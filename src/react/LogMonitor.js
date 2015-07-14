@@ -4,6 +4,7 @@ import LogMonitorEntry from './LogMonitorEntry';
 export default class LogMonitor {
   static propTypes = {
     computedStates: PropTypes.array.isRequired,
+    currentStateIndex: PropTypes.number.isRequired,
     stagedActions: PropTypes.array.isRequired,
     skippedActions: PropTypes.object.isRequired,
     reset: PropTypes.func.isRequired,

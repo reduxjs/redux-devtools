@@ -4,16 +4,13 @@ const ActionTypes = {
   ROLLBACK: 'ROLLBACK',
   COMMIT: 'COMMIT',
   SWEEP: 'SWEEP',
-  TOGGLE_ACTION: 'TOGGLE_ACTION'
+  TOGGLE_ACTION: 'TOGGLE_ACTION',
+  JUMP_TO_STATE: 'JUMP_TO_STATE'
 };
 
 const INIT_ACTION = {
   type: '@@INIT'
 };
-
-function last(arr) {
-  return arr[arr.length - 1];
-}
 
 function toggle(obj, key) {
   const clone = { ...obj };
@@ -84,7 +81,8 @@ function liftReducer(reducer, initialState) {
   const initialLiftedState = {
     committedState: initialState,
     stagedActions: [INIT_ACTION],
-    skippedActions: {}
+    skippedActions: {},
+    currentStateIndex: 0
   };
 
   /**
@@ -95,7 +93,8 @@ function liftReducer(reducer, initialState) {
       committedState,
       stagedActions,
       skippedActions,
-      computedStates
+      computedStates,
+      currentStateIndex
     } = liftedState;
 
     switch (liftedAction.type) {
@@ -103,26 +102,35 @@ function liftReducer(reducer, initialState) {
       committedState = initialState;
       stagedActions = [INIT_ACTION];
       skippedActions = {};
+      currentStateIndex = 0;
       break;
     case ActionTypes.COMMIT:
-      committedState = last(computedStates).state;
+      committedState = computedStates[currentStateIndex].state;
       stagedActions = [INIT_ACTION];
       skippedActions = {};
+      currentStateIndex = 0;
       break;
     case ActionTypes.ROLLBACK:
       stagedActions = [INIT_ACTION];
       skippedActions = {};
+      currentStateIndex = 0;
       break;
     case ActionTypes.TOGGLE_ACTION:
-      const { index } = liftedAction;
-      skippedActions = toggle(skippedActions, index);
+      skippedActions = toggle(skippedActions, liftedAction.index);
+      break;
+    case ActionTypes.JUMP_TO_STATE:
+      currentStateIndex = liftedAction.index;
       break;
     case ActionTypes.SWEEP:
       stagedActions = stagedActions.filter((_, i) => !skippedActions[i]);
       skippedActions = {};
+      currentStateIndex = Math.max(currentStateIndex, stagedActions.length - 1);
       break;
     case ActionTypes.PERFORM_ACTION:
       const { action } = liftedAction;
+      if (currentStateIndex === stagedActions.length - 1) {
+        currentStateIndex++;
+      }
       stagedActions = [...stagedActions, action];
       break;
     default:
@@ -140,7 +148,8 @@ function liftReducer(reducer, initialState) {
       committedState,
       stagedActions,
       skippedActions,
-      computedStates
+      computedStates,
+      currentStateIndex
     };
   };
 }
@@ -157,8 +166,8 @@ function liftAction(action) {
  * Unlifts the DevTools state to the app state.
  */
 function unliftState(liftedState) {
-  const { computedStates } = liftedState;
-  const { state } = last(computedStates);
+  const { computedStates, currentStateIndex } = liftedState;
+  const { state } = computedStates[currentStateIndex];
   return state;
 }
 
@@ -197,6 +206,9 @@ export const ActionCreators = {
   },
   toggleAction(index) {
     return { type: ActionTypes.TOGGLE_ACTION, index };
+  },
+  jumpToState(index) {
+    return { type: ActionTypes.JUMP_TO_STATE, index };
   }
 };
 
