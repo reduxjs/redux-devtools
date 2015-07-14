@@ -33,7 +33,9 @@ Oh, and you can do the same with the TodoMVC example as well.
 
 The design or usability is not the point. (Although we'll have better design in the future :-)  
 
-**You can build a completely custom UI for it because `<DevTools>` accepts a `monitor` React component prop.** The included `LogMonitor` is just an example.
+**You can build a completely custom UI for it** because `<DevTools>` accepts a `monitor` React component prop. The included `LogMonitor` is just an example.
+
+**[In fact I challenge you to build a custom monitor for Redux DevTools!](https://github.com/gaearon/redux-devtools/issues/3)**
 
 Some crazy ideas for custom monitors:
 
@@ -41,6 +43,7 @@ Some crazy ideas for custom monitors:
 * An in-app layer that shows the last N states right in the app (e.g. for animation)
 * A time machine like interface where the last N states of your app reside on different Z layers
 * Feel free to come up with and implement your own! Check `LogMonitor` propTypes to see what you can do.
+
 
 ### License
 
