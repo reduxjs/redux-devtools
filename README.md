@@ -3,6 +3,8 @@ Redux DevTools
 
 A better README is coming. But if you insist...
 
+<img src='http://i.imgur.com/HMW2pjP.png' width='700'>
+
 ### Installation
 
 It's out on NPM as `react-devtools@0.1.0`.  
