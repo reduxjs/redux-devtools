@@ -18,3 +18,5 @@ open http://localhost:3000
 
 Try clicking on actions in the log, or changing some code inside `examples/counter/reducers/counter`.  
 For fun, you can also open `http://localhost:3000/?debug_session=123`, click around, and then refresh.
+
+Oh, and you can do this with the TodoMVC example as well.
