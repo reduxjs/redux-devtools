@@ -1,20 +1,34 @@
 import React, { Component } from 'react';
 import CounterApp from './CounterApp';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { devTools, persistState } from 'redux-devtools';
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import * as reducers from '../reducers';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const finalCreateStore = compose(
+  applyMiddleware(thunk),
+  devTools(),
+  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
+  createStore
+);
+
 const reducer = combineReducers(reducers);
-const store = createStoreWithMiddleware(reducer);
+const store = finalCreateStore(reducer);
 
 export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        {() => <CounterApp />}
-      </Provider>
+      <div>
+        <Provider store={store}>
+          {() => <CounterApp />}
+        </Provider>
+        <DebugPanel top right bottom>
+          <DevTools store={store}
+                    monitor={LogMonitor} />
+        </DebugPanel>
+      </div>
     );
   }
 }
