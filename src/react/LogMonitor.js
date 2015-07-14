@@ -12,6 +12,7 @@ export default class LogMonitor {
     rollback: PropTypes.func.isRequired,
     sweep: PropTypes.func.isRequired,
     toggleAction: PropTypes.func.isRequired,
+    jumpToState: PropTypes.func.isRequired,
     select: PropTypes.func.isRequired
   };
 
