@@ -86,7 +86,7 @@ function liftReducer(reducer, initialState) {
     skippedActions: {},
     currentStateIndex: 0,
     monitorState: {
-      isVisible: true,
+      isVisible: true
     }
   };
 
@@ -141,12 +141,12 @@ function liftReducer(reducer, initialState) {
       break;
     case ActionTypes.HIDE:
       monitorState = {
-        isVisible: false,
+        isVisible: false
       };
       break;
     case ActionTypes.SHOW:
       monitorState = {
-        isVisible: true,
+        isVisible: true
       };
       break;
     default:
@@ -222,10 +222,10 @@ export const ActionCreators = {
     return { type: ActionTypes.SWEEP };
   },
   show() {
-    return { type: ActionTypes.SHOW }
+    return { type: ActionTypes.SHOW };
   },
   hide() {
-    return { type: ActionTypes.HIDE }
+    return { type: ActionTypes.HIDE };
   },
   toggleAction(index) {
     return { type: ActionTypes.TOGGLE_ACTION, index };
