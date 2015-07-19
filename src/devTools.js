@@ -84,7 +84,10 @@ function liftReducer(reducer, initialState) {
     committedState: initialState,
     stagedActions: [INIT_ACTION],
     skippedActions: {},
-    currentStateIndex: 0
+    currentStateIndex: 0,
+    monitorState: {
+      isVisible: true,
+    }
   };
 
   /**
@@ -96,7 +99,8 @@ function liftReducer(reducer, initialState) {
       stagedActions,
       skippedActions,
       computedStates,
-      currentStateIndex
+      currentStateIndex,
+      monitorState
     } = liftedState;
 
     switch (liftedAction.type) {
@@ -135,6 +139,16 @@ function liftReducer(reducer, initialState) {
       }
       stagedActions = [...stagedActions, action];
       break;
+    case ActionTypes.HIDE:
+      monitorState = {
+        isVisible: false,
+      };
+      break;
+    case ActionTypes.SHOW:
+      monitorState = {
+        isVisible: true,
+      };
+      break;
     default:
       break;
     }
@@ -151,7 +165,8 @@ function liftReducer(reducer, initialState) {
       stagedActions,
       skippedActions,
       computedStates,
-      currentStateIndex
+      currentStateIndex,
+      monitorState
     };
   };
 }
