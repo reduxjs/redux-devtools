@@ -5,7 +5,9 @@ const ActionTypes = {
   COMMIT: 'COMMIT',
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
-  JUMP_TO_STATE: 'JUMP_TO_STATE'
+  JUMP_TO_STATE: 'JUMP_TO_STATE',
+  HIDE: 'HIDE',
+  SHOW: 'SHOW'
 };
 
 const INIT_ACTION = {
@@ -82,7 +84,10 @@ function liftReducer(reducer, initialState) {
     committedState: initialState,
     stagedActions: [INIT_ACTION],
     skippedActions: {},
-    currentStateIndex: 0
+    currentStateIndex: 0,
+    monitorState: {
+      isVisible: true
+    }
   };
 
   /**
@@ -94,7 +99,8 @@ function liftReducer(reducer, initialState) {
       stagedActions,
       skippedActions,
       computedStates,
-      currentStateIndex
+      currentStateIndex,
+      monitorState
     } = liftedState;
 
     switch (liftedAction.type) {
@@ -133,6 +139,16 @@ function liftReducer(reducer, initialState) {
       }
       stagedActions = [...stagedActions, action];
       break;
+    case ActionTypes.HIDE:
+      monitorState = {
+        isVisible: false
+      };
+      break;
+    case ActionTypes.SHOW:
+      monitorState = {
+        isVisible: true
+      };
+      break;
     default:
       break;
     }
@@ -149,7 +165,8 @@ function liftReducer(reducer, initialState) {
       stagedActions,
       skippedActions,
       computedStates,
-      currentStateIndex
+      currentStateIndex,
+      monitorState
     };
   };
 }
@@ -203,6 +220,12 @@ export const ActionCreators = {
   },
   sweep() {
     return { type: ActionTypes.SWEEP };
+  },
+  show() {
+    return { type: ActionTypes.SHOW };
+  },
+  hide() {
+    return { type: ActionTypes.HIDE };
   },
   toggleAction(index) {
     return { type: ActionTypes.TOGGLE_ACTION, index };

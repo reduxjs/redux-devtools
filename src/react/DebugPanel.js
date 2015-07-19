@@ -17,7 +17,6 @@ export function getDefaultStyle(props) {
     opacity: 0.92,
     background: 'black',
     color: 'white',
-    padding: '1em',
     left: left ? 0 : undefined,
     right: right ? 0 : undefined,
     top: top ? 0 : undefined,
