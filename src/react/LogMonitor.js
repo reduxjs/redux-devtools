@@ -9,9 +9,12 @@ export default class LogMonitor {
   static propTypes = {
     computedStates: PropTypes.array.isRequired,
     currentStateIndex: PropTypes.number.isRequired,
+    monitorState: PropTypes.object.isRequired,
     stagedActions: PropTypes.array.isRequired,
     skippedActions: PropTypes.object.isRequired,
     reset: PropTypes.func.isRequired,
+    hide: PropTypes.func.isRequired,
+    show: PropTypes.func.isRequired,
     commit: PropTypes.func.isRequired,
     rollback: PropTypes.func.isRequired,
     sweep: PropTypes.func.isRequired,
