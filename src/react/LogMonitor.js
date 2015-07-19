@@ -2,6 +2,10 @@ import React, { PropTypes, findDOMNode } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 
 export default class LogMonitor {
+  constructor() {
+    window.addEventListener('keypress', ::this.handleKeyPress);
+  }
+
   static propTypes = {
     computedStates: PropTypes.array.isRequired,
     currentStateIndex: PropTypes.number.isRequired,
@@ -64,6 +68,18 @@ export default class LogMonitor {
 
   handleReset() {
     this.props.reset();
+  }
+
+  handleKeyPress(event) {
+    let { isVisible } = this.props.monitorState;
+
+    if (event.ctrlKey && event.keyCode === 8) {
+      if (isVisible) {
+        this.props.hide();
+      } else {
+        this.props.show();
+      }
+    }
   }
 
   render() {
