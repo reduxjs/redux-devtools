@@ -5,7 +5,9 @@ const ActionTypes = {
   COMMIT: 'COMMIT',
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
-  JUMP_TO_STATE: 'JUMP_TO_STATE'
+  JUMP_TO_STATE: 'JUMP_TO_STATE',
+  HIDE: 'HIDE',
+  SHOW: 'SHOW'
 };
 
 const INIT_ACTION = {
@@ -203,6 +205,12 @@ export const ActionCreators = {
   },
   sweep() {
     return { type: ActionTypes.SWEEP };
+  },
+  show() {
+    return { type: ActionTypes.SHOW }
+  },
+  hide() {
+    return { type: ActionTypes.HIDE }
   },
   toggleAction(index) {
     return { type: ActionTypes.TOGGLE_ACTION, index };
