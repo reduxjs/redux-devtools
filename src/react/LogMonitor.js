@@ -127,7 +127,7 @@ export default class LogMonitor {
           <div style={{
             paddingBottom: '.5rem'
           }}>
-            <small>Press `ctl+h` to hide.</small>
+            <small>Press Ctrl+H to hide.</small>
           </div>
           <div>
             <a onClick={::this.handleReset}
