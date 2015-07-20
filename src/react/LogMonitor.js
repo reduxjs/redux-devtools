@@ -3,7 +3,7 @@ import LogMonitorEntry from './LogMonitorEntry';
 
 export default class LogMonitor {
   constructor() {
-    window.addEventListener('keypress', ::this.handleKeyPress);
+    window.addEventListener('keydown', ::this.handleKeyPress);
   }
 
   static propTypes = {
@@ -76,7 +76,8 @@ export default class LogMonitor {
   handleKeyPress(event) {
     let { isVisible } = this.props.monitorState;
 
-    if (event.ctrlKey && event.keyCode === 8) {
+    if (event.ctrlKey && event.keyCode === 72) {
+      event.preventDefault();
       if (isVisible) {
         this.props.hide();
       } else {
