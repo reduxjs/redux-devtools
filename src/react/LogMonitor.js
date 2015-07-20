@@ -28,8 +28,13 @@ export default class LogMonitor {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.stagedActions.length < nextProps.stagedActions.length) {
-      const scrollableNode = findDOMNode(this).parentElement;
+    const node = findDOMNode(this);
+    if (!node) {
+      this.scrollDown = true;
+    } else if (
+      this.props.stagedActions.length < nextProps.stagedActions.length
+    ) {
+      const scrollableNode = node.parentElement;
       const { scrollTop, offsetHeight, scrollHeight } = scrollableNode;
 
       this.scrollDown = Math.abs(
@@ -40,12 +45,14 @@ export default class LogMonitor {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.stagedActions.length < this.props.stagedActions.length &&
-      this.scrollDown
-    ) {
-      const scrollableNode = findDOMNode(this).parentElement;
+  componentDidUpdate() {
+    const node = findDOMNode(this);
+    if (!node) {
+      return;
+    }
+
+    if (this.scrollDown) {
+      const scrollableNode = node.parentElement;
       const { offsetHeight, scrollHeight } = scrollableNode;
 
       scrollableNode.scrollTop = scrollHeight - offsetHeight;
@@ -88,7 +95,11 @@ export default class LogMonitor {
 
   render() {
     const elements = [];
-    const { skippedActions, stagedActions, computedStates, select } = this.props;
+    const { monitorState, skippedActions, stagedActions, computedStates, select } = this.props;
+
+    if (!monitorState.isVisible) {
+      return null;
+    }
 
     for (let i = 0; i < stagedActions.length; i++) {
       const action = stagedActions[i];
@@ -106,59 +117,55 @@ export default class LogMonitor {
       );
     }
 
-    if (this.props.monitorState.isVisible === true) {
-      return (
-        <div style={{
-          fontFamily: 'monospace',
-          position: 'relative',
-          padding: '1rem'
-        }}>
-          <div>
-            <div style={{
-              paddingBottom: '.5rem'
-            }}>
-              <small>Press `ctl+h` to hide.</small>
-            </div>
-            <div>
-              <a onClick={::this.handleReset}
-                 style={{ textDecoration: 'underline', cursor: 'hand' }}>
-                <small>Reset</small>
-              </a>
-            </div>
+    return (
+      <div style={{
+        fontFamily: 'monospace',
+        position: 'relative',
+        padding: '1rem'
+      }}>
+        <div>
+          <div style={{
+            paddingBottom: '.5rem'
+          }}>
+            <small>Press `ctl+h` to hide.</small>
           </div>
-          {elements}
           <div>
-            {computedStates.length > 1 &&
-              <a onClick={::this.handleRollback}
-                 style={{ textDecoration: 'underline', cursor: 'hand' }}>
-                Rollback
-              </a>
-            }
-            {Object.keys(skippedActions).some(key => skippedActions[key]) &&
-              <span>
-                {' • '}
-                <a onClick={::this.handleSweep}
-                   style={{ textDecoration: 'underline', cursor: 'hand' }}>
-                  Sweep
-                </a>
-              </span>
-            }
-            {computedStates.length > 1 &&
-              <span>
-                <span>
-                {' • '}
-                </span>
-                <a onClick={::this.handleCommit}
-                   style={{ textDecoration: 'underline', cursor: 'hand' }}>
-                  Commit
-                </a>
-              </span>
-            }
+            <a onClick={::this.handleReset}
+               style={{ textDecoration: 'underline', cursor: 'hand' }}>
+              <small>Reset</small>
+            </a>
           </div>
         </div>
-      );
-    }
-
-    return false;
+        {elements}
+        <div>
+          {computedStates.length > 1 &&
+            <a onClick={::this.handleRollback}
+               style={{ textDecoration: 'underline', cursor: 'hand' }}>
+              Rollback
+            </a>
+          }
+          {Object.keys(skippedActions).some(key => skippedActions[key]) &&
+            <span>
+              {' • '}
+              <a onClick={::this.handleSweep}
+                 style={{ textDecoration: 'underline', cursor: 'hand' }}>
+                Sweep
+              </a>
+            </span>
+          }
+          {computedStates.length > 1 &&
+            <span>
+              <span>
+              {' • '}
+              </span>
+              <a onClick={::this.handleCommit}
+                 style={{ textDecoration: 'underline', cursor: 'hand' }}>
+                Commit
+              </a>
+            </span>
+          }
+        </div>
+      </div>
+    );
   }
 }
