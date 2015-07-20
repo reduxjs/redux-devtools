@@ -191,7 +191,7 @@ function unliftState(liftedState) {
 /**
  * Unlifts the DevTools store to act like the app's store.
  */
-function unliftStore(liftedStore) {
+function unliftStore(liftedStore, reducer) {
   return {
     ...liftedStore,
     devToolsStore: liftedStore,
@@ -201,6 +201,12 @@ function unliftStore(liftedStore) {
     },
     getState() {
       return unliftState(liftedStore.getState());
+    },
+    getReducer() {
+      return reducer;
+    },
+    replaceReducer(nextReducer) {
+      liftedStore.replaceReducer(liftReducer(nextReducer));
     }
   };
 }
@@ -242,7 +248,7 @@ export default function devTools() {
   return next => (reducer, initialState) => {
     const liftedReducer = liftReducer(reducer, initialState);
     const liftedStore = next(liftedReducer);
-    const store = unliftStore(liftedStore);
+    const store = unliftStore(liftedStore, reducer);
     return store;
   };
 }
