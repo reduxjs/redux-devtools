@@ -6,8 +6,7 @@ const ActionTypes = {
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
   JUMP_TO_STATE: 'JUMP_TO_STATE',
-  HIDE: 'HIDE',
-  SHOW: 'SHOW'
+  SET_MONITOR_STATE: 'SET_MONITOR_STATE'
 };
 
 const INIT_ACTION = {
@@ -133,21 +132,13 @@ function liftReducer(reducer, initialState) {
       currentStateIndex = Math.max(currentStateIndex, stagedActions.length - 1);
       break;
     case ActionTypes.PERFORM_ACTION:
-      const { action } = liftedAction;
       if (currentStateIndex === stagedActions.length - 1) {
         currentStateIndex++;
       }
-      stagedActions = [...stagedActions, action];
+      stagedActions = [...stagedActions, liftedAction.action];
       break;
-    case ActionTypes.HIDE:
-      monitorState = {
-        isVisible: false
-      };
-      break;
-    case ActionTypes.SHOW:
-      monitorState = {
-        isVisible: true
-      };
+    case ActionTypes.SET_MONITOR_STATE:
+      monitorState = liftedAction.monitorState;
       break;
     default:
       break;
@@ -227,17 +218,14 @@ export const ActionCreators = {
   sweep() {
     return { type: ActionTypes.SWEEP };
   },
-  show() {
-    return { type: ActionTypes.SHOW };
-  },
-  hide() {
-    return { type: ActionTypes.HIDE };
-  },
   toggleAction(index) {
     return { type: ActionTypes.TOGGLE_ACTION, index };
   },
   jumpToState(index) {
     return { type: ActionTypes.JUMP_TO_STATE, index };
+  },
+  setMonitorState(monitorState) {
+    return { type: ActionTypes.SET_MONITOR_STATE, monitorState };
   }
 };
 

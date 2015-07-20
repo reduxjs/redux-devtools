@@ -13,18 +13,18 @@ export default class LogMonitor {
     stagedActions: PropTypes.array.isRequired,
     skippedActions: PropTypes.object.isRequired,
     reset: PropTypes.func.isRequired,
-    hide: PropTypes.func.isRequired,
-    show: PropTypes.func.isRequired,
     commit: PropTypes.func.isRequired,
     rollback: PropTypes.func.isRequired,
     sweep: PropTypes.func.isRequired,
     toggleAction: PropTypes.func.isRequired,
     jumpToState: PropTypes.func.isRequired,
+    setMonitorState: PropTypes.func.isRequired,
     select: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    select: (state) => state
+    select: (state) => state,
+    monitorState: { isVisible: true }
   };
 
   componentWillReceiveProps(nextProps) {
@@ -81,15 +81,14 @@ export default class LogMonitor {
   }
 
   handleKeyPress(event) {
-    let { isVisible } = this.props.monitorState;
+    const { monitorState } = this.props;
 
-    if (event.ctrlKey && event.keyCode === 72) {
+    if (event.ctrlKey && event.keyCode === 72) { // Ctrl+H
       event.preventDefault();
-      if (isVisible) {
-        this.props.hide();
-      } else {
-        this.props.show();
-      }
+      this.props.setMonitorState({
+        ...monitorState,
+        isVisible: !monitorState.isVisible
+      });
     }
   }
 
