@@ -13,7 +13,7 @@ export function getDefaultStyle(props) {
     position: 'fixed',
     zIndex: 999,
     fontSize: 17,
-    overflow: 'scroll',
+    overflow: 'auto',
     opacity: 0.92,
     background: 'black',
     color: 'white',
