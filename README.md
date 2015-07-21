@@ -1,6 +1,8 @@
 Redux DevTools
 =========================
 
+### [DEMO](http://gaearon.github.io/redux-devtools/)
+
 A better README is coming. But if you insist...
 
 <img src='http://i.imgur.com/HMW2pjP.png' width='700'>
