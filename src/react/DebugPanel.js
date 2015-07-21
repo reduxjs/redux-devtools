@@ -42,7 +42,7 @@ export default class DebugPanel {
 
   render() {
     return (
-      <div style={this.props.getStyle(this.props)}>
+      <div style={{...this.props.getStyle(this.props), ...this.props.style}}>
         {this.props.children}
       </div>
     );
