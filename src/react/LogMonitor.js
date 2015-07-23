@@ -122,48 +122,51 @@ export default class LogMonitor {
         position: 'relative',
         padding: '1rem'
       }}>
-        <div>
-          <div style={{
-            paddingBottom: '.5rem'
-          }}>
-            <small>Press Ctrl+H to hide.</small>
+        <div style={{marginBottom: 40, fontSize: 12}}>
+          <div style={{float: 'left'}}>
+            {computedStates.length > 1 &&
+              <button onClick={::this.handleRollback} style={{
+                cursor: 'hand',
+                padding: '5px 7px',
+                border: '1px solid #eee',
+                display: 'inline-block'
+              }}>
+                Rollback
+              </button>
+            }
+            {Object.keys(skippedActions).some(key => skippedActions[key]) &&
+              <button onClick={::this.handleSweep} style={{
+                cursor: 'hand',
+                padding: '5px 7px',
+                border: '1px solid #eee',
+                display: 'inline-block'
+              }}>
+                Sweep
+              </button>
+            }
+            {computedStates.length > 1 &&
+              <button onClick={::this.handleCommit} style={{
+                cursor: 'hand',
+                padding: '5px 7px',
+                border: '1px solid #eee',
+                display: 'inline-block'
+              }}>
+                Commit
+              </button>
+            }
           </div>
-          <div>
-            <a onClick={::this.handleReset}
-               style={{ textDecoration: 'underline', cursor: 'hand' }}>
-              <small>Reset</small>
-            </a>
+          <div style={{float: 'right'}}>
+            <button onClick={::this.handleReset} style={{
+              cursor: 'hand',
+              padding: '5px 7px',
+              border: '1px solid #eee',
+              display: 'inline-block'
+            }}>
+              Reset
+            </button>
           </div>
         </div>
         {elements}
-        <div>
-          {computedStates.length > 1 &&
-            <a onClick={::this.handleRollback}
-               style={{ textDecoration: 'underline', cursor: 'hand' }}>
-              Rollback
-            </a>
-          }
-          {Object.keys(skippedActions).some(key => skippedActions[key]) &&
-            <span>
-              {' • '}
-              <a onClick={::this.handleSweep}
-                 style={{ textDecoration: 'underline', cursor: 'hand' }}>
-                Sweep
-              </a>
-            </span>
-          }
-          {computedStates.length > 1 &&
-            <span>
-              <span>
-              {' • '}
-              </span>
-              <a onClick={::this.handleCommit}
-                 style={{ textDecoration: 'underline', cursor: 'hand' }}>
-                Commit
-              </a>
-            </span>
-          }
-        </div>
       </div>
     );
   }

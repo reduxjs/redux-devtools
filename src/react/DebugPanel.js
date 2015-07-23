@@ -12,17 +12,15 @@ export function getDefaultStyle(props) {
   return {
     position: 'fixed',
     zIndex: 999,
-    fontSize: 17,
     overflow: 'auto',
-    opacity: 0.92,
-    background: 'black',
+    background: 'rgb(27, 27, 27)',
     color: 'white',
     left: left ? 0 : undefined,
     right: right ? 0 : undefined,
     top: top ? 0 : undefined,
     bottom: bottom ? 0 : undefined,
     maxHeight: (bottom && top) ? '100%' : '20%',
-    maxWidth: (left && right) ? '100%' : '20%',
+    maxWidth: (left && right) ? '100%' : '25%',
     wordWrap: 'break-word'
   };
 }
