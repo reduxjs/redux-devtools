@@ -130,7 +130,10 @@ export default class LogMonitor {
                 cursor: 'pointer',
                 padding: '5px 7px',
                 border: '1px solid #eee',
-                display: 'inline-block'
+                display: 'inline-block',
+                backgroundColor: 'transparent',
+                color: '#eee',
+                fontFamily: 'monospace'
               }}>
                 Rollback
               </button>
@@ -140,7 +143,10 @@ export default class LogMonitor {
                 cursor: 'pointer',
                 padding: '5px 7px',
                 border: '1px solid #eee',
-                display: 'inline-block'
+                display: 'inline-block',
+                backgroundColor: 'transparent',
+                color: '#eee',
+                fontFamily: 'monospace'
               }}>
                 Sweep
               </button>
@@ -150,7 +156,10 @@ export default class LogMonitor {
                 cursor: 'pointer',
                 padding: '5px 7px',
                 border: '1px solid #eee',
-                display: 'inline-block'
+                display: 'inline-block',
+                backgroundColor: 'transparent',
+                color: '#eee',
+                fontFamily: 'monospace'
               }}>
                 Commit
               </button>
@@ -161,7 +170,10 @@ export default class LogMonitor {
               cursor: 'pointer',
               padding: '5px 7px',
               border: '1px solid #eee',
-              display: 'inline-block'
+              display: 'inline-block',
+              backgroundColor: 'transparent',
+              color: '#eee',
+              fontFamily: 'monospace'
             }}>
               Reset
             </button>
