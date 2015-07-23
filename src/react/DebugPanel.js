@@ -20,7 +20,7 @@ export function getDefaultStyle(props) {
     top: top ? 0 : undefined,
     bottom: bottom ? 0 : undefined,
     maxHeight: (bottom && top) ? '100%' : '20%',
-    maxWidth: (left && right) ? '100%' : '25%',
+    width: (left && right) ? '100%' : '25%',
     wordWrap: 'break-word'
   };
 }
