@@ -127,7 +127,7 @@ export default class LogMonitor {
           <div style={{float: 'left'}}>
             {computedStates.length > 1 &&
               <button onClick={::this.handleRollback} style={{
-                cursor: 'hand',
+                cursor: 'pointer',
                 padding: '5px 7px',
                 border: '1px solid #eee',
                 display: 'inline-block'
@@ -137,7 +137,7 @@ export default class LogMonitor {
             }
             {Object.keys(skippedActions).some(key => skippedActions[key]) &&
               <button onClick={::this.handleSweep} style={{
-                cursor: 'hand',
+                cursor: 'pointer',
                 padding: '5px 7px',
                 border: '1px solid #eee',
                 display: 'inline-block'
@@ -147,7 +147,7 @@ export default class LogMonitor {
             }
             {computedStates.length > 1 &&
               <button onClick={::this.handleCommit} style={{
-                cursor: 'hand',
+                cursor: 'pointer',
                 padding: '5px 7px',
                 border: '1px solid #eee',
                 display: 'inline-block'
@@ -158,7 +158,7 @@ export default class LogMonitor {
           </div>
           <div style={{float: 'right'}}>
             <button onClick={::this.handleReset} style={{
-              cursor: 'hand',
+              cursor: 'pointer',
               padding: '5px 7px',
               border: '1px solid #eee',
               display: 'inline-block'

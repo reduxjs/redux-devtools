@@ -87,7 +87,7 @@ export default class LogMonitorEntry {
              display: 'block',
              paddingTop: '1em',
              color: `rgb(${r}, ${g}, ${b})`,
-             cursor: (index > 0) ? 'hand' : 'default',
+             cursor: (index > 0) ? 'pointer' : 'default',
              WebkitUserSelect: 'none'
            }}>
           {JSON.stringify(action)}
