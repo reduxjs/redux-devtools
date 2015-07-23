@@ -139,7 +139,7 @@ export default class LogMonitor {
         <div>
           {computedStates.length > 1 &&
             <a onClick={::this.handleRollback}
-               style={{ textDecoration: 'underline', cursor: 'hand' }}>
+               style={{ textDecoration: 'underline', cursor: 'pointer' }}>
               Rollback
             </a>
           }
@@ -147,7 +147,7 @@ export default class LogMonitor {
             <span>
               {' • '}
               <a onClick={::this.handleSweep}
-                 style={{ textDecoration: 'underline', cursor: 'hand' }}>
+                 style={{ textDecoration: 'underline', cursor: 'pointer' }}>
                 Sweep
               </a>
             </span>
@@ -158,7 +158,7 @@ export default class LogMonitor {
               {' • '}
               </span>
               <a onClick={::this.handleCommit}
-                 style={{ textDecoration: 'underline', cursor: 'hand' }}>
+                 style={{ textDecoration: 'underline', cursor: 'pointer' }}>
                 Commit
               </a>
             </span>
