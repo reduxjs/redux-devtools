@@ -120,7 +120,8 @@ export default class LogMonitor {
       <div style={{
         fontFamily: 'monospace',
         position: 'relative',
-        padding: '1rem'
+        padding: '1rem',
+        height: '100%'
       }}>
         <div style={{marginBottom: 40, fontSize: 12}}>
           <div style={{float: 'left'}}>
@@ -167,6 +168,7 @@ export default class LogMonitor {
           </div>
         </div>
         {elements}
+        <p style={{bottom: 0, position: 'absolute'}}>Tip: Ctrl-H to hide</p>
       </div>
     );
   }
