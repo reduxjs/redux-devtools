@@ -129,7 +129,7 @@ function liftReducer(reducer, initialState) {
     case ActionTypes.SWEEP:
       stagedActions = stagedActions.filter((_, i) => !skippedActions[i]);
       skippedActions = {};
-      currentStateIndex = Math.max(currentStateIndex, stagedActions.length - 1);
+      currentStateIndex = Math.min(currentStateIndex, stagedActions.length - 1);
       break;
     case ActionTypes.PERFORM_ACTION:
       if (currentStateIndex === stagedActions.length - 1) {
