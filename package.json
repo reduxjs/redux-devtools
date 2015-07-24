@@ -11,7 +11,7 @@
     "test:watch": "NODE_ENV=test mocha --compilers js:babel/register --recursive --watch",
     "test:cov": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --recursive",
     "prepublish": "npm run lint && npm run test && npm run clean && npm run build",
-    "demo":"git checkout gh-pages && cd examples/todomvc && webpack && cd ../../ && git add . && git commit -m \"rebuild todomvc bundle for demo\" && git push --force && git checkout master"
+    "demo":"bash ./demo.sh"
   },
   "repository": {
     "type": "git",
