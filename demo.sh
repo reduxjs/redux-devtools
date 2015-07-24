@@ -4,6 +4,7 @@ set -o errexit # Exit on error
 
 git stash save
 git checkout gh-pages
+git pull --rebase origin master
 cd examples/todomvc
 webpack
 git add .
