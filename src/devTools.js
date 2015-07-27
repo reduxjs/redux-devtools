@@ -40,6 +40,7 @@ function computeNextEntry(reducer, action, state, error) {
     nextState = reducer(state, action);
   } catch (err) {
     nextError = err.toString();
+    console.error(err.stack || err);
   }
 
   return {
