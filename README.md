@@ -31,10 +31,11 @@ open http://localhost:3000
 Try clicking on actions in the log, or changing some code inside `examples/counter/reducers/counter`.  
 For fun, you can also open `http://localhost:3000/?debug_session=123`, click around, and then refresh.
 
-If you only would like to monitor a part of the state, you can set a select-prop on the DevTools component.
-ex. <DevTools select={state => state.todos} store={store} monitor={LogMonitor} />
-
 Oh, and you can do the same with the TodoMVC example as well.
+
+If you only would like to monitor a part of the state, you can set a select-prop on the DevTools component.
+ex. `<DevTools select={state => state.todos} store={store} monitor={LogMonitor} />`
+
 
 ### It's Ugly!
 
