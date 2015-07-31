@@ -76,7 +76,6 @@ function recomputeStates(reducer, committedState, stagedActions, skippedActions)
   return computedStates;
 }
 
-
 /**
  * Lifts the app state reducer into a DevTools state reducer.
  */
@@ -88,7 +87,8 @@ function liftReducer(reducer, initialState) {
     currentStateIndex: 0,
     monitorState: {
       isVisible: true
-    }
+    },
+    timestamps: [Date.now()]
   };
 
   /**
@@ -101,7 +101,8 @@ function liftReducer(reducer, initialState) {
       skippedActions,
       computedStates,
       currentStateIndex,
-      monitorState
+      monitorState,
+      timestamps
     } = liftedState;
 
     switch (liftedAction.type) {
@@ -110,17 +111,20 @@ function liftReducer(reducer, initialState) {
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
+      timestamps = [liftedAction.timestamp];
       break;
     case ActionTypes.COMMIT:
       committedState = computedStates[currentStateIndex].state;
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
+      timestamps = [liftedAction.timestamp];
       break;
     case ActionTypes.ROLLBACK:
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
+      timestamps = [liftedAction.timestamp];
       break;
     case ActionTypes.TOGGLE_ACTION:
       skippedActions = toggle(skippedActions, liftedAction.index);
@@ -130,6 +134,7 @@ function liftReducer(reducer, initialState) {
       break;
     case ActionTypes.SWEEP:
       stagedActions = stagedActions.filter((_, i) => !skippedActions[i]);
+      timestamps = timestamps.filter((_, i) => !skippedActions[i]);
       skippedActions = {};
       currentStateIndex = Math.min(currentStateIndex, stagedActions.length - 1);
       break;
@@ -138,6 +143,7 @@ function liftReducer(reducer, initialState) {
         currentStateIndex++;
       }
       stagedActions = [...stagedActions, liftedAction.action];
+      timestamps = [...timestamps, liftedAction.timestamp];
       break;
     case ActionTypes.SET_MONITOR_STATE:
       monitorState = liftedAction.monitorState;
@@ -165,7 +171,8 @@ function liftReducer(reducer, initialState) {
       skippedActions,
       computedStates,
       currentStateIndex,
-      monitorState
+      monitorState,
+      timestamps
     };
   };
 }
@@ -174,7 +181,11 @@ function liftReducer(reducer, initialState) {
  * Lifts an app action to a DevTools action.
  */
 function liftAction(action) {
-  const liftedAction = { type: ActionTypes.PERFORM_ACTION, action };
+  const liftedAction = {
+    type: ActionTypes.PERFORM_ACTION,
+    action,
+    timestamp: Date.now()
+  };
   return liftedAction;
 }
 
@@ -215,13 +226,13 @@ function unliftStore(liftedStore, reducer) {
  */
 export const ActionCreators = {
   reset() {
-    return { type: ActionTypes.RESET };
+    return { type: ActionTypes.RESET, timestamp: Date.now() };
   },
   rollback() {
-    return { type: ActionTypes.ROLLBACK };
+    return { type: ActionTypes.ROLLBACK, timestamp: Date.now() };
   },
   commit() {
-    return { type: ActionTypes.COMMIT };
+    return { type: ActionTypes.COMMIT, timestamp: Date.now() };
   },
   sweep() {
     return { type: ActionTypes.SWEEP };
