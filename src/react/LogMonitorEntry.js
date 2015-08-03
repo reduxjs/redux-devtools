@@ -49,7 +49,7 @@ export default class LogMonitorEntry {
     let errorText = error;
     if (!errorText) {
       try {
-        return JSON.stringify(this.props.select(state));
+        return JSON.stringify(this.props.select(state), null, 2);
       } catch (err) {
         errorText = 'Error selecting state.';
       }
@@ -76,8 +76,10 @@ export default class LogMonitorEntry {
     const { r, g, b } = colorFromString(action.type);
 
     return (
-      <div style={{
-        textDecoration: collapsed ? 'line-through' : 'none'
+      <pre style={{
+        textDecoration: collapsed ? 'line-through' : 'none',
+        backgroundColor: "transparent",
+        border: "0px"
       }}>
         <a onClick={::this.handleActionClick}
            style={{
@@ -90,13 +92,15 @@ export default class LogMonitorEntry {
              cursor: (index > 0) ? 'pointer' : 'default',
              WebkitUserSelect: 'none'
            }}>
-          {JSON.stringify(action)}
+          {JSON.stringify(action, null, 2)}
         </a>
 
         {!collapsed &&
           <p style={{
             textAlign: 'center',
-            transform: 'rotate(180deg)'
+            transform: 'rotate(180deg)',
+            color: 'lightyellow',
+            fontSize: "2em"
           }}>
             ⇧
           </p>
@@ -115,7 +119,7 @@ export default class LogMonitorEntry {
         <hr style={{
           marginBottom: '2em'
         }} />
-      </div>
+      </pre>
     );
   }
 }
