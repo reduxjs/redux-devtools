@@ -33,6 +33,10 @@ For fun, you can also open `http://localhost:3000/?debug_session=123`, click aro
 
 Oh, and you can do the same with the TodoMVC example as well.
 
+If you only would like to monitor a part of the state, you can set a select-prop on the DevTools component.
+ex. `<DevTools select={state => state.todos} store={store} monitor={LogMonitor} />`
+
+
 ### It's Ugly!
 
 The design or usability is not the point. (Although we'll have better design in the future :-)  
