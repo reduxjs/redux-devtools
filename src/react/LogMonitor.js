@@ -2,7 +2,7 @@ import React, { PropTypes, findDOMNode } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 
 if(BROWSER){
-   require("./timeline.less");
+   require("./LogMonitorEntries.less");
 }
 export default class LogMonitor {
   constructor() {
@@ -138,7 +138,7 @@ export default class LogMonitor {
             </a>
           </div>
         </div>
-         <ul className="redux-timeline">
+         <ul className="redux-devtool-entries">
             {elements}
          </ul>
         <div>

@@ -38,8 +38,8 @@ export default class LogMonitorEntry extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         maximized: false,
-         maximizedBody: false
+         maximizedAction: false,
+         maximizedState: false
       }
    }
 
@@ -79,111 +79,62 @@ export default class LogMonitorEntry extends Component {
       }
    }
 
-   handleMaximizeClick() {
-      const { maximized } = this.state;
-      this.setState({maximized: !maximized});
-   }
-   handleMaximizeBodyClick() {
-      const { maximizedBody } = this.state;
-      this.setState({maximizedBody: !maximizedBody});
-   }
-
    render() {
       const { index, error, action, state, collapsed } = this.props;
-      const { maximized, maximizedBody } = this.state;
+      const { maximizedAction, maximizedState } = this.state;
       if (!action.type) {
          return null;
       }
       const { r, g, b } = colorFromString(action.type);
+      const colorStyle = {color: `rgb(${r}, ${g}, ${b})`};
+
+      // Heading
+      let headingComponent = !maximizedAction ? (
+         <h4 style={{color: `rgb(${r}, ${g}, ${b})`,}}>
+            <i className="fa fa-plus-square"></i>
+            {" " + action.type}
+         </h4>
+      ) : (
+         <pre>
+           <a style={colorStyle}>
+              <i className="fa fa-minus-square"></i>
+              {JSON.stringify(action, null, 2)}
+           </a>
+        </pre>
+      );
+
+      // State
+      let stateComponent = !maximizedState ? (
+         <h4 style={{color: "white"}}>
+            <i className="fa fa-plus-square"></i>
+            {" State: object {...}"}
+         </h4>
+      ) : (
+         <pre>
+            <i className="fa fa-minus-square"></i>
+            {this.printState(state, error)}
+         </pre>
+      );
 
       return (
-         <li className="redux-timeline-inverted">
-            {/*<a className="timeline-badge" onClick={::this.handleCollapseClick} href="javascript:;">
-               <i className={"fa fa-" + (collapsed ? "ban" : "check")}></i>
-            </a>*/}
-            <div className="redux-timeline-panel" style={{whiteSpace: "nowrap", overflow: "auto"}}>
-               <div style={{display: "table", tableLayout: "fixed", width: "100%"}}>
-                  <div style={{ width: "400px", display: "table-cell"}}>
-                     <a className="redux-timeline-heading" onClick={::this.handleCollapseClick} href="javascript:;">
+         <li>
+            <div className={"wrap-1"}>
+               <div className={"wrap-2"}>
+                  <div className={"wrap-3"}>
+                     <a onClick={::this.handleCollapseClick} href="javascript:;">
                         <i className={"fa fa-" + (collapsed ? "ban" : "check")}></i>
                         {!collapsed ? " Enabled" : " Disabled"}
                      </a>
-                     <a className="redux-timeline-heading" onClick={::this.handleMaximizeClick} href="javascript:;">
-                        {!maximized ?
-                           (<h4 class="redux-timeline-title" style={{color: `rgb(${r}, ${g}, ${b})`,}}>
-                              <i className="fa fa-plus-square"></i>
-                              {" " + action.type}
-                           </h4>) :
-                           (<pre className="redux-timeline-pre">
-                             <a style={{color: `rgb(${r}, ${g}, ${b})`,}}>
-                                <i className="fa fa-minus-square"></i>
-                                {JSON.stringify(action, null, 2)}
-                             </a>
-                          </pre>)
-                        }
+                     <a onClick={()=>this.setState({maximizedAction: !maximizedAction})} href="javascript:;">
+                        {headingComponent}
                      </a>
-                     <a className="redux-timeline-body" onClick={::this.handleMaximizeBodyClick} href="javascript:;">
-                        {!maximizedBody ?
-                           (<h4 class="redux-timeline-title" style={{color: "white"}}>
-                              <i className="fa fa-plus-square"></i>
-                              {" State: object {...}"}
-                           </h4>) :
-                           (<pre className="redux-timeline-pre">
-                              <i className="fa fa-minus-square"></i>
-                             {this.printState(state, error)}
-                           </pre>)
-                        }
+                     <a onClick={()=>this.setState({maximizedState: !maximizedState})} href="javascript:;">
+                        {stateComponent}
                      </a>
                   </div>
                </div>
             </div>
          </li>
-      );
-      return (
-         <pre style={{
-        textDecoration: collapsed ? 'line-through' : 'none',
-        backgroundColor: "transparent",
-        border: "0px"
-      }}>
-        <a onClick={::this.handleActionClick}
-           style={{
-             opacity: collapsed ? 0.5 : 1,
-             marginTop: '1em',
-             display: 'block',
-             paddingBottom: '1em',
-             paddingTop: '1em',
-             color: `rgb(${r}, ${g}, ${b})`,
-             cursor: (index > 0) ? 'pointer' : 'default',
-             WebkitUserSelect: 'none'
-           }}>
-           {JSON.stringify(action, null, 2)}
-        </a>
-
-            {!collapsed &&
-            <p style={{
-            textAlign: 'center',
-            transform: 'rotate(180deg)',
-            color: 'lightyellow',
-            fontSize: "2em"
-          }}>
-               ⇧
-            </p>
-            }
-
-            {!collapsed &&
-            <div style={{
-            paddingBottom: '1em',
-            paddingTop: '1em',
-            color: 'lightyellow'
-          }}>
-               {this.printState(state, error)}
-            </div>
-            }
-
-            <hr style={{
-          marginBottom: '2em'
-        }}/>
-      </pre>
       );
    }
 }
