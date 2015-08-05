@@ -1,9 +1,12 @@
 import React, { PropTypes, findDOMNode } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 
-if(BROWSER){
-   require("./LogMonitorEntries.less");
-}
+const ulStyle = {
+   listStyle: "none",
+   padding: "20px 0 20px",
+   position: "relative"
+};
+
 export default class LogMonitor {
   constructor() {
     window.addEventListener('keydown', ::this.handleKeyPress);
@@ -138,7 +141,7 @@ export default class LogMonitor {
             </a>
           </div>
         </div>
-         <ul className="redux-devtool-entries">
+         <ul style={ulStyle}>
             {elements}
          </ul>
         <div>

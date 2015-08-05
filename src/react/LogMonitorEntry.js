@@ -1,5 +1,30 @@
 import React, { PropTypes, Component } from 'react';
 
+const preStyle = {
+   backgroundColor: "transparent",
+   color: "white",
+   border: 0,
+   margin: 0,
+   padding: 0
+};
+const liStyle = {
+   marginBottom: "20px",
+   position: "relative"
+};
+const wrap1Style = {
+   whiteSpace: "nowrap",
+   overflow: "auto"
+};
+const wrap2Style = {
+   display: "table",
+   tableLayout: "fixed",
+   width: "100%"
+};
+const wrap3Style = {
+   width: "800px",
+   display: "table-cell"
+};
+
 function hsvToRgb(h, s, v) {
    const i = Math.floor(h);
    const f = h - i;
@@ -95,7 +120,7 @@ export default class LogMonitorEntry extends Component {
             {" " + action.type}
          </h4>
       ) : (
-         <pre>
+         <pre style={preStyle}>
            <a style={colorStyle}>
               <i className="fa fa-minus-square"></i>
               {JSON.stringify(action, null, 2)}
@@ -110,17 +135,17 @@ export default class LogMonitorEntry extends Component {
             {" State: object {...}"}
          </h4>
       ) : (
-         <pre>
+         <pre style={preStyle}>
             <i className="fa fa-minus-square"></i>
             {this.printState(state, error)}
          </pre>
       );
 
       return (
-         <li>
-            <div className={"wrap-1"}>
-               <div className={"wrap-2"}>
-                  <div className={"wrap-3"}>
+         <li style={liStyle}>
+            <div style={wrap1Style}>
+               <div style={wrap2Style}>
+                  <div style={wrap3Style}>
                      <a onClick={::this.handleCollapseClick} href="javascript:;">
                         <i className={"fa fa-" + (collapsed ? "ban" : "check")}></i>
                         {!collapsed ? " Enabled" : " Disabled"}
