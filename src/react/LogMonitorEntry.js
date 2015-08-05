@@ -39,7 +39,7 @@ export default class LogMonitorEntry extends Component {
       super(props);
       this.state = {
          maximized: false,
-         time: new Date()
+         maximizedBody: false
       }
    }
 
@@ -83,56 +83,60 @@ export default class LogMonitorEntry extends Component {
       const { maximized } = this.state;
       this.setState({maximized: !maximized});
    }
+   handleMaximizeBodyClick() {
+      const { maximizedBody } = this.state;
+      this.setState({maximizedBody: !maximizedBody});
+   }
 
    render() {
       const { index, error, action, state, collapsed } = this.props;
-      const { maximized, time } = this.state;
+      const { maximized, maximizedBody } = this.state;
       if (!action.type) {
          return null;
       }
       const { r, g, b } = colorFromString(action.type);
 
       return (
-         <li className="timeline-inverted">
-            <a className="timeline-badge" onClick={::this.handleCollapseClick} href="javascript:;">
+         <li className="redux-timeline-inverted">
+            {/*<a className="timeline-badge" onClick={::this.handleCollapseClick} href="javascript:;">
                <i className={"fa fa-" + (collapsed ? "ban" : "check")}></i>
-            </a>
-            {maximized ?
-               <div className="timeline-panel" style={{whiteSpace: "nowrap", overflow: "auto"}}>
-                  <div style={{display: "table", tableLayout: "fixed", width: "100%"}}>
-                     <div style={{ width: "400px", display: "table-cell"}}>
-                        <a className="timeline-heading" onClick={::this.handleMaximizeClick} href="javascript:;">
-                          <pre className="timeline-pre">
+            </a>*/}
+            <div className="redux-timeline-panel" style={{whiteSpace: "nowrap", overflow: "auto"}}>
+               <div style={{display: "table", tableLayout: "fixed", width: "100%"}}>
+                  <div style={{ width: "400px", display: "table-cell"}}>
+                     <a className="redux-timeline-heading" onClick={::this.handleCollapseClick} href="javascript:;">
+                        <i className={"fa fa-" + (collapsed ? "ban" : "check")}></i>
+                        {!collapsed ? " Enabled" : " Disabled"}
+                     </a>
+                     <a className="redux-timeline-heading" onClick={::this.handleMaximizeClick} href="javascript:;">
+                        {!maximized ?
+                           (<h4 class="redux-timeline-title" style={{color: `rgb(${r}, ${g}, ${b})`,}}>
+                              <i className="fa fa-plus-square"></i>
+                              {" " + action.type}
+                           </h4>) :
+                           (<pre className="redux-timeline-pre">
                              <a style={{color: `rgb(${r}, ${g}, ${b})`,}}>
                                 <i className="fa fa-minus-square"></i>
                                 {JSON.stringify(action, null, 2)}
                              </a>
-                          </pre>
-                        </a>
-
-                        <div className="timeline-body">
-                          <pre className="timeline-pre">
+                          </pre>)
+                        }
+                     </a>
+                     <a className="redux-timeline-body" onClick={::this.handleMaximizeBodyClick} href="javascript:;">
+                        {!maximizedBody ?
+                           (<h4 class="redux-timeline-title" style={{color: "white"}}>
+                              <i className="fa fa-plus-square"></i>
+                              {" State: object {...}"}
+                           </h4>) :
+                           (<pre className="redux-timeline-pre">
+                              <i className="fa fa-minus-square"></i>
                              {this.printState(state, error)}
-                          </pre>
-                        </div>
-                     </div>
+                           </pre>)
+                        }
+                     </a>
                   </div>
-               </div> :
-               <div className="timeline-panel">
-                  <a class="timeline-heading" onClick={::this.handleMaximizeClick} href="javascript:;">
-                     <h4 class="timeline-title" style={{color: `rgb(${r}, ${g}, ${b})`,}}>
-                        <i className="fa fa-plus-square"></i>
-                        {" " + action.type}
-                     </h4>
-                     <p>
-                        <small className="text-muted">
-                           <i className="fa fa-clock-o"></i>
-                           {" " + getTimestring(time)}
-                        </small>
-                     </p>
-                  </a>
                </div>
-            }
+            </div>
          </li>
       );
       return (

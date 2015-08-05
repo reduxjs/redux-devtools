@@ -138,7 +138,7 @@ export default class LogMonitor {
             </a>
           </div>
         </div>
-         <ul className="timeline">
+         <ul className="redux-timeline">
             {elements}
          </ul>
         <div>
