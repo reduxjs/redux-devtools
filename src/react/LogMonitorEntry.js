@@ -7,6 +7,13 @@ const preStyle = {
    margin: 0,
    padding: 0
 };
+const h4Style = {
+   fontWeight: 500,
+   lineHeight: 1.1,
+   fontSize: "18px",
+   marginTop: "10px",
+   marginBottom: "10px"
+}
 const liStyle = {
    marginBottom: "20px",
    position: "relative"
@@ -21,6 +28,10 @@ const wrap2Style = {
    width: "100%"
 };
 const wrap3Style = {
+   width: "100%",
+   display: "table-cell"
+};
+const wrap3StyleMax = {
    width: "800px",
    display: "table-cell"
 };
@@ -113,45 +124,43 @@ export default class LogMonitorEntry extends Component {
       const { r, g, b } = colorFromString(action.type);
       const colorStyle = {color: `rgb(${r}, ${g}, ${b})`};
 
+
       // Heading
-      let headingComponent = !maximizedAction ? (
-         <h4 style={{color: `rgb(${r}, ${g}, ${b})`,}}>
-            <i className="fa fa-plus-square"></i>
-            {" " + action.type}
+      const actionComponent = !maximizedAction ? (
+         <h4 style={{...h4Style, color: `rgb(${r}, ${g}, ${b})`,}}>
+            {"+ " + action.type}
          </h4>
       ) : (
          <pre style={preStyle}>
            <a style={colorStyle}>
-              <i className="fa fa-minus-square"></i>
-              {JSON.stringify(action, null, 2)}
+              {"- " + JSON.stringify(action, null, 2)}
            </a>
         </pre>
       );
 
-      // State
-      let stateComponent = !maximizedState ? (
-         <h4 style={{color: "white"}}>
-            <i className="fa fa-plus-square"></i>
-            {" State: object {...}"}
+      // Action
+      const stateComponent = !maximizedState ? (
+         <h4 style={{...h4Style, color: "white"}}>
+            {"+ State: object {...}"}
          </h4>
       ) : (
          <pre style={preStyle}>
-            <i className="fa fa-minus-square"></i>
-            {this.printState(state, error)}
+            {"- " + this.printState(state, error)}
          </pre>
       );
+
+      const collapsedComponent = !collapsed ? <span>&#10004; Enabled</span> : <span>&#10008; Disabled</span>;
 
       return (
          <li style={liStyle}>
             <div style={wrap1Style}>
                <div style={wrap2Style}>
-                  <div style={wrap3Style}>
+                  <div style={maximizedAction || maximizedState ? wrap3StyleMax : wrap3Style}>
                      <a onClick={::this.handleCollapseClick} href="javascript:;">
-                        <i className={"fa fa-" + (collapsed ? "ban" : "check")}></i>
-                        {!collapsed ? " Enabled" : " Disabled"}
+                        {collapsedComponent}
                      </a>
                      <a onClick={()=>this.setState({maximizedAction: !maximizedAction})} href="javascript:;">
-                        {headingComponent}
+                        {actionComponent}
                      </a>
                      <a onClick={()=>this.setState({maximizedState: !maximizedState})} href="javascript:;">
                         {stateComponent}
