@@ -1,6 +1,9 @@
 import React, { PropTypes, findDOMNode } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 
+if(BROWSER){
+   require("./timeline.less");
+}
 export default class LogMonitor {
   constructor() {
     window.addEventListener('keydown', ::this.handleKeyPress);
@@ -135,7 +138,9 @@ export default class LogMonitor {
             </a>
           </div>
         </div>
-        {elements}
+         <ul className="timeline">
+            {elements}
+         </ul>
         <div>
           {computedStates.length > 1 &&
             <a onClick={::this.handleRollback}
