@@ -135,8 +135,12 @@ function liftReducer(reducer, initialState) {
     case ActionTypes.PERFORM_ACTION:
       if (currentStateIndex === stagedActions.length - 1) {
         currentStateIndex++;
+        stagedActions = [...stagedActions, liftedAction.action];
+      } else {
+        stagedActions = stagedActions.slice(0, currentStateIndex + 1).concat(liftedAction.action);
+        currentStateIndex = stagedActions.length - 1;
+        skippedActions = {};
       }
-      stagedActions = [...stagedActions, liftedAction.action];
       break;
     case ActionTypes.SET_MONITOR_STATE:
       monitorState = liftedAction.monitorState;
