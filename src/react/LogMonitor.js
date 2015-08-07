@@ -61,8 +61,7 @@ export default class LogMonitor {
     } else if (
       this.props.stagedActions.length < nextProps.stagedActions.length
     ) {
-      const scrollableNode = node.parentElement;
-      const { scrollTop, offsetHeight, scrollHeight } = scrollableNode;
+      const { scrollTop, offsetHeight, scrollHeight } = node;
 
       this.scrollDown = Math.abs(
         scrollHeight - (scrollTop + offsetHeight)
@@ -79,9 +78,8 @@ export default class LogMonitor {
     }
 
     if (this.scrollDown) {
-      const scrollableNode = node.parentElement;
-      const { offsetHeight, scrollHeight } = scrollableNode;
-      scrollableNode.scrollTop = scrollHeight - offsetHeight;
+      const { offsetHeight, scrollHeight } = node;
+      node.scrollTop = scrollHeight - offsetHeight;
       this.scrollDown = false;
     }
   }
