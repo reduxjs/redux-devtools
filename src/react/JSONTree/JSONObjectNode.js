@@ -3,8 +3,6 @@ import reactMixin from 'react-mixin';
 import { ExpandedStateHandlerMixin } from './mixins';
 import JSONArrow from './JSONArrow';
 import grabNode from './grab-node';
-import shallowEqual from '../../utils/shallowEqual';
-import hexToRgb from '../../utils/hexToRgb';
 
 const styles = {
   base: {
@@ -86,6 +84,7 @@ export default class JSONObjectNode extends React.Component {
   }
 
   render() {
+    console.log('render');
     let childListStyle = {
       padding: 0,
       margin: 0,

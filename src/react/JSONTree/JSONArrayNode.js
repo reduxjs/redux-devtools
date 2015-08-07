@@ -3,7 +3,6 @@ import reactMixin from 'react-mixin';
 import { ExpandedStateHandlerMixin } from './mixins';
 import JSONArrow from './JSONArrow';
 import grabNode from './grab-node';
-import hexToRgb from '../../utils/hexToRgb';
 
 const styles = {
   base: {
@@ -97,8 +96,7 @@ export default class JSONArrayNode extends React.Component {
     containerStyle = {
       ...styles.base,
       ...styles.parentNode
-    }
-
+    };
     if (this.state.expanded) {
       spanStyle = {
         ...spanStyle,
