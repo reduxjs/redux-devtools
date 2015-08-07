@@ -1,6 +1,6 @@
 export default {
-  scheme: 'Ocean',
-  author: 'Chris Kempson (http://chriskempson.com)',
+  scheme: 'ocean',
+  author: 'chris kempson (http://chriskempson.com)',
   base00: '#2b303b',
   base01: '#343d46',
   base02: '#4f5b66',
