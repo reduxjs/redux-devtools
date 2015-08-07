@@ -84,7 +84,6 @@ export default class JSONObjectNode extends React.Component {
   }
 
   render() {
-    console.log('render');
     let childListStyle = {
       padding: 0,
       margin: 0,
