@@ -76,7 +76,6 @@ export default class LogMonitor {
     if (!node) {
       return;
     }
-
     if (this.scrollDown) {
       const { offsetHeight, scrollHeight } = node;
       node.scrollTop = scrollHeight - offsetHeight;
@@ -137,7 +136,10 @@ export default class LogMonitor {
     for (let i = 0; i < stagedActions.length; i++) {
       const action = stagedActions[i];
       const { state, error } = computedStates[i];
-
+      let previousState;
+      if (i > 0) {
+        previousState = computedStates[i - 1].state;
+      }
       elements.push(
         <LogMonitorEntry key={i}
                          index={i}
@@ -145,6 +147,7 @@ export default class LogMonitor {
                          select={select}
                          action={action}
                          state={state}
+                         previousState={previousState}
                          collapsed={skippedActions[i]}
                          error={error}
                          onActionClick={::this.handleToggleAction} />

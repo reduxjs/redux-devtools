@@ -3,6 +3,8 @@ import reactMixin from 'react-mixin';
 import { ExpandedStateHandlerMixin } from './mixins';
 import JSONArrow from './JSONArrow';
 import grabNode from './grab-node';
+import shallowEqual from '../../utils/shallowEqual';
+import hexToRgb from '../../utils/hexToRgb';
 
 const styles = {
   base: {
@@ -60,7 +62,11 @@ export default class JSONObjectNode extends React.Component {
       let childNodes = [];
       for (let k in obj) {
         if (obj.hasOwnProperty(k)) {
-          childNodes.push(grabNode(k, obj[k], this.props.theme));
+          let prevData;
+          if (typeof this.props.previousData !== 'undefined') {
+            prevData = this.props.previousData[k];
+          }
+          childNodes.push(grabNode(k, obj[k], prevData, this.props.theme));
         }
       }
       this.needsChildNodes = false;
@@ -86,10 +92,20 @@ export default class JSONObjectNode extends React.Component {
       listStyle: 'none',
       display: (this.state.expanded) ? 'block' : 'none'
     };
-    let containerStyle = { ...styles.base, ...styles.parentNode };
+    let backgroundColor = 'transparent';
+    let containerStyle;
     let spanStyle = {
       ...styles.span,
       color: this.props.theme.base0B
+    };
+    if (typeof this.props.previousData !== 'undefined' && !shallowEqual(this.props.data, this.props.previousData || {})) {
+      const bgColor = hexToRgb(this.props.theme.base08);
+      backgroundColor = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, 0.04)`;
+    }
+    containerStyle = {
+      ...styles.base,
+      ...styles.parentNode,
+      backgroundColor
     };
     if (this.state.expanded) {
       spanStyle = {

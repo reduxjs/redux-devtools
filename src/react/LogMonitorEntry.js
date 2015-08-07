@@ -32,7 +32,7 @@ export default class LogMonitorEntry {
     let errorText = error;
     if (!errorText) {
       try {
-        return <JSONTree theme={this.props.theme} keyName={'state'} data={this.props.select(state)} />;
+        return <JSONTree theme={this.props.theme} keyName={'state'} data={this.props.select(state)} previousData={this.props.select(this.props.previousState)}/>;
       } catch (err) {
         errorText = 'Error selecting state.';
       }
