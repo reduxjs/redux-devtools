@@ -12,11 +12,7 @@ const styles = {
   },
   label: {
     display: 'inline-block',
-    marginRight: 5,
-    color: '#8fa1b2'
-  },
-  value: {
-    color: '#0B75F5'
+    marginRight: 5
   }
 };
 
@@ -25,8 +21,13 @@ export default class JSONNumberNode extends React.Component {
   render() {
     return (
       <li style={styles.base} onClick={::this.handleClick}>
-        <label style={styles.label}>{this.props.keyName}:</label>
-        <span style={styles.value}>{this.props.value}</span>
+        <label style={{
+          ...styles.label,
+          color: this.props.theme.base0D
+        }}>
+          {this.props.keyName}:
+        </label>
+        <span style={{ color: this.props.theme.base09 }}>{this.props.value}</span>
       </li>
     );
   }

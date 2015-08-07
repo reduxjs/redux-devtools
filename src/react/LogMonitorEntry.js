@@ -2,38 +2,12 @@ import React, { PropTypes } from 'react';
 import JSONTree from './JSONTree';
 import LogMonitorEntryAction from "./LogMonitorEntryAction";
 
-function hsvToRgb(h, s, v) {
-  const i = Math.floor(h);
-  const f = h - i;
-  const p = v * (1 - s);
-  const q = v * (1 - f * s);
-  const t = v * (1 - (1 - f) * s);
-  const mod = i % 6;
-  const r = [v, q, p, p, t, v][mod];
-  const g = [t, v, v, q, p, p][mod];
-  const b = [p, p, t, v, v, q][mod];
-
-  return {
-    r: Math.round(r * 255),
-    g: Math.round(g * 255),
-    b: Math.round(b * 255)
-  };
-}
-
-function colorFromString(token) {
+function colorFromString(theme, token) {
   const splitToken = token.split('');
   const finalToken = splitToken.concat(splitToken.reverse());
-
-  const number = finalToken.reduce(
-    (sum, char) => sum + char.charCodeAt(0),
-    0
-  ) * Math.abs(Math.sin(token.length));
-
-  const h = Math.round((number * (180 / Math.PI) * token.length) % 360);
-  const s = number % 100 / 100;
-  const v = 1;
-
-  return hsvToRgb(h, s, v);
+  const number = (parseInt(finalToken, 36)  + finalToken.length) % 8;
+  const themeNumber = 'base0' + (number + 8).toString(16).toUpperCase();
+  return theme[themeNumber];
 }
 
 const styles = {
@@ -58,7 +32,7 @@ export default class LogMonitorEntry {
     let errorText = error;
     if (!errorText) {
       try {
-        return <JSONTree keyName={'state'} data={this.props.select(state)} />
+        return <JSONTree theme={this.props.theme} keyName={'state'} data={this.props.select(state)} />
       } catch (err) {
         errorText = 'Error selecting state.';
       }
@@ -82,15 +56,19 @@ export default class LogMonitorEntry {
 
   render() {
    const { index, error, action, state, collapsed } = this.props;
-   const { r, g, b } = colorFromString(action.type);
    const styleEntry = {
      opacity: collapsed ? 0.5 : 1,
-     color: `rgb(${r}, ${g}, ${b})`,
+     color: colorFromString(this.props.theme, action.type),
      cursor: (index > 0) ? 'pointer' : 'default'
    };
    return (
     <div style={{textDecoration: collapsed ? 'line-through' : 'none'}}>
-      <LogMonitorEntryAction collapsed={collapsed} action={action} onClick={::this.handleActionClick} style={{...styles.entry, ...styleEntry}}/>
+      <LogMonitorEntryAction
+        theme={this.props.theme}
+        collapsed={collapsed}
+        action={action}
+        onClick={::this.handleActionClick}
+        style={{...styles.entry, ...styleEntry}}/>
       {!collapsed &&
         <div style={{
           borderBottom: '1px solid #20262c',

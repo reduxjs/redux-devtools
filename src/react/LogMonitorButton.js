@@ -9,9 +9,6 @@ const styles = {
     marginTop: 2,
     display: 'inline-block',
     fontSize: "0.8em"
-  },
-  active: {
-    backgroundColor: "#252c33"
   }
 }
 
@@ -47,7 +44,7 @@ export default class LogMonitorButton extends React.Component {
     if (this.state.hovered) {
       style = {
         ...style,
-        ...styles.active
+        backgroundColor: this.props.theme.base00
       };
     }
     return (

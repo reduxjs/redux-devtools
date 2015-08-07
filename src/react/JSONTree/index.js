@@ -38,9 +38,9 @@ export default class JSONTree extends React.Component {
     let rootNode = false;
     const keyName = this.props.keyName || 'root';
     if (nodeType === 'Object') {
-      rootNode = <JSONObjectNode data={this.props.data} keyName={keyName} initialExpanded={true} />;
+      rootNode = <JSONObjectNode theme={this.props.theme} data={this.props.data} keyName={keyName} initialExpanded={true} />;
     } else if (nodeType === 'Array') {
-      rootNode = <JSONArrayNode data={this.props.data} initialExpanded={true} keyName={keyName} />;
+      rootNode = <JSONArrayNode theme={this.props.theme} data={this.props.data} initialExpanded={true} keyName={keyName} />;
     }
     return (
       <ul style={styles.tree}>

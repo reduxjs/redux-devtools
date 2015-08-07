@@ -11,7 +11,8 @@ const styles = {
     MozTransition: '150ms',
     borderLeft: '5px solid transparent',
     borderRight: '5px solid transparent',
-    borderTop: '5px solid #39ace6',
+    borderTopWidth: 5,
+    borderTopStyle: 'solid',
     WebkitTransform: 'rotateZ(-90deg)',
     MozTransform: 'rotateZ(-90deg)',
     transform: 'rotateZ(-90deg)'
@@ -25,7 +26,10 @@ const styles = {
 
 export default class JSONArrow extends React.Component {
   render() {
-    let style = { ...styles.base };
+    let style = {
+      ...styles.base,
+      borderTopColor: this.props.theme.base0C
+    };
     if (this.props.open) {
       style = {
         ...style,

@@ -1,26 +1,21 @@
 import React, { PropTypes, findDOMNode } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
+import themes from "./themes";
 
 const styles = {
   container: {
     fontFamily: 'monospace',
     position: 'relative',
-    overflowY: 'hidden'
+    overflowY: 'hidden',
+    width: '100%',
+    height: '100%'
   },
   buttonBarWrapper: {
-    backgroundColor: '#343c45',
-    borderBottom: '1px solid #3f464d',
     marginBottom: 1
   },
   buttonBar: {
     paddingLeft: 2
-  },
-  bordering: {
-    'float': 'left',
-    height: 1,
-    border: '1px solid #20262c',
-    width: '100%'
   }
 }
 
@@ -48,6 +43,7 @@ export default class LogMonitor {
   static defaultProps = {
     select: (state) => state,
     monitorState: { isVisible: true },
+    theme: 'ocean'
   };
 
   componentWillReceiveProps(nextProps) {
@@ -77,7 +73,6 @@ export default class LogMonitor {
     if (this.scrollDown) {
       const scrollableNode = node.parentElement;
       const { offsetHeight, scrollHeight } = scrollableNode;
-
       scrollableNode.scrollTop = scrollHeight - offsetHeight;
       this.scrollDown = false;
     }
@@ -118,6 +113,17 @@ export default class LogMonitor {
   render() {
     const elements = [];
     const { monitorState, skippedActions, stagedActions, computedStates, select } = this.props;
+    let theme;
+    if (typeof this.props.theme === 'string') {
+      if (typeof themes[this.props.theme] !== 'undefined') {
+        theme = themes[this.props.theme]
+      } else {
+        console.warn('DevTools theme ' + this.props.theme + ' not found, defaulting to ocean');
+        theme = themes.ocean
+      }
+    } else {
+      theme = this.props.theme;
+    }
     if (!monitorState.isVisible) {
       return null;
     }
@@ -129,6 +135,7 @@ export default class LogMonitor {
       elements.push(
         <LogMonitorEntry key={i}
                          index={i}
+                         theme={theme}
                          select={select}
                          action={action}
                          state={state}
@@ -139,20 +146,22 @@ export default class LogMonitor {
     }
 
     return (
-      <div style={styles.container}>
-        <div style={styles.buttonBarWrapper}>
-          <div style={styles.buttonBar}>
-            <LogMonitorButton onClick={::this.handleReset}>Reset</LogMonitorButton>
-            {computedStates.length > 1 &&
-              <LogMonitorButton onClick={::this.handleRollback}>Revert</LogMonitorButton>
-            }
-            {Object.keys(skippedActions).some(key => skippedActions[key]) &&
-              <LogMonitorButton onClick={::this.handleSweep}>Sweep</LogMonitorButton>
-            }
-            {computedStates.length > 1 &&
-              <LogMonitorButton onClick={::this.handleCommit}>Commit</LogMonitorButton>
-            }
-          </div>
+      <div style={{...styles.container, backgroundColor: theme.base00}}>
+        <div style={{
+          ...styles.buttonBar,
+          backgroundColor: theme.base01,
+          borderBottom: theme.base00
+        }}>
+          <LogMonitorButton theme={theme} onClick={::this.handleReset}>Reset</LogMonitorButton>
+          {computedStates.length > 1 &&
+            <LogMonitorButton theme={theme} onClick={::this.handleRollback}>Revert</LogMonitorButton>
+          }
+          {Object.keys(skippedActions).some(key => skippedActions[key]) &&
+            <LogMonitorButton theme={theme} onClick={::this.handleSweep}>Sweep</LogMonitorButton>
+          }
+          {computedStates.length > 1 &&
+            <LogMonitorButton theme={theme} onClick={::this.handleCommit}>Commit</LogMonitorButton>
+          }
         </div>
         <div styles={{
           overflowX: 'hidden',

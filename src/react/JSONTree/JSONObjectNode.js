@@ -15,16 +15,11 @@ const styles = {
   label: {
     margin: 0,
     padding: 0,
-    display: 'inline-block',
-    color: '#8fa1b2'
+    display: 'inline-block'
   },
   span: {
-    color: '#049977',
     fontSize: 12,
     cursor: 'default'
-  },
-  spanExpanded: {
-    color: '#D7D5D8'
   },
   spanType: {
     marginLeft: 5,
@@ -65,7 +60,7 @@ export default class JSONObjectNode extends React.Component {
       let childNodes = [];
       for (let k in obj) {
         if (obj.hasOwnProperty(k)) {
-          childNodes.push(grabNode(k, obj[k]));
+          childNodes.push(grabNode(k, obj[k], this.props.theme));
         }
       }
       this.needsChildNodes = false;
@@ -91,18 +86,26 @@ export default class JSONObjectNode extends React.Component {
       listStyle: 'none',
       display: (this.state.expanded) ? 'block' : 'none'
     };
-    let containerStyle = {...styles.base, ...styles.parentNode};
-    let spanStyle = { ...styles.span };
+    let containerStyle = { ...styles.base, ...styles.parentNode };
+    let spanStyle = {
+      ...styles.span,
+      color: this.props.theme.base0B
+    };
     if (this.state.expanded) {
       spanStyle = {
         ...spanStyle,
-        ...styles.spanExpanded
+        color: this.props.theme.base05
       };
     }
     return (
       <li style={containerStyle} onClick={::this.handleClick}>
-        <JSONArrow open={this.state.expanded}/>
-        <label style={styles.label}>{this.props.keyName}:</label>
+        <JSONArrow theme={this.props.theme} open={this.state.expanded}/>
+        <label style={{
+          ...styles.label,
+          color: this.props.theme.base0D
+        }}>
+          {this.props.keyName}:
+        </label>
         <span style={spanStyle}>
           <span style={styles.spanType}>&#123;&#125;</span>
           {this.getItemString()}

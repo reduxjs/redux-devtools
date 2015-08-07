@@ -12,11 +12,7 @@ const styles = {
   },
   label: {
     display: 'inline-block',
-    marginRight: 5,
-    color: '#8fa1b2'
-  },
-  value: {
-    color: '#DF113A'
+    marginRight: 5
   }
 };
 
@@ -25,8 +21,13 @@ export default class JSONNullNode extends React.Component {
   render() {
     return (
       <li style={styles.base} onClick={::this.handleClick}>
-        <label style={styles.label}>{this.props.keyName}:</label>
-        <span style={styles.value}>null</span>
+        <label style={{
+          ...styles.label,
+          color: this.props.theme.base0D
+        }}>
+          {this.props.keyName}:
+        </label>
+        <span style={{ color: this.props.theme.base08 }}>null</span>
       </li>
     );
   }
