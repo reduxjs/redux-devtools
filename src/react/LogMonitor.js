@@ -43,7 +43,7 @@ export default class LogMonitor {
   static defaultProps = {
     select: (state) => state,
     monitorState: { isVisible: true },
-    theme: 'monokai'
+    theme: 'ocean'
   };
 
   componentWillReceiveProps(nextProps) {
