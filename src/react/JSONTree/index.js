@@ -1,0 +1,50 @@
+// ES6 + inline style port of JSONViewer https://bitbucket.org/davevedder/react-json-viewer/
+// all credits and original code to the author
+// Dave Vedder <veddermatic@gmail.com> http://www.eskimospy.com/
+// port by Daniele Zannotti http://www.github.com/dzannotti <dzannotti@me.com>
+
+import React from 'react';
+import objectType from './obj-type';
+import JSONObjectNode from './JSONObjectNode';
+import JSONArrayNode from './JSONArrayNode';
+
+const styles = {
+    tree: {
+      border: 0,
+      padding: 0,
+      margin: 0,
+      fontSize: 14,
+      listStyle: 'none',
+      fontFamily: '"Helvetica Neue", Helvetica, Arial, freesans, sans-serif',
+      MozUserSelect: 'none',
+      WebkitUserSelect: 'none'
+    }
+};
+
+export default class JSONTree extends React.Component {
+  static propTypes = {
+    data: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]).isRequired
+  };
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const nodeType = objectType(this.props.data);
+    let rootNode = false;
+    if (nodeType === 'Object') {
+      rootNode = <JSONObjectNode data={this.props.data} keyName="(root)" initialExpanded={true} />;
+    } else if (nodeType === 'Array') {
+      rootNode = <JSONArrayNode data={this.props.data} initialExpanded={true} keyName="(root)" />;
+    }
+    return (
+      <ul style={styles.tree}>
+        {rootNode}
+      </ul>
+    );
+  }
+}

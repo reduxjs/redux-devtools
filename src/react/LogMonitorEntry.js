@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import JSONTree from './JSONTree';
 
 function hsvToRgb(h, s, v) {
   const i = Math.floor(h);
@@ -49,7 +50,7 @@ export default class LogMonitorEntry {
     let errorText = error;
     if (!errorText) {
       try {
-        return JSON.stringify(this.props.select(state));
+        return <JSONTree data={this.props.select(state)} />
       } catch (err) {
         errorText = 'Error selecting state.';
       }
