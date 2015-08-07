@@ -13,9 +13,9 @@ const styles = {
       border: 0,
       padding: 0,
       margin: 0,
-      fontSize: 14,
+      fontSize: '0.90em',
       listStyle: 'none',
-      fontFamily: '"Helvetica Neue", Helvetica, Arial, freesans, sans-serif',
+      fontFamily: 'monospace',
       MozUserSelect: 'none',
       WebkitUserSelect: 'none'
     }
@@ -36,10 +36,11 @@ export default class JSONTree extends React.Component {
   render() {
     const nodeType = objectType(this.props.data);
     let rootNode = false;
+    const keyName = this.props.keyName || 'root';
     if (nodeType === 'Object') {
-      rootNode = <JSONObjectNode data={this.props.data} keyName="(root)" initialExpanded={true} />;
+      rootNode = <JSONObjectNode data={this.props.data} keyName={keyName} initialExpanded={true} />;
     } else if (nodeType === 'Array') {
-      rootNode = <JSONArrayNode data={this.props.data} initialExpanded={true} keyName="(root)" />;
+      rootNode = <JSONArrayNode data={this.props.data} initialExpanded={true} keyName={keyName} />;
     }
     return (
       <ul style={styles.tree}>

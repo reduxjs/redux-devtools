@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import JSONTree from './JSONTree';
+import LogMonitorEntryAction from "./LogMonitorEntryAction";
 
 function hsvToRgb(h, s, v) {
   const i = Math.floor(h);
@@ -35,6 +36,13 @@ function colorFromString(token) {
   return hsvToRgb(h, s, v);
 }
 
+const styles = {
+  entry: {
+    display: 'block',
+    WebkitUserSelect: 'none'
+  }
+};
+
 export default class LogMonitorEntry {
   static propTypes = {
     index: PropTypes.number.isRequired,
@@ -50,14 +58,14 @@ export default class LogMonitorEntry {
     let errorText = error;
     if (!errorText) {
       try {
-        return <JSONTree data={this.props.select(state)} />
+        return <JSONTree keyName={'state'} data={this.props.select(state)} />
       } catch (err) {
         errorText = 'Error selecting state.';
       }
     }
-
     return (
       <span style={{
+        paddingLeft: 15,
         fontStyle: 'italic'
       }}>
         ({errorText})
@@ -73,49 +81,24 @@ export default class LogMonitorEntry {
   }
 
   render() {
-    const { index, error, action, state, collapsed } = this.props;
-    const { r, g, b } = colorFromString(action.type);
-
-    return (
-      <div style={{
-        textDecoration: collapsed ? 'line-through' : 'none'
-      }}>
-        <a onClick={::this.handleActionClick}
-           style={{
-             opacity: collapsed ? 0.5 : 1,
-             marginTop: '1em',
-             display: 'block',
-             paddingBottom: '1em',
-             paddingTop: '1em',
-             color: `rgb(${r}, ${g}, ${b})`,
-             cursor: (index > 0) ? 'pointer' : 'default',
-             WebkitUserSelect: 'none'
-           }}>
-          {JSON.stringify(action)}
-        </a>
-
-        {!collapsed &&
-          <p style={{
-            textAlign: 'center',
-            transform: 'rotate(180deg)'
-          }}>
-            ⇧
-          </p>
-        }
-
-        {!collapsed &&
-          <div style={{
-            paddingBottom: '1em',
-            paddingTop: '1em',
-            color: 'lightyellow'
-          }}>
-            {this.printState(state, error)}
-          </div>
-        }
-
-        <hr style={{
-          marginBottom: '2em'
-        }} />
+   const { index, error, action, state, collapsed } = this.props;
+   const { r, g, b } = colorFromString(action.type);
+   const styleEntry = {
+     opacity: collapsed ? 0.5 : 1,
+     color: `rgb(${r}, ${g}, ${b})`,
+     cursor: (index > 0) ? 'pointer' : 'default'
+   };
+   return (
+    <div style={{textDecoration: collapsed ? 'line-through' : 'none'}}>
+      <LogMonitorEntryAction collapsed={collapsed} action={action} onClick={::this.handleActionClick} style={{...styles.entry, ...styleEntry}}/>
+      {!collapsed &&
+        <div style={{
+          borderBottom: '1px solid #20262c',
+          paddingLeft: 15
+        }}>
+          {this.printState(state, error)}
+        </div>
+      }
       </div>
     );
   }

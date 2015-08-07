@@ -3,7 +3,6 @@ import reactMixin from 'react-mixin';
 import { ExpandedStateHandlerMixin } from './mixins';
 import JSONArrow from './JSONArrow';
 import grabNode from './grab-node';
-import assign from 'lodash.assign';
 
 const styles = {
   base: {
@@ -90,8 +89,14 @@ export default class JSONArrayNode extends React.Component {
       listStyle: 'none',
       display: (this.state.expanded) ? 'block' : 'none'
     };
-    let containerStyle = assign({}, styles.base, styles.parentNode);
-    let spanStyle = assign({}, styles.span, this.state.expanded ? styles.spanExpanded : {});
+    let containerStyle = {...styles.base, ...styles.parentNode};
+    let spanStyle = { ...styles.span };
+    if (this.state.expanded) {
+      spanStyle = {
+        ...spanStyle,
+        ...styles.spanExpanded
+      };
+    }
     return (
       <li style={containerStyle} onClick={::this.handleClick}>
         <JSONArrow open={this.state.expanded}/>

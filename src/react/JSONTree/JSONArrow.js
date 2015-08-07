@@ -1,5 +1,4 @@
 import React from 'react';
-import assign from 'lodash.assign';
 
 const styles = {
   base: {
@@ -26,7 +25,13 @@ const styles = {
 
 export default class JSONArrow extends React.Component {
   render() {
-    const style = assign({}, styles.base, this.props.open ? styles.open : {});
+    let style = { ...styles.base };
+    if (this.props.open) {
+      style = {
+        ...style,
+        ...styles.open
+      };
+    }
     return <div style={style}/>;
   }
 }

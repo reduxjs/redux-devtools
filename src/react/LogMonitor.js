@@ -1,5 +1,28 @@
 import React, { PropTypes, findDOMNode } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
+import LogMonitorButton from './LogMonitorButton';
+
+const styles = {
+  container: {
+    fontFamily: 'monospace',
+    position: 'relative',
+    overflowY: 'hidden'
+  },
+  buttonBarWrapper: {
+    backgroundColor: '#343c45',
+    borderBottom: '1px solid #3f464d',
+    marginBottom: 1
+  },
+  buttonBar: {
+    paddingLeft: 2
+  },
+  bordering: {
+    'float': 'left',
+    height: 1,
+    border: '1px solid #20262c',
+    width: '100%'
+  }
+}
 
 export default class LogMonitor {
   constructor() {
@@ -24,11 +47,11 @@ export default class LogMonitor {
 
   static defaultProps = {
     select: (state) => state,
-    monitorState: { isVisible: true }
+    monitorState: { isVisible: true },
   };
 
   componentWillReceiveProps(nextProps) {
-    const node = findDOMNode(this);
+    const node = findDOMNode(this.refs.elements);
     if (!node) {
       this.scrollDown = true;
     } else if (
@@ -46,7 +69,7 @@ export default class LogMonitor {
   }
 
   componentDidUpdate() {
-    const node = findDOMNode(this);
+    const node = findDOMNode(this.refs.elements);
     if (!node) {
       return;
     }
@@ -95,7 +118,6 @@ export default class LogMonitor {
   render() {
     const elements = [];
     const { monitorState, skippedActions, stagedActions, computedStates, select } = this.props;
-
     if (!monitorState.isVisible) {
       return null;
     }
@@ -117,52 +139,26 @@ export default class LogMonitor {
     }
 
     return (
-      <div style={{
-        fontFamily: 'monospace',
-        position: 'relative',
-        padding: '1rem'
-      }}>
-        <div>
-          <div style={{
-            paddingBottom: '.5rem'
-          }}>
-            <small>Press Ctrl+H to hide.</small>
-          </div>
-          <div>
-            <a onClick={::this.handleReset}
-               style={{ textDecoration: 'underline', cursor: 'hand' }}>
-              <small>Reset</small>
-            </a>
+      <div style={styles.container}>
+        <div style={styles.buttonBarWrapper}>
+          <div style={styles.buttonBar}>
+            <LogMonitorButton onClick={::this.handleReset}>Reset</LogMonitorButton>
+            {computedStates.length > 1 &&
+              <LogMonitorButton onClick={::this.handleRollback}>Revert</LogMonitorButton>
+            }
+            {Object.keys(skippedActions).some(key => skippedActions[key]) &&
+              <LogMonitorButton onClick={::this.handleSweep}>Sweep</LogMonitorButton>
+            }
+            {computedStates.length > 1 &&
+              <LogMonitorButton onClick={::this.handleCommit}>Commit</LogMonitorButton>
+            }
           </div>
         </div>
-        {elements}
-        <div>
-          {computedStates.length > 1 &&
-            <a onClick={::this.handleRollback}
-               style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-              Rollback
-            </a>
-          }
-          {Object.keys(skippedActions).some(key => skippedActions[key]) &&
-            <span>
-              {' • '}
-              <a onClick={::this.handleSweep}
-                 style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                Sweep
-              </a>
-            </span>
-          }
-          {computedStates.length > 1 &&
-            <span>
-              <span>
-              {' • '}
-              </span>
-              <a onClick={::this.handleCommit}
-                 style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                Commit
-              </a>
-            </span>
-          }
+        <div styles={{
+          overflowX: 'hidden',
+          overflowY: 'auto'
+        }} ref="elements">
+          {elements}
         </div>
       </div>
     );

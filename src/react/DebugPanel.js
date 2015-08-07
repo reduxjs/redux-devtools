@@ -13,9 +13,9 @@ export function getDefaultStyle(props) {
     position: 'fixed',
     zIndex: 999,
     fontSize: 17,
-    overflow: 'auto',
+    overflow: 'hidden',
     opacity: 0.92,
-    background: 'black',
+    background: '#181d20',
     color: 'white',
     left: left ? 0 : undefined,
     right: right ? 0 : undefined,
@@ -23,7 +23,9 @@ export function getDefaultStyle(props) {
     bottom: bottom ? 0 : undefined,
     maxHeight: (bottom && top) ? '100%' : '20%',
     maxWidth: (left && right) ? '100%' : '20%',
-    wordWrap: 'break-word'
+    minWidth: 260,
+    wordWrap: 'break-word',
+    boxSizing: 'border-box'
   };
 }
 
