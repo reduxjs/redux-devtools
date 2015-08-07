@@ -1,7 +1,7 @@
 import React, { PropTypes, findDOMNode } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
-import themes from "./themes";
+import * as themes from "./themes";
 
 const styles = {
   container: {
@@ -43,7 +43,7 @@ export default class LogMonitor {
   static defaultProps = {
     select: (state) => state,
     monitorState: { isVisible: true },
-    theme: 'ocean'
+    theme: 'monokai'
   };
 
   componentWillReceiveProps(nextProps) {

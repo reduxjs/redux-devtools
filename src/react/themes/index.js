@@ -1,5 +1,2 @@
-import ocean from "./ocean";
-
-export default {
-    ocean,
-};
+export { default as ocean } from "./ocean";
+export { default as monokai } from "./monokai";

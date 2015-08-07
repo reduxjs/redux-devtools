@@ -14,7 +14,7 @@ export function getDefaultStyle(props) {
     zIndex: 999,
     fontSize: 17,
     overflow: 'hidden',
-    opacity: 0.92,
+    opacity: 0.95,
     color: 'white',
     left: left ? 0 : undefined,
     right: right ? 0 : undefined,
