@@ -89,20 +89,14 @@ export default class JSONArrayNode extends React.Component {
       listStyle: 'none',
       display: (this.state.expanded) ? 'block' : 'none'
     };
-    let backgroundColor = 'transparent';
     let containerStyle;
     let spanStyle = {
       ...styles.span,
       color: this.props.theme.base0E
     };
-    if (typeof this.props.previousData !== 'undefined' && this.props.previousData === this.data) {
-      const bgColor = hexToRgb(this.props.theme.base08);
-      backgroundColor = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, 0.04)`;
-    }
     containerStyle = {
       ...styles.base,
-      ...styles.parentNode,
-      backgroundColor
+      ...styles.parentNode
     }
 
     if (this.state.expanded) {

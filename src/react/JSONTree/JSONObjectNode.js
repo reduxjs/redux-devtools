@@ -92,20 +92,14 @@ export default class JSONObjectNode extends React.Component {
       listStyle: 'none',
       display: (this.state.expanded) ? 'block' : 'none'
     };
-    let backgroundColor = 'transparent';
     let containerStyle;
     let spanStyle = {
       ...styles.span,
       color: this.props.theme.base0B
     };
-    if (typeof this.props.previousData !== 'undefined' && !shallowEqual(this.props.data, this.props.previousData || {})) {
-      const bgColor = hexToRgb(this.props.theme.base08);
-      backgroundColor = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, 0.04)`;
-    }
     containerStyle = {
       ...styles.base,
-      ...styles.parentNode,
-      backgroundColor
+      ...styles.parentNode
     };
     if (this.state.expanded) {
       spanStyle = {
