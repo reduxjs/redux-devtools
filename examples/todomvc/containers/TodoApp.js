@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Connector } from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 import * as TodoActions from '../actions/TodoActions';
 
-export default class TodoApp extends Component {
+class TodoApp extends Component {
   render() {
-    return (
-      <Connector select={state => ({ todos: state.todos })}>
-        {this.renderChild}
-      </Connector>
-    );
-  }
+    const { todos, actions } = this.props;
 
-  renderChild({ todos, dispatch }) {
-    const actions = bindActionCreators(TodoActions, dispatch);
     return (
       <div>
         <Header addTodo={actions.addTodo} />
@@ -24,3 +17,17 @@ export default class TodoApp extends Component {
     );
   }
 }
+
+function mapState(state) {
+  return {
+    todos: state.todos
+  };
+}
+
+function mapDispatch(dispatch) {
+  return {
+    actions: bindActionCreators(TodoActions, dispatch)
+  };
+}
+
+export default connect(mapState, mapDispatch)(TodoApp);

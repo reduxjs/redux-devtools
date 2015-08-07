@@ -1,12 +1,22 @@
 import createAll from 'react-redux/lib/components/createAll';
-import { bindActionCreators } from 'redux';
 import { ActionCreators } from './devTools';
 
 export default function createDevTools(React) {
   const { PropTypes, Component } = React;
-  const { Provider, Connector } = createAll(React);
+  const { Provider, connect } = createAll(React);
 
-  return class DevTools extends Component {
+  @connect(
+    state => state,
+    ActionCreators
+  )
+  class DevTools extends Component {
+    render() {
+      const { monitor: Monitor } = this.props;
+      return <Monitor {...this.props} />;
+    }
+  }
+
+  return class DevToolsWrapper extends Component {
     static propTypes = {
       monitor: PropTypes.func.isRequired,
       store: PropTypes.shape({
@@ -24,32 +34,21 @@ export default function createDevTools(React) {
         );
       }
       super(props, context);
+      this.renderDevTools = ::this.renderDevTools;
     }
 
     render() {
       const { devToolsStore } = this.props.store;
       return (
         <Provider store={devToolsStore}>
-          {this.renderRoot}
+          {this.renderDevTools}
         </Provider>
       );
     }
 
-    renderRoot = () => {
-      return (
-        <Connector>
-          {this.renderMonitor}
-        </Connector>
-      );
-    };
-
-    renderMonitor = ({ dispatch, ...state }) => {
-      const { monitor: Monitor, ...rest } = this.props;
-      return (
-        <Monitor {...state}
-                 {...bindActionCreators(ActionCreators, dispatch)}
-                 {...rest} />
-      );
-    };
+    renderDevTools() {
+      const { store, ...rest } = this.props;
+      return <DevTools {...rest} />;
+    }
   };
 }
