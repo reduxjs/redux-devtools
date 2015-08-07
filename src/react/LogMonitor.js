@@ -11,11 +11,19 @@ const styles = {
     width: '100%',
     height: '100%'
   },
-  buttonBarWrapper: {
-    marginBottom: 1
-  },
   buttonBar: {
+    height: 26,
+    marginBottom: 1,
     paddingLeft: 2
+  },
+  elements: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 27,
+    bottom: 0,
+    overflowX: 'hidden',
+    overflowY: 'auto'
   }
 };
 
@@ -163,10 +171,7 @@ export default class LogMonitor {
             <LogMonitorButton theme={theme} onClick={::this.handleCommit}>Commit</LogMonitorButton>
           }
         </div>
-        <div styles={{
-          overflowX: 'hidden',
-          overflowY: 'auto'
-        }} ref="elements">
+        <div style={styles.elements} ref="elements">
           {elements}
         </div>
       </div>
