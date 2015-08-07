@@ -8,9 +8,9 @@ const styles = {
     paddingRight: 6,
     marginTop: 2,
     display: 'inline-block',
-    fontSize: "0.8em"
+    fontSize: '0.8em'
   }
-}
+};
 
 export default class LogMonitorButton extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class LogMonitorButton extends React.Component {
     this.state = {
       hovered: false,
       active: false
-    }
+    };
   }
 
   handleMouseEnter() {
@@ -39,7 +39,7 @@ export default class LogMonitorButton extends React.Component {
 
   render() {
     let style = {
-      ...styles.base,
+      ...styles.base
     };
     if (this.state.hovered) {
       style = {

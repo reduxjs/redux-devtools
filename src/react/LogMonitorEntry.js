@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import JSONTree from './JSONTree';
-import LogMonitorEntryAction from "./LogMonitorEntryAction";
+import LogMonitorEntryAction from './LogMonitorEntryAction';
 
 function colorFromString(theme, token) {
   const splitToken = token.split('');
   const finalToken = splitToken.concat(splitToken.reverse());
-  const number = (parseInt(finalToken, 36)  + finalToken.length) % 8;
+  const number = (parseInt(finalToken, 36) + finalToken.length) % 8;
   const themeNumber = 'base0' + (number + 8).toString(16).toUpperCase();
   return theme[themeNumber];
 }
@@ -32,7 +32,7 @@ export default class LogMonitorEntry {
     let errorText = error;
     if (!errorText) {
       try {
-        return <JSONTree theme={this.props.theme} keyName={'state'} data={this.props.select(state)} />
+        return <JSONTree theme={this.props.theme} keyName={'state'} data={this.props.select(state)} />;
       } catch (err) {
         errorText = 'Error selecting state.';
       }
@@ -55,28 +55,28 @@ export default class LogMonitorEntry {
   }
 
   render() {
-   const { index, error, action, state, collapsed } = this.props;
-   const styleEntry = {
-     opacity: collapsed ? 0.5 : 1,
-     color: colorFromString(this.props.theme, action.type),
-     cursor: (index > 0) ? 'pointer' : 'default'
-   };
-   return (
-    <div style={{textDecoration: collapsed ? 'line-through' : 'none'}}>
-      <LogMonitorEntryAction
-        theme={this.props.theme}
-        collapsed={collapsed}
-        action={action}
-        onClick={::this.handleActionClick}
-        style={{...styles.entry, ...styleEntry}}/>
-      {!collapsed &&
-        <div style={{
-          borderBottom: '1px solid #20262c',
-          paddingLeft: 15
-        }}>
-          {this.printState(state, error)}
-        </div>
-      }
+    const { index, error, action, state, collapsed } = this.props;
+    const styleEntry = {
+      opacity: collapsed ? 0.5 : 1,
+      color: colorFromString(this.props.theme, action.type),
+      cursor: (index > 0) ? 'pointer' : 'default'
+    };
+    return (
+      <div style={{textDecoration: collapsed ? 'line-through' : 'none'}}>
+        <LogMonitorEntryAction
+          theme={this.props.theme}
+          collapsed={collapsed}
+          action={action}
+          onClick={::this.handleActionClick}
+          style={{...styles.entry, ...styleEntry}}/>
+        {!collapsed &&
+          <div style={{
+            borderBottom: '1px solid #20262c',
+            paddingLeft: 15
+          }}>
+            {this.printState(state, error)}
+          </div>
+        }
       </div>
     );
   }

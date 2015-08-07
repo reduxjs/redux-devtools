@@ -1,7 +1,7 @@
 import React, { PropTypes, findDOMNode } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
-import * as themes from "./themes";
+import * as themes from './themes';
 
 const styles = {
   container: {
@@ -17,7 +17,7 @@ const styles = {
   buttonBar: {
     paddingLeft: 2
   }
-}
+};
 
 export default class LogMonitor {
   constructor() {
@@ -116,10 +116,10 @@ export default class LogMonitor {
     let theme;
     if (typeof this.props.theme === 'string') {
       if (typeof themes[this.props.theme] !== 'undefined') {
-        theme = themes[this.props.theme]
+        theme = themes[this.props.theme];
       } else {
         console.warn('DevTools theme ' + this.props.theme + ' not found, defaulting to ocean');
-        theme = themes.ocean
+        theme = themes.ocean;
       }
     } else {
       theme = this.props.theme;
