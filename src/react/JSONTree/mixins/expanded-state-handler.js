@@ -1,3 +1,5 @@
+import deepEqual from '../../../utils/deepEqual';
+
 export default {
   handleClick(e) {
     e.stopPropagation();
@@ -11,5 +13,9 @@ export default {
     this.renderedChildren = [];
     this.itemString = false;
     this.needsChildNodes = true;
+  },
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !deepEqual(this.state, nextState) || !deepEqual(this.props, nextProps);
   }
 };
