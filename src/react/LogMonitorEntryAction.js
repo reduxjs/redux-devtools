@@ -15,7 +15,6 @@ const styles = {
     marginBottom: 1
   },
   payload: {
-    backgroundColor: '#252c33',
     paddingLeft: 15
   }
 };
@@ -24,7 +23,10 @@ export default class LogMonitorAction extends React.Component {
 
   renderPayload(payload) {
     return (
-      <div style={styles.payload}>
+      <div style={{
+        ...styles.payload,
+        backgroundColor: this.props.theme.base01
+      }}>
         { Object.keys(payload).length > 0 ? <JSONTree theme={this.props.theme} keyName={'payload'} data={payload}/> : '' }
       </div>
     );
@@ -35,13 +37,13 @@ export default class LogMonitorAction extends React.Component {
     return (
       <div style={{
         ...styles.wrapper,
-        backgroundColor: this.props.theme.base01,
+        backgroundColor: this.props.theme.base02,
         borderTopColor: this.props.theme.base00,
-        borderBottomColor: this.props.theme.base02,
+        borderBottomColor: this.props.theme.base03,
         ...this.props.style
       }} onClick={this.props.onClick}>
         <div style={styles.actionBar}>{type}</div>
-        {!this.props.collapsed ? '' : ''}
+        {!this.props.collapsed ? this.renderPayload(payload) : ''}
       </div>
     );
   }
