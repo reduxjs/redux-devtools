@@ -17,7 +17,6 @@ const styles = {
     display: 'inline-block'
   },
   span: {
-    fontSize: '0.85em',
     cursor: 'default'
   },
   spanType: {

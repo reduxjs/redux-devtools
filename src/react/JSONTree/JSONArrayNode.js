@@ -17,13 +17,11 @@ const styles = {
     display: 'inline-block'
   },
   span: {
-    fontSize: '0.85em',
     cursor: 'default'
   },
   spanType: {
     marginLeft: 5,
-    marginRight: 5,
-    fontSize: '1em'
+    marginRight: 5
   }
 };
 
