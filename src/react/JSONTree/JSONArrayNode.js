@@ -91,8 +91,7 @@ export default class JSONArrayNode extends React.Component {
       color: this.props.theme.base0E
     };
     containerStyle = {
-      ...styles.base,
-      ...styles.parentNode
+      ...styles.base
     };
     if (this.state.expanded) {
       spanStyle = {

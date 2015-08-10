@@ -93,8 +93,7 @@ export default class JSONObjectNode extends React.Component {
       color: this.props.theme.base0B
     };
     containerStyle = {
-      ...styles.base,
-      ...styles.parentNode
+      ...styles.base
     };
     if (this.state.expanded) {
       spanStyle = {
