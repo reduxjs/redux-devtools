@@ -9,7 +9,6 @@ const styles = {
     paddingTop: 2,
     paddingBottom: 2,
     paddingRight: 4,
-    letterSpacing: 1,
     marginLeft: 10
   },
   label: {
