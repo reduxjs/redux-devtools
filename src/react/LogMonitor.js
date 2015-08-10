@@ -120,50 +120,66 @@ export default class LogMonitor {
       <div style={{
         fontFamily: 'monospace',
         position: 'relative',
-        padding: '1rem'
+        padding: '1rem 1rem 0 1rem',
+        height: '100%'
       }}>
-        <div>
-          <div style={{
-            paddingBottom: '.5rem'
-          }}>
-            <small>Press Ctrl+H to hide.</small>
+        <div style={{marginBottom: 40, fontSize: 12}}>
+          <div style={{float: 'left'}}>
+            {computedStates.length > 1 &&
+              <button onClick={::this.handleRollback} style={{
+                cursor: 'pointer',
+                padding: '5px 7px',
+                border: '1px solid #eee',
+                display: 'inline-block',
+                backgroundColor: 'transparent',
+                color: '#eee',
+                fontFamily: 'monospace'
+              }}>
+                Rollback
+              </button>
+            }
+            {Object.keys(skippedActions).some(key => skippedActions[key]) &&
+              <button onClick={::this.handleSweep} style={{
+                cursor: 'pointer',
+                padding: '5px 7px',
+                border: '1px solid #eee',
+                display: 'inline-block',
+                backgroundColor: 'transparent',
+                color: '#eee',
+                fontFamily: 'monospace'
+              }}>
+                Sweep
+              </button>
+            }
+            {computedStates.length > 1 &&
+              <button onClick={::this.handleCommit} style={{
+                cursor: 'pointer',
+                padding: '5px 7px',
+                border: '1px solid #eee',
+                display: 'inline-block',
+                backgroundColor: 'transparent',
+                color: '#eee',
+                fontFamily: 'monospace'
+              }}>
+                Commit
+              </button>
+            }
           </div>
-          <div>
-            <a onClick={::this.handleReset}
-               style={{ textDecoration: 'underline', cursor: 'hand' }}>
-              <small>Reset</small>
-            </a>
+          <div style={{float: 'right'}}>
+            <button onClick={::this.handleReset} style={{
+              cursor: 'pointer',
+              padding: '5px 7px',
+              border: '1px solid #eee',
+              display: 'inline-block',
+              backgroundColor: 'transparent',
+              color: '#eee',
+              fontFamily: 'monospace'
+            }}>
+              Reset
+            </button>
           </div>
         </div>
         {elements}
-        <div>
-          {computedStates.length > 1 &&
-            <a onClick={::this.handleRollback}
-               style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-              Rollback
-            </a>
-          }
-          {Object.keys(skippedActions).some(key => skippedActions[key]) &&
-            <span>
-              {' • '}
-              <a onClick={::this.handleSweep}
-                 style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                Sweep
-              </a>
-            </span>
-          }
-          {computedStates.length > 1 &&
-            <span>
-              <span>
-              {' • '}
-              </span>
-              <a onClick={::this.handleCommit}
-                 style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                Commit
-              </a>
-            </span>
-          }
-        </div>
       </div>
     );
   }

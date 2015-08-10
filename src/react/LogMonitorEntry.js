@@ -49,7 +49,7 @@ export default class LogMonitorEntry {
     let errorText = error;
     if (!errorText) {
       try {
-        return JSON.stringify(this.props.select(state));
+        return JSON.stringify(this.props.select(state), null, 2);
       } catch (err) {
         errorText = 'Error selecting state.';
       }
@@ -77,14 +77,14 @@ export default class LogMonitorEntry {
 
     return (
       <div style={{
-        textDecoration: collapsed ? 'line-through' : 'none'
+        textDecoration: collapsed ? 'line-through' : 'none',
+        borderBottom: '1px solid #333',
+        paddingBottom: '1em'
       }}>
         <a onClick={::this.handleActionClick}
            style={{
              opacity: collapsed ? 0.5 : 1,
-             marginTop: '1em',
              display: 'block',
-             paddingBottom: '1em',
              paddingTop: '1em',
              color: `rgb(${r}, ${g}, ${b})`,
              cursor: (index > 0) ? 'pointer' : 'default',
@@ -94,27 +94,16 @@ export default class LogMonitorEntry {
         </a>
 
         {!collapsed &&
-          <p style={{
-            textAlign: 'center',
-            transform: 'rotate(180deg)'
-          }}>
-            ⇧
-          </p>
-        }
-
-        {!collapsed &&
-          <div style={{
-            paddingBottom: '1em',
-            paddingTop: '1em',
-            color: 'lightyellow'
+          <pre style={{
+            backgroundColor: '#fff',
+            color: '#111',
+            padding: 10,
+            marginTop: 10,
+            fontSize: 15
           }}>
             {this.printState(state, error)}
-          </div>
+          </pre>
         }
-
-        <hr style={{
-          marginBottom: '2em'
-        }} />
       </div>
     );
   }
