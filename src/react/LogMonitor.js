@@ -5,7 +5,7 @@ import * as themes from './themes';
 
 const styles = {
   container: {
-    fontFamily: 'monospace',
+    fontFamily: 'Monaco, monospace',
     position: 'relative',
     overflowY: 'hidden',
     width: '100%',
