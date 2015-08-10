@@ -6,6 +6,7 @@ import grabNode from './grab-node';
 
 const styles = {
   base: {
+    position: 'relative',
     paddingTop: 2,
     paddingBottom: 2,
     paddingRight: 4,
@@ -102,15 +103,15 @@ export default class JSONObjectNode extends React.Component {
       };
     }
     return (
-      <li style={containerStyle} onClick={::this.handleClick}>
-        <JSONArrow theme={this.props.theme} open={this.state.expanded}/>
+      <li style={containerStyle}>
+        <JSONArrow theme={this.props.theme} open={this.state.expanded} onClick={::this.handleClick}/>
         <label style={{
           ...styles.label,
           color: this.props.theme.base0D
-        }}>
+        }} onClick={::this.handleClick}>
           {this.props.keyName}:
         </label>
-        <span style={spanStyle}>
+        <span style={spanStyle} onClick={::this.handleClick}>
           <span style={styles.spanType}>&#123;&#125;</span>
           {this.getItemString()}
         </span>
