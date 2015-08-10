@@ -22,7 +22,7 @@ export default class JSONNumberNode extends React.Component {
     let backgroundColor = 'transparent';
     if (this.props.previousValue !== this.props.value) {
       const bgColor = hexToRgb(this.props.theme.base08);
-      backgroundColor = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, 0.04)`;
+      backgroundColor = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, 0.06)`;
     }
     return (
       <li style={{ ...styles.base, backgroundColor }} onClick={::this.handleClick}>
