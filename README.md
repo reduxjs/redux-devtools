@@ -7,7 +7,9 @@ A better README is coming. But if you insist...
 
 ### Installation
 
-It's out on NPM as `redux-devtools@0.1.0`.  
+```
+npm install --save-dev redux-devtools
+```
 
 [This commit](https://github.com/gaearon/redux-devtools/commit/0a2a97556e252bfad822ca438923774bc8b932a4) should give you an idea about how to add Redux DevTools for your app **but make sure to only apply `devTools()` in development!** In production, this will be terribly slow because actions just accumulate forever. (We'll need to implement a rolling window for dev too.)
 
