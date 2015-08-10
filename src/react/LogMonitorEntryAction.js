@@ -27,7 +27,7 @@ export default class LogMonitorAction extends React.Component {
         ...styles.payload,
         backgroundColor: this.props.theme.base01
       }}>
-        { Object.keys(payload).length > 0 ? <JSONTree theme={this.props.theme} keyName={'payload'} data={payload}/> : '' }
+        { Object.keys(payload).length > 0 ? <JSONTree theme={this.props.theme} keyName={'action'} data={payload}/> : '' }
       </div>
     );
   }
