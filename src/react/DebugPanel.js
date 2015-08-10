@@ -11,7 +11,7 @@ export function getDefaultStyle(props) {
 
   return {
     position: 'fixed',
-    zIndex: 999,
+    zIndex: 10000,
     fontSize: 17,
     overflow: 'hidden',
     opacity: 0.9,
