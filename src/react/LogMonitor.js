@@ -9,7 +9,8 @@ const styles = {
     position: 'relative',
     overflowY: 'hidden',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    fontSize: '0.95em'
   },
   buttonBar: {
     height: 26,
