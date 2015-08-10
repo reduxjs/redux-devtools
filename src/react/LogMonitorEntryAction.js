@@ -9,7 +9,7 @@ const styles = {
     borderBottomStyle: 'solid'
   },
   actionBar: {
-    paddingTop: 4,
+    paddingTop: 6,
     paddingBottom: 4,
     paddingLeft: 10,
     marginBottom: 1
