@@ -21,8 +21,7 @@ const styles = {
   },
   spanType: {
     marginLeft: 5,
-    marginRight: 5,
-    fontSize: '1em'
+    marginRight: 5
   }
 };
 
@@ -76,7 +75,7 @@ export default class JSONObjectNode extends React.Component {
   getItemString() {
     if (!this.itemString) {
       const len = Object.keys(this.props.data).length;
-      this.itemString = len + ' Key' + (len > 1 ? 's' : '');
+      this.itemString = len + ' key' + (len > 1 ? 's' : '');
     }
     return this.itemString;
   }

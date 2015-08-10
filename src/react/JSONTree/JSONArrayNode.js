@@ -72,7 +72,7 @@ export default class JSONArrayNode extends React.Component {
   // caching it if it hasn't been created yet.
   getItemString() {
     if (!this.itemString) {
-      this.itemString = this.props.data.length + ' Item' + (this.props.data.length > 1 ? 's' : '');
+      this.itemString = this.props.data.length + ' item' + (this.props.data.length > 1 ? 's' : '');
     }
     return this.itemString;
   }
