@@ -14,6 +14,9 @@ const styles = {
   entry: {
     display: 'block',
     WebkitUserSelect: 'none'
+  },
+  tree: {
+    paddingLeft: 5
   }
 };
 
@@ -32,7 +35,12 @@ export default class LogMonitorEntry {
     let errorText = error;
     if (!errorText) {
       try {
-        return <JSONTree theme={this.props.theme} keyName={'state'} data={this.props.select(state)} previousData={this.props.select(this.props.previousState)}/>;
+        return <JSONTree
+          theme={this.props.theme}
+          keyName={'state'}
+          data={this.props.select(state)}
+          previousData={this.props.select(this.props.previousState)}
+          style={styles.tree}/>;
       } catch (err) {
         errorText = 'Error selecting state.';
       }

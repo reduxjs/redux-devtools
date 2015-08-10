@@ -43,7 +43,10 @@ export default class JSONTree extends React.Component {
       rootNode = <JSONArrayNode theme={this.props.theme} data={this.props.data} previousData={this.props.previousData} initialExpanded={true} keyName={keyName} />;
     }
     return (
-      <ul style={styles.tree}>
+      <ul style={{
+        ...styles.tree,
+        ...this.props.style
+      }}>
         {rootNode}
       </ul>
     );
