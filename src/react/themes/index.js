@@ -35,3 +35,4 @@ export { default as summerfruit } from './summerfruit';
 export { default as tomorrow } from './tomorrow';
 export { default as tube } from './tube';
 export { default as twilight } from './twilight';
+export { default as nicinabox } from './nicinabox';

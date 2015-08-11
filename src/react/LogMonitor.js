@@ -52,7 +52,7 @@ export default class LogMonitor {
   static defaultProps = {
     select: (state) => state,
     monitorState: { isVisible: true },
-    theme: 'ocean'
+    theme: 'nicinabox'
   };
 
   componentWillReceiveProps(nextProps) {
@@ -124,8 +124,8 @@ export default class LogMonitor {
       if (typeof themes[this.props.theme] !== 'undefined') {
         theme = themes[this.props.theme];
       } else {
-        console.warn('DevTools theme ' + this.props.theme + ' not found, defaulting to ocean');
-        theme = themes.ocean;
+        console.warn('DevTools theme ' + this.props.theme + ' not found, defaulting to nicinabox');
+        theme = themes.nicinabox;
       }
     } else {
       theme = this.props.theme;
