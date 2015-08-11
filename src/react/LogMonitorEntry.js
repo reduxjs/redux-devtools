@@ -2,14 +2,6 @@ import React, { PropTypes } from 'react';
 import JSONTree from './JSONTree';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
 
-function colorFromString(theme, token) {
-  const splitToken = token.split('');
-  const finalToken = splitToken.concat(splitToken.reverse());
-  const number = (parseInt(finalToken, 36) + finalToken.length) % 8;
-  const themeNumber = 'base0' + (number + 8).toString(16).toUpperCase();
-  return theme[themeNumber];
-}
-
 const styles = {
   entry: {
     display: 'block',
