@@ -28,7 +28,7 @@ export default class JSONArrow extends React.Component {
   render() {
     let style = {
       ...styles.base,
-      borderTopColor: this.props.theme.base0C
+      borderTopColor: this.props.theme.base0D
     };
     if (this.props.open) {
       style = {

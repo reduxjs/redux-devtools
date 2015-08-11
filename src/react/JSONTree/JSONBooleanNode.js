@@ -33,7 +33,7 @@ export default class JSONBooleanNode extends React.Component {
         }}>
           {this.props.keyName}:
         </label>
-        <span style={{ color: this.props.theme.base0F }}>{truthString}</span>
+        <span style={{ color: this.props.theme.base09 }}>{truthString}</span>
       </li>
     );
   }

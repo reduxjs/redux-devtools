@@ -32,7 +32,7 @@ export default class JSONNumberNode extends React.Component {
         }}>
           {this.props.keyName}:
         </label>
-        <span style={{ color: this.props.theme.base09 }}>{this.props.value}</span>
+        <span style={{ color: this.props.theme.base0E }}>{this.props.value}</span>
       </li>
     );
   }

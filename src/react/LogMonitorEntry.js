@@ -51,7 +51,7 @@ export default class LogMonitorEntry {
         paddingLeft: 0,
         paddingRight: 5,
         fontStyle: 'italic',
-        color: this.props.theme.base08
+        color: this.props.theme.base09
       }}>
         ({errorText})
       </span>
@@ -69,7 +69,6 @@ export default class LogMonitorEntry {
     const { index, error, action, state, collapsed } = this.props;
     const styleEntry = {
       opacity: collapsed ? 0.5 : 1,
-      color: colorFromString(this.props.theme, action.type),
       cursor: (index > 0) ? 'pointer' : 'default'
     };
     return (
@@ -82,7 +81,6 @@ export default class LogMonitorEntry {
           style={{...styles.entry, ...styleEntry}}/>
         {!collapsed &&
           <div style={{
-            borderBottom: '1px solid #20262c',
             paddingLeft: 15
           }}>
             {this.printState(state, error)}

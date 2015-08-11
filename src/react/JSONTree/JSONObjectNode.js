@@ -102,7 +102,7 @@ export default class JSONObjectNode extends React.Component {
     if (this.state.expanded) {
       spanStyle = {
         ...spanStyle,
-        color: this.props.theme.base05
+        color: this.props.theme.base03
       };
     }
     return (
