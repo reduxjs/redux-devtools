@@ -13,7 +13,7 @@ const styles = {
     fontSize: '0.95em'
   },
   buttonBar: {
-    height: 26,
+    height: 45,
     marginBottom: 1,
     paddingLeft: 2
   },

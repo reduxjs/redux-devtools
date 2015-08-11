@@ -3,8 +3,8 @@ import JSONTree from './JSONTree';
 
 const styles = {
   actionBar: {
-    paddingTop: 6,
-    paddingBottom: 4,
+    paddingTop: 7,
+    paddingBottom: 6,
     paddingLeft: 10,
     marginBottom: 1
   },
