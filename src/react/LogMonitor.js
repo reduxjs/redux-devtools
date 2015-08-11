@@ -30,7 +30,9 @@ const styles = {
 
 export default class LogMonitor {
   constructor() {
-    window.addEventListener('keydown', ::this.handleKeyPress);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('keydown', ::this.handleKeyPress);
+    }
   }
 
   static propTypes = {

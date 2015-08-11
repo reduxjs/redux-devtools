@@ -6,7 +6,8 @@ const ActionTypes = {
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
   JUMP_TO_STATE: 'JUMP_TO_STATE',
-  SET_MONITOR_STATE: 'SET_MONITOR_STATE'
+  SET_MONITOR_STATE: 'SET_MONITOR_STATE',
+  RECOMPUTE_STATES: 'RECOMPUTE_STATES'
 };
 
 const INIT_ACTION = {
@@ -141,6 +142,12 @@ function liftReducer(reducer, initialState) {
     case ActionTypes.SET_MONITOR_STATE:
       monitorState = liftedAction.monitorState;
       break;
+    case ActionTypes.RECOMPUTE_STATES:
+      stagedActions = liftedAction.stagedActions;
+      committedState = liftedAction.committedState;
+      currentStateIndex = stagedActions.length - 1;
+      skippedActions = {};
+      break;
     default:
       break;
     }
@@ -227,6 +234,13 @@ export const ActionCreators = {
   },
   setMonitorState(monitorState) {
     return { type: ActionTypes.SET_MONITOR_STATE, monitorState };
+  },
+  recomputeStates(committedState, stagedActions) {
+    return {
+      type: ActionTypes.RECOMPUTE_STATES,
+      committedState,
+      stagedActions
+    };
   }
 };
 
