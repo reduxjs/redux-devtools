@@ -13,15 +13,14 @@ const styles = {
     fontSize: '0.95em'
   },
   buttonBar: {
-    height: 45,
-    marginBottom: 1,
-    paddingLeft: 2
+    height: 40,
+    textAlign: 'center'
   },
   elements: {
     position: 'absolute',
     left: 0,
     right: 0,
-    top: 27,
+    top: 40,
     bottom: 0,
     overflowX: 'hidden',
     overflowY: 'auto'

@@ -2,11 +2,14 @@ import React from 'react';
 
 const styles = {
   base: {
-    paddingTop: 3,
-    paddingBottom: 3,
+    marginTop: 5,
+    marginLeft: 4,
+    minWidth: 40,
     paddingLeft: 6,
     paddingRight: 6,
-    marginTop: 2,
+    height: 30,
+    borderRadius: 4,
+    lineHeight: "30px",
     display: 'inline-block',
     fontSize: '0.8em'
   }
