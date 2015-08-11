@@ -161,15 +161,9 @@ export default class LogMonitor {
       <div style={{...styles.container, backgroundColor: theme.base00}}>
         <div style={styles.buttonBar}>
           <LogMonitorButton theme={theme} onClick={::this.handleReset}>Reset</LogMonitorButton>
-          {computedStates.length > 1 &&
-            <LogMonitorButton theme={theme} onClick={::this.handleRollback}>Revert</LogMonitorButton>
-          }
-          {Object.keys(skippedActions).some(key => skippedActions[key]) &&
-            <LogMonitorButton theme={theme} onClick={::this.handleSweep}>Sweep</LogMonitorButton>
-          }
-          {computedStates.length > 1 &&
-            <LogMonitorButton theme={theme} onClick={::this.handleCommit}>Commit</LogMonitorButton>
-          }
+          <LogMonitorButton theme={theme} onClick={::this.handleRollback} enabled={computedStates.length}>Revert</LogMonitorButton>
+          <LogMonitorButton theme={theme} onClick={::this.handleSweep} enabled={Object.keys(skippedActions).some(key => skippedActions[key])}>Sweep</LogMonitorButton>
+          <LogMonitorButton theme={theme} onClick={::this.handleCommit} enabled={computedStates.length > 1}>Commit</LogMonitorButton>
         </div>
         <div style={styles.elements} ref="elements">
           {elements}

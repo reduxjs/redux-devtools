@@ -37,22 +37,38 @@ export default class LogMonitorButton extends React.Component {
     this.setState({ active: false });
   }
 
+  onClick() {
+    if (!this.props.enabled) {
+      return;
+    }
+    if (this.props.onClick) {
+      this.props.onClick();
+    }
+  }
+
   render() {
     let style = {
-      ...styles.base
+      ...styles.base,
+      backgroundColor: this.props.theme.base01
     };
-    if (this.state.hovered) {
+    if (this.props.enabled && this.state.hovered) {
       style = {
         ...style,
         backgroundColor: this.props.theme.base00
       };
+    }
+    if (!this.props.enabled) {
+      style = {
+        ...style,
+        opacity: 0.5
+      }
     }
     return (
       <a onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}
           onMouseDown={::this.handleMouseDown}
           onMouseUp={::this.handleMouseUp}
-          style={style} onClick={this.props.onClick}>
+          style={style} onClick={::this.onClick}>
         {this.props.children}
       </a>
     );
