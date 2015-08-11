@@ -61,7 +61,10 @@ export default class JSONArrayNode extends React.Component {
         if (typeof this.props.previousData !== 'undefined') {
           prevData = this.props.previousData[idx];
         }
-        childNodes.push(grabNode(idx, element, prevData, this.props.theme));
+        const node = grabNode(idx, element, prevData, this.props.theme);
+        if (node !== false) {
+          childNodes.push(node);
+        }
       });
       this.needsChildNodes = false;
       this.renderedChildren = childNodes;

@@ -62,7 +62,10 @@ export default class JSONObjectNode extends React.Component {
           if (typeof this.props.previousData !== 'undefined') {
             prevData = this.props.previousData[k];
           }
-          childNodes.push(grabNode(k, obj[k], prevData, this.props.theme));
+          const node = grabNode(k, obj[k], prevData, this.props.theme);
+          if (node !== false) {
+            childNodes.push(node);
+          }
         }
       }
       this.needsChildNodes = false;

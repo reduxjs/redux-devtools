@@ -23,6 +23,5 @@ export default function(key, value, prevValue, theme) {
   } else if (nodeType === 'Null') {
     return <JSONNullNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={aKey} />;
   }
-  console.error('Unknown node type:', nodeType);
   return false;
 }
