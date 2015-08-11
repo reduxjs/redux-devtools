@@ -15,7 +15,6 @@ const styles = {
       margin: 0,
       fontSize: '0.90em',
       listStyle: 'none',
-      fontFamily: 'monospace',
       MozUserSelect: 'none',
       WebkitUserSelect: 'none'
     }

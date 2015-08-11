@@ -5,7 +5,7 @@ import * as themes from './themes';
 
 const styles = {
   container: {
-    fontFamily: 'Monaco, monospace',
+    fontFamily: 'monaco, Consolas, Lucida Console, monospace',
     position: 'relative',
     overflowY: 'hidden',
     width: '100%',
@@ -157,11 +157,7 @@ export default class LogMonitor {
 
     return (
       <div style={{...styles.container, backgroundColor: theme.base00}}>
-        <div style={{
-          ...styles.buttonBar,
-          backgroundColor: theme.base01,
-          borderBottom: theme.base00
-        }}>
+        <div style={styles.buttonBar}>
           <LogMonitorButton theme={theme} onClick={::this.handleReset}>Reset</LogMonitorButton>
           {computedStates.length > 1 &&
             <LogMonitorButton theme={theme} onClick={::this.handleRollback}>Revert</LogMonitorButton>
