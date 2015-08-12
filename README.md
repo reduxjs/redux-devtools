@@ -4,7 +4,7 @@ Redux DevTools
 A live-editing time travel environment for Redux.  
 **[See Dan's React Europe talk demoing it!](http://youtube.com/watch?v=xsSnOQynTHs)**
 
-![](https://cloud.githubusercontent.com/assets/246280/9216435/d59b7c80-407e-11e5-8f5a-52a8b0128999.gif)
+![](http://i.imgur.com/J4GeW0M.gif)
 
 ### Features
 
