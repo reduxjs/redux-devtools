@@ -25,6 +25,9 @@ module.exports = {
     },
     extensions: ['', '.js']
   },
+  resolveLoader: {
+    'fallback': path.join(__dirname, 'node_modules')
+  },
   module: {
     loaders: [{
       test: /\.js$/,
@@ -33,7 +36,7 @@ module.exports = {
       include: __dirname
     }, {
       test: /\.js$/,
-      loaders: ['babel'],
+      loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, '..', '..', 'src')
     }, {
       test: /\.css?$/,
