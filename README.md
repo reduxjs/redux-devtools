@@ -1,9 +1,19 @@
 Redux DevTools
 =========================
 
-A better README is coming. But if you insist...
+A live-editing time travel environment for Redux.  
+**[See Dan's React Europe talk demoing it!](http://youtube.com/watch?v=xsSnOQynTHs)**
 
-<img src='http://i.imgur.com/HMW2pjP.png' width='700'>
+![](https://cloud.githubusercontent.com/assets/246280/9216435/d59b7c80-407e-11e5-8f5a-52a8b0128999.gif)
+
+### Features
+
+* Lets you inspect every state and action payload
+* Lets you go back in time by “cancelling” actions
+* If you change the reducer code, each “staged” action will be re-evaluted
+* If the reducers throw, you will see during which action this happened, and what the error was
+* With `persistState()` store enhancer, you can persist debug sessions across page reloads
+* To monitor a part of  the state, you can set a `select` prop on the DevTools component: `<DevTools select={state => state.todos} store={store} monitor={LogMonitor} />`
 
 ### Installation
 
@@ -35,17 +45,11 @@ For fun, you can also open `http://localhost:3000/?debug_session=123`, click aro
 
 Oh, and you can do the same with the TodoMVC example as well.
 
-If you only would like to monitor a part of the state, you can set a select-prop on the DevTools component.
-ex. `<DevTools select={state => state.todos} store={store} monitor={LogMonitor} />`
-
-
-### It's Ugly!
-
-The design or usability is not the point. (Although we'll have better design in the future :-)  
+### Custom Monitors
 
 **You can build a completely custom UI for it** because `<DevTools>` accepts a `monitor` React component prop. The included `LogMonitor` is just an example.
 
-**[In fact I challenge you to build a custom monitor for Redux DevTools!](https://github.com/gaearon/redux-devtools/issues/3)**
+**[I challenge you to build a custom monitor for Redux DevTools!](https://github.com/gaearon/redux-devtools/issues/3)**
 
 Some crazy ideas for custom monitors:
 
@@ -54,6 +58,23 @@ Some crazy ideas for custom monitors:
 * A time machine like interface where the last N states of your app reside on different Z layers
 * Feel free to come up with and implement your own! Check `LogMonitor` propTypes to see what you can do.
 
+In fact some of these are implemented already:
+
+#### [redux-devtools-diff-monitor](https://github.com/whetstone/redux-devtools-diff-monitor)
+
+![](http://i.imgur.com/rvCR9OQ.png)
+
+#### [redux-slider-monitor](https://github.com/calesce/redux-slider-monitor)
+
+![](https://camo.githubusercontent.com/d61984306d27d5e0739efc2d57c56ba7aed7996c/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f662e636c2e6c792f6974656d732f3269314c3147316e3161316833793161324f31772f53637265656e2532305265636f7264696e67253230323031352d30382d3034253230617425323030372e3435253230504d2e676966)
+
+#### [redux-devtools-gentest-plugin](https://github.com/lapanoid/redux-devtools-gentest-plugin)
+
+![](https://camo.githubusercontent.com/71452cc55bc2ac2016dc05e4b6207c5777028a67/687474703a2f2f646c312e6a6f78692e6e65742f64726976652f303031302f333937372f3639323130352f3135303731362f643235343637613236362e706e67)
+
+#### Keep them coming!
+
+Create a PR to add your custom monitor.
 
 ### License
 
