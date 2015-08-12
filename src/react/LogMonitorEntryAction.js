@@ -3,10 +3,9 @@ import JSONTree from './JSONTree';
 
 const styles = {
   actionBar: {
-    paddingTop: 7,
-    paddingBottom: 6,
-    paddingLeft: 10,
-    marginBottom: 1
+    paddingTop: 8,
+    paddingBottom: 7,
+    paddingLeft: 16
   },
   payload: {
     paddingLeft: 15
