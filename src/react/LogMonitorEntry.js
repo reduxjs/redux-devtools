@@ -38,15 +38,15 @@ export default class LogMonitorEntry {
       }
     }
     return (
-      <span style={{
-        fontSize: '0.8em',
-        paddingLeft: 0,
-        paddingRight: 5,
-        fontStyle: 'italic',
-        color: this.props.theme.base09
+      <div style={{
+        color: this.props.theme.base09,
+        paddingTop: 20,
+        paddingLeft: 30,
+        paddingRight: 30,
+        paddingBottom: 35
       }}>
-        ({errorText})
-      </span>
+        {errorText}
+      </div>
     );
   }
 
