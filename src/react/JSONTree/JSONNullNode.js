@@ -21,8 +21,8 @@ export default class JSONNullNode extends React.Component {
   render() {
     let backgroundColor = 'transparent';
     if (this.props.previousValue !== this.props.value) {
-      const bgColor = hexToRgb(this.props.theme.base08);
-      backgroundColor = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, 0.06)`;
+      const bgColor = hexToRgb(this.props.theme.base06);
+      backgroundColor = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, 0.1)`;
     }
     return (
       <li style={{ ...styles.base, backgroundColor }} onClick={::this.handleClick}>
