@@ -13,14 +13,18 @@ const styles = {
     fontSize: '0.95em'
   },
   buttonBar: {
-    height: 40,
-    textAlign: 'center'
+    textAlign: 'center',
+    borderBottomWidth: 1,
+    borderBottomStyle: 'solid',
+    borderColor: 'transparent',
+    zIndex: 1,
+    display: 'flex'
   },
   elements: {
     position: 'absolute',
     left: 0,
     right: 0,
-    top: 40,
+    top: 38,
     bottom: 0,
     overflowX: 'hidden',
     overflowY: 'auto'
@@ -158,7 +162,7 @@ export default class LogMonitor {
 
     return (
       <div style={{...styles.container, backgroundColor: theme.base00}}>
-        <div style={styles.buttonBar}>
+        <div style={{...styles.buttonBar, borderColor: theme.base02}}>
           <LogMonitorButton theme={theme} onClick={::this.handleReset}>Reset</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleRollback} enabled={computedStates.length}>Revert</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleSweep} enabled={Object.keys(skippedActions).some(key => skippedActions[key])}>Sweep</LogMonitorButton>

@@ -1,15 +1,17 @@
 import React from 'react';
+import brighten from '../utils/brighten';
 
 const styles = {
   base: {
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    borderRadius: 3,
+    padding: 4,
+    marginLeft: 3,
+    marginRight: 3,
     marginTop: 5,
-    marginLeft: 4,
-    minWidth: 40,
-    paddingLeft: 6,
-    paddingRight: 6,
-    height: 30,
-    borderRadius: 4,
-    lineHeight: "30px",
+    marginBottom: 5,
+    flexGrow: 1,
     display: 'inline-block',
     fontSize: '0.8em'
   }
@@ -52,18 +54,20 @@ export default class LogMonitorButton extends React.Component {
   render() {
     let style = {
       ...styles.base,
-      backgroundColor: this.props.theme.base01
+      backgroundColor: this.props.theme.base02
     };
     if (this.props.enabled && this.state.hovered) {
       style = {
         ...style,
-        backgroundColor: this.props.theme.base00
+        backgroundColor: brighten(this.props.theme.base02, 0.2)
       };
     }
     if (!this.props.enabled) {
       style = {
         ...style,
-        opacity: 0.5
+        opacity: 0.2,
+        cursor: 'text',
+        backgroundColor: 'transparent'
       }
     }
     return (
