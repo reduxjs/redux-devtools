@@ -150,6 +150,7 @@ function liftReducer(reducer, initialState) {
       break;
     case ActionTypes.RECOMPUTE_STATES:
       stagedActions = liftedAction.stagedActions;
+      timestamps = liftedAction.timestamps;
       committedState = liftedAction.committedState;
       currentStateIndex = stagedActions.length - 1;
       skippedActions = {};
