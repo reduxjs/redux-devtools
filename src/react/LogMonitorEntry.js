@@ -9,6 +9,16 @@ const styles = {
   },
   tree: {
     paddingLeft: 0
+  },
+  animated: {
+    WebkitAnimationDuration: '0.2s',
+    animationDuration: '0.2s',
+    WebkitAnimationFillMode: 'both',
+    animationFillMode: 'both'
+  },
+  fadeIn: {
+    WebkitAnimationName: 'fadeIn',
+    animationName: 'fadeIn'
   }
 };
 
@@ -64,7 +74,7 @@ export default class LogMonitorEntry {
       cursor: (index > 0) ? 'pointer' : 'default'
     };
     return (
-      <div style={{textDecoration: collapsed ? 'line-through' : 'none'}}>
+      <div style={{ ...styles.animated, ...styles.fadeIn, textDecoration: collapsed ? 'line-through' : 'none'}}>
         <LogMonitorEntryAction
           theme={this.props.theme}
           collapsed={collapsed}
