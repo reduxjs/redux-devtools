@@ -1,5 +1,35 @@
 import React, { PropTypes, findDOMNode } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
+import LogMonitorButton from './LogMonitorButton';
+import * as themes from './themes';
+
+const styles = {
+  container: {
+    fontFamily: 'monaco, Consolas, Lucida Console, monospace',
+    position: 'relative',
+    overflowY: 'hidden',
+    width: '100%',
+    height: '100%',
+    fontSize: '0.95em'
+  },
+  buttonBar: {
+    textAlign: 'center',
+    borderBottomWidth: 1,
+    borderBottomStyle: 'solid',
+    borderColor: 'transparent',
+    zIndex: 1,
+    display: 'flex'
+  },
+  elements: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 38,
+    bottom: 0,
+    overflowX: 'hidden',
+    overflowY: 'auto'
+  }
+};
 
 export default class LogMonitor {
   constructor() {
@@ -26,18 +56,18 @@ export default class LogMonitor {
 
   static defaultProps = {
     select: (state) => state,
-    monitorState: { isVisible: true }
+    monitorState: { isVisible: true },
+    theme: 'nicinabox'
   };
 
   componentWillReceiveProps(nextProps) {
-    const node = findDOMNode(this);
+    const node = findDOMNode(this.refs.elements);
     if (!node) {
       this.scrollDown = true;
     } else if (
       this.props.stagedActions.length < nextProps.stagedActions.length
     ) {
-      const scrollableNode = node.parentElement;
-      const { scrollTop, offsetHeight, scrollHeight } = scrollableNode;
+      const { scrollTop, offsetHeight, scrollHeight } = node;
 
       this.scrollDown = Math.abs(
         scrollHeight - (scrollTop + offsetHeight)
@@ -48,16 +78,13 @@ export default class LogMonitor {
   }
 
   componentDidUpdate() {
-    const node = findDOMNode(this);
+    const node = findDOMNode(this.refs.elements);
     if (!node) {
       return;
     }
-
     if (this.scrollDown) {
-      const scrollableNode = node.parentElement;
-      const { offsetHeight, scrollHeight } = scrollableNode;
-
-      scrollableNode.scrollTop = scrollHeight - offsetHeight;
+      const { offsetHeight, scrollHeight } = node;
+      node.scrollTop = scrollHeight - offsetHeight;
       this.scrollDown = false;
     }
   }
@@ -97,7 +124,17 @@ export default class LogMonitor {
   render() {
     const elements = [];
     const { monitorState, skippedActions, stagedActions, computedStates, select } = this.props;
-
+    let theme;
+    if (typeof this.props.theme === 'string') {
+      if (typeof themes[this.props.theme] !== 'undefined') {
+        theme = themes[this.props.theme];
+      } else {
+        console.warn('DevTools theme ' + this.props.theme + ' not found, defaulting to nicinabox');
+        theme = themes.nicinabox;
+      }
+    } else {
+      theme = this.props.theme;
+    }
     if (!monitorState.isVisible) {
       return null;
     }
@@ -105,13 +142,18 @@ export default class LogMonitor {
     for (let i = 0; i < stagedActions.length; i++) {
       const action = stagedActions[i];
       const { state, error } = computedStates[i];
-
+      let previousState;
+      if (i > 0) {
+        previousState = computedStates[i - 1].state;
+      }
       elements.push(
         <LogMonitorEntry key={i}
                          index={i}
+                         theme={theme}
                          select={select}
                          action={action}
                          state={state}
+                         previousState={previousState}
                          collapsed={skippedActions[i]}
                          error={error}
                          onActionClick={::this.handleToggleAction} />
@@ -119,52 +161,15 @@ export default class LogMonitor {
     }
 
     return (
-      <div style={{
-        fontFamily: 'monospace',
-        position: 'relative',
-        padding: '1rem'
-      }}>
-        <div>
-          <div style={{
-            paddingBottom: '.5rem'
-          }}>
-            <small>Press Ctrl+H to hide.</small>
-          </div>
-          <div>
-            <a onClick={::this.handleReset}
-               style={{ textDecoration: 'underline', cursor: 'hand' }}>
-              <small>Reset</small>
-            </a>
-          </div>
+      <div style={{...styles.container, backgroundColor: theme.base00}}>
+        <div style={{...styles.buttonBar, borderColor: theme.base02}}>
+          <LogMonitorButton theme={theme} onClick={::this.handleReset}>Reset</LogMonitorButton>
+          <LogMonitorButton theme={theme} onClick={::this.handleRollback} enabled={computedStates.length}>Revert</LogMonitorButton>
+          <LogMonitorButton theme={theme} onClick={::this.handleSweep} enabled={Object.keys(skippedActions).some(key => skippedActions[key])}>Sweep</LogMonitorButton>
+          <LogMonitorButton theme={theme} onClick={::this.handleCommit} enabled={computedStates.length > 1}>Commit</LogMonitorButton>
         </div>
-        {elements}
-        <div>
-          {computedStates.length > 1 &&
-            <a onClick={::this.handleRollback}
-               style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-              Rollback
-            </a>
-          }
-          {Object.keys(skippedActions).some(key => skippedActions[key]) &&
-            <span>
-              {' • '}
-              <a onClick={::this.handleSweep}
-                 style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                Sweep
-              </a>
-            </span>
-          }
-          {computedStates.length > 1 &&
-            <span>
-              <span>
-              {' • '}
-              </span>
-              <a onClick={::this.handleCommit}
-                 style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                Commit
-              </a>
-            </span>
-          }
+        <div style={styles.elements} ref="elements">
+          {elements}
         </div>
       </div>
     );

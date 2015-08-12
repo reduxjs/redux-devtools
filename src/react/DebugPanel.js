@@ -13,9 +13,8 @@ export function getDefaultStyle(props) {
     position: 'fixed',
     zIndex: 10000,
     fontSize: 17,
-    overflow: 'auto',
-    opacity: 0.92,
-    background: 'black',
+    overflow: 'hidden',
+    opacity: 1,
     color: 'white',
     left: left ? 0 : undefined,
     right: right ? 0 : undefined,
@@ -23,7 +22,10 @@ export function getDefaultStyle(props) {
     bottom: bottom ? 0 : undefined,
     maxHeight: (bottom && top) ? '100%' : '20%',
     maxWidth: (left && right) ? '100%' : '20%',
-    wordWrap: 'break-word'
+    minWidth: 300,
+    wordWrap: 'break-word',
+    boxSizing: 'border-box',
+    boxShadow: '-2px 0 7px 0 rgba(0, 0, 0, 0.5)'
   };
 }
 
