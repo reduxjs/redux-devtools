@@ -9,19 +9,18 @@ import JSONNullNode from './JSONNullNode';
 
 export default function(key, value, prevValue, theme) {
   const nodeType = objType(value);
-  const aKey = key + Date.now();
   if (nodeType === 'Object') {
-    return <JSONObjectNode data={value} previousData={prevValue} theme={theme} keyName={key} key={aKey} />;
+    return <JSONObjectNode data={value} previousData={prevValue} theme={theme} keyName={key} key={key} />;
   } else if (nodeType === 'Array') {
-    return <JSONArrayNode data={value} previousData={prevValue} theme={theme} keyName={key} key={aKey} />;
+    return <JSONArrayNode data={value} previousData={prevValue} theme={theme} keyName={key} key={key} />;
   } else if (nodeType === 'String') {
-    return <JSONStringNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={aKey} />;
+    return <JSONStringNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={key} />;
   } else if (nodeType === 'Number') {
-    return <JSONNumberNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={aKey} />;
+    return <JSONNumberNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={key} />;
   } else if (nodeType === 'Boolean') {
-    return <JSONBooleanNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={aKey} />;
+    return <JSONBooleanNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={key} />;
   } else if (nodeType === 'Null') {
-    return <JSONNullNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={aKey} />;
+    return <JSONNullNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={key} />;
   }
   return false;
 }
