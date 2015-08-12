@@ -39,7 +39,7 @@ export default class LogMonitorEntry {
     }
     return (
       <div style={{
-        color: this.props.theme.base09,
+        color: this.props.theme.base08,
         paddingTop: 20,
         paddingLeft: 30,
         paddingRight: 30,
