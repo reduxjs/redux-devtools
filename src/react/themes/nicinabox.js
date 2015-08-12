@@ -10,7 +10,7 @@ export default {
   base06: '#FFFFFF',
   base07: '#f5f5f5', // unmodified
   base08: '#fb9fb1', // unmodified
-  base09: '#6FB3D2',
+  base09: '#FC6D24',
   base0A: '#ddb26f', // unmodified
   base0B: '#A1C659',
   base0C: '#12cfc0', // unmodified
