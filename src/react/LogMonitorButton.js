@@ -68,7 +68,7 @@ export default class LogMonitorButton extends React.Component {
         opacity: 0.2,
         cursor: 'text',
         backgroundColor: 'transparent'
-      }
+      };
     }
     return (
       <a onMouseEnter={::this.handleMouseEnter}
