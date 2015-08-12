@@ -24,7 +24,8 @@ export function getDefaultStyle(props) {
     maxWidth: (left && right) ? '100%' : '20%',
     minWidth: 300,
     wordWrap: 'break-word',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    boxShadow: '-2px 0 7px 0 rgba(0, 0, 0, 0.5)'
   };
 }
 
