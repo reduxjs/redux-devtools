@@ -20,9 +20,8 @@ export function getDefaultStyle(props) {
     right: right ? 0 : undefined,
     top: top ? 0 : undefined,
     bottom: bottom ? 0 : undefined,
-    maxHeight: (bottom && top) ? '100%' : '20%',
-    maxWidth: (left && right) ? '100%' : '20%',
-    minWidth: 300,
+    maxHeight: (bottom && top) ? '100%' : '30%',
+    maxWidth: (left && right) ? '100%' : '30%',
     wordWrap: 'break-word',
     boxSizing: 'border-box',
     boxShadow: '-2px 0 7px 0 rgba(0, 0, 0, 0.5)'
