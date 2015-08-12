@@ -22,7 +22,7 @@ export function getDefaultStyle(props) {
     bottom: bottom ? 0 : undefined,
     maxHeight: (bottom && top) ? '100%' : '20%',
     maxWidth: (left && right) ? '100%' : '20%',
-    minWidth: 260,
+    minWidth: 300,
     wordWrap: 'break-word',
     boxSizing: 'border-box'
   };
