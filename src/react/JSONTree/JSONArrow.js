@@ -3,10 +3,11 @@ import React from 'react';
 const styles = {
   base: {
     display: 'inline-block',
-    marginLeft: -15,
+    marginLeft: 0,
+    marginTop: 8,
+    marginRight: 5,
     'float': 'left',
     transition: '150ms',
-    marginTop: 7,
     WebkitTransition: '150ms',
     MozTransition: '150ms',
     borderLeft: '5px solid transparent',

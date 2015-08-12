@@ -7,10 +7,10 @@ import grabNode from './grab-node';
 const styles = {
   base: {
     position: 'relative',
-    paddingTop: 2,
-    paddingBottom: 2,
-    paddingRight: 4,
-    marginLeft: 3
+    paddingTop: 3,
+    paddingBottom: 3,
+    paddingRight: 0,
+    marginLeft: 14
   },
   label: {
     margin: 0,

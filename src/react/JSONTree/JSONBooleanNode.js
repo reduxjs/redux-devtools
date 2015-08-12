@@ -5,10 +5,10 @@ import hexToRgb from '../../utils/hexToRgb';
 
 const styles = {
   base: {
-    paddingTop: 2,
-    paddingBottom: 2,
-    paddingRight: 4,
-    marginLeft: 10
+    paddingTop: 3,
+    paddingBottom: 3,
+    paddingRight: 0,
+    marginLeft: 14
   },
   label: {
     display: 'inline-block',

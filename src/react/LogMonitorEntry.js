@@ -8,7 +8,7 @@ const styles = {
     WebkitUserSelect: 'none'
   },
   tree: {
-    paddingLeft: 5
+    paddingLeft: 0
   }
 };
 
@@ -72,9 +72,7 @@ export default class LogMonitorEntry {
           onClick={::this.handleActionClick}
           style={{...styles.entry, ...styleEntry}}/>
         {!collapsed &&
-          <div style={{
-            paddingLeft: 15
-          }}>
+          <div>
             {this.printState(state, error)}
           </div>
         }

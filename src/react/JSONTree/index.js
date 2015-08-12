@@ -12,7 +12,10 @@ const styles = {
     tree: {
       border: 0,
       padding: 0,
-      margin: 0,
+      marginTop: 8,
+      marginBottom: 8,
+      marginLeft: 2,
+      marginRight: 0,
       fontSize: '0.90em',
       listStyle: 'none',
       MozUserSelect: 'none',
