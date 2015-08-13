@@ -18,7 +18,8 @@ const styles = {
     borderBottomStyle: 'solid',
     borderColor: 'transparent',
     zIndex: 1,
-    display: 'flex'
+    display: 'flex',
+    flexDirection: 'row'
   },
   elements: {
     position: 'absolute',
