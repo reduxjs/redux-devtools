@@ -13,7 +13,9 @@ const styles = {
     marginBottom: 5,
     flexGrow: 1,
     display: 'inline-block',
-    fontSize: '0.8em'
+    fontSize: '0.8em',
+    color: 'white',
+    textDecoration: 'none'
   }
 };
 
