@@ -7,6 +7,7 @@ import React from 'react';
 import objectType from './obj-type';
 import JSONObjectNode from './JSONObjectNode';
 import JSONArrayNode from './JSONArrayNode';
+import JSONMapNode from './JSONMapNode';
 
 const styles = {
     tree: {
@@ -43,6 +44,8 @@ export default class JSONTree extends React.Component {
       rootNode = <JSONObjectNode theme={this.props.theme} data={this.props.data} previousData={this.props.previousData} keyName={keyName} initialExpanded={true} />;
     } else if (nodeType === 'Array') {
       rootNode = <JSONArrayNode theme={this.props.theme} data={this.props.data} previousData={this.props.previousData} initialExpanded={true} keyName={keyName} />;
+    } else if (nodeType === 'Map') {
+      rootNode = <JSONMapNode theme={this.props.theme} data={this.props.data} previousData={this.props.previousData} initialExpanded={true} keyName={keyName} />;
     }
     return (
       <ul style={{
