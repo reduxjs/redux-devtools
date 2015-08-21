@@ -21,7 +21,7 @@ A live-editing time travel environment for Redux.
 npm install --save-dev redux-devtools
 ```
 
-DevTools is a middleware, which should be added to your middleware stack *after* `applyMiddleware` because `applyMiddleware` is potentially asynchronous. Otherwise, DevTools won't see the raw actions emitted by the Promise middleware etc.
+DevTools is a store enhancer, which should be added to your middleware stack *after* `applyMiddleware` as `applyMiddleware` is potentially asynchronous. Otherwise, DevTools won't see the raw actions emitted by the Promise store enhancer etc.
 
 To install, firstly import `devTools` into your App container:
 ```
@@ -46,9 +46,6 @@ Lastly, include the `DebugPanel` in your page:
 export default class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        {() => <CounterApp />}
-      </Provider>
       <div>
         <Provider store={store}>
           {() => <CounterApp />}
