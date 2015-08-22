@@ -50,7 +50,7 @@ export default class JSONIterableNode extends React.Component {
     };
   }
 
-  // Returns the child nodes for each element in the array. If we have
+  // Returns the child nodes for each entry in iterable. If we have
   // generated them previously, we return from cache, otherwise we create
   // them.
   getChildNodes() {
@@ -81,13 +81,13 @@ export default class JSONIterableNode extends React.Component {
     return this.renderedChildren;
   }
 
-  // Returns the "n Items" string for this node, generating and
+  // Returns the "n entries" string for this node, generating and
   // caching it if it hasn't been created yet.
   getItemString() {
     if (!this.itemString) {
       const { data } = this.props;
       let count = 0;
-      if (typeof data.size !== 'undefined') {
+      if (Number.isSafeInteger(data.size)) {
         count = data.size;
       } else {
         for (const entry of data) { // eslint-disable-line no-unused-vars
