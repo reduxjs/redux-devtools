@@ -87,10 +87,12 @@ export default class JSONIterableNode extends React.Component {
     if (!this.itemString) {
       const { data } = this.props;
       let count = 0;
-      if (typeof data.count === 'function') {
-        count = data.count();
+      if (typeof data.size !== 'undefined') {
+        count = data.size;
       } else {
-        count = data.length;
+        for (const entry of data) { // eslint-disable-line no-unused-vars
+          count += 1;
+        }
       }
       this.itemString = count + ' entr' + (count !== 1 ? 'ies' : 'y');
     }
