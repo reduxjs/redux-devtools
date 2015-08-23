@@ -21,19 +21,28 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 npm install --save-dev redux-devtools
 ```
 
-DevTools is a store enhancer, which should be added to your middleware stack *after* `applyMiddleware` as `applyMiddleware` is potentially asynchronous. Otherwise, DevTools won't see the raw actions emitted by the Promise store enhancer etc.
+DevTools is a [store enhancer](http://rackt.github.io/redux/docs/Glossary.html#store-enhancer), which should be added to your middleware stack *after* [`applyMiddleware`](http://rackt.github.io/redux/docs/api/applyMiddleware.html) as `applyMiddleware` is potentially asynchronous. Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
 
-To install, firstly import `devTools` into your App container:
-```
+To install, firstly import `devTools` into your root React component:
+
+```js
+// Redux utility functions
+import { compose, createStore, applyMiddleware } from 'redux';
+// Redux DevTools store enhancers
 import { devTools, persistState } from 'redux-devtools';
+// React components for Redux DevTools
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 ```
 
-Then, add `devTools` to your middleware, and create your store:
-```
+Then, add `devTools` to your store enhancers, and create your store:
+
+```js
 const finalCreateStore = compose(
+  // Enables your middleware:
   applyMiddleware(thunk),
+  // Provides support for DevTools:
   devTools(),
+  // Lets you write ?debug_session=<name> in address bar to persist debug sessions
   persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
   createStore
 );
@@ -41,16 +50,17 @@ const finalCreateStore = compose(
 const store = finalCreateStore(reducer);
 ```
 
-Lastly, include the `DebugPanel` in your page:
-```
-export default class App extends Component {
+Finally, include the `DevTools` in your page. You may pass either `LogMonitor` (the default one) or any of the custom monitors described below. For convenience, you can use `DebugPanel` to dock `DevTools` to some part of the screen, but you can put it also somewhere else in the component tree.
+
+```js
+export default class Root extends Component {
   render() {
     return (
       <div>
         <Provider store={store}>
           {() => <CounterApp />}
         </Provider>
-        <DebugPanel top right bottom key="debugPanel">
+        <DebugPanel top right bottom>
           <DevTools store={store} monitor={LogMonitor} />
         </DebugPanel>
       </div>
