@@ -58,7 +58,7 @@ export default class JSONArrayNode extends React.Component {
       let childNodes = [];
       this.props.data.forEach((element, idx) => {
         let prevData;
-        if (typeof this.props.previousData !== 'undefined') {
+        if (typeof this.props.previousData !== 'undefined' && this.props.previousData !== null) {
           prevData = this.props.previousData[idx];
         }
         const node = grabNode(idx, element, prevData, this.props.theme);

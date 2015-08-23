@@ -67,7 +67,7 @@ export default class JSONIterableNode extends React.Component {
         }
 
         let prevData;
-        if (typeof this.props.previousData !== 'undefined') {
+        if (typeof this.props.previousData !== 'undefined' && this.props.previousData !== null) {
           prevData = this.props.previousData[key];
         }
         const node = grabNode(key, value, prevData, this.props.theme);
