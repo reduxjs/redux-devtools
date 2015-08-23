@@ -144,6 +144,20 @@ export default class LogMonitor {
       const action = stagedActions[i];
       const { state, error } = computedStates[i];
       let previousState;
+
+      const readableState = {};
+      for (const prop in state) {
+        if (
+          state.hasOwnProperty(prop) &&
+          typeof state[prop] === 'object' &&
+          typeof state[prop].toJS === 'function'
+        ) {
+          readableState = state[prop].toJS();
+        } else {
+          readableState = state[prop];
+        }
+      }
+
       if (i > 0) {
         previousState = computedStates[i - 1].state;
       }
@@ -153,7 +167,7 @@ export default class LogMonitor {
                          theme={theme}
                          select={select}
                          action={action}
-                         state={state}
+                         state={readableState}
                          previousState={previousState}
                          collapsed={skippedActions[i]}
                          error={error}
