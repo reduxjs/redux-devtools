@@ -2,6 +2,7 @@ import React from 'react';
 import objType from './obj-type';
 import JSONObjectNode from './JSONObjectNode';
 import JSONArrayNode from './JSONArrayNode';
+import JSONIterableNode from './JSONIterableNode';
 import JSONStringNode from './JSONStringNode';
 import JSONNumberNode from './JSONNumberNode';
 import JSONBooleanNode from './JSONBooleanNode';
@@ -13,6 +14,8 @@ export default function(key, value, prevValue, theme) {
     return <JSONObjectNode data={value} previousData={prevValue} theme={theme} keyName={key} key={key} />;
   } else if (nodeType === 'Array') {
     return <JSONArrayNode data={value} previousData={prevValue} theme={theme} keyName={key} key={key} />;
+  } else if (nodeType === 'Iterable') {
+    return <JSONIterableNode data={value} previousData={prevValue} theme={theme} keyName={key} key={key} />;
   } else if (nodeType === 'String') {
     return <JSONStringNode keyName={key} previousValue={prevValue} theme={theme} value={value} key={key} />;
   } else if (nodeType === 'Number') {
