@@ -1,4 +1,4 @@
 # Change log
 
-All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
+See all notable changes on [Releases](https://github.com/gaearon/redux-devtools/releases) page.
