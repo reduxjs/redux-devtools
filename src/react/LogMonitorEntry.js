@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import JSONTree from './JSONTree';
+import JSONTree from 'react-json-tree';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
 
 const styles = {

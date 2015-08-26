@@ -1,5 +1,5 @@
 import React from 'react';
-import JSONTree from './JSONTree';
+import JSONTree from 'react-json-tree';
 
 const styles = {
   actionBar: {
