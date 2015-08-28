@@ -14,6 +14,7 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 * If the reducers throw, you will see during which action this happened, and what the error was
 * With `persistState()` store enhancer, you can persist debug sessions across page reloads
 * To monitor a part of  the state, you can set a `select` prop on the DevTools component: `<DevTools select={state => state.todos} store={store} monitor={LogMonitor} />`
+* Toggle visibility with Ctrl+H
 
 ### Installation
 
