@@ -52,13 +52,15 @@ export default class LogMonitor {
     toggleAction: PropTypes.func.isRequired,
     jumpToState: PropTypes.func.isRequired,
     setMonitorState: PropTypes.func.isRequired,
-    select: PropTypes.func.isRequired
+    select: PropTypes.func.isRequired,
+    visibleOnLoad: PropTypes.bool
   };
 
   static defaultProps = {
     select: (state) => state,
     monitorState: { isVisible: true },
-    theme: 'nicinabox'
+    theme: 'nicinabox',
+    visibleOnLoad: true
   };
 
   componentWillReceiveProps(nextProps) {
@@ -88,6 +90,15 @@ export default class LogMonitor {
       node.scrollTop = scrollHeight - offsetHeight;
       this.scrollDown = false;
     }
+  }
+
+  componentWillMount() {
+    let visibleOnLoad = this.props.visibleOnLoad;
+    const { monitorState } = this.props;
+    this.props.setMonitorState({
+      ...monitorState,
+      isVisible: visibleOnLoad
+    });
   }
 
   handleRollback() {
