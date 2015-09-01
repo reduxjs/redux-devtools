@@ -8,12 +8,17 @@ import * as reducers from '../reducers';
 
 const finalCreateStore = compose(
   devTools(),
-  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-  createStore
-);
+  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+)(createStore);
 
 const reducer = combineReducers(reducers);
 const store = finalCreateStore(reducer);
+
+if (module.hot) {
+  module.hot.accept('../reducers', () =>
+    store.replaceReducer(combineReducers(require('../reducers')))
+  );
+}
 
 export default class App extends Component {
   render() {

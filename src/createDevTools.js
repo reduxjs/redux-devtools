@@ -3,7 +3,7 @@ import { ActionCreators } from './devTools';
 
 export default function createDevTools(React) {
   const { PropTypes, Component } = React;
-  const { Provider, connect } = createAll(React);
+  const { connect } = createAll(React);
 
   @connect(
     state => state,
@@ -30,25 +30,17 @@ export default function createDevTools(React) {
       if (props.store && !props.store.devToolsStore) {
         console.error(
           'Could not find the devTools store inside your store. ' +
-          'Have you applied devTools() higher-order store?'
+          'Have you applied devTools() store enhancer?'
         );
       }
       super(props, context);
-      this.renderDevTools = ::this.renderDevTools;
     }
 
     render() {
-      const { devToolsStore } = this.props.store;
       return (
-        <Provider store={devToolsStore}>
-          {this.renderDevTools}
-        </Provider>
+        <DevTools {...this.props}
+                  store={this.props.store.devToolsStore} />
       );
-    }
-
-    renderDevTools() {
-      const { store, ...rest } = this.props;
-      return <DevTools {...rest} />;
     }
   };
 }
