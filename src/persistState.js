@@ -1,6 +1,22 @@
-export default function persistState(sessionId) {
+export default function persistState(sessionId, deserializer = null) {
   if (!sessionId) {
     return next => (...args) => next(...args);
+  }
+
+  function deserializeState(fullState) {
+    if (!fullState || typeof deserializer !== 'function') {
+      return fullState;
+    }
+    return {
+      ...fullState,
+      committedState: deserializer(fullState.committedState),
+      computedStates: fullState.computedStates.map((computedState) => {
+        return {
+          ...computedState,
+          state: deserializer(computedState.state)
+        };
+      })
+    };
   }
 
   return next => (reducer, initialState) => {
@@ -8,7 +24,7 @@ export default function persistState(sessionId) {
 
     let finalInitialState;
     try {
-      finalInitialState = JSON.parse(localStorage.getItem(key)) || initialState;
+      finalInitialState = deserializeState(JSON.parse(localStorage.getItem(key))) || initialState;
       next(reducer, initialState);
     } catch (e) {
       console.warn('Could not read debug session from localStorage:', e);
