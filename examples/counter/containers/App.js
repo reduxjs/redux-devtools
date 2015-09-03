@@ -31,7 +31,7 @@ export default class App extends Component {
         </Provider>
         <DebugPanel top right bottom>
           <DevTools store={store}
-                    monitor={LogMonitor} />
+                    monitor={LogMonitor} visibleOnLoad={true} />
         </DebugPanel>
       </div>
     );
