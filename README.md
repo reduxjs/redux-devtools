@@ -120,6 +120,10 @@ In fact some of these are implemented already:
 
 ![](https://camo.githubusercontent.com/71452cc55bc2ac2016dc05e4b6207c5777028a67/687474703a2f2f646c312e6a6f78692e6e65742f64726976652f303031302f333937372f3639323130352f3135303731362f643235343637613236362e706e67)
 
+#### Deku port: [redux-devtools-deku-slider-monitor](https://github.com/rsystem-se/redux-devtools-deku-slider-monitor)
+
+![](http://i.imgur.com/QziZQDZ.gif)
+
 #### Keep them coming!
 
 Create a PR to add your custom monitor.
