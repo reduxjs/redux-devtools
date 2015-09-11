@@ -28,7 +28,7 @@ export function getDefaultStyle(props) {
   };
 }
 
-export default class DebugPanel {
+export default class DebugPanel extends React.Component {
   static propTypes = {
     left: PropTypes.bool,
     right: PropTypes.bool,

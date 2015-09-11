@@ -1,4 +1,4 @@
-import React, { PropTypes, findDOMNode } from 'react';
+import React, { PropTypes } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
 import * as themes from './themes';
@@ -32,8 +32,9 @@ const styles = {
   }
 };
 
-export default class LogMonitor {
-  constructor() {
+export default class LogMonitor extends React.Component {
+  constructor(props) {
+    super(props);
     if (typeof window !== 'undefined') {
       window.addEventListener('keydown', ::this.handleKeyPress);
     }
@@ -64,7 +65,7 @@ export default class LogMonitor {
   };
 
   componentWillReceiveProps(nextProps) {
-    const node = findDOMNode(this.refs.elements);
+    const node = this.refs.elements;
     if (!node) {
       this.scrollDown = true;
     } else if (
@@ -81,7 +82,7 @@ export default class LogMonitor {
   }
 
   componentDidUpdate() {
-    const node = findDOMNode(this.refs.elements);
+    const node = this.refs.elements;
     if (!node) {
       return;
     }
