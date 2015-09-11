@@ -4,9 +4,6 @@ export default function persistState(sessionId, stateDeserializer = null, action
   }
 
   function deserializeState(fullState) {
-    if (!fullState || typeof stateDeserializer !== 'function') {
-      return fullState;
-    }
     return {
       ...fullState,
       committedState: stateDeserializer(fullState.committedState),
@@ -20,9 +17,6 @@ export default function persistState(sessionId, stateDeserializer = null, action
   }
 
   function deserializeActions(fullState) {
-    if (!fullState || typeof actionDeserializer !== 'function') {
-      return fullState;
-    }
     return {
       ...fullState,
       stagedActions: fullState.stagedActions.map((action) => {
@@ -31,12 +25,26 @@ export default function persistState(sessionId, stateDeserializer = null, action
     };
   }
 
+  function deserialize(fullState) {
+    if (!fullState) {
+      return fullState;
+    }
+    let deserializedState = fullState;
+    if (typeof stateDeserializer === 'function') {
+      deserializedState = deserializeState(deserializedState);
+    }
+    if (typeof actionDeserializer === 'function') {
+      deserializedState = deserializeActions(deserializedState);
+    }
+    return deserializedState;
+  }
+
   return next => (reducer, initialState) => {
     const key = `redux-dev-session-${sessionId}`;
 
     let finalInitialState;
     try {
-      finalInitialState = deserializeActions(deserializeState(JSON.parse(localStorage.getItem(key)))) || initialState;
+      finalInitialState = deserialize(JSON.parse(localStorage.getItem(key))) || initialState;
       next(reducer, initialState);
     } catch (e) {
       console.warn('Could not read debug session from localStorage:', e);
