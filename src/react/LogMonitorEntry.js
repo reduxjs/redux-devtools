@@ -12,7 +12,7 @@ const styles = {
   }
 };
 
-export default class LogMonitorEntry {
+export default class LogMonitorEntry extends React.Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
     state: PropTypes.object.isRequired,
