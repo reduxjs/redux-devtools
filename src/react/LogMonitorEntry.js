@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import JSONTree from 'react-json-tree';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
 
@@ -12,7 +12,7 @@ const styles = {
   }
 };
 
-export default class LogMonitorEntry {
+export default class LogMonitorEntry extends Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
     state: PropTypes.object.isRequired,

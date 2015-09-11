@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 
 export function getDefaultStyle(props) {
   let { left, right, bottom, top } = props;
@@ -28,7 +28,7 @@ export function getDefaultStyle(props) {
   };
 }
 
-export default class DebugPanel {
+export default class DebugPanel extends Component {
   static propTypes = {
     left: PropTypes.bool,
     right: PropTypes.bool,

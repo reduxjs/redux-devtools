@@ -1,4 +1,4 @@
-import React, { PropTypes, findDOMNode } from 'react';
+import React, { PropTypes, findDOMNode, Component } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
 import * as themes from './themes';
@@ -32,8 +32,9 @@ const styles = {
   }
 };
 
-export default class LogMonitor {
-  constructor() {
+export default class LogMonitor extends Component {
+  constructor(props) {
+    super(props)
     if (typeof window !== 'undefined') {
       window.addEventListener('keydown', ::this.handleKeyPress);
     }
