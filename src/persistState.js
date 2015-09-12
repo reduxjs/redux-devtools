@@ -1,22 +1,42 @@
-export default function persistState(sessionId, deserializer = null) {
+export default function persistState(sessionId, stateDeserializer = null, actionDeserializer = null) {
   if (!sessionId) {
     return next => (...args) => next(...args);
   }
 
   function deserializeState(fullState) {
-    if (!fullState || typeof deserializer !== 'function') {
-      return fullState;
-    }
     return {
       ...fullState,
-      committedState: deserializer(fullState.committedState),
+      committedState: stateDeserializer(fullState.committedState),
       computedStates: fullState.computedStates.map((computedState) => {
         return {
           ...computedState,
-          state: deserializer(computedState.state)
+          state: stateDeserializer(computedState.state)
         };
       })
     };
+  }
+
+  function deserializeActions(fullState) {
+    return {
+      ...fullState,
+      stagedActions: fullState.stagedActions.map((action) => {
+        return actionDeserializer(action);
+      })
+    };
+  }
+
+  function deserialize(fullState) {
+    if (!fullState) {
+      return fullState;
+    }
+    let deserializedState = fullState;
+    if (typeof stateDeserializer === 'function') {
+      deserializedState = deserializeState(deserializedState);
+    }
+    if (typeof actionDeserializer === 'function') {
+      deserializedState = deserializeActions(deserializedState);
+    }
+    return deserializedState;
   }
 
   return next => (reducer, initialState) => {
@@ -24,7 +44,7 @@ export default function persistState(sessionId, deserializer = null) {
 
     let finalInitialState;
     try {
-      finalInitialState = deserializeState(JSON.parse(localStorage.getItem(key))) || initialState;
+      finalInitialState = deserialize(JSON.parse(localStorage.getItem(key))) || initialState;
       next(reducer, initialState);
     } catch (e) {
       console.warn('Could not read debug session from localStorage:', e);
