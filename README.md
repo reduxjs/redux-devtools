@@ -41,7 +41,7 @@ Then, add `devTools` to your store enhancers, and create your store:
 ```js
 const finalCreateStore = compose(
   // Enables your middleware:
-  applyMiddleware(thunk),
+  applyMiddleware(m1, m2, m3), // any Redux middleware, e.g. redux-thunk
   // Provides support for DevTools:
   devTools(),
   // Lets you write ?debug_session=<name> in address bar to persist debug sessions
