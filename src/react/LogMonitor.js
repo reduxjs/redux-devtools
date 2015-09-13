@@ -33,17 +33,9 @@ const styles = {
 };
 
 export default class LogMonitor extends Component {
-  constructor(props) {
-    super(props);
-    if (typeof window !== 'undefined') {
-      window.addEventListener('keydown', ::this.handleKeyPress);
-    }
-  }
-
   static propTypes = {
     computedStates: PropTypes.array.isRequired,
     currentStateIndex: PropTypes.number.isRequired,
-    monitorState: PropTypes.object.isRequired,
     stagedActions: PropTypes.array.isRequired,
     skippedActions: PropTypes.object.isRequired,
     reset: PropTypes.func.isRequired,
@@ -52,16 +44,12 @@ export default class LogMonitor extends Component {
     sweep: PropTypes.func.isRequired,
     toggleAction: PropTypes.func.isRequired,
     jumpToState: PropTypes.func.isRequired,
-    setMonitorState: PropTypes.func.isRequired,
-    select: PropTypes.func.isRequired,
-    visibleOnLoad: PropTypes.bool
+    select: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     select: (state) => state,
-    monitorState: { isVisible: true },
-    theme: 'nicinabox',
-    visibleOnLoad: true
+    theme: 'nicinabox'
   };
 
   componentWillReceiveProps(nextProps) {
@@ -93,15 +81,6 @@ export default class LogMonitor extends Component {
     }
   }
 
-  componentWillMount() {
-    let visibleOnLoad = this.props.visibleOnLoad;
-    const { monitorState } = this.props;
-    this.props.setMonitorState({
-      ...monitorState,
-      isVisible: visibleOnLoad
-    });
-  }
-
   handleRollback() {
     this.props.rollback();
   }
@@ -122,21 +101,9 @@ export default class LogMonitor extends Component {
     this.props.reset();
   }
 
-  handleKeyPress(event) {
-    const { monitorState } = this.props;
-
-    if (event.ctrlKey && event.keyCode === 72) { // Ctrl+H
-      event.preventDefault();
-      this.props.setMonitorState({
-        ...monitorState,
-        isVisible: !monitorState.isVisible
-      });
-    }
-  }
-
   render() {
     const elements = [];
-    const { monitorState, skippedActions, stagedActions, computedStates, select } = this.props;
+    const { skippedActions, stagedActions, computedStates, select } = this.props;
     let theme;
     if (typeof this.props.theme === 'string') {
       if (typeof themes[this.props.theme] !== 'undefined') {
@@ -148,10 +115,6 @@ export default class LogMonitor extends Component {
     } else {
       theme = this.props.theme;
     }
-    if (!monitorState.isVisible) {
-      return null;
-    }
-
     for (let i = 0; i < stagedActions.length; i++) {
       const action = stagedActions[i];
       const { state, error } = computedStates[i];

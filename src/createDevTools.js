@@ -1,5 +1,6 @@
 import createAll from 'react-redux/lib/components/createAll';
 import { ActionCreators } from './devTools';
+import DebugPanel from './react/DebugPanel';
 
 export default function createDevTools(React) {
   const { PropTypes, Component } = React;
@@ -11,8 +12,13 @@ export default function createDevTools(React) {
   )
   class DevTools extends Component {
     render() {
-      const { monitor: Monitor } = this.props;
-      return <Monitor {...this.props} />;
+      const { monitor: Monitor, panelState, setPanelState,
+              visibleOnLoad, position, ...props } = this.props;
+      return (
+        <DebugPanel {...{ panelState, setPanelState, visibleOnLoad, position }}>
+          <Monitor {...props} />
+        </DebugPanel>
+      );
     }
   }
 
@@ -37,9 +43,9 @@ export default function createDevTools(React) {
     }
 
     render() {
+      const { store: { devToolsStore }, ...props } = this.props;
       return (
-        <DevTools {...this.props}
-                  store={this.props.store.devToolsStore} />
+        <DevTools {...props} store={devToolsStore} />
       );
     }
   };

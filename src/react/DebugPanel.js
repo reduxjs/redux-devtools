@@ -1,51 +1,71 @@
 import React, { PropTypes, Component } from 'react';
+import Dock from 'react-dock';
 
-export function getDefaultStyle(props) {
-  let { left, right, bottom, top } = props;
-  if (typeof left === 'undefined' && typeof right === 'undefined') {
-    right = true;
-  }
-  if (typeof top === 'undefined' && typeof bottom === 'undefined') {
-    bottom = true;
-  }
-
-  return {
-    position: 'fixed',
-    zIndex: 10000,
-    fontSize: 17,
-    overflow: 'hidden',
-    opacity: 1,
-    color: 'white',
-    left: left ? 0 : undefined,
-    right: right ? 0 : undefined,
-    top: top ? 0 : undefined,
-    bottom: bottom ? 0 : undefined,
-    maxHeight: (bottom && top) ? '100%' : '30%',
-    maxWidth: (left && right) ? '100%' : '30%',
-    wordWrap: 'break-word',
-    boxSizing: 'border-box',
-    boxShadow: '-2px 0 7px 0 rgba(0, 0, 0, 0.5)'
-  };
-}
+const POSITIONS = ['left', 'top', 'right', 'bottom'];
 
 export default class DebugPanel extends Component {
   static propTypes = {
-    left: PropTypes.bool,
-    right: PropTypes.bool,
-    bottom: PropTypes.bool,
-    top: PropTypes.bool,
     getStyle: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    getStyle: getDefaultStyle
+    getStyle: () => ({}),
+    panelState: {
+      position: 'right',
+      isVisible: true
+    },
+    visibleOnLoad: true,
+    position: 'right',
+    dimMode: 'none'
   };
 
+  componentWillMount() {
+    const { panelState, visibleOnLoad, position } = this.props;
+
+    this.props.setPanelState({
+      ...panelState,
+      isVisible: visibleOnLoad,
+      position: position
+    });
+  }
+
+  componentDidMount() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('keydown', this.handleKeyPress);
+    }
+  }
+
+  componentWillUnmount() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('keydown', this.handleKeyPress);
+    }
+  }
+
   render() {
+    const { getStyle, dimMode, panelState: { position, isVisible } } = this.props;
     return (
-      <div style={{...this.props.getStyle(this.props), ...this.props.style}}>
+      <Dock style={{...getStyle(this.props)}}
+            {...{ dimMode, position, isVisible }}>
         {this.props.children}
-      </div>
+      </Dock>
     );
+  }
+
+  handleKeyPress = event => {
+    const { panelState } = this.props;
+    if (event.ctrlKey && event.keyCode === 72) { // Ctrl+H
+      event.preventDefault();
+      this.props.setPanelState({
+        ...panelState,
+        isVisible: !panelState.isVisible
+      });
+    } else if (event.ctrlKey && event.keyCode === 68) { // Ctrl+D
+      event.preventDefault();
+      const positionIdx = POSITIONS.indexOf(panelState.position);
+      this.props.setPanelState({
+        ...panelState,
+        position: POSITIONS[(positionIdx + 1) % POSITIONS.length]
+      });
+    }
   }
 }

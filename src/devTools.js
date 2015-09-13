@@ -6,7 +6,7 @@ const ActionTypes = {
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
   JUMP_TO_STATE: 'JUMP_TO_STATE',
-  SET_MONITOR_STATE: 'SET_MONITOR_STATE',
+  SET_PANEL_STATE: 'SET_PANEL_STATE',
   RECOMPUTE_STATES: 'RECOMPUTE_STATES'
 };
 
@@ -85,7 +85,8 @@ function liftReducer(reducer, initialState) {
     stagedActions: [INIT_ACTION],
     skippedActions: {},
     currentStateIndex: 0,
-    monitorState: {
+    panelState: {
+      position: 'right',
       isVisible: true
     },
     timestamps: [Date.now()]
@@ -101,7 +102,7 @@ function liftReducer(reducer, initialState) {
       skippedActions,
       computedStates,
       currentStateIndex,
-      monitorState,
+      panelState,
       timestamps
     } = liftedState;
 
@@ -145,8 +146,8 @@ function liftReducer(reducer, initialState) {
       stagedActions = [...stagedActions, liftedAction.action];
       timestamps = [...timestamps, liftedAction.timestamp];
       break;
-    case ActionTypes.SET_MONITOR_STATE:
-      monitorState = liftedAction.monitorState;
+    case ActionTypes.SET_PANEL_STATE:
+      panelState = liftedAction.panelState;
       break;
     case ActionTypes.RECOMPUTE_STATES:
       stagedActions = liftedAction.stagedActions;
@@ -172,7 +173,7 @@ function liftReducer(reducer, initialState) {
       skippedActions,
       computedStates,
       currentStateIndex,
-      monitorState,
+      panelState,
       timestamps
     };
   };
@@ -244,8 +245,8 @@ export const ActionCreators = {
   jumpToState(index) {
     return { type: ActionTypes.JUMP_TO_STATE, index };
   },
-  setMonitorState(monitorState) {
-    return { type: ActionTypes.SET_MONITOR_STATE, monitorState };
+  setPanelState(panelState) {
+    return { type: ActionTypes.SET_PANEL_STATE, panelState };
   },
   recomputeStates(committedState, stagedActions) {
     return {
