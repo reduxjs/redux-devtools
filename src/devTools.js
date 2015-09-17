@@ -60,6 +60,8 @@ function recomputeStates(reducer, committedState, stagedActions, skippedActions)
 
   for (let i = 0; i < stagedActions.length; i++) {
     const action = stagedActions[i];
+    
+    if (i !== stagedActions.length - 1) action._recomputed = true;
 
     const previousEntry = computedStates[i - 1];
     const previousState = previousEntry ? previousEntry.state : committedState;
