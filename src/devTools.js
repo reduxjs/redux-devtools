@@ -3,6 +3,8 @@ const ActionTypes = {
   RESET: 'RESET',
   ROLLBACK: 'ROLLBACK',
   COMMIT: 'COMMIT',
+  EXPORT: 'EXPORT',
+  IMPORT: 'IMPORT',
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
   JUMP_TO_STATE: 'JUMP_TO_STATE',
@@ -86,7 +88,8 @@ function liftReducer(reducer, initialState) {
     skippedActions: {},
     currentStateIndex: 0,
     monitorState: {
-      isVisible: true
+      isVisible: true,
+      exportMode: false
     },
     timestamps: [Date.now()]
   };
@@ -120,6 +123,25 @@ function liftReducer(reducer, initialState) {
       skippedActions = {};
       currentStateIndex = 0;
       timestamps = [liftedAction.timestamp];
+      break;
+    case ActionTypes.EXPORT:
+      monitorState = Object.assign(
+        {},
+        monitorState,
+        { exportMode: !monitorState.exportMode }
+      );
+      break;
+    case ActionTypes.IMPORT:
+      (
+        {
+          stagedActions,
+          skippedActions,
+          computedStates,
+          currentStateIndex,
+          monitorState,
+          timestamps
+        } = liftedAction.newState
+      );
       break;
     case ActionTypes.ROLLBACK:
       stagedActions = [INIT_ACTION];
@@ -257,6 +279,12 @@ export const ActionCreators = {
   },
   commit() {
     return { type: ActionTypes.COMMIT, timestamp: Date.now() };
+  },
+  export() {
+    return { type: ActionTypes.EXPORT };
+  },
+  import(newState) {
+    return { type: ActionTypes.IMPORT, newState };
   },
   sweep() {
     return { type: ActionTypes.SWEEP };

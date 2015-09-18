@@ -1,7 +1,11 @@
 import React, { PropTypes, findDOMNode, Component } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
+import LogMonitorTextarea from './LogMonitorTextarea';
 import * as themes from './themes';
+
+const EXPORT_CONTAINER_HEIGHT = 150;
+const ELEMENTS_CONTAINER_TOP = 38;
 
 const styles = {
   container: {
@@ -25,7 +29,7 @@ const styles = {
     position: 'absolute',
     left: 0,
     right: 0,
-    top: 38,
+    top: ELEMENTS_CONTAINER_TOP,
     bottom: 0,
     overflowX: 'hidden',
     overflowY: 'auto'
@@ -118,6 +122,14 @@ export default class LogMonitor extends Component {
     this.props.commit();
   }
 
+  handleExport() {
+    this.props.export();
+  }
+
+  handleImport(newState) {
+    this.props.import(newState);
+  }
+
   handleToggleAction(index) {
     this.props.toggleAction(index);
   }
@@ -184,8 +196,10 @@ export default class LogMonitor extends Component {
           <LogMonitorButton theme={theme} onClick={::this.handleRollback} enabled={computedStates.length}>Revert</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleSweep} enabled={Object.keys(skippedActions).some(key => skippedActions[key])}>Sweep</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleCommit} enabled={computedStates.length > 1}>Commit</LogMonitorButton>
+          <LogMonitorButton theme={theme} onClick={::this.handleExport} enabled={computedStates.length}>Export</LogMonitorButton>
         </div>
-        <div style={styles.elements} ref="elements">
+        <LogMonitorTextarea theme={theme} handleImport={::this.handleImport} currentState={this.props.store.getState()} />
+        <div style={{...styles.elements, top: monitorState.exportMode ? EXPORT_CONTAINER_HEIGHT : ELEMENTS_CONTAINER_TOP }} ref="elements">
           {elements}
         </div>
       </div>
