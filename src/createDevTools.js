@@ -10,9 +10,26 @@ export default function createDevTools(React) {
     ActionCreators
   )
   class DevTools extends Component {
+
+    static defaultProps = {
+      visibleOnLoad: true
+    };
+
+    componentWillMount() {
+      const monitorState = {
+        ...this.props.monitorState,
+        isVisible: this.props.visibleOnLoad
+      };
+      this.props.setMonitorState(monitorState);
+    }
+
     render() {
+      const monitorState = {
+        ...this.props.monitorState,
+        isVisible: this.props.visibleOnLoad
+      };
       const { monitor: Monitor } = this.props;
-      return <Monitor {...this.props} />;
+      return <Monitor {...this.props} monitorState={monitorState} />;
     }
   }
 
