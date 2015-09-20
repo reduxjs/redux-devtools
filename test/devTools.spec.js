@@ -197,6 +197,22 @@ describe('devTools', () => {
     expect(spy.calls[0].arguments[0]).toMatch(
       /ReferenceError/
     );
+
+    spy.restore();
+  });
+
+  it('returns the last non-undefined state from getState', () => {
+    let spy = spyOn(console, 'error');
+
+    store.dispatch({ type: 'INCREMENT' });
+    store.dispatch({ type: 'DECREMENT' });
+    store.dispatch({ type: 'INCREMENT' });
+    store.dispatch({ type: 'INCREMENT' });
+    expect(store.getState()).toBe(2);
+
+    store.replaceReducer(counterWithBug);
+    expect(store.getState()).toBe(1);
+
     spy.restore();
   });
 });
