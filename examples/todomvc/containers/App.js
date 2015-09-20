@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TodoApp from './TodoApp';
 import { createStore, combineReducers, compose } from 'redux';
 import { devTools, persistState } from 'redux-devtools';
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
+import { DevTools, DebugPanel, LogMonitor, ChartMonitor } from 'redux-devtools/lib/react';
 import { Provider } from 'react-redux';
 import * as reducers from '../reducers';
 
@@ -30,6 +30,11 @@ export default class App extends Component {
         <DebugPanel top right bottom>
           <DevTools store={store}
                     monitor={LogMonitor}
+                    visibleOnLoad={true} />
+        </DebugPanel>
+        <DebugPanel top left bottom style={{ fontSize: undefined }}>
+          <DevTools store={store}
+                    monitor={ChartMonitor}
                     visibleOnLoad={true} />
         </DebugPanel>
       </div>
