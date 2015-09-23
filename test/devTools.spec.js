@@ -35,7 +35,7 @@ describe('devTools', () => {
     devToolsStore = store.devToolsStore;
   });
 
-  it('performs actions', () => {
+  it('should perform actions', () => {
     expect(store.getState()).toBe(0);
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
@@ -43,7 +43,7 @@ describe('devTools', () => {
     expect(store.getState()).toBe(2);
   });
 
-  it('rollbacks state to the last committed state', () => {
+  it('should rollback state to the last committed state', () => {
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
@@ -65,7 +65,7 @@ describe('devTools', () => {
     expect(store.getState()).toBe(2);
   });
 
-  it('resets to initial state', () => {
+  it('should reset to initial state', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
 
@@ -85,7 +85,7 @@ describe('devTools', () => {
     expect(store.getState()).toBe(0);
   });
 
-  it('toggles an action', () => {
+  it('should toggle an action', () => {
     // stateIndex 0 = @@INIT
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
@@ -99,7 +99,7 @@ describe('devTools', () => {
     expect(store.getState()).toBe(1);
   });
 
-  it('sweeps disabled actions', () => {
+  it('sweep disabled actions', () => {
     // stateIndex 0 = @@INIT
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
@@ -120,7 +120,7 @@ describe('devTools', () => {
     expect(store.getState()).toBe(2);
   });
 
-  it('jumps to state', () => {
+  it('should jump to state', () => {
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
     store.dispatch({ type: 'INCREMENT' });
@@ -142,12 +142,12 @@ describe('devTools', () => {
     expect(store.getState()).toBe(2);
   });
 
-  it('sets monitor state', () => {
+  it('should set monitor state', () => {
     devToolsStore.dispatch(ActionCreators.setMonitorState({test: 'test'}));
     expect(devToolsStore.getState().monitorState.test).toBe('test');
   });
 
-  it('recomputes', () => {
+  it('should recompute', () => {
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
     store.dispatch({ type: 'INCREMENT' });
@@ -165,11 +165,11 @@ describe('devTools', () => {
     expect(store.getState()).toBe(13);
   });
 
-  it('gets the reducer', () => {
+  it('should get the reducer', () => {
     expect(store.getReducer()).toBe(counter);
   });
 
-  it('replaces the reducer', () => {
+  it('should replace the reducer', () => {
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
     store.dispatch({ type: 'INCREMENT' });
@@ -179,7 +179,7 @@ describe('devTools', () => {
     expect(store.getState()).toBe(2);
   });
 
-  it('catches and records errors', () => {
+  it('should catch and record errors', () => {
     let spy = spyOn(console, 'error');
     let storeWithBug = devTools()(createStore)(counterWithBug);
 

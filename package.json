@@ -40,8 +40,14 @@
     "eslint-plugin-react": "^2.3.0",
     "expect": "^1.6.0",
     "isparta": "^3.0.3",
+    "jsdom": "^6.5.1",
     "mocha": "^2.2.5",
-    "rimraf": "^2.3.4"
+    "mocha-jsdom": "^1.0.0",
+    "react": "^0.14.0-rc1",
+    "react-addons-test-utils": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1",
+    "rimraf": "^2.3.4",
+    "webpack": "^1.11.0"
   },
   "peerDependencies": {
     "redux": "^2.0.0 || ^3.0.0"
