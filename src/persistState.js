@@ -65,7 +65,7 @@ export default function persistState(sessionId, stateDeserializer = null, action
         try {
           localStorage.setItem(key, JSON.stringify(store.getState()));
         } catch (e) {
-          console.warn('Could not write debug session from localStorage:', e);
+          console.warn('Could not write debug session to localStorage:', e);
         }
 
         return action;
