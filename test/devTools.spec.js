@@ -153,13 +153,14 @@ describe('devTools', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
 
-    let devStoreState = store.devToolsStore.getState();
-    devStoreState.committedState = 10;
-    devStoreState.stagedActions[2] = { type: 'INCREMENT' };
+    let stagedActions = [...store.devToolsStore.getState().stagedActions];
+    // replace DECREMENT with INCREMENT (stagedAction[0] is @@INIT)
+    stagedActions[2] = { type: 'INCREMENT' };
+    const committedState = 10;
 
     devToolsStore.dispatch(ActionCreators.recomputeStates(
-      devStoreState.committedState,
-      devStoreState.stagedActions
+      committedState,
+      stagedActions
     ));
 
     expect(store.getState()).toBe(13);
