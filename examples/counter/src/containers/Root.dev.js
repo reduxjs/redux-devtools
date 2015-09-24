@@ -13,7 +13,7 @@ export default class Root extends Component {
           <CounterApp />
         </Provider>
         <Dock position='right' isVisible dimMode='none'>
-          <LogMonitor store={store.devToolsStore} />
+          <LogMonitor store={store} />
         </Dock>
       </div>
     );

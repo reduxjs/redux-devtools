@@ -2,8 +2,7 @@ import expect from 'expect';
 import jsdom from 'mocha-jsdom';
 import React, { Component } from 'react';
 import TestUtils from 'react-addons-test-utils';
-import createDevTools from '../src/createDevTools';
-import devTools from '../src/devTools';
+import { connectMonitor, devTools } from '../src';
 import { createStore } from 'redux';
 
 class MockMonitor extends Component {
@@ -12,14 +11,14 @@ class MockMonitor extends Component {
   }
 }
 
-describe('createDevTools', () => {
+describe('connectMonitor', () => {
   jsdom();
 
   it('should pass devToolsStore to monitor', () => {
     const store = devTools()(createStore)(() => {});
-    const DevTools = createDevTools(React);
+    const ConnectedMonitor = connectMonitor(MockMonitor);
     const tree = TestUtils.renderIntoDocument(
-      <DevTools monitor={MockMonitor} store={store} />
+      <ConnectedMonitor store={store} />
     );
     const mockMonitor = TestUtils.findRenderedComponentWithType(tree, MockMonitor);
     expect(mockMonitor.props.store).toBe(store.devToolsStore);
@@ -27,9 +26,9 @@ describe('createDevTools', () => {
 
   it('should pass props to monitor', () => {
     const store = devTools()(createStore)(() => {});
-    const DevTools = createDevTools(React);
+    const ConnectedMonitor = connectMonitor(MockMonitor);
     const tree = TestUtils.renderIntoDocument(
-      <DevTools monitor={MockMonitor} store={store} one={1} two={2}/>
+      <ConnectedMonitor store={store} one={1} two={2}/>
     );
     const mockMonitor = TestUtils.findRenderedComponentWithType(tree, MockMonitor);
     expect(mockMonitor.props.one).toBe(1);
@@ -37,7 +36,7 @@ describe('createDevTools', () => {
   });
 
   it('should subscribe monitor to store updates', () => {
-    const DevTools = createDevTools(React);
+    const ConnectedMonitor = connectMonitor(MockMonitor);
     const store = devTools()(createStore)(
       (state, action) => {
         switch (action.type) {
@@ -50,7 +49,7 @@ describe('createDevTools', () => {
       0
     );
     const tree = TestUtils.renderIntoDocument(
-      <DevTools monitor={MockMonitor} store={store} />
+      <ConnectedMonitor store={store} />
     );
 
     store.dispatch({type: 'INC'});
@@ -63,21 +62,19 @@ describe('createDevTools', () => {
   });
 
   it('should warn if devTools() not in middleware', () => {
-    const spy = expect.spyOn(console, 'error');
     const store = createStore(() => {});
-    const DevTools = createDevTools(React);
+    const ConnectedMonitor = connectMonitor(MockMonitor);
 
-    expect(
-      TestUtils.renderIntoDocument,
-    ).withArgs(
-      <DevTools monitor={MockMonitor} store={store} />
-    ).toThrow();
+    // Force to re-evaluate propType checks on every run
+    ConnectedMonitor.displayName = Math.random().toString();
+
+    const spy = expect.spyOn(console, 'error');
+    TestUtils.renderIntoDocument(<ConnectedMonitor store={store} />);
+    spy.restore();
 
     expect(spy.calls).toContain(
-      /Could not find the devTools store/,
+      /Could not find the DevTools store/,
       (call, errMsg) => call.arguments[0].match(errMsg)
     );
-
-    spy.restore();
   });
 });
