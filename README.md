@@ -13,9 +13,7 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 * If you change the reducer code, each “staged” action will be re-evaluted
 * If the reducers throw, you will see during which action this happened, and what the error was
 * With `persistState()` store enhancer, you can persist debug sessions across page reloads
-* To monitor a part of the state, you can set a `select` prop on the DevTools component: `<DevTools select={state => state.todos} store={store} monitor={LogMonitor} />`
 * Toggle visibility with Ctrl+H
-* To hide the devtools on load, set `visibleOnLoad` to false, e.g.: `<DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />`
 
 ### Installation
 
@@ -30,10 +28,12 @@ To install, firstly import `devTools` into your root React component:
 ```js
 // Redux utility functions
 import { compose, createStore, applyMiddleware } from 'redux';
+
 // Redux DevTools store enhancers
 import { devTools, persistState } from 'redux-devtools';
-// React components for Redux DevTools
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
+
+// A monitor component for Redux DevTools
+import LogMonitor from 'redux-devtools-log-monitor';
 ```
 
 Then, add `devTools` to your store enhancers, and create your store:
@@ -42,8 +42,10 @@ Then, add `devTools` to your store enhancers, and create your store:
 const finalCreateStore = compose(
   // Enables your middleware:
   applyMiddleware(m1, m2, m3), // any Redux middleware, e.g. redux-thunk
+
   // Provides support for DevTools:
   devTools(),
+
   // Lets you write ?debug_session=<name> in address bar to persist debug sessions
   persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore);
@@ -51,7 +53,7 @@ const finalCreateStore = compose(
 const store = finalCreateStore(reducer);
 ```
 
-Finally, include the `DevTools` in your page. You may pass either `LogMonitor` (the default one) or any of the custom monitors described below. For convenience, you can use `DebugPanel` to dock `DevTools` to some part of the screen, but you can put it also somewhere else in the component tree.
+Finally, include the `DevTools` in your page. You may pass either `LogMonitor` (the default one) or any of the custom monitors described below.
 
 ```js
 export default class Root extends Component {
@@ -59,11 +61,10 @@ export default class Root extends Component {
     return (
       <div>
         <Provider store={store}>
-          {() => <CounterApp />}
+          <CounterApp />
         </Provider>
-        <DebugPanel top right bottom>
-          <DevTools store={store} monitor={LogMonitor} />
-        </DebugPanel>
+
+        <LogMonitor store={store.devToolsStore} />
       </div>
     );
   }
