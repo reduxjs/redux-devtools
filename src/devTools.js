@@ -203,6 +203,7 @@ function unliftState(liftedState) {
  * Unlifts the DevTools store to act like the app's store.
  */
 function unliftStore(liftedStore, reducer) {
+  let lastDefinedState;
   return {
     ...liftedStore,
     devToolsStore: liftedStore,
@@ -211,7 +212,11 @@ function unliftStore(liftedStore, reducer) {
       return action;
     },
     getState() {
-      return unliftState(liftedStore.getState());
+      const state = unliftState(liftedStore.getState());
+      if (state !== undefined) {
+        lastDefinedState = state;
+      }
+      return lastDefinedState;
     },
     getReducer() {
       return reducer;
