@@ -6,6 +6,8 @@ export default function connectMonitor(Monitor) {
   const ConnectedMonitor = connect(state => state, ActionCreators)(Monitor);
 
   class DevTools extends Component {
+    static Monitor = Monitor;
+
     static propTypes = {
       store(props, propName, componentName) {
         if (!props.store) {
