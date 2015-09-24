@@ -1,4 +1,4 @@
-import React, { PropTypes, findDOMNode, Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
 import * as themes from './themes';
@@ -69,7 +69,7 @@ export default class LogMonitor extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    const node = findDOMNode(this.refs.elements);
+    const node = this.refs.elements;
     if (!node) {
       this.scrollDown = true;
     } else if (
@@ -86,7 +86,7 @@ export default class LogMonitor extends Component {
   }
 
   componentDidUpdate() {
-    const node = findDOMNode(this.refs.elements);
+    const node = this.refs.elements;
     if (!node) {
       return;
     }
