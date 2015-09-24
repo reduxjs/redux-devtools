@@ -14,6 +14,7 @@ function counterWithBug(state = 0, action) {
   switch (action.type) {
     case 'INCREMENT': return state + 1;
     case 'DECREMENT': return mistake - 1; // eslint-disable-line no-undef
+    case 'SET_UNDEFINED': return undefined;
     default: return state;
   }
 }
@@ -99,7 +100,7 @@ describe('devTools', () => {
     expect(store.getState()).toBe(1);
   });
 
-  it('sweep disabled actions', () => {
+  it('should sweep disabled actions', () => {
     // stateIndex 0 = @@INIT
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
@@ -153,13 +154,14 @@ describe('devTools', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
 
-    let devStoreState = store.devToolsStore.getState();
-    devStoreState.committedState = 10;
-    devStoreState.stagedActions[2] = { type: 'INCREMENT' };
+    let stagedActions = [...store.devToolsStore.getState().stagedActions];
+    // replace DECREMENT with INCREMENT (stagedAction[0] is @@INIT)
+    stagedActions[2] = { type: 'INCREMENT' };
+    const committedState = 10;
 
     devToolsStore.dispatch(ActionCreators.recomputeStates(
-      devStoreState.committedState,
-      devStoreState.stagedActions
+      committedState,
+      stagedActions
     ));
 
     expect(store.getState()).toBe(13);
@@ -201,18 +203,13 @@ describe('devTools', () => {
     spy.restore();
   });
 
-  it('returns the last non-undefined state from getState', () => {
-    let spy = spyOn(console, 'error');
+  it('should return the last non-undefined state from getState', () => {
+    let storeWithBug = devTools()(createStore)(counterWithBug);
+    storeWithBug.dispatch({ type: 'INCREMENT' });
+    storeWithBug.dispatch({ type: 'INCREMENT' });
+    expect(storeWithBug.getState()).toBe(2);
 
-    store.dispatch({ type: 'INCREMENT' });
-    store.dispatch({ type: 'DECREMENT' });
-    store.dispatch({ type: 'INCREMENT' });
-    store.dispatch({ type: 'INCREMENT' });
-    expect(store.getState()).toBe(2);
-
-    store.replaceReducer(counterWithBug);
-    expect(store.getState()).toBe(1);
-
-    spy.restore();
+    storeWithBug.dispatch({ type: 'SET_UNDEFINED' });
+    expect(storeWithBug.getState()).toBe(2);
   });
 });
