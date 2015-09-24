@@ -99,7 +99,7 @@ describe('devTools', () => {
     expect(store.getState()).toBe(1);
   });
 
-  it('sweep disabled actions', () => {
+  it('should sweep disabled actions', () => {
     // stateIndex 0 = @@INIT
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
