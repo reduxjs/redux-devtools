@@ -152,8 +152,11 @@ function liftReducer(reducer, initialState) {
       stagedActions = liftedAction.stagedActions;
       timestamps = liftedAction.timestamps;
       committedState = liftedAction.committedState;
-      currentStateIndex = stagedActions.length - 1;
-      skippedActions = {};
+      currentStateIndex = liftedAction.currentStateIndex;
+      if (currentStateIndex === -1) {
+        currentStateIndex = stagedActions.length - 1;
+      }
+      skippedActions = liftedAction.skippedActions;
       break;
     default:
       break;
@@ -252,11 +255,14 @@ export const ActionCreators = {
   setMonitorState(monitorState) {
     return { type: ActionTypes.SET_MONITOR_STATE, monitorState };
   },
-  recomputeStates(committedState, stagedActions) {
+  recomputeStates(committedState, stagedActions, timestamps, currentStateIndex=-1, skippedActions={}) {
     return {
       type: ActionTypes.RECOMPUTE_STATES,
       committedState,
-      stagedActions
+      stagedActions,
+      skippedActions,
+      timestamps,
+      currentStateIndex
     };
   }
 };
