@@ -91,6 +91,7 @@ function liftReducer(reducer, monitorReducer, initialState) {
    * Manages how the DevTools actions modify the DevTools state.
    */
   return function liftedReducer(liftedState = initialLiftedState, liftedAction) {
+    let shouldRecomputeStates = true;
     let {
       committedState,
       stagedActions,
@@ -127,6 +128,8 @@ function liftReducer(reducer, monitorReducer, initialState) {
       break;
     case ActionTypes.JUMP_TO_STATE:
       currentStateIndex = liftedAction.index;
+      // Optimization: we know the history has not changed.
+      shouldRecomputeStates = false;
       break;
     case ActionTypes.SWEEP:
       stagedActions = stagedActions.filter((_, i) => !skippedActions[i]);
@@ -138,19 +141,34 @@ function liftReducer(reducer, monitorReducer, initialState) {
       if (currentStateIndex === stagedActions.length - 1) {
         currentStateIndex++;
       }
+
       stagedActions = [...stagedActions, liftedAction.action];
       timestamps = [...timestamps, liftedAction.timestamp];
+
+      // Optimization: we know that the past has not changed.
+      shouldRecomputeStates = false;
+      // Instead of recomputing the states, append the next one.
+      const previousEntry = computedStates[computedStates.length - 1];
+      const nextEntry = computeNextEntry(
+        reducer,
+        liftedAction.action,
+        previousEntry.state,
+        previousEntry.error
+      );
+      computedStates = [...computedStates, nextEntry];
       break;
     default:
       break;
     }
 
-    computedStates = recomputeStates(
-      reducer,
-      committedState,
-      stagedActions,
-      skippedActions
-    );
+    if (shouldRecomputeStates) {
+      computedStates = recomputeStates(
+        reducer,
+        committedState,
+        stagedActions,
+        skippedActions
+      );
+    }
 
     monitorState = monitorReducer(monitorState, liftedAction);
 
