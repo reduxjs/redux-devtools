@@ -78,13 +78,13 @@ function recomputeStates(reducer, committedState, stagedActions, skippedActions)
 /**
  * Lifts the app state reducer into a DevTools state reducer.
  */
-function liftReducer(reducer, monitorStateReducer, initialState) {
+function liftReducer(reducer, monitorReducer, initialState) {
   const initialLiftedState = {
     committedState: initialState,
     stagedActions: [INIT_ACTION],
     skippedActions: {},
     currentStateIndex: 0,
-    monitorState: monitorStateReducer(undefined, INIT_ACTION),
+    monitorState: monitorReducer(undefined, INIT_ACTION),
     timestamps: [Date.now()]
   };
 
@@ -160,7 +160,7 @@ function liftReducer(reducer, monitorStateReducer, initialState) {
       skippedActions
     );
 
-    monitorState = monitorStateReducer(monitorState, liftedAction);
+    monitorState = monitorReducer(monitorState, liftedAction);
 
     return {
       committedState,
@@ -198,7 +198,7 @@ function unliftState(liftedState) {
 /**
  * Unlifts the DevTools store to act like the app's store.
  */
-function unliftStore(liftedStore, monitorStateReducer) {
+function unliftStore(liftedStore, monitorReducer) {
   let lastDefinedState;
   return {
     ...liftedStore,
@@ -215,7 +215,7 @@ function unliftStore(liftedStore, monitorStateReducer) {
       return lastDefinedState;
     },
     replaceReducer(nextReducer) {
-      liftedStore.replaceReducer(liftReducer(nextReducer, monitorStateReducer));
+      liftedStore.replaceReducer(liftReducer(nextReducer, monitorReducer));
     }
   };
 }
@@ -252,13 +252,13 @@ export const ActionCreators = {
 };
 
 /**
- * Redux DevTools middleware.
+ * Redux DevTools store enhancer.
  */
-export default function devTools(monitorStateReducer = () => undefined) {
+export default function devTools(monitorReducer = () => undefined) {
   return next => (reducer, initialState) => {
-    const liftedReducer = liftReducer(reducer, monitorStateReducer, initialState);
+    const liftedReducer = liftReducer(reducer, monitorReducer, initialState);
     const liftedStore = next(liftedReducer);
-    const store = unliftStore(liftedStore, monitorStateReducer);
+    const store = unliftStore(liftedStore, monitorReducer);
     return store;
   };
 }
