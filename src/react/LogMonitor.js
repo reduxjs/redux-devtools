@@ -1,11 +1,8 @@
+/* eslint-disable no-alert */
 import React, { PropTypes, findDOMNode, Component } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
-import LogMonitorTextarea from './LogMonitorTextarea';
 import * as themes from './themes';
-
-const EXPORT_CONTAINER_HEIGHT = 150;
-const ELEMENTS_CONTAINER_TOP = 38;
 
 const styles = {
   container: {
@@ -29,7 +26,7 @@ const styles = {
     position: 'absolute',
     left: 0,
     right: 0,
-    top: ELEMENTS_CONTAINER_TOP,
+    top: 38,
     bottom: 0,
     overflowX: 'hidden',
     overflowY: 'auto'
@@ -123,11 +120,18 @@ export default class LogMonitor extends Component {
   }
 
   handleExport() {
-    this.props.export();
+    window.prompt('Current state\'s schema', JSON.stringify(this.props.store.getState()));
   }
 
-  handleImport(newState) {
-    this.props.import(newState);
+  handleImport() {
+    try {
+      let nextLiftedState = window.prompt('Please paste a valid action log');
+      if (nextLiftedState) {
+        this.props.importState(JSON.parse(nextLiftedState));
+      }
+    } catch (err) {
+      console.warn('There was an error parsing the new state. Please enter a valid schema.');
+    }
   }
 
   handleToggleAction(index) {
@@ -196,13 +200,14 @@ export default class LogMonitor extends Component {
           <LogMonitorButton theme={theme} onClick={::this.handleRollback} enabled={computedStates.length}>Revert</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleSweep} enabled={Object.keys(skippedActions).some(key => skippedActions[key])}>Sweep</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleCommit} enabled={computedStates.length > 1}>Commit</LogMonitorButton>
+          <LogMonitorButton theme={theme} onClick={::this.handleImport} enabled={true}>Import</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleExport} enabled={computedStates.length}>Export</LogMonitorButton>
         </div>
-        <LogMonitorTextarea theme={theme} handleImport={::this.handleImport} currentState={this.props.store.getState()} />
-        <div style={{...styles.elements, top: monitorState.exportMode ? EXPORT_CONTAINER_HEIGHT : ELEMENTS_CONTAINER_TOP }} ref="elements">
+        <div style={styles.elements} ref="elements">
           {elements}
         </div>
       </div>
     );
   }
 }
+/* eslint-enable no-alert */
