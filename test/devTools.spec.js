@@ -143,25 +143,6 @@ describe('devTools', () => {
     expect(store.getState()).toBe(2);
   });
 
-  it('should recompute', () => {
-    store.dispatch({ type: 'INCREMENT' });
-    store.dispatch({ type: 'DECREMENT' });
-    store.dispatch({ type: 'INCREMENT' });
-    expect(store.getState()).toBe(1);
-
-    let stagedActions = [...store.devToolsStore.getState().stagedActions];
-    // replace DECREMENT with INCREMENT (stagedAction[0] is @@INIT)
-    stagedActions[2] = { type: 'INCREMENT' };
-    const committedState = 10;
-
-    devToolsStore.dispatch(ActionCreators.recomputeStates(
-      committedState,
-      stagedActions
-    ));
-
-    expect(store.getState()).toBe(13);
-  });
-
   it('should replace the reducer', () => {
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });

@@ -5,8 +5,7 @@ const ActionTypes = {
   COMMIT: 'COMMIT',
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
-  JUMP_TO_STATE: 'JUMP_TO_STATE',
-  RECOMPUTE_STATES: 'RECOMPUTE_STATES'
+  JUMP_TO_STATE: 'JUMP_TO_STATE'
 };
 
 const INIT_ACTION = {
@@ -142,13 +141,6 @@ function liftReducer(reducer, monitorReducer, initialState) {
       stagedActions = [...stagedActions, liftedAction.action];
       timestamps = [...timestamps, liftedAction.timestamp];
       break;
-    case ActionTypes.RECOMPUTE_STATES:
-      stagedActions = liftedAction.stagedActions;
-      timestamps = liftedAction.timestamps;
-      committedState = liftedAction.committedState;
-      currentStateIndex = stagedActions.length - 1;
-      skippedActions = {};
-      break;
     default:
       break;
     }
@@ -241,13 +233,6 @@ export const ActionCreators = {
   },
   jumpToState(index) {
     return { type: ActionTypes.JUMP_TO_STATE, index };
-  },
-  recomputeStates(committedState, stagedActions) {
-    return {
-      type: ActionTypes.RECOMPUTE_STATES,
-      committedState,
-      stagedActions
-    };
   }
 };
 
