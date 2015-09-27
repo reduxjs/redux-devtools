@@ -212,4 +212,35 @@ describe('devTools', () => {
     storeWithBug.dispatch({ type: 'SET_UNDEFINED' });
     expect(storeWithBug.getState()).toBe(2);
   });
+
+  it('should not recompute states on every action', () => {
+    let reducerCalls = 0;
+    let monitoredStore = devTools()(createStore)(() => reducerCalls++);
+    expect(reducerCalls).toBe(1);
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    expect(reducerCalls).toBe(4);
+  });
+
+  it('should not recompute states when jumping to state', () => {
+    let reducerCalls = 0;
+    let monitoredStore = devTools()(createStore)(() => reducerCalls++);
+    let monitoredDevToolsStore = monitoredStore.devToolsStore;
+
+    expect(reducerCalls).toBe(1);
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    expect(reducerCalls).toBe(4);
+
+    monitoredDevToolsStore.dispatch(ActionCreators.jumpToState(0));
+    expect(reducerCalls).toBe(4);
+
+    monitoredDevToolsStore.dispatch(ActionCreators.jumpToState(1));
+    expect(reducerCalls).toBe(4);
+
+    monitoredDevToolsStore.dispatch(ActionCreators.jumpToState(3));
+    expect(reducerCalls).toBe(4);
+  });
 });
