@@ -6,7 +6,6 @@ const ActionTypes = {
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
   JUMP_TO_STATE: 'JUMP_TO_STATE',
-  SET_MONITOR_STATE: 'SET_MONITOR_STATE',
   RECOMPUTE_STATES: 'RECOMPUTE_STATES'
 };
 
@@ -79,15 +78,13 @@ function recomputeStates(reducer, committedState, stagedActions, skippedActions)
 /**
  * Lifts the app state reducer into a DevTools state reducer.
  */
-function liftReducer(reducer, initialState) {
+function liftReducer(reducer, monitorStateReducer, initialState) {
   const initialLiftedState = {
     committedState: initialState,
     stagedActions: [INIT_ACTION],
     skippedActions: {},
     currentStateIndex: 0,
-    monitorState: {
-      isVisible: true
-    },
+    monitorState: monitorStateReducer(undefined, INIT_ACTION),
     timestamps: [Date.now()]
   };
 
@@ -145,9 +142,6 @@ function liftReducer(reducer, initialState) {
       stagedActions = [...stagedActions, liftedAction.action];
       timestamps = [...timestamps, liftedAction.timestamp];
       break;
-    case ActionTypes.SET_MONITOR_STATE:
-      monitorState = liftedAction.monitorState;
-      break;
     case ActionTypes.RECOMPUTE_STATES:
       stagedActions = liftedAction.stagedActions;
       timestamps = liftedAction.timestamps;
@@ -165,6 +159,8 @@ function liftReducer(reducer, initialState) {
       stagedActions,
       skippedActions
     );
+
+    monitorState = monitorStateReducer(monitorState, liftedAction);
 
     return {
       committedState,
@@ -202,7 +198,7 @@ function unliftState(liftedState) {
 /**
  * Unlifts the DevTools store to act like the app's store.
  */
-function unliftStore(liftedStore, reducer) {
+function unliftStore(liftedStore, monitorStateReducer) {
   let lastDefinedState;
   return {
     ...liftedStore,
@@ -218,11 +214,8 @@ function unliftStore(liftedStore, reducer) {
       }
       return lastDefinedState;
     },
-    getReducer() {
-      return reducer;
-    },
     replaceReducer(nextReducer) {
-      liftedStore.replaceReducer(liftReducer(nextReducer));
+      liftedStore.replaceReducer(liftReducer(nextReducer, monitorStateReducer));
     }
   };
 }
@@ -249,9 +242,6 @@ export const ActionCreators = {
   jumpToState(index) {
     return { type: ActionTypes.JUMP_TO_STATE, index };
   },
-  setMonitorState(monitorState) {
-    return { type: ActionTypes.SET_MONITOR_STATE, monitorState };
-  },
   recomputeStates(committedState, stagedActions) {
     return {
       type: ActionTypes.RECOMPUTE_STATES,
@@ -264,11 +254,11 @@ export const ActionCreators = {
 /**
  * Redux DevTools middleware.
  */
-export default function devTools() {
+export default function devTools(monitorStateReducer = () => undefined) {
   return next => (reducer, initialState) => {
-    const liftedReducer = liftReducer(reducer, initialState);
+    const liftedReducer = liftReducer(reducer, monitorStateReducer, initialState);
     const liftedStore = next(liftedReducer);
-    const store = unliftStore(liftedStore, reducer);
+    const store = unliftStore(liftedStore, monitorStateReducer);
     return store;
   };
 }

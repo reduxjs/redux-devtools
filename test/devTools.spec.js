@@ -143,11 +143,6 @@ describe('devTools', () => {
     expect(store.getState()).toBe(2);
   });
 
-  it('should set monitor state', () => {
-    devToolsStore.dispatch(ActionCreators.setMonitorState({test: 'test'}));
-    expect(devToolsStore.getState().monitorState.test).toBe('test');
-  });
-
   it('should recompute', () => {
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
@@ -165,10 +160,6 @@ describe('devTools', () => {
     ));
 
     expect(store.getState()).toBe(13);
-  });
-
-  it('should get the reducer', () => {
-    expect(store.getReducer()).toBe(counter);
   });
 
   it('should replace the reducer', () => {

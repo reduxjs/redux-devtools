@@ -11,12 +11,25 @@ class MockMonitor extends Component {
   }
 }
 
+function increment() {
+  return { type: 'INCREMENT' };
+}
+
+function mockMonitorReducer(state = 0, action) {
+  switch (action.type) {
+  case 'INCREMENT':
+    return state + 1;
+  default:
+    return state;
+  }
+}
+
 describe('connectMonitor', () => {
   jsdom();
 
   it('should pass devToolsStore to monitor', () => {
     const store = devTools()(createStore)(() => {});
-    const ConnectedMonitor = connectMonitor(MockMonitor);
+    const ConnectedMonitor = connectMonitor()(MockMonitor);
     const tree = TestUtils.renderIntoDocument(
       <ConnectedMonitor store={store} />
     );
@@ -26,7 +39,7 @@ describe('connectMonitor', () => {
 
   it('should pass props to monitor', () => {
     const store = devTools()(createStore)(() => {});
-    const ConnectedMonitor = connectMonitor(MockMonitor);
+    const ConnectedMonitor = connectMonitor()(MockMonitor);
     const tree = TestUtils.renderIntoDocument(
       <ConnectedMonitor store={store} one={1} two={2}/>
     );
@@ -36,7 +49,7 @@ describe('connectMonitor', () => {
   });
 
   it('should subscribe monitor to store updates', () => {
-    const ConnectedMonitor = connectMonitor(MockMonitor);
+    const ConnectedMonitor = connectMonitor()(MockMonitor);
     const store = devTools()(createStore)(
       (state, action) => {
         switch (action.type) {
@@ -63,7 +76,7 @@ describe('connectMonitor', () => {
 
   it('should warn if devTools() not in middleware', () => {
     const store = createStore(() => {});
-    const ConnectedMonitor = connectMonitor(MockMonitor);
+    const ConnectedMonitor = connectMonitor()(MockMonitor);
 
     // Force to re-evaluate propType checks on every run
     ConnectedMonitor.displayName = Math.random().toString();
@@ -76,5 +89,28 @@ describe('connectMonitor', () => {
       /Could not find the DevTools store/,
       (call, errMsg) => call.arguments[0].match(errMsg)
     );
+  });
+
+  it('should pass monitor state and actions to the monitor', () => {
+    const store = devTools(mockMonitorReducer)(createStore)(() => {});
+    const ConnectedMonitor = connectMonitor()(MockMonitor);
+    const tree = TestUtils.renderIntoDocument(
+      <ConnectedMonitor store={store} />
+    );
+    const mockMonitor = TestUtils.findRenderedComponentWithType(tree, MockMonitor);
+    expect(mockMonitor.props.monitorState).toBe(0);
+  });
+
+  it('should pass bound monitor actions to monitor', () => {
+    const ConnectedMonitor = connectMonitor({ increment })(MockMonitor);
+    const store = devTools(mockMonitorReducer)(createStore)(() => {});
+    const tree = TestUtils.renderIntoDocument(
+      <ConnectedMonitor store={store} />
+    );
+
+    const mockMonitor = TestUtils.findRenderedComponentWithType(tree, MockMonitor);
+    expect(mockMonitor.props.monitorState).toBe(0);
+    mockMonitor.props.monitorActions.increment();
+    expect(mockMonitor.props.monitorState).toBe(1);
   });
 });
