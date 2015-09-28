@@ -2,7 +2,7 @@
 // TODO: extract to a separate project.
 //
 
-import React, { Children, Component, PropTypes } from 'react';
+import { Children, Component, PropTypes } from 'react';
 
 const identity = _ => _;
 function mapStore(store, { mapAction = identity, mapState = identity }) {

@@ -89,6 +89,8 @@ export default class DockMonitor extends Component {
     case 'D':
       this.props.changePosition();
       break;
+    default:
+      break;
     }
   }
 
