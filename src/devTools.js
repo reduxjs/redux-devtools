@@ -1,3 +1,5 @@
+import { combineReducers, compose } from 'redux';
+
 const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
   RESET: 'RESET',
@@ -77,20 +79,19 @@ function recomputeStates(reducer, committedState, stagedActions, skippedActions)
 /**
  * Lifts the app state reducer into a DevTools state reducer.
  */
-function liftReducer(reducer, monitorReducer, initialState) {
-  const initialLiftedState = {
-    committedState: initialState,
+function createDevToolsStateReducer(reducer, initialCommittedState) {
+  const initialState = {
+    committedState: initialCommittedState,
     stagedActions: [INIT_ACTION],
     skippedActions: {},
     currentStateIndex: 0,
-    monitorState: monitorReducer(undefined, INIT_ACTION),
     timestamps: [Date.now()]
   };
 
   /**
    * Manages how the DevTools actions modify the DevTools state.
    */
-  return function liftedReducer(liftedState = initialLiftedState, liftedAction) {
+  return function devToolsState(state = initialState, action) {
     let shouldRecomputeStates = true;
     let {
       committedState,
@@ -98,36 +99,35 @@ function liftReducer(reducer, monitorReducer, initialState) {
       skippedActions,
       computedStates,
       currentStateIndex,
-      monitorState,
       timestamps
-    } = liftedState;
+    } = state;
 
-    switch (liftedAction.type) {
+    switch (action.type) {
     case ActionTypes.RESET:
       committedState = initialState;
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [liftedAction.timestamp];
+      timestamps = [action.timestamp];
       break;
     case ActionTypes.COMMIT:
       committedState = computedStates[currentStateIndex].state;
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [liftedAction.timestamp];
+      timestamps = [action.timestamp];
       break;
     case ActionTypes.ROLLBACK:
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [liftedAction.timestamp];
+      timestamps = [action.timestamp];
       break;
     case ActionTypes.TOGGLE_ACTION:
-      skippedActions = toggle(skippedActions, liftedAction.index);
+      skippedActions = toggle(skippedActions, action.index);
       break;
     case ActionTypes.JUMP_TO_STATE:
-      currentStateIndex = liftedAction.index;
+      currentStateIndex = action.index;
       // Optimization: we know the history has not changed.
       shouldRecomputeStates = false;
       break;
@@ -142,8 +142,8 @@ function liftReducer(reducer, monitorReducer, initialState) {
         currentStateIndex++;
       }
 
-      stagedActions = [...stagedActions, liftedAction.action];
-      timestamps = [...timestamps, liftedAction.timestamp];
+      stagedActions = [...stagedActions, action.action];
+      timestamps = [...timestamps, action.timestamp];
 
       // Optimization: we know that the past has not changed.
       shouldRecomputeStates = false;
@@ -151,7 +151,7 @@ function liftReducer(reducer, monitorReducer, initialState) {
       const previousEntry = computedStates[computedStates.length - 1];
       const nextEntry = computeNextEntry(
         reducer,
-        liftedAction.action,
+        action.action,
         previousEntry.state,
         previousEntry.error
       );
@@ -170,15 +170,12 @@ function liftReducer(reducer, monitorReducer, initialState) {
       );
     }
 
-    monitorState = monitorReducer(monitorState, liftedAction);
-
     return {
       committedState,
       stagedActions,
       skippedActions,
       computedStates,
       currentStateIndex,
-      monitorState,
       timestamps
     };
   };
@@ -200,7 +197,7 @@ function liftAction(action) {
  * Unlifts the DevTools state to the app state.
  */
 function unliftState(liftedState) {
-  const { computedStates, currentStateIndex } = liftedState;
+  const { computedStates, currentStateIndex } = liftedState.devToolsState;
   const { state } = computedStates[currentStateIndex];
   return state;
 }
@@ -208,24 +205,29 @@ function unliftState(liftedState) {
 /**
  * Unlifts the DevTools store to act like the app's store.
  */
-function unliftStore(liftedStore, monitorReducer) {
+function mapToComputedStateStore(devToolsStore, wrapReducer) {
   let lastDefinedState;
+
   return {
-    ...liftedStore,
-    devToolsStore: liftedStore,
+    ...devToolsStore,
+
+    devToolsStore,
+
     dispatch(action) {
-      liftedStore.dispatch(liftAction(action));
+      devToolsStore.dispatch(liftAction(action));
       return action;
     },
+
     getState() {
-      const state = unliftState(liftedStore.getState());
+      const state = unliftState(devToolsStore.getState());
       if (state !== undefined) {
         lastDefinedState = state;
       }
       return lastDefinedState;
     },
+
     replaceReducer(nextReducer) {
-      liftedStore.replaceReducer(liftReducer(nextReducer, monitorReducer));
+      devToolsStore.replaceReducer(wrapReducer(nextReducer));
     }
   };
 }
@@ -237,18 +239,23 @@ export const ActionCreators = {
   reset() {
     return { type: ActionTypes.RESET, timestamp: Date.now() };
   },
+
   rollback() {
     return { type: ActionTypes.ROLLBACK, timestamp: Date.now() };
   },
+
   commit() {
     return { type: ActionTypes.COMMIT, timestamp: Date.now() };
   },
+
   sweep() {
     return { type: ActionTypes.SWEEP };
   },
+
   toggleAction(index) {
     return { type: ActionTypes.TOGGLE_ACTION, index };
   },
+
   jumpToState(index) {
     return { type: ActionTypes.JUMP_TO_STATE, index };
   }
@@ -257,11 +264,21 @@ export const ActionCreators = {
 /**
  * Redux DevTools store enhancer.
  */
-export default function devTools(monitorReducer = () => undefined) {
+export default function devTools(
+  monitorReducer = () => null,
+  ...monitorReducerWrappers
+) {
   return next => (reducer, initialState) => {
-    const liftedReducer = liftReducer(reducer, monitorReducer, initialState);
-    const liftedStore = next(liftedReducer);
-    const store = unliftStore(liftedStore, monitorReducer);
-    return store;
+    const finalMonitorReducer = compose(
+      ...monitorReducerWrappers.slice().reverse()
+    )(monitorReducer);
+
+    const wrapReducer = (r) => combineReducers({
+      devToolsState: createDevToolsStateReducer(r, initialState),
+      monitorState: finalMonitorReducer
+    });
+
+    const devToolsStore = next(wrapReducer(reducer));
+    return mapToComputedStateStore(devToolsStore, wrapReducer);
   };
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import { DevToolsProvider } from 'redux-devtools';
 import CounterApp from './CounterApp';
-import Dock from 'react-dock';
 import LogMonitor from 'redux-devtools-log-monitor';
+import DockMonitor from '../dock/DockMonitor';
 
 export default class Root extends Component {
   render() {
@@ -12,9 +13,11 @@ export default class Root extends Component {
         <Provider store={store}>
           <CounterApp />
         </Provider>
-        <Dock position='right' isVisible dimMode='none'>
-          <LogMonitor store={store} />
-        </Dock>
+        <DevToolsProvider store={store}>
+          <DockMonitor>
+            <LogMonitor />
+          </DockMonitor>
+        </DevToolsProvider>
       </div>
     );
   }
