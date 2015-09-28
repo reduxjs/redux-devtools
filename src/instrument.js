@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
   RESET: 'RESET',
