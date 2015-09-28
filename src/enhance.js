@@ -1,4 +1,4 @@
-import { combineReducers, compose } from 'redux';
+import { combineReducers } from 'redux';
 
 const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',

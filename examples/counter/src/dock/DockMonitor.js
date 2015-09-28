@@ -4,8 +4,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import Dock from 'react-dock';
-import { connect } from 'react-redux';
-import { combineReducers, bindActionCreators } from 'redux';
+import { combineReducers } from 'redux';
 
 const POSITIONS = ['left', 'top', 'right', 'bottom'];
 
@@ -14,7 +13,7 @@ class DockMonitor extends Component {
     monitorState: PropTypes.shape({
       position: PropTypes.oneOf(POSITIONS).isRequired,
       isVisible: PropTypes.bool.isRequired,
-      childState: PropTypes.any
+      child: PropTypes.any
     }).isRequired,
 
     monitorActions: PropTypes.shape({
@@ -75,7 +74,7 @@ function changePosition() {
   return { type: CHANGE_POSITION };
 }
 
-export default function create(ChildMonitor, {
+export default function create(child, {
   defaultIsVisible = true,
   defaultPosition = 'right'
 } = {}) {
@@ -91,37 +90,27 @@ export default function create(ChildMonitor, {
       state;
   }
 
-  function getChildStore(store) {
-    return {
-      ...store,
-      getState() {
-        const state = store.getState();
-        return {
-          ...state,
-          monitorState: state.monitorState.childState
-        };
-      }
-    };
-  }
-
-  const Monitor = connect(
-    state => state,
-    dispatch => ({
-      monitorActions: bindActionCreators({ toggleVisibility, changePosition }, dispatch)
-    })
-  )(DockMonitor);
-
-  const CompositeMonitor = ({ store }) => (
-    <Monitor store={store}>
-      <ChildMonitor store={getChildStore(store)} />
-    </Monitor>
+  const ChildMonitor = child.component;
+  const CompositeMonitor = ({ monitorState, monitorActions, ...rest }) => (
+    <DockMonitor monitorState={monitorState}
+                 monitorActions={monitorActions}>
+      <ChildMonitor {...rest}
+                    monitorState={monitorState.child}
+                    monitorActions={monitorActions.child} />
+    </DockMonitor>
   );
 
-  CompositeMonitor.reducer = combineReducers({
-    childState: ChildMonitor.reducer,
-    position,
-    isVisible
-  });
-
-  return CompositeMonitor;
+  return {
+    component: CompositeMonitor,
+    reducer: combineReducers({
+      position,
+      isVisible,
+      child: child.reducer
+    }),
+    actionCreators: {
+      toggleVisibility,
+      changePosition,
+      child: child.actionCreators
+    }
+  };
 }
