@@ -6,7 +6,7 @@ import DevTools from '../containers/DevTools';
 
 const finalCreateStore = compose(
   applyMiddleware(thunk),
-  DevTools.enhance,
+  DevTools.instrument(),
   persistState(
     window.location.href.match(
       /[?&]debug_session=([^&]+)\b/

@@ -1,6 +1,5 @@
 import expect from 'expect';
-import devTools from '../src/devTools';
-import persistState from '../src/persistState';
+import { instrument, persistState } from '../src';
 import { compose, createStore } from 'redux';
 
 describe('persistState', () => {
@@ -40,7 +39,7 @@ describe('persistState', () => {
   };
 
   it('should persist state', () => {
-    const finalCreateStore = compose(devTools(), persistState('id'))(createStore);
+    const finalCreateStore = compose(instrument(), persistState('id'))(createStore);
     const store = finalCreateStore(reducer);
     expect(store.getState()).toBe(0);
 
@@ -53,7 +52,7 @@ describe('persistState', () => {
   });
 
   it('should not persist state if no session id', () => {
-    const finalCreateStore = compose(devTools(), persistState())(createStore);
+    const finalCreateStore = compose(instrument(), persistState())(createStore);
     const store = finalCreateStore(reducer);
     expect(store.getState()).toBe(0);
 
@@ -67,7 +66,7 @@ describe('persistState', () => {
 
   it('should run with a custom state deserializer', () => {
     const oneLess = state => state === undefined ? -1 : state - 1;
-    const finalCreateStore = compose(devTools(), persistState('id', oneLess))(createStore);
+    const finalCreateStore = compose(instrument(), persistState('id', oneLess))(createStore);
     const store = finalCreateStore(reducer);
     expect(store.getState()).toBe(0);
 
@@ -81,7 +80,7 @@ describe('persistState', () => {
 
   it('should run with a custom action deserializer', () => {
     const incToDec = action => action.type === 'INCREMENT' ? { type: 'DECREMENT' } : action;
-    const finalCreateStore = compose(devTools(), persistState('id', null, incToDec))(createStore);
+    const finalCreateStore = compose(instrument(), persistState('id', undefined, incToDec))(createStore);
     const store = finalCreateStore(reducer);
     expect(store.getState()).toBe(0);
 
@@ -95,7 +94,7 @@ describe('persistState', () => {
 
   it('should warn if read from localStorage fails', () => {
     const spy = expect.spyOn(console, 'warn');
-    const finalCreateStore = compose(devTools(), persistState('id'))(createStore);
+    const finalCreateStore = compose(instrument(), persistState('id'))(createStore);
     delete global.localStorage.getItem;
     finalCreateStore(reducer);
 
@@ -108,7 +107,7 @@ describe('persistState', () => {
   });
   it('should warn if write to localStorage fails', () => {
     const spy = expect.spyOn(console, 'warn');
-    const finalCreateStore = compose(devTools(), persistState('id'))(createStore);
+    const finalCreateStore = compose(instrument(), persistState('id'))(createStore);
     delete global.localStorage.setItem;
     const store = finalCreateStore(reducer);
 

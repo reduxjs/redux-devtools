@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const ActionTypes = {
+export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
   RESET: 'RESET',
   ROLLBACK: 'ROLLBACK',
@@ -10,9 +10,40 @@ const ActionTypes = {
   JUMP_TO_STATE: 'JUMP_TO_STATE'
 };
 
-const INIT_ACTION = {
-  type: '@@INIT'
+/**
+ * Action creators to change the History state.
+ */
+export const ActionCreators = {
+  performAction(action) {
+    return { type: ActionTypes.PERFORM_ACTION, action, timestamp: Date.now() };
+  },
+
+  reset() {
+    return { type: ActionTypes.RESET, timestamp: Date.now() };
+  },
+
+  rollback() {
+    return { type: ActionTypes.ROLLBACK, timestamp: Date.now() };
+  },
+
+  commit() {
+    return { type: ActionTypes.COMMIT, timestamp: Date.now() };
+  },
+
+  sweep() {
+    return { type: ActionTypes.SWEEP };
+  },
+
+  toggleAction(index) {
+    return { type: ActionTypes.TOGGLE_ACTION, index };
+  },
+
+  jumpToState(index) {
+    return { type: ActionTypes.JUMP_TO_STATE, index };
+  }
 };
+
+const INIT_ACTION = { type: '@@INIT' };
 
 function toggle(obj, key) {
   const clone = { ...obj };
@@ -52,8 +83,6 @@ function computeNextEntry(reducer, action, state, error) {
 
 /**
  * Runs the reducer on all actions to get a fresh computation log.
- * It's probably a good idea to do this only if the code has changed,
- * but until we have some tests we'll just do it every time an action fires.
  */
 function recomputeStates(reducer, committedState, stagedActions, skippedActions) {
   const computedStates = [];
@@ -77,10 +106,10 @@ function recomputeStates(reducer, committedState, stagedActions, skippedActions)
 }
 
 /**
- * Lifts the app state reducer into a DevTools state reducer.
+ * Creates a history state reducer from an app's reducer.
  */
-function createDevToolsStateReducer(reducer, initialCommittedState) {
-  const initialState = {
+function createHistoryReducer(reducer, initialCommittedState) {
+  const initialHistoryState = {
     committedState: initialCommittedState,
     stagedActions: [INIT_ACTION],
     skippedActions: {},
@@ -89,9 +118,9 @@ function createDevToolsStateReducer(reducer, initialCommittedState) {
   };
 
   /**
-   * Manages how the DevTools actions modify the DevTools state.
+   * Manages how the history actions modify the history state.
    */
-  return function devToolsState(state = initialState, action) {
+  return (historyState = initialHistoryState, historyAction) => {
     let shouldRecomputeStates = true;
     let {
       committedState,
@@ -100,34 +129,34 @@ function createDevToolsStateReducer(reducer, initialCommittedState) {
       computedStates,
       currentStateIndex,
       timestamps
-    } = state;
+    } = historyState;
 
-    switch (action.type) {
+    switch (historyAction.type) {
     case ActionTypes.RESET:
-      committedState = initialState;
+      committedState = initialCommittedState;
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [action.timestamp];
+      timestamps = [historyAction.timestamp];
       break;
     case ActionTypes.COMMIT:
       committedState = computedStates[currentStateIndex].state;
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [action.timestamp];
+      timestamps = [historyAction.timestamp];
       break;
     case ActionTypes.ROLLBACK:
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [action.timestamp];
+      timestamps = [historyAction.timestamp];
       break;
     case ActionTypes.TOGGLE_ACTION:
-      skippedActions = toggle(skippedActions, action.index);
+      skippedActions = toggle(skippedActions, historyAction.index);
       break;
     case ActionTypes.JUMP_TO_STATE:
-      currentStateIndex = action.index;
+      currentStateIndex = historyAction.index;
       // Optimization: we know the history has not changed.
       shouldRecomputeStates = false;
       break;
@@ -142,8 +171,8 @@ function createDevToolsStateReducer(reducer, initialCommittedState) {
         currentStateIndex++;
       }
 
-      stagedActions = [...stagedActions, action.action];
-      timestamps = [...timestamps, action.timestamp];
+      stagedActions = [...stagedActions, historyAction.action];
+      timestamps = [...timestamps, historyAction.timestamp];
 
       // Optimization: we know that the past has not changed.
       shouldRecomputeStates = false;
@@ -151,7 +180,7 @@ function createDevToolsStateReducer(reducer, initialCommittedState) {
       const previousEntry = computedStates[computedStates.length - 1];
       const nextEntry = computeNextEntry(
         reducer,
-        action.action,
+        historyAction.action,
         previousEntry.state,
         previousEntry.error
       );
@@ -182,44 +211,32 @@ function createDevToolsStateReducer(reducer, initialCommittedState) {
 }
 
 /**
- * Lifts an app action to a DevTools action.
+ * Provides a view into the History state that matches the current app state.
  */
-function liftAction(action) {
-  const liftedAction = {
-    type: ActionTypes.PERFORM_ACTION,
-    action,
-    timestamp: Date.now()
-  };
-  return liftedAction;
-}
-
-/**
- * Unlifts the DevTools state to the app state.
- */
-function unliftState(liftedState) {
-  const { computedStates, currentStateIndex } = liftedState.devToolsState;
+function selectAppState(instrumentedState) {
+  const { computedStates, currentStateIndex } = instrumentedState.historyState;
   const { state } = computedStates[currentStateIndex];
   return state;
 }
 
 /**
- * Unlifts the DevTools store to act like the app's store.
+ * Deinstruments the History store to act like the app's store.
  */
-function mapToComputedStateStore(devToolsStore, wrapReducer) {
+function selectAppStore(instrumentedStore, instrumentReducer) {
   let lastDefinedState;
 
   return {
-    ...devToolsStore,
+    ...instrumentedStore,
 
-    devToolsStore,
+    instrumentedStore,
 
     dispatch(action) {
-      devToolsStore.dispatch(liftAction(action));
+      instrumentedStore.dispatch(ActionCreators.performAction(action));
       return action;
     },
 
     getState() {
-      const state = unliftState(devToolsStore.getState());
+      const state = selectAppState(instrumentedStore.getState());
       if (state !== undefined) {
         lastDefinedState = state;
       }
@@ -227,51 +244,25 @@ function mapToComputedStateStore(devToolsStore, wrapReducer) {
     },
 
     replaceReducer(nextReducer) {
-      devToolsStore.replaceReducer(wrapReducer(nextReducer));
+      instrumentedStore.replaceReducer(instrumentReducer(nextReducer));
     }
   };
 }
 
 /**
- * Action creators to change the DevTools state.
+ * Redux History store enhancer.
  */
-export const ActionCreators = {
-  reset() {
-    return { type: ActionTypes.RESET, timestamp: Date.now() };
-  },
+export default function instrument(monitorReducer = () => null) {
+  return createStore => (reducer, initialState) => {
+    function instrumentReducer(r) {
+      const historyReducer = createHistoryReducer(r, initialState);
+      return ({ historyState, monitorState } = {}, action) => ({
+        historyState: historyReducer(historyState, action),
+        monitorState: monitorReducer(monitorState, action)
+      });
+    }
 
-  rollback() {
-    return { type: ActionTypes.ROLLBACK, timestamp: Date.now() };
-  },
-
-  commit() {
-    return { type: ActionTypes.COMMIT, timestamp: Date.now() };
-  },
-
-  sweep() {
-    return { type: ActionTypes.SWEEP };
-  },
-
-  toggleAction(index) {
-    return { type: ActionTypes.TOGGLE_ACTION, index };
-  },
-
-  jumpToState(index) {
-    return { type: ActionTypes.JUMP_TO_STATE, index };
-  }
-};
-
-/**
- * Redux DevTools store enhancer.
- */
-export default function enhance(monitorReducer = () => null) {
-  return next => (reducer, initialState) => {
-    const wrapReducer = (r) => combineReducers({
-      devToolsState: createDevToolsStateReducer(r, initialState),
-      monitorState: monitorReducer
-    });
-
-    const devToolsStore = next(wrapReducer(reducer));
-    return mapToComputedStateStore(devToolsStore, wrapReducer);
+    const instrumentedStore = createStore(instrumentReducer(reducer));
+    return selectAppStore(instrumentedStore, instrumentReducer);
   };
 }

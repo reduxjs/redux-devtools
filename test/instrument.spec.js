@@ -1,6 +1,6 @@
 import expect, { spyOn } from 'expect';
 import { createStore } from 'redux';
-import devTools, { ActionCreators } from '../src/devTools';
+import instrument, { ActionCreators } from '../src/instrument';
 
 function counter(state = 0, action) {
   switch (action.type) {
@@ -27,13 +27,13 @@ function doubleCounter(state = 0, action) {
   }
 }
 
-describe('devTools', () => {
+describe('instrument', () => {
   let store;
-  let devToolsStore;
+  let instrumentedStore;
 
   beforeEach(() => {
-    store = devTools()(createStore)(counter);
-    devToolsStore = store.devToolsStore;
+    store = instrument()(createStore)(counter);
+    instrumentedStore = store.instrumentedStore;
   });
 
   it('should perform actions', () => {
@@ -49,20 +49,20 @@ describe('devTools', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    devToolsStore.dispatch(ActionCreators.commit());
+    instrumentedStore.dispatch(ActionCreators.commit());
     expect(store.getState()).toBe(2);
 
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(4);
 
-    devToolsStore.dispatch(ActionCreators.rollback());
+    instrumentedStore.dispatch(ActionCreators.rollback());
     expect(store.getState()).toBe(2);
 
     store.dispatch({ type: 'DECREMENT' });
     expect(store.getState()).toBe(1);
 
-    devToolsStore.dispatch(ActionCreators.rollback());
+    instrumentedStore.dispatch(ActionCreators.rollback());
     expect(store.getState()).toBe(2);
   });
 
@@ -70,19 +70,19 @@ describe('devTools', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
 
-    devToolsStore.dispatch(ActionCreators.commit());
+    instrumentedStore.dispatch(ActionCreators.commit());
     expect(store.getState()).toBe(1);
 
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    devToolsStore.dispatch(ActionCreators.rollback());
+    instrumentedStore.dispatch(ActionCreators.rollback());
     expect(store.getState()).toBe(1);
 
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    devToolsStore.dispatch(ActionCreators.reset());
+    instrumentedStore.dispatch(ActionCreators.reset());
     expect(store.getState()).toBe(0);
   });
 
@@ -93,10 +93,10 @@ describe('devTools', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
 
-    devToolsStore.dispatch(ActionCreators.toggleAction(2));
+    instrumentedStore.dispatch(ActionCreators.toggleAction(2));
     expect(store.getState()).toBe(2);
 
-    devToolsStore.dispatch(ActionCreators.toggleAction(2));
+    instrumentedStore.dispatch(ActionCreators.toggleAction(2));
     expect(store.getState()).toBe(1);
   });
 
@@ -108,16 +108,16 @@ describe('devTools', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    devToolsStore.dispatch(ActionCreators.toggleAction(2));
+    instrumentedStore.dispatch(ActionCreators.toggleAction(2));
     expect(store.getState()).toBe(3);
 
-    devToolsStore.dispatch(ActionCreators.sweep());
+    instrumentedStore.dispatch(ActionCreators.sweep());
     expect(store.getState()).toBe(3);
 
-    devToolsStore.dispatch(ActionCreators.toggleAction(2));
+    instrumentedStore.dispatch(ActionCreators.toggleAction(2));
     expect(store.getState()).toBe(2);
 
-    devToolsStore.dispatch(ActionCreators.sweep());
+    instrumentedStore.dispatch(ActionCreators.sweep());
     expect(store.getState()).toBe(2);
   });
 
@@ -127,19 +127,19 @@ describe('devTools', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
 
-    devToolsStore.dispatch(ActionCreators.jumpToState(0));
+    instrumentedStore.dispatch(ActionCreators.jumpToState(0));
     expect(store.getState()).toBe(0);
 
-    devToolsStore.dispatch(ActionCreators.jumpToState(1));
+    instrumentedStore.dispatch(ActionCreators.jumpToState(1));
     expect(store.getState()).toBe(1);
 
-    devToolsStore.dispatch(ActionCreators.jumpToState(2));
+    instrumentedStore.dispatch(ActionCreators.jumpToState(2));
     expect(store.getState()).toBe(0);
 
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(0);
 
-    devToolsStore.dispatch(ActionCreators.jumpToState(4));
+    instrumentedStore.dispatch(ActionCreators.jumpToState(4));
     expect(store.getState()).toBe(2);
   });
 
@@ -155,17 +155,17 @@ describe('devTools', () => {
 
   it('should catch and record errors', () => {
     let spy = spyOn(console, 'error');
-    let storeWithBug = devTools()(createStore)(counterWithBug);
+    let storeWithBug = instrument()(createStore)(counterWithBug);
 
     storeWithBug.dispatch({ type: 'INCREMENT' });
     storeWithBug.dispatch({ type: 'DECREMENT' });
     storeWithBug.dispatch({ type: 'INCREMENT' });
 
-    let devStoreState = storeWithBug.devToolsStore.getState();
-    expect(devStoreState.computedStates[2].error).toMatch(
+    let historyState = storeWithBug.instrumentedStore.getState().historyState;
+    expect(historyState.computedStates[2].error).toMatch(
       /ReferenceError/
     );
-    expect(devStoreState.computedStates[3].error).toMatch(
+    expect(historyState.computedStates[3].error).toMatch(
       /Interrupted by an error up the chain/
     );
     expect(spy.calls[0].arguments[0]).toMatch(
@@ -176,7 +176,7 @@ describe('devTools', () => {
   });
 
   it('should return the last non-undefined state from getState', () => {
-    let storeWithBug = devTools()(createStore)(counterWithBug);
+    let storeWithBug = instrument()(createStore)(counterWithBug);
     storeWithBug.dispatch({ type: 'INCREMENT' });
     storeWithBug.dispatch({ type: 'INCREMENT' });
     expect(storeWithBug.getState()).toBe(2);
@@ -187,7 +187,7 @@ describe('devTools', () => {
 
   it('should not recompute states on every action', () => {
     let reducerCalls = 0;
-    let monitoredStore = devTools()(createStore)(() => reducerCalls++);
+    let monitoredStore = instrument()(createStore)(() => reducerCalls++);
     expect(reducerCalls).toBe(1);
     monitoredStore.dispatch({ type: 'INCREMENT' });
     monitoredStore.dispatch({ type: 'INCREMENT' });
@@ -197,8 +197,8 @@ describe('devTools', () => {
 
   it('should not recompute states when jumping to state', () => {
     let reducerCalls = 0;
-    let monitoredStore = devTools()(createStore)(() => reducerCalls++);
-    let monitoredDevToolsStore = monitoredStore.devToolsStore;
+    let monitoredStore = instrument()(createStore)(() => reducerCalls++);
+    let monitoredInstrumentedStore = monitoredStore.instrumentedStore;
 
     expect(reducerCalls).toBe(1);
     monitoredStore.dispatch({ type: 'INCREMENT' });
@@ -206,13 +206,13 @@ describe('devTools', () => {
     monitoredStore.dispatch({ type: 'INCREMENT' });
     expect(reducerCalls).toBe(4);
 
-    monitoredDevToolsStore.dispatch(ActionCreators.jumpToState(0));
+    monitoredInstrumentedStore.dispatch(ActionCreators.jumpToState(0));
     expect(reducerCalls).toBe(4);
 
-    monitoredDevToolsStore.dispatch(ActionCreators.jumpToState(1));
+    monitoredInstrumentedStore.dispatch(ActionCreators.jumpToState(1));
     expect(reducerCalls).toBe(4);
 
-    monitoredDevToolsStore.dispatch(ActionCreators.jumpToState(3));
+    monitoredInstrumentedStore.dispatch(ActionCreators.jumpToState(3));
     expect(reducerCalls).toBe(4);
   });
 });

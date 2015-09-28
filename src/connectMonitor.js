@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
-import bindActionCreatorsRecursively from './bindActionCreatorsRecursively';
+import bindActionCreatorsDeep from './bindActionCreatorsDeep';
 import { connect } from 'react-redux';
-import { ActionCreators as devToolsActionCreators } from './enhance';
+import { ActionCreators as historyActionCreators } from './instrument';
 
 export default function connectMonitor({
   component,
@@ -10,15 +10,15 @@ export default function connectMonitor({
 }) {
   function mapStateToProps(state) {
     return {
-      devToolsState: state.devToolsState,
+      historyState: state.historyState,
       monitorState: state.monitorState
     };
   }
 
   function mapDispatchToProps(dispatch) {
     return {
-      devToolsActions: bindActionCreators(devToolsActionCreators, dispatch),
-      monitorActions: bindActionCreatorsRecursively(actionCreators, dispatch)
+      historyActions: bindActionCreators(historyActionCreators, dispatch),
+      monitorActions: bindActionCreatorsDeep(actionCreators, dispatch)
     };
   }
 
