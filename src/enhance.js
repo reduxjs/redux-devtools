@@ -264,18 +264,11 @@ export const ActionCreators = {
 /**
  * Redux DevTools store enhancer.
  */
-export default function devTools(
-  monitorReducer = () => null,
-  ...monitorReducerWrappers
-) {
+export default function enhance(monitorReducer = () => null) {
   return next => (reducer, initialState) => {
-    const finalMonitorReducer = compose(
-      ...monitorReducerWrappers.slice().reverse()
-    )(monitorReducer);
-
     const wrapReducer = (r) => combineReducers({
       devToolsState: createDevToolsStateReducer(r, initialState),
-      monitorState: finalMonitorReducer
+      monitorState: monitorReducer
     });
 
     const devToolsStore = next(wrapReducer(reducer));
