@@ -1,9 +1,10 @@
+import React from 'react';
 import { createDevTools } from 'redux-devtools';
-import createLogMonitor from 'redux-devtools-log-monitor';
-import createDockMonitor from '../dock/DockMonitor';
+import LogMonitor from 'redux-devtools-log-monitor';
+import DockMonitor from '../dock/DockMonitor';
 
 export default createDevTools(
-  createDockMonitor(
-    createLogMonitor()
-  )
+  <DockMonitor defaultPosition='bottom'>
+    <LogMonitor theme='ocean' />
+  </DockMonitor>
 );
