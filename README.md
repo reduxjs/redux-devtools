@@ -29,7 +29,7 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 npm install --save-dev redux-devtools
 ```
 
-DevTools is a [store enhancer](http://rackt.github.io/redux/docs/Glossary.html#store-enhancer), which should be added to your middleware stack *after* [`applyMiddleware`](http://rackt.github.io/redux/docs/api/applyMiddleware.html) as `applyMiddleware` is potentially asynchronous. Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
+DevTools is a [store enhancer](http://rackt.github.io/redux/docs/Glossary.html#store-enhancer), which should be added to your middleware stack *before* [`applyMiddleware`](http://rackt.github.io/redux/docs/api/applyMiddleware.html) as `applyMiddleware` is potentially asynchronous. Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
 
 To install, firstly import `devTools` into your root React component:
 
@@ -56,6 +56,8 @@ const finalCreateStore = compose(
 
 const store = finalCreateStore(reducer);
 ```
+
+Note in the code above, the call to `devTools` appears *after* `applyMiddleware` because the `compose` utility composes the function arguments from right to left. So in effect, `applyMiddleware` will be called last.
 
 Finally, include the `DevTools` in your page. You may pass either `LogMonitor` (the default one) or any of the custom monitors described below. For convenience, you can use `DebugPanel` to dock `DevTools` to some part of the screen, but you can put it also somewhere else in the component tree.
 
