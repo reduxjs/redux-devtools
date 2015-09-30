@@ -29,7 +29,7 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 npm install --save-dev redux-devtools
 ```
 
-DevTools is a [store enhancer](http://rackt.github.io/redux/docs/Glossary.html#store-enhancer), which should be added to your middleware stack *after* [`applyMiddleware`](http://rackt.github.io/redux/docs/api/applyMiddleware.html) as `applyMiddleware` is potentially asynchronous. Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
+DevTools is a [store enhancer](http://rackt.github.io/redux/docs/Glossary.html#store-enhancer), which should be added to your middleware stack *after* [`applyMiddleware`](http://rackt.github.io/redux/docs/api/applyMiddleware.html) in the `compose`d functions, as `applyMiddleware` is potentially asynchronous. Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
 
 To install, firstly import `devTools` into your root React component:
 
