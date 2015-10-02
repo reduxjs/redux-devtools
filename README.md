@@ -16,7 +16,7 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 
 * Lets you inspect every state and action payload
 * Lets you go back in time by “cancelling” actions
-* If you change the reducer code, each “staged” action will be re-evaluted
+* If you change the reducer code, each “staged” action will be re-evaluated
 * If the reducers throw, you will see during which action this happened, and what the error was
 * With `persistState()` store enhancer, you can persist debug sessions across page reloads
 * To monitor a part of the state, you can set a `select` prop on the DevTools component: `<DevTools select={state => state.todos} store={store} monitor={LogMonitor} />`
