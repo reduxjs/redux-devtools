@@ -1,9 +1,8 @@
-import createAll from 'react-redux/lib/components/createAll';
+import { connect } from 'react-redux';
 import { ActionCreators } from './devTools';
 
 export default function createDevTools(React) {
   const { PropTypes, Component } = React;
-  const { connect } = createAll(React);
 
   @connect(
     state => state,
