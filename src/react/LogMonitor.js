@@ -38,6 +38,7 @@ export default class LogMonitor extends Component {
     if (typeof window !== 'undefined') {
       window.addEventListener('keydown', ::this.handleKeyPress);
     }
+    this.handleToggleAction = this.handleToggleAction.bind(this);
   }
 
   static propTypes = {
@@ -173,7 +174,7 @@ export default class LogMonitor extends Component {
                          previousState={previousState}
                          collapsed={skippedActions[i]}
                          error={error}
-                         onActionClick={::this.handleToggleAction} />
+                         onActionClick={this.handleToggleAction} />
       );
     }
 
