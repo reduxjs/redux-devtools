@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import ReactDOM, { findDOMNode } from "react-dom";
+import ReactDOM, { findDOMNode } from 'react-dom';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
 import * as themes from './themes';
