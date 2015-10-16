@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import JSONTree from 'react-json-tree';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
+import shallowEqual from '../utils/shallowEqual';
 
 const styles = {
   entry: {
@@ -22,6 +23,10 @@ export default class LogMonitorEntry extends Component {
     onActionClick: PropTypes.func.isRequired,
     collapsed: PropTypes.bool
   };
+
+  shouldComponentUpdate(nextProps) {
+    return !shallowEqual(this.props, nextProps);
+  }
 
   printState(state, error) {
     let errorText = error;
