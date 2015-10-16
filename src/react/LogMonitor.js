@@ -1,4 +1,4 @@
-import React, { PropTypes,  Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
