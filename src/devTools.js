@@ -3,6 +3,7 @@ const ActionTypes = {
   RESET: 'RESET',
   ROLLBACK: 'ROLLBACK',
   COMMIT: 'COMMIT',
+  IMPORT_STATE: 'IMPORT_STATE',
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
   JUMP_TO_STATE: 'JUMP_TO_STATE',
@@ -120,6 +121,16 @@ function liftReducer(reducer, initialState) {
       skippedActions = {};
       currentStateIndex = 0;
       timestamps = [liftedAction.timestamp];
+      break;
+    case ActionTypes.IMPORT_STATE:
+      ({
+        stagedActions,
+        skippedActions,
+        computedStates,
+        currentStateIndex,
+        monitorState,
+        timestamps
+      } = liftedAction.nextLiftedState);
       break;
     case ActionTypes.ROLLBACK:
       stagedActions = [INIT_ACTION];
@@ -257,6 +268,9 @@ export const ActionCreators = {
   },
   commit() {
     return { type: ActionTypes.COMMIT, timestamp: Date.now() };
+  },
+  importState(nextLiftedState) {
+    return { type: ActionTypes.IMPORT_STATE, nextLiftedState };
   },
   sweep() {
     return { type: ActionTypes.SWEEP };

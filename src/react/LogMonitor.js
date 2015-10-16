@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { PropTypes, findDOMNode, Component } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
@@ -118,6 +119,21 @@ export default class LogMonitor extends Component {
     this.props.commit();
   }
 
+  handleExport() {
+    window.prompt('Current state\'s schema', JSON.stringify(this.props.store.getState()));
+  }
+
+  handleImport() {
+    try {
+      let nextLiftedState = window.prompt('Please paste a valid action log');
+      if (nextLiftedState) {
+        this.props.importState(JSON.parse(nextLiftedState));
+      }
+    } catch (err) {
+      console.warn('There was an error parsing the new state. Please enter a valid schema.');
+    }
+  }
+
   handleToggleAction(index) {
     this.props.toggleAction(index);
   }
@@ -184,6 +200,8 @@ export default class LogMonitor extends Component {
           <LogMonitorButton theme={theme} onClick={::this.handleRollback} enabled={computedStates.length}>Revert</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleSweep} enabled={Object.keys(skippedActions).some(key => skippedActions[key])}>Sweep</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleCommit} enabled={computedStates.length > 1}>Commit</LogMonitorButton>
+          <LogMonitorButton theme={theme} onClick={::this.handleImport} enabled={true}>Import</LogMonitorButton>
+          <LogMonitorButton theme={theme} onClick={::this.handleExport} enabled={computedStates.length}>Export</LogMonitorButton>
         </div>
         <div style={styles.elements} ref="elements">
           {elements}
@@ -192,3 +210,4 @@ export default class LogMonitor extends Component {
     );
   }
 }
+/* eslint-enable no-alert */

@@ -243,4 +243,42 @@ describe('devTools', () => {
     monitoredDevToolsStore.dispatch(ActionCreators.jumpToState(3));
     expect(reducerCalls).toBe(4);
   });
+
+  describe('Import State', () => {
+    let monitoredStore;
+    let monitoredDevToolsStore;
+    let exportedState;
+
+    beforeEach(() => {
+      monitoredStore = devTools()(createStore)(counter);
+      monitoredDevToolsStore = monitoredStore.devToolsStore;
+      // Set up state to export
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+
+      exportedState = monitoredDevToolsStore.getState();
+    });
+
+    it('should replay all the steps when a state is imported', () => {
+      let importMonitoredStore = devTools()(createStore)(counter);
+      let importMonitoredDevToolsStore = importMonitoredStore.devToolsStore;
+      // Import exported state
+      importMonitoredDevToolsStore.dispatch(ActionCreators.importState(exportedState));
+      expect(importMonitoredDevToolsStore.getState()).toEqual(exportedState);
+    });
+
+    it('should replace the existing action log with the one imported', () => {
+      let importMonitoredStore = devTools()(createStore)(counter);
+      let importMonitoredDevToolsStore = importMonitoredStore.devToolsStore;
+
+      importMonitoredStore.dispatch({ type: 'DECREMENT' });
+      importMonitoredStore.dispatch({ type: 'DECREMENT' });
+
+      // Import exported state
+      importMonitoredDevToolsStore.dispatch(ActionCreators.importState(exportedState));
+
+      expect(importMonitoredDevToolsStore.getState()).toEqual(exportedState);
+    });
+  });
 });
