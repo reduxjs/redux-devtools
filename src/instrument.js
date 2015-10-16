@@ -5,7 +5,8 @@ export const ActionTypes = {
   COMMIT: 'COMMIT',
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
-  JUMP_TO_STATE: 'JUMP_TO_STATE'
+  JUMP_TO_STATE: 'JUMP_TO_STATE',
+  IMPORT_STATE: 'IMPORT_STATE'
 };
 
 /**
@@ -38,6 +39,10 @@ export const ActionCreators = {
 
   jumpToState(index) {
     return { type: ActionTypes.JUMP_TO_STATE, index };
+  },
+
+  importState(nextLiftedState) {
+    return { type: ActionTypes.IMPORT_STATE, nextLiftedState };
   }
 };
 
@@ -186,6 +191,16 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
       );
       computedStates = [...computedStates, nextEntry];
       break;
+    case ActionTypes.IMPORT_STATE:
+      ({
+        stagedActions,
+        skippedActions,
+        computedStates,
+        currentStateIndex,
+        timestamps,
+        monitorState
+      } = liftedAction.nextLiftedState);
+      break;
     case '@@redux/INIT':
       // Always recompute states on hot reload and init.
       shouldRecomputeStates = true;
@@ -266,7 +281,7 @@ function unliftStore(liftedStore, liftReducer) {
 }
 
 /**
- * Redux History store enhancer.
+ * Redux instrumentation store enhancer.
  */
 export default function instrument(monitorReducer = () => null) {
   return createStore => (reducer, initialState) => {

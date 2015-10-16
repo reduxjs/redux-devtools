@@ -215,4 +215,40 @@ describe('instrument', () => {
     monitoredInstrumentedStore.dispatch(ActionCreators.jumpToState(3));
     expect(reducerCalls).toBe(4);
   });
+
+  describe('Import State', () => {
+    let monitoredStore;
+    let monitoredLiftedStore;
+    let exportedState;
+
+    beforeEach(() => {
+      monitoredStore = instrument()(createStore)(counter);
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      // Set up state to export
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+
+      exportedState = monitoredLiftedStore.getState();
+    });
+
+    it('should replay all the steps when a state is imported', () => {
+      let importMonitoredStore = instrument()(createStore)(counter);
+      let importMonitoredLiftedStore = importMonitoredStore.liftedStore;
+      // Import exported state
+      importMonitoredLiftedStore.dispatch(ActionCreators.importState(exportedState));
+      expect(importMonitoredLiftedStore.getState()).toEqual(exportedState);
+    });
+
+    it('should replace the existing action log with the one imported', () => {
+      let importMonitoredStore = instrument()(createStore)(counter);
+      let importMonitoredLiftedStore = importMonitoredStore.liftedStore;
+
+      importMonitoredStore.dispatch({ type: 'DECREMENT' });
+      importMonitoredStore.dispatch({ type: 'DECREMENT' });
+
+      importMonitoredLiftedStore.dispatch(ActionCreators.importState(exportedState));
+      expect(importMonitoredLiftedStore.getState()).toEqual(exportedState);
+    });
+  });
 });
