@@ -1,3 +1,8 @@
+>### React 0.14 Support
+>React 0.14 support is coming, but it’s not ready yet.  
+>Please wait until next week to get it.
+
+
 Redux DevTools
 =========================
 
