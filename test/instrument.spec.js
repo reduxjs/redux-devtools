@@ -235,7 +235,7 @@ describe('instrument', () => {
     it('should replay all the steps when a state is imported', () => {
       let importMonitoredStore = instrument()(createStore)(counter);
       let importMonitoredLiftedStore = importMonitoredStore.liftedStore;
-      // Import exported state
+
       importMonitoredLiftedStore.dispatch(ActionCreators.importState(exportedState));
       expect(importMonitoredLiftedStore.getState()).toEqual(exportedState);
     });
