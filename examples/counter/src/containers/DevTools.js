@@ -4,7 +4,7 @@ import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from '../dock/DockMonitor';
 
 export default createDevTools(
-  <DockMonitor defaultPosition='bottom'>
+  <DockMonitor>
     <LogMonitor theme='ocean' />
   </DockMonitor>
 );

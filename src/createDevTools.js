@@ -1,39 +1,30 @@
 import React, { Children, Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import bindActionCreatorsDeep from './bindActionCreatorsDeep';
-import instrument, { ActionCreators as historyActionCreators } from './instrument';
+import instrument from './instrument';
 
 export default function createDevTools(children) {
-  const child = Children.only(children);
-  const { type: Monitor } = child;
-  const { reducer, actionCreators } = Monitor.setup(child.props);
+  const monitorElement = Children.only(children);
+  const monitorProps = monitorElement.props;
+  const Monitor = monitorElement.type;
+
+  const enhancer = instrument((state, action) =>
+    Monitor.reducer(state, action, monitorProps)
+  );
 
   function mapStateToProps(state) {
     return {
-      historyState: state.historyState,
+      ...state.historyState,
       monitorState: state.monitorState
     };
   }
-
-  function mapDispatchToProps(dispatch) {
-    return {
-      historyActions: bindActionCreators(historyActionCreators, dispatch),
-      monitorActions: bindActionCreatorsDeep(actionCreators, dispatch)
-    };
-  }
-
-  const ConnectedMonitor = connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Monitor);
+  const ConnectedMonitor = connect(mapStateToProps)(Monitor);
 
   return class DevTools extends Component {
     static contextTypes = {
       store: PropTypes.object.isRequired
     };
 
-    static instrument = () => instrument(reducer);
+    static instrument = () => enhancer;
 
     constructor(props, context) {
       super(props, context);
@@ -42,7 +33,7 @@ export default function createDevTools(children) {
 
     render() {
       return (
-        <ConnectedMonitor {...child.props}
+        <ConnectedMonitor {...monitorProps}
                           store={this.instrumentedStore} />
       );
     }

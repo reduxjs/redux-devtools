@@ -1,41 +1,44 @@
-//
-// TODO: extract to a separate project.
-//
-
-import React, { cloneElement, Children, Component, PropTypes } from 'react';
+import React, { cloneElement, Component, PropTypes } from 'react';
 import Dock from 'react-dock';
-import { combineReducers } from 'redux';
-
-const POSITIONS = ['left', 'top', 'right', 'bottom'];
+import { POSITIONS } from './constants';
+import { toggleVisibility, changePosition, changeSize } from './actions';
+import reducer from './reducers';
 
 export default class DockMonitor extends Component {
+  static reducer = reducer;
+
   static propTypes = {
     defaultPosition: PropTypes.oneOf(POSITIONS).isRequired,
     defaultIsVisible: PropTypes.bool.isRequired,
+    defaultSize: PropTypes.number.isRequired,
     toggleVisibilityShortcut: PropTypes.string.isRequired,
     changePositionShortcut: PropTypes.string.isRequired,
+    children: PropTypes.element,
 
+    dispatch: PropTypes.func,
     monitorState: PropTypes.shape({
       position: PropTypes.oneOf(POSITIONS).isRequired,
+      size: PropTypes.number.isRequired,
       isVisible: PropTypes.bool.isRequired,
-      child: PropTypes.any
-    }),
-
-    monitorActions: PropTypes.shape({
-      toggleVisibility: PropTypes.func.isRequired,
-      changePosition: PropTypes.func.isRequired
+      childMonitorState: PropTypes.any
     })
   };
 
   static defaultProps = {
     defaultIsVisible: true,
     defaultPosition: 'right',
+    defaultSize: 0.3,
     toggleVisibilityShortcut: 'H',
     changePositionShortcut: 'Q'
   };
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleSizeChange = this.handleSizeChange.bind(this);
+  }
+
+  componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   }
 
@@ -53,81 +56,36 @@ export default class DockMonitor extends Component {
     const char = String.fromCharCode(key);
     switch (char.toUpperCase()) {
     case this.props.toggleVisibilityShortcut.toUpperCase():
-      this.props.monitorActions.toggleVisibility();
+      this.props.dispatch(toggleVisibility());
       break;
     case this.props.changePositionShortcut.toUpperCase():
-      this.props.monitorActions.changePosition();
+      this.props.dispatch(changePosition());
       break;
     default:
       break;
     }
   }
 
-  render() {
-    const {
-      monitorState,
-      monitorActions,
-      historyState,
-      historyActions,
-      children
-    } = this.props;
+  handleSizeChange(requestedSize) {
+    this.props.dispatch(changeSize(requestedSize));
+  }
 
-    const {
-      position,
-      isVisible
-    } = monitorState;
+  render() {
+    const { monitorState, children, ...rest } = this.props;
+    const { position, isVisible, size } = monitorState;
+    const childProps = {
+      ...rest,
+      monitorState: monitorState.childMonitorState
+    };
 
     return (
       <Dock position={position}
             isVisible={isVisible}
+            size={size}
+            onSizeChange={this.handleSizeChange}
             dimMode='none'>
-        {cloneElement(Children.only(children), {
-          monitorState: monitorState.child,
-          monitorActions: monitorActions.child,
-          historyState,
-          historyActions
-        })}
+        {cloneElement(children, childProps)}
       </Dock>
     );
   }
-}
-
-const TOGGLE_VISIBILITY = '@@redux-devtools/dock/TOGGLE_VISIBILITY';
-function toggleVisibility() {
-  return { type: TOGGLE_VISIBILITY };
-}
-
-const CHANGE_POSITION = '@@redux-devtools/dock/CHANGE_POSITION';
-function changePosition() {
-  return { type: CHANGE_POSITION };
-}
-
-DockMonitor.setup = function setup(props) {
-  function position(state = props.defaultPosition, action) {
-    return (action.type === CHANGE_POSITION) ?
-      POSITIONS[(POSITIONS.indexOf(state) + 1) % POSITIONS.length] :
-      state;
-  }
-
-  function isVisible(state = props.defaultIsVisible, action) {
-    return (action.type === TOGGLE_VISIBILITY) ?
-      !state :
-      state;
-  }
-
-  const child = Children.only(props.children);
-  const childSetupResult = child.type.setup(child.props);
-
-  return {
-    reducer: combineReducers({
-      position,
-      isVisible,
-      child: childSetupResult.reducer
-    }),
-    actionCreators: {
-      toggleVisibility,
-      changePosition,
-      child: childSetupResult.actionCreators
-    }
-  };
 }
