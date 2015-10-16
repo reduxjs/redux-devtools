@@ -106,55 +106,57 @@ function recomputeStates(reducer, committedState, stagedActions, skippedActions)
 /**
  * Creates a history state reducer from an app's reducer.
  */
-function createHistoryReducer(reducer, initialCommittedState) {
-  const initialHistoryState = {
+function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
+  const initialLiftedState = {
     committedState: initialCommittedState,
     stagedActions: [INIT_ACTION],
     skippedActions: {},
     currentStateIndex: 0,
-    timestamps: [Date.now()]
+    timestamps: [Date.now()],
+    monitorState: monitorReducer(undefined, {})
   };
 
   /**
    * Manages how the history actions modify the history state.
    */
-  return (historyState = initialHistoryState, historyAction) => {
+  return (liftedState = initialLiftedState, liftedAction) => {
     let shouldRecomputeStates = true;
     let {
+      monitorState,
       committedState,
       stagedActions,
       skippedActions,
       computedStates,
       currentStateIndex,
       timestamps
-    } = historyState;
+    } = liftedState;
 
-    switch (historyAction.type) {
+    switch (liftedAction.type) {
     case ActionTypes.RESET:
       committedState = initialCommittedState;
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [historyAction.timestamp];
+      timestamps = [liftedAction.timestamp];
       break;
     case ActionTypes.COMMIT:
       committedState = computedStates[currentStateIndex].state;
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [historyAction.timestamp];
+      timestamps = [liftedAction.timestamp];
       break;
     case ActionTypes.ROLLBACK:
       stagedActions = [INIT_ACTION];
       skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [historyAction.timestamp];
+      timestamps = [liftedAction.timestamp];
       break;
     case ActionTypes.TOGGLE_ACTION:
-      skippedActions = toggle(skippedActions, historyAction.index);
+      skippedActions = toggle(skippedActions, liftedAction.index);
       break;
     case ActionTypes.JUMP_TO_STATE:
-      currentStateIndex = historyAction.index;
+      currentStateIndex = liftedAction.index;
       // Optimization: we know the history has not changed.
       shouldRecomputeStates = false;
       break;
@@ -169,8 +171,8 @@ function createHistoryReducer(reducer, initialCommittedState) {
         currentStateIndex++;
       }
 
-      stagedActions = [...stagedActions, historyAction.action];
-      timestamps = [...timestamps, historyAction.timestamp];
+      stagedActions = [...stagedActions, liftedAction.action];
+      timestamps = [...timestamps, liftedAction.timestamp];
 
       // Optimization: we know that the past has not changed.
       shouldRecomputeStates = false;
@@ -178,13 +180,19 @@ function createHistoryReducer(reducer, initialCommittedState) {
       const previousEntry = computedStates[computedStates.length - 1];
       const nextEntry = computeNextEntry(
         reducer,
-        historyAction.action,
+        liftedAction.action,
         previousEntry.state,
         previousEntry.error
       );
       computedStates = [...computedStates, nextEntry];
       break;
+    case '@@redux/INIT':
+      // Always recompute states on hot reload and init.
+      shouldRecomputeStates = true;
+      break;
     default:
+      // Optimization: a monitor action can't change history.
+      shouldRecomputeStates = false;
       break;
     }
 
@@ -197,44 +205,54 @@ function createHistoryReducer(reducer, initialCommittedState) {
       );
     }
 
+    monitorState = monitorReducer(monitorState, liftedAction);
+
     return {
       committedState,
       stagedActions,
       skippedActions,
       computedStates,
       currentStateIndex,
-      timestamps
+      timestamps,
+      monitorState
     };
   };
 }
 
 /**
- * Provides a view into the History state that matches the current app state.
+ * Provides an app's view into the state of the lifted store.
  */
-function selectAppState(instrumentedState) {
-  const { computedStates, currentStateIndex } = instrumentedState.historyState;
+function unliftState(liftedState) {
+  const { computedStates, currentStateIndex } = liftedState;
   const { state } = computedStates[currentStateIndex];
   return state;
 }
 
 /**
- * Deinstruments the History store to act like the app's store.
+ * Lifts an app's action into an action on the lifted store.
  */
-function selectAppStore(instrumentedStore, instrumentReducer) {
+function liftAction(action) {
+  return ActionCreators.performAction(action);
+}
+
+/**
+ * Provides an app's view into the lifted store.
+ */
+function unliftStore(liftedStore, liftReducer) {
   let lastDefinedState;
 
   return {
-    ...instrumentedStore,
+    ...liftedStore,
 
-    instrumentedStore,
+    liftedStore,
 
     dispatch(action) {
-      instrumentedStore.dispatch(ActionCreators.performAction(action));
+      liftedStore.dispatch(liftAction(action));
       return action;
     },
 
     getState() {
-      const state = selectAppState(instrumentedStore.getState());
+      const state = unliftState(liftedStore.getState());
       if (state !== undefined) {
         lastDefinedState = state;
       }
@@ -242,7 +260,7 @@ function selectAppStore(instrumentedStore, instrumentReducer) {
     },
 
     replaceReducer(nextReducer) {
-      instrumentedStore.replaceReducer(instrumentReducer(nextReducer));
+      liftedStore.replaceReducer(liftReducer(nextReducer));
     }
   };
 }
@@ -252,15 +270,11 @@ function selectAppStore(instrumentedStore, instrumentReducer) {
  */
 export default function instrument(monitorReducer = () => null) {
   return createStore => (reducer, initialState) => {
-    function instrumentReducer(r) {
-      const historyReducer = createHistoryReducer(r, initialState);
-      return ({ historyState, monitorState } = {}, action) => ({
-        historyState: historyReducer(historyState, action),
-        monitorState: monitorReducer(monitorState, action)
-      });
+    function liftReducer(r) {
+      return liftReducerWith(r, initialState, monitorReducer);
     }
 
-    const instrumentedStore = createStore(instrumentReducer(reducer));
-    return selectAppStore(instrumentedStore, instrumentReducer);
+    const liftedStore = createStore(liftReducer(reducer));
+    return unliftStore(liftedStore, liftReducer);
   };
 }

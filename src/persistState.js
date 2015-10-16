@@ -4,18 +4,15 @@ export default function persistState(sessionId, deserializeState = identity, des
     return next => (...args) => next(...args);
   }
 
-  function deserialize({ historyState, ...rest }) {
+  function deserialize(state) {
     return {
-      ...rest,
-      historyState: {
-        ...historyState,
-        stagedActions: historyState.stagedActions.map(deserializeAction),
-        committedState: deserializeState(historyState.committedState),
-        computedStates: historyState.computedStates.map(computedState => ({
-          ...computedState,
-          state: deserializeState(computedState.state)
-        }))
-      }
+      ...state,
+      stagedActions: state.stagedActions.map(deserializeAction),
+      committedState: deserializeState(state.committedState),
+      computedStates: state.computedStates.map(computedState => ({
+        ...computedState,
+        state: deserializeState(computedState.state)
+      }))
     };
   }
 

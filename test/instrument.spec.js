@@ -29,11 +29,11 @@ function doubleCounter(state = 0, action) {
 
 describe('instrument', () => {
   let store;
-  let instrumentedStore;
+  let liftedStore;
 
   beforeEach(() => {
     store = instrument()(createStore)(counter);
-    instrumentedStore = store.instrumentedStore;
+    liftedStore = store.liftedStore;
   });
 
   it('should perform actions', () => {
@@ -49,20 +49,20 @@ describe('instrument', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    instrumentedStore.dispatch(ActionCreators.commit());
+    liftedStore.dispatch(ActionCreators.commit());
     expect(store.getState()).toBe(2);
 
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(4);
 
-    instrumentedStore.dispatch(ActionCreators.rollback());
+    liftedStore.dispatch(ActionCreators.rollback());
     expect(store.getState()).toBe(2);
 
     store.dispatch({ type: 'DECREMENT' });
     expect(store.getState()).toBe(1);
 
-    instrumentedStore.dispatch(ActionCreators.rollback());
+    liftedStore.dispatch(ActionCreators.rollback());
     expect(store.getState()).toBe(2);
   });
 
@@ -70,19 +70,19 @@ describe('instrument', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
 
-    instrumentedStore.dispatch(ActionCreators.commit());
+    liftedStore.dispatch(ActionCreators.commit());
     expect(store.getState()).toBe(1);
 
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    instrumentedStore.dispatch(ActionCreators.rollback());
+    liftedStore.dispatch(ActionCreators.rollback());
     expect(store.getState()).toBe(1);
 
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    instrumentedStore.dispatch(ActionCreators.reset());
+    liftedStore.dispatch(ActionCreators.reset());
     expect(store.getState()).toBe(0);
   });
 
@@ -93,10 +93,10 @@ describe('instrument', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
 
-    instrumentedStore.dispatch(ActionCreators.toggleAction(2));
+    liftedStore.dispatch(ActionCreators.toggleAction(2));
     expect(store.getState()).toBe(2);
 
-    instrumentedStore.dispatch(ActionCreators.toggleAction(2));
+    liftedStore.dispatch(ActionCreators.toggleAction(2));
     expect(store.getState()).toBe(1);
   });
 
@@ -108,16 +108,16 @@ describe('instrument', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    instrumentedStore.dispatch(ActionCreators.toggleAction(2));
+    liftedStore.dispatch(ActionCreators.toggleAction(2));
     expect(store.getState()).toBe(3);
 
-    instrumentedStore.dispatch(ActionCreators.sweep());
+    liftedStore.dispatch(ActionCreators.sweep());
     expect(store.getState()).toBe(3);
 
-    instrumentedStore.dispatch(ActionCreators.toggleAction(2));
+    liftedStore.dispatch(ActionCreators.toggleAction(2));
     expect(store.getState()).toBe(2);
 
-    instrumentedStore.dispatch(ActionCreators.sweep());
+    liftedStore.dispatch(ActionCreators.sweep());
     expect(store.getState()).toBe(2);
   });
 
@@ -127,19 +127,19 @@ describe('instrument', () => {
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(1);
 
-    instrumentedStore.dispatch(ActionCreators.jumpToState(0));
+    liftedStore.dispatch(ActionCreators.jumpToState(0));
     expect(store.getState()).toBe(0);
 
-    instrumentedStore.dispatch(ActionCreators.jumpToState(1));
+    liftedStore.dispatch(ActionCreators.jumpToState(1));
     expect(store.getState()).toBe(1);
 
-    instrumentedStore.dispatch(ActionCreators.jumpToState(2));
+    liftedStore.dispatch(ActionCreators.jumpToState(2));
     expect(store.getState()).toBe(0);
 
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(0);
 
-    instrumentedStore.dispatch(ActionCreators.jumpToState(4));
+    liftedStore.dispatch(ActionCreators.jumpToState(4));
     expect(store.getState()).toBe(2);
   });
 
@@ -161,11 +161,11 @@ describe('instrument', () => {
     storeWithBug.dispatch({ type: 'DECREMENT' });
     storeWithBug.dispatch({ type: 'INCREMENT' });
 
-    let historyState = storeWithBug.instrumentedStore.getState().historyState;
-    expect(historyState.computedStates[2].error).toMatch(
+    let { computedStates } = storeWithBug.liftedStore.getState();
+    expect(computedStates[2].error).toMatch(
       /ReferenceError/
     );
-    expect(historyState.computedStates[3].error).toMatch(
+    expect(computedStates[3].error).toMatch(
       /Interrupted by an error up the chain/
     );
     expect(spy.calls[0].arguments[0]).toMatch(
@@ -198,7 +198,7 @@ describe('instrument', () => {
   it('should not recompute states when jumping to state', () => {
     let reducerCalls = 0;
     let monitoredStore = instrument()(createStore)(() => reducerCalls++);
-    let monitoredInstrumentedStore = monitoredStore.instrumentedStore;
+    let monitoredInstrumentedStore = monitoredStore.liftedStore;
 
     expect(reducerCalls).toBe(1);
     monitoredStore.dispatch({ type: 'INCREMENT' });

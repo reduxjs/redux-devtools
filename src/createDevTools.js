@@ -6,18 +6,10 @@ export default function createDevTools(children) {
   const monitorElement = Children.only(children);
   const monitorProps = monitorElement.props;
   const Monitor = monitorElement.type;
-
+  const ConnectedMonitor = connect(state => state)(Monitor);
   const enhancer = instrument((state, action) =>
     Monitor.reducer(state, action, monitorProps)
   );
-
-  function mapStateToProps(state) {
-    return {
-      ...state.historyState,
-      monitorState: state.monitorState
-    };
-  }
-  const ConnectedMonitor = connect(mapStateToProps)(Monitor);
 
   return class DevTools extends Component {
     static contextTypes = {
@@ -28,13 +20,13 @@ export default function createDevTools(children) {
 
     constructor(props, context) {
       super(props, context);
-      this.instrumentedStore = context.store.instrumentedStore;
+      this.liftedStore = context.store.liftedStore;
     }
 
     render() {
       return (
         <ConnectedMonitor {...monitorProps}
-                          store={this.instrumentedStore} />
+                          store={this.liftedStore} />
       );
     }
   };
