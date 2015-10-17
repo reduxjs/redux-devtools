@@ -131,9 +131,7 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
   const initialLiftedState = {
     monitorState: monitorReducer(undefined, {}),
     nextActionId: 1,
-    actionsById: {
-      0: liftAction(INIT_ACTION)
-    },
+    actionsById: { 0: liftAction(INIT_ACTION) },
     stagedActionIds: [0],
     skippedActionIds: [],
     committedState: initialCommittedState,
