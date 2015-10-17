@@ -250,6 +250,8 @@ describe('instrument', () => {
     monitoredStore.dispatch({ type: 'INCREMENT' });
     expect(reducerCalls).toBe(4);
 
+    let savedComputedStates = monitoredLiftedStore.getState().computedStates;
+
     monitoredLiftedStore.dispatch(ActionCreators.jumpToState(0));
     expect(reducerCalls).toBe(4);
 
@@ -258,6 +260,8 @@ describe('instrument', () => {
 
     monitoredLiftedStore.dispatch(ActionCreators.jumpToState(3));
     expect(reducerCalls).toBe(4);
+
+    expect(monitoredLiftedStore.getState().computedStates).toBe(savedComputedStates);
   });
 
 
@@ -272,11 +276,15 @@ describe('instrument', () => {
     monitoredStore.dispatch({ type: 'INCREMENT' });
     expect(reducerCalls).toBe(4);
 
+    let savedComputedStates = monitoredLiftedStore.getState().computedStates;
+
     monitoredLiftedStore.dispatch({ type: 'lol' });
     expect(reducerCalls).toBe(4);
 
     monitoredLiftedStore.dispatch({ type: 'wat' });
     expect(reducerCalls).toBe(4);
+
+    expect(monitoredLiftedStore.getState().computedStates).toBe(savedComputedStates);
   });
 
   describe('Import State', () => {
