@@ -1,6 +1,14 @@
 # Redux DevTools TodoMVC example
 
-## Getting Started
+## Running example
 
-1. Install dependencies: `npm i`
-2. Start the development server: `npm start`
+```
+git clone https://github.com/gaearon/redux-devtools.git
+cd redux-devtools
+npm install
+
+cd examples/todomvc
+npm install
+npm start
+open http://localhost:3000
+```
