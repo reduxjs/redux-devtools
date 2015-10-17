@@ -34,8 +34,7 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 npm install --save-dev redux-devtools
 ```
 
-DevTools is a [store enhancer](http://rackt.github.io/redux/docs/Glossary.html#store-enhancer), which should be added to your middleware stack *after* [`applyMiddleware`](http://rackt.github.io/redux/docs/api/applyMiddleware.html) in the `compose`d functions, as `applyMiddleware` is potentially asynchronous. Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
-
+DevTools is a [store enhancer](http://rackt.github.io/redux/docs/Glossary.html#store-enhancer).  
 To install, firstly import `devTools` into your root React component:
 
 ```js
@@ -81,9 +80,13 @@ export default class Root extends Component {
 }
 ```
 
-**Make sure to only apply `devTools()` in development!** In production, this will be terribly slow because actions just accumulate forever. (We'll need to implement a rolling window for dev too.)
+### Gotchas
 
-For example, in Webpack, you can use `DefinePlugin` to turn magic constants like `__DEV__` into `true` or `false` depending on the environment, and import and render `redux-devtools` conditionally behind `if (__DEV__)`. Then, if you have an Uglify step before production, Uglify will eliminate dead `if (false)` branches with `redux-devtools` imports. Here is [an example](https://github.com/erikras/react-redux-universal-hot-example/) that adds Redux DevTools handling the production case correctly.
+* **Your reducers have to be pure and free of side effects to work correctly with DevTools.** For example, even generating a random ID in reducer makes it impure and non-deterministic. Instead, do this in action creators.
+
+* **Make sure to only apply `devTools()` in development!** In production, this will be terribly slow because actions just accumulate forever. (We'll need to implement a rolling window for dev too.) For example, in Webpack, you can use `DefinePlugin` to turn magic constants like `__DEV__` into `true` or `false` depending on the environment, and import and render `redux-devtools` conditionally behind `if (__DEV__)`. Then, if you have an Uglify step before production, Uglify will eliminate dead `if (false)` branches with `redux-devtools` imports. Here is [an example](https://github.com/erikras/react-redux-universal-hot-example/) that adds Redux DevTools handling the production case correctly.
+
+* **It is important that `devTools()` store enhancer should be added to your middleware stack *after* [`applyMiddleware`](http://rackt.github.io/redux/docs/api/applyMiddleware.html) in the `compose`d functions, as `applyMiddleware` is potentially asynchronous.** Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
 
 ### Running Examples
 
