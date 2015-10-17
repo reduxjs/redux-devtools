@@ -1,6 +1,6 @@
 >### React 0.14 Support
->React 0.14 support is coming, but it’s not ready yet.  
->Please wait until next week to get it.
+>React 0.14 support is coming in the `next` branch.  
+>[Helps us test it](https://github.com/gaearon/redux-devtools/releases/tag/v3.0.0-beta-2) to get it sooner.
 
 
 Redux DevTools
