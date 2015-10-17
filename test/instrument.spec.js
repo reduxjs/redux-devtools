@@ -106,17 +106,20 @@ describe('instrument', () => {
     store.dispatch({ type: 'DECREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
+
     expect(store.getState()).toBe(2);
+    expect(liftedStore.getState().stagedActionIds).toEqual([0, 1, 2, 3, 4]);
+    expect(liftedStore.getState().skippedActionIds).toEqual([]);
 
     liftedStore.dispatch(ActionCreators.toggleAction(2));
     expect(store.getState()).toBe(3);
+    expect(liftedStore.getState().stagedActionIds).toEqual([0, 1, 2, 3, 4]);
+    expect(liftedStore.getState().skippedActionIds).toEqual([2]);
 
     liftedStore.dispatch(ActionCreators.sweep());
     expect(store.getState()).toBe(3);
-
-    liftedStore.dispatch(ActionCreators.toggleAction(2));
-    // Now it has no effect because it's not staged
-    expect(store.getState()).toBe(3);
+    expect(liftedStore.getState().stagedActionIds).toEqual([0, 1, 3, 4]);
+    expect(liftedStore.getState().skippedActionIds).toEqual([]);
   });
 
   it('should jump to state', () => {
@@ -193,10 +196,53 @@ describe('instrument', () => {
     expect(reducerCalls).toBe(4);
   });
 
+  it('should not recompute old states when toggling an action', () => {
+    let reducerCalls = 0;
+    let monitoredStore = instrument()(createStore)(() => reducerCalls++);
+    let monitoredLiftedStore = monitoredStore.liftedStore;
+
+    expect(reducerCalls).toBe(1);
+    // actionId 0 = @@INIT
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    expect(reducerCalls).toBe(4);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(3));
+    expect(reducerCalls).toBe(4);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(3));
+    expect(reducerCalls).toBe(5);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(2));
+    expect(reducerCalls).toBe(6);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(2));
+    expect(reducerCalls).toBe(8);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(1));
+    expect(reducerCalls).toBe(10);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(2));
+    expect(reducerCalls).toBe(11);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(3));
+    expect(reducerCalls).toBe(11);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(1));
+    expect(reducerCalls).toBe(12);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(3));
+    expect(reducerCalls).toBe(13);
+
+    monitoredLiftedStore.dispatch(ActionCreators.toggleAction(2));
+    expect(reducerCalls).toBe(15);
+  });
+
   it('should not recompute states when jumping to state', () => {
     let reducerCalls = 0;
     let monitoredStore = instrument()(createStore)(() => reducerCalls++);
-    let monitoredInstrumentedStore = monitoredStore.liftedStore;
+    let monitoredLiftedStore = monitoredStore.liftedStore;
 
     expect(reducerCalls).toBe(1);
     monitoredStore.dispatch({ type: 'INCREMENT' });
@@ -204,13 +250,32 @@ describe('instrument', () => {
     monitoredStore.dispatch({ type: 'INCREMENT' });
     expect(reducerCalls).toBe(4);
 
-    monitoredInstrumentedStore.dispatch(ActionCreators.jumpToState(0));
+    monitoredLiftedStore.dispatch(ActionCreators.jumpToState(0));
     expect(reducerCalls).toBe(4);
 
-    monitoredInstrumentedStore.dispatch(ActionCreators.jumpToState(1));
+    monitoredLiftedStore.dispatch(ActionCreators.jumpToState(1));
     expect(reducerCalls).toBe(4);
 
-    monitoredInstrumentedStore.dispatch(ActionCreators.jumpToState(3));
+    monitoredLiftedStore.dispatch(ActionCreators.jumpToState(3));
+    expect(reducerCalls).toBe(4);
+  });
+
+
+  it('should not recompute states on monitor actions', () => {
+    let reducerCalls = 0;
+    let monitoredStore = instrument()(createStore)(() => reducerCalls++);
+    let monitoredLiftedStore = monitoredStore.liftedStore;
+
+    expect(reducerCalls).toBe(1);
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    monitoredStore.dispatch({ type: 'INCREMENT' });
+    expect(reducerCalls).toBe(4);
+
+    monitoredLiftedStore.dispatch({ type: 'lol' });
+    expect(reducerCalls).toBe(4);
+
+    monitoredLiftedStore.dispatch({ type: 'wat' });
     expect(reducerCalls).toBe(4);
   });
 

@@ -77,15 +77,32 @@ function computeNextEntry(reducer, action, state, error) {
 }
 
 /**
- * Runs the reducer on all actions to get a fresh computation log.
+ * Runs the reducer on invalidated actions to get a fresh computation log.
  */
-function recomputeStates(reducer, committedState, actionsById, stagedActionIds, skippedActionIds) {
-  const computedStates = [];
-  for (let i = 0; i < stagedActionIds.length; i++) {
+function recomputeStates(
+  computedStates,
+  minInvalidatedStateIndex,
+  reducer,
+  committedState,
+  actionsById,
+  stagedActionIds,
+  skippedActionIds
+) {
+  // Optimization: exit early and return the same reference
+  // if we know nothing could have changed.
+  if (
+    minInvalidatedStateIndex >= computedStates.length &&
+    computedStates.length === stagedActionIds.length
+  ) {
+    return computedStates;
+  }
+
+  const nextComputedStates = computedStates.slice(0, minInvalidatedStateIndex);
+  for (let i = minInvalidatedStateIndex; i < stagedActionIds.length; i++) {
     const actionId = stagedActionIds[i];
     const action = actionsById[actionId].action;
 
-    const previousEntry = computedStates[i - 1];
+    const previousEntry = nextComputedStates[i - 1];
     const previousState = previousEntry ? previousEntry.state : committedState;
     const previousError = previousEntry ? previousEntry.error : undefined;
 
@@ -94,10 +111,10 @@ function recomputeStates(reducer, committedState, actionsById, stagedActionIds, 
       previousEntry :
       computeNextEntry(reducer, action, previousState, previousError);
 
-    computedStates.push(entry);
+    nextComputedStates.push(entry);
   }
 
-  return computedStates;
+  return nextComputedStates;
 }
 
 /**
@@ -121,14 +138,13 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
     skippedActionIds: [],
     committedState: initialCommittedState,
     currentStateIndex: 0,
-    computedStates: undefined
+    computedStates: []
   };
 
   /**
    * Manages how the history actions modify the history state.
    */
   return (liftedState = initialLiftedState, liftedAction) => {
-    let shouldRecomputeStates = true;
     let {
       monitorState,
       actionsById,
@@ -140,116 +156,125 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
       computedStates
     } = liftedState;
 
+    // By default, agressively recompute every state whatever happens.
+    // This has O(n) performance, so we'll override this to a sensible
+    // value whenever we feel like we don't have to recompute the states.
+    let minInvalidatedStateIndex = 0;
+
     switch (liftedAction.type) {
-    case ActionTypes.RESET:
-      actionsById = {
-        0: liftAction(INIT_ACTION)
-      };
-      nextActionId = 1;
-      stagedActionIds = [0];
-      skippedActionIds = [];
-      committedState = initialCommittedState;
-      currentStateIndex = 0;
-      break;
-    case ActionTypes.COMMIT:
-      actionsById = {
-        0: liftAction(INIT_ACTION)
-      };
-      nextActionId = 1;
-      stagedActionIds = [0];
-      skippedActionIds = [];
-      committedState = computedStates[currentStateIndex].state;
-      currentStateIndex = 0;
-      break;
-    case ActionTypes.ROLLBACK:
-      actionsById = {
-        0: liftAction(INIT_ACTION)
-      };
-      nextActionId = 1;
-      stagedActionIds = [0];
-      skippedActionIds = [];
-      currentStateIndex = 0;
-      break;
-    case ActionTypes.TOGGLE_ACTION:
-      const index = skippedActionIds.indexOf(liftedAction.id);
-      if (index === -1) {
-        skippedActionIds = [
-          liftedAction.id,
-          ...skippedActionIds
-        ];
-      } else {
-        skippedActionIds = [
-          ...skippedActionIds.slice(0, index),
-          ...skippedActionIds.slice(index + 1)
-        ];
+      case ActionTypes.RESET: {
+        // Get back to the state the store was created with.
+        actionsById = { 0: liftAction(INIT_ACTION) };
+        nextActionId = 1;
+        stagedActionIds = [0];
+        skippedActionIds = [];
+        committedState = initialCommittedState;
+        currentStateIndex = 0;
+        computedStates = [];
+        break;
       }
-      break;
-    case ActionTypes.JUMP_TO_STATE:
-      currentStateIndex = liftedAction.index;
-      // Optimization: we know the history has not changed.
-      shouldRecomputeStates = false;
-      break;
-    case ActionTypes.SWEEP:
-      stagedActionIds = difference(stagedActionIds, skippedActionIds);
-      skippedActionIds = [];
-      currentStateIndex = Math.min(currentStateIndex, stagedActionIds.length - 1);
-      break;
-    case ActionTypes.PERFORM_ACTION:
-      if (currentStateIndex === stagedActionIds.length - 1) {
-        currentStateIndex++;
+      case ActionTypes.COMMIT: {
+        // Consider the last committed state the new starting point.
+        // Squash any staged actions into a single committed state.
+        actionsById = { 0: liftAction(INIT_ACTION) };
+        nextActionId = 1;
+        stagedActionIds = [0];
+        skippedActionIds = [];
+        committedState = computedStates[currentStateIndex].state;
+        currentStateIndex = 0;
+        computedStates = [];
+        break;
       }
-
-      const actionId = nextActionId++;
-      // Mutation! This is the hottest path, and we optimize on purpose.
-      // It is safe because we set a new key in a cache dictionary.
-      actionsById[actionId] = liftedAction;
-      stagedActionIds = [...stagedActionIds, actionId];
-      // Optimization: we know that the past has not changed.
-      shouldRecomputeStates = false;
-      // Instead of recomputing the states, append the next one.
-      const previousEntry = computedStates[computedStates.length - 1];
-      const nextEntry = computeNextEntry(
-        reducer,
-        liftedAction.action,
-        previousEntry.state,
-        previousEntry.error
-      );
-      computedStates = [...computedStates, nextEntry];
-      break;
-    case ActionTypes.IMPORT_STATE:
-      ({
-        monitorState,
-        actionsById,
-        nextActionId,
-        stagedActionIds,
-        skippedActionIds,
-        committedState,
-        currentStateIndex,
-        computedStates
-      } = liftedAction.nextLiftedState);
-      break;
-    case '@@redux/INIT':
-      // Always recompute states on hot reload and init.
-      shouldRecomputeStates = true;
-      break;
-    default:
-      // Optimization: a monitor action can't change history.
-      shouldRecomputeStates = false;
-      break;
+      case ActionTypes.ROLLBACK: {
+        // Forget about any staged actions.
+        // Start again from the last committed state.
+        actionsById = { 0: liftAction(INIT_ACTION) };
+        nextActionId = 1;
+        stagedActionIds = [0];
+        skippedActionIds = [];
+        currentStateIndex = 0;
+        computedStates = [];
+        break;
+      }
+      case ActionTypes.TOGGLE_ACTION: {
+        // Toggle whether an action with given ID is skipped.
+        // Being skipped means it is a no-op during the computation.
+        const { id: actionId } = liftedAction;
+        const index = skippedActionIds.indexOf(actionId);
+        if (index === -1) {
+          skippedActionIds = [actionId, ...skippedActionIds];
+        } else {
+          skippedActionIds = skippedActionIds.filter(id => id !== actionId);
+        }
+        // Optimization: we know history before this action hasn't changed
+        minInvalidatedStateIndex = stagedActionIds.indexOf(actionId);
+        break;
+      }
+      case ActionTypes.JUMP_TO_STATE: {
+        // Without recomputing anything, move the pointer that tell us
+        // which state is considered the current one. Useful for sliders.
+        currentStateIndex = liftedAction.index;
+        // Optimization: we know the history has not changed.
+        minInvalidatedStateIndex = Infinity;
+        break;
+      }
+      case ActionTypes.SWEEP: {
+        // Forget any actions that are currently being skipped.
+        stagedActionIds = difference(stagedActionIds, skippedActionIds);
+        skippedActionIds = [];
+        currentStateIndex = Math.min(currentStateIndex, stagedActionIds.length - 1);
+        break;
+      }
+      case ActionTypes.PERFORM_ACTION: {
+        if (currentStateIndex === stagedActionIds.length - 1) {
+          currentStateIndex++;
+        }
+        const actionId = nextActionId++;
+        // Mutation! This is the hottest path, and we optimize on purpose.
+        // It is safe because we set a new key in a cache dictionary.
+        actionsById[actionId] = liftedAction;
+        stagedActionIds = [...stagedActionIds, actionId];
+        // Optimization: we know that only the new action needs computing.
+        minInvalidatedStateIndex = stagedActionIds.length - 1;
+        break;
+      }
+      case ActionTypes.IMPORT_STATE: {
+        // Completely replace everything.
+        ({
+          monitorState,
+          actionsById,
+          nextActionId,
+          stagedActionIds,
+          skippedActionIds,
+          committedState,
+          currentStateIndex,
+          computedStates
+        } = liftedAction.nextLiftedState);
+        break;
+      }
+      case '@@redux/INIT': {
+        // Always recompute states on hot reload and init.
+        minInvalidatedStateIndex = 0;
+        break;
+      }
+      default: {
+        // If the action is not recognized, it's a monitor action.
+        // Optimization: a monitor action can't change history.
+        minInvalidatedStateIndex = Infinity;
+        break;
+      }
     }
 
-    if (shouldRecomputeStates) {
-      computedStates = recomputeStates(
-        reducer,
-        committedState,
-        actionsById,
-        stagedActionIds,
-        skippedActionIds
-      );
-    }
-
+    computedStates = recomputeStates(
+      computedStates,
+      minInvalidatedStateIndex,
+      reducer,
+      committedState,
+      actionsById,
+      stagedActionIds,
+      skippedActionIds
+    );
     monitorState = monitorReducer(monitorState, liftedAction);
-
     return {
       monitorState,
       actionsById,
