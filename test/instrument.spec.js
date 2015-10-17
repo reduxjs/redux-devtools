@@ -87,7 +87,7 @@ describe('instrument', () => {
   });
 
   it('should toggle an action', () => {
-    // stateIndex 0 = @@INIT
+    // actionId 0 = @@INIT
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
     store.dispatch({ type: 'INCREMENT' });
@@ -101,7 +101,7 @@ describe('instrument', () => {
   });
 
   it('should sweep disabled actions', () => {
-    // stateIndex 0 = @@INIT
+    // actionId 0 = @@INIT
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
     store.dispatch({ type: 'INCREMENT' });
@@ -115,10 +115,8 @@ describe('instrument', () => {
     expect(store.getState()).toBe(3);
 
     liftedStore.dispatch(ActionCreators.toggleAction(2));
-    expect(store.getState()).toBe(2);
-
-    liftedStore.dispatch(ActionCreators.sweep());
-    expect(store.getState()).toBe(2);
+    // Now it has no effect because it's not staged
+    expect(store.getState()).toBe(3);
   });
 
   it('should jump to state', () => {

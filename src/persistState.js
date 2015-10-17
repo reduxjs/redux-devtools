@@ -1,4 +1,6 @@
-const identity = _ => _;
+import mapValues from 'lodash/object/mapValues';
+import identity from 'lodash/utility/identity';
+
 export default function persistState(sessionId, deserializeState = identity, deserializeAction = identity) {
   if (!sessionId) {
     return next => (...args) => next(...args);
@@ -7,7 +9,10 @@ export default function persistState(sessionId, deserializeState = identity, des
   function deserialize(state) {
     return {
       ...state,
-      stagedActions: state.stagedActions.map(deserializeAction),
+      actionsById: mapValues(state.actionsById, liftedAction => ({
+        ...liftedAction,
+        action: deserializeAction(liftedAction.action)
+      })),
       committedState: deserializeState(state.committedState),
       computedStates: state.computedStates.map(computedState => ({
         ...computedState,

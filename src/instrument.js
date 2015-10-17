@@ -1,3 +1,5 @@
+import difference from 'lodash/array/difference';
+
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
   RESET: 'RESET',
@@ -33,8 +35,8 @@ export const ActionCreators = {
     return { type: ActionTypes.SWEEP };
   },
 
-  toggleAction(index) {
-    return { type: ActionTypes.TOGGLE_ACTION, index };
+  toggleAction(id) {
+    return { type: ActionTypes.TOGGLE_ACTION, id };
   },
 
   jumpToState(index) {
@@ -47,16 +49,6 @@ export const ActionCreators = {
 };
 
 const INIT_ACTION = { type: '@@INIT' };
-
-function toggle(obj, key) {
-  const clone = { ...obj };
-  if (clone[key]) {
-    delete clone[key];
-  } else {
-    clone[key] = true;
-  }
-  return clone;
-}
 
 /**
  * Computes the next entry in the log by applying an action.
@@ -87,17 +79,17 @@ function computeNextEntry(reducer, action, state, error) {
 /**
  * Runs the reducer on all actions to get a fresh computation log.
  */
-function recomputeStates(reducer, committedState, stagedActions, skippedActions) {
+function recomputeStates(reducer, committedState, actionsById, stagedActionIds, skippedActionIds) {
   const computedStates = [];
-
-  for (let i = 0; i < stagedActions.length; i++) {
-    const action = stagedActions[i];
+  for (let i = 0; i < stagedActionIds.length; i++) {
+    const actionId = stagedActionIds[i];
+    const action = actionsById[actionId].action;
 
     const previousEntry = computedStates[i - 1];
     const previousState = previousEntry ? previousEntry.state : committedState;
     const previousError = previousEntry ? previousEntry.error : undefined;
 
-    const shouldSkip = Boolean(skippedActions[i]);
+    const shouldSkip = skippedActionIds.indexOf(actionId) > -1;
     const entry = shouldSkip ?
       previousEntry :
       computeNextEntry(reducer, action, previousState, previousError);
@@ -109,16 +101,27 @@ function recomputeStates(reducer, committedState, stagedActions, skippedActions)
 }
 
 /**
+ * Lifts an app's action into an action on the lifted store.
+ */
+function liftAction(action) {
+  return ActionCreators.performAction(action);
+}
+
+/**
  * Creates a history state reducer from an app's reducer.
  */
 function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
   const initialLiftedState = {
+    monitorState: monitorReducer(undefined, {}),
+    nextActionId: 1,
+    actionsById: {
+      0: liftAction(INIT_ACTION)
+    },
+    stagedActionIds: [0],
+    skippedActionIds: [],
     committedState: initialCommittedState,
-    stagedActions: [INIT_ACTION],
-    skippedActions: {},
     currentStateIndex: 0,
-    timestamps: [Date.now()],
-    monitorState: monitorReducer(undefined, {})
+    computedStates: undefined
   };
 
   /**
@@ -128,37 +131,58 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
     let shouldRecomputeStates = true;
     let {
       monitorState,
+      actionsById,
+      nextActionId,
+      stagedActionIds,
+      skippedActionIds,
       committedState,
-      stagedActions,
-      skippedActions,
-      computedStates,
       currentStateIndex,
-      timestamps
+      computedStates
     } = liftedState;
 
     switch (liftedAction.type) {
     case ActionTypes.RESET:
+      actionsById = {
+        0: liftAction(INIT_ACTION)
+      };
+      nextActionId = 1;
+      stagedActionIds = [0];
+      skippedActionIds = [];
       committedState = initialCommittedState;
-      stagedActions = [INIT_ACTION];
-      skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [liftedAction.timestamp];
       break;
     case ActionTypes.COMMIT:
+      actionsById = {
+        0: liftAction(INIT_ACTION)
+      };
+      nextActionId = 1;
+      stagedActionIds = [0];
+      skippedActionIds = [];
       committedState = computedStates[currentStateIndex].state;
-      stagedActions = [INIT_ACTION];
-      skippedActions = {};
       currentStateIndex = 0;
-      timestamps = [liftedAction.timestamp];
       break;
     case ActionTypes.ROLLBACK:
-      stagedActions = [INIT_ACTION];
-      skippedActions = {};
+      actionsById = {
+        0: liftAction(INIT_ACTION)
+      };
+      nextActionId = 1;
+      stagedActionIds = [0];
+      skippedActionIds = [];
       currentStateIndex = 0;
-      timestamps = [liftedAction.timestamp];
       break;
     case ActionTypes.TOGGLE_ACTION:
-      skippedActions = toggle(skippedActions, liftedAction.index);
+      const index = skippedActionIds.indexOf(liftedAction.id);
+      if (index === -1) {
+        skippedActionIds = [
+          liftedAction.id,
+          ...skippedActionIds
+        ];
+      } else {
+        skippedActionIds = [
+          ...skippedActionIds.slice(0, index),
+          ...skippedActionIds.slice(index + 1)
+        ];
+      }
       break;
     case ActionTypes.JUMP_TO_STATE:
       currentStateIndex = liftedAction.index;
@@ -166,19 +190,20 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
       shouldRecomputeStates = false;
       break;
     case ActionTypes.SWEEP:
-      stagedActions = stagedActions.filter((_, i) => !skippedActions[i]);
-      timestamps = timestamps.filter((_, i) => !skippedActions[i]);
-      skippedActions = {};
-      currentStateIndex = Math.min(currentStateIndex, stagedActions.length - 1);
+      stagedActionIds = difference(stagedActionIds, skippedActionIds);
+      skippedActionIds = [];
+      currentStateIndex = Math.min(currentStateIndex, stagedActionIds.length - 1);
       break;
     case ActionTypes.PERFORM_ACTION:
-      if (currentStateIndex === stagedActions.length - 1) {
+      if (currentStateIndex === stagedActionIds.length - 1) {
         currentStateIndex++;
       }
 
-      stagedActions = [...stagedActions, liftedAction.action];
-      timestamps = [...timestamps, liftedAction.timestamp];
-
+      const actionId = nextActionId++;
+      // Mutation! This is the hottest path, and we optimize on purpose.
+      // It is safe because we set a new key in a cache dictionary.
+      actionsById[actionId] = liftedAction;
+      stagedActionIds = [...stagedActionIds, actionId];
       // Optimization: we know that the past has not changed.
       shouldRecomputeStates = false;
       // Instead of recomputing the states, append the next one.
@@ -193,12 +218,14 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
       break;
     case ActionTypes.IMPORT_STATE:
       ({
-        stagedActions,
-        skippedActions,
-        computedStates,
+        monitorState,
+        actionsById,
+        nextActionId,
+        stagedActionIds,
+        skippedActionIds,
+        committedState,
         currentStateIndex,
-        timestamps,
-        monitorState
+        computedStates
       } = liftedAction.nextLiftedState);
       break;
     case '@@redux/INIT':
@@ -215,21 +242,23 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
       computedStates = recomputeStates(
         reducer,
         committedState,
-        stagedActions,
-        skippedActions
+        actionsById,
+        stagedActionIds,
+        skippedActionIds
       );
     }
 
     monitorState = monitorReducer(monitorState, liftedAction);
 
     return {
+      monitorState,
+      actionsById,
+      nextActionId,
+      stagedActionIds,
+      skippedActionIds,
       committedState,
-      stagedActions,
-      skippedActions,
-      computedStates,
       currentStateIndex,
-      timestamps,
-      monitorState
+      computedStates
     };
   };
 }
@@ -241,13 +270,6 @@ function unliftState(liftedState) {
   const { computedStates, currentStateIndex } = liftedState;
   const { state } = computedStates[currentStateIndex];
   return state;
-}
-
-/**
- * Lifts an app's action into an action on the lifted store.
- */
-function liftAction(action) {
-  return ActionCreators.performAction(action);
 }
 
 /**
