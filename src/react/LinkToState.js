@@ -1,16 +1,21 @@
 import React, { PropTypes, Component } from 'react';
+import { getUrlForState } from '../urlState';
 
-export default class LogMonitor extends Component {
+const styles = {
+  link: {
+    color: '#6FB3D2'
+  }
+};
+
+export default class LinkToState extends Component {
   static propTypes = {
-    computedState: PropTypes.object.isRequired
+    fullAppState: PropTypes.object.isRequired
   };
 
   render() {
-    const stateUriComponent = encodeURIComponent(JSON.stringify(this.props.computedState));
-
-    // TODO: don't blow away other params
-    const urlForThisState = `?reduxDevState=${stateUriComponent}`;
-
-    return <a href={urlForThisState}>Current State</a>;
+    const urlForState = getUrlForState(this.props.fullAppState);
+    return <a style={{...styles.link}} href={urlForState}>
+      Current State
+    </a>;
   }
 }

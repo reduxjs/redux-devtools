@@ -13,6 +13,12 @@ function deserializeState(json) {
   }
 }
 
+export function getUrlForState(state) {
+  const stateUriComponent = serializeState(state);
+
+  // TODO: don't blow away other params
+  return `?dev_state=${stateUriComponent}`;
+}
 
 export default function urlEncodedStateReducer(stateUriComponent) {
   return next => (reducer, initialState) => {

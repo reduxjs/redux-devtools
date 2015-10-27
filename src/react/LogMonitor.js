@@ -178,8 +178,6 @@ export default class LogMonitor extends Component {
       );
     }
 
-    const currentState = computedStates[computedStates.length - 1];
-    
     return (
       <div style={{...styles.container, backgroundColor: theme.base00}}>
         <div style={{...styles.buttonBar, borderColor: theme.base02}}>
@@ -189,7 +187,7 @@ export default class LogMonitor extends Component {
           <LogMonitorButton theme={theme} onClick={::this.handleCommit} enabled={computedStates.length > 1}>Commit</LogMonitorButton>
         </div>
         <div>
-          <LinkToState computedState={{ monitorState, skippedActions, stagedActions, computedStates, select }} />
+          <LinkToState fullAppState={ this.props.store.getState() } />
         </div>
         <div style={styles.elements} ref="elements">
           {elements}
