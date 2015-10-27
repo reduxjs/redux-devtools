@@ -1,6 +1,7 @@
 import React, { PropTypes, findDOMNode, Component } from 'react';
 import LogMonitorEntry from './LogMonitorEntry';
 import LogMonitorButton from './LogMonitorButton';
+import LinkToState from './LinkToState';
 import * as themes from './themes';
 
 const styles = {
@@ -25,7 +26,7 @@ const styles = {
     position: 'absolute',
     left: 0,
     right: 0,
-    top: 38,
+    top: 76,
     bottom: 0,
     overflowX: 'hidden',
     overflowY: 'auto'
@@ -177,6 +178,8 @@ export default class LogMonitor extends Component {
       );
     }
 
+    const currentState = computedStates[computedStates.length - 1];
+    
     return (
       <div style={{...styles.container, backgroundColor: theme.base00}}>
         <div style={{...styles.buttonBar, borderColor: theme.base02}}>
@@ -184,6 +187,9 @@ export default class LogMonitor extends Component {
           <LogMonitorButton theme={theme} onClick={::this.handleRollback} enabled={computedStates.length}>Revert</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleSweep} enabled={Object.keys(skippedActions).some(key => skippedActions[key])}>Sweep</LogMonitorButton>
           <LogMonitorButton theme={theme} onClick={::this.handleCommit} enabled={computedStates.length > 1}>Commit</LogMonitorButton>
+        </div>
+        <div>
+          <LinkToState computedState={{ monitorState, skippedActions, stagedActions, computedStates, select }} />
         </div>
         <div style={styles.elements} ref="elements">
           {elements}
