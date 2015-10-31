@@ -13,14 +13,22 @@ export default function createDevTools(children) {
 
   return class DevTools extends Component {
     static contextTypes = {
-      store: PropTypes.object.isRequired
+      store: PropTypes.object
+    };
+
+    static propTypes = {
+      store: PropTypes.object
     };
 
     static instrument = () => enhancer;
 
     constructor(props, context) {
       super(props, context);
-      this.liftedStore = context.store.liftedStore;
+      if (context.store) {
+        this.liftedStore = context.store.liftedStore;
+      } else {
+        this.liftedStore = props.store.liftedStore;
+      }
     }
 
     render() {
