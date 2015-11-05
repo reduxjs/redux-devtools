@@ -11,7 +11,7 @@ export default function createDevTools(children) {
     Monitor.reducer(state, action, monitorProps)
   );
 
-  return class DevTools extends Component {
+  class DevTools extends Component {
     static contextTypes = {
       store: PropTypes.object
     };
@@ -37,6 +37,7 @@ export default function createDevTools(children) {
                           store={this.liftedStore} />
       );
     }
-  };
-}
+  }
 
+  return DevTools;
+}

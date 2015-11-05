@@ -1,4 +1,4 @@
 {
-  "stage": 0,
-  "loose": "all"
+  "plugins": ["transform-react-jsx"],
+  "presets": ["es2015", "stage-0"]
 }
