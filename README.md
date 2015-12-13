@@ -55,10 +55,15 @@ const finalCreateStore = compose(
   // Provides support for DevTools:
   devTools(),
   // Lets you write ?debug_session=<name> in address bar to persist debug sessions
-  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+  persistState(getPersistSession())
 )(createStore);
 
 const store = finalCreateStore(reducer);
+
+function getPersistSession() {
+  const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
+  return (matches && matches.length > 0)? matches[1] : null;
+}
 ```
 
 Finally, include the `DevTools` in your page. You may pass either `LogMonitor` (the default one) or any of the custom monitors described below. For convenience, you can use `DebugPanel` to dock `DevTools` to some part of the screen, but you can put it also somewhere else in the component tree.
