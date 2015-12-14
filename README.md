@@ -301,23 +301,46 @@ Personal preferences vary, and whether to put the DevTools in a separate window,
 
 Note that there are no useful props you can pass to the `DevTools` component other than the `store`. The `store` prop is needed if you don’t wrap `<DevTools>` in a `<Provider>`—just like with any connected component. To adjust the monitors, you need to pass props to them inside `DevTools.js` itself inside the `createDevTools()` call when they are used.
 
+### Gotchas
+
+* **Your reducers have to be pure and free of side effects to work correctly with DevTools.** For example, even generating a random ID in reducer makes it impure and non-deterministic. Instead, do this in action creators.
+
+* **Make sure to only apply `DevTools.instrument()` and render `<DevTools>` in development!** In production, this will be terribly slow because actions just accumulate forever. As described above, you need to use conditional `require`s and use `ProvidePlugin` (Webpack) or `loose-envify` (Browserify) together with Uglify to remove the dead code. Here is [an example](https://github.com/erikras/react-redux-universal-hot-example/) that adds Redux DevTools handling the production case correctly.
+
+* **It is important that `DevTools.instrument()` store enhancer should be added to your middleware stack *after* `applyMiddleware` in the `compose`d functions, as `applyMiddleware` is potentially asynchronous.** Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
+
 ### Running Examples
 
-You can do this:
+Clone the project:
 
 ```
 git clone https://github.com/gaearon/redux-devtools.git
 cd redux-devtools
-npm install
+```
 
+Run `npm install` in the root folder:
+
+```
+npm install
+```
+
+Now you can open an example folder and run `npm install` there:
+
+```
 cd examples/counter # or examples/todomvc
 npm install
+```
+
+Finally, run the development server and open the page:
+
+```
 npm start
 open http://localhost:3000
 ```
 
-Try clicking on actions in the log, or changing some code inside `examples/counter/reducers/counter`.  
-For fun, you can also open `http://localhost:3000/?debug_session=123`, click around, and then refresh.
+Try clicking on actions in the log, or changing some code inside the reducers. You should see the action log re-evaluate the state on every code change.
+
+Also try opening `http://localhost:3000/?debug_session=123`, click around, and then refresh. You should see that all actions have been restored from the local storage.
 
 ### Custom Monitors
 
