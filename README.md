@@ -86,7 +86,60 @@ The easiest way to apply several store enhancers in a row is to use the [`compos
 
 It’s important that you should add `DevTools.instrument()` *after* `applyMiddleware` in your `compose()` function arguments. This is because `applyMiddleware` is potentially asynchronous, but `DevTools.instrument()` expects all actions to be plain objects rather than actions interpreted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk). So make sure `applyMiddleware()` goes first in the `compose()` call, and `DevTools.instrument()` goes after it.
 
+##### `store/configureStore.js`
+
+```js
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from '../reducers';
+import DevTools from '../containers/DevTools';
+
+const finalCreateStore = compose(
+  // Middleware you want to use in development:
+  applyMiddleware(d1, d2, d3),
+  // Required! Enable Redux DevTools with the monitors you chose
+  DevTools.instrument()
+)(createStore);
+
+export default function configureStore(initialState) {
+  const store = finalCreateStore(rootReducer, initialState);
+
+  // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
+  if (module.hot) {
+    module.hot.accept('../reducers', () =>
+      store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
+    );
+  }
+
+  return store;
+}
+```
+
 If you’d like, you may add another store enhancer called `persistState()`. It ships with this package, and it lets you serialize whole sessions (including all dispatched actions and the state of the monitors) by a URL key. So if you visit `http://localhost:3000/?debug_session=reproducing_weird_bug`, do something in the app, then open `http://localhost:3000/?debug_session=some_other_feature`, and then go back to `http://localhost:3000/?debug_session=reproducing_weird_bug`, the state will be restored. The implementation of `persistState()` is fairly naïve but you can take it as an inspiration and build a proper UI for it if you feel like it!
+
+```js
+// ...
+import { persistState } from 'redux-devtools';
+
+const finalCreateStore = compose(
+  // Middleware you want to use in development:
+  applyMiddleware(d1, d2, d3),
+  // Required! Enable Redux DevTools with the monitors you chose
+  DevTools.instrument(),
+  // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
+  persistState(getDebugSessionKey())
+)(createStore);
+
+function getDebugSessionKey() {
+  // You can write custom logic here!
+  // By default we try to read the key from ?debug_session=<key> in the address bar
+  const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
+  return (matches && matches.length > 0)? matches[1] : null;
+}
+
+export default function configureStore(initialState) {
+  // ...
+}
+```
 
 #### Exclude DevTools from Production Builds
 
