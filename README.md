@@ -321,7 +321,7 @@ For fun, you can also open `http://localhost:3000/?debug_session=123`, click aro
 
 ### Custom Monitors
 
-**DevTools accepts monitor components so you can build a completely custom UI.** [`redux-devtools-log-monitor`](https://github.com/gaearon/redux-devtools-log-monitor) and [`redux-devtools-dock-monitor`](https://github.com/gaearon/redux-devtools-dock-monitor) are just examples of what is possible.
+**DevTools accepts monitor components so you can build a completely custom UI.** [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) and [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) are just examples of what is possible.
 
 **[I challenge you to build a custom monitor for Redux DevTools!](https://github.com/gaearon/redux-devtools/issues/3)**
 
@@ -330,7 +330,7 @@ Some crazy ideas for custom monitors:
 * A slider that lets you jump between computed states just by dragging it
 * An in-app layer that shows the last N states right in the app (e.g. for animation)
 * A time machine like interface where the last N states of your app reside on different Z layers
-* Feel free to come up with and implement your own! Check [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) propTypes to see what you can do.
+* Feel free to come up with and implement your own! Check [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) `propTypes` to see what you can do.
 
 In fact some of these are implemented already:
 
