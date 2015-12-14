@@ -161,7 +161,7 @@ export default function configureStore(initialState) {
 }
 ```
 
-#### Render `<DevTools>` in Your App
+#### Render `<DevTools>` in Your App...
 
 Finally, include the `DevTools` component in your page.  
 A naïve way to do this would be to render it right in your `index.js`:
@@ -245,7 +245,7 @@ export default class Root extends Component {
 }
 ```
 
-#### Adjusting the Appearance
+#### ...Or Open Them in a New Window
 
 When you use [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor), you usually want to render `<DevTools>` at the root of your app. It will appear in a docked container above it. However, you can also render it anywhere else in your React component tree. In this case, you’d create a development and a production version of some other component that would either include or exclude `<DevTools>`.
 
