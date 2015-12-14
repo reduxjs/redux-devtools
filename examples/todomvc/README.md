@@ -1,7 +1,30 @@
-# Redux DevTools TodoMVC example
+# Redux DevTools Counter example
 
-## Getting Started
+## Running Example
 
-1. Install dependencies in the root folder: `cd ../..` and `npm i`
-2. Install dependencies in the example folder: `cd examples/todomvc` and `npm i`
-3. Start the development server: `npm start`
+First, clone the project:
+
+```
+git clone https://github.com/gaearon/redux-devtools.git
+```
+
+Then install the dependencies in the root folder:
+
+```
+cd redux-devtools
+npm install
+```
+
+Install the dependencies in the example folder:
+
+```
+cd examples/todomvc
+npm install
+```
+
+Finally, run the project:
+
+```
+npm start
+open http://localhost:3000
+```

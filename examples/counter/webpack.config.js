@@ -6,7 +6,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './index'
+    './src/index'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -18,11 +18,9 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),
       'redux-devtools': path.join(__dirname, '..', '..', 'src'),
       'react': path.join(__dirname, 'node_modules', 'react')
-    },
-    extensions: ['', '.js']
+    }
   },
   resolveLoader: {
     'fallback': path.join(__dirname, 'node_modules')
@@ -32,7 +30,7 @@ module.exports = {
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
       exclude: /node_modules/,
-      include: __dirname
+      include: path.join(__dirname, 'src')
     }, {
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],

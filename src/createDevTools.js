@@ -1,46 +1,42 @@
-import createAll from 'react-redux/lib/components/createAll';
-import { ActionCreators } from './devTools';
+import React, { Children, Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import instrument from './instrument';
 
-export default function createDevTools(React) {
-  const { PropTypes, Component } = React;
-  const { connect } = createAll(React);
+export default function createDevTools(children) {
+  const monitorElement = Children.only(children);
+  const monitorProps = monitorElement.props;
+  const Monitor = monitorElement.type;
+  const ConnectedMonitor = connect(state => state)(Monitor);
+  const enhancer = instrument((state, action) =>
+    Monitor.update(monitorProps, state, action)
+  );
 
-  @connect(
-    state => state,
-    ActionCreators
-  )
-  class DevTools extends Component {
-    render() {
-      const { monitor: Monitor } = this.props;
-      return <Monitor {...this.props} />;
-    }
-  }
-
-  return class DevToolsWrapper extends Component {
-    static propTypes = {
-      monitor: PropTypes.func.isRequired,
-      store: PropTypes.shape({
-        devToolsStore: PropTypes.shape({
-          dispatch: PropTypes.func.isRequired
-        }).isRequired
-      }).isRequired
+  return class DevTools extends Component {
+    static contextTypes = {
+      store: PropTypes.object
     };
 
+    static propTypes = {
+      store: PropTypes.object
+    };
+
+    static instrument = () => enhancer;
+
     constructor(props, context) {
-      if (props.store && !props.store.devToolsStore) {
-        console.error(
-          'Could not find the devTools store inside your store. ' +
-          'Have you applied devTools() store enhancer?'
-        );
-      }
       super(props, context);
+      if (context.store) {
+        this.liftedStore = context.store.liftedStore;
+      } else {
+        this.liftedStore = props.store.liftedStore;
+      }
     }
 
     render() {
       return (
-        <DevTools {...this.props}
-                  store={this.props.store.devToolsStore} />
+        <ConnectedMonitor {...monitorProps}
+                          store={this.liftedStore} />
       );
     }
   };
 }
+
