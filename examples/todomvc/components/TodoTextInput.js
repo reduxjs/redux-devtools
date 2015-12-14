@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
-class TodoTextInput extends Component {
+export default class TodoTextInput extends Component {
   static propTypes = {
     onSave: PropTypes.func.isRequired,
     text: PropTypes.string,
@@ -53,5 +53,3 @@ class TodoTextInput extends Component {
     );
   }
 }
-
-export default TodoTextInput;
