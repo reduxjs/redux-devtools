@@ -8,7 +8,7 @@ export default function createDevTools(children) {
   const Monitor = monitorElement.type;
   const ConnectedMonitor = connect(state => state)(Monitor);
   const enhancer = instrument((state, action) =>
-    Monitor.reducer(state, action, monitorProps)
+    Monitor.update(monitorProps, state, action)
   );
 
   return class DevTools extends Component {
