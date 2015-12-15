@@ -21,7 +21,7 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 
 ### Overview
 
-Redux DevTools is a development time package that provides power-ups for your Redux development workflow. Be careful to strip its code in production! To use Redux DevTools, you need to choose a “monitor”—a React component that will serve as a UI for the DevTools. Different tasks and workflows require different UIs, so Redux DevTools is built to be flexible in this regard. We recommend using [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) for inspecting the state and time travel, and wrap it in a [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) to quckly move it across the screen. That said, when you’re comfortable rolling up your own setup, feel free to do this, and share it with us.
+Redux DevTools is a development time package that provides power-ups for your Redux development workflow. Be careful to strip its code in production! To use Redux DevTools, you need to choose a “monitor”—a React component that will serve as a UI for the DevTools. Different tasks and workflows require different UIs, so Redux DevTools is built to be flexible in this regard. We recommend using [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) for inspecting the state and time travel, and wrap it in a [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) to quickly move it across the screen. That said, when you’re comfortable rolling up your own setup, feel free to do this, and share it with us.
 
 ### Installation
 
