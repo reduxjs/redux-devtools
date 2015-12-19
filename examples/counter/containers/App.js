@@ -27,7 +27,7 @@ export default class App extends Component {
     return (
       <div>
         <Provider store={store}>
-          {() => <CounterApp />}
+          <CounterApp />
         </Provider>
         <DebugPanel top right bottom>
           <DevTools store={store}
