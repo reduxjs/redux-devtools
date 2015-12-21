@@ -415,6 +415,10 @@ In fact some of these are implemented already:
 
 ![](https://camo.githubusercontent.com/d61984306d27d5e0739efc2d57c56ba7aed7996c/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f662e636c2e6c792f6974656d732f3269314c3147316e3161316833793161324f31772f53637265656e2532305265636f7264696e67253230323031352d30382d3034253230617425323030372e3435253230504d2e676966)
 
+#### [redux-devtools-filterable-log-monitor](https://github.com/bvaughn/redux-devtools-filterable-log-monitor/)
+
+![reduxfilterablelogmonitor](https://cloud.githubusercontent.com/assets/29597/11937666/a438d56c-a7ca-11e5-848a-0d535d6c3e25.gif)
+
 #### Keep them coming!
 
 Create a PR to add your custom monitor.
