@@ -24,14 +24,32 @@ export default function createDevTools(children) {
 
     constructor(props, context) {
       super(props, context);
+
+      if (!props.store && !context.store) {
+        console.error(
+`DevTools cannot render because no Redux store was injected via \
+props or <Provide>`);
+        return;
+      }
+
       if (context.store) {
         this.liftedStore = context.store.liftedStore;
       } else {
         this.liftedStore = props.store.liftedStore;
       }
+
+      if (!this.liftedStore) {
+        console.error(
+`DevTools cannot render because the store not been instrumented \
+with DevTools.instrument()`);
+      }
     }
 
     render() {
+      if (!this.liftedStore) {
+        return null;
+      }
+
       return (
         <ConnectedMonitor {...monitorProps}
                           store={this.liftedStore} />
@@ -39,4 +57,3 @@ export default function createDevTools(children) {
     }
   };
 }
-
