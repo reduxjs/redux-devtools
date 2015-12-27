@@ -68,9 +68,11 @@ function computeNextEntry(reducer, action, state, error) {
   } catch (err) {
     nextError = err.toString();
     if (typeof window === 'object' && typeof window.chrome !== 'undefined') {
-      // Solve the issue with loosing sourceMaps in Chrome
-      setTimeout(() => { throw err; }, 0);
-    } else console.error(err.stack || err);
+      // In Chrome, rethrowing provides better source map support
+      setTimeout(() => { throw err; });
+    } else {
+      console.error(err.stack || err);
+    }
   }
 
   return {
