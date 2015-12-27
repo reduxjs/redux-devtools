@@ -27,8 +27,10 @@ export default function createDevTools(children) {
 
       if (!props.store && !context.store) {
         console.error(
-`DevTools cannot render because no Redux store was injected via \
-props or <Provide>`);
+          'Redux DevTools could not render. You must pass the Redux store ' +
+          'to <DevTools> either as a "store" prop or by wrapping it in a ' +
+          '<Provider store={store}>.'
+        );
         return;
       }
 
@@ -40,8 +42,10 @@ props or <Provide>`);
 
       if (!this.liftedStore) {
         console.error(
-`DevTools cannot render because the store not been instrumented \
-with DevTools.instrument()`);
+          'Redux DevTools could not render. Did you forget to include ' +
+          'DevTools.instrument() in your store enhancer chain before ' +
+          'using createStore()?'
+        );
       }
     }
 
