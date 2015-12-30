@@ -1,3 +1,11 @@
-export { default as instrument, ActionCreators, ActionTypes } from './instrument';
-export { default as persistState } from './persistState';
-export { default as createDevTools } from './createDevTools';
+const instrument = require('./instrument');
+const persistState = require('./persistState');
+const createDevTools = require('./createDevTools');
+
+module.exports = {
+    instrument,
+    ActionCreators: instrument.ActionCreators,
+    ActionTypes: instrument.ActionTypes,
+    persistState,
+    createDevTools
+};

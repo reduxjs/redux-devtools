@@ -1,7 +1,7 @@
-import mapValues from 'lodash/object/mapValues';
-import identity from 'lodash/utility/identity';
+const mapValues = require('lodash/object/mapValues');
+const identity = require('lodash/utility/identity');
 
-export default function persistState(sessionId, deserializeState = identity, deserializeAction = identity) {
+module.exports = function persistState(sessionId, deserializeState = identity, deserializeAction = identity) {
   if (!sessionId) {
     return next => (...args) => next(...args);
   }
@@ -57,4 +57,4 @@ export default function persistState(sessionId, deserializeState = identity, des
       }
     };
   };
-}
+};
