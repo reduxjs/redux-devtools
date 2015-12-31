@@ -417,7 +417,7 @@ In fact some of these are implemented already:
 
 #### [redux-devtools-filterable-log-monitor](https://github.com/bvaughn/redux-devtools-filterable-log-monitor/)
 
-![reduxfilterablelogmonitor](https://cloud.githubusercontent.com/assets/29597/12024861/a510cb96-ad76-11e5-9ce3-78f46a2f6837.gif)
+![reduxfilterablelogmonitor](https://cloud.githubusercontent.com/assets/29597/12061839/96898fe2-af5e-11e5-8e6a-636379a81c10.gif)
 
 #### Keep them coming!
 
