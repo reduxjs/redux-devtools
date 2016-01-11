@@ -1,6 +1,8 @@
-import expect, { spyOn } from 'expect';
-import { createStore } from 'redux';
-import instrument, { ActionCreators } from '../src/instrument';
+const expect = require('expect');
+const { spyOn } = expect;
+const {createStore } = require('redux');
+const instrument = require('../src/instrument');
+const { ActionCreators } = instrument;
 
 function counter(state = 0, action) {
   switch (action.type) {

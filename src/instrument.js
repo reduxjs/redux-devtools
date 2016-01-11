@@ -1,6 +1,7 @@
-import difference from 'lodash/array/difference';
+const difference = require('lodash/array/difference');
 
-export const ActionTypes = {
+
+const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
   RESET: 'RESET',
   ROLLBACK: 'ROLLBACK',
@@ -14,7 +15,7 @@ export const ActionTypes = {
 /**
  * Action creators to change the History state.
  */
-export const ActionCreators = {
+const ActionCreators = {
   performAction(action) {
     return { type: ActionTypes.PERFORM_ACTION, action, timestamp: Date.now() };
   },
@@ -333,7 +334,7 @@ function unliftStore(liftedStore, liftReducer) {
 /**
  * Redux instrumentation store enhancer.
  */
-export default function instrument(monitorReducer = () => null) {
+module.exports = function instrument(monitorReducer = () => null) {
   return createStore => (reducer, initialState) => {
     function liftReducer(r) {
       return liftReducerWith(r, initialState, monitorReducer);
@@ -342,4 +343,7 @@ export default function instrument(monitorReducer = () => null) {
     const liftedStore = createStore(liftReducer(reducer));
     return unliftStore(liftedStore, liftReducer);
   };
-}
+};
+
+module.exports.ActionTypes = ActionTypes;
+module.exports.ActionCreators = ActionCreators;

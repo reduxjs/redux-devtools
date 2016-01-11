@@ -1,6 +1,6 @@
-import expect from 'expect';
-import { instrument, persistState } from '../src';
-import { compose, createStore } from 'redux';
+const expect = require('expect');
+const { instrument, persistState } = require('../src');
+const { compose, createStore } = require('redux');
 
 describe('persistState', () => {
   let savedLocalStorage = global.localStorage;
