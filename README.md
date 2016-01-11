@@ -144,14 +144,30 @@ export default function configureStore(initialState) {
 
 #### Exclude DevTools from Production Builds
 
-Finally, to make sure we’re not pulling any DevTools-related code in the production builds, we will envify our code. With Webpack, you can use `DefinePlugin` (Browserify equivalent is called [`envify`](https://github.com/zertosh/loose-envify)) to turn magic constants like `process.env.NODE_ENV` into `'production'` or `'development'` strings depending on the environment, and import and render `redux-devtools` conditionally when `process.env.NODE_ENV` is not `'production'`. Then, if you have an Uglify step before production, Uglify will eliminate dead `if (false)` branches with `redux-devtools` imports.
+Finally, to make sure we’re not pulling any DevTools-related code in the production builds, we will envify our code. You can use [`DefinePlugin`](https://github.com/webpack/docs/wiki/list-of-plugins#defineplugin) with Webpack, or [`envify`](https://github.com/zertosh/loose-envify) for Browserify.
+
+The trick is to replace all occurrences of a constant like `process.env.NODE_ENV` into a string depending on the environment, and import and render `redux-devtools` only when `process.env.NODE_ENV` is not `'production'`. Then, if you have an Uglify step before production, Uglify will eliminate dead `if (false)` branches with `redux-devtools` imports.
+
+With Webpack, you'll need two config files, one for development and one for production. Here's a snippet from an example production config:
+
+##### `webpack.config.prod.js`
+
+```js
+// ...
+plugins: [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify('production')
+  })
+],
+// ...
+```
 
 If you are using ES6 modules with Webpack 1.x and Babel, you might try putting your `import` statement inside an `if (process.env.NODE_ENV !== 'production)` to exclude the DevTools package from your production bundle. However this ES6 specification forbids it, so this won’t compile. Instead, you can use a conditional CommonJS `require`. Babel will let it compile, and Uglify will eliminate the dead branches before Webpack creates a bundle. This is why we recommend creating a `configureStore.js` file that either directs you to `configureStore.dev.js` or `configureStore.prod.js` depending on the configuration. While it is a little bit more maintenance, the upside is that you can be sure you won’t pull any development dependencies into the production builds, and that you can easily enable different middleware (e.g. crash reporting, logging) in the production environment.
 
 ##### `store/configureStore.js`
 
 ```js
-// Use ProvidePlugin (Webpack) or loose-envify (Browserify)
+// Use DefinePlugin (Webpack) or loose-envify (Browserify)
 // together with Uglify to strip the dev branch in prod build.
 if (process.env.NODE_ENV === 'production') {
   module.exports = require('./configureStore.prod');
@@ -340,7 +356,7 @@ export default function showDevTools(store) {
   const popup = window.open(null, 'Redux DevTools', 'menubar=no,location=no,resizable=yes,scrollbars=no,status=no');
   // Reload in case it already exists
   popup.location.reload();
-  
+
   setTimeout(() => {
     popup.document.write('<div id="react-devtools-root"></div>');
     render(
@@ -359,7 +375,7 @@ Note that there are no useful props you can pass to the `DevTools` component oth
 
 * **Your reducers have to be pure and free of side effects to work correctly with DevTools.** For example, even generating a random ID in reducer makes it impure and non-deterministic. Instead, do this in action creators.
 
-* **Make sure to only apply `DevTools.instrument()` and render `<DevTools>` in development!** In production, this will be terribly slow because actions just accumulate forever. As described above, you need to use conditional `require`s and use `ProvidePlugin` (Webpack) or `loose-envify` (Browserify) together with Uglify to remove the dead code. Here is [an example](https://github.com/erikras/react-redux-universal-hot-example/) that adds Redux DevTools handling the production case correctly.
+* **Make sure to only apply `DevTools.instrument()` and render `<DevTools>` in development!** In production, this will be terribly slow because actions just accumulate forever. As described above, you need to use conditional `require`s and use `DefinePlugin` (Webpack) or `loose-envify` (Browserify) together with Uglify to remove the dead code. Here is [an example](https://github.com/erikras/react-redux-universal-hot-example/) that adds Redux DevTools handling the production case correctly.
 
 * **It is important that `DevTools.instrument()` store enhancer should be added to your middleware stack *after* `applyMiddleware` in the `compose`d functions, as `applyMiddleware` is potentially asynchronous.** Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
 
