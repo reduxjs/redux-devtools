@@ -15,7 +15,7 @@ export default class Footer extends Component {
     filter: PropTypes.string.isRequired,
     onClearMarked: PropTypes.func.isRequired,
     onShow: PropTypes.func.isRequired
-  }
+  };
 
   render() {
     return (
