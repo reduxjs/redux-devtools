@@ -16,6 +16,12 @@ export const ActionTypes = {
  */
 export const ActionCreators = {
   performAction(action) {
+    if (typeof action.type === 'undefined') {
+      throw new Error(
+        'Actions may not have an undefined "type" property. ' +
+        'Have you misspelled a constant?'
+      );
+    }
     return { type: ActionTypes.PERFORM_ACTION, action, timestamp: Date.now() };
   },
 
