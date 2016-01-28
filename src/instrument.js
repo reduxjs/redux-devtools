@@ -334,12 +334,12 @@ function unliftStore(liftedStore, liftReducer) {
  * Redux instrumentation store enhancer.
  */
 export default function instrument(monitorReducer = () => null) {
-  return createStore => (reducer, initialState) => {
+  return createStore => (reducer, initialState, enhancer) => {
     function liftReducer(r) {
       return liftReducerWith(r, initialState, monitorReducer);
     }
 
-    const liftedStore = createStore(liftReducer(reducer));
+    const liftedStore = createStore(liftReducer(reducer), undefined, enhancer);
     return unliftStore(liftedStore, liftReducer);
   };
 }

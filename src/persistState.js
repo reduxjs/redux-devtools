@@ -21,7 +21,7 @@ export default function persistState(sessionId, deserializeState = identity, des
     };
   }
 
-  return next => (reducer, initialState) => {
+  return next => (reducer, initialState, enhancer) => {
     const key = `redux-dev-session-${sessionId}`;
 
     let finalInitialState;
@@ -40,7 +40,7 @@ export default function persistState(sessionId, deserializeState = identity, des
       }
     }
 
-    const store = next(reducer, finalInitialState);
+    const store = next(reducer, finalInitialState, enhancer);
 
     return {
       ...store,
