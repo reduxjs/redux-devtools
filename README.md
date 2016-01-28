@@ -81,7 +81,7 @@ const DevTools = createDevTools(
 
 The `DevTools` component you created with `createDevTools()` has a special static method called `instrument()`. It returns a [store enhancer](http://rackt.github.io/redux/docs/Glossary.html#store-enhancer) that you need to use in development.
 
-A store enhancer is a function that takes `createStore` and returns an enhanced version of it that you will use instead. You probably already used another store enhancer—[`applyMiddleware()`](http://redux.js.org/docs/api/applyMiddleware.html). Unlike `applyMiddleware()`, you will need to be careful to only use `DevTools.instrument()` in development environment, and never in production.
+A store enhancer is a function that enhances the behavior of `createStore()`. You can pass store enhancer as the last optional argument to `createStore()`. You probably already used another store enhancer—[`applyMiddleware()`](http://redux.js.org/docs/api/applyMiddleware.html). Unlike `applyMiddleware()`, you will need to be careful to only use `DevTools.instrument()` in development environment, and never in production.
 
 The easiest way to apply several store enhancers in a row is to use the [`compose()`](http://redux.js.org/docs/api/compose.html) utility function that ships with Redux. It is the same `compose()` that you can find in Underscore and Lodash. In our case, we would use it to compose several store enhancers into one: `compose(applyMiddleware(m1, m2, m3), DevTools.instrument())`.
 
@@ -94,15 +94,17 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
-const finalCreateStore = compose(
+const enhancer = compose(
   // Middleware you want to use in development:
   applyMiddleware(d1, d2, d3),
   // Required! Enable Redux DevTools with the monitors you chose
   DevTools.instrument()
-)(createStore);
+);
 
 export default function configureStore(initialState) {
-  const store = finalCreateStore(rootReducer, initialState);
+  // Note: only Redux >= 3.1.0 supports passing enhancer as third argument.
+  // See https://github.com/rackt/redux/releases/tag/v3.1.0
+  const store = createStore(rootReducer, initialState, enhancer);
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
@@ -121,14 +123,14 @@ If you’d like, you may add another store enhancer called `persistState()`. It 
 // ...
 import { persistState } from 'redux-devtools';
 
-const finalCreateStore = compose(
+const enhancer = compose(
   // Middleware you want to use in development:
   applyMiddleware(d1, d2, d3),
   // Required! Enable Redux DevTools with the monitors you chose
   DevTools.instrument(),
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
   persistState(getDebugSessionKey())
-)(createStore);
+);
 
 function getDebugSessionKey() {
   // You can write custom logic here!
@@ -182,14 +184,13 @@ if (process.env.NODE_ENV === 'production') {
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers';
 
-const finalCreateStore = compose(
-  // Middleware you want to use in production:
-  applyMiddleware(p1, p2, p3),
-  // Other store enhancers if you use any
-)(createStore);
+// Middleware you want to use in production:
+const enhancer = applyMiddleware(p1, p2, p3);
 
 export default function configureStore(initialState) {
-  return finalCreateStore(rootReducer, initialState);
+  // Note: only Redux >= 3.1.0 supports passing enhancer as third argument.
+  // See https://github.com/rackt/redux/releases/tag/v3.1.0
+  return createStore(rootReducer, initialState, enhancer);
 };
 ```
 
@@ -201,14 +202,14 @@ import { persistState } from 'redux-devtools';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
-const finalCreateStore = compose(
+const enhancer = compose(
   // Middleware you want to use in development:
   applyMiddleware(d1, d2, d3),
   // Required! Enable Redux DevTools with the monitors you chose
   DevTools.instrument(),
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
   persistState(getDebugSessionKey())
-)(createStore);
+);
 
 function getDebugSessionKey() {
   // You can write custom logic here!
@@ -218,7 +219,9 @@ function getDebugSessionKey() {
 }
 
 export default function configureStore(initialState) {
-  const store = finalCreateStore(rootReducer, initialState);
+  // Note: only Redux >= 3.1.0 supports passing enhancer as third argument.
+  // See https://github.com/rackt/redux/releases/tag/v3.1.0
+  const store = createStore(rootReducer, initialState, enhancer);
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
