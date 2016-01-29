@@ -23,6 +23,10 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 
 Redux DevTools is a development time package that provides power-ups for your Redux development workflow. Be careful to strip its code in production! To use Redux DevTools, you need to choose a “monitor”—a React component that will serve as a UI for the DevTools. Different tasks and workflows require different UIs, so Redux DevTools is built to be flexible in this regard. We recommend using [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) for inspecting the state and time travel, and wrap it in a [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) to quickly move it across the screen. That said, when you’re comfortable rolling up your own setup, feel free to do this, and share it with us.
 
+### Chrome Extension
+
+If you don’t want to bother with installing Redux DevTools and integrating it into your project, consider using [Redux DevTools Chrome Extension](https://github.com/zalmoxisus/redux-devtools-extension). It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
+
 ### Installation
 
 ```
@@ -434,9 +438,19 @@ In fact some of these are implemented already:
 
 ![](https://camo.githubusercontent.com/d61984306d27d5e0739efc2d57c56ba7aed7996c/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f662e636c2e6c792f6974656d732f3269314c3147316e3161316833793161324f31772f53637265656e2532305265636f7264696e67253230323031352d30382d3034253230617425323030372e3435253230504d2e676966)
 
+#### [redux-devtools-diff-monitor](https://github.com/whetstone/redux-devtools-diff-monitor)
+
+![](https://camo.githubusercontent.com/c2c0ba1ad82d003b5386404ae09c00763d73510c/687474703a2f2f692e696d6775722e636f6d2f72764352394f512e706e67)
+
 #### [redux-devtools-filterable-log-monitor](https://github.com/bvaughn/redux-devtools-filterable-log-monitor/)
 
-![reduxfilterablelogmonitor](https://cloud.githubusercontent.com/assets/29597/12061839/96898fe2-af5e-11e5-8e6a-636379a81c10.gif)
+![redux-devtools-filterable-log-monitor](https://cloud.githubusercontent.com/assets/29597/12061839/96898fe2-af5e-11e5-8e6a-636379a81c10.gif)
+
+#### [redux-devtools-filter-actions](https://github.com/zalmoxisus/redux-devtools-filter-actions)
+
+(Does not have a UI but can wrap any other monitor)
+
+<img src='http://i.imgur.com/TlqnU0J.png' width='400'>
 
 #### Keep them coming!
 
