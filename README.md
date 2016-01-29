@@ -29,7 +29,7 @@ If you don’t want to bother with installing Redux DevTools and integrating it 
 
 ### Walkthrough
 
-Read the [walkthrough](https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md) for the integration instructions.
+Read the [walkthrough](./docs/Walkthrough.md) for the integration instructions.
 
 ### Running Examples
 
@@ -79,23 +79,23 @@ Some crazy ideas for custom monitors:
 
 In fact some of these are implemented already:
 
-#### [redux-slider-monitor](https://github.com/calesce/redux-slider-monitor)
+#### [Slider Monitor](https://github.com/calesce/redux-slider-monitor)
 
 ![](https://camo.githubusercontent.com/d61984306d27d5e0739efc2d57c56ba7aed7996c/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f662e636c2e6c792f6974656d732f3269314c3147316e3161316833793161324f31772f53637265656e2532305265636f7264696e67253230323031352d30382d3034253230617425323030372e3435253230504d2e676966)
 
-#### [redux-devtools-diff-monitor](https://github.com/whetstone/redux-devtools-diff-monitor)
+#### [Diff Monitor](https://github.com/whetstone/redux-devtools-diff-monitor)
 
 ![](https://camo.githubusercontent.com/c2c0ba1ad82d003b5386404ae09c00763d73510c/687474703a2f2f692e696d6775722e636f6d2f72764352394f512e706e67)
 
-#### [redux-devtools-filterable-log-monitor](https://github.com/bvaughn/redux-devtools-filterable-log-monitor/)
+#### [Filterable Log Monitor](https://github.com/bvaughn/redux-devtools-filterable-log-monitor/)
 
 ![redux-devtools-filterable-log-monitor](https://cloud.githubusercontent.com/assets/29597/12061839/96898fe2-af5e-11e5-8e6a-636379a81c10.gif)
 
-#### [redux-devtools-chart-monitor](https://github.com/romseguy/redux-devtools-chart-monitor)
+#### [Chart Monitor](https://github.com/romseguy/redux-devtools-chart-monitor)
 
 ![redux-devtools-chart-monitor](http://i.imgur.com/MSgvU6l.gif)
 
-#### [redux-devtools-filter-actions](https://github.com/zalmoxisus/redux-devtools-filter-actions)
+#### [Filter Actions](https://github.com/zalmoxisus/redux-devtools-filter-actions)
 
 (Does not have a UI but can wrap any other monitor)
 
