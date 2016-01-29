@@ -446,6 +446,10 @@ In fact some of these are implemented already:
 
 ![redux-devtools-filterable-log-monitor](https://cloud.githubusercontent.com/assets/29597/12061839/96898fe2-af5e-11e5-8e6a-636379a81c10.gif)
 
+#### [redux-devtools-chart-monitor](https://github.com/romseguy/redux-devtools-chart-monitor)
+
+![redux-devtools-chart-monitor](http://i.imgur.com/MSgvU6l.gif)
+
 #### [redux-devtools-filter-actions](https://github.com/zalmoxisus/redux-devtools-filter-actions)
 
 (Does not have a UI but can wrap any other monitor)
