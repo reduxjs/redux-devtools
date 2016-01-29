@@ -81,7 +81,7 @@ In fact some of these are implemented already:
 
 #### [Slider Monitor](https://github.com/calesce/redux-slider-monitor)
 
-![](https://camo.githubusercontent.com/d61984306d27d5e0739efc2d57c56ba7aed7996c/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f662e636c2e6c792f6974656d732f3269314c3147316e3161316833793161324f31772f53637265656e2532305265636f7264696e67253230323031352d30382d3034253230617425323030372e3435253230504d2e676966)
+![](https://camo.githubusercontent.com/47a3f427c9d2e0c763b74e33417b3001fe8604b6/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f662e636c2e6c792f6974656d732f3149335032323243334e3252314d3279314b33622f53637265656e2532305265636f7264696e67253230323031352d31322d3232253230617425323030372e3230253230504d2e6769663f763d3162363236376537)
 
 #### [Diff Monitor](https://github.com/whetstone/redux-devtools-diff-monitor)
 
@@ -89,7 +89,7 @@ In fact some of these are implemented already:
 
 #### [Filterable Log Monitor](https://github.com/bvaughn/redux-devtools-filterable-log-monitor/)
 
-![redux-devtools-filterable-log-monitor](https://cloud.githubusercontent.com/assets/29597/12061839/96898fe2-af5e-11e5-8e6a-636379a81c10.gif)
+![redux-devtools-filterable-log-monitor](https://cloud.githubusercontent.com/assets/29597/12440009/182bb31c-beec-11e5-8fd0-bdda48e646b2.gif)
 
 #### [Chart Monitor](https://github.com/romseguy/redux-devtools-chart-monitor)
 
