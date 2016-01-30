@@ -322,4 +322,10 @@ describe('instrument', () => {
       expect(importMonitoredLiftedStore.getState()).toEqual(exportedState);
     });
   });
+
+  it('throws if reducer is not a function', () => {
+    expect(() =>
+      instrument()(createStore)()
+    ).toThrow('Expected the nextReducer to be a function.');
+  });
 });
