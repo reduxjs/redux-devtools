@@ -336,6 +336,9 @@ function unliftStore(liftedStore, liftReducer) {
 export default function instrument(monitorReducer = () => null) {
   return createStore => (reducer, initialState, enhancer) => {
     function liftReducer(r) {
+      if (typeof r !== 'function') {
+        throw new Error('Expected the nextReducer to be a function.')
+      }
       return liftReducerWith(r, initialState, monitorReducer);
     }
 
