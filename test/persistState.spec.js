@@ -39,64 +39,59 @@ describe('persistState', () => {
   };
 
   it('should persist state', () => {
-    const finalCreateStore = compose(instrument(), persistState('id'))(createStore);
-    const store = finalCreateStore(reducer);
+    const store = createStore(reducer, compose(instrument(), persistState('id')));
     expect(store.getState()).toBe(0);
 
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    const store2 = finalCreateStore(reducer);
+    const store2 = createStore(reducer, compose(instrument(), persistState('id')));
     expect(store2.getState()).toBe(2);
   });
 
   it('should not persist state if no session id', () => {
-    const finalCreateStore = compose(instrument(), persistState())(createStore);
-    const store = finalCreateStore(reducer);
+    const store = createStore(reducer, compose(instrument(), persistState()));
     expect(store.getState()).toBe(0);
 
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    const store2 = finalCreateStore(reducer);
+    const store2 = createStore(reducer, compose(instrument(), persistState()));
     expect(store2.getState()).toBe(0);
   });
 
   it('should run with a custom state deserializer', () => {
     const oneLess = state => state === undefined ? -1 : state - 1;
-    const finalCreateStore = compose(instrument(), persistState('id', oneLess))(createStore);
-    const store = finalCreateStore(reducer);
+    const store = createStore(reducer, compose(instrument(), persistState('id', oneLess)));
     expect(store.getState()).toBe(0);
 
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    const store2 = finalCreateStore(reducer);
+    const store2 = createStore(reducer, compose(instrument(), persistState('id', oneLess)));
     expect(store2.getState()).toBe(1);
   });
 
   it('should run with a custom action deserializer', () => {
     const incToDec = action => action.type === 'INCREMENT' ? { type: 'DECREMENT' } : action;
-    const finalCreateStore = compose(instrument(), persistState('id', undefined, incToDec))(createStore);
-    const store = finalCreateStore(reducer);
+    const store = createStore(reducer, compose(instrument(), persistState('id', undefined, incToDec)));
     expect(store.getState()).toBe(0);
 
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    const store2 = finalCreateStore(reducer);
+    const store2 = createStore(reducer, compose(instrument(), persistState('id', undefined, incToDec)));
     expect(store2.getState()).toBe(-2);
   });
 
   it('should warn if read from localStorage fails', () => {
     const spy = expect.spyOn(console, 'warn');
-    const finalCreateStore = compose(instrument(), persistState('id'))(createStore);
     delete global.localStorage.getItem;
-    finalCreateStore(reducer);
+    const store = createStore(reducer, compose(instrument(), persistState('id')));
 
     expect(spy.calls).toContain(
       /Could not read debug session from localStorage/,
@@ -105,11 +100,11 @@ describe('persistState', () => {
 
     spy.restore();
   });
+
   it('should warn if write to localStorage fails', () => {
     const spy = expect.spyOn(console, 'warn');
-    const finalCreateStore = compose(instrument(), persistState('id'))(createStore);
     delete global.localStorage.setItem;
-    const store = finalCreateStore(reducer);
+    const store = createStore(reducer, compose(instrument(), persistState('id')));
 
     store.dispatch({ type: 'INCREMENT' });
     expect(spy.calls).toContain(

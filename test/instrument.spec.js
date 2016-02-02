@@ -32,7 +32,7 @@ describe('instrument', () => {
   let liftedStore;
 
   beforeEach(() => {
-    store = instrument()(createStore)(counter);
+    store = createStore(counter, instrument());
     liftedStore = store.liftedStore;
   });
 
@@ -156,7 +156,7 @@ describe('instrument', () => {
 
   it('should catch and record errors', () => {
     let spy = spyOn(console, 'error');
-    let storeWithBug = instrument()(createStore)(counterWithBug);
+    let storeWithBug = createStore(counterWithBug, instrument());
 
     storeWithBug.dispatch({ type: 'INCREMENT' });
     storeWithBug.dispatch({ type: 'DECREMENT' });
@@ -180,12 +180,13 @@ describe('instrument', () => {
     expect(() => {
       store.dispatch({ type: undefined });
     }).toThrow(
-      /Actions may not have an undefined/
+      'Actions may not have an undefined "type" property. ' +
+      'Have you misspelled a constant?'
     );
   });
 
   it('should return the last non-undefined state from getState', () => {
-    let storeWithBug = instrument()(createStore)(counterWithBug);
+    let storeWithBug = createStore(counterWithBug, instrument());
     storeWithBug.dispatch({ type: 'INCREMENT' });
     storeWithBug.dispatch({ type: 'INCREMENT' });
     expect(storeWithBug.getState()).toBe(2);
@@ -196,7 +197,7 @@ describe('instrument', () => {
 
   it('should not recompute states on every action', () => {
     let reducerCalls = 0;
-    let monitoredStore = instrument()(createStore)(() => reducerCalls++);
+    let monitoredStore = createStore(() => reducerCalls++, instrument());
     expect(reducerCalls).toBe(1);
     monitoredStore.dispatch({ type: 'INCREMENT' });
     monitoredStore.dispatch({ type: 'INCREMENT' });
@@ -206,7 +207,7 @@ describe('instrument', () => {
 
   it('should not recompute old states when toggling an action', () => {
     let reducerCalls = 0;
-    let monitoredStore = instrument()(createStore)(() => reducerCalls++);
+    let monitoredStore = createStore(() => reducerCalls++, instrument());
     let monitoredLiftedStore = monitoredStore.liftedStore;
 
     expect(reducerCalls).toBe(1);
@@ -249,7 +250,7 @@ describe('instrument', () => {
 
   it('should not recompute states when jumping to state', () => {
     let reducerCalls = 0;
-    let monitoredStore = instrument()(createStore)(() => reducerCalls++);
+    let monitoredStore = createStore(() => reducerCalls++, instrument());
     let monitoredLiftedStore = monitoredStore.liftedStore;
 
     expect(reducerCalls).toBe(1);
@@ -272,10 +273,9 @@ describe('instrument', () => {
     expect(monitoredLiftedStore.getState().computedStates).toBe(savedComputedStates);
   });
 
-
   it('should not recompute states on monitor actions', () => {
     let reducerCalls = 0;
-    let monitoredStore = instrument()(createStore)(() => reducerCalls++);
+    let monitoredStore = createStore(() => reducerCalls++, instrument());
     let monitoredLiftedStore = monitoredStore.liftedStore;
 
     expect(reducerCalls).toBe(1);
@@ -301,7 +301,7 @@ describe('instrument', () => {
     let exportedState;
 
     beforeEach(() => {
-      monitoredStore = instrument()(createStore)(counter);
+      monitoredStore = createStore(counter, instrument());
       monitoredLiftedStore = monitoredStore.liftedStore;
       // Set up state to export
       monitoredStore.dispatch({ type: 'INCREMENT' });
@@ -312,7 +312,7 @@ describe('instrument', () => {
     });
 
     it('should replay all the steps when a state is imported', () => {
-      let importMonitoredStore = instrument()(createStore)(counter);
+      let importMonitoredStore = createStore(counter, instrument());
       let importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       importMonitoredLiftedStore.dispatch(ActionCreators.importState(exportedState));
@@ -320,7 +320,7 @@ describe('instrument', () => {
     });
 
     it('should replace the existing action log with the one imported', () => {
-      let importMonitoredStore = instrument()(createStore)(counter);
+      let importMonitoredStore = createStore(counter, instrument());
       let importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       importMonitoredStore.dispatch({ type: 'DECREMENT' });
@@ -333,12 +333,27 @@ describe('instrument', () => {
 
   it('throws if reducer is not a function', () => {
     expect(() =>
-      instrument()(createStore)()
-    ).toThrow('Expected the nextReducer to be a function.');
+      createStore(undefined, instrument())
+    ).toThrow('Expected the reducer to be a function.');
   });
+
+  it('warns if the reducer is not a function but has a default field that is', () => {
+    expect(() =>
+      createStore(({ default: () => {} }), instrument())
+    ).toThrow(
+      'Expected the reducer to be a function. ' +
+      'Instead got an object with a "default" field. ' +
+      'Did you pass a module instead of the default export? ' +
+      'Try passing require(...).default instead.'
+    );
+  });
+
   it('throws if there are more than one instrument enhancer included', () => {
     expect(() => {
-      store = createStore(counter, undefined, compose(instrument(), instrument()));
-    }).toThrow('DevTools instrument shouldn\'t be included more than once. Check your store configuration.');
+      createStore(counter, compose(instrument(), instrument()))
+    }).toThrow(
+      'DevTools instrumentation should not be applied more than once. ' +
+      'Check your store configuration.'
+    );
   });
 });

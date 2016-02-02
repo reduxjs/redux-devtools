@@ -341,18 +341,30 @@ function unliftStore(liftedStore, liftReducer) {
  */
 export default function instrument(monitorReducer = () => null) {
   return createStore => (reducer, initialState, enhancer) => {
+
     function liftReducer(r) {
       if (typeof r !== 'function') {
-        throw new Error('Expected the nextReducer to be a function.');
+        if (r && typeof r['default'] === 'function') {
+          throw new Error(
+            'Expected the reducer to be a function. ' +
+            'Instead got an object with a "default" field. ' +
+            'Did you pass a module instead of the default export? ' +
+            'Try passing require(...).default instead.'
+          );
+        }
+        throw new Error('Expected the reducer to be a function.');
       }
       return liftReducerWith(r, initialState, monitorReducer);
     }
 
-    const liftedStore = createStore(liftReducer(reducer), undefined, enhancer);
+    const liftedStore = createStore(liftReducer(reducer), enhancer);
     if (liftedStore.liftedStore) {
-      throw new Error('DevTools instrument shouldn\'t be included more than once. ' +
-        'Check your store configuration.');
+      throw new Error(
+        'DevTools instrumentation should not be applied more than once. ' +
+        'Check your store configuration.'
+      );
     }
+
     return unliftStore(liftedStore, liftReducer);
   };
 }
