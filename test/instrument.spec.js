@@ -176,6 +176,14 @@ describe('instrument', () => {
     spy.restore();
   });
 
+  it('should catch invalid action type', () => {
+    expect(() => {
+      store.dispatch({ type: undefined });
+    }).toThrow(
+      /Actions may not have an undefined/
+    );
+  });
+
   it('should return the last non-undefined state from getState', () => {
     let storeWithBug = instrument()(createStore)(counterWithBug);
     storeWithBug.dispatch({ type: 'INCREMENT' });
