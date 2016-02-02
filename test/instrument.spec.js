@@ -1,5 +1,5 @@
 import expect, { spyOn } from 'expect';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import instrument, { ActionCreators } from '../src/instrument';
 
 function counter(state = 0, action) {
@@ -321,5 +321,16 @@ describe('instrument', () => {
       importMonitoredLiftedStore.dispatch(ActionCreators.importState(exportedState));
       expect(importMonitoredLiftedStore.getState()).toEqual(exportedState);
     });
+  });
+
+  it('throws if reducer is not a function', () => {
+    expect(() =>
+      instrument()(createStore)()
+    ).toThrow('Expected the nextReducer to be a function.');
+  });
+  it('throws if there are more than one instrument enhancer included', () => {
+    expect(() => {
+      store = createStore(counter, undefined, compose(instrument(), instrument()));
+    }).toThrow('DevTools instrument shouldn\'t be included more than once. Check your store configuration.');
   });
 });
