@@ -1,4 +1,4 @@
-import difference from 'lodash/array/difference';
+import {difference} from 'lodash/array';
 
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
