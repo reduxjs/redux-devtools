@@ -343,6 +343,10 @@ export default function instrument(monitorReducer = () => null) {
     }
 
     const liftedStore = createStore(liftReducer(reducer), undefined, enhancer);
+    if (liftedStore.liftedStore) {
+      throw new Error('DevTools instrument shouldn\'t be included more than once. ' +
+        'Check your store configuration.');
+    }
     return unliftStore(liftedStore, liftReducer);
   };
 }
