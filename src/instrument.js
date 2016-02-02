@@ -1,4 +1,4 @@
-import {difference} from 'lodash/array';
+import difference from 'lodash/difference';
 
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
@@ -344,7 +344,7 @@ export default function instrument(monitorReducer = () => null) {
 
     function liftReducer(r) {
       if (typeof r !== 'function') {
-        if (r && typeof r['default'] === 'function') {
+        if (r && typeof r.default === 'function') {
           throw new Error(
             'Expected the reducer to be a function. ' +
             'Instead got an object with a "default" field. ' +

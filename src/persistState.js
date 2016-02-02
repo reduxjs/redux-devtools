@@ -1,5 +1,5 @@
-import {mapValues} from 'lodash/object';
-import {identity} from 'lodash/utility';
+import mapValues from 'lodash/mapValues';
+import identity from 'lodash/identity';
 
 export default function persistState(sessionId, deserializeState = identity, deserializeAction = identity) {
   if (!sessionId) {

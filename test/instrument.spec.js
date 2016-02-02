@@ -339,7 +339,7 @@ describe('instrument', () => {
 
   it('warns if the reducer is not a function but has a default field that is', () => {
     expect(() =>
-      createStore(({ default: () => {} }), instrument())
+      createStore(({ 'default': () => {} }), instrument())
     ).toThrow(
       'Expected the reducer to be a function. ' +
       'Instead got an object with a "default" field. ' +
@@ -350,7 +350,7 @@ describe('instrument', () => {
 
   it('throws if there are more than one instrument enhancer included', () => {
     expect(() => {
-      createStore(counter, compose(instrument(), instrument()))
+      createStore(counter, compose(instrument(), instrument()));
     }).toThrow(
       'DevTools instrumentation should not be applied more than once. ' +
       'Check your store configuration.'

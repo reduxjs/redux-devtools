@@ -91,7 +91,7 @@ describe('persistState', () => {
   it('should warn if read from localStorage fails', () => {
     const spy = expect.spyOn(console, 'warn');
     delete global.localStorage.getItem;
-    const store = createStore(reducer, compose(instrument(), persistState('id')));
+    createStore(reducer, compose(instrument(), persistState('id')));
 
     expect(spy.calls).toContain(
       /Could not read debug session from localStorage/,
