@@ -169,7 +169,7 @@ describe('instrument', () => {
     expect(computedStates[3].error).toMatch(
       /Interrupted by an error up the chain/
     );
-    expect(spy.calls[0].arguments[0]).toMatch(
+    expect(spy.calls[0].arguments[0].toString()).toMatch(
       /ReferenceError/
     );
 
