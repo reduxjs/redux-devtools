@@ -347,9 +347,7 @@ function unliftStore(liftedStore, liftReducer) {
 /**
  * Redux instrumentation store enhancer.
  */
-export default function instrument(monitorReducer, options = {}) {
-  if (!monitorReducer) { monitorReducer = () => null; }
-
+export default function instrument(monitorReducer = () => null, options = {}) {
   return createStore => (reducer, initialState, enhancer) => {
 
     function liftReducer(r) {

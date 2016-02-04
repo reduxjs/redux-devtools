@@ -300,7 +300,7 @@ describe('instrument', () => {
     let configuredLiftedStore;
 
     beforeEach(() => {
-      configuredStore = createStore(counter, instrument(null, { maxAge: 2 }));
+      configuredStore = createStore(counter, instrument(undefined, { maxAge: 2 }));
       configuredLiftedStore = configuredStore.liftedStore;
     });
 
