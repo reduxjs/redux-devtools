@@ -138,7 +138,7 @@ function liftAction(action) {
 /**
  * Creates a history state reducer from an app's reducer.
  */
-function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
+function liftReducerWith(reducer, initialCommittedState, monitorReducer, options) {
   const initialLiftedState = {
     monitorState: monitorReducer(undefined, {}),
     nextActionId: 1,
@@ -235,6 +235,14 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
         break;
       }
       case ActionTypes.PERFORM_ACTION: {
+        if (options.maxAge && stagedActionIds.length === options.maxAge) {
+          // If maxAge has been reached, remove oldest action
+          delete actionsById[stagedActionIds[0]];
+          skippedActionIds = skippedActionIds.filter(id => id !== stagedActionIds[0]);
+          stagedActionIds = stagedActionIds.slice(1);
+          committedState = computedStates[1].state;
+          computedStates = computedStates.slice(1);
+        }
         if (currentStateIndex === stagedActionIds.length - 1) {
           currentStateIndex++;
         }
@@ -339,7 +347,9 @@ function unliftStore(liftedStore, liftReducer) {
 /**
  * Redux instrumentation store enhancer.
  */
-export default function instrument(monitorReducer = () => null) {
+export default function instrument(monitorReducer, options = {}) {
+  if (!monitorReducer) { monitorReducer = () => null; }
+
   return createStore => (reducer, initialState, enhancer) => {
 
     function liftReducer(r) {
@@ -354,7 +364,7 @@ export default function instrument(monitorReducer = () => null) {
         }
         throw new Error('Expected the reducer to be a function.');
       }
-      return liftReducerWith(r, initialState, monitorReducer);
+      return liftReducerWith(r, initialState, monitorReducer, options);
     }
 
     const liftedStore = createStore(liftReducer(reducer), enhancer);

@@ -295,6 +295,44 @@ describe('instrument', () => {
     expect(monitoredLiftedStore.getState().computedStates).toBe(savedComputedStates);
   });
 
+  describe('maxAge option', () => {
+    let configuredStore;
+    let configuredLiftedStore;
+
+    beforeEach(() => {
+      configuredStore = createStore(counter, instrument(null, { maxAge: 2 }));
+      configuredLiftedStore = configuredStore.liftedStore;
+    });
+
+    it('should remove earliest action when maxAge is reached', () => {
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      let liftedStoreState = configuredLiftedStore.getState();
+
+      expect(configuredStore.getState()).toBe(1);
+      expect(Object.keys(liftedStoreState.actionsById).length).toBe(2);
+      expect(liftedStoreState.committedState).toBe(undefined);
+
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      liftedStoreState = configuredLiftedStore.getState();
+
+      expect(configuredStore.getState()).toBe(2);
+      expect(Object.keys(liftedStoreState.actionsById).length).toBe(2);
+      expect(liftedStoreState.stagedActionIds).toExclude(0);
+      expect(liftedStoreState.computedStates[0].state).toBe(1);
+      expect(liftedStoreState.committedState).toBe(1);
+      expect(liftedStoreState.currentStateIndex).toBe(1);
+    });
+
+    it('should handle skipped actions', () => {
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      configuredLiftedStore.dispatch(ActionCreators.toggleAction(1));
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      expect(configuredLiftedStore.getState().skippedActionIds).toInclude(1);
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      expect(configuredLiftedStore.getState().skippedActionIds).toExclude(1);
+    });
+  });
+
   describe('Import State', () => {
     let monitoredStore;
     let monitoredLiftedStore;
