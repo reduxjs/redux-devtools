@@ -236,7 +236,7 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
       }
       case ActionTypes.PERFORM_ACTION: {
         if (options.maxAge && stagedActionIds.length === options.maxAge) {
-          // If maxAge has been reached, remove oldest action.
+          // If maxAge has been reached, auto-commit earliest non-@@INIT action.
           delete actionsById[stagedActionIds[1]];
           skippedActionIds = skippedActionIds.filter(id => id !== stagedActionIds[1]);
           stagedActionIds = [0].concat(stagedActionIds.slice(2));
