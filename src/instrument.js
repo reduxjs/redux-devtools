@@ -238,7 +238,7 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
         if (options.maxAge && stagedActionIds.length === options.maxAge) {
           // If maxAge has been reached, remove oldest action.
           delete actionsById[stagedActionIds[1]];
-          skippedActionIds = skippedActionIds.filter(id => id !== stagedActionIds[0]);
+          skippedActionIds = skippedActionIds.filter(id => id !== stagedActionIds[1]);
           stagedActionIds = [0].concat(stagedActionIds.slice(2));
           committedState = computedStates[1].state;
           computedStates = computedStates.slice(1);

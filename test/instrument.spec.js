@@ -300,27 +300,30 @@ describe('instrument', () => {
     let configuredLiftedStore;
 
     beforeEach(() => {
-      configuredStore = createStore(counter, instrument(undefined, { maxAge: 2 }));
+      configuredStore = createStore(counter, instrument(undefined, { maxAge: 3 }));
       configuredLiftedStore = configuredStore.liftedStore;
     });
 
-    it('should remove earliest action when maxAge is reached', () => {
+    it('should auto-commit earliest non-@@INIT action when maxAge is reached', () => {
+      configuredStore.dispatch({ type: 'INCREMENT' });
       configuredStore.dispatch({ type: 'INCREMENT' });
       let liftedStoreState = configuredLiftedStore.getState();
 
-      expect(configuredStore.getState()).toBe(1);
-      expect(Object.keys(liftedStoreState.actionsById).length).toBe(2);
+      expect(configuredStore.getState()).toBe(2);
+      expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
       expect(liftedStoreState.committedState).toBe(undefined);
+      expect(liftedStoreState.stagedActionIds).toInclude(1);
 
+      // Triggers auto-commit.
       configuredStore.dispatch({ type: 'INCREMENT' });
       liftedStoreState = configuredLiftedStore.getState();
 
-      expect(configuredStore.getState()).toBe(2);
-      expect(Object.keys(liftedStoreState.actionsById).length).toBe(2);
-      expect(liftedStoreState.stagedActionIds).toExclude(0);
+      expect(configuredStore.getState()).toBe(3);
+      expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
+      expect(liftedStoreState.stagedActionIds).toExclude(1);
       expect(liftedStoreState.computedStates[0].state).toBe(1);
       expect(liftedStoreState.committedState).toBe(1);
-      expect(liftedStoreState.currentStateIndex).toBe(1);
+      expect(liftedStoreState.currentStateIndex).toBe(2);
     });
 
     it('should handle skipped actions', () => {
