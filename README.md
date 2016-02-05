@@ -3,7 +3,15 @@ Redux DevTools
 
 A live-editing time travel environment for [Redux](https://github.com/rackt/redux).  
 **[See Dan's React Europe talk demoing it!](http://youtube.com/watch?v=xsSnOQynTHs)**  
-[Read the setup instructions](./README.md#setup-instructions).
+
+### Table of Contents
+
+- [Features](#features)
+- [Overview](#overview)
+- [Chrome Extension](#chrome-extension)
+- [Setup Instructions](#setup-instructions)
+- [Custom Monitors](#custom-monitors)
+- [License](#license)
 
 [![build status](https://img.shields.io/travis/gaearon/redux-devtools/master.svg?style=flat-square)](https://travis-ci.org/gaearon/redux-devtools)
 [![npm version](https://img.shields.io/npm/v/redux-devtools.svg?style=flat-square)](https://www.npmjs.com/package/redux-devtools)
