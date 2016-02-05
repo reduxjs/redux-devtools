@@ -2,7 +2,8 @@ Redux DevTools
 =========================
 
 A live-editing time travel environment for [Redux](https://github.com/rackt/redux).  
-**[See Dan's React Europe talk demoing it!](http://youtube.com/watch?v=xsSnOQynTHs)**
+**[See Dan's React Europe talk demoing it!](http://youtube.com/watch?v=xsSnOQynTHs)**  
+[Read the setup instructions](./README.md#setup-instructions).
 
 [![build status](https://img.shields.io/travis/gaearon/redux-devtools/master.svg?style=flat-square)](https://travis-ci.org/gaearon/redux-devtools)
 [![npm version](https://img.shields.io/npm/v/redux-devtools.svg?style=flat-square)](https://www.npmjs.com/package/redux-devtools)
@@ -21,15 +22,15 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 
 ### Overview
 
-Redux DevTools is a development time package that provides power-ups for your Redux development workflow. Be careful to strip its code in production! To use Redux DevTools, you need to choose a “monitor”—a React component that will serve as a UI for the DevTools. Different tasks and workflows require different UIs, so Redux DevTools is built to be flexible in this regard. We recommend using [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) for inspecting the state and time travel, and wrap it in a [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) to quickly move it across the screen. That said, when you’re comfortable rolling up your own setup, feel free to do this, and share it with us.
+Redux DevTools is a development time package that provides power-ups for your Redux development workflow. Be careful to strip its code in production (see [walkthrough](./docs/Walkthrough.md) for instructions)! To use Redux DevTools, you need to choose a “monitor”—a React component that will serve as a UI for the DevTools. Different tasks and workflows require different UIs, so Redux DevTools is built to be flexible in this regard. We recommend using [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) for inspecting the state and time travel, and wrap it in a [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) to quickly move it across the screen. That said, when you’re comfortable rolling up your own setup, feel free to do this, and share it with us.
 
 ### Chrome Extension
 
 If you don’t want to bother with installing Redux DevTools and integrating it into your project, consider using [Redux DevTools Chrome Extension](https://github.com/zalmoxisus/redux-devtools-extension). It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
 
-### Walkthrough
+### Setup Instructions
 
-Read the [walkthrough](./docs/Walkthrough.md) for the integration instructions.
+Read the installation [walkthrough](./docs/Walkthrough.md) for integration instructions and usage examples (`<DevTools>` component, `DevTools.instrument()`, exclude from production builds, gotchas).
 
 ### Running Examples
 
