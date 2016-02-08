@@ -77,7 +77,7 @@ function computeNextEntry(reducer, action, state, error) {
       // In Chrome, rethrowing provides better source map support
       setTimeout(() => { throw err; });
     } else {
-      console.error(err.stack || err);
+      console.error(err);
     }
   }
 
