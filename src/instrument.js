@@ -235,15 +235,18 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
         break;
       }
       case ActionTypes.PERFORM_ACTION: {
-        if (options.maxAge && stagedActionIds.length === options.maxAge) {
+        if (
+          options.maxAge &&
+          stagedActionIds.length === options.maxAge &&
+          !computedStates[1].error
+        ) {
           // If maxAge has been reached, auto-commit earliest non-@@INIT action.
           delete actionsById[stagedActionIds[1]];
           skippedActionIds = skippedActionIds.filter(id => id !== stagedActionIds[1]);
           stagedActionIds = [0].concat(stagedActionIds.slice(2));
           committedState = computedStates[1].state;
           computedStates = computedStates.slice(1);
-        }
-        if (currentStateIndex === stagedActionIds.length - 1) {
+        } else if (currentStateIndex === stagedActionIds.length - 1) {
           currentStateIndex++;
         }
         const actionId = nextActionId++;
