@@ -131,14 +131,14 @@ function recomputeStates(
 /**
  * Lifts an app's action into an action on the lifted store.
  */
-function liftAction(action) {
+export function liftAction(action) {
   return ActionCreators.performAction(action);
 }
 
 /**
  * Creates a history state reducer from an app's reducer.
  */
-function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
+export function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
   const initialLiftedState = {
     monitorState: monitorReducer(undefined, {}),
     nextActionId: 1,
@@ -300,7 +300,7 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
 /**
  * Provides an app's view into the state of the lifted store.
  */
-function unliftState(liftedState) {
+export function unliftState(liftedState) {
   const { computedStates, currentStateIndex } = liftedState;
   const { state } = computedStates[currentStateIndex];
   return state;
