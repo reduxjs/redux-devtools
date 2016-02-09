@@ -165,6 +165,21 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
       computedStates
     } = liftedState;
 
+    function commitExcessActions() {
+      // If maxAge has been exceeded, auto-commit excess.
+      const excess = stagedActionIds.length - options.maxAge + 1;
+      const idsToDelete = stagedActionIds.slice(1, excess + 1);
+
+      idsToDelete.forEach(id => delete actionsById[id]);
+      skippedActionIds = skippedActionIds.filter(id => idsToDelete.indexOf(id) === -1);
+      stagedActionIds = [0, ...stagedActionIds.slice(excess + 1)];
+      committedState = computedStates[excess].state;
+      computedStates = computedStates.slice(excess);
+      currentStateIndex = currentStateIndex > excess
+        ? currentStateIndex - excess
+        : 0;
+    }
+
     // By default, agressively recompute every state whatever happens.
     // This has O(n) performance, so we'll override this to a sensible
     // value whenever we feel like we don't have to recompute the states.
@@ -240,13 +255,10 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
           stagedActionIds.length === options.maxAge &&
           !computedStates[1].error
         ) {
-          // If maxAge has been reached, auto-commit earliest non-@@INIT action.
-          delete actionsById[stagedActionIds[1]];
-          skippedActionIds = skippedActionIds.filter(id => id !== stagedActionIds[1]);
-          stagedActionIds = [0].concat(stagedActionIds.slice(2));
-          committedState = computedStates[1].state;
-          computedStates = computedStates.slice(1);
-        } else if (currentStateIndex === stagedActionIds.length - 1) {
+          commitExcessActions();
+        }
+
+        if (currentStateIndex === stagedActionIds.length - 1) {
           currentStateIndex++;
         }
         const actionId = nextActionId++;
@@ -275,6 +287,21 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
       case '@@redux/INIT': {
         // Always recompute states on hot reload and init.
         minInvalidatedStateIndex = 0;
+
+        if (options.maxAge && stagedActionIds.length >= options.maxAge) {
+          // states must be computed prior to committing
+          computedStates = recomputeStates(
+            computedStates,
+            minInvalidatedStateIndex,
+            reducer,
+            committedState,
+            actionsById,
+            stagedActionIds,
+            skippedActionIds
+          );
+          commitExcessActions();
+        }
+
         break;
       }
       default: {
