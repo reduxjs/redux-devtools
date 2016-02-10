@@ -19,6 +19,15 @@ function counterWithBug(state = 0, action) {
   }
 }
 
+function counterWithAnotherBug(state = 0, action) {
+  switch (action.type) {
+    case 'INCREMENT': return mistake + 1; // eslint-disable-line no-undef
+    case 'DECREMENT': return state - 1;
+    case 'SET_UNDEFINED': return undefined;
+    default: return state;
+  }
+}
+
 function doubleCounter(state = 0, action) {
   switch (action.type) {
   case 'INCREMENT': return state + 2;
@@ -333,6 +342,45 @@ describe('instrument', () => {
       expect(configuredLiftedStore.getState().skippedActionIds).toInclude(1);
       configuredStore.dispatch({ type: 'INCREMENT' });
       expect(configuredLiftedStore.getState().skippedActionIds).toExclude(1);
+    });
+
+    it('should not auto-commit errors', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'INCREMENT' });
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(3);
+
+      storeWithBug.dispatch({ type: 'INCREMENT' });
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(4);
+
+      spy.restore();
+    });
+
+    it('should auto-commit after hot reload', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'INCREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(7);
+
+      // should auto-commit only 2 non-error actions
+      storeWithBug.replaceReducer(counterWithAnotherBug);
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(5);
+
+      // should auto-commit down to 3 actions
+      storeWithBug.replaceReducer(counter);
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(3);
+
+      spy.restore();
     });
   });
 
