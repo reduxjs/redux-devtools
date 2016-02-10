@@ -165,8 +165,9 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
       computedStates
     } = liftedState;
 
-    function commitExcessActions(excess) {
-      // If maxAge has been exceeded, auto-commit excess.
+    function commitExcessActions(n) {
+      // Auto-commits n-number of excess actions.
+      let excess = n;
       let idsToDelete = stagedActionIds.slice(1, excess + 1);
 
       for (let i = 0; i < idsToDelete.length; i++) {
