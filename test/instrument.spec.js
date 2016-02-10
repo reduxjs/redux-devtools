@@ -411,24 +411,24 @@ describe('instrument', () => {
       // currentStateIndex continues to increment while non-committed action causes error
       expect(liftedStoreState.currentStateIndex).toBe(5);
       expect(currentComputedState.state).toBe(3);
-      expect(currentComputedState.error).toExist;
+      expect(currentComputedState.error).toExist();
 
       configuredStore.replaceReducer(counterWithAnotherBug);
       liftedStoreState = configuredLiftedStore.getState();
       currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
-      // currentStateIndex adjusts correctly when multiple actions are committed
+      // currentStateIndex adjusts accordingly when multiple actions are committed
       expect(liftedStoreState.currentStateIndex).toBe(2);
       expect(currentComputedState.state).toBe(0);
-      expect(currentComputedState.error).toExist;
+      expect(currentComputedState.error).toExist();
 
       configuredLiftedStore.dispatch(ActionCreators.jumpToState(0));
       configuredStore.replaceReducer(counter);
       liftedStoreState = configuredLiftedStore.getState();
-      // currentStateIndex stays at 0 as actions are committed
+      // currentStateIndex doesn't go below 0
       currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
       expect(liftedStoreState.currentStateIndex).toBe(0);
       expect(currentComputedState.state).toBe(0);
-      expect(currentComputedState.error).toNotExist;
+      expect(currentComputedState.error).toNotExist();
 
       spy.restore();
     });
