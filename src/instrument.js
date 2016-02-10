@@ -172,7 +172,7 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
 
       for (let i = 0; i < idsToDelete.length; i++) {
         if (computedStates[i + 1].error) {
-          // Stop if error is found. Commit only up to error.
+          // Stop if error is found. Commit actions up to error.
           excess = i;
           idsToDelete = stagedActionIds.slice(1, excess + 1);
           break;
