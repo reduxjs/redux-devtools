@@ -335,7 +335,7 @@ describe('instrument', () => {
       expect(liftedStoreState.currentStateIndex).toBe(2);
     });
 
-    it('should handle skipped actions', () => {
+    it('should remove skipped actions once committed', () => {
       configuredStore.dispatch({ type: 'INCREMENT' });
       configuredLiftedStore.dispatch(ActionCreators.toggleAction(1));
       configuredStore.dispatch({ type: 'INCREMENT' });
@@ -379,6 +379,56 @@ describe('instrument', () => {
       // should auto-commit down to 3 actions
       storeWithBug.replaceReducer(counter);
       expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(3);
+
+      spy.restore();
+    });
+
+    it('should update currentStateIndex when auto-committing', () => {
+      let spy = spyOn(console, 'error');
+
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      configuredStore.dispatch({ type: 'INCREMENT' });
+
+      let liftedStoreState = configuredLiftedStore.getState();
+      expect(liftedStoreState.currentStateIndex).toBe(2);
+
+      configuredStore.dispatch({ type: 'INCREMENT' });
+
+      liftedStoreState = configuredLiftedStore.getState();
+      let currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      // currentStateIndex stays at 2 when an action is committed
+      expect(liftedStoreState.currentStateIndex).toBe(2);
+      expect(currentComputedState.state).toBe(3);
+
+      configuredStore.replaceReducer(counterWithBug);
+      configuredStore.dispatch({ type: 'DECREMENT' });
+      configuredStore.dispatch({ type: 'DECREMENT' });
+      configuredStore.dispatch({ type: 'DECREMENT' });
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      liftedStoreState = configuredLiftedStore.getState();
+      currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      // currentStateIndex continues to increment while non-committed action causes error
+      expect(liftedStoreState.currentStateIndex).toBe(5);
+      expect(currentComputedState.state).toBe(3);
+      expect(currentComputedState.error).toExist;
+
+      configuredStore.replaceReducer(counterWithAnotherBug);
+      liftedStoreState = configuredLiftedStore.getState();
+      currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      // currentStateIndex adjusts correctly when multiple actions are committed
+      expect(liftedStoreState.currentStateIndex).toBe(2);
+      expect(currentComputedState.state).toBe(0);
+      expect(currentComputedState.error).toExist;
+
+      configuredLiftedStore.dispatch(ActionCreators.jumpToState(0));
+      configuredStore.replaceReducer(counter);
+      liftedStoreState = configuredLiftedStore.getState();
+      // currentStateIndex stays at 0 as actions are committed
+      currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      expect(liftedStoreState.currentStateIndex).toBe(0);
+      expect(currentComputedState.state).toBe(0);
+      expect(currentComputedState.error).toNotExist;
 
       spy.restore();
     });
