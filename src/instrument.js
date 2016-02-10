@@ -165,12 +165,21 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
       computedStates
     } = liftedState;
 
-    function commitExcessActions() {
+    function commitExcessActions(excess) {
       // If maxAge has been exceeded, auto-commit excess.
-      const excess = stagedActionIds.length - options.maxAge + 1;
-      const idsToDelete = stagedActionIds.slice(1, excess + 1);
+      let idsToDelete = stagedActionIds.slice(1, excess + 1);
 
-      idsToDelete.forEach(id => delete actionsById[id]);
+      for (let i = 0; i < idsToDelete.length; i++) {
+        if (computedStates[i + 1].error) {
+          // Stop if error is found. Commit only up to error.
+          excess = i;
+          idsToDelete = stagedActionIds.slice(1, excess + 1);
+          break;
+        } else {
+          delete actionsById[idsToDelete[i]];
+        }
+      }
+
       skippedActionIds = skippedActionIds.filter(id => idsToDelete.indexOf(id) === -1);
       stagedActionIds = [0, ...stagedActionIds.slice(excess + 1)];
       committedState = computedStates[excess].state;
@@ -250,12 +259,9 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
         break;
       }
       case ActionTypes.PERFORM_ACTION: {
-        if (
-          options.maxAge &&
-          stagedActionIds.length === options.maxAge &&
-          !computedStates[1].error
-        ) {
-          commitExcessActions();
+        // Auto-commit as new actions come in.
+        if (options.maxAge && stagedActionIds.length === options.maxAge) {
+          commitExcessActions(1);
         }
 
         if (currentStateIndex === stagedActionIds.length - 1) {
@@ -288,8 +294,8 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
         // Always recompute states on hot reload and init.
         minInvalidatedStateIndex = 0;
 
-        if (options.maxAge && stagedActionIds.length >= options.maxAge) {
-          // states must be computed prior to committing
+        if (options.maxAge && stagedActionIds.length > options.maxAge) {
+          // States must be recomputed before committing excess.
           computedStates = recomputeStates(
             computedStates,
             minInvalidatedStateIndex,
@@ -299,7 +305,11 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
             stagedActionIds,
             skippedActionIds
           );
-          commitExcessActions();
+
+          commitExcessActions(stagedActionIds.length - options.maxAge);
+
+          // Avoid double computation.
+          minInvalidatedStateIndex = Infinity;
         }
 
         break;
