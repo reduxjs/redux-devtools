@@ -323,7 +323,7 @@ describe('instrument', () => {
       expect(liftedStoreState.committedState).toBe(undefined);
       expect(liftedStoreState.stagedActionIds).toInclude(1);
 
-      // Triggers auto-commit.
+      // Trigger auto-commit.
       configuredStore.dispatch({ type: 'INCREMENT' });
       liftedStoreState = configuredLiftedStore.getState();
 
@@ -372,11 +372,11 @@ describe('instrument', () => {
       storeWithBug.dispatch({ type: 'DECREMENT' });
       expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(7);
 
-      // should auto-commit only 2 non-error actions
+      // Auto-commit 2 actions by "fixing" reducer bug, but introducing another.
       storeWithBug.replaceReducer(counterWithAnotherBug);
       expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(5);
 
-      // should auto-commit down to 3 actions
+      // Auto-commit 2 more actions by "fixing" other reducer bug.
       storeWithBug.replaceReducer(counter);
       expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(3);
 
@@ -392,7 +392,7 @@ describe('instrument', () => {
       liftedStoreState = configuredLiftedStore.getState();
       expect(liftedStoreState.currentStateIndex).toBe(2);
 
-      // currentStateIndex should stay at 2 as actions are committed
+      // currentStateIndex should stay at 2 as actions are committed.
       configuredStore.dispatch({ type: 'INCREMENT' });
       liftedStoreState = configuredLiftedStore.getState();
       currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
