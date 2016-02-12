@@ -110,6 +110,10 @@ In fact some of these are implemented already:
 
 <img src='http://i.imgur.com/TlqnU0J.png' width='400'>
 
+#### [Dispatch](https://github.com/YoruNoHikage/redux-devtools-dispatch)
+
+![redux-devtools-dispatch](https://cloud.githubusercontent.com/assets/969003/12874321/2c3624ec-cdd2-11e5-9856-fd7e24efb8d5.gif)
+
 #### Keep them coming!
 
 Create a PR to add your custom monitor.
