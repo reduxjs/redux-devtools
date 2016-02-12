@@ -384,7 +384,6 @@ describe('instrument', () => {
     });
 
     it('should update currentStateIndex when auto-committing', () => {
-      let spy = spyOn(console, 'error');
       let liftedStoreState;
       let currentComputedState;
 
@@ -399,8 +398,6 @@ describe('instrument', () => {
       currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
       expect(liftedStoreState.currentStateIndex).toBe(2);
       expect(currentComputedState.state).toBe(3);
-
-      spy.restore();
     });
 
     it('should continue to increment currentStateIndex while error blocks commit', () => {
