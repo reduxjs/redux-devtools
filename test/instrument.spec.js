@@ -385,7 +385,8 @@ describe('instrument', () => {
 
     it('should update currentStateIndex when auto-committing', () => {
       let spy = spyOn(console, 'error');
-      let liftedStoreState, currentComputedState;
+      let liftedStoreState;
+      let currentComputedState;
 
       configuredStore.dispatch({ type: 'INCREMENT' });
       configuredStore.dispatch({ type: 'INCREMENT' });
