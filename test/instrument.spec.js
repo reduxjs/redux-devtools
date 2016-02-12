@@ -359,7 +359,7 @@ describe('instrument', () => {
       spy.restore();
     });
 
-    it('should auto-commit after hot reload', () => {
+    it('should auto-commit actions after hot reload fixes error', () => {
       let spy = spyOn(console, 'error');
 
       let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
@@ -385,50 +385,82 @@ describe('instrument', () => {
 
     it('should update currentStateIndex when auto-committing', () => {
       let spy = spyOn(console, 'error');
+      let liftedStoreState, currentComputedState;
 
       configuredStore.dispatch({ type: 'INCREMENT' });
       configuredStore.dispatch({ type: 'INCREMENT' });
-
-      let liftedStoreState = configuredLiftedStore.getState();
+      liftedStoreState = configuredLiftedStore.getState();
       expect(liftedStoreState.currentStateIndex).toBe(2);
 
+      // currentStateIndex should stay at 2 as actions are committed
       configuredStore.dispatch({ type: 'INCREMENT' });
-
       liftedStoreState = configuredLiftedStore.getState();
+      currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      expect(liftedStoreState.currentStateIndex).toBe(2);
+      expect(currentComputedState.state).toBe(3);
+
+      spy.restore();
+    });
+
+    it('should continue to increment currentStateIndex while error blocks commit', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+
+      let liftedStoreState = liftedStoreWithBug.getState();
       let currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
-      // currentStateIndex stays at 2 when an action is committed
-      expect(liftedStoreState.currentStateIndex).toBe(2);
-      expect(currentComputedState.state).toBe(3);
-
-      configuredStore.replaceReducer(counterWithBug);
-      configuredStore.dispatch({ type: 'DECREMENT' });
-      configuredStore.dispatch({ type: 'DECREMENT' });
-      configuredStore.dispatch({ type: 'DECREMENT' });
-      configuredStore.dispatch({ type: 'INCREMENT' });
-      configuredStore.dispatch({ type: 'INCREMENT' });
-      liftedStoreState = configuredLiftedStore.getState();
-      currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
-      // currentStateIndex continues to increment while non-committed action causes error
-      expect(liftedStoreState.currentStateIndex).toBe(5);
-      expect(currentComputedState.state).toBe(3);
-      expect(currentComputedState.error).toExist();
-
-      configuredStore.replaceReducer(counterWithAnotherBug);
-      liftedStoreState = configuredLiftedStore.getState();
-      currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
-      // currentStateIndex adjusts accordingly when multiple actions are committed
-      expect(liftedStoreState.currentStateIndex).toBe(2);
+      expect(liftedStoreState.currentStateIndex).toBe(4);
       expect(currentComputedState.state).toBe(0);
       expect(currentComputedState.error).toExist();
 
-      configuredLiftedStore.dispatch(ActionCreators.jumpToState(0));
-      configuredStore.replaceReducer(counter);
-      liftedStoreState = configuredLiftedStore.getState();
-      // currentStateIndex doesn't go below 0
-      currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      spy.restore();
+    });
+
+    it('should adjust currentStateIndex correctly when multiple actions are committed', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+
+      // Auto-commit 2 actions by "fixing" reducer bug.
+      storeWithBug.replaceReducer(counter);
+      let liftedStoreState = liftedStoreWithBug.getState();
+      let currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      expect(liftedStoreState.currentStateIndex).toBe(2);
+      expect(currentComputedState.state).toBe(-4);
+
+      spy.restore();
+    });
+
+    it('should not allow currentStateIndex to drop below 0', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      liftedStoreWithBug.dispatch(ActionCreators.jumpToState(1));
+
+      // Auto-commit 2 actions by "fixing" reducer bug.
+      storeWithBug.replaceReducer(counter);
+      let liftedStoreState = liftedStoreWithBug.getState();
+      let currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
       expect(liftedStoreState.currentStateIndex).toBe(0);
-      expect(currentComputedState.state).toBe(0);
-      expect(currentComputedState.error).toNotExist();
+      expect(currentComputedState.state).toBe(-2);
 
       spy.restore();
     });
