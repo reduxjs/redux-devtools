@@ -100,6 +100,23 @@ describe('instrument', () => {
     expect(store.getState()).toBe(1);
   });
 
+  it('should set multiple action skip', () => {
+    // actionId 0 = @@INIT
+    store.dispatch({ type: 'INCREMENT' });
+    store.dispatch({ type: 'INCREMENT' });
+    store.dispatch({ type: 'INCREMENT' });
+    expect(store.getState()).toBe(3);
+
+    liftedStore.dispatch(ActionCreators.setActionsActive(1, 3, false));
+    expect(store.getState()).toBe(1);
+
+    liftedStore.dispatch(ActionCreators.setActionsActive(0, 2, true));
+    expect(store.getState()).toBe(2);
+
+    liftedStore.dispatch(ActionCreators.setActionsActive(0, 1, true));
+    expect(store.getState()).toBe(2);
+  });
+
   it('should sweep disabled actions', () => {
     // actionId 0 = @@INIT
     store.dispatch({ type: 'INCREMENT' });
