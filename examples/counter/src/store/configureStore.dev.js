@@ -9,7 +9,7 @@ const enhancer = compose(
   DevTools.instrument(),
   persistState(
     window.location.href.match(
-      /[?&]debug_session=([^&]+)\b/
+      /[?&]debug_session=([^&#]+)\b/
     )
   )
 );
