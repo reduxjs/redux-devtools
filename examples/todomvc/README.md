@@ -1,4 +1,4 @@
-# Redux DevTools Counter example
+# Redux DevTools todomvc example
 
 ## Running Example
 
