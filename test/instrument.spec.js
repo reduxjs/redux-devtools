@@ -1,4 +1,4 @@
-import expect, { spyOn } from 'expect';
+import expect, { createSpy, spyOn } from 'expect';
 import { createStore, compose } from 'redux';
 import instrument, { ActionCreators } from '../src/instrument';
 
@@ -355,5 +355,85 @@ describe('instrument', () => {
       'DevTools instrumentation should not be applied more than once. ' +
       'Check your store configuration.'
     );
+  });
+
+  describe('replaying flag', () => {
+    const TESTING_ACTION = { type: 'TESTING_ACTION' };
+    const INIT_ACTION = { type: '@@INIT' };
+    const TESTING_APP_STATE = 42;
+
+    let spiedEmptyReducer;
+    let replayingStore;
+    let liftedReplayingStore;
+
+    beforeEach(() => {
+      spiedEmptyReducer = createSpy(function emptyReducer(appState = TESTING_APP_STATE) {
+        return appState;
+      }).andCallThrough();
+      replayingStore = createStore(spiedEmptyReducer, instrument());
+      liftedReplayingStore = replayingStore.liftedStore;
+    });
+
+    it('should provide falsy replaying argument when plain action is dispatched', () => {
+      replayingStore.dispatch(TESTING_ACTION);
+      expect(spiedEmptyReducer).toHaveBeenCalled();
+      expect(spiedEmptyReducer.calls[1].arguments).toEqual([TESTING_APP_STATE, TESTING_ACTION, false]);
+    });
+
+    it('should provide falsy replaying argument when PERFORM_ACTION is dispatched', () => {
+      replayingStore.dispatch(TESTING_ACTION);
+      liftedReplayingStore.dispatch(ActionCreators.performAction(TESTING_ACTION));
+      expect(spiedEmptyReducer.calls[1].arguments).toEqual([TESTING_APP_STATE, TESTING_ACTION, false]);
+    });
+
+    it('should provide truthy replaying argument for init action which follows rollback', () => {
+      replayingStore.dispatch(TESTING_ACTION);
+      liftedReplayingStore.dispatch(ActionCreators.rollback());
+      expect(spiedEmptyReducer.calls[2].arguments).toEqual([undefined, INIT_ACTION, true]);
+    });
+
+    it('should provide truthy replaying argument for init action which follows reset', () => {
+      replayingStore.dispatch(TESTING_ACTION);
+      liftedReplayingStore.dispatch(ActionCreators.reset());
+      expect(spiedEmptyReducer.calls[2].arguments).toEqual([undefined, INIT_ACTION, true]);
+    });
+
+    it('should provide truthy replaying argument for init action which follows commit', () => {
+      replayingStore.dispatch(TESTING_ACTION);
+      liftedReplayingStore.dispatch(ActionCreators.commit());
+      expect(spiedEmptyReducer.calls[2].arguments).toEqual([42, INIT_ACTION, true]);
+    });
+
+    it('should provide truthy replaying argument for all the actions after sweeping', () => {
+      replayingStore.dispatch(TESTING_ACTION);
+      liftedReplayingStore.dispatch(ActionCreators.sweep());
+      expect(spiedEmptyReducer.calls[2].arguments).toEqual([undefined, INIT_ACTION, true]);
+      expect(spiedEmptyReducer.calls[3].arguments).toEqual([TESTING_APP_STATE, TESTING_ACTION, true]);
+    });
+
+    it('after toggling, should provide truthy replaying argument for action which has not been toggled', () => {
+      const NEXT_TESTING_ACTION = { type: 'NEXT_TESTING_ACTION' };
+
+      replayingStore.dispatch(TESTING_ACTION);
+      replayingStore.dispatch(NEXT_TESTING_ACTION);
+      liftedReplayingStore.dispatch(ActionCreators.toggleAction(1));
+      expect(spiedEmptyReducer.calls[3].arguments).toEqual([TESTING_APP_STATE, NEXT_TESTING_ACTION, true]);
+    });
+
+    it('should provide truthy replaying argument for all the actions after importing state', () => {
+      replayingStore.dispatch(TESTING_ACTION);
+      const exportedState = liftedReplayingStore.getState();
+
+      const spiedImportStoreReducer = createSpy(function importReducer(appState = TESTING_APP_STATE) {
+        return appState;
+      }).andCallThrough();
+
+      const importStore = createStore(spiedImportStoreReducer, instrument());
+      importStore.liftedStore.dispatch(ActionCreators.importState(exportedState));
+
+      expect(spiedImportStoreReducer.calls[0].arguments).toEqual([undefined, INIT_ACTION, false]);
+      expect(spiedImportStoreReducer.calls[1].arguments).toEqual([undefined, INIT_ACTION, true]);
+      expect(spiedImportStoreReducer.calls[2].arguments).toEqual([TESTING_APP_STATE, TESTING_ACTION, true]);
+    });
   });
 });
