@@ -1,4 +1,5 @@
 import difference from 'lodash/difference';
+import union from 'lodash/union';
 
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
@@ -7,6 +8,7 @@ export const ActionTypes = {
   COMMIT: 'COMMIT',
   SWEEP: 'SWEEP',
   TOGGLE_ACTION: 'TOGGLE_ACTION',
+  SET_ACTIONS_ACTIVE: 'SET_ACTIONS_ACTIVE',
   JUMP_TO_STATE: 'JUMP_TO_STATE',
   IMPORT_STATE: 'IMPORT_STATE'
 };
@@ -43,6 +45,10 @@ export const ActionCreators = {
 
   toggleAction(id) {
     return { type: ActionTypes.TOGGLE_ACTION, id };
+  },
+
+  setActionsActive(start, end, active=true) {
+    return { type: ActionTypes.SET_ACTIONS_ACTIVE, start, end, active };
   },
 
   jumpToState(index) {
@@ -242,6 +248,22 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
         }
         // Optimization: we know history before this action hasn't changed
         minInvalidatedStateIndex = stagedActionIds.indexOf(actionId);
+        break;
+      }
+      case ActionTypes.SET_ACTIONS_ACTIVE: {
+        // Toggle whether an action with given ID is skipped.
+        // Being skipped means it is a no-op during the computation.
+        const { start, end, active } = liftedAction;
+        const actionIds = [];
+        for (let i = start; i < end; i++) actionIds.push(i);
+        if (active) {
+          skippedActionIds = difference(skippedActionIds, actionIds);
+        } else {
+          skippedActionIds = union(skippedActionIds, actionIds);
+        }
+
+        // Optimization: we know history before this action hasn't changed
+        minInvalidatedStateIndex = stagedActionIds.indexOf(start);
         break;
       }
       case ActionTypes.JUMP_TO_STATE: {
