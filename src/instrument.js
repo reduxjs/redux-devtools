@@ -65,7 +65,7 @@ const INIT_ACTION = { type: '@@INIT' };
 /**
  * Computes the next entry in the log by applying an action.
  */
-function computeNextEntry(reducer, action, state, error) {
+function computeNextEntry(reducer, action, state, error, replaying) {
   if (error) {
     return {
       state,
@@ -76,7 +76,7 @@ function computeNextEntry(reducer, action, state, error) {
   let nextState = state;
   let nextError;
   try {
-    nextState = reducer(state, action);
+    nextState = reducer(state, { ...action, replaying });
   } catch (err) {
     nextError = err.toString();
     if (typeof window === 'object' && typeof window.chrome !== 'undefined') {
@@ -103,7 +103,8 @@ function recomputeStates(
   committedState,
   actionsById,
   stagedActionIds,
-  skippedActionIds
+  skippedActionIds,
+  replaying
 ) {
   // Optimization: exit early and return the same reference
   // if we know nothing could have changed.
@@ -126,7 +127,7 @@ function recomputeStates(
     const shouldSkip = skippedActionIds.indexOf(actionId) > -1;
     const entry = shouldSkip ?
       previousEntry :
-      computeNextEntry(reducer, action, previousState, previousError);
+      computeNextEntry(reducer, action, previousState, previousError, replaying);
 
     nextComputedStates.push(entry);
   }
@@ -200,6 +201,10 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
     // This has O(n) performance, so we'll override this to a sensible
     // value whenever we feel like we don't have to recompute the states.
     let minInvalidatedStateIndex = 0;
+
+    // For now, potentially any action except PERFORM_ACTION is considered
+    // as replay
+    let replaying = true;
 
     switch (liftedAction.type) {
       case ActionTypes.RESET: {
@@ -297,6 +302,10 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
         stagedActionIds = [...stagedActionIds, actionId];
         // Optimization: we know that only the new action needs computing.
         minInvalidatedStateIndex = stagedActionIds.length - 1;
+
+        // This is the first time Action is actually performed, therefore
+        // we don't consider this replay
+        replaying = false;
         break;
       }
       case ActionTypes.IMPORT_STATE: {
@@ -314,6 +323,8 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
         break;
       }
       case '@@redux/INIT': {
+        replaying = false;
+
         // Always recompute states on hot reload and init.
         minInvalidatedStateIndex = 0;
 
@@ -352,7 +363,8 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
       committedState,
       actionsById,
       stagedActionIds,
-      skippedActionIds
+      skippedActionIds,
+      replaying
     );
     monitorState = monitorReducer(monitorState, liftedAction);
     return {

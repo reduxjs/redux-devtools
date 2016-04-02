@@ -370,6 +370,8 @@ Note that there are no useful props you can pass to the `DevTools` component oth
 
 * **It is important that `DevTools.instrument()` store enhancer should be added to your middleware stack *after* `applyMiddleware` in the `compose`d functions, as `applyMiddleware` is potentially asynchronous.** Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
 
+* **Are you a library author**? If you're building a Store Enhancer you might find handy to know which actions have been dispatched regularly and which have been replayed. `redux-devtools` is calling reducer with third argument. The argument is a boolean identifying that Action has been replayed.
+
 ### What Next?
 
 Now that you see the DevTools, you might want to learn what those buttons mean and how to use them. This usually depends on the monitor. You can begin by exploring the [LogMonitor](https://github.com/gaearon/redux-devtools-log-monitor) and [DockMonitor](https://github.com/gaearon/redux-devtools-dock-monitor) documentation, as they are the default monitors we suggest to use together. When you’re comfortable using them, you may want to create your own monitor for more exotic purposes, such as a [chart](https://github.com/romseguy/redux-devtools-chart-monitor) or a [diff](https://github.com/whetstone/redux-devtools-diff-monitor) monitor. Don’t forget to send a PR to feature your monitor at the front page!
