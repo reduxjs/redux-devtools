@@ -138,7 +138,7 @@ function liftAction(action) {
 /**
  * Creates a history state reducer from an app's reducer.
  */
-function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
+function liftReducerWith(reducer, initialCommittedState, monitorReducer, options) {
   const initialLiftedState = {
     monitorState: monitorReducer(undefined, {}),
     nextActionId: 1,
@@ -164,6 +164,31 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
       currentStateIndex,
       computedStates
     } = liftedState;
+
+    function commitExcessActions(n) {
+      // Auto-commits n-number of excess actions.
+      let excess = n;
+      let idsToDelete = stagedActionIds.slice(1, excess + 1);
+
+      for (let i = 0; i < idsToDelete.length; i++) {
+        if (computedStates[i + 1].error) {
+          // Stop if error is found. Commit actions up to error.
+          excess = i;
+          idsToDelete = stagedActionIds.slice(1, excess + 1);
+          break;
+        } else {
+          delete actionsById[idsToDelete[i]];
+        }
+      }
+
+      skippedActionIds = skippedActionIds.filter(id => idsToDelete.indexOf(id) === -1);
+      stagedActionIds = [0, ...stagedActionIds.slice(excess + 1)];
+      committedState = computedStates[excess].state;
+      computedStates = computedStates.slice(excess);
+      currentStateIndex = currentStateIndex > excess
+        ? currentStateIndex - excess
+        : 0;
+    }
 
     // By default, agressively recompute every state whatever happens.
     // This has O(n) performance, so we'll override this to a sensible
@@ -235,6 +260,11 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
         break;
       }
       case ActionTypes.PERFORM_ACTION: {
+        // Auto-commit as new actions come in.
+        if (options.maxAge && stagedActionIds.length === options.maxAge) {
+          commitExcessActions(1);
+        }
+
         if (currentStateIndex === stagedActionIds.length - 1) {
           currentStateIndex++;
         }
@@ -264,6 +294,25 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer) {
       case '@@redux/INIT': {
         // Always recompute states on hot reload and init.
         minInvalidatedStateIndex = 0;
+
+        if (options.maxAge && stagedActionIds.length > options.maxAge) {
+          // States must be recomputed before committing excess.
+          computedStates = recomputeStates(
+            computedStates,
+            minInvalidatedStateIndex,
+            reducer,
+            committedState,
+            actionsById,
+            stagedActionIds,
+            skippedActionIds
+          );
+
+          commitExcessActions(stagedActionIds.length - options.maxAge);
+
+          // Avoid double computation.
+          minInvalidatedStateIndex = Infinity;
+        }
+
         break;
       }
       default: {
@@ -339,7 +388,7 @@ function unliftStore(liftedStore, liftReducer) {
 /**
  * Redux instrumentation store enhancer.
  */
-export default function instrument(monitorReducer = () => null) {
+export default function instrument(monitorReducer = () => null, options = {}) {
   return createStore => (reducer, initialState, enhancer) => {
 
     function liftReducer(r) {
@@ -354,7 +403,7 @@ export default function instrument(monitorReducer = () => null) {
         }
         throw new Error('Expected the reducer to be a function.');
       }
-      return liftReducerWith(r, initialState, monitorReducer);
+      return liftReducerWith(r, initialState, monitorReducer, options);
     }
 
     const liftedStore = createStore(liftReducer(reducer), enhancer);

@@ -19,6 +19,15 @@ function counterWithBug(state = 0, action) {
   }
 }
 
+function counterWithAnotherBug(state = 0, action) {
+  switch (action.type) {
+    case 'INCREMENT': return mistake + 1; // eslint-disable-line no-undef
+    case 'DECREMENT': return state - 1;
+    case 'SET_UNDEFINED': return undefined;
+    default: return state;
+  }
+}
+
 function doubleCounter(state = 0, action) {
   switch (action.type) {
   case 'INCREMENT': return state + 2;
@@ -293,6 +302,166 @@ describe('instrument', () => {
     expect(reducerCalls).toBe(4);
 
     expect(monitoredLiftedStore.getState().computedStates).toBe(savedComputedStates);
+  });
+
+  describe('maxAge option', () => {
+    let configuredStore;
+    let configuredLiftedStore;
+
+    beforeEach(() => {
+      configuredStore = createStore(counter, instrument(undefined, { maxAge: 3 }));
+      configuredLiftedStore = configuredStore.liftedStore;
+    });
+
+    it('should auto-commit earliest non-@@INIT action when maxAge is reached', () => {
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      let liftedStoreState = configuredLiftedStore.getState();
+
+      expect(configuredStore.getState()).toBe(2);
+      expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
+      expect(liftedStoreState.committedState).toBe(undefined);
+      expect(liftedStoreState.stagedActionIds).toInclude(1);
+
+      // Trigger auto-commit.
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      liftedStoreState = configuredLiftedStore.getState();
+
+      expect(configuredStore.getState()).toBe(3);
+      expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
+      expect(liftedStoreState.stagedActionIds).toExclude(1);
+      expect(liftedStoreState.computedStates[0].state).toBe(1);
+      expect(liftedStoreState.committedState).toBe(1);
+      expect(liftedStoreState.currentStateIndex).toBe(2);
+    });
+
+    it('should remove skipped actions once committed', () => {
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      configuredLiftedStore.dispatch(ActionCreators.toggleAction(1));
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      expect(configuredLiftedStore.getState().skippedActionIds).toInclude(1);
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      expect(configuredLiftedStore.getState().skippedActionIds).toExclude(1);
+    });
+
+    it('should not auto-commit errors', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'INCREMENT' });
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(3);
+
+      storeWithBug.dispatch({ type: 'INCREMENT' });
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(4);
+
+      spy.restore();
+    });
+
+    it('should auto-commit actions after hot reload fixes error', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'INCREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(7);
+
+      // Auto-commit 2 actions by "fixing" reducer bug, but introducing another.
+      storeWithBug.replaceReducer(counterWithAnotherBug);
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(5);
+
+      // Auto-commit 2 more actions by "fixing" other reducer bug.
+      storeWithBug.replaceReducer(counter);
+      expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(3);
+
+      spy.restore();
+    });
+
+    it('should update currentStateIndex when auto-committing', () => {
+      let liftedStoreState;
+      let currentComputedState;
+
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      liftedStoreState = configuredLiftedStore.getState();
+      expect(liftedStoreState.currentStateIndex).toBe(2);
+
+      // currentStateIndex should stay at 2 as actions are committed.
+      configuredStore.dispatch({ type: 'INCREMENT' });
+      liftedStoreState = configuredLiftedStore.getState();
+      currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      expect(liftedStoreState.currentStateIndex).toBe(2);
+      expect(currentComputedState.state).toBe(3);
+    });
+
+    it('should continue to increment currentStateIndex while error blocks commit', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+
+      let liftedStoreState = liftedStoreWithBug.getState();
+      let currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      expect(liftedStoreState.currentStateIndex).toBe(4);
+      expect(currentComputedState.state).toBe(0);
+      expect(currentComputedState.error).toExist();
+
+      spy.restore();
+    });
+
+    it('should adjust currentStateIndex correctly when multiple actions are committed', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+
+      // Auto-commit 2 actions by "fixing" reducer bug.
+      storeWithBug.replaceReducer(counter);
+      let liftedStoreState = liftedStoreWithBug.getState();
+      let currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      expect(liftedStoreState.currentStateIndex).toBe(2);
+      expect(currentComputedState.state).toBe(-4);
+
+      spy.restore();
+    });
+
+    it('should not allow currentStateIndex to drop below 0', () => {
+      let spy = spyOn(console, 'error');
+
+      let storeWithBug = createStore(counterWithBug, instrument(undefined, { maxAge: 3 }));
+      let liftedStoreWithBug = storeWithBug.liftedStore;
+
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      storeWithBug.dispatch({ type: 'DECREMENT' });
+      liftedStoreWithBug.dispatch(ActionCreators.jumpToState(1));
+
+      // Auto-commit 2 actions by "fixing" reducer bug.
+      storeWithBug.replaceReducer(counter);
+      let liftedStoreState = liftedStoreWithBug.getState();
+      let currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
+      expect(liftedStoreState.currentStateIndex).toBe(0);
+      expect(currentComputedState.state).toBe(-2);
+
+      spy.restore();
+    });
   });
 
   describe('Import State', () => {

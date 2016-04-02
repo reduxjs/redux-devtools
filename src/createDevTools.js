@@ -7,9 +7,6 @@ export default function createDevTools(children) {
   const monitorProps = monitorElement.props;
   const Monitor = monitorElement.type;
   const ConnectedMonitor = connect(state => state)(Monitor);
-  const enhancer = instrument((state, action) =>
-    Monitor.update(monitorProps, state, action)
-  );
 
   return class DevTools extends Component {
     static contextTypes = {
@@ -20,7 +17,10 @@ export default function createDevTools(children) {
       store: PropTypes.object
     };
 
-    static instrument = () => enhancer;
+    static instrument = (options) => instrument(
+      (state, action) => Monitor.update(monitorProps, state, action),
+      options
+    );
 
     constructor(props, context) {
       super(props, context);
