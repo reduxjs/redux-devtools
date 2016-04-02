@@ -362,6 +362,9 @@ describe('instrument', () => {
     const INIT_ACTION = { type: '@@INIT' };
     const TESTING_APP_STATE = 42;
 
+    const buildTestingAction = replaying => ({ ...TESTING_ACTION, replaying });
+    const buildInitAction = replaying => ({ ...INIT_ACTION, replaying });
+
     let spiedEmptyReducer;
     let replayingStore;
     let liftedReplayingStore;
@@ -374,53 +377,53 @@ describe('instrument', () => {
       liftedReplayingStore = replayingStore.liftedStore;
     });
 
-    it('should provide falsy replaying argument when plain action is dispatched', () => {
+    it('should provide falsy replaying flag when plain action is dispatched', () => {
       replayingStore.dispatch(TESTING_ACTION);
       expect(spiedEmptyReducer).toHaveBeenCalled();
-      expect(spiedEmptyReducer.calls[1].arguments).toEqual([TESTING_APP_STATE, TESTING_ACTION, false]);
+      expect(spiedEmptyReducer.calls[1].arguments).toEqual([TESTING_APP_STATE, buildTestingAction(false)]);
     });
 
-    it('should provide falsy replaying argument when PERFORM_ACTION is dispatched', () => {
+    it('should provide falsy replaying flag when PERFORM_ACTION is dispatched', () => {
       replayingStore.dispatch(TESTING_ACTION);
       liftedReplayingStore.dispatch(ActionCreators.performAction(TESTING_ACTION));
-      expect(spiedEmptyReducer.calls[1].arguments).toEqual([TESTING_APP_STATE, TESTING_ACTION, false]);
+      expect(spiedEmptyReducer.calls[1].arguments).toEqual([TESTING_APP_STATE, buildTestingAction(false)]);
     });
 
-    it('should provide truthy replaying argument for init action which follows rollback', () => {
+    it('should provide truthy replaying flag for init action which follows rollback', () => {
       replayingStore.dispatch(TESTING_ACTION);
       liftedReplayingStore.dispatch(ActionCreators.rollback());
-      expect(spiedEmptyReducer.calls[2].arguments).toEqual([undefined, INIT_ACTION, true]);
+      expect(spiedEmptyReducer.calls[2].arguments).toEqual([undefined, buildInitAction(true)]);
     });
 
-    it('should provide truthy replaying argument for init action which follows reset', () => {
+    it('should provide truthy replaying flag for init action which follows reset', () => {
       replayingStore.dispatch(TESTING_ACTION);
       liftedReplayingStore.dispatch(ActionCreators.reset());
-      expect(spiedEmptyReducer.calls[2].arguments).toEqual([undefined, INIT_ACTION, true]);
+      expect(spiedEmptyReducer.calls[2].arguments).toEqual([undefined, buildInitAction(true)]);
     });
 
-    it('should provide truthy replaying argument for init action which follows commit', () => {
+    it('should provide truthy replaying flag for init action which follows commit', () => {
       replayingStore.dispatch(TESTING_ACTION);
       liftedReplayingStore.dispatch(ActionCreators.commit());
-      expect(spiedEmptyReducer.calls[2].arguments).toEqual([42, INIT_ACTION, true]);
+      expect(spiedEmptyReducer.calls[2].arguments).toEqual([42, buildInitAction(true)]);
     });
 
-    it('should provide truthy replaying argument for all the actions after sweeping', () => {
+    it('should provide truthy replaying flag for all the actions after sweeping', () => {
       replayingStore.dispatch(TESTING_ACTION);
       liftedReplayingStore.dispatch(ActionCreators.sweep());
-      expect(spiedEmptyReducer.calls[2].arguments).toEqual([undefined, INIT_ACTION, true]);
-      expect(spiedEmptyReducer.calls[3].arguments).toEqual([TESTING_APP_STATE, TESTING_ACTION, true]);
+      expect(spiedEmptyReducer.calls[2].arguments).toEqual([undefined, buildInitAction(true)]);
+      expect(spiedEmptyReducer.calls[3].arguments).toEqual([TESTING_APP_STATE, buildTestingAction(true)]);
     });
 
-    it('after toggling, should provide truthy replaying argument for action which has not been toggled', () => {
+    it('after toggling, should provide truthy replaying flag for action which has not been toggled', () => {
       const NEXT_TESTING_ACTION = { type: 'NEXT_TESTING_ACTION' };
 
       replayingStore.dispatch(TESTING_ACTION);
       replayingStore.dispatch(NEXT_TESTING_ACTION);
       liftedReplayingStore.dispatch(ActionCreators.toggleAction(1));
-      expect(spiedEmptyReducer.calls[3].arguments).toEqual([TESTING_APP_STATE, NEXT_TESTING_ACTION, true]);
+      expect(spiedEmptyReducer.calls[3].arguments).toEqual([TESTING_APP_STATE, { ...NEXT_TESTING_ACTION, replaying: true }]);
     });
 
-    it('should provide truthy replaying argument for all the actions after importing state', () => {
+    it('should provide truthy replaying flag for all the actions after importing state', () => {
       replayingStore.dispatch(TESTING_ACTION);
       const exportedState = liftedReplayingStore.getState();
 
@@ -431,9 +434,9 @@ describe('instrument', () => {
       const importStore = createStore(spiedImportStoreReducer, instrument());
       importStore.liftedStore.dispatch(ActionCreators.importState(exportedState));
 
-      expect(spiedImportStoreReducer.calls[0].arguments).toEqual([undefined, INIT_ACTION, false]);
-      expect(spiedImportStoreReducer.calls[1].arguments).toEqual([undefined, INIT_ACTION, true]);
-      expect(spiedImportStoreReducer.calls[2].arguments).toEqual([TESTING_APP_STATE, TESTING_ACTION, true]);
+      expect(spiedImportStoreReducer.calls[0].arguments).toEqual([undefined, buildInitAction(false)]);
+      expect(spiedImportStoreReducer.calls[1].arguments).toEqual([undefined, buildInitAction(true)]);
+      expect(spiedImportStoreReducer.calls[2].arguments).toEqual([TESTING_APP_STATE, buildTestingAction(true)]);
     });
   });
 });
