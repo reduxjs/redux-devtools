@@ -70,7 +70,7 @@ function computeNextEntry(reducer, action, state, error, replaying) {
   let nextState = state;
   let nextError;
   try {
-    nextState = reducer(state, action, replaying);
+    nextState = reducer(state, { ...action, replaying });
   } catch (err) {
     nextError = err.toString();
     if (typeof window === 'object' && typeof window.chrome !== 'undefined') {
