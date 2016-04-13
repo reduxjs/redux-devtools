@@ -479,6 +479,12 @@ describe('instrument', () => {
 
       spy.restore();
     });
+
+    it('should throw error when maxAge < 2', () => {
+      expect(() => {
+        createStore(counter, instrument(undefined, { maxAge: 1 }));
+      }).toThrow(/may not be less than 2/);
+    });
   });
 
   describe('Import State', () => {
