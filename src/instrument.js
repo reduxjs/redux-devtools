@@ -411,6 +411,15 @@ function unliftStore(liftedStore, liftReducer) {
  * Redux instrumentation store enhancer.
  */
 export default function instrument(monitorReducer = () => null, options = {}) {
+  /* eslint-disable no-eq-null */
+  if (options.maxAge != null && options.maxAge < 2) {
+  /* eslint-enable */
+    throw new Error(
+      'DevTools.instrument({ maxAge }) option, if specified, ' +
+      'may not be less than 2.'
+    );
+  }
+
   return createStore => (reducer, initialState, enhancer) => {
 
     function liftReducer(r) {
