@@ -88,6 +88,27 @@ describe('persistState', () => {
     expect(store2.getState()).toBe(-2);
   });
 
+  it('should work with objects with circular references', () => {
+    const circularReducer = (state = { count: 0 }, action) => {
+      if (action.type === 'INCREMENT') {
+        const obj = { count: state.count + 1 };
+        obj.self = obj;
+        return obj;
+      }
+      return state;
+    };
+
+    const store = createStore(circularReducer, compose(instrument(), persistState('id')));
+    expect(store.getState().count).toBe(0);
+
+    store.dispatch({ type: 'INCREMENT' });
+    store.dispatch({ type: 'INCREMENT' });
+    expect(store.getState().count).toBe(2);
+
+    const store2 = createStore(circularReducer, compose(instrument(), persistState('id')));
+    expect(store2.getState().count).toBe(2);
+  });
+
   it('should warn if read from localStorage fails', () => {
     const spy = expect.spyOn(console, 'warn');
     delete global.localStorage.getItem;

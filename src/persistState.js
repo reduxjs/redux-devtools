@@ -1,5 +1,6 @@
 import mapValues from 'lodash/mapValues';
 import identity from 'lodash/identity';
+import jsan from 'jsan';
 
 export default function persistState(sessionId, deserializeState = identity, deserializeAction = identity) {
   if (!sessionId) {
@@ -28,7 +29,7 @@ export default function persistState(sessionId, deserializeState = identity, des
     try {
       const json = localStorage.getItem(key);
       if (json) {
-        finalInitialState = deserialize(JSON.parse(json)) || initialState;
+        finalInitialState = deserialize(jsan.parse(json)) || initialState;
         next(reducer, initialState);
       }
     } catch (e) {
@@ -48,7 +49,7 @@ export default function persistState(sessionId, deserializeState = identity, des
         store.dispatch(action);
 
         try {
-          localStorage.setItem(key, JSON.stringify(store.getState()));
+          localStorage.setItem(key, jsan.stringify(store.getState()));
         } catch (e) {
           console.warn('Could not write debug session to localStorage:', e);
         }
