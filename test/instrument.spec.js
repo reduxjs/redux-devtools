@@ -96,7 +96,7 @@ describe('instrument', () => {
   });
 
   it('should toggle an action', () => {
-    // actionId 0 = @@INIT
+    // actionId 0 = @@redux/INIT
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
     store.dispatch({ type: 'INCREMENT' });
@@ -110,7 +110,7 @@ describe('instrument', () => {
   });
 
   it('should set multiple action skip', () => {
-    // actionId 0 = @@INIT
+    // actionId 0 = @@redux/INIT
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
@@ -127,7 +127,7 @@ describe('instrument', () => {
   });
 
   it('should sweep disabled actions', () => {
-    // actionId 0 = @@INIT
+    // actionId 0 = @@redux/INIT
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'DECREMENT' });
     store.dispatch({ type: 'INCREMENT' });
@@ -237,7 +237,7 @@ describe('instrument', () => {
     let monitoredLiftedStore = monitoredStore.liftedStore;
 
     expect(reducerCalls).toBe(1);
-    // actionId 0 = @@INIT
+    // actionId 0 = @@redux/INIT
     monitoredStore.dispatch({ type: 'INCREMENT' });
     monitoredStore.dispatch({ type: 'INCREMENT' });
     monitoredStore.dispatch({ type: 'INCREMENT' });
@@ -330,7 +330,7 @@ describe('instrument', () => {
       configuredLiftedStore = configuredStore.liftedStore;
     });
 
-    it('should auto-commit earliest non-@@INIT action when maxAge is reached', () => {
+    it('should auto-commit earliest non-@@redux/INIT action when maxAge is reached', () => {
       configuredStore.dispatch({ type: 'INCREMENT' });
       configuredStore.dispatch({ type: 'INCREMENT' });
       let liftedStoreState = configuredLiftedStore.getState();

@@ -60,7 +60,7 @@ export const ActionCreators = {
   }
 };
 
-const INIT_ACTION = { type: '@@INIT' };
+const INIT_ACTION = { type: '@@redux/INIT' };
 
 /**
  * Computes the next entry in the log by applying an action.
