@@ -1,6 +1,9 @@
 import expect, { spyOn } from 'expect';
 import { createStore, compose } from 'redux';
 import instrument, { ActionCreators } from '../src/instrument';
+import {Observable} from 'rxjs';
+
+import 'rxjs/add/observable/from';
 
 function counter(state = 0, action) {
   switch (action.type) {
@@ -51,6 +54,21 @@ describe('instrument', () => {
     expect(store.getState()).toBe(1);
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
+  });
+
+  it('should provide observable', () => {
+    let lastValue;
+    let calls = 0;
+
+    Observable.from(store)
+        .subscribe(state => {
+          lastValue = state;
+          calls++;
+        });
+
+    expect(lastValue).toBe(0);
+    store.dispatch({ type: 'INCREMENT' });
+    expect(lastValue).toBe(1);
   });
 
   it('should rollback state to the last committed state', () => {
