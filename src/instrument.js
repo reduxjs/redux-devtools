@@ -217,6 +217,7 @@ function liftReducerWith(reducer, initialCommittedState, monitorReducer, options
         // Consider the last committed state the new starting point.
         // Squash any staged actions into a single committed state.
         actionsById = { 0: liftAction(INIT_ACTION) };
+        initialLiftedState.actionsById = actionsById;
         nextActionId = 1;
         stagedActionIds = [0];
         skippedActionIds = [];
