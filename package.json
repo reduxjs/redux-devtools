@@ -54,15 +54,17 @@
     "react-addons-test-utils": "^0.14.0",
     "react-dom": "^0.14.0",
     "rimraf": "^2.3.4",
+    "rxjs": "^5.0.0-beta.6",
     "webpack": "^1.11.0"
   },
   "peerDependencies": {
-    "redux": "^3.0.0",
+    "redux": "^3.5.0",
     "react": "^0.14.0 || ^15.0.0-rc.1"
   },
   "dependencies": {
     "lodash": "^4.2.0",
     "react-redux": "^4.0.0",
-    "redux": "^3.2.1"
+    "redux": "^3.5.2",
+    "symbol-observable": "^0.2.4"
   }
 }
