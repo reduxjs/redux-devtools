@@ -16,10 +16,10 @@ render(
 
 if (module.hot) {
   module.hot.accept('./containers/Root', () => {
-    const Root = require('./containers/Root').default;
+    const NewRoot = require('./containers/Root').default;
     render(
       <AppContainer>
-        <Root store={store} />
+        <NewRoot store={store} />
       </AppContainer>,
       document.getElementById('root')
     );
