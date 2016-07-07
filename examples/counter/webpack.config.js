@@ -19,7 +19,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'redux-devtools': path.join(__dirname, '..', '..', 'src'),
+      //'redux-devtools': path.join(__dirname, '..', '..', 'src'),
       'react': path.join(__dirname, 'node_modules', 'react')
     }
   },
