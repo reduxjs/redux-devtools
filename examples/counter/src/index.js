@@ -7,20 +7,22 @@ import Root from './containers/Root';
 const store = configureStore();
 
 render(
-  <AppContainer
-    component={Root}
-    props={{ store }}
-  />,
+  <AppContainer>
+    <Root
+      store={ store }
+    />
+  </AppContainer>,
   document.getElementById('root')
 );
 
 if (module.hot) {
   module.hot.accept('./containers/Root', () => {
     render(
-      <AppContainer
-        component={require('./containers/Root').default}
-        props={{ store }}
-      />,
+      <AppContainer>
+        <Root
+          store={ store }
+        />
+      </AppContainer>,
       document.getElementById('root')
     );
   });
