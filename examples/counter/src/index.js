@@ -17,9 +17,10 @@ render(
 
 if (module.hot) {
   module.hot.accept('./containers/Root', () => {
+    const RootContainer = require('./containers/Root').default;
     render(
       <AppContainer>
-        <Root
+        <RootContainer
           store={ store }
         />
       </AppContainer>,
