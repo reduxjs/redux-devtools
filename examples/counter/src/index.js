@@ -17,13 +17,13 @@ const devRender = () => {
     </AppContainer>,
     rootElement
   );
-}
+};
 
 if (module.hot) {
   devRender();
   module.hot.accept('./containers/Root', devRender);
 } else {
-  renderr(
+  render(
     <Root
       store={ store }
       />,
