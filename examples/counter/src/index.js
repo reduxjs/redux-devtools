@@ -5,26 +5,28 @@ import configureStore from './store/configureStore';
 import Root from './containers/Root';
 
 const store = configureStore();
+const rootElement = document.getElementById('root');
 
-render(
-  <AppContainer>
-    <Root
-      store={ store }
-    />
-  </AppContainer>,
-  document.getElementById('root')
-);
+const devRender = () => {
+  const RootContainer = require('./containers/Root').default;
+  render(
+    <AppContainer>
+      <RootContainer
+        store={ store }
+        />
+    </AppContainer>,
+    rootElement
+  );
+}
 
 if (module.hot) {
-  module.hot.accept('./containers/Root', () => {
-    const RootContainer = require('./containers/Root').default;
-    render(
-      <AppContainer>
-        <RootContainer
-          store={ store }
-        />
-      </AppContainer>,
-      document.getElementById('root')
-    );
-  });
+  devRender();
+  module.hot.accept('./containers/Root', devRender);
+} else {
+  renderr(
+    <Root
+      store={ store }
+      />,
+    rootElement
+  );
 }
