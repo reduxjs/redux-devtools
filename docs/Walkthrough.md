@@ -1,12 +1,12 @@
 # Walkthrough
 
-## Chrome Extension
+## Browser Extension
 
-If you don’t want to bother with installing Redux DevTools and integrating it into your project, consider using [Redux DevTools Chrome Extension](https://github.com/zalmoxisus/redux-devtools-extension). It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
+If you don’t want to bother with installing Redux DevTools and integrating it into your project, consider using [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) for Chrome and Firefox. It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
 
 ## Manual Integration
 
-If you want to have full control over where DevTools are displayed, don’t use Chrome, or are developing a custom monitor, you will probably want to integrate them manually.
+If you want to have full control over where DevTools are displayed, or are developing a custom monitor, you will probably want to integrate them manually.
 It’s more steps, but you will have full control over monitors and their configuration.
 
 ### Installation

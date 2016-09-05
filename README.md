@@ -8,7 +8,7 @@ A live-editing time travel environment for [Redux](https://github.com/rackt/redu
 
 - [Features](#features)
 - [Overview](#overview)
-- [Chrome Extension](#chrome-extension)
+- [Browser Extension](#browser-extension)
 - [Setup Instructions](#setup-instructions)
 - [Custom Monitors](#custom-monitors)
 - [License](#license)
@@ -34,9 +34,9 @@ Redux DevTools is a development time package that provides power-ups for your Re
 
 If you came here looking for what do the “Reset”, “Revert”, “Sweep” or “Commit” buttons do, check out [the `LogMonitor` documentation](https://github.com/gaearon/redux-devtools-log-monitor/blob/master/README.md#features).
 
-### Chrome Extension
+### Browser Extension
 
-If you don’t want to bother with installing Redux DevTools and integrating it into your project, consider using [Redux DevTools Chrome Extension](https://github.com/zalmoxisus/redux-devtools-extension). It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
+If you don’t want to bother with installing Redux DevTools and integrating it into your project, consider using [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) for Chrome and Firefox. It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
 
 ### Setup Instructions
 
