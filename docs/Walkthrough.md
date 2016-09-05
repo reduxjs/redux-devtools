@@ -67,7 +67,7 @@ const DevTools = createDevTools(
 
 #### Use `DevTools.instrument()` Store Enhancer
 
-The `DevTools` component you created with `createDevTools()` has a special static method called `instrument()`. It returns a [store enhancer](http://rackt.github.io/redux/docs/Glossary.html#store-enhancer) that you need to use in development.
+The `DevTools` component you created with `createDevTools()` has a special static method called `instrument()`. It returns a [store enhancer](http://redux.js.org/docs/Glossary.html#store-enhancer) that you need to use in development.
 
 A store enhancer is a function that enhances the behavior of `createStore()`. You can pass store enhancer as the last optional argument to `createStore()`. You probably already used another store enhancer—[`applyMiddleware()`](http://redux.js.org/docs/api/applyMiddleware.html). Unlike `applyMiddleware()`, you will need to be careful to only use `DevTools.instrument()` in development environment, and never in production.
 
