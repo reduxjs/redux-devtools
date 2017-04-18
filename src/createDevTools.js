@@ -1,4 +1,5 @@
-import React, { Children, Component, PropTypes } from 'react';
+import React, { Children, Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import instrument from 'redux-devtools-instrument';
 
