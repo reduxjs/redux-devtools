@@ -77,6 +77,16 @@ Try clicking on actions in the log, or changing some code inside the reducers. Y
 
 Also try opening `http://localhost:3000/?debug_session=123`, click around, and then refresh. You should see that all actions have been restored from the local storage.
 
+### What do the Reset / Revert / Sweep / Commit buttons do?
+
+**Sweep** will remove any disabled actions from your log. 
+
+**Commit** works similar to a a git commit - it will remove all actions from your log and make the current state your initial state. 
+
+**Revert** will remove any actions since your last commit. 
+
+**Reset** will remove all actions and bring your store back to it's initial state. This includes actions that have previously been committed.
+
 ### Custom Monitors
 
 **DevTools accepts monitor components so you can build a completely custom UI.** [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) and [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) are just examples of what is possible.
