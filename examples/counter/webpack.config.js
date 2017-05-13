@@ -24,17 +24,17 @@ module.exports = {
     }
   },
   resolveLoader: {
-    'fallback': path.join(__dirname, 'node_modules')
+    'modules': [path.join(__dirname, 'node_modules')]
   },
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: ['babel'],
+      loaders: ['babel-loader'],
       exclude: /node_modules/,
       include: path.join(__dirname, 'src')
     }, {
       test: /\.js$/,
-      loaders: ['babel'],
+      loaders: ['babel-loader'],
       include: path.join(__dirname, '..', '..', 'src')
     }]
   }
