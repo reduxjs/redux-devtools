@@ -15,10 +15,13 @@ export default class MainSection extends Component {
     todos: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
   };
+  // Keep a counter that can be used to create an html `id` attribute.
+  static mountCount = 0;
 
   constructor(props, context) {
     super(props, context);
     this.state = { filter: SHOW_ALL };
+    this.htmlFormInputId = `toggle-all-${MainSection.mountCount++}`;
   }
 
   handleClearMarked() {
@@ -57,12 +60,17 @@ export default class MainSection extends Component {
 
   renderToggleAll(markedCount) {
     const { todos, actions } = this.props;
+
     if (todos.length > 0) {
       return (
-        <input className='toggle-all'
-               type='checkbox'
-               checked={markedCount === todos.length}
-               onChange={actions.markAll} />
+        <div>
+          <input id={this.htmlFormInputId}
+                 className='toggle-all'
+                 type='checkbox'
+                 checked={markedCount === todos.length}
+                 onChange={actions.markAll} />
+          <label htmlFor={this.htmlFormInputId}>Mark all as complete</label>
+        </div>
       );
     }
   }
