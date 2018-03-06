@@ -122,6 +122,9 @@ In fact some of these are implemented already:
 
 ![redux-devtools-dispatch](https://cloud.githubusercontent.com/assets/969003/12874321/2c3624ec-cdd2-11e5-9856-fd7e24efb8d5.gif)
 
+#### [Redux Usage Report](https://github.com/aholachek/redux-usage-report)
+![redux-usage-report](https://furtive-discussion.surge.sh/redux-usage-monitor.gif)
+
 #### Keep them coming!
 
 Create a PR to add your custom monitor.
