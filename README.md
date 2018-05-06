@@ -15,7 +15,7 @@ A live-editing time travel environment for [Redux](https://github.com/reactjs/re
 - [Custom Monitors](#custom-monitors)
 - [License](#license)
 
-[![build status](https://img.shields.io/travis/gaearon/redux-devtools/master.svg?style=flat-square)](https://travis-ci.org/gaearon/redux-devtools)
+[![build status](https://img.shields.io/travis/reduxjs/redux-devtools/master.svg?style=flat-square)](https://travis-ci.org/reduxjs/redux-devtools)
 [![npm version](https://img.shields.io/npm/v/redux-devtools.svg?style=flat-square)](https://www.npmjs.com/package/redux-devtools)
 [![npm downloads](https://img.shields.io/npm/dm/redux-devtools.svg?style=flat-square)](https://www.npmjs.com/package/redux-devtools)
 [![redux channel on discord](https://img.shields.io/badge/discord-redux@reactiflux-738bd7.svg?style=flat-square)](https://discord.gg/0ZcbPKXt5bWb10Ma)
@@ -49,7 +49,7 @@ Read the installation [walkthrough](./docs/Walkthrough.md) for integration instr
 Clone the project:
 
 ```
-git clone https://github.com/gaearon/redux-devtools.git
+git clone https://github.com/reduxjs/redux-devtools.git
 cd redux-devtools
 ```
 
@@ -81,7 +81,7 @@ Also try opening `http://localhost:3000/?debug_session=123`, click around, and t
 
 **DevTools accepts monitor components so you can build a completely custom UI.** [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) and [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) are just examples of what is possible.
 
-**[I challenge you to build a custom monitor for Redux DevTools!](https://github.com/gaearon/redux-devtools/issues/3)**
+**[I challenge you to build a custom monitor for Redux DevTools!](https://github.com/reduxjs/redux-devtools/issues/3)**
 
 Some crazy ideas for custom monitors:
 
