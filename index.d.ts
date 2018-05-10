@@ -1,3 +1,4 @@
+// Redux version 4.0.0
 // Type definitions for redux-devtools 3.4.1
 // TypeScript Version: 2.8.1
 
