@@ -7,14 +7,12 @@ import { StoreEnhancer } from "redux";
 
 export interface DevTools {
   new (): JSX.ElementClass;
-  instrument(opts?: any): StoreEnhancer<any>;
+  instrument(opts?: any): StoreEnhancer;
 }
 
 export declare function createDevTools(el: React.ReactElement<any>): DevTools;
-export declare function persistState(
-  debugSessionKey: string
-): StoreEnhancer<any>;
+export declare function persistState(debugSessionKey: string): StoreEnhancer;
 
-declare const factory: { instrument(opts?: any): () => StoreEnhancer<any> };
+declare const factory: { instrument(opts?: any): () => StoreEnhancer };
 
 export default factory;
