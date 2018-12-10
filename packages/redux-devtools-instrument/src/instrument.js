@@ -23,7 +23,7 @@ export const ActionTypes = {
  * Action creators to change the History state.
  */
 export const ActionCreators = {
-  performAction(action, trace) {
+  performAction(action, trace, toExcludeFromTrace) {
     if (!isPlainObject(action)) {
       throw new Error(
         'Actions must be plain objects. ' +
@@ -39,9 +39,15 @@ export const ActionCreators = {
     }
 
     let stack;
+    let error;
     if (trace) {
       if (typeof trace === 'function') stack = trace(action);
-      else stack = Error().stack;
+      else {
+        error = Error();
+        // https://v8.dev/docs/stack-trace-api#stack-trace-collection-for-custom-exceptions
+        if (Error.captureStackTrace) Error.captureStackTrace(error, toExcludeFromTrace);
+        stack = error.stack;
+      }
     }
 
     return { type: ActionTypes.PERFORM_ACTION, action, timestamp: Date.now(), stack };
@@ -191,8 +197,8 @@ function recomputeStates(
 /**
  * Lifts an app's action into an action on the lifted store.
  */
-export function liftAction(action, trace) {
-  return ActionCreators.performAction(action, trace);
+export function liftAction(action, trace, toExcludeFromTrace) {
+  return ActionCreators.performAction(action, trace, toExcludeFromTrace);
 }
 
 /**
@@ -614,7 +620,7 @@ export function unliftStore(liftedStore, liftReducer, options) {
     liftedStore,
 
     dispatch(action) {
-      liftedStore.dispatch(liftAction(action, trace));
+      liftedStore.dispatch(liftAction(action, trace, this.dispatch));
       return action;
     },
 
