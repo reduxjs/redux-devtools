@@ -50,7 +50,7 @@ export default function configureStore(initialState) {
     - **pauseActionType** *string* - if specified, whenever `pauseRecording(false)` lifted action is dispatched and there are actions in the history log, will add this action type. If not specified, will commit when paused.
     - **shouldStartLocked** *boolean* - if specified as `true`, it will not allow any non-monitor actions to be dispatched till `lockChanges(false)` is dispatched. Default is `false`.
     - **shouldHotReload** *boolean* - if set to `false`, will not recompute the states on hot reloading (or on replacing the reducers). Default to `true`.
-    - **shouldIncludeCallstack** *boolean* - if set to `true`, will include callstack for every dispatched action. Default to `false`.
+    - **trace** *boolean* or *function* - if set to `true`, will include stack trace for every dispatched action. You can use a function (with action object as argument) which should return `new Error().stack` string, getting the stack outside of reducers. Default to `false`.
 
 ### License
 

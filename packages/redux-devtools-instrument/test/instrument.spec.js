@@ -686,6 +686,71 @@ describe('instrument', () => {
     });
   });
 
+  describe('trace option', () => {
+    let monitoredStore;
+    let monitoredLiftedStore;
+    let exportedState;
+
+    it('should not include stack trace', () => {
+      monitoredStore = createStore(counter, instrument());
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBe(undefined);
+    });
+
+    it('should include stack trace', () => {
+      monitoredStore = createStore(counter, instrument(undefined, { trace: true }));
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
+      expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
+      expect(exportedState.actionsById[1].stack).toContain('instrument.js');
+      expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+    });
+
+    it('should get stack trace from a function', () => {
+      const traceFn = () => new Error().stack;
+      monitoredStore = createStore(counter, instrument(undefined, { trace: traceFn }));
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
+      expect(exportedState.actionsById[1].stack).toContain('instrument.js');
+      expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+    });
+
+    it('should get stack trace inside setTimeout using a function', (done) => {
+      const stack = new Error().stack;
+      setTimeout(() => {
+        const traceFn = () => stack + new Error().stack;
+        monitoredStore = createStore(counter, instrument(undefined, { trace: traceFn }));
+        monitoredLiftedStore = monitoredStore.liftedStore;
+        monitoredStore.dispatch({ type: 'INCREMENT' });
+
+        exportedState = monitoredLiftedStore.getState();
+        expect(exportedState.actionsById[0].stack).toBe(undefined);
+        expect(exportedState.actionsById[1].stack).toBeA('string');
+        expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
+        expect(exportedState.actionsById[1].stack).toContain('instrument.js');
+        expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+        expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+        done();
+      });
+    });
+  });
+
   describe('Import State', () => {
     let monitoredStore;
     let monitoredLiftedStore;
@@ -736,8 +801,8 @@ describe('instrument', () => {
       expect(importMonitoredLiftedStore.getState()).toEqual(expectedImportedState);
     });
 
-    it('should include callstack', () => {
-      let importMonitoredStore = createStore(counter, instrument(undefined, { shouldIncludeCallstack: true }));
+    it('should include stack trace', () => {
+      let importMonitoredStore = createStore(counter, instrument(undefined, { trace: true }));
       let importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       importMonitoredStore.dispatch({ type: 'DECREMENT' });
@@ -801,8 +866,8 @@ describe('instrument', () => {
       expect(filterStackAndTimestamps(importMonitoredLiftedStore.getState())).toEqual(exportedState);
     });
 
-    it('should include callstack', () => {
-      let importMonitoredStore = createStore(counter, instrument(undefined, { shouldIncludeCallstack: true }));
+    it('should include stack trace', () => {
+      let importMonitoredStore = createStore(counter, instrument(undefined, { trace: true }));
       let importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       importMonitoredStore.dispatch({ type: 'DECREMENT' });
