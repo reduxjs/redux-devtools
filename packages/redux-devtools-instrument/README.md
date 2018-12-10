@@ -51,6 +51,7 @@ export default function configureStore(initialState) {
     - **shouldStartLocked** *boolean* - if specified as `true`, it will not allow any non-monitor actions to be dispatched till `lockChanges(false)` is dispatched. Default is `false`.
     - **shouldHotReload** *boolean* - if set to `false`, will not recompute the states on hot reloading (or on replacing the reducers). Default to `true`.
     - **trace** *boolean* or *function* - if set to `true`, will include stack trace for every dispatched action. You can use a function (with action object as argument) which should return `new Error().stack` string, getting the stack outside of reducers. Default to `false`.
+    - **traceLimit** *number* - maximum stack trace frames to be stored (in case `trace` option was provided as `true`). By default it's `10`. Note that for Chrome there's a global limit to `10`, so you should also override the global `Error.stackTraceLimit` for more. If `trace` option is a function, `traceLimit` will have no effect, that should be handled there like so: `trace: () => new Error().stack.split('\n').slice(0, limit+1).join('\n')`. There's `+1` for `Error\n`.
 
 ### License
 

@@ -23,7 +23,7 @@ export const ActionTypes = {
  * Action creators to change the History state.
  */
 export const ActionCreators = {
-  performAction(action, trace, toExcludeFromTrace) {
+  performAction(action, trace, traceLimit, toExcludeFromTrace) {
     if (!isPlainObject(action)) {
       throw new Error(
         'Actions must be plain objects. ' +
@@ -40,6 +40,7 @@ export const ActionCreators = {
 
     let stack;
     let error;
+    let frames;
     if (trace) {
       if (typeof trace === 'function') stack = trace(action);
       else {
@@ -47,6 +48,10 @@ export const ActionCreators = {
         // https://v8.dev/docs/stack-trace-api#stack-trace-collection-for-custom-exceptions
         if (Error.captureStackTrace) Error.captureStackTrace(error, toExcludeFromTrace);
         stack = error.stack;
+        if (typeof Error.stackTraceLimit !== 'number' || Error.stackTraceLimit > traceLimit) {
+          frames = stack.split('\n');
+          if (frames.length > traceLimit) stack = frames.slice(0, traceLimit + 1).join('\n'); // +1 for `Error\n`
+        }
       }
     }
 
@@ -197,8 +202,8 @@ function recomputeStates(
 /**
  * Lifts an app's action into an action on the lifted store.
  */
-export function liftAction(action, trace, toExcludeFromTrace) {
-  return ActionCreators.performAction(action, trace, toExcludeFromTrace);
+export function liftAction(action, trace, traceLimit, toExcludeFromTrace) {
+  return ActionCreators.performAction(action, trace, traceLimit, toExcludeFromTrace);
 }
 
 /**
@@ -605,6 +610,7 @@ export function unliftState(liftedState) {
 export function unliftStore(liftedStore, liftReducer, options) {
   let lastDefinedState;
   const trace = options.trace || options.shouldIncludeCallstack;
+  const traceLimit = options.traceLimit || 10;
 
   function getState() {
     const state = unliftState(liftedStore.getState());
@@ -620,7 +626,7 @@ export function unliftStore(liftedStore, liftReducer, options) {
     liftedStore,
 
     dispatch(action) {
-      liftedStore.dispatch(liftAction(action, trace, this.dispatch));
+      liftedStore.dispatch(liftAction(action, trace, traceLimit, this.dispatch));
       return action;
     },
 
