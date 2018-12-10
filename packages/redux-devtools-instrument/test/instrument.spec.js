@@ -710,8 +710,7 @@ describe('instrument', () => {
       expect(exportedState.actionsById[0].stack).toBe(undefined);
       expect(exportedState.actionsById[1].stack).toBeA('string');
       expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
-      expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
-      expect(exportedState.actionsById[1].stack).toContain('instrument.js');
+      expect(exportedState.actionsById[1].stack).toNotMatch(/instrument.js/);
       expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
       expect(exportedState.actionsById[1].stack).toContain('/mocha/');
     });
