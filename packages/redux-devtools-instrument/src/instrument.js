@@ -23,7 +23,7 @@ export const ActionTypes = {
  * Action creators to change the History state.
  */
 export const ActionCreators = {
-  performAction(action, shouldIncludeCallstack) {
+  performAction(action, trace) {
     if (!isPlainObject(action)) {
       throw new Error(
         'Actions must be plain objects. ' +
@@ -38,10 +38,13 @@ export const ActionCreators = {
       );
     }
 
-    return {
-      type: ActionTypes.PERFORM_ACTION, action, timestamp: Date.now(),
-      stack: shouldIncludeCallstack ? Error().stack : undefined
-    };
+    let stack;
+    if (trace) {
+      if (typeof trace === 'function') stack = trace(action);
+      else stack = Error().stack;
+    }
+
+    return { type: ActionTypes.PERFORM_ACTION, action, timestamp: Date.now(), stack };
   },
 
   reset() {
@@ -188,8 +191,8 @@ function recomputeStates(
 /**
  * Lifts an app's action into an action on the lifted store.
  */
-export function liftAction(action, shouldIncludeCallstack) {
-  return ActionCreators.performAction(action, shouldIncludeCallstack);
+export function liftAction(action, trace) {
+  return ActionCreators.performAction(action, trace);
 }
 
 /**
@@ -502,7 +505,7 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
             minInvalidatedStateIndex = 0;
             // iterate through actions
             liftedAction.nextLiftedState.forEach(action => {
-              actionsById[nextActionId] = liftAction(action, options.shouldIncludeCallstack);
+              actionsById[nextActionId] = liftAction(action, options.trace || options.shouldIncludeCallstack);
               stagedActionIds.push(nextActionId);
               nextActionId++;
             });
@@ -595,7 +598,7 @@ export function unliftState(liftedState) {
  */
 export function unliftStore(liftedStore, liftReducer, options) {
   let lastDefinedState;
-  const { shouldIncludeCallstack } = options;
+  const trace = options.trace || options.shouldIncludeCallstack;
 
   function getState() {
     const state = unliftState(liftedStore.getState());
@@ -611,7 +614,7 @@ export function unliftStore(liftedStore, liftReducer, options) {
     liftedStore,
 
     dispatch(action) {
-      liftedStore.dispatch(liftAction(action, shouldIncludeCallstack));
+      liftedStore.dispatch(liftAction(action, trace));
       return action;
     },
 
