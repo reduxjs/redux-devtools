@@ -4,8 +4,10 @@
     "lerna": "3.4.2"
   },
   "scripts": {
-    "lint": "node ./scripts/run-in-packages npm run lint",
-    "test": "node ./scripts/run-in-packages npm run test"
+    "lint": "lerna run lint --since master -- --color",
+    "lint:all": "lerna run lint -- --color",
+    "test": "lerna run test --since master -- --colors",
+    "test:all": "lerna run test -- --colors"
   },
   "workspaces": [
     "packages/*"
