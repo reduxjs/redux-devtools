@@ -4,6 +4,11 @@
     "lerna": "3.4.2"
   },
   "scripts": {
+    "lerna": "lerna",
+    "prepublishOnly": "lerna run prepublishOnly",
+    "publish": "lerna publish",
+    "canary": "lerna publish --canary preminor --npm-tag alpha",
+    "next": "lerna publish --bump prerelease --npm-tag next",
     "lint": "lerna run lint --since master -- --color",
     "lint:all": "lerna run lint -- --color",
     "test": "lerna run test --since master -- --colors",
