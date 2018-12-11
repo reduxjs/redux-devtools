@@ -1,0 +1,9 @@
+{
+  "presets": [ ["env", {
+    "targets": {
+      "firefox" : 56,
+      "chrome" : 64
+    }
+  }], "react", "flow"],
+  "plugins": [ "transform-class-properties", "transform-object-rest-spread", "add-module-exports", "transform-decorators-legacy" ]
+}
