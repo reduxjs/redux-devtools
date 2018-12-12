@@ -29,6 +29,7 @@ function getStackFrames(
     enhancedFramesPromise = map(parsedFrames, contextSize);
   }
   return enhancedFramesPromise.then(enhancedFrames => {
+    /*
     if (
       enhancedFrames
         .map(f => f._originalFileName)
@@ -36,6 +37,7 @@ function getStackFrames(
     ) {
       return null;
     }
+    */
     return enhancedFrames.filter(
       ({ functionName }) =>
         functionName == null ||
