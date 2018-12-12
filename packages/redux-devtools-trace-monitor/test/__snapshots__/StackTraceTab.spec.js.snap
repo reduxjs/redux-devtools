@@ -1,0 +1,364 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StackTraceTab component should render with no props 1`] = `
+<StackTraceTab>
+  <div
+    style={
+      Object {
+        "backgroundColor": "white",
+        "color": "black",
+      }
+    }
+  >
+    <h2>
+      Dispatched Action Stack Trace
+    </h2>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+        }
+      }
+    >
+      <StackTrace
+        contextSize={3}
+        editorHandler={[Function]}
+        errorName="N/A"
+        stackFrames={Array []}
+      >
+        <div
+          style={
+            Object {
+              "flex": "0 1 auto",
+              "fontSize": "1em",
+              "minHeight": "0px",
+              "overflow": "auto",
+            }
+          }
+        />
+      </StackTrace>
+    </div>
+  </div>
+</StackTraceTab>
+`;
+
+exports[`StackTraceTab component should render with props, but without stack 1`] = `
+<StackTraceTab
+  action={
+    Object {
+      "type": "@@INIT",
+    }
+  }
+  actions={
+    Object {
+      "0": Object {
+        "action": Object {
+          "type": "@@INIT",
+        },
+        "type": "PERFORM_ACTION",
+      },
+      "1": Object {
+        "action": Object {
+          "type": "INCREMENT_COUNTER",
+        },
+        "type": "PERFORM_ACTION",
+      },
+      "2": Object {
+        "action": Object {
+          "type": "INCREMENT_COUNTER",
+        },
+        "stack": "Error
+    at fn1 (app.js:72:24)
+    at fn2 (app.js:84:31)",
+        "type": "PERFORM_ACTION",
+      },
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "white",
+        "color": "black",
+      }
+    }
+  >
+    <h2>
+      Dispatched Action Stack Trace
+    </h2>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+        }
+      }
+    >
+      <StackTrace
+        contextSize={3}
+        editorHandler={[Function]}
+        errorName="N/A"
+        stackFrames={Array []}
+      >
+        <div
+          style={
+            Object {
+              "flex": "0 1 auto",
+              "fontSize": "1em",
+              "minHeight": "0px",
+              "overflow": "auto",
+            }
+          }
+        />
+      </StackTrace>
+    </div>
+  </div>
+</StackTraceTab>
+`;
+
+exports[`StackTraceTab component should render with trace stack 1`] = `
+<StackTraceTab
+  action={
+    Object {
+      "type": "INCREMENT_COUNTER",
+    }
+  }
+  actions={
+    Object {
+      "0": Object {
+        "action": Object {
+          "type": "@@INIT",
+        },
+        "type": "PERFORM_ACTION",
+      },
+      "1": Object {
+        "action": Object {
+          "type": "INCREMENT_COUNTER",
+        },
+        "type": "PERFORM_ACTION",
+      },
+      "2": Object {
+        "action": Object {
+          "type": "INCREMENT_COUNTER",
+        },
+        "stack": "Error
+    at fn1 (app.js:72:24)
+    at fn2 (app.js:84:31)",
+        "type": "PERFORM_ACTION",
+      },
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "white",
+        "color": "black",
+      }
+    }
+  >
+    <h2>
+      Dispatched Action Stack Trace
+    </h2>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexDirection": "column",
+        }
+      }
+    >
+      <StackTrace
+        contextSize={3}
+        editorHandler={[Function]}
+        errorName="N/A"
+        stackFrames={
+          Array [
+            StackFrame {
+              "_originalColumnNumber": null,
+              "_originalFileName": null,
+              "_originalFunctionName": null,
+              "_originalLineNumber": null,
+              "_originalScriptCode": null,
+              "_scriptCode": null,
+              "columnNumber": 24,
+              "fileName": "app.js",
+              "functionName": "fn1",
+              "lineNumber": 72,
+            },
+            StackFrame {
+              "_originalColumnNumber": null,
+              "_originalFileName": null,
+              "_originalFunctionName": null,
+              "_originalLineNumber": null,
+              "_originalScriptCode": null,
+              "_scriptCode": null,
+              "columnNumber": 31,
+              "fileName": "app.js",
+              "functionName": "fn2",
+              "lineNumber": 84,
+            },
+          ]
+        }
+      >
+        <div
+          style={
+            Object {
+              "flex": "0 1 auto",
+              "fontSize": "1em",
+              "minHeight": "0px",
+              "overflow": "auto",
+            }
+          }
+        >
+          <Collapsible
+            key="bundle-1"
+          >
+            <div>
+              <button
+                onClick={[Function]}
+                style={
+                  Object {
+                    "background": "#fff",
+                    "border": "none",
+                    "color": "#293238",
+                    "cursor": "pointer",
+                    "display": "block",
+                    "fontFamily": "Consolas, Menlo, monospace",
+                    "fontSize": "1em",
+                    "lineHeight": "1.5",
+                    "marginBottom": "1.5em",
+                    "padding": "0px",
+                    "textAlign": "left",
+                    "width": "100%",
+                  }
+                }
+              >
+                ▶ 2 stack frames were collapsed.
+              </button>
+              <div
+                style={
+                  Object {
+                    "display": "none",
+                  }
+                }
+              >
+                <StackFrame
+                  contextSize={3}
+                  critical={true}
+                  editorHandler={[Function]}
+                  frame={
+                    StackFrame {
+                      "_originalColumnNumber": null,
+                      "_originalFileName": null,
+                      "_originalFunctionName": null,
+                      "_originalLineNumber": null,
+                      "_originalScriptCode": null,
+                      "_scriptCode": null,
+                      "columnNumber": 24,
+                      "fileName": "app.js",
+                      "functionName": "fn1",
+                      "lineNumber": 72,
+                    }
+                  }
+                  key="frame-0"
+                  showCode={false}
+                >
+                  <div>
+                    <div>
+                      fn1
+                    </div>
+                    <div
+                      style={
+                        Object {
+                          "fontSize": "0.9em",
+                          "marginBottom": "0.9em",
+                        }
+                      }
+                    >
+                      <span
+                        onClick={null}
+                        onKeyDown={null}
+                        style={null}
+                        tabIndex={null}
+                      >
+                        app.js:72:24
+                      </span>
+                    </div>
+                  </div>
+                </StackFrame>
+                <StackFrame
+                  contextSize={3}
+                  critical={false}
+                  editorHandler={[Function]}
+                  frame={
+                    StackFrame {
+                      "_originalColumnNumber": null,
+                      "_originalFileName": null,
+                      "_originalFunctionName": null,
+                      "_originalLineNumber": null,
+                      "_originalScriptCode": null,
+                      "_scriptCode": null,
+                      "columnNumber": 31,
+                      "fileName": "app.js",
+                      "functionName": "fn2",
+                      "lineNumber": 84,
+                    }
+                  }
+                  key="frame-1"
+                  showCode={false}
+                >
+                  <div>
+                    <div>
+                      fn2
+                    </div>
+                    <div
+                      style={
+                        Object {
+                          "fontSize": "0.9em",
+                          "marginBottom": "0.9em",
+                        }
+                      }
+                    >
+                      <span
+                        onClick={null}
+                        onKeyDown={null}
+                        style={null}
+                        tabIndex={null}
+                      >
+                        app.js:84:31
+                      </span>
+                    </div>
+                  </div>
+                </StackFrame>
+                <button
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "background": "#fff",
+                      "border": "none",
+                      "color": "#293238",
+                      "cursor": "pointer",
+                      "display": "block",
+                      "fontFamily": "Consolas, Menlo, monospace",
+                      "fontSize": "1em",
+                      "lineHeight": "1.5",
+                      "marginBottom": "0.6em",
+                      "padding": "0px",
+                      "textAlign": "left",
+                      "width": "100%",
+                    }
+                  }
+                >
+                  ▲ 2 stack frames were expanded.
+                </button>
+              </div>
+            </div>
+          </Collapsible>
+        </div>
+      </StackTrace>
+    </div>
+  </div>
+</StackTraceTab>
+`;
