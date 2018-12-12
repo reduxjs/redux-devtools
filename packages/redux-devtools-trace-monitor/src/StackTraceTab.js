@@ -12,7 +12,7 @@ export default class StackTraceTab extends Component {
     };
   }
   componentDidMount() {
-        //console.log("StackTraceTab mounted");
+    // console.log("StackTraceTab mounted");
     this.checkForStackTrace();
   }
 
@@ -38,10 +38,12 @@ export default class StackTraceTab extends Component {
       const deserializedError = Object.assign(new Error(), {stack: liftedAction.stack});
 
       getStackFrames(deserializedError)
-                .then(stackFrames => {
-                  console.log('Stack frames: ', stackFrames);
-                  this.setState({stackFrames, currentError: deserializedError});
-                });
+        .then(stackFrames => {
+          /* eslint-disable no-console */
+          if (process.env.NODE_ENV === 'development') console.log('Stack frames: ', stackFrames);
+          /* eslint-enable no-console */
+          this.setState({stackFrames, currentError: deserializedError});
+        });
     }
     else {
       this.setState({stackFrames: []});
@@ -49,38 +51,38 @@ export default class StackTraceTab extends Component {
   }
 
   onStackLocationClicked = (fileLocation = {}) => {
-        //console.log("Stack location args: ", ...args);
+    // console.log("Stack location args: ", ...args);
 
     const {fileName, lineNumber} = fileLocation;
 
     if(fileName && lineNumber) {
       const matchingStackFrame = this.state.stackFrames.find(stackFrame => {
         const matches = (
-                    (stackFrame._originalFileName === fileName && stackFrame._originalLineNumber === lineNumber) ||
-                    (stackFrame.fileName === fileName && stackFrame.lineNumber === lineNumber)
-                );
+          (stackFrame._originalFileName === fileName && stackFrame._originalLineNumber === lineNumber) ||
+          (stackFrame.fileName === fileName && stackFrame.lineNumber === lineNumber)
+        );
         return matches;
       });
 
-            //console.log("Matching stack frame: ", matchingStackFrame);
+      // console.log("Matching stack frame: ", matchingStackFrame);
 
       if(matchingStackFrame) {
-                /*
-                const frameIndex = this.state.stackFrames.indexOf(matchingStackFrame);
-                const originalStackFrame = parsedFramesNoSourcemaps[frameIndex];
-                console.log("Original stack frame: ", originalStackFrame);
-                */
+        /*
+        const frameIndex = this.state.stackFrames.indexOf(matchingStackFrame);
+        const originalStackFrame = parsedFramesNoSourcemaps[frameIndex];
+        console.log("Original stack frame: ", originalStackFrame);
+        */
         const adjustedLineNumber = Math.max(lineNumber - 1, 0);
 
 
         chrome.devtools.panels.openResource(fileName, adjustedLineNumber, (result) => {
-                    //console.log("openResource callback args: ", callbackArgs);
-                    //console.log("Testing");
+          //console.log("openResource callback args: ", callbackArgs);
+          //console.log("Testing");
           if(result.isError) {
             const {fileName: finalFileName, lineNumber: finalLineNumber} = matchingStackFrame;
             const adjustedLineNumber = Math.max(finalLineNumber - 1, 0);
             chrome.devtools.panels.openResource(finalFileName, adjustedLineNumber, (result) => {
-                            //console.log("openResource result: ", result);
+            // console.log("openResource result: ", result);
             });
           }
         });
