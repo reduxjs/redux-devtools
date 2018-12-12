@@ -15,7 +15,7 @@ var entities = new Entities();
 // Color scheme inspired by https://chriskempson.github.io/base16/css/base16-github.css
 // var base00 = 'ffffff'; // Default Background
 //var base01 = 'f5f5f5'; // Lighter Background (Used for status bars)
-var base01 = "red";
+var base01 = 'red';
 // var base02 = 'c8c8fa'; // Selection Background
 var base03 = '6e6e6e'; // Comments, Invisibles, Line Highlighting
 // var base04 = 'e8e8e8'; // Dark Foreground (Used for status bars)

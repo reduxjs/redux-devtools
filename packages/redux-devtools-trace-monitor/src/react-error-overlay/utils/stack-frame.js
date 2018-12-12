@@ -112,7 +112,7 @@ class StackFrame {
   toString(): string {
     const functionName = this.getFunctionName();
     const source = this.getSource();
-    return `${functionName}${source ? ` (${source})` : ``}`;
+    return `${functionName}${source ? ` (${source})` : ''}`;
   }
 }
 
