@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-// import ErrorStackParser from "error-stack-parser";
 
 import {getStackFrames} from "./react-error-overlay/utils/getStackFrames";
 import StackTrace from "./react-error-overlay/containers/StackTrace";
@@ -35,7 +34,6 @@ export default class StackTraceTab extends Component {
         const liftedActions = Object.values(liftedActionsById);
         const liftedAction = liftedActions.find(liftedAction => liftedAction.action === action);
 
-
         if(liftedAction && typeof liftedAction.stack === 'string') {
             const deserializedError = Object.assign(new Error(), {stack: liftedAction.stack});
 
@@ -50,37 +48,8 @@ export default class StackTraceTab extends Component {
         }
     }
 
-    /*
-    onStackFrameClicked = (i) => {
-        const stackFrame = this.state.stackFrames[i];
-
-        if(stackFrame) {
-            const parsedFramesNoSourcemaps = ErrorStackParser.parse(this.state.currentError)
-            console.log("Parsed stack frames: ", parsedFramesNoSourcemaps);
-
-            if(chrome && chrome.devtools.panels.openResource) {
-                const frameWithoutSourcemap = parsedFramesNoSourcemaps[i];
-                const {fileName, lineNumber} = frameWithoutSourcemap;
-                console.log("Parsed stack frame: ", stackFrame);
-                console.log("Original stack frame: ", frameWithoutSourcemap);
-
-                const adjustedLineNumber = Math.max(lineNumber - 1, 0);
-
-
-                chrome.devtools.panels.openResource(fileName, adjustedLineNumber, (...callbackArgs) => {
-                    console.log("openResource callback args: ", callbackArgs);
-                    //console.log("Testing");
-                });
-            }
-        }
-    }
-    */
-
     onStackLocationClicked = (fileLocation = {}) => {
         //console.log("Stack location args: ", ...args);
-
-        // const parsedFramesNoSourcemaps = ErrorStackParser.parse(this.state.currentError)
-        //console.log("Parsed stack frames: ", parsedFramesNoSourcemaps);
 
         const {fileName, lineNumber} = fileLocation;
 
