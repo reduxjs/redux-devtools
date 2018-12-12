@@ -73,7 +73,7 @@ A store enhancer is a function that enhances the behavior of `createStore()`. Yo
 
 The easiest way to apply several store enhancers in a row is to use the [`compose()`](http://redux.js.org/docs/api/compose.html) utility function that ships with Redux. It is the same `compose()` that you can find in Underscore and Lodash. In our case, we would use it to compose several store enhancers into one: `compose(applyMiddleware(m1, m2, m3), DevTools.instrument())`.
 
-You can add additional options to it: `DevTools.instrument({ maxAge: 50, shouldCatchErrors: true })`. See [`redux-devtools-instrument`'s API](https://github.com/zalmoxisus/redux-devtools-instrument#api) for more details.
+You can add additional options to it: `DevTools.instrument({ maxAge: 50, shouldCatchErrors: true })`. See [`redux-devtools-instrument`'s API](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-instrument#api) for more details.
 
 It’s important that you should add `DevTools.instrument()` *after* `applyMiddleware` in your `compose()` function arguments. This is because `applyMiddleware` is potentially asynchronous, but `DevTools.instrument()` expects all actions to be plain objects rather than actions interpreted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk). So make sure `applyMiddleware()` goes first in the `compose()` call, and `DevTools.instrument()` goes after it.
 

@@ -50,10 +50,10 @@ Clone the project:
 
 ```
 git clone https://github.com/reduxjs/redux-devtools.git
-cd redux-devtools
+cd redux-devtools/packages/redux-devtools
 ```
 
-Run `npm install` in the root folder:
+Run `npm install` in the package folder:
 
 ```
 npm install

@@ -1,7 +1,7 @@
 Redux DevTools Instrumentation
 ==============================
 
-Redux enhancer used along with [Redux DevTools](https://github.com/gaearon/redux-devtools) or [Remote Redux DevTools](https://github.com/zalmoxisus/remote-redux-devtools).
+Redux enhancer used along with [Redux DevTools](https://github.com/reduxjs/redux-devtools) or [Remote Redux DevTools](https://github.com/zalmoxisus/remote-redux-devtools).
 
 ### Installation
 
