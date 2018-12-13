@@ -39,17 +39,23 @@ export const ActionCreators = {
     }
 
     let stack;
-    let error;
-    let frames;
     if (trace) {
-      if (typeof trace === 'function') stack = trace(action);
-      else {
-        error = Error();
-        // https://v8.dev/docs/stack-trace-api#stack-trace-collection-for-custom-exceptions
-        if (Error.captureStackTrace) Error.captureStackTrace(error, toExcludeFromTrace);
+      if (typeof trace === 'function') {
+        stack = trace(action);
+      } else {
+        const error = Error();
+        let prevStackTraceLimit;
+        if (Error.captureStackTrace) {
+          if (Error.stackTraceLimit < traceLimit) {
+            prevStackTraceLimit = Error.stackTraceLimit;
+            Error.stackTraceLimit = traceLimit;
+          }
+          Error.captureStackTrace(error, toExcludeFromTrace);
+        }
         stack = error.stack;
+        if (prevStackTraceLimit) Error.stackTraceLimit = prevStackTraceLimit;
         if (typeof Error.stackTraceLimit !== 'number' || Error.stackTraceLimit > traceLimit) {
-          frames = stack.split('\n');
+          const frames = stack.split('\n');
           if (frames.length > traceLimit) {
             stack = frames.slice(0, traceLimit + (frames[0] === 'Error' ? 1 : 0)).join('\n');
           }

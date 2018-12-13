@@ -738,32 +738,7 @@ describe('instrument', () => {
       fn4();
     });
 
-    it('should include only 3 frames for stack trace when Error.stackTraceLimit is 3', () => {
-      const stackTraceLimit = Error.stackTraceLimit;
-      Error.stackTraceLimit = 3;
-      function fn1() {
-        monitoredStore = createStore(counter, instrument(undefined, { trace: true }));
-        monitoredLiftedStore = monitoredStore.liftedStore;
-        monitoredStore.dispatch({ type: 'INCREMENT' });
-
-        exportedState = monitoredLiftedStore.getState();
-        expect(exportedState.actionsById[0].stack).toBe(undefined);
-        expect(exportedState.actionsById[1].stack).toBeA('string');
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn1 /);
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn2 /);
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn3 /);
-        expect(exportedState.actionsById[1].stack).toNotMatch(/at fn4 /);
-        expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
-        expect(exportedState.actionsById[1].stack.split('\n').length).toBe(3 + 1);
-      }
-      function fn2() { return fn1(); }
-      function fn3() { return fn2(); }
-      function fn4() { return fn3(); }
-      fn4();
-      Error.stackTraceLimit = stackTraceLimit;
-    });
-
-    it('should include only 3 frames for stack trace when Error.stackTraceLimit is 10', () => {
+    it('should force traceLimit value of 3 when Error.stackTraceLimit is 10', () => {
       const stackTraceLimit = Error.stackTraceLimit;
       Error.stackTraceLimit = 10;
       function fn1() {
@@ -786,6 +761,48 @@ describe('instrument', () => {
       function fn4() { return fn3(); }
       fn4();
       Error.stackTraceLimit = stackTraceLimit;
+    });
+
+    it('should force traceLimit value of 5 even when Error.stackTraceLimit is 2', () => {
+      const stackTraceLimit = Error.stackTraceLimit;
+      Error.stackTraceLimit = 2;
+      monitoredStore = createStore(counter, instrument(undefined, { trace: true, traceLimit: 5 }));
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+      Error.stackTraceLimit = stackTraceLimit;
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
+      expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+      expect(exportedState.actionsById[1].stack.split('\n').length).toBe(5 + 1);
+    });
+
+    it('should force default limit of 10 even when Error.stackTraceLimit is 3', () => {
+      const stackTraceLimit = Error.stackTraceLimit;
+      Error.stackTraceLimit = 3;
+      function fn1() {
+        monitoredStore = createStore(counter, instrument(undefined, { trace: true }));
+        monitoredLiftedStore = monitoredStore.liftedStore;
+        monitoredStore.dispatch({ type: 'INCREMENT' });
+        Error.stackTraceLimit = stackTraceLimit;
+
+        exportedState = monitoredLiftedStore.getState();
+        expect(exportedState.actionsById[0].stack).toBe(undefined);
+        expect(exportedState.actionsById[1].stack).toBeA('string');
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn1 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn2 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn3 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn4 /);
+        expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+        expect(exportedState.actionsById[1].stack.split('\n').length).toBe(10 + 1);
+      }
+      function fn2() { return fn1(); }
+      function fn3() { return fn2(); }
+      function fn4() { return fn3(); }
+      fn4();
     });
 
     it('should get stack trace from a function', () => {
