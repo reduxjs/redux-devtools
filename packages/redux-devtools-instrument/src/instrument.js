@@ -620,15 +620,17 @@ export function unliftStore(liftedStore, liftReducer, options) {
     return lastDefinedState;
   }
 
+  function dispatch(action) {
+    liftedStore.dispatch(liftAction(action, trace, traceLimit, dispatch));
+    return action;
+  }
+
   return {
     ...liftedStore,
 
     liftedStore,
 
-    dispatch(action) {
-      liftedStore.dispatch(liftAction(action, trace, traceLimit, this.dispatch));
-      return action;
-    },
+    dispatch,
 
     getState,
 
