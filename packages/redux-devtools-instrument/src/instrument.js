@@ -50,7 +50,9 @@ export const ActionCreators = {
         stack = error.stack;
         if (typeof Error.stackTraceLimit !== 'number' || Error.stackTraceLimit > traceLimit) {
           frames = stack.split('\n');
-          if (frames.length > traceLimit) stack = frames.slice(0, traceLimit + 1).join('\n'); // +1 for `Error\n`
+          if (frames.length > traceLimit) {
+            stack = frames.slice(0, traceLimit + (frames[0] === 'Error' ? 1 : 0)).join('\n');
+          }
         }
       }
     }
