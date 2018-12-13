@@ -6,7 +6,7 @@
   },
   "scripts": {
     "lerna": "lerna",
-    "prepublishOnly": "lerna run prepublishOnly",
+    "prepare": "lerna run prepare --since master --stream --sort -- --scripts-prepend-node-path",
     "publish": "lerna publish",
     "canary": "lerna publish --canary preminor --npm-tag alpha",
     "next": "lerna publish --bump prerelease --npm-tag next",
