@@ -1,4 +1,13 @@
 {
   "presets": [ ["env", { "modules": "commonjs" }], "react", "flow" ],
-  "plugins": [ "transform-class-properties", "transform-object-rest-spread", "add-module-exports", "transform-decorators-legacy" ]
+  "plugins": [
+    ["transform-runtime", {
+      "polyfill": false,
+      "regenerator": true
+    }],
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "add-module-exports",
+    "transform-decorators-legacy"
+  ]
 }
