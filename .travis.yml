@@ -3,3 +3,10 @@ language: node_js
 node_js:
   - "lts/*"
   - "stable"
+cache:
+  yarn: true
+  directories:
+    - "node_modules"
+script:
+  - npm run lint
+  - npm test

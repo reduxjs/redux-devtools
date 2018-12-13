@@ -1,0 +1,20 @@
+{
+  "extends": "eslint-config-airbnb",
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true
+  },
+  "rules": {
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "no-console": 0,
+    // Temporarily disabled due to babel-eslint issues:
+    "block-scoped-var": 0,
+    "padded-blocks": 0,
+  },
+  "plugins": [
+    "react"
+  ]
+}
