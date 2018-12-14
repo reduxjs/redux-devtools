@@ -44,22 +44,26 @@ type State = {|
 
 class Collapsible extends Component<Props, State> {
   state = {
-    collapsed: true,
+    collapsed: undefined,
   };
 
-  toggleCollaped = () => {
+  toggleCollapsed = () => {
     this.setState(state => ({
-      collapsed: !state.collapsed,
+      collapsed: !this.isCollapsed(state),
     }));
   };
 
+  isCollapsed = (state) => (
+    state.collapsed === undefined ? this.props.collapsedByDefault : state.collapsed
+  );
+
   render() {
     const count = this.props.children.length;
-    const collapsed = this.state.collapsed;
+    const collapsed = this.isCollapsed(this.state);
     return (
       <div>
         <button
-          onClick={this.toggleCollaped}
+          onClick={this.toggleCollapsed}
           style={
             collapsed ? collapsibleCollapsedStyle : collapsibleExpandedStyle
           }
@@ -71,7 +75,7 @@ class Collapsible extends Component<Props, State> {
         <div style={{ display: collapsed ? 'none' : 'block' }}>
           {this.props.children}
           <button
-            onClick={this.toggleCollaped}
+            onClick={this.toggleCollapsed}
             style={collapsibleExpandedStyle}
           >
             {`▲ ${count} stack frames were expanded.`}

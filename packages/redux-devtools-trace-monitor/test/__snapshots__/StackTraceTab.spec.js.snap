@@ -175,6 +175,7 @@ exports[`StackTraceTab component should render with trace stack 1`] = `
         }
       >
         <Collapsible
+          collapsedByDefault={false}
           key="bundle-1"
         >
           <div>
@@ -189,19 +190,19 @@ exports[`StackTraceTab component should render with trace stack 1`] = `
                   "display": "block",
                   "fontSize": "1em",
                   "lineHeight": "1.5",
-                  "marginBottom": "1.5em",
+                  "marginBottom": "0.6em",
                   "padding": "0px 5px",
                   "textAlign": "left",
                   "width": "100%",
                 }
               }
             >
-              ▶ 2 stack frames were collapsed.
+              ▼ 2 stack frames were expanded.
             </button>
             <div
               style={
                 Object {
-                  "display": "none",
+                  "display": "block",
                 }
               }
             >

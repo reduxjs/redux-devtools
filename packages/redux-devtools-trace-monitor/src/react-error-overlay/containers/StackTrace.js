@@ -35,7 +35,8 @@ class StackTrace extends Component<Props> {
     const renderedFrames = [];
     let hasReachedAppCode = false,
       currentBundle = [],
-      bundleCount = 0;
+      bundleCount = 0,
+      anyNodeExpanded = false;
 
     stackFrames.forEach((frame, index) => {
       const { fileName, _originalFileName: sourceFileName } = frame;
@@ -43,6 +44,10 @@ class StackTrace extends Component<Props> {
       const isThrownIntentionally = !isBultinErrorName(errorName);
       const shouldCollapse =
         isInternalUrl && (isThrownIntentionally || hasReachedAppCode);
+
+      if (!shouldCollapse) {
+        anyNodeExpanded = true;
+      }
 
       if (!isInternalUrl) {
         hasReachedAppCode = true;
@@ -70,7 +75,7 @@ class StackTrace extends Component<Props> {
         } else if (currentBundle.length > 1) {
           bundleCount++;
           renderedFrames.push(
-            <Collapsible key={'bundle-' + bundleCount}>
+            <Collapsible collapsedByDefault={anyNodeExpanded} key={'bundle-' + bundleCount}>
               {currentBundle}
             </Collapsible>
           );
