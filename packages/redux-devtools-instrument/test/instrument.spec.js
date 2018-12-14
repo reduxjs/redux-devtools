@@ -805,6 +805,24 @@ describe('instrument', () => {
       fn4();
     });
 
+    it('should include 3 extra frames when Error.captureStackTrace not suported', () => {
+      const captureStackTrace = Error.captureStackTrace;
+      Error.captureStackTrace = undefined;
+      monitoredStore = createStore(counter, instrument(undefined, { trace: true, traceLimit: 5 }));
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+      Error.captureStackTrace = captureStackTrace;
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
+      expect(exportedState.actionsById[1].stack).toContain('instrument.js');
+      expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+      expect(exportedState.actionsById[1].stack.split('\n').length).toBe(5 + 3 + 1);
+    });
+
     it('should get stack trace from a function', () => {
       const traceFn = () => new Error().stack;
       monitoredStore = createStore(counter, instrument(undefined, { trace: traceFn }));

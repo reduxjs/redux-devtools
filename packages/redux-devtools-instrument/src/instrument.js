@@ -40,6 +40,7 @@ export const ActionCreators = {
 
     let stack;
     if (trace) {
+      let extraFrames = 0;
       if (typeof trace === 'function') {
         stack = trace(action);
       } else {
@@ -51,13 +52,15 @@ export const ActionCreators = {
             Error.stackTraceLimit = traceLimit;
           }
           Error.captureStackTrace(error, toExcludeFromTrace);
+        } else {
+          extraFrames = 3;
         }
         stack = error.stack;
         if (prevStackTraceLimit) Error.stackTraceLimit = prevStackTraceLimit;
-        if (typeof Error.stackTraceLimit !== 'number' || Error.stackTraceLimit > traceLimit) {
+        if (extraFrames || typeof Error.stackTraceLimit !== 'number' || Error.stackTraceLimit > traceLimit) {
           const frames = stack.split('\n');
           if (frames.length > traceLimit) {
-            stack = frames.slice(0, traceLimit + (frames[0] === 'Error' ? 1 : 0)).join('\n');
+            stack = frames.slice(0, traceLimit + extraFrames + (frames[0] === 'Error' ? 1 : 0)).join('\n');
           }
         }
       }
