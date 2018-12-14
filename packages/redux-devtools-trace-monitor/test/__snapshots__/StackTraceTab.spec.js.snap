@@ -57,7 +57,8 @@ exports[`StackTraceTab component should render with props, but without stack 1`]
         },
         "stack": "Error
     at fn1 (app.js:72:24)
-    at fn2 (app.js:84:31)",
+    at fn2 (app.js:84:31)
+     at fn3 (chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/page.bundle.js:1269:80)",
         "type": "PERFORM_ACTION",
       },
     }
@@ -118,7 +119,8 @@ exports[`StackTraceTab component should render with trace stack 1`] = `
         },
         "stack": "Error
     at fn1 (app.js:72:24)
-    at fn2 (app.js:84:31)",
+    at fn2 (app.js:84:31)
+     at fn3 (chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/page.bundle.js:1269:80)",
         "type": "PERFORM_ACTION",
       },
     }

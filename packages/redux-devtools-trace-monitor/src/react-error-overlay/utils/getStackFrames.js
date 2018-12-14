@@ -10,6 +10,7 @@ import type { StackFrame } from './stack-frame';
 import { parse } from './parser';
 import { map } from './mapper';
 import { unmap } from './unmapper';
+import { toExclude } from '../../presets';
 
 function getStackFrames(
   error: Error,
@@ -39,9 +40,10 @@ function getStackFrames(
     }
     */
     return enhancedFrames.filter(
-      ({ functionName }) =>
-        functionName == null ||
-        functionName.indexOf('__stack_frame_overlay_proxy_console__') === -1
+      ({ functionName, fileName }) =>
+        (functionName == null ||
+        functionName.indexOf('__stack_frame_overlay_proxy_console__') === -1) &&
+        !toExclude.test(fileName)
     );
   });
 }

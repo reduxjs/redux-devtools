@@ -19,7 +19,7 @@ const actions = {
   1: { type: 'PERFORM_ACTION', action: { type: 'INCREMENT_COUNTER' } },
   2: {
     type: 'PERFORM_ACTION', action: { type: 'INCREMENT_COUNTER' },
-    stack: 'Error\n    at fn1 (app.js:72:24)\n    at fn2 (app.js:84:31)'
+    stack: 'Error\n    at fn1 (app.js:72:24)\n    at fn2 (app.js:84:31)\n     at fn3 (chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/page.bundle.js:1269:80)'
   }
 };
 
