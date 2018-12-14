@@ -11,10 +11,10 @@ import CodeBlock from '../components/CodeBlock';
 import { applyStyles } from '../utils/dom/css';
 import { absolutifyCaret } from '../utils/dom/absolutifyCaret';
 import type { ScriptLine } from '../utils/stack-frame';
-import { primaryErrorStyle, secondaryErrorStyle } from '../styles';
 import generateAnsiHTML from '../utils/generateAnsiHTML';
 
 import { codeFrameColumns } from '@babel/code-frame';
+import { nicinabox as theme } from 'redux-devtools-themes';
 
 type StackFrameCodeBlockPropsType = {|
   lines: ScriptLine[],
@@ -90,7 +90,7 @@ function StackFrameCodeBlock(props: Exact<StackFrameCodeBlockPropsType>) {
         continue;
       }
       // $FlowFixMe
-      applyStyles(node, main ? primaryErrorStyle : secondaryErrorStyle);
+      applyStyles(node, {'background-color':  main ? theme.base02 : theme.base01});
       // eslint-disable-next-line
       break oLoop;
     }

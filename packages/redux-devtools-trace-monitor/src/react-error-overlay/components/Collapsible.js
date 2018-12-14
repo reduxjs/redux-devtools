@@ -7,21 +7,20 @@
 
 /* @flow */
 import React, { Component } from 'react';
-import { black } from '../styles';
+import { nicinabox as theme } from 'redux-devtools-themes';
 
 import type { Element as ReactElement } from 'react';
 
 const _collapsibleStyle = {
-  color: black,
+  color: theme.base06,
+  backgroundColor: theme.base01,
   cursor: 'pointer',
   border: 'none',
   display: 'block',
   width: '100%',
   textAlign: 'left',
-  background: '#fff',
-  fontFamily: 'Consolas, Menlo, monospace',
   fontSize: '1em',
-  padding: '0px',
+  padding: '0px 5px',
   lineHeight: '1.5',
 };
 

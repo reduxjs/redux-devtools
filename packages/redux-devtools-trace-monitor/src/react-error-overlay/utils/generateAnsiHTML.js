@@ -8,58 +8,24 @@
 /* @flow */
 
 import Anser from 'anser';
+import { nicinabox as theme } from 'redux-devtools-themes';
 import { AllHtmlEntities as Entities } from 'html-entities';
 
 var entities = new Entities();
 
-// Color scheme inspired by https://chriskempson.github.io/base16/css/base16-github.css
-// var base00 = 'ffffff'; // Default Background
-//var base01 = 'f5f5f5'; // Lighter Background (Used for status bars)
-var base01 = 'red';
-// var base02 = 'c8c8fa'; // Selection Background
-var base03 = '6e6e6e'; // Comments, Invisibles, Line Highlighting
-// var base04 = 'e8e8e8'; // Dark Foreground (Used for status bars)
-var base05 = '333333'; // Default Foreground, Caret, Delimiters, Operators
-// var base06 = 'ffffff'; // Light Foreground (Not often used)
-// var base07 = 'ffffff'; // Light Background (Not often used)
-var base08 = '881280'; // Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-// var base09 = '0086b3'; // Integers, Boolean, Constants, XML Attributes, Markup Link Url
-// var base0A = '795da3'; // Classes, Markup Bold, Search Text Background
-var base0B = '1155cc'; // Strings, Inherited Class, Markup Code, Diff Inserted
-var base0C = '994500'; // Support, Regular Expressions, Escape Characters, Markup Quotes
-// var base0D = '795da3'; // Functions, Methods, Attribute IDs, Headings
-var base0E = 'c80000'; // Keywords, Storage, Selector, Markup Italic, Diff Changed
-// var base0F = '333333'; // Deprecated, Opening/Closing Embedded Language Tags e.g. <?php ?>
-
-// Map ANSI colors from what babel-code-frame uses to base16-github
-// See: https://github.com/babel/babel/blob/e86f62b304d280d0bab52c38d61842b853848ba6/packages/babel-code-frame/src/index.js#L9-L22
-var colors = {
-  reset: [base05, 'transparent'],
-  black: base05,
-  red: base08 /* marker, bg-invalid */,
-  green: base0B /* string */,
-  yellow: base08 /* capitalized, jsx_tag, punctuator */,
-  blue: base0C,
-  magenta: base0C /* regex */,
-  cyan: base0E /* keyword */,
-  gray: base03 /* comment, gutter */,
-  lightgrey: base01,
-  darkgrey: base03,
-};
-
 var anserMap = {
-  'ansi-bright-black': 'black',
-  'ansi-bright-yellow': 'yellow',
-  'ansi-yellow': 'yellow',
-  'ansi-bright-green': 'green',
-  'ansi-green': 'green',
-  'ansi-bright-cyan': 'cyan',
-  'ansi-cyan': 'cyan',
-  'ansi-bright-red': 'red',
-  'ansi-red': 'red',
-  'ansi-bright-magenta': 'magenta',
-  'ansi-magenta': 'magenta',
-  'ansi-white': 'darkgrey',
+  'ansi-bright-black': theme.base03,
+  'ansi-bright-yellow': theme.base0A,
+  'ansi-yellow': theme.base0B,
+  'ansi-bright-green': theme.base0B,
+  'ansi-green': theme.base0F,
+  'ansi-bright-cyan': theme.base0D,
+  'ansi-cyan': theme.base0C,
+  'ansi-bright-red': theme.base09,
+  'ansi-red': theme.base0E,
+  'ansi-bright-magenta': theme.base0F,
+  'ansi-magenta': theme.base0E,
+  'ansi-white': theme.base00,
 };
 
 function generateAnsiHTML(txt: string): string {
@@ -81,9 +47,9 @@ function generateAnsiHTML(txt: string): string {
         open = true;
       }
       var part = contentParts[_index].replace('\r', '');
-      var color = colors[anserMap[fg]];
+      var color = anserMap[fg];
       if (color != null) {
-        result += '<span style="color: #' + color + ';">' + part + '</span>';
+        result += '<span style="color: ' + color + ';">' + part + '</span>';
       } else {
         if (fg != null) {
           console.log('Missing color mapping:', fg); // eslint-disable-line no-console

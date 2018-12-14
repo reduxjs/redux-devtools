@@ -7,27 +7,17 @@
 
 /* @flow */
 import React from 'react';
-import { redTransparent, yellowTransparent } from '../styles';
 
-const _preStyle = {
+const preStyle = {
   position: 'relative',
   display: 'block',
+  backgroundColor: '#000',
   padding: '0.5em',
   marginTop: '0.5em',
   marginBottom: '0.5em',
   overflowX: 'auto',
   whiteSpace: 'pre-wrap',
   borderRadius: '0.25rem',
-};
-
-const primaryPreStyle = {
-  ..._preStyle,
-  backgroundColor: redTransparent,
-};
-
-const secondaryPreStyle = {
-  ..._preStyle,
-  backgroundColor: yellowTransparent,
 };
 
 const codeStyle = {
@@ -40,7 +30,6 @@ type CodeBlockPropsType = {|
 |};
 
 function CodeBlock(props: CodeBlockPropsType) {
-  const preStyle = props.main ? primaryPreStyle : secondaryPreStyle;
   const codeBlock = { __html: props.codeHTML };
 
   return (

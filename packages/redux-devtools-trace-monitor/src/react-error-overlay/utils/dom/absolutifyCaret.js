@@ -33,6 +33,7 @@ function absolutifyCaret(component: Node) {
     }
     // $FlowFixMe
     c.style.position = 'absolute';
+    c.style.marginTop = '-7px';
     // $FlowFixMe
     removeNextBr(component, c);
   }

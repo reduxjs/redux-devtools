@@ -91,22 +91,18 @@ export default class StackTraceTab extends Component {
 
   }
 
-
   render() {
     const {stackFrames} = this.state;
 
     return (
-            <div style={{backgroundColor: 'white', color: 'black'}}>
-                <h2>Dispatched Action Stack Trace</h2>
-                <div style={{display: 'flex', flexDirection: 'column'}}>
-                    <StackTrace
-                        stackFrames={stackFrames}
-                        errorName={"N/A"}
-                        contextSize={3}
-                        editorHandler={this.onStackLocationClicked}
-                    />
-                </div>
-            </div>
+          <div style={{padding: '5px 10px'}}>
+              <StackTrace
+                  stackFrames={stackFrames}
+                  errorName={"N/A"}
+                  contextSize={3}
+                  editorHandler={this.onStackLocationClicked}
+              />
+          </div>
         );
   }
 }

@@ -9,7 +9,7 @@
 import React, { Component } from 'react';
 import CodeBlock from './StackFrameCodeBlock';
 import { getPrettyURL } from '../utils/getPrettyURL';
-import { darkGray } from '../styles';
+import { nicinabox as theme } from 'redux-devtools-themes';
 
 import type { StackFrame as StackFrameType } from '../utils/stack-frame';
 import type { ErrorLocation } from '../utils/parseCompileError';
@@ -21,7 +21,7 @@ const linkStyle = {
 
 const anchorStyle = {
   textDecoration: 'none',
-  color: darkGray,
+  color: theme.base05,
   cursor: 'pointer',
 };
 
@@ -31,13 +31,13 @@ const codeAnchorStyle = {
 
 const toggleStyle = {
   marginBottom: '1.5em',
-  color: darkGray,
+  color: theme.base05,
   cursor: 'pointer',
   border: 'none',
   display: 'block',
   width: '100%',
   textAlign: 'left',
-  background: '#fff',
+  background: 'transparent',
   fontFamily: 'Consolas, Menlo, monospace',
   fontSize: '1em',
   padding: '0px',
