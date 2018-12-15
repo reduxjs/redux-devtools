@@ -15,7 +15,8 @@ function openResource(fileName, lineNumber, stackFrame) {
 function openInEditor(editor, path, stackFrame) {
   const projectPath = path.replace(/\/$/, '');
   const file = stackFrame._originalFileName || stackFrame.finalFileName || stackFrame.fileName || '';
-  const filePath = /^https?:\/\//.test(file) ? file.replace(/^https?:\/\/[^\/]*/, '') : file.replace(/^\w+:\/\//, '');
+  let filePath = /^https?:\/\//.test(file) ? file.replace(/^https?:\/\/[^\/]*/, '') : file.replace(/^\w+:\/\//, '');
+  filePath = filePath.replace(/^\/~\//, '/node_modules/');
   const line = stackFrame._originalLineNumber || stackFrame.lineNumber || '0';
   const column = stackFrame._originalColumnNumber || stackFrame.columnNumber || '0';
   let url;
@@ -41,7 +42,7 @@ export default function openFile(fileName, lineNumber, stackFrame) {
   const storage = isFF ? chrome.storage.local : chrome.storage.sync || chrome.storage.local;
   storage.get(['useEditor', 'editor', 'projectPath'], function({ useEditor, editor, projectPath }) {
     if (useEditor && projectPath && typeof editor === 'string' && /^\w{1,30}$/.test(editor)) {
-      openInEditor(editor, projectPath, stackFrame);
+      openInEditor(editor.toLowerCase(), projectPath, stackFrame);
     } else {
       if (chrome.devtools && chrome.devtools.panels && chrome.devtools.panels.openResource) {
         openResource(fileName, lineNumber, stackFrame);
