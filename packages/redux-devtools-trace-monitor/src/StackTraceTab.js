@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import {getStackFrames} from './react-error-overlay/utils/getStackFrames';
 import StackTrace from './react-error-overlay/containers/StackTrace';
+import openFile from './openFile';
 
 export default class StackTraceTab extends Component {
   constructor(props) {
@@ -72,20 +73,7 @@ export default class StackTraceTab extends Component {
         const originalStackFrame = parsedFramesNoSourcemaps[frameIndex];
         console.log("Original stack frame: ", originalStackFrame);
         */
-        const adjustedLineNumber = Math.max(lineNumber - 1, 0);
-
-
-        chrome.devtools.panels.openResource(fileName, adjustedLineNumber, (result) => {
-          //console.log("openResource callback args: ", callbackArgs);
-          //console.log("Testing");
-          if(result.isError) {
-            const {fileName: finalFileName, lineNumber: finalLineNumber} = matchingStackFrame;
-            const adjustedLineNumber = Math.max(finalLineNumber - 1, 0);
-            chrome.devtools.panels.openResource(finalFileName, adjustedLineNumber, (result) => {
-            // console.log("openResource result: ", result);
-            });
-          }
-        });
+        openFile(fileName, lineNumber, matchingStackFrame);
       }
     }
 
