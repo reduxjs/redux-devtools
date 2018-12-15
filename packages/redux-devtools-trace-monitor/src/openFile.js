@@ -36,20 +36,25 @@ function openInEditor(editor, path, stackFrame) {
 
 export default function openFile(fileName, lineNumber, stackFrame) {
   if (process.env.NODE_ENV === 'development') console.log(fileName, lineNumber, stackFrame); // eslint-disable-line no-console
-  if (!chrome || !chrome.storage || !chrome.storage.sync) return; // TODO: Pass editor settings for using outside of browser extension
-  if (chrome && chrome.storage && chrome.storage.sync) {
-    chrome.storage.sync.get(['useEditor', 'editor', 'projectPath'], function({ useEditor, editor, projectPath }) {
-      if (useEditor && projectPath && typeof editor === 'string' && /^\w{1,30}$/.test(editor)) {
-        openInEditor(editor, projectPath, stackFrame);
-      } else {
-        if (chrome.devtools && chrome.devtools.panels && chrome.devtools.panels.openResource) {
-          openResource(fileName, lineNumber, stackFrame);
-        } else if (chrome.runtime && chrome.runtime.openOptionsPage) {
-          if (confirm('Set the editor to open the file in?')) {
-            chrome.runtime.openOptionsPage();
-          }
+  if (!chrome || !chrome.storage) return; // TODO: Pass editor settings for using outside of browser extension
+  const isFF = navigator.userAgent.indexOf('Firefox') !== -1;
+  const storage = isFF ? chrome.storage.local : chrome.storage.sync || chrome.storage.local;
+  storage.get(['useEditor', 'editor', 'projectPath'], function({ useEditor, editor, projectPath }) {
+    if (useEditor && projectPath && typeof editor === 'string' && /^\w{1,30}$/.test(editor)) {
+      openInEditor(editor, projectPath, stackFrame);
+    } else {
+      if (chrome.devtools && chrome.devtools.panels && chrome.devtools.panels.openResource) {
+        openResource(fileName, lineNumber, stackFrame);
+      } else if (chrome.runtime && (chrome.runtime.openOptionsPage || isFF)) {
+        if (chrome.devtools && isFF) {
+          chrome.devtools.inspectedWindow.eval('confirm("Set the editor to open the file in?")', result => {
+            if (!result) return;
+            chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
+          });
+        } else if (confirm('Set the editor to open the file in?')) {
+          chrome.runtime.openOptionsPage();
         }
       }
-    });  
-  }
+    }
+  });
 }
