@@ -12,7 +12,7 @@ It can be used as a browser extension (for [Chrome](https://chrome.google.com/we
 
 ### Documentation
 
-- [Brower Extension Instalation and Configuration](https://github.com/zalmoxisus/redux-devtools-extension#installation)
+- [Brower Extension Installation and Configuration](https://github.com/zalmoxisus/redux-devtools-extension#installation)
 - [Manual Integration as a React Component](./docs/Walkthrough.md#manual-integration)
 - [Extension Options (Arguments)](https://github.com/zalmoxisus/redux-devtools-extension/tree/master/docs/API/Arguments.md)
 - [Extension Methods (Advanced API)](https://github.com/zalmoxisus/redux-devtools-extension/tree/master/docs/API/Methods.md)
