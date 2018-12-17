@@ -1,3 +1,5 @@
+const isFF = navigator.userAgent.indexOf('Firefox') !== -1;
+
 function openResource(fileName, lineNumber, stackFrame) {
   const adjustedLineNumber = Math.max(lineNumber - 1, 0);
   chrome.devtools.panels.openResource(fileName, adjustedLineNumber, (result) => {
@@ -10,6 +12,31 @@ function openResource(fileName, lineNumber, stackFrame) {
       });
     }
   });
+}
+
+function openAndCloseTab(url) {
+  chrome.tabs.create({ url }, tab => {
+    const removeTab = () => {
+      chrome.windows.onFocusChanged.removeListener(removeTab);
+      if (tab && tab.id) {
+        chrome.tabs.remove(tab.id, () => {
+          if(chrome.runtime.lastError) console.log(chrome.runtime.lastError); // eslint-disable-line no-console
+          else if (chrome.devtools && chrome.devtools.inspectedWindow) {
+            chrome.tabs.update(chrome.devtools.inspectedWindow.tabId, {active: true});
+          }  
+        });
+      }
+    };
+    if (chrome.windows) chrome.windows.onFocusChanged.addListener(removeTab);
+  });
+}
+
+function openInIframe(url) {
+  const iframe = document.createElement('iframe');
+  iframe.src = url;
+  iframe.style = 'display:none';
+  document.body.appendChild(iframe);
+  setTimeout(() => iframe.parentNode.removeChild(iframe), 3000);
 }
 
 function openInEditor(editor, path, stackFrame) {
@@ -32,13 +59,17 @@ function openInEditor(editor, path, stackFrame) {
       url = `${editor}://open/?url=file://${projectPath}${filePath}&line=${line}&column=${column}`;
   }
   if (process.env.NODE_ENV === 'development') console.log(url); // eslint-disable-line no-console
-  window.open(url);
+  if (chrome.devtools && !isFF) {
+    if (chrome.tabs) openAndCloseTab(url);
+    else window.open(url);
+  } else {
+    openInIframe(url);
+  }
 }
 
 export default function openFile(fileName, lineNumber, stackFrame) {
   if (process.env.NODE_ENV === 'development') console.log(fileName, lineNumber, stackFrame); // eslint-disable-line no-console
   if (!chrome || !chrome.storage) return; // TODO: Pass editor settings for using outside of browser extension
-  const isFF = navigator.userAgent.indexOf('Firefox') !== -1;
   const storage = isFF ? chrome.storage.local : chrome.storage.sync || chrome.storage.local;
   storage.get(['useEditor', 'editor', 'projectPath'], function({ useEditor, editor, projectPath }) {
     if (useEditor && projectPath && typeof editor === 'string' && /^\w{1,30}$/.test(editor)) {
