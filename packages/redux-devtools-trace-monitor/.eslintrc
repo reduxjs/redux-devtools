@@ -1,0 +1,34 @@
+{
+  "extends": "plugin:flowtype/recommended",
+  "globals": {
+    "chrome": true
+  },
+  "env": {
+    "jest": true,
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true
+    }
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/sort-comp": 0,
+    "react/jsx-quotes": 0,
+    "eol-last": 0,
+    "no-unused-vars": 0,
+    "no-console": 1,
+    "comma-dangle": 0
+  },
+  "plugins": [
+    "react",
+    "flowtype"
+  ]
+}

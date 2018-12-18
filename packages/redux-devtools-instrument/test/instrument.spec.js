@@ -686,6 +686,178 @@ describe('instrument', () => {
     });
   });
 
+  describe('trace option', () => {
+    let monitoredStore;
+    let monitoredLiftedStore;
+    let exportedState;
+
+    it('should not include stack trace', () => {
+      monitoredStore = createStore(counter, instrument());
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBe(undefined);
+    });
+
+    it('should include stack trace', () => {
+      monitoredStore = createStore(counter, instrument(undefined, { trace: true }));
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
+      expect(exportedState.actionsById[1].stack).toNotMatch(/instrument.js/);
+      expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+      expect(exportedState.actionsById[1].stack.split('\n').length).toBe(10 + 1); // +1 is for `Error\n`
+    });
+
+    it('should include only 3 frames for stack trace', () => {
+      function fn1() {
+        monitoredStore = createStore(counter, instrument(undefined, { trace: true, traceLimit: 3 }));
+        monitoredLiftedStore = monitoredStore.liftedStore;
+        monitoredStore.dispatch({ type: 'INCREMENT' });
+
+        exportedState = monitoredLiftedStore.getState();
+        expect(exportedState.actionsById[0].stack).toBe(undefined);
+        expect(exportedState.actionsById[1].stack).toBeA('string');
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn1 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn2 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn3 /);
+        expect(exportedState.actionsById[1].stack).toNotMatch(/at fn4 /);
+        expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+        expect(exportedState.actionsById[1].stack.split('\n').length).toBe(3 + 1);
+      }
+      function fn2() { return fn1(); }
+      function fn3() { return fn2(); }
+      function fn4() { return fn3(); }
+      fn4();
+    });
+
+    it('should force traceLimit value of 3 when Error.stackTraceLimit is 10', () => {
+      const stackTraceLimit = Error.stackTraceLimit;
+      Error.stackTraceLimit = 10;
+      function fn1() {
+        monitoredStore = createStore(counter, instrument(undefined, { trace: true, traceLimit: 3 }));
+        monitoredLiftedStore = monitoredStore.liftedStore;
+        monitoredStore.dispatch({ type: 'INCREMENT' });
+
+        exportedState = monitoredLiftedStore.getState();
+        expect(exportedState.actionsById[0].stack).toBe(undefined);
+        expect(exportedState.actionsById[1].stack).toBeA('string');
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn1 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn2 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn3 /);
+        expect(exportedState.actionsById[1].stack).toNotMatch(/at fn4 /);
+        expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+        expect(exportedState.actionsById[1].stack.split('\n').length).toBe(3 + 1);
+      }
+      function fn2() { return fn1(); }
+      function fn3() { return fn2(); }
+      function fn4() { return fn3(); }
+      fn4();
+      Error.stackTraceLimit = stackTraceLimit;
+    });
+
+    it('should force traceLimit value of 5 even when Error.stackTraceLimit is 2', () => {
+      const stackTraceLimit = Error.stackTraceLimit;
+      Error.stackTraceLimit = 2;
+      monitoredStore = createStore(counter, instrument(undefined, { trace: true, traceLimit: 5 }));
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+      Error.stackTraceLimit = stackTraceLimit;
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
+      expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+      expect(exportedState.actionsById[1].stack.split('\n').length).toBe(5 + 1);
+    });
+
+    it('should force default limit of 10 even when Error.stackTraceLimit is 3', () => {
+      const stackTraceLimit = Error.stackTraceLimit;
+      Error.stackTraceLimit = 3;
+      function fn1() {
+        monitoredStore = createStore(counter, instrument(undefined, { trace: true }));
+        monitoredLiftedStore = monitoredStore.liftedStore;
+        monitoredStore.dispatch({ type: 'INCREMENT' });
+        Error.stackTraceLimit = stackTraceLimit;
+
+        exportedState = monitoredLiftedStore.getState();
+        expect(exportedState.actionsById[0].stack).toBe(undefined);
+        expect(exportedState.actionsById[1].stack).toBeA('string');
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn1 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn2 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn3 /);
+        expect(exportedState.actionsById[1].stack).toMatch(/at fn4 /);
+        expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+        expect(exportedState.actionsById[1].stack.split('\n').length).toBe(10 + 1);
+      }
+      function fn2() { return fn1(); }
+      function fn3() { return fn2(); }
+      function fn4() { return fn3(); }
+      fn4();
+    });
+
+    it('should include 3 extra frames when Error.captureStackTrace not suported', () => {
+      const captureStackTrace = Error.captureStackTrace;
+      Error.captureStackTrace = undefined;
+      monitoredStore = createStore(counter, instrument(undefined, { trace: true, traceLimit: 5 }));
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+      Error.captureStackTrace = captureStackTrace;
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
+      expect(exportedState.actionsById[1].stack).toContain('instrument.js');
+      expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+      expect(exportedState.actionsById[1].stack.split('\n').length).toBe(5 + 3 + 1);
+    });
+
+    it('should get stack trace from a function', () => {
+      const traceFn = () => new Error().stack;
+      monitoredStore = createStore(counter, instrument(undefined, { trace: traceFn }));
+      monitoredLiftedStore = monitoredStore.liftedStore;
+      monitoredStore.dispatch({ type: 'INCREMENT' });
+
+      exportedState = monitoredLiftedStore.getState();
+      expect(exportedState.actionsById[0].stack).toBe(undefined);
+      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
+      expect(exportedState.actionsById[1].stack).toContain('instrument.js');
+      expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+    });
+
+    it('should get stack trace inside setTimeout using a function', (done) => {
+      const stack = new Error().stack;
+      setTimeout(() => {
+        const traceFn = () => stack + new Error().stack;
+        monitoredStore = createStore(counter, instrument(undefined, { trace: traceFn }));
+        monitoredLiftedStore = monitoredStore.liftedStore;
+        monitoredStore.dispatch({ type: 'INCREMENT' });
+
+        exportedState = monitoredLiftedStore.getState();
+        expect(exportedState.actionsById[0].stack).toBe(undefined);
+        expect(exportedState.actionsById[1].stack).toBeA('string');
+        expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
+        expect(exportedState.actionsById[1].stack).toContain('instrument.js');
+        expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+        expect(exportedState.actionsById[1].stack).toContain('/mocha/');
+        done();
+      });
+    });
+  });
+
   describe('Import State', () => {
     let monitoredStore;
     let monitoredLiftedStore;
@@ -736,8 +908,8 @@ describe('instrument', () => {
       expect(importMonitoredLiftedStore.getState()).toEqual(expectedImportedState);
     });
 
-    it('should include callstack', () => {
-      let importMonitoredStore = createStore(counter, instrument(undefined, { shouldIncludeCallstack: true }));
+    it('should include stack trace', () => {
+      let importMonitoredStore = createStore(counter, instrument(undefined, { trace: true }));
       let importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       importMonitoredStore.dispatch({ type: 'DECREMENT' });
@@ -801,8 +973,8 @@ describe('instrument', () => {
       expect(filterStackAndTimestamps(importMonitoredLiftedStore.getState())).toEqual(exportedState);
     });
 
-    it('should include callstack', () => {
-      let importMonitoredStore = createStore(counter, instrument(undefined, { shouldIncludeCallstack: true }));
+    it('should include stack trace', () => {
+      let importMonitoredStore = createStore(counter, instrument(undefined, { trace: true }));
       let importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       importMonitoredStore.dispatch({ type: 'DECREMENT' });
