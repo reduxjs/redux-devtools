@@ -2,6 +2,7 @@ d3tooltip
 =========================
 
 This tooltip aims for a minimal yet highly configurable API. It has a long way to go, but the essentials are there.
+It was created by [@romseguy](https://github.com/romseguy) and merged from [`romseguy/d3tooltip`](https://github.com/romseguy/d3tooltip).
 
 ## Installation
 
