@@ -38,6 +38,15 @@ describe('StackTraceTab component', () => {
     genAsyncSnapshot(component, done);
   });
 
+  it('should render the link to docs', (done) => {
+    const component = mount(
+      <StackTraceTab
+      actions={actions} action={actions[1].action}
+      />
+    );
+    genAsyncSnapshot(component, done);
+  });
+
   it('should render with trace stack', (done) => {
     const component = mount(
       <StackTraceTab

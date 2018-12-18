@@ -1,5 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`StackTraceTab component should render the link to docs 1`] = `
+<StackTraceTab
+  action={
+    Object {
+      "type": "INCREMENT_COUNTER",
+    }
+  }
+  actions={
+    Object {
+      "0": Object {
+        "action": Object {
+          "type": "@@INIT",
+        },
+        "type": "PERFORM_ACTION",
+      },
+      "1": Object {
+        "action": Object {
+          "type": "INCREMENT_COUNTER",
+        },
+        "type": "PERFORM_ACTION",
+      },
+      "2": Object {
+        "action": Object {
+          "type": "INCREMENT_COUNTER",
+        },
+        "stack": "Error
+    at fn1 (app.js:72:24)
+    at fn2 (app.js:84:31)
+     at fn3 (chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/page.bundle.js:1269:80)",
+        "type": "PERFORM_ACTION",
+      },
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "padding": "5px 10px",
+      }
+    }
+  >
+    To enable tracing action calls, you should set \`trace\` option to \`true\` for Redux DevTools enhancer. Refer to 
+    <a
+      href="#"
+      onClick={[Function]}
+    >
+      this page
+    </a>
+     for more details.
+  </div>
+</StackTraceTab>
+`;
+
 exports[`StackTraceTab component should render with no props 1`] = `
 <StackTraceTab>
   <div

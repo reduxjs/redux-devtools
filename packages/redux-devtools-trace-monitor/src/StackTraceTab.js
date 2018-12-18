@@ -4,6 +4,8 @@ import {getStackFrames} from './react-error-overlay/utils/getStackFrames';
 import StackTrace from './react-error-overlay/containers/StackTrace';
 import openFile from './openFile';
 
+const rootStyle = {padding: '5px 10px'};
+
 export default class StackTraceTab extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +49,10 @@ export default class StackTraceTab extends Component {
         });
     }
     else {
-      this.setState({stackFrames: []});
+      this.setState({
+        stackFrames: [],
+        showDocsLink: liftedAction.action && liftedAction.action.type && liftedAction.action.type !== '@@INIT'
+      });
     }
   }
 
@@ -76,14 +81,27 @@ export default class StackTraceTab extends Component {
         openFile(fileName, lineNumber, matchingStackFrame);
       }
     }
+  }
 
+  openDocs = (e) => {
+    e.stopPropagation();
+    window.open('https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Features/Trace.md');
   }
 
   render() {
-    const {stackFrames} = this.state;
+    const {stackFrames, showDocsLink} = this.state;
+
+    if (showDocsLink) {
+      return (
+        <div style={rootStyle}>
+          To enable tracing action calls, you should set `trace` option to `true` for Redux DevTools enhancer.
+          Refer to <a href="#" onClick={this.openDocs}>this page</a> for more details.
+        </div>
+      );
+    }
 
     return (
-          <div style={{padding: '5px 10px'}}>
+          <div style={rootStyle}>
               <StackTrace
                   stackFrames={stackFrames}
                   errorName={"N/A"}
