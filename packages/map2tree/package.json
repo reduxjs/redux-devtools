@@ -10,11 +10,12 @@
     "lint": "eslint src test",
     "test": "babel-node test/map2tree.js | tap-diff",
     "check": "npm run lint && npm run test",
-    "prepublish": "npm run check && npm run clean && npm run build && npm run build:umd"
-  },
+    "prepare": "npm run build && npm run build:umd",
+    "prepublishOnly": "npm run check && npm run clean && npm run build && npm run build:umd"
+},
   "repository": {
     "type": "git",
-    "url": "https://github.com/romseguy/map2tree.git"
+    "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "keywords": [
     "map2tree",
@@ -26,9 +27,9 @@
   "author": "romseguy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/romseguy/map2tree/issues"
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/romseguy/map2tree",
+  "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
     "babel-cli": "^6.3.15",
     "babel-core": "^6.1.20",
@@ -49,6 +50,11 @@
     "lodash": "^4.2.1"
   },
   "npmName": "map2tree",
+  "files": [
+    "lib",
+    "dist",
+    "src"
+  ],
   "npmFileMap": [
     {
       "basePath": "/dist/",
