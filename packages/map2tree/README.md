@@ -1,4 +1,4 @@
-A pure function to convert a map into a tree structure.
+A pure function to convert a map into a tree structure. Created by [@romseguy](https://github.com/romseguy) and merged from [`romseguy/map2tree`](https://github.com/romseguy/map2tree).
 
 The following opinions must be taken into account since the primary use case of this library is [redux-devtools-chart-monitor](https://github.com/romseguy/redux-devtools-chart-monitor):
 
