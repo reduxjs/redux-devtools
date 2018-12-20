@@ -9,7 +9,7 @@ function logError(type) {
       'Redux DevTools could not render. You must pass the Redux store ' +
       'to <DevTools> either as a "store" prop or by wrapping it in a ' +
       '<Provider store={store}>.'
-    );  
+    );
   } else {
     console.error(
       'Redux DevTools could not render. Did you forget to include ' +
@@ -78,7 +78,7 @@ export default function createDevTools(children) {
             </Provider>
           );
         }
-        return(
+        return (
           <ReactReduxContext.Consumer>
           {props => {
             if (!props || !props.store) {
@@ -89,7 +89,7 @@ export default function createDevTools(children) {
               logError('NoLiftedStore');
               return null;
             }
-           return (
+            return (
               <Provider store={props.store.liftedStore}>
                 <ConnectedMonitor {...monitorProps} />
               </Provider>
