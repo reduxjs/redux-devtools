@@ -1,0 +1,51 @@
+{
+  "name": "react-json-tree-example",
+  "version": "1.0.0",
+  "description": "React-Json-Tree example",
+  "scripts": {
+    "start": "node server.js",
+    "lint": "eslint src",
+    "stats": "NODE_ENV=production webpack --json > dist/stats.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "boilerplate",
+    "hot",
+    "reload",
+    "hmr",
+    "live",
+    "edit",
+    "webpack"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
+  },
+  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-react": "^6.5.0",
+    "eslint": "^4.10.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "react": "^16.0.0",
+    "react-base16-styling": "^0.5.3",
+    "react-dom": "^16.0.0"
+  }
+}

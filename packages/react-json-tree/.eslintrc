@@ -1,0 +1,53 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "standard",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true
+  },
+  "rules": {
+    "no-restricted-syntax": 0,
+    "comma-dangle": 0,
+    "no-param-reassign": 0,
+    "space-infix-ops": 0,
+    "react/sort-comp": [
+      1, {
+        "order": [
+          "static-methods",
+          "constructor",
+          "lifecycle",
+          "everything-else",
+          "render",
+          "/^handle.+$/"
+        ],
+        "groups": {
+          "lifecycle": [
+            "childContextTypes",
+            "getInitialState",
+            "state",
+            "getChildContext",
+            "componentWillMount",
+            "componentDidMount",
+            "componentWillReceiveProps",
+            "shouldComponentUpdate",
+            "componentWillUpdate",
+            "componentDidUpdate",
+            "componentWillUnmount"
+          ]
+        }
+      }
+    ]
+  },
+  "plugins": [
+    "prettier",
+    "standard",
+    "react",
+    "babel"
+  ]
+}
