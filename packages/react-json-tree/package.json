@@ -13,13 +13,18 @@
       "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --watch",
     "test:cov":
       "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --recursive",
-    "prepublish": "npm run test && npm run clean && npm run build",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test && npm run clean && npm run build",
     "start": "cd examples && npm start",
     "precommit": "lint-staged"
   },
+  "files": [
+    "lib",
+    "src"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/chibicode/react-json-tree.git"
+    "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "keywords": ["react", "json viewer"],
   "author": "Shu Uesugi <shu@chibicode.com> (http://github.com/chibicode)",
@@ -30,9 +35,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chibicode/react-json-tree/issues"
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/chibicode/react-json-tree",
+  "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
