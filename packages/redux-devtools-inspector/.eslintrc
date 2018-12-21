@@ -1,0 +1,57 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "no-undef": ["error"],
+    "no-trailing-spaces": ["warn"],
+    "space-before-blocks": ["warn", "always"],
+    "no-unused-expressions": ["off"],
+    "no-underscore-dangle": ["off"],
+    "quote-props": ["warn", "as-needed"],
+    "no-multi-spaces": ["off"],
+    "no-unused-vars": ["warn"],
+    "no-loop-func": ["off"],
+    "key-spacing": ["off"],
+    "max-len": ["warn", 100],
+    "strict": ["off"],
+    "eol-last": ["warn"],
+    "no-console": ["warn"],
+    "indent": ["warn", 2],
+    "quotes": ["warn", "single", "avoid-escape"],
+    "curly": ["off"],
+    "jsx-quotes": ["warn", "prefer-single"],
+
+    "react/jsx-boolean-value": "warn",
+    "react/jsx-no-undef": "error",
+    "react/jsx-uses-react": "warn",
+    "react/jsx-uses-vars": "warn",
+    "react/no-did-mount-set-state": "warn",
+    "react/no-did-update-set-state": "warn",
+    "react/no-multi-comp": "off",
+    "react/no-unknown-property": "error",
+    "react/react-in-jsx-scope": "error",
+    "react/self-closing-comp": "warn",
+    "react/jsx-wrap-multilines": "warn",
+ 
+    "generator-star-spacing": "off",
+    "new-cap": "off",
+    "object-curly-spacing": "off",
+    "object-shorthand": "off",
+
+    "babel/generator-star-spacing": "warn",
+    "babel/new-cap": "warn",
+    "babel/object-curly-spacing": ["warn", "always"],
+    "babel/object-shorthand": "warn"
+  },
+  "plugins": [
+    "react",
+    "babel"
+  ],
+  "settings": {
+    "ecmascript": 6,
+    "jsx": true
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
