@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    "transform-runtime",
+    "transform-es3-property-literals",
+    "transform-es3-member-expression-literals",
+    "transform-object-rest-spread",
+    "transform-class-properties"
+  ],
+  "presets": [[
+    "env",
+    {
+      "loose": true,
+      "shippedProposals": true
+    }
+  ], "react"]
+}
