@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import dateformat from 'dateformat';
 import debounce from 'lodash.debounce';

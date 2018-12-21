@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { createStylingFromTheme, base16Themes } from './utils/createStylingFromTheme';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import ActionList from './ActionList';

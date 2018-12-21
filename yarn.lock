@@ -9623,7 +9623,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.2:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -9823,7 +9823,7 @@ react-addons-test-utils@^15.4.0:
   resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.6.2.tgz#c12b6efdc2247c10da7b8770d185080a7b047156"
   integrity sha1-wStu/cIkfBDae4dw0YUICnsEcVY=
 
-react-base16-styling@^0.4.1, react-base16-styling@^0.4.6, react-base16-styling@^0.4.7:
+react-base16-styling@^0.4.1:
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/react-base16-styling/-/react-base16-styling-0.4.7.tgz#a3eaf884a0adfc1896455f6302ff75de72e51a2e"
   integrity sha1-o+r4hKCt/BiWRV9jAv913nLlGi4=
@@ -9834,10 +9834,20 @@ react-base16-styling@^0.4.1, react-base16-styling@^0.4.6, react-base16-styling@^
     lodash.flow "^3.3.0"
     pure-color "^1.2.0"
 
-react-base16-styling@^0.5.1:
+react-base16-styling@^0.5.1, react-base16-styling@^0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/react-base16-styling/-/react-base16-styling-0.5.3.tgz#3858f24e9c4dd8cbd3f702f3f74d581ca2917269"
   integrity sha1-OFjyTpxN2MvT9wLz901YHKKRcmk=
+  dependencies:
+    base16 "^1.0.0"
+    lodash.curry "^4.0.1"
+    lodash.flow "^3.3.0"
+    pure-color "^1.2.0"
+
+react-base16-styling@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/react-base16-styling/-/react-base16-styling-0.6.0.tgz#ef2156d66cf4139695c8a167886cb69ea660792c"
+  integrity sha1-7yFW1mz0E5aVyKFniGy2nqZgeSw=
   dependencies:
     base16 "^1.0.0"
     lodash.curry "^4.0.1"
@@ -9860,12 +9870,14 @@ react-bootstrap@^0.30.6:
     uncontrollable "^4.0.1"
     warning "^3.0.0"
 
-react-day-picker-themeable@^2.5.1:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/react-day-picker-themeable/-/react-day-picker-themeable-2.5.2.tgz#52072b8c631bcaba6c4a74a3aaf2422f198f58c7"
-  integrity sha1-UgcrjGMbyrpsSnSjqvJCLxmPWMc=
+react-day-picker-themeable@^7.0.5:
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/react-day-picker-themeable/-/react-day-picker-themeable-7.0.5.tgz#c0a2c24af6e7f562820251eef2d4284582ca9879"
+  integrity sha512-IQZoK6ljQBkqIUuno+KCWmiMnKW8E/RKdXvL37dMQlH+i6c6IQyj0PKswu7QrwwUGLwjKB2REc80M4glka8bCg==
   dependencies:
-    react-base16-styling "^0.4.7"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+    react-base16-styling "^0.6.0"
     react-is-deprecated "0.1.2"
 
 react-deep-force-update@^1.0.0:
@@ -9881,7 +9893,7 @@ react-dock@^0.2.4:
     lodash.debounce "^3.1.1"
     prop-types "^15.5.8"
 
-react-dom@^15.3.2, react-dom@^15.4.0:
+react-dom@^15.4.0:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.2.tgz#41cfadf693b757faf2708443a1d1fd5a02bef730"
   integrity sha1-Qc+t9pO3V/rycIRDodH9WgK+9zA=
@@ -9891,7 +9903,7 @@ react-dom@^15.3.2, react-dom@^15.4.0:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react-dom@^16.0.0:
+react-dom@^16.0.0, react-dom@^16.4.2:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.7.0.tgz#a17b2a7ca89ee7390bc1ed5eb81783c7461748b8"
   integrity sha512-D0Ufv1ExCAmF38P2Uh1lwpminZFRXEINJe53zRAbm4KPwSyd6DY/uDoS0Blj9jvPpn1+wivKpZYc8aAAN/nAkg==
@@ -9909,17 +9921,18 @@ react-dragula@^1.1.17:
     atoa "1.0.0"
     dragula "3.7.2"
 
-react-input-enhancements@^0.5.3:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/react-input-enhancements/-/react-input-enhancements-0.5.4.tgz#eddded4324bcf71b620471185000c0b8e4e0eb56"
-  integrity sha1-7d3tQyS89xtiBHEYUADAuOTg61Y=
+react-input-enhancements@^0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/react-input-enhancements/-/react-input-enhancements-0.7.5.tgz#a1bc1010d2f9dfef53fd490bb605db969f8f0e11"
+  integrity sha512-p3sBaT6+KhkASs+iLlCW1OBVTj3j8axs3rxidg8AEOvd0QMcBWpYWW3B182z4gcdQYamA3YQvf9MnQK1I0Q3dg==
   dependencies:
     babel-runtime "^6.11.6"
     inline-style-prefixer "^2.0.1"
     lodash.sortby "^4.7.0"
     moment "^2.14.1"
-    react-base16-styling "^0.4.6"
-    react-day-picker-themeable "^2.5.1"
+    prop-types "^15.6.0"
+    react-base16-styling "^0.5.3"
+    react-day-picker-themeable "^7.0.5"
 
 react-is-deprecated@0.1.2:
   version "0.1.2"
@@ -10043,7 +10056,7 @@ react-transform-hmr@^1.0.2:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@^15.3.2, react@^15.4.0:
+react@^15.4.0:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
   integrity sha1-26BDSrQ5z+gvEI8PURZjkIF5qnI=
@@ -10054,7 +10067,7 @@ react@^15.3.2, react@^15.4.0:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react@^16.0.0:
+react@^16.0.0, react@^16.4.2:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.7.0.tgz#b674ec396b0a5715873b350446f7ea0802ab6381"
   integrity sha512-StCz3QY8lxTb5cl2HJxjwLFOXPIFQp+p+hxQfc8WE0QiLfCtIlKj8/+5tjjKm8uSTlAW+fCPaavGFS06V9Ar3A==
