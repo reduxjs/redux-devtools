@@ -52,17 +52,16 @@
     "jsdom": "^6.5.1",
     "mocha": "^2.2.5",
     "mocha-jsdom": "^1.0.0",
-    "react": "^0.14.9",
-    "react-addons-test-utils": "^0.14.0",
-    "react-dom": "^0.14.0",
-    "react-redux": "^4.0.0",
-    "redux": "^3.5.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.0",
     "rimraf": "^2.3.4",
     "webpack": "^1.11.0"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0",
-    "react-redux": "^4.0.0 || ^5.0.0",
+    "react-redux": "^4.0.0 || ^5.0.0 || ^6.0.0",
     "redux": "^3.5.2 || ^4.0.0"
   },
   "dependencies": {

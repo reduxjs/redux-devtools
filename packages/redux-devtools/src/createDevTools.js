@@ -1,7 +1,23 @@
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, Provider, ReactReduxContext } from 'react-redux';
 import instrument from 'redux-devtools-instrument';
+
+function logError(type) {
+  if (type === 'NoStore') {
+    console.error(
+      'Redux DevTools could not render. You must pass the Redux store ' +
+      'to <DevTools> either as a "store" prop or by wrapping it in a ' +
+      '<Provider store={store}>.'
+    );
+  } else {
+    console.error(
+      'Redux DevTools could not render. Did you forget to include ' +
+      'DevTools.instrument() in your store enhancer chain before ' +
+      'using createStore()?'
+    );
+  }
+}
 
 export default function createDevTools(children) {
   const monitorElement = Children.only(children);
@@ -26,12 +42,15 @@ export default function createDevTools(children) {
     constructor(props, context) {
       super(props, context);
 
+      if (ReactReduxContext) {
+        if (this.props.store && !this.props.store.liftedStore) {
+          logError('NoLiftedStore');
+        }
+        return;
+      }
+
       if (!props.store && !context.store) {
-        console.error(
-          'Redux DevTools could not render. You must pass the Redux store ' +
-          'to <DevTools> either as a "store" prop or by wrapping it in a ' +
-          '<Provider store={store}>.'
-        );
+        logError('NoStore');
         return;
       }
 
@@ -42,22 +61,50 @@ export default function createDevTools(children) {
       }
 
       if (!this.liftedStore) {
-        console.error(
-          'Redux DevTools could not render. Did you forget to include ' +
-          'DevTools.instrument() in your store enhancer chain before ' +
-          'using createStore()?'
-        );
+        logError('NoLiftedStore');
       }
     }
 
     render() {
+      if (ReactReduxContext) {
+        // For react-redux@6
+        if (this.props.store) {
+          if (!this.props.store.liftedStore) {
+            return null;
+          }
+          return (
+            <Provider store={this.props.store.liftedStore}>
+              <ConnectedMonitor {...monitorProps} />
+            </Provider>
+          );
+        }
+        return (
+          <ReactReduxContext.Consumer>
+          {props => {
+            if (!props || !props.store) {
+              logError('NoStore');
+              return null;
+            }
+            if (!props.store.liftedStore) {
+              logError('NoLiftedStore');
+              return null;
+            }
+            return (
+              <Provider store={props.store.liftedStore}>
+                <ConnectedMonitor {...monitorProps} />
+              </Provider>
+            );
+          }}
+        </ReactReduxContext.Consumer>
+        );
+      }
+
       if (!this.liftedStore) {
         return null;
       }
 
       return (
-        <ConnectedMonitor {...monitorProps}
-                          store={this.liftedStore} />
+        <ConnectedMonitor {...monitorProps} store={this.liftedStore} />
       );
     }
   };
