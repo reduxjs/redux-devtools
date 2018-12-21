@@ -32,7 +32,7 @@ function getFromState(actionIndex, stagedActionIds, computedStates, monitorState
 
 function createIntermediateState(props, monitorState) {
   const { supportImmutable, computedStates, stagedActionIds,
-          actionsById: actions, diffObjectHash, diffPropertyFilter } = props;
+    actionsById: actions, diffObjectHash, diffPropertyFilter } = props;
   const { inspectedStatePath, inspectedActionPath } = monitorState;
   const currentActionId = getCurrentActionId(props, monitorState);
   const currentAction = actions[currentActionId] && actions[currentActionId].action;
@@ -171,31 +171,31 @@ export default class DevtoolsInspector extends Component {
 
     return (
       <div key='inspector'
-           ref='inspector'
-           {...styling(['inspector', isWideLayout && 'inspectorWide'], isWideLayout)}>
+        ref='inspector'
+        {...styling(['inspector', isWideLayout && 'inspectorWide'], isWideLayout)}>
         <ActionList {...{
           actions, actionIds, isWideLayout, searchValue, selectedActionId, startActionId,
           skippedActionIds, draggableActions, hideMainButtons, hideActionButtons, styling
         }}
-                    onSearch={this.handleSearch}
-                    onSelect={this.handleSelectAction}
-                    onToggleAction={this.handleToggleAction}
-                    onJumpToState={this.handleJumpToState}
-                    onCommit={this.handleCommit}
-                    onSweep={this.handleSweep}
-                    onReorderAction={this.handleReorderAction}
-                    currentActionId={actionIds[currentStateIndex]}
-                    lastActionId={getLastActionId(this.props)} />
+        onSearch={this.handleSearch}
+        onSelect={this.handleSelectAction}
+        onToggleAction={this.handleToggleAction}
+        onJumpToState={this.handleJumpToState}
+        onCommit={this.handleCommit}
+        onSweep={this.handleSweep}
+        onReorderAction={this.handleReorderAction}
+        currentActionId={actionIds[currentStateIndex]}
+        lastActionId={getLastActionId(this.props)} />
         <ActionPreview {...{
           base16Theme, invertTheme, isWideLayout, tabs, tabName, delta, error, nextState,
           computedStates, action, actions, selectedActionId, startActionId, dataTypeKey
         }}
-                       monitorState={this.props.monitorState}
-                       updateMonitorState={this.updateMonitorState}
-                       styling={styling}
-                       onInspectPath={this.handleInspectPath.bind(this, inspectedPathType)}
-                       inspectedPath={monitorState[inspectedPathType]}
-                       onSelectTab={this.handleSelectTab} />
+        monitorState={this.props.monitorState}
+        updateMonitorState={this.updateMonitorState}
+        styling={styling}
+        onInspectPath={this.handleInspectPath.bind(this, inspectedPathType)}
+        inspectedPath={monitorState[inspectedPathType]}
+        onSelectTab={this.handleSelectTab} />
       </div>
     );
   }

@@ -70,14 +70,14 @@ export default class JSONDiff extends Component {
 
     return (
       <JSONTree {...props}
-                theme={getJsonTreeTheme(base16Theme)}
-                data={this.state.data}
-                getItemString={this.getItemString}
-                valueRenderer={this.valueRenderer}
-                postprocessValue={prepareDelta}
-                isCustomNode={Array.isArray}
-                shouldExpandNode={expandFirstLevel}
-                hideRoot />
+        theme={getJsonTreeTheme(base16Theme)}
+        data={this.state.data}
+        getItemString={this.getItemString}
+        valueRenderer={this.valueRenderer}
+        postprocessValue={prepareDelta}
+        isCustomNode={Array.isArray}
+        shouldExpandNode={expandFirstLevel}
+        hideRoot />
     );
   }
 

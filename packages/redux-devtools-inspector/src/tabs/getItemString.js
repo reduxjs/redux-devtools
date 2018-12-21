@@ -61,10 +61,10 @@ function getText(type, data, isWideLayout, isDiff) {
 }
 
 const getItemString = (styling, type, data, dataTypeKey, isWideLayout, isDiff) =>
-  <span {...styling('treeItemHint')}>
+  (<span {...styling('treeItemHint')}>
     {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
     {dataTypeKey && data[dataTypeKey] ? data[dataTypeKey] + ' ' : ''}
     {getText(type, data, isWideLayout, isDiff)}
-  </span>;
+  </span>);
 
 export default getItemString;

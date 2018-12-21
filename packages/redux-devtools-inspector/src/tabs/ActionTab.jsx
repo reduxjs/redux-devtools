@@ -6,13 +6,13 @@ import getJsonTreeTheme from './getJsonTreeTheme';
 const ActionTab = ({
   action, styling, base16Theme, invertTheme, labelRenderer, dataTypeKey, isWideLayout
 }) =>
-  <JSONTree
+  (<JSONTree
     labelRenderer={labelRenderer}
     theme={getJsonTreeTheme(base16Theme)}
     data={action}
     getItemString={(type, data) => getItemString(styling, type, data, dataTypeKey, isWideLayout)}
     invertTheme={invertTheme}
     hideRoot
-  />;
+  />);
 
 export default ActionTab;
