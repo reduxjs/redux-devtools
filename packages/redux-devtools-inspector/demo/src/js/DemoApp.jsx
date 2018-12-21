@@ -143,6 +143,9 @@ class DemoApp extends React.Component {
             <Button onClick={this.props.addRecursive} style={styles.button}>
               Add Recursive
             </Button>
+            <Button onClick={this.props.addNativeMap} style={styles.button}>
+              Add Native Map
+            </Button>
             <Button onClick={this.props.addImmutableMap} style={styles.button}>
               Add Immutable Map
             </Button>
@@ -230,6 +233,7 @@ export default connect(
     addIterator: () => ({ type: 'ADD_ITERATOR' }),
     addHugeObect: () => ({ type: 'ADD_HUGE_OBJECT' }),
     addRecursive: () => ({ type: 'ADD_RECURSIVE' }),
+    addNativeMap: () => ({ type: 'ADD_NATIVE_MAP' }),
     addImmutableMap: () => ({ type: 'ADD_IMMUTABLE_MAP' }),
     changeImmutableNested: () => ({ type: 'CHANGE_IMMUTABLE_NESTED' }),
     hugePayload: () => ({

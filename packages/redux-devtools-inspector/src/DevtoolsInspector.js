@@ -116,11 +116,11 @@ export default class DevtoolsInspector extends Component {
 
   componentDidMount() {
     this.updateSizeMode();
-    this.updateSizeTimeout = window.setInterval(this.updateSizeMode.bind(this), 150);
+    this.updateSizeTimeout = setInterval(this.updateSizeMode.bind(this), 150);
   }
 
   componentWillUnmount() {
-    window.clearTimeout(this.updateSizeTimeout);
+    clearTimeout(this.updateSizeTimeout);
   }
 
   updateMonitorState = monitorState => {
