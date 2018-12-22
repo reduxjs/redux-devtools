@@ -16,18 +16,16 @@ export default class Footer extends Component {
     filter: PropTypes.string.isRequired,
     onClearMarked: PropTypes.func.isRequired,
     onShow: PropTypes.func.isRequired
-  }
+  };
 
   render() {
     return (
       <footer className='footer'>
         {this.renderTodoCount()}
         <ul className='filters'>
-          {[SHOW_ALL, SHOW_UNMARKED, SHOW_MARKED].map(filter =>
-            <li key={filter}>
-              {this.renderFilterLink(filter)}
-            </li>
-          )}
+          {[SHOW_ALL, SHOW_UNMARKED, SHOW_MARKED].map(filter => (
+            <li key={filter}>{this.renderFilterLink(filter)}</li>
+          ))}
         </ul>
         {this.renderClearButton()}
       </footer>
@@ -64,10 +62,7 @@ export default class Footer extends Component {
     const { markedCount, onClearMarked } = this.props;
     if (markedCount > 0) {
       return (
-        <button
-          className='clear-completed'
-          onClick={onClearMarked}
-        >
+        <button className='clear-completed' onClick={onClearMarked}>
           Clear completed
         </button>
       );

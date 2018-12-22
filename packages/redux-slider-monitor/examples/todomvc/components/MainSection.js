@@ -39,18 +39,15 @@ export default class MainSection extends Component {
     const { filter } = this.state;
 
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
-    const markedCount = todos.reduce((count, todo) =>
-      (todo.marked ? count + 1 : count),
-      0
-    );
+    const markedCount = todos.reduce((count, todo) => (todo.marked ? count + 1 : count), 0);
 
     return (
       <section className='main'>
         {this.renderToggleAll(markedCount)}
         <ul className='todo-list'>
-          {filteredTodos.map(todo =>
+          {filteredTodos.map(todo => (
             <TodoItem key={todo.id} todo={todo} {...actions} />
-          )}
+          ))}
         </ul>
         {this.renderFooter(markedCount)}
       </section>
