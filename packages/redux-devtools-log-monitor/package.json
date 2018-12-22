@@ -13,11 +13,12 @@
     "lint": "eslint src test",
     "test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive",
     "test:watch": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --watch",
-    "prepublish": "npm run lint && npm run test && npm run clean && npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint && npm run test && npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/redux-devtools-log-monitor.git"
+    "url": "https://github.com/reduxjs/redux-devtools"
   },
   "keywords": [
     "redux",
@@ -31,9 +32,9 @@
   "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gaearon/redux-devtools-log-monitor/issues"
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/gaearon/redux-devtools-log-monitor",
+  "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
     "babel-cli": "^6.3.15",
     "babel-core": "^6.1.20",

@@ -2,7 +2,7 @@ Redux DevTools Log Monitor
 =========================
 
 The default monitor for [Redux DevTools](https://github.com/gaearon/redux-devtools) with a tree view.  
-It shows a log of states and actions, and lets you change their history.
+It shows a log of states and actions, and lets you change their history. Created by [Dan Abramov](http://github.com/gaearon) and merged into `redux-devtools` monorepo from [here](https://github.com/gaearon/redux-devtools-log-monitor).
 
 ![](http://i.imgur.com/J4GeW0M.gif)
 
@@ -33,7 +33,7 @@ Then you can render `<DevTools>` to any place inside app or even into a separate
 Alternative, you can use it together with [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) to make it dockable.  
 Consult the [`DockMonitor` README](https://github.com/gaearon/redux-devtools-dock-monitor) for details of this approach.
 
-[Read how to start using Redux DevTools.](https://github.com/gaearon/redux-devtools)
+[Read how to start using Redux DevTools.](https://github.com/reduxjs/redux-devtools)
 
 ### Features
 
