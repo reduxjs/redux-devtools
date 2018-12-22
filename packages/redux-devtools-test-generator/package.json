@@ -12,11 +12,12 @@
     "build": "babel src --out-dir lib",
     "lint": "eslint src test",
     "test": "jest --no-cache",
-    "prepublish": "npm run lint && npm run test && npm run clean && npm run build"
+    "prepare": "npm run clean && npm run build",
+    "prepublishOnly": "npm run lint && npm run test && npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zalmoxisus/redux-devtools-test-generator.git"
+    "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "keywords": [
     "redux",
@@ -31,9 +32,9 @@
   "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zalmoxisus/redux-devtools-test-generator/issues"
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/zalmoxisus/redux-devtools-test-generator",
+  "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-core": "^6.10.4",
