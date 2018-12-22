@@ -1,0 +1,15 @@
+{
+  "name": "todomvc",
+  "version": "0.0.0",
+  "description": "TodoMVC example for redux",
+  "main": "server.js",
+  "scripts": {
+    "start": "../../node_modules/.bin/webpack-dev-server",
+    "build": "../../node_modules/.bin/webpack --config webpack.config.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calesce/redux-slider-monitor.git"
+  },
+  "license": "MIT"
+}
