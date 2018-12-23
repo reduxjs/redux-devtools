@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/redux-devtools-inspector.svg)](https://badge.fury.io/js/redux-devtools-inspector)
 
-A state monitor for [Redux DevTools](https://github.com/reduxjs/redux-devtools) that provides a convenient way to inspect "real world" app states that could be complicated and deeply nested. Created by [@alexkuz](https://github.com/alexkuz) and merged from [`alexkuz/redux-devtools-inspector`](https://github.com/romseguy/map2tree) into [`reduxjs/redux-devtools` monorepo](https://github.com/reduxjs/redux-devtools).
+A state monitor for [Redux DevTools](https://github.com/reduxjs/redux-devtools) that provides a convenient way to inspect "real world" app states that could be complicated and deeply nested. Created by [@alexkuz](https://github.com/alexkuz) and merged from [`alexkuz/redux-devtools-inspector`](https://github.com/alexkuz/redux-devtools-inspector) into [`reduxjs/redux-devtools` monorepo](https://github.com/reduxjs/redux-devtools).
 
 ![](https://raw.githubusercontent.com/alexkuz/redux-devtools-inspector/master/demo.gif)
 
