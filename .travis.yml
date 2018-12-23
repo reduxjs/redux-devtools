@@ -1,13 +1,12 @@
 sudo: false
 language: node_js
 node_js:
-  - "lts/*"
   - "stable"
 cache:
   yarn: true
   directories:
     - "node_modules"
 script:
-  - npm run build:all
-  - npm run lint
-  - npm test
+  - yarn build:all
+  - yarn lint
+  - yarn test

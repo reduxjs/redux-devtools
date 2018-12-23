@@ -20,7 +20,7 @@
     "lint:fix": "eslint --fix src test",
     "test": "jest --no-cache",
     "prepare": "npm run clean && npm run build",
-    "prepublishOnly": "npm run lint && npm run test"
+    "prepublishOnly": "npm run lint && npm run test && npm run clean && npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
