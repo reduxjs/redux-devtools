@@ -28,7 +28,8 @@
     "prefer-template": 0,
     "prefer-rest-params": 0,
     "no-proto": 0,
-    "no-underscore-dangle": 0
+    "no-underscore-dangle": 0,
+    "max-len": ["error", { "code": 120 }]
   },
   "plugins": [
     "react"
