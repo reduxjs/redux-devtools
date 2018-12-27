@@ -1,0 +1,56 @@
+{
+  "name": "redux-devtools-core",
+  "version": "0.2.0",
+  "description": "Reusable functions of Redux DevTools",
+  "main": "lib/index.js",
+  "files": [
+    "src",
+    "lib"
+  ],
+  "scripts": {
+    "clean": "rimraf lib",
+    "build:lib": "babel src --out-dir lib",
+    "build": "npm run build:lib",
+    "lint": "eslint src test",
+    "lintfix": "eslint src --fix",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint && npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  },
+  "homepage": "https://github.com/reduxjs/redux-devtools",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-loose": "^7.0.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^3.2.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "rimraf": "^2.5.2"
+  },
+  "dependencies": {
+    "get-params": "^0.1.2",
+    "jsan": "^3.1.13",
+    "lodash": "^4.17.11",
+    "nanoid": "^2.0.0",
+    "remotedev-serialize": "^0.1.8"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
