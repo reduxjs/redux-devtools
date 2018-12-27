@@ -1,6 +1,6 @@
 import getParams from 'get-params';
 import jsan from 'jsan';
-import nanoid from 'nanoid';
+import nanoid from 'nanoid/non-secure';
 import seralizeImmutable from 'remotedev-serialize/immutable/serialize';
 
 export function generateId(id) {
