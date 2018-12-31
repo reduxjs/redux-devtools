@@ -221,6 +221,12 @@ const getSheetFromColorMap = map => ({
     'overflow-y': 'auto'
   },
 
+  stateFilter: {
+    width: '100%',
+    display: 'inline-flex',
+    'align-items': 'center',
+  },
+
   stateDiff: {
     padding: '5px 0'
   },
@@ -237,6 +243,23 @@ const getSheetFromColorMap = map => ({
     'font-weight': 'bold',
 
     color: map.ERROR_COLOR
+  },
+
+  stateButtonFullPath: {
+    width: '90px',
+    'font-size': '0.7em',
+    'margin-right': '3px',
+    cursor: 'pointer',
+    padding: '1px 10px',
+    'border-style': 'solid',
+    'border-width': '1px',
+    'border-radius': '3px',
+    'background-color': map.TAB_BACK_COLOR,
+    'border-color': map.TAB_BORDER_COLOR,
+
+    '&:hover': {
+      'background-color': map.TAB_BACK_HOVER_COLOR
+    },
   },
 
   inspectedPath: {
