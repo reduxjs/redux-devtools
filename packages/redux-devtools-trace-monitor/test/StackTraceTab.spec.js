@@ -3,7 +3,7 @@ import { configure, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import StackTraceTab from '../src/StackTraceTab';
 
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 function genAsyncSnapshot(component, done) {
