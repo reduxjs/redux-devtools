@@ -1,0 +1,43 @@
+/* source-code-pro-regular - latin */
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Code Pro'), local('SourceCodePro-Regular'),
+  url('./source-code-pro-v6-latin/source-code-pro-v6-latin-regular.woff2') format('woff2');
+}
+/* source-sans-pro-regular - latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro'), local('SourceSansPro-Regular'),
+  url('./source-sans-pro-v9-latin/source-sans-pro-v9-latin-regular.woff2') format('woff2');
+}
+/* source-sans-pro-600 - latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'),
+  url('./source-sans-pro-v9-latin/source-sans-pro-v9-latin-600.woff2') format('woff2');
+}
+
+/* roboto-regular - latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'),
+  url('./roboto-v15-latin/roboto-v15-latin-regular.woff2') format('woff2');
+}
+/* roboto-mono-regular - latin */
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Mono'), local('RobotoMono-Regular'),
+  url('./roboto-mono-v4-latin/roboto-mono-v4-latin-regular.woff2') format('woff2');
+}
+
+/* Generated with https://google-webfonts-helper.herokuapp.com */

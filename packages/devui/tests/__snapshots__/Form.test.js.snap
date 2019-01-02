@@ -1,0 +1,374 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form renders correctly 1`] = `
+<Styled(Form)
+  formData={
+    Object {
+      "age": 75,
+      "bio": "Roundhouse kicking asses since 1940",
+      "integerRange": 52,
+      "name": "Chuck Norris",
+      "password": "noneed",
+    }
+  }
+  schema={
+    Object {
+      "description": "A simple form example.",
+      "properties": Object {
+        "age": Object {
+          "title": "Age",
+          "type": "integer",
+        },
+        "bio": Object {
+          "title": "Bio",
+          "type": "string",
+        },
+        "integerRange": Object {
+          "maximum": 100,
+          "minimum": 42,
+          "title": "Integer range",
+          "type": "integer",
+        },
+        "multipleChoicesList": Object {
+          "items": Object {
+            "enum": Array [
+              "foo",
+              "bar",
+              "fuzz",
+            ],
+            "type": "string",
+          },
+          "title": "A multiple choices list",
+          "type": "array",
+          "uniqueItems": true,
+        },
+        "name": Object {
+          "title": "Full name",
+          "type": "string",
+        },
+        "numberEnum": Object {
+          "enum": Array [
+            1,
+            2,
+            3,
+          ],
+          "title": "Number enum",
+          "type": "number",
+        },
+        "numberEnumRadio": Object {
+          "enum": Array [
+            1,
+            2,
+            3,
+          ],
+          "title": "Number enum",
+          "type": "number",
+        },
+        "password": Object {
+          "minLength": 3,
+          "title": "Password",
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "title": "Example form",
+      "type": "object",
+    }
+  }
+  uiSchema={
+    Object {
+      "age": Object {
+        "ui:widget": "updown",
+      },
+      "bio": Object {
+        "ui:widget": "textarea",
+      },
+      "date": Object {
+        "ui:widget": "alt-datetime",
+      },
+      "integerRange": Object {
+        "ui:widget": "range",
+      },
+      "multipleChoicesList": Object {
+        "ui:widget": "checkboxes",
+      },
+      "name": Object {
+        "ui:autofocus": true,
+      },
+      "numberEnumRadio": Object {
+        "ui:options": Object {
+          "inline": true,
+        },
+        "ui:widget": "radio",
+      },
+      "password": Object {
+        "ui:help": "Hint: Make it strong!",
+        "ui:widget": "password",
+      },
+    }
+  }
+  widgets={
+    Object {
+      "RangeWidget": [Function],
+      "SelectWidget": [Function],
+    }
+  }
+>
+  <Button
+    size="big"
+    tooltipPosition="top"
+    type="submit"
+  >
+    Submit
+  </Button>
+</Styled(Form)>
+`;
+
+exports[`Form renders with no button 1`] = `
+<Styled(Form)
+  formData={
+    Object {
+      "age": 75,
+      "bio": "Roundhouse kicking asses since 1940",
+      "integerRange": 52,
+      "name": "Chuck Norris",
+      "password": "noneed",
+    }
+  }
+  schema={
+    Object {
+      "description": "A simple form example.",
+      "properties": Object {
+        "age": Object {
+          "title": "Age",
+          "type": "integer",
+        },
+        "bio": Object {
+          "title": "Bio",
+          "type": "string",
+        },
+        "integerRange": Object {
+          "maximum": 100,
+          "minimum": 42,
+          "title": "Integer range",
+          "type": "integer",
+        },
+        "multipleChoicesList": Object {
+          "items": Object {
+            "enum": Array [
+              "foo",
+              "bar",
+              "fuzz",
+            ],
+            "type": "string",
+          },
+          "title": "A multiple choices list",
+          "type": "array",
+          "uniqueItems": true,
+        },
+        "name": Object {
+          "title": "Full name",
+          "type": "string",
+        },
+        "numberEnum": Object {
+          "enum": Array [
+            1,
+            2,
+            3,
+          ],
+          "title": "Number enum",
+          "type": "number",
+        },
+        "numberEnumRadio": Object {
+          "enum": Array [
+            1,
+            2,
+            3,
+          ],
+          "title": "Number enum",
+          "type": "number",
+        },
+        "password": Object {
+          "minLength": 3,
+          "title": "Password",
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "title": "Example form",
+      "type": "object",
+    }
+  }
+  uiSchema={
+    Object {
+      "age": Object {
+        "ui:widget": "updown",
+      },
+      "bio": Object {
+        "ui:widget": "textarea",
+      },
+      "date": Object {
+        "ui:widget": "alt-datetime",
+      },
+      "integerRange": Object {
+        "ui:widget": "range",
+      },
+      "multipleChoicesList": Object {
+        "ui:widget": "checkboxes",
+      },
+      "name": Object {
+        "ui:autofocus": true,
+      },
+      "numberEnumRadio": Object {
+        "ui:options": Object {
+          "inline": true,
+        },
+        "ui:widget": "radio",
+      },
+      "password": Object {
+        "ui:help": "Hint: Make it strong!",
+        "ui:widget": "password",
+      },
+    }
+  }
+  widgets={
+    Object {
+      "RangeWidget": [Function],
+      "SelectWidget": [Function],
+    }
+  }
+>
+  <noscript />
+</Styled(Form)>
+`;
+
+exports[`Form renders with primary button 1`] = `
+<Styled(Form)
+  formData={
+    Object {
+      "age": 75,
+      "bio": "Roundhouse kicking asses since 1940",
+      "integerRange": 52,
+      "name": "Chuck Norris",
+      "password": "noneed",
+    }
+  }
+  schema={
+    Object {
+      "description": "A simple form example.",
+      "properties": Object {
+        "age": Object {
+          "title": "Age",
+          "type": "integer",
+        },
+        "bio": Object {
+          "title": "Bio",
+          "type": "string",
+        },
+        "integerRange": Object {
+          "maximum": 100,
+          "minimum": 42,
+          "title": "Integer range",
+          "type": "integer",
+        },
+        "multipleChoicesList": Object {
+          "items": Object {
+            "enum": Array [
+              "foo",
+              "bar",
+              "fuzz",
+            ],
+            "type": "string",
+          },
+          "title": "A multiple choices list",
+          "type": "array",
+          "uniqueItems": true,
+        },
+        "name": Object {
+          "title": "Full name",
+          "type": "string",
+        },
+        "numberEnum": Object {
+          "enum": Array [
+            1,
+            2,
+            3,
+          ],
+          "title": "Number enum",
+          "type": "number",
+        },
+        "numberEnumRadio": Object {
+          "enum": Array [
+            1,
+            2,
+            3,
+          ],
+          "title": "Number enum",
+          "type": "number",
+        },
+        "password": Object {
+          "minLength": 3,
+          "title": "Password",
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "title": "Example form",
+      "type": "object",
+    }
+  }
+  uiSchema={
+    Object {
+      "age": Object {
+        "ui:widget": "updown",
+      },
+      "bio": Object {
+        "ui:widget": "textarea",
+      },
+      "date": Object {
+        "ui:widget": "alt-datetime",
+      },
+      "integerRange": Object {
+        "ui:widget": "range",
+      },
+      "multipleChoicesList": Object {
+        "ui:widget": "checkboxes",
+      },
+      "name": Object {
+        "ui:autofocus": true,
+      },
+      "numberEnumRadio": Object {
+        "ui:options": Object {
+          "inline": true,
+        },
+        "ui:widget": "radio",
+      },
+      "password": Object {
+        "ui:help": "Hint: Make it strong!",
+        "ui:widget": "password",
+      },
+    }
+  }
+  widgets={
+    Object {
+      "RangeWidget": [Function],
+      "SelectWidget": [Function],
+    }
+  }
+>
+  <Button
+    primary={true}
+    size="big"
+    tooltipPosition="top"
+    type="submit"
+  >
+    Custom button
+  </Button>
+</Styled(Form)>
+`;

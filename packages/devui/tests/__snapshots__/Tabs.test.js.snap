@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs renders correctly 1`] = `
+<div
+  class="sc-VigVT fmiisu"
+>
+  <div
+    class="sc-gqjmRU gEvsQs"
+  >
+    <div>
+      <button
+        value="Tab1"
+      >
+        Tab1
+      </button>
+      <button
+        value="Tab2"
+      >
+        Tab2
+      </button>
+      <button
+        value="Tab3"
+      >
+        Tab3
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tabs renders tabs without inner components 1`] = `
+<div
+  class="sc-VigVT fmiisu"
+>
+  <div
+    class="sc-gqjmRU gEvsQs"
+  >
+    <div>
+      <button
+        value="1"
+      >
+        Tab1
+      </button>
+      <button
+        value="2"
+      >
+        Tab2
+      </button>
+      <button
+        value="3"
+      >
+        Tab3
+      </button>
+      <button
+        value="4"
+      >
+        Tab4
+      </button>
+      <button
+        data-selected="true"
+        value="5"
+      >
+        Tab5
+      </button>
+      <button
+        value="6"
+      >
+        Tab6
+      </button>
+      <button
+        value="7"
+      >
+        Tab7
+      </button>
+      <button
+        value="8"
+      >
+        Tab8
+      </button>
+      <button
+        value="9"
+      >
+        Tab9
+      </button>
+      <button
+        value="10"
+      >
+        Tab10
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tabs renders with props 1`] = `
+<div
+  class="sc-VigVT fmiisu"
+>
+  <div
+    class="sc-gqjmRU gEvsQs"
+  >
+    <div>
+      <button
+        value="Tab1"
+      >
+        Tab1
+      </button>
+      <button
+        data-selected="true"
+        value="Tab2"
+      >
+        Tab2
+      </button>
+      <button
+        value="Tab3"
+      >
+        Tab3
+      </button>
+    </div>
+  </div>
+  <div>
+    <div
+      style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:22px"
+    >
+      Selected Tab2
+    </div>
+  </div>
+</div>
+`;
