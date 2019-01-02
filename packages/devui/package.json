@@ -6,15 +6,14 @@
   "files": ["lib", "fonts"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zalmoxisus/devui.git"
+    "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "author":
     "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "license": "MIT",
   "scripts": {
     "start": "npm run storybook",
-    "build":
-      "rimraf ./lib && babel ./src --out-dir ./lib --ignore tests,stories",
+    "build": "rimraf ./lib && babel ./src --out-dir ./lib --ignore tests,stories",
     "lint": "eslint src",
     "lintfix": "eslint src --fix",
     "lint:css": "stylelint './src/**/styles/*.js'",
@@ -23,13 +22,13 @@
     "test": "jest --no-cache",
     "storybook": "start-storybook -p 9001 -c .storybook -s ./fonts",
     "publish-storybook": "bash .scripts/publish_storybook.sh",
-    "prepublish": "npm run lint && npm run test && npm run build",
-    "postpublish": "npm run publish-storybook"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint && npm run test && npm run build"
   },
   "bugs": {
-    "url": "https://github.com/zalmoxisus/devui/issues"
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/zalmoxisus/devui",
+  "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.13",
     "@storybook/addon-info": "^3.2.13",
