@@ -9,7 +9,8 @@
     "build:umd:min": "webpack -p --progress --config webpack.config.umd.js",
     "clean": "rimraf ./build",
     "build": "rimraf ./lib && babel ./src/app --out-dir lib",
-    "prepublish": "eslint ./src/app && npm run test && npm run build && npm run build:umd && npm run build:umd:min",
+    "prepare": "npm run build",
+    "prepublishOnly": "eslint ./src/app && npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "test": "NODE_ENV=test jest --no-cache"
