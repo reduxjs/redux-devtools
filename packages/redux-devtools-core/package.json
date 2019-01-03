@@ -1,20 +1,31 @@
 {
   "name": "redux-devtools-core",
-  "version": "0.2.1",
+  "version": "1.0.0-1",
   "description": "Reusable functions of Redux DevTools",
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline --env.development --env.platform=web --progress",
+    "build:web": "rimraf ./build/web && webpack -p --env.platform=web --progress",
+    "build:umd": "rimraf ./dist && webpack --env.development --progress --config webpack.config.umd.js",
+    "build:umd:min": "webpack -p --progress --config webpack.config.umd.js",
+    "build": "rimraf ./lib && babel ./src/app --out-dir lib",
+    "clean": "rimraf lib",
+    "lint": "eslint src test",
+    "lint:fix": "eslint src --fix",
+    "test": "NODE_ENV=test jest --no-cache",
+    "prepare": "npm run build",
+    "prepublishOnly": "eslint ./src/app && npm run test && npm run build && npm run build:umd && npm run build:umd:min"
+  },
   "main": "lib/index.js",
   "files": [
     "src",
-    "lib"
+    "lib",
+    "dist"
   ],
-  "scripts": {
-    "clean": "rimraf lib",
-    "build:lib": "babel src --out-dir lib",
-    "build": "npm run build:lib",
-    "lint": "eslint src test",
-    "lintfix": "eslint src --fix",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run lint && npm run clean && npm run build"
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/test/setup.js",
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
+    }
   },
   "repository": {
     "type": "git",
@@ -29,25 +40,68 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-eslint": "^6.1.2",
-    "babel-loader": "^6.2.4",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-env": "^1.1.8",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2015-loose": "^7.0.0",
-    "babel-preset-react": "^6.5.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "eslint": "^3.2.0",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.12.0",
-    "eslint-plugin-jsx-a11y": "^2.0.1",
-    "eslint-plugin-react": "^5.2.2",
-    "rimraf": "^2.5.2"
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.22.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.26.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.1.4",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "file-loader": "^0.10.0",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.28.0",
+    "jest": "^21.2.1",
+    "raw-loader": "^0.5.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "redux-logger": "^2.2.1",
+    "rimraf": "^2.5.4",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0",
+    "webpack-hot-middleware": "^2.16.1"
   },
   "dependencies": {
+    "d3-state-visualizer": "^1.3.1",
+    "devui": "^1.0.0-2",
     "get-params": "^0.1.2",
+    "javascript-stringify": "^1.5.0",
     "jsan": "^3.1.13",
-    "lodash": "^4.17.11",
+    "jsondiffpatch": "^0.2.4",
+    "localforage": "^1.5.0",
+    "lodash": "^4.0.0",
     "nanoid": "^2.0.0",
-    "remotedev-serialize": "^0.1.8"
-  }
+    "remotedev-serialize": "^0.1.8",
+    "prop-types": "^15.5.10",
+    "react-icons": "^2.2.5",
+    "react-redux": "^5.0.5",
+    "redux": "^3.0.5",
+    "redux-devtools": "^3.4.0",
+    "redux-devtools-chart-monitor": "^1.6.1",
+    "redux-devtools-instrument": "^1.8.0",
+    "redux-devtools-log-monitor": "^1.3.0",
+    "redux-devtools-test-generator": "^0.5.1",
+    "redux-persist": "^4.8.0",
+    "redux-slider-monitor": "^2.0.0-0",
+    "redux-devtools-inspector": "^0.11.0",
+    "socketcluster-client": "^5.5.0",
+    "styled-components": "^2.0.0"
+ },
+ "peerDependencies": {
+   "react": "^16.0.0"
+ }
 }

@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = (env = {}) => (
   {
     entry: {
-      app: './src/index.js',
+      app: './index.js',
       common: [
         'react',
         'react-dom',
