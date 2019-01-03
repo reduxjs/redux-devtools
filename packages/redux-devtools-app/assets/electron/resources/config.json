@@ -1,0 +1,17 @@
+{
+  "osx" : {
+    "title": "RemoteDev",
+    "background": "osx/installer.png",
+    "icon": "osx/icon.icns",
+    "icon-size": 225,
+    "contents": [
+      { "x": 290, "y": 1, "type": "link", "path": "/Applications" },
+      { "x": 1, "y": 1, "type": "file" }
+    ]
+  },
+  "win" : {
+    "title" : "RemoteDev",
+    "version" : "0.0.0.1",
+    "icon" : "windows/icon.ico"
+  }
+}

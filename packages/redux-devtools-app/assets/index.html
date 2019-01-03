@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <title>RemoteDev</title>
+  <style>
+    body {
+      position: fixed;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #root {
+      height: 100%;
+    }
+
+    @media print {
+      @page {
+        size: auto;
+        margin: 0;
+      }
+      body {
+        position: static;
+      }
+      #root > div > div:not(:nth-child(2)) {
+        display: none !important;
+      }
+      #root > div > div:nth-child(2) {
+        overflow: visible !important;
+        position: absolute !important;
+        z-index: 2147483647;
+        page-break-after: avoid;
+      }
+      #root > div > div:nth-child(2) * {
+        overflow: visible !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id='root'></div>
+</body>
+</html>

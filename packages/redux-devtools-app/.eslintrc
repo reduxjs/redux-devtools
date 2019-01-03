@@ -1,0 +1,51 @@
+{
+  "extends": "eslint-config-airbnb",
+  "globals": {
+    "chrome": true,
+    "electron": true
+  },
+  "env": {
+    "jest": true,
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "react/prefer-stateless-function": 0,
+    "react/no-array-index-key": 0,
+    "react/forbid-prop-types": 0,
+    "react/require-default-props": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/sort-comp": 0,
+    "react/jsx-quotes": 0,
+    "import/no-extraneous-dependencies": 0,
+    "block-scoped-var": 0,
+    "padded-blocks": 0,
+    "quotes": [ 1, "single" ],
+    "comma-style": [ 2, "last" ],
+    "eol-last": 0,
+    "no-unused-vars": 0,
+    "no-console": 0,
+    "func-names": 0,
+    "prefer-const": 0,
+    "comma-dangle": 0,
+    "id-length": 0,
+    "no-use-before-define": 0,
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "new-cap": [2, { "capIsNewExceptions": ["Test"] }],
+    "no-underscore-dangle": 0,
+    "no-plusplus": 0,
+    "arrow-parens": 0,
+    "prefer-template": 0,
+    "class-methods-use-this": 0,
+    "max-len": ["error", { "code": 120 }],
+    "no-mixed-operators": 0,
+    "no-undef": 0
+  },
+  "plugins": [
+    "react"
+  ]
+}
