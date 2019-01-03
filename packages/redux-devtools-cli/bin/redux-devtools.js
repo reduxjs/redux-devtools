@@ -54,7 +54,7 @@ function getModule(type) {
 if (argv.revert) {
   var module = getModule(argv.revert);
   var pass = injectServer.revert(module.path, module.name);
-  var msg = 'Revert injection of RemoteDev server from React Native local server';
+  var msg = 'Revert injection of ReduxDevTools server from React Native local server';
   log(pass, msg + (!pass ? ', the file `' + path.join(module.name, injectServer.fullPath) + '` not found.' : '.'));
 
   process.exit(pass ? 0 : 1);
@@ -64,7 +64,7 @@ if (argv.injectserver) {
   var options = getOptions(argv);
   var module = getModule(argv.injectserver);
   var pass = injectServer.inject(module.path, options, module.name);
-  var msg = 'Inject RemoteDev server into React Native local server';
+  var msg = 'Inject ReduxDevTools server into React Native local server';
   log(pass, msg + (pass ? '.' : ', the file `' + path.join(module.name, injectServer.fullPath) + '` not found.'));
 
   process.exit(pass ? 0 : 1);

@@ -2,13 +2,12 @@ var childProcess = require('child_process');
 var request = require('supertest');
 var expect = require('expect');
 var scClient = require('socketcluster-client');
-var remotedev = require('../');
 
 describe('Server', function() {
   var scServer;
   this.timeout(5000);
   before(function(done) {
-    scServer = childProcess.fork(__dirname + '/../bin/remotedev.js');
+    scServer = childProcess.fork(__dirname + '/../bin/redux-devtools.js');
     setTimeout(done, 2000);
   });
 
@@ -25,7 +24,7 @@ describe('Server', function() {
         .expect('Content-Type', /text\/html/)
         .expect(200)
         .then(function(res) {
-          expect(res.text).toMatch(/<title>RemoteDev<\/title>/);
+          expect(res.text).toMatch(/<title>Redux DevTools<\/title>/);
         })
     });
 

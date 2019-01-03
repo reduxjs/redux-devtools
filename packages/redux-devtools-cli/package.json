@@ -1,10 +1,10 @@
 {
-  "name": "remotedev-server",
-  "version": "0.3.1",
-  "description": "Run the RemoteDev monitor on your local server.",
+  "name": "redux-devtools-cli",
+  "version": "1.0.0-1",
+  "description": "Run the ReduxDevTools monitor on your local server.",
   "main": "index.js",
   "bin": {
-    "remotedev": "bin/remotedev.js"
+    "redux-devtools": "bin/redux-devtools.js"
   },
   "files": [
     "bin",
@@ -16,25 +16,21 @@
   "scripts": {
     "test": "NODE_ENV=test mocha --recursive",
     "test:watch": "NODE_ENV=test mocha --recursive --watch",
-    "prepublish": "npm run test"
+    "prepublishOnly": "npm run test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zalmoxisus/remotedev-server.git"
+    "url": "https://github.com/reduxjs/redux-devtools.git"
   },
-  "keywords": [
-    "devtools",
-    "remotedev"
-  ],
   "engines": {
     "node": ">=6.0.0"
   },
   "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zalmoxisus/remotedev-server/issues"
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/zalmoxisus/remotedev-server",
+  "homepage": "https://github.com/reduxjs/redux-devtools",
   "dependencies": {
     "body-parser": "^1.15.0",
     "chalk": "^1.1.3",

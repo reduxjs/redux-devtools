@@ -25,12 +25,12 @@ module.exports = function(argv) {
       }
       if (port !== p) {
         if (logLevel >= LOG_LEVEL_WARN) {
-          console.log('[RemoteDev] Server port ' + port + ' is already used.');
+          console.log('[ReduxDevTools] Server port ' + port + ' is already used.');
         }
         resolve({ portAlreadyUsed: true, on: function(status, cb) { cb(); } });
       } else {
         if (logLevel >= LOG_LEVEL_INFO) {
-          console.log('[RemoteDev] Start server...');
+          console.log('[ReduxDevTools] Start server...');
           console.log('-'.repeat(80) + '\n');
         }
         resolve(new SocketCluster(options));

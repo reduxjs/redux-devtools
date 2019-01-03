@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var semver = require('semver');
 
-var name = 'remotedev-server';
+var name = 'redux-devtools-cli';
 var startFlag = '/* ' + name + ' start */';
 var endFlag = '/* ' + name + ' end */';
 var serverFlags = {
