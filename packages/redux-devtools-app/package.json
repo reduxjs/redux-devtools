@@ -20,6 +20,7 @@
     "dist"
   ],
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/test/setup.js",
     "moduleNameMapper": {
       "\\.(css|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
     }
@@ -51,8 +52,9 @@
     "babel-register": "^6.22.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
-    "enzyme": "^2.8.2",
-    "enzyme-to-json": "^1.5.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.1.4",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
@@ -61,13 +63,10 @@
     "file-loader": "^0.10.0",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.28.0",
-    "jest": "^20.0.4",
+    "jest": "^21.2.1",
     "raw-loader": "^0.5.1",
-    "react": "^15.5.4",
-    "react-addons-test-utils": "15.4.0",
-    "react-dom": "^15.5.4",
-    "react-test-renderer": "^15.5.4",
-    "redux-immutable-state-invariant": "^1.2.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "redux-logger": "^2.2.1",
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.0",
@@ -100,6 +99,6 @@
     "styled-components": "^2.0.0"
   },
   "peerDependencies": {
-    "react": "^15.4.0"
+    "react": "^16.0.0"
   }
 }

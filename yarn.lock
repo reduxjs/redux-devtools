@@ -13660,15 +13660,6 @@ react-is@^16.6.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
   integrity sha512-u7FDWtthB4rWibG/+mFbVd5FvdI20yde86qKGx4lVUTWmPlSWQ4QxbBIrrs+HnXGbxOUlUzTAP/VDmvCwaP2yA==
 
-react-json-tree@^0.10.7:
-  version "0.10.9"
-  resolved "https://registry.yarnpkg.com/react-json-tree/-/react-json-tree-0.10.9.tgz#7263173a2cc8bf05eac63b0419c3ce75b232e284"
-  integrity sha1-cmMXOizIvwXqxjsEGcPOdbIy4oQ=
-  dependencies:
-    babel-runtime "^6.6.1"
-    prop-types "^15.5.8"
-    react-base16-styling "^0.5.1"
-
 react-jsonschema-form@^1.0.0:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-jsonschema-form/-/react-jsonschema-form-1.0.6.tgz#ceef7c2c386e46a149ec94203547dd9111913e36"
@@ -13806,14 +13797,6 @@ react-style-proptype@^3.0.0:
   integrity sha512-ywYLSjNkxKHiZOqNlso9PZByNEY+FTyh3C+7uuziK0xFXu9xzdyfHwg4S9iyiRRoPCR4k2LqaBBsWVmSBwCWYQ==
   dependencies:
     prop-types "^15.5.4"
-
-react-test-renderer@^15.5.4:
-  version "15.6.2"
-  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.6.2.tgz#d0333434fc2c438092696ca770da5ed48037efa8"
-  integrity sha1-0DM0NPwsQ4CSaWyncNpe1IA376g=
-  dependencies:
-    fbjs "^0.8.9"
-    object-assign "^4.1.0"
 
 react-test-renderer@^16.0.0, react-test-renderer@^16.0.0-0, react-test-renderer@^16.4.0:
   version "16.7.0"
@@ -14184,14 +14167,6 @@ redux-devtools-themes@^1.0.0:
   dependencies:
     base16 "^1.0.0"
 
-redux-immutable-state-invariant@^1.2.0:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/redux-immutable-state-invariant/-/redux-immutable-state-invariant-1.2.4.tgz#e8bc4a37e22815375d5a04f8ecbb807054ea8bbb"
-  integrity sha1-6LxKN+IoFTddWgT47LuAcFTqi7s=
-  dependencies:
-    invariant "^2.1.0"
-    json-stringify-safe "^5.0.1"
-
 redux-logger@^2.2.1, redux-logger@^2.5.2, redux-logger@^2.8.1:
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-2.10.2.tgz#3c5a5f0a6f32577c1deadf6655f257f82c6c3937"
@@ -14344,27 +14319,6 @@ relateurl@0.2.x:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
-
-remotedev-inspector-monitor@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/remotedev-inspector-monitor/-/remotedev-inspector-monitor-0.11.0.tgz#552dbc3736e6d898a783b51cfd7d20b875620d5f"
-  integrity sha1-VS28Nzbm2Jing7Uc/X0guHViDV8=
-  dependencies:
-    babel-runtime "^6.3.19"
-    dateformat "^1.0.12"
-    hex-rgba "^1.0.0"
-    immutable "^3.7.6"
-    javascript-stringify "^1.1.0"
-    jsondiffpatch "^0.2.4"
-    jss "^6.0.0"
-    jss-nested "^3.0.0"
-    jss-vendor-prefixer "^4.0.0"
-    lodash.debounce "^4.0.3"
-    react-base16-styling "^0.4.1"
-    react-dragula "^1.1.17"
-    react-json-tree "^0.10.7"
-    react-pure-render "^1.0.2"
-    redux-devtools-themes "^1.0.0"
 
 remotedev-serialize@^0.1.8:
   version "0.1.8"

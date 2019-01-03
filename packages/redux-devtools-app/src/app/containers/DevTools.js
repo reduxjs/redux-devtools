@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, createElement } from 'react';
+import React, { Component, createElement } from 'react';
+import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import getMonitor from '../utils/getMonitor';
 

@@ -36,6 +36,6 @@ describe('App container', () => {
         const { className } = n.props();
         return className && className.startsWith('actionListRows-');
       }).html()
-    ).toMatch(/<div class="actionListRows-[0-9]+"><\/div>/);
+    ).toMatch(/<div class="actionListRows-\d-\d+"><\/div>/);
   });
 });
