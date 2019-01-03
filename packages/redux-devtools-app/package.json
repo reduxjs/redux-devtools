@@ -1,7 +1,7 @@
 {
-  "name": "remotedev-app",
+  "name": "redux-devtools-app",
   "version": "0.11.0-3",
-  "description": "Remote Redux DevTools web, electron and chrome app.",
+  "description": "Redux DevTools web app.",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --env.development --env.platform=web --progress",
     "build:web": "rimraf ./build/web && webpack -p --env.platform=web --progress",
@@ -26,9 +26,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zalmoxisus/remotedev-app"
+    "url": "https://github.com/reduxjs/redux-devtools"
   },
-  "homepage": "https://github.com/zalmoxisus/remotedev-app",
+  "homepage": "https://github.com/reduxjs/redux-devtools",
   "keywords": [
     "react",
     "redux",
@@ -95,7 +95,7 @@
     "redux-devtools-test-generator": "^0.5.1",
     "redux-persist": "^4.8.0",
     "redux-slider-monitor": "^2.0.0-0",
-    "remotedev-inspector-monitor": "^0.11.0",
+    "redux-devtools-inspector": "^0.11.0",
     "socketcluster-client": "^5.5.0",
     "styled-components": "^2.0.0"
   },

@@ -7,10 +7,10 @@ module.exports = (env = {}) => (
       app: ['./src/app/index.js']
     },
     output: {
-      library: 'RemoteDevApp',
+      library: 'ReduxDevToolsApp',
       libraryTarget: 'umd',
       path: path.resolve(__dirname, 'dist'),
-      filename: env.development ? 'remotedev-app.js' : 'remotedev-app.min.js'
+      filename: env.development ? 'redux-devtools-app.js' : 'redux-devtools-app.min.js'
     },
     module: {
       rules: [

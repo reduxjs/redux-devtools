@@ -53,7 +53,7 @@ class Header extends Component {
         <Button
           title="Follow us"
           tooltipPosition="bottom"
-          onClick={this.openLink('https://twitter.com/RemoteDev')}
+          onClick={this.openLink('https://twitter.com/ReduxDevTools')}
         >
           <TwitterIcon />
         </Button>

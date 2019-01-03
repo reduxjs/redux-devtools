@@ -1,4 +1,4 @@
-const ERROR = '@@remotedev/ERROR';
+const ERROR = '@@redux-devtools/ERROR';
 
 export default function catchErrors(sendError) {
   if (typeof window === 'object' && typeof window.onerror === 'object') {

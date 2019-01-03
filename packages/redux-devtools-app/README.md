@@ -1,4 +1,4 @@
-Remote Redux DevTools monitor app
+Redux DevTools monitor app
 ==================================
 
 ![Demo](https://raw.githubusercontent.com/zalmoxisus/remote-redux-devtools/master/demo.gif)
@@ -8,7 +8,7 @@ Web, Electron and Chrome app for monitoring [remote-redux-devtools](https://gith
 Also it's a react component you can use to build amazing monitor applications like:
 
 * [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension).
-* [react-native-debugger](https://github.com/jhen0409/react-native-debugger) - Electron app, which already includes `remotedev-server`, `remotedev-app` and even React DevTools.
+* [react-native-debugger](https://github.com/jhen0409/react-native-debugger) - Electron app, which already includes `remotedev-server`, `redux-devtools-app` and even React DevTools.
 * [remote-redux-devtools-on-debugger](https://github.com/jhen0409/remote-redux-devtools-on-debugger) - Used in React Native debugger as a dock monitor.
 * [atom-redux-devtools](https://github.com/zalmoxisus/atom-redux-devtools) - Used in Atom editor.
 * [vscode-redux-devtools](https://github.com/jkzing/vscode-redux-devtools) - Used in Visual Studio Code.
@@ -18,7 +18,7 @@ Also it's a react component you can use to build amazing monitor applications li
 ```js
 import React from 'react';
 import ReactDom from 'react-dom';
-import DevToolsApp from 'remotedev-app';
+import DevToolsApp from 'redux-devtools-app';
 
 ReactDom.render(
   <App />,

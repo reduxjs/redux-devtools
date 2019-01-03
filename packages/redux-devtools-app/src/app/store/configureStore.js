@@ -7,7 +7,7 @@ import rootReducer from '../reducers';
 
 export default function configureStore(callback, key) {
   const persistConfig = {
-    keyPrefix: `remotedev${key || ''}:`,
+    keyPrefix: `redux-devtools${key || ''}:`,
     blacklist: ['instances', 'socket'],
     storage: localForage,
     serialize: data => data,
