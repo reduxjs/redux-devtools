@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dialog renders correctly 1`] = `
+<div
+  class="sc-iwsKbI fOBkrR"
+>
+  <div />
+  <div>
+    <div
+      class="mc-dialog--header"
+    >
+      <div />
+      <button>
+        ×
+      </button>
+    </div>
+    <div
+      class="mc-dialog--body"
+    />
+    <div
+      class="mc-dialog--footer"
+    >
+      <div
+        class="sc-ifAKCX jTewnV"
+      >
+        <button
+          class="sc-htpNat fWcQZ"
+        >
+          Cancel
+        </button>
+      </div>
+      <div
+        class="sc-ifAKCX jTewnV"
+      >
+        <button
+          class="sc-htpNat iMkoYt"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Dialog renders modal 1`] = `
+<div
+  class="sc-iwsKbI fOBkrR"
+>
+  <div />
+  <div>
+    <div
+      class="mc-dialog--header"
+    >
+      <div />
+    </div>
+    <div
+      class="mc-dialog--body"
+    />
+    <div
+      class="mc-dialog--footer"
+    >
+      <div
+        class="sc-ifAKCX jTewnV"
+      >
+        <button
+          class="sc-htpNat fWcQZ"
+        >
+          Cancel
+        </button>
+      </div>
+      <div
+        class="sc-ifAKCX jTewnV"
+      >
+        <button
+          class="sc-htpNat iMkoYt"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Dialog renders with props 1`] = `
+<div
+  class="sc-iwsKbI fpUYbC"
+  open=""
+>
+  <div />
+  <div>
+    <div
+      class="mc-dialog--header"
+    >
+      <div>
+        Dialog Title
+      </div>
+      <button>
+        ×
+      </button>
+    </div>
+    <div
+      class="mc-dialog--body"
+    >
+      Hello Dialog!
+    </div>
+    <div
+      class="mc-dialog--footer"
+    >
+      <div
+        class="sc-ifAKCX jTewnV"
+      >
+        <button
+          class="sc-htpNat fWcQZ"
+        >
+          Cancel
+        </button>
+      </div>
+      <div
+        class="sc-ifAKCX jTewnV"
+      >
+        <button
+          class="sc-htpNat iMkoYt"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

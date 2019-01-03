@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Editor renders correctly 1`] = `
+<Editor
+  autofocus={false}
+  foldGutter={true}
+  lineNumbers={true}
+  lineWrapping={false}
+  mode="javascript"
+  readOnly={false}
+  value="var a = 1;"
+>
+  <styled.div
+    innerRef={[Function]}
+  >
+    <div
+      className="sc-gZMcBi eROHUl"
+    />
+  </styled.div>
+</Editor>
+`;
