@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <title>RemoteDev</title>
+    <style>
+      html {
+        min-width: 350px;
+        min-height: 300px;
+      }
+      body {
+        position: fixed;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #root {
+        height: 100%;
+      }
+      #root > div {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="//unpkg.com/react@0.14/dist/react.min.js"></script>
+    <script src="//unpkg.com/react-dom@0.14/dist/react-dom.min.js"></script>
+    <script src="//unpkg.com/remotedev-app/dist/remotedev-app.min.js"></script>
+    <script>
+      window.remotedevOptions = {
+        hostname: location.hostname,
+        port: <%= port %>,
+        autoReconnect: true
+      };
+      ReactDOM.render(
+        React.createElement(RemoteDevApp, {
+          socketOptions: window.remotedevOptions
+        }),
+        document.querySelector('#root')
+      );
+    </script>
+  </body>
+</html>
