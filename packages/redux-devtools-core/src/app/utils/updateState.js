@@ -16,6 +16,7 @@ export function recompute(previousLiftedState, storeState, action, nextActionId 
     liftedState.actionsById[actionId] = {
       action: action.action || action,
       timestamp: action.timestamp || Date.now(),
+      stack: action.stack,
       type: 'PERFORM_ACTION'
     };
   }
