@@ -1,7 +1,7 @@
 Redux DevTools Command Line Interface
 =====================================
 
-Bridge for communicating with an application remotely via [Redux DevTools extension](https://github.com/zalmoxisus/redux-devtools-extension), [Remote Redux DevTools](https://github.com/zalmoxisus/remote-redux-devtools) or [RemoteDev](https://github.com/zalmoxisus/remotedev). Running your server is optional, you can use [remotedev.io](https://remotedev.io) instead.
+Bridge for remote debugging via [Redux DevTools extension](https://github.com/zalmoxisus/redux-devtools-extension), [Remote Redux DevTools](https://github.com/zalmoxisus/remote-redux-devtools) or [RemoteDev](https://github.com/zalmoxisus/remotedev).
 
 ### Usage
 

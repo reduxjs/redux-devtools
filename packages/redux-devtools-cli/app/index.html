@@ -26,18 +26,18 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="//unpkg.com/react@0.14/dist/react.min.js"></script>
-    <script src="//unpkg.com/react-dom@0.14/dist/react-dom.min.js"></script>
-    <script src="//unpkg.com/remotedev-app/dist/remotedev-app.min.js"></script>
+    <script src="/react.production.min.js"></script>
+    <script src="/react-dom.production.min.js"></script>
+    <script src="/redux-devtools-core.min.js"></script>
+    <script src="/port.js"></script>
     <script>
-      window.remotedevOptions = {
-        hostname: location.hostname,
-        port: <%= port %>,
-        autoReconnect: true
-      };
       ReactDOM.render(
-        React.createElement(RemoteDevApp, {
-          socketOptions: window.remotedevOptions
+        React.createElement(ReduxDevTools, {
+          socketOptions: {
+            hostname: location.hostname,
+            port: reduxDevToolsPort,
+            autoReconnect: true
+          }
         }),
         document.querySelector('#root')
       );
