@@ -3,13 +3,14 @@ const webpack = require('webpack');
 
 module.exports = (env = {}) => (
   {
+    mode: 'production',
     entry: {
       app: ['./src/app/index.js']
     },
     output: {
       library: 'ReduxDevTools',
       libraryTarget: 'umd',
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'umd'),
       filename: env.development ? 'redux-devtools-core.js' : 'redux-devtools-core.min.js'
     },
     module: {
@@ -62,6 +63,9 @@ module.exports = (env = {}) => (
         commonjs: 'react-dom',
         amd: 'react-dom'
       }
+    },
+    performance: {
+      hints: false
     }
   }
 );

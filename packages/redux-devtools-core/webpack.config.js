@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env = {}) => (
   {
+    mode: 'development',
     entry: {
       app: './index.js',
       common: [
@@ -74,6 +75,9 @@ module.exports = (env = {}) => (
         ] : []
       )
     ],
+    performance: {
+      hints: false
+    },
     devServer: {
       port: 3000
     },
