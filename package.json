@@ -9,7 +9,7 @@
   },
   "scripts": {
     "lerna": "lerna",
-    "prepare": "lerna run prepare --since master --stream --sort -- --scripts-prepend-node-path",
+    "build": "lerna run prepare --since master --stream --sort -- --scripts-prepend-node-path",
     "build:all": "lerna run build",
     "publish": "lerna publish",
     "canary": "lerna publish --canary preminor --npm-tag alpha",
