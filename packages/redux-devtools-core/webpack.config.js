@@ -7,18 +7,7 @@ module.exports = (env = {}) => (
   {
     mode: 'development',
     entry: {
-      app: './index.js',
-      common: [
-        'react',
-        'react-dom',
-        'react-redux',
-        'redux',
-        'redux-persist',
-        'localforage',
-        'styled-components',
-        'jsan',
-        'socketcluster-client'
-      ]
+      app: './index.js'
     },
     output: {
       path: path.resolve(__dirname, 'build/' + env.platform),
@@ -63,9 +52,6 @@ module.exports = (env = {}) => (
           PLATFORM: JSON.stringify(env.platform)
         }
       }),
-      new webpack.optimize.CommonsChunkPlugin({
-        names: ['common'],
-      }),
       new HtmlWebpackPlugin({
         template: 'assets/index.html'
       }),
@@ -75,6 +61,18 @@ module.exports = (env = {}) => (
         ] : []
       )
     ],
+    optimization: {
+      minimize: false,
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'common',
+            chunks: 'all'
+          }
+        }
+      }
+    },
     performance: {
       hints: false
     },

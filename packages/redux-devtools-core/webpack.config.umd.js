@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env = {}) => (
   {
@@ -11,7 +12,7 @@ module.exports = (env = {}) => (
       library: 'ReduxDevTools',
       libraryTarget: 'umd',
       path: path.resolve(__dirname, 'umd'),
-      filename: env.development ? 'redux-devtools-core.js' : 'redux-devtools-core.min.js'
+      filename: env.minimize ? 'redux-devtools-core.min.js' : 'redux-devtools-core.js'
     },
     module: {
       rules: [
@@ -63,6 +64,17 @@ module.exports = (env = {}) => (
         commonjs: 'react-dom',
         amd: 'react-dom'
       }
+    },
+    optimization: {
+      minimize: !!env.minimize,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            ie8: true,
+            safari10: true
+          }
+        })
+      ]
     },
     performance: {
       hints: false
