@@ -155,7 +155,7 @@ Redux DevTools server is database agnostic using `knex` schema. By default every
 ```
 
 ### Advanced
-- [Writing your integration for a native application](https://github.com/zalmoxisus/remotedev-server/blob/master/docs/API/Realtime.md)
+- [Writing your integration for a native application](https://github.com/reduxjs/redux-devtools/blob/master/docs/Integrations/Remote.md)
 
 ### License 
 
