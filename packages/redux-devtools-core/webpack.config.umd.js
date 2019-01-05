@@ -70,7 +70,6 @@ module.exports = (env = {}) => (
       minimizer: [
         new TerserPlugin({
           terserOptions: {
-            ie8: true,
             safari10: true
           }
         })
