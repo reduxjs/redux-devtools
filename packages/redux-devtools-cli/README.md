@@ -60,6 +60,20 @@ reduxDevTools({ hostname: 'localhost', port: 8000 });
 
 So, you can start redux-devtools server together with your dev server.
 
+### Open Redux DevTools
+
+You can add `--open` argument to open Redux DevTools app. If nothing specified or set as `browser` will use default browser:
+
+```
+redux-devtools --open
+```
+
+To specify the browser:
+
+```
+redux-devtools --open=firefox
+```
+
 ### Connection settings
 
 Set `hostname` and `port` to the values you want. `hostname` by default is `localhost` and `port` is `8000`.
@@ -80,6 +94,7 @@ To use WSS, set `protocol` argument to `https` and provide `key`, `cert` and `pa
 | `--dbOptions`    | database configuration, can be whether an object or a path (string) to json configuration file (by default it uses our `./defaultDbOptions.json` file. Set `migrate` key to `true` to use our migrations file. [More details bellow](#save-reports-and-logs).                                   | -             |
 | `--logLevel`     | the socket server log level - 0=none, 1=error, 2=warn, 3=info                                                                                           | 3             |
 | `--wsEngine`     | the socket server web socket engine - ws or uws (sc-uws)                                                                                                    | ws            |
+| `--open`     | open DevTools app in browser. If nothing specified or set as `browser` will use default browser.   | false            |
 
 ### Inject to React Native local server
 

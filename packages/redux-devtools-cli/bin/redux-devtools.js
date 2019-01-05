@@ -5,6 +5,10 @@ var argv = require('minimist')(process.argv.slice(2));
 var chalk = require('chalk');
 var injectServer = require('./injectServer');
 var getOptions = require('./../src/options');
+var server = require('../index');
+var open = require('./open');
+
+var options = getOptions(argv);
 
 function readFile(filePath) {
   return fs.readFileSync(path.resolve(process.cwd(), filePath), 'utf-8');
@@ -61,7 +65,6 @@ if (argv.revert) {
 }
 
 if (argv.injectserver) {
-  var options = getOptions(argv);
   var module = getModule(argv.injectserver);
   var pass = injectServer.inject(module.path, options, module.name);
   var msg = 'Inject ReduxDevTools server into React Native local server';
@@ -70,4 +73,10 @@ if (argv.injectserver) {
   process.exit(pass ? 0 : 1);
 }
 
-require('../index')(argv);
+server(argv).then(function (r) {
+  if (argv.open && argv.open !== 'false') {
+    r.on('ready', function () {
+      open(argv.open, options);
+    });  
+  }
+});
