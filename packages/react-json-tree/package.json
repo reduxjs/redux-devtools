@@ -1,11 +1,13 @@
 {
   "name": "react-json-tree",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "description": "React JSON Viewer Component, Extracted from redux-devtools",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "build": "babel src --out-dir lib",
+    "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.js",
+    "build:umd:min": "webpack --env.minimize --progress --config webpack.config.umd.js",
     "lint": "eslint --max-warnings=0 src test examples/src",
     "test":
       "npm run lint && NODE_ENV=test mocha --compilers js:babel-core/register --recursive",
@@ -14,13 +16,14 @@
     "test:cov":
       "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --recursive",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run test && npm run clean && npm run build",
+    "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
     "start": "cd examples && npm start",
     "precommit": "lint-staged"
   },
   "files": [
     "lib",
-    "src"
+    "src",
+    "umd"
   ],
   "repository": {
     "type": "git",
@@ -31,7 +34,8 @@
   "contributors": [
     "Alexander Kuznetsov <alexkuz@gmail.com> (http://kuzya.org/)",
     "Dave Vedder <veddermatic@gmail.com> (http://www.eskimospy.com/)",
-    "Daniele Zannotti <dzannotti@me.com> (http://www.github.com/dzannotti)"
+    "Daniele Zannotti <dzannotti@me.com> (http://www.github.com/dzannotti)",
+    "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)"
   ],
   "license": "MIT",
   "bugs": {
@@ -42,6 +46,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-es3-property-literals": "^6.22.0",
@@ -68,8 +73,11 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
-    "rimraf": "^2.5.2"
-  },
+    "rimraf": "^2.5.2",
+    "terser-webpack-plugin": "^1.2.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.2.0"
+},
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
