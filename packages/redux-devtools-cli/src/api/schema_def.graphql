@@ -1,0 +1,60 @@
+# A list of options for the type of the report
+enum ReportType {
+    STATE
+    ACTION
+    STATES
+    ACTIONS
+}
+
+type Report {
+  # Report ID
+  id: ID!
+  # Type of the report, can be: STATE, ACTION, STATES, ACTIONS
+  type: ReportType,
+  # Briefly what happened
+  title: String,
+  # Details supplied by the user
+  description: String,
+  # The last dispatched action before the report was sent
+  action: String,
+  # Stringified actions or the state or both, which should be loaded the application to reproduce the exact behavior
+  payload: String,
+  # Stringified preloaded state object. Could be the initial state of the app or committed state (after dispatching COMMIT action or reaching maxAge)
+  preloadedState: String,
+  # Screenshot url or blob as a string
+  screenshot: String,
+  # User Agent String
+  userAgent: String,
+  # Application version to group the reports and versioning
+  version: String,
+  # Used to identify the user who sent the report
+  userId: String,
+  # More detailed data about the user, usually it's a stringified object
+  user: String,
+  # Everything else you want to send
+  meta: String,
+  # Error message which invoked sending the report
+  exception: String,
+  # Id to identify the store in case there are multiple stores
+  instanceId: String,
+  # Timestamp when the report was added
+  added: String
+  # Id to identify the application (from apps table)
+  appId: ID
+}
+
+# Explore GraphQL query schema
+type Query {
+  # List all reports
+  reports: [Report]
+  # Get a report by ID
+  report(
+    # Report ID
+    id: ID!
+  ): Report
+}
+
+schema {
+  query: Query
+  #mutation: Mutation
+}

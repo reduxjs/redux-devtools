@@ -16,6 +16,7 @@ It can be used as a browser extension (for [Chrome](https://chrome.google.com/we
 - [Manual Integration as a React Component](./docs/Walkthrough.md#manual-integration)
 - [Extension Options (Arguments)](https://github.com/zalmoxisus/redux-devtools-extension/tree/master/docs/API/Arguments.md)
 - [Extension Methods (Advanced API)](https://github.com/zalmoxisus/redux-devtools-extension/tree/master/docs/API/Methods.md)
+- [Remote monitoring](./docs/Integrations/Remote.md)
 - [Troubleshooting](https://github.com/zalmoxisus/redux-devtools-extension/tree/master/docs/Troubleshooting.md)
 - [Recipes](https://github.com/zalmoxisus/redux-devtools-extension/tree/master/docs/Recipes.md)
 - [FAQ](https://github.com/zalmoxisus/redux-devtools-extension/tree/master/docs/FAQ.md)

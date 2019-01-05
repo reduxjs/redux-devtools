@@ -35,21 +35,21 @@ export function getLocalFilter(config) {
 }
 
 function getDevToolsOptions() {
-  return typeof window !== 'undefined' && window.devToolsOptions || {};
+  return (typeof window !== 'undefined' && window.devToolsOptions) || {};
 }
 
 export function isFiltered(action, localFilter) {
   const { type } = action.action || action;
   const opts = getDevToolsOptions();
   if (
-    !localFilter && (opts.filter && opts.filter === FilterState.DO_NOT_FILTER) ||
-    type && typeof type.match !== 'function'
+    (!localFilter && (opts.filter && opts.filter === FilterState.DO_NOT_FILTER)) ||
+    (type && typeof type.match !== 'function')
   ) return false;
 
   const { whitelist, blacklist } = localFilter || opts;
   return (
-    whitelist && !type.match(whitelist) ||
-    blacklist && type.match(blacklist)
+    (whitelist && !type.match(whitelist)) ||
+    (blacklist && type.match(blacklist))
   );
 }
 
