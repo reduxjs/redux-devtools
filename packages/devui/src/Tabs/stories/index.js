@@ -16,9 +16,8 @@ const Container = styled.div`
 
 storiesOf('Tabs', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    '',
     () => (
       <Container><Tabs
         tabs={simple10Tabs}
@@ -30,9 +29,8 @@ storiesOf('Tabs', module)
       /></Container>
     )
   )
-  .addWithInfo(
+  .add(
     'with content',
-    '',
     () => (
       <Tabs
         tabs={tabs}

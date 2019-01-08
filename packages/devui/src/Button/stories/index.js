@@ -16,9 +16,8 @@ export const Container = styled.div`
 
 storiesOf('Button', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    '',
     () => (
       <Container>
         <Button
@@ -37,9 +36,8 @@ storiesOf('Button', module)
       </Container>
     )
   )
-  .addWithInfo(
+  .add(
     'mark',
-    '',
     () => (
       <Container>
         <Button

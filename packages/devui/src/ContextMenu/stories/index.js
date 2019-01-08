@@ -16,9 +16,8 @@ export const Container = styled.div`
 
 storiesOf('ContextMenu', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    '',
     () => (
       <Container>
         <ContextMenu

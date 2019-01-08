@@ -7,9 +7,8 @@ import { schema, uiSchema, formData } from '../../Form/stories/schema';
 
 storiesOf('Dialog', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    '',
     () => (
       <Dialog
         title={text('title', 'Dialog Title')}
@@ -25,9 +24,8 @@ storiesOf('Dialog', module)
       />
     )
   )
-  .addWithInfo(
+  .add(
     'with form',
-    '',
     () => (
       <Dialog
         open={boolean('open', true)}

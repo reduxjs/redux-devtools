@@ -15,9 +15,8 @@ export const Container = styled.div`
 
 storiesOf('SegmentedControl', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    '',
     () => (
       <Container>
         <SegmentedControl

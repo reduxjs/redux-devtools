@@ -26,9 +26,8 @@ export const SliderContainer = styled.div`
 
 storiesOf('Toolbar', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    '',
     () => (
       <Container>
         <Toolbar borderPosition={select('borderPosition', ['top', 'bottom'])}>
@@ -62,9 +61,8 @@ storiesOf('Toolbar', module)
       </Container>
     )
   )
-  .addWithInfo(
+  .add(
     'tabs',
-    '',
     () => (
       <Container>
         <Toolbar>
@@ -102,9 +100,8 @@ storiesOf('Toolbar', module)
       </Container>
     )
   )
-  .addWithInfo(
+  .add(
     'with slider',
-    '',
     () => (
       <Container>
         <SliderContainer>

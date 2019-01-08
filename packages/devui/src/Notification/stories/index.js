@@ -15,9 +15,8 @@ export const Container = styled.div`
 
 storiesOf('Notification', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    '',
     () => (
       <Container>
         <Notification
