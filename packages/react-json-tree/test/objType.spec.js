@@ -1,5 +1,3 @@
-import expect from 'expect';
-
 import objType from '../src/objType';
 
 describe('objType', () => {

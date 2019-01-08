@@ -1,9 +1,9 @@
-import expect from 'expect';
 import { instrument, persistState } from '../src';
 import { compose, createStore } from 'redux';
 
 describe('persistState', () => {
   let savedLocalStorage = global.localStorage;
+  delete global.localStorage;
 
   beforeEach(() => {
     global.localStorage = {
@@ -23,7 +23,7 @@ describe('persistState', () => {
     };
   });
 
-  after(() => {
+  afterAll(() => {
     global.localStorage = savedLocalStorage;
   });
 
@@ -89,29 +89,23 @@ describe('persistState', () => {
   });
 
   it('should warn if read from localStorage fails', () => {
-    const spy = expect.spyOn(console, 'warn');
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     delete global.localStorage.getItem;
     createStore(reducer, compose(instrument(), persistState('id')));
 
-    expect(spy.calls).toContain(
-      /Could not read debug session from localStorage/,
-      (call, errMsg) => call.arguments[0].match(errMsg)
-    );
+    expect(spy.mock.calls[0]).toContain('Could not read debug session from localStorage:');
 
-    spy.restore();
+    spy.mockReset();
   });
 
   it('should warn if write to localStorage fails', () => {
-    const spy = expect.spyOn(console, 'warn');
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     delete global.localStorage.setItem;
     const store = createStore(reducer, compose(instrument(), persistState('id')));
 
     store.dispatch({ type: 'INCREMENT' });
-    expect(spy.calls).toContain(
-      /Could not write debug session to localStorage/,
-      (call, errMsg) => call.arguments[0].match(errMsg)
-    );
+    expect(spy.mock.calls[0]).toContain('Could not write debug session to localStorage:');
 
-    spy.restore();
+    spy.mockReset();
   });
 });

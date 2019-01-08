@@ -9,14 +9,10 @@
     "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.js",
     "build:umd:min": "webpack --env.minimize --progress --config webpack.config.umd.js",
     "lint": "eslint --max-warnings=0 src test examples/src",
-    "test":
-      "npm run lint && NODE_ENV=test mocha --compilers js:babel-core/register --recursive",
-    "test:watch":
-      "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --watch",
-    "test:cov":
-      "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --recursive",
+    "test": "jest",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
+    "prepublishOnly":
+      "npm run lint && npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
     "start": "cd examples && npm start",
     "precommit": "lint-staged"
   },
@@ -64,11 +60,9 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "7.4.0",
     "eslint-plugin-standard": "^3.0.1",
-    "expect": "^21.2.1",
     "husky": "^0.14.3",
-    "isparta": "^4.0.0",
+    "jest": "^23.6.0",
     "lint-staged": "^4.3.0",
-    "mocha": "^4.0.1",
     "prettier": "^1.7.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

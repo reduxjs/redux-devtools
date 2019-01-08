@@ -12,7 +12,7 @@ function serveUmdModule(name) {
   app.use(express.static(require.resolve(name).match(/.*\/(node_modules|packages)\/[^/]+\//)[0] + 'umd'));
 }
 
-function routes(options, store) {
+function routes(options, store, scServer) {
   var limit = options.maxRequestBody;
   var logHTTPRequests = options.logHTTPRequests;
   

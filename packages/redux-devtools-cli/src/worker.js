@@ -13,7 +13,7 @@ class Worker extends SCWorker {
 
     httpServer.on('request', app);
 
-    app.use(routes(options, store));
+    app.use(routes(options, store, scServer));
 
     scServer.addMiddleware(scServer.MIDDLEWARE_EMIT, function (req, next) {
       var channel = req.event;

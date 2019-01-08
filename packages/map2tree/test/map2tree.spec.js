@@ -1,17 +1,15 @@
-import test from 'tape';
 import map2tree from '../src';
 import immutable from 'immutable';
 
-test('# rootNodeKey', assert => {
+test('# rootNodeKey', () => {
   const map = {};
   const options = {key: 'foo'};
 
-  assert.equal(map2tree(map, options).name, 'foo');
-  assert.end();
+  expect(map2tree(map, options).name).toBe('foo');
 });
 
-test('# shallow map', nest => {
-  nest.test('## null', assert => {
+describe('# shallow map', () => {
+  test('## null', () => {
     const map = {
       a: null
     };
@@ -23,12 +21,11 @@ test('# shallow map', nest => {
       ]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map)), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  nest.test('## value', assert => {
+  test('## value', () => {
     const map = {
       a: 'foo',
       b: 'bar'
@@ -42,12 +39,11 @@ test('# shallow map', nest => {
       ]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map)), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  nest.test('## object', assert => {
+  test('## object', () => {
     const map = {
       a: {aa: 'foo'}
     };
@@ -59,12 +55,11 @@ test('# shallow map', nest => {
       ]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map)), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  nest.test('## immutable Map', assert => {
+  test('## immutable Map', () => {
     const map = {
       a: immutable.fromJS({aa: 'foo', ab: 'bar'})
     };
@@ -76,13 +71,12 @@ test('# shallow map', nest => {
       ]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
   })
 });
 
-test('# deep map', nest => {
-  nest.test('## null', assert => {
+describe('# deep map', () => {
+  test('## null', () => {
     const map = {
       a: {aa: null}
     };
@@ -102,12 +96,11 @@ test('# deep map', nest => {
       ]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map)), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  nest.test('## object', assert => {
+  test('## object', () => {
     const map = {
       a: {aa: {aaa: 'foo'}}
     };
@@ -129,13 +122,12 @@ test('# deep map', nest => {
       ]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map)), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 });
 
-test('# array map', nest => {
+describe('# array map', () => {
   const map = {
     a: [
       1,
@@ -143,7 +135,7 @@ test('# array map', nest => {
     ]
   };
 
-  nest.test('## push', assert => {
+  test('## push', () => {
     const expected = {
       name: 'state',
       children: [{
@@ -154,12 +146,11 @@ test('# array map', nest => {
       }]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map)), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  nest.test('## unshift', assert => {
+  test('## unshift', () => {
     const options = {pushMethod: 'unshift'};
     const expected = {
       name: 'state',
@@ -172,12 +163,11 @@ test('# array map', nest => {
       }]
     };
 
-    assert.deepEqual(map2tree(map, options), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map), options), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map, options)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map), options)).toEqual(expected);
   });
 
-  nest.test('## null', assert => {
+  test('## null', () => {
     const map = {
       a: [
         null
@@ -194,14 +184,13 @@ test('# array map', nest => {
       }]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map)), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   })
 });
 
-test('# collection map', nest => {
-  nest.test('## value', assert => {
+describe('# collection map', () => {
+  test('## value', () => {
     const map = {
       a: [
         {aa: 1},
@@ -222,12 +211,11 @@ test('# collection map', nest => {
       ]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map)), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  nest.test('## object', assert => {
+  test('## object', () => {
     const map = {
       a: [
         {aa: {aaa: 'foo'}}
@@ -246,8 +234,7 @@ test('# collection map', nest => {
       ]
     };
 
-    assert.deepEqual(map2tree(map), expected);
-    assert.deepEqual(map2tree(immutable.fromJS(map)), expected, 'immutable');
-    assert.end();
+    expect(map2tree(map)).toEqual(expected);
+    expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   })
 });

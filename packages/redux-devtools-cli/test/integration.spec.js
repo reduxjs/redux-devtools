@@ -1,31 +1,30 @@
 var childProcess = require('child_process');
 var request = require('supertest');
-var expect = require('expect');
 var scClient = require('socketcluster-client');
 
 describe('Server', function() {
   var scServer;
-  this.timeout(5000);
-  before(function(done) {
+  beforeAll(function(done) {
     scServer = childProcess.fork(__dirname + '/../bin/redux-devtools.js');
     setTimeout(done, 2000);
   });
 
-  after(function() {
+  afterAll(function() {
     if (scServer) {
       scServer.kill();
     }
   });
 
   describe('Express backend', function() {
-    it('loads main page', function() {
+    it('loads main page', function(done) {
       request('http://localhost:8000')
         .get('/')
         .expect('Content-Type', /text\/html/)
         .expect(200)
         .then(function(res) {
           expect(res.text).toMatch(/<title>Redux DevTools<\/title>/);
-        })
+          done();
+        });
     });
 
     it('resolves an inexistent url', function(done) {
@@ -38,7 +37,7 @@ describe('Server', function() {
 
   describe('Realtime monitoring', function() {
     var socket, socket2, channel;
-    before(function() {
+    beforeAll(function() {
       socket = scClient.connect({ hostname: 'localhost', port: 8000 });
       socket.connect();
       socket.on('error', function(error) {
@@ -51,14 +50,14 @@ describe('Server', function() {
       });
     });
 
-    after(function() {
+    afterAll(function() {
       socket.disconnect();
       socket2.disconnect();
     });
 
     it('should connect', function(done) {
       socket.on('connect', function(status) {
-        expect(status.id).toExist();
+        expect(status.id).toBeTruthy();
         done();
       });
     });
@@ -117,7 +116,7 @@ describe('Server', function() {
       preloadedState: '{"todos":[{"text":"Use Redux","completed":false,"id":0}]}',
       userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
     };
-    it('should add a report', function() {
+    it('should add a report', function(done) {
       request('http://localhost:8000')
         .post('/')
         .send(report)
@@ -126,11 +125,12 @@ describe('Server', function() {
         .expect(200)
         .then(function(res) {
           id = res.body.id;
-          expect(id).toExist();
+          expect(id).toBeTruthy();
+          done();
         });
     });
 
-    it('should get the report', function() {
+    it('should get the report', function(done) {
       request('http://localhost:8000')
         .post('/')
         .send({
@@ -141,11 +141,12 @@ describe('Server', function() {
         .expect('Content-Type', /application\/json/)
         .expect(200)
         .then(function(res) {
-          expect(res.body).toInclude(report);
+          expect.objectContaining(res.body, report);
+          done();
         });
     });
 
-    it('should list reports', function() {
+    it('should list reports', function(done) {
       request('http://localhost:8000')
         .post('/')
         .send({
@@ -158,13 +159,14 @@ describe('Server', function() {
           expect(res.body.length).toBe(1);
           expect(res.body[0].id).toBe(id);
           expect(res.body[0].title).toBe('Test report');
-          expect(res.body[0].added).toExist();
+          expect(res.body[0].added).toBeTruthy();
+          done();
         });
     });
   });
 
   describe('GraphQL backend', function() {
-    it('should get the report', function() {
+    it('should get the report', function(done) {
       request('http://localhost:8000')
         .post('/graphql')
         .send({
@@ -176,9 +178,10 @@ describe('Server', function() {
         .then(function(res) {
           var reports = res.body.data.reports;
           expect(reports.length).toBe(1);
-          expect(reports[0].id).toExist();
+          expect(reports[0].id).toBeTruthy();
           expect(reports[0].title).toBe('Test report');
           expect(reports[0].type).toBe('ACTIONS');
+          done();
         });
     });
   });

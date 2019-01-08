@@ -108,7 +108,7 @@ exports[`Select should select another option 1`] = `
   autosize={true}
   clearable={false}
   menuMaxHeight={200}
-  onChange={[Function]}
+  onChange={[MockFunction]}
   options={
     Array [
       Object {
@@ -131,7 +131,7 @@ exports[`Select should select another option 1`] = `
     autosize={true}
     clearable={false}
     menuMaxHeight={200}
-    onChange={[Function]}
+    onChange={[MockFunction]}
     options={
       Array [
         Object {
@@ -180,7 +180,7 @@ exports[`Select should select another option 1`] = `
       multi={false}
       noResultsText="No results found"
       onBlurResetsInput={true}
-      onChange={[Function]}
+      onChange={[MockFunction]}
       onCloseResetsInput={true}
       onSelectResetsInput={true}
       openOnClick={true}
@@ -357,7 +357,7 @@ exports[`Select shouldn't find any results 1`] = `
   autosize={true}
   clearable={false}
   menuMaxHeight={200}
-  onChange={[Function]}
+  onChange={[MockFunction]}
   options={
     Array [
       Object {
@@ -380,7 +380,7 @@ exports[`Select shouldn't find any results 1`] = `
     autosize={true}
     clearable={false}
     menuMaxHeight={200}
-    onChange={[Function]}
+    onChange={[MockFunction]}
     options={
       Array [
         Object {
@@ -429,7 +429,7 @@ exports[`Select shouldn't find any results 1`] = `
       multi={false}
       noResultsText="No results found"
       onBlurResetsInput={true}
-      onChange={[Function]}
+      onChange={[MockFunction]}
       onCloseResetsInput={true}
       onSelectResetsInput={true}
       openOnClick={true}

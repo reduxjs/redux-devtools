@@ -8,7 +8,7 @@
     "build": "babel src --out-dir lib",
     "build:umd": "webpack src/index.js dist/map2tree.js && NODE_ENV=production webpack src/index.js dist/map2tree.min.js",
     "lint": "eslint src test",
-    "test": "babel-node test/map2tree.js | tap-diff",
+    "test": "jest",
     "check": "npm run lint && npm run test",
     "prepare": "npm run build && npm run build:umd",
     "prepublishOnly": "npm run check && npm run clean && npm run build && npm run build:umd"
@@ -40,10 +40,8 @@
     "babel-preset-stage-0": "^6.3.13",
     "eslint": "1.10.3",
     "immutable": "3.7.6",
+    "jest": "^23.6.0",
     "rimraf": "^2.3.4",
-    "tap-diff": "0.1.1",
-    "tap-spec": "4.1.1",
-    "tape": "4.4.0",
     "webpack": "1.12.13"
   },
   "dependencies": {

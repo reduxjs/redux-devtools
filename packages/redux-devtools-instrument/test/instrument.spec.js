@@ -1,4 +1,3 @@
-import expect, { spyOn } from 'expect';
 import { createStore, compose } from 'redux';
 import instrument, { ActionCreators } from '../src/instrument';
 import { Observable } from 'rxjs';
@@ -280,7 +279,7 @@ describe('instrument', () => {
   });
 
   it('should catch and record errors', () => {
-    let spy = spyOn(console, 'error');
+    let spy = jest.spyOn(console, 'error').mockImplementation(() => {});;
     let storeWithBug = createStore(
       counterWithBug,
       instrument(undefined, { shouldCatchErrors: true })
@@ -297,11 +296,11 @@ describe('instrument', () => {
     expect(computedStates[3].error).toMatch(
       /Interrupted by an error up the chain/
     );
-    expect(spy.calls[0].arguments[0].toString()).toMatch(
+    expect(spy.mock.calls[0][0].toString()).toMatch(
       /ReferenceError/
     );
 
-    spy.restore();
+    spy.mockReset();
   });
 
   it('should catch invalid action type', () => {
@@ -453,7 +452,7 @@ describe('instrument', () => {
       expect(configuredStore.getState()).toBe(2);
       expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
       expect(liftedStoreState.committedState).toBe(undefined);
-      expect(liftedStoreState.stagedActionIds).toInclude(1);
+      expect(liftedStoreState.stagedActionIds).toContain(1);
 
       // Trigger auto-commit.
       configuredStore.dispatch({ type: 'INCREMENT' });
@@ -461,7 +460,7 @@ describe('instrument', () => {
 
       expect(configuredStore.getState()).toBe(3);
       expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
-      expect(liftedStoreState.stagedActionIds).toExclude(1);
+      expect(liftedStoreState.stagedActionIds).not.toContain(1);
       expect(liftedStoreState.computedStates[0].state).toBe(1);
       expect(liftedStoreState.committedState).toBe(1);
       expect(liftedStoreState.currentStateIndex).toBe(2);
@@ -471,13 +470,13 @@ describe('instrument', () => {
       configuredStore.dispatch({ type: 'INCREMENT' });
       configuredLiftedStore.dispatch(ActionCreators.toggleAction(1));
       configuredStore.dispatch({ type: 'INCREMENT' });
-      expect(configuredLiftedStore.getState().skippedActionIds).toInclude(1);
+      expect(configuredLiftedStore.getState().skippedActionIds).toContain(1);
       configuredStore.dispatch({ type: 'INCREMENT' });
-      expect(configuredLiftedStore.getState().skippedActionIds).toExclude(1);
+      expect(configuredLiftedStore.getState().skippedActionIds).not.toContain(1);
     });
 
     it('should not auto-commit errors', () => {
-      let spy = spyOn(console, 'error');
+      let spy = jest.spyOn(console, 'error');
 
       let storeWithBug = createStore(
         counterWithBug,
@@ -491,11 +490,11 @@ describe('instrument', () => {
       storeWithBug.dispatch({ type: 'INCREMENT' });
       expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(4);
 
-      spy.restore();
+      spy.mockReset();
     });
 
     it('should auto-commit actions after hot reload fixes error', () => {
-      let spy = spyOn(console, 'error');
+      let spy = jest.spyOn(console, 'error');
 
       let storeWithBug = createStore(
         counterWithBug,
@@ -518,7 +517,7 @@ describe('instrument', () => {
       storeWithBug.replaceReducer(counter);
       expect(liftedStoreWithBug.getState().stagedActionIds.length).toBe(3);
 
-      spy.restore();
+      spy.mockReset();
     });
 
     it('should update currentStateIndex when auto-committing', () => {
@@ -539,7 +538,7 @@ describe('instrument', () => {
     });
 
     it('should continue to increment currentStateIndex while error blocks commit', () => {
-      let spy = spyOn(console, 'error');
+      let spy = jest.spyOn(console, 'error');
 
       let storeWithBug = createStore(
         counterWithBug,
@@ -556,13 +555,13 @@ describe('instrument', () => {
       let currentComputedState = liftedStoreState.computedStates[liftedStoreState.currentStateIndex];
       expect(liftedStoreState.currentStateIndex).toBe(4);
       expect(currentComputedState.state).toBe(0);
-      expect(currentComputedState.error).toExist();
+      expect(currentComputedState.error).toBeTruthy();
 
-      spy.restore();
+      spy.mockReset();
     });
 
     it('should adjust currentStateIndex correctly when multiple actions are committed', () => {
-      let spy = spyOn(console, 'error');
+      let spy = jest.spyOn(console, 'error');
 
       let storeWithBug = createStore(
         counterWithBug,
@@ -582,11 +581,11 @@ describe('instrument', () => {
       expect(liftedStoreState.currentStateIndex).toBe(2);
       expect(currentComputedState.state).toBe(-4);
 
-      spy.restore();
+      spy.mockReset();
     });
 
     it('should not allow currentStateIndex to drop below 0', () => {
-      let spy = spyOn(console, 'error');
+      let spy = jest.spyOn(console, 'error');
 
       let storeWithBug = createStore(
         counterWithBug,
@@ -607,33 +606,33 @@ describe('instrument', () => {
       expect(liftedStoreState.currentStateIndex).toBe(0);
       expect(currentComputedState.state).toBe(-2);
 
-      spy.restore();
+      spy.mockReset();
     });
 
     it('should use dynamic maxAge', () => {
       let max = 3;
-      const getMaxAge = expect.createSpy().andCall(() => max);
+      const getMaxAge = jest.fn().mockImplementation(() => max);
       store = createStore(counter, instrument(undefined, { maxAge: getMaxAge }));
 
-      expect(getMaxAge.calls.length).toEqual(1);
+      expect(getMaxAge.mock.calls.length).toEqual(1);
       store.dispatch({ type: 'INCREMENT' });
-      expect(getMaxAge.calls.length).toEqual(2);
+      expect(getMaxAge.mock.calls.length).toEqual(2);
       store.dispatch({ type: 'INCREMENT' });
-      expect(getMaxAge.calls.length).toEqual(3);
+      expect(getMaxAge.mock.calls.length).toEqual(3);
       let liftedStoreState = store.liftedStore.getState();
 
-      expect(getMaxAge.calls[0].arguments[0].type).toInclude('INIT');
-      expect(getMaxAge.calls[0].arguments[1]).toBe(undefined);
-      expect(getMaxAge.calls[1].arguments[0].type).toBe('PERFORM_ACTION');
-      expect(getMaxAge.calls[1].arguments[1].nextActionId).toBe(1);
-      expect(getMaxAge.calls[1].arguments[1].stagedActionIds).toEqual([0]);
-      expect(getMaxAge.calls[2].arguments[1].nextActionId).toBe(2);
-      expect(getMaxAge.calls[2].arguments[1].stagedActionIds).toEqual([0, 1]);
+      expect(getMaxAge.mock.calls[0][0].type).toContain('INIT');
+      expect(getMaxAge.mock.calls[0][1]).toBe(undefined);
+      expect(getMaxAge.mock.calls[1][0].type).toBe('PERFORM_ACTION');
+      expect(getMaxAge.mock.calls[1][1].nextActionId).toBe(1);
+      expect(getMaxAge.mock.calls[1][1].stagedActionIds).toEqual([0]);
+      expect(getMaxAge.mock.calls[2][1].nextActionId).toBe(2);
+      expect(getMaxAge.mock.calls[2][1].stagedActionIds).toEqual([0, 1]);
 
       expect(store.getState()).toBe(2);
       expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
       expect(liftedStoreState.committedState).toBe(undefined);
-      expect(liftedStoreState.stagedActionIds).toInclude(1);
+      expect(liftedStoreState.stagedActionIds).toContain(1);
 
       // Trigger auto-commit.
       store.dispatch({ type: 'INCREMENT' });
@@ -641,7 +640,7 @@ describe('instrument', () => {
 
       expect(store.getState()).toBe(3);
       expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
-      expect(liftedStoreState.stagedActionIds).toExclude(1);
+      expect(liftedStoreState.stagedActionIds).not.toContain(1);
       expect(liftedStoreState.computedStates[0].state).toBe(1);
       expect(liftedStoreState.committedState).toBe(1);
       expect(liftedStoreState.currentStateIndex).toBe(2);
@@ -652,7 +651,7 @@ describe('instrument', () => {
 
       expect(store.getState()).toBe(4);
       expect(Object.keys(liftedStoreState.actionsById).length).toBe(4);
-      expect(liftedStoreState.stagedActionIds).toExclude(1);
+      expect(liftedStoreState.stagedActionIds).not.toContain(1);
       expect(liftedStoreState.computedStates[0].state).toBe(1);
       expect(liftedStoreState.committedState).toBe(1);
       expect(liftedStoreState.currentStateIndex).toBe(3);
@@ -663,7 +662,7 @@ describe('instrument', () => {
 
       expect(store.getState()).toBe(5);
       expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
-      expect(liftedStoreState.stagedActionIds).toExclude(1);
+      expect(liftedStoreState.stagedActionIds).not.toContain(1);
       expect(liftedStoreState.computedStates[0].state).toBe(3);
       expect(liftedStoreState.committedState).toBe(3);
       expect(liftedStoreState.currentStateIndex).toBe(2);
@@ -673,7 +672,7 @@ describe('instrument', () => {
 
       expect(store.getState()).toBe(6);
       expect(Object.keys(liftedStoreState.actionsById).length).toBe(3);
-      expect(liftedStoreState.stagedActionIds).toExclude(1);
+      expect(liftedStoreState.stagedActionIds).not.toContain(1);
       expect(liftedStoreState.computedStates[0].state).toBe(4);
       expect(liftedStoreState.committedState).toBe(4);
       expect(liftedStoreState.currentStateIndex).toBe(2);
@@ -702,18 +701,27 @@ describe('instrument', () => {
     });
 
     it('should include stack trace', () => {
-      monitoredStore = createStore(counter, instrument(undefined, { trace: true }));
-      monitoredLiftedStore = monitoredStore.liftedStore;
-      monitoredStore.dispatch({ type: 'INCREMENT' });
+      function fn1() {
+        monitoredStore = createStore(counter, instrument(undefined, { trace: true }));
+        monitoredLiftedStore = monitoredStore.liftedStore;
+        monitoredStore.dispatch({ type: 'INCREMENT' });
 
-      exportedState = monitoredLiftedStore.getState();
-      expect(exportedState.actionsById[0].stack).toBe(undefined);
-      expect(exportedState.actionsById[1].stack).toBeA('string');
-      expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
-      expect(exportedState.actionsById[1].stack).toNotMatch(/instrument.js/);
-      expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
-      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
-      expect(exportedState.actionsById[1].stack.split('\n').length).toBe(10 + 1); // +1 is for `Error\n`
+        exportedState = monitoredLiftedStore.getState();
+        expect(exportedState.actionsById[0].stack).toBe(undefined);
+        expect(typeof exportedState.actionsById[1].stack).toBe('string');
+        expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
+        expect(exportedState.actionsById[1].stack).not.toMatch(/instrument.js/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn1\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn2\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn3\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn4\b/);
+        expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
+        expect(exportedState.actionsById[1].stack.split('\n').length).toBe(10 + 1); // +1 is for `Error\n`
+      }
+      function fn2() { return fn1(); }
+      function fn3() { return fn2(); }
+      function fn4() { return fn3(); }
+      fn4();
     });
 
     it('should include only 3 frames for stack trace', () => {
@@ -724,11 +732,12 @@ describe('instrument', () => {
 
         exportedState = monitoredLiftedStore.getState();
         expect(exportedState.actionsById[0].stack).toBe(undefined);
-        expect(exportedState.actionsById[1].stack).toBeA('string');
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn1 /);
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn2 /);
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn3 /);
-        expect(exportedState.actionsById[1].stack).toNotMatch(/at fn4 /);
+        expect(typeof exportedState.actionsById[1].stack).toBe('string');
+        expect(exportedState.actionsById[1].stack).toMatch(/\bat dispatch\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn1\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn2\b/);
+        expect(exportedState.actionsById[1].stack).not.toMatch(/\bfn3\b/);
+        expect(exportedState.actionsById[1].stack).not.toMatch(/\bfn4\b/);
         expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
         expect(exportedState.actionsById[1].stack.split('\n').length).toBe(3 + 1);
       }
@@ -748,11 +757,12 @@ describe('instrument', () => {
 
         exportedState = monitoredLiftedStore.getState();
         expect(exportedState.actionsById[0].stack).toBe(undefined);
-        expect(exportedState.actionsById[1].stack).toBeA('string');
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn1 /);
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn2 /);
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn3 /);
-        expect(exportedState.actionsById[1].stack).toNotMatch(/at fn4 /);
+        expect(typeof exportedState.actionsById[1].stack).toBe('string');
+        expect(exportedState.actionsById[1].stack).toMatch(/\bat dispatch\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn1\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn2\b/);
+        expect(exportedState.actionsById[1].stack).not.toMatch(/\bfn3\b/);
+        expect(exportedState.actionsById[1].stack).not.toMatch(/\bfn4\b/);
         expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
         expect(exportedState.actionsById[1].stack.split('\n').length).toBe(3 + 1);
       }
@@ -773,10 +783,9 @@ describe('instrument', () => {
 
       exportedState = monitoredLiftedStore.getState();
       expect(exportedState.actionsById[0].stack).toBe(undefined);
-      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(typeof exportedState.actionsById[1].stack).toBe('string');
       expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
       expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
-      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
       expect(exportedState.actionsById[1].stack.split('\n').length).toBe(5 + 1);
     });
 
@@ -791,11 +800,11 @@ describe('instrument', () => {
 
         exportedState = monitoredLiftedStore.getState();
         expect(exportedState.actionsById[0].stack).toBe(undefined);
-        expect(exportedState.actionsById[1].stack).toBeA('string');
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn1 /);
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn2 /);
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn3 /);
-        expect(exportedState.actionsById[1].stack).toMatch(/at fn4 /);
+        expect(typeof exportedState.actionsById[1].stack).toBe('string');
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn1\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn2\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn3\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn4\b/);
         expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
         expect(exportedState.actionsById[1].stack.split('\n').length).toBe(10 + 1);
       }
@@ -815,11 +824,10 @@ describe('instrument', () => {
 
       exportedState = monitoredLiftedStore.getState();
       expect(exportedState.actionsById[0].stack).toBe(undefined);
-      expect(exportedState.actionsById[1].stack).toBeA('string');
+      expect(typeof exportedState.actionsById[1].stack).toBe('string');
       expect(exportedState.actionsById[1].stack).toMatch(/^Error/);
       expect(exportedState.actionsById[1].stack).toContain('instrument.js');
       expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
-      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
       expect(exportedState.actionsById[1].stack.split('\n').length).toBe(5 + 3 + 1);
     });
 
@@ -831,11 +839,10 @@ describe('instrument', () => {
 
       exportedState = monitoredLiftedStore.getState();
       expect(exportedState.actionsById[0].stack).toBe(undefined);
-      expect(exportedState.actionsById[1].stack).toBeA('string');
-      expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
+      expect(typeof exportedState.actionsById[1].stack).toBe('string');
+      expect(exportedState.actionsById[1].stack).toContain('at performAction');
       expect(exportedState.actionsById[1].stack).toContain('instrument.js');
       expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
-      expect(exportedState.actionsById[1].stack).toContain('/mocha/');
     });
 
     it('should get stack trace inside setTimeout using a function', (done) => {
@@ -848,11 +855,10 @@ describe('instrument', () => {
 
         exportedState = monitoredLiftedStore.getState();
         expect(exportedState.actionsById[0].stack).toBe(undefined);
-        expect(exportedState.actionsById[1].stack).toBeA('string');
-        expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
+        expect(typeof exportedState.actionsById[1].stack).toBe('string');
+        expect(exportedState.actionsById[1].stack).toContain('at performAction');
         expect(exportedState.actionsById[1].stack).toContain('instrument.js');
         expect(exportedState.actionsById[1].stack).toContain('instrument.spec.js');
-        expect(exportedState.actionsById[1].stack).toContain('/mocha/');
         done();
       });
     });
@@ -917,7 +923,7 @@ describe('instrument', () => {
 
       const oldState = importMonitoredLiftedStore.getState();
       expect(oldState.actionsById[0].stack).toBe(undefined);
-      expect(oldState.actionsById[1].stack).toBeA('string');
+      expect(typeof oldState.actionsById[1].stack).toBe('string');
 
       importMonitoredLiftedStore.dispatch(ActionCreators.importState(oldState));
       expect(importMonitoredLiftedStore.getState()).toEqual(oldState);
@@ -982,7 +988,7 @@ describe('instrument', () => {
 
       importMonitoredLiftedStore.dispatch(ActionCreators.importState(savedActions));
       expect(importMonitoredLiftedStore.getState().actionsById[0].stack).toBe(undefined);
-      expect(importMonitoredLiftedStore.getState().actionsById[1].stack).toBeA('string');
+      expect(typeof importMonitoredLiftedStore.getState().actionsById[1].stack).toBe('string');
       expect(filterStackAndTimestamps(importMonitoredLiftedStore.getState())).toEqual(exportedState);
     });
   });
