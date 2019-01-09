@@ -10,6 +10,7 @@ var pkg = require('./package.json');
 var isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
+  mode: process.env.NODE_ENV || 'development',
   devtool: 'eval',
   entry: isProduction ?
     [ './demo/src/js/index' ] :
@@ -20,8 +21,7 @@ module.exports = {
     ],
   output: {
     path: path.join(__dirname, 'demo/dist'),
-    filename: 'js/bundle.js',
-    hash: true
+    filename: 'js/bundle.js'
   },
   plugins: [
     new CleanWebpackPlugin(isProduction ? ['demo/dist'] : []),
@@ -36,7 +36,6 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       },
     }),
-    new webpack.NoErrorsPlugin(),
     new NyanProgressWebpackPlugin()
   ].concat(isProduction ? [
     new webpack.optimize.UglifyJsPlugin({
@@ -48,19 +47,16 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ]),
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx']
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.jsx?$/,
-      loaders: ['babel'],
+      loader: 'babel-loader',
       include: [
         path.join(__dirname, 'src'),
         path.join(__dirname, 'demo/src/js')
       ]
-    }, {
-      test: /\.json$/,
-      loader: 'json'
     }]
   },
   devServer: isProduction ? null : {

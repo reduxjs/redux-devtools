@@ -11,8 +11,6 @@
     "clean": "rimraf lib",
     "build": "babel src --out-dir lib",
     "lint": "eslint src test",
-    "test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive",
-    "test:watch": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --watch",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint && npm run test && npm run clean && npm run build"
   },
@@ -46,11 +44,7 @@
     "eslint": "^0.23",
     "eslint-config-airbnb": "0.0.6",
     "eslint-plugin-react": "^3.6.3",
-    "expect": "^1.6.0",
-    "mocha": "^2.2.5",
-    "mocha-jsdom": "^1.0.0",
-    "rimraf": "^2.3.4",
-    "webpack": "^1.11.0"
+    "rimraf": "^2.3.4"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",
