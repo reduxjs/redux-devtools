@@ -117,11 +117,10 @@ export default class JSONTree extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return !!Object.keys(nextProps).find(
-      k =>
-        k === 'keyPath'
-          ? nextProps[k].join('/') !== this.props[k].join('/')
-          : nextProps[k] !== this.props[k]
+    return !!Object.keys(nextProps).find(k =>
+      k === 'keyPath'
+        ? nextProps[k].join('/') !== this.props[k].join('/')
+        : nextProps[k] !== this.props[k]
     );
   }
 

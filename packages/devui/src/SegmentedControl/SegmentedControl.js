@@ -7,8 +7,10 @@ const SegmentedWrapper = createStyledComponent(styles);
 
 export default class SegmentedControl extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.disabled !== this.props.disabled ||
-      nextProps.selected !== this.props.selected;
+    return (
+      nextProps.disabled !== this.props.disabled ||
+      nextProps.selected !== this.props.selected
+    );
   }
 
   onClick = e => {

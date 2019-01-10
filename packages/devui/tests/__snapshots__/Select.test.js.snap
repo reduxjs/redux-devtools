@@ -2,7 +2,7 @@
 
 exports[`Select renders correctly 1`] = `
 <div
-  class="Select sc-bZQynM lpCNM is-searchable Select--single"
+  class="Select sc-bZQynM eKUTFA is-searchable Select--single"
 >
   <div
     class="Select-control"
@@ -47,7 +47,7 @@ exports[`Select renders correctly 1`] = `
 
 exports[`Select renders with props 1`] = `
 <div
-  class="Select sc-bZQynM dVPEwd has-value is-clearable is-disabled is-loading Select--multi"
+  class="Select sc-bZQynM lbesTc has-value is-clearable is-disabled is-loading Select--multi"
 >
   <div
     class="Select-control"
@@ -155,7 +155,7 @@ exports[`Select should select another option 1`] = `
       autosize={true}
       backspaceRemoves={true}
       backspaceToRemoveMessage="Press backspace to remove {label}"
-      className="sc-bZQynM lpCNM"
+      className="sc-bZQynM eKUTFA"
       clearAllText="Clear all"
       clearRenderer={[Function]}
       clearValueText="Clear value"
@@ -215,7 +215,7 @@ exports[`Select should select another option 1`] = `
       valueKey="value"
     >
       <div
-        className="Select sc-bZQynM lpCNM is-open is-searchable Select--single"
+        className="Select sc-bZQynM eKUTFA is-open is-searchable Select--single"
       >
         <div
           className="Select-control"
@@ -404,7 +404,7 @@ exports[`Select shouldn't find any results 1`] = `
       autosize={true}
       backspaceRemoves={true}
       backspaceToRemoveMessage="Press backspace to remove {label}"
-      className="sc-bZQynM lpCNM"
+      className="sc-bZQynM eKUTFA"
       clearAllText="Clear all"
       clearRenderer={[Function]}
       clearValueText="Clear value"
@@ -464,7 +464,7 @@ exports[`Select shouldn't find any results 1`] = `
       valueKey="value"
     >
       <div
-        className="Select sc-bZQynM lpCNM is-open is-searchable Select--single"
+        className="Select sc-bZQynM eKUTFA is-open is-searchable Select--single"
       >
         <div
           className="Select-control"

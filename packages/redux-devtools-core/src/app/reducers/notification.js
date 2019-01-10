@@ -1,4 +1,9 @@
-import { SHOW_NOTIFICATION, CLEAR_NOTIFICATION, LIFTED_ACTION, ERROR } from '../constants/actionTypes';
+import {
+  SHOW_NOTIFICATION,
+  CLEAR_NOTIFICATION,
+  LIFTED_ACTION,
+  ERROR
+} from '../constants/actionTypes';
 
 export default function notification(state = null, action) {
   switch (action.type) {

@@ -83,12 +83,14 @@ export default class LogMonitorButton extends React.Component {
       };
     }
     return (
-      <a onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
-          onMouseDown={this.handleMouseDown}
-          onMouseUp={this.handleMouseUp}
-          onClick={this.onClick}
-          style={style}>
+      <a
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        onMouseDown={this.handleMouseDown}
+        onMouseUp={this.handleMouseUp}
+        onClick={this.onClick}
+        style={style}
+      >
         {this.props.children}
       </a>
     );

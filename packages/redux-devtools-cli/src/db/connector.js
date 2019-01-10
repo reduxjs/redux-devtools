@@ -13,7 +13,8 @@ module.exports = function connector(options) {
   var knex = knexModule(dbOptions);
 
   /* eslint-disable no-console */
-  knex.migrate.latest()
+  knex.migrate
+    .latest()
     .then(function() {
       return knex.seed.run();
     })

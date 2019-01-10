@@ -5,7 +5,8 @@ export default ({ theme, disabled }) => css`
   display: flex;
   flex-shrink: 0;
 
-  > [data-selected], > [data-selected]:hover {
+  > [data-selected],
+  > [data-selected]:hover {
     background-color: ${theme.base04};
     color: ${theme.base00};
   }
@@ -19,10 +20,12 @@ export default ({ theme, disabled }) => css`
     border: 1px solid ${color(theme.base03, 'alpha', 0.4)};
     border-left-width: 0;
     padding: 5px 10px;
-    ${disabled ? `
+    ${disabled
+      ? `
     cursor: not-allowed;
     opacity: 0.6;
-    ` : `
+    `
+      : `
     cursor: pointer;
     color: ${theme.base05};
     background-color: ${theme.base01};

@@ -18,7 +18,7 @@ export function getPath(obj, inspectedStatePath) {
 class ChartMonitorWrapper extends Component {
   static update = ChartMonitor.update;
 
-  onClickText = (data) => {
+  onClickText = data => {
     const inspectedStatePath = [];
     getPath(data, inspectedStatePath);
     this.props.selectMonitorWithState('InspectorMonitor', {
@@ -34,7 +34,8 @@ class ChartMonitorWrapper extends Component {
   render() {
     return (
       <ChartMonitor
-        defaultIsVisible invertTheme
+        defaultIsVisible
+        invertTheme
         onClickText={this.onClickText}
         {...this.props}
       />
@@ -52,4 +53,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(ChartMonitorWrapper);
+export default connect(
+  null,
+  mapDispatchToProps
+)(ChartMonitorWrapper);

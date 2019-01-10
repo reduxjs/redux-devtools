@@ -1,15 +1,16 @@
 {
   "name": "devui",
   "version": "1.0.0-3",
-  "description":
-    "Reusable React components for building DevTools monitors and apps.",
-  "files": ["lib", "fonts"],
+  "description": "Reusable React components for building DevTools monitors and apps.",
+  "files": [
+    "lib",
+    "fonts"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
-  "author":
-    "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "license": "MIT",
   "scripts": {
     "start": "npm run storybook",

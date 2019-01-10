@@ -12,34 +12,36 @@ It uses a slider based on [react-slider](https://github.com/mpowaga/react-slider
 
 ### Installation
 
-```npm install redux-slider-monitor```
+`npm install redux-slider-monitor`
 
 ### Recommended Usage
 
 Use with [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor)
+
 ```javascript
-<DockMonitor toggleVisibilityKey='ctrl-h'
-             changePositionKey='ctrl-q'
-             defaultPosition='bottom'
-             defaultSize={0.15}>
+<DockMonitor
+  toggleVisibilityKey="ctrl-h"
+  changePositionKey="ctrl-q"
+  defaultPosition="bottom"
+  defaultSize={0.15}
+>
   <SliderMonitor keyboardEnabled />
 </DockMonitor>
 ```
 
 Dispatch some Redux actions. Use the slider to navigate between the state changes.
 
-Click the play/pause buttons to watch the state changes over time, or step backward or forward in state time with the left/right arrow buttons. Change replay speeds with the ```1x``` button, and "Live" will replay actions with the same time intervals in which they originally were dispatched.
+Click the play/pause buttons to watch the state changes over time, or step backward or forward in state time with the left/right arrow buttons. Change replay speeds with the `1x` button, and "Live" will replay actions with the same time intervals in which they originally were dispatched.
 
 ## Keyboard shortcuts
 
-Pass the ```keyboardEnabled``` prop to use these shortcuts
+Pass the `keyboardEnabled` prop to use these shortcuts
 
-```ctrl+j```: play/pause
+`ctrl+j`: play/pause
 
-```ctrl+[```: step backward
+`ctrl+[`: step backward
 
-```ctrl+]```: step forward
-
+`ctrl+]`: step forward
 
 ### Running Examples
 

@@ -5,15 +5,17 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { withTheme } from './themeAddon/theme';
 import '../src/presets.js';
 
-addDecorator(withOptions({
-  name: 'DevUI',
-  url: 'https://github.com/reduxjs/redux-devtools/tree/master/packages/devui',
-  goFullScreen: false,
-  showStoriesPanel: true,
-  showAddonPanel: true,
-  showSearchBox: false,
-  addonPanelInRight: true
-}));
+addDecorator(
+  withOptions({
+    name: 'DevUI',
+    url: 'https://github.com/reduxjs/redux-devtools/tree/master/packages/devui',
+    goFullScreen: false,
+    showStoriesPanel: true,
+    showAddonPanel: true,
+    showSearchBox: false,
+    addonPanelInRight: true
+  })
+);
 
 addDecorator(withTheme);
 addDecorator(withKnobs);

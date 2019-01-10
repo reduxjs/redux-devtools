@@ -12,7 +12,7 @@ export const Container = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  
+
   > div {
     width: 90%;
   }
@@ -39,8 +39,9 @@ storiesOf('Select', module)
         />
       </Container>
     ),
-    { info: 
-        'Wrapper around [React Select](https://github.com/JedWatson/react-select) with themes '
-        + 'and new props like `openOuterUp` and `menuMaxHeight`.'
+    {
+      info:
+        'Wrapper around [React Select](https://github.com/JedWatson/react-select) with themes ' +
+        'and new props like `openOuterUp` and `menuMaxHeight`.'
     }
   );

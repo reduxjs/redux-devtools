@@ -21,8 +21,6 @@ export default class RawTab extends Component {
   }
 
   render() {
-    return (
-      <Editor value={this.value} />
-    );
+    return <Editor value={this.value} />;
   }
 }

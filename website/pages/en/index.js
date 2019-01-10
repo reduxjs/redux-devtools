@@ -22,8 +22,8 @@ class HomeSplash extends React.Component {
     const langPart = `${language ? `${language}/` : ''}`;
     const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
     */
-   const {siteConfig} = this.props;
-   const {baseUrl} = siteConfig;
+    const { siteConfig } = this.props;
+    const { baseUrl } = siteConfig;
 
     const SplashContainer = props => (
       <div className="homeContainer">
@@ -78,14 +78,15 @@ class HomeSplash extends React.Component {
 
 class Index extends React.Component {
   render() {
-    const {config: siteConfig, language = ''} = this.props;
-    const {baseUrl} = siteConfig;
+    const { config: siteConfig, language = '' } = this.props;
+    const { baseUrl } = siteConfig;
 
     const Block = props => (
       <Container
         padding={['bottom', 'top']}
         id={props.id}
-        background={props.background}>
+        background={props.background}
+      >
         <GridBlock
           align="center"
           contents={props.children}
@@ -97,7 +98,8 @@ class Index extends React.Component {
     const FeatureCallout = () => (
       <div
         className="productShowcaseSection paddingBottom"
-        style={{textAlign: 'center'}}>
+        style={{ textAlign: 'center' }}
+      >
         <h2>Feature Callout</h2>
         <MarkdownBlock>These are features of this project</MarkdownBlock>
       </div>
@@ -110,8 +112,8 @@ class Index extends React.Component {
             content: 'Talk about trying this out',
             image: `${baseUrl}img/docusaurus.svg`,
             imageAlign: 'left',
-            title: 'Try it Out',
-          },
+            title: 'Try it Out'
+          }
         ]}
       </Block>
     );
@@ -124,8 +126,8 @@ class Index extends React.Component {
               'This is another description of how this project is useful',
             image: `${baseUrl}img/docusaurus.svg`,
             imageAlign: 'right',
-            title: 'Description',
-          },
+            title: 'Description'
+          }
         ]}
       </Block>
     );
@@ -137,8 +139,8 @@ class Index extends React.Component {
             content: 'Talk about learning how to use this',
             image: `${baseUrl}img/docusaurus.svg`,
             imageAlign: 'right',
-            title: 'Learn How',
-          },
+            title: 'Learn How'
+          }
         ]}
       </Block>
     );
@@ -150,14 +152,14 @@ class Index extends React.Component {
             content: 'This is the content of my feature',
             image: `${baseUrl}img/docusaurus.svg`,
             imageAlign: 'top',
-            title: 'Feature One',
+            title: 'Feature One'
           },
           {
             content: 'The content of my second feature',
             image: `${baseUrl}img/docusaurus.svg`,
             imageAlign: 'top',
-            title: 'Feature Two',
-          },
+            title: 'Feature Two'
+          }
         ]}
       </Block>
     );

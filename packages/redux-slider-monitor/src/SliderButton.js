@@ -28,7 +28,11 @@ export default class SliderButton extends (PureComponent || Component) {
         disabled={this.props.disabled}
         theme={this.props.theme}
       >
-        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style={this.iconStyle()}>
+        <svg
+          viewBox="0 0 24 24"
+          preserveAspectRatio="xMidYMid meet"
+          style={this.iconStyle()}
+        >
           <g>
             <path d="M8 5v14l11-7z" />
           </g>
@@ -45,7 +49,11 @@ export default class SliderButton extends (PureComponent || Component) {
       disabled={this.props.disabled}
       theme={this.props.theme}
     >
-      <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style={this.iconStyle()}>
+      <svg
+        viewBox="0 0 24 24"
+        preserveAspectRatio="xMidYMid meet"
+        style={this.iconStyle()}
+      >
         <g>
           <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
         </g>
@@ -53,7 +61,7 @@ export default class SliderButton extends (PureComponent || Component) {
     </Button>
   );
 
-  renderStepButton = (direction) => {
+  renderStepButton = direction => {
     const isLeft = direction === 'left';
     const d = isLeft
       ? 'M15.41 16.09l-4.58-4.59 4.58-4.59-1.41-1.41-6 6 6 6z'
@@ -67,7 +75,11 @@ export default class SliderButton extends (PureComponent || Component) {
         disabled={this.props.disabled}
         theme={this.props.theme}
       >
-        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style={this.iconStyle()}>
+        <svg
+          viewBox="0 0 24 24"
+          preserveAspectRatio="xMidYMid meet"
+          style={this.iconStyle()}
+        >
           <g>
             <path d={d} />
           </g>

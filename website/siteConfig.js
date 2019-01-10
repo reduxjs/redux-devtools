@@ -16,8 +16,8 @@ const users = [
     // if it is not '/', like: '/test-site/img/docusaurus.svg'.
     image: '/img/docusaurus.svg',
     infoLink: 'https://www.facebook.com',
-    pinned: true,
-  },
+    pinned: true
+  }
 ];
 
 const siteConfig = {
@@ -37,9 +37,7 @@ const siteConfig = {
   //   organizationName: 'JoelMarcey'
 
   // For no header links in the top nav bar -> headerLinks: [],
-  headerLinks: [
-    {doc: 'Features', label: 'Walkthrough'},
-  ],
+  headerLinks: [{ doc: 'Features', label: 'Walkthrough' }],
 
   // If you have users set above, you add it here:
   users,
@@ -52,7 +50,7 @@ const siteConfig = {
   /* Colors for website */
   colors: {
     primaryColor: '#2E8555',
-    secondaryColor: '#205C3B',
+    secondaryColor: '#205C3B'
   },
 
   /* Custom fonts for website */
@@ -74,7 +72,7 @@ const siteConfig = {
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
-    theme: 'default',
+    theme: 'default'
   },
 
   // Add custom scripts here that would be placed in <script> tags.
@@ -87,7 +85,7 @@ const siteConfig = {
 
   // Open Graph and Twitter card images.
   ogImage: 'img/docusaurus.png',
-  twitterImage: 'img/docusaurus.png',
+  twitterImage: 'img/docusaurus.png'
 
   // Show documentation's last contributor's name.
   // enableUpdateBy: true,

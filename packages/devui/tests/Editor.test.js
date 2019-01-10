@@ -4,10 +4,10 @@ import { mountToJson } from 'enzyme-to-json';
 import { Editor } from '../src';
 import 'codemirror/mode/javascript/javascript';
 
-describe('Editor', function () {
+describe('Editor', function() {
   const getBoundingClientRect = jest.fn();
   const getClientRects = jest.fn();
-  document.body.createTextRange = function () {
+  document.body.createTextRange = function() {
     return {
       getBoundingClientRect() {
         getBoundingClientRect();

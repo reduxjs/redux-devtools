@@ -27,14 +27,14 @@ export const ActionCreators = {
     if (!isPlainObject(action)) {
       throw new Error(
         'Actions must be plain objects. ' +
-        'Use custom middleware for async actions.'
+          'Use custom middleware for async actions.'
       );
     }
 
     if (typeof action.type === 'undefined') {
       throw new Error(
         'Actions may not have an undefined "type" property. ' +
-        'Have you misspelled a constant?'
+          'Have you misspelled a constant?'
       );
     }
 
@@ -57,16 +57,30 @@ export const ActionCreators = {
         }
         stack = error.stack;
         if (prevStackTraceLimit) Error.stackTraceLimit = prevStackTraceLimit;
-        if (extraFrames || typeof Error.stackTraceLimit !== 'number' || Error.stackTraceLimit > traceLimit) {
+        if (
+          extraFrames ||
+          typeof Error.stackTraceLimit !== 'number' ||
+          Error.stackTraceLimit > traceLimit
+        ) {
           const frames = stack.split('\n');
           if (frames.length > traceLimit) {
-            stack = frames.slice(0, traceLimit + extraFrames + (frames[0] === 'Error' ? 1 : 0)).join('\n');
+            stack = frames
+              .slice(
+                0,
+                traceLimit + extraFrames + (frames[0] === 'Error' ? 1 : 0)
+              )
+              .join('\n');
           }
         }
       }
     }
 
-    return { type: ActionTypes.PERFORM_ACTION, action, timestamp: Date.now(), stack };
+    return {
+      type: ActionTypes.PERFORM_ACTION,
+      action,
+      timestamp: Date.now(),
+      stack
+    };
   },
 
   reset() {
@@ -89,7 +103,7 @@ export const ActionCreators = {
     return { type: ActionTypes.TOGGLE_ACTION, id };
   },
 
-  setActionsActive(start, end, active=true) {
+  setActionsActive(start, end, active = true) {
     return { type: ActionTypes.SET_ACTIONS_ACTIVE, start, end, active };
   },
 
@@ -131,13 +145,15 @@ function computeWithTryCatch(reducer, action, state) {
   } catch (err) {
     nextError = err.toString();
     if (
-      typeof window === 'object' && (
-        typeof window.chrome !== 'undefined' ||
-        typeof window.process !== 'undefined' &&
-        window.process.type === 'renderer'
-      )) {
+      typeof window === 'object' &&
+      (typeof window.chrome !== 'undefined' ||
+        (typeof window.process !== 'undefined' &&
+          window.process.type === 'renderer'))
+    ) {
       // In Chrome, rethrowing provides better source map support
-      setTimeout(() => { throw err; });
+      setTimeout(() => {
+        throw err;
+      });
     } else {
       console.error(err); // eslint-disable-line no-console
     }
@@ -175,9 +191,10 @@ function recomputeStates(
   // Optimization: exit early and return the same reference
   // if we know nothing could have changed.
   if (
-    !computedStates || minInvalidatedStateIndex === -1 ||
+    !computedStates ||
+    minInvalidatedStateIndex === -1 ||
     (minInvalidatedStateIndex >= computedStates.length &&
-    computedStates.length === stagedActionIds.length)
+      computedStates.length === stagedActionIds.length)
   ) {
     return computedStates;
   }
@@ -201,7 +218,12 @@ function recomputeStates(
           error: 'Interrupted by an error up the chain'
         };
       } else {
-        entry = computeNextEntry(reducer, action, previousState, shouldCatchErrors);
+        entry = computeNextEntry(
+          reducer,
+          action,
+          previousState,
+          shouldCatchErrors
+        );
       }
     }
     nextComputedStates.push(entry);
@@ -214,13 +236,23 @@ function recomputeStates(
  * Lifts an app's action into an action on the lifted store.
  */
 export function liftAction(action, trace, traceLimit, toExcludeFromTrace) {
-  return ActionCreators.performAction(action, trace, traceLimit, toExcludeFromTrace);
+  return ActionCreators.performAction(
+    action,
+    trace,
+    traceLimit,
+    toExcludeFromTrace
+  );
 }
 
 /**
  * Creates a history state reducer from an app's reducer.
  */
-export function liftReducerWith(reducer, initialCommittedState, monitorReducer, options) {
+export function liftReducerWith(
+  reducer,
+  initialCommittedState,
+  monitorReducer,
+  options
+) {
   const initialLiftedState = {
     monitorState: monitorReducer(undefined, {}),
     nextActionId: 1,
@@ -272,13 +304,14 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
         }
       }
 
-      skippedActionIds = skippedActionIds.filter(id => idsToDelete.indexOf(id) === -1);
+      skippedActionIds = skippedActionIds.filter(
+        id => idsToDelete.indexOf(id) === -1
+      );
       stagedActionIds = [0, ...stagedActionIds.slice(excess + 1)];
       committedState = computedStates[excess].state;
       computedStates = computedStates.slice(excess);
-      currentStateIndex = currentStateIndex > excess
-        ? currentStateIndex - excess
-        : 0;
+      currentStateIndex =
+        currentStateIndex > excess ? currentStateIndex - excess : 0;
     }
 
     function computePausedAction(shouldInit) {
@@ -288,7 +321,10 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
         monitorState = monitorReducer(monitorState, liftedAction);
       } else {
         computedState = computeNextEntry(
-          reducer, liftedAction.action, computedStates[currentStateIndex].state, false
+          reducer,
+          liftedAction.action,
+          computedStates[currentStateIndex].state,
+          false
         );
       }
       if (!options.pauseActionType || nextActionId === 1) {
@@ -323,7 +359,10 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
         skippedActionIds,
         committedState,
         currentStateIndex,
-        computedStates: [...computedStates.slice(0, stagedActionIds.length - 1), computedState],
+        computedStates: [
+          ...computedStates.slice(0, stagedActionIds.length - 1),
+          computedState
+        ],
         isLocked,
         isPaused: true
       };
@@ -336,7 +375,8 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
 
     // maxAge number can be changed dynamically
     let maxAge = options.maxAge;
-    if (typeof maxAge === 'function') maxAge = maxAge(liftedAction, liftedState);
+    if (typeof maxAge === 'function')
+      maxAge = maxAge(liftedAction, liftedState);
 
     if (/^@@redux\/(INIT|REPLACE)/.test(liftedAction.type)) {
       if (options.shouldHotReload === false) {
@@ -344,8 +384,10 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
         nextActionId = 1;
         stagedActionIds = [0];
         skippedActionIds = [];
-        committedState = computedStates.length === 0 ? initialCommittedState :
-            computedStates[currentStateIndex].state;
+        committedState =
+          computedStates.length === 0
+            ? initialCommittedState
+            : computedStates[currentStateIndex].state;
         currentStateIndex = 0;
         computedStates = [];
       }
@@ -478,7 +520,10 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
           // Forget any actions that are currently being skipped.
           stagedActionIds = difference(stagedActionIds, skippedActionIds);
           skippedActionIds = [];
-          currentStateIndex = Math.min(currentStateIndex, stagedActionIds.length - 1);
+          currentStateIndex = Math.min(
+            currentStateIndex,
+            stagedActionIds.length - 1
+          );
           break;
         }
         case ActionTypes.REORDER_ACTION: {
@@ -489,13 +534,15 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
           if (idx < 1) break;
           const beforeActionId = liftedAction.beforeActionId;
           let newIdx = stagedActionIds.indexOf(beforeActionId);
-          if (newIdx < 1) { // move to the beginning or to the end
+          if (newIdx < 1) {
+            // move to the beginning or to the end
             const count = stagedActionIds.length;
             newIdx = beforeActionId > stagedActionIds[count - 1] ? count : 1;
           }
           const diff = idx - newIdx;
 
-          if (diff > 0) { // move left
+          if (diff > 0) {
+            // move left
             stagedActionIds = [
               ...stagedActionIds.slice(0, newIdx),
               actionId,
@@ -503,7 +550,8 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
               ...stagedActionIds.slice(idx + 1)
             ];
             minInvalidatedStateIndex = newIdx;
-          } else if (diff < 0) { // move right
+          } else if (diff < 0) {
+            // move right
             stagedActionIds = [
               ...stagedActionIds.slice(0, idx),
               ...stagedActionIds.slice(idx + 1, newIdx),
@@ -527,7 +575,10 @@ export function liftReducerWith(reducer, initialCommittedState, monitorReducer, 
             minInvalidatedStateIndex = 0;
             // iterate through actions
             liftedAction.nextLiftedState.forEach(action => {
-              actionsById[nextActionId] = liftAction(action, options.trace || options.shouldIncludeCallstack);
+              actionsById[nextActionId] = liftAction(
+                action,
+                options.trace || options.shouldIncludeCallstack
+              );
               stagedActionIds.push(nextActionId);
               nextActionId++;
             });
@@ -679,20 +730,19 @@ export default function instrument(monitorReducer = () => null, options = {}) {
   if (typeof options.maxAge === 'number' && options.maxAge < 2) {
     throw new Error(
       'DevTools.instrument({ maxAge }) option, if specified, ' +
-      'may not be less than 2.'
+        'may not be less than 2.'
     );
   }
 
   return createStore => (reducer, initialState, enhancer) => {
-
     function liftReducer(r) {
       if (typeof r !== 'function') {
         if (r && typeof r.default === 'function') {
           throw new Error(
             'Expected the reducer to be a function. ' +
-            'Instead got an object with a "default" field. ' +
-            'Did you pass a module instead of the default export? ' +
-            'Try passing require(...).default instead.'
+              'Instead got an object with a "default" field. ' +
+              'Did you pass a module instead of the default export? ' +
+              'Try passing require(...).default instead.'
           );
         }
         throw new Error('Expected the reducer to be a function.');
@@ -704,7 +754,7 @@ export default function instrument(monitorReducer = () => null, options = {}) {
     if (liftedStore.liftedStore) {
       throw new Error(
         'DevTools instrumentation should not be applied more than once. ' +
-        'Check your store configuration.'
+          'Check your store configuration.'
       );
     }
 

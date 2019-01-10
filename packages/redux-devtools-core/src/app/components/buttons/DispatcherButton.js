@@ -20,7 +20,9 @@ class DispatcherButton extends Component {
     return (
       <Button
         mark={this.props.dispatcherIsOpen && 'base0D'}
-        title={this.props.dispatcherIsOpen ? 'Hide dispatcher' : 'Show dispatcher'}
+        title={
+          this.props.dispatcherIsOpen ? 'Hide dispatcher' : 'Show dispatcher'
+        }
         onClick={this.props.toggleDispatcher}
         tooltipPosition="top-left"
       >
@@ -36,4 +38,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(DispatcherButton);
+export default connect(
+  null,
+  mapDispatchToProps
+)(DispatcherButton);

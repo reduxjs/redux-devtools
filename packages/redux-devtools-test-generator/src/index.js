@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Toolbar, Container, Button, Select, Notification, Dialog } from 'devui';
+import {
+  Toolbar,
+  Container,
+  Button,
+  Select,
+  Notification,
+  Dialog
+} from 'devui';
 import { formSchema, uiSchema, defaultFormData } from './templateForm';
 import AddIcon from 'react-icons/lib/md/add';
 import EditIcon from 'react-icons/lib/md/edit';
@@ -10,15 +17,14 @@ import mochaTemplate from './redux/mocha/template';
 import tapeTemplate from './redux/tape/template';
 import avaTemplate from './redux/ava/template';
 
-export const getDefaultTemplates = (/* lib */) => (
+export const getDefaultTemplates = (/* lib */) =>
   /*
    if (lib === 'redux') {
    return [mochaTemplate, tapeTemplate, avaTemplate];
    }
    return [mochaVTemplate, tapeVTemplate, avaVTemplate];
    */
-  [jestTemplate, mochaTemplate, tapeTemplate, avaTemplate]
-);
+  [jestTemplate, mochaTemplate, tapeTemplate, avaTemplate];
 
 export default class TestTab extends Component {
   constructor(props) {
@@ -26,9 +32,7 @@ export default class TestTab extends Component {
     this.state = { dialogStatus: null };
   }
 
-  getPersistedState = () => (
-    this.props.monitorState.testGenerator || {}
-  );
+  getPersistedState = () => this.props.monitorState.testGenerator || {};
 
   handleSelectTemplate = selectedTemplate => {
     const { templates = getDefaultTemplates() } = this.getPersistedState();
@@ -44,7 +48,10 @@ export default class TestTab extends Component {
   };
 
   handleSubmit = ({ formData: template }) => {
-    const { templates = getDefaultTemplates(), selected = 0 } = this.getPersistedState();
+    const {
+      templates = getDefaultTemplates(),
+      selected = 0
+    } = this.getPersistedState();
     if (this.state.dialogStatus === 'Add') {
       this.updateState({
         selected: templates.length,
@@ -61,13 +68,16 @@ export default class TestTab extends Component {
   };
 
   handleRemove = () => {
-    const { templates = getDefaultTemplates(), selected = 0 } = this.getPersistedState();
+    const {
+      templates = getDefaultTemplates(),
+      selected = 0
+    } = this.getPersistedState();
     this.updateState({
       selected: 0,
-      templates: templates.length === 1 ? undefined : [
-        ...templates.slice(0, selected),
-        ...templates.slice(selected + 1)
-      ]
+      templates:
+        templates.length === 1
+          ? undefined
+          : [...templates.slice(0, selected), ...templates.slice(selected + 1)]
     });
     this.handleCloseDialog();
   };
@@ -108,14 +118,16 @@ export default class TestTab extends Component {
             simpleValue={false}
             onChange={this.handleSelectTemplate}
           />
-          <Button onClick={this.editTemplate}><EditIcon /></Button>
-          <Button onClick={this.addTemplate}><AddIcon /></Button>
+          <Button onClick={this.editTemplate}>
+            <EditIcon />
+          </Button>
+          <Button onClick={this.addTemplate}>
+            <AddIcon />
+          </Button>
         </Toolbar>
-        {!assertion ?
-          <Notification>
-            No template for tests specified.
-          </Notification>
-        :
+        {!assertion ? (
+          <Notification>No template for tests specified.</Notification>
+        ) : (
           <TestGenerator
             isVanilla={false}
             assertion={assertion}
@@ -123,28 +135,32 @@ export default class TestTab extends Component {
             wrap={wrap}
             {...rest}
           />
-        }
-        {!persistedState.hideTip && assertion && rest.startActionId === null &&
+        )}
+        {!persistedState.hideTip && assertion && rest.startActionId === null && (
           <Notification onClose={this.handleCloseTip}>
             Hold <b>SHIFT</b> key to select more actions.
           </Notification>
-        }
-        {dialogStatus &&
+        )}
+        {dialogStatus && (
           <Dialog
             open
             title={`${dialogStatus} test template`}
             onDismiss={this.handleCloseDialog}
             onSubmit={this.handleSubmit}
             actions={[
-              <Button key="cancel" onClick={this.handleCloseDialog}>Cancel</Button>,
-              <Button key="remove" onClick={this.handleRemove}>Remove</Button>
+              <Button key="cancel" onClick={this.handleCloseDialog}>
+                Cancel
+              </Button>,
+              <Button key="remove" onClick={this.handleRemove}>
+                Remove
+              </Button>
             ]}
             submitText={dialogStatus}
             schema={formSchema}
             uiSchema={uiSchema}
             formData={dialogStatus === 'Edit' ? template : defaultFormData}
           />
-        }
+        )}
       </Container>
     );
   }

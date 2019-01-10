@@ -20,10 +20,18 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
   resolve: {
     alias: {
-      'redux-slider-monitor': path.join(__dirname, '..', '..', 'src/SliderMonitor')
+      'redux-slider-monitor': path.join(
+        __dirname,
+        '..',
+        '..',
+        'src/SliderMonitor'
+      )
     },
     extensions: ['.js']
   },

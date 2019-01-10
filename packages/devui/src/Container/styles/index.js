@@ -10,15 +10,23 @@ export const MainContainerWrapper = styled.div`
   color: ${props => props.theme.base07};
   font-size: 12px;
 
-  div, input, textarea, keygen, select, button {
-   font-family: ${props => props.theme.fontFamily || 'monaco, monospace'};
- }
+  div,
+  input,
+  textarea,
+  keygen,
+  select,
+  button {
+    font-family: ${props => props.theme.fontFamily || 'monaco, monospace'};
+  }
 
- .CodeMirror div, pre, .monitor-LogMonitor * {
-   font-family: ${props => props.theme.codeFontFamily || props.theme.fontFamily || 'monospace'};
- }
+  .CodeMirror div,
+  pre,
+  .monitor-LogMonitor * {
+    font-family: ${props =>
+      props.theme.codeFontFamily || props.theme.fontFamily || 'monospace'};
+  }
 
- .monitor {
+  .monitor {
     flex-grow: 1;
     display: flex;
     flex-flow: column nowrap;

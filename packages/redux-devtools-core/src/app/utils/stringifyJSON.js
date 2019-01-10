@@ -13,5 +13,7 @@ function replacer(key, value) {
 }
 
 export default function stringifyJSON(data, serialize) {
-  return serialize ? jsan.stringify(data, replacer, null, true) : jsan.stringify(data);
+  return serialize
+    ? jsan.stringify(data, replacer, null, true)
+    : jsan.stringify(data);
 }

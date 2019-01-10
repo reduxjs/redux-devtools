@@ -36,7 +36,9 @@ export const ripple = theme => `
     top: 0;
     left: 0;
     pointer-events: none;
-    background-image: radial-gradient(circle, ${theme.base07} 11%, transparent 11%);
+    background-image: radial-gradient(circle, ${
+      theme.base07
+    } 11%, transparent 11%);
     background-repeat: no-repeat;
     background-position: 50%;
     transform: scale(10, 10);

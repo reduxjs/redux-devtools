@@ -16,17 +16,14 @@ export const Container = styled.div`
 
 storiesOf('ContextMenu', module)
   .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <Container>
-        <ContextMenu
-          visible
-          onClick={action('menu item clicked')}
-          x={number('x', 100)}
-          y={number('y', 100)}
-          items={items}
-        />
-      </Container>
-    )
-  );
+  .add('default', () => (
+    <Container>
+      <ContextMenu
+        visible
+        onClick={action('menu item clicked')}
+        x={number('x', 100)}
+        y={number('y', 100)}
+        items={items}
+      />
+    </Container>
+  ));

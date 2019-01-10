@@ -10,10 +10,12 @@ const DEFAULT_TABS = [
   {
     name: 'Action',
     component: SubTabs
-  }, {
+  },
+  {
     name: 'State',
     component: SubTabs
-  }, {
+  },
+  {
     name: 'Diff',
     component: SubTabs
   },

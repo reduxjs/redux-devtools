@@ -3,7 +3,7 @@ import { render } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 import { Toolbar, Divider, Spacer, Button } from '../src';
 
-describe('Toolbar', function () {
+describe('Toolbar', function() {
   it('renders correctly', () => {
     const wrapper = render(
       <Toolbar>
@@ -17,9 +17,7 @@ describe('Toolbar', function () {
   });
 
   it('renders with props', () => {
-    const wrapper = render(
-      <Toolbar borderPosition="top" />
-    );
+    const wrapper = render(<Toolbar borderPosition="top" />);
     expect(renderToJson(wrapper)).toMatchSnapshot();
   });
 });

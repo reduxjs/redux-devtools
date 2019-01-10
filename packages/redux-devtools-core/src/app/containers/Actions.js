@@ -14,7 +14,12 @@ import BottomButtons from '../components/BottomButtons';
 class Actions extends Component {
   render() {
     const {
-      monitor, dispatcherIsOpen, sliderIsOpen, options, liftedState, liftedDispatch
+      monitor,
+      dispatcherIsOpen,
+      sliderIsOpen,
+      options,
+      liftedState,
+      liftedDispatch
     } = this.props;
     return (
       <Container>
@@ -30,12 +35,12 @@ class Actions extends Component {
           dispatch={liftedDispatch}
           features={options.features}
         />
-        {sliderIsOpen && options.connectionId && options.features.jump &&
-        <SliderMonitor liftedState={liftedState} dispatch={liftedDispatch} />
-        }
-        {dispatcherIsOpen && options.connectionId && options.features.dispatch &&
-        <Dispatcher options={options} />
-        }
+        {sliderIsOpen && options.connectionId && options.features.jump && (
+          <SliderMonitor liftedState={liftedState} dispatch={liftedDispatch} />
+        )}
+        {dispatcherIsOpen &&
+          options.connectionId &&
+          options.features.dispatch && <Dispatcher options={options} />}
         <BottomButtons
           dispatcherIsOpen={dispatcherIsOpen}
           sliderIsOpen={sliderIsOpen}
@@ -77,4 +82,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Actions);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Actions);

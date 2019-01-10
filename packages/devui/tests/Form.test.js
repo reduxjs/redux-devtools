@@ -4,14 +4,11 @@ import { shallowToJson } from 'enzyme-to-json';
 import { Form } from '../src';
 import { schema, uiSchema, formData } from '../src/Form/stories/schema';
 
-describe('Form', function () {
+describe('Form', function() {
   it('renders correctly', () => {
     const wrapper = shallow(
-      <Form
-        formData={formData}
-        schema={schema}
-        uiSchema={uiSchema}
-      />);
+      <Form formData={formData} schema={schema} uiSchema={uiSchema} />
+    );
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
@@ -23,18 +20,15 @@ describe('Form', function () {
         formData={formData}
         schema={schema}
         uiSchema={uiSchema}
-      />);
+      />
+    );
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
   it('renders with no button', () => {
     const wrapper = shallow(
-      <Form
-        formData={formData}
-        schema={schema}
-        uiSchema={uiSchema}
-        noSubmit
-      />);
+      <Form formData={formData} schema={schema} uiSchema={uiSchema} noSubmit />
+    );
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 

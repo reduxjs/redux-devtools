@@ -64,7 +64,11 @@ describe('Server', function() {
 
     it('should login', function() {
       socket.emit('login', 'master', function(error, channelName) {
-        if (error) { console.log(error); return; } // eslint-disable-line no-console
+        if (error) {
+          /* eslint-disable-next-line no-console */
+          console.log(error);
+          return;
+        }
         expect(channelName).toBe('respond');
         channel = socket.subscribe(channelName);
         expect(channel.SUBSCRIBED).toBe('subscribed');
@@ -73,24 +77,28 @@ describe('Server', function() {
 
     it('should send message', function(done) {
       var data = {
-        'type': 'ACTION',
-        'payload': {
-          'todos': 'do some'
+        type: 'ACTION',
+        payload: {
+          todos: 'do some'
         },
-        'action': {
-          'timestamp': 1483349708506,
-          'action': {
-            'type': 'ADD_TODO',
-            'text': 'hggg'
+        action: {
+          timestamp: 1483349708506,
+          action: {
+            type: 'ADD_TODO',
+            text: 'hggg'
           }
         },
-        'instanceId': 'tAmA7H5fclyWhvizAAAi',
-        'name': 'LoggerInstance',
-        'id': 'tAmA7H5fclyWhvizAAAi'
+        instanceId: 'tAmA7H5fclyWhvizAAAi',
+        name: 'LoggerInstance',
+        id: 'tAmA7H5fclyWhvizAAAi'
       };
 
       socket2.emit('login', '', function(error, channelName) {
-        if (error) { console.log(error); return; } // eslint-disable-line no-console
+        if (error) {
+          /* eslint-disable-next-line no-console */
+          console.log(error);
+          return;
+        }
         expect(channelName).toBe('log');
         var channel2 = socket2.subscribe(channelName);
         expect(channel2.SUBSCRIBED).toBe('subscribed');
@@ -100,7 +108,7 @@ describe('Server', function() {
             done();
           });
           socket.emit(channelName, data);
-        })
+        });
       });
     });
   });
@@ -113,8 +121,10 @@ describe('Server', function() {
       description: 'Test body report',
       action: 'SOME_FINAL_ACTION',
       payload: '[{"type":"ADD_TODO","text":"hi"},{"type":"SOME_FINAL_ACTION"}]',
-      preloadedState: '{"todos":[{"text":"Use Redux","completed":false,"id":0}]}',
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) ' +
+      preloadedState:
+        '{"todos":[{"text":"Use Redux","completed":false,"id":0}]}',
+      userAgent:
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) ' +
         'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
     };
     it('should add a report', function(done) {

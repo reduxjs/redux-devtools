@@ -32,36 +32,39 @@ export default class TodoItem extends Component {
   }
 
   render() {
-    const {todo, markTodo, deleteTodo} = this.props;
+    const { todo, markTodo, deleteTodo } = this.props;
 
     let element;
     if (this.state.editing) {
       element = (
-        <TodoTextInput text={todo.text}
-                       editing={this.state.editing}
-                       onSave={(text) => this.handleSave(todo.id, text)} />
+        <TodoTextInput
+          text={todo.text}
+          editing={this.state.editing}
+          onSave={text => this.handleSave(todo.id, text)}
+        />
       );
     } else {
       element = (
         <div className="view">
-          <input className="toggle"
-                 type="checkbox"
-                 checked={todo.marked}
-                 onChange={() => markTodo(todo.id)} />
-          <label onDoubleClick={::this.handleDoubleClick}>
-            {todo.text}
-          </label>
-          <button className="destroy"
-                  onClick={() => deleteTodo(todo.id)} />
+          <input
+            className="toggle"
+            type="checkbox"
+            checked={todo.marked}
+            onChange={() => markTodo(todo.id)}
+          />
+          <label onDoubleClick={::this.handleDoubleClick}>{todo.text}</label>
+          <button className="destroy" onClick={() => deleteTodo(todo.id)} />
         </div>
       );
     }
 
     return (
-      <li className={classnames({
-        completed: todo.marked,
-        editing: this.state.editing
-      })}>
+      <li
+        className={classnames({
+          completed: todo.marked,
+          editing: this.state.editing
+        })}
+      >
         {element}
       </li>
     );

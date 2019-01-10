@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 import { fadeIn } from '../../utils/animations';
 import colorEffect from '../../utils/color';
 
-const both = (tooltipPosition) => {
+const both = tooltipPosition => {
   switch (tooltipPosition) {
     case 'bottom':
       return `
@@ -46,7 +46,7 @@ const both = (tooltipPosition) => {
   }
 };
 
-const before = (tooltipPosition) => {
+const before = tooltipPosition => {
   switch (tooltipPosition) {
     case 'bottom-left':
       return `
@@ -110,12 +110,13 @@ const after = (tooltipPosition, color) => {
   }
 };
 
-const getDirection = (tooltipPosition) => {
-  return (tooltipPosition.indexOf('-') > 0) ?
-    tooltipPosition.substring(0, tooltipPosition.indexOf('-')) : tooltipPosition;
+const getDirection = tooltipPosition => {
+  return tooltipPosition.indexOf('-') > 0
+    ? tooltipPosition.substring(0, tooltipPosition.indexOf('-'))
+    : tooltipPosition;
 };
 
-const getSize = (size) => {
+const getSize = size => {
   switch (size) {
     case 'big':
       return 'min-height: 34px; padding: 2px 12px;';
@@ -144,8 +145,13 @@ export const commonStyle = ({ theme, mark, size }) => css`
       pointer-events: none;
     }
 
-    ${mark && `
-    background-color: ${colorEffect(theme[mark], 'fade', theme.light ? 0.92 : 0.82)};
+    ${mark &&
+      `
+    background-color: ${colorEffect(
+      theme[mark],
+      'fade',
+      theme.light ? 0.92 : 0.82
+    )};
   
     > svg {
       color: ${theme[mark]};
@@ -158,7 +164,13 @@ export const commonStyle = ({ theme, mark, size }) => css`
   }
 `;
 
-export const tooltipStyle = ({ theme, tooltipTitle, tooltipPosition, mark, size }) => css`
+export const tooltipStyle = ({
+  theme,
+  tooltipTitle,
+  tooltipPosition,
+  mark,
+  size
+}) => css`
   ${commonStyle({ theme, mark, size })}
 
   &:before {
@@ -170,7 +182,9 @@ export const tooltipStyle = ({ theme, tooltipTitle, tooltipPosition, mark, size 
     border-radius: 3px;
     background: ${theme.base01};
     border: 1px solid ${theme.base02};
-    box-shadow: 1px 1px 2px -1px ${theme.base02}, 1px 1px 2px 0px ${theme.base02};
+    box-shadow: 1px 1px 2px -1px ${theme.base02}, 1px 1px 2px 0px ${
+  theme.base02
+};
   }
 
   &:after,
@@ -194,7 +208,8 @@ export const tooltipStyle = ({ theme, tooltipTitle, tooltipPosition, mark, size 
     ${theme.type === 'material' ? `animation: ${fadeIn} 500ms;` : ''}
   }
 
-  ${theme.type !== 'material' && `
+  ${theme.type !== 'material' &&
+    `
   &:after {
     content: "";
     border-style: solid;

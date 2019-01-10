@@ -59,22 +59,36 @@ function injectRN(type, msg) {
   var module = getModule(type);
   var fn = type === 'revert' ? injectServer.revert : injectServer.inject;
   var pass = fn(module.path, options, module.name);
-  log(pass, msg + (pass ? '.' : ', the file `' + path.join(module.name, injectServer.fullPath) + '` not found.'));
+  log(
+    pass,
+    msg +
+      (pass
+        ? '.'
+        : ', the file `' +
+          path.join(module.name, injectServer.fullPath) +
+          '` not found.')
+  );
 
   process.exit(pass ? 0 : 1);
 }
 
 if (argv.revert) {
-  injectRN(argv.revert, 'Revert injection of ReduxDevTools server from React Native local server');
+  injectRN(
+    argv.revert,
+    'Revert injection of ReduxDevTools server from React Native local server'
+  );
 }
 if (argv.injectserver) {
-  injectRN(argv.injectserver, 'Inject ReduxDevTools server into React Native local server');
+  injectRN(
+    argv.injectserver,
+    'Inject ReduxDevTools server into React Native local server'
+  );
 }
 
-server(argv).then(function (r) {
+server(argv).then(function(r) {
   if (argv.open && argv.open !== 'false') {
-    r.on('ready', function () {
+    r.on('ready', function() {
       open(argv.open, options);
-    });  
+    });
   }
 });

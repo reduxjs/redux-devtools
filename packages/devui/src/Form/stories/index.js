@@ -19,8 +19,9 @@ storiesOf('Form', module)
         onSubmit={action('form submitted')}
       />
     ),
-    { info:
-        'Wrapper around [`react-jsonschema-form`](https://github.com/mozilla-services/react-jsonschema-form)'
-        + ' with custom widgets.'
+    {
+      info:
+        'Wrapper around [`react-jsonschema-form`](https://github.com/mozilla-services/react-jsonschema-form)' +
+        ' with custom widgets.'
     }
   );

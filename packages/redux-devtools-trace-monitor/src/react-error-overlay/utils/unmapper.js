@@ -47,7 +47,7 @@ async function unmap(
       functionName,
       lineNumber,
       columnNumber,
-      _originalLineNumber,
+      _originalLineNumber
     } = frame;
     if (_originalLineNumber != null) {
       return frame;
@@ -76,7 +76,7 @@ async function unmap(
       .map(p => ({
         token: p,
         seps: count(path.sep, path.normalize(p)),
-        penalties: count('node_modules', p) + count('~', p),
+        penalties: count('node_modules', p) + count('~', p)
       }))
       .sort((a, b) => {
         const s = Math.sign(a.seps - b.seps);

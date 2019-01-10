@@ -4,28 +4,27 @@ import styled from 'styled-components';
 import CodeMirror from 'codemirror';
 import { defaultStyle, themedStyle } from './styles';
 
-const EditorContainer = styled.div('',
-  ({ theme }) => (theme.scheme === 'default' && theme.light ? defaultStyle : themedStyle(theme))
+const EditorContainer = styled.div('', ({ theme }) =>
+  theme.scheme === 'default' && theme.light ? defaultStyle : themedStyle(theme)
 );
 
 export default class Editor extends Component {
   componentDidMount() {
-    this.cm = CodeMirror( // eslint-disable-line new-cap
-      this.node,
-      {
-        value: this.props.value,
-        mode: this.props.mode,
-        lineNumbers: this.props.lineNumbers,
-        lineWrapping: this.props.lineWrapping,
-        readOnly: this.props.readOnly,
-        autofocus: this.props.autofocus,
-        foldGutter: this.props.foldGutter,
-        gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-      }
-    );
+    this.cm = CodeMirror(this.node, {
+      value: this.props.value,
+      mode: this.props.mode,
+      lineNumbers: this.props.lineNumbers,
+      lineWrapping: this.props.lineWrapping,
+      readOnly: this.props.readOnly,
+      autofocus: this.props.autofocus,
+      foldGutter: this.props.foldGutter,
+      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+    });
 
     if (this.props.onChange) {
-      this.cm.on('change', (doc, change) => { this.props.onChange(doc.getValue(), change); });
+      this.cm.on('change', (doc, change) => {
+        this.props.onChange(doc.getValue(), change);
+      });
     }
   }
 

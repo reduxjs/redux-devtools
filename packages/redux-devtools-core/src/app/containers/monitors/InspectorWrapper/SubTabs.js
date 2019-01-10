@@ -74,7 +74,8 @@ class SubTabs extends Component {
 
   render() {
     let selected = this.props.selected;
-    if (selected === 'Chart' && this.props.parentTab === 'Diff') selected = 'Tree';
+    if (selected === 'Chart' && this.props.parentTab === 'Diff')
+      selected = 'Tree';
 
     return (
       <Tabs
@@ -108,4 +109,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubTabs);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubTabs);

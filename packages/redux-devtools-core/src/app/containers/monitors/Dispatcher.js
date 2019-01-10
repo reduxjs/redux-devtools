@@ -28,7 +28,7 @@ export const ActionContainer = styled.div`
   color: ${props => props.theme.base06};
 
   > div {
-  display: table-row;
+    display: table-row;
 
     > div:first-child {
       width: 1px;
@@ -55,14 +55,18 @@ class Dispatcher extends Component {
 
   state = {
     selected: 'default',
-    customAction: this.props.options.lib === 'redux' ? '{\n  type: \'\'\n}' : 'this.',
+    customAction:
+      this.props.options.lib === 'redux' ? "{\n  type: ''\n}" : 'this.',
     args: [],
     rest: '[]',
     changed: false
   };
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.selected !== 'default' && !nextProps.options.actionCreators) {
+    if (
+      this.state.selected !== 'default' &&
+      !nextProps.options.actionCreators
+    ) {
       this.setState({
         selected: 'default',
         args: []
@@ -71,14 +75,18 @@ class Dispatcher extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState !== this.state ||
-      nextProps.options.actionCreators !== this.props.options.actionCreators;
+    return (
+      nextState !== this.state ||
+      nextProps.options.actionCreators !== this.props.options.actionCreators
+    );
   }
 
   selectActionCreator = selected => {
     if (selected === 'actions-help') {
-      window.open('https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/' +
-        'basics/Dispatcher.md');
+      window.open(
+        'https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/' +
+          'basics/Dispatcher.md'
+      );
       return;
     }
 
@@ -93,7 +101,7 @@ class Dispatcher extends Component {
     const args = [
       ...this.state.args.slice(0, argIndex),
       value || undefined,
-      ...this.state.args.slice(argIndex + 1),
+      ...this.state.args.slice(argIndex + 1)
     ];
     this.setState({ args, changed: true });
   };
@@ -113,7 +121,8 @@ class Dispatcher extends Component {
       // remove trailing `undefined` arguments
       let i = args.length - 1;
       while (i >= 0 && typeof args[i] === 'undefined') {
-        args.pop(i); i--;
+        args.pop(i);
+        i--;
       }
       this.props.dispatch({
         name: this.props.options.actionCreators[selected].name,
@@ -167,12 +176,17 @@ class Dispatcher extends Component {
 
     let options = [{ value: 'default', label: 'Custom action' }];
     if (actionCreators && actionCreators.length > 0) {
-      options = options.concat(actionCreators.map(({ name, args }, i) => ({
-        value: i,
-        label: `${name}(${args.join(', ')})`
-      })));
+      options = options.concat(
+        actionCreators.map(({ name, args }, i) => ({
+          value: i,
+          label: `${name}(${args.join(', ')})`
+        }))
+      );
     } else {
-      options.push({ value: 'actions-help', label: 'Add your app built-in actions…' });
+      options.push({
+        value: 'actions-help',
+        label: 'Add your app built-in actions…'
+      });
     }
 
     return (
@@ -185,7 +199,9 @@ class Dispatcher extends Component {
             value={this.state.selected || 'default'}
             options={options}
           />
-          <Button onClick={this.dispatchAction} primary={this.state.changed}>Dispatch</Button>
+          <Button onClick={this.dispatchAction} primary={this.state.changed}>
+            Dispatch
+          </Button>
         </Toolbar>
       </DispatcherContainer>
     );
@@ -198,4 +214,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Dispatcher);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Dispatcher);

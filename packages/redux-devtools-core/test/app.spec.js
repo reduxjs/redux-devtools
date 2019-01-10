@@ -21,22 +21,25 @@ describe('App container', () => {
     );
   });
 
-/*
+  /*
   it('should render the App', () => {
     expect(mountToJson(wrapper)).toMatchSnapshot();
   });
 */
 
-  it('should render inspector monitor\'s wrapper', () => {
+  it("should render inspector monitor's wrapper", () => {
     expect(wrapper.find('DevtoolsInspector').html()).toBeDefined();
   });
 
   it('should contain an empty action list', () => {
     expect(
-      wrapper.find('ActionList').findWhere(n => {
-        const { className } = n.props();
-        return className && className.startsWith('actionListRows-');
-      }).html()
+      wrapper
+        .find('ActionList')
+        .findWhere(n => {
+          const { className } = n.props();
+          return className && className.startsWith('actionListRows-');
+        })
+        .html()
     ).toMatch(/<div class="actionListRows-\d-\d+"><\/div>/);
   });
 });

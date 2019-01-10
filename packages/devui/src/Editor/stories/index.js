@@ -30,11 +30,6 @@ storiesOf('Editor', module)
     ),
     { info: 'Based on [CodeMirror](http://codemirror.net/).' }
   )
-  .add(
-    'with tabs',
-    () => (
-      <WithTabs
-        lineNumbers={boolean('lineNumbers', true)}
-      />
-    )
-  );
+  .add('with tabs', () => (
+    <WithTabs lineNumbers={boolean('lineNumbers', true)} />
+  ));

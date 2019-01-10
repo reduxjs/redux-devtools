@@ -13,7 +13,8 @@ module.exports = function(argv) {
     allowClientPublish: false
   });
   var port = options.port;
-  var logLevel = options.logLevel === undefined ? LOG_LEVEL_INFO : options.logLevel;
+  var logLevel =
+    options.logLevel === undefined ? LOG_LEVEL_INFO : options.logLevel;
   return new Promise(function(resolve) {
     // Check port already used
     getPort(port, function(err, p) {
@@ -26,9 +27,16 @@ module.exports = function(argv) {
       }
       if (port !== p) {
         if (logLevel >= LOG_LEVEL_WARN) {
-          console.log('[ReduxDevTools] Server port ' + port + ' is already used.');
+          console.log(
+            '[ReduxDevTools] Server port ' + port + ' is already used.'
+          );
         }
-        resolve({ portAlreadyUsed: true, on: function(status, cb) { cb(); } });
+        resolve({
+          portAlreadyUsed: true,
+          on: function(status, cb) {
+            cb();
+          }
+        });
       } else {
         if (logLevel >= LOG_LEVEL_INFO) {
           console.log('[ReduxDevTools] Start server...');

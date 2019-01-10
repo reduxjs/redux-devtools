@@ -5,7 +5,11 @@ import isIterable from '../utils/isIterable';
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
 
 function isImmutable(value) {
-  return Iterable.isKeyed(value) || Iterable.isIndexed(value) || Iterable.isIterable(value);
+  return (
+    Iterable.isKeyed(value) ||
+    Iterable.isIndexed(value) ||
+    Iterable.isIterable(value)
+  );
 }
 
 function getShortTypeString(val, diff) {
@@ -26,9 +30,9 @@ function getShortTypeString(val, diff) {
   } else if (typeof val === 'function') {
     return 'fn';
   } else if (typeof val === 'string') {
-    return `"${val.substr(0, 10) + (val.length > 10 ? '…' : '')}"`
+    return `"${val.substr(0, 10) + (val.length > 10 ? '…' : '')}"`;
   } else if (typeof val === 'symbol') {
-    return 'symbol'
+    return 'symbol';
   } else {
     return val;
   }
@@ -52,7 +56,8 @@ function getText(type, data, isWideLayout, isDiff) {
     const str = data
       .slice(0, 4)
       .map(val => getShortTypeString(val, isDiff))
-      .concat(data.length > 4 ? ['…'] : []).join(', ');
+      .concat(data.length > 4 ? ['…'] : [])
+      .join(', ');
 
     return `[${str}]`;
   } else {
@@ -60,11 +65,19 @@ function getText(type, data, isWideLayout, isDiff) {
   }
 }
 
-const getItemString = (styling, type, data, dataTypeKey, isWideLayout, isDiff) =>
-  (<span {...styling('treeItemHint')}>
+const getItemString = (
+  styling,
+  type,
+  data,
+  dataTypeKey,
+  isWideLayout,
+  isDiff
+) => (
+  <span {...styling('treeItemHint')}>
     {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
     {dataTypeKey && data[dataTypeKey] ? data[dataTypeKey] + ' ' : ''}
     {getText(type, data, isWideLayout, isDiff)}
-  </span>);
+  </span>
+);
 
 export default getItemString;

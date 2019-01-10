@@ -13,7 +13,11 @@ const defaultSchema = {
       title: 'Connection settings (for getting reports and remote debugging)',
       type: 'string',
       enum: ['disabled', 'remotedev', 'custom'],
-      enumNames: ['no remote connection', 'connect via remotedev.io', 'use local (custom) server']
+      enumNames: [
+        'no remote connection',
+        'connect via remotedev.io',
+        'use local (custom) server'
+      ]
     },
     hostname: {
       type: 'string'
@@ -51,7 +55,9 @@ class Connection extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.options !== nextProps.options) {
-      this.setState({ formData: { ...nextProps.options, type: nextProps.type } });
+      this.setState({
+        formData: { ...nextProps.options, type: nextProps.type }
+      });
     }
   }
 
@@ -123,4 +129,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Connection);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Connection);

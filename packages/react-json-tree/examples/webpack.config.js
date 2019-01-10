@@ -23,29 +23,33 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    isProduction && new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      output: { comments: false },
-      sourceMap: true
-    })
+    isProduction &&
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false },
+        output: { comments: false },
+        sourceMap: true
+      })
   ].filter(Boolean),
   resolve: {
     alias: {
       'react-json-tree/lib': path.join(__dirname, '..', 'src'),
       'react-json-tree': path.join(__dirname, '..', 'src'),
-      'react': path.join(__dirname, 'node_modules', 'react')
+      react: path.join(__dirname, 'node_modules', 'react')
     },
     extensions: ['.js']
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel-loader'].filter(Boolean),
-      include: path.join(__dirname, 'src')
-    }, {
-      test: /\.js$/,
-      loaders: ['babel-loader'].filter(Boolean),
-      include: path.join(__dirname, '..', 'src')
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: ['babel-loader'].filter(Boolean),
+        include: path.join(__dirname, 'src')
+      },
+      {
+        test: /\.js$/,
+        loaders: ['babel-loader'].filter(Boolean),
+        include: path.join(__dirname, '..', 'src')
+      }
+    ]
   }
 };

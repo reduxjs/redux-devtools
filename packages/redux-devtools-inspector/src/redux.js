@@ -13,13 +13,15 @@ export function updateMonitorState(monitorState) {
 }
 
 function reduceUpdateState(state, action) {
-  return (action.type === UPDATE_MONITOR_STATE) ? {
-    ...state,
-    ...action.monitorState
-  } : state;
+  return action.type === UPDATE_MONITOR_STATE
+    ? {
+        ...state,
+        ...action.monitorState
+      }
+    : state;
 }
 
-export function reducer(props, state=DEFAULT_STATE, action) {
+export function reducer(props, state = DEFAULT_STATE, action) {
   return {
     ...reduceUpdateState(state, action)
   };

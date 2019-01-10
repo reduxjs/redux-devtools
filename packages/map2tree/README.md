@@ -5,15 +5,16 @@ The following opinions must be taken into account since the primary use case of 
 - Objects and arrays deeply nested within collections are not converted into a tree structure. See `someNestedObject` and `someNestedArray` in the [output](https://github.com/romseguy/map2tree#output) below, or the [corresponding test](https://github.com/romseguy/map2tree/blob/master/test/map2tree.js#L140).
 - Provides support for [Immutable.js](https://github.com/facebook/immutable-js) data structures (only List and Map though).
 
-
 # Usage
 
-
 ```javascript
-map2tree(someMap, options = {
-  key: 'state',      // the name you want for as the root node of the output tree
-  pushMethod: 'push' // use 'unshift' to change the order children nodes are added
-})
+map2tree(
+  someMap,
+  (options = {
+    key: 'state', // the name you want for as the root node of the output tree
+    pushMethod: 'push' // use 'unshift' to change the order children nodes are added
+  })
+);
 ```
 
 # Input
@@ -22,16 +23,16 @@ map2tree(someMap, options = {
 const someMap = {
   someReducer: {
     todos: [
-     {title: 'map', someNestedObject: {foo: 'bar'}},
-     {title: 'to', someNestedArray: ['foo', 'bar']},
-     {title: 'tree'},
-     {title: 'map2tree'}
+      { title: 'map', someNestedObject: { foo: 'bar' } },
+      { title: 'to', someNestedArray: ['foo', 'bar'] },
+      { title: 'tree' },
+      { title: 'map2tree' }
     ],
     completedCount: 1
   },
   otherReducer: {
     foo: 0,
-    bar:{key: 'value'}
+    bar: { key: 'value' }
   }
 };
 ```

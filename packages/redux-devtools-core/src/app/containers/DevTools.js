@@ -18,7 +18,10 @@ class DevTools extends Component {
     if (update) {
       let newMonitorState;
       const monitorState = props.monitorState;
-      if (skipUpdate || monitorState && monitorState.__overwritten__ === props.monitor) {
+      if (
+        skipUpdate ||
+        (monitorState && monitorState.__overwritten__ === props.monitor)
+      ) {
         newMonitorState = monitorState;
       } else {
         newMonitorState = update(this.monitorProps, undefined, {});

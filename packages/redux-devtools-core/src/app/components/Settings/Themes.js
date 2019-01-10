@@ -28,12 +28,12 @@ class Themes extends Component {
             properties: {
               theme: {
                 type: 'string',
-                enum: listThemes(),
+                enum: listThemes()
               },
               scheme: {
                 title: 'color scheme',
                 type: 'string',
-                enum: listSchemes(),
+                enum: listSchemes()
               },
               dark: {
                 type: 'boolean'
@@ -61,4 +61,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Themes);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Themes);

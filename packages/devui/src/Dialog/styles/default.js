@@ -36,10 +36,8 @@ export const style = ({ theme, open, fullWidth }) => css`
     border: 1px outset ${theme.base01};
     border-radius: 2px;
     background-color: ${theme.base00};
-    box-shadow:
-      0 9px 46px 8px rgba(0, 0, 0, 0.14),
-      0 11px 15px -7px rgba(0, 0, 0, 0.12),
-      0 24px 38px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14),
+      0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
 
     > div.mc-dialog--header {
       display: flex;
@@ -76,15 +74,23 @@ export const style = ({ theme, open, fullWidth }) => css`
 
       > form {
         padding: 0;
-        
-        > .form-group { margin-bottom: 0; }
 
-        > div > fieldset {
-          legend { display: none; }
-          #root__description { margin-top: 0; }
+        > .form-group {
+          margin-bottom: 0;
         }
 
-        .mc-dialog--hidden { display: none; }
+        > div > fieldset {
+          legend {
+            display: none;
+          }
+          #root__description {
+            margin-top: 0;
+          }
+        }
+
+        .mc-dialog--hidden {
+          display: none;
+        }
       }
     }
 
@@ -102,7 +108,7 @@ export const style = ({ theme, open, fullWidth }) => css`
       margin: 0 -16px -16px;
       padding: 2px 10px;
       border-top: 1px solid ${theme.base03};
-      
+
       > button {
         margin-left: 5px;
       }

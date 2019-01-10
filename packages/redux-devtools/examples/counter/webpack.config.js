@@ -14,29 +14,30 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   resolve: {
     alias: {
       'redux-devtools': path.join(__dirname, '..', '..', 'src'),
-      'react': path.join(__dirname, 'node_modules', 'react'),
+      react: path.join(__dirname, 'node_modules', 'react'),
       'react-redux': path.join(__dirname, 'node_modules', 'react-redux')
     }
   },
   resolveLoader: {
-    'modules': [path.join(__dirname, 'node_modules')]
+    modules: [path.join(__dirname, 'node_modules')]
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel-loader'],
-      exclude: /node_modules/,
-      include: path.join(__dirname, 'src')
-    }, {
-      test: /\.js$/,
-      loaders: ['babel-loader'],
-      include: path.join(__dirname, '..', '..', 'src')
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: ['babel-loader'],
+        exclude: /node_modules/,
+        include: path.join(__dirname, 'src')
+      },
+      {
+        test: /\.js$/,
+        loaders: ['babel-loader'],
+        include: path.join(__dirname, '..', '..', 'src')
+      }
+    ]
   }
 };

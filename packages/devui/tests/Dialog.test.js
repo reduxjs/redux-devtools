@@ -3,7 +3,7 @@ import { render, mount } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 import { Dialog } from '../src';
 
-describe('Dialog', function () {
+describe('Dialog', function() {
   it('renders correctly', () => {
     const wrapper = render(<Dialog />);
     expect(renderToJson(wrapper)).toMatchSnapshot();
@@ -11,11 +11,7 @@ describe('Dialog', function () {
 
   it('renders with props', () => {
     const wrapper = render(
-      <Dialog
-        title="Dialog Title"
-        open
-        fullWidth
-      >
+      <Dialog title="Dialog Title" open fullWidth>
         Hello Dialog!
       </Dialog>
     );
@@ -31,7 +27,10 @@ describe('Dialog', function () {
     const onDismiss = jest.fn();
     const wrapper = mount(<Dialog open onDismiss={onDismiss} />);
 
-    wrapper.find('button').first().simulate('click');
+    wrapper
+      .find('button')
+      .first()
+      .simulate('click');
     expect(onDismiss).toBeCalled();
   });
 
@@ -39,7 +38,10 @@ describe('Dialog', function () {
     const onSubmit = jest.fn();
     const wrapper = mount(<Dialog open onSubmit={onSubmit} />);
 
-    wrapper.find('button').last().simulate('click');
+    wrapper
+      .find('button')
+      .last()
+      .simulate('click');
     expect(onSubmit).toBeCalled();
   });
 });

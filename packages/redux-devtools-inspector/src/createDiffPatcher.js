@@ -1,9 +1,9 @@
 import { DiffPatcher } from 'jsondiffpatch/src/diffpatcher';
 
 const defaultObjectHash = (o, idx) =>
-  o === null && '$$null' ||
-  o && (o.id || o.id === 0) && `$$id:${JSON.stringify(o.id)}` ||
-  o && (o._id ||o._id === 0) && `$$_id:${JSON.stringify(o._id)}` ||
+  (o === null && '$$null') ||
+  (o && (o.id || o.id === 0) && `$$id:${JSON.stringify(o.id)}`) ||
+  (o && (o._id || o._id === 0) && `$$_id:${JSON.stringify(o._id)}`) ||
   '$$index:' + idx;
 
 const defaultPropertyFilter = (name, context) =>

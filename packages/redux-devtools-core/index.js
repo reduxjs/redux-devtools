@@ -2,10 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './src/app';
 
-render(
-  <App />,
-  document.getElementById('root')
-);
+render(<App />, document.getElementById('root'));
 
 if (module.hot) {
   // https://github.com/webpack/webpack/issues/418#issuecomment-53398056

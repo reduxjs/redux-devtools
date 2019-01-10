@@ -19,37 +19,79 @@ export const themedStyle = theme => css`
     background-color: ${theme.base00};
     color: ${theme.base04};
 
-    .cm-header { color: ${theme.base05}; }
-    .cm-quote { color: ${theme.base09}; }
+    .cm-header {
+      color: ${theme.base05};
+    }
+    .cm-quote {
+      color: ${theme.base09};
+    }
 
-    .cm-keyword { color: ${theme.base0F}; }
-    .cm-atom { color: ${theme.base0F}; }
-    .cm-number { color: ${theme.base0F}; }
-    .cm-def { color: ${theme.base0D}; }
+    .cm-keyword {
+      color: ${theme.base0F};
+    }
+    .cm-atom {
+      color: ${theme.base0F};
+    }
+    .cm-number {
+      color: ${theme.base0F};
+    }
+    .cm-def {
+      color: ${theme.base0D};
+    }
 
-    .cm-variable { color: ${theme.base05}; }
-    .cm-variable-2 { color: ${theme.base0A}; }
-    .cm-variable-3 { color: ${theme.base0E}; }
+    .cm-variable {
+      color: ${theme.base05};
+    }
+    .cm-variable-2 {
+      color: ${theme.base0A};
+    }
+    .cm-variable-3 {
+      color: ${theme.base0E};
+    }
 
-    .cm-property { color: ${theme.base0C}; }
-    .cm-operator { color: ${theme.base0E}; }
+    .cm-property {
+      color: ${theme.base0C};
+    }
+    .cm-operator {
+      color: ${theme.base0E};
+    }
 
     .cm-comment {
       color: ${theme.base05};
       font-style: italic;
     }
 
-    .cm-string { color: ${theme.base0B}; }
-    .cm-string-2 { color: ${theme.base0A}; }
+    .cm-string {
+      color: ${theme.base0B};
+    }
+    .cm-string-2 {
+      color: ${theme.base0A};
+    }
 
-    .cm-meta { color: ${theme.base0B}; }
-    .cm-qualifier { color: ${theme.base0A}; }
-    .cm-builtin { color: ${theme.base0F}; }
-    .cm-bracket { color: ${theme.base09}; }
-    .CodeMirror-matchingbracket { color: ${theme.base0B}; }
-    .CodeMirror-nonmatchingbracket { color: ${theme.base08}; }
-    .cm-tag { color: ${theme.base02}; }
-    .cm-attribute { color: ${theme.base0C}; }
+    .cm-meta {
+      color: ${theme.base0B};
+    }
+    .cm-qualifier {
+      color: ${theme.base0A};
+    }
+    .cm-builtin {
+      color: ${theme.base0F};
+    }
+    .cm-bracket {
+      color: ${theme.base09};
+    }
+    .CodeMirror-matchingbracket {
+      color: ${theme.base0B};
+    }
+    .CodeMirror-nonmatchingbracket {
+      color: ${theme.base08};
+    }
+    .cm-tag {
+      color: ${theme.base02};
+    }
+    .cm-attribute {
+      color: ${theme.base0C};
+    }
 
     .cm-hr {
       color: transparent;
@@ -62,7 +104,9 @@ export const themedStyle = theme => css`
       cursor: pointer;
     }
 
-    .cm-special { color: ${theme.base0E}; }
+    .cm-special {
+      color: ${theme.base0E};
+    }
 
     .cm-em {
       color: #999;
@@ -70,7 +114,9 @@ export const themedStyle = theme => css`
       text-decoration-style: dotted;
     }
 
-    .cm-strong { color: ${theme.base01}; }
+    .cm-strong {
+      color: ${theme.base01};
+    }
 
     .cm-error,
     .cm-invalidchar {
@@ -78,7 +124,9 @@ export const themedStyle = theme => css`
       border-bottom: 1px dotted ${theme.base08};
     }
 
-    div.CodeMirror-selected { background: ${theme.base01}; }
+    div.CodeMirror-selected {
+      background: ${theme.base01};
+    }
 
     .CodeMirror-line::selection,
     .CodeMirror-line > span::selection,
@@ -106,17 +154,27 @@ export const themedStyle = theme => css`
       padding: 0 5px;
     }
 
-    .CodeMirror-guttermarker-subtle { color: ${theme.base05}; }
-    .CodeMirror-guttermarker { color: ${theme.base09}; }
+    .CodeMirror-guttermarker-subtle {
+      color: ${theme.base05};
+    }
+    .CodeMirror-guttermarker {
+      color: ${theme.base09};
+    }
 
     .CodeMirror-gutter .CodeMirror-gutter-text {
       color: ${theme.base05};
     }
 
-    .CodeMirror-cursor { border-left: 1px solid #819090; }
+    .CodeMirror-cursor {
+      border-left: 1px solid #819090;
+    }
 
-    .cm-fat-cursor .CodeMirror-cursor { background: ${theme.base02}; }
-    .cm-animate-fat-cursor { background-color: ${theme.base02}; }
+    .cm-fat-cursor .CodeMirror-cursor {
+      background: ${theme.base02};
+    }
+    .cm-animate-fat-cursor {
+      background-color: ${theme.base02};
+    }
 
     .CodeMirror-activeline-background {
       background: ${theme.base07};

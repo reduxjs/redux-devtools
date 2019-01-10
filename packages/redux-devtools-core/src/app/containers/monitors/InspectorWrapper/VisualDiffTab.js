@@ -35,7 +35,8 @@ export const StyledContainer = styled.div`
     margin: 0;
   }
 
-  .jsondiffpatch-left-value, .jsondiffpatch-right-value {
+  .jsondiffpatch-left-value,
+  .jsondiffpatch-right-value {
     vertical-align: top;
   }
 
@@ -72,27 +73,39 @@ export const StyledContainer = styled.div`
   }
 
   .jsondiffpatch-unchanged-showing .jsondiffpatch-unchanged,
-  .jsondiffpatch-unchanged-showing .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-showing
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     max-height: 100px;
   }
 
   .jsondiffpatch-unchanged-hidden .jsondiffpatch-unchanged,
-  .jsondiffpatch-unchanged-hidden .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-hidden
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     max-height: 0;
   }
 
-  .jsondiffpatch-unchanged-hiding .jsondiffpatch-movedestination > .jsondiffpatch-value,
-  .jsondiffpatch-unchanged-hidden .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-hiding
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value,
+  .jsondiffpatch-unchanged-hidden
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     display: block;
   }
 
   .jsondiffpatch-unchanged-visible .jsondiffpatch-unchanged,
-  .jsondiffpatch-unchanged-visible .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-visible
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     max-height: 100px;
   }
 
   .jsondiffpatch-unchanged-hiding .jsondiffpatch-unchanged,
-  .jsondiffpatch-unchanged-hiding .jsondiffpatch-movedestination > .jsondiffpatch-value {
+  .jsondiffpatch-unchanged-hiding
+    .jsondiffpatch-movedestination
+    > .jsondiffpatch-value {
     max-height: 0;
   }
 
@@ -175,7 +188,7 @@ export const StyledContainer = styled.div`
   .jsondiffpatch-moved .jsondiffpatch-moved-destination {
     display: inline-block;
     background: ${props => props.theme.base0A};
- }
+  }
 
   .jsondiffpatch-moved .jsondiffpatch-moved-destination:before {
     content: ' => ';

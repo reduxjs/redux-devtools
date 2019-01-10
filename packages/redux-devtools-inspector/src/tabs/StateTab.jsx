@@ -4,15 +4,24 @@ import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
 
 const StateTab = ({
-  nextState, styling, base16Theme, invertTheme, labelRenderer, dataTypeKey, isWideLayout
-}) =>
-  (<JSONTree
+  nextState,
+  styling,
+  base16Theme,
+  invertTheme,
+  labelRenderer,
+  dataTypeKey,
+  isWideLayout
+}) => (
+  <JSONTree
     labelRenderer={labelRenderer}
     theme={getJsonTreeTheme(base16Theme)}
     data={nextState}
-    getItemString={(type, data) => getItemString(styling, type, data, dataTypeKey, isWideLayout)}
+    getItemString={(type, data) =>
+      getItemString(styling, type, data, dataTypeKey, isWideLayout)
+    }
     invertTheme={invertTheme}
     hideRoot
-  />);
+  />
+);
 
 export default StateTab;

@@ -22,8 +22,7 @@ const styles = {
     margin: '0 auto',
     paddingTop: '1px'
   },
-  header: {
-  },
+  header: {},
   content: {
     display: 'flex',
     alignItems: 'center',
@@ -58,23 +57,31 @@ const styles = {
 };
 
 const themeOptions = [
-  ...Object.keys(inspectorThemes)
-    .map(value => ({ value, label: inspectorThemes[value].scheme })),
+  ...Object.keys(inspectorThemes).map(value => ({
+    value,
+    label: inspectorThemes[value].scheme
+  })),
   null,
   ...Object.keys(base16)
     .map(value => ({ value, label: base16[value].scheme }))
     .filter(opt => opt.label)
 ];
 
-const ROOT = process.env.NODE_ENV === 'production' ? '/redux-devtools-inspector/' : '/';
+const ROOT =
+  process.env.NODE_ENV === 'production' ? '/redux-devtools-inspector/' : '/';
 
 function buildUrl(options) {
-  return `${ROOT}?` + [
-    options.useExtension ? 'ext' : '',
-    options.supportImmutable ? 'immutable' : '',
-    options.theme ? 'theme=' + options.theme : '',
-    options.dark ? 'dark' : ''
-  ].filter(s => s).join('&');
+  return (
+    `${ROOT}?` +
+    [
+      options.useExtension ? 'ext' : '',
+      options.supportImmutable ? 'immutable' : '',
+      options.theme ? 'theme=' + options.theme : '',
+      options.dark ? 'dark' : ''
+    ]
+      .filter(s => s)
+      .join('&')
+  );
 }
 
 class DemoApp extends React.Component {
@@ -86,7 +93,11 @@ class DemoApp extends React.Component {
         <PageHeader style={styles.header}>
           {pkg.name || <span style={styles.muted}>Package Name</span>}
         </PageHeader>
-        <h5>{pkg.description || <span style={styles.muted}>Package Description</span>}</h5>
+        <h5>
+          {pkg.description || (
+            <span style={styles.muted}>Package Description</span>
+          )}
+        </h5>
         <div style={styles.links}>
           <div style={styles.input}>
             <Form horizontal>
@@ -96,15 +107,16 @@ class DemoApp extends React.Component {
                 </Col>
                 <Col sm={9}>
                   <InputGroup>
-                    <Combobox options={themeOptions}
-                              value={options.theme}
-                              onSelect={value => this.setTheme(options, value)}
-                              optionFilters={[]}>
+                    <Combobox
+                      options={themeOptions}
+                      value={options.theme}
+                      onSelect={value => this.setTheme(options, value)}
+                      optionFilters={[]}
+                    >
                       {props => <FormControl {...props} type="text" />}
                     </Combobox>
                     <InputGroup.Addon>
-                      <a onClick={this.toggleTheme}
-                         style={styles.link}>
+                      <a onClick={this.toggleTheme} style={styles.link}>
                         {options.dark ? 'Light theme' : 'Dark theme'}
                       </a>
                     </InputGroup.Addon>
@@ -149,7 +161,10 @@ class DemoApp extends React.Component {
             <Button onClick={this.props.addImmutableMap} style={styles.button}>
               Add Immutable Map
             </Button>
-            <Button onClick={this.props.changeImmutableNested} style={styles.button}>
+            <Button
+              onClick={this.props.changeImmutableNested}
+              style={styles.button}
+            >
               Change Immutable Nested
             </Button>
             <Button onClick={this.props.hugePayload} style={styles.button}>
@@ -170,13 +185,13 @@ class DemoApp extends React.Component {
           </div>
         </div>
         <div style={styles.links}>
-          <a onClick={this.toggleExtension}
-             style={styles.link}>
-            {(options.useExtension ? 'Disable' : 'Enable') + ' Chrome Extension'}
+          <a onClick={this.toggleExtension} style={styles.link}>
+            {(options.useExtension ? 'Disable' : 'Enable') +
+              ' Chrome Extension'}
           </a>
-          <a onClick={this.toggleImmutableSupport}
-             style={styles.link}>
-            {(options.supportImmutable ? 'Disable' : 'Enable') + ' Full Immutable Support'}
+          <a onClick={this.toggleImmutableSupport} style={styles.link}>
+            {(options.supportImmutable ? 'Disable' : 'Enable') +
+              ' Full Immutable Support'}
           </a>
         </div>
       </div>
@@ -186,13 +201,17 @@ class DemoApp extends React.Component {
   toggleExtension = () => {
     const options = getOptions();
 
-    this.props.pushRoute(buildUrl({ ...options, useExtension: !options.useExtension }));
+    this.props.pushRoute(
+      buildUrl({ ...options, useExtension: !options.useExtension })
+    );
   };
 
   toggleImmutableSupport = () => {
     const options = getOptions();
 
-    this.props.pushRoute(buildUrl({ ...options, supportImmutable: !options.supportImmutable }));
+    this.props.pushRoute(
+      buildUrl({ ...options, supportImmutable: !options.supportImmutable })
+    );
   };
 
   toggleTheme = () => {
@@ -214,14 +233,15 @@ class DemoApp extends React.Component {
     } else {
       clearTimeout(this.timeout);
     }
-  }
+  };
 }
 
 export default connect(
   state => state,
   {
     toggleTimeoutUpdate: timeoutUpdateEnabled => ({
-      type: 'TOGGLE_TIMEOUT_UPDATE', timeoutUpdateEnabled
+      type: 'TOGGLE_TIMEOUT_UPDATE',
+      timeoutUpdateEnabled
     }),
     timeoutUpdate: () => ({ type: 'TIMEOUT_UPDATE' }),
     increment: () => ({ type: 'INCREMENT' }),

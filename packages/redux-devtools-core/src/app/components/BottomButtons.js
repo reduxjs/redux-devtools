@@ -17,39 +17,32 @@ export default class BottomButtons extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.dispatcherIsOpen !== this.props.dispatcherIsOpen
-      || nextProps.sliderIsOpen !== this.props.sliderIsOpen
-      || nextProps.options !== this.props.options;
+    return (
+      nextProps.dispatcherIsOpen !== this.props.dispatcherIsOpen ||
+      nextProps.sliderIsOpen !== this.props.sliderIsOpen ||
+      nextProps.options !== this.props.options
+    );
   }
 
   render() {
     const features = this.props.options.features;
     return (
       <Toolbar borderPosition="top">
-        {features.export &&
-        <Button
-          title="Save a report"
-          tooltipPosition="top-right"
-        >
-          <SaveIcon />
-        </Button>
-        }
-        {features.export &&
-        <ExportButton />
-        }
-        {features.import &&
-        <ImportButton />
-        }
+        {features.export && (
+          <Button title="Save a report" tooltipPosition="top-right">
+            <SaveIcon />
+          </Button>
+        )}
+        {features.export && <ExportButton />}
+        {features.import && <ImportButton />}
         <PrintButton />
         <Divider />
         <MonitorSelector />
         <Divider />
-        {features.jump &&
-        <SliderButton isOpen={this.props.sliderIsOpen} />
-        }
-        {features.dispatch &&
-        <DispatcherButton dispatcherIsOpen={this.props.dispatcherIsOpen} />
-        }
+        {features.jump && <SliderButton isOpen={this.props.sliderIsOpen} />}
+        {features.dispatch && (
+          <DispatcherButton dispatcherIsOpen={this.props.dispatcherIsOpen} />
+        )}
       </Toolbar>
     );
   }

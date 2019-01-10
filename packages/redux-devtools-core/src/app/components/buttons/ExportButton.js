@@ -17,10 +17,7 @@ class ExportButton extends Component {
 
   render() {
     return (
-      <Button
-        title="Export to a file"
-        onClick={this.props.exportState}
-      >
+      <Button title="Export to a file" onClick={this.props.exportState}>
         <DownloadIcon />
       </Button>
     );
@@ -33,4 +30,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(ExportButton);
+export default connect(
+  null,
+  mapDispatchToProps
+)(ExportButton);

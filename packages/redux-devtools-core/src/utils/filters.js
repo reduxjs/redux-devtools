@@ -12,16 +12,18 @@ export function arrToRegex(v) {
 
 function filterActions(actionsById, actionsFilter) {
   if (!actionsFilter) return actionsById;
-  return mapValues(actionsById, (action, id) => (
-  { ...action, action: actionsFilter(action.action, id) }
-  ));
+  return mapValues(actionsById, (action, id) => ({
+    ...action,
+    action: actionsFilter(action.action, id)
+  }));
 }
 
 function filterStates(computedStates, statesFilter) {
   if (!statesFilter) return computedStates;
-  return computedStates.map((state, idx) => (
-  { ...state, state: statesFilter(state.state, idx) }
-  ));
+  return computedStates.map((state, idx) => ({
+    ...state,
+    state: statesFilter(state.state, idx)
+  }));
 }
 
 export function getLocalFilter(config) {
@@ -42,9 +44,11 @@ export function isFiltered(action, localFilter) {
   const { type } = action.action || action;
   const opts = getDevToolsOptions();
   if (
-    (!localFilter && (opts.filter && opts.filter === FilterState.DO_NOT_FILTER)) ||
+    (!localFilter &&
+      (opts.filter && opts.filter === FilterState.DO_NOT_FILTER)) ||
     (type && typeof type.match !== 'function')
-  ) return false;
+  )
+    return false;
 
   const { whitelist, blacklist } = localFilter || opts;
   return (
@@ -66,20 +70,32 @@ export function filterStagedActions(state, filters) {
     }
   });
 
-  return { ...state,
+  return {
+    ...state,
     stagedActionIds: filteredStagedActionIds,
     computedStates: filteredComputedStates
   };
 }
 
 export function filterState(
-  state, type, localFilter, stateSanitizer, actionSanitizer, nextActionId, predicate
+  state,
+  type,
+  localFilter,
+  stateSanitizer,
+  actionSanitizer,
+  nextActionId,
+  predicate
 ) {
-  if (type === 'ACTION') return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
+  if (type === 'ACTION')
+    return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
   else if (type !== 'STATE') return state;
 
   const { filter } = getDevToolsOptions();
-  if (predicate || localFilter || (filter && filter !== FilterState.DO_NOT_FILTER)) {
+  if (
+    predicate ||
+    localFilter ||
+    (filter && filter !== FilterState.DO_NOT_FILTER)
+  ) {
     const filteredStagedActionIds = [];
     const filteredComputedStates = [];
     const sanitizedActionsById = actionSanitizer && {};
@@ -98,11 +114,14 @@ export function filterState(
 
       filteredStagedActionIds.push(id);
       filteredComputedStates.push(
-        stateSanitizer ? { ...liftedState, state: stateSanitizer(currState, idx) } : liftedState
+        stateSanitizer
+          ? { ...liftedState, state: stateSanitizer(currState, idx) }
+          : liftedState
       );
       if (actionSanitizer) {
         sanitizedActionsById[id] = {
-          ...liftedAction, action: actionSanitizer(currAction, id)
+          ...liftedAction,
+          action: actionSanitizer(currAction, id)
         };
       }
     });

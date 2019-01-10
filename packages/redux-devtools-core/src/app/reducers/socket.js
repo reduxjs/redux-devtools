@@ -62,8 +62,8 @@ export default function socket(state = initialState, action) {
     case actions.UNSUBSCRIBE:
       return {
         ...state,
-        channels: state.channels.filter(channel =>
-          channel !== action.channelName
+        channels: state.channels.filter(
+          channel => channel !== action.channelName
         )
       };
     case actions.DISCONNECTED:

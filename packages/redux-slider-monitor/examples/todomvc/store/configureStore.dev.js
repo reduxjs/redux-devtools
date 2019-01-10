@@ -5,11 +5,7 @@ import DevTools from '../containers/DevTools';
 
 const finalCreateStore = compose(
   DevTools.instrument(),
-  persistState(
-    window.location.href.match(
-      /[?&]debug_session=([^&]+)\b/
-    )
-  )
+  persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore);
 
 export default function configureStore(initialState) {

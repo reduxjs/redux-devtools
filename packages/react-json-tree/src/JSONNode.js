@@ -86,7 +86,10 @@ const JSONNode = ({
       return <JSONValueNode {...simpleNodeProps} />;
     default:
       return (
-        <JSONValueNode {...simpleNodeProps} valueGetter={() => `<${nodeType}>`} />
+        <JSONValueNode
+          {...simpleNodeProps}
+          valueGetter={() => `<${nodeType}>`}
+        />
       );
   }
 };

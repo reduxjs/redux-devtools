@@ -1,4 +1,4 @@
-export default (colors) => ({
+export default colors => ({
   ...colors,
   fontFamily: "'Source Sans Pro', sans-serif",
   codeFontFamily: "'Source Code Pro', monospace",

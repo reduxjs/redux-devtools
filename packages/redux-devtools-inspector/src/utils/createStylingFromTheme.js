@@ -10,7 +10,6 @@ import * as inspectorThemes from '../themes';
 jss.use(jssVendorPrefixer());
 jss.use(jssNested());
 
-
 const colorMap = theme => ({
   TEXT_COLOR: theme.base06,
   TEXT_PLACEHOLDER_COLOR: rgba(theme.base06, 60),
@@ -34,7 +33,7 @@ const colorMap = theme => ({
   DIFF_ARROW_COLOR: theme.base0E,
   LINK_COLOR: rgba(theme.base0E, 90),
   LINK_HOVER_COLOR: theme.base0E,
-  ERROR_COLOR: theme.base08,
+  ERROR_COLOR: theme.base08
 });
 
 const getSheetFromColorMap = map => ({
@@ -213,7 +212,7 @@ const getSheetFromColorMap = map => ({
       color: 'inherit'
     },
 
-    'background-color': map.BACKGROUND_COLOR,
+    'background-color': map.BACKGROUND_COLOR
   },
 
   actionPreviewContent: {
@@ -378,7 +377,7 @@ const getSheetFromColorMap = map => ({
 
   rightSliderShown: {
     position: 'static',
-    transform: 'translateX(0)',
+    transform: 'translateX(0)'
   },
 
   rightSliderRotateShown: {
@@ -394,9 +393,9 @@ const getDefaultThemeStyling = theme => {
     themeSheet.detach();
   }
 
-  themeSheet = jss.createStyleSheet(
-    getSheetFromColorMap(colorMap(theme))
-  ).attach();
+  themeSheet = jss
+    .createStyleSheet(getSheetFromColorMap(colorMap(theme)))
+    .attach();
 
   return themeSheet.classes;
 };

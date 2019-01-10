@@ -23,7 +23,8 @@ export default class ActionList extends Component {
       this.scrollDown = true;
     } else if (this.props.lastActionId !== nextProps.lastActionId) {
       const { scrollTop, offsetHeight, scrollHeight } = node;
-      this.scrollDown = Math.abs(scrollHeight - (scrollTop + offsetHeight)) < 50;
+      this.scrollDown =
+        Math.abs(scrollHeight - (scrollTop + offsetHeight)) < 50;
     } else {
       this.scrollDown = false;
     }
@@ -39,20 +40,18 @@ export default class ActionList extends Component {
       copy: false,
       copySortSource: false,
       mirrorContainer: container,
-      accepts: (el, target, source, sibling) => (
-        !sibling || parseInt(sibling.getAttribute('data-id'))
-      ),
-      moves: (el, source, handle) => (
+      accepts: (el, target, source, sibling) =>
+        !sibling || parseInt(sibling.getAttribute('data-id')),
+      moves: (el, source, handle) =>
         parseInt(el.getAttribute('data-id')) &&
         handle.className.indexOf('selectorButton') !== 0
-      ),
     }).on('drop', (el, target, source, sibling) => {
       let beforeActionId = this.props.actionIds.length;
       if (sibling && sibling.className.indexOf('gu-mirror') === -1) {
         beforeActionId = parseInt(sibling.getAttribute('data-id'));
       }
       const actionId = parseInt(el.getAttribute('data-id'));
-      this.props.onReorderAction(actionId, beforeActionId)
+      this.props.onReorderAction(actionId, beforeActionId);
     });
   }
 
@@ -72,50 +71,80 @@ export default class ActionList extends Component {
 
   getRef = node => {
     this.node = node;
-  }
+  };
 
   render() {
-    const { styling, actions, actionIds, isWideLayout, onToggleAction, skippedActionIds,
-      selectedActionId, startActionId, onSelect, onSearch, searchValue, currentActionId,
-      hideMainButtons, hideActionButtons, onCommit, onSweep, onJumpToState } = this.props;
+    const {
+      styling,
+      actions,
+      actionIds,
+      isWideLayout,
+      onToggleAction,
+      skippedActionIds,
+      selectedActionId,
+      startActionId,
+      onSelect,
+      onSearch,
+      searchValue,
+      currentActionId,
+      hideMainButtons,
+      hideActionButtons,
+      onCommit,
+      onSweep,
+      onJumpToState
+    } = this.props;
     const lowerSearchValue = searchValue && searchValue.toLowerCase();
-    const filteredActionIds = searchValue ? actionIds.filter(
-      id => actions[id].action.type.toLowerCase().indexOf(lowerSearchValue) !== -1
-    ) : actionIds;
+    const filteredActionIds = searchValue
+      ? actionIds.filter(
+          id =>
+            actions[id].action.type.toLowerCase().indexOf(lowerSearchValue) !==
+            -1
+        )
+      : actionIds;
 
     return (
-      <div key="actionList"
-        {...styling(['actionList', isWideLayout && 'actionListWide'], isWideLayout)}>
-        <ActionListHeader styling={styling}
+      <div
+        key="actionList"
+        {...styling(
+          ['actionList', isWideLayout && 'actionListWide'],
+          isWideLayout
+        )}
+      >
+        <ActionListHeader
+          styling={styling}
           onSearch={onSearch}
           onCommit={onCommit}
           onSweep={onSweep}
           hideMainButtons={hideMainButtons}
           hasSkippedActions={skippedActionIds.length > 0}
-          hasStagedActions={actionIds.length > 1} />
+          hasStagedActions={actionIds.length > 1}
+        />
         <div {...styling('actionListRows')} ref={this.getRef}>
-          {filteredActionIds.map(actionId =>
-            (<ActionListRow key={actionId}
+          {filteredActionIds.map(actionId => (
+            <ActionListRow
+              key={actionId}
               styling={styling}
               actionId={actionId}
               isInitAction={!actionId}
               isSelected={
-                startActionId !== null &&
-                            actionId >= startActionId && actionId <= selectedActionId ||
-                            actionId === selectedActionId
+                (startActionId !== null &&
+                  actionId >= startActionId &&
+                  actionId <= selectedActionId) ||
+                actionId === selectedActionId
               }
               isInFuture={
                 actionIds.indexOf(actionId) > actionIds.indexOf(currentActionId)
               }
-              onSelect={(e) => onSelect(e, actionId)}
+              onSelect={e => onSelect(e, actionId)}
               timestamps={getTimestamps(actions, actionIds, actionId)}
               action={actions[actionId].action}
               onToggleClick={() => onToggleAction(actionId)}
               onJumpClick={() => onJumpToState(actionId)}
               onCommitClick={() => onCommit(actionId)}
               hideActionButtons={hideActionButtons}
-              isSkipped={skippedActionIds.indexOf(actionId) !== -1} />)
-          )}
+              isSkipped={skippedActionIds.indexOf(actionId) !== -1}
+            />
+          ))}
         </div>
       </div>
     );

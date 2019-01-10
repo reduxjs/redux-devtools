@@ -24,7 +24,11 @@ class LockButton extends Component {
         tooltipPosition="bottom"
         disabled={this.props.disabled}
         mark={this.props.persisted && 'base0D'}
-        title={this.props.persisted ? 'Persist state history' : 'Disable state persisting'}
+        title={
+          this.props.persisted
+            ? 'Persist state history'
+            : 'Disable state persisting'
+        }
         onClick={this.props.onClick}
       >
         <PersistIcon />
@@ -45,4 +49,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LockButton);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LockButton);

@@ -22,7 +22,10 @@ export default class PrintButton extends Component {
 
     const g = d3svg.firstChild;
     const initTransform = g.getAttribute('transform');
-    g.setAttribute('transform', initTransform.replace(/.+scale\(/, 'translate(57, 10) scale('));
+    g.setAttribute(
+      'transform',
+      initTransform.replace(/.+scale\(/, 'translate(57, 10) scale(')
+    );
 
     window.print();
 
@@ -33,7 +36,9 @@ export default class PrintButton extends Component {
 
   render() {
     return (
-      <Button title="Print" onClick={this.handlePrint}><PrintIcon /></Button>
+      <Button title="Print" onClick={this.handlePrint}>
+        <PrintIcon />
+      </Button>
     );
   }
 }

@@ -16,29 +16,25 @@ const Container = styled.div`
 
 storiesOf('Tabs', module)
   .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <Container><Tabs
+  .add('default', () => (
+    <Container>
+      <Tabs
         tabs={simple10Tabs}
         selected={text('selected', '2')}
         main={boolean('main', true)}
         onClick={action('tab selected')}
         collapsible={boolean('collapsible', true)}
         position={select('position', ['left', 'right', 'center'], 'left')}
-      /></Container>
-    )
-  )
-  .add(
-    'with content',
-    () => (
-      <Tabs
-        tabs={tabs}
-        selected={text('selected', 'Tab2')}
-        main={boolean('main', false)}
-        onClick={action('tab selected')}
-        collapsible={boolean('collapsible', false)}
-        position={select('position', ['left', 'right', 'center'], 'left')}
       />
-    )
-  );
+    </Container>
+  ))
+  .add('with content', () => (
+    <Tabs
+      tabs={tabs}
+      selected={text('selected', 'Tab2')}
+      main={boolean('main', false)}
+      onClick={action('tab selected')}
+      collapsible={boolean('collapsible', false)}
+      position={select('position', ['left', 'right', 'center'], 'left')}
+    />
+  ));

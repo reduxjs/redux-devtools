@@ -11,7 +11,7 @@
     "test": "jest",
     "prepare": "npm run build && npm run build:umd",
     "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min"
-},
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
