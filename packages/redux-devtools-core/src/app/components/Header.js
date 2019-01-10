@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Toolbar, Button, Divider, Spacer } from 'devui';
+import { Tabs, Toolbar, Button, Divider } from 'devui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import DocsIcon from 'react-icons/lib/go/book';

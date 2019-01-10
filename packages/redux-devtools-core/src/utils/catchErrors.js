@@ -14,6 +14,7 @@ export default function catchErrors(sendError) {
     });
   }
 
+  /* eslint-disable no-console */
   if (
     typeof console === 'object' && typeof console.error === 'function' && !console.beforeRemotedev
   ) {
@@ -32,4 +33,5 @@ export default function catchErrors(sendError) {
       console.beforeRemotedev.apply(null, arguments);
     };
   }
+  /* eslint-enable no-console */
 }

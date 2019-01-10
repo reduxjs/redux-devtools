@@ -139,7 +139,7 @@ function computeWithTryCatch(reducer, action, state) {
       // In Chrome, rethrowing provides better source map support
       setTimeout(() => { throw err; });
     } else {
-      console.error(err);
+      console.error(err); // eslint-disable-line no-console
     }
   }
 

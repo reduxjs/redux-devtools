@@ -33,9 +33,9 @@ const CustomComponent = () =>
 const getDevTools = options =>
   createDevTools(
     <DockMonitor defaultIsVisible
-                 toggleVisibilityKey='ctrl-h'
-                 changePositionKey='ctrl-q'
-                 changeMonitorKey='ctrl-m'>
+                 toggleVisibilityKey="ctrl-h"
+                 changePositionKey="ctrl-q"
+                 changeMonitorKey="ctrl-m">
       <DevtoolsInspector theme={options.theme}
                          shouldPersistState
                          invertTheme={!options.dark}

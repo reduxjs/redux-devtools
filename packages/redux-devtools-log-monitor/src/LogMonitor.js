@@ -166,6 +166,7 @@ export default class LogMonitor extends Component {
       return themes[theme];
     }
 
+    // eslint-disable-next-line no-console
     console.warn('DevTools theme ' + theme + ' not found, defaulting to nicinabox');
     return themes.nicinabox;
   }

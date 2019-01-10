@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import {getStackFrames} from './react-error-overlay/utils/getStackFrames';
 import StackTrace from './react-error-overlay/containers/StackTrace';
@@ -104,7 +104,7 @@ export default class StackTraceTab extends Component {
           <div style={rootStyle}>
               <StackTrace
                   stackFrames={stackFrames}
-                  errorName={"N/A"}
+                  errorName="N/A"
                   contextSize={3}
                   editorHandler={this.onStackLocationClicked}
               />

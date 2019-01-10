@@ -167,7 +167,7 @@ class Dispatcher extends Component {
 
     let options = [{ value: 'default', label: 'Custom action' }];
     if (actionCreators && actionCreators.length > 0) {
-      options = options.concat(actionCreators.map(({ name, func, args }, i) => ({
+      options = options.concat(actionCreators.map(({ name, args }, i) => ({
         value: i,
         label: `${name}(${args.join(', ')})`
       })));

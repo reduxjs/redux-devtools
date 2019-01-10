@@ -47,7 +47,7 @@ function routes(options, store, scServer) {
         store.get(req.body.id).then(function (r) {
           res.send(r || {});
         }).catch(function (error) {
-          console.error(error);
+          console.error(error); // eslint-disable-line no-console
           res.sendStatus(500)
         });
         break;
@@ -55,7 +55,7 @@ function routes(options, store, scServer) {
         store.list(req.body.query, req.body.fields).then(function (r) {
           res.send(r);
         }).catch(function (error) {
-          console.error(error);
+          console.error(error); // eslint-disable-line no-console
           res.sendStatus(500)
         });
         break;
@@ -66,7 +66,7 @@ function routes(options, store, scServer) {
             type: 'add', data: r
           });
         }).catch(function (error) {
-          console.error(error);
+          console.error(error); // eslint-disable-line no-console
           res.status(500).send({})
         });
     }

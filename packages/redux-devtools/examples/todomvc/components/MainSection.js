@@ -46,9 +46,9 @@ export default class MainSection extends Component {
     );
 
     return (
-      <section className='main'>
+      <section className="main">
         {this.renderToggleAll(markedCount)}
-        <ul className='todo-list'>
+        <ul className="todo-list">
           {filteredTodos.map(todo =>
             <TodoItem key={todo.id} todo={todo} {...actions} />
           )}
@@ -65,8 +65,8 @@ export default class MainSection extends Component {
       return (
         <div>
           <input id={this.htmlFormInputId}
-                 className='toggle-all'
-                 type='checkbox'
+                 className="toggle-all"
+                 type="checkbox"
                  checked={markedCount === todos.length}
                  onChange={actions.markAll} />
           <label htmlFor={this.htmlFormInputId}>Mark all as complete</label>

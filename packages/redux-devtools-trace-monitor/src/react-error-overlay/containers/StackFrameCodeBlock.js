@@ -10,12 +10,13 @@ import React from 'react';
 import CodeBlock from '../components/CodeBlock';
 import { applyStyles } from '../utils/dom/css';
 import { absolutifyCaret } from '../utils/dom/absolutifyCaret';
-import type { ScriptLine } from '../utils/stack-frame';
+// import type { ScriptLine } from '../utils/stack-frame';
 import generateAnsiHTML from '../utils/generateAnsiHTML';
 
 import { codeFrameColumns } from '@babel/code-frame';
 import { nicinabox as theme } from 'redux-devtools-themes';
 
+/*
 type StackFrameCodeBlockPropsType = {|
   lines: ScriptLine[],
   lineNum: number,
@@ -27,8 +28,9 @@ type StackFrameCodeBlockPropsType = {|
 // Exact type workaround for spread operator.
 // See: https://github.com/facebook/flow/issues/2405
 type Exact<T> = $Shape<T>;
+*/
 
-function StackFrameCodeBlock(props: Exact<StackFrameCodeBlockPropsType>) {
+function StackFrameCodeBlock(props /* : Exact<StackFrameCodeBlockPropsType> */) {
   const { lines, lineNum, columnNum, contextSize, main } = props;
   const sourceCode = [];
   let whiteSpace = Infinity;

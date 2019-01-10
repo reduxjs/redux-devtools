@@ -1,4 +1,4 @@
-var SCWorker = require("socketcluster/scworker");
+var SCWorker = require('socketcluster/scworker');
 var express = require('express');
 var app = express();
 var routes = require('./routes');
@@ -32,7 +32,7 @@ class Worker extends SCWorker {
         store.list().then(function (data) {
           req.socket.emit(req.channel, {type: 'list', data: data});
         }).catch(function (error) {
-          console.error(error);
+          console.error(error); // eslint-disable-line no-console
         });
       }
     });
@@ -56,7 +56,7 @@ class Worker extends SCWorker {
         store.get(id).then(function (data) {
           respond(null, data);
         }).catch(function (error) {
-          console.error(error);
+          console.error(error); // eslint-disable-line no-console
         });
       });
       socket.on('disconnect', function () {

@@ -14,7 +14,7 @@ const ActionListHeader =
       <input
         {...styling('actionListHeaderSearch')}
         onChange={e => onSearch(e.target.value)}
-        placeholder='filter...'
+        placeholder="filter..."
       />
       {!hideMainButtons &&
     <div {...styling('actionListHeaderWrapper')}>

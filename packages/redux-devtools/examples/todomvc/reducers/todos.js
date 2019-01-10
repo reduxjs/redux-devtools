@@ -34,12 +34,13 @@ export default function todos(state = initialState, action) {
         todo
     );
 
-  case MARK_ALL:
+  case MARK_ALL: {
     const areAllMarked = state.every(todo => todo.marked);
     return state.map(todo => ({
       ...todo,
       marked: !areAllMarked
     }));
+  }
 
   case CLEAR_MARKED:
     return state.filter(todo => todo.marked === false);

@@ -8,13 +8,10 @@
     "build": "babel src --out-dir lib",
     "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.js",
     "build:umd:min": "webpack --env.minimize --progress --config webpack.config.umd.js",
-    "lint": "eslint --max-warnings=0 src test examples/src",
     "test": "jest",
     "prepare": "npm run build",
-    "prepublishOnly":
-      "npm run lint && npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
-    "start": "cd examples && npm start",
-    "precommit": "lint-staged"
+    "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
+    "start": "cd examples && npm start"
   },
   "files": [
     "lib",
@@ -41,7 +38,6 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
@@ -50,20 +46,8 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.5.0",
-    "eslint": "^4.10",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-babel": "^4.1.2",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-react": "7.4.0",
-    "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
     "jest": "^23.6.0",
-    "lint-staged": "^4.3.0",
-    "prettier": "^1.7.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
@@ -80,8 +64,5 @@
     "babel-runtime": "^6.6.1",
     "prop-types": "^15.5.8",
     "react-base16-styling": "^0.5.1"
-  },
-  "lint-staged": {
-    "*.{js,json,css}": ["prettier --single-quote --write", "git add"]
   }
 }

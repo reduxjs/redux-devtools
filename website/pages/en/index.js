@@ -15,11 +15,15 @@ const GridBlock = CompLibrary.GridBlock;
 
 class HomeSplash extends React.Component {
   render() {
+    /*
     const {siteConfig, language = ''} = this.props;
     const {baseUrl, docsUrl} = siteConfig;
     const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
     const langPart = `${language ? `${language}/` : ''}`;
     const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
+    */
+   const {siteConfig} = this.props;
+   const {baseUrl} = siteConfig;
 
     const SplashContainer = props => (
       <div className="homeContainer">

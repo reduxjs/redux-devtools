@@ -16,15 +16,12 @@
   "scripts": {
     "clean": "rimraf lib",
     "build": "babel src --out-dir lib",
-    "lint": "eslint src test",
-    "lint:fix": "eslint --fix src test",
     "test": "jest --no-cache",
     "prepare": "npm run clean && npm run build",
-    "prepublishOnly": "npm run lint && npm run test && npm run clean && npm run build"
+    "prepublishOnly": "npm run test && npm run clean && npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
-    "babel-eslint": "^10.0.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-transform": "^2.0.0",
@@ -40,11 +37,6 @@
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "1.7.1",
     "enzyme-to-json": "^3.3.0",
-    "eslint": "^5.0.0",
-    "eslint-plugin-flowtype": "3.2.0",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.1",
-    "eslint-plugin-react": "7.4.0",
     "jest": "^23.6.0",
     "react-addons-test-utils": "^15.4.0",
     "react-dom": "^16.4.0",

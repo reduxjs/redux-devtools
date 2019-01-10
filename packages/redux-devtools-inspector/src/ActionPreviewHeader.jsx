@@ -2,7 +2,7 @@ import React from 'react';
 
 const ActionPreviewHeader =
   ({ styling, inspectedPath, onInspectPath, tabName, onSelectTab, tabs }) =>
-    (<div key='previewHeader' {...styling('previewHeader')}>
+    (<div key="previewHeader" {...styling('previewHeader')}>
       <div {...styling('tabSelector')}>
         {tabs.map(tab =>
           (<div onClick={() => onSelectTab(tab.name)}

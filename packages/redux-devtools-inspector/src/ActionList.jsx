@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import dragula from 'react-dragula';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
@@ -35,7 +34,7 @@ export default class ActionList extends Component {
     this.scrollToBottom();
 
     if (!this.props.draggableActions) return;
-    const container = ReactDOM.findDOMNode(this.refs.rows);
+    const container = this.node;
     this.drake = dragula([container], {
       copy: false,
       copySortSource: false,
@@ -85,7 +84,7 @@ export default class ActionList extends Component {
     ) : actionIds;
 
     return (
-      <div key='actionList'
+      <div key="actionList"
         {...styling(['actionList', isWideLayout && 'actionListWide'], isWideLayout)}>
         <ActionListHeader styling={styling}
           onSearch={onSearch}

@@ -38,7 +38,7 @@ export default function getInspectedState(state, path, convertImmutable) {
   if (convertImmutable) {
     try {
       state = fromJS(state).toJS();
-    } catch(e) {}
+    } catch(e) {} // eslint-disable-line no-empty
   }
 
   return state;

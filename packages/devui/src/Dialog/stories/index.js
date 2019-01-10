@@ -12,7 +12,6 @@ storiesOf('Dialog', module)
     () => (
       <Dialog
         title={text('title', 'Dialog Title')}
-        children={text('children', 'Hello Dialog!')}
         submitText={text('submitText', 'Submit!')}
         open={boolean('open', true)}
         noHeader={boolean('noHeader', false)}
@@ -21,7 +20,9 @@ storiesOf('Dialog', module)
         fullWidth={boolean('fullWidth', false)}
         onDismiss={action('dialog dismissed')}
         onSubmit={action('dialog submitted')}
-      />
+      >
+        {text('children', 'Hello Dialog!')}
+      </Dialog>
     )
   )
   .add(

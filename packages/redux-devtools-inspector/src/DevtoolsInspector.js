@@ -99,7 +99,14 @@ export default class DevtoolsInspector extends Component {
     diffObjectHash: PropTypes.func,
     diffPropertyFilter: PropTypes.func,
     hideMainButtons: PropTypes.bool,
-    hideActionButtons: PropTypes.bool
+    hideActionButtons: PropTypes.bool,
+    invertTheme: PropTypes.bool,
+    skippedActionIds: PropTypes.array,
+    dataTypeKey: PropTypes.string,
+    tabs: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.func
+    ])
   };
 
   static update = reducer;
@@ -128,7 +135,7 @@ export default class DevtoolsInspector extends Component {
   };
 
   updateSizeMode() {
-    const isWideLayout = this.refs.inspector.offsetWidth > 500;
+    const isWideLayout = this.inspectorRef.offsetWidth > 500;
 
     if (isWideLayout !== this.state.isWideLayout) {
       this.setState({ isWideLayout });
@@ -157,6 +164,10 @@ export default class DevtoolsInspector extends Component {
     }
   }
 
+  inspectorCreateRef = (node) => {
+    this.inspectorRef = node;
+  };
+
   render() {
     const {
       stagedActionIds: actionIds, actionsById: actions, computedStates, draggableActions,
@@ -171,8 +182,8 @@ export default class DevtoolsInspector extends Component {
     const { base16Theme, styling } = themeState;
 
     return (
-      <div key='inspector'
-        ref='inspector'
+      <div key="inspector"
+        ref={this.inspectorCreateRef}
         {...styling(['inspector', isWideLayout && 'inspectorWide'], isWideLayout)}>
         <ActionList {...{
           actions, actionIds, isWideLayout, searchValue, selectedActionId, startActionId,

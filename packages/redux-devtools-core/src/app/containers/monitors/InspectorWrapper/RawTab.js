@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Editor } from 'devui';
 import stringify from 'javascript-stringify';
 

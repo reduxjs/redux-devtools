@@ -4,10 +4,10 @@ var schema = requireSchema('./schema_def.graphql', require);
 
 var resolvers = {
   Query: {
-    reports: function report(source, args, context, ast) {
+    reports: function report(source, args, context) {
       return context.store.listAll();
     },
-    report: function report(source, args, context, ast) {
+    report: function report(source, args, context) {
       return context.store.get(args.id);
     }
   }

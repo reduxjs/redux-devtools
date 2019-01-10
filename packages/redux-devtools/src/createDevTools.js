@@ -4,6 +4,7 @@ import { connect, Provider, ReactReduxContext } from 'react-redux';
 import instrument from 'redux-devtools-instrument';
 
 function logError(type) {
+   /* eslint-disable no-console */
   if (type === 'NoStore') {
     console.error(
       'Redux DevTools could not render. You must pass the Redux store ' +
@@ -17,7 +18,8 @@ function logError(type) {
       'using createStore()?'
     );
   }
-}
+   /* eslint-enable no-console */
+  }
 
 export default function createDevTools(children) {
   const monitorElement = Children.only(children);

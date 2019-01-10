@@ -2,7 +2,7 @@ var getPort = require('getport');
 var SocketCluster = require('socketcluster');
 var getOptions = require('./src/options');
 
-var LOG_LEVEL_NONE = 0;
+// var LOG_LEVEL_NONE = 0;
 var LOG_LEVEL_ERROR = 1;
 var LOG_LEVEL_WARN = 2;
 var LOG_LEVEL_INFO = 3;
@@ -17,6 +17,7 @@ module.exports = function(argv) {
   return new Promise(function(resolve) {
     // Check port already used
     getPort(port, function(err, p) {
+      /* eslint-disable no-console */
       if (err) {
         if (logLevel >= LOG_LEVEL_ERROR) {
           console.error(err);
@@ -35,6 +36,7 @@ module.exports = function(argv) {
         }
         resolve(new SocketCluster(options));
       }
+      /* eslint-enable no-console */
     });
   });
 };

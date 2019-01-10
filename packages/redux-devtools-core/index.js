@@ -10,7 +10,7 @@ render(
 if (module.hot) {
   // https://github.com/webpack/webpack/issues/418#issuecomment-53398056
   module.hot.accept(err => {
-    if (err) console.error(err.message);
+    if (err) console.error(err.message); // eslint-disable-line no-console
   });
 
   /*

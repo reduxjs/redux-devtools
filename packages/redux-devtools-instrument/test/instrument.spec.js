@@ -67,12 +67,12 @@ describe('instrument', () => {
 
   it('should provide observable', () => {
     let lastValue;
-    let calls = 0;
+    // let calls = 0;
 
     Observable.from(store)
         .subscribe(state => {
           lastValue = state;
-          calls++;
+          // calls++;
         });
 
     expect(lastValue).toBe(0);

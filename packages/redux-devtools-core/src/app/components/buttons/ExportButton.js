@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
-import { stringify } from 'jsan';
 import DownloadIcon from 'react-icons/lib/ti/download';
 import { exportState } from '../../actions';
 

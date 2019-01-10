@@ -100,7 +100,7 @@ class DemoApp extends React.Component {
                               value={options.theme}
                               onSelect={value => this.setTheme(options, value)}
                               optionFilters={[]}>
-                      {props => <FormControl {...props} type='text' />}
+                      {props => <FormControl {...props} type="text" />}
                     </Combobox>
                     <InputGroup.Addon>
                       <a onClick={this.toggleTheme}

@@ -12,6 +12,7 @@ module.exports = function connector(options) {
   dbOptions.seeds = { directory: path.resolve(__dirname, 'seeds') };
   var knex = knexModule(dbOptions);
 
+  /* eslint-disable no-console */
   knex.migrate.latest()
     .then(function() {
       return knex.seed.run();
@@ -22,6 +23,7 @@ module.exports = function connector(options) {
     .catch(function(error) {
       console.error(error);
     });
+  /* eslint-enable no-console */
 
   return knex;
 };

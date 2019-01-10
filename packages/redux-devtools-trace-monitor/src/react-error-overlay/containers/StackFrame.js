@@ -93,7 +93,7 @@ class StackFrame extends Component<Props, State> {
     this.props.editorHandler(errorLoc);
   };
 
-  onKeyDown = (e: SyntheticKeyboardEvent<>) => {
+  onKeyDown = (e /* : SyntheticKeyboardEvent<> */) => {
     if (e.key === 'Enter') {
       this.editorHandler();
     }

@@ -28,6 +28,7 @@ export default function parseJSON(data, serialize) {
   try {
     return serialize ? jsan.parse(data, reviver) : jsan.parse(data);
   } catch (e) {
+    /* eslint-disable-next-line no-console */
     if (process.env.NODE_ENV !== 'production') console.error(data + 'is not a valid JSON', e);
     return undefined;
   }

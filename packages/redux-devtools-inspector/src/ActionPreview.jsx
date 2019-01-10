@@ -38,13 +38,13 @@ class ActionPreview extends Component {
     );
 
     return (
-      <div key='actionPreview' {...styling('actionPreview')}>
+      <div key="actionPreview" {...styling('actionPreview')}>
         <ActionPreviewHeader
           tabs={renderedTabs}
           {...{ styling, inspectedPath, onInspectPath, tabName, onSelectTab }}
         />
         {!error &&
-          <div key='actionPreviewContent' {...styling('actionPreviewContent')}>
+          <div key="actionPreviewContent" {...styling('actionPreviewContent')}>
             <TabComponent
               labelRenderer={this.labelRenderer}
               {...{

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Button } from 'devui';
 import PrintIcon from 'react-icons/lib/md/print';
 

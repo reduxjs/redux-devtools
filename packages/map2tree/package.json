@@ -8,11 +8,9 @@
     "build": "babel src --out-dir lib",
     "build:umd": "webpack --progress --config webpack.config.umd.js",
     "build:umd:min": "webpack --env.minimize --progress --config webpack.config.umd.js",
-    "lint": "eslint src test",
     "test": "jest",
-    "check": "npm run lint && npm run test",
     "prepare": "npm run build && npm run build:umd",
-    "prepublishOnly": "npm run check && npm run clean && npm run build && npm run build:umd && npm run build:umd:min"
+    "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min"
 },
   "repository": {
     "type": "git",
@@ -34,12 +32,10 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "4.1.8",
     "babel-loader": "^6.2.0",
     "babel-preset-es2015-loose": "^6.1.3",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
-    "eslint": "1.10.3",
     "immutable": "3.7.6",
     "jest": "^23.6.0",
     "rimraf": "^2.3.4",

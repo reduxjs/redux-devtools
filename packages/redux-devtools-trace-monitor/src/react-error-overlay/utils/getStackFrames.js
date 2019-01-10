@@ -14,7 +14,7 @@ import { toExclude } from '../../presets';
 
 function getStackFrames(
   error: Error,
-  unhandledRejection: boolean = false,
+  unhandledRejection: boolean = false, // eslint-disable-line no-unused-vars
   contextSize: number = 3
 ): Promise<StackFrame[] | null> {
   const parsedFrames = parse(error);

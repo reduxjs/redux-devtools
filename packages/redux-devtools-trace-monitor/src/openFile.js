@@ -7,7 +7,7 @@ function openResource(fileName, lineNumber, stackFrame) {
     if(result.isError) {
       const {fileName: finalFileName, lineNumber: finalLineNumber} = stackFrame;
       const adjustedLineNumber = Math.max(finalLineNumber - 1, 0);
-      chrome.devtools.panels.openResource(finalFileName, adjustedLineNumber, (result) => {
+      chrome.devtools.panels.openResource(finalFileName, adjustedLineNumber, (/* result */) => {
       // console.log("openResource result: ", result);
       });
     }
@@ -42,7 +42,7 @@ function openInIframe(url) {
 function openInEditor(editor, path, stackFrame) {
   const projectPath = path.replace(/\/$/, '');
   const file = stackFrame._originalFileName || stackFrame.finalFileName || stackFrame.fileName || '';
-  let filePath = /^https?:\/\//.test(file) ? file.replace(/^https?:\/\/[^\/]*/, '') : file.replace(/^\w+:\/\//, '');
+  let filePath = /^https?:\/\//.test(file) ? file.replace(/^https?:\/\/[^/]*/, '') : file.replace(/^\w+:\/\//, '');
   filePath = filePath.replace(/^\/~\//, '/node_modules/');
   const line = stackFrame._originalLineNumber || stackFrame.lineNumber || '0';
   const column = stackFrame._originalColumnNumber || stackFrame.columnNumber || '0';
@@ -68,7 +68,8 @@ function openInEditor(editor, path, stackFrame) {
 }
 
 export default function openFile(fileName, lineNumber, stackFrame) {
-  if (process.env.NODE_ENV === 'development') console.log(fileName, lineNumber, stackFrame); // eslint-disable-line no-console
+  // eslint-disable-next-line no-console
+  if (process.env.NODE_ENV === 'development') console.log(fileName, lineNumber, stackFrame);
   if (!chrome || !chrome.storage) return; // TODO: Pass editor settings for using outside of browser extension
   const storage = isFF ? chrome.storage.local : chrome.storage.sync || chrome.storage.local;
   storage.get(['useEditor', 'editor', 'projectPath'], function({ useEditor, editor, projectPath }) {

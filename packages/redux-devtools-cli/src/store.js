@@ -9,7 +9,7 @@ var knex;
 var baseFields = ['id', 'title', 'added'];
 
 function error(msg) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
     return resolve({ error: msg });
   });
 }

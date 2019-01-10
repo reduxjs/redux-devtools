@@ -95,6 +95,7 @@ export default class TestGenerator extends (PureComponent || Component) {
     };
 
     while (actions[i]) {
+      // eslint-disable-next-line no-useless-escape
       if (!isVanilla || /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type)) {
         if (isFirst) isFirst = false;
         else r += space;

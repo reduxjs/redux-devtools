@@ -1,4 +1,4 @@
-import { UPDATE_REPORTS, GET_REPORT_SUCCESS } from '../constants/actionTypes';
+import { UPDATE_REPORTS /* , GET_REPORT_SUCCESS */ } from '../constants/actionTypes';
 
 const initialState = {
   data: []

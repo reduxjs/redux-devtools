@@ -267,8 +267,8 @@ export default class SliderMonitor extends (PureComponent || Component) {
 
     const onPlayClick = replaySpeed === 'Live' ? this.startRealtimeReplay : this.startReplay;
     const playPause = this.state.timer ?
-      <SliderButton theme={theme} type='pause' onClick={this.pauseReplay} /> :
-      <SliderButton theme={theme} type='play' disabled={max <= 0} onClick={onPlayClick} />;
+      <SliderButton theme={theme} type="pause" onClick={this.pauseReplay} /> :
+      <SliderButton theme={theme} type="play" disabled={max <= 0} onClick={onPlayClick} />;
 
     return (
       <Toolbar noBorder compact fullHeight theme={theme}>
@@ -284,13 +284,13 @@ export default class SliderMonitor extends (PureComponent || Component) {
         />
         <SliderButton
           theme={theme}
-          type='stepLeft'
+          type="stepLeft"
           disabled={currentStateIndex <= 0}
           onClick={this.stepLeft}
         />
         <SliderButton
           theme={theme}
-          type='stepRight'
+          type="stepRight"
           disabled={currentStateIndex === max}
           onClick={this.stepRight}
         />
@@ -302,8 +302,8 @@ export default class SliderMonitor extends (PureComponent || Component) {
           onClick={this.changeReplaySpeed}
         />
         {!hideResetButton && [
-          <Divider key='divider' theme={theme} />,
-          <Button key='reset' theme={theme} onClick={this.handleReset}>Reset</Button>
+          <Divider key="divider" theme={theme} />,
+          <Button key="reset" theme={theme} onClick={this.handleReset}>Reset</Button>
         ]}
       </Toolbar>
     );
