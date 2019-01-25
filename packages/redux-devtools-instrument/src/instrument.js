@@ -27,7 +27,7 @@ const isChrome = (
 ));
 
 const isChromeOrNode = (
-  isChrome || (typeof process !== 'undefined' && process.release.name === 'node')
+  isChrome || (typeof process !== 'undefined' && process.release && process.release.name === 'node')
 );
 
 /**
