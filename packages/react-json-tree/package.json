@@ -39,18 +39,13 @@
   },
   "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
-    "babel-plugin-transform-es3-property-literals": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.5.0",
-    "husky": "^0.14.3",
-    "jest": "^23.6.0",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "jest": "^24.1.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
@@ -64,7 +59,6 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
-    "babel-runtime": "^6.6.1",
     "prop-types": "^15.5.8",
     "react-base16-styling": "^0.5.1"
   }

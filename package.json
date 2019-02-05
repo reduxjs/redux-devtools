@@ -7,7 +7,7 @@
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "7.12.3",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "lerna": "3.9.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3"
@@ -30,6 +30,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --single-quote --write",
