@@ -7,9 +7,8 @@ import { schema, uiSchema, formData } from './schema';
 
 storiesOf('Form', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    'Wrapper around [`react-jsonschema-form`](https://github.com/mozilla-services/react-jsonschema-form) with custom widgets.',
     () => (
       <Form
         formData={object('formData', formData)}
@@ -19,5 +18,10 @@ storiesOf('Form', module)
         onChange={action('form changed')}
         onSubmit={action('form submitted')}
       />
-    )
+    ),
+    {
+      info:
+        'Wrapper around [`react-jsonschema-form`](https://github.com/mozilla-services/react-jsonschema-form)' +
+        ' with custom widgets.'
+    }
   );

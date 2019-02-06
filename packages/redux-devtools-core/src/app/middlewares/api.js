@@ -4,8 +4,13 @@ import socketOptions from '../constants/socketOptions';
 import * as actions from '../constants/socketActionTypes';
 import { getActiveInstance } from '../reducers/instances';
 import {
-  UPDATE_STATE, REMOVE_INSTANCE, LIFTED_ACTION,
-  UPDATE_REPORTS, GET_REPORT_REQUEST, GET_REPORT_ERROR, GET_REPORT_SUCCESS
+  UPDATE_STATE,
+  REMOVE_INSTANCE,
+  LIFTED_ACTION,
+  UPDATE_REPORTS,
+  GET_REPORT_REQUEST,
+  GET_REPORT_ERROR,
+  GET_REPORT_SUCCESS
 } from '../constants/actionTypes';
 import { showNotification, importState } from '../actions';
 import { nonReduxDispatch } from '../utils/monitorActions';
@@ -14,10 +19,7 @@ let socket;
 let store;
 
 function emit({ message: type, id, instanceId, action, state }) {
-  socket.emit(
-    id ? 'sc-' + id : 'respond',
-    { type, action, state, instanceId }
-  );
+  socket.emit(id ? 'sc-' + id : 'respond', { type, action, state, instanceId });
 }
 
 function startMonitoring(channel) {
@@ -33,7 +35,14 @@ function dispatchRemoteAction({ message, action, state, toAll }) {
     type: actions.EMIT,
     message,
     action,
-    state: nonReduxDispatch(store, message, instanceId, action, state, instances),
+    state: nonReduxDispatch(
+      store,
+      message,
+      instanceId,
+      action,
+      state,
+      instances
+    ),
     instanceId,
     id
   });
@@ -65,7 +74,8 @@ function monitoring(request) {
   const instances = store.getState().instances;
   const instanceId = request.instanceId || request.id;
   if (
-    instances.sync && instanceId === instances.selected &&
+    instances.sync &&
+    instanceId === instances.selected &&
     (request.type === 'ACTION' || request.type === 'STATE')
   ) {
     socket.emit('respond', {
@@ -118,7 +128,11 @@ function handleConnection() {
     store.dispatch({ type: actions.UNSUBSCRIBE, channel });
   });
   socket.on('subscribeFail', error => {
-    store.dispatch({ type: actions.SUBSCRIBE_ERROR, error, status: 'subscribeFail' });
+    store.dispatch({
+      type: actions.SUBSCRIBE_ERROR,
+      error,
+      status: 'subscribeFail'
+    });
   });
   socket.on('dropOut', error => {
     store.dispatch({ type: actions.SUBSCRIBE_ERROR, error, status: 'dropOut' });
@@ -183,18 +197,34 @@ export default function api(inStore) {
   store = inStore;
   return next => action => {
     const result = next(action);
-    switch (action.type) { // eslint-disable-line default-case
-      case actions.CONNECT_REQUEST: connect(); break;
+    switch (
+      action.type // eslint-disable-line default-case
+    ) {
+      case actions.CONNECT_REQUEST:
+        connect();
+        break;
       case actions.RECONNECT:
         disconnect();
         if (action.options.type !== 'disabled') connect();
         break;
-      case actions.AUTH_REQUEST: login(); break;
-      case actions.SUBSCRIBE_REQUEST: subscribe(action.channel, action.subscription); break;
-      case actions.SUBSCRIBE_SUCCESS: startMonitoring(action.channel); break;
-      case actions.EMIT: if (socket) emit(action); break;
-      case LIFTED_ACTION: dispatchRemoteAction(action); break;
-      case GET_REPORT_REQUEST: getReport(action.report); break;
+      case actions.AUTH_REQUEST:
+        login();
+        break;
+      case actions.SUBSCRIBE_REQUEST:
+        subscribe(action.channel, action.subscription);
+        break;
+      case actions.SUBSCRIBE_SUCCESS:
+        startMonitoring(action.channel);
+        break;
+      case actions.EMIT:
+        if (socket) emit(action);
+        break;
+      case LIFTED_ACTION:
+        dispatchRemoteAction(action);
+        break;
+      case GET_REPORT_REQUEST:
+        getReport(action.report);
+        break;
     }
     return result;
   };

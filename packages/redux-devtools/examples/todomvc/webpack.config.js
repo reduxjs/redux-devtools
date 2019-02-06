@@ -14,35 +14,37 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   resolve: {
     alias: {
       'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),
       'redux-devtools': path.join(__dirname, '..', '..', 'src'),
-      'react': path.join(__dirname, 'node_modules', 'react'),
+      react: path.join(__dirname, 'node_modules', 'react'),
       'react-redux': path.join(__dirname, 'node_modules', 'react-redux')
     },
     extensions: ['', '.js']
   },
   resolveLoader: {
-    'fallback': path.join(__dirname, 'node_modules')
+    fallback: path.join(__dirname, 'node_modules')
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      exclude: /node_modules/,
-      include: __dirname
-    }, {
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, '..', '..', 'src')
-    }, {
-      test: /\.css?$/,
-      loaders: ['style', 'raw'],
-      include: __dirname
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: ['babel'],
+        exclude: /node_modules/,
+        include: __dirname
+      },
+      {
+        test: /\.js$/,
+        loaders: ['babel'],
+        include: path.join(__dirname, '..', '..', 'src')
+      },
+      {
+        test: /\.css?$/,
+        loaders: ['style', 'raw'],
+        include: __dirname
+      }
+    ]
   }
 };

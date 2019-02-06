@@ -15,11 +15,13 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className='header'>
-          <h1>todos</h1>
-          <TodoTextInput newTodo={true}
-                         onSave={::this.handleSave}
-                         placeholder='What needs to be done?' />
+      <header className="header">
+        <h1>todos</h1>
+        <TodoTextInput
+          newTodo={true}
+          onSave={::this.handleSave}
+          placeholder="What needs to be done?"
+        />
       </header>
     );
   }

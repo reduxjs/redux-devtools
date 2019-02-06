@@ -1,7 +1,7 @@
 var graphqlExpress = require('graphql-server-express').graphqlExpress;
 var schema = require('../api/schema');
 
-module.exports = function (store) {
+module.exports = function(store) {
   return graphqlExpress(function() {
     return {
       schema: schema,

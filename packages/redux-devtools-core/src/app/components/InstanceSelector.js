@@ -18,7 +18,8 @@ class InstanceSelector extends Component {
     let name;
     Object.keys(instances).forEach(key => {
       name = instances[key].name;
-      if (name !== undefined) this.select.push({ value: key, label: instances[key].name });
+      if (name !== undefined)
+        this.select.push({ value: key, label: instances[key].name });
     });
 
     return (
@@ -44,4 +45,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InstanceSelector);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InstanceSelector);

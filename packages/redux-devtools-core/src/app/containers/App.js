@@ -13,19 +13,25 @@ class App extends Component {
     const { section, theme, notification } = this.props;
     let body;
     switch (section) {
-      case 'Settings': body = <Settings />; break;
-      default: body = <Actions />;
+      case 'Settings':
+        body = <Settings />;
+        break;
+      default:
+        body = <Actions />;
     }
 
     return (
       <Container themeData={theme}>
         <Header section={section} />
         {body}
-        {notification &&
-          <Notification type={notification.type} onClose={this.props.clearNotification}>
+        {notification && (
+          <Notification
+            type={notification.type}
+            onClose={this.props.clearNotification}
+          >
             {notification.message}
           </Notification>
-        }
+        )}
       </Container>
     );
   }
@@ -55,4 +61,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

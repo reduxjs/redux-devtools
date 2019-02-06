@@ -4,8 +4,7 @@ export const dispatcher = 'state = reducers(${prevState}, ${action});';
 
 export const assertion = 'expect(state).toEqual(${curState});';
 
-export const wrap = (
-  `import expect from 'expect';
+export const wrap = `import expect from 'expect';
 import reducers from '../../reducers';
 
 describe('reducers', () => {
@@ -14,6 +13,6 @@ describe('reducers', () => {
     \${assertions}
   });
 });
-`);
+`;
 
 export default { name, assertion, dispatcher, wrap };

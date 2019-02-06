@@ -8,9 +8,7 @@ const store = configureStore();
 
 render(
   <AppContainer>
-    <Root
-      store={ store }
-    />
+    <Root store={store} />
   </AppContainer>,
   document.getElementById('root')
 );
@@ -20,9 +18,7 @@ if (module.hot) {
     const RootContainer = require('./containers/Root').default;
     render(
       <AppContainer>
-        <RootContainer
-          store={ store }
-        />
+        <RootContainer store={store} />
       </AppContainer>,
       document.getElementById('root')
     );

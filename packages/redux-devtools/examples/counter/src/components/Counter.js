@@ -13,12 +13,8 @@ export default class Counter extends Component {
     const { increment, incrementIfOdd, decrement, counter } = this.props;
     return (
       <p>
-        Clicked: {counter} times
-        {' '}
-        <button onClick={increment}>+</button>
-        {' '}
-        <button onClick={decrement}>-</button>
-        {' '}
+        Clicked: {counter} times <button onClick={increment}>+</button>{' '}
+        <button onClick={decrement}>-</button>{' '}
         <button onClick={incrementIfOdd}>Increment if odd</button>
       </p>
     );

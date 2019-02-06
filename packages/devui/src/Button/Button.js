@@ -10,13 +10,15 @@ const CommonWrapper = createStyledComponent(commonStyle);
 
 export default class Button extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.children !== this.props.children ||
+    return (
+      nextProps.children !== this.props.children ||
       nextProps.disabled !== this.props.disabled ||
       nextProps.mark !== this.props.mark ||
       nextProps.size !== this.props.size ||
       nextProps.primary !== this.props.primary ||
       nextProps.tooltipPosition !== this.props.tooltipPosition ||
-      nextProps.title !== this.props.title;
+      nextProps.title !== this.props.title
+    );
   }
 
   onMouseUp = e => {
@@ -56,15 +58,32 @@ export default class Button extends Component {
 Button.propTypes = {
   children: PropTypes.any.isRequired,
   title: PropTypes.string,
-  tooltipPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right',
-    'bottom-left', 'bottom-right', 'top-left', 'top-right']),
+  tooltipPosition: PropTypes.oneOf([
+    'top',
+    'bottom',
+    'left',
+    'right',
+    'bottom-left',
+    'bottom-right',
+    'top-left',
+    'top-right'
+  ]),
   onClick: PropTypes.func,
   type: PropTypes.string,
   disabled: PropTypes.bool,
   primary: PropTypes.bool,
   size: PropTypes.oneOf(['big', 'normal', 'small']),
-  mark: PropTypes.oneOf([false, 'base08', 'base09', 'base0A', 'base0B',
-    'base0C', 'base0D', 'base0E', 'base0F']),
+  mark: PropTypes.oneOf([
+    false,
+    'base08',
+    'base09',
+    'base0A',
+    'base0B',
+    'base0C',
+    'base0D',
+    'base0E',
+    'base0F'
+  ]),
   theme: PropTypes.object
 };
 

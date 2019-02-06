@@ -8,17 +8,10 @@
     "build": "babel src --out-dir lib",
     "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.js",
     "build:umd:min": "webpack --env.minimize --progress --config webpack.config.umd.js",
-    "lint": "eslint --max-warnings=0 src test examples/src",
-    "test":
-      "npm run lint && NODE_ENV=test mocha --compilers js:babel-core/register --recursive",
-    "test:watch":
-      "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --watch",
-    "test:cov":
-      "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --recursive",
+    "test": "jest",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
-    "start": "cd examples && npm start",
-    "precommit": "lint-staged"
+    "start": "cd examples && npm start"
   },
   "files": [
     "lib",
@@ -29,7 +22,10 @@
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
-  "keywords": ["react", "json viewer"],
+  "keywords": [
+    "react",
+    "json viewer"
+  ],
   "author": "Shu Uesugi <shu@chibicode.com> (http://github.com/chibicode)",
   "contributors": [
     "Alexander Kuznetsov <alexkuz@gmail.com> (http://kuzya.org/)",
@@ -43,33 +39,13 @@
   },
   "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
-    "babel-plugin-transform-es3-property-literals": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.5.0",
-    "eslint": "^4.10",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-babel": "^4.1.2",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-react": "7.4.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "expect": "^21.2.1",
-    "husky": "^0.14.3",
-    "isparta": "^4.0.0",
-    "lint-staged": "^4.3.0",
-    "mocha": "^4.0.1",
-    "prettier": "^1.7.4",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "jest": "^24.1.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
@@ -77,17 +53,13 @@
     "terser-webpack-plugin": "^1.2.1",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.2.0"
-},
+  },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
-    "babel-runtime": "^6.6.1",
     "prop-types": "^15.5.8",
     "react-base16-styling": "^0.5.1"
-  },
-  "lint-staged": {
-    "*.{js,json,css}": ["prettier --single-quote --write", "git add"]
   }
 }

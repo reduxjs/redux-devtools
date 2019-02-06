@@ -33,6 +33,7 @@ Check out [examples](examples) directory for more details.
 ### Theming
 
 This component now uses [react-base16-styling](https://github.com/alexkuz/react-base16-styling) module, which allows to customize component via `theme` property, which can be the following:
+
 - [base16](http://chriskempson.github.io/base16) theme data. [The example theme data can be found here](https://github.com/gaearon/redux-devtools/tree/75322b15ee7ba03fddf10ac3399881e302848874/src/react/themes).
 - object that contains style objects, strings (that treated as classnames) or functions. A function is used to extend its first argument `{ style, className }` and should return an object with the same structure. Other arguments depend on particular context (and should be described here). See [createStylingFromTheme.js](https://github.com/alexkuz/react-json-tree/blob/feature-refactor-styling/src/createStylingFromTheme.js) for the list of styling object keys. Also, this object can extend `base16` theme via `extend` property.
 
@@ -62,8 +63,7 @@ const theme = {
 
 <div>
   <JSONTree data={data} theme={theme} invertTheme={false} />
-</div>
-
+</div>;
 ```
 
 #### Result (Monokai theme, dark background):
@@ -74,21 +74,24 @@ const theme = {
 
 ```jsx
 <div>
-  <JSONTree data={data} theme={{
-    extend: theme,
-    // underline keys for literal values
-    valueLabel: {
-      textDecoration: 'underline'
-    },
-    // switch key for objects to uppercase when object is expanded.
-    // `nestedNodeLabel` receives additional arguments `expanded` and `keyPath`
-    nestedNodeLabel: ({ style }, nodeType, expanded) => ({
-      style: {
-        ...style,
-        textTransform: expanded ? 'uppercase' : style.textTransform
-      }
-    })
-  }} />
+  <JSONTree
+    data={data}
+    theme={{
+      extend: theme,
+      // underline keys for literal values
+      valueLabel: {
+        textDecoration: 'underline'
+      },
+      // switch key for objects to uppercase when object is expanded.
+      // `nestedNodeLabel` receives additional arguments `expanded` and `keyPath`
+      nestedNodeLabel: ({ style }, nodeType, expanded) => ({
+        style: {
+          ...style,
+          textTransform: expanded ? 'uppercase' : style.textTransform
+        }
+      })
+    }}
+  />
 </div>
 ```
 
@@ -120,8 +123,8 @@ You can pass the following properties to customize rendered labels and values:
 
 ```jsx
 <JSONTree
-    labelRenderer={raw => <strong>{raw}</strong>}
-    valueRenderer={raw => <em>{raw}</em>}
+  labelRenderer={raw => <strong>{raw}</strong>}
+  valueRenderer={raw => <em>{raw}</em>}
 />
 ```
 

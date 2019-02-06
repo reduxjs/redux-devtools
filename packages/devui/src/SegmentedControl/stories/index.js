@@ -15,17 +15,13 @@ export const Container = styled.div`
 
 storiesOf('SegmentedControl', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
-    'default',
-    '',
-    () => (
-      <Container>
-        <SegmentedControl
-          values={['Button1', 'Button2', 'Button3']}
-          selected={text('selected', 'Button1')}
-          onClick={action('button selected')}
-          disabled={boolean('Disabled', false)}
-        />
-      </Container>
-    )
-  );
+  .add('default', () => (
+    <Container>
+      <SegmentedControl
+        values={['Button1', 'Button2', 'Button3']}
+        selected={text('selected', 'Button1')}
+        onClick={action('button selected')}
+        disabled={boolean('Disabled', false)}
+      />
+    </Container>
+  ));

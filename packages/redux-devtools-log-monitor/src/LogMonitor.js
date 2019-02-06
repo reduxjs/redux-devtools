@@ -48,10 +48,7 @@ export default class LogMonitor extends Component {
 
     preserveScrollTop: PropTypes.bool,
     select: PropTypes.func,
-    theme: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string
-    ]),
+    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     expandActionRoot: PropTypes.bool,
     expandStateRoot: PropTypes.bool,
     markStateDiff: PropTypes.bool,
@@ -59,7 +56,7 @@ export default class LogMonitor extends Component {
   };
 
   static defaultProps = {
-    select: (state) => state,
+    select: state => state,
     theme: 'nicinabox',
     preserveScrollTop: true,
     expandActionRoot: true,
@@ -77,7 +74,9 @@ export default class LogMonitor extends Component {
   constructor(props) {
     super(props);
     this.handleToggleAction = this.handleToggleAction.bind(this);
-    this.handleToggleConsecutiveAction = this.handleToggleConsecutiveAction.bind(this);
+    this.handleToggleConsecutiveAction = this.handleToggleConsecutiveAction.bind(
+      this
+    );
     this.getRef = this.getRef.bind(this);
   }
 
@@ -120,14 +119,12 @@ export default class LogMonitor extends Component {
     if (!node) {
       this.scrollDown = true;
     } else if (
-      this.props.stagedActionIds.length <
-      nextProps.stagedActionIds.length
+      this.props.stagedActionIds.length < nextProps.stagedActionIds.length
     ) {
       const { scrollTop, offsetHeight, scrollHeight } = node;
 
-      this.scrollDown = Math.abs(
-        scrollHeight - (scrollTop + offsetHeight)
-      ) < 20;
+      this.scrollDown =
+        Math.abs(scrollHeight - (scrollTop + offsetHeight)) < 20;
     } else {
       this.scrollDown = false;
     }
@@ -166,7 +163,10 @@ export default class LogMonitor extends Component {
       return themes[theme];
     }
 
-    console.warn('DevTools theme ' + theme + ' not found, defaulting to nicinabox');
+    // eslint-disable-next-line no-console
+    console.warn(
+      'DevTools theme ' + theme + ' not found, defaulting to nicinabox'
+    );
     return themes.nicinabox;
   }
 
@@ -208,17 +208,21 @@ export default class LogMonitor extends Component {
     };
 
     return (
-      <div style={{...styles.container, backgroundColor: theme.base00}}>
-        {!this.props.hideMainButtons &&
+      <div style={{ ...styles.container, backgroundColor: theme.base00 }}>
+        {!this.props.hideMainButtons && (
           <LogMonitorButtonBar
             theme={theme}
             dispatch={dispatch}
             hasStates={computedStates.length > 1}
             hasSkippedActions={skippedActionIds.length > 0}
           />
-        }
+        )}
         <div
-          style={this.props.hideMainButtons ? styles.elements : { ...styles.elements, top: 30 }}
+          style={
+            this.props.hideMainButtons
+              ? styles.elements
+              : { ...styles.elements, top: 30 }
+          }
           ref={this.getRef}
         >
           <LogMonitorEntryList {...entryListProps} />

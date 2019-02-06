@@ -15,9 +15,8 @@ function getThemes() {
 
 storiesOf('Editor', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    'Based on [CodeMirror](http://codemirror.net/).',
     () => (
       <Editor
         value={text('value', value)}
@@ -28,14 +27,9 @@ storiesOf('Editor', module)
         onChange={action('change')}
         autofocus
       />
-    )
+    ),
+    { info: 'Based on [CodeMirror](http://codemirror.net/).' }
   )
-  .addWithInfo(
-    'with tabs',
-    '',
-    () => (
-      <WithTabs
-        lineNumbers={boolean('lineNumbers', true)}
-      />
-    )
-  );
+  .add('with tabs', () => (
+    <WithTabs lineNumbers={boolean('lineNumbers', true)} />
+  ));

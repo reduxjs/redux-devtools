@@ -51,29 +51,29 @@ export default class LogMonitorButtonBar extends Component {
   render() {
     const { theme, hasStates, hasSkippedActions } = this.props;
     return (
-      <div style={{...style, borderColor: theme.base02}}>
-        <LogMonitorButton
-          theme={theme}
-          onClick={this.handleReset}
-          enabled>
+      <div style={{ ...style, borderColor: theme.base02 }}>
+        <LogMonitorButton theme={theme} onClick={this.handleReset} enabled>
           Reset
         </LogMonitorButton>
         <LogMonitorButton
           theme={theme}
           onClick={this.handleRollback}
-          enabled={hasStates}>
+          enabled={hasStates}
+        >
           Revert
         </LogMonitorButton>
         <LogMonitorButton
           theme={theme}
           onClick={this.handleSweep}
-          enabled={hasSkippedActions}>
+          enabled={hasSkippedActions}
+        >
           Sweep
         </LogMonitorButton>
         <LogMonitorButton
           theme={theme}
           onClick={this.handleCommit}
-          enabled={hasStates}>
+          enabled={hasStates}
+        >
           Commit
         </LogMonitorButton>
       </div>

@@ -20,10 +20,14 @@ export default function commitExcessActions(liftedState, n = 1) {
   liftedState.skippedActionIds = liftedState.skippedActionIds.filter(
     id => idsToDelete.indexOf(id) === -1
   );
-  liftedState.stagedActionIds = [0, ...liftedState.stagedActionIds.slice(excess + 1)];
+  liftedState.stagedActionIds = [
+    0,
+    ...liftedState.stagedActionIds.slice(excess + 1)
+  ];
   liftedState.committedState = liftedState.computedStates[excess].state;
   liftedState.computedStates = liftedState.computedStates.slice(excess);
-  liftedState.currentStateIndex = liftedState.currentStateIndex > excess
-    ? liftedState.currentStateIndex - excess
-    : 0;
+  liftedState.currentStateIndex =
+    liftedState.currentStateIndex > excess
+      ? liftedState.currentStateIndex - excess
+      : 0;
 }

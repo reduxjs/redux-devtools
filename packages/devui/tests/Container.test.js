@@ -3,10 +3,12 @@ import { render } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 import { Container } from '../src';
 
-describe('Container', function () {
+describe('Container', function() {
   it('renders correctly', () => {
     const wrapper = render(
-      <Container themeData={{ theme: 'default', scheme: 'default', invert: false }}>
+      <Container
+        themeData={{ theme: 'default', scheme: 'default', invert: false }}
+      >
         Text
       </Container>
     );

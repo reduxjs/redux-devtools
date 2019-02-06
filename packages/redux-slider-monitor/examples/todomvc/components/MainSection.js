@@ -39,12 +39,15 @@ export default class MainSection extends Component {
     const { filter } = this.state;
 
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
-    const markedCount = todos.reduce((count, todo) => (todo.marked ? count + 1 : count), 0);
+    const markedCount = todos.reduce(
+      (count, todo) => (todo.marked ? count + 1 : count),
+      0
+    );
 
     return (
-      <section className='main'>
+      <section className="main">
         {this.renderToggleAll(markedCount)}
-        <ul className='todo-list'>
+        <ul className="todo-list">
           {filteredTodos.map(todo => (
             <TodoItem key={todo.id} todo={todo} {...actions} />
           ))}
@@ -59,8 +62,8 @@ export default class MainSection extends Component {
     if (todos.length > 0) {
       return (
         <input
-          className='toggle-all'
-          type='checkbox'
+          className="toggle-all"
+          type="checkbox"
           checked={markedCount === todos.length}
           onChange={actions.markAll}
         />

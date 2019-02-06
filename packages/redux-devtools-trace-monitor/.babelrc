@@ -1,13 +1,15 @@
 {
-  "presets": [ ["env", { "modules": "commonjs" }], "react", "flow" ],
+  "presets": [
+    "@babel/preset-env", "@babel/preset-react", "@babel/preset-flow"
+  ],
   "plugins": [
-    ["transform-runtime", {
-      "polyfill": false,
+    ["@babel/plugin-transform-runtime", {
       "regenerator": true
     }],
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "add-module-exports",
-    "transform-decorators-legacy"
+    [
+      "@babel/plugin-proposal-decorators",
+      { "legacy": true }
+    ],
+    "@babel/plugin-proposal-class-properties"
   ]
 }

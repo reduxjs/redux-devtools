@@ -2,7 +2,7 @@ var getPort = require('getport');
 var SocketCluster = require('socketcluster');
 var getOptions = require('./src/options');
 
-var LOG_LEVEL_NONE = 0;
+// var LOG_LEVEL_NONE = 0;
 var LOG_LEVEL_ERROR = 1;
 var LOG_LEVEL_WARN = 2;
 var LOG_LEVEL_INFO = 3;
@@ -13,10 +13,12 @@ module.exports = function(argv) {
     allowClientPublish: false
   });
   var port = options.port;
-  var logLevel = options.logLevel === undefined ? LOG_LEVEL_INFO : options.logLevel;
+  var logLevel =
+    options.logLevel === undefined ? LOG_LEVEL_INFO : options.logLevel;
   return new Promise(function(resolve) {
     // Check port already used
     getPort(port, function(err, p) {
+      /* eslint-disable no-console */
       if (err) {
         if (logLevel >= LOG_LEVEL_ERROR) {
           console.error(err);
@@ -25,9 +27,16 @@ module.exports = function(argv) {
       }
       if (port !== p) {
         if (logLevel >= LOG_LEVEL_WARN) {
-          console.log('[ReduxDevTools] Server port ' + port + ' is already used.');
+          console.log(
+            '[ReduxDevTools] Server port ' + port + ' is already used.'
+          );
         }
-        resolve({ portAlreadyUsed: true, on: function(status, cb) { cb(); } });
+        resolve({
+          portAlreadyUsed: true,
+          on: function(status, cb) {
+            cb();
+          }
+        });
       } else {
         if (logLevel >= LOG_LEVEL_INFO) {
           console.log('[ReduxDevTools] Start server...');
@@ -35,6 +44,7 @@ module.exports = function(argv) {
         }
         resolve(new SocketCluster(options));
       }
+      /* eslint-enable no-console */
     });
   });
 };

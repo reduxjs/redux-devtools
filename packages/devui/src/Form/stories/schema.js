@@ -27,31 +27,19 @@ module.exports = {
         title: 'A multiple choices list',
         items: {
           type: 'string',
-          enum: [
-            'foo',
-            'bar',
-            'fuzz'
-          ]
+          enum: ['foo', 'bar', 'fuzz']
         },
         uniqueItems: true
       },
       numberEnum: {
         type: 'number',
         title: 'Number enum',
-        enum: [
-          1,
-          2,
-          3
-        ]
+        enum: [1, 2, 3]
       },
       numberEnumRadio: {
         type: 'number',
         title: 'Number enum',
-        enum: [
-          1,
-          2,
-          3
-        ]
+        enum: [1, 2, 3]
       },
       integerRange: {
         title: 'Integer range',

@@ -10,12 +10,13 @@ import React from 'react';
 import CodeBlock from '../components/CodeBlock';
 import { applyStyles } from '../utils/dom/css';
 import { absolutifyCaret } from '../utils/dom/absolutifyCaret';
-import type { ScriptLine } from '../utils/stack-frame';
+// import type { ScriptLine } from '../utils/stack-frame';
 import generateAnsiHTML from '../utils/generateAnsiHTML';
 
 import { codeFrameColumns } from '@babel/code-frame';
 import { nicinabox as theme } from 'redux-devtools-themes';
 
+/*
 type StackFrameCodeBlockPropsType = {|
   lines: ScriptLine[],
   lineNum: number,
@@ -27,8 +28,11 @@ type StackFrameCodeBlockPropsType = {|
 // Exact type workaround for spread operator.
 // See: https://github.com/facebook/flow/issues/2405
 type Exact<T> = $Shape<T>;
+*/
 
-function StackFrameCodeBlock(props: Exact<StackFrameCodeBlockPropsType>) {
+function StackFrameCodeBlock(
+  props /* : Exact<StackFrameCodeBlockPropsType> */
+) {
   const { lines, lineNum, columnNum, contextSize, main } = props;
   const sourceCode = [];
   let whiteSpace = Infinity;
@@ -61,13 +65,13 @@ function StackFrameCodeBlock(props: Exact<StackFrameCodeBlockPropsType>) {
         column:
           columnNum == null
             ? 0
-            : columnNum - (isFinite(whiteSpace) ? whiteSpace : 0),
-      },
+            : columnNum - (isFinite(whiteSpace) ? whiteSpace : 0)
+      }
     },
     {
       forceColor: true,
       linesAbove: contextSize,
-      linesBelow: contextSize,
+      linesBelow: contextSize
     }
   );
   const htmlHighlight = generateAnsiHTML(ansiHighlight);
@@ -90,7 +94,9 @@ function StackFrameCodeBlock(props: Exact<StackFrameCodeBlockPropsType>) {
         continue;
       }
       // $FlowFixMe
-      applyStyles(node, {'background-color':  main ? theme.base02 : theme.base01});
+      applyStyles(node, {
+        'background-color': main ? theme.base02 : theme.base01
+      });
       // eslint-disable-next-line
       break oLoop;
     }

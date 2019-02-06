@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Container, Form, Button } from 'devui';
+import { Container, Form } from 'devui';
 import { listSchemes, listThemes } from 'devui/lib/utils/theme';
 import { changeTheme } from '../../actions';
 
@@ -28,12 +28,12 @@ class Themes extends Component {
             properties: {
               theme: {
                 type: 'string',
-                enum: listThemes(),
+                enum: listThemes()
               },
               scheme: {
                 title: 'color scheme',
                 type: 'string',
-                enum: listSchemes(),
+                enum: listSchemes()
               },
               dark: {
                 type: 'boolean'
@@ -61,4 +61,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Themes);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Themes);

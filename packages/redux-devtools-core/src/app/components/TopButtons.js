@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ActionCreators } from 'redux-devtools-instrument';
-import { Button, Toolbar, Divider, Spacer } from 'devui';
+import { Button, Toolbar, Divider } from 'devui';
 import RecordButton from './buttons/RecordButton';
 import PersistButton from './buttons/PersistButton';
 import LockButton from './buttons/LockButton';
@@ -19,8 +19,10 @@ export default class TopButtons extends Component {
   };
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.options !== this.props.options
-      || nextProps.liftedState !== this.props.liftedState;
+    return (
+      nextProps.options !== this.props.options ||
+      nextProps.liftedState !== this.props.liftedState
+    );
   }
 
   handleRollback = () => {
@@ -42,23 +44,21 @@ export default class TopButtons extends Component {
   render() {
     const options = this.props.options;
     const features = options.features;
-    const { computedStates, skippedActionIds, isPaused, isLocked } = this.props.liftedState;
+    const {
+      computedStates,
+      skippedActionIds,
+      isPaused,
+      isLocked
+    } = this.props.liftedState;
     const noStates = computedStates.length < 2;
 
     return (
       <Toolbar borderPosition="bottom">
-        {features.pause &&
-        <RecordButton paused={isPaused} />
-        }
-        {features.persist &&
-        <PersistButton />
-        }
-        {features.lock &&
-        <LockButton
-          locked={isLocked}
-          disabled={options.lib !== 'redux'}
-        />
-        }
+        {features.pause && <RecordButton paused={isPaused} />}
+        {features.persist && <PersistButton />}
+        {features.lock && (
+          <LockButton locked={isLocked} disabled={options.lib !== 'redux'} />
+        )}
         <Divider />
         <Button
           title="Reset to the state you created the store with"
@@ -93,9 +93,7 @@ export default class TopButtons extends Component {
         </Button>
         <Divider />
         <InstanceSelector />
-        {features.sync &&
-        <SyncButton />
-        }
+        {features.sync && <SyncButton />}
       </Toolbar>
     );
   }

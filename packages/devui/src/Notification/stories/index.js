@@ -15,19 +15,17 @@ export const Container = styled.div`
 
 storiesOf('Notification', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
-    'default',
-    '',
-    () => (
-      <Container>
-        <Notification
-          type={
-            select('type', ['info', 'success', 'warning', 'error'], 'warning')
-          }
-          onClose={action('notification closed')}
-        >
-          {text('Message', 'Hello Notification')}
-        </Notification>
-      </Container>
-    )
-  );
+  .add('default', () => (
+    <Container>
+      <Notification
+        type={select(
+          'type',
+          ['info', 'success', 'warning', 'error'],
+          'warning'
+        )}
+        onClose={action('notification closed')}
+      >
+        {text('Message', 'Hello Notification')}
+      </Notification>
+    </Container>
+  ));

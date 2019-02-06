@@ -1,7 +1,11 @@
 import mapValues from 'lodash/mapValues';
 import identity from 'lodash/identity';
 
-export default function persistState(sessionId, deserializeState = identity, deserializeAction = identity) {
+export default function persistState(
+  sessionId,
+  deserializeState = identity,
+  deserializeAction = identity
+) {
   if (!sessionId) {
     return next => (...args) => next(...args);
   }
@@ -32,7 +36,7 @@ export default function persistState(sessionId, deserializeState = identity, des
         next(reducer, initialState);
       }
     } catch (e) {
-      console.warn('Could not read debug session from localStorage:', e);
+      console.warn('Could not read debug session from localStorage:', e); // eslint-disable-line no-console
       try {
         localStorage.removeItem(key);
       } finally {
@@ -50,7 +54,7 @@ export default function persistState(sessionId, deserializeState = identity, des
         try {
           localStorage.setItem(key, JSON.stringify(store.getState()));
         } catch (e) {
-          console.warn('Could not write debug session to localStorage:', e);
+          console.warn('Could not write debug session to localStorage:', e); // eslint-disable-line no-console
         }
 
         return action;

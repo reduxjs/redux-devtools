@@ -52,47 +52,47 @@ export default class Dialog extends (PureComponent || Component) {
           {!noHeader && (
             <div className="mc-dialog--header">
               <div>{schema ? schema.title || title : title}</div>
-                {!modal && <button onClick={onDismiss}>×</button>}
+              {!modal && <button onClick={onDismiss}>×</button>}
             </div>
           )}
           <div className="mc-dialog--body">
             {children}
             {schema && (
               <Form {...rest}>
-                {!noFooter &&
-                  (
+                {!noFooter && (
                   <input
                     type="submit"
                     ref={this.getFormButtonRef}
                     className="mc-dialog--hidden"
                   />
-                  )
-                }
+                )}
               </Form>
             )}
           </div>
-          {
-            !noFooter &&
-              (actions ?
-                <div className="mc-dialog--footer">
-                  {submitText ?
-                    [...actions,
-                      <Button key="default-submit" primary onClick={this.onSubmit}>
+          {!noFooter &&
+            (actions ? (
+              <div className="mc-dialog--footer">
+                {submitText
+                  ? [
+                      ...actions,
+                      <Button
+                        key="default-submit"
+                        primary
+                        onClick={this.onSubmit}
+                      >
                         {submitText}
                       </Button>
                     ]
-                    : actions
-                  }
-                </div>
-              :
-                <div className="mc-dialog--footer">
-                  <Button onClick={onDismiss}>Cancel</Button>
-                  <Button primary onClick={this.onSubmit}>
-                    {submitText || 'Submit'}
-                  </Button>
-                </div>
-              )
-          }
+                  : actions}
+              </div>
+            ) : (
+              <div className="mc-dialog--footer">
+                <Button onClick={onDismiss}>Cancel</Button>
+                <Button primary onClick={this.onSubmit}>
+                  {submitText || 'Submit'}
+                </Button>
+              </div>
+            ))}
         </div>
       </DialogWrapper>
     );

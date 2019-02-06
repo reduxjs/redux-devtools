@@ -22,7 +22,7 @@ if (argv.protocol === 'https') {
 function log(pass, msg) {
   var prefix = pass ? chalk.green.bgBlack('PASS') : chalk.red.bgBlack('FAIL');
   var color = pass ? chalk.blue : chalk.red;
-  console.log(prefix, color(msg));
+  console.log(prefix, color(msg)); // eslint-disable-line no-console
 }
 
 function getModuleName(type) {
@@ -55,28 +55,40 @@ function getModule(type) {
   };
 }
 
+function injectRN(type, msg) {
+  var module = getModule(type);
+  var fn = type === 'revert' ? injectServer.revert : injectServer.inject;
+  var pass = fn(module.path, options, module.name);
+  log(
+    pass,
+    msg +
+      (pass
+        ? '.'
+        : ', the file `' +
+          path.join(module.name, injectServer.fullPath) +
+          '` not found.')
+  );
+
+  process.exit(pass ? 0 : 1);
+}
+
 if (argv.revert) {
-  var module = getModule(argv.revert);
-  var pass = injectServer.revert(module.path, module.name);
-  var msg = 'Revert injection of ReduxDevTools server from React Native local server';
-  log(pass, msg + (!pass ? ', the file `' + path.join(module.name, injectServer.fullPath) + '` not found.' : '.'));
-
-  process.exit(pass ? 0 : 1);
+  injectRN(
+    argv.revert,
+    'Revert injection of ReduxDevTools server from React Native local server'
+  );
 }
-
 if (argv.injectserver) {
-  var module = getModule(argv.injectserver);
-  var pass = injectServer.inject(module.path, options, module.name);
-  var msg = 'Inject ReduxDevTools server into React Native local server';
-  log(pass, msg + (pass ? '.' : ', the file `' + path.join(module.name, injectServer.fullPath) + '` not found.'));
-
-  process.exit(pass ? 0 : 1);
+  injectRN(
+    argv.injectserver,
+    'Inject ReduxDevTools server into React Native local server'
+  );
 }
 
-server(argv).then(function (r) {
+server(argv).then(function(r) {
   if (argv.open && argv.open !== 'false') {
-    r.on('ready', function () {
+    r.on('ready', function() {
       open(argv.open, options);
-    });  
+    });
   }
 });

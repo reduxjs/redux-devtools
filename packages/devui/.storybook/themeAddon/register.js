@@ -7,6 +7,7 @@ addons.register(ADDON_ID, api => {
   const channel = addons.getChannel();
   addons.addPanel(PANEL_ID, {
     title: 'Theme',
-    render: () => <Panel channel={channel} api={api} />
+    render: ({ active }) =>
+      active ? <Panel channel={channel} api={api} /> : null
   });
 });

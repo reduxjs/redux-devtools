@@ -12,7 +12,7 @@ export const Container = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  
+
   > div {
     width: 90%;
   }
@@ -20,9 +20,8 @@ export const Container = styled.div`
 
 storiesOf('Select', module)
   .addDecorator(withKnobs)
-  .addWithInfo(
+  .add(
     'default',
-    'Wrapper around [React Select](https://github.com/JedWatson/react-select) with themes and new props like `openOuterUp` and `menuMaxHeight`.',
     () => (
       <Container>
         <Select
@@ -39,5 +38,10 @@ storiesOf('Select', module)
           openOuterUp={boolean('openOuterUp', false)}
         />
       </Container>
-    )
+    ),
+    {
+      info:
+        'Wrapper around [React Select](https://github.com/JedWatson/react-select) with themes ' +
+        'and new props like `openOuterUp` and `menuMaxHeight`.'
+    }
   );

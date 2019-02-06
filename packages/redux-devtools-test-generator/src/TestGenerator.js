@@ -7,13 +7,8 @@ import diff from 'simple-diff';
 import es6template from 'es6template';
 import { Editor } from 'devui';
 
-export const fromPath = (path) => (
-  path
-    .map(a => (
-      typeof a === 'string' ? `.${a}` : `[${a}]`
-    ))
-    .join('')
-);
+export const fromPath = path =>
+  path.map(a => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');
 
 function getState(s, defaultValue) {
   if (!s) return defaultValue;
@@ -44,8 +39,10 @@ export function compare(s1, s2, cb, defaultValue) {
     cb({ path, curState });
   }
 
-  diff(getState(s1, defaultValue), getState(s2, defaultValue)/* , { idProp: '*' } */)
-    .forEach(generate);
+  diff(
+    getState(s1, defaultValue),
+    getState(s2, defaultValue) /* , { idProp: '*' } */
+  ).forEach(generate);
 }
 
 export default class TestGenerator extends (PureComponent || Component) {
@@ -65,19 +62,26 @@ export default class TestGenerator extends (PureComponent || Component) {
 
   generateTest() {
     const {
-      computedStates, actions, selectedActionId, startActionId, isVanilla, name
+      computedStates,
+      actions,
+      selectedActionId,
+      startActionId,
+      isVanilla,
+      name
     } = this.props;
 
     if (!actions || !computedStates || computedStates.length < 1) return '';
 
     let { wrap, assertion, dispatcher, indentation } = this.props;
-    if (typeof assertion === 'string') assertion = es6template.compile(assertion);
+    if (typeof assertion === 'string')
+      assertion = es6template.compile(assertion);
     if (typeof wrap === 'string') {
       const ident = wrap.match(/\n.+\$\{assertions}/);
       if (ident) indentation = ident[0].length - 13;
       wrap = es6template.compile(wrap);
     }
-    if (typeof dispatcher === 'string') dispatcher = es6template.compile(dispatcher);
+    if (typeof dispatcher === 'string')
+      dispatcher = es6template.compile(dispatcher);
 
     let space = '';
     if (indentation) space = Array(indentation).join(' ');
@@ -95,21 +99,35 @@ export default class TestGenerator extends (PureComponent || Component) {
     };
 
     while (actions[i]) {
-      if (!isVanilla || /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type)) {
+      if (
+        !isVanilla ||
+        /* eslint-disable-next-line no-useless-escape */
+        /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type)
+      ) {
         if (isFirst) isFirst = false;
         else r += space;
         if (!isVanilla || actions[i].action.type[0] !== '@') {
-          r += dispatcher({
-            action: !isVanilla ?
-              this.getAction(actions[i].action) :
-              this.getMethod(actions[i].action),
-            prevState: i > 0 ? stringify(computedStates[i - 1].state) : undefined
-          }) + '\n';
+          r +=
+            dispatcher({
+              action: !isVanilla
+                ? this.getAction(actions[i].action)
+                : this.getMethod(actions[i].action),
+              prevState:
+                i > 0 ? stringify(computedStates[i - 1].state) : undefined
+            }) + '\n';
         }
         if (!isVanilla) {
-          addAssertions({ path: '', curState: stringify(computedStates[i].state) });
+          addAssertions({
+            path: '',
+            curState: stringify(computedStates[i].state)
+          });
         } else {
-          compare(computedStates[i - 1], computedStates[i], addAssertions, isVanilla && {});
+          compare(
+            computedStates[i - 1],
+            computedStates[i],
+            addAssertions,
+            isVanilla && {}
+          );
         }
       }
       i++;
@@ -122,9 +140,11 @@ export default class TestGenerator extends (PureComponent || Component) {
       else {
         r = wrap({
           name: /^[a-zA-Z0-9_-]+?$/.test(name) ? name : 'Store',
-          actionName: (selectedActionId === null || selectedActionId > 0) && actions[startIdx] ?
-            actions[startIdx].action.type.replace(/[^a-zA-Z0-9_-]+/, '') :
-            'should return the initial state',
+          actionName:
+            (selectedActionId === null || selectedActionId > 0) &&
+            actions[startIdx]
+              ? actions[startIdx].action.type.replace(/[^a-zA-Z0-9_-]+/, '')
+              : 'should return the initial state',
           initialState: stringify(computedStates[startIdx - 1].state),
           assertions: r
         });
@@ -156,18 +176,9 @@ TestGenerator.propTypes = {
   actions: PropTypes.object,
   selectedActionId: PropTypes.number,
   startActionId: PropTypes.number,
-  wrap: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]),
-  dispatcher: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]),
-  assertion: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string
-  ]),
+  wrap: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  dispatcher: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  assertion: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   useCodemirror: PropTypes.bool,
   indentation: PropTypes.number,
   header: PropTypes.element

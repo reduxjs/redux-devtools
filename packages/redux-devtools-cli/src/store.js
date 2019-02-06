@@ -9,7 +9,7 @@ var knex;
 var baseFields = ['id', 'title', 'added'];
 
 function error(msg) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
     return resolve({ error: msg });
   });
 }
@@ -29,12 +29,14 @@ function listAll(query) {
 function get(id) {
   if (!id) return error('No id specified.');
 
-  return knex(reports).where('id', id).first();
+  return knex(reports)
+    .where('id', id)
+    .first();
 }
 
 function add(data) {
   if (!data.type || !data.payload) {
-    return error('Required parameters aren\'t specified.');
+    return error("Required parameters aren't specified.");
   }
   if (data.type !== 'ACTIONS' && data.type !== 'STATE') {
     return error('Type ' + data.type + ' is not supported yet.');
@@ -44,7 +46,8 @@ function add(data) {
   var report = {
     id: reportId,
     type: data.type,
-    title: data.title || data.exception && data.exception.message || data.action,
+    title:
+      data.title || (data.exception && data.exception.message) || data.action,
     description: data.description,
     action: data.action,
     payload: data.payload,
@@ -57,7 +60,7 @@ function add(data) {
     instanceId: data.instanceId,
     meta: data.meta,
     exception: composeException(data.exception),
-    added: new Date().toISOString(),
+    added: new Date().toISOString()
   };
   if (data.appId) report.appId = data.appId; // TODO check if the id exists and we have access to link it
   /*
@@ -68,8 +71,12 @@ function add(data) {
   };
   */
 
-  return knex.insert(report).into(reports)
-    .then(function (){ return byBaseFields(report); })
+  return knex
+    .insert(report)
+    .into(reports)
+    .then(function() {
+      return byBaseFields(report);
+    });
 }
 
 function byBaseFields(data) {
@@ -92,11 +99,9 @@ function composeException(exception) {
 
   if (exception) {
     message = 'Exception thrown: ';
-    if (exception.message)
-      message += exception.message;
-    if (exception.stack)
-      message += '\n' + exception.stack;
-    }
+    if (exception.message) message += exception.message;
+    if (exception.stack) message += '\n' + exception.stack;
+  }
   return message;
 }
 

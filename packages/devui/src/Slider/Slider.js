@@ -9,12 +9,14 @@ const ContainerWithValue = createStyledComponent(containerStyle);
 
 export default class Slider extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.label !== this.props.label ||
+    return (
+      nextProps.label !== this.props.label ||
       nextProps.value !== this.props.value ||
       nextProps.max !== this.props.max ||
       nextProps.min !== this.props.min ||
       nextProps.withValue !== this.props.withValue ||
-      nextProps.disabled !== this.props.disabled;
+      nextProps.disabled !== this.props.disabled
+    );
   }
 
   onChange = e => {
@@ -25,7 +27,7 @@ export default class Slider extends Component {
     const { label, sublabel, withValue, theme, ...rest } = this.props;
     const { value, max, min, disabled } = rest;
     const absMax = max - min;
-    const percent = (value - min) / absMax * 100;
+    const percent = ((value - min) / absMax) * 100;
     const slider = <input {...rest} onChange={this.onChange} type="range" />;
 
     return (
@@ -35,13 +37,19 @@ export default class Slider extends Component {
         withLabel={!!label}
         theme={theme}
       >
-        {label && <label>{label} {sublabel && <span>{sublabel}</span>}</label>}
-        {!withValue ? slider :
+        {label && (
+          <label>
+            {label} {sublabel && <span>{sublabel}</span>}
+          </label>
+        )}
+        {!withValue ? (
+          slider
+        ) : (
           <ContainerWithValue theme={theme}>
             {slider}
             <div>{value}</div>
           </ContainerWithValue>
-        }
+        )}
       </SliderWrapper>
     );
   }

@@ -8,8 +8,10 @@ class CounterApp extends Component {
   render() {
     const { counter, dispatch } = this.props;
     return (
-      <Counter counter={counter}
-               {...bindActionCreators(CounterActions, dispatch)} />
+      <Counter
+        counter={counter}
+        {...bindActionCreators(CounterActions, dispatch)}
+      />
     );
   }
 }

@@ -8,5 +8,5 @@ cache:
     - "node_modules"
 script:
   - yarn build:all
-  - yarn lint
+  - yarn lint:all
   - yarn test

@@ -46,10 +46,12 @@ const DevTools = createDevTools(
   // Consult their repositories to learn about those props.
   // Here, we put LogMonitor inside a DockMonitor.
   // Note: DockMonitor is visible by default.
-  <DockMonitor toggleVisibilityKey='ctrl-h'
-               changePositionKey='ctrl-q'
-               defaultIsVisible={true}>
-    <LogMonitor theme='tomorrow' />
+  <DockMonitor
+    toggleVisibilityKey="ctrl-h"
+    changePositionKey="ctrl-q"
+    defaultIsVisible={true}
+  >
+    <LogMonitor theme="tomorrow" />
   </DockMonitor>
 );
 
@@ -60,9 +62,7 @@ Note that you can use `LogMonitor` directly without wrapping it in `DockMonitor`
 
 ```js
 // If you'd rather not use docking UI, use <LogMonitor> directly
-const DevTools = createDevTools(
-  <LogMonitor theme='solarized' />
-);
+const DevTools = createDevTools(<LogMonitor theme="solarized" />);
 ```
 
 #### Use `DevTools.instrument()` Store Enhancer
@@ -75,7 +75,7 @@ The easiest way to apply several store enhancers in a row is to use the [`compos
 
 You can add additional options to it: `DevTools.instrument({ maxAge: 50, shouldCatchErrors: true })`. See [`redux-devtools-instrument`'s API](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-instrument#api) for more details.
 
-It’s important that you should add `DevTools.instrument()` *after* `applyMiddleware` in your `compose()` function arguments. This is because `applyMiddleware` is potentially asynchronous, but `DevTools.instrument()` expects all actions to be plain objects rather than actions interpreted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk). So make sure `applyMiddleware()` goes first in the `compose()` call, and `DevTools.instrument()` goes after it.
+It’s important that you should add `DevTools.instrument()` _after_ `applyMiddleware` in your `compose()` function arguments. This is because `applyMiddleware` is potentially asynchronous, but `DevTools.instrument()` expects all actions to be plain objects rather than actions interpreted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk). So make sure `applyMiddleware()` goes first in the `compose()` call, and `DevTools.instrument()` goes after it.
 
 ##### `store/configureStore.js`
 
@@ -99,7 +99,9 @@ export default function configureStore(initialState) {
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
     module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
+      store.replaceReducer(
+        require('../reducers') /*.default if you use Babel 6+ */
+      )
     );
   }
 
@@ -126,7 +128,7 @@ function getDebugSessionKey() {
   // You can write custom logic here!
   // By default we try to read the key from ?debug_session=<key> in the address bar
   const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/);
-  return (matches && matches.length > 0)? matches[1] : null;
+  return matches && matches.length > 0 ? matches[1] : null;
 }
 
 export default function configureStore(initialState) {
@@ -181,7 +183,7 @@ export default function configureStore(initialState) {
   // Note: only Redux >= 3.1.0 supports passing enhancer as third argument.
   // See https://github.com/rackt/redux/releases/tag/v3.1.0
   return createStore(rootReducer, initialState, enhancer);
-};
+}
 ```
 
 ##### `store/configureStore.dev.js`
@@ -205,7 +207,7 @@ function getDebugSessionKey() {
   // You can write custom logic here!
   // By default we try to read the key from ?debug_session=<key> in the address bar
   const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
-  return (matches && matches.length > 0)? matches[1] : null;
+  return matches && matches.length > 0 ? matches[1] : null;
 }
 
 export default function configureStore(initialState) {
@@ -216,7 +218,9 @@ export default function configureStore(initialState) {
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
     module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
+      store.replaceReducer(
+        require('../reducers') /*.default if you use Babel 6+ */
+      )
     );
   }
 
@@ -346,7 +350,11 @@ import { render } from 'react-dom';
 import DevTools from './containers/DevTools';
 
 export default function showDevTools(store) {
-  const popup = window.open(null, 'Redux DevTools', 'menubar=no,location=no,resizable=yes,scrollbars=no,status=no');
+  const popup = window.open(
+    null,
+    'Redux DevTools',
+    'menubar=no,location=no,resizable=yes,scrollbars=no,status=no'
+  );
   // Reload in case it already exists
   popup.location.reload();
 
@@ -366,11 +374,11 @@ Note that there are no useful props you can pass to the `DevTools` component oth
 
 ### Gotchas
 
-* **Your reducers have to be pure and free of side effects to work correctly with DevTools.** For example, even generating a random ID in reducer makes it impure and non-deterministic. Instead, do this in action creators.
+- **Your reducers have to be pure and free of side effects to work correctly with DevTools.** For example, even generating a random ID in reducer makes it impure and non-deterministic. Instead, do this in action creators.
 
-* **Make sure to only apply `DevTools.instrument()` and render `<DevTools>` in development!** In production, this will be terribly slow because actions just accumulate forever. As described above, you need to use conditional `require`s and use `DefinePlugin` (Webpack) or `loose-envify` (Browserify) together with Uglify to remove the dead code. Here is [an example](https://github.com/erikras/react-redux-universal-hot-example/) that adds Redux DevTools handling the production case correctly.
+- **Make sure to only apply `DevTools.instrument()` and render `<DevTools>` in development!** In production, this will be terribly slow because actions just accumulate forever. As described above, you need to use conditional `require`s and use `DefinePlugin` (Webpack) or `loose-envify` (Browserify) together with Uglify to remove the dead code. Here is [an example](https://github.com/erikras/react-redux-universal-hot-example/) that adds Redux DevTools handling the production case correctly.
 
-* **It is important that `DevTools.instrument()` store enhancer should be added to your middleware stack *after* `applyMiddleware` in the `compose`d functions, as `applyMiddleware` is potentially asynchronous.** Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
+- **It is important that `DevTools.instrument()` store enhancer should be added to your middleware stack _after_ `applyMiddleware` in the `compose`d functions, as `applyMiddleware` is potentially asynchronous.** Otherwise, DevTools won’t see the raw actions emitted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk).
 
 ### What Next?
 

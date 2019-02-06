@@ -1,11 +1,13 @@
 import { css } from 'styled-components';
 
 export default ({ theme, left, top, visible }) => css`
-  ${visible ? `
+  ${visible
+    ? `
     visibility: visible;
     opacity: 1;
     transition: opacity 0.2s linear;
-    ` : `
+    `
+    : `
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.2s, opacity 0.2s linear;
@@ -36,7 +38,7 @@ export default ({ theme, left, top, visible }) => css`
       color: ${theme.base07};
     }
     &:focus {
-      outline:0;
+      outline: 0;
     }
   }
 `;

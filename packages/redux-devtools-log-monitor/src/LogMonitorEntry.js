@@ -15,7 +15,8 @@ const styles = {
   }
 };
 
-const getDeepItem = (data, path) => path.reduce((obj, key) => obj && obj[key], data);
+const getDeepItem = (data, path) =>
+  path.reduce((obj, key) => obj && obj[key], data);
 const dataIsEqual = (data, previousData, keyPath) => {
   const path = [...keyPath].reverse().slice(1);
 
@@ -54,15 +55,16 @@ export default class LogMonitorEntry extends Component {
         let theme;
 
         if (this.props.markStateDiff) {
-          const previousData = typeof this.props.previousState !== 'undefined' ?
-            this.props.select(this.props.previousState) :
-            undefined;
+          const previousData =
+            typeof this.props.previousState !== 'undefined'
+              ? this.props.select(this.props.previousState)
+              : undefined;
           const getValueStyle = ({ style }, nodeType, keyPath) => ({
             style: {
               ...style,
-              backgroundColor: dataIsEqual(data, previousData, keyPath) ?
-                'transparent' :
-                this.props.theme.base01
+              backgroundColor: dataIsEqual(data, previousData, keyPath)
+                ? 'transparent'
+                : this.props.theme.base01
             }
           });
           const getNestedNodeStyle = ({ style }, keyPath) => ({
@@ -87,7 +89,8 @@ export default class LogMonitorEntry extends Component {
             data={data}
             invertTheme={false}
             keyPath={['state']}
-            shouldExpandNode={this.shouldExpandNode} />
+            shouldExpandNode={this.shouldExpandNode}
+          />
         );
       } catch (err) {
         errorText = 'Error selecting state.';
@@ -95,13 +98,15 @@ export default class LogMonitorEntry extends Component {
     }
 
     return (
-      <div style={{
-        color: this.props.theme.base08,
-        paddingTop: 20,
-        paddingLeft: 30,
-        paddingRight: 30,
-        paddingBottom: 35
-      }}>
+      <div
+        style={{
+          color: this.props.theme.base08,
+          paddingTop: 20,
+          paddingLeft: 30,
+          paddingRight: 30,
+          paddingBottom: 35
+        }}
+      >
         {errorText}
       </div>
     );
@@ -123,30 +128,39 @@ export default class LogMonitorEntry extends Component {
   }
 
   render() {
-    const { actionId, error, action, state, collapsed, selected, inFuture } = this.props;
+    const {
+      actionId,
+      error,
+      action,
+      state,
+      collapsed,
+      selected,
+      inFuture
+    } = this.props;
     const styleEntry = {
       opacity: collapsed ? 0.5 : 1,
-      cursor: (actionId > 0) ? 'pointer' : 'default'
+      cursor: actionId > 0 ? 'pointer' : 'default'
     };
 
     return (
-      <div style={{
-        opacity: selected ? 0.4 : inFuture ? 0.6 : 1, // eslint-disable-line no-nested-ternary
-        textDecoration: collapsed ? 'line-through' : 'none',
-        color: this.props.theme.base06
-      }}>
+      <div
+        style={{
+          opacity: selected ? 0.4 : inFuture ? 0.6 : 1, // eslint-disable-line no-nested-ternary
+          textDecoration: collapsed ? 'line-through' : 'none',
+          color: this.props.theme.base06
+        }}
+      >
         <LogMonitorEntryAction
           theme={this.props.theme}
           collapsed={collapsed}
           action={action}
           expandActionRoot={this.props.expandActionRoot}
           onClick={this.handleActionClick}
-          style={{...styles.entry, ...styleEntry}}/>
-        {!collapsed &&
-          <div style={{ paddingLeft: 16 }}>
-            {this.printState(state, error)}
-          </div>
-        }
+          style={{ ...styles.entry, ...styleEntry }}
+        />
+        {!collapsed && (
+          <div style={{ paddingLeft: 16 }}>{this.printState(state, error)}</div>
+        )}
       </div>
     );
   }

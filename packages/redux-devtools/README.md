@@ -1,8 +1,7 @@
-Redux DevTools
-=========================
+# Redux DevTools
 
 A live-editing time travel environment for [Redux](https://github.com/reactjs/redux).  
-**[See Dan's React Europe talk demoing it!](http://youtube.com/watch?v=xsSnOQynTHs)**  
+**[See Dan's React Europe talk demoing it!](http://youtube.com/watch?v=xsSnOQynTHs)**
 
 > Note that the implemention in this repository is different from [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension). Please refer to the latter for browser extension.
 
@@ -24,11 +23,11 @@ A live-editing time travel environment for [Redux](https://github.com/reactjs/re
 
 ### Features
 
-* Lets you inspect every state and action payload
-* Lets you go back in time by “cancelling” actions
-* If you change the reducer code, each “staged” action will be re-evaluated
-* If the reducers throw, you will see during which action this happened, and what the error was
-* With `persistState()` store enhancer, you can persist debug sessions across page reloads
+- Lets you inspect every state and action payload
+- Lets you go back in time by “cancelling” actions
+- If you change the reducer code, each “staged” action will be re-evaluated
+- If the reducers throw, you will see during which action this happened, and what the error was
+- With `persistState()` store enhancer, you can persist debug sessions across page reloads
 
 ### Overview
 
@@ -85,10 +84,10 @@ Also try opening `http://localhost:3000/?debug_session=123`, click around, and t
 
 Some crazy ideas for custom monitors:
 
-* A slider that lets you jump between computed states just by dragging it
-* An in-app layer that shows the last N states right in the app (e.g. for animation)
-* A time machine like interface where the last N states of your app reside on different Z layers
-* Feel free to come up with and implement your own! Check [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) `propTypes` to see what you can do.
+- A slider that lets you jump between computed states just by dragging it
+- An in-app layer that shows the last N states right in the app (e.g. for animation)
+- A time machine like interface where the last N states of your app reside on different Z layers
+- Feel free to come up with and implement your own! Check [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) `propTypes` to see what you can do.
 
 In fact some of these are implemented already:
 
@@ -123,6 +122,7 @@ In fact some of these are implemented already:
 ![redux-devtools-dispatch](https://cloud.githubusercontent.com/assets/969003/12874321/2c3624ec-cdd2-11e5-9856-fd7e24efb8d5.gif)
 
 #### [Redux Usage Report](https://github.com/aholachek/redux-usage-report)
+
 ![redux-usage-report](https://furtive-discussion.surge.sh/redux-usage-monitor.gif)
 
 #### Keep them coming!

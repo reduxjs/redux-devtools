@@ -42,21 +42,32 @@ export const style = ({ theme, percent, disabled, withLabel }) => css`
     border-radius: 0.8em/1.1em;
     font-size: 1em;
     cursor: pointer;
-    background: linear-gradient(${theme.base02}, ${theme.base00}) padding-box, 50% 50% border-box;
+    background: linear-gradient(${theme.base02}, ${
+  theme.base00
+}) padding-box, 50% 50% border-box;
     background-size: 100% 100%;
   }
 
-  ${prefixSelectors('input', ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'], `{
+  ${prefixSelectors(
+    'input',
+    ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'],
+    `{
     position: relative;
     height: 0.8em;
     border-radius: 0.5em;
     box-shadow: 0 0 .125em ${theme.base04};
-    background: linear-gradient(${theme.base01}, ${theme.base02} 40%, ${theme.base01})
+    background: linear-gradient(${theme.base01}, ${theme.base02} 40%, ${
+      theme.base01
+    })
       no-repeat ${theme.base00};
     background-size: ${percent}% 100%;
-  }`)}
+  }`
+  )}
 
- ${prefixSelectors('input', ['webkit-slider-thumb', 'moz-range-thumb', 'ms-thumb'], `{
+ ${prefixSelectors(
+   'input',
+   ['webkit-slider-thumb', 'moz-range-thumb', 'ms-thumb'],
+   `{
     position: relative;
     appearance: none;
     cursor: ew-resize;
@@ -68,13 +79,16 @@ export const style = ({ theme, percent, disabled, withLabel }) => css`
     height: 1.5em;
     border-radius: 50%;
     cursor: pointer;
-  }`)}
+  }`
+ )}
 
- ${prefixSelectors('input:focus:not(:active)',
-  ['webkit-slider-thumb', 'moz-range-thumb', 'ms-thumb'],
-  `{
+ ${prefixSelectors(
+   'input:focus:not(:active)',
+   ['webkit-slider-thumb', 'moz-range-thumb', 'ms-thumb'],
+   `{
     box-shadow: 0 0 1px 2px ${theme.base0D};
-  }`)}
+  }`
+ )}
 
   input::-moz-focus-outer {
     border: 0;

@@ -9,11 +9,21 @@ export function sweep(state) {
     actionsById: omit(state.actionsById, state.skippedActionIds),
     stagedActionIds: difference(state.stagedActionIds, state.skippedActionIds),
     skippedActionIds: [],
-    currentStateIndex: Math.min(state.currentStateIndex, state.stagedActionIds.length - 1)
+    currentStateIndex: Math.min(
+      state.currentStateIndex,
+      state.stagedActionIds.length - 1
+    )
   };
 }
 
-export function nonReduxDispatch(store, message, instanceId, action, initialState, preInstances) {
+export function nonReduxDispatch(
+  store,
+  message,
+  instanceId,
+  action,
+  initialState,
+  preInstances
+) {
   const instances = preInstances || store.getState().instances;
   const state = instances.states[instanceId];
   const options = instances.options[instanceId];
@@ -21,7 +31,10 @@ export function nonReduxDispatch(store, message, instanceId, action, initialStat
   if (message !== 'DISPATCH') {
     if (message === 'IMPORT') {
       if (options.features.import === true) {
-        return stringifyJSON(state.computedStates[state.currentStateIndex].state, true);
+        return stringifyJSON(
+          state.computedStates[state.currentStateIndex].state,
+          true
+        );
       }
       return initialState;
     }
@@ -37,7 +50,9 @@ export function nonReduxDispatch(store, message, instanceId, action, initialStat
       return stringifyJSON(state.computedStates[action.index].state, true);
     case 'JUMP_TO_ACTION':
       return stringifyJSON(
-        state.computedStates[state.stagedActionIds.indexOf(action.actionId)].state, true
+        state.computedStates[state.stagedActionIds.indexOf(action.actionId)]
+          .state,
+        true
       );
     case 'ROLLBACK':
       return stringifyJSON(state.computedStates[0].state, true);

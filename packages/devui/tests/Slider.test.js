@@ -3,7 +3,7 @@ import { render, mount } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 import { Slider } from '../src';
 
-describe('Slider', function () {
+describe('Slider', function() {
   it('renders correctly', () => {
     const wrapper = render(<Slider />);
     expect(renderToJson(wrapper)).toMatchSnapshot();

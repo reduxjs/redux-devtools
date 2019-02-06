@@ -40,18 +40,18 @@ export default class MainSection extends Component {
     const { filter } = this.state;
 
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
-    const markedCount = todos.reduce((count, todo) =>
-      todo.marked ? count + 1 : count,
+    const markedCount = todos.reduce(
+      (count, todo) => (todo.marked ? count + 1 : count),
       0
     );
 
     return (
-      <section className='main'>
+      <section className="main">
         {this.renderToggleAll(markedCount)}
-        <ul className='todo-list'>
-          {filteredTodos.map(todo =>
+        <ul className="todo-list">
+          {filteredTodos.map(todo => (
             <TodoItem key={todo.id} todo={todo} {...actions} />
-          )}
+          ))}
         </ul>
         {this.renderFooter(markedCount)}
       </section>
@@ -64,11 +64,13 @@ export default class MainSection extends Component {
     if (todos.length > 0) {
       return (
         <div>
-          <input id={this.htmlFormInputId}
-                 className='toggle-all'
-                 type='checkbox'
-                 checked={markedCount === todos.length}
-                 onChange={actions.markAll} />
+          <input
+            id={this.htmlFormInputId}
+            className="toggle-all"
+            type="checkbox"
+            checked={markedCount === todos.length}
+            onChange={actions.markAll}
+          />
           <label htmlFor={this.htmlFormInputId}>Mark all as complete</label>
         </div>
       );
@@ -82,11 +84,13 @@ export default class MainSection extends Component {
 
     if (todos.length) {
       return (
-        <Footer markedCount={markedCount}
-                unmarkedCount={unmarkedCount}
-                filter={filter}
-                onClearMarked={::this.handleClearMarked}
-                onShow={::this.handleShow} />
+        <Footer
+          markedCount={markedCount}
+          unmarkedCount={unmarkedCount}
+          filter={filter}
+          onClearMarked={::this.handleClearMarked}
+          onShow={::this.handleShow}
+        />
       );
     }
   }

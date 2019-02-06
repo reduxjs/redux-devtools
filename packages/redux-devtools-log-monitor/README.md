@@ -1,5 +1,4 @@
-Redux DevTools Log Monitor
-=========================
+# Redux DevTools Log Monitor
 
 The default monitor for [Redux DevTools](https://github.com/gaearon/redux-devtools) with a tree view.  
 It shows a log of states and actions, and lets you change their history. Created by [Dan Abramov](http://github.com/gaearon) and merged into `redux-devtools` monorepo from [here](https://github.com/gaearon/redux-devtools-log-monitor).
@@ -23,9 +22,7 @@ import React from 'react';
 import { createDevTools } from 'redux-devtools';
 import LogMonitor from 'redux-devtools-log-monitor';
 
-export default createDevTools(
-  <LogMonitor />
-);
+export default createDevTools(<LogMonitor />);
 ```
 
 Then you can render `<DevTools>` to any place inside app or even into a separate popup window.
@@ -47,15 +44,15 @@ There are four buttons at the very top. “Reset” takes your app to the state 
 
 ### Props
 
-Name                  | Description
--------------         | -------------
-`theme`               | Either a string referring to one of the themes provided by [redux-devtools-themes](https://github.com/gaearon/redux-devtools-themes) (feel free to contribute!) or a custom object of the same format. Optional. By default, set to [`'nicinabox'`](https://github.com/gaearon/redux-devtools-themes/blob/master/src/nicinabox.js).
-`select`              | A function that selects the slice of the state for DevTools to show. For example, `state => state.thePart.iCare.about`. Optional. By default, set to `state => state`.
-`preserveScrollTop`   | When `true`, records the current scroll top every second so it can be restored on refresh. This only has effect when used together with `persistState()` enhancer from Redux DevTools. By default, set to `true`.
-`expandActionRoot`    | When `true`, displays the action object expanded rather than collapsed. By default, set to `true`.
-`expandStateRoot`     | When `true`, displays the state object expanded rather than collapsed. By default, set to `true`.
-`markStateDiff`       | When `true`, mark the state's values which were changed comparing to the previous state. It affects the performance significantly! You might also want to set `expandStateRoot` to `true` as well when enabling it. By default, set to `false`.
-`hideMainButtons`     | When `true`, will show only the logs without the top button bar. By default, set to `false`.
+| Name                | Description                                                                                                                                                                                                                                                                                                                         |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `theme`             | Either a string referring to one of the themes provided by [redux-devtools-themes](https://github.com/gaearon/redux-devtools-themes) (feel free to contribute!) or a custom object of the same format. Optional. By default, set to [`'nicinabox'`](https://github.com/gaearon/redux-devtools-themes/blob/master/src/nicinabox.js). |
+| `select`            | A function that selects the slice of the state for DevTools to show. For example, `state => state.thePart.iCare.about`. Optional. By default, set to `state => state`.                                                                                                                                                              |
+| `preserveScrollTop` | When `true`, records the current scroll top every second so it can be restored on refresh. This only has effect when used together with `persistState()` enhancer from Redux DevTools. By default, set to `true`.                                                                                                                   |
+| `expandActionRoot`  | When `true`, displays the action object expanded rather than collapsed. By default, set to `true`.                                                                                                                                                                                                                                  |
+| `expandStateRoot`   | When `true`, displays the state object expanded rather than collapsed. By default, set to `true`.                                                                                                                                                                                                                                   |
+| `markStateDiff`     | When `true`, mark the state's values which were changed comparing to the previous state. It affects the performance significantly! You might also want to set `expandStateRoot` to `true` as well when enabling it. By default, set to `false`.                                                                                     |
+| `hideMainButtons`   | When `true`, will show only the logs without the top button bar. By default, set to `false`.                                                                                                                                                                                                                                        |
 
 ### License
 

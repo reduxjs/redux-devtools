@@ -18,40 +18,37 @@ const actions = {
   0: { type: 'PERFORM_ACTION', action: { type: '@@INIT' } },
   1: { type: 'PERFORM_ACTION', action: { type: 'INCREMENT_COUNTER' } },
   2: {
-    type: 'PERFORM_ACTION', action: { type: 'INCREMENT_COUNTER' },
-    stack: 'Error\n    at fn1 (app.js:72:24)\n    at fn2 (app.js:84:31)\n     at fn3 (chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/page.bundle.js:1269:80)'
+    type: 'PERFORM_ACTION',
+    action: { type: 'INCREMENT_COUNTER' },
+    stack:
+      'Error\n    at fn1 (app.js:72:24)\n    at fn2 (app.js:84:31)\n     ' +
+      'at fn3 (chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/page.bundle.js:1269:80)'
   }
 };
 
 describe('StackTraceTab component', () => {
-  it('should render with no props', (done) => {
+  it('should render with no props', done => {
     const component = mount(<StackTraceTab />);
     genAsyncSnapshot(component, done);
   });
 
-  it('should render with props, but without stack', (done) => {
+  it('should render with props, but without stack', done => {
     const component = mount(
-      <StackTraceTab
-        actions={actions} action={actions[0].action}
-      />
+      <StackTraceTab actions={actions} action={actions[0].action} />
     );
     genAsyncSnapshot(component, done);
   });
 
-  it('should render the link to docs', (done) => {
+  it('should render the link to docs', done => {
     const component = mount(
-      <StackTraceTab
-      actions={actions} action={actions[1].action}
-      />
+      <StackTraceTab actions={actions} action={actions[1].action} />
     );
     genAsyncSnapshot(component, done);
   });
 
-  it('should render with trace stack', (done) => {
+  it('should render with trace stack', done => {
     const component = mount(
-      <StackTraceTab
-      actions={actions} action={actions[2].action}
-      />
+      <StackTraceTab actions={actions} action={actions[2].action} />
     );
     genAsyncSnapshot(component, done);
   });

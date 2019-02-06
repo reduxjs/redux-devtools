@@ -1,5 +1,4 @@
-Redux DevTools Stack Trace Monitor
-==================================
+# Redux DevTools Stack Trace Monitor
 
 Submonitor for Redux DevTools inspector to show stack traces. Based on [`react-error-overlay`](https://github.com/facebook/create-react-app/tree/master/packages/react-error-overlay) and the contribution of [Mark Erikson](https://github.com/markerikson) in [the PR from `remotedev-app`](https://github.com/zalmoxisus/remotedev-app/pull/43/).
 

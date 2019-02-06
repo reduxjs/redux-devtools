@@ -14,8 +14,7 @@ const Toolbar = styled.div`
   text-align: center;
   position: relative;
   ${({ borderPosition, theme }) =>
-    borderPosition && `border-${borderPosition}: 1px solid ${theme.base02};`
-  }
+    borderPosition && `border-${borderPosition}: 1px solid ${theme.base02};`}
   
   & > div {
     margin: auto ${props => (props.noBorder ? '0' : '1px;')};

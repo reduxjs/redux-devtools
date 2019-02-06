@@ -1,6 +1,11 @@
 import {
-  UPDATE_STATE, SET_STATE, LIFTED_ACTION,
-  SELECT_INSTANCE, REMOVE_INSTANCE, TOGGLE_PERSIST, TOGGLE_SYNC
+  UPDATE_STATE,
+  SET_STATE,
+  LIFTED_ACTION,
+  SELECT_INSTANCE,
+  REMOVE_INSTANCE,
+  TOGGLE_PERSIST,
+  TOGGLE_SYNC
 } from '../constants/actionTypes';
 import { DISCONNECTED } from '../constants/socketActionTypes';
 import parseJSON from '../utils/parseJSON';
@@ -42,19 +47,18 @@ function updateState(state, request, id, serialize) {
 
   let newState;
   const liftedState = state[id] || state.default;
-  const action = request.action && parseJSON(request.action, serialize) || {};
+  const action = (request.action && parseJSON(request.action, serialize)) || {};
 
   switch (request.type) {
     case 'INIT':
-      newState = recompute(
-        state.default,
-        payload,
-        { action: { type: '@@INIT' }, timestamp: action.timestamp || Date.now() }
-      );
+      newState = recompute(state.default, payload, {
+        action: { type: '@@INIT' },
+        timestamp: action.timestamp || Date.now()
+      });
       break;
     case 'ACTION': {
       let isExcess = request.isExcess;
-      const nextActionId = request.nextActionId || (liftedState.nextActionId + 1);
+      const nextActionId = request.nextActionId || liftedState.nextActionId + 1;
       const maxAge = request.maxAge;
       if (Array.isArray(action)) {
         // Batched actions
@@ -211,20 +215,21 @@ function init({ type, action, name, libConfig = {} }, connectionId, current) {
     explicitLib: libConfig.type,
     lib,
     actionCreators,
-    features: libConfig.features ? libConfig.features :
-    {
-      lock: lib === 'redux',
-      export: libConfig.type === 'redux' ? 'custom' : true,
-      import: 'custom',
-      persist: true,
-      pause: true,
-      reorder: true,
-      jump: true,
-      skip: true,
-      dispatch: true,
-      sync: true,
-      test: true
-    },
+    features: libConfig.features
+      ? libConfig.features
+      : {
+          lock: lib === 'redux',
+          export: libConfig.type === 'redux' ? 'custom' : true,
+          import: 'custom',
+          persist: true,
+          pause: true,
+          reorder: true,
+          jump: true,
+          skip: true,
+          dispatch: true,
+          sync: true,
+          test: true
+        },
     serialize: libConfig.serialize
   };
 }
@@ -244,7 +249,10 @@ export default function instances(state = initialState, action) {
           ...state.connections,
           [connectionId]: [...(connections[connectionId] || []), current]
         };
-        options = { ...options, [current]: init(request, connectionId, current) };
+        options = {
+          ...options,
+          [current]: init(request, connectionId, current)
+        };
       }
 
       return {
@@ -252,7 +260,12 @@ export default function instances(state = initialState, action) {
         current,
         connections,
         options,
-        states: updateState(state.states, request, current, options[current].serialize)
+        states: updateState(
+          state.states,
+          request,
+          current,
+          options[current].serialize
+        )
       };
     }
     case SET_STATE:
@@ -295,5 +308,6 @@ export default function instances(state = initialState, action) {
 }
 
 /* eslint-disable no-shadow */
-export const getActiveInstance = instances => instances.selected || instances.current;
+export const getActiveInstance = instances =>
+  instances.selected || instances.current;
 /* eslint-enable */

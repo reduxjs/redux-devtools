@@ -11,10 +11,14 @@ export const TabsContainer = styled.div`
   height: 100%;
 
   > div > div:first-child {
-    ${props => props.position !== 'left' && `
+    ${props =>
+      props.position !== 'left' &&
+      `
       margin-left: auto !important;
     `}
-    ${props => props.position === 'center' && `
+    ${props =>
+      props.position === 'center' &&
+      `
       margin-right: auto !important;
     `}
   }

@@ -7,11 +7,7 @@ import DevTools from '../containers/DevTools';
 const enhancer = compose(
   applyMiddleware(thunk),
   DevTools.instrument(),
-  persistState(
-    window.location.href.match(
-      /[?&]debug_session=([^&#]+)\b/
-    )
-  )
+  persistState(window.location.href.match(/[?&]debug_session=([^&#]+)\b/))
 );
 
 export default function configureStore(initialState) {

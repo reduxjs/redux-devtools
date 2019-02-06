@@ -1,4 +1,4 @@
-export default (colors) => ({
+export default colors => ({
   fontFamily: "'Roboto', sans-serif",
   codeFontFamily: "'Roboto Mono', monospace",
   inputPadding: 5,

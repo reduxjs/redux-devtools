@@ -22,14 +22,25 @@ function download(state) {
 const exportState = store => next => action => {
   const result = next(action);
 
-  if (toExport && action.type === UPDATE_STATE && action.request.type === 'EXPORT') {
+  if (
+    toExport &&
+    action.type === UPDATE_STATE &&
+    action.request.type === 'EXPORT'
+  ) {
     const request = action.request;
     const id = request.instanceId || request.id;
     if (id === toExport) {
       toExport = undefined;
-      download(JSON.stringify({
-        payload: request.payload, preloadedState: request.committedState
-      }, null, '\t'));
+      download(
+        JSON.stringify(
+          {
+            payload: request.payload,
+            preloadedState: request.committedState
+          },
+          null,
+          '\t'
+        )
+      );
     }
   } else if (action.type === EXPORT) {
     const instances = store.getState().instances;

@@ -1,5 +1,4 @@
 import React from 'react';
-import expect from 'expect';
 import { createRenderer } from 'react-test-renderer/shallow';
 
 import JSONTree from '../src/index';

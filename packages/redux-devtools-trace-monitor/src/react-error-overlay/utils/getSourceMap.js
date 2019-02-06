@@ -32,10 +32,10 @@ class SourceMap {
     const {
       line: l,
       column: c,
-      source: s,
+      source: s
     } = this.__source_map.originalPositionFor({
       line,
-      column,
+      column
     });
     return { line: l, column: c, source: s };
   }
@@ -54,11 +54,11 @@ class SourceMap {
     const { line: l, column: c } = this.__source_map.generatedPositionFor({
       source,
       line,
-      column,
+      column
     });
     return {
       line: l,
-      column: c,
+      column: c
     };
   }
 
@@ -100,11 +100,10 @@ function extractSourceMapUrl(
  * @param {string} fileContents The contents of the source file.
  */
 async function getSourceMap(
-//function getSourceMap(
+  //function getSourceMap(
   fileUri: string,
   fileContents: string
 ): Promise<SourceMap> {
-
   let sm = await extractSourceMapUrl(fileUri, fileContents);
   if (sm.indexOf('data:') === 0) {
     const base64 = /^data:application\/json;([\w=:"-]+;)*base64,/;
@@ -153,7 +152,6 @@ async function getSourceMap(
           }
       });
       */
-
 }
 
 export { extractSourceMapUrl, getSourceMap };

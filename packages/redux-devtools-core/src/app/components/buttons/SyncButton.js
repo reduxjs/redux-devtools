@@ -42,4 +42,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SyncButton);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SyncButton);
