@@ -33,6 +33,7 @@ exports[`StackTraceTab component should render the link to docs 1`] = `
       },
     }
   }
+  openFile={[Function]}
 >
   <div
     style={
@@ -54,7 +55,9 @@ exports[`StackTraceTab component should render the link to docs 1`] = `
 `;
 
 exports[`StackTraceTab component should render with no props 1`] = `
-<StackTraceTab>
+<StackTraceTab
+  openFile={[Function]}
+>
   <div
     style={
       Object {
@@ -116,6 +119,7 @@ exports[`StackTraceTab component should render with props, but without stack 1`]
       },
     }
   }
+  openFile={[Function]}
 >
   <div
     style={
@@ -178,6 +182,7 @@ exports[`StackTraceTab component should render with trace stack 1`] = `
       },
     }
   }
+  openFile={[Function]}
 >
   <div
     style={
