@@ -19,16 +19,17 @@ export const ActionTypes = {
   PAUSE_RECORDING: 'PAUSE_RECORDING'
 };
 
-const isChrome = (
-  typeof window === 'object' && (
-    typeof window.chrome !== 'undefined' ||
-    typeof window.process !== 'undefined' &&
-    window.process.type === 'renderer'
-));
+const isChrome =
+  typeof window === 'object' &&
+  (typeof window.chrome !== 'undefined' ||
+    (typeof window.process !== 'undefined' &&
+      window.process.type === 'renderer'));
 
-const isChromeOrNode = (
-  isChrome || (typeof process !== 'undefined' && process.release && process.release.name === 'node')
-);
+const isChromeOrNode =
+  isChrome ||
+  (typeof process !== 'undefined' &&
+    process.release &&
+    process.release.name === 'node');
 
 /**
  * Action creators to change the History state.
@@ -57,7 +58,8 @@ export const ActionCreators = {
       } else {
         const error = Error();
         let prevStackTraceLimit;
-        if (Error.captureStackTrace && isChromeOrNode) { // avoid error-polyfill
+        if (Error.captureStackTrace && isChromeOrNode) {
+          // avoid error-polyfill
           if (Error.stackTraceLimit < traceLimit) {
             prevStackTraceLimit = Error.stackTraceLimit;
             Error.stackTraceLimit = traceLimit;

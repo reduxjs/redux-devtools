@@ -9,7 +9,7 @@ const rootStyle = { padding: '5px 10px' };
 export default class StackTraceTab extends Component {
   static defaultProps = {
     openFile
-  }
+  };
   constructor(props) {
     super(props);
 
