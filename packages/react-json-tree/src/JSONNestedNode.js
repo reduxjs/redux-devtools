@@ -157,7 +157,8 @@ export default class JSONNestedNode extends React.Component {
       nodeType,
       data,
       itemType,
-      createItemString(data, collectionLimit)
+      createItemString(data, collectionLimit),
+      keyPath
     );
     const stylingArgs = [keyPath, nodeType, expanded, expandable];
 
