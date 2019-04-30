@@ -6,6 +6,7 @@ import { Toolbar, Divider } from 'devui/lib/Toolbar';
 import Slider from 'devui/lib/Slider';
 import Button from 'devui/lib/Button';
 import SegmentedControl from 'devui/lib/SegmentedControl';
+import parseKey from 'parse-key';
 
 import reducer from './reducers';
 import SliderButton from './SliderButton';
@@ -29,7 +30,10 @@ export default class SliderMonitor extends (PureComponent || Component) {
     select: PropTypes.func.isRequired,
     hideResetButton: PropTypes.bool,
     theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    keyboardEnabled: PropTypes.bool
+    keyboardEnabled: PropTypes.bool,
+    playKey: PropTypes.string,
+    stepBackwardKey: PropTypes.string,
+    stepForwardKey: PropTypes.string
   };
 
   static defaultProps = {
@@ -76,12 +80,52 @@ export default class SliderMonitor extends (PureComponent || Component) {
     this.props.dispatch(reset());
   };
 
+  matchesKey = (key, event) => {
+    if (!key) {
+      return false;
+    }
+    const parsedKey = parseKey(key);
+    const charCode = event.keyCode || event.which;
+    const char = String.fromCharCode(charCode);
+    return parsedKey.name.toUpperCase() === char.toUpperCase() &&
+      parsedKey.alt === event.altKey &&
+      parsedKey.ctrl === event.ctrlKey &&
+      parsedKey.meta === event.metaKey &&
+      parsedKey.shift === event.shiftKey;
+  };
+
+  isPlayKey = event => {
+      if (this.props.playKey) {
+          return this.matchesKey(this.props.playKey, event);
+      } else {
+          // ctrl+j
+          return event.ctrlKey && event.keyCode === 74;
+      }
+  };
+
+  isStepBackwardKey = event => {
+      if (this.props.stepBackwardKey) {
+          return this.matchesKey(this.props.stepBackwardKey, event);
+      } else {
+          // ctrl+]
+          return event.ctrlKey && event.keyCode === 219;
+      }
+  };
+
+  isStepForwardKey = event => {
+      if (this.props.stepForwardKey) {
+          return this.matchesKey(this.props.stepForwardKey, event);
+      } else {
+          // ctrl+[
+          return event.ctrlKey && event.keyCode === 221;
+      }
+  };
+
   handleKeyPress = event => {
     if (!this.props.keyboardEnabled) {
       return null;
     }
-    if (event.ctrlKey && event.keyCode === 74) {
-      // ctrl+j
+    if (this.isPlayKey(event)) {
       event.preventDefault();
 
       if (this.state.timer) {
@@ -93,12 +137,10 @@ export default class SliderMonitor extends (PureComponent || Component) {
       } else {
         this.startReplay();
       }
-    } else if (event.ctrlKey && event.keyCode === 219) {
-      // ctrl+[
+    } else if (this.isStepBackwardKey(event)) {
       event.preventDefault();
       this.stepLeft();
-    } else if (event.ctrlKey && event.keyCode === 221) {
-      // ctrl+]
+    } else if (this.isStepForwardKey(event)) {
       event.preventDefault();
       this.stepRight();
     }
