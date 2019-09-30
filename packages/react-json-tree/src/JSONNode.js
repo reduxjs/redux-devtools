@@ -10,6 +10,7 @@ const JSONNode = ({
   getItemString,
   keyPath,
   labelRenderer,
+  lineRenderer,
   styling,
   value,
   valueRenderer,
@@ -23,6 +24,7 @@ const JSONNode = ({
     key: keyPath[0],
     keyPath,
     labelRenderer,
+    lineRenderer,
     nodeType,
     styling,
     value,
@@ -100,6 +102,7 @@ JSONNode.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ).isRequired,
   labelRenderer: PropTypes.func.isRequired,
+  lineRenderer: PropTypes.func.isRequired,
   styling: PropTypes.func.isRequired,
   value: PropTypes.any,
   valueRenderer: PropTypes.func.isRequired,
