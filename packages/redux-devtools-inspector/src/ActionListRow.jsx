@@ -76,7 +76,11 @@ export default class ActionListRow extends Component {
             isSkipped && 'actionListItemNameSkipped'
           ])}
         >
-          {actionType}
+          {
+            typeof actionType === 'function'
+            ? actionType.name
+            : actionType
+          }
         </div>
         {hideActionButtons ? (
           <RightSlider styling={styling} shown>
