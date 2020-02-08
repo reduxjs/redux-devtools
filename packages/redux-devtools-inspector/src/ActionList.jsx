@@ -85,7 +85,8 @@ export default class ActionList extends Component {
       startActionId,
       onSelect,
       onSearch,
-      searchValue,
+      searchInclude,
+      searchExclude,
       currentActionId,
       hideMainButtons,
       hideActionButtons,
@@ -93,14 +94,14 @@ export default class ActionList extends Component {
       onSweep,
       onJumpToState
     } = this.props;
-    const lowerSearchValue = searchValue && searchValue.toLowerCase();
-    const filteredActionIds = searchValue
-      ? actionIds.filter(
-          id =>
-            actions[id].action.type.toLowerCase().indexOf(lowerSearchValue) !==
-            -1
-        )
-      : actionIds;
+
+    const filteredActionIds = actionIds.filter(id => {
+      const type = actions[id].action.type.toLowerCase();
+      return (
+        searchExclude.every(searchData => !type.includes(searchData)) &&
+        searchInclude.every(searchData => type.includes(searchData))
+      );
+    });
 
     return (
       <div
