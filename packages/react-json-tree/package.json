@@ -4,8 +4,12 @@
   "description": "React JSON Viewer Component, Extracted from redux-devtools",
   "main": "lib/index.js",
   "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
     "clean": "rimraf lib",
-    "build": "babel src --out-dir lib",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.js",
     "build:umd:min": "webpack --env.minimize --progress --config webpack.config.umd.js",
     "test": "jest",
@@ -44,6 +48,9 @@
     "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "babel-loader": "^8.0.5",
     "jest": "^24.1.0",
     "react": "^16.0.0",
@@ -51,12 +58,13 @@
     "react-test-renderer": "^16.0.0",
     "rimraf": "^2.5.2",
     "terser-webpack-plugin": "^1.2.1",
+    "typescript": "^3.8.3",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.2.0"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "@types/react": "^15.0.0 || ^16.0.0",
+    "react": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
     "prop-types": "^15.5.8",
