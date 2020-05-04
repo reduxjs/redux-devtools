@@ -1,7 +1,11 @@
-import { createStyling } from 'react-base16-styling';
+import {
+  createStyling,
+  Base16Theme,
+  StylingConfig
+} from 'react-base16-styling';
 import solarized from './themes/solarized';
 
-const colorMap = theme => ({
+const colorMap = (theme: Base16Theme) => ({
   BACKGROUND_COLOR: theme.base00,
   TEXT_COLOR: theme.base07,
   STRING_COLOR: theme.base0B,
@@ -18,7 +22,12 @@ const colorMap = theme => ({
   ITEM_STRING_EXPANDED_COLOR: theme.base03
 });
 
-const valueColorMap = colors => ({
+type Color = keyof ReturnType<typeof colorMap>;
+type Colors = {
+  [color in Color]: string;
+};
+
+const valueColorMap = (colors: Colors) => ({
   String: colors.STRING_COLOR,
   Date: colors.DATE_COLOR,
   Number: colors.NUMBER_COLOR,
@@ -29,7 +38,7 @@ const valueColorMap = colors => ({
   Symbol: colors.SYMBOL_COLOR
 });
 
-const getDefaultThemeStyling = theme => {
+const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
   const colors = colorMap(theme);
 
   return {
@@ -73,7 +82,9 @@ const getDefaultThemeStyling = theme => {
     valueText: ({ style }, nodeType) => ({
       style: {
         ...style,
-        color: valueColorMap(colors)[nodeType]
+        color: valueColorMap(colors)[
+          nodeType as keyof ReturnType<typeof valueColorMap>
+        ]
       }
     }),
 

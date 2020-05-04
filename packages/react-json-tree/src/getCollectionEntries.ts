@@ -1,4 +1,4 @@
-function getLength(type, collection) {
+function getLength(type: string, collection: any) {
   if (type === 'Object') {
     return Object.keys(collection).length;
   } else if (type === 'Array') {
@@ -8,11 +8,17 @@ function getLength(type, collection) {
   return Infinity;
 }
 
-function isIterableMap(collection) {
+function isIterableMap(collection: any) {
   return typeof collection.set === 'function';
 }
 
-function getEntries(type, collection, sortObjectKeys, from = 0, to = Infinity) {
+function getEntries(
+  type: string,
+  collection: any,
+  sortObjectKeys?: ((a: any, b: any) => number) | boolean | undefined,
+  from = 0,
+  to = Infinity
+): { entries: { key: string | number; value: any }[]; hasMore?: boolean } {
   let res;
 
   if (type === 'Object') {
@@ -31,7 +37,7 @@ function getEntries(type, collection, sortObjectKeys, from = 0, to = Infinity) {
     res = {
       entries: collection
         .slice(from, to + 1)
-        .map((val, idx) => ({ key: idx + from, value: val }))
+        .map((val: any, idx: number) => ({ key: idx + from, value: val }))
     };
   } else {
     let idx = 0;
@@ -74,7 +80,7 @@ function getEntries(type, collection, sortObjectKeys, from = 0, to = Infinity) {
   return res;
 }
 
-function getRanges(from, to, limit) {
+function getRanges(from: number, to: number, limit: number) {
   const ranges = [];
   while (to - from > limit * limit) {
     limit = limit * limit;
@@ -87,10 +93,10 @@ function getRanges(from, to, limit) {
 }
 
 export default function getCollectionEntries(
-  type,
-  collection,
-  sortObjectKeys,
-  limit,
+  type: string,
+  collection: any,
+  sortObjectKeys: ((a: any, b: any) => number) | boolean | undefined,
+  limit: number,
   from = 0,
   to = Infinity
 ) {
