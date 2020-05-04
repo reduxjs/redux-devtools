@@ -81,7 +81,7 @@ function getStateFromProps(props) {
 
 export default class JSONTree extends React.Component {
   static propTypes = {
-    data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+    data: PropTypes.any.isRequired,
     hideRoot: PropTypes.bool,
     theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     invertTheme: PropTypes.bool,
