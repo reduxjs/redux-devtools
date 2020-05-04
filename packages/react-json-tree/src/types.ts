@@ -40,7 +40,7 @@ interface JSONNestedNodeCircularPropsPassedThroughJSONTree {
   postprocessValue: (value: any) => any;
   isCustomNode: (value: any) => boolean;
   collectionLimit: number;
-  sortObjectKeys?: (a: any, b: any) => number | boolean;
+  sortObjectKeys?: ((a: any, b: any) => number) | boolean;
 }
 export type CircularPropsPassedThroughJSONTree = SharedCircularPropsPassedThroughJSONTree &
   JSONValueNodeCircularPropsPassedThroughJSONTree &
