@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 
@@ -15,11 +17,14 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
   externals: {
     react: {

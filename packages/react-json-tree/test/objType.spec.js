@@ -1,3 +1,5 @@
+/* eslint-env jest, es6 */
+
 import objType from '../src/objType';
 
 describe('objType', () => {
@@ -10,7 +12,11 @@ describe('objType', () => {
     expect(objType(new WeakSet())).toBe('WeakSet');
     expect(objType(new Error())).toBe('Error');
     expect(objType(new Date())).toBe('Date');
-    expect(objType(() => {})).toBe('Function');
+    expect(
+      objType(() => {
+        /* noop */
+      })
+    ).toBe('Function');
     expect(objType('')).toBe('String');
     expect(objType(true)).toBe('Boolean');
     expect(objType(null)).toBe('Null');
