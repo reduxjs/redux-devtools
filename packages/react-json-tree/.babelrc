@@ -1,10 +1,10 @@
 {
   "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react",
-    "@babel/preset-typescript"
+    "@babel/env",
+    "@babel/react",
+    "@babel/typescript"
   ],
   "plugins": [
-    "@babel/plugin-proposal-class-properties"
+    "@babel/proposal-class-properties"
   ]
 }

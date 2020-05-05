@@ -8,7 +8,5 @@ coverage
 node_modules
 __snapshots__
 
+# Ignore until TS linting is configured in redux-devtools package
 packages/redux-devtools/index.d.ts
-packages/react-json-tree/examples
-packages/react-json-tree/test
-packages/react-json-tree/webpack.config.umd.ts

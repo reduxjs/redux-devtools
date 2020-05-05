@@ -1,6 +1,5 @@
 import commitExcessActions from './commitExcessActions';
 
-/* eslint-disable import/prefer-default-export */
 export function recompute(
   previousLiftedState,
   storeState,
