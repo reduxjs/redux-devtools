@@ -27,8 +27,6 @@ export default class ItemRange extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { expanded: false };
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
   render() {
