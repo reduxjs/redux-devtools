@@ -1,5 +1,3 @@
-/* eslint-env jest, es6 */
-
 import objType from '../src/objType';
 
 describe('objType', () => {

@@ -3,6 +3,7 @@
   "version": "0.11.2",
   "description": "React JSON Viewer Component, Extracted from redux-devtools",
   "main": "lib/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
@@ -53,6 +54,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@types/node": "^13.13.4",
     "@types/react": "^15.0.0 || ^16.0.0",
+    "@types/react-test-renderer": "^16.9.2",
     "@types/terser-webpack-plugin": "^2.2.0",
     "@types/webpack": "^4.41.12",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
@@ -74,6 +76,7 @@
     "react": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
+    "@types/jest": "^25.2.1",
     "prop-types": "^15.5.8",
     "react-base16-styling": "^0.5.1"
   }

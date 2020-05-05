@@ -48,5 +48,5 @@ declare module 'react-base16-styling' {
   export function createStyling(
     getDefaultStyling: (base16Theme: Base16Theme) => StylingConfig,
     options?: { defaultBase16?: Theme; base16Themes?: Theme[] }
-  ): (theme: Theme, invertTheme?: boolean) => StylingFunction;
+  ): (theme?: Theme, invertTheme?: boolean) => StylingFunction;
 }

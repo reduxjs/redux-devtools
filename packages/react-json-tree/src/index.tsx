@@ -17,9 +17,9 @@ import {
 import { CircularPropsPassedThroughJSONTree } from './types';
 
 interface Props extends CircularPropsPassedThroughJSONTree {
-  theme: Theme;
-  invertTheme: boolean;
   data: any;
+  theme?: Theme;
+  invertTheme: boolean;
 }
 
 interface State {
@@ -47,7 +47,7 @@ const defaultLabelRenderer = ([label]: (string | number)[]) => (
 );
 const noCustomNode = () => false;
 
-function checkLegacyTheming(theme: Theme, props: Props) {
+function checkLegacyTheming(theme: Theme | undefined, props: Props) {
   const deprecatedStylingMethodsMap = {
     getArrowStyle: 'arrow',
     getListStyle: 'nestedNodeChildren',
