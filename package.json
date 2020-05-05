@@ -22,7 +22,7 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
     "lint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix --cache",
     "lint:all": "eslint \"**/*.{js,jsx,ts,tsx}\"",
-    "prettify": "prettier \"**/*.{js,jsx,ts,tsx,json,css,html,md}\" --ignore-path .eslintignore --single-quote --write",
+    "prettify": "prettier \"**/*.{js,jsx,ts,tsx,json,css,html,md}\" --ignore-path .eslintignore --write",
     "precommit": "lint-staged",
     "test": "jest --onlyChanged",
     "test:all": "jest"

@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = (env = {}) => ({
   mode: 'production',
   entry: {
-    app: ['./src/index.js']
+    app: ['./src/index.tsx']
   },
   output: {
     library: 'ReactJsonTree',
@@ -15,7 +15,7 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(ts|tsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       }
