@@ -3,10 +3,17 @@
   "version": "1.9.6",
   "description": "Redux DevTools instrumentation",
   "main": "lib/instrument.js",
+  "types": "lib/instrument.d.ts",
   "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
     "clean": "rimraf lib",
-    "build": "babel src --out-dir lib",
-    "test": "jest",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "eslint . --ext .js,.ts --fix",
+    "test": "tsc --project test/tsconfig.json --noEmit && jest",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test && npm run clean && npm run build"
   },
@@ -35,16 +42,26 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-env": "^7.3.1",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/jest": "^25.2.1",
+    "@types/lodash": "^4.2.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "babel-loader": "^8.0.5",
     "expect": "^1.6.0",
     "jest": "^24.1.0",
-    "redux": "^4.0.0",
+    "redux": "^4.0.5",
     "rimraf": "^2.3.4",
-    "rxjs": "^5.0.0-beta.6"
+    "rxjs": "^5.0.0-beta.6",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "lodash": "^4.2.0",
     "symbol-observable": "^1.0.2"
+  },
+  "peerDependencies": {
+    "redux": "^4.0.5"
   }
 }
