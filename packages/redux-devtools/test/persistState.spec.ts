@@ -1,8 +1,9 @@
 import { instrument, persistState } from '../src';
 import { compose, createStore } from 'redux';
+import './globalLocalStorage.d.ts';
 
 describe('persistState', () => {
-  let savedLocalStorage = global.localStorage;
+  const savedLocalStorage = global.localStorage;
   delete global.localStorage;
 
   beforeEach(() => {
@@ -19,6 +20,12 @@ describe('persistState', () => {
       },
       clear() {
         this.store = {};
+      },
+      get length() {
+        return this.store.length;
+      },
+      key(index) {
+        throw new Error('Unimplemented');
       }
     };
   });
@@ -27,7 +34,8 @@ describe('persistState', () => {
     global.localStorage = savedLocalStorage;
   });
 
-  const reducer = (state = 0, action) => {
+  type Action = { type: 'INCREMENT' } | { type: 'DECREMENT' };
+  const reducer = (state = 0, action: Action) => {
     switch (action.type) {
       case 'INCREMENT':
         return state + 1;
@@ -41,10 +49,7 @@ describe('persistState', () => {
   it('should persist state', () => {
     const store = createStore(
       reducer,
-      compose(
-        instrument(),
-        persistState('id')
-      )
+      compose(instrument(), persistState('id'))
     );
     expect(store.getState()).toBe(0);
 
@@ -54,46 +59,29 @@ describe('persistState', () => {
 
     const store2 = createStore(
       reducer,
-      compose(
-        instrument(),
-        persistState('id')
-      )
+      compose(instrument(), persistState('id'))
     );
     expect(store2.getState()).toBe(2);
   });
 
   it('should not persist state if no session id', () => {
-    const store = createStore(
-      reducer,
-      compose(
-        instrument(),
-        persistState()
-      )
-    );
+    const store = createStore(reducer, compose(instrument(), persistState()));
     expect(store.getState()).toBe(0);
 
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    const store2 = createStore(
-      reducer,
-      compose(
-        instrument(),
-        persistState()
-      )
-    );
+    const store2 = createStore(reducer, compose(instrument(), persistState()));
     expect(store2.getState()).toBe(0);
   });
 
   it('should run with a custom state deserializer', () => {
-    const oneLess = state => (state === undefined ? -1 : state - 1);
+    const oneLess = (state: number | undefined) =>
+      state === undefined ? -1 : state - 1;
     const store = createStore(
       reducer,
-      compose(
-        instrument(),
-        persistState('id', oneLess)
-      )
+      compose(instrument(), persistState('id', oneLess))
     );
     expect(store.getState()).toBe(0);
 
@@ -103,23 +91,17 @@ describe('persistState', () => {
 
     const store2 = createStore(
       reducer,
-      compose(
-        instrument(),
-        persistState('id', oneLess)
-      )
+      compose(instrument(), persistState('id', oneLess))
     );
     expect(store2.getState()).toBe(1);
   });
 
   it('should run with a custom action deserializer', () => {
-    const incToDec = action =>
-      action.type === 'INCREMENT' ? { type: 'DECREMENT' } : action;
+    const incToDec = (action: Action) =>
+      action.type === 'INCREMENT' ? ({ type: 'DECREMENT' } as const) : action;
     const store = createStore(
       reducer,
-      compose(
-        instrument(),
-        persistState('id', undefined, incToDec)
-      )
+      compose(instrument(), persistState('id', undefined, incToDec))
     );
     expect(store.getState()).toBe(0);
 
@@ -129,24 +111,17 @@ describe('persistState', () => {
 
     const store2 = createStore(
       reducer,
-      compose(
-        instrument(),
-        persistState('id', undefined, incToDec)
-      )
+      compose(instrument(), persistState('id', undefined, incToDec))
     );
     expect(store2.getState()).toBe(-2);
   });
 
   it('should warn if read from localStorage fails', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
+      // noop
+    });
     delete global.localStorage.getItem;
-    createStore(
-      reducer,
-      compose(
-        instrument(),
-        persistState('id')
-      )
-    );
+    createStore(reducer, compose(instrument(), persistState('id')));
 
     expect(spy.mock.calls[0]).toContain(
       'Could not read debug session from localStorage:'
@@ -156,14 +131,13 @@ describe('persistState', () => {
   });
 
   it('should warn if write to localStorage fails', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
+      // noop
+    });
     delete global.localStorage.setItem;
     const store = createStore(
       reducer,
-      compose(
-        instrument(),
-        persistState('id')
-      )
+      compose(instrument(), persistState('id'))
     );
 
     store.dispatch({ type: 'INCREMENT' });
