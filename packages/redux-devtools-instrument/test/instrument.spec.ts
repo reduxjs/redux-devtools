@@ -90,8 +90,8 @@ function counterWithMultiply(state = 0, action: CounterWithMultiplyAction) {
 }
 
 describe('instrument', () => {
-  let store: EnhancedStore<number, CounterAction>;
-  let liftedStore: LiftedStore<number, CounterAction>;
+  let store: EnhancedStore<number, CounterAction, null, never>;
+  let liftedStore: LiftedStore<number, CounterAction, null, never>;
 
   beforeEach(() => {
     store = createStore(counter, instrument());
@@ -534,8 +534,8 @@ describe('instrument', () => {
   });
 
   describe('maxAge option', () => {
-    let configuredStore: EnhancedStore<number, CounterAction>;
-    let configuredLiftedStore: LiftedStore<number, CounterAction>;
+    let configuredStore: EnhancedStore<number, CounterAction, null, never>;
+    let configuredLiftedStore: LiftedStore<number, CounterAction, null, never>;
 
     beforeEach(() => {
       configuredStore = createStore(
@@ -618,7 +618,9 @@ describe('instrument', () => {
       );
       const liftedStoreWithAnotherBug = (liftedStoreWithBug as unknown) as LiftedStore<
         number,
-        CounterWithAnotherBugAction
+        CounterWithAnotherBugAction,
+        null,
+        never
       >;
       expect(liftedStoreWithAnotherBug.getState().stagedActionIds).toHaveLength(
         5
@@ -630,7 +632,9 @@ describe('instrument', () => {
       );
       const liftedStore = liftedStoreWithBug as LiftedStore<
         number,
-        CounterAction
+        CounterAction,
+        null,
+        never
       >;
       expect(liftedStore.getState().stagedActionIds).toHaveLength(3);
 
@@ -698,7 +702,9 @@ describe('instrument', () => {
       );
       const liftedStore = liftedStoreWithBug as LiftedStore<
         number,
-        CounterAction
+        CounterAction,
+        null,
+        never
       >;
       const liftedStoreState = liftedStore.getState();
       const currentComputedState =
@@ -730,7 +736,9 @@ describe('instrument', () => {
       );
       const liftedStore = liftedStoreWithBug as LiftedStore<
         number,
-        CounterAction
+        CounterAction,
+        null,
+        never
       >;
       const liftedStoreState = liftedStore.getState();
       const currentComputedState =
@@ -1081,9 +1089,9 @@ describe('instrument', () => {
   });
 
   describe('Import State', () => {
-    let monitoredStore: EnhancedStore<number, CounterAction>;
-    let monitoredLiftedStore: LiftedStore<number, CounterAction>;
-    let exportedState: LiftedState<number, CounterAction>;
+    let monitoredStore: EnhancedStore<number, CounterAction, null, never>;
+    let monitoredLiftedStore: LiftedStore<number, CounterAction, null, never>;
+    let exportedState: LiftedState<number, CounterAction, null>;
 
     beforeEach(() => {
       monitoredStore = createStore(counter, instrument());
@@ -1164,7 +1172,7 @@ describe('instrument', () => {
   });
 
   function filterStackAndTimestamps<S, A extends Action<unknown>>(
-    state: LiftedState<S, A>
+    state: LiftedState<S, A, null>
   ) {
     state.actionsById = _.mapValues(state.actionsById, action => {
       delete action.timestamp;
@@ -1175,9 +1183,9 @@ describe('instrument', () => {
   }
 
   describe('Import Actions', () => {
-    let monitoredStore: EnhancedStore<number, CounterAction>;
-    let monitoredLiftedStore: LiftedStore<number, CounterAction>;
-    let exportedState: LiftedState<number, CounterAction>;
+    let monitoredStore: EnhancedStore<number, CounterAction, null, never>;
+    let monitoredLiftedStore: LiftedStore<number, CounterAction, null, never>;
+    let exportedState: LiftedState<number, CounterAction, null>;
     const savedActions = [
       { type: 'INCREMENT' },
       { type: 'INCREMENT' },
@@ -1285,7 +1293,7 @@ describe('instrument', () => {
         { type: 'INCREMENT' }
       ] as const;
       store.liftedStore.dispatch(
-        ActionCreators.importState<number, CounterAction>(savedActions)
+        ActionCreators.importState<number, CounterAction, null>(savedActions)
       );
       expect(store.liftedStore.getState().nextActionId).toBe(3);
       expect(store.getState()).toBe(2);
