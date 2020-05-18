@@ -147,7 +147,6 @@ Their full signatures are:
 - `collectionLimit: number` - sets the number of nodes that will be rendered before rendering them in collapsed ranges
 - `keyPath: (string | number)[]` - overrides the initial key path for the root node (defaults to `[root]`)
 
-
 ### Credits
 
 - All credits to [Dave Vedder](http://www.eskimospy.com/) ([veddermatic@gmail.com](mailto:veddermatic@gmail.com)), who wrote the original code as [JSONViewer](https://bitbucket.org/davevedder/react-json-viewer/).
