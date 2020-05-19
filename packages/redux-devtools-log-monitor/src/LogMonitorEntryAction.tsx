@@ -1,7 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEventHandler } from 'react';
 import JSONTree from 'react-json-tree';
+import { Action } from 'redux';
+import { Base16Theme } from 'base16';
 
-const styles = {
+const styles: {
+  actionBar: React.CSSProperties;
+  payload: React.CSSProperties;
+} = {
   actionBar: {
     paddingTop: 8,
     paddingBottom: 7,
@@ -14,13 +19,19 @@ const styles = {
   }
 };
 
-export default class LogMonitorAction extends Component {
-  constructor(props) {
-    super(props);
-    this.shouldExpandNode = this.shouldExpandNode.bind(this);
-  }
+interface Props<A extends Action<unknown>> {
+  theme: Base16Theme;
+  collapsed: boolean;
+  action: A;
+  expandActionRoot: boolean;
+  onClick: MouseEventHandler<HTMLDivElement>;
+  style: React.CSSProperties;
+}
 
-  renderPayload(payload) {
+export default class LogMonitorAction<
+  A extends Action<unknown>
+> extends Component<Props<A>> {
+  renderPayload(payload: {}) {
     return (
       <div
         style={{
@@ -43,9 +54,13 @@ export default class LogMonitorAction extends Component {
     );
   }
 
-  shouldExpandNode(keyName, data, level) {
+  shouldExpandNode = (
+    keyName: (string | number)[],
+    data: unknown,
+    level: number
+  ) => {
     return this.props.expandActionRoot && level === 0;
-  }
+  };
 
   render() {
     const { type, ...payload } = this.props.action;
@@ -58,7 +73,7 @@ export default class LogMonitorAction extends Component {
         }}
       >
         <div style={styles.actionBar} onClick={this.props.onClick}>
-          {type !== null && type.toString()}
+          {type !== null && (type as any).toString()}
         </div>
         {!this.props.collapsed ? this.renderPayload(payload) : ''}
       </div>
