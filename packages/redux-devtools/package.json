@@ -10,7 +10,7 @@
     "clean": "rimraf lib",
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir lib --extendsions \".ts,.tsx\" --source-maps inline",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tx --fix",
     "test": "tsc --project test/tsconfig.json --noEmit && jest",
