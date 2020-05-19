@@ -33,7 +33,7 @@ declare module 'react-base16-styling' {
     | ((styling: Styling, ...rest: any[]) => Styling);
 
   export type StylingConfig = { [name: string]: StylingValue } & {
-    extend?: string | Base16Theme;
+    extend?: string | Base16Theme | StylingValue;
   };
 
   export type Theme = string | Base16Theme | StylingConfig;

@@ -7,6 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
+import './react-base16-styling';
 import {
   Base16Theme,
   invertTheme,
@@ -108,7 +109,7 @@ function getStateFromProps(props: Props) {
       } else {
         theme = {
           ...theme,
-          extend: invertTheme(theme.extend)
+          extend: invertTheme(theme.extend as Base16Theme)
         } as StylingConfig;
       }
     } else if (theme) {
