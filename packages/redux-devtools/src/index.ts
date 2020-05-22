@@ -3,6 +3,7 @@ export {
   ActionCreators,
   ActionTypes,
   LiftedAction,
+  LiftedState,
   PerformAction
 } from 'redux-devtools-instrument';
 export { default as persistState } from './persistState';
