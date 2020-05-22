@@ -77,7 +77,9 @@ const data = {
       }
     },
     baz: undefined,
-    func: function User() {}
+    func: function User() {
+      // noop
+    }
   },
   emptyObject: {},
   symbol: Symbol('value'),
