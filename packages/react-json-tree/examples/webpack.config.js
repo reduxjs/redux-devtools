@@ -36,19 +36,25 @@ module.exports = {
       'react-json-tree': path.join(__dirname, '..', 'src'),
       react: path.join(__dirname, 'node_modules', 'react')
     },
-    extensions: ['.js']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
   },
   module: {
     loaders: [
       {
-        test: /\.js$/,
-        loaders: ['babel-loader'].filter(Boolean),
-        include: path.join(__dirname, 'src')
+        test: /\.(ts|js)x?$/,
+        include: path.join(__dirname, 'src'),
+        loaders: 'babel-loader',
+        options: {
+          rootMode: 'upward'
+        }
       },
       {
-        test: /\.js$/,
-        loaders: ['babel-loader'].filter(Boolean),
-        include: path.join(__dirname, '..', 'src')
+        test: /\.(ts|js)x?$/,
+        include: path.join(__dirname, '..', 'src'),
+        loaders: 'babel-loader',
+        options: {
+          rootMode: 'upward'
+        }
       }
     ]
   }

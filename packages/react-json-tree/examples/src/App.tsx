@@ -1,46 +1,59 @@
 import React from 'react';
 import { Map } from 'immutable';
-import JSONTree from '../../src';
+import JSONTree from 'react-json-tree';
+import { StylingValue } from 'react-base16-styling';
 
-const getLabelStyle = ({ style }, nodeType, expanded) => ({
+const getLabelStyle: StylingValue = (
+  { style },
+  keyPath,
+  nodeType,
+  expanded
+) => ({
   style: {
     ...style,
-    textTransform: expanded ? 'uppercase' : style.textTransform
+    textTransform: expanded ? 'uppercase' : style!.textTransform
   }
 });
 
-const getBoolStyle = ({ style }, nodeType) => ({
+const getBoolStyle: StylingValue = ({ style }, nodeType) => ({
   style: {
     ...style,
-    border: nodeType === 'Boolean' ? '1px solid #DD3333' : style.border,
-    borderRadius: nodeType === 'Boolean' ? 3 : style.borderRadius
+    border: nodeType === 'Boolean' ? '1px solid #DD3333' : style!.border,
+    borderRadius: nodeType === 'Boolean' ? 3 : style!.borderRadius
   }
 });
 
-const getItemString = type => (
+const getItemString = (type: string) => (
   <span>
     {' // '}
     {type}
   </span>
 );
 
-const getValueLabelStyle = ({ style }, nodeType, keyPath) => ({
+const getValueLabelStyle: StylingValue = ({ style }, nodeType, keyPath) => ({
   style: {
     ...style,
     color:
       !Number.isNaN(keyPath[0]) && !(parseInt(keyPath, 10) % 2)
         ? '#33F'
-        : style.color
+        : style!.color
   }
 });
 
 const longString =
   'Loremipsumdolorsitamet,consecteturadipiscingelit.Namtempusipsumutfelisdignissimauctor.Maecenasodiolectus,finibusegetultricesvel,aliquamutelit.Loremipsumdolorsitamet,consecteturadipiscingelit.Namtempusipsumutfelisdignissimauctor.Maecenasodiolectus,finibusegetultricesvel,aliquamutelit.Loremipsumdolorsitamet,consecteturadipiscingelit.Namtempusipsumutfelisdignissimauctor.Maecenasodiolectus,finibusegetultricesvel,aliquamutelit.'; // eslint-disable-line max-len
 
-const Custom = function(value) {
-  this.value = value;
-};
-Custom.prototype[Symbol.toStringTag] = 'Custom';
+class Custom {
+  value: unknown;
+
+  constructor(value: unknown) {
+    this.value = value;
+  }
+
+  get [Symbol.toStringTag]() {
+    return 'Custom';
+  }
+}
 
 const data = {
   array: [1, 2, 3],
@@ -73,7 +86,7 @@ const data = {
     ['key', 'value'],
     [{ objectKey: 'value' }, { objectKey: 'value' }]
   ]),
-  map: new window.Map([
+  map: Map([
     ['key', 'value'],
     [0, 'value'],
     [{ objectKey: 'value' }, { objectKey: 'value' }]
@@ -146,7 +159,7 @@ const App = () => (
       <JSONTree
         data={data}
         theme={{
-          extend: theme,
+          extend: (theme as unknown) as StylingValue,
           nestedNodeLabel: getLabelStyle,
           value: getBoolStyle,
           valueLabel: getValueLabelStyle
