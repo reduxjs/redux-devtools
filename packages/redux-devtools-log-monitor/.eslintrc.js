@@ -8,14 +8,6 @@ module.exports = {
         tsconfigRootDir: __dirname,
         project: ['./tsconfig.json']
       }
-    },
-    {
-      files: ['test/*.ts', 'test/*.tsx'],
-      extends: '../../eslintrc.ts.react.jest.base.json',
-      parserOptions: {
-        tsconfigRootDir: __dirname,
-        project: ['./test/tsconfig.json']
-      }
     }
   ]
 };

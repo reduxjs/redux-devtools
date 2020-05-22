@@ -2,7 +2,6 @@ import React, { Component, MouseEventHandler } from 'react';
 import PropTypes from 'prop-types';
 import JSONTree from 'react-json-tree';
 import { Base16Theme } from 'base16';
-import { Action } from 'redux';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { Styling, StylingConfig, StylingValue } from 'react-base16-styling';

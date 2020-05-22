@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import * as themes from 'redux-devtools-themes';
-import { ActionCreators, LiftedAction, PerformAction } from 'redux-devtools';
+import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
 import { Base16Theme } from 'base16';
 import { Action, Dispatch } from 'redux';
 import {
@@ -41,16 +41,11 @@ const styles: {
   }
 };
 
-export interface Props<S, A extends Action> {
+export interface Props<S, A extends Action<unknown>>
+  extends LiftedState<S, A, LogMonitorState> {
   dispatch: Dispatch<
     LogMonitorAction | LiftedAction<S, A, LogMonitorState, LogMonitorAction>
   >;
-  computedStates: { state: S; error?: string }[];
-  actionsById: { [actionId: number]: PerformAction<A> };
-  stagedActionIds: number[];
-  skippedActionIds: number[];
-  currentStateIndex: number;
-  monitorState: LogMonitorState;
 
   preserveScrollTop: boolean;
   select: (state: S) => unknown;

@@ -27,16 +27,16 @@ function startConsecutiveToggle<S, A extends Action>(
 }
 
 interface InitialLogMonitorState {
-  initialScrollTop?: number;
-  consecutiveToggleStartId?: number | null;
+  readonly initialScrollTop?: number;
+  readonly consecutiveToggleStartId?: number | null;
 }
 
 export interface LogMonitorState {
-  initialScrollTop: number;
-  consecutiveToggleStartId?: number | null;
+  readonly initialScrollTop: number;
+  readonly consecutiveToggleStartId?: number | null;
 }
 
-export default function reducer<S, A extends Action>(
+export default function reducer<S, A extends Action<unknown>>(
   props: Props<S, A>,
   state: InitialLogMonitorState = {},
   action: LogMonitorAction
