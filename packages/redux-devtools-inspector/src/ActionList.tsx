@@ -1,10 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, RefCallback } from 'react';
 import dragula from 'react-dragula';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
 import shouldPureComponentUpdate from 'react-pure-render/function';
+import { Action } from 'redux';
+import { PerformAction } from 'redux-devtools';
+import { StylingFunction } from 'react-base16-styling';
+import { Drake } from 'dragula';
 
-function getTimestamps(actions, actionIds, actionId) {
+function getTimestamps<A extends Action<unknown>>(
+  actions: { [actionId: number]: PerformAction<A> },
+  actionIds: number[],
+  actionId: number
+) {
   const idx = actionIds.indexOf(actionId);
   const prevActionId = actionIds[idx - 1];
 
@@ -14,10 +22,40 @@ function getTimestamps(actions, actionIds, actionId) {
   };
 }
 
-export default class ActionList extends Component {
+interface Props<S, A extends Action<unknown>> {
+  actions: { [actionId: number]: PerformAction<A> };
+  actionIds: number[];
+  isWideLayout: boolean;
+  searchValue: string | undefined;
+  selectedActionId: number | null;
+  startActionId: number | null;
+  skippedActionIds: number[];
+  draggableActions: boolean;
+  hideMainButtons: boolean | undefined;
+  hideActionButtons: boolean | undefined;
+  styling: StylingFunction;
+
+  onSelect: (event: React.MouseEvent<HTMLDivElement>, actionId: number) => void;
+  onSearch: (value: string) => void;
+  onToggleAction: (actionId: number) => void;
+  onJumpToState: (actionId: number) => void;
+  onCommit: () => void;
+  onSweep: () => void;
+  onReorderAction: (actionId: number, beforeActionId: number) => void;
+  currentActionId: number;
+  lastActionId: number;
+}
+
+export default class ActionList<S, A extends Action<unknown>> extends Component<
+  Props<S, A>
+> {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  componentWillReceiveProps(nextProps) {
+  node?: HTMLDivElement | null;
+  scrollDown?: boolean;
+  drake?: Drake;
+
+  componentWillReceiveProps(nextProps: Props<S, A>) {
     const node = this.node;
     if (!node) {
       this.scrollDown = true;
@@ -35,22 +73,22 @@ export default class ActionList extends Component {
     this.scrollToBottom();
 
     if (!this.props.draggableActions) return;
-    const container = this.node;
+    const container = this.node!;
     this.drake = dragula([container], {
       copy: false,
       copySortSource: false,
       mirrorContainer: container,
       accepts: (el, target, source, sibling) =>
-        !sibling || parseInt(sibling.getAttribute('data-id')),
+        !sibling || !!parseInt(sibling.getAttribute('data-id')!),
       moves: (el, source, handle) =>
-        parseInt(el.getAttribute('data-id')) &&
-        handle.className.indexOf('selectorButton') !== 0
+        !!parseInt(el!.getAttribute('data-id')!) &&
+        !handle!.className.startsWith('selectorButton')
     }).on('drop', (el, target, source, sibling) => {
       let beforeActionId = this.props.actionIds.length;
-      if (sibling && sibling.className.indexOf('gu-mirror') === -1) {
-        beforeActionId = parseInt(sibling.getAttribute('data-id'));
+      if (sibling && !sibling.className.includes('gu-mirror')) {
+        beforeActionId = parseInt(sibling.getAttribute('data-id')!);
       }
-      const actionId = parseInt(el.getAttribute('data-id'));
+      const actionId = parseInt(el.getAttribute('data-id')!);
       this.props.onReorderAction(actionId, beforeActionId);
     });
   }
@@ -69,7 +107,7 @@ export default class ActionList extends Component {
     }
   }
 
-  getRef = node => {
+  getRef: RefCallback<HTMLDivElement> = node => {
     this.node = node;
   };
 
@@ -95,10 +133,10 @@ export default class ActionList extends Component {
     } = this.props;
     const lowerSearchValue = searchValue && searchValue.toLowerCase();
     const filteredActionIds = searchValue
-      ? actionIds.filter(
-          id =>
-            actions[id].action.type.toLowerCase().indexOf(lowerSearchValue) !==
-            -1
+      ? actionIds.filter(id =>
+          (actions[id].action.type as string)
+            .toLowerCase()
+            .includes(lowerSearchValue as string)
         )
       : actionIds;
 
@@ -129,20 +167,22 @@ export default class ActionList extends Component {
               isSelected={
                 (startActionId !== null &&
                   actionId >= startActionId &&
-                  actionId <= selectedActionId) ||
+                  actionId <= (selectedActionId as number)) ||
                 actionId === selectedActionId
               }
               isInFuture={
                 actionIds.indexOf(actionId) > actionIds.indexOf(currentActionId)
               }
-              onSelect={e => onSelect(e, actionId)}
+              onSelect={(e: React.MouseEvent<HTMLDivElement>) =>
+                onSelect(e, actionId)
+              }
               timestamps={getTimestamps(actions, actionIds, actionId)}
               action={actions[actionId].action}
               onToggleClick={() => onToggleAction(actionId)}
               onJumpClick={() => onJumpToState(actionId)}
-              onCommitClick={() => onCommit(actionId)}
+              onCommitClick={() => onCommit()}
               hideActionButtons={hideActionButtons}
-              isSkipped={skippedActionIds.indexOf(actionId) !== -1}
+              isSkipped={skippedActionIds.includes(actionId)}
             />
           ))}
         </div>

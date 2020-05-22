@@ -1,10 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import RightSlider from './RightSlider';
+import { StylingFunction } from 'react-base16-styling';
 
-const getActiveButtons = hasSkippedActions =>
-  [hasSkippedActions && 'Sweep', 'Commit'].filter(a => a);
+const getActiveButtons = (hasSkippedActions: boolean): ('Sweep' | 'Commit')[] =>
+  [hasSkippedActions && 'Sweep', 'Commit'].filter(a => a) as (
+    | 'Sweep'
+    | 'Commit'
+  )[];
 
-const ActionListHeader = ({
+interface Props {
+  styling: StylingFunction;
+  onSearch: (value: string) => void;
+  hasSkippedActions: boolean;
+  hasStagedActions: boolean;
+  onCommit: () => void;
+  onSweep: () => void;
+  hideMainButtons: boolean | undefined;
+}
+
+const ActionListHeader: React.FunctionComponent<Props> = ({
   styling,
   onSearch,
   hasSkippedActions,
@@ -47,5 +62,15 @@ const ActionListHeader = ({
     )}
   </div>
 );
+
+ActionListHeader.propTypes = {
+  styling: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  hasSkippedActions: PropTypes.bool.isRequired,
+  hasStagedActions: PropTypes.bool.isRequired,
+  onCommit: PropTypes.func.isRequired,
+  onSweep: PropTypes.func.isRequired,
+  hideMainButtons: PropTypes.bool
+};
 
 export default ActionListHeader;

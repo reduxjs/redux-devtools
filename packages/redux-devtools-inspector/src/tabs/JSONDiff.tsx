@@ -3,8 +3,10 @@ import JSONTree from 'react-json-tree';
 import stringify from 'javascript-stringify';
 import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
+import { Delta } from 'jsondiffpatch';
+import { Base16Theme, StylingFunction } from 'react-base16-styling';
 
-function stringifyAndShrink(val, isWideLayout) {
+function stringifyAndShrink(val: any, isWideLayout?: boolean) {
   if (val === null) {
     return 'null';
   }
@@ -19,18 +21,22 @@ function stringifyAndShrink(val, isWideLayout) {
   return str.length > 22 ? `${str.substr(0, 15)}…${str.substr(-5)}` : str;
 }
 
-const expandFirstLevel = (keyName, data, level) => level <= 1;
+const expandFirstLevel = (
+  keyName: (string | number)[],
+  data: any,
+  level: number
+) => level <= 1;
 
-function prepareDelta(value) {
+function prepareDelta(value: any) {
   if (value && value._t === 'a') {
-    const res = {};
-    for (let key in value) {
+    const res: { [key: string]: any } = {};
+    for (const key in value) {
       if (key !== '_t') {
-        if (key[0] === '_' && !value[key.substr(1)]) {
+        if (key.startsWith('_') && !value[key.substr(1)]) {
           res[key.substr(1)] = value[key];
         } else if (value['_' + key]) {
           res[key] = [value['_' + key][0], value[key][0]];
-        } else if (!value['_' + key] && key[0] !== '_') {
+        } else if (!value['_' + key] && !key.startsWith('_')) {
           res[key] = value[key];
         }
       }
@@ -41,14 +47,33 @@ function prepareDelta(value) {
   return value;
 }
 
-export default class JSONDiff extends Component {
+interface Props {
+  delta: Delta | null | undefined | false;
+  styling: StylingFunction;
+  base16Theme: Base16Theme;
+  invertTheme: boolean;
+  labelRenderer: (
+    keyPath: (string | number)[],
+    nodeType: string,
+    expanded: boolean,
+    expandable: boolean
+  ) => React.ReactNode;
+  isWideLayout: boolean;
+  dataTypeKey: string | undefined;
+}
+
+interface State {
+  data: any;
+}
+
+export default class JSONDiff extends Component<Props, State> {
   state = { data: {} };
 
   componentDidMount() {
     this.updateData();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.delta !== this.props.delta) {
       this.updateData();
     }
@@ -84,7 +109,7 @@ export default class JSONDiff extends Component {
     );
   }
 
-  getItemString = (type, data) =>
+  getItemString = (type: string, data: any) =>
     getItemString(
       this.props.styling,
       type,
@@ -94,10 +119,10 @@ export default class JSONDiff extends Component {
       true
     );
 
-  valueRenderer = (raw, value) => {
+  valueRenderer = (raw: any, value: any) => {
     const { styling, isWideLayout } = this.props;
 
-    function renderSpan(name, body) {
+    function renderSpan(name: string, body: string) {
       return (
         <span key={name} {...styling(['diff', name])}>
           {body}

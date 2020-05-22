@@ -3,19 +3,25 @@
   "version": "0.11.0",
   "description": "Redux DevTools Diff Monitor",
   "scripts": {
-    "build": "npm run build:lib",
-    "build:lib": "cross-env NODE_ENV=production babel src --out-dir lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "build:demo": "cross-env NODE_ENV=production webpack -p",
     "stats": "webpack --profile --json > stats.json",
     "start": "webpack-dev-server",
     "preversion": "npm run lint",
     "version": "npm run build:demo && git add -A .",
     "postversion": "git push",
-    "prepare": "npm run build:lib",
-    "prepublishOnly": "npm run build:lib",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "gh": "git subtree push --prefix demo/dist origin gh-pages"
   },
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "url": "https://github.com/reduxjs/redux-devtools"
   },
@@ -28,11 +34,17 @@
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "@types/dateformat": "^3.0.1",
+    "@types/dragula": "^3.7.0",
+    "@types/hex-rgba": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "babel-loader": "^8.0.5",
     "base16": "^1.0.0",
     "chokidar": "^1.6.1",
     "clean-webpack-plugin": "^1.0.0",
     "cross-env": "^5.2.0",
+    "csstype": "^2.6.10",
     "export-files-webpack-plugin": "0.0.1",
     "html-webpack-plugin": "^3.2.0",
     "lodash.shuffle": "^4.2.0",
@@ -50,13 +62,14 @@
     "redux-devtools": "^3.1.0",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-logger": "^2.5.2",
+    "typescript": "^3.8.3",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.2.0",
     "webpack-dev-server": "^3.1.14"
   },
   "peerDependencies": {
-    "react": ">=15.0.0",
-    "react-dom": ">=15.0.0"
+    "@types/react": "^16.3.0",
+    "react": "^16.3.0"
   },
   "author": "Alexander <alexkuz@gmail.com> (http://kuzya.org/)",
   "contributors": [
@@ -64,6 +77,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@types/prop-types": "^15.6.2",
     "babel-runtime": "^6.3.19",
     "dateformat": "^1.0.12",
     "hex-rgba": "^1.0.0",

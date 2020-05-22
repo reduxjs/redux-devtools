@@ -1,4 +1,4 @@
-export default function isIterable(obj) {
+export default function isIterable(obj: any) {
   return (
     obj !== null &&
     typeof obj === 'object' &&

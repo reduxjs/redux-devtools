@@ -1,7 +1,7 @@
-import jss from 'jss';
+import jss, { Styles, StyleSheet } from 'jss';
 import jssVendorPrefixer from 'jss-vendor-prefixer';
 import jssNested from 'jss-nested';
-import { createStyling } from 'react-base16-styling';
+import { Base16Theme, createStyling } from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import inspector from '../themes/inspector';
 import * as reduxThemes from 'redux-devtools-themes';
@@ -10,7 +10,7 @@ import * as inspectorThemes from '../themes';
 jss.use(jssVendorPrefixer());
 jss.use(jssNested());
 
-const colorMap = theme => ({
+const colorMap = (theme: Base16Theme) => ({
   TEXT_COLOR: theme.base06,
   TEXT_PLACEHOLDER_COLOR: rgba(theme.base06, 60),
   BACKGROUND_COLOR: theme.base00,
@@ -36,7 +36,12 @@ const colorMap = theme => ({
   ERROR_COLOR: theme.base08
 });
 
-const getSheetFromColorMap = map => ({
+type Color = keyof ReturnType<typeof colorMap>;
+type ColorMap = {
+  [color in Color]: string;
+};
+
+const getSheetFromColorMap = (map: ColorMap): Partial<Styles> => ({
   inspector: {
     display: 'flex',
     'flex-direction': 'column',
@@ -386,9 +391,9 @@ const getSheetFromColorMap = map => ({
   }
 });
 
-let themeSheet;
+let themeSheet: StyleSheet;
 
-const getDefaultThemeStyling = theme => {
+const getDefaultThemeStyling = (theme: Base16Theme) => {
   if (themeSheet) {
     themeSheet.detach();
   }
@@ -400,7 +405,10 @@ const getDefaultThemeStyling = theme => {
   return themeSheet.classes;
 };
 
-export const base16Themes = { ...reduxThemes, ...inspectorThemes };
+export const base16Themes = ({
+  ...reduxThemes,
+  ...inspectorThemes
+} as unknown) as Base16Theme[];
 
 export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
   defaultBase16: inspector,
