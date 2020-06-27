@@ -1,4 +1,11 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
-  "plugins": ["@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-export-default-from"]
+  "presets": [
+    "@babel/env",
+    "@babel/react",
+    "@babel/typescript"
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties"
+  ],
+  "sourceType": "unambiguous"
 }

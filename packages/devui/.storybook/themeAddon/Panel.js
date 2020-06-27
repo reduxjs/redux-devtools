@@ -2,7 +2,7 @@ import React from 'react';
 import Form from '@storybook/addon-knobs/dist/components/PropForm';
 import styled from 'styled-components';
 import { EVENT_ID_DATA, DEFAULT_THEME_STATE } from './constant';
-import { listSchemes, listThemes } from '../../src/utils/theme';
+import { listSchemes, listThemes } from '../../lib/utils/theme';
 
 const FormWrapper = styled.div`
   width: 100%;
