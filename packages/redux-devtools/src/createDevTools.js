@@ -1,21 +1,21 @@
-import React, { Children, Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect, Provider, ReactReduxContext } from 'react-redux';
-import instrument from 'redux-devtools-instrument';
+import React, { Children, Component } from "react";
+import PropTypes from "prop-types";
+import { connect, Provider, ReactReduxContext } from "react-redux";
+import instrument from "redux-devtools-instrument";
 
 function logError(type) {
   /* eslint-disable no-console */
-  if (type === 'NoStore') {
+  if (type === "NoStore") {
     console.error(
-      'Redux DevTools could not render. You must pass the Redux store ' +
+      "Redux DevTools could not render. You must pass the Redux store " +
         'to <DevTools> either as a "store" prop or by wrapping it in a ' +
-        '<Provider store={store}>.'
+        "<Provider store={store}>."
     );
   } else {
     console.error(
-      'Redux DevTools could not render. Did you forget to include ' +
-        'DevTools.instrument() in your store enhancer chain before ' +
-        'using createStore()?'
+      "Redux DevTools could not render. Did you forget to include " +
+        "DevTools.instrument() in your store enhancer chain before " +
+        "using createStore()?"
     );
   }
   /* eslint-enable no-console */
@@ -47,13 +47,13 @@ export default function createDevTools(children) {
 
       if (ReactReduxContext) {
         if (this.props.store && !this.props.store.liftedStore) {
-          logError('NoLiftedStore');
+          logError("NoLiftedStore");
         }
         return;
       }
 
       if (!props.store && !context.store) {
-        logError('NoStore');
+        logError("NoStore");
         return;
       }
 
@@ -64,7 +64,7 @@ export default function createDevTools(children) {
       }
 
       if (!this.liftedStore) {
-        logError('NoLiftedStore');
+        logError("NoLiftedStore");
       }
     }
 
@@ -85,11 +85,11 @@ export default function createDevTools(children) {
           <ReactReduxContext.Consumer>
             {props => {
               if (!props || !props.store) {
-                logError('NoStore');
+                logError("NoStore");
                 return null;
               }
               if (!props.store.liftedStore) {
-                logError('NoLiftedStore');
+                logError("NoLiftedStore");
                 return null;
               }
               return (
