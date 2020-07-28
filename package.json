@@ -2,6 +2,7 @@
   "private": true,
   "devDependencies": {
     "babel-eslint": "^10.0.0",
+    "cross-env": "^7.0.2",
     "eslint": "^5.12.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-babel": "^5.3.0",
@@ -16,7 +17,7 @@
     "lerna": "lerna",
     "build": "lerna run prepare --since master --stream --sort -- --scripts-prepend-node-path",
     "build:all": "lerna run build",
-    "publish": "lerna publish --conventional-commits --create-release github",
+    "publish": "croos-env GH_TOKEN=6d098392922ac4cd9a79f27feb31749e5914cd3c lerna publish --conventional-commits --create-release github",
     "canary": "lerna publish --canary preminor --npm-tag alpha",
     "next": "lerna publish --bump prerelease --npm-tag next",
     "lint": "eslint '**/*.{js,jsx}' --cache",
