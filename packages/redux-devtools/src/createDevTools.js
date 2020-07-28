@@ -7,7 +7,7 @@ function logError(type) {
   /* eslint-disable no-console */
   if (type === "NoStore") {
     console.error(
-      "Redux DevTools could not render. You must pass the Redux store " +
+      "Redux DevTools could nota render. You must pass the Redux store " +
         'to <DevTools> either as a "store" prop or by wrapping it in a ' +
         "<Provider store={store}>."
     );
