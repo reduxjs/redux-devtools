@@ -41,7 +41,7 @@ If you don’t want to bother with installing Redux DevTools and integrating it 
 
 ### Setup Instructions
 
-Read the installation [walkthrough](./docs/Walkthrough.md) for integration instructions and usage examples (`<DevTools>` component, `DevTools.instrument()`, exclude from production builds, gotchas).
+Read the installation [walkthrough](../../docs/Walkthrough.md) for integration instructions and usage examples (`<DevTools>` component, `DevTools.instrument()`, exclude from production builds, gotchas).
 
 ### Running Examples
 
