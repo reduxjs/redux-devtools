@@ -43,6 +43,8 @@ Pass the `keyboardEnabled` prop to use these shortcuts
 
 `ctrl+]`: step forward
 
+You can override these shortcuts with the `playKey`, `stepBackwardKey`, and `stepForwardKey` respectively. These props are parsed by [parse-key](https://github.com/thlorenz/parse-key), just like in `DockMonitor`.
+
 ### Running Examples
 
 You can do this:
