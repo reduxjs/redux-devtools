@@ -83,8 +83,8 @@ const theme = {
         textDecoration: 'underline'
       },
       // switch key for objects to uppercase when object is expanded.
-      // `nestedNodeLabel` receives additional arguments `expanded` and `keyPath`
-      nestedNodeLabel: ({ style }, nodeType, expanded) => ({
+      // `nestedNodeLabel` receives additional argument `expandable`
+      nestedNodeLabel: ({ style }, keyPath, nodeType, expanded) => ({
         style: {
           ...style,
           textTransform: expanded ? 'uppercase' : style.textTransform
@@ -123,7 +123,7 @@ You can pass the following properties to customize rendered labels and values:
 
 ```jsx
 <JSONTree
-  labelRenderer={raw => <strong>{raw}</strong>}
+  labelRenderer={([key]) => <strong>{key}</strong>}
   valueRenderer={raw => <em>{raw}</em>}
 />
 ```
@@ -132,11 +132,20 @@ In this example the label and value will be rendered with `<strong>` and `<em>` 
 
 For `labelRenderer`, you can provide a full path - [see this PR](https://github.com/chibicode/react-json-tree/pull/32).
 
+Their full signatures are:
+
+- `labelRenderer: function(keyPath, nodeType, expanded, expandable)`
+- `valueRenderer: function(valueAsString, value, ...keyPath)`
+
 #### More Options
 
-- `shouldExpandNode: function(keyName, data, level)` - determines if node should be expanded (root is expanded by default)
-- `hideRoot: Boolean` - if `true`, the root node is hidden.
-- `sortObjectKeys: Boolean | function(a, b)` - sorts object keys with compare function (optional). Isn't applied to iterable maps like `Immutable.Map`.
+- `shouldExpandNode: function(keyPath, data, level)` - determines if node should be expanded (root is expanded by default)
+- `hideRoot: boolean` - if `true`, the root node is hidden.
+- `sortObjectKeys: boolean | function(a, b)` - sorts object keys with compare function (optional). Isn't applied to iterable maps like `Immutable.Map`.
+- `postprocessValue: function(value)` - maps `value` to a new `value`
+- `isCustomNode: function(value)` - overrides the default object type detection and renders the value as a single value
+- `collectionLimit: number` - sets the number of nodes that will be rendered in a collection before rendering them in collapsed ranges
+- `keyPath: (string | number)[]` - overrides the initial key path for the root node (defaults to `[root]`)
 
 ### Credits
 
