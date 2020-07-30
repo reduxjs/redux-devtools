@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
- * Renders  simple  values  (eg. strings, numbers, booleans, etc)
+ * Renders  simple  values  (eg.  strings, numbers, booleans, etc)
  */
 
 const JSONValueNode = ({
