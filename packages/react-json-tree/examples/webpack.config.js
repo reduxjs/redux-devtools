@@ -19,13 +19,6 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
-  resolve: {
-    alias: {
-      'react-json-tree/lib': path.join(__dirname, '..', 'src'),
-      'react-json-tree': path.join(__dirname, '..', 'src')
-    },
-    extensions: ['.js']
-  },
   module: {
     rules: [
       {
