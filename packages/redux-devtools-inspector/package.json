@@ -8,9 +8,6 @@
     "build:demo": "cross-env NODE_ENV=production webpack -p",
     "stats": "webpack --profile --json > stats.json",
     "start": "webpack-dev-server",
-    "preversion": "npm run lint",
-    "version": "npm run build:demo && git add -A .",
-    "postversion": "git push",
     "prepare": "npm run build:lib",
     "prepublishOnly": "npm run build:lib",
     "gh": "git subtree push --prefix demo/dist origin gh-pages"
