@@ -28,7 +28,8 @@
     "test:all": "jest"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/react-json-tree/examples"
   ],
   "engines": {
     "node": ">=8.0.0"
