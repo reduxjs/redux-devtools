@@ -3,7 +3,6 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var ExportFilesWebpackPlugin = require('export-files-webpack-plugin');
-var NyanProgressWebpackPlugin = require('nyan-progress-webpack-plugin');
 
 var pkg = require('./package.json');
 
@@ -35,8 +34,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
-    }),
-    new NyanProgressWebpackPlugin()
+    })
   ].concat(
     isProduction
       ? [
