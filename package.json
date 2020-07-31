@@ -29,7 +29,9 @@
   },
   "workspaces": [
     "packages/*",
-    "packages/react-json-tree/examples"
+    "packages/react-json-tree/examples",
+    "packages/redux-devtools/examples/counter",
+    "packages/redux-devtools/examples/todomvc"
   ],
   "engines": {
     "node": ">=8.0.0"
