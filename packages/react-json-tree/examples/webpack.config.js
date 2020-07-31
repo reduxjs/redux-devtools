@@ -24,18 +24,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: path.join(__dirname, 'src'),
-        options: {
-          rootMode: 'upward'
-        }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: path.join(__dirname, '..', 'src'),
-        options: {
-          rootMode: 'upward'
-        }
+        include: path.join(__dirname, 'src')
       }
     ]
   }
