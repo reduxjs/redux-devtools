@@ -1,4 +1,4 @@
 {
-  "presets": ["es2015-loose", "stage-0", "react"],
-  "plugins": ["react-hot-loader/babel"]
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": ["@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-function-bind", "react-hot-loader/babel"]
 }
