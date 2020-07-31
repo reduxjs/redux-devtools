@@ -1,4 +1,4 @@
-import { DiffPatcher } from 'jsondiffpatch/src/diffpatcher';
+import { DiffPatcher } from 'jsondiffpatch';
 
 const defaultObjectHash = (o, idx) =>
   (o === null && '$$null') ||
