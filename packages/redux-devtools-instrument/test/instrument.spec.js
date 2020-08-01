@@ -1,9 +1,7 @@
 import { createStore, compose } from 'redux';
 import instrument, { ActionCreators } from '../src/instrument';
-import { Observable } from 'rxjs';
+import { from } from 'rxjs';
 import _ from 'lodash';
-
-import 'rxjs/add/observable/from';
 
 function counter(state = 0, action) {
   switch (action.type) {
@@ -87,7 +85,7 @@ describe('instrument', () => {
     let lastValue;
     // let calls = 0;
 
-    Observable.from(store).subscribe(state => {
+    from(store).subscribe(state => {
       lastValue = state;
       // calls++;
     });
