@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return Promise.all([
     knex.schema.createTable('remotedev_reports', function(table) {
       table.uuid('id').primary();
@@ -77,7 +77,7 @@ exports.up = function(knex, Promise) {
   ]);
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return Promise.all([
     knex.schema.dropTable('remotedev_reports'),
     knex.schema.dropTable('remotedev_apps')
