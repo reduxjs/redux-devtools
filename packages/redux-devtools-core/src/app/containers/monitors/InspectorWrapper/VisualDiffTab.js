@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { format } from 'jsondiffpatch/src/formatters/html';
+import { formatters } from 'jsondiffpatch';
 import styled from 'styled-components';
 import { effects } from 'devui';
 
@@ -227,7 +227,7 @@ export default class VisualDiffTab extends Component {
     let __html;
     const data = this.props.data;
     if (data) {
-      __html = format(data);
+      __html = formatters.html.format(data);
     }
 
     return <StyledContainer dangerouslySetInnerHTML={{ __html }} />;
