@@ -3,14 +3,13 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExportFilesWebpackPlugin = require('export-files-webpack-plugin');
-const NyanProgressWebpackPlugin = require('nyan-progress-webpack-plugin');
 
 const pkg = require('./package.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'eval-source-map',
   entry: isProduction
     ? ['./demo/src/js/index']
     : [
@@ -34,8 +33,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
-    }),
-    new NyanProgressWebpackPlugin()
+    })
   ].concat(
     isProduction
       ? [
