@@ -21,20 +21,8 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
-  resolve: {
-    alias: {
-      'redux-slider-monitor': path.join(
-        __dirname,
-        '..',
-        '..',
-        'src/SliderMonitor'
-      )
-    },
-    extensions: ['.js']
-  },
   module: {
     rules: [
       {
@@ -45,11 +33,7 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        use: ['style-loader', 'raw-loader'],
-        include: [
-          __dirname,
-          path.join(__dirname, '../../../../node_modules/todomvc-app-css')
-        ]
+        use: ['style-loader', 'raw-loader']
       }
     ]
   }
