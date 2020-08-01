@@ -12,7 +12,7 @@ export default class RawTab extends Component {
     return nextProps.data !== this.value;
   }
 
-  componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps) {
     this.stringifyData(nextProps);
   }
 

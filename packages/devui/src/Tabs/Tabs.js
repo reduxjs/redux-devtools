@@ -9,7 +9,7 @@ export default class Tabs extends Component {
     this.updateTabs(props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selected !== this.props.selected) {
       this.updateTabs(nextProps);
     }

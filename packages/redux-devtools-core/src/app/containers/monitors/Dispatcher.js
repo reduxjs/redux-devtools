@@ -62,7 +62,7 @@ class Dispatcher extends Component {
     changed: false
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.state.selected !== 'default' &&
       !nextProps.options.actionCreators
