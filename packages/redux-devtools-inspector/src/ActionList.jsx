@@ -17,7 +17,7 @@ function getTimestamps(actions, actionIds, actionId) {
 export default class ActionList extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const node = this.node;
     if (!node) {
       this.scrollDown = true;

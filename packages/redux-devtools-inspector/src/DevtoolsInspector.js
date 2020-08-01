@@ -172,7 +172,7 @@ export default class DevtoolsInspector extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     let nextMonitorState = nextProps.monitorState;
     const monitorState = this.props.monitorState;
 

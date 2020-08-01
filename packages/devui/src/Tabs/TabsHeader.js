@@ -21,7 +21,7 @@ export default class TabsHeader extends Component {
     this.hiddenTabsWidth = [];
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.tabs !== this.props.tabs ||
       nextProps.selected !== this.props.selected ||

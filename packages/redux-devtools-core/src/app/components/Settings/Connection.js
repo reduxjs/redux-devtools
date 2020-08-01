@@ -53,7 +53,7 @@ class Connection extends Component {
     return this.state !== nextState;
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.options !== nextProps.options) {
       this.setState({
         formData: { ...nextProps.options, type: nextProps.type }

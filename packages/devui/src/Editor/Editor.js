@@ -28,7 +28,7 @@ export default class Editor extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.cm.getValue()) {
       this.cm.setValue(nextProps.value);
     }

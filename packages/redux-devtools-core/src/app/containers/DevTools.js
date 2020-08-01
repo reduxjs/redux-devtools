@@ -38,7 +38,7 @@ class DevTools extends Component {
     }
   }
 
-  componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps) {
     if (nextProps.monitor !== this.props.monitor) this.getMonitor(nextProps);
   }
 

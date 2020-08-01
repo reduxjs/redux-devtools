@@ -17,7 +17,7 @@ class SubTabs extends Component {
     this.updateTabs(props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.parentTab !== this.props.parentTab) {
       this.updateTabs(nextProps);
     }

@@ -7,7 +7,7 @@ import { CONNECT_REQUEST } from './constants/socketActionTypes';
 import App from './containers/App';
 
 class Root extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     configureStore((store, preloadedState) => {
       this.store = store;
       store.dispatch({

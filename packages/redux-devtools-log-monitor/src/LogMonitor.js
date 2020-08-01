@@ -114,7 +114,7 @@ export default class LogMonitor extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const node = this.node;
     if (!node) {
       this.scrollDown = true;

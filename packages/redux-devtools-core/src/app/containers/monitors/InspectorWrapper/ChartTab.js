@@ -21,7 +21,7 @@ class ChartTab extends Component {
     this.createChart(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.props.theme.scheme !== nextProps.theme.scheme ||
       nextProps.theme.light !== this.props.theme.light

@@ -11,7 +11,7 @@ export default class ContextMenu extends Component {
     this.updateItems(props.items);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.items !== this.props.items ||
       nextProps.visible !== this.props.visible

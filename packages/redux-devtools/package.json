@@ -33,18 +33,18 @@
   },
   "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
-    "jest": "^24.1.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-redux": "^6.0.0",
-    "redux": "^4.0.0",
-    "rimraf": "^2.3.4"
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.0",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "jest": "^24.9.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.5",
+    "rimraf": "^2.7.1"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0",
@@ -52,8 +52,8 @@
     "redux": "^3.5.2 || ^4.0.0"
   },
   "dependencies": {
-    "lodash": "^4.2.0",
-    "prop-types": "^15.5.7",
-    "redux-devtools-instrument": "^1.9.0"
+    "lodash": "^4.17.19",
+    "prop-types": "^15.7.2",
+    "redux-devtools-instrument": "^1.9.6"
   }
 }
