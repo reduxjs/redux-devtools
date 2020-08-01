@@ -9,6 +9,7 @@ module.exports = (env = {}) => ({
   },
   output: {
     library: 'ReduxDevTools',
+    libraryExport: 'default',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'umd'),
     filename: env.minimize
