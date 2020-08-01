@@ -1,15 +1,27 @@
 {
-  "name": "todomvc",
+  "name": "slider-todomvc",
   "version": "0.0.0",
   "description": "TodoMVC example for redux",
   "main": "server.js",
   "scripts": {
-    "start": "../../node_modules/.bin/webpack-dev-server",
-    "build": "../../node_modules/.bin/webpack --config webpack.config.prod.js"
+    "start": "webpack-dev-server",
+    "build": "webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/calesce/redux-slider-monitor.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.27.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "redux-slider-monitor": "^2.0.0-2"
+  }
 }
