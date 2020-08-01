@@ -5,7 +5,7 @@ var isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   mode: isProduction ? 'production' : 'development',
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   entry: [
     !isProduction && 'webpack-dev-server/client?http://localhost:3000',
     !isProduction && 'webpack/hot/only-dev-server',

@@ -81,5 +81,5 @@ module.exports = (env = {}) => ({
   devServer: {
     port: 3000
   },
-  devtool: env.development ? 'eval' : 'source-map'
+  devtool: env.development ? 'eval-source-map' : 'source-map'
 });
