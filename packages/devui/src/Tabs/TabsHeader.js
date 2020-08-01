@@ -69,7 +69,9 @@ export default class TabsHeader extends Component {
   }
 
   componentWillUnmount() {
-    this.disableResizeEvents();
+    if (this.props.collapsible) {
+      this.disableResizeEvents();
+    }
   }
 
   enableResizeEvents() {
