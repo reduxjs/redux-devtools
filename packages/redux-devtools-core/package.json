@@ -20,7 +20,7 @@
     "umd"
   ],
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/test/setup.js",
+    "setupFilesAfterEnv": ["<rootDir>/test/setup.js"],
     "moduleNameMapper": {
       "\\.(css|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
     }
