@@ -59,7 +59,7 @@ module.exports = {
     ]
   },
   devServer: isProduction
-    ? null
+    ? {}
     : {
         quiet: false,
         port: 3000,
