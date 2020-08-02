@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function(knex) {
   return Promise.all([knex('remotedev_apps').del()]).then(function() {
     return Promise.all([
       knex('remotedev_apps').insert({
