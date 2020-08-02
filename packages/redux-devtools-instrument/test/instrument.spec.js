@@ -827,10 +827,9 @@ describe('instrument', () => {
         exportedState = monitoredLiftedStore.getState();
         expect(exportedState.actionsById[0].stack).toBe(undefined);
         expect(typeof exportedState.actionsById[1].stack).toBe('string');
-        expect(exportedState.actionsById[1].stack).toMatch(/\bat dispatch\b/);
         expect(exportedState.actionsById[1].stack).toMatch(/\bfn1\b/);
         expect(exportedState.actionsById[1].stack).toMatch(/\bfn2\b/);
-        expect(exportedState.actionsById[1].stack).not.toMatch(/\bfn3\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn3\b/);
         expect(exportedState.actionsById[1].stack).not.toMatch(/\bfn4\b/);
         expect(exportedState.actionsById[1].stack).toContain(
           'instrument.spec.js'
@@ -865,10 +864,9 @@ describe('instrument', () => {
         exportedState = monitoredLiftedStore.getState();
         expect(exportedState.actionsById[0].stack).toBe(undefined);
         expect(typeof exportedState.actionsById[1].stack).toBe('string');
-        expect(exportedState.actionsById[1].stack).toMatch(/\bat dispatch\b/);
         expect(exportedState.actionsById[1].stack).toMatch(/\bfn1\b/);
         expect(exportedState.actionsById[1].stack).toMatch(/\bfn2\b/);
-        expect(exportedState.actionsById[1].stack).not.toMatch(/\bfn3\b/);
+        expect(exportedState.actionsById[1].stack).toMatch(/\bfn3\b/);
         expect(exportedState.actionsById[1].stack).not.toMatch(/\bfn4\b/);
         expect(exportedState.actionsById[1].stack).toContain(
           'instrument.spec.js'
@@ -985,7 +983,7 @@ describe('instrument', () => {
       exportedState = monitoredLiftedStore.getState();
       expect(exportedState.actionsById[0].stack).toBe(undefined);
       expect(typeof exportedState.actionsById[1].stack).toBe('string');
-      expect(exportedState.actionsById[1].stack).toContain('at performAction');
+      expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
       expect(exportedState.actionsById[1].stack).toContain('instrument.js');
       expect(exportedState.actionsById[1].stack).toContain(
         'instrument.spec.js'
@@ -1007,7 +1005,7 @@ describe('instrument', () => {
         expect(exportedState.actionsById[0].stack).toBe(undefined);
         expect(typeof exportedState.actionsById[1].stack).toBe('string');
         expect(exportedState.actionsById[1].stack).toContain(
-          'at performAction'
+          'at Object.performAction'
         );
         expect(exportedState.actionsById[1].stack).toContain('instrument.js');
         expect(exportedState.actionsById[1].stack).toContain(
