@@ -1,6 +1,6 @@
 {
   "name": "redux-devtools-cli",
-  "version": "1.0.0-1",
+  "version": "1.0.0-2",
   "description": "CLI for remote debugging with Redux DevTools.",
   "main": "index.js",
   "bin": {
@@ -16,8 +16,7 @@
   "scripts": {
     "start": "node ./bin/redux-devtools.js",
     "start:electron": "node ./bin/redux-devtools.js --open",
-    "test": "jest",
-    "prepublishOnly": "npm run test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
