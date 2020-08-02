@@ -37,12 +37,7 @@ module.exports = {
     })
   ].concat(
     isProduction
-      ? [
-          new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false },
-            output: { comments: false }
-          })
-        ]
+      ? []
       : [
           new ExportFilesWebpackPlugin('demo/dist/index.html'),
           new webpack.HotModuleReplacementPlugin()
