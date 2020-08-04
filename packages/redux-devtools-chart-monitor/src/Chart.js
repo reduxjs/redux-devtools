@@ -69,7 +69,7 @@ class Chart extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { state, select, monitorState } = nextProps;
 
     if (monitorState.isVisible !== false) {

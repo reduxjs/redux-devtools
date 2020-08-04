@@ -105,6 +105,7 @@ class ChartMonitor extends Component {
       return invertTheme ? invertColors(themes[theme]) : themes[theme];
     }
 
+    // eslint-disable-next-line no-console
     console.warn('DevTools theme ' + theme + ' not found, defaulting to nicinabox');
     return invertTheme ? invertColors(themes.nicinabox) : themes.nicinabox;
   }
