@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
 import { tree } from 'd3-state-visualizer';
 
 const wrapperStyle = {
@@ -61,9 +60,11 @@ class Chart extends Component {
     })
   };
 
+  divRef = createRef();
+
   componentDidMount() {
     const { select, state, defaultIsVisible } = this.props;
-    this.renderChart = tree(findDOMNode(this), this.props);
+    this.renderChart = tree(this.divRef.current, this.props);
     if (defaultIsVisible) {
       this.renderChart(select(state));
     }
@@ -78,7 +79,7 @@ class Chart extends Component {
   }
 
   render() {
-    return <div style={wrapperStyle}/>;
+    return <div style={wrapperStyle} ref={this.divRef}/>;
   }
 }
 
