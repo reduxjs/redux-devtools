@@ -11,8 +11,8 @@
   "scripts": {
     "clean": "rimraf lib dist",
     "build": "babel src --out-dir lib",
-    "build:umd": "webpack src/index.js dist/d3-state-visualizer.js --config webpack.config.development.js",
-    "build:umd:min": "webpack src/index.js dist/d3-state-visualizer.min.js --config webpack.config.production.js",
+    "build:umd": "webpack src/index.js -o dist/d3-state-visualizer.js --config webpack.config.development.js",
+    "build:umd:min": "webpack src/index.js -o dist/d3-state-visualizer.min.js --config webpack.config.production.js",
     "prepare": "npm run build",
     "prepublishOnly": "npm run clean && npm run build && npm run build:umd && npm run build:umd:min"
   },
@@ -37,6 +37,7 @@
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.0",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-export-default-from": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
