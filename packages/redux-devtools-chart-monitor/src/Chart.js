@@ -20,7 +20,7 @@ class Chart extends Component {
     style: PropTypes.shape({
       node: PropTypes.shape({
         colors: PropTypes.shape({
-          'default': PropTypes.string,
+          default: PropTypes.string,
           parent: PropTypes.string,
           collapsed: PropTypes.string
         }),
@@ -28,7 +28,7 @@ class Chart extends Component {
       }),
       text: PropTypes.shape({
         colors: PropTypes.shape({
-          'default': PropTypes.string,
+          default: PropTypes.string,
           hover: PropTypes.string
         })
       }),
@@ -79,7 +79,7 @@ class Chart extends Component {
   }
 
   render() {
-    return <div style={wrapperStyle} ref={this.divRef}/>;
+    return <div style={wrapperStyle} ref={this.divRef} />;
   }
 }
 

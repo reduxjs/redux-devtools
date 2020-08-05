@@ -14,18 +14,18 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   resolve: {
     extensions: ['.js']
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      loaders: ['babel-loader'],
-      exclude: /node_modules/,
-      include: __dirname
-    }]
+    rules: [
+      {
+        test: /\.js$/,
+        loaders: ['babel-loader'],
+        exclude: /node_modules/,
+        include: __dirname
+      }
+    ]
   }
 };

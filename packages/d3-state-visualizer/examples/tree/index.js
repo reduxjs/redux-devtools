@@ -3,7 +3,7 @@ import { tree } from 'd3-state-visualizer';
 const appState = {
   todoStore: {
     todos: [
-      { title: 'd3'},
+      { title: 'd3' },
       { title: 'state' },
       { title: 'visualizer' },
       { title: 'tree' }
@@ -28,8 +28,8 @@ const render = tree(document.getElementById('root'), {
   isSorted: false,
   widthBetweenNodesCoeff: 1.5,
   heightBetweenNodesCoeff: 2,
-  style: {border: '1px solid black'},
-  tooltipOptions: {offset: {left: 30, top: 10}, indentationSize: 2}
+  style: { border: '1px solid black' },
+  tooltipOptions: { offset: { left: 30, top: 10 }, indentationSize: 2 }
 });
 
 render();

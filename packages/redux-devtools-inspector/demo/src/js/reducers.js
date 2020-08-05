@@ -28,8 +28,20 @@ const IMMUTABLE_MAP = Immutable.Map({
 });
 
 const NATIVE_MAP = new window.Map([
-  ['map', new window.Map([[{ first: true }, 1], ['second', 2]])],
-  ['weakMap', new window.WeakMap([[{ first: true }, 1], [{ second: 1 }, 2]])],
+  [
+    'map',
+    new window.Map([
+      [{ first: true }, 1],
+      ['second', 2]
+    ])
+  ],
+  [
+    'weakMap',
+    new window.WeakMap([
+      [{ first: true }, 1],
+      [{ second: 1 }, 2]
+    ])
+  ],
   ['set', new window.Set([{ first: true }, 'second'])],
   ['weakSet', new window.WeakSet([{ first: true }, { second: 1 }])]
 ]);

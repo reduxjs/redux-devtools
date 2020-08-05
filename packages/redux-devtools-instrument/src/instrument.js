@@ -80,7 +80,9 @@ export const ActionCreators = {
             stack = frames
               .slice(
                 0,
-                traceLimit + extraFrames + (frames[0].startsWith('Error') ? 1 : 0)
+                traceLimit +
+                  extraFrames +
+                  (frames[0].startsWith('Error') ? 1 : 0)
               )
               .join('\n');
           }

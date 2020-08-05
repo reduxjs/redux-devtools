@@ -61,7 +61,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(ImportButton);
+export default connect(null, mapDispatchToProps)(ImportButton);

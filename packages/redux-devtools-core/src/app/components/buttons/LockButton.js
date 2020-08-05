@@ -37,7 +37,4 @@ function mapDispatchToProps(dispatch, ownProps) {
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(LockButton);
+export default connect(null, mapDispatchToProps)(LockButton);

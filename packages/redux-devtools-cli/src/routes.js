@@ -9,7 +9,11 @@ var graphqlMiddleware = require('./middleware/graphql');
 var app = express.Router();
 
 function serveUmdModule(name) {
-  app.use(express.static(path.dirname(require.resolve(name + '/package.json')) + '/umd'));
+  app.use(
+    express.static(
+      path.dirname(require.resolve(name + '/package.json')) + '/umd'
+    )
+  );
 }
 
 function routes(options, store, scServer) {
