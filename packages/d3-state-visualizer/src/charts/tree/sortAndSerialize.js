@@ -1,5 +1,3 @@
-import { is } from 'ramda'
-
 function sortObject(obj, strict) {
   if (obj instanceof Array) {
     let ary

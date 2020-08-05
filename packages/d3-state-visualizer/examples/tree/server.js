@@ -11,8 +11,10 @@ new WebpackDevServer(webpack(config), {
   }
 }).listen(3000, 'localhost', function (err) {
   if (err) {
+    // eslint-disable-next-line no-console
     console.log(err);
   }
 
+  // eslint-disable-next-line no-console
   console.log('Listening at localhost:3000');
 });
