@@ -7,6 +7,7 @@
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.5",
+    "husky": "^4.2.5",
     "jest": "^24.9.0",
     "lerna": "^3.22.1",
     "lint-staged": "^8.2.1",
@@ -23,7 +24,6 @@
     "lint:fix": "eslint \"**/*.{js,jsx}\" --fix --cache",
     "lint:all": "eslint \"**/*.{js,jsx}\"",
     "prettify": "prettier \"**/*.{js,jsx,json,css,html,md}\" --ignore-path .eslintignore --single-quote --write",
-    "precommit": "lint-staged",
     "test": "jest --onlyChanged",
     "test:all": "jest"
   },
@@ -37,6 +37,11 @@
   ],
   "engines": {
     "node": ">=10.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{js,jsx}": [
