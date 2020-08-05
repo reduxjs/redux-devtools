@@ -56,9 +56,7 @@ export const style = ({ theme, percent, disabled, withLabel }) => css`
     height: 0.8em;
     border-radius: 0.5em;
     box-shadow: 0 0 .125em ${theme.base04};
-    background: linear-gradient(${theme.base01}, ${theme.base02} 40%, ${
-      theme.base01
-    })
+    background: linear-gradient(${theme.base01}, ${theme.base02} 40%, ${theme.base01})
       no-repeat ${theme.base00};
     background-size: ${percent}% 100%;
   }`

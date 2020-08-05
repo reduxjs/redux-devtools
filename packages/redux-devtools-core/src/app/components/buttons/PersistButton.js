@@ -49,7 +49,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LockButton);
+export default connect(mapStateToProps, mapDispatchToProps)(LockButton);

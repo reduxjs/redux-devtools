@@ -105,8 +105,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const ConnectedChartTab = connect(
-  null,
-  mapDispatchToProps
-)(ChartTab);
+const ConnectedChartTab = connect(null, mapDispatchToProps)(ChartTab);
 export default withTheme(ConnectedChartTab);

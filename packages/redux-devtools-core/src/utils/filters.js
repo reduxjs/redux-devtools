@@ -45,7 +45,8 @@ export function isFiltered(action, localFilter) {
   const opts = getDevToolsOptions();
   if (
     (!localFilter &&
-      (opts.filter && opts.filter === FilterState.DO_NOT_FILTER)) ||
+      opts.filter &&
+      opts.filter === FilterState.DO_NOT_FILTER) ||
     (type && typeof type.match !== 'function')
   )
     return false;

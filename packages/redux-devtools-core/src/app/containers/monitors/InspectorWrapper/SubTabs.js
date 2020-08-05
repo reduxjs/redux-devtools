@@ -109,7 +109,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SubTabs);
+export default connect(mapStateToProps, mapDispatchToProps)(SubTabs);

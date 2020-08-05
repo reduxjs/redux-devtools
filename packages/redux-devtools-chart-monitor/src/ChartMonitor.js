@@ -50,15 +50,12 @@ class ChartMonitor extends Component {
 
     preserveScrollTop: PropTypes.bool,
     select: PropTypes.func.isRequired,
-    theme: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string
-    ]),
+    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     invertTheme: PropTypes.bool
   };
 
   static defaultProps = {
-    select: (state) => state,
+    select: state => state,
     theme: 'nicinabox',
     preserveScrollTop: true,
     invertTheme: false
@@ -106,7 +103,9 @@ class ChartMonitor extends Component {
     }
 
     // eslint-disable-next-line no-console
-    console.warn('DevTools theme ' + theme + ' not found, defaulting to nicinabox');
+    console.warn(
+      'DevTools theme ' + theme + ' not found, defaulting to nicinabox'
+    );
     return invertTheme ? invertColors(themes.nicinabox) : themes.nicinabox;
   }
 
@@ -118,7 +117,7 @@ class ChartMonitor extends Component {
       height: '100%',
       node: {
         colors: {
-          'default': theme.base0B,
+          default: theme.base0B,
           collapsed: theme.base0B,
           parent: theme.base0E
         },
@@ -126,7 +125,7 @@ class ChartMonitor extends Component {
       },
       text: {
         colors: {
-          'default': theme.base0D,
+          default: theme.base0D,
           hover: theme.base06
         }
       }
@@ -139,18 +138,20 @@ class ChartMonitor extends Component {
 
     const tooltipOptions = {
       disabled: false,
-      offset: {left: 30, top: 10},
+      offset: { left: 30, top: 10 },
       indentationSize: 2,
       style: {
         'background-color': theme.base06,
-        'opacity': '0.7',
+        opacity: '0.7',
         'border-radius': '5px',
-        'padding': '5px'
+        padding: '5px'
       }
     };
 
     const defaultOptions = {
-      state: computedStates.length ? computedStates[props.currentStateIndex].state : null,
+      state: computedStates.length
+        ? computedStates[props.currentStateIndex].state
+        : null,
       isSorted: false,
       heightBetweenNodesCoeff: 1,
       widthBetweenNodesCoeff: 1.3,
@@ -165,7 +166,7 @@ class ChartMonitor extends Component {
     const theme = this.getTheme();
 
     return (
-      <div style={{...styles.container, backgroundColor: theme.base07}}>
+      <div style={{ ...styles.container, backgroundColor: theme.base07 }}>
         <Chart {...this.getChartOptions()} />
       </div>
     );

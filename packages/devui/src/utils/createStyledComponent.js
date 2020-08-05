@@ -10,7 +10,10 @@ export default (styles, component) =>
       props.theme.type
         ? getStyle(styles, props.theme.type)
         : // used outside of container (theme provider)
-          getStyle(styles, 'default')({
+          getStyle(
+            styles,
+            'default'
+          )({
             ...props,
             theme: getDefaultTheme(props.theme)
           })}

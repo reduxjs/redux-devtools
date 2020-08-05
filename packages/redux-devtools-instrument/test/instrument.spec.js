@@ -983,7 +983,9 @@ describe('instrument', () => {
       exportedState = monitoredLiftedStore.getState();
       expect(exportedState.actionsById[0].stack).toBe(undefined);
       expect(typeof exportedState.actionsById[1].stack).toBe('string');
-      expect(exportedState.actionsById[1].stack).toContain('at Object.performAction');
+      expect(exportedState.actionsById[1].stack).toContain(
+        'at Object.performAction'
+      );
       expect(exportedState.actionsById[1].stack).toContain('instrument.js');
       expect(exportedState.actionsById[1].stack).toContain(
         'instrument.spec.js'
@@ -1318,13 +1320,7 @@ describe('instrument', () => {
 
   it('throws if there are more than one instrument enhancer included', () => {
     expect(() => {
-      createStore(
-        counter,
-        compose(
-          instrument(),
-          instrument()
-        )
-      );
+      createStore(counter, compose(instrument(), instrument()));
     }).toThrow(
       'DevTools instrumentation should not be applied more than once. ' +
         'Check your store configuration.'

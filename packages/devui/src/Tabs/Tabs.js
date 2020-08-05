@@ -76,7 +76,7 @@ export default class Tabs extends Component {
       <TabsContainer position={this.props.position}>
         {tabsHeader}
         <div>
-          <this.SelectedComponent {...this.selector && this.selector()} />
+          <this.SelectedComponent {...(this.selector && this.selector())} />
         </div>
       </TabsContainer>
     );

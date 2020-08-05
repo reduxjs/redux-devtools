@@ -35,7 +35,4 @@ function mapDispatchToProps(dispatch, ownProps) {
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(RecordButton);
+export default connect(null, mapDispatchToProps)(RecordButton);

@@ -31,7 +31,10 @@ describe('# shallow map', () => {
 
     const expected = {
       name: 'state',
-      children: [{ name: 'a', value: 'foo' }, { name: 'b', value: 'bar' }]
+      children: [
+        { name: 'a', value: 'foo' },
+        { name: 'b', value: 'bar' }
+      ]
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -62,7 +65,10 @@ describe('# shallow map', () => {
       children: [
         {
           name: 'a',
-          children: [{ name: 'aa', value: 'foo' }, { name: 'ab', value: 'bar' }]
+          children: [
+            { name: 'aa', value: 'foo' },
+            { name: 'ab', value: 'bar' }
+          ]
         }
       ]
     };
@@ -132,7 +138,10 @@ describe('# array map', () => {
       children: [
         {
           name: 'a',
-          children: [{ name: 'a[0]', value: 1 }, { name: 'a[1]', value: 2 }]
+          children: [
+            { name: 'a[0]', value: 1 },
+            { name: 'a[1]', value: 2 }
+          ]
         }
       ]
     };
@@ -148,7 +157,10 @@ describe('# array map', () => {
       children: [
         {
           name: 'a',
-          children: [{ name: 'a[1]', value: 2 }, { name: 'a[0]', value: 1 }]
+          children: [
+            { name: 'a[1]', value: 2 },
+            { name: 'a[0]', value: 1 }
+          ]
         }
       ]
     };

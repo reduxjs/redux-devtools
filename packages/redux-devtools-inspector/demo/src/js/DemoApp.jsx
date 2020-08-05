@@ -236,33 +236,30 @@ class DemoApp extends React.Component {
   };
 }
 
-export default connect(
-  state => state,
-  {
-    toggleTimeoutUpdate: timeoutUpdateEnabled => ({
-      type: 'TOGGLE_TIMEOUT_UPDATE',
-      timeoutUpdateEnabled
-    }),
-    timeoutUpdate: () => ({ type: 'TIMEOUT_UPDATE' }),
-    increment: () => ({ type: 'INCREMENT' }),
-    push: () => ({ type: 'PUSH' }),
-    pop: () => ({ type: 'POP' }),
-    replace: () => ({ type: 'REPLACE' }),
-    changeNested: () => ({ type: 'CHANGE_NESTED' }),
-    pushHugeArray: () => ({ type: 'PUSH_HUGE_ARRAY' }),
-    addIterator: () => ({ type: 'ADD_ITERATOR' }),
-    addHugeObect: () => ({ type: 'ADD_HUGE_OBJECT' }),
-    addRecursive: () => ({ type: 'ADD_RECURSIVE' }),
-    addNativeMap: () => ({ type: 'ADD_NATIVE_MAP' }),
-    addImmutableMap: () => ({ type: 'ADD_IMMUTABLE_MAP' }),
-    changeImmutableNested: () => ({ type: 'CHANGE_IMMUTABLE_NESTED' }),
-    hugePayload: () => ({
-      type: 'HUGE_PAYLOAD',
-      payload: Array.from({ length: 10000 }).map((_, i) => i)
-    }),
-    addFunction: () => ({ type: 'ADD_FUNCTION' }),
-    addSymbol: () => ({ type: 'ADD_SYMBOL' }),
-    shuffleArray: () => ({ type: 'SHUFFLE_ARRAY' }),
-    pushRoute
-  }
-)(DemoApp);
+export default connect(state => state, {
+  toggleTimeoutUpdate: timeoutUpdateEnabled => ({
+    type: 'TOGGLE_TIMEOUT_UPDATE',
+    timeoutUpdateEnabled
+  }),
+  timeoutUpdate: () => ({ type: 'TIMEOUT_UPDATE' }),
+  increment: () => ({ type: 'INCREMENT' }),
+  push: () => ({ type: 'PUSH' }),
+  pop: () => ({ type: 'POP' }),
+  replace: () => ({ type: 'REPLACE' }),
+  changeNested: () => ({ type: 'CHANGE_NESTED' }),
+  pushHugeArray: () => ({ type: 'PUSH_HUGE_ARRAY' }),
+  addIterator: () => ({ type: 'ADD_ITERATOR' }),
+  addHugeObect: () => ({ type: 'ADD_HUGE_OBJECT' }),
+  addRecursive: () => ({ type: 'ADD_RECURSIVE' }),
+  addNativeMap: () => ({ type: 'ADD_NATIVE_MAP' }),
+  addImmutableMap: () => ({ type: 'ADD_IMMUTABLE_MAP' }),
+  changeImmutableNested: () => ({ type: 'CHANGE_IMMUTABLE_NESTED' }),
+  hugePayload: () => ({
+    type: 'HUGE_PAYLOAD',
+    payload: Array.from({ length: 10000 }).map((_, i) => i)
+  }),
+  addFunction: () => ({ type: 'ADD_FUNCTION' }),
+  addSymbol: () => ({ type: 'ADD_SYMBOL' }),
+  shuffleArray: () => ({ type: 'SHUFFLE_ARRAY' }),
+  pushRoute
+})(DemoApp);

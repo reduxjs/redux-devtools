@@ -30,7 +30,4 @@ function mapDispatch(dispatch) {
   };
 }
 
-export default connect(
-  mapState,
-  mapDispatch
-)(TodoApp);
+export default connect(mapState, mapDispatch)(TodoApp);
