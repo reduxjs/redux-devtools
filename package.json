@@ -19,10 +19,10 @@
     "publish": "lerna publish",
     "canary": "lerna publish --canary preminor --npm-tag alpha",
     "next": "lerna publish --bump prerelease --npm-tag next",
-    "lint": "eslint '**/*.{js,jsx}' --cache",
-    "lint:fix": "eslint '**/*.{js,jsx}' --fix --cache",
-    "lint:all": "eslint '**/*.{js,jsx}'",
-    "prettify": "prettier '**/*.{js,jsx,json,css,html,md}' --ignore-path .eslintignore --single-quote --write",
+    "lint": "eslint \"**/*.{js,jsx}\" --cache",
+    "lint:fix": "eslint \"**/*.{js,jsx}\" --fix --cache",
+    "lint:all": "eslint \"**/*.{js,jsx}\"",
+    "prettify": "prettier \"**/*.{js,jsx,json,css,html,md}\" --ignore-path .eslintignore --single-quote --write",
     "precommit": "lint-staged",
     "test": "jest --onlyChanged",
     "test:all": "jest"
@@ -36,7 +36,7 @@
     "packages/redux-slider-monitor/examples/todomvc"
   ],
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "lint-staged": {
     "*.{js,jsx}": [
