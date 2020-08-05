@@ -1,7 +1,9 @@
 Redux DevTools Chart Monitor
 =========================
 
-A chart monitor for [Redux DevTools](https://github.com/gaearon/redux-devtools). Created by [@romseguy](https://github.com/romseguy) and merged from [`reduxjs/redux-devtools-chart-monitor`](https://github.com/reduxjs/redux-devtools-chart-monitor).  
+A chart monitor for [Redux DevTools](https://github.com/gaearon/redux-devtools).
+
+Created by [@romseguy](https://github.com/romseguy) and merged from [`reduxjs/redux-devtools-chart-monitor`](https://github.com/reduxjs/redux-devtools-chart-monitor).  
 
 It shows a real-time view of the store aka the current state of the app.
 
