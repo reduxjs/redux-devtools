@@ -1,0 +1,30 @@
+{
+  "name": "remotedev-serialize",
+  "version": "0.1.8",
+  "description": "Serialize unserializable data and parse it back.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --no-cache",
+    "prepublish": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "keywords": [
+    "redux",
+    "devtools"
+  ],
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  },
+  "homepage": "https://github.com/reduxjs/redux-devtools",
+  "devDependencies": {
+    "immutable": "^3.8.2"
+  },
+  "dependencies": {
+    "jsan": "^3.1.13"
+  }
+}
