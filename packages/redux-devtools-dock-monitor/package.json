@@ -10,7 +10,6 @@
   "scripts": {
     "clean": "rimraf lib",
     "build": "babel src --out-dir lib",
-    "test": "jest",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test && npm run clean && npm run build"
   },
