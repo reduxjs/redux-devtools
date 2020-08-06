@@ -1,0 +1,33 @@
+exports[`Helpers extract 1`] = `
+Object {
+  "__serializedType__": "testType",
+  "data": Object {
+    "testData": "test",
+  },
+}
+`;
+
+exports[`Helpers mark 1`] = `
+Object {
+  "__serializedType__": "testType",
+  "data": Object {
+    "testData": "test",
+  },
+}
+`;
+
+exports[`Helpers mark 2`] = `
+Object {
+  "__serializedType__": "testType",
+  "data": "[object Object]",
+}
+`;
+
+exports[`Helpers refer 1`] = `
+Object {
+  "__serializedType__": "testType",
+  "data": Object {
+    "testData": "test",
+  },
+}
+`;
