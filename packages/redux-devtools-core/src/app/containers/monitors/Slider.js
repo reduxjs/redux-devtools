@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
-import SliderMonitor from 'redux-slider-monitor';
+import SliderMonitor from 'redux-devtools-slider-monitor';
 
 const SliderWrapper = styled.div`
   border-color: ${props => props.theme.base02};
