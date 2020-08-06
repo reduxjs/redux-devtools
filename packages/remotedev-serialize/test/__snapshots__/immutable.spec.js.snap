@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Immutable Nested stringify 1`] = `"{\\"data\\":[[\\"map\\",{\\"data\\":{\\"seq\\":{\\"data\\":[1,2,3,4,5,6,7,8],\\"__serializedType__\\":\\"ImmutableSeq\\"},\\"stack\\":{\\"data\\":[\\"a\\",\\"b\\",\\"c\\"],\\"__serializedType__\\":\\"ImmutableStack\\"}},\\"__serializedType__\\":\\"ImmutableOrderedMap\\"}],[\\"repeat\\",{\\"data\\":{\\"_value\\":\\"hi\\",\\"size\\":100},\\"__serializedType__\\":\\"ImmutableRepeat\\"}]],\\"__serializedType__\\":\\"ImmutableSet\\"}"`;
+
+exports[`Immutable Record stringify 1`] = `"{\\"data\\":{\\"a\\":1,\\"b\\":3},\\"__serializedType__\\":\\"ImmutableRecord\\",\\"__serializedRef__\\":0}"`;
+
+exports[`Immutable Stringify list 1`] = `"{\\"data\\":[1,2,3,4,5,6,7,8,9,10],\\"__serializedType__\\":\\"ImmutableList\\"}"`;
+
+exports[`Immutable Stringify map 1`] = `"{\\"data\\":{\\"a\\":1,\\"b\\":2,\\"c\\":3,\\"d\\":4},\\"__serializedType__\\":\\"ImmutableMap\\"}"`;
+
+exports[`Immutable Stringify orderedMap 1`] = `"{\\"data\\":{\\"b\\":2,\\"a\\":1,\\"c\\":3,\\"d\\":4},\\"__serializedType__\\":\\"ImmutableOrderedMap\\"}"`;
+
+exports[`Immutable Stringify orderedSet 1`] = `"{\\"data\\":[10,9,8,7,6,5,4,3,2,1],\\"__serializedType__\\":\\"ImmutableOrderedSet\\"}"`;
+
+exports[`Immutable Stringify range 1`] = `"{\\"data\\":{\\"_start\\":0,\\"_end\\":7,\\"_step\\":1,\\"size\\":7},\\"__serializedType__\\":\\"ImmutableRange\\"}"`;
+
+exports[`Immutable Stringify repeat 1`] = `"{\\"data\\":{\\"_value\\":\\"hi\\",\\"size\\":100},\\"__serializedType__\\":\\"ImmutableRepeat\\"}"`;
+
+exports[`Immutable Stringify seq 1`] = `"{\\"data\\":[1,2,3,4,5,6,7,8],\\"__serializedType__\\":\\"ImmutableSeq\\"}"`;
+
+exports[`Immutable Stringify set 1`] = `"{\\"data\\":[1,2,3,4,5,6,7,8,9,10],\\"__serializedType__\\":\\"ImmutableSet\\"}"`;
+
+exports[`Immutable Stringify stack 1`] = `"{\\"data\\":[\\"a\\",\\"b\\",\\"c\\"],\\"__serializedType__\\":\\"ImmutableStack\\"}"`;
