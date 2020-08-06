@@ -12,7 +12,7 @@ It uses a slider based on [react-slider](https://github.com/mpowaga/react-slider
 
 ### Installation
 
-`npm install redux-slider-monitor`
+`yarn add redux-devtools-slider-monitor`
 
 ### Recommended Usage
 

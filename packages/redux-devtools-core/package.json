@@ -20,7 +20,9 @@
     "umd"
   ],
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>/test/setup.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setup.js"
+    ],
     "moduleNameMapper": {
       "\\.(css|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
     }
@@ -83,10 +85,10 @@
     "redux-devtools-inspector": "^0.13.0",
     "redux-devtools-instrument": "^1.9.6",
     "redux-devtools-log-monitor": "^2.0.0",
+    "redux-devtools-slider-monitor": "^2.0.0-3",
     "redux-devtools-test-generator": "^0.6.0",
     "redux-devtools-trace-monitor": "^0.1.0",
     "redux-persist": "^4.10.2",
-    "redux-slider-monitor": "^2.0.0-3",
     "remotedev-serialize": "^0.1.8",
     "socketcluster-client": "^5.5.2",
     "styled-components": "^2.4.1"
