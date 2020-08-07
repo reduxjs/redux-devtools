@@ -5,7 +5,11 @@ var spawn = require('cross-spawn');
 function open(app, options) {
   if (app === true || app === 'electron') {
     try {
-      spawn.sync(require('electron'), [path.join(__dirname, '..', 'app')]);
+      var port = options.port ? '--port=' + options.port : '';
+      spawn.sync(require('electron'), [
+        path.join(__dirname, '..', 'app'),
+        port
+      ]);
     } catch (error) {
       /* eslint-disable no-console */
       if (error.message === "Cannot find module 'electron'") {
