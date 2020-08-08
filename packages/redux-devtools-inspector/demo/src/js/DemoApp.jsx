@@ -9,7 +9,6 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Form from 'react-bootstrap/lib/Form';
 import Col from 'react-bootstrap/lib/Col';
 import InputGroup from 'react-bootstrap/lib/InputGroup';
-import Combobox from 'react-input-enhancements/lib/Combobox';
 import * as base16 from 'base16';
 import * as inspectorThemes from '../../../src/themes';
 import getOptions from './getOptions';
@@ -107,14 +106,21 @@ class DemoApp extends React.Component {
                 </Col>
                 <Col sm={9}>
                   <InputGroup>
-                    <Combobox
-                      options={themeOptions}
-                      value={options.theme}
-                      onSelect={value => this.setTheme(options, value)}
-                      optionFilters={[]}
+                    <FormControl
+                      componentClass="select"
+                      onChange={event =>
+                        this.setTheme(options, event.currentTarget.value)
+                      }
                     >
-                      {props => <FormControl {...props} type="text" />}
-                    </Combobox>
+                      {themeOptions.map(theme => (
+                        <option
+                          key={(theme && theme.label) || 'empty'}
+                          label={(theme && theme.label) || '──────────'}
+                          value={theme && theme.value}
+                          disabled={!theme}
+                        />
+                      ))}
+                    </FormControl>
                     <InputGroup.Addon>
                       <a onClick={this.toggleTheme} style={styles.link}>
                         {options.dark ? 'Light theme' : 'Dark theme'}
