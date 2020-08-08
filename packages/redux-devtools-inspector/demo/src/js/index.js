@@ -5,7 +5,7 @@ import DemoApp from './DemoApp';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import createLogger from 'redux-logger';
+import logger from 'redux-logger';
 import { Router, Route, browserHistory } from 'react-router';
 import {
   syncHistoryWithStore,
@@ -69,7 +69,7 @@ let DevTools = getDevTools(getOptions());
 const reduxRouterMiddleware = routerMiddleware(browserHistory);
 
 const enhancer = compose(
-  applyMiddleware(createLogger(), reduxRouterMiddleware),
+  applyMiddleware(logger, reduxRouterMiddleware),
   (...args) => {
     const useDevtoolsExtension =
       !!window.__REDUX_DEVTOOLS_EXTENSION__ && getOptions().useExtension;
