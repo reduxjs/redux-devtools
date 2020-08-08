@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const ExportFilesWebpackPlugin = require('export-files-webpack-plugin');
 
 const pkg = require('./package.json');
 
@@ -41,10 +40,7 @@ module.exports = {
             output: { comments: false },
           }),
         ]
-      : [
-          new ExportFilesWebpackPlugin('demo/dist/index.html'),
-          new webpack.HotModuleReplacementPlugin(),
-        ]
+      : [new webpack.HotModuleReplacementPlugin()]
   ),
   resolve: {
     extensions: ['.js', '.jsx'],
