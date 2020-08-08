@@ -26,7 +26,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: 'demo/src/index.html',
-      filename: 'index.html',
       package: pkg
     }),
     new webpack.DefinePlugin({

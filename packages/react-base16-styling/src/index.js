@@ -208,7 +208,9 @@ export const getBase16Theme = (theme, base16Themes) => {
     }
   }
 
-  return theme && theme.hasOwnProperty('base00') ? theme : undefined;
+  return theme && Object.prototype.hasOwnProperty.call(theme, 'base00')
+    ? theme
+    : undefined;
 };
 
 export const invertTheme = theme => {
