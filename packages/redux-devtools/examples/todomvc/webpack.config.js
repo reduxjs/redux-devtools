@@ -26,7 +26,15 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        loaders: ['style-loader', 'raw-loader']
+        loaders: [
+          'style-loader',
+          {
+            loader: 'raw-loader',
+            options: {
+              esModule: false
+            }
+          }
+        ]
       }
     ]
   }

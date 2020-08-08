@@ -31,7 +31,15 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        use: ['style-loader', 'raw-loader']
+        use: [
+          'style-loader',
+          {
+            loader: 'raw-loader',
+            options: {
+              esModule: false
+            }
+          }
+        ]
       }
     ]
   }

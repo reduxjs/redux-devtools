@@ -10,7 +10,7 @@
     "husky": "^4.2.5",
     "jest": "^26.2.2",
     "lerna": "^3.22.1",
-    "lint-staged": "^8.2.1",
+    "lint-staged": "^10.2.11",
     "prettier": "^1.19.1"
   },
   "scripts": {
@@ -46,12 +46,10 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",
-      "yarn lint:fix",
-      "git add"
+      "yarn lint:fix"
     ],
     "*.{json,css,html,md}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   }
 }
