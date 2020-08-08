@@ -4,7 +4,7 @@ export default function getOptions() {
     supportImmutable: window.location.search.indexOf('immutable') !== -1,
     theme: do {
       const match = window.location.search.match(/theme=([^&]+)/);
-      match ? match[1] : 'inspector'
+      match ? match[1] : 'inspector';
     },
     dark: window.location.search.indexOf('dark') !== -1
   };
