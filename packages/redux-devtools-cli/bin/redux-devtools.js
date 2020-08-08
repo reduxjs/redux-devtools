@@ -6,7 +6,7 @@ var chalk = require('chalk');
 var injectServer = require('./injectServer');
 var getOptions = require('./../src/options');
 var server = require('../index');
-var open = require('./open');
+var openApp = require('./openApp');
 
 var options = getOptions(argv);
 
@@ -88,7 +88,7 @@ if (argv.injectserver) {
 server(argv).then(function (r) {
   if (argv.open && argv.open !== 'false') {
     r.on('ready', function () {
-      open(argv.open, options);
+      openApp(argv.open, options);
     });
   }
 });

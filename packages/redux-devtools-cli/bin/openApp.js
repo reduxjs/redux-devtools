@@ -1,8 +1,8 @@
-var opn = require('opn');
+var open = require('open');
 var path = require('path');
 var spawn = require('cross-spawn');
 
-function open(app, options) {
+function openApp(app, options) {
   if (app === true || app === 'electron') {
     try {
       var port = options.port ? '--port=' + options.port : '';
@@ -29,10 +29,10 @@ function open(app, options) {
     }
     return;
   }
-  opn(
+  open(
     'http://localhost:' + options.port + '/',
     app !== 'browser' ? { app: app } : undefined
   );
 }
 
-module.exports = open;
+module.exports = openApp;
