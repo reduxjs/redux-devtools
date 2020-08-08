@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ExportFilesWebpackPlugin = require('export-files-webpack-plugin');
 
 const pkg = require('./package.json');
@@ -22,7 +22,7 @@ module.exports = {
     filename: 'js/bundle.js'
   },
   plugins: [
-    new CleanWebpackPlugin(isProduction ? ['demo/dist'] : []),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: 'demo/src/index.html',

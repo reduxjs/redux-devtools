@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env = {}) => ({
@@ -56,12 +55,7 @@ module.exports = (env = {}) => ({
     }),
     new HtmlWebpackPlugin({
       template: 'assets/index.html'
-    }),
-    new CopyWebpackPlugin(
-      env.platform === 'electron'
-        ? [{ context: './src/electron', from: '*' }]
-        : []
-    )
+    })
   ],
   optimization: {
     minimize: false,
