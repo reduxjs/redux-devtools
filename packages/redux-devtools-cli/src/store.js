@@ -1,4 +1,4 @@
-var uuidV4 = require('uuid/v4');
+var { v4: uuidV4 } = require('uuid');
 var pick = require('lodash/pick');
 var connector = require('./db/connector');
 
