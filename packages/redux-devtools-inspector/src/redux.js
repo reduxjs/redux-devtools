@@ -5,7 +5,9 @@ export const DEFAULT_STATE = {
   startActionId: null,
   inspectedActionPath: [],
   inspectedStatePath: [],
-  tabName: 'Diff'
+  tabName: 'Diff',
+  searchInclude: [],
+  searchExclude: []
 };
 
 export function updateMonitorState(monitorState) {

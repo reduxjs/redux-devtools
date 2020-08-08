@@ -221,7 +221,8 @@ export default class DevtoolsInspector extends Component {
     const {
       selectedActionId,
       startActionId,
-      searchValue,
+      searchInclude,
+      searchExclude,
       tabName
     } = monitorState;
     const inspectedPathType =
@@ -250,7 +251,8 @@ export default class DevtoolsInspector extends Component {
             actions,
             actionIds,
             isWideLayout,
-            searchValue,
+            searchInclude,
+            searchExclude,
             selectedActionId,
             startActionId,
             skippedActionIds,
@@ -324,8 +326,22 @@ export default class DevtoolsInspector extends Component {
     this.props.dispatch(sweep());
   };
 
-  handleSearch = val => {
-    this.updateMonitorState({ searchValue: val });
+  handleSearch = value => {
+    const segments = value.toLowerCase().trim().split(/\s+/);
+    const searchInclude = [];
+    const searchExclude = [];
+
+    segments.forEach(segment => {
+      if (segment.charAt(0) === '-') {
+        if (segment.length > 1) {
+          searchExclude.push(segment.substr(1));
+        }
+      } else {
+        searchInclude.push(segment);
+      }
+    });
+
+    this.updateMonitorState({ searchInclude, searchExclude });
   };
 
   handleSelectAction = (e, actionId) => {
