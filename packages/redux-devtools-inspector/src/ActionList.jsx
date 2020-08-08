@@ -94,13 +94,19 @@ export default class ActionList extends Component {
       onJumpToState
     } = this.props;
     const lowerSearchValue = searchValue && searchValue.toLowerCase();
-    const filteredActionIds = searchValue
-      ? actionIds.filter(
-          id =>
-            actions[id].action.type.toLowerCase().indexOf(lowerSearchValue) !==
-            -1
-        )
-      : actionIds;
+
+    const shouldMatchNegative = lowerSearchValue && lowerSearchValue.indexOf('!') === 0;
+    const query = shouldMatchNegative ? lowerSearchValue.substring(1) : lowerSearchValue;
+
+    const filterFunction = id => {
+      const actionIndex = actions[id].action.type.toLowerCase().indexOf(query);
+      if (shouldMatchNegative) {
+        return actionIndex === -1;
+      }
+      return actionIndex !== -1;
+    };
+
+    const filteredActionIds = searchValue ? actionIds.filter(filterFunction) : actionIds;
 
     return (
       <div
