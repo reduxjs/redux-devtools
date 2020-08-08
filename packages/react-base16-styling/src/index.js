@@ -148,14 +148,14 @@ const getStylingByKeys = (mergedStyling, keys, ...args) => {
   return props;
 };
 
-export const invertTheme = theme =>
-  Object.keys(theme).reduce(
+export const invertBase16Theme = base16Theme =>
+  Object.keys(base16Theme).reduce(
     (t, key) => (
       (t[key] = /^base/.test(key)
-        ? invertColor(theme[key])
+        ? invertColor(base16Theme[key])
         : key === 'scheme'
-        ? theme[key] + ':inverted'
-        : theme[key]),
+        ? base16Theme[key] + ':inverted'
+        : base16Theme[key]),
       t
     ),
     {}
@@ -204,9 +204,27 @@ export const getBase16Theme = (theme, base16Themes) => {
     const [themeName, modifier] = theme.split(':');
     theme = (base16Themes || {})[themeName] || base16[themeName];
     if (modifier === 'inverted') {
-      theme = invertTheme(theme);
+      theme = invertBase16Theme(theme);
     }
   }
 
   return theme && theme.hasOwnProperty('base00') ? theme : undefined;
+};
+
+export const invertTheme = theme => {
+  if (typeof theme === 'string') {
+    return `${theme}:inverted`;
+  }
+
+  if (theme && theme.extend) {
+    if (typeof theme.extend === 'string') {
+      return { ...theme, extend: `${theme.extend}:inverted` };
+    }
+
+    return { ...theme, extend: invertBase16Theme(theme.extend) };
+  }
+
+  if (theme) {
+    return invertBase16Theme(theme);
+  }
 };

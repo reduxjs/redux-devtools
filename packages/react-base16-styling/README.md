@@ -82,10 +82,18 @@ function(themeOrStyling, base16Themes)
 
 Helper method that returns `base16` theme object if `themeOrStyling` is `base16` theme name or theme object.
 
+## `invertBase16Theme`
+
+```js
+function(base16Theme)
+```
+
+Helper method that inverts `base16` theme colors, creating light theme out of dark one or vice versa.
+
 ## `invertTheme`
 
 ```js
 function(theme)
 ```
 
-Helper method that inverts `base16` theme colors, creating light theme out of dark one or vice versa.
+Helper method that inverts a theme or styling object to be passed into the `themeOrStyling` parameter of [createStyling](#createstyling).
