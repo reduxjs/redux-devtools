@@ -1,4 +1,4 @@
-export default function(hexColor, lightness) {
+export default function (hexColor, lightness) {
   let hex = String(hexColor).replace(/[^0-9a-f]/gi, '');
   if (hex.length < 6) {
     hex = hex.replace(/(.)/g, '$1$1');

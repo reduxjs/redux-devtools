@@ -6,7 +6,7 @@ import {
   toggleVisibility,
   changeMonitor,
   changePosition,
-  changeSize
+  changeSize,
 } from './actions';
 import reducer from './reducers';
 import parseKey from 'parse-key';
@@ -28,15 +28,15 @@ export default class DockMonitor extends Component {
       position: PropTypes.oneOf(POSITIONS).isRequired,
       size: PropTypes.number.isRequired,
       isVisible: PropTypes.bool.isRequired,
-      childMonitorState: PropTypes.any
-    })
+      childMonitorState: PropTypes.any,
+    }),
   };
 
   static defaultProps = {
     defaultIsVisible: true,
     defaultPosition: 'right',
     defaultSize: 0.3,
-    fluid: true
+    fluid: true,
   };
 
   constructor(props) {
@@ -136,7 +136,7 @@ export default class DockMonitor extends Component {
 
     return cloneElement(child, {
       monitorState: childMonitorStates[index],
-      ...otherProps
+      ...otherProps,
     });
   }
 

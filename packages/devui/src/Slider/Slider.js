@@ -19,7 +19,7 @@ export default class Slider extends Component {
     );
   }
 
-  onChange = e => {
+  onChange = (e) => {
     this.props.onChange(parseFloat(e.target.value));
   };
 
@@ -64,7 +64,7 @@ Slider.propTypes = {
   withValue: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-  theme: PropTypes.object
+  theme: PropTypes.object,
 };
 
 Slider.defaultProps = { value: 0, min: 0, max: 100 };

@@ -51,7 +51,7 @@ function getModule(type) {
   }
   return {
     name: moduleName,
-    path: modulePath
+    path: modulePath,
   };
 }
 
@@ -85,9 +85,9 @@ if (argv.injectserver) {
   );
 }
 
-server(argv).then(function(r) {
+server(argv).then(function (r) {
   if (argv.open && argv.open !== 'false') {
-    r.on('ready', function() {
+    r.on('ready', function () {
       open(argv.open, options);
     });
   }

@@ -1,6 +1,6 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return Promise.all([
-    knex.schema.createTable('remotedev_reports', function(table) {
+    knex.schema.createTable('remotedev_reports', function (table) {
       table.uuid('id').primary();
       table.string('type');
       table.string('title');
@@ -25,7 +25,7 @@ exports.up = function(knex) {
         .onUpdate('CASCADE')
         .defaultTo('78626c31-e16b-4528-b8e5-f81301b627f4');
     }),
-    knex.schema.createTable('remotedev_payloads', function(table) {
+    knex.schema.createTable('remotedev_payloads', function (table) {
       table.uuid('id').primary();
       table.text('state');
       table.text('action');
@@ -37,14 +37,14 @@ exports.up = function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
     }),
-    knex.schema.createTable('remotedev_apps', function(table) {
+    knex.schema.createTable('remotedev_apps', function (table) {
       table.uuid('id').primary();
       table.string('title');
       table.string('description');
       table.string('url');
       table.timestamps(false, true);
     }),
-    knex.schema.createTable('remotedev_users', function(table) {
+    knex.schema.createTable('remotedev_users', function (table) {
       table.uuid('id').primary();
       table.string('name');
       table.string('login');
@@ -56,7 +56,7 @@ exports.up = function(knex) {
       table.string('token');
       table.timestamps(false, true);
     }),
-    knex.schema.createTable('remotedev_users_apps', function(table) {
+    knex.schema.createTable('remotedev_users_apps', function (table) {
       table.boolean('readOnly').defaultTo(false);
       table.uuid('userId');
       table.uuid('appId');
@@ -73,13 +73,13 @@ exports.up = function(knex) {
         .inTable('remotedev_apps')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
-    })
+    }),
   ]);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return Promise.all([
     knex.schema.dropTable('remotedev_reports'),
-    knex.schema.dropTable('remotedev_apps')
+    knex.schema.dropTable('remotedev_apps'),
   ]);
 };

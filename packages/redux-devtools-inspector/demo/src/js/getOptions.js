@@ -6,6 +6,6 @@ export default function getOptions() {
       const match = window.location.search.match(/theme=([^&]+)/);
       match ? match[1] : 'inspector';
     },
-    dark: window.location.search.indexOf('dark') !== -1
+    dark: window.location.search.indexOf('dark') !== -1,
   };
 }

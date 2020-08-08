@@ -1,7 +1,7 @@
 function deepMapCached(obj, f, ctx, cache) {
   cache.push(obj);
   if (Array.isArray(obj)) {
-    return obj.map(function(val, key) {
+    return obj.map(function (val, key) {
       val = f.call(ctx, val, key);
       return typeof val === 'object' && cache.indexOf(val) === -1
         ? deepMapCached(val, f, ctx, cache)

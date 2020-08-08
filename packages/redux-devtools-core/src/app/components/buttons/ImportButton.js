@@ -8,7 +8,7 @@ import { importState } from '../../actions';
 
 class ImportButton extends Component {
   static propTypes = {
-    importState: PropTypes.func.isRequired
+    importState: PropTypes.func.isRequired,
   };
 
   constructor() {
@@ -57,7 +57,7 @@ class ImportButton extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    importState: bindActionCreators(importState, dispatch)
+    importState: bindActionCreators(importState, dispatch),
   };
 }
 

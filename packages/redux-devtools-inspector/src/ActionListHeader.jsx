@@ -1,8 +1,8 @@
 import React from 'react';
 import RightSlider from './RightSlider';
 
-const getActiveButtons = hasSkippedActions =>
-  [hasSkippedActions && 'Sweep', 'Commit'].filter(a => a);
+const getActiveButtons = (hasSkippedActions) =>
+  [hasSkippedActions && 'Sweep', 'Commit'].filter((a) => a);
 
 const ActionListHeader = ({
   styling,
@@ -11,25 +11,25 @@ const ActionListHeader = ({
   hasStagedActions,
   onCommit,
   onSweep,
-  hideMainButtons
+  hideMainButtons,
 }) => (
   <div {...styling('actionListHeader')}>
     <input
       {...styling('actionListHeaderSearch')}
-      onChange={e => onSearch(e.target.value)}
+      onChange={(e) => onSearch(e.target.value)}
       placeholder="filter..."
     />
     {!hideMainButtons && (
       <div {...styling('actionListHeaderWrapper')}>
         <RightSlider shown={hasStagedActions} styling={styling}>
           <div {...styling('actionListHeaderSelector')}>
-            {getActiveButtons(hasSkippedActions).map(btn => (
+            {getActiveButtons(hasSkippedActions).map((btn) => (
               <div
                 key={btn}
                 onClick={() =>
                   ({
                     Commit: onCommit,
-                    Sweep: onSweep
+                    Sweep: onSweep,
                   }[btn]())
                 }
                 {...styling(

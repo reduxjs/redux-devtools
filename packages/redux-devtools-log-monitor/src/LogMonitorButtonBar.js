@@ -13,13 +13,13 @@ const style = {
   borderColor: 'transparent',
   zIndex: 1,
   display: 'flex',
-  flexDirection: 'row'
+  flexDirection: 'row',
 };
 
 export default class LogMonitorButtonBar extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
-    theme: PropTypes.object
+    theme: PropTypes.object,
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;

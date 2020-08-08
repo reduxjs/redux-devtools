@@ -1,9 +1,9 @@
 import {
-  UPDATE_REPORTS /* , GET_REPORT_SUCCESS */
+  UPDATE_REPORTS /* , GET_REPORT_SUCCESS */,
 } from '../constants/actionTypes';
 
 const initialState = {
-  data: []
+  data: [],
 };
 
 export default function reports(state = initialState, action) {
@@ -24,17 +24,17 @@ export default function reports(state = initialState, action) {
     case 'list':
       return {
         ...state,
-        data
+        data,
       };
     case 'add':
       return {
         ...state,
-        data: [...state.data, data]
+        data: [...state.data, data],
       };
     case 'remove':
       return {
         ...state,
-        data: state.data.filter(d => d.id !== request.id)
+        data: state.data.filter((d) => d.id !== request.id),
       };
     default:
       return state;

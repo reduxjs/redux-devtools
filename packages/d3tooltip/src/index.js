@@ -6,7 +6,7 @@ const defaultOptions = {
   left: undefined, // mouseX
   top: undefined, // mouseY
   offset: { left: 0, top: 0 },
-  root: undefined
+  root: undefined,
 };
 
 export default function tooltip(d3, className = 'tooltip', options = {}) {
@@ -22,7 +22,7 @@ export default function tooltip(d3, className = 'tooltip', options = {}) {
 
   function tip(selection) {
     selection.on({
-      'mouseover.tip': node => {
+      'mouseover.tip': (node) => {
         let [mouseX, mouseY] = d3.mouse(rootNode);
         let [x, y] = [left || mouseX + offset.left, top || mouseY - offset.top];
 
@@ -36,22 +36,22 @@ export default function tooltip(d3, className = 'tooltip', options = {}) {
             'z-index': 1001,
             left: x + 'px',
             top: y + 'px',
-            ...styles
+            ...styles,
           })
           .html(() => text(node));
       },
 
-      'mousemove.tip': node => {
+      'mousemove.tip': (node) => {
         let [mouseX, mouseY] = d3.mouse(rootNode);
         let [x, y] = [left || mouseX + offset.left, top || mouseY - offset.top];
 
         el.style({
           left: x + 'px',
-          top: y + 'px'
+          top: y + 'px',
         }).html(() => text(node));
       },
 
-      'mouseout.tip': () => el.remove()
+      'mouseout.tip': () => el.remove(),
     });
   }
 

@@ -7,8 +7,8 @@ import diff from 'simple-diff';
 import es6template from 'es6template';
 import { Editor } from 'devui';
 
-export const fromPath = path =>
-  path.map(a => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');
+export const fromPath = (path) =>
+  path.map((a) => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');
 
 function getState(s, defaultValue) {
   if (!s) return defaultValue;
@@ -50,7 +50,7 @@ export default class TestGenerator extends (PureComponent || Component) {
     let type = action.type;
     if (type[0] === '┗') type = type.substr(1).trim();
     let args = action.arguments;
-    if (args) args = args.map(arg => stringify(arg)).join(',');
+    if (args) args = args.map((arg) => stringify(arg)).join(',');
     else args = '';
     return `${type}(${args})`;
   }
@@ -67,7 +67,7 @@ export default class TestGenerator extends (PureComponent || Component) {
       selectedActionId,
       startActionId,
       isVanilla,
-      name
+      name,
     } = this.props;
 
     if (!actions || !computedStates || computedStates.length < 1) return '';
@@ -113,13 +113,13 @@ export default class TestGenerator extends (PureComponent || Component) {
                 ? this.getAction(actions[i].action)
                 : this.getMethod(actions[i].action),
               prevState:
-                i > 0 ? stringify(computedStates[i - 1].state) : undefined
+                i > 0 ? stringify(computedStates[i - 1].state) : undefined,
             }) + '\n';
         }
         if (!isVanilla) {
           addAssertions({
             path: '',
-            curState: stringify(computedStates[i].state)
+            curState: stringify(computedStates[i].state),
           });
         } else {
           compare(
@@ -146,7 +146,7 @@ export default class TestGenerator extends (PureComponent || Component) {
               ? actions[startIdx].action.type.replace(/[^a-zA-Z0-9_-]+/, '')
               : 'should return the initial state',
           initialState: stringify(computedStates[startIdx - 1].state),
-          assertions: r
+          assertions: r,
         });
       }
     }
@@ -181,11 +181,11 @@ TestGenerator.propTypes = {
   assertion: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   useCodemirror: PropTypes.bool,
   indentation: PropTypes.number,
-  header: PropTypes.element
+  header: PropTypes.element,
 };
 
 TestGenerator.defaultProps = {
   useCodemirror: true,
   selectedActionId: null,
-  startActionId: null
+  startActionId: null,
 };

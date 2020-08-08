@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import {
   createStylingFromTheme,
-  base16Themes
+  base16Themes,
 } from './utils/createStylingFromTheme';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import ActionList from './ActionList';
@@ -19,7 +19,7 @@ const {
   toggleAction,
   jumpToAction,
   jumpToState,
-  reorderAction
+  reorderAction,
 } = ActionCreators;
 
 function getLastActionId(props) {
@@ -54,7 +54,7 @@ function createIntermediateState(props, monitorState) {
     stagedActionIds,
     actionsById: actions,
     diffObjectHash,
-    diffPropertyFilter
+    diffPropertyFilter,
   } = props;
   const { inspectedStatePath, inspectedActionPath } = monitorState;
   const currentActionId = getCurrentActionId(props, monitorState);
@@ -93,7 +93,7 @@ function createIntermediateState(props, monitorState) {
     nextState:
       toState && getInspectedState(toState.state, inspectedStatePath, false),
     action: getInspectedState(currentAction, inspectedActionPath, false),
-    error
+    error,
   };
 }
 
@@ -112,7 +112,7 @@ export default class DevtoolsInspector extends Component {
     this.state = {
       ...createIntermediateState(props, props.monitorState),
       isWideLayout: false,
-      themeState: createThemeState(props)
+      themeState: createThemeState(props),
     };
   }
 
@@ -123,7 +123,7 @@ export default class DevtoolsInspector extends Component {
     actionsById: PropTypes.object,
     currentStateIndex: PropTypes.number,
     monitorState: PropTypes.shape({
-      initialScrollTop: PropTypes.number
+      initialScrollTop: PropTypes.number,
     }),
     preserveScrollTop: PropTypes.bool,
     draggableActions: PropTypes.bool,
@@ -138,17 +138,17 @@ export default class DevtoolsInspector extends Component {
     invertTheme: PropTypes.bool,
     skippedActionIds: PropTypes.array,
     dataTypeKey: PropTypes.any,
-    tabs: PropTypes.oneOfType([PropTypes.array, PropTypes.func])
+    tabs: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
   };
 
   static update = reducer;
 
   static defaultProps = {
-    select: state => state,
+    select: (state) => state,
     supportImmutable: false,
     draggableActions: true,
     theme: 'inspector',
-    invertTheme: true
+    invertTheme: true,
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -162,7 +162,7 @@ export default class DevtoolsInspector extends Component {
     clearTimeout(this.updateSizeTimeout);
   }
 
-  updateMonitorState = monitorState => {
+  updateMonitorState = (monitorState) => {
     this.props.dispatch(updateMonitorState(monitorState));
   };
 
@@ -199,7 +199,7 @@ export default class DevtoolsInspector extends Component {
     }
   }
 
-  inspectorCreateRef = node => {
+  inspectorCreateRef = (node) => {
     this.inspectorRef = node;
   };
 
@@ -216,13 +216,13 @@ export default class DevtoolsInspector extends Component {
       monitorState,
       dataTypeKey,
       hideMainButtons,
-      hideActionButtons
+      hideActionButtons,
     } = this.props;
     const {
       selectedActionId,
       startActionId,
       searchValue,
-      tabName
+      tabName,
     } = monitorState;
     const inspectedPathType =
       tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
@@ -232,7 +232,7 @@ export default class DevtoolsInspector extends Component {
       action,
       nextState,
       delta,
-      error
+      error,
     } = this.state;
     const { base16Theme, styling } = themeState;
 
@@ -257,7 +257,7 @@ export default class DevtoolsInspector extends Component {
             draggableActions,
             hideMainButtons,
             hideActionButtons,
-            styling
+            styling,
           }}
           onSearch={this.handleSearch}
           onSelect={this.handleSelectAction}
@@ -284,7 +284,7 @@ export default class DevtoolsInspector extends Component {
             actions,
             selectedActionId,
             startActionId,
-            dataTypeKey
+            dataTypeKey,
           }}
           monitorState={this.props.monitorState}
           updateMonitorState={this.updateMonitorState}
@@ -297,11 +297,11 @@ export default class DevtoolsInspector extends Component {
     );
   }
 
-  handleToggleAction = actionId => {
+  handleToggleAction = (actionId) => {
     this.props.dispatch(toggleAction(actionId));
   };
 
-  handleJumpToState = actionId => {
+  handleJumpToState = (actionId) => {
     if (jumpToAction) {
       this.props.dispatch(jumpToAction(actionId));
     } else {
@@ -324,7 +324,7 @@ export default class DevtoolsInspector extends Component {
     this.props.dispatch(sweep());
   };
 
-  handleSearch = val => {
+  handleSearch = (val) => {
     this.updateMonitorState({ searchValue: val });
   };
 
@@ -371,7 +371,7 @@ export default class DevtoolsInspector extends Component {
     this.updateMonitorState({ [pathType]: path });
   };
 
-  handleSelectTab = tabName => {
+  handleSelectTab = (tabName) => {
     this.updateMonitorState({ tabName });
   };
 }

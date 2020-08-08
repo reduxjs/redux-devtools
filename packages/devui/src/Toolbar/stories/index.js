@@ -7,7 +7,7 @@ import {
   text,
   number,
   boolean,
-  select
+  select,
 } from '@storybook/addon-knobs';
 import PlayIcon from 'react-icons/lib/md/play-arrow';
 import RecordIcon from 'react-icons/lib/md/fiber-manual-record';
@@ -21,7 +21,7 @@ import {
   Select,
   Slider,
   SegmentedControl,
-  Tabs
+  Tabs,
 } from '../../';
 import { options } from '../../Select/stories/options';
 import { simple10Tabs } from '../../Tabs/stories/data';
@@ -54,7 +54,7 @@ storiesOf('Toolbar', module)
             'bottom-left',
             'bottom-right',
             'top-left',
-            'top-right'
+            'top-right',
           ])}
           disabled={boolean('Disabled', false)}
           onClick={action('button clicked')}
@@ -72,7 +72,7 @@ storiesOf('Toolbar', module)
             'bottom-left',
             'bottom-right',
             'top-left',
-            'top-right'
+            'top-right',
           ])}
           disabled={boolean('Disabled', false)}
           onClick={action('button clicked')}
@@ -98,7 +98,7 @@ storiesOf('Toolbar', module)
             'bottom-left',
             'bottom-right',
             'top-left',
-            'top-right'
+            'top-right',
           ])}
           disabled={boolean('Disabled', false)}
           onClick={action('button clicked')}
@@ -123,7 +123,7 @@ storiesOf('Toolbar', module)
             'bottom-left',
             'bottom-right',
             'top-left',
-            'top-right'
+            'top-right',
           ])}
           disabled={boolean('Disabled', false)}
           onClick={action('button clicked')}
@@ -147,7 +147,7 @@ storiesOf('Toolbar', module)
               'bottom-left',
               'bottom-right',
               'top-left',
-              'top-right'
+              'top-right',
             ])}
             onClick={action('button clicked')}
           >
@@ -171,7 +171,7 @@ storiesOf('Toolbar', module)
               'bottom-left',
               'bottom-right',
               'top-left',
-              'top-right'
+              'top-right',
             ])}
             disabled
             onClick={action('previous state clicked')}
@@ -188,7 +188,7 @@ storiesOf('Toolbar', module)
               'bottom-left',
               'bottom-right',
               'top-left',
-              'top-right'
+              'top-right',
             ])}
             onClick={action('next state clicked')}
           >

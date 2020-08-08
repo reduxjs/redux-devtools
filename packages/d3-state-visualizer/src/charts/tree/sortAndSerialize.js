@@ -13,7 +13,7 @@ function sortObject(obj, strict) {
     const tObj = {};
     Object.keys(obj)
       .sort()
-      .forEach(key => (tObj[key] = sortObject(obj[key])));
+      .forEach((key) => (tObj[key] = sortObject(obj[key])));
     return tObj;
   }
 

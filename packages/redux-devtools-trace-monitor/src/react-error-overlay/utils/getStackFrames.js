@@ -29,7 +29,7 @@ function getStackFrames(
   } else {
     enhancedFramesPromise = map(parsedFrames, contextSize);
   }
-  return enhancedFramesPromise.then(enhancedFrames => {
+  return enhancedFramesPromise.then((enhancedFrames) => {
     /*
     if (
       enhancedFrames

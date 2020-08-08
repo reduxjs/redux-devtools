@@ -2,7 +2,7 @@ import {
   CHANGE_MONITOR,
   CHANGE_POSITION,
   CHANGE_SIZE,
-  TOGGLE_VISIBILITY
+  TOGGLE_VISIBILITY,
 } from './actions';
 import { POSITIONS } from './constants';
 import { Children } from 'react';
@@ -63,6 +63,6 @@ export default function reducer(props, state = {}, action) {
       props,
       state.childMonitorStates,
       action
-    )
+    ),
   };
 }

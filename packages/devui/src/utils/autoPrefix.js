@@ -1,2 +1,2 @@
 export const prefixSelectors = (tag, selectors, style) =>
-  selectors.map(selector => `${tag}::-${selector} ${style}`);
+  selectors.map((selector) => `${tag}::-${selector} ${style}`);

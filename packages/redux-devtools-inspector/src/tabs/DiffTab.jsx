@@ -7,7 +7,7 @@ const DiffTab = ({
   base16Theme,
   invertTheme,
   labelRenderer,
-  isWideLayout
+  isWideLayout,
 }) => (
   <JSONDiff
     {...{
@@ -16,7 +16,7 @@ const DiffTab = ({
       base16Theme,
       invertTheme,
       labelRenderer,
-      isWideLayout
+      isWideLayout,
     }}
   />
 );

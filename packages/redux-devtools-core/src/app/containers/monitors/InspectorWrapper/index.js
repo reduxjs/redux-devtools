@@ -9,20 +9,20 @@ import SubTabs from './SubTabs';
 const DEFAULT_TABS = [
   {
     name: 'Action',
-    component: SubTabs
+    component: SubTabs,
   },
   {
     name: 'State',
-    component: SubTabs
+    component: SubTabs,
   },
   {
     name: 'Diff',
-    component: SubTabs
+    component: SubTabs,
   },
   {
     name: 'Trace',
-    component: StackTraceTab
-  }
+    component: StackTraceTab,
+  },
 ];
 
 class InspectorWrapper extends Component {
@@ -52,7 +52,7 @@ class InspectorWrapper extends Component {
 }
 
 InspectorWrapper.propTypes = {
-  features: PropTypes.object
+  features: PropTypes.object,
 };
 
 export default InspectorWrapper;

@@ -7,12 +7,12 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 const styles = {
   entry: {
     display: 'block',
-    WebkitUserSelect: 'none'
+    WebkitUserSelect: 'none',
   },
 
   root: {
-    marginLeft: 0
-  }
+    marginLeft: 0,
+  },
 };
 
 const getDeepItem = (data, path) =>
@@ -36,7 +36,7 @@ export default class LogMonitorEntry extends Component {
     collapsed: PropTypes.bool,
     selected: PropTypes.bool,
     expandActionRoot: PropTypes.bool,
-    expandStateRoot: PropTypes.bool
+    expandStateRoot: PropTypes.bool,
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -64,20 +64,20 @@ export default class LogMonitorEntry extends Component {
               ...style,
               backgroundColor: dataIsEqual(data, previousData, keyPath)
                 ? 'transparent'
-                : this.props.theme.base01
-            }
+                : this.props.theme.base01,
+            },
           });
           const getNestedNodeStyle = ({ style }, keyPath) => ({
             style: {
               ...style,
-              ...(keyPath.length > 1 ? {} : styles.root)
-            }
+              ...(keyPath.length > 1 ? {} : styles.root),
+            },
           });
           theme = {
             extend: this.props.theme,
             tree: styles.tree,
             value: getValueStyle,
-            nestedNode: getNestedNodeStyle
+            nestedNode: getNestedNodeStyle,
           };
         } else {
           theme = this.props.theme;
@@ -104,7 +104,7 @@ export default class LogMonitorEntry extends Component {
           paddingTop: 20,
           paddingLeft: 30,
           paddingRight: 30,
-          paddingBottom: 35
+          paddingBottom: 35,
         }}
       >
         {errorText}
@@ -135,11 +135,11 @@ export default class LogMonitorEntry extends Component {
       state,
       collapsed,
       selected,
-      inFuture
+      inFuture,
     } = this.props;
     const styleEntry = {
       opacity: collapsed ? 0.5 : 1,
-      cursor: actionId > 0 ? 'pointer' : 'default'
+      cursor: actionId > 0 ? 'pointer' : 'default',
     };
 
     return (
@@ -147,7 +147,7 @@ export default class LogMonitorEntry extends Component {
         style={{
           opacity: selected ? 0.4 : inFuture ? 0.6 : 1, // eslint-disable-line no-nested-ternary
           textDecoration: collapsed ? 'line-through' : 'none',
-          color: this.props.theme.base06
+          color: this.props.theme.base06,
         }}
       >
         <LogMonitorEntryAction

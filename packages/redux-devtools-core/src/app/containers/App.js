@@ -42,22 +42,22 @@ App.propTypes = {
   theme: PropTypes.object.isRequired,
   notification: PropTypes.shape({
     message: PropTypes.string,
-    type: PropTypes.string
+    type: PropTypes.string,
   }),
-  clearNotification: PropTypes.func
+  clearNotification: PropTypes.func,
 };
 
 function mapStateToProps(state) {
   return {
     section: state.section,
     theme: state.theme,
-    notification: state.notification
+    notification: state.notification,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    clearNotification: bindActionCreators(clearNotification, dispatch)
+    clearNotification: bindActionCreators(clearNotification, dispatch),
   };
 }
 

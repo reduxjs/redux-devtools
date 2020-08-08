@@ -58,7 +58,7 @@ const theme = {
   base0C: '#a1efe4',
   base0D: '#66d9ef',
   base0E: '#ae81ff',
-  base0F: '#cc6633'
+  base0F: '#cc6633',
 };
 
 <div>
@@ -80,16 +80,16 @@ const theme = {
       extend: theme,
       // underline keys for literal values
       valueLabel: {
-        textDecoration: 'underline'
+        textDecoration: 'underline',
       },
       // switch key for objects to uppercase when object is expanded.
       // `nestedNodeLabel` receives additional argument `expandable`
       nestedNodeLabel: ({ style }, keyPath, nodeType, expanded) => ({
         style: {
           ...style,
-          textTransform: expanded ? 'uppercase' : style.textTransform
-        }
-      })
+          textTransform: expanded ? 'uppercase' : style.textTransform,
+        },
+      }),
     }}
   />
 </div>
@@ -124,7 +124,7 @@ You can pass the following properties to customize rendered labels and values:
 ```jsx
 <JSONTree
   labelRenderer={([key]) => <strong>{key}</strong>}
-  valueRenderer={raw => <em>{raw}</em>}
+  valueRenderer={(raw) => <em>{raw}</em>}
 />
 ```
 

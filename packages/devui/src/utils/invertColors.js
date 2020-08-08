@@ -8,7 +8,7 @@ function invertColors(theme) {
     base04: theme.base03,
     base05: theme.base02,
     base06: theme.base01,
-    base07: theme.base00
+    base07: theme.base00,
   };
 }
 

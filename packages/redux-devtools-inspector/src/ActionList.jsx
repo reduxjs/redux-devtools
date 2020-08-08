@@ -10,7 +10,7 @@ function getTimestamps(actions, actionIds, actionId) {
 
   return {
     current: actions[actionId].timestamp,
-    previous: idx ? actions[prevActionId].timestamp : 0
+    previous: idx ? actions[prevActionId].timestamp : 0,
   };
 }
 
@@ -44,7 +44,7 @@ export default class ActionList extends Component {
         !sibling || parseInt(sibling.getAttribute('data-id')),
       moves: (el, source, handle) =>
         parseInt(el.getAttribute('data-id')) &&
-        handle.className.indexOf('selectorButton') !== 0
+        handle.className.indexOf('selectorButton') !== 0,
     }).on('drop', (el, target, source, sibling) => {
       let beforeActionId = this.props.actionIds.length;
       if (sibling && sibling.className.indexOf('gu-mirror') === -1) {
@@ -69,7 +69,7 @@ export default class ActionList extends Component {
     }
   }
 
-  getRef = node => {
+  getRef = (node) => {
     this.node = node;
   };
 
@@ -91,12 +91,12 @@ export default class ActionList extends Component {
       hideActionButtons,
       onCommit,
       onSweep,
-      onJumpToState
+      onJumpToState,
     } = this.props;
     const lowerSearchValue = searchValue && searchValue.toLowerCase();
     const filteredActionIds = searchValue
       ? actionIds.filter(
-          id =>
+          (id) =>
             actions[id].action.type.toLowerCase().indexOf(lowerSearchValue) !==
             -1
         )
@@ -120,7 +120,7 @@ export default class ActionList extends Component {
           hasStagedActions={actionIds.length > 1}
         />
         <div {...styling('actionListRows')} ref={this.getRef}>
-          {filteredActionIds.map(actionId => (
+          {filteredActionIds.map((actionId) => (
             <ActionListRow
               key={actionId}
               styling={styling}
@@ -135,7 +135,7 @@ export default class ActionList extends Component {
               isInFuture={
                 actionIds.indexOf(actionId) > actionIds.indexOf(currentActionId)
               }
-              onSelect={e => onSelect(e, actionId)}
+              onSelect={(e) => onSelect(e, actionId)}
               timestamps={getTimestamps(actions, actionIds, actionId)}
               action={actions[actionId].action}
               onToggleClick={() => onToggleAction(actionId)}

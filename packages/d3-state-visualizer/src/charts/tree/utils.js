@@ -59,7 +59,7 @@ export function getNodeGroupByDepthCount(rootNode) {
 
     nodeGroupByDepthCount[depth + 1] += node.children.length;
 
-    node.children.forEach(childNode => {
+    node.children.forEach((childNode) => {
       traverseFrom(childNode, depth + 1);
     });
   };

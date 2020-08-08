@@ -9,7 +9,7 @@ var knex;
 var baseFields = ['id', 'title', 'added'];
 
 function error(msg) {
-  return new Promise(function(resolve) {
+  return new Promise(function (resolve) {
     return resolve({ error: msg });
   });
 }
@@ -29,9 +29,7 @@ function listAll(query) {
 function get(id) {
   if (!id) return error('No id specified.');
 
-  return knex(reports)
-    .where('id', id)
-    .first();
+  return knex(reports).where('id', id).first();
 }
 
 function add(data) {
@@ -60,7 +58,7 @@ function add(data) {
     instanceId: data.instanceId,
     meta: data.meta,
     exception: composeException(data.exception),
-    added: new Date().toISOString()
+    added: new Date().toISOString(),
   };
   if (data.appId) report.appId = data.appId; // TODO check if the id exists and we have access to link it
   /*
@@ -74,7 +72,7 @@ function add(data) {
   return knex
     .insert(report)
     .into(reports)
-    .then(function() {
+    .then(function () {
       return byBaseFields(report);
     });
 }
@@ -90,7 +88,7 @@ function createStore(options) {
     list: list,
     listAll: listAll,
     get: get,
-    add: add
+    add: add,
   };
 }
 

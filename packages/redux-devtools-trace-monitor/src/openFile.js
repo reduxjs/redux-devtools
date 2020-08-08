@@ -2,27 +2,31 @@ const isFF = navigator.userAgent.indexOf('Firefox') !== -1;
 
 function openResource(fileName, lineNumber, stackFrame) {
   const adjustedLineNumber = Math.max(lineNumber - 1, 0);
-  chrome.devtools.panels.openResource(fileName, adjustedLineNumber, result => {
-    //console.log("openResource callback args: ", callbackArgs);
-    if (result.isError) {
-      const {
-        fileName: finalFileName,
-        lineNumber: finalLineNumber
-      } = stackFrame;
-      const adjustedLineNumber = Math.max(finalLineNumber - 1, 0);
-      chrome.devtools.panels.openResource(
-        finalFileName,
-        adjustedLineNumber,
-        (/* result */) => {
-          // console.log("openResource result: ", result);
-        }
-      );
+  chrome.devtools.panels.openResource(
+    fileName,
+    adjustedLineNumber,
+    (result) => {
+      //console.log("openResource callback args: ", callbackArgs);
+      if (result.isError) {
+        const {
+          fileName: finalFileName,
+          lineNumber: finalLineNumber,
+        } = stackFrame;
+        const adjustedLineNumber = Math.max(finalLineNumber - 1, 0);
+        chrome.devtools.panels.openResource(
+          finalFileName,
+          adjustedLineNumber,
+          (/* result */) => {
+            // console.log("openResource result: ", result);
+          }
+        );
+      }
     }
-  });
+  );
 }
 
 function openAndCloseTab(url) {
-  chrome.tabs.create({ url }, tab => {
+  chrome.tabs.create({ url }, (tab) => {
     const removeTab = () => {
       chrome.windows.onFocusChanged.removeListener(removeTab);
       if (tab && tab.id) {
@@ -31,7 +35,7 @@ function openAndCloseTab(url) {
           if (chrome.runtime.lastError) console.log(chrome.runtime.lastError);
           else if (chrome.devtools && chrome.devtools.inspectedWindow) {
             chrome.tabs.update(chrome.devtools.inspectedWindow.tabId, {
-              active: true
+              active: true,
             });
           }
         });
@@ -99,10 +103,10 @@ export default function openFile(fileName, lineNumber, stackFrame) {
   const storage = isFF
     ? chrome.storage.local
     : chrome.storage.sync || chrome.storage.local;
-  storage.get(['useEditor', 'editor', 'projectPath'], function({
+  storage.get(['useEditor', 'editor', 'projectPath'], function ({
     useEditor,
     editor,
-    projectPath
+    projectPath,
   }) {
     if (
       useEditor &&
@@ -122,7 +126,7 @@ export default function openFile(fileName, lineNumber, stackFrame) {
         if (chrome.devtools && isFF) {
           chrome.devtools.inspectedWindow.eval(
             'confirm("Set the editor to open the file in?")',
-            result => {
+            (result) => {
               if (!result) return;
               chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
             }

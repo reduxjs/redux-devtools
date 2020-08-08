@@ -85,7 +85,7 @@ describe('instrument', () => {
     let lastValue;
     // let calls = 0;
 
-    from(store).subscribe(state => {
+    from(store).subscribe((state) => {
       lastValue = state;
       // calls++;
     });
@@ -239,7 +239,7 @@ describe('instrument', () => {
       1,
       2,
       3,
-      4
+      4,
     ]);
     expect(store.getState()).toBe(2);
 
@@ -249,7 +249,7 @@ describe('instrument', () => {
       4,
       1,
       2,
-      3
+      3,
     ]);
     expect(store.getState()).toBe(1);
 
@@ -259,7 +259,7 @@ describe('instrument', () => {
       4,
       1,
       2,
-      3
+      3,
     ]);
     expect(store.getState()).toBe(1);
 
@@ -269,7 +269,7 @@ describe('instrument', () => {
       1,
       4,
       2,
-      3
+      3,
     ]);
     expect(store.getState()).toBe(2);
 
@@ -279,7 +279,7 @@ describe('instrument', () => {
       4,
       2,
       3,
-      1
+      1,
     ]);
     expect(store.getState()).toBe(1);
 
@@ -289,7 +289,7 @@ describe('instrument', () => {
       4,
       2,
       3,
-      1
+      1,
     ]);
     expect(store.getState()).toBe(1);
 
@@ -299,7 +299,7 @@ describe('instrument', () => {
       1,
       4,
       2,
-      3
+      3,
     ]);
     expect(store.getState()).toBe(2);
 
@@ -309,7 +309,7 @@ describe('instrument', () => {
       1,
       4,
       2,
-      3
+      3,
     ]);
     expect(store.getState()).toBe(2);
   });
@@ -992,7 +992,7 @@ describe('instrument', () => {
       );
     });
 
-    it('should get stack trace inside setTimeout using a function', done => {
+    it('should get stack trace inside setTimeout using a function', (done) => {
       const stack = new Error().stack;
       setTimeout(() => {
         const traceFn = () => stack + new Error().stack;
@@ -1069,7 +1069,7 @@ describe('instrument', () => {
       );
 
       let expectedImportedState = Object.assign({}, noComputedExportedState, {
-        computedStates: undefined
+        computedStates: undefined,
       });
       expect(importMonitoredLiftedStore.getState()).toEqual(
         expectedImportedState
@@ -1102,7 +1102,7 @@ describe('instrument', () => {
   });
 
   function filterStackAndTimestamps(state) {
-    state.actionsById = _.mapValues(state.actionsById, action => {
+    state.actionsById = _.mapValues(state.actionsById, (action) => {
       delete action.timestamp;
       delete action.stack;
       return action;
@@ -1117,14 +1117,14 @@ describe('instrument', () => {
     let savedActions = [
       { type: 'INCREMENT' },
       { type: 'INCREMENT' },
-      { type: 'INCREMENT' }
+      { type: 'INCREMENT' },
     ];
 
     beforeEach(() => {
       monitoredStore = createStore(counter, instrument());
       monitoredLiftedStore = monitoredStore.liftedStore;
       // Pass actions through component
-      savedActions.forEach(action => monitoredStore.dispatch(action));
+      savedActions.forEach((action) => monitoredStore.dispatch(action));
       // get the final state
       exportedState = filterStackAndTimestamps(monitoredLiftedStore.getState());
     });
@@ -1242,7 +1242,7 @@ describe('instrument', () => {
       expect(store.liftedStore.getState().isPaused).toBe(true);
       expect(store.liftedStore.getState().nextActionId).toBe(1);
       expect(store.liftedStore.getState().actionsById[0].action).toEqual({
-        type: '@@INIT'
+        type: '@@INIT',
       });
       expect(store.getState()).toBe(2);
 
@@ -1250,7 +1250,7 @@ describe('instrument', () => {
       store.dispatch({ type: 'INCREMENT' });
       expect(store.liftedStore.getState().nextActionId).toBe(1);
       expect(store.liftedStore.getState().actionsById[0].action).toEqual({
-        type: '@@INIT'
+        type: '@@INIT',
       });
       expect(store.getState()).toBe(4);
 
@@ -1261,7 +1261,7 @@ describe('instrument', () => {
       store.dispatch({ type: 'INCREMENT' });
       expect(store.liftedStore.getState().nextActionId).toBe(3);
       expect(store.liftedStore.getState().actionsById[2].action).toEqual({
-        type: 'INCREMENT'
+        type: 'INCREMENT',
       });
       expect(store.getState()).toBe(6);
     });

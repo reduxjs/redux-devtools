@@ -9,7 +9,7 @@ import { selectMonitor } from '../actions';
 class MonitorSelector extends Component {
   static propTypes = {
     selected: PropTypes.string,
-    selectMonitor: PropTypes.func.isRequired
+    selectMonitor: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -32,13 +32,13 @@ class MonitorSelector extends Component {
 
 function mapStateToProps(state) {
   return {
-    selected: state.monitor.selected
+    selected: state.monitor.selected,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectMonitor: bindActionCreators(selectMonitor, dispatch)
+    selectMonitor: bindActionCreators(selectMonitor, dispatch),
   };
 }
 

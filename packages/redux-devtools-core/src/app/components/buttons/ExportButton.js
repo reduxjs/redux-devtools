@@ -8,7 +8,7 @@ import { exportState } from '../../actions';
 
 class ExportButton extends Component {
   static propTypes = {
-    exportState: PropTypes.func.isRequired
+    exportState: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate() {
@@ -26,7 +26,7 @@ class ExportButton extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    exportState: bindActionCreators(exportState, dispatch)
+    exportState: bindActionCreators(exportState, dispatch),
   };
 }
 

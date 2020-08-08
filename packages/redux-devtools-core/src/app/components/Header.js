@@ -14,10 +14,10 @@ const tabs = [{ name: 'Actions' }, { name: 'Reports' }, { name: 'Settings' }];
 class Header extends Component {
   static propTypes = {
     section: PropTypes.string.isRequired,
-    changeSection: PropTypes.func.isRequired
+    changeSection: PropTypes.func.isRequired,
   };
 
-  openLink = url => () => {
+  openLink = (url) => () => {
     window.open(url);
   };
 
@@ -71,7 +71,7 @@ class Header extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeSection: bindActionCreators(changeSection, dispatch)
+    changeSection: bindActionCreators(changeSection, dispatch),
   };
 }
 

@@ -23,12 +23,12 @@ Select.propTypes = {
   simpleValue: PropTypes.bool, // pass the value with label to onChange
   value: PropTypes.any, // initial field value
   valueKey: PropTypes.string, // path of the label value in option objects
-  openOuterUp: PropTypes.bool // value to control the opening direction
+  openOuterUp: PropTypes.bool, // value to control the opening direction
 };
 
 Select.defaultProps = {
   autosize: true,
   clearable: false,
   simpleValue: true,
-  menuMaxHeight: 200
+  menuMaxHeight: 200,
 };

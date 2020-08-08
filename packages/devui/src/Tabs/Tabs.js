@@ -15,11 +15,11 @@ export default class Tabs extends Component {
     }
   }
 
-  onMouseUp = e => {
+  onMouseUp = (e) => {
     e.target.blur();
   };
 
-  onClick = e => {
+  onClick = (e) => {
     this.props.onClick(e.target.value);
   };
 
@@ -89,7 +89,7 @@ Tabs.propTypes = {
   main: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   collapsible: PropTypes.bool,
-  position: PropTypes.oneOf(['left', 'right', 'center'])
+  position: PropTypes.oneOf(['left', 'right', 'center']),
 };
 
 Tabs.defaultProps = { position: 'left' };

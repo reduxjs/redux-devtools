@@ -36,7 +36,7 @@ function StackFrameCodeBlock(
   const { lines, lineNum, columnNum, contextSize, main } = props;
   const sourceCode = [];
   let whiteSpace = Infinity;
-  lines.forEach(function(e) {
+  lines.forEach(function (e) {
     const { content: text } = e;
     const m = text.match(/^\s*/);
     if (text === '') {
@@ -48,7 +48,7 @@ function StackFrameCodeBlock(
       whiteSpace = 0;
     }
   });
-  lines.forEach(function(e) {
+  lines.forEach(function (e) {
     let { content: text } = e;
     const { lineNumber: line } = e;
 
@@ -65,13 +65,13 @@ function StackFrameCodeBlock(
         column:
           columnNum == null
             ? 0
-            : columnNum - (isFinite(whiteSpace) ? whiteSpace : 0)
-      }
+            : columnNum - (isFinite(whiteSpace) ? whiteSpace : 0),
+      },
     },
     {
       forceColor: true,
       linesAbove: contextSize,
-      linesBelow: contextSize
+      linesBelow: contextSize,
     }
   );
   const htmlHighlight = generateAnsiHTML(ansiHighlight);
@@ -95,7 +95,7 @@ function StackFrameCodeBlock(
       }
       // $FlowFixMe
       applyStyles(node, {
-        'background-color': main ? theme.base02 : theme.base01
+        'background-color': main ? theme.base02 : theme.base01,
       });
       // eslint-disable-next-line
       break oLoop;

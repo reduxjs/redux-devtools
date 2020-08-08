@@ -16,7 +16,7 @@ export default class LogMonitorEntryList extends Component {
     onActionClick: PropTypes.func.isRequired,
     theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     expandActionRoot: PropTypes.bool,
-    expandStateRoot: PropTypes.bool
+    expandStateRoot: PropTypes.bool,
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -36,7 +36,7 @@ export default class LogMonitorEntryList extends Component {
       expandStateRoot,
       markStateDiff,
       onActionClick,
-      onActionShiftClick
+      onActionShiftClick,
     } = this.props;
 
     for (let i = 0; i < stagedActionIds.length; i++) {

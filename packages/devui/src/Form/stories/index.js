@@ -22,6 +22,6 @@ storiesOf('Form', module)
     {
       info:
         'Wrapper around [`react-jsonschema-form`](https://github.com/mozilla-services/react-jsonschema-form)' +
-        ' with custom widgets.'
+        ' with custom widgets.',
     }
   );

@@ -9,13 +9,13 @@ export function generateId(id) {
 
 function flatTree(obj, namespace = '') {
   let functions = [];
-  Object.keys(obj).forEach(key => {
+  Object.keys(obj).forEach((key) => {
     const prop = obj[key];
     if (typeof prop === 'function') {
       functions.push({
         name: namespace + (key || prop.name || 'anonymous'),
         func: prop,
-        args: getParams(prop)
+        args: getParams(prop),
       });
     } else if (typeof prop === 'object') {
       functions = functions.concat(flatTree(prop, namespace + key + '.'));
@@ -31,7 +31,7 @@ export function getMethods(obj) {
   if (obj.__proto__) m = obj.__proto__.__proto__;
   if (!m) m = obj;
 
-  Object.getOwnPropertyNames(m).forEach(key => {
+  Object.getOwnPropertyNames(m).forEach((key) => {
     const propDescriptor = Object.getOwnPropertyDescriptor(m, key);
     if (!propDescriptor || 'get' in propDescriptor || 'set' in propDescriptor)
       return;
@@ -40,7 +40,7 @@ export function getMethods(obj) {
       if (!functions) functions = [];
       functions.push({
         name: key || prop.name || 'anonymous',
-        args: getParams(prop)
+        args: getParams(prop),
       });
     }
   });
@@ -53,7 +53,7 @@ export function getActionsArray(actionCreators) {
 }
 
 /* eslint-disable no-new-func */
-const interpretArg = arg => new Function('return ' + arg)();
+const interpretArg = (arg) => new Function('return ' + arg)();
 
 function evalArgs(inArgs, restArgs) {
   const args = inArgs.map(interpretArg);
@@ -105,7 +105,7 @@ export function stringify(obj, serialize) {
   if (serialize === true) {
     return jsan.stringify(
       obj,
-      function(key, value) {
+      function (key, value) {
         if (value && typeof value.toJS === 'function') return value.toJS();
         return value;
       },
@@ -124,7 +124,7 @@ export function getSeralizeParameter(config, param) {
       return {
         replacer: seralizeImmutable(serialize.immutable, serialize.refs)
           .replacer,
-        options: serialize.options || true
+        options: serialize.options || true,
       };
     }
     if (!serialize.replacer) return { options: serialize.options };

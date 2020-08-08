@@ -19,7 +19,7 @@ class Actions extends Component {
       sliderIsOpen,
       options,
       liftedState,
-      liftedDispatch
+      liftedDispatch,
     } = this.props;
     return (
       <Container>
@@ -58,7 +58,7 @@ Actions.propTypes = {
   options: PropTypes.object.isRequired,
   monitor: PropTypes.string,
   dispatcherIsOpen: PropTypes.bool,
-  sliderIsOpen: PropTypes.bool
+  sliderIsOpen: PropTypes.bool,
 };
 
 function mapStateToProps(state) {
@@ -71,14 +71,14 @@ function mapStateToProps(state) {
     monitor: state.monitor.selected,
     dispatcherIsOpen: state.monitor.dispatcherIsOpen,
     sliderIsOpen: state.monitor.sliderIsOpen,
-    reports: state.reports.data
+    reports: state.reports.data,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     liftedDispatch: bindActionCreators(liftedDispatchAction, dispatch),
-    getReport: bindActionCreators(getReport, dispatch)
+    getReport: bindActionCreators(getReport, dispatch),
   };
 }
 

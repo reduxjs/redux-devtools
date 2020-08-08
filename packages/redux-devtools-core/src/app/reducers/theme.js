@@ -8,7 +8,7 @@ export default function theme(
     return {
       theme: action.theme,
       scheme: action.scheme,
-      light: !action.dark
+      light: !action.dark,
     };
   }
   return state;

@@ -6,7 +6,7 @@ export const {
   OPEN,
   AUTHENTICATED,
   PENDING,
-  UNAUTHENTICATED
+  UNAUTHENTICATED,
 } = socketCluster.SCSocket;
 export const CONNECT_REQUEST = 'socket/CONNECT_REQUEST';
 export const CONNECT_SUCCESS = 'socket/CONNECT_SUCCESS';

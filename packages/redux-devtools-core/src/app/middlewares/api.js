@@ -10,7 +10,7 @@ import {
   UPDATE_REPORTS,
   GET_REPORT_REQUEST,
   GET_REPORT_ERROR,
-  GET_REPORT_SUCCESS
+  GET_REPORT_SUCCESS,
 } from '../constants/actionTypes';
 import { showNotification, importState } from '../actions';
 import { nonReduxDispatch } from '../utils/monitorActions';
@@ -44,7 +44,7 @@ function dispatchRemoteAction({ message, action, state, toAll }) {
       instances
     ),
     instanceId,
-    id
+    id,
   });
 }
 
@@ -52,7 +52,7 @@ function monitoring(request) {
   if (request.type === 'DISCONNECTED') {
     store.dispatch({
       type: REMOVE_INSTANCE,
-      id: request.id
+      id: request.id,
     });
     return;
   }
@@ -68,7 +68,7 @@ function monitoring(request) {
 
   store.dispatch({
     type: UPDATE_STATE,
-    request: request.data ? { ...request.data, id: request.id } : request
+    request: request.data ? { ...request.data, id: request.id } : request,
   });
 
   const instances = store.getState().instances;
@@ -82,7 +82,7 @@ function monitoring(request) {
       type: 'SYNC',
       state: stringify(instances.states[instanceId]),
       id: request.id,
-      instanceId
+      instanceId,
     });
   }
 }
@@ -91,7 +91,7 @@ function subscribe(channelName, subscription) {
   const channel = socket.subscribe(channelName);
   if (subscription === UPDATE_STATE) channel.watch(monitoring);
   else {
-    const watcher = request => {
+    const watcher = (request) => {
       store.dispatch({ type: subscription, request });
     };
     channel.watch(watcher);
@@ -100,45 +100,45 @@ function subscribe(channelName, subscription) {
 }
 
 function handleConnection() {
-  socket.on('connect', status => {
+  socket.on('connect', (status) => {
     store.dispatch({
       type: actions.CONNECT_SUCCESS,
       payload: {
         id: status.id,
         authState: socket.authState,
-        socketState: socket.state
+        socketState: socket.state,
       },
-      error: status.authError
+      error: status.authError,
     });
     if (socket.authState !== actions.AUTHENTICATED) {
       store.dispatch({ type: actions.AUTH_REQUEST });
     }
   });
-  socket.on('disconnect', code => {
+  socket.on('disconnect', (code) => {
     store.dispatch({ type: actions.DISCONNECTED, code });
   });
 
-  socket.on('subscribe', channel => {
+  socket.on('subscribe', (channel) => {
     store.dispatch({ type: actions.SUBSCRIBE_SUCCESS, channel });
   });
-  socket.on('unsubscribe', channel => {
+  socket.on('unsubscribe', (channel) => {
     socket.unsubscribe(channel);
     socket.unwatch(channel);
     socket.off(channel);
     store.dispatch({ type: actions.UNSUBSCRIBE, channel });
   });
-  socket.on('subscribeFail', error => {
+  socket.on('subscribeFail', (error) => {
     store.dispatch({
       type: actions.SUBSCRIBE_ERROR,
       error,
-      status: 'subscribeFail'
+      status: 'subscribeFail',
     });
   });
-  socket.on('dropOut', error => {
+  socket.on('dropOut', (error) => {
     store.dispatch({ type: actions.SUBSCRIBE_ERROR, error, status: 'dropOut' });
   });
 
-  socket.on('error', error => {
+  socket.on('error', (error) => {
     store.dispatch({ type: actions.CONNECT_ERROR, error });
   });
 }
@@ -172,12 +172,12 @@ function login() {
     store.dispatch({
       type: actions.SUBSCRIBE_REQUEST,
       channel: baseChannel,
-      subscription: UPDATE_STATE
+      subscription: UPDATE_STATE,
     });
     store.dispatch({
       type: actions.SUBSCRIBE_REQUEST,
       channel: 'report',
-      subscription: UPDATE_REPORTS
+      subscription: UPDATE_REPORTS,
     });
   });
 }
@@ -195,7 +195,7 @@ function getReport(reportId) {
 
 export default function api(inStore) {
   store = inStore;
-  return next => action => {
+  return (next) => (action) => {
     const result = next(action);
     switch (
       action.type // eslint-disable-line default-case

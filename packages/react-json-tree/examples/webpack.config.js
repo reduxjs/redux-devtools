@@ -9,12 +9,12 @@ module.exports = {
   entry: [
     !isProduction && 'webpack-dev-server/client?http://localhost:3000',
     !isProduction && 'webpack/hot/only-dev-server',
-    './src/index'
+    './src/index',
   ].filter(Boolean),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/static/',
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   module: {
@@ -22,8 +22,8 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: path.join(__dirname, 'src')
-      }
-    ]
-  }
+        include: path.join(__dirname, 'src'),
+      },
+    ],
+  },
 };

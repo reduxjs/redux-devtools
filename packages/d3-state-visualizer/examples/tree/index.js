@@ -6,18 +6,18 @@ const appState = {
       { title: 'd3' },
       { title: 'state' },
       { title: 'visualizer' },
-      { title: 'tree' }
+      { title: 'tree' },
     ],
     completedCount: 1,
-    alphabeticalOrder: true
+    alphabeticalOrder: true,
   },
   someStore: {
     someProperty: 0,
     someObject: {
       anotherProperty: 'value',
-      someArray: [0, 1, 2]
-    }
-  }
+      someArray: [0, 1, 2],
+    },
+  },
 };
 
 const render = tree(document.getElementById('root'), {
@@ -29,7 +29,7 @@ const render = tree(document.getElementById('root'), {
   widthBetweenNodesCoeff: 1.5,
   heightBetweenNodesCoeff: 2,
   style: { border: '1px solid black' },
-  tooltipOptions: { offset: { left: 30, top: 10 }, indentationSize: 2 }
+  tooltipOptions: { offset: { left: 30, top: 10 }, indentationSize: 2 },
 });
 
 render();

@@ -19,51 +19,51 @@ const styles = {
     height: '100vh',
     width: '80%',
     margin: '0 auto',
-    paddingTop: '1px'
+    paddingTop: '1px',
   },
   header: {},
   content: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '50%'
+    height: '50%',
   },
   buttons: {
     display: 'flex',
     width: '40rem',
     justifyContent: 'center',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   muted: {
-    color: '#CCCCCC'
+    color: '#CCCCCC',
   },
   button: {
-    margin: '0.5rem'
+    margin: '0.5rem',
   },
   links: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   link: {
     margin: '0 0.5rem',
     cursor: 'pointer',
-    display: 'block'
+    display: 'block',
   },
   input: {
     display: 'inline-block',
     textAlign: 'left',
-    width: '30rem'
-  }
+    width: '30rem',
+  },
 };
 
 const themeOptions = [
-  ...Object.keys(inspectorThemes).map(value => ({
+  ...Object.keys(inspectorThemes).map((value) => ({
     value,
-    label: inspectorThemes[value].scheme
+    label: inspectorThemes[value].scheme,
   })),
   null,
   ...Object.keys(base16)
-    .map(value => ({ value, label: base16[value].scheme }))
-    .filter(opt => opt.label)
+    .map((value) => ({ value, label: base16[value].scheme }))
+    .filter((opt) => opt.label),
 ];
 
 const ROOT =
@@ -76,9 +76,9 @@ function buildUrl(options) {
       options.useExtension ? 'ext' : '',
       options.supportImmutable ? 'immutable' : '',
       options.theme ? 'theme=' + options.theme : '',
-      options.dark ? 'dark' : ''
+      options.dark ? 'dark' : '',
     ]
-      .filter(s => s)
+      .filter((s) => s)
       .join('&')
   );
 }
@@ -108,11 +108,11 @@ class DemoApp extends React.Component {
                   <InputGroup>
                     <FormControl
                       componentClass="select"
-                      onChange={event =>
+                      onChange={(event) =>
                         this.setTheme(options, event.currentTarget.value)
                       }
                     >
-                      {themeOptions.map(theme => (
+                      {themeOptions.map((theme) => (
                         <option
                           key={(theme && theme.label) || 'empty'}
                           label={(theme && theme.label) || '──────────'}
@@ -242,10 +242,10 @@ class DemoApp extends React.Component {
   };
 }
 
-export default connect(state => state, {
-  toggleTimeoutUpdate: timeoutUpdateEnabled => ({
+export default connect((state) => state, {
+  toggleTimeoutUpdate: (timeoutUpdateEnabled) => ({
     type: 'TOGGLE_TIMEOUT_UPDATE',
-    timeoutUpdateEnabled
+    timeoutUpdateEnabled,
   }),
   timeoutUpdate: () => ({ type: 'TIMEOUT_UPDATE' }),
   increment: () => ({ type: 'INCREMENT' }),
@@ -262,10 +262,10 @@ export default connect(state => state, {
   changeImmutableNested: () => ({ type: 'CHANGE_IMMUTABLE_NESTED' }),
   hugePayload: () => ({
     type: 'HUGE_PAYLOAD',
-    payload: Array.from({ length: 10000 }).map((_, i) => i)
+    payload: Array.from({ length: 10000 }).map((_, i) => i),
   }),
   addFunction: () => ({ type: 'ADD_FUNCTION' }),
   addSymbol: () => ({ type: 'ADD_SYMBOL' }),
   shuffleArray: () => ({ type: 'SHUFFLE_ARRAY' }),
-  pushRoute
+  pushRoute,
 })(DemoApp);

@@ -9,7 +9,7 @@ const Component = ({ selected }) => (
       justifyContent: 'center',
       width: '100%',
       height: '100%',
-      fontSize: '22px'
+      fontSize: '22px',
     }}
   >
     Selected {selected}
@@ -17,24 +17,24 @@ const Component = ({ selected }) => (
 );
 /* eslint-enable react/prop-types */
 
-const selector = tab => ({ selected: tab.name });
+const selector = (tab) => ({ selected: tab.name });
 
 export const tabs = [
   {
     name: 'Tab1',
     component: Component,
-    selector
+    selector,
   },
   {
     name: 'Tab2',
     component: Component,
-    selector
+    selector,
   },
   {
     name: 'Tab3',
     component: Component,
-    selector
-  }
+    selector,
+  },
 ];
 
 export const simple10Tabs = [];

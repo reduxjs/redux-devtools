@@ -6,7 +6,7 @@ import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../constants/TodoFilters';
 const FILTER_TITLES = {
   [SHOW_ALL]: 'All',
   [SHOW_UNMARKED]: 'Active',
-  [SHOW_MARKED]: 'Completed'
+  [SHOW_MARKED]: 'Completed',
 };
 
 export default class Footer extends Component {
@@ -15,7 +15,7 @@ export default class Footer extends Component {
     unmarkedCount: PropTypes.number.isRequired,
     filter: PropTypes.string.isRequired,
     onClearMarked: PropTypes.func.isRequired,
-    onShow: PropTypes.func.isRequired
+    onShow: PropTypes.func.isRequired,
   };
 
   render() {
@@ -23,7 +23,7 @@ export default class Footer extends Component {
       <footer className="footer">
         {this.renderTodoCount()}
         <ul className="filters">
-          {[SHOW_ALL, SHOW_UNMARKED, SHOW_MARKED].map(filter => (
+          {[SHOW_ALL, SHOW_UNMARKED, SHOW_MARKED].map((filter) => (
             <li key={filter}>{this.renderFilterLink(filter)}</li>
           ))}
         </ul>

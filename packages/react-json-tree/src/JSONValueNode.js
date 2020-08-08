@@ -12,7 +12,7 @@ const JSONValueNode = ({
   keyPath,
   valueRenderer,
   value,
-  valueGetter
+  valueGetter,
 }) => (
   <li {...styling('value', nodeType, keyPath)}>
     <label {...styling(['label', 'valueLabel'], nodeType, keyPath)}>
@@ -33,11 +33,11 @@ JSONValueNode.propTypes = {
   ).isRequired,
   valueRenderer: PropTypes.func.isRequired,
   value: PropTypes.any,
-  valueGetter: PropTypes.func
+  valueGetter: PropTypes.func,
 };
 
 JSONValueNode.defaultProps = {
-  valueGetter: value => value
+  valueGetter: (value) => value,
 };
 
 export default JSONValueNode;

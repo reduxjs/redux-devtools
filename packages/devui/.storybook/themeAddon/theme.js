@@ -16,7 +16,7 @@ class Theme extends React.Component {
     channel.removeListener(EVENT_ID_DATA, this.onChannel);
   }
 
-  onChannel = state => {
+  onChannel = (state) => {
     this.setState(state);
   };
 
@@ -25,4 +25,4 @@ class Theme extends React.Component {
   }
 }
 
-export const withTheme = story => <Theme>{story()}</Theme>;
+export const withTheme = (story) => <Theme>{story()}</Theme>;

@@ -13,29 +13,29 @@ var data = {
   set: Immutable.Set([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]),
   orderedSet: Immutable.OrderedSet([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]),
   seq: Immutable.Seq([1, 2, 3, 4, 5, 6, 7, 8]),
-  stack: Immutable.Stack.of('a', 'b', 'c')
+  stack: Immutable.Stack.of('a', 'b', 'c'),
 };
 
-describe('Immutable', function() {
+describe('Immutable', function () {
   var stringified = {};
-  describe('Stringify', function() {
-    Object.keys(data).forEach(function(key) {
-      it(key, function() {
+  describe('Stringify', function () {
+    Object.keys(data).forEach(function (key) {
+      it(key, function () {
         stringified[key] = stringify(data[key]);
         expect(stringified[key]).toMatchSnapshot();
       });
     });
   });
 
-  describe('Parse', function() {
-    Object.keys(data).forEach(function(key) {
-      it(key, function() {
+  describe('Parse', function () {
+    Object.keys(data).forEach(function (key) {
+      it(key, function () {
         expect(parse(stringified[key])).toEqual(data[key]);
       });
     });
   });
 
-  describe('Record', function() {
+  describe('Record', function () {
     var ABRecord = Immutable.Record({ a: 1, b: 2 });
     var myRecord = new ABRecord({ b: 3 });
 
@@ -44,20 +44,20 @@ describe('Immutable', function() {
     var parse = serialize.parse;
     var stringifiedRecord;
 
-    it('stringify', function() {
+    it('stringify', function () {
       stringifiedRecord = stringify(myRecord);
       expect(stringifiedRecord).toMatchSnapshot();
     });
 
-    it('parse', function() {
+    it('parse', function () {
       expect(parse(stringifiedRecord)).toEqual(myRecord);
     });
   });
 
-  describe('Nested', function() {
+  describe('Nested', function () {
     var ABRecord = Immutable.Record({
       map: Immutable.OrderedMap({ seq: data.seq, stack: data.stack }),
-      repeat: data.repeat
+      repeat: data.repeat,
     });
     var nestedData = Immutable.Set(ABRecord(), data.orderedSet, data.range);
 
@@ -66,27 +66,27 @@ describe('Immutable', function() {
     var parse = serialize.parse;
     var stringifiedNested;
 
-    it('stringify', function() {
+    it('stringify', function () {
       stringifiedNested = stringify(nestedData);
       expect(stringifiedNested).toMatchSnapshot();
     });
 
-    it('parse', function() {
+    it('parse', function () {
       expect(parse(stringifiedNested)).toEqual(nestedData);
     });
   });
-  describe('With references', function() {
-    it('serializes and deserializes', function() {
+  describe('With references', function () {
+    it('serializes and deserializes', function () {
       var sharedValue = [];
       var record = Immutable.Record({
-        prop: sharedValue
+        prop: sharedValue,
       });
 
       var refs = [record];
 
       var obj = Immutable.Map({
         fst: new record(),
-        scnd: new record()
+        scnd: new record(),
       });
 
       var serialized = stringify(
@@ -105,7 +105,7 @@ describe('Immutable', function() {
     });
   });
 
-  describe('Custom replacer and reviver functions', function() {
+  describe('Custom replacer and reviver functions', function () {
     var customOneRepresentation = 'one';
 
     function customReplacer(key, value, defaultReplacer) {
@@ -133,9 +133,9 @@ describe('Immutable', function() {
       customReviver
     );
 
-    Object.keys(data).forEach(function(key) {
+    Object.keys(data).forEach(function (key) {
       var stringified = serializeCustom.stringify(data[key]);
-      it(key, function() {
+      it(key, function () {
         var deserialized = serializeCustom.parse(stringified);
         expect(deserialized).toEqual(data[key]);
         if (key === 'map' || key === 'orderedMap') {

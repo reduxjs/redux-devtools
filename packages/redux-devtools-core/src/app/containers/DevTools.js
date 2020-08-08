@@ -33,7 +33,7 @@ class DevTools extends Component {
         type: '@@INIT_MONITOR',
         newMonitorState,
         update,
-        monitorProps: this.monitorProps
+        monitorProps: this.monitorProps,
       });
     }
   }
@@ -52,7 +52,7 @@ class DevTools extends Component {
     );
   }
 
-  dispatch = action => {
+  dispatch = (action) => {
     this.props.dispatch(action);
   };
 
@@ -64,7 +64,7 @@ class DevTools extends Component {
 
     const liftedState = {
       ...this.props.liftedState,
-      monitorState: this.props.monitorState
+      monitorState: this.props.monitorState,
     };
     return (
       <div className={`monitor monitor-${this.props.monitor}`}>
@@ -86,7 +86,7 @@ DevTools.propTypes = {
   dispatch: PropTypes.func.isRequired,
   monitor: PropTypes.string,
   features: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
 };
 
 export default withTheme(DevTools);

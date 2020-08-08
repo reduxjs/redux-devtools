@@ -9,7 +9,7 @@ import { toggleDispatcher } from '../../actions';
 class DispatcherButton extends Component {
   static propTypes = {
     dispatcherIsOpen: PropTypes.bool,
-    toggleDispatcher: PropTypes.func.isRequired
+    toggleDispatcher: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -34,7 +34,7 @@ class DispatcherButton extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    toggleDispatcher: bindActionCreators(toggleDispatcher, dispatch)
+    toggleDispatcher: bindActionCreators(toggleDispatcher, dispatch),
   };
 }
 

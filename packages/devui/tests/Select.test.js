@@ -4,7 +4,7 @@ import { renderToJson, mountToJson } from 'enzyme-to-json';
 import { Select } from '../src';
 import { options } from '../src/Select/stories/options';
 
-describe('Select', function() {
+describe('Select', function () {
   it('renders correctly', () => {
     const wrapper = render(<Select options={options} onChange={() => {}} />);
     expect(renderToJson(wrapper)).toMatchSnapshot();

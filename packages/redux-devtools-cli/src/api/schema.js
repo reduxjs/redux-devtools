@@ -9,13 +9,13 @@ var resolvers = {
     },
     report: function report(source, args, context) {
       return context.store.get(args.id);
-    }
-  }
+    },
+  },
 };
 
 var executableSchema = makeExecutableSchema({
   typeDefs: schema,
-  resolvers: resolvers
+  resolvers: resolvers,
 });
 
 module.exports = executableSchema;

@@ -19,6 +19,6 @@ export default function reducer(props, state = {}, action) {
       props,
       state.consecutiveToggleStartId,
       action
-    )
+    ),
   };
 }

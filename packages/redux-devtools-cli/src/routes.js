@@ -32,10 +32,10 @@ function routes(options, store, scServer) {
   serveUmdModule('react-dom');
   serveUmdModule('redux-devtools-core');
 
-  app.get('/port.js', function(req, res) {
+  app.get('/port.js', function (req, res) {
     res.send('reduxDevToolsPort = ' + options.port);
   });
-  app.get('*', function(req, res) {
+  app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../app/index.html'));
   });
 
@@ -45,16 +45,16 @@ function routes(options, store, scServer) {
 
   app.use('/graphql', graphqlMiddleware(store));
 
-  app.post('/', function(req, res) {
+  app.post('/', function (req, res) {
     if (!req.body) return res.status(404).end();
     switch (req.body.op) {
       case 'get':
         store
           .get(req.body.id)
-          .then(function(r) {
+          .then(function (r) {
             res.send(r || {});
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.error(error); // eslint-disable-line no-console
             res.sendStatus(500);
           });
@@ -62,10 +62,10 @@ function routes(options, store, scServer) {
       case 'list':
         store
           .list(req.body.query, req.body.fields)
-          .then(function(r) {
+          .then(function (r) {
             res.send(r);
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.error(error); // eslint-disable-line no-console
             res.sendStatus(500);
           });
@@ -73,14 +73,14 @@ function routes(options, store, scServer) {
       default:
         store
           .add(req.body)
-          .then(function(r) {
+          .then(function (r) {
             res.send({ id: r.id, error: r.error });
             scServer.exchange.publish('report', {
               type: 'add',
-              data: r
+              data: r,
             });
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.error(error); // eslint-disable-line no-console
             res.status(500).send({});
           });

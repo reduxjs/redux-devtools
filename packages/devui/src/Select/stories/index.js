@@ -42,6 +42,6 @@ storiesOf('Select', module)
     {
       info:
         'Wrapper around [React Select](https://github.com/JedWatson/react-select) with themes ' +
-        'and new props like `openOuterUp` and `menuMaxHeight`.'
+        'and new props like `openOuterUp` and `menuMaxHeight`.',
     }
   );

@@ -8,12 +8,12 @@ module.exports = {
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
-    './index'
+    './index',
   ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/static/',
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   module: {
@@ -22,7 +22,7 @@ module.exports = {
         test: /\.js$/,
         loaders: ['babel-loader'],
         exclude: /node_modules/,
-        include: __dirname
+        include: __dirname,
       },
       {
         test: /\.css?$/,
@@ -31,11 +31,11 @@ module.exports = {
           {
             loader: 'raw-loader',
             options: {
-              esModule: false
-            }
-          }
-        ]
-      }
-    ]
-  }
+              esModule: false,
+            },
+          },
+        ],
+      },
+    ],
+  },
 };

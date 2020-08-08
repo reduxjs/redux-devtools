@@ -4,7 +4,7 @@ import Anser from 'anser';
 export type ErrorLocation = {|
   fileName: string,
   lineNumber: number,
-  colNumber?: number
+  colNumber?: number,
 |};
 
 const filePathRegex = /^\.(\/[^/\n ]+)+\.[^/\n ]+$/;
@@ -17,7 +17,7 @@ const lineNumberRegexes = [
 
   // ESLint errors
   // Based on eslintFormatter in react-dev-utils
-  /^Line (\d+):.+$/
+  /^Line (\d+):.+$/,
 ];
 
 // Based on error formatting of webpack

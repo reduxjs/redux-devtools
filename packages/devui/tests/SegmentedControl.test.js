@@ -3,7 +3,7 @@ import { render, mount } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 import { SegmentedControl } from '../src';
 
-describe('SegmentedControl', function() {
+describe('SegmentedControl', function () {
   it('renders correctly', () => {
     const wrapper = render(
       <SegmentedControl
@@ -26,10 +26,7 @@ describe('SegmentedControl', function() {
       />
     );
 
-    wrapper
-      .find('button')
-      .first()
-      .simulate('click');
+    wrapper.find('button').first().simulate('click');
     expect(onClick).toBeCalled();
   });
 });

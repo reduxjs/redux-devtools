@@ -30,11 +30,11 @@ export default class ContextMenu extends Component {
     }
   }
 
-  onMouseUp = e => {
+  onMouseUp = (e) => {
     e.target.blur();
   };
 
-  onClick = e => {
+  onClick = (e) => {
     this.props.onClick(e.target.value);
   };
 
@@ -64,7 +64,7 @@ export default class ContextMenu extends Component {
   }
 
   updateItems(items) {
-    this.items = items.map(item => {
+    this.items = items.map((item) => {
       const value = item.value || item.name;
       if (item.type === 'button') return item;
       return (
@@ -80,7 +80,7 @@ export default class ContextMenu extends Component {
     });
   }
 
-  menuRef = c => {
+  menuRef = (c) => {
     this.menu = c;
   };
 
@@ -103,5 +103,5 @@ ContextMenu.propTypes = {
   onClick: PropTypes.func.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
 };

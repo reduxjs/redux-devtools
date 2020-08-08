@@ -32,10 +32,10 @@ class SourceMap {
     const {
       line: l,
       column: c,
-      source: s
+      source: s,
     } = this.__source_map.originalPositionFor({
       line,
-      column
+      column,
     });
     return { line: l, column: c, source: s };
   }
@@ -54,11 +54,11 @@ class SourceMap {
     const { line: l, column: c } = this.__source_map.generatedPositionFor({
       source,
       line,
-      column
+      column,
     });
     return {
       line: l,
-      column: c
+      column: c,
     };
   }
 
@@ -120,7 +120,7 @@ async function getSourceMap(
   } else {
     const index = fileUri.lastIndexOf('/');
     const url = fileUri.substring(0, index + 1) + sm;
-    const obj = await fetch(url).then(res => res.json());
+    const obj = await fetch(url).then((res) => res.json());
     return new SourceMap(new SourceMapConsumer(obj));
   }
 

@@ -5,7 +5,7 @@ export const DEFAULT_STATE = {
   startActionId: null,
   inspectedActionPath: [],
   inspectedStatePath: [],
-  tabName: 'Diff'
+  tabName: 'Diff',
 };
 
 export function updateMonitorState(monitorState) {
@@ -16,13 +16,13 @@ function reduceUpdateState(state, action) {
   return action.type === UPDATE_MONITOR_STATE
     ? {
         ...state,
-        ...action.monitorState
+        ...action.monitorState,
       }
     : state;
 }
 
 export function reducer(props, state = DEFAULT_STATE, action) {
   return {
-    ...reduceUpdateState(state, action)
+    ...reduceUpdateState(state, action),
   };
 }

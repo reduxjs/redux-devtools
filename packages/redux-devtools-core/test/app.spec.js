@@ -35,7 +35,7 @@ describe('App container', () => {
     expect(
       wrapper
         .find('ActionList')
-        .findWhere(n => {
+        .findWhere((n) => {
           const { className } = n.props();
           return className && className.startsWith('actionListRows-');
         })

@@ -9,7 +9,7 @@ import { updateMonitorState } from '../../../actions';
 
 const style = {
   width: '100%',
-  height: '100%'
+  height: '100%',
 };
 
 class ChartTab extends Component {
@@ -33,7 +33,7 @@ class ChartTab extends Component {
     }
   }
 
-  getRef = node => {
+  getRef = (node) => {
     this.node = node;
   };
 
@@ -52,10 +52,10 @@ class ChartTab extends Component {
           'background-color': theme.base01,
           opacity: '0.9',
           'border-radius': '5px',
-          padding: '5px'
+          padding: '5px',
         },
         offset: { left: 30, top: 10 },
-        indentationSize: 2
+        indentationSize: 2,
       },
       style: {
         width: '100%',
@@ -64,27 +64,27 @@ class ChartTab extends Component {
           colors: {
             default: theme.base0B,
             collapsed: theme.base0B,
-            parent: theme.base0E
+            parent: theme.base0E,
           },
-          radius: 7
+          radius: 7,
         },
         text: {
           colors: {
             default: theme.base0D,
-            hover: theme.base06
-          }
-        }
+            hover: theme.base06,
+          },
+        },
       },
-      onClickText: this.onClickText
+      onClickText: this.onClickText,
     };
   }
 
-  onClickText = data => {
+  onClickText = (data) => {
     const inspectedStatePath = [];
     getPath(data, inspectedStatePath);
     this.props.updateMonitorState({
       inspectedStatePath,
-      subTabName: data.children ? 'Chart' : 'Tree'
+      subTabName: data.children ? 'Chart' : 'Tree',
     });
   };
 
@@ -96,12 +96,12 @@ class ChartTab extends Component {
 ChartTab.propTypes = {
   data: PropTypes.object,
   updateMonitorState: PropTypes.func.isRequired,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateMonitorState: bindActionCreators(updateMonitorState, dispatch)
+    updateMonitorState: bindActionCreators(updateMonitorState, dispatch),
   };
 }
 

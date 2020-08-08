@@ -19,7 +19,7 @@ function download(state) {
   }, 0);
 }
 
-const exportState = store => next => action => {
+const exportState = (store) => (next) => (action) => {
   const result = next(action);
 
   if (
@@ -35,7 +35,7 @@ const exportState = store => next => action => {
         JSON.stringify(
           {
             payload: request.payload,
-            preloadedState: request.committedState
+            preloadedState: request.committedState,
           },
           null,
           '\t'

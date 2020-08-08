@@ -13,11 +13,11 @@ var serverFlags = {
     '0.44.0-rc.0': '  runServer(args, config, startedCallback, readyCallback);',
     '0.46.0-rc.0':
       '  runServer(runServerArgs, configT, startedCallback, readyCallback);',
-    '0.57.0': '  runServer(args, configT);'
+    '0.57.0': '  runServer(args, configT);',
   },
   'react-native-desktop': {
-    '0.0.1': '    _server(argv, config, resolve, reject);'
-  }
+    '0.0.1': '    _server(argv, config, resolve, reject);',
+  },
 };
 
 function getModuleVersion(modulePath) {
@@ -42,7 +42,7 @@ exports.dir = 'local-cli/server';
 exports.file = 'server.js';
 exports.fullPath = path.join(exports.dir, exports.file);
 
-exports.inject = function(modulePath, options, moduleName) {
+exports.inject = function (modulePath, options, moduleName) {
   var filePath = path.join(modulePath, exports.fullPath);
   if (!fs.existsSync(filePath)) return false;
 
@@ -56,7 +56,7 @@ exports.inject = function(modulePath, options, moduleName) {
     '      ' + serverFlag,
     '        })',
     '      );',
-    endFlag
+    endFlag,
   ].join('\n');
 
   var serverCode = fs.readFileSync(filePath, 'utf-8');
@@ -75,7 +75,7 @@ exports.inject = function(modulePath, options, moduleName) {
   return true;
 };
 
-exports.revert = function(modulePath, moduleName) {
+exports.revert = function (modulePath, moduleName) {
   var filePath = path.join(modulePath, exports.fullPath);
   if (!fs.existsSync(filePath)) return false;
 

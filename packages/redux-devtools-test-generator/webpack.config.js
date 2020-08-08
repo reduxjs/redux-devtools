@@ -15,39 +15,39 @@ module.exports = {
     : [
         'webpack-dev-server/client?http://localhost:3000',
         'webpack/hot/only-dev-server',
-        './demo/src/js/index'
+        './demo/src/js/index',
       ],
   output: {
     path: path.join(__dirname, 'demo/dist'),
-    filename: 'js/bundle.js'
+    filename: 'js/bundle.js',
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: 'demo/src/index.html',
-      package: pkg
+      package: pkg,
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-      }
-    })
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
   ].concat(
     isProduction
       ? [
           new webpack.optimize.UglifyJsPlugin({
             compress: { warnings: false },
-            output: { comments: false }
-          })
+            output: { comments: false },
+          }),
         ]
       : [
           new ExportFilesWebpackPlugin('demo/dist/index.html'),
-          new webpack.HotModuleReplacementPlugin()
+          new webpack.HotModuleReplacementPlugin(),
         ]
   ),
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
@@ -56,19 +56,19 @@ module.exports = {
         loader: 'babel-loader',
         include: [
           path.join(__dirname, 'src'),
-          path.join(__dirname, 'demo/src/js')
-        ]
+          path.join(__dirname, 'demo/src/js'),
+        ],
       },
       {
         test: /\.css$/,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
       {
         test: /\.(ttf|eot|svg|woff|woff2)$/,
         loader: 'file-loader',
-        options: { outputPath: 'fonts/', publicPath: 'fonts/' }
-      }
-    ]
+        options: { outputPath: 'fonts/', publicPath: 'fonts/' },
+      },
+    ],
   },
   devServer: isProduction
     ? null
@@ -78,8 +78,8 @@ module.exports = {
         hot: true,
         stats: {
           chunkModules: false,
-          colors: true
+          colors: true,
         },
-        historyApiFallback: true
-      }
+        historyApiFallback: true,
+      },
 };

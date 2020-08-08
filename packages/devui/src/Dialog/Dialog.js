@@ -13,11 +13,11 @@ export default class Dialog extends (PureComponent || Component) {
     else this.props.onSubmit();
   };
 
-  getFormButtonRef = node => {
+  getFormButtonRef = (node) => {
     this.submitButton = node;
   };
 
-  onKeyDown = e => {
+  onKeyDown = (e) => {
     if (e.keyCode === 27 /* esc */) {
       e.preventDefault();
       this.props.onDismiss(false);
@@ -81,7 +81,7 @@ export default class Dialog extends (PureComponent || Component) {
                         onClick={this.onSubmit}
                       >
                         {submitText}
-                      </Button>
+                      </Button>,
                     ]
                   : actions}
               </div>
@@ -111,5 +111,5 @@ Dialog.propTypes = {
   modal: PropTypes.bool,
   onDismiss: PropTypes.func,
   onSubmit: PropTypes.func,
-  theme: PropTypes.object
+  theme: PropTypes.object,
 };

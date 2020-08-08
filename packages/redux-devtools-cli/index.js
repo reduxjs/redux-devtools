@@ -7,17 +7,17 @@ var LOG_LEVEL_ERROR = 1;
 var LOG_LEVEL_WARN = 2;
 var LOG_LEVEL_INFO = 3;
 
-module.exports = function(argv) {
+module.exports = function (argv) {
   var options = Object.assign(getOptions(argv), {
     workerController: __dirname + '/src/worker.js',
-    allowClientPublish: false
+    allowClientPublish: false,
   });
   var port = options.port;
   var logLevel =
     options.logLevel === undefined ? LOG_LEVEL_INFO : options.logLevel;
-  return new Promise(function(resolve) {
+  return new Promise(function (resolve) {
     // Check port already used
-    getPort(port, function(err, p) {
+    getPort(port, function (err, p) {
       /* eslint-disable no-console */
       if (err) {
         if (logLevel >= LOG_LEVEL_ERROR) {
@@ -33,9 +33,9 @@ module.exports = function(argv) {
         }
         resolve({
           portAlreadyUsed: true,
-          on: function(status, cb) {
+          on: function (status, cb) {
             cb();
-          }
+          },
         });
       } else {
         if (logLevel >= LOG_LEVEL_INFO) {

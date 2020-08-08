@@ -16,32 +16,32 @@ const defaultSchema = {
       enumNames: [
         'no remote connection',
         'connect via remotedev.io',
-        'use local (custom) server'
-      ]
+        'use local (custom) server',
+      ],
     },
     hostname: {
-      type: 'string'
+      type: 'string',
     },
     port: {
-      type: 'number'
+      type: 'number',
     },
     secure: {
-      type: 'boolean'
-    }
-  }
+      type: 'boolean',
+    },
+  },
 };
 
 const uiSchema = {
   type: {
-    'ui:widget': 'radio'
-  }
+    'ui:widget': 'radio',
+  },
 };
 
 class Connection extends Component {
   static propTypes = {
     saveSettings: PropTypes.func.isRequired,
     options: PropTypes.object.isRequired,
-    type: PropTypes.string
+    type: PropTypes.string,
   };
 
   constructor(props) {
@@ -56,12 +56,12 @@ class Connection extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.options !== nextProps.options) {
       this.setState({
-        formData: { ...nextProps.options, type: nextProps.type }
+        formData: { ...nextProps.options, type: nextProps.type },
       });
     }
   }
 
-  handleSave = data => {
+  handleSave = (data) => {
     this.props.saveSettings(data.formData);
     this.setState({ changed: false });
   };
@@ -71,7 +71,7 @@ class Connection extends Component {
     if (type !== 'custom') {
       schema = {
         type: 'object',
-        properties: { type: defaultSchema.properties.type }
+        properties: { type: defaultSchema.properties.type },
       };
     } else {
       schema = defaultSchema;
@@ -79,15 +79,15 @@ class Connection extends Component {
     return {
       formData: {
         type,
-        ...this.props.options
+        ...this.props.options,
       },
       type,
       schema,
-      changed
+      changed,
     };
   };
 
-  handleChange = data => {
+  handleChange = (data) => {
     const formData = data.formData;
     const type = formData.type;
     if (type !== this.state.type) {
@@ -125,7 +125,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveSettings: bindActionCreators(saveSocketSettings, dispatch)
+    saveSettings: bindActionCreators(saveSocketSettings, dispatch),
   };
 }
 

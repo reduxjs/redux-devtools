@@ -14,7 +14,7 @@ function extractLocation(token: string): [string, number, number] {
   return regexExtractLocation
     .exec(token)
     .slice(1)
-    .map(v => {
+    .map((v) => {
       const p = Number(v);
       if (!isNaN(p)) {
         return p;
@@ -29,9 +29,9 @@ const regexValidFrame_FireFox = /(^|@)\S+:\d+|.+line\s+\d+\s+>\s+(eval|Function)
 function parseStack(stack: string[]): StackFrame[] {
   const frames = stack
     .filter(
-      e => regexValidFrame_Chrome.test(e) || regexValidFrame_FireFox.test(e)
+      (e) => regexValidFrame_Chrome.test(e) || regexValidFrame_FireFox.test(e)
     )
-    .map(e => {
+    .map((e) => {
       if (regexValidFrame_FireFox.test(e)) {
         // Strip eval, we don't care about it
         let isEval = false;
@@ -56,10 +56,7 @@ function parseStack(stack: string[]): StackFrame[] {
         if (e.indexOf('(at ') !== -1) {
           e = e.replace(/\(at /, '(');
         }
-        const data = e
-          .trim()
-          .split(/\s+/g)
-          .slice(1);
+        const data = e.trim().split(/\s+/g).slice(1);
         const last = data.pop();
         return new StackFrame(data.join(' ') || null, ...extractLocation(last));
       }

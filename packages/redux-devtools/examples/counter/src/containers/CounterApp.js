@@ -18,7 +18,7 @@ class CounterApp extends Component {
 
 function select(state) {
   return {
-    counter: state.counter
+    counter: state.counter,
   };
 }
 

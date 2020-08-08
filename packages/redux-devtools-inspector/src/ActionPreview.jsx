@@ -8,21 +8,21 @@ import ActionTab from './tabs/ActionTab';
 const DEFAULT_TABS = [
   {
     name: 'Action',
-    component: ActionTab
+    component: ActionTab,
   },
   {
     name: 'Diff',
-    component: DiffTab
+    component: DiffTab,
   },
   {
     name: 'State',
-    component: StateTab
-  }
+    component: StateTab,
+  },
 ];
 
 class ActionPreview extends Component {
   static defaultProps = {
-    tabName: DEFAULT_STATE.tabName
+    tabName: DEFAULT_STATE.tabName,
   };
 
   render() {
@@ -46,7 +46,7 @@ class ActionPreview extends Component {
       tabs,
       dataTypeKey,
       monitorState,
-      updateMonitorState
+      updateMonitorState,
     } = this.props;
 
     const renderedTabs =
@@ -57,8 +57,8 @@ class ActionPreview extends Component {
         : DEFAULT_TABS;
 
     const { component: TabComponent } =
-      renderedTabs.find(tab => tab.name === tabName) ||
-      renderedTabs.find(tab => tab.name === DEFAULT_STATE.tabName);
+      renderedTabs.find((tab) => tab.name === tabName) ||
+      renderedTabs.find((tab) => tab.name === DEFAULT_STATE.tabName);
 
     return (
       <div key="actionPreview" {...styling('actionPreview')}>
@@ -84,7 +84,7 @@ class ActionPreview extends Component {
                 action,
                 nextState,
                 monitorState,
-                updateMonitorState
+                updateMonitorState,
               }}
             />
           </div>
@@ -105,7 +105,7 @@ class ActionPreview extends Component {
           onClick={() =>
             onInspectPath([
               ...inspectedPath.slice(0, inspectedPath.length - 1),
-              ...[key, ...rest].reverse()
+              ...[key, ...rest].reverse(),
             ])
           }
         >

@@ -22,7 +22,7 @@ async function map(
 ): Promise<StackFrame[]> {
   const cache: any = {};
   const files: string[] = [];
-  frames.forEach(frame => {
+  frames.forEach((frame) => {
     const { fileName } = frame;
     if (fileName == null) {
       return;
@@ -33,13 +33,13 @@ async function map(
     files.push(fileName);
   });
   await settle(
-    files.map(async fileName => {
-      const fileSource = await fetch(fileName).then(r => r.text());
+    files.map(async (fileName) => {
+      const fileSource = await fetch(fileName).then((r) => r.text());
       const map = await getSourceMap(fileName, fileSource);
       cache[fileName] = { fileSource, map };
     })
   );
-  return frames.map(frame => {
+  return frames.map((frame) => {
     const { functionName, fileName, lineNumber, columnNumber } = frame;
     let { map, fileSource } = cache[fileName] || {};
     if (map == null || lineNumber == null) {

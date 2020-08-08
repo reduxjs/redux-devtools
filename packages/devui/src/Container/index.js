@@ -26,7 +26,7 @@ Container.propTypes = {
   children: PropTypes.node,
   themeData: PropTypes.object,
   theme: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Container;

@@ -7,7 +7,7 @@ const RightSlider = ({ styling, shown, children, rotate }) => (
       'rightSlider',
       shown && 'rightSliderShown',
       rotate && 'rightSliderRotate',
-      rotate && shown && 'rightSliderRotateShown'
+      rotate && shown && 'rightSliderRotateShown',
     ])}
   >
     {children}
@@ -15,7 +15,7 @@ const RightSlider = ({ styling, shown, children, rotate }) => (
 );
 
 RightSlider.propTypes = {
-  shown: PropTypes.bool
+  shown: PropTypes.bool,
 };
 
 export default RightSlider;

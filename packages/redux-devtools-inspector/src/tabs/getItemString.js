@@ -45,7 +45,7 @@ function getText(type, data, isWideLayout, isDiff) {
 
     const str = keys
       .slice(0, 3)
-      .map(key => `${key}: ${getShortTypeString(data[key], isDiff)}`)
+      .map((key) => `${key}: ${getShortTypeString(data[key], isDiff)}`)
       .concat(keys.length > 3 ? ['…'] : [])
       .join(', ');
 
@@ -55,7 +55,7 @@ function getText(type, data, isWideLayout, isDiff) {
 
     const str = data
       .slice(0, 4)
-      .map(val => getShortTypeString(val, isDiff))
+      .map((val) => getShortTypeString(val, isDiff))
       .concat(data.length > 4 ? ['…'] : [])
       .join(', ');
 

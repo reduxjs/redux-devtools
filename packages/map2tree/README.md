@@ -12,7 +12,7 @@ map2tree(
   someMap,
   (options = {
     key: 'state', // the name you want for as the root node of the output tree
-    pushMethod: 'push' // use 'unshift' to change the order children nodes are added
+    pushMethod: 'push', // use 'unshift' to change the order children nodes are added
   })
 );
 ```
@@ -26,14 +26,14 @@ const someMap = {
       { title: 'map', someNestedObject: { foo: 'bar' } },
       { title: 'to', someNestedArray: ['foo', 'bar'] },
       { title: 'tree' },
-      { title: 'map2tree' }
+      { title: 'map2tree' },
     ],
-    completedCount: 1
+    completedCount: 1,
   },
   otherReducer: {
     foo: 0,
-    bar: { key: 'value' }
-  }
+    bar: { key: 'value' },
+  },
 };
 ```
 

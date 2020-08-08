@@ -6,7 +6,7 @@ import InspectorWrapper from '../containers/monitors/InspectorWrapper';
 export const monitors = [
   { value: 'InspectorMonitor', name: 'Inspector' },
   { value: 'LogMonitor', name: 'Log monitor' },
-  { value: 'ChartMonitor', name: 'Chart' }
+  { value: 'ChartMonitor', name: 'Chart' },
 ];
 
 export default function getMonitor({ monitor }) {

@@ -19,23 +19,23 @@ import base16Themes from './base16Themes';
 function getStylingFromBase16(base16Theme) {
   return {
     myComponent: {
-      backgroundColor: base16Theme.base00
+      backgroundColor: base16Theme.base00,
     },
 
     myComponentToggleColor({ style, className }, clickCount) {
       return {
         style: {
           ...style,
-          backgroundColor: clickCount % 2 ? 'red' : 'blue'
-        }
+          backgroundColor: clickCount % 2 ? 'red' : 'blue',
+        },
       };
-    }
+    },
   };
 }
 
 const createStylingFromTheme = createStyling(getStylingFromBase16, {
   defaultBase16: base16Themes.solarized,
-  base16Themes
+  base16Themes,
 });
 
 class MyComponent extends Component {

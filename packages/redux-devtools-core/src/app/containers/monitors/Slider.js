@@ -4,7 +4,7 @@ import styled, { withTheme } from 'styled-components';
 import SliderMonitor from 'redux-devtools-slider-monitor';
 
 const SliderWrapper = styled.div`
-  border-color: ${props => props.theme.base02};
+  border-color: ${(props) => props.theme.base02};
   border-style: solid;
   border-width: 1px 0;
 `;
@@ -33,7 +33,7 @@ class Slider extends Component {
 Slider.propTypes = {
   liftedState: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
 };
 
 export default withTheme(Slider);

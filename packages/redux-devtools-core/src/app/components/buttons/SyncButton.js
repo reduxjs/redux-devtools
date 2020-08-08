@@ -9,7 +9,7 @@ import { toggleSync } from '../../actions';
 class SyncButton extends Component {
   static propTypes = {
     sync: PropTypes.bool,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -32,13 +32,13 @@ class SyncButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    sync: state.instances.sync
+    sync: state.instances.sync,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onClick: bindActionCreators(toggleSync, dispatch)
+    onClick: bindActionCreators(toggleSync, dispatch),
   };
 }
 

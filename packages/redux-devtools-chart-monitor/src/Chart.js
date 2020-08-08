@@ -4,7 +4,7 @@ import { tree } from 'd3-state-visualizer';
 
 const wrapperStyle = {
   width: '100%',
-  height: '100%'
+  height: '100%',
 };
 
 class Chart extends Component {
@@ -14,7 +14,7 @@ class Chart extends Component {
     pushMethod: PropTypes.oneOf(['push', 'unshift']),
     tree: PropTypes.shape({
       name: PropTypes.string,
-      children: PropTypes.array
+      children: PropTypes.array,
     }),
     id: PropTypes.string,
     style: PropTypes.shape({
@@ -22,17 +22,17 @@ class Chart extends Component {
         colors: PropTypes.shape({
           default: PropTypes.string,
           parent: PropTypes.string,
-          collapsed: PropTypes.string
+          collapsed: PropTypes.string,
         }),
-        radius: PropTypes.number
+        radius: PropTypes.number,
       }),
       text: PropTypes.shape({
         colors: PropTypes.shape({
           default: PropTypes.string,
-          hover: PropTypes.string
-        })
+          hover: PropTypes.string,
+        }),
       }),
-      link: PropTypes.object
+      link: PropTypes.object,
     }),
     size: PropTypes.number,
     aspectRatio: PropTypes.number,
@@ -40,7 +40,7 @@ class Chart extends Component {
       top: PropTypes.number,
       right: PropTypes.number,
       bottom: PropTypes.number,
-      left: PropTypes.number
+      left: PropTypes.number,
     }),
     isSorted: PropTypes.bool,
     heightBetweenNodesCoeff: PropTypes.number,
@@ -53,11 +53,11 @@ class Chart extends Component {
       top: PropTypes.number,
       offset: PropTypes.shape({
         left: PropTypes.number,
-        top: PropTypes.number
+        top: PropTypes.number,
       }),
       indentationSize: PropTypes.number,
-      style: PropTypes.object
-    })
+      style: PropTypes.object,
+    }),
   };
 
   divRef = createRef();

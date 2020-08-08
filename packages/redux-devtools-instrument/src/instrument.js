@@ -16,7 +16,7 @@ export const ActionTypes = {
   REORDER_ACTION: 'REORDER_ACTION',
   IMPORT_STATE: 'IMPORT_STATE',
   LOCK_CHANGES: 'LOCK_CHANGES',
-  PAUSE_RECORDING: 'PAUSE_RECORDING'
+  PAUSE_RECORDING: 'PAUSE_RECORDING',
 };
 
 const isChrome =
@@ -94,7 +94,7 @@ export const ActionCreators = {
       type: ActionTypes.PERFORM_ACTION,
       action,
       timestamp: Date.now(),
-      stack
+      stack,
     };
   },
 
@@ -144,7 +144,7 @@ export const ActionCreators = {
 
   pauseRecording(status) {
     return { type: ActionTypes.PAUSE_RECORDING, status };
-  }
+  },
 };
 
 export const INIT_ACTION = { type: '@@INIT' };
@@ -171,7 +171,7 @@ function computeWithTryCatch(reducer, action, state) {
 
   return {
     state: nextState,
-    error: nextError
+    error: nextError,
   };
 }
 
@@ -225,7 +225,7 @@ function recomputeStates(
       if (shouldCatchErrors && previousEntry && previousEntry.error) {
         entry = {
           state: previousState,
-          error: 'Interrupted by an error up the chain'
+          error: 'Interrupted by an error up the chain',
         };
       } else {
         entry = computeNextEntry(
@@ -273,7 +273,7 @@ export function liftReducerWith(
     currentStateIndex: 0,
     computedStates: [],
     isLocked: options.shouldStartLocked === true,
-    isPaused: options.shouldRecordChanges === false
+    isPaused: options.shouldRecordChanges === false,
   };
 
   /**
@@ -290,7 +290,7 @@ export function liftReducerWith(
       currentStateIndex,
       computedStates,
       isLocked,
-      isPaused
+      isPaused,
     } = liftedState || initialLiftedState;
 
     if (!liftedState) {
@@ -315,7 +315,7 @@ export function liftReducerWith(
       }
 
       skippedActionIds = skippedActionIds.filter(
-        id => idsToDelete.indexOf(id) === -1
+        (id) => idsToDelete.indexOf(id) === -1
       );
       stagedActionIds = [0, ...stagedActionIds.slice(excess + 1)];
       committedState = computedStates[excess].state;
@@ -348,7 +348,7 @@ export function liftReducerWith(
           currentStateIndex: 0,
           computedStates: [computedState],
           isLocked,
-          isPaused: true
+          isPaused: true,
         };
       }
       if (shouldInit) {
@@ -362,7 +362,7 @@ export function liftReducerWith(
         monitorState,
         actionsById: {
           ...actionsById,
-          [nextActionId - 1]: liftAction({ type: options.pauseActionType })
+          [nextActionId - 1]: liftAction({ type: options.pauseActionType }),
         },
         nextActionId,
         stagedActionIds,
@@ -371,10 +371,10 @@ export function liftReducerWith(
         currentStateIndex,
         computedStates: [
           ...computedStates.slice(0, stagedActionIds.length - 1),
-          computedState
+          computedState,
         ],
         isLocked,
-        isPaused: true
+        isPaused: true,
       };
     }
 
@@ -488,7 +488,7 @@ export function liftReducerWith(
           if (index === -1) {
             skippedActionIds = [actionId, ...skippedActionIds];
           } else {
-            skippedActionIds = skippedActionIds.filter(id => id !== actionId);
+            skippedActionIds = skippedActionIds.filter((id) => id !== actionId);
           }
           // Optimization: we know history before this action hasn't changed
           minInvalidatedStateIndex = stagedActionIds.indexOf(actionId);
@@ -557,7 +557,7 @@ export function liftReducerWith(
               ...stagedActionIds.slice(0, newIdx),
               actionId,
               ...stagedActionIds.slice(newIdx, idx),
-              ...stagedActionIds.slice(idx + 1)
+              ...stagedActionIds.slice(idx + 1),
             ];
             minInvalidatedStateIndex = newIdx;
           } else if (diff < 0) {
@@ -566,7 +566,7 @@ export function liftReducerWith(
               ...stagedActionIds.slice(0, idx),
               ...stagedActionIds.slice(idx + 1, newIdx),
               actionId,
-              ...stagedActionIds.slice(newIdx)
+              ...stagedActionIds.slice(newIdx),
             ];
             minInvalidatedStateIndex = idx;
           }
@@ -584,7 +584,7 @@ export function liftReducerWith(
             committedState = liftedAction.preloadedState;
             minInvalidatedStateIndex = 0;
             // iterate through actions
-            liftedAction.nextLiftedState.forEach(action => {
+            liftedAction.nextLiftedState.forEach((action) => {
               actionsById[nextActionId] = liftAction(
                 action,
                 options.trace || options.shouldIncludeCallstack
@@ -602,7 +602,7 @@ export function liftReducerWith(
               skippedActionIds,
               committedState,
               currentStateIndex,
-              computedStates
+              computedStates,
             } = liftedAction.nextLiftedState);
 
             if (liftedAction.noRecompute) {
@@ -662,7 +662,7 @@ export function liftReducerWith(
       currentStateIndex,
       computedStates,
       isLocked,
-      isPaused
+      isPaused,
     };
   };
 }
@@ -727,9 +727,9 @@ export function unliftStore(liftedStore, liftReducer, options) {
           observeState();
           const unsubscribe = liftedStore.subscribe(observeState);
           return { unsubscribe };
-        }
+        },
       };
-    }
+    },
   };
 }
 
@@ -744,7 +744,7 @@ export default function instrument(monitorReducer = () => null, options = {}) {
     );
   }
 
-  return createStore => (reducer, initialState, enhancer) => {
+  return (createStore) => (reducer, initialState, enhancer) => {
     function liftReducer(r) {
       if (typeof r !== 'function') {
         if (r && typeof r.default === 'function') {

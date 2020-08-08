@@ -9,7 +9,7 @@ class LockButton extends Component {
   static propTypes = {
     locked: PropTypes.bool,
     disabled: PropTypes.bool,
-    lockChanges: PropTypes.func.isRequired
+    lockChanges: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -33,7 +33,7 @@ class LockButton extends Component {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    lockChanges: () => dispatch(lockChanges(!ownProps.locked))
+    lockChanges: () => dispatch(lockChanges(!ownProps.locked)),
   };
 }
 

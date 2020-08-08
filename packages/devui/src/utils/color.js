@@ -8,9 +8,6 @@ import Color from 'color';
 */
 
 export default (color, effect, val) =>
-  new Color(color)
-    [effect](val)
-    .hsl()
-    .string();
+  new Color(color)[effect](val).hsl().string();
 
 // TODO: memoize it

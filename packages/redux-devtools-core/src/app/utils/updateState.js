@@ -26,13 +26,13 @@ export function recompute(
       action: action.action || action,
       timestamp: action.timestamp || Date.now(),
       stack: action.stack,
-      type: 'PERFORM_ACTION'
+      type: 'PERFORM_ACTION',
     };
   }
   liftedState.nextActionId = nextActionId;
   liftedState.computedStates = [
     ...liftedState.computedStates,
-    { state: storeState }
+    { state: storeState },
   ];
 
   if (isExcess) commitExcessActions(liftedState);

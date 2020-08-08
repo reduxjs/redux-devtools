@@ -13,7 +13,7 @@ const defaultPropertyFilter = (name, context) =>
 const defaultDiffPatcher = new DiffPatcher({
   arrays: { detectMove: false },
   objectHash: defaultObjectHash,
-  propertyFilter: defaultPropertyFilter
+  propertyFilter: defaultPropertyFilter,
 });
 
 export default function createDiffPatcher(objectHash, propertyFilter) {
@@ -24,6 +24,6 @@ export default function createDiffPatcher(objectHash, propertyFilter) {
   return new DiffPatcher({
     arrays: { detectMove: false },
     objectHash: objectHash || defaultObjectHash,
-    propertyFilter: propertyFilter || defaultPropertyFilter
+    propertyFilter: propertyFilter || defaultPropertyFilter,
   });
 }

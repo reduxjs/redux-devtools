@@ -4,7 +4,7 @@ import { shallowToJson } from 'enzyme-to-json';
 import { Form } from '../src';
 import { schema, uiSchema, formData } from '../src/Form/stories/schema';
 
-describe('Form', function() {
+describe('Form', function () {
   it('renders correctly', () => {
     const wrapper = shallow(
       <Form formData={formData} schema={schema} uiSchema={uiSchema} />

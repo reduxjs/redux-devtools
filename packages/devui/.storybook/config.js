@@ -13,7 +13,7 @@ addDecorator(
     showStoriesPanel: true,
     showAddonPanel: true,
     showSearchBox: false,
-    addonPanelInRight: true
+    addonPanelInRight: true,
   })
 );
 
@@ -24,7 +24,7 @@ addDecorator(withInfo);
 const req = require.context('../src/', true, /stories\/index\.js$/);
 
 function loadStories() {
-  req.keys().forEach(filename => req(filename));
+  req.keys().forEach((filename) => req(filename));
 }
 
 configure(loadStories, module);

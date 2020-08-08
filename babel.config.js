@@ -4,11 +4,11 @@ module.exports = {
     [
       '@babel/plugin-transform-runtime',
       {
-        regenerator: true
-      }
+        regenerator: true,
+      },
     ],
     ['@babel/plugin-proposal-decorators', { legacy: true }],
     '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-export-default-from'
-  ]
+    '@babel/plugin-proposal-export-default-from',
+  ],
 };

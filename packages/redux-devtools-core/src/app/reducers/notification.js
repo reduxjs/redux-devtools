@@ -2,7 +2,7 @@ import {
   SHOW_NOTIFICATION,
   CLEAR_NOTIFICATION,
   LIFTED_ACTION,
-  ERROR
+  ERROR,
 } from '../constants/actionTypes';
 
 export default function notification(state = null, action) {

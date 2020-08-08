@@ -12,7 +12,7 @@ export function sweep(state) {
     currentStateIndex: Math.min(
       state.currentStateIndex,
       state.stagedActionIds.length - 1
-    )
+    ),
   };
 }
 

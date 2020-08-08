@@ -73,15 +73,15 @@ module.exports = function serialize(
 
   return {
     replacer: customReplacer
-      ? function(key, value) {
+      ? function (key, value) {
           return customReplacer(key, value, replacer);
         }
       : replacer,
     reviver: customReviver
-      ? function(key, value) {
+      ? function (key, value) {
           return customReviver(key, value, reviver);
         }
       : reviver,
-    options: options
+    options: options,
   };
 };

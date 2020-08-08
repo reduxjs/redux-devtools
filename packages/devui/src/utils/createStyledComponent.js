@@ -6,7 +6,7 @@ const getStyle = (styles, type) =>
 
 export default (styles, component) =>
   styled(component || 'div')`
-    ${props =>
+    ${(props) =>
       props.theme.type
         ? getStyle(styles, props.theme.type)
         : // used outside of container (theme provider)
@@ -15,7 +15,7 @@ export default (styles, component) =>
             'default'
           )({
             ...props,
-            theme: getDefaultTheme(props.theme)
+            theme: getDefaultTheme(props.theme),
           })}
   `;
 

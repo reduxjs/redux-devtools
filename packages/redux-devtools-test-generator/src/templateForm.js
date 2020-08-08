@@ -4,33 +4,34 @@ export const formSchema = {
   properties: {
     name: {
       type: 'string',
-      title: 'Template name'
+      title: 'Template name',
     },
     dispatcher: {
       type: 'string',
-      title: 'Dispatcher: ({ action, prevState }) => (`<template>`)'
+      title: 'Dispatcher: ({ action, prevState }) => (`<template>`)',
     },
     assertion: {
       type: 'string',
-      title: 'Assertion: ({ curState }) => (`<template>`)'
+      title: 'Assertion: ({ curState }) => (`<template>`)',
     },
     wrap: {
       type: 'string',
-      title: 'Wrap code: ({ name, initialState, assertions }) => (`<template>`)'
-    }
-  }
+      title:
+        'Wrap code: ({ name, initialState, assertions }) => (`<template>`)',
+    },
+  },
 };
 
 export const uiSchema = {
   dispatcher: {
-    'ui:widget': 'textarea'
+    'ui:widget': 'textarea',
   },
   assertion: {
-    'ui:widget': 'textarea'
+    'ui:widget': 'textarea',
   },
   wrap: {
-    'ui:widget': 'textarea'
-  }
+    'ui:widget': 'textarea',
+  },
 };
 
 export const defaultFormData = {
@@ -38,5 +39,5 @@ export const defaultFormData = {
   assertion: 't.deepEqual(state, ${curState});',
   wrap: `test('reducers', (t) => {
   \${assertions}
-});`
+});`,
 };

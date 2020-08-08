@@ -3,7 +3,7 @@ import { keyframes } from 'styled-components';
 export const spin = keyframes`
   to { transform: rotate(1turn); }
 `;
-export const spinner = theme => `
+export const spinner = (theme) => `
   animation: ${spin} 400ms infinite linear;
   width: ${theme.spinnerSize}px;
   height: ${theme.spinnerSize}px;
@@ -21,7 +21,7 @@ export const fadeIn = keyframes`
 `;
 
 // Based on https://github.com/mladenplavsic/css-ripple-effect
-export const ripple = theme => `
+export const ripple = (theme) => `
   & {
     position: relative;
     overflow: hidden;

@@ -16,8 +16,8 @@ const styles = {
     overflowY: 'hidden',
     width: '100%',
     height: '100%',
-    minWidth: 300
-  }
+    minWidth: 300,
+  },
 };
 
 function invertColors(theme) {
@@ -30,7 +30,7 @@ function invertColors(theme) {
     base04: theme.base03,
     base05: theme.base02,
     base06: theme.base01,
-    base07: theme.base00
+    base07: theme.base00,
   };
 }
 
@@ -45,20 +45,20 @@ class ChartMonitor extends Component {
     stagedActionIds: PropTypes.array,
     skippedActionIds: PropTypes.array,
     monitorState: PropTypes.shape({
-      initialScrollTop: PropTypes.number
+      initialScrollTop: PropTypes.number,
     }),
 
     preserveScrollTop: PropTypes.bool,
     select: PropTypes.func.isRequired,
     theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    invertTheme: PropTypes.bool
+    invertTheme: PropTypes.bool,
   };
 
   static defaultProps = {
-    select: state => state,
+    select: (state) => state,
     theme: 'nicinabox',
     preserveScrollTop: true,
-    invertTheme: false
+    invertTheme: false,
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -119,16 +119,16 @@ class ChartMonitor extends Component {
         colors: {
           default: theme.base0B,
           collapsed: theme.base0B,
-          parent: theme.base0E
+          parent: theme.base0E,
         },
-        radius: 7
+        radius: 7,
       },
       text: {
         colors: {
           default: theme.base0D,
-          hover: theme.base06
-        }
-      }
+          hover: theme.base06,
+        },
+      },
     };
   }
 
@@ -144,8 +144,8 @@ class ChartMonitor extends Component {
         'background-color': theme.base06,
         opacity: '0.7',
         'border-radius': '5px',
-        padding: '5px'
-      }
+        padding: '5px',
+      },
     };
 
     const defaultOptions = {
@@ -156,7 +156,7 @@ class ChartMonitor extends Component {
       heightBetweenNodesCoeff: 1,
       widthBetweenNodesCoeff: 1.3,
       tooltipOptions,
-      style: this.getChartStyle()
+      style: this.getChartStyle(),
     };
 
     return deepmerge(defaultOptions, props);
