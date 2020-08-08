@@ -9,7 +9,7 @@ import ActionList from './ActionList';
 import ActionPreview from './ActionPreview';
 import getInspectedState from './utils/getInspectedState';
 import createDiffPatcher from './createDiffPatcher';
-import { getBase16Theme } from 'react-base16-styling';
+import { getBase16Theme, invertTheme } from 'react-base16-styling';
 import { reducer, updateMonitorState } from './redux';
 import { ActionCreators } from 'redux-devtools';
 
@@ -99,7 +99,9 @@ function createIntermediateState(props, monitorState) {
 
 function createThemeState(props) {
   const base16Theme = getBase16Theme(props.theme, base16Themes);
-  const styling = createStylingFromTheme(props.theme, props.invertTheme);
+
+  const theme = props.invertTheme ? invertTheme(props.theme) : props.theme;
+  const styling = createStylingFromTheme(theme);
 
   return { base16Theme, styling };
 }
