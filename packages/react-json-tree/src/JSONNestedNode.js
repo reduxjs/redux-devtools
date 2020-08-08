@@ -90,6 +90,7 @@ export default class JSONNestedNode extends React.Component {
       PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     ).isRequired,
     labelRenderer: PropTypes.func.isRequired,
+    lineRenderer: PropTypes.func.isRequired,
     shouldExpandNode: PropTypes.func,
     level: PropTypes.number.isRequired,
     sortObjectKeys: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
@@ -140,6 +141,7 @@ export default class JSONNestedNode extends React.Component {
       collectionLimit,
       keyPath,
       labelRenderer,
+      lineRenderer,
       expandable
     } = this.props;
     const { expanded } = this.state;
@@ -157,27 +159,21 @@ export default class JSONNestedNode extends React.Component {
       nodeType,
       data,
       itemType,
-      createItemString(data, collectionLimit)
+      createItemString(data, collectionLimit),
+      ...keyPath
     );
     const stylingArgs = [keyPath, nodeType, expanded, expandable];
 
-    return hideRoot ? (
-      <li {...styling('rootNode', ...stylingArgs)}>
-        <ul {...styling('rootNodeChildren', ...stylingArgs)}>
-          {renderedChildren}
-        </ul>
-      </li>
-    ) : (
-      <li {...styling('nestedNode', ...stylingArgs)}>
-        {expandable && (
-          <JSONArrow
-            styling={styling}
-            nodeType={nodeType}
-            expanded={expanded}
-            onClick={this.handleClick}
-          />
-        )}
-        <label
+    const labelItem = <>
+      {expandable && (
+        <JSONArrow
+          styling={styling}
+          nodeType={nodeType}
+          expanded={expanded}
+          onClick={this.handleClick}
+        />
+      )}
+      <label
           {...styling(['label', 'nestedNodeLabel'], ...stylingArgs)}
           onClick={this.handleClick}
         >
@@ -189,11 +185,25 @@ export default class JSONNestedNode extends React.Component {
         >
           {renderedItemString}
         </span>
-        <ul {...styling('nestedNodeChildren', ...stylingArgs)}>
+        </>
+
+     const valueItem = 
+            <ul {...styling('nestedNodeChildren', ...stylingArgs)}>
+          {renderedChildren}
+        </ul>
+        
+    
+    return hideRoot ? (
+      <li {...styling('rootNode', ...stylingArgs)}>
+        <ul {...styling('rootNodeChildren', ...stylingArgs)}>
           {renderedChildren}
         </ul>
       </li>
-    );
+    ) : 
+      <li  {...styling('nestedNode', ...stylingArgs)}>
+      {lineRenderer(labelItem, valueItem, ...stylingArgs)}
+      </li>
+    ;
   }
 
   handleClick = () => {

@@ -9,25 +9,29 @@ const JSONValueNode = ({
   nodeType,
   styling,
   labelRenderer,
+  lineRenderer, 
   keyPath,
   valueRenderer,
   value,
   valueGetter
-}) => (
-  <li {...styling('value', nodeType, keyPath)}>
-    <label {...styling(['label', 'valueLabel'], nodeType, keyPath)}>
-      {labelRenderer(keyPath, nodeType, false, false)}
-    </label>
-    <span {...styling('valueText', nodeType, keyPath)}>
+}) =>  {
+    const labelItem = (<label {...styling(['label', 'valueLabel'], nodeType, keyPath)}>
+     {labelRenderer(keyPath, nodeType, false, false)}
+    </label>)
+    const valueItem = (<span {...styling('valueText', nodeType, keyPath)}>
       {valueRenderer(valueGetter(value), value, ...keyPath)}
-    </span>
+    </span>)
+  return <li {...styling('value', nodeType, keyPath)}>
+  {lineRenderer(labelItem, valueItem, keyPath,nodeType, false, false)}
   </li>
-);
+};
+
 
 JSONValueNode.propTypes = {
   nodeType: PropTypes.string.isRequired,
   styling: PropTypes.func.isRequired,
   labelRenderer: PropTypes.func.isRequired,
+  lineRenderer: PropTypes.func.isRequired,
   keyPath: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ).isRequired,

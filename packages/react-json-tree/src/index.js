@@ -17,6 +17,7 @@ const defaultItemString = (type, data, itemType, itemString) => (
   </span>
 );
 const defaultLabelRenderer = ([label]) => <span>{label}:</span>;
+const defaultLineRenderer = (labelItem, valueItem, [other]) => <>{labelItem}{valueItem}</>;
 const noCustomNode = () => false;
 
 function checkLegacyTheming(theme, props) {
@@ -89,6 +90,7 @@ export default class JSONTree extends React.Component {
     keyPath: ['root'],
     getItemString: defaultItemString,
     labelRenderer: defaultLabelRenderer,
+    lineRenderer: defaultLineRenderer, 
     valueRenderer: identity,
     postprocessValue: identity,
     isCustomNode: noCustomNode,
