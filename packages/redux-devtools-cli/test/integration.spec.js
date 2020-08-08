@@ -6,7 +6,7 @@ describe('Server', function() {
   var scServer;
   beforeAll(function(done) {
     scServer = childProcess.fork(__dirname + '/../bin/redux-devtools.js');
-    setTimeout(done, 2000);
+    setTimeout(done, 3000);
   });
 
   afterAll(function() {

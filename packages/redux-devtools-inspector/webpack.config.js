@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
+var { CleanWebpackPlugin } = require('clean-webpack-plugin');
 var ExportFilesWebpackPlugin = require('export-files-webpack-plugin');
 
 var pkg = require('./package.json');
@@ -23,11 +23,10 @@ module.exports = {
     filename: 'js/bundle.js'
   },
   plugins: [
-    new CleanWebpackPlugin(isProduction ? ['demo/dist'] : []),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: 'demo/src/index.html',
-      filename: 'index.html',
       package: pkg
     }),
     new webpack.DefinePlugin({

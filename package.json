@@ -2,15 +2,15 @@
   "private": true,
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^3.6.0",
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.5",
     "husky": "^4.2.5",
-    "jest": "^24.9.0",
+    "jest": "^26.2.2",
     "lerna": "^3.22.1",
-    "lint-staged": "^8.2.1",
+    "lint-staged": "^10.2.11",
     "prettier": "^1.19.1"
   },
   "scripts": {
@@ -36,7 +36,7 @@
     "packages/redux-slider-monitor/examples/todomvc"
   ],
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=10.13.0"
   },
   "husky": {
     "hooks": {
@@ -46,12 +46,10 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",
-      "yarn lint:fix",
-      "git add"
+      "yarn lint:fix"
     ],
     "*.{json,css,html,md}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   }
 }

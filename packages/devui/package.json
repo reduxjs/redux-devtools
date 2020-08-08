@@ -15,7 +15,7 @@
   "scripts": {
     "start": "npm run storybook",
     "build": "rimraf ./lib && babel ./src --out-dir ./lib --ignore tests,stories",
-    "lint:css": "stylelint './src/**/styles/*.js'",
+    "lint:css": "stylelint \"./src/**/styles/*.js\"",
     "test:update": "npm run jest -- -u",
     "test": "jest --no-cache",
     "storybook": "start-storybook -p 9001 -c .storybook -s ./fonts",
@@ -29,7 +29,7 @@
   "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.0",
+    "@babel/core": "^7.11.1",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-decorators": "^7.10.5",
     "@babel/plugin-proposal-export-default-from": "^7.10.4",
@@ -43,15 +43,15 @@
     "@storybook/react": "4.1.18",
     "babel-loader": "^8.1.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-adapter-react-16": "^1.15.3",
     "enzyme-to-json": "^3.5.0",
-    "git-url-parse": "^7.2.0",
-    "jest": "^24.9.0",
-    "jsdom": "^11.12.0",
+    "git-url-parse": "^11.1.2",
+    "jest": "^26.2.2",
+    "jsdom": "^16.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-test-renderer": "^16.13.1",
-    "rimraf": "^2.7.1",
+    "rimraf": "^3.0.2",
     "stylelint": "^7.13.0",
     "stylelint-config-standard": "^15.0.1",
     "stylelint-processor-styled-components": "^0.0.4"
@@ -72,7 +72,9 @@
     "styled-components": "^2.4.1"
   },
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setup.js"
+    ]
   },
   "main": "lib/index.js"
 }
