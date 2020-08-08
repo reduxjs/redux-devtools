@@ -9,7 +9,7 @@ import { changeTheme } from '../../actions';
 class Themes extends Component {
   static propTypes = {
     changeTheme: PropTypes.func.isRequired,
-    theme: PropTypes.object.isRequired
+    theme: PropTypes.object.isRequired,
   };
 
   render() {
@@ -17,7 +17,7 @@ class Themes extends Component {
     const formData = {
       theme: theme.theme,
       scheme: theme.scheme,
-      dark: !theme.light
+      dark: !theme.light,
     };
 
     return (
@@ -28,17 +28,17 @@ class Themes extends Component {
             properties: {
               theme: {
                 type: 'string',
-                enum: listThemes()
+                enum: listThemes(),
               },
               scheme: {
                 title: 'color scheme',
                 type: 'string',
-                enum: listSchemes()
+                enum: listSchemes(),
               },
               dark: {
-                type: 'boolean'
-              }
-            }
+                type: 'boolean',
+              },
+            },
           }}
           formData={formData}
           noSubmit
@@ -51,13 +51,13 @@ class Themes extends Component {
 
 function mapStateToProps(state) {
   return {
-    theme: state.theme
+    theme: state.theme,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeTheme: bindActionCreators(changeTheme, dispatch)
+    changeTheme: bindActionCreators(changeTheme, dispatch),
   };
 }
 

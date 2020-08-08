@@ -39,15 +39,15 @@ async function unmap(
   let fileContents = typeof _fileUri === 'object' ? _fileUri.contents : null;
   let fileUri = typeof _fileUri === 'object' ? _fileUri.uri : _fileUri;
   if (fileContents == null) {
-    fileContents = await fetch(fileUri).then(res => res.text());
+    fileContents = await fetch(fileUri).then((res) => res.text());
   }
   const map = await getSourceMap(fileUri, fileContents);
-  return frames.map(frame => {
+  return frames.map((frame) => {
     const {
       functionName,
       lineNumber,
       columnNumber,
-      _originalLineNumber
+      _originalLineNumber,
     } = frame;
     if (_originalLineNumber != null) {
       return frame;
@@ -67,16 +67,16 @@ async function unmap(
     const source = map
       .getSources()
       // Prepare path for normalization; see comment above for reasoning.
-      .map(s => s.replace(/[\\]+/g, '/'))
-      .filter(p => {
+      .map((s) => s.replace(/[\\]+/g, '/'))
+      .filter((p) => {
         p = path.normalize(p);
         const i = p.lastIndexOf(fN);
         return i !== -1 && i === p.length - fN.length;
       })
-      .map(p => ({
+      .map((p) => ({
         token: p,
         seps: count(path.sep, path.normalize(p)),
-        penalties: count('node_modules', p) + count('~', p)
+        penalties: count('node_modules', p) + count('~', p),
       }))
       .sort((a, b) => {
         const s = Math.sign(a.seps - b.seps);

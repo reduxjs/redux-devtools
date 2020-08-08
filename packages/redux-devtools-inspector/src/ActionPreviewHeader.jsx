@@ -6,18 +6,18 @@ const ActionPreviewHeader = ({
   onInspectPath,
   tabName,
   onSelectTab,
-  tabs
+  tabs,
 }) => (
   <div key="previewHeader" {...styling('previewHeader')}>
     <div {...styling('tabSelector')}>
-      {tabs.map(tab => (
+      {tabs.map((tab) => (
         <div
           onClick={() => onSelectTab(tab.name)}
           key={tab.name}
           {...styling(
             [
               'selectorButton',
-              tab.name === tabName && 'selectorButtonSelected'
+              tab.name === tabName && 'selectorButtonSelected',
             ],
             tab.name === tabName
           )}

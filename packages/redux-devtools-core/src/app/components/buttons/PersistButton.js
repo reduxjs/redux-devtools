@@ -10,7 +10,7 @@ class LockButton extends Component {
   static propTypes = {
     persisted: PropTypes.bool,
     disabled: PropTypes.bool,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -39,13 +39,13 @@ class LockButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    persisted: state.instances.persisted
+    persisted: state.instances.persisted,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onClick: bindActionCreators(togglePersist, dispatch)
+    onClick: bindActionCreators(togglePersist, dispatch),
   };
 }
 

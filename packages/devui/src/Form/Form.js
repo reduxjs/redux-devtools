@@ -49,5 +49,5 @@ Form.propTypes = {
   formData: PropTypes.any,
   widgets: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-  )
+  ),
 };

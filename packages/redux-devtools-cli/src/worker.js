@@ -15,7 +15,7 @@ class Worker extends SCWorker {
 
     app.use(routes(options, store, scServer));
 
-    scServer.addMiddleware(scServer.MIDDLEWARE_EMIT, function(req, next) {
+    scServer.addMiddleware(scServer.MIDDLEWARE_EMIT, function (req, next) {
       var channel = req.event;
       var data = req.data;
       if (
@@ -30,23 +30,23 @@ class Worker extends SCWorker {
       next();
     });
 
-    scServer.addMiddleware(scServer.MIDDLEWARE_SUBSCRIBE, function(req, next) {
+    scServer.addMiddleware(scServer.MIDDLEWARE_SUBSCRIBE, function (req, next) {
       next();
       if (req.channel === 'report') {
         store
           .list()
-          .then(function(data) {
+          .then(function (data) {
             req.socket.emit(req.channel, { type: 'list', data: data });
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.error(error); // eslint-disable-line no-console
           });
       }
     });
 
-    scServer.on('connection', function(socket) {
+    scServer.on('connection', function (socket) {
       var channelToWatch, channelToEmit;
-      socket.on('login', function(credentials, respond) {
+      socket.on('login', function (credentials, respond) {
         if (credentials === 'master') {
           channelToWatch = 'respond';
           channelToEmit = 'log';
@@ -54,28 +54,28 @@ class Worker extends SCWorker {
           channelToWatch = 'log';
           channelToEmit = 'respond';
         }
-        this.exchange.subscribe('sc-' + socket.id).watch(function(msg) {
+        this.exchange.subscribe('sc-' + socket.id).watch(function (msg) {
           socket.emit(channelToWatch, msg);
         });
         respond(null, channelToWatch);
       });
-      socket.on('getReport', function(id, respond) {
+      socket.on('getReport', function (id, respond) {
         store
           .get(id)
-          .then(function(data) {
+          .then(function (data) {
             respond(null, data);
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.error(error); // eslint-disable-line no-console
           });
       });
-      socket.on('disconnect', function() {
+      socket.on('disconnect', function () {
         var channel = this.exchange.channel('sc-' + socket.id);
         channel.unsubscribe();
         channel.destroy();
         scServer.exchange.publish(channelToEmit, {
           id: socket.id,
-          type: 'DISCONNECTED'
+          type: 'DISCONNECTED',
         });
       });
     });

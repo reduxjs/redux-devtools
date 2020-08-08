@@ -25,18 +25,18 @@ export default function createDevTools(children) {
   const monitorElement = Children.only(children);
   const monitorProps = monitorElement.props;
   const Monitor = monitorElement.type;
-  const ConnectedMonitor = connect(state => state)(Monitor);
+  const ConnectedMonitor = connect((state) => state)(Monitor);
 
   return class DevTools extends Component {
     static contextTypes = {
-      store: PropTypes.object
+      store: PropTypes.object,
     };
 
     static propTypes = {
-      store: PropTypes.object
+      store: PropTypes.object,
     };
 
-    static instrument = options =>
+    static instrument = (options) =>
       instrument(
         (state, action) => Monitor.update(monitorProps, state, action),
         options
@@ -83,7 +83,7 @@ export default function createDevTools(children) {
         }
         return (
           <ReactReduxContext.Consumer>
-            {props => {
+            {(props) => {
               if (!props || !props.store) {
                 logError('NoStore');
                 return null;

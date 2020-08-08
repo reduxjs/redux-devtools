@@ -7,83 +7,83 @@ module.exports = {
     properties: {
       name: {
         type: 'string',
-        title: 'Full name'
+        title: 'Full name',
       },
       age: {
         type: 'integer',
-        title: 'Age'
+        title: 'Age',
       },
       bio: {
         type: 'string',
-        title: 'Bio'
+        title: 'Bio',
       },
       password: {
         type: 'string',
         title: 'Password',
-        minLength: 3
+        minLength: 3,
       },
       multipleChoicesList: {
         type: 'array',
         title: 'A multiple choices list',
         items: {
           type: 'string',
-          enum: ['foo', 'bar', 'fuzz']
+          enum: ['foo', 'bar', 'fuzz'],
         },
-        uniqueItems: true
+        uniqueItems: true,
       },
       numberEnum: {
         type: 'number',
         title: 'Number enum',
-        enum: [1, 2, 3]
+        enum: [1, 2, 3],
       },
       numberEnumRadio: {
         type: 'number',
         title: 'Number enum',
-        enum: [1, 2, 3]
+        enum: [1, 2, 3],
       },
       integerRange: {
         title: 'Integer range',
         type: 'integer',
         minimum: 42,
-        maximum: 100
-      }
-    }
+        maximum: 100,
+      },
+    },
   },
   uiSchema: {
     name: {
-      'ui:autofocus': true
+      'ui:autofocus': true,
     },
     age: {
-      'ui:widget': 'updown'
+      'ui:widget': 'updown',
     },
     bio: {
-      'ui:widget': 'textarea'
+      'ui:widget': 'textarea',
     },
     password: {
       'ui:widget': 'password',
-      'ui:help': 'Hint: Make it strong!'
+      'ui:help': 'Hint: Make it strong!',
     },
     date: {
-      'ui:widget': 'alt-datetime'
+      'ui:widget': 'alt-datetime',
     },
     multipleChoicesList: {
-      'ui:widget': 'checkboxes'
+      'ui:widget': 'checkboxes',
     },
     numberEnumRadio: {
       'ui:widget': 'radio',
       'ui:options': {
-        inline: true
-      }
+        inline: true,
+      },
     },
     integerRange: {
-      'ui:widget': 'range'
-    }
+      'ui:widget': 'range',
+    },
   },
   formData: {
     name: 'Chuck Norris',
     age: 75,
     bio: 'Roundhouse kicking asses since 1940',
     password: 'noneed',
-    integerRange: 52
-  }
+    integerRange: 52,
+  },
 };

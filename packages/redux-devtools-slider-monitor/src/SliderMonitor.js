@@ -22,26 +22,26 @@ export default class SliderMonitor extends (PureComponent || Component) {
     actionsById: PropTypes.object,
     currentStateIndex: PropTypes.number,
     monitorState: PropTypes.shape({
-      initialScrollTop: PropTypes.number
+      initialScrollTop: PropTypes.number,
     }),
     preserveScrollTop: PropTypes.bool,
     stagedActions: PropTypes.array,
     select: PropTypes.func.isRequired,
     hideResetButton: PropTypes.bool,
     theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    keyboardEnabled: PropTypes.bool
+    keyboardEnabled: PropTypes.bool,
   };
 
   static defaultProps = {
-    select: state => state,
+    select: (state) => state,
     theme: 'nicinabox',
     preserveScrollTop: true,
-    keyboardEnabled: true
+    keyboardEnabled: true,
   };
 
   state = {
     timer: undefined,
-    replaySpeed: '1x'
+    replaySpeed: '1x',
   };
 
   componentDidMount() {
@@ -76,7 +76,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     this.props.dispatch(reset());
   };
 
-  handleKeyPress = event => {
+  handleKeyPress = (event) => {
     if (!this.props.keyboardEnabled) {
       return null;
     }
@@ -105,7 +105,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     return null;
   };
 
-  handleSliderChange = value => {
+  handleSliderChange = (value) => {
     if (this.state.timer) {
       this.pauseReplay();
     }
@@ -143,7 +143,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
       if (counter >= computedStates.length - 1) {
         clearInterval(this.state.timer);
         this.setState({
-          timer: undefined
+          timer: undefined,
         });
       }
     }, speed);
@@ -165,7 +165,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     }
   };
 
-  loop = index => {
+  loop = (index) => {
     let currentTimestamp = Date.now();
     let timestampDiff = this.getLatestTimestampDiff(index);
 
@@ -188,38 +188,38 @@ export default class SliderMonitor extends (PureComponent || Component) {
         currentTimestamp = Date.now();
 
         this.setState({
-          timer: requestAnimationFrame(aLoop)
+          timer: requestAnimationFrame(aLoop),
         });
       } else {
         this.setState({
-          timer: requestAnimationFrame(aLoop)
+          timer: requestAnimationFrame(aLoop),
         });
       }
     };
 
     if (index !== this.props.computedStates.length - 1) {
       this.setState({
-        timer: requestAnimationFrame(aLoop)
+        timer: requestAnimationFrame(aLoop),
       });
     }
   };
 
-  getLatestTimestampDiff = index =>
+  getLatestTimestampDiff = (index) =>
     this.getTimestampOfStateIndex(index + 1) -
     this.getTimestampOfStateIndex(index);
 
-  getTimestampOfStateIndex = stateIndex => {
+  getTimestampOfStateIndex = (stateIndex) => {
     const id = this.props.stagedActionIds[stateIndex];
     return this.props.actionsById[id].timestamp;
   };
 
-  pauseReplay = cb => {
+  pauseReplay = (cb) => {
     if (this.state.timer) {
       cancelAnimationFrame(this.state.timer);
       clearInterval(this.state.timer);
       this.setState(
         {
-          timer: undefined
+          timer: undefined,
         },
         () => {
           if (typeof cb === 'function') {
@@ -246,7 +246,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     }
   };
 
-  changeReplaySpeed = replaySpeed => {
+  changeReplaySpeed = (replaySpeed) => {
     this.setState({ replaySpeed });
 
     if (this.state.timer) {
@@ -266,7 +266,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
       computedStates,
       actionsById,
       stagedActionIds,
-      hideResetButton
+      hideResetButton,
     } = this.props;
     const { replaySpeed } = this.state;
     const theme = this.setUpTheme();
@@ -326,7 +326,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
           <Divider key="divider" theme={theme} />,
           <Button key="reset" theme={theme} onClick={this.handleReset}>
             Reset
-          </Button>
+          </Button>,
         ]}
       </Toolbar>
     );

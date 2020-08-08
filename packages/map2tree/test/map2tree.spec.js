@@ -11,12 +11,12 @@ test('# rootNodeKey', () => {
 describe('# shallow map', () => {
   test('## null', () => {
     const map = {
-      a: null
+      a: null,
     };
 
     const expected = {
       name: 'state',
-      children: [{ name: 'a', value: null }]
+      children: [{ name: 'a', value: null }],
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -26,15 +26,15 @@ describe('# shallow map', () => {
   test('## value', () => {
     const map = {
       a: 'foo',
-      b: 'bar'
+      b: 'bar',
     };
 
     const expected = {
       name: 'state',
       children: [
         { name: 'a', value: 'foo' },
-        { name: 'b', value: 'bar' }
-      ]
+        { name: 'b', value: 'bar' },
+      ],
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -43,12 +43,12 @@ describe('# shallow map', () => {
 
   test('## object', () => {
     const map = {
-      a: { aa: 'foo' }
+      a: { aa: 'foo' },
     };
 
     const expected = {
       name: 'state',
-      children: [{ name: 'a', children: [{ name: 'aa', value: 'foo' }] }]
+      children: [{ name: 'a', children: [{ name: 'aa', value: 'foo' }] }],
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -57,7 +57,7 @@ describe('# shallow map', () => {
 
   test('## immutable Map', () => {
     const map = {
-      a: immutable.fromJS({ aa: 'foo', ab: 'bar' })
+      a: immutable.fromJS({ aa: 'foo', ab: 'bar' }),
     };
 
     const expected = {
@@ -67,10 +67,10 @@ describe('# shallow map', () => {
           name: 'a',
           children: [
             { name: 'aa', value: 'foo' },
-            { name: 'ab', value: 'bar' }
-          ]
-        }
-      ]
+            { name: 'ab', value: 'bar' },
+          ],
+        },
+      ],
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -80,7 +80,7 @@ describe('# shallow map', () => {
 describe('# deep map', () => {
   test('## null', () => {
     const map = {
-      a: { aa: null }
+      a: { aa: null },
     };
 
     const expected = {
@@ -91,11 +91,11 @@ describe('# deep map', () => {
           children: [
             {
               name: 'aa',
-              value: null
-            }
-          ]
-        }
-      ]
+              value: null,
+            },
+          ],
+        },
+      ],
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -104,7 +104,7 @@ describe('# deep map', () => {
 
   test('## object', () => {
     const map = {
-      a: { aa: { aaa: 'foo' } }
+      a: { aa: { aaa: 'foo' } },
     };
 
     const expected = {
@@ -115,11 +115,11 @@ describe('# deep map', () => {
           children: [
             {
               name: 'aa',
-              children: [{ name: 'aaa', value: 'foo' }]
-            }
-          ]
-        }
-      ]
+              children: [{ name: 'aaa', value: 'foo' }],
+            },
+          ],
+        },
+      ],
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -129,7 +129,7 @@ describe('# deep map', () => {
 
 describe('# array map', () => {
   const map = {
-    a: [1, 2]
+    a: [1, 2],
   };
 
   test('## push', () => {
@@ -140,10 +140,10 @@ describe('# array map', () => {
           name: 'a',
           children: [
             { name: 'a[0]', value: 1 },
-            { name: 'a[1]', value: 2 }
-          ]
-        }
-      ]
+            { name: 'a[1]', value: 2 },
+          ],
+        },
+      ],
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -159,10 +159,10 @@ describe('# array map', () => {
           name: 'a',
           children: [
             { name: 'a[1]', value: 2 },
-            { name: 'a[0]', value: 1 }
-          ]
-        }
-      ]
+            { name: 'a[0]', value: 1 },
+          ],
+        },
+      ],
     };
 
     expect(map2tree(map, options)).toEqual(expected);
@@ -171,7 +171,7 @@ describe('# array map', () => {
 
   test('## null', () => {
     const map = {
-      a: [null]
+      a: [null],
     };
 
     const expected = {
@@ -179,9 +179,9 @@ describe('# array map', () => {
       children: [
         {
           name: 'a',
-          children: [{ name: 'a[0]', value: null }]
-        }
-      ]
+          children: [{ name: 'a[0]', value: null }],
+        },
+      ],
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -192,7 +192,7 @@ describe('# array map', () => {
 describe('# collection map', () => {
   test('## value', () => {
     const map = {
-      a: [{ aa: 1 }, { aa: 2 }]
+      a: [{ aa: 1 }, { aa: 2 }],
     };
 
     const expected = {
@@ -202,10 +202,10 @@ describe('# collection map', () => {
           name: 'a',
           children: [
             { name: 'a[0]', object: { aa: 1 } },
-            { name: 'a[1]', object: { aa: 2 } }
-          ]
-        }
-      ]
+            { name: 'a[1]', object: { aa: 2 } },
+          ],
+        },
+      ],
     };
 
     expect(map2tree(map)).toEqual(expected);
@@ -214,7 +214,7 @@ describe('# collection map', () => {
 
   test('## object', () => {
     const map = {
-      a: [{ aa: { aaa: 'foo' } }]
+      a: [{ aa: { aaa: 'foo' } }],
     };
 
     const expected = {
@@ -222,9 +222,9 @@ describe('# collection map', () => {
       children: [
         {
           name: 'a',
-          children: [{ name: 'a[0]', object: { aa: { aaa: 'foo' } } }]
-        }
-      ]
+          children: [{ name: 'a[0]', object: { aa: { aaa: 'foo' } } }],
+        },
+      ],
     };
 
     expect(map2tree(map)).toEqual(expected);

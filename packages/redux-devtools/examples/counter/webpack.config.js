@@ -8,12 +8,12 @@ module.exports = {
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
-    './src/index'
+    './src/index',
   ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/static/',
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   module: {
@@ -22,8 +22,8 @@ module.exports = {
         test: /\.js$/,
         loaders: ['babel-loader'],
         exclude: /node_modules/,
-        include: path.join(__dirname, 'src')
-      }
-    ]
-  }
+        include: path.join(__dirname, 'src'),
+      },
+    ],
+  },
 };

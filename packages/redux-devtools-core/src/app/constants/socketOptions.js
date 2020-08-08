@@ -5,8 +5,8 @@ const socketOptions = {
   autoReconnect: true,
   secure: true,
   autoReconnectOptions: {
-    randomness: 30000
-  }
+    randomness: 30000,
+  },
 };
 
 export default socketOptions;

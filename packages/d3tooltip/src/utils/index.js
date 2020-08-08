@@ -3,5 +3,5 @@ import functor from './functor';
 
 export default {
   prependClass,
-  functor
+  functor,
 };

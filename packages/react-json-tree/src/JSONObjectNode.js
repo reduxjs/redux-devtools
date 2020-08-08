@@ -23,7 +23,7 @@ const JSONObjectNode = ({ data, ...props }) => (
 
 JSONObjectNode.propTypes = {
   data: PropTypes.object,
-  nodeType: PropTypes.string
+  nodeType: PropTypes.string,
 };
 
 export default JSONObjectNode;

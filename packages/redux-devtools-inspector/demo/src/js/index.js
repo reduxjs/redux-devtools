@@ -10,7 +10,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import {
   syncHistoryWithStore,
   routerReducer,
-  routerMiddleware
+  routerMiddleware,
 } from 'react-router-redux';
 import { createDevTools, persistState } from 'redux-devtools';
 import DevtoolsInspector from '../../../src/DevtoolsInspector';
@@ -30,14 +30,14 @@ const CustomComponent = () => (
       justifyContent: 'center',
       width: '100%',
       height: '100%',
-      minHeight: '20rem'
+      minHeight: '20rem',
     }}
   >
     <div>Custom Tab Content</div>
   </div>
 );
 
-const getDevTools = options =>
+const getDevTools = (options) =>
   createDevTools(
     <DockMonitor
       defaultIsVisible
@@ -50,12 +50,12 @@ const getDevTools = options =>
         shouldPersistState
         invertTheme={!options.dark}
         supportImmutable={options.supportImmutable}
-        tabs={defaultTabs => [
+        tabs={(defaultTabs) => [
           {
             name: 'Custom Tab',
-            component: CustomComponent
+            component: CustomComponent,
           },
-          ...defaultTabs
+          ...defaultTabs,
         ]}
       />
     </DockMonitor>
@@ -84,7 +84,7 @@ const enhancer = compose(
 const store = createStore(
   combineReducers({
     ...reducers,
-    routing: routerReducer
+    routing: routerReducer,
   }),
   {},
   enhancer
@@ -102,7 +102,7 @@ const router = (
   </Router>
 );
 
-const renderApp = options => {
+const renderApp = (options) => {
   DevTools = getDevTools(options);
   const useDevtoolsExtension =
     !!window.__REDUX_DEVTOOLS_EXTENSION__ && options.useExtension;

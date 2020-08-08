@@ -1,3 +1,3 @@
 module.exports = {
-  setupFiles: ['devui/tests/setup.js']
+  setupFiles: ['devui/tests/setup.js'],
 };

@@ -13,7 +13,7 @@ export const DispatcherContainer = styled.div`
   flex-direction: column;
   flex-shrink: 0;
   padding-top: 2px;
-  background: ${props => props.theme.base01};
+  background: ${(props) => props.theme.base01};
 `;
 
 export const CodeContainer = styled.div`
@@ -25,7 +25,7 @@ export const CodeContainer = styled.div`
 export const ActionContainer = styled.div`
   display: table;
   width: 100%;
-  color: ${props => props.theme.base06};
+  color: ${(props) => props.theme.base06};
 
   > div {
     display: table-row;
@@ -50,7 +50,7 @@ export const ActionContainer = styled.div`
 class Dispatcher extends Component {
   static propTypes = {
     options: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   };
 
   state = {
@@ -59,7 +59,7 @@ class Dispatcher extends Component {
       this.props.options.lib === 'redux' ? "{\n  type: ''\n}" : 'this.',
     args: [],
     rest: '[]',
-    changed: false
+    changed: false,
   };
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -69,7 +69,7 @@ class Dispatcher extends Component {
     ) {
       this.setState({
         selected: 'default',
-        args: []
+        args: [],
       });
     }
   }
@@ -81,7 +81,7 @@ class Dispatcher extends Component {
     );
   }
 
-  selectActionCreator = selected => {
+  selectActionCreator = (selected) => {
     if (selected === 'actions-help') {
       window.open(
         'https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/' +
@@ -97,20 +97,20 @@ class Dispatcher extends Component {
     this.setState({ selected, args, rest: '[]', changed: false });
   };
 
-  handleArg = argIndex => value => {
+  handleArg = (argIndex) => (value) => {
     const args = [
       ...this.state.args.slice(0, argIndex),
       value || undefined,
-      ...this.state.args.slice(argIndex + 1)
+      ...this.state.args.slice(argIndex + 1),
     ];
     this.setState({ args, changed: true });
   };
 
-  handleRest = rest => {
+  handleRest = (rest) => {
     this.setState({ rest, changed: true });
   };
 
-  handleCustomAction = customAction => {
+  handleCustomAction = (customAction) => {
     this.setState({ customAction, changed: true });
   };
 
@@ -128,7 +128,7 @@ class Dispatcher extends Component {
         name: this.props.options.actionCreators[selected].name,
         selected,
         args,
-        rest
+        rest,
       });
     } else {
       this.props.dispatch(customAction);
@@ -179,13 +179,13 @@ class Dispatcher extends Component {
       options = options.concat(
         actionCreators.map(({ name, args }, i) => ({
           value: i,
-          label: `${name}(${args.join(', ')})`
+          label: `${name}(${args.join(', ')})`,
         }))
       );
     } else {
       options.push({
         value: 'actions-help',
-        label: 'Add your app built-in actions…'
+        label: 'Add your app built-in actions…',
       });
     }
 
@@ -210,7 +210,7 @@ class Dispatcher extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch: bindActionCreators(dispatchRemotely, dispatch)
+    dispatch: bindActionCreators(dispatchRemotely, dispatch),
   };
 }
 

@@ -10,8 +10,8 @@ export default function configureStore(callback, key) {
     keyPrefix: `redux-devtools${key || ''}:`,
     blacklist: ['instances', 'socket'],
     storage: localForage,
-    serialize: data => data,
-    deserialize: data => data
+    serialize: (data) => data,
+    deserialize: (data) => data,
   };
 
   getStoredState(persistConfig, (err, restoredState) => {

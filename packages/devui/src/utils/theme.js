@@ -5,10 +5,7 @@ import * as additionalSchemes from '../colorSchemes';
 import invertColors from '../utils/invertColors';
 
 export const schemes = { ...baseSchemes, ...additionalSchemes };
-export const listSchemes = () =>
-  Object.keys(schemes)
-    .slice(1)
-    .sort(); // remove `__esModule`
+export const listSchemes = () => Object.keys(schemes).slice(1).sort(); // remove `__esModule`
 export const listThemes = () => Object.keys(themes);
 
 export const getTheme = ({ theme: type, scheme, light }) => {
@@ -23,7 +20,7 @@ export const getTheme = ({ theme: type, scheme, light }) => {
   let theme = {
     type,
     light,
-    ...themes.default(colors)
+    ...themes.default(colors),
   };
   if (type !== 'default') {
     theme = { ...theme, ...themes[type](colors) };

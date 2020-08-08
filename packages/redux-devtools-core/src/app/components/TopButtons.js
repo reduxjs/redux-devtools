@@ -15,7 +15,7 @@ export default class TopButtons extends Component {
     // shouldSync: PropTypes.bool,
     liftedState: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    options: PropTypes.object.isRequired
+    options: PropTypes.object.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -48,7 +48,7 @@ export default class TopButtons extends Component {
       computedStates,
       skippedActionIds,
       isPaused,
-      isLocked
+      isLocked,
     } = this.props.liftedState;
     const noStates = computedStates.length < 2;
 

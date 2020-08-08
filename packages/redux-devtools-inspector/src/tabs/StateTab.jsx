@@ -10,7 +10,7 @@ const StateTab = ({
   invertTheme,
   labelRenderer,
   dataTypeKey,
-  isWideLayout
+  isWideLayout,
 }) => (
   <JSONTree
     labelRenderer={labelRenderer}

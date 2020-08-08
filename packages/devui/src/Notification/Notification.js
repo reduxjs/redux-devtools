@@ -49,9 +49,9 @@ Notification.propTypes = {
   children: PropTypes.any.isRequired,
   type: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
   onClose: PropTypes.func,
-  theme: PropTypes.object
+  theme: PropTypes.object,
 };
 
 Notification.defaultProps = {
-  type: 'info'
+  type: 'info',
 };

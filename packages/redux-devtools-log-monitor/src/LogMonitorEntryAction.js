@@ -5,13 +5,13 @@ const styles = {
   actionBar: {
     paddingTop: 8,
     paddingBottom: 7,
-    paddingLeft: 16
+    paddingLeft: 16,
   },
   payload: {
     margin: 0,
     paddingLeft: 16,
-    overflow: 'auto'
-  }
+    overflow: 'auto',
+  },
 };
 
 export default class LogMonitorAction extends Component {
@@ -25,7 +25,7 @@ export default class LogMonitorAction extends Component {
       <div
         style={{
           ...styles.payload,
-          backgroundColor: this.props.theme.base00
+          backgroundColor: this.props.theme.base00,
         }}
       >
         {Object.keys(payload).length > 0 ? (
@@ -54,7 +54,7 @@ export default class LogMonitorAction extends Component {
         style={{
           backgroundColor: this.props.theme.base02,
           color: this.props.theme.base06,
-          ...this.props.style
+          ...this.props.style,
         }}
       >
         <div style={styles.actionBar} onClick={this.props.onClick}>

@@ -8,13 +8,13 @@ const rootStyle = { padding: '5px 10px' };
 
 export default class StackTraceTab extends Component {
   static defaultProps = {
-    openFile
+    openFile,
   };
   constructor(props) {
     super(props);
 
     this.state = {
-      stackFrames: []
+      stackFrames: [],
     };
   }
   componentDidMount() {
@@ -39,15 +39,15 @@ export default class StackTraceTab extends Component {
 
     const liftedActions = Object.values(liftedActionsById);
     const liftedAction = liftedActions.find(
-      liftedAction => liftedAction.action === action
+      (liftedAction) => liftedAction.action === action
     );
 
     if (liftedAction && typeof liftedAction.stack === 'string') {
       const deserializedError = Object.assign(new Error(), {
-        stack: liftedAction.stack
+        stack: liftedAction.stack,
       });
 
-      getStackFrames(deserializedError).then(stackFrames => {
+      getStackFrames(deserializedError).then((stackFrames) => {
         /* eslint-disable no-console */
         if (process.env.NODE_ENV === 'development')
           console.log('Stack frames: ', stackFrames);
@@ -60,7 +60,7 @@ export default class StackTraceTab extends Component {
         showDocsLink:
           liftedAction.action &&
           liftedAction.action.type &&
-          liftedAction.action.type !== '@@INIT'
+          liftedAction.action.type !== '@@INIT',
       });
     }
   }
@@ -71,7 +71,7 @@ export default class StackTraceTab extends Component {
     const { fileName, lineNumber } = fileLocation;
 
     if (fileName && lineNumber) {
-      const matchingStackFrame = this.state.stackFrames.find(stackFrame => {
+      const matchingStackFrame = this.state.stackFrames.find((stackFrame) => {
         const matches =
           (stackFrame._originalFileName === fileName &&
             stackFrame._originalLineNumber === lineNumber) ||
@@ -93,7 +93,7 @@ export default class StackTraceTab extends Component {
     }
   };
 
-  openDocs = e => {
+  openDocs = (e) => {
     e.stopPropagation();
     window.open(
       'https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Features/Trace.md'

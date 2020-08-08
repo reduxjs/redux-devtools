@@ -19,7 +19,7 @@ const styles = {
     width: '100%',
     height: '100%',
     minWidth: 300,
-    direction: 'ltr'
+    direction: 'ltr',
   },
   elements: {
     position: 'absolute',
@@ -28,8 +28,8 @@ const styles = {
     top: 0,
     bottom: 0,
     overflowX: 'hidden',
-    overflowY: 'auto'
-  }
+    overflowY: 'auto',
+  },
 };
 
 export default class LogMonitor extends Component {
@@ -43,7 +43,7 @@ export default class LogMonitor extends Component {
     skippedActionIds: PropTypes.array,
     monitorState: PropTypes.shape({
       initialScrollTop: PropTypes.number,
-      consecutiveToggleStartId: PropTypes.number
+      consecutiveToggleStartId: PropTypes.number,
     }),
 
     preserveScrollTop: PropTypes.bool,
@@ -52,16 +52,16 @@ export default class LogMonitor extends Component {
     expandActionRoot: PropTypes.bool,
     expandStateRoot: PropTypes.bool,
     markStateDiff: PropTypes.bool,
-    hideMainButtons: PropTypes.bool
+    hideMainButtons: PropTypes.bool,
   };
 
   static defaultProps = {
-    select: state => state,
+    select: (state) => state,
     theme: 'nicinabox',
     preserveScrollTop: true,
     expandActionRoot: true,
     expandStateRoot: true,
-    markStateDiff: false
+    markStateDiff: false,
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -188,7 +188,7 @@ export default class LogMonitor extends Component {
       select,
       expandActionRoot,
       expandStateRoot,
-      markStateDiff
+      markStateDiff,
     } = this.props;
 
     const entryListProps = {
@@ -204,7 +204,7 @@ export default class LogMonitor extends Component {
       expandStateRoot,
       markStateDiff,
       onActionClick: this.handleToggleAction,
-      onActionShiftClick: this.handleToggleConsecutiveAction
+      onActionShiftClick: this.handleToggleConsecutiveAction,
     };
 
     return (

@@ -9,5 +9,5 @@ module.exports = graphiqlExpress({
     '    type,\n' +
     '    title\n' +
     '  }\n' +
-    '}'
+    '}',
 });

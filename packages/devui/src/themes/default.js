@@ -1,4 +1,4 @@
-export default colors => ({
+export default (colors) => ({
   ...colors,
   fontFamily: "'Source Sans Pro', sans-serif",
   codeFontFamily: "'Source Code Pro', monospace",
@@ -10,5 +10,5 @@ export default colors => ({
   selectArrowWidth: 4, // Math.floor(theme.inputHeight / 7)
   inputInternalHeight: 28, // theme.inputHeight - theme.inputBorderWidth * 2
   inputBorderColor: colors.base02,
-  inputFocusedStyle: `border-color: ${colors.base0D}`
+  inputFocusedStyle: `border-color: ${colors.base0D}`,
 });

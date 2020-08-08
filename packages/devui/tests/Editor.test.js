@@ -4,7 +4,7 @@ import { mountToJson } from 'enzyme-to-json';
 import { Editor } from '../src';
 import 'codemirror/mode/javascript/javascript';
 
-describe('Editor', function() {
+describe('Editor', function () {
   const getBoundingClientRect = jest.fn();
   const getClientRects = jest.fn();
 
@@ -19,7 +19,7 @@ describe('Editor', function() {
       return {
         item: () => null,
         length: 0,
-        [Symbol.iterator]: jest.fn()
+        [Symbol.iterator]: jest.fn(),
       };
     };
 

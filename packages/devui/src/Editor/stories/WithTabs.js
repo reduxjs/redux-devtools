@@ -14,7 +14,7 @@ const value2 = `
 /* eslint-disable react/prop-types */
 export default class WithTabs extends Component {
   state = {
-    selected: 'Function 1'
+    selected: 'Function 1',
   };
 
   render() {
@@ -25,16 +25,16 @@ export default class WithTabs extends Component {
           {
             name: 'Function 1',
             component: Editor,
-            selector: () => ({ value: value1, lineNumbers })
+            selector: () => ({ value: value1, lineNumbers }),
           },
           {
             name: 'Function 2',
             component: Editor,
-            selector: () => ({ value: value2, lineNumbers })
-          }
+            selector: () => ({ value: value2, lineNumbers }),
+          },
         ]}
         selected={this.state.selected}
-        onClick={selected => {
+        onClick={(selected) => {
           this.setState({ selected });
         }}
         align={select('align', ['left', 'right', 'center'], 'left')}

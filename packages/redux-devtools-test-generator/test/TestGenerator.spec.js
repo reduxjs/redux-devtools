@@ -9,7 +9,7 @@ import strVanillaTemplate from '../src/vanilla/mocha/template';
 
 const actions = {
   0: { type: 'PERFORM_ACTION', action: { type: '@@INIT' } },
-  1: { type: 'PERFORM_ACTION', action: { type: 'INCREMENT_COUNTER' } }
+  1: { type: 'PERFORM_ACTION', action: { type: 'INCREMENT_COUNTER' } },
 };
 
 const computedStates = [{ state: { counter: 0 } }, { state: { counter: 1 } }];

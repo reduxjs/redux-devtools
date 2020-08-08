@@ -15,13 +15,13 @@ module.exports = function connector(options) {
   /* eslint-disable no-console */
   knex.migrate
     .latest()
-    .then(function() {
+    .then(function () {
       return knex.seed.run();
     })
-    .then(function() {
+    .then(function () {
       console.log('   \x1b[0;32m[Done]\x1b[0m Migrations are finished\n');
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.error(error);
     });
   /* eslint-enable no-console */

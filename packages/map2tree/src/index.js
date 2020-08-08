@@ -21,12 +21,12 @@ function getNode(tree, key) {
 
   visit(
     tree,
-    d => {
+    (d) => {
       if (d.name === key) {
         node = d;
       }
     },
-    d => d.children
+    (d) => d.children
   );
 
   return node;
@@ -61,7 +61,7 @@ export default function map2tree(
       for (let i = 0; i < value.length; i++) {
         newNode.children[pushMethod]({
           name: `${key}[${i}]`,
-          [isPlainObject(value[i]) ? 'object' : 'value']: value[i]
+          [isPlainObject(value[i]) ? 'object' : 'value']: value[i],
         });
       }
     } else if (isPlainObject(value)) {

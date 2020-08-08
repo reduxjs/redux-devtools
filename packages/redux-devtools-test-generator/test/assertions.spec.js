@@ -9,7 +9,7 @@ const computedStates = [
   { state: { o1: [{ t: 3 }], o3: { t: 2 } } },
   { state: [0, 1, 2, 3, 4] },
   { state: [0, 3] },
-  { state: [0, 2, 3, 4] }
+  { state: [0, 2, 3, 4] },
 ];
 
 const test = (s1, s2) =>

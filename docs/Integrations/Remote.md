@@ -19,7 +19,7 @@ The client driver provides a way to connect to the server via websockets (see th
 ```js
 var socket = socketCluster.connect({
   hostname: 'localhost',
-  port: 8000
+  port: 8000,
 });
 ```
 
@@ -39,13 +39,13 @@ SocketCluster client handles reconnecting for you, but you still might want to k
 ##### JavaScript
 
 ```js
-socket.on('connect', status => {
+socket.on('connect', (status) => {
   // Here will come the next step
 });
-socket.on('disconnect', code => {
+socket.on('disconnect', (code) => {
   console.warn('Socket disconnected with code', code);
 });
-socket.on('error', error => {
+socket.on('error', (error) => {
   console.warn('Socket error', error);
 });
 ```
@@ -125,7 +125,7 @@ const message = {
   payload: state,
   id: socket.id,
   instanceId: window.btoa(location.href),
-  name: document.title
+  name: document.title,
 };
 socket.emit(socket.id ? 'log' : 'log-noid', message);
 ```

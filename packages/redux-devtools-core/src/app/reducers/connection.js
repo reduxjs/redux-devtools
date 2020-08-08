@@ -3,7 +3,7 @@ import { RECONNECT } from '../constants/socketActionTypes';
 export default function connection(
   state = {
     options: { hostname: 'localhost', port: 8000, secure: false },
-    type: 'remotedev'
+    type: 'remotedev',
   },
   action
 ) {

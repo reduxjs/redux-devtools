@@ -13,7 +13,7 @@ export default class BottomButtons extends Component {
   static propTypes = {
     dispatcherIsOpen: PropTypes.bool,
     sliderIsOpen: PropTypes.bool,
-    options: PropTypes.object.isRequired
+    options: PropTypes.object.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {

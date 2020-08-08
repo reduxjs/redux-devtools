@@ -10,7 +10,7 @@ import * as inspectorThemes from '../themes';
 jss.use(jssVendorPrefixer());
 jss.use(jssNested());
 
-const colorMap = theme => ({
+const colorMap = (theme) => ({
   TEXT_COLOR: theme.base06,
   TEXT_PLACEHOLDER_COLOR: rgba(theme.base06, 60),
   BACKGROUND_COLOR: theme.base00,
@@ -33,10 +33,10 @@ const colorMap = theme => ({
   DIFF_ARROW_COLOR: theme.base0E,
   LINK_COLOR: rgba(theme.base0E, 90),
   LINK_HOVER_COLOR: theme.base0E,
-  ERROR_COLOR: theme.base08
+  ERROR_COLOR: theme.base08,
 });
 
-const getSheetFromColorMap = map => ({
+const getSheetFromColorMap = (map) => ({
   inspector: {
     display: 'flex',
     'flex-direction': 'column',
@@ -48,11 +48,11 @@ const getSheetFromColorMap = map => ({
     'line-height': '1.5em',
 
     'background-color': map.BACKGROUND_COLOR,
-    color: map.TEXT_COLOR
+    color: map.TEXT_COLOR,
   },
 
   inspectorWide: {
-    'flex-direction': 'row'
+    'flex-direction': 'row',
   },
 
   actionList: {
@@ -66,7 +66,7 @@ const getSheetFromColorMap = map => ({
     'flex-direction': 'column',
 
     'background-color': map.BACKGROUND_COLOR,
-    'border-color': map.LIST_BORDER_COLOR
+    'border-color': map.LIST_BORDER_COLOR,
   },
 
   actionListHeader: {
@@ -76,14 +76,14 @@ const getSheetFromColorMap = map => ({
     'border-bottom-width': '1px',
     'border-bottom-style': 'solid',
 
-    'border-color': map.LIST_BORDER_COLOR
+    'border-color': map.LIST_BORDER_COLOR,
   },
 
   actionListRows: {
     overflow: 'auto',
 
     '& div.gu-transit': {
-      opacity: '0.3'
+      opacity: '0.3',
     },
 
     '& div.gu-mirror': {
@@ -92,24 +92,24 @@ const getSheetFromColorMap = map => ({
       height: 'auto !important',
       'border-width': '1px',
       'border-style': 'solid',
-      'border-color': map.LIST_BORDER_COLOR
+      'border-color': map.LIST_BORDER_COLOR,
     },
 
     '& div.gu-hide': {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
 
   actionListHeaderSelector: {
     display: 'inline-flex',
-    'margin-right': '10px'
+    'margin-right': '10px',
   },
 
   actionListWide: {
     'flex-basis': '40%',
     'border-bottom': 'none',
     'border-right-width': '3px',
-    'border-right-style': 'double'
+    'border-right-style': 'double',
   },
 
   actionListItem: {
@@ -122,28 +122,28 @@ const getSheetFromColorMap = map => ({
     'user-select': 'none',
 
     '&:last-child': {
-      'border-bottom-width': 0
+      'border-bottom-width': 0,
     },
 
-    'border-bottom-color': map.BORDER_COLOR
+    'border-bottom-color': map.BORDER_COLOR,
   },
 
   actionListItemSelected: {
-    'background-color': map.SELECTED_BACKGROUND_COLOR
+    'background-color': map.SELECTED_BACKGROUND_COLOR,
   },
 
   actionListItemSkipped: {
-    'background-color': map.SKIPPED_BACKGROUND_COLOR
+    'background-color': map.SKIPPED_BACKGROUND_COLOR,
   },
 
   actionListFromFuture: {
-    opacity: '0.6'
+    opacity: '0.6',
   },
 
   actionListItemButtons: {
     position: 'relative',
     height: '20px',
-    display: 'flex'
+    display: 'flex',
   },
 
   actionListItemTime: {
@@ -155,22 +155,22 @@ const getSheetFromColorMap = map => ({
     'flex-shrink': 0,
 
     'background-color': map.ACTION_TIME_BACK_COLOR,
-    color: map.ACTION_TIME_COLOR
+    color: map.ACTION_TIME_COLOR,
   },
 
   actionListItemSelector: {
-    display: 'inline-flex'
+    display: 'inline-flex',
   },
 
   actionListItemName: {
     overflow: 'hidden',
     'text-overflow': 'ellipsis',
-    'line-height': '20px'
+    'line-height': '20px',
   },
 
   actionListItemNameSkipped: {
     'text-decoration': 'line-through',
-    opacity: 0.3
+    opacity: 0.3,
   },
 
   actionListHeaderSearch: {
@@ -185,17 +185,17 @@ const getSheetFromColorMap = map => ({
     color: map.TEXT_COLOR,
 
     '&::-webkit-input-placeholder': {
-      color: map.TEXT_PLACEHOLDER_COLOR
+      color: map.TEXT_PLACEHOLDER_COLOR,
     },
 
     '&::-moz-placeholder': {
-      color: map.TEXT_PLACEHOLDER_COLOR
-    }
+      color: map.TEXT_PLACEHOLDER_COLOR,
+    },
   },
 
   actionListHeaderWrapper: {
     position: 'relative',
-    height: '20px'
+    height: '20px',
   },
 
   actionPreview: {
@@ -209,25 +209,25 @@ const getSheetFromColorMap = map => ({
       border: 'inherit',
       'border-radius': '3px',
       'line-height': 'inherit',
-      color: 'inherit'
+      color: 'inherit',
     },
 
-    'background-color': map.BACKGROUND_COLOR
+    'background-color': map.BACKGROUND_COLOR,
   },
 
   actionPreviewContent: {
     flex: 1,
-    'overflow-y': 'auto'
+    'overflow-y': 'auto',
   },
 
   stateDiff: {
-    padding: '5px 0'
+    padding: '5px 0',
   },
 
   stateDiffEmpty: {
     padding: '10px',
 
-    color: map.TEXT_PLACEHOLDER_COLOR
+    color: map.TEXT_PLACEHOLDER_COLOR,
   },
 
   stateError: {
@@ -235,17 +235,17 @@ const getSheetFromColorMap = map => ({
     'margin-left': '14px',
     'font-weight': 'bold',
 
-    color: map.ERROR_COLOR
+    color: map.ERROR_COLOR,
   },
 
   inspectedPath: {
-    padding: '6px 0'
+    padding: '6px 0',
   },
 
   inspectedPathKey: {
     '&:not(:last-child):after': {
-      content: '" > "'
-    }
+      content: '" > "',
+    },
   },
 
   inspectedPathKeyLink: {
@@ -253,8 +253,8 @@ const getSheetFromColorMap = map => ({
     color: map.LINK_COLOR,
     '&:hover': {
       'text-decoration': 'underline',
-      color: map.LINK_HOVER_COLOR
-    }
+      color: map.LINK_HOVER_COLOR,
+    },
   },
 
   treeItemPin: {
@@ -262,14 +262,14 @@ const getSheetFromColorMap = map => ({
     'padding-left': '5px',
     cursor: 'pointer',
     '&:hover': {
-      'text-decoration': 'underline'
+      'text-decoration': 'underline',
     },
 
-    color: map.PIN_COLOR
+    color: map.PIN_COLOR,
   },
 
   treeItemHint: {
-    color: map.ITEM_HINT_COLOR
+    color: map.ITEM_HINT_COLOR,
   },
 
   previewHeader: {
@@ -280,14 +280,14 @@ const getSheetFromColorMap = map => ({
     'border-bottom-style': 'solid',
 
     'background-color': map.HEADER_BACKGROUND_COLOR,
-    'border-bottom-color': map.HEADER_BORDER_COLOR
+    'border-bottom-color': map.HEADER_BORDER_COLOR,
   },
 
   tabSelector: {
     position: 'relative',
     'z-index': 1,
     display: 'inline-flex',
-    float: 'right'
+    float: 'right',
   },
 
   selectorButton: {
@@ -301,30 +301,30 @@ const getSheetFromColorMap = map => ({
     '&:first-child': {
       'border-left-width': '1px',
       'border-top-left-radius': '3px',
-      'border-bottom-left-radius': '3px'
+      'border-bottom-left-radius': '3px',
     },
 
     '&:last-child': {
       'border-top-right-radius': '3px',
-      'border-bottom-right-radius': '3px'
+      'border-bottom-right-radius': '3px',
     },
 
     'background-color': map.TAB_BACK_COLOR,
 
     '&:hover': {
-      'background-color': map.TAB_BACK_HOVER_COLOR
+      'background-color': map.TAB_BACK_HOVER_COLOR,
     },
 
-    'border-color': map.TAB_BORDER_COLOR
+    'border-color': map.TAB_BORDER_COLOR,
   },
 
   selectorButtonSmall: {
     padding: '0px 8px',
-    'font-size': '0.8em'
+    'font-size': '0.8em',
   },
 
   selectorButtonSelected: {
-    'background-color': map.TAB_BACK_SELECTED_COLOR
+    'background-color': map.TAB_BACK_SELECTED_COLOR,
   },
 
   diff: {
@@ -332,34 +332,34 @@ const getSheetFromColorMap = map => ({
     'border-radius': '3px',
     position: 'relative',
 
-    color: map.TEXT_COLOR
+    color: map.TEXT_COLOR,
   },
 
   diffWrap: {
     position: 'relative',
-    'z-index': 1
+    'z-index': 1,
   },
 
   diffAdd: {
-    'background-color': map.DIFF_ADD_COLOR
+    'background-color': map.DIFF_ADD_COLOR,
   },
 
   diffRemove: {
     'text-decoration': 'line-through',
-    'background-color': map.DIFF_REMOVE_COLOR
+    'background-color': map.DIFF_REMOVE_COLOR,
   },
 
   diffUpdateFrom: {
     'text-decoration': 'line-through',
-    'background-color': map.DIFF_REMOVE_COLOR
+    'background-color': map.DIFF_REMOVE_COLOR,
   },
 
   diffUpdateTo: {
-    'background-color': map.DIFF_ADD_COLOR
+    'background-color': map.DIFF_ADD_COLOR,
   },
 
   diffUpdateArrow: {
-    color: map.DIFF_ARROW_COLOR
+    color: map.DIFF_ARROW_COLOR,
   },
 
   rightSlider: {
@@ -367,28 +367,28 @@ const getSheetFromColorMap = map => ({
     position: 'absolute',
     right: 0,
     transform: 'translateX(150%)',
-    transition: 'transform 0.2s ease-in-out'
+    transition: 'transform 0.2s ease-in-out',
   },
 
   rightSliderRotate: {
     transform: 'rotateX(90deg)',
-    transition: 'transform 0.2s ease-in-out 0.08s'
+    transition: 'transform 0.2s ease-in-out 0.08s',
   },
 
   rightSliderShown: {
     position: 'static',
-    transform: 'translateX(0)'
+    transform: 'translateX(0)',
   },
 
   rightSliderRotateShown: {
     transform: 'rotateX(0)',
-    transition: 'transform 0.2s ease-in-out 0.18s'
-  }
+    transition: 'transform 0.2s ease-in-out 0.18s',
+  },
 });
 
 let themeSheet;
 
-const getDefaultThemeStyling = theme => {
+const getDefaultThemeStyling = (theme) => {
   if (themeSheet) {
     themeSheet.detach();
   }
@@ -404,5 +404,5 @@ export const base16Themes = { ...reduxThemes, ...inspectorThemes };
 
 export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
   defaultBase16: inspector,
-  base16Themes
+  base16Themes,
 });

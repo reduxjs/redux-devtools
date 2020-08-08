@@ -25,12 +25,12 @@ var anserMap = {
   'ansi-red': theme.base0E,
   'ansi-bright-magenta': theme.base0F,
   'ansi-magenta': theme.base0E,
-  'ansi-white': theme.base00
+  'ansi-white': theme.base00,
 };
 
 function generateAnsiHTML(txt: string): string {
   var arr = new Anser().ansiToJson(entities.encode(txt), {
-    use_classes: true
+    use_classes: true,
   });
 
   var result = '';

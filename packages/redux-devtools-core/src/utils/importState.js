@@ -18,13 +18,13 @@ export default function importState(
   let parse = jsan.parse;
   if (serialize) {
     if (serialize.immutable) {
-      parse = v =>
+      parse = (v) =>
         jsan.parse(
           v,
           seralizeImmutable(serialize.immutable, serialize.refs).reviver
         );
     } else if (serialize.reviver) {
-      parse = v => jsan.parse(v, serialize.reviver);
+      parse = (v) => jsan.parse(v, serialize.reviver);
     }
   }
 
@@ -39,9 +39,9 @@ export default function importState(
     deprecate('deserializeState');
     if (typeof nextLiftedState.computedStates !== 'undefined') {
       nextLiftedState.computedStates = nextLiftedState.computedStates.map(
-        computedState => ({
+        (computedState) => ({
           ...computedState,
-          state: deserializeState(computedState.state)
+          state: deserializeState(computedState.state),
         })
       );
     }
@@ -58,9 +58,9 @@ export default function importState(
     deprecate('deserializeAction');
     nextLiftedState.actionsById = mapValues(
       nextLiftedState.actionsById,
-      liftedAction => ({
+      (liftedAction) => ({
         ...liftedAction,
-        action: deserializeAction(liftedAction.action)
+        action: deserializeAction(liftedAction.action),
       })
     );
   }

@@ -13,7 +13,7 @@ import {
   TOGGLE_PERSIST,
   GET_REPORT_REQUEST,
   SHOW_NOTIFICATION,
-  CLEAR_NOTIFICATION
+  CLEAR_NOTIFICATION,
 } from '../constants/actionTypes';
 import { RECONNECT } from '../constants/socketActionTypes';
 
@@ -72,7 +72,7 @@ export function lockChanges(status) {
     type: LIFTED_ACTION,
     message: 'DISPATCH',
     action: { type: 'LOCK_CHANGES', status },
-    toAll: true
+    toAll: true,
   };
 }
 
@@ -81,7 +81,7 @@ export function pauseRecording(status) {
     type: LIFTED_ACTION,
     message: 'DISPATCH',
     action: { type: 'PAUSE_RECORDING', status },
-    toAll: true
+    toAll: true,
   };
 }
 

@@ -16,8 +16,8 @@ const styles = {
     display: 'inline-block',
     fontSize: '0.8em',
     color: 'white',
-    textDecoration: 'none'
-  }
+    textDecoration: 'none',
+  },
 };
 
 export default class LogMonitorButton extends React.Component {
@@ -34,7 +34,7 @@ export default class LogMonitorButton extends React.Component {
 
     this.state = {
       hovered: false,
-      active: false
+      active: false,
     };
   }
 
@@ -66,12 +66,12 @@ export default class LogMonitorButton extends React.Component {
   render() {
     let style = {
       ...styles.base,
-      backgroundColor: this.props.theme.base02
+      backgroundColor: this.props.theme.base02,
     };
     if (this.props.enabled && this.state.hovered) {
       style = {
         ...style,
-        backgroundColor: brighten(this.props.theme.base02, 0.2)
+        backgroundColor: brighten(this.props.theme.base02, 0.2),
       };
     }
     if (!this.props.enabled) {
@@ -79,7 +79,7 @@ export default class LogMonitorButton extends React.Component {
         ...style,
         opacity: 0.2,
         cursor: 'text',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
       };
     }
     return (

@@ -6,14 +6,14 @@ import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../constants/TodoFilters';
 
 const TODO_FILTERS = {
   [SHOW_ALL]: () => true,
-  [SHOW_UNMARKED]: todo => !todo.marked,
-  [SHOW_MARKED]: todo => todo.marked
+  [SHOW_UNMARKED]: (todo) => !todo.marked,
+  [SHOW_MARKED]: (todo) => todo.marked,
 };
 
 export default class MainSection extends Component {
   static propTypes = {
     todos: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
   };
 
   constructor(props, context) {
@@ -24,7 +24,7 @@ export default class MainSection extends Component {
   }
 
   handleClearMarked() {
-    const atLeastOneMarked = this.props.todos.some(todo => todo.marked);
+    const atLeastOneMarked = this.props.todos.some((todo) => todo.marked);
     if (atLeastOneMarked) {
       this.props.actions.clearMarked();
     }
@@ -48,7 +48,7 @@ export default class MainSection extends Component {
       <section className="main">
         {this.renderToggleAll(markedCount)}
         <ul className="todo-list">
-          {filteredTodos.map(todo => (
+          {filteredTodos.map((todo) => (
             <TodoItem key={todo.id} todo={todo} {...actions} />
           ))}
         </ul>

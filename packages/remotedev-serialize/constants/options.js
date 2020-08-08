@@ -11,5 +11,5 @@ module.exports = {
   map: true,
   set: true,
   nan: true,
-  infinity: true
+  infinity: true,
 };

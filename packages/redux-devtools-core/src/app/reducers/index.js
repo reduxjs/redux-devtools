@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   monitor,
   instances,
   reports,
-  notification
+  notification,
 });
 
 export default rootReducer;

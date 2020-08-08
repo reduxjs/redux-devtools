@@ -8,7 +8,7 @@ export default class ItemRange extends React.Component {
     from: PropTypes.number.isRequired,
     to: PropTypes.number.isRequired,
     renderChildNodes: PropTypes.func.isRequired,
-    nodeType: PropTypes.string.isRequired
+    nodeType: PropTypes.string.isRequired,
   };
 
   constructor(props) {

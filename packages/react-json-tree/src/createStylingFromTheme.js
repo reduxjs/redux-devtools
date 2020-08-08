@@ -1,7 +1,7 @@
 import { createStyling } from 'react-base16-styling';
 import solarized from './themes/solarized';
 
-const colorMap = theme => ({
+const colorMap = (theme) => ({
   BACKGROUND_COLOR: theme.base00,
   TEXT_COLOR: theme.base07,
   STRING_COLOR: theme.base0B,
@@ -15,10 +15,10 @@ const colorMap = theme => ({
   LABEL_COLOR: theme.base0D,
   ARROW_COLOR: theme.base0D,
   ITEM_STRING_COLOR: theme.base0B,
-  ITEM_STRING_EXPANDED_COLOR: theme.base03
+  ITEM_STRING_EXPANDED_COLOR: theme.base03,
 });
 
-const valueColorMap = colors => ({
+const valueColorMap = (colors) => ({
   String: colors.STRING_COLOR,
   Date: colors.DATE_COLOR,
   Number: colors.NUMBER_COLOR,
@@ -26,10 +26,10 @@ const valueColorMap = colors => ({
   Null: colors.NULL_COLOR,
   Undefined: colors.UNDEFINED_COLOR,
   Function: colors.FUNCTION_COLOR,
-  Symbol: colors.SYMBOL_COLOR
+  Symbol: colors.SYMBOL_COLOR,
 });
 
-const getDefaultThemeStyling = theme => {
+const getDefaultThemeStyling = (theme) => {
   const colors = colorMap(theme);
 
   return {
@@ -43,7 +43,7 @@ const getDefaultThemeStyling = theme => {
       listStyle: 'none',
       MozUserSelect: 'none',
       WebkitUserSelect: 'none',
-      backgroundColor: colors.BACKGROUND_COLOR
+      backgroundColor: colors.BACKGROUND_COLOR,
     },
 
     value: ({ style }, nodeType, keyPath) => ({
@@ -57,32 +57,32 @@ const getDefaultThemeStyling = theme => {
         wordWrap: 'break-word',
         paddingLeft: keyPath.length > 1 ? '2.125em' : '1.25em',
         textIndent: '-0.5em',
-        wordBreak: 'break-all'
-      }
+        wordBreak: 'break-all',
+      },
     }),
 
     label: {
       display: 'inline-block',
-      color: colors.LABEL_COLOR
+      color: colors.LABEL_COLOR,
     },
 
     valueLabel: {
-      margin: '0 0.5em 0 0'
+      margin: '0 0.5em 0 0',
     },
 
     valueText: ({ style }, nodeType) => ({
       style: {
         ...style,
-        color: valueColorMap(colors)[nodeType]
-      }
+        color: valueColorMap(colors)[nodeType],
+      },
     }),
 
     itemRange: (styling, expanded) => ({
       style: {
         paddingTop: expanded ? 0 : '0.25em',
         cursor: 'pointer',
-        color: colors.LABEL_COLOR
-      }
+        color: colors.LABEL_COLOR,
+      },
     }),
 
     arrow: ({ style }, nodeType, expanded) => ({
@@ -100,8 +100,8 @@ const getDefaultThemeStyling = theme => {
         MozTransformOrigin: '45% 50%',
         position: 'relative',
         lineHeight: '1.1em',
-        fontSize: '0.75em'
-      }
+        fontSize: '0.75em',
+      },
     }),
 
     arrowContainer: ({ style }, arrowStyle) => ({
@@ -110,18 +110,18 @@ const getDefaultThemeStyling = theme => {
         display: 'inline-block',
         paddingRight: '0.5em',
         paddingLeft: arrowStyle === 'double' ? '1em' : 0,
-        cursor: 'pointer'
-      }
+        cursor: 'pointer',
+      },
     }),
 
     arrowSign: {
-      color: colors.ARROW_COLOR
+      color: colors.ARROW_COLOR,
     },
 
     arrowSignInner: {
       position: 'absolute',
       top: 0,
-      left: '-0.4em'
+      left: '-0.4em',
     },
 
     nestedNode: ({ style }, keyPath, nodeType, expanded, expandable) => ({
@@ -130,13 +130,13 @@ const getDefaultThemeStyling = theme => {
         position: 'relative',
         paddingTop: '0.25em',
         marginLeft: keyPath.length > 1 ? '0.875em' : 0,
-        paddingLeft: !expandable ? '1.125em' : 0
-      }
+        paddingLeft: !expandable ? '1.125em' : 0,
+      },
     }),
 
     rootNode: {
       padding: 0,
-      margin: 0
+      margin: 0,
     },
 
     nestedNodeLabel: ({ style }, keyPath, nodeType, expanded, expandable) => ({
@@ -146,8 +146,8 @@ const getDefaultThemeStyling = theme => {
         padding: 0,
         WebkitUserSelect: expandable ? 'inherit' : 'text',
         MozUserSelect: expandable ? 'inherit' : 'text',
-        cursor: expandable ? 'pointer' : 'default'
-      }
+        cursor: expandable ? 'pointer' : 'default',
+      },
     }),
 
     nestedNodeItemString: ({ style }, keyPath, nodeType, expanded) => ({
@@ -157,13 +157,13 @@ const getDefaultThemeStyling = theme => {
         cursor: 'default',
         color: expanded
           ? colors.ITEM_STRING_EXPANDED_COLOR
-          : colors.ITEM_STRING_COLOR
-      }
+          : colors.ITEM_STRING_COLOR,
+      },
     }),
 
     nestedNodeItemType: {
       marginLeft: '0.3em',
-      marginRight: '0.3em'
+      marginRight: '0.3em',
     },
 
     nestedNodeChildren: ({ style }, nodeType, expanded) => ({
@@ -172,18 +172,18 @@ const getDefaultThemeStyling = theme => {
         padding: 0,
         margin: 0,
         listStyle: 'none',
-        display: expanded ? 'block' : 'none'
-      }
+        display: expanded ? 'block' : 'none',
+      },
     }),
 
     rootNodeChildren: {
       padding: 0,
       margin: 0,
-      listStyle: 'none'
-    }
+      listStyle: 'none',
+    },
   };
 };
 
 export default createStyling(getDefaultThemeStyling, {
-  defaultBase16: solarized
+  defaultBase16: solarized,
 });

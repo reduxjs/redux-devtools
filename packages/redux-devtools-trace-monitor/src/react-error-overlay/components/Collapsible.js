@@ -21,39 +21,39 @@ const _collapsibleStyle = {
   textAlign: 'left',
   fontSize: '1em',
   padding: '0px 5px',
-  lineHeight: '1.5'
+  lineHeight: '1.5',
 };
 
 const collapsibleCollapsedStyle = {
   ..._collapsibleStyle,
-  marginBottom: '1.5em'
+  marginBottom: '1.5em',
 };
 
 const collapsibleExpandedStyle = {
   ..._collapsibleStyle,
-  marginBottom: '0.6em'
+  marginBottom: '0.6em',
 };
 
 type Props = {|
-  children: ReactElement<any>[]
+  children: ReactElement<any>[],
 |};
 
 type State = {|
-  collapsed: boolean
+  collapsed: boolean,
 |};
 
 class Collapsible extends Component<Props, State> {
   state = {
-    collapsed: undefined
+    collapsed: undefined,
   };
 
   toggleCollapsed = () => {
-    this.setState(state => ({
-      collapsed: !this.isCollapsed(state)
+    this.setState((state) => ({
+      collapsed: !this.isCollapsed(state),
     }));
   };
 
-  isCollapsed = state =>
+  isCollapsed = (state) =>
     state.collapsed === undefined
       ? this.props.collapsedByDefault
       : state.collapsed;

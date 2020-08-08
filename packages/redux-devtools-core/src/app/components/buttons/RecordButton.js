@@ -8,7 +8,7 @@ import { pauseRecording } from '../../actions';
 class RecordButton extends Component {
   static propTypes = {
     paused: PropTypes.bool,
-    pauseRecording: PropTypes.func.isRequired
+    pauseRecording: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -31,7 +31,7 @@ class RecordButton extends Component {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    pauseRecording: () => dispatch(pauseRecording(!ownProps.paused))
+    pauseRecording: () => dispatch(pauseRecording(!ownProps.paused)),
   };
 }
 

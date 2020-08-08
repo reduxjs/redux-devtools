@@ -9,7 +9,7 @@ import { toggleSlider } from '../../actions';
 class SliderButton extends Component {
   static propTypes = {
     isOpen: PropTypes.bool,
-    toggleSlider: PropTypes.func.isRequired
+    toggleSlider: PropTypes.func.isRequired,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -32,7 +32,7 @@ class SliderButton extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    toggleSlider: bindActionCreators(toggleSlider, dispatch)
+    toggleSlider: bindActionCreators(toggleSlider, dispatch),
   };
 }
 

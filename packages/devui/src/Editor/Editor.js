@@ -18,7 +18,7 @@ export default class Editor extends Component {
       readOnly: this.props.readOnly,
       autofocus: this.props.autofocus,
       foldGutter: this.props.foldGutter,
-      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
     });
 
     if (this.props.onChange) {
@@ -56,7 +56,7 @@ export default class Editor extends Component {
     this.cm = null;
   }
 
-  getRef = node => {
+  getRef = (node) => {
     this.node = node;
   };
 
@@ -74,7 +74,7 @@ Editor.propTypes = {
   theme: PropTypes.object,
   foldGutter: PropTypes.bool,
   autofocus: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 Editor.defaultProps = {
@@ -84,5 +84,5 @@ Editor.defaultProps = {
   lineWrapping: false,
   readOnly: false,
   foldGutter: true,
-  autofocus: false
+  autofocus: false,
 };

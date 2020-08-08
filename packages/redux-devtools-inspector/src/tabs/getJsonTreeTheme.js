@@ -4,14 +4,14 @@ export default function getJsonTreeTheme(base16Theme) {
     nestedNode: ({ style }, keyPath, nodeType, expanded) => ({
       style: {
         ...style,
-        whiteSpace: expanded ? 'inherit' : 'nowrap'
-      }
+        whiteSpace: expanded ? 'inherit' : 'nowrap',
+      },
     }),
     nestedNodeItemString: ({ style }, keyPath, nodeType, expanded) => ({
       style: {
         ...style,
-        display: expanded ? 'none' : 'inline'
-      }
-    })
+        display: expanded ? 'none' : 'inline',
+      },
+    }),
   };
 }

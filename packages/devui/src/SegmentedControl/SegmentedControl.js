@@ -13,11 +13,11 @@ export default class SegmentedControl extends Component {
     );
   }
 
-  onClick = e => {
+  onClick = (e) => {
     this.props.onClick(e.target.value);
   };
 
-  onMouseUp = e => {
+  onMouseUp = (e) => {
     e.target.blur();
   };
 
@@ -25,7 +25,7 @@ export default class SegmentedControl extends Component {
     const { values, selected } = this.props;
     return (
       <SegmentedWrapper disabled={this.props.disabled} theme={this.props.theme}>
-        {values.map(button => (
+        {values.map((button) => (
           <button
             key={button}
             value={button}
@@ -46,5 +46,5 @@ SegmentedControl.propTypes = {
   selected: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-  theme: PropTypes.object
+  theme: PropTypes.object,
 };

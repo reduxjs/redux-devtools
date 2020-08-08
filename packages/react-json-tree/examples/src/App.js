@@ -5,19 +5,19 @@ import JSONTree from 'react-json-tree';
 const getLabelStyle = ({ style }, nodeType, expanded) => ({
   style: {
     ...style,
-    textTransform: expanded ? 'uppercase' : style.textTransform
-  }
+    textTransform: expanded ? 'uppercase' : style.textTransform,
+  },
 });
 
 const getBoolStyle = ({ style }, nodeType) => ({
   style: {
     ...style,
     border: nodeType === 'Boolean' ? '1px solid #DD3333' : style.border,
-    borderRadius: nodeType === 'Boolean' ? 3 : style.borderRadius
-  }
+    borderRadius: nodeType === 'Boolean' ? 3 : style.borderRadius,
+  },
 });
 
-const getItemString = type => (
+const getItemString = (type) => (
   <span>
     {' // '}
     {type}
@@ -30,14 +30,14 @@ const getValueLabelStyle = ({ style }, nodeType, keyPath) => ({
     color:
       !Number.isNaN(keyPath[0]) && !(parseInt(keyPath, 10) % 2)
         ? '#33F'
-        : style.color
-  }
+        : style.color,
+  },
 });
 
 const longString =
   'Loremipsumdolorsitamet,consecteturadipiscingelit.Namtempusipsumutfelisdignissimauctor.Maecenasodiolectus,finibusegetultricesvel,aliquamutelit.Loremipsumdolorsitamet,consecteturadipiscingelit.Namtempusipsumutfelisdignissimauctor.Maecenasodiolectus,finibusegetultricesvel,aliquamutelit.Loremipsumdolorsitamet,consecteturadipiscingelit.Namtempusipsumutfelisdignissimauctor.Maecenasodiolectus,finibusegetultricesvel,aliquamutelit.'; // eslint-disable-line max-len
 
-const Custom = function(value) {
+const Custom = function (value) {
   this.value = value;
 };
 Custom.prototype[Symbol.toStringTag] = 'Custom';
@@ -56,42 +56,42 @@ const data = {
           evenMoreNested: {
             veryNested: {
               insanelyNested: {
-                ridiculouslyDeepValue: 'Hello'
-              }
-            }
-          }
-        }
-      }
+                ridiculouslyDeepValue: 'Hello',
+              },
+            },
+          },
+        },
+      },
     },
     baz: undefined,
-    func: function User() {}
+    func: function User() {},
   },
   emptyObject: {},
   symbol: Symbol('value'),
   // eslint-disable-next-line new-cap
   immutable: Map([
     ['key', 'value'],
-    [{ objectKey: 'value' }, { objectKey: 'value' }]
+    [{ objectKey: 'value' }, { objectKey: 'value' }],
   ]),
   map: new window.Map([
     ['key', 'value'],
     [0, 'value'],
-    [{ objectKey: 'value' }, { objectKey: 'value' }]
+    [{ objectKey: 'value' }, { objectKey: 'value' }],
   ]),
   weakMap: new window.WeakMap([
-    [{ objectKey: 'value' }, { objectKey: 'value' }]
+    [{ objectKey: 'value' }, { objectKey: 'value' }],
   ]),
   set: new window.Set(['value', 0, { objectKey: 'value' }]),
   weakSet: new window.WeakSet([
     { objectKey: 'value1' },
-    { objectKey: 'value2' }
+    { objectKey: 'value2' },
   ]),
   hugeArray: Array.from({ length: 10000 }).map((_, i) => `item #${i}`),
   customProfile: {
     avatar: new Custom('placehold.it/50x50'),
-    name: new Custom('Name')
+    name: new Custom('Name'),
   },
-  longString
+  longString,
 };
 
 const theme = {
@@ -112,7 +112,7 @@ const theme = {
   base0C: '#a1efe4',
   base0D: '#66d9ef',
   base0E: '#ae81ff',
-  base0F: '#cc6633'
+  base0F: '#cc6633',
 };
 
 const App = () => (
@@ -149,7 +149,7 @@ const App = () => (
           extend: theme,
           nestedNodeLabel: getLabelStyle,
           value: getBoolStyle,
-          valueLabel: getValueLabelStyle
+          valueLabel: getValueLabelStyle,
         }}
         getItemString={getItemString}
       />
@@ -163,7 +163,7 @@ const App = () => (
         data={data}
         theme={theme}
         labelRenderer={([raw]) => <span>(({raw})):</span>}
-        valueRenderer={raw => (
+        valueRenderer={(raw) => (
           <em>
             <span role="img" aria-label="mellow">
               😐

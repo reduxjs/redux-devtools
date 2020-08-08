@@ -8,13 +8,13 @@ export default class TodoItem extends Component {
     todo: PropTypes.object.isRequired,
     editTodo: PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired,
-    markTodo: PropTypes.func.isRequired
+    markTodo: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      editing: false
+      editing: false,
     };
   }
 
@@ -40,7 +40,7 @@ export default class TodoItem extends Component {
         <TodoTextInput
           text={todo.text}
           editing={this.state.editing}
-          onSave={text => this.handleSave(todo.id, text)}
+          onSave={(text) => this.handleSave(todo.id, text)}
         />
       );
     } else {
@@ -64,7 +64,7 @@ export default class TodoItem extends Component {
       <li
         className={classnames({
           completed: todo.marked,
-          editing: this.state.editing
+          editing: this.state.editing,
         })}
       >
         {element}

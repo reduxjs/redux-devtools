@@ -8,12 +8,12 @@ class Settings extends Component {
     super(props);
     this.tabs = [
       { name: 'Connection', component: Connection },
-      { name: 'Themes', component: Themes }
+      { name: 'Themes', component: Themes },
     ];
     this.state = { selected: 'Connection' };
   }
 
-  handleSelect = selected => {
+  handleSelect = (selected) => {
     this.setState({ selected });
   };
 

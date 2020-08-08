@@ -10,7 +10,7 @@ export const defaultStyle = `
   }
 `;
 
-export const themedStyle = theme => css`
+export const themedStyle = (theme) => css`
   height: 100%;
 
   > div {

@@ -7,25 +7,25 @@ export default function persistState(
   deserializeAction = identity
 ) {
   if (!sessionId) {
-    return next => (...args) => next(...args);
+    return (next) => (...args) => next(...args);
   }
 
   function deserialize(state) {
     return {
       ...state,
-      actionsById: mapValues(state.actionsById, liftedAction => ({
+      actionsById: mapValues(state.actionsById, (liftedAction) => ({
         ...liftedAction,
-        action: deserializeAction(liftedAction.action)
+        action: deserializeAction(liftedAction.action),
       })),
       committedState: deserializeState(state.committedState),
-      computedStates: state.computedStates.map(computedState => ({
+      computedStates: state.computedStates.map((computedState) => ({
         ...computedState,
-        state: deserializeState(computedState.state)
-      }))
+        state: deserializeState(computedState.state),
+      })),
     };
   }
 
-  return next => (reducer, initialState, enhancer) => {
+  return (next) => (reducer, initialState, enhancer) => {
     const key = `redux-dev-session-${sessionId}`;
 
     let finalInitialState;
@@ -58,7 +58,7 @@ export default function persistState(
         }
 
         return action;
-      }
+      },
     };
   };
 }

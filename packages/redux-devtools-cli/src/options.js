@@ -21,13 +21,13 @@ module.exports = function getOptions(argv) {
           passphrase:
             argv.passphrase ||
             process.env.npm_package_remotedev_passphrase ||
-            null
+            null,
         },
     dbOptions: dbOptions,
     maxRequestBody: argv.passphrase || '16mb',
     logHTTPRequests: argv.logHTTPRequests,
     logLevel: argv.logLevel || 3,
     wsEngine:
-      argv.wsEngine || process.env.npm_package_remotedev_wsengine || 'ws'
+      argv.wsEngine || process.env.npm_package_remotedev_wsengine || 'ws',
   };
 };

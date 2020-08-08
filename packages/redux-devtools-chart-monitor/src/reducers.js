@@ -14,6 +14,6 @@ function toggleVisibility(props, state = props.defaultIsVisible, action) {
 
 export default function reducer(props, state = {}, action) {
   return {
-    isVisible: toggleVisibility(props, state.isVisible, action)
+    isVisible: toggleVisibility(props, state.isVisible, action),
   };
 }

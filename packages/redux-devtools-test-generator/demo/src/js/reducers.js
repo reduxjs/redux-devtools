@@ -7,12 +7,12 @@ const NESTED = {
       {
         path: {
           to: {
-            a: 'key'
-          }
-        }
-      }
-    ]
-  }
+            a: 'key',
+          },
+        },
+      },
+    ],
+  },
 };
 
 const IMMUTABLE_NESTED = Immutable.fromJS(NESTED);
@@ -24,13 +24,13 @@ const IMMUTABLE_MAP = Immutable.Map({
   list: Immutable.List(['a', 'b', 'c']),
   set: Immutable.Set(['a', 'b', 'c']),
   stack: Immutable.Stack(['a', 'b', 'c']),
-  seq: Immutable.Seq.of(1, 2, 3, 4, 5, 6, 7, 8)
+  seq: Immutable.Seq.of(1, 2, 3, 4, 5, 6, 7, 8),
 });
 
 /* eslint-enable babel/new-cap */
 
 const HUGE_ARRAY = Array.from({ length: 5000 }).map((_, key) => ({
-  str: 'key ' + key
+  str: 'key ' + key,
 }));
 
 const HUGE_OBJECT = Array.from({ length: 5000 }).reduce(
@@ -38,7 +38,7 @@ const HUGE_OBJECT = Array.from({ length: 5000 }).reduce(
   {}
 );
 
-const FUNC = function(a, b, c) {
+const FUNC = function (a, b, c) {
   return a + b + c;
 };
 
@@ -91,12 +91,12 @@ export default {
               {
                 path: {
                   to: {
-                    a: state.long.nested[0].path.to.a + '!'
-                  }
-                }
-              }
-            ]
-          }
+                    a: state.long.nested[0].path.to.a + '!',
+                  },
+                },
+              },
+            ],
+          },
         }
       : state,
   recursive: (state = [], action) =>
@@ -107,7 +107,7 @@ export default {
     action.type === 'CHANGE_IMMUTABLE_NESTED'
       ? state.updateIn(
           ['long', 'nested', 0, 'path', 'to', 'a'],
-          str => str + '!'
+          (str) => str + '!'
         )
       : state,
   addFunction: (state = null, action) =>
@@ -115,5 +115,5 @@ export default {
   addSymbol: (state = null, action) =>
     action.type === 'ADD_SYMBOL' ? { s: window.Symbol('symbol') } : state,
   shuffleArray: (state = DEFAULT_SHUFFLE_ARRAY, action) =>
-    action.type === 'SHUFFLE_ARRAY' ? shuffle(state) : state
+    action.type === 'SHUFFLE_ARRAY' ? shuffle(state) : state,
 };

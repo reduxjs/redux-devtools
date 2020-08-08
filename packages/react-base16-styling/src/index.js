@@ -11,7 +11,7 @@ const BASE16_KEYS = Object.keys(DEFAULT_BASE16);
 
 // we need a correcting factor, so that a dark, but not black background color
 // converts to bright enough inversed color
-const flip = x => (x < 0.25 ? 1 : x < 0.5 ? 0.9 - x : 1.1 - x);
+const flip = (x) => (x < 0.25 ? 1 : x < 0.5 ? 0.9 - x : 1.1 - x);
 
 const invertColor = flow(
   parse,
@@ -22,11 +22,11 @@ const invertColor = flow(
 );
 
 const merger = function merger(styling) {
-  return prevStyling => ({
+  return (prevStyling) => ({
     className: [prevStyling.className, styling.className]
       .filter(Boolean)
       .join(' '),
-    style: { ...(prevStyling.style || {}), ...(styling.style || {}) }
+    style: { ...(prevStyling.style || {}), ...(styling.style || {}) },
   });
 };
 
@@ -51,7 +51,7 @@ const mergeStyling = function mergeStyling(customStyling, defaultStyling) {
         case 'function':
           return (styling, ...args) =>
             merger({
-              className: customStyling
+              className: customStyling,
             })(defaultStyling(styling, ...args));
       }
       break;
@@ -64,7 +64,7 @@ const mergeStyling = function mergeStyling(customStyling, defaultStyling) {
         case 'function':
           return (styling, ...args) =>
             merger({
-              style: customStyling
+              style: customStyling,
             })(defaultStyling(styling, ...args));
       }
       break;
@@ -74,7 +74,7 @@ const mergeStyling = function mergeStyling(customStyling, defaultStyling) {
           return (styling, ...args) =>
             customStyling(
               merger(styling)({
-                className: defaultStyling
+                className: defaultStyling,
               }),
               ...args
             );
@@ -82,7 +82,7 @@ const mergeStyling = function mergeStyling(customStyling, defaultStyling) {
           return (styling, ...args) =>
             customStyling(
               merger(styling)({
-                style: defaultStyling
+                style: defaultStyling,
               }),
               ...args
             );
@@ -120,7 +120,7 @@ const getStylingByKeys = (mergedStyling, keys, ...args) => {
     keys = [keys];
   }
 
-  const styles = keys.map(key => mergedStyling[key]).filter(Boolean);
+  const styles = keys.map((key) => mergedStyling[key]).filter(Boolean);
 
   const props = styles.reduce(
     (obj, s) => {
@@ -148,7 +148,7 @@ const getStylingByKeys = (mergedStyling, keys, ...args) => {
   return props;
 };
 
-export const invertBase16Theme = base16Theme =>
+export const invertBase16Theme = (base16Theme) =>
   Object.keys(base16Theme).reduce(
     (t, key) => (
       (t[key] = /^base/.test(key)
@@ -169,7 +169,7 @@ export const createStyling = curry(
     if (base16Theme) {
       themeOrStyling = {
         ...base16Theme,
-        ...themeOrStyling
+        ...themeOrStyling,
       };
     }
 
@@ -213,7 +213,7 @@ export const getBase16Theme = (theme, base16Themes) => {
     : undefined;
 };
 
-export const invertTheme = theme => {
+export const invertTheme = (theme) => {
   if (typeof theme === 'string') {
     return `${theme}:inverted`;
   }

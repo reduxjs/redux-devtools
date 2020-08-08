@@ -7,7 +7,7 @@ export default class SliderButton extends (PureComponent || Component) {
     theme: PropTypes.object,
     type: PropTypes.string,
     disabled: PropTypes.bool,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
   };
 
   iconStyle() {
@@ -15,7 +15,7 @@ export default class SliderButton extends (PureComponent || Component) {
       cursor: 'hand',
       fill: this.props.theme.base06,
       width: '1.8rem',
-      height: '1.8rem'
+      height: '1.8rem',
     };
   }
 
@@ -61,7 +61,7 @@ export default class SliderButton extends (PureComponent || Component) {
     </Button>
   );
 
-  renderStepButton = direction => {
+  renderStepButton = (direction) => {
     const isLeft = direction === 'left';
     const d = isLeft
       ? 'M15.41 16.09l-4.58-4.59 4.58-4.59-1.41-1.41-6 6 6 6z'

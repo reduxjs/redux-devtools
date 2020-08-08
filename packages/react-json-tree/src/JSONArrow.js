@@ -17,11 +17,11 @@ JSONArrow.propTypes = {
   arrowStyle: PropTypes.oneOf(['single', 'double']),
   expanded: PropTypes.bool.isRequired,
   nodeType: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 JSONArrow.defaultProps = {
-  arrowStyle: 'single'
+  arrowStyle: 'single',
 };
 
 export default JSONArrow;

@@ -16,17 +16,17 @@ import type { ErrorLocation } from '../utils/parseCompileError';
 
 const linkStyle = {
   fontSize: '0.9em',
-  marginBottom: '0.9em'
+  marginBottom: '0.9em',
 };
 
 const anchorStyle = {
   textDecoration: 'none',
   color: theme.base05,
-  cursor: 'pointer'
+  cursor: 'pointer',
 };
 
 const codeAnchorStyle = {
-  cursor: 'pointer'
+  cursor: 'pointer',
 };
 
 const toggleStyle = {
@@ -41,7 +41,7 @@ const toggleStyle = {
   fontFamily: 'Consolas, Menlo, monospace',
   fontSize: '1em',
   padding: '0px',
-  lineHeight: '1.5'
+  lineHeight: '1.5',
 };
 
 type Props = {|
@@ -49,28 +49,28 @@ type Props = {|
   contextSize: number,
   critical: boolean,
   showCode: boolean,
-  editorHandler: (errorLoc: ErrorLocation) => void
+  editorHandler: (errorLoc: ErrorLocation) => void,
 |};
 
 type State = {|
-  compiled: boolean
+  compiled: boolean,
 |};
 
 class StackFrame extends Component<Props, State> {
   state = {
-    compiled: false
+    compiled: false,
   };
 
   toggleCompiled = () => {
-    this.setState(state => ({
-      compiled: !state.compiled
+    this.setState((state) => ({
+      compiled: !state.compiled,
     }));
   };
 
   getErrorLocation(): ErrorLocation | null {
     const {
       _originalFileName: fileName,
-      _originalLineNumber: lineNumber
+      _originalLineNumber: lineNumber,
     } = this.props.frame;
     // Unknown file
     if (!fileName) {
@@ -109,7 +109,7 @@ class StackFrame extends Component<Props, State> {
       _originalFileName: sourceFileName,
       _originalLineNumber: sourceLineNumber,
       _originalColumnNumber: sourceColumnNumber,
-      _originalScriptCode: sourceLines
+      _originalScriptCode: sourceLines,
     } = frame;
     const functionName = frame.getFunctionName();
 
@@ -137,7 +137,7 @@ class StackFrame extends Component<Props, State> {
           lineNum: lineNumber,
           columnNum: columnNumber,
           contextSize,
-          main: critical
+          main: critical,
         };
       } else if (
         !compiled &&
@@ -150,7 +150,7 @@ class StackFrame extends Component<Props, State> {
           lineNum: sourceLineNumber,
           columnNum: sourceColumnNumber,
           contextSize,
-          main: critical
+          main: critical,
         };
       }
     }

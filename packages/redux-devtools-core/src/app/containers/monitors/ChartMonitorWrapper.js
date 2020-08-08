@@ -18,7 +18,7 @@ export function getPath(obj, inspectedStatePath) {
 class ChartMonitorWrapper extends Component {
   static update = ChartMonitor.update;
 
-  onClickText = data => {
+  onClickText = (data) => {
     const inspectedStatePath = [];
     getPath(data, inspectedStatePath);
     this.props.selectMonitorWithState('InspectorMonitor', {
@@ -27,7 +27,7 @@ class ChartMonitorWrapper extends Component {
       subTabName: data.children ? 'Chart' : 'Tree',
       selectedActionId: null,
       startActionId: null,
-      inspectedActionPath: []
+      inspectedActionPath: [],
     });
   };
 
@@ -44,12 +44,15 @@ class ChartMonitorWrapper extends Component {
 }
 
 ChartMonitorWrapper.propTypes = {
-  selectMonitorWithState: PropTypes.func.isRequired
+  selectMonitorWithState: PropTypes.func.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectMonitorWithState: bindActionCreators(selectMonitorWithState, dispatch)
+    selectMonitorWithState: bindActionCreators(
+      selectMonitorWithState,
+      dispatch
+    ),
   };
 }
 

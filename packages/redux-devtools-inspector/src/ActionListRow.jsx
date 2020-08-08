@@ -20,9 +20,9 @@ export default class ActionListRow extends Component {
     onSelect: PropTypes.func.isRequired,
     timestamps: PropTypes.shape({
       current: PropTypes.number.isRequired,
-      previous: PropTypes.number.isRequired
+      previous: PropTypes.number.isRequired,
     }).isRequired,
-    isSkipped: PropTypes.bool.isRequired
+    isSkipped: PropTypes.bool.isRequired,
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -38,13 +38,13 @@ export default class ActionListRow extends Component {
       timestamps,
       isSkipped,
       isInFuture,
-      hideActionButtons
+      hideActionButtons,
     } = this.props;
     const { hover } = this.state;
     const timeDelta = timestamps.current - timestamps.previous;
     const showButtons = (hover && !isInitAction) || isSkipped;
 
-    const isButtonSelected = btn => btn === BUTTON_SKIP && isSkipped;
+    const isButtonSelected = (btn) => btn === BUTTON_SKIP && isSkipped;
 
     let actionType = action.type;
     if (typeof actionType === 'undefined') actionType = '<UNDEFINED>';
@@ -64,7 +64,7 @@ export default class ActionListRow extends Component {
             'actionListItem',
             isSelected && 'actionListItemSelected',
             isSkipped && 'actionListItemSkipped',
-            isInFuture && 'actionListFromFuture'
+            isInFuture && 'actionListFromFuture',
           ],
           isSelected,
           action
@@ -73,7 +73,7 @@ export default class ActionListRow extends Component {
         <div
           {...styling([
             'actionListItemName',
-            isSkipped && 'actionListItemNameSkipped'
+            isSkipped && 'actionListItemNameSkipped',
           ])}
         >
           {actionType}
@@ -104,7 +104,7 @@ export default class ActionListRow extends Component {
             <RightSlider styling={styling} shown={showButtons} rotate>
               <div {...styling('actionListItemSelector')}>
                 {[BUTTON_JUMP, BUTTON_SKIP].map(
-                  btn =>
+                  (btn) =>
                     (!isInitAction || btn !== BUTTON_SKIP) && (
                       <div
                         key={btn}
@@ -113,7 +113,7 @@ export default class ActionListRow extends Component {
                           [
                             'selectorButton',
                             isButtonSelected(btn) && 'selectorButtonSelected',
-                            'selectorButtonSmall'
+                            'selectorButtonSmall',
                           ],
                           isButtonSelected(btn),
                           true
@@ -144,13 +144,13 @@ export default class ActionListRow extends Component {
     }
   }
 
-  handleMouseEnter = e => {
+  handleMouseEnter = (e) => {
     if (this.hover) return;
     this.handleMouseLeave.cancel();
     this.handleMouseEnterDebounced(e.buttons);
   };
 
-  handleMouseEnterDebounced = debounce(buttons => {
+  handleMouseEnterDebounced = debounce((buttons) => {
     if (buttons) return;
     this.setState({ hover: true });
   }, 150);
@@ -160,7 +160,7 @@ export default class ActionListRow extends Component {
     if (this.state.hover) this.setState({ hover: false });
   }, 100);
 
-  handleMouseDown = e => {
+  handleMouseDown = (e) => {
     if (e.target.className.indexOf('selectorButton') === 0) return;
     this.handleMouseLeave();
   };

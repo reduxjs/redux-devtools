@@ -21,7 +21,7 @@ const JSONArrayNode = ({ data, ...props }) => (
 );
 
 JSONArrayNode.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
 };
 
 export default JSONArrayNode;

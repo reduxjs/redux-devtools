@@ -31,7 +31,7 @@ export default function getInspectedState(state, path, convertImmutable) {
             }
 
             return s[key];
-          }, state)
+          }, state),
         }
       : state;
 

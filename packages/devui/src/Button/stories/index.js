@@ -28,7 +28,7 @@ storiesOf('Button', module)
           'bottom-left',
           'bottom-right',
           'top-left',
-          'top-right'
+          'top-right',
         ])}
         primary={boolean('primary', true)}
         size={select('size', ['big', 'normal', 'small'], 'normal')}
@@ -52,7 +52,7 @@ storiesOf('Button', module)
             'base0C',
             'base0D',
             'base0E',
-            'base0F'
+            'base0F',
           ],
           'base08'
         )}
@@ -65,7 +65,7 @@ storiesOf('Button', module)
           'bottom-left',
           'bottom-right',
           'top-left',
-          'top-right'
+          'top-right',
         ])}
         size={select('size', ['big', 'normal', 'small'], 'normal')}
         disabled={boolean('Disabled', false)}

@@ -26,14 +26,14 @@ const JSONNode = ({
     nodeType,
     styling,
     value,
-    valueRenderer
+    valueRenderer,
   };
 
   const nestedNodeProps = {
     ...rest,
     ...simpleNodeProps,
     data: value,
-    isCustomNode
+    isCustomNode,
   };
 
   switch (nodeType) {
@@ -50,7 +50,7 @@ const JSONNode = ({
       return <JSONIterableNode {...nestedNodeProps} />;
     case 'String':
       return (
-        <JSONValueNode {...simpleNodeProps} valueGetter={raw => `"${raw}"`} />
+        <JSONValueNode {...simpleNodeProps} valueGetter={(raw) => `"${raw}"`} />
       );
     case 'Number':
       return <JSONValueNode {...simpleNodeProps} />;
@@ -58,14 +58,14 @@ const JSONNode = ({
       return (
         <JSONValueNode
           {...simpleNodeProps}
-          valueGetter={raw => (raw ? 'true' : 'false')}
+          valueGetter={(raw) => (raw ? 'true' : 'false')}
         />
       );
     case 'Date':
       return (
         <JSONValueNode
           {...simpleNodeProps}
-          valueGetter={raw => raw.toISOString()}
+          valueGetter={(raw) => raw.toISOString()}
         />
       );
     case 'Null':
@@ -79,7 +79,7 @@ const JSONNode = ({
       return (
         <JSONValueNode
           {...simpleNodeProps}
-          valueGetter={raw => raw.toString()}
+          valueGetter={(raw) => raw.toString()}
         />
       );
     case 'Custom':
@@ -103,7 +103,7 @@ JSONNode.propTypes = {
   styling: PropTypes.func.isRequired,
   value: PropTypes.any,
   valueRenderer: PropTypes.func.isRequired,
-  isCustomNode: PropTypes.func.isRequired
+  isCustomNode: PropTypes.func.isRequired,
 };
 
 export default JSONNode;

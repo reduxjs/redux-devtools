@@ -17,7 +17,7 @@ function renderChildNodes(props, from, to) {
     circularCache,
     keyPath,
     postprocessValue,
-    sortObjectKeys
+    sortObjectKeys,
   } = props;
   const childNodes = [];
 
@@ -28,7 +28,7 @@ function renderChildNodes(props, from, to) {
     collectionLimit,
     from,
     to
-  ).forEach(entry => {
+  ).forEach((entry) => {
     if (entry.to) {
       childNodes.push(
         <ItemRange
@@ -72,7 +72,7 @@ function getStateFromProps(props) {
       ? props.shouldExpandNode(props.keyPath, props.data, props.level)
       : false;
   return {
-    expanded
+    expanded,
   };
 }
 
@@ -94,14 +94,14 @@ export default class JSONNestedNode extends React.Component {
     level: PropTypes.number.isRequired,
     sortObjectKeys: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     isCircular: PropTypes.bool,
-    expandable: PropTypes.bool
+    expandable: PropTypes.bool,
   };
 
   static defaultProps = {
     data: [],
     circularCache: [],
     level: 0,
-    expandable: true
+    expandable: true,
   };
 
   constructor(props) {
@@ -119,7 +119,7 @@ export default class JSONNestedNode extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (
       !!Object.keys(nextProps).find(
-        key =>
+        (key) =>
           key !== 'circularCache' &&
           (key === 'keyPath'
             ? nextProps[key].join('/') !== this.props[key].join('/')
@@ -140,7 +140,7 @@ export default class JSONNestedNode extends React.Component {
       collectionLimit,
       keyPath,
       labelRenderer,
-      expandable
+      expandable,
     } = this.props;
     const { expanded } = this.state;
     const renderedChildren =

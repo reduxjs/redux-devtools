@@ -19,7 +19,7 @@ const themes = listThemes();
 export default class Panel extends React.Component {
   state = DEFAULT_THEME_STATE;
 
-  onChange = o => {
+  onChange = (o) => {
     const state = { [o.name.split(' ').slice(-1)[0]]: o.value };
     this.props.channel.emit(EVENT_ID_DATA, state);
     this.setState(state);
@@ -37,19 +37,19 @@ export default class Panel extends React.Component {
               type: 'select',
               name: 'theme',
               value: theme,
-              options: themes
+              options: themes,
             },
             {
               type: 'select',
               name: 'color scheme',
               value: scheme,
-              options: schemes
+              options: schemes,
             },
             {
               type: 'boolean',
               name: 'light',
-              value: light
-            }
+              value: light,
+            },
           ]}
           onFieldChange={this.onChange}
           onFieldClick={this.onClick}

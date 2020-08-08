@@ -15,7 +15,7 @@ export default class TabsHeader extends Component {
       visibleTabs: props.tabs.slice(),
       hiddenTabs: [],
       subMenuOpened: false,
-      contextMenu: undefined
+      contextMenu: undefined,
     };
     this.iconWidth = 0;
     this.hiddenTabsWidth = [];
@@ -154,22 +154,22 @@ export default class TabsHeader extends Component {
     this.setState({ subMenuOpened: false, contextMenu: undefined });
   };
 
-  getTabsWrapperRef = node => {
+  getTabsWrapperRef = (node) => {
     this.tabsWrapperRef = node;
   };
 
-  getTabsRef = node => {
+  getTabsRef = (node) => {
     this.tabsRef = node;
   };
 
-  expandMenu = e => {
+  expandMenu = (e) => {
     const rect = e.currentTarget.children[0].getBoundingClientRect();
     this.setState({
       contextMenu: {
         top: rect.top + 10,
-        left: rect.left
+        left: rect.left,
       },
-      subMenuOpened: true
+      subMenuOpened: true,
     });
   };
 
@@ -211,5 +211,5 @@ TabsHeader.propTypes = {
   onClick: PropTypes.func,
   position: PropTypes.string,
   collapsible: PropTypes.bool,
-  selected: PropTypes.string
+  selected: PropTypes.string,
 };

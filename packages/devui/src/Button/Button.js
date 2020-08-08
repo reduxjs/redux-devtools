@@ -21,7 +21,7 @@ export default class Button extends Component {
     );
   }
 
-  onMouseUp = e => {
+  onMouseUp = (e) => {
     e.target.blur();
   };
 
@@ -66,7 +66,7 @@ Button.propTypes = {
     'bottom-left',
     'bottom-right',
     'top-left',
-    'top-right'
+    'top-right',
   ]),
   onClick: PropTypes.func,
   type: PropTypes.string,
@@ -82,11 +82,11 @@ Button.propTypes = {
     'base0C',
     'base0D',
     'base0E',
-    'base0F'
+    'base0F',
   ]),
-  theme: PropTypes.object
+  theme: PropTypes.object,
 };
 
 Button.defaultProps = {
-  tooltipPosition: 'top'
+  tooltipPosition: 'top',
 };

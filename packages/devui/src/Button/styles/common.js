@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 import { fadeIn } from '../../utils/animations';
 import colorEffect from '../../utils/color';
 
-const both = tooltipPosition => {
+const both = (tooltipPosition) => {
   switch (tooltipPosition) {
     case 'bottom':
       return `
@@ -46,7 +46,7 @@ const both = tooltipPosition => {
   }
 };
 
-const before = tooltipPosition => {
+const before = (tooltipPosition) => {
   switch (tooltipPosition) {
     case 'bottom-left':
       return `
@@ -110,13 +110,13 @@ const after = (tooltipPosition, color) => {
   }
 };
 
-const getDirection = tooltipPosition => {
+const getDirection = (tooltipPosition) => {
   return tooltipPosition.indexOf('-') > 0
     ? tooltipPosition.substring(0, tooltipPosition.indexOf('-'))
     : tooltipPosition;
 };
 
-const getSize = size => {
+const getSize = (size) => {
   switch (size) {
     case 'big':
       return 'min-height: 34px; padding: 2px 12px;';
@@ -146,7 +146,7 @@ export const commonStyle = ({ theme, mark, size }) => css`
     }
 
     ${mark &&
-      `
+    `
     background-color: ${colorEffect(
       theme[mark],
       'fade',
@@ -169,7 +169,7 @@ export const tooltipStyle = ({
   tooltipTitle,
   tooltipPosition,
   mark,
-  size
+  size,
 }) => css`
   ${commonStyle({ theme, mark, size })}
 
@@ -208,7 +208,8 @@ export const tooltipStyle = ({
     ${theme.type === 'material' ? `animation: ${fadeIn} 500ms;` : ''}
   }
 
-  ${theme.type !== 'material' &&
+  ${
+    theme.type !== 'material' &&
     `
   &:after {
     content: "";
@@ -218,7 +219,8 @@ export const tooltipStyle = ({
     ${after(tooltipPosition, theme.base02)}
     ${getDirection(tooltipPosition)}: 7px;
   }
-  `}
+  `
+  }
 
   &:hover:after,
   &:hover:before {

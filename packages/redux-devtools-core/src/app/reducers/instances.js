@@ -5,7 +5,7 @@ import {
   SELECT_INSTANCE,
   REMOVE_INSTANCE,
   TOGGLE_PERSIST,
-  TOGGLE_SYNC
+  TOGGLE_SYNC,
 } from '../constants/actionTypes';
 import { DISCONNECTED } from '../constants/socketActionTypes';
 import parseJSON from '../utils/parseJSON';
@@ -24,9 +24,9 @@ export const initialState = {
       currentStateIndex: -1,
       nextActionId: 0,
       skippedActionIds: [],
-      stagedActionIds: []
-    }
-  }
+      stagedActionIds: [],
+    },
+  },
 };
 
 function updateState(state, request, id, serialize) {
@@ -36,7 +36,7 @@ function updateState(state, request, id, serialize) {
     payload = {
       ...payload,
       actionsById: parseJSON(actionsById, serialize),
-      computedStates: parseJSON(request.computedStates, serialize)
+      computedStates: parseJSON(request.computedStates, serialize),
     };
     if (request.type === 'STATE' && request.committedState) {
       payload.committedState = payload.computedStates[0].state;
@@ -53,7 +53,7 @@ function updateState(state, request, id, serialize) {
     case 'INIT':
       newState = recompute(state.default, payload, {
         action: { type: '@@INIT' },
-        timestamp: action.timestamp || Date.now()
+        timestamp: action.timestamp || Date.now(),
       });
       break;
     case 'ACTION': {
@@ -133,7 +133,7 @@ function updateState(state, request, id, serialize) {
         currentStateIndex,
         nextActionId,
         stagedActionIds,
-        committedState
+        committedState,
       };
       break;
     }
@@ -160,8 +160,8 @@ export function dispatchAction(state, { action }) {
       ...state,
       states: {
         ...state.states,
-        [id]: { ...liftedState, currentStateIndex }
-      }
+        [id]: { ...liftedState, currentStateIndex },
+      },
     };
   }
   return state;
@@ -179,7 +179,7 @@ function removeState(state, connectionId) {
   let sync = state.sync;
 
   delete connections[connectionId];
-  instanceIds.forEach(id => {
+  instanceIds.forEach((id) => {
     if (id === selected) {
       selected = null;
       sync = false;
@@ -198,7 +198,7 @@ function removeState(state, connectionId) {
     sync,
     connections,
     options,
-    states
+    states,
   };
 }
 
@@ -228,9 +228,9 @@ function init({ type, action, name, libConfig = {} }, connectionId, current) {
           skip: true,
           dispatch: true,
           sync: true,
-          test: true
+          test: true,
         },
-    serialize: libConfig.serialize
+    serialize: libConfig.serialize,
   };
 }
 
@@ -247,11 +247,11 @@ export default function instances(state = initialState, action) {
       if (typeof state.options[current] === 'undefined') {
         connections = {
           ...state.connections,
-          [connectionId]: [...(connections[connectionId] || []), current]
+          [connectionId]: [...(connections[connectionId] || []), current],
         };
         options = {
           ...options,
-          [current]: init(request, connectionId, current)
+          [current]: init(request, connectionId, current),
         };
       }
 
@@ -265,7 +265,7 @@ export default function instances(state = initialState, action) {
           request,
           current,
           options[current].serialize
-        )
+        ),
       };
     }
     case SET_STATE:
@@ -273,8 +273,8 @@ export default function instances(state = initialState, action) {
         ...state,
         states: {
           ...state.states,
-          [getActiveInstance(state)]: action.newState
-        }
+          [getActiveInstance(state)]: action.newState,
+        },
       };
     case TOGGLE_PERSIST:
       return { ...state, persisted: !state.persisted };
@@ -293,8 +293,8 @@ export default function instances(state = initialState, action) {
             ...state,
             states: {
               ...state.states,
-              [id]: parseJSON(action.state)
-            }
+              [id]: parseJSON(action.state),
+            },
           };
         }
       }
@@ -308,6 +308,6 @@ export default function instances(state = initialState, action) {
 }
 
 /* eslint-disable no-shadow */
-export const getActiveInstance = instances =>
+export const getActiveInstance = (instances) =>
   instances.selected || instances.current;
 /* eslint-enable */

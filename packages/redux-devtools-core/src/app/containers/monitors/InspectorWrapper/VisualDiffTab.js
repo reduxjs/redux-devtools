@@ -19,7 +19,7 @@ export const StyledContainer = styled.div`
     padding: 2px 3px;
     border-radius: 3px;
     position: relative;
-    color: ${props => props.theme.base07};
+    color: ${(props) => props.theme.base07};
     display: inline-block;
   }
 
@@ -43,20 +43,20 @@ export const StyledContainer = styled.div`
   .jsondiffpatch-modified .jsondiffpatch-right-value:before {
     vertical-align: top;
     padding: 2px;
-    color: ${props => props.theme.base0E};
+    color: ${(props) => props.theme.base0E};
     content: ' => ';
   }
 
   .jsondiffpatch-added .jsondiffpatch-value pre,
   .jsondiffpatch-modified .jsondiffpatch-right-value pre,
   .jsondiffpatch-textdiff-added {
-    background: ${props => effects.color(props.theme.base0B, 'alpha', 0.2)};
+    background: ${(props) => effects.color(props.theme.base0B, 'alpha', 0.2)};
   }
 
   .jsondiffpatch-deleted pre,
   .jsondiffpatch-modified .jsondiffpatch-left-value pre,
   .jsondiffpatch-textdiff-deleted {
-    background: ${props => effects.color(props.theme.base08, 'alpha', 0.2)};
+    background: ${(props) => effects.color(props.theme.base08, 'alpha', 0.2)};
     text-decoration: line-through;
   }
 
@@ -123,12 +123,12 @@ export const StyledContainer = styled.div`
     padding: 2px 0;
     padding-right: 5px;
     vertical-align: top;
-    color: ${props => props.theme.base0D};
+    color: ${(props) => props.theme.base0D};
   }
 
   .jsondiffpatch-property-name:after {
     content: ': ';
-    color: ${props => props.theme.base07};
+    color: ${(props) => props.theme.base07};
   }
 
   .jsondiffpatch-child-node-type-array > .jsondiffpatch-property-name:after {
@@ -164,7 +164,7 @@ export const StyledContainer = styled.div`
   }
 
   .jsondiffpatch-value pre:after {
-    color: ${props => props.theme.base07};
+    color: ${(props) => props.theme.base07};
     content: ',';
   }
 
@@ -187,7 +187,7 @@ export const StyledContainer = styled.div`
 
   .jsondiffpatch-moved .jsondiffpatch-moved-destination {
     display: inline-block;
-    background: ${props => props.theme.base0A};
+    background: ${(props) => props.theme.base0A};
   }
 
   .jsondiffpatch-moved .jsondiffpatch-moved-destination:before {
@@ -235,5 +235,5 @@ export default class VisualDiffTab extends Component {
 }
 
 VisualDiffTab.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
 };

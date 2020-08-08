@@ -9,7 +9,7 @@ export const style = ({ theme, main }) => css`
   width: 100%;
   overflow: hidden;
   ${!main &&
-    `
+  `
   border-top: 1px solid ${theme.base01};
   border-bottom: 1px solid ${theme.base02};
   `}

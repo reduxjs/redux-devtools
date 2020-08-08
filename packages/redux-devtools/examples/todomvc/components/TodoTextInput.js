@@ -8,13 +8,13 @@ export default class TodoTextInput extends Component {
     text: PropTypes.string,
     placeholder: PropTypes.string,
     editing: PropTypes.bool,
-    newTodo: PropTypes.bool
+    newTodo: PropTypes.bool,
   };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      text: this.props.text || ''
+      text: this.props.text || '',
     };
   }
 
@@ -43,7 +43,7 @@ export default class TodoTextInput extends Component {
       <input
         className={classnames({
           edit: this.props.editing,
-          'new-todo': this.props.newTodo
+          'new-todo': this.props.newTodo,
         })}
         type="text"
         placeholder={this.props.placeholder}

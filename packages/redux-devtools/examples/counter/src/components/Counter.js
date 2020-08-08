@@ -6,7 +6,7 @@ export default class Counter extends Component {
     increment: PropTypes.func.isRequired,
     incrementIfOdd: PropTypes.func.isRequired,
     decrement: PropTypes.func.isRequired,
-    counter: PropTypes.number.isRequired
+    counter: PropTypes.number.isRequired,
   };
 
   render() {

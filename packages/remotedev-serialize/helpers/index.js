@@ -1,14 +1,14 @@
 function mark(data, type, transformMethod) {
   return {
     data: transformMethod ? data[transformMethod]() : data,
-    __serializedType__: type
+    __serializedType__: type,
   };
 }
 
 function extract(data, type) {
   return {
     data: Object.assign({}, data),
-    __serializedType__: type
+    __serializedType__: type,
   };
 }
 
@@ -28,5 +28,5 @@ function refer(data, type, isArray, refs) {
 module.exports = {
   mark: mark,
   extract: extract,
-  refer: refer
+  refer: refer,
 };

@@ -3,7 +3,7 @@ import { render } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 import { Container } from '../src';
 
-describe('Container', function() {
+describe('Container', function () {
   it('renders correctly', () => {
     const wrapper = render(
       <Container

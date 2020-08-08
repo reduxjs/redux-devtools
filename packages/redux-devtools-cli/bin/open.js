@@ -8,7 +8,7 @@ function open(app, options) {
       var port = options.port ? '--port=' + options.port : '';
       spawn.sync(require('electron'), [
         path.join(__dirname, '..', 'app'),
-        port
+        port,
       ]);
     } catch (error) {
       /* eslint-disable no-console */

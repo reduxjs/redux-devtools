@@ -5,28 +5,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = (env = {}) => ({
   mode: 'development',
   entry: {
-    app: './index.js'
+    app: './index.js',
   },
   output: {
     path: path.resolve(__dirname, 'build/' + env.platform),
     publicPath: '',
     filename: 'js/[name].js',
-    sourceMapFilename: 'js/[name].map'
+    sourceMapFilename: 'js/[name].map',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.html$/,
-        loader: 'html-loader'
+        loader: 'html-loader',
       },
       {
         test: /\.css$/,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
       {
         test: /\.(png|gif|jpg)$/,
@@ -34,15 +34,15 @@ module.exports = (env = {}) => ({
         options: {
           limit: '25000',
           outputPath: 'images/',
-          publicPath: 'images/'
-        }
+          publicPath: 'images/',
+        },
       },
       {
         test: /\.(ttf|eot|svg|woff|woff2)$/,
         loader: 'file-loader',
-        options: { outputPath: 'fonts/', publicPath: 'fonts/' }
-      }
-    ]
+        options: { outputPath: 'fonts/', publicPath: 'fonts/' },
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -50,12 +50,12 @@ module.exports = (env = {}) => ({
         NODE_ENV: JSON.stringify(
           env.development ? 'development' : 'production'
         ),
-        PLATFORM: JSON.stringify(env.platform)
-      }
+        PLATFORM: JSON.stringify(env.platform),
+      },
     }),
     new HtmlWebpackPlugin({
-      template: 'assets/index.html'
-    })
+      template: 'assets/index.html',
+    }),
   ],
   optimization: {
     minimize: false,
@@ -64,16 +64,16 @@ module.exports = (env = {}) => ({
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'common',
-          chunks: 'all'
-        }
-      }
-    }
+          chunks: 'all',
+        },
+      },
+    },
   },
   performance: {
-    hints: false
+    hints: false,
   },
   devServer: {
-    port: 3000
+    port: 3000,
   },
-  devtool: env.development ? 'eval-source-map' : 'source-map'
+  devtool: env.development ? 'eval-source-map' : 'source-map',
 });

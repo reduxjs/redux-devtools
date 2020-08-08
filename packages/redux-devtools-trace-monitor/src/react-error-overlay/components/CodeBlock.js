@@ -17,16 +17,16 @@ const preStyle = {
   marginBottom: '0.5em',
   overflowX: 'auto',
   whiteSpace: 'pre-wrap',
-  borderRadius: '0.25rem'
+  borderRadius: '0.25rem',
 };
 
 const codeStyle = {
-  fontFamily: 'Consolas, Menlo, monospace'
+  fontFamily: 'Consolas, Menlo, monospace',
 };
 
 type CodeBlockPropsType = {|
   main: boolean,
-  codeHTML: string
+  codeHTML: string,
 |};
 
 function CodeBlock(props: CodeBlockPropsType) {

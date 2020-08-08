@@ -5,5 +5,5 @@ export const CSS_CLASS = 'redux-devtools-storybook';
 export const DEFAULT_THEME_STATE = {
   theme: 'default',
   scheme: 'default',
-  light: true
+  light: true,
 };

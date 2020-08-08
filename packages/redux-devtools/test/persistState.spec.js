@@ -19,7 +19,7 @@ describe('persistState', () => {
       },
       clear() {
         this.store = {};
-      }
+      },
     };
   });
 
@@ -69,7 +69,7 @@ describe('persistState', () => {
   });
 
   it('should run with a custom state deserializer', () => {
-    const oneLess = state => (state === undefined ? -1 : state - 1);
+    const oneLess = (state) => (state === undefined ? -1 : state - 1);
     const store = createStore(
       reducer,
       compose(instrument(), persistState('id', oneLess))
@@ -88,7 +88,7 @@ describe('persistState', () => {
   });
 
   it('should run with a custom action deserializer', () => {
-    const incToDec = action =>
+    const incToDec = (action) =>
       action.type === 'INCREMENT' ? { type: 'DECREMENT' } : action;
     const store = createStore(
       reducer,

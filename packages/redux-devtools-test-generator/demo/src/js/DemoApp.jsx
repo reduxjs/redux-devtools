@@ -10,16 +10,16 @@ const styles = {
     height: '100vh',
     width: '450px',
     margin: 'auto',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   muted: {
-    color: '#CCCCCC'
+    color: '#CCCCCC',
   },
   link: {
     margin: '0 0.5rem',
     cursor: 'pointer',
-    display: 'block'
-  }
+    display: 'block',
+  },
 };
 
 const ROOT = '/'; // process.env.NODE_ENV === 'production' ? '/' : '/';
@@ -105,10 +105,10 @@ class DemoApp extends React.Component {
   };
 }
 
-export default connect(state => state, {
-  toggleTimeoutUpdate: timeoutUpdateEnabled => ({
+export default connect((state) => state, {
+  toggleTimeoutUpdate: (timeoutUpdateEnabled) => ({
     type: 'TOGGLE_TIMEOUT_UPDATE',
-    timeoutUpdateEnabled
+    timeoutUpdateEnabled,
   }),
   timeoutUpdate: () => ({ type: 'TIMEOUT_UPDATE' }),
   increment: () => ({ type: 'INCREMENT' }),
@@ -124,10 +124,10 @@ export default connect(state => state, {
   changeImmutableNested: () => ({ type: 'CHANGE_IMMUTABLE_NESTED' }),
   hugePayload: () => ({
     type: 'HUGE_PAYLOAD',
-    payload: Array.from({ length: 10000 }).map((_, i) => i)
+    payload: Array.from({ length: 10000 }).map((_, i) => i),
   }),
   addFunction: () => ({ type: 'ADD_FUNCTION' }),
   addSymbol: () => ({ type: 'ADD_SYMBOL' }),
   shuffleArray: () => ({ type: 'SHUFFLE_ARRAY' }),
-  pushRoute
+  pushRoute,
 })(DemoApp);

@@ -12,7 +12,7 @@ class Root extends Component {
       this.store = store;
       store.dispatch({
         type: CONNECT_REQUEST,
-        options: preloadedState.connection || this.props.socketOptions
+        options: preloadedState.connection || this.props.socketOptions,
       });
       this.forceUpdate();
     });
@@ -33,8 +33,8 @@ Root.propTypes = {
     hostname: PropTypes.string,
     port: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     autoReconnect: PropTypes.bool,
-    secure: PropTypes.bool
-  })
+    secure: PropTypes.bool,
+  }),
 };
 
 export default Root;

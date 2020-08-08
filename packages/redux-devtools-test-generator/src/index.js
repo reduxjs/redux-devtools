@@ -6,7 +6,7 @@ import {
   Button,
   Select,
   Notification,
-  Dialog
+  Dialog,
 } from 'devui';
 import { formSchema, uiSchema, defaultFormData } from './templateForm';
 import AddIcon from 'react-icons/lib/md/add';
@@ -34,7 +34,7 @@ export default class TestTab extends Component {
 
   getPersistedState = () => this.props.monitorState.testGenerator || {};
 
-  handleSelectTemplate = selectedTemplate => {
+  handleSelectTemplate = (selectedTemplate) => {
     const { templates = getDefaultTemplates() } = this.getPersistedState();
     this.updateState({ selected: templates.indexOf(selectedTemplate) });
   };
@@ -50,18 +50,18 @@ export default class TestTab extends Component {
   handleSubmit = ({ formData: template }) => {
     const {
       templates = getDefaultTemplates(),
-      selected = 0
+      selected = 0,
     } = this.getPersistedState();
     if (this.state.dialogStatus === 'Add') {
       this.updateState({
         selected: templates.length,
-        templates: [...templates, template]
+        templates: [...templates, template],
       });
     } else {
       const editedTemplates = [...templates];
       editedTemplates[selected] = template;
       this.updateState({
-        templates: editedTemplates
+        templates: editedTemplates,
       });
     }
     this.handleCloseDialog();
@@ -70,14 +70,14 @@ export default class TestTab extends Component {
   handleRemove = () => {
     const {
       templates = getDefaultTemplates(),
-      selected = 0
+      selected = 0,
     } = this.getPersistedState();
     this.updateState({
       selected: 0,
       templates:
         templates.length === 1
           ? undefined
-          : [...templates.slice(0, selected), ...templates.slice(selected + 1)]
+          : [...templates.slice(0, selected), ...templates.slice(selected + 1)],
     });
     this.handleCloseDialog();
   };
@@ -90,12 +90,12 @@ export default class TestTab extends Component {
     this.setState({ dialogStatus: 'Edit' });
   };
 
-  updateState = newState => {
+  updateState = (newState) => {
     this.props.updateMonitorState({
       testGenerator: {
         ...this.props.monitorState.testGenerator,
-        ...newState
-      }
+        ...newState,
+      },
     });
   };
 
@@ -153,7 +153,7 @@ export default class TestTab extends Component {
               </Button>,
               <Button key="remove" onClick={this.handleRemove}>
                 Remove
-              </Button>
+              </Button>,
             ]}
             submitText={dialogStatus}
             schema={formSchema}
@@ -171,13 +171,13 @@ TestTab.propTypes = {
     testGenerator: PropTypes.shape({
       templates: PropTypes.array,
       selected: PropTypes.number,
-      hideTip: PropTypes.bool
-    })
+      hideTip: PropTypes.bool,
+    }),
   }).isRequired,
   /*
   options: PropTypes.shape({
     lib: PropTypes.string
   }).isRequired,
   */
-  updateMonitorState: PropTypes.func.isRequired
+  updateMonitorState: PropTypes.func.isRequired,
 };

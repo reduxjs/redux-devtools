@@ -19,14 +19,14 @@ const traceStyle = {
   fontSize: '1em',
   flex: '0 1 auto',
   minHeight: '0px',
-  overflow: 'auto'
+  overflow: 'auto',
 };
 
 type Props = {|
   stackFrames: StackFrameType[],
   errorName: string,
   contextSize: number,
-  editorHandler: (errorLoc: ErrorLocation) => void
+  editorHandler: (errorLoc: ErrorLocation) => void,
 |};
 
 class StackTrace extends Component<Props> {
