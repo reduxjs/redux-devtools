@@ -2,7 +2,6 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var { CleanWebpackPlugin } = require('clean-webpack-plugin');
-var ExportFilesWebpackPlugin = require('export-files-webpack-plugin');
 
 var pkg = require('./package.json');
 
@@ -34,14 +33,7 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
     }),
-  ].concat(
-    isProduction
-      ? []
-      : [
-          new ExportFilesWebpackPlugin('demo/dist/index.html'),
-          new webpack.HotModuleReplacementPlugin(),
-        ]
-  ),
+  ].concat(isProduction ? [] : [new webpack.HotModuleReplacementPlugin()]),
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },

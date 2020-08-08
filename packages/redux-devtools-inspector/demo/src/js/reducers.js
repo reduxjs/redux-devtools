@@ -24,7 +24,7 @@ const IMMUTABLE_MAP = Immutable.Map({
   list: Immutable.List(['a', 'b', 'c']),
   set: Immutable.Set(['a', 'b', 'c']),
   stack: Immutable.Stack(['a', 'b', 'c']),
-  seq: Immutable.Seq.of(1, 2, 3, 4, 5, 6, 7, 8),
+  seq: Immutable.Seq([1, 2, 3, 4, 5, 6, 7, 8]),
 });
 
 const NATIVE_MAP = new window.Map([
