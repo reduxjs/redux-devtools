@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import observeResize from 'simple-element-resize-detector';
-import CollapseIcon from 'react-icons/lib/fa/angle-double-right';
+import { FaAngleDoubleRight } from 'react-icons/fa';
 import ContextMenu from '../ContextMenu';
 import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
@@ -186,7 +186,7 @@ export default class TabsHeader extends Component {
           {this.props.collapsible &&
             visibleTabs.length < this.props.items.length && (
               <button onClick={this.expandMenu} value="expandIcon">
-                <CollapseIcon />
+                <FaAngleDoubleRight />
               </button>
             )}
         </div>

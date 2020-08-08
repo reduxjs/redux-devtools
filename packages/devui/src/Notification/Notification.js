@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CloseIcon from 'react-icons/lib/md/close';
-import WarningIcon from 'react-icons/lib/md/warning';
-import ErrorIcon from 'react-icons/lib/md/error';
-import SuccessIcon from 'react-icons/lib/md/check-circle';
+import { MdClose } from 'react-icons/md';
+import { MdWarning } from 'react-icons/md';
+import { MdError } from 'react-icons/md';
+import { MdCheckCircle } from 'react-icons/md';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
 
@@ -20,11 +20,11 @@ export default class Notification extends Component {
   getIcon = () => {
     switch (this.props.type) {
       case 'warning':
-        return <WarningIcon />;
+        return <MdWarning />;
       case 'error':
-        return <ErrorIcon />;
+        return <MdError />;
       case 'success':
-        return <SuccessIcon />;
+        return <MdCheckCircle />;
       default:
         return null;
     }
@@ -37,7 +37,7 @@ export default class Notification extends Component {
         <span>{this.props.children}</span>
         {this.props.onClose && (
           <button onClick={this.props.onClose}>
-            <CloseIcon />
+            <MdClose />
           </button>
         )}
       </NotificationWrapper>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
-import UploadIcon from 'react-icons/lib/ti/upload';
+import { TiUpload } from 'react-icons/ti';
 import { importState } from '../../actions';
 
 class ImportButton extends Component {
@@ -43,7 +43,7 @@ class ImportButton extends Component {
   render() {
     return (
       <Button title="Import from a file" onClick={this.handleImport}>
-        <UploadIcon />
+        <TiUpload />
         <input
           type="file"
           ref={this.mapRef}

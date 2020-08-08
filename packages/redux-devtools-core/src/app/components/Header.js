@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Tabs, Toolbar, Button, Divider } from 'devui';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import DocsIcon from 'react-icons/lib/go/book';
-import FeedBackIcon from 'react-icons/lib/io/android-textsms';
-import TwitterIcon from 'react-icons/lib/ti/social-twitter';
-import SupportIcon from 'react-icons/lib/ti/heart-full-outline';
+import { GoBook } from 'react-icons/go';
+import { IoMdText } from 'react-icons/io';
+import { TiSocialTwitter } from 'react-icons/ti';
+import { TiHeartFullOutline } from 'react-icons/ti';
 import { changeSection } from '../actions';
 
 const tabs = [{ name: 'Actions' }, { name: 'Reports' }, { name: 'Settings' }];
@@ -37,7 +37,7 @@ class Header extends Component {
           tooltipPosition="bottom"
           onClick={this.openLink('http://extension.remotedev.io')}
         >
-          <DocsIcon />
+          <GoBook />
         </Button>
         <Button
           title="Feedback"
@@ -46,14 +46,14 @@ class Header extends Component {
             'http://extension.remotedev.io/docs/Feedback.html'
           )}
         >
-          <FeedBackIcon />
+          <IoMdText />
         </Button>
         <Button
           title="Follow us"
           tooltipPosition="bottom"
           onClick={this.openLink('https://twitter.com/ReduxDevTools')}
         >
-          <TwitterIcon />
+          <TiSocialTwitter />
         </Button>
         <Button
           title="Support us"
@@ -62,7 +62,7 @@ class Header extends Component {
             'https://opencollective.com/redux-devtools-extension'
           )}
         >
-          <SupportIcon />
+          <TiHeartFullOutline />
         </Button>
       </Toolbar>
     );

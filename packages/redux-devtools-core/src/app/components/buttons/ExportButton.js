@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
-import DownloadIcon from 'react-icons/lib/ti/download';
+import { TiDownload } from 'react-icons/ti';
 import { exportState } from '../../actions';
 
 class ExportButton extends Component {
@@ -18,7 +18,7 @@ class ExportButton extends Component {
   render() {
     return (
       <Button title="Export to a file" onClick={this.props.exportState}>
-        <DownloadIcon />
+        <TiDownload />
       </Button>
     );
   }

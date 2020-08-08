@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
-import MdFiberManualRecord from 'react-icons/lib/md/fiber-manual-record';
+import { MdFiberManualRecord } from 'react-icons/md';
 import Button from '../';
 
 export const Container = styled.div`

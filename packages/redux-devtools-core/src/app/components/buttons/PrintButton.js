@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'devui';
-import PrintIcon from 'react-icons/lib/md/print';
+import { MdPrint } from 'react-icons/md';
 
 export default class PrintButton extends Component {
   shouldComponentUpdate() {
@@ -37,7 +37,7 @@ export default class PrintButton extends Component {
   render() {
     return (
       <Button title="Print" onClick={this.handlePrint}>
-        <PrintIcon />
+        <MdPrint />
       </Button>
     );
   }

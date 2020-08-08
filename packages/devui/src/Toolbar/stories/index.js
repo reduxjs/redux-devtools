@@ -9,10 +9,10 @@ import {
   boolean,
   select,
 } from '@storybook/addon-knobs';
-import PlayIcon from 'react-icons/lib/md/play-arrow';
-import RecordIcon from 'react-icons/lib/md/fiber-manual-record';
-import LeftIcon from 'react-icons/lib/md/keyboard-arrow-left';
-import RightIcon from 'react-icons/lib/md/keyboard-arrow-right';
+import { MdPlayArrow } from 'react-icons/md';
+import { MdFiberManualRecord } from 'react-icons/md';
+import { MdKeyboardArrowLeft } from 'react-icons/md';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 import {
   Toolbar,
   Divider,
@@ -77,7 +77,7 @@ storiesOf('Toolbar', module)
           disabled={boolean('Disabled', false)}
           onClick={action('button clicked')}
         >
-          <RecordIcon />
+          <MdFiberManualRecord />
         </Button>
         <Divider />
         <Spacer />
@@ -151,7 +151,7 @@ storiesOf('Toolbar', module)
             ])}
             onClick={action('button clicked')}
           >
-            <PlayIcon />
+            <MdPlayArrow />
           </Button>
           <Slider
             value={number('value', 80)}
@@ -176,7 +176,7 @@ storiesOf('Toolbar', module)
             disabled
             onClick={action('previous state clicked')}
           >
-            <LeftIcon />
+            <MdKeyboardArrowLeft />
           </Button>
           <Button
             title="Next state"
@@ -192,7 +192,7 @@ storiesOf('Toolbar', module)
             ])}
             onClick={action('next state clicked')}
           >
-            <RightIcon />
+            <MdKeyboardArrowRight />
           </Button>
           <SegmentedControl
             values={['live', '1x']}

@@ -9,8 +9,8 @@ import {
   Dialog,
 } from 'devui';
 import { formSchema, uiSchema, defaultFormData } from './templateForm';
-import AddIcon from 'react-icons/lib/md/add';
-import EditIcon from 'react-icons/lib/md/edit';
+import { MdAdd } from 'react-icons/md';
+import { MdEdit } from 'react-icons/md';
 import TestGenerator from './TestGenerator';
 import jestTemplate from './redux/jest/template';
 import mochaTemplate from './redux/mocha/template';
@@ -119,10 +119,10 @@ export default class TestTab extends Component {
             onChange={this.handleSelectTemplate}
           />
           <Button onClick={this.editTemplate}>
-            <EditIcon />
+            <MdEdit />
           </Button>
           <Button onClick={this.addTemplate}>
-            <AddIcon />
+            <MdAdd />
           </Button>
         </Toolbar>
         {!assertion ? (
