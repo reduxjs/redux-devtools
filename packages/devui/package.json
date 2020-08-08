@@ -15,7 +15,7 @@
   "scripts": {
     "start": "npm run storybook",
     "build": "rimraf ./lib && babel ./src --out-dir ./lib --ignore tests,stories",
-    "lint:css": "stylelint './src/**/styles/*.js'",
+    "lint:css": "stylelint \"./src/**/styles/*.js\"",
     "test:update": "npm run jest -- -u",
     "test": "jest --no-cache",
     "storybook": "start-storybook -p 9001 -c .storybook -s ./fonts",
