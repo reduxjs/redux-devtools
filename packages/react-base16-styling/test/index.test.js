@@ -1,4 +1,4 @@
-import { createStyling, invertTheme, getBase16Theme } from '../src';
+import { createStyling, invertBase16Theme, getBase16Theme } from '../src';
 import apathy from 'base16/lib/apathy';
 
 const base16Theme = {
@@ -86,7 +86,7 @@ const getStylingFromBase16 = base16 => ({
 });
 
 test('invertTheme', () => {
-  expect(invertTheme(base16Theme)).toEqual(invertedBase16Theme);
+  expect(invertBase16Theme(base16Theme)).toEqual(invertedBase16Theme);
 });
 
 test('getBase16Theme', () => {
