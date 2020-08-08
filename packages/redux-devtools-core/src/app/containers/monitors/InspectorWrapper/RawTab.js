@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Editor } from 'devui';
-import stringify from 'javascript-stringify';
+import { stringify } from 'javascript-stringify';
 
 export default class RawTab extends Component {
   constructor(props) {
