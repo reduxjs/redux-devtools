@@ -43,13 +43,10 @@ const getDevTools = ({ location }) =>
       changeMonitorKey="ctrl-m"
     >
       <DevtoolsInspector
-        theme={do {
-          const match = window.location.search.match(/theme=([^&]+)/);
-          match ? match[1] : 'inspector';
-        }}
+        theme={getOptions(location).theme}
         shouldPersistState
-        invertTheme={location.search.indexOf('dark') === -1}
-        supportImmutable={location.search.indexOf('immutable') !== -1}
+        invertTheme={getOptions(location).dark}
+        supportImmutable={getOptions(location).supportImmutable}
         tabs={(defaultTabs) => [
           {
             name: 'Custom Tab',
@@ -64,13 +61,13 @@ const getDevTools = ({ location }) =>
 const ROOT =
   process.env.NODE_ENV === 'production' ? '/redux-devtools-inspector/' : '/';
 
-const DevTools = getDevTools(getOptions());
+const DevTools = getDevTools({ location: window.location });
 
 const history = createBrowserHistory();
 
 const useDevtoolsExtension =
   !!window.__REDUX_DEVTOOLS_EXTENSION__ &&
-  window.location.search.indexOf('ext') !== -1;
+  getOptions(window.location).useExtension;
 
 const enhancer = compose(
   applyMiddleware(logger, routerMiddleware(history)),

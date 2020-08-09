@@ -1,11 +1,11 @@
-export default function getOptions() {
+export default function getOptions(location) {
   return {
-    useExtension: window.location.search.indexOf('ext') !== -1,
-    supportImmutable: window.location.search.indexOf('immutable') !== -1,
+    useExtension: location.search.indexOf('ext') !== -1,
+    supportImmutable: location.search.indexOf('immutable') !== -1,
     theme: do {
-      const match = window.location.search.match(/theme=([^&]+)/);
+      const match = location.search.match(/theme=([^&]+)/);
       match ? match[1] : 'inspector';
     },
-    dark: window.location.search.indexOf('dark') !== -1,
+    dark: location.search.indexOf('dark') !== -1,
   };
 }

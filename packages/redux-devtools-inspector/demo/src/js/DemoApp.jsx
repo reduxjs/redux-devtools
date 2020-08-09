@@ -85,7 +85,7 @@ function buildUrl(options) {
 
 class DemoApp extends React.Component {
   render() {
-    const options = getOptions();
+    const options = getOptions(this.props.router.location);
 
     return (
       <div style={styles.wrapper}>
@@ -193,7 +193,7 @@ class DemoApp extends React.Component {
         <div style={styles.links}>
           <a onClick={this.toggleExtension} style={styles.link}>
             {(options.useExtension ? 'Disable' : 'Enable') +
-              ' Chrome Extension'}
+              ' Chrome Extension (will reload this page)'}
           </a>
           <a onClick={this.toggleImmutableSupport} style={styles.link}>
             {(options.supportImmutable ? 'Disable' : 'Enable') +
@@ -205,15 +205,16 @@ class DemoApp extends React.Component {
   }
 
   toggleExtension = () => {
-    const options = getOptions();
+    const options = getOptions(this.props.router.location);
 
-    this.props.pushRoute(
-      buildUrl({ ...options, useExtension: !options.useExtension })
-    );
+    window.location.href = buildUrl({
+      ...options,
+      useExtension: !options.useExtension,
+    });
   };
 
   toggleImmutableSupport = () => {
-    const options = getOptions();
+    const options = getOptions(this.props.router.location);
 
     this.props.pushRoute(
       buildUrl({ ...options, supportImmutable: !options.supportImmutable })
@@ -221,7 +222,7 @@ class DemoApp extends React.Component {
   };
 
   toggleTheme = () => {
-    const options = getOptions();
+    const options = getOptions(this.props.router.location);
 
     this.props.pushRoute(buildUrl({ ...options, dark: !options.dark }));
   };
