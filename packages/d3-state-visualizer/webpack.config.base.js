@@ -8,6 +8,7 @@ module.exports = {
   },
   output: {
     library: 'd3-state-visualizer',
+    libraryExport: 'default',
     libraryTarget: 'umd',
   },
   resolve: {

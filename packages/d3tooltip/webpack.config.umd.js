@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = (env = {}) => ({
-  mode: 'production',
+  mode: env.production ? 'production' : 'development',
   entry: {
     app: ['./src/index.js'],
   },
@@ -9,7 +9,7 @@ module.exports = (env = {}) => ({
     library: 'd3tooltip',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
-    filename: env.minimize ? 'd3tooltip.min.js' : 'd3tooltip.js',
+    filename: env.production ? 'd3tooltip.min.js' : 'd3tooltip.js',
   },
   module: {
     rules: [
@@ -19,11 +19,5 @@ module.exports = (env = {}) => ({
         exclude: /node_modules/,
       },
     ],
-  },
-  optimization: {
-    minimize: !!env.minimize,
-  },
-  performance: {
-    hints: false,
   },
 });
