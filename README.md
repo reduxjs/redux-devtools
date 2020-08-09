@@ -4,7 +4,7 @@
 
 Developer Tools to power-up [Redux](https://github.com/reactjs/redux) development workflow or any other architecture which handles the state change (see [integrations](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Integrations.md)).
 
-It can be used as a browser extension (for [Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/reduxdevtools/)), as [a standalone app](https://github.com/zalmoxisus/remotedev-app) or as [a React component](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools) integrated in the client app.
+It can be used as a browser extension (for [Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd), [Edge](https://microsoftedge.microsoft.com/addons/detail/redux-devtools/nnkgneoiohoecpdiaponcejilbhhikei) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/reduxdevtools/)), as [a standalone app](https://github.com/zalmoxisus/remotedev-app) or as [a React component](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools) integrated in the client app.
 
 ![image](https://user-images.githubusercontent.com/7957859/48663602-3aac4900-ea9b-11e8-921f-97059cbb599c.png)
 
