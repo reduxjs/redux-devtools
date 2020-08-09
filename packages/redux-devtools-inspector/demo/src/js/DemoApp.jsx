@@ -12,7 +12,7 @@ import InputGroup from 'react-bootstrap/lib/InputGroup';
 import * as base16 from 'base16';
 import * as inspectorThemes from '../../../src/themes';
 import getOptions from './getOptions';
-import { push as pushRoute } from 'react-router-redux';
+import { push as pushRoute } from 'connected-react-router';
 
 const styles = {
   wrapper: {

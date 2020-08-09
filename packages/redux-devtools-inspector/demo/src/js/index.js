@@ -3,15 +3,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import DemoApp from './DemoApp';
 import { Provider } from 'react-redux';
-import reducers from './reducers';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import createRootReducer from './reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
-import { Router, Route, browserHistory } from 'react-router';
-import {
-  syncHistoryWithStore,
-  routerReducer,
-  routerMiddleware,
-} from 'react-router-redux';
+import { Route } from 'react-router';
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
 import { createDevTools, persistState } from 'redux-devtools';
 import DevtoolsInspector from '../../../src/DevtoolsInspector';
 import DockMonitor from 'redux-devtools-dock-monitor';
@@ -37,7 +34,7 @@ const CustomComponent = () => (
   </div>
 );
 
-const getDevTools = (options) =>
+const getDevTools = ({ location }) =>
   createDevTools(
     <DockMonitor
       defaultIsVisible
@@ -46,10 +43,13 @@ const getDevTools = (options) =>
       changeMonitorKey="ctrl-m"
     >
       <DevtoolsInspector
-        theme={options.theme}
+        theme={do {
+          const match = window.location.search.match(/theme=([^&]+)/);
+          match ? match[1] : 'inspector';
+        }}
         shouldPersistState
-        invertTheme={!options.dark}
-        supportImmutable={options.supportImmutable}
+        invertTheme={location.search.indexOf('dark') === -1}
+        supportImmutable={location.search.indexOf('immutable') !== -1}
         tabs={(defaultTabs) => [
           {
             name: 'Custom Tab',
@@ -64,15 +64,17 @@ const getDevTools = (options) =>
 const ROOT =
   process.env.NODE_ENV === 'production' ? '/redux-devtools-inspector/' : '/';
 
-let DevTools = getDevTools(getOptions());
+const DevTools = getDevTools(getOptions());
 
-const reduxRouterMiddleware = routerMiddleware(browserHistory);
+const history = createBrowserHistory();
+
+const useDevtoolsExtension =
+  !!window.__REDUX_DEVTOOLS_EXTENSION__ &&
+  window.location.search.indexOf('ext') !== -1;
 
 const enhancer = compose(
-  applyMiddleware(logger, reduxRouterMiddleware),
+  applyMiddleware(logger, routerMiddleware(history)),
   (...args) => {
-    const useDevtoolsExtension =
-      !!window.__REDUX_DEVTOOLS_EXTENSION__ && getOptions().useExtension;
     const instrument = useDevtoolsExtension
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : DevTools.instrument();
@@ -81,41 +83,16 @@ const enhancer = compose(
   persistState(getDebugSessionKey())
 );
 
-const store = createStore(
-  combineReducers({
-    ...reducers,
-    routing: routerReducer,
-  }),
-  {},
-  enhancer
-);
+const store = createStore(createRootReducer(history), {}, enhancer);
 
-const history = syncHistoryWithStore(browserHistory, store);
-
-const handleRouterUpdate = () => {
-  renderApp(getOptions());
-};
-
-const router = (
-  <Router history={history} onUpdate={handleRouterUpdate}>
-    <Route path={ROOT} component={DemoApp} />
-  </Router>
-);
-
-const renderApp = (options) => {
-  DevTools = getDevTools(options);
-  const useDevtoolsExtension =
-    !!window.__REDUX_DEVTOOLS_EXTENSION__ && options.useExtension;
-
-  return render(
-    <Provider store={store}>
-      <div>
-        {router}
+render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Route path={ROOT}>
+        <DemoApp />
         {!useDevtoolsExtension && <DevTools />}
-      </div>
-    </Provider>,
-    document.getElementById('root')
-  );
-};
-
-renderApp(getOptions());
+      </Route>
+    </ConnectedRouter>
+  </Provider>,
+  document.getElementById('root')
+);

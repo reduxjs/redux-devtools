@@ -1,5 +1,7 @@
 import Immutable from 'immutable';
 import shuffle from 'lodash.shuffle';
+import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 
 const NESTED = {
   long: {
@@ -77,66 +79,70 @@ function createIterator() {
 
 const DEFAULT_SHUFFLE_ARRAY = [0, 1, null, { id: 1 }, { id: 2 }, 'string'];
 
-export default {
-  timeoutUpdateEnabled: (state = false, action) =>
-    action.type === 'TOGGLE_TIMEOUT_UPDATE'
-      ? action.timeoutUpdateEnabled
-      : state,
-  store: (state = 0, action) =>
-    action.type === 'INCREMENT' ? state + 1 : state,
-  undefined: (state = { val: undefined }) => state,
-  null: (state = null) => state,
-  func: (state = () => {}) => state,
-  array: (state = [], action) =>
-    action.type === 'PUSH'
-      ? [...state, Math.random()]
-      : action.type === 'POP'
-      ? state.slice(0, state.length - 1)
-      : action.type === 'REPLACE'
-      ? [Math.random(), ...state.slice(1)]
-      : state,
-  hugeArrays: (state = [], action) =>
-    action.type === 'PUSH_HUGE_ARRAY' ? [...state, ...HUGE_ARRAY] : state,
-  hugeObjects: (state = [], action) =>
-    action.type === 'ADD_HUGE_OBJECT' ? [...state, HUGE_OBJECT] : state,
-  iterators: (state = [], action) =>
-    action.type === 'ADD_ITERATOR' ? [...state, createIterator()] : state,
-  nested: (state = NESTED, action) =>
-    action.type === 'CHANGE_NESTED'
-      ? {
-          ...state,
-          long: {
-            nested: [
-              {
-                path: {
-                  to: {
-                    a: state.long.nested[0].path.to.a + '!',
+const createRootReducer = (history) =>
+  combineReducers({
+    router: connectRouter(history),
+    timeoutUpdateEnabled: (state = false, action) =>
+      action.type === 'TOGGLE_TIMEOUT_UPDATE'
+        ? action.timeoutUpdateEnabled
+        : state,
+    store: (state = 0, action) =>
+      action.type === 'INCREMENT' ? state + 1 : state,
+    undefined: (state = { val: undefined }) => state,
+    null: (state = null) => state,
+    func: (state = () => {}) => state,
+    array: (state = [], action) =>
+      action.type === 'PUSH'
+        ? [...state, Math.random()]
+        : action.type === 'POP'
+        ? state.slice(0, state.length - 1)
+        : action.type === 'REPLACE'
+        ? [Math.random(), ...state.slice(1)]
+        : state,
+    hugeArrays: (state = [], action) =>
+      action.type === 'PUSH_HUGE_ARRAY' ? [...state, ...HUGE_ARRAY] : state,
+    hugeObjects: (state = [], action) =>
+      action.type === 'ADD_HUGE_OBJECT' ? [...state, HUGE_OBJECT] : state,
+    iterators: (state = [], action) =>
+      action.type === 'ADD_ITERATOR' ? [...state, createIterator()] : state,
+    nested: (state = NESTED, action) =>
+      action.type === 'CHANGE_NESTED'
+        ? {
+            ...state,
+            long: {
+              nested: [
+                {
+                  path: {
+                    to: {
+                      a: state.long.nested[0].path.to.a + '!',
+                    },
                   },
                 },
-              },
-            ],
-          },
-        }
-      : state,
-  recursive: (state = [], action) =>
-    action.type === 'ADD_RECURSIVE' ? [...state, { ...RECURSIVE }] : state,
-  immutables: (state = [], action) =>
-    action.type === 'ADD_IMMUTABLE_MAP' ? [...state, IMMUTABLE_MAP] : state,
-  maps: (state = [], action) =>
-    action.type === 'ADD_NATIVE_MAP' ? [...state, NATIVE_MAP] : state,
-  immutableNested: (state = IMMUTABLE_NESTED, action) =>
-    action.type === 'CHANGE_IMMUTABLE_NESTED'
-      ? state.updateIn(
-          ['long', 'nested', 0, 'path', 'to', 'a'],
-          (str) => str + '!'
-        )
-      : state,
-  addFunction: (state = null, action) =>
-    action.type === 'ADD_FUNCTION' ? { f: FUNC } : state,
-  addSymbol: (state = null, action) =>
-    action.type === 'ADD_SYMBOL'
-      ? { s: window.Symbol('symbol'), error: new Error('TEST') }
-      : state,
-  shuffleArray: (state = DEFAULT_SHUFFLE_ARRAY, action) =>
-    action.type === 'SHUFFLE_ARRAY' ? shuffle(state) : state,
-};
+              ],
+            },
+          }
+        : state,
+    recursive: (state = [], action) =>
+      action.type === 'ADD_RECURSIVE' ? [...state, { ...RECURSIVE }] : state,
+    immutables: (state = [], action) =>
+      action.type === 'ADD_IMMUTABLE_MAP' ? [...state, IMMUTABLE_MAP] : state,
+    maps: (state = [], action) =>
+      action.type === 'ADD_NATIVE_MAP' ? [...state, NATIVE_MAP] : state,
+    immutableNested: (state = IMMUTABLE_NESTED, action) =>
+      action.type === 'CHANGE_IMMUTABLE_NESTED'
+        ? state.updateIn(
+            ['long', 'nested', 0, 'path', 'to', 'a'],
+            (str) => str + '!'
+          )
+        : state,
+    addFunction: (state = null, action) =>
+      action.type === 'ADD_FUNCTION' ? { f: FUNC } : state,
+    addSymbol: (state = null, action) =>
+      action.type === 'ADD_SYMBOL'
+        ? { s: window.Symbol('symbol'), error: new Error('TEST') }
+        : state,
+    shuffleArray: (state = DEFAULT_SHUFFLE_ARRAY, action) =>
+      action.type === 'SHUFFLE_ARRAY' ? shuffle(state) : state,
+  });
+
+export default createRootReducer;
