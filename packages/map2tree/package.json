@@ -7,7 +7,7 @@
     "clean": "rimraf lib dist",
     "build": "babel src --out-dir lib",
     "build:umd": "webpack --progress --config webpack.config.umd.js",
-    "build:umd:min": "webpack --env.minimize --progress --config webpack.config.umd.js",
+    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.js",
     "test": "jest",
     "prepare": "npm run build && npm run build:umd",
     "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min"

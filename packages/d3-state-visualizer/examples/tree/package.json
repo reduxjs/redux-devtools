@@ -2,9 +2,9 @@
   "name": "d3-state-visualizer-tree-example",
   "version": "0.0.0",
   "description": "Visualize your app state as a tree",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
