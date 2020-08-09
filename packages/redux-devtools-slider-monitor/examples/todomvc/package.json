@@ -2,7 +2,7 @@
   "name": "slider-todomvc",
   "version": "0.0.0",
   "description": "TodoMVC example for redux",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.prod.js"
@@ -23,6 +23,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "react-hot-loader": "^4.12.21",
     "react-redux": "^7.2.1",
     "redux-devtools-slider-monitor": "^2.0.0-3"
   }
