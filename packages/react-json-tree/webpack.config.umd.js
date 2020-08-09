@@ -1,16 +1,16 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env = {}) => ({
-  mode: 'production',
+  mode: env.production ? 'production' : 'development',
   entry: {
     app: ['./src/index.js'],
   },
   output: {
     library: 'ReactJsonTree',
+    libraryExport: 'default',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'umd'),
-    filename: env.minimize ? 'react-json-tree.min.js' : 'react-json-tree.js',
+    filename: env.production ? 'react-json-tree.min.js' : 'react-json-tree.js',
   },
   module: {
     rules: [
@@ -34,18 +34,5 @@ module.exports = (env = {}) => ({
       commonjs: 'react-dom',
       amd: 'react-dom',
     },
-  },
-  optimization: {
-    minimize: !!env.minimize,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          safari10: true,
-        },
-      }),
-    ],
-  },
-  performance: {
-    hints: false,
   },
 });

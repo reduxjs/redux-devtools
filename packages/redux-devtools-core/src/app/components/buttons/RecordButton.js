@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
-import RecordIcon from 'react-icons/lib/md/fiber-manual-record';
+import { MdFiberManualRecord } from 'react-icons/md';
 import { pauseRecording } from '../../actions';
 
 class RecordButton extends Component {
@@ -23,7 +23,7 @@ class RecordButton extends Component {
         title={this.props.paused ? 'Start recording' : 'Pause recording'}
         onClick={this.props.pauseRecording}
       >
-        <RecordIcon />
+        <MdFiberManualRecord />
       </Button>
     );
   }

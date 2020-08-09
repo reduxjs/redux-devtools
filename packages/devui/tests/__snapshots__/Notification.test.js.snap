@@ -19,16 +19,15 @@ exports[`Notification renders with props 1`] = `
   <svg
     fill="currentColor"
     height="1em"
-    preserveAspectRatio="xMidYMid meet"
-    style="vertical-align:middle"
-    viewBox="0 0 40 40"
+    stroke="currentColor"
+    stroke-width="0"
+    viewBox="0 0 24 24"
     width="1em"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <g>
-      <path
-        d="m21.6 21.6v-10h-3.2v10h3.2z m0 6.8v-3.4h-3.2v3.4h3.2z m-1.6-25c9.2 0 16.6 7.4 16.6 16.6s-7.4 16.6-16.6 16.6-16.6-7.4-16.6-16.6 7.4-16.6 16.6-16.6z"
-      />
-    </g>
+    <path
+      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+    />
   </svg>
   <span>
     Message
@@ -37,16 +36,15 @@ exports[`Notification renders with props 1`] = `
     <svg
       fill="currentColor"
       height="1em"
-      preserveAspectRatio="xMidYMid meet"
-      style="vertical-align:middle"
-      viewBox="0 0 40 40"
+      stroke="currentColor"
+      stroke-width="0"
+      viewBox="0 0 24 24"
       width="1em"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <g>
-        <path
-          d="m31.6 10.7l-9.3 9.3 9.3 9.3-2.3 2.3-9.3-9.3-9.3 9.3-2.3-2.3 9.3-9.3-9.3-9.3 2.3-2.3 9.3 9.3 9.3-9.3z"
-        />
-      </g>
+      <path
+        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+      />
     </svg>
   </button>
 </div>

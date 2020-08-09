@@ -147,7 +147,7 @@ function connect() {
   if (process.env.NODE_ENV === 'test') return;
   const connection = store.getState().connection;
   try {
-    socket = socketCluster.connect(
+    socket = socketCluster.create(
       connection.type === 'remotedev' ? socketOptions : connection.options
     );
     handleConnection(store);

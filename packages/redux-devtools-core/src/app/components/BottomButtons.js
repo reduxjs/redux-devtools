@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Toolbar, Divider } from 'devui';
-import SaveIcon from 'react-icons/lib/md/save';
+import { MdSave } from 'react-icons/md';
 import ExportButton from './buttons/ExportButton';
 import ImportButton from './buttons/ImportButton';
 import PrintButton from './buttons/PrintButton';
@@ -30,7 +30,7 @@ export default class BottomButtons extends Component {
       <Toolbar borderPosition="top">
         {features.export && (
           <Button title="Save a report" tooltipPosition="top-right">
-            <SaveIcon />
+            <MdSave />
           </Button>
         )}
         {features.export && <ExportButton />}

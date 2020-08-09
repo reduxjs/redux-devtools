@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
-import SyncIcon from 'react-icons/lib/ti/arrow-sync';
+import { TiArrowSync } from 'react-icons/ti';
 import { toggleSync } from '../../actions';
 
 class SyncButton extends Component {
@@ -24,7 +24,7 @@ class SyncButton extends Component {
         onClick={this.props.onClick}
         mark={this.props.sync && 'base0B'}
       >
-        <SyncIcon />
+        <TiArrowSync />
       </Button>
     );
   }

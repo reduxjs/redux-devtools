@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button } from 'devui';
-import PersistIcon from 'react-icons/lib/fa/thumb-tack';
+import { FaThumbtack } from 'react-icons/fa';
 import { togglePersist } from '../../actions';
 
 class LockButton extends Component {
@@ -31,7 +31,7 @@ class LockButton extends Component {
         }
         onClick={this.props.onClick}
       >
-        <PersistIcon />
+        <FaThumbtack />
       </Button>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
-import LockIcon from 'react-icons/lib/io/ios-locked';
+import { IoIosLock } from 'react-icons/io';
 import { lockChanges } from '../../actions';
 
 class LockButton extends Component {
@@ -25,7 +25,7 @@ class LockButton extends Component {
         title={this.props.locked ? 'Unlock changes' : 'Lock changes'}
         onClick={this.props.lockChanges}
       >
-        <LockIcon />
+        <IoIosLock />
       </Button>
     );
   }

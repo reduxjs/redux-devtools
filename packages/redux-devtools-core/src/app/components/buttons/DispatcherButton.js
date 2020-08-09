@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
-import DispatchIcon from 'react-icons/lib/fa/terminal';
+import { FaTerminal } from 'react-icons/fa';
 import { toggleDispatcher } from '../../actions';
 
 class DispatcherButton extends Component {
@@ -26,7 +26,7 @@ class DispatcherButton extends Component {
         onClick={this.props.toggleDispatcher}
         tooltipPosition="top-left"
       >
-        <DispatchIcon />
+        <FaTerminal />
       </Button>
     );
   }

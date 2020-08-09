@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
-import HistoryIcon from 'react-icons/lib/md/av-timer';
+import { MdAvTimer } from 'react-icons/md';
 import { toggleSlider } from '../../actions';
 
 class SliderButton extends Component {
@@ -24,7 +24,7 @@ class SliderButton extends Component {
         tooltipPosition="top-left"
         onClick={this.props.toggleSlider}
       >
-        <HistoryIcon />
+        <MdAvTimer />
       </Button>
     );
   }
