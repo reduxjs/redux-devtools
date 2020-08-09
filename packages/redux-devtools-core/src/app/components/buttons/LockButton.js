@@ -25,7 +25,7 @@ class LockButton extends Component {
         title={this.props.locked ? 'Unlock changes' : 'Lock changes'}
         onClick={this.props.lockChanges}
       >
-        <IoIosLock />
+        <LockIcon />
       </Button>
     );
   }
