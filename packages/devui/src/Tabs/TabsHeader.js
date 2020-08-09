@@ -177,7 +177,7 @@ export default class TabsHeader extends Component {
     const { visibleTabs, hiddenTabs, contextMenu } = this.state;
     return (
       <TabsWrapper
-        innerRef={this.getTabsWrapperRef}
+        ref={this.getTabsWrapperRef}
         main={this.props.main}
         position={this.props.position}
       >

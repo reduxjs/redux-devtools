@@ -61,7 +61,7 @@ export default class Editor extends Component {
   };
 
   render() {
-    return <EditorContainer innerRef={this.getRef} theme={this.props.theme} />;
+    return <EditorContainer ref={this.getRef} theme={this.props.theme} />;
   }
 }
 
