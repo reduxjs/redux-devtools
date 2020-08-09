@@ -205,7 +205,13 @@ export const tooltipStyle = ({
   &:before {
     ${before(tooltipPosition)}
     ${getDirection(tooltipPosition)}: 3px;
-    ${theme.type === 'material' ? `animation: ${fadeIn} 500ms;` : ''}
+    ${
+      theme.type === 'material'
+        ? css`
+            animation: ${fadeIn} 500ms;
+          `
+        : ''
+    }
   }
 
   ${

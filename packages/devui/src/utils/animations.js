@@ -1,9 +1,9 @@
-import { keyframes } from 'styled-components';
+import { css, keyframes } from 'styled-components';
 
 export const spin = keyframes`
   to { transform: rotate(1turn); }
 `;
-export const spinner = (theme) => `
+export const spinner = (theme) => css`
   animation: ${spin} 400ms infinite linear;
   width: ${theme.spinnerSize}px;
   height: ${theme.spinnerSize}px;

@@ -87,7 +87,7 @@ export default class ContextMenu extends Component {
   render() {
     return (
       <ContextMenuWrapper
-        innerRef={this.menuRef}
+        ref={this.menuRef}
         left={this.props.x}
         top={this.props.y}
         visible={this.props.visible}
