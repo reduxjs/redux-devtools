@@ -7,7 +7,7 @@ export const {
   AUTHENTICATED,
   PENDING,
   UNAUTHENTICATED,
-} = socketCluster.SCSocket;
+} = socketCluster.SCClientSocket;
 export const CONNECT_REQUEST = 'socket/CONNECT_REQUEST';
 export const CONNECT_SUCCESS = 'socket/CONNECT_SUCCESS';
 export const CONNECT_ERROR = 'socket/CONNECT_ERROR';
