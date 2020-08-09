@@ -1,8 +1,9 @@
+import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import CounterApp from './CounterApp';
 
-export default class Root extends Component {
+class Root extends Component {
   render() {
     const { store } = this.props;
     return (
@@ -12,3 +13,5 @@ export default class Root extends Component {
     );
   }
 }
+
+export default hot(Root);

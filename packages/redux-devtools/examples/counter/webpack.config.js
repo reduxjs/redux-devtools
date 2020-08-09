@@ -7,7 +7,6 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    'react-hot-loader/patch',
     './src/index',
   ],
   output: {
@@ -25,5 +24,10 @@ module.exports = {
         include: path.join(__dirname, 'src'),
       },
     ],
+  },
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    port: 3000,
   },
 };
