@@ -9,59 +9,19 @@ import logger from 'redux-logger';
 import { Route } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
-import { createDevTools, persistState } from 'redux-devtools';
-import DevtoolsInspector from '../../../src/DevtoolsInspector';
-import DockMonitor from 'redux-devtools-dock-monitor';
+import { persistState } from 'redux-devtools';
 import getOptions from './getOptions';
+import { ConnectedDevTools, getDevTools } from './DevTools';
 
 function getDebugSessionKey() {
   const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/);
   return matches && matches.length > 0 ? matches[1] : null;
 }
 
-const CustomComponent = () => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '100%',
-      height: '100%',
-      minHeight: '20rem',
-    }}
-  >
-    <div>Custom Tab Content</div>
-  </div>
-);
-
-const getDevTools = ({ location }) =>
-  createDevTools(
-    <DockMonitor
-      defaultIsVisible
-      toggleVisibilityKey="ctrl-h"
-      changePositionKey="ctrl-q"
-      changeMonitorKey="ctrl-m"
-    >
-      <DevtoolsInspector
-        theme={getOptions(location).theme}
-        shouldPersistState
-        invertTheme={getOptions(location).dark}
-        supportImmutable={getOptions(location).supportImmutable}
-        tabs={(defaultTabs) => [
-          {
-            name: 'Custom Tab',
-            component: CustomComponent,
-          },
-          ...defaultTabs,
-        ]}
-      />
-    </DockMonitor>
-  );
-
 const ROOT =
   process.env.NODE_ENV === 'production' ? '/redux-devtools-inspector/' : '/';
 
-const DevTools = getDevTools({ location: window.location });
+const DevTools = getDevTools(window.location);
 
 const history = createBrowserHistory();
 
@@ -87,7 +47,7 @@ render(
     <ConnectedRouter history={history}>
       <Route path={ROOT}>
         <DemoApp />
-        {!useDevtoolsExtension && <DevTools />}
+        {!useDevtoolsExtension && <ConnectedDevTools />}
       </Route>
     </ConnectedRouter>
   </Provider>,
