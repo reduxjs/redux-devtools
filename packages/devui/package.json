@@ -15,7 +15,7 @@
   "scripts": {
     "start": "npm run storybook",
     "build": "rimraf ./lib && babel ./src --out-dir ./lib --ignore tests,stories",
-    "lint:css": "stylelint \"./src/**/styles/*.js\"",
+    "lint:css": "stylelint \"./src/**/*.js\"",
     "test:update": "npm run jest -- -u",
     "test": "jest --no-cache",
     "storybook": "start-storybook -p 9001 -c .storybook -s ./fonts",
@@ -52,9 +52,11 @@
     "react-dom": "^16.13.1",
     "react-test-renderer": "^16.13.1",
     "rimraf": "^3.0.2",
-    "stylelint": "^7.13.0",
-    "stylelint-config-standard": "^15.0.1",
-    "stylelint-processor-styled-components": "^0.0.4"
+    "stylelint": "^13.6.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0"
   },
   "peerDependencies": {
     "react": "^16.3.0"
