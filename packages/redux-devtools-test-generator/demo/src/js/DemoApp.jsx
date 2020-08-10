@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import pkg from '../../../package.json';
 import { Button, Toolbar, Spacer } from 'devui';
 import getOptions from './getOptions';
-import { push as pushRoute } from 'react-router-redux';
+import { push as pushRoute } from 'connected-react-router';
 
 const styles = {
   wrapper: {
@@ -26,7 +26,7 @@ const ROOT = '/'; // process.env.NODE_ENV === 'production' ? '/' : '/';
 
 class DemoApp extends React.Component {
   render() {
-    const options = getOptions();
+    const options = getOptions(this.props.router.location);
 
     return (
       <div style={styles.wrapper}>

@@ -5,62 +5,37 @@ import { render } from 'react-dom';
 import { Container } from 'devui';
 import DemoApp from './DemoApp';
 import { Provider } from 'react-redux';
-import reducers from './reducers';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import createRootReducer from './reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
-import { Router, Route, browserHistory } from 'react-router';
-import {
-  syncHistoryWithStore,
-  routerReducer,
-  routerMiddleware,
-} from 'react-router-redux';
-import { createDevTools, persistState } from 'redux-devtools';
-import DevtoolsInspector from 'redux-devtools-inspector';
-import DockMonitor from 'redux-devtools-dock-monitor';
+import { Route } from 'react-router';
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
+import { persistState } from 'redux-devtools';
 import getOptions from './getOptions';
-import TestGenerator from '../../../src';
+import { ConnectedDevTools, getDevTools } from './DevTools';
 
 function getDebugSessionKey() {
   const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/);
   return matches && matches.length > 0 ? matches[1] : null;
 }
 
-const getDevTools = (options) =>
-  createDevTools(
-    <DockMonitor
-      defaultIsVisible
-      toggleVisibilityKey="ctrl-h"
-      changePositionKey="ctrl-q"
-      changeMonitorKey="ctrl-m"
-    >
-      <DevtoolsInspector
-        theme={options.theme}
-        shouldPersistState
-        invertTheme={!options.dark}
-        supportImmutable={options.supportImmutable}
-        tabs={(defaultTabs) => [
-          {
-            name: 'Test',
-            component: TestGenerator,
-          },
-          ...defaultTabs,
-        ]}
-      />
-    </DockMonitor>
-  );
-
 const ROOT =
-  process.env.NODE_ENV === 'production' ? '/redux-devtools-inspector/' : '/';
+  process.env.NODE_ENV === 'production'
+    ? '/redux-devtools-test-generator/'
+    : '/';
 
-let DevTools = getDevTools(getOptions());
+const DevTools = getDevTools(window.location);
 
-const reduxRouterMiddleware = routerMiddleware(browserHistory);
+const history = createBrowserHistory();
+
+const useDevtoolsExtension =
+  !!window.__REDUX_DEVTOOLS_EXTENSION__ &&
+  getOptions(window.location).useExtension;
 
 const enhancer = compose(
-  applyMiddleware(logger, reduxRouterMiddleware),
+  applyMiddleware(logger, routerMiddleware(history)),
   (...args) => {
-    const useDevtoolsExtension =
-      !!window.__REDUX_DEVTOOLS_EXTENSION__ && getOptions().useExtension;
     const instrument = useDevtoolsExtension
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : DevTools.instrument();
@@ -69,43 +44,20 @@ const enhancer = compose(
   persistState(getDebugSessionKey())
 );
 
-const store = createStore(
-  combineReducers({
-    ...reducers,
-    routing: routerReducer,
-  }),
-  {},
-  enhancer
-);
+const store = createStore(createRootReducer(history), {}, enhancer);
 
-const history = syncHistoryWithStore(browserHistory, store);
-
-const handleRouterUpdate = () => {
-  renderApp(getOptions());
-};
-
-const router = (
-  <Router history={history} onUpdate={handleRouterUpdate}>
-    <Route path={ROOT} component={DemoApp} />
-  </Router>
-);
-
-const renderApp = (options) => {
-  DevTools = getDevTools(options);
-  const useDevtoolsExtension =
-    !!window.__REDUX_DEVTOOLS_EXTENSION__ && options.useExtension;
-
-  return render(
-    <Provider store={store}>
+render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
       <Container
         themeData={{ theme: 'default', scheme: 'default', light: true }}
       >
-        {router}
-        {!useDevtoolsExtension && <DevTools />}
+        <Route path={ROOT}>
+          <DemoApp />
+        </Route>
+        {!useDevtoolsExtension && <ConnectedDevTools />}
       </Container>
-    </Provider>,
-    document.getElementById('root')
-  );
-};
-
-renderApp(getOptions());
+    </ConnectedRouter>
+  </Provider>,
+  document.getElementById('root')
+);
