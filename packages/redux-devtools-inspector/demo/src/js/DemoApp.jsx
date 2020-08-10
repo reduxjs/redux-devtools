@@ -1,14 +1,13 @@
 import React from 'react';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
 import { connect } from 'react-redux';
 import pkg from '../../../package.json';
-import Button from 'react-bootstrap/lib/Button';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import Form from 'react-bootstrap/lib/Form';
-import Col from 'react-bootstrap/lib/Col';
-import InputGroup from 'react-bootstrap/lib/InputGroup';
+import Button from 'react-bootstrap/Button';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import FormLabel from 'react-bootstrap/FormLabel';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
 import * as base16 from 'base16';
 import * as inspectorThemes from '../../../src/themes';
 import getOptions from './getOptions';
@@ -89,9 +88,9 @@ class DemoApp extends React.Component {
 
     return (
       <div style={styles.wrapper}>
-        <PageHeader style={styles.header}>
+        <h1 style={styles.header}>
           {pkg.name || <span style={styles.muted}>Package Name</span>}
-        </PageHeader>
+        </h1>
         <h5>
           {pkg.description || (
             <span style={styles.muted}>Package Description</span>
@@ -101,13 +100,13 @@ class DemoApp extends React.Component {
           <div style={styles.input}>
             <Form horizontal>
               <FormGroup>
-                <Col componentClass={ControlLabel} sm={3}>
+                <Col as={FormLabel} sm={3}>
                   Theme:
                 </Col>
                 <Col sm={9}>
                   <InputGroup>
                     <FormControl
-                      componentClass="select"
+                      as="select"
                       onChange={(event) =>
                         this.setTheme(options, event.currentTarget.value)
                       }
@@ -121,11 +120,11 @@ class DemoApp extends React.Component {
                         />
                       ))}
                     </FormControl>
-                    <InputGroup.Addon>
+                    <InputGroup.Append>
                       <a onClick={this.toggleTheme} style={styles.link}>
                         {options.dark ? 'Light theme' : 'Dark theme'}
                       </a>
-                    </InputGroup.Addon>
+                    </InputGroup.Append>
                   </InputGroup>
                 </Col>
               </FormGroup>
