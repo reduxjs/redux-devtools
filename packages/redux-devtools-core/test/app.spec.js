@@ -40,6 +40,6 @@ describe('App container', () => {
           return className && className.startsWith('actionListRows-');
         })
         .html()
-    ).toMatch(/<div class="actionListRows-\d-\d+"><\/div>/);
+    ).toMatch(/<div class="actionListRows-\d-\d-\d+"><\/div>/);
   });
 });

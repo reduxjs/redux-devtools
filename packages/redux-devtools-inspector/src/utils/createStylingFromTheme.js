@@ -1,14 +1,12 @@
 import jss from 'jss';
-import jssVendorPrefixer from 'jss-vendor-prefixer';
-import jssNested from 'jss-nested';
+import preset from 'jss-preset-default';
 import { createStyling } from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import inspector from '../themes/inspector';
 import * as reduxThemes from 'redux-devtools-themes';
 import * as inspectorThemes from '../themes';
 
-jss.use(jssVendorPrefixer());
-jss.use(jssNested());
+jss.setup(preset());
 
 const colorMap = (theme) => ({
   TEXT_COLOR: theme.base06,
