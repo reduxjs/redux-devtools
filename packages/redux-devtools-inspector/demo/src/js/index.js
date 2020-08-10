@@ -47,8 +47,8 @@ render(
     <ConnectedRouter history={history}>
       <Route path={ROOT}>
         <DemoApp />
-        {!useDevtoolsExtension && <ConnectedDevTools />}
       </Route>
+      {!useDevtoolsExtension && <ConnectedDevTools />}
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')

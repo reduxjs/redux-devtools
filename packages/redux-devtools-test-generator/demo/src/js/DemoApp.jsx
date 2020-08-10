@@ -26,7 +26,7 @@ const ROOT = '/'; // process.env.NODE_ENV === 'production' ? '/' : '/';
 
 class DemoApp extends React.Component {
   render() {
-    const options = getOptions();
+    const options = getOptions(this.props.router.location);
 
     return (
       <div style={styles.wrapper}>
