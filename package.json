@@ -1,6 +1,7 @@
 {
   "private": true,
   "devDependencies": {
+    "@types/jest": "^26.0.9",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
     "babel-eslint": "^10.1.0",
@@ -15,6 +16,7 @@
     "lerna": "^3.22.1",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
+    "ts-jest": "^26.2.0",
     "typescript": "^3.9.7"
   },
   "scripts": {
