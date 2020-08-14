@@ -1,5 +1,5 @@
 import { createStyling, invertBase16Theme, getBase16Theme } from '../src';
-import apathy from 'base16/lib/apathy';
+import { apathy } from 'base16';
 
 const base16Theme = {
   scheme: 'myscheme',

@@ -1,5 +1,6 @@
 import curry from 'lodash.curry';
 import * as base16 from 'base16';
+import { Base16Theme } from 'base16';
 import rgb2hex from 'pure-color/convert/rgb2hex';
 import parse from 'pure-color/parse';
 import flow from 'lodash.flow';
@@ -148,7 +149,7 @@ const getStylingByKeys = (mergedStyling, keys, ...args) => {
   return props;
 };
 
-export const invertBase16Theme = (base16Theme) =>
+export const invertBase16Theme = (base16Theme: Base16Theme) =>
   Object.keys(base16Theme).reduce(
     (t, key) => (
       (t[key] = /^base/.test(key)
