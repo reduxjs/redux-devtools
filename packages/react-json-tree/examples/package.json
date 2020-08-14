@@ -2,6 +2,7 @@
   "name": "react-json-tree-example",
   "version": "1.0.0",
   "description": "React-Json-Tree example",
+  "private": true,
   "scripts": {
     "start": "webpack-dev-server --open",
     "stats": "NODE_ENV=production webpack --json > dist/stats.json"
