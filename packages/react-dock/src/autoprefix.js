@@ -29,22 +29,29 @@ const vendorSpecificProperties = [
   'transitionTimingFunction',
   'perspective',
   'perspectiveOrigin',
-  'userSelect'
+  'userSelect',
 ];
 
 const prefixes = ['Moz', 'Webkit', 'ms', 'O'];
 
 function prefixProp(key, value) {
   return prefixes.reduce(
-    (obj, pre) => (obj[pre + key[0].toUpperCase() + key.substr(1)] = value, obj),
+    (obj, pre) => (
+      (obj[pre + key[0].toUpperCase() + key.substr(1)] = value), obj
+    ),
     {}
   );
 }
 
 export default function autoprefix(style) {
-  return Object.keys(style).reduce((obj, key) => (
-    vendorSpecificProperties.indexOf(key) !== -1 ? {
-      ...obj,
-      ...prefixProp(key, style[key])
-    } : obj), style);
+  return Object.keys(style).reduce(
+    (obj, key) =>
+      vendorSpecificProperties.indexOf(key) !== -1
+        ? {
+            ...obj,
+            ...prefixProp(key, style[key]),
+          }
+        : obj,
+    style
+  );
 }
