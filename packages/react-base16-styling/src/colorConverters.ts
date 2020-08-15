@@ -1,4 +1,4 @@
-type Color = [number, number, number];
+export type Color = [number, number, number];
 
 export function yuv2rgb(yuv: Color): Color {
   const y = yuv[0],

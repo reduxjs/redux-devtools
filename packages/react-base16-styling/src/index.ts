@@ -1,10 +1,8 @@
 import curry from 'lodash.curry';
 import * as base16 from 'base16';
 import { Base16Theme } from 'base16';
-import rgb2hex from 'pure-color/convert/rgb2hex';
-import parse from 'pure-color/parse';
-import flow from 'lodash.flow';
-import { yuv2rgb, rgb2yuv } from './colorConverters';
+import { get, to } from 'color-string';
+import { Color, yuv2rgb, rgb2yuv } from './colorConverters';
 
 const DEFAULT_BASE16 = base16.default;
 
@@ -12,15 +10,16 @@ const BASE16_KEYS = Object.keys(DEFAULT_BASE16);
 
 // we need a correcting factor, so that a dark, but not black background color
 // converts to bright enough inversed color
-const flip = (x) => (x < 0.25 ? 1 : x < 0.5 ? 0.9 - x : 1.1 - x);
+const flip = (x: number) => (x < 0.25 ? 1 : x < 0.5 ? 0.9 - x : 1.1 - x);
 
-const invertColor = flow(
-  parse,
-  rgb2yuv,
-  ([y, u, v]) => [flip(y), u, v],
-  yuv2rgb,
-  rgb2hex
-);
+const invertColor = (colorString: string) => {
+  const color = get.rgb(colorString);
+  if (!color) throw new Error(`Unable to parse color: ${colorString}`);
+  const [y, u, v] = rgb2yuv([color[0], color[1], color[2]]);
+  const flippedYuv: Color = [flip(y), u, v];
+  const rgb = yuv2rgb(flippedYuv);
+  return to.hex(rgb);
+};
 
 const merger = function merger(styling) {
   return (prevStyling) => ({
