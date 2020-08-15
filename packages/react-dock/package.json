@@ -1,0 +1,64 @@
+{
+  "name": "react-dock",
+  "version": "0.2.4",
+  "description": "Resizable dockable react component",
+  "scripts": {
+    "build-lib": "babel src --out-dir lib",
+    "build-demo": "NODE_ENV=production webpack -p",
+    "stats": "webpack --profile --json > stats.json",
+    "start": "webpack-dev-server",
+    "preversion": "npm run lint && npm run test",
+    "version": "npm run build-demo && git add -A .",
+    "postversion": "git push",
+    "prepublish": "npm run build-lib",
+    "test": "jest"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "dock",
+    "sidebar"
+  ],
+  "author": "Alexander <alexkuz@gmail.com> (http://kuzya.org/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  },
+  "homepage": "https://github.com/reduxjs/redux-devtools",
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-export-default-from": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.3.0",
+    "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.12.21",
+    "react-icons": "^3.10.0",
+    "react-pure-render": "^1.0.2",
+    "react-test-renderer": "^16.13.1",
+    "styled-components": "^5.1.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "peerDependencies": {
+    "react": "^16.3.0"
+  },
+  "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "prop-types": "^15.7.2"
+  }
+}
