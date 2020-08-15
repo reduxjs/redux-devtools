@@ -10472,11 +10472,6 @@ lodash-es@^4.17.15, lodash-es@^4.17.4:
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
   integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
 
-lodash._getnative@^3.0.0:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
-  integrity sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=
-
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
@@ -10491,13 +10486,6 @@ lodash.curry@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.curry/-/lodash.curry-4.1.1.tgz#248e36072ede906501d75966200a86dab8b23170"
   integrity sha1-JI42By7ekGUB11lmIAqG2riyMXA=
-
-lodash.debounce@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-3.1.1.tgz#812211c378a94cc29d5aa4e3346cf0bfce3a7df5"
-  integrity sha1-gSIRw3ipTMKdWqTjNGzwv846ffU=
-  dependencies:
-    lodash._getnative "^3.0.0"
 
 lodash.debounce@^4.0.8:
   version "4.0.8"
@@ -13052,14 +13040,6 @@ react-docgen@^3.0.0:
     doctrine "^2.0.0"
     node-dir "^0.1.10"
     recast "^0.16.0"
-
-react-dock@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/react-dock/-/react-dock-0.2.4.tgz#e727dc7550b3b73116635dcb9c0e04d0b7afe17c"
-  integrity sha1-5yfcdVCztzEWY13LnA4E0Lev4Xw=
-  dependencies:
-    lodash.debounce "^3.1.1"
-    prop-types "^15.5.8"
 
 react-dom@^16.13.1, react-dom@^16.7.0:
   version "16.13.1"
