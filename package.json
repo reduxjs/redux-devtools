@@ -1,17 +1,29 @@
 {
   "private": true,
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.9",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-jest": "^23.20.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.5",
     "husky": "^4.2.5",
     "jest": "^26.2.2",
     "lerna": "^3.22.1",
     "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.2.0",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "lerna": "lerna",
@@ -20,10 +32,10 @@
     "publish": "lerna publish",
     "canary": "lerna publish --canary preminor --npm-tag alpha",
     "next": "lerna publish --bump prerelease --npm-tag next",
-    "lint": "eslint \"**/*.{js,jsx}\" --cache",
-    "lint:fix": "eslint \"**/*.{js,jsx}\" --fix --cache",
-    "lint:all": "eslint \"**/*.{js,jsx}\"",
-    "prettify": "prettier \"**/*.{js,jsx,json,css,html,md}\" --write",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
+    "lint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix --cache",
+    "lint:all": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "prettify": "prettier \"**/*.{js,jsx,ts,tsx,json,css,html,md}\" --write",
     "test": "jest --onlyChanged",
     "test:all": "jest"
   },
@@ -44,7 +56,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "yarn lint:fix"
     ],

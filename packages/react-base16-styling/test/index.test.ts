@@ -1,5 +1,6 @@
 import { createStyling, invertBase16Theme, getBase16Theme } from '../src';
-import apathy from 'base16/lib/apathy';
+import { apathy, Base16Theme } from 'base16';
+import { Styling, StylingConfig } from '../src/types';
 
 const base16Theme = {
   scheme: 'myscheme',
@@ -25,52 +26,52 @@ const base16Theme = {
 const invertedBase16Theme = {
   scheme: 'myscheme:inverted',
   author: 'me',
-  base00: '#ffffff',
-  base01: '#ffffff',
-  base02: '#a2a1a2',
-  base03: '#807f80',
-  base04: '#807f80',
-  base05: '#5e5d5e',
-  base06: '#3c3b3c',
-  base07: '#1a191a',
-  base08: '#ff4d4d',
-  base09: '#cb6500',
+  base00: '#FFFFFF',
+  base01: '#FFFFFF',
+  base02: '#A2A1A2',
+  base03: '#807F80',
+  base04: '#807F80',
+  base05: '#5E5D5E',
+  base06: '#3C3B3C',
+  base07: '#1A191A',
+  base08: '#FF4D4D',
+  base09: '#CB6500',
   base0A: '#545400',
-  base0B: '#a2a20a',
-  base0C: '#0fa8a8',
-  base0D: '#32cb32',
-  base0E: '#6868ce',
-  base0F: '#ff2ac3',
+  base0B: '#A2A20A',
+  base0C: '#0FA8A8',
+  base0D: '#32CB32',
+  base0E: '#6868CE',
+  base0F: '#FF2AC3',
 };
 
 const apathyInverted = {
   author: 'jannik siebert (https://github.com/janniks)',
-  base00: '#efffff',
-  base01: '#e3ffff',
-  base02: '#daffff',
-  base03: '#67a49a',
-  base04: '#66a399',
-  base05: '#51857c',
-  base06: '#3c635d',
-  base07: '#2a3f3c',
-  base08: '#2f8779',
-  base09: '#4e89a6',
-  base0A: '#8391db',
-  base0B: '#b167bf',
-  base0C: '#c8707e',
-  base0D: '#a7994f',
+  base00: '#EFFFFF',
+  base01: '#E3FFFF',
+  base02: '#DAFFFF',
+  base03: '#67A49A',
+  base04: '#66A399',
+  base05: '#51857C',
+  base06: '#3C635D',
+  base07: '#2A3F3C',
+  base08: '#2F8779',
+  base09: '#4E89A6',
+  base0A: '#8391DB',
+  base0B: '#B167BF',
+  base0C: '#C8707E',
+  base0D: '#A7994F',
   base0E: '#469038',
-  base0F: '#3a9257',
+  base0F: '#3A9257',
   scheme: 'apathy:inverted',
 };
 
-const getStylingFromBase16 = (base16) => ({
+const getStylingFromBase16 = (base16: Base16Theme): StylingConfig => ({
   testClass: 'testClass',
   testStyle: {
     color: base16.base00,
   },
-  testFunc: ({ style }, arg) => ({
-    className: 'testClass--' + arg,
+  testFunc: ({ style }, arg: string) => ({
+    className: `testClass--${arg}`,
     style: {
       ...style,
       width: 0,
@@ -93,7 +94,7 @@ test('getBase16Theme', () => {
   expect(getBase16Theme('apathy')).toEqual(apathy);
   expect(getBase16Theme({ extend: 'apathy' })).toEqual(apathy);
   expect(getBase16Theme('apathy:inverted')).toEqual(apathyInverted);
-  expect(getBase16Theme({})).toBe(undefined);
+  expect(getBase16Theme({})).toBeUndefined();
 });
 
 test('createStyling (default)', () => {
@@ -122,8 +123,8 @@ test('createStyling (custom)', () => {
   let customStyling = styling({
     testClass: 'customClass',
     testStyle: { height: 0 },
-    testFunc: (styling, arg) => ({
-      className: styling.className + ' customClass--' + arg,
+    testFunc: (styling: Styling, arg: string) => ({
+      className: `${styling.className!} customClass--${arg}`,
       style: {
         ...styling.style,
         border: 0,

@@ -7,3 +7,6 @@ build
 coverage
 node_modules
 __snapshots__
+
+# Ignore until TS linting is configured in redux-devtools package
+packages/redux-devtools/index.d.ts
