@@ -33,7 +33,8 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "prepublishOnly": "npm run type-check && npm run lint && npm run test && npm run clean && npm run build"
+    "preversion": "npm run type-check && npm run lint && npm run test",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
     "@types/base16": "^1.0.2",
