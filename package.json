@@ -32,10 +32,10 @@
     "publish": "lerna publish",
     "canary": "lerna publish --canary preminor --npm-tag alpha",
     "next": "lerna publish --bump prerelease --npm-tag next",
-    "lint": "eslint \"**/*.{js,jsx}\" --cache",
-    "lint:fix": "eslint \"**/*.{js,jsx}\" --fix --cache",
-    "lint:all": "eslint \"**/*.{js,jsx}\"",
-    "prettify": "prettier \"**/*.{js,jsx,json,css,html,md}\" --write",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
+    "lint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix --cache",
+    "lint:all": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "prettify": "prettier \"**/*.{js,jsx,ts,tsx,json,css,html,md}\" --write",
     "test": "jest --onlyChanged",
     "test:all": "jest"
   },
@@ -56,7 +56,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "yarn lint:fix"
     ],
