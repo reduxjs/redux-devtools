@@ -38,10 +38,10 @@ const merger = (styling: Styling) => {
   });
 };
 
-const mergeStyling = function mergeStyling(
+const mergeStyling = (
   customStyling: StylingValue,
   defaultStyling: StylingValue
-): StylingValue | undefined {
+): StylingValue | undefined => {
   if (customStyling === undefined) {
     return defaultStyling;
   }
