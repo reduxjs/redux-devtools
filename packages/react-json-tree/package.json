@@ -2,7 +2,33 @@
   "name": "react-json-tree",
   "version": "0.12.1",
   "description": "React JSON Viewer Component, Extracted from redux-devtools",
+  "keywords": [
+    "react",
+    "json viewer"
+  ],
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/react-json-tree",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  },
+  "license": "MIT",
+  "author": "Shu Uesugi <shu@chibicode.com> (http://github.com/chibicode)",
+  "contributors": [
+    "Alexander Kuznetsov <alexkuz@gmail.com> (http://kuzya.org/)",
+    "Dave Vedder <veddermatic@gmail.com> (http://www.eskimospy.com/)",
+    "Daniele Zannotti <dzannotti@me.com> (http://www.github.com/dzannotti)",
+    "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)"
+  ],
+  "files": [
+    "lib",
+    "src",
+    "umd"
+  ],
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
   "scripts": {
     "clean": "rimraf lib",
     "build": "babel src --out-dir lib",
@@ -13,31 +39,6 @@
     "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
     "start": "cd examples && npm start"
   },
-  "files": [
-    "lib",
-    "src",
-    "umd"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reduxjs/redux-devtools.git"
-  },
-  "keywords": [
-    "react",
-    "json viewer"
-  ],
-  "author": "Shu Uesugi <shu@chibicode.com> (http://github.com/chibicode)",
-  "contributors": [
-    "Alexander Kuznetsov <alexkuz@gmail.com> (http://kuzya.org/)",
-    "Dave Vedder <veddermatic@gmail.com> (http://www.eskimospy.com/)",
-    "Daniele Zannotti <dzannotti@me.com> (http://www.github.com/dzannotti)",
-    "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/reduxjs/redux-devtools/issues"
-  },
-  "homepage": "https://github.com/reduxjs/redux-devtools",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.1",
