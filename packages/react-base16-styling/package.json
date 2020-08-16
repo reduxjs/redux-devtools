@@ -37,19 +37,13 @@
   },
   "dependencies": {
     "@types/base16": "^1.0.2",
-    "@types/color-string": "^1.5.0",
     "@types/lodash.curry": "^4.1.6",
     "base16": "^1.0.0",
-    "color-string": "^1.5.3",
+    "color": "^3.1.2",
     "csstype": "^3.0.2",
     "lodash.curry": "^4.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-typescript": "^7.10.4",
-    "rimraf": "^3.0.2"
+    "@types/color": "^3.0.1"
   }
 }
