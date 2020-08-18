@@ -333,8 +333,11 @@ export default class Dock extends Component {
           <div style={dimStyles} onClick={this.handleDimClick} />
         )}
         <div style={dockStyles}>
-          <div style={resizerStyles}
-              onMouseDown={this.handleMouseDown} onTouchStart={this.handleMouseDown} />
+          <div
+            style={resizerStyles}
+            onMouseDown={this.handleMouseDown}
+            onTouchStart={this.handleMouseDown}
+          />
           <div style={styles.dockContent}>
             {typeof children === 'function'
               ? children({
