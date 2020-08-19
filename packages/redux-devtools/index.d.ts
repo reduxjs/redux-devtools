@@ -2,8 +2,8 @@
 // Type definitions for redux-devtools 3.4.1
 // TypeScript Version: 2.8.1
 
-import * as React from "react";
-import { StoreEnhancer } from "redux";
+import * as React from 'react';
+import { StoreEnhancer } from 'redux';
 
 export interface DevTools {
   new (): JSX.ElementClass;

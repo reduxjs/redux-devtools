@@ -35,7 +35,8 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --cache",
     "lint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix --cache",
     "lint:all": "eslint \"**/*.{js,jsx,ts,tsx}\"",
-    "prettify": "prettier \"**/*.{js,jsx,ts,tsx,json,css,html,md}\" --write",
+    "prettify": "prettier --write .",
+    "prettier:check": "prettier --check .",
     "test": "jest --onlyChanged",
     "test:all": "jest"
   },
@@ -56,11 +57,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "yarn lint:fix"
-    ],
-    "*.{json,css,html,md}": [
+    "**/*": [
+      "eslint --fix",
       "prettier --write"
     ]
   }
