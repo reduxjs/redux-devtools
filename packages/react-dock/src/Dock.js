@@ -244,7 +244,9 @@ export default class Dock extends Component {
   };
 
   componentDidMount() {
+    window.addEventListener('touchend', this.handleMouseUp);
     window.addEventListener('mouseup', this.handleMouseUp);
+    window.addEventListener('touchmove', this.handleMouseMove);
     window.addEventListener('mousemove', this.handleMouseMove);
     window.addEventListener('resize', this.handleResize);
 
@@ -254,7 +256,9 @@ export default class Dock extends Component {
   }
 
   componentWillUnmount() {
+    window.removeEventListener('touchend', this.handleMouseUp);
     window.removeEventListener('mouseup', this.handleMouseUp);
+    window.removeEventListener('touchmove', this.handleMouseMove);
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('resize', this.handleResize);
   }
@@ -329,7 +333,11 @@ export default class Dock extends Component {
           <div style={dimStyles} onClick={this.handleDimClick} />
         )}
         <div style={dockStyles}>
-          <div style={resizerStyles} onMouseDown={this.handleMouseDown} />
+          <div
+            style={resizerStyles}
+            onMouseDown={this.handleMouseDown}
+            onTouchStart={this.handleMouseDown}
+          />
           <div style={styles.dockContent}>
             {typeof children === 'function'
               ? children({
@@ -401,11 +409,18 @@ export default class Dock extends Component {
 
   handleMouseMove = (e) => {
     if (!this.state.isResizing || this.state.isWindowResizing) return;
-    e.preventDefault();
+
+    if (!e.touches) e.preventDefault();
 
     const { position, fluid } = this.props;
     const { fullWidth, fullHeight, isControlled } = this.state;
-    const { clientX: x, clientY: y } = e;
+    let { clientX: x, clientY: y } = e;
+
+    if (e.touches) {
+      x = e.touches[0].clientX;
+      y = e.touches[0].clientY;
+    }
+
     let size;
 
     switch (position) {
