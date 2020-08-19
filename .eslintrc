@@ -1,11 +1,7 @@
 {
   "root": true,
   "parser": "babel-eslint",
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
   "globals": {
     "chrome": true
   },
@@ -17,17 +13,13 @@
   },
   "rules": {
     "eol-last": ["warn"],
-    "max-len": ["warn", { "code": 120 , "ignoreComments": true }],
+    "max-len": ["warn", { "code": 120, "ignoreComments": true }],
     "quotes": ["warn", "single", "avoid-escape"],
     "jsx-quotes": ["warn", "prefer-double"],
     "react/prop-types": 0,
     "prettier/prettier": "error"
   },
-  "plugins": [
-    "prettier",
-    "react",
-    "babel"
-  ],
+  "plugins": ["prettier", "react", "babel"],
   "settings": {
     "react": {
       "version": "detect"
