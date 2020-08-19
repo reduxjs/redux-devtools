@@ -1,18 +1,24 @@
-function getLength(type, collection) {
+function getLength(type: string, collection: any) {
   if (type === 'Object') {
     return Object.keys(collection).length;
   } else if (type === 'Array') {
-    return collection.length;
+    return (collection as unknown[]).length;
   }
 
   return Infinity;
 }
 
-function isIterableMap(collection) {
-  return typeof collection.set === 'function';
+function isIterableMap(collection: any) {
+  return typeof (collection as Map<any, any>).set === 'function';
 }
 
-function getEntries(type, collection, sortObjectKeys, from = 0, to = Infinity) {
+function getEntries(
+  type: string,
+  collection: any,
+  sortObjectKeys?: ((a: any, b: any) => number) | boolean | undefined,
+  from = 0,
+  to = Infinity
+) {
   let res;
 
   if (type === 'Object') {
@@ -74,7 +80,7 @@ function getEntries(type, collection, sortObjectKeys, from = 0, to = Infinity) {
   return res;
 }
 
-function getRanges(from, to, limit) {
+function getRanges(from: number, to: number, limit: number) {
   const ranges = [];
   while (to - from > limit * limit) {
     limit = limit * limit;
@@ -87,10 +93,10 @@ function getRanges(from, to, limit) {
 }
 
 export default function getCollectionEntries(
-  type,
-  collection,
-  sortObjectKeys,
-  limit,
+  type: string,
+  collection: any,
+  sortObjectKeys: ((a: any, b: any) => number) | boolean | undefined,
+  limit: number,
   from = 0,
   to = Infinity
 ) {

@@ -7,19 +7,46 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
-import { invertTheme } from 'react-base16-styling';
+import {
+  invertTheme,
+  StylingConfig,
+  StylingFunction,
+  Theme,
+} from 'react-base16-styling';
+import { CircularPropsPassedThroughJSONTree } from './types';
 
-const identity = (value) => value;
-const expandRootNode = (keyName, data, level) => level === 0;
-const defaultItemString = (type, data, itemType, itemString) => (
+interface Props extends CircularPropsPassedThroughJSONTree {
+  data: any;
+  theme?: Theme;
+  invertTheme: boolean;
+}
+
+interface State {
+  styling: StylingFunction;
+}
+
+const identity = (value: any) => value;
+const expandRootNode = (
+  keyPath: (string | number)[],
+  data: any,
+  level: number
+) => level === 0;
+const defaultItemString = (
+  type: string,
+  data: any,
+  itemType: React.ReactNode,
+  itemString: string
+) => (
   <span>
     {itemType} {itemString}
   </span>
 );
-const defaultLabelRenderer = ([label]) => <span>{label}:</span>;
+const defaultLabelRenderer = ([label]: (string | number)[]) => (
+  <span>{label}:</span>
+);
 const noCustomNode = () => false;
 
-function checkLegacyTheming(theme, props) {
+function checkLegacyTheming(theme: Theme | undefined, props: Props) {
   const deprecatedStylingMethodsMap = {
     getArrowStyle: 'arrow',
     getListStyle: 'nestedNodeChildren',
@@ -30,7 +57,7 @@ function checkLegacyTheming(theme, props) {
 
   const deprecatedStylingMethods = Object.keys(
     deprecatedStylingMethodsMap
-  ).filter((name) => props[name]);
+  ).filter((name) => props[name as keyof Props]);
 
   if (deprecatedStylingMethods.length > 0) {
     if (typeof theme === 'string') {
@@ -47,10 +74,14 @@ function checkLegacyTheming(theme, props) {
         `Styling method "${name}" is deprecated, use "theme" property instead`
       );
 
-      theme[deprecatedStylingMethodsMap[name]] = ({ style }, ...args) => ({
+      (theme as StylingConfig)[
+        deprecatedStylingMethodsMap[
+          name as keyof typeof deprecatedStylingMethodsMap
+        ]
+      ] = ({ style }, ...args) => ({
         style: {
           ...style,
-          ...props[name](...args),
+          ...props[name as keyof Props](...args),
         },
       });
     });
@@ -59,7 +90,7 @@ function checkLegacyTheming(theme, props) {
   return theme;
 }
 
-function getStateFromProps(props) {
+function getStateFromProps(props: Props) {
   let theme = checkLegacyTheming(props.theme, props);
   if (props.invertTheme) {
     theme = invertTheme(theme);
@@ -70,7 +101,7 @@ function getStateFromProps(props) {
   };
 }
 
-export default class JSONTree extends React.Component {
+export default class JSONTree extends React.Component<Props, State> {
   static propTypes = {
     data: PropTypes.any.isRequired,
     hideRoot: PropTypes.bool,
@@ -96,22 +127,26 @@ export default class JSONTree extends React.Component {
     invertTheme: true,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = getStateFromProps(props);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (['theme', 'invertTheme'].find((k) => nextProps[k] !== this.props[k])) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
+    if (
+      ['theme', 'invertTheme'].find(
+        (k) => nextProps[k as keyof Props] !== this.props[k as keyof Props]
+      )
+    ) {
       this.setState(getStateFromProps(nextProps));
     }
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return !!Object.keys(nextProps).find((k) =>
       k === 'keyPath'
         ? nextProps[k].join('/') !== this.props[k].join('/')
-        : nextProps[k] !== this.props[k]
+        : nextProps[k as keyof Props] !== this.props[k as keyof Props]
     );
   }
 
