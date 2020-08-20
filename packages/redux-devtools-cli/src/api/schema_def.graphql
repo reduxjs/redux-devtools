@@ -1,42 +1,42 @@
 # A list of options for the type of the report
 enum ReportType {
-    STATE
-    ACTION
-    STATES
-    ACTIONS
+  STATE
+  ACTION
+  STATES
+  ACTIONS
 }
 
 type Report {
   # Report ID
   id: ID!
   # Type of the report, can be: STATE, ACTION, STATES, ACTIONS
-  type: ReportType,
+  type: ReportType
   # Briefly what happened
-  title: String,
+  title: String
   # Details supplied by the user
-  description: String,
+  description: String
   # The last dispatched action before the report was sent
-  action: String,
+  action: String
   # Stringified actions or the state or both, which should be loaded the application to reproduce the exact behavior
-  payload: String,
+  payload: String
   # Stringified preloaded state object. Could be the initial state of the app or committed state (after dispatching COMMIT action or reaching maxAge)
-  preloadedState: String,
+  preloadedState: String
   # Screenshot url or blob as a string
-  screenshot: String,
+  screenshot: String
   # User Agent String
-  userAgent: String,
+  userAgent: String
   # Application version to group the reports and versioning
-  version: String,
+  version: String
   # Used to identify the user who sent the report
-  userId: String,
+  userId: String
   # More detailed data about the user, usually it's a stringified object
-  user: String,
+  user: String
   # Everything else you want to send
-  meta: String,
+  meta: String
   # Error message which invoked sending the report
-  exception: String,
+  exception: String
   # Id to identify the store in case there are multiple stores
-  instanceId: String,
+  instanceId: String
   # Timestamp when the report was added
   added: String
   # Id to identify the application (from apps table)

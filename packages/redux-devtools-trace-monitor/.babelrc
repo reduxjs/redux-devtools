@@ -1,15 +1,13 @@
 {
-  "presets": [
-    "@babel/preset-env", "@babel/preset-react", "@babel/preset-flow"
-  ],
+  "presets": ["@babel/preset-env", "@babel/preset-react", "@babel/preset-flow"],
   "plugins": [
-    ["@babel/plugin-transform-runtime", {
-      "regenerator": true
-    }],
     [
-      "@babel/plugin-proposal-decorators",
-      { "legacy": true }
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
     ],
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "@babel/plugin-proposal-class-properties"
   ]
 }
