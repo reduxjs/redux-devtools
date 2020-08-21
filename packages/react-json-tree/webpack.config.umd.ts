@@ -1,6 +1,6 @@
-const path = require('path');
+import * as path from 'path';
 
-module.exports = (env = {}) => ({
+module.exports = (env: { production?: boolean } = {}) => ({
   mode: env.production ? 'production' : 'development',
   entry: {
     app: ['./src/index'],

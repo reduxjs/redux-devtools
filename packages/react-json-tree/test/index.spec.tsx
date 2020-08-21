@@ -6,7 +6,7 @@ import JSONNode from '../src/JSONNode';
 
 const BASIC_DATA = { a: 1, b: 'c' };
 
-function render(component) {
+function render(component: React.ReactElement) {
   const renderer = createRenderer();
   renderer.render(component);
   return renderer.getRenderOutput();
