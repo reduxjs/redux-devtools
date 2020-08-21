@@ -6,7 +6,9 @@ import { CircularPropsPassedThroughJSONNode } from './types';
 // Returns the "n Items" string for this node,
 // generating and caching it if it hasn't been created yet.
 function createItemString(data: any) {
-  return `${data.length} ${data.length !== 1 ? 'items' : 'item'}`;
+  return `${(data as unknown[]).length} ${
+    (data as unknown[]).length !== 1 ? 'items' : 'item'
+  }`;
 }
 
 interface Props extends CircularPropsPassedThroughJSONNode {

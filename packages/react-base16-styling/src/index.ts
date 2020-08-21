@@ -266,7 +266,7 @@ export const getBase16Theme = (
     : undefined;
 };
 
-export const invertTheme = (theme: Theme): Theme => {
+export const invertTheme = (theme: Theme | undefined): Theme | undefined => {
   if (typeof theme === 'string') {
     return `${theme}:inverted`;
   }

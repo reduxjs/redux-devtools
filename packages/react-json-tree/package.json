@@ -31,7 +31,7 @@
   },
   "scripts": {
     "start": "cd examples && npm start",
-    "build": "npm run build:types && npm run build:js && npm build:umd && npm build:umd:min",
+    "build": "npm run build:types && npm run build:js && npm run build:umd && npm run build:umd:min",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.js",
@@ -50,7 +50,6 @@
     "react-base16-styling": "^0.7.0"
   },
   "peerDependencies": {
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "react": "^16.3.0"
   }
 }

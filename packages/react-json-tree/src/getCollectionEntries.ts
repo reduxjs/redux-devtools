@@ -18,7 +18,7 @@ function getEntries(
   sortObjectKeys?: ((a: any, b: any) => number) | boolean | undefined,
   from = 0,
   to = Infinity
-) {
+): { entries: { key: string | number; value: any }[]; hasMore?: boolean } {
   let res;
 
   if (type === 'Object') {
@@ -37,7 +37,7 @@ function getEntries(
     res = {
       entries: collection
         .slice(from, to + 1)
-        .map((val, idx) => ({ key: idx + from, value: val })),
+        .map((val: unknown, idx: number) => ({ key: idx + from, value: val })),
     };
   } else {
     let idx = 0;

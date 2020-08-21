@@ -57,7 +57,10 @@ const JSONNode: React.FunctionComponent<Props> = ({
       return <JSONIterableNode {...nestedNodeProps} />;
     case 'String':
       return (
-        <JSONValueNode {...simpleNodeProps} valueGetter={(raw) => `"${raw}"`} />
+        <JSONValueNode
+          {...simpleNodeProps}
+          valueGetter={(raw: string) => `"${raw}"`}
+        />
       );
     case 'Number':
       return <JSONValueNode {...simpleNodeProps} />;
