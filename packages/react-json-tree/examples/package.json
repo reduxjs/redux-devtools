@@ -2,39 +2,18 @@
   "name": "react-json-tree-example",
   "version": "1.0.1",
   "description": "React-Json-Tree example",
-  "private": true,
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/react-json-tree/examples",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
   "scripts": {
     "start": "webpack-dev-server --open",
     "stats": "NODE_ENV=production webpack --json > dist/stats.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
-  },
-  "keywords": [
-    "react",
-    "reactjs",
-    "boilerplate",
-    "hot",
-    "reload",
-    "hmr",
-    "live",
-    "edit",
-    "webpack"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
-  },
-  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
-  "devDependencies": {
-    "@babel/core": "^7.11.1",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-react": "^7.10.4",
-    "babel-loader": "^8.1.0",
-    "webpack": "^4.44.1",
-    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "immutable": "^4.0.0-rc.12",
@@ -42,5 +21,6 @@
     "react-base16-styling": "^0.7.0",
     "react-dom": "^16.13.1",
     "react-json-tree": "^0.12.1"
-  }
+  },
+  "private": true
 }

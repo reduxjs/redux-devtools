@@ -1,15 +1,15 @@
 import React from 'react';
 import { Map } from 'immutable';
-import JSONTree from 'react-json-tree';
+import JSONTree, { StylingValue } from 'react-json-tree';
 
-const getLabelStyle = ({ style }, nodeType, expanded) => ({
+const getLabelStyle: StylingValue = ({ style }, nodeType, expanded) => ({
   style: {
     ...style,
     textTransform: expanded ? 'uppercase' : style.textTransform,
   },
 });
 
-const getBoolStyle = ({ style }, nodeType) => ({
+const getBoolStyle: StylingValue = ({ style }, nodeType) => ({
   style: {
     ...style,
     border: nodeType === 'Boolean' ? '1px solid #DD3333' : style.border,
@@ -17,14 +17,14 @@ const getBoolStyle = ({ style }, nodeType) => ({
   },
 });
 
-const getItemString = (type) => (
+const getItemString = (type: string) => (
   <span>
     {' // '}
     {type}
   </span>
 );
 
-const getValueLabelStyle = ({ style }, nodeType, keyPath) => ({
+const getValueLabelStyle: StylingValue = ({ style }, nodeType, keyPath) => ({
   style: {
     ...style,
     color:
@@ -37,10 +37,17 @@ const getValueLabelStyle = ({ style }, nodeType, keyPath) => ({
 const longString =
   'Loremipsumdolorsitamet,consecteturadipiscingelit.Namtempusipsumutfelisdignissimauctor.Maecenasodiolectus,finibusegetultricesvel,aliquamutelit.Loremipsumdolorsitamet,consecteturadipiscingelit.Namtempusipsumutfelisdignissimauctor.Maecenasodiolectus,finibusegetultricesvel,aliquamutelit.Loremipsumdolorsitamet,consecteturadipiscingelit.Namtempusipsumutfelisdignissimauctor.Maecenasodiolectus,finibusegetultricesvel,aliquamutelit.'; // eslint-disable-line max-len
 
-const Custom = function (value) {
-  this.value = value;
-};
-Custom.prototype[Symbol.toStringTag] = 'Custom';
+class Custom {
+  value: unknown;
+
+  constructor(value: unknown) {
+    this.value = value;
+  }
+
+  get [Symbol.toStringTag]() {
+    return 'Custom';
+  }
+}
 
 const data = {
   array: [1, 2, 3],
@@ -64,16 +71,18 @@ const data = {
       },
     },
     baz: undefined,
-    func: function User() {},
+    func: function User() {
+      // noop
+    },
   },
   emptyObject: {},
   symbol: Symbol('value'),
   // eslint-disable-next-line new-cap
-  immutable: Map([
+  immutable: Map<any, any>([
     ['key', 'value'],
     [{ objectKey: 'value' }, { objectKey: 'value' }],
   ]),
-  map: new window.Map([
+  map: new window.Map<any, any>([
     ['key', 'value'],
     [0, 'value'],
     [{ objectKey: 'value' }, { objectKey: 'value' }],
