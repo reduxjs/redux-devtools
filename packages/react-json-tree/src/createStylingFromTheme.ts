@@ -1,7 +1,6 @@
 import {
   Base16Theme,
   createStyling,
-  Styling,
   StylingConfig,
 } from 'react-base16-styling';
 import solarized from './themes/solarized';
@@ -56,7 +55,7 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
       backgroundColor: colors.BACKGROUND_COLOR,
     },
 
-    value: ({ style }, nodeType, keyPath: (string | number)[]): Styling => ({
+    value: ({ style }, nodeType, keyPath: (string | number)[]) => ({
       style: {
         ...style,
         paddingTop: '0.25em',
