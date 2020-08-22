@@ -1,9 +1,9 @@
-const path = require('path');
+import * as path from 'path';
 
-module.exports = (env = {}) => ({
+module.exports = (env: { production?: boolean } = {}) => ({
   mode: env.production ? 'production' : 'development',
   entry: {
-    app: ['./src/index.js'],
+    app: ['./src/index'],
   },
   output: {
     library: 'ReactJsonTree',
@@ -15,11 +15,14 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)x?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   externals: {
     react: {
@@ -27,12 +30,6 @@ module.exports = (env = {}) => ({
       commonjs2: 'react',
       commonjs: 'react',
       amd: 'react',
-    },
-    'react-dom': {
-      root: 'ReactDOM',
-      commonjs2: 'react-dom',
-      commonjs: 'react-dom',
-      amd: 'react-dom',
     },
   },
 });

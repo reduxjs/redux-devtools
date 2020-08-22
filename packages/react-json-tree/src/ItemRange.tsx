@@ -1,8 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import JSONArrow from './JSONArrow';
+import { CircularPropsPassedThroughItemRange } from './types';
 
-export default class ItemRange extends React.Component {
+interface Props extends CircularPropsPassedThroughItemRange {
+  data: any;
+  nodeType: string;
+  from: number;
+  to: number;
+  renderChildNodes: (props: Props, from: number, to: number) => React.ReactNode;
+}
+
+interface State {
+  expanded: boolean;
+}
+
+export default class ItemRange extends React.Component<Props, State> {
   static propTypes = {
     styling: PropTypes.func.isRequired,
     from: PropTypes.number.isRequired,
@@ -11,11 +24,9 @@ export default class ItemRange extends React.Component {
     nodeType: PropTypes.string.isRequired,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = { expanded: false };
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
   render() {
@@ -42,7 +53,7 @@ export default class ItemRange extends React.Component {
     );
   }
 
-  handleClick() {
+  handleClick = () => {
     this.setState({ expanded: !this.state.expanded });
-  }
+  };
 }

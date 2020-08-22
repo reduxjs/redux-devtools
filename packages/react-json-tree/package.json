@@ -2,30 +2,15 @@
   "name": "react-json-tree",
   "version": "0.12.1",
   "description": "React JSON Viewer Component, Extracted from redux-devtools",
-  "main": "lib/index.js",
-  "scripts": {
-    "clean": "rimraf lib",
-    "build": "babel src --out-dir lib",
-    "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.js",
-    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.js",
-    "test": "jest",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min",
-    "start": "cd examples && npm start"
-  },
-  "files": [
-    "lib",
-    "src",
-    "umd"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reduxjs/redux-devtools.git"
-  },
   "keywords": [
     "react",
     "json viewer"
   ],
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/react-json-tree",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  },
+  "license": "MIT",
   "author": "Shu Uesugi <shu@chibicode.com> (http://github.com/chibicode)",
   "contributors": [
     "Alexander Kuznetsov <alexkuz@gmail.com> (http://kuzya.org/)",
@@ -33,32 +18,38 @@
     "Daniele Zannotti <dzannotti@me.com> (http://www.github.com/dzannotti)",
     "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)"
   ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  "files": [
+    "lib",
+    "src",
+    "umd"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
   },
-  "homepage": "https://github.com/reduxjs/redux-devtools",
-  "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-react": "^7.10.4",
-    "babel-loader": "^8.1.0",
-    "jest": "^26.2.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-test-renderer": "^16.13.1",
-    "rimraf": "^3.0.2",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
-  },
-  "peerDependencies": {
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+  "scripts": {
+    "start": "cd examples && npm start",
+    "build": "npm run build:types && npm run build:js && npm run build:umd && npm run build:umd:min",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.ts",
+    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.ts",
+    "clean": "rimraf lib umd",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "preversion": "npm run type-check && npm run lint && npm run test",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
     "prop-types": "^15.7.2",
     "react-base16-styling": "^0.7.0"
+  },
+  "peerDependencies": {
+    "react": "^16.3.0"
   }
 }

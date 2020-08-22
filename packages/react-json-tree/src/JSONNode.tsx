@@ -5,8 +5,15 @@ import JSONObjectNode from './JSONObjectNode';
 import JSONArrayNode from './JSONArrayNode';
 import JSONIterableNode from './JSONIterableNode';
 import JSONValueNode from './JSONValueNode';
+import { CircularPropsPassedThroughJSONNode } from './types';
 
-const JSONNode = ({
+interface Props extends CircularPropsPassedThroughJSONNode {
+  keyPath: (string | number)[];
+  value: any;
+  isCustomNode: (value: any) => boolean;
+}
+
+const JSONNode: React.FunctionComponent<Props> = ({
   getItemString,
   keyPath,
   labelRenderer,
@@ -50,7 +57,10 @@ const JSONNode = ({
       return <JSONIterableNode {...nestedNodeProps} />;
     case 'String':
       return (
-        <JSONValueNode {...simpleNodeProps} valueGetter={(raw) => `"${raw}"`} />
+        <JSONValueNode
+          {...simpleNodeProps}
+          valueGetter={(raw: string) => `"${raw}"`}
+        />
       );
     case 'Number':
       return <JSONValueNode {...simpleNodeProps} />;
@@ -97,7 +107,7 @@ const JSONNode = ({
 JSONNode.propTypes = {
   getItemString: PropTypes.func.isRequired,
   keyPath: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
   ).isRequired,
   labelRenderer: PropTypes.func.isRequired,
   styling: PropTypes.func.isRequired,

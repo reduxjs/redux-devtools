@@ -288,3 +288,6 @@ export const invertTheme = (theme: Theme | undefined): Theme | undefined => {
 
   return theme;
 };
+
+export { Base16Theme };
+export * from './types';

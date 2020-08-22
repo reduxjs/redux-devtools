@@ -1,7 +1,12 @@
-import { createStyling } from 'react-base16-styling';
+import {
+  Base16Theme,
+  createStyling,
+  Styling,
+  StylingConfig,
+} from 'react-base16-styling';
 import solarized from './themes/solarized';
 
-const colorMap = (theme) => ({
+const colorMap = (theme: Base16Theme) => ({
   BACKGROUND_COLOR: theme.base00,
   TEXT_COLOR: theme.base07,
   STRING_COLOR: theme.base0B,
@@ -18,7 +23,12 @@ const colorMap = (theme) => ({
   ITEM_STRING_EXPANDED_COLOR: theme.base03,
 });
 
-const valueColorMap = (colors) => ({
+type Color = keyof ReturnType<typeof colorMap>;
+type Colors = {
+  [color in Color]: string;
+};
+
+const valueColorMap = (colors: Colors) => ({
   String: colors.STRING_COLOR,
   Date: colors.DATE_COLOR,
   Number: colors.NUMBER_COLOR,
@@ -29,7 +39,7 @@ const valueColorMap = (colors) => ({
   Symbol: colors.SYMBOL_COLOR,
 });
 
-const getDefaultThemeStyling = (theme) => {
+const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
   const colors = colorMap(theme);
 
   return {
@@ -46,7 +56,7 @@ const getDefaultThemeStyling = (theme) => {
       backgroundColor: colors.BACKGROUND_COLOR,
     },
 
-    value: ({ style }, nodeType, keyPath) => ({
+    value: ({ style }, nodeType, keyPath: (string | number)[]): Styling => ({
       style: {
         ...style,
         paddingTop: '0.25em',
@@ -73,7 +83,9 @@ const getDefaultThemeStyling = (theme) => {
     valueText: ({ style }, nodeType) => ({
       style: {
         ...style,
-        color: valueColorMap(colors)[nodeType],
+        color: valueColorMap(colors)[
+          nodeType as keyof ReturnType<typeof valueColorMap>
+        ],
       },
     }),
 
@@ -124,7 +136,13 @@ const getDefaultThemeStyling = (theme) => {
       left: '-0.4em',
     },
 
-    nestedNode: ({ style }, keyPath, nodeType, expanded, expandable) => ({
+    nestedNode: (
+      { style },
+      keyPath: (string | number)[],
+      nodeType,
+      expanded,
+      expandable
+    ) => ({
       style: {
         ...style,
         position: 'relative',
