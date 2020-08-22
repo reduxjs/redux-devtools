@@ -29,8 +29,8 @@ const invertColor = (hexString: string) => {
   return Color.rgb(rgb).hex();
 };
 
-const merger = (styling: Styling) => {
-  return (prevStyling: Styling) => ({
+const merger = (styling: Partial<Styling>) => {
+  return (prevStyling: Partial<Styling>) => ({
     className: [prevStyling.className, styling.className]
       .filter(Boolean)
       .join(' '),
@@ -109,7 +109,10 @@ const mergeStyling = (
         case 'function':
           return (styling, ...args) =>
             (customStyling as StylingValueFunction)(
-              (defaultStyling as StylingValueFunction)(styling, ...args),
+              (defaultStyling as StylingValueFunction)(
+                styling,
+                ...args
+              ) as Styling,
               ...args
             );
       }
@@ -143,7 +146,7 @@ const getStylingByKeys = (
   ...args: any[]
 ): Styling => {
   if (keys === null) {
-    return mergedStyling as Styling;
+    return (mergedStyling as unknown) as Styling;
   }
 
   if (!Array.isArray(keys)) {

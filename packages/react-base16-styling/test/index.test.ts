@@ -84,6 +84,9 @@ const getStylingFromBase16 = (base16: Base16Theme): StylingConfig => ({
   additionalStyle: {
     border: 0,
   },
+  testFuncNoStyle: (_, arg: string) => ({
+    className: `testClass--${arg}`,
+  }),
 });
 
 test('invertTheme', () => {
@@ -124,7 +127,14 @@ test('createStyling (custom)', () => {
     testClass: 'customClass',
     testStyle: { height: 0 },
     testFunc: (styling: Styling, arg: string) => ({
-      className: `${styling.className!} customClass--${arg}`,
+      className: `${styling.className} customClass--${arg}`,
+      style: {
+        ...styling.style,
+        border: 0,
+      },
+    }),
+    testFuncNoStyle: (styling: Styling, arg: string) => ({
+      className: `${styling.className} customClass--${arg}`,
       style: {
         ...styling.style,
         border: 0,
@@ -143,6 +153,12 @@ test('createStyling (custom)', () => {
     style: {
       width: 0,
       color: apathy.base00,
+      border: 0,
+    },
+  });
+  expect(customStyling('testFuncNoStyle', 'mod')).toEqual({
+    className: 'testClass--mod customClass--mod',
+    style: {
       border: 0,
     },
   });
