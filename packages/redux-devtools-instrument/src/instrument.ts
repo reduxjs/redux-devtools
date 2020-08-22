@@ -2,6 +2,15 @@ import difference from 'lodash/difference';
 import union from 'lodash/union';
 import isPlainObject from 'lodash/isPlainObject';
 import $$observable from 'symbol-observable';
+import {
+  Action,
+  Observable,
+  PreloadedState,
+  Reducer,
+  Store,
+  StoreEnhancer,
+  StoreEnhancerStoreCreator,
+} from 'redux';
 
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
@@ -17,13 +26,15 @@ export const ActionTypes = {
   IMPORT_STATE: 'IMPORT_STATE',
   LOCK_CHANGES: 'LOCK_CHANGES',
   PAUSE_RECORDING: 'PAUSE_RECORDING',
-};
+} as const;
 
 const isChrome =
   typeof window === 'object' &&
-  (typeof window.chrome !== 'undefined' ||
+  (typeof (window as typeof window & { chrome: unknown }).chrome !==
+    'undefined' ||
     (typeof window.process !== 'undefined' &&
-      window.process.type === 'renderer'));
+      (window.process as typeof window.process & { type: unknown }).type ===
+        'renderer'));
 
 const isChromeOrNode =
   isChrome ||
@@ -31,11 +42,103 @@ const isChromeOrNode =
     process.release &&
     process.release.name === 'node');
 
+interface PerformAction<A extends Action<unknown>> {
+  type: typeof ActionTypes.PERFORM_ACTION;
+  action: A;
+  timestamp: number;
+  stack: string | undefined;
+}
+
+interface ResetAction {
+  type: typeof ActionTypes.RESET;
+  timestamp: number;
+}
+
+interface RollbackAction {
+  type: typeof ActionTypes.ROLLBACK;
+  timestamp: number;
+}
+
+interface CommitAction {
+  type: typeof ActionTypes.COMMIT;
+  timestamp: number;
+}
+
+interface SweepAction {
+  type: typeof ActionTypes.SWEEP;
+}
+
+interface ToggleAction {
+  type: typeof ActionTypes.TOGGLE_ACTION;
+  id: number;
+}
+
+interface SetActionsActiveAction {
+  type: typeof ActionTypes.SET_ACTIONS_ACTIVE;
+  start: number;
+  end: number;
+  active: boolean;
+}
+
+interface ReorderAction {
+  type: typeof ActionTypes.REORDER_ACTION;
+  actionId: number;
+  beforeActionId: number;
+}
+
+interface JumpToStateAction {
+  type: typeof ActionTypes.JUMP_TO_STATE;
+  index: number;
+}
+
+interface JumpToActionAction {
+  type: typeof ActionTypes.JUMP_TO_ACTION;
+  actionId: number;
+}
+
+interface ImportStateAction<S, A extends Action<unknown>, MonitorState> {
+  type: typeof ActionTypes.IMPORT_STATE;
+  nextLiftedState: LiftedState<S, A, MonitorState> | readonly A[];
+  preloadedState?: S;
+  noRecompute: boolean | undefined;
+}
+
+interface LockChangesAction {
+  type: typeof ActionTypes.LOCK_CHANGES;
+  status: boolean;
+}
+
+interface PauseRecordingAction {
+  type: typeof ActionTypes.PAUSE_RECORDING;
+  status: boolean;
+}
+
+export type LiftedAction<S, A extends Action<unknown>, MonitorState> =
+  | PerformAction<A>
+  | ResetAction
+  | RollbackAction
+  | CommitAction
+  | SweepAction
+  | ToggleAction
+  | SetActionsActiveAction
+  | ReorderAction
+  | JumpToStateAction
+  | JumpToActionAction
+  | ImportStateAction<S, A, MonitorState>
+  | LockChangesAction
+  | PauseRecordingAction;
+
 /**
  * Action creators to change the History state.
  */
 export const ActionCreators = {
-  performAction(action, trace, traceLimit, toExcludeFromTrace) {
+  performAction<A extends Action<unknown>>(
+    action: A,
+    trace?: ((action: A) => string | undefined) | boolean,
+    traceLimit?: number,
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    toExcludeFromTrace?: Function
+  ) {
     if (!isPlainObject(action)) {
       throw new Error(
         'Actions must be plain objects. ' +
@@ -60,7 +163,7 @@ export const ActionCreators = {
         let prevStackTraceLimit;
         if (Error.captureStackTrace && isChromeOrNode) {
           // avoid error-polyfill
-          if (Error.stackTraceLimit < traceLimit) {
+          if (traceLimit && Error.stackTraceLimit < traceLimit) {
             prevStackTraceLimit = Error.stackTraceLimit;
             Error.stackTraceLimit = traceLimit;
           }
@@ -73,18 +176,20 @@ export const ActionCreators = {
         if (
           extraFrames ||
           typeof Error.stackTraceLimit !== 'number' ||
-          Error.stackTraceLimit > traceLimit
+          (traceLimit && Error.stackTraceLimit > traceLimit)
         ) {
-          const frames = stack.split('\n');
-          if (frames.length > traceLimit) {
-            stack = frames
-              .slice(
-                0,
-                traceLimit +
-                  extraFrames +
-                  (frames[0].startsWith('Error') ? 1 : 0)
-              )
-              .join('\n');
+          if (stack != null) {
+            const frames = stack.split('\n');
+            if (traceLimit && frames.length > traceLimit) {
+              stack = frames
+                .slice(
+                  0,
+                  traceLimit +
+                    extraFrames +
+                    (frames[0].startsWith('Error') ? 1 : 0)
+                )
+                .join('\n');
+            }
           }
         }
       }
@@ -98,51 +203,58 @@ export const ActionCreators = {
     };
   },
 
-  reset() {
+  reset(): ResetAction {
     return { type: ActionTypes.RESET, timestamp: Date.now() };
   },
 
-  rollback() {
+  rollback(): RollbackAction {
     return { type: ActionTypes.ROLLBACK, timestamp: Date.now() };
   },
 
-  commit() {
+  commit(): CommitAction {
     return { type: ActionTypes.COMMIT, timestamp: Date.now() };
   },
 
-  sweep() {
+  sweep(): SweepAction {
     return { type: ActionTypes.SWEEP };
   },
 
-  toggleAction(id) {
+  toggleAction(id: number): ToggleAction {
     return { type: ActionTypes.TOGGLE_ACTION, id };
   },
 
-  setActionsActive(start, end, active = true) {
+  setActionsActive(
+    start: number,
+    end: number,
+    active = true
+  ): SetActionsActiveAction {
     return { type: ActionTypes.SET_ACTIONS_ACTIVE, start, end, active };
   },
 
-  reorderAction(actionId, beforeActionId) {
+  reorderAction(actionId: number, beforeActionId: number): ReorderAction {
     return { type: ActionTypes.REORDER_ACTION, actionId, beforeActionId };
   },
 
-  jumpToState(index) {
+  jumpToState(index: number): JumpToStateAction {
     return { type: ActionTypes.JUMP_TO_STATE, index };
   },
 
-  jumpToAction(actionId) {
+  jumpToAction(actionId: number): JumpToActionAction {
     return { type: ActionTypes.JUMP_TO_ACTION, actionId };
   },
 
-  importState(nextLiftedState, noRecompute) {
+  importState<S, A extends Action<unknown>, MonitorState = null>(
+    nextLiftedState: LiftedState<S, A, MonitorState> | readonly A[],
+    noRecompute?: boolean
+  ): ImportStateAction<S, A, MonitorState> {
     return { type: ActionTypes.IMPORT_STATE, nextLiftedState, noRecompute };
   },
 
-  lockChanges(status) {
+  lockChanges(status: boolean): LockChangesAction {
     return { type: ActionTypes.LOCK_CHANGES, status };
   },
 
-  pauseRecording(status) {
+  pauseRecording(status: boolean): PauseRecordingAction {
     return { type: ActionTypes.PAUSE_RECORDING, status };
   },
 };
@@ -152,7 +264,11 @@ export const INIT_ACTION = { type: '@@INIT' };
 /**
  * Computes the next entry with exceptions catching.
  */
-function computeWithTryCatch(reducer, action, state) {
+function computeWithTryCatch<S, A extends Action<unknown>>(
+  reducer: Reducer<S, A>,
+  action: A,
+  state: S
+) {
   let nextState = state;
   let nextError;
   try {
@@ -178,7 +294,12 @@ function computeWithTryCatch(reducer, action, state) {
 /**
  * Computes the next entry in the log by applying an action.
  */
-function computeNextEntry(reducer, action, state, shouldCatchErrors) {
+function computeNextEntry<S, A extends Action<unknown>>(
+  reducer: Reducer<S, A>,
+  action: A,
+  state: S,
+  shouldCatchErrors: boolean | undefined
+) {
   if (!shouldCatchErrors) {
     return { state: reducer(state, action) };
   }
@@ -188,15 +309,15 @@ function computeNextEntry(reducer, action, state, shouldCatchErrors) {
 /**
  * Runs the reducer on invalidated actions to get a fresh computation log.
  */
-function recomputeStates(
-  computedStates,
-  minInvalidatedStateIndex,
-  reducer,
-  committedState,
-  actionsById,
-  stagedActionIds,
-  skippedActionIds,
-  shouldCatchErrors
+function recomputeStates<S, A extends Action<unknown>>(
+  computedStates: { state: S; error?: string }[],
+  minInvalidatedStateIndex: number,
+  reducer: Reducer<S, A>,
+  committedState: S,
+  actionsById: { [actionId: number]: PerformAction<A> },
+  stagedActionIds: number[],
+  skippedActionIds: number[],
+  shouldCatchErrors: boolean | undefined
 ) {
   // Optimization: exit early and return the same reference
   // if we know nothing could have changed.
@@ -245,7 +366,13 @@ function recomputeStates(
 /**
  * Lifts an app's action into an action on the lifted store.
  */
-export function liftAction(action, trace, traceLimit, toExcludeFromTrace) {
+export function liftAction<A extends Action<unknown>>(
+  action: A,
+  trace?: ((action: A) => string | undefined) | boolean,
+  traceLimit?: number,
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  toExcludeFromTrace?: Function
+) {
   return ActionCreators.performAction(
     action,
     trace,
@@ -254,22 +381,46 @@ export function liftAction(action, trace, traceLimit, toExcludeFromTrace) {
   );
 }
 
+function isArray<S, A extends Action<unknown>, MonitorState>(
+  nextLiftedState: LiftedState<S, A, MonitorState> | readonly A[]
+): nextLiftedState is readonly A[] {
+  return Array.isArray(nextLiftedState);
+}
+
+export interface LiftedState<S, A extends Action<unknown>, MonitorState> {
+  monitorState: MonitorState;
+  nextActionId: number;
+  actionsById: { [actionId: number]: PerformAction<A> };
+  stagedActionIds: number[];
+  skippedActionIds: number[];
+  committedState: S;
+  currentStateIndex: number;
+  computedStates: { state: S; error?: string }[];
+  isLocked: boolean;
+  isPaused: boolean;
+}
+
 /**
  * Creates a history state reducer from an app's reducer.
  */
-export function liftReducerWith(
-  reducer,
-  initialCommittedState,
-  monitorReducer,
-  options
-) {
-  const initialLiftedState = {
-    monitorState: monitorReducer(undefined, {}),
+export function liftReducerWith<
+  S,
+  A extends Action<unknown>,
+  MonitorState,
+  MonitorAction extends Action<unknown>
+>(
+  reducer: Reducer<S, A>,
+  initialCommittedState: PreloadedState<S> | undefined,
+  monitorReducer: Reducer<MonitorState, MonitorAction>,
+  options: Options<S, A, MonitorState, MonitorAction>
+): Reducer<LiftedState<S, A, MonitorState>, LiftedAction<S, A, MonitorState>> {
+  const initialLiftedState: LiftedState<S, A, MonitorState> = {
+    monitorState: monitorReducer(undefined, {} as MonitorAction),
     nextActionId: 1,
-    actionsById: { 0: liftAction(INIT_ACTION) },
+    actionsById: { 0: liftAction(INIT_ACTION as A) },
     stagedActionIds: [0],
     skippedActionIds: [],
-    committedState: initialCommittedState,
+    committedState: initialCommittedState as S,
     currentStateIndex: 0,
     computedStates: [],
     isLocked: options.shouldStartLocked === true,
@@ -279,7 +430,10 @@ export function liftReducerWith(
   /**
    * Manages how the history actions modify the history state.
    */
-  return (liftedState, liftedAction) => {
+  return (
+    liftedState: LiftedState<S, A, MonitorState> | undefined,
+    liftedAction: LiftedAction<S, A, MonitorState>
+  ): LiftedState<S, A, MonitorState> => {
     let {
       monitorState,
       actionsById,
@@ -298,7 +452,7 @@ export function liftReducerWith(
       actionsById = { ...actionsById };
     }
 
-    function commitExcessActions(n) {
+    function commitExcessActions(n: number) {
       // Auto-commits n-number of excess actions.
       let excess = n;
       let idsToDelete = stagedActionIds.slice(1, excess + 1);
@@ -324,15 +478,20 @@ export function liftReducerWith(
         currentStateIndex > excess ? currentStateIndex - excess : 0;
     }
 
-    function computePausedAction(shouldInit) {
+    function computePausedAction(
+      shouldInit?: boolean
+    ): LiftedState<S, A, MonitorState> {
       let computedState;
       if (shouldInit) {
         computedState = computedStates[currentStateIndex];
-        monitorState = monitorReducer(monitorState, liftedAction);
+        monitorState = monitorReducer(
+          monitorState,
+          liftedAction as MonitorAction
+        );
       } else {
         computedState = computeNextEntry(
           reducer,
-          liftedAction.action,
+          (liftedAction as PerformAction<A>).action,
           computedStates[currentStateIndex].state,
           false
         );
@@ -340,7 +499,7 @@ export function liftReducerWith(
       if (!options.pauseActionType || nextActionId === 1) {
         return {
           monitorState,
-          actionsById: { 0: liftAction(INIT_ACTION) },
+          actionsById: { 0: liftAction(INIT_ACTION as A) },
           nextActionId: 1,
           stagedActionIds: [0],
           skippedActionIds: [],
@@ -362,7 +521,9 @@ export function liftReducerWith(
         monitorState,
         actionsById: {
           ...actionsById,
-          [nextActionId - 1]: liftAction({ type: options.pauseActionType }),
+          [nextActionId - 1]: liftAction({
+            type: options.pauseActionType,
+          } as A),
         },
         nextActionId,
         stagedActionIds,
@@ -378,7 +539,7 @@ export function liftReducerWith(
       };
     }
 
-    // By default, agressively recompute every state whatever happens.
+    // By default, aggressively recompute every state whatever happens.
     // This has O(n) performance, so we'll override this to a sensible
     // value whenever we feel like we don't have to recompute the states.
     let minInvalidatedStateIndex = 0;
@@ -390,13 +551,13 @@ export function liftReducerWith(
 
     if (/^@@redux\/(INIT|REPLACE)/.test(liftedAction.type)) {
       if (options.shouldHotReload === false) {
-        actionsById = { 0: liftAction(INIT_ACTION) };
+        actionsById = { 0: liftAction(INIT_ACTION as A) };
         nextActionId = 1;
         stagedActionIds = [0];
         skippedActionIds = [];
         committedState =
           computedStates.length === 0
-            ? initialCommittedState
+            ? (initialCommittedState as S)
             : computedStates[currentStateIndex].state;
         currentStateIndex = 0;
         computedStates = [];
@@ -407,7 +568,7 @@ export function liftReducerWith(
 
       if (maxAge && stagedActionIds.length > maxAge) {
         // States must be recomputed before committing excess.
-        computedStates = recomputeStates(
+        computedStates = recomputeStates<S, A>(
           computedStates,
           minInvalidatedStateIndex,
           reducer,
@@ -448,11 +609,11 @@ export function liftReducerWith(
         }
         case ActionTypes.RESET: {
           // Get back to the state the store was created with.
-          actionsById = { 0: liftAction(INIT_ACTION) };
+          actionsById = { 0: liftAction(INIT_ACTION as A) };
           nextActionId = 1;
           stagedActionIds = [0];
           skippedActionIds = [];
-          committedState = initialCommittedState;
+          committedState = initialCommittedState as S;
           currentStateIndex = 0;
           computedStates = [];
           break;
@@ -460,7 +621,7 @@ export function liftReducerWith(
         case ActionTypes.COMMIT: {
           // Consider the last committed state the new starting point.
           // Squash any staged actions into a single committed state.
-          actionsById = { 0: liftAction(INIT_ACTION) };
+          actionsById = { 0: liftAction(INIT_ACTION as A) };
           nextActionId = 1;
           stagedActionIds = [0];
           skippedActionIds = [];
@@ -472,7 +633,7 @@ export function liftReducerWith(
         case ActionTypes.ROLLBACK: {
           // Forget about any staged actions.
           // Start again from the last committed state.
-          actionsById = { 0: liftAction(INIT_ACTION) };
+          actionsById = { 0: liftAction(INIT_ACTION as A) };
           nextActionId = 1;
           stagedActionIds = [0];
           skippedActionIds = [];
@@ -573,15 +734,15 @@ export function liftReducerWith(
           break;
         }
         case ActionTypes.IMPORT_STATE: {
-          if (Array.isArray(liftedAction.nextLiftedState)) {
+          if (isArray(liftedAction.nextLiftedState)) {
             // recompute array of actions
-            actionsById = { 0: liftAction(INIT_ACTION) };
+            actionsById = { 0: liftAction(INIT_ACTION as A) };
             nextActionId = 1;
             stagedActionIds = [0];
             skippedActionIds = [];
             currentStateIndex = liftedAction.nextLiftedState.length;
             computedStates = [];
-            committedState = liftedAction.preloadedState;
+            committedState = liftedAction.preloadedState as S;
             minInvalidatedStateIndex = 0;
             // iterate through actions
             liftedAction.nextLiftedState.forEach((action) => {
@@ -623,7 +784,7 @@ export function liftReducerWith(
             return computePausedAction(true);
           }
           // Commit when unpausing
-          actionsById = { 0: liftAction(INIT_ACTION) };
+          actionsById = { 0: liftAction(INIT_ACTION as A) };
           nextActionId = 1;
           stagedActionIds = [0];
           skippedActionIds = [];
@@ -651,7 +812,7 @@ export function liftReducerWith(
       skippedActionIds,
       options.shouldCatchErrors
     );
-    monitorState = monitorReducer(monitorState, liftedAction);
+    monitorState = monitorReducer(monitorState, liftedAction as MonitorAction);
     return {
       monitorState,
       actionsById,
@@ -670,34 +831,78 @@ export function liftReducerWith(
 /**
  * Provides an app's view into the state of the lifted store.
  */
-export function unliftState(liftedState) {
+export function unliftState<
+  S,
+  A extends Action<unknown>,
+  MonitorState,
+  NextStateExt
+>(
+  liftedState: LiftedState<S, A, MonitorState> & NextStateExt
+): S & NextStateExt {
   const { computedStates, currentStateIndex } = liftedState;
   const { state } = computedStates[currentStateIndex];
-  return state;
+  return state as S & NextStateExt;
 }
+
+export type LiftedReducer<S, A extends Action<unknown>, MonitorState> = Reducer<
+  LiftedState<S, A, MonitorState>,
+  LiftedAction<S, A, MonitorState>
+>;
+
+export type LiftedStore<S, A extends Action<unknown>, MonitorState> = Store<
+  LiftedState<S, A, MonitorState>,
+  LiftedAction<S, A, MonitorState>
+>;
+
+export type InstrumentExt<S, A extends Action<unknown>, MonitorState> = {
+  liftedStore: LiftedStore<S, A, MonitorState>;
+};
+
+export type EnhancedStore<S, A extends Action<unknown>, MonitorState> = Store<
+  S,
+  A
+> &
+  InstrumentExt<S, A, MonitorState>;
 
 /**
  * Provides an app's view into the lifted store.
  */
-export function unliftStore(liftedStore, liftReducer, options) {
-  let lastDefinedState;
+export function unliftStore<
+  S,
+  A extends Action<unknown>,
+  MonitorState,
+  MonitorAction extends Action<unknown>,
+  NextExt,
+  NextStateExt
+>(
+  liftedStore: Store<
+    LiftedState<S, A, MonitorState> & NextStateExt,
+    LiftedAction<S, A, MonitorState>
+  > &
+    NextExt,
+  liftReducer: (r: Reducer<S, A>) => LiftedReducer<S, A, MonitorState>,
+  options: Options<S, A, MonitorState, MonitorAction>
+) {
+  let lastDefinedState: S & NextStateExt;
   const trace = options.trace || options.shouldIncludeCallstack;
   const traceLimit = options.traceLimit || 10;
 
-  function getState() {
-    const state = unliftState(liftedStore.getState());
+  function getState(): S & NextStateExt {
+    const state = unliftState<S, A, MonitorState, NextStateExt>(
+      liftedStore.getState()
+    );
     if (state !== undefined) {
       lastDefinedState = state;
     }
     return lastDefinedState;
   }
 
-  function dispatch(action) {
-    liftedStore.dispatch(liftAction(action, trace, traceLimit, dispatch));
+  function dispatch<T extends A>(action: T): T {
+    liftedStore.dispatch(liftAction<A>(action, trace, traceLimit, dispatch));
     return action;
   }
 
-  return {
+  return ({
     ...liftedStore,
 
     liftedStore,
@@ -706,13 +911,20 @@ export function unliftStore(liftedStore, liftReducer, options) {
 
     getState,
 
-    replaceReducer(nextReducer) {
-      liftedStore.replaceReducer(liftReducer(nextReducer));
+    replaceReducer(nextReducer: Reducer<S & NextStateExt, A>) {
+      liftedStore.replaceReducer(
+        (liftReducer(
+          (nextReducer as unknown) as Reducer<S, A>
+        ) as unknown) as Reducer<
+          LiftedState<S, A, MonitorState> & NextStateExt,
+          LiftedAction<S, A, MonitorState>
+        >
+      );
     },
 
-    [$$observable]() {
+    [$$observable](): Observable<S> {
       return {
-        ...liftedStore[$$observable](),
+        ...(liftedStore as any)[$$observable](),
         subscribe(observer) {
           if (typeof observer !== 'object') {
             throw new TypeError('Expected the observer to be an object.');
@@ -728,15 +940,56 @@ export function unliftStore(liftedStore, liftReducer, options) {
           const unsubscribe = liftedStore.subscribe(observeState);
           return { unsubscribe };
         },
+
+        [$$observable]() {
+          return this;
+        },
       };
     },
-  };
+  } as unknown) as Store<S & NextStateExt, A> &
+    NextExt & {
+      liftedStore: Store<
+        LiftedState<S, A, MonitorState> & NextStateExt,
+        LiftedAction<S, A, MonitorState>
+      >;
+    };
+}
+
+export interface Options<
+  S,
+  A extends Action<unknown>,
+  MonitorState,
+  MonitorAction extends Action<unknown>
+> {
+  maxAge?:
+    | number
+    | ((
+        currentLiftedAction: LiftedAction<S, A, MonitorState>,
+        previousLiftedState: LiftedState<S, A, MonitorState> | undefined
+      ) => number);
+  shouldCatchErrors?: boolean;
+  shouldRecordChanges?: boolean;
+  pauseActionType?: unknown;
+  shouldStartLocked?: boolean;
+  shouldHotReload?: boolean;
+  trace?: boolean | ((action: A) => string | undefined);
+  traceLimit?: number;
+  shouldIncludeCallstack?: boolean;
 }
 
 /**
  * Redux instrumentation store enhancer.
  */
-export default function instrument(monitorReducer = () => null, options = {}) {
+export default function instrument<
+  OptionsS,
+  OptionsA extends Action<unknown>,
+  MonitorState = null,
+  MonitorAction extends Action<unknown> = never
+>(
+  monitorReducer: Reducer<MonitorState, MonitorAction> = ((() =>
+    null) as unknown) as Reducer<MonitorState, MonitorAction>,
+  options: Options<OptionsS, OptionsA, MonitorState, MonitorAction> = {}
+): StoreEnhancer<InstrumentExt<any, any, MonitorState>> {
   if (typeof options.maxAge === 'number' && options.maxAge < 2) {
     throw new Error(
       'DevTools.instrument({ maxAge }) option, if specified, ' +
@@ -744,10 +997,15 @@ export default function instrument(monitorReducer = () => null, options = {}) {
     );
   }
 
-  return (createStore) => (reducer, initialState, enhancer) => {
-    function liftReducer(r) {
+  return <NextExt, NextStateExt>(
+    createStore: StoreEnhancerStoreCreator<NextExt, NextStateExt>
+  ) => <S, A extends Action<unknown>>(
+    reducer: Reducer<S, A>,
+    initialState?: PreloadedState<S>
+  ) => {
+    function liftReducer(r: Reducer<S, A>) {
       if (typeof r !== 'function') {
-        if (r && typeof r.default === 'function') {
+        if (r && typeof (r as { default: unknown }).default === 'function') {
           throw new Error(
             'Expected the reducer to be a function. ' +
               'Instead got an object with a "default" field. ' +
@@ -757,17 +1015,44 @@ export default function instrument(monitorReducer = () => null, options = {}) {
         }
         throw new Error('Expected the reducer to be a function.');
       }
-      return liftReducerWith(r, initialState, monitorReducer, options);
+      return liftReducerWith<S, A, MonitorState, MonitorAction>(
+        r,
+        initialState,
+        monitorReducer,
+        (options as unknown) as Options<S, A, MonitorState, MonitorAction>
+      );
     }
 
-    const liftedStore = createStore(liftReducer(reducer), enhancer);
-    if (liftedStore.liftedStore) {
+    const liftedStore = createStore(liftReducer(reducer));
+    if (
+      (liftedStore as Store<
+        LiftedState<S, A, MonitorState> & NextStateExt,
+        LiftedAction<S, A, MonitorState>
+      > &
+        NextExt & {
+          liftedStore: Store<
+            LiftedState<S, A, MonitorState>,
+            LiftedAction<S, A, MonitorState>
+          >;
+        }).liftedStore
+    ) {
       throw new Error(
         'DevTools instrumentation should not be applied more than once. ' +
           'Check your store configuration.'
       );
     }
 
-    return unliftStore(liftedStore, liftReducer, options);
+    return unliftStore<
+      S,
+      A,
+      MonitorState,
+      MonitorAction,
+      NextExt,
+      NextStateExt
+    >(
+      liftedStore,
+      liftReducer,
+      (options as unknown) as Options<S, A, MonitorState, MonitorAction>
+    );
   };
 }
