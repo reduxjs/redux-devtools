@@ -11,6 +11,7 @@ import {
   invertTheme,
   StylingConfig,
   StylingFunction,
+  StylingValue,
   Theme,
 } from 'react-base16-styling';
 import { CircularPropsPassedThroughJSONTree } from './types';
@@ -174,3 +175,5 @@ export default class JSONTree extends React.Component<Props, State> {
     );
   }
 }
+
+export { StylingValue };

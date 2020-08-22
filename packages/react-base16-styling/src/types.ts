@@ -2,14 +2,14 @@ import { Base16Theme } from 'base16';
 import * as CSS from 'csstype';
 
 export interface Styling {
-  className?: string;
-  style?: CSS.Properties<string | number>;
+  className: string;
+  style: CSS.Properties<string | number>;
 }
 
 export type StylingValueFunction = (
   styling: Styling,
   ...rest: any[]
-) => Styling;
+) => Partial<Styling>;
 
 export type StylingValue =
   | string
