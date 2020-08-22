@@ -58,16 +58,5 @@
   ],
   "engines": {
     "node": ">=10.13.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*": [
-      "eslint --fix",
-      "prettier --write"
-    ]
   }
 }
