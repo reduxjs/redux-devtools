@@ -2,7 +2,7 @@ import { instrument, persistState } from '../src';
 import { compose, createStore } from 'redux';
 
 describe('persistState', () => {
-  let savedLocalStorage = global.localStorage;
+  const savedLocalStorage = global.localStorage;
   delete global.localStorage;
 
   beforeEach(() => {
@@ -20,6 +20,12 @@ describe('persistState', () => {
       clear() {
         this.store = {};
       },
+      get length() {
+        return this.store.length;
+      },
+      key(index) {
+        throw new Error('Unimplemented');
+      },
     };
   });
 
@@ -27,7 +33,8 @@ describe('persistState', () => {
     global.localStorage = savedLocalStorage;
   });
 
-  const reducer = (state = 0, action) => {
+  type Action = { type: 'INCREMENT' } | { type: 'DECREMENT' };
+  const reducer = (state = 0, action: Action) => {
     switch (action.type) {
       case 'INCREMENT':
         return state + 1;
@@ -69,7 +76,8 @@ describe('persistState', () => {
   });
 
   it('should run with a custom state deserializer', () => {
-    const oneLess = (state) => (state === undefined ? -1 : state - 1);
+    const oneLess = (state: number | undefined) =>
+      state === undefined ? -1 : state - 1;
     const store = createStore(
       reducer,
       compose(instrument(), persistState('id', oneLess))
@@ -88,8 +96,8 @@ describe('persistState', () => {
   });
 
   it('should run with a custom action deserializer', () => {
-    const incToDec = (action) =>
-      action.type === 'INCREMENT' ? { type: 'DECREMENT' } : action;
+    const incToDec = (action: Action) =>
+      action.type === 'INCREMENT' ? ({ type: 'DECREMENT' } as const) : action;
     const store = createStore(
       reducer,
       compose(instrument(), persistState('id', undefined, incToDec))
@@ -108,7 +116,9 @@ describe('persistState', () => {
   });
 
   it('should warn if read from localStorage fails', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
+      // noop
+    });
     delete global.localStorage.getItem;
     createStore(reducer, compose(instrument(), persistState('id')));
 
@@ -120,7 +130,9 @@ describe('persistState', () => {
   });
 
   it('should warn if write to localStorage fails', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
+      // noop
+    });
     delete global.localStorage.setItem;
     const store = createStore(
       reducer,

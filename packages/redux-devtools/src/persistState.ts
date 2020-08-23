@@ -1,16 +1,24 @@
 import mapValues from 'lodash/mapValues';
 import identity from 'lodash/identity';
+import { Action, PreloadedState, Reducer, StoreEnhancer } from 'redux';
+import { LiftedState } from 'redux-devtools-instrument';
 
-export default function persistState(
-  sessionId,
-  deserializeState = identity,
-  deserializeAction = identity
-) {
+export default function persistState<
+  S,
+  A extends Action<unknown>,
+  MonitorState
+>(
+  sessionId?: string,
+  deserializeState: (state: S) => S = identity,
+  deserializeAction: (action: A) => A = identity
+): StoreEnhancer {
   if (!sessionId) {
     return (next) => (...args) => next(...args);
   }
 
-  function deserialize(state) {
+  function deserialize(
+    state: LiftedState<S, A, MonitorState>
+  ): LiftedState<S, A, MonitorState> {
     return {
       ...state,
       actionsById: mapValues(state.actionsById, (liftedAction) => ({
@@ -25,7 +33,10 @@ export default function persistState(
     };
   }
 
-  return (next) => (reducer, initialState, enhancer) => {
+  return (next) => <S, A extends Action<unknown>>(
+    reducer: Reducer<S, A>,
+    initialState?: PreloadedState<S>
+  ) => {
     const key = `redux-dev-session-${sessionId}`;
 
     let finalInitialState;
@@ -44,11 +55,14 @@ export default function persistState(
       }
     }
 
-    const store = next(reducer, finalInitialState, enhancer);
+    const store = next(
+      reducer,
+      finalInitialState as PreloadedState<S> | undefined
+    );
 
     return {
       ...store,
-      dispatch(action) {
+      dispatch<T extends A>(action: T) {
         store.dispatch(action);
 
         try {
