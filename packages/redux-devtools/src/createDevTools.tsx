@@ -1,10 +1,15 @@
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect, Provider, ReactReduxContext } from 'react-redux';
-import instrument from 'redux-devtools-instrument';
+import instrument, {
+  EnhancedStore,
+  LiftedState,
+  LiftedStore,
+  Options,
+} from 'redux-devtools-instrument';
+import { Action } from 'redux';
 
-function logError(type) {
-  /* eslint-disable no-console */
+function logError(type: string) {
   if (type === 'NoStore') {
     console.error(
       'Redux DevTools could not render. You must pass the Redux store ' +
@@ -18,16 +23,51 @@ function logError(type) {
         'using createStore()?'
     );
   }
-  /* eslint-enable no-console */
 }
 
-export default function createDevTools(children) {
+interface Props<
+  S,
+  A extends Action<unknown>,
+  MonitorState,
+  MonitorAction extends Action<unknown>
+> {
+  store?: EnhancedStore<S, A, MonitorState>;
+}
+
+type Monitor<
+  S,
+  A extends Action<unknown>,
+  MonitorProps,
+  MonitorState,
+  MonitorAction extends Action<unknown>
+> = React.ReactElement<
+  MonitorProps,
+  React.ComponentType<MonitorProps & LiftedState<S, A, MonitorState>> & {
+    update(
+      monitorProps: MonitorProps,
+      state: MonitorState | undefined,
+      action: MonitorAction
+    ): MonitorState;
+  }
+>;
+
+export default function createDevTools<
+  S,
+  A extends Action<unknown>,
+  MonitorProps,
+  MonitorState,
+  MonitorAction extends Action<unknown>
+>(children: Monitor<S, A, MonitorProps, MonitorState, MonitorAction>) {
   const monitorElement = Children.only(children);
   const monitorProps = monitorElement.props;
   const Monitor = monitorElement.type;
-  const ConnectedMonitor = connect((state) => state)(Monitor);
+  const ConnectedMonitor = connect(
+    (state: LiftedState<S, A, MonitorState>) => state
+  )(Monitor as React.ComponentType<any>);
 
-  return class DevTools extends Component {
+  return class DevTools extends Component<
+    Props<S, A, MonitorState, MonitorAction>
+  > {
     static contextTypes = {
       store: PropTypes.object,
     };
@@ -36,13 +76,18 @@ export default function createDevTools(children) {
       store: PropTypes.object,
     };
 
-    static instrument = (options) =>
+    liftedStore?: LiftedStore<S, A, MonitorState>;
+
+    static instrument = (options: Options<S, A, MonitorState, MonitorAction>) =>
       instrument(
         (state, action) => Monitor.update(monitorProps, state, action),
         options
       );
 
-    constructor(props, context) {
+    constructor(
+      props: Props<S, A, MonitorState, MonitorAction>,
+      context: { store?: EnhancedStore<S, A, MonitorState> }
+    ) {
       super(props, context);
 
       if (ReactReduxContext) {
@@ -60,7 +105,7 @@ export default function createDevTools(children) {
       if (context.store) {
         this.liftedStore = context.store.liftedStore;
       } else {
-        this.liftedStore = props.store.liftedStore;
+        this.liftedStore = props.store!.liftedStore;
       }
 
       if (!this.liftedStore) {
@@ -88,12 +133,23 @@ export default function createDevTools(children) {
                 logError('NoStore');
                 return null;
               }
-              if (!props.store.liftedStore) {
+              if (
+                !((props.store as unknown) as EnhancedStore<S, A, MonitorState>)
+                  .liftedStore
+              ) {
                 logError('NoLiftedStore');
                 return null;
               }
               return (
-                <Provider store={props.store.liftedStore}>
+                <Provider
+                  store={
+                    ((props.store as unknown) as EnhancedStore<
+                      S,
+                      A,
+                      MonitorState
+                    >).liftedStore
+                  }
+                >
                   <ConnectedMonitor {...monitorProps} />
                 </Provider>
               );
