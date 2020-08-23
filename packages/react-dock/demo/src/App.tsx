@@ -39,24 +39,29 @@ const Remove = styled(BsX)`
   cursor: pointer;
 `;
 
-const positions = ['left', 'top', 'right', 'bottom'];
-const dimModes = ['transparent', 'none', 'opaque'];
+const positions = ['left', 'top', 'right', 'bottom'] as const;
+const dimModes = ['transparent', 'none', 'opaque'] as const;
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      positionIdx: 0,
-      dimModeIdx: 0,
-      isVisible: true,
-      fluid: true,
-      customAnimation: false,
-      slow: false,
-      size: 0.25,
-    };
-  }
+interface State {
+  positionIdx: number;
+  dimModeIdx: number;
+  isVisible: boolean;
+  fluid: boolean;
+  customAnimation: boolean;
+  slow: boolean;
+  size: number;
+}
 
-  componentDidMount() {}
+class App extends Component<never, State> {
+  state: State = {
+    positionIdx: 0,
+    dimModeIdx: 0,
+    isVisible: true,
+    fluid: true,
+    customAnimation: false,
+    slow: false,
+    size: 0.25,
+  };
 
   render() {
     const duration = this.state.slow ? 2000 : 200;
@@ -166,11 +171,11 @@ class App extends Component {
     );
   }
 
-  handleVisibleChange = (isVisible) => {
+  handleVisibleChange = (isVisible: boolean) => {
     this.setState({ isVisible });
   };
 
-  handleSizeChange = (size) => {
+  handleSizeChange = (size: number) => {
     this.setState({ size });
   };
 

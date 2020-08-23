@@ -1,7 +1,7 @@
-var path = require('path');
-var webpack = require('webpack');
+import * as path from 'path';
+import * as webpack from 'webpack';
 
-var isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   mode: isProduction ? 'production' : 'development',
@@ -20,12 +20,12 @@ module.exports = {
   },
   plugins: isProduction ? [] : [new webpack.HotModuleReplacementPlugin()],
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|ts)x?$/,
         loader: 'babel-loader',
         include: [
           path.join(__dirname, 'src'),
@@ -37,7 +37,6 @@ module.exports = {
   devServer: isProduction
     ? null
     : {
-        quiet: true,
         publicPath: '/static/',
         port: 3000,
         contentBase: './demo/',
