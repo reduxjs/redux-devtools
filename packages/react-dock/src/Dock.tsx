@@ -227,7 +227,7 @@ interface Props {
   dockStyle?: React.CSSProperties | null;
   dockHiddenStyle?: React.CSSProperties | null;
   duration: number;
-  children: React.FunctionComponent<{
+  children?: React.FunctionComponent<{
     position: 'left' | 'right' | 'top' | 'bottom';
     isResizing: boolean | undefined;
     size: number;
