@@ -1,9 +1,7 @@
 {
   "extends": "../../tsconfig.react.base.json",
   "compilerOptions": {
-    "outDir": "lib",
-    // See https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33311
-    "types": ["jest"]
+    "outDir": "lib"
   },
   "include": ["src"]
 }
