@@ -1,6 +1,8 @@
 // Same as https://github.com/SimenB/react-vendor-prefixes/blob/master/src/index.js,
 // but dumber
 
+import { CSSProperties } from 'react';
+
 const vendorSpecificProperties = [
   'animation',
   'animationDelay',
@@ -34,8 +36,8 @@ const vendorSpecificProperties = [
 
 const prefixes = ['Moz', 'Webkit', 'ms', 'O'];
 
-function prefixProp(key, value) {
-  return prefixes.reduce(
+function prefixProp<Value>(key: string, value: Value) {
+  return prefixes.reduce<{ [key: string]: Value }>(
     (obj, pre) => (
       (obj[pre + key[0].toUpperCase() + key.substr(1)] = value), obj
     ),
@@ -43,13 +45,13 @@ function prefixProp(key, value) {
   );
 }
 
-export default function autoprefix(style) {
+export default function autoprefix(style: CSSProperties) {
   return Object.keys(style).reduce(
     (obj, key) =>
       vendorSpecificProperties.indexOf(key) !== -1
         ? {
             ...obj,
-            ...prefixProp(key, style[key]),
+            ...prefixProp(key, style[key as keyof CSSProperties]),
           }
         : obj,
     style

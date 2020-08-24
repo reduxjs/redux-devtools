@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import autoprefix from './autoprefix';
 
-function autoprefixes(styles) {
-  return Object.keys(styles).reduce(
+interface Styles {
+  [key: string]: React.CSSProperties;
+}
+
+function autoprefixes(styles: Styles) {
+  return Object.keys(styles).reduce<Styles>(
     (obj, key) => ((obj[key] = autoprefix(styles[key])), obj),
     {}
   );
@@ -74,21 +78,21 @@ const styles = autoprefixes({
   },
 });
 
-function getTransitions(duration) {
+function getTransitions(duration: number) {
   return ['left', 'top', 'width', 'height'].map(
     (p) => `${p} ${duration / 1000}s ease-out`
   );
 }
 
 function getDockStyles(
-  { fluid, dockStyle, dockHiddenStyle, duration, position, isVisible },
-  { size, isResizing, fullWidth, fullHeight }
+  { fluid, dockStyle, dockHiddenStyle, duration, position, isVisible }: Props,
+  { size, isResizing, fullWidth, fullHeight }: State
 ) {
   let posStyle;
-  const absSize = fluid ? size * 100 + '%' : size + 'px';
+  const absSize = fluid ? `${size * 100}%` : `${size}px`;
 
-  function getRestSize(fullSize) {
-    return fluid ? 100 - size * 100 + '%' : fullSize - size + 'px';
+  function getRestSize(fullSize: number) {
+    return fluid ? `${100 - size * 100}%` : `${fullSize - size}px`;
   }
 
   switch (position) {
@@ -139,8 +143,8 @@ function getDockStyles(
 }
 
 function getDimStyles(
-  { dimMode, dimStyle, duration, isVisible },
-  { isTransitionStarted }
+  { dimMode, dimStyle, duration, isVisible }: Props,
+  { isTransitionStarted }: State
 ) {
   return [
     styles.dim,
@@ -155,7 +159,7 @@ function getDimStyles(
   ];
 }
 
-function getResizerStyles(position) {
+function getResizerStyles(position: 'left' | 'right' | 'top' | 'bottom') {
   let resizerStyle;
   const size = 10;
 
@@ -201,23 +205,57 @@ function getResizerStyles(position) {
   return [styles.resizer, autoprefix(resizerStyle)];
 }
 
-function getFullSize(position, fullWidth, fullHeight) {
+function getFullSize(
+  position: 'left' | 'right' | 'top' | 'bottom',
+  fullWidth: number,
+  fullHeight: number
+) {
   return position === 'left' || position === 'right' ? fullWidth : fullHeight;
 }
 
-export default class Dock extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isControlled: typeof props.size !== 'undefined',
-      size: props.size || props.defaultSize,
-      isDimHidden: !props.isVisible,
-      fullWidth: typeof window !== 'undefined' && window.innerWidth,
-      fullHeight: typeof window !== 'undefined' && window.innerHeight,
-      isTransitionStarted: false,
-      isWindowResizing: false,
-    };
-  }
+interface Props {
+  position: 'left' | 'right' | 'top' | 'bottom';
+  zIndex: number;
+  fluid: boolean;
+  size?: number;
+  defaultSize: number;
+  dimMode: 'none' | 'transparent' | 'opaque';
+  isVisible?: boolean;
+  onVisibleChange?: (isVisible: boolean) => void;
+  onSizeChange?: (size: number) => void;
+  dimStyle?: React.CSSProperties | null;
+  dockStyle?: React.CSSProperties | null;
+  dockHiddenStyle?: React.CSSProperties | null;
+  duration: number;
+  children?: React.FunctionComponent<{
+    position: 'left' | 'right' | 'top' | 'bottom';
+    isResizing: boolean | undefined;
+    size: number;
+    isVisible: boolean | undefined;
+  }>;
+}
+
+interface State {
+  isControlled: boolean;
+  size: number;
+  isDimHidden: boolean;
+  fullWidth: number;
+  fullHeight: number;
+  isTransitionStarted: boolean;
+  isWindowResizing: unknown;
+  isResizing?: boolean;
+}
+
+export default class Dock extends Component<Props, State> {
+  state: State = {
+    isControlled: typeof this.props.size !== 'undefined',
+    size: this.props.size || this.props.defaultSize,
+    isDimHidden: !this.props.isVisible,
+    fullWidth: window.innerWidth,
+    fullHeight: window.innerHeight,
+    isTransitionStarted: false,
+    isWindowResizing: false,
+  };
 
   static propTypes = {
     position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
@@ -250,9 +288,7 @@ export default class Dock extends Component {
     window.addEventListener('mousemove', this.handleMouseMove);
     window.addEventListener('resize', this.handleResize);
 
-    if (!window.fullWidth) {
-      this.updateWindowSize();
-    }
+    this.updateWindowSize();
   }
 
   componentWillUnmount() {
@@ -263,12 +299,12 @@ export default class Dock extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     const isControlled = typeof nextProps.size !== 'undefined';
 
     this.setState({ isControlled });
 
-    if (isControlled && this.props.size !== nextProps.size) {
+    if (isControlled && nextProps.size && this.props.size !== nextProps.size) {
       this.setState({ size: nextProps.size });
     } else if (this.props.fluid !== nextProps.fluid) {
       this.updateSize(nextProps);
@@ -281,7 +317,7 @@ export default class Dock extends Component {
     }
   }
 
-  updateSize(props) {
+  updateSize(props: Props) {
     const { fullWidth, fullHeight } = this.state;
 
     this.setState({
@@ -291,7 +327,7 @@ export default class Dock extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (this.props.isVisible !== prevProps.isVisible) {
       if (!this.props.isVisible) {
         window.setTimeout(() => this.hideDim(), this.props.duration);
@@ -367,7 +403,7 @@ export default class Dock extends Component {
     }
   };
 
-  updateWindowSize = (windowResize) => {
+  updateWindowSize = (windowResize?: true) => {
     const sizeState = {
       fullWidth: window.innerWidth,
       fullHeight: window.innerHeight,
@@ -407,18 +443,18 @@ export default class Dock extends Component {
     this.setState({ isResizing: false });
   };
 
-  handleMouseMove = (e) => {
+  handleMouseMove = (e: MouseEvent | TouchEvent) => {
     if (!this.state.isResizing || this.state.isWindowResizing) return;
 
-    if (!e.touches) e.preventDefault();
+    if (!(e as TouchEvent).touches) e.preventDefault();
 
     const { position, fluid } = this.props;
     const { fullWidth, fullHeight, isControlled } = this.state;
-    let { clientX: x, clientY: y } = e;
+    let { clientX: x, clientY: y } = e as MouseEvent;
 
-    if (e.touches) {
-      x = e.touches[0].clientX;
-      y = e.touches[0].clientY;
+    if ((e as TouchEvent).touches) {
+      x = (e as TouchEvent).touches[0].clientX;
+      y = (e as TouchEvent).touches[0].clientY;
     }
 
     let size;

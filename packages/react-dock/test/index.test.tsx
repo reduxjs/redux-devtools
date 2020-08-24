@@ -1,14 +1,14 @@
 import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import { createRenderer } from 'react-test-renderer/shallow';
 import Dock from '../src/Dock';
 
 describe('Dock component', function () {
   it('should have shallow rendering', function () {
-    const shallowRenderer = new ShallowRenderer();
+    const renderer = createRenderer();
     const DockEl = <Dock />;
-    shallowRenderer.render(DockEl);
+    renderer.render(DockEl);
 
-    const result = shallowRenderer.getRenderOutput();
+    const result = renderer.getRenderOutput();
 
     expect(DockEl.props).toEqual({
       position: 'left',

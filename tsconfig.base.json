@@ -6,6 +6,8 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    // See https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33311
+    "types": ["node", "jest"]
   }
 }
