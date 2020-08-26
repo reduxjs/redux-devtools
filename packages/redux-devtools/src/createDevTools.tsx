@@ -37,7 +37,7 @@ interface Props<
 export type Monitor<
   S,
   A extends Action<unknown>,
-  MonitorProps,
+  MonitorProps extends LiftedState<S, A, MonitorState>,
   MonitorState,
   MonitorAction extends Action<unknown>
 > = React.ReactElement<
@@ -54,7 +54,7 @@ export type Monitor<
 export default function createDevTools<
   S,
   A extends Action<unknown>,
-  MonitorProps,
+  MonitorProps extends LiftedState<S, A, MonitorState>,
   MonitorState,
   MonitorAction extends Action<unknown>
 >(children: Monitor<S, A, MonitorProps, MonitorState, MonitorAction>) {
