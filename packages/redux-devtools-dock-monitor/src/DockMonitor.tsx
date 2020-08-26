@@ -1,17 +1,49 @@
 import React, { cloneElement, Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import Dock from 'react-dock';
+import { Action, Dispatch } from 'redux';
+import { LiftedState, Monitor } from 'redux-devtools';
 import { POSITIONS } from './constants';
 import {
   toggleVisibility,
   changeMonitor,
   changePosition,
   changeSize,
+  DockMonitorAction,
 } from './actions';
-import reducer from './reducers';
+import reducer, { DockMonitorState } from './reducers';
 import parseKey from 'parse-key';
 
-export default class DockMonitor extends Component {
+interface KeyObject {
+  name: string;
+  ctrl: boolean;
+  meta: boolean;
+  shift: boolean;
+  alt: boolean;
+  sequence: string;
+}
+
+export interface DockMonitorProps<S, A extends Action<unknown>>
+  extends LiftedState<S, A, DockMonitorState> {
+  defaultPosition: 'left' | 'top' | 'right' | 'bottom';
+  defaultIsVisible: boolean;
+  defaultSize: number;
+  toggleVisibilityKey: string;
+  changePositionKey: string;
+  changeMonitorKey?: string;
+  fluid: boolean;
+
+  dispatch: Dispatch<DockMonitorAction>;
+
+  children:
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>[];
+}
+
+export default class DockMonitor<
+  S,
+  A extends Action<unknown>
+> extends Component<DockMonitorProps<S, A>> {
   static update = reducer;
 
   static propTypes = {
@@ -39,10 +71,8 @@ export default class DockMonitor extends Component {
     fluid: true,
   };
 
-  constructor(props) {
+  constructor(props: DockMonitorProps<S, A>) {
     super(props);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleSizeChange = this.handleSizeChange.bind(this);
 
     const childrenCount = Children.count(props.children);
     if (childrenCount === 0) {
@@ -71,7 +101,7 @@ export default class DockMonitor extends Component {
     window.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  matchesKey(key, event) {
+  matchesKey(key: KeyObject | undefined, event: KeyboardEvent) {
     if (!key) {
       return false;
     }
@@ -87,17 +117,17 @@ export default class DockMonitor extends Component {
     );
   }
 
-  handleKeyDown(e) {
+  handleKeyDown = (e: KeyboardEvent) => {
     // Ignore regular keys when focused on a field
     // and no modifiers are active.
     if (
       !e.ctrlKey &&
       !e.metaKey &&
       !e.altKey &&
-      (e.target.tagName === 'INPUT' ||
-        e.target.tagName === 'SELECT' ||
-        e.target.tagName === 'TEXTAREA' ||
-        e.target.isContentEditable)
+      ((e.target! as { tagName?: string }).tagName === 'INPUT' ||
+        (e.target! as { tagName?: string }).tagName === 'SELECT' ||
+        (e.target! as { tagName?: string }).tagName === 'TEXTAREA' ||
+        (e.target! as { isContentEditable?: boolean }).isContentEditable)
     ) {
       return;
     }
@@ -120,13 +150,20 @@ export default class DockMonitor extends Component {
       e.preventDefault();
       this.props.dispatch(changeMonitor());
     }
-  }
+  };
 
-  handleSizeChange(requestedSize) {
+  handleSizeChange = (requestedSize: number) => {
     this.props.dispatch(changeSize(requestedSize));
-  }
+  };
 
-  renderChild(child, index, otherProps) {
+  renderChild(
+    child: Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>,
+    index: number,
+    otherProps: Omit<
+      DockMonitorProps<S, A>,
+      'monitorState' | 'children' | 'fluid'
+    >
+  ) {
     const { monitorState } = this.props;
     const { childMonitorIndex, childMonitorStates } = monitorState;
 
@@ -153,8 +190,23 @@ export default class DockMonitor extends Component {
         onSizeChange={this.handleSizeChange}
         dimMode="none"
       >
-        {Children.map(children, (child, index) =>
-          this.renderChild(child, index, rest)
+        {Children.map(
+          children as
+            | Monitor<
+                S,
+                A,
+                LiftedState<S, A, unknown>,
+                unknown,
+                Action<unknown>
+              >
+            | Monitor<
+                S,
+                A,
+                LiftedState<S, A, unknown>,
+                unknown,
+                Action<unknown>
+              >[],
+          (child, index) => this.renderChild(child, index, rest)
         )}
       </Dock>
     );
