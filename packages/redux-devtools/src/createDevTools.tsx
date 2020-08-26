@@ -34,7 +34,7 @@ interface Props<
   store?: EnhancedStore<S, A, MonitorState>;
 }
 
-type Monitor<
+export type Monitor<
   S,
   A extends Action<unknown>,
   MonitorProps,
