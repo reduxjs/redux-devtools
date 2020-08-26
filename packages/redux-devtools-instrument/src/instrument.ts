@@ -42,7 +42,7 @@ const isChromeOrNode =
     process.release &&
     process.release.name === 'node');
 
-interface PerformAction<A extends Action<unknown>> {
+export interface PerformAction<A extends Action<unknown>> {
   type: typeof ActionTypes.PERFORM_ACTION;
   action: A;
   timestamp: number;

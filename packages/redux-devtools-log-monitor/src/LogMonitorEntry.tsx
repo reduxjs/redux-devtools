@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import JSONTree from 'react-json-tree';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
-import shouldPureComponentUpdate from 'react-pure-render/function';
 
 const styles = {
   entry: {
@@ -23,7 +22,7 @@ const dataIsEqual = (data, previousData, keyPath) => {
   return getDeepItem(data, path) === getDeepItem(previousData, path);
 };
 
-export default class LogMonitorEntry extends Component {
+export default class LogMonitorEntry extends PureComponent {
   static propTypes = {
     state: PropTypes.object.isRequired,
     action: PropTypes.object.isRequired,
@@ -38,8 +37,6 @@ export default class LogMonitorEntry extends Component {
     expandActionRoot: PropTypes.bool,
     expandStateRoot: PropTypes.bool,
   };
-
-  shouldComponentUpdate = shouldPureComponentUpdate;
 
   constructor(props) {
     super(props);

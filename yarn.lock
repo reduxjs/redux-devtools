@@ -3045,7 +3045,7 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/base16@^1.0.2":
+"@types/base16@*", "@types/base16@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/base16/-/base16-1.0.2.tgz#eb3a07db52309bfefb9ba010dfdb3c0784971f65"
   integrity sha512-oYO/U4VD1DavwrKuCSQWdLG+5K22SLPem2OQaHmFcQuwHoVeGC+JGVRji2MUqZUAIQZHEonOeVfAX09hYiLsdg==
@@ -3339,6 +3339,13 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
+
+"@types/redux-devtools-themes@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/redux-devtools-themes/-/redux-devtools-themes-1.0.0.tgz#4d22d3e8be499fc7eec220e020b0640d4bfb17bd"
+  integrity sha512-ul3x0MYM5Nzj57Fh9wINyHFne8vZL04RC4nWAUWLYcL105vHoa/oJyopuKOrQmqVmhqmDiL4c9FfLbUmIB7TWQ==
+  dependencies:
+    "@types/base16" "*"
 
 "@types/serve-static@*":
   version "1.13.5"
