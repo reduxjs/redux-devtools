@@ -1,10 +1,4 @@
-import React, {
-  cloneElement,
-  Children,
-  Component,
-  ReactNode,
-  ReactElement,
-} from 'react';
+import React, { cloneElement, Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import Dock from 'react-dock';
 import { Action, Dispatch } from 'redux';
@@ -42,8 +36,8 @@ export interface DockMonitorProps<S, A extends Action<unknown>>
   dispatch: Dispatch<DockMonitorAction>;
 
   children:
-    | Monitor<S, A, unknown, unknown, Action<unknown>>
-    | Monitor<S, A, unknown, unknown, Action<unknown>>[];
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>[];
 }
 
 export default class DockMonitor<
@@ -163,7 +157,7 @@ export default class DockMonitor<
   };
 
   renderChild(
-    child: ReactElement,
+    child: Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>,
     index: number,
     otherProps: Omit<
       DockMonitorProps<S, A>,
@@ -196,8 +190,23 @@ export default class DockMonitor<
         onSizeChange={this.handleSizeChange}
         dimMode="none"
       >
-        {Children.map<ReactNode, ReactElement>(children, (child, index) =>
-          this.renderChild(child, index, rest)
+        {Children.map(
+          children as
+            | Monitor<
+                S,
+                A,
+                LiftedState<S, A, unknown>,
+                unknown,
+                Action<unknown>
+              >
+            | Monitor<
+                S,
+                A,
+                LiftedState<S, A, unknown>,
+                unknown,
+                Action<unknown>
+              >[],
+          (child, index) => this.renderChild(child, index, rest)
         )}
       </Dock>
     );
