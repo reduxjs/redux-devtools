@@ -1,9 +1,9 @@
-export default function (hexColor, lightness) {
+export default function (hexColor: string, lightness: number) {
   let hex = String(hexColor).replace(/[^0-9a-f]/gi, '');
   if (hex.length < 6) {
     hex = hex.replace(/(.)/g, '$1$1');
   }
-  let lum = lightness || 0;
+  const lum = lightness || 0;
 
   let rgb = '#';
   let c;
