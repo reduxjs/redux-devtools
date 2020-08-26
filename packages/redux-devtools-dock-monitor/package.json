@@ -45,9 +45,16 @@
     "prop-types": "^15.7.2",
     "react-dock": "^0.2.4"
   },
+  "devDependencies": {
+    "@types/react": "^16.9.46",
+    "react": "^16.13.1",
+    "redux": "^4.0.5",
+    "redux-devtools": "^3.6.1"
+  },
   "peerDependencies": {
     "@types/react": "^16.3.18",
     "react": "^16.3.0",
+    "redux": "^3.4.0 || ^4.0.0",
     "redux-devtools": "^3.4.0"
   }
 }

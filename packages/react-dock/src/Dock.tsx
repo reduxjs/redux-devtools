@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import autoprefix from './autoprefix';
@@ -227,12 +227,14 @@ interface Props {
   dockStyle?: React.CSSProperties | null;
   dockHiddenStyle?: React.CSSProperties | null;
   duration: number;
-  children?: React.FunctionComponent<{
-    position: 'left' | 'right' | 'top' | 'bottom';
-    isResizing: boolean | undefined;
-    size: number;
-    isVisible: boolean | undefined;
-  }>;
+  children?:
+    | React.FunctionComponent<{
+        position: 'left' | 'right' | 'top' | 'bottom';
+        isResizing: boolean | undefined;
+        size: number;
+        isVisible: boolean | undefined;
+      }>
+    | ReactNode;
 }
 
 interface State {
@@ -376,7 +378,12 @@ export default class Dock extends Component<Props, State> {
           />
           <div style={styles.dockContent}>
             {typeof children === 'function'
-              ? children({
+              ? (children as React.FunctionComponent<{
+                  position: 'left' | 'right' | 'top' | 'bottom';
+                  isResizing: boolean | undefined;
+                  size: number;
+                  isVisible: boolean | undefined;
+                }>)({
                   position,
                   isResizing,
                   size,
