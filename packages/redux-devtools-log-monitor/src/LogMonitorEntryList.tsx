@@ -1,9 +1,31 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Action } from 'redux';
+import { PerformAction } from 'redux-devtools';
+import { Base16Theme } from 'redux-devtools-themes';
 import LogMonitorEntry from './LogMonitorEntry';
-import shouldPureComponentUpdate from 'react-pure-render/function';
 
-export default class LogMonitorEntryList extends Component {
+interface Props<S, A extends Action<unknown>> {
+  actionsById: { [actionId: number]: PerformAction<A> };
+  computedStates: { state: S; error?: string }[];
+  stagedActionIds: number[];
+  skippedActionIds: number[];
+  currentStateIndex: number;
+  consecutiveToggleStartId: number | null | undefined;
+
+  select: (state: S) => unknown;
+  onActionClick: (id: number) => void;
+  theme: Base16Theme;
+  expandActionRoot: boolean;
+  expandStateRoot: boolean;
+  markStateDiff: boolean;
+  onActionShiftClick: (id: number) => void;
+}
+
+export default class LogMonitorEntryList<
+  S,
+  A extends Action<unknown>
+> extends PureComponent<Props<S, A>> {
   static propTypes = {
     actionsById: PropTypes.object,
     computedStates: PropTypes.array,
@@ -18,8 +40,6 @@ export default class LogMonitorEntryList extends Component {
     expandActionRoot: PropTypes.bool,
     expandStateRoot: PropTypes.bool,
   };
-
-  shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
     const elements = [];

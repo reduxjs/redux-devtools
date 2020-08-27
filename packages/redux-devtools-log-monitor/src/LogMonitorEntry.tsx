@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { CSSProperties, MouseEventHandler, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import JSONTree from 'react-json-tree';
+import JSONTree, { StylingValue } from 'react-json-tree';
+import { Base16Theme } from 'redux-devtools-themes';
+import { Action } from 'redux';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
-import shouldPureComponentUpdate from 'react-pure-render/function';
 
-const styles = {
+const styles: { entry: CSSProperties; root: CSSProperties } = {
   entry: {
     display: 'block',
     WebkitUserSelect: 'none',
@@ -15,15 +16,40 @@ const styles = {
   },
 };
 
-const getDeepItem = (data, path) =>
+const getDeepItem = (data: any, path: (string | number)[]) =>
   path.reduce((obj, key) => obj && obj[key], data);
-const dataIsEqual = (data, previousData, keyPath) => {
+const dataIsEqual = (
+  data: any,
+  previousData: unknown,
+  keyPath: (string | number)[]
+) => {
   const path = [...keyPath].reverse().slice(1);
 
   return getDeepItem(data, path) === getDeepItem(previousData, path);
 };
 
-export default class LogMonitorEntry extends Component {
+interface Props<S, A extends Action<unknown>> {
+  theme: Base16Theme;
+  select: (state: any) => unknown;
+  action: A;
+  actionId: number;
+  state: S;
+  previousState: S | undefined;
+  collapsed: boolean;
+  inFuture: boolean;
+  selected: boolean;
+  error: string | undefined;
+  expandActionRoot: boolean;
+  expandStateRoot: boolean;
+  markStateDiff: boolean;
+  onActionClick: (id: number) => void;
+  onActionShiftClick: (id: number) => void;
+}
+
+export default class LogMonitorEntry<
+  S,
+  A extends Action<unknown>
+> extends PureComponent<Props<S, A>> {
   static propTypes = {
     state: PropTypes.object.isRequired,
     action: PropTypes.object.isRequired,
@@ -37,17 +63,10 @@ export default class LogMonitorEntry extends Component {
     selected: PropTypes.bool,
     expandActionRoot: PropTypes.bool,
     expandStateRoot: PropTypes.bool,
+    previousState: PropTypes.object,
   };
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
-
-  constructor(props) {
-    super(props);
-    this.handleActionClick = this.handleActionClick.bind(this);
-    this.shouldExpandNode = this.shouldExpandNode.bind(this);
-  }
-
-  printState(state, error) {
+  printState(state: S, error: string | undefined) {
     let errorText = error;
     if (!errorText) {
       try {
@@ -59,7 +78,11 @@ export default class LogMonitorEntry extends Component {
             typeof this.props.previousState !== 'undefined'
               ? this.props.select(this.props.previousState)
               : undefined;
-          const getValueStyle = ({ style }, nodeType, keyPath) => ({
+          const getValueStyle: StylingValue = (
+            { style },
+            nodeType,
+            keyPath
+          ) => ({
             style: {
               ...style,
               backgroundColor: dataIsEqual(data, previousData, keyPath)
@@ -67,7 +90,7 @@ export default class LogMonitorEntry extends Component {
                 : this.props.theme.base01,
             },
           });
-          const getNestedNodeStyle = ({ style }, keyPath) => ({
+          const getNestedNodeStyle: StylingValue = ({ style }, keyPath) => ({
             style: {
               ...style,
               ...(keyPath.length > 1 ? {} : styles.root),
@@ -75,7 +98,6 @@ export default class LogMonitorEntry extends Component {
           });
           theme = {
             extend: this.props.theme,
-            tree: styles.tree,
             value: getValueStyle,
             nestedNode: getNestedNodeStyle,
           };
@@ -112,7 +134,7 @@ export default class LogMonitorEntry extends Component {
     );
   }
 
-  handleActionClick(e) {
+  handleActionClick: MouseEventHandler<HTMLDivElement> = (e) => {
     const { actionId, onActionClick, onActionShiftClick } = this.props;
     if (actionId > 0) {
       if (e.shiftKey) {
@@ -121,11 +143,15 @@ export default class LogMonitorEntry extends Component {
         onActionClick(actionId);
       }
     }
-  }
+  };
 
-  shouldExpandNode(keyName, data, level) {
+  shouldExpandNode = (
+    keyPath: (string | number)[],
+    data: any,
+    level: number
+  ) => {
     return this.props.expandStateRoot && level === 0;
-  }
+  };
 
   render() {
     const {

@@ -1,17 +1,26 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import shouldPureComponentUpdate from 'react-pure-render/function';
+import { Action, Dispatch } from 'redux';
 import * as themes from 'redux-devtools-themes';
-import { ActionCreators } from 'redux-devtools';
-import { updateScrollTop, startConsecutiveToggle } from './actions';
-import reducer from './reducers';
+import { Base16Theme } from 'redux-devtools-themes';
+import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
+import {
+  updateScrollTop,
+  startConsecutiveToggle,
+  LogMonitorAction,
+} from './actions';
+import reducer, { LogMonitorState } from './reducers';
 import LogMonitorButtonBar from './LogMonitorButtonBar';
 import LogMonitorEntryList from './LogMonitorEntryList';
 import debounce from 'lodash.debounce';
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const { toggleAction, setActionsActive } = ActionCreators;
 
-const styles = {
+const styles: {
+  container: React.CSSProperties;
+  elements: React.CSSProperties;
+} = {
   container: {
     fontFamily: 'monaco, Consolas, Lucida Console, monospace',
     position: 'relative',
@@ -32,7 +41,23 @@ const styles = {
   },
 };
 
-export default class LogMonitor extends Component {
+export interface LogMonitorProps<S, A extends Action<unknown>>
+  extends LiftedState<S, A, LogMonitorState> {
+  dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
+
+  preserveScrollTop: boolean;
+  select: (state: S) => unknown;
+  theme: keyof typeof themes | Base16Theme;
+  expandActionRoot: boolean;
+  expandStateRoot: boolean;
+  markStateDiff: boolean;
+  hideMainButtons?: boolean;
+}
+
+export default class LogMonitor<
+  S,
+  A extends Action<unknown>
+> extends PureComponent<LogMonitorProps<S, A>> {
   static update = reducer;
 
   static propTypes = {
@@ -56,7 +81,7 @@ export default class LogMonitor extends Component {
   };
 
   static defaultProps = {
-    select: (state) => state,
+    select: (state: unknown) => state,
     theme: 'nicinabox',
     preserveScrollTop: true,
     expandActionRoot: true,
@@ -64,21 +89,13 @@ export default class LogMonitor extends Component {
     markStateDiff: false,
   };
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
+  scrollDown?: boolean;
+  node?: HTMLDivElement | null;
 
   updateScrollTop = debounce(() => {
     const node = this.node;
     this.props.dispatch(updateScrollTop(node ? node.scrollTop : 0));
   }, 500);
-
-  constructor(props) {
-    super(props);
-    this.handleToggleAction = this.handleToggleAction.bind(this);
-    this.handleToggleConsecutiveAction = this.handleToggleConsecutiveAction.bind(
-      this
-    );
-    this.getRef = this.getRef.bind(this);
-  }
 
   scroll() {
     const node = this.node;
@@ -114,7 +131,7 @@ export default class LogMonitor extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: LogMonitorProps<S, A>) {
     const node = this.node;
     if (!node) {
       this.scrollDown = true;
@@ -134,11 +151,11 @@ export default class LogMonitor extends Component {
     this.scroll();
   }
 
-  handleToggleAction(id) {
+  handleToggleAction = (id: number) => {
     this.props.dispatch(toggleAction(id));
-  }
+  };
 
-  handleToggleConsecutiveAction(id) {
+  handleToggleConsecutiveAction = (id: number) => {
     const { monitorState, actionsById } = this.props;
     const { consecutiveToggleStartId } = monitorState;
     if (consecutiveToggleStartId && actionsById[consecutiveToggleStartId]) {
@@ -151,10 +168,10 @@ export default class LogMonitor extends Component {
     } else if (id > 0) {
       this.props.dispatch(startConsecutiveToggle(id));
     }
-  }
+  };
 
   getTheme() {
-    let { theme } = this.props;
+    const { theme } = this.props;
     if (typeof theme !== 'string') {
       return theme;
     }
@@ -170,9 +187,9 @@ export default class LogMonitor extends Component {
     return themes.nicinabox;
   }
 
-  getRef(node) {
+  getRef: React.RefCallback<HTMLDivElement> = (node) => {
     this.node = node;
-  }
+  };
 
   render() {
     const theme = this.getTheme();

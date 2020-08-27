@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { CSSProperties, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import shouldPureComponentUpdate from 'react-pure-render/function';
-import { ActionCreators } from 'redux-devtools';
+import { ActionCreators, LiftedAction } from 'redux-devtools';
+import { Base16Theme } from 'redux-devtools-themes';
+import { Action, Dispatch } from 'redux';
 import LogMonitorButton from './LogMonitorButton';
+import { LogMonitorAction } from './actions';
+import { LogMonitorState } from './reducers';
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep } = ActionCreators;
 
-const style = {
+const style: CSSProperties = {
   textAlign: 'center',
   borderBottomWidth: 1,
   borderBottomStyle: 'solid',
@@ -16,37 +20,37 @@ const style = {
   flexDirection: 'row',
 };
 
-export default class LogMonitorButtonBar extends Component {
+interface Props<S, A extends Action<unknown>> {
+  theme: Base16Theme;
+  dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
+  hasStates: boolean;
+  hasSkippedActions: boolean;
+}
+
+export default class LogMonitorButtonBar<
+  S,
+  A extends Action<unknown>
+> extends PureComponent<Props<S, A>> {
   static propTypes = {
     dispatch: PropTypes.func,
     theme: PropTypes.object,
   };
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
-
-  constructor(props) {
-    super(props);
-    this.handleReset = this.handleReset.bind(this);
-    this.handleRollback = this.handleRollback.bind(this);
-    this.handleSweep = this.handleSweep.bind(this);
-    this.handleCommit = this.handleCommit.bind(this);
-  }
-
-  handleRollback() {
+  handleRollback = () => {
     this.props.dispatch(rollback());
-  }
+  };
 
-  handleSweep() {
+  handleSweep = () => {
     this.props.dispatch(sweep());
-  }
+  };
 
-  handleCommit() {
+  handleCommit = () => {
     this.props.dispatch(commit());
-  }
+  };
 
-  handleReset() {
+  handleReset = () => {
     this.props.dispatch(reset());
-  }
+  };
 
   render() {
     const { theme, hasStates, hasSkippedActions } = this.props;
