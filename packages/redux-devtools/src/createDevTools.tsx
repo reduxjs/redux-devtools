@@ -25,7 +25,7 @@ function logError(type: string) {
   }
 }
 
-interface Props<
+export interface Props<
   S,
   A extends Action<unknown>,
   MonitorState,

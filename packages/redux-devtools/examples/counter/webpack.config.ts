@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+import * as path from 'path';
+import * as webpack from 'webpack';
 
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -18,7 +18,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)x?$/,
         loaders: ['babel-loader'],
         exclude: /node_modules/,
         include: path.join(__dirname, 'src'),
