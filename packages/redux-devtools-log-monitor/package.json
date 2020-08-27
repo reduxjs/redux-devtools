@@ -40,6 +40,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@types/lodash.debounce": "^4.0.6",
     "@types/prop-types": "^15.7.3",
     "@types/redux-devtools-themes": "^1.0.0",
     "lodash.debounce": "^4.0.8",
@@ -48,14 +49,15 @@
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
-    "@types/lodash.debounce": "^4.0.6",
     "@types/react": "^16.9.46",
     "react": "^16.13.1",
     "redux": "^4.0.5",
     "redux-devtools": "^3.6.1"
   },
   "peerDependencies": {
+    "@types/react": "^16.9.46",
     "react": "^16.3.0",
+    "redux": "^4.0.5",
     "redux-devtools": "^3.4.0"
   }
 }
