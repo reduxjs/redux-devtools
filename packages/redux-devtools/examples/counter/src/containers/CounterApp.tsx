@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Counter from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
+import { CounterAction } from '../actions/CounterActions';
+import { CounterState } from '../reducers';
 
-class CounterApp extends Component {
+interface Props {
+  counter: number;
+  dispatch: Dispatch<CounterAction>;
+}
+
+class CounterApp extends Component<Props> {
   render() {
     const { counter, dispatch } = this.props;
     return (
@@ -16,7 +23,7 @@ class CounterApp extends Component {
   }
 }
 
-function select(state) {
+function select(state: CounterState) {
   return {
     counter: state.counter,
   };

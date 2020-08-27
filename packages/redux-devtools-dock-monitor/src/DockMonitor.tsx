@@ -23,6 +23,29 @@ interface KeyObject {
   sequence: string;
 }
 
+interface ExternalProps<S, A extends Action<unknown>> {
+  defaultPosition: 'left' | 'top' | 'right' | 'bottom';
+  defaultIsVisible: boolean;
+  defaultSize: number;
+  toggleVisibilityKey: string;
+  changePositionKey: string;
+  changeMonitorKey?: string;
+  fluid: boolean;
+
+  dispatch: Dispatch<DockMonitorAction>;
+
+  children:
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>[];
+}
+
+interface DefaultProps {
+  defaultIsVisible: boolean;
+  defaultPosition: 'left' | 'top' | 'right' | 'bottom';
+  defaultSize: number;
+  fluid: boolean;
+}
+
 export interface DockMonitorProps<S, A extends Action<unknown>>
   extends LiftedState<S, A, DockMonitorState> {
   defaultPosition: 'left' | 'top' | 'right' | 'bottom';
@@ -40,10 +63,9 @@ export interface DockMonitorProps<S, A extends Action<unknown>>
     | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>[];
 }
 
-export default class DockMonitor<
-  S,
-  A extends Action<unknown>
-> extends Component<DockMonitorProps<S, A>> {
+class DockMonitor<S, A extends Action<unknown>> extends Component<
+  DockMonitorProps<S, A>
+> {
   static update = reducer;
 
   static propTypes = {
@@ -64,7 +86,7 @@ export default class DockMonitor<
     }),
   };
 
-  static defaultProps = {
+  static defaultProps: DefaultProps = {
     defaultIsVisible: true,
     defaultPosition: 'right',
     defaultSize: 0.3,
@@ -212,3 +234,14 @@ export default class DockMonitor<
     );
   }
 }
+
+export default (DockMonitor as unknown) as React.ComponentType<
+  ExternalProps<unknown, Action<unknown>>
+> & {
+  update(
+    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    state: DockMonitorState | undefined,
+    action: DockMonitorAction
+  ): DockMonitorState;
+  defaultProps: DefaultProps;
+};

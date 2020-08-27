@@ -8,7 +8,7 @@ export default function persistState<
   A extends Action<unknown>,
   MonitorState
 >(
-  sessionId?: string,
+  sessionId?: string | null,
   deserializeState: (state: S) => S = identity,
   deserializeAction: (action: A) => A = identity
 ): StoreEnhancer {
