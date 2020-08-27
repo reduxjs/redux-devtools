@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Action, Dispatch } from 'redux';
 import * as themes from 'redux-devtools-themes';
+import { Base16Theme } from 'redux-devtools-themes';
 import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
-import { Base16Theme } from 'base16';
 import {
   updateScrollTop,
   startConsecutiveToggle,

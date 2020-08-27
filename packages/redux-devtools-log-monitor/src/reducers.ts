@@ -1,9 +1,9 @@
+import { Action } from 'redux';
 import {
   UPDATE_SCROLL_TOP,
   START_CONSECUTIVE_TOGGLE,
   LogMonitorAction,
 } from './actions';
-import { Action } from 'redux';
 import { LogMonitorProps } from './LogMonitor';
 
 function initialScrollTop<S, A extends Action<unknown>>(

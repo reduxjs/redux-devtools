@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, CSSProperties, MouseEventHandler } from 'react';
 import JSONTree from 'react-json-tree';
+import { Base16Theme } from 'redux-devtools-themes';
+import { Action } from 'redux';
 
 const styles = {
   actionBar: {
@@ -14,13 +16,19 @@ const styles = {
   },
 };
 
-export default class LogMonitorAction extends Component {
-  constructor(props) {
-    super(props);
-    this.shouldExpandNode = this.shouldExpandNode.bind(this);
-  }
+interface Props<A extends Action<unknown>> {
+  theme: Base16Theme;
+  collapsed: boolean;
+  action: A;
+  expandActionRoot: boolean;
+  onClick: MouseEventHandler<HTMLDivElement>;
+  style: CSSProperties;
+}
 
-  renderPayload(payload) {
+export default class LogMonitorAction<
+  A extends Action<unknown>
+> extends Component<Props<A>> {
+  renderPayload(payload: Record<string, unknown>) {
     return (
       <div
         style={{
@@ -43,9 +51,13 @@ export default class LogMonitorAction extends Component {
     );
   }
 
-  shouldExpandNode(keyName, data, level) {
+  shouldExpandNode = (
+    keyPath: (string | number)[],
+    data: any,
+    level: number
+  ) => {
     return this.props.expandActionRoot && level === 0;
-  }
+  };
 
   render() {
     const { type, ...payload } = this.props.action;
@@ -58,7 +70,7 @@ export default class LogMonitorAction extends Component {
         }}
       >
         <div style={styles.actionBar} onClick={this.props.onClick}>
-          {type !== null && type.toString()}
+          {type !== null && (type as string).toString()}
         </div>
         {!this.props.collapsed ? this.renderPayload(payload) : ''}
       </div>

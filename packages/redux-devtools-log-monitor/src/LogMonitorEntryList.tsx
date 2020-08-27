@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Action } from 'redux';
 import { PerformAction } from 'redux-devtools';
-import { Base16Theme } from 'base16';
+import { Base16Theme } from 'redux-devtools-themes';
 import LogMonitorEntry from './LogMonitorEntry';
 
 interface Props<S, A extends Action<unknown>> {
