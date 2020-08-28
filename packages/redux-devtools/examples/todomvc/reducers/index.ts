@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
-import todos from './todos';
+import todos, { Todo } from './todos';
+
+export interface TodoState {
+  todos: Todo[];
+}
 
 const rootReducer = combineReducers({
   todos,

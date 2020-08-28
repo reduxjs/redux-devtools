@@ -16,6 +16,7 @@ render(
 
 if (module.hot) {
   module.hot.accept('./containers/Root', () => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const RootContainer = require('./containers/Root').default;
     render(
       <AppContainer>

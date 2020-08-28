@@ -2,15 +2,6 @@
   "name": "todomvc",
   "version": "0.0.1",
   "description": "TodoMVC example for redux",
-  "private": true,
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server --open"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reduxjs/redux-devtools.git"
-  },
   "keywords": [
     "react",
     "reactjs",
@@ -23,11 +14,22 @@
     "flux",
     "todomvc"
   ],
-  "license": "MIT",
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools/examples/todomvc",
   "bugs": {
     "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/reduxjs/redux-devtools#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
@@ -36,21 +38,18 @@
     "react-hot-loader": "^4.12.21",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
-    "todomvc-app-css": "^2.3.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.11.1",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-proposal-function-bind": "^7.10.5",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-react": "^7.10.4",
-    "babel-loader": "^8.1.0",
-    "raw-loader": "^4.0.1",
     "redux-devtools": "^3.6.1",
     "redux-devtools-dock-monitor": "^1.1.4",
     "redux-devtools-log-monitor": "^2.0.1",
-    "style-loader": "^1.2.1",
-    "webpack": "^4.44.1",
-    "webpack-dev-server": "^3.11.0"
-  }
+    "todomvc-app-css": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.10",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.46",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
+    "@types/webpack-env": "^1.15.2"
+  },
+  "private": true
 }
