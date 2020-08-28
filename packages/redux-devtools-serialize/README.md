@@ -32,7 +32,7 @@ To parse a Record class back, you need to specify a reference to it:
 
 ```js
 import Immutable from 'immutable';
-import Serialize from 'remotedev-serialize';
+import Serialize from 'redux-devtools-serialize';
 
 const ABRecord = Immutable.Record({ a: 1, b: 2 });
 const { stringify, parse } = Serialize.immutable(Immutable, [ABRecord]);
