@@ -3,7 +3,7 @@
 ### Installation
 
 ```
-yarn add remotedev-serialize
+yarn add redux-devtools-serialize
 ```
 
 ### Usage with ImmutableJS data structures
@@ -12,7 +12,7 @@ Just pass the Immutable library to our class:
 
 ```js
 import Immutable from 'immutable';
-import Serialize from 'remotedev-serialize';
+import Serialize from 'redux-devtools-serialize';
 const { stringify, parse } = Serialize.immutable(Immutable);
 
 const data = Immutable.fromJS({ foo: 'bar', baz: { qux: 42 } });
@@ -32,7 +32,7 @@ To parse a Record class back, you need to specify a reference to it:
 
 ```js
 import Immutable from 'immutable';
-import Serialize from 'remotedev-serialize';
+import Serialize from 'redux-devtools-serialize';
 
 const ABRecord = Immutable.Record({ a: 1, b: 2 });
 const { stringify, parse } = Serialize.immutable(Immutable, [ABRecord]);
@@ -52,7 +52,7 @@ You can pass custom replacer and reviver functions to Serialize:
 
 ```js
 import Immutable from 'immutable';
-import Serialize from 'remotedev-serialize';
+import Serialize from 'redux-devtools-serialize';
 
 function customReplacer(key, value, defaultReplacer) {
   if (value === 1) {
