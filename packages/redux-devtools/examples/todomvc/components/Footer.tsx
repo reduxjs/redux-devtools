@@ -1,7 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEventHandler } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../constants/TodoFilters';
+import {
+  SHOW_ALL,
+  SHOW_MARKED,
+  SHOW_UNMARKED,
+  TodoFilter,
+} from '../constants/TodoFilters';
 
 const FILTER_TITLES = {
   [SHOW_ALL]: 'All',
@@ -9,7 +14,15 @@ const FILTER_TITLES = {
   [SHOW_MARKED]: 'Completed',
 };
 
-export default class Footer extends Component {
+interface Props {
+  markedCount: number;
+  unmarkedCount: number;
+  filter: TodoFilter;
+  onClearMarked: MouseEventHandler<HTMLButtonElement>;
+  onShow: (filter: TodoFilter) => void;
+}
+
+export default class Footer extends Component<Props> {
   static propTypes = {
     markedCount: PropTypes.number.isRequired,
     unmarkedCount: PropTypes.number.isRequired,
@@ -23,7 +36,7 @@ export default class Footer extends Component {
       <footer className="footer">
         {this.renderTodoCount()}
         <ul className="filters">
-          {[SHOW_ALL, SHOW_UNMARKED, SHOW_MARKED].map((filter) => (
+          {([SHOW_ALL, SHOW_UNMARKED, SHOW_MARKED] as const).map((filter) => (
             <li key={filter}>{this.renderFilterLink(filter)}</li>
           ))}
         </ul>
@@ -43,7 +56,7 @@ export default class Footer extends Component {
     );
   }
 
-  renderFilterLink(filter) {
+  renderFilterLink(filter: TodoFilter) {
     const title = FILTER_TITLES[filter];
     const { filter: selectedFilter, onShow } = this.props;
 
