@@ -13,6 +13,8 @@ import reducer, { LogMonitorState } from './reducers';
 import LogMonitorButtonBar from './LogMonitorButtonBar';
 import LogMonitorEntryList from './LogMonitorEntryList';
 import debounce from 'lodash.debounce';
+import { DockMonitorState } from 'redux-devtools-dock-monitor/lib/reducers';
+import { DockMonitorAction } from 'redux-devtools-dock-monitor/lib/actions';
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { toggleAction, setActionsActive } = ActionCreators;
@@ -41,6 +43,27 @@ const styles: {
   },
 };
 
+interface ExternalProps<S, A extends Action<unknown>> {
+  dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
+
+  preserveScrollTop: boolean;
+  select: (state: S) => unknown;
+  theme: keyof typeof themes | Base16Theme;
+  expandActionRoot: boolean;
+  expandStateRoot: boolean;
+  markStateDiff: boolean;
+  hideMainButtons?: boolean;
+}
+
+interface DefaultProps<S> {
+  select: (state: unknown) => unknown;
+  theme: keyof typeof themes | Base16Theme;
+  preserveScrollTop: boolean;
+  expandActionRoot: boolean;
+  expandStateRoot: boolean;
+  markStateDiff: boolean;
+}
+
 export interface LogMonitorProps<S, A extends Action<unknown>>
   extends LiftedState<S, A, LogMonitorState> {
   dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
@@ -54,10 +77,9 @@ export interface LogMonitorProps<S, A extends Action<unknown>>
   hideMainButtons?: boolean;
 }
 
-export default class LogMonitor<
-  S,
-  A extends Action<unknown>
-> extends PureComponent<LogMonitorProps<S, A>> {
+class LogMonitor<S, A extends Action<unknown>> extends PureComponent<
+  LogMonitorProps<S, A>
+> {
   static update = reducer;
 
   static propTypes = {
@@ -80,7 +102,7 @@ export default class LogMonitor<
     hideMainButtons: PropTypes.bool,
   };
 
-  static defaultProps = {
+  static defaultProps: DefaultProps<unknown> = {
     select: (state: unknown) => state,
     theme: 'nicinabox',
     preserveScrollTop: true,
@@ -248,3 +270,14 @@ export default class LogMonitor<
     );
   }
 }
+
+export default (LogMonitor as unknown) as React.ComponentType<
+  ExternalProps<unknown, Action<unknown>>
+> & {
+  update(
+    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    state: DockMonitorState | undefined,
+    action: DockMonitorAction
+  ): DockMonitorState;
+  defaultProps: DefaultProps<unknown>;
+};

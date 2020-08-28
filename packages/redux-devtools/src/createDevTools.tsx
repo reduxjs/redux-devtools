@@ -78,7 +78,9 @@ export default function createDevTools<
 
     liftedStore?: LiftedStore<S, A, MonitorState>;
 
-    static instrument = (options: Options<S, A, MonitorState, MonitorAction>) =>
+    static instrument = (
+      options?: Options<S, A, MonitorState, MonitorAction>
+    ) =>
       instrument(
         (state, action) => Monitor.update(monitorProps, state, action),
         options

@@ -13,7 +13,11 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open",
-    "stats": "NODE_ENV=production webpack --json > dist/stats.json"
+    "stats": "NODE_ENV=production webpack --json > dist/stats.json",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
   },
   "dependencies": {
     "immutable": "^4.0.0-rc.12",
