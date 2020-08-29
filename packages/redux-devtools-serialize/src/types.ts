@@ -1,5 +1,3 @@
-import { Seq } from 'immutable';
-
 interface SerializedImmutableMap {
   data: Record<string, unknown>;
   __serializedType__: 'ImmutableMap';
