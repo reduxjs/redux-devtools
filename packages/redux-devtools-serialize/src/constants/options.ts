@@ -1,6 +1,6 @@
 // jsan stringify options
 
-module.exports = {
+export default {
   refs: false, // references can't be resolved on the original Immutable structure
   date: true,
   function: true,

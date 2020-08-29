@@ -36,7 +36,7 @@
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "preversion": "npm run type-check && npm run lint && npm run test",
+    "preversion": "npm run type-check && npm run lint",
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
