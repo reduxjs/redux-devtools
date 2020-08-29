@@ -1,11 +1,11 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var { CleanWebpackPlugin } = require('clean-webpack-plugin');
+import * as path from 'path';
+import * as webpack from 'webpack';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pkg = require('./package.json');
 
-var pkg = require('./package.json');
-
-var isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',

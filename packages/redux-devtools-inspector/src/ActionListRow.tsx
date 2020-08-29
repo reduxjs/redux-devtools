@@ -1,15 +1,40 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-import shouldPureComponentUpdate from 'react-pure-render/function';
+import React, { MouseEvent, MouseEventHandler, PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
 import debounce from 'lodash.debounce';
+import { StylingFunction } from 'react-base16-styling';
+import { Action } from 'redux';
 import RightSlider from './RightSlider';
 
 const BUTTON_SKIP = 'Skip';
 const BUTTON_JUMP = 'Jump';
 
-export default class ActionListRow extends Component {
-  state = { hover: false };
+type Button = typeof BUTTON_SKIP | typeof BUTTON_JUMP;
+
+interface Props<A extends Action<unknown>> {
+  styling: StylingFunction;
+  actionId: number;
+  isInitAction: boolean;
+  isSelected: boolean;
+  isInFuture: boolean;
+  onSelect: MouseEventHandler<HTMLDivElement>;
+  timestamps: { current: number; previous: number };
+  action: A;
+  onToggleClick: () => void;
+  onJumpClick: () => void;
+  onCommitClick: () => void;
+  hideActionButtons: boolean | undefined;
+  isSkipped: boolean;
+}
+
+interface State {
+  hover: boolean;
+}
+
+export default class ActionListRow<
+  A extends Action<unknown>
+> extends PureComponent<Props<A>, State> {
+  state: State = { hover: false };
 
   static propTypes = {
     styling: PropTypes.func.isRequired,
@@ -24,8 +49,6 @@ export default class ActionListRow extends Component {
     }).isRequired,
     isSkipped: PropTypes.bool.isRequired,
   };
-
-  shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
     const {
@@ -44,18 +67,26 @@ export default class ActionListRow extends Component {
     const timeDelta = timestamps.current - timestamps.previous;
     const showButtons = (hover && !isInitAction) || isSkipped;
 
-    const isButtonSelected = (btn) => btn === BUTTON_SKIP && isSkipped;
+    const isButtonSelected = (btn: Button) => btn === BUTTON_SKIP && isSkipped;
 
     let actionType = action.type;
     if (typeof actionType === 'undefined') actionType = '<UNDEFINED>';
     else if (actionType === null) actionType = '<NULL>';
-    else actionType = actionType.toString() || '<EMPTY>';
+    else actionType = (actionType as string).toString() || '<EMPTY>';
 
     return (
       <div
         onClick={onSelect}
-        onMouseEnter={!hideActionButtons && this.handleMouseEnter}
-        onMouseLeave={!hideActionButtons && this.handleMouseLeave}
+        onMouseEnter={
+          (!hideActionButtons && this.handleMouseEnter) as MouseEventHandler<
+            HTMLDivElement
+          >
+        }
+        onMouseLeave={
+          (!hideActionButtons && this.handleMouseLeave) as MouseEventHandler<
+            HTMLDivElement
+          >
+        }
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseEnter}
         data-id={actionId}
@@ -76,7 +107,7 @@ export default class ActionListRow extends Component {
             isSkipped && 'actionListItemNameSkipped',
           ])}
         >
-          {actionType}
+          {actionType as string}
         </div>
         {hideActionButtons ? (
           <RightSlider styling={styling} shown>
@@ -103,12 +134,12 @@ export default class ActionListRow extends Component {
             </RightSlider>
             <RightSlider styling={styling} shown={showButtons} rotate>
               <div {...styling('actionListItemSelector')}>
-                {[BUTTON_JUMP, BUTTON_SKIP].map(
+                {([BUTTON_JUMP, BUTTON_SKIP] as const).map(
                   (btn) =>
                     (!isInitAction || btn !== BUTTON_SKIP) && (
                       <div
                         key={btn}
-                        onClick={this.handleButtonClick.bind(this, btn)}
+                        onClick={(e) => this.handleButtonClick(btn, e)}
                         {...styling(
                           [
                             'selectorButton',
@@ -131,7 +162,7 @@ export default class ActionListRow extends Component {
     );
   }
 
-  handleButtonClick(btn, e) {
+  handleButtonClick(btn: Button, e: MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
 
     switch (btn) {
@@ -144,8 +175,8 @@ export default class ActionListRow extends Component {
     }
   }
 
-  handleMouseEnter = (e) => {
-    if (this.hover) return;
+  handleMouseEnter = (e: MouseEvent<HTMLDivElement>) => {
+    if (this.state.hover) return;
     this.handleMouseLeave.cancel();
     this.handleMouseEnterDebounced(e.buttons);
   };
@@ -160,8 +191,13 @@ export default class ActionListRow extends Component {
     if (this.state.hover) this.setState({ hover: false });
   }, 100);
 
-  handleMouseDown = (e) => {
-    if (e.target.className.indexOf('selectorButton') === 0) return;
+  handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+    if (
+      ((e.target as unknown) as { className: string[] }).className.indexOf(
+        'selectorButton'
+      ) === 0
+    )
+      return;
     this.handleMouseLeave();
   };
 }

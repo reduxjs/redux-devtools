@@ -27,6 +27,6 @@ export type StylingConfig = {
 export type Theme = string | Base16Theme | StylingConfig;
 
 export type StylingFunction = (
-  keys: string | string[],
+  keys: (string | false) | (string | false)[],
   ...rest: any[]
 ) => Styling;
