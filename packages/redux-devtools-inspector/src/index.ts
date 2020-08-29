@@ -1,1 +1,2 @@
-export default from './DevtoolsInspector';
+import DevtoolsInspector from './DevtoolsInspector';
+export default DevtoolsInspector;
