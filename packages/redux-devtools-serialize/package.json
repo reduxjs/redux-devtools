@@ -2,29 +2,42 @@
   "name": "redux-devtools-serialize",
   "version": "0.1.9",
   "description": "Serialize unserializable data and parse it back.",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest --no-cache",
-    "prepublish": "npm run test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reduxjs/redux-devtools.git"
-  },
   "keywords": [
     "redux",
     "devtools"
   ],
-  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
-  "license": "MIT",
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-serialize",
   "bugs": {
     "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/reduxjs/redux-devtools",
-  "devDependencies": {
-    "immutable": "^4.0.0-rc.12"
+  "license": "MIT",
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "scripts": {
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
+    "clean": "rimraf lib",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "preversion": "npm run type-check && npm run lint && npm run test",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
     "jsan": "^3.1.13"
+  },
+  "devDependencies": {
+    "immutable": "^4.0.0-rc.12"
+  },
+  "peerDependencies": {
+    "immutable": "^4.0.0-rc.12"
   }
 }

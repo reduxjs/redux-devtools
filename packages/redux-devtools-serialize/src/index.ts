@@ -1,4 +1,4 @@
-var immutable = require('./immutable');
+import immutable from './immutable';
 
 module.exports = {
   immutable: immutable,

@@ -1,7 +1,4 @@
-var helpers = require('../helpers');
-var mark = helpers.mark;
-var extract = helpers.extract;
-var refer = helpers.refer;
+import { mark, extract, refer } from '../src/helpers';
 
 describe('Helpers', function () {
   it('mark', function () {
@@ -16,12 +13,12 @@ describe('Helpers', function () {
   });
 
   it('refer', function () {
-    var TestClass = function (data) {
+    const TestClass = function (data: unknown) {
       return data;
     };
-    var testInstance = new TestClass({ testData: 'test' });
+    const testInstance = new (TestClass as any)({ testData: 'test' });
     expect(
-      refer(testInstance, 'testType', false, [TestClass])
+      refer(testInstance, 'testType', false, [TestClass as any])
     ).toMatchSnapshot();
   });
 });
