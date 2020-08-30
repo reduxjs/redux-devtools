@@ -1,18 +1,15 @@
 import React from 'react';
-import { Iterable } from 'immutable';
+import { isCollection, isIndexed, isKeyed } from 'immutable';
+import { StylingFunction } from 'react-base16-styling';
 import isIterable from '../utils/isIterable';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
 
-function isImmutable(value) {
-  return (
-    Iterable.isKeyed(value) ||
-    Iterable.isIndexed(value) ||
-    Iterable.isIterable(value)
-  );
+function isImmutable(value: any) {
+  return isKeyed(value) || isIndexed(value) || isCollection(value);
 }
 
-function getShortTypeString(val, diff) {
+function getShortTypeString(val: any, diff: boolean | undefined) {
   if (diff && Array.isArray(val)) {
     val = val[val.length === 2 ? 1 : 0];
   }
@@ -38,14 +35,21 @@ function getShortTypeString(val, diff) {
   }
 }
 
-function getText(type, data, isWideLayout, isDiff) {
+function getText(
+  type: string,
+  data: any,
+  isWideLayout: boolean,
+  isDiff: boolean | undefined
+) {
   if (type === 'Object') {
     const keys = Object.keys(data);
     if (!isWideLayout) return keys.length ? '{…}' : '{}';
 
     const str = keys
       .slice(0, 3)
-      .map((key) => `${key}: ${getShortTypeString(data[key], isDiff)}`)
+      .map(
+        (key) => `${key}: ${getShortTypeString(data[key], isDiff) as string}`
+      )
       .concat(keys.length > 3 ? ['…'] : [])
       .join(', ');
 
@@ -55,27 +59,27 @@ function getText(type, data, isWideLayout, isDiff) {
 
     const str = data
       .slice(0, 4)
-      .map((val) => getShortTypeString(val, isDiff))
+      .map((val: any) => getShortTypeString(val, isDiff))
       .concat(data.length > 4 ? ['…'] : [])
       .join(', ');
 
-    return `[${str}]`;
+    return `[${str as string}]`;
   } else {
     return type;
   }
 }
 
 const getItemString = (
-  styling,
-  type,
-  data,
-  dataTypeKey,
-  isWideLayout,
-  isDiff
+  styling: StylingFunction,
+  type: string,
+  data: any,
+  dataTypeKey: string | undefined,
+  isWideLayout: boolean,
+  isDiff?: boolean
 ) => (
   <span {...styling('treeItemHint')}>
     {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
-    {dataTypeKey && data[dataTypeKey] ? data[dataTypeKey] + ' ' : ''}
+    {dataTypeKey && data[dataTypeKey] ? `${data[dataTypeKey] as string} ` : ''}
     {getText(type, data, isWideLayout, isDiff)}
   </span>
 );

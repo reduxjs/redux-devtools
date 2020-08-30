@@ -14,7 +14,7 @@ import {
   base16Themes,
 } from './utils/createStylingFromTheme';
 import ActionList from './ActionList';
-import ActionPreview from './ActionPreview';
+import ActionPreview, { Tab } from './ActionPreview';
 import getInspectedState from './utils/getInspectedState';
 import createDiffPatcher from './createDiffPatcher';
 import {
@@ -144,7 +144,7 @@ export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
   hideActionButtons?: boolean;
   invertTheme: boolean;
   dataTypeKey?: string;
-  tabs: unknown;
+  tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
 }
 
 interface State<S, A extends Action<unknown>> {
@@ -342,7 +342,9 @@ export default class DevtoolsInspector<
           monitorState={this.props.monitorState}
           updateMonitorState={this.updateMonitorState}
           styling={styling}
-          onInspectPath={this.handleInspectPath.bind(this, inspectedPathType)}
+          onInspectPath={(path: (string | number)[]) =>
+            this.handleInspectPath(inspectedPathType, path)
+          }
           inspectedPath={monitorState[inspectedPathType]}
           onSelectTab={this.handleSelectTab}
         />

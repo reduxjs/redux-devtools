@@ -1,9 +1,42 @@
 import React, { Component } from 'react';
-import { DEFAULT_STATE } from './redux';
+import { Base16Theme } from 'redux-devtools-themes';
+import { Action } from 'redux';
+import { StylingFunction } from 'react-base16-styling';
+import { PerformAction } from 'redux-devtools';
+import { Delta } from 'jsondiffpatch';
+import { DEFAULT_STATE, DevtoolsInspectorState } from './redux';
 import ActionPreviewHeader from './ActionPreviewHeader';
 import DiffTab from './tabs/DiffTab';
 import StateTab from './tabs/StateTab';
 import ActionTab from './tabs/ActionTab';
+
+export interface TabComponentProps<S, A extends Action<unknown>> {
+  labelRenderer: (
+    keyPath: (string | number)[],
+    nodeType: string,
+    expanded: boolean,
+    expandable: boolean
+  ) => React.ReactNode;
+  styling: StylingFunction;
+  computedStates: { state: S; error?: string }[];
+  actions: { [actionId: number]: PerformAction<A> };
+  selectedActionId: number | null;
+  startActionId: number | null;
+  base16Theme: Base16Theme;
+  invertTheme: boolean;
+  isWideLayout: boolean;
+  dataTypeKey: string | undefined;
+  delta: Delta | null | undefined | false;
+  action: A;
+  nextState: S;
+  monitorState: DevtoolsInspectorState;
+  updateMonitorState: (monitorState: Partial<DevtoolsInspectorState>) => void;
+}
+
+export interface Tab<S, A extends Action<unknown>> {
+  name: string;
+  component: React.ComponentType<TabComponentProps<S, A>>;
+}
 
 const DEFAULT_TABS = [
   {
@@ -20,7 +53,32 @@ const DEFAULT_TABS = [
   },
 ];
 
-class ActionPreview extends Component {
+interface Props<S, A extends Action<unknown>> {
+  base16Theme: Base16Theme;
+  invertTheme: boolean;
+  isWideLayout: boolean;
+  tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
+  tabName: string;
+  delta: Delta | null | undefined | false;
+  error: string | undefined;
+  nextState: S;
+  computedStates: { state: S; error?: string }[];
+  action: A;
+  actions: { [actionId: number]: PerformAction<A> };
+  selectedActionId: number | null;
+  startActionId: number | null;
+  dataTypeKey: string | undefined;
+  monitorState: DevtoolsInspectorState;
+  updateMonitorState: (monitorState: Partial<DevtoolsInspectorState>) => void;
+  styling: StylingFunction;
+  onInspectPath: (path: (string | number)[]) => void;
+  inspectedPath: (string | number)[];
+  onSelectTab: (tabName: string) => void;
+}
+
+class ActionPreview<S, A extends Action<unknown>> extends Component<
+  Props<S, A>
+> {
   static defaultProps = {
     tabName: DEFAULT_STATE.tabName,
   };
@@ -49,21 +107,21 @@ class ActionPreview extends Component {
       updateMonitorState,
     } = this.props;
 
-    const renderedTabs =
+    const renderedTabs: Tab<S, A>[] =
       typeof tabs === 'function'
-        ? tabs(DEFAULT_TABS)
+        ? tabs(DEFAULT_TABS as Tab<S, A>[])
         : tabs
         ? tabs
-        : DEFAULT_TABS;
+        : (DEFAULT_TABS as Tab<S, A>[]);
 
     const { component: TabComponent } =
       renderedTabs.find((tab) => tab.name === tabName) ||
-      renderedTabs.find((tab) => tab.name === DEFAULT_STATE.tabName);
+      renderedTabs.find((tab) => tab.name === DEFAULT_STATE.tabName)!;
 
     return (
       <div key="actionPreview" {...styling('actionPreview')}>
         <ActionPreviewHeader
-          tabs={renderedTabs}
+          tabs={(renderedTabs as unknown) as Tab<unknown, Action<unknown>>[]}
           {...{ styling, inspectedPath, onInspectPath, tabName, onSelectTab }}
         />
         {!error && (
@@ -94,7 +152,11 @@ class ActionPreview extends Component {
     );
   }
 
-  labelRenderer = ([key, ...rest], nodeType, expanded) => {
+  labelRenderer = (
+    [key, ...rest]: (string | number)[],
+    nodeType: string,
+    expanded: boolean
+  ) => {
     const { styling, onInspectPath, inspectedPath } = this.props;
 
     return (

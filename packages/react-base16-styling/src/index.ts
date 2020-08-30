@@ -142,7 +142,7 @@ const mergeStylings = (
 
 const getStylingByKeys = (
   mergedStyling: StylingConfig,
-  keys: (string | false) | (string | false)[],
+  keys: (string | false | undefined) | (string | false | undefined)[],
   ...args: any[]
 ): Styling => {
   if (keys === null) {

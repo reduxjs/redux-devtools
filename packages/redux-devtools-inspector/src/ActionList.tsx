@@ -164,18 +164,20 @@ export default class ActionList<
               isSelected={
                 (startActionId !== null &&
                   actionId >= startActionId &&
-                  actionId <= selectedActionId) ||
+                  actionId <= (selectedActionId as number)) ||
                 actionId === selectedActionId
               }
               isInFuture={
                 actionIds.indexOf(actionId) > actionIds.indexOf(currentActionId)
               }
-              onSelect={(e) => onSelect(e, actionId)}
+              onSelect={(e: React.MouseEvent<HTMLDivElement>) =>
+                onSelect(e, actionId)
+              }
               timestamps={getTimestamps(actions, actionIds, actionId)}
               action={actions[actionId].action}
               onToggleClick={() => onToggleAction(actionId)}
               onJumpClick={() => onJumpToState(actionId)}
-              onCommitClick={() => onCommit(actionId)}
+              onCommitClick={() => onCommit()}
               hideActionButtons={hideActionButtons}
               isSkipped={skippedActionIds.indexOf(actionId) !== -1}
             />

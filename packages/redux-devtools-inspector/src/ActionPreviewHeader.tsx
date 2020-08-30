@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Action } from 'redux';
+import { StylingFunction } from 'react-base16-styling';
+import { Tab } from './ActionPreview';
 
-const ActionPreviewHeader = ({
+interface Props<S, A extends Action<unknown>> {
+  tabs: Tab<S, A>[];
+  styling: StylingFunction;
+  inspectedPath: (string | number)[];
+  onInspectPath: (path: (string | number)[]) => void;
+  tabName: string;
+  onSelectTab: (tabName: string) => void;
+}
+
+const ActionPreviewHeader: FunctionComponent<Props<
+  unknown,
+  Action<unknown>
+>> = ({
   styling,
   inspectedPath,
   onInspectPath,
@@ -56,5 +72,14 @@ const ActionPreviewHeader = ({
     </div>
   </div>
 );
+
+ActionPreviewHeader.propTypes = {
+  tabs: PropTypes.array.isRequired,
+  styling: PropTypes.func.isRequired,
+  inspectedPath: PropTypes.array.isRequired,
+  onInspectPath: PropTypes.func.isRequired,
+  tabName: PropTypes.string.isRequired,
+  onSelectTab: PropTypes.func.isRequired,
+};
 
 export default ActionPreviewHeader;
