@@ -18,11 +18,11 @@ module.exports = {
       },
     },
     {
-      files: ['webpack.config.ts'],
+      files: ['demo/config/webpack.config.ts'],
       extends: '../../eslintrc.ts.base.json',
       parserOptions: {
         tsconfigRootDir: __dirname,
-        project: ['./tsconfig.webpack.json'],
+        project: ['./demo/config/tsconfig.json'],
       },
     },
   ],

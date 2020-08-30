@@ -4,6 +4,9 @@ import { createDevTools } from 'redux-devtools';
 import DockMonitor from 'redux-devtools-dock-monitor';
 import DevtoolsInspector from '../../../src/DevtoolsInspector';
 import getOptions from './getOptions';
+import { base16Themes } from '../../../src/utils/createStylingFromTheme';
+import { Location } from 'history';
+import { DemoAppState } from './reducers';
 
 const CustomComponent = () => (
   <div
@@ -20,7 +23,7 @@ const CustomComponent = () => (
   </div>
 );
 
-export const getDevTools = (location) =>
+export const getDevTools = (location: { search: string }) =>
   createDevTools(
     <DockMonitor
       defaultIsVisible
@@ -29,8 +32,7 @@ export const getDevTools = (location) =>
       changeMonitorKey="ctrl-m"
     >
       <DevtoolsInspector
-        theme={getOptions(location).theme}
-        shouldPersistState
+        theme={getOptions(location).theme as keyof typeof base16Themes}
         invertTheme={!getOptions(location).dark}
         supportImmutable={getOptions(location).supportImmutable}
         tabs={(defaultTabs) => [
@@ -44,12 +46,12 @@ export const getDevTools = (location) =>
     </DockMonitor>
   );
 
-const UnconnectedDevTools = ({ location }) => {
+const UnconnectedDevTools = ({ location }: { location: Location }) => {
   const DevTools = getDevTools(location);
   return <DevTools />;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: DemoAppState) => ({
   location: state.router.location,
 });
 

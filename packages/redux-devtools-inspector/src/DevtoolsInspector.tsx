@@ -128,6 +128,32 @@ function createThemeState<S, A extends Action<unknown>>(
   return { base16Theme, styling };
 }
 
+interface ExternalProps<S, A extends Action<unknown>> {
+  dispatch: Dispatch<
+    DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
+  >;
+  preserveScrollTop?: boolean;
+  draggableActions: boolean;
+  select: (state: S) => unknown;
+  theme: keyof typeof base16Themes | Base16Theme;
+  supportImmutable: boolean;
+  diffObjectHash?: (item: unknown, index: number) => string;
+  diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
+  hideMainButtons?: boolean;
+  hideActionButtons?: boolean;
+  invertTheme: boolean;
+  dataTypeKey?: string;
+  tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
+}
+
+interface DefaultProps {
+  select: (state: unknown) => unknown;
+  supportImmutable: boolean;
+  draggableActions: boolean;
+  theme: keyof typeof base16Themes;
+  invertTheme: boolean;
+}
+
 export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
   extends LiftedState<S, A, DevtoolsInspectorState> {
   dispatch: Dispatch<
@@ -156,10 +182,10 @@ interface State<S, A extends Action<unknown>> {
   themeState: { base16Theme: Base16Theme; styling: StylingFunction };
 }
 
-export default class DevtoolsInspector<
-  S,
-  A extends Action<unknown>
-> extends PureComponent<DevtoolsInspectorProps<S, A>, State<S, A>> {
+class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
+  DevtoolsInspectorProps<S, A>,
+  State<S, A>
+> {
   state: State<S, A> = {
     ...createIntermediateState(this.props, this.props.monitorState),
     isWideLayout: false,
@@ -436,3 +462,14 @@ export default class DevtoolsInspector<
     this.updateMonitorState({ tabName });
   };
 }
+
+export default (DevtoolsInspector as unknown) as React.ComponentType<
+  ExternalProps<unknown, Action<unknown>>
+> & {
+  update(
+    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    state: DevtoolsInspectorState | undefined,
+    action: DevtoolsInspectorAction
+  ): DevtoolsInspectorState;
+  defaultProps: DefaultProps;
+};

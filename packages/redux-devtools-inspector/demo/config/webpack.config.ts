@@ -1,9 +1,9 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('./package.json');
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import pkg from '../../package.json';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -26,14 +26,14 @@ module.exports = {
         test: /\.(js|ts)x?$/,
         loader: 'babel-loader',
         include: [
-          path.join(__dirname, 'src'),
-          path.join(__dirname, 'demo/src/js'),
+          path.join(__dirname, '../../src'),
+          path.join(__dirname, '../src/js'),
         ],
       },
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -41,6 +41,11 @@ module.exports = {
       inject: true,
       template: 'demo/src/index.html',
       package: pkg,
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: 'demo/tsconfig.json',
+      },
     }),
   ].concat(isProduction ? [] : [new webpack.HotModuleReplacementPlugin()]),
   devServer: isProduction

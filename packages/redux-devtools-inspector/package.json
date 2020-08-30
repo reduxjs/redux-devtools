@@ -21,7 +21,7 @@
     "url": "https://github.com/reduxjs/redux-devtools"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --config demo/config/webpack.config.ts",
     "stats": "webpack --profile --json > stats.json",
     "build:demo": "NODE_ENV=production webpack -p",
     "build": "npm run build:types && npm run build:js",
@@ -52,11 +52,16 @@
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.11.2",
     "@types/dateformat": "^3.0.1",
     "@types/hex-rgba": "^1.0.0",
+    "@types/history": "^4.7.7",
     "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash.shuffle": "^4.2.6",
     "@types/react": "^16.9.46",
     "@types/react-dragula": "^1.1.0",
+    "@types/react-router": "^5.1.8",
+    "@types/redux-logger": "^3.0.8",
     "base16": "^1.0.0",
     "connected-react-router": "^6.8.0",
     "history": "^4.10.1",
