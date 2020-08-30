@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { connect } from 'react-redux';
 import pkg from '../../../package.json';
 import Button from 'react-bootstrap/Button';
@@ -8,12 +8,45 @@ import FormLabel from 'react-bootstrap/FormLabel';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Row from 'react-bootstrap/Row';
 import * as base16 from 'base16';
-import * as inspectorThemes from '../../../src/themes';
-import getOptions from './getOptions';
 import { push as pushRoute } from 'connected-react-router';
+import { Path } from 'history';
+import * as inspectorThemes from '../../../src/themes';
+import getOptions, { Options } from './getOptions';
+import {
+  AddFunctionAction,
+  AddHugeObjectAction,
+  AddImmutableMapAction,
+  AddIteratorAction,
+  AddNativeMapAction,
+  AddRecursiveAction,
+  AddSymbolAction,
+  ChangeImmutableNestedAction,
+  ChangeNestedAction,
+  DemoAppState,
+  HugePayloadAction,
+  IncrementAction,
+  PopAction,
+  PushAction,
+  PushHugeArrayAction,
+  ReplaceAction,
+  ShuffleArrayAction,
+  TimeoutUpdateAction,
+  ToggleTimeoutUpdateAction,
+} from './reducers';
 
-const styles = {
+const styles: {
+  wrapper: CSSProperties;
+  header: CSSProperties;
+  content: CSSProperties;
+  buttons: CSSProperties;
+  muted: CSSProperties;
+  button: CSSProperties;
+  links: CSSProperties;
+  link: CSSProperties;
+  input: CSSProperties;
+} = {
   wrapper: {
     height: '100vh',
     width: '80%',
@@ -57,18 +90,21 @@ const styles = {
 const themeOptions = [
   ...Object.keys(inspectorThemes).map((value) => ({
     value,
-    label: inspectorThemes[value].scheme,
+    label: inspectorThemes[value as keyof typeof inspectorThemes].scheme,
   })),
   null,
   ...Object.keys(base16)
-    .map((value) => ({ value, label: base16[value].scheme }))
+    .map((value) => ({
+      value,
+      label: base16[value as keyof typeof base16].scheme,
+    }))
     .filter((opt) => opt.label),
 ];
 
 const ROOT =
   process.env.NODE_ENV === 'production' ? '/redux-devtools-inspector/' : '/';
 
-function buildUrl(options) {
+function buildUrl(options: Options) {
   return (
     `${ROOT}?` +
     [
@@ -82,7 +118,32 @@ function buildUrl(options) {
   );
 }
 
-class DemoApp extends React.Component {
+interface Props
+  extends Omit<DemoAppState, 'addFunction' | 'addSymbol' | 'shuffleArray'> {
+  toggleTimeoutUpdate: (timeoutUpdateEnabled: boolean) => void;
+  timeoutUpdate: () => void;
+  increment: () => void;
+  push: () => void;
+  pop: () => void;
+  replace: () => void;
+  changeNested: () => void;
+  pushHugeArray: () => void;
+  addIterator: () => void;
+  addHugeObject: () => void;
+  addRecursive: () => void;
+  addNativeMap: () => void;
+  addImmutableMap: () => void;
+  changeImmutableNested: () => void;
+  hugePayload: () => void;
+  addFunction: () => void;
+  addSymbol: () => void;
+  shuffleArray: () => void;
+  pushRoute: (path: Path) => void;
+}
+
+class DemoApp extends React.Component<Props> {
+  timeout?: number;
+
   render() {
     const options = getOptions(this.props.router.location);
 
@@ -98,8 +159,8 @@ class DemoApp extends React.Component {
         </h5>
         <div style={styles.links}>
           <div style={styles.input}>
-            <Form horizontal>
-              <FormGroup>
+            <Form>
+              <FormGroup as={Row}>
                 <Col as={FormLabel} sm={3}>
                   Theme:
                 </Col>
@@ -115,7 +176,7 @@ class DemoApp extends React.Component {
                         <option
                           key={(theme && theme.label) || 'empty'}
                           label={(theme && theme.label) || '──────────'}
-                          value={theme && theme.value}
+                          value={theme ? theme.value : undefined}
                           disabled={!theme}
                         />
                       ))}
@@ -151,7 +212,7 @@ class DemoApp extends React.Component {
             <Button onClick={this.props.pushHugeArray} style={styles.button}>
               Push Huge Array
             </Button>
-            <Button onClick={this.props.addHugeObect} style={styles.button}>
+            <Button onClick={this.props.addHugeObject} style={styles.button}>
               Add Huge Object
             </Button>
             <Button onClick={this.props.addIterator} style={styles.button}>
@@ -226,7 +287,7 @@ class DemoApp extends React.Component {
     this.props.pushRoute(buildUrl({ ...options, dark: !options.dark }));
   };
 
-  setTheme = (options, theme) => {
+  setTheme = (options: Options, theme: string) => {
     this.props.pushRoute(buildUrl({ ...options, theme }));
   };
 
@@ -235,37 +296,41 @@ class DemoApp extends React.Component {
     this.props.toggleTimeoutUpdate(enabled);
 
     if (enabled) {
-      this.timeout = setInterval(this.props.timeoutUpdate, 1000);
+      this.timeout = window.setInterval(this.props.timeoutUpdate, 1000);
     } else {
       clearTimeout(this.timeout);
     }
   };
 }
 
-export default connect((state) => state, {
-  toggleTimeoutUpdate: (timeoutUpdateEnabled) => ({
+export default connect((state: DemoAppState) => state, {
+  toggleTimeoutUpdate: (
+    timeoutUpdateEnabled: boolean
+  ): ToggleTimeoutUpdateAction => ({
     type: 'TOGGLE_TIMEOUT_UPDATE',
     timeoutUpdateEnabled,
   }),
-  timeoutUpdate: () => ({ type: 'TIMEOUT_UPDATE' }),
-  increment: () => ({ type: 'INCREMENT' }),
-  push: () => ({ type: 'PUSH' }),
-  pop: () => ({ type: 'POP' }),
-  replace: () => ({ type: 'REPLACE' }),
-  changeNested: () => ({ type: 'CHANGE_NESTED' }),
-  pushHugeArray: () => ({ type: 'PUSH_HUGE_ARRAY' }),
-  addIterator: () => ({ type: 'ADD_ITERATOR' }),
-  addHugeObect: () => ({ type: 'ADD_HUGE_OBJECT' }),
-  addRecursive: () => ({ type: 'ADD_RECURSIVE' }),
-  addNativeMap: () => ({ type: 'ADD_NATIVE_MAP' }),
-  addImmutableMap: () => ({ type: 'ADD_IMMUTABLE_MAP' }),
-  changeImmutableNested: () => ({ type: 'CHANGE_IMMUTABLE_NESTED' }),
-  hugePayload: () => ({
+  timeoutUpdate: (): TimeoutUpdateAction => ({ type: 'TIMEOUT_UPDATE' }),
+  increment: (): IncrementAction => ({ type: 'INCREMENT' }),
+  push: (): PushAction => ({ type: 'PUSH' }),
+  pop: (): PopAction => ({ type: 'POP' }),
+  replace: (): ReplaceAction => ({ type: 'REPLACE' }),
+  changeNested: (): ChangeNestedAction => ({ type: 'CHANGE_NESTED' }),
+  pushHugeArray: (): PushHugeArrayAction => ({ type: 'PUSH_HUGE_ARRAY' }),
+  addIterator: (): AddIteratorAction => ({ type: 'ADD_ITERATOR' }),
+  addHugeObject: (): AddHugeObjectAction => ({ type: 'ADD_HUGE_OBJECT' }),
+  addRecursive: (): AddRecursiveAction => ({ type: 'ADD_RECURSIVE' }),
+  addNativeMap: (): AddNativeMapAction => ({ type: 'ADD_NATIVE_MAP' }),
+  addImmutableMap: (): AddImmutableMapAction => ({ type: 'ADD_IMMUTABLE_MAP' }),
+  changeImmutableNested: (): ChangeImmutableNestedAction => ({
+    type: 'CHANGE_IMMUTABLE_NESTED',
+  }),
+  hugePayload: (): HugePayloadAction => ({
     type: 'HUGE_PAYLOAD',
     payload: Array.from({ length: 10000 }).map((_, i) => i),
   }),
-  addFunction: () => ({ type: 'ADD_FUNCTION' }),
-  addSymbol: () => ({ type: 'ADD_SYMBOL' }),
-  shuffleArray: () => ({ type: 'SHUFFLE_ARRAY' }),
+  addFunction: (): AddFunctionAction => ({ type: 'ADD_FUNCTION' }),
+  addSymbol: (): AddSymbolAction => ({ type: 'ADD_SYMBOL' }),
+  shuffleArray: (): ShuffleArrayAction => ({ type: 'SHUFFLE_ARRAY' }),
   pushRoute,
 })(DemoApp);

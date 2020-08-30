@@ -5,7 +5,6 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   mode: isProduction ? 'production' : 'development',
-  devtool: 'eval',
   entry: isProduction
     ? ['./demo/src/index']
     : [
@@ -17,10 +16,6 @@ module.exports = {
     path: path.join(__dirname, 'demo/static'),
     filename: 'bundle.js',
     publicPath: isProduction ? 'static/' : '/static/',
-  },
-  plugins: isProduction ? [] : [new webpack.HotModuleReplacementPlugin()],
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -34,6 +29,10 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+  plugins: isProduction ? [] : [new webpack.HotModuleReplacementPlugin()],
   devServer: isProduction
     ? null
     : {
@@ -46,4 +45,5 @@ module.exports = {
         },
         historyApiFallback: true,
       },
+  devtool: 'eval-source-map',
 };

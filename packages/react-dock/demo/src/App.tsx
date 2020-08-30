@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import { hot } from 'react-hot-loader/root';
+import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { BsX } from 'react-icons/bs';

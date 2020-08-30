@@ -1,10 +1,10 @@
-import { Iterable, fromJS } from 'immutable';
+import { fromJS, isAssociative } from 'immutable';
 import isIterable from './isIterable';
 
-function iterateToKey(obj, key) {
+function iterateToKey(obj: any, key: string | number) {
   // maybe there's a better way, dunno
   let idx = 0;
-  for (let entry of obj) {
+  for (const entry of obj) {
     if (Array.isArray(entry)) {
       if (entry[0] === key) return entry[1];
     } else {
@@ -15,24 +15,28 @@ function iterateToKey(obj, key) {
   }
 }
 
-export default function getInspectedState(state, path, convertImmutable) {
+export default function getInspectedState<S>(
+  state: S,
+  path: (string | number)[],
+  convertImmutable: boolean
+): S {
   state =
     path && path.length
-      ? {
-          [path[path.length - 1]]: path.reduce((s, key) => {
+      ? ({
+          [path[path.length - 1]]: path.reduce((s: any, key) => {
             if (!s) {
               return s;
             }
 
-            if (Iterable.isAssociative(s)) {
-              return s.get(key);
+            if (isAssociative(s)) {
+              return s.get(key as number);
             } else if (isIterable(s)) {
               return iterateToKey(s, key);
             }
 
             return s[key];
           }, state),
-        }
+        } as S)
       : state;
 
   if (convertImmutable) {

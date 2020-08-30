@@ -1,20 +1,25 @@
-import '@babel/polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import DemoApp from './DemoApp';
 import { Provider } from 'react-redux';
-import createRootReducer from './reducers';
-import { createStore, applyMiddleware, compose } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose,
+  StoreEnhancerStoreCreator,
+  StoreEnhancer,
+} from 'redux';
 import logger from 'redux-logger';
 import { Route } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
 import { persistState } from 'redux-devtools';
+import DemoApp from './DemoApp';
+import createRootReducer from './reducers';
 import getOptions from './getOptions';
 import { ConnectedDevTools, getDevTools } from './DevTools';
 
 function getDebugSessionKey() {
-  const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/);
+  const matches = /[?&]debug_session=([^&#]+)\b/.exec(window.location.href);
   return matches && matches.length > 0 ? matches[1] : null;
 }
 
@@ -26,21 +31,23 @@ const DevTools = getDevTools(window.location);
 const history = createBrowserHistory();
 
 const useDevtoolsExtension =
-  !!window.__REDUX_DEVTOOLS_EXTENSION__ &&
-  getOptions(window.location).useExtension;
+  !!((window as unknown) as { __REDUX_DEVTOOLS_EXTENSION__: unknown })
+    .__REDUX_DEVTOOLS_EXTENSION__ && getOptions(window.location).useExtension;
 
 const enhancer = compose(
   applyMiddleware(logger, routerMiddleware(history)),
-  (...args) => {
+  (next: StoreEnhancerStoreCreator) => {
     const instrument = useDevtoolsExtension
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      ? ((window as unknown) as {
+          __REDUX_DEVTOOLS_EXTENSION__(): StoreEnhancer;
+        }).__REDUX_DEVTOOLS_EXTENSION__()
       : DevTools.instrument();
-    return instrument(...args);
+    return instrument(next);
   },
   persistState(getDebugSessionKey())
 );
 
-const store = createStore(createRootReducer(history), {}, enhancer);
+const store = createStore(createRootReducer(history), enhancer);
 
 render(
   <Provider store={store}>

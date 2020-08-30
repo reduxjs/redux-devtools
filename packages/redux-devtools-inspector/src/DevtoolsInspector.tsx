@@ -1,18 +1,30 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Base16Theme } from 'redux-devtools-themes';
+import {
+  getBase16Theme,
+  invertTheme,
+  StylingFunction,
+} from 'react-base16-styling';
+import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
+import { Action, Dispatch } from 'redux';
+import { Delta, DiffContext } from 'jsondiffpatch';
 import {
   createStylingFromTheme,
   base16Themes,
 } from './utils/createStylingFromTheme';
-import shouldPureComponentUpdate from 'react-pure-render/function';
 import ActionList from './ActionList';
-import ActionPreview from './ActionPreview';
+import ActionPreview, { Tab } from './ActionPreview';
 import getInspectedState from './utils/getInspectedState';
 import createDiffPatcher from './createDiffPatcher';
-import { getBase16Theme, invertTheme } from 'react-base16-styling';
-import { reducer, updateMonitorState } from './redux';
-import { ActionCreators } from 'redux-devtools';
+import {
+  DevtoolsInspectorAction,
+  DevtoolsInspectorState,
+  reducer,
+  updateMonitorState,
+} from './redux';
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const {
   commit,
   sweep,
@@ -22,21 +34,26 @@ const {
   reorderAction,
 } = ActionCreators;
 
-function getLastActionId(props) {
+function getLastActionId<S, A extends Action<unknown>>(
+  props: DevtoolsInspectorProps<S, A>
+) {
   return props.stagedActionIds[props.stagedActionIds.length - 1];
 }
 
-function getCurrentActionId(props, monitorState) {
+function getCurrentActionId<S, A extends Action<unknown>>(
+  props: DevtoolsInspectorProps<S, A>,
+  monitorState: DevtoolsInspectorState
+) {
   return monitorState.selectedActionId === null
     ? props.stagedActionIds[props.currentStateIndex]
     : monitorState.selectedActionId;
 }
 
-function getFromState(
-  actionIndex,
-  stagedActionIds,
-  computedStates,
-  monitorState
+function getFromState<S>(
+  actionIndex: number,
+  stagedActionIds: number[],
+  computedStates: { state: S; error?: string }[],
+  monitorState: DevtoolsInspectorState
 ) {
   const { startActionId } = monitorState;
   if (startActionId === null) {
@@ -47,7 +64,10 @@ function getFromState(
   return computedStates[fromStateIdx];
 }
 
-function createIntermediateState(props, monitorState) {
+function createIntermediateState<S, A extends Action<unknown>>(
+  props: DevtoolsInspectorProps<S, A>,
+  monitorState: DevtoolsInspectorState
+) {
   const {
     supportImmutable,
     computedStates,
@@ -97,8 +117,10 @@ function createIntermediateState(props, monitorState) {
   };
 }
 
-function createThemeState(props) {
-  const base16Theme = getBase16Theme(props.theme, base16Themes);
+function createThemeState<S, A extends Action<unknown>>(
+  props: DevtoolsInspectorProps<S, A>
+) {
+  const base16Theme = getBase16Theme(props.theme, base16Themes)!;
 
   const theme = props.invertTheme ? invertTheme(props.theme) : props.theme;
   const styling = createStylingFromTheme(theme);
@@ -106,15 +128,69 @@ function createThemeState(props) {
   return { base16Theme, styling };
 }
 
-export default class DevtoolsInspector extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...createIntermediateState(props, props.monitorState),
-      isWideLayout: false,
-      themeState: createThemeState(props),
-    };
-  }
+interface ExternalProps<S, A extends Action<unknown>> {
+  dispatch: Dispatch<
+    DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
+  >;
+  preserveScrollTop?: boolean;
+  draggableActions: boolean;
+  select: (state: S) => unknown;
+  theme: keyof typeof base16Themes | Base16Theme;
+  supportImmutable: boolean;
+  diffObjectHash?: (item: unknown, index: number) => string;
+  diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
+  hideMainButtons?: boolean;
+  hideActionButtons?: boolean;
+  invertTheme: boolean;
+  dataTypeKey?: string;
+  tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
+}
+
+interface DefaultProps {
+  select: (state: unknown) => unknown;
+  supportImmutable: boolean;
+  draggableActions: boolean;
+  theme: keyof typeof base16Themes;
+  invertTheme: boolean;
+}
+
+export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
+  extends LiftedState<S, A, DevtoolsInspectorState> {
+  dispatch: Dispatch<
+    DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
+  >;
+  preserveScrollTop?: boolean;
+  draggableActions: boolean;
+  select: (state: S) => unknown;
+  theme: keyof typeof base16Themes | Base16Theme;
+  supportImmutable: boolean;
+  diffObjectHash?: (item: unknown, index: number) => string;
+  diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
+  hideMainButtons?: boolean;
+  hideActionButtons?: boolean;
+  invertTheme: boolean;
+  dataTypeKey?: string;
+  tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
+}
+
+interface State<S, A extends Action<unknown>> {
+  delta: Delta | null | undefined | false;
+  nextState: S;
+  action: A;
+  error: string | undefined;
+  isWideLayout: boolean;
+  themeState: { base16Theme: Base16Theme; styling: StylingFunction };
+}
+
+class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
+  DevtoolsInspectorProps<S, A>,
+  State<S, A>
+> {
+  state: State<S, A> = {
+    ...createIntermediateState(this.props, this.props.monitorState),
+    isWideLayout: false,
+    themeState: createThemeState(this.props),
+  };
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -127,7 +203,6 @@ export default class DevtoolsInspector extends Component {
     }),
     preserveScrollTop: PropTypes.bool,
     draggableActions: PropTypes.bool,
-    stagedActions: PropTypes.array,
     select: PropTypes.func.isRequired,
     theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     supportImmutable: PropTypes.bool,
@@ -144,38 +219,42 @@ export default class DevtoolsInspector extends Component {
   static update = reducer;
 
   static defaultProps = {
-    select: (state) => state,
+    select: (state: unknown) => state,
     supportImmutable: false,
     draggableActions: true,
     theme: 'inspector',
     invertTheme: true,
   };
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
+  updateSizeTimeout?: number;
+  inspectorRef?: HTMLDivElement | null;
 
   componentDidMount() {
     this.updateSizeMode();
-    this.updateSizeTimeout = setInterval(this.updateSizeMode.bind(this), 150);
+    this.updateSizeTimeout = window.setInterval(
+      this.updateSizeMode.bind(this),
+      150
+    );
   }
 
   componentWillUnmount() {
     clearTimeout(this.updateSizeTimeout);
   }
 
-  updateMonitorState = (monitorState) => {
+  updateMonitorState = (monitorState: Partial<DevtoolsInspectorState>) => {
     this.props.dispatch(updateMonitorState(monitorState));
   };
 
   updateSizeMode() {
-    const isWideLayout = this.inspectorRef.offsetWidth > 500;
+    const isWideLayout = this.inspectorRef!.offsetWidth > 500;
 
     if (isWideLayout !== this.state.isWideLayout) {
       this.setState({ isWideLayout });
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    let nextMonitorState = nextProps.monitorState;
+  UNSAFE_componentWillReceiveProps(nextProps: DevtoolsInspectorProps<S, A>) {
+    const nextMonitorState = nextProps.monitorState;
     const monitorState = this.props.monitorState;
 
     if (
@@ -199,7 +278,7 @@ export default class DevtoolsInspector extends Component {
     }
   }
 
-  inspectorCreateRef = (node) => {
+  inspectorCreateRef: React.RefCallback<HTMLDivElement> = (node) => {
     this.inspectorRef = node;
   };
 
@@ -289,7 +368,9 @@ export default class DevtoolsInspector extends Component {
           monitorState={this.props.monitorState}
           updateMonitorState={this.updateMonitorState}
           styling={styling}
-          onInspectPath={this.handleInspectPath.bind(this, inspectedPathType)}
+          onInspectPath={(path: (string | number)[]) =>
+            this.handleInspectPath(inspectedPathType, path)
+          }
           inspectedPath={monitorState[inspectedPathType]}
           onSelectTab={this.handleSelectTab}
         />
@@ -297,11 +378,11 @@ export default class DevtoolsInspector extends Component {
     );
   }
 
-  handleToggleAction = (actionId) => {
+  handleToggleAction = (actionId: number) => {
     this.props.dispatch(toggleAction(actionId));
   };
 
-  handleJumpToState = (actionId) => {
+  handleJumpToState = (actionId: number) => {
     if (jumpToAction) {
       this.props.dispatch(jumpToAction(actionId));
     } else {
@@ -311,7 +392,7 @@ export default class DevtoolsInspector extends Component {
     }
   };
 
-  handleReorderAction = (actionId, beforeActionId) => {
+  handleReorderAction = (actionId: number, beforeActionId: number) => {
     if (reorderAction)
       this.props.dispatch(reorderAction(actionId, beforeActionId));
   };
@@ -324,11 +405,14 @@ export default class DevtoolsInspector extends Component {
     this.props.dispatch(sweep());
   };
 
-  handleSearch = (val) => {
+  handleSearch = (val: string) => {
     this.updateMonitorState({ searchValue: val });
   };
 
-  handleSelectAction = (e, actionId) => {
+  handleSelectAction = (
+    e: React.MouseEvent<HTMLDivElement>,
+    actionId: number
+  ) => {
     const { monitorState } = this.props;
     let startActionId;
     let selectedActionId;
@@ -367,11 +451,25 @@ export default class DevtoolsInspector extends Component {
     this.updateMonitorState({ startActionId, selectedActionId });
   };
 
-  handleInspectPath = (pathType, path) => {
+  handleInspectPath = (
+    pathType: 'inspectedActionPath' | 'inspectedStatePath',
+    path: (string | number)[]
+  ) => {
     this.updateMonitorState({ [pathType]: path });
   };
 
-  handleSelectTab = (tabName) => {
+  handleSelectTab = (tabName: string) => {
     this.updateMonitorState({ tabName });
   };
 }
+
+export default (DevtoolsInspector as unknown) as React.ComponentType<
+  ExternalProps<unknown, Action<unknown>>
+> & {
+  update(
+    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    state: DevtoolsInspectorState | undefined,
+    action: DevtoolsInspectorAction
+  ): DevtoolsInspectorState;
+  defaultProps: DefaultProps;
+};
