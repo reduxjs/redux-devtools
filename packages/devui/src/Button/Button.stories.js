@@ -4,7 +4,7 @@ import { MdFiberManualRecord } from 'react-icons/md';
 import Button from './';
 
 export default {
-  title: 'Components/Button',
+  title: 'Button',
   component: Button,
 };
 
