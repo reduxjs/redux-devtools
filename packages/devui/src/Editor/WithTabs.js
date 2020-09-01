@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { select } from '@storybook/addon-knobs';
-import Editor from '../';
-import Tabs from '../../Tabs';
+import Editor from './';
+import Tabs from '../Tabs';
 
 const value1 = `
   const func1 = () => {}
@@ -18,7 +17,7 @@ export default class WithTabs extends Component {
   };
 
   render() {
-    const { lineNumbers } = this.props;
+    const { align, lineNumbers } = this.props;
     return (
       <Tabs
         tabs={[
@@ -37,7 +36,7 @@ export default class WithTabs extends Component {
         onClick={(selected) => {
           this.setState({ selected });
         }}
-        align={select('align', ['left', 'right', 'center'], 'left')}
+        align={align}
       />
     );
   }
