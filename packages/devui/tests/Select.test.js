@@ -2,7 +2,7 @@ import React from 'react';
 import { render, mount } from 'enzyme';
 import { renderToJson, mountToJson } from 'enzyme-to-json';
 import { Select } from '../src';
-import { options } from '../src/Select/stories/options';
+import { options } from '../src/Select/options';
 
 describe('Select', function () {
   it('renders correctly', () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, mount } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 import { ContextMenu } from '../src';
-import { items } from '../src/ContextMenu/stories/data';
+import { items } from '../src/ContextMenu/data';
 
 describe('ContextMenu', function () {
   it('renders correctly', () => {

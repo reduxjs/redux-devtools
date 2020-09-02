@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import { Form } from '../src';
-import { schema, uiSchema, formData } from '../src/Form/stories/schema';
+import { schema, uiSchema, formData } from '../src/Form/schema';
 
 describe('Form', function () {
   it('renders correctly', () => {
