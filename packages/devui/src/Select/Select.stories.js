@@ -33,11 +33,16 @@ const Template = ({ value, ...args }) => (
 export const Default = Template.bind({});
 Default.args = {
   value: 'one',
-  // menuMaxHeight: 200,
+  maxMenuHeight: 300,
   isClearable: false,
   isDisabled: false,
   isLoading: false,
   isMulti: false,
   isSearchable: true,
-  // openOuterUp: false,
+  menuPlacement: 'bottom',
+};
+Default.argTypes = {
+  onChange: {
+    action: 'selected',
+  },
 };

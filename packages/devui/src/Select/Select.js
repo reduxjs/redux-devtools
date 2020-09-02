@@ -23,10 +23,5 @@ Select.propTypes = {
   isMulti: PropTypes.bool, // multi-value input
   isSearchable: PropTypes.bool, // whether to enable searching feature or not
   value: PropTypes.any, // initial field value
-  // openOuterUp: PropTypes.bool, // value to control the opening direction
-};
-
-Select.defaultProps = {
-  isClearable: false,
-  // menuMaxHeight: 200,
+  menuPlacement: PropTypes.oneOf(['auto', 'bottom', 'top']), // value to control the opening direction
 };
