@@ -8,6 +8,9 @@ import customWidgets from './widgets';
 
 const FormContainer = createStyledComponent(styles, JSONSchemaForm);
 
+/**
+ * Wrapper around [`react-jsonschema-form`](https://github.com/mozilla-services/react-jsonschema-form) with custom widgets.
+ */
 export default class Form extends (PureComponent || Component) {
   render() {
     const {

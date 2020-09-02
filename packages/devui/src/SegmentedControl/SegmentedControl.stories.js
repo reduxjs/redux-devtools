@@ -1,12 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ContextMenu from './';
-import { items } from './data';
-
-export default {
-  title: 'ContextMenu',
-  component: ContextMenu,
-};
+import SegmentedControl from './';
 
 const Container = styled.div`
   display: flex;
@@ -16,21 +10,24 @@ const Container = styled.div`
   align-items: center;
 `;
 
+export default {
+  title: 'SegmentedControl',
+  component: SegmentedControl,
+};
+
 const Template = (args) => (
   <Container>
-    <ContextMenu {...args} />
+    <SegmentedControl values={['Button1', 'Button2', 'Button3']} {...args} />
   </Container>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  visible: true,
-  x: 100,
-  y: 100,
-  items,
+  selected: 'Button1',
+  disabled: false,
 };
 Default.argTypes = {
-  visible: { control: { disable: true } },
-  items: { control: { disable: true } },
+  values: { control: { disable: true } },
   onClick: { control: { disable: true } },
+  theme: { control: { disable: true } },
 };

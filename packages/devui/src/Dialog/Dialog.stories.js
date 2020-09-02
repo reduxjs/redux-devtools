@@ -1,6 +1,6 @@
 import React from 'react';
 import Dialog from './';
-import { schema, uiSchema, formData } from '../Form/stories/schema';
+import { schema, uiSchema, formData } from '../Form/schema';
 
 export default {
   title: 'Dialog',
@@ -21,10 +21,10 @@ Default.args = {
   children: 'Hello Dialog!',
 };
 Default.argTypes = {
-  actions: { table: { disable: true } },
-  onDismiss: { table: { disable: true } },
-  onSubmit: { table: { disable: true } },
-  theme: { table: { disable: true } },
+  actions: { control: { disable: true } },
+  onDismiss: { control: { disable: true } },
+  onSubmit: { control: { disable: true } },
+  theme: { control: { disable: true } },
 };
 
 export const WithForm = Template.bind({});
@@ -39,11 +39,11 @@ WithForm.args = {
   uiSchema,
 };
 WithForm.argTypes = {
-  title: { table: { disable: true } },
-  children: { table: { disable: true } },
-  actions: { table: { disable: true } },
-  modal: { table: { disable: true } },
-  onDismiss: { table: { disable: true } },
-  onSubmit: { table: { disable: true } },
-  theme: { table: { disable: true } },
+  title: { control: { disable: true } },
+  children: { control: { disable: true } },
+  actions: { control: { disable: true } },
+  modal: { control: { disable: true } },
+  onDismiss: { control: { disable: true } },
+  onSubmit: { control: { disable: true } },
+  theme: { control: { disable: true } },
 };

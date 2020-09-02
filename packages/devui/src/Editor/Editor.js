@@ -8,6 +8,9 @@ const EditorContainer = styled.div('', ({ theme }) =>
   theme.scheme === 'default' && theme.light ? defaultStyle : themedStyle(theme)
 );
 
+/**
+ * Based on [CodeMirror](http://codemirror.net/).
+ */
 export default class Editor extends Component {
   componentDidMount() {
     this.cm = CodeMirror(this.node, {

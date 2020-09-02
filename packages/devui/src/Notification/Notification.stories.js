@@ -1,12 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ContextMenu from './';
-import { items } from './data';
-
-export default {
-  title: 'ContextMenu',
-  component: ContextMenu,
-};
+import Notification from './';
 
 const Container = styled.div`
   display: flex;
@@ -16,21 +10,23 @@ const Container = styled.div`
   align-items: center;
 `;
 
+export default {
+  title: 'Notification',
+  component: Notification,
+};
+
 const Template = (args) => (
   <Container>
-    <ContextMenu {...args} />
+    <Notification {...args} />
   </Container>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  visible: true,
-  x: 100,
-  y: 100,
-  items,
+  type: 'warning',
+  children: 'Hello Notification',
 };
 Default.argTypes = {
-  visible: { control: { disable: true } },
-  items: { control: { disable: true } },
-  onClick: { control: { disable: true } },
+  onClose: { control: { disable: true } },
+  theme: { control: { disable: true } },
 };

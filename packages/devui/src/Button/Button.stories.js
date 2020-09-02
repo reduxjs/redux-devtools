@@ -31,10 +31,10 @@ Default.args = {
   children: 'Hello Button',
 };
 Default.argTypes = {
-  onClick: { table: { disable: true } },
-  type: { table: { disable: true } },
-  mark: { table: { disable: true } },
-  theme: { table: { disable: true } },
+  onClick: { control: { disable: true } },
+  type: { control: { disable: true } },
+  mark: { control: { disable: true } },
+  theme: { control: { disable: true } },
 };
 
 export const Mark = Template.bind({});
@@ -46,9 +46,9 @@ Mark.args = {
   children: <MdFiberManualRecord />,
 };
 Mark.argTypes = {
-  children: { table: { disable: true } },
-  onClick: { table: { disable: true } },
-  type: { table: { disable: true } },
-  primary: { table: { disable: true } },
-  theme: { table: { disable: true } },
+  children: { control: { disable: true } },
+  onClick: { control: { disable: true } },
+  type: { control: { disable: true } },
+  primary: { control: { disable: true } },
+  theme: { control: { disable: true } },
 };

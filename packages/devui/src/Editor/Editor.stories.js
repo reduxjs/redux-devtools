@@ -26,6 +26,12 @@ Default.args = {
   readOnly: false,
   autofocus: true,
 };
+Default.argTypes = {
+  autofocus: { control: { disable: true } },
+  mode: { control: { disable: true } },
+  theme: { control: { disable: true } },
+  onChange: { control: { disable: true } },
+};
 
 const WithTabsTemplate = (args) => <WithTabsComponent {...args} />;
 
@@ -34,23 +40,13 @@ WithTabs.args = {
   lineNumbers: true,
   align: 'left',
 };
-// storiesOf('Editor', module)
-//   .addDecorator(withKnobs)
-//   .add(
-//     'default',
-//     () => (
-//       <Editor
-//         value={text('value', value)}
-//         lineNumbers={boolean('lineNumbers', true)}
-//         lineWrapping={boolean('lineWrapping', false)}
-//         foldGutter={boolean('foldGutter', true)}
-//         readOnly={boolean('readOnly', false)}
-//         onChange={action('change')}
-//         autofocus
-//       />
-//     ),
-//     { info: 'Based on [CodeMirror](http://codemirror.net/).' }
-//   )
-//   .add('with tabs', () => (
-//     <WithTabs lineNumbers={boolean('lineNumbers', true)} />
-//   ));
+WithTabs.argTypes = {
+  value: { control: { disable: true } },
+  mode: { control: { disable: true } },
+  lineWrapping: { control: { disable: true } },
+  readOnly: { control: { disable: true } },
+  theme: { control: { disable: true } },
+  foldGutter: { control: { disable: true } },
+  autofocus: { control: { disable: true } },
+  onChange: { control: { disable: true } },
+};

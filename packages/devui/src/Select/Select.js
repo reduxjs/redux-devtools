@@ -6,6 +6,9 @@ import styles from './styles';
 
 const SelectContainer = createStyledComponent(styles, ReactSelect);
 
+/**
+ * Wrapper around [React Select](https://github.com/JedWatson/react-select) with themes and new props like `openOuterUp` and `menuMaxHeight`.
+ */
 export default class Select extends (PureComponent || Component) {
   render() {
     return <SelectContainer {...this.props} />;
