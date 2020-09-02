@@ -2,7 +2,7 @@ import React from 'react';
 import { render, mount } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 import { Tabs } from '../src';
-import { tabs, simple10Tabs } from '../src/Tabs/stories/data';
+import { tabs, simple10Tabs } from '../src/Tabs/data';
 
 describe('Tabs', function () {
   it('renders correctly', () => {
