@@ -7,6 +7,8 @@ import App from '../src/app/containers/App';
 import api from '../src/app/middlewares/api';
 import exportState from '../src/app/middlewares/exportState';
 import rootReducer from '../src/app/reducers';
+import { DATA_TYPE_KEY } from '../src/app/constants/dataTypes';
+import stringifyJSON from '../src/app/utils/stringifyJSON';
 
 let wrapper;
 
@@ -41,5 +43,27 @@ describe('App container', () => {
         })
         .html()
     ).toMatch(/<div class="actionListRows-\d-\d-\d+"><\/div>/);
+  });
+});
+
+describe('stringifyJSON', () => {
+  it('should not mutate the source object', () => {
+    const src = {
+      isTest: true,
+      [DATA_TYPE_KEY]: 'Test',
+    };
+
+    const result = {
+      data: {
+        isTest: true,
+      },
+      __serializedType__: 'Test',
+    };
+
+    expect(stringifyJSON(src, true)).toEqual(JSON.stringify(result));
+    expect(src).toEqual({
+      isTest: true,
+      [DATA_TYPE_KEY]: 'Test',
+    });
   });
 });
