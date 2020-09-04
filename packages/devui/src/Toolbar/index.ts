@@ -1,3 +1,3 @@
-export Toolbar from './styles/Toolbar';
-export Divider from './styles/Divider';
-export Spacer from './styles/Spacer';
+export { default as Toolbar } from './styles/Toolbar';
+export { default as Divider } from './styles/Divider';
+export { default as Spacer } from './styles/Spacer';
