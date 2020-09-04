@@ -1,37 +1,53 @@
 import React, { PureComponent, Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect from 'react-select';
-import createStyledComponent from '../utils/createStyledComponent';
-import styles from './styles';
-
-const SelectContainer = createStyledComponent(styles, ReactSelect);
+import createThemedComponent from '../utils/createThemedComponent';
 
 /**
- * Wrapper around [React Select](https://github.com/JedWatson/react-select) with themes and new props like `openOuterUp` and `menuMaxHeight`.
+ * Wrapper around [React Select](https://github.com/JedWatson/react-select).
  */
-export default class Select extends (PureComponent || Component) {
+class Select extends (PureComponent || Component) {
   render() {
-    return <SelectContainer {...this.props} />;
+    return (
+      <ReactSelect
+        {...this.props}
+        theme={(theme) => ({
+          ...theme,
+          borderRadius: this.props.theme.inputBorderRadius,
+          colors: {
+            ...theme.colors,
+
+            primary: this.props.theme.base05,
+            primary50: this.props.theme.base03,
+            primary25: this.props.theme.base01,
+
+            dangerLight: this.props.theme.base03,
+            danger: this.props.theme.base07,
+
+            neutral0: this.props.theme.base00,
+            neutral5: this.props.theme.base01,
+            neutral10: this.props.theme.base02,
+            neutral20: this.props.theme.base03,
+            neutral30: this.props.theme.base04,
+            neutral40: this.props.theme.base05,
+            neutral60: this.props.theme.base06,
+            neutral80: this.props.theme.base07,
+          },
+        })}
+      />
+    );
   }
 }
 
 Select.propTypes = {
-  autosize: PropTypes.bool, // whether to enable autosizing or not
-  clearable: PropTypes.bool, // should it be possible to reset value
-  disabled: PropTypes.bool, // whether the Select is disabled or not
+  isClearable: PropTypes.bool, // should it be possible to reset value
+  isDisabled: PropTypes.bool, // whether the Select is disabled or not
   isLoading: PropTypes.bool, // whether the Select is loading externally or not
-  menuMaxHeight: PropTypes.number, // maximum css height for the opened menu of options
-  multi: PropTypes.bool, // multi-value input
-  searchable: PropTypes.bool, // whether to enable searching feature or not
-  simpleValue: PropTypes.bool, // pass the value with label to onChange
+  maxMenuHeight: PropTypes.number, // maximum css height for the opened menu of options
+  isMulti: PropTypes.bool, // multi-value input
+  isSearchable: PropTypes.bool, // whether to enable searching feature or not
   value: PropTypes.any, // initial field value
-  valueKey: PropTypes.string, // path of the label value in option objects
-  openOuterUp: PropTypes.bool, // value to control the opening direction
+  menuPlacement: PropTypes.oneOf(['auto', 'bottom', 'top']), // value to control the opening direction
 };
 
-Select.defaultProps = {
-  autosize: true,
-  clearable: false,
-  simpleValue: true,
-  menuMaxHeight: 200,
-};
+export default createThemedComponent(Select);

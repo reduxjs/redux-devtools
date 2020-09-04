@@ -30,7 +30,9 @@ describe('Select', function () {
 
   it('should select another option', () => {
     const onChange = jest.fn();
-    const wrapper = mount(<Select options={options} onChange={onChange} />);
+    const wrapper = mount(
+      <Select options={options} onInputChange={onChange} />
+    );
 
     const input = wrapper.find('input');
     input.at(0).instance().value = 'two';

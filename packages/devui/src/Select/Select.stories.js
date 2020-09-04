@@ -20,25 +20,29 @@ export default {
   component: Select,
 };
 
-const Template = (args) => (
+const Template = ({ value, ...args }) => (
   <Container>
-    <Select options={options} {...args} />
+    <Select
+      options={options}
+      value={options.filter((option) => option.value === value)}
+      {...args}
+    />
   </Container>
 );
 
 export const Default = Template.bind({});
 Default.args = {
   value: 'one',
-  menuMaxHeight: 200,
-  autosize: false,
-  clearable: false,
-  disabled: false,
+  maxMenuHeight: 300,
+  isClearable: false,
+  isDisabled: false,
   isLoading: false,
-  multi: false,
-  searchable: true,
-  openOuterUp: false,
+  isMulti: false,
+  isSearchable: true,
+  menuPlacement: 'bottom',
 };
 Default.argTypes = {
-  simpleValue: { control: { disable: true } },
-  valueKey: { control: { disable: true } },
+  onChange: {
+    action: 'selected',
+  },
 };
