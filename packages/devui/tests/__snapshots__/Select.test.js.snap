@@ -152,7 +152,24 @@ exports[`Select renders with props 1`] = `
 
 exports[`Select should select another option 1`] = `
 <Component
-  onChange={[MockFunction]}
+  onInputChange={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "two",
+          Object {
+            "action": "input-change",
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
   options={
     Array [
       Object {
@@ -171,7 +188,24 @@ exports[`Select should select another option 1`] = `
   }
 >
   <Select
-    onChange={[MockFunction]}
+    onInputChange={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "two",
+            Object {
+              "action": "input-change",
+            },
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
     options={
       Array [
         Object {
@@ -208,7 +242,24 @@ exports[`Select should select another option 1`] = `
       defaultInputValue=""
       defaultMenuIsOpen={false}
       defaultValue={null}
-      onChange={[MockFunction]}
+      onInputChange={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "two",
+              Object {
+                "action": "input-change",
+              },
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
       options={
         Array [
           Object {
