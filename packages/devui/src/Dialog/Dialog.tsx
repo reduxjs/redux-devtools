@@ -4,20 +4,60 @@ import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
 import Button from '../Button';
 import Form from '../Form';
+import { Theme } from '../themes/default';
+import { Props as FormProps } from '../Form/Form';
 
 const DialogWrapper = createStyledComponent(styles);
 
-export default class Dialog extends (PureComponent || Component) {
+export interface DialogProps {
+  open?: boolean;
+  title?: string;
+  children?: React.ReactNode;
+  actions?: React.ReactNode[];
+  submitText?: string;
+  fullWidth?: boolean;
+  noHeader?: boolean;
+  noFooter?: boolean;
+  modal?: boolean;
+  onDismiss: (
+    e: React.MouseEvent<HTMLButtonElement | HTMLDivElement> | false
+  ) => void;
+  onSubmit: () => void;
+  theme?: Theme;
+}
+
+type Rest<P> = Omit<
+  DialogProps & FormProps<P>,
+  | 'modal'
+  | 'open'
+  | 'fullWidth'
+  | 'title'
+  | 'children'
+  | 'actions'
+  | 'noHeader'
+  | 'noFooter'
+  | 'submitText'
+  | 'onDismiss'
+>;
+function isForm<P>(rest?: FormProps<P>): rest is FormProps<P> {
+  return (rest as FormProps<P>).schema !== undefined;
+}
+
+export default class Dialog<P> extends (PureComponent || Component)<
+  DialogProps | (DialogProps & FormProps<P>)
+> {
+  submitButton?: HTMLInputElement | null;
+
   onSubmit = () => {
     if (this.submitButton) this.submitButton.click();
     else this.props.onSubmit();
   };
 
-  getFormButtonRef = (node) => {
+  getFormButtonRef: React.RefCallback<HTMLInputElement> = (node) => {
     this.submitButton = node;
   };
 
-  onKeyDown = (e) => {
+  onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
     if (e.keyCode === 27 /* esc */) {
       e.preventDefault();
       this.props.onDismiss(false);
@@ -38,7 +78,7 @@ export default class Dialog extends (PureComponent || Component) {
       onDismiss,
       ...rest
     } = this.props;
-    const schema = rest.schema;
+    const schema = (rest as Rest<P>).schema;
 
     return (
       <DialogWrapper
@@ -47,7 +87,7 @@ export default class Dialog extends (PureComponent || Component) {
         onKeyDown={this.onKeyDown}
         theme={rest.theme}
       >
-        <div onClick={!modal && onDismiss} />
+        <div onClick={!modal ? onDismiss : undefined} />
         <div>
           {!noHeader && (
             <div className="mc-dialog--header">
@@ -57,8 +97,8 @@ export default class Dialog extends (PureComponent || Component) {
           )}
           <div className="mc-dialog--body">
             {children}
-            {schema && (
-              <Form {...rest}>
+            {isForm(rest as FormProps<P>) && (
+              <Form {...(rest as FormProps<P>)}>
                 {!noFooter && (
                   <input
                     type="submit"
@@ -97,19 +137,19 @@ export default class Dialog extends (PureComponent || Component) {
       </DialogWrapper>
     );
   }
-}
 
-Dialog.propTypes = {
-  open: PropTypes.bool,
-  title: PropTypes.string,
-  children: PropTypes.any,
-  actions: PropTypes.node,
-  submitText: PropTypes.string,
-  fullWidth: PropTypes.bool,
-  noHeader: PropTypes.bool,
-  noFooter: PropTypes.bool,
-  modal: PropTypes.bool,
-  onDismiss: PropTypes.func,
-  onSubmit: PropTypes.func,
-  theme: PropTypes.object,
-};
+  static propTypes = {
+    open: PropTypes.bool,
+    title: PropTypes.string,
+    children: PropTypes.any,
+    actions: PropTypes.node,
+    submitText: PropTypes.string,
+    fullWidth: PropTypes.bool,
+    noHeader: PropTypes.bool,
+    noFooter: PropTypes.bool,
+    modal: PropTypes.bool,
+    onDismiss: PropTypes.func,
+    onSubmit: PropTypes.func,
+    theme: PropTypes.object,
+  };
+}

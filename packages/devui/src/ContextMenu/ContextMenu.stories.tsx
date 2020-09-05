@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Story } from '@storybook/react';
 import ContextMenu from './';
 import { items } from './data';
+import { ContextMenuProps } from './ContextMenu';
 
 export default {
   title: 'ContextMenu',
@@ -16,7 +18,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Template = (args) => (
+const Template: Story<ContextMenuProps> = (args) => (
   <Container>
     <ContextMenu {...args} />
   </Container>

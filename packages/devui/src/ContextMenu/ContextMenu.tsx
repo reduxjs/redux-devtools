@@ -5,13 +5,34 @@ import styles from './styles/index';
 
 const ContextMenuWrapper = createStyledComponent(styles);
 
-export default class ContextMenu extends Component {
-  constructor(props) {
+type ReactButtonElement = React.ReactElement<
+  JSX.IntrinsicElements['button'],
+  'button'
+>;
+type Item = { name: string; value?: string } | ReactButtonElement;
+
+function isReactButtonElement(item: Item): item is ReactButtonElement {
+  return (item as ReactButtonElement).type === 'button';
+}
+
+export interface ContextMenuProps {
+  items: Item[];
+  onClick: (value: string) => void;
+  x: number;
+  y: number;
+  visible?: boolean;
+}
+
+export default class ContextMenu extends Component<ContextMenuProps> {
+  constructor(props: ContextMenuProps) {
     super(props);
     this.updateItems(props.items);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  menu?: HTMLDivElement | null;
+  items?: React.ReactNode[];
+
+  UNSAFE_componentWillReceiveProps(nextProps: ContextMenuProps) {
     if (
       nextProps.items !== this.props.items ||
       nextProps.visible !== this.props.visible
@@ -24,25 +45,25 @@ export default class ContextMenu extends Component {
     this.amendPosition();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: ContextMenuProps) {
     if (prevProps.x !== this.props.x || prevProps.y !== this.props.y) {
       this.amendPosition();
     }
   }
 
-  onMouseUp = (e) => {
-    e.target.blur();
+  onMouseUp: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.currentTarget.blur();
   };
 
-  onClick = (e) => {
-    this.props.onClick(e.target.value);
+  onClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    this.props.onClick(e.currentTarget.value);
   };
 
   amendPosition() {
     const { x, y } = this.props;
     const { scrollTop, scrollLeft } = document.documentElement;
     const { innerWidth, innerHeight } = window;
-    const rect = this.menu.getBoundingClientRect();
+    const rect = this.menu!.getBoundingClientRect();
     let left = x + scrollLeft;
     let top = y + scrollTop;
 
@@ -59,14 +80,14 @@ export default class ContextMenu extends Component {
       left = rect.width < innerWidth ? (innerWidth - rect.width) / 2 : 0;
     }
 
-    this.menu.style.top = `${top}px`;
-    this.menu.style.left = `${left}px`;
+    this.menu!.style.top = `${top}px`;
+    this.menu!.style.left = `${left}px`;
   }
 
-  updateItems(items) {
+  updateItems(items: Item[]) {
     this.items = items.map((item) => {
+      if (isReactButtonElement(item)) return item;
       const value = item.value || item.name;
-      if (item.type === 'button') return item;
       return (
         <button
           key={value}
@@ -80,7 +101,7 @@ export default class ContextMenu extends Component {
     });
   }
 
-  menuRef = (c) => {
+  menuRef: React.RefCallback<HTMLDivElement> = (c) => {
     this.menu = c;
   };
 
@@ -96,12 +117,12 @@ export default class ContextMenu extends Component {
       </ContextMenuWrapper>
     );
   }
-}
 
-ContextMenu.propTypes = {
-  items: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  visible: PropTypes.bool,
-};
+  static propTypes = {
+    items: PropTypes.array.isRequired,
+    onClick: PropTypes.func.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    visible: PropTypes.bool,
+  };
+}

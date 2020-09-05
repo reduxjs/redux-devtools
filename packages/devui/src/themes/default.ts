@@ -1,4 +1,24 @@
-export default (colors) => ({
+import { Base16Theme } from 'base16';
+import * as CSS from 'csstype';
+import * as themes from './index';
+
+export interface Theme extends Base16Theme {
+  fontFamily: CSS.Property.FontFamily;
+  codeFontFamily: CSS.Property.FontFamily;
+  inputHeight: number;
+  inputBorderWidth: number;
+  inputBorderRadius: number;
+  spinnerSize: number;
+  inputPadding: number;
+  selectArrowWidth: number;
+  inputInternalHeight: number;
+  inputBorderColor: string;
+  inputFocusedStyle: string;
+  type?: keyof typeof themes;
+  light?: boolean;
+}
+
+export default (colors: Base16Theme) => ({
   ...colors,
   fontFamily: "'Source Sans Pro', sans-serif",
   codeFontFamily: "'Source Code Pro', monospace",

@@ -1,13 +1,18 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 import Dialog from './';
 import { schema, uiSchema, formData } from '../Form/schema';
+import { DialogProps } from './Dialog';
+import { Props as FormProps } from '../Form/Form';
 
 export default {
   title: 'Dialog',
   component: Dialog,
 };
 
-const Template = (args) => <Dialog {...args} />;
+const Template: Story<DialogProps | (DialogProps & FormProps<unknown>)> = (
+  args
+) => <Dialog {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

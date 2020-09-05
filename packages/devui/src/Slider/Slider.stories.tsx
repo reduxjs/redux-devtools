@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Story } from '@storybook/react';
 import Slider from './';
+import { SliderProps } from './Slider';
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +17,7 @@ export default {
   component: Slider,
 };
 
-const Template = (args) => (
+const Template: Story<SliderProps> = (args) => (
   <Container>
     <Slider {...args} />
   </Container>

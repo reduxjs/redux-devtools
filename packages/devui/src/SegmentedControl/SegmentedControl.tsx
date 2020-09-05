@@ -2,23 +2,32 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
+import { Theme } from '../themes/default';
 
 const SegmentedWrapper = createStyledComponent(styles);
 
-export default class SegmentedControl extends Component {
-  shouldComponentUpdate(nextProps) {
+export interface SegmentedControlProps {
+  values: string[];
+  selected?: string;
+  onClick: (value: string) => void;
+  disabled?: boolean;
+  theme?: Theme;
+}
+
+export default class SegmentedControl extends Component<SegmentedControlProps> {
+  shouldComponentUpdate(nextProps: SegmentedControlProps) {
     return (
       nextProps.disabled !== this.props.disabled ||
       nextProps.selected !== this.props.selected
     );
   }
 
-  onClick = (e) => {
-    this.props.onClick(e.target.value);
+  onClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    this.props.onClick(e.currentTarget.value);
   };
 
-  onMouseUp = (e) => {
-    e.target.blur();
+  onMouseUp: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.currentTarget.blur();
   };
 
   render() {
@@ -39,12 +48,12 @@ export default class SegmentedControl extends Component {
       </SegmentedWrapper>
     );
   }
-}
 
-SegmentedControl.propTypes = {
-  values: PropTypes.array.isRequired,
-  selected: PropTypes.string,
-  onClick: PropTypes.func,
-  disabled: PropTypes.bool,
-  theme: PropTypes.object,
-};
+  static propTypes = {
+    values: PropTypes.array.isRequired,
+    selected: PropTypes.string,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
+    theme: PropTypes.object,
+  };
+}

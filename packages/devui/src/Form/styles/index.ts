@@ -1,6 +1,8 @@
-import { css } from 'styled-components';
+import { css, ThemedStyledProps } from 'styled-components';
+import { Theme } from '../../themes/default';
 
-export default ({ theme }) => css`
+// eslint-disable-next-line @typescript-eslint/ban-types
+export default ({ theme }: ThemedStyledProps<{}, Theme>) => css`
   padding: 10px;
   line-height: 1.846;
   font-size: 14px;

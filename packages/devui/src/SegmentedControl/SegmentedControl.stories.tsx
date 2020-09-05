@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Story } from '@storybook/react';
 import SegmentedControl from './';
+import { SegmentedControlProps } from './SegmentedControl';
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +17,7 @@ export default {
   component: SegmentedControl,
 };
 
-const Template = (args) => (
+const Template: Story<Omit<SegmentedControlProps, 'values'>> = (args) => (
   <Container>
     <SegmentedControl values={['Button1', 'Button2', 'Button3']} {...args} />
   </Container>

@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdFiberManualRecord } from 'react-icons/md';
+import { Story } from '@storybook/react';
 import Button from './';
+import { ButtonProps } from './Button';
 
 export default {
   title: 'Button',
@@ -16,7 +18,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Template = (args) => (
+const Template: Story<ButtonProps> = (args) => (
   <Container>
     <Button {...args} />
   </Container>

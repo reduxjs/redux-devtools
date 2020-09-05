@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import { Theme } from '../../themes/default';
 
 export const defaultStyle = `
   height: 100%;
@@ -10,7 +11,7 @@ export const defaultStyle = `
   }
 `;
 
-export const themedStyle = (theme) => css`
+export const themedStyle = (theme: Theme) => css`
   height: 100%;
 
   > div {

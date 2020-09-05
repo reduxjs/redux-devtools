@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Story } from '@storybook/react';
 import Notification from './';
+import { NotificationProps } from './Notification';
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +17,7 @@ export default {
   component: Notification,
 };
 
-const Template = (args) => (
+const Template: Story<NotificationProps> = (args) => (
   <Container>
     <Notification {...args} />
   </Container>

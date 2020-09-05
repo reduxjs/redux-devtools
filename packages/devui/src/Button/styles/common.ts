@@ -1,8 +1,10 @@
-import { css } from 'styled-components';
+import { css, ThemedStyledProps } from 'styled-components';
 import { fadeIn } from '../../utils/animations';
 import colorEffect from '../../utils/color';
+import { Mark, Size, TooltipPosition } from '../Button';
+import { Theme } from '../../themes/default';
 
-const both = (tooltipPosition) => {
+const both = (tooltipPosition: TooltipPosition) => {
   switch (tooltipPosition) {
     case 'bottom':
       return `
@@ -46,7 +48,7 @@ const both = (tooltipPosition) => {
   }
 };
 
-const before = (tooltipPosition) => {
+const before = (tooltipPosition: TooltipPosition) => {
   switch (tooltipPosition) {
     case 'bottom-left':
       return `
@@ -69,7 +71,7 @@ const before = (tooltipPosition) => {
   }
 };
 
-const after = (tooltipPosition, color) => {
+const after = (tooltipPosition: TooltipPosition, color: string) => {
   switch (tooltipPosition) {
     case 'bottom':
       return `
@@ -110,13 +112,13 @@ const after = (tooltipPosition, color) => {
   }
 };
 
-const getDirection = (tooltipPosition) => {
+const getDirection = (tooltipPosition: TooltipPosition) => {
   return tooltipPosition.indexOf('-') > 0
     ? tooltipPosition.substring(0, tooltipPosition.indexOf('-'))
     : tooltipPosition;
 };
 
-const getSize = (size) => {
+const getSize = (size: Size | undefined) => {
   switch (size) {
     case 'big':
       return 'min-height: 34px; padding: 2px 12px;';
@@ -127,7 +129,16 @@ const getSize = (size) => {
   }
 };
 
-export const commonStyle = ({ theme, mark, size }) => css`
+interface CommonStyleProps {
+  size: Size | undefined;
+  mark: Mark | false | undefined;
+}
+
+export const commonStyle = ({
+  theme,
+  mark,
+  size,
+}: ThemedStyledProps<CommonStyleProps, Theme>) => css`
   display: inline-block;
   position: relative;
   flex-shrink: 0;
@@ -164,13 +175,20 @@ export const commonStyle = ({ theme, mark, size }) => css`
   }
 `;
 
+interface TooltipStyleProps {
+  tooltipTitle: string | undefined;
+  tooltipPosition: TooltipPosition;
+  size: Size | undefined;
+  mark: Mark | false | undefined;
+}
+
 export const tooltipStyle = ({
   theme,
   tooltipTitle,
   tooltipPosition,
   mark,
   size,
-}) => css`
+}: ThemedStyledProps<TooltipStyleProps, Theme>) => css`
   ${commonStyle({ theme, mark, size })}
 
   &:before {

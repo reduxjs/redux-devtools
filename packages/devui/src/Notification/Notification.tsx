@@ -6,11 +6,21 @@ import { MdError } from 'react-icons/md';
 import { MdCheckCircle } from 'react-icons/md';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
+import { Theme } from '../themes/default';
 
 const NotificationWrapper = createStyledComponent(styles);
 
-export default class Notification extends Component {
-  shouldComponentUpdate(nextProps) {
+export type Type = 'info' | 'success' | 'warning' | 'error';
+
+export interface NotificationProps {
+  children?: React.ReactNode;
+  type: Type;
+  onClose?: React.MouseEventHandler<HTMLButtonElement>;
+  theme?: Theme;
+}
+
+export default class Notification extends Component<NotificationProps> {
+  shouldComponentUpdate(nextProps: NotificationProps) {
     return (
       nextProps.children !== this.props.children ||
       nextProps.type !== this.props.type
@@ -43,15 +53,15 @@ export default class Notification extends Component {
       </NotificationWrapper>
     );
   }
+
+  static propTypes = {
+    children: PropTypes.any.isRequired,
+    type: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
+    onClose: PropTypes.func,
+    theme: PropTypes.object,
+  };
+
+  static defaultProps = {
+    type: 'info',
+  };
 }
-
-Notification.propTypes = {
-  children: PropTypes.any.isRequired,
-  type: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
-  onClose: PropTypes.func,
-  theme: PropTypes.object,
-};
-
-Notification.defaultProps = {
-  type: 'info',
-};

@@ -1,17 +1,26 @@
 import React, { PureComponent, Component } from 'react';
 import PropTypes from 'prop-types';
-import JSONSchemaForm from 'react-jsonschema-form';
+import JSONSchemaForm, { FormProps } from 'react-jsonschema-form';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
 import Button from '../Button';
 import customWidgets from './widgets';
+import { Theme } from '../themes/default';
 
 const FormContainer = createStyledComponent(styles, JSONSchemaForm);
+
+export interface Props<T> extends FormProps<T> {
+  children?: React.ReactNode;
+  submitText?: string;
+  primaryButton?: boolean;
+  noSubmit?: boolean;
+  theme?: Theme;
+}
 
 /**
  * Wrapper around [`react-jsonschema-form`](https://github.com/mozilla-services/react-jsonschema-form) with custom widgets.
  */
-export default class Form extends (PureComponent || Component) {
+export default class Form<T> extends (PureComponent || Component)<Props<T>> {
   render() {
     const {
       widgets,
@@ -22,7 +31,10 @@ export default class Form extends (PureComponent || Component) {
       ...rest
     } = this.props;
     return (
-      <FormContainer {...rest} widgets={{ ...customWidgets, ...widgets }}>
+      <FormContainer
+        {...(rest as Props<unknown>)}
+        widgets={{ ...customWidgets, ...widgets }}
+      >
         {noSubmit ? (
           <noscript />
         ) : (
@@ -40,17 +52,17 @@ export default class Form extends (PureComponent || Component) {
       </FormContainer>
     );
   }
-}
 
-Form.propTypes = {
-  children: PropTypes.any,
-  submitText: PropTypes.string,
-  primaryButton: PropTypes.bool,
-  noSubmit: PropTypes.bool,
-  schema: PropTypes.object.isRequired,
-  uiSchema: PropTypes.object,
-  formData: PropTypes.any,
-  widgets: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-  ),
-};
+  static propTypes = {
+    children: PropTypes.any,
+    submitText: PropTypes.string,
+    primaryButton: PropTypes.bool,
+    noSubmit: PropTypes.bool,
+    schema: PropTypes.object.isRequired,
+    uiSchema: PropTypes.object,
+    formData: PropTypes.any,
+    widgets: PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+    ),
+  };
+}

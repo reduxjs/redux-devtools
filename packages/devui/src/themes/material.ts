@@ -1,4 +1,6 @@
-export default (colors) => ({
+import { Base16Theme } from 'base16';
+
+export default (colors: Base16Theme) => ({
   fontFamily: "'Roboto', sans-serif",
   codeFontFamily: "'Roboto Mono', monospace",
   inputPadding: 5,

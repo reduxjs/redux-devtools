@@ -10,8 +10,18 @@ const value2 = `
   const func2 = () => {}
 `;
 
+export interface WithTabsProps {
+  align: 'left' | 'right' | 'center';
+  lineNumbers: boolean;
+}
+
+interface TabProps {
+  value: string;
+  lineNumbers: boolean;
+}
+
 /* eslint-disable react/prop-types */
-export default class WithTabs extends Component {
+export default class WithTabs extends Component<WithTabsProps> {
   state = {
     selected: 'Function 1',
   };

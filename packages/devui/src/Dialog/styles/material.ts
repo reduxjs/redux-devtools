@@ -1,6 +1,12 @@
-import { css } from 'styled-components';
+import { css, ThemedStyledProps } from 'styled-components';
+import { StyleProps } from './default';
+import { Theme } from '../../themes/default';
 
-export const style = ({ theme, open, fullWidth }) => css`
+export const style = ({
+  theme,
+  open,
+  fullWidth,
+}: ThemedStyledProps<StyleProps, Theme>) => css`
   position: fixed;
   top: 0px;
   right: 0px;

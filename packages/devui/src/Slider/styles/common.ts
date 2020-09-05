@@ -1,6 +1,8 @@
-import { css } from 'styled-components';
+import { css, ThemedStyledProps } from 'styled-components';
+import { Theme } from '../../themes/default';
 
-export const containerStyle = ({ theme }) => css`
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const containerStyle = ({ theme }: ThemedStyledProps<{}, Theme>) => css`
   display: flex;
   align-items: center;
 

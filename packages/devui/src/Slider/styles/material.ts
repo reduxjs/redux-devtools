@@ -1,9 +1,16 @@
-import { css } from 'styled-components';
+import { css, ThemedStyledProps } from 'styled-components';
 import { prefixSelectors } from '../../utils/autoPrefix';
 import color from '../../utils/color';
 import { animationCurve } from '../../utils/animations';
+import { StyleProps } from './default';
+import { Theme } from '../../themes/default';
 
-export const style = ({ theme, percent, disabled, withLabel }) => css`
+export const style = ({
+  theme,
+  percent,
+  disabled,
+  withLabel,
+}: ThemedStyledProps<StyleProps, Theme>) => css`
   display: block;
   width: 100%;
   position: relative;

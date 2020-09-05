@@ -1,12 +1,17 @@
 import React, { PureComponent, Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactSelect from 'react-select';
+import ReactSelect, { Props as ReactSelectProps } from 'react-select';
 import createThemedComponent from '../utils/createThemedComponent';
+import { Theme } from '../themes/default';
+
+export interface SelectProps extends Omit<ReactSelectProps, 'theme'> {
+  theme: Theme;
+}
 
 /**
  * Wrapper around [React Select](https://github.com/JedWatson/react-select).
  */
-class Select extends (PureComponent || Component) {
+class Select extends (PureComponent || Component)<SelectProps> {
   render() {
     return (
       <ReactSelect
@@ -37,17 +42,17 @@ class Select extends (PureComponent || Component) {
       />
     );
   }
-}
 
-Select.propTypes = {
-  isClearable: PropTypes.bool, // should it be possible to reset value
-  isDisabled: PropTypes.bool, // whether the Select is disabled or not
-  isLoading: PropTypes.bool, // whether the Select is loading externally or not
-  maxMenuHeight: PropTypes.number, // maximum css height for the opened menu of options
-  isMulti: PropTypes.bool, // multi-value input
-  isSearchable: PropTypes.bool, // whether to enable searching feature or not
-  value: PropTypes.any, // initial field value
-  menuPlacement: PropTypes.oneOf(['auto', 'bottom', 'top']), // value to control the opening direction
-};
+  static propTypes = {
+    isClearable: PropTypes.bool, // should it be possible to reset value
+    isDisabled: PropTypes.bool, // whether the Select is disabled or not
+    isLoading: PropTypes.bool, // whether the Select is loading externally or not
+    maxMenuHeight: PropTypes.number, // maximum css height for the opened menu of options
+    isMulti: PropTypes.bool, // multi-value input
+    isSearchable: PropTypes.bool, // whether to enable searching feature or not
+    value: PropTypes.any, // initial field value
+    menuPlacement: PropTypes.oneOf(['auto', 'bottom', 'top']), // value to control the opening direction
+  };
+}
 
 export default createThemedComponent(Select);

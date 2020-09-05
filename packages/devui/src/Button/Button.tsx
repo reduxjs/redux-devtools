@@ -1,15 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
 import { commonStyle, tooltipStyle } from './styles/common';
+import { Theme } from '../themes/default';
 
 const ButtonWrapper = createStyledComponent(styles, 'button');
 const TooltipWrapper = createStyledComponent(tooltipStyle);
 const CommonWrapper = createStyledComponent(commonStyle);
 
-export default class Button extends Component {
-  shouldComponentUpdate(nextProps) {
+export type TooltipPosition =
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'top-left'
+  | 'top-right';
+
+export type Size = 'big' | 'normal' | 'small';
+
+export type Mark =
+  | 'base08'
+  | 'base09'
+  | 'base0A'
+  | 'base0B'
+  | 'base0C'
+  | 'base0D'
+  | 'base0E'
+  | 'base0F';
+
+export interface ButtonProps {
+  children: ReactNode;
+  title?: string;
+  tooltipPosition: TooltipPosition;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  type?: 'button' | 'reset' | 'submit';
+  disabled?: boolean;
+  primary?: boolean;
+  size?: Size;
+  mark?: Mark | false;
+  theme?: Theme;
+}
+
+export default class Button extends Component<ButtonProps> {
+  shouldComponentUpdate(nextProps: ButtonProps) {
     return (
       nextProps.children !== this.props.children ||
       nextProps.disabled !== this.props.disabled ||
@@ -21,8 +57,8 @@ export default class Button extends Component {
     );
   }
 
-  onMouseUp = (e) => {
-    e.target.blur();
+  onMouseUp: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.currentTarget.blur();
   };
 
   render() {
@@ -53,40 +89,40 @@ export default class Button extends Component {
       </Wrapper>
     );
   }
+
+  static propTypes = {
+    children: PropTypes.any.isRequired,
+    title: PropTypes.string,
+    tooltipPosition: PropTypes.oneOf([
+      'top',
+      'bottom',
+      'left',
+      'right',
+      'bottom-left',
+      'bottom-right',
+      'top-left',
+      'top-right',
+    ]),
+    onClick: PropTypes.func,
+    type: PropTypes.string,
+    disabled: PropTypes.bool,
+    primary: PropTypes.bool,
+    size: PropTypes.oneOf(['big', 'normal', 'small']),
+    mark: PropTypes.oneOf([
+      false,
+      'base08',
+      'base09',
+      'base0A',
+      'base0B',
+      'base0C',
+      'base0D',
+      'base0E',
+      'base0F',
+    ]),
+    theme: PropTypes.object,
+  };
+
+  static defaultProps = {
+    tooltipPosition: 'top',
+  };
 }
-
-Button.propTypes = {
-  children: PropTypes.any.isRequired,
-  title: PropTypes.string,
-  tooltipPosition: PropTypes.oneOf([
-    'top',
-    'bottom',
-    'left',
-    'right',
-    'bottom-left',
-    'bottom-right',
-    'top-left',
-    'top-right',
-  ]),
-  onClick: PropTypes.func,
-  type: PropTypes.string,
-  disabled: PropTypes.bool,
-  primary: PropTypes.bool,
-  size: PropTypes.oneOf(['big', 'normal', 'small']),
-  mark: PropTypes.oneOf([
-    false,
-    'base08',
-    'base09',
-    'base0A',
-    'base0B',
-    'base0C',
-    'base0D',
-    'base0E',
-    'base0F',
-  ]),
-  theme: PropTypes.object,
-};
-
-Button.defaultProps = {
-  tooltipPosition: 'top',
-};

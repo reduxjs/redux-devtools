@@ -8,8 +8,37 @@ import * as styles from './styles';
 
 const TabsWrapper = createStyledComponent(styles);
 
-export default class TabsHeader extends Component {
-  constructor(props) {
+export type ReactButtonElement = React.ReactElement<
+  JSX.IntrinsicElements['button'],
+  'button'
+>;
+
+export interface Tab<P> {
+  name: string;
+  value?: string;
+  component?: React.ComponentType<P>;
+  selector?: (tab: this) => P;
+}
+
+interface Props<P> {
+  tabs: ReactButtonElement[];
+  items: Tab<P>;
+  main: boolean | undefined;
+  onClick: (value: string) => void;
+  position: 'left' | 'right' | 'center';
+  collapsible: boolean | undefined;
+  selected: string | undefined;
+}
+
+interface State {
+  visibleTabs: ReactButtonElement[];
+  hiddenTabs: ReactButtonElement[];
+  subMenuOpened: boolean;
+  contextMenu: { top: number; left: number } | undefined;
+}
+
+export default class TabsHeader<P> extends Component<Props<P>, State> {
+  constructor(props: Props<P>) {
     super(props);
     this.state = {
       visibleTabs: props.tabs.slice(),
@@ -21,7 +50,7 @@ export default class TabsHeader extends Component {
     this.hiddenTabsWidth = [];
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props<P>) {
     if (
       nextProps.tabs !== this.props.tabs ||
       nextProps.selected !== this.props.selected ||
@@ -38,7 +67,7 @@ export default class TabsHeader extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props<P>) {
     const { collapsible } = this.props;
     if (!collapsible) {
       if (prevProps.collapsible !== collapsible) this.disableResizeEvents();

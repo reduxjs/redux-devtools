@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Select from './';
 import { options } from './options';
+import { Story } from '@storybook/react';
+import { SelectProps } from './Select';
 
 const Container = styled.div`
   display: flex;
@@ -20,7 +22,10 @@ export default {
   component: Select,
 };
 
-const Template = ({ value, ...args }) => (
+type TemplateArgs = Omit<SelectProps, 'value'> & { value: string };
+
+// eslint-disable-next-line react/prop-types
+const Template: Story<TemplateArgs> = ({ value, ...args }) => (
   <Container>
     <Select
       options={options}

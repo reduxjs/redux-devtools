@@ -1,6 +1,8 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 import Editor from './';
-import { default as WithTabsComponent } from './WithTabs';
+import { default as WithTabsComponent, WithTabsProps } from './WithTabs';
+import { EditorProps } from './Editor';
 
 const value = `
 var themes = [];
@@ -15,7 +17,7 @@ export default {
   component: Editor,
 };
 
-const Template = (args) => <Editor {...args} />;
+const Template: Story<EditorProps> = (args) => <Editor {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -33,7 +35,9 @@ Default.argTypes = {
   onChange: { control: { disable: true } },
 };
 
-const WithTabsTemplate = (args) => <WithTabsComponent {...args} />;
+const WithTabsTemplate: Story<WithTabsProps> = (args) => (
+  <WithTabsComponent {...args} />
+);
 
 export const WithTabs = WithTabsTemplate.bind({});
 WithTabs.args = {

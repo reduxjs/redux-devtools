@@ -1,13 +1,14 @@
 import React from 'react';
+import { Widget } from 'react-jsonschema-form';
 import Select from '../Select';
 import Slider from '../Slider';
 
 /* eslint-disable react/prop-types */
-const SelectWidget = ({ options, multi, ...rest }) => (
+const SelectWidget: Widget = ({ options, multi, ...rest }) => (
   <Select options={options.enumOptions} multiple={multi} {...rest} />
 );
 
-const RangeWidget = ({
+const RangeWidget: Widget = ({
   schema,
   readonly,
   autofocus,
