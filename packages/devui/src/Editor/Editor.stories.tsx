@@ -42,7 +42,7 @@ const WithTabsTemplate: Story<WithTabsProps> = (args) => (
 export const WithTabs = WithTabsTemplate.bind({});
 WithTabs.args = {
   lineNumbers: true,
-  align: 'left',
+  position: 'left',
 };
 WithTabs.argTypes = {
   value: { control: { disable: true } },

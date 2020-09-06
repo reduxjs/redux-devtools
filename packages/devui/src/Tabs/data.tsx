@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* eslint-disable react/prop-types */
-const Component = ({ selected }) => (
+const Component = ({ selected }: { selected: string }) => (
   <div
     style={{
       display: 'flex',
@@ -17,7 +17,9 @@ const Component = ({ selected }) => (
 );
 /* eslint-enable react/prop-types */
 
-const selector = (tab) => ({ selected: tab.name });
+const selector = (tab: { name: string; value?: string }) => ({
+  selected: tab.name,
+});
 
 export const tabs = [
   {
@@ -37,6 +39,6 @@ export const tabs = [
   },
 ];
 
-export const simple10Tabs = [];
+export const simple10Tabs: { name: string; value: string }[] = [];
 for (let i = 1; i <= 10; i++)
   simple10Tabs.push({ name: `Tab${i}`, value: `${i}` });

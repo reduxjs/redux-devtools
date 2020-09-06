@@ -1,6 +1,16 @@
-import styled from 'styled-components';
+import styled, { ThemedStyledInterface } from 'styled-components';
+import { Theme } from '../../themes/default';
 
-const Toolbar = styled.div`
+export type BorderPosition = 'top' | 'bottom';
+
+export interface Props {
+  fullHeight?: boolean;
+  compact?: boolean;
+  borderPosition?: BorderPosition;
+  noBorder?: boolean;
+}
+
+const Toolbar = (styled as ThemedStyledInterface<Theme>).div<Props>`
   display: flex;
   flex-shrink: 0;
   box-sizing: border-box;

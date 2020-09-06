@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TabsHeader from './TabsHeader';
+import TabsHeader, { ReactButtonElement, Tab } from './TabsHeader';
 import { TabsContainer } from './styles/common';
 
 export type Position = 'left' | 'right' | 'center';
@@ -96,15 +96,15 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
       </TabsContainer>
     );
   }
+
+  static propTypes = {
+    tabs: PropTypes.array.isRequired,
+    selected: PropTypes.string,
+    main: PropTypes.bool,
+    onClick: PropTypes.func.isRequired,
+    collapsible: PropTypes.bool,
+    position: PropTypes.oneOf(['left', 'right', 'center']),
+  };
+
+  static defaultProps = { position: 'left' };
 }
-
-Tabs.propTypes = {
-  tabs: PropTypes.array.isRequired,
-  selected: PropTypes.string,
-  main: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
-  collapsible: PropTypes.bool,
-  position: PropTypes.oneOf(['left', 'right', 'center']),
-};
-
-Tabs.defaultProps = { position: 'left' };

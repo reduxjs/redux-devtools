@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '../src';
 import { listSchemes, listThemes } from '../src/utils/theme';
-import '../src/presets.js';
+import '../src/presets';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },

@@ -27,6 +27,7 @@ const Template: Story<ButtonProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   title: 'Hello Tooltip! \\a And from new line hello!',
+  tooltipPosition: 'top',
   primary: true,
   size: 'normal',
   disabled: false,
@@ -43,6 +44,7 @@ export const Mark = Template.bind({});
 Mark.args = {
   mark: 'base08',
   title: 'Hello Tooltip',
+  tooltipPosition: 'top',
   size: 'normal',
   disabled: false,
   children: <MdFiberManualRecord />,

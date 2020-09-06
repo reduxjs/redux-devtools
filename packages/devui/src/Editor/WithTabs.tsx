@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ComponentType } from 'react';
 import Editor from './';
 import Tabs from '../Tabs';
 
@@ -11,7 +11,7 @@ const value2 = `
 `;
 
 export interface WithTabsProps {
-  align: 'left' | 'right' | 'center';
+  position: 'left' | 'right' | 'center';
   lineNumbers: boolean;
 }
 
@@ -27,18 +27,18 @@ export default class WithTabs extends Component<WithTabsProps> {
   };
 
   render() {
-    const { align, lineNumbers } = this.props;
+    const { position, lineNumbers } = this.props;
     return (
-      <Tabs
+      <Tabs<TabProps>
         tabs={[
           {
             name: 'Function 1',
-            component: Editor,
+            component: (Editor as unknown) as ComponentType<TabProps>,
             selector: () => ({ value: value1, lineNumbers }),
           },
           {
             name: 'Function 2',
-            component: Editor,
+            component: (Editor as unknown) as ComponentType<TabProps>,
             selector: () => ({ value: value2, lineNumbers }),
           },
         ]}
@@ -46,7 +46,7 @@ export default class WithTabs extends Component<WithTabsProps> {
         onClick={(selected) => {
           this.setState({ selected });
         }}
-        align={align}
+        position={position}
       />
     );
   }

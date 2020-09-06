@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
+import { Story } from '@storybook/react';
 import { MdPlayArrow } from 'react-icons/md';
 import { MdFiberManualRecord } from 'react-icons/md';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
@@ -16,6 +17,9 @@ import {
 } from '../';
 import { options } from '../Select/options';
 import { simple10Tabs } from '../Tabs/data';
+import { BorderPosition } from './styles/Toolbar';
+import { TooltipPosition } from '../Button/Button';
+import { Position } from '../Tabs/Tabs';
 
 const Container = styled.div`
   display: flex;
@@ -35,12 +39,27 @@ export default {
   component: Toolbar,
 };
 
-const Template = ({
+interface TemplateArgs {
+  borderPosition: BorderPosition;
+  title?: string;
+  tooltipPosition: TooltipPosition;
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  label: ReactNode;
+}
+
+const Template: Story<TemplateArgs> = ({
+  // eslint-disable-next-line react/prop-types
   borderPosition,
+  // eslint-disable-next-line react/prop-types
   title,
+  // eslint-disable-next-line react/prop-types
   tooltipPosition,
+  // eslint-disable-next-line react/prop-types
   disabled,
+  // eslint-disable-next-line react/prop-types
   onClick,
+  // eslint-disable-next-line react/prop-types
   label,
 }) => (
   <Container>
@@ -104,17 +123,41 @@ Default.argTypes = {
   },
 };
 
-const TabsTemplate = ({
+interface TabsTemplateArgs {
+  title?: string;
+  tooltipPosition: TooltipPosition;
+  disabled?: boolean;
+  buttonOnClick?: React.MouseEventHandler<HTMLButtonElement>;
+  label: ReactNode;
+  selected?: string;
+  main?: boolean;
+  tabsOnClick: (value: string) => void;
+  collapsible?: boolean;
+  position: Position;
+}
+
+const TabsTemplate: Story<TabsTemplateArgs> = ({
+  // eslint-disable-next-line react/prop-types
   title,
+  // eslint-disable-next-line react/prop-types
   tooltipPosition,
+  // eslint-disable-next-line react/prop-types
   disabled,
+  // eslint-disable-next-line react/prop-types
   buttonOnClick,
+  // eslint-disable-next-line react/prop-types
   label,
+  // eslint-disable-next-line react/prop-types
   selected,
+  // eslint-disable-next-line react/prop-types
   main,
-  tabOnClick,
+  // eslint-disable-next-line react/prop-types
+  tabsOnClick,
+  // eslint-disable-next-line react/prop-types
   collapsible,
+  // eslint-disable-next-line react/prop-types
   position,
+  // eslint-disable-next-line react/prop-types
 }) => (
   <Container>
     <Toolbar>
@@ -130,7 +173,7 @@ const TabsTemplate = ({
         tabs={simple10Tabs}
         selected={selected}
         main={main}
-        onClick={tabOnClick}
+        onClick={tabsOnClick}
         collapsible={collapsible}
         position={position}
       />
@@ -176,7 +219,7 @@ Tabs.argTypes = {
   buttonOnClick: {
     action: 'button clicked',
   },
-  tabOnClick: {
+  tabsOnClick: {
     action: 'tab selected',
   },
   position: {
@@ -187,19 +230,48 @@ Tabs.argTypes = {
   },
 };
 
-const WithSliderTemplate = ({
+interface WithSliderTemplateArgs {
+  title?: string;
+  tooltipPosition: TooltipPosition;
+  playOnClick?: React.MouseEventHandler<HTMLButtonElement>;
+  value: number;
+  min: number;
+  max: number;
+  label?: string;
+  withValue?: boolean;
+  onChange: (value: number) => void;
+  previousStateOnClick?: React.MouseEventHandler<HTMLButtonElement>;
+  nextStateOnClick?: React.MouseEventHandler<HTMLButtonElement>;
+  selected?: string;
+  segmentedControlOnClick: (value: string) => void;
+}
+
+const WithSliderTemplate: Story<WithSliderTemplateArgs> = ({
+  // eslint-disable-next-line react/prop-types
   title,
+  // eslint-disable-next-line react/prop-types
   tooltipPosition,
+  // eslint-disable-next-line react/prop-types
   playOnClick,
+  // eslint-disable-next-line react/prop-types
   value,
+  // eslint-disable-next-line react/prop-types
   min,
+  // eslint-disable-next-line react/prop-types
   max,
+  // eslint-disable-next-line react/prop-types
   label,
+  // eslint-disable-next-line react/prop-types
   withValue,
+  // eslint-disable-next-line react/prop-types
   onChange,
+  // eslint-disable-next-line react/prop-types
   previousStateOnClick,
+  // eslint-disable-next-line react/prop-types
   nextStateOnClick,
+  // eslint-disable-next-line react/prop-types
   selected,
+  // eslint-disable-next-line react/prop-types
   segmentedControlOnClick,
 }) => (
   <Container>

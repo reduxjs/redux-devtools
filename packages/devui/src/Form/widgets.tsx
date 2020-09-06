@@ -1,32 +1,30 @@
 import React from 'react';
-import { Widget } from 'react-jsonschema-form';
+import { FieldProps, Widget, WidgetProps } from 'react-jsonschema-form';
 import Select from '../Select';
 import Slider from '../Slider';
 
 /* eslint-disable react/prop-types */
-const SelectWidget: Widget = ({ options, multi, ...rest }) => (
-  <Select options={options.enumOptions} multiple={multi} {...rest} />
+const SelectWidget: Widget = ({ options, ...rest }) => (
+  <Select options={options.enumOptions} {...rest} />
 );
 
-const RangeWidget: Widget = ({
+const RangeWidget: Widget = (({
   schema,
-  readonly,
-  autofocus,
+  disabled,
   label, // eslint-disable-line
   options, // eslint-disable-line
   formContext, // eslint-disable-line
   registry, // eslint-disable-line
   ...rest
-}) => (
-  <Slider
-    {...rest}
-    autoFocus={autofocus}
-    readOnly={readonly}
-    min={schema.minimum}
-    max={schema.maximum}
-    step={schema.multipleOf}
-    withValue
-  />
-);
+}: WidgetProps & { registry: FieldProps['registry'] }) =>
+  (
+    <Slider
+      {...rest}
+      disabled={disabled}
+      min={schema.minimum}
+      max={schema.maximum}
+      withValue
+    />
+  ) as unknown) as Widget;
 
 export default { SelectWidget, RangeWidget };

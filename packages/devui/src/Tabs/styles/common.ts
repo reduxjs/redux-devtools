@@ -1,6 +1,11 @@
 import styled from 'styled-components';
+import { Position } from '../Tabs';
 
-export const TabsContainer = styled.div`
+interface StyleProps {
+  position: Position;
+}
+
+export const TabsContainer = styled.div<StyleProps>`
   position: relative;
   display: flex;
   flex-direction: column;

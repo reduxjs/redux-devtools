@@ -3,6 +3,7 @@
 
 export default {
   scheme: 'default',
+  author: 'Mihail Diordiev (https://github.com/zalmoxisus)',
   base00: '#ffffff',
   base01: '#f3f3f3',
   base02: '#e8e8e8',

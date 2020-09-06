@@ -11,7 +11,7 @@ export interface SelectProps extends Omit<ReactSelectProps, 'theme'> {
 /**
  * Wrapper around [React Select](https://github.com/JedWatson/react-select).
  */
-class Select extends (PureComponent || Component)<SelectProps> {
+export class Select extends (PureComponent || Component)<SelectProps> {
   render() {
     return (
       <ReactSelect

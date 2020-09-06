@@ -1,6 +1,14 @@
-import { css } from 'styled-components';
+import { css, ThemedStyledProps } from 'styled-components';
+import { Theme } from '../../themes/default';
 
-export const style = ({ theme, main }) => css`
+export interface StyleProps {
+  main: boolean | undefined;
+}
+
+export const style = ({
+  theme,
+  main,
+}: ThemedStyledProps<StyleProps, Theme>) => css`
   display: flex;
   flex: 0 0 1;
   padding-left: 1px;

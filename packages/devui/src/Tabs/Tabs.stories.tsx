@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Story } from '@storybook/react';
 import Tabs from './';
 import { tabs, simple10Tabs } from './data';
+import { TabsProps } from './Tabs';
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +18,7 @@ export default {
   component: Tabs,
 };
 
-const Template = (args) => (
+const Template: Story<TabsProps<unknown>> = (args) => (
   <Container>
     <Tabs {...args} />
   </Container>
@@ -35,7 +37,9 @@ Default.argTypes = {
   onClick: { control: { disable: true } },
 };
 
-export const WithContent = Template.bind({});
+export const WithContent = (Template as Story<
+  TabsProps<{ selected: string }>
+>).bind({});
 WithContent.args = {
   tabs,
   selected: 'Tab2',

@@ -22,7 +22,7 @@ export interface Tab<P> {
 
 interface Props<P> {
   tabs: ReactButtonElement[];
-  items: Tab<P>;
+  items: Tab<P>[];
   main: boolean | undefined;
   onClick: (value: string) => void;
   position: 'left' | 'right' | 'center';
@@ -38,17 +38,18 @@ interface State {
 }
 
 export default class TabsHeader<P> extends Component<Props<P>, State> {
-  constructor(props: Props<P>) {
-    super(props);
-    this.state = {
-      visibleTabs: props.tabs.slice(),
-      hiddenTabs: [],
-      subMenuOpened: false,
-      contextMenu: undefined,
-    };
-    this.iconWidth = 0;
-    this.hiddenTabsWidth = [];
-  }
+  state: State = {
+    visibleTabs: this.props.tabs.slice(),
+    hiddenTabs: [],
+    subMenuOpened: false,
+    contextMenu: undefined,
+  };
+
+  iconWidth = 0;
+  hiddenTabsWidth: number[] = [];
+  tabsWrapperRef?: HTMLDivElement | null;
+  tabsRef?: HTMLDivElement | null;
+  resizeDetector?: HTMLIFrameElement;
 
   UNSAFE_componentWillReceiveProps(nextProps: Props<P>) {
     if (
@@ -76,8 +77,11 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
 
     let shouldCollapse = false;
     if (this.iconWidth === 0) {
-      const tabButtons = this.tabsRef.children;
-      if (this.tabsRef.children[tabButtons.length - 1].value === 'expandIcon') {
+      const tabButtons = this.tabsRef!.children;
+      if (
+        (this.tabsRef!.children[tabButtons.length - 1] as HTMLButtonElement)
+          .value === 'expandIcon'
+      ) {
         this.iconWidth = tabButtons[
           tabButtons.length - 1
         ].getBoundingClientRect().width;
@@ -104,12 +108,12 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
   }
 
   enableResizeEvents() {
-    this.resizeDetector = observeResize(this.tabsWrapperRef, this.collapse);
+    this.resizeDetector = observeResize(this.tabsWrapperRef!, this.collapse);
     window.addEventListener('mousedown', this.hideSubmenu);
   }
 
   disableResizeEvents() {
-    this.resizeDetector.remove();
+    this.resizeDetector!.remove();
     window.removeEventListener('mousedown', this.hideSubmenu);
   }
 
@@ -119,13 +123,13 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
     const { selected, tabs } = this.props;
     const tabsWrapperRef = this.tabsWrapperRef;
     const tabsRef = this.tabsRef;
-    const tabButtons = this.tabsRef.children;
+    const tabButtons = this.tabsRef!.children;
     const visibleTabs = this.state.visibleTabs;
     const hiddenTabs = this.state.hiddenTabs;
-    let tabsWrapperRight = tabsWrapperRef.getBoundingClientRect().right;
+    let tabsWrapperRight = tabsWrapperRef!.getBoundingClientRect().right;
     if (!tabsWrapperRight) return; // tabs are hidden
 
-    const tabsRefRight = tabsRef.getBoundingClientRect().right;
+    const tabsRefRight = tabsRef!.getBoundingClientRect().right;
     let i = visibleTabs.length - 1;
     let hiddenTab;
 
@@ -133,16 +137,16 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
       if (
         this.props.position === 'right' &&
         hiddenTabs.length > 0 &&
-        tabsRef.getBoundingClientRect().width + this.hiddenTabsWidth[0] <
-          tabsWrapperRef.getBoundingClientRect().width
+        tabsRef!.getBoundingClientRect().width + this.hiddenTabsWidth[0] <
+          tabsWrapperRef!.getBoundingClientRect().width
       ) {
         while (
           i < tabs.length - 1 &&
-          tabsRef.getBoundingClientRect().width + this.hiddenTabsWidth[0] <
-            tabsWrapperRef.getBoundingClientRect().width
+          tabsRef!.getBoundingClientRect().width + this.hiddenTabsWidth[0] <
+            tabsWrapperRef!.getBoundingClientRect().width
         ) {
           hiddenTab = hiddenTabs.shift();
-          visibleTabs.splice(Number(hiddenTab.key), 0, hiddenTab);
+          visibleTabs.splice(Number(hiddenTab!.key), 0, hiddenTab!);
           i++;
         }
       } else {
@@ -152,7 +156,7 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
           tabButtons[i].getBoundingClientRect().right >=
             tabsWrapperRight - this.iconWidth
         ) {
-          if (tabButtons[i].value !== selected) {
+          if ((tabButtons[i] as HTMLButtonElement).value !== selected) {
             hiddenTabs.unshift(...visibleTabs.splice(i, 1));
             this.hiddenTabsWidth.unshift(
               tabButtons[i].getBoundingClientRect().width
@@ -171,7 +175,7 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
           tabsWrapperRight - this.iconWidth
       ) {
         hiddenTab = hiddenTabs.shift();
-        visibleTabs.splice(Number(hiddenTab.key), 0, hiddenTab);
+        visibleTabs.splice(Number(hiddenTab!.key), 0, hiddenTab!);
         this.hiddenTabsWidth.shift();
         i++;
       }
@@ -183,15 +187,15 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
     this.setState({ subMenuOpened: false, contextMenu: undefined });
   };
 
-  getTabsWrapperRef = (node) => {
+  getTabsWrapperRef: React.RefCallback<HTMLDivElement> = (node) => {
     this.tabsWrapperRef = node;
   };
 
-  getTabsRef = (node) => {
+  getTabsRef: React.RefCallback<HTMLDivElement> = (node) => {
     this.tabsRef = node;
   };
 
-  expandMenu = (e) => {
+  expandMenu: React.MouseEventHandler = (e) => {
     const rect = e.currentTarget.children[0].getBoundingClientRect();
     this.setState({
       contextMenu: {
@@ -231,14 +235,14 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
       </TabsWrapper>
     );
   }
-}
 
-TabsHeader.propTypes = {
-  tabs: PropTypes.array.isRequired,
-  items: PropTypes.array.isRequired,
-  main: PropTypes.bool,
-  onClick: PropTypes.func,
-  position: PropTypes.string,
-  collapsible: PropTypes.bool,
-  selected: PropTypes.string,
-};
+  static propTypes = {
+    tabs: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired,
+    main: PropTypes.bool,
+    onClick: PropTypes.func,
+    position: PropTypes.string,
+    collapsible: PropTypes.bool,
+    selected: PropTypes.string,
+  };
+}

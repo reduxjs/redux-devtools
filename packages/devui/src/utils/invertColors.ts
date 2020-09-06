@@ -1,4 +1,6 @@
-function invertColors(theme) {
+import { Base16Theme } from 'base16';
+
+function invertColors(theme: Base16Theme) {
   return {
     ...theme,
     base00: theme.base07,
