@@ -7,7 +7,7 @@ describe('Container', function () {
   it('renders correctly', () => {
     const wrapper = render(
       <Container
-        themeData={{ theme: 'default', scheme: 'default', invert: false }}
+        themeData={{ theme: 'default', scheme: 'default', light: false }}
       >
         Text
       </Container>

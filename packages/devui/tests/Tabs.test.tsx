@@ -6,20 +6,39 @@ import { tabs, simple10Tabs } from '../src/Tabs/data';
 
 describe('Tabs', function () {
   it('renders correctly', () => {
-    const wrapper = render(<Tabs tabs={tabs} onClick={() => {}} />);
+    const wrapper = render(
+      <Tabs
+        tabs={tabs}
+        onClick={() => {
+          // noop
+        }}
+      />
+    );
     expect(renderToJson(wrapper)).toMatchSnapshot();
   });
 
   it('renders with props', () => {
     const wrapper = render(
-      <Tabs tabs={tabs} onClick={() => {}} selected="Tab2" />
+      <Tabs
+        tabs={tabs}
+        onClick={() => {
+          // noop
+        }}
+        selected="Tab2"
+      />
     );
     expect(renderToJson(wrapper)).toMatchSnapshot();
   });
 
   it('renders tabs without inner components', () => {
     const wrapper = render(
-      <Tabs tabs={simple10Tabs} onClick={() => {}} selected="5" />
+      <Tabs
+        tabs={simple10Tabs}
+        onClick={() => {
+          // noop
+        }}
+        selected="5"
+      />
     );
     expect(renderToJson(wrapper)).toMatchSnapshot();
   });

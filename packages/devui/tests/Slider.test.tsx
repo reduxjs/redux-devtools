@@ -5,7 +5,13 @@ import { Slider } from '../src';
 
 describe('Slider', function () {
   it('renders correctly', () => {
-    const wrapper = render(<Slider />);
+    const wrapper = render(
+      <Slider
+        onChange={() => {
+          // noop
+        }}
+      />
+    );
     expect(renderToJson(wrapper)).toMatchSnapshot();
   });
 
@@ -16,9 +22,10 @@ describe('Slider', function () {
         min={1}
         max={10}
         value={5}
-        step={1}
         disabled
-        onChange={() => {}}
+        onChange={() => {
+          // noop
+        }}
       />
     );
     expect(renderToJson(wrapper)).toMatchSnapshot();
@@ -26,7 +33,7 @@ describe('Slider', function () {
 
   it('should handle the change event', () => {
     const onChange = jest.fn();
-    const wrapper = mount(<Slider value={1} autoFocus onChange={onChange} />);
+    const wrapper = mount(<Slider value={1} onChange={onChange} />);
 
     wrapper.find('input').simulate('change');
     expect(onChange).toBeCalled();

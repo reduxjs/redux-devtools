@@ -7,7 +7,14 @@ import { items } from '../src/ContextMenu/data';
 describe('ContextMenu', function () {
   it('renders correctly', () => {
     const wrapper = render(
-      <ContextMenu items={items} onClick={() => {}} x={100} y={100} />
+      <ContextMenu
+        items={items}
+        onClick={() => {
+          // noop
+        }}
+        x={100}
+        y={100}
+      />
     );
     expect(renderToJson(wrapper)).toMatchSnapshot();
   });
