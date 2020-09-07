@@ -11,7 +11,12 @@ describe('Notification', function () {
 
   it('renders with props', () => {
     const wrapper = render(
-      <Notification type="error" onClose={() => {}}>
+      <Notification
+        type="error"
+        onClose={() => {
+          // noop
+        }}
+      >
         Message
       </Notification>
     );

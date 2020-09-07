@@ -10,7 +10,9 @@ describe('SegmentedControl', function () {
         values={['Button1', 'Button2', 'Button3']}
         selected="Button1"
         disabled={false}
-        onClick={() => {}}
+        onClick={() => {
+          // noop
+        }}
       />
     );
     expect(renderToJson(wrapper)).toMatchSnapshot();

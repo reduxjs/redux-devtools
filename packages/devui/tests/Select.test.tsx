@@ -6,7 +6,14 @@ import { options } from '../src/Select/options';
 
 describe('Select', function () {
   it('renders correctly', () => {
-    const wrapper = render(<Select options={options} onChange={() => {}} />);
+    const wrapper = render(
+      <Select
+        options={options}
+        onChange={() => {
+          // noop
+        }}
+      />
+    );
     expect(renderToJson(wrapper)).toMatchSnapshot();
   });
 
@@ -14,7 +21,9 @@ describe('Select', function () {
     const wrapper = render(
       <Select
         options={options}
-        onChange={() => {}}
+        onChange={() => {
+          // noop
+        }}
         value="one"
         menuMaxHeight={20}
         clearable
