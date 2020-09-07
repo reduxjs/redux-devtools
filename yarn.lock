@@ -3388,7 +3388,14 @@
   resolved "https://registry.yarnpkg.com/@types/dragula/-/dragula-3.7.0.tgz#62178f21c3896ab9823a33d08ed844ab9af496af"
   integrity sha512-Scr3lQ7pDmwic+I4qrzDEIfPVGUhc/qo8S0VJJ9v5pzTyIIJzAXrnFajjsMSL8J84VERIkZUh7wH6wYEisY+TA==
 
-"@types/enzyme@^3.10.5":
+"@types/enzyme-adapter-react-16@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@types/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.0.6.tgz#8aca7ae2fd6c7137d869b6616e696d21bb8b0cec"
+  integrity sha512-VonDkZ15jzqDWL8mPFIQnnLtjwebuL9YnDkqeCDYnB4IVgwUm0mwKkqhrxLL6mb05xm7qqa3IE95m8CZE9imCg==
+  dependencies:
+    "@types/enzyme" "*"
+
+"@types/enzyme@*", "@types/enzyme@^3.10.5":
   version "3.10.5"
   resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.5.tgz#fe7eeba3550369eed20e7fb565bfb74eec44f1f0"
   integrity sha512-R+phe509UuUYy9Tk0YlSbipRpfVtIzb/9BHn5pTEtjJTF5LXvUjrIQcZvNyANNEyFrd2YGs196PniNT1fgvOQA==
