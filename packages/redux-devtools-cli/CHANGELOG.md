@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package redux-devtools-cli
 
-
-
-
-
 # [1.0.0-3](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-cli@1.0.0-2...redux-devtools-cli@1.0.0-3) (2020-08-14)
 
 ### Bug Fixes

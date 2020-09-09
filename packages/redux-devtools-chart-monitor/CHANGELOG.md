@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package redux-devtools-chart-monitor
 
-
-
-
-
 ## 1.7.1 (2020-08-14)
 
 **Note:** Version bump only for package redux-devtools-chart-monitor
