@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package redux-devtools-trace-monitor
 
-
-
-
-
 ## 0.1.2 (2020-08-14)
 
 ### Bug Fixes

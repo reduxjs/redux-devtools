@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package d3-state-visualizer-tree-example
 
-
-
-
-
 ## 0.0.1 (2020-08-14)
 
 **Note:** Version bump only for package d3-state-visualizer-tree-example

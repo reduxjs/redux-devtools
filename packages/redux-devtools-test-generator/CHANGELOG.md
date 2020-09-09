@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package redux-devtools-test-generator
 
-
-
-
-
 ## [0.6.1](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-test-generator@0.6.0...redux-devtools-test-generator@0.6.1) (2020-08-14)
 
 **Note:** Version bump only for package redux-devtools-test-generator

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider renders correctly 1`] = `
+<div
+  class="sc-AxheI ikoHwk"
+>
+  <input
+    max="100"
+    min="0"
+    type="range"
+    value="0"
+  />
+</div>
+`;
+
+exports[`Slider renders with props 1`] = `
+<div
+  class="sc-AxheI bySZMR"
+  disabled=""
+>
+  <label>
+    Hi 
+  </label>
+  <input
+    disabled=""
+    max="10"
+    min="1"
+    type="range"
+    value="5"
+  />
+</div>
+`;
