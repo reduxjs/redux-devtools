@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CodeMirror from 'codemirror';
+import { Base16Theme } from 'base16';
 import { defaultStyle, themedStyle } from './styles';
 import { Theme } from '../themes/default';
 
@@ -19,7 +20,7 @@ export interface EditorProps {
   lineNumbers: boolean;
   lineWrapping: boolean;
   readOnly: boolean;
-  theme?: Theme;
+  theme?: Base16Theme;
   foldGutter: boolean;
   autofocus: boolean;
   onChange: (value: string, change: CodeMirror.EditorChangeLinkedList) => void;

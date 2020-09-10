@@ -1,10 +1,10 @@
 import React, { PureComponent, Component } from 'react';
 import PropTypes from 'prop-types';
+import { Base16Theme } from 'base16';
 import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
 import Button from '../Button';
 import Form from '../Form';
-import { Theme } from '../themes/default';
 import { Props as FormProps } from '../Form/Form';
 
 const DialogWrapper = createStyledComponent(styles);
@@ -23,7 +23,7 @@ export interface DialogProps {
     e: React.MouseEvent<HTMLButtonElement | HTMLDivElement> | false
   ) => void;
   onSubmit: () => void;
-  theme?: Theme;
+  theme?: Base16Theme;
 }
 
 type Rest<P> = Omit<

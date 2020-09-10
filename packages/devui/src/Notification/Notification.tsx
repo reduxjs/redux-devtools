@@ -4,9 +4,9 @@ import { MdClose } from 'react-icons/md';
 import { MdWarning } from 'react-icons/md';
 import { MdError } from 'react-icons/md';
 import { MdCheckCircle } from 'react-icons/md';
+import { Base16Theme } from 'base16';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
-import { Theme } from '../themes/default';
 
 const NotificationWrapper = createStyledComponent(styles);
 
@@ -16,7 +16,7 @@ export interface NotificationProps {
   children?: React.ReactNode;
   type: Type;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
-  theme?: Theme;
+  theme?: Base16Theme;
 }
 
 export default class Notification extends Component<NotificationProps> {
