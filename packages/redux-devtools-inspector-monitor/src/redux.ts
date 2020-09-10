@@ -1,7 +1,8 @@
 import { Action } from 'redux';
 import { DevtoolsInspectorProps } from './DevtoolsInspector';
 
-const UPDATE_MONITOR_STATE = '@@redux-devtools-inspector/UPDATE_MONITOR_STATE';
+const UPDATE_MONITOR_STATE =
+  '@@redux-devtools-inspector-monitor/UPDATE_MONITOR_STATE';
 
 interface UpdateMonitorStateAction {
   type: typeof UPDATE_MONITOR_STATE;

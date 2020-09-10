@@ -22,7 +22,7 @@ For example, you can use it together with [`LogMonitor`](https://github.com/redu
 import React from 'react';
 import { createDevTools } from 'redux-devtools';
 import LogMonitor from 'redux-devtools-log-monitor';
-import SliderMonitor from 'redux-slider-monitor';
+import SliderMonitor from 'redux-devtools-slider-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
 
 export default createDevTools(
