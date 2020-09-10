@@ -1,38 +1,49 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEventHandler } from 'react';
 import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 import Footer from './Footer';
-import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../constants/TodoFilters';
+import {
+  SHOW_ALL,
+  SHOW_MARKED,
+  SHOW_UNMARKED,
+  TodoFilter,
+} from '../constants/TodoFilters';
+import { Todo } from '../reducers/todos';
+import { TodoActions } from '../actions/TodoActions';
 
 const TODO_FILTERS = {
   [SHOW_ALL]: () => true,
-  [SHOW_UNMARKED]: (todo) => !todo.marked,
-  [SHOW_MARKED]: (todo) => todo.marked,
+  [SHOW_UNMARKED]: (todo: Todo) => !todo.marked,
+  [SHOW_MARKED]: (todo: Todo) => todo.marked,
 };
 
-export default class MainSection extends Component {
+interface State {
+  filter: TodoFilter;
+}
+
+interface Props {
+  todos: Todo[];
+  actions: TodoActions;
+}
+
+export default class MainSection extends Component<Props, State> {
   static propTypes = {
     todos: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,
   };
 
-  constructor(props, context) {
-    super(props, context);
-    this.handleClearMarked = this.handleClearMarked.bind(this);
-    this.handleShow = this.handleShow.bind(this);
-    this.state = { filter: SHOW_ALL };
-  }
+  state: State = { filter: SHOW_ALL };
 
-  handleClearMarked() {
+  handleClearMarked: MouseEventHandler<HTMLButtonElement> = () => {
     const atLeastOneMarked = this.props.todos.some((todo) => todo.marked);
     if (atLeastOneMarked) {
       this.props.actions.clearMarked();
     }
-  }
+  };
 
-  handleShow(filter) {
+  handleShow = (filter: TodoFilter) => {
     this.setState({ filter });
-  }
+  };
 
   render() {
     const { todos, actions } = this.props;
@@ -57,7 +68,7 @@ export default class MainSection extends Component {
     );
   }
 
-  renderToggleAll(markedCount) {
+  renderToggleAll(markedCount: number) {
     const { todos, actions } = this.props;
     if (todos.length > 0) {
       return (
@@ -65,6 +76,7 @@ export default class MainSection extends Component {
           className="toggle-all"
           type="checkbox"
           checked={markedCount === todos.length}
+          // eslint-disable-next-line @typescript-eslint/unbound-method
           onChange={actions.markAll}
         />
       );
@@ -72,7 +84,7 @@ export default class MainSection extends Component {
     return null;
   }
 
-  renderFooter(markedCount) {
+  renderFooter(markedCount: number) {
     const { todos } = this.props;
     const { filter } = this.state;
     const unmarkedCount = todos.length - markedCount;

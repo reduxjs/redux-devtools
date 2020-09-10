@@ -1,15 +1,8 @@
-const path = require('path');
-const webpack = require('webpack');
+import * as path from 'path';
+import * as webpack from 'webpack';
 
 module.exports = {
-  devtool: 'eval-source-map',
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    host: 'localhost',
-    port: process.env.PORT || 3000,
-    historyApiFallback: true,
-    hot: true,
-  },
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
@@ -19,14 +12,13 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)x?$/,
         use: ['babel-loader'],
         exclude: /node_modules/,
-        include: [__dirname, path.join(__dirname, '../../src')],
+        include: __dirname,
       },
       {
         test: /\.css?$/,
@@ -42,4 +34,16 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    host: 'localhost',
+    port: process.env.PORT || 3000,
+    historyApiFallback: true,
+    hot: true,
+  },
+  devtool: 'eval-source-map',
 };

@@ -6,8 +6,15 @@ import {
   MARK_ALL,
   CLEAR_MARKED,
 } from '../constants/ActionTypes';
+import { TodoAction } from '../actions/TodoActions';
 
-const initialState = [
+export interface Todo {
+  text: string;
+  marked: boolean;
+  id: number;
+}
+
+const initialState: Todo[] = [
   {
     text: 'Use Redux',
     marked: false,
@@ -15,7 +22,7 @@ const initialState = [
   },
 ];
 
-export default function todos(state = initialState, action) {
+export default function todos(state = initialState, action: TodoAction) {
   switch (action.type) {
     case ADD_TODO:
       return [
@@ -48,7 +55,7 @@ export default function todos(state = initialState, action) {
       }));
     }
     case CLEAR_MARKED:
-      return state.filter((todo) => todo.marked === false);
+      return state.filter((todo) => !todo.marked);
 
     default:
       return state;

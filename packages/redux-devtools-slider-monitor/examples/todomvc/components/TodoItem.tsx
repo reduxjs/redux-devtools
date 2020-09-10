@@ -2,8 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import TodoTextInput from './TodoTextInput';
+import { Todo } from '../reducers/todos';
 
-export default class TodoItem extends Component {
+interface State {
+  editing: boolean;
+}
+
+interface Props {
+  todo: Todo;
+  addTodo: (text: string) => void;
+  deleteTodo: (id: number) => void;
+  editTodo: (id: number, text: string) => void;
+  markTodo: (id: number) => void;
+  markAll: () => void;
+  clearMarked: () => void;
+}
+
+export default class TodoItem extends Component<Props, State> {
   static propTypes = {
     todo: PropTypes.object.isRequired,
     editTodo: PropTypes.func.isRequired,
@@ -11,18 +26,15 @@ export default class TodoItem extends Component {
     markTodo: PropTypes.func.isRequired,
   };
 
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      editing: false,
-    };
-  }
+  state: State = {
+    editing: false,
+  };
 
   handleDoubleClick = () => {
     this.setState({ editing: true });
   };
 
-  handleSave = (id, text) => {
+  handleSave = (id: number, text: string) => {
     if (text.length === 0) {
       this.props.deleteTodo(id);
     } else {
