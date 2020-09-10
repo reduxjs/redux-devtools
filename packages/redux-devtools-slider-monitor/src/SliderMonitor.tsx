@@ -96,10 +96,8 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
   setUpTheme = (): Base16Theme => {
     let theme;
     if (typeof this.props.theme === 'string') {
-      if (
-        typeof themes[this.props.theme as keyof typeof themes] !== 'undefined'
-      ) {
-        theme = themes[this.props.theme as keyof typeof themes];
+      if (typeof themes[this.props.theme] !== 'undefined') {
+        theme = themes[this.props.theme];
       } else {
         theme = themes.nicinabox;
       }
