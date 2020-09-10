@@ -10,14 +10,14 @@ npm install --save-dev redux-devtools-test-generator
 
 If you use [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension), [Remote Redux DevTools](https://github.com/zalmoxisus/remote-redux-devtools) or [RemoteDev](https://github.com/zalmoxisus/remotedev), it's already there, and no additional actions required.
 
-With [`redux-devtools`](https://github.com/reduxjs/redux-devtools) and [`redux-devtools-inspector`](https://github.com/reduxjs/redux-devtools/packages/redux-devtools-inspector):
+With [`redux-devtools`](https://github.com/reduxjs/redux-devtools) and [`redux-devtools-inspector-monitor`](https://github.com/reduxjs/redux-devtools/packages/redux-devtools-inspector-monitor):
 
 ##### `containers/DevTools.js`
 
 ```js
 import React from 'react';
 import { createDevTools } from 'redux-devtools';
-import Inspector from 'redux-devtools-inspector';
+import InspectorMonitor from 'redux-devtools-inspector-monitor';
 import TestGenerator from 'redux-devtools-test-generator';
 import mochaTemplate from 'redux-devtools-test-generator/lib/redux/mocha'; // If using default tests.
 

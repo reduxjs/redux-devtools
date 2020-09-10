@@ -1,4 +1,4 @@
-## Redux Slider Monitor
+## Redux DevTools Slider Monitor
 
 [![npm version](https://img.shields.io/npm/v/redux-slider-monitor.svg?style=flat-square)](https://www.npmjs.com/package/redux-slider-monitor)
 
@@ -48,12 +48,9 @@ Pass the `keyboardEnabled` prop to use these shortcuts
 You can do this:
 
 ```
-git clone https://github.com/calesce/redux-slider-monitor.git
-cd redux-slider-monitor
-npm install
-
-cd examples/todomvc
-npm install
+git clone https://github.com/reduxjs/redux-devtools.git
+cd packages/redux-devtools-slider-monitor/examples/todomvc
+yarn install
 npm start
 open http://localhost:3000
 ```

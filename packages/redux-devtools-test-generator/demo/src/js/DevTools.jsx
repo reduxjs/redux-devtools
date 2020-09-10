@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createDevTools } from 'redux-devtools';
-import DevtoolsInspector from 'redux-devtools-inspector';
+import InspectorMonitor from 'redux-devtools-inspector-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
 import getOptions from './getOptions';
 import TestGenerator from '../../../src';
@@ -14,7 +14,7 @@ export const getDevTools = (location) =>
       changePositionKey="ctrl-q"
       changeMonitorKey="ctrl-m"
     >
-      <DevtoolsInspector
+      <InspectorMonitor
         theme={getOptions(location).theme}
         shouldPersistState
         invertTheme={!getOptions(location).dark}
