@@ -59,7 +59,10 @@ export default function createStyledComponent<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/ban-types
   O extends object = {}
->(styles: Styles<C, O>, component?: C): StyledComponent<C, Theme, O> {
+>(
+  styles: Styles<C, O>,
+  component?: C
+): StyledComponent<C, Theme | Base16Theme, O> {
   return (styled as ThemedStyledInterface<Theme>)((component || 'div') as C)`
     ${(props: ThemedStyledProps<StyledComponentPropsWithRef<C> & O, Theme>) =>
       isThemeFromProvider(props.theme)
@@ -72,7 +75,7 @@ export default function createStyledComponent<
             ...props,
             theme: getDefaultTheme(props.theme),
           })}
-  `;
+  ` as StyledComponent<C, Theme | Base16Theme, O>;
 }
 
 // TODO: memoize it?

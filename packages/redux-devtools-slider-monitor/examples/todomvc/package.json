@@ -13,19 +13,17 @@
     "url": "https://github.com/calesce/redux-slider-monitor.git"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.11.0",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-react": "^7.10.4",
-    "babel-loader": "^8.1.0",
-    "raw-loader": "^4.0.1",
-    "webpack": "^4.44.1",
-    "webpack-dev-server": "^3.11.0"
-  },
   "dependencies": {
+    "classnames": "^2.2.6",
     "react-hot-loader": "^4.12.21",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
-    "redux-devtools-slider-monitor": "^2.0.0-5"
+    "redux": "^4.0.5",
+    "redux-devtools": "^3.7.0",
+    "redux-devtools-dock-monitor": "^1.2.0",
+    "redux-devtools-log-monitor": "^2.1.0",
+    "redux-devtools-slider-monitor": "^2.0.0-5",
+    "todomvc-app-css": "^2.3.0"
   }
 }

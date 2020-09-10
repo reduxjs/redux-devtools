@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Base16Theme } from 'base16';
 import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
 import { containerStyle } from './styles/common';
-import { Theme } from '../themes/default';
 
 const SliderWrapper = createStyledComponent(styles);
 const ContainerWithValue = createStyledComponent(containerStyle);
@@ -17,7 +17,7 @@ export interface SliderProps {
   withValue?: boolean;
   disabled?: boolean;
   onChange: (value: number) => void;
-  theme?: Theme;
+  theme?: Base16Theme;
 }
 
 export default class Slider extends Component<SliderProps> {

@@ -1,9 +1,9 @@
 import React, { Component, ReactNode } from 'react';
 import PropTypes from 'prop-types';
+import { Base16Theme } from 'base16';
 import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
 import { commonStyle, tooltipStyle } from './styles/common';
-import { Theme } from '../themes/default';
 
 const ButtonWrapper = createStyledComponent(styles, 'button');
 const TooltipWrapper = createStyledComponent(tooltipStyle);
@@ -41,7 +41,7 @@ export interface ButtonProps {
   primary?: boolean;
   size?: Size;
   mark?: Mark | false;
-  theme?: Theme;
+  theme?: Base16Theme;
 }
 
 export default class Button extends Component<ButtonProps> {

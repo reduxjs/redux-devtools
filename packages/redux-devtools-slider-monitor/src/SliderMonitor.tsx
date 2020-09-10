@@ -1,7 +1,9 @@
 import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Action, Dispatch } from 'redux';
 import * as themes from 'redux-devtools-themes';
-import { ActionCreators } from 'redux-devtools';
+import { Base16Theme } from 'redux-devtools-themes';
+import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
 import { Toolbar, Divider } from 'devui/lib/Toolbar';
 import Slider from 'devui/lib/Slider';
 import Button from 'devui/lib/Button';
@@ -10,9 +12,44 @@ import SegmentedControl from 'devui/lib/SegmentedControl';
 import reducer from './reducers';
 import SliderButton from './SliderButton';
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, jumpToState } = ActionCreators;
 
-export default class SliderMonitor extends (PureComponent || Component) {
+interface ExternalProps<S, A extends Action<unknown>> {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  dispatch: Dispatch<LiftedAction<S, A, {}>>;
+  preserveScrollTop: boolean;
+  select: (state: S) => unknown;
+  theme: keyof typeof themes | Base16Theme;
+  keyboardEnabled: boolean;
+  hideResetButton?: boolean;
+}
+
+interface DefaultProps {
+  select: (state: unknown) => unknown;
+  theme: keyof typeof themes;
+  preserveScrollTop: boolean;
+  keyboardEnabled: boolean;
+}
+
+interface SliderMonitorProps<S, A extends Action<unknown>>  // eslint-disable-next-line @typescript-eslint/ban-types
+  extends LiftedState<S, A, {}> {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  dispatch: Dispatch<LiftedAction<S, A, {}>>;
+  preserveScrollTop: boolean;
+  select: (state: S) => unknown;
+  theme: keyof typeof themes | Base16Theme;
+  keyboardEnabled: boolean;
+  hideResetButton?: boolean;
+}
+
+interface State {
+  timer: number | undefined;
+  replaySpeed: string;
+}
+
+class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
+  Component)<SliderMonitorProps<S, A>, State> {
   static update = reducer;
 
   static propTypes = {
@@ -25,7 +62,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
       initialScrollTop: PropTypes.number,
     }),
     preserveScrollTop: PropTypes.bool,
-    stagedActions: PropTypes.array,
+    // stagedActions: PropTypes.array,
     select: PropTypes.func.isRequired,
     hideResetButton: PropTypes.bool,
     theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -33,13 +70,13 @@ export default class SliderMonitor extends (PureComponent || Component) {
   };
 
   static defaultProps = {
-    select: (state) => state,
+    select: (state: unknown) => state,
     theme: 'nicinabox',
     preserveScrollTop: true,
     keyboardEnabled: true,
   };
 
-  state = {
+  state: State = {
     timer: undefined,
     replaySpeed: '1x',
   };
@@ -56,7 +93,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     }
   }
 
-  setUpTheme = () => {
+  setUpTheme = (): Base16Theme => {
     let theme;
     if (typeof this.props.theme === 'string') {
       if (typeof themes[this.props.theme] !== 'undefined') {
@@ -76,7 +113,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     this.props.dispatch(reset());
   };
 
-  handleKeyPress = (event) => {
+  handleKeyPress = (event: KeyboardEvent) => {
     if (!this.props.keyboardEnabled) {
       return null;
     }
@@ -105,7 +142,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     return null;
   };
 
-  handleSliderChange = (value) => {
+  handleSliderChange = (value: number) => {
     if (this.state.timer) {
       this.pauseReplay();
     }
@@ -134,7 +171,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     }
 
     let counter = stateIndex;
-    const timer = setInterval(() => {
+    const timer = window.setInterval(() => {
       if (counter + 1 <= computedStates.length - 1) {
         dispatch(jumpToState(counter + 1));
       }
@@ -165,7 +202,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     }
   };
 
-  loop = (index) => {
+  loop = (index: number) => {
     let currentTimestamp = Date.now();
     let timestampDiff = this.getLatestTimestampDiff(index);
 
@@ -204,16 +241,16 @@ export default class SliderMonitor extends (PureComponent || Component) {
     }
   };
 
-  getLatestTimestampDiff = (index) =>
+  getLatestTimestampDiff = (index: number) =>
     this.getTimestampOfStateIndex(index + 1) -
     this.getTimestampOfStateIndex(index);
 
-  getTimestampOfStateIndex = (stateIndex) => {
+  getTimestampOfStateIndex = (stateIndex: number) => {
     const id = this.props.stagedActionIds[stateIndex];
     return this.props.actionsById[id].timestamp;
   };
 
-  pauseReplay = (cb) => {
+  pauseReplay = (cb?: () => void) => {
     if (this.state.timer) {
       cancelAnimationFrame(this.state.timer);
       clearInterval(this.state.timer);
@@ -246,7 +283,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     }
   };
 
-  changeReplaySpeed = (replaySpeed) => {
+  changeReplaySpeed = (replaySpeed: string) => {
     this.setState({ replaySpeed });
 
     if (this.state.timer) {
@@ -276,7 +313,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
     let actionType = actionsById[actionId].action.type;
     if (actionType === undefined) actionType = '<UNDEFINED>';
     else if (actionType === null) actionType = '<NULL>';
-    else actionType = actionType.toString() || '<EMPTY>';
+    else actionType = (actionType as string).toString() || '<EMPTY>';
 
     const onPlayClick =
       replaySpeed === 'Live' ? this.startRealtimeReplay : this.startReplay;
@@ -295,7 +332,7 @@ export default class SliderMonitor extends (PureComponent || Component) {
       <Toolbar noBorder compact fullHeight theme={theme}>
         {playPause}
         <Slider
-          label={actionType}
+          label={actionType as string}
           sublabel={`(${actionId})`}
           min={0}
           max={max}
@@ -332,3 +369,16 @@ export default class SliderMonitor extends (PureComponent || Component) {
     );
   }
 }
+
+export default (SliderMonitor as unknown) as React.ComponentType<
+  ExternalProps<unknown, Action<unknown>>
+> & {
+  update(
+    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    state: {} | undefined,
+    action: Action<unknown>
+    // eslint-disable-next-line @typescript-eslint/ban-types
+  ): {};
+  defaultProps: DefaultProps;
+};

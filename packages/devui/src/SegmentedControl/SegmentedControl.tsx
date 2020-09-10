@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Base16Theme } from 'base16';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
-import { Theme } from '../themes/default';
 
 const SegmentedWrapper = createStyledComponent(styles);
 
@@ -11,7 +11,7 @@ export interface SegmentedControlProps {
   selected?: string;
   onClick: (value: string) => void;
   disabled?: boolean;
-  theme?: Theme;
+  theme?: Base16Theme;
 }
 
 export default class SegmentedControl extends Component<SegmentedControlProps> {
