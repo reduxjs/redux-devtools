@@ -8,16 +8,20 @@ import {
   Notification,
   Dialog,
 } from 'devui';
-import { formSchema, uiSchema, defaultFormData } from './templateForm';
 import { MdAdd } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md';
+import { Action } from 'redux';
+import { TabComponentProps } from 'redux-devtools-inspector-monitor';
+import { formSchema, uiSchema, defaultFormData } from './templateForm';
 import TestGenerator from './TestGenerator';
 import jestTemplate from './redux/jest/template';
 import mochaTemplate from './redux/mocha/template';
 import tapeTemplate from './redux/tape/template';
 import avaTemplate from './redux/ava/template';
+import { Template } from './types';
+import { DevtoolsInspectorState } from 'redux-devtools-inspector-monitor/lib/redux';
 
-export const getDefaultTemplates = (/* lib */) =>
+export const getDefaultTemplates = (/* lib */): Template[] =>
   /*
    if (lib === 'redux') {
    return [mochaTemplate, tapeTemplate, avaTemplate];
@@ -26,15 +30,27 @@ export const getDefaultTemplates = (/* lib */) =>
    */
   [jestTemplate, mochaTemplate, tapeTemplate, avaTemplate];
 
-export default class TestTab extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { dialogStatus: null };
-  }
+interface TestGeneratorMonitorState {
+  hideTip?: boolean;
+  selected?: number;
+  templates: Template[];
+}
 
-  getPersistedState = () => this.props.monitorState.testGenerator || {};
+interface State {
+  dialogStatus: 'Add' | 'Edit' | null;
+}
 
-  handleSelectTemplate = (selectedTemplate) => {
+export default class TestTab<S, A extends Action<unknown>> extends Component<
+  TabComponentProps<S, A>,
+  State
+> {
+  state: State = { dialogStatus: null };
+
+  getPersistedState = (): TestGeneratorMonitorState =>
+    (this.props.monitorState as { testGenerator?: TestGeneratorMonitorState })
+      .testGenerator || {};
+
+  handleSelectTemplate = (selectedTemplate: Template) => {
     const { templates = getDefaultTemplates() } = this.getPersistedState();
     this.updateState({ selected: templates.indexOf(selectedTemplate) });
   };
@@ -93,10 +109,12 @@ export default class TestTab extends Component {
   updateState = (newState) => {
     this.props.updateMonitorState({
       testGenerator: {
-        ...this.props.monitorState.testGenerator,
+        ...(this.props.monitorState as {
+          testGenerator?: TestGeneratorMonitorState;
+        }).testGenerator,
         ...newState,
       },
-    });
+    } as Partial<DevtoolsInspectorState>);
   };
 
   render() {
@@ -164,20 +182,20 @@ export default class TestTab extends Component {
       </Container>
     );
   }
-}
 
-TestTab.propTypes = {
-  monitorState: PropTypes.shape({
-    testGenerator: PropTypes.shape({
-      templates: PropTypes.array,
-      selected: PropTypes.number,
-      hideTip: PropTypes.bool,
-    }),
-  }).isRequired,
-  /*
-  options: PropTypes.shape({
-    lib: PropTypes.string
-  }).isRequired,
-  */
-  updateMonitorState: PropTypes.func.isRequired,
-};
+  static propTypes = {
+    monitorState: PropTypes.shape({
+      testGenerator: PropTypes.shape({
+        templates: PropTypes.array,
+        selected: PropTypes.number,
+        hideTip: PropTypes.bool,
+      }),
+    }).isRequired,
+    /*
+    options: PropTypes.shape({
+      lib: PropTypes.string
+    }).isRequired,
+    */
+    updateMonitorState: PropTypes.func.isRequired,
+  };
+}
