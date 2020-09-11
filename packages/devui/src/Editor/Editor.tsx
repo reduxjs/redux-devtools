@@ -23,7 +23,7 @@ export interface EditorProps {
   theme?: Base16Theme;
   foldGutter: boolean;
   autofocus: boolean;
-  onChange: (value: string, change: CodeMirror.EditorChangeLinkedList) => void;
+  onChange?: (value: string, change: CodeMirror.EditorChangeLinkedList) => void;
 }
 
 /**
@@ -47,7 +47,7 @@ export default class Editor extends Component<EditorProps> {
 
     if (this.props.onChange) {
       this.cm.on('change', (doc, change) => {
-        this.props.onChange(doc.getValue(), change);
+        this.props.onChange!(doc.getValue(), change);
       });
     }
   }

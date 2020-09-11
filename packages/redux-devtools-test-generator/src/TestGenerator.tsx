@@ -1,4 +1,4 @@
-import React, { PureComponent, Component } from 'react';
+import React, { PureComponent, Component, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { stringify } from 'javascript-stringify';
 import objectPath from 'object-path';
@@ -6,6 +6,8 @@ import jsan from 'jsan';
 import diff from 'simple-diff';
 import es6template from 'es6template';
 import { Editor } from 'devui';
+import { TabComponentProps } from 'redux-devtools-inspector-monitor';
+import { Action } from 'redux';
 
 export const fromPath = (path) =>
   path.map((a) => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');
@@ -15,7 +17,7 @@ function getState(s, defaultValue) {
   return JSON.parse(jsan.stringify(s.state));
 }
 
-export function compare(s1, s2, cb, defaultValue) {
+export function compare<S>(s1: S, s2: S, cb, defaultValue) {
   const paths = []; // Already processed
   function generate({ type, newPath, newValue, newIndex }) {
     let curState;
@@ -45,17 +47,34 @@ export function compare(s1, s2, cb, defaultValue) {
   ).forEach(generate);
 }
 
-export default class TestGenerator extends (PureComponent || Component) {
-  getMethod(action) {
-    let type = action.type;
+interface Props<S, A extends Action<unknown>>
+  extends Omit<TabComponentProps<S, A>, 'monitorState' | 'updateMonitorState'> {
+  name?: string;
+  isVanilla?: boolean;
+  wrap?: unknown;
+  dispatcher?: unknown;
+  assertion?: unknown;
+  useCodemirror: boolean;
+  indentation?: number;
+  header?: ReactNode;
+}
+
+export default class TestGenerator<
+  S,
+  A extends Action<unknown>
+> extends (PureComponent || Component)<Props<S, A>> {
+  getMethod(action: A) {
+    let type: string = action.type as string;
     if (type[0] === '┗') type = type.substr(1).trim();
-    let args = action.arguments;
-    if (args) args = args.map((arg) => stringify(arg)).join(',');
-    else args = '';
+    const args = ((action as unknown) as { arguments: unknown[] }).arguments
+      ? ((action as unknown) as { arguments: unknown[] }).arguments
+          .map((arg) => stringify(arg))
+          .join(',')
+      : '';
     return `${type}(${args})`;
   }
 
-  getAction(action) {
+  getAction(action: A) {
     if (action.type === '@@INIT') return '{}';
     return stringify(action);
   }
@@ -76,7 +95,7 @@ export default class TestGenerator extends (PureComponent || Component) {
     if (typeof assertion === 'string')
       assertion = es6template.compile(assertion);
     if (typeof wrap === 'string') {
-      const ident = wrap.match(/\n.+\$\{assertions}/);
+      const ident = /\n.+\$\{assertions}/.exec(wrap);
       if (ident) indentation = ident[0].length - 13;
       wrap = es6template.compile(wrap);
     }
@@ -94,19 +113,25 @@ export default class TestGenerator extends (PureComponent || Component) {
     else i = computedStates.length - 1;
     const startIdx = i > 0 ? i : 1;
 
-    const addAssertions = ({ path, curState }) => {
-      r += space + assertion({ path, curState }) + '\n';
+    const addAssertions = ({
+      path,
+      curState,
+    }: {
+      path: string;
+      curState: string | undefined;
+    }) => {
+      r += `${space}${assertion({ path, curState })}\n`;
     };
 
     while (actions[i]) {
       if (
         !isVanilla ||
         /* eslint-disable-next-line no-useless-escape */
-        /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type)
+        /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type as string)
       ) {
         if (isFirst) isFirst = false;
         else r += space;
-        if (!isVanilla || actions[i].action.type[0] !== '@') {
+        if (!isVanilla || (actions[i].action.type as string)[0] !== '@') {
           r +=
             dispatcher({
               action: !isVanilla
@@ -131,7 +156,7 @@ export default class TestGenerator extends (PureComponent || Component) {
         }
       }
       i++;
-      if (i > selectedActionId) break;
+      if (i > selectedActionId!) break;
     }
 
     r = r.trim();
@@ -143,7 +168,10 @@ export default class TestGenerator extends (PureComponent || Component) {
           actionName:
             (selectedActionId === null || selectedActionId > 0) &&
             actions[startIdx]
-              ? actions[startIdx].action.type.replace(/[^a-zA-Z0-9_-]+/, '')
+              ? (actions[startIdx].action.type as string).replace(
+                  /[^a-zA-Z0-9_-]+/,
+                  ''
+                )
               : 'should return the initial state',
           initialState: stringify(computedStates[startIdx - 1].state),
           assertions: r,
@@ -167,25 +195,25 @@ export default class TestGenerator extends (PureComponent || Component) {
 
     return <Editor value={code} />;
   }
+
+  static propTypes = {
+    name: PropTypes.string,
+    isVanilla: PropTypes.bool,
+    computedStates: PropTypes.array,
+    actions: PropTypes.object,
+    selectedActionId: PropTypes.number,
+    startActionId: PropTypes.number,
+    wrap: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    dispatcher: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    assertion: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    useCodemirror: PropTypes.bool,
+    indentation: PropTypes.number,
+    header: PropTypes.element,
+  };
+
+  static defaultProps = {
+    useCodemirror: true,
+    selectedActionId: null,
+    startActionId: null,
+  };
 }
-
-TestGenerator.propTypes = {
-  name: PropTypes.string,
-  isVanilla: PropTypes.bool,
-  computedStates: PropTypes.array,
-  actions: PropTypes.object,
-  selectedActionId: PropTypes.number,
-  startActionId: PropTypes.number,
-  wrap: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  dispatcher: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  assertion: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  useCodemirror: PropTypes.bool,
-  indentation: PropTypes.number,
-  header: PropTypes.element,
-};
-
-TestGenerator.defaultProps = {
-  useCodemirror: true,
-  selectedActionId: null,
-  startActionId: null,
-};

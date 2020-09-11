@@ -1,4 +1,3 @@
-import '@babel/polyfill';
 import 'devui/lib/presets';
 import React from 'react';
 import { render } from 'react-dom';

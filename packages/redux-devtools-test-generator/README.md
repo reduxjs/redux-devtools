@@ -29,7 +29,7 @@ const testComponent = (props) => (
 );
 
 export default createDevTools(
-  <Inspector
+  <InspectorMonitor
     tabs: defaultTabs => [...defaultTabs, { name: 'Test', component: testComponent }]
   />
 );
