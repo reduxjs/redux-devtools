@@ -1,11 +1,14 @@
+import { AssertionLocals, DispatcherLocals, WrapLocals } from '../../types';
+
 export const name = 'Ava template';
 
-export const dispatcher = ({ action, prevState }) =>
-  `state = reducers(${prevState}, ${action});`;
+export const dispatcher = ({ action, prevState }: DispatcherLocals) =>
+  `state = reducers(${prevState!}, ${action!});`;
 
-export const assertion = ({ curState }) => `t.deepEqual(state, ${curState});`;
+export const assertion = ({ curState }: AssertionLocals) =>
+  `t.deepEqual(state, ${curState!});`;
 
-export const wrap = ({ assertions }) =>
+export const wrap = ({ assertions }: WrapLocals) =>
   `import test from 'ava';
 import reducers from '../../reducers';
 

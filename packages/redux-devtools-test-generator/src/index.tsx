@@ -11,7 +11,10 @@ import {
 import { MdAdd } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md';
 import { Action } from 'redux';
-import { TabComponentProps } from 'redux-devtools-inspector-monitor';
+import {
+  DevtoolsInspectorState,
+  TabComponentProps,
+} from 'redux-devtools-inspector-monitor';
 import { formSchema, uiSchema, defaultFormData } from './templateForm';
 import TestGenerator from './TestGenerator';
 import jestTemplate from './redux/jest/template';
@@ -19,7 +22,6 @@ import mochaTemplate from './redux/mocha/template';
 import tapeTemplate from './redux/tape/template';
 import avaTemplate from './redux/ava/template';
 import { Template } from './types';
-import { DevtoolsInspectorState } from 'redux-devtools-inspector-monitor/lib/redux';
 
 export const getDefaultTemplates = (/* lib */): Template[] =>
   /*
@@ -33,7 +35,7 @@ export const getDefaultTemplates = (/* lib */): Template[] =>
 interface TestGeneratorMonitorState {
   hideTip?: boolean;
   selected?: number;
-  templates: Template[];
+  templates?: Template[];
 }
 
 interface State {
@@ -63,7 +65,7 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
     this.setState({ dialogStatus: null });
   };
 
-  handleSubmit = ({ formData: template }) => {
+  handleSubmit = ({ formData: template }: { formData: Template }) => {
     const {
       templates = getDefaultTemplates(),
       selected = 0,
@@ -106,7 +108,7 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
     this.setState({ dialogStatus: 'Edit' });
   };
 
-  updateState = (newState) => {
+  updateState = (newState: TestGeneratorMonitorState) => {
     this.props.updateMonitorState({
       testGenerator: {
         ...(this.props.monitorState as {
@@ -146,7 +148,7 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
         {!assertion ? (
           <Notification>No template for tests specified.</Notification>
         ) : (
-          <TestGenerator
+          <TestGenerator<S, A>
             isVanilla={false}
             assertion={assertion}
             dispatcher={dispatcher}
@@ -160,7 +162,7 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
           </Notification>
         )}
         {dialogStatus && (
-          <Dialog
+          <Dialog<Template>
             open
             title={`${dialogStatus} test template`}
             onDismiss={this.handleCloseDialog}

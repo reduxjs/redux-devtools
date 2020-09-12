@@ -1,16 +1,18 @@
+import { AssertionLocals, DispatcherLocals, WrapLocals } from '../../types';
+
 export const name = 'Mocha template';
 
-export const dispatcher = ({ action }) => `${action};`;
+export const dispatcher = ({ action }: DispatcherLocals) => `${action!};`;
 
-export const assertion = ({ path, curState }) =>
-  `expect(store${path}).toEqual(${curState});`;
+export const assertion = ({ path, curState }: AssertionLocals) =>
+  `expect(store${path}).toEqual(${curState!});`;
 
-export const wrap = ({ name, initialState, assertions }) =>
+export const wrap = ({ name, initialState, assertions }: WrapLocals) =>
   `import expect from 'expect';
-import ${name} from '../../stores/${name}';
+import ${name!} from '../../stores/${name!}';
 
-test('${name}', (t) => {
-  const store = new ${name}(${initialState});
+test('${name!}', (t) => {
+  const store = new ${name!}(${initialState!});
   ${assertions}
 });
 `;
