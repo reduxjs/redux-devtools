@@ -25,14 +25,7 @@ describe('Editor', function () {
 
     return range;
   };
-  const wrapper = mount(
-    <Editor
-      value="var a = 1;"
-      onChange={() => {
-        //noop
-      }}
-    />
-  );
+  const wrapper = mount(<Editor value="var a = 1;" />);
 
   it('renders correctly', () => {
     expect(mountToJson(wrapper)).toMatchSnapshot();

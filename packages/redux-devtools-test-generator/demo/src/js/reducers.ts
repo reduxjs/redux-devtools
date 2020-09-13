@@ -34,31 +34,6 @@ const IMMUTABLE_MAP = Immutable.Map({
   seq: Immutable.Seq([1, 2, 3, 4, 5, 6, 7, 8]),
 });
 
-type MapValue =
-  | Map<{ first: boolean } | string, number>
-  | WeakMap<{ first: boolean } | { second: number }, number>
-  | Set<{ first: boolean } | string>
-  | WeakSet<{ first: boolean } | { second: number }>;
-
-const NATIVE_MAP = new window.Map<string, MapValue>([
-  [
-    'map',
-    new window.Map<{ first: boolean } | string, number>([
-      [{ first: true }, 1],
-      ['second', 2],
-    ]),
-  ],
-  [
-    'weakMap',
-    new window.WeakMap<{ first: boolean } | { second: number }, number>([
-      [{ first: true }, 1],
-      [{ second: 1 }, 2],
-    ]),
-  ],
-  ['set', new window.Set([{ first: true }, 'second'])],
-  ['weakSet', new window.WeakSet([{ first: true }, { second: 1 }])],
-]);
-
 const HUGE_ARRAY = Array.from({ length: 5000 }).map((_, key) => ({
   str: `key ${key}`,
 }));
@@ -125,9 +100,6 @@ export interface AddHugeObjectAction {
 export interface AddRecursiveAction {
   type: 'ADD_RECURSIVE';
 }
-export interface AddNativeMapAction {
-  type: 'ADD_NATIVE_MAP';
-}
 export interface AddImmutableMapAction {
   type: 'ADD_IMMUTABLE_MAP';
 }
@@ -159,7 +131,6 @@ type DemoAppAction =
   | AddIteratorAction
   | AddHugeObjectAction
   | AddRecursiveAction
-  | AddNativeMapAction
   | AddImmutableMapAction
   | ChangeImmutableNestedAction
   | HugePayloadAction
@@ -182,7 +153,6 @@ export interface DemoAppState {
   nested: Nested;
   recursive: { obj?: unknown }[];
   immutables: Immutable.Map<string, unknown>[];
-  maps: Map<string, MapValue>[];
   immutableNested: Immutable.Map<unknown, unknown>;
   addFunction: { f: (a: number, b: number, c: number) => number } | null;
   addSymbol: { s: symbol; error: Error } | null;
@@ -238,12 +208,10 @@ const createRootReducer = (
             },
           }
         : state,
-    recursive: (state: { obj?: unknown }[] = [], action) =>
+    recursive: (state = [], action) =>
       action.type === 'ADD_RECURSIVE' ? [...state, { ...RECURSIVE }] : state,
-    immutables: (state: Immutable.Map<string, unknown>[] = [], action) =>
+    immutables: (state = [], action) =>
       action.type === 'ADD_IMMUTABLE_MAP' ? [...state, IMMUTABLE_MAP] : state,
-    maps: (state: Map<string, MapValue>[] = [], action) =>
-      action.type === 'ADD_NATIVE_MAP' ? [...state, NATIVE_MAP] : state,
     immutableNested: (state = IMMUTABLE_NESTED, action) =>
       action.type === 'CHANGE_IMMUTABLE_NESTED'
         ? state.updateIn(

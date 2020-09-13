@@ -12,11 +12,11 @@ const computedStates = [
   { state: [0, 2, 3, 4] },
 ];
 
-const test = (s1, s2) =>
+const test = (s1: { state: unknown } | undefined, s2: { state: unknown }) =>
   compare(s1, s2, ({ path, curState }) =>
-    expect(`expect(store${path}).toEqual(${curState});`).toBe(
-      assertion({ path, curState })
-    )
+    expect(
+      `expect(store${path}).toEqual(${curState as number | string});`
+    ).toBe(assertion({ path, curState }))
   );
 
 describe('Assertions', () => {

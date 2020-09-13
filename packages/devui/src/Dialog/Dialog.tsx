@@ -44,13 +44,13 @@ function isForm<P>(rest?: FormProps<P>): rest is FormProps<P> {
 }
 
 export default class Dialog<P> extends (PureComponent || Component)<
-  DialogProps | (DialogProps & FormProps<P>)
+  DialogProps | (Omit<DialogProps, 'onSubmit'> & FormProps<P>)
 > {
   submitButton?: HTMLInputElement | null;
 
   onSubmit = () => {
     if (this.submitButton) this.submitButton.click();
-    else this.props.onSubmit();
+    else (this.props.onSubmit as () => void)();
   };
 
   getFormButtonRef: React.RefCallback<HTMLInputElement> = (node) => {

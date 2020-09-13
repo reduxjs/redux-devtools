@@ -1,38 +1,54 @@
-import React, { PureComponent, Component } from 'react';
+import React, { PureComponent, Component, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { stringify } from 'javascript-stringify';
 import objectPath from 'object-path';
 import jsan from 'jsan';
-import diff from 'simple-diff';
+import diff, { Event } from 'simple-diff';
 import es6template from 'es6template';
 import { Editor } from 'devui';
+import { TabComponentProps } from 'redux-devtools-inspector-monitor';
+import { Action } from 'redux';
+import { AssertionLocals, DispatcherLocals, WrapLocals } from './types';
 
-export const fromPath = (path) =>
+export const fromPath = (path: (string | number)[]) =>
   path.map((a) => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');
 
-function getState(s, defaultValue) {
+function getState<S>(
+  s: { state: S; error?: string } | undefined,
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  defaultValue?: {}
+) {
   if (!s) return defaultValue;
   return JSON.parse(jsan.stringify(s.state));
 }
 
-export function compare(s1, s2, cb, defaultValue) {
-  const paths = []; // Already processed
-  function generate({ type, newPath, newValue, newIndex }) {
-    let curState;
-    let path = fromPath(newPath);
+export function compare<S>(
+  s1: { state: S; error?: string } | undefined,
+  s2: { state: S; error?: string },
+  cb: (value: { path: string; curState: number | string | undefined }) => void,
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  defaultValue?: {}
+) {
+  const paths: string[] = []; // Already processed
+  function generate(
+    event: Event | { type: 'move-item'; newPath: (string | number)[] }
+  ) {
+    let curState: number | string | undefined;
+    let path = fromPath(event.newPath);
 
-    if (type === 'remove-item' || type === 'move-item') {
+    if (event.type === 'remove-item' || event.type === 'move-item') {
       if (paths.length && paths.indexOf(path) !== -1) return;
       paths.push(path);
-      const v = objectPath.get(s2.state, newPath);
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      const v = objectPath.get((s2.state as unknown) as object, event.newPath);
       curState = v.length;
       path += '.length';
-    } else if (type === 'add-item') {
-      generate({ type: 'move-item', newPath });
-      path += `[${newIndex}]`;
-      curState = stringify(newValue);
+    } else if (event.type === 'add-item') {
+      generate({ type: 'move-item', newPath: event.newPath });
+      path += `[${event.newIndex}]`;
+      curState = stringify(event.newValue);
     } else {
-      curState = stringify(newValue);
+      curState = stringify(event.newValue);
     }
 
     // console.log(`expect(store${path}).toEqual(${curState});`);
@@ -45,17 +61,34 @@ export function compare(s1, s2, cb, defaultValue) {
   ).forEach(generate);
 }
 
-export default class TestGenerator extends (PureComponent || Component) {
-  getMethod(action) {
-    let type = action.type;
+interface Props<S, A extends Action<unknown>>
+  extends Omit<TabComponentProps<S, A>, 'monitorState' | 'updateMonitorState'> {
+  name?: string;
+  isVanilla?: boolean;
+  wrap?: string | ((locals: WrapLocals) => string);
+  dispatcher?: string | ((locals: DispatcherLocals) => string);
+  assertion?: string | ((locals: AssertionLocals) => string);
+  useCodemirror: boolean;
+  indentation?: number;
+  header?: ReactNode;
+}
+
+export default class TestGenerator<
+  S,
+  A extends Action<unknown>
+> extends (PureComponent || Component)<Props<S, A>> {
+  getMethod(action: A) {
+    let type: string = action.type as string;
     if (type[0] === '┗') type = type.substr(1).trim();
-    let args = action.arguments;
-    if (args) args = args.map((arg) => stringify(arg)).join(',');
-    else args = '';
+    const args = ((action as unknown) as { arguments: unknown[] }).arguments
+      ? ((action as unknown) as { arguments: unknown[] }).arguments
+          .map((arg) => stringify(arg))
+          .join(',')
+      : '';
     return `${type}(${args})`;
   }
 
-  getAction(action) {
+  getAction(action: A) {
     if (action.type === '@@INIT') return '{}';
     return stringify(action);
   }
@@ -76,7 +109,7 @@ export default class TestGenerator extends (PureComponent || Component) {
     if (typeof assertion === 'string')
       assertion = es6template.compile(assertion);
     if (typeof wrap === 'string') {
-      const ident = wrap.match(/\n.+\$\{assertions}/);
+      const ident = /\n.+\$\{assertions}/.exec(wrap);
       if (ident) indentation = ident[0].length - 13;
       wrap = es6template.compile(wrap);
     }
@@ -94,21 +127,30 @@ export default class TestGenerator extends (PureComponent || Component) {
     else i = computedStates.length - 1;
     const startIdx = i > 0 ? i : 1;
 
-    const addAssertions = ({ path, curState }) => {
-      r += space + assertion({ path, curState }) + '\n';
+    const addAssertions = ({
+      path,
+      curState,
+    }: {
+      path: string;
+      curState: number | string | undefined;
+    }) => {
+      r += `${space}${(assertion as (locals: AssertionLocals) => string)({
+        path,
+        curState,
+      })}\n`;
     };
 
     while (actions[i]) {
       if (
         !isVanilla ||
         /* eslint-disable-next-line no-useless-escape */
-        /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type)
+        /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type as string)
       ) {
         if (isFirst) isFirst = false;
         else r += space;
-        if (!isVanilla || actions[i].action.type[0] !== '@') {
+        if (!isVanilla || (actions[i].action.type as string)[0] !== '@') {
           r +=
-            dispatcher({
+            (dispatcher as (locals: DispatcherLocals) => string)({
               action: !isVanilla
                 ? this.getAction(actions[i].action)
                 : this.getMethod(actions[i].action),
@@ -131,7 +173,7 @@ export default class TestGenerator extends (PureComponent || Component) {
         }
       }
       i++;
-      if (i > selectedActionId) break;
+      if (i > selectedActionId!) break;
     }
 
     r = r.trim();
@@ -139,11 +181,14 @@ export default class TestGenerator extends (PureComponent || Component) {
       if (!isVanilla) r = wrap({ name, assertions: r });
       else {
         r = wrap({
-          name: /^[a-zA-Z0-9_-]+?$/.test(name) ? name : 'Store',
+          name: /^[a-zA-Z0-9_-]+?$/.test(name as string) ? name : 'Store',
           actionName:
             (selectedActionId === null || selectedActionId > 0) &&
             actions[startIdx]
-              ? actions[startIdx].action.type.replace(/[^a-zA-Z0-9_-]+/, '')
+              ? (actions[startIdx].action.type as string).replace(
+                  /[^a-zA-Z0-9_-]+/,
+                  ''
+                )
               : 'should return the initial state',
           initialState: stringify(computedStates[startIdx - 1].state),
           assertions: r,
@@ -167,25 +212,10 @@ export default class TestGenerator extends (PureComponent || Component) {
 
     return <Editor value={code} />;
   }
+
+  static defaultProps = {
+    useCodemirror: true,
+    selectedActionId: null,
+    startActionId: null,
+  };
 }
-
-TestGenerator.propTypes = {
-  name: PropTypes.string,
-  isVanilla: PropTypes.bool,
-  computedStates: PropTypes.array,
-  actions: PropTypes.object,
-  selectedActionId: PropTypes.number,
-  startActionId: PropTypes.number,
-  wrap: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  dispatcher: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  assertion: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  useCodemirror: PropTypes.bool,
-  indentation: PropTypes.number,
-  header: PropTypes.element,
-};
-
-TestGenerator.defaultProps = {
-  useCodemirror: true,
-  selectedActionId: null,
-  startActionId: null,
-};

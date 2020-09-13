@@ -1,11 +1,35 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { connect } from 'react-redux';
-import pkg from '../../../package.json';
 import { Button, Toolbar, Spacer } from 'devui';
-import getOptions from './getOptions';
 import { push as pushRoute } from 'connected-react-router';
+import pkg from '../../../package.json';
+import getOptions from './getOptions';
+import { DemoAppState } from './reducers';
+import {
+  AddFunctionAction,
+  AddHugeObjectAction,
+  AddImmutableMapAction,
+  AddIteratorAction,
+  AddRecursiveAction,
+  AddSymbolAction,
+  ChangeImmutableNestedAction,
+  ChangeNestedAction,
+  HugePayloadAction,
+  IncrementAction,
+  PopAction,
+  PushAction,
+  PushHugeArrayAction,
+  ReplaceAction,
+  ShuffleArrayAction,
+  TimeoutUpdateAction,
+  ToggleTimeoutUpdateAction,
+} from './reducers';
 
-const styles = {
+const styles: {
+  wrapper: CSSProperties;
+  muted: CSSProperties;
+  link: CSSProperties;
+} = {
   wrapper: {
     height: '100vh',
     width: '450px',
@@ -24,7 +48,30 @@ const styles = {
 
 const ROOT = '/'; // process.env.NODE_ENV === 'production' ? '/' : '/';
 
-class DemoApp extends React.Component {
+interface Props
+  extends Omit<DemoAppState, 'addFunction' | 'addSymbol' | 'shuffleArray'> {
+  toggleTimeoutUpdate: (timeoutUpdateEnabled: boolean) => void;
+  timeoutUpdate: () => void;
+  increment: () => void;
+  push: () => void;
+  pop: () => void;
+  replace: () => void;
+  changeNested: () => void;
+  pushHugeArray: () => void;
+  addIterator: () => void;
+  addHugeObject: () => void;
+  addRecursive: () => void;
+  addImmutableMap: () => void;
+  changeImmutableNested: () => void;
+  hugePayload: () => void;
+  addFunction: () => void;
+  addSymbol: () => void;
+  shuffleArray: () => void;
+}
+
+class DemoApp extends React.Component<Props> {
+  timeout?: number;
+
   render() {
     const options = getOptions(this.props.router.location);
 
@@ -48,7 +95,7 @@ class DemoApp extends React.Component {
         <Toolbar>
           <Spacer />
           <Button onClick={this.props.pushHugeArray}>Push Huge Array</Button>
-          <Button onClick={this.props.addHugeObect}>Add Huge Object</Button>
+          <Button onClick={this.props.addHugeObject}>Add Huge Object</Button>
           <Button onClick={this.props.hugePayload}>Huge Payload</Button>
           <Spacer />
         </Toolbar>
@@ -98,36 +145,40 @@ class DemoApp extends React.Component {
     this.props.toggleTimeoutUpdate(enabled);
 
     if (enabled) {
-      this.timeout = setInterval(this.props.timeoutUpdate, 1000);
+      this.timeout = window.setInterval(this.props.timeoutUpdate, 1000);
     } else {
       clearTimeout(this.timeout);
     }
   };
 }
 
-export default connect((state) => state, {
-  toggleTimeoutUpdate: (timeoutUpdateEnabled) => ({
+export default connect((state: DemoAppState) => state, {
+  toggleTimeoutUpdate: (
+    timeoutUpdateEnabled: boolean
+  ): ToggleTimeoutUpdateAction => ({
     type: 'TOGGLE_TIMEOUT_UPDATE',
     timeoutUpdateEnabled,
   }),
-  timeoutUpdate: () => ({ type: 'TIMEOUT_UPDATE' }),
-  increment: () => ({ type: 'INCREMENT' }),
-  push: () => ({ type: 'PUSH' }),
-  pop: () => ({ type: 'POP' }),
-  replace: () => ({ type: 'REPLACE' }),
-  changeNested: () => ({ type: 'CHANGE_NESTED' }),
-  pushHugeArray: () => ({ type: 'PUSH_HUGE_ARRAY' }),
-  addIterator: () => ({ type: 'ADD_ITERATOR' }),
-  addHugeObect: () => ({ type: 'ADD_HUGE_OBJECT' }),
-  addRecursive: () => ({ type: 'ADD_RECURSIVE' }),
-  addImmutableMap: () => ({ type: 'ADD_IMMUTABLE_MAP' }),
-  changeImmutableNested: () => ({ type: 'CHANGE_IMMUTABLE_NESTED' }),
-  hugePayload: () => ({
+  timeoutUpdate: (): TimeoutUpdateAction => ({ type: 'TIMEOUT_UPDATE' }),
+  increment: (): IncrementAction => ({ type: 'INCREMENT' }),
+  push: (): PushAction => ({ type: 'PUSH' }),
+  pop: (): PopAction => ({ type: 'POP' }),
+  replace: (): ReplaceAction => ({ type: 'REPLACE' }),
+  changeNested: (): ChangeNestedAction => ({ type: 'CHANGE_NESTED' }),
+  pushHugeArray: (): PushHugeArrayAction => ({ type: 'PUSH_HUGE_ARRAY' }),
+  addIterator: (): AddIteratorAction => ({ type: 'ADD_ITERATOR' }),
+  addHugeObject: (): AddHugeObjectAction => ({ type: 'ADD_HUGE_OBJECT' }),
+  addRecursive: (): AddRecursiveAction => ({ type: 'ADD_RECURSIVE' }),
+  addImmutableMap: (): AddImmutableMapAction => ({ type: 'ADD_IMMUTABLE_MAP' }),
+  changeImmutableNested: (): ChangeImmutableNestedAction => ({
+    type: 'CHANGE_IMMUTABLE_NESTED',
+  }),
+  hugePayload: (): HugePayloadAction => ({
     type: 'HUGE_PAYLOAD',
     payload: Array.from({ length: 10000 }).map((_, i) => i),
   }),
-  addFunction: () => ({ type: 'ADD_FUNCTION' }),
-  addSymbol: () => ({ type: 'ADD_SYMBOL' }),
-  shuffleArray: () => ({ type: 'SHUFFLE_ARRAY' }),
+  addFunction: (): AddFunctionAction => ({ type: 'ADD_FUNCTION' }),
+  addSymbol: (): AddSymbolAction => ({ type: 'ADD_SYMBOL' }),
+  shuffleArray: (): ShuffleArrayAction => ({ type: 'SHUFFLE_ARRAY' }),
   pushRoute,
 })(DemoApp);

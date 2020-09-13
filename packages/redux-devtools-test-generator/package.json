@@ -2,22 +2,6 @@
   "name": "redux-devtools-test-generator",
   "version": "0.6.2",
   "description": "Generate tests for redux devtools.",
-  "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
-  "scripts": {
-    "start": "webpack-dev-server",
-    "clean": "rimraf lib",
-    "build": "babel src --out-dir lib",
-    "test": "jest --no-cache",
-    "prepare": "npm run clean && npm run build",
-    "prepublishOnly": "npm run test && npm run clean && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reduxjs/redux-devtools.git"
-  },
   "keywords": [
     "redux",
     "devtools",
@@ -28,35 +12,64 @@
     "time travel",
     "live edit"
   ],
-  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
-  "license": "MIT",
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-test-generator",
   "bugs": {
     "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/reduxjs/redux-devtools",
+  "license": "MIT",
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config demo/config/webpack.config.ts",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "clean": "rimraf lib",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "preversion": "npm run type-check && npm run lint && npm run test",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "@types/prop-types": "^15.7.3",
+    "devui": "^1.0.0-6",
+    "es6template": "^1.0.5",
+    "javascript-stringify": "^2.0.1",
+    "jsan": "^3.1.13",
+    "object-path": "^0.11.4",
+    "prop-types": "^15.7.2",
+    "react-icons": "^3.10.0",
+    "simple-diff": "^1.6.0"
+  },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-proposal-do-expressions": "^7.10.4",
-    "@babel/polyfill": "^7.10.4",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-react": "^7.10.4",
-    "babel-loader": "^8.1.0",
-    "clean-webpack-plugin": "^3.0.0",
+    "@types/history": "^4.7.7",
+    "@types/jsan": "^3.1.0",
+    "@types/lodash.shuffle": "^4.2.6",
+    "@types/object-path": "^0.11.0",
+    "@types/react": "^16.9.46",
+    "@types/react-router": "^5.1.8",
+    "@types/redux-logger": "^3.0.8",
     "connected-react-router": "^6.8.0",
-    "css-loader": "^4.2.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.3",
     "enzyme-to-json": "^3.5.0",
-    "expect": "^26.2.0",
-    "file-loader": "^6.0.0",
     "history": "^4.10.1",
-    "html-webpack-plugin": "^4.3.0",
     "immutable": "^4.0.0-rc.12",
     "jest": "^26.2.2",
-    "lodash.isequalwith": "^4.4.0",
     "lodash.shuffle": "^4.2.0",
+    "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "react-router": "^5.2.0",
@@ -64,27 +77,11 @@
     "redux-devtools": "^3.7.0",
     "redux-devtools-dock-monitor": "^1.2.0",
     "redux-devtools-inspector-monitor": "^0.14.0",
-    "redux-logger": "^3.0.6",
-    "rimraf": "^3.0.2",
-    "seamless-immutable": "^7.1.4",
-    "style-loader": "^1.2.1",
-    "webpack": "^4.44.1",
-    "webpack-dev-server": "^3.11.0"
+    "redux-logger": "^3.0.6"
   },
-  "dependencies": {
-    "devui": "^1.0.0-6",
-    "es6template": "^1.0.5",
-    "javascript-stringify": "^2.0.1",
-    "jsan": "^3.1.13",
-    "object-path": "^0.11.4",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-icons": "^3.10.0",
-    "simple-diff": "^1.6.0"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/test/setup.js"
-    ]
+  "peerDependencies": {
+    "@types/react": "^16.3.18",
+    "react": "^16.3.0",
+    "redux-devtools-inspector-monitor": "^0.14.0"
   }
 }
