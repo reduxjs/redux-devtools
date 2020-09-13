@@ -13,18 +13,21 @@ import { AssertionLocals, DispatcherLocals, WrapLocals } from './types';
 export const fromPath = (path: (string | number)[]) =>
   path.map((a) => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-function getState<S>(s: { state: S; error?: string }, defaultValue: {}) {
+function getState<S>(
+  s: { state: S; error?: string } | undefined,
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  defaultValue?: {}
+) {
   if (!s) return defaultValue;
   return JSON.parse(jsan.stringify(s.state));
 }
 
 export function compare<S>(
-  s1: { state: S; error?: string },
+  s1: { state: S; error?: string } | undefined,
   s2: { state: S; error?: string },
   cb: (value: { path: string; curState: number | string | undefined }) => void,
   // eslint-disable-next-line @typescript-eslint/ban-types
-  defaultValue: {}
+  defaultValue?: {}
 ) {
   const paths: string[] = []; // Already processed
   function generate(
