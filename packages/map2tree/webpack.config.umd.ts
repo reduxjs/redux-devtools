@@ -20,4 +20,7 @@ module.exports = (env: { production?: boolean } = {}) => ({
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
 });
