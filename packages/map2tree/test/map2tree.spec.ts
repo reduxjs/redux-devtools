@@ -1,5 +1,5 @@
 import map2tree from '../src';
-import immutable from 'immutable';
+import * as immutable from 'immutable';
 
 test('# rootNodeKey', () => {
   const map = {};
@@ -151,7 +151,7 @@ describe('# array map', () => {
   });
 
   test('## unshift', () => {
-    const options = { pushMethod: 'unshift' };
+    const options = { pushMethod: 'unshift' as const };
     const expected = {
       name: 'state',
       children: [
