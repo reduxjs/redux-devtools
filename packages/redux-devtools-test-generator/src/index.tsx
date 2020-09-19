@@ -130,14 +130,15 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
     return (
       <Container>
         <Toolbar>
-          <Select
-            options={templates}
-            valueKey="name"
-            labelKey="name"
-            value={name}
-            simpleValue={false}
-            onChange={this.handleSelectTemplate}
-          />
+          <div style={{ flexGrow: 1, zIndex: 100 }}>
+            <Select
+              options={templates}
+              getOptionValue={(template: Template) => template.name}
+              getOptionLabel={(template: Template) => template.name}
+              value={templates.filter((template) => template.name === name)}
+              onChange={this.handleSelectTemplate}
+            />
+          </div>
           <Button onClick={this.editTemplate}>
             <MdEdit />
           </Button>
