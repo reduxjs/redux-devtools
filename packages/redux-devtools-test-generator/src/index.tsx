@@ -133,9 +133,9 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
           <div style={{ flexGrow: 1, zIndex: 100 }}>
             <Select
               options={templates}
-              getValueLabel={(template: Template) => template.name}
+              getOptionValue={(template: Template) => template.name}
               getOptionLabel={(template: Template) => template.name}
-              value={templates.filter((template) => template.name == name)}
+              value={templates.filter((template) => template.name === name)}
               onChange={this.handleSelectTemplate}
             />
           </div>

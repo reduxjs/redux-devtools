@@ -14,7 +14,7 @@ export default <C extends React.ComponentType<any>>(
     ) : (
       <UnthemedComponent
         {...props}
-        theme={getDefaultTheme({} as Base16Theme)}
+        theme={getDefaultTheme((props.theme ?? {}) as Base16Theme)}
       />
     );
   });
