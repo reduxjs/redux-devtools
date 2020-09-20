@@ -10,6 +10,44 @@ import {
 } from './utils';
 import d3tooltip from 'd3tooltip';
 
+interface InputOptions {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  state?: {};
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  tree?: NodeWithId | {};
+
+  rootKeyName: string;
+  pushMethod: 'push' | 'unshift';
+  id: string;
+  style: { [key: string]: Primitive };
+  size: number;
+  aspectRatio: number;
+  initialZoom: number;
+  margin: {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  };
+  isSorted: boolean;
+  heightBetweenNodesCoeff: number;
+  widthBetweenNodesCoeff: number;
+  transitionDuration: number;
+  blinkDuration: number;
+  onClickText: () => void;
+  tooltipOptions: {
+    disabled?: boolean;
+    left?: number | undefined;
+    top?: number | undefined;
+    offset?: {
+      left: number;
+      top: number;
+    };
+    style?: { [key: string]: Primitive } | undefined;
+    indentationSize?: number;
+  };
+}
+
 interface Options {
   // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {};
@@ -63,6 +101,7 @@ interface Options {
       top: number;
     };
     style: { [key: string]: Primitive } | undefined;
+    indentationSize?: number;
   };
 }
 
@@ -141,7 +180,10 @@ interface NodePosition {
   y: number | undefined;
 }
 
-export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
+export default function (
+  DOMNode: HTMLElement,
+  options: Partial<InputOptions> = {}
+) {
   const {
     id,
     style,
@@ -160,7 +202,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
     tree,
     tooltipOptions,
     onClickText,
-  } = deepmerge(defaultOptions, options);
+  } = deepmerge(defaultOptions, options) as Options;
 
   const width = size - margin.left - margin.right;
   const height = size * aspectRatio - margin.top - margin.bottom;
@@ -363,13 +405,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
       if (!tooltipOptions.disabled) {
         nodeEnter.call(
           d3tooltip(d3, 'tooltip', { ...tooltipOptions, root })
-            .text((d, i) =>
-              getTooltipString(
-                d,
-                i,
-                (tooltipOptions as unknown) as { indentationSize: number }
-              )
-            )
+            .text((d, i) => getTooltipString(d, i, tooltipOptions))
             .style(tooltipOptions.style)
         );
       }
