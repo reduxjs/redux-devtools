@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-module.exports = (env: { production?: boolean } = {}) => ({
+export default (env: { production?: boolean } = {}) => ({
   mode: env.production ? 'production' : 'development',
   entry: {
     app: ['./src/index'],

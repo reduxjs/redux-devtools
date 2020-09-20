@@ -1,4 +1,4 @@
-import d3 from 'd3';
+import d3, { ZoomEvent, Primitive } from 'd3';
 import { isEmpty } from 'ramda';
 import map2tree from 'map2tree';
 import deepmerge from 'deepmerge';
@@ -10,7 +10,63 @@ import {
 } from './utils';
 import d3tooltip from 'd3tooltip';
 
-const defaultOptions = {
+interface Options {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  state?: {};
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  tree?: NodeWithId | {};
+
+  rootKeyName: string;
+  pushMethod: 'push' | 'unshift';
+  id: string;
+  style: {
+    node: {
+      colors: {
+        default: string;
+        collapsed: string;
+        parent: string;
+      };
+      radius: number;
+    };
+    text: {
+      colors: {
+        default: string;
+        hover: string;
+      };
+    };
+    link: {
+      stroke: string;
+      fill: string;
+    };
+  };
+  size: number;
+  aspectRatio: number;
+  initialZoom: number;
+  margin: {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  };
+  isSorted: boolean;
+  heightBetweenNodesCoeff: number;
+  widthBetweenNodesCoeff: number;
+  transitionDuration: number;
+  blinkDuration: number;
+  onClickText: () => void;
+  tooltipOptions: {
+    disabled: boolean;
+    left: number | undefined;
+    top: number | undefined;
+    offset: {
+      left: number;
+      top: number;
+    };
+    style: { [key: string]: Primitive } | undefined;
+  };
+}
+
+const defaultOptions: Options = {
   state: undefined,
   rootKeyName: 'state',
   pushMethod: 'push',
@@ -50,11 +106,13 @@ const defaultOptions = {
   widthBetweenNodesCoeff: 1,
   transitionDuration: 750,
   blinkDuration: 100,
-  onClickText: () => {},
+  onClickText: () => {
+    // noop
+  },
   tooltipOptions: {
     disabled: false,
     left: undefined,
-    right: undefined,
+    top: undefined,
     offset: {
       left: 0,
       top: 0,
@@ -63,7 +121,27 @@ const defaultOptions = {
   },
 };
 
-export default function (DOMNode, options = {}) {
+export interface NodeWithId {
+  name: string;
+  children?: NodeWithId[] | null;
+  _children?: NodeWithId[] | null;
+  value?: unknown;
+  id: string;
+
+  parent?: NodeWithId;
+  depth?: number;
+  x?: number;
+  y?: number;
+}
+
+interface NodePosition {
+  parentId: string | null | undefined;
+  id: string;
+  x: number | undefined;
+  y: number | undefined;
+}
+
+export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
   const {
     id,
     style,
@@ -89,16 +167,19 @@ export default function (DOMNode, options = {}) {
   const fullWidth = size;
   const fullHeight = size * aspectRatio;
 
-  const attr = {
+  const attr: { [key: string]: Primitive } = {
     id,
     preserveAspectRatio: 'xMinYMin slice',
   };
 
-  if (!style.width) {
+  if (!((style as unknown) as { [key: string]: Primitive }).width) {
     attr.width = fullWidth;
   }
 
-  if (!style.width || !style.height) {
+  if (
+    !((style as unknown) as { [key: string]: Primitive }).width ||
+    !((style as unknown) as { [key: string]: Primitive }).height
+  ) {
     attr.viewBox = `0 0 ${fullWidth} ${fullHeight}`;
   }
 
@@ -107,11 +188,16 @@ export default function (DOMNode, options = {}) {
   const vis = root
     .append('svg')
     .attr(attr)
-    .style({ cursor: '-webkit-grab', ...style })
+    .style(({ cursor: '-webkit-grab', ...style } as unknown) as {
+      [key: string]: Primitive;
+    })
     .call(
       zoom.on('zoom', () => {
-        const { translate, scale } = d3.event;
-        vis.attr('transform', `translate(${translate})scale(${scale})`);
+        const { translate, scale } = d3.event as ZoomEvent;
+        vis.attr(
+          'transform',
+          `translate(${translate.toString()})scale(${scale})`
+        );
       })
     )
     .append('g')
@@ -122,18 +208,21 @@ export default function (DOMNode, options = {}) {
     });
 
   let layout = d3.layout.tree().size([width, height]);
-  let data;
+  let data: NodeWithId;
 
   if (isSorted) {
     layout.sort((a, b) =>
-      b.name.toLowerCase() < a.name.toLowerCase() ? 1 : -1
+      (b as NodeWithId).name.toLowerCase() <
+      (a as NodeWithId).name.toLowerCase()
+        ? 1
+        : -1
     );
   }
 
   // previousNodePositionsById stores node x and y
   // as well as hierarchy (id / parentId);
   // helps animating transitions
-  let previousNodePositionsById = {
+  let previousNodePositionsById: { [nodeId: string]: NodePosition } = {
     root: {
       id: 'root',
       parentId: null,
@@ -145,10 +234,14 @@ export default function (DOMNode, options = {}) {
   // traverses a map with node positions by going through the chain
   // of parent ids; once a parent that matches the given filter is found,
   // the parent position gets returned
-  function findParentNodePosition(nodePositionsById, nodeId, filter) {
+  function findParentNodePosition(
+    nodePositionsById: { [nodeId: string]: NodePosition },
+    nodeId: string,
+    filter: (nodePosition: NodePosition) => boolean
+  ) {
     let currentPosition = nodePositionsById[nodeId];
     while (currentPosition) {
-      currentPosition = nodePositionsById[currentPosition.parentId];
+      currentPosition = nodePositionsById[currentPosition.parentId!];
       if (!currentPosition) {
         return null;
       }
@@ -160,14 +253,18 @@ export default function (DOMNode, options = {}) {
 
   return function renderChart(nextState = tree || state) {
     data = !tree
-      ? map2tree(nextState, { key: rootKeyName, pushMethod })
-      : nextState;
+      ? // eslint-disable-next-line @typescript-eslint/ban-types
+        (map2tree(nextState as {}, {
+          key: rootKeyName,
+          pushMethod,
+        }) as NodeWithId)
+      : (nextState as NodeWithId);
 
     if (isEmpty(data) || !data.name) {
-      data = {
+      data = ({
         name: 'error',
         message: 'Please provide a state map or a tree structure',
-      };
+      } as unknown) as NodeWithId;
     }
 
     let nodeIndex = 0;
@@ -191,13 +288,13 @@ export default function (DOMNode, options = {}) {
           : null
     );
 
-    /*eslint-disable*/
     update();
-    /*eslint-enable*/
 
     function update() {
       // path generator for links
-      const diagonal = d3.svg.diagonal().projection((d) => [d.y, d.x]);
+      const diagonal = d3.svg
+        .diagonal<NodePosition>()
+        .projection((d) => [d.y!, d.x!]);
       // set tree dimensions and spacing between branches and nodes
       const maxNodeCountByLevel = Math.max(...getNodeGroupByDepthCount(data));
 
@@ -206,12 +303,12 @@ export default function (DOMNode, options = {}) {
         width,
       ]);
 
-      let nodes = layout.nodes(data);
-      let links = layout.links(nodes);
+      const nodes = layout.nodes(data as d3.layout.tree.Node) as NodeWithId[];
+      const links = layout.links(nodes as d3.layout.tree.Node[]);
 
       nodes.forEach(
         (node) =>
-          (node.y = node.depth * (maxLabelLength * 7 * widthBetweenNodesCoeff))
+          (node.y = node.depth! * (maxLabelLength * 7 * widthBetweenNodesCoeff))
       );
 
       const nodePositions = nodes.map((n) => ({
@@ -220,15 +317,18 @@ export default function (DOMNode, options = {}) {
         x: n.x,
         y: n.y,
       }));
-      const nodePositionsById = {};
+      const nodePositionsById: { [nodeId: string]: NodePosition } = {};
       nodePositions.forEach((node) => (nodePositionsById[node.id] = node));
 
       // process the node selection
-      let node = vis
+      const node = vis
         .selectAll('g.node')
-        .property('__oldData__', (d) => d)
-        .data(nodes, (d) => d.id || (d.id = ++nodeIndex));
-      let nodeEnter = node
+        .property('__oldData__', (d: NodeWithId) => d)
+        .data(
+          nodes,
+          (d) => d.id || (d.id = (++nodeIndex as unknown) as string)
+        );
+      const nodeEnter = node
         .enter()
         .append('g')
         .attr({
@@ -237,35 +337,39 @@ export default function (DOMNode, options = {}) {
             const position = findParentNodePosition(
               nodePositionsById,
               d.id,
-              (n) => previousNodePositionsById[n.id]
+              (n) => !!previousNodePositionsById[n.id]
             );
             const previousPosition =
               (position && previousNodePositionsById[position.id]) ||
               previousNodePositionsById.root;
-            return `translate(${previousPosition.y},${previousPosition.x})`;
+            return `translate(${previousPosition.y!},${previousPosition.x!})`;
           },
         })
         .style({
           fill: style.text.colors.default,
           cursor: 'pointer',
         })
-        .on({
-          mouseover: function mouseover() {
-            d3.select(this).style({
-              fill: style.text.colors.hover,
-            });
-          },
-          mouseout: function mouseout() {
-            d3.select(this).style({
-              fill: style.text.colors.default,
-            });
-          },
+        .on('mouseover', function mouseover(this: any) {
+          d3.select(this).style({
+            fill: style.text.colors.hover,
+          });
+        })
+        .on('mouseout', function mouseout(this: any) {
+          d3.select(this).style({
+            fill: style.text.colors.default,
+          });
         });
 
       if (!tooltipOptions.disabled) {
         nodeEnter.call(
           d3tooltip(d3, 'tooltip', { ...tooltipOptions, root })
-            .text((d, i) => getTooltipString(d, i, tooltipOptions))
+            .text((d, i) =>
+              getTooltipString(
+                d,
+                i,
+                (tooltipOptions as unknown) as { indentationSize: number }
+              )
+            )
             .style(tooltipOptions.style)
         );
       }
@@ -279,12 +383,10 @@ export default function (DOMNode, options = {}) {
           class: 'nodeCircle',
           r: 0,
         })
-        .on({
-          click: (clickedNode) => {
-            if (d3.event.defaultPrevented) return;
-            toggleChildren(clickedNode);
-            update();
-          },
+        .on('click', (clickedNode) => {
+          if ((d3.event as Event).defaultPrevented) return;
+          toggleChildren(clickedNode);
+          update();
         });
 
       nodeEnterInnerGroup
@@ -299,9 +401,7 @@ export default function (DOMNode, options = {}) {
           'fill-opacity': 0,
         })
         .text((d) => d.name)
-        .on({
-          click: onClickText,
-        });
+        .on('click', onClickText);
 
       // update the text to reflect whether node has children or not
       node.select('text').text((d) => d.name);
@@ -319,11 +419,11 @@ export default function (DOMNode, options = {}) {
       });
 
       // transition nodes to their new position
-      let nodeUpdate = node
+      const nodeUpdate = node
         .transition()
         .duration(transitionDuration)
         .attr({
-          transform: (d) => `translate(${d.y},${d.x})`,
+          transform: (d) => `translate(${d.y!},${d.x!})`,
         });
 
       // ensure circle radius is correct
@@ -334,7 +434,7 @@ export default function (DOMNode, options = {}) {
         .select('text')
         .style('fill-opacity', 1)
         .attr({
-          transform: function transform(d) {
+          transform: function transform(this: SVGGraphicsElement, d) {
             const x =
               (d.children || d._children ? -1 : 1) *
               (this.getBBox().width / 2 + style.node.radius + 5);
@@ -344,7 +444,7 @@ export default function (DOMNode, options = {}) {
 
       // blink updated nodes
       node
-        .filter(function flick(d) {
+        .filter(function flick(this: any, d) {
           // test whether the relevant properties of d match
           // the equivalent property of the oldData
           // also test whether the old data exists,
@@ -358,7 +458,7 @@ export default function (DOMNode, options = {}) {
         .style('opacity', '1');
 
       // transition exiting nodes to the parent's new position
-      let nodeExit = node
+      const nodeExit = node
         .exit()
         .transition()
         .duration(transitionDuration)
@@ -367,12 +467,12 @@ export default function (DOMNode, options = {}) {
             const position = findParentNodePosition(
               previousNodePositionsById,
               d.id,
-              (n) => nodePositionsById[n.id]
+              (n) => !!nodePositionsById[n.id]
             );
             const futurePosition =
               (position && nodePositionsById[position.id]) ||
               nodePositionsById.root;
-            return `translate(${futurePosition.y},${futurePosition.x})`;
+            return `translate(${futurePosition.y!},${futurePosition.x!})`;
           },
         })
         .remove();
@@ -382,7 +482,9 @@ export default function (DOMNode, options = {}) {
       nodeExit.select('text').style('fill-opacity', 0);
 
       // update the links
-      let link = vis.selectAll('path.link').data(links, (d) => d.target.id);
+      const link = vis
+        .selectAll('path.link')
+        .data(links, (d) => (d.target as NodeWithId).id);
 
       // enter any new links at the parent's previous position
       link
@@ -393,8 +495,8 @@ export default function (DOMNode, options = {}) {
           d: (d) => {
             const position = findParentNodePosition(
               nodePositionsById,
-              d.target.id,
-              (n) => previousNodePositionsById[n.id]
+              (d.target as NodeWithId).id,
+              (n) => !!previousNodePositionsById[n.id]
             );
             const previousPosition =
               (position && previousNodePositionsById[position.id]) ||
@@ -402,15 +504,18 @@ export default function (DOMNode, options = {}) {
             return diagonal({
               source: previousPosition,
               target: previousPosition,
-            });
+            } as d3.svg.diagonal.Link<NodePosition>);
           },
         })
         .style(style.link);
 
       // transition links to their new position
-      link.transition().duration(transitionDuration).attr({
-        d: diagonal,
-      });
+      link
+        .transition()
+        .duration(transitionDuration)
+        .attr({
+          d: (diagonal as unknown) as Primitive,
+        });
 
       // transition exiting nodes to the parent's new position
       link
@@ -421,8 +526,8 @@ export default function (DOMNode, options = {}) {
           d: (d) => {
             const position = findParentNodePosition(
               previousNodePositionsById,
-              d.target.id,
-              (n) => nodePositionsById[n.id]
+              (d.target as NodeWithId).id,
+              (n) => !!nodePositionsById[n.id]
             );
             const futurePosition =
               (position && nodePositionsById[position.id]) ||

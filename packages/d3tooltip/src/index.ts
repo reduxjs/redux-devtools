@@ -3,7 +3,17 @@ import { is } from 'ramda';
 import utils from './utils';
 const { prependClass, functor } = utils;
 
-const defaultOptions = {
+interface Options<Datum> {
+  left: number | undefined;
+  top: number | undefined;
+  offset: {
+    left: number;
+    top: number;
+  };
+  root: Selection<Datum> | undefined;
+}
+
+const defaultOptions: Options<unknown> = {
   left: undefined, // mouseX
   top: undefined, // mouseY
   offset: { left: 0, top: 0 },
@@ -13,9 +23,12 @@ const defaultOptions = {
 export default function tooltip<Datum>(
   d3: typeof d3Package,
   className = 'tooltip',
-  options = {}
+  options: Partial<Options<Datum>> = {}
 ) {
-  const { left, top, offset, root } = { ...defaultOptions, ...options };
+  const { left, top, offset, root } = {
+    ...defaultOptions,
+    ...options,
+  } as Options<Datum>;
 
   let attrs = { class: className };
   let text: (datum: Datum, index?: number, outerIndex?: number) => string = (
@@ -44,7 +57,7 @@ export default function tooltip<Datum>(
           top: `${y}px`,
           ...styles,
         })
-        .html(() => text(node));
+        .html(() => text(node)) as Selection<Datum>;
     });
 
     selection.on('mousemove.tip', (node) => {
