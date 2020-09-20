@@ -1,6 +1,7 @@
+import d3Package from 'd3';
 import { is } from 'ramda';
 import utils from './utils';
-const { prependClass, functor } = utils.default || utils;
+const { prependClass, functor } = utils;
 
 const defaultOptions = {
   left: undefined, // mouseX
@@ -9,7 +10,11 @@ const defaultOptions = {
   root: undefined,
 };
 
-export default function tooltip(d3, className = 'tooltip', options = {}) {
+export default function tooltip(
+  d3: typeof d3Package,
+  className = 'tooltip',
+  options = {}
+) {
   const { left, top, offset, root } = { ...defaultOptions, ...options };
 
   let attrs = { class: className };
