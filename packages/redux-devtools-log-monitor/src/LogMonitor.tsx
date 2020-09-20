@@ -4,6 +4,7 @@ import { Action, Dispatch } from 'redux';
 import * as themes from 'redux-devtools-themes';
 import { Base16Theme } from 'redux-devtools-themes';
 import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
+import debounce from 'lodash.debounce';
 import {
   updateScrollTop,
   startConsecutiveToggle,
@@ -12,9 +13,6 @@ import {
 import reducer, { LogMonitorState } from './reducers';
 import LogMonitorButtonBar from './LogMonitorButtonBar';
 import LogMonitorEntryList from './LogMonitorEntryList';
-import debounce from 'lodash.debounce';
-import { DockMonitorState } from 'redux-devtools-dock-monitor/lib/reducers';
-import { DockMonitorAction } from 'redux-devtools-dock-monitor/lib/actions';
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { toggleAction, setActionsActive } = ActionCreators;
@@ -276,8 +274,8 @@ export default (LogMonitor as unknown) as React.ComponentType<
 > & {
   update(
     monitorProps: ExternalProps<unknown, Action<unknown>>,
-    state: DockMonitorState | undefined,
-    action: DockMonitorAction
-  ): DockMonitorState;
+    state: LogMonitorState | undefined,
+    action: LogMonitorAction
+  ): LogMonitorState;
   defaultProps: DefaultProps<unknown>;
 };
