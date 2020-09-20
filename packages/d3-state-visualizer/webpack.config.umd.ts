@@ -6,10 +6,12 @@ export default (env: { production?: boolean } = {}) => ({
     app: ['./src/index'],
   },
   output: {
-    library: 'map2tree',
+    library: 'd3-state-visualizer',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
-    filename: env.production ? 'map2tree.min.js' : 'map2tree.js',
+    filename: env.production
+      ? 'd3-state-visualizer.min.js'
+      : 'd3-state-visualizer.js',
   },
   module: {
     rules: [

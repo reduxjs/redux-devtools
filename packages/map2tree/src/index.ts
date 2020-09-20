@@ -2,16 +2,16 @@ import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
 
-interface Node {
+export interface Node {
   name: string;
-  children?: Node[];
+  children?: Node[] | null;
   value?: unknown;
 }
 
 function visit(
   parent: Node,
   visitFn: (parent: Node) => void,
-  childrenFn: (parent: Node) => Node[] | undefined
+  childrenFn: (parent: Node) => Node[] | undefined | null
 ) {
   if (!parent) return;
 
@@ -47,17 +47,18 @@ export default function map2tree(
   root: {},
   options: { key?: string; pushMethod?: 'push' | 'unshift' } = {},
   tree: Node = { name: options.key || 'state', children: [] }
-): Node {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+): Node | {} {
   // eslint-disable-next-line @typescript-eslint/ban-types
   if (!isPlainObject(root) && root && !(root as { toJS: () => {} }).toJS) {
-    return {} as Node;
+    return {};
   }
 
   const { key: rootNodeKey = 'state', pushMethod = 'push' } = options;
   const currentNode = getNode(tree, rootNodeKey);
 
   if (currentNode === null) {
-    return {} as Node;
+    return {};
   }
 
   mapValues(
