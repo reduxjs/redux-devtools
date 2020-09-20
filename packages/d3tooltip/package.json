@@ -2,46 +2,46 @@
   "name": "d3tooltip",
   "version": "1.2.3",
   "description": "A highly configurable tooltip for d3",
-  "main": "lib/index.js",
-  "scripts": {
-    "clean": "rimraf lib dist",
-    "build": "babel src --out-dir lib",
-    "build:umd": "webpack --progress --config webpack.config.umd.js",
-    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.js",
-    "version": "npm run build",
-    "postversion": "git push && git push --tags && npm run clean",
-    "prepare": "npm run clean && npm run build",
-    "prepublishOnly": "npm run clean && npm run build && npm run build:umd && npm run build:umd:min"
+  "keywords": [
+    "d3",
+    "tooltip"
+  ],
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/d3tooltip",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
+  "license": "MIT",
+  "author": "romseguy",
   "files": [
     "lib",
     "dist",
     "src"
   ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
-  "keywords": [
-    "d3",
-    "tooltip"
-  ],
-  "author": "romseguy",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/reduxjs/redux-devtools/issues"
-  },
-  "homepage": "https://github.com/reduxjs/redux-devtools",
-  "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
-    "@babel/preset-env": "^7.11.0",
-    "babel-loader": "^8.1.0",
-    "rimraf": "^3.0.2",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+  "scripts": {
+    "build": "npm run build:types && npm run build:js && npm run build:umd && npm run build:umd:min",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
+    "build:umd": "webpack --progress --config webpack.config.umd.ts",
+    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.ts",
+    "clean": "rimraf lib dist",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "preversion": "npm run type-check && npm run lint && npm run test",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
     "ramda": "^0.27.1"
+  },
+  "devDependencies": {
+    "@types/d3": "^3.5.43",
+    "@types/ramda": "^0.27.17"
   }
 }
