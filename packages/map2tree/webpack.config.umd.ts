@@ -6,7 +6,7 @@ module.exports = (env: { production?: boolean } = {}) => ({
     app: ['./src/index'],
   },
   output: {
-    library: 'd3tooltip',
+    library: 'map2tree',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
     filename: env.production ? 'map2tree.min.js' : 'map2tree.js',

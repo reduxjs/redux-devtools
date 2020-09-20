@@ -3,7 +3,7 @@ import * as path from 'path';
 module.exports = (env: { production?: boolean } = {}) => ({
   mode: env.production ? 'production' : 'development',
   entry: {
-    app: ['./src/index.js'],
+    app: ['./src/index'],
   },
   output: {
     library: 'd3tooltip',
@@ -14,10 +14,13 @@ module.exports = (env: { production?: boolean } = {}) => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 });
