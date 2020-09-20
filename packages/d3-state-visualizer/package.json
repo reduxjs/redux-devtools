@@ -41,6 +41,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@types/d3": "^3.5.43",
     "d3": "^3.5.17",
     "d3tooltip": "^1.2.3",
     "deepmerge": "^4.2.2",
@@ -48,7 +49,6 @@
     "ramda": "^0.27.1"
   },
   "devDependencies": {
-    "@types/d3": "^3.5.43",
     "@types/ramda": "^0.27.17"
   }
 }
