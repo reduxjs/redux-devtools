@@ -12,7 +12,7 @@ import d3tooltip from 'd3tooltip';
 
 interface InputOptions {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  state?: {};
+  state?: {} | null;
   // eslint-disable-next-line @typescript-eslint/ban-types
   tree?: NodeWithId | {};
 
@@ -50,7 +50,7 @@ interface InputOptions {
 
 interface Options {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  state?: {};
+  state?: {} | null;
   // eslint-disable-next-line @typescript-eslint/ban-types
   tree?: NodeWithId | {};
 
