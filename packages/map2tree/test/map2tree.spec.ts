@@ -1,11 +1,11 @@
-import map2tree from '../src';
-import immutable from 'immutable';
+import map2tree, { Node } from '../src';
+import * as immutable from 'immutable';
 
 test('# rootNodeKey', () => {
   const map = {};
   const options = { key: 'foo' };
 
-  expect(map2tree(map, options).name).toBe('foo');
+  expect((map2tree(map, options) as Node).name).toBe('foo');
 });
 
 describe('# shallow map', () => {
@@ -151,7 +151,7 @@ describe('# array map', () => {
   });
 
   test('## unshift', () => {
-    const options = { pushMethod: 'unshift' };
+    const options = { pushMethod: 'unshift' as const };
     const expected = {
       name: 'state',
       children: [

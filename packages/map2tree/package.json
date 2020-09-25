@@ -2,20 +2,6 @@
   "name": "map2tree",
   "version": "1.4.2",
   "description": "Utility for mapping maps to trees",
-  "main": "lib/index.js",
-  "scripts": {
-    "clean": "rimraf lib dist",
-    "build": "babel src --out-dir lib",
-    "build:umd": "webpack --progress --config webpack.config.umd.js",
-    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.js",
-    "test": "jest",
-    "prepare": "npm run build && npm run build:umd",
-    "prepublishOnly": "npm run test && npm run clean && npm run build && npm run build:umd && npm run build:umd:min"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reduxjs/redux-devtools.git"
-  },
   "keywords": [
     "map2tree",
     "map-to-tree",
@@ -23,38 +9,43 @@
     "map",
     "tree"
   ],
-  "author": "romseguy",
-  "license": "MIT",
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/map2tree",
   "bugs": {
     "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "homepage": "https://github.com/reduxjs/redux-devtools",
-  "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
-    "@babel/preset-env": "^7.11.0",
-    "babel-loader": "^8.1.0",
-    "immutable": "^4.0.0-rc.12",
-    "jest": "^26.2.2",
-    "rimraf": "^3.0.2",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
-  },
-  "dependencies": {
-    "lodash": "^4.17.19"
-  },
-  "npmName": "map2tree",
+  "license": "MIT",
+  "author": "romseguy",
   "files": [
     "lib",
     "dist",
     "src"
   ],
-  "npmFileMap": [
-    {
-      "basePath": "/dist/",
-      "files": [
-        "*.js"
-      ]
-    }
-  ]
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "scripts": {
+    "build": "npm run build:types && npm run build:js && npm run build:umd && npm run build:umd:min",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
+    "build:umd": "webpack --progress --config webpack.config.umd.ts",
+    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.ts",
+    "clean": "rimraf lib dist",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "preversion": "npm run type-check && npm run lint && npm run test",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "lodash": "^4.17.19"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.159",
+    "immutable": "^4.0.0-rc.12"
+  }
 }

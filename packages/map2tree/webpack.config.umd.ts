@@ -1,12 +1,12 @@
-const path = require('path');
+import * as path from 'path';
 
-module.exports = (env = {}) => ({
+export default (env: { production?: boolean } = {}) => ({
   mode: env.production ? 'production' : 'development',
   entry: {
-    app: ['./src/index.js'],
+    app: ['./src/index'],
   },
   output: {
-    library: 'd3tooltip',
+    library: 'map2tree',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
     filename: env.production ? 'map2tree.min.js' : 'map2tree.js',
@@ -14,10 +14,13 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 });
