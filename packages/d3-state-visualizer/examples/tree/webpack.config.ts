@@ -1,9 +1,8 @@
-var path = require('path');
-var webpack = require('webpack');
+import * as path from 'path';
+import * as webpack from 'webpack';
 
-module.exports = {
+export default {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-  devtool: 'eval-source-map',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
@@ -14,23 +13,24 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/',
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
-  resolve: {
-    extensions: ['.js'],
-  },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loaders: ['babel-loader'],
+        test: /\.(js|ts)$/,
+        loaders: 'babel-loader',
         exclude: /node_modules/,
         include: __dirname,
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     historyApiFallback: true,
     hot: true,
     port: 3000,
   },
+  devtool: 'eval-source-map',
 };

@@ -38,6 +38,11 @@ export class Select extends (PureComponent || Component)<SelectProps> {
             neutral60: this.props.theme.base06,
             neutral80: this.props.theme.base07,
           },
+          spacing: {
+            ...theme.spacing,
+            baseUnit: 2,
+            controlHeight: this.props.theme.inputHeight,
+          },
         })}
       />
     );
