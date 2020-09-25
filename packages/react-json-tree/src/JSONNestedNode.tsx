@@ -145,14 +145,6 @@ export default class JSONNestedNode extends React.Component<Props, State> {
     this.state = getStateFromProps(props);
   }
 
-  static getDerivedStateFromProps(nextProps: Props, state: State): State | null {
-    const nextState = getStateFromProps(nextProps);
-    if (nextState.expanded !== state.expanded) {
-      return nextState;
-    }
-    return null;
-  }
-
   shouldComponentUpdate(nextProps: Props, nextState: State) {
     return (
       !!Object.keys(nextProps).find(
