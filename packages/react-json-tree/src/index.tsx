@@ -16,13 +16,15 @@ import {
 } from 'react-base16-styling';
 import { CircularPropsPassedThroughJSONTree } from './types';
 
-interface Props extends CircularPropsPassedThroughJSONTree {
-  data: any;
+interface ThemesConf {
   theme?: Theme;
-  invertTheme: boolean;
+  invertTheme?: boolean;
+}
+interface Props extends CircularPropsPassedThroughJSONTree, ThemesConf {
+  data: any;
 }
 
-interface State {
+interface State extends ThemesConf {
   styling: StylingFunction;
 }
 
@@ -133,14 +135,16 @@ export default class JSONTree extends React.Component<Props, State> {
     this.state = getStateFromProps(props);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps: Props) {
+  static getDerivedStateFromProps(nextProps: Props, state: State): State | null {
     if (
       ['theme', 'invertTheme'].find(
-        (k) => nextProps[k as keyof Props] !== this.props[k as keyof Props]
+        (k) => nextProps[k as keyof ThemesConf] !== state[k as keyof ThemesConf]
       )
     ) {
-      this.setState(getStateFromProps(nextProps));
+      return getStateFromProps(nextProps);
     }
+
+    return null;
   }
 
   shouldComponentUpdate(nextProps: Props) {
