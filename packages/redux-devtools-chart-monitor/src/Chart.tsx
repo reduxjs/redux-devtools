@@ -1,13 +1,44 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { tree } from 'd3-state-visualizer';
+import { Action, Dispatch } from 'redux';
+import { LiftedAction, LiftedState } from 'redux-devtools-instrument';
+import * as themes from 'redux-devtools-themes';
+import { Base16Theme } from 'react-base16-styling';
+import { ChartMonitorState } from './reducers';
+import { Primitive } from 'd3';
 
 const wrapperStyle = {
   width: '100%',
   height: '100%',
 };
 
-class Chart extends Component {
+export interface Props<S, A extends Action<unknown>>
+  extends LiftedState<S, A, ChartMonitorState> {
+  dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
+  preserveScrollTop: boolean;
+  select: (state: S) => unknown;
+  theme: keyof typeof themes | Base16Theme;
+  invertTheme: boolean;
+
+  state: S | null;
+  isSorted: boolean;
+  heightBetweenNodesCoeff: number;
+  widthBetweenNodesCoeff: number;
+  tooltipOptions: {
+    disabled: boolean;
+    offset: {
+      left: number;
+      top: number;
+    };
+    indentationSize: number;
+    style: { [key: string]: Primitive } | undefined;
+  };
+  style: { [key: string]: Primitive } | undefined;
+  defaultIsVisible?: boolean;
+}
+
+class Chart<S, A extends Action<unknown>> extends Component<Props<S, A>> {
   static propTypes = {
     state: PropTypes.object,
     rootKeyName: PropTypes.string,
@@ -60,21 +91,25 @@ class Chart extends Component {
     }),
   };
 
-  divRef = createRef();
+  divRef = createRef<HTMLDivElement>();
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  renderChart?: (state?: {} | null | undefined) => void;
 
   componentDidMount() {
     const { select, state, defaultIsVisible } = this.props;
-    this.renderChart = tree(this.divRef.current, this.props);
+    this.renderChart = tree(this.divRef.current!, this.props);
     if (defaultIsVisible) {
-      this.renderChart(select(state));
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      this.renderChart(select(state!) as {} | null | undefined);
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props<S, A>) {
     const { state, select, monitorState } = nextProps;
 
     if (monitorState.isVisible !== false) {
-      this.renderChart(select(state));
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      this.renderChart!(select(state!) as {} | null | undefined);
     }
   }
 

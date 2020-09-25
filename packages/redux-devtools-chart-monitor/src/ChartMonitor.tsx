@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
+import React, { CSSProperties, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import shouldPureComponentUpdate from 'react-pure-render/function';
 import * as themes from 'redux-devtools-themes';
-import { ActionCreators } from 'redux-devtools';
+import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
 import deepmerge from 'deepmerge';
+import { Action, Dispatch } from 'redux';
+import { Base16Theme } from 'react-base16-styling';
 
-import reducer from './reducers';
-import Chart from './Chart';
+import reducer, { ChartMonitorState } from './reducers';
+import Chart, { Props } from './Chart';
+import { Primitive } from 'd3';
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep, toggleAction } = ActionCreators;
 
-const styles = {
+const styles: { container: CSSProperties } = {
   container: {
     fontFamily: 'monaco, Consolas, Lucida Console, monospace',
     position: 'relative',
@@ -20,7 +23,7 @@ const styles = {
   },
 };
 
-function invertColors(theme) {
+function invertColors(theme: Base16Theme) {
   return {
     ...theme,
     base00: theme.base07,
@@ -34,7 +37,43 @@ function invertColors(theme) {
   };
 }
 
-class ChartMonitor extends Component {
+export interface ChartMonitorProps<S, A extends Action<unknown>>
+  extends LiftedState<S, A, ChartMonitorState> {
+  dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
+  preserveScrollTop: boolean;
+  select: (state: S) => unknown;
+  theme: keyof typeof themes | Base16Theme;
+  invertTheme: boolean;
+
+  state: S | null;
+  isSorted: boolean;
+  heightBetweenNodesCoeff: number;
+  widthBetweenNodesCoeff: number;
+  tooltipOptions: unknown;
+  style: {
+    width: number;
+    height: number;
+    node: {
+      colors: {
+        default: string;
+        collapsed: string;
+        parent: string;
+      };
+      radius: number;
+    };
+    text: {
+      colors: {
+        default: string;
+        hover: string;
+      };
+    };
+  };
+  defaultIsVisible?: boolean;
+}
+
+class ChartMonitor<S, A extends Action<unknown>> extends PureComponent<
+  ChartMonitorProps<S, A>
+> {
   static update = reducer;
 
   static propTypes = {
@@ -55,45 +94,34 @@ class ChartMonitor extends Component {
   };
 
   static defaultProps = {
-    select: (state) => state,
+    select: (state: unknown) => state,
     theme: 'nicinabox',
     preserveScrollTop: true,
     invertTheme: false,
   };
 
-  shouldComponentUpdate = shouldPureComponentUpdate;
-
-  constructor(props) {
-    super(props);
-    this.handleToggleAction = this.handleToggleAction.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-    this.handleRollback = this.handleRollback.bind(this);
-    this.handleSweep = this.handleSweep.bind(this);
-    this.handleCommit = this.handleCommit.bind(this);
-  }
-
-  handleRollback() {
+  handleRollback = () => {
     this.props.dispatch(rollback());
-  }
+  };
 
-  handleSweep() {
+  handleSweep = () => {
     this.props.dispatch(sweep());
-  }
+  };
 
-  handleCommit() {
+  handleCommit = () => {
     this.props.dispatch(commit());
-  }
+  };
 
-  handleToggleAction(id) {
+  handleToggleAction = (id: number) => {
     this.props.dispatch(toggleAction(id));
-  }
+  };
 
-  handleReset() {
+  handleReset = () => {
     this.props.dispatch(reset());
-  }
+  };
 
   getTheme() {
-    let { theme, invertTheme } = this.props;
+    const { theme, invertTheme } = this.props;
     if (typeof theme !== 'string') {
       return invertTheme ? invertColors(theme) : theme;
     }
@@ -102,7 +130,6 @@ class ChartMonitor extends Component {
       return invertTheme ? invertColors(themes[theme]) : themes[theme];
     }
 
-    // eslint-disable-next-line no-console
     console.warn(
       'DevTools theme ' + theme + ' not found, defaulting to nicinabox'
     );
@@ -132,7 +159,7 @@ class ChartMonitor extends Component {
     };
   }
 
-  getChartOptions(props = this.props) {
+  getChartOptions(props = this.props): Props<S, A> {
     const { computedStates } = props;
     const theme = this.getTheme();
 
@@ -156,7 +183,9 @@ class ChartMonitor extends Component {
       heightBetweenNodesCoeff: 1,
       widthBetweenNodesCoeff: 1.3,
       tooltipOptions,
-      style: this.getChartStyle(),
+      style: (this.getChartStyle() as unknown) as
+        | { [key: string]: Primitive }
+        | undefined,
     };
 
     return deepmerge(defaultOptions, props);
@@ -165,9 +194,10 @@ class ChartMonitor extends Component {
   render() {
     const theme = this.getTheme();
 
+    const ChartAsAny = Chart as any;
     return (
       <div style={{ ...styles.container, backgroundColor: theme.base07 }}>
-        <Chart {...this.getChartOptions()} />
+        <ChartAsAny {...this.getChartOptions()} />
       </div>
     );
   }
