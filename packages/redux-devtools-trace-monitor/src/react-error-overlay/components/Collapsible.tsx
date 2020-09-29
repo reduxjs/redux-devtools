@@ -5,13 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
-import React, { Component } from 'react';
+import React, { Component, CSSProperties, ReactNode } from 'react';
 import { nicinabox as theme } from 'redux-devtools-themes';
 
-import type { Element as ReactElement } from 'react';
-
-const _collapsibleStyle = {
+const _collapsibleStyle: CSSProperties = {
   color: theme.base06,
   backgroundColor: theme.base01,
   cursor: 'pointer',
@@ -24,26 +21,27 @@ const _collapsibleStyle = {
   lineHeight: '1.5',
 };
 
-const collapsibleCollapsedStyle = {
+const collapsibleCollapsedStyle: CSSProperties = {
   ..._collapsibleStyle,
   marginBottom: '1.5em',
 };
 
-const collapsibleExpandedStyle = {
+const collapsibleExpandedStyle: CSSProperties = {
   ..._collapsibleStyle,
   marginBottom: '0.6em',
 };
 
-type Props = {|
-  children: ReactElement<any>[],
-|};
+interface Props {
+  collapsedByDefault?: boolean;
+  children: ReactNode[];
+}
 
-type State = {|
-  collapsed: boolean,
-|};
+interface State {
+  collapsed: boolean | undefined;
+}
 
 class Collapsible extends Component<Props, State> {
-  state = {
+  state: State = {
     collapsed: undefined,
   };
 
@@ -53,7 +51,7 @@ class Collapsible extends Component<Props, State> {
     }));
   };
 
-  isCollapsed = (state) =>
+  isCollapsed = (state: State) =>
     state.collapsed === undefined
       ? this.props.collapsedByDefault
       : state.collapsed;

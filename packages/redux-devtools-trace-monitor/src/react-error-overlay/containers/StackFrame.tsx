@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
-import React, { Component } from 'react';
+import React, { Component, CSSProperties } from 'react';
 import CodeBlock from './StackFrameCodeBlock';
 import { getPrettyURL } from '../utils/getPrettyURL';
 import { nicinabox as theme } from 'redux-devtools-themes';
@@ -14,22 +13,22 @@ import { nicinabox as theme } from 'redux-devtools-themes';
 import type { StackFrame as StackFrameType } from '../utils/stack-frame';
 import type { ErrorLocation } from '../utils/parseCompileError';
 
-const linkStyle = {
+const linkStyle: CSSProperties = {
   fontSize: '0.9em',
   marginBottom: '0.9em',
 };
 
-const anchorStyle = {
+const anchorStyle: CSSProperties = {
   textDecoration: 'none',
   color: theme.base05,
   cursor: 'pointer',
 };
 
-const codeAnchorStyle = {
+const codeAnchorStyle: CSSProperties = {
   cursor: 'pointer',
 };
 
-const toggleStyle = {
+const toggleStyle: CSSProperties = {
   marginBottom: '1.5em',
   color: theme.base05,
   cursor: 'pointer',
@@ -44,20 +43,20 @@ const toggleStyle = {
   lineHeight: '1.5',
 };
 
-type Props = {|
-  frame: StackFrameType,
-  contextSize: number,
-  critical: boolean,
-  showCode: boolean,
-  editorHandler: (errorLoc: ErrorLocation) => void,
-|};
+interface Props {
+  frame: StackFrameType;
+  contextSize: number;
+  critical: boolean;
+  showCode: boolean;
+  editorHandler: (errorLoc: ErrorLocation) => void;
+}
 
-type State = {|
-  compiled: boolean,
-|};
+interface State {
+  compiled: boolean;
+}
 
 class StackFrame extends Component<Props, State> {
-  state = {
+  state: State = {
     compiled: false,
   };
 
@@ -93,7 +92,9 @@ class StackFrame extends Component<Props, State> {
     this.props.editorHandler(errorLoc);
   };
 
-  onKeyDown = (e /* : SyntheticKeyboardEvent<> */) => {
+  onKeyDown: React.KeyboardEventHandler<HTMLSpanElement> = (
+    e /* : SyntheticKeyboardEvent<> */
+  ) => {
     if (e.key === 'Enter') {
       this.editorHandler();
     }
@@ -162,10 +163,10 @@ class StackFrame extends Component<Props, State> {
         <div>{functionName}</div>
         <div style={linkStyle}>
           <span
-            style={canOpenInEditor ? anchorStyle : null}
-            onClick={canOpenInEditor ? this.editorHandler : null}
-            onKeyDown={canOpenInEditor ? this.onKeyDown : null}
-            tabIndex={canOpenInEditor ? '0' : null}
+            style={canOpenInEditor ? anchorStyle : undefined}
+            onClick={canOpenInEditor ? this.editorHandler : undefined}
+            onKeyDown={canOpenInEditor ? this.onKeyDown : undefined}
+            tabIndex={canOpenInEditor ? 0 : undefined}
           >
             {url}
           </span>
@@ -173,8 +174,8 @@ class StackFrame extends Component<Props, State> {
         {codeBlockProps && (
           <span>
             <span
-              onClick={canOpenInEditor ? this.editorHandler : null}
-              style={canOpenInEditor ? codeAnchorStyle : null}
+              onClick={canOpenInEditor ? this.editorHandler : undefined}
+              style={canOpenInEditor ? codeAnchorStyle : undefined}
             >
               <CodeBlock {...codeBlockProps} />
             </span>

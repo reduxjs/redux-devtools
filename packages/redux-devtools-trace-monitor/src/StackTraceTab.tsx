@@ -3,26 +3,45 @@ import React, { Component } from 'react';
 import { getStackFrames } from './react-error-overlay/utils/getStackFrames';
 import StackTrace from './react-error-overlay/containers/StackTrace';
 import openFile from './openFile';
+import { Action } from 'redux';
+import { TabComponentProps } from 'redux-devtools-inspector-monitor';
+import StackFrame from './react-error-overlay/utils/stack-frame';
+import { ErrorLocation } from './react-error-overlay/utils/parseCompileError';
 
 const rootStyle = { padding: '5px 10px' };
 
-export default class StackTraceTab extends Component {
+interface Props<S, A extends Action<unknown>> extends TabComponentProps<S, A> {
+  openFile: (
+    fileName: string,
+    lineNumber: number,
+    stackFrame: StackFrame
+  ) => void;
+}
+
+interface State {
+  stackFrames: StackFrame[];
+  currentError?: Error;
+  showDocsLink?: boolean;
+}
+
+export default class StackTraceTab<
+  S,
+  A extends Action<unknown>
+> extends Component<Props<S, A>, State> {
   static defaultProps = {
     openFile,
   };
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      stackFrames: [],
-    };
-  }
+  state: State = {
+    stackFrames: [],
+  };
+
   componentDidMount() {
     // console.log("StackTraceTab mounted");
     this.checkForStackTrace();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props<S, A>) {
     const { action, actions } = prevProps;
 
     if (action !== this.props.action || actions !== this.props.actions) {
@@ -47,25 +66,32 @@ export default class StackTraceTab extends Component {
         stack: liftedAction.stack,
       });
 
-      getStackFrames(deserializedError).then((stackFrames) => {
-        /* eslint-disable no-console */
-        if (process.env.NODE_ENV === 'development')
-          console.log('Stack frames: ', stackFrames);
-        /* eslint-enable no-console */
-        this.setState({ stackFrames, currentError: deserializedError });
-      });
+      getStackFrames(deserializedError)
+        .then((stackFrames) => {
+          /* eslint-disable no-console */
+          if (process.env.NODE_ENV === 'development')
+            console.log('Stack frames: ', stackFrames);
+          /* eslint-enable no-console */
+          this.setState({
+            stackFrames: stackFrames!,
+            currentError: deserializedError,
+          });
+        })
+        .catch(() => {
+          // noop
+        });
     } else {
       this.setState({
         stackFrames: [],
         showDocsLink:
-          liftedAction.action &&
-          liftedAction.action.type &&
-          liftedAction.action.type !== '@@INIT',
+          liftedAction!.action &&
+          liftedAction!.action.type &&
+          liftedAction!.action.type !== '@@INIT',
       });
     }
   }
 
-  onStackLocationClicked = (fileLocation = {}) => {
+  onStackLocationClicked = (fileLocation: Partial<ErrorLocation> = {}) => {
     // console.log("Stack location args: ", ...args);
 
     const { fileName, lineNumber } = fileLocation;
@@ -93,7 +119,7 @@ export default class StackTraceTab extends Component {
     }
   };
 
-  openDocs = (e) => {
+  openDocs: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.stopPropagation();
     window.open(
       'https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Features/Trace.md'

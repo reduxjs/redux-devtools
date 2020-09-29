@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
 import type { StackFrame } from './stack-frame';
 import { parse } from './parser';
 import { map } from './mapper';
@@ -14,15 +13,21 @@ import { toExclude } from '../../presets';
 
 function getStackFrames(
   error: Error,
-  unhandledRejection: boolean = false, // eslint-disable-line no-unused-vars
-  contextSize: number = 3
+  unhandledRejection = false, // eslint-disable-line no-unused-vars
+  contextSize = 3
 ): Promise<StackFrame[] | null> {
   const parsedFrames = parse(error);
   let enhancedFramesPromise;
-  if (error.__unmap_source) {
+  if (
+    ((error as unknown) as {
+      __unmap_source: string | { uri: string; contents: string };
+    }).__unmap_source
+  ) {
     enhancedFramesPromise = unmap(
       // $FlowFixMe
-      error.__unmap_source,
+      ((error as unknown) as {
+        __unmap_source: string | { uri: string; contents: string };
+      }).__unmap_source,
       parsedFrames,
       contextSize
     );
@@ -44,7 +49,7 @@ function getStackFrames(
         (functionName == null ||
           functionName.indexOf('__stack_frame_overlay_proxy_console__') ===
             -1) &&
-        !toExclude.test(fileName)
+        !toExclude.test(fileName!)
     );
   });
 }

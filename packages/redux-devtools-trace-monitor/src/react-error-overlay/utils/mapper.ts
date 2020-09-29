@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
 import StackFrame from './stack-frame';
 import { getSourceMap } from './getSourceMap';
 import { getLinesAround } from './getLinesAround';
@@ -18,7 +17,7 @@ import { settle } from 'settle-promise';
  */
 async function map(
   frames: StackFrame[],
-  contextLines: number = 3
+  contextLines = 3
 ): Promise<StackFrame[]> {
   const cache: any = {};
   const files: string[] = [];
@@ -41,7 +40,7 @@ async function map(
   );
   return frames.map((frame) => {
     const { functionName, fileName, lineNumber, columnNumber } = frame;
-    let { map, fileSource } = cache[fileName] || {};
+    const { map, fileSource } = cache[fileName!] || {};
     if (map == null || lineNumber == null) {
       return frame;
     }

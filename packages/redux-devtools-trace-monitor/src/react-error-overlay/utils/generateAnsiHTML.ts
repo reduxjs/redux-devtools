@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
-
 import Anser from 'anser';
 import { nicinabox as theme } from 'redux-devtools-themes';
 import { AllHtmlEntities as Entities } from 'html-entities';
 
-var entities = new Entities();
+const entities = new Entities();
 
-var anserMap = {
+const anserMap = {
   'ansi-bright-black': theme.base03,
   'ansi-bright-yellow': theme.base0A,
   'ansi-yellow': theme.base0B,
@@ -29,25 +27,25 @@ var anserMap = {
 };
 
 function generateAnsiHTML(txt: string): string {
-  var arr = new Anser().ansiToJson(entities.encode(txt), {
+  const arr = new Anser().ansiToJson(entities.encode(txt), {
     use_classes: true,
   });
 
-  var result = '';
-  var open = false;
-  for (var index = 0; index < arr.length; ++index) {
-    var c = arr[index];
-    var content = c.content,
+  let result = '';
+  let open = false;
+  for (let index = 0; index < arr.length; ++index) {
+    const c = arr[index];
+    const content = c.content,
       fg = c.fg;
 
-    var contentParts = content.split('\n');
-    for (var _index = 0; _index < contentParts.length; ++_index) {
+    const contentParts = content.split('\n');
+    for (let _index = 0; _index < contentParts.length; ++_index) {
       if (!open) {
         result += '<span data-ansi-line="true">';
         open = true;
       }
-      var part = contentParts[_index].replace('\r', '');
-      var color = anserMap[fg];
+      const part = contentParts[_index].replace('\r', '');
+      const color = anserMap[fg as keyof typeof anserMap];
       if (color != null) {
         result += '<span style="color: ' + color + ';">' + part + '</span>';
       } else {

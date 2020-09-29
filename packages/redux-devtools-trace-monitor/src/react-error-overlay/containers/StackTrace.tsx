@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import StackFrame from './StackFrame';
 import Collapsible from '../components/Collapsible';
 import { isInternalFile } from '../utils/isInternalFile';
@@ -22,19 +21,19 @@ const traceStyle = {
   overflow: 'auto',
 };
 
-type Props = {|
-  stackFrames: StackFrameType[],
-  errorName: string,
-  contextSize: number,
-  editorHandler: (errorLoc: ErrorLocation) => void,
-|};
+interface Props {
+  stackFrames: StackFrameType[];
+  errorName: string;
+  contextSize: number;
+  editorHandler: (errorLoc: ErrorLocation) => void;
+}
 
 class StackTrace extends Component<Props> {
   renderFrames() {
     const { stackFrames, errorName, contextSize, editorHandler } = this.props;
-    const renderedFrames = [];
+    const renderedFrames: ReactElement[] = [];
     let hasReachedAppCode = false,
-      currentBundle = [],
+      currentBundle: ReactElement[] = [],
       bundleCount = 0,
       anyNodeExpanded = false;
 
@@ -55,7 +54,7 @@ class StackTrace extends Component<Props> {
 
       const frameEle = (
         <StackFrame
-          key={'frame-' + index}
+          key={`frame-${index}`}
           frame={frame}
           contextSize={contextSize}
           critical={index === 0}
@@ -77,7 +76,7 @@ class StackTrace extends Component<Props> {
           renderedFrames.push(
             <Collapsible
               collapsedByDefault={anyNodeExpanded}
-              key={'bundle-' + bundleCount}
+              key={`bundle-${bundleCount}`}
             >
               {currentBundle}
             </Collapsible>

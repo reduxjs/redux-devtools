@@ -1,31 +1,35 @@
+import StackFrame from './react-error-overlay/utils/stack-frame';
+
 const isFF = navigator.userAgent.indexOf('Firefox') !== -1;
 
-function openResource(fileName, lineNumber, stackFrame) {
+function openResource(
+  fileName: string,
+  lineNumber: number,
+  stackFrame: StackFrame
+) {
   const adjustedLineNumber = Math.max(lineNumber - 1, 0);
-  chrome.devtools.panels.openResource(
-    fileName,
-    adjustedLineNumber,
-    (result) => {
-      //console.log("openResource callback args: ", callbackArgs);
-      if (result.isError) {
-        const {
-          fileName: finalFileName,
-          lineNumber: finalLineNumber,
-        } = stackFrame;
-        const adjustedLineNumber = Math.max(finalLineNumber - 1, 0);
-        chrome.devtools.panels.openResource(
-          finalFileName,
-          adjustedLineNumber,
-          (/* result */) => {
-            // console.log("openResource result: ", result);
-          }
-        );
-      }
+  chrome.devtools.panels.openResource(fileName, adjustedLineNumber, ((result: {
+    isError?: boolean;
+  }) => {
+    //console.log("openResource callback args: ", callbackArgs);
+    if (result.isError) {
+      const {
+        fileName: finalFileName,
+        lineNumber: finalLineNumber,
+      } = stackFrame;
+      const adjustedLineNumber = Math.max(finalLineNumber! - 1, 0);
+      chrome.devtools.panels.openResource(
+        finalFileName!,
+        adjustedLineNumber,
+        (/* result */) => {
+          // console.log("openResource result: ", result);
+        }
+      );
     }
-  );
+  }) as () => void);
 }
 
-function openAndCloseTab(url) {
+function openAndCloseTab(url: string) {
   chrome.tabs.create({ url }, (tab) => {
     const removeTab = () => {
       chrome.windows.onFocusChanged.removeListener(removeTab);
@@ -45,19 +49,19 @@ function openAndCloseTab(url) {
   });
 }
 
-function openInIframe(url) {
+function openInIframe(url: string) {
   const iframe = document.createElement('iframe');
   iframe.src = url;
-  iframe.style = 'display:none';
+  iframe.style.display = 'none';
   document.body.appendChild(iframe);
-  setTimeout(() => iframe.parentNode.removeChild(iframe), 3000);
+  setTimeout(() => iframe.parentNode!.removeChild(iframe), 3000);
 }
 
-function openInEditor(editor, path, stackFrame) {
+function openInEditor(editor: string, path: string, stackFrame: StackFrame) {
   const projectPath = path.replace(/\/$/, '');
   const file =
     stackFrame._originalFileName ||
-    stackFrame.finalFileName ||
+    ((stackFrame as unknown) as { finalFileName: string }).finalFileName ||
     stackFrame.fileName ||
     '';
   let filePath = /^https?:\/\//.test(file)
@@ -95,7 +99,11 @@ function openInEditor(editor, path, stackFrame) {
   }
 }
 
-export default function openFile(fileName, lineNumber, stackFrame) {
+export default function openFile(
+  fileName: string,
+  lineNumber: number,
+  stackFrame: StackFrame
+) {
   if (process.env.NODE_ENV === 'development')
     // eslint-disable-next-line no-console
     console.log(fileName, lineNumber, stackFrame);

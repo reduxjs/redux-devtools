@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
-import { SourceMapConsumer } from 'source-map';
+import { RawSourceMap, SourceMapConsumer } from 'source-map';
 
 /**
  * A wrapped instance of a <code>{@link https://github.com/mozilla/source-map SourceMapConsumer}</code>.
@@ -16,7 +15,7 @@ import { SourceMapConsumer } from 'source-map';
 class SourceMap {
   __source_map: SourceMapConsumer;
 
-  constructor(sourceMap) {
+  constructor(sourceMap: SourceMapConsumer) {
     this.__source_map = sourceMap;
   }
 
@@ -28,7 +27,7 @@ class SourceMap {
   getOriginalPosition(
     line: number,
     column: number
-  ): { source: string, line: number, column: number } {
+  ): { source: string; line: number; column: number } {
     const {
       line: l,
       column: c,
@@ -50,7 +49,7 @@ class SourceMap {
     source: string,
     line: number,
     column: number
-  ): { line: number, column: number } {
+  ): { line: number; column: number } {
     const { line: l, column: c } = this.__source_map.generatedPositionFor({
       source,
       line,
@@ -71,7 +70,7 @@ class SourceMap {
   }
 
   getSources(): string[] {
-    return this.__source_map.sources;
+    return ((this.__source_map as unknown) as { sources: string[] }).sources;
   }
 }
 
@@ -82,7 +81,7 @@ function extractSourceMapUrl(
   const regex = /\/\/[#@] ?sourceMappingURL=([^\s'"]+)\s*$/gm;
   let match = null;
   for (;;) {
-    let next = regex.exec(fileContents);
+    const next = regex.exec(fileContents);
     if (next == null) {
       break;
     }
@@ -107,7 +106,7 @@ async function getSourceMap(
   let sm = await extractSourceMapUrl(fileUri, fileContents);
   if (sm.indexOf('data:') === 0) {
     const base64 = /^data:application\/json;([\w=:"-]+;)*base64,/;
-    const match2 = sm.match(base64);
+    const match2 = base64.exec(sm);
     if (!match2) {
       throw new Error(
         'Sorry, non-base64 inline source-map encoding is not supported.'
@@ -116,7 +115,9 @@ async function getSourceMap(
     sm = sm.substring(match2[0].length);
     sm = window.atob(sm);
     sm = JSON.parse(sm);
-    return new SourceMap(new SourceMapConsumer(sm));
+    return new SourceMap(
+      new SourceMapConsumer((sm as unknown) as RawSourceMap)
+    );
   } else {
     const index = fileUri.lastIndexOf('/');
     const url = fileUri.substring(0, index + 1) + sm;
