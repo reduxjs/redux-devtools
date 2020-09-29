@@ -1,5 +1,5 @@
 import React, { ReactComponentElement } from 'react';
-import { configure, mount } from 'enzyme';
+import { configure, mount, ReactWrapper } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import StackTraceTab from '../src/StackTraceTab';
 
@@ -7,8 +7,8 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 function genAsyncSnapshot(
-  component: ReactComponentElement<any>,
-  done: boolean
+  component: ReactWrapper<any, any, any>,
+  done: () => void
 ) {
   setTimeout(() => {
     component.update();
