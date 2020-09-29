@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
 let injectedCount = 0;
-const injectedCache = {};
+const injectedCache: { [key: number]: HTMLStyleElement } = {};
 
 function getHead(document: Document) {
   return document.head || document.getElementsByTagName('head')[0];
@@ -33,14 +32,17 @@ function removeCss(document: Document, ref: number) {
   delete injectedCache[ref];
 }
 
-function applyStyles(element: HTMLElement, styles: Object) {
+function applyStyles(
+  element: HTMLElement,
+  styles: Partial<CSSStyleDeclaration>
+) {
   element.setAttribute('style', '');
   for (const key in styles) {
     if (!Object.prototype.hasOwnProperty.call(styles, key)) {
       continue;
     }
     // $FlowFixMe
-    element.style[key] = styles[key];
+    element.style[key] = styles[key]!;
   }
 }
 

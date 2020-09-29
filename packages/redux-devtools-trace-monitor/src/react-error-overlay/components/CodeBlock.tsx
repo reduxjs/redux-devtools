@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
-const preStyle = {
+const preStyle: CSSProperties = {
   position: 'relative',
   display: 'block',
   backgroundColor: '#000',
@@ -24,10 +23,10 @@ const codeStyle = {
   fontFamily: 'Consolas, Menlo, monospace',
 };
 
-type CodeBlockPropsType = {|
-  main: boolean,
-  codeHTML: string,
-|};
+interface CodeBlockPropsType {
+  main: boolean;
+  codeHTML: string;
+}
 
 function CodeBlock(props: CodeBlockPropsType) {
   const codeBlock = { __html: props.codeHTML };

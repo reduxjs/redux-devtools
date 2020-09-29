@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
-
 /** A container holding a script line. */
 class ScriptLine {
   /** The line number of this line of source. */
@@ -16,7 +14,7 @@ class ScriptLine {
   /** Whether or not this line should be highlighted. Particularly useful for error reporting with context. */
   highlight: boolean;
 
-  constructor(lineNumber: number, content: string, highlight: boolean = false) {
+  constructor(lineNumber: number, content: string, highlight = false) {
     this.lineNumber = lineNumber;
     this.content = content;
     this.highlight = highlight;
@@ -98,10 +96,10 @@ class StackFrame {
       str += this.fileName + ':';
     }
     if (this.lineNumber != null) {
-      str += this.lineNumber + ':';
+      str += `${this.lineNumber}:`;
     }
     if (this.columnNumber != null) {
-      str += this.columnNumber + ':';
+      str += `${this.columnNumber}:`;
     }
     return str.slice(0, -1);
   }

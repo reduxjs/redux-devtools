@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
 function getPrettyURL(
-  sourceFileName: ?string,
-  sourceLineNumber: ?number,
-  sourceColumnNumber: ?number,
-  fileName: ?string,
-  lineNumber: ?number,
-  columnNumber: ?number,
+  sourceFileName: string | null | undefined,
+  sourceLineNumber: number | null | undefined,
+  sourceColumnNumber: number | null | undefined,
+  fileName: string | null | undefined,
+  lineNumber: number | null | undefined,
+  columnNumber: number | null | undefined,
   compiled: boolean
 ): string {
   let prettyURL;
@@ -26,16 +25,16 @@ function getPrettyURL(
     } else {
       prettyURL = sourceFileName;
     }
-    prettyURL += ':' + sourceLineNumber;
+    prettyURL += `:${sourceLineNumber}`;
     // Note: we intentionally skip 0's because they're produced by cheap Webpack maps
     if (sourceColumnNumber) {
-      prettyURL += ':' + sourceColumnNumber;
+      prettyURL += `:${sourceColumnNumber}`;
     }
   } else if (fileName && typeof lineNumber === 'number') {
-    prettyURL = fileName + ':' + lineNumber;
+    prettyURL = `${fileName}:${lineNumber}`;
     // Note: we intentionally skip 0's because they're produced by cheap Webpack maps
     if (columnNumber) {
-      prettyURL += ':' + columnNumber;
+      prettyURL += `:${columnNumber}`;
     }
   } else {
     prettyURL = 'unknown';

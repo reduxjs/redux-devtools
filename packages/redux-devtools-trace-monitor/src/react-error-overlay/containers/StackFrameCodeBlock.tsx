@@ -5,40 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
 import React from 'react';
 import CodeBlock from '../components/CodeBlock';
 import { applyStyles } from '../utils/dom/css';
 import { absolutifyCaret } from '../utils/dom/absolutifyCaret';
-// import type { ScriptLine } from '../utils/stack-frame';
+import { ScriptLine } from '../utils/stack-frame';
 import generateAnsiHTML from '../utils/generateAnsiHTML';
 
 import { codeFrameColumns } from '@babel/code-frame';
 import { nicinabox as theme } from 'redux-devtools-themes';
 
-/*
-type StackFrameCodeBlockPropsType = {|
-  lines: ScriptLine[],
-  lineNum: number,
-  columnNum: ?number,
-  contextSize: number,
-  main: boolean,
-|};
+interface StackFrameCodeBlockPropsType {
+  lines: ScriptLine[];
+  lineNum: number;
+  columnNum: number | null | undefined;
+  contextSize: number;
+  main: boolean;
+}
 
-// Exact type workaround for spread operator.
-// See: https://github.com/facebook/flow/issues/2405
-type Exact<T> = $Shape<T>;
-*/
-
-function StackFrameCodeBlock(
-  props /* : Exact<StackFrameCodeBlockPropsType> */
-) {
+function StackFrameCodeBlock(props: StackFrameCodeBlockPropsType) {
   const { lines, lineNum, columnNum, contextSize, main } = props;
-  const sourceCode = [];
+  const sourceCode: string[] = [];
   let whiteSpace = Infinity;
   lines.forEach(function (e) {
     const { content: text } = e;
-    const m = text.match(/^\s*/);
+    const m = /^\s*/.exec(text);
     if (text === '') {
       return;
     }
@@ -86,16 +77,16 @@ function StackFrameCodeBlock(
     const ccn2 = node.childNodes;
     for (let index2 = 0; index2 < ccn2.length; ++index2) {
       const lineNode = ccn2[index2];
-      const text = lineNode.innerText;
+      const text = (lineNode as HTMLElement).innerText;
       if (text == null) {
         continue;
       }
-      if (text.indexOf(' ' + lineNum + ' |') === -1) {
+      if (text.indexOf(` ${lineNum} |`) === -1) {
         continue;
       }
       // $FlowFixMe
-      applyStyles(node, {
-        'background-color': main ? theme.base02 : theme.base01,
+      applyStyles(node as HTMLElement, {
+        backgroundColor: main ? theme.base02 : theme.base01,
       });
       // eslint-disable-next-line
       break oLoop;

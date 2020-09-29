@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
 import StackFrame from './stack-frame';
 
 const regexExtractLocation = /\(?(.+?)(?::(\d+))?(?::(\d+))?\)?$/;
 
 function extractLocation(token: string): [string, number, number] {
   return regexExtractLocation
-    .exec(token)
+    .exec(token)!
     .slice(1)
     .map((v) => {
       const p = Number(v);
@@ -20,7 +19,7 @@ function extractLocation(token: string): [string, number, number] {
         return p;
       }
       return v;
-    });
+    }) as [string, number, number];
 }
 
 const regexValidFrame_Chrome = /^\s*(at|in)\s.+(:\d+)/;
@@ -46,7 +45,7 @@ function parseStack(stack: string[]): StackFrame[] {
         const last = data.pop();
         return new StackFrame(
           data.join('@') || (isEval ? 'eval' : null),
-          ...extractLocation(last)
+          ...extractLocation(last!)
         );
       } else {
         // Strip eval, we don't care about it
@@ -58,7 +57,10 @@ function parseStack(stack: string[]): StackFrame[] {
         }
         const data = e.trim().split(/\s+/g).slice(1);
         const last = data.pop();
-        return new StackFrame(data.join(' ') || null, ...extractLocation(last));
+        return new StackFrame(
+          data.join(' ') || null,
+          ...extractLocation(last!)
+        );
       }
     });
   return frames;
