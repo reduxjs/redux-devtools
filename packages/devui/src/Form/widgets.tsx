@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldProps, Widget, WidgetProps } from 'react-jsonschema-form';
+import { FieldProps, Widget, WidgetProps } from '@rjsf/core';
 import Select from '../Select';
 import Slider from '../Slider';
 
