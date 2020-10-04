@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InspectorMonitor from 'redux-devtools-inspector-monitor';
-import TraceTabe from 'redux-devtools-inspector-monitor-trace-tab';
+import TraceTab from 'redux-devtools-inspector-monitor-trace-tab';
 import TestTab from 'redux-devtools-test-generator';
 import { DATA_TYPE_KEY } from '../../../constants/dataTypes';
 import SubTabs from './SubTabs';
@@ -21,7 +21,7 @@ const DEFAULT_TABS = [
   },
   {
     name: 'Trace',
-    component: StackTraceTab,
+    component: TraceTab,
   },
 ];
 
