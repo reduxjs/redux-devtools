@@ -60,7 +60,7 @@ If `tabs` is an array, only provided tabs are rendered.
 
 `component` is provided with `action` and other props, see [`ActionPreview.jsx`](src/ActionPreview.jsx#L42) for reference.
 
-Usage example: [`redux-devtools-test-generator`](https://github.com/zalmoxisus/redux-devtools-test-generator#containersdevtoolsjs).
+Usage example: [`redux-devtools-inspector-monitor-test-tab`](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-inspector-monitor-test-tab#containersdevtoolsjs).
 
 ### License
 
