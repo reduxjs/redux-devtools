@@ -1,5 +1,5 @@
 {
-  "name": "redux-devtools-test-generator",
+  "name": "redux-devtools-inspector-monitor-test-tab",
   "version": "0.6.2",
   "description": "Generate tests for redux devtools.",
   "keywords": [
@@ -12,7 +12,7 @@
     "time travel",
     "live edit"
   ],
-  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-test-generator",
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-inspector-monitor-test-tab",
   "bugs": {
     "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
@@ -79,7 +79,8 @@
     "redux-devtools": "^3.7.0",
     "redux-devtools-dock-monitor": "^1.2.0",
     "redux-devtools-inspector-monitor": "^0.14.0",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "seamless-immutable": "^7.1.4"
   },
   "peerDependencies": {
     "@types/react": "^16.3.18",
