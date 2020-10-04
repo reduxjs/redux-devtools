@@ -10,11 +10,11 @@ It's integrated in Redux DevTools browser extension. To use it separately with [
 import React from 'react';
 import { createDevTools } from 'redux-devtools';
 import InspectorMonitor from 'redux-devtools-inspector-monitor';
-import TraceMonitor from 'redux-devtools-trace-monitor';
+import TraceTab from 'redux-devtools-inspector-monitor-trace-tab';
 
 export default createDevTools(
   <Inspector
-    tabs: defaultTabs => [...defaultTabs, { name: 'Trace', component: TraceMonitor }]
+    tabs: defaultTabs => [...defaultTabs, { name: 'Trace', component: TraceTab }]
   />
 );
 ```
