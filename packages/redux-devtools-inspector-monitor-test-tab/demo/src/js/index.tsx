@@ -27,7 +27,7 @@ function getDebugSessionKey() {
 
 const ROOT =
   process.env.NODE_ENV === 'production'
-    ? '/redux-devtools-test-generator/'
+    ? '/redux-devtools-inspector-monitor-test-tab/'
     : '/';
 
 const DevTools = getDevTools(window.location);
