@@ -3587,11 +3587,6 @@
   resolved "https://registry.yarnpkg.com/@types/jsan/-/jsan-3.1.0.tgz#128fdb14a102134ede764b11682e795d1b380c43"
   integrity sha512-V5wfm0++TqM92D0ZkAhl9MDQHPTi88fXhMNVin5LV/Y3RnuU/FUv6wML4Vt/amZmPN9WaFTmDhKW+h58kAFmIg==
 
-"@types/json-schema@*":
-  version "7.0.6"
-  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
-  integrity sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
-
 "@types/json-schema@^7.0.3", "@types/json-schema@^7.0.4", "@types/json-schema@^7.0.5":
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.5.tgz#dcce4430e64b443ba8945f0290fb564ad5bac6dd"
@@ -3778,14 +3773,6 @@
   integrity sha512-wgRIVV2jo/Gria1PK3K26II7gfRD3VTcMfPYhL0CuIApSeon7xjBTj8Xs8Ln+Vbb/FuRKWfUaJXmF4R3KUGntA==
   dependencies:
     "@types/dragula" "*"
-
-"@types/react-jsonschema-form@^1.7.4":
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/@types/react-jsonschema-form/-/react-jsonschema-form-1.7.4.tgz#b9dded80f830bce11a623107633b13964a143cca"
-  integrity sha512-TSsntIuB8bfheC/ZpjUmgB6+m5cLR4Gbh8rnqpSYB6T4e2TwzNICuKC5AykZI0XTxqLJmShyVsJxuo4aih64Gw==
-  dependencies:
-    "@types/json-schema" "*"
-    "@types/react" "*"
 
 "@types/react-native@*":
   version "0.63.8"
