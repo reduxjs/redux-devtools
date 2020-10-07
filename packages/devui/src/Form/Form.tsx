@@ -1,6 +1,6 @@
 import React, { PureComponent, Component } from 'react';
 import PropTypes from 'prop-types';
-import JSONSchemaForm, { FormProps } from 'react-jsonschema-form';
+import JSONSchemaForm, { FormProps } from '@rjsf/core';
 import { Base16Theme } from 'base16';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
@@ -18,7 +18,7 @@ export interface Props<T> extends FormProps<T> {
 }
 
 /**
- * Wrapper around [`react-jsonschema-form`](https://github.com/mozilla-services/react-jsonschema-form) with custom widgets.
+ * Wrapper around [`react-jsonschema-form`](https://github.com/rjsf-team/react-jsonschema-form) with custom widgets.
  */
 export default class Form<T> extends (PureComponent || Component)<Props<T>> {
   render() {
