@@ -3,7 +3,6 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var graphiqlMiddleware = require('./middleware/graphiql');
 var graphqlMiddleware = require('./middleware/graphql');
 
 var app = express.Router();
@@ -26,7 +25,7 @@ function routes(options, store, scServer) {
     else app.use(morgan('combined'));
   }
 
-  app.use('/graphiql', graphiqlMiddleware);
+  graphqlMiddleware(store).applyMiddleware({ app });
 
   serveUmdModule('react');
   serveUmdModule('react-dom');
@@ -42,8 +41,6 @@ function routes(options, store, scServer) {
   app.use(cors({ methods: 'POST' }));
   app.use(bodyParser.json({ limit: limit }));
   app.use(bodyParser.urlencoded({ limit: limit, extended: false }));
-
-  app.use('/graphql', graphqlMiddleware(store));
 
   app.post('/', function (req, res) {
     if (!req.body) return res.status(404).end();
