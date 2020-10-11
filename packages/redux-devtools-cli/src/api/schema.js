@@ -1,4 +1,4 @@
-var makeExecutableSchema = require('graphql-tools').makeExecutableSchema;
+var makeExecutableSchema = require('apollo-server').makeExecutableSchema;
 var requireSchema = require('../utils/requireSchema');
 var schema = requireSchema('./schema_def.graphql', require);
 

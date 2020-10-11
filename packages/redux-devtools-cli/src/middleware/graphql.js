@@ -1,13 +1,27 @@
-var graphqlExpress = require('graphql-server-express').graphqlExpress;
+var ApolloServer = require('apollo-server-express').ApolloServer;
 var schema = require('../api/schema');
 
 module.exports = function (store) {
-  return graphqlExpress(function () {
-    return {
-      schema: schema,
-      context: {
-        store: store,
-      },
-    };
+  return new ApolloServer({
+    schema,
+    context: {
+      store: store,
+    },
+    playground: {
+      endpoint: '/graphql',
+      tabs: [
+        {
+          endpoint: '/graphql',
+          query:
+            '{\n' +
+            '  reports {\n' +
+            '    id,\n' +
+            '    type,\n' +
+            '    title\n' +
+            '  }\n' +
+            '}',
+        },
+      ],
+    },
   });
 };
