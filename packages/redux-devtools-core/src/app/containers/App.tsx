@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Container, Notification } from 'devui';
 import { clearNotification } from '../actions';
 import Header from '../components/Header';
 import Actions from '../containers/Actions';
 import Settings from '../components/Settings';
+import { StoreState } from '../reducers';
 
-class App extends Component {
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = StateProps & DispatchProps;
+
+class App extends Component<Props> {
   render() {
     const { section, theme, notification } = this.props;
     let body;
@@ -47,18 +51,14 @@ App.propTypes = {
   clearNotification: PropTypes.func,
 };
 
-function mapStateToProps(state) {
-  return {
-    section: state.section,
-    theme: state.theme,
-    notification: state.notification,
-  };
-}
+const mapStateToProps = (state: StoreState) => ({
+  section: state.section,
+  theme: state.theme,
+  notification: state.notification,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    clearNotification: bindActionCreators(clearNotification, dispatch),
-  };
-}
+const actionCreators = {
+  clearNotification,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, actionCreators)(App);

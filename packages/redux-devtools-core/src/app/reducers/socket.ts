@@ -1,4 +1,5 @@
 import * as actions from '../constants/socketActionTypes';
+import { StoreAction } from '../actions';
 
 const initialState = {
   id: null,
@@ -9,7 +10,7 @@ const initialState = {
   error: undefined,
 };
 
-export default function socket(state = initialState, action) {
+export default function socket(state = initialState, action: StoreAction) {
   switch (action.type) {
     case actions.CONNECT_REQUEST: {
       return {

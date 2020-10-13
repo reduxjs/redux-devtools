@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Tabs } from 'devui';
 import { monitors } from '../utils/getMonitor';
 import { selectMonitor } from '../actions';
+import { StoreState } from '../reducers';
 
-class MonitorSelector extends Component {
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = StateProps & DispatchProps;
+
+class MonitorSelector extends Component<Props> {
   static propTypes = {
     selected: PropTypes.string,
     selectMonitor: PropTypes.func.isRequired,
   };
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return nextProps.selected !== this.props.selected;
   }
 
@@ -30,16 +34,12 @@ class MonitorSelector extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    selected: state.monitor.selected,
-  };
-}
+const mapStateToProps = (state: StoreState) => ({
+  selected: state.monitor.selected,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    selectMonitor: bindActionCreators(selectMonitor, dispatch),
-  };
-}
+const actionCreators = {
+  selectMonitor,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MonitorSelector);
+export default connect(mapStateToProps, actionCreators)(MonitorSelector);

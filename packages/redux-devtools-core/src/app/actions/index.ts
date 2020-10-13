@@ -20,11 +20,29 @@ import { RECONNECT } from '../constants/socketActionTypes';
 let monitorReducer;
 let monitorProps = {};
 
-export function changeSection(section) {
+interface ChangeSectionAction {
+  readonly type: typeof CHANGE_SECTION;
+  readonly section: string;
+}
+export function changeSection(section: string): ChangeSectionAction {
   return { type: CHANGE_SECTION, section };
 }
 
-export function changeTheme(data) {
+interface ChangeThemeFormData {
+  readonly theme: 'default' | 'material';
+  readonly scheme: string;
+  readonly dark: boolean;
+}
+interface ChangeThemeData {
+  readonly formData: ChangeThemeFormData;
+}
+interface ChangeThemeAction {
+  readonly type: typeof CHANGE_THEME;
+  readonly theme: 'default' | 'material';
+  readonly scheme: string;
+  readonly dark: boolean;
+}
+export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
   return { type: CHANGE_THEME, ...data.formData };
 }
 
@@ -63,7 +81,10 @@ export function importState(state, preloadedState) {
   return { type: LIFTED_ACTION, message: 'IMPORT', state, preloadedState };
 }
 
-export function exportState() {
+interface ExportAction {
+  type: typeof EXPORT;
+}
+export function exportState(): ExportAction {
   return { type: EXPORT };
 }
 
@@ -89,34 +110,81 @@ export function dispatchRemotely(action) {
   return { type: LIFTED_ACTION, message: 'ACTION', action };
 }
 
-export function togglePersist() {
+interface TogglePersistAction {
+  type: typeof TOGGLE_PERSIST;
+}
+export function togglePersist(): TogglePersistAction {
   return { type: TOGGLE_PERSIST };
 }
 
-export function toggleSync() {
+interface ToggleSyncAction {
+  type: typeof TOGGLE_SYNC;
+}
+export function toggleSync(): ToggleSyncAction {
   return { type: TOGGLE_SYNC };
 }
 
-export function toggleSlider() {
+interface ToggleSliderAction {
+  type: typeof TOGGLE_SLIDER;
+}
+export function toggleSlider(): ToggleSliderAction {
   return { type: TOGGLE_SLIDER };
 }
 
-export function toggleDispatcher() {
+interface ToggleDispatcherAction {
+  type: typeof TOGGLE_DISPATCHER;
+}
+export function toggleDispatcher(): ToggleDispatcherAction {
   return { type: TOGGLE_DISPATCHER };
 }
 
-export function saveSocketSettings(options) {
+interface ConnectionOptions {
+  readonly type: 'disabled' | 'remotedev' | 'custom';
+  readonly hostname: string;
+  readonly port: number;
+  readonly secure: boolean;
+}
+interface ReconnectAction {
+  readonly type: typeof RECONNECT;
+  readonly options: ConnectionOptions;
+}
+export function saveSocketSettings(
+  options: ConnectionOptions
+): ReconnectAction {
   return { type: RECONNECT, options };
 }
 
-export function showNotification(message) {
+interface Notification {
+  readonly type: 'error';
+  readonly message: string;
+}
+interface ShowNotificationAction {
+  readonly type: typeof SHOW_NOTIFICATION;
+  readonly notification: Notification;
+}
+export function showNotification(message: string): ShowNotificationAction {
   return { type: SHOW_NOTIFICATION, notification: { type: 'error', message } };
 }
 
-export function clearNotification() {
+interface ClearNotificationAction {
+  readonly type: typeof CLEAR_NOTIFICATION;
+}
+export function clearNotification(): ClearNotificationAction {
   return { type: CLEAR_NOTIFICATION };
 }
 
 export function getReport(report) {
   return { type: GET_REPORT_REQUEST, report };
 }
+
+export type StoreAction =
+  | ChangeSectionAction
+  | ChangeThemeAction
+  | ExportAction
+  | TogglePersistAction
+  | ToggleSyncAction
+  | ToggleSliderAction
+  | ToggleDispatcherAction
+  | ReconnectAction
+  | ShowNotificationAction
+  | ClearNotificationAction;

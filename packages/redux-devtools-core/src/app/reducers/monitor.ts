@@ -5,6 +5,7 @@ import {
   TOGGLE_SLIDER,
   TOGGLE_DISPATCHER,
 } from '../constants/actionTypes';
+import { StoreAction } from '../actions';
 
 const initialState = {
   selected: 'InspectorMonitor',
@@ -26,7 +27,7 @@ export function dispatchMonitorAction(state, action) {
   };
 }
 
-export default function monitor(state = initialState, action) {
+export default function monitor(state = initialState, action: StoreAction) {
   switch (action.type) {
     case MONITOR_ACTION:
       return dispatchMonitorAction(state, action);

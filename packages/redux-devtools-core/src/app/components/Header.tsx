@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Tabs, Toolbar, Button, Divider } from 'devui';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { GoBook } from 'react-icons/go';
 import { IoMdText } from 'react-icons/io';
 import { TiSocialTwitter } from 'react-icons/ti';
@@ -11,13 +9,14 @@ import { changeSection } from '../actions';
 
 const tabs = [{ name: 'Actions' }, { name: 'Reports' }, { name: 'Settings' }];
 
-class Header extends Component {
-  static propTypes = {
-    section: PropTypes.string.isRequired,
-    changeSection: PropTypes.func.isRequired,
-  };
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+interface OwnProps {
+  readonly section: string;
+}
+type Props = DispatchProps & OwnProps;
 
-  openLink = (url) => () => {
+class Header extends Component<Props> {
+  openLink = (url: string) => () => {
     window.open(url);
   };
 
@@ -69,10 +68,8 @@ class Header extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    changeSection: bindActionCreators(changeSection, dispatch),
-  };
-}
+const actionCreators = {
+  changeSection,
+};
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(null, actionCreators)(Header);

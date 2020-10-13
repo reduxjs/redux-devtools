@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Button } from 'devui';
 import { MdAvTimer } from 'react-icons/md';
 import { toggleSlider } from '../../actions';
 
-class SliderButton extends Component {
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = DispatchProps;
+
+class SliderButton extends Component<Props> {
   static propTypes = {
     isOpen: PropTypes.bool,
     toggleSlider: PropTypes.func.isRequired,
   };
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return nextProps.isOpen !== this.props.isOpen;
   }
 
@@ -30,10 +32,8 @@ class SliderButton extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    toggleSlider: bindActionCreators(toggleSlider, dispatch),
-  };
-}
+const actionCreators = {
+  toggleSlider,
+};
 
-export default connect(null, mapDispatchToProps)(SliderButton);
+export default connect(null, actionCreators)(SliderButton);

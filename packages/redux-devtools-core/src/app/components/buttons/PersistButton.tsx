@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Button } from 'devui';
 import { FaThumbtack } from 'react-icons/fa';
 import { togglePersist } from '../../actions';
+import { StoreState } from '../../reducers';
 
-class LockButton extends Component {
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = StateProps & DispatchProps;
+
+class LockButton extends Component<Props> {
   static propTypes = {
     persisted: PropTypes.bool,
     disabled: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
   };
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return nextProps.persisted !== this.props.persisted;
   }
 
@@ -37,16 +41,12 @@ class LockButton extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    persisted: state.instances.persisted,
-  };
-}
+const mapStateToProps = (state: StoreState) => ({
+  persisted: state.instances.persisted,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onClick: bindActionCreators(togglePersist, dispatch),
-  };
-}
+const actionCreators = {
+  onClick: togglePersist,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(LockButton);
+export default connect(mapStateToProps, actionCreators)(LockButton);

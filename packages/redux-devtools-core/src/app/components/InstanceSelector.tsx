@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Select } from 'devui';
 import { selectInstance } from '../actions';
+import { StoreState } from '../reducers';
 
-class InstanceSelector extends Component {
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = StateProps & DispatchProps;
+
+class InstanceSelector extends Component<Props> {
   static propTypes = {
     selected: PropTypes.string,
     instances: PropTypes.object.isRequired,
     onSelect: PropTypes.func.isRequired,
   };
+
+  select?: { readonly value: string; readonly label: string }[];
 
   render() {
     this.select = [{ value: '', label: 'Autoselect instances' }];
@@ -19,7 +25,7 @@ class InstanceSelector extends Component {
     Object.keys(instances).forEach((key) => {
       name = instances[key].name;
       if (name !== undefined)
-        this.select.push({ value: key, label: instances[key].name });
+        this.select!.push({ value: key, label: instances[key].name });
     });
 
     return (
@@ -32,17 +38,13 @@ class InstanceSelector extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    selected: state.instances.selected,
-    instances: state.instances.options,
-  };
-}
+const mapStateToProps = (state: StoreState) => ({
+  selected: state.instances.selected,
+  instances: state.instances.options,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onSelect: bindActionCreators(selectInstance, dispatch),
-  };
-}
+const actionCreators = {
+  onSelect: selectInstance,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(InstanceSelector);
+export default connect(mapStateToProps, actionCreators)(InstanceSelector);

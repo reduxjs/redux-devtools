@@ -14,3 +14,4 @@ export * from './Toolbar';
 import color from './utils/color';
 export const effects = { color };
 export { default as createStyledComponent } from './utils/createStyledComponent';
+export { Theme, Scheme } from './utils/theme';

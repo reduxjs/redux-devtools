@@ -11,6 +11,8 @@ import { DISCONNECTED } from '../constants/socketActionTypes';
 import parseJSON from '../utils/parseJSON';
 import { recompute } from '../utils/updateState';
 
+interface InstancesState {}
+
 export const initialState = {
   selected: null,
   current: 'default',

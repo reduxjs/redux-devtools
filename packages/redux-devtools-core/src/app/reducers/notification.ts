@@ -4,8 +4,18 @@ import {
   LIFTED_ACTION,
   ERROR,
 } from '../constants/actionTypes';
+import { StoreAction } from '../actions';
 
-export default function notification(state = null, action) {
+interface Notification {
+  readonly type: 'error';
+  readonly message: string;
+}
+export type NotificationState = Notification | null;
+
+export default function notification(
+  state: NotificationState = null,
+  action: StoreAction
+): NotificationState {
   switch (action.type) {
     case SHOW_NOTIFICATION:
       return action.notification;

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Container, Form } from 'devui';
 import { listSchemes, listThemes } from 'devui/lib/utils/theme';
 import { changeTheme } from '../../actions';
+import { StoreState } from '../../reducers';
 
-class Themes extends Component {
-  static propTypes = {
-    changeTheme: PropTypes.func.isRequired,
-    theme: PropTypes.object.isRequired,
-  };
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = StateProps & DispatchProps;
 
+class Themes extends Component<Props> {
   render() {
     const theme = this.props.theme;
     const formData = {
@@ -49,16 +47,12 @@ class Themes extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    theme: state.theme,
-  };
-}
+const mapStateToProps = (state: StoreState) => ({
+  theme: state.theme,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    changeTheme: bindActionCreators(changeTheme, dispatch),
-  };
-}
+const actionCreators = {
+  changeTheme,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Themes);
+export default connect(mapStateToProps, actionCreators)(Themes);

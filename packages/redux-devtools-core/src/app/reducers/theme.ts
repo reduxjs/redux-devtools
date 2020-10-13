@@ -1,8 +1,15 @@
 import { CHANGE_THEME } from '../constants/actionTypes';
+import { StoreAction } from '../actions';
+
+export interface ThemeState {
+  readonly theme: 'default' | 'material';
+  readonly scheme: string;
+  readonly light: boolean;
+}
 
 export default function theme(
   state = { theme: 'default', scheme: 'default', light: true },
-  action
+  action: StoreAction
 ) {
   if (action.type === CHANGE_THEME) {
     return {

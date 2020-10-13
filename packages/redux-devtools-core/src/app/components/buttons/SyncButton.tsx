@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Button } from 'devui';
 import { TiArrowSync } from 'react-icons/ti';
 import { toggleSync } from '../../actions';
+import { StoreState } from '../../reducers';
 
-class SyncButton extends Component {
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = StateProps & DispatchProps;
+
+class SyncButton extends Component<Props> {
   static propTypes = {
     sync: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
   };
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return nextProps.sync !== this.props.sync;
   }
 
@@ -30,16 +34,12 @@ class SyncButton extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    sync: state.instances.sync,
-  };
-}
+const mapStateToProps = (state: StoreState) => ({
+  sync: state.instances.sync,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onClick: bindActionCreators(toggleSync, dispatch),
-  };
-}
+const actionCreators = {
+  onClick: toggleSync,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SyncButton);
+export default connect(mapStateToProps, actionCreators)(SyncButton);

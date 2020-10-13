@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Container } from 'devui';
 import SliderMonitor from './monitors/Slider';
@@ -10,6 +9,7 @@ import DevTools from '../containers/DevTools';
 import Dispatcher from './monitors/Dispatcher';
 import TopButtons from '../components/TopButtons';
 import BottomButtons from '../components/BottomButtons';
+import { StoreState } from '../reducers';
 
 class Actions extends Component {
   render() {
@@ -61,7 +61,7 @@ Actions.propTypes = {
   sliderIsOpen: PropTypes.bool,
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state: StoreState) => {
   const instances = state.instances;
   const id = getActiveInstance(instances);
   return {
@@ -73,13 +73,11 @@ function mapStateToProps(state) {
     sliderIsOpen: state.monitor.sliderIsOpen,
     reports: state.reports.data,
   };
-}
+};
 
-function mapDispatchToProps(dispatch) {
-  return {
-    liftedDispatch: bindActionCreators(liftedDispatchAction, dispatch),
-    getReport: bindActionCreators(getReport, dispatch),
-  };
-}
+const actionCreators = {
+  liftedDispatch: liftedDispatchAction,
+  getReport,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Actions);
+export default connect(mapStateToProps, actionCreators)(Actions);

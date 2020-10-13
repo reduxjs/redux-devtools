@@ -1,12 +1,13 @@
 import {
   UPDATE_REPORTS /* , GET_REPORT_SUCCESS */,
 } from '../constants/actionTypes';
+import { StoreAction } from '../actions';
 
 const initialState = {
   data: [],
 };
 
-export default function reports(state = initialState, action) {
+export default function reports(state = initialState, action: StoreAction) {
   /* if (action.type === GET_REPORT_SUCCESS) {
     const id = action.data.id;
     return {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Container, Form } from 'devui';
 import { saveSocketSettings } from '../../actions';
+import { StoreState } from '../../reducers';
 
 const defaultSchema = {
   type: 'object',
@@ -37,19 +37,17 @@ const uiSchema = {
   },
 };
 
-class Connection extends Component {
-  static propTypes = {
-    saveSettings: PropTypes.func.isRequired,
-    options: PropTypes.object.isRequired,
-    type: PropTypes.string,
-  };
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = StateProps & DispatchProps;
 
+class Connection extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = this.setFormData(props.type);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: Props, nextState) {
     return this.state !== nextState;
   }
 
@@ -119,14 +117,10 @@ class Connection extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return state.connection;
-}
+const mapStateToProps = (state: StoreState) => state.connection;
 
-function mapDispatchToProps(dispatch) {
-  return {
-    saveSettings: bindActionCreators(saveSocketSettings, dispatch),
-  };
-}
+const actionCreators = {
+  saveSettings: saveSocketSettings,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Connection);
+export default connect(mapStateToProps, actionCreators)(Connection);
