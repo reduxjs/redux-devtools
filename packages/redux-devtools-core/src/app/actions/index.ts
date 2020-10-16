@@ -18,6 +18,7 @@ import {
   CLEAR_NOTIFICATION,
   UPDATE_STATE,
   UPDATE_REPORTS,
+  REMOVE_INSTANCE,
 } from '../constants/actionTypes';
 import {
   AUTH_ERROR,
@@ -75,19 +76,37 @@ export function liftedDispatch(action) {
   return { type: LIFTED_ACTION, message: 'DISPATCH', action };
 }
 
-export function selectInstance(selected) {
+interface SelectInstanceAction {
+  type: typeof SELECT_INSTANCE;
+  selected: string;
+}
+export function selectInstance(selected: string): SelectInstanceAction {
   return { type: SELECT_INSTANCE, selected };
 }
 
-export function selectMonitor(monitor) {
+interface SelectMonitorAction {
+  type: typeof SELECT_MONITOR;
+  monitor: string;
+  monitorState?: unknown;
+}
+export function selectMonitor(monitor: string): SelectMonitorAction {
   return { type: SELECT_MONITOR, monitor };
 }
-
-export function selectMonitorWithState(value, monitorState) {
+export function selectMonitorWithState(
+  value: string,
+  monitorState: unknown
+): SelectMonitorAction {
   return { type: SELECT_MONITOR, monitor: value, monitorState };
 }
 
-export function selectMonitorTab(subTabName) {
+interface NextState {
+  subTabName: string;
+}
+interface UpdateMonitorStateAction {
+  type: typeof UPDATE_MONITOR_STATE;
+  nextState: NextState;
+}
+export function selectMonitorTab(subTabName: string): UpdateMonitorStateAction {
   return { type: UPDATE_MONITOR_STATE, nextState: { subTabName } };
 }
 
@@ -196,6 +215,11 @@ export function getReport(report) {
   return { type: GET_REPORT_REQUEST, report };
 }
 
+interface RemoveInstanceAction {
+  type: typeof REMOVE_INSTANCE;
+  id: string;
+}
+
 interface ConnectRequestAction {
   type: typeof CONNECT_REQUEST;
   options: ConnectionOptions;
@@ -265,6 +289,9 @@ interface UnsubscribeAction {
 export type StoreAction =
   | ChangeSectionAction
   | ChangeThemeAction
+  | SelectInstanceAction
+  | SelectMonitorAction
+  | UpdateMonitorStateAction
   | ExportAction
   | TogglePersistAction
   | ToggleSyncAction
@@ -273,6 +300,7 @@ export type StoreAction =
   | ReconnectAction
   | ShowNotificationAction
   | ClearNotificationAction
+  | RemoveInstanceAction
   | ConnectRequestAction
   | ConnectSuccessAction
   | ConnectErrorAction

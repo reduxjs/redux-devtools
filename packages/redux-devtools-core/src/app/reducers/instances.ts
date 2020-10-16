@@ -12,9 +12,12 @@ import parseJSON from '../utils/parseJSON';
 import { recompute } from '../utils/updateState';
 import { StoreAction } from '../actions';
 
-interface InstancesState {}
+interface InstancesState {
+  sync: boolean;
+  persisted?: boolean;
+}
 
-export const initialState = {
+export const initialState: InstancesState = {
   selected: null,
   current: 'default',
   sync: false,
@@ -170,7 +173,7 @@ export function dispatchAction(state, { action }) {
   return state;
 }
 
-function removeState(state, connectionId) {
+function removeState(state: InstancesState, connectionId: string) {
   const instanceIds = state.connections[connectionId];
   if (!instanceIds) return state;
 
@@ -310,7 +313,5 @@ export default function instances(state = initialState, action: StoreAction) {
   }
 }
 
-/* eslint-disable no-shadow */
-export const getActiveInstance = (instances) =>
+export const getActiveInstance = (instances: InstancesState) =>
   instances.selected || instances.current;
-/* eslint-enable */

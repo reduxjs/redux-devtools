@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { withTheme } from 'styled-components';
 import { tree } from 'd3-state-visualizer';
 import { getPath } from '../ChartMonitorWrapper';
@@ -12,7 +11,10 @@ const style = {
   height: '100%',
 };
 
-class ChartTab extends Component {
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = DispatchProps;
+
+class ChartTab extends Component<Props> {
   shouldComponentUpdate() {
     return false;
   }
@@ -21,7 +23,7 @@ class ChartTab extends Component {
     this.createChart(this.props);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (
       this.props.theme.scheme !== nextProps.theme.scheme ||
       nextProps.theme.light !== this.props.theme.light
@@ -99,11 +101,9 @@ ChartTab.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    updateMonitorState: bindActionCreators(updateMonitorState, dispatch),
-  };
-}
+const actionCreators = {
+  updateMonitorState,
+};
 
-const ConnectedChartTab = connect(null, mapDispatchToProps)(ChartTab);
+const ConnectedChartTab = connect(null, actionCreators)(ChartTab);
 export default withTheme(ConnectedChartTab);

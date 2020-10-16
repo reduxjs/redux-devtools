@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Button } from 'devui';
 import { TiUpload } from 'react-icons/ti';
 import { importState } from '../../actions';
 
-class ImportButton extends Component {
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = DispatchProps;
+
+class ImportButton extends Component<Props> {
   static propTypes = {
     importState: PropTypes.func.isRequired,
   };
@@ -55,10 +57,8 @@ class ImportButton extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    importState: bindActionCreators(importState, dispatch),
-  };
-}
+const actionCreators = {
+  importState,
+};
 
-export default connect(null, mapDispatchToProps)(ImportButton);
+export default connect(null, actionCreators)(ImportButton);

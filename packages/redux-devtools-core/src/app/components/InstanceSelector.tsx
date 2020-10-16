@@ -31,6 +31,7 @@ class InstanceSelector extends Component<Props> {
     return (
       <Select
         options={this.select}
+        // TODO Where's the type-checking?
         onChange={this.props.onSelect}
         value={this.props.selected || ''}
       />

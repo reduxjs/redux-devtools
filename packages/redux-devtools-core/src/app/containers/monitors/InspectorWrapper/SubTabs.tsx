@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Tabs } from 'devui';
 import StateTree from 'redux-devtools-inspector-monitor/lib/tabs/StateTab';
 import ActionTree from 'redux-devtools-inspector-monitor/lib/tabs/ActionTab';
@@ -10,14 +9,19 @@ import { selectMonitorTab } from '../../../actions';
 import RawTab from './RawTab';
 import ChartTab from './ChartTab';
 import VisualDiffTab from './VisualDiffTab';
+import { StoreState } from '../../../reducers';
 
-class SubTabs extends Component {
-  constructor(props) {
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = StateProps & DispatchProps;
+
+class SubTabs extends Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.updateTabs(props);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (nextProps.parentTab !== this.props.parentTab) {
       this.updateTabs(nextProps);
     }
@@ -34,7 +38,7 @@ class SubTabs extends Component {
     }
   };
 
-  updateTabs(props) {
+  updateTabs(props: Props) {
     const parentTab = props.parentTab;
 
     if (parentTab === 'Diff') {
@@ -96,17 +100,13 @@ SubTabs.propTypes = {
   nextState: PropTypes.object,
 };
 
-function mapStateToProps(state) {
-  return {
-    parentTab: state.monitor.monitorState.tabName,
-    selected: state.monitor.monitorState.subTabName,
-  };
-}
+const mapStateToProps = (state: StoreState) => ({
+  parentTab: state.monitor.monitorState.tabName,
+  selected: state.monitor.monitorState.subTabName,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    selectMonitorTab: bindActionCreators(selectMonitorTab, dispatch),
-  };
-}
+const actionCreators = {
+  selectMonitorTab,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubTabs);
+export default connect(mapStateToProps, actionCreators)(SubTabs);

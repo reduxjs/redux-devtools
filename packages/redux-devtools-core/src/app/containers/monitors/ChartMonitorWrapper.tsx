@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import ChartMonitor from 'redux-devtools-chart-monitor';
 import { selectMonitorWithState } from '../../actions';
 
@@ -15,7 +14,10 @@ export function getPath(obj, inspectedStatePath) {
   inspectedStatePath.push(name);
 }
 
-class ChartMonitorWrapper extends Component {
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = DispatchProps;
+
+class ChartMonitorWrapper extends Component<Props> {
   static update = ChartMonitor.update;
 
   onClickText = (data) => {
@@ -47,13 +49,8 @@ ChartMonitorWrapper.propTypes = {
   selectMonitorWithState: PropTypes.func.isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    selectMonitorWithState: bindActionCreators(
-      selectMonitorWithState,
-      dispatch
-    ),
-  };
-}
+const actionCreators = {
+  selectMonitorWithState: selectMonitorWithState,
+};
 
-export default connect(null, mapDispatchToProps)(ChartMonitorWrapper);
+export default connect(null, actionCreators)(ChartMonitorWrapper);
