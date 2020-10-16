@@ -9,7 +9,7 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = StateProps & DispatchProps;
 
-class Themes extends Component<Props> {
+export class Themes extends Component<Props> {
   render() {
     const theme = this.props.theme;
     const formData = {

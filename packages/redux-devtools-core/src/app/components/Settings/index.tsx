@@ -3,17 +3,19 @@ import { Tabs } from 'devui';
 import Connection from './Connection';
 import Themes from './Themes';
 
-class Settings extends Component {
-  constructor(props) {
-    super(props);
-    this.tabs = [
-      { name: 'Connection', component: Connection },
-      { name: 'Themes', component: Themes },
-    ];
-    this.state = { selected: 'Connection' };
-  }
+interface State {
+  selected: string;
+}
 
-  handleSelect = (selected) => {
+// eslint-disable-next-line @typescript-eslint/ban-types
+class Settings extends Component<{}, State> {
+  tabs = [
+    { name: 'Connection', component: Connection },
+    { name: 'Themes', component: Themes },
+  ];
+  state: State = { selected: 'Connection' };
+
+  handleSelect = (selected: string) => {
     this.setState({ selected });
   };
 

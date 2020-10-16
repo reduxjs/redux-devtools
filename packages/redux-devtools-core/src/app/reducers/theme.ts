@@ -1,14 +1,19 @@
+import { Scheme, Theme } from 'devui';
 import { CHANGE_THEME } from '../constants/actionTypes';
 import { StoreAction } from '../actions';
 
 export interface ThemeState {
-  readonly theme: 'default' | 'material';
-  readonly scheme: string;
+  readonly theme: Theme;
+  readonly scheme: Scheme;
   readonly light: boolean;
 }
 
 export default function theme(
-  state = { theme: 'default', scheme: 'default', light: true },
+  state: ThemeState = {
+    theme: 'default' as const,
+    scheme: 'default' as const,
+    light: true,
+  },
   action: StoreAction
 ) {
   if (action.type === CHANGE_THEME) {

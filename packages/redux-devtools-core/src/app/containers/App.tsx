@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container, Notification } from 'devui';
 import { clearNotification } from '../actions';
@@ -40,16 +39,6 @@ class App extends Component<Props> {
     );
   }
 }
-
-App.propTypes = {
-  section: PropTypes.string.isRequired,
-  theme: PropTypes.object.isRequired,
-  notification: PropTypes.shape({
-    message: PropTypes.string,
-    type: PropTypes.string,
-  }),
-  clearNotification: PropTypes.func,
-};
 
 const mapStateToProps = (state: StoreState) => ({
   section: state.section,

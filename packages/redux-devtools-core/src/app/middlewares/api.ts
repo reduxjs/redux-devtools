@@ -1,5 +1,6 @@
-import socketCluster from 'socketcluster-client';
+import socketCluster, { SCClientSocket } from 'socketcluster-client';
 import { stringify } from 'jsan';
+import { Dispatch, Middleware, MiddlewareAPI, Store } from 'redux';
 import socketOptions from '../constants/socketOptions';
 import * as actions from '../constants/socketActionTypes';
 import { getActiveInstance } from '../reducers/instances';
@@ -12,11 +13,12 @@ import {
   GET_REPORT_ERROR,
   GET_REPORT_SUCCESS,
 } from '../constants/actionTypes';
-import { showNotification, importState } from '../actions';
+import { showNotification, importState, StoreAction } from '../actions';
 import { nonReduxDispatch } from '../utils/monitorActions';
+import { StoreState } from '../reducers';
 
-let socket;
-let store;
+let socket: SCClientSocket;
+let store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>;
 
 function emit({ message: type, id, instanceId, action, state }) {
   socket.emit(id ? 'sc-' + id : 'respond', { type, action, state, instanceId });
@@ -163,7 +165,7 @@ function disconnect() {
 }
 
 function login() {
-  socket.emit('login', {}, (error, baseChannel) => {
+  socket.emit('login', {}, (error: Error, baseChannel: string) => {
     if (error) {
       store.dispatch({ type: actions.AUTH_ERROR, error });
       return;
@@ -193,13 +195,13 @@ function getReport(reportId) {
   });
 }
 
-export default function api(inStore) {
+export default function api(
+  inStore: MiddlewareAPI<Dispatch<StoreAction>, StoreState>
+) {
   store = inStore;
-  return (next) => (action) => {
+  return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
     const result = next(action);
-    switch (
-      action.type // eslint-disable-line default-case
-    ) {
+    switch (action.type) {
       case actions.CONNECT_REQUEST:
         connect();
         break;

@@ -1,12 +1,20 @@
+import { AuthStates, States } from 'socketcluster-client/lib/scclientsocket';
 import * as actions from '../constants/socketActionTypes';
 import { StoreAction } from '../actions';
 
-const initialState = {
+export interface SocketState {
+  id: string | null;
+  channels: string[];
+  socketState: States;
+  authState: AuthStates;
+  error: Error | undefined;
+}
+
+const initialState: SocketState = {
   id: null,
   channels: [],
   socketState: actions.CLOSED,
   authState: actions.PENDING,
-  authToken: null,
   error: undefined,
 };
 
@@ -40,7 +48,6 @@ export default function socket(state = initialState, action: StoreAction) {
       return {
         ...state,
         authState: actions.AUTHENTICATED,
-        authToken: action.authToken,
         baseChannel: action.baseChannel,
       };
     case actions.AUTH_ERROR:
@@ -58,13 +65,13 @@ export default function socket(state = initialState, action: StoreAction) {
     case actions.SUBSCRIBE_SUCCESS:
       return {
         ...state,
-        channels: [...state.channels, action.channelName],
+        channels: [...state.channels, action.channel],
       };
     case actions.UNSUBSCRIBE:
       return {
         ...state,
         channels: state.channels.filter(
-          (channel) => channel !== action.channelName
+          (channel) => channel !== action.channel
         ),
       };
     case actions.DISCONNECTED:

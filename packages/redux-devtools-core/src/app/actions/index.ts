@@ -1,3 +1,5 @@
+import { Scheme, Theme } from 'devui';
+import { AuthStates, States } from 'socketcluster-client/lib/scclientsocket';
 import {
   CHANGE_SECTION,
   CHANGE_THEME,
@@ -14,8 +16,24 @@ import {
   GET_REPORT_REQUEST,
   SHOW_NOTIFICATION,
   CLEAR_NOTIFICATION,
+  UPDATE_STATE,
+  UPDATE_REPORTS,
 } from '../constants/actionTypes';
-import { RECONNECT } from '../constants/socketActionTypes';
+import {
+  AUTH_ERROR,
+  AUTH_REQUEST,
+  AUTH_SUCCESS,
+  CONNECT_ERROR,
+  CONNECT_REQUEST,
+  CONNECT_SUCCESS,
+  DEAUTHENTICATE,
+  DISCONNECTED,
+  RECONNECT,
+  SUBSCRIBE_ERROR,
+  SUBSCRIBE_REQUEST,
+  SUBSCRIBE_SUCCESS,
+  UNSUBSCRIBE,
+} from '../constants/socketActionTypes';
 
 let monitorReducer;
 let monitorProps = {};
@@ -29,8 +47,8 @@ export function changeSection(section: string): ChangeSectionAction {
 }
 
 interface ChangeThemeFormData {
-  readonly theme: 'default' | 'material';
-  readonly scheme: string;
+  readonly theme: Theme;
+  readonly scheme: Scheme;
   readonly dark: boolean;
 }
 interface ChangeThemeData {
@@ -38,8 +56,8 @@ interface ChangeThemeData {
 }
 interface ChangeThemeAction {
   readonly type: typeof CHANGE_THEME;
-  readonly theme: 'default' | 'material';
-  readonly scheme: string;
+  readonly theme: Theme;
+  readonly scheme: Scheme;
   readonly dark: boolean;
 }
 export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
@@ -138,8 +156,9 @@ export function toggleDispatcher(): ToggleDispatcherAction {
   return { type: TOGGLE_DISPATCHER };
 }
 
+export type ConnectionType = 'disabled' | 'remotedev' | 'custom';
 interface ConnectionOptions {
-  readonly type: 'disabled' | 'remotedev' | 'custom';
+  readonly type: ConnectionType;
   readonly hostname: string;
   readonly port: number;
   readonly secure: boolean;
@@ -177,6 +196,72 @@ export function getReport(report) {
   return { type: GET_REPORT_REQUEST, report };
 }
 
+interface ConnectRequestAction {
+  type: typeof CONNECT_REQUEST;
+  options: ConnectionOptions;
+}
+
+interface ConnectSuccessPayload {
+  id: string;
+  authState: AuthStates;
+  socketState: States;
+}
+interface ConnectSuccessAction {
+  type: typeof CONNECT_SUCCESS;
+  payload: ConnectSuccessPayload;
+  error: Error | undefined;
+}
+
+interface ConnectErrorAction {
+  type: typeof CONNECT_ERROR;
+  error: Error | undefined;
+}
+
+interface AuthRequestAction {
+  type: typeof AUTH_REQUEST;
+}
+
+interface AuthSuccessAction {
+  type: typeof AUTH_SUCCESS;
+  baseChannel: string;
+}
+
+interface AuthErrorAction {
+  type: typeof AUTH_ERROR;
+  error: Error;
+}
+
+interface DisconnectedAction {
+  type: typeof DISCONNECTED;
+  code: number;
+}
+
+interface DeauthenticateAction {
+  type: typeof DEAUTHENTICATE;
+}
+
+interface SubscribeRequestAction {
+  type: typeof SUBSCRIBE_REQUEST;
+  channel: string;
+  subscription: typeof UPDATE_STATE | typeof UPDATE_REPORTS;
+}
+
+interface SubscribeSuccessAction {
+  type: typeof SUBSCRIBE_SUCCESS;
+  channel: string;
+}
+
+interface SubscribeErrorAction {
+  type: typeof SUBSCRIBE_ERROR;
+  error: Error;
+  status: string;
+}
+
+interface UnsubscribeAction {
+  type: typeof UNSUBSCRIBE;
+  channel: string;
+}
+
 export type StoreAction =
   | ChangeSectionAction
   | ChangeThemeAction
@@ -187,4 +272,16 @@ export type StoreAction =
   | ToggleDispatcherAction
   | ReconnectAction
   | ShowNotificationAction
-  | ClearNotificationAction;
+  | ClearNotificationAction
+  | ConnectRequestAction
+  | ConnectSuccessAction
+  | ConnectErrorAction
+  | AuthRequestAction
+  | AuthSuccessAction
+  | AuthErrorAction
+  | DisconnectedAction
+  | DeauthenticateAction
+  | SubscribeRequestAction
+  | SubscribeSuccessAction
+  | SubscribeErrorAction
+  | UnsubscribeAction;

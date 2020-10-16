@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import section, { SectionState } from './section';
 import connection, { ConnectionState } from './connection';
-import socket from './socket';
+import socket, { SocketState } from './socket';
 import monitor from './monitor';
 import notification, { NotificationState } from './notification';
 import instances from './instances';
@@ -13,6 +13,7 @@ export interface StoreState {
   readonly section: SectionState;
   readonly theme: ThemeState;
   readonly connection: ConnectionState;
+  readonly socket: SocketState;
   readonly notification: NotificationState;
 }
 

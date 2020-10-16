@@ -10,6 +10,7 @@ import {
 import { DISCONNECTED } from '../constants/socketActionTypes';
 import parseJSON from '../utils/parseJSON';
 import { recompute } from '../utils/updateState';
+import { StoreAction } from '../actions';
 
 interface InstancesState {}
 
@@ -236,7 +237,7 @@ function init({ type, action, name, libConfig = {} }, connectionId, current) {
   };
 }
 
-export default function instances(state = initialState, action) {
+export default function instances(state = initialState, action: StoreAction) {
   switch (action.type) {
     case UPDATE_STATE: {
       const { request } = action;

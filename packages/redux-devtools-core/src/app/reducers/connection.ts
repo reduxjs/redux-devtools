@@ -1,14 +1,14 @@
 import { RECONNECT } from '../constants/socketActionTypes';
-import { StoreAction } from '../actions';
+import { ConnectionType, StoreAction } from '../actions';
 
-interface ConnectionOptions {
+export interface ConnectionOptions {
   readonly hostname: string;
   readonly port: number;
   readonly secure: boolean;
 }
 export interface ConnectionState {
   readonly options: ConnectionOptions;
-  readonly type: 'disabled' | 'remotedev' | 'custom';
+  readonly type: ConnectionType;
 }
 
 export default function connection(

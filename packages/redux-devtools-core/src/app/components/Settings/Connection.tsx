@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container, Form } from 'devui';
-import { saveSocketSettings } from '../../actions';
+import {
+  JSONSchema7,
+  JSONSchema7Definition,
+  JSONSchema7Type,
+  JSONSchema7TypeName,
+} from 'json-schema';
+import { ConnectionType, saveSocketSettings } from '../../actions';
 import { StoreState } from '../../reducers';
+import { ConnectionOptions } from '../../reducers/connection';
+import { IChangeEvent, ISubmitEvent } from '@rjsf/core';
 
-const defaultSchema = {
+declare module 'json-schema' {
+  export interface JSONSchema7 {
+    enumNames?: JSONSchema7Type[];
+  }
+}
+
+interface Schema {
+  type: JSONSchema7TypeName;
+  required?: string[];
+  properties: {
+    [key: string]: JSONSchema7Definition;
+  };
+}
+
+const defaultSchema: Schema = {
   type: 'object',
   required: [],
   properties: {
@@ -41,31 +62,20 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = StateProps & DispatchProps;
 
-class Connection extends Component<Props> {
-  constructor(props) {
-    super(props);
-    this.state = this.setFormData(props.type);
-  }
+interface FormData extends ConnectionOptions {
+  readonly type: ConnectionType;
+}
 
-  shouldComponentUpdate(nextProps: Props, nextState) {
-    return this.state !== nextState;
-  }
+interface State {
+  readonly formData: FormData;
+  readonly type: ConnectionType;
+  readonly schema: Schema;
+  readonly changed: boolean | undefined;
+}
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.options !== nextProps.options) {
-      this.setState({
-        formData: { ...nextProps.options, type: nextProps.type },
-      });
-    }
-  }
-
-  handleSave = (data) => {
-    this.props.saveSettings(data.formData);
-    this.setState({ changed: false });
-  };
-
-  setFormData = (type, changed) => {
-    let schema;
+export class Connection extends Component<Props, State> {
+  setFormData = (type: ConnectionType, changed?: boolean) => {
+    let schema: Schema;
     if (type !== 'custom') {
       schema = {
         type: 'object',
@@ -85,7 +95,26 @@ class Connection extends Component<Props> {
     };
   };
 
-  handleChange = (data) => {
+  state: State = this.setFormData(this.props.type);
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return this.state !== nextState;
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
+    if (this.props.options !== nextProps.options) {
+      this.setState({
+        formData: { ...nextProps.options, type: nextProps.type },
+      });
+    }
+  }
+
+  handleSave = (data: ISubmitEvent<FormData>) => {
+    this.props.saveSettings(data.formData);
+    this.setState({ changed: false });
+  };
+
+  handleChange = (data: IChangeEvent<FormData>) => {
     const formData = data.formData;
     const type = formData.type;
     if (type !== this.state.type) {
