@@ -12,7 +12,7 @@ import parseJSON from '../utils/parseJSON';
 import { recompute } from '../utils/updateState';
 import { StoreAction } from '../actions';
 
-interface InstancesState {
+export interface InstancesState {
   sync: boolean;
   persisted?: boolean;
 }

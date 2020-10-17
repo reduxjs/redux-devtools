@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ActionCreators } from 'redux-devtools-instrument';
+import { ActionCreators, LiftedAction } from 'redux-devtools-instrument';
 import { Button, Toolbar, Divider } from 'devui';
 import RecordButton from './buttons/RecordButton';
 import PersistButton from './buttons/PersistButton';
 import LockButton from './buttons/LockButton';
 import InstanceSelector from './InstanceSelector';
 import SyncButton from './buttons/SyncButton';
+import { Action } from 'redux';
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep } = ActionCreators;
 
-export default class TopButtons extends Component {
+interface Props {
+  dispatch: (action: LiftedAction<unknown, Action<unknown>, unknown>) => void;
+}
+
+export default class TopButtons extends Component<Props> {
   static propTypes = {
     // shouldSync: PropTypes.bool,
     liftedState: PropTypes.object.isRequired,
@@ -18,7 +24,7 @@ export default class TopButtons extends Component {
     options: PropTypes.object.isRequired,
   };
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return (
       nextProps.options !== this.props.options ||
       nextProps.liftedState !== this.props.liftedState

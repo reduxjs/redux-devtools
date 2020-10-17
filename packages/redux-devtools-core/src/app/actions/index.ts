@@ -35,6 +35,7 @@ import {
   SUBSCRIBE_SUCCESS,
   UNSUBSCRIBE,
 } from '../constants/socketActionTypes';
+import { Action } from 'redux';
 
 let monitorReducer;
 let monitorProps = {};
@@ -65,7 +66,18 @@ export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
   return { type: CHANGE_THEME, ...data.formData };
 }
 
-export function liftedDispatch(action) {
+interface MonitorActionAction {
+  type: typeof MONITOR_ACTION;
+  action: Action<unknown>;
+}
+interface LiftedActionAction {
+  type: typeof LIFTED_ACTION;
+  message: 'DISPATCH';
+  action: Action<unknown>;
+}
+export function liftedDispatch(
+  action: Action<unknown>
+): MonitorActionAction | LiftedActionAction {
   if (action.type[0] === '@') {
     if (action.type === '@@INIT_MONITOR') {
       monitorReducer = action.update;
@@ -289,6 +301,8 @@ interface UnsubscribeAction {
 export type StoreAction =
   | ChangeSectionAction
   | ChangeThemeAction
+  | MonitorActionAction
+  | LiftedActionAction
   | SelectInstanceAction
   | SelectMonitorAction
   | UpdateMonitorStateAction

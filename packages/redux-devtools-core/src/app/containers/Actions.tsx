@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Container } from 'devui';
 import SliderMonitor from './monitors/Slider';
 import { liftedDispatch as liftedDispatchAction, getReport } from '../actions';
@@ -11,7 +11,11 @@ import TopButtons from '../components/TopButtons';
 import BottomButtons from '../components/BottomButtons';
 import { StoreState } from '../reducers';
 
-class Actions extends Component {
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = StateProps & DispatchProps;
+
+class Actions extends Component<Props> {
   render() {
     const {
       monitor,

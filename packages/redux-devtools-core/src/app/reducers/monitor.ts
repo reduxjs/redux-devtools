@@ -7,6 +7,8 @@ import {
 } from '../constants/actionTypes';
 import { StoreAction } from '../actions';
 
+export interface MonitorState {}
+
 const initialState = {
   selected: 'InspectorMonitor',
   monitorState: undefined,
