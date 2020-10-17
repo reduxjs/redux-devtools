@@ -9,7 +9,7 @@ export const monitors = [
   { value: 'ChartMonitor', name: 'Chart' },
 ];
 
-export default function getMonitor({ monitor }) {
+export default function getMonitor({ monitor }: { monitor: string }) {
   switch (monitor) {
     case 'LogMonitor':
       return (

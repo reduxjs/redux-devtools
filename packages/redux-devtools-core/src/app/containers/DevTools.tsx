@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
+import { LiftedAction } from 'redux-devtools-instrument';
+import { Action } from 'redux';
 import getMonitor from '../utils/getMonitor';
 
 class DevTools extends Component {
@@ -52,7 +54,7 @@ class DevTools extends Component {
     );
   }
 
-  dispatch = (action) => {
+  dispatch = (action: LiftedAction<unknown, Action<unknown>, unknown>) => {
     this.props.dispatch(action);
   };
 
