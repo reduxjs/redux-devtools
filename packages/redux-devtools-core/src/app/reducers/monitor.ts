@@ -5,9 +5,14 @@ import {
   TOGGLE_SLIDER,
   TOGGLE_DISPATCHER,
 } from '../constants/actionTypes';
-import { StoreAction } from '../actions';
+import { MonitorActionAction, StoreAction } from '../actions';
 
-export interface MonitorState {}
+export interface MonitorState {
+  selected: string;
+  monitorState: unknown | undefined;
+  sliderIsOpen: boolean;
+  dispatcherIsOpen: boolean;
+}
 
 const initialState = {
   selected: 'InspectorMonitor',
@@ -16,7 +21,10 @@ const initialState = {
   dispatcherIsOpen: false,
 };
 
-export function dispatchMonitorAction(state, action) {
+export function dispatchMonitorAction(
+  state: MonitorState,
+  action: MonitorActionAction
+) {
   return {
     ...state,
     monitorState:

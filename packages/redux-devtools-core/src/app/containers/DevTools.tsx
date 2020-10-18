@@ -1,22 +1,41 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
-import { LiftedAction } from 'redux-devtools-instrument';
+import { LiftedAction, LiftedState } from 'redux-devtools-instrument';
 import { Action } from 'redux';
+import { Monitor } from 'redux-devtools';
 import getMonitor from '../utils/getMonitor';
+import { InitMonitorAction } from '../actions';
 
-class DevTools extends Component {
-  constructor(props) {
+interface Props {
+  monitor: string;
+  dispatch: (
+    action: LiftedAction<unknown, Action<unknown>, unknown> | InitMonitorAction
+  ) => void;
+}
+
+class DevTools extends Component<Props> {
+  monitorProps: unknown;
+  Monitor?: Monitor<
+    unknown,
+    Action<unknown>,
+    LiftedState<unknown, Action<unknown>, unknown>,
+    unknown,
+    Action<unknown>
+  >;
+  preventRender?: boolean;
+
+  constructor(props: Props) {
     super(props);
     this.getMonitor(props, props.monitorState);
   }
 
-  getMonitor(props, skipUpdate) {
+  getMonitor(props: Props, skipUpdate: unknown) {
     const monitorElement = getMonitor(props);
     this.monitorProps = monitorElement.props;
     this.Monitor = monitorElement.type;
 
-    const update = this.Monitor.update;
+    const update = this.Monitor!.update;
     if (update) {
       let newMonitorState;
       const monitorState = props.monitorState;
@@ -54,7 +73,9 @@ class DevTools extends Component {
     );
   }
 
-  dispatch = (action: LiftedAction<unknown, Action<unknown>, unknown>) => {
+  dispatch = (
+    action: LiftedAction<unknown, Action<unknown>, unknown> | InitMonitorAction
+  ) => {
     this.props.dispatch(action);
   };
 

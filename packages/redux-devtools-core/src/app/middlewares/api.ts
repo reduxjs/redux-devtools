@@ -1,6 +1,6 @@
 import socketCluster, { SCClientSocket } from 'socketcluster-client';
 import { stringify } from 'jsan';
-import { Dispatch, Middleware, MiddlewareAPI, Store } from 'redux';
+import { Dispatch, MiddlewareAPI } from 'redux';
 import socketOptions from '../constants/socketOptions';
 import * as actions from '../constants/socketActionTypes';
 import { getActiveInstance } from '../reducers/instances';

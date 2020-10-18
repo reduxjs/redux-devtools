@@ -37,8 +37,12 @@ import {
 } from '../constants/socketActionTypes';
 import { Action } from 'redux';
 
-let monitorReducer;
-let monitorProps = {};
+let monitorReducer: (
+  monitorProps: unknown,
+  state: unknown | undefined,
+  action: Action<unknown>
+) => unknown;
+let monitorProps: unknown = {};
 
 interface ChangeSectionAction {
   readonly type: typeof CHANGE_SECTION;
@@ -66,9 +70,25 @@ export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
   return { type: CHANGE_THEME, ...data.formData };
 }
 
-interface MonitorActionAction {
+export interface InitMonitorAction {
+  type: '@@INIT_MONITOR';
+  newMonitorState: unknown;
+  update: (
+    monitorProps: unknown,
+    state: unknown | undefined,
+    action: Action<unknown>
+  ) => unknown;
+  monitorProps: unknown;
+}
+export interface MonitorActionAction {
   type: typeof MONITOR_ACTION;
-  action: Action<unknown>;
+  action: InitMonitorAction;
+  monitorReducer: (
+    monitorProps: unknown,
+    state: unknown | undefined,
+    action: Action<unknown>
+  ) => unknown;
+  monitorProps: unknown;
 }
 interface LiftedActionAction {
   type: typeof LIFTED_ACTION;
@@ -76,7 +96,7 @@ interface LiftedActionAction {
   action: Action<unknown>;
 }
 export function liftedDispatch(
-  action: Action<unknown>
+  action: InitMonitorAction
 ): MonitorActionAction | LiftedActionAction {
   if (action.type[0] === '@') {
     if (action.type === '@@INIT_MONITOR') {
@@ -188,7 +208,7 @@ export function toggleDispatcher(): ToggleDispatcherAction {
 }
 
 export type ConnectionType = 'disabled' | 'remotedev' | 'custom';
-interface ConnectionOptions {
+export interface ConnectionOptions {
   readonly type: ConnectionType;
   readonly hostname: string;
   readonly port: number;

@@ -4,8 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, Select, Editor, Toolbar } from 'devui';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { dispatchRemotely } from '../../actions';
 
 export const DispatcherContainer = styled.div`
@@ -47,7 +46,10 @@ export const ActionContainer = styled.div`
   }
 `;
 
-class Dispatcher extends Component {
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+type Props = DispatchProps;
+
+class Dispatcher extends Component<Props> {
   static propTypes = {
     options: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
@@ -208,10 +210,8 @@ class Dispatcher extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch: bindActionCreators(dispatchRemotely, dispatch),
-  };
-}
+const actionCreators = {
+  dispatch: dispatchRemotely,
+};
 
-export default connect(null, mapDispatchToProps)(Dispatcher);
+export default connect(null, actionCreators)(Dispatcher);
