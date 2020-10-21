@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { formatters } from 'jsondiffpatch';
+import { Delta, formatters } from 'jsondiffpatch';
 import styled from 'styled-components';
 import { effects } from 'devui';
 
@@ -218,22 +218,22 @@ export const StyledContainer = styled.div`
   }
 `;
 
-export default class VisualDiffTab extends Component {
-  shouldComponentUpdate(nextProps) {
+interface Props {
+  data?: Delta;
+}
+
+export default class VisualDiffTab extends Component<Props> {
+  shouldComponentUpdate(nextProps: Props) {
     return this.props.data !== nextProps.data;
   }
 
   render() {
-    let __html;
+    let __html: string | undefined;
     const data = this.props.data;
     if (data) {
-      __html = formatters.html.format(data);
+      __html = formatters.html.format(data, undefined);
     }
 
-    return <StyledContainer dangerouslySetInnerHTML={{ __html }} />;
+    return <StyledContainer dangerouslySetInnerHTML={{ __html: __html! }} />;
   }
 }
-
-VisualDiffTab.propTypes = {
-  data: PropTypes.object,
-};

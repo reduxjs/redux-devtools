@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import ChartMonitor from 'redux-devtools-chart-monitor';
+import { NodeWithId } from 'd3-state-visualizer';
 import { selectMonitorWithState } from '../../actions';
 
-export function getPath(obj, inspectedStatePath) {
+export function getPath(obj: NodeWithId, inspectedStatePath: string[]) {
   const parent = obj.parent;
   if (!parent) return;
   getPath(parent, inspectedStatePath);
@@ -20,8 +20,8 @@ type Props = DispatchProps;
 class ChartMonitorWrapper extends Component<Props> {
   static update = ChartMonitor.update;
 
-  onClickText = (data) => {
-    const inspectedStatePath = [];
+  onClickText = (data: NodeWithId) => {
+    const inspectedStatePath: string[] = [];
     getPath(data, inspectedStatePath);
     this.props.selectMonitorWithState('InspectorMonitor', {
       inspectedStatePath,
@@ -44,10 +44,6 @@ class ChartMonitorWrapper extends Component<Props> {
     );
   }
 }
-
-ChartMonitorWrapper.propTypes = {
-  selectMonitorWithState: PropTypes.func.isRequired,
-};
 
 const actionCreators = {
   selectMonitorWithState: selectMonitorWithState,

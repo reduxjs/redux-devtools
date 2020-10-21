@@ -2,21 +2,27 @@ import React, { Component } from 'react';
 import { Editor } from 'devui';
 import { stringify } from 'javascript-stringify';
 
-export default class RawTab extends Component {
-  constructor(props) {
+interface Props {
+  data: unknown;
+}
+
+export default class RawTab extends Component<Props> {
+  value?: string | undefined;
+
+  constructor(props: Props) {
     super(props);
     this.stringifyData(props);
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return nextProps.data !== this.value;
   }
 
-  UNSAFE_componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps: Props) {
     this.stringifyData(nextProps);
   }
 
-  stringifyData(props) {
+  stringifyData(props: Props) {
     this.value = stringify(props.data, null, 2);
   }
 

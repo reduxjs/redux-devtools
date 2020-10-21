@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import InspectorMonitor from 'redux-devtools-inspector-monitor';
+import InspectorMonitor, { Tab } from 'redux-devtools-inspector-monitor';
 import TraceTab from 'redux-devtools-inspector-monitor-trace-tab';
 import TestTab from 'redux-devtools-inspector-monitor-test-tab';
 import { DATA_TYPE_KEY } from '../../../constants/dataTypes';
 import SubTabs from './SubTabs';
+import { Action } from 'redux';
 
 const DEFAULT_TABS = [
   {
@@ -25,34 +25,43 @@ const DEFAULT_TABS = [
   },
 ];
 
-class InspectorWrapper extends Component {
+interface Features {
+  test?: boolean;
+  skip?: boolean;
+}
+interface Props {
+  features?: Features;
+}
+
+class InspectorWrapper extends Component<Props> {
   static update = InspectorMonitor.update;
 
   render() {
     const { features, ...rest } = this.props;
-    let tabs;
+    let tabs: () => Tab<unknown, Action<unknown>>[];
     if (features && features.test) {
-      tabs = () => [...DEFAULT_TABS, { name: 'Test', component: TestTab }];
+      tabs = () => [
+        ...(DEFAULT_TABS as Tab<unknown, Action<unknown>>[]),
+        ({ name: 'Test', component: TestTab } as unknown) as Tab<
+          unknown,
+          Action<unknown>
+        >,
+      ];
     } else {
-      tabs = () => DEFAULT_TABS;
+      tabs = () => DEFAULT_TABS as Tab<unknown, Action<unknown>>[];
     }
 
     return (
       <InspectorMonitor
         dataTypeKey={DATA_TYPE_KEY}
-        shouldPersistState={false}
         invertTheme={false}
         tabs={tabs}
-        hideActionButtons={!features.skip}
+        hideActionButtons={!features!.skip}
         hideMainButtons
         {...rest}
       />
     );
   }
 }
-
-InspectorWrapper.propTypes = {
-  features: PropTypes.object,
-};
 
 export default InspectorWrapper;

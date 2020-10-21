@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
 import SliderMonitor from 'redux-devtools-slider-monitor';
 import { LiftedAction, LiftedState } from 'redux-devtools-instrument';
 import { Action, Dispatch } from 'redux';
+import { ThemeFromProvider } from 'devui';
 
 const SliderWrapper = styled.div`
   border-color: ${(props) => props.theme.base02};
@@ -14,7 +14,7 @@ const SliderWrapper = styled.div`
 interface Props {
   liftedState: LiftedState<unknown, Action<unknown>, unknown>;
   dispatch: Dispatch<LiftedAction<unknown, Action<unknown>, unknown>>;
-  theme:
+  theme: ThemeFromProvider;
 }
 
 class Slider extends Component<Props> {
@@ -37,11 +37,5 @@ class Slider extends Component<Props> {
     );
   }
 }
-
-Slider.propTypes = {
-  liftedState: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
-  theme: PropTypes.object.isRequired,
-};
 
 export default withTheme(Slider);

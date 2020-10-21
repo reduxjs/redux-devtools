@@ -34,7 +34,7 @@ interface InputOptions {
   widthBetweenNodesCoeff: number;
   transitionDuration: number;
   blinkDuration: number;
-  onClickText: () => void;
+  onClickText: (datum: NodeWithId) => void;
   tooltipOptions: {
     disabled?: boolean;
     left?: number | undefined;

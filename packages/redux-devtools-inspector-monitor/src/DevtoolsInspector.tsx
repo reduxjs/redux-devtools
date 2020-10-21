@@ -128,7 +128,7 @@ function createThemeState<S, A extends Action<unknown>>(
   return { base16Theme, styling };
 }
 
-interface ExternalProps<S, A extends Action<unknown>> {
+export interface ExternalProps<S, A extends Action<unknown>> {
   dispatch: Dispatch<
     DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
   >;
@@ -142,7 +142,7 @@ interface ExternalProps<S, A extends Action<unknown>> {
   hideMainButtons?: boolean;
   hideActionButtons?: boolean;
   invertTheme: boolean;
-  dataTypeKey?: string;
+  dataTypeKey?: string | symbol;
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
 }
 
@@ -169,7 +169,7 @@ export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
   hideMainButtons?: boolean;
   hideActionButtons?: boolean;
   invertTheme: boolean;
-  dataTypeKey?: string;
+  dataTypeKey?: string | symbol;
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
 }
 

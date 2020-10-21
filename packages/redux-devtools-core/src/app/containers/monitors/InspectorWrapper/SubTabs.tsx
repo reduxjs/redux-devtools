@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
-import { Tabs } from 'devui';
+import { Tab, Tabs } from 'devui';
+import { TabComponentProps } from 'redux-devtools-inspector-monitor';
+import { Action } from 'redux';
 import StateTree from 'redux-devtools-inspector-monitor/lib/tabs/StateTab';
 import ActionTree from 'redux-devtools-inspector-monitor/lib/tabs/ActionTab';
 import DiffTree from 'redux-devtools-inspector-monitor/lib/tabs/DiffTab';
@@ -13,9 +15,13 @@ import { StoreState } from '../../../reducers';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
-type Props = StateProps & DispatchProps;
+type Props = StateProps &
+  DispatchProps &
+  TabComponentProps<unknown, Action<unknown>>;
 
 class SubTabs extends Component<Props> {
+  tabs?: Tab<unknown>[];
+
   constructor(props: Props) {
     super(props);
     this.updateTabs(props);
@@ -83,7 +89,7 @@ class SubTabs extends Component<Props> {
 
     return (
       <Tabs
-        tabs={this.tabs}
+        tabs={this.tabs!}
         selected={selected || 'Tree'}
         onClick={this.props.selectMonitorTab}
       />

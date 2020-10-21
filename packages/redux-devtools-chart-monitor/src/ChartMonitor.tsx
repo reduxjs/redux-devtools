@@ -9,6 +9,7 @@ import { Base16Theme } from 'react-base16-styling';
 import reducer, { ChartMonitorState } from './reducers';
 import Chart, { Props } from './Chart';
 import { Primitive } from 'd3';
+import { NodeWithId } from 'd3-state-visualizer/lib/charts/tree/tree';
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep, toggleAction } = ActionCreators;
 
@@ -49,6 +50,7 @@ export interface ChartMonitorProps<S, A extends Action<unknown>>
   isSorted: boolean;
   heightBetweenNodesCoeff: number;
   widthBetweenNodesCoeff: number;
+  onClickText: (datum: NodeWithId) => void;
   tooltipOptions: unknown;
   style: {
     width: number;
