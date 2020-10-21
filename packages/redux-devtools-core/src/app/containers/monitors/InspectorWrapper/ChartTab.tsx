@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, RefCallback } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { withTheme } from 'styled-components';
-import { tree } from 'd3-state-visualizer';
+import { InputOptions, NodeWithId, tree } from 'd3-state-visualizer';
 import { getPath } from '../ChartMonitorWrapper';
 import { updateMonitorState } from '../../../actions';
+import { ThemeFromProvider } from 'devui';
 
 const style = {
   width: '100%',
@@ -12,9 +12,17 @@ const style = {
 };
 
 type DispatchProps = ResolveThunks<typeof actionCreators>;
-type Props = DispatchProps;
+interface OwnProps {
+  data: unknown;
+  theme: ThemeFromProvider;
+}
+type Props = DispatchProps & OwnProps;
 
 class ChartTab extends Component<Props> {
+  node?: HTMLDivElement | null;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  renderChart?: (nextState?: {} | null | undefined) => void;
+
   shouldComponentUpdate() {
     return false;
   }
@@ -28,23 +36,25 @@ class ChartTab extends Component<Props> {
       this.props.theme.scheme !== nextProps.theme.scheme ||
       nextProps.theme.light !== this.props.theme.light
     ) {
-      this.node.innerHTML = '';
+      this.node!.innerHTML = '';
       this.createChart(nextProps);
     } else if (nextProps.data !== this.props.data) {
-      this.renderChart(nextProps.data);
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      this.renderChart!(nextProps.data as {} | null | undefined);
     }
   }
 
-  getRef = (node) => {
+  getRef: RefCallback<HTMLDivElement> = (node) => {
     this.node = node;
   };
 
-  createChart(props) {
-    this.renderChart = tree(this.node, this.getChartTheme(props.theme));
-    this.renderChart(props.data);
+  createChart(props: Props) {
+    this.renderChart = tree(this.node!, this.getChartTheme(props.theme));
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    this.renderChart(props.data as {} | null | undefined);
   }
 
-  getChartTheme(theme) {
+  getChartTheme(theme: ThemeFromProvider): Partial<InputOptions> {
     return {
       heightBetweenNodesCoeff: 1,
       widthBetweenNodesCoeff: 1.3,
@@ -81,8 +91,8 @@ class ChartTab extends Component<Props> {
     };
   }
 
-  onClickText = (data) => {
-    const inspectedStatePath = [];
+  onClickText = (data: NodeWithId) => {
+    const inspectedStatePath: string[] = [];
     getPath(data, inspectedStatePath);
     this.props.updateMonitorState({
       inspectedStatePath,
@@ -94,12 +104,6 @@ class ChartTab extends Component<Props> {
     return <div style={style} ref={this.getRef} />;
   }
 }
-
-ChartTab.propTypes = {
-  data: PropTypes.object,
-  updateMonitorState: PropTypes.func.isRequired,
-  theme: PropTypes.object.isRequired,
-};
 
 const actionCreators = {
   updateMonitorState,

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Delta, formatters } from 'jsondiffpatch';
 import styled from 'styled-components';
 import { effects } from 'devui';

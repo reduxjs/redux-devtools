@@ -10,7 +10,7 @@ import {
 } from './utils';
 import d3tooltip from 'd3tooltip';
 
-interface InputOptions {
+export interface InputOptions {
   // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
   // eslint-disable-next-line @typescript-eslint/ban-types
