@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import { Tab, Tabs } from 'devui';
 import { TabComponentProps } from 'redux-devtools-inspector-monitor';
@@ -97,18 +96,9 @@ class SubTabs extends Component<Props> {
   }
 }
 
-SubTabs.propTypes = {
-  selected: PropTypes.string,
-  parentTab: PropTypes.string,
-  selectMonitorTab: PropTypes.func.isRequired,
-  action: PropTypes.object,
-  delta: PropTypes.object,
-  nextState: PropTypes.object,
-};
-
 const mapStateToProps = (state: StoreState) => ({
-  parentTab: state.monitor.monitorState.tabName,
-  selected: state.monitor.monitorState.subTabName,
+  parentTab: state.monitor.monitorState!.tabName,
+  selected: state.monitor.monitorState!.subTabName,
 });
 
 const actionCreators = {

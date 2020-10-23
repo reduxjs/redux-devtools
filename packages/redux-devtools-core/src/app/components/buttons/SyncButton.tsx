@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import { Button } from 'devui';
 import { TiArrowSync } from 'react-icons/ti';
@@ -11,11 +10,6 @@ type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = StateProps & DispatchProps;
 
 class SyncButton extends Component<Props> {
-  static propTypes = {
-    sync: PropTypes.bool,
-    onClick: PropTypes.func.isRequired,
-  };
-
   shouldComponentUpdate(nextProps: Props) {
     return nextProps.sync !== this.props.sync;
   }

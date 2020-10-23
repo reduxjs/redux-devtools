@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import { LiftedAction, LiftedState } from 'redux-devtools-instrument';
 import { Action } from 'redux';
 import { Monitor } from 'redux-devtools';
 import getMonitor from '../utils/getMonitor';
 import { InitMonitorAction } from '../actions';
+import { Features, State } from '../reducers/instances';
+import { MonitorStateMonitorState } from '../reducers/monitor';
+import { ThemeFromProvider } from 'devui';
 
 interface Props {
   monitor: string;
+  liftedState: State;
+  monitorState: MonitorStateMonitorState | undefined;
   dispatch: (
     action: LiftedAction<unknown, Action<unknown>, unknown> | InitMonitorAction
   ) => void;
+  features: Features | undefined;
+  theme: ThemeFromProvider;
 }
 
 class DevTools extends Component<Props> {
@@ -30,7 +36,7 @@ class DevTools extends Component<Props> {
     this.getMonitor(props, props.monitorState);
   }
 
-  getMonitor(props: Props, skipUpdate: unknown) {
+  getMonitor(props: Props, skipUpdate?: unknown) {
     const monitorElement = getMonitor(props);
     this.monitorProps = monitorElement.props;
     this.Monitor = monitorElement.type;
@@ -59,15 +65,15 @@ class DevTools extends Component<Props> {
     }
   }
 
-  UNSAFE_componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps: Props) {
     if (nextProps.monitor !== this.props.monitor) this.getMonitor(nextProps);
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return (
       nextProps.monitor !== this.props.monitor ||
       nextProps.liftedState !== this.props.liftedState ||
-      nextProps.monitorState !== this.props.liftedState ||
+      nextProps.monitorState !== this.props.monitorState ||
       nextProps.features !== this.props.features ||
       nextProps.theme.scheme !== this.props.theme.scheme
     );
@@ -102,14 +108,5 @@ class DevTools extends Component<Props> {
     );
   }
 }
-
-DevTools.propTypes = {
-  liftedState: PropTypes.object,
-  monitorState: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
-  monitor: PropTypes.string,
-  features: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-};
 
 export default withTheme(DevTools);

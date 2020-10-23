@@ -9,7 +9,7 @@ export function getPath(obj: NodeWithId, inspectedStatePath: string[]) {
   if (!parent) return;
   getPath(parent, inspectedStatePath);
   let name = obj.name;
-  const item = name.match(/.+\[(\d+)]/);
+  const item = /.+\[(\d+)]/.exec(name);
   if (item) name = item[1];
   inspectedStatePath.push(name);
 }

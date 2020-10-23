@@ -2,8 +2,9 @@ import difference from 'lodash/difference';
 import omit from 'lodash/omit';
 import stringifyJSON from './stringifyJSON';
 import { SET_STATE } from '../constants/actionTypes';
+import { State } from '../reducers/instances';
 
-export function sweep(state) {
+export function sweep(state: State): State {
   return {
     ...state,
     actionsById: omit(state.actionsById, state.skippedActionIds),

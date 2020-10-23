@@ -19,6 +19,7 @@ import {
   UPDATE_STATE,
   UPDATE_REPORTS,
   REMOVE_INSTANCE,
+  SET_STATE,
 } from '../constants/actionTypes';
 import {
   AUTH_ERROR,
@@ -37,6 +38,9 @@ import {
   UNSUBSCRIBE,
 } from '../constants/socketActionTypes';
 import { Action } from 'redux';
+import { Features, State } from '../reducers/instances';
+import { MonitorStateMonitorState } from '../reducers/monitor';
+import { LiftedAction } from 'redux-devtools-instrument';
 
 let monitorReducer: (
   monitorProps: unknown,
@@ -91,10 +95,33 @@ export interface MonitorActionAction {
   ) => unknown;
   monitorProps: unknown;
 }
-interface LiftedActionDispatchAction {
+interface JumpToStateAction {
+  type: 'JUMP_TO_STATE';
+  index: number;
+  actionId: number;
+}
+interface JumpToActionAction {
+  type: 'JUMP_TO_ACTION';
+  index: number;
+  actionId: number;
+}
+interface PauseRecordingAction {
+  type: 'PAUSE_RECORDING';
+  status: boolean;
+}
+interface LockChangesAction {
+  type: 'LOCK_CHANGES';
+  status: boolean;
+}
+export interface LiftedActionDispatchAction {
   type: typeof LIFTED_ACTION;
   message: 'DISPATCH';
-  action: Action<unknown>;
+  action:
+    | JumpToStateAction
+    | JumpToActionAction
+    | PauseRecordingAction
+    | LockChangesAction;
+  toAll?: boolean;
 }
 interface LiftedActionImportAction {
   type: typeof LIFTED_ACTION;
@@ -102,18 +129,39 @@ interface LiftedActionImportAction {
   state: string;
   preloadedState: unknown | undefined;
 }
-export type LiftedActionAction = LiftedActionDispatchAction;
+interface LiftedActionActionAction {
+  type: typeof LIFTED_ACTION;
+  message: 'ACTION';
+  action: Action<unknown>;
+}
+export type LiftedActionAction =
+  | LiftedActionDispatchAction
+  | LiftedActionImportAction
+  | LiftedActionActionAction;
 export function liftedDispatch(
-  action: InitMonitorAction
+  action:
+    | InitMonitorAction
+    | JumpToStateAction
+    | JumpToActionAction
+    | LiftedAction<unknown, Action<unknown>, unknown>
 ): MonitorActionAction | LiftedActionDispatchAction {
   if (action.type[0] === '@') {
     if (action.type === '@@INIT_MONITOR') {
       monitorReducer = action.update;
       monitorProps = action.monitorProps;
     }
-    return { type: MONITOR_ACTION, action, monitorReducer, monitorProps };
+    return {
+      type: MONITOR_ACTION,
+      action,
+      monitorReducer,
+      monitorProps,
+    } as MonitorActionAction;
   }
-  return { type: LIFTED_ACTION, message: 'DISPATCH', action };
+  return {
+    type: LIFTED_ACTION,
+    message: 'DISPATCH',
+    action,
+  } as LiftedActionDispatchAction;
 }
 
 interface SelectInstanceAction {
@@ -127,20 +175,21 @@ export function selectInstance(selected: string): SelectInstanceAction {
 interface SelectMonitorAction {
   type: typeof SELECT_MONITOR;
   monitor: string;
-  monitorState?: unknown;
+  monitorState?: MonitorStateMonitorState;
 }
 export function selectMonitor(monitor: string): SelectMonitorAction {
   return { type: SELECT_MONITOR, monitor };
 }
 export function selectMonitorWithState(
   value: string,
-  monitorState: unknown
+  monitorState: MonitorStateMonitorState
 ): SelectMonitorAction {
   return { type: SELECT_MONITOR, monitor: value, monitorState };
 }
 
 interface NextState {
   subTabName: string;
+  inspectedStatePath?: string[];
 }
 interface UpdateMonitorStateAction {
   type: typeof UPDATE_MONITOR_STATE;
@@ -150,7 +199,9 @@ export function selectMonitorTab(subTabName: string): UpdateMonitorStateAction {
   return { type: UPDATE_MONITOR_STATE, nextState: { subTabName } };
 }
 
-export function updateMonitorState(nextState) {
+export function updateMonitorState(
+  nextState: NextState
+): UpdateMonitorStateAction {
   return { type: UPDATE_MONITOR_STATE, nextState };
 }
 
@@ -168,7 +219,7 @@ export function exportState(): ExportAction {
   return { type: EXPORT };
 }
 
-export function lockChanges(status) {
+export function lockChanges(status: boolean): LiftedActionDispatchAction {
   return {
     type: LIFTED_ACTION,
     message: 'DISPATCH',
@@ -177,7 +228,7 @@ export function lockChanges(status) {
   };
 }
 
-export function pauseRecording(status) {
+export function pauseRecording(status: boolean): LiftedActionDispatchAction {
   return {
     type: LIFTED_ACTION,
     message: 'DISPATCH',
@@ -186,7 +237,9 @@ export function pauseRecording(status) {
   };
 }
 
-export function dispatchRemotely(action) {
+export function dispatchRemotely(
+  action: Action<unknown>
+): LiftedActionActionAction {
   return { type: LIFTED_ACTION, message: 'ACTION', action };
 }
 
@@ -254,12 +307,67 @@ export function clearNotification(): ClearNotificationAction {
   return { type: CLEAR_NOTIFICATION };
 }
 
-export function getReport(report) {
+interface GetReportRequest {
+  readonly type: typeof GET_REPORT_REQUEST;
+  readonly report: unknown;
+}
+export function getReport(report: unknown): GetReportRequest {
   return { type: GET_REPORT_REQUEST, report };
 }
 
+interface LibConfig {
+  actionCreators?: string;
+  name?: string;
+  type?: string;
+  features?: Features;
+  serialize?: boolean;
+}
+
+export interface RequestBase {
+  id: string;
+  instanceId?: string;
+  action?: string;
+  name?: string;
+  libConfig?: LibConfig;
+  actionsById?: string;
+  computedStates?: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  payload?: {} | string;
+}
+interface InitRequest extends RequestBase {
+  type: 'INIT';
+  action: string;
+}
+interface ActionRequest extends RequestBase {
+  type: 'ACTION';
+}
+interface StateRequest extends RequestBase {
+  type: 'STATE';
+  committedState: unknown;
+}
+interface PartialStateRequest extends RequestBase {
+  type: 'PARTIAL_STATE';
+  committedState: unknown;
+}
+interface LiftedRequest extends RequestBase {
+  type: 'LIFTED';
+}
+export type Request =
+  | InitRequest
+  | ActionRequest
+  | StateRequest
+  | PartialStateRequest
+  | LiftedRequest;
+
 interface UpdateStateAction {
   type: typeof UPDATE_STATE;
+  request?: Request;
+  id?: string;
+}
+
+interface SetStateAction {
+  type: typeof SET_STATE;
+  newState: State;
 }
 
 interface RemoveInstanceAction {
@@ -355,6 +463,8 @@ export type StoreAction =
   | ReconnectAction
   | ShowNotificationAction
   | ClearNotificationAction
+  | GetReportRequest
+  | SetStateAction
   | UpdateStateAction
   | RemoveInstanceAction
   | ConnectRequestAction

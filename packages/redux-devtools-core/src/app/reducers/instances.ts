@@ -12,12 +12,12 @@ import {
 import { DISCONNECTED } from '../constants/socketActionTypes';
 import parseJSON from '../utils/parseJSON';
 import { recompute } from '../utils/updateState';
-import { LiftedActionAction, StoreAction } from '../actions';
+import { LiftedActionDispatchAction, Request, StoreAction } from '../actions';
 
-interface Features {
+export interface Features {
   lock?: boolean;
-  export?: boolean;
-  import?: string;
+  export?: string | boolean;
+  import?: string | boolean;
   persist?: boolean;
   pause?: boolean;
   reorder?: boolean;
@@ -28,7 +28,7 @@ interface Features {
   test?: boolean;
 }
 
-interface Options {
+export interface Options {
   name?: string;
   connectionId?: string;
   explicitLib?: string;
@@ -38,13 +38,16 @@ interface Options {
   serialize?: boolean;
 }
 
-interface State {
+export interface State {
   actionsById: { [actionId: number]: PerformAction<Action<unknown>> };
   computedStates: { state: unknown; error?: string }[];
   currentStateIndex: number;
   nextActionId: number;
   skippedActionIds: number[];
   stagedActionIds: number[];
+  committedState?: unknown;
+  isLocked?: boolean;
+  isPaused?: boolean;
 }
 
 export interface InstancesState {
@@ -77,7 +80,7 @@ export const initialState: InstancesState = {
 
 function updateState(
   state: { [id: string]: State },
-  request,
+  request: Request,
   id: string,
   serialize: boolean | undefined
 ) {
@@ -201,7 +204,7 @@ function updateState(
 
 export function dispatchAction(
   state: InstancesState,
-  { action }: LiftedActionAction
+  { action }: LiftedActionDispatchAction
 ) {
   if (action.type === 'JUMP_TO_STATE' || action.type === 'JUMP_TO_ACTION') {
     const id = state.selected || state.current;
@@ -256,7 +259,11 @@ function removeState(state: InstancesState, connectionId: string) {
   };
 }
 
-function init({ type, action, name, libConfig = {} }, connectionId, current) {
+function init(
+  { type, action, name, libConfig = {} }: Request,
+  connectionId: string,
+  current: string
+): Options {
   let lib;
   let actionCreators;
   let creators = libConfig.actionCreators || action;

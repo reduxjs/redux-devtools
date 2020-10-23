@@ -1,12 +1,13 @@
 import commitExcessActions from './commitExcessActions';
+import { State } from '../reducers/instances';
 
 export function recompute(
-  previousLiftedState,
+  previousLiftedState: State,
   storeState,
   action,
   nextActionId = 1,
-  maxAge,
-  isExcess
+  maxAge?: number,
+  isExcess?: boolean
 ) {
   const actionId = nextActionId - 1;
   const liftedState = { ...previousLiftedState };

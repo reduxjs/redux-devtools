@@ -3,9 +3,11 @@ import {
 } from '../constants/actionTypes';
 import { StoreAction } from '../actions';
 
-export interface ReportsState {}
+export interface ReportsState {
+  data: unknown[];
+}
 
-const initialState = {
+const initialState: ReportsState = {
   data: [],
 };
 

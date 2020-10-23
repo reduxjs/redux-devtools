@@ -8,7 +8,7 @@ function download(state) {
   const blob = new Blob([state], { type: 'octet/stream' });
   const href = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.style = 'display: none';
+  a.style.display = 'none';
   a.download = 'state.json';
   a.href = href;
   document.body.appendChild(a);

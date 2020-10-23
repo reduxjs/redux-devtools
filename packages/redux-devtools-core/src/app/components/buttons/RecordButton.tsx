@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
 import { MdFiberManualRecord } from 'react-icons/md';
-import { pauseRecording } from '../../actions';
+import { pauseRecording, StoreAction } from '../../actions';
+import { Dispatch } from 'redux';
 
-class RecordButton extends Component {
-  static propTypes = {
-    paused: PropTypes.bool,
-    pauseRecording: PropTypes.func.isRequired,
-  };
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
+interface OwnProps {
+  paused: boolean | undefined;
+}
+type Props = DispatchProps & OwnProps;
 
-  shouldComponentUpdate(nextProps) {
+class RecordButton extends Component<Props> {
+  shouldComponentUpdate(nextProps: Props) {
     return nextProps.paused !== this.props.paused;
   }
 
@@ -29,7 +30,10 @@ class RecordButton extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(
+  dispatch: Dispatch<StoreAction>,
+  ownProps: OwnProps
+) {
   return {
     pauseRecording: () => dispatch(pauseRecording(!ownProps.paused)),
   };

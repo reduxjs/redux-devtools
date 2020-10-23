@@ -8,10 +8,12 @@ import PrintButton from './buttons/PrintButton';
 import DispatcherButton from './buttons/DispatcherButton';
 import SliderButton from './buttons/SliderButton';
 import MonitorSelector from './MonitorSelector';
+import { Options } from '../reducers/instances';
 
 interface Props {
   dispatcherIsOpen: boolean;
   sliderIsOpen: boolean;
+  options: Options;
 }
 
 export default class BottomButtons extends Component<Props> {

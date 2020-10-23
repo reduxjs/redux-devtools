@@ -1,11 +1,11 @@
 // Based on https://github.com/YoruNoHikage/redux-devtools-dispatch
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, Select, Editor, Toolbar } from 'devui';
 import { connect, ResolveThunks } from 'react-redux';
 import { dispatchRemotely } from '../../actions';
+import { Options } from '../../reducers/instances';
 
 export const DispatcherContainer = styled.div`
   display: flex;
@@ -47,14 +47,20 @@ export const ActionContainer = styled.div`
 `;
 
 type DispatchProps = ResolveThunks<typeof actionCreators>;
-type Props = DispatchProps;
+interface OwnProps {
+  options: Options;
+}
+type Props = DispatchProps & OwnProps;
 
-class Dispatcher extends Component<Props> {
-  static propTypes = {
-    options: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  };
+interface State {
+  selected: string;
+  customAction: string;
+  args: unknown[];
+  rest: string;
+  changed: boolean;
+}
 
+class Dispatcher extends Component<Props, State> {
   state = {
     selected: 'default',
     customAction:
@@ -64,7 +70,7 @@ class Dispatcher extends Component<Props> {
     changed: false,
   };
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props) {
     if (
       this.state.selected !== 'default' &&
       !nextProps.options.actionCreators
@@ -76,7 +82,7 @@ class Dispatcher extends Component<Props> {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
     return (
       nextState !== this.state ||
       nextProps.options.actionCreators !== this.props.options.actionCreators
@@ -94,7 +100,7 @@ class Dispatcher extends Component<Props> {
 
     const args = [];
     if (selected !== 'default') {
-      args.length = this.props.options.actionCreators[selected].args.length;
+      args.length = this.props.options.actionCreators![selected].args.length;
     }
     this.setState({ selected, args, rest: '[]', changed: false });
   };

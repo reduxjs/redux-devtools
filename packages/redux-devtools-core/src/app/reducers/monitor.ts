@@ -7,14 +7,23 @@ import {
 } from '../constants/actionTypes';
 import { MonitorActionAction, StoreAction } from '../actions';
 
+export interface MonitorStateMonitorState {
+  inspectedStatePath?: string[];
+  tabName?: string;
+  subTabName?: string;
+  selectedActionId?: number | null;
+  startActionId?: number | null;
+  inspectedActionPath?: string[];
+  __overwritten__?: string;
+}
 export interface MonitorState {
   selected: string;
-  monitorState: unknown | undefined;
+  monitorState: MonitorStateMonitorState | undefined;
   sliderIsOpen: boolean;
   dispatcherIsOpen: boolean;
 }
 
-const initialState = {
+const initialState: MonitorState = {
   selected: 'InspectorMonitor',
   monitorState: undefined,
   sliderIsOpen: true,
@@ -24,7 +33,7 @@ const initialState = {
 export function dispatchMonitorAction(
   state: MonitorState,
   action: MonitorActionAction
-) {
+): MonitorState {
   return {
     ...state,
     monitorState:
@@ -37,7 +46,10 @@ export function dispatchMonitorAction(
   };
 }
 
-export default function monitor(state = initialState, action: StoreAction) {
+export default function monitor(
+  state = initialState,
+  action: StoreAction
+): MonitorState {
   switch (action.type) {
     case MONITOR_ACTION:
       return dispatchMonitorAction(state, action);
@@ -56,7 +68,7 @@ export default function monitor(state = initialState, action: StoreAction) {
       };
     }
     case UPDATE_MONITOR_STATE: {
-      let inspectedStatePath = state.monitorState.inspectedStatePath;
+      let inspectedStatePath = state.monitorState!.inspectedStatePath!;
       if (action.nextState.inspectedStatePath) {
         inspectedStatePath = [
           ...inspectedStatePath.slice(0, -1),

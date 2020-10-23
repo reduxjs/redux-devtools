@@ -2,18 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ActionCreators, LiftedAction } from 'redux-devtools-instrument';
 import { Button, Toolbar, Divider } from 'devui';
+import { Action } from 'redux';
 import RecordButton from './buttons/RecordButton';
 import PersistButton from './buttons/PersistButton';
 import LockButton from './buttons/LockButton';
 import InstanceSelector from './InstanceSelector';
 import SyncButton from './buttons/SyncButton';
-import { Action } from 'redux';
+import { Options, State } from '../reducers/instances';
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep } = ActionCreators;
 
 interface Props {
   dispatch: (action: LiftedAction<unknown, Action<unknown>, unknown>) => void;
+  liftedState: State;
+  options: Options;
 }
 
 export default class TopButtons extends Component<Props> {

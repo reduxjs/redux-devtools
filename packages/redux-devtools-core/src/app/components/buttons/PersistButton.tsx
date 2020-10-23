@@ -8,15 +8,12 @@ import { StoreState } from '../../reducers';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
-type Props = StateProps & DispatchProps;
+interface OwnProps {
+  disabled?: boolean;
+}
+type Props = StateProps & DispatchProps & OwnProps;
 
 class LockButton extends Component<Props> {
-  static propTypes = {
-    persisted: PropTypes.bool,
-    disabled: PropTypes.bool,
-    onClick: PropTypes.func.isRequired,
-  };
-
   shouldComponentUpdate(nextProps: Props) {
     return nextProps.persisted !== this.props.persisted;
   }

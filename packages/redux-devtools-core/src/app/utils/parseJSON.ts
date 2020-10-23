@@ -26,7 +26,10 @@ export function reviver(key, value) {
   return value;
 }
 
-export default function parseJSON(data, serialize) {
+export default function parseJSON(
+  data: string | undefined,
+  serialize?: boolean
+) {
   if (typeof data !== 'string') return data;
   try {
     return serialize ? jsan.parse(data, reviver) : jsan.parse(data);

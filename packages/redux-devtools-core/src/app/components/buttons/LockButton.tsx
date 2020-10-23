@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
 import { IoIosLock } from 'react-icons/io';
 import { lockChanges, StoreAction } from '../../actions';
 import { Dispatch } from 'redux';
 
-class LockButton extends Component {
-  static propTypes = {
-    locked: PropTypes.bool,
-    disabled: PropTypes.bool,
-    lockChanges: PropTypes.func.isRequired,
-  };
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
+interface OwnProps {
+  locked: boolean | undefined;
+  disabled: boolean;
+}
+type Props = DispatchProps & OwnProps;
 
-  shouldComponentUpdate(nextProps) {
+class LockButton extends Component<Props> {
+  shouldComponentUpdate(nextProps: Props) {
     return nextProps.locked !== this.props.locked;
   }
 
