@@ -315,6 +315,10 @@ export function getReport(report: unknown): GetReportRequest {
   return { type: GET_REPORT_REQUEST, report };
 }
 
+export interface ActionCreator {
+  args: string[];
+}
+
 interface LibConfig {
   actionCreators?: string;
   name?: string;

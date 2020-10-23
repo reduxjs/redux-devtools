@@ -12,7 +12,12 @@ import {
 import { DISCONNECTED } from '../constants/socketActionTypes';
 import parseJSON from '../utils/parseJSON';
 import { recompute } from '../utils/updateState';
-import { LiftedActionDispatchAction, Request, StoreAction } from '../actions';
+import {
+  ActionCreator,
+  LiftedActionDispatchAction,
+  Request,
+  StoreAction,
+} from '../actions';
 
 export interface Features {
   lock?: boolean;
@@ -33,7 +38,7 @@ export interface Options {
   connectionId?: string;
   explicitLib?: string;
   lib?: string;
-  actionCreators?: string;
+  actionCreators?: ActionCreator[];
   features: Features;
   serialize?: boolean;
 }
