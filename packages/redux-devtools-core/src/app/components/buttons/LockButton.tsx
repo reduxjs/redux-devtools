@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'devui';
 import { IoIosLock } from 'react-icons/io';
-import { lockChanges } from '../../actions';
+import { lockChanges, StoreAction } from '../../actions';
+import { Dispatch } from 'redux';
 
 class LockButton extends Component {
   static propTypes = {
@@ -31,7 +32,10 @@ class LockButton extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(
+  dispatch: Dispatch<StoreAction>,
+  ownProps: OwnProps
+) {
   return {
     lockChanges: () => dispatch(lockChanges(!ownProps.locked)),
   };

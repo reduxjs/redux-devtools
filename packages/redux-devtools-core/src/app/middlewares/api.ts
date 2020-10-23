@@ -50,7 +50,21 @@ function dispatchRemoteAction({ message, action, state, toAll }) {
   });
 }
 
-function monitoring(request) {
+interface DisconnectedAction {
+  type: 'DISCONNECTED';
+  id: string;
+}
+interface StartAction {
+  type: 'START';
+  id: string;
+}
+interface ErrorAction {
+  type: 'ERROR';
+  payload: string;
+}
+type Request = DisconnectedAction | StartAction | ErrorAction;
+
+function monitoring(request: Request) {
   if (request.type === 'DISCONNECTED') {
     store.dispatch({
       type: REMOVE_INSTANCE,
@@ -89,7 +103,10 @@ function monitoring(request) {
   }
 }
 
-function subscribe(channelName, subscription) {
+function subscribe(
+  channelName: string,
+  subscription: typeof UPDATE_STATE | typeof UPDATE_REPORTS
+) {
   const channel = socket.subscribe(channelName);
   if (subscription === UPDATE_STATE) channel.watch(monitoring);
   else {
@@ -152,7 +169,7 @@ function connect() {
     socket = socketCluster.create(
       connection.type === 'remotedev' ? socketOptions : connection.options
     );
-    handleConnection(store);
+    handleConnection();
   } catch (error) {
     store.dispatch({ type: actions.CONNECT_ERROR, error });
     store.dispatch(showNotification(error.message || error));

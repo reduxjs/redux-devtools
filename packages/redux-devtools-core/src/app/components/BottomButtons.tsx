@@ -9,14 +9,19 @@ import DispatcherButton from './buttons/DispatcherButton';
 import SliderButton from './buttons/SliderButton';
 import MonitorSelector from './MonitorSelector';
 
-export default class BottomButtons extends Component {
+interface Props {
+  dispatcherIsOpen: boolean;
+  sliderIsOpen: boolean;
+}
+
+export default class BottomButtons extends Component<Props> {
   static propTypes = {
     dispatcherIsOpen: PropTypes.bool,
     sliderIsOpen: PropTypes.bool,
     options: PropTypes.object.isRequired,
   };
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: Props) {
     return (
       nextProps.dispatcherIsOpen !== this.props.dispatcherIsOpen ||
       nextProps.sliderIsOpen !== this.props.sliderIsOpen ||

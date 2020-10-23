@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { ChangeEventHandler, Component, RefCallback } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Button } from 'devui';
 import { TiUpload } from 'react-icons/ti';
@@ -9,38 +8,29 @@ type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = DispatchProps;
 
 class ImportButton extends Component<Props> {
-  static propTypes = {
-    importState: PropTypes.func.isRequired,
-  };
-
-  constructor() {
-    super();
-    this.handleImport = this.handleImport.bind(this);
-    this.handleImportFile = this.handleImportFile.bind(this);
-    this.mapRef = this.mapRef.bind(this);
-  }
+  fileInput?: HTMLInputElement | null;
 
   shouldComponentUpdate() {
     return false;
   }
 
-  mapRef(node) {
+  mapRef: RefCallback<HTMLInputElement> = (node) => {
     this.fileInput = node;
-  }
+  };
 
-  handleImport() {
-    this.fileInput.click();
-  }
+  handleImport = () => {
+    this.fileInput!.click();
+  };
 
-  handleImportFile(e) {
-    const file = e.target.files[0];
+  handleImportFile: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const file = e.target.files![0];
     const reader = new FileReader();
     reader.onload = () => {
-      this.props.importState(reader.result);
+      this.props.importState(reader.result as string);
     };
     reader.readAsText(file);
-    e.target.value = ''; // eslint-disable-line no-param-reassign
-  }
+    e.target.value = '';
+  };
 
   render() {
     return (

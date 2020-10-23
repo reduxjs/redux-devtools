@@ -29,6 +29,7 @@ import {
   CONNECT_SUCCESS,
   DEAUTHENTICATE,
   DISCONNECTED,
+  EMIT,
   RECONNECT,
   SUBSCRIBE_ERROR,
   SUBSCRIBE_REQUEST,
@@ -90,14 +91,21 @@ export interface MonitorActionAction {
   ) => unknown;
   monitorProps: unknown;
 }
-interface LiftedActionAction {
+interface LiftedActionDispatchAction {
   type: typeof LIFTED_ACTION;
   message: 'DISPATCH';
   action: Action<unknown>;
 }
+interface LiftedActionImportAction {
+  type: typeof LIFTED_ACTION;
+  message: 'IMPORT';
+  state: string;
+  preloadedState: unknown | undefined;
+}
+export type LiftedActionAction = LiftedActionDispatchAction;
 export function liftedDispatch(
   action: InitMonitorAction
-): MonitorActionAction | LiftedActionAction {
+): MonitorActionAction | LiftedActionDispatchAction {
   if (action.type[0] === '@') {
     if (action.type === '@@INIT_MONITOR') {
       monitorReducer = action.update;
@@ -146,7 +154,10 @@ export function updateMonitorState(nextState) {
   return { type: UPDATE_MONITOR_STATE, nextState };
 }
 
-export function importState(state, preloadedState) {
+export function importState(
+  state: string,
+  preloadedState?: unknown
+): LiftedActionImportAction {
   return { type: LIFTED_ACTION, message: 'IMPORT', state, preloadedState };
 }
 
@@ -247,6 +258,10 @@ export function getReport(report) {
   return { type: GET_REPORT_REQUEST, report };
 }
 
+interface UpdateStateAction {
+  type: typeof UPDATE_STATE;
+}
+
 interface RemoveInstanceAction {
   type: typeof REMOVE_INSTANCE;
   id: string;
@@ -318,6 +333,12 @@ interface UnsubscribeAction {
   channel: string;
 }
 
+interface EmitAction {
+  type: typeof EMIT;
+  message: string;
+  id: string;
+}
+
 export type StoreAction =
   | ChangeSectionAction
   | ChangeThemeAction
@@ -334,6 +355,7 @@ export type StoreAction =
   | ReconnectAction
   | ShowNotificationAction
   | ClearNotificationAction
+  | UpdateStateAction
   | RemoveInstanceAction
   | ConnectRequestAction
   | ConnectSuccessAction
@@ -346,4 +368,5 @@ export type StoreAction =
   | SubscribeRequestAction
   | SubscribeSuccessAction
   | SubscribeErrorAction
-  | UnsubscribeAction;
+  | UnsubscribeAction
+  | EmitAction;

@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import { Button } from 'devui';
 import { MdAvTimer } from 'react-icons/md';
 import { toggleSlider } from '../../actions';
 
 type DispatchProps = ResolveThunks<typeof actionCreators>;
-type Props = DispatchProps;
+interface OwnProps {
+  isOpen: boolean;
+}
+type Props = DispatchProps & OwnProps;
 
 class SliderButton extends Component<Props> {
-  static propTypes = {
-    isOpen: PropTypes.bool,
-    toggleSlider: PropTypes.func.isRequired,
-  };
-
   shouldComponentUpdate(nextProps: Props) {
     return nextProps.isOpen !== this.props.isOpen;
   }

@@ -1,3 +1,5 @@
+import { PerformAction } from 'redux-devtools-instrument';
+import { Action } from 'redux';
 import {
   UPDATE_STATE,
   SET_STATE,
@@ -10,10 +12,48 @@ import {
 import { DISCONNECTED } from '../constants/socketActionTypes';
 import parseJSON from '../utils/parseJSON';
 import { recompute } from '../utils/updateState';
-import { StoreAction } from '../actions';
+import { LiftedActionAction, StoreAction } from '../actions';
+
+interface Features {
+  lock?: boolean;
+  export?: boolean;
+  import?: string;
+  persist?: boolean;
+  pause?: boolean;
+  reorder?: boolean;
+  jump?: boolean;
+  skip?: boolean;
+  dispatch?: boolean;
+  sync?: boolean;
+  test?: boolean;
+}
+
+interface Options {
+  name?: string;
+  connectionId?: string;
+  explicitLib?: string;
+  lib?: string;
+  actionCreators?: string;
+  features: Features;
+  serialize?: boolean;
+}
+
+interface State {
+  actionsById: { [actionId: number]: PerformAction<Action<unknown>> };
+  computedStates: { state: unknown; error?: string }[];
+  currentStateIndex: number;
+  nextActionId: number;
+  skippedActionIds: number[];
+  stagedActionIds: number[];
+}
 
 export interface InstancesState {
+  selected: string | null;
+  current: string;
   sync: boolean;
+  connections: { [id: string]: string[] };
+  options: { [id: string]: Options };
+  states: { [id: string]: State };
   persisted?: boolean;
 }
 
@@ -35,7 +75,12 @@ export const initialState: InstancesState = {
   },
 };
 
-function updateState(state, request, id, serialize) {
+function updateState(
+  state: { [id: string]: State },
+  request,
+  id: string,
+  serialize: boolean | undefined
+) {
   let payload = request.payload;
   const actionsById = request.actionsById;
   if (actionsById) {
@@ -154,7 +199,10 @@ function updateState(state, request, id, serialize) {
   return { ...state, [id]: newState };
 }
 
-export function dispatchAction(state, { action }) {
+export function dispatchAction(
+  state: InstancesState,
+  { action }: LiftedActionAction
+) {
   if (action.type === 'JUMP_TO_STATE' || action.type === 'JUMP_TO_ACTION') {
     const id = state.selected || state.current;
     const liftedState = state.states[id];

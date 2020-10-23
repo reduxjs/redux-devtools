@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import { Button } from 'devui';
 import { TiDownload } from 'react-icons/ti';
@@ -9,10 +8,6 @@ type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = DispatchProps;
 
 class ExportButton extends Component<Props> {
-  static propTypes = {
-    exportState: PropTypes.func.isRequired,
-  };
-
   shouldComponentUpdate() {
     return false;
   }
