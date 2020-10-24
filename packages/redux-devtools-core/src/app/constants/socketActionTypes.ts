@@ -1,5 +1,14 @@
 import socketCluster from 'socketcluster-client';
 
+interface States {
+  CLOSED: 'closed';
+  CONNECTING: 'connecting';
+  OPEN: 'open';
+  AUTHENTICATED: 'authenticated';
+  PENDING: 'pending';
+  UNAUTHENTICATED: 'unauthenticated';
+}
+
 export const {
   CLOSED,
   CONNECTING,
@@ -7,7 +16,7 @@ export const {
   AUTHENTICATED,
   PENDING,
   UNAUTHENTICATED,
-} = socketCluster.SCClientSocket;
+} = (socketCluster.SCClientSocket as unknown) as States;
 export const CONNECT_REQUEST = 'socket/CONNECT_REQUEST';
 export const CONNECT_SUCCESS = 'socket/CONNECT_SUCCESS';
 export const CONNECT_ERROR = 'socket/CONNECT_ERROR';

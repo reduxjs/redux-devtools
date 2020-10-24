@@ -11,6 +11,7 @@ import RawTab from './RawTab';
 import ChartTab from './ChartTab';
 import VisualDiffTab from './VisualDiffTab';
 import { StoreState } from '../../../reducers';
+import { Delta } from 'jsondiffpatch';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
@@ -19,7 +20,7 @@ type Props = StateProps &
   TabComponentProps<unknown, Action<unknown>>;
 
 class SubTabs extends Component<Props> {
-  tabs?: Tab<unknown>[];
+  tabs?: (Tab<Props> | Tab<{ data: unknown }> | Tab<{ data?: Delta }>)[];
 
   constructor(props: Props) {
     super(props);
@@ -56,7 +57,7 @@ class SubTabs extends Component<Props> {
         {
           name: 'Raw',
           component: VisualDiffTab,
-          selector: this.selector,
+          selector: this.selector as () => { data?: Delta },
         },
       ];
       return;
@@ -88,7 +89,7 @@ class SubTabs extends Component<Props> {
 
     return (
       <Tabs
-        tabs={this.tabs!}
+        tabs={this.tabs! as any}
         selected={selected || 'Tree'}
         onClick={this.props.selectMonitorTab}
       />

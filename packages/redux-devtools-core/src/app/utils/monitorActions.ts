@@ -2,7 +2,10 @@ import difference from 'lodash/difference';
 import omit from 'lodash/omit';
 import stringifyJSON from './stringifyJSON';
 import { SET_STATE } from '../constants/actionTypes';
-import { State } from '../reducers/instances';
+import { InstancesState, State } from '../reducers/instances';
+import { Dispatch, MiddlewareAPI } from 'redux';
+import { DispatchAction, StoreAction } from '../actions';
+import { StoreState } from '../reducers';
 
 export function sweep(state: State): State {
   return {
@@ -18,12 +21,12 @@ export function sweep(state: State): State {
 }
 
 export function nonReduxDispatch(
-  store,
-  message,
-  instanceId,
-  action,
-  initialState,
-  preInstances
+  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
+  message: string,
+  instanceId: string,
+  action: DispatchAction,
+  initialState: string | undefined,
+  preInstances: InstancesState
 ) {
   const instances = preInstances || store.getState().instances;
   const state = instances.states[instanceId];

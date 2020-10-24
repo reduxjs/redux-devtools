@@ -89,19 +89,20 @@ function updateState(
   id: string,
   serialize: boolean | undefined
 ) {
-  let payload = request.payload;
+  let payload: State = request.payload as State;
   const actionsById = request.actionsById;
   if (actionsById) {
     payload = {
+      // eslint-disable-next-line @typescript-eslint/ban-types
       ...payload,
       actionsById: parseJSON(actionsById, serialize),
       computedStates: parseJSON(request.computedStates, serialize),
-    };
+    } as State;
     if (request.type === 'STATE' && request.committedState) {
       payload.committedState = payload.computedStates[0].state;
     }
   } else {
-    payload = parseJSON(payload, serialize);
+    payload = parseJSON((payload as unknown) as string, serialize) as State;
   }
 
   let newState;
@@ -112,11 +113,11 @@ function updateState(
     case 'INIT':
       newState = recompute(state.default, payload, {
         action: { type: '@@INIT' },
-        timestamp: action.timestamp || Date.now(),
+        timestamp: (action as { timestamp?: unknown }).timestamp || Date.now(),
       });
       break;
     case 'ACTION': {
-      let isExcess = request.isExcess;
+      const isExcess = request.isExcess;
       const nextActionId = request.nextActionId || liftedState.nextActionId + 1;
       const maxAge = request.maxAge;
       if (Array.isArray(action)) {
@@ -125,7 +126,7 @@ function updateState(
         for (let i = 0; i < action.length; i++) {
           newState = recompute(
             newState,
-            request.batched ? payload : payload[i],
+            request.batched ? payload : ((payload as unknown) as State[])[i],
             action[i],
             newState.nextActionId + 1,
             maxAge,

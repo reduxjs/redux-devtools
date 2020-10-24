@@ -1,10 +1,13 @@
 import stringifyJSON from '../utils/stringifyJSON';
 import { UPDATE_STATE, LIFTED_ACTION, EXPORT } from '../constants/actionTypes';
 import { getActiveInstance } from '../reducers/instances';
+import { Dispatch, MiddlewareAPI } from 'redux';
+import { ExportRequest, StoreAction } from '../actions';
+import { StoreState } from '../reducers';
 
-let toExport;
+let toExport: string | undefined;
 
-function download(state) {
+function download(state: string) {
   const blob = new Blob([state], { type: 'octet/stream' });
   const href = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -19,15 +22,17 @@ function download(state) {
   }, 0);
 }
 
-const exportState = (store) => (next) => (action) => {
+const exportState = (
+  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>
+) => (next: Dispatch<StoreAction>) => (action: StoreAction) => {
   const result = next(action);
 
   if (
     toExport &&
     action.type === UPDATE_STATE &&
-    action.request.type === 'EXPORT'
+    action.request!.type === 'EXPORT'
   ) {
-    const request = action.request;
+    const request = action.request!;
     const id = request.instanceId || request.id;
     if (id === toExport) {
       toExport = undefined;
@@ -35,7 +40,7 @@ const exportState = (store) => (next) => (action) => {
         JSON.stringify(
           {
             payload: request.payload,
-            preloadedState: request.committedState,
+            preloadedState: (request as ExportRequest).committedState,
           },
           null,
           '\t'

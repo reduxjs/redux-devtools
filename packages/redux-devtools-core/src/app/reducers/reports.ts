@@ -3,8 +3,12 @@ import {
 } from '../constants/actionTypes';
 import { StoreAction } from '../actions';
 
+export interface Data {
+  id: unknown;
+}
+
 export interface ReportsState {
-  data: unknown[];
+  data: Data[];
 }
 
 const initialState: ReportsState = {

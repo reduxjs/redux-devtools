@@ -6,8 +6,10 @@ export interface SocketState {
   id: string | null;
   channels: string[];
   socketState: States;
-  authState: AuthStates;
+  authState: AuthStates | 'pending';
   error: Error | undefined;
+  baseChannel?: string;
+  authToken?: null;
 }
 
 const initialState: SocketState = {
@@ -18,7 +20,10 @@ const initialState: SocketState = {
   error: undefined,
 };
 
-export default function socket(state = initialState, action: StoreAction) {
+export default function socket(
+  state = initialState,
+  action: StoreAction
+): SocketState {
   switch (action.type) {
     case actions.CONNECT_REQUEST: {
       return {

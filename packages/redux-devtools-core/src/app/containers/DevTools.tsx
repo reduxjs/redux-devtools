@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withTheme } from 'styled-components';
 import { LiftedAction, LiftedState } from 'redux-devtools-instrument';
 import { Action } from 'redux';
-import { Monitor } from 'redux-devtools';
 import getMonitor from '../utils/getMonitor';
 import { InitMonitorAction } from '../actions';
 import { Features, State } from '../reducers/instances';
@@ -22,13 +21,15 @@ interface Props {
 
 class DevTools extends Component<Props> {
   monitorProps: unknown;
-  Monitor?: Monitor<
-    unknown,
-    Action<unknown>,
-    LiftedState<unknown, Action<unknown>, unknown>,
-    unknown,
-    Action<unknown>
-  >;
+  Monitor?: React.ComponentType<
+    LiftedState<unknown, Action<unknown>, unknown>
+  > & {
+    update(
+      monitorProps: unknown,
+      state: unknown | undefined,
+      action: Action<unknown>
+    ): unknown;
+  };
   preventRender?: boolean;
 
   constructor(props: Props) {
@@ -41,6 +42,7 @@ class DevTools extends Component<Props> {
     this.monitorProps = monitorElement.props;
     this.Monitor = monitorElement.type;
 
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const update = this.Monitor!.update;
     if (update) {
       let newMonitorState;
@@ -51,7 +53,11 @@ class DevTools extends Component<Props> {
       ) {
         newMonitorState = monitorState;
       } else {
-        newMonitorState = update(this.monitorProps, undefined, {});
+        newMonitorState = update(
+          this.monitorProps,
+          undefined,
+          {} as Action<unknown>
+        );
         if (newMonitorState !== monitorState) {
           this.preventRender = true;
         }
@@ -95,9 +101,10 @@ class DevTools extends Component<Props> {
       ...this.props.liftedState,
       monitorState: this.props.monitorState,
     };
+    const MonitorAsAny = this.Monitor as any;
     return (
       <div className={`monitor monitor-${this.props.monitor}`}>
-        <this.Monitor
+        <MonitorAsAny
           {...liftedState}
           {...this.monitorProps}
           features={this.props.features}

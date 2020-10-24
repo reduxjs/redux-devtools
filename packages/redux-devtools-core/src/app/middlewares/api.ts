@@ -13,23 +13,36 @@ import {
   GET_REPORT_ERROR,
   GET_REPORT_SUCCESS,
 } from '../constants/actionTypes';
-import { showNotification, importState, StoreAction } from '../actions';
+import {
+  showNotification,
+  importState,
+  StoreAction,
+  EmitAction,
+  LiftedActionAction,
+  Request,
+  DispatchAction,
+} from '../actions';
 import { nonReduxDispatch } from '../utils/monitorActions';
 import { StoreState } from '../reducers';
 
 let socket: SCClientSocket;
 let store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>;
 
-function emit({ message: type, id, instanceId, action, state }) {
+function emit({ message: type, id, instanceId, action, state }: EmitAction) {
   socket.emit(id ? 'sc-' + id : 'respond', { type, action, state, instanceId });
 }
 
-function startMonitoring(channel) {
+function startMonitoring(channel: string) {
   if (channel !== store.getState().socket.baseChannel) return;
   store.dispatch({ type: actions.EMIT, message: 'START' });
 }
 
-function dispatchRemoteAction({ message, action, state, toAll }) {
+function dispatchRemoteAction({
+  message,
+  action,
+  state,
+  toAll,
+}: LiftedActionAction) {
   const instances = store.getState().instances;
   const instanceId = getActiveInstance(instances);
   const id = !toAll && instances.options[instanceId].connectionId;
@@ -41,7 +54,7 @@ function dispatchRemoteAction({ message, action, state, toAll }) {
       store,
       message,
       instanceId,
-      action,
+      action as DispatchAction,
       state,
       instances
     ),
@@ -50,21 +63,32 @@ function dispatchRemoteAction({ message, action, state, toAll }) {
   });
 }
 
-interface DisconnectedAction {
+interface RequestBase {
+  id?: string;
+  instanceId?: string;
+}
+interface DisconnectedAction extends RequestBase {
   type: 'DISCONNECTED';
   id: string;
 }
-interface StartAction {
+interface StartAction extends RequestBase {
   type: 'START';
   id: string;
 }
-interface ErrorAction {
+interface ErrorAction extends RequestBase {
   type: 'ERROR';
   payload: string;
 }
-type Request = DisconnectedAction | StartAction | ErrorAction;
+interface RequestWithData extends RequestBase {
+  data: Request;
+}
+type MonitoringRequest =
+  | DisconnectedAction
+  | StartAction
+  | ErrorAction
+  | Request;
 
-function monitoring(request: Request) {
+function monitoring(request: MonitoringRequest) {
   if (request.type === 'DISCONNECTED') {
     store.dispatch({
       type: REMOVE_INSTANCE,
@@ -84,7 +108,9 @@ function monitoring(request: Request) {
 
   store.dispatch({
     type: UPDATE_STATE,
-    request: request.data ? { ...request.data, id: request.id } : request,
+    request: ((request as unknown) as RequestWithData).data
+      ? { ...((request as unknown) as RequestWithData).data, id: request.id }
+      : request,
   });
 
   const instances = store.getState().instances;
@@ -110,7 +136,7 @@ function subscribe(
   const channel = socket.subscribe(channelName);
   if (subscription === UPDATE_STATE) channel.watch(monitoring);
   else {
-    const watcher = (request) => {
+    const watcher = (request: Request) => {
       store.dispatch({ type: subscription, request });
     };
     channel.watch(watcher);
@@ -201,15 +227,19 @@ function login() {
   });
 }
 
-function getReport(reportId) {
-  socket.emit('getReport', reportId, (error, data) => {
-    if (error) {
-      store.dispatch({ type: GET_REPORT_ERROR, error });
-      return;
+function getReport(reportId: unknown) {
+  socket.emit(
+    'getReport',
+    reportId,
+    (error: Error, data: { payload: string }) => {
+      if (error) {
+        store.dispatch({ type: GET_REPORT_ERROR, error });
+        return;
+      }
+      store.dispatch({ type: GET_REPORT_SUCCESS, data });
+      store.dispatch(importState(data.payload));
     }
-    store.dispatch({ type: GET_REPORT_SUCCESS, data });
-    store.dispatch(importState(data.payload));
-  });
+  );
 }
 
 export default function api(

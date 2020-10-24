@@ -36,13 +36,12 @@ export function dispatchMonitorAction(
 ): MonitorState {
   return {
     ...state,
-    monitorState:
-      action.action.newMonitorState ||
+    monitorState: (action.action.newMonitorState ||
       action.monitorReducer(
         action.monitorProps,
         state.monitorState,
         action.action
-      ),
+      )) as MonitorStateMonitorState,
   };
 }
 

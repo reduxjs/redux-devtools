@@ -20,6 +20,9 @@ import {
   UPDATE_REPORTS,
   REMOVE_INSTANCE,
   SET_STATE,
+  GET_REPORT_ERROR,
+  GET_REPORT_SUCCESS,
+  ERROR,
 } from '../constants/actionTypes';
 import {
   AUTH_ERROR,
@@ -41,6 +44,7 @@ import { Action } from 'redux';
 import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
 import { LiftedAction } from 'redux-devtools-instrument';
+import { Data } from '../reducers/reports';
 
 let monitorReducer: (
   monitorProps: unknown,
@@ -95,49 +99,73 @@ export interface MonitorActionAction {
   ) => unknown;
   monitorProps: unknown;
 }
-interface JumpToStateAction {
+export interface JumpToStateAction {
   type: 'JUMP_TO_STATE';
   index: number;
   actionId: number;
 }
-interface JumpToActionAction {
+export interface JumpToActionAction {
   type: 'JUMP_TO_ACTION';
   index: number;
   actionId: number;
 }
-interface PauseRecordingAction {
+export interface PauseRecordingAction {
   type: 'PAUSE_RECORDING';
   status: boolean;
 }
-interface LockChangesAction {
+export interface LockChangesAction {
   type: 'LOCK_CHANGES';
   status: boolean;
 }
-export interface LiftedActionDispatchAction {
-  type: typeof LIFTED_ACTION;
-  message: 'DISPATCH';
-  action:
-    | JumpToStateAction
-    | JumpToActionAction
-    | PauseRecordingAction
-    | LockChangesAction;
+export interface ToggleActionAction {
+  type: 'TOGGLE_ACTION';
+}
+export interface RollbackAction {
+  type: 'ROLLBACK';
+}
+export interface SweepAction {
+  type: 'SWEEP';
+}
+export type DispatchAction =
+  | JumpToStateAction
+  | JumpToActionAction
+  | PauseRecordingAction
+  | LockChangesAction
+  | ToggleActionAction
+  | RollbackAction
+  | SweepAction;
+interface LiftedActionActionBase {
+  action?: DispatchAction | string | CustomAction;
+  state?: string;
   toAll?: boolean;
 }
-interface LiftedActionImportAction {
+export interface LiftedActionDispatchAction extends LiftedActionActionBase {
+  type: typeof LIFTED_ACTION;
+  message: 'DISPATCH';
+  action: DispatchAction;
+  toAll?: boolean;
+}
+interface LiftedActionImportAction extends LiftedActionActionBase {
   type: typeof LIFTED_ACTION;
   message: 'IMPORT';
   state: string;
   preloadedState: unknown | undefined;
 }
-interface LiftedActionActionAction {
+interface LiftedActionActionAction extends LiftedActionActionBase {
   type: typeof LIFTED_ACTION;
   message: 'ACTION';
-  action: Action<unknown>;
+  action: string | CustomAction;
+}
+interface LiftedActionExportAction extends LiftedActionActionBase {
+  type: typeof LIFTED_ACTION;
+  message: 'EXPORT';
+  toExport: boolean;
 }
 export type LiftedActionAction =
   | LiftedActionDispatchAction
   | LiftedActionImportAction
-  | LiftedActionActionAction;
+  | LiftedActionActionAction
+  | LiftedActionExportAction;
 export function liftedDispatch(
   action:
     | InitMonitorAction
@@ -237,8 +265,14 @@ export function pauseRecording(status: boolean): LiftedActionDispatchAction {
   };
 }
 
+export interface CustomAction {
+  name: string;
+  selected: number;
+  args: (string | undefined)[];
+  rest: string;
+}
 export function dispatchRemotely(
-  action: Action<unknown>
+  action: string | CustomAction
 ): LiftedActionActionAction {
   return { type: LIFTED_ACTION, message: 'ACTION', action };
 }
@@ -317,6 +351,7 @@ export function getReport(report: unknown): GetReportRequest {
 
 export interface ActionCreator {
   args: string[];
+  name: string;
 }
 
 interface LibConfig {
@@ -337,6 +372,7 @@ export interface RequestBase {
   computedStates?: string;
   // eslint-disable-next-line @typescript-eslint/ban-types
   payload?: {} | string;
+  liftedState?: Partial<State>;
 }
 interface InitRequest extends RequestBase {
   type: 'INIT';
@@ -344,6 +380,10 @@ interface InitRequest extends RequestBase {
 }
 interface ActionRequest extends RequestBase {
   type: 'ACTION';
+  isExcess: boolean;
+  nextActionId: number;
+  maxAge: number;
+  batched: boolean;
 }
 interface StateRequest extends RequestBase {
   type: 'STATE';
@@ -352,16 +392,22 @@ interface StateRequest extends RequestBase {
 interface PartialStateRequest extends RequestBase {
   type: 'PARTIAL_STATE';
   committedState: unknown;
+  maxAge: number;
 }
 interface LiftedRequest extends RequestBase {
   type: 'LIFTED';
+}
+export interface ExportRequest extends RequestBase {
+  type: 'EXPORT';
+  committedState: unknown;
 }
 export type Request =
   | InitRequest
   | ActionRequest
   | StateRequest
   | PartialStateRequest
-  | LiftedRequest;
+  | LiftedRequest
+  | ExportRequest;
 
 interface UpdateStateAction {
   type: typeof UPDATE_STATE;
@@ -445,10 +491,47 @@ interface UnsubscribeAction {
   channel: string;
 }
 
-interface EmitAction {
+export interface EmitAction {
   type: typeof EMIT;
   message: string;
-  id: string;
+  id?: string | false;
+  instanceId?: string;
+  action?: unknown;
+  state?: unknown;
+}
+
+interface ListRequest {
+  type: 'list';
+  data: Data;
+}
+interface AddRequest {
+  type: 'add';
+  data: Data;
+}
+interface RemoveRequest {
+  type: 'remove';
+  data: Data;
+  id: unknown;
+}
+type UpdateReportsRequest = ListRequest | AddRequest | RemoveRequest;
+interface UpdateReportsAction {
+  type: typeof UPDATE_REPORTS;
+  request: UpdateReportsRequest;
+}
+
+interface GetReportError {
+  type: typeof GET_REPORT_ERROR;
+  error: Error;
+}
+
+interface GetReportSuccess {
+  type: typeof GET_REPORT_SUCCESS;
+  data: { payload: string };
+}
+
+interface ErrorAction {
+  type: typeof ERROR;
+  payload: string;
 }
 
 export type StoreAction =
@@ -483,4 +566,8 @@ export type StoreAction =
   | SubscribeSuccessAction
   | SubscribeErrorAction
   | UnsubscribeAction
-  | EmitAction;
+  | EmitAction
+  | UpdateReportsAction
+  | GetReportError
+  | GetReportSuccess
+  | ErrorAction;

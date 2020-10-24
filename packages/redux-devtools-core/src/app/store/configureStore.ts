@@ -25,15 +25,23 @@ export default function configureStore(
     deserialize: (data: unknown) => data,
   } as unknown) as PersistorConfig;
 
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   getStoredState<StoreState>(persistConfig, (err, restoredState) => {
     let composeEnhancers = compose;
     if (process.env.NODE_ENV !== 'production') {
-      if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
-        composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+      if (
+        ((window as unknown) as {
+          __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+        }).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ) {
+        composeEnhancers = ((window as unknown) as {
+          __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: typeof compose;
+        }).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
       }
       if (module.hot) {
         // Enable Webpack hot module replacement for reducers
         module.hot.accept('../reducers', () => {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           const nextReducer = require('../reducers'); // eslint-disable-line global-require
           store.replaceReducer(nextReducer);
         });

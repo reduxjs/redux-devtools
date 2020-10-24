@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import styled, { withTheme } from 'styled-components';
 import SliderMonitor from 'redux-devtools-slider-monitor';
-import { LiftedAction, LiftedState } from 'redux-devtools-instrument';
-import { Action, Dispatch } from 'redux';
+import { LiftedAction } from 'redux-devtools-instrument';
+import { Action } from 'redux';
 import { ThemeFromProvider } from 'devui';
+import { State } from '../../reducers/instances';
 
 const SliderWrapper = styled.div`
   border-color: ${(props) => props.theme.base02};
@@ -12,8 +13,8 @@ const SliderWrapper = styled.div`
 `;
 
 interface Props {
-  liftedState: LiftedState<unknown, Action<unknown>, unknown>;
-  dispatch: Dispatch<LiftedAction<unknown, Action<unknown>, unknown>>;
+  liftedState: State;
+  dispatch: (action: LiftedAction<unknown, Action<unknown>, unknown>) => void;
   theme: ThemeFromProvider;
 }
 
@@ -29,6 +30,8 @@ class Slider extends Component<Props> {
       <SliderWrapper>
         <SliderMonitor
           {...this.props.liftedState}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           dispatch={this.props.dispatch}
           theme={this.props.theme}
           hideResetButton

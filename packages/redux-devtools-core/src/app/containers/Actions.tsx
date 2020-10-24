@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container } from 'devui';
 import SliderMonitor from './monitors/Slider';
@@ -54,16 +53,6 @@ class Actions extends Component<Props> {
     );
   }
 }
-
-Actions.propTypes = {
-  liftedDispatch: PropTypes.func.isRequired,
-  liftedState: PropTypes.object.isRequired,
-  monitorState: PropTypes.object,
-  options: PropTypes.object.isRequired,
-  monitor: PropTypes.string,
-  dispatcherIsOpen: PropTypes.bool,
-  sliderIsOpen: PropTypes.bool,
-};
 
 const mapStateToProps = (state: StoreState) => {
   const instances = state.instances;

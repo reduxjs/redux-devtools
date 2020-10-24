@@ -53,15 +53,15 @@ interface OwnProps {
 type Props = DispatchProps & OwnProps;
 
 interface State {
-  selected: string;
+  selected: 'default' | number;
   customAction: string;
-  args: unknown[];
+  args: (string | undefined)[];
   rest: string;
   changed: boolean;
 }
 
 class Dispatcher extends Component<Props, State> {
-  state = {
+  state: State = {
     selected: 'default',
     customAction:
       this.props.options.lib === 'redux' ? "{\n  type: ''\n}" : 'this.',
@@ -89,7 +89,7 @@ class Dispatcher extends Component<Props, State> {
     );
   }
 
-  selectActionCreator = (selected) => {
+  selectActionCreator = (selected: 'default' | 'actions-help' | number) => {
     if (selected === 'actions-help') {
       window.open(
         'https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/' +
@@ -98,14 +98,14 @@ class Dispatcher extends Component<Props, State> {
       return;
     }
 
-    const args = [];
+    const args: string[] = [];
     if (selected !== 'default') {
       args.length = this.props.options.actionCreators![selected].args.length;
     }
     this.setState({ selected, args, rest: '[]', changed: false });
   };
 
-  handleArg = (argIndex) => (value) => {
+  handleArg = (argIndex: number) => (value: string) => {
     const args = [
       ...this.state.args.slice(0, argIndex),
       value || undefined,
@@ -114,26 +114,26 @@ class Dispatcher extends Component<Props, State> {
     this.setState({ args, changed: true });
   };
 
-  handleRest = (rest) => {
+  handleRest = (rest: string) => {
     this.setState({ rest, changed: true });
   };
 
-  handleCustomAction = (customAction) => {
+  handleCustomAction = (customAction: string) => {
     this.setState({ customAction, changed: true });
   };
 
   dispatchAction = () => {
     const { selected, customAction, args, rest } = this.state;
 
-    if (this.state.selected !== 'default') {
+    if (selected !== 'default') {
       // remove trailing `undefined` arguments
       let i = args.length - 1;
       while (i >= 0 && typeof args[i] === 'undefined') {
-        args.pop(i);
+        args.pop();
         i--;
       }
       this.props.dispatch({
-        name: this.props.options.actionCreators[selected].name,
+        name: this.props.options.actionCreators![selected].name,
         selected,
         args,
         rest,
@@ -182,7 +182,9 @@ class Dispatcher extends Component<Props, State> {
       );
     }
 
-    let options = [{ value: 'default', label: 'Custom action' }];
+    let options: { value: string | number; label: string }[] = [
+      { value: 'default', label: 'Custom action' },
+    ];
     if (actionCreators && actionCreators.length > 0) {
       options = options.concat(
         actionCreators.map(({ name, args }, i) => ({

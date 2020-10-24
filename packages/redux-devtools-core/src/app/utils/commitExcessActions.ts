@@ -1,7 +1,9 @@
 // Based on https://github.com/gaearon/redux-devtools/pull/241
 /* eslint-disable no-param-reassign */
 
-export default function commitExcessActions(liftedState, n = 1) {
+import { State } from '../reducers/instances';
+
+export default function commitExcessActions(liftedState: State, n = 1) {
   // Auto-commits n-number of excess actions.
   let excess = n;
   let idsToDelete = liftedState.stagedActionIds.slice(1, excess + 1);

@@ -21,7 +21,8 @@ class Settings extends Component<{}, State> {
 
   render() {
     return (
-      <Tabs
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      <Tabs<{}>
         toRight
         tabs={this.tabs}
         selected={this.state.selected}

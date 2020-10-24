@@ -1,17 +1,17 @@
 import jsan from 'jsan';
 import { DATA_TYPE_KEY, DATA_REF_KEY } from '../constants/dataTypes';
 
-export function reviver(key, value) {
+export function reviver(key: string, value: unknown) {
   if (
     typeof value === 'object' &&
     value !== null &&
     '__serializedType__' in value &&
-    typeof value.data === 'object'
+    typeof (value as any).data === 'object'
   ) {
-    const data = value.data;
-    data[DATA_TYPE_KEY] = value.__serializedType__;
+    const data = (value as any).data;
+    data[DATA_TYPE_KEY] = (value as any).__serializedType__;
     if ('__serializedRef__' in value)
-      data[DATA_REF_KEY] = value.__serializedRef__;
+      data[DATA_REF_KEY] = (value as any).__serializedRef__;
     /*
     if (Array.isArray(data)) {
       data.__serializedType__ = value.__serializedType__;
