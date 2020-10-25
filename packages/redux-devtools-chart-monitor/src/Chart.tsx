@@ -7,6 +7,7 @@ import * as themes from 'redux-devtools-themes';
 import { Base16Theme } from 'react-base16-styling';
 import { ChartMonitorState } from './reducers';
 import { Primitive } from 'd3';
+import { NodeWithId } from 'd3-state-visualizer/lib/charts/tree/tree';
 
 const wrapperStyle = {
   width: '100%',
@@ -25,6 +26,7 @@ export interface Props<S, A extends Action<unknown>>
   isSorted: boolean;
   heightBetweenNodesCoeff: number;
   widthBetweenNodesCoeff: number;
+  onClickText: (datum: NodeWithId) => void;
   tooltipOptions: {
     disabled: boolean;
     offset: {

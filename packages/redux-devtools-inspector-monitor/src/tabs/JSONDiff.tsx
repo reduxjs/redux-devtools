@@ -60,7 +60,7 @@ interface Props {
     expandable: boolean
   ) => React.ReactNode;
   isWideLayout: boolean;
-  dataTypeKey: string | undefined;
+  dataTypeKey: string | symbol | undefined;
 }
 
 interface State {

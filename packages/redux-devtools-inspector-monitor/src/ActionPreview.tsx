@@ -25,7 +25,7 @@ export interface TabComponentProps<S, A extends Action<unknown>> {
   base16Theme: Base16Theme;
   invertTheme: boolean;
   isWideLayout: boolean;
-  dataTypeKey: string | undefined;
+  dataTypeKey: string | symbol | undefined;
   delta: Delta | null | undefined | false;
   action: A;
   nextState: S;
@@ -67,7 +67,7 @@ interface Props<S, A extends Action<unknown>> {
   actions: { [actionId: number]: PerformAction<A> };
   selectedActionId: number | null;
   startActionId: number | null;
-  dataTypeKey: string | undefined;
+  dataTypeKey: string | symbol | undefined;
   monitorState: DevtoolsInspectorState;
   updateMonitorState: (monitorState: Partial<DevtoolsInspectorState>) => void;
   styling: StylingFunction;
