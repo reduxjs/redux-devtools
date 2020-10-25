@@ -1,8 +1,11 @@
 import mapValues from 'lodash/mapValues';
 import jsan from 'jsan';
-import seralizeImmutable from 'remotedev-serialize/immutable/serialize';
+import { immutableSerialize } from 'redux-devtools-serialize';
+import { Action } from 'redux';
+import Immutable from 'immutable';
+import { State } from '../app/reducers/instances';
 
-function deprecate(param) {
+function deprecate(param: string) {
   // eslint-disable-next-line no-console
   console.warn(
     `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead:` +
@@ -11,8 +14,20 @@ function deprecate(param) {
 }
 
 export default function importState(
-  state,
-  { deserializeState, deserializeAction, serialize }
+  state: string,
+  {
+    deserializeState,
+    deserializeAction,
+    serialize,
+  }: {
+    deserializeState?: (state: string) => unknown;
+    deserializeAction?: (action: string) => Action<unknown>;
+    serialize?: {
+      immutable?: typeof Immutable;
+      refs?: (new (data: any) => unknown)[] | null;
+      reviver?: (key: string, value: unknown) => unknown;
+    };
+  }
 ) {
   if (!state) return undefined;
   let parse = jsan.parse;
@@ -21,19 +36,38 @@ export default function importState(
       parse = (v) =>
         jsan.parse(
           v,
-          seralizeImmutable(serialize.immutable, serialize.refs).reviver
+          immutableSerialize(serialize.immutable!, serialize.refs).reviver
         );
     } else if (serialize.reviver) {
       parse = (v) => jsan.parse(v, serialize.reviver);
     }
   }
 
-  let preloadedState;
-  let nextLiftedState = parse(state);
-  if (nextLiftedState.payload) {
-    if (nextLiftedState.preloadedState)
-      preloadedState = parse(nextLiftedState.preloadedState);
-    nextLiftedState = parse(nextLiftedState.payload);
+  let preloadedState: State | undefined;
+  let nextLiftedState: State = parse(state) as State;
+  if (
+    ((nextLiftedState as unknown) as {
+      payload?: string;
+      preloadedState?: string;
+    }).payload
+  ) {
+    if (
+      ((nextLiftedState as unknown) as {
+        payload: string;
+        preloadedState?: string;
+      }).preloadedState
+    )
+      preloadedState = parse(
+        ((nextLiftedState as unknown) as {
+          payload: string;
+          preloadedState: string;
+        }).preloadedState
+      ) as State;
+    nextLiftedState = parse(
+      ((nextLiftedState as unknown) as {
+        payload: string;
+      }).payload
+    ) as State;
   }
   if (deserializeState) {
     deprecate('deserializeState');
@@ -41,17 +75,19 @@ export default function importState(
       nextLiftedState.computedStates = nextLiftedState.computedStates.map(
         (computedState) => ({
           ...computedState,
-          state: deserializeState(computedState.state),
+          state: deserializeState(computedState.state as string),
         })
       );
     }
     if (typeof nextLiftedState.committedState !== 'undefined') {
       nextLiftedState.committedState = deserializeState(
-        nextLiftedState.committedState
+        nextLiftedState.committedState as string
       );
     }
     if (typeof preloadedState !== 'undefined') {
-      preloadedState = deserializeState(preloadedState);
+      preloadedState = deserializeState(
+        (preloadedState as unknown) as string
+      ) as State;
     }
   }
   if (deserializeAction) {
@@ -60,7 +96,7 @@ export default function importState(
       nextLiftedState.actionsById,
       (liftedAction) => ({
         ...liftedAction,
-        action: deserializeAction(liftedAction.action),
+        action: deserializeAction((liftedAction.action as unknown) as string),
       })
     );
   }

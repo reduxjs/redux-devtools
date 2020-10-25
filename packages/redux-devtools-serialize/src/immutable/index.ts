@@ -35,3 +35,4 @@ export default function (
     serialize: serialize,
   };
 }
+export { default as serialize } from './serialize';

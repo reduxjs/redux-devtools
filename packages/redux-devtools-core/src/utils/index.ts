@@ -1,14 +1,24 @@
 import getParams from 'get-params';
 import jsan from 'jsan';
 import { nanoid } from 'nanoid/non-secure';
-import seralizeImmutable from 'remotedev-serialize/immutable/serialize';
+import { immutableSerialize } from 'redux-devtools-serialize';
+import Immutable from 'immutable';
+import { Action } from 'redux';
 
-export function generateId(id) {
+export function generateId(id: string | undefined) {
   return id || nanoid(7);
 }
 
-function flatTree(obj, namespace = '') {
-  let functions = [];
+// eslint-disable-next-line @typescript-eslint/ban-types
+function flatTree(
+  obj: { [key: string]: (...args: any[]) => unknown },
+  namespace = ''
+) {
+  let functions: {
+    name: string;
+    func: (...args: any[]) => unknown;
+    args: string[];
+  }[] = [];
   Object.keys(obj).forEach((key) => {
     const prop = obj[key];
     if (typeof prop === 'function') {
@@ -24,18 +34,23 @@ function flatTree(obj, namespace = '') {
   return functions;
 }
 
-export function getMethods(obj) {
+export function getMethods(obj: unknown) {
   if (typeof obj !== 'object') return undefined;
-  let functions;
-  let m;
-  if (obj.__proto__) m = obj.__proto__.__proto__;
-  if (!m) m = obj;
+  let functions:
+    | {
+        name: string;
+        args: string[];
+      }[]
+    | undefined;
+  let m: { [key: string]: (...args: any[]) => unknown } | undefined;
+  if ((obj as any).__proto__) m = (obj as any).__proto__.__proto__;
+  if (!m) m = obj as any;
 
   Object.getOwnPropertyNames(m).forEach((key) => {
     const propDescriptor = Object.getOwnPropertyDescriptor(m, key);
     if (!propDescriptor || 'get' in propDescriptor || 'set' in propDescriptor)
       return;
-    const prop = m[key];
+    const prop = m![key];
     if (typeof prop === 'function' && key !== 'constructor') {
       if (!functions) functions = [];
       functions.push({
@@ -47,15 +62,17 @@ export function getMethods(obj) {
   return functions;
 }
 
-export function getActionsArray(actionCreators) {
+export function getActionsArray(actionCreators: {
+  [key: string]: (...args: any[]) => unknown;
+}) {
   if (Array.isArray(actionCreators)) return actionCreators;
   return flatTree(actionCreators);
 }
 
-/* eslint-disable no-new-func */
-const interpretArg = (arg) => new Function('return ' + arg)();
+// eslint-disable-next-line @typescript-eslint/no-implied-eval
+const interpretArg = (arg: string) => new Function('return ' + arg)();
 
-function evalArgs(inArgs, restArgs) {
+function evalArgs(inArgs: string[], restArgs: string) {
   const args = inArgs.map(interpretArg);
   if (!restArgs) return args;
   const rest = interpretArg(restArgs);
@@ -63,8 +80,14 @@ function evalArgs(inArgs, restArgs) {
   throw new Error('rest must be an array');
 }
 
-export function evalAction(action, actionCreators) {
+export function evalAction(
+  action: string | { args: string[]; rest: string; selected: string },
+  actionCreators: {
+    [selected: string]: { func: (...args: any[]) => Action<unknown> };
+  }
+) {
   if (typeof action === 'string') {
+    // eslint-disable-next-line @typescript-eslint/no-implied-eval
     return new Function('return ' + action)();
   }
 
@@ -73,12 +96,17 @@ export function evalAction(action, actionCreators) {
   return actionCreator(...args);
 }
 
-export function evalMethod(action, obj) {
+export function evalMethod(
+  action: string | { args: string[]; rest: string; name: string },
+  obj: unknown
+) {
   if (typeof action === 'string') {
+    // eslint-disable-next-line @typescript-eslint/no-implied-eval
     return new Function('return ' + action).call(obj);
   }
 
   const args = evalArgs(action.args, action.rest);
+  // eslint-disable-next-line @typescript-eslint/no-implied-eval
   return new Function('args', `return this.${action.name}(args)`).apply(
     obj,
     args
@@ -86,7 +114,7 @@ export function evalMethod(action, obj) {
 }
 /* eslint-enable */
 
-function tryCatchStringify(obj) {
+function tryCatchStringify(obj: unknown) {
   try {
     return JSON.stringify(obj);
   } catch (err) {
@@ -94,11 +122,26 @@ function tryCatchStringify(obj) {
     if (process.env.NODE_ENV !== 'production')
       console.log('Failed to stringify', err);
     /* eslint-enable no-console */
-    return jsan.stringify(obj, null, null, { circular: '[CIRCULAR]' });
+    return jsan.stringify(
+      obj,
+      (null as unknown) as undefined,
+      (null as unknown) as undefined,
+      ({
+        circular: '[CIRCULAR]',
+      } as unknown) as boolean
+    );
   }
 }
 
-export function stringify(obj, serialize) {
+export function stringify(
+  obj: unknown,
+  serialize?:
+    | {
+        replacer?: (key: string, value: unknown) => unknown;
+        options?: unknown | boolean;
+      }
+    | true
+) {
   if (typeof serialize === 'undefined') {
     return tryCatchStringify(obj);
   }
@@ -106,23 +149,44 @@ export function stringify(obj, serialize) {
     return jsan.stringify(
       obj,
       function (key, value) {
-        if (value && typeof value.toJS === 'function') return value.toJS();
+        if (value && typeof (value as any).toJS === 'function')
+          return (value as any).toJS();
         return value;
       },
-      null,
+      (null as unknown) as undefined,
       true
     );
   }
-  return jsan.stringify(obj, serialize.replacer, null, serialize.options);
+  return jsan.stringify(
+    obj,
+    serialize.replacer,
+    (null as unknown) as undefined,
+    serialize.options as boolean
+  );
 }
 
-export function getSeralizeParameter(config, param) {
+export function getSeralizeParameter(
+  config: {
+    serialize?: {
+      immutable?: typeof Immutable;
+      refs?: (new (data: any) => unknown)[] | null;
+      replacer?: (key: string, value: unknown) => unknown;
+      options?: unknown | boolean;
+    };
+  },
+  param: string
+):
+  | {
+      replacer?: (key: string, value: unknown) => unknown;
+      options: unknown | boolean;
+    }
+  | undefined {
   const serialize = config.serialize;
   if (serialize) {
     if (serialize === true) return { options: true };
     if (serialize.immutable) {
       return {
-        replacer: seralizeImmutable(serialize.immutable, serialize.refs)
+        replacer: immutableSerialize(serialize.immutable, serialize.refs)
           .replacer,
         options: serialize.options || true,
       };
@@ -131,7 +195,12 @@ export function getSeralizeParameter(config, param) {
     return { replacer: serialize.replacer, options: serialize.options || true };
   }
 
-  const value = config[param];
+  const value = (config as {
+    [param: string]: {
+      replacer?: (key: string, value: unknown) => unknown;
+      options: unknown | boolean;
+    };
+  })[param];
   if (typeof value === 'undefined') return undefined;
   // eslint-disable-next-line no-console
   console.warn(
@@ -139,12 +208,15 @@ export function getSeralizeParameter(config, param) {
       ' https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1'
   );
 
-  if (typeof serializeState === 'boolean') return { options: value };
-  if (typeof serializeState === 'function') return { replacer: value };
   return value;
 }
 
-export function getStackTrace(config, toExcludeFromTrace) {
+export function getStackTrace(
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  config: { trace?: () => {}; traceLimit: number },
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  toExcludeFromTrace?: Function | undefined
+) {
   if (!config.trace) return undefined;
   if (typeof config.trace === 'function') return config.trace();
 
@@ -169,7 +241,7 @@ export function getStackTrace(config, toExcludeFromTrace) {
     typeof Error.stackTraceLimit !== 'number' ||
     Error.stackTraceLimit > traceLimit
   ) {
-    const frames = stack.split('\n');
+    const frames = stack!.split('\n');
     if (frames.length > traceLimit) {
       stack = frames
         .slice(0, traceLimit + extraFrames + (frames[0] === 'Error' ? 1 : 0))

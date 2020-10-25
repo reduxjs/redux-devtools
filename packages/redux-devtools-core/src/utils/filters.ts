@@ -1,4 +1,7 @@
 import mapValues from 'lodash/mapValues';
+import { PerformAction } from 'redux-devtools-instrument';
+import { Action } from 'redux';
+import { State } from '../app/reducers/instances';
 
 export const FilterState = {
   DO_NOT_FILTER: 'DO_NOT_FILTER',
@@ -6,19 +9,25 @@ export const FilterState = {
   WHITELIST_SPECIFIC: 'WHITELIST_SPECIFIC',
 };
 
-export function arrToRegex(v) {
+export function arrToRegex(v: string | string[]) {
   return typeof v === 'string' ? v : v.join('|');
 }
 
-function filterActions(actionsById, actionsFilter) {
+function filterActions(
+  actionsById: { [actionId: number]: PerformAction<Action<unknown>> },
+  actionsFilter: (action: Action<unknown>, id: number) => Action
+) {
   if (!actionsFilter) return actionsById;
-  return mapValues(actionsById, (action, id) => ({
+  return mapValues(actionsById, (action, id: number) => ({
     ...action,
     action: actionsFilter(action.action, id),
   }));
 }
 
-function filterStates(computedStates, statesFilter) {
+function filterStates(
+  computedStates: { state: unknown; error?: string | undefined }[],
+  statesFilter: (state: unknown, actionId: number) => unknown
+) {
   if (!statesFilter) return computedStates;
   return computedStates.map((state, idx) => ({
     ...state,
@@ -26,7 +35,17 @@ function filterStates(computedStates, statesFilter) {
   }));
 }
 
-export function getLocalFilter(config) {
+interface Config {
+  actionsBlacklist?: string[];
+  actionsWhitelist?: string[];
+}
+
+interface LocalFilter {
+  whitelist?: string;
+  blacklist?: string;
+}
+
+export function getLocalFilter(config: Config): LocalFilter | undefined {
   if (config.actionsBlacklist || config.actionsWhitelist) {
     return {
       whitelist: config.actionsWhitelist && config.actionsWhitelist.join('|'),
@@ -36,33 +55,53 @@ export function getLocalFilter(config) {
   return undefined;
 }
 
+interface DevToolsOptions {
+  filter?:
+    | typeof FilterState.DO_NOT_FILTER
+    | typeof FilterState.BLACKLIST_SPECIFIC
+    | typeof FilterState.WHITELIST_SPECIFIC;
+  whitelist?: string;
+  blacklist?: string;
+}
 function getDevToolsOptions() {
-  return (typeof window !== 'undefined' && window.devToolsOptions) || {};
+  return (
+    (typeof window !== 'undefined' &&
+      (window as { devToolsOptions?: DevToolsOptions }).devToolsOptions) ||
+    {}
+  );
 }
 
-export function isFiltered(action, localFilter) {
-  const { type } = action.action || action;
+export function isFiltered(
+  action: PerformAction<Action<unknown>> | Action<unknown>,
+  localFilter?: LocalFilter
+) {
+  const { type } = (action as PerformAction<Action<unknown>>).action || action;
   const opts = getDevToolsOptions();
   if (
     (!localFilter &&
       opts.filter &&
       opts.filter === FilterState.DO_NOT_FILTER) ||
-    (type && typeof type.match !== 'function')
+    (type && typeof (type as string).match !== 'function')
   )
     return false;
 
   const { whitelist, blacklist } = localFilter || opts;
   return (
-    (whitelist && !type.match(whitelist)) ||
-    (blacklist && type.match(blacklist))
+    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
+    (whitelist && !(type as string).match(whitelist)) ||
+    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
+    (blacklist && (type as string).match(blacklist))
   );
 }
 
-export function filterStagedActions(state, filters) {
+export function filterStagedActions(state: State, filters: LocalFilter) {
   if (!filters) return state;
 
-  const filteredStagedActionIds = [];
-  const filteredComputedStates = [];
+  const filteredStagedActionIds: number[] = [];
+  const filteredComputedStates: {
+    state: unknown;
+    error?: string | undefined;
+  }[] = [];
 
   state.stagedActionIds.forEach((id, idx) => {
     if (!isFiltered(state.actionsById[id], filters)) {
@@ -79,13 +118,13 @@ export function filterStagedActions(state, filters) {
 }
 
 export function filterState(
-  state,
-  type,
-  localFilter,
-  stateSanitizer,
-  actionSanitizer,
-  nextActionId,
-  predicate
+  state: State,
+  type: string,
+  localFilter: LocalFilter,
+  stateSanitizer: (state: unknown, actionId: number) => unknown,
+  actionSanitizer: (action: Action<unknown>, id: number) => Action,
+  nextActionId: number,
+  predicate: (currState: unknown, currAction: Action<unknown>) => boolean
 ) {
   if (type === 'ACTION')
     return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
@@ -97,9 +136,14 @@ export function filterState(
     localFilter ||
     (filter && filter !== FilterState.DO_NOT_FILTER)
   ) {
-    const filteredStagedActionIds = [];
-    const filteredComputedStates = [];
-    const sanitizedActionsById = actionSanitizer && {};
+    const filteredStagedActionIds: number[] = [];
+    const filteredComputedStates: {
+      state: unknown;
+      error?: string | undefined;
+    }[] = [];
+    const sanitizedActionsById: {
+      [id: number]: PerformAction<Action<unknown>>;
+    } = actionSanitizer && {};
     const { actionsById } = state;
     const { computedStates } = state;
 

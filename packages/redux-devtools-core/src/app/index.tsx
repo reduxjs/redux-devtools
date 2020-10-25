@@ -9,7 +9,7 @@ import { StoreState } from './reducers';
 import { ConnectionOptions, StoreAction } from './actions';
 
 interface Props {
-  socketOptions: ConnectionOptions;
+  socketOptions?: ConnectionOptions;
 }
 
 class Root extends Component<Props> {

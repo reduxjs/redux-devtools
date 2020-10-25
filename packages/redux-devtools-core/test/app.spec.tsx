@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 // import { mountToJson } from 'enzyme-to-json';
 import App from '../src/app/containers/App';
 import api from '../src/app/middlewares/api';
@@ -10,7 +10,7 @@ import rootReducer from '../src/app/reducers';
 import { DATA_TYPE_KEY } from '../src/app/constants/dataTypes';
 import stringifyJSON from '../src/app/utils/stringifyJSON';
 
-let wrapper;
+let wrapper: ReactWrapper<unknown, unknown, Component>;
 
 const store = createStore(rootReducer, applyMiddleware(exportState, api));
 

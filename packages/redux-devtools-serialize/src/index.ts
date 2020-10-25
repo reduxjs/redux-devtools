@@ -1,5 +1,4 @@
-import immutable from './immutable';
-
-module.exports = {
-  immutable: immutable,
-};
+export {
+  default as immutable,
+  serialize as immutableSerialize,
+} from './immutable';
