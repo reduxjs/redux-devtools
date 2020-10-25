@@ -6,7 +6,9 @@ import { PerformAction } from 'redux-devtools-instrument';
 export function recompute(
   previousLiftedState: State,
   storeState: State,
-  action: Action<unknown>,
+  action:
+    | PerformAction<Action<unknown>>
+    | { action: Action<unknown>; timestamp?: number; stack?: string },
   nextActionId = 1,
   maxAge?: number,
   isExcess?: boolean
@@ -22,15 +24,15 @@ export function recompute(
   }
   liftedState.stagedActionIds = [...liftedState.stagedActionIds, actionId];
   liftedState.actionsById = { ...liftedState.actionsById };
-  if (action.type === 'PERFORM_ACTION') {
+  if ((action as PerformAction<Action<unknown>>).type === 'PERFORM_ACTION') {
     liftedState.actionsById[actionId] = action as PerformAction<
       Action<unknown>
     >;
   } else {
     liftedState.actionsById[actionId] = {
-      action: (action as any).action || action,
-      timestamp: (action as any).timestamp || Date.now(),
-      stack: (action as any).stack,
+      action: action.action || action,
+      timestamp: action.timestamp || Date.now(),
+      stack: action.stack,
       type: 'PERFORM_ACTION',
     };
   }

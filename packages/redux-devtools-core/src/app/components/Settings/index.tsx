@@ -23,8 +23,7 @@ class Settings extends Component<{}, State> {
     return (
       // eslint-disable-next-line @typescript-eslint/ban-types
       <Tabs<{}>
-        toRight
-        tabs={this.tabs}
+        tabs={this.tabs as any}
         selected={this.state.selected}
         onClick={this.handleSelect}
       />

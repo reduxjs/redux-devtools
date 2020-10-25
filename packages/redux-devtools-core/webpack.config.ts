@@ -1,14 +1,15 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import * as path from 'path';
+import * as webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-module.exports = (env = {}) => ({
+module.exports = (env: { development?: boolean; platform?: string } = {}) => ({
   mode: env.development ? 'development' : 'production',
   entry: {
-    app: './index.js',
+    app: './index',
   },
   output: {
-    path: path.resolve(__dirname, 'build/' + env.platform),
+    path: path.resolve(__dirname, `build/${env.platform as string}`),
     publicPath: '',
     filename: 'js/[name].js',
     sourceMapFilename: 'js/[name].map',
@@ -16,7 +17,7 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)x?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
@@ -44,6 +45,9 @@ module.exports = (env = {}) => ({
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -55,6 +59,11 @@ module.exports = (env = {}) => ({
     }),
     new HtmlWebpackPlugin({
       template: 'assets/index.html',
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: 'tsconfig.json',
+      },
     }),
   ],
   optimization: {

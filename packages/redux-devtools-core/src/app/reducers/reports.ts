@@ -15,7 +15,10 @@ const initialState: ReportsState = {
   data: [],
 };
 
-export default function reports(state = initialState, action: StoreAction) {
+export default function reports(
+  state = initialState,
+  action: StoreAction
+): ReportsState {
   /* if (action.type === GET_REPORT_SUCCESS) {
     const id = action.data.id;
     return {
@@ -28,17 +31,16 @@ export default function reports(state = initialState, action: StoreAction) {
     return state;
 
   const request = action.request;
-  const data = request.data;
   switch (request.type) {
     case 'list':
       return {
         ...state,
-        data,
+        data: request.data,
       };
     case 'add':
       return {
         ...state,
-        data: [...state.data, data],
+        data: [...state.data, request.data],
       };
     case 'remove':
       return {

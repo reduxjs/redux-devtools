@@ -14,7 +14,10 @@ function replacer(key: string, value: unknown) {
   return value;
 }
 
-export default function stringifyJSON(data: unknown, serialize: boolean) {
+export default function stringifyJSON(
+  data: unknown,
+  serialize: boolean | undefined
+) {
   return serialize
     ? jsan.stringify(data, replacer, (null as unknown) as undefined, true)
     : jsan.stringify(data);

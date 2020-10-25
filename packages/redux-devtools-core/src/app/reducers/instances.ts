@@ -107,13 +107,14 @@ function updateState(
 
   let newState;
   const liftedState = state[id] || state.default;
-  const action = (request.action && parseJSON(request.action, serialize)) || {};
+  const action = ((request.action && parseJSON(request.action, serialize)) ||
+    {}) as PerformAction<Action<unknown>>;
 
   switch (request.type) {
     case 'INIT':
       newState = recompute(state.default, payload, {
         action: { type: '@@INIT' },
-        timestamp: (action as { timestamp?: unknown }).timestamp || Date.now(),
+        timestamp: (action as { timestamp?: number }).timestamp || Date.now(),
       });
       break;
     case 'ACTION': {
@@ -301,7 +302,10 @@ function init(
   };
 }
 
-export default function instances(state = initialState, action: StoreAction) {
+export default function instances(
+  state = initialState,
+  action: StoreAction
+): InstancesState {
   switch (action.type) {
     case UPDATE_STATE: {
       const { request } = action;
@@ -360,7 +364,7 @@ export default function instances(state = initialState, action: StoreAction) {
             ...state,
             states: {
               ...state.states,
-              [id]: parseJSON(action.state),
+              [id]: parseJSON(action.state) as State,
             },
           };
         }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import { Select } from 'devui';
 import { selectInstance } from '../actions';
@@ -10,12 +9,6 @@ type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = StateProps & DispatchProps;
 
 class InstanceSelector extends Component<Props> {
-  static propTypes = {
-    selected: PropTypes.string,
-    instances: PropTypes.object.isRequired,
-    onSelect: PropTypes.func.isRequired,
-  };
-
   select?: { readonly value: string; readonly label: string }[];
 
   render() {
@@ -24,8 +17,7 @@ class InstanceSelector extends Component<Props> {
     let name;
     Object.keys(instances).forEach((key) => {
       name = instances[key].name;
-      if (name !== undefined)
-        this.select!.push({ value: key, label: instances[key].name });
+      if (name !== undefined) this.select!.push({ value: key, label: name });
     });
 
     return (

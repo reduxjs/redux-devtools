@@ -502,7 +502,7 @@ export interface EmitAction {
 
 interface ListRequest {
   type: 'list';
-  data: Data;
+  data: Data[];
 }
 interface AddRequest {
   type: 'add';
@@ -513,7 +513,7 @@ interface RemoveRequest {
   data: Data;
   id: unknown;
 }
-type UpdateReportsRequest = ListRequest | AddRequest | RemoveRequest;
+export type UpdateReportsRequest = ListRequest | AddRequest | RemoveRequest;
 interface UpdateReportsAction {
   type: typeof UPDATE_REPORTS;
   request: UpdateReportsRequest;

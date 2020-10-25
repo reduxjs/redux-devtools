@@ -21,7 +21,6 @@ class LockButton extends Component<Props> {
   render() {
     return (
       <Button
-        toolbar
         tooltipPosition="bottom"
         disabled={this.props.disabled}
         mark={this.props.persisted && 'base0D'}

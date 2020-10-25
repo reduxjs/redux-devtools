@@ -21,6 +21,7 @@ import {
   LiftedActionAction,
   Request,
   DispatchAction,
+  UpdateReportsRequest,
 } from '../actions';
 import { nonReduxDispatch } from '../utils/monitorActions';
 import { StoreState } from '../reducers';
@@ -136,7 +137,7 @@ function subscribe(
   const channel = socket.subscribe(channelName);
   if (subscription === UPDATE_STATE) channel.watch(monitoring);
   else {
-    const watcher = (request: Request) => {
+    const watcher = (request: UpdateReportsRequest) => {
       store.dispatch({ type: subscription, request });
     };
     channel.watch(watcher);
