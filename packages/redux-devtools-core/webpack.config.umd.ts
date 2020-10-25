@@ -1,10 +1,11 @@
-const path = require('path');
-const webpack = require('webpack');
+import * as path from 'path';
+import * as webpack from 'webpack';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-module.exports = (env = {}) => ({
+module.exports = (env: { production?: boolean } = {}) => ({
   mode: env.production ? 'production' : 'development',
   entry: {
-    app: ['./src/app/index.js'],
+    app: ['./src/app/index'],
   },
   output: {
     library: 'ReduxDevTools',
@@ -18,7 +19,7 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)x?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
@@ -41,11 +42,19 @@ module.exports = (env = {}) => ({
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
         PLATFORM: JSON.stringify('web'),
+      },
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: 'tsconfig.json',
       },
     }),
   ],
