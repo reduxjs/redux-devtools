@@ -1,4 +1,6 @@
-exports.seed = function (knex) {
+import type knexModule from 'knex';
+
+export function seed(knex: knexModule) {
   return Promise.all([knex('remotedev_apps').del()]).then(function () {
     return Promise.all([
       knex('remotedev_apps').insert({
@@ -7,4 +9,4 @@ exports.seed = function (knex) {
       }),
     ]);
   });
-};
+}

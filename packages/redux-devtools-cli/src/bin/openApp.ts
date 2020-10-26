@@ -1,11 +1,13 @@
-var open = require('open');
-var path = require('path');
-var spawn = require('cross-spawn');
+import open from 'open';
+import path from 'path';
+import spawn from 'cross-spawn';
+import { Options } from '../options';
 
-function openApp(app, options) {
+export default function openApp(app: boolean | string, options: Options) {
   if (app === true || app === 'electron') {
     try {
-      var port = options.port ? '--port=' + options.port : '';
+      const port = options.port ? `--port=${options.port}` : '';
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       spawn.sync(require('electron'), [
         path.join(__dirname, '..', 'app'),
         port,
@@ -29,10 +31,9 @@ function openApp(app, options) {
     }
     return;
   }
+  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   open(
-    'http://localhost:' + options.port + '/',
-    app !== 'browser' ? { app: app } : undefined
+    `http://localhost:${options.port}/`,
+    app !== 'browser' ? { app: app as string } : undefined
   );
 }
-
-module.exports = openApp;

@@ -1,23 +1,24 @@
-var SCWorker = require('socketcluster/scworker');
-var express = require('express');
-var app = express();
-var routes = require('./routes');
-var createStore = require('./store');
+import SCWorker from 'socketcluster/scworker';
+import express from 'express';
+import routes from './routes';
+import createStore from './store';
+
+const app = express();
 
 class Worker extends SCWorker {
   run() {
-    var httpServer = this.httpServer;
-    var scServer = this.scServer;
-    var options = this.options;
-    var store = createStore(options);
+    const httpServer = this.httpServer;
+    const scServer = this.scServer;
+    const options = this.options;
+    const store = createStore(options);
 
     httpServer.on('request', app);
 
     app.use(routes(options, store, scServer));
 
     scServer.addMiddleware(scServer.MIDDLEWARE_EMIT, function (req, next) {
-      var channel = req.event;
-      var data = req.data;
+      const channel = req.event;
+      const data = req.data;
       if (
         channel.substr(0, 3) === 'sc-' ||
         channel === 'respond' ||
@@ -36,7 +37,7 @@ class Worker extends SCWorker {
         store
           .list()
           .then(function (data) {
-            req.socket.emit(req.channel, { type: 'list', data: data });
+            req.socket.emit(req.channel!, { type: 'list', data: data });
           })
           .catch(function (error) {
             console.error(error); // eslint-disable-line no-console
@@ -45,8 +46,8 @@ class Worker extends SCWorker {
     });
 
     scServer.on('connection', function (socket) {
-      var channelToWatch, channelToEmit;
-      socket.on('login', function (credentials, respond) {
+      let channelToWatch: string, channelToEmit: string;
+      socket.on('login', function (this: Worker, credentials, respond) {
         if (credentials === 'master') {
           channelToWatch = 'respond';
           channelToEmit = 'log';
@@ -69,8 +70,8 @@ class Worker extends SCWorker {
             console.error(error); // eslint-disable-line no-console
           });
       });
-      socket.on('disconnect', function () {
-        var channel = this.exchange.channel('sc-' + socket.id);
+      socket.on('disconnect', function (this: Worker) {
+        const channel = this.exchange.channel('sc-' + socket.id);
         channel.unsubscribe();
         channel.destroy();
         scServer.exchange.publish(channelToEmit, {

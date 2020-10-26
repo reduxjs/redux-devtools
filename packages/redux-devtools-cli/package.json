@@ -2,10 +2,12 @@
   "name": "redux-devtools-cli",
   "version": "1.0.0-4",
   "description": "CLI for remote debugging with Redux DevTools.",
-  "main": "index.js",
-  "bin": {
-    "redux-devtools": "bin/redux-devtools.js"
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-cli",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
+  "license": "MIT",
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "files": [
     "bin",
     "src",
@@ -13,25 +15,31 @@
     "index.js",
     "defaultDbOptions.json"
   ],
-  "scripts": {
-    "start": "node ./bin/redux-devtools.js",
-    "start:electron": "node ./bin/redux-devtools.js --open",
-    "test": "jest",
-    "prepublishOnly": "npm run test"
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "redux-devtools": "bin/redux-devtools.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
+  "scripts": {
+    "build": "tsc && ncp ./src/api/schema_def.graphql ./dist/api/schema_def.graphql",
+    "start": "node ./bin/redux-devtools.js",
+    "start:electron": "node ./bin/redux-devtools.js --open",
+    "clean": "rimraf dist",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "preversion": "npm run type-check && npm run lint && npm run test",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=10.0.0"
   },
-  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/reduxjs/redux-devtools/issues"
-  },
-  "homepage": "https://github.com/reduxjs/redux-devtools",
   "dependencies": {
     "apollo-server": "^2.18.2",
     "apollo-server-express": "^2.18.2",
@@ -42,7 +50,7 @@
     "electron": "^9.2.0",
     "express": "^4.17.1",
     "getport": "^0.1.0",
-    "graphql": "^15.3.0",
+    "graphql": "^14.7.0",
     "knex": "^0.19.5",
     "lodash": "^4.17.19",
     "minimist": "^1.2.5",
@@ -57,7 +65,13 @@
     "uuid": "^8.3.0"
   },
   "devDependencies": {
+    "@types/cross-spawn": "^6.0.2",
+    "@types/morgan": "^1.9.1",
+    "@types/semver": "^7.3.4",
+    "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
     "jest": "^26.2.2",
+    "ncp": "^2.0.0",
     "socketcluster-client": "^14.3.1",
     "supertest": "^4.0.2"
   }

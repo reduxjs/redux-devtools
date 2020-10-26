@@ -1,8 +1,9 @@
-var path = require('path');
-var knexModule = require('knex');
+import path from 'path';
+import knexModule from 'knex';
+import { SCServer } from 'socketcluster-server';
 
-module.exports = function connector(options) {
-  var dbOptions = options.dbOptions;
+export default function connector(options: SCServer.SCServerOptions) {
+  const dbOptions = options.dbOptions;
   dbOptions.useNullAsDefault = true;
   if (!dbOptions.migrate) {
     return knexModule(dbOptions);
@@ -10,13 +11,13 @@ module.exports = function connector(options) {
 
   dbOptions.migrations = { directory: path.resolve(__dirname, 'migrations') };
   dbOptions.seeds = { directory: path.resolve(__dirname, 'seeds') };
-  var knex = knexModule(dbOptions);
+  const knex = knexModule(dbOptions);
 
   /* eslint-disable no-console */
   knex.migrate
-    .latest()
+    .latest({ loadExtensions: ['.js'] })
     .then(function () {
-      return knex.seed.run();
+      return knex.seed.run({ loadExtensions: ['.js'] });
     })
     .then(function () {
       console.log('   \x1b[0;32m[Done]\x1b[0m Migrations are finished\n');
@@ -27,4 +28,4 @@ module.exports = function connector(options) {
   /* eslint-enable no-console */
 
   return knex;
-};
+}

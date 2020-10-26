@@ -1,4 +1,6 @@
-exports.up = function (knex) {
+import type knexModule from 'knex';
+
+export function up(knex: knexModule) {
   return Promise.all([
     knex.schema.createTable('remotedev_reports', function (table) {
       table.uuid('id').primary();
@@ -75,11 +77,11 @@ exports.up = function (knex) {
         .onUpdate('CASCADE');
     }),
   ]);
-};
+}
 
-exports.down = function (knex) {
+export function down(knex: knexModule) {
   return Promise.all([
     knex.schema.dropTable('remotedev_reports'),
     knex.schema.dropTable('remotedev_apps'),
   ]);
-};
+}
