@@ -1,4 +1,4 @@
-import {Action, ActionCreator, StoreEnhancer, compose} from "redux";
+import { Action, ActionCreator, StoreEnhancer, compose } from 'redux';
 
 export interface EnhancerOptions {
   /**
@@ -9,7 +9,7 @@ export interface EnhancerOptions {
   /**
    * action creators functions to be available in the Dispatcher.
    */
-  actionCreators?: ActionCreator<any>[] | {[key: string]: ActionCreator<any>};
+  actionCreators?: ActionCreator<any>[] | { [key: string]: ActionCreator<any> };
   /**
    * if more than one action is dispatched in the indicated interval, all new actions will be collected and sent at once.
    * It is the joint between performance and speed. When set to `0`, all actions will be sent instantly.
@@ -33,16 +33,18 @@ export interface EnhancerOptions {
    *   For `function` key you can also specify a custom function which handles serialization.
    *   See [`jsan`](https://github.com/kolodny/jsan) for more details.
    */
-  serialize?: boolean | {
-  date?: boolean;
-  regex?: boolean;
-  undefined?: boolean;
-  error?: boolean;
-  symbol?: boolean;
-  map?: boolean;
-  set?: boolean;
-  function?: boolean | Function;
-  };
+  serialize?:
+    | boolean
+    | {
+        date?: boolean;
+        regex?: boolean;
+        undefined?: boolean;
+        error?: boolean;
+        symbol?: boolean;
+        map?: boolean;
+        set?: boolean;
+        function?: boolean | Function;
+      };
   /**
    * function which takes `action` object and id number as arguments, and should return `action` object back.
    */
@@ -128,11 +130,11 @@ export interface EnhancerOptions {
     /**
      * export history of actions in a file
      */
-    export?: boolean | "custom";
+    export?: boolean | 'custom';
     /**
      * import history of actions from a file
      */
-    import?: boolean | "custom";
+    import?: boolean | 'custom';
     /**
      * jump back and forth (time travelling)
      */
@@ -165,6 +167,8 @@ export interface EnhancerOptions {
   traceLimit?: number;
 }
 
-export function composeWithDevTools<StoreExt, StateExt>(...funcs: Array<StoreEnhancer<StoreExt>>): StoreEnhancer<StoreExt>;
+export function composeWithDevTools<StoreExt, StateExt>(
+  ...funcs: Array<StoreEnhancer<StoreExt>>
+): StoreEnhancer<StoreExt>;
 export function composeWithDevTools(options: EnhancerOptions): typeof compose;
 export function devToolsEnhancer(options: EnhancerOptions): StoreEnhancer<any>;

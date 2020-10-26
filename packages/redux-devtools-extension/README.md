@@ -4,34 +4,46 @@
 
 ## Usage
 
-  Install:
-  ```
-  npm install --save redux-devtools-extension
-  ```
-  and use like that:
-  ```js
-  import { createStore, applyMiddleware } from 'redux';
-  import { composeWithDevTools } from 'redux-devtools-extension';
+Install:
 
-  const store = createStore(reducer, composeWithDevTools(
-    applyMiddleware(...middleware),
-    // other store enhancers if any
-  ));
-  ```
-  or if needed to apply [extension’s options](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md#windowdevtoolsextensionconfig):
-  ```js
-  import { createStore, applyMiddleware } from 'redux';
-  import { composeWithDevTools } from 'redux-devtools-extension';
+```
+npm install --save redux-devtools-extension
+```
 
-  const composeEnhancers = composeWithDevTools({
-    // Specify here name, actionsBlacklist, actionsCreators and other options
-  });
-  const store = createStore(reducer, composeEnhancers(
-    applyMiddleware(...middleware),
+and use like that:
+
+```js
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const store = createStore(
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(...middleware)
     // other store enhancers if any
-  ));
-  ```  
-  There’re just [few lines of code](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/npm-package/index.js). If you don’t want to allow the extension in production, just use ‘redux-devtools-extension/developmentOnly’ instead of ‘redux-devtools-extension’.
+  )
+);
+```
+
+or if needed to apply [extension’s options](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md#windowdevtoolsextensionconfig):
+
+```js
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const composeEnhancers = composeWithDevTools({
+  // Specify here name, actionsBlacklist, actionsCreators and other options
+});
+const store = createStore(
+  reducer,
+  composeEnhancers(
+    applyMiddleware(...middleware)
+    // other store enhancers if any
+  )
+);
+```
+
+There’re just [few lines of code](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/npm-package/index.js). If you don’t want to allow the extension in production, just use ‘redux-devtools-extension/developmentOnly’ instead of ‘redux-devtools-extension’.
 
 ## License
 

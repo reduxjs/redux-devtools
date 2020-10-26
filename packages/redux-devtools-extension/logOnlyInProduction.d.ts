@@ -1,1 +1,1 @@
-export * from "redux-devtools-extension";
+export * from 'redux-devtools-extension';

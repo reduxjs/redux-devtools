@@ -1,4 +1,6 @@
-var objectKeys = Object.keys || function (obj) {
+var objectKeys =
+  Object.keys ||
+  function (obj) {
     var keys = [];
     for (var key in obj) {
       if ({}.hasOwnProperty.call(obj, key)) keys.push(key);
