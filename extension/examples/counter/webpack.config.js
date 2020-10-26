@@ -4,23 +4,20 @@ var webpack = require('webpack');
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
-  entry: [
-    'webpack-hot-middleware/client',
-    './index'
-  ],
+  entry: ['webpack-hot-middleware/client', './index'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/static/',
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   module: {
-    rules: [{
-      test: /\.js$/,
-      loaders: ['babel-loader'],
-      exclude: /node_modules/
-    }]
-  }
+    rules: [
+      {
+        test: /\.js$/,
+        loaders: ['babel-loader'],
+        exclude: /node_modules/,
+      },
+    ],
+  },
 };

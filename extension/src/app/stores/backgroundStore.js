@@ -4,7 +4,7 @@ import api from '../middlewares/api';
 
 export default function configureStore(preloadedState) {
   return createStore(rootReducer, preloadedState, applyMiddleware(api));
-/*
+  /*
   let enhancer;
   if (process.env.NODE_ENV === 'production') {
     enhancer = applyMiddleware(api);

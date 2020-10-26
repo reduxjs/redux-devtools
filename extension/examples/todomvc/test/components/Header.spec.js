@@ -6,7 +6,7 @@ import TodoTextInput from '../../components/TodoTextInput';
 
 function setup() {
   const props = {
-    addTodo: expect.createSpy()
+    addTodo: expect.createSpy(),
   };
 
   const renderer = TestUtils.createRenderer();
@@ -16,7 +16,7 @@ function setup() {
   return {
     props: props,
     output: output,
-    renderer: renderer
+    renderer: renderer,
   };
 }
 

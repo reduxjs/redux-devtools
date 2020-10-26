@@ -4,7 +4,7 @@ import persistStates from './persistStates';
 
 const rootReducer = combineReducers({
   instances,
-  persistStates
+  persistStates,
 });
 
 export default rootReducer;

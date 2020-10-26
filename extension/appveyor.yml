@@ -3,7 +3,7 @@ environment:
     - nodejs_version: '6'
 
 cache:
-  - "%LOCALAPPDATA%/Yarn"
+  - '%LOCALAPPDATA%/Yarn'
   - node_modules
 
 install:

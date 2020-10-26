@@ -3,7 +3,7 @@ let lastTime = 0;
 
 function createExpBackoffTimer(step) {
   let count = 1;
-  return function(reset) {
+  return function (reset) {
     // Reset call
     if (reset) {
       count = 1;
@@ -20,19 +20,24 @@ const nextErrorTimeout = createExpBackoffTimer(5000);
 
 function postError(message) {
   if (handleError && !handleError()) return;
-  window.postMessage({
-    source: '@devtools-page',
-    type: 'ERROR',
-    message: message
-  }, '*');
+  window.postMessage(
+    {
+      source: '@devtools-page',
+      type: 'ERROR',
+      message: message,
+    },
+    '*'
+  );
 }
 
 function catchErrors(e) {
   if (
-    window.devToolsOptions && !window.devToolsOptions.shouldCatchErrors
-    || e.timeStamp - lastTime < nextErrorTimeout()
-  ) return;
-  lastTime = e.timeStamp; nextErrorTimeout(true);
+    (window.devToolsOptions && !window.devToolsOptions.shouldCatchErrors) ||
+    e.timeStamp - lastTime < nextErrorTimeout()
+  )
+    return;
+  lastTime = e.timeStamp;
+  nextErrorTimeout(true);
   postError(e.message);
 }
 

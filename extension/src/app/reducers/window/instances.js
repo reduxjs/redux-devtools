@@ -1,5 +1,12 @@
-import { initialState, dispatchAction } from 'remotedev-app/lib/reducers/instances';
-import { UPDATE_STATE, SELECT_INSTANCE, LIFTED_ACTION } from 'remotedev-app/lib/constants/actionTypes';
+import {
+  initialState,
+  dispatchAction,
+} from 'remotedev-app/lib/reducers/instances';
+import {
+  UPDATE_STATE,
+  SELECT_INSTANCE,
+  LIFTED_ACTION,
+} from 'remotedev-app/lib/constants/actionTypes';
 
 export default function instances(state = initialState, action) {
   switch (action.type) {

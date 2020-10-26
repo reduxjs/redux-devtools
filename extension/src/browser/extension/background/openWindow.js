@@ -8,8 +8,9 @@ export default function openDevToolsWindow(position) {
         callback();
         lastPosition = position;
       } else {
-        let params = {focused: true};
-        if (lastPosition !== position && position !== 'devtools-panel') params = {...params, ...customOptions};
+        let params = { focused: true };
+        if (lastPosition !== position && position !== 'devtools-panel')
+          params = { ...params, ...customOptions };
         chrome.windows.update(windows[position], params, () => {
           lastPosition = null;
           if (chrome.runtime.lastError) callback();
@@ -20,10 +21,12 @@ export default function openDevToolsWindow(position) {
     focusIfExist(() => {
       let options = {
         type: 'popup',
-        ...customOptions
+        ...customOptions,
       };
       if (action === 'open') {
-        options.url = chrome.extension.getURL(url + '#' + position.substr(position.indexOf('-') + 1));
+        options.url = chrome.extension.getURL(
+          url + '#' + position.substr(position.indexOf('-') + 1)
+        );
         chrome.windows.create(options, (win) => {
           windows[position] = win.id;
           if (navigator.userAgent.indexOf('Firefox') !== -1) {
@@ -34,11 +37,17 @@ export default function openDevToolsWindow(position) {
     });
   }
 
-  let params = { left: 0, top: 0, width: 380, height: window.screen.availHeight };
+  let params = {
+    left: 0,
+    top: 0,
+    width: 380,
+    height: window.screen.availHeight,
+  };
   let url = 'window.html';
   switch (position) {
     case 'devtools-right':
-      params.left = window.screen.availLeft + window.screen.availWidth - params.width;
+      params.left =
+        window.screen.availLeft + window.screen.availWidth - params.width;
       break;
     case 'devtools-bottom':
       params.height = 420;

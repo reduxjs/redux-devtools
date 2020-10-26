@@ -54,6 +54,12 @@
     "js/inject.bundle.js",
     "js/redux-devtools-extension.js"
   ],
-  "permissions": ["notifications", "contextMenus", "tabs", "storage", "<all_urls>"],
+  "permissions": [
+    "notifications",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ],
   "content_security_policy": "script-src 'self'; object-src 'self'; img-src 'self' data:;"
 }

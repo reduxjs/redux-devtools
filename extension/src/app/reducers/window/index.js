@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   test,
   socket,
   reports,
-  notification
+  notification,
 });
 
 export default rootReducer;

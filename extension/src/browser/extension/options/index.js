@@ -2,14 +2,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import Options from './Options';
 
-chrome.runtime.getBackgroundPage(background => {
+chrome.runtime.getBackgroundPage((background) => {
   const syncOptions = background.syncOptions;
 
   const saveOption = (name, value) => {
     syncOptions.save(name, value);
   };
 
-  const renderOptions = options => {
+  const renderOptions = (options) => {
     render(
       <Options options={options} saveOption={saveOption} />,
       document.getElementById('root')
@@ -17,7 +17,7 @@ chrome.runtime.getBackgroundPage(background => {
   };
 
   syncOptions.subscribe(renderOptions);
-  syncOptions.get(options => {
+  syncOptions.get((options) => {
     renderOptions(options);
   });
 });

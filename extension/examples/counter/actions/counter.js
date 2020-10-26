@@ -5,18 +5,18 @@ let t;
 
 export function increment() {
   return {
-    type: INCREMENT_COUNTER
+    type: INCREMENT_COUNTER,
   };
 }
 
 export function decrement() {
   return {
-    type: DECREMENT_COUNTER
+    type: DECREMENT_COUNTER,
   };
 }
 
 export function autoIncrement(delay = 10) {
-  return dispatch => {
+  return (dispatch) => {
     if (t) {
       clearInterval(t);
       t = undefined;
@@ -29,7 +29,7 @@ export function autoIncrement(delay = 10) {
 }
 
 export function incrementAsync(delay = 1000) {
-  return dispatch => {
+  return (dispatch) => {
     setTimeout(() => {
       dispatch(increment());
     }, delay);

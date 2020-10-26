@@ -15,17 +15,17 @@ Object.keys(document.defaultView).forEach((property) => {
 });
 
 global.navigator = {
-  userAgent: 'gecko'
+  userAgent: 'gecko',
 };
 
-global.document.createRange = function() {
+global.document.createRange = function () {
   return {
-    setEnd: function(){},
-    setStart: function(){},
-    getBoundingClientRect: function(){
-      return {right: 0};
-    }
-  }
+    setEnd: function () {},
+    setStart: function () {},
+    getBoundingClientRect: function () {
+      return { right: 0 };
+    },
+  };
 };
 
 documentRef = document;

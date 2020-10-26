@@ -5,6 +5,10 @@ import panelDispatcher from '../middlewares/panelSync';
 import rootReducer from '../reducers/panel';
 
 export default function configureStore(position, bgConnection, preloadedState) {
-  const enhancer = applyMiddleware(exportState, panelDispatcher(bgConnection), persist(position));
+  const enhancer = applyMiddleware(
+    exportState,
+    panelDispatcher(bgConnection),
+    persist(position)
+  );
   return createStore(rootReducer, preloadedState, enhancer);
 }

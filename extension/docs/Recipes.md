@@ -12,37 +12,42 @@ const store = createStore(
     (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );
 ```
+
 Note that you many need to set `no-any` to false in your `tslint.json` file.
 
-Alternatively you can use typeguard in order to avoid 
+Alternatively you can use typeguard in order to avoid
 casting to any.
 
 ```typescript
-import { createStore, StoreEnhancer } from "redux";
-
-// ... 
-
-type WindowWithDevTools = Window & {
- __REDUX_DEVTOOLS_EXTENSION__: () => StoreEnhancer<unknown, {}>
-}
-
-const isReduxDevtoolsExtenstionExist = 
-(arg: Window | WindowWithDevTools): 
-  arg is WindowWithDevTools  => {
-    return  '__REDUX_DEVTOOLS_EXTENSION__' in arg;
-}
+import { createStore, StoreEnhancer } from 'redux';
 
 // ...
 
-const store = createStore(rootReducer, initialState,
-  isReduxDevtoolsExtenstionExist(window) ? 
-  window.__REDUX_DEVTOOLS_EXTENSION__() : undefined)
+type WindowWithDevTools = Window & {
+  __REDUX_DEVTOOLS_EXTENSION__: () => StoreEnhancer<unknown, {}>;
+};
+
+const isReduxDevtoolsExtenstionExist = (
+  arg: Window | WindowWithDevTools
+): arg is WindowWithDevTools => {
+  return '__REDUX_DEVTOOLS_EXTENSION__' in arg;
+};
+
+// ...
+
+const store = createStore(
+  rootReducer,
+  initialState,
+  isReduxDevtoolsExtenstionExist(window)
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    : undefined
+);
 ```
 
 ### Export from browser console or from application
 
 ```js
-store.liftedStore.getState()
+store.liftedStore.getState();
 ```
 
 The extension is not sharing `store` object, so you should take care of that.
@@ -55,16 +60,19 @@ We're [not allowing that from instrumentation part](https://github.com/zalmoxisu
 import { createStore, compose } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnly';
 
-const store = createStore(reducer, /* preloadedState, */ compose(
-devToolsEnhancer({
-  instaceID: 1,
-  name: 'Blacklisted',
-  actionsBlacklist: '...'
-}),
-devToolsEnhancer({
-  instaceID: 2,
-  name: 'Whitelisted',
-  actionsWhitelist: '...'
-})
-));
+const store = createStore(
+  reducer,
+  /* preloadedState, */ compose(
+    devToolsEnhancer({
+      instaceID: 1,
+      name: 'Blacklisted',
+      actionsBlacklist: '...',
+    }),
+    devToolsEnhancer({
+      instaceID: 2,
+      name: 'Whitelisted',
+      actionsWhitelist: '...',
+    })
+  )
+);
 ```

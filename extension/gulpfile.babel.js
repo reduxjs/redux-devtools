@@ -19,14 +19,19 @@ function copy(dest) {
  * common tasks
  */
 gulp.task('replace-webpack-code', () => {
-  const replaceTasks = [{
-    from: './webpack/replace/JsonpMainTemplate.runtime.js',
-    to: './node_modules/webpack/lib/JsonpMainTemplate.runtime.js'
-  }, {
-    from: './webpack/replace/log-apply-result.js',
-    to: './node_modules/webpack/hot/log-apply-result.js'
-  }];
-  replaceTasks.forEach(task => fs.writeFileSync(task.to, fs.readFileSync(task.from)));
+  const replaceTasks = [
+    {
+      from: './webpack/replace/JsonpMainTemplate.runtime.js',
+      to: './node_modules/webpack/lib/JsonpMainTemplate.runtime.js',
+    },
+    {
+      from: './webpack/replace/log-apply-result.js',
+      to: './node_modules/webpack/hot/log-apply-result.js',
+    },
+  ];
+  replaceTasks.forEach((task) =>
+    fs.writeFileSync(task.to, fs.readFileSync(task.from))
+  );
 });
 
 /*
@@ -44,15 +49,19 @@ gulp.task('webpack:dev', (callback) => {
 });
 
 gulp.task('views:dev', () => {
-  gulp.src('./src/browser/views/*.pug')
-    .pipe(jade({
-      locals: { env: 'dev' }
-    }))
+  gulp
+    .src('./src/browser/views/*.pug')
+    .pipe(
+      jade({
+        locals: { env: 'dev' },
+      })
+    )
     .pipe(gulp.dest('./dev'));
 });
 
 gulp.task('copy:dev', () => {
-  gulp.src('./src/browser/extension/manifest.json')
+  gulp
+    .src('./src/browser/extension/manifest.json')
     .pipe(rename('manifest.json'))
     .pipe(gulp.dest('./dev'));
   copy('./dev');
@@ -87,29 +96,34 @@ gulp.task('webpack:build:extension', (callback) => {
 });
 
 gulp.task('views:build:extension', () => {
-  gulp.src([
-    './src/browser/views/*.pug'
-  ])
-    .pipe(jade({
-      locals: { env: 'prod' }
-    }))
+  gulp
+    .src(['./src/browser/views/*.pug'])
+    .pipe(
+      jade({
+        locals: { env: 'prod' },
+      })
+    )
     .pipe(gulp.dest('./build/extension'));
 });
 
 gulp.task('copy:build:extension', () => {
-  gulp.src('./src/browser/extension/manifest.json')
+  gulp
+    .src('./src/browser/extension/manifest.json')
     .pipe(rename('manifest.json'))
     .pipe(gulp.dest('./build/extension'));
   copy('./build/extension');
 });
 
 gulp.task('copy:build:firefox', ['build:extension'], () => {
-  gulp.src([
-    './build/extension/**', '!./build/extension/js/redux-devtools-extension.js'
-  ])
+  gulp
+    .src([
+      './build/extension/**',
+      '!./build/extension/js/redux-devtools-extension.js',
+    ])
     .pipe(gulp.dest('./build/firefox'))
-    .on('finish', function() {
-      gulp.src('./src/browser/firefox/manifest.json')
+    .on('finish', function () {
+      gulp
+        .src('./src/browser/firefox/manifest.json')
         .pipe(gulp.dest('./build/firefox'));
     });
   copy('./build/firefox');
@@ -120,13 +134,15 @@ gulp.task('copy:build:firefox', ['build:extension'], () => {
  */
 
 gulp.task('compress:extension', () => {
-  gulp.src('build/extension/**')
+  gulp
+    .src('build/extension/**')
     .pipe(zip('extension.zip'))
     .pipe(gulp.dest('./build'));
 });
 
 gulp.task('compress:firefox', () => {
-  gulp.src('build/firefox/**')
+  gulp
+    .src('build/firefox/**')
     .pipe(zip('firefox.zip'))
     .pipe(gulp.dest('./build'));
 });
@@ -140,23 +156,40 @@ gulp.task('views:watch', () => {
 });
 
 gulp.task('copy:watch', () => {
-  gulp.watch(['./src/browser/extension/manifest.json', './src/assets/**/*'], ['copy:dev']);
+  gulp.watch(
+    ['./src/browser/extension/manifest.json', './src/assets/**/*'],
+    ['copy:dev']
+  );
 });
 
 gulp.task('test:chrome', () => {
   crdv.start();
-  return gulp.src('./test/chrome/*.spec.js')
+  return gulp
+    .src('./test/chrome/*.spec.js')
     .pipe(mocha({ require: ['babel-polyfill', 'co-mocha'] }))
     .on('end', () => crdv.stop());
 });
 
 gulp.task('test:electron', () => {
   crdv.start();
-  return gulp.src('./test/electron/*.spec.js')
+  return gulp
+    .src('./test/electron/*.spec.js')
     .pipe(mocha({ require: ['babel-polyfill', 'co-mocha'] }))
     .on('end', () => crdv.stop());
 });
 
-gulp.task('default', ['replace-webpack-code', 'webpack:dev', 'views:dev', 'copy:dev', 'views:watch', 'copy:watch']);
-gulp.task('build:extension', ['replace-webpack-code', 'webpack:build:extension', 'views:build:extension', 'copy:build:extension']);
+gulp.task('default', [
+  'replace-webpack-code',
+  'webpack:dev',
+  'views:dev',
+  'copy:dev',
+  'views:watch',
+  'copy:watch',
+]);
+gulp.task('build:extension', [
+  'replace-webpack-code',
+  'webpack:build:extension',
+  'views:build:extension',
+  'copy:build:extension',
+]);
 gulp.task('build:firefox', ['copy:build:firefox']);

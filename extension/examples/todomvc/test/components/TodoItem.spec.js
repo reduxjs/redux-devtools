@@ -4,23 +4,21 @@ import TestUtils from 'react-addons-test-utils';
 import TodoItem from '../../components/TodoItem';
 import TodoTextInput from '../../components/TodoTextInput';
 
-function setup( editing = false ) {
+function setup(editing = false) {
   const props = {
     todo: {
       id: 0,
       text: 'Use Redux',
-      completed: false
+      completed: false,
     },
     editTodo: expect.createSpy(),
     deleteTodo: expect.createSpy(),
-    completeTodo: expect.createSpy()
+    completeTodo: expect.createSpy(),
   };
 
   const renderer = TestUtils.createRenderer();
 
-  renderer.render(
-    <TodoItem {...props} />
-  );
+  renderer.render(<TodoItem {...props} />);
 
   let output = renderer.getRenderOutput();
 
@@ -33,7 +31,7 @@ function setup( editing = false ) {
   return {
     props: props,
     output: output,
-    renderer: renderer
+    renderer: renderer,
   };
 }
 

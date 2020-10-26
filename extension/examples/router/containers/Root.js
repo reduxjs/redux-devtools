@@ -9,9 +9,9 @@ class Root extends Component {
   render() {
     return (
       <ReduxRouter>
-        <Redirect from="/" to="Standard Todo"/>
+        <Redirect from="/" to="Standard Todo" />
         <Route path="/" component={Wrapper}>
-          <Route path="/:id" component={App}/>
+          <Route path="/:id" component={App} />
         </Route>
       </ReduxRouter>
     );

@@ -5,8 +5,8 @@ export function insertScript(str) {
 }
 
 export function listenMessage(f) {
-  return new Promise(resolve => {
-    const listener = event => {
+  return new Promise((resolve) => {
+    const listener = (event) => {
       const message = event.data;
       window.removeEventListener('message', listener);
       resolve(message);

@@ -1,5 +1,9 @@
 import stringifyJSON from 'remotedev-app/lib/utils/stringifyJSON';
-import { UPDATE_STATE, REMOVE_INSTANCE, LIFTED_ACTION } from 'remotedev-app/lib/constants/actionTypes';
+import {
+  UPDATE_STATE,
+  REMOVE_INSTANCE,
+  LIFTED_ACTION,
+} from 'remotedev-app/lib/constants/actionTypes';
 import { nonReduxDispatch } from 'remotedev-app/lib/utils/monitorActions';
 import syncOptions from '../../browser/extension/options/syncOptions';
 import openDevToolsWindow from '../../browser/extension/background/openWindow';
@@ -10,21 +14,22 @@ const DISCONNECTED = 'socket/DISCONNECTED';
 const connections = {
   tab: {},
   panel: {},
-  monitor: {}
+  monitor: {},
 };
 const chunks = {};
 let monitors = 0;
 let isMonitored = false;
 
-const getId = (sender, name) => sender.tab ? sender.tab.id : name || sender.id;
+const getId = (sender, name) =>
+  sender.tab ? sender.tab.id : name || sender.id;
 
 function toMonitors(action, tabId, verbose) {
-  Object.keys(connections.monitor).forEach(id => {
+  Object.keys(connections.monitor).forEach((id) => {
     connections.monitor[id].postMessage(
       verbose || action.type === 'ERROR' ? action : { type: UPDATE_STATE }
     );
   });
-  Object.keys(connections.panel).forEach(id => {
+  Object.keys(connections.panel).forEach((id) => {
     connections.panel[id].postMessage(action);
   });
 }
@@ -34,13 +39,13 @@ function toContentScript({ message, action, id, instanceId, state }) {
     type: message,
     action,
     state: nonReduxDispatch(window.store, message, instanceId, action, state),
-    id: instanceId.toString().replace(/^[^\/]+\//, '')
+    id: instanceId.toString().replace(/^[^\/]+\//, ''),
   });
 }
 
 function toAllTabs(msg) {
   const tabs = connections.tab;
-  Object.keys(tabs).forEach(id => {
+  Object.keys(tabs).forEach((id) => {
     tabs[id].postMessage(msg);
   });
 }
@@ -67,7 +72,7 @@ function getReducerError() {
 function togglePersist() {
   const state = window.store.getState();
   if (state.persistStates) {
-    Object.keys(state.instances.connections).forEach(id => {
+    Object.keys(state.instances.connections).forEach((id) => {
       if (connections.tab[id]) return;
       window.store.dispatch({ type: REMOVE_INSTANCE, id });
       toMonitors({ type: 'NA', id });
@@ -92,7 +97,7 @@ function messaging(request, sender, sendResponse) {
     return;
   }
   if (request.type === 'GET_OPTIONS') {
-    window.syncOptions.get(options => {
+    window.syncOptions.get((options) => {
       sendResponse({ options });
     });
     return;
@@ -103,7 +108,11 @@ function messaging(request, sender, sendResponse) {
   }
   if (request.type === 'OPEN') {
     let position = 'devtools-left';
-    if (['remote', 'panel', 'left', 'right', 'bottom'].indexOf(request.position) !== -1) {
+    if (
+      ['remote', 'panel', 'left', 'right', 'bottom'].indexOf(
+        request.position
+      ) !== -1
+    ) {
       position = 'devtools-' + request.position;
     }
     openDevToolsWindow(position);
@@ -118,10 +127,12 @@ function messaging(request, sender, sendResponse) {
     const reducerError = getReducerError();
     chrome.notifications.create('app-error', {
       type: 'basic',
-      title: reducerError ? 'An error occurred in the reducer' : 'An error occurred in the app',
+      title: reducerError
+        ? 'An error occurred in the reducer'
+        : 'An error occurred in the app',
       message: reducerError || request.message,
       iconUrl: 'img/logo/48x48.png',
-      isClickable: !!reducerError
+      isClickable: !!reducerError,
     });
     return;
   }
@@ -134,7 +145,8 @@ function messaging(request, sender, sendResponse) {
       return;
     }
     if (request.split === 'chunk') {
-      chunks[instanceId][request.chunk[0]] = (chunks[instanceId][request.chunk[0]] || '') + request.chunk[1];
+      chunks[instanceId][request.chunk[0]] =
+        (chunks[instanceId][request.chunk[0]] || '') + request.chunk[1];
       return;
     }
     action.request = chunks[instanceId];
@@ -180,11 +192,11 @@ function onConnect(port) {
     id = getId(port.sender);
     if (port.sender.frameId) id = `${id}-${port.sender.frameId}`;
     connections.tab[id] = port;
-    listener = msg => {
+    listener = (msg) => {
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
           chrome.pageAction.show(id);
-          chrome.pageAction.setIcon({tabId: id, path: 'img/logo/38x38.png'});
+          chrome.pageAction.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
         }
         if (isMonitored) port.postMessage({ type: 'START' });
 
@@ -195,8 +207,12 @@ function onConnect(port) {
           if (!persistedState) return;
           toContentScript({
             message: 'IMPORT',
-            id, instanceId,
-            state: stringifyJSON(persistedState, state.instances.options[instanceId].serialize)
+            id,
+            instanceId,
+            state: stringifyJSON(
+              persistedState,
+              state.instances.options[instanceId].serialize
+            ),
           });
         }
         return;
@@ -213,12 +229,13 @@ function onConnect(port) {
     monitorInstances(true);
     monitors++;
     port.onDisconnect.addListener(disconnect('monitor', id));
-  } else { // devpanel
+  } else {
+    // devpanel
     id = port.name || port.sender.frameId;
     connections.panel[id] = port;
     monitorInstances(true, port.name);
     monitors++;
-    listener = msg => {
+    listener = (msg) => {
       window.store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
@@ -231,7 +248,7 @@ chrome.runtime.onConnectExternal.addListener(onConnect);
 chrome.runtime.onMessage.addListener(messaging);
 chrome.runtime.onMessageExternal.addListener(messaging);
 
-chrome.notifications.onClicked.addListener(id => {
+chrome.notifications.onClicked.addListener((id) => {
   chrome.notifications.clear(id);
   openDevToolsWindow('devtools-right');
 });
@@ -239,7 +256,7 @@ chrome.notifications.onClicked.addListener(id => {
 window.syncOptions = syncOptions(toAllTabs); // Expose to the options page
 
 export default function api() {
-  return next => action => {
+  return (next) => (action) => {
     if (action.type === LIFTED_ACTION) toContentScript(action);
     else if (action.type === 'TOGGLE_PERSIST') togglePersist();
     return next(action);

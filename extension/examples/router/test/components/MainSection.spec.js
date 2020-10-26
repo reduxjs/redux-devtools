@@ -7,24 +7,30 @@ import Footer from '../../components/Footer';
 import { SHOW_ALL, SHOW_COMPLETED } from '../../constants/TodoFilters';
 
 function setup(propOverrides) {
-  const props = Object.assign({
-    todos: [{
-      text: 'Use Redux',
-      completed: false,
-      id: 0
-    }, {
-      text: 'Run the tests',
-      completed: true,
-      id: 1
-    }],
-    actions: {
-      editTodo: expect.createSpy(),
-      deleteTodo: expect.createSpy(),
-      completeTodo: expect.createSpy(),
-      completeAll: expect.createSpy(),
-      clearCompleted: expect.createSpy()
-    }
-  }, propOverrides);
+  const props = Object.assign(
+    {
+      todos: [
+        {
+          text: 'Use Redux',
+          completed: false,
+          id: 0,
+        },
+        {
+          text: 'Run the tests',
+          completed: true,
+          id: 1,
+        },
+      ],
+      actions: {
+        editTodo: expect.createSpy(),
+        deleteTodo: expect.createSpy(),
+        completeTodo: expect.createSpy(),
+        completeAll: expect.createSpy(),
+        clearCompleted: expect.createSpy(),
+      },
+    },
+    propOverrides
+  );
 
   const renderer = TestUtils.createRenderer();
   renderer.render(<MainSection {...props} />);
@@ -33,7 +39,7 @@ function setup(propOverrides) {
   return {
     props: props,
     output: output,
-    renderer: renderer
+    renderer: renderer,
   };
 }
 
@@ -55,11 +61,15 @@ describe('components', () => {
       });
 
       it('should be checked if all todos completed', () => {
-        const { output } = setup({ todos: [{
-          text: 'Use Redux',
-          completed: true,
-          id: 0
-        }]});
+        const { output } = setup({
+          todos: [
+            {
+              text: 'Use Redux',
+              completed: true,
+              id: 0,
+            },
+          ],
+        });
         const [toggle] = output.props.children;
         expect(toggle.props.checked).toBe(true);
       });
@@ -75,7 +85,7 @@ describe('components', () => {
     describe('footer', () => {
       it('should render', () => {
         const { output } = setup();
-        const [,, footer] = output.props.children;
+        const [, , footer] = output.props.children;
         expect(footer.type).toBe(Footer);
         expect(footer.props.completedCount).toBe(1);
         expect(footer.props.activeCount).toBe(1);
@@ -84,27 +94,31 @@ describe('components', () => {
 
       it('onShow should set the filter', () => {
         const { output, renderer } = setup();
-        const [,, footer] = output.props.children;
+        const [, , footer] = output.props.children;
         footer.props.onShow(SHOW_COMPLETED);
         const updated = renderer.getRenderOutput();
-        const [,, updatedFooter] = updated.props.children;
+        const [, , updatedFooter] = updated.props.children;
         expect(updatedFooter.props.filter).toBe(SHOW_COMPLETED);
       });
 
       it('onClearCompleted should call clearCompleted', () => {
         const { output, props } = setup();
-        const [,, footer] = output.props.children;
+        const [, , footer] = output.props.children;
         footer.props.onClearCompleted();
         expect(props.actions.clearCompleted).toHaveBeenCalled();
       });
 
       it('onClearCompleted shouldnt call clearCompleted if no todos completed', () => {
-        const { output, props } = setup({ todos: [{
-          text: 'Use Redux',
-          completed: false,
-          id: 0
-        }]});
-        const [,, footer] = output.props.children;
+        const { output, props } = setup({
+          todos: [
+            {
+              text: 'Use Redux',
+              completed: false,
+              id: 0,
+            },
+          ],
+        });
+        const [, , footer] = output.props.children;
         footer.props.onClearCompleted();
         expect(props.actions.clearCompleted.calls.length).toBe(0);
       });
@@ -124,7 +138,7 @@ describe('components', () => {
 
       it('should filter items', () => {
         const { output, renderer, props } = setup();
-        const [,, footer] = output.props.children;
+        const [, , footer] = output.props.children;
         footer.props.onShow(SHOW_COMPLETED);
         const updated = renderer.getRenderOutput();
         const [, updatedList] = updated.props.children;

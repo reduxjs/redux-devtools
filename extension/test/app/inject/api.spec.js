@@ -18,12 +18,20 @@ describe('API', () => {
     let message = await listenMessage(() => {
       window.__REDUX_DEVTOOLS_EXTENSION__.open();
     });
-    expect(message).toEqual({ source: '@devtools-page', type: 'OPEN', position: 'right' });
+    expect(message).toEqual({
+      source: '@devtools-page',
+      type: 'OPEN',
+      position: 'right',
+    });
 
     message = await listenMessage(() => {
       window.__REDUX_DEVTOOLS_EXTENSION__.open('left');
     });
-    expect(message).toEqual({ source: '@devtools-page', type: 'OPEN', position: 'left' });
+    expect(message).toEqual({
+      source: '@devtools-page',
+      type: 'OPEN',
+      position: 'left',
+    });
   });
 
   it('should send message', async () => {
@@ -35,31 +43,39 @@ describe('API', () => {
       payload: undefined,
       instanceId: 1,
       name: undefined,
-      source: '@devtools-page'
+      source: '@devtools-page',
     });
     expect(message.action).toMatch(/{"action":{"type":"hi"},"timestamp":\d+}/);
 
     message = await listenMessage(() => {
-      window.__REDUX_DEVTOOLS_EXTENSION__.send({ type: 'hi' }, { counter: 1 }, 1);
+      window.__REDUX_DEVTOOLS_EXTENSION__.send(
+        { type: 'hi' },
+        { counter: 1 },
+        1
+      );
     });
     expect(message).toInclude({
       type: 'ACTION',
       payload: '{"counter":1}',
       instanceId: 1,
       name: undefined,
-      source: '@devtools-page'
+      source: '@devtools-page',
     });
     expect(message.action).toMatch(/{"action":{"type":"hi"},"timestamp":\d+}/);
 
     message = await listenMessage(() => {
-      window.__REDUX_DEVTOOLS_EXTENSION__.send({ type: 'hi' }, { counter: 1 }, 1);
+      window.__REDUX_DEVTOOLS_EXTENSION__.send(
+        { type: 'hi' },
+        { counter: 1 },
+        1
+      );
     });
     expect(message).toInclude({
       type: 'ACTION',
       payload: '{"counter":1}',
       instanceId: 1,
       name: undefined,
-      source: '@devtools-page'
+      source: '@devtools-page',
     });
     expect(message.action).toMatch(/{"action":{"type":"hi"},"timestamp":\d+}/);
 
@@ -76,7 +92,7 @@ describe('API', () => {
       instanceId: 1,
       maxAge: undefined,
       name: undefined,
-      source: '@devtools-page'
+      source: '@devtools-page',
     });
   });
 });

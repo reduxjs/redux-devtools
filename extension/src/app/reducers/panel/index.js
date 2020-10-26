@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   monitor,
   test,
   reports,
-  notification
+  notification,
 });
 
 export default rootReducer;

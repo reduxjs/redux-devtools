@@ -18,7 +18,9 @@ let preloadedState;
 
 const isChrome = navigator.userAgent.indexOf('Firefox') === -1;
 
-getPreloadedState(position, state => { preloadedState = state; });
+getPreloadedState(position, (state) => {
+  preloadedState = state;
+});
 
 function renderDevTools() {
   const node = document.getElementById('root');
@@ -40,15 +42,29 @@ function renderNA() {
   naTimeout = setTimeout(() => {
     let message = (
       <div style={messageStyle}>
-        No store found. Make sure to follow <a href="https://github.com/zalmoxisus/redux-devtools-extension#usage" target="_blank">the instructions</a>.
+        No store found. Make sure to follow{' '}
+        <a
+          href="https://github.com/zalmoxisus/redux-devtools-extension#usage"
+          target="_blank"
+        >
+          the instructions
+        </a>
+        .
       </div>
     );
     if (isChrome) {
-      chrome.devtools.inspectedWindow.getResources(resources => {
+      chrome.devtools.inspectedWindow.getResources((resources) => {
         if (resources[0].url.substr(0, 4) === 'file') {
           message = (
             <div style={messageStyle}>
-              No store found. Most likely you did not allow access to file URLs. <a href="https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Troubleshooting.md#access-file-url-file" target="_blank">See details</a>.
+              No store found. Most likely you did not allow access to file URLs.{' '}
+              <a
+                href="https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Troubleshooting.md#access-file-url-file"
+                target="_blank"
+              >
+                See details
+              </a>
+              .
             </div>
           );
         }
@@ -69,8 +85,10 @@ function renderNA() {
 
 function init(id) {
   renderNA();
-  bgConnection = chrome.runtime.connect({ name: id ? id.toString() : undefined });
-  bgConnection.onMessage.addListener(message => {
+  bgConnection = chrome.runtime.connect({
+    name: id ? id.toString() : undefined,
+  });
+  bgConnection.onMessage.addListener((message) => {
     if (message.type === 'NA') {
       if (message.id === id) renderNA();
       else store.dispatch({ type: REMOVE_INSTANCE, id: message.id });

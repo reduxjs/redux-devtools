@@ -1,40 +1,40 @@
 // Mock not supported chrome.* API for Firefox and Electron
 
-window.isElectron = window.navigator &&
-  window.navigator.userAgent.indexOf('Electron') !== -1;
+window.isElectron =
+  window.navigator && window.navigator.userAgent.indexOf('Electron') !== -1;
 
 const isFirefox = navigator.userAgent.indexOf('Firefox') !== -1;
 
 // Background page only
 if (
-  window.isElectron &&
-  location.pathname === '/_generated_background_page.html' ||
+  (window.isElectron &&
+    location.pathname === '/_generated_background_page.html') ||
   isFirefox
 ) {
   chrome.runtime.onConnectExternal = {
-    addListener() {}
+    addListener() {},
   };
   chrome.runtime.onMessageExternal = {
-    addListener() {}
+    addListener() {},
   };
 
   if (window.isElectron) {
     chrome.notifications = {
       onClicked: {
-        addListener() {}
+        addListener() {},
       },
       create() {},
-      clear() {}
+      clear() {},
     };
     chrome.contextMenus = {
       onClicked: {
-        addListener() {}
-      }
+        addListener() {},
+      },
     };
   } else {
     chrome.storage.sync = chrome.storage.local;
     chrome.runtime.onInstalled = {
-      addListener: cb => cb()
+      addListener: (cb) => cb(),
     };
   }
 }
@@ -43,7 +43,7 @@ if (window.isElectron) {
   if (!chrome.storage.local || !chrome.storage.local.remove) {
     chrome.storage.local = {
       set(obj, callback) {
-        Object.keys(obj).forEach(key => {
+        Object.keys(obj).forEach((key) => {
           localStorage.setItem(key, obj[key]);
         });
         if (callback) {
@@ -52,7 +52,7 @@ if (window.isElectron) {
       },
       get(obj, callback) {
         const result = {};
-        Object.keys(obj).forEach(key => {
+        Object.keys(obj).forEach((key) => {
           result[key] = localStorage.getItem(key) || obj[key];
         });
         if (callback) {
@@ -62,7 +62,7 @@ if (window.isElectron) {
       // Electron ~ 1.4.6
       remove(items, callback) {
         if (Array.isArray(items)) {
-          items.forEach(name => {
+          items.forEach((name) => {
             localStorage.removeItem(name);
           });
         } else {
@@ -71,12 +71,12 @@ if (window.isElectron) {
         if (callback) {
           callback();
         }
-      }
+      },
     };
   }
   // Avoid error: chrome.runtime.sendMessage is not supported responseCallback
   const originSendMessage = chrome.runtime.sendMessage;
-  chrome.runtime.sendMessage = function() {
+  chrome.runtime.sendMessage = function () {
     if (process.env.NODE_ENV === 'development') {
       return originSendMessage(...arguments);
     }

@@ -8,7 +8,7 @@ const path = resolve('build/extension');
 const extensionId = 'lmhkpmbekcpmknklioeibfkpmmfibljd';
 const actionsPattern = /^@@INIT(.|\n)+@@reduxReactRouter\/routerDidChange(.|\n)+@@reduxReactRouter\/initRoutes(.|\n)+$/;
 
-describe('Chrome extension', function() {
+describe('Chrome extension', function () {
   this.timeout(20000);
 
   before(async () => {
@@ -17,8 +17,8 @@ describe('Chrome extension', function() {
       .usingServer(`http://localhost:${port}`)
       .withCapabilities({
         chromeOptions: {
-          args: [`load-extension=${path}`]
-        }
+          args: [`load-extension=${path}`],
+        },
       })
       .forBrowser('chrome')
       .build();
@@ -27,7 +27,7 @@ describe('Chrome extension', function() {
     await this.driver.quit();
   });
 
-  it('should open extension\'s window', async () => {
+  it("should open extension's window", async () => {
     await this.driver.get(`chrome-extension://${extensionId}/window.html#left`);
     const url = await this.driver.getCurrentUrl();
     expect(url).toBe(`chrome-extension://${extensionId}/window.html#left`);
@@ -38,19 +38,23 @@ describe('Chrome extension', function() {
     expect(title).toBe('Redux DevTools');
   });
 
-  it('should contain inspector monitor\'s component', async () => {
-    const val = this.driver.findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
+  it("should contain inspector monitor's component", async () => {
+    const val = this.driver
+      .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
       .getText();
     expect(val).toExist();
   });
 
   it('should contain an empty actions list', async () => {
-    const val = await this.driver.findElement(webdriver.By.xpath('//div[contains(@class, "actionListRows-")]'))
+    const val = await this.driver
+      .findElement(
+        webdriver.By.xpath('//div[contains(@class, "actionListRows-")]')
+      )
       .getText();
     expect(val).toBe('');
   });
 
-  Object.keys(switchMonitorTests).forEach(description =>
+  Object.keys(switchMonitorTests).forEach((description) =>
     it(description, switchMonitorTests[description].bind(this))
   );
 
@@ -67,11 +71,18 @@ describe('Chrome extension', function() {
 
     await this.driver.switchTo().window(tabs[0]);
 
-    const result = await this.driver.wait(this.driver
-      .findElement(webdriver.By.xpath('//div[contains(@class, "actionListRows-")]'))
-      .getText().then((val) => {
-        return actionsPattern.test(val);
-      }), 15000, 'it doesn\'t match actions pattern');
+    const result = await this.driver.wait(
+      this.driver
+        .findElement(
+          webdriver.By.xpath('//div[contains(@class, "actionListRows-")]')
+        )
+        .getText()
+        .then((val) => {
+          return actionsPattern.test(val);
+        }),
+      15000,
+      "it doesn't match actions pattern"
+    );
     expect(result).toBeTruthy();
   });
 });

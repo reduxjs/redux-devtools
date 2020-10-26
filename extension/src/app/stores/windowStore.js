@@ -9,8 +9,14 @@ import rootReducer from '../reducers/window';
 
 export default function configureStore(baseStore, position, preloadedState) {
   let enhancer;
-  const middlewares = [exportState, api, syncStores(baseStore), persist(position)];
-  if (!position || position === '#popup') { // select current tab instance for devPanel and pageAction
+  const middlewares = [
+    exportState,
+    api,
+    syncStores(baseStore),
+    persist(position),
+  ];
+  if (!position || position === '#popup') {
+    // select current tab instance for devPanel and pageAction
     middlewares.push(instanceSelector);
   }
   if (process.env.NODE_ENV === 'production') {
@@ -18,16 +24,22 @@ export default function configureStore(baseStore, position, preloadedState) {
   } else {
     enhancer = compose(
       applyMiddleware(...middlewares),
-      window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : noop => noop
+      window.__REDUX_DEVTOOLS_EXTENSION__
+        ? window.__REDUX_DEVTOOLS_EXTENSION__()
+        : (noop) => noop
     );
   }
   const store = createStore(rootReducer, preloadedState, enhancer);
 
-  chrome.storage.local.get(['s:hostname', 's:port', 's:secure'], options => {
+  chrome.storage.local.get(['s:hostname', 's:port', 's:secure'], (options) => {
     if (!options['s:hostname'] || !options['s:port']) return;
     store.dispatch({
       type: CONNECT_REQUEST,
-      options: { hostname: options['s:hostname'], port: options['s:port'], secure: options['s:secure'] }
+      options: {
+        hostname: options['s:hostname'],
+        port: options['s:port'],
+        secure: options['s:secure'],
+      },
     });
   });
 

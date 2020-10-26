@@ -21,20 +21,29 @@ function tryCatchStringify(obj) {
     return JSON.stringify(obj);
   } catch (err) {
     /* eslint-disable no-console */
-    if (process.env.NODE_ENV !== 'production') console.log('Failed to stringify', err);
+    if (process.env.NODE_ENV !== 'production')
+      console.log('Failed to stringify', err);
     /* eslint-enable no-console */
-    return jsan.stringify(obj, windowReplacer, null, { circular: '[CIRCULAR]', date: true });
+    return jsan.stringify(obj, windowReplacer, null, {
+      circular: '[CIRCULAR]',
+      date: true,
+    });
   }
 }
 
 let stringifyWarned;
 function stringify(obj, serialize) {
-  const str = typeof serialize === 'undefined' ? tryCatchStringify(obj) :
-    jsan.stringify(obj, serialize.replacer, null, serialize.options);
+  const str =
+    typeof serialize === 'undefined'
+      ? tryCatchStringify(obj)
+      : jsan.stringify(obj, serialize.replacer, null, serialize.options);
 
-  if (!stringifyWarned && str && str.length > 16 * 1024 * 1024) { // 16 MB
+  if (!stringifyWarned && str && str.length > 16 * 1024 * 1024) {
+    // 16 MB
     /* eslint-disable no-console */
-    console.warn('Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://git.io/fpcP5 on how to configure it.');
+    console.warn(
+      'Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://git.io/fpcP5 on how to configure it.'
+    );
     /* eslint-enable no-console */
     stringifyWarned = true;
   }
@@ -48,22 +57,34 @@ export function getSeralizeParameter(config, param) {
     if (serialize === true) return { options: true };
     if (serialize.immutable) {
       const immutableSerializer = seralizeImmutable(
-        serialize.immutable, serialize.refs, serialize.replacer, serialize.reviver
+        serialize.immutable,
+        serialize.refs,
+        serialize.replacer,
+        serialize.reviver
       );
       return {
         replacer: immutableSerializer.replacer,
         reviver: immutableSerializer.reviver,
-        options: typeof serialize.options === 'object' ?
-          { ...immutableSerializer.options, ...serialize.options } : immutableSerializer.options
+        options:
+          typeof serialize.options === 'object'
+            ? { ...immutableSerializer.options, ...serialize.options }
+            : immutableSerializer.options,
       };
     }
-    if (!serialize.replacer && !serialize.reviver) return { options: serialize.options };
-    return { replacer: serialize.replacer, reviver: serialize.reviver, options: serialize.options || true };
+    if (!serialize.replacer && !serialize.reviver)
+      return { options: serialize.options };
+    return {
+      replacer: serialize.replacer,
+      reviver: serialize.reviver,
+      options: serialize.options || true,
+    };
   }
 
   const value = config[param];
   if (typeof value === 'undefined') return undefined;
-  console.warn(`\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead: https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1`); // eslint-disable-line
+  console.warn(
+    `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead: https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1`
+  ); // eslint-disable-line
 
   if (typeof serializeState === 'boolean') return { options: value };
   if (typeof serializeState === 'function') return { replacer: value };
@@ -94,10 +115,16 @@ function getStackTrace(config, toExcludeFromTrace) {
   }
   stack = error.stack;
   if (prevStackTraceLimit) Error.stackTraceLimit = prevStackTraceLimit;
-  if (extraFrames || typeof Error.stackTraceLimit !== 'number' || Error.stackTraceLimit > traceLimit) {
+  if (
+    extraFrames ||
+    typeof Error.stackTraceLimit !== 'number' ||
+    Error.stackTraceLimit > traceLimit
+  ) {
     const frames = stack.split('\n');
     if (frames.length > traceLimit) {
-      stack = frames.slice(0, traceLimit + extraFrames + (frames[0] === 'Error' ? 1 : 0)).join('\n');
+      stack = frames
+        .slice(0, traceLimit + extraFrames + (frames[0] === 'Error' ? 1 : 0))
+        .join('\n');
     }
   }
   return stack;
@@ -106,7 +133,8 @@ function getStackTrace(config, toExcludeFromTrace) {
 function amendActionType(action, config, toExcludeFromTrace) {
   let timestamp = Date.now();
   let stack = getStackTrace(config, toExcludeFromTrace);
-  if (typeof action === 'string') return { action: { type: action }, timestamp, stack };
+  if (typeof action === 'string')
+    return { action: { type: action }, timestamp, stack };
   if (!action.type) return { action: { type: 'update' }, timestamp, stack };
   if (action.action) return stack ? { stack, ...action } : action;
   return { action, timestamp, stack };
@@ -117,7 +145,12 @@ export function toContentScript(message, serializeState, serializeAction) {
     message.action = stringify(message.action, serializeAction);
     message.payload = stringify(message.payload, serializeState);
   } else if (message.type === 'STATE' || message.type === 'PARTIAL_STATE') {
-    const { actionsById, computedStates, committedState, ...rest } = message.payload;
+    const {
+      actionsById,
+      computedStates,
+      committedState,
+      ...rest
+    } = message.payload;
     message.payload = rest;
     message.actionsById = stringify(actionsById, serializeAction);
     message.computedStates = stringify(computedStates, serializeState);
@@ -125,7 +158,10 @@ export function toContentScript(message, serializeState, serializeAction) {
   } else if (message.type === 'EXPORT') {
     message.payload = stringify(message.payload, serializeAction);
     if (typeof message.committedState !== 'undefined') {
-      message.committedState = stringify(message.committedState, serializeState);
+      message.committedState = stringify(
+        message.committedState,
+        serializeState
+      );
     }
   }
   post(message);
@@ -145,19 +181,23 @@ export function sendMessage(action, state, config, instanceId, name) {
     maxAge: config.maxAge,
     source,
     name: config.name || name,
-    instanceId: config.instanceId || instanceId || 1
+    instanceId: config.instanceId || instanceId || 1,
   };
   toContentScript(message, config.serialize, config.serialize);
 }
 
 function handleMessages(event) {
-  if (process.env.BABEL_ENV !== 'test' && (!event || event.source !== window)) return;
+  if (process.env.BABEL_ENV !== 'test' && (!event || event.source !== window))
+    return;
   const message = event.data;
   if (!message || message.source !== '@devtools-extension') return;
-  Object.keys(listeners).forEach(id => {
+  Object.keys(listeners).forEach((id) => {
     if (message.id && id !== message.id) return;
     if (typeof listeners[id] === 'function') listeners[id](message);
-    else listeners[id].forEach(fn => { fn(message); });
+    else
+      listeners[id].forEach((fn) => {
+        fn(message);
+      });
   });
 }
 
@@ -166,13 +206,13 @@ export function setListener(onMessage, instanceId) {
   window.addEventListener('message', handleMessages, false);
 }
 
-const liftListener = (listener, config) => message => {
+const liftListener = (listener, config) => (message) => {
   let data = {};
   if (message.type === 'IMPORT') {
     data.type = 'DISPATCH';
     data.payload = {
       type: 'IMPORT_STATE',
-      ...importState(message.state, config)
+      ...importState(message.state, config),
     };
   } else {
     data = message;
@@ -189,7 +229,9 @@ export function connect(preConfig) {
   const config = preConfig || {};
   const id = generateId(config.instanceId);
   if (!config.instanceId) config.instanceId = id;
-  if (!config.name) config.name = document.title && id === 1 ? document.title : `Instance ${id}`;
+  if (!config.name)
+    config.name =
+      document.title && id === 1 ? document.title : `Instance ${id}`;
   if (config.serialize) config.serialize = getSeralizeParameter(config);
   const actionCreators = config.actionCreators || {};
   const latency = config.latency;
@@ -200,7 +242,7 @@ export function connect(preConfig) {
   let delayedActions = [];
   let delayedStates = [];
 
-  const rootListiner = action => {
+  const rootListiner = (action) => {
     if (autoPause) {
       if (action.type === 'START') isPaused = false;
       else if (action.type === 'STOP') isPaused = true;
@@ -213,7 +255,7 @@ export function connect(preConfig) {
           type: 'LIFTED',
           liftedState: { isPaused },
           instanceId: id,
-          source
+          source,
         });
       }
     }
@@ -243,20 +285,29 @@ export function connect(preConfig) {
   }, latency);
 
   const send = (action, state) => {
-    if (isPaused || isFiltered(action, localFilter) || predicate && !predicate(state, action)) {
+    if (
+      isPaused ||
+      isFiltered(action, localFilter) ||
+      (predicate && !predicate(state, action))
+    ) {
       return;
     }
 
     let amendedAction = action;
-    const amendedState = config.stateSanitizer ? config.stateSanitizer(state) : state;
+    const amendedState = config.stateSanitizer
+      ? config.stateSanitizer(state)
+      : state;
     if (action) {
       if (config.getActionType) {
         amendedAction = config.getActionType(action);
         if (typeof amendedAction !== 'object') {
-          amendedAction = { action: { type: amendedAction }, timestamp: Date.now() };
+          amendedAction = {
+            action: { type: amendedAction },
+            timestamp: Date.now(),
+          };
         }
-      }
-      else if (config.actionSanitizer) amendedAction = config.actionSanitizer(action);
+      } else if (config.actionSanitizer)
+        amendedAction = config.actionSanitizer(action);
       amendedAction = amendActionType(amendedAction, config, send);
       if (latency) {
         delayedActions.push(amendedAction);
@@ -273,9 +324,10 @@ export function connect(preConfig) {
       type: 'INIT',
       payload: stringify(state, config.serialize),
       instanceId: id,
-      source
+      source,
     };
-    if (liftedData && Array.isArray(liftedData)) { // Legacy
+    if (liftedData && Array.isArray(liftedData)) {
+      // Legacy
       message.action = stringify(liftedData);
       message.name = config.name;
     } else {
@@ -288,7 +340,7 @@ export function connect(preConfig) {
         name: config.name || document.title,
         features: config.features,
         serialize: !!config.serialize,
-        type: config.type
+        type: config.type,
       };
     }
     post(message);
@@ -307,16 +359,18 @@ export function connect(preConfig) {
     subscribe,
     unsubscribe,
     send,
-    error
+    error,
   };
 }
 
 export function updateStore(stores) {
-  return function(newStore, instanceId) {
+  return function (newStore, instanceId) {
     /* eslint-disable no-console */
-    console.warn('`__REDUX_DEVTOOLS_EXTENSION__.updateStore` is deprecated, remove it and just use ' +
-      '`__REDUX_DEVTOOLS_EXTENSION_COMPOSE__` instead of the extension\'s store enhancer: ' +
-      'https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup');
+    console.warn(
+      '`__REDUX_DEVTOOLS_EXTENSION__.updateStore` is deprecated, remove it and just use ' +
+        "`__REDUX_DEVTOOLS_EXTENSION_COMPOSE__` instead of the extension's store enhancer: " +
+        'https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup'
+    );
     /* eslint-enable no-console */
     const store = stores[instanceId || Object.keys(stores)[0]];
     // Mutate the store in order to keep the reference

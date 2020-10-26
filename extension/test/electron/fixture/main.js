@@ -11,7 +11,7 @@ app.on('ready', () => {
 
   const mainWindow = new BrowserWindow({
     width: 150,
-    height: 100
+    height: 100,
   });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
   mainWindow.openDevTools({ detach: true });

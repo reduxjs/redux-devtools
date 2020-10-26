@@ -41,13 +41,25 @@ class App extends Component {
 
   render() {
     const {
-      monitor, position, togglePersist,
-      dispatcherIsOpen, sliderIsOpen, options, liftedState
+      monitor,
+      position,
+      togglePersist,
+      dispatcherIsOpen,
+      sliderIsOpen,
+      options,
+      liftedState,
     } = this.props;
     if (!position && (!options || !options.features)) {
       return (
         <div style={{ padding: '20px', width: '100%', textAlign: 'center' }}>
-          No store found. Make sure to follow <a href="https://github.com/zalmoxisus/redux-devtools-extension#usage" target="_blank">the instructions</a>.
+          No store found. Make sure to follow{' '}
+          <a
+            href="https://github.com/zalmoxisus/redux-devtools-extension#usage"
+            target="_blank"
+          >
+            the instructions
+          </a>
+          .
         </div>
       );
     }
@@ -55,7 +67,7 @@ class App extends Component {
     return (
       <div style={styles.container}>
         <div style={styles.buttonBar}>
-          <MonitorSelector selected={monitor}/>
+          <MonitorSelector selected={monitor} />
           <Instances selected={this.props.selected} />
         </div>
         <DevTools
@@ -66,7 +78,7 @@ class App extends Component {
           lib={options.lib || options.explicitLib}
         />
         <Notification />
-        {sliderIsOpen && options.connectionId && options.features.jump &&
+        {sliderIsOpen && options.connectionId && options.features.jump && (
           <SliderMonitor
             monitor="SliderMonitor"
             liftedState={liftedState}
@@ -77,68 +89,67 @@ class App extends Component {
             style={{ padding: '15px 5px' }}
             fillColor="rgb(120, 144, 156)"
           />
-        }
-        {dispatcherIsOpen && options.connectionId && options.features.dispatch &&
-          <Dispatcher options={options} />
-        }
+        )}
+        {dispatcherIsOpen &&
+          options.connectionId &&
+          options.features.dispatch && <Dispatcher options={options} />}
         <div style={styles.buttonBar}>
-          {!window.isElectron && position !== '#left' &&
-          <Button
-            Icon={LeftIcon}
-            onClick={() => { this.openWindow('left'); }}
-          />
-          }
-          {!window.isElectron && position !== '#right' &&
-          <Button
-            Icon={RightIcon}
-            onClick={() => { this.openWindow('right'); }}
-          />
-          }
-          {!window.isElectron && position !== '#bottom' &&
-          <Button
-            Icon={BottomIcon}
-            onClick={() => { this.openWindow('bottom'); }}
-          />
-          }
-          {features.pause &&
-            <RecordButton paused={liftedState.isPaused} />
-          }
-          {features.lock &&
-            <LockButton locked={liftedState.isLocked} />
-          }
-          {features.persist &&
+          {!window.isElectron && position !== '#left' && (
             <Button
-              Icon={PersistIcon}
-              onClick={togglePersist}
-            >Persist</Button>
-          }
-          {features.dispatch &&
-            <DispatcherButton dispatcherIsOpen={dispatcherIsOpen}/>
-          }
-          {features.jump &&
-            <SliderButton isOpen={sliderIsOpen}/>
-          }
-          {features.import &&
-            <ImportButton />
-          }
-          {features.export &&
-            <ExportButton />
-          }
-          {position && (position !== '#popup' || navigator.userAgent.indexOf('Firefox') !== -1) &&
-            <PrintButton />
-          }
-          {!window.isElectron &&
-          <Button
-            Icon={RemoteIcon}
-            onClick={() => { this.openWindow('remote'); }}
-          >Remote</Button>
-          }
-          {(chrome.runtime.openOptionsPage || navigator.userAgent.indexOf('Firefox') !== -1) &&
-          <Button
-            Icon={SettingsIcon}
-            onClick={this.openOptionsPage}
-          >Settings</Button>
-          }
+              Icon={LeftIcon}
+              onClick={() => {
+                this.openWindow('left');
+              }}
+            />
+          )}
+          {!window.isElectron && position !== '#right' && (
+            <Button
+              Icon={RightIcon}
+              onClick={() => {
+                this.openWindow('right');
+              }}
+            />
+          )}
+          {!window.isElectron && position !== '#bottom' && (
+            <Button
+              Icon={BottomIcon}
+              onClick={() => {
+                this.openWindow('bottom');
+              }}
+            />
+          )}
+          {features.pause && <RecordButton paused={liftedState.isPaused} />}
+          {features.lock && <LockButton locked={liftedState.isLocked} />}
+          {features.persist && (
+            <Button Icon={PersistIcon} onClick={togglePersist}>
+              Persist
+            </Button>
+          )}
+          {features.dispatch && (
+            <DispatcherButton dispatcherIsOpen={dispatcherIsOpen} />
+          )}
+          {features.jump && <SliderButton isOpen={sliderIsOpen} />}
+          {features.import && <ImportButton />}
+          {features.export && <ExportButton />}
+          {position &&
+            (position !== '#popup' ||
+              navigator.userAgent.indexOf('Firefox') !== -1) && <PrintButton />}
+          {!window.isElectron && (
+            <Button
+              Icon={RemoteIcon}
+              onClick={() => {
+                this.openWindow('remote');
+              }}
+            >
+              Remote
+            </Button>
+          )}
+          {(chrome.runtime.openOptionsPage ||
+            navigator.userAgent.indexOf('Firefox') !== -1) && (
+            <Button Icon={SettingsIcon} onClick={this.openOptionsPage}>
+              Settings
+            </Button>
+          )}
         </div>
       </div>
     );
@@ -158,7 +169,7 @@ App.propTypes = {
   position: PropTypes.string,
   reports: PropTypes.array.isRequired,
   dispatcherIsOpen: PropTypes.bool,
-  sliderIsOpen: PropTypes.bool
+  sliderIsOpen: PropTypes.bool,
 };
 
 function mapStateToProps(state) {
@@ -173,7 +184,7 @@ function mapStateToProps(state) {
     dispatcherIsOpen: state.monitor.dispatcherIsOpen,
     sliderIsOpen: state.monitor.sliderIsOpen,
     reports: state.reports.data,
-    shouldSync: state.instances.sync
+    shouldSync: state.instances.sync,
   };
 }
 
@@ -181,7 +192,9 @@ function mapDispatchToProps(dispatch) {
   return {
     liftedDispatch: bindActionCreators(liftedDispatch, dispatch),
     getReport: bindActionCreators(getReport, dispatch),
-    togglePersist: () => { dispatch({ type: 'TOGGLE_PERSIST' }); }
+    togglePersist: () => {
+      dispatch({ type: 'TOGGLE_PERSIST' });
+    },
   };
 }
 

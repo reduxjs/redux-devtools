@@ -1,4 +1,8 @@
-import { injectOptions, getOptionsFromBg, isAllowed } from '../options/syncOptions';
+import {
+  injectOptions,
+  getOptionsFromBg,
+  isAllowed,
+} from '../options/syncOptions';
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
@@ -19,22 +23,28 @@ function connect() {
   // Relay background script messages to the page script
   bg.onMessage.addListener((message) => {
     if (message.action) {
-      window.postMessage({
-        type: message.type,
-        payload: message.action,
-        state: message.state,
-        id: message.id,
-        source
-      }, '*');
+      window.postMessage(
+        {
+          type: message.type,
+          payload: message.action,
+          state: message.state,
+          id: message.id,
+          source,
+        },
+        '*'
+      );
     } else if (message.options) {
       injectOptions(message.options);
     } else {
-      window.postMessage({
-        type: message.type,
-        state: message.state,
-        id: message.id,
-        source
-      }, '*');
+      window.postMessage(
+        {
+          type: message.type,
+          state: message.state,
+          id: message.id,
+          source,
+        },
+        '*'
+      );
     }
   });
 
@@ -57,7 +67,7 @@ function tryCatch(fn, args) {
       const toSplit = [];
       let size = 0;
       let arg;
-      Object.keys(args).map(key => {
+      Object.keys(args).map((key) => {
         arg = args[key];
         if (typeof arg === 'string') {
           size += arg.length;
@@ -75,7 +85,7 @@ function tryCatch(fn, args) {
             instanceId,
             source: pageSource,
             split: 'chunk',
-            chunk: [toSplit[i][0], toSplit[i][1].substr(j, maxChromeMsgSize)]
+            chunk: [toSplit[i][0], toSplit[i][1].substr(j, maxChromeMsgSize)],
           });
         }
       }
@@ -83,7 +93,8 @@ function tryCatch(fn, args) {
     }
     handleDisconnect();
     /* eslint-disable no-console */
-    if (process.env.NODE_ENV !== 'production') console.error('Failed to send message', err);
+    if (process.env.NODE_ENV !== 'production')
+      console.error('Failed to send message', err);
     /* eslint-enable no-console */
   }
 }
@@ -101,7 +112,8 @@ function send(message) {
 // Resend messages from the page to the background script
 function handleMessages(event) {
   if (!isAllowed()) return;
-  if (!event || event.source !== window || typeof event.data !== 'object') return;
+  if (!event || event.source !== window || typeof event.data !== 'object')
+    return;
   const message = event.data;
   if (message.source !== pageSource) return;
   if (message.type === 'DISCONNECT') {
