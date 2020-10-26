@@ -1,0 +1,21 @@
+# Documentation
+
+* [Extension](/README.md)
+  * [Installation](/README.md#installation)
+  * [Usage](/README.md#usage)
+  * [Demo](/README.md#demo)
+* [API Reference](/docs/API/README.md)
+  * [Options (arguments)](/docs/API/Arguments.md)
+  * [Methods (advanced API)](/docs/API/Methods.md)
+* Features
+  * [Trace actions calls](/docs/Features/Trace.md)
+* [Integrations](/docs/Integrations.md)
+* [FAQ](/docs/FAQ.md)
+* [Troubleshooting](/docs/Troubleshooting.md)
+* [Recipes](/docs/Recipes.md)
+* [Articles](/docs/Articles.md)
+* [Videos](/docs/Videos.md)
+* [Credits](/docs/Credits.md)
+* [Support us](/README.md#backers)
+* [Feedback](/docs/Feedback.md)
+* [Change Log](https://github.com/zalmoxisus/redux-devtools-extension/releases)

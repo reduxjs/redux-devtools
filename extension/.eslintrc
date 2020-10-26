@@ -1,0 +1,32 @@
+{
+  "extends": "eslint-config-airbnb",
+  "globals": {
+    "chrome": true,
+    "__DEVELOPMENT__": true
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/jsx-quotes": 0,
+    "block-scoped-var": 0,
+    "padded-blocks": 0,
+    "quotes": [ 1, "single" ],
+    "comma-style": [ 2, "last" ],
+    "no-use-before-define": [0, "nofunc"],
+    "func-names": 0,
+    "prefer-const": 0,
+    "comma-dangle": 0,
+    "id-length": 0,
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "new-cap": [2, { "capIsNewExceptions": ["Test"] }],
+    "default-case": 0
+  },
+  "plugins": [
+    "react"
+  ]
+}

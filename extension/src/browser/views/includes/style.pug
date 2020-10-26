@@ -1,0 +1,64 @@
+style.
+  html {
+    height: 100%;
+    width: 100%;
+  }
+  body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    min-width: 350px;
+    min-height: 400px;
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", "Lucida Grande", sans-serif;
+    font-size: 11px;
+    background-color: rgb(53, 59, 70);
+    color: #fff;
+  }
+  a {
+    color: #fff;
+  }
+  #root {
+    height: 100%;
+  }
+  #root > div {
+    height: 100%;
+  }
+  #root > div > div:nth-child(2) {
+    min-height: 0;
+  }
+  .ReactCodeMirror {
+    overflow: auto;
+    height: 100%;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: initial !important;
+  }
+
+  @media print {
+    @page {
+      size: auto;
+      margin: 0;
+    }
+
+    body {
+      position: static;
+    }
+
+    #root > div > div:not(:nth-child(2)) {
+      display: none !important;
+    }
+
+    #root > div > div:nth-child(2) {
+      overflow: visible !important;
+      position: absolute !important;
+      z-index: 2147483647;
+      page-break-after: avoid;
+    }
+
+    #root > div > div:nth-child(2) * {
+      overflow: visible !important;
+    }
+  }

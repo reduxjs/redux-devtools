@@ -1,0 +1,59 @@
+{
+  "version": "2.17.1",
+  "name": "Redux DevTools",
+  "manifest_version": 2,
+  "description": "Redux Developer Tools for debugging application state changes.",
+  "homepage_url": "https://github.com/zalmoxisus/redux-devtools-extension",
+  "applications": {
+    "gecko": {
+      "id": "extension@redux.devtools",
+      "strict_min_version": "54.0"
+    }
+  },
+  "page_action": {
+    "default_icon": "img/logo/38x38.png",
+    "default_title": "Redux DevTools",
+    "default_popup": "window.html#popup"
+  },
+  "commands": {
+    "devtools-left": {
+      "description": "DevTools window to left"
+    },
+    "devtools-right": {
+      "description": "DevTools window to right"
+    },
+    "devtools-bottom": {
+      "description": "DevTools window to bottom"
+    },
+    "devtools-remote": {
+      "description": "Remote DevTools"
+    }
+  },
+  "icons": {
+    "16": "img/logo/16x16.png",
+    "48": "img/logo/48x48.png",
+    "128": "img/logo/128x128.png"
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "background": {
+    "scripts": ["js/background.bundle.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/content.bundle.js", "js/pagewrap.bundle.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "devtools_page": "devtools.html",
+  "web_accessible_resources": [
+    "js/page.bundle.js",
+    "js/inject.bundle.js",
+    "js/redux-devtools-extension.js"
+  ],
+  "permissions": ["notifications", "contextMenus", "tabs", "storage", "<all_urls>"],
+  "content_security_policy": "script-src 'self'; object-src 'self'; img-src 'self' data:;"
+}

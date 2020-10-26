@@ -1,0 +1,18 @@
+{
+  "gitbook": "3.2.2",
+  "title": "Redux DevTools Extension",
+  "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs"],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/zalmoxisus/redux-devtools-extension/tree/master",
+      "label": "Edit This Page"
+    },
+    "github": {
+      "url": "https://github.com/zalmoxisus/redux-devtools-extension/"
+    },
+    "sharing": {
+      "facebook": true,
+      "twitter": true
+    }
+  }
+}

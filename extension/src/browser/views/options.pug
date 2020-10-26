@@ -1,0 +1,93 @@
+doctype html
+
+html
+  head
+    meta(charset='UTF-8')
+  title Redux DevTools Options
+  style.
+    body {
+      padding: 2px;
+      min-width: 380px;
+    }
+
+    .option-group {
+      /* Reset the default fieldset styles */
+      margin: initial;
+      border: initial;
+      padding: initial;
+    }
+
+    .option-group + .option-group {
+      margin-top: 30px;
+    }
+
+    .option-group__title {
+      /* Reset the default legend styles */
+      margin: initial;
+      padding: initial;
+
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    .option + .option {
+      margin-top: 5px;
+    }
+
+    .option__textarea {
+      margin-top: 2px;
+      width: 300px;
+      min-height: 50px;
+    }
+
+    .option__hint {
+      margin-top: 2px;
+      font-size: 10px;
+    }
+
+    .option__textarea + .option__hint {
+      margin-top: -2px;
+    }
+
+    /* Checkbox and radio styling */
+    .option_type_checkbox .option__element,
+    .option_type_radio .option__element {
+      vertical-align: bottom;
+    }
+
+    .option_type_checkbox .option__label,
+    .option_type_radio .option__label {
+      margin-left: 4px;
+    }
+
+    .option_type_checkbox .option__textarea,
+    .option_type_checkbox .option__hint,
+    .option_type_radio .option__textarea,
+    .option_type_radio .option__hint {
+      margin-left: 20px;
+    }
+
+
+    /* Checkbox styling */
+    .option_type_checkbox .option__element {
+      /* Checkboxes in Chrome are 2px narrower than radio buttons.
+         These margins align them. */
+      margin-left: 1px;
+      /* ...margin-right is 2px instead of 1px
+         because both radios and checkboxes have initial margin-right of 1px */
+      margin-right: 2px;
+    }
+
+    /* Value-based styling */
+    .option_value_max-age {
+      margin-left: 20px;
+    }
+
+    .option_value_max-age .option__element {
+      width: 50px;
+    }
+
+  body
+    #root
+    script(src='/js/options.bundle.js')

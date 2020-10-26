@@ -1,0 +1,67 @@
+{
+  "version": "2.17.1",
+  "name": "Redux DevTools",
+  "short_name": "Redux DevTools",
+  "description": "Redux DevTools for debugging application's state changes.",
+  "homepage_url": "https://github.com/zalmoxisus/redux-devtools-extension",
+  "manifest_version": 2,
+  "page_action": {
+    "default_icon": "img/logo/gray.png",
+    "default_title": "Redux DevTools",
+    "default_popup": "window.html#popup"
+  },
+  "commands": {
+    "devtools-left": {
+      "description": "DevTools window to left"
+    },
+    "devtools-right": {
+      "description": "DevTools window to right"
+    },
+    "devtools-bottom": {
+      "description": "DevTools window to bottom"
+    },
+    "devtools-remote": {
+      "description": "Remote DevTools"
+    },
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E"
+      }
+    }
+  },
+  "icons": {
+    "16": "img/logo/16x16.png",
+    "48": "img/logo/48x48.png",
+    "128": "img/logo/128x128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": ["js/background.bundle.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_globs": [ "https://www.google*" ],
+      "js": ["js/content.bundle.js", "js/pagewrap.bundle.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "devtools_page": "devtools.html",
+  "web_accessible_resources": [
+    "js/page.bundle.js",
+    "js/inject.bundle.js",
+    "js/redux-devtools-extension.js"
+  ],
+  "externally_connectable": {
+    "ids": ["*"]
+  },
+  "permissions": [ "notifications", "contextMenus", "tabs", "storage", "<all_urls>" ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsdJEPwY92xUACA9CcDBDBmbdbp8Ap3cKQ0DJTUuVQvqb4FQAv8RtKY3iUjGvdwuAcSJQIZwHXcP2aNDH3TiFik/NhRK2GRW8X3OZyTdkuDueABGP2KEX8q1WQDgjX/rPIinGYztUrvoICw/UerMPwNW62jwGoVU3YhAGf+15CgX2Y6a4tppnf/+1mPedKPidh0RsM+aJY98rX+r1SPAHPcGzMjocLkqcT75DZBXer8VQN14tOOzRCd6T6oy7qm7eWru8lJwcY66qMQvhk0osqEod2G3nA7aTWpmqPFS66VEiecP9PgZlp8gQdgZ3dFhA62exydlD55JuRhiMIR63yQIDAQAB"
+}
