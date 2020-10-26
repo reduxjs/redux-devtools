@@ -1,4 +1,4 @@
-import knexModule from 'knex';
+import type knexModule from 'knex';
 
 export function seed(knex: knexModule) {
   return Promise.all([knex('remotedev_apps').del()]).then(function () {

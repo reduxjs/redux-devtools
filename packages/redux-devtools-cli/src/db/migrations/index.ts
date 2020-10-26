@@ -1,4 +1,4 @@
-import knexModule from 'knex';
+import type knexModule from 'knex';
 
 export function up(knex: knexModule) {
   return Promise.all([

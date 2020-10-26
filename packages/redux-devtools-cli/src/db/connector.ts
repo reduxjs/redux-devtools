@@ -15,9 +15,9 @@ export default function connector(options: SCServer.SCServerOptions) {
 
   /* eslint-disable no-console */
   knex.migrate
-    .latest()
+    .latest({ loadExtensions: ['.js'] })
     .then(function () {
-      return knex.seed.run();
+      return knex.seed.run({ loadExtensions: ['.js'] });
     })
     .then(function () {
       console.log('   \x1b[0;32m[Done]\x1b[0m Migrations are finished\n');
