@@ -1,0 +1,17 @@
+doctype html
+
+html
+  head
+    meta(charset='UTF-8')
+  title Redux DevTools
+  include ./includes/style.pug
+
+  body
+    #root
+      div(style='position: relative')
+        img(
+          src='/img/loading.svg',
+          height=300, width=350,
+          style='position: absolute; top: 50%; left: 50%; margin-top: -175px; margin-left: -175px;'
+        )
+    script(src='/js/window.bundle.js')
