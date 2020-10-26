@@ -1,7 +1,8 @@
-var ApolloServer = require('apollo-server-express').ApolloServer;
-var schema = require('../api/schema');
+import { ApolloServer } from 'apollo-server-express';
+import schema from '../api/schema';
+import { Store } from '../store';
 
-module.exports = function (store) {
+export default function (store: Store) {
   return new ApolloServer({
     schema,
     context: {
@@ -24,4 +25,4 @@ module.exports = function (store) {
       ],
     },
   });
-};
+}

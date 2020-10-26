@@ -1,13 +1,15 @@
-var path = require('path');
-var express = require('express');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-var cors = require('cors');
-var graphqlMiddleware = require('./middleware/graphql');
+import path from 'path';
+import express from 'express';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import { SCServer } from 'socketcluster-server';
+import graphqlMiddleware from './middleware/graphql';
+import { ReportBaseFields, Store } from './store';
 
-var app = express.Router();
+const app = express.Router();
 
-function serveUmdModule(name) {
+function serveUmdModule(name: string) {
   app.use(
     express.static(
       path.dirname(require.resolve(name + '/package.json')) + '/umd'
@@ -15,9 +17,13 @@ function serveUmdModule(name) {
   );
 }
 
-function routes(options, store, scServer) {
-  var limit = options.maxRequestBody;
-  var logHTTPRequests = options.logHTTPRequests;
+function routes(
+  options: SCServer.SCServerOptions,
+  store: Store,
+  scServer: SCServer
+) {
+  const limit = options.maxRequestBody;
+  const logHTTPRequests = options.logHTTPRequests;
 
   if (logHTTPRequests) {
     if (typeof logHTTPRequests === 'object')
@@ -25,14 +31,16 @@ function routes(options, store, scServer) {
     else app.use(morgan('combined'));
   }
 
-  graphqlMiddleware(store).applyMiddleware({ app });
+  graphqlMiddleware(store).applyMiddleware({ app } as {
+    app: express.Application;
+  });
 
   serveUmdModule('react');
   serveUmdModule('react-dom');
   serveUmdModule('redux-devtools-core');
 
   app.get('/port.js', function (req, res) {
-    res.send('reduxDevToolsPort = ' + options.port);
+    res.send(`reduxDevToolsPort = ${options.port!}`);
   });
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../app/index.html'));
@@ -71,7 +79,10 @@ function routes(options, store, scServer) {
         store
           .add(req.body)
           .then(function (r) {
-            res.send({ id: r.id, error: r.error });
+            res.send({
+              id: (r as ReportBaseFields).id,
+              error: (r as { error: string }).error,
+            });
             scServer.exchange.publish('report', {
               type: 'add',
               data: r,
@@ -86,4 +97,4 @@ function routes(options, store, scServer) {
   return app;
 }
 
-module.exports = routes;
+export default routes;

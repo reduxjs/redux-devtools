@@ -1,19 +1,29 @@
-var getPort = require('getport');
-var SocketCluster = require('socketcluster');
-var getOptions = require('./src/options');
+import getPort from 'getport';
+import SocketCluster from 'socketcluster';
+import getOptions, { Options } from './options';
 
 // var LOG_LEVEL_NONE = 0;
-var LOG_LEVEL_ERROR = 1;
-var LOG_LEVEL_WARN = 2;
-var LOG_LEVEL_INFO = 3;
+const LOG_LEVEL_ERROR = 1;
+const LOG_LEVEL_WARN = 2;
+const LOG_LEVEL_INFO = 3;
 
-module.exports = function (argv) {
-  var options = Object.assign(getOptions(argv), {
-    workerController: __dirname + '/src/worker.js',
+export interface ExtendedOptions extends Options {
+  workerController: string;
+  allowClientPublish: boolean;
+}
+
+export default function (argv: {
+  [arg: string]: any;
+}): Promise<{
+  portAlreadyUsed?: boolean;
+  on: (status: 'ready', cb: () => void) => void;
+}> {
+  const options = Object.assign(getOptions(argv), {
+    workerController: __dirname + '/worker.js',
     allowClientPublish: false,
   });
-  var port = options.port;
-  var logLevel =
+  const port = options.port;
+  const logLevel =
     options.logLevel === undefined ? LOG_LEVEL_INFO : options.logLevel;
   return new Promise(function (resolve) {
     // Check port already used
@@ -27,13 +37,11 @@ module.exports = function (argv) {
       }
       if (port !== p) {
         if (logLevel >= LOG_LEVEL_WARN) {
-          console.log(
-            '[ReduxDevTools] Server port ' + port + ' is already used.'
-          );
+          console.log(`[ReduxDevTools] Server port ${port} is already used.`);
         }
         resolve({
           portAlreadyUsed: true,
-          on: function (status, cb) {
+          on: function (status: string, cb: () => void) {
             cb();
           },
         });
@@ -47,4 +55,4 @@ module.exports = function (argv) {
       /* eslint-enable no-console */
     });
   });
-};
+}
