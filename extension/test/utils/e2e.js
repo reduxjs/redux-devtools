@@ -4,7 +4,7 @@ export const delay = (time) =>
   new Promise((resolve) => setTimeout(resolve, time));
 
 export const switchMonitorTests = {
-  'should switch to Log Monitor': async function () {
+  'should switch to Log Monitor': async function() {
     await this.driver
       .findElement(webdriver.By.xpath('//div[text()="Inspector"]'))
       .click();
@@ -19,7 +19,7 @@ export const switchMonitorTests = {
     await delay(500);
   },
 
-  'should switch to Chart Monitor': async function () {
+  'should switch to Chart Monitor': async function() {
     await this.driver
       .findElement(webdriver.By.xpath('//div[text()="Log monitor"]'))
       .click();
@@ -34,7 +34,7 @@ export const switchMonitorTests = {
     await delay(500); // Wait till menu is closed
   },
 
-  'should switch back to Inspector Monitor': async function () {
+  'should switch back to Inspector Monitor': async function() {
     await this.driver
       .findElement(webdriver.By.xpath('//div[text()="Chart"]'))
       .click();

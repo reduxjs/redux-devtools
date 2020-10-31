@@ -76,7 +76,7 @@ if (window.isElectron) {
   }
   // Avoid error: chrome.runtime.sendMessage is not supported responseCallback
   const originSendMessage = chrome.runtime.sendMessage;
-  chrome.runtime.sendMessage = function () {
+  chrome.runtime.sendMessage = function() {
     if (process.env.NODE_ENV === 'development') {
       return originSendMessage(...arguments);
     }

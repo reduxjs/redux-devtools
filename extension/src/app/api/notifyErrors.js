@@ -3,7 +3,7 @@ let lastTime = 0;
 
 function createExpBackoffTimer(step) {
   let count = 1;
-  return function (reset) {
+  return function(reset) {
     // Reset call
     if (reset) {
       count = 1;
@@ -34,8 +34,9 @@ function catchErrors(e) {
   if (
     (window.devToolsOptions && !window.devToolsOptions.shouldCatchErrors) ||
     e.timeStamp - lastTime < nextErrorTimeout()
-  )
+  ) {
     return;
+  }
   lastTime = e.timeStamp;
   nextErrorTimeout(true);
   postError(e.message);

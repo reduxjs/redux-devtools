@@ -7,7 +7,7 @@ import { switchMonitorTests, delay } from '../utils/e2e';
 const port = 9515;
 const devPanelPath = 'chrome-extension://redux-devtools/devpanel.html';
 
-describe('DevTools panel for Electron', function () {
+describe('DevTools panel for Electron', function() {
   this.timeout(10000);
 
   before(async () => {
@@ -36,7 +36,7 @@ describe('DevTools panel for Electron', function () {
 
     await this.driver.manage().timeouts().pageLoadTimeout(5000);
 
-    const id = await this.driver.executeAsyncScript(function (callback) {
+    const id = await this.driver.executeAsyncScript(function(callback) {
       let attempts = 5;
       function showReduxPanel() {
         if (attempts === 0) {

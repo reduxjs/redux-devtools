@@ -31,8 +31,9 @@ export function isFiltered(action, localFilter) {
   if (
     noFiltersApplied(localFilter) ||
     (typeof action !== 'string' && typeof action.type.match !== 'function')
-  )
+  ) {
     return false;
+  }
 
   const { whitelist, blacklist } = localFilter || window.devToolsOptions || {};
   const actionType = action.type || action;
@@ -67,8 +68,9 @@ export function filterState(
   nextActionId,
   predicate
 ) {
-  if (type === 'ACTION')
+  if (type === 'ACTION') {
     return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
+  }
   else if (type !== 'STATE') return state;
 
   if (predicate || !noFiltersApplied(localFilter)) {
@@ -151,8 +153,9 @@ export function startingFrom(
       if (
         (predicate && !predicate(currState.state, currAction.action)) ||
         isFiltered(currAction.action, localFilter)
-      )
+      ) {
         continue;
+      }
       filteredStagedActionIds.push(key);
       if (i < index) continue;
     }

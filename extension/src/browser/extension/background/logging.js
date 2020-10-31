@@ -28,7 +28,7 @@ export function getReport(reportId, tabId, instanceId) {
           instanceId: `${tabId}/${instanceId}`,
         });
       })
-      .catch(function (err) {
+      .catch(function(err) {
         /* eslint-disable no-console */
         console.warn(err);
         /* eslint-enable no-console */

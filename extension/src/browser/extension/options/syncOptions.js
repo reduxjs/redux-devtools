@@ -47,7 +47,7 @@ const get = (callback) => {
           '^https?://localhost|0\\.0\\.0\\.0:\\d+\n^https?://.+\\.github\\.io',
         showContextMenus: true,
       },
-      function (items) {
+      function(items) {
         options = migrateOldOptions(items);
         callback(options);
       }
