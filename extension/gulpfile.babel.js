@@ -170,33 +170,42 @@ gulp.task('test:electron', () => {
     .on('end', () => crdv.stop());
 });
 
-gulp.task('default', gulp.parallel(
-  'replace-webpack-code',
-  'webpack:dev',
-  'views:dev',
-  'copy:dev',
-  'views:watch',
-  'copy:watch',
-));
-gulp.task('build:extension', gulp.parallel(
-  'replace-webpack-code',
-  'webpack:build:extension',
-  'views:build:extension',
-  'copy:build:extension',
-));
-gulp.task('copy:build:firefox', gulp.series('build:extension', (done) => {
-  gulp
-    .src([
-      './build/extension/**',
-      '!./build/extension/js/redux-devtools-extension.js',
-    ])
-    .pipe(gulp.dest('./build/firefox'))
-    .on('finish', function() {
-      gulp
-        .src('./src/browser/firefox/manifest.json')
-        .pipe(gulp.dest('./build/firefox'));
-    });
-  copy('./build/firefox');
-  done();
-}));
+gulp.task(
+  'default',
+  gulp.parallel(
+    'replace-webpack-code',
+    'webpack:dev',
+    'views:dev',
+    'copy:dev',
+    'views:watch',
+    'copy:watch'
+  )
+);
+gulp.task(
+  'build:extension',
+  gulp.parallel(
+    'replace-webpack-code',
+    'webpack:build:extension',
+    'views:build:extension',
+    'copy:build:extension'
+  )
+);
+gulp.task(
+  'copy:build:firefox',
+  gulp.series('build:extension', (done) => {
+    gulp
+      .src([
+        './build/extension/**',
+        '!./build/extension/js/redux-devtools-extension.js',
+      ])
+      .pipe(gulp.dest('./build/firefox'))
+      .on('finish', function () {
+        gulp
+          .src('./src/browser/firefox/manifest.json')
+          .pipe(gulp.dest('./build/firefox'));
+      });
+    copy('./build/firefox');
+    done();
+  })
+);
 gulp.task('build:firefox', gulp.series('copy:build:firefox'));

@@ -3,7 +3,7 @@ function createPanel(url) {
     'Redux',
     'img/logo/scalable.png',
     url,
-    function() {}
+    function () {}
   );
 }
 

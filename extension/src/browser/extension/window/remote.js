@@ -22,10 +22,10 @@ chrome.storage.local.get(
         socketOptions={
           options['s:hostname'] && options['s:port']
             ? {
-              hostname: options['s:hostname'],
-              port: options['s:port'],
-              secure: options['s:secure'],
-            }
+                hostname: options['s:hostname'],
+                port: options['s:port'],
+                secure: options['s:secure'],
+              }
             : undefined
         }
       />,

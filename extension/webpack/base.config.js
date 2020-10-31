@@ -34,9 +34,9 @@ const baseConfig = (params) => ({
     ...(params.plugins
       ? params.plugins
       : [
-        new webpack.optimize.ModuleConcatenationPlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-      ]),
+          new webpack.optimize.ModuleConcatenationPlugin(),
+          new webpack.optimize.OccurrenceOrderPlugin(),
+        ]),
   ],
   optimization: {
     minimizer: [
@@ -67,12 +67,12 @@ const baseConfig = (params) => ({
       ...(params.loaders
         ? params.loaders
         : [
-          {
-            test: /\.js$/,
-            use: 'babel-loader',
-            exclude: /(node_modules|tmp\/page\.bundle)/,
-          },
-        ]),
+            {
+              test: /\.js$/,
+              use: 'babel-loader',
+              exclude: /(node_modules|tmp\/page\.bundle)/,
+            },
+          ]),
       {
         test: /\.css?$/,
         use: ['style-loader', 'raw-loader'],

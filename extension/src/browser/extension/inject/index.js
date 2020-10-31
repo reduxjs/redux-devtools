@@ -8,7 +8,7 @@ require('./pageScript');
 chrome.runtime.sendMessage(
   window.devToolsExtensionID,
   { type: 'GET_OPTIONS' },
-  function(response) {
+  function (response) {
     if (!response.options.inject) {
       const urls = response.options.urls.split('\n').filter(Boolean).join('|');
       if (!location.href.match(new RegExp(urls))) return;

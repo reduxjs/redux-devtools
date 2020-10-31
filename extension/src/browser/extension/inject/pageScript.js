@@ -38,7 +38,7 @@ function deprecateParam(oldParam, newParam) {
   /* eslint-enable no-console */
 }
 
-const __REDUX_DEVTOOLS_EXTENSION__ = function(
+const __REDUX_DEVTOOLS_EXTENSION__ = function (
   reducer,
   preloadedState,
   config
@@ -299,7 +299,11 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function(
   const filteredActionIds = []; // simple circular buffer of non-excluded actions with fixed maxAge-1 length
   const getMaxAge = (liftedAction, liftedState) => {
     let m = (config && config.maxAge) || window.devToolsOptions.maxAge || 50;
-    if (!liftedAction || noFiltersApplied(localFilter) || !liftedAction.action) {
+    if (
+      !liftedAction ||
+      noFiltersApplied(localFilter) ||
+      !liftedAction.action
+    ) {
       return m;
     }
     if (!maxAge || maxAge < m) maxAge = m; // it can be modified in process on options page

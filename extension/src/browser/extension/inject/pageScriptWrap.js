@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   s.parentNode.removeChild(s);
 } else {
   s.src = chrome.extension.getURL('js/page.bundle.js');
-  s.onload = function() {
+  s.onload = function () {
     this.parentNode.removeChild(this);
   };
   (document.head || document.documentElement).appendChild(s);

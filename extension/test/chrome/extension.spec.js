@@ -8,7 +8,7 @@ const path = resolve('build/extension');
 const extensionId = 'lmhkpmbekcpmknklioeibfkpmmfibljd';
 const actionsPattern = /^@@INIT(.|\n)+@@reduxReactRouter\/routerDidChange(.|\n)+@@reduxReactRouter\/initRoutes(.|\n)+$/;
 
-describe('Chrome extension', function() {
+describe('Chrome extension', function () {
   this.timeout(20000);
 
   before(async () => {

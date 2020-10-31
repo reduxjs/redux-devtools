@@ -372,7 +372,7 @@ export function connect(preConfig) {
 }
 
 export function updateStore(stores) {
-  return function(newStore, instanceId) {
+  return function (newStore, instanceId) {
     /* eslint-disable no-console */
     console.warn(
       '`__REDUX_DEVTOOLS_EXTENSION__.updateStore` is deprecated, remove it and just use ' +

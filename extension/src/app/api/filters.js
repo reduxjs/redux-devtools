@@ -70,8 +70,7 @@ export function filterState(
 ) {
   if (type === 'ACTION') {
     return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
-  }
-  else if (type !== 'STATE') return state;
+  } else if (type !== 'STATE') return state;
 
   if (predicate || !noFiltersApplied(localFilter)) {
     const filteredStagedActionIds = [];
