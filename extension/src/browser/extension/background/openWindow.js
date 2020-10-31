@@ -9,8 +9,9 @@ export default function openDevToolsWindow(position) {
         lastPosition = position;
       } else {
         let params = { focused: true };
-        if (lastPosition !== position && position !== 'devtools-panel')
+        if (lastPosition !== position && position !== 'devtools-panel') {
           params = { ...params, ...customOptions };
+        }
         chrome.windows.update(windows[position], params, () => {
           lastPosition = null;
           if (chrome.runtime.lastError) callback();

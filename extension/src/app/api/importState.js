@@ -3,9 +3,10 @@ import jsan from 'jsan';
 import seralizeImmutable from 'remotedev-serialize/immutable/serialize';
 
 function deprecate(param) {
+  // eslint-disable-next-line no-console
   console.warn(
     `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead: https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1`
-  ); // eslint-disable-line
+  );
 }
 
 export default function importState(
@@ -34,8 +35,9 @@ export default function importState(
   let preloadedState;
   let nextLiftedState = parse(state);
   if (nextLiftedState.payload) {
-    if (nextLiftedState.preloadedState)
+    if (nextLiftedState.preloadedState) {
       preloadedState = parse(nextLiftedState.preloadedState);
+    }
     nextLiftedState = parse(nextLiftedState.payload);
   }
   if (deserializeState) {

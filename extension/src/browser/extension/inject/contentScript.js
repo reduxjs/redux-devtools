@@ -93,8 +93,9 @@ function tryCatch(fn, args) {
     }
     handleDisconnect();
     /* eslint-disable no-console */
-    if (process.env.NODE_ENV !== 'production')
+    if (process.env.NODE_ENV !== 'production') {
       console.error('Failed to send message', err);
+    }
     /* eslint-enable no-console */
   }
 }
@@ -112,8 +113,9 @@ function send(message) {
 // Resend messages from the page to the background script
 function handleMessages(event) {
   if (!isAllowed()) return;
-  if (!event || event.source !== window || typeof event.data !== 'object')
+  if (!event || event.source !== window || typeof event.data !== 'object') {
     return;
+  }
   const message = event.data;
   if (message.source !== pageSource) return;
   if (message.type === 'DISCONNECT') {

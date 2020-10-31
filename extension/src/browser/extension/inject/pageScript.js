@@ -164,8 +164,9 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
         isFiltered(action, localFilter) ||
         (predicate &&
           !predicate(computedStates[computedStates.length - 1].state, action))
-      )
+      ) {
         return;
+      }
       const state =
         liftedState.computedStates[liftedState.computedStates.length - 1].state;
       relay(
@@ -233,8 +234,9 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
       if (
         !features.jump &&
         (type === 'JUMP_TO_STATE' || type === 'JUMP_TO_ACTION')
-      )
+      ) {
         return;
+      }
       if (!features.skip && type === 'TOGGLE_ACTION') return;
       if (!features.reorder && type === 'REORDER_ACTION') return;
       if (!features.import && type === 'IMPORT_STATE') return;
@@ -297,8 +299,13 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
   const filteredActionIds = []; // simple circular buffer of non-excluded actions with fixed maxAge-1 length
   const getMaxAge = (liftedAction, liftedState) => {
     let m = (config && config.maxAge) || window.devToolsOptions.maxAge || 50;
-    if (!liftedAction || noFiltersApplied(localFilter) || !liftedAction.action)
+    if (
+      !liftedAction ||
+      noFiltersApplied(localFilter) ||
+      !liftedAction.action
+    ) {
       return m;
+    }
     if (!maxAge || maxAge < m) maxAge = m; // it can be modified in process on options page
     if (isFiltered(liftedAction.action, localFilter)) {
       // TODO: check also predicate && !predicate(state, action) with current state
@@ -347,8 +354,9 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
       relayAction();
       return;
     }
-    if (monitor.isPaused() || monitor.isLocked() || monitor.isTimeTraveling())
+    if (monitor.isPaused() || monitor.isLocked() || monitor.isTimeTraveling()) {
       return;
+    }
     const liftedState = store.liftedStore.getState();
     if (
       errorOccurred &&
@@ -361,8 +369,9 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
 
   const enhance = () => (next) => {
     return (reducer_, initialState_, enhancer_) => {
-      if (!isAllowed(window.devToolsOptions))
+      if (!isAllowed(window.devToolsOptions)) {
         return next(reducer_, initialState_, enhancer_);
+      }
 
       store = stores[instanceId] = configureStore(next, monitor.reducer, {
         ...config,

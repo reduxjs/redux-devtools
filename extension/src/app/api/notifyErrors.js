@@ -34,8 +34,9 @@ function catchErrors(e) {
   if (
     (window.devToolsOptions && !window.devToolsOptions.shouldCatchErrors) ||
     e.timeStamp - lastTime < nextErrorTimeout()
-  )
+  ) {
     return;
+  }
   lastTime = e.timeStamp;
   nextErrorTimeout(true);
   postError(e.message);

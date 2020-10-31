@@ -31,8 +31,9 @@ export default class Monitor {
   isPaused = () => {
     if (this.paused) {
       if (this.lastAction !== 'BLOCKED') {
-        if (!window.__REDUX_DEVTOOLS_EXTENSION_LOCKED__)
+        if (!window.__REDUX_DEVTOOLS_EXTENSION_LOCKED__) {
           this.lastAction = 'BLOCKED';
+        }
         return false;
       }
       return true;

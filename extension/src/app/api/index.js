@@ -21,8 +21,9 @@ function tryCatchStringify(obj) {
     return JSON.stringify(obj);
   } catch (err) {
     /* eslint-disable no-console */
-    if (process.env.NODE_ENV !== 'production')
+    if (process.env.NODE_ENV !== 'production') {
       console.log('Failed to stringify', err);
+    }
     /* eslint-enable no-console */
     return jsan.stringify(obj, windowReplacer, null, {
       circular: '[CIRCULAR]',
@@ -71,8 +72,9 @@ export function getSeralizeParameter(config, param) {
             : immutableSerializer.options,
       };
     }
-    if (!serialize.replacer && !serialize.reviver)
+    if (!serialize.replacer && !serialize.reviver) {
       return { options: serialize.options };
+    }
     return {
       replacer: serialize.replacer,
       reviver: serialize.reviver,
@@ -82,9 +84,10 @@ export function getSeralizeParameter(config, param) {
 
   const value = config[param];
   if (typeof value === 'undefined') return undefined;
+  // eslint-disable-next-line no-console
   console.warn(
     `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead: https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1`
-  ); // eslint-disable-line
+  );
 
   if (typeof serializeState === 'boolean') return { options: value };
   if (typeof serializeState === 'function') return { replacer: value };
@@ -133,8 +136,9 @@ function getStackTrace(config, toExcludeFromTrace) {
 function amendActionType(action, config, toExcludeFromTrace) {
   let timestamp = Date.now();
   let stack = getStackTrace(config, toExcludeFromTrace);
-  if (typeof action === 'string')
+  if (typeof action === 'string') {
     return { action: { type: action }, timestamp, stack };
+  }
   if (!action.type) return { action: { type: 'update' }, timestamp, stack };
   if (action.action) return stack ? { stack, ...action } : action;
   return { action, timestamp, stack };
@@ -187,17 +191,19 @@ export function sendMessage(action, state, config, instanceId, name) {
 }
 
 function handleMessages(event) {
-  if (process.env.BABEL_ENV !== 'test' && (!event || event.source !== window))
+  if (process.env.BABEL_ENV !== 'test' && (!event || event.source !== window)) {
     return;
+  }
   const message = event.data;
   if (!message || message.source !== '@devtools-extension') return;
   Object.keys(listeners).forEach((id) => {
     if (message.id && id !== message.id) return;
     if (typeof listeners[id] === 'function') listeners[id](message);
-    else
+    else {
       listeners[id].forEach((fn) => {
         fn(message);
       });
+    }
   });
 }
 
@@ -229,9 +235,10 @@ export function connect(preConfig) {
   const config = preConfig || {};
   const id = generateId(config.instanceId);
   if (!config.instanceId) config.instanceId = id;
-  if (!config.name)
+  if (!config.name) {
     config.name =
       document.title && id === 1 ? document.title : `Instance ${id}`;
+  }
   if (config.serialize) config.serialize = getSeralizeParameter(config);
   const actionCreators = config.actionCreators || {};
   const latency = config.latency;
@@ -306,8 +313,9 @@ export function connect(preConfig) {
             timestamp: Date.now(),
           };
         }
-      } else if (config.actionSanitizer)
+      } else if (config.actionSanitizer) {
         amendedAction = config.actionSanitizer(action);
+      }
       amendedAction = amendActionType(amendedAction, config, send);
       if (latency) {
         delayedActions.push(amendedAction);
