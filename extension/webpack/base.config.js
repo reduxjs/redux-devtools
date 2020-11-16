@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 const extpath = path.join(__dirname, '../src/browser/extension/');
 const mock = `${extpath}chromeAPIMock.js`;
@@ -37,7 +38,22 @@ const baseConfig = (params) => ({
           new webpack.optimize.ModuleConcatenationPlugin(),
           new webpack.optimize.OccurrenceOrderPlugin(),
         ]),
-  ],
+  ].concat(
+    params.copy
+      ? new CopyPlugin({
+          patterns: [
+            {
+              from: `${extpath}manifest.json`,
+              to: path.join(params.output.path, 'manifest.json'),
+            },
+            {
+              from: path.join(__dirname, '../src/assets/'),
+              to: params.output.path,
+            },
+          ],
+        })
+      : []
+  ),
   optimization: {
     minimizer: [
       new TerserPlugin({
