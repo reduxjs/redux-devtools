@@ -39,23 +39,23 @@
     "chrome_style": true
   },
   "background": {
-    "scripts": ["js/background.bundle.js"],
+    "scripts": ["background.bundle.js"],
     "persistent": false
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "exclude_globs": ["https://www.google*"],
-      "js": ["js/content.bundle.js", "js/pagewrap.bundle.js"],
+      "js": ["content.bundle.js", "pagewrap.bundle.js"],
       "run_at": "document_start",
       "all_frames": true
     }
   ],
   "devtools_page": "devtools.html",
   "web_accessible_resources": [
-    "js/page.bundle.js",
-    "js/inject.bundle.js",
-    "js/redux-devtools-extension.js"
+    "page.bundle.js",
+    "inject.bundle.js",
+    "redux-devtools-extension.js"
   ],
   "externally_connectable": {
     "ids": ["*"]

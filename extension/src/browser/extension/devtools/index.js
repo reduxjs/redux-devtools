@@ -1,3 +1,5 @@
+import '../../views/devtools.pug';
+
 function createPanel(url) {
   chrome.devtools.panels.create(
     'Redux',

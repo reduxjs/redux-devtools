@@ -1,7 +1,6 @@
 import fs from 'fs';
 import gulp from 'gulp';
 import gutil from 'gulp-util';
-import jade from 'gulp-pug';
 import rename from 'gulp-rename';
 import zip from 'gulp-zip';
 import webpack from 'webpack';
@@ -27,18 +26,6 @@ gulp.task('webpack:dev', (callback) => {
     gutil.log('[webpack:dev]', stats.toString({ colors: true }));
   });
   callback();
-});
-
-gulp.task('views:dev', (done) => {
-  gulp
-    .src('./src/browser/views/*.pug')
-    .pipe(
-      jade({
-        locals: { env: 'dev' },
-      })
-    )
-    .pipe(gulp.dest('./dev'));
-  done();
 });
 
 gulp.task('copy:dev', (done) => {
@@ -71,23 +58,11 @@ gulp.task('webpack:build:extension', (callback) => {
     .then(() => {
       const dest = './build/extension';
       fs.rename(
-        `${dest}/js/redux-devtools-extension.bundle.js`,
-        `${dest}/js/redux-devtools-extension.js`,
+        `${dest}/redux-devtools-extension.bundle.js`,
+        `${dest}/redux-devtools-extension.js`,
         callback
       );
     });
-});
-
-gulp.task('views:build:extension', (done) => {
-  gulp
-    .src(['./src/browser/views/*.pug'])
-    .pipe(
-      jade({
-        locals: { env: 'prod' },
-      })
-    )
-    .pipe(gulp.dest('./build/extension'));
-  done();
 });
 
 gulp.task('copy:build:extension', (done) => {
@@ -123,10 +98,6 @@ gulp.task('compress:firefox', (done) => {
  * watch tasks
  */
 
-gulp.task('views:watch', () => {
-  gulp.watch('./src/browser/views/*.pug', gulp.series('views:dev'));
-});
-
 gulp.task('copy:watch', () => {
   gulp.watch(
     ['./src/browser/extension/manifest.json', './src/assets/**/*'],
@@ -150,23 +121,10 @@ gulp.task('test:electron', () => {
     .on('end', () => crdv.stop());
 });
 
-gulp.task(
-  'default',
-  gulp.parallel(
-    'webpack:dev',
-    'views:dev',
-    'copy:dev',
-    'views:watch',
-    'copy:watch'
-  )
-);
+gulp.task('default', gulp.parallel('webpack:dev', 'copy:dev', 'copy:watch'));
 gulp.task(
   'build:extension',
-  gulp.parallel(
-    'webpack:build:extension',
-    'views:build:extension',
-    'copy:build:extension'
-  )
+  gulp.parallel('webpack:build:extension', 'copy:build:extension')
 );
 gulp.task(
   'copy:build:firefox',
@@ -174,7 +132,7 @@ gulp.task(
     gulp
       .src([
         './build/extension/**',
-        '!./build/extension/js/redux-devtools-extension.js',
+        '!./build/extension/redux-devtools-extension.js',
       ])
       .pipe(gulp.dest('./build/firefox'))
       .on('finish', function () {
