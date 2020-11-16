@@ -8,4 +8,5 @@ export default baseConfig({
       NODE_ENV: '"production"',
     },
   },
+  copy: true,
 });

@@ -13,6 +13,7 @@ let config = baseConfig({
     },
   },
   plugins: [new webpack.NoEmitOnErrorsPlugin()],
+  copy: true,
 });
 
 config.watch = true;

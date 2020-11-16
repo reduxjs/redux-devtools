@@ -1,6 +1,5 @@
 import gulp from 'gulp';
 import gutil from 'gulp-util';
-import rename from 'gulp-rename';
 import zip from 'gulp-zip';
 import webpack from 'webpack';
 import mocha from 'gulp-mocha';
@@ -8,10 +7,6 @@ import crdv from 'chromedriver';
 import devConfig from './webpack/dev.config';
 import prodConfig from './webpack/prod.config';
 import wrapConfig from './webpack/wrap.config';
-
-function copy(dest) {
-  gulp.src('./src/assets/**/*').pipe(gulp.dest(dest));
-}
 
 /*
  * dev tasks
@@ -25,15 +20,6 @@ gulp.task('webpack:dev', (callback) => {
     gutil.log('[webpack:dev]', stats.toString({ colors: true }));
   });
   callback();
-});
-
-gulp.task('copy:dev', (done) => {
-  gulp
-    .src('./src/browser/extension/manifest.json')
-    .pipe(rename('manifest.json'))
-    .pipe(gulp.dest('./dev'));
-  copy('./dev');
-  done();
 });
 
 /*
@@ -57,15 +43,6 @@ gulp.task('webpack:build:extension', (callback) => {
     .then(callback);
 });
 
-gulp.task('copy:build:extension', (done) => {
-  gulp
-    .src('./src/browser/extension/manifest.json')
-    .pipe(rename('manifest.json'))
-    .pipe(gulp.dest('./build/extension'));
-  copy('./build/extension');
-  done();
-});
-
 /*
  * compress task
  */
@@ -86,17 +63,6 @@ gulp.task('compress:firefox', (done) => {
   done();
 });
 
-/*
- * watch tasks
- */
-
-gulp.task('copy:watch', () => {
-  gulp.watch(
-    ['./src/browser/extension/manifest.json', './src/assets/**/*'],
-    gulp.series('copy:dev')
-  );
-});
-
 gulp.task('test:chrome', () => {
   crdv.start();
   return gulp
@@ -113,18 +79,15 @@ gulp.task('test:electron', () => {
     .on('end', () => crdv.stop());
 });
 
-gulp.task('default', gulp.parallel('webpack:dev', 'copy:dev', 'copy:watch'));
-gulp.task(
-  'build:extension',
-  gulp.parallel('webpack:build:extension', 'copy:build:extension')
-);
+gulp.task('default', gulp.parallel('webpack:dev'));
+gulp.task('build:extension', gulp.parallel('webpack:build:extension'));
 gulp.task(
   'copy:build:firefox',
   gulp.series('build:extension', (done) => {
     gulp
       .src([
         './build/extension/**',
-        '!./build/extension/redux-devtools-extension.js',
+        '!./build/extension/redux-devtools-extension.bundle.js',
       ])
       .pipe(gulp.dest('./build/firefox'))
       .on('finish', function () {
@@ -132,7 +95,6 @@ gulp.task(
           .src('./src/browser/firefox/manifest.json')
           .pipe(gulp.dest('./build/firefox'));
       });
-    copy('./build/firefox');
     done();
   })
 );
