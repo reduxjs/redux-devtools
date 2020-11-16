@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from 'remotedev-app';
 
+import '../../views/remote.pug';
+
 chrome.storage.local.get(
   {
     'select-monitor': 'InspectorMonitor',

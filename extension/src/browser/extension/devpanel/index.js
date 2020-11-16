@@ -7,6 +7,8 @@ import App from '../../../app/containers/App';
 import configureStore from '../../../app/stores/panelStore';
 import getPreloadedState from '../background/getPreloadedState';
 
+import '../../views/devpanel.pug';
+
 const position = location.hash;
 const messageStyle = { padding: '20px', width: '100%', textAlign: 'center' };
 

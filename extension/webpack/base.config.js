@@ -77,6 +77,10 @@ const baseConfig = (params) => ({
         test: /\.css?$/,
         use: ['style-loader', 'raw-loader'],
       },
+      {
+        test: /\.pug$/,
+        use: ['file-loader?name=[name].html', 'pug-html-loader'],
+      },
     ],
   },
 });

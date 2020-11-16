@@ -7,6 +7,8 @@ import App from '../../../app/containers/App';
 import configureStore from '../../../app/stores/windowStore';
 import getPreloadedState from '../background/getPreloadedState';
 
+import '../../views/window.pug';
+
 const position = location.hash;
 let preloadedState;
 getPreloadedState(position, (state) => {

@@ -6,7 +6,7 @@ let config = baseConfig({
   inputExtra: {
     page: [path.join(__dirname, '../src/browser/extension/inject/pageScript')],
   },
-  output: { path: path.join(__dirname, '../dev/js') },
+  output: { path: path.join(__dirname, '../dev') },
   globals: {
     'process.env': {
       NODE_ENV: '"development"',
