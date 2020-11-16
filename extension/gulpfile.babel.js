@@ -1,4 +1,3 @@
-import fs from 'fs';
 import gulp from 'gulp';
 import gutil from 'gulp-util';
 import rename from 'gulp-rename';
@@ -55,14 +54,7 @@ gulp.task('webpack:build:extension', (callback) => {
   }
   webpackProcess(wrapConfig)
     .then(() => webpackProcess(prodConfig))
-    .then(() => {
-      const dest = './build/extension';
-      fs.rename(
-        `${dest}/redux-devtools-extension.bundle.js`,
-        `${dest}/redux-devtools-extension.js`,
-        callback
-      );
-    });
+    .then(callback);
 });
 
 gulp.task('copy:build:extension', (done) => {

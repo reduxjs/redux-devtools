@@ -1,5 +1,5 @@
 // Include this script in Chrome apps and extensions for remote debugging
-// <script src="chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/redux-devtools-extension.js"></script>
+// <script src="chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/redux-devtools-extension.bundle.js"></script>
 
 window.devToolsExtensionID = 'lmhkpmbekcpmknklioeibfkpmmfibljd';
 require('./contentScript');
