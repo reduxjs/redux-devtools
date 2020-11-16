@@ -121,20 +121,10 @@ gulp.task('test:electron', () => {
     .on('end', () => crdv.stop());
 });
 
-gulp.task(
-  'default',
-  gulp.parallel(
-    'webpack:dev',
-    'copy:dev',
-    'copy:watch'
-  )
-);
+gulp.task('default', gulp.parallel('webpack:dev', 'copy:dev', 'copy:watch'));
 gulp.task(
   'build:extension',
-  gulp.parallel(
-    'webpack:build:extension',
-    'copy:build:extension'
-  )
+  gulp.parallel('webpack:build:extension', 'copy:build:extension')
 );
 gulp.task(
   'copy:build:firefox',
