@@ -16,26 +16,6 @@ function copy(dest) {
 }
 
 /*
- * common tasks
- */
-gulp.task('replace-webpack-code', (done) => {
-  const replaceTasks = [
-    {
-      from: './webpack/replace/JsonpMainTemplate.runtime.js',
-      to: './node_modules/webpack/lib/JsonpMainTemplate.runtime.js',
-    },
-    {
-      from: './webpack/replace/log-apply-result.js',
-      to: './node_modules/webpack/hot/log-apply-result.js',
-    },
-  ];
-  replaceTasks.forEach((task) =>
-    fs.writeFileSync(task.to, fs.readFileSync(task.from))
-  );
-  done();
-});
-
-/*
  * dev tasks
  */
 
@@ -173,7 +153,6 @@ gulp.task('test:electron', () => {
 gulp.task(
   'default',
   gulp.parallel(
-    'replace-webpack-code',
     'webpack:dev',
     'views:dev',
     'copy:dev',
@@ -184,7 +163,6 @@ gulp.task(
 gulp.task(
   'build:extension',
   gulp.parallel(
-    'replace-webpack-code',
     'webpack:build:extension',
     'views:build:extension',
     'copy:build:extension'
