@@ -1,5 +1,5 @@
-require('babel-register')();
-require('babel-polyfill');
+require('@babel/register')();
+require('@babel/polyfill');
 global.chrome = require('sinon-chrome');
 var jsdom = require('jsdom').jsdom;
 

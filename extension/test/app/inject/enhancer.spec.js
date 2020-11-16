@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import expect from 'expect';
 import { createStore, compose } from 'redux';
 import { insertScript, listenMessage } from '../../utils/inject';
