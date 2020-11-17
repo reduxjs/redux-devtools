@@ -8,9 +8,7 @@ const port = 9515;
 const devPanelPath = 'chrome-extension://redux-devtools/devpanel.html';
 
 describe('DevTools panel for Electron', function () {
-  this.timeout(10000);
-
-  before(async () => {
+  beforeAll(async () => {
     chromedriver.start();
     await delay(1000);
     this.driver = new webdriver.Builder()
@@ -26,7 +24,7 @@ describe('DevTools panel for Electron', function () {
     await this.driver.manage().timeouts().setScriptTimeout(10000);
   });
 
-  after(async () => {
+  afterAll(async () => {
     await this.driver.quit();
     chromedriver.stop();
   });
@@ -61,7 +59,7 @@ describe('DevTools panel for Electron', function () {
     const className = await this.driver
       .findElement(webdriver.By.className(id))
       .getAttribute('class');
-    expect(className).toNotMatch(/hidden/); // not hidden
+    expect(className).not.toMatch(/hidden/); // not hidden
   });
 
   it('should have Redux DevTools UI on current tab', async () => {
@@ -91,7 +89,7 @@ describe('DevTools panel for Electron', function () {
     const val = await this.driver
       .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
       .getText();
-    expect(val).toExist();
+    expect(val).toBeDefined();
   });
 
   Object.keys(switchMonitorTests).forEach((description) =>
