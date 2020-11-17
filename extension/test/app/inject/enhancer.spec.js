@@ -36,8 +36,8 @@ describe('Redux enhancer', () => {
 
     message = await listenMessage();
     expect(message.type).toBe('STATE');
-    expect(message.actionsById).toInclude(
-      '{"0":{"type":"PERFORM_ACTION","action":{"type":"@@INIT"},"'
+    expect(message.actionsById).toMatch(
+      /{"0":{"type":"PERFORM_ACTION","action":{"type":"@@INIT"},"/
     );
     expect(message.computedStates).toBe('[{"state":0}]');
   });
@@ -48,8 +48,8 @@ describe('Redux enhancer', () => {
       expect(window.store.getState()).toBe(1);
     });
     expect(message.type).toBe('ACTION');
-    expect(message.action).toInclude(
-      '{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},'
+    expect(message.action).toMatch(
+      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/
     );
     expect(message.payload).toBe('1');
 
@@ -58,8 +58,8 @@ describe('Redux enhancer', () => {
       expect(window.store.getState()).toBe(2);
     });
     expect(message.type).toBe('ACTION');
-    expect(message.action).toInclude(
-      '{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},'
+    expect(message.action).toMatch(
+      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/
     );
     expect(message.payload).toBe('2');
   });
@@ -79,8 +79,8 @@ describe('Redux enhancer', () => {
 
     message = await listenMessage();
     expect(message.type).toBe('ACTION');
-    expect(message.action).toInclude(
-      '{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},'
+    expect(message.action).toMatch(
+      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/
     );
     expect(message.payload).toBe('3');
   });
