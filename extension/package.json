@@ -18,9 +18,9 @@
     "docs:publish": "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:zalmoxisus/redux-devtools-extension gh-pages --force",
     "clean": "rimraf build/ && rimraf dev/",
     "lint": "eslint .",
-    "test:app": "cross-env BABEL_ENV=test mocha --require test/app/setup.js --recursive test/app",
-    "test:chrome": "gulp test:chrome",
-    "test:electron": "gulp test:electron && rimraf test/electron/tmp",
+    "test:app": "cross-env BABEL_ENV=test mocha --require test/app/setup.js test/app",
+    "test:chrome": "mocha --require test/chrome/setup.js test/chrome",
+    "test:electron": "mocha --require test/electron/setup.js test/electron && rimraf test/electron/tmp",
     "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron"
   },
   "repository": {
@@ -54,7 +54,6 @@
     "file-loader": "^6.2.0",
     "gitbook-cli": "^2.3.0",
     "gulp": "^4.0.2",
-    "gulp-mocha": "^3.0.1",
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.0.2",
     "jsdom": "^9.8.3",
