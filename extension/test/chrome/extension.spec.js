@@ -1,6 +1,5 @@
 import { resolve } from 'path';
 import webdriver from 'selenium-webdriver';
-import expect from 'expect';
 import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 

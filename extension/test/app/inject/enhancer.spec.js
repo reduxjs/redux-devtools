@@ -1,5 +1,4 @@
 import '@babel/polyfill';
-import expect from 'expect';
 import { createStore, compose } from 'redux';
 import { insertScript, listenMessage } from '../../utils/inject';
 import '../../../src/browser/extension/inject/pageScript';
@@ -22,7 +21,7 @@ describe('Redux enhancer', () => {
         counter,
         window.__REDUX_DEVTOOLS_EXTENSION__()
       );
-      expect(window.store).toBeA('object');
+      expect(typeof window.store).toBe('object');
     });
     expect(message.type).toBe('INIT_INSTANCE');
     expect(window.store.getState()).toBe(0);
@@ -187,7 +186,7 @@ describe('Redux enhancer', () => {
           serializeState: (key, value) => value,
         })
       );
-      expect(window.store).toBeA('object');
+      expect(typeof window.store).toBe('object');
     });
     expect(message.type).toBe('INIT_INSTANCE');
   });
@@ -197,7 +196,7 @@ describe('Redux enhancer', () => {
       window.store = window.__REDUX_DEVTOOLS_EXTENSION__()(createStore)(
         counter
       );
-      expect(window.store).toBeA('object');
+      expect(typeof window.store).toBe('object');
     });
     expect(message.type).toBe('INIT_INSTANCE');
   });
@@ -210,7 +209,7 @@ describe('Redux enhancer', () => {
         counter,
         compose(testEnhancer, window.__REDUX_DEVTOOLS_EXTENSION__())
       );
-      expect(window.store).toBeA('object');
+      expect(typeof window.store).toBe('object');
     });
     expect(message.type).toBe('INIT_INSTANCE');
   });
