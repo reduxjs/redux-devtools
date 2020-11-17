@@ -2,6 +2,7 @@ import { join } from 'path';
 import webdriver from 'selenium-webdriver';
 import electronPath from 'electron';
 import expect from 'expect';
+import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const port = 9515;
@@ -11,6 +12,7 @@ describe('DevTools panel for Electron', function () {
   this.timeout(10000);
 
   before(async () => {
+    chromedriver.start();
     await delay(1000);
     this.driver = new webdriver.Builder()
       .usingServer(`http://localhost:${port}`)
@@ -27,6 +29,7 @@ describe('DevTools panel for Electron', function () {
 
   after(async () => {
     await this.driver.quit();
+    chromedriver.stop();
   });
 
   it('should open Redux DevTools tab', async () => {

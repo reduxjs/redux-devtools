@@ -2,8 +2,6 @@ import gulp from 'gulp';
 import gutil from 'gulp-util';
 import zip from 'gulp-zip';
 import webpack from 'webpack';
-import mocha from 'gulp-mocha';
-import crdv from 'chromedriver';
 import devConfig from './webpack/dev.config';
 import prodConfig from './webpack/prod.config';
 import wrapConfig from './webpack/wrap.config';
@@ -61,22 +59,6 @@ gulp.task('compress:firefox', (done) => {
     .pipe(zip('firefox.zip'))
     .pipe(gulp.dest('./build'));
   done();
-});
-
-gulp.task('test:chrome', () => {
-  crdv.start();
-  return gulp
-    .src('./test/chrome/*.spec.js')
-    .pipe(mocha({ require: ['@babel/polyfill', 'co-mocha'] }))
-    .on('end', () => crdv.stop());
-});
-
-gulp.task('test:electron', () => {
-  crdv.start();
-  return gulp
-    .src('./test/electron/*.spec.js')
-    .pipe(mocha({ require: ['@babel/polyfill', 'co-mocha'] }))
-    .on('end', () => crdv.stop());
 });
 
 gulp.task('default', gulp.parallel('webpack:dev'));
