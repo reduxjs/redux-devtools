@@ -9,4 +9,8 @@ export default baseConfig({
     },
   },
   copy: true,
+  manifestJsonPath: path.join(
+    __dirname,
+    '../src/browser/firefox/manifest.json'
+  ),
 });

@@ -43,7 +43,7 @@ const baseConfig = (params) => ({
       ? new CopyPlugin({
           patterns: [
             {
-              from: `${extpath}manifest.json`,
+              from: params.manifestJsonPath,
               to: path.join(params.output.path, 'manifest.json'),
             },
             {

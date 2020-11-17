@@ -14,6 +14,10 @@ let config = baseConfig({
   },
   plugins: [new webpack.NoEmitOnErrorsPlugin()],
   copy: true,
+  manifestJsonPath: path.join(
+    __dirname,
+    '../src/browser/extension/manifest.json'
+  ),
 });
 
 config.watch = true;
