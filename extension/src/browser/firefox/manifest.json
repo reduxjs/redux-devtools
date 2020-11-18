@@ -59,7 +59,9 @@
     "contextMenus",
     "tabs",
     "storage",
-    "<all_urls>"
+    "file:///*",
+    "http://*/*",
+    "https://*/*"
   ],
   "content_security_policy": "script-src 'self'; object-src 'self'; img-src 'self' data:;"
 }
