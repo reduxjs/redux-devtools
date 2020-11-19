@@ -20,6 +20,7 @@ interface Props extends CircularPropsPassedThroughJSONTree {
   data: any;
   theme?: Theme;
   invertTheme: boolean;
+  onExpand?: (data: any, level: number, keyPath: any[]) => void;
 }
 
 interface State {
