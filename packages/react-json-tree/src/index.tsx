@@ -38,10 +38,10 @@ const defaultItemString = (
   itemType: React.ReactNode,
   itemString: string
 ) => (
-    <span>
-      {itemType} {itemString}
-    </span>
-  );
+  <span>
+    {itemType} {itemString}
+  </span>
+);
 const defaultLabelRenderer = ([label]: (string | number)[]) => (
   <span>{label}:</span>
 );
@@ -77,7 +77,7 @@ function checkLegacyTheming(theme: Theme | undefined, props: Props) {
 
       (theme as StylingConfig)[
         deprecatedStylingMethodsMap[
-        name as keyof typeof deprecatedStylingMethodsMap
+          name as keyof typeof deprecatedStylingMethodsMap
         ]
       ] = ({ style }, ...args) => ({
         style: {
