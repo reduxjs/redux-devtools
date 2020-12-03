@@ -38,10 +38,10 @@ const defaultItemString = (
   itemType: React.ReactNode,
   itemString: string
 ) => (
-  <span>
-    {itemType} {itemString}
-  </span>
-);
+    <span>
+      {itemType} {itemString}
+    </span>
+  );
 const defaultLabelRenderer = ([label]: (string | number)[]) => (
   <span>{label}:</span>
 );
@@ -77,7 +77,7 @@ function checkLegacyTheming(theme: Theme | undefined, props: Props) {
 
       (theme as StylingConfig)[
         deprecatedStylingMethodsMap[
-          name as keyof typeof deprecatedStylingMethodsMap
+        name as keyof typeof deprecatedStylingMethodsMap
         ]
       ] = ({ style }, ...args) => ({
         style: {
@@ -104,7 +104,7 @@ function getStateFromProps(props: Props) {
 
 export default class JSONTree extends React.Component<Props, State> {
   static propTypes = {
-    data: PropTypes.any.isRequired,
+    data: PropTypes.any,
     hideRoot: PropTypes.bool,
     theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     invertTheme: PropTypes.bool,
