@@ -2,47 +2,78 @@
   "name": "redux-devtools-core",
   "version": "1.0.0-4",
   "description": "Reusable functions of Redux DevTools",
-  "scripts": {
-    "start": "webpack-dev-server --hot --inline --env.development --env.platform=web --progress",
-    "build:web": "rimraf ./build/web && webpack -p --env.platform=web --progress",
-    "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.js",
-    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.js",
-    "build": "rimraf ./lib && babel ./src/app --out-dir lib",
-    "clean": "rimraf lib",
-    "test": "jest --no-cache",
-    "prepare": "npm run build && npm run build:umd && npm run build:umd:min",
-    "prepublishOnly": "npm run test && npm run build && npm run build:umd && npm run build:umd:min"
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-core",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
-  "main": "lib/index.js",
+  "license": "MIT",
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "files": [
     "src",
     "lib",
     "umd"
   ],
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/test/setup.js"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
-    }
-  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
-  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline --env.development --env.platform=web --progress",
+    "build": "npm run build:types && npm run build:js && npm run build:web && npm run build:umd && npm run build:umd:min",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "build:web": "rimraf ./build/web && webpack -p --env.platform=web --progress",
+    "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.ts",
+    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.ts",
+    "clean": "rimraf lib",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "preversion": "npm run type-check && npm run lint && npm run test",
+    "prepublishOnly": "npm run clean && npm run build"
   },
-  "homepage": "https://github.com/reduxjs/redux-devtools",
+  "dependencies": {
+    "d3-state-visualizer": "^1.3.4",
+    "devui": "^1.0.0-6",
+    "get-params": "^0.1.2",
+    "immutable": "^4.0.0-rc.12",
+    "javascript-stringify": "^2.0.1",
+    "jsan": "^3.1.13",
+    "jsondiffpatch": "^0.4.1",
+    "localforage": "^1.9.0",
+    "lodash": "^4.17.19",
+    "nanoid": "^3.1.12",
+    "prop-types": "^15.7.2",
+    "react-icons": "^3.10.0",
+    "react-is": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-devtools": "^3.7.0",
+    "redux-devtools-chart-monitor": "^1.7.2",
+    "redux-devtools-inspector-monitor": "^0.14.0",
+    "redux-devtools-inspector-monitor-test-tab": "^0.6.2",
+    "redux-devtools-inspector-monitor-trace-tab": "^0.1.3",
+    "redux-devtools-instrument": "^1.10.0",
+    "redux-devtools-log-monitor": "^2.1.0",
+    "redux-devtools-serialize": "^0.2.0",
+    "redux-devtools-slider-monitor": "^2.0.0-5",
+    "redux-persist": "^4.10.2",
+    "socketcluster-client": "^14.3.1",
+    "styled-components": "^5.1.1"
+  },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.1",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "@rjsf/core": "^2.4.0",
+    "@types/json-schema": "^7.0.6",
+    "@types/socketcluster-client": "^13.0.3",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
     "enzyme": "^3.11.0",
@@ -61,34 +92,6 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-hot-middleware": "^2.25.0"
-  },
-  "dependencies": {
-    "d3-state-visualizer": "^1.3.4",
-    "devui": "^1.0.0-6",
-    "get-params": "^0.1.2",
-    "javascript-stringify": "^2.0.1",
-    "jsan": "^3.1.13",
-    "jsondiffpatch": "^0.4.1",
-    "localforage": "^1.9.0",
-    "lodash": "^4.17.19",
-    "nanoid": "^3.1.12",
-    "prop-types": "^15.7.2",
-    "react-icons": "^3.10.0",
-    "react-is": "^16.13.1",
-    "react-redux": "^7.2.1",
-    "redux": "^4.0.5",
-    "redux-devtools": "^3.7.0",
-    "redux-devtools-chart-monitor": "^1.7.2",
-    "redux-devtools-inspector-monitor": "^0.14.0",
-    "redux-devtools-instrument": "^1.10.0",
-    "redux-devtools-log-monitor": "^2.1.0",
-    "redux-devtools-serialize": "^0.2.0",
-    "redux-devtools-slider-monitor": "^2.0.0-5",
-    "redux-devtools-test-generator": "^0.6.2",
-    "redux-devtools-trace-monitor": "^0.1.3",
-    "redux-persist": "^4.10.2",
-    "socketcluster-client": "^14.3.1",
-    "styled-components": "^5.1.1"
   },
   "peerDependencies": {
     "react": "^16.3.0"

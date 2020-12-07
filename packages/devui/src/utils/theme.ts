@@ -3,11 +3,14 @@ import { nicinabox as defaultDarkScheme } from 'redux-devtools-themes';
 import * as baseSchemes from 'base16';
 import * as additionalSchemes from '../colorSchemes';
 import invertColors from '../utils/invertColors';
-import { Theme } from '../themes/default';
+import { Theme as ThemeBase } from '../themes/default';
 
 export const schemes = { ...baseSchemes, ...additionalSchemes };
 export const listSchemes = () => Object.keys(schemes).slice(1).sort(); // remove `__esModule`
 export const listThemes = () => Object.keys(themes);
+
+export type Theme = keyof typeof themes;
+export type Scheme = keyof typeof schemes;
 
 export interface ThemeData {
   theme: keyof typeof themes;
@@ -15,7 +18,7 @@ export interface ThemeData {
   light: boolean;
 }
 
-export interface ThemeFromProvider extends Theme {
+export interface ThemeFromProvider extends ThemeBase {
   type: keyof typeof themes;
   light: boolean;
 }

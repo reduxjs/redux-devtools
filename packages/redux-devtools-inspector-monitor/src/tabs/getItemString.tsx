@@ -73,7 +73,7 @@ const getItemString = (
   styling: StylingFunction,
   type: string,
   data: any,
-  dataTypeKey: string | undefined,
+  dataTypeKey: string | symbol | undefined,
   isWideLayout: boolean,
   isDiff?: boolean
 ) => (

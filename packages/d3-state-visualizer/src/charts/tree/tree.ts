@@ -10,7 +10,7 @@ import {
 } from './utils';
 import d3tooltip from 'd3tooltip';
 
-interface InputOptions {
+export interface InputOptions {
   // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -34,7 +34,7 @@ interface InputOptions {
   widthBetweenNodesCoeff: number;
   transitionDuration: number;
   blinkDuration: number;
-  onClickText: () => void;
+  onClickText: (datum: NodeWithId) => void;
   tooltipOptions: {
     disabled?: boolean;
     left?: number | undefined;
