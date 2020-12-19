@@ -19,12 +19,13 @@ import SliderButton from 'remotedev-app/lib/components/buttons/SliderButton';
 import ImportButton from 'remotedev-app/lib/components/buttons/ImportButton';
 import ExportButton from 'remotedev-app/lib/components/buttons/ExportButton';
 import PrintButton from 'remotedev-app/lib/components/buttons/PrintButton';
-import SettingsIcon from 'react-icons/lib/md/settings';
-import LeftIcon from 'react-icons/lib/md/border-left';
-import RightIcon from 'react-icons/lib/md/border-right';
-import BottomIcon from 'react-icons/lib/md/border-bottom';
-import RemoteIcon from 'react-icons/lib/go/radio-tower';
-import PersistIcon from 'react-icons/lib/go/pin';
+import {
+  MdSettings,
+  MdBorderLeft,
+  MdBorderRight,
+  MdBorderBottom,
+} from 'react-icons/md';
+import { GoRadioTower, GoPin } from 'react-icons/go';
 
 @enhance
 class App extends Component {
@@ -96,7 +97,7 @@ class App extends Component {
         <div style={styles.buttonBar}>
           {!window.isElectron && position !== '#left' && (
             <Button
-              Icon={LeftIcon}
+              Icon={MdBorderLeft}
               onClick={() => {
                 this.openWindow('left');
               }}
@@ -104,7 +105,7 @@ class App extends Component {
           )}
           {!window.isElectron && position !== '#right' && (
             <Button
-              Icon={RightIcon}
+              Icon={MdBorderRight}
               onClick={() => {
                 this.openWindow('right');
               }}
@@ -112,7 +113,7 @@ class App extends Component {
           )}
           {!window.isElectron && position !== '#bottom' && (
             <Button
-              Icon={BottomIcon}
+              Icon={MdBorderBottom}
               onClick={() => {
                 this.openWindow('bottom');
               }}
@@ -121,7 +122,7 @@ class App extends Component {
           {features.pause && <RecordButton paused={liftedState.isPaused} />}
           {features.lock && <LockButton locked={liftedState.isLocked} />}
           {features.persist && (
-            <Button Icon={PersistIcon} onClick={togglePersist}>
+            <Button Icon={GoPin} onClick={togglePersist}>
               Persist
             </Button>
           )}
@@ -136,7 +137,7 @@ class App extends Component {
               navigator.userAgent.indexOf('Firefox') !== -1) && <PrintButton />}
           {!window.isElectron && (
             <Button
-              Icon={RemoteIcon}
+              Icon={GoRadioTower}
               onClick={() => {
                 this.openWindow('remote');
               }}
@@ -146,7 +147,7 @@ class App extends Component {
           )}
           {(chrome.runtime.openOptionsPage ||
             navigator.userAgent.indexOf('Firefox') !== -1) && (
-            <Button Icon={SettingsIcon} onClick={this.openOptionsPage}>
+            <Button Icon={MdSettings} onClick={this.openOptionsPage}>
               Settings
             </Button>
           )}
