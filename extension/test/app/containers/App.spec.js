@@ -1,4 +1,3 @@
-import expect from 'expect';
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
@@ -14,7 +13,7 @@ const component = mount(
 
 describe('App container', () => {
   it("should render inspector monitor's component", () => {
-    expect(component.find('DevtoolsInspector').html()).toExist();
+    expect(component.find('DevtoolsInspector').html()).toBeDefined();
   });
 
   it('should contain an empty action list', () => {

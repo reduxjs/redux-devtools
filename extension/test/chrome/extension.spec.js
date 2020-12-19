@@ -1,6 +1,5 @@
 import { resolve } from 'path';
 import webdriver from 'selenium-webdriver';
-import expect from 'expect';
 import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
@@ -10,9 +9,7 @@ const extensionId = 'lmhkpmbekcpmknklioeibfkpmmfibljd';
 const actionsPattern = /^@@INIT(.|\n)+@@reduxReactRouter\/routerDidChange(.|\n)+@@reduxReactRouter\/initRoutes(.|\n)+$/;
 
 describe('Chrome extension', function () {
-  this.timeout(20000);
-
-  before(async () => {
+  beforeAll(async () => {
     chromedriver.start();
     await delay(2000);
     this.driver = new webdriver.Builder()
@@ -25,7 +22,7 @@ describe('Chrome extension', function () {
       .forBrowser('chrome')
       .build();
   });
-  after(async () => {
+  afterAll(async () => {
     await this.driver.quit();
     chromedriver.stop();
   });
@@ -42,10 +39,10 @@ describe('Chrome extension', function () {
   });
 
   it("should contain inspector monitor's component", async () => {
-    const val = this.driver
+    const val = await this.driver
       .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
       .getText();
-    expect(val).toExist();
+    expect(val).toBeDefined();
   });
 
   it('should contain an empty actions list', async () => {

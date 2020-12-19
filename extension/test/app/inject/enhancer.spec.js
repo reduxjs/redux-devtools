@@ -1,5 +1,4 @@
 import '@babel/polyfill';
-import expect from 'expect';
 import { createStore, compose } from 'redux';
 import { insertScript, listenMessage } from '../../utils/inject';
 import '../../../src/browser/extension/inject/pageScript';
@@ -22,7 +21,7 @@ describe('Redux enhancer', () => {
         counter,
         window.__REDUX_DEVTOOLS_EXTENSION__()
       );
-      expect(window.store).toBeA('object');
+      expect(typeof window.store).toBe('object');
     });
     expect(message.type).toBe('INIT_INSTANCE');
     expect(window.store.getState()).toBe(0);
@@ -37,8 +36,8 @@ describe('Redux enhancer', () => {
 
     message = await listenMessage();
     expect(message.type).toBe('STATE');
-    expect(message.actionsById).toInclude(
-      '{"0":{"type":"PERFORM_ACTION","action":{"type":"@@INIT"},"'
+    expect(message.actionsById).toMatch(
+      /{"0":{"type":"PERFORM_ACTION","action":{"type":"@@INIT"},"/
     );
     expect(message.computedStates).toBe('[{"state":0}]');
   });
@@ -49,8 +48,8 @@ describe('Redux enhancer', () => {
       expect(window.store.getState()).toBe(1);
     });
     expect(message.type).toBe('ACTION');
-    expect(message.action).toInclude(
-      '{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},'
+    expect(message.action).toMatch(
+      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/
     );
     expect(message.payload).toBe('1');
 
@@ -59,8 +58,8 @@ describe('Redux enhancer', () => {
       expect(window.store.getState()).toBe(2);
     });
     expect(message.type).toBe('ACTION');
-    expect(message.action).toInclude(
-      '{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},'
+    expect(message.action).toMatch(
+      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/
     );
     expect(message.payload).toBe('2');
   });
@@ -80,8 +79,8 @@ describe('Redux enhancer', () => {
 
     message = await listenMessage();
     expect(message.type).toBe('ACTION');
-    expect(message.action).toInclude(
-      '{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},'
+    expect(message.action).toMatch(
+      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/
     );
     expect(message.payload).toBe('3');
   });
@@ -187,7 +186,7 @@ describe('Redux enhancer', () => {
           serializeState: (key, value) => value,
         })
       );
-      expect(window.store).toBeA('object');
+      expect(typeof window.store).toBe('object');
     });
     expect(message.type).toBe('INIT_INSTANCE');
   });
@@ -197,7 +196,7 @@ describe('Redux enhancer', () => {
       window.store = window.__REDUX_DEVTOOLS_EXTENSION__()(createStore)(
         counter
       );
-      expect(window.store).toBeA('object');
+      expect(typeof window.store).toBe('object');
     });
     expect(message.type).toBe('INIT_INSTANCE');
   });
@@ -210,7 +209,7 @@ describe('Redux enhancer', () => {
         counter,
         compose(testEnhancer, window.__REDUX_DEVTOOLS_EXTENSION__())
       );
-      expect(window.store).toBeA('object');
+      expect(typeof window.store).toBe('object');
     });
     expect(message.type).toBe('INIT_INSTANCE');
   });

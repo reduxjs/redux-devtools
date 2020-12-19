@@ -1,17 +1,16 @@
-import expect from 'expect';
 import { insertScript, listenMessage } from '../../utils/inject';
 import '../../../src/browser/extension/inject/pageScript';
 
 describe('API', () => {
   it('should get window.__REDUX_DEVTOOLS_EXTENSION__ function', () => {
-    expect(window.__REDUX_DEVTOOLS_EXTENSION__).toBeA('function');
+    expect(typeof window.__REDUX_DEVTOOLS_EXTENSION__).toBe('function');
   });
 
   it('should notify error', () => {
-    const spy = expect.createSpy(() => {});
-    window.__REDUX_DEVTOOLS_EXTENSION__.notifyErrors(spy);
+    const mockFunc = jest.fn(() => {});
+    window.__REDUX_DEVTOOLS_EXTENSION__.notifyErrors(mockFunc);
     insertScript('hi()');
-    expect(spy).toHaveBeenCalled();
+    expect(mockFunc.mock.calls.length).toBeGreaterThan(0);
   });
 
   it('should open monitor', async () => {
@@ -38,7 +37,7 @@ describe('API', () => {
     let message = await listenMessage(() => {
       window.__REDUX_DEVTOOLS_EXTENSION__.send('hi');
     });
-    expect(message).toInclude({
+    expect(message).toMatchObject({
       type: 'ACTION',
       payload: undefined,
       instanceId: 1,
@@ -54,7 +53,7 @@ describe('API', () => {
         1
       );
     });
-    expect(message).toInclude({
+    expect(message).toMatchObject({
       type: 'ACTION',
       payload: '{"counter":1}',
       instanceId: 1,
@@ -70,7 +69,7 @@ describe('API', () => {
         1
       );
     });
-    expect(message).toInclude({
+    expect(message).toMatchObject({
       type: 'ACTION',
       payload: '{"counter":1}',
       instanceId: 1,
