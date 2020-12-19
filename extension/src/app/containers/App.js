@@ -19,7 +19,12 @@ import SliderButton from 'remotedev-app/lib/components/buttons/SliderButton';
 import ImportButton from 'remotedev-app/lib/components/buttons/ImportButton';
 import ExportButton from 'remotedev-app/lib/components/buttons/ExportButton';
 import PrintButton from 'remotedev-app/lib/components/buttons/PrintButton';
-import { MdSettings, MdBorderLeft, MdBorderRight, MdBorderBottom } from 'react-icons/md';
+import {
+  MdSettings,
+  MdBorderLeft,
+  MdBorderRight,
+  MdBorderBottom,
+} from 'react-icons/md';
 import { GoRadioTower, GoPin } from 'react-icons/go';
 
 @enhance
