@@ -5,7 +5,7 @@ Redux enhancer used along with [Redux DevTools](https://github.com/reduxjs/redux
 ### Installation
 
 ```
-npm install --save-dev redux-devtools-instrument
+yarn add @redux-devtools/instrument
 ```
 
 ### Usage
