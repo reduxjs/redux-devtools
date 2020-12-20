@@ -1,7 +1,7 @@
 import mapValues from 'lodash/mapValues';
 import identity from 'lodash/identity';
 import { Action, PreloadedState, Reducer, StoreEnhancer } from 'redux';
-import { LiftedState } from 'redux-devtools-instrument';
+import { LiftedState } from '@redux-devtools/instrument';
 
 export default function persistState<
   S,

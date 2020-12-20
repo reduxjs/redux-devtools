@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withTheme } from 'styled-components';
-import { LiftedAction, LiftedState } from 'redux-devtools-instrument';
+import { LiftedAction, LiftedState } from 'redux-devtools';
 import { Action } from 'redux';
 import getMonitor from '../utils/getMonitor';
 import { InitMonitorAction } from '../actions';
