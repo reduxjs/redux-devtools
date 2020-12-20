@@ -19,13 +19,13 @@
     "type-check:watch": "npm run type-check -- --watch"
   },
   "dependencies": {
+    "@redux-devtools/core": "^3.7.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
-    "redux-devtools": "^3.7.0",
     "redux-devtools-dock-monitor": "^1.2.0",
     "redux-devtools-log-monitor": "^2.1.0",
     "redux-thunk": "^2.3.0"

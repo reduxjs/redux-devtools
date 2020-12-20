@@ -1,7 +1,11 @@
 import React, { CSSProperties, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import * as themes from 'redux-devtools-themes';
-import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
+import {
+  ActionCreators,
+  LiftedAction,
+  LiftedState,
+} from '@redux-devtools/core';
 import deepmerge from 'deepmerge';
 import { Action, Dispatch } from 'redux';
 import { Base16Theme } from 'react-base16-styling';

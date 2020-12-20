@@ -1,5 +1,5 @@
 import { createStore, compose, PreloadedState } from 'redux';
-import { persistState } from 'redux-devtools';
+import { persistState } from '@redux-devtools/core';
 import rootReducer, { TodoState } from '../reducers';
 import DevTools from '../containers/DevTools';
 

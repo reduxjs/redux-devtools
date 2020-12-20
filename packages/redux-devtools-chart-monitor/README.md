@@ -15,7 +15,7 @@ It shows a real-time view of the store aka the current state of the app.
 ### Installation
 
 ```
-yarn add --dev redux-devtools-chart-monitor
+yarn add redux-devtools-chart-monitor
 ```
 
 ### Usage

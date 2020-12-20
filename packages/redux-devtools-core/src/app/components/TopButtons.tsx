@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ActionCreators, LiftedAction } from 'redux-devtools';
+import { ActionCreators, LiftedAction } from '@redux-devtools/core';
 import { Button, Toolbar, Divider } from 'devui';
 import { Action } from 'redux';
 import RecordButton from './buttons/RecordButton';

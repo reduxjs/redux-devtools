@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose, PreloadedState } from 'redux';
-import { persistState } from 'redux-devtools';
+import { persistState } from '@redux-devtools/core';
 import thunk from 'redux-thunk';
 import rootReducer, { CounterState } from '../reducers';
 import DevTools from '../containers/DevTools';
