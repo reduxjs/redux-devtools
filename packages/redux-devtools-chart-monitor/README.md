@@ -26,7 +26,7 @@ You can use `ChartMonitor` as the only monitor in your app:
 
 ```js
 import React from 'react';
-import { createDevTools } from 'redux-devtools';
+import { createDevTools } from '@redux-devtools/core';
 import ChartMonitor from 'redux-devtools-chart-monitor';
 
 export default createDevTools(<ChartMonitor />);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createDevTools } from 'redux-devtools';
+import { createDevTools } from '@redux-devtools/core';
 import InspectorMonitor, {
   base16Themes,
   Tab,

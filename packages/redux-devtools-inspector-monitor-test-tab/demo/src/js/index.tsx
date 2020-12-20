@@ -14,7 +14,7 @@ import logger from 'redux-logger';
 import { Route } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
-import { persistState } from 'redux-devtools';
+import { persistState } from '@redux-devtools/core';
 import DemoApp from './DemoApp';
 import createRootReducer from './reducers';
 import getOptions from './getOptions';
