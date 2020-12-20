@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { tree } from 'd3-state-visualizer';
 import { Action, Dispatch } from 'redux';
-import { LiftedAction, LiftedState } from 'redux-devtools-instrument';
+import { LiftedAction, LiftedState } from 'redux-devtools';
 import * as themes from 'redux-devtools-themes';
 import { Base16Theme } from 'react-base16-styling';
 import { ChartMonitorState } from './reducers';

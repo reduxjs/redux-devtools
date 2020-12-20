@@ -1,5 +1,5 @@
 import mapValues from 'lodash/mapValues';
-import { PerformAction } from 'redux-devtools-instrument';
+import { PerformAction } from 'redux-devtools';
 import { Action } from 'redux';
 import { State } from '../app/reducers/instances';
 

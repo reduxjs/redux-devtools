@@ -40,10 +40,10 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@redux-devtools/instrument": "^1.10.0",
     "@types/prop-types": "^15.7.3",
     "lodash": "^4.17.19",
-    "prop-types": "^15.7.2",
-    "redux-devtools-instrument": "^1.10.0"
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.159",

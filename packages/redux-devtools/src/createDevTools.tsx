@@ -6,7 +6,7 @@ import instrument, {
   LiftedState,
   LiftedStore,
   Options,
-} from 'redux-devtools-instrument';
+} from '@redux-devtools/instrument';
 import { Action } from 'redux';
 
 function logError(type: string) {

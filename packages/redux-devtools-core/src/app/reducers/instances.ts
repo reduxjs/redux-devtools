@@ -1,4 +1,4 @@
-import { PerformAction } from 'redux-devtools-instrument';
+import { PerformAction } from 'redux-devtools';
 import { Action } from 'redux';
 import {
   UPDATE_STATE,

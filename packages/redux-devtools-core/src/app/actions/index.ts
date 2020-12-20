@@ -43,7 +43,7 @@ import {
 import { Action } from 'redux';
 import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
-import { LiftedAction } from 'redux-devtools-instrument';
+import { LiftedAction } from 'redux-devtools';
 import { Data } from '../reducers/reports';
 
 let monitorReducer: (

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { withTheme } from 'styled-components';
 import SliderMonitor from 'redux-devtools-slider-monitor';
-import { LiftedAction } from 'redux-devtools-instrument';
+import { LiftedAction } from 'redux-devtools';
 import { Action } from 'redux';
 import { ThemeFromProvider } from 'devui';
 import { State } from '../../reducers/instances';
