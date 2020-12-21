@@ -3,7 +3,13 @@ import jsan from 'jsan';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { Action } from 'redux';
 import Immutable from 'immutable';
-import { State } from '../app/reducers/instances';
+import { PerformAction } from '@redux-devtools/instrument';
+
+interface State {
+  actionsById: { [actionId: number]: PerformAction<Action<unknown>> };
+  computedStates: { state: unknown; error?: string }[];
+  committedState?: unknown;
+}
 
 function deprecate(param: string) {
   // eslint-disable-next-line no-console
