@@ -20,20 +20,15 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --env.development --env.platform=web --progress",
-    "build": "npm run build:types && npm run build:js && npm run build:web && npm run build:umd && npm run build:umd:min",
+    "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "build:web": "rimraf ./build/web && webpack -p --env.platform=web --progress",
-    "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.ts",
-    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.ts",
+    "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
     "clean": "rimraf lib",
-    "test": "jest",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "preversion": "npm run type-check && npm run lint && npm run test",
+    "preversion": "npm run type-check && npm run lint",
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
