@@ -37,7 +37,14 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@redux-devtools/chart-monitor": "^1.7.2",
     "@redux-devtools/core": "^3.7.0",
+    "@redux-devtools/inspector-monitor": "^0.14.0",
+    "@redux-devtools/inspector-monitor-test-tab": "^0.6.2",
+    "@redux-devtools/inspector-monitor-trace-tab": "^0.1.3",
+    "@redux-devtools/log-monitor": "^2.1.0",
+    "@redux-devtools/serialize": "^0.2.0",
+    "@redux-devtools/slider-monitor": "^2.0.0-5",
     "d3-state-visualizer": "^1.3.4",
     "devui": "^1.0.0-6",
     "get-params": "^0.1.2",
@@ -53,13 +60,6 @@
     "react-is": "^16.13.1",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
-    "redux-devtools-chart-monitor": "^1.7.2",
-    "redux-devtools-inspector-monitor": "^0.14.0",
-    "redux-devtools-inspector-monitor-test-tab": "^0.6.2",
-    "redux-devtools-inspector-monitor-trace-tab": "^0.1.3",
-    "redux-devtools-log-monitor": "^2.1.0",
-    "redux-devtools-serialize": "^0.2.0",
-    "redux-devtools-slider-monitor": "^2.0.0-5",
     "redux-persist": "^4.10.2",
     "socketcluster-client": "^14.3.1",
     "styled-components": "^5.1.1"

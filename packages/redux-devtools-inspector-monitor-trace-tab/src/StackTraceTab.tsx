@@ -4,7 +4,7 @@ import { getStackFrames } from './react-error-overlay/utils/getStackFrames';
 import StackTrace from './react-error-overlay/containers/StackTrace';
 import openFile from './openFile';
 import { Action } from 'redux';
-import { TabComponentProps } from 'redux-devtools-inspector-monitor';
+import { TabComponentProps } from '@redux-devtools/inspector-monitor';
 import StackFrame from './react-error-overlay/utils/stack-frame';
 import { ErrorLocation } from './react-error-overlay/utils/parseCompileError';
 

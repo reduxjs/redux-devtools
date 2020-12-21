@@ -1,7 +1,7 @@
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import DockMonitor from 'redux-devtools-dock-monitor';
-import SliderMonitor from 'redux-devtools-slider-monitor';
+import DockMonitor from '@redux-devtools/dock-monitor';
+import SliderMonitor from '@redux-devtools/slider-monitor';
 
 export default createDevTools(
   <DockMonitor

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import ChartMonitor from 'redux-devtools-chart-monitor';
+import ChartMonitor from '@redux-devtools/chart-monitor';
 import { NodeWithId } from 'd3-state-visualizer';
 import { selectMonitorWithState } from '../../actions';
 

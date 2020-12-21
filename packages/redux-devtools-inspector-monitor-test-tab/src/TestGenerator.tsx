@@ -5,7 +5,7 @@ import jsan from 'jsan';
 import diff, { Event } from 'simple-diff';
 import es6template from 'es6template';
 import { Editor } from 'devui';
-import { TabComponentProps } from 'redux-devtools-inspector-monitor';
+import { TabComponentProps } from '@redux-devtools/inspector-monitor';
 import { Action } from 'redux';
 import { AssertionLocals, DispatcherLocals, WrapLocals } from './types';
 

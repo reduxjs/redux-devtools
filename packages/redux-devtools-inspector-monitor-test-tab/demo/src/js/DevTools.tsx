@@ -4,8 +4,8 @@ import { createDevTools } from '@redux-devtools/core';
 import InspectorMonitor, {
   base16Themes,
   Tab,
-} from 'redux-devtools-inspector-monitor';
-import DockMonitor from 'redux-devtools-dock-monitor';
+} from '@redux-devtools/inspector-monitor';
+import DockMonitor from '@redux-devtools/dock-monitor';
 import { Location } from 'history';
 import getOptions from './getOptions';
 import TestGenerator from '../../../src';

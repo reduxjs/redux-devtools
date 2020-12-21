@@ -8,7 +8,7 @@ Powered by [React Dock](https://github.com/alexkuz/react-dock).
 ### Installation
 
 ```
-yarn add redux-devtools-dock-monitor
+yarn add @redux-devtools/dock-monitor
 ```
 
 ### Usage
@@ -21,9 +21,9 @@ For example, you can use it together with [`LogMonitor`](https://github.com/redu
 ```js
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import LogMonitor from 'redux-devtools-log-monitor';
-import SliderMonitor from 'redux-devtools-slider-monitor';
-import DockMonitor from 'redux-devtools-dock-monitor';
+import LogMonitor from '@redux-devtools/log-monitor';
+import SliderMonitor from '@redux-devtools/slider-monitor';
+import DockMonitor from '@redux-devtools/dock-monitor';
 
 export default createDevTools(
   <DockMonitor

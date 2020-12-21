@@ -1,5 +1,5 @@
 {
-  "name": "redux-devtools-inspector-monitor",
+  "name": "@redux-devtools/inspector-monitor",
   "version": "0.14.0",
   "description": "Redux DevTools Diff Monitor",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-inspector-monitor",
@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@redux-devtools/core": "^3.7.0",
+    "@redux-devtools/dock-monitor": "^1.2.0",
     "@types/dateformat": "^3.0.1",
     "@types/hex-rgba": "^1.0.0",
     "@types/history": "^4.7.7",
@@ -73,7 +74,6 @@
     "react-redux": "^7.2.1",
     "react-router": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-devtools-dock-monitor": "^1.2.0",
     "redux-logger": "^3.0.6",
     "seamless-immutable": "^7.1.4"
   },
