@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
-import { PerformAction } from 'redux-devtools';
+import { PerformAction } from '@redux-devtools/core';
 import { Action } from 'redux';
 import TestGenerator from '../src/TestGenerator';
 import fnTemplate from '../src/redux/mocha';

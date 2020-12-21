@@ -37,6 +37,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@redux-devtools/core": "^3.7.0",
     "d3-state-visualizer": "^1.3.4",
     "devui": "^1.0.0-6",
     "get-params": "^0.1.2",
@@ -52,7 +53,6 @@
     "react-is": "^16.13.1",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
-    "redux-devtools": "^3.7.0",
     "redux-devtools-chart-monitor": "^1.7.2",
     "redux-devtools-inspector-monitor": "^0.14.0",
     "redux-devtools-inspector-monitor-test-tab": "^0.6.2",

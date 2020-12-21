@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createDevTools } from 'redux-devtools';
+import { createDevTools } from '@redux-devtools/core';
 import DockMonitor from 'redux-devtools-dock-monitor';
 import { Location } from 'history';
 import DevtoolsInspector from '../../../src/DevtoolsInspector';

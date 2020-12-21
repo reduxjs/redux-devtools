@@ -36,6 +36,7 @@
     "settle-promise": "^1.0.0"
   },
   "devDependencies": {
+    "@redux-devtools/core": "^3.7.0",
     "@types/babel__code-frame": "^7.0.2",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
@@ -49,14 +50,12 @@
     "react-dom": "^16.13.1",
     "react-test-renderer": "^16.13.1",
     "redux": "^4.0.5",
-    "redux-devtools": "^3.7.0",
     "redux-devtools-inspector-monitor": "^0.14.0"
   },
   "peerDependencies": {
     "@types/react": "^16.3.18",
     "react": "^16.3.0",
     "redux": "^3.4.0 || ^4.0.0",
-    "redux-devtools": "^3.4.0",
     "redux-devtools-inspector-monitor": "^0.14.0"
   }
 }

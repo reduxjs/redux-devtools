@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Action } from 'redux';
-import { PerformAction } from 'redux-devtools';
+import { PerformAction } from '@redux-devtools/core';
 import { Base16Theme } from 'redux-devtools-themes';
 import LogMonitorEntry from './LogMonitorEntry';
 

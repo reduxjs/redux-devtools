@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { Action, Dispatch } from 'redux';
 import * as themes from 'redux-devtools-themes';
 import { Base16Theme } from 'redux-devtools-themes';
-import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
+import {
+  ActionCreators,
+  LiftedAction,
+  LiftedState,
+} from '@redux-devtools/core';
 import { Toolbar, Divider } from 'devui/lib/Toolbar';
 import Slider from 'devui/lib/Slider';
 import Button from 'devui/lib/Button';

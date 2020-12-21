@@ -6,7 +6,11 @@ import {
   invertTheme,
   StylingFunction,
 } from 'react-base16-styling';
-import { ActionCreators, LiftedAction, LiftedState } from 'redux-devtools';
+import {
+  ActionCreators,
+  LiftedAction,
+  LiftedState,
+} from '@redux-devtools/core';
 import { Action, Dispatch } from 'redux';
 import { Delta, DiffContext } from 'jsondiffpatch';
 import {

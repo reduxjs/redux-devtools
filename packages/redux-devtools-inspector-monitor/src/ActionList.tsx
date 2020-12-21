@@ -2,7 +2,7 @@ import React, { PureComponent, RefCallback } from 'react';
 import { Drake } from 'dragula';
 import dragula from 'react-dragula';
 import { Action } from 'redux';
-import { PerformAction } from 'redux-devtools';
+import { PerformAction } from '@redux-devtools/core';
 import { StylingFunction } from 'react-base16-styling';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
