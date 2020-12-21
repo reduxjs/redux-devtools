@@ -28,8 +28,8 @@ export default createDevTools(<Inspector />);
 
 Then you can render `<DevTools>` to any place inside app or even into a separate popup window.
 
-Alternative, you can use it together with [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) to make it dockable.  
-Consult the [`DockMonitor` README](https://github.com/gaearon/redux-devtools-dock-monitor) for details of this approach.
+Alternative, you can use it together with [`DockMonitor`](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor) to make it dockable.  
+Consult the [`DockMonitor` README](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor) for details of this approach.
 
 [Read how to start using Redux DevTools.](https://github.com/gaearon/redux-devtools)
 

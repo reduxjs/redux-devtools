@@ -16,7 +16,7 @@ It uses a slider based on [react-slider](https://github.com/mpowaga/react-slider
 
 ### Recommended Usage
 
-Use with [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor)
+Use with [`DockMonitor`](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor)
 
 ```javascript
 <DockMonitor

@@ -5,7 +5,7 @@ import InspectorMonitor, {
   base16Themes,
   Tab,
 } from 'redux-devtools-inspector-monitor';
-import DockMonitor from 'redux-devtools-dock-monitor';
+import DockMonitor from '@redux-devtools/dock-monitor';
 import { Location } from 'history';
 import getOptions from './getOptions';
 import TestGenerator from '../../../src';
