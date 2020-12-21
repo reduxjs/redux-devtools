@@ -1,6 +1,6 @@
 import mapValues from 'lodash/mapValues';
 import jsan from 'jsan';
-import { immutableSerialize } from 'redux-devtools-serialize';
+import { immutableSerialize } from '@redux-devtools/serialize';
 import { Action } from 'redux';
 import Immutable from 'immutable';
 import { State } from '../app/reducers/instances';

@@ -1,7 +1,7 @@
 import getParams from 'get-params';
 import jsan from 'jsan';
 import { nanoid } from 'nanoid/non-secure';
-import { immutableSerialize } from 'redux-devtools-serialize';
+import { immutableSerialize } from '@redux-devtools/serialize';
 import Immutable from 'immutable';
 import { Action } from 'redux';
 
