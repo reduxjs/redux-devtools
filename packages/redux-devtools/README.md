@@ -107,7 +107,7 @@ In fact some of these are implemented already:
 
 ![redux-devtools-filterable-log-monitor](https://cloud.githubusercontent.com/assets/29597/12440009/182bb31c-beec-11e5-8fd0-bdda48e646b2.gif)
 
-#### [Chart Monitor](https://github.com/romseguy/redux-devtools-chart-monitor)
+#### [Chart Monitor](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-chart-monitor)
 
 ![redux-devtools-chart-monitor](http://i.imgur.com/MSgvU6l.gif)
 
