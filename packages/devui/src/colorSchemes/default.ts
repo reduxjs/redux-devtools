@@ -1,5 +1,5 @@
 // Based on unikitty theme and on
-// https://github.com/reduxjs/redux-devtools/blob/master/packages/redux-devtools-inspector/src/themes/inspector.ts
+// https://github.com/reduxjs/redux-devtools/blob/master/packages/redux-devtools-inspector-monitor/src/themes/inspector.ts
 
 export default {
   scheme: 'default',

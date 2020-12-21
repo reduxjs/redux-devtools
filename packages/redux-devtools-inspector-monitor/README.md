@@ -9,7 +9,7 @@ A state monitor for [Redux DevTools](https://github.com/reduxjs/redux-devtools) 
 ### Installation
 
 ```
-yarn add redux-devtools-inspector-monitor
+yarn add @redux-devtools/inspector-monitor
 ```
 
 ### Usage
@@ -21,7 +21,7 @@ You can use `Inspector` as the only monitor in your app:
 ```js
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import Inspector from 'redux-devtools-inspector-monitor';
+import Inspector from '@redux-devtools/inspector-monitor';
 
 export default createDevTools(<Inspector />);
 ```

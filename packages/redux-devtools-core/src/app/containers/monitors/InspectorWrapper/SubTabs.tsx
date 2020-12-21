@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Tab, Tabs } from 'devui';
-import { TabComponentProps } from 'redux-devtools-inspector-monitor';
+import { TabComponentProps } from '@redux-devtools/inspector-monitor';
 import { Action } from 'redux';
-import StateTree from 'redux-devtools-inspector-monitor/lib/tabs/StateTab';
-import ActionTree from 'redux-devtools-inspector-monitor/lib/tabs/ActionTab';
-import DiffTree from 'redux-devtools-inspector-monitor/lib/tabs/DiffTab';
+import StateTree from '@redux-devtools/inspector-monitor/lib/tabs/StateTab';
+import ActionTree from '@redux-devtools/inspector-monitor/lib/tabs/ActionTab';
+import DiffTree from '@redux-devtools/inspector-monitor/lib/tabs/DiffTab';
 import { selectMonitorTab } from '../../../actions';
 import RawTab from './RawTab';
 import ChartTab from './ChartTab';

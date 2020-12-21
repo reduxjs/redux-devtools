@@ -14,7 +14,7 @@ import { Action } from 'redux';
 import {
   DevtoolsInspectorState,
   TabComponentProps,
-} from 'redux-devtools-inspector-monitor';
+} from '@redux-devtools/inspector-monitor';
 import { formSchema, uiSchema, defaultFormData } from './templateForm';
 import TestGenerator from './TestGenerator';
 import jestTemplate from './redux/jest/template';

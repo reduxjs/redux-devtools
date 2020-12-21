@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InspectorMonitor, { Tab } from 'redux-devtools-inspector-monitor';
+import InspectorMonitor, { Tab } from '@redux-devtools/inspector-monitor';
 import TraceTab from 'redux-devtools-inspector-monitor-trace-tab';
 import TestTab from 'redux-devtools-inspector-monitor-test-tab';
 import { DATA_TYPE_KEY } from '../../../constants/dataTypes';
