@@ -3,7 +3,7 @@ import path from 'path';
 import semver from 'semver';
 import { Options } from '../options';
 
-const name = 'redux-devtools-cli';
+const name = '@redux-devtools/cli';
 const startFlag = '/* ' + name + ' start */';
 const endFlag = '/* ' + name + ' end */';
 const serverFlags: { [moduleName: string]: { [version: string]: string } } = {
