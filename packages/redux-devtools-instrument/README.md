@@ -41,7 +41,7 @@ export default function configureStore(initialState) {
 `instrument(monitorReducer, [options])`
 
 - arguments
-  - **monitorReducer** _function_ called whenever an action is dispatched ([see the example of a monitor reducer](https://github.com/gaearon/redux-devtools-log-monitor/blob/master/src/reducers.js#L13)).
+  - **monitorReducer** _function_ called whenever an action is dispatched ([see the example of a monitor reducer](https://github.com/reduxjs/redux-devtools/blob/master/packages/redux-devtools-log-monitor/src/reducers.ts#L34)).
   - **options** _object_
     - **maxAge** _number_ or _function_(currentLiftedAction, previousLiftedState) - maximum allowed actions to be stored on the history tree, the oldest actions are removed once `maxAge` is reached. Can be generated dynamically with a function getting current action as argument.
     - **shouldCatchErrors** _boolean_ - if specified as `true`, whenever there's an exception in reducers, the monitors will show the error message, and next actions will not be dispatched.

@@ -8,7 +8,7 @@ It shows a log of states and actions, and lets you change their history. Created
 ### Installation
 
 ```
-npm install --save-dev redux-devtools-log-monitor
+yarn add @redux-devtools/log-monitor
 ```
 
 ### Usage
@@ -20,7 +20,7 @@ You can use `LogMonitor` as the only monitor in your app:
 ```js
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import LogMonitor from 'redux-devtools-log-monitor';
+import LogMonitor from '@redux-devtools/log-monitor';
 
 export default createDevTools(<LogMonitor />);
 ```
