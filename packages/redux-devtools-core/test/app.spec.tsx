@@ -3,12 +3,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { mount, ReactWrapper } from 'enzyme';
 // import { mountToJson } from 'enzyme-to-json';
-import App from '../src/app/containers/App';
-import api from '../src/app/middlewares/api';
-import exportState from '../src/app/middlewares/exportState';
-import rootReducer from '../src/app/reducers';
-import { DATA_TYPE_KEY } from '../src/app/constants/dataTypes';
-import stringifyJSON from '../src/app/utils/stringifyJSON';
+import App from '../src/containers/App';
+import api from '../src/middlewares/api';
+import exportState from '../src/middlewares/exportState';
+import rootReducer from '../src/reducers';
+import { DATA_TYPE_KEY } from '../src/constants/dataTypes';
+import stringifyJSON from '../src/utils/stringifyJSON';
 
 let wrapper: ReactWrapper<unknown, unknown, Component>;
 
