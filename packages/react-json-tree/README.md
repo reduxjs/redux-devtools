@@ -102,14 +102,14 @@ You can pass `getItemString` to customize the way arrays, objects, and iterable 
 By default, it'll be:
 
 ```jsx
-<JSONTree getItemString={(type, data, itemType, itemString)
+<JSONTree getItemString={(type, data, itemType, itemString, keyPath)
   => <span>{itemType} {itemString}</span>}
 ```
 
 But if you pass the following:
 
 ```jsx
-const getItemString = (type, data, itemType, itemString)
+const getItemString = (type, data, itemType, itemString, keyPath)
   => (<span> // {type}</span>);
 ```
 
