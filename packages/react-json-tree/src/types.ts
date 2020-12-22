@@ -35,7 +35,8 @@ interface JSONNestedNodeCircularPropsPassedThroughJSONTree {
     nodeType: string,
     data: any,
     itemType: React.ReactNode,
-    itemString: string
+    itemString: string,
+    keyPath: (string | number)[]
   ) => React.ReactNode;
   postprocessValue: (value: any) => any;
   isCustomNode: (value: any) => boolean;
