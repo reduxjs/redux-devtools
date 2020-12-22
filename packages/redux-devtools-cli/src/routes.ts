@@ -37,7 +37,7 @@ function routes(
 
   serveUmdModule('react');
   serveUmdModule('react-dom');
-  serveUmdModule('redux-devtools-core');
+  serveUmdModule('@redux-devtools/app');
 
   app.get('/port.js', function (req, res) {
     res.send(`reduxDevToolsPort = ${options.port!}`);

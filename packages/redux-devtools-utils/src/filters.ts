@@ -1,7 +1,12 @@
 import mapValues from 'lodash/mapValues';
 import { PerformAction } from '@redux-devtools/core';
 import { Action } from 'redux';
-import { State } from '../app/reducers/instances';
+
+interface State {
+  actionsById: { [actionId: number]: PerformAction<Action<unknown>> };
+  computedStates: { state: unknown; error?: string }[];
+  stagedActionIds: number[];
+}
 
 export const FilterState = {
   DO_NOT_FILTER: 'DO_NOT_FILTER',

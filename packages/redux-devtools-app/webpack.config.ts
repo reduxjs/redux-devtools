@@ -6,7 +6,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 module.exports = (env: { development?: boolean; platform?: string } = {}) => ({
   mode: env.development ? 'development' : 'production',
   entry: {
-    app: './src/index',
+    app: './demo/index',
   },
   output: {
     path: path.resolve(__dirname, `build/${env.platform as string}`),

@@ -1,5 +1,5 @@
 {
-  "name": "redux-devtools-cli",
+  "name": "@redux-devtools/cli",
   "version": "1.0.0-4",
   "description": "CLI for remote debugging with Redux DevTools.",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-cli",
@@ -41,6 +41,7 @@
     "node": ">=10.0.0"
   },
   "dependencies": {
+    "@redux-devtools/app": "^1.0.0-4",
     "@types/react": "^16.9.46",
     "apollo-server": "^2.18.2",
     "apollo-server-express": "^2.18.2",
@@ -59,7 +60,6 @@
     "open": "^7.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "redux-devtools-core": "^1.0.0-4",
     "semver": "^7.3.2",
     "socketcluster": "^14.4.2",
     "sqlite3": "^5.0.0",

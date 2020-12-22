@@ -9,13 +9,13 @@ Bridge for remote debugging via [Redux DevTools extension](https://github.com/za
 with npm:
 
 ```
-npm install -g redux-devtools-cli
+npm install -g @redux-devtools/cli
 ```
 
 or with yarn:
 
 ```
-yarn global add redux-devtools-cli
+yarn global add @redux-devtools/cli
 ```
 
 and start as:
@@ -24,20 +24,20 @@ and start as:
 redux-devtools --hostname=localhost --port=8000
 ```
 
-> Note the package is called `redux-devtools-cli` not `redux-devtools` (the latter is a React component).
+> Note the package is called `@redux-devtools/cli` not `redux-devtools` (the latter is a React component).
 
 #### Or add in your project
 
 with npm:
 
 ```
-npm install --save-dev redux-devtools-cli
+npm install --save-dev @redux-devtools/cli
 ```
 
 or with yarn:
 
 ```
-yarn add --dev redux-devtools-cli
+yarn add --dev @redux-devtools/cli
 ```
 
 and add to `package.json`:
@@ -53,7 +53,7 @@ So, you can start redux-devtools server by running `npm run redux-devtools`.
 ##### Import in your `server.js` script you use for starting a development server:
 
 ```js
-var reduxDevTools = require('redux-devtools-cli');
+var reduxDevTools = require('@redux-devtools/cli');
 reduxDevTools({ hostname: 'localhost', port: 8000 });
 ```
 
