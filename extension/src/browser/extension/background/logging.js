@@ -1,4 +1,4 @@
-import { LIFTED_ACTION } from 'remotedev-app/lib/constants/actionTypes';
+import { LIFTED_ACTION } from '@redux-devtools/app/lib/constants/actionTypes';
 
 export function getReport(reportId, tabId, instanceId) {
   chrome.storage.local.get(['s:hostname', 's:port', 's:secure'], (options) => {

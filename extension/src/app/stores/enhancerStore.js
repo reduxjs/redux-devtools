@@ -1,6 +1,6 @@
 import { compose } from 'redux';
-import instrument from 'redux-devtools-instrument';
-import persistState from 'redux-devtools/lib/persistState';
+import instrument from '@redux-devtools/instrument';
+import persistState from '@redux-devtools/core/lib/persistState';
 
 export function getUrlParam(key) {
   const matches = window.location.href.match(

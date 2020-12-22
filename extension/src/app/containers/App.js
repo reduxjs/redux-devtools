@@ -1,24 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import SliderMonitor from 'remotedev-slider/lib/Slider';
-import { liftedDispatch, getReport } from 'remotedev-app/lib/actions';
-import { getActiveInstance } from 'remotedev-app/lib/reducers/instances';
-import styles from 'remotedev-app/lib/styles';
-import enhance from 'remotedev-app/lib/hoc';
-import DevTools from 'remotedev-app/lib/containers/DevTools';
-import Dispatcher from 'remotedev-app/lib/containers/monitors/Dispatcher';
-import MonitorSelector from 'remotedev-app/lib/components/MonitorSelector';
-import Notification from 'remotedev-app/lib/components/Notification';
-import Instances from 'remotedev-app/lib/components/Instances';
-import Button from 'remotedev-app/lib/components/Button';
-import RecordButton from 'remotedev-app/lib/components/buttons/RecordButton';
-import LockButton from 'remotedev-app/lib/components/buttons/LockButton';
-import DispatcherButton from 'remotedev-app/lib/components/buttons/DispatcherButton';
-import SliderButton from 'remotedev-app/lib/components/buttons/SliderButton';
-import ImportButton from 'remotedev-app/lib/components/buttons/ImportButton';
-import ExportButton from 'remotedev-app/lib/components/buttons/ExportButton';
-import PrintButton from 'remotedev-app/lib/components/buttons/PrintButton';
+import SliderMonitor from '@redux-devtools/slider-monitor';
+import { liftedDispatch, getReport } from '@redux-devtools/app/lib/actions';
+import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
+import styles from '@redux-devtools/app/lib/styles';
+import enhance from '@redux-devtools/app/lib/hoc';
+import DevTools from '@redux-devtools/app/lib/containers/DevTools';
+import Dispatcher from '@redux-devtools/app/lib/containers/monitors/Dispatcher';
+import MonitorSelector from '@redux-devtools/app/lib/components/MonitorSelector';
+import Notification from '@redux-devtools/app/lib/components/Notification';
+import Instances from '@redux-devtools/app/lib/components/Instances';
+import Button from '@redux-devtools/app/lib/components/Button';
+import RecordButton from '@redux-devtools/app/lib/components/buttons/RecordButton';
+import LockButton from '@redux-devtools/app/lib/components/buttons/LockButton';
+import DispatcherButton from '@redux-devtools/app/lib/components/buttons/DispatcherButton';
+import SliderButton from '@redux-devtools/app/lib/components/buttons/SliderButton';
+import ImportButton from '@redux-devtools/app/lib/components/buttons/ImportButton';
+import ExportButton from '@redux-devtools/app/lib/components/buttons/ExportButton';
+import PrintButton from '@redux-devtools/app/lib/components/buttons/PrintButton';
 import {
   MdSettings,
   MdBorderLeft,

@@ -1,7 +1,7 @@
 import jsan from 'jsan';
 import throttle from 'lodash/throttle';
-import seralizeImmutable from 'remotedev-serialize/immutable/serialize';
-import { getActionsArray } from 'remotedev-utils';
+import seralizeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
+import { getActionsArray } from '@redux-devtools/utils';
 import { getLocalFilter, isFiltered } from './filters';
 import importState from './importState';
 import generateId from './generateInstanceId';

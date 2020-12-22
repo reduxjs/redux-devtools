@@ -1,8 +1,8 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import persist from 'remotedev-app/lib/middlewares/persist';
-import exportState from 'remotedev-app/lib/middlewares/exportState';
-import api from 'remotedev-app/lib/middlewares/api';
-import { CONNECT_REQUEST } from 'remotedev-app/lib/constants/socketActionTypes';
+import persist from '@redux-devtools/app/lib/middlewares/persist';
+import exportState from '@redux-devtools/app/lib/middlewares/exportState';
+import api from '@redux-devtools/app/lib/middlewares/api';
+import { CONNECT_REQUEST } from '@redux-devtools/app/lib/constants/socketActionTypes';
 import syncStores from '../middlewares/windowSync';
 import instanceSelector from '../middlewares/instanceSelector';
 import rootReducer from '../reducers/window';

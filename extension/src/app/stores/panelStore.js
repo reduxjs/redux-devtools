@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
-import persist from 'remotedev-app/lib/middlewares/persist';
-import exportState from 'remotedev-app/lib/middlewares/exportState';
+import persist from '@redux-devtools/app/lib/middlewares/persist';
+import exportState from '@redux-devtools/app/lib/middlewares/exportState';
 import panelDispatcher from '../middlewares/panelSync';
 import rootReducer from '../reducers/panel';
 
