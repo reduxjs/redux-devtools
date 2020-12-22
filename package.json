@@ -59,6 +59,7 @@
     "test:all": "jest"
   },
   "workspaces": [
+    "extension",
     "packages/*",
     "packages/d3-state-visualizer/examples/tree",
     "packages/react-json-tree/examples",

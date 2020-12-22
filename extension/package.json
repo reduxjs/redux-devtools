@@ -47,7 +47,7 @@
     "cross-env": "^7.0.2",
     "electron": "^2.0.2",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-15.4": "^1.4.2",
+    "enzyme-adapter-react-16": "^1.15.3",
     "eslint": "^7.6.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
@@ -59,7 +59,6 @@
     "jest": "^26.2.2",
     "pug-html-loader": "^1.1.5",
     "raw-loader": "^4.0.2",
-    "react-addons-test-utils": "^15.4.1",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "rimraf": "^3.0.2",
@@ -71,20 +70,19 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "@redux-devtools/app": "^1.0.0-4",
+    "@redux-devtools/core": "^3.7.0",
+    "@redux-devtools/instrument": "^1.10.0",
+    "@redux-devtools/serialize": "^0.2.0",
+    "@redux-devtools/slider-monitor": "^2.0.0-5",
+    "@redux-devtools/utils": "^1.0.0-4",
     "jsan": "^3.1.13",
     "lodash": "^4.17.19",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
-    "react-json-tree": "^0.10.9",
-    "react-redux": "^5.1.2",
-    "redux": "^3.7.2",
-    "redux-devtools": "^3.4.1",
-    "redux-devtools-instrument": "^1.9.6",
-    "remotedev-app": "^0.10.13-beta",
-    "remotedev-monitor-components": "^0.0.5",
-    "remotedev-serialize": "^0.1.8",
-    "remotedev-slider": "^1.1.1",
-    "remotedev-utils": "0.0.1"
+    "react-json-tree": "^0.13.0",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5"
   }
 }
