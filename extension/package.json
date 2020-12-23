@@ -1,9 +1,17 @@
 {
-  "version": "2.17.1",
   "name": "remotedev-redux-devtools-extension",
+  "version": "2.17.1",
   "description": "Redux Developer Tools for debugging application state changes.",
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/extension",
+  "license": "MIT",
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
   "scripts": {
     "start": "webpack --config webpack/dev.config.babel.js",
+    "build": "npm run build:extension && npm run build:firefox && npm run build:examples",
     "build:extension": "rimraf build/extension && webpack --config webpack/wrap.config.babel.js && webpack --config webpack/prod.config.babel.js",
     "build:firefox": "webpack --config webpack/prod.firefox.config.babel.js",
     "build:examples": "babel-node examples/buildAll.js",
@@ -23,13 +31,25 @@
     "test:electron": "jest test/electron && rimraf test/electron/tmp",
     "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zalmoxisus/redux-devtools-extension"
+  "dependencies": {
+    "@redux-devtools/app": "^1.0.0-4",
+    "@redux-devtools/core": "^3.7.0",
+    "@redux-devtools/instrument": "^1.10.0",
+    "@redux-devtools/serialize": "^0.2.0",
+    "@redux-devtools/slider-monitor": "^2.0.0-5",
+    "@redux-devtools/utils": "^1.0.0-4",
+    "jsan": "^3.1.13",
+    "localforage": "^1.9.0",
+    "lodash": "^4.17.19",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
+    "react-json-tree": "^0.13.0",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-persist": "^4.10.2"
   },
-  "homepage": "https://github.com/zalmoxisus/redux-devtools-extension",
-  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
-  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.1",
@@ -68,24 +88,5 @@
     "terser-webpack-plugin": "^1.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
-  },
-  "dependencies": {
-    "@redux-devtools/app": "^1.0.0-4",
-    "@redux-devtools/core": "^3.7.0",
-    "@redux-devtools/instrument": "^1.10.0",
-    "@redux-devtools/serialize": "^0.2.0",
-    "@redux-devtools/slider-monitor": "^2.0.0-5",
-    "@redux-devtools/utils": "^1.0.0-4",
-    "jsan": "^3.1.13",
-    "localforage": "^1.9.0",
-    "lodash": "^4.17.19",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-icons": "^3.10.0",
-    "react-json-tree": "^0.13.0",
-    "react-redux": "^7.2.1",
-    "redux": "^4.0.5",
-    "redux-persist": "^4.10.2"
   }
 }
