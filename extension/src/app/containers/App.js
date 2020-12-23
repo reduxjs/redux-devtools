@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Container, Notification } from 'devui';
-import { liftedDispatch, getReport } from '@redux-devtools/app/lib/actions';
 import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
 import Settings from '@redux-devtools/app/lib/components/Settings';
 import Actions from '@redux-devtools/app/lib/containers/Actions';
 import Header from '@redux-devtools/app/lib/components/Header';
+import { clearNotification } from '@redux-devtools/app/lib/actions';
 
 class App extends Component {
   openWindow = (position) => {
@@ -64,46 +62,19 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  bgStore: PropTypes.object,
-  liftedDispatch: PropTypes.func.isRequired,
-  getReport: PropTypes.func.isRequired,
-  togglePersist: PropTypes.func.isRequired,
-  selected: PropTypes.string,
-  liftedState: PropTypes.object.isRequired,
-  monitorState: PropTypes.object,
-  options: PropTypes.object.isRequired,
-  monitor: PropTypes.string,
-  position: PropTypes.string,
-  reports: PropTypes.array.isRequired,
-  dispatcherIsOpen: PropTypes.bool,
-  sliderIsOpen: PropTypes.bool,
-};
-
 function mapStateToProps(state) {
   const instances = state.instances;
   const id = getActiveInstance(instances);
   return {
-    selected: instances.selected,
-    liftedState: instances.states[id],
-    monitorState: state.monitor.monitorState,
     options: instances.options[id],
-    monitor: state.monitor.selected,
-    dispatcherIsOpen: state.monitor.dispatcherIsOpen,
-    sliderIsOpen: state.monitor.sliderIsOpen,
-    reports: state.reports.data,
-    shouldSync: state.instances.sync,
+    section: state.section,
+    theme: state.theme,
+    notification: state.notification,
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    liftedDispatch: bindActionCreators(liftedDispatch, dispatch),
-    getReport: bindActionCreators(getReport, dispatch),
-    togglePersist: () => {
-      dispatch({ type: 'TOGGLE_PERSIST' });
-    },
-  };
-}
+const actionCreators = {
+  clearNotification,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, actionCreators)(App);
