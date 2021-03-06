@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/reduxjs/redux-devtools/compare/react-json-tree@0.13.0...react-json-tree@0.14.0) (2021-03-06)
+
+
+### Bug Fixes
+
+* **react-json-tree:** remove isRequired from `data` prop type ([#685](https://github.com/reduxjs/redux-devtools/issues/685)) ([d76d6c6](https://github.com/reduxjs/redux-devtools/commit/d76d6c678d3b3b304cf53c1b4b1b329e8962f7b0))
+
+
+### Features
+
+* **react-json-tree:** Add keyPath to getItemString ([#694](https://github.com/reduxjs/redux-devtools/issues/694)) ([85b4b0f](https://github.com/reduxjs/redux-devtools/commit/85b4b0fb04b1d6d95054d5073fa17fa61efc0df3))
+
+
+
+
+
 # [0.13.0](https://github.com/reduxjs/redux-devtools/compare/react-json-tree@0.12.1...react-json-tree@0.13.0) (2020-09-07)
 
 ### Bug Fixes
