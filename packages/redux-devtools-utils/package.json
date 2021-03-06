@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/utils",
-  "version": "1.0.0-5",
+  "version": "1.0.0-6",
   "description": "Reusable functions of Redux DevTools",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-utils",
   "bugs": {
@@ -32,7 +32,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@redux-devtools/core": "^3.8.0",
+    "@redux-devtools/core": "^3.9.0",
     "@redux-devtools/serialize": "^0.3.0",
     "get-params": "^0.1.2",
     "immutable": "^4.0.0-rc.12",

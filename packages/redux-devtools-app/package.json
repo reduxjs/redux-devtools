@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/app",
-  "version": "1.0.0-5",
+  "version": "1.0.0-6",
   "description": "Redux DevTools app",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-app",
   "bugs": {
@@ -37,15 +37,15 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@redux-devtools/chart-monitor": "^1.8.0",
-    "@redux-devtools/core": "^3.8.0",
-    "@redux-devtools/inspector-monitor": "^0.14.1",
-    "@redux-devtools/inspector-monitor-test-tab": "^0.6.3",
-    "@redux-devtools/inspector-monitor-trace-tab": "^0.1.4",
-    "@redux-devtools/log-monitor": "^2.2.0",
-    "@redux-devtools/slider-monitor": "^2.0.0-6",
+    "@redux-devtools/chart-monitor": "^1.9.0",
+    "@redux-devtools/core": "^3.9.0",
+    "@redux-devtools/inspector-monitor": "^0.15.0",
+    "@redux-devtools/inspector-monitor-test-tab": "^0.7.0",
+    "@redux-devtools/inspector-monitor-trace-tab": "^0.2.0",
+    "@redux-devtools/log-monitor": "^2.3.0",
+    "@redux-devtools/slider-monitor": "^2.0.0-7",
     "d3-state-visualizer": "^1.4.0",
-    "devui": "^1.0.0-7",
+    "devui": "^1.0.0-8",
     "javascript-stringify": "^2.0.1",
     "jsan": "^3.1.13",
     "jsondiffpatch": "^0.4.1",

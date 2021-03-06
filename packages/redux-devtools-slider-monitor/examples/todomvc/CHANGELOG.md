@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/reduxjs/redux-devtools/compare/slider-todomvc@0.1.0...slider-todomvc@0.1.1) (2021-03-06)
+
+**Note:** Version bump only for package slider-todomvc
+
+
+
+
+
 # [0.1.0](https://github.com/reduxjs/redux-devtools/compare/slider-todomvc@0.0.2...slider-todomvc@0.1.0) (2021-03-06)
 
 ### Features

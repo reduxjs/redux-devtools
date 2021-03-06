@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.9.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/core@3.8.0...@redux-devtools/core@3.9.0) (2021-03-06)
+
+
+### Features
+
+* update peer dependencies to allow react@^17 ([#703](https://github.com/reduxjs/redux-devtools/issues/703)) ([2aaa9c1](https://github.com/reduxjs/redux-devtools/commit/2aaa9c10a383e3a7ab20b3ab14639781fd7bb2eb))
+
+
+
+
+
 # 3.8.0 (2021-03-06)
 
 ### Bug Fixes

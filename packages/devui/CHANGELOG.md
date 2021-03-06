@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-8](https://github.com/reduxjs/redux-devtools/compare/devui@1.0.0-7...devui@1.0.0-8) (2021-03-06)
+
+
+### Features
+
+* update peer dependencies to allow react@^17 ([#703](https://github.com/reduxjs/redux-devtools/issues/703)) ([2aaa9c1](https://github.com/reduxjs/redux-devtools/commit/2aaa9c10a383e3a7ab20b3ab14639781fd7bb2eb))
+
+
+
+
+
 # [1.0.0-7](https://github.com/reduxjs/redux-devtools/compare/devui@1.0.0-6...devui@1.0.0-7) (2021-03-06)
 
 ### Bug Fixes
