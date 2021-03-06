@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package counter-redux
 
-
-
-
-
 # [0.1.0](https://github.com/reduxjs/redux-devtools/compare/counter-redux@0.0.1...counter-redux@0.1.0) (2020-09-07)
 
 ### Features

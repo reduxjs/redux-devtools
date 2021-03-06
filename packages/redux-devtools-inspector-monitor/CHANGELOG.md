@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @redux-devtools/inspector-monitor
 
-
-
-
-
 # [0.14.0](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-inspector@0.13.1...redux-devtools-inspector@0.14.0) (2020-09-07)
 
 ### Features

@@ -5,15 +5,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # 1.0.0-5 (2021-03-06)
 
-
 ### Bug Fixes
 
-* **cli:** resolve dependency issues ([#666](https://github.com/reduxjs/redux-devtools/issues/666)) ([e39e439](https://github.com/reduxjs/redux-devtools/commit/e39e43968b445ecbdcdab515050c5338cadabbe6))
-* **redux-devtools-cli:** forward port to spawned electron ([#564](https://github.com/reduxjs/redux-devtools/issues/564)) ([a1c2f06](https://github.com/reduxjs/redux-devtools/commit/a1c2f068b53ad205d448baa86003c3313f7ab2d1))
-
-
-
-
+- **cli:** resolve dependency issues ([#666](https://github.com/reduxjs/redux-devtools/issues/666)) ([e39e439](https://github.com/reduxjs/redux-devtools/commit/e39e43968b445ecbdcdab515050c5338cadabbe6))
+- **redux-devtools-cli:** forward port to spawned electron ([#564](https://github.com/reduxjs/redux-devtools/issues/564)) ([a1c2f06](https://github.com/reduxjs/redux-devtools/commit/a1c2f068b53ad205d448baa86003c3313f7ab2d1))
 
 # [1.0.0-4](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-cli@1.0.0-3...redux-devtools-cli@1.0.0-4) (2020-09-07)
 

@@ -5,14 +5,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.2.0](https://github.com/reduxjs/redux-devtools/compare/todomvc@0.1.0...todomvc@0.2.0) (2021-03-06)
 
-
 ### Features
 
-* **redux-devtools-slider-monitor:** convert example to TypeScript ([#632](https://github.com/reduxjs/redux-devtools/issues/632)) ([ec75d3a](https://github.com/reduxjs/redux-devtools/commit/ec75d3a4b62d0f4b8d52a739a7727142421cc261))
-
-
-
-
+- **redux-devtools-slider-monitor:** convert example to TypeScript ([#632](https://github.com/reduxjs/redux-devtools/issues/632)) ([ec75d3a](https://github.com/reduxjs/redux-devtools/commit/ec75d3a4b62d0f4b8d52a739a7727142421cc261))
 
 # [0.1.0](https://github.com/reduxjs/redux-devtools/compare/todomvc@0.0.1...todomvc@0.1.0) (2020-09-07)
 
