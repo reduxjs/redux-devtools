@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @redux-devtools/app
 
-
-
-
-
 # [1.0.0-4](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-core@1.0.0-3...redux-devtools-core@1.0.0-4) (2020-09-07)
 
 ### Bug Fixes
