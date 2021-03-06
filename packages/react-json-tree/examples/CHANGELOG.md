@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package react-json-tree-example
 
-
-
-
-
 ## [1.1.1](https://github.com/reduxjs/redux-devtools/compare/react-json-tree-example@1.1.0...react-json-tree-example@1.1.1) (2021-03-06)
 
 **Note:** Version bump only for package react-json-tree-example

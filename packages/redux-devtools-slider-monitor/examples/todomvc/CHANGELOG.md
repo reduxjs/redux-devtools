@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package slider-todomvc
 
-
-
-
-
 # [0.1.0](https://github.com/reduxjs/redux-devtools/compare/slider-todomvc@0.0.2...slider-todomvc@0.1.0) (2021-03-06)
 
 ### Features
