@@ -12,14 +12,14 @@ It’s more steps, but you will have full control over monitors and their config
 ### Installation
 
 ```
-npm install --save-dev redux-devtools
+npm install --save-dev @redux-devtools/core
 ```
 
 You’ll also likely want to install some monitors:
 
 ```
-npm install --save-dev redux-devtools-log-monitor
-npm install --save-dev redux-devtools-dock-monitor
+npm install --save-dev @redux-devtools/log-monitor
+npm install --save-dev @redux-devtools/dock-monitor
 ```
 
 ### Usage
@@ -34,11 +34,11 @@ Somewhere in your project, create a `DevTools` component by passing a `monitor` 
 import React from 'react';
 
 // Exported from redux-devtools
-import { createDevTools } from 'redux-devtools';
+import { createDevTools } from '@redux-devtools/core';
 
 // Monitors are separate packages, and you can make a custom one
-import LogMonitor from 'redux-devtools-log-monitor';
-import DockMonitor from 'redux-devtools-dock-monitor';
+import LogMonitor from '@redux-devtools/log-monitor';
+import DockMonitor from '@redux-devtools/dock-monitor';
 
 // createDevTools takes a monitor and produces a DevTools component
 const DevTools = createDevTools(
@@ -113,7 +113,7 @@ If you’d like, you may add another store enhancer called `persistState()`. It 
 
 ```js
 // ...
-import { persistState } from 'redux-devtools';
+import { persistState } from '@redux-devtools/core';
 
 const enhancer = compose(
   // Middleware you want to use in development:
@@ -190,7 +190,7 @@ export default function configureStore(initialState) {
 
 ```js
 import { createStore, applyMiddleware, compose } from 'redux';
-import { persistState } from 'redux-devtools';
+import { persistState } from '@redux-devtools/core';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
