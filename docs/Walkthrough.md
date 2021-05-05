@@ -2,7 +2,7 @@
 
 ## Browser Extension
 
-If you don’t want to bother with installing Redux DevTools and integrating it into your project, consider using [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) for Chrome and Firefox. It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
+If you don’t want to bother with installing Redux DevTools and integrating it into your project, consider using [Redux DevTools Extension](https://github.com/reduxjs/redux-devtools/tree/master/extension) for Chrome and Firefox. It provides access to the most popular monitors, is easy to configure to filter actions, and doesn’t require installing any packages.
 
 ## Manual Integration
 
