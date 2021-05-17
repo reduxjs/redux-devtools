@@ -87,6 +87,6 @@ if (window.isElectron) {
   };
 }
 
-if (isFirefox) {
+if (isFirefox || window.isElectron) {
   chrome.storage.sync = chrome.storage.local;
 }
