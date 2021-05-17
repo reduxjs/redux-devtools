@@ -24,10 +24,6 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
   SelectedComponent?: React.ComponentType<P>;
   selector?: () => P;
 
-  UNSAFE_componentWillReceiveProps(nextProps: TabsProps<P>): void {
-    this.updateTabs(nextProps);
-  }
-
   onMouseUp: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.currentTarget.blur();
   };
@@ -65,6 +61,8 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
   }
 
   render() {
+    this.updateTabs(nextProps);
+    
     const tabsHeader = (
       <TabsHeader
         tabs={this.tabsHeader!}
