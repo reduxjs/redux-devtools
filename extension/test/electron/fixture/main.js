@@ -14,5 +14,5 @@ app.on('ready', () => {
     height: 100,
   });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
-  mainWindow.openDevTools({ detach: true });
+  mainWindow.openDevTools({ mode: 'detach' });
 });
