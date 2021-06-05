@@ -27,7 +27,7 @@ describe('DevTools panel for Electron', function () {
 
   it('should open Redux DevTools tab', async () => {
     expect(await this.driver.getCurrentUrl()).toMatch(
-      /chrome-devtools:\/\/devtools\/bundled\/inspector.html/
+      /chrome-devtools:\/\/devtools\/bundled\/devtools_app.html/
     );
 
     await this.driver.manage().timeouts().pageLoadTimeout(5000);
