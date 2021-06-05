@@ -20,7 +20,7 @@
     "lint": "eslint .",
     "test:app": "cross-env BABEL_ENV=test jest test/app",
     "test:chrome": "jest test/chrome",
-    "test:electron": "jest test/electron && rimraf test/electron/tmp",
+    "test:electron": "jest test/electron",
     "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron"
   },
   "repository": {
@@ -44,8 +44,8 @@
     "bestzip": "^2.1.7",
     "copy-webpack-plugin": "^6.3.1",
     "cross-env": "^7.0.2",
-    "electron": "^3.1.13",
-    "electron-chromedriver": "^3.0.0",
+    "electron": "^5.0.13",
+    "electron-chromedriver": "^5.0.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-15.4": "^1.4.2",
     "eslint": "^7.6.0",

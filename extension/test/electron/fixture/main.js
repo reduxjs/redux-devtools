@@ -1,8 +1,6 @@
 const path = require('path');
 const { app, BrowserWindow } = require('electron');
 
-app.setPath('userData', path.join(__dirname, '../tmp'));
-
 app.on('window-all-closed', app.quit);
 app.on('ready', () => {
   BrowserWindow.addDevToolsExtension(
@@ -12,7 +10,10 @@ app.on('ready', () => {
   const mainWindow = new BrowserWindow({
     width: 150,
     height: 100,
+    webPreferences: {
+      nodeIntegration: true,
+    },
   });
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
-  mainWindow.openDevTools({ mode: 'detach' });
+  mainWindow.loadFile('index.html');
+  mainWindow.webContents.openDevTools({ mode: 'detach' });
 });
