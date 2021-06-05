@@ -26,6 +26,13 @@ describe('DevTools panel for Electron', function () {
   });
 
   it('should open Redux DevTools tab', async () => {
+    const windows = await this.driver.getAllWindowHandles();
+    for (const window of windows) {
+      await this.driver.switchTo().window(window);
+      if ((await this.driver.getCurrentUrl()).startsWith('devtools')) {
+        break;
+      }
+    }
     expect(await this.driver.getCurrentUrl()).toMatch(
       /devtools:\/\/devtools\/bundled\/devtools_app.html/
     );

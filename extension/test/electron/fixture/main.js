@@ -10,6 +10,7 @@ app.whenReady().then(async () => {
     height: 100,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
     },
   });
   mainWindow.loadFile('index.html');
