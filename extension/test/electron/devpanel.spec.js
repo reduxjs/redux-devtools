@@ -4,7 +4,7 @@ import electronPath from 'electron';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const port = 9515;
-const devPanelPath = 'chrome-extension://redux-devtools/devpanel.html';
+const devPanelPath = 'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/window.html';
 
 describe('DevTools panel for Electron', function () {
   beforeAll(async () => {
@@ -40,7 +40,7 @@ describe('DevTools panel for Electron', function () {
         }
         const tabs = UI.inspectorView._tabbedPane._tabs;
         const idList = tabs.map((tab) => tab.id);
-        const reduxPanelId = 'chrome-extension://redux-devtoolsRedux';
+        const reduxPanelId = 'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux';
         if (idList.indexOf(reduxPanelId) !== -1) {
           UI.inspectorView.showPanel(reduxPanelId);
           return callback(reduxPanelId);
@@ -50,7 +50,7 @@ describe('DevTools panel for Electron', function () {
       }
       showReduxPanel();
     });
-    expect(id).toBe('chrome-extension://redux-devtoolsRedux');
+    expect(id).toBe('chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux');
 
     const className = await this.driver
       .findElement(webdriver.By.className(id))
