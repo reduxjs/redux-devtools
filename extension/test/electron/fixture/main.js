@@ -1,18 +1,21 @@
 const path = require('path');
-const { app, BrowserWindow } = require('electron');
-
-app.setPath('userData', path.join(__dirname, '../tmp'));
+const { app, BrowserWindow, session } = require('electron');
 
 app.on('window-all-closed', app.quit);
-app.on('ready', () => {
-  BrowserWindow.addDevToolsExtension(
-    path.join(__dirname, '../../../build/extension')
+app.whenReady().then(async () => {
+  await session.defaultSession.loadExtension(
+    path.join(__dirname, '../../../build/extension'),
+    { allowFileAccess: true }
   );
 
   const mainWindow = new BrowserWindow({
     width: 150,
     height: 100,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
   });
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
-  mainWindow.openDevTools({ detach: true });
+  mainWindow.loadFile('index.html');
+  mainWindow.webContents.openDevTools({ mode: 'detach' });
 });
