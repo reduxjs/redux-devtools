@@ -1,6 +1,7 @@
 import { join } from 'path';
 import webdriver from 'selenium-webdriver';
 import electronPath from 'electron';
+// import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const port = 9515;
@@ -8,6 +9,8 @@ const devPanelPath = 'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/window
 
 describe('DevTools panel for Electron', function () {
   beforeAll(async () => {
+    // chromedriver.start();
+    // await delay(1000);
     this.driver = new webdriver.Builder()
       .usingServer(`http://localhost:${port}`)
       .withCapabilities({
@@ -23,21 +26,28 @@ describe('DevTools panel for Electron', function () {
 
   afterAll(async () => {
     await this.driver.quit();
+    // chromedriver.stop();
   });
 
   it('should open Redux DevTools tab', async () => {
+    const originalWindow = await this.driver.getWindowHandle();
     const windows = await this.driver.getAllWindowHandles();
     for (const window of windows) {
-      await this.driver.switchTo().window(window);
-      if ((await this.driver.getCurrentUrl()).startsWith('devtools')) {
-        break;
+      if (window !== originalWindow) {
+        await this.driver.switchTo().window(window);
+        // if ((await this.driver.getCurrentUrl()).startsWith('devtools')) {
+        //   break;
+        // }
       }
+      // await delay(2000);
     }
     expect(await this.driver.getCurrentUrl()).toMatch(
       /devtools:\/\/devtools\/bundled\/devtools_app.html/
     );
 
     await this.driver.manage().timeouts().pageLoadTimeout(5000);
+
+    // await this.driver.wait(() => window.UI && window.UI.inspectorView, 5000);
 
     const id = await this.driver.executeAsyncScript(function (callback) {
       let attempts = 5;
