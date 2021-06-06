@@ -31,23 +31,22 @@ describe('DevTools panel for Electron', function () {
 
   it('should open Redux DevTools tab', async () => {
     const originalWindow = await this.driver.getWindowHandle();
-    const windows = await this.driver.getAllWindowHandles();
-    for (const window of windows) {
-      if (window !== originalWindow) {
+    console.log(await this.driver.getCurrentUrl());
+    if (!(await this.driver.getCurrentUrl()).startsWith('devtools')) {
+      const windows = await this.driver.getAllWindowHandles();
+      for (const window of windows) {
+        if (window === originalWindow) continue;
         await this.driver.switchTo().window(window);
-        // if ((await this.driver.getCurrentUrl()).startsWith('devtools')) {
-        //   break;
-        // }
+        if ((await this.driver.getCurrentUrl()).startsWith('devtools')) {
+          break;
+        }
       }
-      // await delay(2000);
     }
     expect(await this.driver.getCurrentUrl()).toMatch(
       /devtools:\/\/devtools\/bundled\/devtools_app.html/
     );
 
     await this.driver.manage().timeouts().pageLoadTimeout(5000);
-
-    // await this.driver.wait(() => window.UI && window.UI.inspectorView, 5000);
 
     const id = await this.driver.executeAsyncScript(function (callback) {
       let attempts = 5;
