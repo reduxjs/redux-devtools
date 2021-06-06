@@ -44,6 +44,18 @@ export class Select extends (PureComponent || Component)<SelectProps> {
             controlHeight: this.props.theme.inputHeight,
           },
         })}
+        styles={{
+          container: (base, props) => ({
+            ...base,
+            flexGrow: 1,
+          }),
+          control: (base, props) => ({
+            ...base,
+            backgroundColor: props.isDisabled
+              ? props.theme.colors.neutral10
+              : props.theme.colors.neutral5,
+          }),
+        }}
       />
     );
   }
