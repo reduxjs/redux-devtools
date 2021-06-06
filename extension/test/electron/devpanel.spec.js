@@ -1,7 +1,7 @@
 import { join } from 'path';
 import webdriver from 'selenium-webdriver';
 import electronPath from 'electron';
-// import chromedriver from 'chromedriver';
+import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const port = 9515;
@@ -9,8 +9,8 @@ const devPanelPath = 'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/window
 
 describe('DevTools panel for Electron', function () {
   beforeAll(async () => {
-    // chromedriver.start();
-    // await delay(1000);
+    chromedriver.start();
+    await delay(1000);
     this.driver = new webdriver.Builder()
       .usingServer(`http://localhost:${port}`)
       .withCapabilities({
@@ -26,13 +26,12 @@ describe('DevTools panel for Electron', function () {
 
   afterAll(async () => {
     await this.driver.quit();
-    // chromedriver.stop();
+    chromedriver.stop();
   });
 
   it('should open Redux DevTools tab', async () => {
-    const originalWindow = await this.driver.getWindowHandle();
-    console.log(await this.driver.getCurrentUrl());
     if (!(await this.driver.getCurrentUrl()).startsWith('devtools')) {
+      const originalWindow = await this.driver.getWindowHandle();
       const windows = await this.driver.getAllWindowHandles();
       for (const window of windows) {
         if (window === originalWindow) continue;
@@ -54,12 +53,14 @@ describe('DevTools panel for Electron', function () {
         if (attempts === 0) {
           return callback('Redux panel not found');
         }
-        const tabs = UI.inspectorView._tabbedPane._tabs;
-        const idList = tabs.map((tab) => tab.id);
-        const reduxPanelId = 'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux';
-        if (idList.indexOf(reduxPanelId) !== -1) {
-          UI.inspectorView.showPanel(reduxPanelId);
-          return callback(reduxPanelId);
+        if (UI.inspectorView) {
+          const tabs = UI.inspectorView._tabbedPane._tabs;
+          const idList = tabs.map((tab) => tab.id);
+          const reduxPanelId = 'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux';
+          if (idList.indexOf(reduxPanelId) !== -1) {
+            UI.inspectorView.showPanel(reduxPanelId);
+            return callback(reduxPanelId);
+          }
         }
         attempts--;
         setTimeout(showReduxPanel, 500);
