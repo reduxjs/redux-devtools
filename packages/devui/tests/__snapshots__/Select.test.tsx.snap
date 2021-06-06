@@ -2,7 +2,7 @@
 
 exports[`Select renders correctly 1`] = `
 <div
-  class=" css-2b097c-container"
+  class=" css-butsr4-container"
 >
   <div
     class=" css-vmgz7k-control"
@@ -70,7 +70,7 @@ exports[`Select renders correctly 1`] = `
 
 exports[`Select renders with props 1`] = `
 <div
-  class=" css-2b097c-container"
+  class=" css-butsr4-container"
 >
   <div
     class=" css-vmgz7k-control"
@@ -312,6 +312,12 @@ exports[`Select should select another option 1`] = `
             },
           ]
         }
+        styles={
+          Object {
+            "container": [Function],
+            "control": [Function],
+          }
+        }
         theme={[Function]}
       >
         <Select
@@ -368,7 +374,12 @@ exports[`Select should select another option 1`] = `
           pageSize={5}
           placeholder="Select..."
           screenReaderStatus={[Function]}
-          styles={Object {}}
+          styles={
+            Object {
+              "container": [Function],
+              "control": [Function],
+            }
+          }
           tabIndex="0"
           tabSelectsValue={true}
           theme={[Function]}
@@ -460,7 +471,10 @@ exports[`Select should select another option 1`] = `
                 "pageSize": 5,
                 "placeholder": "Select...",
                 "screenReaderStatus": [Function],
-                "styles": Object {},
+                "styles": Object {
+                  "container": [Function],
+                  "control": [Function],
+                },
                 "tabIndex": "0",
                 "tabSelectsValue": true,
                 "theme": [Function],
@@ -506,6 +520,7 @@ exports[`Select should select another option 1`] = `
                 Object {
                   "boxSizing": "border-box",
                   "direction": null,
+                  "flexGrow": 1,
                   "label": "container",
                   "pointerEvents": null,
                   "position": "relative",
@@ -514,7 +529,7 @@ exports[`Select should select another option 1`] = `
               onKeyDown={[Function]}
             >
               <div
-                className=" css-2b097c-container"
+                className=" css-butsr4-container"
                 onKeyDown={[Function]}
               >
                 <Control
@@ -605,7 +620,10 @@ exports[`Select should select another option 1`] = `
                       "pageSize": 5,
                       "placeholder": "Select...",
                       "screenReaderStatus": [Function],
-                      "styles": Object {},
+                      "styles": Object {
+                        "container": [Function],
+                        "control": [Function],
+                      },
                       "tabIndex": "0",
                       "tabSelectsValue": true,
                       "theme": [Function],
@@ -758,7 +776,10 @@ exports[`Select should select another option 1`] = `
                             "pageSize": 5,
                             "placeholder": "Select...",
                             "screenReaderStatus": [Function],
-                            "styles": Object {},
+                            "styles": Object {
+                              "container": [Function],
+                              "control": [Function],
+                            },
                             "tabIndex": "0",
                             "tabSelectsValue": true,
                             "theme": [Function],
@@ -884,7 +905,10 @@ exports[`Select should select another option 1`] = `
                                   "pageSize": 5,
                                   "placeholder": "Select...",
                                   "screenReaderStatus": [Function],
-                                  "styles": Object {},
+                                  "styles": Object {
+                                    "container": [Function],
+                                    "control": [Function],
+                                  },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
                                   "theme": [Function],
@@ -1112,7 +1136,10 @@ exports[`Select should select another option 1`] = `
                             "pageSize": 5,
                             "placeholder": "Select...",
                             "screenReaderStatus": [Function],
-                            "styles": Object {},
+                            "styles": Object {
+                              "container": [Function],
+                              "control": [Function],
+                            },
                             "tabIndex": "0",
                             "tabSelectsValue": true,
                             "theme": [Function],
@@ -1247,7 +1274,10 @@ exports[`Select should select another option 1`] = `
                                   "pageSize": 5,
                                   "placeholder": "Select...",
                                   "screenReaderStatus": [Function],
-                                  "styles": Object {},
+                                  "styles": Object {
+                                    "container": [Function],
+                                    "control": [Function],
+                                  },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
                                   "theme": [Function],
@@ -1393,7 +1423,10 @@ exports[`Select should select another option 1`] = `
                                   "pageSize": 5,
                                   "placeholder": "Select...",
                                   "screenReaderStatus": [Function],
-                                  "styles": Object {},
+                                  "styles": Object {
+                                    "container": [Function],
+                                    "control": [Function],
+                                  },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
                                   "theme": [Function],
@@ -1585,7 +1618,10 @@ exports[`Select should select another option 1`] = `
                       "pageSize": 5,
                       "placeholder": "Select...",
                       "screenReaderStatus": [Function],
-                      "styles": Object {},
+                      "styles": Object {
+                        "container": [Function],
+                        "control": [Function],
+                      },
                       "tabIndex": "0",
                       "tabSelectsValue": true,
                       "theme": [Function],
@@ -1715,7 +1751,10 @@ exports[`Select should select another option 1`] = `
                         "pageSize": 5,
                         "placeholder": "Select...",
                         "screenReaderStatus": [Function],
-                        "styles": Object {},
+                        "styles": Object {
+                          "container": [Function],
+                          "control": [Function],
+                        },
                         "tabIndex": "0",
                         "tabSelectsValue": true,
                         "theme": [Function],
@@ -1867,7 +1906,10 @@ exports[`Select should select another option 1`] = `
                                   "pageSize": 5,
                                   "placeholder": "Select...",
                                   "screenReaderStatus": [Function],
-                                  "styles": Object {},
+                                  "styles": Object {
+                                    "container": [Function],
+                                    "control": [Function],
+                                  },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
                                   "theme": [Function],
@@ -2023,7 +2065,10 @@ exports[`Select should select another option 1`] = `
                                         "pageSize": 5,
                                         "placeholder": "Select...",
                                         "screenReaderStatus": [Function],
-                                        "styles": Object {},
+                                        "styles": Object {
+                                          "container": [Function],
+                                          "control": [Function],
+                                        },
                                         "tabIndex": "0",
                                         "tabSelectsValue": true,
                                         "theme": [Function],
@@ -2216,6 +2261,12 @@ exports[`Select shouldn't find any results 1`] = `
             },
           ]
         }
+        styles={
+          Object {
+            "container": [Function],
+            "control": [Function],
+          }
+        }
         theme={[Function]}
       >
         <Select
@@ -2272,7 +2323,12 @@ exports[`Select shouldn't find any results 1`] = `
           pageSize={5}
           placeholder="Select..."
           screenReaderStatus={[Function]}
-          styles={Object {}}
+          styles={
+            Object {
+              "container": [Function],
+              "control": [Function],
+            }
+          }
           tabIndex="0"
           tabSelectsValue={true}
           theme={[Function]}
@@ -2364,7 +2420,10 @@ exports[`Select shouldn't find any results 1`] = `
                 "pageSize": 5,
                 "placeholder": "Select...",
                 "screenReaderStatus": [Function],
-                "styles": Object {},
+                "styles": Object {
+                  "container": [Function],
+                  "control": [Function],
+                },
                 "tabIndex": "0",
                 "tabSelectsValue": true,
                 "theme": [Function],
@@ -2410,6 +2469,7 @@ exports[`Select shouldn't find any results 1`] = `
                 Object {
                   "boxSizing": "border-box",
                   "direction": null,
+                  "flexGrow": 1,
                   "label": "container",
                   "pointerEvents": null,
                   "position": "relative",
@@ -2418,7 +2478,7 @@ exports[`Select shouldn't find any results 1`] = `
               onKeyDown={[Function]}
             >
               <div
-                className=" css-2b097c-container"
+                className=" css-butsr4-container"
                 onKeyDown={[Function]}
               >
                 <Control
@@ -2509,7 +2569,10 @@ exports[`Select shouldn't find any results 1`] = `
                       "pageSize": 5,
                       "placeholder": "Select...",
                       "screenReaderStatus": [Function],
-                      "styles": Object {},
+                      "styles": Object {
+                        "container": [Function],
+                        "control": [Function],
+                      },
                       "tabIndex": "0",
                       "tabSelectsValue": true,
                       "theme": [Function],
@@ -2662,7 +2725,10 @@ exports[`Select shouldn't find any results 1`] = `
                             "pageSize": 5,
                             "placeholder": "Select...",
                             "screenReaderStatus": [Function],
-                            "styles": Object {},
+                            "styles": Object {
+                              "container": [Function],
+                              "control": [Function],
+                            },
                             "tabIndex": "0",
                             "tabSelectsValue": true,
                             "theme": [Function],
@@ -2788,7 +2854,10 @@ exports[`Select shouldn't find any results 1`] = `
                                   "pageSize": 5,
                                   "placeholder": "Select...",
                                   "screenReaderStatus": [Function],
-                                  "styles": Object {},
+                                  "styles": Object {
+                                    "container": [Function],
+                                    "control": [Function],
+                                  },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
                                   "theme": [Function],
@@ -3016,7 +3085,10 @@ exports[`Select shouldn't find any results 1`] = `
                             "pageSize": 5,
                             "placeholder": "Select...",
                             "screenReaderStatus": [Function],
-                            "styles": Object {},
+                            "styles": Object {
+                              "container": [Function],
+                              "control": [Function],
+                            },
                             "tabIndex": "0",
                             "tabSelectsValue": true,
                             "theme": [Function],
@@ -3151,7 +3223,10 @@ exports[`Select shouldn't find any results 1`] = `
                                   "pageSize": 5,
                                   "placeholder": "Select...",
                                   "screenReaderStatus": [Function],
-                                  "styles": Object {},
+                                  "styles": Object {
+                                    "container": [Function],
+                                    "control": [Function],
+                                  },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
                                   "theme": [Function],
@@ -3297,7 +3372,10 @@ exports[`Select shouldn't find any results 1`] = `
                                   "pageSize": 5,
                                   "placeholder": "Select...",
                                   "screenReaderStatus": [Function],
-                                  "styles": Object {},
+                                  "styles": Object {
+                                    "container": [Function],
+                                    "control": [Function],
+                                  },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
                                   "theme": [Function],
@@ -3489,7 +3567,10 @@ exports[`Select shouldn't find any results 1`] = `
                       "pageSize": 5,
                       "placeholder": "Select...",
                       "screenReaderStatus": [Function],
-                      "styles": Object {},
+                      "styles": Object {
+                        "container": [Function],
+                        "control": [Function],
+                      },
                       "tabIndex": "0",
                       "tabSelectsValue": true,
                       "theme": [Function],
@@ -3619,7 +3700,10 @@ exports[`Select shouldn't find any results 1`] = `
                         "pageSize": 5,
                         "placeholder": "Select...",
                         "screenReaderStatus": [Function],
-                        "styles": Object {},
+                        "styles": Object {
+                          "container": [Function],
+                          "control": [Function],
+                        },
                         "tabIndex": "0",
                         "tabSelectsValue": true,
                         "theme": [Function],
@@ -3771,7 +3855,10 @@ exports[`Select shouldn't find any results 1`] = `
                                   "pageSize": 5,
                                   "placeholder": "Select...",
                                   "screenReaderStatus": [Function],
-                                  "styles": Object {},
+                                  "styles": Object {
+                                    "container": [Function],
+                                    "control": [Function],
+                                  },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
                                   "theme": [Function],
@@ -3906,7 +3993,10 @@ exports[`Select shouldn't find any results 1`] = `
                                         "pageSize": 5,
                                         "placeholder": "Select...",
                                         "screenReaderStatus": [Function],
-                                        "styles": Object {},
+                                        "styles": Object {
+                                          "container": [Function],
+                                          "control": [Function],
+                                        },
                                         "tabIndex": "0",
                                         "tabSelectsValue": true,
                                         "theme": [Function],
