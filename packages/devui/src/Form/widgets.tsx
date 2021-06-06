@@ -4,8 +4,17 @@ import Select from '../Select';
 import Slider from '../Slider';
 
 /* eslint-disable react/prop-types */
-const SelectWidget: Widget = ({ options, ...rest }) => (
-  <Select options={options.enumOptions} {...rest} />
+const SelectWidget: Widget = ({ options, onChange, value, ...rest }) => (
+  <Select
+    options={options.enumOptions}
+    onChange={(option: { value: string }) => {
+      onChange(option.value);
+    }}
+    value={(options.enumOptions as { value: string }[]).find(
+      (option) => option.value === value
+    )}
+    {...rest}
+  />
 );
 
 const RangeWidget: Widget = (({
