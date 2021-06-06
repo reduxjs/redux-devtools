@@ -3,7 +3,10 @@ const { app, BrowserWindow, session } = require('electron');
 
 app.on('window-all-closed', app.quit);
 app.whenReady().then(async () => {
-  await session.defaultSession.loadExtension(path.join(__dirname, '../../../build/extension'), { allowFileAccess: true });
+  await session.defaultSession.loadExtension(
+    path.join(__dirname, '../../../build/extension'),
+    { allowFileAccess: true }
+  );
 
   const mainWindow = new BrowserWindow({
     width: 150,

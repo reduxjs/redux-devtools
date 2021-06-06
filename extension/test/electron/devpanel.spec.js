@@ -5,7 +5,8 @@ import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const port = 9515;
-const devPanelPath = 'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/window.html';
+const devPanelPath =
+  'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/window.html';
 
 describe('DevTools panel for Electron', function () {
   beforeAll(async () => {
@@ -56,7 +57,8 @@ describe('DevTools panel for Electron', function () {
         if (UI.inspectorView) {
           const tabs = UI.inspectorView._tabbedPane._tabs;
           const idList = tabs.map((tab) => tab.id);
-          const reduxPanelId = 'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux';
+          const reduxPanelId =
+            'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux';
           if (idList.indexOf(reduxPanelId) !== -1) {
             UI.inspectorView.showPanel(reduxPanelId);
             return callback(reduxPanelId);
