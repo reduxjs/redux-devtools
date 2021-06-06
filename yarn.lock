@@ -3903,15 +3903,15 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.39.tgz#ce1122758d0608de8303667cebf171f44192629b"
   integrity sha512-dJLCxrpQmgyxYGcl0Ae9MTsQgI22qHHcGFj/8VKu7McJA5zQpnuGjoksnxbo1JxSjW/Nahnl13W8MYZf01CZHA==
 
-"@types/node@^12.0.12":
-  version "12.12.54"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.54.tgz#a4b58d8df3a4677b6c08bfbc94b7ad7a7a5f82d1"
-  integrity sha512-ge4xZ3vSBornVYlDnk7yZ0gK6ChHf/CHB7Gl1I0Jhah8DDnEQqBzgohYG4FX4p81TNirSETOiSyn+y1r9/IR6w==
-
 "@types/node@^14.6.0":
   version "14.6.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.6.0.tgz#7d4411bf5157339337d7cff864d9ff45f177b499"
   integrity sha512-mikldZQitV94akrc4sCcSjtJfsTKt4p+e/s0AGscVA6XArQ9kFclP+ZiYUMnq987rc6QlYxXv/EivqlfSLxpKA==
+
+"@types/node@^14.6.2":
+  version "14.17.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.2.tgz#1e94476db57ec93a372c7f7d29aa5707cfb92339"
+  integrity sha512-sld7b/xmFum66AAKuz/rp/CUO8+98fMpyQ3SBfzzBNGMd/1iHBTAg9oyAvcYlAj46bpc74r91jSw2iFdnx29nw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -7937,13 +7937,13 @@ electron-to-chromium@^1.3.523:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.526.tgz#0e004899edf75afc172cce1b8189aac5dca646aa"
   integrity sha512-HiroW5ZbGwgT8kCnoEO8qnGjoTPzJxduvV/Vv/wH63eo2N6Zj3xT5fmmaSPAPUM05iN9/5fIEkIg3owTtV6QZg==
 
-electron@^9.2.0:
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-9.2.0.tgz#d9fc8c8c9e5109669c366bd7b9ba83b06095d7a4"
-  integrity sha512-4ecZ3rcGg//Gk4fAK3Jo61T+uh36JhU6HHR/PTujQqQiBw1g4tNPd4R2hGGth2d+7FkRIs5GdRNef7h64fQEMw==
+electron@^13.1.1:
+  version "13.1.1"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-13.1.1.tgz#de1ea908bcac2197d7a5a373fb68c0c66043e10e"
+  integrity sha512-kySSb5CbIkWU2Kd9mf2rpGZC9p1nWhVVNl+CJjuOUGeVPXHbojHvTkDU1iC8AvV28eik3gqHisSJss40Caprog==
   dependencies:
     "@electron/get" "^1.0.1"
-    "@types/node" "^12.0.12"
+    "@types/node" "^14.6.2"
     extract-zip "^1.0.3"
 
 element-resize-detector@^1.2.1:
