@@ -81,11 +81,18 @@ export class Select<
   };
 }
 
+interface ExternalSelectProps<
+  Option extends OptionTypeBase = OptionTypeBase,
+  IsMulti extends boolean = false
+> extends Omit<ReactSelectProps<Option, IsMulti>, 'theme'> {
+  theme?: Theme;
+}
+
 type SelectComponent = <
   Option extends OptionTypeBase = OptionTypeBase,
   IsMulti extends boolean = false
 >(
-  props: SelectProps<Option, IsMulti>
+  props: ExternalSelectProps<Option, IsMulti>
 ) => ReactElement;
 
 export default createThemedComponent(Select) as SelectComponent & {
