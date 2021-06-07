@@ -22,7 +22,10 @@ export default {
   component: Select,
 };
 
-type TemplateArgs = Omit<SelectProps, 'value'> & { value: string };
+type TemplateArgs = Omit<
+  SelectProps<{ value: string; label: string }, boolean>,
+  'value'
+> & { value: string };
 
 // eslint-disable-next-line react/prop-types
 const Template: Story<TemplateArgs> = ({ value, ...args }) => (
