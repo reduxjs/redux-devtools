@@ -81,7 +81,7 @@ export class Select<
   };
 }
 
-interface ExternalSelectProps<
+export interface ExternalSelectProps<
   Option extends OptionTypeBase = OptionTypeBase,
   IsMulti extends boolean = false
 > extends Omit<ReactSelectProps<Option, IsMulti>, 'theme'> {
