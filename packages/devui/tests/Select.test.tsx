@@ -24,14 +24,14 @@ describe('Select', function () {
         onChange={() => {
           // noop
         }}
-        value="one"
-        menuMaxHeight={20}
-        clearable
-        disabled
+        value={options.filter((option) => option.value === 'one')}
+        maxMenuHeight={20}
+        isClearable
+        isDisabled
         isLoading
-        multi
-        searchable={false}
-        openOuterUp
+        isMulti
+        isSearchable={false}
+        menuPlacement="top"
       />
     );
     expect(renderToJson(wrapper)).toMatchSnapshot();
