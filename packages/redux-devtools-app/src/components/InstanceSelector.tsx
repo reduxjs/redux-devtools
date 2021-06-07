@@ -24,8 +24,13 @@ class InstanceSelector extends Component<Props> {
       <Select
         options={this.select}
         // TODO Where's the type-checking?
-        onChange={this.props.onSelect}
-        value={this.props.selected || ''}
+        onChange={(option: { value: string }) =>
+          this.props.onSelect(option.value)
+        }
+        value={
+          this.select.find((option) => option.value === this.props.selected) ||
+          ''
+        }
       />
     );
   }
