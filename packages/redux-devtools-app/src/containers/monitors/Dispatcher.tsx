@@ -205,6 +205,7 @@ class Dispatcher extends Component<Props, State> {
         {actionElement}
         <Toolbar>
           <Select
+            menuPlacement="top"
             onChange={(option) => this.selectActionCreator(option!.value)}
             value={
               options.find((option) => option.value === this.state.selected) ||

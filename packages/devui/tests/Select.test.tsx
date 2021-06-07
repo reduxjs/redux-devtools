@@ -31,6 +31,7 @@ describe('Select', function () {
         isLoading
         isMulti
         isSearchable={false}
+        menuPlacement="top"
       />
     );
     expect(renderToJson(wrapper)).toMatchSnapshot();
