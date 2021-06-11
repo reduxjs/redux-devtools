@@ -15,12 +15,6 @@ export interface TabsProps<P> {
 }
 
 export default class Tabs<P> extends Component<TabsProps<P>> {
-  constructor(props: TabsProps<P>) {
-    super(props);
-    this.updateTabs(props);
-  }
-
-  tabsHeader?: ReactButtonElement[];
   SelectedComponent?: React.ComponentType<P>;
   selector?: () => P;
 
@@ -32,11 +26,11 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
     this.props.onClick(e.currentTarget.value);
   };
 
-  updateTabs(props: TabsProps<P>): void {
-    const tabs = props.tabs;
-    const selected = props.selected;
+  renderTabs() {
+    const tabs = this.props.tabs;
+    const selected = this.props.selected;
 
-    this.tabsHeader = tabs.map((tab, i) => {
+    return tabs.map((tab, i) => {
       let isSelected;
       const value = typeof tab.value !== 'undefined' ? tab.value : tab.name;
       if (value === selected) {
@@ -61,11 +55,9 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
   }
 
   render() {
-    this.updateTabs(nextProps);
-    
     const tabsHeader = (
       <TabsHeader
-        tabs={this.tabsHeader!}
+        tabs={this.renderTabs()}
         items={this.props.tabs}
         main={this.props.main}
         collapsible={this.props.collapsible}
