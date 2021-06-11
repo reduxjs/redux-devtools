@@ -26,9 +26,9 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
     this.props.onClick(e.currentTarget.value);
   };
 
-  renderTabs(props: TabsProps<P>) {
-    const tabs = props.tabs;
-    const selected = props.selected;
+  renderTabs() {
+    const tabs = this.props.tabs;
+    const selected = this.props.selected;
 
     return tabs.map((tab, i) => {
       let isSelected;
