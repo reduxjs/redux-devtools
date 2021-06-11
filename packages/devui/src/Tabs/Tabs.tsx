@@ -24,12 +24,6 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
   SelectedComponent?: React.ComponentType<P>;
   selector?: () => P;
 
-  UNSAFE_componentWillReceiveProps(nextProps: TabsProps<P>) {
-    if (nextProps.selected !== this.props.selected) {
-      this.updateTabs(nextProps);
-    }
-  }
-
   onMouseUp: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.currentTarget.blur();
   };
@@ -38,7 +32,7 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
     this.props.onClick(e.currentTarget.value);
   };
 
-  updateTabs(props: TabsProps<P>) {
+  updateTabs(props: TabsProps<P>): void {
     const tabs = props.tabs;
     const selected = props.selected;
 
@@ -67,6 +61,8 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
   }
 
   render() {
+    this.updateTabs(nextProps);
+    
     const tabsHeader = (
       <TabsHeader
         tabs={this.tabsHeader!}
