@@ -6,8 +6,7 @@ export const MainContainerWrapper = styled.div`
   height: 100%;
   width: 100%;
   flex-flow: column nowrap;
-  flex-shrink: 1;
-  min-height: 0;
+  overflow: auto;
   background-color: ${(props) => color(props.theme.base00, 'lighten', 0.03)};
   color: ${(props) => props.theme.base07};
   font-size: 12px;
@@ -32,8 +31,7 @@ export const MainContainerWrapper = styled.div`
     flex-grow: 1;
     display: flex;
     flex-flow: column nowrap;
-    flex-shrink: 1;
-    min-height: 0;
+    overflow: auto;
 
     > div {
       flex-grow: 1;
@@ -46,6 +44,5 @@ export const ContainerWrapper = styled.div`
   height: 100%;
   width: 100%;
   flex-flow: column nowrap;
-  flex-shrink: 1;
-  min-height: 0;
+  overflow: auto;
 `;
