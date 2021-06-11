@@ -289,7 +289,6 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
   tabSelector: {
     position: 'relative',
-    'z-index': 1,
     display: 'inline-flex',
     float: 'right',
   },

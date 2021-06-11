@@ -182,9 +182,10 @@ class Dispatcher extends Component<Props, State> {
       );
     }
 
-    let options: { value: string | number; label: string }[] = [
-      { value: 'default', label: 'Custom action' },
-    ];
+    let options: {
+      value: 'default' | 'actions-help' | number;
+      label: string;
+    }[] = [{ value: 'default', label: 'Custom action' }];
     if (actionCreators && actionCreators.length > 0) {
       options = options.concat(
         actionCreators.map(({ name, args }, i) => ({
@@ -204,9 +205,12 @@ class Dispatcher extends Component<Props, State> {
         {actionElement}
         <Toolbar>
           <Select
-            openOuterUp
-            onChange={this.selectActionCreator}
-            value={this.state.selected || 'default'}
+            menuPlacement="top"
+            onChange={(option) => this.selectActionCreator(option!.value)}
+            value={
+              options.find((option) => option.value === this.state.selected) ||
+              options.find((option) => option.value === 'default')
+            }
             options={options}
           />
           <Button onClick={this.dispatchAction} primary={this.state.changed}>

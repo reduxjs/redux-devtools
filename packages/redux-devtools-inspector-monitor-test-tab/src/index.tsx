@@ -52,9 +52,9 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
     (this.props.monitorState as { testGenerator?: TestGeneratorMonitorState })
       .testGenerator || {};
 
-  handleSelectTemplate = (selectedTemplate: Template) => {
+  handleSelectTemplate = (selectedTemplate: Template | null | undefined) => {
     const { templates = getDefaultTemplates() } = this.getPersistedState();
-    this.updateState({ selected: templates.indexOf(selectedTemplate) });
+    this.updateState({ selected: templates.indexOf(selectedTemplate!) });
   };
 
   handleCloseTip = () => {
@@ -133,9 +133,9 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
           <div style={{ flexGrow: 1, zIndex: 100 }}>
             <Select
               options={templates}
-              getOptionValue={(template: Template) => template.name}
-              getOptionLabel={(template: Template) => template.name}
-              value={templates.filter((template) => template.name === name)}
+              getOptionValue={(template: Template) => template.name!}
+              getOptionLabel={(template: Template) => template.name!}
+              value={templates.find((template) => template.name === name)}
               onChange={this.handleSelectTemplate}
             />
           </div>

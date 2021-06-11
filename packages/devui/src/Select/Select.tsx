@@ -1,17 +1,26 @@
-import React, { PureComponent, Component } from 'react';
+import React, { PureComponent, Component, ReactElement } from 'react';
 import PropTypes from 'prop-types';
-import ReactSelect, { Props as ReactSelectProps } from 'react-select';
+import ReactSelect, {
+  NamedProps as ReactSelectProps,
+  OptionTypeBase,
+} from 'react-select';
 import createThemedComponent from '../utils/createThemedComponent';
 import { Theme } from '../themes/default';
 
-export interface SelectProps extends Omit<ReactSelectProps, 'theme'> {
+export interface SelectProps<
+  Option extends OptionTypeBase = OptionTypeBase,
+  IsMulti extends boolean = false
+> extends Omit<ReactSelectProps<Option, IsMulti>, 'theme'> {
   theme: Theme;
 }
 
 /**
  * Wrapper around [React Select](https://github.com/JedWatson/react-select).
  */
-export class Select extends (PureComponent || Component)<SelectProps> {
+export class Select<
+  Option extends OptionTypeBase = OptionTypeBase,
+  IsMulti extends boolean = false
+> extends (PureComponent || Component)<SelectProps<Option, IsMulti>> {
   render() {
     return (
       <ReactSelect
@@ -44,6 +53,18 @@ export class Select extends (PureComponent || Component)<SelectProps> {
             controlHeight: this.props.theme.inputHeight,
           },
         })}
+        styles={{
+          container: (base) => ({
+            ...base,
+            flexGrow: 1,
+          }),
+          control: (base, props) => ({
+            ...base,
+            backgroundColor: props.isDisabled
+              ? props.theme.colors.neutral10
+              : props.theme.colors.neutral5,
+          }),
+        }}
       />
     );
   }
@@ -60,4 +81,20 @@ export class Select extends (PureComponent || Component)<SelectProps> {
   };
 }
 
-export default createThemedComponent(Select);
+export interface ExternalSelectProps<
+  Option extends OptionTypeBase = OptionTypeBase,
+  IsMulti extends boolean = false
+> extends Omit<ReactSelectProps<Option, IsMulti>, 'theme'> {
+  theme?: Theme;
+}
+
+type SelectComponent = <
+  Option extends OptionTypeBase = OptionTypeBase,
+  IsMulti extends boolean = false
+>(
+  props: ExternalSelectProps<Option, IsMulti>
+) => ReactElement;
+
+export default createThemedComponent(Select) as SelectComponent & {
+  theme?: Theme;
+};
