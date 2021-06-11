@@ -5,14 +5,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.2.2](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor-trace-tab@0.2.1...@redux-devtools/inspector-monitor-trace-tab@0.2.2) (2021-06-11)
 
-
 ### Bug Fixes
 
-* **app:** fix dependency version of inspector ([#732](https://github.com/reduxjs/redux-devtools/issues/732)) ([30c6971](https://github.com/reduxjs/redux-devtools/commit/30c6971d379c53ec1343a20240b73705751f7445))
-
-
-
-
+- **app:** fix dependency version of inspector ([#732](https://github.com/reduxjs/redux-devtools/issues/732)) ([30c6971](https://github.com/reduxjs/redux-devtools/commit/30c6971d379c53ec1343a20240b73705751f7445))
 
 ## [0.2.1](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor-trace-tab@0.2.0...@redux-devtools/inspector-monitor-trace-tab@0.2.1) (2021-06-11)
 
