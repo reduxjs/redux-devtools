@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-7](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/app@1.0.0-6...@redux-devtools/app@1.0.0-7) (2021-06-11)
+
+
+### Bug Fixes
+
+* fix Select types and usages ([#724](https://github.com/reduxjs/redux-devtools/issues/724)) ([07e409d](https://github.com/reduxjs/redux-devtools/commit/07e409de6a1c3d362929d854542df0c1d74ce18e))
+* **app:** remove unimplemented reports tab ([#731](https://github.com/reduxjs/redux-devtools/issues/731)) ([c4a8fa2](https://github.com/reduxjs/redux-devtools/commit/c4a8fa286cfe3f30133c2f948164001bd2a618ac))
+
+
+
+
+
 # [1.0.0-6](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/app@1.0.0-5...@redux-devtools/app@1.0.0-6) (2021-03-06)
 
 ### Features
