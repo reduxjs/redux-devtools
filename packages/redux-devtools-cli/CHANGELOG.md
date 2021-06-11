@@ -5,14 +5,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [1.0.0-8](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/cli@1.0.0-7...@redux-devtools/cli@1.0.0-8) (2021-06-11)
 
-
 ### Bug Fixes
 
-* **cli:** fix starting Electron app ([#729](https://github.com/reduxjs/redux-devtools/issues/729)) ([457a201](https://github.com/reduxjs/redux-devtools/commit/457a201232d96a5c28dbaf3f8a42259a35b2b364))
-
-
-
-
+- **cli:** fix starting Electron app ([#729](https://github.com/reduxjs/redux-devtools/issues/729)) ([457a201](https://github.com/reduxjs/redux-devtools/commit/457a201232d96a5c28dbaf3f8a42259a35b2b364))
 
 # [1.0.0-7](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/cli@1.0.0-6...@redux-devtools/cli@1.0.0-7) (2021-04-06)
 

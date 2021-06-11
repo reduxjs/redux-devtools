@@ -5,15 +5,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.7.1](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor-test-tab@0.7.0...@redux-devtools/inspector-monitor-test-tab@0.7.1) (2021-06-11)
 
-
 ### Bug Fixes
 
-* fix peer dependencies on inpsector monitor ([#730](https://github.com/reduxjs/redux-devtools/issues/730)) ([0291f5c](https://github.com/reduxjs/redux-devtools/commit/0291f5c95e4340a3b5e30a3efe76a1a1a2bb7f5e))
-* fix Select types and usages ([#724](https://github.com/reduxjs/redux-devtools/issues/724)) ([07e409d](https://github.com/reduxjs/redux-devtools/commit/07e409de6a1c3d362929d854542df0c1d74ce18e))
-
-
-
-
+- fix peer dependencies on inpsector monitor ([#730](https://github.com/reduxjs/redux-devtools/issues/730)) ([0291f5c](https://github.com/reduxjs/redux-devtools/commit/0291f5c95e4340a3b5e30a3efe76a1a1a2bb7f5e))
+- fix Select types and usages ([#724](https://github.com/reduxjs/redux-devtools/issues/724)) ([07e409d](https://github.com/reduxjs/redux-devtools/commit/07e409de6a1c3d362929d854542df0c1d74ce18e))
 
 # [0.7.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor-test-tab@0.6.3...@redux-devtools/inspector-monitor-test-tab@0.7.0) (2021-03-06)
 
