@@ -9,7 +9,7 @@ export default function openApp(app: boolean | string, options: Options) {
       const port = options.port ? `--port=${options.port}` : '';
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       spawn.sync(require('electron'), [
-        path.join(__dirname, '..', 'app'),
+        path.join(__dirname, '..', '..', 'app'),
         port,
       ]);
     } catch (error) {
