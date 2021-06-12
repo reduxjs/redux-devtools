@@ -55,17 +55,20 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.1",
     "@storybook/addon-essentials": "^6.0.21",
     "@storybook/react": "^6.0.21",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
+    "babel-loader": "^8.1.0",
     "csstype": "^3.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.3",
     "enzyme-to-json": "^3.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-is": "^16.13.1"
+    "react-is": "^16.13.1",
+    "webpack": "^4.44.1"
   },
   "peerDependencies": {
     "react": "^16.3.0 || ^17.0.0"
