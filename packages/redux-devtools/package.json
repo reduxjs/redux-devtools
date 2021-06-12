@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/core",
-  "version": "3.7.0",
+  "version": "3.9.0",
   "description": "Redux DevTools with hot reloading and time travel",
   "keywords": [
     "redux",
@@ -40,7 +40,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@redux-devtools/instrument": "^1.10.0",
+    "@redux-devtools/instrument": "^1.11.0",
     "@types/prop-types": "^15.7.3",
     "lodash": "^4.17.19",
     "prop-types": "^15.7.2"
@@ -54,7 +54,7 @@
     "redux": "^4.0.5"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.3.0 || ^16.0.0",
+    "react": "^0.14.9 || ^15.3.0 || ^16.0.0 || ^17.0.0",
     "react-redux": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0",
     "redux": "^3.5.2 || ^4.0.0"
   }

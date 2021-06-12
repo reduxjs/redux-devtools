@@ -1,6 +1,5 @@
 import path from 'path';
 import webpack from 'webpack';
-import TerserPlugin from 'terser-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 
 const extpath = path.join(__dirname, '../src/browser/extension/');
@@ -55,18 +54,7 @@ const baseConfig = (params) => ({
       : []
   ),
   optimization: {
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          output: {
-            comments: false,
-          },
-        },
-        // sourceMap: true,
-        cache: true,
-        parallel: true,
-      }),
-    ],
+    minimize: false,
   },
   performance: {
     hints: false,

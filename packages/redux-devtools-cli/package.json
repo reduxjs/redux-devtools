@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/cli",
-  "version": "1.0.0-4",
+  "version": "1.0.0-9",
   "description": "CLI for remote debugging with Redux DevTools.",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-cli",
   "bugs": {
@@ -10,6 +10,7 @@
   "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "files": [
     "bin",
+    "dist",
     "src",
     "app",
     "index.js",
@@ -41,7 +42,7 @@
     "node": ">=10.0.0"
   },
   "dependencies": {
-    "@redux-devtools/app": "^1.0.0-4",
+    "@redux-devtools/app": "^1.0.0-8",
     "@types/react": "^16.9.46",
     "apollo-server": "^2.18.2",
     "apollo-server-express": "^2.18.2",
@@ -49,7 +50,7 @@
     "chalk": "^4.1.0",
     "cors": "^2.8.5",
     "cross-spawn": "^7.0.3",
-    "electron": "^9.2.0",
+    "electron": "^13.1.1",
     "express": "^4.17.1",
     "getport": "^0.1.0",
     "graphql": "^14.7.0",

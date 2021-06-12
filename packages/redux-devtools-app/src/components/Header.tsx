@@ -7,7 +7,7 @@ import { TiSocialTwitter } from 'react-icons/ti';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import { changeSection } from '../actions';
 
-const tabs = [{ name: 'Actions' }, { name: 'Reports' }, { name: 'Settings' }];
+const tabs = [{ name: 'Actions' }, { name: 'Settings' }];
 
 type DispatchProps = ResolveThunks<typeof actionCreators>;
 interface OwnProps {

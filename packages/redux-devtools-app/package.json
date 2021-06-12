@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/app",
-  "version": "1.0.0-4",
+  "version": "1.0.0-8",
   "description": "Redux DevTools app",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-app",
   "bugs": {
@@ -37,15 +37,15 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@redux-devtools/chart-monitor": "^1.7.2",
-    "@redux-devtools/core": "^3.7.0",
-    "@redux-devtools/inspector-monitor": "^0.14.0",
-    "@redux-devtools/inspector-monitor-test-tab": "^0.6.2",
-    "@redux-devtools/inspector-monitor-trace-tab": "^0.1.3",
-    "@redux-devtools/log-monitor": "^2.1.0",
-    "@redux-devtools/slider-monitor": "^2.0.0-5",
-    "d3-state-visualizer": "^1.3.4",
-    "devui": "^1.0.0-6",
+    "@redux-devtools/chart-monitor": "^1.9.0",
+    "@redux-devtools/core": "^3.9.0",
+    "@redux-devtools/inspector-monitor": "^1.0.0",
+    "@redux-devtools/inspector-monitor-test-tab": "^0.7.2",
+    "@redux-devtools/inspector-monitor-trace-tab": "^0.2.2",
+    "@redux-devtools/log-monitor": "^2.3.0",
+    "@redux-devtools/slider-monitor": "^2.0.0-8",
+    "d3-state-visualizer": "^1.4.0",
+    "devui": "^1.0.0-9",
     "javascript-stringify": "^2.0.1",
     "jsan": "^3.1.13",
     "jsondiffpatch": "^0.4.1",
@@ -61,34 +61,16 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-react": "^7.10.4",
     "@rjsf/core": "^2.4.0",
     "@types/json-schema": "^7.0.6",
     "@types/socketcluster-client": "^13.0.3",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^4.2.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.3",
     "enzyme-to-json": "^3.5.0",
-    "file-loader": "^6.0.0",
-    "html-loader": "^1.1.0",
-    "html-webpack-plugin": "^4.3.0",
-    "jest": "^26.2.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "rimraf": "^3.0.2",
-    "style-loader": "^1.2.1",
-    "url-loader": "^4.1.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-hot-middleware": "^2.25.0"
+    "react-dom": "^16.13.1"
   },
   "peerDependencies": {
-    "react": "^16.3.0"
+    "react": "^16.3.0 || ^17.0.0"
   }
 }

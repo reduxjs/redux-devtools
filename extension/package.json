@@ -1,6 +1,6 @@
 {
   "name": "remotedev-redux-devtools-extension",
-  "version": "2.17.1",
+  "version": "2.17.2",
   "description": "Redux Developer Tools for debugging application state changes.",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/extension",
   "license": "MIT",
@@ -17,8 +17,8 @@
     "build:examples": "babel-node examples/buildAll.js",
     "precompress:extension": "npm run lint && npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron",
     "precompress:firefox": "npm run lint && npm run build:firefox && npm run test:app",
-    "compress:extension": "cd build/extension && bestzip ../extension.zip",
-    "compress:firefox": "cd build/firefox && bestzip ../firefox.zip",
+    "compress:extension": "bestzip build/extension.zip build/extension",
+    "compress:firefox": "bestzip build/extension.zip build/extension",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build",
@@ -27,7 +27,7 @@
     "clean": "rimraf build/ && rimraf dev/",
     "test:app": "cross-env BABEL_ENV=test jest test/app",
     "test:chrome": "jest test/chrome",
-    "test:electron": "jest test/electron && rimraf test/electron/tmp",
+    "test:electron": "jest test/electron",
     "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron"
   },
   "dependencies": {
@@ -64,7 +64,7 @@
     "chromedriver": "^91.0.0",
     "copy-webpack-plugin": "^6.3.1",
     "cross-env": "^7.0.2",
-    "electron": "^2.0.2",
+    "electron": "^13.1.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.3",
     "eslint": "^7.6.0",
@@ -81,10 +81,9 @@
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "rimraf": "^3.0.2",
-    "selenium-webdriver": "^3.0.1",
+    "selenium-webdriver": "^3.6.0",
     "sinon-chrome": "^1.1.2",
     "style-loader": "^1.2.1",
-    "terser-webpack-plugin": "^1.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   }
