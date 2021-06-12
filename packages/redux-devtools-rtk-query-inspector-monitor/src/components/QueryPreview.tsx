@@ -68,7 +68,7 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
                   <li>{`loaded at: ${latestFetch}`}</li>
                   <li>{`requested at: ${startedAt}`}</li>
                 </ul>
-                <div style={{ padding: '1em' }}>
+                <div {...styling('treeWrapper')}>
                   <JSONTree
                     data={data}
                     labelRenderer={this.labelRenderer}

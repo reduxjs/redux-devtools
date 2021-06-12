@@ -1,5 +1,5 @@
 import { QueryStatus } from '@reduxjs/toolkit/dist/query';
-import { QueryInfo } from '../types';
+import { QueryInfo, SelectOption } from '../types';
 
 export interface Comparator<T> {
   (a: T, b: T): number;
@@ -12,7 +12,7 @@ export enum QueryComparators {
   endpointName = 'endpointName',
 }
 
-export const sortQueryOptions: { label: string; value: string }[] = [
+export const sortQueryOptions: SelectOption<QueryComparators>[] = [
   { label: 'fulfilledTimeStamp', value: QueryComparators.fulfilledTimeStamp },
   { label: 'query key', value: QueryComparators.queryKey },
   { label: 'status ', value: QueryComparators.status },

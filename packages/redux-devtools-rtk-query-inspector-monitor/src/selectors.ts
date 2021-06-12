@@ -1,17 +1,13 @@
 import { Action, createSelector, Selector } from '@reduxjs/toolkit';
 import { RtkQueryInspectorProps } from './RtkQueryInspector';
-import { QueryInfo, RtkQueryInspectorMonitorState } from './types';
+import { QueryInfo, SelectorsSource } from './types';
 import { Comparator, queryComparators } from './utils/comparators';
+import { escapeRegExpSpecialCharacter } from './utils/regexp';
 import {
   getApiStatesOf,
   extractAllApiQueries,
   flipComparator,
 } from './utils/rtk-query';
-
-type SelectorsSource<S> = {
-  currentState: S | null;
-  monitorState: RtkQueryInspectorMonitorState;
-};
 
 type InspectorSelector<S, Output> = Selector<SelectorsSource<S>, Output>;
 
@@ -21,16 +17,16 @@ export function computeSelectorSource<S, A extends Action<unknown>>(
 ): SelectorsSource<S> {
   const { computedStates, currentStateIndex, monitorState } = props;
 
-  const currentState =
+  const userState =
     computedStates.length > 0 ? computedStates[currentStateIndex].state : null;
 
   if (
     !previous ||
-    previous.currentState !== currentState ||
+    previous.userState !== userState ||
     previous.monitorState !== monitorState
   ) {
     return {
-      currentState,
+      userState,
       monitorState,
     };
   }
@@ -48,19 +44,20 @@ export interface InspectorSelectors<S> {
     S,
     ReturnType<typeof extractAllApiQueries>
   >;
-  readonly selectAllSortedQueries: InspectorSelector<S, QueryInfo[]>;
+  readonly selectAllVisbileQueries: InspectorSelector<S, QueryInfo[]>;
   readonly selectorCurrentQueryInfo: InspectorSelector<S, QueryInfo | null>;
+  readonly selectSearchQueryRegex: InspectorSelector<S, RegExp | null>;
 }
 
 export function createInspectorSelectors<S>(): InspectorSelectors<S> {
   const selectQueryComparator = ({
     monitorState,
   }: SelectorsSource<S>): Comparator<QueryInfo> => {
-    return queryComparators[monitorState.queryComparator];
+    return queryComparators[monitorState.queryForm.values.queryComparator];
   };
 
   const selectApiStates = createSelector(
-    ({ currentState }: SelectorsSource<S>) => currentState,
+    ({ userState }: SelectorsSource<S>) => userState,
     getApiStatesOf
   );
   const selectAllQueries = createSelector(
@@ -68,21 +65,35 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     extractAllApiQueries
   );
 
-  const selectAllSortedQueries = createSelector(
+  const selectSearchQueryRegex = createSelector(
+    ({ monitorState }: SelectorsSource<S>) =>
+      monitorState.queryForm.values.searchValue,
+    (searchValue) => {
+      if (searchValue.length >= 3) {
+        return new RegExp(escapeRegExpSpecialCharacter(searchValue), 'i');
+      }
+      return null;
+    }
+  );
+
+  const selectAllVisbileQueries = createSelector(
     [
       selectQueryComparator,
       selectAllQueries,
       ({ monitorState }: SelectorsSource<S>) =>
-        monitorState.isAscendingQueryComparatorOrder,
+        monitorState.queryForm.values.isAscendingQueryComparatorOrder,
+      selectSearchQueryRegex,
     ],
-    (comparator, queryList, isAscending) => {
-      console.log({ comparator, queryList, isAscending });
+    (comparator, queryList, isAscending, searchRegex) => {
+      const filteredList = searchRegex
+        ? queryList.filter((queryInfo) => searchRegex.test(queryInfo.queryKey))
+        : queryList.slice();
 
       const computedComparator = isAscending
         ? comparator
         : flipComparator(comparator);
 
-      return queryList.slice().sort(computedComparator);
+      return filteredList.sort(computedComparator);
     }
   );
 
@@ -109,7 +120,8 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     selectQueryComparator,
     selectApiStates,
     selectAllQueries,
-    selectAllSortedQueries,
+    selectAllVisbileQueries,
+    selectSearchQueryRegex,
     selectorCurrentQueryInfo,
   };
 }

@@ -1,19 +1,20 @@
-import React, { ReactNode, FormEvent, MouseEvent } from 'react';
-import { RtkQueryInspectorMonitorState } from '../types';
+import React, { ReactNode, FormEvent, MouseEvent, ChangeEvent } from 'react';
+import { QueryFormValues } from '../types';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 import { Select } from 'devui';
+import { SelectOption } from '../types';
 import { AnyAction } from 'redux';
+import debounce from 'lodash.debounce';
 import { sortQueryOptions, QueryComparators } from '../utils/comparators';
-import {
-  changeIsAscendingQueryComparatorOrder,
-  changeQueryComparator,
-} from '../reducers';
-export interface QueryFormProps
-  extends Pick<
-    RtkQueryInspectorMonitorState,
-    'isAscendingQueryComparatorOrder' | 'queryComparator'
-  > {
+
+export interface QueryFormProps {
   dispatch: (action: AnyAction) => void;
+  values: QueryFormValues;
+  onFormValuesChange: (values: Partial<QueryFormValues>) => void;
+}
+
+interface QueryFormState {
+  searchValue: string;
 }
 
 const ascId = 'rtk-query-rb-asc';
@@ -23,37 +24,71 @@ const searchId = 'rtk-query-search-query';
 
 const searchPlaceholder = 'filter query...';
 
-export class QueryForm extends React.PureComponent<QueryFormProps> {
+export class QueryForm extends React.PureComponent<
+  QueryFormProps,
+  QueryFormState
+> {
+  constructor(props: QueryFormProps) {
+    super(props);
+
+    this.state = {
+      searchValue: props.values.searchValue,
+    };
+  }
+
+  inputSearchRef = React.createRef<HTMLInputElement>();
+
   handleSubmit = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
   };
 
   handleButtonGroupClick = ({ target }: MouseEvent<HTMLElement>): void => {
-    const { isAscendingQueryComparatorOrder: isAsc, dispatch } = this.props;
+    const {
+      values: { isAscendingQueryComparatorOrder: isAsc },
+      onFormValuesChange,
+    } = this.props;
 
     const targetId = (target as HTMLElement)?.id ?? null;
 
     if (targetId === ascId && !isAsc) {
-      dispatch(changeIsAscendingQueryComparatorOrder(true));
+      onFormValuesChange({ isAscendingQueryComparatorOrder: true });
     } else if (targetId === descId && isAsc) {
-      this.props.dispatch(changeIsAscendingQueryComparatorOrder(false));
+      onFormValuesChange({ isAscendingQueryComparatorOrder: false });
     }
   };
 
-  handleSelectComparator = (option: { value: string }): void => {
-    const { dispatch } = this.props;
-
+  handleSelectComparator = (
+    option: SelectOption<QueryComparators> | undefined | null
+  ): void => {
     if (typeof option?.value === 'string') {
-      dispatch(changeQueryComparator(option.value as QueryComparators));
+      this.props.onFormValuesChange({ queryComparator: option.value });
     }
   };
 
-  getSelectedOption = (option: { value: string }): string => option?.value;
+  restoreCaretPosition = (start: number | null, end: number | null): void => {
+    window.requestAnimationFrame(() => {
+      if (this.inputSearchRef.current) {
+        this.inputSearchRef.current.selectionStart = start;
+        this.inputSearchRef.current.selectionEnd = end;
+      }
+    });
+  };
+
+  invalidateSearchValueFromProps = debounce(() => {
+    this.props.onFormValuesChange({
+      searchValue: this.state.searchValue,
+    });
+  }, 150);
+
+  handleSearchChange = (evt: ChangeEvent<HTMLInputElement>): void => {
+    const searchValue = evt.target.value.trim();
+    this.setState({ searchValue });
+    this.invalidateSearchValueFromProps();
+  };
 
   render(): ReactNode {
     const {
-      isAscendingQueryComparatorOrder: isAsc,
-      queryComparator,
+      values: { isAscendingQueryComparatorOrder: isAsc, queryComparator },
     } = this.props;
 
     const isDesc = !isAsc;
@@ -72,24 +107,25 @@ export class QueryForm extends React.PureComponent<QueryFormProps> {
                   filter query
                 </label>
                 <input
+                  ref={this.inputSearchRef}
                   type="search"
+                  value={this.state.searchValue}
+                  onChange={this.handleSearchChange}
                   placeholder={searchPlaceholder}
                   {...styling('querySearch')}
                 />
               </div>
               <div {...styling('sortBySection')}>
                 <label htmlFor={selectId}>Sort by</label>
-                <Select
+                <Select<SelectOption<QueryComparators>>
                   id={selectId}
                   isSearchable={false}
-                  openOuterUp
-                  theme={base16Theme}
+                  theme={base16Theme as any}
                   value={sortQueryOptions.find(
                     (opt) => opt?.value === queryComparator
                   )}
                   options={sortQueryOptions}
                   onChange={this.handleSelectComparator}
-                  selectOption={this.getSelectedOption}
                 />
                 <div
                   tabIndex={0}

@@ -52,6 +52,7 @@ const getSheetFromColorMap = (map: ColorMap) => ({
   inspector: {
     display: 'flex',
     flexFlow: 'column nowrap',
+    overflow: 'hidden',
     width: '100%',
     height: '100%',
     'font-family': 'monaco, Consolas, "Lucida Console", monospace',
@@ -253,6 +254,8 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
   queryPreview: {
     flex: '1 1 50%',
+    overflowX: 'hidden',
+    oveflowY: 'auto',
     display: 'flex',
     'flex-direction': 'column',
     'overflow-y': 'hidden',
@@ -290,6 +293,12 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
   treeItemKey: {
     color: map.TEXT_PLACEHOLDER_COLOR,
+  },
+
+  treeWrapper: {
+    overflowX: 'auto',
+    overflowY: 'auto',
+    padding: '1em',
   },
 });
 

@@ -1,12 +1,21 @@
 import { Action, AnyAction } from 'redux';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RtkQueryInspectorProps } from './RtkQueryInspector';
-import { QueryInfo, RtkQueryInspectorMonitorState } from './types';
+import {
+  QueryInfo,
+  RtkQueryInspectorMonitorState,
+  QueryFormValues,
+} from './types';
 import { QueryComparators } from './utils/comparators';
 
 const initialState: RtkQueryInspectorMonitorState = {
-  queryComparator: QueryComparators.fulfilledTimeStamp,
-  isAscendingQueryComparatorOrder: false,
+  queryForm: {
+    values: {
+      queryComparator: QueryComparators.fulfilledTimeStamp,
+      isAscendingQueryComparatorOrder: false,
+      searchValue: '',
+    },
+  },
   selectedQueryKey: null,
 };
 
@@ -14,14 +23,11 @@ const monitorSlice = createSlice({
   name: 'rtk-query-monitor',
   initialState,
   reducers: {
-    changeQueryComparator(state, action: PayloadAction<QueryComparators>) {
-      state.queryComparator = action.payload;
-    },
-    changeIsAscendingQueryComparatorOrder(
+    changeQueryFormValues(
       state,
-      action: PayloadAction<boolean>
+      action: PayloadAction<Partial<QueryFormValues>>
     ) {
-      state.isAscendingQueryComparatorOrder = !!action.payload;
+      state.queryForm.values = { ...state.queryForm.values, ...action.payload };
     },
     selectQueryKey(
       state,
@@ -45,8 +51,4 @@ export default function reducer<S, A extends Action<unknown>>(
   return output;
 }
 
-export const {
-  changeIsAscendingQueryComparatorOrder,
-  changeQueryComparator,
-  selectQueryKey,
-} = monitorSlice.actions;
+export const { selectQueryKey, changeQueryFormValues } = monitorSlice.actions;

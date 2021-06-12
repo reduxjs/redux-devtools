@@ -3,16 +3,20 @@ import { AnyAction, Dispatch, Action } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import * as themes from 'redux-devtools-themes';
 import { Base16Theme } from 'react-base16-styling';
-import { QueryInfo, RtkQueryInspectorMonitorState } from './types';
+import {
+  QueryFormValues,
+  QueryInfo,
+  RtkQueryInspectorMonitorState,
+} from './types';
 import { createInspectorSelectors, computeSelectorSource } from './selectors';
-import { selectQueryKey } from './reducers';
+import { changeQueryFormValues, selectQueryKey } from './reducers';
 import { QueryList } from './components/QueryList';
 import { StyleUtils } from './styles/createStylingFromTheme';
 import { QueryForm } from './components/QueryForm';
 import { QueryPreview } from './components/QueryPreview';
 
 type SelectorsSource<S> = {
-  currentState: S | null;
+  userState: S | null;
   monitorState: RtkQueryInspectorMonitorState;
 };
 
@@ -47,7 +51,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
     };
   }
 
-  static wideLayout = 500;
+  static wideLayout = 650;
 
   static getDerivedStateFromProps(
     props: RtkQueryInspectorProps<unknown, Action<unknown>>,
@@ -80,17 +84,21 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
     }
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.updateSizeMode();
 
     this.isWideIntervalRef = setInterval(this.updateSizeMode, 200);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     if (this.isWideIntervalRef) {
       clearTimeout(this.isWideIntervalRef as any);
     }
   }
+
+  handleQueryFormValuesChange = (values: Partial<QueryFormValues>): void => {
+    this.props.dispatch(changeQueryFormValues(values) as AnyAction);
+  };
 
   handleSelectQuery = (queryInfo: QueryInfo): void => {
     this.props.dispatch(selectQueryKey(queryInfo) as AnyAction);
@@ -102,7 +110,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
       styleUtils: { styling },
     } = this.props;
     const apiStates = this.selectors.selectApiStates(selectorsSource);
-    const allSortedQueries = this.selectors.selectAllSortedQueries(
+    const allVisibleQueries = this.selectors.selectAllVisbileQueries(
       selectorsSource
     );
 
@@ -112,7 +120,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
 
     console.log('inspector', {
       apiStates,
-      allSortedQueries,
+      allVisibleQueries,
       selectorsSource,
       currentQueryInfo,
     });
@@ -129,14 +137,12 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
         >
           <QueryForm
             dispatch={this.props.dispatch}
-            queryComparator={selectorsSource.monitorState.queryComparator}
-            isAscendingQueryComparatorOrder={
-              selectorsSource.monitorState.isAscendingQueryComparatorOrder
-            }
+            values={selectorsSource.monitorState.queryForm.values}
+            onFormValuesChange={this.handleQueryFormValuesChange}
           />
           <QueryList
             onSelectQuery={this.handleSelectQuery}
-            queryInfos={allSortedQueries}
+            queryInfos={allVisibleQueries}
             selectedQueryKey={selectorsSource.monitorState.selectedQueryKey}
           />
         </div>

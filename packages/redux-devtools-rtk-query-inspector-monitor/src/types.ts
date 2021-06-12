@@ -6,10 +6,16 @@ import { Action } from 'redux';
 import * as themes from 'redux-devtools-themes';
 import { QueryComparators } from './utils/comparators';
 
-export interface RtkQueryInspectorMonitorState {
+export interface QueryFormValues {
   queryComparator: QueryComparators;
   isAscendingQueryComparatorOrder: boolean;
-  selectedQueryKey: Pick<QueryInfo, 'reducerPath' | 'queryKey'> | null;
+  searchValue: string;
+}
+export interface RtkQueryInspectorMonitorState {
+  readonly queryForm: {
+    values: QueryFormValues;
+  };
+  readonly selectedQueryKey: Pick<QueryInfo, 'reducerPath' | 'queryKey'> | null;
 }
 
 export interface RtkQueryInspectorMonitorProps<S, A extends Action<unknown>>
@@ -62,4 +68,14 @@ export interface QueryInfo {
 export interface ApiInfo {
   reducerPath: string;
   apiState: RtkQueryApiState;
+}
+
+export interface SelectOption<T = string> {
+  label: string;
+  value: T;
+}
+
+export interface SelectorsSource<S> {
+  userState: S | null;
+  monitorState: RtkQueryInspectorMonitorState;
 }
