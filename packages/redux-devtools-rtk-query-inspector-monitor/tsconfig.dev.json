@@ -1,10 +1,9 @@
 {
-    "extends": "../../tsconfig.react.base.json",
-    "compilerOptions": {
-      "outDir": "./demo/src/generated-module",
-      "module": "ES2015",
-      "strict": false
-    },
-    "include": ["src"],
-  }
-  
+  "extends": "../../tsconfig.react.base.json",
+  "compilerOptions": {
+    "outDir": "./demo/src/generated-module",
+    "module": "ES2015",
+    "strict": false
+  },
+  "include": ["src"]
+}

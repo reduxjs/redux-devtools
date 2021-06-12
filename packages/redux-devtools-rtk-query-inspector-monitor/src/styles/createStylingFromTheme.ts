@@ -1,5 +1,6 @@
 import jss, { StyleSheet } from 'jss';
 import preset from 'jss-preset-default';
+import { StylingConfig } from 'react-base16-styling';
 import {
   createStyling,
   getBase16Theme,
@@ -50,7 +51,7 @@ type ColorMap = {
 const getSheetFromColorMap = (map: ColorMap) => ({
   inspector: {
     display: 'flex',
-    'flex-direction': 'column',
+    flexFlow: 'column nowrap',
     width: '100%',
     height: '100%',
     'font-family': 'monaco, Consolas, "Lucida Console", monospace',
@@ -60,11 +61,30 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
     'background-color': map.BACKGROUND_COLOR,
     color: map.TEXT_COLOR,
+
+    '&[data-wide-layout="1"]': {
+      flexFlow: 'row nowrap',
+    },
   },
 
   querySectionWrapper: {
     display: 'flex',
-    height: '100%',
+    flex: '0 0 auto',
+    height: '50%',
+    width: '100%',
+    borderColor: map.TAB_BORDER_COLOR,
+
+    '&[data-wide-layout="0"]': {
+      borderBottomWidth: 1,
+      borderStyle: 'solid',
+    },
+
+    '&[data-wide-layout="1"]': {
+      height: '100%',
+      width: '40%',
+      borderRightWidth: 1,
+      borderStyle: 'solid',
+    },
     flexFlow: 'column nowrap',
     '& > :first-child': {
       flex: '0 0 auto',
@@ -230,6 +250,47 @@ const getSheetFromColorMap = (map: ColorMap) => ({
       color: map.TEXT_PLACEHOLDER_COLOR,
     },
   },
+
+  queryPreview: {
+    flex: '1 1 50%',
+    display: 'flex',
+    'flex-direction': 'column',
+    'overflow-y': 'hidden',
+    '& pre': {
+      border: 'inherit',
+      'border-radius': '3px',
+      'line-height': 'inherit',
+      color: 'inherit',
+    },
+
+    'background-color': map.BACKGROUND_COLOR,
+  },
+
+  previewHeader: {
+    flex: '0 0 30px',
+    padding: '5px 10px',
+    'align-items': 'center',
+    'border-bottom-width': '1px',
+    'border-bottom-style': 'solid',
+
+    'background-color': map.HEADER_BACKGROUND_COLOR,
+    'border-bottom-color': map.HEADER_BORDER_COLOR,
+  },
+
+  treeItemPin: {
+    'font-size': '0.7em',
+    'padding-left': '5px',
+    cursor: 'pointer',
+    '&:hover': {
+      'text-decoration': 'underline',
+    },
+
+    color: map.PIN_COLOR,
+  },
+
+  treeItemKey: {
+    color: map.TEXT_PLACEHOLDER_COLOR,
+  },
 });
 
 let themeSheet: StyleSheet;
@@ -256,6 +317,7 @@ export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
 export interface StyleUtils {
   base16Theme: Base16Theme;
   styling: StylingFunction;
+  invertTheme: boolean;
 }
 
 export function createThemeState<S, A extends Action<unknown>>(
@@ -267,10 +329,31 @@ export function createThemeState<S, A extends Action<unknown>>(
   const theme = props.invertTheme ? invertTheme(props.theme) : props.theme;
   const styling = createStylingFromTheme(theme);
 
-  return { base16Theme, styling };
+  return { base16Theme, styling, invertTheme: !!props.invertTheme };
 }
+
+const mockStyling = (...args: any[]) => ({ className: '', style: {} });
 
 export const StyleUtilsContext = createContext<StyleUtils>({
   base16Theme: rtkInspectorTheme,
-  styling: (...args: any[]) => ({ className: '', style: {} }),
+  invertTheme: false,
+  styling: mockStyling,
 });
+
+export function getJsonTreeTheme(base16Theme: Base16Theme): StylingConfig {
+  return {
+    extend: base16Theme,
+    nestedNode: ({ style }, keyPath, nodeType, expanded) => ({
+      style: {
+        ...style,
+        whiteSpace: expanded ? 'inherit' : 'nowrap',
+      },
+    }),
+    nestedNodeItemString: ({ style }, keyPath, nodeType, expanded) => ({
+      style: {
+        ...style,
+        display: expanded ? 'none' : 'inline',
+      },
+    }),
+  };
+}

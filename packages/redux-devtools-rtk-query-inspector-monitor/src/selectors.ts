@@ -49,6 +49,7 @@ export interface InspectorSelectors<S> {
     ReturnType<typeof extractAllApiQueries>
   >;
   readonly selectAllSortedQueries: InspectorSelector<S, QueryInfo[]>;
+  readonly selectorCurrentQueryInfo: InspectorSelector<S, QueryInfo | null>;
 }
 
 export function createInspectorSelectors<S>(): InspectorSelectors<S> {
@@ -85,10 +86,30 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     }
   );
 
+  const selectorCurrentQueryInfo = createSelector(
+    selectAllQueries,
+    ({ monitorState }: SelectorsSource<S>) => monitorState.selectedQueryKey,
+    (allQueries, selectedQueryKey) => {
+      if (!selectedQueryKey) {
+        return null;
+      }
+
+      const currentQueryInfo =
+        allQueries.find(
+          (query) =>
+            query.queryKey === selectedQueryKey.queryKey &&
+            selectedQueryKey.reducerPath === query.reducerPath
+        ) || null;
+
+      return currentQueryInfo;
+    }
+  );
+
   return {
     selectQueryComparator,
     selectApiStates,
     selectAllQueries,
     selectAllSortedQueries,
+    selectorCurrentQueryInfo,
   };
 }

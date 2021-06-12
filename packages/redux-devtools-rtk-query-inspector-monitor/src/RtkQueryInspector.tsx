@@ -1,4 +1,4 @@
-import React, { Component, createRef, CSSProperties, ReactNode } from 'react';
+import React, { Component, createRef, ReactNode } from 'react';
 import { AnyAction, Dispatch, Action } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import * as themes from 'redux-devtools-themes';
@@ -9,11 +9,7 @@ import { selectQueryKey } from './reducers';
 import { QueryList } from './components/QueryList';
 import { StyleUtils } from './styles/createStylingFromTheme';
 import { QueryForm } from './components/QueryForm';
-
-const wrapperStyle: CSSProperties = {
-  width: '100%',
-  height: '100%',
-};
+import { QueryPreview } from './components/QueryPreview';
 
 type SelectorsSource<S> = {
   currentState: S | null;
@@ -29,26 +25,34 @@ export interface RtkQueryInspectorProps<S, A extends Action<unknown>>
   styleUtils: StyleUtils;
 }
 
-type RtkQueryInspectorState<S> = { selectorsSource: SelectorsSource<S> };
+type RtkQueryInspectorState<S> = {
+  selectorsSource: SelectorsSource<S>;
+  isWideLayout: boolean;
+};
 
 class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
   RtkQueryInspectorProps<S, A>,
   RtkQueryInspectorState<S>
 > {
-  divRef = createRef<HTMLDivElement>();
+  inspectorRef = createRef<HTMLDivElement>();
+
+  isWideIntervalRef: number | NodeJS.Timeout | null = null;
 
   constructor(props: RtkQueryInspectorProps<S, A>) {
     super(props);
 
     this.state = {
+      isWideLayout: true,
       selectorsSource: computeSelectorSource(props, null),
     };
   }
 
+  static wideLayout = 500;
+
   static getDerivedStateFromProps(
     props: RtkQueryInspectorProps<unknown, Action<unknown>>,
     state: RtkQueryInspectorState<unknown>
-  ): null | RtkQueryInspectorState<unknown> {
+  ): null | Partial<RtkQueryInspectorState<unknown>> {
     const selectorsSource = computeSelectorSource<unknown, Action<unknown>>(
       props,
       state.selectorsSource
@@ -65,12 +69,35 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
 
   selectors = createInspectorSelectors<S>();
 
-  handleSelectQuery = (queryInfo: QueryInfo) => {
+  updateSizeMode = (): void => {
+    if (this.inspectorRef.current) {
+      const isWideLayout =
+        this.inspectorRef.current.offsetWidth > RtkQueryInspector.wideLayout;
+
+      if (isWideLayout !== this.state.isWideLayout) {
+        this.setState({ isWideLayout });
+      }
+    }
+  };
+
+  componentDidMount() {
+    this.updateSizeMode();
+
+    this.isWideIntervalRef = setInterval(this.updateSizeMode, 200);
+  }
+
+  componentWillUnmount() {
+    if (this.isWideIntervalRef) {
+      clearTimeout(this.isWideIntervalRef as any);
+    }
+  }
+
+  handleSelectQuery = (queryInfo: QueryInfo): void => {
     this.props.dispatch(selectQueryKey(queryInfo) as AnyAction);
   };
 
   render(): ReactNode {
-    const { selectorsSource } = this.state;
+    const { selectorsSource, isWideLayout } = this.state;
     const {
       styleUtils: { styling },
     } = this.props;
@@ -79,11 +106,27 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
       selectorsSource
     );
 
-    console.log('inspector', { apiStates, allSortedQueries, selectorsSource });
+    const currentQueryInfo = this.selectors.selectorCurrentQueryInfo(
+      selectorsSource
+    );
+
+    console.log('inspector', {
+      apiStates,
+      allSortedQueries,
+      selectorsSource,
+      currentQueryInfo,
+    });
 
     return (
-      <div style={wrapperStyle} ref={this.divRef}>
-        <div {...styling('querySectionWrapper')}>
+      <div
+        ref={this.inspectorRef}
+        data-wide-layout={+this.state.isWideLayout}
+        {...styling('inspector')}
+      >
+        <div
+          {...styling('querySectionWrapper')}
+          data-wide-layout={+this.state.isWideLayout}
+        >
           <QueryForm
             dispatch={this.props.dispatch}
             queryComparator={selectorsSource.monitorState.queryComparator}
@@ -97,6 +140,11 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
             selectedQueryKey={selectorsSource.monitorState.selectedQueryKey}
           />
         </div>
+        <QueryPreview
+          selectedQueryInfo={currentQueryInfo}
+          styling={styling}
+          isWideLayout={isWideLayout}
+        />
       </div>
     );
   }

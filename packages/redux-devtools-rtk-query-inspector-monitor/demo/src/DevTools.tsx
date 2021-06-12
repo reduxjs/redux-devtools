@@ -10,5 +10,5 @@ export default createDevTools(
     changeMonitorKey="ctrl-m"
   >
     <RtkQueryInspectorMonitor />
-  </DockMonitor>,
+  </DockMonitor>
 );

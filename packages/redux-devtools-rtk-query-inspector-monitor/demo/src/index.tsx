@@ -12,5 +12,5 @@ ReactDOM.render(
     <App />
     <DevTools />
   </Provider>,
-  rootElement,
+  rootElement
 );

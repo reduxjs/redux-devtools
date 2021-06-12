@@ -1,4 +1,4 @@
-import React, { CSSProperties, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import * as themes from 'redux-devtools-themes';
 import { Action } from 'redux';
@@ -15,18 +15,6 @@ import {
   StyleUtils,
   StyleUtilsContext,
 } from './styles/createStylingFromTheme';
-
-const styles: { container: CSSProperties } = {
-  container: {
-    fontFamily: 'monaco, Consolas, Lucida Console, monospace',
-    position: 'relative',
-    overflowY: 'hidden',
-    width: '100%',
-    height: '100%',
-    minWidth: 300,
-  },
-};
-
 interface DefaultProps<S> {
   select: (state: unknown) => unknown;
   theme: keyof typeof themes | Base16Theme;
@@ -85,20 +73,18 @@ class RtkQueryInspectorMonitor<
 
   render() {
     const {
-      styleUtils: { base16Theme, styling },
+      styleUtils: { base16Theme },
     } = this.state;
 
     const RtkQueryInspectorAsAny = RtkQueryInspector as any;
 
     return (
       <StyleUtilsContext.Provider value={this.state.styleUtils}>
-        <div {...styling(['inspector'])}>
-          <RtkQueryInspectorAsAny
-            {...this.props}
-            theme={base16Theme}
-            styleUtils={this.state.styleUtils}
-          />
-        </div>
+        <RtkQueryInspectorAsAny
+          {...this.props}
+          theme={base16Theme}
+          styleUtils={this.state.styleUtils}
+        />
       </StyleUtilsContext.Provider>
     );
   }
