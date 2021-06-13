@@ -20,7 +20,11 @@ const initialState: RtkQueryInspectorMonitorState = {
 };
 
 const monitorSlice = createSlice({
-  name: 'rtk-query-monitor',
+  /**
+   * `@@` prefix is mandatory.
+   * @see lifedAction @ `packages/redux-devtools-app/src/actions/index.ts`
+   */
+  name: '@@rtk-query-inspector-monitor',
   initialState,
   reducers: {
     changeQueryFormValues(
