@@ -9,3 +9,10 @@ coverage
 .idea
 .eslintcache
 !packages/redux-devtools-slider-monitor/examples/todomvc/dist/index.html
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
