@@ -1,11 +1,6 @@
-sudo: false
 language: node_js
 node_js:
   - 'stable'
-cache:
-  yarn: true
-  directories:
-    - 'node_modules'
 script:
   - yarn build:all
   - yarn lint:all
