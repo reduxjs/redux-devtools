@@ -12,11 +12,10 @@ import {
   createThemeState,
   StyleUtils,
   StyleUtilsContext,
-  base16Themes,
 } from './styles/createStylingFromTheme';
 
 interface DefaultProps {
-  theme: keyof typeof base16Themes;
+  theme: string;
   invertTheme: boolean;
 }
 
@@ -43,7 +42,7 @@ class RtkQueryInspectorMonitor<S, A extends Action<unknown>> extends Component<
   };
 
   static defaultProps = {
-    theme: 'inspector',
+    theme: 'nicinabox',
     invertTheme: false,
   };
 

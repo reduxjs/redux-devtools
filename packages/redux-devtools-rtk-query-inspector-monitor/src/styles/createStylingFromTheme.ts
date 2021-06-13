@@ -1,15 +1,13 @@
 import jss, { StyleSheet } from 'jss';
 import preset from 'jss-preset-default';
-import { StylingConfig } from 'react-base16-styling';
 import {
   createStyling,
   getBase16Theme,
   invertTheme,
   StylingFunction,
+  StylingConfig,
 } from 'react-base16-styling';
 import rgba from 'hex-rgba';
-import { Base16Theme } from 'redux-devtools-themes';
-import { rtkInspectorTheme } from './theme';
 import * as reduxThemes from 'redux-devtools-themes';
 import { Action } from 'redux';
 import { RtkQueryInspectorMonitorProps } from '../types';
@@ -17,7 +15,7 @@ import { createContext } from 'react';
 
 jss.setup(preset());
 
-export const colorMap = (theme: Base16Theme) => ({
+export const colorMap = (theme: reduxThemes.Base16Theme) => ({
   TEXT_COLOR: theme.base06,
   TEXT_PLACEHOLDER_COLOR: rgba(theme.base06, 60),
   BACKGROUND_COLOR: theme.base00,
@@ -304,7 +302,7 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
 let themeSheet: StyleSheet;
 
-const getDefaultThemeStyling = (theme: Base16Theme) => {
+const getDefaultThemeStyling = (theme: reduxThemes.Base16Theme) => {
   if (themeSheet) {
     themeSheet.detach();
   }
@@ -316,15 +314,13 @@ const getDefaultThemeStyling = (theme: Base16Theme) => {
   return themeSheet.classes;
 };
 
-export const base16Themes = { ...reduxThemes };
-
 export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
-  defaultBase16: rtkInspectorTheme,
-  base16Themes,
+  defaultBase16: reduxThemes.nicinabox,
+  base16Themes: { ...reduxThemes },
 });
 
 export interface StyleUtils {
-  base16Theme: Base16Theme;
+  base16Theme: reduxThemes.Base16Theme;
   styling: StylingFunction;
   invertTheme: boolean;
 }
@@ -333,7 +329,7 @@ export function createThemeState<S, A extends Action<unknown>>(
   props: RtkQueryInspectorMonitorProps<S, A>
 ): StyleUtils {
   const base16Theme =
-    getBase16Theme(props.theme, base16Themes) ?? rtkInspectorTheme;
+    getBase16Theme(props.theme, { ...reduxThemes }) ?? reduxThemes.nicinabox;
 
   const theme = props.invertTheme ? invertTheme(props.theme) : props.theme;
   const styling = createStylingFromTheme(theme);
@@ -341,15 +337,17 @@ export function createThemeState<S, A extends Action<unknown>>(
   return { base16Theme, styling, invertTheme: !!props.invertTheme };
 }
 
-const mockStyling = (...args: any[]) => ({ className: '', style: {} });
+const mockStyling = () => ({ className: '', style: {} });
 
 export const StyleUtilsContext = createContext<StyleUtils>({
-  base16Theme: rtkInspectorTheme,
+  base16Theme: reduxThemes.nicinabox,
   invertTheme: false,
   styling: mockStyling,
 });
 
-export function getJsonTreeTheme(base16Theme: Base16Theme): StylingConfig {
+export function getJsonTreeTheme(
+  base16Theme: reduxThemes.Base16Theme
+): StylingConfig {
   return {
     extend: base16Theme,
     nestedNode: ({ style }, keyPath, nodeType, expanded) => ({
