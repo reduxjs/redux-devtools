@@ -41,14 +41,12 @@ const monitorSlice = createSlice({
   },
 });
 
-export default function reducer<S, A extends Action<unknown>>(
+export function reducer<S, A extends Action<unknown>>(
   props: RtkQueryInspectorProps<S, A>,
-  state: RtkQueryInspectorMonitorState | undefined = initialState,
+  state: RtkQueryInspectorMonitorState | undefined,
   action: AnyAction
 ): RtkQueryInspectorMonitorState {
-  const output = monitorSlice.reducer(state, action);
-
-  return output;
+  return monitorSlice.reducer(state, action);
 }
 
 export const { selectQueryKey, changeQueryFormValues } = monitorSlice.actions;

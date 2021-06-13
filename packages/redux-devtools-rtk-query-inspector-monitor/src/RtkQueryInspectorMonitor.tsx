@@ -1,10 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as themes from 'redux-devtools-themes';
 import { Action } from 'redux';
-import { Base16Theme } from 'react-base16-styling';
 import RtkQueryInspector from './RtkQueryInspector';
-import reducer from './reducers';
+import { reducer } from './reducers';
 import {
   ExternalProps,
   RtkQueryInspectorMonitorProps,
@@ -14,35 +12,22 @@ import {
   createThemeState,
   StyleUtils,
   StyleUtilsContext,
+  base16Themes,
 } from './styles/createStylingFromTheme';
-interface DefaultProps<S> {
-  select: (state: unknown) => unknown;
-  theme: keyof typeof themes | Base16Theme;
-  preserveScrollTop: boolean;
-  expandActionRoot: boolean;
-  expandStateRoot: boolean;
-  markStateDiff: boolean;
+
+interface DefaultProps {
+  theme: keyof typeof base16Themes;
+  invertTheme: boolean;
 }
 
 export interface RtkQueryInspectorComponentState {
   readonly styleUtils: StyleUtils;
 }
 
-class RtkQueryInspectorMonitor<
-  S,
-  A extends Action<unknown>
-> extends PureComponent<
+class RtkQueryInspectorMonitor<S, A extends Action<unknown>> extends Component<
   RtkQueryInspectorMonitorProps<S, A>,
   RtkQueryInspectorComponentState
 > {
-  constructor(props: RtkQueryInspectorMonitorProps<S, A>) {
-    super(props);
-
-    this.state = {
-      styleUtils: createThemeState<S, A>(props),
-    };
-  }
-
   static update = reducer;
 
   static propTypes = {
@@ -52,24 +37,23 @@ class RtkQueryInspectorMonitor<
     actionsById: PropTypes.object,
     stagedActionIds: PropTypes.array,
     skippedActionIds: PropTypes.array,
-    monitorState: PropTypes.shape({
-      initialScrollTop: PropTypes.number,
-    }),
-
-    preserveScrollTop: PropTypes.bool,
-    select: PropTypes.func.isRequired,
+    monitorState: PropTypes.object,
     theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     invertTheme: PropTypes.bool,
   };
 
-  static defaultProps: DefaultProps<unknown> = {
-    select: (state: unknown) => state,
-    theme: 'nicinabox',
-    preserveScrollTop: true,
-    expandActionRoot: true,
-    expandStateRoot: true,
-    markStateDiff: false,
+  static defaultProps = {
+    theme: 'inspector',
+    invertTheme: false,
   };
+
+  constructor(props: RtkQueryInspectorMonitorProps<S, A>) {
+    super(props);
+
+    this.state = {
+      styleUtils: createThemeState<S, A>(props),
+    };
+  }
 
   render() {
     const {
@@ -98,5 +82,5 @@ export default (RtkQueryInspectorMonitor as unknown) as React.ComponentType<
     state: RtkQueryInspectorMonitorState | undefined,
     action: Action
   ): RtkQueryInspectorMonitorState;
-  defaultProps: DefaultProps<unknown>;
+  defaultProps: DefaultProps;
 };

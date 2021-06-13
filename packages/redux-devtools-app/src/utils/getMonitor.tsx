@@ -1,8 +1,8 @@
 import React from 'react';
 import LogMonitor from '@redux-devtools/log-monitor';
-import RtkQueryInspectorMonitorWrapper from '../containers/monitors/RtkQueryMonitorWrapper';
 import ChartMonitorWrapper from '../containers/monitors/ChartMonitorWrapper';
 import InspectorWrapper from '../containers/monitors/InspectorWrapper';
+import RtkQueryInspectorMonitor from '@redux-devtools/rtk-query-inspector-monitor/lib/RtkQueryInspectorMonitor';
 
 export const monitors = [
   { value: 'InspectorMonitor', name: 'Inspector' },
@@ -20,7 +20,7 @@ export default function getMonitor({ monitor }: { monitor: string }) {
     case 'ChartMonitor':
       return <ChartMonitorWrapper />;
     case 'RtkQueryMonitor':
-      return <RtkQueryInspectorMonitorWrapper />;
+      return <RtkQueryInspectorMonitor />;
     default:
       return <InspectorWrapper />;
   }
