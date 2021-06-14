@@ -93,7 +93,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
   componentDidMount(): void {
     this.updateSizeMode();
 
-    this.isWideIntervalRef = setInterval(this.updateSizeMode, 200);
+    this.isWideIntervalRef = setInterval(this.updateSizeMode, 300);
   }
 
   componentWillUnmount(): void {
