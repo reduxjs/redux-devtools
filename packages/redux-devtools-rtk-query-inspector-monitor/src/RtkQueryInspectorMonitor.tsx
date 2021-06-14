@@ -7,10 +7,10 @@ import {
   ExternalProps,
   RtkQueryInspectorMonitorProps,
   RtkQueryInspectorMonitorState,
+  StyleUtils,
 } from './types';
 import {
   createThemeState,
-  StyleUtils,
   StyleUtilsContext,
 } from './styles/createStylingFromTheme';
 

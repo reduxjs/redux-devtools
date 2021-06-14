@@ -3377,7 +3377,9 @@ __metadata:
     "@redux-devtools/inspector-monitor-test-tab": ^0.7.2
     "@redux-devtools/inspector-monitor-trace-tab": ^0.2.2
     "@redux-devtools/log-monitor": ^2.3.0
+    "@redux-devtools/rtk-query-inspector-monitor": ^1.0.0
     "@redux-devtools/slider-monitor": ^2.0.0-8
+    "@reduxjs/toolkit": ^1.6.0
     "@rjsf/core": ^2.5.1
     "@types/json-schema": ^7.0.7
     "@types/socketcluster-client": ^13.0.4
@@ -3678,6 +3680,32 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@redux-devtools/rtk-query-inspector-monitor@^1.0.0, @redux-devtools/rtk-query-inspector-monitor@workspace:packages/redux-devtools-rtk-query-inspector-monitor":
+  version: 0.0.0-use.local
+  resolution: "@redux-devtools/rtk-query-inspector-monitor@workspace:packages/redux-devtools-rtk-query-inspector-monitor"
+  dependencies:
+    "@redux-devtools/core": ^3.9.0
+    "@redux-devtools/dock-monitor": ^1.4.0
+    "@reduxjs/toolkit": ^1.6.0
+    "@types/prop-types": ^15.7.3
+    "@types/react": ^16.9.46
+    "@types/redux-devtools-themes": ^1.0.0
+    devui: ^1.0.0-8
+    lodash.debounce: ^4.0.8
+    prop-types: ^15.7.2
+    react: ^16.13.1
+    react-json-tree: ^0.15.0
+    redux: ^4.0.5
+    redux-devtools-themes: ^1.0.0
+  peerDependencies:
+    "@redux-devtools/core": ^3.7.0
+    "@reduxjs/toolkit": ^1.6.0
+    "@types/react": ^16.3.0 || ^17.0.0
+    react: ^16.3.0 || ^17.0.0
+    redux: ^3.4.0 || ^4.0.0
+  languageName: unknown
+  linkType: soft
+
 "@redux-devtools/serialize@^0.3.0, @redux-devtools/serialize@workspace:packages/redux-devtools-serialize":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/serialize@workspace:packages/redux-devtools-serialize"
@@ -3729,6 +3757,26 @@ __metadata:
     redux: ^4.0.5
   languageName: unknown
   linkType: soft
+
+"@reduxjs/toolkit@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "@reduxjs/toolkit@npm:1.6.0"
+  dependencies:
+    immer: ^9.0.1
+    redux: ^4.1.0
+    redux-thunk: ^2.3.0
+    reselect: ^4.0.0
+  peerDependencies:
+    react: ^16.14.0 || ^17.0.0
+    react-redux: ^7.2.1
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-redux:
+      optional: true
+  checksum: b42d66cae4ea23ab23f394dd80ae9879b34dc995eda04a1f8aebc4fdfc03a7d138418ef103325d84594b43a616b7a70d1d306816ea823fbfd40502f56f124533
+  languageName: node
+  linkType: hard
 
 "@restart/context@npm:^2.1.4":
   version: 2.1.4
@@ -5635,7 +5683,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16.14.8, @types/react@npm:>=16.9.11, @types/react@npm:^16, @types/react@npm:^16.14.8":
+"@types/react@npm:*, @types/react@npm:>=16.14.8, @types/react@npm:>=16.9.11, @types/react@npm:^16, @types/react@npm:^16.14.8, @types/react@npm:^16.9.46":
   version: 16.14.8
   resolution: "@types/react@npm:16.14.8"
   dependencies:
@@ -10900,7 +10948,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"devui@^1.0.0-9, devui@workspace:packages/devui":
+"devui@^1.0.0-8, devui@^1.0.0-9, devui@workspace:packages/devui":
   version: 0.0.0-use.local
   resolution: "devui@workspace:packages/devui"
   dependencies:
@@ -14906,6 +14954,13 @@ fsevents@^1.2.7:
   version: 8.0.1
   resolution: "immer@npm:8.0.1"
   checksum: a8c8d531af8f968f4d5a2ec3c5eeb6dd6933c69d216b3f8c55275e34c87926d556db4e3d81f5f038e66f9886e874da4ab4f7ffe228e33d718593820e2f57b68f
+  languageName: node
+  linkType: hard
+
+"immer@npm:^9.0.1":
+  version: 9.0.3
+  resolution: "immer@npm:9.0.3"
+  checksum: 98e0dabde5361afe30fb72d6b662682af2cd9be82919d78955901dabb9851ce00e8655cf935f68f4b055f250f9f33a0f80f94f3e954e7887228ee6710c9d05b4
   languageName: node
   linkType: hard
 
@@ -22584,7 +22639,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react@npm:^16.14.0":
+"react@npm:^16.13.1, react@npm:^16.14.0":
   version: 16.14.0
   resolution: "react@npm:16.14.0"
   dependencies:
@@ -22958,7 +23013,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"redux@npm:^4.0.0, redux@npm:^4.1.0":
+"redux@npm:^4.0.0, redux@npm:^4.0.5, redux@npm:^4.1.0":
   version: 4.1.0
   resolution: "redux@npm:4.1.0"
   dependencies:
@@ -23413,6 +23468,13 @@ fsevents@^1.2.7:
   version: 1.0.0
   resolution: "requires-port@npm:1.0.0"
   checksum: 0db25fb2ac9b4f2345a350846b7ba99d1f25a6686b1728246d14f05450c8f2fc066bdfae4561b4be2627c184a030a27e17268cfefdf46836e271db13734bc49e
+  languageName: node
+  linkType: hard
+
+"reselect@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "reselect@npm:4.0.0"
+  checksum: 3480930929f673f12962cdde140dce48ea8ba171cd428bb2c7639672e41770bd6b64e935bc0400f47cfa960f617c7ac068c4309527373825d11e27262f08c0a3
   languageName: node
   linkType: hard
 

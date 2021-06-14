@@ -40,19 +40,19 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@redux-devtools/dock-monitor": "^1.4.0",
     "@types/prop-types": "^15.7.3",
     "@types/redux-devtools-themes": "^1.0.0",
-    "@redux-devtools/dock-monitor": "^1.4.0",
-    "prop-types": "^15.7.2",
-    "redux-devtools-themes": "^1.0.0",
     "devui": "^1.0.0-8",
+    "lodash.debounce": "^4.0.8",
+    "prop-types": "^15.7.2",
     "react-json-tree": "^0.15.0",
-    "lodash.debounce": "^4.0.8"
+    "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
     "@redux-devtools/core": "^3.9.0",
-    "@types/react": "^16.9.46",
     "@reduxjs/toolkit": "^1.6.0",
+    "@types/react": "^16.9.46",
     "react": "^16.13.1",
     "redux": "^4.0.5"
   },
