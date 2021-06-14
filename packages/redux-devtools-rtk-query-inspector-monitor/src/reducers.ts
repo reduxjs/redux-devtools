@@ -5,6 +5,7 @@ import {
   QueryInfo,
   RtkQueryInspectorMonitorState,
   QueryFormValues,
+  QueryPreviewTabs,
 } from './types';
 import { QueryComparators } from './utils/comparators';
 
@@ -16,6 +17,7 @@ const initialState: RtkQueryInspectorMonitorState = {
       searchValue: '',
     },
   },
+  selectedPreviewTab: QueryPreviewTabs.queryinfo,
   selectedQueryKey: null,
 };
 
@@ -42,6 +44,9 @@ const monitorSlice = createSlice({
         reducerPath: action.payload.reducerPath,
       };
     },
+    selectedPreviewTab(state, action: PayloadAction<QueryPreviewTabs>) {
+      state.selectedPreviewTab = action.payload;
+    },
   },
 });
 
@@ -53,4 +58,8 @@ export function reducer<S, A extends Action<unknown>>(
   return monitorSlice.reducer(state, action);
 }
 
-export const { selectQueryKey, changeQueryFormValues } = monitorSlice.actions;
+export const {
+  selectQueryKey,
+  changeQueryFormValues,
+  selectedPreviewTab,
+} = monitorSlice.actions;

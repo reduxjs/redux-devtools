@@ -1,19 +1,45 @@
 import React, { ReactNode } from 'react';
-import JSONTree from 'react-json-tree';
-import { StylingFunction } from 'react-base16-styling';
-import { DATA_TYPE_KEY } from '../monitor-config';
+import { StyleUtilsContext } from '../styles/createStylingFromTheme';
+import { createTreeItemLabelRenderer } from '../styles/tree';
 import {
-  getJsonTreeTheme,
-  StyleUtilsContext,
-} from '../styles/createStylingFromTheme';
-import { createTreeItemLabelRenderer, getItemString } from '../styles/tree';
-import { QueryInfo } from '../types';
+  QueryPreviewTabOption,
+  QueryPreviewTabs,
+  QueryPreviewTabProps,
+} from '../types';
+import { QueryPreviewHeader } from './QueryPreviewHeader';
+import { QueryPreviewInfo } from './QueryPreviewInfo';
+import { QueryPreviewApiConfig } from './QueryPreviewApiConfig';
+import { QueryPreviewSubscriptions } from './QueryPreviewSubscriptions';
+import { QueryPreviewTags } from './QueryPreviewTags';
 
-export interface QueryPreviewProps {
-  selectedQueryInfo: QueryInfo | null;
-  styling: StylingFunction;
-  isWideLayout: boolean;
+export interface QueryPreviewProps
+  extends Omit<QueryPreviewTabProps, 'base16Theme' | 'invertTheme'> {
+  selectedTab: QueryPreviewTabs;
+  onTabChange: (tab: QueryPreviewTabs) => void;
 }
+
+const tabs: ReadonlyArray<QueryPreviewTabOption> = [
+  {
+    label: 'query',
+    value: QueryPreviewTabs.queryinfo,
+    component: QueryPreviewInfo,
+  },
+  {
+    label: 'tags',
+    value: QueryPreviewTabs.queryTags,
+    component: QueryPreviewTags,
+  },
+  {
+    label: 'subs',
+    value: QueryPreviewTabs.querySubscriptions,
+    component: QueryPreviewSubscriptions,
+  },
+  {
+    label: 'api',
+    value: QueryPreviewTabs.apiConfig,
+    component: QueryPreviewApiConfig,
+  },
+];
 
 export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
   readonly labelRenderer: ReturnType<typeof createTreeItemLabelRenderer>;
@@ -25,68 +51,55 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
   }
 
   render(): ReactNode {
-    const { selectedQueryInfo, isWideLayout } = this.props;
+    const {
+      queryInfo,
+      isWideLayout,
+      selectedTab,
+      apiConfig,
+      onTabChange,
+      querySubscriptions,
+      tags,
+    } = this.props;
 
-    if (!selectedQueryInfo) {
+    const { component: TabComponent } =
+      tabs.find((tab) => tab.value === selectedTab) || tabs[0];
+
+    if (!queryInfo) {
       return (
         <StyleUtilsContext.Consumer>
-          {({ styling }) => <div {...styling('queryPreview')} />}
+          {({ styling }) => (
+            <div {...styling('queryPreview')}>
+              <QueryPreviewHeader
+                selectedTab={selectedTab}
+                onTabChange={onTabChange}
+                tabs={tabs}
+              />
+            </div>
+          )}
         </StyleUtilsContext.Consumer>
       );
     }
-
-    const {
-      query: {
-        endpointName,
-        fulfilledTimeStamp,
-        status,
-        startedTimeStamp,
-        data,
-      },
-      reducerPath,
-    } = selectedQueryInfo;
-
-    const startedAt = startedTimeStamp
-      ? new Date(startedTimeStamp).toISOString()
-      : '-';
-
-    const latestFetch = fulfilledTimeStamp
-      ? new Date(fulfilledTimeStamp).toISOString()
-      : '-';
 
     return (
       <StyleUtilsContext.Consumer>
         {({ styling, base16Theme, invertTheme }) => {
           return (
             <div {...styling('queryPreview')}>
-              <React.Fragment>
-                <div {...styling('previewHeader')}></div>
-                <ul>
-                  <li>{`reducerPath: ${reducerPath ?? '-'}`}</li>
-                  <li>{`endpointName: ${endpointName ?? '-'}`}</li>
-                  <li>{`status: ${status}`}</li>
-                  <li>{`loaded at: ${latestFetch}`}</li>
-                  <li>{`requested at: ${startedAt}`}</li>
-                </ul>
-                <div {...styling('treeWrapper')}>
-                  <JSONTree
-                    data={data}
-                    labelRenderer={this.labelRenderer}
-                    theme={getJsonTreeTheme(base16Theme)}
-                    invertTheme={invertTheme}
-                    getItemString={(type, data) =>
-                      getItemString(
-                        styling,
-                        type,
-                        data,
-                        DATA_TYPE_KEY,
-                        isWideLayout
-                      )
-                    }
-                    hideRoot
-                  />
-                </div>
-              </React.Fragment>
+              <QueryPreviewHeader
+                selectedTab={selectedTab}
+                onTabChange={onTabChange}
+                tabs={tabs}
+              />
+              <TabComponent
+                styling={styling}
+                base16Theme={base16Theme}
+                invertTheme={invertTheme}
+                querySubscriptions={querySubscriptions}
+                queryInfo={queryInfo}
+                tags={tags}
+                apiConfig={apiConfig}
+                isWideLayout={isWideLayout}
+              />
             </div>
           );
         }}

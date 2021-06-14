@@ -4,13 +4,12 @@ import {
   createStyling,
   getBase16Theme,
   invertTheme,
-  StylingFunction,
   StylingConfig,
 } from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import * as reduxThemes from 'redux-devtools-themes';
 import { Action } from 'redux';
-import { RtkQueryInspectorMonitorProps } from '../types';
+import { RtkQueryInspectorMonitorProps, StyleUtils } from '../types';
 import { createContext } from 'react';
 
 jss.setup(preset());
@@ -318,12 +317,6 @@ export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
   defaultBase16: reduxThemes.nicinabox,
   base16Themes: { ...reduxThemes },
 });
-
-export interface StyleUtils {
-  base16Theme: reduxThemes.Base16Theme;
-  styling: StylingFunction;
-  invertTheme: boolean;
-}
 
 export function createThemeState<S, A extends Action<unknown>>(
   props: RtkQueryInspectorMonitorProps<S, A>

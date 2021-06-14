@@ -10,13 +10,15 @@ export enum QueryComparators {
   queryKey = 'key',
   status = 'status',
   endpointName = 'endpointName',
+  apiReducerPath = 'apiReducerPath',
 }
 
 export const sortQueryOptions: SelectOption<QueryComparators>[] = [
   { label: 'fulfilledTimeStamp', value: QueryComparators.fulfilledTimeStamp },
   { label: 'query key', value: QueryComparators.queryKey },
-  { label: 'status ', value: QueryComparators.status },
+  { label: 'status', value: QueryComparators.status },
   { label: 'endpoint', value: QueryComparators.endpointName },
+  { label: 'reducerPath', value: QueryComparators.apiReducerPath },
 ];
 
 function sortQueryByFulfilled(
@@ -46,7 +48,10 @@ function sortQueryByStatus(
   return thisTerm - thatTerm;
 }
 
-function compareStrings(a: string, b: string): number {
+function compareJSONPrimitive<T extends string | number | boolean | null>(
+  a: T,
+  b: T
+): number {
   if (a === b) {
     return 0;
   }
@@ -58,7 +63,7 @@ function sortByQueryKey(
   thisQueryInfo: QueryInfo,
   thatQueryInfo: QueryInfo
 ): number {
-  return compareStrings(thisQueryInfo.queryKey, thatQueryInfo.queryKey);
+  return compareJSONPrimitive(thisQueryInfo.queryKey, thatQueryInfo.queryKey);
 }
 
 function sortQueryByEndpointName(
@@ -68,7 +73,17 @@ function sortQueryByEndpointName(
   const thisEndpointName = thisQueryInfo.query.endpointName ?? '';
   const thatEndpointName = thatQueryInfo.query.endpointName ?? '';
 
-  return compareStrings(thisEndpointName, thatEndpointName);
+  return compareJSONPrimitive(thisEndpointName, thatEndpointName);
+}
+
+function sortByApiReducerPath(
+  thisQueryInfo: QueryInfo,
+  thatQueryInfo: QueryInfo
+): number {
+  return compareJSONPrimitive(
+    thisQueryInfo.reducerPath,
+    thatQueryInfo.reducerPath
+  );
 }
 
 export const queryComparators: Readonly<Record<
@@ -79,4 +94,5 @@ export const queryComparators: Readonly<Record<
   [QueryComparators.status]: sortQueryByStatus,
   [QueryComparators.endpointName]: sortQueryByEndpointName,
   [QueryComparators.queryKey]: sortByQueryKey,
+  [QueryComparators.apiReducerPath]: sortByApiReducerPath,
 };

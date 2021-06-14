@@ -1,10 +1,17 @@
 import { LiftedAction, LiftedState } from '@redux-devtools/instrument';
 import type { createApi } from '@reduxjs/toolkit/query';
-import { Dispatch } from 'react';
-import { Base16Theme } from 'react-base16-styling';
+import { ComponentType, Dispatch } from 'react';
+import { Base16Theme, StylingFunction } from 'react-base16-styling';
 import { Action } from 'redux';
 import * as themes from 'redux-devtools-themes';
 import { QueryComparators } from './utils/comparators';
+
+export enum QueryPreviewTabs {
+  queryinfo,
+  apiConfig,
+  querySubscriptions,
+  queryTags,
+}
 
 export interface QueryFormValues {
   queryComparator: QueryComparators;
@@ -16,6 +23,7 @@ export interface RtkQueryInspectorMonitorState {
     values: QueryFormValues;
   };
   readonly selectedQueryKey: Pick<QueryInfo, 'reducerPath' | 'queryKey'> | null;
+  readonly selectedPreviewTab: QueryPreviewTabs;
 }
 
 export interface RtkQueryInspectorMonitorProps<S, A extends Action<unknown>>
@@ -41,6 +49,10 @@ export type RtkQueryApiState = ReturnType<
 export type RtkQueryState = NonNullable<
   RtkQueryApiState['queries'][keyof RtkQueryApiState]
 >;
+
+export type RtkQueryApiConfig = RtkQueryApiState['config'];
+
+export type RtkQueryProvided = RtkQueryApiState['provided'];
 
 export interface ExternalProps<S, A extends Action<unknown>> {
   dispatch: Dispatch<
@@ -79,3 +91,35 @@ export interface SelectorsSource<S> {
   userState: S | null;
   monitorState: RtkQueryInspectorMonitorState;
 }
+
+export interface StyleUtils {
+  readonly base16Theme: Base16Theme;
+  readonly styling: StylingFunction;
+  readonly invertTheme: boolean;
+}
+
+export type RTKQuerySubscribers = NonNullable<
+  RtkQueryApiState['subscriptions'][keyof RtkQueryApiState['subscriptions']]
+>;
+
+export interface RtkQueryTag {
+  type: string;
+  id?: number | string;
+}
+
+export interface QueryPreviewTabProps extends StyleUtils {
+  queryInfo: QueryInfo | null;
+  apiConfig: RtkQueryApiState['config'] | null;
+  querySubscriptions: RTKQuerySubscribers | null;
+  isWideLayout: boolean;
+  tags: RtkQueryTag[];
+}
+
+export interface TabOption<S, P> extends SelectOption<S> {
+  component: ComponentType<P>;
+}
+
+export type QueryPreviewTabOption = TabOption<
+  QueryPreviewTabs,
+  QueryPreviewTabProps
+>;

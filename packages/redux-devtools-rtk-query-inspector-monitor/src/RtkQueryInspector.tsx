@@ -6,14 +6,20 @@ import { Base16Theme } from 'react-base16-styling';
 import {
   QueryFormValues,
   QueryInfo,
+  QueryPreviewTabs,
   RtkQueryInspectorMonitorState,
+  StyleUtils,
 } from './types';
 import { createInspectorSelectors, computeSelectorSource } from './selectors';
-import { changeQueryFormValues, selectQueryKey } from './reducers';
+import {
+  changeQueryFormValues,
+  selectedPreviewTab,
+  selectQueryKey,
+} from './reducers';
 import { QueryList } from './components/QueryList';
-import { StyleUtils } from './styles/createStylingFromTheme';
 import { QueryForm } from './components/QueryForm';
 import { QueryPreview } from './components/QueryPreview';
+import { getApiStateOf, getQuerySubscriptionsOf } from './utils/rtk-query';
 
 type SelectorsSource<S> = {
   userState: S | null;
@@ -104,6 +110,10 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
     this.props.dispatch(selectQueryKey(queryInfo) as AnyAction);
   };
 
+  handleTabChange = (tab: QueryPreviewTabs): void => {
+    this.props.dispatch(selectedPreviewTab(tab) as AnyAction);
+  };
+
   render(): ReactNode {
     const { selectorsSource, isWideLayout } = this.state;
     const {
@@ -118,11 +128,21 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
       selectorsSource
     );
 
+    const currentRtkApi = getApiStateOf(currentQueryInfo, apiStates);
+    const currentQuerySubscriptions = getQuerySubscriptionsOf(
+      currentQueryInfo,
+      apiStates
+    );
+
+    const currentTags = this.selectors.selectCurrentQueryTags(selectorsSource);
+
     console.log('inspector', {
       apiStates,
       allVisibleQueries,
       selectorsSource,
       currentQueryInfo,
+      currentRtkApi,
+      currentTags,
     });
 
     return (
@@ -147,8 +167,13 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
           />
         </div>
         <QueryPreview
-          selectedQueryInfo={currentQueryInfo}
+          queryInfo={currentQueryInfo}
+          selectedTab={selectorsSource.monitorState.selectedPreviewTab}
+          onTabChange={this.handleTabChange}
           styling={styling}
+          tags={currentTags}
+          querySubscriptions={currentQuerySubscriptions}
+          apiConfig={currentRtkApi?.config ?? null}
           isWideLayout={isWideLayout}
         />
       </div>
