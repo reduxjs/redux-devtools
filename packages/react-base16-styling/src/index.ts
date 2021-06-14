@@ -157,7 +157,7 @@ const getStylingByKeys = (
     .map((key) => mergedStyling[key as string])
     .filter(Boolean);
 
-  const props = styles.reduce(
+  const props = styles.reduce<Styling>(
     (obj, s) => {
       if (typeof s === 'string') {
         obj.className = [obj.className, s].filter(Boolean).join(' ');
@@ -176,7 +176,7 @@ const getStylingByKeys = (
     delete props.className;
   }
 
-  if (Object.keys(props.style).length === 0) {
+  if (Object.keys(props.style!).length === 0) {
     delete props.style;
   }
 
