@@ -1141,6 +1141,8 @@ describe('instrument', () => {
       const importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       const noComputedExportedState = Object.assign({}, exportedState);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       delete noComputedExportedState.computedStates;
 
       importMonitoredLiftedStore.dispatch(
@@ -1184,6 +1186,8 @@ describe('instrument', () => {
     state: LiftedState<S, A, null>
   ) {
     state.actionsById = _.mapValues(state.actionsById, (action) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       delete action.timestamp;
       delete action.stack;
       return action;

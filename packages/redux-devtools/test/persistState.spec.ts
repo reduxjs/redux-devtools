@@ -3,7 +3,6 @@ import { compose, createStore } from 'redux';
 
 describe('persistState', () => {
   const savedLocalStorage = global.localStorage;
-  delete global.localStorage;
 
   beforeEach(() => {
     global.localStorage = {
@@ -119,7 +118,9 @@ describe('persistState', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
-    delete global.localStorage.getItem;
+    global.localStorage.getItem = () => {
+      throw new Error();
+    };
     createStore(reducer, compose(instrument(), persistState('id')));
 
     expect(spy.mock.calls[0]).toContain(
@@ -133,7 +134,9 @@ describe('persistState', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
-    delete global.localStorage.setItem;
+    global.localStorage.setItem = () => {
+      throw new Error();
+    };
     const store = createStore(
       reducer,
       compose(instrument(), persistState('id'))
