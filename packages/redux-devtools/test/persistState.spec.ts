@@ -3,6 +3,8 @@ import { compose, createStore } from 'redux';
 
 describe('persistState', () => {
   const savedLocalStorage = global.localStorage;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   delete global.localStorage;
 
   beforeEach(() => {
@@ -119,6 +121,8 @@ describe('persistState', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     delete global.localStorage.getItem;
     createStore(reducer, compose(instrument(), persistState('id')));
 
@@ -133,6 +137,8 @@ describe('persistState', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     delete global.localStorage.setItem;
     const store = createStore(
       reducer,
