@@ -3,12 +3,11 @@ import { QueryFormValues } from '../types';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 import { Select } from 'devui';
 import { SelectOption } from '../types';
-import { AnyAction } from 'redux';
 import debounce from 'lodash.debounce';
 import { sortQueryOptions, QueryComparators } from '../utils/comparators';
+import { QueryFilters, filterQueryOptions } from '../utils/filters';
 
 export interface QueryFormProps {
-  dispatch: (action: AnyAction) => void;
   values: QueryFormValues;
   onFormValuesChange: (values: Partial<QueryFormValues>) => void;
 }
@@ -21,8 +20,8 @@ const ascId = 'rtk-query-rb-asc';
 const descId = 'rtk-query-rb-desc';
 const selectId = 'rtk-query-comp-select';
 const searchId = 'rtk-query-search-query';
-
-const searchPlaceholder = 'filter query...';
+const filterSelectId = 'rtk-query-search-query-select';
+const searchPlaceholder = 'filter query by...';
 
 export class QueryForm extends React.PureComponent<
   QueryFormProps,
@@ -57,11 +56,19 @@ export class QueryForm extends React.PureComponent<
     }
   };
 
-  handleSelectComparator = (
+  handleSelectComparatorChange = (
     option: SelectOption<QueryComparators> | undefined | null
   ): void => {
     if (typeof option?.value === 'string') {
       this.props.onFormValuesChange({ queryComparator: option.value });
+    }
+  };
+
+  handleSelectFilterChange = (
+    option: SelectOption<QueryFilters> | undefined | null
+  ): void => {
+    if (typeof option?.value === 'string') {
+      this.props.onFormValuesChange({ queryFilter: option.value });
     }
   };
 
@@ -86,9 +93,21 @@ export class QueryForm extends React.PureComponent<
     this.invalidateSearchValueFromProps();
   };
 
+  handleClearSearchClick = (evt: MouseEvent<HTMLButtonElement>): void => {
+    evt.preventDefault();
+
+    if (this.state.searchValue) {
+      this.setState({ searchValue: '' });
+    }
+  };
+
   render(): ReactNode {
     const {
-      values: { isAscendingQueryComparatorOrder: isAsc, queryComparator },
+      values: {
+        isAscendingQueryComparatorOrder: isAsc,
+        queryComparator,
+        queryFilter,
+      },
     } = this.props;
 
     const isDesc = !isAsc;
@@ -106,13 +125,36 @@ export class QueryForm extends React.PureComponent<
                 <label htmlFor={searchId} {...styling('srOnly')}>
                   filter query
                 </label>
-                <input
-                  ref={this.inputSearchRef}
-                  type="search"
-                  value={this.state.searchValue}
-                  onChange={this.handleSearchChange}
-                  placeholder={searchPlaceholder}
-                  {...styling('querySearch')}
+                <div {...styling('querySearch')}>
+                  <input
+                    ref={this.inputSearchRef}
+                    type="search"
+                    value={this.state.searchValue}
+                    onChange={this.handleSearchChange}
+                    placeholder={searchPlaceholder}
+                  />
+                  <button
+                    type="reset"
+                    aria-label="clear search"
+                    data-invisible={
+                      +(this.state.searchValue.length === 0) || undefined
+                    }
+                    onClick={this.handleClearSearchClick}
+                    {...styling('closeButton')}
+                  />
+                </div>
+                <label htmlFor={selectId} {...styling('srOnly')}>
+                  filter by
+                </label>
+                <Select<SelectOption<QueryFilters>>
+                  id={filterSelectId}
+                  isSearchable={false}
+                  options={filterQueryOptions}
+                  theme={base16Theme as any}
+                  value={filterQueryOptions.find(
+                    (opt) => opt?.value === queryFilter
+                  )}
+                  onChange={this.handleSelectFilterChange}
                 />
               </div>
               <div {...styling('sortBySection')}>
@@ -125,7 +167,7 @@ export class QueryForm extends React.PureComponent<
                     (opt) => opt?.value === queryComparator
                   )}
                   options={sortQueryOptions}
-                  onChange={this.handleSelectComparator}
+                  onChange={this.handleSelectComparatorChange}
                 />
                 <div
                   tabIndex={0}

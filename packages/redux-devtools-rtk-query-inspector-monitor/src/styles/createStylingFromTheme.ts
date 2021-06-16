@@ -45,259 +45,310 @@ type ColorMap = {
   [color in Color]: string;
 };
 
-const getSheetFromColorMap = (map: ColorMap) => ({
-  inspector: {
-    display: 'flex',
-    flexFlow: 'column nowrap',
-    overflow: 'hidden',
-    width: '100%',
-    height: '100%',
-    'font-family': 'monaco, Consolas, "Lucida Console", monospace',
-    'font-size': '12px',
-    'font-smoothing': 'antialiased',
-    'line-height': '1.5em',
+const getSheetFromColorMap = (map: ColorMap) => {
+  const appearanceNone = {
+    '-webkit-appearance': 'none',
+  };
 
-    'background-color': map.BACKGROUND_COLOR,
-    color: map.TEXT_COLOR,
-
-    '&[data-wide-layout="1"]': {
-      flexFlow: 'row nowrap',
-    },
-  },
-
-  querySectionWrapper: {
-    display: 'flex',
-    flex: '0 0 auto',
-    height: '50%',
-    width: '100%',
-    borderColor: map.TAB_BORDER_COLOR,
-
-    '&[data-wide-layout="0"]': {
-      borderBottomWidth: 1,
-      borderStyle: 'solid',
-    },
-
-    '&[data-wide-layout="1"]': {
+  return {
+    inspector: {
+      display: 'flex',
+      flexFlow: 'column nowrap',
+      overflow: 'hidden',
+      width: '100%',
       height: '100%',
-      width: '40%',
-      borderRightWidth: 1,
-      borderStyle: 'solid',
-    },
-    flexFlow: 'column nowrap',
-    '& > :first-child': {
-      flex: '0 0 auto',
-      'border-bottom-width': '1px',
-      'border-bottom-style': 'solid',
-      'border-color': map.LIST_BORDER_COLOR,
-    },
-    '& > :nth-child(n + 2)': {
-      flex: '1 1 auto',
-      overflowX: 'hidden',
-      overflowY: 'auto',
-      maxHeight: 'calc(100% - 70px)',
-    },
-  },
+      'font-family': 'monaco, Consolas, "Lucida Console", monospace',
+      'font-size': '12px',
+      'font-smoothing': 'antialiased',
+      'line-height': '1.5em',
 
-  queryList: {
-    listStyle: 'none',
-    margin: '0',
-    padding: '0',
-  },
+      'background-color': map.BACKGROUND_COLOR,
+      color: map.TEXT_COLOR,
 
-  queryListItem: {
-    'border-bottom-width': '1px',
-    'border-bottom-style': 'solid',
-    display: 'flex',
-    'justify-content': 'space-between',
-    padding: '5px 10px',
-    cursor: 'pointer',
-    'user-select': 'none',
-
-    '& > :first-child': {
-      whiteSpace: 'nowrap',
-      overflowX: 'hidden',
-      maxWidth: 'calc(100% - 70px)',
-      textOverflow: 'ellipsis',
-    },
-    '&:last-child': {
-      'border-bottom-width': 0,
+      '&[data-wide-layout="1"]': {
+        flexFlow: 'row nowrap',
+      },
     },
 
-    'border-bottom-color': map.BORDER_COLOR,
-  },
-
-  queryListHeader: {
-    display: 'flex',
-    flex: '0 0 auto',
-    'align-items': 'center',
-    'border-bottom-width': '1px',
-    'border-bottom-style': 'solid',
-
-    'border-color': map.LIST_BORDER_COLOR,
-  },
-
-  queryStatus: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 22,
-    padding: '0 6px',
-    'border-radius': '3px',
-    'font-size': '0.7em',
-    'line-height': '1em',
-    'flex-shrink': 0,
-    'background-color': map.ACTION_TIME_BACK_COLOR,
-    color: map.ACTION_TIME_COLOR,
-  },
-
-  queryListItemSelected: {
-    'background-color': map.SELECTED_BACKGROUND_COLOR,
-  },
-
-  tabSelector: {
-    position: 'relative',
-    'z-index': 1,
-    display: 'inline-flex',
-    float: 'right',
-  },
-
-  srOnly: {
-    position: 'absolute',
-    width: 1,
-    height: 1,
-    padding: 0,
-    margin: '-1px',
-    overflow: 'hidden',
-    clip: 'rect(0,0,0,0)',
-    border: 0,
-  },
-
-  selectorButton: {
-    cursor: 'pointer',
-    position: 'relative',
-    padding: '6.5px 10px',
-    color: map.TEXT_COLOR,
-    'border-style': 'solid',
-    'border-width': '1px',
-    'border-left-width': 0,
-
-    '&:first-child': {
-      'border-left-width': '1px',
-      'border-top-left-radius': '3px',
-      'border-bottom-left-radius': '3px',
-    },
-
-    '&:last-child': {
-      'border-top-right-radius': '3px',
-      'border-bottom-right-radius': '3px',
-    },
-
-    'background-color': map.TAB_BACK_COLOR,
-
-    '&:hover': {
-      'background-color': map.TAB_BACK_HOVER_COLOR,
-    },
-
-    'border-color': map.TAB_BORDER_COLOR,
-  },
-
-  selectorButtonSmall: {
-    padding: '0px 8px',
-    'font-size': '0.8em',
-  },
-
-  selectorButtonSelected: {
-    'background-color': map.TAB_BACK_SELECTED_COLOR,
-  },
-
-  queryForm: {
-    display: 'flex',
-    flexFlow: 'column nowrap',
-  },
-  sortBySection: {
-    display: 'flex',
-    padding: '0.4em',
-    '& > [role="radiogroup"]': {
-      flex: '0 0 auto',
-      padding: '0 0 0 0.4em',
-    },
-    '& label': {
+    querySectionWrapper: {
       display: 'flex',
       flex: '0 0 auto',
-      whiteSpace: 'noWrap',
+      height: '50%',
+      width: '100%',
+      borderColor: map.TAB_BORDER_COLOR,
+
+      '&[data-wide-layout="0"]': {
+        borderBottomWidth: 1,
+        borderStyle: 'solid',
+      },
+
+      '&[data-wide-layout="1"]': {
+        height: '100%',
+        width: '40%',
+        borderRightWidth: 1,
+        borderStyle: 'solid',
+      },
+      flexFlow: 'column nowrap',
+      '& > :first-child': {
+        flex: '0 0 auto',
+        'border-bottom-width': '1px',
+        'border-bottom-style': 'solid',
+        'border-color': map.LIST_BORDER_COLOR,
+      },
+      '& > :nth-child(n + 2)': {
+        flex: '1 1 auto',
+        overflowX: 'hidden',
+        overflowY: 'auto',
+        maxHeight: 'calc(100% - 70px)',
+      },
+    },
+
+    queryList: {
+      listStyle: 'none',
+      margin: '0',
+      padding: '0',
+    },
+
+    queryListItem: {
+      'border-bottom-width': '1px',
+      'border-bottom-style': 'solid',
+      display: 'flex',
+      'justify-content': 'space-between',
+      padding: '5px 10px',
+      cursor: 'pointer',
+      'user-select': 'none',
+
+      '& > :first-child': {
+        whiteSpace: 'nowrap',
+        overflowX: 'hidden',
+        maxWidth: 'calc(100% - 70px)',
+        textOverflow: 'ellipsis',
+      },
+      '&:last-child': {
+        'border-bottom-width': 0,
+      },
+
+      'border-bottom-color': map.BORDER_COLOR,
+    },
+
+    queryListHeader: {
+      display: 'flex',
+      padding: 4,
+      flex: '0 0 auto',
+      'align-items': 'center',
+      'border-bottom-width': '1px',
+      'border-bottom-style': 'solid',
+
+      'border-color': map.LIST_BORDER_COLOR,
+    },
+
+    queryStatus: {
+      display: 'inline-flex',
       alignItems: 'center',
-      paddingRight: '0.4em',
-    },
-  },
-  querySearch: {
-    outline: 'none',
-    border: 'none',
-    width: '100%',
-    padding: '5px 10px',
-    'font-size': '1em',
-    'font-family': 'monaco, Consolas, "Lucida Console", monospace',
-
-    'background-color': map.BACKGROUND_COLOR,
-    color: map.TEXT_COLOR,
-
-    '&::-webkit-input-placeholder': {
-      color: map.TEXT_PLACEHOLDER_COLOR,
-    },
-
-    '&::-moz-placeholder': {
-      color: map.TEXT_PLACEHOLDER_COLOR,
-    },
-  },
-
-  queryPreview: {
-    flex: '1 1 50%',
-    overflowX: 'hidden',
-    oveflowY: 'auto',
-    display: 'flex',
-    'flex-direction': 'column',
-    'overflow-y': 'hidden',
-    '& pre': {
-      border: 'inherit',
+      justifyContent: 'center',
+      height: 22,
+      padding: '0 6px',
       'border-radius': '3px',
-      'line-height': 'inherit',
-      color: 'inherit',
+      'font-size': '0.7em',
+      'line-height': '1em',
+      'flex-shrink': 0,
+      'background-color': map.ACTION_TIME_BACK_COLOR,
+      color: map.ACTION_TIME_COLOR,
     },
 
-    'background-color': map.BACKGROUND_COLOR,
-  },
-
-  previewHeader: {
-    flex: '0 0 30px',
-    padding: '5px 10px',
-    'align-items': 'center',
-    'border-bottom-width': '1px',
-    'border-bottom-style': 'solid',
-
-    'background-color': map.HEADER_BACKGROUND_COLOR,
-    'border-bottom-color': map.HEADER_BORDER_COLOR,
-  },
-
-  treeItemPin: {
-    'font-size': '0.7em',
-    'padding-left': '5px',
-    cursor: 'pointer',
-    '&:hover': {
-      'text-decoration': 'underline',
+    queryListItemSelected: {
+      'background-color': map.SELECTED_BACKGROUND_COLOR,
     },
 
-    color: map.PIN_COLOR,
-  },
+    tabSelector: {
+      position: 'relative',
+      'z-index': 1,
+      display: 'inline-flex',
+      float: 'right',
+    },
 
-  treeItemKey: {
-    color: map.TEXT_PLACEHOLDER_COLOR,
-  },
+    srOnly: {
+      position: 'absolute',
+      width: 1,
+      height: 1,
+      padding: 0,
+      margin: '-1px',
+      overflow: 'hidden',
+      clip: 'rect(0,0,0,0)',
+      border: 0,
+    },
 
-  treeWrapper: {
-    overflowX: 'auto',
-    overflowY: 'auto',
-    padding: '1em',
-  },
-});
+    selectorButton: {
+      cursor: 'pointer',
+      position: 'relative',
+      padding: '6.5px 10px',
+      color: map.TEXT_COLOR,
+      'border-style': 'solid',
+      'border-width': '1px',
+      'border-left-width': 0,
+
+      '&:first-child': {
+        'border-left-width': '1px',
+        'border-top-left-radius': '3px',
+        'border-bottom-left-radius': '3px',
+      },
+
+      '&:last-child': {
+        'border-top-right-radius': '3px',
+        'border-bottom-right-radius': '3px',
+      },
+
+      'background-color': map.TAB_BACK_COLOR,
+
+      '&:hover': {
+        'background-color': map.TAB_BACK_HOVER_COLOR,
+      },
+
+      'border-color': map.TAB_BORDER_COLOR,
+    },
+
+    selectorButtonSmall: {
+      padding: '0px 8px',
+      'font-size': '0.8em',
+    },
+
+    selectorButtonSelected: {
+      'background-color': map.TAB_BACK_SELECTED_COLOR,
+    },
+
+    queryForm: {
+      display: 'flex',
+      flexFlow: 'column nowrap',
+    },
+    sortBySection: {
+      display: 'flex',
+      padding: '0.4em',
+      '& > [role="radiogroup"]': {
+        flex: '0 0 auto',
+        padding: '0 0 0 0.4em',
+      },
+      '& label': {
+        display: 'flex',
+        flex: '0 0 auto',
+        whiteSpace: 'noWrap',
+        alignItems: 'center',
+        paddingRight: '0.4em',
+      },
+    },
+
+    querySearch: {
+      maxWidth: '65%',
+      'background-color': map.BACKGROUND_COLOR,
+      display: 'flex',
+      alignItems: 'center',
+      flexFlow: 'row nowrap',
+      flex: '1 1 auto',
+
+      '& input': {
+        outline: 'none',
+        border: 'none',
+        width: '100%',
+        flex: '1 1 auto',
+        padding: '5px 10px',
+        'font-size': '1em',
+        position: 'relative',
+        fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+
+        'background-color': map.BACKGROUND_COLOR,
+        color: map.TEXT_COLOR,
+
+        '&::-webkit-input-placeholder': {
+          color: map.TEXT_PLACEHOLDER_COLOR,
+        },
+
+        '&::-moz-placeholder': {
+          color: map.TEXT_PLACEHOLDER_COLOR,
+        },
+        '&::-webkit-search-cancel-button': appearanceNone,
+      },
+    },
+
+    closeButton: {
+      ...appearanceNone,
+      border: 'none',
+      outline: 'none',
+      boxShadow: 'none',
+      display: 'block',
+      cursor: 'pointer',
+      background: 'transparent',
+      position: 'relative',
+      fontSize: 'inherit',
+      '&[data-invisible="1"]': {
+        visibility: 'hidden !important',
+      },
+      '&::after': {
+        content: '"\u00d7"',
+        display: 'block',
+        padding: 4,
+        width: '16px',
+        height: '16px',
+        fontSize: '16px',
+        color: map.TEXT_COLOR,
+        background: 'transparent',
+      },
+    },
+
+    searchSelectLabel: {
+      display: 'inline-block',
+      padding: 4,
+      borderLeft: `1px solid currentColor`,
+    },
+
+    queryPreview: {
+      flex: '1 1 50%',
+      overflowX: 'hidden',
+      oveflowY: 'auto',
+      display: 'flex',
+      'flex-direction': 'column',
+      'overflow-y': 'hidden',
+      '& pre': {
+        border: 'inherit',
+        'border-radius': '3px',
+        'line-height': 'inherit',
+        color: 'inherit',
+      },
+
+      'background-color': map.BACKGROUND_COLOR,
+    },
+
+    previewHeader: {
+      flex: '0 0 30px',
+      padding: '5px 10px',
+      'align-items': 'center',
+      'border-bottom-width': '1px',
+      'border-bottom-style': 'solid',
+
+      'background-color': map.HEADER_BACKGROUND_COLOR,
+      'border-bottom-color': map.HEADER_BORDER_COLOR,
+    },
+
+    treeItemPin: {
+      'font-size': '0.7em',
+      'padding-left': '5px',
+      cursor: 'pointer',
+      '&:hover': {
+        'text-decoration': 'underline',
+      },
+
+      color: map.PIN_COLOR,
+    },
+
+    treeItemKey: {
+      color: map.TEXT_PLACEHOLDER_COLOR,
+    },
+
+    treeWrapper: {
+      overflowX: 'auto',
+      overflowY: 'auto',
+      padding: '1em',
+    },
+  };
+};
 
 let themeSheet: StyleSheet;
 

@@ -8,6 +8,7 @@ import {
   QueryPreviewTabs,
 } from './types';
 import { QueryComparators } from './utils/comparators';
+import { QueryFilters } from './utils/filters';
 
 const initialState: RtkQueryInspectorMonitorState = {
   queryForm: {
@@ -15,6 +16,7 @@ const initialState: RtkQueryInspectorMonitorState = {
       queryComparator: QueryComparators.fulfilledTimeStamp,
       isAscendingQueryComparatorOrder: false,
       searchValue: '',
+      queryFilter: QueryFilters.queryKey,
     },
   },
   selectedPreviewTab: QueryPreviewTabs.queryinfo,

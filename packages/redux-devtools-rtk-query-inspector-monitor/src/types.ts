@@ -5,6 +5,7 @@ import { Base16Theme, StylingFunction } from 'react-base16-styling';
 import { Action } from 'redux';
 import * as themes from 'redux-devtools-themes';
 import { QueryComparators } from './utils/comparators';
+import { QueryFilters } from './utils/filters';
 
 export enum QueryPreviewTabs {
   queryinfo,
@@ -17,6 +18,7 @@ export interface QueryFormValues {
   queryComparator: QueryComparators;
   isAscendingQueryComparatorOrder: boolean;
   searchValue: string;
+  queryFilter: QueryFilters;
 }
 export interface RtkQueryInspectorMonitorState {
   readonly queryForm: {
@@ -68,8 +70,6 @@ export interface ExternalProps<S, A extends Action<unknown>> {
   hideMainButtons?: boolean;
   invertTheme: boolean;
 }
-
-export type AnyExternalProps = ExternalProps<unknown, any>;
 
 export interface QueryInfo {
   query: RtkQueryState;

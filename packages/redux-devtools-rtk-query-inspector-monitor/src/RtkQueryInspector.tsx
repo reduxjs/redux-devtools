@@ -156,7 +156,6 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
           data-wide-layout={+this.state.isWideLayout}
         >
           <QueryForm
-            dispatch={this.props.dispatch}
             values={selectorsSource.monitorState.queryForm.values}
             onFormValuesChange={this.handleQueryFormValuesChange}
           />

@@ -157,7 +157,7 @@ export function getQueryTagsOf(
   const provided = apiStates[queryInfo.reducerPath].provided;
 
   const tagTypes = Object.keys(provided);
-  console.log({ tagTypes, provided });
+
   if (tagTypes.length < 1) {
     return emptyArray;
   }

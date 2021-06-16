@@ -2,6 +2,7 @@ import { Action, createSelector, Selector } from '@reduxjs/toolkit';
 import { RtkQueryInspectorProps } from './RtkQueryInspector';
 import { QueryInfo, RtkQueryTag, SelectorsSource } from './types';
 import { Comparator, queryComparators } from './utils/comparators';
+import { FilterList, queryListFilters } from './utils/filters';
 import { escapeRegExpSpecialCharacter } from './utils/regexp';
 import {
   getApiStatesOf,
@@ -58,6 +59,12 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     return queryComparators[monitorState.queryForm.values.queryComparator];
   };
 
+  const selectQueryListFilter = ({
+    monitorState,
+  }: SelectorsSource<S>): FilterList<QueryInfo> => {
+    return queryListFilters[monitorState.queryForm.values.queryFilter];
+  };
+
   const selectApiStates = createSelector(
     ({ userState }: SelectorsSource<S>) => userState,
     getApiStatesOf
@@ -81,21 +88,23 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
   const selectAllVisbileQueries = createSelector(
     [
       selectQueryComparator,
+      selectQueryListFilter,
       selectAllQueries,
       ({ monitorState }: SelectorsSource<S>) =>
         monitorState.queryForm.values.isAscendingQueryComparatorOrder,
       selectSearchQueryRegex,
     ],
-    (comparator, queryList, isAscending, searchRegex) => {
-      const filteredList = searchRegex
-        ? queryList.filter((queryInfo) => searchRegex.test(queryInfo.queryKey))
-        : queryList.slice();
+    (comparator, queryListFilter, queryList, isAscending, searchRegex) => {
+      const filteredList = queryListFilter(
+        searchRegex,
+        queryList as QueryInfo[]
+      );
 
       const computedComparator = isAscending
         ? comparator
         : flipComparator(comparator);
 
-      return filteredList.sort(computedComparator);
+      return filteredList.slice().sort(computedComparator);
     }
   );
 
