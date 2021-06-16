@@ -1,8 +1,0 @@
-language: node_js
-node_js:
-  - 'stable'
-script:
-  - yarn prettier:check
-  - yarn build:all
-  - yarn lint:all
-  - yarn test:all
