@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "build": "react-scripts build"
+    "build:demo": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build"
   },
   "dependencies": {
     "@redux-devtools/core": "^3.9.0",
