@@ -123,3 +123,13 @@ export type QueryPreviewTabOption = TabOption<
   QueryPreviewTabs,
   QueryPreviewTabProps
 >;
+
+/**
+ * It is Omit<RequestStatusFlags, 'status'> & { isFetching: boolean; }
+ */
+export interface RTKStatusFlags {
+  readonly isUninitialized: boolean;
+  readonly isFetching: boolean;
+  readonly isSuccess: boolean;
+  readonly isError: boolean;
+}

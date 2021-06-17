@@ -1,10 +1,13 @@
 import { isPlainObject } from '@reduxjs/toolkit';
+import { QueryStatus } from '@reduxjs/toolkit/query';
 import {
   QueryInfo,
   RtkQueryInspectorMonitorState,
   RtkQueryApiState,
   RTKQuerySubscribers,
   RtkQueryTag,
+  RTKStatusFlags,
+  RtkQueryState,
 } from '../types';
 import { missingTagId } from '../monitor-config';
 import { Comparator } from './comparators';
@@ -181,4 +184,22 @@ export function getQueryTagsOf(
   }
 
   return output;
+}
+
+/**
+ * Computes query status flags.
+ * @param status
+ * @see https://redux-toolkit.js.org/rtk-query/usage/queries#frequently-used-query-hook-return-values
+ * @see https://github.com/reduxjs/redux-toolkit/blob/b718e01d323d3ab4b913e5d88c9b90aa790bb975/src/query/core/apiState.ts#L63
+ */
+export function getQueryStatusFlags({
+  status,
+  data,
+}: RtkQueryState): RTKStatusFlags {
+  return {
+    isUninitialized: status === QueryStatus.uninitialized,
+    isFetching: status === QueryStatus.pending,
+    isSuccess: status === QueryStatus.fulfilled && !!data,
+    isError: status === QueryStatus.rejected,
+  };
 }

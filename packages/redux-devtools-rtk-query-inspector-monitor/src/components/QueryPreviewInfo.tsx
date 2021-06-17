@@ -1,7 +1,13 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ReactNode, PureComponent } from 'react';
-import { QueryInfo, QueryPreviewTabProps, RtkQueryState } from '../types';
+import {
+  QueryInfo,
+  QueryPreviewTabProps,
+  RtkQueryState,
+  RTKStatusFlags,
+} from '../types';
 import { identity } from '../utils/object';
+import { getQueryStatusFlags } from '../utils/rtk-query';
 import { TreeView } from './TreeView';
 
 type ComputedQueryInfo = {
@@ -11,6 +17,7 @@ type ComputedQueryInfo = {
 
 interface FormattedQuery extends ComputedQueryInfo {
   queryKey: string;
+  statusFlags: RTKStatusFlags;
   query: RtkQueryState;
 }
 
@@ -35,10 +42,13 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewTabProps> {
         ? new Date(query.fulfilledTimeStamp).toISOString()
         : '-';
 
+      const statusFlags = getQueryStatusFlags(query);
+
       return {
         queryKey,
         startedAt,
         latestFetchAt,
+        statusFlags,
         query: queryInfo.query,
       };
     }
