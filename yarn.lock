@@ -24378,7 +24378,7 @@ fsevents@^1.2.7:
   languageName: unknown
   linkType: soft
 
-"react-dom@npm:^16.14.0, react-dom@npm:^16.3.0":
+"react-dom@npm:^16.14.0":
   version: 16.14.0
   resolution: "react-dom@npm:16.14.0"
   dependencies:
@@ -24392,7 +24392,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^17.0.2":
+"react-dom@npm:^17.0.0, react-dom@npm:^17.0.2":
   version: 17.0.2
   resolution: "react-dom@npm:17.0.2"
   dependencies:
@@ -24879,7 +24879,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react@npm:^16.13.1, react@npm:^16.14.0, react@npm:^16.3.0":
+"react@npm:^16.13.1, react@npm:^16.14.0":
   version: 16.14.0
   resolution: "react@npm:16.14.0"
   dependencies:
@@ -24890,7 +24890,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.2":
+"react@npm:^17.0.0, react@npm:^17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
@@ -26192,12 +26192,12 @@ resolve@^2.0.0-next.3:
     "@types/react": 17.0.0
     "@types/react-dom": 17.0.0
     "@types/react-redux": 7.1.9
-    react: ^16.3.0
-    react-dom: ^16.3.0
+    react: ^17.0.0
+    react-dom: ^17.0.0
     react-redux: 7.2.2
     react-scripts: 4.0.2
     remote-redux-devtools: 0.5.16
-    typescript: 4.1.3
+    typescript: 4.3.2
   languageName: unknown
   linkType: soft
 
@@ -29274,16 +29274,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-typescript@4.1.3:
-  version: 4.1.3
-  resolution: "typescript@npm:4.1.3"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 4f7ab1506ea22c7a1c313ec5b4285e93ce08d709ad6086d02d3096adb399ca339972ee56d1e578213c51dd0fb7b0fad50283c2d3c39642405644458ae29774f8
-  languageName: node
-  linkType: hard
-
 typescript@4.3.2:
   version: 4.3.2
   resolution: "typescript@npm:4.3.2"
@@ -29291,16 +29281,6 @@ typescript@4.3.2:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 21e1285402e32fd240f6ad3f97b6fea81b90d2591f412677d01b570a8bd93151d1e08460d58f43689fc758671a5baaebb16fa93d3c8260181612c8e619bd24f7
-  languageName: node
-  linkType: hard
-
-typescript@^3.9.7:
-  version: 3.9.10
-  resolution: "typescript@npm:3.9.10"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 544f3810ac3d3fcd141907e7f52f0b8c70af178adc83af47e2b8a48351e5a119919a4d3bfbe2f62d5165b5aa203e896fe0432024cfbda670dbd03a4f53ce7748
   languageName: node
   linkType: hard
 
@@ -29314,16 +29294,6 @@ typescript@^4.3.4:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.1.3#builtin<compat/typescript>":
-  version: 4.1.3
-  resolution: "typescript@patch:typescript@npm%3A4.1.3#builtin<compat/typescript>::version=4.1.3&hash=ddfc1b"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 28f0f616bf6284543bb14d4bfe0e1a74963e5df0396ebccfc6a57bfd4ab70b4284e51b3a2045ed2466151a4a58c8a549edb886a2f7a2232cf08fcf73496592e6
-  languageName: node
-  linkType: hard
-
 "typescript@patch:typescript@4.3.2#builtin<compat/typescript>":
   version: 4.3.2
   resolution: "typescript@patch:typescript@npm%3A4.3.2#builtin<compat/typescript>::version=4.3.2&hash=ddfc1b"
@@ -29334,16 +29304,6 @@ typescript@^4.3.4:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^3.9.7#builtin<compat/typescript>":
-  version: 3.9.10
-  resolution: "typescript@patch:typescript@npm%3A3.9.10#builtin<compat/typescript>::version=3.9.10&hash=ddfc1b"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 744dab471ae59659b1618be636ab56b9c0afbca801e0640c3cdfad0a894315c87d30a290b7063c6a3f1860bf47fe44d9188cb85e46b2bdadda7f207d67e6b4e1
-  languageName: node
-  linkType: hard
-
 "typescript@patch:typescript@^4.3.4#builtin<compat/typescript>":
   version: 4.3.4
   resolution: "typescript@patch:typescript@npm%3A4.3.4#builtin<compat/typescript>::version=4.3.4&hash=ddfc1b"
@@ -29351,6 +29311,26 @@ typescript@^4.3.4:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: c8766e84a4f71e925cc059af8286cc7f41819fe821d433b90c83e9b36729cbda7a8e4be3292d8a1433cd717d529c93217d58d173418f43862290b206bd88b284
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@~4.0.7#builtin<compat/typescript>":
+  version: 4.0.8
+  resolution: "typescript@patch:typescript@npm%3A4.0.8#builtin<compat/typescript>::version=4.0.8&hash=ddfc1b"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: d12e73e6fb00f0ed42b10b42493d2eb907f31b8c6eb6cfb896be45d79d8fcbf46c9bc1e2aced88898f91191e3f49c5a13d3f86d01bb386ee29f502c7ccfe0b6a
+  languageName: node
+  linkType: hard
+
+typescript@~4.0.7:
+  version: 4.0.8
+  resolution: "typescript@npm:4.0.8"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: f7789f9c531dffcf4c849a806627562ad6297f608aab85c0514d87a2ab3e060bcfadd63963735994796c45326eebeb479c004065af47e72ee44ba8c935fc9a54
   languageName: node
   linkType: hard
 

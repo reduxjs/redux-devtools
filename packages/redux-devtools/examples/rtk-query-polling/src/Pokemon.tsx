@@ -1,8 +1,6 @@
-import { useState, version } from 'react'
-import { useGetPokemonByNameQuery } from './services/pokemon'
-import type { PokemonName } from './pokemon.data'
-
-console.log(version);
+import * as React from 'react';
+import { useGetPokemonByNameQuery } from './services/pokemon';
+import type { PokemonName } from './pokemon.data';
 
 const intervalOptions = [
   { label: 'Off', value: 0 },
@@ -16,7 +14,7 @@ const getRandomIntervalValue = () =>
   intervalOptions[Math.floor(Math.random() * intervalOptions.length)].value
 
 export function Pokemon({ name }: { name: PokemonName })  {
-  const [pollingInterval, setPollingInterval] = useState(
+  const [pollingInterval, setPollingInterval] = React.useState(
     getRandomIntervalValue()
   )
 

@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "A redux app powered by rtk-query connected via remote-redux-devtools",
-  "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-redux": "7.2.2",
     "react-scripts": "4.0.2",
     "remote-redux-devtools": "0.5.16"
@@ -17,7 +16,7 @@
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
     "@types/react-redux": "7.1.9",
-    "typescript": "4.1.3"
+    "typescript": "4.3.2"
   },
   "eslintConfig": {
     "extends": [

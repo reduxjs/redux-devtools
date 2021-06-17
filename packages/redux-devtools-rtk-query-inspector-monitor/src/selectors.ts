@@ -85,13 +85,15 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     }
   );
 
+  const selectComparatorOrder = ({ monitorState }: SelectorsSource<S>) =>
+    monitorState.queryForm.values.isAscendingQueryComparatorOrder;
+
   const selectAllVisbileQueries = createSelector(
     [
       selectQueryComparator,
       selectQueryListFilter,
       selectAllQueries,
-      ({ monitorState }: SelectorsSource<S>) =>
-        monitorState.queryForm.values.isAscendingQueryComparatorOrder,
+      selectComparatorOrder,
       selectSearchQueryRegex,
     ],
     (comparator, queryListFilter, queryList, isAscending, searchRegex) => {
