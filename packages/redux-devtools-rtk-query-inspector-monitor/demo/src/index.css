@@ -11,3 +11,53 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1 {
+  font-size: 1.4em;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: left;
+  font-family: inherit;
+  padding: 0.5em;
+  margin: 0;
+}
+
+.demo-toolbar {
+  display: flex;
+  padding: 1em;
+  justify-content: flex-start;
+}
+
+section {
+  display: block;
+}
+
+.pokemon-list {
+  display: flex;
+  max-width: 80vw;
+  flex-flow: row wrap;
+  overflow-x: hidden;
+}
+
+.pokemon {
+  padding: 0.2em;
+  text-align: center;
+}
+
+pre code {
+  white-space: pre-wrap;
+}
+
+article {
+  padding: 0.4em;
+}

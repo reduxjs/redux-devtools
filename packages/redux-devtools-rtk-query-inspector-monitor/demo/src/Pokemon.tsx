@@ -28,9 +28,8 @@ export function Pokemon({ name }: { name: PokemonName }) {
 
   return (
     <div
+      className="pokemon"
       style={{
-        float: 'left',
-        textAlign: 'center',
         ...(isFetching ? { background: '#e6ffe8' } : {}),
       }}
     >
