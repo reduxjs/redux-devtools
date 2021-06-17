@@ -98,6 +98,7 @@ export class QueryForm extends React.PureComponent<
 
     if (this.state.searchValue) {
       this.setState({ searchValue: '' });
+      this.invalidateSearchValueFromProps();
     }
   };
 
