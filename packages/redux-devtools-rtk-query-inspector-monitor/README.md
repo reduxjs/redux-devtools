@@ -4,10 +4,17 @@ Displays rtk-query queries and mutations for [Redux DevTools](https://github.com
 
 Created by [FaberVitale](https://github.com/FaberVitale)
 
+## Demo
+
+- [link](https://rtk-query-monitor-demo.netlify.app/)
+- [demo source](https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-inspector-monitor/demo)
+
+## Preview
 
 ![RTK Query inspector monitor demo](./monitor-demo.gif)
 
-### Installation
+
+## Installation
 
 ```bash
 npm i @redux-devtools/rtk-query-inspector-monitor --save # npm
@@ -18,7 +25,7 @@ yarn add @redux-devtools/rtk-query-inspector-monitor # yarn
 
 ```
 
-### Usage
+## Usage
 
 You can use `ChartMonitor` as the only monitor in your app:
 
@@ -39,13 +46,13 @@ Consult the [`DockMonitor` README](https://github.com/reduxjs/redux-devtools/tre
 
 [Read how to start using Redux DevTools.](https://github.com/reduxjs/redux-devtools)
 
-#### Redux DevTools props
+## Redux DevTools props
 
 | Name          | Description                                                                                                                                                                                                                                                                                                                         |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `theme`       | Either a string referring to one of the themes provided by [redux-devtools-themes](https://github.com/gaearon/redux-devtools-themes) (feel free to contribute!) or a custom object of the same format. Optional. By default, set to [`'nicinabox'`](https://github.com/gaearon/redux-devtools-themes/blob/master/src/nicinabox.js). |
 | `invertTheme` | Boolean value that will invert the colors of the selected theme. Optional. By default, set to `false`                                                                                                                                                                                                                               |
 
-### License
+## License
 
 MIT
