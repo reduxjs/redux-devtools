@@ -103,10 +103,9 @@ interface State {
 
 function getStateFromProps(props: Props) {
   // calculate individual node expansion if necessary
-  const expanded =
-    props.shouldExpandNode && !props.isCircular
-      ? props.shouldExpandNode(props.keyPath, props.data, props.level)
-      : false;
+  const expanded = !props.isCircular
+    ? props.shouldExpandNode(props.keyPath, props.data, props.level)
+    : false;
   return {
     expanded,
   };

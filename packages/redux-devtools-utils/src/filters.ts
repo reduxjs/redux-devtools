@@ -20,7 +20,7 @@ export function arrToRegex(v: string | string[]) {
 
 function filterActions(
   actionsById: { [actionId: number]: PerformAction<Action<unknown>> },
-  actionsFilter: (action: Action<unknown>, id: number) => Action
+  actionsFilter: ((action: Action<unknown>, id: number) => Action) | undefined
 ) {
   if (!actionsFilter) return actionsById;
   return mapValues(actionsById, (action, id: number) => ({
@@ -127,7 +127,9 @@ export function filterState(
   type: string,
   localFilter: LocalFilter,
   stateSanitizer: (state: unknown, actionId: number) => unknown,
-  actionSanitizer: (action: Action<unknown>, id: number) => Action,
+  actionSanitizer:
+    | ((action: Action<unknown>, id: number) => Action)
+    | undefined,
   nextActionId: number,
   predicate: (currState: unknown, currAction: Action<unknown>) => boolean
 ) {
@@ -146,9 +148,11 @@ export function filterState(
       state: unknown;
       error?: string | undefined;
     }[] = [];
-    const sanitizedActionsById: {
-      [id: number]: PerformAction<Action<unknown>>;
-    } = actionSanitizer && {};
+    const sanitizedActionsById:
+      | {
+          [id: number]: PerformAction<Action<unknown>>;
+        }
+      | undefined = actionSanitizer && {};
     const { actionsById } = state;
     const { computedStates } = state;
 
@@ -169,7 +173,7 @@ export function filterState(
           : liftedState
       );
       if (actionSanitizer) {
-        sanitizedActionsById[id] = {
+        sanitizedActionsById![id] = {
           ...liftedAction,
           action: actionSanitizer(currAction, id),
         };
