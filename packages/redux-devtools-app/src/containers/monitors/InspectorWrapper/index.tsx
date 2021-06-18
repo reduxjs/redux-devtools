@@ -34,6 +34,7 @@ interface Props {
 }
 
 class InspectorWrapper extends Component<Props> {
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   static update = InspectorMonitor.update;
 
   render() {
