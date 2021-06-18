@@ -196,13 +196,20 @@ export const invertBase16Theme = (base16Theme: Base16Theme): Base16Theme =>
     {} as Base16Theme
   );
 
-export const createStyling = curry(
+interface Options {
+  defaultBase16?: Base16Theme;
+  base16Themes?: { [themeName: string]: Base16Theme };
+}
+
+export const createStyling = curry<
+  (base16Theme: Base16Theme) => StylingConfig,
+  Options | undefined,
+  Theme | undefined,
+  StylingFunction
+>(
   (
     getStylingFromBase16: (base16Theme: Base16Theme) => StylingConfig,
-    options: {
-      defaultBase16?: Base16Theme;
-      base16Themes?: { [themeName: string]: Base16Theme };
-    } = {},
+    options: Options = {},
     themeOrStyling: Theme = {},
     ...args
   ): StylingFunction => {

@@ -84,8 +84,8 @@ export default class StackTraceTab<
       this.setState({
         stackFrames: [],
         showDocsLink:
-          liftedAction!.action &&
-          liftedAction!.action.type &&
+          !!liftedAction!.action &&
+          !!liftedAction!.action.type &&
           liftedAction!.action.type !== '@@INIT',
       });
     }

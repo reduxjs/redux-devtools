@@ -21305,7 +21305,7 @@ fsevents@^1.2.7:
     stylelint-processor-styled-components: ^1.10.0
     ts-jest: ^26.2.0
     ts-node: ^9.0.0
-    typescript: ~4.0.7
+    typescript: ~4.1.6
     url-loader: ^4.1.0
     webpack: ^4.44.1
     webpack-cli: ^3.3.12
@@ -23947,23 +23947,23 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@~4.0.7#builtin<compat/typescript>":
-  version: 4.0.7
-  resolution: "typescript@patch:typescript@npm%3A4.0.7#builtin<compat/typescript>::version=4.0.7&hash=ddfc1b"
+"typescript@patch:typescript@~4.1.6#builtin<compat/typescript>":
+  version: 4.1.6
+  resolution: "typescript@patch:typescript@npm%3A4.1.6#builtin<compat/typescript>::version=4.1.6&hash=ddfc1b"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: f234923fbef722077d00ee008aa3492b02adbfe5a67b1c31687a0f7c6cb9946b759665ea643ffc1174298ffb1c59de0cc2abe1a91e57415d51951589eff12446
+  checksum: 12e2121f1dd538030ec829e6d5ed8205c256f3b22269744140676deace23b559aa67d143676761a1780c14f70f16953d8ae850a344bee2f7d915e0bf6ca6943e
   languageName: node
   linkType: hard
 
-typescript@~4.0.7:
-  version: 4.0.7
-  resolution: "typescript@npm:4.0.7"
+typescript@~4.1.6:
+  version: 4.1.6
+  resolution: "typescript@npm:4.1.6"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 1b4c63a228efd6ceec80382b6001dad2c27c9bd46022f965dab907a13275c9ceb7b4b4de8be8902457bd644d2b0f9ddd8cf03b561e35d7cd2d793cf7554afd2d
+  checksum: 36cdaf5d69fe096d3644d01f163a62c9469065e23867e2d732f83a85e97e67a32644407bebb36e46d8bcc2c5c57d4b7a07f0701b591af038a5984b58a0664566
   languageName: node
   linkType: hard
 
