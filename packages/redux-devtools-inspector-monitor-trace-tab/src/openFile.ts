@@ -127,7 +127,7 @@ export default function openFile(
       if (
         chrome.devtools &&
         chrome.devtools.panels &&
-        chrome.devtools.panels.openResource
+        !!chrome.devtools.panels.openResource
       ) {
         openResource(fileName, lineNumber, stackFrame);
       } else if (chrome.runtime && (chrome.runtime.openOptionsPage || isFF)) {
