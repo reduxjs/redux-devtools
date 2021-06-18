@@ -1,6 +1,6 @@
 # Redux DevTools RTK Query inspector monitor
 
-Displays rtk-query queries and mutations for [Redux DevTools](https://github.com/gaearon/redux-devtools).
+A monitor that displays [RTK query](https://redux-toolkit.js.org/rtk-query/overview) queries and mutations for [Redux DevTools](https://github.com/gaearon/redux-devtools).
 
 Created by [FaberVitale](https://github.com/FaberVitale)
 
@@ -15,18 +15,22 @@ Created by [FaberVitale](https://github.com/FaberVitale)
 
 ## Installation
 
+### npm
+
 ```bash
 npm i @redux-devtools/rtk-query-inspector-monitor --save # npm
-
-# or
-
-yarn add @redux-devtools/rtk-query-inspector-monitor # yarn
-
 ```
+
+### yarn
+
+```bash
+yarn add @redux-devtools/rtk-query-inspector-monitor # yarn
+```
+
 
 ## Usage
 
-You can use `ChartMonitor` as the only monitor in your app:
+You can use `RtkQueryInspectorMonitor` as the only monitor in your app:
 
 ##### `containers/DevTools.js`
 
@@ -41,9 +45,46 @@ export default createDevTools(<RtkQueryInspectorMonitor />);
 Then you can render `<DevTools>` to any place inside app or even into a separate popup window.
 
 Alternatively, you can use it together with [`DockMonitor`](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor) to make it dockable.  
-Consult the [`DockMonitor` README](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor) for details of this approach.
 
-[Read how to start using Redux DevTools.](https://github.com/reduxjs/redux-devtools)
+See also
+
+- [`DockMonitor` README](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor)
+
+- [Read how to start using Redux DevTools.](https://github.com/reduxjs/redux-devtools)
+
+- [Redux Devtools walkthrough](https://github.com/reduxjs/redux-devtools/tree/master/docs/Walkthrough.md)
+
+
+## Features
+
+- sorts queries in ascending or descending order by:
+    - fulfilledTimeStamp
+    - query key
+    - query status
+    - endpoint
+    - api reducerPath
+- filters queries by:
+    - fulfilledTimeStamp
+    - query key
+    - query status
+    - endpoint
+    - api reducerPath
+- displays
+    - status flags
+    - query state
+    - tags
+    - subscriptions
+    - api slice config
+
+## TODO
+
+- [] display mutations
+- [] filter by tags types
+- [] download query.data
+- [] upload query.data(?)
+- [] refetch query button(?)
+- ...suggestions are welcome
+
 
 ## Redux DevTools props
 
@@ -52,6 +93,14 @@ Consult the [`DockMonitor` README](https://github.com/reduxjs/redux-devtools/tre
 | `theme`       | Either a string referring to one of the themes provided by [redux-devtools-themes](https://github.com/gaearon/redux-devtools-themes) (feel free to contribute!) or a custom object of the same format. Optional. By default, set to [`'nicinabox'`](https://github.com/gaearon/redux-devtools-themes/blob/master/src/nicinabox.js). |
 | `invertTheme` | Boolean value that will invert the colors of the selected theme. Optional. By default, set to `false`                                                                                                                                                                                                                               |
 
+<br/>
+
+### Development
+
+[running the demo](/demo/README.md)
+
+<br/>
+
 ## License
 
-MIT
+[MIT](./LICENSE.md)
