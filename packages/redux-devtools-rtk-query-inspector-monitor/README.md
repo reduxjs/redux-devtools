@@ -97,7 +97,7 @@ See also
 
 ### Development
 
-[running the demo](/demo/README.md)
+[running the demo](./demo/README.md)
 
 <br/>
 
