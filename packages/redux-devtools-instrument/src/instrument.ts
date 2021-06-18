@@ -1,7 +1,7 @@
 import difference from 'lodash/difference';
 import union from 'lodash/union';
 import isPlainObject from 'lodash/isPlainObject';
-import $$observable from 'symbol-observable';
+import $$observable from './symbol-observable';
 import {
   Action,
   Observable,
