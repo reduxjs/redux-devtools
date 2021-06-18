@@ -55,13 +55,8 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewTabProps> {
   );
 
   render(): ReactNode {
-    const {
-      queryInfo,
-      isWideLayout,
-      base16Theme,
-      styling,
-      invertTheme,
-    } = this.props;
+    const { queryInfo, isWideLayout, base16Theme, styling, invertTheme } =
+      this.props;
 
     const formattedQuery = this.selectFormattedQuery(queryInfo);
 

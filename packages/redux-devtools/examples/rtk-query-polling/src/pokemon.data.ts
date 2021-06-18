@@ -150,6 +150,6 @@ export const POKEMON_NAMES = [
   'dragonite',
   'mewtwo',
   'mew',
-] as const
+] as const;
 
-export type PokemonName = typeof POKEMON_NAMES[number]
+export type PokemonName = typeof POKEMON_NAMES[number];

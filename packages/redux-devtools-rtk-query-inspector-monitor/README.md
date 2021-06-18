@@ -13,7 +13,6 @@ Created by [FaberVitale](https://github.com/FaberVitale)
 
 ![RTK Query inspector monitor demo](./monitor-demo.gif)
 
-
 ## Installation
 
 ```bash

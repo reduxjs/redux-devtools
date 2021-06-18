@@ -60,8 +60,5 @@ export function reducer<S, A extends Action<unknown>>(
   return monitorSlice.reducer(state, action);
 }
 
-export const {
-  selectQueryKey,
-  changeQueryFormValues,
-  selectedPreviewTab,
-} = monitorSlice.actions;
+export const { selectQueryKey, changeQueryFormValues, selectedPreviewTab } =
+  monitorSlice.actions;

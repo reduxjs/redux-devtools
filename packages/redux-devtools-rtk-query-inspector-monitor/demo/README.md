@@ -2,10 +2,9 @@
 
 ## Running demo
 
-
 ### Working directory
-Run the following commands from redux-devtools monorepo root directory.
 
+Run the following commands from redux-devtools monorepo root directory.
 
 ### 1. Install depedencies
 

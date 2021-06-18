@@ -9,9 +9,7 @@ export interface QueryPreviewHeaderProps {
   selectedTab: QueryPreviewTabs;
 }
 
-export class QueryPreviewHeader extends React.Component<
-  QueryPreviewHeaderProps
-> {
+export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps> {
   handleTabClick = (tab: QueryPreviewTabOption): void => {
     if (this.props.selectedTab !== tab.value) {
       this.props.onTabChange(tab.value);

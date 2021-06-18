@@ -61,10 +61,9 @@ export const filterQueryOptions: SelectOption<QueryFilters>[] = [
   { label: 'endpoint', value: QueryFilters.endpointName },
 ];
 
-export const queryListFilters: Readonly<Record<
-  QueryFilters,
-  FilterList<QueryInfo>
->> = {
+export const queryListFilters: Readonly<
+  Record<QueryFilters, FilterList<QueryInfo>>
+> = {
   [QueryFilters.queryKey]: filterByQueryKey,
   [QueryFilters.endpointName]: filterByEndpointName,
   [QueryFilters.reducerPath]: filterByReducerPath,

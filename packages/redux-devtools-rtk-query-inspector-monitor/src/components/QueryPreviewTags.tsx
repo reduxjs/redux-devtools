@@ -32,13 +32,8 @@ export class QueryPreviewTags extends PureComponent<
   }
 
   render(): ReactNode {
-    const {
-      queryInfo,
-      isWideLayout,
-      base16Theme,
-      styling,
-      invertTheme,
-    } = this.props;
+    const { queryInfo, isWideLayout, base16Theme, styling, invertTheme } =
+      this.props;
 
     if (!queryInfo) {
       return null;

@@ -8,25 +8,20 @@ const intervalOptions = [
   { label: '5s', value: 5000 },
   { label: '10s', value: 10000 },
   { label: '1m', value: 60000 },
-]
+];
 
 const getRandomIntervalValue = () =>
-  intervalOptions[Math.floor(Math.random() * intervalOptions.length)].value
+  intervalOptions[Math.floor(Math.random() * intervalOptions.length)].value;
 
-export function Pokemon({ name }: { name: PokemonName })  {
+export function Pokemon({ name }: { name: PokemonName }) {
   const [pollingInterval, setPollingInterval] = React.useState(
     getRandomIntervalValue()
-  )
+  );
 
-  const {
-    data,
-    error,
-    isLoading,
-    isFetching,
-    refetch,
-  } = useGetPokemonByNameQuery(name, {
-    pollingInterval,
-  })
+  const { data, error, isLoading, isFetching, refetch } =
+    useGetPokemonByNameQuery(name, {
+      pollingInterval,
+    });
 
   return (
     <div
@@ -75,5 +70,5 @@ export function Pokemon({ name }: { name: PokemonName })  {
         'No Data'
       )}
     </div>
-  )
+  );
 }

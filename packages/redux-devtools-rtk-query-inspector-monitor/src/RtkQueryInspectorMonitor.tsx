@@ -73,7 +73,7 @@ class RtkQueryInspectorMonitor<S, A extends Action<unknown>> extends Component<
   }
 }
 
-export default (RtkQueryInspectorMonitor as unknown) as React.ComponentType<
+export default RtkQueryInspectorMonitor as unknown as React.ComponentType<
   ExternalProps<unknown, Action<unknown>>
 > & {
   update(

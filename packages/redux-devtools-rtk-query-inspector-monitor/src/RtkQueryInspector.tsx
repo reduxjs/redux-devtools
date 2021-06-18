@@ -120,13 +120,11 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
       styleUtils: { styling },
     } = this.props;
     const apiStates = this.selectors.selectApiStates(selectorsSource);
-    const allVisibleQueries = this.selectors.selectAllVisbileQueries(
-      selectorsSource
-    );
+    const allVisibleQueries =
+      this.selectors.selectAllVisbileQueries(selectorsSource);
 
-    const currentQueryInfo = this.selectors.selectorCurrentQueryInfo(
-      selectorsSource
-    );
+    const currentQueryInfo =
+      this.selectors.selectorCurrentQueryInfo(selectorsSource);
 
     const currentRtkApi = getApiStateOf(currentQueryInfo, apiStates);
     const currentQuerySubscriptions = getQuerySubscriptionsOf(

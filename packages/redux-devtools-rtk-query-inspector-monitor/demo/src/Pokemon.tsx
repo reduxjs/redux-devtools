@@ -16,15 +16,10 @@ const getRandomIntervalValue = () =>
 export function Pokemon({ name }: { name: PokemonName }) {
   const [pollingInterval, setPollingInterval] = useState(60000);
 
-  const {
-    data,
-    error,
-    isLoading,
-    isFetching,
-    refetch,
-  } = useGetPokemonByNameQuery(name, {
-    pollingInterval,
-  });
+  const { data, error, isLoading, isFetching, refetch } =
+    useGetPokemonByNameQuery(name, {
+      pollingInterval,
+    });
 
   return (
     <div

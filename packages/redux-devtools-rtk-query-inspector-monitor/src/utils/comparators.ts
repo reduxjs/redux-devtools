@@ -86,10 +86,9 @@ function sortByApiReducerPath(
   );
 }
 
-export const queryComparators: Readonly<Record<
-  QueryComparators,
-  Comparator<QueryInfo>
->> = {
+export const queryComparators: Readonly<
+  Record<QueryComparators, Comparator<QueryInfo>>
+> = {
   [QueryComparators.fulfilledTimeStamp]: sortQueryByFulfilled,
   [QueryComparators.status]: sortQueryByStatus,
   [QueryComparators.endpointName]: sortQueryByEndpointName,

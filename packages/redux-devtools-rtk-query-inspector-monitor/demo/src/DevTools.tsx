@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createDevTools } from '@redux-devtools/core';
 import DockMonitor from '@redux-devtools/dock-monitor';
-import RtkQueryInspectorMonitor from './generated-module/RtkQueryInspectorMonitor.js';
+import RtkQueryInspectorMonitor from './build/RtkQueryInspectorMonitor.js';
 
 export default createDevTools(
   <DockMonitor

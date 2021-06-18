@@ -29334,19 +29334,23 @@ typescript@~4.0.7:
   languageName: node
   linkType: hard
 
-"uglify-js@npm:^2.6.1":
-  version: 2.8.29
-  resolution: "uglify-js@npm:2.8.29"
-  dependencies:
-    source-map: ~0.5.1
-    uglify-to-browserify: ~1.0.0
-    yargs: ~3.10.0
-  dependenciesMeta:
-    uglify-to-browserify:
-      optional: true
+"typescript@patch:typescript@~4.0.7#builtin<compat/typescript>":
+  version: 4.0.8
+  resolution: "typescript@patch:typescript@npm%3A4.0.8#builtin<compat/typescript>::version=4.0.8&hash=ddfc1b"
   bin:
-    uglifyjs: bin/uglifyjs
-  checksum: de5e5af14b788c9a0360fdfad6283b6ad89ecf3bf319924048628c87265252998d6f4bc8ca8bb7f163dd599cfe8262bca5b02396584fc120623a0225484309c6
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: d12e73e6fb00f0ed42b10b42493d2eb907f31b8c6eb6cfb896be45d79d8fcbf46c9bc1e2aced88898f91191e3f49c5a13d3f86d01bb386ee29f502c7ccfe0b6a
+  languageName: node
+  linkType: hard
+
+typescript@~4.0.7:
+  version: 4.0.8
+  resolution: "typescript@npm:4.0.8"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: f7789f9c531dffcf4c849a806627562ad6297f608aab85c0514d87a2ab3e060bcfadd63963735994796c45326eebeb479c004065af47e72ee44ba8c935fc9a54
   languageName: node
   linkType: hard
 
