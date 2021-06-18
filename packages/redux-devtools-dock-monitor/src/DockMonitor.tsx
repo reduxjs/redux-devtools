@@ -235,7 +235,7 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
   }
 }
 
-export default (DockMonitor as unknown) as React.ComponentType<
+export default DockMonitor as unknown as React.ComponentType<
   ExternalProps<unknown, Action<unknown>>
 > & {
   update(

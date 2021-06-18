@@ -6,10 +6,9 @@ import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
 import { TabComponentProps } from '../ActionPreview';
 
-const StateTab: React.FunctionComponent<TabComponentProps<
-  any,
-  Action<unknown>
->> = ({
+const StateTab: React.FunctionComponent<
+  TabComponentProps<any, Action<unknown>>
+> = ({
   nextState,
   styling,
   base16Theme,

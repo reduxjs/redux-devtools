@@ -136,7 +136,7 @@ export default function createDevTools<
                 return null;
               }
               if (
-                !((props.store as unknown) as EnhancedStore<S, A, MonitorState>)
+                !(props.store as unknown as EnhancedStore<S, A, MonitorState>)
                   .liftedStore
               ) {
                 logError('NoLiftedStore');
@@ -145,11 +145,13 @@ export default function createDevTools<
               return (
                 <Provider
                   store={
-                    ((props.store as unknown) as EnhancedStore<
-                      S,
-                      A,
-                      MonitorState
-                    >).liftedStore
+                    (
+                      props.store as unknown as EnhancedStore<
+                        S,
+                        A,
+                        MonitorState
+                      >
+                    ).liftedStore
                   }
                 >
                   <ConnectedMonitor {...monitorProps} />

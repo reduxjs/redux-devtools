@@ -301,22 +301,12 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
       hideMainButtons,
       hideActionButtons,
     } = this.props;
-    const {
-      selectedActionId,
-      startActionId,
-      searchValue,
-      tabName,
-    } = monitorState;
+    const { selectedActionId, startActionId, searchValue, tabName } =
+      monitorState;
     const inspectedPathType =
       tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
-    const {
-      themeState,
-      isWideLayout,
-      action,
-      nextState,
-      delta,
-      error,
-    } = this.state;
+    const { themeState, isWideLayout, action, nextState, delta, error } =
+      this.state;
     const { base16Theme, styling } = themeState;
 
     return (
@@ -467,7 +457,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
   };
 }
 
-export default (DevtoolsInspector as unknown) as React.ComponentType<
+export default DevtoolsInspector as unknown as React.ComponentType<
   ExternalProps<unknown, Action<unknown>>
 > & {
   update(

@@ -73,19 +73,20 @@ describe('Server', function () {
     });
 
     it('should login', function () {
-      socket.emit('login', 'master', function (
-        error: Error | undefined,
-        channelName: string
-      ) {
-        if (error) {
-          /* eslint-disable-next-line no-console */
-          console.log(error);
-          return;
+      socket.emit(
+        'login',
+        'master',
+        function (error: Error | undefined, channelName: string) {
+          if (error) {
+            /* eslint-disable-next-line no-console */
+            console.log(error);
+            return;
+          }
+          expect(channelName).toBe('respond');
+          channel = socket.subscribe(channelName);
+          expect(channel.SUBSCRIBED).toBe('subscribed');
         }
-        expect(channelName).toBe('respond');
-        channel = socket.subscribe(channelName);
-        expect(channel.SUBSCRIBED).toBe('subscribed');
-      });
+      );
     });
 
     it('should send message', function () {
@@ -107,26 +108,27 @@ describe('Server', function () {
           id: 'tAmA7H5fclyWhvizAAAi',
         };
 
-        socket2.emit('login', '', function (
-          error: Error | undefined,
-          channelName: string
-        ) {
-          if (error) {
-            /* eslint-disable-next-line no-console */
-            console.log(error);
-            return;
-          }
-          expect(channelName).toBe('log');
-          const channel2 = socket2.subscribe(channelName);
-          expect(channel2.SUBSCRIBED).toBe('subscribed');
-          channel2.on('subscribe', function () {
-            channel2.watch(function (message) {
-              expect(message).toEqual(data);
-              done();
+        socket2.emit(
+          'login',
+          '',
+          function (error: Error | undefined, channelName: string) {
+            if (error) {
+              /* eslint-disable-next-line no-console */
+              console.log(error);
+              return;
+            }
+            expect(channelName).toBe('log');
+            const channel2 = socket2.subscribe(channelName);
+            expect(channel2.SUBSCRIBED).toBe('subscribed');
+            channel2.on('subscribe', function () {
+              channel2.watch(function (message) {
+                expect(message).toEqual(data);
+                done();
+              });
+              socket.emit(channelName, data);
             });
-            socket.emit(channelName, data);
-          });
-        });
+          }
+        );
       });
     });
   });

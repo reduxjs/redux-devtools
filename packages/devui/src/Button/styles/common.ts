@@ -192,7 +192,7 @@ export const tooltipStyle = ({
   ${commonStyle({ theme, mark, size })}
 
   &:before {
-    content: "${tooltipTitle}";
+    content: '${tooltipTitle}';
     white-space: pre;
     color: ${theme.base06};
     line-height: 16px;
@@ -200,9 +200,8 @@ export const tooltipStyle = ({
     border-radius: 3px;
     background: ${theme.base01};
     border: 1px solid ${theme.base02};
-    box-shadow: 1px 1px 2px -1px ${theme.base02}, 1px 1px 2px 0px ${
-  theme.base02
-};
+    box-shadow: 1px 1px 2px -1px ${theme.base02},
+      1px 1px 2px 0px ${theme.base02};
   }
 
   &:after,
@@ -223,18 +222,15 @@ export const tooltipStyle = ({
   &:before {
     ${before(tooltipPosition)}
     ${getDirection(tooltipPosition)}: 3px;
-    ${
-      theme.type === 'material'
-        ? css`
-            animation: ${fadeIn} 500ms;
-          `
-        : ''
-    }
+    ${theme.type === 'material'
+      ? css`
+          animation: ${fadeIn} 500ms;
+        `
+      : ''}
   }
 
-  ${
-    theme.type !== 'material' &&
-    `
+  ${theme.type !== 'material' &&
+  `
   &:after {
     content: "";
     border-style: solid;
@@ -243,8 +239,7 @@ export const tooltipStyle = ({
     ${after(tooltipPosition, theme.base02)}
     ${getDirection(tooltipPosition)}: 7px;
   }
-  `
-  }
+  `}
 
   &:hover:after,
   &:hover:before {

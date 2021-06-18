@@ -102,7 +102,7 @@ function updateState(
       payload.committedState = payload.computedStates[0].state;
     }
   } else {
-    payload = parseJSON((payload as unknown) as string, serialize) as State;
+    payload = parseJSON(payload as unknown as string, serialize) as State;
   }
 
   let newState;
@@ -127,7 +127,7 @@ function updateState(
         for (let i = 0; i < action.length; i++) {
           newState = recompute(
             newState,
-            request.batched ? payload : ((payload as unknown) as State[])[i],
+            request.batched ? payload : (payload as unknown as State[])[i],
             action[i],
             newState.nextActionId + 1,
             maxAge,

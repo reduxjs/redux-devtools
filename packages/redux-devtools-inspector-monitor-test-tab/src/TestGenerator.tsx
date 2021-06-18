@@ -39,7 +39,7 @@ export function compare<S>(
       if (paths.length && paths.indexOf(path) !== -1) return;
       paths.push(path);
       // eslint-disable-next-line @typescript-eslint/ban-types
-      const v = objectPath.get((s2.state as unknown) as object, event.newPath);
+      const v = objectPath.get(s2.state as unknown as object, event.newPath);
       curState = v.length;
       path += '.length';
     } else if (event.type === 'add-item') {
@@ -79,8 +79,8 @@ export default class TestGenerator<
   getMethod(action: A) {
     let type: string = action.type as string;
     if (type[0] === '┗') type = type.substr(1).trim();
-    const args = ((action as unknown) as { arguments: unknown[] }).arguments
-      ? ((action as unknown) as { arguments: unknown[] }).arguments
+    const args = (action as unknown as { arguments: unknown[] }).arguments
+      ? (action as unknown as { arguments: unknown[] }).arguments
           .map((arg) => stringify(arg))
           .join(',')
       : '';

@@ -378,12 +378,14 @@ export default class Dock extends Component<Props, State> {
           />
           <div style={styles.dockContent}>
             {typeof children === 'function'
-              ? (children as React.FunctionComponent<{
-                  position: 'left' | 'right' | 'top' | 'bottom';
-                  isResizing: boolean | undefined;
-                  size: number;
-                  isVisible: boolean | undefined;
-                }>)({
+              ? (
+                  children as React.FunctionComponent<{
+                    position: 'left' | 'right' | 'top' | 'bottom';
+                    isResizing: boolean | undefined;
+                    size: number;
+                    isVisible: boolean | undefined;
+                  }>
+                )({
                   position,
                   isResizing,
                   size,

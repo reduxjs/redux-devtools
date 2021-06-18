@@ -52,27 +52,35 @@ export default function importState(
   let preloadedState: State | undefined;
   let nextLiftedState: State = parse(state) as State;
   if (
-    ((nextLiftedState as unknown) as {
-      payload?: string;
-      preloadedState?: string;
-    }).payload
+    (
+      nextLiftedState as unknown as {
+        payload?: string;
+        preloadedState?: string;
+      }
+    ).payload
   ) {
     if (
-      ((nextLiftedState as unknown) as {
-        payload: string;
-        preloadedState?: string;
-      }).preloadedState
+      (
+        nextLiftedState as unknown as {
+          payload: string;
+          preloadedState?: string;
+        }
+      ).preloadedState
     )
       preloadedState = parse(
-        ((nextLiftedState as unknown) as {
-          payload: string;
-          preloadedState: string;
-        }).preloadedState
+        (
+          nextLiftedState as unknown as {
+            payload: string;
+            preloadedState: string;
+          }
+        ).preloadedState
       ) as State;
     nextLiftedState = parse(
-      ((nextLiftedState as unknown) as {
-        payload: string;
-      }).payload
+      (
+        nextLiftedState as unknown as {
+          payload: string;
+        }
+      ).payload
     ) as State;
   }
   if (deserializeState) {
@@ -92,7 +100,7 @@ export default function importState(
     }
     if (typeof preloadedState !== 'undefined') {
       preloadedState = deserializeState(
-        (preloadedState as unknown) as string
+        preloadedState as unknown as string
       ) as State;
     }
   }
@@ -102,7 +110,7 @@ export default function importState(
       nextLiftedState.actionsById,
       (liftedAction) => ({
         ...liftedAction,
-        action: deserializeAction((liftedAction.action as unknown) as string),
+        action: deserializeAction(liftedAction.action as unknown as string),
       })
     );
   }

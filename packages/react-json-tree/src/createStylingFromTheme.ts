@@ -82,9 +82,10 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
     valueText: ({ style }, nodeType) => ({
       style: {
         ...style,
-        color: valueColorMap(colors)[
-          nodeType as keyof ReturnType<typeof valueColorMap>
-        ],
+        color:
+          valueColorMap(colors)[
+            nodeType as keyof ReturnType<typeof valueColorMap>
+          ],
       },
     }),
 

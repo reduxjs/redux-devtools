@@ -902,7 +902,7 @@ export function unliftStore<
     return action;
   }
 
-  return ({
+  return {
     ...liftedStore,
 
     liftedStore,
@@ -913,9 +913,9 @@ export function unliftStore<
 
     replaceReducer(nextReducer: Reducer<S & NextStateExt, A>) {
       liftedStore.replaceReducer(
-        (liftReducer(
-          (nextReducer as unknown) as Reducer<S, A>
-        ) as unknown) as Reducer<
+        liftReducer(
+          nextReducer as unknown as Reducer<S, A>
+        ) as unknown as Reducer<
           LiftedState<S, A, MonitorState> & NextStateExt,
           LiftedAction<S, A, MonitorState>
         >
@@ -946,7 +946,7 @@ export function unliftStore<
         },
       };
     },
-  } as unknown) as Store<S & NextStateExt, A> &
+  } as unknown as Store<S & NextStateExt, A> &
     NextExt & {
       liftedStore: Store<
         LiftedState<S, A, MonitorState> & NextStateExt,
@@ -986,8 +986,8 @@ export default function instrument<
   MonitorState = null,
   MonitorAction extends Action<unknown> = never
 >(
-  monitorReducer: Reducer<MonitorState, MonitorAction> = ((() =>
-    null) as unknown) as Reducer<MonitorState, MonitorAction>,
+  monitorReducer: Reducer<MonitorState, MonitorAction> = (() =>
+    null) as unknown as Reducer<MonitorState, MonitorAction>,
   options: Options<OptionsS, OptionsA, MonitorState, MonitorAction> = {}
 ): StoreEnhancer<InstrumentExt<any, any, MonitorState>> {
   if (typeof options.maxAge === 'number' && options.maxAge < 2) {
@@ -998,61 +998,64 @@ export default function instrument<
   }
 
   return <NextExt, NextStateExt>(
-    createStore: StoreEnhancerStoreCreator<NextExt, NextStateExt>
-  ) => <S, A extends Action<unknown>>(
-    reducer: Reducer<S, A>,
-    initialState?: PreloadedState<S>
-  ) => {
-    function liftReducer(r: Reducer<S, A>) {
-      if (typeof r !== 'function') {
-        if (r && typeof (r as { default: unknown }).default === 'function') {
-          throw new Error(
-            'Expected the reducer to be a function. ' +
-              'Instead got an object with a "default" field. ' +
-              'Did you pass a module instead of the default export? ' +
-              'Try passing require(...).default instead.'
-          );
+      createStore: StoreEnhancerStoreCreator<NextExt, NextStateExt>
+    ) =>
+    <S, A extends Action<unknown>>(
+      reducer: Reducer<S, A>,
+      initialState?: PreloadedState<S>
+    ) => {
+      function liftReducer(r: Reducer<S, A>) {
+        if (typeof r !== 'function') {
+          if (r && typeof (r as { default: unknown }).default === 'function') {
+            throw new Error(
+              'Expected the reducer to be a function. ' +
+                'Instead got an object with a "default" field. ' +
+                'Did you pass a module instead of the default export? ' +
+                'Try passing require(...).default instead.'
+            );
+          }
+          throw new Error('Expected the reducer to be a function.');
         }
-        throw new Error('Expected the reducer to be a function.');
+        return liftReducerWith<S, A, MonitorState, MonitorAction>(
+          r,
+          initialState,
+          monitorReducer,
+          options as unknown as Options<S, A, MonitorState, MonitorAction>
+        );
       }
-      return liftReducerWith<S, A, MonitorState, MonitorAction>(
-        r,
-        initialState,
-        monitorReducer,
-        (options as unknown) as Options<S, A, MonitorState, MonitorAction>
-      );
-    }
 
-    const liftedStore = createStore(liftReducer(reducer));
-    if (
-      (liftedStore as Store<
-        LiftedState<S, A, MonitorState> & NextStateExt,
-        LiftedAction<S, A, MonitorState>
-      > &
-        NextExt & {
-          liftedStore: Store<
-            LiftedState<S, A, MonitorState>,
+      const liftedStore = createStore(liftReducer(reducer));
+      if (
+        (
+          liftedStore as Store<
+            LiftedState<S, A, MonitorState> & NextStateExt,
             LiftedAction<S, A, MonitorState>
-          >;
-        }).liftedStore
-    ) {
-      throw new Error(
-        'DevTools instrumentation should not be applied more than once. ' +
-          'Check your store configuration.'
-      );
-    }
+          > &
+            NextExt & {
+              liftedStore: Store<
+                LiftedState<S, A, MonitorState>,
+                LiftedAction<S, A, MonitorState>
+              >;
+            }
+        ).liftedStore
+      ) {
+        throw new Error(
+          'DevTools instrumentation should not be applied more than once. ' +
+            'Check your store configuration.'
+        );
+      }
 
-    return unliftStore<
-      S,
-      A,
-      MonitorState,
-      MonitorAction,
-      NextExt,
-      NextStateExt
-    >(
-      liftedStore,
-      liftReducer,
-      (options as unknown) as Options<S, A, MonitorState, MonitorAction>
-    );
-  };
+      return unliftStore<
+        S,
+        A,
+        MonitorState,
+        MonitorAction,
+        NextExt,
+        NextStateExt
+      >(
+        liftedStore,
+        liftReducer,
+        options as unknown as Options<S, A, MonitorState, MonitorAction>
+      );
+    };
 }

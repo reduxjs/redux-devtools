@@ -33,7 +33,7 @@ function counterWithBug(state = 0, action: CounterWithBugAction) {
       // @ts-ignore
       return mistake - 1;
     case 'SET_UNDEFINED':
-      return (undefined as unknown) as number;
+      return undefined as unknown as number;
     default:
       return state;
   }
@@ -48,7 +48,7 @@ function counterWithAnotherBug(state = 0, action: CounterWithBugAction) {
     case 'INCREMENT':
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      return ((mistake as unknown) as number) + 1;
+      return (mistake as unknown as number) + 1;
     case 'DECREMENT':
       return state - 1;
     case 'SET_UNDEFINED':
@@ -108,7 +108,7 @@ describe('instrument', () => {
     let lastValue;
     // let calls = 0;
 
-    from((store as unknown) as Observable<number>).subscribe((state) => {
+    from(store as unknown as Observable<number>).subscribe((state) => {
       lastValue = state;
       // calls++;
     });
@@ -258,81 +258,49 @@ describe('instrument', () => {
     storeWithMultiply.dispatch({ type: 'INCREMENT' });
     storeWithMultiply.dispatch({ type: 'MULTIPLY' });
     expect(storeWithMultiply.liftedStore.getState().stagedActionIds).toEqual([
-      0,
-      1,
-      2,
-      3,
-      4,
+      0, 1, 2, 3, 4,
     ]);
     expect(storeWithMultiply.getState()).toBe(2);
 
     storeWithMultiply.liftedStore.dispatch(ActionCreators.reorderAction(4, 1));
     expect(storeWithMultiply.liftedStore.getState().stagedActionIds).toEqual([
-      0,
-      4,
-      1,
-      2,
-      3,
+      0, 4, 1, 2, 3,
     ]);
     expect(storeWithMultiply.getState()).toBe(1);
 
     storeWithMultiply.liftedStore.dispatch(ActionCreators.reorderAction(4, 1));
     expect(storeWithMultiply.liftedStore.getState().stagedActionIds).toEqual([
-      0,
-      4,
-      1,
-      2,
-      3,
+      0, 4, 1, 2, 3,
     ]);
     expect(storeWithMultiply.getState()).toBe(1);
 
     storeWithMultiply.liftedStore.dispatch(ActionCreators.reorderAction(4, 2));
     expect(storeWithMultiply.liftedStore.getState().stagedActionIds).toEqual([
-      0,
-      1,
-      4,
-      2,
-      3,
+      0, 1, 4, 2, 3,
     ]);
     expect(storeWithMultiply.getState()).toBe(2);
 
     storeWithMultiply.liftedStore.dispatch(ActionCreators.reorderAction(1, 10));
     expect(storeWithMultiply.liftedStore.getState().stagedActionIds).toEqual([
-      0,
-      4,
-      2,
-      3,
-      1,
+      0, 4, 2, 3, 1,
     ]);
     expect(storeWithMultiply.getState()).toBe(1);
 
     storeWithMultiply.liftedStore.dispatch(ActionCreators.reorderAction(10, 1));
     expect(storeWithMultiply.liftedStore.getState().stagedActionIds).toEqual([
-      0,
-      4,
-      2,
-      3,
-      1,
+      0, 4, 2, 3, 1,
     ]);
     expect(storeWithMultiply.getState()).toBe(1);
 
     storeWithMultiply.liftedStore.dispatch(ActionCreators.reorderAction(1, -2));
     expect(storeWithMultiply.liftedStore.getState().stagedActionIds).toEqual([
-      0,
-      1,
-      4,
-      2,
-      3,
+      0, 1, 4, 2, 3,
     ]);
     expect(storeWithMultiply.getState()).toBe(2);
 
     storeWithMultiply.liftedStore.dispatch(ActionCreators.reorderAction(0, 1));
     expect(storeWithMultiply.liftedStore.getState().stagedActionIds).toEqual([
-      0,
-      1,
-      4,
-      2,
-      3,
+      0, 1, 4, 2, 3,
     ]);
     expect(storeWithMultiply.getState()).toBe(2);
   });
@@ -366,7 +334,7 @@ describe('instrument', () => {
     store.replaceReducer(
       (() => ({ test: true } as unknown)) as Reducer<number, CounterAction>
     );
-    const newStore = (store as unknown) as Store<{ test: boolean }>;
+    const newStore = store as unknown as Store<{ test: boolean }>;
     expect(newStore.getState()).toEqual({ test: true });
   });
 
@@ -395,7 +363,7 @@ describe('instrument', () => {
 
   it('should catch invalid action type (undefined type)', () => {
     expect(() => {
-      store.dispatch(({ type: undefined } as unknown) as CounterAction);
+      store.dispatch({ type: undefined } as unknown as CounterAction);
     }).toThrow(
       'Actions may not have an undefined "type" property. ' +
         'Have you misspelled a constant?'
@@ -612,11 +580,12 @@ describe('instrument', () => {
       storeWithBug.replaceReducer(
         counterWithAnotherBug as Reducer<number, CounterWithBugAction>
       );
-      const liftedStoreWithAnotherBug = (liftedStoreWithBug as unknown) as LiftedStore<
-        number,
-        CounterWithAnotherBugAction,
-        null
-      >;
+      const liftedStoreWithAnotherBug =
+        liftedStoreWithBug as unknown as LiftedStore<
+          number,
+          CounterWithAnotherBugAction,
+          null
+        >;
       expect(liftedStoreWithAnotherBug.getState().stagedActionIds).toHaveLength(
         5
       );
@@ -1027,7 +996,7 @@ describe('instrument', () => {
     it('should include 3 extra frames when Error.captureStackTrace not suported', () => {
       // eslint-disable-next-line @typescript-eslint/unbound-method
       const captureStackTrace = Error.captureStackTrace;
-      Error.captureStackTrace = (undefined as unknown) as () => unknown;
+      Error.captureStackTrace = undefined as unknown as () => unknown;
       monitoredStore = createStore(
         counter,
         instrument(undefined, { trace: true, traceLimit: 5 })
@@ -1395,18 +1364,18 @@ describe('instrument', () => {
 
   it('throws if reducer is not a function', () => {
     expect(() =>
-      createStore((undefined as unknown) as Reducer, instrument())
+      createStore(undefined as unknown as Reducer, instrument())
     ).toThrow('Expected the reducer to be a function.');
   });
 
   it('warns if the reducer is not a function but has a default field that is', () => {
     expect(() =>
       createStore(
-        ({
+        {
           default: () => {
             // noop
           },
-        } as unknown) as Reducer,
+        } as unknown as Reducer,
         instrument()
       )
     ).toThrow(

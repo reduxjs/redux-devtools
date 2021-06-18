@@ -273,7 +273,7 @@ class LogMonitor<S, A extends Action<unknown>> extends PureComponent<
   }
 }
 
-export default (LogMonitor as unknown) as React.ComponentType<
+export default LogMonitor as unknown as React.ComponentType<
   ExternalProps<unknown, Action<unknown>>
 > & {
   update(

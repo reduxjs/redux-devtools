@@ -53,12 +53,8 @@ export default class TopButtons extends Component<Props> {
   render() {
     const options = this.props.options;
     const features = options.features;
-    const {
-      computedStates,
-      skippedActionIds,
-      isPaused,
-      isLocked,
-    } = this.props.liftedState;
+    const { computedStates, skippedActionIds, isPaused, isLocked } =
+      this.props.liftedState;
     const noStates = computedStates.length < 2;
 
     return (

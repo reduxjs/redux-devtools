@@ -6,7 +6,8 @@ import { switchMonitorTests, delay } from '../utils/e2e';
 const port = 9515;
 const path = resolve('build/extension');
 const extensionId = 'lmhkpmbekcpmknklioeibfkpmmfibljd';
-const actionsPattern = /^@@INIT(.|\n)+@@reduxReactRouter\/routerDidChange(.|\n)+@@reduxReactRouter\/initRoutes(.|\n)+$/;
+const actionsPattern =
+  /^@@INIT(.|\n)+@@reduxReactRouter\/routerDidChange(.|\n)+@@reduxReactRouter\/initRoutes(.|\n)+$/;
 
 describe('Chrome extension', function () {
   beforeAll(async () => {

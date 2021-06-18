@@ -12,9 +12,7 @@ export interface ExtendedOptions extends Options {
   allowClientPublish: boolean;
 }
 
-export default function (argv: {
-  [arg: string]: any;
-}): Promise<{
+export default function (argv: { [arg: string]: any }): Promise<{
   portAlreadyUsed?: boolean;
   on: (status: 'ready', cb: () => void) => void;
 }> {

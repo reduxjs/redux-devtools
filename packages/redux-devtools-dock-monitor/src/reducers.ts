@@ -81,7 +81,7 @@ export default function reducer<S, A extends Action<unknown>>(
             `(${
               child.type.displayName ||
               child.type.name ||
-              ((child.type as unknown) as string)
+              (child.type as unknown as string)
             }) ` +
             'does not appear to be a valid Redux DevTools monitor.'
         );

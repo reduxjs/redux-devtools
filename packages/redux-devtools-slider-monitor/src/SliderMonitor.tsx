@@ -36,7 +36,7 @@ interface DefaultProps {
   keyboardEnabled: boolean;
 }
 
-interface SliderMonitorProps<S, A extends Action<unknown>>  // eslint-disable-next-line @typescript-eslint/ban-types
+interface SliderMonitorProps<S, A extends Action<unknown>> // eslint-disable-next-line @typescript-eslint/ban-types
   extends LiftedState<S, A, {}> {
   // eslint-disable-next-line @typescript-eslint/ban-types
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
@@ -374,7 +374,7 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
   }
 }
 
-export default (SliderMonitor as unknown) as React.ComponentType<
+export default SliderMonitor as unknown as React.ComponentType<
   ExternalProps<unknown, Action<unknown>>
 > & {
   update(

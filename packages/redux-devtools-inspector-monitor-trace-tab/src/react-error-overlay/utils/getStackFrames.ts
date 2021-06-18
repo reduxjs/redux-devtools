@@ -19,15 +19,19 @@ function getStackFrames(
   const parsedFrames = parse(error);
   let enhancedFramesPromise;
   if (
-    ((error as unknown) as {
-      __unmap_source: string | { uri: string; contents: string };
-    }).__unmap_source
+    (
+      error as unknown as {
+        __unmap_source: string | { uri: string; contents: string };
+      }
+    ).__unmap_source
   ) {
     enhancedFramesPromise = unmap(
       // $FlowFixMe
-      ((error as unknown) as {
-        __unmap_source: string | { uri: string; contents: string };
-      }).__unmap_source,
+      (
+        error as unknown as {
+          __unmap_source: string | { uri: string; contents: string };
+        }
+      ).__unmap_source,
       parsedFrames,
       contextSize
     );

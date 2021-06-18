@@ -154,15 +154,8 @@ export default class LogMonitorEntry<
   };
 
   render() {
-    const {
-      actionId,
-      error,
-      action,
-      state,
-      collapsed,
-      selected,
-      inFuture,
-    } = this.props;
+    const { actionId, error, action, state, collapsed, selected, inFuture } =
+      this.props;
     const styleEntry = {
       opacity: collapsed ? 0.5 : 1,
       cursor: actionId > 0 ? 'pointer' : 'default',

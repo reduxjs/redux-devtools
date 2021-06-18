@@ -39,9 +39,8 @@ function parseCompileError(message: string): ErrorLocation | null | undefined {
 
     let k = 0;
     while (k < lineNumberRegexes.length) {
-      const match: string[] | null | undefined = lineNumberRegexes[k].exec(
-        line
-      );
+      const match: string[] | null | undefined =
+        lineNumberRegexes[k].exec(line);
       if (match) {
         lineNumber = parseInt(match[1], 10);
         // colNumber starts with 0 and hence add 1

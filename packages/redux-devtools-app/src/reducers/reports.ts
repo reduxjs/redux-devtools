@@ -25,10 +25,7 @@ export default function reports(
       ...state,
       data: state.data.map(d => (d.id === id ? action.data : d))
     };
-  } else */ if (
-    action.type !== UPDATE_REPORTS
-  )
-    return state;
+  } else */ if (action.type !== UPDATE_REPORTS) return state;
 
   const request = action.request;
   switch (request.type) {

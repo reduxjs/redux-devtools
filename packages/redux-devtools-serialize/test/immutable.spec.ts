@@ -148,9 +148,11 @@ describe('Immutable', function () {
         if (key === 'map' || key === 'orderedMap') {
           const deserializedDefault = parse(stringified);
           expect(
-            (deserializedDefault as
-              | Map<unknown, unknown>
-              | OrderedMap<unknown, unknown>).get('a')
+            (
+              deserializedDefault as
+                | Map<unknown, unknown>
+                | OrderedMap<unknown, unknown>
+            ).get('a')
           ).toEqual(customOneRepresentation);
         }
       });

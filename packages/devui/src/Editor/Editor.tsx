@@ -7,7 +7,7 @@ import { defaultStyle, themedStyle } from './styles';
 import { Theme } from '../themes/default';
 
 const EditorContainer = styled.div(
-  ('' as unknown) as TemplateStringsArray,
+  '' as unknown as TemplateStringsArray,
   ({ theme }: { theme: Theme }) =>
     theme.scheme === 'default' && theme.light
       ? defaultStyle

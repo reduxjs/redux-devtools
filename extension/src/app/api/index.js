@@ -149,12 +149,8 @@ export function toContentScript(message, serializeState, serializeAction) {
     message.action = stringify(message.action, serializeAction);
     message.payload = stringify(message.payload, serializeState);
   } else if (message.type === 'STATE' || message.type === 'PARTIAL_STATE') {
-    const {
-      actionsById,
-      computedStates,
-      committedState,
-      ...rest
-    } = message.payload;
+    const { actionsById, computedStates, committedState, ...rest } =
+      message.payload;
     message.payload = rest;
     message.actionsById = stringify(actionsById, serializeAction);
     message.computedStates = stringify(computedStates, serializeState);
