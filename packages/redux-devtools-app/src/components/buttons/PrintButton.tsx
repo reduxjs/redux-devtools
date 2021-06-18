@@ -8,7 +8,7 @@ export default class PrintButton extends Component {
   }
 
   handlePrint = () => {
-    const d3svg = (document.getElementById('d3svg') as unknown) as SVGGElement;
+    const d3svg = document.getElementById('d3svg') as unknown as SVGGElement;
     if (!d3svg) {
       window.print();
       return;

@@ -13,10 +13,8 @@ function openResource(
   }) => {
     //console.log("openResource callback args: ", callbackArgs);
     if (result.isError) {
-      const {
-        fileName: finalFileName,
-        lineNumber: finalLineNumber,
-      } = stackFrame;
+      const { fileName: finalFileName, lineNumber: finalLineNumber } =
+        stackFrame;
       const adjustedLineNumber = Math.max(finalLineNumber! - 1, 0);
       chrome.devtools.panels.openResource(
         finalFileName!,
@@ -61,7 +59,7 @@ function openInEditor(editor: string, path: string, stackFrame: StackFrame) {
   const projectPath = path.replace(/\/$/, '');
   const file =
     stackFrame._originalFileName ||
-    ((stackFrame as unknown) as { finalFileName: string }).finalFileName ||
+    (stackFrame as unknown as { finalFileName: string }).finalFileName ||
     stackFrame.fileName ||
     '';
   let filePath = /^https?:\/\//.test(file)
@@ -111,38 +109,37 @@ export default function openFile(
   const storage = isFF
     ? chrome.storage.local
     : chrome.storage.sync || chrome.storage.local;
-  storage.get(['useEditor', 'editor', 'projectPath'], function ({
-    useEditor,
-    editor,
-    projectPath,
-  }) {
-    if (
-      useEditor &&
-      projectPath &&
-      typeof editor === 'string' &&
-      /^\w{1,30}$/.test(editor)
-    ) {
-      openInEditor(editor.toLowerCase(), projectPath, stackFrame);
-    } else {
+  storage.get(
+    ['useEditor', 'editor', 'projectPath'],
+    function ({ useEditor, editor, projectPath }) {
       if (
-        chrome.devtools &&
-        chrome.devtools.panels &&
-        !!chrome.devtools.panels.openResource
+        useEditor &&
+        projectPath &&
+        typeof editor === 'string' &&
+        /^\w{1,30}$/.test(editor)
       ) {
-        openResource(fileName, lineNumber, stackFrame);
-      } else if (chrome.runtime && (chrome.runtime.openOptionsPage || isFF)) {
-        if (chrome.devtools && isFF) {
-          chrome.devtools.inspectedWindow.eval(
-            'confirm("Set the editor to open the file in?")',
-            (result) => {
-              if (!result) return;
-              chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
-            }
-          );
-        } else if (confirm('Set the editor to open the file in?')) {
-          chrome.runtime.openOptionsPage();
+        openInEditor(editor.toLowerCase(), projectPath, stackFrame);
+      } else {
+        if (
+          chrome.devtools &&
+          chrome.devtools.panels &&
+          !!chrome.devtools.panels.openResource
+        ) {
+          openResource(fileName, lineNumber, stackFrame);
+        } else if (chrome.runtime && (chrome.runtime.openOptionsPage || isFF)) {
+          if (chrome.devtools && isFF) {
+            chrome.devtools.inspectedWindow.eval(
+              'confirm("Set the editor to open the file in?")',
+              (result) => {
+                if (!result) return;
+                chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
+              }
+            );
+          } else if (confirm('Set the editor to open the file in?')) {
+            chrome.runtime.openOptionsPage();
+          }
         }
       }
     }
-  });
+  );
 }

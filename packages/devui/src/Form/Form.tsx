@@ -22,14 +22,8 @@ export interface Props<T> extends FormProps<T> {
  */
 export default class Form<T> extends (PureComponent || Component)<Props<T>> {
   render() {
-    const {
-      widgets,
-      children,
-      submitText,
-      primaryButton,
-      noSubmit,
-      ...rest
-    } = this.props;
+    const { widgets, children, submitText, primaryButton, noSubmit, ...rest } =
+      this.props;
     return (
       <FormContainer
         {...(rest as Props<unknown>)}

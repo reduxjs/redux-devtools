@@ -78,14 +78,12 @@ export default class ActionListRow<
       <div
         onClick={onSelect}
         onMouseEnter={
-          (!hideActionButtons && this.handleMouseEnter) as MouseEventHandler<
-            HTMLDivElement
-          >
+          (!hideActionButtons &&
+            this.handleMouseEnter) as MouseEventHandler<HTMLDivElement>
         }
         onMouseLeave={
-          (!hideActionButtons && this.handleMouseLeave) as MouseEventHandler<
-            HTMLDivElement
-          >
+          (!hideActionButtons &&
+            this.handleMouseLeave) as MouseEventHandler<HTMLDivElement>
         }
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseEnter}
@@ -193,7 +191,7 @@ export default class ActionListRow<
 
   handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     if (
-      ((e.target as unknown) as { className: string[] }).className.indexOf(
+      (e.target as unknown as { className: string[] }).className.indexOf(
         'selectorButton'
       ) === 0
     )

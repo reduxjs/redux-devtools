@@ -44,7 +44,7 @@ describe('Select', function () {
     );
 
     const input = wrapper.find('input');
-    ((input.at(0).instance() as unknown) as HTMLInputElement).value = 'two';
+    (input.at(0).instance() as unknown as HTMLInputElement).value = 'two';
     input.first().simulate('change');
     expect(mountToJson(wrapper)).toMatchSnapshot();
     input.first().simulate('keyDown', { keyCode: 13 });
@@ -56,7 +56,7 @@ describe('Select', function () {
     const wrapper = mount(<Select options={options} onChange={onChange} />);
 
     const input = wrapper.find('input');
-    ((input.at(0).instance() as unknown) as HTMLInputElement).value = 'text';
+    (input.at(0).instance() as unknown as HTMLInputElement).value = 'text';
     input.first().simulate('change');
     expect(mountToJson(wrapper)).toMatchSnapshot(); // 'No results found'
     input.first().simulate('keyDown', { keyCode: 13 });

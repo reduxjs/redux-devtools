@@ -146,7 +146,7 @@ const getStylingByKeys = (
   ...args: any[]
 ): Styling => {
   if (keys === null) {
-    return (mergedStyling as unknown) as Styling;
+    return mergedStyling as unknown as Styling;
   }
 
   if (!Array.isArray(keys)) {

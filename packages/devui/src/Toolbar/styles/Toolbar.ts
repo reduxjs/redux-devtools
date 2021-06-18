@@ -11,9 +11,11 @@ export interface Props {
   noBorder?: boolean;
 }
 
-const Toolbar = (styled as ThemedStyledInterface<
-  Base16Theme & { fontFamily?: CSS.Property.FontFamily }
->).div<Props>`
+const Toolbar = (
+  styled as ThemedStyledInterface<
+    Base16Theme & { fontFamily?: CSS.Property.FontFamily }
+  >
+).div<Props>`
   display: flex;
   flex-shrink: 0;
   box-sizing: border-box;

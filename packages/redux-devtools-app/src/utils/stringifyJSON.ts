@@ -19,6 +19,6 @@ export default function stringifyJSON(
   serialize: boolean | undefined
 ) {
   return serialize
-    ? jsan.stringify(data, replacer, (null as unknown) as undefined, true)
+    ? jsan.stringify(data, replacer, null as unknown as undefined, true)
     : jsan.stringify(data);
 }

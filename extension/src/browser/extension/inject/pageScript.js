@@ -448,33 +448,32 @@ window.devToolsExtension.disconnect = (...args) => {
   return disconnect.apply(null, args);
 };
 
-const preEnhancer = (instanceId) => (next) => (
-  reducer,
-  preloadedState,
-  enhancer
-) => {
-  const store = next(reducer, preloadedState, enhancer);
+const preEnhancer =
+  (instanceId) => (next) => (reducer, preloadedState, enhancer) => {
+    const store = next(reducer, preloadedState, enhancer);
 
-  if (stores[instanceId]) {
-    stores[instanceId].initialDispatch = store.dispatch;
-  }
+    if (stores[instanceId]) {
+      stores[instanceId].initialDispatch = store.dispatch;
+    }
 
-  return {
-    ...store,
-    dispatch: (...args) =>
-      !window.__REDUX_DEVTOOLS_EXTENSION_LOCKED__ && store.dispatch(...args),
+    return {
+      ...store,
+      dispatch: (...args) =>
+        !window.__REDUX_DEVTOOLS_EXTENSION_LOCKED__ && store.dispatch(...args),
+    };
   };
-};
 
-const extensionCompose = (config) => (...funcs) => {
-  return (...args) => {
-    const instanceId = generateId(config.instanceId);
-    return [preEnhancer(instanceId), ...funcs].reduceRight(
-      (composed, f) => f(composed),
-      __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args)
-    );
+const extensionCompose =
+  (config) =>
+  (...funcs) => {
+    return (...args) => {
+      const instanceId = generateId(config.instanceId);
+      return [preEnhancer(instanceId), ...funcs].reduceRight(
+        (composed, f) => f(composed),
+        __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args)
+      );
+    };
   };
-};
 
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = (...funcs) => {
   if (funcs.length === 0) {

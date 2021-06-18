@@ -109,8 +109,8 @@ function monitoring(request: MonitoringRequest) {
 
   store.dispatch({
     type: UPDATE_STATE,
-    request: ((request as unknown) as RequestWithData).data
-      ? { ...((request as unknown) as RequestWithData).data, id: request.id }
+    request: (request as unknown as RequestWithData).data
+      ? { ...(request as unknown as RequestWithData).data, id: request.id }
       : request,
   });
 

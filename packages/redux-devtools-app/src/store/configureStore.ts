@@ -17,26 +17,30 @@ export default function configureStore(
   ) => void,
   key?: string
 ) {
-  const persistConfig: PersistorConfig = ({
+  const persistConfig: PersistorConfig = {
     keyPrefix: `redux-devtools${key || ''}:`,
     blacklist: ['instances', 'socket'],
     storage: localForage,
     serialize: (data: unknown) => data,
     deserialize: (data: unknown) => data,
-  } as unknown) as PersistorConfig;
+  } as unknown as PersistorConfig;
 
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
   getStoredState<StoreState>(persistConfig, (err, restoredState) => {
     let composeEnhancers = compose;
     if (process.env.NODE_ENV !== 'production') {
       if (
-        ((window as unknown) as {
-          __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-        }).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        (
+          window as unknown as {
+            __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+          }
+        ).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ) {
-        composeEnhancers = ((window as unknown) as {
-          __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: typeof compose;
-        }).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+        composeEnhancers = (
+          window as unknown as {
+            __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: typeof compose;
+          }
+        ).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
       }
       if (module.hot) {
         // Enable Webpack hot module replacement for reducers

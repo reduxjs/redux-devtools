@@ -15,13 +15,11 @@ export const style = ({
   background-color: ${theme.base01};
   width: 100%;
   overflow: hidden;
-  ${
-    !main &&
-    `
+  ${!main &&
+  `
   border-top: 1px solid ${theme.base01};
   border-bottom: 1px solid ${theme.base02};
-  `
-  }
+  `}
 
   > div {
     display: flex;
@@ -50,16 +48,14 @@ export const style = ({
     }
 
     > [data-selected] {
-      ${
-        main
-          ? `border-bottom: 2px solid ${theme.base0D};`
-          : `
+      ${main
+        ? `border-bottom: 2px solid ${theme.base0D};`
+        : `
       background-color: ${theme.base00};
       border: 1px solid ${theme.base02};
       border-bottom: 1px solid ${theme.base00};
       box-shadow: 0 1px ${theme.base00};
-      `
-      }
+      `}
       color: ${theme.base07};
     }
   }

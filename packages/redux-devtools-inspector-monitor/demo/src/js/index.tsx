@@ -33,16 +33,18 @@ const DevTools = getDevTools(window.location);
 const history = createBrowserHistory();
 
 const useDevtoolsExtension =
-  !!((window as unknown) as { __REDUX_DEVTOOLS_EXTENSION__: unknown })
+  !!(window as unknown as { __REDUX_DEVTOOLS_EXTENSION__: unknown })
     .__REDUX_DEVTOOLS_EXTENSION__ && getOptions(window.location).useExtension;
 
 const enhancer = compose(
   applyMiddleware(logger, routerMiddleware(history)),
   (next: StoreEnhancerStoreCreator) => {
     const instrument = useDevtoolsExtension
-      ? ((window as unknown) as {
-          __REDUX_DEVTOOLS_EXTENSION__(): StoreEnhancer;
-        }).__REDUX_DEVTOOLS_EXTENSION__()
+      ? (
+          window as unknown as {
+            __REDUX_DEVTOOLS_EXTENSION__(): StoreEnhancer;
+          }
+        ).__REDUX_DEVTOOLS_EXTENSION__()
       : DevTools.instrument();
     return instrument(next);
   },

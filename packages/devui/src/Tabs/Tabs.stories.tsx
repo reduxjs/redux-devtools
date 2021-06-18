@@ -37,9 +37,9 @@ Default.argTypes = {
   onClick: { control: { disable: true } },
 };
 
-export const WithContent = (Template as Story<
-  TabsProps<{ selected: string }>
->).bind({});
+export const WithContent = (
+  Template as Story<TabsProps<{ selected: string }>>
+).bind({});
 WithContent.args = {
   tabs,
   selected: 'Tab2',

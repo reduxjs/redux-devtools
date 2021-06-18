@@ -70,7 +70,7 @@ class SourceMap {
   }
 
   getSources(): string[] {
-    return ((this.__source_map as unknown) as { sources: string[] }).sources;
+    return (this.__source_map as unknown as { sources: string[] }).sources;
   }
 }
 
@@ -115,9 +115,7 @@ async function getSourceMap(
     sm = sm.substring(match2[0].length);
     sm = window.atob(sm);
     sm = JSON.parse(sm);
-    return new SourceMap(
-      new SourceMapConsumer((sm as unknown) as RawSourceMap)
-    );
+    return new SourceMap(new SourceMapConsumer(sm as unknown as RawSourceMap));
   } else {
     const index = fileUri.lastIndexOf('/');
     const url = fileUri.substring(0, index + 1) + sm;

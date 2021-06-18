@@ -121,7 +121,7 @@ class ActionPreview<S, A extends Action<unknown>> extends Component<
     return (
       <div key="actionPreview" {...styling('actionPreview')}>
         <ActionPreviewHeader
-          tabs={(renderedTabs as unknown) as Tab<unknown, Action<unknown>>[]}
+          tabs={renderedTabs as unknown as Tab<unknown, Action<unknown>>[]}
           {...{ styling, inspectedPath, onInspectPath, tabName, onSelectTab }}
         />
         {!error && (

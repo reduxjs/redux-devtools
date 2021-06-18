@@ -22,43 +22,46 @@ function download(state: string) {
   }, 0);
 }
 
-const exportState = (
-  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>
-) => (next: Dispatch<StoreAction>) => (action: StoreAction) => {
-  const result = next(action);
+const exportState =
+  (store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) =>
+  (next: Dispatch<StoreAction>) =>
+  (action: StoreAction) => {
+    const result = next(action);
 
-  if (
-    toExport &&
-    action.type === UPDATE_STATE &&
-    action.request!.type === 'EXPORT'
-  ) {
-    const request = action.request!;
-    const id = request.instanceId || request.id;
-    if (id === toExport) {
-      toExport = undefined;
-      download(
-        JSON.stringify(
-          {
-            payload: request.payload,
-            preloadedState: (request as ExportRequest).committedState,
-          },
-          null,
-          '\t'
-        )
-      );
+    if (
+      toExport &&
+      action.type === UPDATE_STATE &&
+      action.request!.type === 'EXPORT'
+    ) {
+      const request = action.request!;
+      const id = request.instanceId || request.id;
+      if (id === toExport) {
+        toExport = undefined;
+        download(
+          JSON.stringify(
+            {
+              payload: request.payload,
+              preloadedState: (request as ExportRequest).committedState,
+            },
+            null,
+            '\t'
+          )
+        );
+      }
+    } else if (action.type === EXPORT) {
+      const instances = store.getState().instances;
+      const instanceId = getActiveInstance(instances);
+      const options = instances.options[instanceId];
+      if (options.features.export === true) {
+        download(
+          stringifyJSON(instances.states[instanceId], options.serialize)
+        );
+      } else {
+        toExport = instanceId;
+        next({ type: LIFTED_ACTION, message: 'EXPORT', toExport: true });
+      }
     }
-  } else if (action.type === EXPORT) {
-    const instances = store.getState().instances;
-    const instanceId = getActiveInstance(instances);
-    const options = instances.options[instanceId];
-    if (options.features.export === true) {
-      download(stringifyJSON(instances.states[instanceId], options.serialize));
-    } else {
-      toExport = instanceId;
-      next({ type: LIFTED_ACTION, message: 'EXPORT', toExport: true });
-    }
-  }
-  return result;
-};
+    return result;
+  };
 
 export default exportState;

@@ -66,10 +66,8 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
   };
 
   handleSubmit = ({ formData: template }: { formData: Template }) => {
-    const {
-      templates = getDefaultTemplates(),
-      selected = 0,
-    } = this.getPersistedState();
+    const { templates = getDefaultTemplates(), selected = 0 } =
+      this.getPersistedState();
     if (this.state.dialogStatus === 'Add') {
       this.updateState({
         selected: templates.length,
@@ -86,10 +84,8 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
   };
 
   handleRemove = () => {
-    const {
-      templates = getDefaultTemplates(),
-      selected = 0,
-    } = this.getPersistedState();
+    const { templates = getDefaultTemplates(), selected = 0 } =
+      this.getPersistedState();
     this.updateState({
       selected: 0,
       templates:
@@ -111,9 +107,11 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
   updateState = (newState: TestGeneratorMonitorState) => {
     this.props.updateMonitorState({
       testGenerator: {
-        ...(this.props.monitorState as {
-          testGenerator?: TestGeneratorMonitorState;
-        }).testGenerator,
+        ...(
+          this.props.monitorState as {
+            testGenerator?: TestGeneratorMonitorState;
+          }
+        ).testGenerator,
         ...newState,
       },
     } as Partial<DevtoolsInspectorState>);

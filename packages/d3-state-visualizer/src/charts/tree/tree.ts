@@ -214,13 +214,13 @@ export default function (
     preserveAspectRatio: 'xMinYMin slice',
   };
 
-  if (!((style as unknown) as { [key: string]: Primitive }).width) {
+  if (!(style as unknown as { [key: string]: Primitive }).width) {
     attr.width = fullWidth;
   }
 
   if (
-    !((style as unknown) as { [key: string]: Primitive }).width ||
-    !((style as unknown) as { [key: string]: Primitive }).height
+    !(style as unknown as { [key: string]: Primitive }).width ||
+    !(style as unknown as { [key: string]: Primitive }).height
   ) {
     attr.viewBox = `0 0 ${fullWidth} ${fullHeight}`;
   }
@@ -230,7 +230,7 @@ export default function (
   const vis = root
     .append('svg')
     .attr(attr)
-    .style(({ cursor: '-webkit-grab', ...style } as unknown) as {
+    .style({ cursor: '-webkit-grab', ...style } as unknown as {
       [key: string]: Primitive;
     })
     .call(
@@ -303,10 +303,10 @@ export default function (
       : (nextState as NodeWithId);
 
     if (isEmpty(data) || !data.name) {
-      data = ({
+      data = {
         name: 'error',
         message: 'Please provide a state map or a tree structure',
-      } as unknown) as NodeWithId;
+      } as unknown as NodeWithId;
     }
 
     let nodeIndex = 0;
@@ -366,10 +366,7 @@ export default function (
       const node = vis
         .selectAll('g.node')
         .property('__oldData__', (d: NodeWithId) => d)
-        .data(
-          nodes,
-          (d) => d.id || (d.id = (++nodeIndex as unknown) as string)
-        );
+        .data(nodes, (d) => d.id || (d.id = ++nodeIndex as unknown as string));
       const nodeEnter = node
         .enter()
         .append('g')
@@ -550,7 +547,7 @@ export default function (
         .transition()
         .duration(transitionDuration)
         .attr({
-          d: (diagonal as unknown) as Primitive,
+          d: diagonal as unknown as Primitive,
         });
 
       // transition exiting nodes to the parent's new position

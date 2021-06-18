@@ -4,30 +4,28 @@ import JSONDiff from './JSONDiff';
 import { TabComponentProps } from '../ActionPreview';
 import { Action } from 'redux';
 
-const DiffTab: FunctionComponent<TabComponentProps<
-  unknown,
-  Action<unknown>
->> = ({
-  delta,
-  styling,
-  base16Theme,
-  invertTheme,
-  labelRenderer,
-  isWideLayout,
-  dataTypeKey,
-}) => (
-  <JSONDiff
-    {...{
-      delta,
-      styling,
-      base16Theme,
-      invertTheme,
-      labelRenderer,
-      isWideLayout,
-      dataTypeKey,
-    }}
-  />
-);
+const DiffTab: FunctionComponent<TabComponentProps<unknown, Action<unknown>>> =
+  ({
+    delta,
+    styling,
+    base16Theme,
+    invertTheme,
+    labelRenderer,
+    isWideLayout,
+    dataTypeKey,
+  }) => (
+    <JSONDiff
+      {...{
+        delta,
+        styling,
+        base16Theme,
+        invertTheme,
+        labelRenderer,
+        isWideLayout,
+        dataTypeKey,
+      }}
+    />
+  );
 
 DiffTab.propTypes = {
   delta: PropTypes.any,

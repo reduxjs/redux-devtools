@@ -124,11 +124,11 @@ function tryCatchStringify(obj: unknown) {
     /* eslint-enable no-console */
     return jsan.stringify(
       obj,
-      (null as unknown) as undefined,
-      (null as unknown) as undefined,
-      ({
+      null as unknown as undefined,
+      null as unknown as undefined,
+      {
         circular: '[CIRCULAR]',
-      } as unknown) as boolean
+      } as unknown as boolean
     );
   }
 }
@@ -153,14 +153,14 @@ export function stringify(
           return (value as any).toJS();
         return value;
       },
-      (null as unknown) as undefined,
+      null as unknown as undefined,
       true
     );
   }
   return jsan.stringify(
     obj,
     serialize.replacer,
-    (null as unknown) as undefined,
+    null as unknown as undefined,
     serialize.options as boolean
   );
 }
@@ -195,12 +195,14 @@ export function getSeralizeParameter(
     return { replacer: serialize.replacer, options: serialize.options || true };
   }
 
-  const value = (config as {
-    [param: string]: {
-      replacer?: (key: string, value: unknown) => unknown;
-      options: unknown | boolean;
-    };
-  })[param];
+  const value = (
+    config as {
+      [param: string]: {
+        replacer?: (key: string, value: unknown) => unknown;
+        options: unknown | boolean;
+      };
+    }
+  )[param];
   if (typeof value === 'undefined') return undefined;
   // eslint-disable-next-line no-console
   console.warn(

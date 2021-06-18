@@ -13,7 +13,9 @@ export default function persistState<
   deserializeAction: (action: A) => A = identity
 ): StoreEnhancer {
   if (!sessionId) {
-    return (next) => (...args) => next(...args);
+    return (next) =>
+      (...args) =>
+        next(...args);
   }
 
   function deserialize(
@@ -33,46 +35,47 @@ export default function persistState<
     };
   }
 
-  return (next) => <S, A extends Action<unknown>>(
-    reducer: Reducer<S, A>,
-    initialState?: PreloadedState<S>
-  ) => {
-    const key = `redux-dev-session-${sessionId}`;
+  return (next) =>
+    <S, A extends Action<unknown>>(
+      reducer: Reducer<S, A>,
+      initialState?: PreloadedState<S>
+    ) => {
+      const key = `redux-dev-session-${sessionId}`;
 
-    let finalInitialState;
-    try {
-      const json = localStorage.getItem(key);
-      if (json) {
-        finalInitialState = deserialize(JSON.parse(json)) || initialState;
-        next(reducer, initialState);
-      }
-    } catch (e) {
-      console.warn('Could not read debug session from localStorage:', e); // eslint-disable-line no-console
+      let finalInitialState;
       try {
-        localStorage.removeItem(key);
-      } finally {
-        finalInitialState = undefined;
-      }
-    }
-
-    const store = next(
-      reducer,
-      finalInitialState as PreloadedState<S> | undefined
-    );
-
-    return {
-      ...store,
-      dispatch<T extends A>(action: T) {
-        store.dispatch(action);
-
-        try {
-          localStorage.setItem(key, JSON.stringify(store.getState()));
-        } catch (e) {
-          console.warn('Could not write debug session to localStorage:', e); // eslint-disable-line no-console
+        const json = localStorage.getItem(key);
+        if (json) {
+          finalInitialState = deserialize(JSON.parse(json)) || initialState;
+          next(reducer, initialState);
         }
+      } catch (e) {
+        console.warn('Could not read debug session from localStorage:', e); // eslint-disable-line no-console
+        try {
+          localStorage.removeItem(key);
+        } finally {
+          finalInitialState = undefined;
+        }
+      }
 
-        return action;
-      },
+      const store = next(
+        reducer,
+        finalInitialState as PreloadedState<S> | undefined
+      );
+
+      return {
+        ...store,
+        dispatch<T extends A>(action: T) {
+          store.dispatch(action);
+
+          try {
+            localStorage.setItem(key, JSON.stringify(store.getState()));
+          } catch (e) {
+            console.warn('Could not write debug session to localStorage:', e); // eslint-disable-line no-console
+          }
+
+          return action;
+        },
+      };
     };
-  };
 }

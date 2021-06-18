@@ -72,20 +72,20 @@ class ChartTab extends Component<Props> {
       style: {
         width: '100%',
         height: '100%',
-        node: ({
+        node: {
           colors: {
             default: theme.base0B,
             collapsed: theme.base0B,
             parent: theme.base0E,
           },
           radius: 7,
-        } as unknown) as string,
-        text: ({
+        } as unknown as string,
+        text: {
           colors: {
             default: theme.base0D,
             hover: theme.base06,
           },
-        } as unknown) as string,
+        } as unknown as string,
       },
       onClickText: this.onClickText,
     };

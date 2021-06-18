@@ -67,10 +67,8 @@ class StackFrame extends Component<Props, State> {
   };
 
   getErrorLocation(): ErrorLocation | null {
-    const {
-      _originalFileName: fileName,
-      _originalLineNumber: lineNumber,
-    } = this.props.frame;
+    const { _originalFileName: fileName, _originalLineNumber: lineNumber } =
+      this.props.frame;
     // Unknown file
     if (!fileName) {
       return null;

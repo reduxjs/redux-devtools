@@ -189,7 +189,7 @@ class ChartMonitor<S, A extends Action<unknown>> extends PureComponent<
       heightBetweenNodesCoeff: 1,
       widthBetweenNodesCoeff: 1.3,
       tooltipOptions,
-      style: (this.getChartStyle() as unknown) as
+      style: this.getChartStyle() as unknown as
         | { [key: string]: Primitive }
         | undefined,
     };

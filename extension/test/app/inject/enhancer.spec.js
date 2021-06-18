@@ -155,9 +155,9 @@ describe('Redux enhancer', () => {
           state: JSON.stringify({
             monitorState: {},
             actionsById: {
-              '0': { type: 'PERFORM_ACTION', action: { type: '@@INIT' } },
-              '1': { type: 'PERFORM_ACTION', action: { type: 'INCREMENT' } },
-              '2': { type: 'PERFORM_ACTION', action: { type: 'INCREMENT' } },
+              0: { type: 'PERFORM_ACTION', action: { type: '@@INIT' } },
+              1: { type: 'PERFORM_ACTION', action: { type: 'INCREMENT' } },
+              2: { type: 'PERFORM_ACTION', action: { type: 'INCREMENT' } },
             },
             nextActionId: 3,
             stagedActionIds: [0, 1, 2],
@@ -193,9 +193,8 @@ describe('Redux enhancer', () => {
 
   it('should create the store using old Redux api', async () => {
     const message = await listenMessage(() => {
-      window.store = window.__REDUX_DEVTOOLS_EXTENSION__()(createStore)(
-        counter
-      );
+      window.store =
+        window.__REDUX_DEVTOOLS_EXTENSION__()(createStore)(counter);
       expect(typeof window.store).toBe('object');
     });
     expect(message.type).toBe('INIT_INSTANCE');

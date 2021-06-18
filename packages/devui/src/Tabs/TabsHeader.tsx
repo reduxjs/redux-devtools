@@ -82,9 +82,8 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
         (this.tabsRef!.children[tabButtons.length - 1] as HTMLButtonElement)
           .value === 'expandIcon'
       ) {
-        this.iconWidth = tabButtons[
-          tabButtons.length - 1
-        ].getBoundingClientRect().width;
+        this.iconWidth =
+          tabButtons[tabButtons.length - 1].getBoundingClientRect().width;
         shouldCollapse = true;
       }
     } else if (this.state.hiddenTabs.length === 0) {

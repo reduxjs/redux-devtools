@@ -6,10 +6,9 @@ import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
 import { TabComponentProps } from '../ActionPreview';
 
-const ActionTab: FunctionComponent<TabComponentProps<
-  unknown,
-  Action<unknown>
->> = ({
+const ActionTab: FunctionComponent<
+  TabComponentProps<unknown, Action<unknown>>
+> = ({
   action,
   styling,
   base16Theme,

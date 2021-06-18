@@ -16,7 +16,7 @@ export const {
   AUTHENTICATED,
   PENDING,
   UNAUTHENTICATED,
-} = (socketCluster.SCClientSocket as unknown) as States;
+} = socketCluster.SCClientSocket as unknown as States;
 export const CONNECT_REQUEST = 'socket/CONNECT_REQUEST';
 export const CONNECT_SUCCESS = 'socket/CONNECT_SUCCESS';
 export const CONNECT_ERROR = 'socket/CONNECT_ERROR';

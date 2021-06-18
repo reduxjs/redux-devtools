@@ -43,7 +43,7 @@ class InspectorWrapper extends Component<Props> {
     if (features && features.test) {
       tabs = () => [
         ...(DEFAULT_TABS as Tab<unknown, Action<unknown>>[]),
-        ({ name: 'Test', component: TestTab } as unknown) as Tab<
+        { name: 'Test', component: TestTab } as unknown as Tab<
           unknown,
           Action<unknown>
         >,
