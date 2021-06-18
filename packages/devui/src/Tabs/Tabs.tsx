@@ -79,7 +79,7 @@ export default class Tabs<P> extends Component<TabsProps<P>> {
       <TabsContainer position={this.props.position}>
         {tabsHeader}
         <div>
-          <this.SelectedComponent {...(this.selector! && this.selector!())} />
+          <this.SelectedComponent {...(this.selector! && this.selector())} />
         </div>
       </TabsContainer>
     );

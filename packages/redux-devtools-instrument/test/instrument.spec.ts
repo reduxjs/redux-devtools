@@ -1071,7 +1071,7 @@ describe('instrument', () => {
     });
 
     it('should get stack trace inside setTimeout using a function', () =>
-      new Promise((done) => {
+      new Promise<void>((done) => {
         const stack = new Error().stack;
         setTimeout(() => {
           const traceFn = () => stack! + new Error().stack!;

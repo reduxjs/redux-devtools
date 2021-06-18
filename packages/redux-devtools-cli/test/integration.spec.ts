@@ -17,7 +17,7 @@ describe('Server', function () {
 
   describe('Express backend', function () {
     it('loads main page', function () {
-      return new Promise((done) => {
+      return new Promise<void>((done) => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         request('http://localhost:8000')
           .get('/')
@@ -64,7 +64,7 @@ describe('Server', function () {
     });
 
     it('should connect', function () {
-      return new Promise((done) => {
+      return new Promise<void>((done) => {
         socket.on('connect', function (status) {
           expect(status.id).toBeTruthy();
           done();
@@ -89,7 +89,7 @@ describe('Server', function () {
     });
 
     it('should send message', function () {
-      return new Promise((done) => {
+      return new Promise<void>((done) => {
         const data = {
           type: 'ACTION',
           payload: {
@@ -146,7 +146,7 @@ describe('Server', function () {
         'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36',
     };
     it('should add a report', function () {
-      return new Promise((done) => {
+      return new Promise<void>((done) => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         request('http://localhost:8000')
           .post('/')
@@ -163,7 +163,7 @@ describe('Server', function () {
     });
 
     it('should get the report', function () {
-      return new Promise((done) => {
+      return new Promise<void>((done) => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         request('http://localhost:8000')
           .post('/')
@@ -182,7 +182,7 @@ describe('Server', function () {
     });
 
     it('should list reports', function () {
-      return new Promise((done) => {
+      return new Promise<void>((done) => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         request('http://localhost:8000')
           .post('/')
@@ -207,7 +207,7 @@ describe('Server', function () {
 
   describe('GraphQL backend', function () {
     it('should get the report', function () {
-      return new Promise((done) => {
+      return new Promise<void>((done) => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         request('http://localhost:8000')
           .post('/graphql')

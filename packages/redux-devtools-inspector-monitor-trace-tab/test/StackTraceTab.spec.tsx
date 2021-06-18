@@ -33,14 +33,14 @@ const StackTraceTabAsAny = StackTraceTab as any;
 
 describe('StackTraceTab component', () => {
   it('should render with no props', () => {
-    return new Promise((done) => {
+    return new Promise<void>((done) => {
       const component = mount(<StackTraceTabAsAny />);
       genAsyncSnapshot(component, done);
     });
   });
 
   it('should render with props, but without stack', () => {
-    return new Promise((done) => {
+    return new Promise<void>((done) => {
       const component = mount(
         <StackTraceTabAsAny actions={actions} action={actions[0].action} />
       );
@@ -49,7 +49,7 @@ describe('StackTraceTab component', () => {
   });
 
   it('should render the link to docs', () => {
-    return new Promise((done) => {
+    return new Promise<void>((done) => {
       const component = mount(
         <StackTraceTabAsAny actions={actions} action={actions[1].action} />
       );
@@ -58,7 +58,7 @@ describe('StackTraceTab component', () => {
   });
 
   it('should render with trace stack', () => {
-    return new Promise((done) => {
+    return new Promise<void>((done) => {
       const component = mount(
         <StackTraceTabAsAny actions={actions} action={actions[2].action} />
       );
