@@ -31,7 +31,7 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
     "build:umd": "webpack --progress --config webpack.config.umd.ts",
-    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.ts",
+    "build:umd:min": "webpack --env production --progress --config webpack.config.umd.ts",
     "clean": "rimraf lib dist",
     "test": "jest",
     "lint": "eslint . --ext .ts",
