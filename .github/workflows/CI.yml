@@ -12,8 +12,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - run: cd extension
       - run: yarn install --immutable
-      - run: yarn prettier:check
-      - run: yarn build:all
-      - run: yarn lint:all
-      - run: yarn test:all
+      - run: yarn test
