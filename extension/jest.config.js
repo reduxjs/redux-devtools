@@ -1,4 +1,4 @@
 module.exports = {
   setupFilesAfterEnv: ['<rootDir>/test/setup.js'],
-  testPathIgnorePatterns: ['<rootDir>/examples'],
+  testPathIgnorePatterns: ['<rootDir>/examples', '<rootDir>/test/electron'],
 };
