@@ -4,7 +4,7 @@ import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const port = 9515;
-const path = resolve('build/extension');
+const path = resolve(__dirname, '..', '..', 'build', 'extension');
 const extensionId = 'lmhkpmbekcpmknklioeibfkpmmfibljd';
 const actionsPattern =
   /^@@INIT(.|\n)+@@reduxReactRouter\/routerDidChange(.|\n)+@@reduxReactRouter\/initRoutes(.|\n)+$/;
@@ -17,7 +17,11 @@ describe('Chrome extension', function () {
       .usingServer(`http://localhost:${port}`)
       .withCapabilities({
         chromeOptions: {
-          args: ['--no-sandbox', `load-extension=${path}`],
+          args: [
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            `load-extension=${path}`,
+          ],
         },
       })
       .forBrowser('chrome')
