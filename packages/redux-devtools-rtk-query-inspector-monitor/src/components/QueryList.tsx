@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactNode, MouseEvent } from 'react';
+import React, { PureComponent, ReactNode } from 'react';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 import { QueryInfo, RtkQueryInspectorMonitorState } from '../types';
 import { isQuerySelected } from '../utils/rtk-query';

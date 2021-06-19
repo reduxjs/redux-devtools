@@ -12,7 +12,7 @@ export default function PokemonView() {
   return (
     <Flex p="2" as="section" flexWrap="nowrap" flexDirection="column">
       <Heading as="h2">Pokemon polling demo</Heading>
-      <div className="demo-toolbar">
+      <Flex p="2" gridGap="0.5em" flexDirection="row" flexWrap="wrap">
         <Button
           onClick={() =>
             setPokemon((prev) => [...prev, getRandomPokemonName()])
@@ -23,7 +23,7 @@ export default function PokemonView() {
         <Button onClick={() => setPokemon((prev) => [...prev, 'bulbasaur'])}>
           Add bulbasaur
         </Button>
-      </div>
+      </Flex>
 
       <div className="pokemon-list">
         {pokemon.map((name, index) => (

@@ -1,6 +1,6 @@
 import PokemonView from 'features/pokemon/PokemonView';
 import PostsView from 'features/posts/PostsView';
-import { Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import { Link, UnorderedList, ListItem } from '@chakra-ui/react';
 import { Code } from '@chakra-ui/react';
 import * as React from 'react';
@@ -14,14 +14,17 @@ export function App() {
       <PostsView />
       <Flex p="2" as="section" flexWrap="nowrap" flexDirection="column">
         <Heading as="h2">Dock controls</Heading>
-        <pre>
+        <Box as="pre" p="2" paddingX="4">
           <Code>
             {`toggleVisibilityKey="ctrl-h"\nchangePositionKey="ctrl-q"`}
           </Code>
-        </pre>
+        </Box>
+        <Box as="p" p="2" paddingX="4">
+          Drag its border to resize
+        </Box>
       </Flex>
       <Flex p="2" as="footer">
-        <UnorderedList>
+        <UnorderedList p="2">
           <ListItem>
             <Link
               className="link"

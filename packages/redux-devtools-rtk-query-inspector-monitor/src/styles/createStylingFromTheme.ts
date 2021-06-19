@@ -161,8 +161,6 @@ const getSheetFromColorMap = (map: ColorMap) => {
     },
 
     tabSelector: {
-      position: 'relative',
-      'z-index': 1,
       display: 'inline-flex',
       float: 'right',
     },
@@ -296,7 +294,7 @@ const getSheetFromColorMap = (map: ColorMap) => {
     searchSelectLabel: {
       display: 'inline-block',
       padding: 4,
-      borderLeft: `1px solid currentColor`,
+      borderLeft: '1px solid currentColor',
     },
 
     queryPreview: {

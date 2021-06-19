@@ -17,6 +17,7 @@ yarn
 ```bash
 yarn exec --cwd 'packages/redux-devtools-rtk-query-inspector-monitor/demo' yarn
 ```
+
 ### 3. Start demo
 
 ```bash

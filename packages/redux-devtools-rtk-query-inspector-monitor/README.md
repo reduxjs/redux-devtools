@@ -27,7 +27,6 @@ npm i @redux-devtools/rtk-query-inspector-monitor --save
 yarn add @redux-devtools/rtk-query-inspector-monitor
 ```
 
-
 ## Usage
 
 You can use `RtkQueryInspectorMonitor` as the only monitor in your app:
@@ -44,7 +43,7 @@ export default createDevTools(<RtkQueryInspectorMonitor />);
 
 Then you can render `<DevTools>` to any place inside app or even into a separate popup window.
 
-Alternatively, you can use it together with [`DockMonitor`](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor) to make it dockable.  
+Alternatively, you can use it together with [`DockMonitor`](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor) to make it dockable.
 
 See also
 
@@ -54,27 +53,26 @@ See also
 
 - [Redux Devtools walkthrough](https://github.com/reduxjs/redux-devtools/tree/master/docs/Walkthrough.md)
 
-
 ## Features
 
 - sorts queries in ascending or descending order by:
-    - fulfilledTimeStamp
-    - query key
-    - query status
-    - endpoint
-    - api reducerPath
+  - fulfilledTimeStamp
+  - query key
+  - query status
+  - endpoint
+  - api reducerPath
 - filters queries by:
-    - fulfilledTimeStamp
-    - query key
-    - query status
-    - endpoint
-    - api reducerPath
+  - fulfilledTimeStamp
+  - query key
+  - query status
+  - endpoint
+  - api reducerPath
 - displays
-    - status flags
-    - query state
-    - tags
-    - subscriptions
-    - api slice config
+  - status flags
+  - query state
+  - tags
+  - subscriptions
+  - api slice config
 
 ## TODO
 
@@ -84,7 +82,6 @@ See also
 - [ ] upload query.data(?)
 - [ ] refetch query button(?)
 - ...suggestions are welcome
-
 
 ## Redux DevTools props
 
