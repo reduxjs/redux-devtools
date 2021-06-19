@@ -6,26 +6,28 @@ export const delay = (time) =>
 export const switchMonitorTests = {
   'should switch to Log Monitor': async function () {
     await this.driver
-      .findElement(webdriver.By.xpath('//div[text()="Inspector"]'))
+      .findElement(webdriver.By.xpath('//button[text()="Inspector"]'))
       .click();
     await delay(500); // Wait till menu is fully opened
     await this.driver
-      .findElement(webdriver.By.xpath('//div[text()="Log monitor"]'))
+      .findElement(webdriver.By.xpath('//button[text()="Log monitor"]'))
       .click();
     await delay(500);
     await this.driver.findElement(
-      webdriver.By.xpath('//div[a[text()="Reset"] and .//a[text()="Revert"]]')
+      webdriver.By.xpath(
+        '//div[div[button[text()="Reset"]] and .//div[button[text()="Revert"]]]'
+      )
     );
     await delay(500);
   },
 
   'should switch to Chart Monitor': async function () {
     await this.driver
-      .findElement(webdriver.By.xpath('//div[text()="Log monitor"]'))
+      .findElement(webdriver.By.xpath('//button[text()="Log monitor"]'))
       .click();
     await delay(500); // Wait till menu is fully opened
     await this.driver
-      .findElement(webdriver.By.xpath('//div[text()="Chart"]'))
+      .findElement(webdriver.By.xpath('//button[text()="Chart"]'))
       .click();
     await delay(500);
     await this.driver.findElement(
@@ -36,11 +38,11 @@ export const switchMonitorTests = {
 
   'should switch back to Inspector Monitor': async function () {
     await this.driver
-      .findElement(webdriver.By.xpath('//div[text()="Chart"]'))
+      .findElement(webdriver.By.xpath('//button[text()="Chart"]'))
       .click();
     await delay(1000); // Wait till menu is fully opened
     await this.driver
-      .findElement(webdriver.By.xpath('//div[text()="Inspector"]'))
+      .findElement(webdriver.By.xpath('//button[text()="Inspector"]'))
       .click();
     await delay(1500); // Wait till menu is closed
   },

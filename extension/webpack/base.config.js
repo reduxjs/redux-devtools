@@ -7,7 +7,7 @@ const mock = `${extpath}chromeAPIMock.js`;
 
 const baseConfig = (params) => ({
   // devtool: 'source-map',
-  mode: 'production',
+  mode: params.mode,
   entry: params.input || {
     background: [mock, `${extpath}background/index`],
     options: [mock, `${extpath}options/index`],
