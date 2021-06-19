@@ -18,8 +18,9 @@ describe('Chrome extension', function () {
       .withCapabilities({
         chromeOptions: {
           args: [
-            'no-sandbox',
-            'disable-dev-shm-usage',
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--headless',
             `load-extension=${path}`,
           ],
         },
