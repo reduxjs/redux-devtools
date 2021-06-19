@@ -17,7 +17,7 @@ describe('DevTools panel for Electron', function () {
       .withCapabilities({
         chromeOptions: {
           binary: electronPath,
-          args: [`app=${join(__dirname, 'fixture')}`],
+          args: ['--no-sandbox', `app=${join(__dirname, 'fixture')}`],
         },
       })
       .forBrowser('electron')

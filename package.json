@@ -60,7 +60,7 @@
     "prettify": "prettier --write .",
     "prettier:check": "prettier --check .",
     "test": "jest --onlyChanged",
-    "test:all": "lerna run test"
+    "test:all": "jest"
   },
   "workspaces": [
     "extension",
