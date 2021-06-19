@@ -20,7 +20,6 @@ describe('Chrome extension', function () {
           args: [
             '--no-sandbox',
             '--disable-dev-shm-usage',
-            '--headless',
             `load-extension=${path}`,
           ],
         },

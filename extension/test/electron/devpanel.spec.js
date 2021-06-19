@@ -20,7 +20,6 @@ describe('DevTools panel for Electron', function () {
           args: [
             '--no-sandbox',
             '--disable-dev-shm-usage',
-            '--headless',
             `app=${join(__dirname, 'fixture')}`,
           ],
         },
