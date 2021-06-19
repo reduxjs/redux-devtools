@@ -8,10 +8,14 @@ import {
   RtkQueryTag,
   RTKStatusFlags,
   RtkQueryState,
+  MutationInfo,
+  ApiStats,
+  QueryTally,
 } from '../types';
 import { missingTagId } from '../monitor-config';
 import { Comparator } from './comparators';
 import { emptyArray } from './object';
+import { SubscriptionState } from '@reduxjs/toolkit/dist/query/core/apiState';
 
 const rtkqueryApiStateKeys: ReadonlyArray<keyof RtkQueryApiState> = [
   'queries',
@@ -38,18 +42,18 @@ export function isApiSlice(val: unknown): val is RtkQueryApiState {
 }
 
 export function getApiStatesOf(
-  state: unknown
+  reduxStoreState: unknown
 ): null | Readonly<Record<string, RtkQueryApiState>> {
-  if (!isPlainObject(state)) {
+  if (!isPlainObject(reduxStoreState)) {
     return null;
   }
 
   const output: null | Record<string, RtkQueryApiState> = {};
-  const keys = Object.keys(state);
+  const keys = Object.keys(reduxStoreState);
 
   for (let i = 0, len = keys.length; i < len; i++) {
     const key = keys[i];
-    const value = (state as Record<string, unknown>)[key];
+    const value = (reduxStoreState as Record<string, unknown>)[key];
 
     if (isApiSlice(value)) {
       output[key] = value;
@@ -94,6 +98,105 @@ export function extractAllApiQueries(
   }
 
   return output;
+}
+
+export function extractAllApiMutations(
+  apiStatesByReducerPath: null | Readonly<Record<string, RtkQueryApiState>>
+): ReadonlyArray<MutationInfo> {
+  if (!apiStatesByReducerPath) {
+    return emptyArray;
+  }
+
+  const reducerPaths = Object.keys(apiStatesByReducerPath);
+  const output: MutationInfo[] = [];
+
+  for (let i = 0, len = reducerPaths.length; i < len; i++) {
+    const reducerPath = reducerPaths[i];
+    const api = apiStatesByReducerPath[reducerPath];
+    const mutationKeys = Object.keys(api.mutations);
+
+    for (let j = 0, mKeysLen = mutationKeys.length; j < mKeysLen; j++) {
+      const queryKey = mutationKeys[j];
+      const mutation = api.queries[queryKey];
+
+      if (mutation) {
+        output.push({
+          reducerPath,
+          queryKey,
+          mutation,
+        });
+      }
+    }
+  }
+
+  return output;
+}
+
+function computeQueryTallyOf(
+  queryState: RtkQueryApiState['queries'] | RtkQueryApiState['mutations']
+): QueryTally {
+  const queries = Object.values(queryState);
+
+  const output: QueryTally = {
+    count: 0,
+  };
+
+  for (let i = 0, len = queries.length; i < len; i++) {
+    const query = queries[i];
+
+    if (query) {
+      output.count++;
+
+      if (!output[query.status]) {
+        output[query.status] = 1;
+      } else {
+        (output[query.status] as number)++;
+      }
+    }
+  }
+
+  return output;
+}
+
+function tallySubscriptions(
+  subsState: SubscriptionState
+): ApiStats['tally']['subscriptions'] {
+  const subsOfQueries = Object.values(subsState);
+
+  const output: ApiStats['tally']['subscriptions'] = {
+    count: 0,
+  };
+
+  for (let i = 0, len = subsOfQueries.length; i < len; i++) {
+    const subsOfQuery = subsOfQueries[i];
+
+    if (subsOfQuery) {
+      output.count += Object.keys(subsOfQuery).length;
+    }
+  }
+
+  return output;
+}
+
+export function generateApiStatsOfCurrentQuery(
+  queryInfo: QueryInfo | null,
+  apiStates: ReturnType<typeof getApiStatesOf>
+): ApiStats | null {
+  if (!apiStates || !queryInfo) {
+    return null;
+  }
+
+  const { reducerPath } = queryInfo;
+  const api = apiStates[reducerPath];
+
+  return {
+    tally: {
+      subscriptions: tallySubscriptions(api.subscriptions),
+      queries: computeQueryTallyOf(api.queries),
+      tagTypes: { count: Object.keys(api.provided).length },
+      mutations: computeQueryTallyOf(api.mutations),
+    },
+  };
 }
 
 export function flipComparator<T>(comparator: Comparator<T>): Comparator<T> {

@@ -1,5 +1,5 @@
 import { LiftedAction, LiftedState } from '@redux-devtools/instrument';
-import type { createApi } from '@reduxjs/toolkit/query';
+import type { createApi, QueryStatus } from '@reduxjs/toolkit/query';
 import { ComponentType, Dispatch } from 'react';
 import { Base16Theme, StylingFunction } from 'react-base16-styling';
 import { Action } from 'redux';
@@ -33,14 +33,7 @@ export interface RtkQueryInspectorMonitorProps<S, A extends Action<unknown>>
   dispatch: Dispatch<
     Action | LiftedAction<S, A, RtkQueryInspectorMonitorState>
   >;
-
-  preserveScrollTop: boolean;
-  select: (state: S) => unknown;
   theme: keyof typeof themes | Base16Theme;
-  expandActionRoot: boolean;
-  expandStateRoot: boolean;
-  markStateDiff: boolean;
-  hideMainButtons?: boolean;
   invertTheme?: boolean;
 }
 
@@ -50,6 +43,10 @@ export type RtkQueryApiState = ReturnType<
 
 export type RtkQueryState = NonNullable<
   RtkQueryApiState['queries'][keyof RtkQueryApiState]
+>;
+
+export type RtkMutationState = NonNullable<
+  RtkQueryApiState['mutations'][keyof RtkQueryApiState]
 >;
 
 export type RtkQueryApiConfig = RtkQueryApiState['config'];
@@ -73,6 +70,12 @@ export interface ExternalProps<S, A extends Action<unknown>> {
 
 export interface QueryInfo {
   query: RtkQueryState;
+  queryKey: string;
+  reducerPath: string;
+}
+
+export interface MutationInfo {
+  mutation: RtkMutationState;
   queryKey: string;
   reducerPath: string;
 }
@@ -107,12 +110,31 @@ export interface RtkQueryTag {
   id?: number | string;
 }
 
+interface Tally {
+  count: number;
+}
+
+export type QueryTally = {
+  [key in QueryStatus]?: number;
+} &
+  Tally;
+
+export interface ApiStats {
+  readonly tally: {
+    subscriptions: Tally;
+    queries: QueryTally;
+    tagTypes: Tally;
+    mutations: QueryTally;
+  };
+}
+
 export interface QueryPreviewTabProps extends StyleUtils {
   queryInfo: QueryInfo | null;
   apiConfig: RtkQueryApiState['config'] | null;
   querySubscriptions: RTKQuerySubscribers | null;
   isWideLayout: boolean;
   tags: RtkQueryTag[];
+  apiStats: ApiStats | null;
 }
 
 export interface TabOption<S, P> extends SelectOption<S> {

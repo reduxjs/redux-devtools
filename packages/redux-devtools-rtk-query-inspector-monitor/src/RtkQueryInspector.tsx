@@ -134,14 +134,8 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
 
     const currentTags = this.selectors.selectCurrentQueryTags(selectorsSource);
 
-    console.log('inspector', {
-      apiStates,
-      allVisibleQueries,
-      selectorsSource,
-      currentQueryInfo,
-      currentRtkApi,
-      currentTags,
-    });
+    const currentApiStats =
+      this.selectors.selectApiStatsOfCurrentQuery(selectorsSource);
 
     return (
       <div
@@ -172,6 +166,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
           querySubscriptions={currentQuerySubscriptions}
           apiConfig={currentRtkApi?.config ?? null}
           isWideLayout={isWideLayout}
+          apiStats={currentApiStats}
         />
       </div>
     );

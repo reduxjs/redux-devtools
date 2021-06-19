@@ -8,7 +8,7 @@ import {
 } from '../types';
 import { QueryPreviewHeader } from './QueryPreviewHeader';
 import { QueryPreviewInfo } from './QueryPreviewInfo';
-import { QueryPreviewApiConfig } from './QueryPreviewApiConfig';
+import { QueryPreviewApi } from './QueryPreviewApi';
 import { QueryPreviewSubscriptions } from './QueryPreviewSubscriptions';
 import { QueryPreviewTags } from './QueryPreviewTags';
 
@@ -37,7 +37,7 @@ const tabs: ReadonlyArray<QueryPreviewTabOption> = [
   {
     label: 'api',
     value: QueryPreviewTabs.apiConfig,
-    component: QueryPreviewApiConfig,
+    component: QueryPreviewApi,
   },
 ];
 
@@ -94,6 +94,7 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
       onTabChange,
       querySubscriptions,
       tags,
+      apiStats,
     } = this.props;
 
     const { component: TabComponent } =
@@ -136,6 +137,7 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
                 tags={tags}
                 apiConfig={apiConfig}
                 isWideLayout={isWideLayout}
+                apiStats={apiStats}
               />
             </div>
           );

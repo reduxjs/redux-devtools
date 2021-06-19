@@ -73,6 +73,7 @@ See also
   - tags
   - subscriptions
   - api slice config
+  - api stats
 
 ## TODO
 

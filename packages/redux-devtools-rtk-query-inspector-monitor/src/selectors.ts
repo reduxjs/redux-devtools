@@ -1,6 +1,6 @@
 import { Action, createSelector, Selector } from '@reduxjs/toolkit';
 import { RtkQueryInspectorProps } from './RtkQueryInspector';
-import { QueryInfo, RtkQueryTag, SelectorsSource } from './types';
+import { ApiStats, QueryInfo, RtkQueryTag, SelectorsSource } from './types';
 import { Comparator, queryComparators } from './utils/comparators';
 import { FilterList, queryListFilters } from './utils/filters';
 import { escapeRegExpSpecialCharacter } from './utils/regexp';
@@ -9,6 +9,7 @@ import {
   extractAllApiQueries,
   flipComparator,
   getQueryTagsOf,
+  generateApiStatsOfCurrentQuery,
 } from './utils/rtk-query';
 
 type InspectorSelector<S, Output> = Selector<SelectorsSource<S>, Output>;
@@ -50,6 +51,7 @@ export interface InspectorSelectors<S> {
   readonly selectorCurrentQueryInfo: InspectorSelector<S, QueryInfo | null>;
   readonly selectSearchQueryRegex: InspectorSelector<S, RegExp | null>;
   readonly selectCurrentQueryTags: InspectorSelector<S, RtkQueryTag[]>;
+  readonly selectApiStatsOfCurrentQuery: InspectorSelector<S, ApiStats | null>;
 }
 
 export function createInspectorSelectors<S>(): InspectorSelectors<S> {
@@ -135,6 +137,13 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     (apiState, currentQueryInfo) => getQueryTagsOf(currentQueryInfo, apiState)
   );
 
+  const selectApiStatsOfCurrentQuery = createSelector(
+    selectApiStates,
+    selectorCurrentQueryInfo,
+    (apiState, currentQueryInfo) =>
+      generateApiStatsOfCurrentQuery(currentQueryInfo, apiState)
+  );
+
   return {
     selectQueryComparator,
     selectApiStates,
@@ -143,5 +152,6 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     selectSearchQueryRegex,
     selectorCurrentQueryInfo,
     selectCurrentQueryTags,
+    selectApiStatsOfCurrentQuery,
   };
 }
