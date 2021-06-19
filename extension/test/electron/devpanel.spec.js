@@ -17,11 +17,7 @@ describe('DevTools panel for Electron', function () {
       .withCapabilities({
         chromeOptions: {
           binary: electronPath,
-          args: [
-            '--no-sandbox',
-            '--disable-dev-shm-usage',
-            `app=${join(__dirname, 'fixture')}`,
-          ],
+          args: [`app=${join(__dirname, 'fixture')}`],
         },
       })
       .forBrowser('electron')

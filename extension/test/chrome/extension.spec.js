@@ -17,11 +17,7 @@ describe('Chrome extension', function () {
       .usingServer(`http://localhost:${port}`)
       .withCapabilities({
         chromeOptions: {
-          args: [
-            '--no-sandbox',
-            '--disable-dev-shm-usage',
-            `load-extension=${path}`,
-          ],
+          args: [`load-extension=${path}`],
         },
       })
       .forBrowser('chrome')

@@ -8,14 +8,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
       - run: yarn install --immutable
-      - run: yarn prettier:check
       - run: yarn build:all
-      - run: yarn lint:all
-      - uses: GabrielBB/xvfb-action@v1
-        with:
-          run: yarn test:all
+      - run: yarn test:all
