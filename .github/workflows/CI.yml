@@ -12,6 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: cd extension
-      - run: yarn install --immutable
-      - run: yarn test
+      - working-directory: ./extension
+        run: yarn install --immutable
+      - working-directory: ./extension
+        run: yarn test
