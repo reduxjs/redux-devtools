@@ -14,7 +14,7 @@ export enum QueryComparators {
 }
 
 export const sortQueryOptions: SelectOption<QueryComparators>[] = [
-  { label: 'fulfilledTimeStamp', value: QueryComparators.fulfilledTimeStamp },
+  { label: 'last updated', value: QueryComparators.fulfilledTimeStamp },
   { label: 'query key', value: QueryComparators.queryKey },
   { label: 'status', value: QueryComparators.status },
   { label: 'endpoint', value: QueryComparators.endpointName },
