@@ -1,17 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './App';
+import { ChakraProvider } from '@chakra-ui/react';
 import './index.css';
 import { store } from './store';
 import DevTools from './DevTools';
+import { BrowserRouter } from 'react-router-dom';
+import { App } from 'App';
+import { worker } from './mocks/browser';
 
-const rootElement = document.getElementById('root');
+function renderApp() {
+  const rootElement = document.getElementById('root');
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-    <DevTools />
-  </Provider>,
-  rootElement
-);
+  ReactDOM.render(
+    <Provider store={store}>
+      <ChakraProvider>
+        <BrowserRouter>
+          <App />
+          <DevTools />
+        </BrowserRouter>
+      </ChakraProvider>
+    </Provider>,
+    rootElement
+  );
+}
+
+worker.start({ quiet: true }).then(renderApp);

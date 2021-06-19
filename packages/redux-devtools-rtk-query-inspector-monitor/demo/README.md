@@ -6,17 +6,19 @@
 
 Run the following commands from redux-devtools monorepo root directory.
 
-### 1. Install depedencies
+### 1. Install monorepo depedencies
 
 ```bash
 yarn
 ```
 
-### 2. Start demo
+### 2. Install demo dependencies
 
 ```bash
-# working directory is monorepo root
-yarn lerna run --parallel start \
---scope '@redux-devtools/rtk-query-inspector-monitor' \
---scope 'rtk-query-imspector-monitor-demo'
+yarn exec --cwd 'packages/redux-devtools-rtk-query-inspector-monitor/demo' yarn
+```
+### 3. Start demo
+
+```bash
+yarn lerna run --stream start --scope '@redux-devtools/rtk-query-inspector-monitor'
 ```

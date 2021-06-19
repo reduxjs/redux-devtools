@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useGetPokemonByNameQuery } from './services/pokemon';
-import type { PokemonName } from './pokemon.data';
+import { Button, Select } from '@chakra-ui/react';
+import { useGetPokemonByNameQuery } from '../../services/pokemon';
+import type { PokemonName } from '../../pokemon.data';
 
 const intervalOptions = [
   { label: 'Off', value: 0 },
@@ -9,9 +10,6 @@ const intervalOptions = [
   { label: '10s', value: 10000 },
   { label: '1m', value: 60000 },
 ];
-
-const getRandomIntervalValue = () =>
-  intervalOptions[Math.floor(Math.random() * intervalOptions.length)].value;
 
 export function Pokemon({ name }: { name: PokemonName }) {
   const [pollingInterval, setPollingInterval] = useState(60000);
@@ -44,7 +42,7 @@ export function Pokemon({ name }: { name: PokemonName }) {
           </div>
           <div>
             <label style={{ display: 'block' }}>Polling interval</label>
-            <select
+            <Select
               value={pollingInterval}
               onChange={({ target: { value } }) =>
                 setPollingInterval(Number(value))
@@ -55,12 +53,12 @@ export function Pokemon({ name }: { name: PokemonName }) {
                   {label}
                 </option>
               ))}
-            </select>
+            </Select>
           </div>
           <div>
-            <button onClick={refetch} disabled={isFetching}>
+            <Button onClick={refetch} disabled={isFetching}>
               {isFetching ? 'Loading' : 'Manually refetch'}
-            </button>
+            </Button>
           </div>
         </>
       ) : (

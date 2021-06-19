@@ -4008,6 +4008,7 @@ __metadata:
     "@types/redux-devtools-themes": ^1.0.0
     devui: ^1.0.0-8
     lodash.debounce: ^4.0.8
+    npm-run-all: ^4.1.5
     prop-types: ^15.7.2
     react: ^16.13.1
     react-json-tree: ^0.15.0
@@ -19787,6 +19788,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"memorystream@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "memorystream@npm:0.3.1"
+  checksum: 825bcc7d3eb8bd021a1b0f8c81e4d7a8dc2eced1f8bb79d41ec978547cf118146d6863f5e6134f02bb55ee5d963a8689793e6e82ce8eb989bac339ae782728bb
+  languageName: node
+  linkType: hard
+
 "meow@npm:^3.3.0":
   version: 3.7.0
   resolution: "meow@npm:3.7.0"
@@ -21092,46 +21100,24 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"npm-registry-client@npm:~7.2.1":
-  version: 7.2.1
-  resolution: "npm-registry-client@npm:7.2.1"
+"npm-run-all@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "npm-run-all@npm:4.1.5"
   dependencies:
-    concat-stream: ^1.5.2
-    graceful-fs: ^4.1.6
-    normalize-package-data: ~1.0.1 || ^2.0.0
-    npm-package-arg: ^3.0.0 || ^4.0.0
-    npmlog: ~2.0.0 || ~3.1.0
-    once: ^1.3.3
-    request: ^2.74.0
-    retry: ^0.10.0
-    semver: 2 >=2.2.1 || 3.x || 4 || 5
-    slide: ^1.1.3
-  dependenciesMeta:
-    npmlog:
-      optional: true
-  checksum: 2f172e9d4a90e7c5172a705af0db10c96d8ec55ede6141c7fe4116382b492c0e6744b759347111bff0cc1a7d9e4e8b5185007b74b2dbb912de16b1bb4331959d
-  languageName: node
-  linkType: hard
-
-"npm-registry-client@npm:~8.4.0":
-  version: 8.4.0
-  resolution: "npm-registry-client@npm:8.4.0"
-  dependencies:
-    concat-stream: ^1.5.2
-    graceful-fs: ^4.1.6
-    normalize-package-data: ~1.0.1 || ^2.0.0
-    npm-package-arg: ^3.0.0 || ^4.0.0 || ^5.0.0
-    npmlog: 2 || ^3.1.0 || ^4.0.0
-    once: ^1.3.3
-    request: ^2.74.0
-    retry: ^0.10.0
-    semver: 2 >=2.2.1 || 3.x || 4 || 5
-    slide: ^1.1.3
-    ssri: ^4.1.2
-  dependenciesMeta:
-    npmlog:
-      optional: true
-  checksum: f16d83cf8eed879080dd758a00995864c77613ed964cc36ab0e9d9ed00d246e6dc31bf2959caf09284710676efb2e8cbc90e30f8b1d30860494a17c1b83dc5f3
+    ansi-styles: ^3.2.1
+    chalk: ^2.4.1
+    cross-spawn: ^6.0.5
+    memorystream: ^0.3.1
+    minimatch: ^3.0.4
+    pidtree: ^0.3.0
+    read-pkg: ^3.0.0
+    shell-quote: ^1.6.1
+    string.prototype.padend: ^3.0.0
+  bin:
+    npm-run-all: bin/npm-run-all/index.js
+    run-p: bin/run-p/index.js
+    run-s: bin/run-s/index.js
+  checksum: ef1b5b5a5fe7864d2b45c13de6dbffacde956bfc265117e0d1c8b05ee34264d494e5e65474d46592228e3a00857eae58359782fe7889d73de0a8714e6f9c0e83
   languageName: node
   linkType: hard
 
@@ -22381,6 +22367,15 @@ fsevents@^1.2.7:
   version: 2.3.0
   resolution: "picomatch@npm:2.3.0"
   checksum: 80113a0fb70cfa62730d5aa3fd3d45b76bf3985f8494080ab2de1cc1fa3ba96d77990c7553a81401e16c51c0eb19c27cf5bc94f2196155090f26c8a167968001
+  languageName: node
+  linkType: hard
+
+"pidtree@npm:^0.3.0":
+  version: 0.3.1
+  resolution: "pidtree@npm:0.3.1"
+  bin:
+    pidtree: bin/pidtree.js
+  checksum: 8a48f063cb60e188bc94c307a309d309e20e9a3c3ca3537a035baf66dba2315f7b175d3a13a3b816db349dad270e347877b5aeae6d763360be650b3d1b1ca9b3
   languageName: node
   linkType: hard
 
@@ -24392,7 +24387,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^17.0.0, react-dom@npm:^17.0.2":
+"react-dom@npm:^17.0.0":
   version: 17.0.2
   resolution: "react-dom@npm:17.0.2"
   dependencies:
@@ -24645,7 +24640,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-redux@npm:^7.2.1, react-redux@npm:^7.2.4":
+"react-redux@npm:^7.2.4":
   version: 7.2.4
   resolution: "react-redux@npm:7.2.4"
   dependencies:
@@ -24890,7 +24885,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.0, react@npm:^17.0.2":
+"react@npm:^17.0.0":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
@@ -26159,31 +26154,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rtk-query-imspector-monitor-demo@workspace:packages/redux-devtools-rtk-query-inspector-monitor/demo":
-  version: 0.0.0-use.local
-  resolution: "rtk-query-imspector-monitor-demo@workspace:packages/redux-devtools-rtk-query-inspector-monitor/demo"
-  dependencies:
-    "@redux-devtools/core": ^3.9.0
-    "@redux-devtools/dock-monitor": ^1.4.0
-    "@reduxjs/toolkit": ^1.6.0
-    "@types/react": 17.0.0
-    "@types/react-dom": 17.0.0
-    "@types/react-redux": 7.1.9
-    cross-env: ^7.0.3
-    devui: ^1.0.0-8
-    lodash.debounce: ^4.0.8
-    react: ^17.0.2
-    react-base16-styling: ^0.8.0
-    react-dom: ^17.0.2
-    react-json-tree: ^0.15.0
-    react-redux: ^7.2.1
-    react-scripts: 4.0.2
-    redux: ^4.0.5
-    redux-devtools-themes: ^1.0.0
-    typescript: ~4.0.7
-  languageName: unknown
-  linkType: soft
-
 "rtk-query-polling@workspace:packages/redux-devtools/examples/rtk-query-polling":
   version: 0.0.0-use.local
   resolution: "rtk-query-polling@workspace:packages/redux-devtools/examples/rtk-query-polling"
@@ -26848,7 +26818,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"shell-quote@npm:1.7.2":
+"shell-quote@npm:1.7.2, shell-quote@npm:^1.6.1":
   version: 1.7.2
   resolution: "shell-quote@npm:1.7.2"
   checksum: 3b3d06814ca464cde8594c27bdd57a1f4c06b26ad2988b08b5819f97ac1edfd7cb7313fda1c909da33211972c72c5a7906b7da2b62078109f9d3274d3f404fa9
@@ -29311,26 +29281,6 @@ typescript@^4.3.4:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: c8766e84a4f71e925cc059af8286cc7f41819fe821d433b90c83e9b36729cbda7a8e4be3292d8a1433cd717d529c93217d58d173418f43862290b206bd88b284
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@~4.0.7#builtin<compat/typescript>":
-  version: 4.0.8
-  resolution: "typescript@patch:typescript@npm%3A4.0.8#builtin<compat/typescript>::version=4.0.8&hash=ddfc1b"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: d12e73e6fb00f0ed42b10b42493d2eb907f31b8c6eb6cfb896be45d79d8fcbf46c9bc1e2aced88898f91191e3f49c5a13d3f86d01bb386ee29f502c7ccfe0b6a
-  languageName: node
-  linkType: hard
-
-typescript@~4.0.7:
-  version: 4.0.8
-  resolution: "typescript@npm:4.0.8"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: f7789f9c531dffcf4c849a806627562ad6297f608aab85c0514d87a2ab3e060bcfadd63963735994796c45326eebeb479c004065af47e72ee44ba8c935fc9a54
   languageName: node
   linkType: hard
 

@@ -1,58 +1,65 @@
+import PokemonView from 'features/pokemon/PokemonView';
+import PostsView from 'features/posts/PostsView';
+import { Flex, Heading } from '@chakra-ui/react';
+import { Link, UnorderedList, ListItem } from '@chakra-ui/react';
+import { Code } from '@chakra-ui/react';
 import * as React from 'react';
-import { Pokemon } from './Pokemon';
-import { PokemonName, POKEMON_NAMES } from './pokemon.data';
 import './styles.css';
 
-const getRandomPokemonName = () =>
-  POKEMON_NAMES[Math.floor(Math.random() * POKEMON_NAMES.length)];
-
-export default function App() {
-  const [pokemon, setPokemon] = React.useState<PokemonName[]>(['bulbasaur']);
-
+export function App() {
   return (
     <article>
-      <h1>RTK Query inspector monitor demo</h1>
-      <section className="App">
-        <h2>Pokemon polling demo</h2>
-        <div className="demo-toolbar">
-          <button
-            onClick={() =>
-              setPokemon((prev) => [...prev, getRandomPokemonName()])
-            }
-          >
-            Add random pokemon
-          </button>
-          <button onClick={() => setPokemon((prev) => [...prev, 'bulbasaur'])}>
-            Add bulbasaur
-          </button>
-        </div>
-
-        <div className="pokemon-list">
-          {pokemon.map((name, index) => (
-            <Pokemon key={index} name={name} />
-          ))}
-        </div>
-      </section>
-      <section>
-        <h2>Dock controls</h2>
+      <Heading as="h1">RTK Query inspector monitor demo</Heading>
+      <PokemonView />
+      <PostsView />
+      <Flex p="2" as="section" flexWrap="nowrap" flexDirection="column">
+        <Heading as="h2">Dock controls</Heading>
         <pre>
-          <code>
+          <Code>
             {`toggleVisibilityKey="ctrl-h"\nchangePositionKey="ctrl-q"`}
-          </code>
+          </Code>
         </pre>
-      </section>
-      <footer>
-        <p>
-          <a href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-inspector-monitor/demo">
-            demo source
-          </a>
-        </p>
-        <p>
-          <a href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-inspector-monitor">
-            @redux-devtools/rtk-query-inspector-monitor source
-          </a>
-        </p>
-      </footer>
+      </Flex>
+      <Flex p="2" as="footer">
+        <UnorderedList>
+          <ListItem>
+            <Link
+              className="link"
+              isExternal
+              href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-inspector-monitor/demo"
+            >
+              demo source
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link
+              className="link"
+              isExternal
+              href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-inspector-monitor"
+            >
+              @redux-devtools/rtk-query-inspector-monitor source
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link
+              className="link"
+              isExternal
+              href="https://github.com/reduxjs/redux-toolkit/tree/master/examples/query/react/polling"
+            >
+              polling example
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link
+              className="link"
+              isExternal
+              href="https://github.com/reduxjs/redux-toolkit/tree/master/examples/query/react/mutations"
+            >
+              mutations example
+            </Link>
+          </ListItem>
+        </UnorderedList>
+      </Flex>
     </article>
   );
 }

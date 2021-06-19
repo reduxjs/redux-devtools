@@ -13,6 +13,7 @@ code {
 }
 
 h1 {
+  font-weight: 700;
   font-size: 1.4em;
 }
 
@@ -40,11 +41,11 @@ h6 {
 
 section {
   display: block;
+  max-width: 67vw;
 }
 
 .pokemon-list {
   display: flex;
-  max-width: 80vw;
   flex-flow: row wrap;
   overflow-x: hidden;
 }
@@ -59,5 +60,9 @@ pre code {
 }
 
 article {
-  padding: 0.4em;
+  padding: 0 0 0.5em;
+}
+
+.link.link {
+  color: #805ad5;
 }

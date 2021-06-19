@@ -18,13 +18,13 @@ Created by [FaberVitale](https://github.com/FaberVitale)
 ### npm
 
 ```bash
-npm i @redux-devtools/rtk-query-inspector-monitor --save # npm
+npm i @redux-devtools/rtk-query-inspector-monitor --save
 ```
 
 ### yarn
 
 ```bash
-yarn add @redux-devtools/rtk-query-inspector-monitor # yarn
+yarn add @redux-devtools/rtk-query-inspector-monitor
 ```
 
 
@@ -78,11 +78,11 @@ See also
 
 ## TODO
 
-- [] display mutations
-- [] filter by tags types
-- [] download query.data
-- [] upload query.data(?)
-- [] refetch query button(?)
+- [ ] display mutations
+- [ ] filter by tags types
+- [ ] download query.data
+- [ ] upload query.data(?)
+- [ ] refetch query button(?)
 - ...suggestions are welcome
 
 
