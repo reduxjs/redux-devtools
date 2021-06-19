@@ -12,6 +12,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - run: yarn install --immutable
+      - run: yarn prettier:check
+      - run: yarn build:all
+      - run: yarn lint:all
+      - run: yarn test:all
       - working-directory: ./extension
         run: yarn install --immutable
       - working-directory: ./extension
