@@ -7,6 +7,7 @@ export interface QueryPreviewHeaderProps {
   tabs: ReadonlyArray<QueryPreviewTabOption>;
   onTabChange: (tab: QueryPreviewTabs) => void;
   selectedTab: QueryPreviewTabs;
+  renderTabLabel?: (tab: QueryPreviewTabOption) => ReactNode;
 }
 
 export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps> {
@@ -17,7 +18,7 @@ export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps>
   };
 
   render(): ReactNode {
-    const { tabs, selectedTab } = this.props;
+    const { tabs, selectedTab, renderTabLabel } = this.props;
 
     return (
       <StyleUtilsContext.Consumer>
@@ -36,7 +37,7 @@ export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps>
                     tab.value === selectedTab
                   )}
                 >
-                  {tab.label}
+                  {renderTabLabel ? renderTabLabel(tab) : tab.label}
                 </div>
               ))}
             </div>

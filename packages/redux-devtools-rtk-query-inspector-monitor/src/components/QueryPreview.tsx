@@ -50,6 +50,36 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
     this.labelRenderer = createTreeItemLabelRenderer(this.props.styling);
   }
 
+  renderLabelWithCounter = (label: React.ReactText, counter: number): string => {
+    let counterAsString = counter.toFixed(0);
+
+    if(counterAsString.length > 3) {
+      counterAsString = counterAsString.slice(0, 2) + '...';
+    }
+
+    return `${label} (${counterAsString})`
+  }
+
+  renderTabLabel = (tab: QueryPreviewTabOption): ReactNode => {
+    const { queryInfo, tags, querySubscriptions } = this.props;
+    if(queryInfo) {
+      if(tab.value === QueryPreviewTabs.queryTags && tags.length > 0) {
+        return this.renderLabelWithCounter(tab.label, tags.length);
+      }
+
+      if(tab.value === QueryPreviewTabs.querySubscriptions && querySubscriptions) {
+        const subsCount = Object.keys(querySubscriptions).length;
+
+        if(subsCount > 0) {
+          return this.renderLabelWithCounter(tab.label, subsCount);
+        }
+      }
+    }
+
+    return tab.label;
+
+  }
+
   render(): ReactNode {
     const {
       queryInfo,
@@ -73,6 +103,7 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
                 selectedTab={selectedTab}
                 onTabChange={onTabChange}
                 tabs={tabs}
+                renderTabLabel={this.renderTabLabel}
               />
             </div>
           )}
@@ -89,6 +120,7 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
                 selectedTab={selectedTab}
                 onTabChange={onTabChange}
                 tabs={tabs}
+                renderTabLabel={this.renderTabLabel}
               />
               <TabComponent
                 styling={styling}
