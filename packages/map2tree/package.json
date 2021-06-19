@@ -42,10 +42,10 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.159",
+    "@types/lodash": "^4.14.170",
     "immutable": "^4.0.0-rc.12"
   }
 }

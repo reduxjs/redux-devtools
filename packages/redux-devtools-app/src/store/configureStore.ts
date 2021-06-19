@@ -54,6 +54,8 @@ export default function configureStore(
 
     const store = createStore(
       rootReducer,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       restoredState,
       composeEnhancers(applyMiddleware(exportState, api))
     );
