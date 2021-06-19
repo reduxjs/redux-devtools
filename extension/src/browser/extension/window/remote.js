@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from 'remotedev-app';
+import App from '@redux-devtools/app';
 
 import '../../views/remote.pug';
 

@@ -2,8 +2,8 @@ import {
   LIFTED_ACTION,
   UPDATE_STATE,
   SELECT_INSTANCE,
-} from 'remotedev-app/lib/constants/actionTypes';
-import { getActiveInstance } from 'remotedev-app/lib/reducers/instances';
+} from '@redux-devtools/app/lib/constants/actionTypes';
+import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
 
 function panelDispatcher(bgConnection) {
   let autoselected = false;

@@ -1,8 +1,7 @@
-import 'remotedev-monitor-components/lib/presets';
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { Provider } from 'react-redux';
-import { REMOVE_INSTANCE } from 'remotedev-app/lib/constants/actionTypes';
+import { REMOVE_INSTANCE } from '@redux-devtools/app/lib/constants/actionTypes';
 import App from '../../../app/containers/App';
 import configureStore from '../../../app/stores/panelStore';
 import getPreloadedState from '../background/getPreloadedState';

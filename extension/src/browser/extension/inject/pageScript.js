@@ -1,4 +1,4 @@
-import { getActionsArray, evalAction } from 'remotedev-utils';
+import { getActionsArray, evalAction } from '@redux-devtools/utils';
 import throttle from 'lodash/throttle';
 import createStore from '../../../app/stores/createStore';
 import configureStore, { getUrlParam } from '../../../app/stores/enhancerStore';

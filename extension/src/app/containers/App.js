@@ -1,33 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import SliderMonitor from 'remotedev-slider/lib/Slider';
-import { liftedDispatch, getReport } from 'remotedev-app/lib/actions';
-import { getActiveInstance } from 'remotedev-app/lib/reducers/instances';
-import styles from 'remotedev-app/lib/styles';
-import enhance from 'remotedev-app/lib/hoc';
-import DevTools from 'remotedev-app/lib/containers/DevTools';
-import Dispatcher from 'remotedev-app/lib/containers/monitors/Dispatcher';
-import MonitorSelector from 'remotedev-app/lib/components/MonitorSelector';
-import Notification from 'remotedev-app/lib/components/Notification';
-import Instances from 'remotedev-app/lib/components/Instances';
-import Button from 'remotedev-app/lib/components/Button';
-import RecordButton from 'remotedev-app/lib/components/buttons/RecordButton';
-import LockButton from 'remotedev-app/lib/components/buttons/LockButton';
-import DispatcherButton from 'remotedev-app/lib/components/buttons/DispatcherButton';
-import SliderButton from 'remotedev-app/lib/components/buttons/SliderButton';
-import ImportButton from 'remotedev-app/lib/components/buttons/ImportButton';
-import ExportButton from 'remotedev-app/lib/components/buttons/ExportButton';
-import PrintButton from 'remotedev-app/lib/components/buttons/PrintButton';
-import {
-  MdSettings,
-  MdBorderLeft,
-  MdBorderRight,
-  MdBorderBottom,
-} from 'react-icons/md';
-import { GoRadioTower, GoPin } from 'react-icons/go';
+import { Container, Notification } from 'devui';
+import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
+import Settings from '@redux-devtools/app/lib/components/Settings';
+import Actions from '@redux-devtools/app/lib/containers/Actions';
+import Header from '@redux-devtools/app/lib/components/Header';
+import { clearNotification } from '@redux-devtools/app/lib/actions';
 
-@enhance
 class App extends Component {
   openWindow = (position) => {
     chrome.runtime.sendMessage({ type: 'OPEN', position });
@@ -41,15 +20,7 @@ class App extends Component {
   };
 
   render() {
-    const {
-      monitor,
-      position,
-      togglePersist,
-      dispatcherIsOpen,
-      sliderIsOpen,
-      options,
-      liftedState,
-    } = this.props;
+    const { position, options, section, theme, notification } = this.props;
     if (!position && (!options || !options.features)) {
       return (
         <div style={{ padding: '20px', width: '100%', textAlign: 'center' }}>
@@ -64,139 +35,46 @@ class App extends Component {
         </div>
       );
     }
-    const features = options.features || {};
+
+    let body;
+    switch (section) {
+      case 'Settings':
+        body = <Settings />;
+        break;
+      default:
+        body = <Actions />;
+    }
+
     return (
-      <div style={styles.container}>
-        <div style={styles.buttonBar}>
-          <MonitorSelector selected={monitor} />
-          <Instances selected={this.props.selected} />
-        </div>
-        <DevTools
-          monitor={monitor}
-          liftedState={liftedState}
-          monitorState={this.props.monitorState}
-          dispatch={this.props.liftedDispatch}
-          lib={options.lib || options.explicitLib}
-        />
-        <Notification />
-        {sliderIsOpen && options.connectionId && options.features.jump && (
-          <SliderMonitor
-            monitor="SliderMonitor"
-            liftedState={liftedState}
-            dispatch={this.props.liftedDispatch}
-            getReport={this.props.getReport}
-            reports={this.props.reports}
-            showActions={monitor === 'ChartMonitor'}
-            style={{ padding: '15px 5px' }}
-            fillColor="rgb(120, 144, 156)"
-          />
+      <Container themeData={theme}>
+        <Header section={section} />
+        {body}
+        {notification && (
+          <Notification
+            type={notification.type}
+            onClose={this.props.clearNotification}
+          >
+            {notification.message}
+          </Notification>
         )}
-        {dispatcherIsOpen &&
-          options.connectionId &&
-          options.features.dispatch && <Dispatcher options={options} />}
-        <div style={styles.buttonBar}>
-          {!window.isElectron && position !== '#left' && (
-            <Button
-              Icon={MdBorderLeft}
-              onClick={() => {
-                this.openWindow('left');
-              }}
-            />
-          )}
-          {!window.isElectron && position !== '#right' && (
-            <Button
-              Icon={MdBorderRight}
-              onClick={() => {
-                this.openWindow('right');
-              }}
-            />
-          )}
-          {!window.isElectron && position !== '#bottom' && (
-            <Button
-              Icon={MdBorderBottom}
-              onClick={() => {
-                this.openWindow('bottom');
-              }}
-            />
-          )}
-          {features.pause && <RecordButton paused={liftedState.isPaused} />}
-          {features.lock && <LockButton locked={liftedState.isLocked} />}
-          {features.persist && (
-            <Button Icon={GoPin} onClick={togglePersist}>
-              Persist
-            </Button>
-          )}
-          {features.dispatch && (
-            <DispatcherButton dispatcherIsOpen={dispatcherIsOpen} />
-          )}
-          {features.jump && <SliderButton isOpen={sliderIsOpen} />}
-          {features.import && <ImportButton />}
-          {features.export && <ExportButton />}
-          {position &&
-            (position !== '#popup' ||
-              navigator.userAgent.indexOf('Firefox') !== -1) && <PrintButton />}
-          {!window.isElectron && (
-            <Button
-              Icon={GoRadioTower}
-              onClick={() => {
-                this.openWindow('remote');
-              }}
-            >
-              Remote
-            </Button>
-          )}
-          {(chrome.runtime.openOptionsPage ||
-            navigator.userAgent.indexOf('Firefox') !== -1) && (
-            <Button Icon={MdSettings} onClick={this.openOptionsPage}>
-              Settings
-            </Button>
-          )}
-        </div>
-      </div>
+      </Container>
     );
   }
 }
-
-App.propTypes = {
-  bgStore: PropTypes.object,
-  liftedDispatch: PropTypes.func.isRequired,
-  getReport: PropTypes.func.isRequired,
-  togglePersist: PropTypes.func.isRequired,
-  selected: PropTypes.string,
-  liftedState: PropTypes.object.isRequired,
-  monitorState: PropTypes.object,
-  options: PropTypes.object.isRequired,
-  monitor: PropTypes.string,
-  position: PropTypes.string,
-  reports: PropTypes.array.isRequired,
-  dispatcherIsOpen: PropTypes.bool,
-  sliderIsOpen: PropTypes.bool,
-};
 
 function mapStateToProps(state) {
   const instances = state.instances;
   const id = getActiveInstance(instances);
   return {
-    selected: instances.selected,
-    liftedState: instances.states[id],
-    monitorState: state.monitor.monitorState,
     options: instances.options[id],
-    monitor: state.monitor.selected,
-    dispatcherIsOpen: state.monitor.dispatcherIsOpen,
-    sliderIsOpen: state.monitor.sliderIsOpen,
-    reports: state.reports.data,
-    shouldSync: state.instances.sync,
+    section: state.section,
+    theme: state.theme,
+    notification: state.notification,
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    liftedDispatch: bindActionCreators(liftedDispatch, dispatch),
-    getReport: bindActionCreators(getReport, dispatch),
-    togglePersist: () => {
-      dispatch({ type: 'TOGGLE_PERSIST' });
-    },
-  };
-}
+const actionCreators = {
+  clearNotification,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, actionCreators)(App);

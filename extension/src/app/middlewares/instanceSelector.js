@@ -1,7 +1,7 @@
 import {
   SELECT_INSTANCE,
   UPDATE_STATE,
-} from 'remotedev-app/lib/constants/actionTypes';
+} from '@redux-devtools/app/lib/constants/actionTypes';
 
 function selectInstance(tabId, store, next) {
   const instances = store.getState().instances;
