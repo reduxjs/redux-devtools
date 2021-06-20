@@ -7,11 +7,22 @@ adds a connection via `remote-redux-devtools` to a devtools server.
 
 ## Run example
 
+Runs the example at `localhost:3002`, `devtools-app` at `localhost:3000` and remote server at `8000`.
+
+1. Install local dependencies
+
 ```bash
-yarn lerna run --parallel start \
-  --scope 'rtk-query-polling' \
-  --scope '@redux-devtools/app' \
-  --scope '@redux-devtools/cli'
+yarn exec --cwd 'packages/redux-devtools/examples/rtk-query-polling' yarn
 ```
 
-Runs the example at `localhost:3002`, `app` at `localhost:3000` and remote server at `8000`.
+2. Start example
+
+```bash
+yarn exec --cwd 'packages/redux-devtools/examples/rtk-query-polling' yarn start
+```
+
+3. Start devtools in another shell
+
+```bash
+yarn lerna run --parallel start  --scope '@redux-devtools/app' --scope '@redux-devtools/cli'
+```
