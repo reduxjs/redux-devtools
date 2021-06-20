@@ -1,6 +1,7 @@
 import React from 'react';
+import { OptionsProps } from './Options';
 
-export default ({ options, saveOption }) => {
+export default ({ options, saveOption }: OptionsProps) => {
   const AllowToRunState = {
     EVERYWHERE: true,
     ON_SPECIFIC_URLS: false,

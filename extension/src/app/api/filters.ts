@@ -1,6 +1,11 @@
 import mapValues from 'lodash/mapValues';
 
-export const FilterState = {
+export type FilterStateValue =
+  | 'DO_NOT_FILTER'
+  | 'BLACKLIST_SPECIFIC'
+  | 'WHITELIST_SPECIFIC';
+
+export const FilterState: { [K in FilterStateValue]: FilterStateValue } = {
   DO_NOT_FILTER: 'DO_NOT_FILTER',
   BLACKLIST_SPECIFIC: 'BLACKLIST_SPECIFIC',
   WHITELIST_SPECIFIC: 'WHITELIST_SPECIFIC',

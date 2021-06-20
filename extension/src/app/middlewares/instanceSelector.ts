@@ -1,9 +1,16 @@
+import { Dispatch, Store } from 'redux';
 import {
   SELECT_INSTANCE,
   UPDATE_STATE,
 } from '@redux-devtools/app/lib/constants/actionTypes';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
+import { StoreState } from '@redux-devtools/app/lib/reducers';
 
-function selectInstance(tabId, store, next) {
+function selectInstance(
+  tabId: number,
+  store: Store<StoreState, StoreAction>,
+  next: Dispatch<StoreAction>
+) {
   const instances = store.getState().instances;
   if (instances.current === 'default') return;
   const connections = instances.connections[tabId];
@@ -12,7 +19,7 @@ function selectInstance(tabId, store, next) {
   }
 }
 
-function getCurrentTabId(next) {
+function getCurrentTabId(next: (tabId: number) => void) {
   chrome.tabs.query(
     {
       active: true,
@@ -21,13 +28,13 @@ function getCurrentTabId(next) {
     (tabs) => {
       const tab = tabs[0];
       if (!tab) return;
-      next(tab.id);
+      next(tab.id!);
     }
   );
 }
 
-export default function popupSelector(store) {
-  return (next) => (action) => {
+export default function popupSelector(store: Store<StoreState, StoreAction>) {
+  return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
     const result = next(action);
     if (action.type === UPDATE_STATE) {
       if (chrome.devtools && chrome.devtools.inspectedWindow) {

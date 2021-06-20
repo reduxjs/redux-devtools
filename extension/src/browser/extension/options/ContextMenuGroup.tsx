@@ -1,6 +1,7 @@
 import React from 'react';
+import { OptionsProps } from './Options';
 
-export default ({ options, saveOption }) => {
+export default ({ options, saveOption }: OptionsProps) => {
   return (
     <fieldset className="option-group">
       <legend className="option-group__title">Context Menu</legend>

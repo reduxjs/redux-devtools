@@ -7,6 +7,9 @@ import configureStore from '../../../app/stores/panelStore';
 import getPreloadedState from '../background/getPreloadedState';
 
 import '../../views/devpanel.pug';
+import { PreloadedState, Store } from 'redux';
+import { StoreState } from '@redux-devtools/app/lib/reducers';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
 
 const position = location.hash;
 const messageStyle: CSSProperties = {
@@ -16,10 +19,10 @@ const messageStyle: CSSProperties = {
 };
 
 let rendered: boolean;
-let store;
+let store: Store<StoreState, StoreAction> | undefined;
 let bgConnection: chrome.runtime.Port;
 let naTimeout: NodeJS.Timeout;
-let preloadedState;
+let preloadedState: PreloadedState<StoreState>;
 
 const isChrome = navigator.userAgent.indexOf('Firefox') === -1;
 
@@ -96,10 +99,10 @@ function init(id: number) {
   bgConnection.onMessage.addListener((message) => {
     if (message.type === 'NA') {
       if (message.id === id) renderNA();
-      else store.dispatch({ type: REMOVE_INSTANCE, id: message.id });
+      else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });
     } else {
       if (!rendered) renderDevTools();
-      store.dispatch(message);
+      store!.dispatch(message);
     }
   });
 }

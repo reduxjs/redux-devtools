@@ -1,12 +1,25 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+import {
+  createStore,
+  compose,
+  applyMiddleware,
+  Store,
+  PreloadedState,
+} from 'redux';
 import exportState from '@redux-devtools/app/lib/middlewares/exportState';
 import api from '@redux-devtools/app/lib/middlewares/api';
 import { CONNECT_REQUEST } from '@redux-devtools/app/lib/constants/socketActionTypes';
+import { StoreState } from '@redux-devtools/app/lib/reducers';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
 import syncStores from '../middlewares/windowSync';
 import instanceSelector from '../middlewares/instanceSelector';
 import rootReducer from '../reducers/window';
+import { BackgroundState } from '../reducers/background';
 
-export default function configureStore(baseStore, position, preloadedState) {
+export default function configureStore(
+  baseStore: Store<BackgroundState, StoreAction>,
+  position: string,
+  preloadedState: PreloadedState<StoreState>
+) {
   let enhancer;
   const middlewares = [exportState, api, syncStores(baseStore)];
   if (!position || position === '#popup') {

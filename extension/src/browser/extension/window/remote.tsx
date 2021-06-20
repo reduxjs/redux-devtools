@@ -19,7 +19,6 @@ chrome.storage.local.get(
         selectMonitor={options['select-monitor']}
         testTemplates={options['test-templates']}
         selectedTemplate={options['test-templates-sel']}
-        testTemplates={options['test-templates']}
         useCodemirror
         socketOptions={
           options['s:hostname'] && options['s:port']

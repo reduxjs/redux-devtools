@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from '../reducers/background';
+import { createStore, applyMiddleware, PreloadedState } from 'redux';
+import rootReducer, { BackgroundState } from '../reducers/background';
 import api from '../middlewares/api';
 
-export default function configureStore(preloadedState) {
+export default function configureStore(
+  preloadedState: PreloadedState<BackgroundState>
+) {
   return createStore(rootReducer, preloadedState, applyMiddleware(api));
   /*
   let enhancer;

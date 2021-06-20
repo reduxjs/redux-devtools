@@ -4,8 +4,17 @@ import FilterGroup from './FilterGroup';
 import AllowToRunGroup from './AllowToRunGroup';
 import MiscellaneousGroup from './MiscellaneousGroup';
 import ContextMenuGroup from './ContextMenuGroup';
+import { Options } from './syncOptions';
 
-export default (props) => (
+export interface OptionsProps {
+  readonly options: Options;
+  readonly saveOption: <K extends keyof Options>(
+    name: K,
+    value: Options[K]
+  ) => void;
+}
+
+export default (props: OptionsProps) => (
   <div>
     <EditorGroup {...props} />
     <FilterGroup {...props} />

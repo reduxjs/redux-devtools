@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect, ResolveThunks } from 'react-redux';
 import { Container, Notification } from 'devui';
 import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
 import Settings from '@redux-devtools/app/lib/components/Settings';
 import Actions from '@redux-devtools/app/lib/containers/Actions';
 import Header from '@redux-devtools/app/lib/components/Header';
 import { clearNotification } from '@redux-devtools/app/lib/actions';
+import { StoreState } from '@redux-devtools/app/lib/reducers';
 
-class App extends Component {
-  openWindow = (position) => {
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ResolveThunks<typeof actionCreators>;
+interface OwnProps {
+  readonly position: string;
+}
+type Props = StateProps & DispatchProps & OwnProps;
+
+class App extends Component<Props> {
+  openWindow = (position: string) => {
     chrome.runtime.sendMessage({ type: 'OPEN', position });
   };
   openOptionsPage = () => {
@@ -62,7 +70,7 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreState) {
   const instances = state.instances;
   const id = getActiveInstance(instances);
   return {

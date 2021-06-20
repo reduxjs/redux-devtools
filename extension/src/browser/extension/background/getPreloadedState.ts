@@ -1,3 +1,6 @@
+import { PreloadedState } from 'redux';
+import { StoreState } from '@redux-devtools/app/lib/reducers';
+
 const getIfExists = (sel, template) =>
   typeof sel === 'undefined' ||
   typeof template === 'undefined' ||
@@ -5,7 +8,10 @@ const getIfExists = (sel, template) =>
     ? 0
     : sel;
 
-export default function getPreloadedState(position, cb) {
+export default function getPreloadedState(
+  position: string,
+  cb: (state: PreloadedState<StoreState>) => void
+) {
   chrome.storage.local.get(
     [
       'monitor' + position,

@@ -1,6 +1,7 @@
 import React from 'react';
+import { OptionsProps } from './Options';
 
-export default ({ options, saveOption }) => {
+export default ({ options, saveOption }: OptionsProps) => {
   const EditorState = {
     BROWSER: 0,
     EXTERNAL: 1,
@@ -45,7 +46,7 @@ export default ({ options, saveOption }) => {
           className="option__element"
           id="editor"
           type="text"
-          size="33"
+          size={33}
           maxLength={30}
           placeholder="vscode, atom, webstorm, sublime..."
           value={options.editor}

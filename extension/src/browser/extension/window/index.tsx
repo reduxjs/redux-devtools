@@ -1,7 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { PreloadedState } from 'redux';
 import { Provider } from 'react-redux';
 import { UPDATE_STATE } from '@redux-devtools/app/lib/constants/actionTypes';
+import { StoreState } from '@redux-devtools/app/lib/reducers';
 import App from '../../../app/containers/App';
 import configureStore from '../../../app/stores/windowStore';
 import getPreloadedState from '../background/getPreloadedState';
@@ -9,7 +11,7 @@ import getPreloadedState from '../background/getPreloadedState';
 import '../../views/window.pug';
 
 const position = location.hash;
-let preloadedState;
+let preloadedState: PreloadedState<StoreState>;
 getPreloadedState(position, (state) => {
   preloadedState = state;
 });
