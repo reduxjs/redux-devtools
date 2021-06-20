@@ -1,19 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Options from './Options';
+import OptionsComponent from './Options';
+import { Options } from './syncOptions';
 
 import '../../views/options.pug';
 
 chrome.runtime.getBackgroundPage((background) => {
   const syncOptions = background.syncOptions;
 
-  const saveOption = (name, value) => {
+  const saveOption = <K extends keyof Options>(name: K, value: Options[K]) => {
     syncOptions.save(name, value);
   };
 
-  const renderOptions = (options) => {
+  const renderOptions = (options: Options) => {
     render(
-      <Options options={options} saveOption={saveOption} />,
+      <OptionsComponent options={options} saveOption={saveOption} />,
       document.getElementById('root')
     );
   };
