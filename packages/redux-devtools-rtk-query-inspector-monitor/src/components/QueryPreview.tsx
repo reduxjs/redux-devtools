@@ -90,7 +90,7 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
       queryInfo,
       isWideLayout,
       selectedTab,
-      apiConfig,
+      apiState,
       onTabChange,
       querySubscriptions,
       tags,
@@ -135,7 +135,7 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
                 querySubscriptions={querySubscriptions}
                 queryInfo={queryInfo}
                 tags={tags}
-                apiConfig={apiConfig}
+                apiState={apiState}
                 isWideLayout={isWideLayout}
                 apiStats={apiStats}
               />

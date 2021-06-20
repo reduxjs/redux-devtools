@@ -130,7 +130,7 @@ export interface ApiStats {
 
 export interface QueryPreviewTabProps extends StyleUtils {
   queryInfo: QueryInfo | null;
-  apiConfig: RtkQueryApiState['config'] | null;
+  apiState: RtkQueryApiState | null;
   querySubscriptions: RTKQuerySubscribers | null;
   isWideLayout: boolean;
   tags: RtkQueryTag[];

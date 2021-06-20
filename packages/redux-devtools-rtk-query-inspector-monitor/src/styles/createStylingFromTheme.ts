@@ -84,7 +84,7 @@ const getSheetFromColorMap = (map: ColorMap) => {
 
       '&[data-wide-layout="1"]': {
         height: '100%',
-        width: '40%',
+        width: '45%',
         borderRightWidth: 1,
         borderStyle: 'solid',
       },
@@ -241,7 +241,7 @@ const getSheetFromColorMap = (map: ColorMap) => {
       alignItems: 'center',
       flexFlow: 'row nowrap',
       flex: '1 1 auto',
-
+      paddingRight: 6,
       '& input': {
         outline: 'none',
         border: 'none',
@@ -283,8 +283,6 @@ const getSheetFromColorMap = (map: ColorMap) => {
         content: '"\u00d7"',
         display: 'block',
         padding: 4,
-        width: '16px',
-        height: '16px',
         fontSize: '16px',
         color: map.TEXT_COLOR,
         background: 'transparent',

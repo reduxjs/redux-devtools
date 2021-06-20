@@ -4,16 +4,21 @@ import { QueryPreviewTabProps } from '../types';
 import { TreeView } from './TreeView';
 
 interface TreeDisplayed {
-  config: QueryPreviewTabProps['apiConfig'];
+  reducerPath: string;
+  api: QueryPreviewTabProps['apiState'];
   stats: QueryPreviewTabProps['apiStats'];
 }
 export class QueryPreviewApi extends PureComponent<QueryPreviewTabProps> {
   selectData = createSelector(
     [
-      ({ apiConfig }: QueryPreviewTabProps) => apiConfig,
+      ({ apiState }: QueryPreviewTabProps) => apiState,
       ({ apiStats }: QueryPreviewTabProps) => apiStats,
     ],
-    (apiConfig, apiStats) => ({ config: apiConfig, stats: apiStats })
+    (apiState, apiStats) => ({
+      reducerPath: apiState?.config?.reducerPath ?? null,
+      apiState: apiState,
+      stats: apiStats,
+    })
   );
 
   render(): ReactNode {

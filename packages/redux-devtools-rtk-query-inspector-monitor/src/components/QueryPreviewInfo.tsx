@@ -17,6 +17,7 @@ type ComputedQueryInfo = {
 
 interface FormattedQuery extends ComputedQueryInfo {
   queryKey: string;
+  reducerPath: string;
   statusFlags: RTKStatusFlags;
   query: RtkQueryState;
 }
@@ -32,7 +33,7 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewTabProps> {
         return null;
       }
 
-      const { query, queryKey } = queryInfo;
+      const { query, queryKey, reducerPath } = queryInfo;
 
       const startedAt = query.startedTimeStamp
         ? new Date(query.startedTimeStamp).toISOString()
@@ -46,6 +47,7 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewTabProps> {
 
       return {
         queryKey,
+        reducerPath,
         startedAt,
         latestFetchAt,
         statusFlags,

@@ -57,7 +57,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
     };
   }
 
-  static wideLayout = 650;
+  static wideLayout = 600;
 
   static getDerivedStateFromProps(
     props: RtkQueryInspectorProps<unknown, Action<unknown>>,
@@ -164,7 +164,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
           styling={styling}
           tags={currentTags}
           querySubscriptions={currentQuerySubscriptions}
-          apiConfig={currentRtkApi?.config ?? null}
+          apiState={currentRtkApi}
           isWideLayout={isWideLayout}
           apiStats={currentApiStats}
         />
