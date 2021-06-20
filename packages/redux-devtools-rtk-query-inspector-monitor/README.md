@@ -2,7 +2,7 @@
 
 A monitor that displays [RTK query](https://redux-toolkit.js.org/rtk-query/overview) queries and mutations for [Redux DevTools](https://github.com/gaearon/redux-devtools).
 
-Created by [FaberVitale](https://github.com/FaberVitale)
+Created by [FaberVitale](https://github.com/FaberVitale), inspired by [react-query devtools](https://github.com/tannerlinsley/react-query/tree/master/devtools).
 
 ## Demo
 
