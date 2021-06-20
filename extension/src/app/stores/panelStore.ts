@@ -3,7 +3,11 @@ import exportState from '@redux-devtools/app/lib/middlewares/exportState';
 import panelDispatcher from '../middlewares/panelSync';
 import rootReducer from '../reducers/panel';
 
-export default function configureStore(position, bgConnection, preloadedState) {
+export default function configureStore(
+  position: string,
+  bgConnection: chrome.runtime.Port,
+  preloadedState
+) {
   const enhancer = applyMiddleware(exportState, panelDispatcher(bgConnection));
   return createStore(rootReducer, preloadedState, enhancer);
 }

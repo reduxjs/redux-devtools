@@ -1,9 +1,20 @@
-let windows = {};
-let lastPosition = null;
+export type DevToolsPosition =
+  | 'devtools-left'
+  | 'devtools-right'
+  | 'devtools-bottom'
+  | 'devtools-panel'
+  | 'devtools-remote';
 
-export default function openDevToolsWindow(position) {
-  function popWindow(action, url, customOptions) {
-    function focusIfExist(callback) {
+let windows: { [K in DevToolsPosition]?: number } = {};
+let lastPosition: DevToolsPosition | null = null;
+
+export default function openDevToolsWindow(position: DevToolsPosition) {
+  function popWindow(
+    action: string,
+    url: string,
+    customOptions: chrome.windows.CreateData & chrome.windows.UpdateInfo
+  ) {
+    function focusIfExist(callback: () => void) {
       if (!windows[position]) {
         callback();
         lastPosition = position;
@@ -12,7 +23,7 @@ export default function openDevToolsWindow(position) {
         if (lastPosition !== position && position !== 'devtools-panel') {
           params = { ...params, ...customOptions };
         }
-        chrome.windows.update(windows[position], params, () => {
+        chrome.windows.update(windows[position]!, params, () => {
           lastPosition = null;
           if (chrome.runtime.lastError) callback();
         });
@@ -20,7 +31,7 @@ export default function openDevToolsWindow(position) {
     }
 
     focusIfExist(() => {
-      let options = {
+      let options: chrome.windows.CreateData = {
         type: 'popup',
         ...customOptions,
       };
@@ -29,16 +40,19 @@ export default function openDevToolsWindow(position) {
           url + '#' + position.substr(position.indexOf('-') + 1)
         );
         chrome.windows.create(options, (win) => {
-          windows[position] = win.id;
+          windows[position] = win!.id;
           if (navigator.userAgent.indexOf('Firefox') !== -1) {
-            chrome.windows.update(win.id, { focused: true, ...customOptions });
+            chrome.windows.update(win!.id!, {
+              focused: true,
+              ...customOptions,
+            });
           }
         });
       }
     });
   }
 
-  let params = {
+  let params: chrome.windows.CreateData & chrome.windows.UpdateInfo = {
     left: 0,
     top: 0,
     width: 380,
@@ -48,7 +62,7 @@ export default function openDevToolsWindow(position) {
   switch (position) {
     case 'devtools-right':
       params.left =
-        window.screen.availLeft + window.screen.availWidth - params.width;
+        window.screen.availLeft + window.screen.availWidth - params.width!;
       break;
     case 'devtools-bottom':
       params.height = 420;

@@ -12,10 +12,10 @@ export function createMenu() {
     { id: 'devtools-remote', title: 'Open Remote DevTools' },
   ];
 
-  let shortcuts = {};
+  let shortcuts: { [commandName: string]: string | undefined } = {};
   chrome.commands.getAll((commands) => {
     commands.forEach(({ name, shortcut }) => {
-      shortcuts[name] = shortcut;
+      shortcuts[name!] = shortcut;
     });
 
     menus.forEach(({ id, title }) => {

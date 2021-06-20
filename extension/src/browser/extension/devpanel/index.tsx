@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { Provider } from 'react-redux';
 import { REMOVE_INSTANCE } from '@redux-devtools/app/lib/constants/actionTypes';
@@ -9,12 +9,16 @@ import getPreloadedState from '../background/getPreloadedState';
 import '../../views/devpanel.pug';
 
 const position = location.hash;
-const messageStyle = { padding: '20px', width: '100%', textAlign: 'center' };
+const messageStyle: CSSProperties = {
+  padding: '20px',
+  width: '100%',
+  textAlign: 'center',
+};
 
-let rendered;
+let rendered: boolean;
 let store;
-let bgConnection;
-let naTimeout;
+let bgConnection: chrome.runtime.Port;
+let naTimeout: NodeJS.Timeout;
 let preloadedState;
 
 const isChrome = navigator.userAgent.indexOf('Firefox') === -1;
@@ -25,7 +29,7 @@ getPreloadedState(position, (state) => {
 
 function renderDevTools() {
   const node = document.getElementById('root');
-  unmountComponentAtNode(node);
+  unmountComponentAtNode(node!);
   clearTimeout(naTimeout);
   store = configureStore(position, bgConnection, preloadedState);
   render(
@@ -71,20 +75,20 @@ function renderNA() {
         }
 
         const node = document.getElementById('root');
-        unmountComponentAtNode(node);
+        unmountComponentAtNode(node!);
         render(message, node);
         store = undefined;
       });
     } else {
       const node = document.getElementById('root');
-      unmountComponentAtNode(node);
+      unmountComponentAtNode(node!);
       render(message, node);
       store = undefined;
     }
   }, 3500);
 }
 
-function init(id) {
+function init(id: number) {
   renderNA();
   bgConnection = chrome.runtime.connect({
     name: id ? id.toString() : undefined,
