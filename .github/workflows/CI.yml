@@ -15,3 +15,7 @@ jobs:
       - run: yarn install --immutable
       - run: yarn build:all
       - run: yarn test:all
+      - working-directory: ./extension
+        run: yarn install --immutable
+      - working-directory: ./extension
+        run: yarn test
