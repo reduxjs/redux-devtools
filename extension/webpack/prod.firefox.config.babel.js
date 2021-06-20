@@ -2,6 +2,7 @@ import path from 'path';
 import baseConfig from './base.config';
 
 export default baseConfig({
+  mode: 'production',
   output: { path: path.join(__dirname, '../build/extension') },
   globals: {
     'process.env': {

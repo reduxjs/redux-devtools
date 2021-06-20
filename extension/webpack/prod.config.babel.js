@@ -2,6 +2,10 @@ import path from 'path';
 import baseConfig from './base.config';
 
 export default baseConfig({
+  mode: 'production',
+  inputExtra: {
+    page: [path.join(__dirname, '../src/browser/extension/inject/pageScript')],
+  },
   output: { path: path.join(__dirname, '../build/extension') },
   globals: {
     'process.env': {

@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import baseConfig from './base.config';
 
 let config = baseConfig({
+  mode: 'development',
   inputExtra: {
     page: [path.join(__dirname, '../src/browser/extension/inject/pageScript')],
   },

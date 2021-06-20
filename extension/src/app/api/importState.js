@@ -1,6 +1,6 @@
 import mapValues from 'lodash/mapValues';
 import jsan from 'jsan';
-import seralizeImmutable from 'remotedev-serialize/immutable/serialize';
+import seralizeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
 
 function deprecate(param) {
   // eslint-disable-next-line no-console

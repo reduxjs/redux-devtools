@@ -1,8 +1,8 @@
 import {
   UPDATE_STATE,
   LIFTED_ACTION,
-} from 'remotedev-app/lib/constants/actionTypes';
-import { getActiveInstance } from 'remotedev-app/lib/reducers/instances';
+} from '@redux-devtools/app/lib/constants/actionTypes';
+import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
 
 const syncStores = (baseStore) => (store) => (next) => (action) => {
   if (action.type === UPDATE_STATE) {

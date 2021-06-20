@@ -1,20 +1,14 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import persist from 'remotedev-app/lib/middlewares/persist';
-import exportState from 'remotedev-app/lib/middlewares/exportState';
-import api from 'remotedev-app/lib/middlewares/api';
-import { CONNECT_REQUEST } from 'remotedev-app/lib/constants/socketActionTypes';
+import exportState from '@redux-devtools/app/lib/middlewares/exportState';
+import api from '@redux-devtools/app/lib/middlewares/api';
+import { CONNECT_REQUEST } from '@redux-devtools/app/lib/constants/socketActionTypes';
 import syncStores from '../middlewares/windowSync';
 import instanceSelector from '../middlewares/instanceSelector';
 import rootReducer from '../reducers/window';
 
 export default function configureStore(baseStore, position, preloadedState) {
   let enhancer;
-  const middlewares = [
-    exportState,
-    api,
-    syncStores(baseStore),
-    persist(position),
-  ];
+  const middlewares = [exportState, api, syncStores(baseStore)];
   if (!position || position === '#popup') {
     // select current tab instance for devPanel and pageAction
     middlewares.push(instanceSelector);

@@ -18,7 +18,7 @@ describe('App container', () => {
 
   it('should contain an empty action list', () => {
     expect(component.find('ActionList').html()).toMatch(
-      /<div class="actionListRows-[0-9]+"><\/div>/
+      /<div class="actionListRows-[0-9-]+"><\/div>/
     );
   });
 });
