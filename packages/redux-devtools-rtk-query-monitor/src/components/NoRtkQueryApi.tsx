@@ -12,7 +12,7 @@ export function NoRtkQueryApi(): JSX.Element {
           <a
             href="https://redux-toolkit.js.org/rtk-query/overview#basic-usage"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
           >
             the instructions
           </a>

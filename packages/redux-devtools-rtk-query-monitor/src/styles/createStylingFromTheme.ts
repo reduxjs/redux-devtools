@@ -293,9 +293,11 @@ const getSheetFromColorMap = (map: ColorMap) => {
     noApiFound: {
       width: '100%',
       textAlign: 'center',
+      color: map.TEXT_COLOR,
       padding: '1.4em',
       '& a': {
         fontSize: 'inherit',
+        color: map.TEXT_COLOR,
         textDecoration: 'underline',
       },
     },
