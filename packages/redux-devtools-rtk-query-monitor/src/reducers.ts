@@ -1,10 +1,10 @@
 import { Action, AnyAction } from 'redux';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RtkQueryInspectorProps } from './RtkQueryInspector';
 import {
   QueryInfo,
   RtkQueryMonitorState,
   QueryFormValues,
+  RtkQueryMonitorProps,
   QueryPreviewTabs,
 } from './types';
 import { QueryComparators } from './utils/comparators';
@@ -53,7 +53,7 @@ const monitorSlice = createSlice({
 });
 
 export function reducer<S, A extends Action<unknown>>(
-  props: RtkQueryInspectorProps<S, A>,
+  props: RtkQueryMonitorProps<S, A>,
   state: RtkQueryMonitorState | undefined,
   action: AnyAction
 ): RtkQueryMonitorState {

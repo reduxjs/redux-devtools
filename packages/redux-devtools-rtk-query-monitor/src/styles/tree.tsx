@@ -5,11 +5,11 @@ import isIterable from '../utils/isIterable';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
 
-function isImmutable(value: any) {
+function isImmutable(value: unknown) {
   return isKeyed(value) || isIndexed(value) || isCollection(value);
 }
 
-function getShortTypeString(val: any, diff: boolean | undefined) {
+function getShortTypeString(val: unknown, diff: boolean | undefined) {
   if (diff && Array.isArray(val)) {
     val = val[val.length === 2 ? 1 : 0];
   }
@@ -23,7 +23,9 @@ function getShortTypeString(val: any, diff: boolean | undefined) {
   } else if (val === undefined) {
     return 'undef';
   } else if (typeof val === 'object') {
-    return Object.keys(val).length > 0 ? '{…}' : '{}';
+    return Object.keys(val as Record<string, unknown>).length > 0
+      ? '{…}'
+      : '{}';
   } else if (typeof val === 'function') {
     return 'fn';
   } else if (typeof val === 'string') {

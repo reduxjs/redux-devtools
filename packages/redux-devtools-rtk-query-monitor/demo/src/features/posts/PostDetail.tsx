@@ -73,7 +73,7 @@ const PostJsonDetail = ({ id }: { id: string }) => {
 
 export const PostDetail = () => {
   const { id } = useParams<{ id: any }>();
-  const { push } = useHistory();
+  const history = useHistory();
 
   const toast = useToast();
 
@@ -137,7 +137,9 @@ export const PostDetail = () => {
                 {isUpdating ? 'Updating...' : 'Edit'}
               </Button>
               <Button
-                onClick={() => deletePost(id).then(() => push('/posts'))}
+                onClick={() =>
+                  deletePost(id).then(() => history.push('/posts'))
+                }
                 disabled={isDeleting}
                 colorScheme="red"
               >

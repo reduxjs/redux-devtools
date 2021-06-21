@@ -82,7 +82,7 @@ const AddPost = () => {
 
 const PostList = () => {
   const { data: posts, isLoading } = useGetPostsQuery();
-  const { push } = useHistory();
+  const history = useHistory();
 
   if (isLoading) {
     return <div>Loading</div>;
@@ -95,7 +95,7 @@ const PostList = () => {
   return (
     <List spacing={3}>
       {posts.map(({ id, name }) => (
-        <ListItem key={id} onClick={() => push(`/posts/${id}`)}>
+        <ListItem key={id} onClick={() => history.push(`/posts/${id}`)}>
           <ListIcon as={MdBook} color="green.500" /> {name}
         </ListItem>
       ))}

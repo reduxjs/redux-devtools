@@ -1,37 +1,33 @@
-import React, { Component, createRef, ReactNode } from 'react';
-import { AnyAction, Dispatch, Action } from 'redux';
-import { LiftedAction, LiftedState } from '@redux-devtools/core';
-import * as themes from 'redux-devtools-themes';
-import { Base16Theme } from 'react-base16-styling';
+import React, { PureComponent, createRef, ReactNode } from 'react';
+import type { AnyAction, Dispatch, Action } from '@reduxjs/toolkit';
+import type { LiftedAction, LiftedState } from '@redux-devtools/core';
 import {
   QueryFormValues,
   QueryInfo,
   QueryPreviewTabs,
   RtkQueryMonitorState,
   StyleUtils,
-} from './types';
-import { createInspectorSelectors, computeSelectorSource } from './selectors';
+  SelectorsSource,
+} from '../types';
+import { createInspectorSelectors, computeSelectorSource } from '../selectors';
 import {
   changeQueryFormValues,
   selectedPreviewTab,
   selectQueryKey,
-} from './reducers';
-import { QueryList } from './components/QueryList';
-import { QueryForm } from './components/QueryForm';
-import { QueryPreview } from './components/QueryPreview';
-import { getApiStateOf, getQuerySubscriptionsOf } from './utils/rtk-query';
+} from '../reducers';
+import { QueryList } from '../components/QueryList';
+import { QueryForm } from '../components/QueryForm';
+import { QueryPreview } from '../components/QueryPreview';
+import { getApiStateOf, getQuerySubscriptionsOf } from '../utils/rtk-query';
 
-type SelectorsSource<S> = {
-  userState: S | null;
-  monitorState: RtkQueryMonitorState;
-};
+type ForwardedMonitorProps<S, A extends Action<unknown>> = Pick<
+  LiftedState<S, A, RtkQueryMonitorState>,
+  'monitorState' | 'currentStateIndex' | 'computedStates'
+>;
 
 export interface RtkQueryInspectorProps<S, A extends Action<unknown>>
-  extends LiftedState<S, A, RtkQueryMonitorState> {
+  extends ForwardedMonitorProps<S, A> {
   dispatch: Dispatch<LiftedAction<S, A, RtkQueryMonitorState>>;
-  theme: keyof typeof themes | Base16Theme;
-  invertTheme: boolean;
-  state: S | null;
   styleUtils: StyleUtils;
 }
 
@@ -40,13 +36,13 @@ type RtkQueryInspectorState<S> = {
   isWideLayout: boolean;
 };
 
-class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
+class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
   RtkQueryInspectorProps<S, A>,
   RtkQueryInspectorState<S>
 > {
   inspectorRef = createRef<HTMLDivElement>();
 
-  isWideIntervalRef: number | NodeJS.Timeout | null = null;
+  isWideIntervalRef: ReturnType<typeof setInterval> | null = null;
 
   constructor(props: RtkQueryInspectorProps<S, A>) {
     super(props);
@@ -98,7 +94,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
 
   componentWillUnmount(): void {
     if (this.isWideIntervalRef) {
-      clearTimeout(this.isWideIntervalRef as any);
+      clearTimeout(this.isWideIntervalRef);
     }
   }
 

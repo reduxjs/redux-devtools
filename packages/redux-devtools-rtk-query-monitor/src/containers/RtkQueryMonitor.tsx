@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Action } from 'redux';
+import { Action, AnyAction } from 'redux';
 import RtkQueryInspector from './RtkQueryInspector';
-import { reducer } from './reducers';
+import { reducer } from '../reducers';
 import {
   ExternalProps,
   RtkQueryMonitorProps,
   RtkQueryMonitorState,
   StyleUtils,
-} from './types';
+} from '../types';
 import {
   createThemeState,
   StyleUtilsContext,
-} from './styles/createStylingFromTheme';
+} from '../styles/createStylingFromTheme';
 
 interface DefaultProps {
   theme: string;
@@ -41,7 +41,7 @@ class RtkQueryMonitor<S, A extends Action<unknown>> extends Component<
     invertTheme: PropTypes.bool,
   };
 
-  static defaultProps = {
+  static defaultProps: DefaultProps = {
     theme: 'nicinabox',
     invertTheme: false,
   };
@@ -55,17 +55,16 @@ class RtkQueryMonitor<S, A extends Action<unknown>> extends Component<
   }
 
   render() {
-    const {
-      styleUtils: { base16Theme },
-    } = this.state;
-
-    const RtkQueryInspectorAsAny = RtkQueryInspector as any;
+    const { currentStateIndex, computedStates, monitorState, dispatch } =
+      this.props;
 
     return (
       <StyleUtilsContext.Provider value={this.state.styleUtils}>
-        <RtkQueryInspectorAsAny
-          {...this.props}
-          theme={base16Theme}
+        <RtkQueryInspector<S, AnyAction>
+          computedStates={computedStates}
+          currentStateIndex={currentStateIndex}
+          monitorState={monitorState}
+          dispatch={dispatch}
           styleUtils={this.state.styleUtils}
         />
       </StyleUtilsContext.Provider>

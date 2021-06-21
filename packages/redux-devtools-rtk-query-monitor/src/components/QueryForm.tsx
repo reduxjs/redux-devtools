@@ -6,6 +6,7 @@ import { SelectOption } from '../types';
 import debounce from 'lodash.debounce';
 import { sortQueryOptions, QueryComparators } from '../utils/comparators';
 import { QueryFilters, filterQueryOptions } from '../utils/filters';
+import { SortOrderButtons } from './SortOrderButtons';
 
 export interface QueryFormProps {
   values: QueryFormValues;
@@ -16,8 +17,6 @@ interface QueryFormState {
   searchValue: string;
 }
 
-const ascId = 'rtk-query-rb-asc';
-const descId = 'rtk-query-rb-desc';
 const selectId = 'rtk-query-comp-select';
 const searchId = 'rtk-query-search-query';
 const filterSelectId = 'rtk-query-search-query-select';
@@ -41,19 +40,8 @@ export class QueryForm extends React.PureComponent<
     evt.preventDefault();
   };
 
-  handleButtonGroupClick = ({ target }: MouseEvent<HTMLElement>): void => {
-    const {
-      values: { isAscendingQueryComparatorOrder: isAsc },
-      onFormValuesChange,
-    } = this.props;
-
-    const targetId = (target as HTMLElement)?.id ?? null;
-
-    if (targetId === ascId && !isAsc) {
-      onFormValuesChange({ isAscendingQueryComparatorOrder: true });
-    } else if (targetId === descId && isAsc) {
-      onFormValuesChange({ isAscendingQueryComparatorOrder: false });
-    }
+  handleButtonGroupClick = (isAsc: boolean): void => {
+    this.props.onFormValuesChange({ isAscendingQueryComparatorOrder: isAsc });
   };
 
   handleSelectComparatorChange = (
@@ -110,8 +98,6 @@ export class QueryForm extends React.PureComponent<
         queryFilter,
       },
     } = this.props;
-
-    const isDesc = !isAsc;
 
     return (
       <StyleUtilsContext.Consumer>
@@ -170,37 +156,10 @@ export class QueryForm extends React.PureComponent<
                   options={sortQueryOptions}
                   onChange={this.handleSelectComparatorChange}
                 />
-                <div
-                  tabIndex={0}
-                  role="radiogroup"
-                  aria-activedescendant={isAsc ? ascId : descId}
-                  onClick={this.handleButtonGroupClick}
-                >
-                  <button
-                    role="radio"
-                    type="button"
-                    id={ascId}
-                    aria-checked={isAsc}
-                    {...styling(
-                      ['selectorButton', isAsc && 'selectorButtonSelected'],
-                      isAsc
-                    )}
-                  >
-                    asc
-                  </button>
-                  <button
-                    id={descId}
-                    role="radio"
-                    type="button"
-                    aria-checked={isDesc}
-                    {...styling(
-                      ['selectorButton', isDesc && 'selectorButtonSelected'],
-                      isDesc
-                    )}
-                  >
-                    desc
-                  </button>
-                </div>
+                <SortOrderButtons
+                  isAsc={isAsc}
+                  onChange={this.handleButtonGroupClick}
+                />
               </div>
             </form>
           );

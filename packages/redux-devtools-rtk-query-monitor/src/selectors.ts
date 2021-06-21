@@ -1,5 +1,5 @@
 import { Action, createSelector, Selector } from '@reduxjs/toolkit';
-import { RtkQueryInspectorProps } from './RtkQueryInspector';
+import { RtkQueryInspectorProps } from './containers/RtkQueryInspector';
 import { ApiStats, QueryInfo, RtkQueryTag, SelectorsSource } from './types';
 import { Comparator, queryComparators } from './utils/comparators';
 import { FilterList, queryListFilters } from './utils/filters';

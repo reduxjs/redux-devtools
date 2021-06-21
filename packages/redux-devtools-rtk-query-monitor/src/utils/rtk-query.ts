@@ -25,6 +25,11 @@ const rtkqueryApiStateKeys: ReadonlyArray<keyof RtkQueryApiState> = [
   'subscriptions',
 ];
 
+/**
+ * Type guard used to select apis from the user store state.
+ * @param val
+ * @returns {boolean}
+ */
 export function isApiSlice(val: unknown): val is RtkQueryApiState {
   if (!isPlainObject(val)) {
     return false;
@@ -282,7 +287,7 @@ export function getQueryTagsOf(
   for (const [type, tagIds] of Object.entries(provided)) {
     if (tagIds) {
       for (const [id, queryKeys] of Object.entries(tagIds)) {
-        if (queryKeys.includes(queryInfo.queryKey as any)) {
+        if ((queryKeys as unknown[]).includes(queryInfo.queryKey)) {
           const tag: RtkQueryTag = { type };
 
           if (id !== missingTagId) {

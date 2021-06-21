@@ -3,6 +3,8 @@ export default function isIterable(obj: unknown): boolean {
     obj !== null &&
     typeof obj === 'object' &&
     !Array.isArray(obj) &&
-    typeof (obj as any)[window.Symbol.iterator] === 'function'
+    typeof (obj as Record<string | typeof Symbol.iterator, unknown>)[
+      window.Symbol.iterator
+    ] === 'function'
   );
 }

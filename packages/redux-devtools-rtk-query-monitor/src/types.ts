@@ -1,11 +1,11 @@
-import { LiftedAction, LiftedState } from '@redux-devtools/instrument';
+import type { LiftedAction, LiftedState } from '@redux-devtools/instrument';
 import type { createApi, QueryStatus } from '@reduxjs/toolkit/query';
-import { ComponentType, Dispatch } from 'react';
-import { Base16Theme, StylingFunction } from 'react-base16-styling';
-import { Action } from 'redux';
-import * as themes from 'redux-devtools-themes';
-import { QueryComparators } from './utils/comparators';
-import { QueryFilters } from './utils/filters';
+import type { Action, Dispatch } from '@reduxjs/toolkit';
+import type { ComponentType } from 'react';
+import type { Base16Theme, StylingFunction } from 'react-base16-styling';
+import type * as themes from 'redux-devtools-themes';
+import type { QueryComparators } from './utils/comparators';
+import type { QueryFilters } from './utils/filters';
 
 export enum QueryPreviewTabs {
   queryinfo,

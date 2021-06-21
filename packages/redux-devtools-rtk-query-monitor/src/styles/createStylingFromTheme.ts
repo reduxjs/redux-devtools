@@ -14,31 +14,32 @@ import { createContext } from 'react';
 
 jss.setup(preset());
 
-export const colorMap = (theme: reduxThemes.Base16Theme) => ({
-  TEXT_COLOR: theme.base06,
-  TEXT_PLACEHOLDER_COLOR: rgba(theme.base06, 60),
-  BACKGROUND_COLOR: theme.base00,
-  SELECTED_BACKGROUND_COLOR: rgba(theme.base03, 20),
-  SKIPPED_BACKGROUND_COLOR: rgba(theme.base03, 10),
-  HEADER_BACKGROUND_COLOR: rgba(theme.base03, 30),
-  HEADER_BORDER_COLOR: rgba(theme.base03, 20),
-  BORDER_COLOR: rgba(theme.base03, 50),
-  LIST_BORDER_COLOR: rgba(theme.base03, 50),
-  ACTION_TIME_BACK_COLOR: rgba(theme.base03, 20),
-  ACTION_TIME_COLOR: theme.base04,
-  PIN_COLOR: theme.base04,
-  ITEM_HINT_COLOR: rgba(theme.base0F, 90),
-  TAB_BACK_SELECTED_COLOR: rgba(theme.base03, 20),
-  TAB_BACK_COLOR: rgba(theme.base00, 70),
-  TAB_BACK_HOVER_COLOR: rgba(theme.base03, 40),
-  TAB_BORDER_COLOR: rgba(theme.base03, 50),
-  DIFF_ADD_COLOR: rgba(theme.base0B, 40),
-  DIFF_REMOVE_COLOR: rgba(theme.base08, 40),
-  DIFF_ARROW_COLOR: theme.base0E,
-  LINK_COLOR: rgba(theme.base0E, 90),
-  LINK_HOVER_COLOR: theme.base0E,
-  ERROR_COLOR: theme.base08,
-});
+export const colorMap = (theme: reduxThemes.Base16Theme) =>
+  ({
+    TEXT_COLOR: theme.base06,
+    TEXT_PLACEHOLDER_COLOR: rgba(theme.base06, 60),
+    BACKGROUND_COLOR: theme.base00,
+    SELECTED_BACKGROUND_COLOR: rgba(theme.base03, 20),
+    SKIPPED_BACKGROUND_COLOR: rgba(theme.base03, 10),
+    HEADER_BACKGROUND_COLOR: rgba(theme.base03, 30),
+    HEADER_BORDER_COLOR: rgba(theme.base03, 20),
+    BORDER_COLOR: rgba(theme.base03, 50),
+    LIST_BORDER_COLOR: rgba(theme.base03, 50),
+    ACTION_TIME_BACK_COLOR: rgba(theme.base03, 20),
+    ACTION_TIME_COLOR: theme.base04,
+    PIN_COLOR: theme.base04,
+    ITEM_HINT_COLOR: rgba(theme.base0F, 90),
+    TAB_BACK_SELECTED_COLOR: rgba(theme.base03, 20),
+    TAB_BACK_COLOR: rgba(theme.base00, 70),
+    TAB_BACK_HOVER_COLOR: rgba(theme.base03, 40),
+    TAB_BORDER_COLOR: rgba(theme.base03, 50),
+    DIFF_ADD_COLOR: rgba(theme.base0B, 40),
+    DIFF_REMOVE_COLOR: rgba(theme.base08, 40),
+    DIFF_ARROW_COLOR: theme.base0E,
+    LINK_COLOR: rgba(theme.base0E, 90),
+    LINK_HOVER_COLOR: theme.base0E,
+    ERROR_COLOR: theme.base08,
+  } as const);
 
 type Color = keyof ReturnType<typeof colorMap>;
 type ColorMap = {
