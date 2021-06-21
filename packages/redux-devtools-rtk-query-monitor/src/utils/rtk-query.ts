@@ -41,6 +41,15 @@ export function isApiSlice(val: unknown): val is RtkQueryApiState {
   return true;
 }
 
+/**
+ * Indexes api states by their `reducerPath`.
+ *
+ * Returns `null` if there are no api slice or `reduxStoreState`
+ * is not an object.
+ *
+ * @param reduxStoreState
+ * @returns
+ */
 export function getApiStatesOf(
   reduxStoreState: unknown
 ): null | Readonly<Record<string, RtkQueryApiState>> {

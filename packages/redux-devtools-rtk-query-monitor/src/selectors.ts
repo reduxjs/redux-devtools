@@ -48,7 +48,7 @@ export interface InspectorSelectors<S> {
     ReturnType<typeof extractAllApiQueries>
   >;
   readonly selectAllVisbileQueries: InspectorSelector<S, QueryInfo[]>;
-  readonly selectorCurrentQueryInfo: InspectorSelector<S, QueryInfo | null>;
+  readonly selectCurrentQueryInfo: InspectorSelector<S, QueryInfo | null>;
   readonly selectSearchQueryRegex: InspectorSelector<S, RegExp | null>;
   readonly selectCurrentQueryTags: InspectorSelector<S, RtkQueryTag[]>;
   readonly selectApiStatsOfCurrentQuery: InspectorSelector<S, ApiStats | null>;
@@ -112,7 +112,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     }
   );
 
-  const selectorCurrentQueryInfo = createSelector(
+  const selectCurrentQueryInfo = createSelector(
     selectAllQueries,
     ({ monitorState }: SelectorsSource<S>) => monitorState.selectedQueryKey,
     (allQueries, selectedQueryKey) => {
@@ -133,13 +133,13 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
 
   const selectCurrentQueryTags = createSelector(
     selectApiStates,
-    selectorCurrentQueryInfo,
+    selectCurrentQueryInfo,
     (apiState, currentQueryInfo) => getQueryTagsOf(currentQueryInfo, apiState)
   );
 
   const selectApiStatsOfCurrentQuery = createSelector(
     selectApiStates,
-    selectorCurrentQueryInfo,
+    selectCurrentQueryInfo,
     (apiState, currentQueryInfo) =>
       generateApiStatsOfCurrentQuery(currentQueryInfo, apiState)
   );
@@ -150,7 +150,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     selectAllQueries,
     selectAllVisbileQueries,
     selectSearchQueryRegex,
-    selectorCurrentQueryInfo,
+    selectCurrentQueryInfo,
     selectCurrentQueryTags,
     selectApiStatsOfCurrentQuery,
   };

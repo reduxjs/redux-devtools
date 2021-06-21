@@ -11,10 +11,12 @@ import { QueryPreviewInfo } from './QueryPreviewInfo';
 import { QueryPreviewApi } from './QueryPreviewApi';
 import { QueryPreviewSubscriptions } from './QueryPreviewSubscriptions';
 import { QueryPreviewTags } from './QueryPreviewTags';
+import { NoRtkQueryApi } from './NoRtkQueryApi';
 
 export interface QueryPreviewProps
   extends Omit<QueryPreviewTabProps, 'base16Theme' | 'invertTheme'> {
   selectedTab: QueryPreviewTabs;
+  hasNoApis: boolean;
   onTabChange: (tab: QueryPreviewTabs) => void;
 }
 
@@ -95,6 +97,7 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
       querySubscriptions,
       tags,
       apiStats,
+      hasNoApis,
     } = this.props;
 
     const { component: TabComponent } =
@@ -111,6 +114,7 @@ export class QueryPreview extends React.PureComponent<QueryPreviewProps> {
                 tabs={tabs}
                 renderTabLabel={this.renderTabLabel}
               />
+              {hasNoApis && <NoRtkQueryApi />}
             </div>
           )}
         </StyleUtilsContext.Consumer>

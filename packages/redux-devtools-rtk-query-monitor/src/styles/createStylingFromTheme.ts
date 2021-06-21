@@ -289,6 +289,16 @@ const getSheetFromColorMap = (map: ColorMap) => {
       },
     },
 
+    noApiFound: {
+      width: '100%',
+      textAlign: 'center',
+      padding: '1.4em',
+      '& a': {
+        fontSize: 'inherit',
+        textDecoration: 'underline',
+      },
+    },
+
     searchSelectLabel: {
       display: 'inline-block',
       padding: 4,

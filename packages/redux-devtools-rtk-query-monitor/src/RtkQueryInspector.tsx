@@ -124,7 +124,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
       this.selectors.selectAllVisbileQueries(selectorsSource);
 
     const currentQueryInfo =
-      this.selectors.selectorCurrentQueryInfo(selectorsSource);
+      this.selectors.selectCurrentQueryInfo(selectorsSource);
 
     const currentRtkApi = getApiStateOf(currentQueryInfo, apiStates);
     const currentQuerySubscriptions = getQuerySubscriptionsOf(
@@ -136,6 +136,8 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
 
     const currentApiStats =
       this.selectors.selectApiStatsOfCurrentQuery(selectorsSource);
+
+    const hasNoApis = apiStates == null;
 
     return (
       <div
@@ -167,6 +169,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends Component<
           apiState={currentRtkApi}
           isWideLayout={isWideLayout}
           apiStats={currentApiStats}
+          hasNoApis={hasNoApis}
         />
       </div>
     );
