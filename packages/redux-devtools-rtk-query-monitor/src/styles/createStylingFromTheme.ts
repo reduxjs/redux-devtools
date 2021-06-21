@@ -215,6 +215,29 @@ const getSheetFromColorMap = (map: ColorMap) => {
       'background-color': map.TAB_BACK_SELECTED_COLOR,
     },
 
+    sortButton: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexFlow: 'row nowrap',
+      cursor: 'pointer',
+      position: 'relative',
+      padding: '0 8px',
+      color: map.TEXT_COLOR,
+      borderStyle: 'solid',
+      borderWidth: '1px',
+      borderRadius: '3px',
+      backgroundColor: map.TAB_BACK_COLOR,
+      borderColor: map.TAB_BORDER_COLOR,
+      height: 30,
+      fontSize: 12,
+      width: 64,
+
+      '&:active': {
+        backgroundColor: map.TAB_BACK_SELECTED_COLOR,
+      },
+    },
+
     queryForm: {
       display: 'flex',
       flexFlow: 'column nowrap',
@@ -222,16 +245,17 @@ const getSheetFromColorMap = (map: ColorMap) => {
     sortBySection: {
       display: 'flex',
       padding: '0.4em',
-      '& > [role="radiogroup"]': {
-        flex: '0 0 auto',
-        padding: '0 0 0 0.4em',
-      },
       '& label': {
         display: 'flex',
         flex: '0 0 auto',
         whiteSpace: 'noWrap',
         alignItems: 'center',
         paddingRight: '0.4em',
+      },
+
+      '& > :last-child': {
+        flex: '0 0 auto',
+        marginLeft: '0.4em',
       },
     },
 

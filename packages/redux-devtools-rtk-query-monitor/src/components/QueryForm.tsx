@@ -6,7 +6,7 @@ import { SelectOption } from '../types';
 import debounce from 'lodash.debounce';
 import { sortQueryOptions, QueryComparators } from '../utils/comparators';
 import { QueryFilters, filterQueryOptions } from '../utils/filters';
-import { SortOrderButtons } from './SortOrderButtons';
+import { SortOrderButton } from './SortOrderButton';
 
 export interface QueryFormProps {
   values: QueryFormValues;
@@ -156,7 +156,8 @@ export class QueryForm extends React.PureComponent<
                   options={sortQueryOptions}
                   onChange={this.handleSelectComparatorChange}
                 />
-                <SortOrderButtons
+                <SortOrderButton
+                  id={'rtk-query-sort-order-button'}
                   isAsc={isAsc}
                   onChange={this.handleButtonGroupClick}
                 />
