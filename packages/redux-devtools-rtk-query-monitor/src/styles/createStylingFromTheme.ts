@@ -9,7 +9,7 @@ import {
 import rgba from 'hex-rgba';
 import * as reduxThemes from 'redux-devtools-themes';
 import { Action } from 'redux';
-import { RtkQueryInspectorMonitorProps, StyleUtils } from '../types';
+import { RtkQueryMonitorProps, StyleUtils } from '../types';
 import { createContext } from 'react';
 
 jss.setup(preset());
@@ -366,7 +366,7 @@ export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
 });
 
 export function createThemeState<S, A extends Action<unknown>>(
-  props: RtkQueryInspectorMonitorProps<S, A>
+  props: RtkQueryMonitorProps<S, A>
 ): StyleUtils {
   const base16Theme =
     getBase16Theme(props.theme, { ...reduxThemes }) ?? reduxThemes.nicinabox;

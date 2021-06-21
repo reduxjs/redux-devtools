@@ -15,11 +15,11 @@ yarn
 ### 2. Install demo dependencies
 
 ```bash
-yarn exec --cwd 'packages/redux-devtools-rtk-query-inspector-monitor/demo' yarn
+yarn exec --cwd 'packages/redux-devtools-rtk-query-monitor/demo' yarn
 ```
 
 ### 3. Start demo
 
 ```bash
-yarn lerna run --stream start --scope '@redux-devtools/rtk-query-inspector-monitor'
+yarn lerna run --stream start --scope '@redux-devtools/rtk-query-monitor'
 ```

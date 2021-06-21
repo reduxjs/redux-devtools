@@ -20,7 +20,7 @@ export interface QueryFormValues {
   searchValue: string;
   queryFilter: QueryFilters;
 }
-export interface RtkQueryInspectorMonitorState {
+export interface RtkQueryMonitorState {
   readonly queryForm: {
     values: QueryFormValues;
   };
@@ -28,11 +28,9 @@ export interface RtkQueryInspectorMonitorState {
   readonly selectedPreviewTab: QueryPreviewTabs;
 }
 
-export interface RtkQueryInspectorMonitorProps<S, A extends Action<unknown>>
-  extends LiftedState<S, A, RtkQueryInspectorMonitorState> {
-  dispatch: Dispatch<
-    Action | LiftedAction<S, A, RtkQueryInspectorMonitorState>
-  >;
+export interface RtkQueryMonitorProps<S, A extends Action<unknown>>
+  extends LiftedState<S, A, RtkQueryMonitorState> {
+  dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
   theme: keyof typeof themes | Base16Theme;
   invertTheme?: boolean;
 }
@@ -54,16 +52,8 @@ export type RtkQueryApiConfig = RtkQueryApiState['config'];
 export type RtkQueryProvided = RtkQueryApiState['provided'];
 
 export interface ExternalProps<S, A extends Action<unknown>> {
-  dispatch: Dispatch<
-    Action | LiftedAction<S, A, RtkQueryInspectorMonitorState>
-  >;
-
-  preserveScrollTop: boolean;
-  select: (state: S) => unknown;
+  dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
   theme: keyof typeof themes | Base16Theme;
-  expandActionRoot: boolean;
-  expandStateRoot: boolean;
-  markStateDiff: boolean;
   hideMainButtons?: boolean;
   invertTheme: boolean;
 }
@@ -92,7 +82,7 @@ export interface SelectOption<T = string> {
 
 export interface SelectorsSource<S> {
   userState: S | null;
-  monitorState: RtkQueryInspectorMonitorState;
+  monitorState: RtkQueryMonitorState;
 }
 
 export interface StyleUtils {

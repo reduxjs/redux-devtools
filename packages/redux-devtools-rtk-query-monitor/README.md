@@ -7,7 +7,7 @@ Created by [FaberVitale](https://github.com/FaberVitale), inspired by [react-que
 ## Demo
 
 - [link](https://rtk-query-monitor-demo.netlify.app/)
-- [demo source](https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-inspector-monitor/demo)
+- [demo source](https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-monitor/demo)
 
 ## Preview
 
@@ -18,27 +18,27 @@ Created by [FaberVitale](https://github.com/FaberVitale), inspired by [react-que
 ### npm
 
 ```bash
-npm i @redux-devtools/rtk-query-inspector-monitor --save
+npm i @redux-devtools/rtk-query-monitor --save
 ```
 
 ### yarn
 
 ```bash
-yarn add @redux-devtools/rtk-query-inspector-monitor
+yarn add @redux-devtools/rtk-query-monitor
 ```
 
 ## Usage
 
-You can use `RtkQueryInspectorMonitor` as the only monitor in your app:
+You can use `RtkQueryMonitor` as the only monitor in your app:
 
 ##### `containers/DevTools.js`
 
 ```ts
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import RtkQueryInspectorMonitor from '@redux-devtools/rtk-query-inspector-monitor';
+import RtkQueryrMonitor from '@redux-devtools/rtk-query-monitor';
 
-export default createDevTools(<RtkQueryInspectorMonitor />);
+export default createDevTools(<RtkQueryrMonitor />);
 ```
 
 Then you can render `<DevTools>` to any place inside app or even into a separate popup window.

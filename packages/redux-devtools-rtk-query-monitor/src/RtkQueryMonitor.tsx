@@ -5,8 +5,8 @@ import RtkQueryInspector from './RtkQueryInspector';
 import { reducer } from './reducers';
 import {
   ExternalProps,
-  RtkQueryInspectorMonitorProps,
-  RtkQueryInspectorMonitorState,
+  RtkQueryMonitorProps,
+  RtkQueryMonitorState,
   StyleUtils,
 } from './types';
 import {
@@ -19,13 +19,13 @@ interface DefaultProps {
   invertTheme: boolean;
 }
 
-export interface RtkQueryInspectorComponentState {
+export interface RtkQueryComponentState {
   readonly styleUtils: StyleUtils;
 }
 
-class RtkQueryInspectorMonitor<S, A extends Action<unknown>> extends Component<
-  RtkQueryInspectorMonitorProps<S, A>,
-  RtkQueryInspectorComponentState
+class RtkQueryMonitor<S, A extends Action<unknown>> extends Component<
+  RtkQueryMonitorProps<S, A>,
+  RtkQueryComponentState
 > {
   static update = reducer;
 
@@ -46,7 +46,7 @@ class RtkQueryInspectorMonitor<S, A extends Action<unknown>> extends Component<
     invertTheme: false,
   };
 
-  constructor(props: RtkQueryInspectorMonitorProps<S, A>) {
+  constructor(props: RtkQueryMonitorProps<S, A>) {
     super(props);
 
     this.state = {
@@ -73,13 +73,13 @@ class RtkQueryInspectorMonitor<S, A extends Action<unknown>> extends Component<
   }
 }
 
-export default RtkQueryInspectorMonitor as unknown as React.ComponentType<
+export default RtkQueryMonitor as unknown as React.ComponentType<
   ExternalProps<unknown, Action<unknown>>
 > & {
   update(
     monitorProps: ExternalProps<unknown, Action<unknown>>,
-    state: RtkQueryInspectorMonitorState | undefined,
+    state: RtkQueryMonitorState | undefined,
     action: Action
-  ): RtkQueryInspectorMonitorState;
+  ): RtkQueryMonitorState;
   defaultProps: DefaultProps;
 };

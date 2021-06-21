@@ -2,7 +2,7 @@ import { isPlainObject } from '@reduxjs/toolkit';
 import { QueryStatus } from '@reduxjs/toolkit/query';
 import {
   QueryInfo,
-  RtkQueryInspectorMonitorState,
+  RtkQueryMonitorState,
   RtkQueryApiState,
   RTKQuerySubscribers,
   RtkQueryTag,
@@ -206,7 +206,7 @@ export function flipComparator<T>(comparator: Comparator<T>): Comparator<T> {
 }
 
 export function isQuerySelected(
-  selectedQueryKey: RtkQueryInspectorMonitorState['selectedQueryKey'],
+  selectedQueryKey: RtkQueryMonitorState['selectedQueryKey'],
   queryInfo: QueryInfo
 ): boolean {
   return (

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createDevTools } from '@redux-devtools/core';
 import DockMonitor from '@redux-devtools/dock-monitor';
-import RtkQueryInspectorMonitor from './build/RtkQueryInspectorMonitor.js';
+import RtkQueryMonitor from './build/RtkQueryMonitor.js';
 
 export default createDevTools(
   <DockMonitor
@@ -9,6 +9,6 @@ export default createDevTools(
     changePositionKey="ctrl-q"
     changeMonitorKey="ctrl-m"
   >
-    <RtkQueryInspectorMonitor />
+    <RtkQueryMonitor />
   </DockMonitor>
 );

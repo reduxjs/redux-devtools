@@ -29,7 +29,7 @@ export function App() {
             <Link
               className="link"
               isExternal
-              href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-inspector-monitor/demo"
+              href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-monitor/demo"
             >
               demo source
             </Link>
@@ -38,9 +38,9 @@ export function App() {
             <Link
               className="link"
               isExternal
-              href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-inspector-monitor"
+              href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-monitor"
             >
-              @redux-devtools/rtk-query-inspector-monitor source
+              @redux-devtools/rtk-query-monitor source
             </Link>
           </ListItem>
           <ListItem>

@@ -3,14 +3,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RtkQueryInspectorProps } from './RtkQueryInspector';
 import {
   QueryInfo,
-  RtkQueryInspectorMonitorState,
+  RtkQueryMonitorState,
   QueryFormValues,
   QueryPreviewTabs,
 } from './types';
 import { QueryComparators } from './utils/comparators';
 import { QueryFilters } from './utils/filters';
 
-const initialState: RtkQueryInspectorMonitorState = {
+const initialState: RtkQueryMonitorState = {
   queryForm: {
     values: {
       queryComparator: QueryComparators.fulfilledTimeStamp,
@@ -28,7 +28,7 @@ const monitorSlice = createSlice({
    * `@@` prefix is mandatory.
    * @see lifedAction @ `packages/redux-devtools-app/src/actions/index.ts`
    */
-  name: '@@rtk-query-inspector-monitor',
+  name: '@@rtk-query-monitor',
   initialState,
   reducers: {
     changeQueryFormValues(
@@ -54,9 +54,9 @@ const monitorSlice = createSlice({
 
 export function reducer<S, A extends Action<unknown>>(
   props: RtkQueryInspectorProps<S, A>,
-  state: RtkQueryInspectorMonitorState | undefined,
+  state: RtkQueryMonitorState | undefined,
   action: AnyAction
-): RtkQueryInspectorMonitorState {
+): RtkQueryMonitorState {
   return monitorSlice.reducer(state, action);
 }
 

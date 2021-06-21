@@ -1,9 +1,14 @@
 {
-  "name": "rtk-query-imspector-monitor-demo",
+  "name": "rtk-query-monitor-demo",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "build": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build"
+  },
+  "author": {
+    "name": "FaberVitale",
+    "url": "https://github.com/FaberVitale"
   },
   "dependencies": {
     "@chakra-ui/react": "1.0.0",

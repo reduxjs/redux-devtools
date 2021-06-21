@@ -7,7 +7,7 @@ import {
   QueryFormValues,
   QueryInfo,
   QueryPreviewTabs,
-  RtkQueryInspectorMonitorState,
+  RtkQueryMonitorState,
   StyleUtils,
 } from './types';
 import { createInspectorSelectors, computeSelectorSource } from './selectors';
@@ -23,12 +23,12 @@ import { getApiStateOf, getQuerySubscriptionsOf } from './utils/rtk-query';
 
 type SelectorsSource<S> = {
   userState: S | null;
-  monitorState: RtkQueryInspectorMonitorState;
+  monitorState: RtkQueryMonitorState;
 };
 
 export interface RtkQueryInspectorProps<S, A extends Action<unknown>>
-  extends LiftedState<S, A, RtkQueryInspectorMonitorState> {
-  dispatch: Dispatch<LiftedAction<S, A, RtkQueryInspectorMonitorState>>;
+  extends LiftedState<S, A, RtkQueryMonitorState> {
+  dispatch: Dispatch<LiftedAction<S, A, RtkQueryMonitorState>>;
   theme: keyof typeof themes | Base16Theme;
   invertTheme: boolean;
   state: S | null;

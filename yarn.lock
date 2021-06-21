@@ -3377,7 +3377,7 @@ __metadata:
     "@redux-devtools/inspector-monitor-test-tab": ^0.7.2
     "@redux-devtools/inspector-monitor-trace-tab": ^0.2.2
     "@redux-devtools/log-monitor": ^2.3.0
-    "@redux-devtools/rtk-query-inspector-monitor": ^1.0.0
+    "@redux-devtools/rtk-query-monitor": ^1.0.0
     "@redux-devtools/slider-monitor": ^2.0.0-8
     "@reduxjs/toolkit": ^1.6.0
     "@rjsf/core": ^2.5.1
@@ -3680,9 +3680,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/rtk-query-inspector-monitor@^1.0.0, @redux-devtools/rtk-query-inspector-monitor@workspace:packages/redux-devtools-rtk-query-inspector-monitor":
+"@redux-devtools/rtk-query-monitor@^1.0.0, @redux-devtools/rtk-query-monitor@workspace:packages/redux-devtools-rtk-query-monitor":
   version: 0.0.0-use.local
-  resolution: "@redux-devtools/rtk-query-inspector-monitor@workspace:packages/redux-devtools-rtk-query-inspector-monitor"
+  resolution: "@redux-devtools/rtk-query-monitor@workspace:packages/redux-devtools-rtk-query-monitor"
   dependencies:
     "@redux-devtools/core": ^3.9.0
     "@redux-devtools/dock-monitor": ^1.4.0
