@@ -1,6 +1,13 @@
 import { Action, createSelector, Selector } from '@reduxjs/toolkit';
 import { RtkQueryInspectorProps } from './containers/RtkQueryInspector';
-import { ApiStats, QueryInfo, RtkQueryTag, SelectorsSource } from './types';
+import {
+  ApiStats,
+  QueryInfo,
+  RtkQueryApiState,
+  RtkQueryTag,
+  SelectorsSource,
+  RtkQueryProvided,
+} from './types';
 import { Comparator, queryComparators } from './utils/comparators';
 import { FilterList, queryListFilters } from './utils/filters';
 import { escapeRegExpSpecialCharacter } from './utils/regexp';
@@ -52,6 +59,10 @@ export interface InspectorSelectors<S> {
   readonly selectSearchQueryRegex: InspectorSelector<S, RegExp | null>;
   readonly selectCurrentQueryTags: InspectorSelector<S, RtkQueryTag[]>;
   readonly selectApiStatsOfCurrentQuery: InspectorSelector<S, ApiStats | null>;
+  readonly selectApiOfCurrentQuery: InspectorSelector<
+    S,
+    RtkQueryApiState | null
+  >;
 }
 
 export function createInspectorSelectors<S>(): InspectorSelectors<S> {
@@ -131,17 +142,33 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     }
   );
 
+  const selectApiOfCurrentQuery: InspectorSelector<S, null | RtkQueryApiState> =
+    (selectorsSource: SelectorsSource<S>) => {
+      const apiStates = selectApiStates(selectorsSource);
+      const currentQueryInfo = selectCurrentQueryInfo(selectorsSource);
+
+      if (!apiStates || !currentQueryInfo) {
+        return null;
+      }
+
+      return apiStates[currentQueryInfo.reducerPath] ?? null;
+    };
+
+  const selectProvidedOfCurrentQuery: InspectorSelector<
+    S,
+    null | RtkQueryProvided
+  > = (selectorsSource: SelectorsSource<S>) => {
+    return selectApiOfCurrentQuery(selectorsSource)?.provided ?? null;
+  };
+
   const selectCurrentQueryTags = createSelector(
-    selectApiStates,
-    selectCurrentQueryInfo,
-    (apiState, currentQueryInfo) => getQueryTagsOf(currentQueryInfo, apiState)
+    [selectCurrentQueryInfo, selectProvidedOfCurrentQuery],
+    getQueryTagsOf
   );
 
   const selectApiStatsOfCurrentQuery = createSelector(
-    selectApiStates,
-    selectCurrentQueryInfo,
-    (apiState, currentQueryInfo) =>
-      generateApiStatsOfCurrentQuery(currentQueryInfo, apiState)
+    selectApiOfCurrentQuery,
+    generateApiStatsOfCurrentQuery
   );
 
   return {
@@ -153,5 +180,6 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     selectCurrentQueryInfo,
     selectCurrentQueryTags,
     selectApiStatsOfCurrentQuery,
+    selectApiOfCurrentQuery,
   };
 }

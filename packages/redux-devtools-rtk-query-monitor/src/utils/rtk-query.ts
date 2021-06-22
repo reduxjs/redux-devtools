@@ -11,6 +11,9 @@ import {
   MutationInfo,
   ApiStats,
   QueryTally,
+  RtkQueryProvided,
+  ApiTimings,
+  QueryTimings,
 } from '../types';
 import { missingTagId } from '../monitor-config';
 import { Comparator } from './comparators';
@@ -192,18 +195,75 @@ function tallySubscriptions(
   return output;
 }
 
+function computeQueryApiTimings(
+  queriesOrMutations:
+    | RtkQueryApiState['queries']
+    | RtkQueryApiState['mutations']
+): QueryTimings {
+  let latestFetch = null;
+  let latestFetchedQueryKey: string | null = null;
+  let latestFetchedQueryTiming = -1;
+  let oldestFetch = null;
+  let oldestFetchedQueryKey: string | null = null;
+  let oldestFetchedQueryTiming = Number.MAX_SAFE_INTEGER;
+
+  const queryKeys = Object.keys(queriesOrMutations);
+
+  for (let i = 0, len = queryKeys.length; i < len; i++) {
+    const queryKey = queryKeys[i];
+    const query = queriesOrMutations[queryKey];
+
+    const fulfilledTimeStamp = query?.fulfilledTimeStamp;
+
+    if (typeof fulfilledTimeStamp === 'number') {
+      if (fulfilledTimeStamp > latestFetchedQueryTiming) {
+        latestFetchedQueryKey = queryKey;
+        latestFetchedQueryTiming = fulfilledTimeStamp;
+      }
+
+      if (fulfilledTimeStamp < oldestFetchedQueryTiming) {
+        oldestFetchedQueryKey = queryKey;
+        oldestFetchedQueryTiming = fulfilledTimeStamp;
+      }
+    }
+  }
+
+  if (latestFetchedQueryKey) {
+    latestFetch = {
+      key: latestFetchedQueryKey,
+      at: new Date(latestFetchedQueryTiming).toISOString(),
+    };
+  }
+
+  if (oldestFetchedQueryKey) {
+    oldestFetch = {
+      key: oldestFetchedQueryKey,
+      at: new Date(oldestFetchedQueryTiming).toISOString(),
+    };
+  }
+
+  return {
+    latestFetch,
+    oldestFetch,
+  };
+}
+
+function computeApiTimings(api: RtkQueryApiState): ApiTimings {
+  return {
+    queries: computeQueryApiTimings(api.queries),
+    mutations: computeQueryApiTimings(api.mutations),
+  };
+}
+
 export function generateApiStatsOfCurrentQuery(
-  queryInfo: QueryInfo | null,
-  apiStates: ReturnType<typeof getApiStatesOf>
+  api: RtkQueryApiState | null
 ): ApiStats | null {
-  if (!apiStates || !queryInfo) {
+  if (!api) {
     return null;
   }
 
-  const { reducerPath } = queryInfo;
-  const api = apiStates[reducerPath];
-
   return {
+    timings: computeApiTimings(api),
     tally: {
       subscriptions: tallySubscriptions(api.subscriptions),
       queries: computeQueryTallyOf(api.queries),
@@ -268,13 +328,11 @@ export function getProvidedOf(
 
 export function getQueryTagsOf(
   queryInfo: QueryInfo | null,
-  apiStates: ReturnType<typeof getApiStatesOf>
+  provided: RtkQueryProvided | null
 ): RtkQueryTag[] {
-  if (!apiStates || !queryInfo) {
+  if (!queryInfo || !provided) {
     return emptyArray;
   }
-
-  const provided = apiStates[queryInfo.reducerPath].provided;
 
   const tagTypes = Object.keys(provided);
 

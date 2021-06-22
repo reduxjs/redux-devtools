@@ -122,7 +122,8 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
     const currentQueryInfo =
       this.selectors.selectCurrentQueryInfo(selectorsSource);
 
-    const currentRtkApi = getApiStateOf(currentQueryInfo, apiStates);
+    const currentRtkApi =
+      this.selectors.selectApiOfCurrentQuery(selectorsSource);
     const currentQuerySubscriptions = getQuerySubscriptionsOf(
       currentQueryInfo,
       apiStates

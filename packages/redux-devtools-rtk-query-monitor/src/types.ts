@@ -109,13 +109,24 @@ export type QueryTally = {
 } &
   Tally;
 
+export interface QueryTimings {
+  readonly oldestFetch: { key: string; at: string } | null;
+  readonly latestFetch: { key: string; at: string } | null;
+}
+
+export interface ApiTimings {
+  readonly queries: QueryTimings;
+  readonly mutations: QueryTimings;
+}
+
 export interface ApiStats {
-  readonly tally: {
+  readonly timings: ApiTimings;
+  readonly tally: Readonly<{
     subscriptions: Tally;
     queries: QueryTally;
     tagTypes: Tally;
     mutations: QueryTally;
-  };
+  }>;
 }
 
 export interface QueryPreviewTabProps extends StyleUtils {
