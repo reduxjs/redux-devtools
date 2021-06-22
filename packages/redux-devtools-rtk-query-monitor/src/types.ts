@@ -112,6 +112,8 @@ export type QueryTally = {
 export interface QueryTimings {
   readonly oldestFetch: { key: string; at: string } | null;
   readonly latestFetch: { key: string; at: string } | null;
+  readonly slowest: { key: string; duration: string } | null;
+  readonly fastest: { key: string; duration: string } | null;
 }
 
 export interface ApiTimings {

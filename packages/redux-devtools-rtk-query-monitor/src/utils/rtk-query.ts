@@ -200,12 +200,18 @@ function computeQueryApiTimings(
     | RtkQueryApiState['queries']
     | RtkQueryApiState['mutations']
 ): QueryTimings {
-  let latestFetch = null;
-  let latestFetchedQueryKey: string | null = null;
-  let latestFetchedQueryTiming = -1;
-  let oldestFetch = null;
-  let oldestFetchedQueryKey: string | null = null;
-  let oldestFetchedQueryTiming = Number.MAX_SAFE_INTEGER;
+  type SpeedReport = { key: string | null; at: string | number };
+  type DurationReport = { key: string | null; duration: string | number };
+  let latestFetch: null | SpeedReport = { key: null, at: -1 };
+  let oldestFetch: null | SpeedReport = {
+    key: null,
+    at: Number.MAX_SAFE_INTEGER,
+  };
+  let slowest: null | DurationReport = { key: null, duration: -1 };
+  let fastest: null | DurationReport = {
+    key: null,
+    duration: Number.MAX_SAFE_INTEGER,
+  };
 
   const queryKeys = Object.keys(queriesOrMutations);
 
@@ -214,38 +220,68 @@ function computeQueryApiTimings(
     const query = queriesOrMutations[queryKey];
 
     const fulfilledTimeStamp = query?.fulfilledTimeStamp;
+    const startedTimeStamp = query?.startedTimeStamp;
 
     if (typeof fulfilledTimeStamp === 'number') {
-      if (fulfilledTimeStamp > latestFetchedQueryTiming) {
-        latestFetchedQueryKey = queryKey;
-        latestFetchedQueryTiming = fulfilledTimeStamp;
+      if (fulfilledTimeStamp > latestFetch.at) {
+        latestFetch.key = queryKey;
+        latestFetch.at = fulfilledTimeStamp;
       }
 
-      if (fulfilledTimeStamp < oldestFetchedQueryTiming) {
-        oldestFetchedQueryKey = queryKey;
-        oldestFetchedQueryTiming = fulfilledTimeStamp;
+      if (fulfilledTimeStamp < oldestFetch.at) {
+        oldestFetch.key = queryKey;
+        oldestFetch.at = fulfilledTimeStamp;
+      }
+
+      if (
+        typeof startedTimeStamp === 'number' &&
+        startedTimeStamp <= fulfilledTimeStamp
+      ) {
+        const pendingDuration = fulfilledTimeStamp - startedTimeStamp;
+
+        if (pendingDuration > slowest.duration) {
+          slowest.key = queryKey;
+          slowest.duration = pendingDuration;
+        }
+
+        if (pendingDuration < fastest.duration) {
+          fastest.key = queryKey;
+          fastest.duration = pendingDuration;
+        }
       }
     }
   }
 
-  if (latestFetchedQueryKey) {
-    latestFetch = {
-      key: latestFetchedQueryKey,
-      at: new Date(latestFetchedQueryTiming).toISOString(),
-    };
+  if (latestFetch.key !== null) {
+    latestFetch.at = new Date(latestFetch.at).toISOString();
+  } else {
+    latestFetch = null;
   }
 
-  if (oldestFetchedQueryKey) {
-    oldestFetch = {
-      key: oldestFetchedQueryKey,
-      at: new Date(oldestFetchedQueryTiming).toISOString(),
-    };
+  if (oldestFetch.key !== null) {
+    oldestFetch.at = new Date(oldestFetch.at).toISOString();
+  } else {
+    oldestFetch = null;
+  }
+
+  if (slowest.key !== null) {
+    slowest.duration = `${((slowest.duration as number) / 1_000).toFixed(3)}s`;
+  } else {
+    slowest = null;
+  }
+
+  if (fastest.key !== null) {
+    fastest.duration = `${((fastest.duration as number) / 1_000).toFixed(3)}s`;
+  } else {
+    fastest = null;
   }
 
   return {
     latestFetch,
     oldestFetch,
-  };
+    slowest,
+    fastest,
+  } as QueryTimings;
 }
 
 function computeApiTimings(api: RtkQueryApiState): ApiTimings {
