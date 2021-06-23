@@ -72,7 +72,7 @@ See also
   - query state
   - tags
   - subscriptions
-  - api slice config
+  - api state
   - api stats
 
 ## TODO

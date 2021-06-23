@@ -19,6 +19,8 @@ import { missingTagId } from '../monitor-config';
 import { Comparator } from './comparators';
 import { emptyArray } from './object';
 import { SubscriptionState } from '@reduxjs/toolkit/dist/query/core/apiState';
+import { formatMs } from './formatters';
+import { mean } from './statistics';
 
 const rtkqueryApiStateKeys: ReadonlyArray<keyof RtkQueryApiState> = [
   'queries',
@@ -213,6 +215,8 @@ function computeQueryApiTimings(
     duration: Number.MAX_SAFE_INTEGER,
   };
 
+  const pendingDurations: number[] = [];
+
   const queryKeys = Object.keys(queriesOrMutations);
 
   for (let i = 0, len = queryKeys.length; i < len; i++) {
@@ -238,6 +242,8 @@ function computeQueryApiTimings(
         startedTimeStamp <= fulfilledTimeStamp
       ) {
         const pendingDuration = fulfilledTimeStamp - startedTimeStamp;
+
+        pendingDurations.push(pendingDuration);
 
         if (pendingDuration > slowest.duration) {
           slowest.key = queryKey;
@@ -265,22 +271,26 @@ function computeQueryApiTimings(
   }
 
   if (slowest.key !== null) {
-    slowest.duration = `${((slowest.duration as number) / 1_000).toFixed(3)}s`;
+    slowest.duration = formatMs(slowest.duration as number);
   } else {
     slowest = null;
   }
 
   if (fastest.key !== null) {
-    fastest.duration = `${((fastest.duration as number) / 1_000).toFixed(3)}s`;
+    fastest.duration = formatMs(fastest.duration as number);
   } else {
     fastest = null;
   }
+
+  const average =
+    pendingDurations.length > 0 ? formatMs(mean(pendingDurations)) : '-';
 
   return {
     latestFetch,
     oldestFetch,
     slowest,
     fastest,
+    average,
   } as QueryTimings;
 }
 

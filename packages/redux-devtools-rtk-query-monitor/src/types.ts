@@ -114,6 +114,7 @@ export interface QueryTimings {
   readonly latestFetch: { key: string; at: string } | null;
   readonly slowest: { key: string; duration: string } | null;
   readonly fastest: { key: string; duration: string } | null;
+  readonly average: string;
 }
 
 export interface ApiTimings {
