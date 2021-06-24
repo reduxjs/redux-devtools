@@ -1,4 +1,4 @@
-import { isPlainObject } from '@reduxjs/toolkit';
+import { AnyAction, isPlainObject } from '@reduxjs/toolkit';
 import { QueryStatus } from '@reduxjs/toolkit/query';
 import {
   QueryInfo,
@@ -18,7 +18,6 @@ import {
 import { missingTagId } from '../monitor-config';
 import { Comparator } from './comparators';
 import { emptyArray } from './object';
-import { SubscriptionState } from '@reduxjs/toolkit/dist/query/core/apiState';
 import { formatMs } from './formatters';
 import { mean } from './statistics';
 
@@ -178,7 +177,7 @@ function computeQueryTallyOf(
 }
 
 function tallySubscriptions(
-  subsState: SubscriptionState
+  subsState: RtkQueryApiState['subscriptions']
 ): ApiStats['tally']['subscriptions'] {
   const subsOfQueries = Object.values(subsState);
 

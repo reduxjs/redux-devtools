@@ -1,4 +1,4 @@
-import { QueryStatus } from '@reduxjs/toolkit/dist/query';
+import { QueryStatus } from '@reduxjs/toolkit/query';
 import { QueryInfo, SelectOption } from '../types';
 
 export interface Comparator<T> {
