@@ -1,29 +1,21 @@
 import React, { ReactNode, PureComponent } from 'react';
-import { QueryPreviewTabProps } from '../types';
+import { RtkQueryTag } from '../types';
 import { TreeView } from './TreeView';
 
 interface QueryPreviewTagsState {
-  data: { tags: QueryPreviewTabProps['tags'] };
+  data: { tags: RtkQueryTag[] };
+}
+
+export interface QueryPreviewTagsProps {
+  tags: RtkQueryTag[];
+  isWideLayout: boolean;
 }
 
 export class QueryPreviewTags extends PureComponent<
-  QueryPreviewTabProps,
+  QueryPreviewTagsProps,
   QueryPreviewTagsState
 > {
-  static getDerivedStateFromProps(
-    { tags }: QueryPreviewTabProps,
-    state: QueryPreviewTagsState
-  ): QueryPreviewTagsState | null {
-    if (tags !== state.data.tags) {
-      return {
-        data: { tags },
-      };
-    }
-
-    return null;
-  }
-
-  constructor(props: QueryPreviewTabProps) {
+  constructor(props: QueryPreviewTagsProps) {
     super(props);
 
     this.state = {
@@ -32,21 +24,8 @@ export class QueryPreviewTags extends PureComponent<
   }
 
   render(): ReactNode {
-    const { queryInfo, isWideLayout, base16Theme, styling, invertTheme } =
-      this.props;
+    const { isWideLayout, tags } = this.props;
 
-    if (!queryInfo) {
-      return null;
-    }
-
-    return (
-      <TreeView
-        data={this.state.data}
-        isWideLayout={isWideLayout}
-        base16Theme={base16Theme}
-        styling={styling}
-        invertTheme={invertTheme}
-      />
-    );
+    return <TreeView data={tags} isWideLayout={isWideLayout} />;
   }
 }

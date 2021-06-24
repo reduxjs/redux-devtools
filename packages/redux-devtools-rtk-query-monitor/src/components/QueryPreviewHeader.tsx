@@ -1,17 +1,17 @@
 import React, { ReactNode } from 'react';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
-import { QueryPreviewTabOption, QueryPreviewTabs } from '../types';
+import { QueryPreviewTabs, TabOption } from '../types';
 import { emptyArray } from '../utils/object';
 
 export interface QueryPreviewHeaderProps {
-  tabs: ReadonlyArray<QueryPreviewTabOption>;
+  tabs: ReadonlyArray<TabOption<QueryPreviewTabs, unknown>>;
   onTabChange: (tab: QueryPreviewTabs) => void;
   selectedTab: QueryPreviewTabs;
-  renderTabLabel?: (tab: QueryPreviewTabOption) => ReactNode;
+  renderTabLabel?: (tab: QueryPreviewHeaderProps['tabs'][number]) => ReactNode;
 }
 
 export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps> {
-  handleTabClick = (tab: QueryPreviewTabOption): void => {
+  handleTabClick = (tab: QueryPreviewHeaderProps['tabs'][number]): void => {
     if (this.props.selectedTab !== tab.value) {
       this.props.onTabChange(tab.value);
     }

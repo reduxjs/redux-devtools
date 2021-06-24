@@ -7,9 +7,11 @@ import {
   RtkQueryTag,
   SelectorsSource,
   RtkQueryProvided,
+  QueryPreviewTabs,
 } from './types';
 import { Comparator, queryComparators } from './utils/comparators';
 import { FilterList, queryListFilters } from './utils/filters';
+import { emptyRecord } from './utils/object';
 import { escapeRegExpSpecialCharacter } from './utils/regexp';
 import {
   getApiStatesOf,
@@ -62,6 +64,14 @@ export interface InspectorSelectors<S> {
   readonly selectApiOfCurrentQuery: InspectorSelector<
     S,
     RtkQueryApiState | null
+  >;
+  readonly selectTabCounters: InspectorSelector<
+    S,
+    Record<QueryPreviewTabs, number>
+  >;
+  readonly selectSubscriptionsOfCurrentQuery: InspectorSelector<
+    S,
+    RtkQueryApiState['subscriptions'][string]
   >;
 }
 
@@ -161,6 +171,17 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     return selectApiOfCurrentQuery(selectorsSource)?.provided ?? null;
   };
 
+  const selectSubscriptionsOfCurrentQuery = createSelector(
+    [selectApiOfCurrentQuery, selectCurrentQueryInfo],
+    (apiState, queryInfo) => {
+      if (!queryInfo || !apiState) {
+        return emptyRecord;
+      }
+
+      return apiState.subscriptions[queryInfo.queryKey];
+    }
+  );
+
   const selectCurrentQueryTags = createSelector(
     [selectCurrentQueryInfo, selectProvidedOfCurrentQuery],
     getQueryTagsOf
@@ -171,6 +192,21 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     generateApiStatsOfCurrentQuery
   );
 
+  const selectTabCounters = (
+    selectorsSource: SelectorsSource<S>
+  ): Record<QueryPreviewTabs, number> => {
+    const subscriptions = selectSubscriptionsOfCurrentQuery(selectorsSource);
+    const subsLen = Object.keys(subscriptions ?? {}).length;
+
+    return {
+      [QueryPreviewTabs.queryTags]:
+        selectCurrentQueryTags(selectorsSource).length,
+      [QueryPreviewTabs.querySubscriptions]: subsLen,
+      [QueryPreviewTabs.apiConfig]: 0,
+      [QueryPreviewTabs.queryinfo]: 0,
+    };
+  };
+
   return {
     selectQueryComparator,
     selectApiStates,
@@ -180,6 +216,8 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     selectCurrentQueryInfo,
     selectCurrentQueryTags,
     selectApiStatsOfCurrentQuery,
+    selectSubscriptionsOfCurrentQuery,
     selectApiOfCurrentQuery,
+    selectTabCounters,
   };
 }

@@ -1,18 +1,19 @@
 import { createSelector } from '@reduxjs/toolkit';
 import React, { ReactNode, PureComponent } from 'react';
-import { QueryPreviewTabProps } from '../types';
+import { ApiStats, RtkQueryApiState } from '../types';
 import { TreeView } from './TreeView';
 
-interface TreeDisplayed {
-  reducerPath: string;
-  api: QueryPreviewTabProps['apiState'];
-  stats: QueryPreviewTabProps['apiStats'];
+export interface QueryPreviewApiProps {
+  apiStats: ApiStats | null;
+  apiState: RtkQueryApiState | null;
+  isWideLayout: boolean;
 }
-export class QueryPreviewApi extends PureComponent<QueryPreviewTabProps> {
+
+export class QueryPreviewApi extends PureComponent<QueryPreviewApiProps> {
   selectData = createSelector(
     [
-      ({ apiState }: QueryPreviewTabProps) => apiState,
-      ({ apiStats }: QueryPreviewTabProps) => apiStats,
+      ({ apiState }: QueryPreviewApiProps) => apiState,
+      ({ apiStats }: QueryPreviewApiProps) => apiStats,
     ],
     (apiState, apiStats) => ({
       reducerPath: apiState?.config?.reducerPath ?? null,
@@ -22,20 +23,10 @@ export class QueryPreviewApi extends PureComponent<QueryPreviewTabProps> {
   );
 
   render(): ReactNode {
-    const { queryInfo, isWideLayout, base16Theme, styling, invertTheme } =
-      this.props;
-
-    if (!queryInfo) {
-      return null;
-    }
-
     return (
       <TreeView
         data={this.selectData(this.props)}
-        isWideLayout={isWideLayout}
-        base16Theme={base16Theme}
-        styling={styling}
-        invertTheme={invertTheme}
+        isWideLayout={this.props.isWideLayout}
       />
     );
   }

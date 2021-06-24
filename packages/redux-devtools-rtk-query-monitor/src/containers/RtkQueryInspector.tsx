@@ -18,7 +18,6 @@ import {
 import { QueryList } from '../components/QueryList';
 import { QueryForm } from '../components/QueryForm';
 import { QueryPreview } from '../components/QueryPreview';
-import { getApiStateOf, getQuerySubscriptionsOf } from '../utils/rtk-query';
 
 type ForwardedMonitorProps<S, A extends Action<unknown>> = Pick<
   LiftedState<S, A, RtkQueryMonitorState>,
@@ -115,26 +114,15 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
     const {
       styleUtils: { styling },
     } = this.props;
-    const apiStates = this.selectors.selectApiStates(selectorsSource);
     const allVisibleQueries =
       this.selectors.selectAllVisbileQueries(selectorsSource);
 
     const currentQueryInfo =
       this.selectors.selectCurrentQueryInfo(selectorsSource);
 
-    const currentRtkApi =
-      this.selectors.selectApiOfCurrentQuery(selectorsSource);
-    const currentQuerySubscriptions = getQuerySubscriptionsOf(
-      currentQueryInfo,
-      apiStates
-    );
+    const apiStates = this.selectors.selectApiStates(selectorsSource);
 
-    const currentTags = this.selectors.selectCurrentQueryTags(selectorsSource);
-
-    const currentApiStats =
-      this.selectors.selectApiStatsOfCurrentQuery(selectorsSource);
-
-    const hasNoApis = apiStates == null;
+    const hasNoApi = apiStates == null;
 
     return (
       <div
@@ -156,17 +144,15 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
             selectedQueryKey={selectorsSource.monitorState.selectedQueryKey}
           />
         </div>
-        <QueryPreview
+        <QueryPreview<S>
+          selectorsSource={this.state.selectorsSource}
+          selectors={this.selectors}
           queryInfo={currentQueryInfo}
           selectedTab={selectorsSource.monitorState.selectedPreviewTab}
           onTabChange={this.handleTabChange}
           styling={styling}
-          tags={currentTags}
-          querySubscriptions={currentQuerySubscriptions}
-          apiState={currentRtkApi}
           isWideLayout={isWideLayout}
-          apiStats={currentApiStats}
-          hasNoApis={hasNoApis}
+          hasNoApis={hasNoApi}
         />
       </div>
     );

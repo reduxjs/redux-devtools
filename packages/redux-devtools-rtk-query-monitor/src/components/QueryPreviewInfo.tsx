@@ -1,11 +1,6 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ReactNode, PureComponent } from 'react';
-import {
-  QueryInfo,
-  QueryPreviewTabProps,
-  RtkQueryState,
-  RTKStatusFlags,
-} from '../types';
+import { QueryInfo, RtkQueryState, RTKStatusFlags } from '../types';
 import { identity } from '../utils/object';
 import { getQueryStatusFlags } from '../utils/rtk-query';
 import { TreeView } from './TreeView';
@@ -22,17 +17,14 @@ interface FormattedQuery extends ComputedQueryInfo {
   query: RtkQueryState;
 }
 
-export class QueryPreviewInfo extends PureComponent<QueryPreviewTabProps> {
-  selectFormattedQuery: Selector<
-    QueryPreviewTabProps['queryInfo'],
-    FormattedQuery | null
-  > = createSelector(
+export interface QueryPreviewInfoProps {
+  queryInfo: QueryInfo;
+  isWideLayout: boolean;
+}
+export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
+  selectFormattedQuery: Selector<QueryInfo, FormattedQuery> = createSelector(
     identity,
-    (queryInfo: QueryInfo | null): FormattedQuery | null => {
-      if (!queryInfo) {
-        return null;
-      }
-
+    (queryInfo: QueryInfo): FormattedQuery => {
       const { query, queryKey, reducerPath } = queryInfo;
 
       const startedAt = query.startedTimeStamp
@@ -57,23 +49,9 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewTabProps> {
   );
 
   render(): ReactNode {
-    const { queryInfo, isWideLayout, base16Theme, styling, invertTheme } =
-      this.props;
-
+    const { queryInfo, isWideLayout } = this.props;
     const formattedQuery = this.selectFormattedQuery(queryInfo);
 
-    if (!formattedQuery) {
-      return null;
-    }
-
-    return (
-      <TreeView
-        data={formattedQuery}
-        isWideLayout={isWideLayout}
-        base16Theme={base16Theme}
-        styling={styling}
-        invertTheme={invertTheme}
-      />
-    );
+    return <TreeView data={formattedQuery} isWideLayout={isWideLayout} />;
   }
 }

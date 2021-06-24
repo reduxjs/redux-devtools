@@ -132,23 +132,9 @@ export interface ApiStats {
   }>;
 }
 
-export interface QueryPreviewTabProps extends StyleUtils {
-  queryInfo: QueryInfo | null;
-  apiState: RtkQueryApiState | null;
-  querySubscriptions: RTKQuerySubscribers | null;
-  isWideLayout: boolean;
-  tags: RtkQueryTag[];
-  apiStats: ApiStats | null;
-}
-
 export interface TabOption<S, P> extends SelectOption<S> {
   component: ComponentType<P>;
 }
-
-export type QueryPreviewTabOption = TabOption<
-  QueryPreviewTabs,
-  QueryPreviewTabProps
->;
 
 /**
  * It is Omit<RequestStatusFlags, 'status'> & { isFetching: boolean; }
