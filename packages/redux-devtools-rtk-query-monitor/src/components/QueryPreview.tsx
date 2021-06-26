@@ -19,6 +19,10 @@ import { NoRtkQueryApi } from './NoRtkQueryApi';
 import { InspectorSelectors } from '../selectors';
 import { StylingFunction } from 'react-base16-styling';
 import { mapProps } from '../containers/mapProps';
+import {
+  QueryPreviewActions,
+  QueryPreviewActionsProps,
+} from './QueryPreviewActions';
 
 export interface QueryPreviewProps<S = unknown> {
   readonly selectedTab: QueryPreviewTabs;
@@ -70,11 +74,24 @@ const MappedApiPreview = mapProps<QueryPreviewTabProps, QueryPreviewApiProps>(
   })
 )(QueryPreviewApi);
 
+const MappedQueryPreviewActions = mapProps<
+  QueryPreviewTabProps,
+  QueryPreviewActionsProps
+>(({ isWideLayout, selectorsSource, selectors }) => ({
+  isWideLayout,
+  actionsOfQuery: selectors.selectActionsOfCurrentQuery(selectorsSource),
+}))(QueryPreviewActions);
+
 const tabs: ReadonlyArray<TabOption<QueryPreviewTabs, QueryPreviewTabProps>> = [
   {
     label: 'query',
     value: QueryPreviewTabs.queryinfo,
     component: MappedQueryPreviewInfo,
+  },
+  {
+    label: 'actions',
+    value: QueryPreviewTabs.actions,
+    component: MappedQueryPreviewActions,
   },
   {
     label: 'tags',
@@ -112,7 +129,7 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
       counterAsString = counterAsString.slice(0, 2) + '...';
     }
 
-    return `${label} (${counterAsString})`;
+    return `${label}(${counterAsString})`;
   };
 
   renderTabLabel = (tab: TabOption<QueryPreviewTabs, unknown>): ReactNode => {

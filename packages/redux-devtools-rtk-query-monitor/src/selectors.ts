@@ -19,6 +19,7 @@ import {
   flipComparator,
   getQueryTagsOf,
   generateApiStatsOfCurrentQuery,
+  getActionsOfCurrentQuery,
 } from './utils/rtk-query';
 
 type InspectorSelector<S, Output> = Selector<SelectorsSource<S>, Output>;
@@ -27,7 +28,8 @@ export function computeSelectorSource<S, A extends Action<unknown>>(
   props: RtkQueryInspectorProps<S, A>,
   previous: SelectorsSource<S> | null = null
 ): SelectorsSource<S> {
-  const { computedStates, currentStateIndex, monitorState } = props;
+  const { computedStates, currentStateIndex, monitorState, actionsById } =
+    props;
 
   const userState =
     computedStates.length > 0 ? computedStates[currentStateIndex].state : null;
@@ -35,11 +37,13 @@ export function computeSelectorSource<S, A extends Action<unknown>>(
   if (
     !previous ||
     previous.userState !== userState ||
-    previous.monitorState !== monitorState
+    previous.monitorState !== monitorState ||
+    previous.actionsById !== actionsById
   ) {
     return {
       userState,
       monitorState,
+      actionsById,
     };
   }
 
@@ -73,6 +77,10 @@ export interface InspectorSelectors<S> {
     S,
     RtkQueryApiState['subscriptions'][string]
   >;
+  readonly selectActionsOfCurrentQuery: InspectorSelector<
+    S,
+    ReturnType<typeof getActionsOfCurrentQuery>
+  >;
 }
 
 export function createInspectorSelectors<S>(): InspectorSelectors<S> {
@@ -87,6 +95,9 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
   }: SelectorsSource<S>): FilterList<QueryInfo> => {
     return queryListFilters[monitorState.queryForm.values.queryFilter];
   };
+
+  const selectActionsById = ({ actionsById }: SelectorsSource<S>) =>
+    actionsById;
 
   const selectApiStates = createSelector(
     ({ userState }: SelectorsSource<S>) => userState,
@@ -192,20 +203,29 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     generateApiStatsOfCurrentQuery
   );
 
-  const selectTabCounters = (
-    selectorsSource: SelectorsSource<S>
-  ): Record<QueryPreviewTabs, number> => {
-    const subscriptions = selectSubscriptionsOfCurrentQuery(selectorsSource);
-    const subsLen = Object.keys(subscriptions ?? {}).length;
+  const selectActionsOfCurrentQuery = createSelector(
+    selectCurrentQueryInfo,
+    selectActionsById,
+    getActionsOfCurrentQuery
+  );
 
-    return {
-      [QueryPreviewTabs.queryTags]:
-        selectCurrentQueryTags(selectorsSource).length,
-      [QueryPreviewTabs.querySubscriptions]: subsLen,
-      [QueryPreviewTabs.apiConfig]: 0,
-      [QueryPreviewTabs.queryinfo]: 0,
-    };
-  };
+  const selectTabCounters = createSelector(
+    [
+      selectSubscriptionsOfCurrentQuery,
+      selectActionsOfCurrentQuery,
+      selectCurrentQueryTags,
+    ],
+    (subscriptions, actions, tags) => {
+      return {
+        [QueryPreviewTabs.queryTags]: tags.length,
+        [QueryPreviewTabs.querySubscriptions]: Object.keys(subscriptions ?? {})
+          .length,
+        [QueryPreviewTabs.apiConfig]: 0,
+        [QueryPreviewTabs.queryinfo]: 0,
+        [QueryPreviewTabs.actions]: actions.length,
+      };
+    }
+  );
 
   return {
     selectQueryComparator,
@@ -219,5 +239,6 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     selectSubscriptionsOfCurrentQuery,
     selectApiOfCurrentQuery,
     selectTabCounters,
+    selectActionsOfCurrentQuery,
   };
 }

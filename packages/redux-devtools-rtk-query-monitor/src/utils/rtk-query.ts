@@ -1,4 +1,4 @@
-import { AnyAction, isPlainObject } from '@reduxjs/toolkit';
+import { AnyAction, isAnyOf, isPlainObject } from '@reduxjs/toolkit';
 import { QueryStatus } from '@reduxjs/toolkit/query';
 import {
   QueryInfo,
@@ -14,6 +14,7 @@ import {
   RtkQueryProvided,
   ApiTimings,
   QueryTimings,
+  SelectorsSource,
 } from '../types';
 import { missingTagId } from '../monitor-config';
 import { Comparator } from './comparators';
@@ -422,4 +423,40 @@ export function getQueryStatusFlags({
     isSuccess: status === QueryStatus.fulfilled && !!data,
     isError: status === QueryStatus.rejected,
   };
+}
+
+/**
+ * endpoint matcher
+ * @param endpointName
+ * @see https://github.com/reduxjs/redux-toolkit/blob/b718e01d323d3ab4b913e5d88c9b90aa790bb975/src/query/core/buildThunks.ts#L415
+ */
+export function matchesEndpoint(endpointName: unknown) {
+  return (action: any): action is AnyAction =>
+    endpointName != null && action?.meta?.arg?.endpointName === endpointName;
+}
+
+function matchesQueryKey(queryKey: string) {
+  return (action: any): action is AnyAction =>
+    action?.meta?.arg?.queryCacheKey === queryKey;
+}
+
+export function getActionsOfCurrentQuery(
+  currentQuery: QueryInfo | null,
+  actionById: SelectorsSource<unknown>['actionsById']
+): AnyAction[] {
+  if (!currentQuery) {
+    return emptyArray;
+  }
+
+  const matcher = isAnyOf(matchesQueryKey(currentQuery.queryKey));
+
+  const output: AnyAction[] = [];
+
+  for (const [, liftedAction] of Object.entries(actionById)) {
+    if (matcher(liftedAction?.action)) {
+      output.push(liftedAction.action);
+    }
+  }
+
+  return output.length === 0 ? emptyArray : output;
 }

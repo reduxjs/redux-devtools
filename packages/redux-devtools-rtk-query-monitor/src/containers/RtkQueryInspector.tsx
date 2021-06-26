@@ -21,7 +21,7 @@ import { QueryPreview } from '../components/QueryPreview';
 
 type ForwardedMonitorProps<S, A extends Action<unknown>> = Pick<
   LiftedState<S, A, RtkQueryMonitorState>,
-  'monitorState' | 'currentStateIndex' | 'computedStates'
+  'monitorState' | 'currentStateIndex' | 'computedStates' | 'actionsById'
 >;
 
 export interface RtkQueryInspectorProps<S, A extends Action<unknown>>
@@ -123,6 +123,9 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
     const apiStates = this.selectors.selectApiStates(selectorsSource);
 
     const hasNoApi = apiStates == null;
+
+    const actionsOfCurrentQuery =
+      this.selectors.selectActionsOfCurrentQuery(selectorsSource);
 
     return (
       <div

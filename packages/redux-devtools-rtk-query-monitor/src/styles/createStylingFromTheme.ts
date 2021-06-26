@@ -85,7 +85,7 @@ const getSheetFromColorMap = (map: ColorMap) => {
 
       '&[data-wide-layout="1"]': {
         height: '100%',
-        width: '45%',
+        width: '44%',
         borderRightWidth: 1,
         borderStyle: 'solid',
       },
@@ -180,7 +180,7 @@ const getSheetFromColorMap = (map: ColorMap) => {
     selectorButton: {
       cursor: 'pointer',
       position: 'relative',
-      padding: '6.5px 10px',
+      padding: '6.5px 8px',
       color: map.TEXT_COLOR,
       'border-style': 'solid',
       'border-width': '1px',
@@ -351,7 +351,7 @@ const getSheetFromColorMap = (map: ColorMap) => {
 
     previewHeader: {
       flex: '0 0 30px',
-      padding: '5px 10px',
+      padding: '5px 4px',
       'align-items': 'center',
       'border-bottom-width': '1px',
       'border-bottom-style': 'solid',

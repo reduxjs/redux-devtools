@@ -1,6 +1,6 @@
 import type { LiftedAction, LiftedState } from '@redux-devtools/instrument';
 import type { createApi, QueryStatus } from '@reduxjs/toolkit/query';
-import type { Action, Dispatch } from '@reduxjs/toolkit';
+import type { Action, AnyAction, Dispatch } from '@reduxjs/toolkit';
 import type { ComponentType } from 'react';
 import type { Base16Theme, StylingFunction } from 'react-base16-styling';
 import type * as themes from 'redux-devtools-themes';
@@ -12,6 +12,7 @@ export enum QueryPreviewTabs {
   apiConfig,
   querySubscriptions,
   queryTags,
+  actions,
 }
 
 export interface QueryFormValues {
@@ -83,6 +84,7 @@ export interface SelectOption<T = string> {
 export interface SelectorsSource<S> {
   userState: S | null;
   monitorState: RtkQueryMonitorState;
+  actionsById: LiftedState<unknown, AnyAction, unknown>['actionsById'];
 }
 
 export interface StyleUtils {

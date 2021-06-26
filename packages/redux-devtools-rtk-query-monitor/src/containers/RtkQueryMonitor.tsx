@@ -55,8 +55,13 @@ class RtkQueryMonitor<S, A extends Action<unknown>> extends Component<
   }
 
   render() {
-    const { currentStateIndex, computedStates, monitorState, dispatch } =
-      this.props;
+    const {
+      currentStateIndex,
+      computedStates,
+      monitorState,
+      dispatch,
+      actionsById,
+    } = this.props;
 
     return (
       <StyleUtilsContext.Provider value={this.state.styleUtils}>
@@ -66,6 +71,7 @@ class RtkQueryMonitor<S, A extends Action<unknown>> extends Component<
           monitorState={monitorState}
           dispatch={dispatch}
           styleUtils={this.state.styleUtils}
+          actionsById={actionsById}
         />
       </StyleUtilsContext.Provider>
     );
