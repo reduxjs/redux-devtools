@@ -1,18 +1,22 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
+import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import React, { ReactNode, PureComponent } from 'react';
 import { QueryInfo, RtkQueryState, RTKStatusFlags } from '../types';
+import { formatMs } from '../utils/formatters';
 import { identity } from '../utils/object';
 import { getQueryStatusFlags } from '../utils/rtk-query';
 import { TreeView } from './TreeView';
 
-type ComputedQueryInfo = {
+type QueryTimings = {
   startedAt: string;
   latestFetchAt: string;
+  duration: string;
 };
 
-interface FormattedQuery extends ComputedQueryInfo {
+interface FormattedQuery {
   queryKey: string;
   reducerPath: string;
+  timings: QueryTimings;
   statusFlags: RTKStatusFlags;
   query: RtkQueryState;
 }
@@ -22,6 +26,16 @@ export interface QueryPreviewInfoProps {
   isWideLayout: boolean;
 }
 export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
+  shouldExpandNode = (
+    keyPath: (string | number)[],
+    value: unknown,
+    layer: number
+  ): boolean => {
+    const lastKey = keyPath[keyPath.length - 1];
+
+    return layer <= 1 && lastKey !== 'query';
+  };
+
   selectFormattedQuery: Selector<QueryInfo, FormattedQuery> = createSelector(
     identity,
     (queryInfo: QueryInfo): FormattedQuery => {
@@ -37,13 +51,29 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
 
       const statusFlags = getQueryStatusFlags(query);
 
+      const timings = {
+        startedAt,
+        latestFetchAt,
+        duration: '-',
+      };
+
+      if (
+        query.fulfilledTimeStamp &&
+        query.startedTimeStamp &&
+        query.status !== QueryStatus.pending &&
+        query.startedTimeStamp <= query.fulfilledTimeStamp
+      ) {
+        timings.duration = formatMs(
+          query.fulfilledTimeStamp - query.startedTimeStamp
+        );
+      }
+
       return {
         queryKey,
         reducerPath,
-        startedAt,
-        latestFetchAt,
-        statusFlags,
         query: queryInfo.query,
+        statusFlags,
+        timings,
       };
     }
   );
@@ -52,6 +82,12 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
     const { queryInfo, isWideLayout } = this.props;
     const formattedQuery = this.selectFormattedQuery(queryInfo);
 
-    return <TreeView data={formattedQuery} isWideLayout={isWideLayout} />;
+    return (
+      <TreeView
+        data={formattedQuery}
+        isWideLayout={isWideLayout}
+        shouldExpandNode={this.shouldExpandNode}
+      />
+    );
   }
 }
