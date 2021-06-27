@@ -7,11 +7,11 @@ const largeScreenQuery = window.matchMedia('(min-width: 1024px)');
 
 export default createDevTools(
   <DockMonitor
-    fluid
     toggleVisibilityKey="ctrl-h"
     changePositionKey="ctrl-q"
     changeMonitorKey="ctrl-m"
-    defaultSize={largeScreenQuery.matches ? 0.34 : 0.55}
+    fluid
+    defaultSize={largeScreenQuery.matches ? 0.44 : 0.55}
   >
     <RtkQueryMonitor />
   </DockMonitor>

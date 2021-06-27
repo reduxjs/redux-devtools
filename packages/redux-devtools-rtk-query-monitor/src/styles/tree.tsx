@@ -40,12 +40,12 @@ function getShortTypeString(val: unknown, diff: boolean | undefined) {
 function getText(
   type: string,
   data: any,
-  isWideLayout: boolean,
+  previewContent: boolean,
   isDiff: boolean | undefined
 ) {
   if (type === 'Object') {
     const keys = Object.keys(data);
-    if (!isWideLayout) return keys.length ? '{…}' : '{}';
+    if (!previewContent) return keys.length ? '{…}' : '{}';
 
     const str = keys
       .slice(0, 3)
@@ -57,7 +57,7 @@ function getText(
 
     return `{ ${str} }`;
   } else if (type === 'Array') {
-    if (!isWideLayout) return data.length ? '[…]' : '[]';
+    if (!previewContent) return data.length ? '[…]' : '[]';
 
     const str = data
       .slice(0, 4)
@@ -76,7 +76,7 @@ export function getItemString(
   type: string,
   data: any,
   dataTypeKey: string | symbol | undefined,
-  isWideLayout: boolean,
+  previewContent: boolean,
   isDiff?: boolean
 ): ReactNode {
   return (
@@ -85,7 +85,7 @@ export function getItemString(
       {dataTypeKey && data[dataTypeKey]
         ? `${data[dataTypeKey] as string} `
         : ''}
-      {getText(type, data, isWideLayout, isDiff)}
+      {getText(type, data, previewContent, isDiff)}
     </span>
   );
 }

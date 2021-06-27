@@ -42,13 +42,14 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
     ReturnType<typeof createTreeItemLabelRenderer>
   >(identity, createTreeItemLabelRenderer);
 
-  readonly selectGetItemString = createSelector(
-    [
-      (styling: StylingFunction, _: boolean) => styling,
-      (_: StylingFunction, isWideLayout: boolean) => isWideLayout,
-    ],
-    (styling, isWideLayout) => (type: string, data: any) =>
-      getItemString(styling, type, data, DATA_TYPE_KEY, isWideLayout)
+  readonly selectGetItemString = createSelector<
+    StylingFunction,
+    StylingFunction,
+    (type: string, data: unknown) => ReactNode
+  >(
+    identity,
+    (styling) => (type, data) =>
+      getItemString(styling, type, data, DATA_TYPE_KEY, false)
   );
 
   readonly selectTheme = createSelector<
@@ -63,7 +64,6 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
 
   render(): ReactNode {
     const {
-      isWideLayout,
       data,
       before,
       after,
@@ -86,7 +86,7 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
                 labelRenderer={this.selectLabelRenderer(styling)}
                 theme={this.selectTheme(base16Theme)}
                 invertTheme={invertTheme}
-                getItemString={this.selectGetItemString(styling, isWideLayout)}
+                getItemString={this.selectGetItemString(styling)}
                 hideRoot={hideRoot}
               />
               {after}

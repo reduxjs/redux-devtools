@@ -9,7 +9,7 @@ import { TreeView } from './TreeView';
 
 type QueryTimings = {
   startedAt: string;
-  latestFetchAt: string;
+  loadedAt: string;
   duration: string;
 };
 
@@ -45,7 +45,7 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
         ? new Date(query.startedTimeStamp).toISOString()
         : '-';
 
-      const latestFetchAt = query.fulfilledTimeStamp
+      const loadedAt = query.fulfilledTimeStamp
         ? new Date(query.fulfilledTimeStamp).toISOString()
         : '-';
 
@@ -53,7 +53,7 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
 
       const timings = {
         startedAt,
-        latestFetchAt,
+        loadedAt,
         duration: '-',
       };
 

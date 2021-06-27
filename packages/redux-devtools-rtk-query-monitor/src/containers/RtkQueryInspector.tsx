@@ -77,7 +77,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
   updateSizeMode = (): void => {
     if (this.inspectorRef.current) {
       const isWideLayout =
-        this.inspectorRef.current.offsetWidth > RtkQueryInspector.wideLayout;
+        this.inspectorRef.current.offsetWidth >= RtkQueryInspector.wideLayout;
 
       if (isWideLayout !== this.state.isWideLayout) {
         this.setState({ isWideLayout });
