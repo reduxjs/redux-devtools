@@ -39,5 +39,30 @@ export function mean(nums: number[]): number {
     return NaN;
   }
 
-  return sum(nums) / nums.length;
+  return +(sum(nums) / nums.length).toFixed(6);
+}
+
+/**
+ * Returns median value of a numeric sequence.
+ * @param nums
+ * @returns
+ */
+export function median(nums: number[]): number {
+  const len = nums.length;
+
+  if (len === 0) {
+    return NaN;
+  }
+
+  if (len === 1) {
+    return nums[0];
+  }
+
+  const sorted = nums.slice().sort();
+
+  if (len % 2 === 1) {
+    return sorted[(len + 1) / 2 - 1];
+  }
+
+  return +(0.5 * (sorted[len / 2 - 1] + sorted[len / 2])).toFixed(6);
 }

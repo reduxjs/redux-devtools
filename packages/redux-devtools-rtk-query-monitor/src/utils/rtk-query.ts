@@ -20,7 +20,7 @@ import { missingTagId } from '../monitor-config';
 import { Comparator } from './comparators';
 import { emptyArray } from './object';
 import { formatMs } from './formatters';
-import { mean } from './statistics';
+import * as statistics from './statistics';
 
 const rtkqueryApiStateKeys: ReadonlyArray<keyof RtkQueryApiState> = [
   'queries',
@@ -283,7 +283,14 @@ function computeQueryApiTimings(
   }
 
   const average =
-    pendingDurations.length > 0 ? formatMs(mean(pendingDurations)) : '-';
+    pendingDurations.length > 0
+      ? formatMs(statistics.mean(pendingDurations))
+      : '-';
+
+  const median =
+    pendingDurations.length > 0
+      ? formatMs(statistics.median(pendingDurations))
+      : '-';
 
   return {
     latestFetch,
@@ -291,6 +298,7 @@ function computeQueryApiTimings(
     slowest,
     fastest,
     average,
+    median,
   } as QueryTimings;
 }
 

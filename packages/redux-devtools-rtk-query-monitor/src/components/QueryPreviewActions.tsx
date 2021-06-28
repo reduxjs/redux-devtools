@@ -32,22 +32,35 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
     return output;
   });
 
+  isLastActionNode = (keyPath: (string | number)[], layer: number): boolean => {
+    if (layer >= 1) {
+      const len = this.props.actionsOfQuery.length;
+      const actionKey = keyPath[keyPath.length - 1];
+
+      if (typeof actionKey === 'string') {
+        const index = Number(actionKey.split(keySep)[0]);
+
+        return len > 0 && len - index < 2;
+      }
+    }
+
+    return false;
+  };
+
   shouldExpandNode = (
     keyPath: (string | number)[],
     value: unknown,
     layer: number
   ): boolean => {
     if (layer === 1) {
-      const len = this.props.actionsOfQuery.length;
-      const lastKey = keyPath[keyPath.length - 1];
+      return this.isLastActionNode(keyPath, layer);
+    }
 
-      if (typeof lastKey === 'string') {
-        const index = Number(lastKey.split(keySep)[0]);
-
-        return len - index < 2;
-      }
-
-      return false;
+    if (layer === 2) {
+      return (
+        this.isLastActionNode(keyPath, layer) &&
+        (keyPath[0] === 'meta' || keyPath[0] === 'error')
+      );
     }
 
     return layer <= 1;
