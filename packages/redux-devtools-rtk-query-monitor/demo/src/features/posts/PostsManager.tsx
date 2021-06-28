@@ -54,8 +54,11 @@ const AddPost = () => {
   return (
     <Flex p={'5px 0'} flexDirection="row" flexWrap="wrap" maxWidth={'85%'}>
       <Box flex={'5 0 auto'} padding="0 5px 0 0">
-        <FormControl flexDirection="column" isInvalid={Boolean(post.name.length < 3 && post.name)}>
-          <FormLabel  htmlFor="name">Post name</FormLabel>
+        <FormControl
+          flexDirection="column"
+          isInvalid={Boolean(post.name.length < 3 && post.name)}
+        >
+          <FormLabel htmlFor="name">Post name</FormLabel>
           <Input
             id="name"
             name="name"

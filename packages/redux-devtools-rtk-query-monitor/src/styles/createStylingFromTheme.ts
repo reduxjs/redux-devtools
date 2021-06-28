@@ -118,18 +118,22 @@ const getSheetFromColorMap = (map: ColorMap) => {
       padding: '5px 10px',
       cursor: 'pointer',
       'user-select': 'none',
-
-      '& > :first-child': {
-        whiteSpace: 'nowrap',
-        overflowX: 'hidden',
-        maxWidth: 'calc(100% - 70px)',
-        textOverflow: 'ellipsis',
-      },
       '&:last-child': {
         'border-bottom-width': 0,
       },
-
+      overflow: 'hidden',
+      maxHeight: 47,
       'border-bottom-color': map.BORDER_COLOR,
+    },
+
+    queryListItemKey: {
+      display: '-webkit-box',
+      boxOrient: 'vertical',
+      '-webkit-line-clamp': 2,
+      whiteSpace: 'normal',
+      overflow: 'hidden',
+      maxWidth: 'calc(100% - 70px)',
+      wordBreak: 'break-all',
     },
 
     queryListHeader: {
@@ -162,8 +166,13 @@ const getSheetFromColorMap = (map: ColorMap) => {
     },
 
     tabSelector: {
-      display: 'inline-flex',
-      float: 'right',
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'flex-end',
+      overflow: 'hidden',
+      '& > *': {
+        flex: '0 1 auto',
+      },
     },
 
     srOnly: {
@@ -180,7 +189,10 @@ const getSheetFromColorMap = (map: ColorMap) => {
     selectorButton: {
       cursor: 'pointer',
       position: 'relative',
-      padding: '6.5px 8px',
+      height: '33px',
+      padding: '0 8px',
+      display: 'inline-flex',
+      alignItems: 'center',
       color: map.TEXT_COLOR,
       'border-style': 'solid',
       'border-width': '1px',
@@ -204,6 +216,16 @@ const getSheetFromColorMap = (map: ColorMap) => {
       },
 
       'border-color': map.TAB_BORDER_COLOR,
+
+      '& > *': {
+        display: '-webkit-box',
+        boxOrient: 'vertical',
+        '-webkit-line-clamp': 1,
+        overflow: 'hidden',
+        wordBreak: 'break-all',
+        '-webkit-box-pack': 'end',
+        paddingBottom: 0,
+      },
     },
 
     selectorButtonSmall: {

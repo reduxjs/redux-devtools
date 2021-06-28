@@ -40,7 +40,7 @@ export class QueryList extends PureComponent<QueryListProps> {
                     isSelected
                   )}
                 >
-                  <p>{queryInfo.queryKey}</p>
+                  <p {...styling('queryListItemKey')}>{queryInfo.queryKey}</p>
                   <p {...styling('queryStatus')}>{queryInfo.query.status}</p>
                 </li>
               );

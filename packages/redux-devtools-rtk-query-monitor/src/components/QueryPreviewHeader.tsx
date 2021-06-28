@@ -37,7 +37,9 @@ export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps>
                     tab.value === selectedTab
                   )}
                 >
-                  {renderTabLabel ? renderTabLabel(tab) : tab.label}
+                  <span>
+                    {renderTabLabel ? renderTabLabel(tab) : tab.label}
+                  </span>
                 </div>
               ))}
             </div>
