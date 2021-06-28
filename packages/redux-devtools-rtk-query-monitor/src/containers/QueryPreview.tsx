@@ -7,22 +7,31 @@ import {
   SelectorsSource,
   TabOption,
 } from '../types';
-import { QueryPreviewHeader } from './QueryPreviewHeader';
-import { QueryPreviewInfo, QueryPreviewInfoProps } from './QueryPreviewInfo';
-import { QueryPreviewApi, QueryPreviewApiProps } from './QueryPreviewApi';
+import { QueryPreviewHeader } from '../components/QueryPreviewHeader';
+import {
+  QueryPreviewInfo,
+  QueryPreviewInfoProps,
+} from '../components/QueryPreviewInfo';
+import {
+  QueryPreviewApi,
+  QueryPreviewApiProps,
+} from '../components/QueryPreviewApi';
 import {
   QueryPreviewSubscriptions,
   QueryPreviewSubscriptionsProps,
-} from './QueryPreviewSubscriptions';
-import { QueryPreviewTags, QueryPreviewTagsProps } from './QueryPreviewTags';
-import { NoRtkQueryApi } from './NoRtkQueryApi';
+} from '../components/QueryPreviewSubscriptions';
+import {
+  QueryPreviewTags,
+  QueryPreviewTagsProps,
+} from '../components/QueryPreviewTags';
+import { NoRtkQueryApi } from '../components/NoRtkQueryApi';
 import { InspectorSelectors } from '../selectors';
 import { StylingFunction } from 'react-base16-styling';
-import { mapProps } from '../containers/mapProps';
+import { mapProps } from './mapProps';
 import {
   QueryPreviewActions,
   QueryPreviewActionsProps,
-} from './QueryPreviewActions';
+} from '../components/QueryPreviewActions';
 
 export interface QueryPreviewProps<S = unknown> {
   readonly selectedTab: QueryPreviewTabs;

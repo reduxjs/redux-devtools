@@ -17,7 +17,7 @@ import {
 } from '../reducers';
 import { QueryList } from '../components/QueryList';
 import { QueryForm } from '../components/QueryForm';
-import { QueryPreview } from '../components/QueryPreview';
+import { QueryPreview } from './QueryPreview';
 
 type ForwardedMonitorProps<S, A extends Action<unknown>> = Pick<
   LiftedState<S, A, RtkQueryMonitorState>,
@@ -123,9 +123,6 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
     const apiStates = this.selectors.selectApiStates(selectorsSource);
 
     const hasNoApi = apiStates == null;
-
-    const actionsOfCurrentQuery =
-      this.selectors.selectActionsOfCurrentQuery(selectorsSource);
 
     return (
       <div
