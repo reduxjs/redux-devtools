@@ -1,5 +1,26 @@
-export default class Monitor {
-  constructor(update) {
+import { Action } from 'redux';
+import { LiftedState } from '@redux-devtools/instrument';
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_LOCKED__?: boolean;
+  }
+}
+
+export default class Monitor<S, A extends Action<unknown>> {
+  update: (
+    liftedState?: LiftedState<S, A, unknown> | undefined,
+    libConfig?: unknown
+  ) => void;
+  active?: boolean;
+  paused?: boolean;
+
+  constructor(
+    update: (
+      liftedState?: LiftedState<S, A, unknown> | undefined,
+      libConfig?: unknown
+    ) => void
+  ) {
     this.update = update;
   }
   reducer = (state = {}, action) => {
@@ -15,7 +36,7 @@ export default class Monitor {
     }
     return state;
   };
-  start = (skipUpdate) => {
+  start = (skipUpdate: boolean) => {
     this.active = true;
     if (!skipUpdate) this.update();
   };

@@ -8,7 +8,13 @@ const pageSource = '@devtools-page';
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
 const maxChromeMsgSize = 32 * 1024 * 1024;
 let connected = false;
-let bg;
+let bg: chrome.runtime.Port | undefined;
+
+declare global {
+  interface Window {
+    devToolsExtensionID?: string;
+  }
+}
 
 function connect() {
   // Connect to the background script
@@ -57,7 +63,10 @@ function handleDisconnect() {
   bg = undefined;
 }
 
-function tryCatch(fn, args) {
+function tryCatch<A>(
+  fn: (args: PageScriptToContentScriptMessage) => void,
+  args: PageScriptToContentScriptMessage
+) {
   try {
     return fn(args);
   } catch (err) {
@@ -100,18 +109,51 @@ function tryCatch(fn, args) {
   }
 }
 
-function send(message) {
+interface InitInstancePageScriptToContentScriptMessage {
+  readonly type: 'INIT_INSTANCE';
+  readonly instanceId: number;
+  readonly source: typeof pageSource;
+}
+
+interface DisconnectMessage {
+  readonly type: 'DISCONNECT';
+  readonly source: typeof pageSource;
+}
+
+export type PageScriptToContentScriptMessage =
+  | InitInstancePageScriptToContentScriptMessage
+  | DisconnectMessage;
+
+interface InitInstanceContentScriptToBackgroundMessage {
+  readonly name: 'INIT_INSTANCE';
+  readonly instanceId: number;
+}
+
+interface RelayMessage {
+  readonly name: 'RELAY';
+  readonly message: unknown;
+}
+
+export type ContentScriptToBackgroundMessage =
+  | InitInstanceContentScriptToBackgroundMessage
+  | RelayMessage;
+
+function postToBackground(message: ContentScriptToBackgroundMessage) {
+  bg!.postMessage(message);
+}
+
+function send(message: never) {
   if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {
     getOptionsFromBg();
-    bg.postMessage({ name: 'INIT_INSTANCE', instanceId: message.instanceId });
+    postToBackground({ name: 'INIT_INSTANCE', instanceId: message.instanceId });
   } else {
-    bg.postMessage({ name: 'RELAY', message });
+    postToBackground({ name: 'RELAY', message });
   }
 }
 
 // Resend messages from the page to the background script
-function handleMessages(event) {
+function handleMessages(event: MessageEvent<PageScriptToContentScriptMessage>) {
   if (!isAllowed()) return;
   if (!event || event.source !== window || typeof event.data !== 'object') {
     return;

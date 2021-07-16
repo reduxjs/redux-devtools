@@ -1,7 +1,16 @@
+import { Store } from 'redux';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
 import configureStore from '../../../app/stores/backgroundStore';
-import openDevToolsWindow from './openWindow';
+import openDevToolsWindow, { DevToolsPosition } from './openWindow';
 import { createMenu, removeMenu } from './contextMenus';
 import syncOptions from '../options/syncOptions';
+import { BackgroundState } from '../../../app/reducers/background';
+
+declare global {
+  interface Window {
+    store: Store<BackgroundState, StoreAction>;
+  }
+}
 
 // Expose the extension's store globally to access it from the windows
 // via chrome.runtime.getBackgroundPage
@@ -9,7 +18,7 @@ window.store = configureStore();
 
 // Listen for keyboard shortcuts
 chrome.commands.onCommand.addListener((shortcut) => {
-  openDevToolsWindow(shortcut);
+  openDevToolsWindow(shortcut as DevToolsPosition);
 });
 
 // Create the context menu when installed

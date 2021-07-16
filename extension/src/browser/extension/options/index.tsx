@@ -6,7 +6,7 @@ import { Options } from './syncOptions';
 import '../../views/options.pug';
 
 chrome.runtime.getBackgroundPage((background) => {
-  const syncOptions = background.syncOptions;
+  const syncOptions = background!.syncOptions;
 
   const saveOption = <K extends keyof Options>(name: K, value: Options[K]) => {
     syncOptions.save(name, value);

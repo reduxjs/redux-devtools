@@ -1,4 +1,7 @@
 import mapValues from 'lodash/mapValues';
+import { Config } from '../../browser/extension/inject/pageScript';
+import { Action } from 'redux';
+import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 
 export type FilterStateValue =
   | 'DO_NOT_FILTER'
@@ -11,13 +14,22 @@ export const FilterState: { [K in FilterStateValue]: FilterStateValue } = {
   WHITELIST_SPECIFIC: 'WHITELIST_SPECIFIC',
 };
 
-export function getLocalFilter(config) {
+function isArray(arg: unknown): arg is readonly unknown[] {
+  return Array.isArray(arg);
+}
+
+interface LocalFilter {
+  readonly whitelist: string | undefined;
+  readonly blacklist: string | undefined;
+}
+
+export function getLocalFilter(config: Config): LocalFilter | undefined {
   if (config.actionsBlacklist || config.actionsWhitelist) {
     return {
-      whitelist: Array.isArray(config.actionsWhitelist)
+      whitelist: isArray(config.actionsWhitelist)
         ? config.actionsWhitelist.join('|')
         : config.actionsWhitelist,
-      blacklist: Array.isArray(config.actionsBlacklist)
+      blacklist: isArray(config.actionsBlacklist)
         ? config.actionsBlacklist.join('|')
         : config.actionsBlacklist,
     };
@@ -125,13 +137,17 @@ export function filterState(
   };
 }
 
-export function startingFrom(
-  sendingActionId,
-  state,
-  localFilter,
-  stateSanitizer,
-  actionSanitizer,
-  predicate
+export function startingFrom<S, A extends Action<unknown>>(
+  sendingActionId: number,
+  state: LiftedState<S, A, unknown>,
+  localFilter: LocalFilter | undefined,
+  stateSanitizer: (<S>(state: S, index: number) => S) | undefined,
+  actionSanitizer:
+    | (<A extends Action<unknown>>(action: A, id: number) => A)
+    | undefined,
+  predicate:
+    | (<S, A extends Action<unknown>>(state: S, action: A) => boolean)
+    | undefined
 ) {
   const stagedActionIds = state.stagedActionIds;
   if (sendingActionId <= stagedActionIds[1]) return state;
@@ -142,7 +158,7 @@ export function startingFrom(
   const filteredStagedActionIds = shouldFilter ? [0] : stagedActionIds;
   const actionsById = state.actionsById;
   const computedStates = state.computedStates;
-  const newActionsById = {};
+  const newActionsById: { [key: number]: PerformAction<A> } = {};
   const newComputedStates = [];
   let key;
   let currAction;

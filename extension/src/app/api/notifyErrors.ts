@@ -1,9 +1,9 @@
-let handleError;
+let handleError: () => boolean;
 let lastTime = 0;
 
-function createExpBackoffTimer(step) {
+function createExpBackoffTimer(step: number) {
   let count = 1;
-  return function (reset) {
+  return function (reset?: boolean) {
     // Reset call
     if (reset) {
       count = 1;
@@ -18,7 +18,7 @@ function createExpBackoffTimer(step) {
 
 const nextErrorTimeout = createExpBackoffTimer(5000);
 
-function postError(message) {
+function postError(message: string) {
   if (handleError && !handleError()) return;
   window.postMessage(
     {
@@ -30,7 +30,7 @@ function postError(message) {
   );
 }
 
-function catchErrors(e) {
+function catchErrors(e: ErrorEvent) {
   if (
     (window.devToolsOptions && !window.devToolsOptions.shouldCatchErrors) ||
     e.timeStamp - lastTime < nextErrorTimeout()
@@ -42,7 +42,7 @@ function catchErrors(e) {
   postError(e.message);
 }
 
-export default function notifyErrors(onError) {
+export default function notifyErrors(onError: () => boolean) {
   handleError = onError;
   window.addEventListener('error', catchErrors, false);
 }

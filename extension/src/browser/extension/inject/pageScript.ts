@@ -1,8 +1,10 @@
 import { getActionsArray, evalAction } from '@redux-devtools/utils';
 import throttle from 'lodash/throttle';
+import { Action, PreloadedState, Reducer, Store, StoreEnhancer } from 'redux';
+import Immutable from 'immutable';
 import createStore from '../../../app/stores/createStore';
 import configureStore, { getUrlParam } from '../../../app/stores/enhancerStore';
-import { isAllowed } from '../options/syncOptions';
+import { isAllowed, Options } from '../options/syncOptions';
 import Monitor from '../../../app/service/Monitor';
 import {
   noFiltersApplied,
@@ -13,7 +15,7 @@ import {
 } from '../../../app/api/filters';
 import notifyErrors from '../../../app/api/notifyErrors';
 import importState from '../../../app/api/importState';
-import openWindow from '../../../app/api/openWindow';
+import openWindow, { Position } from '../../../app/api/openWindow';
 import generateId from '../../../app/api/generateInstanceId';
 import {
   updateStore,
@@ -23,14 +25,21 @@ import {
   connect,
   disconnect,
   isInIframe,
-  getSeralizeParameter,
+  getSerializeParameter,
+  Serialize,
 } from '../../../app/api';
+import {
+  InstrumentExt,
+  LiftedAction,
+  LiftedState,
+  PerformAction,
+} from '@redux-devtools/instrument';
 
 const source = '@devtools-page';
-let stores = {};
-let reportId;
+let stores: { [instanceId: number]: Store<unknown, Action<unknown>> } = {};
+let reportId: string | null | undefined;
 
-function deprecateParam(oldParam, newParam) {
+function deprecateParam(oldParam: string, newParam: string) {
   /* eslint-disable no-console */
   console.warn(
     `${oldParam} parameter is deprecated, use ${newParam} instead: https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md`
@@ -38,10 +47,96 @@ function deprecateParam(oldParam, newParam) {
   /* eslint-enable no-console */
 }
 
-const __REDUX_DEVTOOLS_EXTENSION__ = function (
-  reducer,
-  preloadedState,
-  config
+interface SerializeWithImmutable extends Serialize {
+  readonly immutable?: typeof Immutable;
+  readonly refs?: (new (data: any) => unknown)[] | null;
+}
+
+export interface ConfigWithExpandedMaxAge {
+  readonly instanceId?: number;
+  readonly actionsBlacklist?: string | readonly string[];
+  readonly actionsWhitelist?: string | readonly string[];
+  readonly serialize?: boolean | SerializeWithImmutable;
+  readonly serializeState?:
+    | boolean
+    | ((key: string, value: unknown) => unknown)
+    | Serialize;
+  readonly serializeAction?:
+    | boolean
+    | ((key: string, value: unknown) => unknown)
+    | Serialize;
+  readonly statesFilter?: <S>(state: S, index: number) => S;
+  readonly actionsFilter?: <A extends Action<unknown>>(
+    action: A,
+    id: number
+  ) => A;
+  readonly stateSanitizer?: <S>(state: S, index: number) => S;
+  readonly actionSanitizer?: <A extends Action<unknown>>(
+    action: A,
+    id: number
+  ) => A;
+  readonly predicate?: <S, A extends Action<unknown>>(
+    state: S,
+    action: A
+  ) => boolean;
+  readonly latency?: number;
+  readonly getMonitor?: <S, A extends Action<unknown>>(
+    monitor: Monitor<S, A>
+  ) => void;
+  readonly maxAge?:
+    | number
+    | (<S, A extends Action<unknown>>(
+        currentLiftedAction: LiftedAction<S, A, unknown>,
+        previousLiftedState: LiftedState<S, A, unknown> | undefined
+      ) => number);
+  readonly trace?:
+    | boolean
+    | (<A extends Action<unknown>>(action: A) => string | undefined);
+  readonly traceLimit?: number;
+  readonly shouldCatchErrors?: boolean;
+  readonly shouldHotReload?: boolean;
+  readonly shouldRecordChanges?: boolean;
+  readonly shouldStartLocked?: boolean;
+  readonly pauseActionType?: unknown;
+  readonly deserializeState?: <S>(state: S) => S;
+  readonly deserializeAction?: <A extends Action<unknown>>(action: A) => A;
+  readonly name?: string;
+}
+
+export interface Config extends ConfigWithExpandedMaxAge {
+  readonly maxAge?: number;
+}
+
+interface ReduxDevtoolsExtension {
+  <S, A extends Action<unknown>>(
+    reducer: Reducer<S, A>,
+    preloadedState?: PreloadedState<S>,
+    config?: Config
+  ): Store<S, A>;
+  (config: Config): StoreEnhancer;
+  open: (position?: Position) => void;
+  notifyErrors: (onError: () => boolean) => void;
+  disconnect: () => void;
+}
+
+declare global {
+  interface Window {
+    devToolsOptions: Options;
+  }
+}
+
+const __REDUX_DEVTOOLS_EXTENSION__ = reduxDevtoolsExtension;
+
+function reduxDevtoolsExtension<S, A extends Action<unknown>>(
+  reducer?: Reducer<S, A>,
+  preloadedState?: PreloadedState<S>,
+  config?: Config
+): Store<S, A>;
+function reduxDevtoolsExtension(config: Config): StoreEnhancer;
+function reduxDevtoolsExtension<S, A extends Action<unknown>>(
+  reducer?: Reducer<S, A> | Config | undefined,
+  preloadedState?: PreloadedState<S>,
+  config?: Config
 ) {
   /* eslint-disable no-param-reassign */
   if (typeof reducer === 'object') {
@@ -51,15 +146,15 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
   /* eslint-enable no-param-reassign */
   if (!window.devToolsOptions) window.devToolsOptions = {};
 
-  let store;
+  let store: Store<S, A> & InstrumentExt<S, A, unknown>;
   let errorOccurred = false;
-  let maxAge;
+  let maxAge: number | undefined;
   let actionCreators;
   let sendingActionId = 1;
   const instanceId = generateId(config.instanceId);
   const localFilter = getLocalFilter(config);
-  const serializeState = getSeralizeParameter(config, 'serializeState');
-  const serializeAction = getSeralizeParameter(config, 'serializeAction');
+  const serializeState = getSerializeParameter(config, 'serializeState');
+  const serializeAction = getSerializeParameter(config, 'serializeAction');
   let {
     statesFilter,
     actionsFilter,
@@ -79,6 +174,19 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
     actionSanitizer = actionsFilter; // eslint-disable-line no-param-reassign
   }
 
+  const relayState = throttle(
+    (
+      liftedState?: LiftedState<S, A, unknown> | undefined,
+      libConfig?: unknown
+    ) => {
+      relayAction.cancel();
+      const state = liftedState || store.liftedStore.getState();
+      sendingActionId = state.nextActionId;
+      relay('STATE', state, undefined, undefined, libConfig);
+    },
+    latency
+  );
+
   const monitor = new Monitor(relayState);
   if (config.getMonitor) {
     /* eslint-disable no-console */
@@ -95,7 +203,7 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
   function exportState() {
     const liftedState = store.liftedStore.getState();
     const actionsById = liftedState.actionsById;
-    const payload = [];
+    const payload: A[] = [];
     liftedState.stagedActionIds.slice(1).forEach((id) => {
       // if (isFiltered(actionsById[id].action, localFilter)) return;
       payload.push(actionsById[id].action);
@@ -113,7 +221,30 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
     );
   }
 
-  function relay(type, state, action, nextActionId, libConfig) {
+  function relay(
+    type: 'ACTION',
+    state: S,
+    action: PerformAction<A>,
+    nextActionId: number
+  ): void;
+  function relay(
+    type: 'STATE',
+    state: LiftedState<S, A, unknown>,
+    action?: undefined,
+    nextActionId?: undefined,
+    libConfig?: unknown
+  ): void;
+  function relay(type: 'ERROR', message: unknown): void;
+  function relay(type: 'INIT_INSTANCE'): void;
+  function relay(type: 'GET_REPORT', reportId: string): void;
+  function relay(type: 'STOP'): void;
+  function relay(
+    type: string,
+    state?: S | LiftedState<S, A, unknown> | unknown,
+    action?: PerformAction<A> | undefined,
+    nextActionId?: number | undefined,
+    libConfig?: unknown
+  ) {
     const message = {
       type,
       payload: filterState(
@@ -141,13 +272,6 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
 
     toContentScript(message, serializeState, serializeAction);
   }
-
-  const relayState = throttle((liftedState, libConfig) => {
-    relayAction.cancel();
-    const state = liftedState || store.liftedStore.getState();
-    sendingActionId = state.nextActionId;
-    relay('STATE', state, undefined, undefined, libConfig);
-  }, latency);
 
   const relayAction = throttle(() => {
     const liftedState = store.liftedStore.getState();
@@ -296,8 +420,11 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
     }
   }
 
-  const filteredActionIds = []; // simple circular buffer of non-excluded actions with fixed maxAge-1 length
-  const getMaxAge = (liftedAction, liftedState) => {
+  const filteredActionIds: number[] = []; // simple circular buffer of non-excluded actions with fixed maxAge-1 length
+  const getMaxAge = (
+    liftedAction?: LiftedAction<S, A, unknown>,
+    liftedState?: LiftedState<S, A, unknown> | undefined
+  ) => {
     let m = (config && config.maxAge) || window.devToolsOptions.maxAge || 50;
     if (
       !liftedAction ||
@@ -311,9 +438,9 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
       // TODO: check also predicate && !predicate(state, action) with current state
       maxAge++;
     } else {
-      filteredActionIds.push(liftedState.nextActionId);
+      filteredActionIds.push(liftedState!.nextActionId);
       if (filteredActionIds.length >= m) {
-        const stagedActionIds = liftedState.stagedActionIds;
+        const stagedActionIds = liftedState!.stagedActionIds;
         let i = 1;
         while (
           maxAge > m &&
@@ -367,16 +494,16 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
     relayState(liftedState);
   }
 
-  const enhance = () => (next) => {
-    return (reducer_, initialState_, enhancer_) => {
+  const enhance = (): StoreEnhancer => (next) => {
+    return (reducer_, initialState_) => {
       if (!isAllowed(window.devToolsOptions)) {
-        return next(reducer_, initialState_, enhancer_);
+        return next(reducer_, initialState_);
       }
 
       store = stores[instanceId] = configureStore(next, monitor.reducer, {
         ...config,
         maxAge: getMaxAge,
-      })(reducer_, initialState_, enhancer_);
+      })(reducer_, initialState_);
 
       if (isInIframe()) setTimeout(init, 3000);
       else init();
@@ -392,10 +519,16 @@ const __REDUX_DEVTOOLS_EXTENSION__ = function (
   );
   /* eslint-enable no-console */
   return createStore(reducer, preloadedState, enhance);
-};
+}
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__: ReduxDevtoolsExtension;
+  }
+}
 
 // noinspection JSAnnotator
-window.__REDUX_DEVTOOLS_EXTENSION__ = __REDUX_DEVTOOLS_EXTENSION__;
+window.__REDUX_DEVTOOLS_EXTENSION__ = __REDUX_DEVTOOLS_EXTENSION__ as any;
 window.__REDUX_DEVTOOLS_EXTENSION__.open = openWindow;
 window.__REDUX_DEVTOOLS_EXTENSION__.updateStore = updateStore(stores);
 window.__REDUX_DEVTOOLS_EXTENSION__.notifyErrors = notifyErrors;
@@ -403,50 +536,6 @@ window.__REDUX_DEVTOOLS_EXTENSION__.send = sendMessage;
 window.__REDUX_DEVTOOLS_EXTENSION__.listen = setListener;
 window.__REDUX_DEVTOOLS_EXTENSION__.connect = connect;
 window.__REDUX_DEVTOOLS_EXTENSION__.disconnect = disconnect;
-
-// Deprecated
-/* eslint-disable no-console */
-let varNameDeprecatedWarned;
-const varNameDeprecatedWarn = () => {
-  if (varNameDeprecatedWarned) return;
-  console.warn(
-    '`window.devToolsExtension` is deprecated in favor of `window.__REDUX_DEVTOOLS_EXTENSION__`, and will be removed in next version of Redux DevTools: https://git.io/fpEJZ'
-  );
-  varNameDeprecatedWarned = true;
-};
-/* eslint-enable no-console */
-window.devToolsExtension = (...args) => {
-  varNameDeprecatedWarn();
-  return __REDUX_DEVTOOLS_EXTENSION__.apply(null, args);
-};
-window.devToolsExtension.open = (...args) => {
-  varNameDeprecatedWarn();
-  return openWindow.apply(null, args);
-};
-window.devToolsExtension.updateStore = (...args) => {
-  varNameDeprecatedWarn();
-  return updateStore(stores).apply(null, args);
-};
-window.devToolsExtension.notifyErrors = (...args) => {
-  varNameDeprecatedWarn();
-  return notifyErrors.apply(null, args);
-};
-window.devToolsExtension.send = (...args) => {
-  varNameDeprecatedWarn();
-  return sendMessage.apply(null, args);
-};
-window.devToolsExtension.listen = (...args) => {
-  varNameDeprecatedWarn();
-  return setListener.apply(null, args);
-};
-window.devToolsExtension.connect = (...args) => {
-  varNameDeprecatedWarn();
-  return connect.apply(null, args);
-};
-window.devToolsExtension.disconnect = (...args) => {
-  varNameDeprecatedWarn();
-  return disconnect.apply(null, args);
-};
 
 const preEnhancer =
   (instanceId) => (next) => (reducer, preloadedState, enhancer) => {
@@ -464,8 +553,8 @@ const preEnhancer =
   };
 
 const extensionCompose =
-  (config) =>
-  (...funcs) => {
+  (config: Config) =>
+  (...funcs: StoreEnhancer[]) => {
     return (...args) => {
       const instanceId = generateId(config.instanceId);
       return [preEnhancer(instanceId), ...funcs].reduceRight(
@@ -474,6 +563,12 @@ const extensionCompose =
       );
     };
   };
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: unknown;
+  }
+}
 
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = (...funcs) => {
   if (funcs.length === 0) {

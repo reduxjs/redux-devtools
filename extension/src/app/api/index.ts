@@ -1,22 +1,24 @@
-import jsan from 'jsan';
+import jsan, { Options } from 'jsan';
 import throttle from 'lodash/throttle';
-import seralizeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
+import serializeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
 import { getActionsArray } from '@redux-devtools/utils';
 import { getLocalFilter, isFiltered } from './filters';
 import importState from './importState';
 import generateId from './generateInstanceId';
+import { PageScriptToContentScriptMessage } from '../../browser/extension/inject/contentScript';
+import { Config } from '../../browser/extension/inject/pageScript';
 
 const listeners = {};
 export const source = '@devtools-page';
 
-function windowReplacer(key, value) {
-  if (value && value.window === value) {
+function windowReplacer(key: string, value: unknown) {
+  if (value && (value as Window).window === value) {
     return '[WINDOW]';
   }
   return value;
 }
 
-function tryCatchStringify(obj) {
+function tryCatchStringify(obj: unknown) {
   try {
     return JSON.stringify(obj);
   } catch (err) {
@@ -25,19 +27,19 @@ function tryCatchStringify(obj) {
       console.log('Failed to stringify', err);
     }
     /* eslint-enable no-console */
-    return jsan.stringify(obj, windowReplacer, null, {
+    return jsan.stringify(obj, windowReplacer, undefined, {
       circular: '[CIRCULAR]',
       date: true,
     });
   }
 }
 
-let stringifyWarned;
-function stringify(obj, serialize) {
+let stringifyWarned: boolean;
+function stringify(obj: unknown, serialize?: Serialize | undefined) {
   const str =
     typeof serialize === 'undefined'
       ? tryCatchStringify(obj)
-      : jsan.stringify(obj, serialize.replacer, null, serialize.options);
+      : jsan.stringify(obj, serialize.replacer, undefined, serialize.options);
 
   if (!stringifyWarned && str && str.length > 16 * 1024 * 1024) {
     // 16 MB
@@ -52,12 +54,21 @@ function stringify(obj, serialize) {
   return str;
 }
 
-export function getSeralizeParameter(config, param) {
+export interface Serialize {
+  readonly replacer?: (key: string, value: unknown) => unknown;
+  readonly reviver?: (key: string, value: unknown) => unknown;
+  readonly options?: Options | boolean;
+}
+
+export function getSerializeParameter(
+  config: Config,
+  param?: 'serializeState' | 'serializeAction'
+) {
   const serialize = config.serialize;
   if (serialize) {
     if (serialize === true) return { options: true };
     if (serialize.immutable) {
-      const immutableSerializer = seralizeImmutable(
+      const immutableSerializer = serializeImmutable(
         serialize.immutable,
         serialize.refs,
         serialize.replacer,
@@ -82,23 +93,23 @@ export function getSeralizeParameter(config, param) {
     };
   }
 
-  const value = config[param];
+  const value = config[param!];
   if (typeof value === 'undefined') return undefined;
   // eslint-disable-next-line no-console
   console.warn(
     `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead: https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1`
   );
 
-  if (typeof serializeState === 'boolean') return { options: value };
-  if (typeof serializeState === 'function') return { replacer: value };
+  if (typeof value === 'boolean') return { options: value };
+  if (typeof value === 'function') return { replacer: value };
   return value;
 }
 
-function post(message) {
+function post(message: PageScriptToContentScriptMessage) {
   window.postMessage(message, '*');
 }
 
-function getStackTrace(config, toExcludeFromTrace) {
+function getStackTrace(config, toExcludeFromTrace: Function | undefined) {
   if (!config.trace) return undefined;
   if (typeof config.trace === 'function') return config.trace();
 
@@ -123,7 +134,7 @@ function getStackTrace(config, toExcludeFromTrace) {
     typeof Error.stackTraceLimit !== 'number' ||
     Error.stackTraceLimit > traceLimit
   ) {
-    const frames = stack.split('\n');
+    const frames = stack!.split('\n');
     if (frames.length > traceLimit) {
       stack = frames
         .slice(0, traceLimit + extraFrames + (frames[0] === 'Error' ? 1 : 0))
@@ -133,7 +144,11 @@ function getStackTrace(config, toExcludeFromTrace) {
   return stack;
 }
 
-function amendActionType(action, config, toExcludeFromTrace) {
+function amendActionType(
+  action,
+  config,
+  toExcludeFromTrace: Function | undefined
+) {
   let timestamp = Date.now();
   let stack = getStackTrace(config, toExcludeFromTrace);
   if (typeof action === 'string') {
@@ -144,7 +159,11 @@ function amendActionType(action, config, toExcludeFromTrace) {
   return { action, timestamp, stack };
 }
 
-export function toContentScript(message, serializeState, serializeAction) {
+export function toContentScript(
+  message,
+  serializeState: Serialize | undefined,
+  serializeAction: Serialize | undefined
+) {
   if (message.type === 'ACTION') {
     message.action = stringify(message.action, serializeAction);
     message.payload = stringify(message.payload, serializeState);
@@ -235,7 +254,7 @@ export function connect(preConfig) {
     config.name =
       document.title && id === 1 ? document.title : `Instance ${id}`;
   }
-  if (config.serialize) config.serialize = getSeralizeParameter(config);
+  if (config.serialize) config.serialize = getSerializeParameter(config);
   const actionCreators = config.actionCreators || {};
   const latency = config.latency;
   const predicate = config.predicate;
@@ -245,7 +264,7 @@ export function connect(preConfig) {
   let delayedActions = [];
   let delayedStates = [];
 
-  const rootListiner = (action) => {
+  const rootListener = (action) => {
     if (autoPause) {
       if (action.type === 'START') isPaused = false;
       else if (action.type === 'STOP') isPaused = true;
@@ -264,7 +283,7 @@ export function connect(preConfig) {
     }
   };
 
-  listeners[id] = [rootListiner];
+  listeners[id] = [rootListener];
 
   const subscribe = (listener) => {
     if (!listener) return undefined;

@@ -5,13 +5,53 @@ import {
   LIFTED_ACTION,
 } from '@redux-devtools/app/lib/constants/actionTypes';
 import { nonReduxDispatch } from '@redux-devtools/app/lib/utils/monitorActions';
-import syncOptions from '../../browser/extension/options/syncOptions';
+import syncOptions, {
+  OptionsMessage,
+  SyncOptions,
+} from '../../browser/extension/options/syncOptions';
 import openDevToolsWindow from '../../browser/extension/background/openWindow';
 import { getReport } from '../../browser/extension/background/logging';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
+import { Dispatch } from 'redux';
+
+interface StartAction {
+  readonly type: 'START';
+}
+
+interface StopAction {
+  readonly type: 'STOP';
+}
+
+interface NAAction {
+  readonly type: 'NA';
+  readonly id: string;
+}
+
+interface UpdateStateAction {
+  readonly type: typeof UPDATE_STATE;
+}
+
+type TabMessage = StartAction | StopAction | OptionsMessage;
+type PanelMessage = NAAction;
+type MonitorMessage = UpdateStateAction;
+
+type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
+  postMessage: (message: TabMessage) => void;
+};
+type PanelPort = Omit<chrome.runtime.Port, 'postMessage'> & {
+  postMessage: (message: PanelMessage) => void;
+};
+type MonitorPort = Omit<chrome.runtime.Port, 'postMessage'> & {
+  postMessage: (message: MonitorMessage) => void;
+};
 
 const CONNECTED = 'socket/CONNECTED';
 const DISCONNECTED = 'socket/DISCONNECTED';
-const connections = {
+const connections: {
+  readonly tab: { [K in number | string]: TabPort };
+  readonly panel: { [K in number | string]: PanelPort };
+  readonly monitor: { [K in number | string]: MonitorPort };
+} = {
   tab: {},
   panel: {},
   monitor: {},
@@ -20,10 +60,16 @@ const chunks = {};
 let monitors = 0;
 let isMonitored = false;
 
-const getId = (sender, name) =>
-  sender.tab ? sender.tab.id : name || sender.id;
+const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
+  sender.tab ? sender.tab.id! : name || sender.id!;
 
-function toMonitors(action, tabId, verbose) {
+type MonitorAction = NAAction;
+
+function toMonitors(
+  action: MonitorAction,
+  tabId?: string | number,
+  verbose?: boolean
+) {
   Object.keys(connections.monitor).forEach((id) => {
     connections.monitor[id].postMessage(
       verbose || action.type === 'ERROR' ? action : { type: UPDATE_STATE }
@@ -43,16 +89,18 @@ function toContentScript({ message, action, id, instanceId, state }) {
   });
 }
 
-function toAllTabs(msg) {
+function toAllTabs(msg: TabMessage) {
   const tabs = connections.tab;
   Object.keys(tabs).forEach((id) => {
     tabs[id].postMessage(msg);
   });
 }
 
-function monitorInstances(shouldMonitor, id) {
+function monitorInstances(shouldMonitor: boolean, id?: string) {
   if (!id && isMonitored === shouldMonitor) return;
-  const action = { type: shouldMonitor ? 'START' : 'STOP' };
+  const action = {
+    type: shouldMonitor ? ('START' as const) : ('STOP' as const),
+  };
   if (id) {
     if (connections.tab[id]) connections.tab[id].postMessage(action);
   } else {
@@ -80,8 +128,15 @@ function togglePersist() {
   }
 }
 
+type BackgroundStoreMessage = unknown;
+type BackgroundStoreResponse = never;
+
 // Receive messages from content scripts
-function messaging(request, sender, sendResponse) {
+function messaging(
+  request: BackgroundStoreMessage,
+  sender: chrome.runtime.MessageSender,
+  sendResponse: (response?: BackgroundStoreResponse) => void
+) {
   let tabId = getId(sender);
   if (!tabId) return;
   if (sender.frameId) tabId = `${tabId}-${sender.frameId}`;
@@ -164,7 +219,11 @@ function messaging(request, sender, sendResponse) {
   }
 }
 
-function disconnect(type, id, listener) {
+function disconnect(
+  type: 'tab' | 'monitor' | 'panel',
+  id: number | string,
+  listener?: (message: any, port: chrome.runtime.Port) => void
+) {
   return function disconnectListener() {
     const p = connections[type][id];
     if (listener && p) p.onMessage.removeListener(listener);
@@ -182,17 +241,17 @@ function disconnect(type, id, listener) {
   };
 }
 
-function onConnect(port) {
-  let id;
+function onConnect(port: chrome.runtime.Port) {
+  let id: number | string;
   let listener;
 
   window.store.dispatch({ type: CONNECTED, port });
 
   if (port.name === 'tab') {
-    id = getId(port.sender);
-    if (port.sender.frameId) id = `${id}-${port.sender.frameId}`;
+    id = getId(port.sender!);
+    if (port.sender!.frameId) id = `${id}-${port.sender!.frameId}`;
     connections.tab[id] = port;
-    listener = (msg) => {
+    listener = (msg: TabToBackgroundMessage) => {
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
           chrome.pageAction.show(id);
@@ -218,24 +277,24 @@ function onConnect(port) {
         return;
       }
       if (msg.name === 'RELAY') {
-        messaging(msg.message, port.sender, id);
+        messaging(msg.message, port.sender!, id);
       }
     };
     port.onMessage.addListener(listener);
     port.onDisconnect.addListener(disconnect('tab', id, listener));
   } else if (port.name && port.name.indexOf('monitor') === 0) {
-    id = getId(port.sender, port.name);
+    id = getId(port.sender!, port.name);
     connections.monitor[id] = port;
     monitorInstances(true);
     monitors++;
     port.onDisconnect.addListener(disconnect('monitor', id));
   } else {
     // devpanel
-    id = port.name || port.sender.frameId;
+    id = port.name || port.sender!.frameId!;
     connections.panel[id] = port;
     monitorInstances(true, port.name);
     monitors++;
-    listener = (msg) => {
+    listener = (msg: StoreAction) => {
       window.store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
@@ -253,10 +312,16 @@ chrome.notifications.onClicked.addListener((id) => {
   openDevToolsWindow('devtools-right');
 });
 
+declare global {
+  interface Window {
+    syncOptions: SyncOptions;
+  }
+}
+
 window.syncOptions = syncOptions(toAllTabs); // Expose to the options page
 
 export default function api() {
-  return (next) => (action) => {
+  return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
     if (action.type === LIFTED_ACTION) toContentScript(action);
     else if (action.type === 'TOGGLE_PERSIST') togglePersist();
     return next(action);

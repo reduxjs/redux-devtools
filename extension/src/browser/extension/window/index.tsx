@@ -16,7 +16,8 @@ getPreloadedState(position, (state) => {
   preloadedState = state;
 });
 
-chrome.runtime.getBackgroundPage(({ store }) => {
+chrome.runtime.getBackgroundPage((window) => {
+  const { store } = window!;
   const localStore = configureStore(store, position, preloadedState);
   let name = 'monitor';
   if (chrome && chrome.devtools && chrome.devtools.inspectedWindow) {

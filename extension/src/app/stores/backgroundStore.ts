@@ -3,7 +3,7 @@ import rootReducer, { BackgroundState } from '../reducers/background';
 import api from '../middlewares/api';
 
 export default function configureStore(
-  preloadedState: PreloadedState<BackgroundState>
+  preloadedState?: PreloadedState<BackgroundState>
 ) {
   return createStore(rootReducer, preloadedState, applyMiddleware(api));
   /*

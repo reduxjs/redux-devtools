@@ -31,7 +31,11 @@ interface OldOrNewOptions {
 let options: Options | undefined;
 let subscribers: ((options: Options) => void)[] = [];
 
-type ToAllTabs = (msg: { readonly options: Options }) => void;
+export interface OptionsMessage {
+  readonly options: Options;
+}
+
+type ToAllTabs = (msg: OptionsMessage) => void;
 
 const save =
   (toAllTabs: ToAllTabs | undefined) =>
@@ -132,7 +136,13 @@ export const isAllowed = (localOptions = options) =>
   !localOptions.urls ||
   location.href.match(toReg(localOptions.urls)!);
 
-export default function syncOptions(toAllTabs?: ToAllTabs) {
+export interface SyncOptions {
+  readonly save: <K extends keyof Options>(key: K, value: Options[K]) => void;
+  readonly get: (callback: (options: Options) => void) => void;
+  readonly subscribe: (callback: (options: Options) => void) => void;
+}
+
+export default function syncOptions(toAllTabs?: ToAllTabs): SyncOptions {
   if (toAllTabs && !options) get(() => {}); // Initialize
   return {
     save: save(toAllTabs),
