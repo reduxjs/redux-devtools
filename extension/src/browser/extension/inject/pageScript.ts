@@ -334,12 +334,16 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       const result = evalAction(action, actionCreators);
       (store.initialDispatch || store.dispatch)(result);
     } catch (e) {
-      toContentScript({
-        type: 'ERROR',
-        payload: e.message,
-        source,
-        instanceId,
-      });
+      toContentScript(
+        {
+          type: 'ERROR',
+          payload: e.message,
+          source,
+          instanceId,
+        },
+        serializeState,
+        serializeAction
+      );
     }
   }
 
@@ -350,12 +354,16 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       if (!nextLiftedState) return;
       store.liftedStore.dispatch({ type: 'IMPORT_STATE', ...nextLiftedState });
     } catch (e) {
-      toContentScript({
-        type: 'ERROR',
-        payload: e.message,
-        source,
-        instanceId,
-      });
+      toContentScript(
+        {
+          type: 'ERROR',
+          payload: e.message,
+          source,
+          instanceId,
+        },
+        serializeState,
+        serializeAction
+      );
     }
   }
 
@@ -416,12 +424,16 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
         });
 
         if (reportId) {
-          toContentScript({
-            type: 'GET_REPORT',
-            payload: reportId,
-            source,
-            instanceId,
-          });
+          toContentScript(
+            {
+              type: 'GET_REPORT',
+              payload: reportId,
+              source,
+              instanceId,
+            },
+            serializeState,
+            serializeAction
+          );
           reportId = null;
         }
         return;
@@ -430,12 +442,16 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
         relayAction.cancel();
         relayState.cancel();
         if (!message.failed) {
-          toContentScript({
-            type: 'STOP',
-            payload: undefined,
-            source,
-            instanceId,
-          });
+          toContentScript(
+            {
+              type: 'STOP',
+              payload: undefined,
+              source,
+              instanceId,
+            },
+            serializeState,
+            serializeAction
+          );
         }
     }
   }
@@ -486,12 +502,16 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       return true;
     });
 
-    toContentScript({
-      type: 'INIT_INSTANCE',
-      payload: undefined,
-      source,
-      instanceId,
-    });
+    toContentScript(
+      {
+        type: 'INIT_INSTANCE',
+        payload: undefined,
+        source,
+        instanceId,
+      },
+      serializeState,
+      serializeAction
+    );
     store.subscribe(handleChange);
 
     if (typeof reportId === 'undefined') {
