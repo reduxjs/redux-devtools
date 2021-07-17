@@ -1,7 +1,15 @@
 import { getActionsArray, evalAction } from '@redux-devtools/utils';
 import throttle from 'lodash/throttle';
-import { Action, PreloadedState, Reducer, Store, StoreEnhancer } from 'redux';
+import {
+  Action,
+  PreloadedState,
+  Reducer,
+  Store,
+  StoreEnhancer,
+  StoreEnhancerStoreCreator,
+} from 'redux';
 import Immutable from 'immutable';
+import { EnhancedStore } from '@redux-devtools/instrument';
 import createStore from '../../../app/stores/createStore';
 import configureStore, { getUrlParam } from '../../../app/stores/enhancerStore';
 import { isAllowed, Options } from '../options/syncOptions';
@@ -29,14 +37,15 @@ import {
   Serialize,
 } from '../../../app/api';
 import {
-  InstrumentExt,
   LiftedAction,
   LiftedState,
   PerformAction,
 } from '@redux-devtools/instrument';
 
 const source = '@devtools-page';
-let stores: { [instanceId: number]: Store<unknown, Action<unknown>> } = {};
+let stores: {
+  [instanceId: number]: EnhancedStore<unknown, Action<unknown>, unknown>;
+} = {};
 let reportId: string | null | undefined;
 
 function deprecateParam(oldParam: string, newParam: string) {
@@ -89,9 +98,7 @@ export interface ConfigWithExpandedMaxAge {
         currentLiftedAction: LiftedAction<S, A, unknown>,
         previousLiftedState: LiftedState<S, A, unknown> | undefined
       ) => number);
-  readonly trace?:
-    | boolean
-    | (<A extends Action<unknown>>(action: A) => string | undefined);
+  readonly trace?: boolean | (() => string | undefined);
   readonly traceLimit?: number;
   readonly shouldCatchErrors?: boolean;
   readonly shouldHotReload?: boolean;
@@ -113,7 +120,7 @@ interface ReduxDevtoolsExtension {
     preloadedState?: PreloadedState<S>,
     config?: Config
   ): Store<S, A>;
-  (config: Config): StoreEnhancer;
+  (config?: Config): StoreEnhancer;
   open: (position?: Position) => void;
   notifyErrors: (onError: () => boolean) => void;
   disconnect: () => void;
@@ -125,15 +132,13 @@ declare global {
   }
 }
 
-const __REDUX_DEVTOOLS_EXTENSION__ = reduxDevtoolsExtension;
-
-function reduxDevtoolsExtension<S, A extends Action<unknown>>(
+function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   reducer?: Reducer<S, A>,
   preloadedState?: PreloadedState<S>,
   config?: Config
 ): Store<S, A>;
-function reduxDevtoolsExtension(config: Config): StoreEnhancer;
-function reduxDevtoolsExtension<S, A extends Action<unknown>>(
+function __REDUX_DEVTOOLS_EXTENSION__(config: Config): StoreEnhancer;
+function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   reducer?: Reducer<S, A> | Config | undefined,
   preloadedState?: PreloadedState<S>,
   config?: Config
@@ -146,7 +151,7 @@ function reduxDevtoolsExtension<S, A extends Action<unknown>>(
   /* eslint-enable no-param-reassign */
   if (!window.devToolsOptions) window.devToolsOptions = {};
 
-  let store: Store<S, A> & InstrumentExt<S, A, unknown>;
+  let store: EnhancedStore<S, A, unknown>;
   let errorOccurred = false;
   let maxAge: number | undefined;
   let actionCreators;
@@ -313,7 +318,7 @@ function reduxDevtoolsExtension<S, A extends Action<unknown>>(
     );
     sendingActionId = nextActionId;
     if (typeof payload === 'undefined') return;
-    if (typeof payload.skippedActionIds !== 'undefined') {
+    if ('skippedActionIds' in payload) {
       relay('STATE', payload);
       return;
     }
@@ -494,23 +499,30 @@ function reduxDevtoolsExtension<S, A extends Action<unknown>>(
     relayState(liftedState);
   }
 
-  const enhance = (): StoreEnhancer => (next) => {
-    return (reducer_, initialState_) => {
-      if (!isAllowed(window.devToolsOptions)) {
-        return next(reducer_, initialState_);
-      }
+  const enhance =
+    () =>
+    <NextExt, NextStateExt>(
+      next: StoreEnhancerStoreCreator<NextExt, NextStateExt>
+    ) => {
+      return <S2 extends S, A2 extends A>(
+        reducer_: Reducer<S2, A2>,
+        initialState_?: PreloadedState<S2>
+      ) => {
+        if (!isAllowed(window.devToolsOptions)) {
+          return next(reducer_, initialState_);
+        }
 
-      store = stores[instanceId] = configureStore(next, monitor.reducer, {
-        ...config,
-        maxAge: getMaxAge,
-      })(reducer_, initialState_);
+        return configureStore(next, monitor.reducer, {
+          ...config,
+          maxAge: getMaxAge,
+        })(reducer_, initialState_);
 
-      if (isInIframe()) setTimeout(init, 3000);
-      else init();
+        if (isInIframe()) setTimeout(init, 3000);
+        else init();
 
-      return store;
+        return store;
+      };
     };
-  };
 
   if (!reducer) return enhance();
   /* eslint-disable no-console */
@@ -538,8 +550,10 @@ window.__REDUX_DEVTOOLS_EXTENSION__.connect = connect;
 window.__REDUX_DEVTOOLS_EXTENSION__.disconnect = disconnect;
 
 const preEnhancer =
-  (instanceId) => (next) => (reducer, preloadedState, enhancer) => {
-    const store = next(reducer, preloadedState, enhancer);
+  (instanceId: number): StoreEnhancer =>
+  (next) =>
+  (reducer, preloadedState) => {
+    const store = next(reducer, preloadedState);
 
     if (stores[instanceId]) {
       stores[instanceId].initialDispatch = store.dispatch;

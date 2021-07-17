@@ -4,7 +4,7 @@ import {
   SELECT_INSTANCE,
 } from '@redux-devtools/app/lib/constants/actionTypes';
 import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
-import { Dispatch, MiddlewareAPI, Store } from 'redux';
+import { Dispatch, MiddlewareAPI } from 'redux';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
 import { StoreAction } from '@redux-devtools/app/lib/actions';
 

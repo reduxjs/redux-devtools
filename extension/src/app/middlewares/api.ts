@@ -31,7 +31,7 @@ interface UpdateStateAction {
   readonly type: typeof UPDATE_STATE;
 }
 
-type TabMessage = StartAction | StopAction | OptionsMessage;
+export type TabMessage = StartAction | StopAction | OptionsMessage;
 type PanelMessage = NAAction;
 type MonitorMessage = UpdateStateAction;
 
@@ -80,7 +80,22 @@ function toMonitors(
   });
 }
 
-function toContentScript({ message, action, id, instanceId, state }) {
+interface ImportMessage {
+  readonly message: 'IMPORT';
+  readonly id: string | number;
+  readonly instanceId: string;
+  readonly state: string;
+}
+
+type ToContentScriptMessage = ImportMessage;
+
+function toContentScript({
+  message,
+  action,
+  id,
+  instanceId,
+  state,
+}: ToContentScriptMessage) {
   connections.tab[id].postMessage({
     type: message,
     action,
@@ -251,7 +266,7 @@ function onConnect(port: chrome.runtime.Port) {
     id = getId(port.sender!);
     if (port.sender!.frameId) id = `${id}-${port.sender!.frameId}`;
     connections.tab[id] = port;
-    listener = (msg: TabToBackgroundMessage) => {
+    listener = (msg) => {
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
           chrome.pageAction.show(id);

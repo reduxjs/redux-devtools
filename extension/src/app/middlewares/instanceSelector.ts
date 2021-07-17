@@ -1,4 +1,4 @@
-import { Dispatch, Store } from 'redux';
+import { Dispatch, MiddlewareAPI } from 'redux';
 import {
   SELECT_INSTANCE,
   UPDATE_STATE,
@@ -8,7 +8,7 @@ import { StoreState } from '@redux-devtools/app/lib/reducers';
 
 function selectInstance(
   tabId: number,
-  store: Store<StoreState, StoreAction>,
+  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
   next: Dispatch<StoreAction>
 ) {
   const instances = store.getState().instances;
@@ -33,7 +33,9 @@ function getCurrentTabId(next: (tabId: number) => void) {
   );
 }
 
-export default function popupSelector(store: Store<StoreState, StoreAction>) {
+export default function popupSelector(
+  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>
+) {
   return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
     const result = next(action);
     if (action.type === UPDATE_STATE) {

@@ -2,7 +2,7 @@ import mapValues from 'lodash/mapValues';
 import jsan from 'jsan';
 import seralizeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
 
-function deprecate(param) {
+function deprecate(param: string) {
   // eslint-disable-next-line no-console
   console.warn(
     `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead: https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1`

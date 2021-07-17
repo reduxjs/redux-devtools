@@ -100,7 +100,7 @@ interface ImportStateAction<S, A extends Action<unknown>, MonitorState> {
   type: typeof ActionTypes.IMPORT_STATE;
   nextLiftedState: LiftedState<S, A, MonitorState> | readonly A[];
   preloadedState?: S;
-  noRecompute: boolean | undefined;
+  noRecompute?: boolean | undefined;
 }
 
 interface LockChangesAction {

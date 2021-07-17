@@ -1,13 +1,7 @@
 import { Action, compose, Reducer, StoreEnhancerStoreCreator } from 'redux';
-import instrument, {
-  LiftedAction,
-  LiftedState,
-} from '@redux-devtools/instrument';
+import instrument from '@redux-devtools/instrument';
 import persistState from '@redux-devtools/core/lib/persistState';
-import {
-  Config,
-  ConfigWithExpandedMaxAge,
-} from '../../browser/extension/inject/pageScript';
+import { ConfigWithExpandedMaxAge } from '../../browser/extension/inject/pageScript';
 
 export function getUrlParam(key: string) {
   const matches = window.location.href.match(
@@ -16,9 +10,20 @@ export function getUrlParam(key: string) {
   return matches && matches.length > 0 ? matches[1] : null;
 }
 
-export default function configureStore(
+declare global {
+  interface Window {
+    shouldCatchErrors?: boolean;
+  }
+}
+
+export default function configureStore<
+  S,
+  A extends Action<unknown>,
+  MonitorState,
+  MonitorAction extends Action<unknown>
+>(
   next: StoreEnhancerStoreCreator,
-  monitorReducer: Reducer,
+  monitorReducer: Reducer<MonitorState, MonitorAction>,
   config: ConfigWithExpandedMaxAge
 ) {
   return compose(

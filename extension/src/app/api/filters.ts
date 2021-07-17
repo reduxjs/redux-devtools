@@ -37,14 +37,14 @@ export function getLocalFilter(config: Config): LocalFilter | undefined {
   return undefined;
 }
 
-export const noFiltersApplied = (localFilter) =>
+export const noFiltersApplied = (localFilter: LocalFilter | undefined) =>
   // !predicate &&
   !localFilter &&
   (!window.devToolsOptions ||
     !window.devToolsOptions.filter ||
     window.devToolsOptions.filter === FilterState.DO_NOT_FILTER);
 
-export function isFiltered(action, localFilter) {
+export function isFiltered(action, localFilter: LocalFilter | undefined) {
   if (
     noFiltersApplied(localFilter) ||
     (typeof action !== 'string' && typeof action.type.match !== 'function')
@@ -76,23 +76,25 @@ function filterStates(computedStates, stateSanitizer) {
   }));
 }
 
-export function filterState(
-  state,
+export function filterState<S, A extends Action<unknown>>(
+  state: LiftedState<S, A, unknown>,
   type,
-  localFilter,
-  stateSanitizer,
-  actionSanitizer,
-  nextActionId,
-  predicate
+  localFilter: LocalFilter | undefined,
+  stateSanitizer: ((state: S, index: number) => S) | undefined,
+  actionSanitizer: ((action: A, id: number) => A) | undefined,
+  nextActionId: number | undefined,
+  predicate: ((state: S, action: A) => boolean) | undefined
 ) {
   if (type === 'ACTION') {
     return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
   } else if (type !== 'STATE') return state;
 
   if (predicate || !noFiltersApplied(localFilter)) {
-    const filteredStagedActionIds = [];
-    const filteredComputedStates = [];
-    const sanitizedActionsById = actionSanitizer && {};
+    const filteredStagedActionIds: number[] = [];
+    const filteredComputedStates: { state: S; error?: string | undefined }[] =
+      [];
+    const sanitizedActionsById: { [p: number]: PerformAction<A> } | undefined =
+      actionSanitizer && {};
     const { actionsById } = state;
     const { computedStates } = state;
 
@@ -114,7 +116,7 @@ export function filterState(
           : liftedState
       );
       if (actionSanitizer) {
-        sanitizedActionsById[id] = {
+        sanitizedActionsById![id] = {
           ...liftedAction,
           action: actionSanitizer(currAction, id),
         };
@@ -137,6 +139,14 @@ export function filterState(
   };
 }
 
+export interface PartialLiftedState<S, A extends Action<unknown>> {
+  readonly actionsById: { [actionId: number]: PerformAction<A> };
+  readonly computedStates: { state: S; error?: string }[];
+  readonly stagedActionIds: readonly number[];
+  readonly currentStateIndex: number;
+  readonly nextActionId: number;
+}
+
 export function startingFrom<S, A extends Action<unknown>>(
   sendingActionId: number,
   state: LiftedState<S, A, unknown>,
@@ -148,7 +158,7 @@ export function startingFrom<S, A extends Action<unknown>>(
   predicate:
     | (<S, A extends Action<unknown>>(state: S, action: A) => boolean)
     | undefined
-) {
+): LiftedState<S, A, unknown> | PartialLiftedState<S, A> | undefined {
   const stagedActionIds = state.stagedActionIds;
   if (sendingActionId <= stagedActionIds[1]) return state;
   const index = stagedActionIds.indexOf(sendingActionId);

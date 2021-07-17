@@ -3,6 +3,7 @@ import {
   getOptionsFromBg,
   isAllowed,
 } from '../options/syncOptions';
+import { TabMessage } from '../../../app/middlewares/api';
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
@@ -27,8 +28,8 @@ function connect() {
   }
 
   // Relay background script messages to the page script
-  bg.onMessage.addListener((message) => {
-    if (message.action) {
+  bg.onMessage.addListener((message: TabMessage) => {
+    if ('action' in message) {
       window.postMessage(
         {
           type: message.type,
@@ -39,7 +40,7 @@ function connect() {
         },
         '*'
       );
-    } else if (message.options) {
+    } else if ('options' in message) {
       injectOptions(message.options);
     } else {
       window.postMessage(

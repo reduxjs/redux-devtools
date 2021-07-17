@@ -2,11 +2,12 @@ import jsan, { Options } from 'jsan';
 import throttle from 'lodash/throttle';
 import serializeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
 import { getActionsArray } from '@redux-devtools/utils';
-import { getLocalFilter, isFiltered } from './filters';
+import { getLocalFilter, isFiltered, PartialLiftedState } from './filters';
 import importState from './importState';
 import generateId from './generateInstanceId';
 import { PageScriptToContentScriptMessage } from '../../browser/extension/inject/contentScript';
 import { Config } from '../../browser/extension/inject/pageScript';
+import { Action } from 'redux';
 
 const listeners = {};
 export const source = '@devtools-page';
@@ -109,7 +110,10 @@ function post(message: PageScriptToContentScriptMessage) {
   window.postMessage(message, '*');
 }
 
-function getStackTrace(config, toExcludeFromTrace: Function | undefined) {
+function getStackTrace(
+  config: Config,
+  toExcludeFromTrace: Function | undefined
+) {
   if (!config.trace) return undefined;
   if (typeof config.trace === 'function') return config.trace();
 
@@ -119,9 +123,9 @@ function getStackTrace(config, toExcludeFromTrace: Function | undefined) {
   const traceLimit = config.traceLimit;
   const error = Error();
   if (Error.captureStackTrace) {
-    if (Error.stackTraceLimit < traceLimit) {
+    if (Error.stackTraceLimit < traceLimit!) {
       prevStackTraceLimit = Error.stackTraceLimit;
-      Error.stackTraceLimit = traceLimit;
+      Error.stackTraceLimit = traceLimit!;
     }
     Error.captureStackTrace(error, toExcludeFromTrace);
   } else {
@@ -132,12 +136,12 @@ function getStackTrace(config, toExcludeFromTrace: Function | undefined) {
   if (
     extraFrames ||
     typeof Error.stackTraceLimit !== 'number' ||
-    Error.stackTraceLimit > traceLimit
+    Error.stackTraceLimit > traceLimit!
   ) {
     const frames = stack!.split('\n');
-    if (frames.length > traceLimit) {
+    if (frames.length > traceLimit!) {
       stack = frames
-        .slice(0, traceLimit + extraFrames + (frames[0] === 'Error' ? 1 : 0))
+        .slice(0, traceLimit! + extraFrames + (frames[0] === 'Error' ? 1 : 0))
         .join('\n');
     }
   }
@@ -159,10 +163,38 @@ function amendActionType(
   return { action, timestamp, stack };
 }
 
-export function toContentScript(
-  message,
-  serializeState: Serialize | undefined,
-  serializeAction: Serialize | undefined
+interface LiftedMessage {
+  readonly type: 'LIFTED';
+  readonly liftedState: { readonly isPaused: boolean };
+  readonly instanceId: number;
+  readonly source: typeof source;
+}
+
+interface PartialStateMessage<S, A extends Action<unknown>> {
+  readonly type: 'PARTIAL_STATE';
+  readonly payload: PartialLiftedState<S, A>;
+  readonly source: typeof source;
+  readonly instanceId: number;
+  readonly maxAge: number;
+}
+
+interface ExportMessage<S, A extends Action<unknown>> {
+  readonly type: 'EXPORT';
+  readonly payload: readonly A[];
+  readonly committedState: S;
+  readonly source: typeof source;
+  readonly instanceId: number;
+}
+
+type ToContentScriptMessage<S, A extends Action<unknown>> =
+  | LiftedMessage
+  | PartialStateMessage<S, A>
+  | ExportMessage<S, A>;
+
+export function toContentScript<S, A extends Action<unknown>>(
+  message: ToContentScriptMessage<S, A>,
+  serializeState?: Serialize | undefined,
+  serializeAction?: Serialize | undefined
 ) {
   if (message.type === 'ACTION') {
     message.action = stringify(message.action, serializeAction);
