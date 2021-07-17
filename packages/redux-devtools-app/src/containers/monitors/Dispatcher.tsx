@@ -55,7 +55,7 @@ type Props = DispatchProps & OwnProps;
 interface State {
   selected: 'default' | number;
   customAction: string;
-  args: (string | undefined)[];
+  args: string[];
   rest: string;
   changed: boolean;
 }
@@ -108,7 +108,7 @@ class Dispatcher extends Component<Props, State> {
   handleArg = (argIndex: number) => (value: string) => {
     const args = [
       ...this.state.args.slice(0, argIndex),
-      value || undefined,
+      (value || undefined)!,
       ...this.state.args.slice(argIndex + 1),
     ];
     this.setState({ args, changed: true });

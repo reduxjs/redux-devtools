@@ -6,20 +6,65 @@ import {
 } from '@redux-devtools/app/lib/constants/actionTypes';
 import { nonReduxDispatch } from '@redux-devtools/app/lib/utils/monitorActions';
 import syncOptions, {
+  Options,
   OptionsMessage,
   SyncOptions,
 } from '../../browser/extension/options/syncOptions';
 import openDevToolsWindow from '../../browser/extension/background/openWindow';
 import { getReport } from '../../browser/extension/background/logging';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
-import { Dispatch } from 'redux';
+import {
+  CustomAction,
+  DispatchAction as AppDispatchAction,
+  LiftedActionAction,
+  StoreAction,
+} from '@redux-devtools/app/lib/actions';
+import { Action, Dispatch } from 'redux';
+import { ContentScriptToBackgroundMessage } from '../../browser/extension/inject/contentScript';
 
-interface StartAction {
-  readonly type: 'START';
+interface TabMessageBase {
+  readonly type: string;
+  readonly state?: string | undefined;
+  readonly id?: string;
 }
 
-interface StopAction {
+interface StartAction extends TabMessageBase {
+  readonly type: 'START';
+  readonly state: never;
+  readonly id: never;
+}
+
+interface StopAction extends TabMessageBase {
   readonly type: 'STOP';
+  readonly state: never;
+  readonly id: never;
+}
+
+interface DispatchAction extends TabMessageBase {
+  readonly type: 'DISPATCH';
+  readonly action: AppDispatchAction;
+  readonly state: string | undefined;
+  readonly id: string;
+}
+
+interface ImportAction extends TabMessageBase {
+  readonly type: 'IMPORT';
+  readonly action: undefined;
+  readonly state: string | undefined;
+  readonly id: string;
+}
+
+interface ActionAction extends TabMessageBase {
+  readonly type: 'ACTION';
+  readonly action: string | CustomAction;
+  readonly state: string | undefined;
+  readonly id: string;
+}
+
+interface ExportAction extends TabMessageBase {
+  readonly type: 'EXPORT';
+  readonly action: undefined;
+  readonly state: string | undefined;
+  readonly id: string;
 }
 
 interface NAAction {
@@ -31,7 +76,14 @@ interface UpdateStateAction {
   readonly type: typeof UPDATE_STATE;
 }
 
-export type TabMessage = StartAction | StopAction | OptionsMessage;
+export type TabMessage =
+  | StartAction
+  | StopAction
+  | OptionsMessage
+  | DispatchAction
+  | ImportAction
+  | ActionAction
+  | ExportAction;
 type PanelMessage = NAAction;
 type MonitorMessage = UpdateStateAction;
 
@@ -87,7 +139,7 @@ interface ImportMessage {
   readonly state: string;
 }
 
-type ToContentScriptMessage = ImportMessage;
+type ToContentScriptMessage = ImportMessage | LiftedActionAction;
 
 function toContentScript({
   message,
@@ -144,13 +196,13 @@ function togglePersist() {
 }
 
 type BackgroundStoreMessage = unknown;
-type BackgroundStoreResponse = never;
+type BackgroundStoreResponse = { readonly options: Options };
 
 // Receive messages from content scripts
 function messaging(
   request: BackgroundStoreMessage,
   sender: chrome.runtime.MessageSender,
-  sendResponse: (response?: BackgroundStoreResponse) => void
+  sendResponse?: (response?: BackgroundStoreResponse) => void
 ) {
   let tabId = getId(sender);
   if (!tabId) return;
@@ -168,7 +220,7 @@ function messaging(
   }
   if (request.type === 'GET_OPTIONS') {
     window.syncOptions.get((options) => {
-      sendResponse({ options });
+      sendResponse!({ options });
     });
     return;
   }
@@ -256,7 +308,7 @@ function disconnect(
   };
 }
 
-function onConnect(port: chrome.runtime.Port) {
+function onConnect<S, A extends Action<unknown>>(port: chrome.runtime.Port) {
   let id: number | string;
   let listener;
 
@@ -266,7 +318,7 @@ function onConnect(port: chrome.runtime.Port) {
     id = getId(port.sender!);
     if (port.sender!.frameId) id = `${id}-${port.sender!.frameId}`;
     connections.tab[id] = port;
-    listener = (msg) => {
+    listener = (msg: ContentScriptToBackgroundMessage<S, A>) => {
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
           chrome.pageAction.show(id);
@@ -292,7 +344,7 @@ function onConnect(port: chrome.runtime.Port) {
         return;
       }
       if (msg.name === 'RELAY') {
-        messaging(msg.message, port.sender!, id);
+        messaging(msg.message, port.sender!);
       }
     };
     port.onMessage.addListener(listener);

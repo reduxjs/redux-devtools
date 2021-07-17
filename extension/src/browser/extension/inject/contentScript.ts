@@ -7,8 +7,13 @@ import { TabMessage } from '../../../app/middlewares/api';
 import {
   PageScriptToContentScriptMessage,
   PageScriptToContentScriptMessageWithoutDisconnect,
+  PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
 } from '../../../app/api';
 import { Action } from 'redux';
+import {
+  CustomAction,
+  DispatchAction as AppDispatchAction,
+} from '@redux-devtools/app/lib/actions';
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
@@ -20,6 +25,73 @@ declare global {
   interface Window {
     devToolsExtensionID?: string;
   }
+}
+
+interface StartAction {
+  readonly type: 'START';
+  readonly state: undefined;
+  readonly id: undefined;
+  readonly source: typeof source;
+}
+
+interface StopAction {
+  readonly type: 'STOP';
+  readonly state: undefined;
+  readonly id: undefined;
+  readonly source: typeof source;
+  readonly failed?: boolean;
+}
+
+interface DispatchAction {
+  readonly type: 'DISPATCH';
+  readonly payload: AppDispatchAction;
+  readonly state: string | undefined;
+  readonly id: string;
+  readonly source: typeof source;
+}
+
+interface ImportAction {
+  readonly type: 'IMPORT';
+  readonly payload: undefined;
+  readonly state: string | undefined;
+  readonly id: string;
+  readonly source: typeof source;
+}
+
+interface ActionAction {
+  readonly type: 'ACTION';
+  readonly payload: string | CustomAction;
+  readonly state: string | undefined;
+  readonly id: string;
+  readonly source: typeof source;
+}
+
+interface ExportAction {
+  readonly type: 'EXPORT';
+  readonly payload: undefined;
+  readonly state: string | undefined;
+  readonly id: string;
+  readonly source: typeof source;
+}
+
+interface UpdateAction {
+  readonly type: 'UPDATE';
+  readonly state: string | undefined;
+  readonly id: string;
+  readonly source: typeof source;
+}
+
+export type ContentScriptToPageScriptMessage =
+  | StartAction
+  | StopAction
+  | DispatchAction
+  | ImportAction
+  | ActionAction
+  | ExportAction
+  | UpdateAction;
+
+function postToPageScript(message: ContentScriptToPageScriptMessage) {
+  window.postMessage(message, '*');
 }
 
 function connect() {
@@ -35,28 +107,40 @@ function connect() {
   // Relay background script messages to the page script
   bg.onMessage.addListener((message: TabMessage) => {
     if ('action' in message) {
-      window.postMessage(
-        {
+      if (message.type === 'DISPATCH') {
+        postToPageScript({
           type: message.type,
           payload: message.action,
           state: message.state,
           id: message.id,
           source,
-        },
-        '*'
-      );
-    } else if ('options' in message) {
-      injectOptions(message.options);
-    } else {
-      window.postMessage(
-        {
+        });
+      } else if (message.type === 'ACTION') {
+        postToPageScript({
           type: message.type,
+          payload: message.action,
           state: message.state,
           id: message.id,
           source,
-        },
-        '*'
-      );
+        });
+      } else {
+        postToPageScript({
+          type: message.type,
+          payload: message.action,
+          state: message.state,
+          id: message.id,
+          source,
+        });
+      }
+    } else if ('options' in message) {
+      injectOptions(message.options);
+    } else {
+      postToPageScript({
+        type: message.type,
+        state: message.state,
+        id: message.id,
+        source,
+      });
     }
   });
 
@@ -93,7 +177,9 @@ interface SplitMessageEnd extends SplitMessageBase {
 type SplitMessage = SplitMessageStart | SplitMessageChunk | SplitMessageEnd;
 
 function tryCatch<S, A extends Action<unknown>>(
-  fn: (args: PageScriptToContentScriptMessage<S, A> | SplitMessage) => void,
+  fn: (
+    args: PageScriptToContentScriptMessageWithoutDisconnect<S, A> | SplitMessage
+  ) => void,
   args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>
 ) {
   try {
@@ -145,21 +231,27 @@ interface InitInstanceContentScriptToBackgroundMessage {
   readonly instanceId: number;
 }
 
-interface RelayMessage {
+interface RelayMessage<S, A extends Action<unknown>> {
   readonly name: 'RELAY';
-  readonly message: unknown;
+  readonly message:
+    | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
+    | SplitMessage;
 }
 
-export type ContentScriptToBackgroundMessage =
+export type ContentScriptToBackgroundMessage<S, A extends Action<unknown>> =
   | InitInstanceContentScriptToBackgroundMessage
-  | RelayMessage;
+  | RelayMessage<S, A>;
 
-function postToBackground(message: ContentScriptToBackgroundMessage) {
+function postToBackground<S, A extends Action<unknown>>(
+  message: ContentScriptToBackgroundMessage<S, A>
+) {
   bg!.postMessage(message);
 }
 
 function send<S, A extends Action<unknown>>(
-  message: PageScriptToContentScriptMessage<S, A> | SplitMessage
+  message:
+    | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
+    | SplitMessage
 ) {
   if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {

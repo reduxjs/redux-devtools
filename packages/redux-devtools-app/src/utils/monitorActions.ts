@@ -26,7 +26,7 @@ export function nonReduxDispatch(
   instanceId: string,
   action: DispatchAction,
   initialState: string | undefined,
-  preInstances: InstancesState
+  preInstances?: InstancesState
 ) {
   const instances = preInstances || store.getState().instances;
   const state = instances.states[instanceId];

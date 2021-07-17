@@ -41,6 +41,13 @@ import {
   LiftedState,
   PerformAction,
 } from '@redux-devtools/instrument';
+import {
+  CustomAction,
+  DispatchAction,
+  LibConfig,
+} from '@redux-devtools/app/lib/actions';
+import { ContentScriptToPageScriptMessage } from './contentScript';
+import { Features } from '@redux-devtools/app/lib/reducers/instances';
 
 const source = '@devtools-page';
 let stores: {
@@ -62,10 +69,10 @@ interface SerializeWithImmutable extends Serialize {
 }
 
 export interface ConfigWithExpandedMaxAge {
-  readonly instanceId?: number;
+  instanceId?: number;
   readonly actionsBlacklist?: string | readonly string[];
   readonly actionsWhitelist?: string | readonly string[];
-  readonly serialize?: boolean | SerializeWithImmutable;
+  serialize?: boolean | SerializeWithImmutable;
   readonly serializeState?:
     | boolean
     | ((key: string, value: unknown) => unknown)
@@ -107,7 +114,9 @@ export interface ConfigWithExpandedMaxAge {
   readonly pauseActionType?: unknown;
   readonly deserializeState?: <S>(state: S) => S;
   readonly deserializeAction?: <A extends Action<unknown>>(action: A) => A;
-  readonly name?: string;
+  name?: string;
+  readonly autoPause?: boolean;
+  readonly features?: Features;
 }
 
 export interface Config extends ConfigWithExpandedMaxAge {
@@ -182,7 +191,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   const relayState = throttle(
     (
       liftedState?: LiftedState<S, A, unknown> | undefined,
-      libConfig?: unknown
+      libConfig?: LibConfig
     ) => {
       relayAction.cancel();
       const state = liftedState || store.liftedStore.getState();
@@ -328,8 +337,8 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     );
   }, latency);
 
-  function dispatchRemotely(action) {
-    if (config.features && !config.features.dispatch) return;
+  function dispatchRemotely(action: string | CustomAction) {
+    if (config!.features && !config!.features.dispatch) return;
     try {
       const result = evalAction(action, actionCreators);
       (store.initialDispatch || store.dispatch)(result);
@@ -367,7 +376,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     }
   }
 
-  function dispatchMonitorAction(action) {
+  function dispatchMonitorAction(action: DispatchAction) {
     const type = action.type;
     const features = config.features;
     if (features) {
@@ -393,7 +402,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     store.liftedStore.dispatch(action);
   }
 
-  function onMessage(message) {
+  function onMessage(message: ContentScriptToPageScriptMessage) {
     switch (message.type) {
       case 'DISPATCH':
         dispatchMonitorAction(message.payload);
@@ -416,10 +425,10 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
           actionCreators = getActionsArray(config.actionCreators);
         }
         relayState(undefined, {
-          name: config.name || document.title,
+          name: config!.name || document.title,
           actionCreators: JSON.stringify(actionCreators),
-          features: config.features,
-          serialize: !!config.serialize,
+          features: config!.features,
+          serialize: !!config!.serialize,
           type: 'redux',
         });
 

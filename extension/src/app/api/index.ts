@@ -8,6 +8,7 @@ import generateId from './generateInstanceId';
 import { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
+import { LibConfig } from '@redux-devtools/app/lib/actions';
 
 const listeners = {};
 export const source = '@devtools-page';
@@ -125,7 +126,7 @@ interface InitMessage<S, A extends Action<unknown>> {
   action?: string;
   name?: string | undefined;
   liftedState?: LiftedState<S, A, unknown>;
-  libConfig?: unknown;
+  libConfig?: LibConfig;
 }
 
 interface SerializedPartialLiftedState<S, A extends Action<unknown>> {
@@ -171,17 +172,15 @@ interface SerializedStateMessage<S, A extends Action<unknown>> {
   >;
   readonly source: typeof source;
   readonly instanceId: number;
-  readonly libConfig?: unknown;
+  readonly libConfig?: LibConfig;
   readonly actionsById: string;
   readonly computedStates: string;
   readonly committedState: boolean;
 }
-
-export type PageScriptToContentScriptMessageWithoutDisconnect<
+export type PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<
   S,
   A extends Action<unknown>
 > =
-  | InitInstancePageScriptToContentScriptMessage
   | InitMessage<S, A>
   | LiftedMessage
   | SerializedPartialStateMessage<S, A>
@@ -192,6 +191,13 @@ export type PageScriptToContentScriptMessageWithoutDisconnect<
   | InitInstanceMessage
   | GetReportMessage
   | StopMessage;
+
+export type PageScriptToContentScriptMessageWithoutDisconnect<
+  S,
+  A extends Action<unknown>
+> =
+  | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
+  | InitInstancePageScriptToContentScriptMessage;
 
 export type PageScriptToContentScriptMessage<S, A extends Action<unknown>> =
   | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
@@ -258,7 +264,7 @@ function amendActionType(
 
 export interface LiftedMessage {
   readonly type: 'LIFTED';
-  readonly liftedState: { readonly isPaused: boolean };
+  readonly liftedState: { readonly isPaused: boolean | undefined };
   readonly instanceId: number;
   readonly source: typeof source;
 }
@@ -294,7 +300,7 @@ interface StateMessage<S, A extends Action<unknown>> {
   readonly payload: LiftedState<S, A, unknown>;
   readonly source: typeof source;
   readonly instanceId: number;
-  readonly libConfig?: unknown;
+  readonly libConfig?: LibConfig;
 }
 
 interface ErrorMessage {
@@ -447,7 +453,7 @@ export function disconnect() {
   post({ type: 'DISCONNECT', source });
 }
 
-export function connect(preConfig) {
+export function connect(preConfig: Config) {
   const config = preConfig || {};
   const id = generateId(config.instanceId);
   if (!config.instanceId) config.instanceId = id;

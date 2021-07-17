@@ -268,7 +268,7 @@ export function pauseRecording(status: boolean): LiftedActionDispatchAction {
 export interface CustomAction {
   name: string;
   selected: number;
-  args: (string | undefined)[];
+  args: string[];
   rest: string;
 }
 export function dispatchRemotely(
@@ -354,7 +354,7 @@ export interface ActionCreator {
   name: string;
 }
 
-interface LibConfig {
+export interface LibConfig {
   actionCreators?: string;
   name?: string;
   type?: string;

@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { LiftedState } from '@redux-devtools/instrument';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
+import { LibConfig, StoreAction } from '@redux-devtools/app/lib/actions';
 
 declare global {
   interface Window {
@@ -11,7 +11,7 @@ declare global {
 export default class Monitor<S, A extends Action<unknown>> {
   update: (
     liftedState?: LiftedState<S, A, unknown> | undefined,
-    libConfig?: unknown
+    libConfig?: LibConfig
   ) => void;
   active?: boolean;
   paused?: boolean;
@@ -19,7 +19,7 @@ export default class Monitor<S, A extends Action<unknown>> {
   constructor(
     update: (
       liftedState?: LiftedState<S, A, unknown> | undefined,
-      libConfig?: unknown
+      libConfig?: LibConfig
     ) => void
   ) {
     this.update = update;
