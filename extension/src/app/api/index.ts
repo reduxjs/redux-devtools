@@ -5,7 +5,6 @@ import { getActionsArray } from '@redux-devtools/utils';
 import { getLocalFilter, isFiltered, PartialLiftedState } from './filters';
 import importState from './importState';
 import generateId from './generateInstanceId';
-import { PageScriptToContentScriptMessage } from '../../browser/extension/inject/contentScript';
 import { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
@@ -107,7 +106,100 @@ export function getSerializeParameter(
   return value;
 }
 
-function post(message: PageScriptToContentScriptMessage) {
+interface InitInstancePageScriptToContentScriptMessage {
+  readonly type: 'INIT_INSTANCE';
+  readonly instanceId: number;
+  readonly source: typeof source;
+}
+
+interface DisconnectMessage {
+  readonly type: 'DISCONNECT';
+  readonly source: typeof source;
+}
+
+interface InitMessage<S, A extends Action<unknown>> {
+  readonly type: 'INIT';
+  readonly payload: string;
+  readonly instanceId: number;
+  readonly source: typeof source;
+  action?: string;
+  name?: string | undefined;
+  liftedState?: LiftedState<S, A, unknown>;
+  libConfig?: unknown;
+}
+
+interface SerializedPartialLiftedState<S, A extends Action<unknown>> {
+  readonly stagedActionIds: readonly number[];
+  readonly currentStateIndex: number;
+  readonly nextActionId: number;
+}
+
+interface SerializedPartialStateMessage<S, A extends Action<unknown>> {
+  readonly type: 'PARTIAL_STATE';
+  readonly payload: SerializedPartialLiftedState<S, A>;
+  readonly source: typeof source;
+  readonly instanceId: number;
+  readonly maxAge: number;
+  readonly actionsById: string;
+  readonly computedStates: string;
+  readonly committedState: boolean;
+}
+
+interface SerializedExportMessage {
+  readonly type: 'EXPORT';
+  readonly payload: string;
+  readonly committedState: string | undefined;
+  readonly source: typeof source;
+  readonly instanceId: number;
+}
+
+interface SerializedActionMessage {
+  readonly type: 'ACTION';
+  readonly payload: string;
+  readonly source: typeof source;
+  readonly instanceId: number;
+  readonly action: string;
+  readonly maxAge: number;
+  readonly nextActionId: number;
+}
+
+interface SerializedStateMessage<S, A extends Action<unknown>> {
+  readonly type: 'STATE';
+  readonly payload: Omit<
+    LiftedState<S, A, unknown>,
+    'actionsById' | 'computedStates' | 'committedState'
+  >;
+  readonly source: typeof source;
+  readonly instanceId: number;
+  readonly libConfig?: unknown;
+  readonly actionsById: string;
+  readonly computedStates: string;
+  readonly committedState: boolean;
+}
+
+export type PageScriptToContentScriptMessageWithoutDisconnect<
+  S,
+  A extends Action<unknown>
+> =
+  | InitInstancePageScriptToContentScriptMessage
+  | InitMessage<S, A>
+  | LiftedMessage
+  | SerializedPartialStateMessage<S, A>
+  | SerializedExportMessage
+  | SerializedActionMessage
+  | SerializedStateMessage<S, A>
+  | ErrorMessage
+  | InitInstanceMessage
+  | GetReportMessage
+  | StopMessage;
+
+export type PageScriptToContentScriptMessage<S, A extends Action<unknown>> =
+  | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
+  | DisconnectMessage;
+
+function post<S, A extends Action<unknown>>(
+  message: PageScriptToContentScriptMessage<S, A>
+) {
   window.postMessage(message, '*');
 }
 
@@ -164,7 +256,7 @@ function amendActionType(
   return { action, timestamp, stack };
 }
 
-interface LiftedMessage {
+export interface LiftedMessage {
   readonly type: 'LIFTED';
   readonly liftedState: { readonly isPaused: boolean };
   readonly instanceId: number;
@@ -250,28 +342,52 @@ export function toContentScript<S, A extends Action<unknown>>(
   serializeAction?: Serialize | undefined
 ) {
   if (message.type === 'ACTION') {
-    message.action = stringify(message.action, serializeAction);
-    message.payload = stringify(message.payload, serializeState);
-  } else if (message.type === 'STATE' || message.type === 'PARTIAL_STATE') {
+    post({
+      ...message,
+      action: stringify(message.action, serializeAction),
+      payload: stringify(message.payload, serializeState),
+    });
+  } else if (message.type === 'STATE') {
     const { actionsById, computedStates, committedState, ...rest } =
       message.payload;
-    message.payload = rest;
-    message.actionsById = stringify(actionsById, serializeAction);
-    message.computedStates = stringify(computedStates, serializeState);
-    message.committedState = typeof committedState !== 'undefined';
+    post({
+      ...message,
+      payload: rest,
+      actionsById: stringify(actionsById, serializeAction),
+      computedStates: stringify(computedStates, serializeState),
+      committedState: typeof committedState !== 'undefined',
+    });
+  } else if (message.type === 'PARTIAL_STATE') {
+    const { actionsById, computedStates, committedState, ...rest } =
+      message.payload;
+    post({
+      ...message,
+      payload: rest,
+      actionsById: stringify(actionsById, serializeAction),
+      computedStates: stringify(computedStates, serializeState),
+      committedState: typeof committedState !== 'undefined',
+    });
   } else if (message.type === 'EXPORT') {
-    message.payload = stringify(message.payload, serializeAction);
-    if (typeof message.committedState !== 'undefined') {
-      message.committedState = stringify(
-        message.committedState,
-        serializeState
-      );
-    }
+    post({
+      ...message,
+      payload: stringify(message.payload, serializeAction),
+      committedState:
+        typeof message.committedState !== 'undefined'
+          ? stringify(message.committedState, serializeState)
+          : (message.committedState as undefined),
+    });
+  } else {
+    post(message);
   }
-  post(message);
 }
 
-export function sendMessage(action, state, config, instanceId, name) {
+export function sendMessage(
+  action,
+  state,
+  config: Config,
+  instanceId?: number,
+  name?: string
+) {
   let amendedAction = action;
   if (typeof config !== 'object') {
     // Legacy: sending actions not from connected part
@@ -427,8 +543,11 @@ export function connect(preConfig) {
     sendMessage(amendedAction, amendedState, config);
   };
 
-  const init = (state, liftedData) => {
-    const message = {
+  const init = <S, A extends Action<unknown>>(
+    state: S,
+    liftedData: LiftedState<S, A, unknown>
+  ) => {
+    const message: InitMessage<S, A> = {
       type: 'INIT',
       payload: stringify(state, config.serialize),
       instanceId: id,
@@ -454,8 +573,8 @@ export function connect(preConfig) {
     post(message);
   };
 
-  const error = (payload) => {
-    post({ type: 'ERROR', payload, id, source });
+  const error = (payload: unknown) => {
+    post({ type: 'ERROR', payload, instanceId: id, source });
   };
 
   window.addEventListener('message', handleMessages, false);

@@ -4,6 +4,11 @@ import {
   isAllowed,
 } from '../options/syncOptions';
 import { TabMessage } from '../../../app/middlewares/api';
+import {
+  PageScriptToContentScriptMessage,
+  PageScriptToContentScriptMessageWithoutDisconnect,
+} from '../../../app/api';
+import { Action } from 'redux';
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
@@ -64,21 +69,46 @@ function handleDisconnect() {
   bg = undefined;
 }
 
-function tryCatch<A>(
-  fn: (args: PageScriptToContentScriptMessage) => void,
-  args: PageScriptToContentScriptMessage
+interface SplitMessageBase {
+  readonly type?: never;
+}
+
+interface SplitMessageStart extends SplitMessageBase {
+  readonly split: 'start';
+}
+
+interface SplitMessageChunk extends SplitMessageBase {
+  readonly instanceId: number;
+  readonly source: typeof pageSource;
+  readonly split: 'chunk';
+  readonly chunk: [string, string];
+}
+
+interface SplitMessageEnd extends SplitMessageBase {
+  readonly instanceId: number;
+  readonly source: typeof pageSource;
+  readonly split: 'end';
+}
+
+type SplitMessage = SplitMessageStart | SplitMessageChunk | SplitMessageEnd;
+
+function tryCatch<S, A extends Action<unknown>>(
+  fn: (args: PageScriptToContentScriptMessage<S, A> | SplitMessage) => void,
+  args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>
 ) {
   try {
     return fn(args);
   } catch (err) {
     if (err.message === 'Message length exceeded maximum allowed length.') {
       const instanceId = args.instanceId;
-      const newArgs = { split: 'start' };
-      const toSplit = [];
+      const newArgs: SplitMessageStart = {
+        split: 'start',
+      };
+      const toSplit: [string, string][] = [];
       let size = 0;
       let arg;
       Object.keys(args).map((key) => {
-        arg = args[key];
+        arg = args[key as keyof typeof args];
         if (typeof arg === 'string') {
           size += arg.length;
           if (size > maxChromeMsgSize) {
@@ -86,7 +116,7 @@ function tryCatch<A>(
             return;
           }
         }
-        newArgs[key] = arg;
+        newArgs[key as keyof typeof newArgs] = arg;
       });
       fn(newArgs);
       for (let i = 0; i < toSplit.length; i++) {
@@ -110,21 +140,6 @@ function tryCatch<A>(
   }
 }
 
-interface InitInstancePageScriptToContentScriptMessage {
-  readonly type: 'INIT_INSTANCE';
-  readonly instanceId: number;
-  readonly source: typeof pageSource;
-}
-
-interface DisconnectMessage {
-  readonly type: 'DISCONNECT';
-  readonly source: typeof pageSource;
-}
-
-export type PageScriptToContentScriptMessage =
-  | InitInstancePageScriptToContentScriptMessage
-  | DisconnectMessage;
-
 interface InitInstanceContentScriptToBackgroundMessage {
   readonly name: 'INIT_INSTANCE';
   readonly instanceId: number;
@@ -143,7 +158,9 @@ function postToBackground(message: ContentScriptToBackgroundMessage) {
   bg!.postMessage(message);
 }
 
-function send(message: never) {
+function send<S, A extends Action<unknown>>(
+  message: PageScriptToContentScriptMessage<S, A> | SplitMessage
+) {
   if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {
     getOptionsFromBg();
@@ -154,7 +171,9 @@ function send(message: never) {
 }
 
 // Resend messages from the page to the background script
-function handleMessages(event: MessageEvent<PageScriptToContentScriptMessage>) {
+function handleMessages<S, A extends Action<unknown>>(
+  event: MessageEvent<PageScriptToContentScriptMessage<S, A>>
+) {
   if (!isAllowed()) return;
   if (!event || event.source !== window || typeof event.data !== 'object') {
     return;

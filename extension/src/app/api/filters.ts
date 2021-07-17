@@ -139,6 +139,7 @@ export interface PartialLiftedState<S, A extends Action<unknown>> {
   readonly stagedActionIds: readonly number[];
   readonly currentStateIndex: number;
   readonly nextActionId: number;
+  readonly committedState?: S;
 }
 
 export function startingFrom<S, A extends Action<unknown>>(
