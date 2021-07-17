@@ -78,17 +78,11 @@ function filterStates(computedStates, stateSanitizer) {
 
 export function filterState<S, A extends Action<unknown>>(
   state: LiftedState<S, A, unknown>,
-  type,
   localFilter: LocalFilter | undefined,
   stateSanitizer: ((state: S, index: number) => S) | undefined,
   actionSanitizer: ((action: A, id: number) => A) | undefined,
-  nextActionId: number | undefined,
   predicate: ((state: S, action: A) => boolean) | undefined
 ) {
-  if (type === 'ACTION') {
-    return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
-  } else if (type !== 'STATE') return state;
-
   if (predicate || !noFiltersApplied(localFilter)) {
     const filteredStagedActionIds: number[] = [];
     const filteredComputedStates: { state: S; error?: string | undefined }[] =

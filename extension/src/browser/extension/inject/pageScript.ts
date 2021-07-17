@@ -187,7 +187,23 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       relayAction.cancel();
       const state = liftedState || store.liftedStore.getState();
       sendingActionId = state.nextActionId;
-      relay('STATE', state, undefined, undefined, libConfig);
+      toContentScript(
+        {
+          type: 'STATE',
+          payload: filterState(
+            state,
+            localFilter,
+            stateSanitizer,
+            actionSanitizer,
+            predicate
+          ),
+          source,
+          instanceId,
+          libConfig,
+        },
+        serializeState,
+        serializeAction
+      );
     },
     latency
   );
@@ -226,58 +242,6 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     );
   }
 
-  function relay(
-    type: 'ACTION',
-    state: S,
-    action: PerformAction<A>,
-    nextActionId: number
-  ): void;
-  function relay(
-    type: 'STATE',
-    state: LiftedState<S, A, unknown>,
-    action?: undefined,
-    nextActionId?: undefined,
-    libConfig?: unknown
-  ): void;
-  function relay(type: 'ERROR', message: unknown): void;
-  function relay(type: 'INIT_INSTANCE'): void;
-  function relay(type: 'GET_REPORT', reportId: string): void;
-  function relay(type: 'STOP'): void;
-  function relay(
-    type: string,
-    state?: S | LiftedState<S, A, unknown> | unknown,
-    action?: PerformAction<A> | undefined,
-    nextActionId?: number | undefined,
-    libConfig?: unknown
-  ) {
-    const message = {
-      type,
-      payload: filterState(
-        state,
-        type,
-        localFilter,
-        stateSanitizer,
-        actionSanitizer,
-        nextActionId,
-        predicate
-      ),
-      source,
-      instanceId,
-    };
-
-    if (type === 'ACTION') {
-      message.action = !actionSanitizer
-        ? action
-        : actionSanitizer(action.action, nextActionId - 1);
-      message.maxAge = getMaxAge();
-      message.nextActionId = nextActionId;
-    } else if (libConfig) {
-      message.libConfig = libConfig;
-    }
-
-    toContentScript(message, serializeState, serializeAction);
-  }
-
   const relayAction = throttle(() => {
     const liftedState = store.liftedStore.getState();
     const nextActionId = liftedState.nextActionId;
@@ -298,11 +262,25 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       }
       const state =
         liftedState.computedStates[liftedState.computedStates.length - 1].state;
-      relay(
-        'ACTION',
-        state,
-        liftedState.actionsById[nextActionId - 1],
-        nextActionId
+      toContentScript(
+        {
+          type: 'ACTION',
+          payload: !stateSanitizer
+            ? state
+            : stateSanitizer(state, nextActionId - 1),
+          source,
+          instanceId,
+          action: !actionSanitizer
+            ? liftedState.actionsById[nextActionId - 1]
+            : actionSanitizer(
+                liftedState.actionsById[nextActionId - 1].action,
+                nextActionId - 1
+              ),
+          maxAge: getMaxAge(),
+          nextActionId,
+        },
+        serializeState,
+        serializeAction
       );
       return;
     }
@@ -319,7 +297,22 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     sendingActionId = nextActionId;
     if (typeof payload === 'undefined') return;
     if ('skippedActionIds' in payload) {
-      relay('STATE', payload);
+      toContentScript(
+        {
+          type: 'STATE',
+          payload: filterState(
+            payload,
+            localFilter,
+            stateSanitizer,
+            actionSanitizer,
+            predicate
+          ),
+          source,
+          instanceId,
+        },
+        serializeState,
+        serializeAction
+      );
       return;
     }
     toContentScript(
@@ -341,7 +334,12 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       const result = evalAction(action, actionCreators);
       (store.initialDispatch || store.dispatch)(result);
     } catch (e) {
-      relay('ERROR', e.message);
+      toContentScript({
+        type: 'ERROR',
+        payload: e.message,
+        source,
+        instanceId,
+      });
     }
   }
 
@@ -352,7 +350,12 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       if (!nextLiftedState) return;
       store.liftedStore.dispatch({ type: 'IMPORT_STATE', ...nextLiftedState });
     } catch (e) {
-      relay('ERROR', e.message);
+      toContentScript({
+        type: 'ERROR',
+        payload: e.message,
+        source,
+        instanceId,
+      });
     }
   }
 
@@ -413,7 +416,12 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
         });
 
         if (reportId) {
-          relay('GET_REPORT', reportId);
+          toContentScript({
+            type: 'GET_REPORT',
+            payload: reportId,
+            source,
+            instanceId,
+          });
           reportId = null;
         }
         return;
@@ -421,7 +429,14 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
         monitor.stop();
         relayAction.cancel();
         relayState.cancel();
-        if (!message.failed) relay('STOP');
+        if (!message.failed) {
+          toContentScript({
+            type: 'STOP',
+            payload: undefined,
+            source,
+            instanceId,
+          });
+        }
     }
   }
 
@@ -471,7 +486,12 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       return true;
     });
 
-    relay('INIT_INSTANCE');
+    toContentScript({
+      type: 'INIT_INSTANCE',
+      payload: undefined,
+      source,
+      instanceId,
+    });
     store.subscribe(handleChange);
 
     if (typeof reportId === 'undefined') {

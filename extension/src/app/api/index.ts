@@ -8,6 +8,7 @@ import generateId from './generateInstanceId';
 import { PageScriptToContentScriptMessage } from '../../browser/extension/inject/contentScript';
 import { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
+import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 
 const listeners = {};
 export const source = '@devtools-page';
@@ -186,10 +187,62 @@ interface ExportMessage<S, A extends Action<unknown>> {
   readonly instanceId: number;
 }
 
+interface ActionMessage<S, A extends Action<unknown>> {
+  readonly type: 'ACTION';
+  readonly payload: S;
+  readonly source: typeof source;
+  readonly instanceId: number;
+  readonly action: PerformAction<A> | A;
+  readonly maxAge: number;
+  readonly nextActionId: number;
+}
+
+interface StateMessage<S, A extends Action<unknown>> {
+  readonly type: 'STATE';
+  readonly payload: LiftedState<S, A, unknown>;
+  readonly source: typeof source;
+  readonly instanceId: number;
+  readonly libConfig?: unknown;
+}
+
+interface ErrorMessage {
+  readonly type: 'ERROR';
+  readonly payload: unknown;
+  readonly source: typeof source;
+  readonly instanceId: number;
+}
+
+interface InitInstanceMessage {
+  readonly type: 'INIT_INSTANCE';
+  readonly payload: undefined;
+  readonly source: typeof source;
+  readonly instanceId: number;
+}
+
+interface GetReportMessage {
+  readonly type: 'GET_REPORT';
+  readonly payload: string;
+  readonly source: typeof source;
+  readonly instanceId: number;
+}
+
+interface StopMessage {
+  readonly type: 'STOP';
+  readonly payload: undefined;
+  readonly source: typeof source;
+  readonly instanceId: number;
+}
+
 type ToContentScriptMessage<S, A extends Action<unknown>> =
   | LiftedMessage
   | PartialStateMessage<S, A>
-  | ExportMessage<S, A>;
+  | ExportMessage<S, A>
+  | ActionMessage<S, A>
+  | StateMessage<S, A>
+  | ErrorMessage
+  | InitInstanceMessage
+  | GetReportMessage
+  | StopMessage;
 
 export function toContentScript<S, A extends Action<unknown>>(
   message: ToContentScriptMessage<S, A>,
