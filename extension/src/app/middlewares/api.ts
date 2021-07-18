@@ -29,14 +29,14 @@ interface TabMessageBase {
 
 interface StartAction extends TabMessageBase {
   readonly type: 'START';
-  readonly state: never;
-  readonly id: never;
+  readonly state?: never;
+  readonly id?: never;
 }
 
 interface StopAction extends TabMessageBase {
   readonly type: 'STOP';
-  readonly state: never;
-  readonly id: never;
+  readonly state?: never;
+  readonly id?: never;
 }
 
 interface DispatchAction extends TabMessageBase {
