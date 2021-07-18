@@ -1,4 +1,4 @@
-let handleError: () => boolean;
+let handleError: (() => boolean) | undefined;
 let lastTime = 0;
 
 function createExpBackoffTimer(step: number) {
@@ -42,7 +42,7 @@ function catchErrors(e: ErrorEvent) {
   postError(e.message);
 }
 
-export default function notifyErrors(onError: () => boolean) {
+export default function notifyErrors(onError?: () => boolean) {
   handleError = onError;
   window.addEventListener('error', catchErrors, false);
 }

@@ -158,6 +158,8 @@ interface SplitMessageBase {
 }
 
 interface SplitMessageStart extends SplitMessageBase {
+  readonly instanceId: number;
+  readonly source: typeof pageSource;
   readonly split: 'start';
 }
 
@@ -174,7 +176,10 @@ interface SplitMessageEnd extends SplitMessageBase {
   readonly split: 'end';
 }
 
-type SplitMessage = SplitMessageStart | SplitMessageChunk | SplitMessageEnd;
+export type SplitMessage =
+  | SplitMessageStart
+  | SplitMessageChunk
+  | SplitMessageEnd;
 
 function tryCatch<S, A extends Action<unknown>>(
   fn: (

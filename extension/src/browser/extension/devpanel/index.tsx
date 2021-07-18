@@ -18,7 +18,7 @@ const messageStyle: CSSProperties = {
   textAlign: 'center',
 };
 
-let rendered: boolean;
+let rendered: boolean | undefined;
 let store: Store<StoreState, StoreAction> | undefined;
 let bgConnection: chrome.runtime.Port;
 let naTimeout: NodeJS.Timeout;

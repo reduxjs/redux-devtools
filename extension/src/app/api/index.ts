@@ -9,8 +9,14 @@ import { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LibConfig } from '@redux-devtools/app/lib/actions';
+import { ContentScriptToPageScriptMessage } from '../../browser/extension/inject/contentScript';
+import { Position } from './openWindow';
 
-const listeners = {};
+const listeners: {
+  [instanceId: string]:
+    | ((message: ContentScriptToPageScriptMessage) => void)
+    | ((message: ContentScriptToPageScriptMessage) => void)[];
+} = {};
 export const source = '@devtools-page';
 
 function windowReplacer(key: string, value: unknown) {
@@ -129,15 +135,15 @@ interface InitMessage<S, A extends Action<unknown>> {
   libConfig?: LibConfig;
 }
 
-interface SerializedPartialLiftedState<S, A extends Action<unknown>> {
+interface SerializedPartialLiftedState {
   readonly stagedActionIds: readonly number[];
   readonly currentStateIndex: number;
   readonly nextActionId: number;
 }
 
-interface SerializedPartialStateMessage<S, A extends Action<unknown>> {
+interface SerializedPartialStateMessage {
   readonly type: 'PARTIAL_STATE';
-  readonly payload: SerializedPartialLiftedState<S, A>;
+  readonly payload: SerializedPartialLiftedState;
   readonly source: typeof source;
   readonly instanceId: number;
   readonly maxAge: number;
@@ -177,27 +183,41 @@ interface SerializedStateMessage<S, A extends Action<unknown>> {
   readonly computedStates: string;
   readonly committedState: boolean;
 }
-export type PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<
+
+interface OpenMessage {
+  readonly source: typeof source;
+  readonly type: 'OPEN';
+  readonly position: Position;
+}
+
+export type PageScriptToContentScriptMessageForwardedToMonitors<
   S,
   A extends Action<unknown>
 > =
   | InitMessage<S, A>
   | LiftedMessage
-  | SerializedPartialStateMessage<S, A>
+  | SerializedPartialStateMessage
   | SerializedExportMessage
   | SerializedActionMessage
-  | SerializedStateMessage<S, A>
+  | SerializedStateMessage<S, A>;
+
+export type PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<
+  S,
+  A extends Action<unknown>
+> =
+  | PageScriptToContentScriptMessageForwardedToMonitors<S, A>
   | ErrorMessage
-  | InitInstanceMessage
   | GetReportMessage
-  | StopMessage;
+  | StopMessage
+  | OpenMessage;
 
 export type PageScriptToContentScriptMessageWithoutDisconnect<
   S,
   A extends Action<unknown>
 > =
   | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
-  | InitInstancePageScriptToContentScriptMessage;
+  | InitInstancePageScriptToContentScriptMessage
+  | InitInstanceMessage;
 
 export type PageScriptToContentScriptMessage<S, A extends Action<unknown>> =
   | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
@@ -262,7 +282,7 @@ function amendActionType(
   return { action, timestamp, stack };
 }
 
-export interface LiftedMessage {
+interface LiftedMessage {
   readonly type: 'LIFTED';
   readonly liftedState: { readonly isPaused: boolean | undefined };
   readonly instanceId: number;
@@ -303,7 +323,7 @@ interface StateMessage<S, A extends Action<unknown>> {
   readonly libConfig?: LibConfig;
 }
 
-interface ErrorMessage {
+export interface ErrorMessage {
   readonly type: 'ERROR';
   readonly payload: unknown;
   readonly source: typeof source;
@@ -412,7 +432,7 @@ export function sendMessage(
   toContentScript(message, config.serialize, config.serialize);
 }
 
-function handleMessages(event) {
+function handleMessages(event: MessageEvent<ContentScriptToPageScriptMessage>) {
   if (process.env.BABEL_ENV !== 'test' && (!event || event.source !== window)) {
     return;
   }
@@ -420,33 +440,38 @@ function handleMessages(event) {
   if (!message || message.source !== '@devtools-extension') return;
   Object.keys(listeners).forEach((id) => {
     if (message.id && id !== message.id) return;
-    if (typeof listeners[id] === 'function') listeners[id](message);
+    const listenersForId = listeners[id];
+    if (typeof listenersForId === 'function') listenersForId(message);
     else {
-      listeners[id].forEach((fn) => {
+      listenersForId.forEach((fn) => {
         fn(message);
       });
     }
   });
 }
 
-export function setListener(onMessage, instanceId) {
+export function setListener(
+  onMessage: (message: ContentScriptToPageScriptMessage) => void,
+  instanceId: number
+) {
   listeners[instanceId] = onMessage;
   window.addEventListener('message', handleMessages, false);
 }
 
-const liftListener = (listener, config) => (message) => {
-  let data = {};
-  if (message.type === 'IMPORT') {
-    data.type = 'DISPATCH';
-    data.payload = {
-      type: 'IMPORT_STATE',
-      ...importState(message.state, config),
-    };
-  } else {
-    data = message;
-  }
-  listener(data);
-};
+const liftListener =
+  (listener, config: Config) => (message: ContentScriptToPageScriptMessage) => {
+    let data = {};
+    if (message.type === 'IMPORT') {
+      data.type = 'DISPATCH';
+      data.payload = {
+        type: 'IMPORT_STATE',
+        ...importState(message.state, config),
+      };
+    } else {
+      data = message;
+    }
+    listener(data);
+  };
 
 export function disconnect() {
   window.removeEventListener('message', handleMessages);
@@ -471,7 +496,7 @@ export function connect(preConfig: Config) {
   let delayedActions = [];
   let delayedStates = [];
 
-  const rootListener = (action) => {
+  const rootListener = (action: ContentScriptToPageScriptMessage) => {
     if (autoPause) {
       if (action.type === 'START') isPaused = false;
       else if (action.type === 'STOP') isPaused = true;
@@ -495,11 +520,14 @@ export function connect(preConfig: Config) {
   const subscribe = (listener) => {
     if (!listener) return undefined;
     const liftedListener = liftListener(listener, config);
-    listeners[id].push(liftedListener);
+    const listenersForId = listeners[id] as ((
+      message: ContentScriptToPageScriptMessage
+    ) => void)[];
+    listenersForId.push(liftedListener);
 
     return function unsubscribe() {
-      const index = listeners[id].indexOf(liftedListener);
-      listeners[id].splice(index, 1);
+      const index = listenersForId.indexOf(liftedListener);
+      listenersForId.splice(index, 1);
     };
   };
 

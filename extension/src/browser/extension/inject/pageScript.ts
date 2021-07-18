@@ -36,11 +36,7 @@ import {
   getSerializeParameter,
   Serialize,
 } from '../../../app/api';
-import {
-  LiftedAction,
-  LiftedState,
-  PerformAction,
-} from '@redux-devtools/instrument';
+import { LiftedAction, LiftedState } from '@redux-devtools/instrument';
 import {
   CustomAction,
   DispatchAction,
@@ -63,7 +59,7 @@ function deprecateParam(oldParam: string, newParam: string) {
   /* eslint-enable no-console */
 }
 
-interface SerializeWithImmutable extends Serialize {
+export interface SerializeWithImmutable extends Serialize {
   readonly immutable?: typeof Immutable;
   readonly refs?: (new (data: any) => unknown)[] | null;
 }
@@ -81,12 +77,12 @@ export interface ConfigWithExpandedMaxAge {
     | boolean
     | ((key: string, value: unknown) => unknown)
     | Serialize;
-  readonly statesFilter?: <S>(state: S, index: number) => S;
+  readonly statesFilter?: <S>(state: S, index?: number) => S;
   readonly actionsFilter?: <A extends Action<unknown>>(
     action: A,
     id: number
   ) => A;
-  readonly stateSanitizer?: <S>(state: S, index: number) => S;
+  readonly stateSanitizer?: <S>(state: S, index?: number) => S;
   readonly actionSanitizer?: <A extends Action<unknown>>(
     action: A,
     id: number
@@ -117,6 +113,7 @@ export interface ConfigWithExpandedMaxAge {
   name?: string;
   readonly autoPause?: boolean;
   readonly features?: Features;
+  readonly type?: string;
 }
 
 export interface Config extends ConfigWithExpandedMaxAge {
@@ -131,7 +128,7 @@ interface ReduxDevtoolsExtension {
   ): Store<S, A>;
   (config?: Config): StoreEnhancer;
   open: (position?: Position) => void;
-  notifyErrors: (onError: () => boolean) => void;
+  notifyErrors: (onError?: () => boolean) => void;
   disconnect: () => void;
 }
 

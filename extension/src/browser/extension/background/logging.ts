@@ -1,6 +1,10 @@
 import { LIFTED_ACTION } from '@redux-devtools/app/lib/constants/actionTypes';
 
-export function getReport(reportId, tabId, instanceId) {
+export function getReport(
+  reportId: string,
+  tabId: string | number,
+  instanceId: number
+) {
   chrome.storage.local.get(['s:hostname', 's:port', 's:secure'], (options) => {
     if (!options['s:hostname'] || !options['s:port']) return;
     const url = `${options['s:secure'] ? 'https' : 'http'}://${

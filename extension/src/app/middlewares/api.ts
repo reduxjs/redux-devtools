@@ -15,11 +15,21 @@ import { getReport } from '../../browser/extension/background/logging';
 import {
   CustomAction,
   DispatchAction as AppDispatchAction,
+  LibConfig,
   LiftedActionAction,
   StoreAction,
 } from '@redux-devtools/app/lib/actions';
 import { Action, Dispatch } from 'redux';
-import { ContentScriptToBackgroundMessage } from '../../browser/extension/inject/contentScript';
+import {
+  ContentScriptToBackgroundMessage,
+  SplitMessage,
+} from '../../browser/extension/inject/contentScript';
+import {
+  ErrorMessage,
+  PageScriptToContentScriptMessageForwardedToMonitors,
+  PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
+} from '../api';
+import { LiftedState } from '@redux-devtools/instrument';
 
 interface TabMessageBase {
   readonly type: string;
@@ -72,8 +82,85 @@ interface NAAction {
   readonly id: string;
 }
 
-interface UpdateStateAction {
+interface InitMessage<S, A extends Action<unknown>> {
+  readonly type: 'INIT';
+  readonly payload: string;
+  readonly instanceId: string;
+  readonly source: '@devtools-page';
+  action?: string;
+  name?: string | undefined;
+  liftedState?: LiftedState<S, A, unknown>;
+  libConfig?: LibConfig;
+}
+
+interface LiftedMessage {
+  readonly type: 'LIFTED';
+  readonly liftedState: { readonly isPaused: boolean | undefined };
+  readonly instanceId: string;
+  readonly source: '@devtools-page';
+}
+
+interface SerializedPartialLiftedState {
+  readonly stagedActionIds: readonly number[];
+  readonly currentStateIndex: number;
+  readonly nextActionId: number;
+}
+
+interface SerializedPartialStateMessage {
+  readonly type: 'PARTIAL_STATE';
+  readonly payload: SerializedPartialLiftedState;
+  readonly source: '@devtools-page';
+  readonly instanceId: string;
+  readonly maxAge: number;
+  readonly actionsById: string;
+  readonly computedStates: string;
+  readonly committedState: boolean;
+}
+
+interface SerializedExportMessage {
+  readonly type: 'EXPORT';
+  readonly payload: string;
+  readonly committedState: string | undefined;
+  readonly source: '@devtools-page';
+  readonly instanceId: string;
+}
+
+interface SerializedActionMessage {
+  readonly type: 'ACTION';
+  readonly payload: string;
+  readonly source: '@devtools-page';
+  readonly instanceId: string;
+  readonly action: string;
+  readonly maxAge: number;
+  readonly nextActionId: number;
+}
+
+interface SerializedStateMessage<S, A extends Action<unknown>> {
+  readonly type: 'STATE';
+  readonly payload: Omit<
+    LiftedState<S, A, unknown>,
+    'actionsById' | 'computedStates' | 'committedState'
+  >;
+  readonly source: '@devtools-page';
+  readonly instanceId: string;
+  readonly libConfig?: LibConfig;
+  readonly actionsById: string;
+  readonly computedStates: string;
+  readonly committedState: boolean;
+}
+
+type UpdateStateRequest<S, A extends Action<unknown>> =
+  | InitMessage<S, A>
+  | LiftedMessage
+  | SerializedPartialStateMessage
+  | SerializedExportMessage
+  | SerializedActionMessage
+  | SerializedStateMessage<S, A>;
+
+interface UpdateStateAction<S, A extends Action<unknown>> {
   readonly type: typeof UPDATE_STATE;
+  readonly request?: UpdateStateRequest<S, A>;
+  readonly id?: string | number;
 }
 
 export type TabMessage =
@@ -84,17 +171,27 @@ export type TabMessage =
   | ImportAction
   | ActionAction
   | ExportAction;
-type PanelMessage = NAAction;
-type MonitorMessage = UpdateStateAction;
+type PanelMessage<S, A extends Action<unknown>> =
+  | NAAction
+  | ErrorMessage
+  | UpdateStateAction<S, A>;
+type MonitorMessage<S, A extends Action<unknown>> =
+  | NAAction
+  | ErrorMessage
+  | UpdateStateAction<S, A>;
 
 type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: (message: TabMessage) => void;
 };
 type PanelPort = Omit<chrome.runtime.Port, 'postMessage'> & {
-  postMessage: (message: PanelMessage) => void;
+  postMessage: <S, A extends Action<unknown>>(
+    message: PanelMessage<S, A>
+  ) => void;
 };
 type MonitorPort = Omit<chrome.runtime.Port, 'postMessage'> & {
-  postMessage: (message: MonitorMessage) => void;
+  postMessage: <S, A extends Action<unknown>>(
+    message: MonitorMessage<S, A>
+  ) => void;
 };
 
 const CONNECTED = 'socket/CONNECTED';
@@ -108,17 +205,25 @@ const connections: {
   panel: {},
   monitor: {},
 };
-const chunks = {};
+const chunks: {
+  [instanceId: string]: PageScriptToContentScriptMessageForwardedToMonitors<
+    unknown,
+    Action<unknown>
+  >;
+} = {};
 let monitors = 0;
 let isMonitored = false;
 
 const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
   sender.tab ? sender.tab.id! : name || sender.id!;
 
-type MonitorAction = NAAction;
+type MonitorAction<S, A extends Action<unknown>> =
+  | NAAction
+  | ErrorMessage
+  | UpdateStateAction<S, A>;
 
-function toMonitors(
-  action: MonitorAction,
+function toMonitors<S, A extends Action<unknown>>(
+  action: MonitorAction<S, A>,
   tabId?: string | number,
   verbose?: boolean
 ) {
@@ -195,12 +300,14 @@ function togglePersist() {
   }
 }
 
-type BackgroundStoreMessage = unknown;
+type BackgroundStoreMessage<S, A extends Action<unknown>> =
+  | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
+  | SplitMessage;
 type BackgroundStoreResponse = { readonly options: Options };
 
 // Receive messages from content scripts
-function messaging(
-  request: BackgroundStoreMessage,
+function messaging<S, A extends Action<unknown>>(
+  request: BackgroundStoreMessage<S, A>,
   sender: chrome.runtime.MessageSender,
   sendResponse?: (response?: BackgroundStoreResponse) => void
 ) {
@@ -259,9 +366,13 @@ function messaging(
     return;
   }
 
-  const action = { type: UPDATE_STATE, request, id: tabId };
+  const action: UpdateStateAction<S, A> = {
+    type: UPDATE_STATE,
+    request,
+    id: tabId,
+  };
   const instanceId = `${tabId}/${request.instanceId}`;
-  if (request.split) {
+  if ('split' in request) {
     if (request.split === 'start') {
       chunks[instanceId] = request;
       return;

@@ -1,6 +1,11 @@
 import mapValues from 'lodash/mapValues';
 import jsan from 'jsan';
 import seralizeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
+import {
+  Config,
+  SerializeWithImmutable,
+} from '../../browser/extension/inject/pageScript';
+import Immutable from 'immutable';
 
 function deprecate(param: string) {
   // eslint-disable-next-line no-console
@@ -9,14 +14,34 @@ function deprecate(param: string) {
   );
 }
 
+interface SerializeWithRequiredImmutable extends SerializeWithImmutable {
+  readonly immutable: typeof Immutable;
+}
+
+function isSerializeWithImmutable(
+  serialize: boolean | SerializeWithImmutable
+): serialize is SerializeWithRequiredImmutable {
+  return !!(serialize as SerializeWithImmutable).immutable;
+}
+
+interface SerializeWithRequiredReviver extends SerializeWithImmutable {
+  readonly reviver: (key: string, value: unknown) => unknown;
+}
+
+function isSerializeWithReviver(
+  serialize: boolean | SerializeWithImmutable
+): serialize is SerializeWithRequiredReviver {
+  return !!(serialize as SerializeWithImmutable).immutable;
+}
+
 export default function importState(
-  state,
-  { deserializeState, deserializeAction, serialize }
+  state: string | undefined,
+  { deserializeState, deserializeAction, serialize }: Config
 ) {
   if (!state) return undefined;
   let parse = jsan.parse;
   if (serialize) {
-    if (serialize.immutable) {
+    if (isSerializeWithImmutable(serialize)) {
       parse = (v) =>
         jsan.parse(
           v,
@@ -27,7 +52,7 @@ export default function importState(
             serialize.reviver
           ).reviver
         );
-    } else if (serialize.reviver) {
+    } else if (isSerializeWithReviver(serialize)) {
       parse = (v) => jsan.parse(v, serialize.reviver);
     }
   }
