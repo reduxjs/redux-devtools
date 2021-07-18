@@ -325,7 +325,7 @@ interface StateMessage<S, A extends Action<unknown>> {
 
 export interface ErrorMessage {
   readonly type: 'ERROR';
-  readonly payload: unknown;
+  readonly payload: string;
   readonly source: typeof source;
   readonly instanceId: number;
 }
@@ -607,7 +607,7 @@ export function connect(preConfig: Config) {
     post(message);
   };
 
-  const error = (payload: unknown) => {
+  const error = (payload: string) => {
     post({ type: 'ERROR', payload, instanceId: id, source });
   };
 

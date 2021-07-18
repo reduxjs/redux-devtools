@@ -157,10 +157,14 @@ type UpdateStateRequest<S, A extends Action<unknown>> =
   | SerializedActionMessage
   | SerializedStateMessage<S, A>;
 
+interface EmptyUpdateStateAction {
+  readonly type: typeof UPDATE_STATE;
+}
+
 interface UpdateStateAction<S, A extends Action<unknown>> {
   readonly type: typeof UPDATE_STATE;
-  readonly request?: UpdateStateRequest<S, A>;
-  readonly id?: string | number;
+  readonly request: UpdateStateRequest<S, A>;
+  readonly id: string | number;
 }
 
 export type TabMessage =
@@ -171,14 +175,11 @@ export type TabMessage =
   | ImportAction
   | ActionAction
   | ExportAction;
-type PanelMessage<S, A extends Action<unknown>> =
+export type PanelMessage<S, A extends Action<unknown>> =
   | NAAction
   | ErrorMessage
   | UpdateStateAction<S, A>;
-type MonitorMessage<S, A extends Action<unknown>> =
-  | NAAction
-  | ErrorMessage
-  | UpdateStateAction<S, A>;
+export type MonitorMessage = NAAction | ErrorMessage | EmptyUpdateStateAction;
 
 type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: (message: TabMessage) => void;
@@ -189,9 +190,7 @@ type PanelPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   ) => void;
 };
 type MonitorPort = Omit<chrome.runtime.Port, 'postMessage'> & {
-  postMessage: <S, A extends Action<unknown>>(
-    message: MonitorMessage<S, A>
-  ) => void;
+  postMessage: (message: MonitorMessage) => void;
 };
 
 const CONNECTED = 'socket/CONNECTED';

@@ -7,9 +7,10 @@ import configureStore from '../../../app/stores/panelStore';
 import getPreloadedState from '../background/getPreloadedState';
 
 import '../../views/devpanel.pug';
-import { PreloadedState, Store } from 'redux';
+import { Action, PreloadedState, Store } from 'redux';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
 import { StoreAction } from '@redux-devtools/app/lib/actions';
+import { PanelMessage } from '../../../app/middlewares/api';
 
 const position = location.hash;
 const messageStyle: CSSProperties = {
@@ -96,15 +97,17 @@ function init(id: number) {
   bgConnection = chrome.runtime.connect({
     name: id ? id.toString() : undefined,
   });
-  bgConnection.onMessage.addListener((message) => {
-    if (message.type === 'NA') {
-      if (message.id === id) renderNA();
-      else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });
-    } else {
-      if (!rendered) renderDevTools();
-      store!.dispatch(message);
+  bgConnection.onMessage.addListener(
+    <S, A extends Action<unknown>>(message: PanelMessage<S, A>) => {
+      if (message.type === 'NA') {
+        if (message.id === id) renderNA();
+        else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });
+      } else {
+        if (!rendered) renderDevTools();
+        store!.dispatch(message);
+      }
     }
-  });
+  );
 }
 
 init(chrome.devtools.inspectedWindow.tabId);
