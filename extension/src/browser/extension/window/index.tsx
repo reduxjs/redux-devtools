@@ -9,6 +9,7 @@ import configureStore from '../../../app/stores/windowStore';
 import getPreloadedState from '../background/getPreloadedState';
 
 import '../../views/window.pug';
+import { MonitorMessage } from '../../../app/middlewares/api';
 
 const position = location.hash;
 let preloadedState: PreloadedState<StoreState>;
@@ -24,7 +25,7 @@ chrome.runtime.getBackgroundPage((window) => {
     name += chrome.devtools.inspectedWindow.tabId;
   }
   const bg = chrome.runtime.connect({ name });
-  const update = (action) => {
+  const update = (action?: MonitorMessage) => {
     localStore.dispatch(action || { type: UPDATE_STATE });
   };
   bg.onMessage.addListener(update);
