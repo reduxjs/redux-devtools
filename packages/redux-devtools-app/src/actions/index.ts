@@ -45,6 +45,7 @@ import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
 import { LiftedAction } from '@redux-devtools/core';
 import { Data } from '../reducers/reports';
+import { LiftedState } from '@redux-devtools/instrument';
 
 let monitorReducer: (
   monitorProps: unknown,
@@ -363,10 +364,10 @@ export interface LibConfig {
 }
 
 export interface RequestBase {
-  id: string;
+  id?: string;
   instanceId?: string;
   action?: string;
-  name?: string;
+  name?: string | undefined;
   libConfig?: LibConfig;
   actionsById?: string;
   computedStates?: string;
@@ -376,14 +377,15 @@ export interface RequestBase {
 }
 interface InitRequest extends RequestBase {
   type: 'INIT';
-  action: string;
+  action?: string;
+  payload?: string;
 }
 interface ActionRequest extends RequestBase {
   type: 'ACTION';
-  isExcess: boolean;
+  isExcess?: boolean;
   nextActionId: number;
   maxAge: number;
-  batched: boolean;
+  batched?: boolean;
 }
 interface StateRequest extends RequestBase {
   type: 'STATE';
@@ -412,7 +414,7 @@ export type Request =
 interface UpdateStateAction {
   type: typeof UPDATE_STATE;
   request?: Request;
-  id?: string;
+  id?: string | number;
 }
 
 interface SetStateAction {
@@ -494,8 +496,8 @@ interface UnsubscribeAction {
 export interface EmitAction {
   type: typeof EMIT;
   message: string;
-  id?: string | false;
-  instanceId?: string;
+  id?: string | number | false;
+  instanceId?: string | number;
   action?: unknown;
   state?: unknown;
 }

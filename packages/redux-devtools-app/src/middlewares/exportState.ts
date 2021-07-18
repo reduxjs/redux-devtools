@@ -5,7 +5,7 @@ import { Dispatch, MiddlewareAPI } from 'redux';
 import { ExportRequest, StoreAction } from '../actions';
 import { StoreState } from '../reducers';
 
-let toExport: string | undefined;
+let toExport: string | number | undefined;
 
 function download(state: string) {
   const blob = new Blob([state], { type: 'octet/stream' });
