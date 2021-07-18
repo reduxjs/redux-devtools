@@ -14,6 +14,7 @@ import {
   CustomAction,
   DispatchAction as AppDispatchAction,
 } from '@redux-devtools/app/lib/actions';
+import { LiftedState } from '@redux-devtools/instrument';
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
@@ -89,6 +90,27 @@ export type ContentScriptToPageScriptMessage =
   | ActionAction
   | ExportAction
   | UpdateAction;
+
+interface ImportStatePayload<S, A extends Action<unknown>> {
+  readonly type: 'IMPORT_STATE';
+  readonly nextLiftedState: LiftedState<S, A, unknown> | readonly A[];
+  readonly preloadedState?: S;
+}
+
+interface ImportStateDispatchAction<S, A extends Action<unknown>> {
+  readonly type: 'DISPATCH';
+  readonly payload: ImportStatePayload<S, A>;
+}
+
+export type ListenerMessage<S, A extends Action<unknown>> =
+  | StartAction
+  | StopAction
+  | DispatchAction
+  | ImportAction
+  | ActionAction
+  | ExportAction
+  | UpdateAction
+  | ImportStateDispatchAction<S, A>;
 
 function postToPageScript(message: ContentScriptToPageScriptMessage) {
   window.postMessage(message, '*');

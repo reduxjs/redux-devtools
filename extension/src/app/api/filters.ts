@@ -44,31 +44,41 @@ export const noFiltersApplied = (localFilter: LocalFilter | undefined) =>
     !window.devToolsOptions.filter ||
     window.devToolsOptions.filter === FilterState.DO_NOT_FILTER);
 
-export function isFiltered(action, localFilter: LocalFilter | undefined) {
+export function isFiltered<A extends Action<unknown>>(
+  action: A | string,
+  localFilter: LocalFilter | undefined
+) {
   if (
     noFiltersApplied(localFilter) ||
-    (typeof action !== 'string' && typeof action.type.match !== 'function')
+    (typeof action !== 'string' &&
+      typeof (action.type as string).match !== 'function')
   ) {
     return false;
   }
 
   const { whitelist, blacklist } = localFilter || window.devToolsOptions || {};
-  const actionType = action.type || action;
+  const actionType = ((action as A).type || action) as string;
   return (
     (whitelist && !actionType.match(whitelist)) ||
     (blacklist && actionType.match(blacklist))
   );
 }
 
-function filterActions(actionsById, actionSanitizer) {
+function filterActions<A extends Action<unknown>>(
+  actionsById: { [p: number]: PerformAction<A> },
+  actionSanitizer: ((action: A, id: number) => A) | undefined
+) {
   if (!actionSanitizer) return actionsById;
-  return mapValues(actionsById, (action, id) => ({
+  return mapValues(actionsById, (action, id: number) => ({
     ...action,
     action: actionSanitizer(action.action, id),
   }));
 }
 
-function filterStates(computedStates, stateSanitizer) {
+function filterStates<S>(
+  computedStates: { state: S; error?: string | undefined }[],
+  stateSanitizer: ((state: S, index: number) => S) | undefined
+) {
   if (!stateSanitizer) return computedStates;
   return computedStates.map((state, idx) => ({
     ...state,

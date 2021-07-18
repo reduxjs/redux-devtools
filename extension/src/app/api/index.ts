@@ -7,9 +7,16 @@ import importState from './importState';
 import generateId from './generateInstanceId';
 import { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
-import { LiftedState, PerformAction } from '@redux-devtools/instrument';
+import {
+  EnhancedStore,
+  LiftedState,
+  PerformAction,
+} from '@redux-devtools/instrument';
 import { LibConfig } from '@redux-devtools/app/lib/actions';
-import { ContentScriptToPageScriptMessage } from '../../browser/extension/inject/contentScript';
+import {
+  ContentScriptToPageScriptMessage,
+  ListenerMessage,
+} from '../../browser/extension/inject/contentScript';
 import { Position } from './openWindow';
 
 const listeners: {
@@ -267,19 +274,23 @@ function getStackTrace(
   return stack;
 }
 
-function amendActionType(
-  action,
-  config,
+function amendActionType<A extends Action<unknown>>(
+  action: A | StructuralPerformAction<A> | string,
+  config: Config,
   toExcludeFromTrace: Function | undefined
-) {
+): StructuralPerformAction<A> {
   let timestamp = Date.now();
   let stack = getStackTrace(config, toExcludeFromTrace);
   if (typeof action === 'string') {
-    return { action: { type: action }, timestamp, stack };
+    return { action: { type: action } as A, timestamp, stack };
   }
-  if (!action.type) return { action: { type: 'update' }, timestamp, stack };
-  if (action.action) return stack ? { stack, ...action } : action;
-  return { action, timestamp, stack };
+  if (!(action as A).type)
+    return { action: { type: 'update' } as A, timestamp, stack };
+  if ((action as StructuralPerformAction<A>).action)
+    return (
+      stack ? { stack, ...action } : action
+    ) as StructuralPerformAction<A>;
+  return { action, timestamp, stack } as StructuralPerformAction<A>;
 }
 
 interface LiftedMessage {
@@ -305,12 +316,26 @@ interface ExportMessage<S, A extends Action<unknown>> {
   readonly instanceId: number;
 }
 
+interface StructuralPerformAction<A extends Action<unknown>> {
+  readonly action: A;
+  readonly timestamp?: number;
+  readonly stack?: string;
+}
+
+type SingleUserAction<A extends Action<unknown>> =
+  | PerformAction<A>
+  | StructuralPerformAction<A>
+  | A;
+type UserAction<A extends Action<unknown>> =
+  | SingleUserAction<A>
+  | readonly SingleUserAction<A>[];
+
 interface ActionMessage<S, A extends Action<unknown>> {
   readonly type: 'ACTION';
   readonly payload: S;
   readonly source: typeof source;
   readonly instanceId: number;
-  readonly action: PerformAction<A> | A;
+  readonly action: UserAction<A>;
   readonly maxAge: number;
   readonly nextActionId: number;
 }
@@ -407,9 +432,9 @@ export function toContentScript<S, A extends Action<unknown>>(
   }
 }
 
-export function sendMessage(
-  action,
-  state,
+export function sendMessage<S, A extends Action<unknown>>(
+  action: StructuralPerformAction<A> | StructuralPerformAction<A>[],
+  state: S,
   config: Config,
   instanceId?: number,
   name?: string
@@ -459,18 +484,22 @@ export function setListener(
 }
 
 const liftListener =
-  (listener, config: Config) => (message: ContentScriptToPageScriptMessage) => {
-    let data = {};
+  <S, A extends Action<unknown>>(
+    listener: (message: ListenerMessage<S, A>) => void,
+    config: Config
+  ) =>
+  (message: ContentScriptToPageScriptMessage) => {
     if (message.type === 'IMPORT') {
-      data.type = 'DISPATCH';
-      data.payload = {
-        type: 'IMPORT_STATE',
-        ...importState(message.state, config),
-      };
+      listener({
+        type: 'DISPATCH',
+        payload: {
+          type: 'IMPORT_STATE',
+          ...importState(message.state, config),
+        },
+      });
     } else {
-      data = message;
+      listener(message);
     }
-    listener(data);
   };
 
 export function disconnect() {
@@ -493,8 +522,8 @@ export function connect(preConfig: Config) {
   const localFilter = getLocalFilter(config);
   const autoPause = config.autoPause;
   let isPaused = autoPause;
-  let delayedActions = [];
-  let delayedStates = [];
+  let delayedActions: StructuralPerformAction<Action<unknown>>[] = [];
+  let delayedStates: unknown[] = [];
 
   const rootListener = (action: ContentScriptToPageScriptMessage) => {
     if (autoPause) {
@@ -517,7 +546,9 @@ export function connect(preConfig: Config) {
 
   listeners[id] = [rootListener];
 
-  const subscribe = (listener) => {
+  const subscribe = <S, A extends Action<unknown>>(
+    listener: (message: ListenerMessage<S, A>) => void
+  ) => {
     if (!listener) return undefined;
     const liftedListener = liftListener(listener, config);
     const listenersForId = listeners[id] as ((
@@ -541,7 +572,7 @@ export function connect(preConfig: Config) {
     delayedStates = [];
   }, latency);
 
-  const send = (action, state) => {
+  const send = <S, A extends Action<unknown>>(action: A, state: S) => {
     if (
       isPaused ||
       isFiltered(action, localFilter) ||
@@ -550,7 +581,7 @@ export function connect(preConfig: Config) {
       return;
     }
 
-    let amendedAction = action;
+    let amendedAction: A | StructuralPerformAction<A> = action;
     const amendedState = config.stateSanitizer
       ? config.stateSanitizer(state)
       : state;
@@ -561,7 +592,7 @@ export function connect(preConfig: Config) {
           amendedAction = {
             action: { type: amendedAction },
             timestamp: Date.now(),
-          };
+          } as unknown as A;
         }
       } else if (config.actionSanitizer) {
         amendedAction = config.actionSanitizer(action);
@@ -624,8 +655,15 @@ export function connect(preConfig: Config) {
   };
 }
 
-export function updateStore(stores) {
-  return function (newStore, instanceId) {
+export function updateStore<S, A extends Action<unknown>>(
+  stores: {
+    [K in string | number]: EnhancedStore<S, Action<A>, unknown>;
+  }
+) {
+  return function (
+    newStore: EnhancedStore<S, Action<A>, unknown>,
+    instanceId: number
+  ) {
     /* eslint-disable no-console */
     console.warn(
       '`__REDUX_DEVTOOLS_EXTENSION__.updateStore` is deprecated, remove it and just use ' +

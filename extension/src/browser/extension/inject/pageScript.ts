@@ -47,7 +47,7 @@ import { Features } from '@redux-devtools/app/lib/reducers/instances';
 
 const source = '@devtools-page';
 let stores: {
-  [instanceId: number]: EnhancedStore<unknown, Action<unknown>, unknown>;
+  [K in string | number]: EnhancedStore<unknown, Action<unknown>, unknown>;
 } = {};
 let reportId: string | null | undefined;
 
@@ -80,12 +80,12 @@ export interface ConfigWithExpandedMaxAge {
   readonly statesFilter?: <S>(state: S, index?: number) => S;
   readonly actionsFilter?: <A extends Action<unknown>>(
     action: A,
-    id: number
+    id?: number
   ) => A;
   readonly stateSanitizer?: <S>(state: S, index?: number) => S;
   readonly actionSanitizer?: <A extends Action<unknown>>(
     action: A,
-    id: number
+    id?: number
   ) => A;
   readonly predicate?: <S, A extends Action<unknown>>(
     state: S,
@@ -114,6 +114,7 @@ export interface ConfigWithExpandedMaxAge {
   readonly autoPause?: boolean;
   readonly features?: Features;
   readonly type?: string;
+  readonly getActionType?: <A extends Action<unknown>>(action: A) => A;
 }
 
 export interface Config extends ConfigWithExpandedMaxAge {
