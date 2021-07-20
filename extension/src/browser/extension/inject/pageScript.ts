@@ -1,7 +1,12 @@
-import { getActionsArray, evalAction } from '@redux-devtools/utils';
+import {
+  getActionsArray,
+  evalAction,
+  ActionCreatorObject,
+} from '@redux-devtools/utils';
 import throttle from 'lodash/throttle';
 import {
   Action,
+  ActionCreator,
   PreloadedState,
   Reducer,
   Store,
@@ -115,6 +120,9 @@ export interface ConfigWithExpandedMaxAge {
   readonly features?: Features;
   readonly type?: string;
   readonly getActionType?: <A extends Action<unknown>>(action: A) => A;
+  readonly actionCreators: {
+    readonly [key: string]: ActionCreator<Action<unknown>>;
+  };
 }
 
 export interface Config extends ConfigWithExpandedMaxAge {
@@ -161,7 +169,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   let store: EnhancedStore<S, A, unknown>;
   let errorOccurred = false;
   let maxAge: number | undefined;
-  let actionCreators;
+  let actionCreators: readonly ActionCreatorObject[];
   let sendingActionId = 1;
   const instanceId = generateId(config.instanceId);
   const localFilter = getLocalFilter(config);
@@ -375,26 +383,25 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   }
 
   function dispatchMonitorAction(action: DispatchAction) {
-    const type = action.type;
-    const features = config.features;
+    const features = config!.features;
     if (features) {
       if (
         !features.jump &&
-        (type === 'JUMP_TO_STATE' || type === 'JUMP_TO_ACTION')
+        (action.type === 'JUMP_TO_STATE' || action.type === 'JUMP_TO_ACTION')
       ) {
         return;
       }
-      if (!features.skip && type === 'TOGGLE_ACTION') return;
-      if (!features.reorder && type === 'REORDER_ACTION') return;
-      if (!features.import && type === 'IMPORT_STATE') return;
-      if (!features.lock && type === 'LOCK_CHANGES') return;
-      if (!features.pause && type === 'PAUSE_RECORDING') return;
+      if (!features.skip && action.type === 'TOGGLE_ACTION') return;
+      if (!features.reorder && action.type === 'REORDER_ACTION') return;
+      if (!features.import && action.type === 'IMPORT_STATE') return;
+      if (!features.lock && action.type === 'LOCK_CHANGES') return;
+      if (!features.pause && action.type === 'PAUSE_RECORDING') return;
     }
-    if (type === 'JUMP_TO_STATE') {
+    if (action.type === 'JUMP_TO_STATE') {
       const liftedState = store.liftedStore.getState();
       const index = liftedState.stagedActionIds.indexOf(action.actionId);
       if (index === -1) return;
-      store.liftedStore.dispatch({ type, index });
+      store.liftedStore.dispatch({ type: action.type, index });
       return;
     }
     store.liftedStore.dispatch(action);
@@ -419,8 +426,8 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
         return;
       case 'START':
         monitor.start(true);
-        if (!actionCreators && config.actionCreators) {
-          actionCreators = getActionsArray(config.actionCreators);
+        if (!actionCreators && config!.actionCreators) {
+          actionCreators = getActionsArray(config!.actionCreators);
         }
         relayState(undefined, {
           name: config!.name || document.title,

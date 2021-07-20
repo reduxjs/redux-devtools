@@ -62,7 +62,9 @@ export default function openDevToolsWindow(position: DevToolsPosition) {
   switch (position) {
     case 'devtools-right':
       params.left =
-        window.screen.availLeft + window.screen.availWidth - params.width!;
+        (window.screen as unknown as { availLeft: number }).availLeft +
+        window.screen.availWidth -
+        params.width!;
       break;
     case 'devtools-bottom':
       params.height = 420;

@@ -3,22 +3,24 @@ import jsan from 'jsan';
 import { nanoid } from 'nanoid/non-secure';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import Immutable from 'immutable';
-import { Action } from 'redux';
+import { Action, ActionCreator } from 'redux';
 
 export function generateId(id: string | undefined) {
   return id || nanoid(7);
 }
 
+export interface ActionCreatorObject {
+  readonly name: string;
+  readonly func: ActionCreator<Action<unknown>>;
+  readonly args: readonly string[];
+}
+
 // eslint-disable-next-line @typescript-eslint/ban-types
 function flatTree(
-  obj: { [key: string]: (...args: any[]) => unknown },
+  obj: { [key: string]: ActionCreator<Action<unknown>> },
   namespace = ''
 ) {
-  let functions: {
-    name: string;
-    func: (...args: any[]) => unknown;
-    args: string[];
-  }[] = [];
+  let functions: ActionCreatorObject[] = [];
   Object.keys(obj).forEach((key) => {
     const prop = obj[key];
     if (typeof prop === 'function') {
@@ -63,7 +65,7 @@ export function getMethods(obj: unknown) {
 }
 
 export function getActionsArray(actionCreators: {
-  [key: string]: (...args: any[]) => unknown;
+  [key: string]: ActionCreator<Action<unknown>>;
 }) {
   if (Array.isArray(actionCreators)) return actionCreators;
   return flatTree(actionCreators);
@@ -81,10 +83,8 @@ function evalArgs(inArgs: string[], restArgs: string) {
 }
 
 export function evalAction(
-  action: string | { args: string[]; rest: string; selected: string },
-  actionCreators: {
-    [selected: string]: { func: (...args: any[]) => Action<unknown> };
-  }
+  action: string | { args: string[]; rest: string; selected: number },
+  actionCreators: readonly ActionCreatorObject[]
 ) {
   if (typeof action === 'string') {
     // eslint-disable-next-line @typescript-eslint/no-implied-eval

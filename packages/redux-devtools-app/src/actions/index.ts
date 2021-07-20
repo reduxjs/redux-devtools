@@ -120,12 +120,27 @@ export interface LockChangesAction {
 }
 export interface ToggleActionAction {
   type: 'TOGGLE_ACTION';
+  id: number;
 }
 export interface RollbackAction {
   type: 'ROLLBACK';
+  timestamp: number;
 }
 export interface SweepAction {
   type: 'SWEEP';
+}
+interface ReorderActionAction {
+  type: 'REORDER_ACTION';
+  actionId: number;
+  beforeActionId: number;
+}
+interface ImportStateAction {
+  type: 'IMPORT_STATE';
+  nextLiftedState:
+    | LiftedState<unknown, Action<unknown>, unknown>
+    | readonly Action<unknown>[];
+  preloadedState?: unknown;
+  noRecompute?: boolean | undefined;
 }
 export type DispatchAction =
   | JumpToStateAction
@@ -134,7 +149,9 @@ export type DispatchAction =
   | LockChangesAction
   | ToggleActionAction
   | RollbackAction
-  | SweepAction;
+  | SweepAction
+  | ReorderActionAction
+  | ImportStateAction;
 interface LiftedActionActionBase {
   action?: DispatchAction | string | CustomAction;
   state?: string;
@@ -151,6 +168,7 @@ interface LiftedActionImportAction extends LiftedActionActionBase {
   message: 'IMPORT';
   state: string;
   preloadedState: unknown | undefined;
+  id?: string | number;
 }
 interface LiftedActionActionAction extends LiftedActionActionBase {
   type: typeof LIFTED_ACTION;

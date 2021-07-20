@@ -9,7 +9,9 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   s.src = chrome.extension.getURL('page.bundle.js');
   s.onload = function () {
-    this.parentNode.removeChild(this);
+    (this as HTMLScriptElement).parentNode!.removeChild(
+      this as HTMLScriptElement
+    );
   };
   (document.head || document.documentElement).appendChild(s);
 }

@@ -214,7 +214,7 @@ function tryCatch<S, A extends Action<unknown>>(
   } catch (err) {
     if (err.message === 'Message length exceeded maximum allowed length.') {
       const instanceId = args.instanceId;
-      const newArgs: SplitMessageStart = {
+      const newArgs = {
         split: 'start',
       };
       const toSplit: [string, string][] = [];
