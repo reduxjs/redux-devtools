@@ -7,9 +7,12 @@ import {
   SELECT_INSTANCE,
   LIFTED_ACTION,
 } from '@redux-devtools/app/lib/constants/actionTypes';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
+import { WindowStoreAction } from '../../stores/windowStore';
 
-export default function instances(state = initialState, action: StoreAction) {
+export default function instances(
+  state = initialState,
+  action: WindowStoreAction
+) {
   switch (action.type) {
     case UPDATE_STATE:
       return { ...action.instances, selected: state.selected };

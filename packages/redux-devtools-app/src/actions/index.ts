@@ -54,7 +54,7 @@ let monitorReducer: (
 ) => unknown;
 let monitorProps: unknown = {};
 
-interface ChangeSectionAction {
+export interface ChangeSectionAction {
   readonly type: typeof CHANGE_SECTION;
   readonly section: string;
 }
@@ -70,7 +70,7 @@ interface ChangeThemeFormData {
 interface ChangeThemeData {
   readonly formData: ChangeThemeFormData;
 }
-interface ChangeThemeAction {
+export interface ChangeThemeAction {
   readonly type: typeof CHANGE_THEME;
   readonly theme: Theme;
   readonly scheme: Scheme;
@@ -163,19 +163,18 @@ export interface LiftedActionDispatchAction extends LiftedActionActionBase {
   action: DispatchAction;
   toAll?: boolean;
 }
-interface LiftedActionImportAction extends LiftedActionActionBase {
+export interface LiftedActionImportAction extends LiftedActionActionBase {
   type: typeof LIFTED_ACTION;
   message: 'IMPORT';
   state: string;
   preloadedState: unknown | undefined;
-  id?: string | number;
 }
-interface LiftedActionActionAction extends LiftedActionActionBase {
+export interface LiftedActionActionAction extends LiftedActionActionBase {
   type: typeof LIFTED_ACTION;
   message: 'ACTION';
   action: string | CustomAction;
 }
-interface LiftedActionExportAction extends LiftedActionActionBase {
+export interface LiftedActionExportAction extends LiftedActionActionBase {
   type: typeof LIFTED_ACTION;
   message: 'EXPORT';
   toExport: boolean;
@@ -211,15 +210,15 @@ export function liftedDispatch(
   } as LiftedActionDispatchAction;
 }
 
-interface SelectInstanceAction {
+export interface SelectInstanceAction {
   type: typeof SELECT_INSTANCE;
-  selected: string;
+  selected: string | number;
 }
 export function selectInstance(selected: string): SelectInstanceAction {
   return { type: SELECT_INSTANCE, selected };
 }
 
-interface SelectMonitorAction {
+export interface SelectMonitorAction {
   type: typeof SELECT_MONITOR;
   monitor: string;
   monitorState?: MonitorStateMonitorState;
@@ -238,7 +237,7 @@ interface NextState {
   subTabName: string;
   inspectedStatePath?: string[];
 }
-interface UpdateMonitorStateAction {
+export interface UpdateMonitorStateAction {
   type: typeof UPDATE_MONITOR_STATE;
   nextState: NextState;
 }
@@ -259,7 +258,7 @@ export function importState(
   return { type: LIFTED_ACTION, message: 'IMPORT', state, preloadedState };
 }
 
-interface ExportAction {
+export interface ExportAction {
   type: typeof EXPORT;
 }
 export function exportState(): ExportAction {
@@ -296,28 +295,28 @@ export function dispatchRemotely(
   return { type: LIFTED_ACTION, message: 'ACTION', action };
 }
 
-interface TogglePersistAction {
+export interface TogglePersistAction {
   type: typeof TOGGLE_PERSIST;
 }
 export function togglePersist(): TogglePersistAction {
   return { type: TOGGLE_PERSIST };
 }
 
-interface ToggleSyncAction {
+export interface ToggleSyncAction {
   type: typeof TOGGLE_SYNC;
 }
 export function toggleSync(): ToggleSyncAction {
   return { type: TOGGLE_SYNC };
 }
 
-interface ToggleSliderAction {
+export interface ToggleSliderAction {
   type: typeof TOGGLE_SLIDER;
 }
 export function toggleSlider(): ToggleSliderAction {
   return { type: TOGGLE_SLIDER };
 }
 
-interface ToggleDispatcherAction {
+export interface ToggleDispatcherAction {
   type: typeof TOGGLE_DISPATCHER;
 }
 export function toggleDispatcher(): ToggleDispatcherAction {
@@ -331,7 +330,7 @@ export interface ConnectionOptions {
   readonly port: number;
   readonly secure: boolean;
 }
-interface ReconnectAction {
+export interface ReconnectAction {
   readonly type: typeof RECONNECT;
   readonly options: ConnectionOptions;
 }
@@ -345,7 +344,7 @@ interface Notification {
   readonly type: 'error';
   readonly message: string;
 }
-interface ShowNotificationAction {
+export interface ShowNotificationAction {
   readonly type: typeof SHOW_NOTIFICATION;
   readonly notification: Notification;
 }
@@ -353,14 +352,14 @@ export function showNotification(message: string): ShowNotificationAction {
   return { type: SHOW_NOTIFICATION, notification: { type: 'error', message } };
 }
 
-interface ClearNotificationAction {
+export interface ClearNotificationAction {
   readonly type: typeof CLEAR_NOTIFICATION;
 }
 export function clearNotification(): ClearNotificationAction {
   return { type: CLEAR_NOTIFICATION };
 }
 
-interface GetReportRequest {
+export interface GetReportRequest {
   readonly type: typeof GET_REPORT_REQUEST;
   readonly report: unknown;
 }
@@ -429,23 +428,23 @@ export type Request =
   | LiftedRequest
   | ExportRequest;
 
-interface UpdateStateAction {
+export interface UpdateStateAction {
   type: typeof UPDATE_STATE;
   request?: Request;
   id?: string | number;
 }
 
-interface SetStateAction {
+export interface SetStateAction {
   type: typeof SET_STATE;
   newState: State;
 }
 
-interface RemoveInstanceAction {
+export interface RemoveInstanceAction {
   type: typeof REMOVE_INSTANCE;
   id: string;
 }
 
-interface ConnectRequestAction {
+export interface ConnectRequestAction {
   type: typeof CONNECT_REQUEST;
   options: ConnectionOptions;
 }
@@ -455,58 +454,58 @@ interface ConnectSuccessPayload {
   authState: AuthStates;
   socketState: States;
 }
-interface ConnectSuccessAction {
+export interface ConnectSuccessAction {
   type: typeof CONNECT_SUCCESS;
   payload: ConnectSuccessPayload;
   error: Error | undefined;
 }
 
-interface ConnectErrorAction {
+export interface ConnectErrorAction {
   type: typeof CONNECT_ERROR;
   error: Error | undefined;
 }
 
-interface AuthRequestAction {
+export interface AuthRequestAction {
   type: typeof AUTH_REQUEST;
 }
 
-interface AuthSuccessAction {
+export interface AuthSuccessAction {
   type: typeof AUTH_SUCCESS;
   baseChannel: string;
 }
 
-interface AuthErrorAction {
+export interface AuthErrorAction {
   type: typeof AUTH_ERROR;
   error: Error;
 }
 
-interface DisconnectedAction {
+export interface DisconnectedAction {
   type: typeof DISCONNECTED;
   code: number;
 }
 
-interface DeauthenticateAction {
+export interface DeauthenticateAction {
   type: typeof DEAUTHENTICATE;
 }
 
-interface SubscribeRequestAction {
+export interface SubscribeRequestAction {
   type: typeof SUBSCRIBE_REQUEST;
   channel: string;
   subscription: typeof UPDATE_STATE | typeof UPDATE_REPORTS;
 }
 
-interface SubscribeSuccessAction {
+export interface SubscribeSuccessAction {
   type: typeof SUBSCRIBE_SUCCESS;
   channel: string;
 }
 
-interface SubscribeErrorAction {
+export interface SubscribeErrorAction {
   type: typeof SUBSCRIBE_ERROR;
   error: Error;
   status: string;
 }
 
-interface UnsubscribeAction {
+export interface UnsubscribeAction {
   type: typeof UNSUBSCRIBE;
   channel: string;
 }
@@ -534,27 +533,27 @@ interface RemoveRequest {
   id: unknown;
 }
 export type UpdateReportsRequest = ListRequest | AddRequest | RemoveRequest;
-interface UpdateReportsAction {
+export interface UpdateReportsAction {
   type: typeof UPDATE_REPORTS;
   request: UpdateReportsRequest;
 }
 
-interface GetReportError {
+export interface GetReportError {
   type: typeof GET_REPORT_ERROR;
   error: Error;
 }
 
-interface GetReportSuccess {
+export interface GetReportSuccess {
   type: typeof GET_REPORT_SUCCESS;
   data: { payload: string };
 }
 
-interface ErrorAction {
+export interface ErrorAction {
   type: typeof ERROR;
   payload: string;
 }
 
-export type StoreAction =
+export type StoreActionWithoutUpdateStateOrLiftedAction =
   | ChangeSectionAction
   | ChangeThemeAction
   | MonitorActionAction
@@ -572,7 +571,6 @@ export type StoreAction =
   | ClearNotificationAction
   | GetReportRequest
   | SetStateAction
-  | UpdateStateAction
   | RemoveInstanceAction
   | ConnectRequestAction
   | ConnectSuccessAction
@@ -591,3 +589,13 @@ export type StoreAction =
   | GetReportError
   | GetReportSuccess
   | ErrorAction;
+
+export type StoreActionWithoutUpdateState =
+  | StoreActionWithoutUpdateStateOrLiftedAction
+  | LiftedActionAction;
+
+export type StoreActionWithoutLiftedAction =
+  | StoreActionWithoutUpdateStateOrLiftedAction
+  | UpdateStateAction;
+
+export type StoreAction = StoreActionWithoutUpdateState | UpdateStateAction;

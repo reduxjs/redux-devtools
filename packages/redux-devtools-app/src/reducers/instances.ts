@@ -56,7 +56,7 @@ export interface State {
 }
 
 export interface InstancesState {
-  selected: string | null;
+  selected: string | number | null;
   current: string | number;
   sync: boolean;
   connections: { [id: string]: (string | number)[] };

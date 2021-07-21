@@ -1,6 +1,7 @@
 import { Store } from 'redux';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
-import configureStore from '../../../app/stores/backgroundStore';
+import configureStore, {
+  BackgroundAction,
+} from '../../../app/stores/backgroundStore';
 import openDevToolsWindow, { DevToolsPosition } from './openWindow';
 import { createMenu, removeMenu } from './contextMenus';
 import syncOptions from '../options/syncOptions';
@@ -8,7 +9,7 @@ import { BackgroundState } from '../../../app/reducers/background';
 
 declare global {
   interface Window {
-    store: Store<BackgroundState, StoreAction>;
+    store: Store<BackgroundState, BackgroundAction>;
   }
 }
 

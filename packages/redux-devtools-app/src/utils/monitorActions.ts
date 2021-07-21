@@ -21,7 +21,10 @@ export function sweep(state: State): State {
 }
 
 export function nonReduxDispatch(
-  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
+  store: MiddlewareAPI<
+    Dispatch<StoreAction>,
+    { readonly instances: InstancesState }
+  >,
   message: string,
   instanceId: string | number,
   action: DispatchAction,

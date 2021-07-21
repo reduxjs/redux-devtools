@@ -16,8 +16,6 @@ import {
   CustomAction,
   DispatchAction as AppDispatchAction,
   LibConfig,
-  LiftedActionAction,
-  StoreAction,
 } from '@redux-devtools/app/lib/actions';
 import { Action, Dispatch } from 'redux';
 import {
@@ -30,6 +28,10 @@ import {
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
 } from '../api';
 import { LiftedState } from '@redux-devtools/instrument';
+import {
+  BackgroundAction,
+  LiftedActionAction,
+} from '../stores/backgroundStore';
 
 interface TabMessageBase {
   readonly type: string;
@@ -241,6 +243,7 @@ interface ImportMessage {
   readonly id: string | number;
   readonly instanceId: string;
   readonly state: string;
+  readonly action?: never;
 }
 
 type ToContentScriptMessage = ImportMessage | LiftedActionAction;
@@ -252,7 +255,7 @@ function toContentScript({
   instanceId,
   state,
 }: ToContentScriptMessage) {
-  connections.tab[id].postMessage({
+  connections.tab[id!].postMessage({
     type: message,
     action,
     state: nonReduxDispatch(window.store, message, instanceId, action, state),
@@ -471,7 +474,7 @@ function onConnect<S, A extends Action<unknown>>(port: chrome.runtime.Port) {
     connections.panel[id] = port;
     monitorInstances(true, port.name);
     monitors++;
-    listener = (msg: StoreAction) => {
+    listener = (msg: BackgroundAction) => {
       window.store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
@@ -498,7 +501,7 @@ declare global {
 window.syncOptions = syncOptions(toAllTabs); // Expose to the options page
 
 export default function api() {
-  return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
+  return (next: Dispatch<BackgroundAction>) => (action: BackgroundAction) => {
     if (action.type === LIFTED_ACTION) toContentScript(action);
     else if (action.type === 'TOGGLE_PERSIST') togglePersist();
     return next(action);

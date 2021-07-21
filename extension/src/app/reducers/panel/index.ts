@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 import instances from '@redux-devtools/app/lib/reducers/instances';
 import monitor from '@redux-devtools/app/lib/reducers/monitor';
 import notification from '@redux-devtools/app/lib/reducers/notification';
@@ -8,17 +8,18 @@ import theme from '@redux-devtools/app/lib/reducers/theme';
 import connection from '@redux-devtools/app/lib/reducers/connection';
 import socket from '@redux-devtools/app/lib/reducers/socket';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
+import { StoreActionWithTogglePersist } from '../../stores/windowStore';
 
-const rootReducer = combineReducers<StoreState, StoreAction>({
-  instances,
-  monitor,
-  reports,
-  notification,
-  section,
-  theme,
-  connection,
-  socket,
-});
+const rootReducer: Reducer<StoreState, StoreActionWithTogglePersist> =
+  combineReducers<StoreState>({
+    instances,
+    monitor,
+    reports,
+    notification,
+    section,
+    theme,
+    connection,
+    socket,
+  });
 
 export default rootReducer;

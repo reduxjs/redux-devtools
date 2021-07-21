@@ -4,23 +4,45 @@ import {
   applyMiddleware,
   Store,
   PreloadedState,
+  StoreEnhancer,
 } from 'redux';
 import exportState from '@redux-devtools/app/lib/middlewares/exportState';
 import api from '@redux-devtools/app/lib/middlewares/api';
 import { CONNECT_REQUEST } from '@redux-devtools/app/lib/constants/socketActionTypes';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
+import {
+  StoreAction,
+  StoreActionWithoutUpdateState,
+  UpdateStateAction,
+} from '@redux-devtools/app/lib/actions';
+import { InstancesState } from '@redux-devtools/app/lib/reducers/instances';
 import syncStores from '../middlewares/windowSync';
 import instanceSelector from '../middlewares/instanceSelector';
 import rootReducer from '../reducers/window';
 import { BackgroundState } from '../reducers/background';
+import { BackgroundAction } from './backgroundStore';
+
+export interface TogglePersistAction {
+  readonly type: 'TOGGLE_PERSIST';
+}
+
+export type StoreActionWithTogglePersist = StoreAction | TogglePersistAction;
+
+interface ExpandedUpdateStateAction extends UpdateStateAction {
+  readonly instances: InstancesState;
+}
+
+export type WindowStoreAction =
+  | StoreActionWithoutUpdateState
+  | TogglePersistAction
+  | ExpandedUpdateStateAction;
 
 export default function configureStore(
-  baseStore: Store<BackgroundState, StoreAction>,
+  baseStore: Store<BackgroundState, BackgroundAction>,
   position: string,
   preloadedState: PreloadedState<StoreState>
 ) {
-  let enhancer;
+  let enhancer: StoreEnhancer;
   const middlewares = [exportState, api, syncStores(baseStore)];
   if (!position || position === '#popup') {
     // select current tab instance for devPanel and pageAction
@@ -33,7 +55,7 @@ export default function configureStore(
       applyMiddleware(...middlewares),
       window.__REDUX_DEVTOOLS_EXTENSION__
         ? window.__REDUX_DEVTOOLS_EXTENSION__()
-        : (noop) => noop
+        : (noop: unknown) => noop
     );
   }
   const store = createStore(rootReducer, preloadedState, enhancer);

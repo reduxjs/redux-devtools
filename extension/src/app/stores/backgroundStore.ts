@@ -1,6 +1,58 @@
 import { createStore, applyMiddleware, PreloadedState } from 'redux';
 import rootReducer, { BackgroundState } from '../reducers/background';
 import api from '../middlewares/api';
+import { LIFTED_ACTION } from '@redux-devtools/app/lib/constants/actionTypes';
+import {
+  CustomAction,
+  DispatchAction,
+  StoreActionWithoutLiftedAction,
+} from '@redux-devtools/app/lib/actions';
+
+interface LiftedActionActionBase {
+  action?: DispatchAction | string | CustomAction;
+  state?: string;
+  toAll?: boolean;
+  readonly instanceId: string | number;
+  readonly id: string | number | undefined;
+}
+interface LiftedActionDispatchAction extends LiftedActionActionBase {
+  type: typeof LIFTED_ACTION;
+  message: 'DISPATCH';
+  action: DispatchAction;
+  toAll?: boolean;
+}
+interface LiftedActionImportAction extends LiftedActionActionBase {
+  type: typeof LIFTED_ACTION;
+  message: 'IMPORT';
+  state: string;
+  preloadedState?: unknown | undefined;
+}
+interface LiftedActionActionAction extends LiftedActionActionBase {
+  type: typeof LIFTED_ACTION;
+  message: 'ACTION';
+  action: string | CustomAction;
+}
+interface LiftedActionExportAction extends LiftedActionActionBase {
+  type: typeof LIFTED_ACTION;
+  message: 'EXPORT';
+  toExport: boolean;
+}
+export type LiftedActionAction =
+  | LiftedActionDispatchAction
+  | LiftedActionImportAction
+  | LiftedActionActionAction
+  | LiftedActionExportAction;
+
+interface TogglePersistAction {
+  readonly type: 'TOGGLE_PERSIST';
+  readonly instanceId: string | number;
+  readonly id: string | number | undefined;
+}
+
+export type BackgroundAction =
+  | StoreActionWithoutLiftedAction
+  | LiftedActionAction
+  | TogglePersistAction;
 
 export default function configureStore(
   preloadedState?: PreloadedState<BackgroundState>

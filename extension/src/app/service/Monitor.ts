@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { LiftedState } from '@redux-devtools/instrument';
-import { LibConfig, StoreAction } from '@redux-devtools/app/lib/actions';
+import { DispatchAction, LibConfig } from '@redux-devtools/app/lib/actions';
 
 declare global {
   interface Window {
@@ -15,6 +15,8 @@ export default class Monitor<S, A extends Action<unknown>> {
   ) => void;
   active?: boolean;
   paused?: boolean;
+  lastAction?: string;
+  waitingTimeout?: number;
 
   constructor(
     update: (
@@ -24,7 +26,7 @@ export default class Monitor<S, A extends Action<unknown>> {
   ) {
     this.update = update;
   }
-  reducer = (state = {}, action: StoreAction) => {
+  reducer = (state = {}, action: DispatchAction) => {
     if (!this.active) return state;
     this.lastAction = action.type;
     if (action.type === 'LOCK_CHANGES') {

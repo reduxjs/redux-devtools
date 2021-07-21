@@ -1,6 +1,6 @@
-import { StoreAction } from '@redux-devtools/app/lib/actions';
+import { BackgroundAction } from '../../stores/backgroundStore';
 
-export default function persistStates(state = false, action: StoreAction) {
+export default function persistStates(state = false, action: BackgroundAction) {
   if (action.type === 'TOGGLE_PERSIST') return !state;
   return state;
 }
