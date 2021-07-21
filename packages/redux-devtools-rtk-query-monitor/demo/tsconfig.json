@@ -1,21 +1,11 @@
 {
-  "include": ["./src/**/*"],
+  "extends": "../../../tsconfig.react.base.json",
   "compilerOptions": {
-    "strict": true,
-    "esModuleInterop": true,
-    "lib": ["dom", "es2015"],
-    "jsx": "react",
-    "target": "es5",
-    "baseUrl": "src",
-    "allowJs": true,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
-  }
+    "baseUrl": "./src",
+    "target": "esNext",
+    "module": "es6",
+    "moduleResolution": "node"
+  },
+  "include": ["../src", "src"]
 }

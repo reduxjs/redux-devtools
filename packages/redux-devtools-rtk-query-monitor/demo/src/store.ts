@@ -2,6 +2,7 @@ import { configureStore, Middleware } from '@reduxjs/toolkit';
 import { pokemonApi } from './services/pokemon';
 import { postsApi } from 'services/posts';
 import DevTools from './DevTools';
+
 export const store = configureStore({
   reducer: {
     [pokemonApi.reducerPath]: pokemonApi.reducer,

@@ -95,7 +95,11 @@ See also
 
 ### Development
 
-[running the demo](./demo/README.md)
+#### Start Demo
+
+```bash
+yarn lerna run start --stream --scope @redux-devtools/rtk-query-monitor
+```
 
 <br/>
 

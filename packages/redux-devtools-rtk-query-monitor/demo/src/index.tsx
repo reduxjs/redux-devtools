@@ -25,4 +25,4 @@ function renderApp() {
   );
 }
 
-worker.start({ quiet: true }).then(renderApp);
+worker.start({ quiet: true }).then(renderApp, renderApp);

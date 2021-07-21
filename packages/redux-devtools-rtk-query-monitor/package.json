@@ -30,11 +30,11 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
+    "start": "webpack-dev-server --config demo/config/webpack.config.ts",
     "build": "npm run build:types && npm run build:js",
+    "stats": "webpack --profile --json > stats.json",
+    "build:demo": "cross-env NODE_ENV=production webpack -p --config demo/config/webpack.config.ts",
     "build:types": "tsc --emitDeclarationOnly",
-    "start:demo": "cd demo && yarn start",
-    "start:ts": "tsc -p ./tsconfig.dev.json --watch",
-    "start": "run-p start:ts start:demo",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "clean": "rimraf lib",
     "lint": "eslint . --ext .ts,.tsx",
@@ -55,11 +55,27 @@
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
+    "@chakra-ui/react": "^1.6.5",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@mswjs/data": "^0.3.0",
     "@redux-devtools/core": "^3.9.0",
+    "@redux-devtools/dock-monitor": "^1.4.0",
     "@reduxjs/toolkit": "^1.6.0",
-    "@types/react": "^16.14.8",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "17.0.0",
+    "@types/react-redux": "7.1.9",
+    "@types/react-router-dom": "5.1.6",
+    "cross-env": "^7.0.3",
+    "devui": "^1.0.0-8",
+    "framer-motion": "^4",
+    "lodash.debounce": "^4.0.8",
+    "msw": "0.28.2",
     "npm-run-all": "^4.1.5",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5"
   },
   "peerDependencies": {
@@ -68,5 +84,8 @@
     "@types/react": "^16.3.0 || ^17.0.0",
     "react": "^16.3.0 || ^17.0.0",
     "redux": "^3.4.0 || ^4.0.0"
+  },
+  "msw": {
+    "workerDirectory": "demo/public"
   }
 }

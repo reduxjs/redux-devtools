@@ -1,2 +1,2 @@
 export { default } from './containers/RtkQueryMonitor';
-export { ExternalProps } from './types';
+export type { ExternalProps } from './types';
