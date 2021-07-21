@@ -56,7 +56,12 @@ export function Pokemon({ name }: { name: PokemonName }) {
             </Select>
           </div>
           <div>
-            <Button onClick={refetch} disabled={isFetching}>
+            <Button
+              colorScheme="blue"
+              variant="outline"
+              onClick={refetch}
+              disabled={isFetching}
+            >
               {isFetching ? 'Loading' : 'Manually refetch'}
             </Button>
           </div>

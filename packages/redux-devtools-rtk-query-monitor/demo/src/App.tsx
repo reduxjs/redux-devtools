@@ -4,13 +4,17 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import { Link, UnorderedList, ListItem } from '@chakra-ui/react';
 import { Code } from '@chakra-ui/react';
 import * as React from 'react';
+import { DevToolsSelector } from 'features/DevTools/DevToolsSelector';
 
 export function App() {
   return (
     <article>
-      <Heading as="h1">RTK Query inspector monitor demo</Heading>
+      <Heading as="h1" p="0">
+        RTK Query inspector monitor demo
+      </Heading>
       <PokemonView />
       <PostsView />
+      <DevToolsSelector />
       <Flex p="2" as="section" flexWrap="nowrap" flexDirection="column">
         <Heading as="h2">Dock controls</Heading>
         <Box as="pre" p="2" paddingX="4">

@@ -14,13 +14,19 @@ export default function PokemonView() {
       <Heading as="h2">Pokemon polling demo</Heading>
       <Flex p="2" gridGap="0.5em" flexDirection="row" flexWrap="wrap">
         <Button
+          colorScheme="blue"
+          variant="outline"
           onClick={() =>
             setPokemon((prev) => [...prev, getRandomPokemonName()])
           }
         >
           Add random pokemon
         </Button>
-        <Button onClick={() => setPokemon((prev) => [...prev, 'bulbasaur'])}>
+        <Button
+          colorScheme="blue"
+          variant="outline"
+          onClick={() => setPokemon((prev) => [...prev, 'bulbasaur'])}
+        >
           Add bulbasaur
         </Button>
       </Flex>
