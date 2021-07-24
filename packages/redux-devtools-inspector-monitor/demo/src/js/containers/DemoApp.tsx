@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { connect } from 'react-redux';
-import pkg from '../../../package.json';
+import pkg from '../../../../package.json';
 import Button from 'react-bootstrap/Button';
 import FormGroup from 'react-bootstrap/FormGroup';
 import FormControl from 'react-bootstrap/FormControl';
@@ -11,9 +11,10 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import * as base16 from 'base16';
 import { push as pushRoute } from 'connected-react-router';
+import { PokemonView } from '../components/PokemonView';
 import { Path } from 'history';
-import * as inspectorThemes from '../../../src/themes';
-import getOptions, { Options } from './getOptions';
+import * as inspectorThemes from '../../../../src/themes';
+import getOptions, { Options } from '../getOptions';
 import {
   AddFunctionAction,
   AddHugeObjectAction,
@@ -34,7 +35,7 @@ import {
   ShuffleArrayAction,
   TimeoutUpdateAction,
   ToggleTimeoutUpdateAction,
-} from './reducers';
+} from '../reducers';
 
 const styles: {
   wrapper: CSSProperties;
@@ -56,9 +57,10 @@ const styles: {
   header: {},
   content: {
     display: 'flex',
+    flexFlow: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    height: '50%',
+    justifyContent: 'space-evenly',
+    padding: 8,
   },
   buttons: {
     display: 'flex',
@@ -251,6 +253,7 @@ class DemoApp extends React.Component<Props> {
               Shuffle Array
             </Button>
           </div>
+          <PokemonView />
         </div>
         <div style={styles.links}>
           <a onClick={this.toggleExtension} style={styles.link}>

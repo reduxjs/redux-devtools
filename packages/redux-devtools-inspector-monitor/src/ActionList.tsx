@@ -6,7 +6,6 @@ import { PerformAction } from '@redux-devtools/core';
 import { StylingFunction } from 'react-base16-styling';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
-import { filterActions } from './utils/filters';
 import { ActionForm } from './redux';
 
 function getTimestamps<A extends Action<unknown>>(
@@ -30,9 +29,9 @@ interface Props<S, A extends Action<unknown>> {
   selectedActionId: number | null;
   startActionId: number | null;
   skippedActionIds: number[];
-  computedStates: { state: S; error?: string }[];
   draggableActions: boolean;
   actionForm: ActionForm;
+  filteredActionIds: number[];
   hideMainButtons: boolean | undefined;
   hideActionButtons: boolean | undefined;
   styling: StylingFunction;
@@ -129,12 +128,11 @@ export default class ActionList<
       hideActionButtons,
       onCommit,
       onSweep,
-      actionForm,
       onActionFormChange,
       onJumpToState,
+      actionForm,
+      filteredActionIds,
     } = this.props;
-    const filteredActionIds = filterActions<unknown, A>(this.props);
-
     return (
       <div
         key="actionList"
@@ -155,7 +153,7 @@ export default class ActionList<
           hasStagedActions={actionIds.length > 1}
         />
         <div {...styling('actionListRows')} ref={this.getRef}>
-          {filteredActionIds.map((actionId) => (
+          {filteredActionIds.map((actionId: number) => (
             <ActionListRow
               key={actionId}
               styling={styling}

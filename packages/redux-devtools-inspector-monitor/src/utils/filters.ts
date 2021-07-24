@@ -1,6 +1,8 @@
 import type { Action } from 'redux';
 import type { LiftedState, PerformAction } from '@redux-devtools/core';
 import { ActionForm } from '../redux';
+import { makeSelectRtkQueryActionRegex } from './rtk-query';
+import { createShallowEqualSelector, SelectorsSource } from './selectors';
 
 type ComputedStates<S> = LiftedState<
   S,
@@ -34,7 +36,7 @@ function filterActionsBySearchValue<A extends Action<unknown>>(
 ): number[] {
   const lowerSearchValue = searchValue && searchValue.toLowerCase();
 
-  if (!lowerSearchValue) {
+  if (!lowerSearchValue || !actionIds.length) {
     return actionIds;
   }
 
@@ -48,18 +50,35 @@ function filterActionsBySearchValue<A extends Action<unknown>>(
   });
 }
 
+function filterOutRtkQueryActions(
+  actionIds: number[],
+  actions: Record<number, PerformAction<Action<unknown>>>,
+  rtkQueryRegex: RegExp | null
+) {
+  if (!rtkQueryRegex || actionIds.length === 0) {
+    return actionIds;
+  }
+
+  return actionIds.filter((actionId) => {
+    const type = actions[actionId].action.type;
+
+    return typeof type !== 'string' || !rtkQueryRegex.test(type);
+  });
+}
 export interface FilterActionsPayload<S, A extends Action<unknown>> {
   readonly actionIds: number[];
   readonly actions: Record<number, PerformAction<A>>;
   readonly computedStates: ComputedStates<S>;
   readonly actionForm: ActionForm;
+  readonly rtkQueryRegex: RegExp | null;
 }
 
-export function filterActions<S, A extends Action<unknown>>({
+function filterActions<S, A extends Action<unknown>>({
   actionIds,
   actions,
   computedStates,
   actionForm,
+  rtkQueryRegex,
 }: FilterActionsPayload<S, A>): number[] {
   let output = filterActionsBySearchValue(
     actionForm.searchValue,
@@ -68,8 +87,44 @@ export function filterActions<S, A extends Action<unknown>>({
   );
 
   if (actionForm.isNoopFilterActive) {
-    output = filterStateChangingAction(actionIds, computedStates);
+    output = filterStateChangingAction(output, computedStates);
+  }
+
+  if (actionForm.isRtkQueryFilterActive && rtkQueryRegex) {
+    output = filterOutRtkQueryActions(output, actions, rtkQueryRegex);
   }
 
   return output;
+}
+
+export interface SelectFilteredActions<S, A extends Action<unknown>> {
+  (selectorsSource: SelectorsSource<S, A>): number[];
+}
+
+/**
+ * Creates a selector that given `SelectorsSource` returns
+ * a list of filtered `actionsIds`.
+ * @returns {number[]}
+ */
+export function makeSelectFilteredActions<
+  S,
+  A extends Action<unknown>
+>(): SelectFilteredActions<S, A> {
+  const selectRegex = makeSelectRtkQueryActionRegex();
+
+  return createShallowEqualSelector(
+    (selectorsSource: SelectorsSource<S, A>): FilterActionsPayload<S, A> => {
+      const actionForm = selectorsSource.monitorState.actionForm;
+      const { actionIds, actions, computedStates } = selectorsSource;
+
+      return {
+        actionIds,
+        actions,
+        computedStates,
+        actionForm,
+        rtkQueryRegex: selectRegex(selectorsSource),
+      };
+    },
+    filterActions
+  );
 }

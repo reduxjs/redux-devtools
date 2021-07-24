@@ -1,4 +1,4 @@
-import jss, { Styles, StyleSheet } from 'jss';
+import jss, { StyleSheet } from 'jss';
 import preset from 'jss-preset-default';
 import { createStyling } from 'react-base16-styling';
 import rgba from 'hex-rgba';
@@ -33,6 +33,8 @@ const colorMap = (theme: Base16Theme) => ({
   LINK_COLOR: rgba(theme.base0E, 90),
   LINK_HOVER_COLOR: theme.base0E,
   ERROR_COLOR: theme.base08,
+  TOGGLE_BUTTON_BACKGROUND: rgba(theme.base00, 70),
+  TOGGLE_BUTTON_SELECTED_BACKGROUND: theme.base04,
 });
 
 type Color = keyof ReturnType<typeof colorMap>;
@@ -85,6 +87,7 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
   actionListHeaderSecondRow: {
     padding: '5px 10px',
+    justifyContent: 'flex-end',
   },
 
   actionListRows: {
@@ -110,7 +113,6 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
   actionListHeaderSelector: {
     display: 'inline-flex',
-    'margin-right': '10px',
   },
 
   actionListWide: {
@@ -332,6 +334,55 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
   selectorButtonSelected: {
     'background-color': map.TAB_BACK_SELECTED_COLOR,
+  },
+
+  toggleButtonWrapper: {
+    display: 'flex',
+    height: 20,
+    margin: 0,
+    padding: '0 10px 0 0',
+    '& > *': {
+      height: '100%',
+    },
+  },
+
+  toggleButton: {
+    color: 'inherit',
+    cursor: 'pointer',
+    position: 'relative',
+    padding: '0px 4px',
+    fontSize: '0.7em',
+    letterSpacing: '-0.7px',
+    outline: 'none',
+    boxShadow: 'none',
+    fontWeight: '700',
+    'border-style': 'solid',
+    'border-width': '1px',
+    'border-left-width': 0,
+
+    '&:first-child': {
+      'border-left-width': '1px',
+      'border-top-left-radius': '3px',
+      'border-bottom-left-radius': '3px',
+    },
+
+    '&:last-child': {
+      'border-top-right-radius': '3px',
+      'border-bottom-right-radius': '3px',
+    },
+
+    '&:hover': {
+      'background-color': map.TAB_BACK_SELECTED_COLOR,
+    },
+
+    'background-color': map.TOGGLE_BUTTON_BACKGROUND,
+
+    'border-color': map.TAB_BORDER_COLOR,
+
+    '&[aria-pressed="true"]': {
+      color: map.BACKGROUND_COLOR,
+      backgroundColor: map.TOGGLE_BUTTON_SELECTED_BACKGROUND,
+    },
   },
 
   diff: {

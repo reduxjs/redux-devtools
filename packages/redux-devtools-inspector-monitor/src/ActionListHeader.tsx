@@ -32,7 +32,7 @@ const ActionListHeader: FunctionComponent<Props> = ({
   actionForm,
   onActionFormChange,
 }) => {
-  const { isNoopFilterActive } = actionForm;
+  const { isNoopFilterActive, isRtkQueryFilterActive } = actionForm;
 
   return (
     <>
@@ -42,7 +42,37 @@ const ActionListHeader: FunctionComponent<Props> = ({
           onChange={(e) => onSearch(e.target.value)}
           placeholder="filter..."
         />
-        {!hideMainButtons && (
+        <div {...styling('toggleButtonWrapper')}>
+          <button
+            title="Toggle visibility of noop actions"
+            aria-label="Toggle visibility of noop actions"
+            aria-pressed={!isNoopFilterActive}
+            onClick={() =>
+              onActionFormChange({ isNoopFilterActive: !isNoopFilterActive })
+            }
+            type="button"
+            {...styling('toggleButton')}
+          >
+            noop
+          </button>
+          <button
+            title="Toggle visibility of rtk-query actions"
+            aria-label="Toggle visibility of rtk-query  actions"
+            aria-pressed={!isRtkQueryFilterActive}
+            onClick={() =>
+              onActionFormChange({
+                isRtkQueryFilterActive: !isRtkQueryFilterActive,
+              })
+            }
+            type="button"
+            {...styling('toggleButton')}
+          >
+            RTKQ
+          </button>
+        </div>
+      </div>
+      {!hideMainButtons && (
+        <div {...styling(['actionListHeader', 'actionListHeaderSecondRow'])}>
           <div {...styling('actionListHeaderWrapper')}>
             <RightSlider shown={hasStagedActions} styling={styling}>
               <div {...styling('actionListHeaderSelector')}>
@@ -67,25 +97,8 @@ const ActionListHeader: FunctionComponent<Props> = ({
               </div>
             </RightSlider>
           </div>
-        )}
-      </div>
-      <div {...styling(['actionListHeader', 'actionListHeaderSecondRow'])}>
-        <button
-          title="Toggle visibility of noop actions"
-          aria-label="Toggle visibility of noop actions"
-          aria-pressed={!isNoopFilterActive}
-          onClick={() =>
-            onActionFormChange({ isNoopFilterActive: !isNoopFilterActive })
-          }
-          type="button"
-          {...styling(
-            ['selectorButton', 'selectorButtonSmall', !isNoopFilterActive && 'selectorButtonSelected'],
-            isNoopFilterActive
-          )}
-        >
-          noop
-        </button>
-      </div>
+        </div>
+      )}
     </>
   );
 };
@@ -101,6 +114,7 @@ ActionListHeader.propTypes = {
   actionForm: PropTypes.shape({
     searchValue: PropTypes.string.isRequired,
     isNoopFilterActive: PropTypes.bool.isRequired,
+    isRtkQueryFilterActive: PropTypes.bool.isRequired,
   }).isRequired,
   onActionFormChange: PropTypes.func.isRequired,
 };

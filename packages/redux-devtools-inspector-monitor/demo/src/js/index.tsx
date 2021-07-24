@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { pokemonApi } from '../js/rtk-query/pokemonApi';
 import {
-  createStore,
   applyMiddleware,
   compose,
   StoreEnhancerStoreCreator,
@@ -13,10 +14,10 @@ import { Route } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
 import { persistState } from '@redux-devtools/core';
-import DemoApp from './DemoApp';
+import DemoApp from './containers/DemoApp';
 import createRootReducer from './reducers';
 import getOptions from './getOptions';
-import { ConnectedDevTools, getDevTools } from './DevTools';
+import { ConnectedDevTools, getDevTools } from './containers/DevTools';
 
 function getDebugSessionKey() {
   const matches = /[?&]debug_session=([^&#]+)\b/.exec(window.location.href);
@@ -51,7 +52,16 @@ const enhancer = compose(
   persistState(getDebugSessionKey())
 );
 
-const store = createStore(createRootReducer(history), enhancer);
+const store = configureStore({
+  reducer: createRootReducer(history),
+  devTools: false,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }).concat([pokemonApi.middleware]),
+  enhancers: [enhancer],
+}); //  createStore(createRootReducer(history), enhancer);
 
 render(
   <Provider store={store}>

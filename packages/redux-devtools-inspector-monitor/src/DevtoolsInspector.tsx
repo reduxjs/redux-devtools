@@ -30,6 +30,8 @@ import {
   reducer,
   updateMonitorState,
 } from './redux';
+import { makeSelectFilteredActions } from './utils/filters';
+import { computeSelectorSource } from './utils/selectors';
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const {
@@ -236,6 +238,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
   updateSizeTimeout?: number;
   inspectorRef?: HTMLDivElement | null;
 
+  selectorsSource = computeSelectorSource(this.props);
+
   componentDidMount() {
     this.updateSizeMode();
     this.updateSizeTimeout = window.setInterval(
@@ -293,6 +297,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     this.inspectorRef = node;
   };
 
+  selectFilteredActions = makeSelectFilteredActions();
+
   render() {
     const {
       stagedActionIds: actionIds,
@@ -315,6 +321,12 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     const { themeState, isWideLayout, action, nextState, delta, error } =
       this.state;
     const { base16Theme, styling } = themeState;
+
+    this.selectorsSource = computeSelectorSource(
+      this.props,
+      this.selectorsSource
+    );
+    const filteredActionIds = this.selectFilteredActions(this.selectorsSource);
 
     return (
       <div
@@ -339,7 +351,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
             styling,
           }}
           actionForm={actionForm}
-          computedStates={computedStates}
+          filteredActionIds={filteredActionIds}
           onSearch={this.handleSearch}
           onActionFormChange={this.handleActionFormChange}
           onSelect={this.handleSelectAction}

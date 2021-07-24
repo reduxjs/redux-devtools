@@ -10,6 +10,7 @@ const ACTION_FORM_VALUE_CHANGE =
 export interface ActionForm {
   searchValue: string;
   isNoopFilterActive: boolean;
+  isRtkQueryFilterActive: boolean;
 }
 export interface UpdateMonitorStateAction {
   type: typeof UPDATE_MONITOR_STATE;
@@ -55,6 +56,7 @@ export const DEFAULT_STATE: DevtoolsInspectorState = {
   actionForm: {
     searchValue: '',
     isNoopFilterActive: false,
+    isRtkQueryFilterActive: false,
   },
 };
 
