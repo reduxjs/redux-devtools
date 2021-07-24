@@ -22,6 +22,8 @@ import ActionPreview, { Tab } from './ActionPreview';
 import getInspectedState from './utils/getInspectedState';
 import createDiffPatcher from './createDiffPatcher';
 import {
+  ActionForm,
+  changeActionFormValues,
   DevtoolsInspectorAction,
   DevtoolsInspectorState,
   reducer,
@@ -249,6 +251,10 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     this.props.dispatch(updateMonitorState(monitorState));
   };
 
+  handleActionFormChange = (formValues: Partial<ActionForm>) => {
+    this.props.dispatch(changeActionFormValues(formValues));
+  };
+
   updateSizeMode() {
     const isWideLayout = this.inspectorRef!.offsetWidth > 500;
 
@@ -301,7 +307,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
       hideMainButtons,
       hideActionButtons,
     } = this.props;
-    const { selectedActionId, startActionId, searchValue, tabName } =
+    const { selectedActionId, startActionId, actionForm, tabName } =
       monitorState;
     const inspectedPathType =
       tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
@@ -323,7 +329,6 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
             actions,
             actionIds,
             isWideLayout,
-            searchValue,
             selectedActionId,
             startActionId,
             skippedActionIds,
@@ -332,7 +337,10 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
             hideActionButtons,
             styling,
           }}
+          actionForm={actionForm}
+          computedStates={computedStates}
           onSearch={this.handleSearch}
+          onActionFormChange={this.handleActionFormChange}
           onSelect={this.handleSelectAction}
           onToggleAction={this.handleToggleAction}
           onJumpToState={this.handleJumpToState}
@@ -400,7 +408,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
   };
 
   handleSearch = (val: string) => {
-    this.updateMonitorState({ searchValue: val });
+    this.handleActionFormChange({ searchValue: val });
   };
 
   handleSelectAction = (

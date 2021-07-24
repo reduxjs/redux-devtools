@@ -83,6 +83,10 @@ const getSheetFromColorMap = (map: ColorMap) => ({
     'border-color': map.LIST_BORDER_COLOR,
   },
 
+  actionListHeaderSecondRow: {
+    padding: '5px 10px',
+  },
+
   actionListRows: {
     overflow: 'auto',
 
