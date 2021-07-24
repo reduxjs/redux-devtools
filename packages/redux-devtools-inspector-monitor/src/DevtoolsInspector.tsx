@@ -21,6 +21,7 @@ import ActionList from './ActionList';
 import ActionPreview, { Tab } from './ActionPreview';
 import getInspectedState from './utils/getInspectedState';
 import createDiffPatcher from './createDiffPatcher';
+import debounce from 'lodash.debounce';
 import {
   ActionForm,
   changeActionFormValues,
@@ -407,9 +408,9 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     this.props.dispatch(sweep());
   };
 
-  handleSearch = (val: string) => {
+  handleSearch = debounce((val: string) => {
     this.handleActionFormChange({ searchValue: val });
-  };
+  }, 200);
 
   handleSelectAction = (
     e: React.MouseEvent<HTMLDivElement>,
