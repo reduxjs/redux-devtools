@@ -24,10 +24,7 @@ function getDebugSessionKey() {
   return matches && matches.length > 0 ? matches[1] : null;
 }
 
-const ROOT =
-  process.env.NODE_ENV === 'production'
-    ? '/redux-devtools-inspector-monitor/'
-    : '/';
+const ROOT = '/';
 
 const DevTools = getDevTools(window.location);
 

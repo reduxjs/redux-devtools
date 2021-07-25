@@ -24,7 +24,7 @@
   "scripts": {
     "start": "webpack-dev-server --config demo/config/webpack.config.ts",
     "stats": "webpack --profile --json > stats.json",
-    "build:demo": "NODE_ENV=production webpack -p",
+    "build:demo": "cross-env NODE_ENV=production webpack -p --config demo/config/webpack.config.ts",
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",

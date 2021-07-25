@@ -17,7 +17,7 @@ module.exports = {
         './demo/src/js/index',
       ],
   output: {
-    path: path.join(__dirname, 'demo/dist'),
+    path: path.join(__dirname, './dist'),
     filename: 'js/bundle.js',
   },
   module: {
@@ -60,5 +60,5 @@ module.exports = {
         },
         historyApiFallback: true,
       },
-  devtool: 'eval-source-map',
+  devtool: isProduction ? 'sourcemap' : 'eval-source-map',
 };
