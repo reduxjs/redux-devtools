@@ -94,7 +94,7 @@ export function makeSelectRtkQueryActionRegex<
 >(): SelectRTKQueryActionRegex<S, A> {
   const selectApiReducerPaths = createSelector(
     (source: SelectorsSource<S, A>) =>
-      source.computedStates[source.currentStateIndex].state,
+      source.computedStates[source.currentStateIndex]?.state,
     getApiReducerPaths
   );
 
