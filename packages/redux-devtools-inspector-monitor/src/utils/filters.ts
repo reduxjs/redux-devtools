@@ -65,6 +65,24 @@ function filterOutRtkQueryActions(
     return typeof type !== 'string' || !rtkQueryRegex.test(type);
   });
 }
+
+function invertSearchResults(
+  actionIds: number[],
+  filteredActionIds: number[]
+): number[] {
+  if (
+    actionIds.length === 0 ||
+    actionIds.length === filteredActionIds.length ||
+    filteredActionIds.length === 0
+  ) {
+    return actionIds;
+  }
+
+  const filteredSet = new Set(filteredActionIds);
+
+  return actionIds.filter((actionId) => !filteredSet.has(actionId));
+}
+
 export interface FilterActionsPayload<S, A extends Action<unknown>> {
   readonly actionIds: number[];
   readonly actions: Record<number, PerformAction<A>>;
@@ -92,6 +110,10 @@ function filterActions<S, A extends Action<unknown>>({
 
   if (actionForm.isRtkQueryFilterActive && rtkQueryRegex) {
     output = filterOutRtkQueryActions(output, actions, rtkQueryRegex);
+  }
+
+  if (actionForm.isInvertSearchActive) {
+    output = invertSearchResults(actionIds, output);
   }
 
   return output;

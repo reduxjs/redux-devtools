@@ -9,6 +9,20 @@ const getActiveButtons = (hasSkippedActions: boolean): ('Sweep' | 'Commit')[] =>
     (a): a is 'Sweep' | 'Commit' => !!a
   );
 
+const toggleButton = {
+  label: {
+    rtkq(val: boolean) {
+      return val ? 'Show rtk-query actions' : 'Hide rtk-query actions';
+    },
+    noop(val: boolean) {
+      return val ? 'Show noop actions' : 'Hide noop actions';
+    },
+    invertSearch(val: boolean) {
+      return val ? 'Disable inverse search' : 'Activate inverse search';
+    },
+  },
+};
+
 interface Props {
   styling: StylingFunction;
   onSearch: (value: string) => void;
@@ -32,7 +46,8 @@ const ActionListHeader: FunctionComponent<Props> = ({
   actionForm,
   onActionFormChange,
 }) => {
-  const { isNoopFilterActive, isRtkQueryFilterActive } = actionForm;
+  const { isNoopFilterActive, isRtkQueryFilterActive, isInvertSearchActive } =
+    actionForm;
 
   return (
     <>
@@ -44,9 +59,9 @@ const ActionListHeader: FunctionComponent<Props> = ({
         />
         <div {...styling('toggleButtonWrapper')}>
           <button
-            title="Toggle visibility of noop actions"
-            aria-label="Toggle visibility of noop actions"
-            aria-pressed={!isNoopFilterActive}
+            title={toggleButton.label.noop(isNoopFilterActive)}
+            aria-label={toggleButton.label.noop(isNoopFilterActive)}
+            aria-pressed={isNoopFilterActive}
             onClick={() =>
               onActionFormChange({ isNoopFilterActive: !isNoopFilterActive })
             }
@@ -56,9 +71,9 @@ const ActionListHeader: FunctionComponent<Props> = ({
             noop
           </button>
           <button
-            title="Toggle visibility of rtk-query actions"
-            aria-label="Toggle visibility of rtk-query  actions"
-            aria-pressed={!isRtkQueryFilterActive}
+            title={toggleButton.label.rtkq(isRtkQueryFilterActive)}
+            aria-label={toggleButton.label.rtkq(isRtkQueryFilterActive)}
+            aria-pressed={isRtkQueryFilterActive}
             onClick={() =>
               onActionFormChange({
                 isRtkQueryFilterActive: !isRtkQueryFilterActive,
@@ -68,6 +83,20 @@ const ActionListHeader: FunctionComponent<Props> = ({
             {...styling('toggleButton')}
           >
             RTKQ
+          </button>
+          <button
+            title={toggleButton.label.invertSearch(isInvertSearchActive)}
+            aria-label={toggleButton.label.invertSearch(isInvertSearchActive)}
+            aria-pressed={isInvertSearchActive}
+            onClick={() =>
+              onActionFormChange({
+                isInvertSearchActive: !isInvertSearchActive,
+              })
+            }
+            type="button"
+            {...styling('toggleButton')}
+          >
+            !
           </button>
         </div>
       </div>
@@ -115,6 +144,7 @@ ActionListHeader.propTypes = {
     searchValue: PropTypes.string.isRequired,
     isNoopFilterActive: PropTypes.bool.isRequired,
     isRtkQueryFilterActive: PropTypes.bool.isRequired,
+    isInvertSearchActive: PropTypes.bool.isRequired,
   }).isRequired,
   onActionFormChange: PropTypes.func.isRequired,
 };

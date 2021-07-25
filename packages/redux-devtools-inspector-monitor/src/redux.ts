@@ -8,9 +8,10 @@ const ACTION_FORM_VALUE_CHANGE =
   '@@redux-devtools-inspector-monitor/ACTION_FORM_VALUE_CHANGE';
 
 export interface ActionForm {
-  searchValue: string;
-  isNoopFilterActive: boolean;
-  isRtkQueryFilterActive: boolean;
+  readonly searchValue: string;
+  readonly isNoopFilterActive: boolean;
+  readonly isRtkQueryFilterActive: boolean;
+  readonly isInvertSearchActive: boolean;
 }
 export interface UpdateMonitorStateAction {
   type: typeof UPDATE_MONITOR_STATE;
@@ -57,6 +58,7 @@ export const DEFAULT_STATE: DevtoolsInspectorState = {
     searchValue: '',
     isNoopFilterActive: false,
     isRtkQueryFilterActive: false,
+    isInvertSearchActive: false,
   },
 };
 
