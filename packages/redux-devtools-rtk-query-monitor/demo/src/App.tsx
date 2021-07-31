@@ -8,8 +8,8 @@ import { DevToolsSelector } from 'features/DevTools/DevToolsSelector';
 
 export function App() {
   return (
-    <article>
-      <Heading as="h1" p="0">
+    <main className="rtk-query-demo-app">
+      <Heading as="h1" p="2">
         RTK Query inspector monitor demo
       </Heading>
       <PokemonView />
@@ -66,6 +66,6 @@ export function App() {
           </ListItem>
         </UnorderedList>
       </Flex>
-    </article>
+    </main>
   );
 }

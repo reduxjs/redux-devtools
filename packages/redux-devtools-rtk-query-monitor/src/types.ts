@@ -112,8 +112,8 @@ export type QueryTally = {
   Tally;
 
 export interface QueryTimings {
-  readonly oldestFetch: { key: string; at: string } | null;
-  readonly latestFetch: { key: string; at: string } | null;
+  readonly oldest: { key: string; at: string } | null;
+  readonly latest: { key: string; at: string } | null;
   readonly slowest: { key: string; duration: string } | null;
   readonly fastest: { key: string; duration: string } | null;
   readonly average: string;
@@ -128,9 +128,9 @@ export interface ApiTimings {
 export interface ApiStats {
   readonly timings: ApiTimings;
   readonly tally: Readonly<{
-    subscriptions: Tally;
+    subscriptions: number;
     queries: QueryTally;
-    tagTypes: Tally;
+    tagTypes: number;
     mutations: QueryTally;
   }>;
 }

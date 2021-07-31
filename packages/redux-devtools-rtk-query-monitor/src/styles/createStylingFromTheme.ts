@@ -39,6 +39,10 @@ export const colorMap = (theme: reduxThemes.Base16Theme) =>
     LINK_COLOR: rgba(theme.base0E, 90),
     LINK_HOVER_COLOR: theme.base0E,
     ERROR_COLOR: theme.base08,
+    ULIST_DISC_COLOR: theme.base0D,
+    ULIST_COLOR: rgba(theme.base06, 60),
+    ULIST_STRONG_COLOR: theme.base0B,
+    TAB_CONTENT_COLOR: rgba(theme.base06, 60),
   } as const);
 
 type Color = keyof ReturnType<typeof colorMap>;
@@ -400,7 +404,42 @@ const getSheetFromColorMap = (map: ColorMap) => {
     treeWrapper: {
       overflowX: 'auto',
       overflowY: 'auto',
-      padding: '1em',
+      padding: '0.5em 1em',
+    },
+
+    tabContent: {
+      display: 'block',
+      overflowY: 'auto',
+      padding: '0.5em 0',
+      color: map.TAB_CONTENT_COLOR,
+      '& h2': {
+        color: map.ULIST_STRONG_COLOR,
+        padding: '0.5em 1em',
+        fontWeight: 700,
+      },
+      '& h3': {
+        color: map.ULIST_STRONG_COLOR,
+      },
+    },
+
+    uList: {
+      listStyle: 'none',
+      padding: '0 0 0 1em',
+      color: map.ULIST_COLOR,
+      '& > li': {
+        listStyle: 'none',
+      },
+      '& > li::before': {
+        content: '"\\2022"',
+        display: 'inline-block',
+        paddingRight: '0.5em',
+        color: map.ULIST_DISC_COLOR,
+        fontSize: '0.8em',
+      },
+
+      '& strong': {
+        color: map.ULIST_STRONG_COLOR,
+      },
     },
   };
 };

@@ -179,18 +179,16 @@ function computeQueryTallyOf(
 
 function tallySubscriptions(
   subsState: RtkQueryApiState['subscriptions']
-): ApiStats['tally']['subscriptions'] {
+): number {
   const subsOfQueries = Object.values(subsState);
 
-  const output: ApiStats['tally']['subscriptions'] = {
-    count: 0,
-  };
+  let output = 0;
 
   for (let i = 0, len = subsOfQueries.length; i < len; i++) {
     const subsOfQuery = subsOfQueries[i];
 
     if (subsOfQuery) {
-      output.count += Object.keys(subsOfQuery).length;
+      output += Object.keys(subsOfQuery).length;
     }
   }
 
@@ -204,8 +202,8 @@ function computeQueryApiTimings(
 ): QueryTimings {
   type SpeedReport = { key: string | null; at: string | number };
   type DurationReport = { key: string | null; duration: string | number };
-  let latestFetch: null | SpeedReport = { key: null, at: -1 };
-  let oldestFetch: null | SpeedReport = {
+  let latest: null | SpeedReport = { key: null, at: -1 };
+  let oldest: null | SpeedReport = {
     key: null,
     at: Number.MAX_SAFE_INTEGER,
   };
@@ -227,14 +225,14 @@ function computeQueryApiTimings(
     const startedTimeStamp = query?.startedTimeStamp;
 
     if (typeof fulfilledTimeStamp === 'number') {
-      if (fulfilledTimeStamp > latestFetch.at) {
-        latestFetch.key = queryKey;
-        latestFetch.at = fulfilledTimeStamp;
+      if (fulfilledTimeStamp > latest.at) {
+        latest.key = queryKey;
+        latest.at = fulfilledTimeStamp;
       }
 
-      if (fulfilledTimeStamp < oldestFetch.at) {
-        oldestFetch.key = queryKey;
-        oldestFetch.at = fulfilledTimeStamp;
+      if (fulfilledTimeStamp < oldest.at) {
+        oldest.key = queryKey;
+        oldest.at = fulfilledTimeStamp;
       }
 
       if (
@@ -258,16 +256,16 @@ function computeQueryApiTimings(
     }
   }
 
-  if (latestFetch.key !== null) {
-    latestFetch.at = new Date(latestFetch.at).toISOString();
+  if (latest.key !== null) {
+    latest.at = new Date(latest.at).toISOString();
   } else {
-    latestFetch = null;
+    latest = null;
   }
 
-  if (oldestFetch.key !== null) {
-    oldestFetch.at = new Date(oldestFetch.at).toISOString();
+  if (oldest.key !== null) {
+    oldest.at = new Date(oldest.at).toISOString();
   } else {
-    oldestFetch = null;
+    oldest = null;
   }
 
   if (slowest.key !== null) {
@@ -293,8 +291,8 @@ function computeQueryApiTimings(
       : '-';
 
   return {
-    latestFetch,
-    oldestFetch,
+    latest,
+    oldest,
     slowest,
     fastest,
     average,
@@ -319,10 +317,10 @@ export function generateApiStatsOfCurrentQuery(
   return {
     timings: computeApiTimings(api),
     tally: {
-      subscriptions: tallySubscriptions(api.subscriptions),
       queries: computeQueryTallyOf(api.queries),
-      tagTypes: { count: Object.keys(api.provided).length },
       mutations: computeQueryTallyOf(api.mutations),
+      tagTypes: Object.keys(api.provided).length,
+      subscriptions: tallySubscriptions(api.subscriptions),
     },
   };
 }
