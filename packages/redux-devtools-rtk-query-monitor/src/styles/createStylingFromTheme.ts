@@ -139,8 +139,10 @@ const getSheetFromColorMap = (map: ColorMap) => {
       '-webkit-line-clamp': 2,
       whiteSpace: 'normal',
       overflow: 'hidden',
+      width: '100%',
       maxWidth: 'calc(100% - 70px)',
       wordBreak: 'break-all',
+      margin: 0,
     },
 
     queryListHeader: {
@@ -154,6 +156,20 @@ const getSheetFromColorMap = (map: ColorMap) => {
       'border-color': map.LIST_BORDER_COLOR,
     },
 
+    queryStatusWrapper: {
+      display: 'flex',
+      width: 'auto',
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: 0,
+      flex: '0 0 auto',
+      overflow: 'hidden',
+    },
+
+    queryType: {
+      marginRight: 4,
+    },
+
     queryStatus: {
       display: 'inline-flex',
       alignItems: 'center',
@@ -164,6 +180,7 @@ const getSheetFromColorMap = (map: ColorMap) => {
       'font-size': '0.7em',
       'line-height': '1em',
       'flex-shrink': 0,
+      fontWeight: 700,
       'background-color': map.ACTION_TIME_BACK_COLOR,
       color: map.ACTION_TIME_COLOR,
     },

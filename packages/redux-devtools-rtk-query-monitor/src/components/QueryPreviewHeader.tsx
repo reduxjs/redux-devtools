@@ -4,7 +4,9 @@ import { QueryPreviewTabs, TabOption } from '../types';
 import { emptyArray } from '../utils/object';
 
 export interface QueryPreviewHeaderProps {
-  tabs: ReadonlyArray<TabOption<QueryPreviewTabs, unknown>>;
+  tabs: ReadonlyArray<
+    TabOption<QueryPreviewTabs, unknown, 'query' | 'mutation'>
+  >;
   onTabChange: (tab: QueryPreviewTabs) => void;
   selectedTab: QueryPreviewTabs;
   renderTabLabel?: (tab: QueryPreviewHeaderProps['tabs'][number]) => ReactNode;

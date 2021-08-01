@@ -1,7 +1,7 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
 import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import React, { ReactNode, PureComponent } from 'react';
-import { QueryInfo, RtkQueryState, RTKStatusFlags } from '../types';
+import { RtkResourceInfo, RTKStatusFlags } from '../types';
 import { formatMs } from '../utils/formatters';
 import { identity } from '../utils/object';
 import { getQueryStatusFlags } from '../utils/rtk-query';
@@ -13,16 +13,18 @@ type QueryTimings = {
   duration: string;
 };
 
-interface FormattedQuery {
-  queryKey: string;
+type FormattedQuery = {
+  key: string;
   reducerPath: string;
   timings: QueryTimings;
   statusFlags: RTKStatusFlags;
-  query: RtkQueryState;
-}
+} & (
+  | { mutation: RtkResourceInfo['state'] }
+  | { query: RtkResourceInfo['state'] }
+);
 
 export interface QueryPreviewInfoProps {
-  queryInfo: QueryInfo;
+  resInfo: RtkResourceInfo;
   isWideLayout: boolean;
 }
 export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
@@ -33,23 +35,22 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
   ): boolean => {
     const lastKey = keyPath[keyPath.length - 1];
 
-    return layer <= 1 && lastKey !== 'query';
+    return layer <= 1 && lastKey !== 'query' && lastKey !== 'mutation';
   };
 
-  selectFormattedQuery: Selector<QueryInfo, FormattedQuery> = createSelector(
-    identity,
-    (queryInfo: QueryInfo): FormattedQuery => {
-      const { query, queryKey, reducerPath } = queryInfo;
+  selectFormattedQuery: Selector<RtkResourceInfo, FormattedQuery> =
+    createSelector(identity, (resInfo: RtkResourceInfo): FormattedQuery => {
+      const { state, queryKey, reducerPath } = resInfo;
 
-      const startedAt = query.startedTimeStamp
-        ? new Date(query.startedTimeStamp).toISOString()
+      const startedAt = state.startedTimeStamp
+        ? new Date(state.startedTimeStamp).toISOString()
         : '-';
 
-      const loadedAt = query.fulfilledTimeStamp
-        ? new Date(query.fulfilledTimeStamp).toISOString()
+      const loadedAt = state.fulfilledTimeStamp
+        ? new Date(state.fulfilledTimeStamp).toISOString()
         : '-';
 
-      const statusFlags = getQueryStatusFlags(query);
+      const statusFlags = getQueryStatusFlags(state);
 
       const timings = {
         startedAt,
@@ -58,29 +59,38 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
       };
 
       if (
-        query.fulfilledTimeStamp &&
-        query.startedTimeStamp &&
-        query.status !== QueryStatus.pending &&
-        query.startedTimeStamp <= query.fulfilledTimeStamp
+        state.fulfilledTimeStamp &&
+        state.startedTimeStamp &&
+        state.status !== QueryStatus.pending &&
+        state.startedTimeStamp <= state.fulfilledTimeStamp
       ) {
         timings.duration = formatMs(
-          query.fulfilledTimeStamp - query.startedTimeStamp
+          state.fulfilledTimeStamp - state.startedTimeStamp
         );
       }
 
+      if (resInfo.type === 'query') {
+        return {
+          key: queryKey,
+          reducerPath,
+          query: resInfo.state,
+          statusFlags,
+          timings,
+        };
+      }
+
       return {
-        queryKey,
+        key: queryKey,
         reducerPath,
-        query: queryInfo.query,
+        mutation: resInfo.state,
         statusFlags,
         timings,
       };
-    }
-  );
+    });
 
   render(): ReactNode {
-    const { queryInfo, isWideLayout } = this.props;
-    const formattedQuery = this.selectFormattedQuery(queryInfo);
+    const { resInfo, isWideLayout } = this.props;
+    const formattedQuery = this.selectFormattedQuery(resInfo);
 
     return (
       <TreeView

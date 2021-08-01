@@ -61,25 +61,33 @@ export interface ExternalProps<S, A extends Action<unknown>> {
 }
 
 export interface QueryInfo {
-  query: RtkQueryState;
+  type: 'query';
+  state: RtkQueryState;
   queryKey: string;
   reducerPath: string;
 }
 
 export interface MutationInfo {
-  mutation: RtkMutationState;
+  type: 'mutation';
+  state: RtkMutationState;
   queryKey: string;
   reducerPath: string;
 }
+
+export type RtkResourceInfo = QueryInfo | MutationInfo;
 
 export interface ApiInfo {
   reducerPath: string;
   apiState: RtkQueryApiState;
 }
 
-export interface SelectOption<T = string> {
+export interface SelectOption<
+  T = string,
+  VisConfig extends string = 'default'
+> {
   label: string;
   value: T;
+  visible?: Record<VisConfig | 'default', boolean> | boolean;
 }
 
 export interface SelectorsSource<S> {
@@ -136,7 +144,8 @@ export interface ApiStats {
   }>;
 }
 
-export interface TabOption<S, P> extends SelectOption<S> {
+export interface TabOption<S, P, V extends string = 'default'>
+  extends SelectOption<S, V> {
   component: ComponentType<P>;
 }
 

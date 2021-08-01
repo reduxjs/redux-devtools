@@ -8,6 +8,7 @@ import {
   SelectorsSource,
   RtkQueryProvided,
   QueryPreviewTabs,
+  RtkResourceInfo,
 } from './types';
 import { Comparator, queryComparators } from './utils/comparators';
 import { FilterList, queryListFilters } from './utils/filters';
@@ -20,6 +21,7 @@ import {
   getQueryTagsOf,
   generateApiStatsOfCurrentQuery,
   getActionsOfCurrentQuery,
+  extractAllApiMutations,
 } from './utils/rtk-query';
 
 type InspectorSelector<S, Output> = Selector<SelectorsSource<S>, Output>;
@@ -60,8 +62,8 @@ export interface InspectorSelectors<S> {
     S,
     ReturnType<typeof extractAllApiQueries>
   >;
-  readonly selectAllVisbileQueries: InspectorSelector<S, QueryInfo[]>;
-  readonly selectCurrentQueryInfo: InspectorSelector<S, QueryInfo | null>;
+  readonly selectAllVisbileQueries: InspectorSelector<S, RtkResourceInfo[]>;
+  readonly selectCurrentQueryInfo: InspectorSelector<S, RtkResourceInfo | null>;
   readonly selectSearchQueryRegex: InspectorSelector<S, RegExp | null>;
   readonly selectCurrentQueryTags: InspectorSelector<S, RtkQueryTag[]>;
   readonly selectApiStatsOfCurrentQuery: InspectorSelector<S, ApiStats | null>;
@@ -86,13 +88,13 @@ export interface InspectorSelectors<S> {
 export function createInspectorSelectors<S>(): InspectorSelectors<S> {
   const selectQueryComparator = ({
     monitorState,
-  }: SelectorsSource<S>): Comparator<QueryInfo> => {
+  }: SelectorsSource<S>): Comparator<RtkResourceInfo> => {
     return queryComparators[monitorState.queryForm.values.queryComparator];
   };
 
   const selectQueryListFilter = ({
     monitorState,
-  }: SelectorsSource<S>): FilterList<QueryInfo> => {
+  }: SelectorsSource<S>): FilterList<RtkResourceInfo> => {
     return queryListFilters[monitorState.queryForm.values.queryFilter];
   };
 
@@ -106,6 +108,11 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
   const selectAllQueries = createSelector(
     selectApiStates,
     extractAllApiQueries
+  );
+
+  const selectAllMutations = createSelector(
+    selectApiStates,
+    extractAllApiMutations
   );
 
   const selectSearchQueryRegex = createSelector(
@@ -138,13 +145,21 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
       selectQueryComparator,
       selectQueryListFilter,
       selectAllQueries,
+      selectAllMutations,
       selectComparatorOrder,
       selectSearchQueryRegex,
     ],
-    (comparator, queryListFilter, queryList, isAscending, searchRegex) => {
+    (
+      comparator,
+      queryListFilter,
+      queryList,
+      mutationsList,
+      isAscending,
+      searchRegex
+    ) => {
       const filteredList = queryListFilter(
         searchRegex,
-        queryList as QueryInfo[]
+        (queryList as RtkResourceInfo[]).concat(mutationsList)
       );
 
       const computedComparator = isAscending
@@ -157,18 +172,28 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
 
   const selectCurrentQueryInfo = createSelector(
     selectAllQueries,
+    selectAllMutations,
     ({ monitorState }: SelectorsSource<S>) => monitorState.selectedQueryKey,
-    (allQueries, selectedQueryKey) => {
+    (allQueries, allMutations, selectedQueryKey) => {
       if (!selectedQueryKey) {
         return null;
       }
 
-      const currentQueryInfo =
+      let currentQueryInfo: null | RtkResourceInfo =
         allQueries.find(
           (query) =>
             query.queryKey === selectedQueryKey.queryKey &&
             selectedQueryKey.reducerPath === query.reducerPath
         ) || null;
+
+      if (!currentQueryInfo) {
+        currentQueryInfo =
+          allMutations.find(
+            (mutation) =>
+              mutation.queryKey === selectedQueryKey.queryKey &&
+              selectedQueryKey.reducerPath === mutation.reducerPath
+          ) || null;
+      }
 
       return currentQueryInfo;
     }

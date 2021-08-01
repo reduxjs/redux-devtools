@@ -1,4 +1,4 @@
-import { QueryInfo, SelectOption } from '../types';
+import { RtkResourceInfo, SelectOption } from '../types';
 
 export interface FilterList<T> {
   (regex: RegExp | null, list: T[]): T[];
@@ -13,45 +13,52 @@ export enum QueryFilters {
 
 function filterByQueryKey(
   regex: RegExp | null,
-  list: QueryInfo[]
-): QueryInfo[] {
+  list: RtkResourceInfo[]
+): RtkResourceInfo[] {
   if (!regex) {
     return list;
   }
 
-  return list.filter((queryInfo) => regex.test(queryInfo.queryKey));
+  return list.filter((RtkResourceInfo) => regex.test(RtkResourceInfo.queryKey));
 }
 
 function filterByReducerPath(
   regex: RegExp | null,
-  list: QueryInfo[]
-): QueryInfo[] {
+  list: RtkResourceInfo[]
+): RtkResourceInfo[] {
   if (!regex) {
     return list;
   }
 
-  return list.filter((queryInfo) => regex.test(queryInfo.reducerPath));
+  return list.filter((RtkResourceInfo) =>
+    regex.test(RtkResourceInfo.reducerPath)
+  );
 }
 
 function filterByEndpointName(
   regex: RegExp | null,
-  list: QueryInfo[]
-): QueryInfo[] {
+  list: RtkResourceInfo[]
+): RtkResourceInfo[] {
   if (!regex) {
     return list;
   }
 
-  return list.filter((queryInfo) =>
-    regex.test(queryInfo.query.endpointName ?? 'undefined')
+  return list.filter((RtkResourceInfo) =>
+    regex.test(RtkResourceInfo.state.endpointName ?? 'undefined')
   );
 }
 
-function filterByStatus(regex: RegExp | null, list: QueryInfo[]): QueryInfo[] {
+function filterByStatus(
+  regex: RegExp | null,
+  list: RtkResourceInfo[]
+): RtkResourceInfo[] {
   if (!regex) {
     return list;
   }
 
-  return list.filter((queryInfo) => regex.test(queryInfo.query.status));
+  return list.filter((RtkResourceInfo) =>
+    regex.test(RtkResourceInfo.state.status)
+  );
 }
 
 export const filterQueryOptions: SelectOption<QueryFilters>[] = [
@@ -62,7 +69,7 @@ export const filterQueryOptions: SelectOption<QueryFilters>[] = [
 ];
 
 export const queryListFilters: Readonly<
-  Record<QueryFilters, FilterList<QueryInfo>>
+  Record<QueryFilters, FilterList<RtkResourceInfo>>
 > = {
   [QueryFilters.queryKey]: filterByQueryKey,
   [QueryFilters.endpointName]: filterByEndpointName,

@@ -3,7 +3,7 @@ import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 import { createTreeItemLabelRenderer } from '../styles/tree';
 import {
   QueryPreviewTabs,
-  QueryInfo,
+  RtkResourceInfo,
   SelectorsSource,
   TabOption,
 } from '../types';
@@ -32,12 +32,13 @@ import {
   QueryPreviewActions,
   QueryPreviewActionsProps,
 } from '../components/QueryPreviewActions';
+import { isTabVisible } from '../utils/tabs';
 
 export interface QueryPreviewProps<S = unknown> {
   readonly selectedTab: QueryPreviewTabs;
   readonly hasNoApis: boolean;
   readonly onTabChange: (tab: QueryPreviewTabs) => void;
-  readonly queryInfo: QueryInfo | null;
+  readonly resInfo: RtkResourceInfo | null;
   readonly styling: StylingFunction;
   readonly isWideLayout: boolean;
   readonly selectorsSource: SelectorsSource<S>;
@@ -47,15 +48,15 @@ export interface QueryPreviewProps<S = unknown> {
 /**
  * Tab content is not rendered if there's no selected query.
  */
-type QueryPreviewTabProps = Omit<QueryPreviewProps<unknown>, 'queryInfo'> & {
-  queryInfo: QueryInfo;
+type QueryPreviewTabProps = Omit<QueryPreviewProps<unknown>, 'resInfo'> & {
+  resInfo: RtkResourceInfo;
 };
 
 const MappedQueryPreviewTags = mapProps<
   QueryPreviewTabProps,
   QueryPreviewTagsProps
->(({ selectors, selectorsSource, isWideLayout, queryInfo }) => ({
-  queryInfo,
+>(({ selectors, selectorsSource, isWideLayout, resInfo }) => ({
+  resInfo,
   tags: selectors.selectCurrentQueryTags(selectorsSource),
   isWideLayout,
 }))(QueryPreviewTags);
@@ -63,9 +64,7 @@ const MappedQueryPreviewTags = mapProps<
 const MappedQueryPreviewInfo = mapProps<
   QueryPreviewTabProps,
   QueryPreviewInfoProps
->(({ queryInfo, isWideLayout }) => ({ queryInfo, isWideLayout }))(
-  QueryPreviewInfo
-);
+>(({ resInfo, isWideLayout }) => ({ resInfo, isWideLayout }))(QueryPreviewInfo);
 
 const MappedQuerySubscriptipns = mapProps<
   QueryPreviewTabProps,
@@ -91,26 +90,48 @@ const MappedQueryPreviewActions = mapProps<
   actionsOfQuery: selectors.selectActionsOfCurrentQuery(selectorsSource),
 }))(QueryPreviewActions);
 
-const tabs: ReadonlyArray<TabOption<QueryPreviewTabs, QueryPreviewTabProps>> = [
+const tabs: ReadonlyArray<
+  TabOption<QueryPreviewTabs, QueryPreviewTabProps, RtkResourceInfo['type']>
+> = [
   {
     label: 'query',
     value: QueryPreviewTabs.queryinfo,
     component: MappedQueryPreviewInfo,
+    visible: {
+      query: true,
+      mutation: true,
+      default: true,
+    },
   },
   {
     label: 'actions',
     value: QueryPreviewTabs.actions,
     component: MappedQueryPreviewActions,
+    visible: {
+      query: true,
+      mutation: true,
+      default: true,
+    },
   },
   {
     label: 'tags',
     value: QueryPreviewTabs.queryTags,
     component: MappedQueryPreviewTags,
+    visible: {
+      query: true,
+      mutation: false,
+      default: true,
+    },
   },
   {
     label: 'subs',
     value: QueryPreviewTabs.querySubscriptions,
     component: MappedQuerySubscriptipns,
+    visible: {
+      query: true,
+      mutation: false,
+      default: true,
+    },
   },
   {
     label: 'api',
@@ -141,24 +162,32 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
     return `${label}(${counterAsString})`;
   };
 
-  renderTabLabel = (tab: TabOption<QueryPreviewTabs, unknown>): ReactNode => {
-    const { selectors, selectorsSource } = this.props;
+  renderTabLabel = (
+    tab: TabOption<QueryPreviewTabs, unknown, 'query' | 'mutation'>
+  ): ReactNode => {
+    const { selectors, selectorsSource, resInfo } = this.props;
     const tabCount = selectors.selectTabCounters(selectorsSource)[tab.value];
 
-    if (tabCount > 0) {
-      return this.renderLabelWithCounter(tab.label, tabCount);
+    let tabLabel = tab.label;
+
+    if (tabLabel === 'query' && resInfo?.type === 'mutation') {
+      tabLabel = resInfo.type;
     }
 
-    return tab.label;
+    if (tabCount > 0) {
+      return this.renderLabelWithCounter(tabLabel, tabCount);
+    }
+
+    return tabLabel;
   };
 
   render(): ReactNode {
-    const { queryInfo, selectedTab, onTabChange, hasNoApis } = this.props;
+    const { resInfo, selectedTab, onTabChange, hasNoApis } = this.props;
 
     const { component: TabComponent } =
       tabs.find((tab) => tab.value === selectedTab) || tabs[0];
 
-    if (!queryInfo) {
+    if (!resInfo) {
       return (
         <StyleUtilsContext.Consumer>
           {({ styling }) => (
@@ -167,7 +196,15 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
                 selectedTab={selectedTab}
                 onTabChange={onTabChange}
                 tabs={
-                  tabs as ReadonlyArray<TabOption<QueryPreviewTabs, unknown>>
+                  tabs.filter((tab) =>
+                    isTabVisible(tab, 'default')
+                  ) as ReadonlyArray<
+                    TabOption<
+                      QueryPreviewTabs,
+                      unknown,
+                      RtkResourceInfo['type']
+                    >
+                  >
                 }
                 renderTabLabel={this.renderTabLabel}
               />
@@ -187,7 +224,15 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
                 selectedTab={selectedTab}
                 onTabChange={onTabChange}
                 tabs={
-                  tabs as ReadonlyArray<TabOption<QueryPreviewTabs, unknown>>
+                  tabs.filter((tab) =>
+                    isTabVisible(tab, resInfo.type)
+                  ) as ReadonlyArray<
+                    TabOption<
+                      QueryPreviewTabs,
+                      unknown,
+                      RtkResourceInfo['type']
+                    >
+                  >
                 }
                 renderTabLabel={this.renderTabLabel}
               />

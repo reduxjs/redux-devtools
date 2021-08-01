@@ -3,11 +3,11 @@ import type { AnyAction, Dispatch, Action } from '@reduxjs/toolkit';
 import type { LiftedAction, LiftedState } from '@redux-devtools/core';
 import {
   QueryFormValues,
-  QueryInfo,
   QueryPreviewTabs,
   RtkQueryMonitorState,
   StyleUtils,
   SelectorsSource,
+  RtkResourceInfo,
 } from '../types';
 import { createInspectorSelectors, computeSelectorSource } from '../selectors';
 import {
@@ -101,7 +101,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
     this.props.dispatch(changeQueryFormValues(values) as AnyAction);
   };
 
-  handleSelectQuery = (queryInfo: QueryInfo): void => {
+  handleSelectQuery = (queryInfo: RtkResourceInfo): void => {
     this.props.dispatch(selectQueryKey(queryInfo) as AnyAction);
   };
 
@@ -114,10 +114,10 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
     const {
       styleUtils: { styling },
     } = this.props;
-    const allVisibleQueries =
+    const allVisibleRtkResourceInfos =
       this.selectors.selectAllVisbileQueries(selectorsSource);
 
-    const currentQueryInfo =
+    const currentResInfo =
       this.selectors.selectCurrentQueryInfo(selectorsSource);
 
     const apiStates = this.selectors.selectApiStates(selectorsSource);
@@ -144,14 +144,14 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
           />
           <QueryList
             onSelectQuery={this.handleSelectQuery}
-            queryInfos={allVisibleQueries}
+            resInfos={allVisibleRtkResourceInfos}
             selectedQueryKey={selectorsSource.monitorState.selectedQueryKey}
           />
         </div>
         <QueryPreview<S>
           selectorsSource={this.state.selectorsSource}
           selectors={this.selectors}
-          queryInfo={currentQueryInfo}
+          resInfo={currentResInfo}
           selectedTab={selectorsSource.monitorState.selectedPreviewTab}
           onTabChange={this.handleTabChange}
           styling={styling}

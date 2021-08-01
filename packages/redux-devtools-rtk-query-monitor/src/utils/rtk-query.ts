@@ -1,4 +1,4 @@
-import { AnyAction, isAnyOf, isPlainObject } from '@reduxjs/toolkit';
+import { AnyAction, isAllOf, isAnyOf, isPlainObject } from '@reduxjs/toolkit';
 import { QueryStatus } from '@reduxjs/toolkit/query';
 import {
   QueryInfo,
@@ -15,6 +15,8 @@ import {
   ApiTimings,
   QueryTimings,
   SelectorsSource,
+  RtkMutationState,
+  RtkResourceInfo,
 } from '../types';
 import { missingTagId } from '../monitor-config';
 import { Comparator } from './comparators';
@@ -104,13 +106,14 @@ export function extractAllApiQueries(
 
     for (let j = 0, qKeysLen = queryKeys.length; j < qKeysLen; j++) {
       const queryKey = queryKeys[j];
-      const query = api.queries[queryKey];
+      const state = api.queries[queryKey];
 
-      if (query) {
+      if (state) {
         output.push({
+          type: 'query',
           reducerPath,
           queryKey,
-          query,
+          state,
         });
       }
     }
@@ -136,13 +139,14 @@ export function extractAllApiMutations(
 
     for (let j = 0, mKeysLen = mutationKeys.length; j < mKeysLen; j++) {
       const queryKey = mutationKeys[j];
-      const mutation = api.queries[queryKey];
+      const state = api.mutations[queryKey];
 
-      if (mutation) {
+      if (state) {
         output.push({
+          type: 'mutation',
           reducerPath,
           queryKey,
-          mutation,
+          state,
         });
       }
     }
@@ -333,7 +337,7 @@ export function flipComparator<T>(comparator: Comparator<T>): Comparator<T> {
 
 export function isQuerySelected(
   selectedQueryKey: RtkQueryMonitorState['selectedQueryKey'],
-  queryInfo: QueryInfo
+  queryInfo: RtkResourceInfo
 ): boolean {
   return (
     !!selectedQueryKey &&
@@ -343,7 +347,7 @@ export function isQuerySelected(
 }
 
 export function getApiStateOf(
-  queryInfo: QueryInfo | null,
+  queryInfo: RtkResourceInfo | null,
   apiStates: ReturnType<typeof getApiStatesOf>
 ): RtkQueryApiState | null {
   if (!apiStates || !queryInfo) {
@@ -379,10 +383,10 @@ export function getProvidedOf(
 }
 
 export function getQueryTagsOf(
-  queryInfo: QueryInfo | null,
+  resInfo: RtkResourceInfo | null,
   provided: RtkQueryProvided | null
 ): RtkQueryTag[] {
-  if (!queryInfo || !provided) {
+  if (!resInfo || resInfo.type === 'mutation' || !provided) {
     return emptyArray;
   }
 
@@ -397,7 +401,7 @@ export function getQueryTagsOf(
   for (const [type, tagIds] of Object.entries(provided)) {
     if (tagIds) {
       for (const [id, queryKeys] of Object.entries(tagIds)) {
-        if ((queryKeys as unknown[]).includes(queryInfo.queryKey)) {
+        if ((queryKeys as unknown[]).includes(resInfo.queryKey)) {
           const tag: RtkQueryTag = { type };
 
           if (id !== missingTagId) {
@@ -422,7 +426,7 @@ export function getQueryTagsOf(
 export function getQueryStatusFlags({
   status,
   data,
-}: RtkQueryState): RTKStatusFlags {
+}: RtkQueryState | RtkMutationState): RTKStatusFlags {
   return {
     isUninitialized: status === QueryStatus.uninitialized,
     isFetching: status === QueryStatus.pending,
@@ -446,15 +450,37 @@ function matchesQueryKey(queryKey: string) {
     action?.meta?.arg?.queryCacheKey === queryKey;
 }
 
+function macthesRequestId(requestId: string) {
+  return (action: any): action is AnyAction =>
+    action?.meta?.requestId === requestId;
+}
+
+function matchesReducerPath(reducerPath: string) {
+  return (action: any): action is AnyAction =>
+    typeof action?.type === 'string' && action.type.startsWith(reducerPath);
+}
+
 export function getActionsOfCurrentQuery(
-  currentQuery: QueryInfo | null,
+  currentQuery: RtkResourceInfo | null,
   actionById: SelectorsSource<unknown>['actionsById']
 ): AnyAction[] {
   if (!currentQuery) {
     return emptyArray;
   }
 
-  const matcher = isAnyOf(matchesQueryKey(currentQuery.queryKey));
+  let matcher: ReturnType<typeof macthesRequestId>;
+
+  if (currentQuery.type === 'mutation') {
+    matcher = isAllOf(
+      matchesReducerPath(currentQuery.reducerPath),
+      macthesRequestId(currentQuery.queryKey)
+    );
+  } else {
+    matcher = isAllOf(
+      matchesReducerPath(currentQuery.reducerPath),
+      matchesQueryKey(currentQuery.queryKey)
+    );
+  }
 
   const output: AnyAction[] = [];
 
