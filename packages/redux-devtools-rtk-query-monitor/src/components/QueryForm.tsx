@@ -7,9 +7,11 @@ import debounce from 'lodash.debounce';
 import { sortQueryOptions, QueryComparators } from '../utils/comparators';
 import { QueryFilters, filterQueryOptions } from '../utils/filters';
 import { SortOrderButton } from './SortOrderButton';
+import { RegexIcon } from './RegexIcon';
 
 export interface QueryFormProps {
   values: QueryFormValues;
+  searchQueryRegex: RegExp | null;
   onFormValuesChange: (values: Partial<QueryFormValues>) => void;
 }
 
@@ -21,6 +23,13 @@ const selectId = 'rtk-query-comp-select';
 const searchId = 'rtk-query-search-query';
 const filterSelectId = 'rtk-query-search-query-select';
 const searchPlaceholder = 'filter query by...';
+
+const labels = {
+  regexToggle: {
+    info: 'Use regular expression search',
+    error: 'Invalid regular expression provided',
+  },
+};
 
 export class QueryForm extends React.PureComponent<
   QueryFormProps,
@@ -60,6 +69,12 @@ export class QueryForm extends React.PureComponent<
     }
   };
 
+  handleRegexSearchClick = (): void => {
+    this.props.onFormValuesChange({
+      isRegexSearch: !this.props.values.isRegexSearch,
+    });
+  };
+
   restoreCaretPosition = (start: number | null, end: number | null): void => {
     window.requestAnimationFrame(() => {
       if (this.inputSearchRef.current) {
@@ -92,12 +107,20 @@ export class QueryForm extends React.PureComponent<
 
   render(): ReactNode {
     const {
+      searchQueryRegex,
       values: {
         isAscendingQueryComparatorOrder: isAsc,
         queryComparator,
+        searchValue,
         queryFilter,
+        isRegexSearch,
       },
     } = this.props;
+
+    const isRegexInvalid =
+      isRegexSearch && searchValue.length > 0 && searchQueryRegex == null;
+    const regexToggleType = isRegexInvalid ? 'error' : 'info';
+    const regexToggleLabel = labels.regexToggle[regexToggleType];
 
     return (
       <StyleUtilsContext.Consumer>
@@ -129,6 +152,17 @@ export class QueryForm extends React.PureComponent<
                     onClick={this.handleClearSearchClick}
                     {...styling('closeButton')}
                   />
+                  <button
+                    type="button"
+                    aria-label={regexToggleLabel}
+                    title={regexToggleLabel}
+                    data-type={regexToggleType}
+                    aria-pressed={isRegexSearch}
+                    onClick={this.handleRegexSearchClick}
+                    {...styling('toggleButton')}
+                  >
+                    <RegexIcon />
+                  </button>
                 </div>
                 <label htmlFor={selectId} {...styling('srOnly')}>
                   filter by

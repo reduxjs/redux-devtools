@@ -111,10 +111,21 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
   const selectSearchQueryRegex = createSelector(
     ({ monitorState }: SelectorsSource<S>) =>
       monitorState.queryForm.values.searchValue,
-    (searchValue) => {
-      if (searchValue.length >= 3) {
-        return new RegExp(escapeRegExpSpecialCharacter(searchValue), 'i');
+    ({ monitorState }: SelectorsSource<S>) =>
+      monitorState.queryForm.values.isRegexSearch,
+    (searchValue, isRegexSearch) => {
+      if (searchValue) {
+        try {
+          const regexPattern = isRegexSearch
+            ? searchValue
+            : escapeRegExpSpecialCharacter(searchValue);
+
+          return new RegExp(regexPattern, 'i');
+        } catch (err) {
+          // We notify that the search regex provided is not valid
+        }
       }
+
       return null;
     }
   );

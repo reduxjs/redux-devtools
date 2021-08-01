@@ -16,6 +16,7 @@ const initialState: RtkQueryMonitorState = {
       queryComparator: QueryComparators.fulfilledTimeStamp,
       isAscendingQueryComparatorOrder: false,
       searchValue: '',
+      isRegexSearch: false,
       queryFilter: QueryFilters.queryKey,
     },
   },

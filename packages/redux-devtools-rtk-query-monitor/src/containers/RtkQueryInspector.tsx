@@ -124,6 +124,9 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
 
     const hasNoApi = apiStates == null;
 
+    const searchQueryRegex =
+      this.selectors.selectSearchQueryRegex(selectorsSource);
+
     return (
       <div
         ref={this.inspectorRef}
@@ -135,6 +138,7 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
           data-wide-layout={+this.state.isWideLayout}
         >
           <QueryForm
+            searchQueryRegex={searchQueryRegex}
             values={selectorsSource.monitorState.queryForm.values}
             onFormValuesChange={this.handleQueryFormValuesChange}
           />

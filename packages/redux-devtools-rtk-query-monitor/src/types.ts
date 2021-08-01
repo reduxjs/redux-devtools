@@ -19,6 +19,7 @@ export interface QueryFormValues {
   queryComparator: QueryComparators;
   isAscendingQueryComparatorOrder: boolean;
   searchValue: string;
+  isRegexSearch: boolean;
   queryFilter: QueryFilters;
 }
 export interface RtkQueryMonitorState {

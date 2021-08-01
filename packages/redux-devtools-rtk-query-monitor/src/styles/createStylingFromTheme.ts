@@ -43,6 +43,9 @@ export const colorMap = (theme: reduxThemes.Base16Theme) =>
     ULIST_COLOR: rgba(theme.base06, 60),
     ULIST_STRONG_COLOR: theme.base0B,
     TAB_CONTENT_COLOR: rgba(theme.base06, 60),
+    TOGGLE_BUTTON_BACKGROUND: rgba(theme.base00, 70),
+    TOGGLE_BUTTON_SELECTED_BACKGROUND: theme.base04,
+    TOGGLE_BUTTON_ERROR: rgba(theme.base08, 40),
   } as const);
 
 type Color = keyof ReturnType<typeof colorMap>;
@@ -264,6 +267,37 @@ const getSheetFromColorMap = (map: ColorMap) => {
       },
     },
 
+    toggleButton: {
+      width: '24px',
+      height: '24px',
+      display: 'inline-block',
+      flex: '0 0 auto',
+      color: map.TEXT_PLACEHOLDER_COLOR,
+      cursor: 'pointer',
+      padding: 0,
+      fontSize: '0.7em',
+      letterSpacing: '-0.7px',
+      outline: 'none',
+      boxShadow: 'none',
+      fontWeight: '700',
+      border: 'none',
+
+      '&:hover': {
+        color: map.TEXT_COLOR,
+      },
+
+      backgroundColor: 'transparent',
+      '&[aria-pressed="true"]': {
+        color: map.BACKGROUND_COLOR,
+        backgroundColor: map.TEXT_COLOR,
+      },
+
+      '&[data-type="error"]': {
+        color: map.TEXT_COLOR,
+        backgroundColor: map.TOGGLE_BUTTON_ERROR,
+      },
+    },
+
     queryForm: {
       display: 'flex',
       flexFlow: 'column nowrap',
@@ -323,6 +357,7 @@ const getSheetFromColorMap = (map: ColorMap) => {
       outline: 'none',
       boxShadow: 'none',
       display: 'block',
+      flex: '0 0 auto',
       cursor: 'pointer',
       background: 'transparent',
       position: 'relative',
@@ -334,9 +369,12 @@ const getSheetFromColorMap = (map: ColorMap) => {
         content: '"\u00d7"',
         display: 'block',
         padding: 4,
-        fontSize: '16px',
-        color: map.TEXT_COLOR,
+        fontSize: '1.2em',
+        color: map.TEXT_PLACEHOLDER_COLOR,
         background: 'transparent',
+      },
+      '&:hover::after': {
+        color: map.TEXT_COLOR,
       },
     },
 
