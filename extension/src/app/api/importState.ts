@@ -6,6 +6,8 @@ import {
   SerializeWithImmutable,
 } from '../../browser/extension/inject/pageScript';
 import Immutable from 'immutable';
+import { LiftedState } from '@redux-devtools/instrument';
+import { Action } from 'redux';
 
 function deprecate(param: string) {
   // eslint-disable-next-line no-console
@@ -34,7 +36,12 @@ function isSerializeWithReviver(
   return !!(serialize as SerializeWithImmutable).immutable;
 }
 
-export default function importState(
+interface ParsedSerializedLiftedState {
+  readonly payload: string;
+  readonly preloadedState?: string;
+}
+
+export default function importState<S, A extends Action<unknown>>(
   state: string | undefined,
   { deserializeState, deserializeAction, serialize }: Config
 ) {
@@ -57,14 +64,24 @@ export default function importState(
     }
   }
 
-  let preloadedState;
-  let nextLiftedState = parse(state);
-  if (nextLiftedState.payload) {
-    if (nextLiftedState.preloadedState) {
-      preloadedState = parse(nextLiftedState.preloadedState);
-    }
-    nextLiftedState = parse(nextLiftedState.payload);
-  }
+  const parsedSerializedLiftedState:
+    | ParsedSerializedLiftedState
+    | LiftedState<S, A, unknown> = parse(state) as
+    | ParsedSerializedLiftedState
+    | LiftedState<S, A, unknown>;
+  let preloadedState =
+    'payload' in parsedSerializedLiftedState &&
+    parsedSerializedLiftedState.preloadedState
+      ? (parse(parsedSerializedLiftedState.preloadedState) as S)
+      : undefined;
+  const nextLiftedState =
+    'payload' in parsedSerializedLiftedState
+      ? (parse(parsedSerializedLiftedState.payload) as LiftedState<
+          S,
+          A,
+          unknown
+        >)
+      : parsedSerializedLiftedState;
   if (deserializeState) {
     deprecate('deserializeState');
     if (typeof nextLiftedState.computedStates !== 'undefined') {

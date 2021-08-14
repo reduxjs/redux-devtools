@@ -3520,7 +3520,7 @@ __metadata:
     "@redux-devtools/inspector-monitor": ^1.0.0
     "@types/es6template": ^1.0.0
     "@types/history": ^4.7.8
-    "@types/jsan": ^3.1.0
+    "@types/jsan": ^3.1.2
     "@types/lodash.shuffle": ^4.2.6
     "@types/object-path": ^0.11.0
     "@types/prop-types": ^15.7.3
@@ -3682,7 +3682,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/serialize@workspace:packages/redux-devtools-serialize"
   dependencies:
-    "@types/jsan": ^3.1.0
+    "@types/jsan": ^3.1.2
     immutable: ^4.0.0-rc.12
     jsan: ^3.1.13
   peerDependencies:
@@ -5246,10 +5246,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsan@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@types/jsan@npm:3.1.0"
-  checksum: a0670d90e4bee7110504be73eefff9196b46235faf490062865136b1cbad4d3bac2adb9303e308c523f07716c026bb8e72a12ae7d47a948424d4ca4d7883587d
+"@types/jsan@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "@types/jsan@npm:3.1.2"
+  checksum: 2ff652807d6067bbc650aaefcda4e3c07b54ddfd7d72283d7c1f1892ad1e18e907b1bbdbee7d0a163efa9e8aed9af5fa9f4ed8e2f27243c46383d31e1181fc11
   languageName: node
   linkType: hard
 
@@ -23231,6 +23231,7 @@ fsevents@^1.2.7:
     "@redux-devtools/serialize": ^0.3.0
     "@redux-devtools/slider-monitor": ^2.0.0-8
     "@redux-devtools/utils": ^1.0.0-6
+    "@types/jsan": ^3.1.2
     bestzip: ^2.2.0
     chromedriver: ^91.0.1
     electron: ^13.1.2

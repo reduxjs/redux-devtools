@@ -120,7 +120,7 @@ export interface ConfigWithExpandedMaxAge {
   readonly features?: Features;
   readonly type?: string;
   readonly getActionType?: <A extends Action<unknown>>(action: A) => A;
-  readonly actionCreators: {
+  readonly actionCreators?: {
     readonly [key: string]: ActionCreator<Action<unknown>>;
   };
 }
@@ -362,10 +362,10 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     }
   }
 
-  function importPayloadFrom(state) {
-    if (config.features && !config.features.import) return;
+  function importPayloadFrom(state: string | undefined) {
+    if (config!.features && !config!.features.import) return;
     try {
-      const nextLiftedState = importState(state, config);
+      const nextLiftedState = importState<S, A>(state, config!);
       if (!nextLiftedState) return;
       store.liftedStore.dispatch({ type: 'IMPORT_STATE', ...nextLiftedState });
     } catch (e) {

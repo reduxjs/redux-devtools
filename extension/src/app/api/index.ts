@@ -275,7 +275,11 @@ function getStackTrace(
 }
 
 function amendActionType<A extends Action<unknown>>(
-  action: A | StructuralPerformAction<A> | string,
+  action:
+    | A
+    | StructuralPerformAction<A>
+    | StructuralPerformAction<A>[]
+    | string,
   config: Config,
   toExcludeFromTrace: Function | undefined
 ): StructuralPerformAction<A> {
@@ -494,7 +498,7 @@ const liftListener =
         type: 'DISPATCH',
         payload: {
           type: 'IMPORT_STATE',
-          ...importState(message.state, config),
+          ...importState<S, A>(message.state, config)!,
         },
       });
     } else {
@@ -614,7 +618,7 @@ export function connect(preConfig: Config) {
   ) => {
     const message: InitMessage<S, A> = {
       type: 'INIT',
-      payload: stringify(state, config.serialize),
+      payload: stringify(state, config.serialize as Serialize | undefined),
       instanceId: id,
       source,
     };
