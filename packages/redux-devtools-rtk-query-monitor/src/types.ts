@@ -93,6 +93,7 @@ export interface SelectOption<
 export interface SelectorsSource<S> {
   userState: S | null;
   monitorState: RtkQueryMonitorState;
+  currentStateIndex: number;
   actionsById: LiftedState<unknown, AnyAction, unknown>['actionsById'];
 }
 
@@ -120,11 +121,20 @@ export type QueryTally = {
 } &
   Tally;
 
+export interface RtkRequestTiming {
+  requestId: string;
+  queryKey: string;
+  endpointName: string;
+  startedAt: string;
+  completedAt: string;
+  duration: string;
+}
+
 export interface QueryTimings {
-  readonly oldest: { key: string; at: string } | null;
-  readonly latest: { key: string; at: string } | null;
-  readonly slowest: { key: string; duration: string } | null;
-  readonly fastest: { key: string; duration: string } | null;
+  readonly oldest: RtkRequestTiming | null;
+  readonly latest: RtkRequestTiming | null;
+  readonly slowest: RtkRequestTiming | null;
+  readonly fastest: RtkRequestTiming | null;
   readonly average: string;
   readonly median: string;
 }
@@ -138,9 +148,9 @@ export interface ApiStats {
   readonly timings: ApiTimings;
   readonly tally: Readonly<{
     subscriptions: number;
-    queries: QueryTally;
+    cachedQueries: QueryTally;
     tagTypes: number;
-    mutations: QueryTally;
+    cachedMutations: QueryTally;
   }>;
 }
 
@@ -158,3 +168,12 @@ export interface RTKStatusFlags {
   readonly isSuccess: boolean;
   readonly isError: boolean;
 }
+
+export type RtkRequest = {
+  status: QueryStatus;
+  queryKey: string;
+  requestId: string;
+  endpointName: string;
+  startedTimeStamp?: number;
+  fulfilledTimeStamp?: number;
+};

@@ -45,6 +45,7 @@ export function computeSelectorSource<S, A extends Action<unknown>>(
     return {
       userState,
       monitorState,
+      currentStateIndex,
       actionsById,
     };
   }
@@ -236,6 +237,8 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
 
   const selectApiStatsOfCurrentQuery = createSelector(
     selectApiOfCurrentQuery,
+    (selectorsSource) => selectorsSource.actionsById,
+    (selectorsSource) => selectorsSource.currentStateIndex,
     generateApiStatsOfCurrentQuery
   );
 

@@ -1,4 +1,4 @@
-import { AnyAction, isAllOf, isAnyOf, isPlainObject } from '@reduxjs/toolkit';
+import { Action, AnyAction, isAllOf, isPlainObject } from '@reduxjs/toolkit';
 import { QueryStatus } from '@reduxjs/toolkit/query';
 import {
   QueryInfo,
@@ -17,9 +17,11 @@ import {
   SelectorsSource,
   RtkMutationState,
   RtkResourceInfo,
+  RtkRequest,
+  RtkRequestTiming,
 } from '../types';
 import { missingTagId } from '../monitor-config';
-import { Comparator } from './comparators';
+import { Comparator, compareJSONPrimitive } from './comparators';
 import { emptyArray } from './object';
 import { formatMs } from './formatters';
 import * as statistics from './statistics';
@@ -199,44 +201,186 @@ function tallySubscriptions(
   return output;
 }
 
+function computeRtkQueryRequests(
+  type: 'queries' | 'mutations',
+  api: RtkQueryApiState,
+  sortedActions: AnyAction[],
+  currentStateIndex: SelectorsSource<unknown>['currentStateIndex']
+): Readonly<Record<string, RtkRequest>> {
+  const requestById: Record<string, RtkRequest> = {};
+
+  const matcher =
+    type === 'queries'
+      ? matchesExecuteQuery(api.config.reducerPath)
+      : matchesExecuteMutation(api.config.reducerPath);
+
+  for (
+    let i = 0, len = sortedActions.length;
+    i < len && i <= currentStateIndex;
+    i++
+  ) {
+    const action = sortedActions[i];
+
+    if (matcher(action)) {
+      let requestRecord: RtkRequest | undefined =
+        requestById[action.meta.requestId];
+
+      if (!requestRecord) {
+        const queryCacheKey: string | undefined = (
+          action.meta as Record<string, any>
+        )?.arg?.queryCacheKey;
+
+        const queryKey =
+          typeof queryCacheKey === 'string'
+            ? queryCacheKey
+            : action.meta.requestId;
+
+        const endpointName: string =
+          (action.meta as any)?.arg?.endpointName ?? '-';
+
+        requestById[action.meta.requestId] = requestRecord = {
+          queryKey,
+          requestId: action.meta.requestId,
+          endpointName,
+          status: action.meta.requestStatus,
+        };
+      }
+
+      requestRecord.status = action.meta.requestStatus;
+
+      if (
+        action.meta.requestStatus === QueryStatus.pending &&
+        typeof (action.meta as any).startedTimeStamp === 'number'
+      ) {
+        requestRecord.startedTimeStamp = (action.meta as any).startedTimeStamp;
+      }
+
+      if (
+        action.meta.requestStatus === QueryStatus.fulfilled &&
+        typeof (action.meta as any).fulfilledTimeStamp === 'number'
+      ) {
+        requestRecord.fulfilledTimeStamp = (
+          action.meta as any
+        ).fulfilledTimeStamp;
+      }
+    }
+  }
+
+  const requestIds = Object.keys(requestById);
+
+  // Patch queries that have pending actions that are committed
+  for (let i = 0, len = requestIds.length; i < len; i++) {
+    const requestId = requestIds[i];
+    const request = requestById[requestId];
+
+    if (
+      typeof request.startedTimeStamp === 'undefined' &&
+      typeof request.fulfilledTimeStamp === 'number'
+    ) {
+      const startedTimeStampFromCache =
+        api[type][request.queryKey]?.startedTimeStamp;
+
+      if (typeof startedTimeStampFromCache === 'number') {
+        request.startedTimeStamp = startedTimeStampFromCache;
+      }
+    }
+  }
+
+  // Add queries that have pending and fulfilled actions committed
+  const queryCacheEntries = Object.entries(api[type] ?? {});
+
+  for (let i = 0, len = queryCacheEntries.length; i < len; i++) {
+    const [queryCacheKey, queryCache] = queryCacheEntries[i];
+    const requestId: string =
+      type === 'queries'
+        ? (queryCache as typeof api['queries'][string])?.requestId ?? ''
+        : queryCacheKey;
+    if (
+      queryCache &&
+      !Object.prototype.hasOwnProperty.call(requestById, requestId)
+    ) {
+      const startedTimeStamp = queryCache?.startedTimeStamp;
+      const fulfilledTimeStamp = queryCache?.fulfilledTimeStamp;
+
+      if (
+        typeof startedTimeStamp === 'number' &&
+        typeof fulfilledTimeStamp === 'number'
+      ) {
+        requestById[requestId] = {
+          queryKey: queryCacheKey,
+          requestId,
+          endpointName: queryCache.endpointName ?? '',
+          startedTimeStamp,
+          fulfilledTimeStamp,
+          status: queryCache.status,
+        };
+      }
+    }
+  }
+
+  return requestById;
+}
+
+function formatRtkRequest(
+  rtkRequest: RtkRequest | null
+): RtkRequestTiming | null {
+  if (!rtkRequest) {
+    return null;
+  }
+
+  const fulfilledTimeStamp = rtkRequest.fulfilledTimeStamp;
+  const startedTimeStamp = rtkRequest.startedTimeStamp;
+
+  const output: RtkRequestTiming = {
+    queryKey: rtkRequest.queryKey,
+    requestId: rtkRequest.requestId,
+    endpointName: rtkRequest.endpointName,
+    startedAt: '-',
+    completedAt: '-',
+    duration: '-',
+  };
+
+  if (
+    typeof fulfilledTimeStamp === 'number' &&
+    typeof startedTimeStamp === 'number'
+  ) {
+    output.startedAt = new Date(startedTimeStamp).toISOString();
+    output.completedAt = new Date(fulfilledTimeStamp).toISOString();
+    output.duration = formatMs(fulfilledTimeStamp - startedTimeStamp);
+  }
+
+  return output;
+}
+
 function computeQueryApiTimings(
-  queriesOrMutations:
-    | RtkQueryApiState['queries']
-    | RtkQueryApiState['mutations']
+  requestById: Readonly<Record<string, RtkRequest>>
 ): QueryTimings {
-  type SpeedReport = { key: string | null; at: string | number };
-  type DurationReport = { key: string | null; duration: string | number };
-  let latest: null | SpeedReport = { key: null, at: -1 };
-  let oldest: null | SpeedReport = {
-    key: null,
-    at: Number.MAX_SAFE_INTEGER,
-  };
-  let slowest: null | DurationReport = { key: null, duration: -1 };
-  let fastest: null | DurationReport = {
-    key: null,
-    duration: Number.MAX_SAFE_INTEGER,
-  };
+  const requests = Object.values(requestById);
+
+  let latestRequest: RtkRequest | null = null;
+  let oldestRequest: null | RtkRequest = null;
+  let slowestRequest: RtkRequest | null = null;
+  let fastestRequest: RtkRequest | null = null;
+  let slowestDuration = 0;
+  let fastestDuration = Number.MAX_SAFE_INTEGER;
 
   const pendingDurations: number[] = [];
 
-  const queryKeys = Object.keys(queriesOrMutations);
-
-  for (let i = 0, len = queryKeys.length; i < len; i++) {
-    const queryKey = queryKeys[i];
-    const query = queriesOrMutations[queryKey];
-
-    const fulfilledTimeStamp = query?.fulfilledTimeStamp;
-    const startedTimeStamp = query?.startedTimeStamp;
+  for (let i = 0, len = requests.length; i < len; i++) {
+    const request = requests[i];
+    const { fulfilledTimeStamp, startedTimeStamp } = request;
 
     if (typeof fulfilledTimeStamp === 'number') {
-      if (fulfilledTimeStamp > latest.at) {
-        latest.key = queryKey;
-        latest.at = fulfilledTimeStamp;
+      const latestFulfilledTimeStamp = latestRequest?.fulfilledTimeStamp || 0;
+      const oldestFulfilledTimeStamp =
+        oldestRequest?.fulfilledTimeStamp || Number.MAX_SAFE_INTEGER;
+
+      if (fulfilledTimeStamp > latestFulfilledTimeStamp) {
+        latestRequest = request;
       }
 
-      if (fulfilledTimeStamp < oldest.at) {
-        oldest.key = queryKey;
-        oldest.at = fulfilledTimeStamp;
+      if (fulfilledTimeStamp < oldestFulfilledTimeStamp) {
+        oldestRequest = request;
       }
 
       if (
@@ -244,44 +388,19 @@ function computeQueryApiTimings(
         startedTimeStamp <= fulfilledTimeStamp
       ) {
         const pendingDuration = fulfilledTimeStamp - startedTimeStamp;
-
         pendingDurations.push(pendingDuration);
 
-        if (pendingDuration > slowest.duration) {
-          slowest.key = queryKey;
-          slowest.duration = pendingDuration;
+        if (pendingDuration > slowestDuration) {
+          slowestDuration = pendingDuration;
+          slowestRequest = request;
         }
 
-        if (pendingDuration < fastest.duration) {
-          fastest.key = queryKey;
-          fastest.duration = pendingDuration;
+        if (pendingDuration < fastestDuration) {
+          fastestDuration = pendingDuration;
+          fastestRequest = request;
         }
       }
     }
-  }
-
-  if (latest.key !== null) {
-    latest.at = new Date(latest.at).toISOString();
-  } else {
-    latest = null;
-  }
-
-  if (oldest.key !== null) {
-    oldest.at = new Date(oldest.at).toISOString();
-  } else {
-    oldest = null;
-  }
-
-  if (slowest.key !== null) {
-    slowest.duration = formatMs(slowest.duration as number);
-  } else {
-    slowest = null;
-  }
-
-  if (fastest.key !== null) {
-    fastest.duration = formatMs(fastest.duration as number);
-  } else {
-    fastest = null;
   }
 
   const average =
@@ -295,34 +414,60 @@ function computeQueryApiTimings(
       : '-';
 
   return {
-    latest,
-    oldest,
-    slowest,
-    fastest,
+    latest: formatRtkRequest(latestRequest),
+    oldest: formatRtkRequest(oldestRequest),
+    slowest: formatRtkRequest(slowestRequest),
+    fastest: formatRtkRequest(fastestRequest),
     average,
     median,
-  } as QueryTimings;
+  };
 }
 
-function computeApiTimings(api: RtkQueryApiState): ApiTimings {
+function computeApiTimings(
+  api: RtkQueryApiState,
+  actionsById: SelectorsSource<unknown>['actionsById'],
+  currentStateIndex: SelectorsSource<unknown>['currentStateIndex']
+): ApiTimings {
+  const sortedActions = Object.entries(actionsById)
+    .sort((thisAction, thatAction) =>
+      compareJSONPrimitive(Number(thisAction[0]), Number(thatAction[0]))
+    )
+    .map((entry) => entry[1].action);
+
+  const queryRequestsById = computeRtkQueryRequests(
+    'queries',
+    api,
+    sortedActions,
+    currentStateIndex
+  );
+
+  const mutationRequestsById = computeRtkQueryRequests(
+    'mutations',
+    api,
+    sortedActions,
+    currentStateIndex
+  );
+
   return {
-    queries: computeQueryApiTimings(api.queries),
-    mutations: computeQueryApiTimings(api.mutations),
+    queries: computeQueryApiTimings(queryRequestsById),
+    mutations: computeQueryApiTimings(mutationRequestsById),
   };
 }
 
 export function generateApiStatsOfCurrentQuery(
-  api: RtkQueryApiState | null
+  api: RtkQueryApiState | null,
+  actionsById: SelectorsSource<unknown>['actionsById'],
+  currentStateIndex: SelectorsSource<unknown>['currentStateIndex']
 ): ApiStats | null {
   if (!api) {
     return null;
   }
 
   return {
-    timings: computeApiTimings(api),
+    timings: computeApiTimings(api, actionsById, currentStateIndex),
     tally: {
-      queries: computeQueryTallyOf(api.queries),
-      mutations: computeQueryTallyOf(api.mutations),
+      cachedQueries: computeQueryTallyOf(api.queries),
+      cachedMutations: computeQueryTallyOf(api.mutations),
       tagTypes: Object.keys(api.provided).length,
       subscriptions: tallySubscriptions(api.subscriptions),
     },
@@ -441,29 +586,56 @@ export function getQueryStatusFlags({
  * @see https://github.com/reduxjs/redux-toolkit/blob/b718e01d323d3ab4b913e5d88c9b90aa790bb975/src/query/core/buildThunks.ts#L415
  */
 export function matchesEndpoint(endpointName: unknown) {
-  return (action: any): action is AnyAction =>
+  return (action: any): action is Action =>
     endpointName != null && action?.meta?.arg?.endpointName === endpointName;
 }
 
 function matchesQueryKey(queryKey: string) {
-  return (action: any): action is AnyAction =>
+  return (action: any): action is Action =>
     action?.meta?.arg?.queryCacheKey === queryKey;
 }
 
 function macthesRequestId(requestId: string) {
-  return (action: any): action is AnyAction =>
+  return (action: any): action is Action =>
     action?.meta?.requestId === requestId;
 }
 
 function matchesReducerPath(reducerPath: string) {
-  return (action: any): action is AnyAction =>
+  return (action: any): action is Action<string> =>
     typeof action?.type === 'string' && action.type.startsWith(reducerPath);
+}
+
+function matchesExecuteQuery(reducerPath: string) {
+  return (
+    action: any
+  ): action is Action<string> & {
+    meta: { requestId: string; requestStatus: QueryStatus };
+  } => {
+    return (
+      typeof action?.type === 'string' &&
+      action.type.startsWith(`${reducerPath}/executeQuery`) &&
+      typeof action.meta?.requestId === 'string' &&
+      typeof action.meta?.requestStatus === 'string'
+    );
+  };
+}
+
+function matchesExecuteMutation(reducerPath: string) {
+  return (
+    action: any
+  ): action is Action<string> & {
+    meta: { requestId: string; requestStatus: QueryStatus };
+  } =>
+    typeof action?.type === 'string' &&
+    action.type.startsWith(`${reducerPath}/executeMutation`) &&
+    typeof action.meta?.requestId === 'string' &&
+    typeof action.meta?.requestStatus === 'string';
 }
 
 export function getActionsOfCurrentQuery(
   currentQuery: RtkResourceInfo | null,
   actionById: SelectorsSource<unknown>['actionsById']
-): AnyAction[] {
+): Action[] {
   if (!currentQuery) {
     return emptyArray;
   }

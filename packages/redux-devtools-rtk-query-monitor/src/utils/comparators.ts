@@ -48,10 +48,9 @@ function sortQueryByStatus(
   return thisTerm - thatTerm;
 }
 
-function compareJSONPrimitive<T extends string | number | boolean | null>(
-  a: T,
-  b: T
-): number {
+export function compareJSONPrimitive<
+  T extends string | number | boolean | null
+>(a: T, b: T): number {
   if (a === b) {
     return 0;
   }
