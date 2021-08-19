@@ -28,7 +28,8 @@
     "test:app": "cross-env BABEL_ENV=test jest test/app",
     "test:chrome": "jest test/chrome",
     "test:electron": "jest test/electron",
-    "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron"
+    "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@redux-devtools/app": "^1.0.0-8",

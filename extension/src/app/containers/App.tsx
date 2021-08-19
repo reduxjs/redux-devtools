@@ -7,6 +7,8 @@ import Actions from '@redux-devtools/app/lib/containers/Actions';
 import Header from '@redux-devtools/app/lib/components/Header';
 import { clearNotification } from '@redux-devtools/app/lib/actions';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
+import { SingleMessage } from '../middlewares/api';
+import { Position } from '../api/openWindow';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
@@ -15,13 +17,17 @@ interface OwnProps {
 }
 type Props = StateProps & DispatchProps & OwnProps;
 
+function sendMessage(message: SingleMessage) {
+  chrome.runtime.sendMessage(message);
+}
+
 class App extends Component<Props> {
-  openWindow = (position: string) => {
-    chrome.runtime.sendMessage({ type: 'OPEN', position });
+  openWindow = (position: Position) => {
+    sendMessage({ type: 'OPEN', position });
   };
   openOptionsPage = () => {
     if (navigator.userAgent.indexOf('Firefox') !== -1) {
-      chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
+      sendMessage({ type: 'OPEN_OPTIONS' });
     } else {
       chrome.runtime.openOptionsPage();
     }

@@ -5,7 +5,6 @@ import { SET_STATE } from '../constants/actionTypes';
 import { InstancesState, State } from '../reducers/instances';
 import { Dispatch, MiddlewareAPI } from 'redux';
 import { DispatchAction, StoreAction } from '../actions';
-import { StoreState } from '../reducers';
 
 export function sweep(state: State): State {
   return {

@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, PreloadedState } from 'redux';
 import rootReducer, { BackgroundState } from '../reducers/background';
-import api from '../middlewares/api';
+import api, { CONNECTED, DISCONNECTED } from '../middlewares/api';
 import { LIFTED_ACTION } from '@redux-devtools/app/lib/constants/actionTypes';
 import {
   CustomAction,
@@ -26,6 +26,7 @@ interface LiftedActionImportAction extends LiftedActionActionBase {
   message: 'IMPORT';
   state: string;
   preloadedState?: unknown | undefined;
+  action?: never;
 }
 interface LiftedActionActionAction extends LiftedActionActionBase {
   type: typeof LIFTED_ACTION;
@@ -36,6 +37,7 @@ interface LiftedActionExportAction extends LiftedActionActionBase {
   type: typeof LIFTED_ACTION;
   message: 'EXPORT';
   toExport: boolean;
+  action?: never;
 }
 export type LiftedActionAction =
   | LiftedActionDispatchAction
@@ -49,10 +51,20 @@ interface TogglePersistAction {
   readonly id: string | number | undefined;
 }
 
+interface ConnectedAction {
+  readonly type: typeof CONNECTED;
+}
+
+interface DisconnectedAction {
+  readonly type: typeof DISCONNECTED;
+}
+
 export type BackgroundAction =
   | StoreActionWithoutLiftedAction
   | LiftedActionAction
-  | TogglePersistAction;
+  | TogglePersistAction
+  | ConnectedAction
+  | DisconnectedAction;
 
 export default function configureStore(
   preloadedState?: PreloadedState<BackgroundState>

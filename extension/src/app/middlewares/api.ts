@@ -10,7 +10,9 @@ import syncOptions, {
   OptionsMessage,
   SyncOptions,
 } from '../../browser/extension/options/syncOptions';
-import openDevToolsWindow from '../../browser/extension/background/openWindow';
+import openDevToolsWindow, {
+  DevToolsPosition,
+} from '../../browser/extension/background/openWindow';
 import { getReport } from '../../browser/extension/background/logging';
 import {
   CustomAction,
@@ -32,6 +34,7 @@ import {
   BackgroundAction,
   LiftedActionAction,
 } from '../stores/backgroundStore';
+import { Position } from '../api/openWindow';
 
 interface TabMessageBase {
   readonly type: string;
@@ -87,7 +90,7 @@ interface NAAction {
 interface InitMessage<S, A extends Action<unknown>> {
   readonly type: 'INIT';
   readonly payload: string;
-  readonly instanceId: string;
+  instanceId: string;
   readonly source: '@devtools-page';
   action?: string;
   name?: string | undefined;
@@ -98,7 +101,7 @@ interface InitMessage<S, A extends Action<unknown>> {
 interface LiftedMessage {
   readonly type: 'LIFTED';
   readonly liftedState: { readonly isPaused: boolean | undefined };
-  readonly instanceId: string;
+  instanceId: number;
   readonly source: '@devtools-page';
 }
 
@@ -112,7 +115,7 @@ interface SerializedPartialStateMessage {
   readonly type: 'PARTIAL_STATE';
   readonly payload: SerializedPartialLiftedState;
   readonly source: '@devtools-page';
-  readonly instanceId: string;
+  instanceId: number;
   readonly maxAge: number;
   readonly actionsById: string;
   readonly computedStates: string;
@@ -124,14 +127,14 @@ interface SerializedExportMessage {
   readonly payload: string;
   readonly committedState: string | undefined;
   readonly source: '@devtools-page';
-  readonly instanceId: string;
+  instanceId: number;
 }
 
 interface SerializedActionMessage {
   readonly type: 'ACTION';
   readonly payload: string;
   readonly source: '@devtools-page';
-  readonly instanceId: string;
+  instanceId: number;
   readonly action: string;
   readonly maxAge: number;
   readonly nextActionId: number;
@@ -144,7 +147,7 @@ interface SerializedStateMessage<S, A extends Action<unknown>> {
     'actionsById' | 'computedStates' | 'committedState'
   >;
   readonly source: '@devtools-page';
-  readonly instanceId: string;
+  instanceId: string;
   readonly libConfig?: LibConfig;
   readonly actionsById: string;
   readonly computedStates: string;
@@ -165,7 +168,7 @@ interface EmptyUpdateStateAction {
 
 interface UpdateStateAction<S, A extends Action<unknown>> {
   readonly type: typeof UPDATE_STATE;
-  readonly request: UpdateStateRequest<S, A>;
+  request: UpdateStateRequest<S, A>;
   readonly id: string | number;
 }
 
@@ -195,8 +198,8 @@ type MonitorPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: (message: MonitorMessage) => void;
 };
 
-const CONNECTED = 'socket/CONNECTED';
-const DISCONNECTED = 'socket/DISCONNECTED';
+export const CONNECTED = 'socket/CONNECTED';
+export const DISCONNECTED = 'socket/DISCONNECTED';
 const connections: {
   readonly tab: { [K in number | string]: TabPort };
   readonly panel: { [K in number | string]: PanelPort };
@@ -248,19 +251,78 @@ interface ImportMessage {
 
 type ToContentScriptMessage = ImportMessage | LiftedActionAction;
 
-function toContentScript({
-  message,
-  action,
-  id,
-  instanceId,
-  state,
-}: ToContentScriptMessage) {
-  connections.tab[id!].postMessage({
-    type: message,
-    action,
-    state: nonReduxDispatch(window.store, message, instanceId, action, state),
-    id: instanceId.toString().replace(/^[^\/]+\//, ''),
-  });
+function toContentScript(messageBody: ToContentScriptMessage) {
+  if (messageBody.message === 'DISPATCH') {
+    const { message, action, id, instanceId, state } = messageBody;
+    connections.tab[id!].postMessage({
+      type: message,
+      action,
+      state: nonReduxDispatch(
+        window.store,
+        message,
+        instanceId,
+        action as AppDispatchAction,
+        state
+      ),
+      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+    });
+  } else if (messageBody.message === 'IMPORT') {
+    const { message, action, id, instanceId, state } = messageBody;
+    connections.tab[id!].postMessage({
+      type: message,
+      action,
+      state: nonReduxDispatch(
+        window.store,
+        message,
+        instanceId,
+        action as unknown as AppDispatchAction,
+        state
+      ),
+      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+    });
+  } else if (messageBody.message === 'ACTION') {
+    const { message, action, id, instanceId, state } = messageBody;
+    connections.tab[id!].postMessage({
+      type: message,
+      action,
+      state: nonReduxDispatch(
+        window.store,
+        message,
+        instanceId,
+        action as unknown as AppDispatchAction,
+        state
+      ),
+      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+    });
+  } else if (messageBody.message === 'EXPORT') {
+    const { message, action, id, instanceId, state } = messageBody;
+    connections.tab[id!].postMessage({
+      type: message,
+      action,
+      state: nonReduxDispatch(
+        window.store,
+        message,
+        instanceId,
+        action as unknown as AppDispatchAction,
+        state
+      ),
+      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+    });
+  } else {
+    const { message, action, id, instanceId, state } = messageBody;
+    connections.tab[id!].postMessage({
+      type: message,
+      action,
+      state: nonReduxDispatch(
+        window.store,
+        message,
+        instanceId,
+        action as AppDispatchAction,
+        state
+      ),
+      id: (instanceId as number).toString().replace(/^[^\/]+\//, ''),
+    });
+  }
 }
 
 function toAllTabs(msg: TabMessage) {
@@ -302,9 +364,28 @@ function togglePersist() {
   }
 }
 
+interface OpenMessage {
+  readonly type: 'OPEN';
+  readonly position: Position;
+}
+
+interface OpenOptionsMessage {
+  readonly type: 'OPEN_OPTIONS';
+}
+
+interface GetOptionsMessage {
+  readonly type: 'GET_OPTIONS';
+}
+
+export type SingleMessage =
+  | OpenMessage
+  | OpenOptionsMessage
+  | GetOptionsMessage;
+
 type BackgroundStoreMessage<S, A extends Action<unknown>> =
   | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
-  | SplitMessage;
+  | SplitMessage
+  | SingleMessage;
 type BackgroundStoreResponse = { readonly options: Options };
 
 // Receive messages from content scripts
@@ -338,13 +419,13 @@ function messaging<S, A extends Action<unknown>>(
     return;
   }
   if (request.type === 'OPEN') {
-    let position = 'devtools-left';
+    let position: DevToolsPosition = 'devtools-left';
     if (
       ['remote', 'panel', 'left', 'right', 'bottom'].indexOf(
         request.position
       ) !== -1
     ) {
-      position = 'devtools-' + request.position;
+      position = ('devtools-' + request.position) as DevToolsPosition;
     }
     openDevToolsWindow(position);
     return;
@@ -372,19 +453,20 @@ function messaging<S, A extends Action<unknown>>(
     type: UPDATE_STATE,
     request,
     id: tabId,
-  };
+  } as UpdateStateAction<S, A>;
   const instanceId = `${tabId}/${request.instanceId}`;
   if ('split' in request) {
     if (request.split === 'start') {
-      chunks[instanceId] = request;
+      chunks[instanceId] = request as any;
       return;
     }
     if (request.split === 'chunk') {
-      chunks[instanceId][request.chunk[0]] =
-        (chunks[instanceId][request.chunk[0]] || '') + request.chunk[1];
+      (chunks[instanceId] as any)[request.chunk[0]] =
+        ((chunks[instanceId] as any)[request.chunk[0]] || '') +
+        request.chunk[1];
       return;
     }
-    action.request = chunks[instanceId];
+    action.request = chunks[instanceId] as any;
     delete chunks[instanceId];
   }
   if (request.instanceId) {

@@ -357,6 +357,7 @@ export interface ErrorMessage {
   readonly payload: string;
   readonly source: typeof source;
   readonly instanceId: number;
+  readonly message?: string | undefined;
 }
 
 interface InitInstanceMessage {
@@ -449,16 +450,34 @@ export function sendMessage<S, A extends Action<unknown>>(
     config = {}; // eslint-disable-line no-param-reassign
     if (action) amendedAction = amendActionType(action, config, sendMessage);
   }
-  const message = {
-    type: action ? 'ACTION' : 'STATE',
-    action: amendedAction,
-    payload: state,
-    maxAge: config.maxAge,
-    source,
-    name: config.name || name,
-    instanceId: config.instanceId || instanceId || 1,
-  };
-  toContentScript(message, config.serialize, config.serialize);
+  if (action) {
+    toContentScript(
+      {
+        type: 'ACTION',
+        action: amendedAction,
+        payload: state,
+        maxAge: config.maxAge,
+        source,
+        name: config.name || name,
+        instanceId: config.instanceId || instanceId || 1,
+      },
+      config.serialize,
+      config.serialize
+    );
+  }
+  toContentScript(
+    {
+      type: 'STATE',
+      action: amendedAction,
+      payload: state,
+      maxAge: config.maxAge,
+      source,
+      name: config.name || name,
+      instanceId: config.instanceId || instanceId || 1,
+    },
+    config.serialize,
+    config.serialize
+  );
 }
 
 function handleMessages(event: MessageEvent<ContentScriptToPageScriptMessage>) {
@@ -609,7 +628,11 @@ export function connect(preConfig: Config) {
         return;
       }
     }
-    sendMessage(amendedAction, amendedState, config);
+    sendMessage(
+      amendedAction as StructuralPerformAction<A>,
+      amendedState,
+      config
+    );
   };
 
   const init = <S, A extends Action<unknown>>(
