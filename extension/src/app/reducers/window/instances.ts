@@ -7,7 +7,10 @@ import {
   SELECT_INSTANCE,
   LIFTED_ACTION,
 } from '@redux-devtools/app/lib/constants/actionTypes';
-import { WindowStoreAction } from '../../stores/windowStore';
+import {
+  ExpandedUpdateStateAction,
+  WindowStoreAction,
+} from '../../stores/windowStore';
 
 export default function instances(
   state = initialState,
@@ -15,7 +18,10 @@ export default function instances(
 ) {
   switch (action.type) {
     case UPDATE_STATE:
-      return { ...action.instances, selected: state.selected };
+      return {
+        ...(action as ExpandedUpdateStateAction).instances,
+        selected: state.selected,
+      };
     case LIFTED_ACTION:
       if (action.message === 'DISPATCH') return dispatchAction(state, action);
       return state;

@@ -28,7 +28,7 @@ const syncStores =
       const instances = store.getState().instances;
       const instanceId = getActiveInstance(instances);
       const id = instances.options[instanceId].connectionId;
-      baseStore.dispatch({ ...action, instanceId, id });
+      baseStore.dispatch({ ...action, instanceId, id } as any);
     }
     return next(action);
   };

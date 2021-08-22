@@ -14,8 +14,9 @@ chrome.storage.local.get(
     's:secure': null,
   },
   (options) => {
+    const AppAsAny = App as any;
     render(
-      <App
+      <AppAsAny
         selectMonitor={options['select-monitor']}
         testTemplates={options['test-templates']}
         selectedTemplate={options['test-templates-sel']}

@@ -82,9 +82,9 @@ interface ExportAction extends TabMessageBase {
   readonly id: string;
 }
 
-interface NAAction {
+export interface NAAction {
   readonly type: 'NA';
-  readonly id: string;
+  readonly id: string | number;
 }
 
 interface InitMessage<S, A extends Action<unknown>> {
@@ -99,10 +99,10 @@ interface InitMessage<S, A extends Action<unknown>> {
 }
 
 interface LiftedMessage {
-  readonly type: 'LIFTED';
-  readonly liftedState: { readonly isPaused: boolean | undefined };
+  type: 'LIFTED';
+  liftedState: { isPaused: boolean | undefined };
   instanceId: number;
-  readonly source: '@devtools-page';
+  source: '@devtools-page';
 }
 
 interface SerializedPartialLiftedState {
@@ -162,7 +162,7 @@ type UpdateStateRequest<S, A extends Action<unknown>> =
   | SerializedActionMessage
   | SerializedStateMessage<S, A>;
 
-interface EmptyUpdateStateAction {
+export interface EmptyUpdateStateAction {
   readonly type: typeof UPDATE_STATE;
 }
 

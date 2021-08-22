@@ -1,7 +1,7 @@
 import { PreloadedState } from 'redux';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
 
-const getIfExists = (sel, template) =>
+const getIfExists = (sel: any, template: any) =>
   typeof sel === 'undefined' ||
   typeof template === 'undefined' ||
   typeof template[sel] === 'undefined'
@@ -34,7 +34,7 @@ export default function getPreloadedState(
           ),
           templates: options['test-templates'],
         },
-      });
+      } as any);
     }
   );
 }

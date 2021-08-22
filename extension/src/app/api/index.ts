@@ -174,7 +174,7 @@ interface SerializedActionMessage {
   readonly instanceId: number;
   readonly action: string;
   readonly maxAge: number;
-  readonly nextActionId: number;
+  readonly nextActionId?: number;
 }
 
 interface SerializedStateMessage<S, A extends Action<unknown>> {
@@ -320,7 +320,7 @@ interface ExportMessage<S, A extends Action<unknown>> {
   readonly instanceId: number;
 }
 
-interface StructuralPerformAction<A extends Action<unknown>> {
+export interface StructuralPerformAction<A extends Action<unknown>> {
   readonly action: A;
   readonly timestamp?: number;
   readonly stack?: string;
@@ -341,7 +341,8 @@ interface ActionMessage<S, A extends Action<unknown>> {
   readonly instanceId: number;
   readonly action: UserAction<A>;
   readonly maxAge: number;
-  readonly nextActionId: number;
+  readonly nextActionId?: number;
+  readonly name?: string;
 }
 
 interface StateMessage<S, A extends Action<unknown>> {
@@ -350,6 +351,9 @@ interface StateMessage<S, A extends Action<unknown>> {
   readonly source: typeof source;
   readonly instanceId: number;
   readonly libConfig?: LibConfig;
+  readonly action?: UserAction<A>;
+  readonly maxAge?: number;
+  readonly name?: string;
 }
 
 export interface ErrorMessage {
@@ -439,7 +443,7 @@ export function toContentScript<S, A extends Action<unknown>>(
 
 export function sendMessage<S, A extends Action<unknown>>(
   action: StructuralPerformAction<A> | StructuralPerformAction<A>[],
-  state: S,
+  state: LiftedState<S, A, unknown>,
   config: Config,
   instanceId?: number,
   name?: string
@@ -456,16 +460,16 @@ export function sendMessage<S, A extends Action<unknown>>(
         type: 'ACTION',
         action: amendedAction,
         payload: state,
-        maxAge: config.maxAge,
+        maxAge: config.maxAge!,
         source,
         name: config.name || name,
         instanceId: config.instanceId || instanceId || 1,
       },
-      config.serialize,
-      config.serialize
+      config.serialize as Serialize | undefined,
+      config.serialize as Serialize | undefined
     );
   }
-  toContentScript(
+  toContentScript<S, A>(
     {
       type: 'STATE',
       action: amendedAction,
@@ -475,8 +479,8 @@ export function sendMessage<S, A extends Action<unknown>>(
       name: config.name || name,
       instanceId: config.instanceId || instanceId || 1,
     },
-    config.serialize,
-    config.serialize
+    config.serialize as Serialize | undefined,
+    config.serialize as Serialize | undefined
   );
 }
 
@@ -530,7 +534,23 @@ export function disconnect() {
   post({ type: 'DISCONNECT', source });
 }
 
-export function connect(preConfig: Config) {
+export interface ConnectResponse {
+  init: <S, A extends Action<unknown>>(
+    state: S,
+    liftedData: LiftedState<S, A, unknown>
+  ) => void;
+  subscribe: <S, A extends Action<unknown>>(
+    listener: (message: ListenerMessage<S, A>) => void
+  ) => (() => void) | undefined;
+  unsubscribe: () => void;
+  send: <S, A extends Action<unknown>>(
+    action: A,
+    state: LiftedState<S, A, unknown>
+  ) => void;
+  error: (payload: string) => void;
+}
+
+export function connect(preConfig: Config): ConnectResponse {
   const config = preConfig || {};
   const id = generateId(config.instanceId);
   if (!config.instanceId) config.instanceId = id;
@@ -546,7 +566,7 @@ export function connect(preConfig: Config) {
   const autoPause = config.autoPause;
   let isPaused = autoPause;
   let delayedActions: StructuralPerformAction<Action<unknown>>[] = [];
-  let delayedStates: unknown[] = [];
+  let delayedStates: LiftedState<unknown, Action<unknown>, unknown>[] = [];
 
   const rootListener = (action: ContentScriptToPageScriptMessage) => {
     if (autoPause) {
@@ -590,12 +610,15 @@ export function connect(preConfig: Config) {
   };
 
   const sendDelayed = throttle(() => {
-    sendMessage(delayedActions, delayedStates, config);
+    sendMessage(delayedActions, delayedStates as any, config);
     delayedActions = [];
     delayedStates = [];
   }, latency);
 
-  const send = <S, A extends Action<unknown>>(action: A, state: S) => {
+  const send = <S, A extends Action<unknown>>(
+    action: A,
+    state: LiftedState<S, A, unknown>
+  ) => {
     if (
       isPaused ||
       isFiltered(action, localFilter) ||
@@ -684,13 +707,10 @@ export function connect(preConfig: Config) {
 
 export function updateStore<S, A extends Action<unknown>>(
   stores: {
-    [K in string | number]: EnhancedStore<S, Action<A>, unknown>;
+    [K in string | number]: EnhancedStore<S, A, unknown>;
   }
 ) {
-  return function (
-    newStore: EnhancedStore<S, Action<A>, unknown>,
-    instanceId: number
-  ) {
+  return function (newStore: EnhancedStore<S, A, unknown>, instanceId: number) {
     /* eslint-disable no-console */
     console.warn(
       '`__REDUX_DEVTOOLS_EXTENSION__.updateStore` is deprecated, remove it and just use ' +

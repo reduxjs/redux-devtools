@@ -4,7 +4,7 @@ import stringifyJSON from './stringifyJSON';
 import { SET_STATE } from '../constants/actionTypes';
 import { InstancesState, State } from '../reducers/instances';
 import { Dispatch, MiddlewareAPI } from 'redux';
-import { DispatchAction, StoreAction } from '../actions';
+import { DispatchAction, StoreActionWithoutLiftedAction } from '../actions';
 
 export function sweep(state: State): State {
   return {
@@ -21,7 +21,7 @@ export function sweep(state: State): State {
 
 export function nonReduxDispatch(
   store: MiddlewareAPI<
-    Dispatch<StoreAction>,
+    Dispatch<StoreActionWithoutLiftedAction>,
     { readonly instances: InstancesState }
   >,
   message: string,

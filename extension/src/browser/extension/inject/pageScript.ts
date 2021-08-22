@@ -7,6 +7,7 @@ import throttle from 'lodash/throttle';
 import {
   Action,
   ActionCreator,
+  Dispatch,
   PreloadedState,
   Reducer,
   Store,
@@ -14,7 +15,7 @@ import {
   StoreEnhancerStoreCreator,
 } from 'redux';
 import Immutable from 'immutable';
-import { EnhancedStore } from '@redux-devtools/instrument';
+import { EnhancedStore, PerformAction } from '@redux-devtools/instrument';
 import createStore from '../../../app/stores/createStore';
 import configureStore, { getUrlParam } from '../../../app/stores/enhancerStore';
 import { isAllowed, Options } from '../options/syncOptions';
@@ -40,6 +41,8 @@ import {
   isInIframe,
   getSerializeParameter,
   Serialize,
+  StructuralPerformAction,
+  ConnectResponse,
 } from '../../../app/api';
 import { LiftedAction, LiftedState } from '@redux-devtools/instrument';
 import {
@@ -50,9 +53,19 @@ import {
 import { ContentScriptToPageScriptMessage } from './contentScript';
 import { Features } from '@redux-devtools/app/lib/reducers/instances';
 
+type EnhancedStoreWithInitialDispatch<
+  S,
+  A extends Action<unknown>,
+  MonitorState
+> = EnhancedStore<S, A, MonitorState> & { initialDispatch: Dispatch<A> };
+
 const source = '@devtools-page';
 let stores: {
-  [K in string | number]: EnhancedStore<unknown, Action<unknown>, unknown>;
+  [K in string | number]: EnhancedStoreWithInitialDispatch<
+    unknown,
+    Action<unknown>,
+    unknown
+  >;
 } = {};
 let reportId: string | null | undefined;
 
@@ -137,7 +150,23 @@ interface ReduxDevtoolsExtension {
   ): Store<S, A>;
   (config?: Config): StoreEnhancer;
   open: (position?: Position) => void;
+  updateStore: (
+    newStore: EnhancedStore<unknown, Action<unknown>, unknown>,
+    instanceId: number
+  ) => void;
   notifyErrors: (onError?: () => boolean) => void;
+  send: <S, A extends Action<unknown>>(
+    action: StructuralPerformAction<A> | StructuralPerformAction<A>[],
+    state: LiftedState<S, A, unknown>,
+    config: Config,
+    instanceId?: number,
+    name?: string
+  ) => void;
+  listen: (
+    onMessage: (message: ContentScriptToPageScriptMessage) => void,
+    instanceId: number
+  ) => void;
+  connect: (preConfig: Config) => ConnectResponse;
   disconnect: () => void;
 }
 
@@ -157,16 +186,16 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   reducer?: Reducer<S, A> | Config | undefined,
   preloadedState?: PreloadedState<S>,
   config?: Config
-) {
+): Store<S, A> | StoreEnhancer {
   /* eslint-disable no-param-reassign */
   if (typeof reducer === 'object') {
     config = reducer;
     reducer = undefined;
   } else if (typeof config !== 'object') config = {};
   /* eslint-enable no-param-reassign */
-  if (!window.devToolsOptions) window.devToolsOptions = {};
+  if (!window.devToolsOptions) window.devToolsOptions = {} as any;
 
-  let store: EnhancedStore<S, A, unknown>;
+  let store: EnhancedStoreWithInitialDispatch<S, A, unknown>;
   let errorOccurred = false;
   let maxAge: number | undefined;
   let actionCreators: readonly ActionCreatorObject[];
@@ -404,7 +433,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       store.liftedStore.dispatch({ type: action.type, index });
       return;
     }
-    store.liftedStore.dispatch(action);
+    store.liftedStore.dispatch(action as any);
   }
 
   function onMessage(message: ContentScriptToPageScriptMessage) {
@@ -479,12 +508,12 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     if (
       !liftedAction ||
       noFiltersApplied(localFilter) ||
-      !liftedAction.action
+      !(liftedAction as PerformAction<A>).action
     ) {
       return m;
     }
     if (!maxAge || maxAge < m) maxAge = m; // it can be modified in process on options page
-    if (isFiltered(liftedAction.action, localFilter)) {
+    if (isFiltered((liftedAction as PerformAction<A>).action, localFilter)) {
       // TODO: check also predicate && !predicate(state, action) with current state
       maxAge++;
     } else {
@@ -554,10 +583,10 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   }
 
   const enhance =
-    () =>
+    (): StoreEnhancer =>
     <NextExt, NextStateExt>(
       next: StoreEnhancerStoreCreator<NextExt, NextStateExt>
-    ) => {
+    ): any => {
       return <S2 extends S, A2 extends A>(
         reducer_: Reducer<S2, A2>,
         initialState_?: PreloadedState<S2>
@@ -568,7 +597,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
 
         return configureStore(next, monitor.reducer, {
           ...config,
-          maxAge: getMaxAge,
+          maxAge: getMaxAge as any,
         })(reducer_, initialState_);
 
         if (isInIframe()) setTimeout(init, 3000);
@@ -610,24 +639,27 @@ const preEnhancer =
     const store = next(reducer, preloadedState);
 
     if (stores[instanceId]) {
-      stores[instanceId].initialDispatch = store.dispatch;
+      (stores[instanceId].initialDispatch as any) = store.dispatch;
     }
 
     return {
       ...store,
-      dispatch: (...args) =>
-        !window.__REDUX_DEVTOOLS_EXTENSION_LOCKED__ && store.dispatch(...args),
-    };
+      dispatch: (...args: any[]) =>
+        !window.__REDUX_DEVTOOLS_EXTENSION_LOCKED__ &&
+        (store.dispatch as any)(...args),
+    } as any;
   };
 
 const extensionCompose =
   (config: Config) =>
   (...funcs: StoreEnhancer[]) => {
-    return (...args) => {
+    return (...args: any[]) => {
       const instanceId = generateId(config.instanceId);
       return [preEnhancer(instanceId), ...funcs].reduceRight(
         (composed, f) => f(composed),
-        __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args)
+        (__REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId }) as any)(
+          ...args
+        )
       );
     };
   };
@@ -638,7 +670,7 @@ declare global {
   }
 }
 
-window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = (...funcs) => {
+window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = (...funcs: any[]) => {
   if (funcs.length === 0) {
     return __REDUX_DEVTOOLS_EXTENSION__();
   }

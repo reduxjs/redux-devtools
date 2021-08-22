@@ -382,7 +382,7 @@ export interface LibConfig {
 
 export interface RequestBase {
   id?: string;
-  instanceId?: string;
+  instanceId?: string | number;
   action?: string;
   name?: string | undefined;
   libConfig?: LibConfig;
@@ -441,7 +441,7 @@ export interface SetStateAction {
 
 export interface RemoveInstanceAction {
   type: typeof REMOVE_INSTANCE;
-  id: string;
+  id: string | number;
 }
 
 export interface ConnectRequestAction {
@@ -557,7 +557,6 @@ export type StoreActionWithoutUpdateStateOrLiftedAction =
   | ChangeSectionAction
   | ChangeThemeAction
   | MonitorActionAction
-  | LiftedActionAction
   | SelectInstanceAction
   | SelectMonitorAction
   | UpdateMonitorStateAction

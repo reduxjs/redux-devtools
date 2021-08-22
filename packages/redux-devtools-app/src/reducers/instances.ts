@@ -231,7 +231,7 @@ export function dispatchAction(
   return state;
 }
 
-function removeState(state: InstancesState, connectionId: string) {
+function removeState(state: InstancesState, connectionId: string | number) {
   const instanceIds = state.connections[connectionId];
   if (!instanceIds) return state;
 

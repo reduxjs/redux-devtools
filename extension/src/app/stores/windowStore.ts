@@ -21,6 +21,7 @@ import instanceSelector from '../middlewares/instanceSelector';
 import rootReducer from '../reducers/window';
 import { BackgroundState } from '../reducers/background';
 import { BackgroundAction } from './backgroundStore';
+import { EmptyUpdateStateAction, NAAction } from '../middlewares/api';
 
 export interface TogglePersistAction {
   readonly type: 'TOGGLE_PERSIST';
@@ -28,14 +29,16 @@ export interface TogglePersistAction {
 
 export type StoreActionWithTogglePersist = StoreAction | TogglePersistAction;
 
-interface ExpandedUpdateStateAction extends UpdateStateAction {
+export interface ExpandedUpdateStateAction extends UpdateStateAction {
   readonly instances: InstancesState;
 }
 
 export type WindowStoreAction =
   | StoreActionWithoutUpdateState
   | TogglePersistAction
-  | ExpandedUpdateStateAction;
+  | ExpandedUpdateStateAction
+  | NAAction
+  | EmptyUpdateStateAction;
 
 export default function configureStore(
   baseStore: Store<BackgroundState, BackgroundAction>,
@@ -68,7 +71,7 @@ export default function configureStore(
         hostname: options['s:hostname'],
         port: options['s:port'],
         secure: options['s:secure'],
-      },
+      } as any,
     });
   });
 

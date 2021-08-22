@@ -67,11 +67,11 @@ export function isFiltered<A extends Action<unknown>>(
 function filterActions<A extends Action<unknown>>(
   actionsById: { [p: number]: PerformAction<A> },
   actionSanitizer: ((action: A, id: number) => A) | undefined
-) {
+): { [p: number]: PerformAction<A> } {
   if (!actionSanitizer) return actionsById;
-  return mapValues(actionsById, (action, id: number) => ({
+  return mapValues(actionsById, (action, id) => ({
     ...action,
-    action: actionSanitizer(action.action, id),
+    action: actionSanitizer(action.action, id as unknown as number),
   }));
 }
 
@@ -92,7 +92,7 @@ export function filterState<S, A extends Action<unknown>>(
   stateSanitizer: ((state: S, index: number) => S) | undefined,
   actionSanitizer: ((action: A, id: number) => A) | undefined,
   predicate: ((state: S, action: A) => boolean) | undefined
-) {
+): LiftedState<S, A, unknown> {
   if (predicate || !noFiltersApplied(localFilter)) {
     const filteredStagedActionIds: number[] = [];
     const filteredComputedStates: { state: S; error?: string | undefined }[] =

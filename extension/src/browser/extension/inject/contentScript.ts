@@ -213,7 +213,7 @@ function tryCatch<S, A extends Action<unknown>>(
     return fn(args);
   } catch (err) {
     if (err.message === 'Message length exceeded maximum allowed length.') {
-      const instanceId = args.instanceId;
+      const instanceId = (args as any).instanceId;
       const newArgs = {
         split: 'start',
       };
@@ -231,7 +231,7 @@ function tryCatch<S, A extends Action<unknown>>(
         }
         newArgs[key as keyof typeof newArgs] = arg;
       });
-      fn(newArgs);
+      fn(newArgs as any);
       for (let i = 0; i < toSplit.length; i++) {
         for (let j = 0; j < toSplit[i][1].length; j += maxChromeMsgSize) {
           fn({
