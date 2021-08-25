@@ -34,8 +34,8 @@ export interface Features {
 }
 
 export interface Options {
-  name?: string;
-  connectionId?: string;
+  name?: string | number;
+  connectionId?: string | number;
   explicitLib?: string;
   lib?: string;
   actionCreators?: ActionCreator[];
@@ -56,10 +56,10 @@ export interface State {
 }
 
 export interface InstancesState {
-  selected: string | null;
-  current: string;
+  selected: string | number | null;
+  current: string | number;
   sync: boolean;
-  connections: { [id: string]: string[] };
+  connections: { [id: string]: (string | number)[] };
   options: { [id: string]: Options };
   states: { [id: string]: State };
   persisted?: boolean;
@@ -86,7 +86,7 @@ export const initialState: InstancesState = {
 function updateState(
   state: { [id: string]: State },
   request: Request,
-  id: string,
+  id: string | number,
   serialize: boolean | undefined
 ) {
   let payload: State = request.payload as State;
@@ -231,7 +231,7 @@ export function dispatchAction(
   return state;
 }
 
-function removeState(state: InstancesState, connectionId: string) {
+function removeState(state: InstancesState, connectionId: string | number) {
   const instanceIds = state.connections[connectionId];
   if (!instanceIds) return state;
 
@@ -268,8 +268,8 @@ function removeState(state: InstancesState, connectionId: string) {
 
 function init(
   { type, action, name, libConfig = {} }: Request,
-  connectionId: string,
-  current: string
+  connectionId: string | number,
+  current: string | number
 ): Options {
   let lib;
   let actionCreators;
@@ -310,7 +310,7 @@ export default function instances(
     case UPDATE_STATE: {
       const { request } = action;
       if (!request) return state;
-      const connectionId = action.id || request.id;
+      const connectionId = (action.id || request.id)!;
       const current = request.instanceId || connectionId;
       let connections = state.connections;
       let options = state.options;

@@ -4,8 +4,7 @@ import stringifyJSON from './stringifyJSON';
 import { SET_STATE } from '../constants/actionTypes';
 import { InstancesState, State } from '../reducers/instances';
 import { Dispatch, MiddlewareAPI } from 'redux';
-import { DispatchAction, StoreAction } from '../actions';
-import { StoreState } from '../reducers';
+import { DispatchAction, StoreActionWithoutLiftedAction } from '../actions';
 
 export function sweep(state: State): State {
   return {
@@ -21,12 +20,15 @@ export function sweep(state: State): State {
 }
 
 export function nonReduxDispatch(
-  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
+  store: MiddlewareAPI<
+    Dispatch<StoreActionWithoutLiftedAction>,
+    { readonly instances: InstancesState }
+  >,
   message: string,
-  instanceId: string,
+  instanceId: string | number,
   action: DispatchAction,
   initialState: string | undefined,
-  preInstances: InstancesState
+  preInstances?: InstancesState
 ) {
   const instances = preInstances || store.getState().instances;
   const state = instances.states[instanceId];

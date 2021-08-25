@@ -9,7 +9,7 @@ type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = StateProps & DispatchProps;
 
 class InstanceSelector extends Component<Props> {
-  select?: { readonly value: string; readonly label: string }[];
+  select?: { readonly value: string; readonly label: string | number }[];
 
   render() {
     this.select = [{ value: '', label: 'Autoselect instances' }];

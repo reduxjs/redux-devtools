@@ -18,7 +18,7 @@ export interface MonitorStateMonitorState {
 }
 export interface MonitorState {
   selected: string;
-  monitorState: MonitorStateMonitorState | undefined;
+  monitorState?: MonitorStateMonitorState | undefined;
   sliderIsOpen: boolean;
   dispatcherIsOpen: boolean;
 }

@@ -28,7 +28,8 @@
     "test:app": "cross-env BABEL_ENV=test jest test/app",
     "test:chrome": "jest test/chrome",
     "test:electron": "jest test/electron",
-    "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron"
+    "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@redux-devtools/app": "^1.0.0-8",
@@ -37,6 +38,7 @@
     "@redux-devtools/serialize": "^0.3.0",
     "@redux-devtools/slider-monitor": "^2.0.0-8",
     "@redux-devtools/utils": "^1.0.0-6",
+    "@types/jsan": "^3.1.2",
     "jsan": "^3.1.13",
     "lodash": "^4.17.21",
     "react": "^16.14.0",
