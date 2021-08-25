@@ -595,10 +595,10 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
           return next(reducer_, initialState_);
         }
 
-        return configureStore(next, monitor.reducer, {
+        store = stores[instanceId] = configureStore(next, monitor.reducer, {
           ...config,
           maxAge: getMaxAge as any,
-        })(reducer_, initialState_);
+        })(reducer_, initialState_) as any;
 
         if (isInIframe()) setTimeout(init, 3000);
         else init();
