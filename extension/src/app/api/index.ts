@@ -468,20 +468,21 @@ export function sendMessage<S, A extends Action<unknown>>(
       config.serialize as Serialize | undefined,
       config.serialize as Serialize | undefined
     );
+  } else {
+    toContentScript<S, A>(
+      {
+        type: 'STATE',
+        action: amendedAction,
+        payload: state,
+        maxAge: config.maxAge,
+        source,
+        name: config.name || name,
+        instanceId: config.instanceId || instanceId || 1,
+      },
+      config.serialize as Serialize | undefined,
+      config.serialize as Serialize | undefined
+    );
   }
-  toContentScript<S, A>(
-    {
-      type: 'STATE',
-      action: amendedAction,
-      payload: state,
-      maxAge: config.maxAge,
-      source,
-      name: config.name || name,
-      instanceId: config.instanceId || instanceId || 1,
-    },
-    config.serialize as Serialize | undefined,
-    config.serialize as Serialize | undefined
-  );
 }
 
 function handleMessages(event: MessageEvent<ContentScriptToPageScriptMessage>) {
