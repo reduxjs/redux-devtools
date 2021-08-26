@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import configureStore from '../../../src/app/stores/windowStore';
-import App from '../../../src/app/containers/App.js';
+import App from '../../../src/app/containers/App';
 
 const store = configureStore(store);
 const component = mount(

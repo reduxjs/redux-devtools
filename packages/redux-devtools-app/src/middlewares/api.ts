@@ -30,7 +30,7 @@ let socket: SCClientSocket;
 let store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>;
 
 function emit({ message: type, id, instanceId, action, state }: EmitAction) {
-  socket.emit(id ? 'sc-' + id : 'respond', { type, action, state, instanceId });
+  socket.emit(id ? `sc-${id}` : 'respond', { type, action, state, instanceId });
 }
 
 function startMonitoring(channel: string) {

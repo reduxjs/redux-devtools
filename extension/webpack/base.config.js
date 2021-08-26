@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 
 const extpath = path.join(__dirname, '../src/browser/extension/');
-const mock = `${extpath}chromeAPIMock.js`;
+const mock = `${extpath}chromeAPIMock`;
 
 const baseConfig = (params) => ({
   // devtool: 'source-map',
@@ -64,7 +64,7 @@ const baseConfig = (params) => ({
       app: path.join(__dirname, '../src/app'),
       tmp: path.join(__dirname, '../build/tmp'),
     },
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -72,7 +72,7 @@ const baseConfig = (params) => ({
         ? params.loaders
         : [
             {
-              test: /\.js$/,
+              test: /\.(js|ts)x?$/,
               use: 'babel-loader',
               exclude: /(node_modules|tmp\/page\.bundle)/,
             },

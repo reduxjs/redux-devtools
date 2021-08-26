@@ -28,7 +28,8 @@
     "test:app": "cross-env BABEL_ENV=test jest test/app",
     "test:chrome": "jest test/chrome",
     "test:electron": "jest test/electron",
-    "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron"
+    "test": "npm run test:app && npm run build:extension && npm run test:chrome && npm run test:electron",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@redux-devtools/app": "^1.0.0-8",
@@ -37,6 +38,7 @@
     "@redux-devtools/serialize": "^0.3.0",
     "@redux-devtools/slider-monitor": "^2.0.0-8",
     "@redux-devtools/utils": "^1.0.0-6",
+    "@types/jsan": "^3.1.2",
     "jsan": "^3.1.13",
     "lodash": "^4.17.21",
     "react": "^16.14.0",
@@ -44,20 +46,20 @@
     "react-icons": "^3.11.0",
     "react-json-tree": "^0.15.0",
     "react-redux": "^7.2.4",
-    "redux": "^4.1.0"
+    "redux": "^4.1.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.14.5",
     "@babel/polyfill": "^7.12.1",
-    "@babel/register": "^7.14.5",
+    "@babel/register": "^7.15.3",
     "bestzip": "^2.2.0",
     "chromedriver": "^91.0.1",
-    "electron": "^13.1.2",
+    "electron": "^13.2.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
-    "eslint": "^7.28.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",

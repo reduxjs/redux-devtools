@@ -39,18 +39,18 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=14.15.0"
   },
   "dependencies": {
     "@redux-devtools/app": "^1.0.0-8",
-    "@types/react": "^16.14.8",
-    "apollo-server": "^2.25.1",
-    "apollo-server-express": "^2.25.1",
+    "@types/react": "^16.14.14",
+    "apollo-server": "^2.25.2",
+    "apollo-server-express": "^2.25.2",
     "body-parser": "^1.19.0",
-    "chalk": "^4.1.1",
+    "chalk": "^4.1.2",
     "cors": "^2.8.5",
     "cross-spawn": "^7.0.3",
-    "electron": "^13.1.2",
+    "electron": "^13.2.2",
     "express": "^4.17.1",
     "getport": "^0.1.0",
     "graphql": "^14.7.0",
@@ -68,10 +68,10 @@
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
-    "@types/morgan": "^1.9.2",
-    "@types/semver": "^7.3.6",
+    "@types/morgan": "^1.9.3",
+    "@types/semver": "^7.3.8",
     "@types/supertest": "^2.0.11",
-    "@types/uuid": "^8.3.0",
+    "@types/uuid": "^8.3.1",
     "jest": "^26.6.3",
     "ncp": "^2.0.0",
     "socketcluster-client": "^14.3.2",
