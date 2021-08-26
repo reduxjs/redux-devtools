@@ -39,7 +39,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "engines": {
-    "node": ">=v10.24.1"
+    "node": "^14"
   },
   "dependencies": {
     "@redux-devtools/app": "^1.0.0-8",
