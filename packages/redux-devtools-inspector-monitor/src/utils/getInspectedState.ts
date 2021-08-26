@@ -1,4 +1,4 @@
-import { fromJS, isAssociative } from 'immutable';
+import { fromJS, isAssociative, Map } from 'immutable';
 import isIterable from './isIterable';
 
 function iterateToKey(obj: any, key: string | number) {
@@ -41,7 +41,7 @@ export default function getInspectedState<S>(
 
   if (convertImmutable) {
     try {
-      state = fromJS(state).toJS();
+      state = (fromJS(state) as Map<unknown, unknown>).toJS() as unknown as S;
     } catch (e) {} // eslint-disable-line no-empty
   }
 

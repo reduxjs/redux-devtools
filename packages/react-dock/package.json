@@ -41,23 +41,23 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@types/prop-types": "^15.7.3",
+    "@types/prop-types": "^15.7.4",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
-    "@types/react": "^16.14.8",
-    "@types/react-dom": "^16.9.13",
+    "@types/react": "^16.14.14",
+    "@types/react-dom": "^16.9.14",
     "@types/react-test-renderer": "^16.9.5",
-    "@types/styled-components": "^5.1.10",
+    "@types/styled-components": "^5.1.13",
     "react": "^16.14.0",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^16.14.0",
     "react-hot-loader": "^4.13.0",
     "react-icons": "^3.11.0",
     "react-test-renderer": "^16.14.0",
-    "styled-components": "^5.3.0"
+    "styled-components": "^5.3.1"
   },
   "peerDependencies": {
     "@types/react": "^16.3.0 || ^17.0.0",

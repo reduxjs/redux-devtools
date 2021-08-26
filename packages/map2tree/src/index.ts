@@ -44,7 +44,7 @@ function getNode(tree: Node, key: string): Node | null {
 
 export default function map2tree(
   // eslint-disable-next-line @typescript-eslint/ban-types
-  root: {},
+  root: unknown,
   options: { key?: string; pushMethod?: 'push' | 'unshift' } = {},
   tree: Node = { name: options.key || 'state', children: [] }
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -66,7 +66,8 @@ export default function map2tree(
     root && (root as { toJS: () => {} }).toJS
       ? // eslint-disable-next-line @typescript-eslint/ban-types
         (root as { toJS: () => {} }).toJS()
-      : root,
+      : // eslint-disable-next-line @typescript-eslint/ban-types
+        (root as {}),
     // eslint-disable-next-line @typescript-eslint/ban-types
     (maybeImmutable: { toJS?: () => {} }, key) => {
       const value =
