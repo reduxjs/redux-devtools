@@ -1,0 +1,88 @@
+{
+  "name": "@redux-devtools/rtk-query-monitor",
+  "version": "1.0.0",
+  "description": "rtk-query monitor for Redux DevTools",
+  "keywords": [
+    "redux",
+    "devtools",
+    "flux",
+    "react",
+    "redux-toolkit",
+    "rtk-query"
+  ],
+  "homepage": "https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-monitor",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "FaberVitale",
+    "url": "https://github.com/FaberVitale"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config demo/config/webpack.config.ts",
+    "build": "npm run build:types && npm run build:js",
+    "stats": "webpack --profile --json > stats.json",
+    "build:demo": "cross-env NODE_ENV=production webpack -p --config demo/config/webpack.config.ts",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "clean": "rimraf lib",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "preversion": "npm run type-check && npm run lint",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "@redux-devtools/dock-monitor": "^1.4.0",
+    "@types/prop-types": "^15.7.4",
+    "@types/redux-devtools-themes": "^1.0.0",
+    "devui": "^1.0.0-9",
+    "lodash.debounce": "^4.0.8",
+    "prop-types": "^15.7.2",
+    "react-json-tree": "^0.15.0",
+    "redux-devtools-themes": "^1.0.0"
+  },
+  "devDependencies": {
+    "@chakra-ui/react": "^1.6.5",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@mswjs/data": "^0.3.0",
+    "@redux-devtools/core": "^3.9.0",
+    "@redux-devtools/dock-monitor": "^1.4.0",
+    "@reduxjs/toolkit": "^1.6.0",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "17.0.0",
+    "@types/react-redux": "7.1.9",
+    "@types/react-router-dom": "5.1.6",
+    "cross-env": "^7.0.3",
+    "framer-motion": "^4",
+    "msw": "0.28.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5"
+  },
+  "peerDependencies": {
+    "@redux-devtools/core": "^3.7.0",
+    "@reduxjs/toolkit": "^1.6.0",
+    "@types/react": "^16.3.0 || ^17.0.0",
+    "react": "^16.3.0 || ^17.0.0",
+    "redux": "^3.4.0 || ^4.0.0"
+  },
+  "msw": {
+    "workerDirectory": "demo/public"
+  }
+}

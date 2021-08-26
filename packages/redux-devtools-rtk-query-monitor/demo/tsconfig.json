@@ -1,0 +1,11 @@
+{
+  "extends": "../../../tsconfig.react.base.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "baseUrl": "./src",
+    "target": "esNext",
+    "module": "es6",
+    "moduleResolution": "node"
+  },
+  "include": ["../src", "src"]
+}
