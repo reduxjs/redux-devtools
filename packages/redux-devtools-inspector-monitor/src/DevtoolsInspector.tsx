@@ -21,12 +21,17 @@ import ActionList from './ActionList';
 import ActionPreview, { Tab } from './ActionPreview';
 import getInspectedState from './utils/getInspectedState';
 import createDiffPatcher from './createDiffPatcher';
+import debounce from 'lodash.debounce';
 import {
+  ActionForm,
+  changeActionFormValues,
   DevtoolsInspectorAction,
   DevtoolsInspectorState,
   reducer,
   updateMonitorState,
 } from './redux';
+import { makeSelectFilteredActions } from './utils/filters';
+import { computeSelectorSource } from './utils/selectors';
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const {
@@ -233,6 +238,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
   updateSizeTimeout?: number;
   inspectorRef?: HTMLDivElement | null;
 
+  selectorsSource = computeSelectorSource(this.props);
+
   componentDidMount() {
     this.updateSizeMode();
     this.updateSizeTimeout = window.setInterval(
@@ -247,6 +254,10 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
 
   updateMonitorState = (monitorState: Partial<DevtoolsInspectorState>) => {
     this.props.dispatch(updateMonitorState(monitorState));
+  };
+
+  handleActionFormChange = (formValues: Partial<ActionForm>) => {
+    this.props.dispatch(changeActionFormValues(formValues));
   };
 
   updateSizeMode() {
@@ -286,6 +297,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     this.inspectorRef = node;
   };
 
+  selectFilteredActions = makeSelectFilteredActions();
+
   render() {
     const {
       stagedActionIds: actionIds,
@@ -301,13 +314,19 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
       hideMainButtons,
       hideActionButtons,
     } = this.props;
-    const { selectedActionId, startActionId, searchValue, tabName } =
+    const { selectedActionId, startActionId, actionForm, tabName } =
       monitorState;
     const inspectedPathType =
       tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
     const { themeState, isWideLayout, action, nextState, delta, error } =
       this.state;
     const { base16Theme, styling } = themeState;
+
+    this.selectorsSource = computeSelectorSource(
+      this.props,
+      this.selectorsSource
+    );
+    const filteredActionIds = this.selectFilteredActions(this.selectorsSource);
 
     return (
       <div
@@ -323,7 +342,6 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
             actions,
             actionIds,
             isWideLayout,
-            searchValue,
             selectedActionId,
             startActionId,
             skippedActionIds,
@@ -332,7 +350,10 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
             hideActionButtons,
             styling,
           }}
+          actionForm={actionForm}
+          filteredActionIds={filteredActionIds}
           onSearch={this.handleSearch}
+          onActionFormChange={this.handleActionFormChange}
           onSelect={this.handleSelectAction}
           onToggleAction={this.handleToggleAction}
           onJumpToState={this.handleJumpToState}
@@ -399,9 +420,9 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     this.props.dispatch(sweep());
   };
 
-  handleSearch = (val: string) => {
-    this.updateMonitorState({ searchValue: val });
-  };
+  handleSearch = debounce((val: string) => {
+    this.handleActionFormChange({ searchValue: val });
+  }, 200);
 
   handleSelectAction = (
     e: React.MouseEvent<HTMLDivElement>,

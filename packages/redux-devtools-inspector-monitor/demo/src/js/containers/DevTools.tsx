@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { createDevTools } from '@redux-devtools/core';
 import DockMonitor from '@redux-devtools/dock-monitor';
 import { Location } from 'history';
-import DevtoolsInspector from '../../../src/DevtoolsInspector';
-import getOptions from './getOptions';
-import { base16Themes } from '../../../src/utils/createStylingFromTheme';
-import { DemoAppState } from './reducers';
+import DevtoolsInspector from '../../../../src/DevtoolsInspector';
+import getOptions from '../getOptions';
+import { base16Themes } from '../../../../src/utils/createStylingFromTheme';
+import { DemoAppState } from '../reducers';
 
 const CustomComponent = () => (
   <div

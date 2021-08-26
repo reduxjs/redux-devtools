@@ -7,6 +7,7 @@ import {
   RouterState,
 } from 'connected-react-router';
 import { History } from 'history';
+import { pokemonApi } from './rtk-query/pokemonApi';
 
 type Nested = { long: { nested: { path: { to: { a: string } } }[] } };
 
@@ -187,6 +188,7 @@ export interface DemoAppState {
   addFunction: { f: (a: number, b: number, c: number) => number } | null;
   addSymbol: { s: symbol; error: Error } | null;
   shuffleArray: unknown[];
+  [pokemonApi.reducerPath]: ReturnType<typeof pokemonApi.reducer>;
 }
 
 const createRootReducer = (
@@ -259,6 +261,7 @@ const createRootReducer = (
         : state,
     shuffleArray: (state = DEFAULT_SHUFFLE_ARRAY, action) =>
       action.type === 'SHUFFLE_ARRAY' ? shuffle(state) : state,
+    [pokemonApi.reducerPath]: pokemonApi.reducer,
   });
 
 export default createRootReducer;

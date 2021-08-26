@@ -3992,6 +3992,7 @@ __metadata:
   dependencies:
     "@redux-devtools/core": ^3.9.0
     "@redux-devtools/dock-monitor": ^1.4.0
+    "@reduxjs/toolkit": ^1.6.0
     "@types/dateformat": ^3.0.1
     "@types/dragula": ^3.7.1
     "@types/hex-rgba": ^1.0.1
@@ -4026,6 +4027,7 @@ __metadata:
     redux: ^4.1.1
     redux-devtools-themes: ^1.0.0
     redux-logger: ^3.0.6
+    reselect: ^4.0.0
     seamless-immutable: ^7.1.4
   peerDependencies:
     "@redux-devtools/core": ^3.7.0
@@ -4123,6 +4125,26 @@ __metadata:
     redux: ^4.1.1
   languageName: unknown
   linkType: soft
+
+"@reduxjs/toolkit@npm:^1.6.0":
+  version: 1.6.1
+  resolution: "@reduxjs/toolkit@npm:1.6.1"
+  dependencies:
+    immer: ^9.0.1
+    redux: ^4.1.0
+    redux-thunk: ^2.3.0
+    reselect: ^4.0.0
+  peerDependencies:
+    react: ^16.14.0 || ^17.0.0
+    react-redux: ^7.2.1
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-redux:
+      optional: true
+  checksum: fc7f8211a74e4ccb246870e9f3dddbd2f9a79ce50ed3c3bb68a59af2b279712e0cba0690479416ef3fea6cfcc1e8d257da8e6a4a49a306d38d83d80182329cfb
+  languageName: node
+  linkType: hard
 
 "@restart/context@npm:^2.1.4":
   version: 2.1.4
@@ -15552,6 +15574,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"immer@npm:^9.0.1":
+  version: 9.0.5
+  resolution: "immer@npm:9.0.5"
+  checksum: a7fa984fa1887a33ce6d44a7a505fd5ac76009336d8b1c99d34f59aaefc28aadf93ab1e5db27513acd15be454a8a89d8151e915d9b0b6e86e72acbd28218410b
+  languageName: node
+  linkType: hard
+
 "immutable@npm:^3.8.1 || ^4.0.0-rc.1, immutable@npm:^4.0.0-rc.12":
   version: 4.0.0-rc.12
   resolution: "immutable@npm:4.0.0-rc.12"
@@ -24064,6 +24093,13 @@ fsevents@^1.2.7:
   version: 1.0.0
   resolution: "requires-port@npm:1.0.0"
   checksum: eee0e303adffb69be55d1a214e415cf42b7441ae858c76dfc5353148644f6fd6e698926fc4643f510d5c126d12a705e7c8ed7e38061113bdf37547ab356797ff
+  languageName: node
+  linkType: hard
+
+"reselect@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "reselect@npm:4.0.0"
+  checksum: 3480930929f673f12962cdde140dce48ea8ba171cd428bb2c7639672e41770bd6b64e935bc0400f47cfa960f617c7ac068c4309527373825d11e27262f08c0a3
   languageName: node
   linkType: hard
 

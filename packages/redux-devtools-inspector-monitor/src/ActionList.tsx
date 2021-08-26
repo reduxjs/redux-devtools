@@ -6,6 +6,7 @@ import { PerformAction } from '@redux-devtools/core';
 import { StylingFunction } from 'react-base16-styling';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
+import { ActionForm } from './redux';
 
 function getTimestamps<A extends Action<unknown>>(
   actions: { [actionId: number]: PerformAction<A> },
@@ -21,15 +22,16 @@ function getTimestamps<A extends Action<unknown>>(
   };
 }
 
-interface Props<A extends Action<unknown>> {
+interface Props<S, A extends Action<unknown>> {
   actions: { [actionId: number]: PerformAction<A> };
   actionIds: number[];
   isWideLayout: boolean;
-  searchValue: string | undefined;
   selectedActionId: number | null;
   startActionId: number | null;
   skippedActionIds: number[];
   draggableActions: boolean;
+  actionForm: ActionForm;
+  filteredActionIds: number[];
   hideMainButtons: boolean | undefined;
   hideActionButtons: boolean | undefined;
   styling: StylingFunction;
@@ -40,18 +42,20 @@ interface Props<A extends Action<unknown>> {
   onCommit: () => void;
   onSweep: () => void;
   onReorderAction: (actionId: number, beforeActionId: number) => void;
+  onActionFormChange: (formValues: Partial<ActionForm>) => void;
   currentActionId: number;
   lastActionId: number;
 }
 
 export default class ActionList<
+  S,
   A extends Action<unknown>
-> extends PureComponent<Props<A>> {
+> extends PureComponent<Props<S, A>> {
   node?: HTMLDivElement | null;
   scrollDown?: boolean;
   drake?: Drake;
 
-  UNSAFE_componentWillReceiveProps(nextProps: Props<A>) {
+  UNSAFE_componentWillReceiveProps(nextProps: Props<S, A>) {
     const node = this.node;
     if (!node) {
       this.scrollDown = true;
@@ -119,24 +123,16 @@ export default class ActionList<
       startActionId,
       onSelect,
       onSearch,
-      searchValue,
       currentActionId,
       hideMainButtons,
       hideActionButtons,
       onCommit,
       onSweep,
+      onActionFormChange,
       onJumpToState,
+      actionForm,
+      filteredActionIds,
     } = this.props;
-    const lowerSearchValue = searchValue && searchValue.toLowerCase();
-    const filteredActionIds = searchValue
-      ? actionIds.filter(
-          (id) =>
-            (actions[id].action.type as string)
-              .toLowerCase()
-              .indexOf(lowerSearchValue as string) !== -1
-        )
-      : actionIds;
-
     return (
       <div
         key="actionList"
@@ -150,12 +146,14 @@ export default class ActionList<
           onSearch={onSearch}
           onCommit={onCommit}
           onSweep={onSweep}
+          actionForm={actionForm}
+          onActionFormChange={onActionFormChange}
           hideMainButtons={hideMainButtons}
           hasSkippedActions={skippedActionIds.length > 0}
           hasStagedActions={actionIds.length > 1}
         />
         <div {...styling('actionListRows')} ref={this.getRef}>
-          {filteredActionIds.map((actionId) => (
+          {filteredActionIds.map((actionId: number) => (
             <ActionListRow
               key={actionId}
               styling={styling}
