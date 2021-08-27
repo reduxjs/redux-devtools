@@ -17,6 +17,7 @@ import MonitorSelector from '@redux-devtools/app/lib/components/MonitorSelector'
 import SliderButton from '@redux-devtools/app/lib/components/buttons/SliderButton';
 import DispatcherButton from '@redux-devtools/app/lib/components/buttons/DispatcherButton';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
+import { GoRadioTower } from 'react-icons/go';
 import {
   MdBorderBottom,
   MdBorderLeft,
@@ -25,7 +26,6 @@ import {
 } from 'react-icons/md';
 import { Position } from '../api/openWindow';
 import { SingleMessage } from '../middlewares/api';
-import { GoRadioTower } from 'react-icons/all';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
