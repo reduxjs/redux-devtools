@@ -3,12 +3,10 @@ import { connect, ResolveThunks } from 'react-redux';
 import { Container, Notification } from 'devui';
 import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
 import Settings from '@redux-devtools/app/lib/components/Settings';
-import Actions from '@redux-devtools/app/lib/containers/Actions';
 import Header from '@redux-devtools/app/lib/components/Header';
 import { clearNotification } from '@redux-devtools/app/lib/actions';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
-import { SingleMessage } from '../middlewares/api';
-import { Position } from '../api/openWindow';
+import Actions from './Actions';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
@@ -17,22 +15,7 @@ interface OwnProps {
 }
 type Props = StateProps & DispatchProps & OwnProps;
 
-function sendMessage(message: SingleMessage) {
-  chrome.runtime.sendMessage(message);
-}
-
 class App extends Component<Props> {
-  openWindow = (position: Position) => {
-    sendMessage({ type: 'OPEN', position });
-  };
-  openOptionsPage = () => {
-    if (navigator.userAgent.indexOf('Firefox') !== -1) {
-      sendMessage({ type: 'OPEN_OPTIONS' });
-    } else {
-      chrome.runtime.openOptionsPage();
-    }
-  };
-
   render() {
     const { position, options, section, theme, notification } = this.props;
     if (!position && (!options || !options.features)) {
@@ -56,7 +39,7 @@ class App extends Component<Props> {
         body = <Settings />;
         break;
       default:
-        body = <Actions />;
+        body = <Actions position={position} />;
     }
 
     return (
