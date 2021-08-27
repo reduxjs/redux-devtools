@@ -27,7 +27,7 @@ export class Select<
         {...this.props}
         theme={(theme) => ({
           ...theme,
-          borderRadius: this.props.theme.inputBorderRadius,
+          borderRadius: 0,
           colors: {
             ...theme.colors,
 
@@ -60,9 +60,15 @@ export class Select<
           }),
           control: (base, props) => ({
             ...base,
-            backgroundColor: props.isDisabled
+            backgroundColor: props.isFocused
               ? props.theme.colors.neutral10
               : props.theme.colors.neutral5,
+            borderColor: props.theme.colors.neutral10,
+
+            '&:hover': {
+              backgroundColor: props.theme.colors.neutral10,
+              borderColor: props.theme.colors.neutral10,
+            },
           }),
         }}
       />
