@@ -20,13 +20,13 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --env.development --env.platform=web --progress",
+    "start": "webpack-dev-server --hot --inline --env development --env platform=web --progress",
     "build": "npm run build:types && npm run build:js && npm run build:web && npm run build:umd && npm run build:umd:min",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "build:web": "rimraf ./build/web && webpack -p --env.platform=web --progress",
+    "build:web": "rimraf ./build/web && webpack --env platform=web --progress",
     "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.ts",
-    "build:umd:min": "webpack --env.production --progress --config webpack.config.umd.ts",
+    "build:umd:min": "webpack --env production --progress --config webpack.config.umd.ts",
     "clean": "rimraf lib",
     "test": "jest",
     "lint": "eslint . --ext .ts,.tsx",
