@@ -148,9 +148,9 @@ describe('Immutable', function () {
       it(key, function () {
         const deserialized = serializeCustom.parse(stringified);
         expect(deserialized).toEqual(data[key as keyof typeof data]);
-        // eslint-disable-next-line jest/no-conditional-expect
         if (key === 'map' || key === 'orderedMap') {
           const deserializedDefault = parse(stringified);
+          // eslint-disable-next-line jest/no-conditional-expect
           expect(
             (
               deserializedDefault as
