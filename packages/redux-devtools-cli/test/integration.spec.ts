@@ -4,9 +4,9 @@ import scClient from 'socketcluster-client';
 
 describe('Server', function () {
   let scServer: childProcess.ChildProcess;
-  beforeAll(function (done) {
+  beforeAll(async function () {
     scServer = childProcess.fork(__dirname + '/../bin/redux-devtools.js');
-    setTimeout(done, 3000);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
   });
 
   afterAll(function () {
