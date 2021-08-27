@@ -1,7 +1,7 @@
 import path from 'path';
 import baseConfig from './base.config';
 
-const config = baseConfig({
+export default baseConfig({
   mode: 'production',
   output: { path: path.join(__dirname, '../build/extension') },
   globals: {
@@ -15,5 +15,3 @@ const config = baseConfig({
     '../src/browser/firefox/manifest.json'
   ),
 });
-
-export default config;

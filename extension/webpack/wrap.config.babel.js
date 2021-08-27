@@ -1,7 +1,7 @@
 import path from 'path';
 import baseConfig from './base.config';
 
-const config = baseConfig({
+export default baseConfig({
   mode: 'production',
   input: {
     page: [path.join(__dirname, '../src/browser/extension/inject/pageScript')],
@@ -13,5 +13,3 @@ const config = baseConfig({
     },
   },
 });
-
-export default config;
