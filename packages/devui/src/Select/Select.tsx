@@ -27,7 +27,7 @@ export class Select<
         {...this.props}
         theme={(theme) => ({
           ...theme,
-          borderRadius: this.props.theme.inputBorderRadius,
+          borderRadius: 0,
           colors: {
             ...theme.colors,
 
@@ -63,6 +63,11 @@ export class Select<
             backgroundColor: props.isDisabled
               ? props.theme.colors.neutral10
               : props.theme.colors.neutral5,
+            borderColor: isDisabled
+              ? colors.neutral10
+              : isFocused
+              ? colors.primary
+              : colors.neutral20,
           }),
         }}
       />
