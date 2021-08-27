@@ -60,14 +60,15 @@ export class Select<
           }),
           control: (base, props) => ({
             ...base,
-            backgroundColor: props.isDisabled
+            backgroundColor: props.isFocused
               ? props.theme.colors.neutral10
               : props.theme.colors.neutral5,
-            borderColor: isDisabled
-              ? colors.neutral10
-              : isFocused
-              ? colors.primary
-              : colors.neutral20,
+            borderColor: props.theme.colors.neutral10,
+
+            '&:hover': {
+              backgroundColor: props.theme.colors.neutral10,
+              borderColor: props.theme.colors.neutral10,
+            },
           }),
         }}
       />
