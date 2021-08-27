@@ -21,6 +21,7 @@ describe('Immutable', function () {
   const stringified: { [key: string]: string } = {};
   describe('Stringify', function () {
     Object.keys(data).forEach(function (key) {
+      // eslint-disable-next-line jest/valid-title
       it(key, function () {
         stringified[key] = stringify(data[key as keyof typeof data]);
         expect(stringified[key]).toMatchSnapshot();
@@ -30,6 +31,7 @@ describe('Immutable', function () {
 
   describe('Parse', function () {
     Object.keys(data).forEach(function (key) {
+      // eslint-disable-next-line jest/valid-title
       it(key, function () {
         expect(parse(stringified[key])).toEqual(data[key as keyof typeof data]);
       });
@@ -142,11 +144,13 @@ describe('Immutable', function () {
       const stringified = serializeCustom.stringify(
         data[key as keyof typeof data]
       );
+      // eslint-disable-next-line jest/valid-title
       it(key, function () {
         const deserialized = serializeCustom.parse(stringified);
         expect(deserialized).toEqual(data[key as keyof typeof data]);
         if (key === 'map' || key === 'orderedMap') {
           const deserializedDefault = parse(stringified);
+          // eslint-disable-next-line jest/no-conditional-expect
           expect(
             (
               deserializedDefault as
