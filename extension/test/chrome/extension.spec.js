@@ -10,10 +10,12 @@ const actionsPattern =
   /^@@INIT(.|\n)+@@reduxReactRouter\/routerDidChange(.|\n)+@@reduxReactRouter\/initRoutes(.|\n)+$/;
 
 describe('Chrome extension', function () {
+  let driver;
+
   beforeAll(async () => {
     chromedriver.start();
     await delay(2000);
-    this.driver = new webdriver.Builder()
+    driver = new webdriver.Builder()
       .usingServer(`http://localhost:${port}`)
       .withCapabilities({
         chromeOptions: {
@@ -23,31 +25,32 @@ describe('Chrome extension', function () {
       .forBrowser('chrome')
       .build();
   });
+
   afterAll(async () => {
-    await this.driver.quit();
+    await driver.quit();
     chromedriver.stop();
   });
 
   it("should open extension's window", async () => {
-    await this.driver.get(`chrome-extension://${extensionId}/window.html#left`);
-    const url = await this.driver.getCurrentUrl();
+    await driver.get(`chrome-extension://${extensionId}/window.html#left`);
+    const url = await driver.getCurrentUrl();
     expect(url).toBe(`chrome-extension://${extensionId}/window.html#left`);
   });
 
   it('should match document title', async () => {
-    const title = await this.driver.getTitle();
+    const title = await driver.getTitle();
     expect(title).toBe('Redux DevTools');
   });
 
   it("should contain inspector monitor's component", async () => {
-    const val = await this.driver
+    const val = await driver
       .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
       .getText();
     expect(val).toBeDefined();
   });
 
   it('should contain an empty actions list', async () => {
-    const val = await this.driver
+    const val = await driver
       .findElement(
         webdriver.By.xpath('//div[contains(@class, "actionListRows-")]')
       )
@@ -56,24 +59,24 @@ describe('Chrome extension', function () {
   });
 
   Object.keys(switchMonitorTests).forEach((description) =>
-    it(description, switchMonitorTests[description].bind(this))
+    it(description, () => switchMonitorTests[description](driver))
   );
 
   it('should get actions list', async () => {
     const url = 'http://zalmoxisus.github.io/examples/router/';
-    await this.driver.executeScript(`window.open('${url}')`);
+    await driver.executeScript(`window.open('${url}')`);
     await delay(2000);
 
-    const tabs = await this.driver.getAllWindowHandles();
+    const tabs = await driver.getAllWindowHandles();
 
-    await this.driver.switchTo().window(tabs[1]);
-    expect(await this.driver.getCurrentUrl()).toMatch(url);
-    await this.driver.manage().timeouts().pageLoadTimeout(5000);
+    await driver.switchTo().window(tabs[1]);
+    expect(await driver.getCurrentUrl()).toMatch(url);
+    await driver.manage().timeouts().pageLoadTimeout(5000);
 
-    await this.driver.switchTo().window(tabs[0]);
+    await driver.switchTo().window(tabs[0]);
 
-    const result = await this.driver.wait(
-      this.driver
+    const result = await driver.wait(
+      driver
         .findElement(
           webdriver.By.xpath('//div[contains(@class, "actionListRows-")]')
         )

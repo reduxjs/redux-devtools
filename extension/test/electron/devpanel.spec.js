@@ -9,10 +9,12 @@ const devPanelPath =
   'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/window.html';
 
 describe('DevTools panel for Electron', function () {
+  let driver;
+
   beforeAll(async () => {
     chromedriver.start();
     await delay(1000);
-    this.driver = new webdriver.Builder()
+    driver = new webdriver.Builder()
       .usingServer(`http://localhost:${port}`)
       .withCapabilities({
         chromeOptions: {
@@ -22,33 +24,33 @@ describe('DevTools panel for Electron', function () {
       })
       .forBrowser('electron')
       .build();
-    await this.driver.manage().timeouts().setScriptTimeout(10000);
+    await driver.manage().timeouts().setScriptTimeout(10000);
   });
 
   afterAll(async () => {
-    await this.driver.quit();
+    await driver.quit();
     chromedriver.stop();
   });
 
   it('should open Redux DevTools tab', async () => {
-    if (!(await this.driver.getCurrentUrl()).startsWith('devtools')) {
-      const originalWindow = await this.driver.getWindowHandle();
-      const windows = await this.driver.getAllWindowHandles();
+    if (!(await driver.getCurrentUrl()).startsWith('devtools')) {
+      const originalWindow = await driver.getWindowHandle();
+      const windows = await driver.getAllWindowHandles();
       for (const window of windows) {
         if (window === originalWindow) continue;
-        await this.driver.switchTo().window(window);
-        if ((await this.driver.getCurrentUrl()).startsWith('devtools')) {
+        await driver.switchTo().window(window);
+        if ((await driver.getCurrentUrl()).startsWith('devtools')) {
           break;
         }
       }
     }
-    expect(await this.driver.getCurrentUrl()).toMatch(
+    expect(await driver.getCurrentUrl()).toMatch(
       /devtools:\/\/devtools\/bundled\/devtools_app.html/
     );
 
-    await this.driver.manage().timeouts().pageLoadTimeout(5000);
+    await driver.manage().timeouts().pageLoadTimeout(5000);
 
-    const id = await this.driver.executeAsyncScript(function (callback) {
+    const id = await driver.executeAsyncScript(function (callback) {
       let attempts = 5;
       function showReduxPanel() {
         if (attempts === 0) {
@@ -71,17 +73,17 @@ describe('DevTools panel for Electron', function () {
     });
     expect(id).toBe('chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux');
 
-    const className = await this.driver
+    const className = await driver
       .findElement(webdriver.By.className(id))
       .getAttribute('class');
     expect(className).not.toMatch(/hidden/); // not hidden
   });
 
   it('should have Redux DevTools UI on current tab', async () => {
-    await this.driver
+    await driver
       .switchTo()
       .frame(
-        this.driver.findElement(
+        driver.findElement(
           webdriver.By.xpath(`//iframe[@src='${devPanelPath}']`)
         )
       );
@@ -89,7 +91,7 @@ describe('DevTools panel for Electron', function () {
   });
 
   it('should contain INIT action', async () => {
-    const element = await this.driver.wait(
+    const element = await driver.wait(
       webdriver.until.elementLocated(
         webdriver.By.xpath('//div[contains(@class, "actionListRows-")]')
       ),
@@ -101,23 +103,23 @@ describe('DevTools panel for Electron', function () {
   });
 
   it("should contain Inspector monitor's component", async () => {
-    const val = await this.driver
+    const val = await driver
       .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
       .getText();
     expect(val).toBeDefined();
   });
 
   Object.keys(switchMonitorTests).forEach((description) =>
-    it(description, switchMonitorTests[description].bind(this))
+    it(description, () => switchMonitorTests[description](driver))
   );
 
   /*  it('should be no logs in console of main window', async () => {
-    const handles = await this.driver.getAllWindowHandles();
-    await this.driver.switchTo().window(handles[1]); // Change to main window
+    const handles = await driver.getAllWindowHandles();
+    await driver.switchTo().window(handles[1]); // Change to main window
 
-    expect(await this.driver.getTitle()).toBe('Electron Test');
+    expect(await driver.getTitle()).toBe('Electron Test');
 
-    const logs = await this.driver.manage().logs().get(webdriver.logging.Type.BROWSER);
+    const logs = await driver.manage().logs().get(webdriver.logging.Type.BROWSER);
     expect(logs).toEqual([]);
   });
 */
