@@ -12,7 +12,7 @@ const computedStates = [
   { state: [0, 2, 3, 4] },
 ];
 
-const test = (s1: { state: unknown } | undefined, s2: { state: unknown }) =>
+const runTest = (s1: { state: unknown } | undefined, s2: { state: unknown }) =>
   compare(s1, s2, ({ path, curState }) =>
     expect(
       `expect(store${path}).toEqual(${curState as number | string});`
@@ -21,38 +21,38 @@ const test = (s1: { state: unknown } | undefined, s2: { state: unknown }) =>
 
 describe('Assertions', () => {
   it('should return initial state', () => {
-    test(undefined, computedStates[0]);
+    runTest(undefined, computedStates[0]);
   });
 
   it('should add element', () => {
-    test(computedStates[0], computedStates[1]);
+    runTest(computedStates[0], computedStates[1]);
   });
 
   it('should remove element', () => {
-    test(computedStates[1], computedStates[0]);
+    runTest(computedStates[1], computedStates[0]);
   });
 
   it('should change element', () => {
-    test(computedStates[1], computedStates[2]);
+    runTest(computedStates[1], computedStates[2]);
   });
 
   it('should add, change and remove elements', () => {
-    test(computedStates[2], computedStates[3]);
+    runTest(computedStates[2], computedStates[3]);
   });
 
   it('should change in array', () => {
-    test(computedStates[3], computedStates[4]);
+    runTest(computedStates[3], computedStates[4]);
   });
 
   it('should remove elements in array', () => {
-    test(computedStates[5], computedStates[6]);
+    runTest(computedStates[5], computedStates[6]);
   });
 
   it('should add elements in array', () => {
-    test(computedStates[6], computedStates[5]);
+    runTest(computedStates[6], computedStates[5]);
   });
 
   it('should add and change elements in array', () => {
-    test(computedStates[5], computedStates[7]);
+    runTest(computedStates[5], computedStates[7]);
   });
 });
