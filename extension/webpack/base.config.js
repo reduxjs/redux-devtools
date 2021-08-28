@@ -33,10 +33,7 @@ const baseConfig = (params) => ({
     new webpack.DefinePlugin(params.globals),
     ...(params.plugins
       ? params.plugins
-      : [
-          new webpack.optimize.ModuleConcatenationPlugin(),
-          new webpack.optimize.OccurrenceOrderPlugin(),
-        ]),
+      : [new webpack.optimize.ModuleConcatenationPlugin()]),
   ].concat(
     params.copy
       ? new CopyPlugin({
