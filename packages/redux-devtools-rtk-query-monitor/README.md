@@ -7,7 +7,7 @@ Created by [FaberVitale](https://github.com/FaberVitale), inspired by [react-que
 ## Demo
 
 - [link](https://rtk-query-monitor-demo.netlify.app/)
-- [demo source](https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-monitor/demo)
+- [demo source](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-rtk-query-monitor/demo)
 
 ## Preview
 
@@ -31,7 +31,7 @@ yarn add @redux-devtools/rtk-query-monitor
 
 You can use `RtkQueryMonitor` as the only monitor in your app:
 
-##### `containers/DevTools.js`
+#### `containers/DevTools.js`
 
 ```ts
 import React from 'react';
@@ -45,7 +45,7 @@ Then you can render `<DevTools>` to any place inside app or even into a separate
 
 Alternatively, you can use it together with [`DockMonitor`](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor) to make it dockable.
 
-See also
+### See also
 
 - [`DockMonitor` README](https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-dock-monitor)
 
@@ -55,34 +55,27 @@ See also
 
 ## Features
 
-- sorts queries in ascending or descending order by:
+- sorts active queries and mutations in ascending or descending order by:
   - fulfilledTimeStamp
   - query key
   - query status
   - endpoint
   - api reducerPath
-- filters queries by:
+- filters active queries and mutations by:
   - fulfilledTimeStamp
   - query key
   - query status
   - endpoint
   - api reducerPath
-- displays
+- toggleable regular expression search
+- Displays
   - status flags
   - query state
   - tags
   - subscriptions
   - api state
   - api stats
-
-## TODO
-
-- [ ] display mutations
-- [ ] filter by tags types
-- [ ] download query.data
-- [ ] upload query.data(?)
-- [ ] refetch query button(?)
-- ...suggestions are welcome
+  - actions relevant to the selected query or mutation
 
 ## Redux DevTools props
 
