@@ -44,6 +44,9 @@ module.exports = (env: { production?: boolean } = {}) => ({
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    fallback: {
+      path: require.resolve('path-browserify'),
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
