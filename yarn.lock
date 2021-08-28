@@ -5190,7 +5190,7 @@ __metadata:
     "@reduxjs/toolkit": ^1.6.1
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.14
-    "@types/react-dom": ^16.9.14
+    "@types/react-dom": ^17.0.9
     "@types/react-redux": ^7.1.18
     "@types/react-router-dom": ^5.1.8
     "@types/redux-devtools-themes": ^1.0.0
@@ -7392,12 +7392,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:*, @types/react-dom@npm:^16.9.13, @types/react-dom@npm:^16.9.14":
+"@types/react-dom@npm:*, @types/react-dom@npm:^16.9.13":
   version: 16.9.14
   resolution: "@types/react-dom@npm:16.9.14"
   dependencies:
     "@types/react": ^16
   checksum: 68a4ee88f7a56cdbfbca24b1936b9aa5dad8b40ffbf1f047ddf990454aec6e0c9da2a01c9ae87045e95236602061646c90d02f01281533e14f1970687873030f
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^17.0.9":
+  version: 17.0.9
+  resolution: "@types/react-dom@npm:17.0.9"
+  dependencies:
+    "@types/react": "*"
+  checksum: b7e898e1a22643a371f58e801a3d1d8cf13a82d77063c24be73e840ef8d877ca1d04adc5db168d0dac3167dc050a26b1d70efc5fe8566a7f46a3c488a8322989
   languageName: node
   linkType: hard
 
@@ -24460,7 +24469,7 @@ fsevents@^1.2.7:
     "@types/lodash.debounce": ^4.0.6
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.14
-    "@types/react-dom": ^16.9.14
+    "@types/react-dom": ^17.0.9
     "@types/react-test-renderer": ^16.9.5
     "@types/styled-components": ^5.1.13
     lodash.debounce: ^4.0.8
