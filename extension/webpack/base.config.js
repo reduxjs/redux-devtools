@@ -62,6 +62,9 @@ const baseConfig = (params) => ({
       tmp: path.join(__dirname, '../build/tmp'),
     },
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    fallback: {
+      path: require.resolve('path-browserify'),
+    },
   },
   module: {
     rules: [
