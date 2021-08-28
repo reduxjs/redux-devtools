@@ -68,7 +68,7 @@ Alternatively, you can use it together with [`DockMonitor`](https://github.com/r
   - endpoint
   - api reducerPath
 - toggleable regular expression search
-- Displays 
+- Displays
   - status flags
   - query state
   - tags
