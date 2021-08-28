@@ -7475,12 +7475,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-test-renderer@npm:^16.9.5":
-  version: 16.9.5
-  resolution: "@types/react-test-renderer@npm:16.9.5"
+"@types/react-test-renderer@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "@types/react-test-renderer@npm:17.0.1"
   dependencies:
-    "@types/react": ^16
-  checksum: 5ba383f05342c9bdd3bdd431591586b76d01d673f7446bf0a035f990cdb8a84c8944994089bf179855b39324f516ed1461e23c7f27e2522210a7acaba60a5172
+    "@types/react": "*"
+  checksum: ecaae8df36cd8cfeb89080d52534856acc3789bad9a6e369ff5119426377c827b4e5b5daa638507f2c1c2fd6c994bf45de288a698143178cd4049c2cd8b77b35
   languageName: node
   linkType: hard
 
@@ -24461,7 +24461,7 @@ fsevents@^1.2.7:
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.14
     "@types/react-dom": ^16.9.14
-    "@types/react-test-renderer": ^16.9.5
+    "@types/react-test-renderer": ^17.0.1
     "@types/styled-components": ^5.1.13
     lodash.debounce: ^4.0.8
     prop-types: ^15.7.2
@@ -24663,7 +24663,7 @@ fsevents@^1.2.7:
   dependencies:
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.14
-    "@types/react-test-renderer": ^16.9.5
+    "@types/react-test-renderer": ^17.0.1
     prop-types: ^15.7.2
     react: ^16.14.0
     react-base16-styling: ^0.8.0
