@@ -1,4 +1,5 @@
 {
   "extends": ["config:base", "group:allNonMajor", ":maintainLockFilesWeekly"],
-  "rangeStrategy": "bump"
+  "rangeStrategy": "bump",
+  "rebaseWhen": "conflicted"
 }
