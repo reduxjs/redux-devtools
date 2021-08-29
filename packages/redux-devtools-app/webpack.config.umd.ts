@@ -44,11 +44,13 @@ module.exports = (env: { production?: boolean } = {}) => ({
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    fallback: {
+      path: require.resolve('path-browserify'),
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production'),
         PLATFORM: JSON.stringify('web'),
       },
     }),
