@@ -4,8 +4,5 @@
     "@babel/preset-react",
     "@babel/preset-typescript"
   ],
-  "plugins": [
-    "@babel/plugin-proposal-class-properties",
-    "react-hot-loader/babel"
-  ]
+  "plugins": ["react-hot-loader/babel"]
 }
