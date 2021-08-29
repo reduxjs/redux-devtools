@@ -3,13 +3,12 @@ import * as webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as pkg from '../../package.json';
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 
 const demoSrc = path.join(__dirname, '../src');
 const libSrc = path.join(__dirname, '../../src');
-const publicDir = path.join(__dirname, '../public');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
@@ -57,7 +56,7 @@ module.exports = {
       patterns: [
         {
           from: 'demo/public/assets/*.js',
-          to: ({ absoluteFilename }: any) => {
+          to: ({ absoluteFilename }) => {
             return `./${path.basename(absoluteFilename)}`;
           },
           globOptions: {
