@@ -31,9 +31,7 @@ const baseConfig = (params) => ({
   },
   plugins: [
     new webpack.DefinePlugin(params.globals),
-    ...(params.plugins
-      ? params.plugins
-      : [new webpack.optimize.ModuleConcatenationPlugin()]),
+    ...(params.plugins ? params.plugins : []),
   ].concat(
     params.copy
       ? new CopyPlugin({
