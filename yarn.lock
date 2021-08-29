@@ -1941,16 +1941,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime-corejs2@npm:^7.8.7":
-  version: 7.14.6
-  resolution: "@babel/runtime-corejs2@npm:7.14.6"
-  dependencies:
-    core-js: ^2.6.5
-    regenerator-runtime: ^0.13.4
-  checksum: 6b776553c02b16a6fb627451e032c4f6257895bbe8892c2c6cc1cc5f1eef82ed6e1720f390876ce62ddd640d3078f7d51b70227d5f7f9882942c780b68333dbd
-  languageName: node
-  linkType: hard
-
 "@babel/runtime-corejs3@npm:^7.10.2":
   version: 7.14.6
   resolution: "@babel/runtime-corejs3@npm:7.14.6"
@@ -4877,7 +4867,7 @@ __metadata:
     "@redux-devtools/rtk-query-monitor": ^1.0.0
     "@redux-devtools/slider-monitor": ^2.0.0-8
     "@reduxjs/toolkit": ^1.6.1
-    "@rjsf/core": ^2.5.1
+    "@rjsf/core": ^3.1.0
     "@types/json-schema": ^7.0.9
     "@types/socketcluster-client": ^13.0.5
     d3-state-visualizer: ^1.4.0
@@ -5309,24 +5299,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rjsf/core@npm:^2.5.1":
-  version: 2.5.1
-  resolution: "@rjsf/core@npm:2.5.1"
+"@rjsf/core@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@rjsf/core@npm:3.1.0"
   dependencies:
-    "@babel/runtime-corejs2": ^7.8.7
-    "@types/json-schema": ^7.0.4
+    "@types/json-schema": ^7.0.7
     ajv: ^6.7.0
-    core-js: ^2.5.7
+    core-js-pure: ^3.6.5
     json-schema-merge-allof: ^0.6.0
     jsonpointer: ^4.0.1
     lodash: ^4.17.15
+    nanoid: ^3.1.23
     prop-types: ^15.7.2
-    react-app-polyfill: ^1.0.4
     react-is: ^16.9.0
-    shortid: ^2.2.14
   peerDependencies:
     react: ">=16"
-  checksum: 670d097045f60dde7203419df55f112367b7dffe3a4bfb1501535bf39a58bc66d74ef3139b3ad62aaa94cf5d03a8bc6ee1835c1dfa8bff7caadcb007eae2a2ae
+  checksum: fe37da1cbf7fe213b02e37b71769bef7592fc24181726b3ae7a765f1e14308cfb161fdea190f69fa1469547208dd6a0552c57ef0ebe5317b636244dbaf78bc72
   languageName: node
   linkType: hard
 
@@ -9458,7 +9446,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"asap@npm:^2.0.0, asap@npm:~2.0.3, asap@npm:~2.0.6":
+"asap@npm:^2.0.0, asap@npm:~2.0.3":
   version: 2.0.6
   resolution: "asap@npm:2.0.6"
   checksum: b296c92c4b969e973260e47523207cd5769abd27c245a68c26dc7a0fe8053c55bb04360237cb51cab1df52be939da77150ace99ad331fb7fb13b3423ed73ff3d
@@ -12146,14 +12134,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^2.4.0, core-js@npm:^2.5.7, core-js@npm:^2.6.5":
+"core-js-pure@npm:^3.6.5":
+  version: 3.16.3
+  resolution: "core-js-pure@npm:3.16.3"
+  checksum: 15be550ffb1eed2a60c9e4ac72620ccf66c11da696597cdcbc4ad874d70fd2c5a1bfe40fea8ce09fb3ee2d8efcfd98de1bf8404209a170f769d9a4f309644197
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^2.4.0, core-js@npm:^2.6.5":
   version: 2.6.12
   resolution: "core-js@npm:2.6.12"
   checksum: 44fa9934a85f8c78d61e0c8b7b22436330471ffe59ec5076fe7f324d6e8cf7f824b14b1c81ca73608b13bdb0fef035bd820989bf059767ad6fa13123bb8bd016
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.0.4, core-js@npm:^3.5.0, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
+"core-js@npm:^3.0.4, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
   version: 3.14.0
   resolution: "core-js@npm:3.14.0"
   checksum: a450089e5796496c7f4a84b13139d853fec5233077833ed142fe401bf9ff4ec2a5bae781f3879ef76cefcfe8a274218d3d4d7d813f5f7f32911fbd36e13a6dc4
@@ -13121,7 +13116,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "devui@workspace:packages/devui"
   dependencies:
-    "@rjsf/core": ^2.5.1
+    "@rjsf/core": ^3.1.0
     "@storybook/addon-essentials": ^6.3.7
     "@storybook/react": ^6.3.7
     "@types/base16": ^1.0.2
@@ -21465,13 +21460,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^2.1.0":
-  version: 2.1.11
-  resolution: "nanoid@npm:2.1.11"
-  checksum: 18cd14386816873849787eb4e65667021bfdeb019a8f14c74287c23594c67b7c0e8f42c7d69f6aedf05cd3d100f1ddc41184f9f9b6b17fbaea1c3ee3f0704eec
-  languageName: node
-  linkType: hard
-
 "nanoid@npm:^3.1.23, nanoid@npm:^3.1.25":
   version: 3.1.25
   resolution: "nanoid@npm:3.1.25"
@@ -24078,15 +24066,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"promise@npm:^8.0.3":
-  version: 8.1.0
-  resolution: "promise@npm:8.1.0"
-  dependencies:
-    asap: ~2.0.6
-  checksum: 89b71a56154ed7d66a73236d8e8351a9c59adddba3929ecc845f75421ff37fc08ea0c67ad76cd5c0b0d81812c7d07a32bed27e7df5fcc960c6d68b0c1cd771f7
-  languageName: node
-  linkType: hard
-
 "prompts@npm:2.4.0":
   version: 2.4.0
   resolution: "prompts@npm:2.4.0"
@@ -24634,20 +24613,6 @@ fsevents@^1.2.7:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
-  languageName: node
-  linkType: hard
-
-"react-app-polyfill@npm:^1.0.4":
-  version: 1.0.6
-  resolution: "react-app-polyfill@npm:1.0.6"
-  dependencies:
-    core-js: ^3.5.0
-    object-assign: ^4.1.1
-    promise: ^8.0.3
-    raf: ^3.4.1
-    regenerator-runtime: ^0.13.3
-    whatwg-fetch: ^3.0.0
-  checksum: d38fb0e5f773eb618e39832e78e34b2382a33a2f633ecbc7aba3af819134938f25f4b6915f40dcbb46efa1096efdfabe44030165142000dcf522f564db7cb3b9
   languageName: node
   linkType: hard
 
@@ -25731,7 +25696,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.3, regenerator-runtime@npm:^0.13.4, regenerator-runtime@npm:^0.13.7":
+"regenerator-runtime@npm:^0.13.4, regenerator-runtime@npm:^0.13.7":
   version: 0.13.8
   resolution: "regenerator-runtime@npm:0.13.8"
   checksum: 5f89699ab578301e3f47fe323d2a9e19ed4b7302481b37ce96843602be3a5cb1e5b66a07c1500e69d4710c1dd6fa3b3f3e56d188ef56df4c17a744d853ac36ed
@@ -27066,15 +27031,6 @@ resolve@^2.0.0-next.3:
   version: 1.7.2
   resolution: "shell-quote@npm:1.7.2"
   checksum: efad426fb25d8a54d06363f1f45774aa9e195f62f14fa696d542b44bfe418ab41206448b63af18d726c62e099e66d9a3f4f44858b9ea2ce4b794b41b802672d1
-  languageName: node
-  linkType: hard
-
-"shortid@npm:^2.2.14":
-  version: 2.2.16
-  resolution: "shortid@npm:2.2.16"
-  dependencies:
-    nanoid: ^2.1.0
-  checksum: 0790ce22fe20aacc226915160da178b5a6af7814d1796404684f6699b60f77e291d39ad3b6b2b4c6efcf5553e1deeee7e29a48b8f46955de1425e67ab934e309
   languageName: node
   linkType: hard
 
@@ -30585,13 +30541,6 @@ typescript@^4.3.5:
   dependencies:
     iconv-lite: 0.4.24
   checksum: 5be4efe111dce29ddee3448d3915477fcc3b28f991d9cf1300b4e50d6d189010d47bca2f51140a844cf9b726e8f066f4aee72a04d687bfe4f2ee2767b2f5b1e6
-  languageName: node
-  linkType: hard
-
-"whatwg-fetch@npm:^3.0.0":
-  version: 3.6.2
-  resolution: "whatwg-fetch@npm:3.6.2"
-  checksum: ee976b7249e7791edb0d0a62cd806b29006ad7ec3a3d89145921ad8c00a3a67e4be8f3fb3ec6bc7b58498724fd568d11aeeeea1f7827e7e1e5eae6c8a275afed
   languageName: node
   linkType: hard
 
