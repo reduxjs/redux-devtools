@@ -29,7 +29,7 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --config demo/config/webpack.config.ts",
+    "start": "webpack serve --config demo/config/webpack.config.ts",
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
