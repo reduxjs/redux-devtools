@@ -4,6 +4,12 @@ exports[`Select renders correctly 1`] = `
 <div
   class=" css-butsr4-container"
 >
+  <span
+    aria-atomic="false"
+    aria-live="polite"
+    aria-relevant="additions text"
+    class="css-1f43avz-a11yText-A11yText"
+  />
   <div
     class=" css-10abb65-control"
   >
@@ -52,7 +58,7 @@ exports[`Select renders correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="css-6q0nyr-Svg"
+          class="css-tj5bde-Svg"
           focusable="false"
           height="20"
           viewBox="0 0 20 20"
@@ -72,6 +78,12 @@ exports[`Select renders with props 1`] = `
 <div
   class=" css-ie73ge-container"
 >
+  <span
+    aria-atomic="false"
+    aria-live="polite"
+    aria-relevant="additions text"
+    class="css-1f43avz-a11yText-A11yText"
+  />
   <div
     class=" css-10abb65-control"
   >
@@ -91,7 +103,7 @@ exports[`Select renders with props 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="css-6q0nyr-Svg"
+            class="css-tj5bde-Svg"
             focusable="false"
             height="14"
             viewBox="0 0 20 20"
@@ -105,7 +117,7 @@ exports[`Select renders with props 1`] = `
       </div>
       <input
         aria-autocomplete="list"
-        class="css-62g3xt-dummyInput"
+        class="css-wmatm6-dummyInput-DummyInput"
         disabled=""
         id="react-select-3-input"
         readonly=""
@@ -139,7 +151,7 @@ exports[`Select renders with props 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="css-6q0nyr-Svg"
+          class="css-tj5bde-Svg"
           focusable="false"
           height="20"
           viewBox="0 0 20 20"
@@ -326,6 +338,7 @@ exports[`Select should select another option 1`] = `
         theme={[Function]}
       >
         <Select
+          aria-live="polite"
           backspaceRemovesValue={true}
           blurInputOnSelect={true}
           captureMenuScroll={false}
@@ -425,6 +438,7 @@ exports[`Select should select another option 1`] = `
             selectOption={[Function]}
             selectProps={
               Object {
+                "aria-live": "polite",
                 "backspaceRemovesValue": true,
                 "blurInputOnSelect": true,
                 "captureMenuScroll": false,
@@ -537,6 +551,173 @@ exports[`Select should select another option 1`] = `
                 className=" css-butsr4-container"
                 onKeyDown={[Function]}
               >
+                <LiveRegion
+                  ariaSelection={null}
+                  clearValue={[Function]}
+                  cx={[Function]}
+                  focusableOptions={
+                    Array [
+                      Object {
+                        "label": "Two",
+                        "value": "two",
+                      },
+                    ]
+                  }
+                  focusedOption={
+                    Object {
+                      "label": "Two",
+                      "value": "two",
+                    }
+                  }
+                  focusedValue={null}
+                  getStyles={[Function]}
+                  getValue={[Function]}
+                  hasValue={false}
+                  isFocused={false}
+                  isMulti={false}
+                  isRtl={false}
+                  options={
+                    Array [
+                      Object {
+                        "label": "One",
+                        "value": "one",
+                      },
+                      Object {
+                        "label": "Two",
+                        "value": "two",
+                      },
+                      Object {
+                        "label": "One hundred",
+                        "value": "hundred",
+                      },
+                    ]
+                  }
+                  selectOption={[Function]}
+                  selectProps={
+                    Object {
+                      "aria-live": "polite",
+                      "backspaceRemovesValue": true,
+                      "blurInputOnSelect": true,
+                      "captureMenuScroll": false,
+                      "closeMenuOnScroll": false,
+                      "closeMenuOnSelect": true,
+                      "components": Object {},
+                      "controlShouldRenderValue": true,
+                      "escapeClearsValue": false,
+                      "filterOption": [Function],
+                      "formatGroupLabel": [Function],
+                      "getOptionLabel": [Function],
+                      "getOptionValue": [Function],
+                      "inputValue": "two",
+                      "isDisabled": false,
+                      "isLoading": false,
+                      "isMulti": false,
+                      "isOptionDisabled": [Function],
+                      "isRtl": false,
+                      "isSearchable": true,
+                      "loadingMessage": [Function],
+                      "maxMenuHeight": 300,
+                      "menuIsOpen": true,
+                      "menuPlacement": "bottom",
+                      "menuPosition": "absolute",
+                      "menuShouldBlockScroll": false,
+                      "menuShouldScrollIntoView": true,
+                      "minMenuHeight": 140,
+                      "noOptionsMessage": [Function],
+                      "onChange": [Function],
+                      "onInputChange": [Function],
+                      "onMenuClose": [Function],
+                      "onMenuOpen": [Function],
+                      "openMenuOnClick": true,
+                      "openMenuOnFocus": false,
+                      "options": Array [
+                        Object {
+                          "label": "One",
+                          "value": "one",
+                        },
+                        Object {
+                          "label": "Two",
+                          "value": "two",
+                        },
+                        Object {
+                          "label": "One hundred",
+                          "value": "hundred",
+                        },
+                      ],
+                      "pageSize": 5,
+                      "placeholder": "Select...",
+                      "screenReaderStatus": [Function],
+                      "styles": Object {
+                        "container": [Function],
+                        "control": [Function],
+                      },
+                      "tabIndex": "0",
+                      "tabSelectsValue": true,
+                      "theme": [Function],
+                      "value": null,
+                    }
+                  }
+                  selectValue={Array []}
+                  setValue={[Function]}
+                  theme={
+                    Object {
+                      "borderRadius": 0,
+                      "colors": Object {
+                        "danger": undefined,
+                        "dangerLight": undefined,
+                        "neutral0": undefined,
+                        "neutral10": undefined,
+                        "neutral20": undefined,
+                        "neutral30": undefined,
+                        "neutral40": undefined,
+                        "neutral5": undefined,
+                        "neutral50": "hsl(0, 0%, 50%)",
+                        "neutral60": undefined,
+                        "neutral70": "hsl(0, 0%, 30%)",
+                        "neutral80": undefined,
+                        "neutral90": "hsl(0, 0%, 10%)",
+                        "primary": undefined,
+                        "primary25": undefined,
+                        "primary50": undefined,
+                        "primary75": "#4C9AFF",
+                      },
+                      "spacing": Object {
+                        "baseUnit": 2,
+                        "controlHeight": 30,
+                        "menuGutter": 8,
+                      },
+                    }
+                  }
+                >
+                  <A11yText
+                    aria-atomic="false"
+                    aria-live="polite"
+                    aria-relevant="additions text"
+                  >
+                    <EmotionCssPropInternal
+                      __EMOTION_LABEL_PLEASE_DO_NOT_USE__="A11yText"
+                      __EMOTION_TYPE_PLEASE_DO_NOT_USE__="span"
+                      aria-atomic="false"
+                      aria-live="polite"
+                      aria-relevant="additions text"
+                      css={
+                        Object {
+                          "map": "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkExMXlUZXh0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQVFJIiwiZmlsZSI6IkExMXlUZXh0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gQGZsb3dcbi8qKiBAanN4IGpzeCAqL1xuaW1wb3J0IHsgdHlwZSBFbGVtZW50Q29uZmlnIH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IHsganN4IH0gZnJvbSAnQGVtb3Rpb24vcmVhY3QnO1xuXG4vLyBBc3Npc3RpdmUgdGV4dCB0byBkZXNjcmliZSB2aXN1YWwgZWxlbWVudHMuIEhpZGRlbiBmb3Igc2lnaHRlZCB1c2Vycy5cbmNvbnN0IEExMXlUZXh0ID0gKHByb3BzOiBFbGVtZW50Q29uZmlnPCdzcGFuJz4pID0+IChcbiAgPHNwYW5cbiAgICBjc3M9e3tcbiAgICAgIGxhYmVsOiAnYTExeVRleHQnLFxuICAgICAgekluZGV4OiA5OTk5LFxuICAgICAgYm9yZGVyOiAwLFxuICAgICAgY2xpcDogJ3JlY3QoMXB4LCAxcHgsIDFweCwgMXB4KScsXG4gICAgICBoZWlnaHQ6IDEsXG4gICAgICB3aWR0aDogMSxcbiAgICAgIHBvc2l0aW9uOiAnYWJzb2x1dGUnLFxuICAgICAgb3ZlcmZsb3c6ICdoaWRkZW4nLFxuICAgICAgcGFkZGluZzogMCxcbiAgICAgIHdoaXRlU3BhY2U6ICdub3dyYXAnLFxuICAgIH19XG4gICAgey4uLnByb3BzfVxuICAvPlxuKTtcblxuZXhwb3J0IGRlZmF1bHQgQTExeVRleHQ7XG4iXX0= */",
+                          "name": "1f43avz-a11yText-A11yText",
+                          "styles": "label:a11yText;z-index:9999;border:0;clip:rect(1px, 1px, 1px, 1px);height:1px;width:1px;position:absolute;overflow:hidden;padding:0;white-space:nowrap;label:A11yText;",
+                          "toString": [Function],
+                        }
+                      }
+                    >
+                      <span
+                        aria-atomic="false"
+                        aria-live="polite"
+                        aria-relevant="additions text"
+                        className="css-1f43avz-a11yText-A11yText"
+                      />
+                    </EmotionCssPropInternal>
+                  </A11yText>
+                </LiveRegion>
                 <Control
                   clearValue={[Function]}
                   cx={[Function]}
@@ -574,6 +755,7 @@ exports[`Select should select another option 1`] = `
                   selectOption={[Function]}
                   selectProps={
                     Object {
+                      "aria-live": "polite",
                       "backspaceRemovesValue": true,
                       "blurInputOnSelect": true,
                       "captureMenuScroll": false,
@@ -731,6 +913,7 @@ exports[`Select should select another option 1`] = `
                         selectOption={[Function]}
                         selectProps={
                           Object {
+                            "aria-live": "polite",
                             "backspaceRemovesValue": true,
                             "blurInputOnSelect": true,
                             "captureMenuScroll": false,
@@ -849,17 +1032,40 @@ exports[`Select should select another option 1`] = `
                               autoCapitalize="none"
                               autoComplete="off"
                               autoCorrect="off"
+                              clearValue={[Function]}
                               cx={[Function]}
                               getStyles={[Function]}
+                              getValue={[Function]}
+                              hasValue={false}
                               id="react-select-4-input"
                               innerRef={[Function]}
                               isDisabled={false}
                               isHidden={false}
+                              isMulti={false}
+                              isRtl={false}
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
+                              options={
+                                Array [
+                                  Object {
+                                    "label": "One",
+                                    "value": "one",
+                                  },
+                                  Object {
+                                    "label": "Two",
+                                    "value": "two",
+                                  },
+                                  Object {
+                                    "label": "One hundred",
+                                    "value": "hundred",
+                                  },
+                                ]
+                              }
+                              selectOption={[Function]}
                               selectProps={
                                 Object {
+                                  "aria-live": "polite",
                                   "backspaceRemovesValue": true,
                                   "blurInputOnSelect": true,
                                   "captureMenuScroll": false,
@@ -921,6 +1127,7 @@ exports[`Select should select another option 1`] = `
                                   "value": null,
                                 }
                               }
+                              setValue={[Function]}
                               spellCheck="false"
                               tabIndex="0"
                               theme={
@@ -1091,6 +1298,7 @@ exports[`Select should select another option 1`] = `
                         selectOption={[Function]}
                         selectProps={
                           Object {
+                            "aria-live": "polite",
                             "backspaceRemovesValue": true,
                             "blurInputOnSelect": true,
                             "captureMenuScroll": false,
@@ -1229,6 +1437,7 @@ exports[`Select should select another option 1`] = `
                               selectOption={[Function]}
                               selectProps={
                                 Object {
+                                  "aria-live": "polite",
                                   "backspaceRemovesValue": true,
                                   "blurInputOnSelect": true,
                                   "captureMenuScroll": false,
@@ -1378,6 +1587,7 @@ exports[`Select should select another option 1`] = `
                               selectOption={[Function]}
                               selectProps={
                                 Object {
+                                  "aria-live": "polite",
                                   "backspaceRemovesValue": true,
                                   "blurInputOnSelect": true,
                                   "captureMenuScroll": false,
@@ -1507,9 +1717,9 @@ exports[`Select should select another option 1`] = `
                                         aria-hidden="true"
                                         css={
                                           Object {
-                                            "map": "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGljYXRvcnMuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBa0JJIiwiZmlsZSI6ImluZGljYXRvcnMuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBAZmxvd1xuLyoqIEBqc3gganN4ICovXG5pbXBvcnQgeyB0eXBlIE5vZGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBqc3gsIGtleWZyYW1lcyB9IGZyb20gJ0BlbW90aW9uL2NvcmUnO1xuXG5pbXBvcnQgdHlwZSB7IENvbW1vblByb3BzLCBUaGVtZSB9IGZyb20gJy4uL3R5cGVzJztcblxuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4vLyBEcm9wZG93biAmIENsZWFyIEljb25zXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cblxuY29uc3QgU3ZnID0gKHsgc2l6ZSwgLi4ucHJvcHMgfTogeyBzaXplOiBudW1iZXIgfSkgPT4gKFxuICA8c3ZnXG4gICAgaGVpZ2h0PXtzaXplfVxuICAgIHdpZHRoPXtzaXplfVxuICAgIHZpZXdCb3g9XCIwIDAgMjAgMjBcIlxuICAgIGFyaWEtaGlkZGVuPVwidHJ1ZVwiXG4gICAgZm9jdXNhYmxlPVwiZmFsc2VcIlxuICAgIGNzcz17e1xuICAgICAgZGlzcGxheTogJ2lubGluZS1ibG9jaycsXG4gICAgICBmaWxsOiAnY3VycmVudENvbG9yJyxcbiAgICAgIGxpbmVIZWlnaHQ6IDEsXG4gICAgICBzdHJva2U6ICdjdXJyZW50Q29sb3InLFxuICAgICAgc3Ryb2tlV2lkdGg6IDAsXG4gICAgfX1cbiAgICB7Li4ucHJvcHN9XG4gIC8+XG4pO1xuXG5leHBvcnQgY29uc3QgQ3Jvc3NJY29uID0gKHByb3BzOiBhbnkpID0+IChcbiAgPFN2ZyBzaXplPXsyMH0gey4uLnByb3BzfT5cbiAgICA8cGF0aCBkPVwiTTE0LjM0OCAxNC44NDljLTAuNDY5IDAuNDY5LTEuMjI5IDAuNDY5LTEuNjk3IDBsLTIuNjUxLTMuMDMwLTIuNjUxIDMuMDI5Yy0wLjQ2OSAwLjQ2OS0xLjIyOSAwLjQ2OS0xLjY5NyAwLTAuNDY5LTAuNDY5LTAuNDY5LTEuMjI5IDAtMS42OTdsMi43NTgtMy4xNS0yLjc1OS0zLjE1MmMtMC40NjktMC40NjktMC40NjktMS4yMjggMC0xLjY5N3MxLjIyOC0wLjQ2OSAxLjY5NyAwbDIuNjUyIDMuMDMxIDIuNjUxLTMuMDMxYzAuNDY5LTAuNDY5IDEuMjI4LTAuNDY5IDEuNjk3IDBzMC40NjkgMS4yMjkgMCAxLjY5N2wtMi43NTggMy4xNTIgMi43NTggMy4xNWMwLjQ2OSAwLjQ2OSAwLjQ2OSAxLjIyOSAwIDEuNjk4elwiIC8+XG4gIDwvU3ZnPlxuKTtcbmV4cG9ydCBjb25zdCBEb3duQ2hldnJvbiA9IChwcm9wczogYW55KSA9PiAoXG4gIDxTdmcgc2l6ZT17MjB9IHsuLi5wcm9wc30+XG4gICAgPHBhdGggZD1cIk00LjUxNiA3LjU0OGMwLjQzNi0wLjQ0NiAxLjA0My0wLjQ4MSAxLjU3NiAwbDMuOTA4IDMuNzQ3IDMuOTA4LTMuNzQ3YzAuNTMzLTAuNDgxIDEuMTQxLTAuNDQ2IDEuNTc0IDAgMC40MzYgMC40NDUgMC40MDggMS4xOTcgMCAxLjYxNS0wLjQwNiAwLjQxOC00LjY5NSA0LjUwMi00LjY5NSA0LjUwMi0wLjIxNyAwLjIyMy0wLjUwMiAwLjMzNS0wLjc4NyAwLjMzNXMtMC41Ny0wLjExMi0wLjc4OS0wLjMzNWMwIDAtNC4yODctNC4wODQtNC42OTUtNC41MDJzLTAuNDM2LTEuMTcgMC0xLjYxNXpcIiAvPlxuICA8L1N2Zz5cbik7XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gRHJvcGRvd24gJiBDbGVhciBCdXR0b25zXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cblxuZXhwb3J0IHR5cGUgSW5kaWNhdG9yUHJvcHMgPSBDb21tb25Qcm9wcyAmIHtcbiAgLyoqIFRoZSBjaGlsZHJlbiB0byBiZSByZW5kZXJlZCBpbnNpZGUgdGhlIGluZGljYXRvci4gKi9cbiAgY2hpbGRyZW46IE5vZGUsXG4gIC8qKiBQcm9wcyB0aGF0IHdpbGwgYmUgcGFzc2VkIG9uIHRvIHRoZSBjaGlsZHJlbi4gKi9cbiAgaW5uZXJQcm9wczogYW55LFxuICAvKiogVGhlIGZvY3VzZWQgc3RhdGUgb2YgdGhlIHNlbGVjdC4gKi9cbiAgaXNGb2N1c2VkOiBib29sZWFuLFxuICAvKiogV2hldGhlciB0aGUgdGV4dCBpcyByaWdodCB0byBsZWZ0ICovXG4gIGlzUnRsOiBib29sZWFuLFxufTtcblxuY29uc3QgYmFzZUNTUyA9ICh7XG4gIGlzRm9jdXNlZCxcbiAgdGhlbWU6IHtcbiAgICBzcGFjaW5nOiB7IGJhc2VVbml0IH0sXG4gICAgY29sb3JzLFxuICB9LFxufTogSW5kaWNhdG9yUHJvcHMpID0+ICh7XG4gIGxhYmVsOiAnaW5kaWNhdG9yQ29udGFpbmVyJyxcbiAgY29sb3I6IGlzRm9jdXNlZCA/IGNvbG9ycy5uZXV0cmFsNjAgOiBjb2xvcnMubmV1dHJhbDIwLFxuICBkaXNwbGF5OiAnZmxleCcsXG4gIHBhZGRpbmc6IGJhc2VVbml0ICogMixcbiAgdHJhbnNpdGlvbjogJ2NvbG9yIDE1MG1zJyxcblxuICAnOmhvdmVyJzoge1xuICAgIGNvbG9yOiBpc0ZvY3VzZWQgPyBjb2xvcnMubmV1dHJhbDgwIDogY29sb3JzLm5ldXRyYWw0MCxcbiAgfSxcbn0pO1xuXG5leHBvcnQgY29uc3QgZHJvcGRvd25JbmRpY2F0b3JDU1MgPSBiYXNlQ1NTO1xuZXhwb3J0IGNvbnN0IERyb3Bkb3duSW5kaWNhdG9yID0gKHByb3BzOiBJbmRpY2F0b3JQcm9wcykgPT4ge1xuICBjb25zdCB7IGNoaWxkcmVuLCBjbGFzc05hbWUsIGN4LCBnZXRTdHlsZXMsIGlubmVyUHJvcHMgfSA9IHByb3BzO1xuICByZXR1cm4gKFxuICAgIDxkaXZcbiAgICAgIHsuLi5pbm5lclByb3BzfVxuICAgICAgY3NzPXtnZXRTdHlsZXMoJ2Ryb3Bkb3duSW5kaWNhdG9yJywgcHJvcHMpfVxuICAgICAgY2xhc3NOYW1lPXtjeChcbiAgICAgICAge1xuICAgICAgICAgIGluZGljYXRvcjogdHJ1ZSxcbiAgICAgICAgICAnZHJvcGRvd24taW5kaWNhdG9yJzogdHJ1ZSxcbiAgICAgICAgfSxcbiAgICAgICAgY2xhc3NOYW1lXG4gICAgICApfVxuICAgID5cbiAgICAgIHtjaGlsZHJlbiB8fCA8RG93bkNoZXZyb24gLz59XG4gICAgPC9kaXY+XG4gICk7XG59O1xuXG5leHBvcnQgY29uc3QgY2xlYXJJbmRpY2F0b3JDU1MgPSBiYXNlQ1NTO1xuZXhwb3J0IGNvbnN0IENsZWFySW5kaWNhdG9yID0gKHByb3BzOiBJbmRpY2F0b3JQcm9wcykgPT4ge1xuICBjb25zdCB7IGNoaWxkcmVuLCBjbGFzc05hbWUsIGN4LCBnZXRTdHlsZXMsIGlubmVyUHJvcHMgfSA9IHByb3BzO1xuICByZXR1cm4gKFxuICAgIDxkaXZcbiAgICAgIHsuLi5pbm5lclByb3BzfVxuICAgICAgY3NzPXtnZXRTdHlsZXMoJ2NsZWFySW5kaWNhdG9yJywgcHJvcHMpfVxuICAgICAgY2xhc3NOYW1lPXtjeChcbiAgICAgICAge1xuICAgICAgICAgIGluZGljYXRvcjogdHJ1ZSxcbiAgICAgICAgICAnY2xlYXItaW5kaWNhdG9yJzogdHJ1ZSxcbiAgICAgICAgfSxcbiAgICAgICAgY2xhc3NOYW1lXG4gICAgICApfVxuICAgID5cbiAgICAgIHtjaGlsZHJlbiB8fCA8Q3Jvc3NJY29uIC8+fVxuICAgIDwvZGl2PlxuICApO1xufTtcblxuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4vLyBTZXBhcmF0b3Jcbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuXG50eXBlIFNlcGFyYXRvclN0YXRlID0geyBpc0Rpc2FibGVkOiBib29sZWFuIH07XG5cbmV4cG9ydCBjb25zdCBpbmRpY2F0b3JTZXBhcmF0b3JDU1MgPSAoe1xuICBpc0Rpc2FibGVkLFxuICB0aGVtZToge1xuICAgIHNwYWNpbmc6IHsgYmFzZVVuaXQgfSxcbiAgICBjb2xvcnMsXG4gIH0sXG59OiBDb21tb25Qcm9wcyAmIFNlcGFyYXRvclN0YXRlKSA9PiAoe1xuICBsYWJlbDogJ2luZGljYXRvclNlcGFyYXRvcicsXG4gIGFsaWduU2VsZjogJ3N0cmV0Y2gnLFxuICBiYWNrZ3JvdW5kQ29sb3I6IGlzRGlzYWJsZWQgPyBjb2xvcnMubmV1dHJhbDEwIDogY29sb3JzLm5ldXRyYWwyMCxcbiAgbWFyZ2luQm90dG9tOiBiYXNlVW5pdCAqIDIsXG4gIG1hcmdpblRvcDogYmFzZVVuaXQgKiAyLFxuICB3aWR0aDogMSxcbn0pO1xuXG5leHBvcnQgY29uc3QgSW5kaWNhdG9yU2VwYXJhdG9yID0gKHByb3BzOiBJbmRpY2F0b3JQcm9wcykgPT4ge1xuICBjb25zdCB7IGNsYXNzTmFtZSwgY3gsIGdldFN0eWxlcywgaW5uZXJQcm9wcyB9ID0gcHJvcHM7XG4gIHJldHVybiAoXG4gICAgPHNwYW5cbiAgICAgIHsuLi5pbm5lclByb3BzfVxuICAgICAgY3NzPXtnZXRTdHlsZXMoJ2luZGljYXRvclNlcGFyYXRvcicsIHByb3BzKX1cbiAgICAgIGNsYXNzTmFtZT17Y3goeyAnaW5kaWNhdG9yLXNlcGFyYXRvcic6IHRydWUgfSwgY2xhc3NOYW1lKX1cbiAgICAvPlxuICApO1xufTtcblxuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4vLyBMb2FkaW5nXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cblxuY29uc3QgbG9hZGluZ0RvdEFuaW1hdGlvbnMgPSBrZXlmcmFtZXNgXG4gIDAlLCA4MCUsIDEwMCUgeyBvcGFjaXR5OiAwOyB9XG4gIDQwJSB7IG9wYWNpdHk6IDE7IH1cbmA7XG5cbmV4cG9ydCBjb25zdCBsb2FkaW5nSW5kaWNhdG9yQ1NTID0gKHtcbiAgaXNGb2N1c2VkLFxuICBzaXplLFxuICB0aGVtZToge1xuICAgIGNvbG9ycyxcbiAgICBzcGFjaW5nOiB7IGJhc2VVbml0IH0sXG4gIH0sXG59OiB7XG4gIGlzRm9jdXNlZDogYm9vbGVhbixcbiAgc2l6ZTogbnVtYmVyLFxuICB0aGVtZTogVGhlbWUsXG59KSA9PiAoe1xuICBsYWJlbDogJ2xvYWRpbmdJbmRpY2F0b3InLFxuICBjb2xvcjogaXNGb2N1c2VkID8gY29sb3JzLm5ldXRyYWw2MCA6IGNvbG9ycy5uZXV0cmFsMjAsXG4gIGRpc3BsYXk6ICdmbGV4JyxcbiAgcGFkZGluZzogYmFzZVVuaXQgKiAyLFxuICB0cmFuc2l0aW9uOiAnY29sb3IgMTUwbXMnLFxuICBhbGlnblNlbGY6ICdjZW50ZXInLFxuICBmb250U2l6ZTogc2l6ZSxcbiAgbGluZUhlaWdodDogMSxcbiAgbWFyZ2luUmlnaHQ6IHNpemUsXG4gIHRleHRBbGlnbjogJ2NlbnRlcicsXG4gIHZlcnRpY2FsQWxpZ246ICdtaWRkbGUnLFxufSk7XG5cbnR5cGUgRG90UHJvcHMgPSB7IGRlbGF5OiBudW1iZXIsIG9mZnNldDogYm9vbGVhbiB9O1xuY29uc3QgTG9hZGluZ0RvdCA9ICh7IGRlbGF5LCBvZmZzZXQgfTogRG90UHJvcHMpID0+IChcbiAgPHNwYW5cbiAgICBjc3M9e3tcbiAgICAgIGFuaW1hdGlvbjogYCR7bG9hZGluZ0RvdEFuaW1hdGlvbnN9IDFzIGVhc2UtaW4tb3V0ICR7ZGVsYXl9bXMgaW5maW5pdGU7YCxcbiAgICAgIGJhY2tncm91bmRDb2xvcjogJ2N1cnJlbnRDb2xvcicsXG4gICAgICBib3JkZXJSYWRpdXM6ICcxZW0nLFxuICAgICAgZGlzcGxheTogJ2lubGluZS1ibG9jaycsXG4gICAgICBtYXJnaW5MZWZ0OiBvZmZzZXQgPyAnMWVtJyA6IG51bGwsXG4gICAgICBoZWlnaHQ6ICcxZW0nLFxuICAgICAgdmVydGljYWxBbGlnbjogJ3RvcCcsXG4gICAgICB3aWR0aDogJzFlbScsXG4gICAgfX1cbiAgLz5cbik7XG5cbmV4cG9ydCB0eXBlIExvYWRpbmdJY29uUHJvcHMgPSB7XG4gIC8qKiBQcm9wcyB0aGF0IHdpbGwgYmUgcGFzc2VkIG9uIHRvIHRoZSBjaGlsZHJlbi4gKi9cbiAgaW5uZXJQcm9wczogYW55LFxuICAvKiogVGhlIGZvY3VzZWQgc3RhdGUgb2YgdGhlIHNlbGVjdC4gKi9cbiAgaXNGb2N1c2VkOiBib29sZWFuLFxuICAvKiogV2hldGhlciB0aGUgdGV4dCBpcyByaWdodCB0byBsZWZ0ICovXG4gIGlzUnRsOiBib29sZWFuLFxufSAmIENvbW1vblByb3BzICYge1xuICAgIC8qKiBTZXQgc2l6ZSBvZiB0aGUgY29udGFpbmVyLiAqL1xuICAgIHNpemU6IG51bWJlcixcbiAgfTtcbmV4cG9ydCBjb25zdCBMb2FkaW5nSW5kaWNhdG9yID0gKHByb3BzOiBMb2FkaW5nSWNvblByb3BzKSA9PiB7XG4gIGNvbnN0IHsgY2xhc3NOYW1lLCBjeCwgZ2V0U3R5bGVzLCBpbm5lclByb3BzLCBpc1J0bCB9ID0gcHJvcHM7XG5cbiAgcmV0dXJuIChcbiAgICA8ZGl2XG4gICAgICB7Li4uaW5uZXJQcm9wc31cbiAgICAgIGNzcz17Z2V0U3R5bGVzKCdsb2FkaW5nSW5kaWNhdG9yJywgcHJvcHMpfVxuICAgICAgY2xhc3NOYW1lPXtjeChcbiAgICAgICAge1xuICAgICAgICAgIGluZGljYXRvcjogdHJ1ZSxcbiAgICAgICAgICAnbG9hZGluZy1pbmRpY2F0b3InOiB0cnVlLFxuICAgICAgICB9LFxuICAgICAgICBjbGFzc05hbWVcbiAgICAgICl9XG4gICAgPlxuICAgICAgPExvYWRpbmdEb3QgZGVsYXk9ezB9IG9mZnNldD17aXNSdGx9IC8+XG4gICAgICA8TG9hZGluZ0RvdCBkZWxheT17MTYwfSBvZmZzZXQgLz5cbiAgICAgIDxMb2FkaW5nRG90IGRlbGF5PXszMjB9IG9mZnNldD17IWlzUnRsfSAvPlxuICAgIDwvZGl2PlxuICApO1xufTtcbkxvYWRpbmdJbmRpY2F0b3IuZGVmYXVsdFByb3BzID0geyBzaXplOiA0IH07XG4iXX0= */",
-                                            "name": "19bqh2r",
-                                            "styles": "display:inline-block;fill:currentColor;line-height:1;stroke:currentColor;stroke-width:0;",
+                                            "map": "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGljYXRvcnMuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBa0JJIiwiZmlsZSI6ImluZGljYXRvcnMuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBAZmxvd1xuLyoqIEBqc3gganN4ICovXG5pbXBvcnQgeyB0eXBlIE5vZGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBqc3gsIGtleWZyYW1lcyB9IGZyb20gJ0BlbW90aW9uL3JlYWN0JztcblxuaW1wb3J0IHR5cGUgeyBDb21tb25Qcm9wcywgVGhlbWUgfSBmcm9tICcuLi90eXBlcyc7XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gRHJvcGRvd24gJiBDbGVhciBJY29uc1xuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5cbmNvbnN0IFN2ZyA9ICh7IHNpemUsIC4uLnByb3BzIH06IHsgc2l6ZTogbnVtYmVyIH0pID0+IChcbiAgPHN2Z1xuICAgIGhlaWdodD17c2l6ZX1cbiAgICB3aWR0aD17c2l6ZX1cbiAgICB2aWV3Qm94PVwiMCAwIDIwIDIwXCJcbiAgICBhcmlhLWhpZGRlbj1cInRydWVcIlxuICAgIGZvY3VzYWJsZT1cImZhbHNlXCJcbiAgICBjc3M9e3tcbiAgICAgIGRpc3BsYXk6ICdpbmxpbmUtYmxvY2snLFxuICAgICAgZmlsbDogJ2N1cnJlbnRDb2xvcicsXG4gICAgICBsaW5lSGVpZ2h0OiAxLFxuICAgICAgc3Ryb2tlOiAnY3VycmVudENvbG9yJyxcbiAgICAgIHN0cm9rZVdpZHRoOiAwLFxuICAgIH19XG4gICAgey4uLnByb3BzfVxuICAvPlxuKTtcblxuZXhwb3J0IGNvbnN0IENyb3NzSWNvbiA9IChwcm9wczogYW55KSA9PiAoXG4gIDxTdmcgc2l6ZT17MjB9IHsuLi5wcm9wc30+XG4gICAgPHBhdGggZD1cIk0xNC4zNDggMTQuODQ5Yy0wLjQ2OSAwLjQ2OS0xLjIyOSAwLjQ2OS0xLjY5NyAwbC0yLjY1MS0zLjAzMC0yLjY1MSAzLjAyOWMtMC40NjkgMC40NjktMS4yMjkgMC40NjktMS42OTcgMC0wLjQ2OS0wLjQ2OS0wLjQ2OS0xLjIyOSAwLTEuNjk3bDIuNzU4LTMuMTUtMi43NTktMy4xNTJjLTAuNDY5LTAuNDY5LTAuNDY5LTEuMjI4IDAtMS42OTdzMS4yMjgtMC40NjkgMS42OTcgMGwyLjY1MiAzLjAzMSAyLjY1MS0zLjAzMWMwLjQ2OS0wLjQ2OSAxLjIyOC0wLjQ2OSAxLjY5NyAwczAuNDY5IDEuMjI5IDAgMS42OTdsLTIuNzU4IDMuMTUyIDIuNzU4IDMuMTVjMC40NjkgMC40NjkgMC40NjkgMS4yMjkgMCAxLjY5OHpcIiAvPlxuICA8L1N2Zz5cbik7XG5leHBvcnQgY29uc3QgRG93bkNoZXZyb24gPSAocHJvcHM6IGFueSkgPT4gKFxuICA8U3ZnIHNpemU9ezIwfSB7Li4ucHJvcHN9PlxuICAgIDxwYXRoIGQ9XCJNNC41MTYgNy41NDhjMC40MzYtMC40NDYgMS4wNDMtMC40ODEgMS41NzYgMGwzLjkwOCAzLjc0NyAzLjkwOC0zLjc0N2MwLjUzMy0wLjQ4MSAxLjE0MS0wLjQ0NiAxLjU3NCAwIDAuNDM2IDAuNDQ1IDAuNDA4IDEuMTk3IDAgMS42MTUtMC40MDYgMC40MTgtNC42OTUgNC41MDItNC42OTUgNC41MDItMC4yMTcgMC4yMjMtMC41MDIgMC4zMzUtMC43ODcgMC4zMzVzLTAuNTctMC4xMTItMC43ODktMC4zMzVjMCAwLTQuMjg3LTQuMDg0LTQuNjk1LTQuNTAycy0wLjQzNi0xLjE3IDAtMS42MTV6XCIgLz5cbiAgPC9Tdmc+XG4pO1xuXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbi8vIERyb3Bkb3duICYgQ2xlYXIgQnV0dG9uc1xuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5cbmV4cG9ydCB0eXBlIEluZGljYXRvclByb3BzID0gQ29tbW9uUHJvcHMgJiB7XG4gIC8qKiBUaGUgY2hpbGRyZW4gdG8gYmUgcmVuZGVyZWQgaW5zaWRlIHRoZSBpbmRpY2F0b3IuICovXG4gIGNoaWxkcmVuOiBOb2RlLFxuICAvKiogUHJvcHMgdGhhdCB3aWxsIGJlIHBhc3NlZCBvbiB0byB0aGUgY2hpbGRyZW4uICovXG4gIGlubmVyUHJvcHM6IGFueSxcbiAgLyoqIFRoZSBmb2N1c2VkIHN0YXRlIG9mIHRoZSBzZWxlY3QuICovXG4gIGlzRm9jdXNlZDogYm9vbGVhbixcbiAgLyoqIFdoZXRoZXIgdGhlIHRleHQgaXMgcmlnaHQgdG8gbGVmdCAqL1xuICBpc1J0bDogYm9vbGVhbixcbn07XG5cbmNvbnN0IGJhc2VDU1MgPSAoe1xuICBpc0ZvY3VzZWQsXG4gIHRoZW1lOiB7XG4gICAgc3BhY2luZzogeyBiYXNlVW5pdCB9LFxuICAgIGNvbG9ycyxcbiAgfSxcbn06IEluZGljYXRvclByb3BzKSA9PiAoe1xuICBsYWJlbDogJ2luZGljYXRvckNvbnRhaW5lcicsXG4gIGNvbG9yOiBpc0ZvY3VzZWQgPyBjb2xvcnMubmV1dHJhbDYwIDogY29sb3JzLm5ldXRyYWwyMCxcbiAgZGlzcGxheTogJ2ZsZXgnLFxuICBwYWRkaW5nOiBiYXNlVW5pdCAqIDIsXG4gIHRyYW5zaXRpb246ICdjb2xvciAxNTBtcycsXG5cbiAgJzpob3Zlcic6IHtcbiAgICBjb2xvcjogaXNGb2N1c2VkID8gY29sb3JzLm5ldXRyYWw4MCA6IGNvbG9ycy5uZXV0cmFsNDAsXG4gIH0sXG59KTtcblxuZXhwb3J0IGNvbnN0IGRyb3Bkb3duSW5kaWNhdG9yQ1NTID0gYmFzZUNTUztcbmV4cG9ydCBjb25zdCBEcm9wZG93bkluZGljYXRvciA9IChwcm9wczogSW5kaWNhdG9yUHJvcHMpID0+IHtcbiAgY29uc3QgeyBjaGlsZHJlbiwgY2xhc3NOYW1lLCBjeCwgZ2V0U3R5bGVzLCBpbm5lclByb3BzIH0gPSBwcm9wcztcbiAgcmV0dXJuIChcbiAgICA8ZGl2XG4gICAgICBjc3M9e2dldFN0eWxlcygnZHJvcGRvd25JbmRpY2F0b3InLCBwcm9wcyl9XG4gICAgICBjbGFzc05hbWU9e2N4KFxuICAgICAgICB7XG4gICAgICAgICAgaW5kaWNhdG9yOiB0cnVlLFxuICAgICAgICAgICdkcm9wZG93bi1pbmRpY2F0b3InOiB0cnVlLFxuICAgICAgICB9LFxuICAgICAgICBjbGFzc05hbWVcbiAgICAgICl9XG4gICAgICB7Li4uaW5uZXJQcm9wc31cbiAgICA+XG4gICAgICB7Y2hpbGRyZW4gfHwgPERvd25DaGV2cm9uIC8+fVxuICAgIDwvZGl2PlxuICApO1xufTtcblxuZXhwb3J0IGNvbnN0IGNsZWFySW5kaWNhdG9yQ1NTID0gYmFzZUNTUztcbmV4cG9ydCBjb25zdCBDbGVhckluZGljYXRvciA9IChwcm9wczogSW5kaWNhdG9yUHJvcHMpID0+IHtcbiAgY29uc3QgeyBjaGlsZHJlbiwgY2xhc3NOYW1lLCBjeCwgZ2V0U3R5bGVzLCBpbm5lclByb3BzIH0gPSBwcm9wcztcbiAgcmV0dXJuIChcbiAgICA8ZGl2XG4gICAgICBjc3M9e2dldFN0eWxlcygnY2xlYXJJbmRpY2F0b3InLCBwcm9wcyl9XG4gICAgICBjbGFzc05hbWU9e2N4KFxuICAgICAgICB7XG4gICAgICAgICAgaW5kaWNhdG9yOiB0cnVlLFxuICAgICAgICAgICdjbGVhci1pbmRpY2F0b3InOiB0cnVlLFxuICAgICAgICB9LFxuICAgICAgICBjbGFzc05hbWVcbiAgICAgICl9XG4gICAgICB7Li4uaW5uZXJQcm9wc31cbiAgICA+XG4gICAgICB7Y2hpbGRyZW4gfHwgPENyb3NzSWNvbiAvPn1cbiAgICA8L2Rpdj5cbiAgKTtcbn07XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gU2VwYXJhdG9yXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cblxudHlwZSBTZXBhcmF0b3JTdGF0ZSA9IHsgaXNEaXNhYmxlZDogYm9vbGVhbiB9O1xuXG5leHBvcnQgY29uc3QgaW5kaWNhdG9yU2VwYXJhdG9yQ1NTID0gKHtcbiAgaXNEaXNhYmxlZCxcbiAgdGhlbWU6IHtcbiAgICBzcGFjaW5nOiB7IGJhc2VVbml0IH0sXG4gICAgY29sb3JzLFxuICB9LFxufTogQ29tbW9uUHJvcHMgJiBTZXBhcmF0b3JTdGF0ZSkgPT4gKHtcbiAgbGFiZWw6ICdpbmRpY2F0b3JTZXBhcmF0b3InLFxuICBhbGlnblNlbGY6ICdzdHJldGNoJyxcbiAgYmFja2dyb3VuZENvbG9yOiBpc0Rpc2FibGVkID8gY29sb3JzLm5ldXRyYWwxMCA6IGNvbG9ycy5uZXV0cmFsMjAsXG4gIG1hcmdpbkJvdHRvbTogYmFzZVVuaXQgKiAyLFxuICBtYXJnaW5Ub3A6IGJhc2VVbml0ICogMixcbiAgd2lkdGg6IDEsXG59KTtcblxuZXhwb3J0IGNvbnN0IEluZGljYXRvclNlcGFyYXRvciA9IChwcm9wczogSW5kaWNhdG9yUHJvcHMpID0+IHtcbiAgY29uc3QgeyBjbGFzc05hbWUsIGN4LCBnZXRTdHlsZXMsIGlubmVyUHJvcHMgfSA9IHByb3BzO1xuICByZXR1cm4gKFxuICAgIDxzcGFuXG4gICAgICB7Li4uaW5uZXJQcm9wc31cbiAgICAgIGNzcz17Z2V0U3R5bGVzKCdpbmRpY2F0b3JTZXBhcmF0b3InLCBwcm9wcyl9XG4gICAgICBjbGFzc05hbWU9e2N4KHsgJ2luZGljYXRvci1zZXBhcmF0b3InOiB0cnVlIH0sIGNsYXNzTmFtZSl9XG4gICAgLz5cbiAgKTtcbn07XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gTG9hZGluZ1xuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5cbmNvbnN0IGxvYWRpbmdEb3RBbmltYXRpb25zID0ga2V5ZnJhbWVzYFxuICAwJSwgODAlLCAxMDAlIHsgb3BhY2l0eTogMDsgfVxuICA0MCUgeyBvcGFjaXR5OiAxOyB9XG5gO1xuXG5leHBvcnQgY29uc3QgbG9hZGluZ0luZGljYXRvckNTUyA9ICh7XG4gIGlzRm9jdXNlZCxcbiAgc2l6ZSxcbiAgdGhlbWU6IHtcbiAgICBjb2xvcnMsXG4gICAgc3BhY2luZzogeyBiYXNlVW5pdCB9LFxuICB9LFxufToge1xuICBpc0ZvY3VzZWQ6IGJvb2xlYW4sXG4gIHNpemU6IG51bWJlcixcbiAgdGhlbWU6IFRoZW1lLFxufSkgPT4gKHtcbiAgbGFiZWw6ICdsb2FkaW5nSW5kaWNhdG9yJyxcbiAgY29sb3I6IGlzRm9jdXNlZCA/IGNvbG9ycy5uZXV0cmFsNjAgOiBjb2xvcnMubmV1dHJhbDIwLFxuICBkaXNwbGF5OiAnZmxleCcsXG4gIHBhZGRpbmc6IGJhc2VVbml0ICogMixcbiAgdHJhbnNpdGlvbjogJ2NvbG9yIDE1MG1zJyxcbiAgYWxpZ25TZWxmOiAnY2VudGVyJyxcbiAgZm9udFNpemU6IHNpemUsXG4gIGxpbmVIZWlnaHQ6IDEsXG4gIG1hcmdpblJpZ2h0OiBzaXplLFxuICB0ZXh0QWxpZ246ICdjZW50ZXInLFxuICB2ZXJ0aWNhbEFsaWduOiAnbWlkZGxlJyxcbn0pO1xuXG50eXBlIERvdFByb3BzID0geyBkZWxheTogbnVtYmVyLCBvZmZzZXQ6IGJvb2xlYW4gfTtcbmNvbnN0IExvYWRpbmdEb3QgPSAoeyBkZWxheSwgb2Zmc2V0IH06IERvdFByb3BzKSA9PiAoXG4gIDxzcGFuXG4gICAgY3NzPXt7XG4gICAgICBhbmltYXRpb246IGAke2xvYWRpbmdEb3RBbmltYXRpb25zfSAxcyBlYXNlLWluLW91dCAke2RlbGF5fW1zIGluZmluaXRlO2AsXG4gICAgICBiYWNrZ3JvdW5kQ29sb3I6ICdjdXJyZW50Q29sb3InLFxuICAgICAgYm9yZGVyUmFkaXVzOiAnMWVtJyxcbiAgICAgIGRpc3BsYXk6ICdpbmxpbmUtYmxvY2snLFxuICAgICAgbWFyZ2luTGVmdDogb2Zmc2V0ID8gJzFlbScgOiBudWxsLFxuICAgICAgaGVpZ2h0OiAnMWVtJyxcbiAgICAgIHZlcnRpY2FsQWxpZ246ICd0b3AnLFxuICAgICAgd2lkdGg6ICcxZW0nLFxuICAgIH19XG4gIC8+XG4pO1xuXG5leHBvcnQgdHlwZSBMb2FkaW5nSWNvblByb3BzID0ge1xuICAvKiogUHJvcHMgdGhhdCB3aWxsIGJlIHBhc3NlZCBvbiB0byB0aGUgY2hpbGRyZW4uICovXG4gIGlubmVyUHJvcHM6IGFueSxcbiAgLyoqIFRoZSBmb2N1c2VkIHN0YXRlIG9mIHRoZSBzZWxlY3QuICovXG4gIGlzRm9jdXNlZDogYm9vbGVhbixcbiAgLyoqIFdoZXRoZXIgdGhlIHRleHQgaXMgcmlnaHQgdG8gbGVmdCAqL1xuICBpc1J0bDogYm9vbGVhbixcbn0gJiBDb21tb25Qcm9wcyAmIHtcbiAgICAvKiogU2V0IHNpemUgb2YgdGhlIGNvbnRhaW5lci4gKi9cbiAgICBzaXplOiBudW1iZXIsXG4gIH07XG5leHBvcnQgY29uc3QgTG9hZGluZ0luZGljYXRvciA9IChwcm9wczogTG9hZGluZ0ljb25Qcm9wcykgPT4ge1xuICBjb25zdCB7IGNsYXNzTmFtZSwgY3gsIGdldFN0eWxlcywgaW5uZXJQcm9wcywgaXNSdGwgfSA9IHByb3BzO1xuXG4gIHJldHVybiAoXG4gICAgPGRpdlxuICAgICAgY3NzPXtnZXRTdHlsZXMoJ2xvYWRpbmdJbmRpY2F0b3InLCBwcm9wcyl9XG4gICAgICBjbGFzc05hbWU9e2N4KFxuICAgICAgICB7XG4gICAgICAgICAgaW5kaWNhdG9yOiB0cnVlLFxuICAgICAgICAgICdsb2FkaW5nLWluZGljYXRvcic6IHRydWUsXG4gICAgICAgIH0sXG4gICAgICAgIGNsYXNzTmFtZVxuICAgICAgKX1cbiAgICAgIHsuLi5pbm5lclByb3BzfVxuICAgID5cbiAgICAgIDxMb2FkaW5nRG90IGRlbGF5PXswfSBvZmZzZXQ9e2lzUnRsfSAvPlxuICAgICAgPExvYWRpbmdEb3QgZGVsYXk9ezE2MH0gb2Zmc2V0IC8+XG4gICAgICA8TG9hZGluZ0RvdCBkZWxheT17MzIwfSBvZmZzZXQ9eyFpc1J0bH0gLz5cbiAgICA8L2Rpdj5cbiAgKTtcbn07XG5Mb2FkaW5nSW5kaWNhdG9yLmRlZmF1bHRQcm9wcyA9IHsgc2l6ZTogNCB9O1xuIl19 */",
+                                            "name": "tj5bde-Svg",
+                                            "styles": "display:inline-block;fill:currentColor;line-height:1;stroke:currentColor;stroke-width:0;label:Svg;",
                                             "toString": [Function],
                                           }
                                         }
@@ -1520,7 +1730,7 @@ exports[`Select should select another option 1`] = `
                                       >
                                         <svg
                                           aria-hidden="true"
-                                          className="css-6q0nyr-Svg"
+                                          className="css-tj5bde-Svg"
                                           focusable="false"
                                           height={20}
                                           viewBox="0 0 20 20"
@@ -1574,6 +1784,7 @@ exports[`Select should select another option 1`] = `
                   selectOption={[Function]}
                   selectProps={
                     Object {
+                      "aria-live": "polite",
                       "backspaceRemovesValue": true,
                       "blurInputOnSelect": true,
                       "captureMenuScroll": false,
@@ -1707,6 +1918,7 @@ exports[`Select should select another option 1`] = `
                     selectOption={[Function]}
                     selectProps={
                       Object {
+                        "aria-live": "polite",
                         "backspaceRemovesValue": true,
                         "blurInputOnSelect": true,
                         "captureMenuScroll": false,
@@ -1826,25 +2038,82 @@ exports[`Select should select another option 1`] = `
                         onMouseDown={[Function]}
                         onMouseMove={[Function]}
                       >
-                        <ScrollCaptorSwitch
-                          isEnabled={false}
+                        <ScrollManager
+                          captureEnabled={false}
+                          lockEnabled={false}
                         >
-                          <ScrollBlock
-                            isEnabled={false}
-                          >
-                            <MenuList
-                              clearValue={[Function]}
-                              cx={[Function]}
-                              getStyles={[Function]}
-                              getValue={[Function]}
-                              hasValue={false}
-                              innerRef={[Function]}
-                              isLoading={false}
-                              isMulti={false}
-                              isRtl={false}
-                              maxHeight={300}
-                              options={
-                                Array [
+                          <MenuList
+                            clearValue={[Function]}
+                            cx={[Function]}
+                            focusedOption={
+                              Object {
+                                "label": "Two",
+                                "value": "two",
+                              }
+                            }
+                            getStyles={[Function]}
+                            getValue={[Function]}
+                            hasValue={false}
+                            innerRef={[Function]}
+                            isLoading={false}
+                            isMulti={false}
+                            isRtl={false}
+                            maxHeight={300}
+                            options={
+                              Array [
+                                Object {
+                                  "label": "One",
+                                  "value": "one",
+                                },
+                                Object {
+                                  "label": "Two",
+                                  "value": "two",
+                                },
+                                Object {
+                                  "label": "One hundred",
+                                  "value": "hundred",
+                                },
+                              ]
+                            }
+                            selectOption={[Function]}
+                            selectProps={
+                              Object {
+                                "aria-live": "polite",
+                                "backspaceRemovesValue": true,
+                                "blurInputOnSelect": true,
+                                "captureMenuScroll": false,
+                                "closeMenuOnScroll": false,
+                                "closeMenuOnSelect": true,
+                                "components": Object {},
+                                "controlShouldRenderValue": true,
+                                "escapeClearsValue": false,
+                                "filterOption": [Function],
+                                "formatGroupLabel": [Function],
+                                "getOptionLabel": [Function],
+                                "getOptionValue": [Function],
+                                "inputValue": "two",
+                                "isDisabled": false,
+                                "isLoading": false,
+                                "isMulti": false,
+                                "isOptionDisabled": [Function],
+                                "isRtl": false,
+                                "isSearchable": true,
+                                "loadingMessage": [Function],
+                                "maxMenuHeight": 300,
+                                "menuIsOpen": true,
+                                "menuPlacement": "bottom",
+                                "menuPosition": "absolute",
+                                "menuShouldBlockScroll": false,
+                                "menuShouldScrollIntoView": true,
+                                "minMenuHeight": 140,
+                                "noOptionsMessage": [Function],
+                                "onChange": [Function],
+                                "onInputChange": [Function],
+                                "onMenuClose": [Function],
+                                "onMenuOpen": [Function],
+                                "openMenuOnClick": true,
+                                "openMenuOnFocus": false,
+                                "options": Array [
                                   Object {
                                     "label": "One",
                                     "value": "one",
@@ -1857,153 +2126,154 @@ exports[`Select should select another option 1`] = `
                                     "label": "One hundred",
                                     "value": "hundred",
                                   },
-                                ]
+                                ],
+                                "pageSize": 5,
+                                "placeholder": "Select...",
+                                "screenReaderStatus": [Function],
+                                "styles": Object {
+                                  "container": [Function],
+                                  "control": [Function],
+                                },
+                                "tabIndex": "0",
+                                "tabSelectsValue": true,
+                                "theme": [Function],
+                                "value": null,
                               }
-                              selectOption={[Function]}
-                              selectProps={
-                                Object {
-                                  "backspaceRemovesValue": true,
-                                  "blurInputOnSelect": true,
-                                  "captureMenuScroll": false,
-                                  "closeMenuOnScroll": false,
-                                  "closeMenuOnSelect": true,
-                                  "components": Object {},
-                                  "controlShouldRenderValue": true,
-                                  "escapeClearsValue": false,
-                                  "filterOption": [Function],
-                                  "formatGroupLabel": [Function],
-                                  "getOptionLabel": [Function],
-                                  "getOptionValue": [Function],
-                                  "inputValue": "two",
-                                  "isDisabled": false,
-                                  "isLoading": false,
-                                  "isMulti": false,
-                                  "isOptionDisabled": [Function],
-                                  "isRtl": false,
-                                  "isSearchable": true,
-                                  "loadingMessage": [Function],
-                                  "maxMenuHeight": 300,
-                                  "menuIsOpen": true,
-                                  "menuPlacement": "bottom",
-                                  "menuPosition": "absolute",
-                                  "menuShouldBlockScroll": false,
-                                  "menuShouldScrollIntoView": true,
-                                  "minMenuHeight": 140,
-                                  "noOptionsMessage": [Function],
-                                  "onChange": [Function],
-                                  "onInputChange": [Function],
-                                  "onMenuClose": [Function],
-                                  "onMenuOpen": [Function],
-                                  "openMenuOnClick": true,
-                                  "openMenuOnFocus": false,
-                                  "options": Array [
-                                    Object {
-                                      "label": "One",
-                                      "value": "one",
-                                    },
-                                    Object {
-                                      "label": "Two",
-                                      "value": "two",
-                                    },
-                                    Object {
-                                      "label": "One hundred",
-                                      "value": "hundred",
-                                    },
-                                  ],
-                                  "pageSize": 5,
-                                  "placeholder": "Select...",
-                                  "screenReaderStatus": [Function],
-                                  "styles": Object {
-                                    "container": [Function],
-                                    "control": [Function],
-                                  },
-                                  "tabIndex": "0",
-                                  "tabSelectsValue": true,
-                                  "theme": [Function],
-                                  "value": null,
-                                }
+                            }
+                            setValue={[Function]}
+                            theme={
+                              Object {
+                                "borderRadius": 0,
+                                "colors": Object {
+                                  "danger": undefined,
+                                  "dangerLight": undefined,
+                                  "neutral0": undefined,
+                                  "neutral10": undefined,
+                                  "neutral20": undefined,
+                                  "neutral30": undefined,
+                                  "neutral40": undefined,
+                                  "neutral5": undefined,
+                                  "neutral50": "hsl(0, 0%, 50%)",
+                                  "neutral60": undefined,
+                                  "neutral70": "hsl(0, 0%, 30%)",
+                                  "neutral80": undefined,
+                                  "neutral90": "hsl(0, 0%, 10%)",
+                                  "primary": undefined,
+                                  "primary25": undefined,
+                                  "primary50": undefined,
+                                  "primary75": "#4C9AFF",
+                                },
+                                "spacing": Object {
+                                  "baseUnit": 2,
+                                  "controlHeight": 30,
+                                  "menuGutter": 8,
+                                },
                               }
-                              setValue={[Function]}
-                              theme={
+                            }
+                          >
+                            <EmotionCssPropInternal
+                              __EMOTION_LABEL_PLEASE_DO_NOT_USE__="MenuList"
+                              __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                              className=""
+                              css={
                                 Object {
-                                  "borderRadius": 0,
-                                  "colors": Object {
-                                    "danger": undefined,
-                                    "dangerLight": undefined,
-                                    "neutral0": undefined,
-                                    "neutral10": undefined,
-                                    "neutral20": undefined,
-                                    "neutral30": undefined,
-                                    "neutral40": undefined,
-                                    "neutral5": undefined,
-                                    "neutral50": "hsl(0, 0%, 50%)",
-                                    "neutral60": undefined,
-                                    "neutral70": "hsl(0, 0%, 30%)",
-                                    "neutral80": undefined,
-                                    "neutral90": "hsl(0, 0%, 10%)",
-                                    "primary": undefined,
-                                    "primary25": undefined,
-                                    "primary50": undefined,
-                                    "primary75": "#4C9AFF",
-                                  },
-                                  "spacing": Object {
-                                    "baseUnit": 2,
-                                    "controlHeight": 30,
-                                    "menuGutter": 8,
-                                  },
+                                  "WebkitOverflowScrolling": "touch",
+                                  "boxSizing": "border-box",
+                                  "maxHeight": 300,
+                                  "overflowY": "auto",
+                                  "paddingBottom": 2,
+                                  "paddingTop": 2,
+                                  "position": "relative",
                                 }
                               }
                             >
-                              <EmotionCssPropInternal
-                                __EMOTION_LABEL_PLEASE_DO_NOT_USE__="MenuList"
-                                __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
-                                className=""
-                                css={
-                                  Object {
-                                    "WebkitOverflowScrolling": "touch",
-                                    "boxSizing": "border-box",
-                                    "maxHeight": 300,
-                                    "overflowY": "auto",
-                                    "paddingBottom": 2,
-                                    "paddingTop": 2,
-                                    "position": "relative",
-                                  }
-                                }
+                              <div
+                                className=" css-87spde-MenuList"
                               >
-                                <div
-                                  className=" css-87spde-MenuList"
-                                >
-                                  <Option
-                                    clearValue={[Function]}
-                                    cx={[Function]}
-                                    data={
+                                <Option
+                                  clearValue={[Function]}
+                                  cx={[Function]}
+                                  data={
+                                    Object {
+                                      "label": "Two",
+                                      "value": "two",
+                                    }
+                                  }
+                                  getStyles={[Function]}
+                                  getValue={[Function]}
+                                  hasValue={false}
+                                  innerProps={
+                                    Object {
+                                      "id": "react-select-4-option-1",
+                                      "onClick": [Function],
+                                      "onMouseMove": [Function],
+                                      "onMouseOver": [Function],
+                                      "tabIndex": -1,
+                                    }
+                                  }
+                                  innerRef={[Function]}
+                                  isDisabled={false}
+                                  isFocused={true}
+                                  isMulti={false}
+                                  isRtl={false}
+                                  isSelected={false}
+                                  key="react-select-4-option-1"
+                                  label="Two"
+                                  options={
+                                    Array [
+                                      Object {
+                                        "label": "One",
+                                        "value": "one",
+                                      },
                                       Object {
                                         "label": "Two",
                                         "value": "two",
-                                      }
-                                    }
-                                    getStyles={[Function]}
-                                    getValue={[Function]}
-                                    hasValue={false}
-                                    innerProps={
+                                      },
                                       Object {
-                                        "id": "react-select-4-option-1",
-                                        "onClick": [Function],
-                                        "onMouseMove": [Function],
-                                        "onMouseOver": [Function],
-                                        "tabIndex": -1,
-                                      }
-                                    }
-                                    innerRef={[Function]}
-                                    isDisabled={false}
-                                    isFocused={true}
-                                    isMulti={false}
-                                    isRtl={false}
-                                    isSelected={false}
-                                    key="react-select-4-option-1"
-                                    label="Two"
-                                    options={
-                                      Array [
+                                        "label": "One hundred",
+                                        "value": "hundred",
+                                      },
+                                    ]
+                                  }
+                                  selectOption={[Function]}
+                                  selectProps={
+                                    Object {
+                                      "aria-live": "polite",
+                                      "backspaceRemovesValue": true,
+                                      "blurInputOnSelect": true,
+                                      "captureMenuScroll": false,
+                                      "closeMenuOnScroll": false,
+                                      "closeMenuOnSelect": true,
+                                      "components": Object {},
+                                      "controlShouldRenderValue": true,
+                                      "escapeClearsValue": false,
+                                      "filterOption": [Function],
+                                      "formatGroupLabel": [Function],
+                                      "getOptionLabel": [Function],
+                                      "getOptionValue": [Function],
+                                      "inputValue": "two",
+                                      "isDisabled": false,
+                                      "isLoading": false,
+                                      "isMulti": false,
+                                      "isOptionDisabled": [Function],
+                                      "isRtl": false,
+                                      "isSearchable": true,
+                                      "loadingMessage": [Function],
+                                      "maxMenuHeight": 300,
+                                      "menuIsOpen": true,
+                                      "menuPlacement": "bottom",
+                                      "menuPosition": "absolute",
+                                      "menuShouldBlockScroll": false,
+                                      "menuShouldScrollIntoView": true,
+                                      "minMenuHeight": 140,
+                                      "noOptionsMessage": [Function],
+                                      "onChange": [Function],
+                                      "onInputChange": [Function],
+                                      "onMenuClose": [Function],
+                                      "onMenuOpen": [Function],
+                                      "openMenuOnClick": true,
+                                      "openMenuOnFocus": false,
+                                      "options": Array [
                                         Object {
                                           "label": "One",
                                           "value": "one",
@@ -2016,150 +2286,97 @@ exports[`Select should select another option 1`] = `
                                           "label": "One hundred",
                                           "value": "hundred",
                                         },
-                                      ]
+                                      ],
+                                      "pageSize": 5,
+                                      "placeholder": "Select...",
+                                      "screenReaderStatus": [Function],
+                                      "styles": Object {
+                                        "container": [Function],
+                                        "control": [Function],
+                                      },
+                                      "tabIndex": "0",
+                                      "tabSelectsValue": true,
+                                      "theme": [Function],
+                                      "value": null,
                                     }
-                                    selectOption={[Function]}
-                                    selectProps={
+                                  }
+                                  setValue={[Function]}
+                                  theme={
+                                    Object {
+                                      "borderRadius": 0,
+                                      "colors": Object {
+                                        "danger": undefined,
+                                        "dangerLight": undefined,
+                                        "neutral0": undefined,
+                                        "neutral10": undefined,
+                                        "neutral20": undefined,
+                                        "neutral30": undefined,
+                                        "neutral40": undefined,
+                                        "neutral5": undefined,
+                                        "neutral50": "hsl(0, 0%, 50%)",
+                                        "neutral60": undefined,
+                                        "neutral70": "hsl(0, 0%, 30%)",
+                                        "neutral80": undefined,
+                                        "neutral90": "hsl(0, 0%, 10%)",
+                                        "primary": undefined,
+                                        "primary25": undefined,
+                                        "primary50": undefined,
+                                        "primary75": "#4C9AFF",
+                                      },
+                                      "spacing": Object {
+                                        "baseUnit": 2,
+                                        "controlHeight": 30,
+                                        "menuGutter": 8,
+                                      },
+                                    }
+                                  }
+                                  type="option"
+                                  value="two"
+                                >
+                                  <EmotionCssPropInternal
+                                    __EMOTION_LABEL_PLEASE_DO_NOT_USE__="Option"
+                                    __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                                    className=""
+                                    css={
                                       Object {
-                                        "backspaceRemovesValue": true,
-                                        "blurInputOnSelect": true,
-                                        "captureMenuScroll": false,
-                                        "closeMenuOnScroll": false,
-                                        "closeMenuOnSelect": true,
-                                        "components": Object {},
-                                        "controlShouldRenderValue": true,
-                                        "escapeClearsValue": false,
-                                        "filterOption": [Function],
-                                        "formatGroupLabel": [Function],
-                                        "getOptionLabel": [Function],
-                                        "getOptionValue": [Function],
-                                        "inputValue": "two",
-                                        "isDisabled": false,
-                                        "isLoading": false,
-                                        "isMulti": false,
-                                        "isOptionDisabled": [Function],
-                                        "isRtl": false,
-                                        "isSearchable": true,
-                                        "loadingMessage": [Function],
-                                        "maxMenuHeight": 300,
-                                        "menuIsOpen": true,
-                                        "menuPlacement": "bottom",
-                                        "menuPosition": "absolute",
-                                        "menuShouldBlockScroll": false,
-                                        "menuShouldScrollIntoView": true,
-                                        "minMenuHeight": 140,
-                                        "noOptionsMessage": [Function],
-                                        "onChange": [Function],
-                                        "onInputChange": [Function],
-                                        "onMenuClose": [Function],
-                                        "onMenuOpen": [Function],
-                                        "openMenuOnClick": true,
-                                        "openMenuOnFocus": false,
-                                        "options": Array [
-                                          Object {
-                                            "label": "One",
-                                            "value": "one",
-                                          },
-                                          Object {
-                                            "label": "Two",
-                                            "value": "two",
-                                          },
-                                          Object {
-                                            "label": "One hundred",
-                                            "value": "hundred",
-                                          },
-                                        ],
-                                        "pageSize": 5,
-                                        "placeholder": "Select...",
-                                        "screenReaderStatus": [Function],
-                                        "styles": Object {
-                                          "container": [Function],
-                                          "control": [Function],
-                                        },
-                                        "tabIndex": "0",
-                                        "tabSelectsValue": true,
-                                        "theme": [Function],
-                                        "value": null,
-                                      }
-                                    }
-                                    setValue={[Function]}
-                                    theme={
-                                      Object {
-                                        "borderRadius": 0,
-                                        "colors": Object {
-                                          "danger": undefined,
-                                          "dangerLight": undefined,
-                                          "neutral0": undefined,
-                                          "neutral10": undefined,
-                                          "neutral20": undefined,
-                                          "neutral30": undefined,
-                                          "neutral40": undefined,
-                                          "neutral5": undefined,
-                                          "neutral50": "hsl(0, 0%, 50%)",
-                                          "neutral60": undefined,
-                                          "neutral70": "hsl(0, 0%, 30%)",
-                                          "neutral80": undefined,
-                                          "neutral90": "hsl(0, 0%, 10%)",
-                                          "primary": undefined,
-                                          "primary25": undefined,
-                                          "primary50": undefined,
-                                          "primary75": "#4C9AFF",
-                                        },
-                                        "spacing": Object {
-                                          "baseUnit": 2,
-                                          "controlHeight": 30,
-                                          "menuGutter": 8,
-                                        },
-                                      }
-                                    }
-                                    type="option"
-                                    value="two"
-                                  >
-                                    <EmotionCssPropInternal
-                                      __EMOTION_LABEL_PLEASE_DO_NOT_USE__="Option"
-                                      __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
-                                      className=""
-                                      css={
-                                        Object {
-                                          ":active": Object {
-                                            "backgroundColor": undefined,
-                                          },
-                                          "WebkitTapHighlightColor": "rgba(0, 0, 0, 0)",
+                                        ":active": Object {
                                           "backgroundColor": undefined,
-                                          "boxSizing": "border-box",
-                                          "color": "inherit",
-                                          "cursor": "default",
-                                          "display": "block",
-                                          "fontSize": "inherit",
-                                          "label": "option",
-                                          "padding": "4px 6px",
-                                          "userSelect": "none",
-                                          "width": "100%",
-                                        }
+                                        },
+                                        "WebkitTapHighlightColor": "rgba(0, 0, 0, 0)",
+                                        "backgroundColor": undefined,
+                                        "boxSizing": "border-box",
+                                        "color": "inherit",
+                                        "cursor": "default",
+                                        "display": "block",
+                                        "fontSize": "inherit",
+                                        "label": "option",
+                                        "padding": "4px 6px",
+                                        "userSelect": "none",
+                                        "width": "100%",
                                       }
+                                    }
+                                    id="react-select-4-option-1"
+                                    onClick={[Function]}
+                                    onMouseMove={[Function]}
+                                    onMouseOver={[Function]}
+                                    tabIndex={-1}
+                                  >
+                                    <div
+                                      className=" css-1npzjqc-option"
                                       id="react-select-4-option-1"
                                       onClick={[Function]}
                                       onMouseMove={[Function]}
                                       onMouseOver={[Function]}
                                       tabIndex={-1}
                                     >
-                                      <div
-                                        className=" css-1npzjqc-option"
-                                        id="react-select-4-option-1"
-                                        onClick={[Function]}
-                                        onMouseMove={[Function]}
-                                        onMouseOver={[Function]}
-                                        tabIndex={-1}
-                                      >
-                                        Two
-                                      </div>
-                                    </EmotionCssPropInternal>
-                                  </Option>
-                                </div>
-                              </EmotionCssPropInternal>
-                            </MenuList>
-                          </ScrollBlock>
-                        </ScrollCaptorSwitch>
+                                      Two
+                                    </div>
+                                  </EmotionCssPropInternal>
+                                </Option>
+                              </div>
+                            </EmotionCssPropInternal>
+                          </MenuList>
+                        </ScrollManager>
                       </div>
                     </EmotionCssPropInternal>
                   </Menu>
@@ -2277,6 +2494,7 @@ exports[`Select shouldn't find any results 1`] = `
         theme={[Function]}
       >
         <Select
+          aria-live="polite"
           backspaceRemovesValue={true}
           blurInputOnSelect={true}
           captureMenuScroll={false}
@@ -2376,6 +2594,7 @@ exports[`Select shouldn't find any results 1`] = `
             selectOption={[Function]}
             selectProps={
               Object {
+                "aria-live": "polite",
                 "backspaceRemovesValue": true,
                 "blurInputOnSelect": true,
                 "captureMenuScroll": false,
@@ -2488,6 +2707,160 @@ exports[`Select shouldn't find any results 1`] = `
                 className=" css-butsr4-container"
                 onKeyDown={[Function]}
               >
+                <LiveRegion
+                  ariaSelection={null}
+                  clearValue={[Function]}
+                  cx={[Function]}
+                  focusableOptions={Array []}
+                  focusedValue={null}
+                  getStyles={[Function]}
+                  getValue={[Function]}
+                  hasValue={false}
+                  isFocused={false}
+                  isMulti={false}
+                  isRtl={false}
+                  options={
+                    Array [
+                      Object {
+                        "label": "One",
+                        "value": "one",
+                      },
+                      Object {
+                        "label": "Two",
+                        "value": "two",
+                      },
+                      Object {
+                        "label": "One hundred",
+                        "value": "hundred",
+                      },
+                    ]
+                  }
+                  selectOption={[Function]}
+                  selectProps={
+                    Object {
+                      "aria-live": "polite",
+                      "backspaceRemovesValue": true,
+                      "blurInputOnSelect": true,
+                      "captureMenuScroll": false,
+                      "closeMenuOnScroll": false,
+                      "closeMenuOnSelect": true,
+                      "components": Object {},
+                      "controlShouldRenderValue": true,
+                      "escapeClearsValue": false,
+                      "filterOption": [Function],
+                      "formatGroupLabel": [Function],
+                      "getOptionLabel": [Function],
+                      "getOptionValue": [Function],
+                      "inputValue": "text",
+                      "isDisabled": false,
+                      "isLoading": false,
+                      "isMulti": false,
+                      "isOptionDisabled": [Function],
+                      "isRtl": false,
+                      "isSearchable": true,
+                      "loadingMessage": [Function],
+                      "maxMenuHeight": 300,
+                      "menuIsOpen": true,
+                      "menuPlacement": "bottom",
+                      "menuPosition": "absolute",
+                      "menuShouldBlockScroll": false,
+                      "menuShouldScrollIntoView": true,
+                      "minMenuHeight": 140,
+                      "noOptionsMessage": [Function],
+                      "onChange": [Function],
+                      "onInputChange": [Function],
+                      "onMenuClose": [Function],
+                      "onMenuOpen": [Function],
+                      "openMenuOnClick": true,
+                      "openMenuOnFocus": false,
+                      "options": Array [
+                        Object {
+                          "label": "One",
+                          "value": "one",
+                        },
+                        Object {
+                          "label": "Two",
+                          "value": "two",
+                        },
+                        Object {
+                          "label": "One hundred",
+                          "value": "hundred",
+                        },
+                      ],
+                      "pageSize": 5,
+                      "placeholder": "Select...",
+                      "screenReaderStatus": [Function],
+                      "styles": Object {
+                        "container": [Function],
+                        "control": [Function],
+                      },
+                      "tabIndex": "0",
+                      "tabSelectsValue": true,
+                      "theme": [Function],
+                      "value": null,
+                    }
+                  }
+                  selectValue={Array []}
+                  setValue={[Function]}
+                  theme={
+                    Object {
+                      "borderRadius": 0,
+                      "colors": Object {
+                        "danger": undefined,
+                        "dangerLight": undefined,
+                        "neutral0": undefined,
+                        "neutral10": undefined,
+                        "neutral20": undefined,
+                        "neutral30": undefined,
+                        "neutral40": undefined,
+                        "neutral5": undefined,
+                        "neutral50": "hsl(0, 0%, 50%)",
+                        "neutral60": undefined,
+                        "neutral70": "hsl(0, 0%, 30%)",
+                        "neutral80": undefined,
+                        "neutral90": "hsl(0, 0%, 10%)",
+                        "primary": undefined,
+                        "primary25": undefined,
+                        "primary50": undefined,
+                        "primary75": "#4C9AFF",
+                      },
+                      "spacing": Object {
+                        "baseUnit": 2,
+                        "controlHeight": 30,
+                        "menuGutter": 8,
+                      },
+                    }
+                  }
+                >
+                  <A11yText
+                    aria-atomic="false"
+                    aria-live="polite"
+                    aria-relevant="additions text"
+                  >
+                    <EmotionCssPropInternal
+                      __EMOTION_LABEL_PLEASE_DO_NOT_USE__="A11yText"
+                      __EMOTION_TYPE_PLEASE_DO_NOT_USE__="span"
+                      aria-atomic="false"
+                      aria-live="polite"
+                      aria-relevant="additions text"
+                      css={
+                        Object {
+                          "map": "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkExMXlUZXh0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQVFJIiwiZmlsZSI6IkExMXlUZXh0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gQGZsb3dcbi8qKiBAanN4IGpzeCAqL1xuaW1wb3J0IHsgdHlwZSBFbGVtZW50Q29uZmlnIH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IHsganN4IH0gZnJvbSAnQGVtb3Rpb24vcmVhY3QnO1xuXG4vLyBBc3Npc3RpdmUgdGV4dCB0byBkZXNjcmliZSB2aXN1YWwgZWxlbWVudHMuIEhpZGRlbiBmb3Igc2lnaHRlZCB1c2Vycy5cbmNvbnN0IEExMXlUZXh0ID0gKHByb3BzOiBFbGVtZW50Q29uZmlnPCdzcGFuJz4pID0+IChcbiAgPHNwYW5cbiAgICBjc3M9e3tcbiAgICAgIGxhYmVsOiAnYTExeVRleHQnLFxuICAgICAgekluZGV4OiA5OTk5LFxuICAgICAgYm9yZGVyOiAwLFxuICAgICAgY2xpcDogJ3JlY3QoMXB4LCAxcHgsIDFweCwgMXB4KScsXG4gICAgICBoZWlnaHQ6IDEsXG4gICAgICB3aWR0aDogMSxcbiAgICAgIHBvc2l0aW9uOiAnYWJzb2x1dGUnLFxuICAgICAgb3ZlcmZsb3c6ICdoaWRkZW4nLFxuICAgICAgcGFkZGluZzogMCxcbiAgICAgIHdoaXRlU3BhY2U6ICdub3dyYXAnLFxuICAgIH19XG4gICAgey4uLnByb3BzfVxuICAvPlxuKTtcblxuZXhwb3J0IGRlZmF1bHQgQTExeVRleHQ7XG4iXX0= */",
+                          "name": "1f43avz-a11yText-A11yText",
+                          "styles": "label:a11yText;z-index:9999;border:0;clip:rect(1px, 1px, 1px, 1px);height:1px;width:1px;position:absolute;overflow:hidden;padding:0;white-space:nowrap;label:A11yText;",
+                          "toString": [Function],
+                        }
+                      }
+                    >
+                      <span
+                        aria-atomic="false"
+                        aria-live="polite"
+                        aria-relevant="additions text"
+                        className="css-1f43avz-a11yText-A11yText"
+                      />
+                    </EmotionCssPropInternal>
+                  </A11yText>
+                </LiveRegion>
                 <Control
                   clearValue={[Function]}
                   cx={[Function]}
@@ -2525,6 +2898,7 @@ exports[`Select shouldn't find any results 1`] = `
                   selectOption={[Function]}
                   selectProps={
                     Object {
+                      "aria-live": "polite",
                       "backspaceRemovesValue": true,
                       "blurInputOnSelect": true,
                       "captureMenuScroll": false,
@@ -2682,6 +3056,7 @@ exports[`Select shouldn't find any results 1`] = `
                         selectOption={[Function]}
                         selectProps={
                           Object {
+                            "aria-live": "polite",
                             "backspaceRemovesValue": true,
                             "blurInputOnSelect": true,
                             "captureMenuScroll": false,
@@ -2800,17 +3175,40 @@ exports[`Select shouldn't find any results 1`] = `
                               autoCapitalize="none"
                               autoComplete="off"
                               autoCorrect="off"
+                              clearValue={[Function]}
                               cx={[Function]}
                               getStyles={[Function]}
+                              getValue={[Function]}
+                              hasValue={false}
                               id="react-select-5-input"
                               innerRef={[Function]}
                               isDisabled={false}
                               isHidden={false}
+                              isMulti={false}
+                              isRtl={false}
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
+                              options={
+                                Array [
+                                  Object {
+                                    "label": "One",
+                                    "value": "one",
+                                  },
+                                  Object {
+                                    "label": "Two",
+                                    "value": "two",
+                                  },
+                                  Object {
+                                    "label": "One hundred",
+                                    "value": "hundred",
+                                  },
+                                ]
+                              }
+                              selectOption={[Function]}
                               selectProps={
                                 Object {
+                                  "aria-live": "polite",
                                   "backspaceRemovesValue": true,
                                   "blurInputOnSelect": true,
                                   "captureMenuScroll": false,
@@ -2872,6 +3270,7 @@ exports[`Select shouldn't find any results 1`] = `
                                   "value": null,
                                 }
                               }
+                              setValue={[Function]}
                               spellCheck="false"
                               tabIndex="0"
                               theme={
@@ -3042,6 +3441,7 @@ exports[`Select shouldn't find any results 1`] = `
                         selectOption={[Function]}
                         selectProps={
                           Object {
+                            "aria-live": "polite",
                             "backspaceRemovesValue": true,
                             "blurInputOnSelect": true,
                             "captureMenuScroll": false,
@@ -3180,6 +3580,7 @@ exports[`Select shouldn't find any results 1`] = `
                               selectOption={[Function]}
                               selectProps={
                                 Object {
+                                  "aria-live": "polite",
                                   "backspaceRemovesValue": true,
                                   "blurInputOnSelect": true,
                                   "captureMenuScroll": false,
@@ -3329,6 +3730,7 @@ exports[`Select shouldn't find any results 1`] = `
                               selectOption={[Function]}
                               selectProps={
                                 Object {
+                                  "aria-live": "polite",
                                   "backspaceRemovesValue": true,
                                   "blurInputOnSelect": true,
                                   "captureMenuScroll": false,
@@ -3458,9 +3860,9 @@ exports[`Select shouldn't find any results 1`] = `
                                         aria-hidden="true"
                                         css={
                                           Object {
-                                            "map": "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGljYXRvcnMuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBa0JJIiwiZmlsZSI6ImluZGljYXRvcnMuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBAZmxvd1xuLyoqIEBqc3gganN4ICovXG5pbXBvcnQgeyB0eXBlIE5vZGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBqc3gsIGtleWZyYW1lcyB9IGZyb20gJ0BlbW90aW9uL2NvcmUnO1xuXG5pbXBvcnQgdHlwZSB7IENvbW1vblByb3BzLCBUaGVtZSB9IGZyb20gJy4uL3R5cGVzJztcblxuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4vLyBEcm9wZG93biAmIENsZWFyIEljb25zXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cblxuY29uc3QgU3ZnID0gKHsgc2l6ZSwgLi4ucHJvcHMgfTogeyBzaXplOiBudW1iZXIgfSkgPT4gKFxuICA8c3ZnXG4gICAgaGVpZ2h0PXtzaXplfVxuICAgIHdpZHRoPXtzaXplfVxuICAgIHZpZXdCb3g9XCIwIDAgMjAgMjBcIlxuICAgIGFyaWEtaGlkZGVuPVwidHJ1ZVwiXG4gICAgZm9jdXNhYmxlPVwiZmFsc2VcIlxuICAgIGNzcz17e1xuICAgICAgZGlzcGxheTogJ2lubGluZS1ibG9jaycsXG4gICAgICBmaWxsOiAnY3VycmVudENvbG9yJyxcbiAgICAgIGxpbmVIZWlnaHQ6IDEsXG4gICAgICBzdHJva2U6ICdjdXJyZW50Q29sb3InLFxuICAgICAgc3Ryb2tlV2lkdGg6IDAsXG4gICAgfX1cbiAgICB7Li4ucHJvcHN9XG4gIC8+XG4pO1xuXG5leHBvcnQgY29uc3QgQ3Jvc3NJY29uID0gKHByb3BzOiBhbnkpID0+IChcbiAgPFN2ZyBzaXplPXsyMH0gey4uLnByb3BzfT5cbiAgICA8cGF0aCBkPVwiTTE0LjM0OCAxNC44NDljLTAuNDY5IDAuNDY5LTEuMjI5IDAuNDY5LTEuNjk3IDBsLTIuNjUxLTMuMDMwLTIuNjUxIDMuMDI5Yy0wLjQ2OSAwLjQ2OS0xLjIyOSAwLjQ2OS0xLjY5NyAwLTAuNDY5LTAuNDY5LTAuNDY5LTEuMjI5IDAtMS42OTdsMi43NTgtMy4xNS0yLjc1OS0zLjE1MmMtMC40NjktMC40NjktMC40NjktMS4yMjggMC0xLjY5N3MxLjIyOC0wLjQ2OSAxLjY5NyAwbDIuNjUyIDMuMDMxIDIuNjUxLTMuMDMxYzAuNDY5LTAuNDY5IDEuMjI4LTAuNDY5IDEuNjk3IDBzMC40NjkgMS4yMjkgMCAxLjY5N2wtMi43NTggMy4xNTIgMi43NTggMy4xNWMwLjQ2OSAwLjQ2OSAwLjQ2OSAxLjIyOSAwIDEuNjk4elwiIC8+XG4gIDwvU3ZnPlxuKTtcbmV4cG9ydCBjb25zdCBEb3duQ2hldnJvbiA9IChwcm9wczogYW55KSA9PiAoXG4gIDxTdmcgc2l6ZT17MjB9IHsuLi5wcm9wc30+XG4gICAgPHBhdGggZD1cIk00LjUxNiA3LjU0OGMwLjQzNi0wLjQ0NiAxLjA0My0wLjQ4MSAxLjU3NiAwbDMuOTA4IDMuNzQ3IDMuOTA4LTMuNzQ3YzAuNTMzLTAuNDgxIDEuMTQxLTAuNDQ2IDEuNTc0IDAgMC40MzYgMC40NDUgMC40MDggMS4xOTcgMCAxLjYxNS0wLjQwNiAwLjQxOC00LjY5NSA0LjUwMi00LjY5NSA0LjUwMi0wLjIxNyAwLjIyMy0wLjUwMiAwLjMzNS0wLjc4NyAwLjMzNXMtMC41Ny0wLjExMi0wLjc4OS0wLjMzNWMwIDAtNC4yODctNC4wODQtNC42OTUtNC41MDJzLTAuNDM2LTEuMTcgMC0xLjYxNXpcIiAvPlxuICA8L1N2Zz5cbik7XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gRHJvcGRvd24gJiBDbGVhciBCdXR0b25zXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cblxuZXhwb3J0IHR5cGUgSW5kaWNhdG9yUHJvcHMgPSBDb21tb25Qcm9wcyAmIHtcbiAgLyoqIFRoZSBjaGlsZHJlbiB0byBiZSByZW5kZXJlZCBpbnNpZGUgdGhlIGluZGljYXRvci4gKi9cbiAgY2hpbGRyZW46IE5vZGUsXG4gIC8qKiBQcm9wcyB0aGF0IHdpbGwgYmUgcGFzc2VkIG9uIHRvIHRoZSBjaGlsZHJlbi4gKi9cbiAgaW5uZXJQcm9wczogYW55LFxuICAvKiogVGhlIGZvY3VzZWQgc3RhdGUgb2YgdGhlIHNlbGVjdC4gKi9cbiAgaXNGb2N1c2VkOiBib29sZWFuLFxuICAvKiogV2hldGhlciB0aGUgdGV4dCBpcyByaWdodCB0byBsZWZ0ICovXG4gIGlzUnRsOiBib29sZWFuLFxufTtcblxuY29uc3QgYmFzZUNTUyA9ICh7XG4gIGlzRm9jdXNlZCxcbiAgdGhlbWU6IHtcbiAgICBzcGFjaW5nOiB7IGJhc2VVbml0IH0sXG4gICAgY29sb3JzLFxuICB9LFxufTogSW5kaWNhdG9yUHJvcHMpID0+ICh7XG4gIGxhYmVsOiAnaW5kaWNhdG9yQ29udGFpbmVyJyxcbiAgY29sb3I6IGlzRm9jdXNlZCA/IGNvbG9ycy5uZXV0cmFsNjAgOiBjb2xvcnMubmV1dHJhbDIwLFxuICBkaXNwbGF5OiAnZmxleCcsXG4gIHBhZGRpbmc6IGJhc2VVbml0ICogMixcbiAgdHJhbnNpdGlvbjogJ2NvbG9yIDE1MG1zJyxcblxuICAnOmhvdmVyJzoge1xuICAgIGNvbG9yOiBpc0ZvY3VzZWQgPyBjb2xvcnMubmV1dHJhbDgwIDogY29sb3JzLm5ldXRyYWw0MCxcbiAgfSxcbn0pO1xuXG5leHBvcnQgY29uc3QgZHJvcGRvd25JbmRpY2F0b3JDU1MgPSBiYXNlQ1NTO1xuZXhwb3J0IGNvbnN0IERyb3Bkb3duSW5kaWNhdG9yID0gKHByb3BzOiBJbmRpY2F0b3JQcm9wcykgPT4ge1xuICBjb25zdCB7IGNoaWxkcmVuLCBjbGFzc05hbWUsIGN4LCBnZXRTdHlsZXMsIGlubmVyUHJvcHMgfSA9IHByb3BzO1xuICByZXR1cm4gKFxuICAgIDxkaXZcbiAgICAgIHsuLi5pbm5lclByb3BzfVxuICAgICAgY3NzPXtnZXRTdHlsZXMoJ2Ryb3Bkb3duSW5kaWNhdG9yJywgcHJvcHMpfVxuICAgICAgY2xhc3NOYW1lPXtjeChcbiAgICAgICAge1xuICAgICAgICAgIGluZGljYXRvcjogdHJ1ZSxcbiAgICAgICAgICAnZHJvcGRvd24taW5kaWNhdG9yJzogdHJ1ZSxcbiAgICAgICAgfSxcbiAgICAgICAgY2xhc3NOYW1lXG4gICAgICApfVxuICAgID5cbiAgICAgIHtjaGlsZHJlbiB8fCA8RG93bkNoZXZyb24gLz59XG4gICAgPC9kaXY+XG4gICk7XG59O1xuXG5leHBvcnQgY29uc3QgY2xlYXJJbmRpY2F0b3JDU1MgPSBiYXNlQ1NTO1xuZXhwb3J0IGNvbnN0IENsZWFySW5kaWNhdG9yID0gKHByb3BzOiBJbmRpY2F0b3JQcm9wcykgPT4ge1xuICBjb25zdCB7IGNoaWxkcmVuLCBjbGFzc05hbWUsIGN4LCBnZXRTdHlsZXMsIGlubmVyUHJvcHMgfSA9IHByb3BzO1xuICByZXR1cm4gKFxuICAgIDxkaXZcbiAgICAgIHsuLi5pbm5lclByb3BzfVxuICAgICAgY3NzPXtnZXRTdHlsZXMoJ2NsZWFySW5kaWNhdG9yJywgcHJvcHMpfVxuICAgICAgY2xhc3NOYW1lPXtjeChcbiAgICAgICAge1xuICAgICAgICAgIGluZGljYXRvcjogdHJ1ZSxcbiAgICAgICAgICAnY2xlYXItaW5kaWNhdG9yJzogdHJ1ZSxcbiAgICAgICAgfSxcbiAgICAgICAgY2xhc3NOYW1lXG4gICAgICApfVxuICAgID5cbiAgICAgIHtjaGlsZHJlbiB8fCA8Q3Jvc3NJY29uIC8+fVxuICAgIDwvZGl2PlxuICApO1xufTtcblxuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4vLyBTZXBhcmF0b3Jcbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuXG50eXBlIFNlcGFyYXRvclN0YXRlID0geyBpc0Rpc2FibGVkOiBib29sZWFuIH07XG5cbmV4cG9ydCBjb25zdCBpbmRpY2F0b3JTZXBhcmF0b3JDU1MgPSAoe1xuICBpc0Rpc2FibGVkLFxuICB0aGVtZToge1xuICAgIHNwYWNpbmc6IHsgYmFzZVVuaXQgfSxcbiAgICBjb2xvcnMsXG4gIH0sXG59OiBDb21tb25Qcm9wcyAmIFNlcGFyYXRvclN0YXRlKSA9PiAoe1xuICBsYWJlbDogJ2luZGljYXRvclNlcGFyYXRvcicsXG4gIGFsaWduU2VsZjogJ3N0cmV0Y2gnLFxuICBiYWNrZ3JvdW5kQ29sb3I6IGlzRGlzYWJsZWQgPyBjb2xvcnMubmV1dHJhbDEwIDogY29sb3JzLm5ldXRyYWwyMCxcbiAgbWFyZ2luQm90dG9tOiBiYXNlVW5pdCAqIDIsXG4gIG1hcmdpblRvcDogYmFzZVVuaXQgKiAyLFxuICB3aWR0aDogMSxcbn0pO1xuXG5leHBvcnQgY29uc3QgSW5kaWNhdG9yU2VwYXJhdG9yID0gKHByb3BzOiBJbmRpY2F0b3JQcm9wcykgPT4ge1xuICBjb25zdCB7IGNsYXNzTmFtZSwgY3gsIGdldFN0eWxlcywgaW5uZXJQcm9wcyB9ID0gcHJvcHM7XG4gIHJldHVybiAoXG4gICAgPHNwYW5cbiAgICAgIHsuLi5pbm5lclByb3BzfVxuICAgICAgY3NzPXtnZXRTdHlsZXMoJ2luZGljYXRvclNlcGFyYXRvcicsIHByb3BzKX1cbiAgICAgIGNsYXNzTmFtZT17Y3goeyAnaW5kaWNhdG9yLXNlcGFyYXRvcic6IHRydWUgfSwgY2xhc3NOYW1lKX1cbiAgICAvPlxuICApO1xufTtcblxuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4vLyBMb2FkaW5nXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cblxuY29uc3QgbG9hZGluZ0RvdEFuaW1hdGlvbnMgPSBrZXlmcmFtZXNgXG4gIDAlLCA4MCUsIDEwMCUgeyBvcGFjaXR5OiAwOyB9XG4gIDQwJSB7IG9wYWNpdHk6IDE7IH1cbmA7XG5cbmV4cG9ydCBjb25zdCBsb2FkaW5nSW5kaWNhdG9yQ1NTID0gKHtcbiAgaXNGb2N1c2VkLFxuICBzaXplLFxuICB0aGVtZToge1xuICAgIGNvbG9ycyxcbiAgICBzcGFjaW5nOiB7IGJhc2VVbml0IH0sXG4gIH0sXG59OiB7XG4gIGlzRm9jdXNlZDogYm9vbGVhbixcbiAgc2l6ZTogbnVtYmVyLFxuICB0aGVtZTogVGhlbWUsXG59KSA9PiAoe1xuICBsYWJlbDogJ2xvYWRpbmdJbmRpY2F0b3InLFxuICBjb2xvcjogaXNGb2N1c2VkID8gY29sb3JzLm5ldXRyYWw2MCA6IGNvbG9ycy5uZXV0cmFsMjAsXG4gIGRpc3BsYXk6ICdmbGV4JyxcbiAgcGFkZGluZzogYmFzZVVuaXQgKiAyLFxuICB0cmFuc2l0aW9uOiAnY29sb3IgMTUwbXMnLFxuICBhbGlnblNlbGY6ICdjZW50ZXInLFxuICBmb250U2l6ZTogc2l6ZSxcbiAgbGluZUhlaWdodDogMSxcbiAgbWFyZ2luUmlnaHQ6IHNpemUsXG4gIHRleHRBbGlnbjogJ2NlbnRlcicsXG4gIHZlcnRpY2FsQWxpZ246ICdtaWRkbGUnLFxufSk7XG5cbnR5cGUgRG90UHJvcHMgPSB7IGRlbGF5OiBudW1iZXIsIG9mZnNldDogYm9vbGVhbiB9O1xuY29uc3QgTG9hZGluZ0RvdCA9ICh7IGRlbGF5LCBvZmZzZXQgfTogRG90UHJvcHMpID0+IChcbiAgPHNwYW5cbiAgICBjc3M9e3tcbiAgICAgIGFuaW1hdGlvbjogYCR7bG9hZGluZ0RvdEFuaW1hdGlvbnN9IDFzIGVhc2UtaW4tb3V0ICR7ZGVsYXl9bXMgaW5maW5pdGU7YCxcbiAgICAgIGJhY2tncm91bmRDb2xvcjogJ2N1cnJlbnRDb2xvcicsXG4gICAgICBib3JkZXJSYWRpdXM6ICcxZW0nLFxuICAgICAgZGlzcGxheTogJ2lubGluZS1ibG9jaycsXG4gICAgICBtYXJnaW5MZWZ0OiBvZmZzZXQgPyAnMWVtJyA6IG51bGwsXG4gICAgICBoZWlnaHQ6ICcxZW0nLFxuICAgICAgdmVydGljYWxBbGlnbjogJ3RvcCcsXG4gICAgICB3aWR0aDogJzFlbScsXG4gICAgfX1cbiAgLz5cbik7XG5cbmV4cG9ydCB0eXBlIExvYWRpbmdJY29uUHJvcHMgPSB7XG4gIC8qKiBQcm9wcyB0aGF0IHdpbGwgYmUgcGFzc2VkIG9uIHRvIHRoZSBjaGlsZHJlbi4gKi9cbiAgaW5uZXJQcm9wczogYW55LFxuICAvKiogVGhlIGZvY3VzZWQgc3RhdGUgb2YgdGhlIHNlbGVjdC4gKi9cbiAgaXNGb2N1c2VkOiBib29sZWFuLFxuICAvKiogV2hldGhlciB0aGUgdGV4dCBpcyByaWdodCB0byBsZWZ0ICovXG4gIGlzUnRsOiBib29sZWFuLFxufSAmIENvbW1vblByb3BzICYge1xuICAgIC8qKiBTZXQgc2l6ZSBvZiB0aGUgY29udGFpbmVyLiAqL1xuICAgIHNpemU6IG51bWJlcixcbiAgfTtcbmV4cG9ydCBjb25zdCBMb2FkaW5nSW5kaWNhdG9yID0gKHByb3BzOiBMb2FkaW5nSWNvblByb3BzKSA9PiB7XG4gIGNvbnN0IHsgY2xhc3NOYW1lLCBjeCwgZ2V0U3R5bGVzLCBpbm5lclByb3BzLCBpc1J0bCB9ID0gcHJvcHM7XG5cbiAgcmV0dXJuIChcbiAgICA8ZGl2XG4gICAgICB7Li4uaW5uZXJQcm9wc31cbiAgICAgIGNzcz17Z2V0U3R5bGVzKCdsb2FkaW5nSW5kaWNhdG9yJywgcHJvcHMpfVxuICAgICAgY2xhc3NOYW1lPXtjeChcbiAgICAgICAge1xuICAgICAgICAgIGluZGljYXRvcjogdHJ1ZSxcbiAgICAgICAgICAnbG9hZGluZy1pbmRpY2F0b3InOiB0cnVlLFxuICAgICAgICB9LFxuICAgICAgICBjbGFzc05hbWVcbiAgICAgICl9XG4gICAgPlxuICAgICAgPExvYWRpbmdEb3QgZGVsYXk9ezB9IG9mZnNldD17aXNSdGx9IC8+XG4gICAgICA8TG9hZGluZ0RvdCBkZWxheT17MTYwfSBvZmZzZXQgLz5cbiAgICAgIDxMb2FkaW5nRG90IGRlbGF5PXszMjB9IG9mZnNldD17IWlzUnRsfSAvPlxuICAgIDwvZGl2PlxuICApO1xufTtcbkxvYWRpbmdJbmRpY2F0b3IuZGVmYXVsdFByb3BzID0geyBzaXplOiA0IH07XG4iXX0= */",
-                                            "name": "19bqh2r",
-                                            "styles": "display:inline-block;fill:currentColor;line-height:1;stroke:currentColor;stroke-width:0;",
+                                            "map": "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGljYXRvcnMuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBa0JJIiwiZmlsZSI6ImluZGljYXRvcnMuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBAZmxvd1xuLyoqIEBqc3gganN4ICovXG5pbXBvcnQgeyB0eXBlIE5vZGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBqc3gsIGtleWZyYW1lcyB9IGZyb20gJ0BlbW90aW9uL3JlYWN0JztcblxuaW1wb3J0IHR5cGUgeyBDb21tb25Qcm9wcywgVGhlbWUgfSBmcm9tICcuLi90eXBlcyc7XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gRHJvcGRvd24gJiBDbGVhciBJY29uc1xuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5cbmNvbnN0IFN2ZyA9ICh7IHNpemUsIC4uLnByb3BzIH06IHsgc2l6ZTogbnVtYmVyIH0pID0+IChcbiAgPHN2Z1xuICAgIGhlaWdodD17c2l6ZX1cbiAgICB3aWR0aD17c2l6ZX1cbiAgICB2aWV3Qm94PVwiMCAwIDIwIDIwXCJcbiAgICBhcmlhLWhpZGRlbj1cInRydWVcIlxuICAgIGZvY3VzYWJsZT1cImZhbHNlXCJcbiAgICBjc3M9e3tcbiAgICAgIGRpc3BsYXk6ICdpbmxpbmUtYmxvY2snLFxuICAgICAgZmlsbDogJ2N1cnJlbnRDb2xvcicsXG4gICAgICBsaW5lSGVpZ2h0OiAxLFxuICAgICAgc3Ryb2tlOiAnY3VycmVudENvbG9yJyxcbiAgICAgIHN0cm9rZVdpZHRoOiAwLFxuICAgIH19XG4gICAgey4uLnByb3BzfVxuICAvPlxuKTtcblxuZXhwb3J0IGNvbnN0IENyb3NzSWNvbiA9IChwcm9wczogYW55KSA9PiAoXG4gIDxTdmcgc2l6ZT17MjB9IHsuLi5wcm9wc30+XG4gICAgPHBhdGggZD1cIk0xNC4zNDggMTQuODQ5Yy0wLjQ2OSAwLjQ2OS0xLjIyOSAwLjQ2OS0xLjY5NyAwbC0yLjY1MS0zLjAzMC0yLjY1MSAzLjAyOWMtMC40NjkgMC40NjktMS4yMjkgMC40NjktMS42OTcgMC0wLjQ2OS0wLjQ2OS0wLjQ2OS0xLjIyOSAwLTEuNjk3bDIuNzU4LTMuMTUtMi43NTktMy4xNTJjLTAuNDY5LTAuNDY5LTAuNDY5LTEuMjI4IDAtMS42OTdzMS4yMjgtMC40NjkgMS42OTcgMGwyLjY1MiAzLjAzMSAyLjY1MS0zLjAzMWMwLjQ2OS0wLjQ2OSAxLjIyOC0wLjQ2OSAxLjY5NyAwczAuNDY5IDEuMjI5IDAgMS42OTdsLTIuNzU4IDMuMTUyIDIuNzU4IDMuMTVjMC40NjkgMC40NjkgMC40NjkgMS4yMjkgMCAxLjY5OHpcIiAvPlxuICA8L1N2Zz5cbik7XG5leHBvcnQgY29uc3QgRG93bkNoZXZyb24gPSAocHJvcHM6IGFueSkgPT4gKFxuICA8U3ZnIHNpemU9ezIwfSB7Li4ucHJvcHN9PlxuICAgIDxwYXRoIGQ9XCJNNC41MTYgNy41NDhjMC40MzYtMC40NDYgMS4wNDMtMC40ODEgMS41NzYgMGwzLjkwOCAzLjc0NyAzLjkwOC0zLjc0N2MwLjUzMy0wLjQ4MSAxLjE0MS0wLjQ0NiAxLjU3NCAwIDAuNDM2IDAuNDQ1IDAuNDA4IDEuMTk3IDAgMS42MTUtMC40MDYgMC40MTgtNC42OTUgNC41MDItNC42OTUgNC41MDItMC4yMTcgMC4yMjMtMC41MDIgMC4zMzUtMC43ODcgMC4zMzVzLTAuNTctMC4xMTItMC43ODktMC4zMzVjMCAwLTQuMjg3LTQuMDg0LTQuNjk1LTQuNTAycy0wLjQzNi0xLjE3IDAtMS42MTV6XCIgLz5cbiAgPC9Tdmc+XG4pO1xuXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbi8vIERyb3Bkb3duICYgQ2xlYXIgQnV0dG9uc1xuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5cbmV4cG9ydCB0eXBlIEluZGljYXRvclByb3BzID0gQ29tbW9uUHJvcHMgJiB7XG4gIC8qKiBUaGUgY2hpbGRyZW4gdG8gYmUgcmVuZGVyZWQgaW5zaWRlIHRoZSBpbmRpY2F0b3IuICovXG4gIGNoaWxkcmVuOiBOb2RlLFxuICAvKiogUHJvcHMgdGhhdCB3aWxsIGJlIHBhc3NlZCBvbiB0byB0aGUgY2hpbGRyZW4uICovXG4gIGlubmVyUHJvcHM6IGFueSxcbiAgLyoqIFRoZSBmb2N1c2VkIHN0YXRlIG9mIHRoZSBzZWxlY3QuICovXG4gIGlzRm9jdXNlZDogYm9vbGVhbixcbiAgLyoqIFdoZXRoZXIgdGhlIHRleHQgaXMgcmlnaHQgdG8gbGVmdCAqL1xuICBpc1J0bDogYm9vbGVhbixcbn07XG5cbmNvbnN0IGJhc2VDU1MgPSAoe1xuICBpc0ZvY3VzZWQsXG4gIHRoZW1lOiB7XG4gICAgc3BhY2luZzogeyBiYXNlVW5pdCB9LFxuICAgIGNvbG9ycyxcbiAgfSxcbn06IEluZGljYXRvclByb3BzKSA9PiAoe1xuICBsYWJlbDogJ2luZGljYXRvckNvbnRhaW5lcicsXG4gIGNvbG9yOiBpc0ZvY3VzZWQgPyBjb2xvcnMubmV1dHJhbDYwIDogY29sb3JzLm5ldXRyYWwyMCxcbiAgZGlzcGxheTogJ2ZsZXgnLFxuICBwYWRkaW5nOiBiYXNlVW5pdCAqIDIsXG4gIHRyYW5zaXRpb246ICdjb2xvciAxNTBtcycsXG5cbiAgJzpob3Zlcic6IHtcbiAgICBjb2xvcjogaXNGb2N1c2VkID8gY29sb3JzLm5ldXRyYWw4MCA6IGNvbG9ycy5uZXV0cmFsNDAsXG4gIH0sXG59KTtcblxuZXhwb3J0IGNvbnN0IGRyb3Bkb3duSW5kaWNhdG9yQ1NTID0gYmFzZUNTUztcbmV4cG9ydCBjb25zdCBEcm9wZG93bkluZGljYXRvciA9IChwcm9wczogSW5kaWNhdG9yUHJvcHMpID0+IHtcbiAgY29uc3QgeyBjaGlsZHJlbiwgY2xhc3NOYW1lLCBjeCwgZ2V0U3R5bGVzLCBpbm5lclByb3BzIH0gPSBwcm9wcztcbiAgcmV0dXJuIChcbiAgICA8ZGl2XG4gICAgICBjc3M9e2dldFN0eWxlcygnZHJvcGRvd25JbmRpY2F0b3InLCBwcm9wcyl9XG4gICAgICBjbGFzc05hbWU9e2N4KFxuICAgICAgICB7XG4gICAgICAgICAgaW5kaWNhdG9yOiB0cnVlLFxuICAgICAgICAgICdkcm9wZG93bi1pbmRpY2F0b3InOiB0cnVlLFxuICAgICAgICB9LFxuICAgICAgICBjbGFzc05hbWVcbiAgICAgICl9XG4gICAgICB7Li4uaW5uZXJQcm9wc31cbiAgICA+XG4gICAgICB7Y2hpbGRyZW4gfHwgPERvd25DaGV2cm9uIC8+fVxuICAgIDwvZGl2PlxuICApO1xufTtcblxuZXhwb3J0IGNvbnN0IGNsZWFySW5kaWNhdG9yQ1NTID0gYmFzZUNTUztcbmV4cG9ydCBjb25zdCBDbGVhckluZGljYXRvciA9IChwcm9wczogSW5kaWNhdG9yUHJvcHMpID0+IHtcbiAgY29uc3QgeyBjaGlsZHJlbiwgY2xhc3NOYW1lLCBjeCwgZ2V0U3R5bGVzLCBpbm5lclByb3BzIH0gPSBwcm9wcztcbiAgcmV0dXJuIChcbiAgICA8ZGl2XG4gICAgICBjc3M9e2dldFN0eWxlcygnY2xlYXJJbmRpY2F0b3InLCBwcm9wcyl9XG4gICAgICBjbGFzc05hbWU9e2N4KFxuICAgICAgICB7XG4gICAgICAgICAgaW5kaWNhdG9yOiB0cnVlLFxuICAgICAgICAgICdjbGVhci1pbmRpY2F0b3InOiB0cnVlLFxuICAgICAgICB9LFxuICAgICAgICBjbGFzc05hbWVcbiAgICAgICl9XG4gICAgICB7Li4uaW5uZXJQcm9wc31cbiAgICA+XG4gICAgICB7Y2hpbGRyZW4gfHwgPENyb3NzSWNvbiAvPn1cbiAgICA8L2Rpdj5cbiAgKTtcbn07XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gU2VwYXJhdG9yXG4vLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cblxudHlwZSBTZXBhcmF0b3JTdGF0ZSA9IHsgaXNEaXNhYmxlZDogYm9vbGVhbiB9O1xuXG5leHBvcnQgY29uc3QgaW5kaWNhdG9yU2VwYXJhdG9yQ1NTID0gKHtcbiAgaXNEaXNhYmxlZCxcbiAgdGhlbWU6IHtcbiAgICBzcGFjaW5nOiB7IGJhc2VVbml0IH0sXG4gICAgY29sb3JzLFxuICB9LFxufTogQ29tbW9uUHJvcHMgJiBTZXBhcmF0b3JTdGF0ZSkgPT4gKHtcbiAgbGFiZWw6ICdpbmRpY2F0b3JTZXBhcmF0b3InLFxuICBhbGlnblNlbGY6ICdzdHJldGNoJyxcbiAgYmFja2dyb3VuZENvbG9yOiBpc0Rpc2FibGVkID8gY29sb3JzLm5ldXRyYWwxMCA6IGNvbG9ycy5uZXV0cmFsMjAsXG4gIG1hcmdpbkJvdHRvbTogYmFzZVVuaXQgKiAyLFxuICBtYXJnaW5Ub3A6IGJhc2VVbml0ICogMixcbiAgd2lkdGg6IDEsXG59KTtcblxuZXhwb3J0IGNvbnN0IEluZGljYXRvclNlcGFyYXRvciA9IChwcm9wczogSW5kaWNhdG9yUHJvcHMpID0+IHtcbiAgY29uc3QgeyBjbGFzc05hbWUsIGN4LCBnZXRTdHlsZXMsIGlubmVyUHJvcHMgfSA9IHByb3BzO1xuICByZXR1cm4gKFxuICAgIDxzcGFuXG4gICAgICB7Li4uaW5uZXJQcm9wc31cbiAgICAgIGNzcz17Z2V0U3R5bGVzKCdpbmRpY2F0b3JTZXBhcmF0b3InLCBwcm9wcyl9XG4gICAgICBjbGFzc05hbWU9e2N4KHsgJ2luZGljYXRvci1zZXBhcmF0b3InOiB0cnVlIH0sIGNsYXNzTmFtZSl9XG4gICAgLz5cbiAgKTtcbn07XG5cbi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuLy8gTG9hZGluZ1xuLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5cbmNvbnN0IGxvYWRpbmdEb3RBbmltYXRpb25zID0ga2V5ZnJhbWVzYFxuICAwJSwgODAlLCAxMDAlIHsgb3BhY2l0eTogMDsgfVxuICA0MCUgeyBvcGFjaXR5OiAxOyB9XG5gO1xuXG5leHBvcnQgY29uc3QgbG9hZGluZ0luZGljYXRvckNTUyA9ICh7XG4gIGlzRm9jdXNlZCxcbiAgc2l6ZSxcbiAgdGhlbWU6IHtcbiAgICBjb2xvcnMsXG4gICAgc3BhY2luZzogeyBiYXNlVW5pdCB9LFxuICB9LFxufToge1xuICBpc0ZvY3VzZWQ6IGJvb2xlYW4sXG4gIHNpemU6IG51bWJlcixcbiAgdGhlbWU6IFRoZW1lLFxufSkgPT4gKHtcbiAgbGFiZWw6ICdsb2FkaW5nSW5kaWNhdG9yJyxcbiAgY29sb3I6IGlzRm9jdXNlZCA/IGNvbG9ycy5uZXV0cmFsNjAgOiBjb2xvcnMubmV1dHJhbDIwLFxuICBkaXNwbGF5OiAnZmxleCcsXG4gIHBhZGRpbmc6IGJhc2VVbml0ICogMixcbiAgdHJhbnNpdGlvbjogJ2NvbG9yIDE1MG1zJyxcbiAgYWxpZ25TZWxmOiAnY2VudGVyJyxcbiAgZm9udFNpemU6IHNpemUsXG4gIGxpbmVIZWlnaHQ6IDEsXG4gIG1hcmdpblJpZ2h0OiBzaXplLFxuICB0ZXh0QWxpZ246ICdjZW50ZXInLFxuICB2ZXJ0aWNhbEFsaWduOiAnbWlkZGxlJyxcbn0pO1xuXG50eXBlIERvdFByb3BzID0geyBkZWxheTogbnVtYmVyLCBvZmZzZXQ6IGJvb2xlYW4gfTtcbmNvbnN0IExvYWRpbmdEb3QgPSAoeyBkZWxheSwgb2Zmc2V0IH06IERvdFByb3BzKSA9PiAoXG4gIDxzcGFuXG4gICAgY3NzPXt7XG4gICAgICBhbmltYXRpb246IGAke2xvYWRpbmdEb3RBbmltYXRpb25zfSAxcyBlYXNlLWluLW91dCAke2RlbGF5fW1zIGluZmluaXRlO2AsXG4gICAgICBiYWNrZ3JvdW5kQ29sb3I6ICdjdXJyZW50Q29sb3InLFxuICAgICAgYm9yZGVyUmFkaXVzOiAnMWVtJyxcbiAgICAgIGRpc3BsYXk6ICdpbmxpbmUtYmxvY2snLFxuICAgICAgbWFyZ2luTGVmdDogb2Zmc2V0ID8gJzFlbScgOiBudWxsLFxuICAgICAgaGVpZ2h0OiAnMWVtJyxcbiAgICAgIHZlcnRpY2FsQWxpZ246ICd0b3AnLFxuICAgICAgd2lkdGg6ICcxZW0nLFxuICAgIH19XG4gIC8+XG4pO1xuXG5leHBvcnQgdHlwZSBMb2FkaW5nSWNvblByb3BzID0ge1xuICAvKiogUHJvcHMgdGhhdCB3aWxsIGJlIHBhc3NlZCBvbiB0byB0aGUgY2hpbGRyZW4uICovXG4gIGlubmVyUHJvcHM6IGFueSxcbiAgLyoqIFRoZSBmb2N1c2VkIHN0YXRlIG9mIHRoZSBzZWxlY3QuICovXG4gIGlzRm9jdXNlZDogYm9vbGVhbixcbiAgLyoqIFdoZXRoZXIgdGhlIHRleHQgaXMgcmlnaHQgdG8gbGVmdCAqL1xuICBpc1J0bDogYm9vbGVhbixcbn0gJiBDb21tb25Qcm9wcyAmIHtcbiAgICAvKiogU2V0IHNpemUgb2YgdGhlIGNvbnRhaW5lci4gKi9cbiAgICBzaXplOiBudW1iZXIsXG4gIH07XG5leHBvcnQgY29uc3QgTG9hZGluZ0luZGljYXRvciA9IChwcm9wczogTG9hZGluZ0ljb25Qcm9wcykgPT4ge1xuICBjb25zdCB7IGNsYXNzTmFtZSwgY3gsIGdldFN0eWxlcywgaW5uZXJQcm9wcywgaXNSdGwgfSA9IHByb3BzO1xuXG4gIHJldHVybiAoXG4gICAgPGRpdlxuICAgICAgY3NzPXtnZXRTdHlsZXMoJ2xvYWRpbmdJbmRpY2F0b3InLCBwcm9wcyl9XG4gICAgICBjbGFzc05hbWU9e2N4KFxuICAgICAgICB7XG4gICAgICAgICAgaW5kaWNhdG9yOiB0cnVlLFxuICAgICAgICAgICdsb2FkaW5nLWluZGljYXRvcic6IHRydWUsXG4gICAgICAgIH0sXG4gICAgICAgIGNsYXNzTmFtZVxuICAgICAgKX1cbiAgICAgIHsuLi5pbm5lclByb3BzfVxuICAgID5cbiAgICAgIDxMb2FkaW5nRG90IGRlbGF5PXswfSBvZmZzZXQ9e2lzUnRsfSAvPlxuICAgICAgPExvYWRpbmdEb3QgZGVsYXk9ezE2MH0gb2Zmc2V0IC8+XG4gICAgICA8TG9hZGluZ0RvdCBkZWxheT17MzIwfSBvZmZzZXQ9eyFpc1J0bH0gLz5cbiAgICA8L2Rpdj5cbiAgKTtcbn07XG5Mb2FkaW5nSW5kaWNhdG9yLmRlZmF1bHRQcm9wcyA9IHsgc2l6ZTogNCB9O1xuIl19 */",
+                                            "name": "tj5bde-Svg",
+                                            "styles": "display:inline-block;fill:currentColor;line-height:1;stroke:currentColor;stroke-width:0;label:Svg;",
                                             "toString": [Function],
                                           }
                                         }
@@ -3471,7 +3873,7 @@ exports[`Select shouldn't find any results 1`] = `
                                       >
                                         <svg
                                           aria-hidden="true"
-                                          className="css-6q0nyr-Svg"
+                                          className="css-tj5bde-Svg"
                                           focusable="false"
                                           height={20}
                                           viewBox="0 0 20 20"
@@ -3525,6 +3927,7 @@ exports[`Select shouldn't find any results 1`] = `
                   selectOption={[Function]}
                   selectProps={
                     Object {
+                      "aria-live": "polite",
                       "backspaceRemovesValue": true,
                       "blurInputOnSelect": true,
                       "captureMenuScroll": false,
@@ -3658,6 +4061,7 @@ exports[`Select shouldn't find any results 1`] = `
                     selectOption={[Function]}
                     selectProps={
                       Object {
+                        "aria-live": "polite",
                         "backspaceRemovesValue": true,
                         "blurInputOnSelect": true,
                         "captureMenuScroll": false,
@@ -3777,25 +4181,76 @@ exports[`Select shouldn't find any results 1`] = `
                         onMouseDown={[Function]}
                         onMouseMove={[Function]}
                       >
-                        <ScrollCaptorSwitch
-                          isEnabled={false}
+                        <ScrollManager
+                          captureEnabled={false}
+                          lockEnabled={false}
                         >
-                          <ScrollBlock
-                            isEnabled={false}
-                          >
-                            <MenuList
-                              clearValue={[Function]}
-                              cx={[Function]}
-                              getStyles={[Function]}
-                              getValue={[Function]}
-                              hasValue={false}
-                              innerRef={[Function]}
-                              isLoading={false}
-                              isMulti={false}
-                              isRtl={false}
-                              maxHeight={300}
-                              options={
-                                Array [
+                          <MenuList
+                            clearValue={[Function]}
+                            cx={[Function]}
+                            getStyles={[Function]}
+                            getValue={[Function]}
+                            hasValue={false}
+                            innerRef={[Function]}
+                            isLoading={false}
+                            isMulti={false}
+                            isRtl={false}
+                            maxHeight={300}
+                            options={
+                              Array [
+                                Object {
+                                  "label": "One",
+                                  "value": "one",
+                                },
+                                Object {
+                                  "label": "Two",
+                                  "value": "two",
+                                },
+                                Object {
+                                  "label": "One hundred",
+                                  "value": "hundred",
+                                },
+                              ]
+                            }
+                            selectOption={[Function]}
+                            selectProps={
+                              Object {
+                                "aria-live": "polite",
+                                "backspaceRemovesValue": true,
+                                "blurInputOnSelect": true,
+                                "captureMenuScroll": false,
+                                "closeMenuOnScroll": false,
+                                "closeMenuOnSelect": true,
+                                "components": Object {},
+                                "controlShouldRenderValue": true,
+                                "escapeClearsValue": false,
+                                "filterOption": [Function],
+                                "formatGroupLabel": [Function],
+                                "getOptionLabel": [Function],
+                                "getOptionValue": [Function],
+                                "inputValue": "text",
+                                "isDisabled": false,
+                                "isLoading": false,
+                                "isMulti": false,
+                                "isOptionDisabled": [Function],
+                                "isRtl": false,
+                                "isSearchable": true,
+                                "loadingMessage": [Function],
+                                "maxMenuHeight": 300,
+                                "menuIsOpen": true,
+                                "menuPlacement": "bottom",
+                                "menuPosition": "absolute",
+                                "menuShouldBlockScroll": false,
+                                "menuShouldScrollIntoView": true,
+                                "minMenuHeight": 140,
+                                "noOptionsMessage": [Function],
+                                "onChange": [Function],
+                                "onInputChange": [Function],
+                                "onMenuClose": [Function],
+                                "onMenuOpen": [Function],
+                                "openMenuOnClick": true,
+                                "openMenuOnFocus": false,
+                                "options": Array [
                                   Object {
                                     "label": "One",
                                     "value": "one",
@@ -3808,132 +4263,133 @@ exports[`Select shouldn't find any results 1`] = `
                                     "label": "One hundred",
                                     "value": "hundred",
                                   },
-                                ]
+                                ],
+                                "pageSize": 5,
+                                "placeholder": "Select...",
+                                "screenReaderStatus": [Function],
+                                "styles": Object {
+                                  "container": [Function],
+                                  "control": [Function],
+                                },
+                                "tabIndex": "0",
+                                "tabSelectsValue": true,
+                                "theme": [Function],
+                                "value": null,
                               }
-                              selectOption={[Function]}
-                              selectProps={
-                                Object {
-                                  "backspaceRemovesValue": true,
-                                  "blurInputOnSelect": true,
-                                  "captureMenuScroll": false,
-                                  "closeMenuOnScroll": false,
-                                  "closeMenuOnSelect": true,
-                                  "components": Object {},
-                                  "controlShouldRenderValue": true,
-                                  "escapeClearsValue": false,
-                                  "filterOption": [Function],
-                                  "formatGroupLabel": [Function],
-                                  "getOptionLabel": [Function],
-                                  "getOptionValue": [Function],
-                                  "inputValue": "text",
-                                  "isDisabled": false,
-                                  "isLoading": false,
-                                  "isMulti": false,
-                                  "isOptionDisabled": [Function],
-                                  "isRtl": false,
-                                  "isSearchable": true,
-                                  "loadingMessage": [Function],
-                                  "maxMenuHeight": 300,
-                                  "menuIsOpen": true,
-                                  "menuPlacement": "bottom",
-                                  "menuPosition": "absolute",
-                                  "menuShouldBlockScroll": false,
-                                  "menuShouldScrollIntoView": true,
-                                  "minMenuHeight": 140,
-                                  "noOptionsMessage": [Function],
-                                  "onChange": [Function],
-                                  "onInputChange": [Function],
-                                  "onMenuClose": [Function],
-                                  "onMenuOpen": [Function],
-                                  "openMenuOnClick": true,
-                                  "openMenuOnFocus": false,
-                                  "options": Array [
-                                    Object {
-                                      "label": "One",
-                                      "value": "one",
-                                    },
-                                    Object {
-                                      "label": "Two",
-                                      "value": "two",
-                                    },
-                                    Object {
-                                      "label": "One hundred",
-                                      "value": "hundred",
-                                    },
-                                  ],
-                                  "pageSize": 5,
-                                  "placeholder": "Select...",
-                                  "screenReaderStatus": [Function],
-                                  "styles": Object {
-                                    "container": [Function],
-                                    "control": [Function],
-                                  },
-                                  "tabIndex": "0",
-                                  "tabSelectsValue": true,
-                                  "theme": [Function],
-                                  "value": null,
-                                }
+                            }
+                            setValue={[Function]}
+                            theme={
+                              Object {
+                                "borderRadius": 0,
+                                "colors": Object {
+                                  "danger": undefined,
+                                  "dangerLight": undefined,
+                                  "neutral0": undefined,
+                                  "neutral10": undefined,
+                                  "neutral20": undefined,
+                                  "neutral30": undefined,
+                                  "neutral40": undefined,
+                                  "neutral5": undefined,
+                                  "neutral50": "hsl(0, 0%, 50%)",
+                                  "neutral60": undefined,
+                                  "neutral70": "hsl(0, 0%, 30%)",
+                                  "neutral80": undefined,
+                                  "neutral90": "hsl(0, 0%, 10%)",
+                                  "primary": undefined,
+                                  "primary25": undefined,
+                                  "primary50": undefined,
+                                  "primary75": "#4C9AFF",
+                                },
+                                "spacing": Object {
+                                  "baseUnit": 2,
+                                  "controlHeight": 30,
+                                  "menuGutter": 8,
+                                },
                               }
-                              setValue={[Function]}
-                              theme={
+                            }
+                          >
+                            <EmotionCssPropInternal
+                              __EMOTION_LABEL_PLEASE_DO_NOT_USE__="MenuList"
+                              __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                              className=""
+                              css={
                                 Object {
-                                  "borderRadius": 0,
-                                  "colors": Object {
-                                    "danger": undefined,
-                                    "dangerLight": undefined,
-                                    "neutral0": undefined,
-                                    "neutral10": undefined,
-                                    "neutral20": undefined,
-                                    "neutral30": undefined,
-                                    "neutral40": undefined,
-                                    "neutral5": undefined,
-                                    "neutral50": "hsl(0, 0%, 50%)",
-                                    "neutral60": undefined,
-                                    "neutral70": "hsl(0, 0%, 30%)",
-                                    "neutral80": undefined,
-                                    "neutral90": "hsl(0, 0%, 10%)",
-                                    "primary": undefined,
-                                    "primary25": undefined,
-                                    "primary50": undefined,
-                                    "primary75": "#4C9AFF",
-                                  },
-                                  "spacing": Object {
-                                    "baseUnit": 2,
-                                    "controlHeight": 30,
-                                    "menuGutter": 8,
-                                  },
+                                  "WebkitOverflowScrolling": "touch",
+                                  "boxSizing": "border-box",
+                                  "maxHeight": 300,
+                                  "overflowY": "auto",
+                                  "paddingBottom": 2,
+                                  "paddingTop": 2,
+                                  "position": "relative",
                                 }
                               }
                             >
-                              <EmotionCssPropInternal
-                                __EMOTION_LABEL_PLEASE_DO_NOT_USE__="MenuList"
-                                __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
-                                className=""
-                                css={
-                                  Object {
-                                    "WebkitOverflowScrolling": "touch",
-                                    "boxSizing": "border-box",
-                                    "maxHeight": 300,
-                                    "overflowY": "auto",
-                                    "paddingBottom": 2,
-                                    "paddingTop": 2,
-                                    "position": "relative",
-                                  }
-                                }
+                              <div
+                                className=" css-87spde-MenuList"
                               >
-                                <div
-                                  className=" css-87spde-MenuList"
-                                >
-                                  <NoOptionsMessage
-                                    clearValue={[Function]}
-                                    cx={[Function]}
-                                    getStyles={[Function]}
-                                    getValue={[Function]}
-                                    hasValue={false}
-                                    isMulti={false}
-                                    isRtl={false}
-                                    options={
-                                      Array [
+                                <NoOptionsMessage
+                                  clearValue={[Function]}
+                                  cx={[Function]}
+                                  getStyles={[Function]}
+                                  getValue={[Function]}
+                                  hasValue={false}
+                                  isMulti={false}
+                                  isRtl={false}
+                                  options={
+                                    Array [
+                                      Object {
+                                        "label": "One",
+                                        "value": "one",
+                                      },
+                                      Object {
+                                        "label": "Two",
+                                        "value": "two",
+                                      },
+                                      Object {
+                                        "label": "One hundred",
+                                        "value": "hundred",
+                                      },
+                                    ]
+                                  }
+                                  selectOption={[Function]}
+                                  selectProps={
+                                    Object {
+                                      "aria-live": "polite",
+                                      "backspaceRemovesValue": true,
+                                      "blurInputOnSelect": true,
+                                      "captureMenuScroll": false,
+                                      "closeMenuOnScroll": false,
+                                      "closeMenuOnSelect": true,
+                                      "components": Object {},
+                                      "controlShouldRenderValue": true,
+                                      "escapeClearsValue": false,
+                                      "filterOption": [Function],
+                                      "formatGroupLabel": [Function],
+                                      "getOptionLabel": [Function],
+                                      "getOptionValue": [Function],
+                                      "inputValue": "text",
+                                      "isDisabled": false,
+                                      "isLoading": false,
+                                      "isMulti": false,
+                                      "isOptionDisabled": [Function],
+                                      "isRtl": false,
+                                      "isSearchable": true,
+                                      "loadingMessage": [Function],
+                                      "maxMenuHeight": 300,
+                                      "menuIsOpen": true,
+                                      "menuPlacement": "bottom",
+                                      "menuPosition": "absolute",
+                                      "menuShouldBlockScroll": false,
+                                      "menuShouldScrollIntoView": true,
+                                      "minMenuHeight": 140,
+                                      "noOptionsMessage": [Function],
+                                      "onChange": [Function],
+                                      "onInputChange": [Function],
+                                      "onMenuClose": [Function],
+                                      "onMenuOpen": [Function],
+                                      "openMenuOnClick": true,
+                                      "openMenuOnFocus": false,
+                                      "options": Array [
                                         Object {
                                           "label": "One",
                                           "value": "one",
@@ -3946,128 +4402,75 @@ exports[`Select shouldn't find any results 1`] = `
                                           "label": "One hundred",
                                           "value": "hundred",
                                         },
-                                      ]
+                                      ],
+                                      "pageSize": 5,
+                                      "placeholder": "Select...",
+                                      "screenReaderStatus": [Function],
+                                      "styles": Object {
+                                        "container": [Function],
+                                        "control": [Function],
+                                      },
+                                      "tabIndex": "0",
+                                      "tabSelectsValue": true,
+                                      "theme": [Function],
+                                      "value": null,
                                     }
-                                    selectOption={[Function]}
-                                    selectProps={
-                                      Object {
-                                        "backspaceRemovesValue": true,
-                                        "blurInputOnSelect": true,
-                                        "captureMenuScroll": false,
-                                        "closeMenuOnScroll": false,
-                                        "closeMenuOnSelect": true,
-                                        "components": Object {},
-                                        "controlShouldRenderValue": true,
-                                        "escapeClearsValue": false,
-                                        "filterOption": [Function],
-                                        "formatGroupLabel": [Function],
-                                        "getOptionLabel": [Function],
-                                        "getOptionValue": [Function],
-                                        "inputValue": "text",
-                                        "isDisabled": false,
-                                        "isLoading": false,
-                                        "isMulti": false,
-                                        "isOptionDisabled": [Function],
-                                        "isRtl": false,
-                                        "isSearchable": true,
-                                        "loadingMessage": [Function],
-                                        "maxMenuHeight": 300,
-                                        "menuIsOpen": true,
-                                        "menuPlacement": "bottom",
-                                        "menuPosition": "absolute",
-                                        "menuShouldBlockScroll": false,
-                                        "menuShouldScrollIntoView": true,
-                                        "minMenuHeight": 140,
-                                        "noOptionsMessage": [Function],
-                                        "onChange": [Function],
-                                        "onInputChange": [Function],
-                                        "onMenuClose": [Function],
-                                        "onMenuOpen": [Function],
-                                        "openMenuOnClick": true,
-                                        "openMenuOnFocus": false,
-                                        "options": Array [
-                                          Object {
-                                            "label": "One",
-                                            "value": "one",
-                                          },
-                                          Object {
-                                            "label": "Two",
-                                            "value": "two",
-                                          },
-                                          Object {
-                                            "label": "One hundred",
-                                            "value": "hundred",
-                                          },
-                                        ],
-                                        "pageSize": 5,
-                                        "placeholder": "Select...",
-                                        "screenReaderStatus": [Function],
-                                        "styles": Object {
-                                          "container": [Function],
-                                          "control": [Function],
-                                        },
-                                        "tabIndex": "0",
-                                        "tabSelectsValue": true,
-                                        "theme": [Function],
-                                        "value": null,
-                                      }
+                                  }
+                                  setValue={[Function]}
+                                  theme={
+                                    Object {
+                                      "borderRadius": 0,
+                                      "colors": Object {
+                                        "danger": undefined,
+                                        "dangerLight": undefined,
+                                        "neutral0": undefined,
+                                        "neutral10": undefined,
+                                        "neutral20": undefined,
+                                        "neutral30": undefined,
+                                        "neutral40": undefined,
+                                        "neutral5": undefined,
+                                        "neutral50": "hsl(0, 0%, 50%)",
+                                        "neutral60": undefined,
+                                        "neutral70": "hsl(0, 0%, 30%)",
+                                        "neutral80": undefined,
+                                        "neutral90": "hsl(0, 0%, 10%)",
+                                        "primary": undefined,
+                                        "primary25": undefined,
+                                        "primary50": undefined,
+                                        "primary75": "#4C9AFF",
+                                      },
+                                      "spacing": Object {
+                                        "baseUnit": 2,
+                                        "controlHeight": 30,
+                                        "menuGutter": 8,
+                                      },
                                     }
-                                    setValue={[Function]}
-                                    theme={
+                                  }
+                                >
+                                  <EmotionCssPropInternal
+                                    __EMOTION_LABEL_PLEASE_DO_NOT_USE__="NoOptionsMessage"
+                                    __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                                    className=""
+                                    css={
                                       Object {
-                                        "borderRadius": 0,
-                                        "colors": Object {
-                                          "danger": undefined,
-                                          "dangerLight": undefined,
-                                          "neutral0": undefined,
-                                          "neutral10": undefined,
-                                          "neutral20": undefined,
-                                          "neutral30": undefined,
-                                          "neutral40": undefined,
-                                          "neutral5": undefined,
-                                          "neutral50": "hsl(0, 0%, 50%)",
-                                          "neutral60": undefined,
-                                          "neutral70": "hsl(0, 0%, 30%)",
-                                          "neutral80": undefined,
-                                          "neutral90": "hsl(0, 0%, 10%)",
-                                          "primary": undefined,
-                                          "primary25": undefined,
-                                          "primary50": undefined,
-                                          "primary75": "#4C9AFF",
-                                        },
-                                        "spacing": Object {
-                                          "baseUnit": 2,
-                                          "controlHeight": 30,
-                                          "menuGutter": 8,
-                                        },
+                                        "boxSizing": "border-box",
+                                        "color": undefined,
+                                        "padding": "4px 6px",
+                                        "textAlign": "center",
                                       }
                                     }
                                   >
-                                    <EmotionCssPropInternal
-                                      __EMOTION_LABEL_PLEASE_DO_NOT_USE__="NoOptionsMessage"
-                                      __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
-                                      className=""
-                                      css={
-                                        Object {
-                                          "boxSizing": "border-box",
-                                          "color": undefined,
-                                          "padding": "4px 6px",
-                                          "textAlign": "center",
-                                        }
-                                      }
+                                    <div
+                                      className=" css-36co7-NoOptionsMessage"
                                     >
-                                      <div
-                                        className=" css-36co7-NoOptionsMessage"
-                                      >
-                                        No options
-                                      </div>
-                                    </EmotionCssPropInternal>
-                                  </NoOptionsMessage>
-                                </div>
-                              </EmotionCssPropInternal>
-                            </MenuList>
-                          </ScrollBlock>
-                        </ScrollCaptorSwitch>
+                                      No options
+                                    </div>
+                                  </EmotionCssPropInternal>
+                                </NoOptionsMessage>
+                              </div>
+                            </EmotionCssPropInternal>
+                          </MenuList>
+                        </ScrollManager>
                       </div>
                     </EmotionCssPropInternal>
                   </Menu>
