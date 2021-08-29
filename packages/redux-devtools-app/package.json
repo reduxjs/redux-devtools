@@ -20,7 +20,7 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --env development --env platform=web --progress",
+    "start": "webpack-dev-server --hot --env development --env platform=web --progress",
     "build": "npm run build:types && npm run build:js && npm run build:web && npm run build:umd && npm run build:umd:min",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
@@ -69,6 +69,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
+    "path-browserify": "^1.0.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
