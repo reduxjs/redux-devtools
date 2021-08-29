@@ -14,7 +14,7 @@ export interface ExtendedOptions extends Options {
 
 export default function (argv: { [arg: string]: any }): Promise<{
   portAlreadyUsed?: boolean;
-  on: (status: 'ready', cb: () => void) => void;
+  on: (status: 'ready', cb: (() => void) | (() => Promise<void>)) => void;
 }> {
   const options = Object.assign(getOptions(argv), {
     workerController: __dirname + '/worker.js',
