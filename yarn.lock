@@ -5100,7 +5100,7 @@ __metadata:
     "@types/redux-logger": ^3.0.9
     base16: ^1.0.0
     connected-react-router: ^6.9.1
-    dateformat: ^3.0.3
+    dateformat: ^4.5.1
     hex-rgba: ^1.0.2
     history: ^4.10.1
     immutable: ^4.0.0-rc.14
@@ -12683,10 +12683,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dateformat@npm:^3.0.0, dateformat@npm:^3.0.3":
+"dateformat@npm:^3.0.0":
   version: 3.0.3
   resolution: "dateformat@npm:3.0.3"
   checksum: ca4911148abb09887bd9bdcd632c399b06f3ecad709a18eb594d289a1031982f441e08e281db77ffebcb2cbcbfa1ac578a7cbfbf8743f41009aa5adc1846ed34
+  languageName: node
+  linkType: hard
+
+"dateformat@npm:^4.5.1":
+  version: 4.5.1
+  resolution: "dateformat@npm:4.5.1"
+  checksum: 2c80b0fed4977db338aa70fbdd605a50c06ec36f4ef8d8fd36193a08c4910da1172eec919a74ed93abfc134fc71dca8707877d4fd149c07f0d1c919d598283e3
   languageName: node
   linkType: hard
 
