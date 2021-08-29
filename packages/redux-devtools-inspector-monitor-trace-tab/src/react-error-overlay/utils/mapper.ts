@@ -8,7 +8,6 @@
 import StackFrame from './stack-frame';
 import { getSourceMap } from './getSourceMap';
 import { getLinesAround } from './getLinesAround';
-import { settle } from 'settle-promise';
 
 /**
  * Enhances a set of <code>StackFrame</code>s with their original positions and code (when available).
@@ -31,7 +30,7 @@ async function map(
     }
     files.push(fileName);
   });
-  await settle(
+  await Promise.allSettled(
     files.map(async (fileName) => {
       const fileSource = await fetch(fileName).then((r) => r.text());
       const map = await getSourceMap(fileName, fileSource);
