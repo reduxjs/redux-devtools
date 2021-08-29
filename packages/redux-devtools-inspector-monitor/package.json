@@ -22,7 +22,7 @@
     "url": "https://github.com/reduxjs/redux-devtools"
   },
   "scripts": {
-    "start": "webpack-dev-server --config demo/config/webpack.config.ts",
+    "start": "webpack serve --config demo/config/webpack.config.ts",
     "stats": "webpack --profile --json > stats.json",
     "build:demo": "NODE_ENV=production webpack -p",
     "build": "npm run build:types && npm run build:js",
@@ -39,7 +39,7 @@
   "dependencies": {
     "@types/dragula": "^3.7.1",
     "@types/prop-types": "^15.7.4",
-    "dateformat": "^3.0.3",
+    "dateformat": "^4.5.1",
     "hex-rgba": "^1.0.2",
     "immutable": "^4.0.0-rc.14",
     "javascript-stringify": "^2.1.0",

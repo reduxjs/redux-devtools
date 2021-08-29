@@ -12,7 +12,7 @@ import { absolutifyCaret } from '../utils/dom/absolutifyCaret';
 import { ScriptLine } from '../utils/stack-frame';
 import generateAnsiHTML from '../utils/generateAnsiHTML';
 
-// import { codeFrameColumns } from '@babel/code-frame';
+import { codeFrameColumns } from '@babel/code-frame';
 import { nicinabox as theme } from 'redux-devtools-themes';
 
 interface StackFrameCodeBlockPropsType {
@@ -48,25 +48,24 @@ function StackFrameCodeBlock(props: StackFrameCodeBlockPropsType) {
     }
     sourceCode[line - 1] = text;
   });
-  // const ansiHighlight = codeFrameColumns(
-  //   sourceCode.join('\n'),
-  //   {
-  //     start: {
-  //       line: lineNum,
-  //       column:
-  //         columnNum == null
-  //           ? 0
-  //           : columnNum - (isFinite(whiteSpace) ? whiteSpace : 0),
-  //     },
-  //   },
-  //   {
-  //     forceColor: true,
-  //     linesAbove: contextSize,
-  //     linesBelow: contextSize,
-  //   }
-  // );
-  // const htmlHighlight = generateAnsiHTML(ansiHighlight);
-  const htmlHighlight = generateAnsiHTML(sourceCode.join('\n'));
+  const ansiHighlight = codeFrameColumns(
+    sourceCode.join('\n'),
+    {
+      start: {
+        line: lineNum,
+        column:
+          columnNum == null
+            ? 0
+            : columnNum - (isFinite(whiteSpace) ? whiteSpace : 0),
+      },
+    },
+    {
+      forceColor: true,
+      linesAbove: contextSize,
+      linesBelow: contextSize,
+    }
+  );
+  const htmlHighlight = generateAnsiHTML(ansiHighlight);
   const code = document.createElement('code');
   code.innerHTML = htmlHighlight;
   absolutifyCaret(code);

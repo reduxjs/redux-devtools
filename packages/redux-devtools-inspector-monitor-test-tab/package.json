@@ -29,7 +29,7 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --config demo/config/webpack.config.ts",
+    "start": "webpack serve --config demo/config/webpack.config.ts",
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
@@ -50,7 +50,7 @@
     "jsan": "^3.1.13",
     "object-path": "^0.11.5",
     "prop-types": "^15.7.2",
-    "react-icons": "^3.11.0",
+    "react-icons": "^4.2.0",
     "simple-diff": "^1.6.0"
   },
   "devDependencies": {

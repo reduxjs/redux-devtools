@@ -7,9 +7,7 @@
 
 import Anser from 'anser';
 import { nicinabox as theme } from 'redux-devtools-themes';
-import { AllHtmlEntities as Entities } from 'html-entities';
-
-const entities = new Entities();
+import { encode } from 'html-entities';
 
 const anserMap = {
   'ansi-bright-black': theme.base03,
@@ -27,7 +25,7 @@ const anserMap = {
 };
 
 function generateAnsiHTML(txt: string): string {
-  const arr = new Anser().ansiToJson(entities.encode(txt), {
+  const arr = new Anser().ansiToJson(encode(txt), {
     use_classes: true,
   });
 
