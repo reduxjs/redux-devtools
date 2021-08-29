@@ -71,5 +71,8 @@
     "packages/redux-devtools/examples/counter",
     "packages/redux-devtools/examples/todomvc",
     "packages/redux-devtools-slider-monitor/examples/todomvc"
-  ]
+  ],
+  "resolutions": {
+    "@babel/highlight/chalk": "Methuselah96/chalk#head=v2-without-process"
+  }
 }
