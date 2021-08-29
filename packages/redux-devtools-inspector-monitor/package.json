@@ -22,7 +22,7 @@
     "url": "https://github.com/reduxjs/redux-devtools"
   },
   "scripts": {
-    "start": "webpack-dev-server --config demo/config/webpack.config.ts",
+    "start": "webpack serve --config demo/config/webpack.config.ts",
     "stats": "webpack --profile --json > stats.json",
     "build:demo": "NODE_ENV=production webpack -p",
     "build": "npm run build:types && npm run build:js",
