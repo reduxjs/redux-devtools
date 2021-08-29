@@ -32,6 +32,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@redux-devtools/app": "^1.0.0-8",
     "@redux-devtools/core": "^3.9.0",
     "@redux-devtools/instrument": "^1.11.0",
@@ -49,8 +50,6 @@
     "redux": "^4.1.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.14.5",
-    "@babel/polyfill": "^7.12.1",
     "@babel/register": "^7.15.3",
     "bestzip": "^2.2.0",
     "chromedriver": "^91.0.1",
@@ -64,6 +63,7 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "gitbook-cli": "^2.3.2",
+    "path-browserify": "^1.0.1",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
     "selenium-webdriver": "^3.6.0",
