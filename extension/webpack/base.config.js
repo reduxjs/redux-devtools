@@ -31,12 +31,7 @@ const baseConfig = (params) => ({
   },
   plugins: [
     new webpack.DefinePlugin(params.globals),
-    ...(params.plugins
-      ? params.plugins
-      : [
-          new webpack.optimize.ModuleConcatenationPlugin(),
-          new webpack.optimize.OccurrenceOrderPlugin(),
-        ]),
+    ...(params.plugins ? params.plugins : []),
   ].concat(
     params.copy
       ? new CopyPlugin({
@@ -65,6 +60,9 @@ const baseConfig = (params) => ({
       tmp: path.join(__dirname, '../build/tmp'),
     },
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    fallback: {
+      path: require.resolve('path-browserify'),
+    },
   },
   module: {
     rules: [

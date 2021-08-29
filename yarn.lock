@@ -688,7 +688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-decorators@npm:^7.12.12, @babel/plugin-proposal-decorators@npm:^7.14.5":
+"@babel/plugin-proposal-decorators@npm:^7.12.12":
   version: 7.14.5
   resolution: "@babel/plugin-proposal-decorators@npm:7.14.5"
   dependencies:
@@ -4890,6 +4890,7 @@ __metadata:
     jsondiffpatch: ^0.4.1
     localforage: ^1.10.0
     lodash: ^4.17.21
+    path-browserify: ^1.0.1
     prop-types: ^15.7.2
     react: ^16.14.0
     react-dom: ^16.14.0
@@ -7892,17 +7893,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack@npm:^4.41.30":
-  version: 4.41.30
-  resolution: "@types/webpack@npm:4.41.30"
+"@types/webpack@npm:^5.28.0":
+  version: 5.28.0
+  resolution: "@types/webpack@npm:5.28.0"
   dependencies:
     "@types/node": "*"
-    "@types/tapable": ^1
-    "@types/uglify-js": "*"
-    "@types/webpack-sources": "*"
-    anymatch: ^3.0.0
-    source-map: ^0.6.0
-  checksum: a247f48905777ac96fd43699cbef0aa053d25316f4242f3b1b9c5193850883fe42397e745a87b209c1da94f61dbbb9db2cef0a74b420bd3fe3af3be6a5ed039f
+    tapable: ^2.2.0
+    webpack: ^5
+  checksum: a038d7e12dd109c6a8d2eb744fd32070ef94f1655e730fb1443b370db98864c3a0e408638b02d12ba08269b9c012b3be8b801117ced2d1102e7676203fd663ed
   languageName: node
   linkType: hard
 
@@ -23343,6 +23341,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"path-browserify@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "path-browserify@npm:1.0.1"
+  checksum: c6d7fa376423fe35b95b2d67990060c3ee304fc815ff0a2dc1c6c3cfaff2bd0d572ee67e18f19d0ea3bbe32e8add2a05021132ac40509416459fffee35200699
+  languageName: node
+  linkType: hard
+
 "path-dirname@npm:^1.0.0":
   version: 1.0.2
   resolution: "path-dirname@npm:1.0.2"
@@ -25877,7 +25882,6 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "remotedev-redux-devtools-extension@workspace:extension"
   dependencies:
-    "@babel/plugin-proposal-decorators": ^7.14.5
     "@babel/polyfill": ^7.12.1
     "@babel/register": ^7.15.3
     "@redux-devtools/app": ^1.0.0-8
@@ -25901,6 +25905,7 @@ fsevents@^1.2.7:
     gitbook-cli: ^2.3.2
     jsan: ^3.1.13
     lodash: ^4.17.21
+    path-browserify: ^1.0.1
     react: ^16.14.0
     react-dom: ^16.14.0
     react-icons: ^3.11.0
@@ -26304,7 +26309,7 @@ resolve@^2.0.0-next.3:
     "@babel/preset-typescript": ^7.15.0
     "@types/jest": ^27.0.1
     "@types/node": ^14.17.12
-    "@types/webpack": ^4.41.30
+    "@types/webpack": ^5.28.0
     "@types/webpack-dev-server": ^4.0.3
     "@types/webpack-env": ^1.16.2
     "@typescript-eslint/eslint-plugin": ^4.29.3
@@ -26340,7 +26345,7 @@ resolve@^2.0.0-next.3:
     ts-node: ^10.2.1
     typescript: ^4.3.5
     url-loader: ^4.1.1
-    webpack: ^4.46.0
+    webpack: ^5.51.1
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.0.0
   languageName: unknown
@@ -30401,7 +30406,7 @@ typescript@^4.3.5:
   languageName: node
   linkType: hard
 
-"webpack@npm:4, webpack@npm:^4.46.0":
+"webpack@npm:4":
   version: 4.46.0
   resolution: "webpack@npm:4.46.0"
   dependencies:
@@ -30439,7 +30444,7 @@ typescript@^4.3.5:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.38.1":
+"webpack@npm:^5, webpack@npm:^5.38.1, webpack@npm:^5.51.1":
   version: 5.51.1
   resolution: "webpack@npm:5.51.1"
   dependencies:
