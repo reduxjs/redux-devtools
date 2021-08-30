@@ -65,7 +65,7 @@ module.exports = (env: { development?: boolean; platform?: string } = {}) => ({
     }),
     new ForkTsCheckerWebpackPlugin({
       typescript: {
-        configFile: 'tsconfig.json',
+        configFile: 'tsconfig.demo.json',
       },
     }),
   ],

@@ -45,12 +45,6 @@ export type LiftedActionAction =
   | LiftedActionActionAction
   | LiftedActionExportAction;
 
-interface TogglePersistAction {
-  readonly type: 'TOGGLE_PERSIST';
-  readonly instanceId: string | number;
-  readonly id: string | number | undefined;
-}
-
 interface ConnectedAction {
   readonly type: typeof CONNECTED;
 }
@@ -62,7 +56,6 @@ interface DisconnectedAction {
 export type BackgroundAction =
   | StoreActionWithoutLiftedAction
   | LiftedActionAction
-  | TogglePersistAction
   | ConnectedAction
   | DisconnectedAction;
 

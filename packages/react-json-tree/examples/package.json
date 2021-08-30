@@ -12,7 +12,7 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack serve --open",
     "stats": "NODE_ENV=production webpack --json > dist/stats.json",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",

@@ -6,17 +6,15 @@ import {
 import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
 import { Dispatch, MiddlewareAPI } from 'redux';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
-import { StoreActionWithTogglePersist } from '../stores/windowStore';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
 
 function panelDispatcher(bgConnection: chrome.runtime.Port) {
   let autoselected = false;
   const tabId = chrome.devtools.inspectedWindow.tabId;
 
-  return (
-      store: MiddlewareAPI<Dispatch<StoreActionWithTogglePersist>, StoreState>
-    ) =>
-    (next: Dispatch<StoreActionWithTogglePersist>) =>
-    (action: StoreActionWithTogglePersist) => {
+  return (store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) =>
+    (next: Dispatch<StoreAction>) =>
+    (action: StoreAction) => {
       const result = next(action);
       if (!autoselected && action.type === UPDATE_STATE && tabId) {
         autoselected = true;
@@ -25,7 +23,7 @@ function panelDispatcher(bgConnection: chrome.runtime.Port) {
           next({ type: SELECT_INSTANCE, selected: connections[0] });
         }
       }
-      if (action.type === LIFTED_ACTION || action.type === 'TOGGLE_PERSIST') {
+      if (action.type === LIFTED_ACTION) {
         const instances = store.getState().instances;
         const instanceId = getActiveInstance(instances);
         const id = instances.options[instanceId].connectionId;

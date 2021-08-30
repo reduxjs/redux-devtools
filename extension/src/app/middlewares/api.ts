@@ -355,7 +355,7 @@ function getReducerError() {
 
 function togglePersist() {
   const state = window.store.getState();
-  if (state.persistStates) {
+  if (state.instances.persisted) {
     Object.keys(state.instances.connections).forEach((id) => {
       if (connections.tab[id]) return;
       window.store.dispatch({ type: REMOVE_INSTANCE, id });
@@ -492,7 +492,7 @@ function disconnect(
     if (p) p.onDisconnect.removeListener(disconnectListener);
     delete connections[type][id];
     if (type === 'tab') {
-      if (!window.store.getState().persistStates) {
+      if (!window.store.getState().instances.persisted) {
         window.store.dispatch({ type: REMOVE_INSTANCE, id });
         toMonitors({ type: 'NA', id });
       }
@@ -522,7 +522,7 @@ function onConnect<S, A extends Action<unknown>>(port: chrome.runtime.Port) {
         if (isMonitored) port.postMessage({ type: 'START' });
 
         const state = window.store.getState();
-        if (state.persistStates) {
+        if (state.instances.persisted) {
           const instanceId = `${id}/${msg.instanceId}`;
           const persistedState = state.instances.states[instanceId];
           if (!persistedState) return;
@@ -585,7 +585,6 @@ window.syncOptions = syncOptions(toAllTabs); // Expose to the options page
 export default function api() {
   return (next: Dispatch<BackgroundAction>) => (action: BackgroundAction) => {
     if (action.type === LIFTED_ACTION) toContentScript(action);
-    else if (action.type === 'TOGGLE_PERSIST') togglePersist();
     return next(action);
   };
 }

@@ -23,19 +23,12 @@ import { BackgroundState } from '../reducers/background';
 import { BackgroundAction } from './backgroundStore';
 import { EmptyUpdateStateAction, NAAction } from '../middlewares/api';
 
-export interface TogglePersistAction {
-  readonly type: 'TOGGLE_PERSIST';
-}
-
-export type StoreActionWithTogglePersist = StoreAction | TogglePersistAction;
-
 export interface ExpandedUpdateStateAction extends UpdateStateAction {
   readonly instances: InstancesState;
 }
 
 export type WindowStoreAction =
   | StoreActionWithoutUpdateState
-  | TogglePersistAction
   | ExpandedUpdateStateAction
   | NAAction
   | EmptyUpdateStateAction;

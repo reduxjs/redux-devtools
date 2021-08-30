@@ -6,10 +6,7 @@ import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
 import { Dispatch, MiddlewareAPI, Store } from 'redux';
 import { BackgroundState } from '../reducers/background';
 import { StoreAction } from '@redux-devtools/app/lib/actions';
-import {
-  WindowStoreAction,
-  StoreActionWithTogglePersist,
-} from '../stores/windowStore';
+import { WindowStoreAction } from '../stores/windowStore';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
 import { BackgroundAction } from '../stores/backgroundStore';
 
@@ -17,14 +14,14 @@ const syncStores =
   (baseStore: Store<BackgroundState, BackgroundAction>) =>
   (store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) =>
   (next: Dispatch<WindowStoreAction>) =>
-  (action: StoreActionWithTogglePersist) => {
+  (action: StoreAction) => {
     if (action.type === UPDATE_STATE) {
       return next({
         ...action,
         instances: baseStore.getState().instances,
       });
     }
-    if (action.type === LIFTED_ACTION || action.type === 'TOGGLE_PERSIST') {
+    if (action.type === LIFTED_ACTION) {
       const instances = store.getState().instances;
       const instanceId = getActiveInstance(instances);
       const id = instances.options[instanceId].connectionId;

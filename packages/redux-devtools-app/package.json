@@ -20,7 +20,7 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --env development --env platform=web --progress",
+    "start": "webpack serve --hot --env development --env platform=web --progress",
     "build": "npm run build:types && npm run build:js && npm run build:web && npm run build:umd && npm run build:umd:min",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
@@ -63,7 +63,7 @@
     "styled-components": "^5.3.1"
   },
   "devDependencies": {
-    "@rjsf/core": "^2.5.1",
+    "@rjsf/core": "^3.1.0",
     "@types/json-schema": "^7.0.9",
     "@types/socketcluster-client": "^13.0.5",
     "enzyme": "^3.11.0",

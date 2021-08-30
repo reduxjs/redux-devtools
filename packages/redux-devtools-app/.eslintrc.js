@@ -10,6 +10,14 @@ module.exports = {
       },
     },
     {
+      files: ['demo/*.ts', 'demo/*.tsx'],
+      extends: '../../eslintrc.ts.react.base.json',
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+        project: ['./tsconfig.demo.json'],
+      },
+    },
+    {
       files: ['test/*.ts', 'test/*.tsx'],
       extends: '../../eslintrc.ts.react.jest.base.json',
       parserOptions: {

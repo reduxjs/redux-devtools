@@ -1,4 +1,3 @@
-import 'devui/lib/presets';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
