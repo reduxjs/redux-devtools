@@ -1,5 +1,15 @@
 {
   "extends": ["config:base", "group:allNonMajor", ":maintainLockFilesWeekly"],
   "rangeStrategy": "bump",
-  "rebaseWhen": "conflicted"
+  "rebaseWhen": "conflicted",
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "@types/react",
+        "@types/react-dom",
+        "@types/react-test-renderer"
+      ],
+      "groupName": "react monorepo"
+    }
+  ]
 }
