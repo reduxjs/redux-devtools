@@ -1,17 +1,17 @@
 import React, { CSSProperties } from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { Provider } from 'react-redux';
+import { Persistor } from 'redux-persist';
 import { REMOVE_INSTANCE } from '@redux-devtools/app/lib/constants/actionTypes';
 import App from '../../../app/containers/App';
 import configureStore from '../../../app/stores/panelStore';
-import getPreloadedState from '../background/getPreloadedState';
 
 import '../../views/devpanel.pug';
-import { Action, PreloadedState, Store } from 'redux';
-import { StoreState } from '@redux-devtools/app/lib/reducers';
+import { Action, Store } from 'redux';
 import { StoreAction } from '@redux-devtools/app/lib/actions';
 import { PanelMessage } from '../../../app/middlewares/api';
 import { StoreStateWithoutSocket } from '../../../app/reducers/panel';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const position = location.hash;
 const messageStyle: CSSProperties = {
@@ -22,24 +22,22 @@ const messageStyle: CSSProperties = {
 
 let rendered: boolean | undefined;
 let store: Store<StoreStateWithoutSocket, StoreAction> | undefined;
+let persistor: Persistor | undefined;
 let bgConnection: chrome.runtime.Port;
 let naTimeout: NodeJS.Timeout;
-let preloadedState: PreloadedState<StoreState>;
 
 const isChrome = navigator.userAgent.indexOf('Firefox') === -1;
-
-getPreloadedState(position, (state) => {
-  preloadedState = state;
-});
 
 function renderDevTools() {
   const node = document.getElementById('root');
   unmountComponentAtNode(node!);
   clearTimeout(naTimeout);
-  store = configureStore(position, bgConnection, preloadedState);
+  ({ store, persistor } = configureStore(position, bgConnection));
   render(
     <Provider store={store}>
-      <App position={position} />
+      <PersistGate loading={null} persistor={persistor}>
+        <App position={position} />
+      </PersistGate>
     </Provider>,
     node
   );
