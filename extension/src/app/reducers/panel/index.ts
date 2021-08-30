@@ -18,7 +18,7 @@ import theme, { ThemeState } from '@redux-devtools/app/lib/reducers/theme';
 import connection, {
   ConnectionState,
 } from '@redux-devtools/app/lib/reducers/connection';
-import { StoreActionWithTogglePersist } from '../../stores/windowStore';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
 
 export interface StoreStateWithoutSocket {
   readonly section: SectionState;
@@ -30,17 +30,15 @@ export interface StoreStateWithoutSocket {
   readonly notification: NotificationState;
 }
 
-const rootReducer: Reducer<
-  StoreStateWithoutSocket,
-  StoreActionWithTogglePersist
-> = combineReducers<StoreStateWithoutSocket>({
-  instances,
-  monitor,
-  reports,
-  notification,
-  section,
-  theme,
-  connection,
-});
+const rootReducer: Reducer<StoreStateWithoutSocket, StoreAction> =
+  combineReducers<StoreStateWithoutSocket>({
+    instances,
+    monitor,
+    reports,
+    notification,
+    section,
+    theme,
+    connection,
+  });
 
 export default rootReducer;

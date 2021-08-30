@@ -9,8 +9,8 @@ import getPreloadedState from '../background/getPreloadedState';
 import '../../views/devpanel.pug';
 import { Action, PreloadedState, Store } from 'redux';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
 import { PanelMessage } from '../../../app/middlewares/api';
-import { StoreActionWithTogglePersist } from '../../../app/stores/windowStore';
 import { StoreStateWithoutSocket } from '../../../app/reducers/panel';
 
 const position = location.hash;
@@ -21,9 +21,7 @@ const messageStyle: CSSProperties = {
 };
 
 let rendered: boolean | undefined;
-let store:
-  | Store<StoreStateWithoutSocket, StoreActionWithTogglePersist>
-  | undefined;
+let store: Store<StoreStateWithoutSocket, StoreAction> | undefined;
 let bgConnection: chrome.runtime.Port;
 let naTimeout: NodeJS.Timeout;
 let preloadedState: PreloadedState<StoreState>;
