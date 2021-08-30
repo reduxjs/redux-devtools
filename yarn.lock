@@ -4944,7 +4944,7 @@ __metadata:
     chalk: ^4.1.2
     cors: ^2.8.5
     cross-spawn: ^7.0.3
-    electron: ^13.2.2
+    electron: ^14.0.0
     express: ^4.17.1
     getport: ^0.1.0
     graphql: ^14.7.0
@@ -13609,16 +13609,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:^13.2.2":
-  version: 13.2.2
-  resolution: "electron@npm:13.2.2"
+"electron@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "electron@npm:14.0.0"
   dependencies:
     "@electron/get": ^1.0.1
     "@types/node": ^14.6.2
     extract-zip: ^1.0.3
   bin:
     electron: cli.js
-  checksum: b6c6b71ed574f6c6a28cc3ac973d5791ef0af30b7a431cad00e949e5b2d97338dc9093d2aee883696c6e637b573b51ea390b3cce8e72897129119ca8b53f7fc1
+  checksum: f07d52aab130ea596a295de0d1f620af73e0ce46462e5d73dc0f0e591daf92ef9c661e260ac00657e46d82e598758ad818a9d3eb3260968289bd44123119a1cf
   languageName: node
   linkType: hard
 
@@ -25947,7 +25947,7 @@ fsevents@^1.2.7:
     "@types/jsan": ^3.1.2
     bestzip: ^2.2.0
     chromedriver: ^91.0.1
-    electron: ^13.2.2
+    electron: ^14.0.0
     enzyme: ^3.11.0
     enzyme-adapter-react-16: ^1.15.6
     eslint: ^7.32.0
