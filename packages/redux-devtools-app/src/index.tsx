@@ -16,15 +16,11 @@ class Root extends Component<Props> {
   store?: Store<StoreState, StoreAction>;
 
   UNSAFE_componentWillMount() {
-    configureStore((store, preloadedState) => {
-      this.store = store;
-      store.dispatch({
-        type: CONNECT_REQUEST,
-        options: (preloadedState!.connection ||
-          this.props.socketOptions) as ConnectionOptions,
-      });
-      this.forceUpdate();
+    this.store = configureStore();
+    this.store.dispatch({
+      type: CONNECT_REQUEST,
     });
+    this.forceUpdate();
   }
 
   render() {
