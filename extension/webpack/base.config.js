@@ -77,7 +77,7 @@ const baseConfig = (params) => ({
           ]),
       {
         test: /\.css?$/,
-        use: ['style-loader', 'raw-loader'],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.pug$/,
