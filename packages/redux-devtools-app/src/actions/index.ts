@@ -446,7 +446,6 @@ export interface RemoveInstanceAction {
 
 export interface ConnectRequestAction {
   type: typeof CONNECT_REQUEST;
-  options: ConnectionOptions;
 }
 
 interface ConnectSuccessPayload {

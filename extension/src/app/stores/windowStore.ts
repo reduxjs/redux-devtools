@@ -56,17 +56,14 @@ export default function configureStore(
   }
   const store = createStore(rootReducer, preloadedState, enhancer);
 
-  chrome.storage.local.get(['s:hostname', 's:port', 's:secure'], (options) => {
-    if (!options['s:hostname'] || !options['s:port']) return;
+  if (
+    store.getState().connection.options.hostname &&
+    store.getState().connection.options.port
+  ) {
     store.dispatch({
       type: CONNECT_REQUEST,
-      options: {
-        hostname: options['s:hostname'],
-        port: options['s:port'],
-        secure: options['s:secure'],
-      } as any,
     });
-  });
+  }
 
   return store;
 }

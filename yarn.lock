@@ -4897,7 +4897,7 @@ __metadata:
     react-is: ^16.13.1
     react-redux: ^7.2.4
     redux: ^4.1.1
-    redux-persist: ^4.10.2
+    redux-persist: ^6.0.0
     socketcluster-client: ^14.3.2
     styled-components: ^5.3.1
   peerDependencies:
@@ -19987,13 +19987,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.4":
-  version: 4.17.21
-  resolution: "lodash-es@npm:4.17.21"
-  checksum: 05cbffad6e2adbb331a4e16fbd826e7faee403a1a04873b82b42c0f22090f280839f85b95393f487c1303c8a3d2a010048bf06151a6cbe03eee4d388fb0a12d2
-  languageName: node
-  linkType: hard
-
 "lodash._baseindexof@npm:*":
   version: 3.1.0
   resolution: "lodash._baseindexof@npm:3.1.0"
@@ -25654,14 +25647,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"redux-persist@npm:^4.10.2":
-  version: 4.10.2
-  resolution: "redux-persist@npm:4.10.2"
-  dependencies:
-    json-stringify-safe: ^5.0.1
-    lodash: ^4.17.4
-    lodash-es: ^4.17.4
-  checksum: 78f476357960d1ffae2cac2da4ae6937d6c2d5350a51024bc457e4e2c1e5d65db0cd019508446575a54c306065afcbf278c3f186979d7f207c59f26966d1cf45
+"redux-persist@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "redux-persist@npm:6.0.0"
+  peerDependencies:
+    redux: ">4.0.0"
+  checksum: edaf10dbf17351ce8058d0802357adae8665b3a1ff39371834e37838ddbe1a79cccbc717b8ba54acb5307651ccf51d0f7dc1cbc8dbae0726ff952d11ef61c6b8
   languageName: node
   linkType: hard
 
