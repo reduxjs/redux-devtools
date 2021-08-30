@@ -44,6 +44,6 @@ export default function configureStore() {
     persistedReducer as any,
     composeEnhancers(applyMiddleware(exportState, api))
   );
-  persistStore(store);
-  return store;
+  const persistor = persistStore(store);
+  return { store, persistor };
 }
