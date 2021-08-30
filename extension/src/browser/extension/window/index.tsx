@@ -7,9 +7,9 @@ import { StoreState } from '@redux-devtools/app/lib/reducers';
 import App from '../../../app/containers/App';
 import configureStore from '../../../app/stores/windowStore';
 import getPreloadedState from '../background/getPreloadedState';
+import { MonitorMessage } from '../../../app/middlewares/api';
 
 import '../../views/window.pug';
-import { MonitorMessage } from '../../../app/middlewares/api';
 
 const position = location.hash;
 let preloadedState: PreloadedState<StoreState>;

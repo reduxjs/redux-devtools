@@ -6,6 +6,15 @@ import { Base16Theme } from 'base16';
 import { defaultStyle, themedStyle } from './styles';
 import { Theme } from '../themes/default';
 
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/addon/fold/foldgutter';
+import 'codemirror/addon/fold/foldcode';
+import 'codemirror/addon/fold/brace-fold';
+
+import '../../fonts/index.css';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/addon/fold/foldgutter.css';
+
 const EditorContainer = styled.div(
   '' as unknown as TemplateStringsArray,
   ({ theme }: { theme: Theme }) =>
