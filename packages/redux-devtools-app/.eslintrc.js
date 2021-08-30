@@ -2,11 +2,19 @@ module.exports = {
   extends: '../../.eslintrc',
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['src/*.ts', 'src/*.tsx'],
       extends: '../../eslintrc.ts.react.base.json',
       parserOptions: {
         tsconfigRootDir: __dirname,
         project: ['./tsconfig.json'],
+      },
+    },
+    {
+      files: ['demo/*.ts', 'demo/*.tsx'],
+      extends: '../../eslintrc.ts.react.base.json',
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+        project: ['./tsconfig.demo.json'],
       },
     },
     {
