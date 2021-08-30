@@ -1,4 +1,4 @@
-import openDevToolsWindow from './openWindow';
+import openDevToolsWindow, { DevToolsPosition } from './openWindow';
 
 export function createMenu() {
   const menus = [
@@ -33,5 +33,5 @@ export function removeMenu() {
 }
 
 chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
-  openDevToolsWindow(menuItemId);
+  openDevToolsWindow(menuItemId as DevToolsPosition);
 });

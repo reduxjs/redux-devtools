@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const extpath = path.join(__dirname, '../src/browser/extension/');
 const mock = `${extpath}chromeAPIMock`;
@@ -31,7 +32,15 @@ const baseConfig = (params) => ({
   },
   plugins: [
     new webpack.DefinePlugin(params.globals),
-    ...(params.plugins ? params.plugins : []),
+    ...(params.plugins
+      ? params.plugins
+      : [
+          new ForkTsCheckerWebpackPlugin({
+            typescript: {
+              configFile: 'tsconfig.json',
+            },
+          }),
+        ]),
   ].concat(
     params.copy
       ? new CopyPlugin({
