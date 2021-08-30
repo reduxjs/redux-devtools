@@ -11,6 +11,7 @@ import { Action, PreloadedState, Store } from 'redux';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
 import { PanelMessage } from '../../../app/middlewares/api';
 import { StoreActionWithTogglePersist } from '../../../app/stores/windowStore';
+import { StoreStateWithoutSocket } from '../../../app/reducers/panel';
 
 const position = location.hash;
 const messageStyle: CSSProperties = {
@@ -20,7 +21,9 @@ const messageStyle: CSSProperties = {
 };
 
 let rendered: boolean | undefined;
-let store: Store<StoreState, StoreActionWithTogglePersist> | undefined;
+let store:
+  | Store<StoreStateWithoutSocket, StoreActionWithTogglePersist>
+  | undefined;
 let bgConnection: chrome.runtime.Port;
 let naTimeout: NodeJS.Timeout;
 let preloadedState: PreloadedState<StoreState>;
