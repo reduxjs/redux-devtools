@@ -6,7 +6,7 @@ import {
 import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
 import { Dispatch, MiddlewareAPI } from 'redux';
 import { StoreState } from '@redux-devtools/app/lib/reducers';
-import { StoreAction } from '@redux-devtools/app/lib/src/actions';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
 
 function panelDispatcher(bgConnection: chrome.runtime.Port) {
   let autoselected = false;
