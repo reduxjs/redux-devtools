@@ -46,6 +46,7 @@ describe('Chrome extension', function () {
     await driver
       .findElement(webdriver.By.xpath('//button[text()="Inspector"]'))
       .click();
+    await delay(1000);
     const val = await driver
       .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
       .getText();
