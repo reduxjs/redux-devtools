@@ -91,6 +91,9 @@ describe('DevTools panel for Electron', function () {
   });
 
   it('should contain INIT action', async () => {
+    await driver
+      .findElement(webdriver.By.xpath('//button[text()="Inspector"]'))
+      .click();
     const element = await driver.wait(
       webdriver.until.elementLocated(
         webdriver.By.xpath('//div[contains(@class, "actionListRows-")]')
