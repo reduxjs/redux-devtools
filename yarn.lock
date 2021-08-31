@@ -4944,7 +4944,7 @@ __metadata:
     chalk: ^4.1.2
     cors: ^2.8.5
     cross-spawn: ^7.0.3
-    electron: ^13.2.2
+    electron: ^14.0.0
     express: ^4.17.1
     getport: ^0.1.0
     graphql: ^14.7.0
@@ -11250,9 +11250,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:^91.0.1":
-  version: 91.0.1
-  resolution: "chromedriver@npm:91.0.1"
+"chromedriver@npm:^92.0.2":
+  version: 92.0.2
+  resolution: "chromedriver@npm:92.0.2"
   dependencies:
     "@testim/chrome-version": ^1.0.7
     axios: ^0.21.1
@@ -11263,7 +11263,7 @@ __metadata:
     tcp-port-used: ^1.0.1
   bin:
     chromedriver: bin/chromedriver
-  checksum: 869fb9954d437bc17da40d142abcfc06ac0dc99b978d3b7e6718cf260a768b88d28aea9d3b8dcfe14bbdf197063b818972a3b3b692e695f64d7bfe8d988468c2
+  checksum: bb085f8e783d8b5174d2274560e0b7d4d5d66614932d1fa93e99e09dffa567593e92b336592504c340d3750641bb2ff9a0a790e9225cc82dc83116d53a66667d
   languageName: node
   linkType: hard
 
@@ -13609,16 +13609,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:^13.2.2":
-  version: 13.2.2
-  resolution: "electron@npm:13.2.2"
+"electron@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "electron@npm:14.0.0"
   dependencies:
     "@electron/get": ^1.0.1
     "@types/node": ^14.6.2
     extract-zip: ^1.0.3
   bin:
     electron: cli.js
-  checksum: b6c6b71ed574f6c6a28cc3ac973d5791ef0af30b7a431cad00e949e5b2d97338dc9093d2aee883696c6e637b573b51ea390b3cce8e72897129119ca8b53f7fc1
+  checksum: f07d52aab130ea596a295de0d1f620af73e0ce46462e5d73dc0f0e591daf92ef9c661e260ac00657e46d82e598758ad818a9d3eb3260968289bd44123119a1cf
   languageName: node
   linkType: hard
 
@@ -25946,8 +25946,8 @@ fsevents@^1.2.7:
     "@redux-devtools/utils": ^1.0.0-6
     "@types/jsan": ^3.1.2
     bestzip: ^2.2.0
-    chromedriver: ^91.0.1
-    electron: ^13.2.2
+    chromedriver: ^92.0.2
+    electron: ^14.0.0
     enzyme: ^3.11.0
     enzyme-adapter-react-16: ^1.15.6
     eslint: ^7.32.0
