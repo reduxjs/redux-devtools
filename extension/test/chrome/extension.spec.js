@@ -43,10 +43,7 @@ describe('Chrome extension', function () {
   });
 
   it("should contain inspector monitor's component", async () => {
-    await driver
-      .findElement(webdriver.By.xpath('//button[text()="Inspector"]'))
-      .click();
-    await delay(1000);
+    await delay(500);
     const val = await driver
       .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
       .getText();
