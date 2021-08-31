@@ -1,25 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { PreloadedState } from 'redux';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { UPDATE_STATE } from '@redux-devtools/app/lib/constants/actionTypes';
-import { StoreState } from '@redux-devtools/app/lib/reducers';
 import App from '../../../app/containers/App';
 import configureStore from '../../../app/stores/windowStore';
-import getPreloadedState from '../background/getPreloadedState';
 import { MonitorMessage } from '../../../app/middlewares/api';
 
 import '../../views/window.pug';
 
 const position = location.hash;
-let preloadedState: PreloadedState<StoreState>;
-getPreloadedState(position, (state) => {
-  preloadedState = state;
-});
 
 chrome.runtime.getBackgroundPage((window) => {
   const { store } = window!;
-  const localStore = configureStore(store, position, preloadedState);
+  const { store: localStore, persistor } = configureStore(store, position);
   let name = 'monitor';
   if (chrome && chrome.devtools && chrome.devtools.inspectedWindow) {
     name += chrome.devtools.inspectedWindow.tabId;
@@ -33,7 +27,9 @@ chrome.runtime.getBackgroundPage((window) => {
 
   render(
     <Provider store={localStore}>
-      <App position={position} />
+      <PersistGate loading={null} persistor={persistor}>
+        <App position={position} />
+      </PersistGate>
     </Provider>,
     document.getElementById('root')
   );

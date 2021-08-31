@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from '../../../src/app/stores/windowStore';
 import App from '../../../src/app/containers/App';
 
-const store = configureStore(store);
+const { store } = configureStore(store);
 const component = mount(
   <Provider store={store}>
     <App position="devtools-left" />

@@ -3,15 +3,15 @@ import {
   compose,
   applyMiddleware,
   Store,
-  PreloadedState,
   StoreEnhancer,
+  Reducer,
 } from 'redux';
+import localForage from 'localforage';
+import { persistReducer, persistStore } from 'redux-persist';
 import exportState from '@redux-devtools/app/lib/middlewares/exportState';
 import api from '@redux-devtools/app/lib/middlewares/api';
 import { CONNECT_REQUEST } from '@redux-devtools/app/lib/constants/socketActionTypes';
-import { StoreState } from '@redux-devtools/app/lib/reducers';
 import {
-  StoreAction,
   StoreActionWithoutUpdateState,
   UpdateStateAction,
 } from '@redux-devtools/app/lib/actions';
@@ -22,6 +22,7 @@ import rootReducer from '../reducers/window';
 import { BackgroundState } from '../reducers/background';
 import { BackgroundAction } from './backgroundStore';
 import { EmptyUpdateStateAction, NAAction } from '../middlewares/api';
+import { StoreState } from '@redux-devtools/app/lib/reducers';
 
 export interface ExpandedUpdateStateAction extends UpdateStateAction {
   readonly instances: InstancesState;
@@ -33,10 +34,20 @@ export type WindowStoreAction =
   | NAAction
   | EmptyUpdateStateAction;
 
+const persistConfig = {
+  key: 'redux-devtools',
+  blacklist: ['instances', 'socket'],
+  storage: localForage,
+};
+
+const persistedReducer: Reducer<StoreState, WindowStoreAction> = persistReducer(
+  persistConfig,
+  rootReducer
+) as any;
+
 export default function configureStore(
   baseStore: Store<BackgroundState, BackgroundAction>,
-  position: string,
-  preloadedState: PreloadedState<StoreState>
+  position: string
 ) {
   let enhancer: StoreEnhancer;
   const middlewares = [exportState, api, syncStores(baseStore)];
@@ -54,7 +65,8 @@ export default function configureStore(
         : (noop: unknown) => noop
     );
   }
-  const store = createStore(rootReducer, preloadedState, enhancer);
+  const store = createStore(persistedReducer, enhancer);
+  const persistor = persistStore(store);
 
   if (
     store.getState().connection.options.hostname &&
@@ -65,5 +77,5 @@ export default function configureStore(
     });
   }
 
-  return store;
+  return { store, persistor };
 }
