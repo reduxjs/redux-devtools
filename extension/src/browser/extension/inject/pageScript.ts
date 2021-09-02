@@ -426,13 +426,6 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       if (!features.lock && action.type === 'LOCK_CHANGES') return;
       if (!features.pause && action.type === 'PAUSE_RECORDING') return;
     }
-    if (action.type === 'JUMP_TO_STATE') {
-      const liftedState = store.liftedStore.getState();
-      const index = liftedState.stagedActionIds.indexOf(action.actionId);
-      if (index === -1) return;
-      store.liftedStore.dispatch({ type: action.type, index });
-      return;
-    }
     store.liftedStore.dispatch(action as any);
   }
 
