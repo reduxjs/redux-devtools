@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container } from 'devui';
 import SliderMonitor from './monitors/Slider';
-import { liftedDispatch as liftedDispatchAction, getReport } from '../actions';
+import { liftedDispatch, getReport } from '../actions';
 import { getActiveInstance } from '../reducers/instances';
 import DevTools from '../containers/DevTools';
 import Dispatcher from './monitors/Dispatcher';
@@ -69,7 +69,7 @@ const mapStateToProps = (state: StoreState) => {
 };
 
 const actionCreators = {
-  liftedDispatch: liftedDispatchAction,
+  liftedDispatch,
   getReport,
 };
 
