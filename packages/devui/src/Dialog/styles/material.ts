@@ -12,7 +12,7 @@ export const style = ({
   right: 0px;
   bottom: 0px;
   left: 0px;
-  z-index: 4;
+  z-index: 14;
   display: ${open ? 'flex' : 'none'};
   flex-direction: column;
   align-items: center;
@@ -33,7 +33,7 @@ export const style = ({
     flex-direction: column;
     box-sizing: border-box;
     position: relative;
-    z-index: 2;
+    z-index: 12;
     max-height: 100%;
     min-width: 320px;
     ${fullWidth ? 'width: 99%;' : ''}
