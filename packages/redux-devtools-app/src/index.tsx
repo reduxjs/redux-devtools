@@ -14,12 +14,17 @@ class Root extends Component {
   persistor?: Persistor;
 
   UNSAFE_componentWillMount() {
-    const { store, persistor } = configureStore();
+    const { store, persistor } = configureStore(
+      (store: Store<StoreState, StoreAction>) => {
+        if (store.getState().connection.type !== 'disabled') {
+          store.dispatch({
+            type: CONNECT_REQUEST,
+          });
+        }
+      }
+    );
     this.store = store;
     this.persistor = persistor;
-    store.dispatch({
-      type: CONNECT_REQUEST,
-    });
   }
 
   render() {
