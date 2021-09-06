@@ -14,7 +14,7 @@ export interface ConnectionState {
 export default function connection(
   state: ConnectionState = {
     options: { hostname: 'localhost', port: 8000, secure: false },
-    type: 'remotedev',
+    type: 'disabled',
   },
   action: StoreAction
 ) {

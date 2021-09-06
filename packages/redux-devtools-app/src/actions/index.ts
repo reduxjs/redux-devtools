@@ -332,7 +332,7 @@ export function toggleDispatcher(): ToggleDispatcherAction {
   return { type: TOGGLE_DISPATCHER };
 }
 
-export type ConnectionType = 'disabled' | 'remotedev' | 'custom';
+export type ConnectionType = 'disabled' | 'custom';
 export interface ConnectionOptions {
   readonly type: ConnectionType;
   readonly hostname: string;
