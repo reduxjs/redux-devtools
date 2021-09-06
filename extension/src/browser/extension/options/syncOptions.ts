@@ -6,8 +6,8 @@ export interface Options {
   readonly projectPath: string;
   readonly maxAge: number;
   readonly filter: FilterStateValue;
-  readonly whitelist: string;
-  readonly blacklist: string;
+  readonly allowlist: string;
+  readonly denylist: string;
   readonly shouldCatchErrors: boolean;
   readonly inject: boolean;
   readonly urls: string;
@@ -19,7 +19,13 @@ interface OldOrNewOptions {
   readonly editor: string;
   readonly projectPath: string;
   readonly maxAge: number;
-  readonly filter: FilterStateValue | boolean;
+  readonly filter:
+    | FilterStateValue
+    | 'WHITELIST_SPECIFIC'
+    | 'BLACKLIST_SPECIFIC'
+    | boolean;
+  readonly allowlist: string;
+  readonly denylist: string;
   readonly whitelist: string;
   readonly blacklist: string;
   readonly shouldCatchErrors: boolean;
@@ -54,10 +60,14 @@ const migrateOldOptions = (oldOptions: OldOrNewOptions): Options => ({
     // Migrate the old `filter` option from 2.2.1
     typeof oldOptions.filter === 'boolean'
       ? oldOptions.filter && oldOptions.whitelist.length > 0
-        ? FilterState.WHITELIST_SPECIFIC
+        ? FilterState.ALLOWLIST_SPECIFIC
         : oldOptions.filter
-        ? FilterState.BLACKLIST_SPECIFIC
+        ? FilterState.DENYLIST_SPECIFIC
         : FilterState.DO_NOT_FILTER
+      : oldOptions.filter === 'WHITELIST_SPECIFIC'
+      ? FilterState.ALLOWLIST_SPECIFIC
+      : oldOptions.filter === 'BLACKLIST_SPECIFIC'
+      ? FilterState.DENYLIST_SPECIFIC
       : oldOptions.filter,
 });
 
@@ -73,6 +83,8 @@ const get = (callback: (options: Options) => void) => {
         filter: FilterState.DO_NOT_FILTER,
         whitelist: '',
         blacklist: '',
+        allowlist: '',
+        denylist: '',
         shouldCatchErrors: false,
         inject: true,
         urls: '^https?://localhost|0\\.0\\.0\\.0:\\d+\n^https?://.+\\.github\\.io',
@@ -98,14 +110,14 @@ export const injectOptions = (newOptions: Options) => {
 
   options = {
     ...newOptions,
-    whitelist:
+    allowlist:
       newOptions.filter !== FilterState.DO_NOT_FILTER
-        ? toReg(newOptions.whitelist)!
-        : newOptions.whitelist,
-    blacklist:
+        ? toReg(newOptions.allowlist)!
+        : newOptions.allowlist,
+    denylist:
       newOptions.filter !== FilterState.DO_NOT_FILTER
-        ? toReg(newOptions.blacklist)!
-        : newOptions.blacklist,
+        ? toReg(newOptions.denylist)!
+        : newOptions.denylist,
   };
   let s = document.createElement('script');
   s.type = 'text/javascript';
