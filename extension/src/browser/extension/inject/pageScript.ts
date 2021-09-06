@@ -72,7 +72,7 @@ let reportId: string | null | undefined;
 function deprecateParam(oldParam: string, newParam: string) {
   /* eslint-disable no-console */
   console.warn(
-    `${oldParam} parameter is deprecated, use ${newParam} instead: https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md`
+    `${oldParam} parameter is deprecated, use ${newParam} instead: https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/API/Arguments.md`
   );
   /* eslint-enable no-console */
 }
@@ -84,8 +84,16 @@ export interface SerializeWithImmutable extends Serialize {
 
 export interface ConfigWithExpandedMaxAge {
   instanceId?: number;
+  /**
+   * @deprecated Use actionsDenylist instead.
+   */
   readonly actionsBlacklist?: string | readonly string[];
+  /**
+   * @deprecated Use actionsAllowlist instead.
+   */
   readonly actionsWhitelist?: string | readonly string[];
+  readonly actionsDenylist?: string | readonly string[];
+  readonly actionsAllowlist?: string | readonly string[];
   serialize?: boolean | SerializeWithImmutable;
   readonly serializeState?:
     | boolean
@@ -212,6 +220,14 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     predicate,
     latency = 500,
   } = config;
+
+  // Deprecate actionsWhitelist and actionsBlacklist
+  if (config.actionsWhitelist) {
+    deprecateParam('actionsWhiteList', 'actionsAllowlist');
+  }
+  if (config.actionsBlacklist) {
+    deprecateParam('actionsBlacklist', 'actionsDenylist');
+  }
 
   // Deprecate statesFilter and actionsFilter
   if (statesFilter) {
