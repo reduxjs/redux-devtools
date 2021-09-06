@@ -181,7 +181,7 @@ describe('Redux enhancer', () => {
       window.store = createStore(
         counter,
         window.__REDUX_DEVTOOLS_EXTENSION__({
-          actionsBlacklist: ['SOME_ACTION'],
+          actionsDenylist: ['SOME_ACTION'],
           statesFilter: (state) => state,
           serializeState: (key, value) => value,
         })
