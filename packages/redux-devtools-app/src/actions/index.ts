@@ -23,6 +23,7 @@ import {
   GET_REPORT_ERROR,
   GET_REPORT_SUCCESS,
   ERROR,
+  SET_PERSIST,
 } from '../constants/actionTypes';
 import {
   AUTH_ERROR,
@@ -302,6 +303,14 @@ export function togglePersist(): TogglePersistAction {
   return { type: TOGGLE_PERSIST };
 }
 
+export interface SetPersistAction {
+  type: typeof SET_PERSIST;
+  payload: boolean;
+}
+export function setPersist(persist: boolean): SetPersistAction {
+  return { type: SET_PERSIST, payload: persist };
+}
+
 export interface ToggleSyncAction {
   type: typeof TOGGLE_SYNC;
 }
@@ -561,6 +570,7 @@ export type StoreActionWithoutUpdateStateOrLiftedAction =
   | UpdateMonitorStateAction
   | ExportAction
   | TogglePersistAction
+  | SetPersistAction
   | ToggleSyncAction
   | ToggleSliderAction
   | ToggleDispatcherAction
