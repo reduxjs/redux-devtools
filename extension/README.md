@@ -100,7 +100,7 @@ To specify [extension’s options](https://github.com/zalmoxisus/redux-devtools-
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+        // Specify extension’s options like name, actionsDenylist, actionsCreators, serialize...
       })
     : compose;
 
@@ -143,7 +143,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const composeEnhancers = composeWithDevTools({
-  // Specify name here, actionsBlacklist, actionsCreators and other options if needed
+  // Specify name here, actionsDenylist, actionsCreators and other options if needed
 });
 const store = createStore(
   reducer,
@@ -165,7 +165,7 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 const store = createStore(
   reducer,
   /* preloadedState, */ devToolsEnhancer()
-  // Specify name here, actionsBlacklist, actionsCreators and other options if needed
+  // Specify name here, actionsDenylist, actionsCreators and other options if needed
 );
 ```
 
