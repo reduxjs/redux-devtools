@@ -35,7 +35,7 @@ class Header extends Component<Props> {
           title="Documentation"
           tooltipPosition="bottom"
           onClick={this.openLink(
-            'https://github.com/reduxjs/redux-devtools/tree/main/extension'
+            'https://github.com/reduxjs/redux-devtools/blob/main/README.md'
           )}
         >
           <GoBook />
