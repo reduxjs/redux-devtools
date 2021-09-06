@@ -92,8 +92,8 @@ class Dispatcher extends Component<Props, State> {
   selectActionCreator = (selected: 'default' | 'actions-help' | number) => {
     if (selected === 'actions-help') {
       window.open(
-        'https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/' +
-          'basics/Dispatcher.md'
+        'https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/' +
+          'API/Arguments.md#actioncreators'
       );
       return;
     }

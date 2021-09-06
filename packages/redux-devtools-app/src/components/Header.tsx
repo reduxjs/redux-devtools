@@ -34,7 +34,9 @@ class Header extends Component<Props> {
         <Button
           title="Documentation"
           tooltipPosition="bottom"
-          onClick={this.openLink('http://extension.remotedev.io')}
+          onClick={this.openLink(
+            'https://github.com/reduxjs/redux-devtools/blob/main/README.md'
+          )}
         >
           <GoBook />
         </Button>
@@ -42,7 +44,7 @@ class Header extends Component<Props> {
           title="Feedback"
           tooltipPosition="bottom"
           onClick={this.openLink(
-            'http://extension.remotedev.io/docs/Feedback.html'
+            'https://github.com/reduxjs/redux-devtools/discussions'
           )}
         >
           <IoMdText />
