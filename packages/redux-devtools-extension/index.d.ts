@@ -56,16 +56,28 @@ export interface EnhancerOptions {
   /**
    * *string or array of strings as regex* - actions types to be hidden / shown in the monitors (while passed to the reducers).
    * If `actionsWhitelist` specified, `actionsBlacklist` is ignored.
+   * @deprecated Use actionsDenylist instead.
    */
   actionsBlacklist?: string | string[];
   /**
    * *string or array of strings as regex* - actions types to be hidden / shown in the monitors (while passed to the reducers).
    * If `actionsWhitelist` specified, `actionsBlacklist` is ignored.
+   * @deprecated Use actionsAllowlist instead.
    */
   actionsWhitelist?: string | string[];
   /**
+   * *string or array of strings as regex* - actions types to be hidden / shown in the monitors (while passed to the reducers).
+   * If `actionsAllowlist` specified, `actionsDenylist` is ignored.
+   */
+  actionsDenylist?: string | string[];
+  /**
+   * *string or array of strings as regex* - actions types to be hidden / shown in the monitors (while passed to the reducers).
+   * If `actionsAllowlist` specified, `actionsDenylist` is ignored.
+   */
+  actionsAllowlist?: string | string[];
+  /**
    * called for every action before sending, takes `state` and `action` object, and returns `true` in case it allows sending the current data to the monitor.
-   * Use it as a more advanced version of `actionsBlacklist`/`actionsWhitelist` parameters.
+   * Use it as a more advanced version of `actionsDenylist`/`actionsAllowlist` parameters.
    */
   predicate?: <S, A extends Action>(state: S, action: A) => boolean;
   /**

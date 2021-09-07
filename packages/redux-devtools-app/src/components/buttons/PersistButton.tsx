@@ -26,8 +26,8 @@ class LockButton extends Component<Props> {
         mark={this.props.persisted && 'base0D'}
         title={
           this.props.persisted
-            ? 'Persist state history'
-            : 'Disable state persisting'
+            ? 'Disable state persisting'
+            : 'Persist state history'
         }
         onClick={this.props.onClick}
       >

@@ -5,13 +5,13 @@ import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 
 export type FilterStateValue =
   | 'DO_NOT_FILTER'
-  | 'BLACKLIST_SPECIFIC'
-  | 'WHITELIST_SPECIFIC';
+  | 'DENYLIST_SPECIFIC'
+  | 'ALLOWLIST_SPECIFIC';
 
 export const FilterState: { [K in FilterStateValue]: FilterStateValue } = {
   DO_NOT_FILTER: 'DO_NOT_FILTER',
-  BLACKLIST_SPECIFIC: 'BLACKLIST_SPECIFIC',
-  WHITELIST_SPECIFIC: 'WHITELIST_SPECIFIC',
+  DENYLIST_SPECIFIC: 'DENYLIST_SPECIFIC',
+  ALLOWLIST_SPECIFIC: 'ALLOWLIST_SPECIFIC',
 };
 
 function isArray(arg: unknown): arg is readonly unknown[] {
@@ -19,19 +19,17 @@ function isArray(arg: unknown): arg is readonly unknown[] {
 }
 
 interface LocalFilter {
-  readonly whitelist: string | undefined;
-  readonly blacklist: string | undefined;
+  readonly allowlist: string | undefined;
+  readonly denylist: string | undefined;
 }
 
 export function getLocalFilter(config: Config): LocalFilter | undefined {
-  if (config.actionsBlacklist || config.actionsWhitelist) {
+  const denylist = config.actionsDenylist ?? config.actionsBlacklist;
+  const allowlist = config.actionsAllowlist ?? config.actionsWhitelist;
+  if (denylist || allowlist) {
     return {
-      whitelist: isArray(config.actionsWhitelist)
-        ? config.actionsWhitelist.join('|')
-        : config.actionsWhitelist,
-      blacklist: isArray(config.actionsBlacklist)
-        ? config.actionsBlacklist.join('|')
-        : config.actionsBlacklist,
+      allowlist: isArray(allowlist) ? allowlist.join('|') : allowlist,
+      denylist: isArray(denylist) ? denylist.join('|') : denylist,
     };
   }
   return undefined;
@@ -56,11 +54,11 @@ export function isFiltered<A extends Action<unknown>>(
     return false;
   }
 
-  const { whitelist, blacklist } = localFilter || window.devToolsOptions || {};
+  const { allowlist, denylist } = localFilter || window.devToolsOptions || {};
   const actionType = ((action as A).type || action) as string;
   return (
-    (whitelist && !actionType.match(whitelist)) ||
-    (blacklist && actionType.match(blacklist))
+    (allowlist && !actionType.match(allowlist)) ||
+    (denylist && actionType.match(denylist))
   );
 }
 

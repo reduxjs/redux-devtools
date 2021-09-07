@@ -10,8 +10,8 @@ interface State {
 
 export const FilterState = {
   DO_NOT_FILTER: 'DO_NOT_FILTER',
-  BLACKLIST_SPECIFIC: 'BLACKLIST_SPECIFIC',
-  WHITELIST_SPECIFIC: 'WHITELIST_SPECIFIC',
+  DENYLIST_SPECIFIC: 'DENYLIST_SPECIFIC',
+  ALLOWLIST_SPECIFIC: 'ALLOWLIST_SPECIFIC',
 };
 
 export function arrToRegex(v: string | string[]) {
@@ -41,20 +41,20 @@ function filterStates(
 }
 
 interface Config {
-  actionsBlacklist?: string[];
-  actionsWhitelist?: string[];
+  actionsDenylist?: string[];
+  actionsAllowlist?: string[];
 }
 
 interface LocalFilter {
-  whitelist?: string;
-  blacklist?: string;
+  allowlist?: string;
+  denylist?: string;
 }
 
 export function getLocalFilter(config: Config): LocalFilter | undefined {
-  if (config.actionsBlacklist || config.actionsWhitelist) {
+  if (config.actionsDenylist || config.actionsAllowlist) {
     return {
-      whitelist: config.actionsWhitelist && config.actionsWhitelist.join('|'),
-      blacklist: config.actionsBlacklist && config.actionsBlacklist.join('|'),
+      allowlist: config.actionsAllowlist && config.actionsAllowlist.join('|'),
+      denylist: config.actionsDenylist && config.actionsDenylist.join('|'),
     };
   }
   return undefined;
@@ -63,10 +63,10 @@ export function getLocalFilter(config: Config): LocalFilter | undefined {
 interface DevToolsOptions {
   filter?:
     | typeof FilterState.DO_NOT_FILTER
-    | typeof FilterState.BLACKLIST_SPECIFIC
-    | typeof FilterState.WHITELIST_SPECIFIC;
-  whitelist?: string;
-  blacklist?: string;
+    | typeof FilterState.DENYLIST_SPECIFIC
+    | typeof FilterState.ALLOWLIST_SPECIFIC;
+  allowlist?: string;
+  denylist?: string;
 }
 function getDevToolsOptions() {
   return (
@@ -90,12 +90,12 @@ export function isFiltered(
   )
     return false;
 
-  const { whitelist, blacklist } = localFilter || opts;
+  const { allowlist, denylist } = localFilter || opts;
   return (
     // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (whitelist && !(type as string).match(whitelist)) ||
+    (allowlist && !(type as string).match(allowlist)) ||
     // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (blacklist && (type as string).match(blacklist))
+    (denylist && (type as string).match(denylist))
   );
 }
 

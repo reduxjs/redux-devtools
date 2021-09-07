@@ -66,16 +66,13 @@ export default function configureStore(
     );
   }
   const store = createStore(persistedReducer, enhancer);
-  const persistor = persistStore(store);
-
-  if (
-    store.getState().connection.options.hostname &&
-    store.getState().connection.options.port
-  ) {
-    store.dispatch({
-      type: CONNECT_REQUEST,
-    });
-  }
+  const persistor = persistStore(store, null, () => {
+    if (store.getState().connection.type !== 'disabled') {
+      store.dispatch({
+        type: CONNECT_REQUEST,
+      });
+    }
+  });
 
   return { store, persistor };
 }

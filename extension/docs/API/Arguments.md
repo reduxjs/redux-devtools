@@ -240,9 +240,9 @@ const store = createStore(
 );
 ```
 
-### `actionsBlacklist` / `actionsWhitelist`
+### `actionsDenylist` / `actionsAllowlist`
 
-_string or array of strings as regex_ - actions types to be hidden / shown in the monitors (while passed to the reducers). If `actionsWhitelist` specified, `actionsBlacklist` is ignored.
+_string or array of strings as regex_ - actions types to be hidden / shown in the monitors (while passed to the reducers). If `actionsAllowlist` specified, `actionsDenylist` is ignored.
 
 Example:
 
@@ -251,16 +251,16 @@ createStore(
   reducer,
   remotedev({
     sendTo: 'http://localhost:8000',
-    actionsBlacklist: 'SOME_ACTION',
-    // or actionsBlacklist: ['SOME_ACTION', 'SOME_OTHER_ACTION']
-    // or just actionsBlacklist: 'SOME_' to omit both
+    actionsDenylist: 'SOME_ACTION',
+    // or actionsDenylist: ['SOME_ACTION', 'SOME_OTHER_ACTION']
+    // or just actionsDenylist: 'SOME_' to omit both
   })
 );
 ```
 
 ### `predicate`
 
-_function_ - called for every action before sending, takes `state` and `action` object, and returns `true` in case it allows sending the current data to the monitor. Use it as a more advanced version of `actionsBlacklist`/`actionsWhitelist` parameters.
+_function_ - called for every action before sending, takes `state` and `action` object, and returns `true` in case it allows sending the current data to the monitor. Use it as a more advanced version of `actionsDenylist`/`actionsAllowlist` parameters.
 Example of usage:
 
 ```js

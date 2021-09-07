@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container, Form } from 'devui';
 import {
-  JSONSchema7,
   JSONSchema7Definition,
   JSONSchema7Type,
   JSONSchema7TypeName,
@@ -33,12 +32,8 @@ const defaultSchema: Schema = {
     type: {
       title: 'Connection settings (for getting reports and remote debugging)',
       type: 'string',
-      enum: ['disabled', 'remotedev', 'custom'],
-      enumNames: [
-        'no remote connection',
-        'connect via remotedev.io',
-        'use local (custom) server',
-      ],
+      enum: ['disabled', 'custom'],
+      enumNames: ['no remote connection', 'use local (custom) server'],
     },
     hostname: {
       type: 'string',
