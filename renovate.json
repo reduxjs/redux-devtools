@@ -35,6 +35,11 @@
     {
       "matchPackageNames": ["node"],
       "groupName": "node"
+    },
+    {
+      "matchPackageNames": ["prettier"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "groupName": "prettier"
     }
   ]
 }
