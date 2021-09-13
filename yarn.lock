@@ -9373,7 +9373,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.21.1":
+"axios@npm:^0.21.2":
   version: 0.21.3
   resolution: "axios@npm:0.21.3"
   dependencies:
@@ -10887,12 +10887,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:^92.0.2":
-  version: 92.0.2
-  resolution: "chromedriver@npm:92.0.2"
+"chromedriver@npm:^93.0.1":
+  version: 93.0.1
+  resolution: "chromedriver@npm:93.0.1"
   dependencies:
     "@testim/chrome-version": ^1.0.7
-    axios: ^0.21.1
+    axios: ^0.21.2
     del: ^6.0.0
     extract-zip: ^2.0.1
     https-proxy-agent: ^5.0.0
@@ -10900,7 +10900,7 @@ __metadata:
     tcp-port-used: ^1.0.1
   bin:
     chromedriver: bin/chromedriver
-  checksum: bb085f8e783d8b5174d2274560e0b7d4d5d66614932d1fa93e99e09dffa567593e92b336592504c340d3750641bb2ff9a0a790e9225cc82dc83116d53a66667d
+  checksum: 91a5c29c55cf058f7f95af1141bcc4df076b1fd0e90e6b05d16adbb5aefd8ebdfc315d01da584de58f8f77c3382cab231ae494601e332de6b529523272f27997
   languageName: node
   linkType: hard
 
@@ -25436,7 +25436,7 @@ fsevents@^1.2.7:
     "@redux-devtools/utils": ^1.0.0-6
     "@types/jsan": ^3.1.2
     bestzip: ^2.2.0
-    chromedriver: ^92.0.2
+    chromedriver: ^93.0.1
     electron: ^14.0.0
     enzyme: ^3.11.0
     enzyme-adapter-react-16: ^1.15.6
