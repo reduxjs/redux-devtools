@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 import { CONNECT_REQUEST } from './constants/socketActionTypes';
 import App from './containers/App';
 import { StoreState } from './reducers';
-import { StoreAction } from './actions';
+import { StoreAction, applyMediaFeaturesPreferences } from './actions';
 
 class Root extends Component {
   store?: Store<StoreState, StoreAction>;
@@ -27,11 +27,26 @@ class Root extends Component {
     this.persistor = persistor;
   }
 
+  /**
+   * @hidden
+   * @private
+   */
+  private _checkMediaFeaturesPreferences = () => {
+    if (this.store) {
+      this.store.dispatch(applyMediaFeaturesPreferences());
+    }
+  };
+
   render() {
     if (!this.store) return null;
+
     return (
       <Provider store={this.store}>
-        <PersistGate loading={null} persistor={this.persistor!}>
+        <PersistGate
+          loading={null}
+          persistor={this.persistor!}
+          onBeforeLift={this._checkMediaFeaturesPreferences}
+        >
           <App />
         </PersistGate>
       </Provider>
