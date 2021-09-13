@@ -118,8 +118,7 @@ interface Tally {
 
 export type QueryTally = {
   [key in QueryStatus]?: number;
-} &
-  Tally;
+} & Tally;
 
 export interface RtkRequestTiming {
   requestId: string;
