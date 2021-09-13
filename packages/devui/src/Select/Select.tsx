@@ -73,6 +73,10 @@ export class Select<
               borderColor: props.theme.colors.neutral10,
             },
           }),
+          menu: (base) => ({
+            ...base,
+            zIndex: 10,
+          }),
         }}
       />
     );

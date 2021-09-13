@@ -65,13 +65,13 @@ const store = createStore(
   /* preloadedState, */ compose(
     devToolsEnhancer({
       instaceID: 1,
-      name: 'Blacklisted',
-      actionsBlacklist: '...',
+      name: 'Denylisted',
+      actionsDenylist: '...',
     }),
     devToolsEnhancer({
       instaceID: 2,
-      name: 'Whitelisted',
-      actionsWhitelist: '...',
+      name: 'Allowlisted',
+      actionsAllowlist: '...',
     })
   )
 );

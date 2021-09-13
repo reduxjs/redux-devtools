@@ -8,6 +8,7 @@ import {
   REMOVE_INSTANCE,
   TOGGLE_PERSIST,
   TOGGLE_SYNC,
+  SET_PERSIST,
 } from '../constants/actionTypes';
 import { DISCONNECTED } from '../constants/socketActionTypes';
 import parseJSON from '../utils/parseJSON';
@@ -349,6 +350,8 @@ export default function instances(
       };
     case TOGGLE_PERSIST:
       return { ...state, persisted: !state.persisted };
+    case SET_PERSIST:
+      return { ...state, persisted: action.payload };
     case TOGGLE_SYNC:
       return { ...state, sync: !state.sync };
     case SELECT_INSTANCE:

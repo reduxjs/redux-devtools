@@ -3,6 +3,8 @@ import {
   UPDATE_STATE,
   REMOVE_INSTANCE,
   LIFTED_ACTION,
+  TOGGLE_PERSIST,
+  SET_PERSIST,
 } from '@redux-devtools/app/lib/constants/actionTypes';
 import { nonReduxDispatch } from '@redux-devtools/app/lib/utils/monitorActions';
 import syncOptions, {
@@ -18,8 +20,9 @@ import {
   CustomAction,
   DispatchAction as AppDispatchAction,
   LibConfig,
+  SetPersistAction,
 } from '@redux-devtools/app/lib/actions';
-import { Action, Dispatch } from 'redux';
+import { Action, Dispatch, MiddlewareAPI } from 'redux';
 import {
   ContentScriptToBackgroundMessage,
   SplitMessage,
@@ -35,6 +38,7 @@ import {
   LiftedActionAction,
 } from '../stores/backgroundStore';
 import { Position } from '../api/openWindow';
+import { BackgroundState } from '../reducers/background';
 
 interface TabMessageBase {
   readonly type: string;
@@ -183,8 +187,13 @@ export type TabMessage =
 export type PanelMessage<S, A extends Action<unknown>> =
   | NAAction
   | ErrorMessage
-  | UpdateStateAction<S, A>;
-export type MonitorMessage = NAAction | ErrorMessage | EmptyUpdateStateAction;
+  | UpdateStateAction<S, A>
+  | SetPersistAction;
+export type MonitorMessage =
+  | NAAction
+  | ErrorMessage
+  | EmptyUpdateStateAction
+  | SetPersistAction;
 
 type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: (message: TabMessage) => void;
@@ -224,7 +233,8 @@ const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
 type MonitorAction<S, A extends Action<unknown>> =
   | NAAction
   | ErrorMessage
-  | UpdateStateAction<S, A>;
+  | UpdateStateAction<S, A>
+  | SetPersistAction;
 
 function toMonitors<S, A extends Action<unknown>>(
   action: MonitorAction<S, A>,
@@ -233,7 +243,9 @@ function toMonitors<S, A extends Action<unknown>>(
 ) {
   Object.keys(connections.monitor).forEach((id) => {
     connections.monitor[id].postMessage(
-      verbose || action.type === 'ERROR' ? action : { type: UPDATE_STATE }
+      verbose || action.type === 'ERROR' || action.type === SET_PERSIST
+        ? action
+        : { type: UPDATE_STATE }
     );
   });
   Object.keys(connections.panel).forEach((id) => {
@@ -582,9 +594,18 @@ declare global {
 
 window.syncOptions = syncOptions(toAllTabs); // Expose to the options page
 
-export default function api() {
+export default function api(
+  store: MiddlewareAPI<Dispatch<BackgroundAction>, BackgroundState>
+) {
   return (next: Dispatch<BackgroundAction>) => (action: BackgroundAction) => {
     if (action.type === LIFTED_ACTION) toContentScript(action);
+    else if (action.type === TOGGLE_PERSIST) {
+      togglePersist();
+      toMonitors({
+        type: SET_PERSIST,
+        payload: !store.getState().instances.persisted,
+      });
+    }
     return next(action);
   };
 }

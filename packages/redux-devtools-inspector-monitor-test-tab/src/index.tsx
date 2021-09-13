@@ -128,7 +128,7 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
     return (
       <Container>
         <Toolbar>
-          <div style={{ flexGrow: 1, zIndex: 10 }}>
+          <div style={{ flexGrow: 1 }}>
             <Select
               options={templates}
               getOptionValue={(template: Template) => template.name!}

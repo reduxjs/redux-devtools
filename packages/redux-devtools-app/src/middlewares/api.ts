@@ -1,7 +1,6 @@
 import socketCluster, { SCClientSocket } from 'socketcluster-client';
 import { stringify } from 'jsan';
 import { Dispatch, MiddlewareAPI } from 'redux';
-import socketOptions from '../constants/socketOptions';
 import * as actions from '../constants/socketActionTypes';
 import { getActiveInstance } from '../reducers/instances';
 import {
@@ -193,9 +192,7 @@ function connect() {
   if (process.env.NODE_ENV === 'test') return;
   const connection = store.getState().connection;
   try {
-    socket = socketCluster.create(
-      connection.type === 'remotedev' ? socketOptions : connection.options
-    );
+    socket = socketCluster.create(connection.options);
     handleConnection();
   } catch (error) {
     store.dispatch({ type: actions.CONNECT_ERROR, error });
@@ -204,8 +201,10 @@ function connect() {
 }
 
 function disconnect() {
-  socket.disconnect();
-  socket.off();
+  if (socket) {
+    socket.disconnect();
+    socket.off();
+  }
 }
 
 function login() {

@@ -1,6 +1,7 @@
 import {
   UPDATE_STATE,
   LIFTED_ACTION,
+  TOGGLE_PERSIST,
 } from '@redux-devtools/app/lib/constants/actionTypes';
 import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
 import { Dispatch, MiddlewareAPI, Store } from 'redux';
@@ -21,7 +22,7 @@ const syncStores =
         instances: baseStore.getState().instances,
       });
     }
-    if (action.type === LIFTED_ACTION) {
+    if (action.type === LIFTED_ACTION || action.type === TOGGLE_PERSIST) {
       const instances = store.getState().instances;
       const instanceId = getActiveInstance(instances);
       const id = instances.options[instanceId].connectionId;

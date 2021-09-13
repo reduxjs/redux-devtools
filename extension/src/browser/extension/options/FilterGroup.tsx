@@ -29,8 +29,8 @@ export default ({ options, saveOption }: OptionsProps) => {
           id="filter-hide"
           name="filter"
           type="radio"
-          checked={options.filter === FilterState.BLACKLIST_SPECIFIC}
-          onChange={() => saveOption('filter', FilterState.BLACKLIST_SPECIFIC)}
+          checked={options.filter === FilterState.DENYLIST_SPECIFIC}
+          onChange={() => saveOption('filter', FilterState.DENYLIST_SPECIFIC)}
         />
         <label className="option__label" htmlFor="filter-hide">
           Hide the following:
@@ -38,9 +38,9 @@ export default ({ options, saveOption }: OptionsProps) => {
         <br />
         <textarea
           className="option__textarea"
-          value={options.blacklist}
-          disabled={options.filter !== FilterState.BLACKLIST_SPECIFIC}
-          onChange={(e) => saveOption('blacklist', e.target.value)}
+          value={options.denylist}
+          disabled={options.filter !== FilterState.DENYLIST_SPECIFIC}
+          onChange={(e) => saveOption('denylist', e.target.value)}
         />
         <div className="option__hint">Each action from the new line</div>
       </div>
@@ -51,8 +51,8 @@ export default ({ options, saveOption }: OptionsProps) => {
           id="filter-show"
           name="filter"
           type="radio"
-          checked={options.filter === FilterState.WHITELIST_SPECIFIC}
-          onChange={() => saveOption('filter', FilterState.WHITELIST_SPECIFIC)}
+          checked={options.filter === FilterState.ALLOWLIST_SPECIFIC}
+          onChange={() => saveOption('filter', FilterState.ALLOWLIST_SPECIFIC)}
         />
         <label className="option__label" htmlFor="filter-show">
           Show the following:
@@ -60,9 +60,9 @@ export default ({ options, saveOption }: OptionsProps) => {
         <br />
         <textarea
           className="option__textarea"
-          value={options.whitelist}
-          disabled={options.filter !== FilterState.WHITELIST_SPECIFIC}
-          onChange={(e) => saveOption('whitelist', e.target.value)}
+          value={options.allowlist}
+          disabled={options.filter !== FilterState.ALLOWLIST_SPECIFIC}
+          onChange={(e) => saveOption('allowlist', e.target.value)}
         />
         <div className="option__hint">Each action from the new line</div>
       </div>
