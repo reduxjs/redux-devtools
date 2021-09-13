@@ -4673,7 +4673,7 @@ __metadata:
     chalk: ^4.1.2
     cors: ^2.8.5
     cross-spawn: ^7.0.3
-    electron: ^14.0.0
+    electron: ^14.0.1
     express: ^4.17.1
     getport: ^0.1.0
     graphql: ^14.7.0
@@ -13211,16 +13211,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:^14.0.0":
-  version: 14.0.0
-  resolution: "electron@npm:14.0.0"
+"electron@npm:^14.0.1":
+  version: 14.0.1
+  resolution: "electron@npm:14.0.1"
   dependencies:
     "@electron/get": ^1.0.1
     "@types/node": ^14.6.2
     extract-zip: ^1.0.3
   bin:
     electron: cli.js
-  checksum: f07d52aab130ea596a295de0d1f620af73e0ce46462e5d73dc0f0e591daf92ef9c661e260ac00657e46d82e598758ad818a9d3eb3260968289bd44123119a1cf
+  checksum: 91bc2dd399450c26a98b11b166208cc09e454d72c83b0ab77d209de9285fa87b2a8f7b470c3893225756cdc5d4a82eeeebfb93fa102efc7780d92abb881378da
   languageName: node
   linkType: hard
 
@@ -25437,7 +25437,7 @@ fsevents@^1.2.7:
     "@types/jsan": ^3.1.2
     bestzip: ^2.2.0
     chromedriver: ^93.0.1
-    electron: ^14.0.0
+    electron: ^14.0.1
     enzyme: ^3.11.0
     enzyme-adapter-react-16: ^1.15.6
     eslint: ^7.32.0
@@ -25894,7 +25894,7 @@ resolve@^2.0.0-next.3:
     url-loader: ^4.1.1
     webpack: ^5.52.1
     webpack-cli: ^4.8.0
-    webpack-dev-server: ^4.2.0
+    webpack-dev-server: ^4.2.1
   languageName: unknown
   linkType: soft
 
@@ -29820,9 +29820,9 @@ typescript@~4.3.5:
   languageName: node
   linkType: hard
 
-"webpack-dev-server@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "webpack-dev-server@npm:4.2.0"
+"webpack-dev-server@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "webpack-dev-server@npm:4.2.1"
   dependencies:
     ansi-html-community: ^0.0.8
     bonjour: ^3.5.0
@@ -29856,7 +29856,7 @@ typescript@~4.3.5:
       optional: true
   bin:
     webpack-dev-server: bin/webpack-dev-server.js
-  checksum: 67392d41771eb4f8be32d53bc77b62318cf11d2b5f7703102240085db65c99dd450bbd9519361c3e10c8329959c6c2e3875a081166e4ec11e9c93516bfb7cc31
+  checksum: 553cba00afd36206ab06a23ba44139aef1e44d1fba5dab9326c053591041768d2f5db0cd3af7e0186f34b57db58ac2c5c029f02a984825a477afa76d1bb65981
   languageName: node
   linkType: hard
 
