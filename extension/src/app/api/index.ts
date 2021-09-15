@@ -706,11 +706,9 @@ export function connect(preConfig: Config): ConnectResponse {
   };
 }
 
-export function updateStore<S, A extends Action<unknown>>(
-  stores: {
-    [K in string | number]: EnhancedStore<S, A, unknown>;
-  }
-) {
+export function updateStore<S, A extends Action<unknown>>(stores: {
+  [K in string | number]: EnhancedStore<S, A, unknown>;
+}) {
   return function (newStore: EnhancedStore<S, A, unknown>, instanceId: number) {
     /* eslint-disable no-console */
     console.warn(
