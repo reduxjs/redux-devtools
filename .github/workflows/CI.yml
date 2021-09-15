@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: yarn install --immutable
+      - run: yarn install
       - run: yarn prettier:check
       - run: yarn build:all
       - run: yarn lint:all
