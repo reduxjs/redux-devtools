@@ -32,10 +32,10 @@ Check out [examples](examples) directory for more details.
 
 ### Theming
 
-This component now uses [react-base16-styling](https://github.com/alexkuz/react-base16-styling) module, which allows to customize component via `theme` property, which can be the following:
+This component now uses [react-base16-styling](https://github.com/reduxjs/redux-devtools/tree/main/packages/react-base16-styling) module, which allows to customize component via `theme` property, which can be the following:
 
 - [base16](http://chriskempson.com/projects/base16/) theme data. [The example theme data can be found here](https://github.com/gaearon/redux-devtools/tree/75322b15ee7ba03fddf10ac3399881e302848874/src/react/themes).
-- object that contains style objects, strings (that treated as classnames) or functions. A function is used to extend its first argument `{ style, className }` and should return an object with the same structure. Other arguments depend on particular context (and should be described here). See [createStylingFromTheme.js](https://github.com/alexkuz/react-json-tree/blob/feature-refactor-styling/src/createStylingFromTheme.js) for the list of styling object keys. Also, this object can extend `base16` theme via `extend` property.
+- object that contains style objects, strings (that treated as classnames) or functions. A function is used to extend its first argument `{ style, className }` and should return an object with the same structure. Other arguments depend on particular context (and should be described here). See [createStylingFromTheme.js](https://github.com/reduxjs/redux-devtools/blob/main/packages/react-json-tree/src/createStylingFromTheme.ts) for the list of styling object keys. Also, this object can extend `base16` theme via `extend` property.
 
 Every theme has a light version, which is enabled with `invertTheme` prop.
 

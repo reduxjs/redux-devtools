@@ -1,7 +1,7 @@
 # Redux DevTools Dock Monitor
 
 A resizable and movable dock for [Redux DevTools](https://github.com/reduxjs/redux-devtools).  
-Powered by [React Dock](https://github.com/alexkuz/react-dock).
+Powered by [React Dock](https://github.com/reduxjs/redux-devtools/tree/main/packages/react-dock).
 
 ![](http://i.imgur.com/QbNzNW4.gif)
 
