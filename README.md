@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/reduxjs/redux-devtools.svg?branch=master)](https://travis-ci.org/reduxjs/redux-devtools) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=round-square)](https://github.com/reduxjs/redux-devtools/pulls)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/reduxjs/redux-devtools/CI) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=round-square)](https://github.com/reduxjs/redux-devtools/pulls)
 
 # Redux DevTools
 

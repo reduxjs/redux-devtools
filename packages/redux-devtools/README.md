@@ -14,7 +14,6 @@ A live-editing time travel environment for [Redux](https://github.com/reactjs/re
 - [Custom Monitors](#custom-monitors)
 - [License](#license)
 
-[![build status](https://img.shields.io/travis/reduxjs/redux-devtools/master.svg?style=flat-square)](https://travis-ci.org/reduxjs/redux-devtools)
 [![npm version](https://img.shields.io/npm/v/redux-devtools.svg?style=flat-square)](https://www.npmjs.com/package/redux-devtools)
 [![npm downloads](https://img.shields.io/npm/dm/redux-devtools.svg?style=flat-square)](https://www.npmjs.com/package/redux-devtools)
 [![redux channel on discord](https://img.shields.io/badge/discord-redux@reactiflux-738bd7.svg?style=flat-square)](https://discord.gg/0ZcbPKXt5bWb10Ma)
