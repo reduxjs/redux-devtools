@@ -5,11 +5,11 @@
     "prettier": "2.4.1"
   },
   "scripts": {
+    "format": "prettier --write .",
     "build:all": "lerna run build",
     "lint:all": "lerna run lint",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "test:all": "lerna run test"
+    "test:all": "lerna run test",
+    "format:check": "prettier --check ."
   },
   "workspaces": [
     "extension",
