@@ -16,4 +16,7 @@ jobs:
       - run: yarn prettier:check
       - run: yarn build:all
       - run: yarn lint:all
-      - run: yarn test:all
+      - name: Run yarn test:all
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: yarn test:all
