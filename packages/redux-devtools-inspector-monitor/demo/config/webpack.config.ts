@@ -47,7 +47,7 @@ module.exports = {
         configFile: 'demo/tsconfig.json',
       },
     }),
-    ...(isProduction ? [] : [new webpack.HotModuleReplacementPlugin()])
+    ...(isProduction ? [] : [new webpack.HotModuleReplacementPlugin()]),
   ],
   devServer: isProduction
     ? {}
