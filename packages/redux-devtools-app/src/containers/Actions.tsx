@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { Container } from 'devui';
+import { Container } from '@redux-devtools/ui';
 import SliderMonitor from './monitors/Slider';
 import { liftedDispatch, getReport } from '../actions';
 import { getActiveInstance } from '../reducers/instances';

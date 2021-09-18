@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { connect } from 'react-redux';
-import { Button, Toolbar, Spacer } from 'devui';
+import { Button, Toolbar, Spacer } from '@redux-devtools/ui';
 import { push as pushRoute } from 'connected-react-router';
 import pkg from '../../../package.json';
 import getOptions from './getOptions';

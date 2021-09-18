@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Editor } from 'devui';
+import { Editor } from '@redux-devtools/ui';
 import { stringify } from 'javascript-stringify';
 
 interface Props {

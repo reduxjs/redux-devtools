@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { Button } from 'devui';
+import { Button } from '@redux-devtools/ui';
 import { TiDownload } from 'react-icons/ti';
 import { exportState } from '../../actions';
 

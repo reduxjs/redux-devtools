@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'devui';
+import { Button } from '@redux-devtools/ui';
 import { IoIosLock } from 'react-icons/io';
 import { lockChanges, StoreAction } from '../../actions';
 import { Dispatch } from 'redux';

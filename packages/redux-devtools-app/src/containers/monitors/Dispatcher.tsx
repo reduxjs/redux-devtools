@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Button, Select, Editor, Toolbar } from 'devui';
+import { Button, Select, Editor, Toolbar } from '@redux-devtools/ui';
 import { connect, ResolveThunks } from 'react-redux';
 import { dispatchRemotely } from '../../actions';
 import { Options } from '../../reducers/instances';

@@ -6,7 +6,7 @@ import getMonitor from '../utils/getMonitor';
 import { InitMonitorAction } from '../actions';
 import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
-import { ThemeFromProvider } from 'devui';
+import { ThemeFromProvider } from '@redux-devtools/ui';
 
 interface Props {
   monitor: string;

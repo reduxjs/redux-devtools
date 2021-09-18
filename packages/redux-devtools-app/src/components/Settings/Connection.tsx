@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { Container, Form } from 'devui';
+import { Container, Form } from '@redux-devtools/ui';
 import {
   JSONSchema7Definition,
   JSONSchema7Type,

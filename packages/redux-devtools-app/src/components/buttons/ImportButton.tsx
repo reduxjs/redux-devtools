@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler, Component, RefCallback } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { Button } from 'devui';
+import { Button } from '@redux-devtools/ui';
 import { TiUpload } from 'react-icons/ti';
 import { importState } from '../../actions';
 

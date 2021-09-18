@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tabs } from 'devui';
+import { Tabs } from '@redux-devtools/ui';
 import Connection from './Connection';
 import Themes from './Themes';
 

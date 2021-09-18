@@ -4,7 +4,7 @@ import { withTheme } from 'styled-components';
 import { InputOptions, NodeWithId, tree } from 'd3-state-visualizer';
 import { getPath } from '../ChartMonitorWrapper';
 import { updateMonitorState } from '../../../actions';
-import { ThemeFromProvider } from 'devui';
+import { ThemeFromProvider } from '@redux-devtools/ui';
 
 const style = {
   width: '100%',

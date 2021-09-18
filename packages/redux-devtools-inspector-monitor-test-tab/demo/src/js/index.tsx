@@ -1,7 +1,7 @@
-import 'devui/lib/presets';
+import '@redux-devtools/ui/lib/presets';
 import React from 'react';
 import { render } from 'react-dom';
-import { Container } from 'devui';
+import { Container } from '@redux-devtools/ui';
 import { Provider } from 'react-redux';
 import {
   createStore,

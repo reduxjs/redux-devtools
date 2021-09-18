@@ -1,4 +1,4 @@
-import { Scheme, Theme } from 'devui';
+import { Scheme, Theme } from '@redux-devtools/ui';
 import { CHANGE_THEME } from '../constants/actionTypes';
 import { StoreAction } from '../actions';
 
