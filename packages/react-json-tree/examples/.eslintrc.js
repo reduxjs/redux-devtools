@@ -1,14 +1,10 @@
 module.exports = {
-  extends: '../../../.eslintrc',
+  extends: '../../../eslintrc.ts.react.base.json',
+  parserOptions: {
+    tsconfigRootDir: __dirname,
+    project: ['./tsconfig.json'],
+  },
   overrides: [
-    {
-      files: ['*.ts', '*.tsx'],
-      extends: '../../../eslintrc.ts.react.base.json',
-      parserOptions: {
-        tsconfigRootDir: __dirname,
-        project: ['./tsconfig.json'],
-      },
-    },
     {
       files: ['webpack.config.ts'],
       extends: '../../../eslintrc.ts.base.json',

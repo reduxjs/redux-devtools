@@ -17,13 +17,13 @@ module.exports = {
     rules: [
       {
         test: /\.(js|ts)x?$/,
-        loaders: ['babel-loader'],
+        loader: 'babel-loader',
         exclude: /node_modules/,
         include: __dirname,
       },
       {
         test: /\.css?$/,
-        loaders: [
+        use: [
           'style-loader',
           {
             loader: 'raw-loader',
