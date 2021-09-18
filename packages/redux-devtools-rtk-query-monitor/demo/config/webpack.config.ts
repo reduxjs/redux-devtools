@@ -33,7 +33,7 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        loaders: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader'],
         include: demoSrc,
       },
     ],
@@ -74,13 +74,8 @@ module.exports = {
   devServer: isProduction
     ? {}
     : {
-        quiet: false,
         port: 3000,
         hot: true,
-        stats: {
-          chunkModules: false,
-          colors: true,
-        },
         historyApiFallback: true,
       },
   devtool: isProduction ? 'source-map' : 'cheap-module-source-map',

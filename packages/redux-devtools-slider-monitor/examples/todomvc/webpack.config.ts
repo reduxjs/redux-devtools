@@ -39,7 +39,6 @@ module.exports = {
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
     host: 'localhost',
     port: process.env.PORT || 3000,
     historyApiFallback: true,

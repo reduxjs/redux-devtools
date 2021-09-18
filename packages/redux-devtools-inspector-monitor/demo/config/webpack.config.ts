@@ -47,17 +47,13 @@ module.exports = {
         configFile: 'demo/tsconfig.json',
       },
     }),
-  ].concat(isProduction ? [] : [new webpack.HotModuleReplacementPlugin()]),
+    ...(isProduction ? [] : [new webpack.HotModuleReplacementPlugin()]),
+  ],
   devServer: isProduction
     ? {}
     : {
-        quiet: false,
         port: 3000,
         hot: true,
-        stats: {
-          chunkModules: false,
-          colors: true,
-        },
         historyApiFallback: true,
       },
   devtool: 'eval-source-map',

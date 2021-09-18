@@ -31,7 +31,7 @@
   },
   "scripts": {
     "start": "cd examples && npm start",
-    "build": "npm run build:types && npm run build:js && npm run build:umd && npm run build:umd:min",
+    "build": "yarn run build:types && yarn run build:js && yarn run build:umd && npm run build:umd:min",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "build:umd": "rimraf ./umd && webpack --progress --config webpack.config.umd.ts",
@@ -39,11 +39,9 @@
     "clean": "rimraf lib umd",
     "test": "jest",
     "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
-    "preversion": "npm run type-check && npm run lint && npm run test",
-    "prepublishOnly": "npm run clean && npm run build"
+    "prepack": "yarn run clean && yarn run build",
+    "prepublish": "yarn run type-check && yarn run lint && yarn run test"
   },
   "dependencies": {
     "@types/prop-types": "^15.7.4",
@@ -51,10 +49,32 @@
     "react-base16-styling": "^0.8.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^14.17.15",
     "@types/react": "^16.14.15",
     "@types/react-test-renderer": "^16.9.5",
+    "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-react": "^7.25.1",
+    "jest": "^27.2.0",
     "react": "^16.14.0",
-    "react-test-renderer": "^16.14.0"
+    "react-test-renderer": "^16.14.0",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "~4.3.5",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0"
   },
   "peerDependencies": {
     "@types/react": "^16.3.0 || ^17.0.0",
