@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { Container, Form } from 'devui';
-import { listSchemes, listThemes } from 'devui/lib/utils/theme';
+import { Container, Form } from '@redux-devtools/ui';
+import { listSchemes, listThemes } from '@redux-devtools/ui/lib/utils/theme';
 import { changeTheme } from '../../actions';
 import { StoreState } from '../../reducers';
 

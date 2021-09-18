@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { Container, Notification } from 'devui';
+import { Container, Notification } from '@redux-devtools/ui';
 import { clearNotification } from '../actions';
 import Header from '../components/Header';
 import Actions from '../containers/Actions';

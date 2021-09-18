@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { Tabs } from 'devui';
+import { Tabs } from '@redux-devtools/ui';
 import { monitors } from '../utils/getMonitor';
 import { selectMonitor } from '../actions';
 import { StoreState } from '../reducers';

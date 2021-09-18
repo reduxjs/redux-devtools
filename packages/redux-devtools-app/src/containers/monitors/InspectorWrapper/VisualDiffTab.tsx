@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Delta, formatters } from 'jsondiffpatch';
 import styled from 'styled-components';
-import { effects } from 'devui';
+import { effects } from '@redux-devtools/ui';
 
 export const StyledContainer = styled.div`
   .jsondiffpatch-delta {
