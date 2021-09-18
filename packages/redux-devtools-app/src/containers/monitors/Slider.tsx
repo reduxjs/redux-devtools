@@ -3,7 +3,7 @@ import styled, { withTheme } from 'styled-components';
 import SliderMonitor from '@redux-devtools/slider-monitor';
 import { LiftedAction } from '@redux-devtools/core';
 import { Action } from 'redux';
-import { ThemeFromProvider } from 'devui';
+import { ThemeFromProvider } from '@redux-devtools/ui';
 import { State } from '../../reducers/instances';
 
 const SliderWrapper = styled.div`

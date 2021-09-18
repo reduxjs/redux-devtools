@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'devui';
+import { Button } from '@redux-devtools/ui';
 import { MdFiberManualRecord } from 'react-icons/md';
 import { pauseRecording, StoreAction } from '../../actions';
 import { Dispatch } from 'redux';

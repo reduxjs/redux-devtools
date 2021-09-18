@@ -7,7 +7,7 @@ import {
   Select,
   Notification,
   Dialog,
-} from 'devui';
+} from '@redux-devtools/ui';
 import { MdAdd } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md';
 import { Action } from 'redux';

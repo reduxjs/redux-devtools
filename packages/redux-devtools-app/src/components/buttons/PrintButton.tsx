@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'devui';
+import { Button } from '@redux-devtools/ui';
 import { MdPrint } from 'react-icons/md';
 
 export default class PrintButton extends Component {

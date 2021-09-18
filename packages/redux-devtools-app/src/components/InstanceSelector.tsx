@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { Select } from 'devui';
+import { Select } from '@redux-devtools/ui';
 import { selectInstance } from '../actions';
 import { StoreState } from '../reducers';
 

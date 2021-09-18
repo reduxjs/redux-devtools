@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Toolbar, Divider } from 'devui';
+import { Button, Toolbar, Divider } from '@redux-devtools/ui';
 import { MdSave } from 'react-icons/md';
 import ExportButton from './buttons/ExportButton';
 import ImportButton from './buttons/ImportButton';

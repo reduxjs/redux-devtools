@@ -1,4 +1,4 @@
-import { Scheme, Theme } from 'devui';
+import { Scheme, Theme } from '@redux-devtools/ui';
 import { AuthStates, States } from 'socketcluster-client/lib/scclientsocket';
 import {
   CHANGE_SECTION,

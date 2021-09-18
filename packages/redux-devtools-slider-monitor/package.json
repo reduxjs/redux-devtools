@@ -31,9 +31,9 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@redux-devtools/ui": "^1.0.0-9",
     "@types/prop-types": "^15.7.4",
     "@types/redux-devtools-themes": "^1.0.0",
-    "devui": "^1.0.0-9",
     "prop-types": "^15.7.2",
     "redux-devtools-themes": "^1.0.0"
   },

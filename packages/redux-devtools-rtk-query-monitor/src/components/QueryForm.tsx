@@ -1,7 +1,7 @@
 import React, { ReactNode, FormEvent, MouseEvent, ChangeEvent } from 'react';
 import { QueryFormValues } from '../types';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
-import { Select } from 'devui';
+import { Select } from '@redux-devtools/ui';
 import { SelectOption } from '../types';
 import debounce from 'lodash.debounce';
 import { sortQueryOptions, QueryComparators } from '../utils/comparators';

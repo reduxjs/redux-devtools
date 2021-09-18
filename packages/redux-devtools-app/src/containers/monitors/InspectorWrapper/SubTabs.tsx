@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { Tab, Tabs } from 'devui';
+import { Tab, Tabs } from '@redux-devtools/ui';
 import { TabComponentProps } from '@redux-devtools/inspector-monitor';
 import { Action } from 'redux';
 import StateTree from '@redux-devtools/inspector-monitor/lib/tabs/StateTab';
