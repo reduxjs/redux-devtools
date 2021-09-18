@@ -471,7 +471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.12.11, @babel/parser@npm:^7.12.7, @babel/parser@npm:^7.15.4, @babel/parser@npm:^7.15.5, @babel/parser@npm:^7.7.0, @babel/parser@npm:^7.7.2, @babel/parser@npm:^7.8.3":
+"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.12.11, @babel/parser@npm:^7.12.7, @babel/parser@npm:^7.15.4, @babel/parser@npm:^7.15.5, @babel/parser@npm:^7.7.2, @babel/parser@npm:^7.8.3":
   version: 7.15.6
   resolution: "@babel/parser@npm:7.15.6"
   bin:
@@ -1622,7 +1622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.1.0, @babel/traverse@npm:^7.1.6, @babel/traverse@npm:^7.12.11, @babel/traverse@npm:^7.12.9, @babel/traverse@npm:^7.13.0, @babel/traverse@npm:^7.15.4, @babel/traverse@npm:^7.4.5, @babel/traverse@npm:^7.7.0, @babel/traverse@npm:^7.7.2, @babel/traverse@npm:^7.8.3":
+"@babel/traverse@npm:^7.1.0, @babel/traverse@npm:^7.1.6, @babel/traverse@npm:^7.12.11, @babel/traverse@npm:^7.12.9, @babel/traverse@npm:^7.13.0, @babel/traverse@npm:^7.15.4, @babel/traverse@npm:^7.4.5, @babel/traverse@npm:^7.7.2, @babel/traverse@npm:^7.8.3":
   version: 7.15.4
   resolution: "@babel/traverse@npm:7.15.4"
   dependencies:
@@ -1639,7 +1639,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.0.0, @babel/types@npm:^7.12.11, @babel/types@npm:^7.12.7, @babel/types@npm:^7.14.9, @babel/types@npm:^7.15.4, @babel/types@npm:^7.15.6, @babel/types@npm:^7.2.0, @babel/types@npm:^7.3.0, @babel/types@npm:^7.3.3, @babel/types@npm:^7.4.4, @babel/types@npm:^7.7.0, @babel/types@npm:^7.8.3":
+"@babel/types@npm:^7.0.0, @babel/types@npm:^7.12.11, @babel/types@npm:^7.12.7, @babel/types@npm:^7.14.9, @babel/types@npm:^7.15.4, @babel/types@npm:^7.15.6, @babel/types@npm:^7.2.0, @babel/types@npm:^7.3.0, @babel/types@npm:^7.3.3, @babel/types@npm:^7.4.4, @babel/types@npm:^7.8.3":
   version: 7.15.6
   resolution: "@babel/types@npm:7.15.6"
   dependencies:
@@ -5138,6 +5138,11 @@ __metadata:
     rimraf: ^3.0.2
     simple-element-resize-detector: ^1.3.0
     styled-components: ^5.3.1
+    stylelint: ^13.13.1
+    stylelint-config-prettier: ^8.0.2
+    stylelint-config-standard: ^22.0.0
+    stylelint-config-styled-components: ^0.1.1
+    stylelint-processor-styled-components: ^1.10.0
     ts-jest: ^27.0.5
     typescript: ~4.3.5
   peerDependencies:
@@ -7683,7 +7688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack-env@npm:^1.16.0, @types/webpack-env@npm:^1.16.2":
+"@types/webpack-env@npm:^1.16.0":
   version: 1.16.2
   resolution: "@types/webpack-env@npm:1.16.2"
   checksum: 122273f20e2bed6895aae2f03891f51ddacd826018e395d18aa5d833ad0462bb159637b83f8d202907234a6a48c66a8e4e9fdd703afc66f6afddb83eeac82b13
@@ -9498,22 +9503,6 @@ __metadata:
   version: 2.2.0
   resolution: "axobject-query@npm:2.2.0"
   checksum: 96b8c7d807ca525f41ad9b286186e2089b561ba63a6d36c3e7d73dc08150714660995c7ad19cda05784458446a0793b45246db45894631e13853f48c1aa3117f
-  languageName: node
-  linkType: hard
-
-"babel-eslint@npm:^10.1.0":
-  version: 10.1.0
-  resolution: "babel-eslint@npm:10.1.0"
-  dependencies:
-    "@babel/code-frame": ^7.0.0
-    "@babel/parser": ^7.7.0
-    "@babel/traverse": ^7.7.0
-    "@babel/types": ^7.7.0
-    eslint-visitor-keys: ^1.0.0
-    resolve: ^1.12.0
-  peerDependencies:
-    eslint: ">= 4.12.1"
-  checksum: bdc1f62b6b0f9c4d5108c96d835dad0c0066bc45b7c020fcb2d6a08107cf69c9217a99d3438dbd701b2816896190c4283ba04270ed9a8349ee07bd8dafcdc050
   languageName: node
   linkType: hard
 
@@ -13908,17 +13897,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-babel@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "eslint-plugin-babel@npm:5.3.1"
-  dependencies:
-    eslint-rule-composer: ^0.3.0
-  peerDependencies:
-    eslint: ">=4.0.0"
-  checksum: 18b0bfda53deab4056160a4f3a89a4649b6ae17e4970cc836f7d586c8abab5ebb492440e2acf4770a463138a44a4ee7f9b22b4ed1fdbe69c652f714c1d973e38
-  languageName: node
-  linkType: hard
-
 "eslint-plugin-import@npm:^2.24.2":
   version: 2.24.2
   resolution: "eslint-plugin-import@npm:2.24.2"
@@ -14012,13 +13990,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-rule-composer@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "eslint-rule-composer@npm:0.3.0"
-  checksum: c2f57cded8d1c8f82483e0ce28861214347e24fd79fd4144667974cd334d718f4ba05080aaef2399e3bbe36f7d6632865110227e6b176ed6daa2d676df9281b1
-  languageName: node
-  linkType: hard
-
 "eslint-scope@npm:5.1.1, eslint-scope@npm:^5.1.1":
   version: 5.1.1
   resolution: "eslint-scope@npm:5.1.1"
@@ -14059,7 +14030,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-visitor-keys@npm:^1.0.0, eslint-visitor-keys@npm:^1.1.0, eslint-visitor-keys@npm:^1.3.0":
+"eslint-visitor-keys@npm:^1.1.0, eslint-visitor-keys@npm:^1.3.0":
   version: 1.3.0
   resolution: "eslint-visitor-keys@npm:1.3.0"
   checksum: 37a19b712f42f4c9027e8ba98c2b06031c17e0c0a4c696cd429bd9ee04eb43889c446f2cd545e1ff51bef9593fcec94ecd2c2ef89129fcbbf3adadbef520376a
@@ -25627,6 +25598,7 @@ fsevents@^1.2.7:
     bestzip: ^2.2.0
     chromedriver: ^93.0.1
     copy-webpack-plugin: ^9.0.1
+    cross-env: ^7.0.3
     css-loader: ^6.2.0
     electron: ^14.0.1
     enzyme: ^3.11.0
@@ -26043,55 +26015,8 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@babel/cli": ^7.15.4
-    "@babel/core": ^7.15.5
-    "@babel/plugin-proposal-class-properties": ^7.14.5
-    "@babel/plugin-transform-runtime": ^7.15.0
-    "@babel/preset-env": ^7.15.6
-    "@babel/preset-react": ^7.14.5
-    "@babel/preset-typescript": ^7.15.0
-    "@types/copy-webpack-plugin": ^8.0.1
-    "@types/jest": ^27.0.1
-    "@types/node": ^14.17.15
-    "@types/webpack": ^5.28.0
-    "@types/webpack-dev-server": ^4.1.0
-    "@types/webpack-env": ^1.16.2
-    "@typescript-eslint/eslint-plugin": ^4.31.1
-    "@typescript-eslint/parser": ^4.31.1
-    babel-eslint: ^10.1.0
-    babel-loader: ^8.2.2
-    clean-webpack-plugin: ^4.0.0
-    copy-webpack-plugin: ^9.0.1
-    cross-env: ^7.0.3
-    css-loader: ^6.2.0
-    eslint: ^7.32.0
-    eslint-config-prettier: ^8.3.0
-    eslint-plugin-babel: ^5.3.1
-    eslint-plugin-jest: ^24.4.0
-    eslint-plugin-react: ^7.25.1
-    file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.3.3
-    html-loader: ^2.1.2
-    html-webpack-plugin: ^5.3.2
-    jest: ^27.2.0
     lerna: ^4.0.0
     prettier: 2.4.1
-    pug-html-loader: ^1.1.5
-    raw-loader: ^4.0.2
-    rimraf: ^3.0.2
-    style-loader: ^3.2.1
-    stylelint: ^13.13.1
-    stylelint-config-prettier: ^8.0.2
-    stylelint-config-standard: ^22.0.0
-    stylelint-config-styled-components: ^0.1.1
-    stylelint-processor-styled-components: ^1.10.0
-    ts-jest: ^27.0.5
-    ts-node: ^10.2.1
-    typescript: ~4.3.5
-    url-loader: ^4.1.1
-    webpack: ^5.52.1
-    webpack-cli: ^4.8.0
-    webpack-dev-server: ^4.2.1
   languageName: unknown
   linkType: soft
 

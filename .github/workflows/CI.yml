@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: yarn install
-      - run: yarn prettier:check
+      - run: yarn format:check
       - run: yarn build:all
       - run: yarn lint:all
       - name: Run yarn test:all
