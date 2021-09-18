@@ -1,4 +1,4 @@
-# react-base16-styling [![Build Status](https://img.shields.io/travis/alexkuz/react-base16-styling/master.svg)](https://travis-ci.org/alexkuz/react-base16-styling) [![Latest Stable Version](https://img.shields.io/npm/v/react-base16-styling.svg)](https://www.npmjs.com/package/react-base16-styling)
+# react-base16-styling [![Latest Stable Version](https://img.shields.io/npm/v/react-base16-styling.svg)](https://www.npmjs.com/package/react-base16-styling)
 
 React styling with base16 color scheme support
 

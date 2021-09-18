@@ -10,7 +10,7 @@ module.exports = {
       },
     },
     {
-      files: ['test/*.ts', 'test/*.tsx'],
+      files: ['test/**/*.ts', 'test/**/*.tsx'],
       extends: '../../eslintrc.ts.react.jest.base.json',
       parserOptions: {
         tsconfigRootDir: __dirname,
