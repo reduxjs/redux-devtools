@@ -28,14 +28,14 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "npm run build:types && npm run build:js",
+    "build": "yarn run build:types && yarn run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "clean": "rimraf lib",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
-    "prepack": "npm run clean && npm run build",
-    "prepublish": "npm run type-check && npm run lint"
+    "prepack": "yarn run clean && yarn run build",
+    "prepublish": "yarn run type-check && yarn run lint"
   },
   "dependencies": {
     "@types/prop-types": "^15.7.4",
