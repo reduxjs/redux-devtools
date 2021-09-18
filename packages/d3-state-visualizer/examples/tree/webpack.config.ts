@@ -17,7 +17,7 @@ export default {
     rules: [
       {
         test: /\.(js|ts)$/,
-        loaders: 'babel-loader',
+        loader: 'babel-loader',
         exclude: /node_modules/,
         include: __dirname,
       },
