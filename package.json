@@ -1,8 +1,15 @@
 {
   "private": true,
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-react": "^7.25.1",
     "lerna": "^4.0.0",
-    "prettier": "2.4.1"
+    "prettier": "2.4.1",
+    "typescript": "~4.3.5"
   },
   "scripts": {
     "format": "prettier --write .",
