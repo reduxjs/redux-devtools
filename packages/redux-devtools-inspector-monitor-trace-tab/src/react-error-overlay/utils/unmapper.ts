@@ -107,12 +107,12 @@ async function unmap(
       fileUri,
       line,
       column || null,
-      getLinesAround(line, contextLines, fileContents || []),
+      getLinesAround(line!, contextLines, fileContents || []),
       functionName,
       fN,
       lineNumber,
       columnNumber,
-      getLinesAround(lineNumber, contextLines, originalSource)
+      getLinesAround(lineNumber, contextLines, originalSource!)
     );
   });
 }

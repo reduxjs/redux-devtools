@@ -8,12 +8,13 @@ import {
 } from '@redux-devtools/core';
 import deepmerge from 'deepmerge';
 import { Action, Dispatch } from 'redux';
-import { Base16Theme } from 'react-base16-styling';
 
 import reducer, { ChartMonitorState } from './reducers';
 import Chart, { Props } from './Chart';
-import { Primitive } from 'd3';
-import { NodeWithId } from 'd3-state-visualizer/lib/charts/tree/tree';
+import {
+  NodeWithId,
+  Primitive,
+} from 'd3-state-visualizer/lib/charts/tree/tree';
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep, toggleAction } = ActionCreators;
 
@@ -28,7 +29,7 @@ const styles: { container: CSSProperties } = {
   },
 };
 
-function invertColors(theme: Base16Theme) {
+function invertColors(theme: themes.Base16Theme) {
   return {
     ...theme,
     base00: theme.base07,
@@ -47,7 +48,7 @@ export interface ChartMonitorProps<S, A extends Action<unknown>>
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof themes | themes.Base16Theme;
   invertTheme: boolean;
 
   state: S | null;

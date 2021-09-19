@@ -581,3 +581,5 @@ export default function (
     }
   };
 }
+
+export { Primitive };

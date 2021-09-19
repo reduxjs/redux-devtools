@@ -45,6 +45,7 @@
     "@redux-devtools/slider-monitor": "^2.0.0-8",
     "@redux-devtools/ui": "^1.0.0-9",
     "@reduxjs/toolkit": "^1.6.1",
+    "@types/prop-types": "^15.7.4",
     "d3-state-visualizer": "^1.4.0",
     "javascript-stringify": "^2.1.0",
     "jsan": "^3.1.13",
@@ -68,11 +69,18 @@
     "@babel/preset-typescript": "^7.15.0",
     "@rjsf/core": "^3.1.0",
     "@types/jest": "^27.0.1",
+    "@types/jsan": "^3.1.2",
     "@types/json-schema": "^7.0.9",
+    "@types/lodash": "^4.14.172",
     "@types/node": "^14.17.15",
+    "@types/react": "^16.14.15",
+    "@types/react-dom": "^16.9.13",
+    "@types/react-redux": "^7.1.18",
     "@types/socketcluster-client": "^13.0.5",
+    "@types/styled-components": "^5.1.14",
     "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^4.1.0",
+    "@types/webpack-env": "^1.16.0",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "babel-loader": "^8.2.2",
@@ -103,6 +111,7 @@
     "webpack-dev-server": "^4.2.1"
   },
   "peerDependencies": {
+    "@types/react": "^16.3.0 || ^17.0.0",
     "react": "^16.3.0 || ^17.0.0"
   }
 }
