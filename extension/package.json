@@ -27,8 +27,9 @@
     "clean": "rimraf build/ && rimraf dev/",
     "test:app": "cross-env BABEL_ENV=test jest test/app",
     "test:chrome": "jest test/chrome",
-    "test:electron": "jest test/electron",
+    "test:electron": "yarn run build:test:electron:fixture && jest test/electron",
     "test": "yarn run test:app && yarn run build:extension && yarn run test:chrome && yarn run test:electron",
+    "build:test:electron:fixture": "webpack --config test/electron/fixture/webpack.config.js",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
