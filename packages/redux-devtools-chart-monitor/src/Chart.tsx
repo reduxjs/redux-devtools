@@ -4,10 +4,11 @@ import { tree } from 'd3-state-visualizer';
 import { Action, Dispatch } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import * as themes from 'redux-devtools-themes';
-import { Base16Theme } from 'react-base16-styling';
 import { ChartMonitorState } from './reducers';
-import { Primitive } from 'd3';
-import { NodeWithId } from 'd3-state-visualizer/lib/charts/tree/tree';
+import {
+  NodeWithId,
+  Primitive,
+} from 'd3-state-visualizer/lib/charts/tree/tree';
 
 const wrapperStyle = {
   width: '100%',
@@ -19,7 +20,7 @@ export interface Props<S, A extends Action<unknown>>
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof themes | themes.Base16Theme;
   invertTheme: boolean;
 
   state: S | null;

@@ -27,7 +27,7 @@ class SourceMap {
   getOriginalPosition(
     line: number,
     column: number
-  ): { source: string; line: number; column: number } {
+  ): { source: string | null; line: number | null; column: number | null } {
     const {
       line: l,
       column: c,
@@ -49,7 +49,7 @@ class SourceMap {
     source: string,
     line: number,
     column: number
-  ): { line: number; column: number } {
+  ): { line: number | null; column: number | null } {
     const { line: l, column: c } = this.__source_map.generatedPositionFor({
       source,
       line,
@@ -65,7 +65,7 @@ class SourceMap {
    * Returns the code for a given source file name.
    * @param {string} sourceName The name of the source file.
    */
-  getSource(sourceName: string): string {
+  getSource(sourceName: string): string | null {
     return this.__source_map.sourceContentFor(sourceName);
   }
 

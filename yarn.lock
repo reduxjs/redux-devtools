@@ -2780,7 +2780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/utils@npm:0.11.3":
+"@emotion/utils@npm:0.11.3, @emotion/utils@npm:^0.11.3":
   version: 0.11.3
   resolution: "@emotion/utils@npm:0.11.3"
   checksum: 9c4204bda84f9acd153a9be9478a83f9baa74d5d7a4c21882681c4d1b86cd113b84540cb1f92e1c30313b5075f024da2658dbc553f5b00776ef9b6ec7991c0c9
@@ -4491,12 +4491,22 @@ __metadata:
     "@redux-devtools/ui": ^1.0.0-9
     "@reduxjs/toolkit": ^1.6.1
     "@rjsf/core": ^3.1.0
+    "@types/enzyme": ^3.10.9
+    "@types/enzyme-adapter-react-16": ^1.0.6
     "@types/jest": ^27.0.1
+    "@types/jsan": ^3.1.2
     "@types/json-schema": ^7.0.9
+    "@types/lodash": ^4.14.172
     "@types/node": ^14.17.15
+    "@types/prop-types": ^15.7.4
+    "@types/react": ^16.14.15
+    "@types/react-dom": ^16.9.13
+    "@types/react-redux": ^7.1.18
     "@types/socketcluster-client": ^13.0.5
+    "@types/styled-components": ^5.1.14
     "@types/webpack": ^5.28.0
     "@types/webpack-dev-server": ^4.1.0
+    "@types/webpack-env": ^1.16.0
     "@typescript-eslint/eslint-plugin": ^4.31.1
     "@typescript-eslint/parser": ^4.31.1
     babel-loader: ^8.2.2
@@ -4540,7 +4550,10 @@ __metadata:
     webpack-cli: ^4.8.0
     webpack-dev-server: ^4.2.1
   peerDependencies:
+    "@types/react": ^16.3.0 || ^17.0.0
+    "@types/styled-components": ^5.1.14
     react: ^16.3.0 || ^17.0.0
+    styled-components: ^5.3.1
   languageName: unknown
   linkType: soft
 
@@ -4583,13 +4596,24 @@ __metadata:
   resolution: "@redux-devtools/cli@workspace:packages/redux-devtools-cli"
   dependencies:
     "@redux-devtools/app": ^1.0.0-8
+    "@types/body-parser": ^1.19.1
+    "@types/cors": ^2.8.12
     "@types/cross-spawn": ^6.0.2
+    "@types/express": ^4.17.13
     "@types/jest": ^27.0.1
+    "@types/lodash": ^4.14.172
+    "@types/minimist": ^1.2.2
     "@types/morgan": ^1.9.3
     "@types/react": ^16.14.15
     "@types/semver": ^7.3.8
+    "@types/socketcluster": ^14.0.4
+    "@types/socketcluster-client": ^13.0.5
+    "@types/socketcluster-server": ^14.2.6
+    "@types/styled-components": ^5.1.14
     "@types/supertest": ^2.0.11
     "@types/uuid": ^8.3.1
+    "@typescript-eslint/eslint-plugin": ^4.31.1
+    "@typescript-eslint/parser": ^4.31.1
     apollo-server: ^2.25.2
     apollo-server-express: ^2.25.2
     body-parser: ^1.19.0
@@ -4612,11 +4636,13 @@ __metadata:
     open: ^8.2.1
     react: ^16.14.0
     react-dom: ^16.14.0
+    react-is: ^16.13.1
     rimraf: ^3.0.2
     semver: ^7.3.5
     socketcluster: ^14.4.2
     socketcluster-client: ^14.3.2
     sqlite3: ^5.0.2
+    styled-components: ^5.3.1
     supertest: ^6.1.6
     ts-jest: ^27.0.5
     typescript: ~4.3.5
@@ -4798,6 +4824,7 @@ __metadata:
     "@types/jest": ^27.0.1
     "@types/react": ^16.14.15
     "@types/redux-devtools-themes": ^1.0.0
+    "@types/source-map": 0.5.2
     "@typescript-eslint/eslint-plugin": ^4.31.1
     "@typescript-eslint/parser": ^4.31.1
     anser: ^2.0.2
@@ -4844,12 +4871,15 @@ __metadata:
     "@types/dragula": ^3.7.1
     "@types/hex-rgba": ^1.0.1
     "@types/history": ^4.7.9
+    "@types/lodash": ^4.14.172
+    "@types/lodash.debounce": ^4.0.6
     "@types/lodash.shuffle": ^4.2.6
     "@types/node": ^14.17.15
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.15
     "@types/react-dragula": ^1.1.0
     "@types/react-router": ^5.1.16
+    "@types/redux-devtools-themes": ^1.0.0
     "@types/redux-logger": ^3.0.9
     "@types/webpack": ^5.28.0
     "@types/webpack-dev-server": ^4.1.0
@@ -4983,10 +5013,12 @@ __metadata:
     "@redux-devtools/ui": ^1.0.0-9
     "@reduxjs/toolkit": ^1.6.1
     "@types/copy-webpack-plugin": ^8.0.1
+    "@types/hex-rgba": ^1.0.1
+    "@types/lodash.debounce": ^4.0.6
     "@types/node": ^14.17.15
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.15
-    "@types/react-dom": ^16.9.14
+    "@types/react-dom": ^16.9.13
     "@types/react-redux": ^7.1.18
     "@types/react-router-dom": ^5.1.8
     "@types/redux-devtools-themes": ^1.0.0
@@ -5004,11 +5036,16 @@ __metadata:
     eslint-plugin-react: ^7.25.1
     fork-ts-checker-webpack-plugin: ^6.3.3
     framer-motion: ^4.1.17
+    hex-rgba: ^1.0.2
     html-webpack-plugin: ^5.3.2
+    immutable: ^4.0.0-rc.14
+    jss: ^10.7.1
+    jss-preset-default: ^10.7.1
     lodash.debounce: ^4.0.8
     msw: ^0.28.2
     prop-types: ^15.7.2
     react: ^16.14.0
+    react-base16-styling: ^0.8.0
     react-dom: ^16.14.0
     react-json-tree: ^0.15.0
     react-redux: ^7.2.5
@@ -5148,7 +5185,9 @@ __metadata:
     typescript: ~4.3.5
   peerDependencies:
     "@types/react": ^16.3.0 || ^17.0.0
+    "@types/styled-components": ^5.1.14
     react: ^16.3.0 || ^17.0.0
+    styled-components: ^5.3.1
   languageName: unknown
   linkType: soft
 
@@ -5163,6 +5202,8 @@ __metadata:
     "@redux-devtools/core": ^3.9.0
     "@redux-devtools/serialize": ^0.3.0
     "@types/get-params": ^0.1.0
+    "@types/jsan": ^3.1.2
+    "@types/lodash": ^4.14.172
     "@types/node": ^14.17.15
     "@typescript-eslint/eslint-plugin": ^4.31.1
     "@typescript-eslint/parser": ^4.31.1
@@ -5745,7 +5786,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/client-api@npm:6.3.8":
+"@storybook/client-api@npm:6.3.8, @storybook/client-api@npm:^6.3.8":
   version: 6.3.8
   resolution: "@storybook/client-api@npm:6.3.8"
   dependencies:
@@ -6441,7 +6482,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/body-parser@npm:*":
+"@types/body-parser@npm:*, @types/body-parser@npm:^1.19.1":
   version: 1.19.1
   resolution: "@types/body-parser@npm:1.19.1"
   dependencies:
@@ -6616,6 +6657,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/cors@npm:^2.8.12":
+  version: 2.8.12
+  resolution: "@types/cors@npm:2.8.12"
+  checksum: 8c45f112c7d1d2d831b4b266f2e6ed33a1887a35dcbfe2a18b28370751fababb7cd045e745ef84a523c33a25932678097bf79afaa367c6cb3fa0daa7a6438257
+  languageName: node
+  linkType: hard
+
 "@types/cross-spawn@npm:^6.0.2":
   version: 6.0.2
   resolution: "@types/cross-spawn@npm:6.0.2"
@@ -6717,7 +6765,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*, @types/express@npm:^4.17.12":
+"@types/express@npm:*, @types/express@npm:^4.17.12, @types/express@npm:^4.17.13":
   version: 4.17.13
   resolution: "@types/express@npm:4.17.13"
   dependencies:
@@ -7110,7 +7158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/minimist@npm:^1.2.0":
+"@types/minimist@npm:^1.2.0, @types/minimist@npm:^1.2.2":
   version: 1.2.2
   resolution: "@types/minimist@npm:1.2.2"
   checksum: b8da83c66eb4aac0440e64674b19564d9d86c80ae273144db9681e5eeff66f238ade9515f5006ffbfa955ceff8b89ad2bd8ec577d7caee74ba101431fb07045d
@@ -7145,10 +7193,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
-  version: 16.9.1
-  resolution: "@types/node@npm:16.9.1"
-  checksum: 41afcf183a22d59323a0199dd7e0f46591247f45fc08a4434edb26d56dc279ae4fdb80f37989ddd7a0f45e3857c4933e6e82057ede09c5a829f77e373e680375
+"@types/node@npm:*, @types/node@npm:^14.0.10, @types/node@npm:^14.17.15, @types/node@npm:^14.6.2":
+  version: 14.17.15
+  resolution: "@types/node@npm:14.17.15"
+  checksum: e0840304db236027e822ef1e149de433afd20d2553699cdc2ce651d107a77646c6eaaeaec8c348eabdc05169440dbc2cf069791bef65ca4b6e5ee4412e69c898
   languageName: node
   linkType: hard
 
@@ -7156,13 +7204,6 @@ __metadata:
   version: 10.17.60
   resolution: "@types/node@npm:10.17.60"
   checksum: 2cdb3a77d071ba8513e5e8306fa64bf50e3c3302390feeaeff1fd325dd25c8441369715dfc8e3701011a72fed5958c7dfa94eb9239a81b3c286caa4d97db6eef
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^14.0.10, @types/node@npm:^14.17.15, @types/node@npm:^14.6.2":
-  version: 14.17.15
-  resolution: "@types/node@npm:14.17.15"
-  checksum: e0840304db236027e822ef1e149de433afd20d2553699cdc2ce651d107a77646c6eaaeaec8c348eabdc05169440dbc2cf069791bef65ca4b6e5ee4412e69c898
   languageName: node
   linkType: hard
 
@@ -7275,7 +7316,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:*, @types/react-dom@npm:^16.9.13, @types/react-dom@npm:^16.9.14":
+"@types/react-dom@npm:*, @types/react-dom@npm:^16.9.13":
   version: 16.9.14
   resolution: "@types/react-dom@npm:16.9.14"
   dependencies:
@@ -7531,7 +7572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/socketcluster-server@npm:^14":
+"@types/socketcluster-server@npm:^14, @types/socketcluster-server@npm:^14.2.6":
   version: 14.2.6
   resolution: "@types/socketcluster-server@npm:14.2.6"
   dependencies:
@@ -7544,7 +7585,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/socketcluster@npm:*":
+"@types/socketcluster@npm:*, @types/socketcluster@npm:^14.0.4":
   version: 14.0.4
   resolution: "@types/socketcluster@npm:14.0.4"
   dependencies:
@@ -7559,6 +7600,13 @@ __metadata:
   version: 0.1.2
   resolution: "@types/source-list-map@npm:0.1.2"
   checksum: fda8f37537aca9d3ed860d559289ab1dddb6897e642e6f53e909bbd18a7ac3129a8faa2a7d093847c91346cf09c86ef36e350c715406fba1f2271759b449adf6
+  languageName: node
+  linkType: hard
+
+"@types/source-map@npm:0.5.2":
+  version: 0.5.2
+  resolution: "@types/source-map@npm:0.5.2"
+  checksum: e7ff6a13f396fbed6ec9181d6801fee0e466ede4b0e7f00662cd7aca34f0f30d22a7bf00e01a901b374f025a2d7857e19eee29a9dcf6c59af5168bcfc06aa66d
   languageName: node
   linkType: hard
 
@@ -7732,7 +7780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ws@npm:*, @types/ws@npm:^7.0.0":
+"@types/ws@npm:*, @types/ws@npm:^7.0.0, @types/ws@npm:^7.4.7":
   version: 7.4.7
   resolution: "@types/ws@npm:7.4.7"
   dependencies:
@@ -24232,6 +24280,7 @@ fsevents@^1.2.7:
     "@types/base16": ^1.0.2
     "@types/color": ^3.0.2
     "@types/jest": ^27.0.1
+    "@types/lodash": ^4.14.172
     "@types/lodash.curry": ^4.1.6
     "@typescript-eslint/eslint-plugin": ^4.31.1
     "@typescript-eslint/parser": ^4.31.1
@@ -24376,11 +24425,12 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
     "@types/jest": ^27.0.1
+    "@types/lodash": ^4.14.172
     "@types/lodash.debounce": ^4.0.6
     "@types/node": ^14.17.15
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.15
-    "@types/react-dom": ^16.9.14
+    "@types/react-dom": ^16.9.13
     "@types/react-test-renderer": ^16.9.5
     "@types/styled-components": ^5.1.14
     "@types/webpack": ^5.28.0
@@ -25593,8 +25643,15 @@ fsevents@^1.2.7:
     "@redux-devtools/instrument": ^1.11.0
     "@redux-devtools/serialize": ^0.3.0
     "@redux-devtools/slider-monitor": ^2.0.0-8
+    "@redux-devtools/ui": ^1.0.0-9
     "@redux-devtools/utils": ^1.0.0-6
+    "@types/chrome": ^0.0.157
     "@types/jsan": ^3.1.2
+    "@types/lodash": ^4.14.172
+    "@types/react": ^16.14.15
+    "@types/react-dom": ^16.9.13
+    "@types/react-redux": ^7.1.18
+    "@types/styled-components": ^5.1.14
     babel-loader: ^8.2.2
     bestzip: ^2.2.0
     chromedriver: ^93.0.1
@@ -25613,6 +25670,7 @@ fsevents@^1.2.7:
     file-loader: ^6.2.0
     fork-ts-checker-webpack-plugin: ^6.3.3
     gitbook-cli: ^2.3.2
+    immutable: ^4.0.0-rc.14
     jest: ^27.2.0
     jsan: ^3.1.13
     localforage: ^1.10.0
@@ -25623,6 +25681,7 @@ fsevents@^1.2.7:
     react: ^16.14.0
     react-dom: ^16.14.0
     react-icons: ^4.2.0
+    react-is: ^16.13.1
     react-json-tree: ^0.15.0
     react-redux: ^7.2.5
     react-transform-catch-errors: ^1.0.2
@@ -25633,6 +25692,7 @@ fsevents@^1.2.7:
     selenium-webdriver: ^3.6.0
     sinon-chrome: ^3.0.1
     style-loader: ^3.2.1
+    styled-components: ^5.3.1
     ts-jest: ^27.0.5
     typescript: ~4.3.5
     webpack: ^5.52.1
@@ -26021,8 +26081,15 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@typescript-eslint/eslint-plugin": ^4.31.1
+    "@typescript-eslint/parser": ^4.31.1
+    eslint: ^7.32.0
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-jest: ^24.4.0
+    eslint-plugin-react: ^7.25.1
     lerna: ^4.0.0
     prettier: 2.4.1
+    typescript: ~4.3.5
   languageName: unknown
   linkType: soft
 

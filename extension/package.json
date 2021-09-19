@@ -27,8 +27,9 @@
     "clean": "rimraf build/ && rimraf dev/",
     "test:app": "cross-env BABEL_ENV=test jest test/app",
     "test:chrome": "jest test/chrome",
-    "test:electron": "jest test/electron",
+    "test:electron": "yarn run build:test:electron:fixture && jest test/electron",
     "test": "yarn run test:app && yarn run build:extension && yarn run test:chrome && yarn run test:electron",
+    "build:test:electron:fixture": "webpack --config test/electron/fixture/webpack.config.js",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -38,6 +39,7 @@
     "@redux-devtools/instrument": "^1.11.0",
     "@redux-devtools/serialize": "^0.3.0",
     "@redux-devtools/slider-monitor": "^2.0.0-8",
+    "@redux-devtools/ui": "^1.0.0-9",
     "@redux-devtools/utils": "^1.0.0-6",
     "@types/jsan": "^3.1.2",
     "jsan": "^3.1.13",
@@ -46,10 +48,12 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-icons": "^4.2.0",
+    "react-is": "^16.13.1",
     "react-json-tree": "^0.15.0",
     "react-redux": "^7.2.5",
     "redux": "^4.1.1",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -57,6 +61,12 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
     "@babel/register": "^7.15.3",
+    "@types/chrome": "^0.0.157",
+    "@types/lodash": "^4.14.172",
+    "@types/react": "^16.14.15",
+    "@types/react-dom": "^16.9.13",
+    "@types/react-redux": "^7.1.18",
+    "@types/styled-components": "^5.1.14",
     "babel-loader": "^8.2.2",
     "bestzip": "^2.2.0",
     "chromedriver": "^93.0.1",
@@ -75,6 +85,7 @@
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.3.3",
     "gitbook-cli": "^2.3.2",
+    "immutable": "^4.0.0-rc.14",
     "jest": "^27.2.0",
     "path-browserify": "^1.0.1",
     "pug-html-loader": "^1.1.5",

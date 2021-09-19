@@ -1,4 +1,4 @@
-import type { JSONSchema7 } from 'json-schema';
+import { JSONSchema7 } from 'json-schema';
 
 export const schema: JSONSchema7 = {
   title: 'Example form',

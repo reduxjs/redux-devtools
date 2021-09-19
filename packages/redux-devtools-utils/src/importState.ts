@@ -3,7 +3,7 @@ import jsan from 'jsan';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { Action } from 'redux';
 import Immutable from 'immutable';
-import { PerformAction } from '@redux-devtools/instrument';
+import { PerformAction } from '@redux-devtools/core';
 
 interface State {
   actionsById: { [actionId: number]: PerformAction<Action<unknown>> };

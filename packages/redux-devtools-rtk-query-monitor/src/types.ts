@@ -1,4 +1,4 @@
-import type { LiftedAction, LiftedState } from '@redux-devtools/instrument';
+import type { LiftedAction, LiftedState } from '@redux-devtools/core';
 import type { createApi, QueryStatus } from '@reduxjs/toolkit/query';
 import type { Action, AnyAction, Dispatch } from '@reduxjs/toolkit';
 import type { ComponentType } from 'react';

@@ -46,7 +46,7 @@ import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
 import { LiftedAction } from '@redux-devtools/core';
 import { Data } from '../reducers/reports';
-import { LiftedState } from '@redux-devtools/instrument';
+import { LiftedState } from '@redux-devtools/core';
 
 let monitorReducer: (
   monitorProps: unknown,
