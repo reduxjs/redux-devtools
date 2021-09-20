@@ -20,7 +20,7 @@ const appState = {
   },
 };
 
-const render = tree(document.getElementById('root'), {
+const render = tree(document.getElementById('root')!, {
   state: appState,
   id: 'treeExample',
   size: 1000,
