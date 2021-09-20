@@ -40,6 +40,11 @@
       "matchPackageNames": ["prettier"],
       "matchUpdateTypes": ["major", "minor", "patch"],
       "groupName": "prettier"
+    },
+    {
+      "matchPackageNames": ["source-map"],
+      "matchUpdateTypes": ["major", "minor"],
+      "groupName": "source-map"
     }
   ]
 }
