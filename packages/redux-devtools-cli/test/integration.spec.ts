@@ -6,7 +6,7 @@ describe('Server', function () {
   let scServer: childProcess.ChildProcess;
   beforeAll(async function () {
     scServer = childProcess.fork(__dirname + '/../bin/redux-devtools.js');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 4000));
   });
 
   afterAll(function () {
