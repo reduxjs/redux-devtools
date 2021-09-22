@@ -2,9 +2,9 @@ import * as path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-export default {
+module.exports = {
   mode: 'development',
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
   devtool: 'eval-source-map',
   devServer: {
     static: './dist',
@@ -23,13 +23,14 @@ export default {
   module: {
     rules: [
       {
-        test: /\.(js|ts)$/,
+        test: /\.(js|ts)x?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
               ['@babel/preset-env', { targets: 'defaults' }],
+              '@babel/preset-react',
               '@babel/preset-typescript',
             ],
           },
@@ -38,6 +39,6 @@ export default {
     ],
   },
   resolve: {
-    extensions: ['.js', '.ts'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 };
