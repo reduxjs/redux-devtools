@@ -51,6 +51,7 @@ interface State {
   size: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export default class App extends Component<{}, State> {
   state: State = {
     positionIdx: 0,
