@@ -12409,8 +12409,12 @@ __metadata:
     "@types/node": ^14.17.17
     "@types/webpack": ^5.28.0
     "@types/webpack-dev-server": ^4.1.0
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
     babel-loader: ^8.2.2
     d3-state-visualizer: ^1.4.0
+    eslint: ^7.32.0
+    eslint-config-prettier: ^8.3.0
     fork-ts-checker-webpack-plugin: ^6.3.3
     html-webpack-plugin: ^5.3.2
     map2tree: ^1.5.0
@@ -24435,6 +24439,43 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-dock-demo@workspace:packages/react-dock/demo":
+  version: 0.0.0-use.local
+  resolution: "react-dock-demo@workspace:packages/react-dock/demo"
+  dependencies:
+    "@babel/core": ^7.15.5
+    "@babel/preset-env": ^7.15.6
+    "@babel/preset-react": ^7.14.5
+    "@babel/preset-typescript": ^7.15.0
+    "@types/node": ^14.17.17
+    "@types/react": ^16.14.15
+    "@types/react-dom": ^16.9.14
+    "@types/styled-components": ^5.1.14
+    "@types/webpack": ^5.28.0
+    "@types/webpack-dev-server": ^4.1.0
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    babel-loader: ^8.2.2
+    eslint: ^7.32.0
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-react: ^7.25.3
+    fork-ts-checker-webpack-plugin: ^6.3.3
+    html-webpack-plugin: ^5.3.2
+    react: ^16.14.0
+    react-bootstrap: ^1.6.3
+    react-dock: ^0.4.0
+    react-dom: ^16.14.0
+    react-icons: ^4.2.0
+    react-is: ^16.13.1
+    styled-components: ^5.3.1
+    ts-node: ^10.2.1
+    typescript: ~4.3.5
+    webpack: ^5.53.0
+    webpack-cli: ^4.8.0
+    webpack-dev-server: ^4.2.1
+  languageName: unknown
+  linkType: soft
+
 "react-dock@^0.4.0, react-dock@workspace:packages/react-dock":
   version: 0.0.0-use.local
   resolution: "react-dock@workspace:packages/react-dock"
@@ -24447,17 +24488,11 @@ fsevents@^1.2.7:
     "@types/jest": ^27.0.1
     "@types/lodash": ^4.14.173
     "@types/lodash.debounce": ^4.0.6
-    "@types/node": ^14.17.17
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.15
-    "@types/react-dom": ^16.9.14
     "@types/react-test-renderer": ^16.9.5
-    "@types/styled-components": ^5.1.14
-    "@types/webpack": ^5.28.0
-    "@types/webpack-dev-server": ^4.1.0
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
-    babel-loader: ^8.2.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-jest: ^24.4.2
@@ -24466,20 +24501,10 @@ fsevents@^1.2.7:
     lodash.debounce: ^4.0.8
     prop-types: ^15.7.2
     react: ^16.14.0
-    react-bootstrap: ^1.6.3
-    react-dom: ^16.14.0
-    react-hot-loader: ^4.13.0
-    react-icons: ^4.2.0
-    react-is: ^16.13.1
     react-test-renderer: ^16.14.0
     rimraf: ^3.0.2
-    styled-components: ^5.3.1
     ts-jest: ^27.0.5
-    ts-node: ^10.2.1
     typescript: ~4.3.5
-    webpack: ^5.53.0
-    webpack-cli: ^4.8.0
-    webpack-dev-server: ^4.2.1
   peerDependencies:
     "@types/react": ^16.3.0 || ^17.0.0
     react: ^16.3.0 || ^17.0.0

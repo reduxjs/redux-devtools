@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -52,7 +51,8 @@ interface State {
   size: number;
 }
 
-class App extends Component<never, State> {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export default class App extends Component<{}, State> {
   state: State = {
     positionIdx: 0,
     dimModeIdx: 0,
@@ -187,5 +187,3 @@ class App extends Component<never, State> {
     this.setState({ dimModeIdx: (this.state.dimModeIdx + 1) % 3 });
   };
 }
-
-export default hot(App);
