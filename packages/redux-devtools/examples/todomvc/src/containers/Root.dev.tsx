@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import TodoApp from './TodoApp';
@@ -11,7 +10,7 @@ interface Props {
   store: Store<TodoState, TodoAction>;
 }
 
-class Root extends Component<Props> {
+export default class Root extends Component<Props> {
   render() {
     const { store } = this.props;
     return (
@@ -24,5 +23,3 @@ class Root extends Component<Props> {
     );
   }
 }
-
-export default hot(Root);

@@ -16,14 +16,5 @@ const enhancer = compose(
 export default function configureStore(
   initialState?: PreloadedState<TodoState>
 ) {
-  const store = createStore(rootReducer, initialState, enhancer);
-
-  if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      store.replaceReducer(require('../reducers').default)
-    );
-  }
-
-  return store;
+  return createStore(rootReducer, initialState, enhancer);
 }
