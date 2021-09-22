@@ -1,37 +1,44 @@
 import * as path from 'path';
-import * as webpack from 'webpack';
-
-const isProduction = process.env.NODE_ENV === 'production';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 module.exports = {
-  mode: isProduction ? 'production' : 'development',
-  entry: [
-    !isProduction && 'webpack-dev-server/client?http://localhost:3000',
-    !isProduction && 'webpack/hot/only-dev-server',
-    './src/index',
-  ].filter(Boolean),
+  mode: 'development',
+  entry: './src/index.tsx',
+  devtool: 'eval-source-map',
+  devServer: {
+    static: './dist',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+    }),
+    new ForkTsCheckerWebpackPlugin(),
+  ],
   output: {
-    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/',
+    path: path.join(__dirname, 'dist'),
+    clean: true,
   },
   module: {
     rules: [
       {
-        test: /\.(js|ts)x$/,
-        loader: 'babel-loader',
+        test: /\.(js|ts)x?$/,
         exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: 'defaults' }],
+              '@babel/preset-react',
+              '@babel/preset-typescript',
+            ],
+          },
+        },
       },
     ],
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
-  devServer: {
-    historyApiFallback: true,
-    hot: true,
-    port: 3000,
-  },
-  devtool: 'eval-source-map',
 };
