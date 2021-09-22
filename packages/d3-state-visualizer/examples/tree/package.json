@@ -21,7 +21,8 @@
   "scripts": {
     "start": "webpack serve --open",
     "build": "webpack",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "d3-state-visualizer": "^1.4.0",

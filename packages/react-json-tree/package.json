@@ -30,7 +30,6 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "cd examples && npm start",
     "build": "yarn run build:types && yarn run build:js && yarn run build:umd && npm run build:umd:min",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",

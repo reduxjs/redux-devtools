@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --open",
     "build": "webpack",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^16.14.0",
