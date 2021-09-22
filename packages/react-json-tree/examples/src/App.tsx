@@ -5,15 +5,15 @@ import JSONTree, { StylingValue } from 'react-json-tree';
 const getLabelStyle: StylingValue = ({ style }, nodeType, expanded) => ({
   style: {
     ...style,
-    textTransform: expanded ? 'uppercase' : style.textTransform,
+    textTransform: expanded ? 'uppercase' : style!.textTransform,
   },
 });
 
 const getBoolStyle: StylingValue = ({ style }, nodeType) => ({
   style: {
     ...style,
-    border: nodeType === 'Boolean' ? '1px solid #DD3333' : style.border,
-    borderRadius: nodeType === 'Boolean' ? 3 : style.borderRadius,
+    border: nodeType === 'Boolean' ? '1px solid #DD3333' : style!.border,
+    borderRadius: nodeType === 'Boolean' ? 3 : style!.borderRadius,
   },
 });
 
@@ -30,7 +30,7 @@ const getValueLabelStyle: StylingValue = ({ style }, nodeType, keyPath) => ({
     color:
       !Number.isNaN(keyPath[0]) && !(parseInt(keyPath, 10) % 2)
         ? '#33F'
-        : style.color,
+        : style!.color,
   },
 });
 
