@@ -3975,7 +3975,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mswjs/cookies@npm:^0.1.4":
+"@mswjs/cookies@npm:^0.1.6":
   version: 0.1.6
   resolution: "@mswjs/cookies@npm:0.1.6"
   dependencies:
@@ -3985,36 +3985,40 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mswjs/data@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@mswjs/data@npm:0.3.0"
+"@mswjs/data@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@mswjs/data@npm:0.5.1"
   dependencies:
+    "@types/lodash.get": ^4.4.6
     "@types/md5": ^2.3.0
     "@types/pluralize": ^0.0.29
     "@types/uuid": ^8.3.0
     date-fns: ^2.21.1
     graphql: ^15.5.0
+    lodash.get: ^4.4.2
     md5: ^2.3.0
-    msw: ^0.28.2
+    msw: latest
     pluralize: ^8.0.0
     strict-event-emitter: ^0.2.0
     uuid: ^8.3.1
   dependenciesMeta:
     msw:
       optional: true
-  checksum: 4bb78cc759e850f9e02d620dc9b5c7c8f0d61cbb09a77e28f57d2b4a8d50d3ce9b7b28b32024fdf8b766ff770cf222bbd0af3b0767981bf533e8639f1cb044df
+  checksum: ae4f31a1ffe7cda619f21883f6e061693cb2b74a9de8ae0689c3d1f8f828a78406c4d56abeba70f018e14c882cbb7e199c9e0f156d438f71961892404dca85e3
   languageName: node
   linkType: hard
 
-"@mswjs/interceptors@npm:^0.8.0":
-  version: 0.8.1
-  resolution: "@mswjs/interceptors@npm:0.8.1"
+"@mswjs/interceptors@npm:^0.12.6":
+  version: 0.12.7
+  resolution: "@mswjs/interceptors@npm:0.12.7"
   dependencies:
     "@open-draft/until": ^1.0.3
-    debug: ^4.3.0
+    "@xmldom/xmldom": ^0.7.2
+    debug: ^4.3.2
     headers-utils: ^3.0.2
+    outvariant: ^1.2.0
     strict-event-emitter: ^0.2.0
-  checksum: cb4aaf4d83b0f12560f856952a4fa12b77cc50d273da08823b8a7c4a89602a770b0143823f1dcb38832c9a8fc064c9497c455f6079656fcf113b80561b3488a8
+  checksum: 426e9a27f13f0bd1f5b8dbf5f3605c65709f0aa73cee5a4a8278bc43859968a11d72aef42266a9c07030f1949f539ac1865a1da7edecc31b1ba40406211918f5
   languageName: node
   linkType: hard
 
@@ -4947,11 +4951,9 @@ __metadata:
   dependencies:
     "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
-    "@babel/plugin-transform-runtime": ^7.15.0
     "@babel/preset-env": ^7.15.6
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
-    "@babel/runtime": ^7.15.4
     "@redux-devtools/core": ^3.9.0
     "@redux-devtools/ui": ^1.0.0-9
     "@reduxjs/toolkit": ^1.6.1
@@ -6529,7 +6531,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cookie@npm:^0.4.0":
+"@types/cookie@npm:^0.4.1":
   version: 0.4.1
   resolution: "@types/cookie@npm:0.4.1"
   checksum: 3275534ed69a76c68eb1a77d547d75f99fedc80befb75a3d1d03662fb08d697e6f8b1274e12af1a74c6896071b11510631ba891f64d30c78528d0ec45a9c1a18
@@ -6837,7 +6839,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/inquirer@npm:^7.3.1":
+"@types/inquirer@npm:^7.3.3":
   version: 7.3.3
   resolution: "@types/inquirer@npm:7.3.3"
   dependencies:
@@ -6989,6 +6991,15 @@ __metadata:
   dependencies:
     "@types/lodash": "*"
   checksum: 54b181c65009d2523ad13a608e1db22950467573bf6e10adaccdf46b5c2c68e7d109ff352e7e95c0035a6dd30eafd06f59356c893373098c4fb60db368158595
+  languageName: node
+  linkType: hard
+
+"@types/lodash.get@npm:^4.4.6":
+  version: 4.4.6
+  resolution: "@types/lodash.get@npm:4.4.6"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 1f0f11a3fde2b7347482550cff4d1ba4d109c53e3f374dbe8a243f01b50e50446dd6b4d4bc897890caea50eac1157cdd0d627fb7390202b1aa5376cc27c077e6
   languageName: node
   linkType: hard
 
@@ -8190,6 +8201,13 @@ __metadata:
   dependencies:
     tslib: ^1.9.3
   checksum: 1a26a0fd11e3e3a6a197d9a54a5bec523caf693daa24ad2709f496e43dd3cd12290a0d17df81f8a783437795f6c64a1ca2717cdac6e79022bde4450c11e705c9
+  languageName: node
+  linkType: hard
+
+"@xmldom/xmldom@npm:^0.7.2":
+  version: 0.7.5
+  resolution: "@xmldom/xmldom@npm:0.7.5"
+  checksum: 8d7ec35c1ef6183b4f621df08e01d7e61f244fb964a4719025e65fe6ac06fac418919be64fb40fe5908e69158ef728f2d936daa082db326fe04603012b5f2a84
   languageName: node
   linkType: hard
 
@@ -9922,7 +9940,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bl@npm:^4.0.3":
+"bl@npm:^4.0.3, bl@npm:^4.1.0":
   version: 4.1.0
   resolution: "bl@npm:4.1.0"
   dependencies:
@@ -11046,6 +11064,13 @@ __metadata:
   dependencies:
     restore-cursor: ^3.1.0
   checksum: 2692784c6cd2fd85cfdbd11f53aea73a463a6d64a77c3e098b2b4697a20443f430c220629e1ca3b195ea5ac4a97a74c2ee411f3807abf6df2b66211fec0c0a29
+  languageName: node
+  linkType: hard
+
+"cli-spinners@npm:^2.5.0":
+  version: 2.6.0
+  resolution: "cli-spinners@npm:2.6.0"
+  checksum: bc5d06af9f896e95d0c277e2a5ee0adc5876767decca6b3c22e212934b96033453268cb59be904eccb6d59119e57dbb3fc8ca9bdf5f8476506283b3dd8728748
   languageName: node
   linkType: hard
 
@@ -12464,7 +12489,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.0, debug@npm:^4.3.1, debug@npm:^4.3.2":
+"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2":
   version: 4.3.2
   resolution: "debug@npm:4.3.2"
   dependencies:
@@ -15949,7 +15974,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"graphql@npm:^15.4.0, graphql@npm:^15.5.0":
+"graphql@npm:^15.5.0, graphql@npm:^15.5.1":
   version: 15.6.0
   resolution: "graphql@npm:15.6.0"
   checksum: 439959514665bc03ba86d6e55d8fb81d4c1e8ba3fc7f5114878b0ba794147e7ef57f368e40dadbb3f94d7c5f6685d15599bebb3a124cee2a1a8871a797d5ae81
@@ -17043,6 +17068,28 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"inquirer@npm:^8.1.1":
+  version: 8.1.5
+  resolution: "inquirer@npm:8.1.5"
+  dependencies:
+    ansi-escapes: ^4.2.1
+    chalk: ^4.1.1
+    cli-cursor: ^3.1.0
+    cli-width: ^3.0.0
+    external-editor: ^3.0.3
+    figures: ^3.0.0
+    lodash: ^4.17.21
+    mute-stream: 0.0.8
+    ora: ^5.4.1
+    run-async: ^2.4.0
+    rxjs: ^7.2.0
+    string-width: ^4.1.0
+    strip-ansi: ^6.0.0
+    through: ^2.3.6
+  checksum: f3fa97a9abc20206effc7ca4e4d664d783becb58dbb6eca5b49ad7b02ef102c6c09d5c93aa7d64112417e70300267fe80c164e098adb126b6059327681d76e68
+  languageName: node
+  linkType: hard
+
 "inspector-demo@workspace:packages/redux-devtools-inspector-monitor/demo":
   version: 0.0.0-use.local
   resolution: "inspector-demo@workspace:packages/redux-devtools-inspector-monitor/demo"
@@ -17534,6 +17581,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"is-interactive@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "is-interactive@npm:1.0.0"
+  checksum: 824808776e2d468b2916cdd6c16acacebce060d844c35ca6d82267da692e92c3a16fdba624c50b54a63f38bdc4016055b6f443ce57d7147240de4f8cdabaf6f9
+  languageName: node
+  linkType: hard
+
 "is-ip@npm:^3.1.0":
   version: 3.1.0
   resolution: "is-ip@npm:3.1.0"
@@ -17581,6 +17635,13 @@ fsevents@^1.2.7:
   version: 2.0.1
   resolution: "is-negative-zero@npm:2.0.1"
   checksum: a46f2e0cb5e16fdb8f2011ed488979386d7e68d381966682e3f4c98fc126efe47f26827912baca2d06a02a644aee458b9cba307fb389f6b161e759125db7a3b8
+  languageName: node
+  linkType: hard
+
+"is-node-process@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "is-node-process@npm:1.0.1"
+  checksum: 3ddb8a892a00f6eb9c2aea7e7e1426b8683512d9419933d95114f4f64b5455e26601c23a31c0682463890032136dd98a326988a770ab6b4eed54a43ade8bed50
   languageName: node
   linkType: hard
 
@@ -19723,6 +19784,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"lodash.get@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "lodash.get@npm:4.4.2"
+  checksum: e403047ddb03181c9d0e92df9556570e2b67e0f0a930fcbbbd779370972368f5568e914f913e93f3b08f6d492abc71e14d4e9b7a18916c31fa04bd2306efe545
+  languageName: node
+  linkType: hard
+
 "lodash.includes@npm:^4.3.0":
   version: 4.3.0
   resolution: "lodash.includes@npm:4.3.0"
@@ -20968,31 +21036,33 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"msw@npm:^0.28.2":
-  version: 0.28.2
-  resolution: "msw@npm:0.28.2"
+"msw@npm:^0.35.0, msw@npm:latest":
+  version: 0.35.0
+  resolution: "msw@npm:0.35.0"
   dependencies:
-    "@mswjs/cookies": ^0.1.4
-    "@mswjs/interceptors": ^0.8.0
+    "@mswjs/cookies": ^0.1.6
+    "@mswjs/interceptors": ^0.12.6
     "@open-draft/until": ^1.0.3
-    "@types/cookie": ^0.4.0
-    "@types/inquirer": ^7.3.1
+    "@types/cookie": ^0.4.1
+    "@types/inquirer": ^7.3.3
     "@types/js-levenshtein": ^1.1.0
-    chalk: ^4.1.0
+    chalk: ^4.1.1
     chokidar: ^3.4.2
     cookie: ^0.4.1
-    graphql: ^15.4.0
+    graphql: ^15.5.1
     headers-utils: ^3.0.2
-    inquirer: ^7.3.3
+    inquirer: ^8.1.1
+    is-node-process: ^1.0.1
     js-levenshtein: ^1.1.6
     node-fetch: ^2.6.1
-    node-match-path: ^0.6.1
+    node-match-path: ^0.6.3
     statuses: ^2.0.0
     strict-event-emitter: ^0.2.0
-    yargs: ^16.2.0
+    type-fest: ^1.2.2
+    yargs: ^17.0.1
   bin:
     msw: cli/index.js
-  checksum: bfcac14831d88ebee0375933a84294696410a2f93a8dd0cf0d37fb8f641ce93e9d2d840253fb5755003ea8bd7126dc83bd6844066bf5073f0a264cd8c768dec7
+  checksum: cc5e85573e85779a95b1d5bfc306d4d0bcb4de660ac08c640e316c00fe4a0ea24dfe1decf6a46d10538550dfc7f7559836e1fda3d6e1f60ee7e99916bb3db3ff
   languageName: node
   linkType: hard
 
@@ -21383,7 +21453,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"node-match-path@npm:^0.6.1":
+"node-match-path@npm:^0.6.3":
   version: 0.6.3
   resolution: "node-match-path@npm:0.6.3"
   checksum: d515bc069f293688109c058ee02567528fdaa856290d362b80a2254734975014e4eefcdcc5164a8adfd5560aa870e277c97fe8be648074d5088056cf61553c7c
@@ -22407,6 +22477,23 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"ora@npm:^5.4.1":
+  version: 5.4.1
+  resolution: "ora@npm:5.4.1"
+  dependencies:
+    bl: ^4.1.0
+    chalk: ^4.1.0
+    cli-cursor: ^3.1.0
+    cli-spinners: ^2.5.0
+    is-interactive: ^1.0.0
+    is-unicode-supported: ^0.1.0
+    log-symbols: ^4.1.0
+    strip-ansi: ^6.0.0
+    wcwidth: ^1.0.1
+  checksum: 28d476ee6c1049d68368c0dc922e7225e3b5600c3ede88fade8052837f9ed342625fdaa84a6209302587c8ddd9b664f71f0759833cbdb3a4cf81344057e63c63
+  languageName: node
+  linkType: hard
+
 "os-browserify@npm:^0.3.0":
   version: 0.3.0
   resolution: "os-browserify@npm:0.3.0"
@@ -22435,6 +22522,13 @@ fsevents@^1.2.7:
     os-homedir: ^1.0.0
     os-tmpdir: ^1.0.0
   checksum: 779d261920f2a13e5e18cf02446484f12747d3f2ff82280912f52b213162d43d312647a40c332373cbccd5e3fb8126915d3bfea8dde4827f70f82da76e52d359
+  languageName: node
+  linkType: hard
+
+"outvariant@npm:^1.2.0":
+  version: 1.2.1
+  resolution: "outvariant@npm:1.2.1"
+  checksum: 1686113d01b6acbd23b9444ecad680f3f8b163817cde76e4c2f818631cfb6a898718b9c8a01f967b23473ed2715e0e46396ba7400cd12ade478f7532687957cd
   languageName: node
   linkType: hard
 
@@ -26053,13 +26147,15 @@ resolve@^2.0.0-next.3:
   resolution: "rtk-query-demo@workspace:packages/redux-devtools-rtk-query-monitor/demo"
   dependencies:
     "@babel/core": ^7.15.5
+    "@babel/plugin-transform-runtime": ^7.15.0
     "@babel/preset-env": ^7.15.6
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
+    "@babel/runtime": ^7.15.4
     "@chakra-ui/react": ^1.6.8
     "@emotion/react": ^11.4.1
     "@emotion/styled": ^11.3.0
-    "@mswjs/data": ^0.3.0
+    "@mswjs/data": ^0.5.1
     "@redux-devtools/core": ^3.9.0
     "@redux-devtools/dock-monitor": ^1.4.0
     "@redux-devtools/rtk-query-monitor": ^1.0.0
@@ -26083,7 +26179,7 @@ resolve@^2.0.0-next.3:
     fork-ts-checker-webpack-plugin: ^6.3.3
     framer-motion: ^4.1.17
     html-webpack-plugin: ^5.3.2
-    msw: ^0.28.2
+    msw: ^0.35.0
     react: ^16.14.0
     react-dom: ^16.14.0
     react-icons: ^4.2.0
@@ -26141,7 +26237,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.3.0":
+"rxjs@npm:^7.2.0, rxjs@npm:^7.3.0":
   version: 7.3.0
   resolution: "rxjs@npm:7.3.0"
   dependencies:
@@ -29076,6 +29172,13 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"type-fest@npm:^1.2.2":
+  version: 1.4.0
+  resolution: "type-fest@npm:1.4.0"
+  checksum: b011c3388665b097ae6a109a437a04d6f61d81b7357f74cbcb02246f2f5bd72b888ae33631b99871388122ba0a87f4ff1c94078e7119ff22c70e52c0ff828201
+  languageName: node
+  linkType: hard
+
 "type-is@npm:^1.6.16, type-is@npm:~1.6.17, type-is@npm:~1.6.18":
   version: 1.6.18
   resolution: "type-is@npm:1.6.18"
@@ -29994,7 +30097,7 @@ typescript@~4.3.5:
   languageName: node
   linkType: hard
 
-"wcwidth@npm:^1.0.0":
+"wcwidth@npm:^1.0.0, wcwidth@npm:^1.0.1":
   version: 1.0.1
   resolution: "wcwidth@npm:1.0.1"
   dependencies:
@@ -30749,6 +30852,21 @@ typescript@~4.3.5:
     y18n: ^5.0.5
     yargs-parser: ^20.2.2
   checksum: b14afbb51e3251a204d81937c86a7e9d4bdbf9a2bcee38226c900d00f522969ab675703bee2a6f99f8e20103f608382936034e64d921b74df82b63c07c5e8f59
+  languageName: node
+  linkType: hard
+
+"yargs@npm:^17.0.1":
+  version: 17.2.0
+  resolution: "yargs@npm:17.2.0"
+  dependencies:
+    cliui: ^7.0.2
+    escalade: ^3.1.1
+    get-caller-file: ^2.0.5
+    require-directory: ^2.1.1
+    string-width: ^4.2.0
+    y18n: ^5.0.5
+    yargs-parser: ^20.2.2
+  checksum: 7904ae4cb54c956ed4e2e0920417958e339c0e5305b6f7385a66afd5101a79dc83b38af856064a7dd1fd8458dc442936ee19e53b621349d410f7abebf2769772
   languageName: node
   linkType: hard
 

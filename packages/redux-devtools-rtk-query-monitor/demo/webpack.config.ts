@@ -21,7 +21,7 @@ module.exports = {
       patterns: [
         {
           from: 'public',
-          to: 'dist',
+          to: '.',
         },
       ],
     }),
@@ -44,6 +44,7 @@ module.exports = {
               '@babel/preset-react',
               '@babel/preset-typescript',
             ],
+            plugins: ['@babel/plugin-transform-runtime'],
           },
         },
       },

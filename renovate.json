@@ -14,19 +14,9 @@
       "groupName": "react monorepo"
     },
     {
-      "matchPackageNames": ["msw", "@mswjs/data"],
-      "matchUpdateTypes": ["major", "minor"],
-      "groupName": "msw"
-    },
-    {
       "matchPackageNames": ["knex"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "knex"
-    },
-    {
-      "matchPackageNames": ["object-path"],
-      "matchUpdateTypes": ["major", "minor"],
-      "groupName": "object-path"
     },
     {
       "matchPackageNames": ["typescript"],
@@ -36,11 +26,6 @@
     {
       "matchPackageNames": ["node"],
       "groupName": "node"
-    },
-    {
-      "matchPackageNames": ["prettier"],
-      "matchUpdateTypes": ["major", "minor", "patch"],
-      "groupName": "prettier"
     },
     {
       "matchPackageNames": ["source-map"],

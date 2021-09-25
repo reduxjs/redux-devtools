@@ -40,7 +40,6 @@
     "prepublish": "yarn run type-check && yarn run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.15.4",
     "@redux-devtools/ui": "^1.0.0-9",
     "@types/prop-types": "^15.7.4",
     "@types/redux-devtools-themes": "^1.0.0",
@@ -57,7 +56,6 @@
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.5",
-    "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
