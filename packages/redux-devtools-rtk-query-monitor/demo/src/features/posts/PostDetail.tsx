@@ -4,7 +4,7 @@ import {
   useDeletePostMutation,
   useGetPostQuery,
   useUpdatePostMutation,
-} from 'services/posts';
+} from '../../services/posts';
 import {
   Box,
   Button,

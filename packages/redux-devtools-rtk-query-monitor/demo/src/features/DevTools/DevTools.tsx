@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createDevTools } from '@redux-devtools/core';
 import DockMonitor from '@redux-devtools/dock-monitor';
-import RtkQueryMonitor from '../../../../src';
+import RtkQueryMonitor from '@redux-devtools/rtk-query-monitor';
 
 const largeScreenQuery = window.matchMedia('(min-width: 1024px)');
 
