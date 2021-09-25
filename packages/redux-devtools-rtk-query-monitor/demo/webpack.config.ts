@@ -5,6 +5,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as pkg from '../../package.json';
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 const demoSrc = path.join(__dirname, '../src');
