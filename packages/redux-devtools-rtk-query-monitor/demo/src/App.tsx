@@ -1,10 +1,10 @@
-import PokemonView from 'features/pokemon/PokemonView';
-import PostsView from 'features/posts/PostsView';
+import PokemonView from './features/pokemon/PokemonView';
+import PostsView from './features/posts/PostsView';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import { Link, UnorderedList, ListItem } from '@chakra-ui/react';
 import { Code } from '@chakra-ui/react';
 import * as React from 'react';
-import { DevToolsSelector } from 'features/DevTools/DevToolsSelector';
+import { DevToolsSelector } from './features/DevTools/DevToolsSelector';
 
 export function App() {
   return (

@@ -1,83 +1,59 @@
 import * as path from 'path';
-import * as webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import * as pkg from '../../package.json';
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-const demoSrc = path.join(__dirname, '../src');
-const libSrc = path.join(__dirname, '../../src');
+import pkg from '@redux-devtools/rtk-query-monitor/package.json';
 
 module.exports = {
-  mode: process.env.NODE_ENV || 'development',
-  entry: isProduction
-    ? ['./demo/src/index']
-    : [
-        'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/only-dev-server',
-        './demo/src/index',
+  mode: 'development',
+  entry: './src/index.tsx',
+  devtool: 'eval-source-map',
+  devServer: {
+    static: './dist',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      package: pkg,
+    }),
+    new ForkTsCheckerWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public',
+          to: 'dist',
+        },
       ],
+    }),
+  ],
   output: {
-    path: path.join(__dirname, '../dist'),
-    filename: isProduction ? '[name].[contenthash:8].js' : 'js/bundle.js',
+    filename: 'bundle.js',
+    path: path.join(__dirname, 'dist'),
+    clean: true,
   },
   module: {
     rules: [
       {
         test: /\.(js|ts)x?$/,
-        loader: 'babel-loader',
         exclude: /node_modules/,
-        include: [demoSrc, libSrc],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: 'defaults' }],
+              '@babel/preset-react',
+              '@babel/preset-typescript',
+            ],
+          },
+        },
       },
       {
-        test: /\.css?$/,
+        test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
-        include: demoSrc,
       },
     ],
   },
   resolve: {
-    modules: ['node_modules', demoSrc],
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
-  optimization: {
-    minimize: isProduction,
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: 'demo/public/index.html',
-      package: pkg,
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'demo/public/assets/*.js',
-          to: ({ absoluteFilename }) => {
-            return `./${path.basename(absoluteFilename)}`;
-          },
-          globOptions: {
-            ignore: ['*.DS_Store'],
-          },
-        },
-      ],
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      typescript: {
-        configFile: 'demo/tsconfig.json',
-      },
-    }),
-  ].concat(isProduction ? [] : [new webpack.HotModuleReplacementPlugin()]),
-  devServer: isProduction
-    ? {}
-    : {
-        port: 3000,
-        hot: true,
-        historyApiFallback: true,
-      },
-  devtool: isProduction ? 'source-map' : 'cheap-module-source-map',
 };

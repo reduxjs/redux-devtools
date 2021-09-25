@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { PostsManager } from 'features/posts/PostsManager';
+import { PostsManager } from '../../features/posts/PostsManager';
 import { Box, Heading } from '@chakra-ui/react';
 
 function PostsView() {

@@ -4947,9 +4947,11 @@ __metadata:
   dependencies:
     "@babel/cli": ^7.15.7
     "@babel/core": ^7.15.5
+    "@babel/plugin-transform-runtime": ^7.15.0
     "@babel/preset-env": ^7.15.6
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
+    "@babel/runtime": ^7.15.4
     "@redux-devtools/core": ^3.9.0
     "@redux-devtools/ui": ^1.0.0-9
     "@reduxjs/toolkit": ^1.6.1
@@ -12462,7 +12464,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.0, debug@npm:^4.3.1":
+"debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.0.1, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.0, debug@npm:^4.3.1, debug@npm:^4.3.2":
   version: 4.3.2
   resolution: "debug@npm:4.3.2"
   dependencies:
@@ -26084,6 +26086,7 @@ resolve@^2.0.0-next.3:
     msw: ^0.28.2
     react: ^16.14.0
     react-dom: ^16.14.0
+    react-icons: ^4.2.0
     react-redux: ^7.2.5
     react-router-dom: ^5.3.0
     style-loader: ^3.2.1

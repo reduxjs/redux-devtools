@@ -6,7 +6,7 @@ import './index.css';
 import { store } from './store';
 import DevTools from './features/DevTools/DevTools';
 import { BrowserRouter } from 'react-router-dom';
-import { App } from 'App';
+import { App } from './App';
 import { worker } from './mocks/browser';
 
 function renderApp() {

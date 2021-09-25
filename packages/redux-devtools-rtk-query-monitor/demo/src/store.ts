@@ -5,9 +5,9 @@ import {
   EnhancedStore,
 } from '@reduxjs/toolkit';
 import { pokemonApi } from './services/pokemon';
-import { postsApi } from 'services/posts';
+import { postsApi } from './services/posts';
 import DevTools from './features/DevTools/DevTools';
-import { isExtensionEnabled } from 'features/DevTools/helpers';
+import { isExtensionEnabled } from './features/DevTools/helpers';
 
 const devTools = isExtensionEnabled();
 
