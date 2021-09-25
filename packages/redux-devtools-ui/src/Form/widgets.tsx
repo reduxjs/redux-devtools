@@ -12,6 +12,7 @@ const SelectWidget: Widget = ({
   defaultValue,
   tabIndex,
   onFocus,
+  'aria-invalid': ariaInvalid,
   ...rest
 }) => (
   <Select<{ label: string; value: string }>

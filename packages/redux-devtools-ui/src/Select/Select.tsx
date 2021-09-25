@@ -1,17 +1,16 @@
 import React, { PureComponent, Component, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect, {
-  GroupTypeBase,
-  NamedProps as ReactSelectProps,
-  OptionTypeBase,
+  GroupBase,
+  Props as ReactSelectProps,
 } from 'react-select';
 import createThemedComponent from '../utils/createThemedComponent';
 import { Theme } from '../themes/default';
 
 export interface SelectProps<
-  Option extends OptionTypeBase,
+  Option,
   IsMulti extends boolean = false,
-  Group extends GroupTypeBase<Option> = GroupTypeBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>
 > extends Omit<ReactSelectProps<Option, IsMulti, Group>, 'theme'> {
   theme: Theme;
 }
@@ -20,9 +19,9 @@ export interface SelectProps<
  * Wrapper around [React Select](https://github.com/JedWatson/react-select).
  */
 export class Select<
-  Option extends OptionTypeBase,
+  Option,
   IsMulti extends boolean = false,
-  Group extends GroupTypeBase<Option> = GroupTypeBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>
 > extends (PureComponent || Component)<SelectProps<Option, IsMulti, Group>> {
   render() {
     return (
@@ -95,17 +94,17 @@ export class Select<
 }
 
 export interface ExternalSelectProps<
-  Option extends OptionTypeBase,
+  Option,
   IsMulti extends boolean = false,
-  Group extends GroupTypeBase<Option> = GroupTypeBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>
 > extends Omit<ReactSelectProps<Option, IsMulti, Group>, 'theme'> {
   theme?: Theme;
 }
 
 type SelectComponent = <
-  Option extends OptionTypeBase,
+  Option,
   IsMulti extends boolean = false,
-  Group extends GroupTypeBase<Option> = GroupTypeBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: ExternalSelectProps<Option, IsMulti, Group>
 ) => ReactElement;

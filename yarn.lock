@@ -2697,7 +2697,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/serialize@npm:^1.0.0, @emotion/serialize@npm:^1.0.2":
+"@emotion/serialize@npm:^1.0.2":
   version: 1.0.2
   resolution: "@emotion/serialize@npm:1.0.2"
   dependencies:
@@ -5144,7 +5144,6 @@ __metadata:
     "@types/json-schema": ^7.0.9
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.15
-    "@types/react-select": ^4.0.17
     "@types/redux-devtools-themes": ^1.0.0
     "@types/simple-element-resize-detector": ^1.3.0
     "@types/styled-components": ^5.1.14
@@ -5167,7 +5166,7 @@ __metadata:
     react-dom: ^16.14.0
     react-icons: ^4.2.0
     react-is: ^16.13.1
-    react-select: ^4.3.1
+    react-select: ^5.0.0
     redux-devtools-themes: ^1.0.0
     rimraf: ^3.0.2
     simple-element-resize-detector: ^1.3.0
@@ -7312,7 +7311,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:*, @types/react-dom@npm:^16.9.14":
+"@types/react-dom@npm:^16.9.14":
   version: 16.9.14
   resolution: "@types/react-dom@npm:16.9.14"
   dependencies:
@@ -7363,18 +7362,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-select@npm:^4.0.17":
-  version: 4.0.17
-  resolution: "@types/react-select@npm:4.0.17"
-  dependencies:
-    "@emotion/serialize": ^1.0.0
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    "@types/react-transition-group": "*"
-  checksum: aa94bd1ff3536ab2bb8443bcf3c11109bcd78ae965dc534b205273eb98a84487d272e008adff50744870255e4ec5767465283649abd3d449fbc712718c062fca
-  languageName: node
-  linkType: hard
-
 "@types/react-syntax-highlighter@npm:11.0.5":
   version: 11.0.5
   resolution: "@types/react-syntax-highlighter@npm:11.0.5"
@@ -7393,7 +7380,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-transition-group@npm:*, @types/react-transition-group@npm:^4.4.1":
+"@types/react-transition-group@npm:^4.4.0, @types/react-transition-group@npm:^4.4.1":
   version: 4.4.3
   resolution: "@types/react-transition-group@npm:4.4.3"
   dependencies:
@@ -23796,7 +23783,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -24640,17 +24627,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-input-autosize@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "react-input-autosize@npm:3.0.0"
-  dependencies:
-    prop-types: ^15.5.8
-  peerDependencies:
-    react: ^16.3.0 || ^17.0.0
-  checksum: cc3309ddc87446ade742c7d0e88ef089dd8b6981f21506a2bb27daf01a8803ac697f64157c4ffc7e81dfcf3892b54a4072dbc3652fd9addcf6d22dd0b87ab723
-  languageName: node
-  linkType: hard
-
 "react-inspector@npm:^5.1.0":
   version: 5.1.1
   resolution: "react-inspector@npm:5.1.1"
@@ -24914,21 +24890,21 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-select@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "react-select@npm:4.3.1"
+"react-select@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "react-select@npm:5.0.0"
   dependencies:
     "@babel/runtime": ^7.12.0
     "@emotion/cache": ^11.4.0
     "@emotion/react": ^11.1.1
+    "@types/react-transition-group": ^4.4.0
     memoize-one: ^5.0.0
     prop-types: ^15.6.0
-    react-input-autosize: ^3.0.0
     react-transition-group: ^4.3.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: e87e0b42a662ddce7957a69a3029ea769b22264c197cbd1d8bde1ce631e49c5c5f42414773364674a7a6a8431340e1ede49220583bf1dcd966b63e9bd25cfc12
+  checksum: f0a0762ebccc7f825c583ec8ab13d372eeba5c2deea054264df6f3a15eab0bcd06aec7a1771765eb353a40e32407ac659e739657085b484a82e0b79efe2800d4
   languageName: node
   linkType: hard
 
