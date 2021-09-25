@@ -8,7 +8,7 @@ import InspectorMonitor, {
 import DockMonitor from '@redux-devtools/dock-monitor';
 import { Location } from 'history';
 import getOptions from './getOptions';
-import TestGenerator from '../../../src';
+import TestGenerator from '../../lib';
 import { DemoAppState } from './reducers';
 import { Action } from 'redux';
 
