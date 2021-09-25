@@ -24,7 +24,10 @@ const NESTED = {
   },
 };
 
-const IMMUTABLE_NESTED = Immutable.fromJS(NESTED);
+const IMMUTABLE_NESTED = Immutable.fromJS(NESTED) as Immutable.Map<
+  unknown,
+  unknown
+>;
 
 const IMMUTABLE_MAP = Immutable.Map({
   map: Immutable.Map({ a: 1, b: 2, c: 3 }),
@@ -216,7 +219,7 @@ const createRootReducer = (
       action.type === 'CHANGE_IMMUTABLE_NESTED'
         ? state.updateIn(
             ['long', 'nested', 0, 'path', 'to', 'a'],
-            (str: string) => str + '!'
+            (str: unknown) => (str as string) + '!'
           )
         : state,
     addFunction: (state = null, action) =>

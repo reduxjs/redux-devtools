@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import { connect } from 'react-redux';
 import { Button, Toolbar, Spacer } from '@redux-devtools/ui';
 import { push as pushRoute } from 'connected-react-router';
-import pkg from '../../../package.json';
+import pkg from '@redux-devtools/inspector-monitor-test-tab/package.json';
 import getOptions from './getOptions';
 import { DemoAppState } from './reducers';
 import {
