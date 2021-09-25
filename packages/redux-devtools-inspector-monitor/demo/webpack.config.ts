@@ -1,7 +1,7 @@
 import * as path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import pkg from '../package.json';
+import pkg from '@redux-devtools/inspector-monitor/package.json';
 
 module.exports = {
   mode: 'development',
