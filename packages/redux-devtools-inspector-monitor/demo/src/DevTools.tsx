@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { createDevTools } from '@redux-devtools/core';
 import DockMonitor from '@redux-devtools/dock-monitor';
 import { Location } from 'history';
-import DevtoolsInspector from '../../../src/DevtoolsInspector';
+import DevtoolsInspector from '@redux-devtools/inspector-monitor/lib/DevtoolsInspector';
 import getOptions from './getOptions';
-import { base16Themes } from '../../../src/utils/createStylingFromTheme';
+import { base16Themes } from '@redux-devtools/inspector-monitor/lib/utils/createStylingFromTheme';
 import { DemoAppState } from './reducers';
 
 const CustomComponent = () => (

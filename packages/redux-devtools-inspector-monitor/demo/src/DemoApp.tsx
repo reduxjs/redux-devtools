@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { connect } from 'react-redux';
-import pkg from '../../../package.json';
+import pkg from '@redux-devtools/inspector-monitor/package.json';
 import Button from 'react-bootstrap/Button';
 import FormGroup from 'react-bootstrap/FormGroup';
 import FormControl from 'react-bootstrap/FormControl';
@@ -12,7 +12,7 @@ import Row from 'react-bootstrap/Row';
 import * as base16 from 'base16';
 import { push as pushRoute } from 'connected-react-router';
 import { Path } from 'history';
-import * as inspectorThemes from '../../../src/themes';
+import * as inspectorThemes from '@redux-devtools/inspector-monitor/lib/themes';
 import getOptions, { Options } from './getOptions';
 import {
   AddFunctionAction,

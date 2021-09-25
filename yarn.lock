@@ -4862,63 +4862,38 @@ __metadata:
     "@babel/preset-typescript": ^7.15.0
     "@babel/runtime": ^7.15.4
     "@redux-devtools/core": ^3.9.0
-    "@redux-devtools/dock-monitor": ^1.4.0
     "@types/dateformat": ^3.0.1
     "@types/dragula": ^3.7.1
     "@types/hex-rgba": ^1.0.1
     "@types/history": ^4.7.9
     "@types/lodash": ^4.14.173
     "@types/lodash.debounce": ^4.0.6
-    "@types/lodash.shuffle": ^4.2.6
-    "@types/node": ^14.17.17
     "@types/prop-types": ^15.7.4
     "@types/react": ^16.14.15
     "@types/react-dragula": ^1.1.0
-    "@types/react-router": ^5.1.16
     "@types/redux-devtools-themes": ^1.0.0
-    "@types/redux-logger": ^3.0.9
-    "@types/webpack": ^5.28.0
-    "@types/webpack-dev-server": ^4.1.0
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
-    babel-loader: ^8.2.2
-    base16: ^1.0.0
-    clean-webpack-plugin: ^4.0.0
-    connected-react-router: ^6.9.1
     dateformat: ^4.5.1
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.25.3
-    fork-ts-checker-webpack-plugin: ^6.3.3
     hex-rgba: ^1.0.2
-    history: ^4.10.1
-    html-webpack-plugin: ^5.3.2
     immutable: ^4.0.0-rc.15
     javascript-stringify: ^2.1.0
     jsondiffpatch: ^0.4.1
     jss: ^10.8.0
     jss-preset-default: ^10.8.0
     lodash.debounce: ^4.0.8
-    lodash.shuffle: ^4.2.0
     prop-types: ^15.7.2
     react: ^16.14.0
     react-base16-styling: ^0.8.0
-    react-bootstrap: ^1.6.3
-    react-dom: ^16.14.0
     react-dragula: ^1.1.17
     react-json-tree: ^0.15.0
-    react-redux: ^7.2.5
-    react-router: ^5.2.1
     redux: ^4.1.1
     redux-devtools-themes: ^1.0.0
-    redux-logger: ^3.0.6
     rimraf: ^3.0.2
-    seamless-immutable: ^7.1.4
-    ts-node: ^10.2.1
     typescript: ~4.3.5
-    webpack: ^5.53.0
-    webpack-cli: ^4.8.0
-    webpack-dev-server: ^4.2.1
   peerDependencies:
     "@redux-devtools/core": ^3.7.0
     "@types/react": ^16.3.0 || ^17.0.0
@@ -17160,6 +17135,57 @@ fsevents@^1.2.7:
   checksum: 4d387fc1eb6126acbd58cbdb9ad99d2887d181df86ab0c2b9abdf734e751093e2d5882c2b6dc7144d9ab16b7ab30a78a1d7f01fb6a2850a44aeb175d1e3f8778
   languageName: node
   linkType: hard
+
+"inspector-demo@workspace:packages/redux-devtools-inspector-monitor/demo":
+  version: 0.0.0-use.local
+  resolution: "inspector-demo@workspace:packages/redux-devtools-inspector-monitor/demo"
+  dependencies:
+    "@babel/core": ^7.15.5
+    "@babel/preset-env": ^7.15.6
+    "@babel/preset-react": ^7.14.5
+    "@babel/preset-typescript": ^7.15.0
+    "@redux-devtools/core": ^3.9.0
+    "@redux-devtools/dock-monitor": ^1.4.0
+    "@redux-devtools/inspector-monitor": ^1.0.0
+    "@types/base16": ^1.0.2
+    "@types/history": ^4.7.9
+    "@types/lodash.shuffle": ^4.2.6
+    "@types/node": ^14.17.17
+    "@types/react": ^16.14.15
+    "@types/react-dom": ^16.9.14
+    "@types/react-redux": ^7.1.18
+    "@types/react-router": ^5.1.16
+    "@types/redux-logger": ^3.0.9
+    "@types/webpack": ^5.28.0
+    "@types/webpack-dev-server": ^4.1.0
+    "@typescript-eslint/eslint-plugin": ^4.31.2
+    "@typescript-eslint/parser": ^4.31.2
+    babel-loader: ^8.2.2
+    base16: ^1.0.0
+    connected-react-router: ^6.9.1
+    eslint: ^7.32.0
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-react: ^7.25.3
+    fork-ts-checker-webpack-plugin: ^6.3.3
+    history: ^4.10.1
+    html-webpack-plugin: ^5.3.2
+    immutable: ^4.0.0-rc.15
+    lodash.shuffle: ^4.2.0
+    react: ^16.14.0
+    react-bootstrap: ^1.6.3
+    react-dom: ^16.14.0
+    react-redux: ^7.2.5
+    react-router: ^5.2.1
+    redux: ^4.1.1
+    redux-logger: ^3.0.6
+    seamless-immutable: ^7.1.4
+    ts-node: ^10.2.1
+    typescript: ~4.3.5
+    webpack: ^5.53.0
+    webpack-cli: ^4.8.0
+    webpack-dev-server: ^4.2.1
+  languageName: unknown
+  linkType: soft
 
 "internal-ip@npm:^6.2.0":
   version: 6.2.0
