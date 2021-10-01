@@ -22,7 +22,7 @@
     "start": "yarn run storybook",
     "storybook": "start-storybook -p 6006 -s ./fonts",
     "build-storybook": "build-storybook -s ./fonts",
-    "build": "yarn run build:types && yarn run build:js",
+    "build": "yarn run build:types && yarn run build:js && yarn run build-storybook",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "clean": "rimraf lib",
