@@ -9,7 +9,8 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --open",
+    "build": "webpack",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit"
   },
@@ -19,9 +20,9 @@
     "@redux-devtools/log-monitor": "^2.3.0",
     "@redux-devtools/slider-monitor": "^2.0.0-8",
     "classnames": "^2.3.1",
+    "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-hot-loader": "^4.13.0",
     "react-redux": "^7.2.5",
     "redux": "^4.1.1",
     "todomvc-app-css": "^2.4.1"
@@ -33,6 +34,7 @@
     "@babel/preset-typescript": "^7.15.0",
     "@types/classnames": "^2.3.1",
     "@types/node": "^14.17.17",
+    "@types/prop-types": "^15.7.4",
     "@types/react": "^16.14.15",
     "@types/react-dom": "^16.9.14",
     "@types/react-redux": "^7.1.18",
@@ -41,10 +43,12 @@
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "babel-loader": "^8.2.2",
+    "css-loader": "^6.3.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.25.3",
-    "raw-loader": "^4.0.2",
+    "fork-ts-checker-webpack-plugin": "^6.3.3",
+    "html-webpack-plugin": "^5.3.2",
     "style-loader": "^3.2.1",
     "ts-node": "^10.2.1",
     "typescript": "~4.3.5",
