@@ -16,11 +16,5 @@ const enhancer = compose(
 export default function configureStore(
   initialState?: PreloadedState<TodoState>
 ) {
-  const store = createStore(rootReducer, initialState, enhancer);
-
-  if (module.hot) {
-    module.hot.accept('../reducers', () => store.replaceReducer(rootReducer));
-  }
-
-  return store;
+  return createStore(rootReducer, initialState, enhancer);
 }
