@@ -5076,7 +5076,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.31.2
     base16: ^1.0.0
     codemirror: ^5.63.0
-    color: ^4.0.1
+    color: ^3.2.1
     csstype: ^3.0.9
     enzyme: ^3.11.0
     enzyme-adapter-react-16: ^1.15.6
@@ -11240,7 +11240,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-convert@npm:^1.9.0":
+"color-convert@npm:^1.9.0, color-convert@npm:^1.9.3":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
   dependencies:
@@ -11282,13 +11282,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "color@npm:4.0.1"
+"color@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "color@npm:3.2.1"
   dependencies:
-    color-convert: ^2.0.1
+    color-convert: ^1.9.3
     color-string: ^1.6.0
-  checksum: 46b1e7c6a5d5b1db5e0a8f1f32eea015a1923c9a591cbef67e20b439d67fe8043a7c3beb96c602f0055068909c3ee73bc8ee1817e76a25861a92f64430d6118f
+  checksum: f81220e8b774d35865c2561be921f5652117638dcda7ca4029262046e37fc2444ac7bbfdd110cf1fd9c074a4ee5eda8f85944ffbdda26186b602dd9bb05f6400
   languageName: node
   linkType: hard
 
@@ -24307,7 +24307,7 @@ fsevents@^1.2.7:
     "@typescript-eslint/eslint-plugin": ^4.31.2
     "@typescript-eslint/parser": ^4.31.2
     base16: ^1.0.0
-    color: ^4.0.1
+    color: ^3.2.1
     csstype: ^3.0.9
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
