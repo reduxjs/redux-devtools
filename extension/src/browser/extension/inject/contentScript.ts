@@ -212,7 +212,10 @@ function tryCatch<S, A extends Action<unknown>>(
   try {
     return fn(args);
   } catch (err) {
-    if (err.message === 'Message length exceeded maximum allowed length.') {
+    if (
+      (err as Error).message ===
+      'Message length exceeded maximum allowed length.'
+    ) {
       const instanceId = (args as any).instanceId;
       const newArgs = {
         split: 'start',

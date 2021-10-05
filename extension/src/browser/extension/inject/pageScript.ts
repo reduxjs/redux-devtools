@@ -397,7 +397,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       toContentScript(
         {
           type: 'ERROR',
-          payload: e.message,
+          payload: (e as Error).message,
           source,
           instanceId,
         },
@@ -417,7 +417,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       toContentScript(
         {
           type: 'ERROR',
-          payload: e.message,
+          payload: (e as Error).message,
           source,
           instanceId,
         },
