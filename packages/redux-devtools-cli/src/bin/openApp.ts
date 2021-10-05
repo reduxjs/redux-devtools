@@ -14,7 +14,7 @@ export default async function openApp(app: true | string, options: Options) {
       ]);
     } catch (error) {
       /* eslint-disable no-console */
-      if (error.message === "Cannot find module 'electron'") {
+      if ((error as Error).message === "Cannot find module 'electron'") {
         // TODO: Move electron to dev-dependences to make our package installation faster when not needed.
         console.log(
           '   \x1b[1;31m[Warn]\x1b[0m Electron module not installed.\n'
