@@ -195,8 +195,10 @@ function connect() {
     socket = socketCluster.create(connection.options);
     handleConnection();
   } catch (error) {
-    store.dispatch({ type: actions.CONNECT_ERROR, error });
-    store.dispatch(showNotification(error.message || error));
+    store.dispatch({ type: actions.CONNECT_ERROR, error: error as Error });
+    store.dispatch(
+      showNotification((error as Error).message || (error as string))
+    );
   }
 }
 
