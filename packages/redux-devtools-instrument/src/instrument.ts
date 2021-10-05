@@ -274,7 +274,8 @@ function computeWithTryCatch<S, A extends Action<unknown>>(
   try {
     nextState = reducer(state, action);
   } catch (err) {
-    nextError = err.toString();
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    nextError = (err as object).toString();
     if (isChrome) {
       // In Chrome, rethrowing provides better source map support
       setTimeout(() => {
