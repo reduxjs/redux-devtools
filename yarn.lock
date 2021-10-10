@@ -4516,7 +4516,7 @@ __metadata:
     enzyme-to-json: ^3.6.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     eslint-plugin-react: ^7.26.1
     file-loader: ^6.2.0
     fork-ts-checker-webpack-plugin: ^6.3.3
@@ -4622,7 +4622,7 @@ __metadata:
     electron: ^15.1.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     express: ^4.17.1
     getport: ^0.1.0
     graphql: ^14.7.0
@@ -4671,7 +4671,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.33.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     eslint-plugin-react: ^7.26.1
     jest: ^27.2.4
     lodash: ^4.17.21
@@ -4754,7 +4754,7 @@ __metadata:
     es6template: ^1.0.5
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     eslint-plugin-react: ^7.26.1
     javascript-stringify: ^2.1.0
     jest: ^27.2.4
@@ -4808,7 +4808,7 @@ __metadata:
     enzyme-to-json: ^3.6.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     eslint-plugin-react: ^7.26.1
     html-entities: ^2.3.2
     jest: ^27.2.4
@@ -4896,7 +4896,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.33.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     jest: ^27.2.4
     lodash: ^4.17.21
     redux: ^4.1.1
@@ -5002,7 +5002,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.33.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     immutable: ^4.0.0-rc.15
     jest: ^27.2.4
     jsan: ^3.1.13
@@ -5082,7 +5082,7 @@ __metadata:
     enzyme-to-json: ^3.6.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     eslint-plugin-react: ^7.26.1
     jest: ^27.2.4
     prop-types: ^15.7.2
@@ -13883,18 +13883,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:^24.5.2":
-  version: 24.5.2
-  resolution: "eslint-plugin-jest@npm:24.5.2"
+"eslint-plugin-jest@npm:^25.0.1":
+  version: 25.0.1
+  resolution: "eslint-plugin-jest@npm:25.0.1"
   dependencies:
     "@typescript-eslint/experimental-utils": ^4.0.1
   peerDependencies:
-    "@typescript-eslint/eslint-plugin": ">= 4"
-    eslint: ">=5"
+    "@typescript-eslint/eslint-plugin": ^4.0.0
+    eslint: ^6.0.0 || ^7.0.0
   peerDependenciesMeta:
     "@typescript-eslint/eslint-plugin":
       optional: true
-  checksum: e314d9e3443791273089dd8f90915a4b1dc54db20099725ef9673ff369d4ad361fd8b369eff36c63de797c06f702162f5543a52847877f4a7d6c656a0991df84
+  checksum: b32fe8c5aa5fe3c6e22fa6a6d7dba9cab366c8cf973b288e9e5e75c35ffa08638dee49e20271bb61e8e70e2323fed2feeade085fd572ded4703f6defde415a95
   languageName: node
   linkType: hard
 
@@ -20324,7 +20324,7 @@ fsevents@^1.2.7:
     babel-loader: ^8.2.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     immutable: ^4.0.0-rc.15
     jest: ^27.2.4
     lodash: ^4.17.21
@@ -24337,7 +24337,7 @@ fsevents@^1.2.7:
     csstype: ^3.0.9
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     jest: ^27.2.4
     lodash.curry: ^4.1.1
     rimraf: ^3.0.2
@@ -24519,7 +24519,7 @@ fsevents@^1.2.7:
     "@typescript-eslint/parser": ^4.33.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     eslint-plugin-react: ^7.26.1
     jest: ^27.2.4
     lodash.debounce: ^4.0.8
@@ -24721,7 +24721,7 @@ fsevents@^1.2.7:
     babel-loader: ^8.2.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     eslint-plugin-react: ^7.26.1
     jest: ^27.2.4
     prop-types: ^15.7.2
@@ -26122,7 +26122,7 @@ resolve@^2.0.0-next.3:
     "@typescript-eslint/parser": ^4.33.0
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
-    eslint-plugin-jest: ^24.5.2
+    eslint-plugin-jest: ^25.0.1
     eslint-plugin-react: ^7.26.1
     jest: ^27.2.4
     lerna: ^4.0.0
