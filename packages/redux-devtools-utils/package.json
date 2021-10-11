@@ -34,20 +34,20 @@
     "@redux-devtools/serialize": "^0.3.0",
     "@types/get-params": "^0.1.0",
     "get-params": "^0.1.2",
-    "immutable": "^4.0.0-rc.15",
+    "immutable": "^4.0.0",
     "jsan": "^3.1.13",
     "lodash": "^4.17.21",
-    "nanoid": "^3.1.28",
+    "nanoid": "^3.1.29",
     "redux": "^4.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.6",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
     "@types/jsan": "^3.1.2",
     "@types/lodash": "^4.14.175",
-    "@types/node": "^14.17.20",
+    "@types/node": "^14.17.21",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
@@ -57,7 +57,7 @@
   },
   "peerDependencies": {
     "@redux-devtools/core": "^3.7.0",
-    "immutable": "^4.0.0-rc.15",
+    "immutable": "^4.0.0",
     "redux": "^4.1.1"
   }
 }

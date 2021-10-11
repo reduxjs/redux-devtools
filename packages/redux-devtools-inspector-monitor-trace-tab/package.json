@@ -26,9 +26,9 @@
     "prepublish": "yarn run type-check && yarn run lint && yarn run test"
   },
   "dependencies": {
-    "@babel/code-frame": "^7.14.5",
+    "@babel/code-frame": "^7.15.8",
     "@babel/runtime": "^7.15.4",
-    "@types/chrome": "^0.0.158",
+    "@types/chrome": "^0.0.159",
     "anser": "^2.0.2",
     "html-entities": "^2.3.2",
     "redux-devtools-themes": "^1.0.0",
@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.5",
-    "@babel/plugin-transform-runtime": "^7.15.0",
-    "@babel/preset-env": "^7.15.6",
+    "@babel/core": "^7.15.8",
+    "@babel/plugin-transform-runtime": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
     "@redux-devtools/core": "^3.9.0",
@@ -60,7 +60,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^25.0.1",
     "eslint-plugin-react": "^7.26.1",
-    "jest": "^27.2.4",
+    "jest": "^27.2.5",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-test-renderer": "^16.14.0",
