@@ -37,7 +37,7 @@
     "prepublish": "yarn run type-check && yarn run lint && yarn run test"
   },
   "engines": {
-    "node": ">=14.15.0"
+    "node": ">=v14.18.1"
   },
   "dependencies": {
     "@redux-devtools/app": "^1.0.0-8",
