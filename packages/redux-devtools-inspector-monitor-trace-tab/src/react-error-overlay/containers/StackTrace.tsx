@@ -94,7 +94,11 @@ class StackTrace extends Component<Props> {
   }
 
   render() {
-    return <div style={traceStyle}>{this.renderFrames()}</div>;
+    return (
+      <div data-testid="stack-trace" style={traceStyle}>
+        {this.renderFrames()}
+      </div>
+    );
   }
 }
 
