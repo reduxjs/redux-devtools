@@ -183,11 +183,9 @@ class DemoApp extends React.Component<Props> {
                         />
                       ))}
                     </FormControl>
-                    <InputGroup.Append>
-                      <a onClick={this.toggleTheme} style={styles.link}>
-                        {options.dark ? 'Light theme' : 'Dark theme'}
-                      </a>
-                    </InputGroup.Append>
+                    <a onClick={this.toggleTheme} style={styles.link}>
+                      {options.dark ? 'Light theme' : 'Dark theme'}
+                    </a>
                   </InputGroup>
                 </Col>
               </FormGroup>
