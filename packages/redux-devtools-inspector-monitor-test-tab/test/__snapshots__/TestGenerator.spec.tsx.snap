@@ -2,13 +2,13 @@
 
 exports[`TestGenerator component should be empty when no actions provided 1`] = `
 <textarea
-  style="padding:10px;width:100%;height:100%"
+  style="padding: 10px; width: 100%; height: 100%;"
 />
 `;
 
 exports[`TestGenerator component should generate test for the last action when selectedActionId not specified 1`] = `
 <textarea
-  style="padding:10px;width:100%;height:100%"
+  style="padding: 10px; width: 100%; height: 100%;"
 >
   import expect from 'expect';
 import reducers from '../../reducers';
@@ -26,7 +26,7 @@ expect(state).toEqual({counter:1});
 
 exports[`TestGenerator component should generate test for vanilla js class 1`] = `
 <textarea
-  style="padding:10px;width:100%;height:100%"
+  style="padding: 10px; width: 100%; height: 100%;"
 >
   import expect from 'expect';
 import SomeStore from '../../stores/SomeStore';
@@ -44,7 +44,7 @@ expect(store.counter).toEqual(1);
 
 exports[`TestGenerator component should generate test for vanilla js class with string template 1`] = `
 <textarea
-  style="padding:10px;width:100%;height:100%"
+  style="padding: 10px; width: 100%; height: 100%;"
 >
   import expect from 'expect';
 import SomeStore from '../../stores/SomeStore';
@@ -62,7 +62,7 @@ describe('SomeStore', () =&gt; {
 
 exports[`TestGenerator component should match function template's test for first action 1`] = `
 <textarea
-  style="padding:10px;width:100%;height:100%"
+  style="padding: 10px; width: 100%; height: 100%;"
 >
   import expect from 'expect';
 import reducers from '../../reducers';
@@ -80,7 +80,7 @@ expect(state).toEqual({counter:1});
 
 exports[`TestGenerator component should match string template's test for first action 1`] = `
 <textarea
-  style="padding:10px;width:100%;height:100%"
+  style="padding: 10px; width: 100%; height: 100%;"
 >
   import expect from 'expect';
 import reducers from '../../reducers';
@@ -98,6 +98,6 @@ describe('reducers', () =&gt; {
 
 exports[`TestGenerator component should show warning message when no params provided 1`] = `
 <textarea
-  style="padding:10px;width:100%;height:100%"
+  style="padding: 10px; width: 100%; height: 100%;"
 />
 `;

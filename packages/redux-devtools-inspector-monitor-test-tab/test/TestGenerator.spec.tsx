@@ -1,6 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
 import { PerformAction } from '@redux-devtools/core';
 import { Action } from 'redux';
 import TestGenerator from '../src/TestGenerator';
@@ -30,12 +29,12 @@ const TestGeneratorAsAny = TestGenerator as any;
 
 describe('TestGenerator component', () => {
   it('should show warning message when no params provided', () => {
-    const component = render(<TestGeneratorAsAny useCodemirror={false} />);
-    expect(renderToJson(component)).toMatchSnapshot();
+    const { container } = render(<TestGeneratorAsAny useCodemirror={false} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should be empty when no actions provided', () => {
-    const component = render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={fnTemplate.assertion}
         dispatcher={fnTemplate.dispatcher}
@@ -43,11 +42,11 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(renderToJson(component)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it("should match function template's test for first action", () => {
-    const component = render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={fnTemplate.assertion}
         dispatcher={fnTemplate.dispatcher}
@@ -58,11 +57,11 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(renderToJson(component)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it("should match string template's test for first action", () => {
-    const component = render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={strTemplate.assertion}
         dispatcher={strTemplate.dispatcher}
@@ -73,11 +72,11 @@ describe('TestGenerator component', () => {
         selectedActionId={1}
       />
     );
-    expect(renderToJson(component)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should generate test for the last action when selectedActionId not specified', () => {
-    const component = render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={fnTemplate.assertion}
         dispatcher={fnTemplate.dispatcher}
@@ -87,11 +86,11 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(renderToJson(component)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should generate test for vanilla js class', () => {
-    const component = render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={fnVanillaTemplate.assertion}
         dispatcher={fnVanillaTemplate.dispatcher}
@@ -104,11 +103,11 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(renderToJson(component)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should generate test for vanilla js class with string template', () => {
-    const component = render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={strVanillaTemplate.assertion}
         dispatcher={strVanillaTemplate.dispatcher}
@@ -121,6 +120,6 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(renderToJson(component)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
