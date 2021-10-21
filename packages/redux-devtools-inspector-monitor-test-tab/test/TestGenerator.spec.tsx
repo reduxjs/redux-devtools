@@ -29,12 +29,12 @@ const TestGeneratorAsAny = TestGenerator as any;
 
 describe('TestGenerator component', () => {
   it('should show warning message when no params provided', () => {
-    render(<TestGeneratorAsAny useCodemirror={false} />);
-    expect(screen.getByRole('textbox')).toMatchSnapshot();
+    const { container } = render(<TestGeneratorAsAny useCodemirror={false} />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should be empty when no actions provided', () => {
-    render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={fnTemplate.assertion}
         dispatcher={fnTemplate.dispatcher}
@@ -42,11 +42,11 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(screen.getByRole('textbox')).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it("should match function template's test for first action", () => {
-    render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={fnTemplate.assertion}
         dispatcher={fnTemplate.dispatcher}
@@ -57,11 +57,11 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(screen.getByRole('textbox')).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it("should match string template's test for first action", () => {
-    render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={strTemplate.assertion}
         dispatcher={strTemplate.dispatcher}
@@ -72,11 +72,11 @@ describe('TestGenerator component', () => {
         selectedActionId={1}
       />
     );
-    expect(screen.getByRole('textbox')).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should generate test for the last action when selectedActionId not specified', () => {
-    render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={fnTemplate.assertion}
         dispatcher={fnTemplate.dispatcher}
@@ -86,11 +86,11 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(screen.getByRole('textbox')).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should generate test for vanilla js class', () => {
-    render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={fnVanillaTemplate.assertion}
         dispatcher={fnVanillaTemplate.dispatcher}
@@ -103,11 +103,11 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(screen.getByRole('textbox')).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should generate test for vanilla js class with string template', () => {
-    render(
+    const { container } = render(
       <TestGeneratorAsAny
         assertion={strVanillaTemplate.assertion}
         dispatcher={strVanillaTemplate.dispatcher}
@@ -120,6 +120,6 @@ describe('TestGenerator component', () => {
         useCodemirror={false}
       />
     );
-    expect(screen.getByRole('textbox')).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
