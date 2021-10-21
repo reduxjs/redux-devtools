@@ -1,4 +1,10 @@
-import { createStore, applyMiddleware, compose, PreloadedState } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose,
+  PreloadedState,
+  Reducer,
+} from 'redux';
 import { persistState } from '@redux-devtools/core';
 import thunk from 'redux-thunk';
 import rootReducer, { CounterState } from '../reducers';
@@ -23,7 +29,7 @@ export default function configureStore(
   if (module.hot) {
     module.hot.accept('../reducers', () =>
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      store.replaceReducer(require('../reducers').default)
+      store.replaceReducer(require('../reducers').default as Reducer)
     );
   }
 

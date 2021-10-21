@@ -85,7 +85,11 @@ export default class LogMonitorEntry<
           ) => ({
             style: {
               ...style,
-              backgroundColor: dataIsEqual(data, previousData, keyPath)
+              backgroundColor: dataIsEqual(
+                data,
+                previousData,
+                keyPath as (string | number)[]
+              )
                 ? 'transparent'
                 : this.props.theme.base01,
             },
@@ -93,7 +97,7 @@ export default class LogMonitorEntry<
           const getNestedNodeStyle: StylingValue = ({ style }, keyPath) => ({
             style: {
               ...style,
-              ...(keyPath.length > 1 ? {} : styles.root),
+              ...((keyPath as unknown[]).length > 1 ? {} : styles.root),
             },
           });
           theme = {

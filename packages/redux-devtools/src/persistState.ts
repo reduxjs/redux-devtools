@@ -36,9 +36,9 @@ export default function persistState<
   }
 
   return (next) =>
-    <S, A extends Action<unknown>>(
-      reducer: Reducer<S, A>,
-      initialState?: PreloadedState<S>
+    <S2, A2 extends Action<unknown>>(
+      reducer: Reducer<S2, A2>,
+      initialState?: PreloadedState<S2>
     ) => {
       const key = `redux-dev-session-${sessionId}`;
 
@@ -46,7 +46,9 @@ export default function persistState<
       try {
         const json = localStorage.getItem(key);
         if (json) {
-          finalInitialState = deserialize(JSON.parse(json)) || initialState;
+          finalInitialState =
+            deserialize(JSON.parse(json) as LiftedState<S, A, MonitorState>) ||
+            initialState;
           next(reducer, initialState);
         }
       } catch (e) {
@@ -60,12 +62,12 @@ export default function persistState<
 
       const store = next(
         reducer,
-        finalInitialState as PreloadedState<S> | undefined
+        finalInitialState as PreloadedState<S2> | undefined
       );
 
       return {
         ...store,
-        dispatch<T extends A>(action: T) {
+        dispatch<T extends A2>(action: T) {
           store.dispatch(action);
 
           try {

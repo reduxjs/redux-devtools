@@ -55,7 +55,7 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
       backgroundColor: colors.BACKGROUND_COLOR,
     },
 
-    value: ({ style }, nodeType, keyPath: (string | number)[]) => ({
+    value: ({ style }, nodeType, keyPath) => ({
       style: {
         ...style,
         paddingTop: '0.25em',
@@ -64,7 +64,7 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
         WebkitUserSelect: 'text',
         MozUserSelect: 'text',
         wordWrap: 'break-word',
-        paddingLeft: keyPath.length > 1 ? '2.125em' : '1.25em',
+        paddingLeft: (keyPath as unknown[]).length > 1 ? '2.125em' : '1.25em',
         textIndent: '-0.5em',
         wordBreak: 'break-all',
       },
@@ -136,18 +136,12 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
       left: '-0.4em',
     },
 
-    nestedNode: (
-      { style },
-      keyPath: (string | number)[],
-      nodeType,
-      expanded,
-      expandable
-    ) => ({
+    nestedNode: ({ style }, keyPath, nodeType, expanded, expandable) => ({
       style: {
         ...style,
         position: 'relative',
         paddingTop: '0.25em',
-        marginLeft: keyPath.length > 1 ? '0.875em' : 0,
+        marginLeft: (keyPath as unknown[]).length > 1 ? '0.875em' : 0,
         paddingLeft: !expandable ? '1.125em' : 0,
       },
     }),

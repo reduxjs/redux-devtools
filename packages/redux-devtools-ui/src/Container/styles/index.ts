@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { ThemedStyledProps } from 'styled-components';
 import color from '../../utils/color';
+import { Theme } from '../../themes/default';
 
 export const MainContainerWrapper = styled.div`
   display: flex;
@@ -7,7 +8,9 @@ export const MainContainerWrapper = styled.div`
   width: 100%;
   flex-flow: column nowrap;
   overflow: auto;
-  background-color: ${(props) => color(props.theme.base00, 'lighten', 0.03)};
+  ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+  background-color: ${(props: ThemedStyledProps<{}, Theme>) =>
+    color(props.theme.base00, 'lighten', 0.03)};
   color: ${(props) => props.theme.base07};
   font-size: 12px;
 

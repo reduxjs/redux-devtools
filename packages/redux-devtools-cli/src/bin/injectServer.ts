@@ -21,7 +21,7 @@ const serverFlags: { [moduleName: string]: { [version: string]: string } } = {
   },
 };
 
-function getModuleVersion(modulePath: string) {
+function getModuleVersion(modulePath: string): string {
   return JSON.parse(
     fs.readFileSync(path.join(modulePath, 'package.json'), 'utf-8')
   ).version;
@@ -41,14 +41,14 @@ function getServerFlag(moduleName: string, version: string): string {
 
 export const dir = 'local-cli/server';
 export const file = 'server.js';
-export const fullPath = path.join(exports.dir, exports.file);
+export const fullPath = path.join(dir, file);
 
 export function inject(
   modulePath: string,
   options: Options,
   moduleName: string
 ) {
-  const filePath = path.join(modulePath, exports.fullPath);
+  const filePath = path.join(modulePath, fullPath);
   if (!fs.existsSync(filePath)) return false;
 
   const serverFlag = getServerFlag(moduleName, getModuleVersion(modulePath));
@@ -85,7 +85,7 @@ export function revert(
   options: Options,
   moduleName: string
 ) {
-  const filePath = path.join(modulePath, exports.fullPath);
+  const filePath = path.join(modulePath, fullPath);
   if (!fs.existsSync(filePath)) return false;
 
   const serverFlag = getServerFlag(moduleName, getModuleVersion(modulePath));

@@ -1,11 +1,11 @@
 import path from 'path';
-import knexModule from 'knex';
+import knexModule, { Config } from 'knex';
 import { SCServer } from 'socketcluster-server';
 
 export default function connector(options: SCServer.SCServerOptions) {
-  const dbOptions = options.dbOptions;
+  const dbOptions = options.dbOptions as Config;
   dbOptions.useNullAsDefault = true;
-  if (!dbOptions.migrate) {
+  if (!(dbOptions as any).migrate) {
     return knexModule(dbOptions);
   }
 
