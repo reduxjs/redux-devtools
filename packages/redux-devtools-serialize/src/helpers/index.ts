@@ -35,13 +35,26 @@ export function extract(data: unknown, type: string): SerializedData {
   };
 }
 
+export function refer(data: unknown, type: string): SerializedData;
 export function refer<K extends string>(
   data: { [key in K]: () => unknown },
   type: string,
-  transformMethod: K | false,
+  transformMethod?: K | false,
+  refs?: (new (data: any) => unknown)[] | null
+): SerializedData;
+export function refer<K extends string>(
+  data: any,
+  type: string,
+  transformMethod?: 'toString' | false,
+  refs?: (new (data: any) => unknown)[] | null
+): SerializedData;
+export function refer<K extends string>(
+  data: { [key in K]: () => unknown } | unknown,
+  type: string,
+  transformMethod?: K | false,
   refs?: (new (data: any) => unknown)[] | null
 ): SerializedData {
-  const r = mark(data, type, transformMethod);
+  const r = mark(data as { [key in K]: () => unknown }, type, transformMethod);
   if (!refs) return r;
   for (let i = 0; i < refs.length; i++) {
     const ref = refs[i];

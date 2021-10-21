@@ -8,7 +8,7 @@ export interface Styling {
 
 export type StylingValueFunction = (
   styling: Styling,
-  ...rest: any[]
+  ...rest: unknown[]
 ) => Partial<Styling>;
 
 export type StylingValue =

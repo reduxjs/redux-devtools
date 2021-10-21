@@ -1,11 +1,12 @@
 import path from 'path';
 import express from 'express';
 import morgan from 'morgan';
+import * as http from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { SCServer } from 'socketcluster-server';
 import graphqlMiddleware from './middleware/graphql';
-import { ReportBaseFields, Store } from './store';
+import { AddData, ReportBaseFields, Store } from './store';
 
 const app = express.Router();
 
@@ -27,7 +28,15 @@ function routes(
 
   if (logHTTPRequests) {
     if (typeof logHTTPRequests === 'object')
-      app.use(morgan('combined', logHTTPRequests));
+      app.use(
+        morgan(
+          'combined',
+          logHTTPRequests as morgan.Options<
+            http.IncomingMessage,
+            http.ServerResponse
+          >
+        )
+      );
     else app.use(morgan('combined'));
   }
 
@@ -55,7 +64,7 @@ function routes(
     switch (req.body.op) {
       case 'get':
         store
-          .get(req.body.id)
+          .get(req.body.id as string)
           .then(function (r) {
             res.send(r || {});
           })
@@ -66,7 +75,7 @@ function routes(
         break;
       case 'list':
         store
-          .list(req.body.query, req.body.fields)
+          .list(req.body.query, req.body.fields as string[])
           .then(function (r) {
             res.send(r);
           })
@@ -77,7 +86,7 @@ function routes(
         break;
       default:
         store
-          .add(req.body)
+          .add(req.body as AddData)
           .then(function (r) {
             res.send({
               id: (r as ReportBaseFields).id,

@@ -31,7 +31,7 @@ export interface Options {
 export default function getOptions(argv: { [arg: string]: any }): Options {
   let dbOptions = argv.dbOptions;
   if (typeof dbOptions === 'string') {
-    dbOptions = require(path.resolve(process.cwd(), argv.dbOptions));
+    dbOptions = require(path.resolve(process.cwd(), argv.dbOptions as string));
   } else if (typeof dbOptions === 'undefined') {
     dbOptions = require('../defaultDbOptions.json');
   }

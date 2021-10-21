@@ -118,7 +118,7 @@ export default function openFile(
         typeof editor === 'string' &&
         /^\w{1,30}$/.test(editor)
       ) {
-        openInEditor(editor.toLowerCase(), projectPath, stackFrame);
+        openInEditor(editor.toLowerCase(), projectPath as string, stackFrame);
       } else {
         if (
           chrome.devtools &&

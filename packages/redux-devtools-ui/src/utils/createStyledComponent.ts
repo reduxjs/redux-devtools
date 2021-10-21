@@ -65,15 +65,15 @@ export default function createStyledComponent<
 ): StyledComponent<C, Theme | Base16Theme, O> {
   return (styled as ThemedStyledInterface<Theme>)((component || 'div') as C)`
     ${(props: ThemedStyledProps<StyledComponentPropsWithRef<C> & O, Theme>) =>
-      isThemeFromProvider(props.theme)
-        ? getStyle(styles, props.theme.type)
+      isThemeFromProvider(props.theme as Theme | Base16Theme)
+        ? getStyle(styles, props.theme.type as string)
         : // used outside of container (theme provider)
           getStyle(
             styles,
             'default'
           )({
             ...props,
-            theme: getDefaultTheme(props.theme),
+            theme: getDefaultTheme(props.theme as Base16Theme),
           })}
   ` as StyledComponent<C, Theme | Base16Theme, O>;
 }

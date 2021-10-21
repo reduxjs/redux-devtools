@@ -1,6 +1,7 @@
 function getLength(type: string, collection: any) {
   if (type === 'Object') {
-    return Object.keys(collection).length;
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    return Object.keys(collection as {}).length;
   } else if (type === 'Array') {
     return (collection as unknown[]).length;
   }

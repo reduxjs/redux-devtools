@@ -63,7 +63,7 @@ const mergeStyling = (
             style: defaultStyling as CSS.Properties<string | number>,
           });
         case 'function':
-          return (styling: Styling, ...args: any[]) =>
+          return (styling: Styling, ...args: unknown[]) =>
             merger({
               className: customStyling as string,
             })((defaultStyling as StylingValueFunction)(styling, ...args));
@@ -82,7 +82,7 @@ const mergeStyling = (
             ...(customStyling as CSS.Properties<string | number>),
           };
         case 'function':
-          return (styling: Styling, ...args: any[]) =>
+          return (styling: Styling, ...args: unknown[]) =>
             merger({
               style: customStyling as CSS.Properties<string | number>,
             })((defaultStyling as StylingValueFunction)(styling, ...args));
@@ -143,7 +143,7 @@ const mergeStylings = (
 const getStylingByKeys = (
   mergedStyling: StylingConfig,
   keys: (string | false | undefined) | (string | false | undefined)[],
-  ...args: any[]
+  ...args: unknown[]
 ): Styling => {
   if (keys === null) {
     return mergedStyling as unknown as Styling;
