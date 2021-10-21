@@ -126,15 +126,15 @@ test('createStyling (custom)', () => {
   let customStyling = styling({
     testClass: 'customClass',
     testStyle: { height: 0 },
-    testFunc: (styling: Styling, arg: string) => ({
-      className: `${styling.className!} customClass--${arg}`,
+    testFunc: (styling: Styling, arg) => ({
+      className: `${styling.className!} customClass--${arg as string}`,
       style: {
         ...styling.style,
         border: 0,
       },
     }),
-    testFuncNoStyle: (styling: Styling, arg: string) => ({
-      className: `${styling.className!} customClass--${arg}`,
+    testFuncNoStyle: (styling: Styling, arg) => ({
+      className: `${styling.className!} customClass--${arg as string}`,
       style: {
         ...styling.style,
         border: 0,
