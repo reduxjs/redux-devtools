@@ -4523,7 +4523,7 @@ __metadata:
     eslint-plugin-react: ^7.26.1
     file-loader: ^6.2.0
     fork-ts-checker-webpack-plugin: ^6.4.0
-    html-loader: ^2.1.2
+    html-loader: ^3.0.0
     html-webpack-plugin: ^5.4.0
     javascript-stringify: ^2.1.0
     jest: ^27.3.1
@@ -16585,19 +16585,19 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"html-loader@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "html-loader@npm:2.1.2"
+"html-loader@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "html-loader@npm:3.0.0"
   dependencies:
-    html-minifier-terser: ^5.1.1
+    html-minifier-terser: ^6.0.2
     parse5: ^6.0.1
   peerDependencies:
     webpack: ^5.0.0
-  checksum: ed0b9033121b5ee5f85c3fbc5e17208f207cc33785417c014dc942a579410089de923d9c509a2d42821f3488efe984d2b898f277469e47eabf1a37cfbc48c302
+  checksum: 5e8438da51fbee925350f9ad0121c924064d054fc8675944fbd03606d3243504eb3a46ea263574bef0757b9c7f2b16702c898b9d6dd92b229d07a21dcf4a6383
   languageName: node
   linkType: hard
 
-"html-minifier-terser@npm:^5.0.1, html-minifier-terser@npm:^5.1.1":
+"html-minifier-terser@npm:^5.0.1":
   version: 5.1.1
   resolution: "html-minifier-terser@npm:5.1.1"
   dependencies:
