@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import webdriver from 'selenium-webdriver';
+import chrome from 'selenium-webdriver/chrome';
 import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
@@ -17,11 +18,9 @@ describe('Chrome extension', function () {
     await delay(2000);
     driver = new webdriver.Builder()
       .usingServer(`http://localhost:${port}`)
-      .withCapabilities({
-        chromeOptions: {
-          args: [`load-extension=${path}`],
-        },
-      })
+      .setChromeOptions(
+        new chrome.Options().addArguments(`load-extension=${path}`)
+      )
       .forBrowser('chrome')
       .build();
   });
@@ -72,7 +71,6 @@ describe('Chrome extension', function () {
 
     await driver.switchTo().window(tabs[1]);
     expect(await driver.getCurrentUrl()).toMatch(url);
-    await driver.manage().timeouts().pageLoadTimeout(5000);
 
     await driver.switchTo().window(tabs[0]);
 
