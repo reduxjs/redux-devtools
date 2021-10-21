@@ -12,7 +12,7 @@ import { RawSourceMap, SourceMapConsumer } from 'source-map';
  *
  * This exposes methods which will be indifferent to changes made in <code>{@link https://github.com/mozilla/source-map source-map}</code>.
  */
-class SourceMap {
+export class SourceMap {
   __source_map: SourceMapConsumer;
 
   constructor(sourceMap: SourceMapConsumer) {
@@ -74,7 +74,7 @@ class SourceMap {
   }
 }
 
-function extractSourceMapUrl(
+export function extractSourceMapUrl(
   fileUri: string,
   fileContents: string
 ): Promise<string> {
@@ -98,7 +98,7 @@ function extractSourceMapUrl(
  * @param {string} fileUri The URI of the source file.
  * @param {string} fileContents The contents of the source file.
  */
-async function getSourceMap(
+export async function getSourceMap(
   //function getSourceMap(
   fileUri: string,
   fileContents: string
@@ -120,7 +120,7 @@ async function getSourceMap(
     const index = fileUri.lastIndexOf('/');
     const url = fileUri.substring(0, index + 1) + sm;
     const obj = await fetch(url).then((res) => res.json());
-    return new SourceMap(new SourceMapConsumer(obj));
+    return new SourceMap(new SourceMapConsumer(obj as RawSourceMap));
   }
 
   /*
@@ -153,5 +153,4 @@ async function getSourceMap(
       */
 }
 
-export { extractSourceMapUrl, getSourceMap };
 export default getSourceMap;

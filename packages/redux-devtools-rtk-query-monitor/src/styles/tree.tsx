@@ -44,7 +44,8 @@ function getText(
   isDiff: boolean | undefined
 ) {
   if (type === 'Object') {
-    const keys = Object.keys(data);
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    const keys = Object.keys(data as {});
     if (!previewContent) return keys.length ? '{…}' : '{}';
 
     const str = keys

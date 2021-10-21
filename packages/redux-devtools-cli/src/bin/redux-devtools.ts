@@ -17,8 +17,8 @@ function readFile(filePath: string) {
 }
 
 if (argv.protocol === 'https') {
-  argv.key = argv.key ? readFile(argv.key) : null;
-  argv.cert = argv.cert ? readFile(argv.cert) : null;
+  argv.key = argv.key ? readFile(argv.key as string) : null;
+  argv.cert = argv.cert ? readFile(argv.cert as string) : null;
 }
 
 function log(pass: boolean, msg: string) {
@@ -76,13 +76,13 @@ function injectRN(type: string, msg: string) {
 
 if (argv.revert) {
   injectRN(
-    argv.revert,
+    argv.revert as string,
     'Revert injection of ReduxDevTools server from React Native local server'
   );
 }
 if (argv.injectserver) {
   injectRN(
-    argv.injectserver,
+    argv.injectserver as string,
     'Inject ReduxDevTools server into React Native local server'
   );
 }
@@ -91,7 +91,7 @@ if (argv.injectserver) {
 server(argv).then(function (r) {
   if (argv.open && argv.open !== 'false') {
     r.on('ready', async function () {
-      await openApp(argv.open, options);
+      await openApp(argv.open as string, options);
     });
   }
 });

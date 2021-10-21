@@ -129,7 +129,7 @@ function updateState(
           newState = recompute(
             newState,
             request.batched ? payload : (payload as unknown as State[])[i],
-            action[i],
+            action[i] as PerformAction<Action<unknown>>,
             newState.nextActionId + 1,
             maxAge,
             isExcess

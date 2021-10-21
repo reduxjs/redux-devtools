@@ -388,12 +388,12 @@ export default function (
           fill: style.text.colors.default,
           cursor: 'pointer',
         })
-        .on('mouseover', function mouseover(this: any) {
+        .on('mouseover', function mouseover(this: EventTarget) {
           d3.select(this).style({
             fill: style.text.colors.hover,
           });
         })
-        .on('mouseout', function mouseout(this: any) {
+        .on('mouseout', function mouseout(this: EventTarget) {
           d3.select(this).style({
             fill: style.text.colors.default,
           });
@@ -401,7 +401,7 @@ export default function (
 
       if (!tooltipOptions.disabled) {
         nodeEnter.call(
-          d3tooltip(d3, 'tooltip', { ...tooltipOptions, root })
+          d3tooltip<NodeWithId>(d3, 'tooltip', { ...tooltipOptions, root })
             .text((d, i) => getTooltipString(d, i, tooltipOptions))
             .style(tooltipOptions.style)
         );

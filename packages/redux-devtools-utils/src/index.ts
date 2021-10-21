@@ -71,14 +71,15 @@ export function getActionsArray(actionCreators: {
   return flatTree(actionCreators);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-implied-eval
-const interpretArg = (arg: string) => new Function('return ' + arg)();
+const interpretArg = (arg: string): unknown =>
+  // eslint-disable-next-line @typescript-eslint/no-implied-eval
+  new Function('return ' + arg)();
 
-function evalArgs(inArgs: string[], restArgs: string) {
+function evalArgs(inArgs: string[], restArgs: string): unknown[] {
   const args = inArgs.map(interpretArg);
   if (!restArgs) return args;
   const rest = interpretArg(restArgs);
-  if (Array.isArray(rest)) return args.concat(...rest);
+  if (Array.isArray(rest)) return args.concat(...(rest as unknown[]));
   throw new Error('rest must be an array');
 }
 

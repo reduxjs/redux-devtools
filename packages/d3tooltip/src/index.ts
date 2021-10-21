@@ -20,11 +20,40 @@ const defaultOptions: Options<unknown> = {
   root: undefined,
 };
 
+interface Tip<Datum> {
+  (selection: Selection<Datum>): void;
+  attr: (
+    this: this,
+    d:
+      | string
+      | {
+          [key: string]:
+            | Primitive
+            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
+        }
+  ) => this;
+  style: (
+    this: this,
+    d:
+      | string
+      | {
+          [key: string]:
+            | Primitive
+            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
+        }
+      | undefined
+  ) => this;
+  text: (
+    this: this,
+    d: string | ((datum: Datum, index?: number, outerIndex?: number) => string)
+  ) => this;
+}
+
 export default function tooltip<Datum>(
   d3: typeof d3Package,
   className = 'tooltip',
   options: Partial<Options<Datum>> = {}
-) {
+): Tip<Datum> {
   const { left, top, offset, root } = {
     ...defaultOptions,
     ...options,
@@ -74,6 +103,7 @@ export default function tooltip<Datum>(
   }
 
   tip.attr = function setAttr(
+    this: typeof tip,
     d:
       | string
       | {
@@ -96,6 +126,7 @@ export default function tooltip<Datum>(
   };
 
   tip.style = function setStyle(
+    this: typeof tip,
     d:
       | string
       | {
@@ -103,6 +134,7 @@ export default function tooltip<Datum>(
             | Primitive
             | ((datum: Datum, index: number, outerIndex: number) => Primitive);
         }
+      | undefined
   ) {
     if (is(Object, d)) {
       styles = {
@@ -118,6 +150,7 @@ export default function tooltip<Datum>(
   };
 
   tip.text = function setText(
+    this: typeof tip,
     d: string | ((datum: Datum, index?: number, outerIndex?: number) => string)
   ) {
     text = functor(d);

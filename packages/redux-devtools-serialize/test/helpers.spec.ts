@@ -16,7 +16,9 @@ describe('Helpers', function () {
     const TestClass = function (data: unknown) {
       return data;
     };
-    const testInstance = new (TestClass as any)({ testData: 'test' });
+    const testInstance = new (TestClass as any)({
+      testData: 'test',
+    }) as unknown;
     expect(
       refer(testInstance, 'testType', false, [TestClass as any])
     ).toMatchSnapshot();

@@ -72,7 +72,7 @@ const PostJsonDetail = ({ id }: { id: string }) => {
 };
 
 export const PostDetail = () => {
-  const { id } = useParams<{ id: any }>();
+  const { id } = useParams<{ id: string }>();
   const history = useHistory();
 
   const toast = useToast();

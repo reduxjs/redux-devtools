@@ -70,8 +70,8 @@ const getStylingFromBase16 = (base16: Base16Theme): StylingConfig => ({
   testStyle: {
     color: base16.base00,
   },
-  testFunc: ({ style }, arg: string) => ({
-    className: `testClass--${arg}`,
+  testFunc: ({ style }, arg) => ({
+    className: `testClass--${arg as string}`,
     style: {
       ...style,
       width: 0,
@@ -84,8 +84,8 @@ const getStylingFromBase16 = (base16: Base16Theme): StylingConfig => ({
   additionalStyle: {
     border: 0,
   },
-  testFuncNoStyle: (_, arg: string) => ({
-    className: `testClass--${arg}`,
+  testFuncNoStyle: (_, arg) => ({
+    className: `testClass--${arg as string}`,
   }),
 });
 
@@ -126,15 +126,15 @@ test('createStyling (custom)', () => {
   let customStyling = styling({
     testClass: 'customClass',
     testStyle: { height: 0 },
-    testFunc: (styling: Styling, arg: string) => ({
-      className: `${styling.className!} customClass--${arg}`,
+    testFunc: (styling: Styling, arg) => ({
+      className: `${styling.className!} customClass--${arg as string}`,
       style: {
         ...styling.style,
         border: 0,
       },
     }),
-    testFuncNoStyle: (styling: Styling, arg: string) => ({
-      className: `${styling.className!} customClass--${arg}`,
+    testFuncNoStyle: (styling: Styling, arg) => ({
+      className: `${styling.className!} customClass--${arg as string}`,
       style: {
         ...styling.style,
         border: 0,
