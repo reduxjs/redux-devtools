@@ -1,21 +1,6 @@
-import React, { ReactComponentElement } from 'react';
-import { configure, mount, ReactWrapper } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
 import StackTraceTab from '../src/StackTraceTab';
-
-import Adapter from 'enzyme-adapter-react-16';
-configure({ adapter: new Adapter() });
-
-function genAsyncSnapshot(
-  component: ReactWrapper<any, any, any>,
-  done: () => void
-) {
-  setTimeout(() => {
-    component.update();
-    expect(toJson(component)).toMatchSnapshot();
-    done();
-  });
-}
 
 const actions = {
   0: { type: 'PERFORM_ACTION', action: { type: '@@INIT' } },
@@ -32,37 +17,32 @@ const actions = {
 const StackTraceTabAsAny = StackTraceTab as any;
 
 describe('StackTraceTab component', () => {
-  it('should render with no props', () => {
-    return new Promise<void>((done) => {
-      const component = mount(<StackTraceTabAsAny />);
-      genAsyncSnapshot(component, done);
-    });
+  it('should render with no props', async () => {
+    const { container } = render(<StackTraceTabAsAny />);
+    await screen.findByTestId('stack-trace');
+    expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should render with props, but without stack', () => {
-    return new Promise<void>((done) => {
-      const component = mount(
-        <StackTraceTabAsAny actions={actions} action={actions[0].action} />
-      );
-      genAsyncSnapshot(component, done);
-    });
+  it('should render with props, but without stack', async () => {
+    const { container } = render(
+      <StackTraceTabAsAny actions={actions} action={actions[0].action} />
+    );
+    await screen.findByTestId('stack-trace');
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render the link to docs', () => {
-    return new Promise<void>((done) => {
-      const component = mount(
-        <StackTraceTabAsAny actions={actions} action={actions[1].action} />
-      );
-      genAsyncSnapshot(component, done);
-    });
+    const { container } = render(
+      <StackTraceTabAsAny actions={actions} action={actions[1].action} />
+    );
+    expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should render with trace stack', () => {
-    return new Promise<void>((done) => {
-      const component = mount(
-        <StackTraceTabAsAny actions={actions} action={actions[2].action} />
-      );
-      genAsyncSnapshot(component, done);
-    });
+  it('should render with trace stack', async () => {
+    const { container } = render(
+      <StackTraceTabAsAny actions={actions} action={actions[2].action} />
+    );
+    await screen.findByTestId('stack-trace');
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

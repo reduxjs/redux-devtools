@@ -68,10 +68,6 @@ export default class StackTraceTab<
 
       getStackFrames(deserializedError)
         .then((stackFrames) => {
-          /* eslint-disable no-console */
-          if (process.env.NODE_ENV === 'development')
-            console.log('Stack frames: ', stackFrames);
-          /* eslint-enable no-console */
           this.setState({
             stackFrames: stackFrames!,
             currentError: deserializedError,
