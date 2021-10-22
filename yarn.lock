@@ -4504,8 +4504,7 @@ __metadata:
     "@redux-devtools/ui": ^1.0.0-9
     "@reduxjs/toolkit": ^1.6.2
     "@rjsf/core": ^3.2.0
-    "@types/enzyme": ^3.10.10
-    "@types/enzyme-adapter-react-16": ^1.0.6
+    "@testing-library/react": ^12.1.2
     "@types/jest": ^27.0.2
     "@types/jsan": ^3.1.2
     "@types/json-schema": ^7.0.9
@@ -4525,9 +4524,6 @@ __metadata:
     babel-loader: ^8.2.3
     css-loader: ^6.4.0
     d3-state-visualizer: ^1.4.0
-    enzyme: ^3.11.0
-    enzyme-adapter-react-16: ^1.15.6
-    enzyme-to-json: ^3.6.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-jest: ^25.2.2
@@ -6487,15 +6483,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cheerio@npm:*, @types/cheerio@npm:^0.22.22":
-  version: 0.22.30
-  resolution: "@types/cheerio@npm:0.22.30"
-  dependencies:
-    "@types/node": "*"
-  checksum: 2aba93f57c0c88964bd83c3403b1f9ad98c377d00e0d638417a943ab483f0a638925c9a4f2e25d923db2a293ffb59f833cd49fa76c6299684494633becea54de
-  languageName: node
-  linkType: hard
-
 "@types/chrome@npm:^0.0.159":
   version: 0.0.159
   resolution: "@types/chrome@npm:0.0.159"
@@ -6660,25 +6647,6 @@ __metadata:
   version: 3.7.1
   resolution: "@types/dragula@npm:3.7.1"
   checksum: 24116579426a11960fb9f54780024fe75685cd2c23fca7e147c971c0766a77df11e522301b7436d3768f9e650e642c0f7942fe4d75deefcaa1daf80986d66633
-  languageName: node
-  linkType: hard
-
-"@types/enzyme-adapter-react-16@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "@types/enzyme-adapter-react-16@npm:1.0.6"
-  dependencies:
-    "@types/enzyme": "*"
-  checksum: d668ed5fbb7bf72e647f212ab60e2208f96b566a1782cbaa35cd0be3bfc27c5d075367517d341155d35dd21834271df7d74bbf49d1f878e0b7be2a9c0daa17a3
-  languageName: node
-  linkType: hard
-
-"@types/enzyme@npm:*, @types/enzyme@npm:^3.10.10":
-  version: 3.10.10
-  resolution: "@types/enzyme@npm:3.10.10"
-  dependencies:
-    "@types/cheerio": "*"
-    "@types/react": "*"
-  checksum: e2393f87d6737d643789fb1a83c53c5cb6cb9eaebf1e1c8a3163d95f778f3741a9734fea47761a7648d9c778166ffd531f61c0aa4c5bf97b0d8018cacad05a49
   languageName: node
   linkType: hard
 
@@ -13556,19 +13524,6 @@ __metadata:
     has: ^1.0.3
     object-is: ^1.1.2
   checksum: 54bbad0955683f09252568bfcb9d7e934a27c06634057db9e82b54c0d9f7a27b6160d77643177d973c133b87d404f284cc6aa0481c0a1c81cdff05b072e2bb49
-  languageName: node
-  linkType: hard
-
-"enzyme-to-json@npm:^3.6.2":
-  version: 3.6.2
-  resolution: "enzyme-to-json@npm:3.6.2"
-  dependencies:
-    "@types/cheerio": ^0.22.22
-    lodash: ^4.17.21
-    react-is: ^16.12.0
-  peerDependencies:
-    enzyme: ^3.4.0
-  checksum: e81f3dc05b5c440da416544a3cbc41fb9e79de0777453e48fe55de822f7d6f56ee08e5173d46a7624cf2781198396509c470bdd616a1ea441e6fa9ddf4396477
   languageName: node
   linkType: hard
 
@@ -24609,7 +24564,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.12.0, react-is@npm:^16.13.1, react-is@npm:^16.3.2, react-is@npm:^16.6.0, react-is@npm:^16.7.0, react-is@npm:^16.8.1, react-is@npm:^16.8.6, react-is@npm:^16.9.0":
+"react-is@npm:^16.13.1, react-is@npm:^16.3.2, react-is@npm:^16.6.0, react-is@npm:^16.7.0, react-is@npm:^16.8.1, react-is@npm:^16.8.6, react-is@npm:^16.9.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f

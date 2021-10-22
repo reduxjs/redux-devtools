@@ -140,6 +140,7 @@ export default class ActionList<
     return (
       <div
         key="actionList"
+        data-testid="actionList"
         {...styling(
           ['actionList', isWideLayout && 'actionListWide'],
           isWideLayout
@@ -154,7 +155,11 @@ export default class ActionList<
           hasSkippedActions={skippedActionIds.length > 0}
           hasStagedActions={actionIds.length > 1}
         />
-        <div {...styling('actionListRows')} ref={this.getRef}>
+        <div
+          data-testid="actionListRows"
+          {...styling('actionListRows')}
+          ref={this.getRef}
+        >
           {filteredActionIds.map((actionId) => (
             <ActionListRow
               key={actionId}
