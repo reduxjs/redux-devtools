@@ -5,6 +5,18 @@ import { Form } from '../src';
 import { schema, uiSchema, formData } from '../src/Form/schema';
 
 describe('Form', function () {
+  let random: () => number;
+
+  beforeAll(() => {
+    random = Math.random;
+    Math.random = jest.fn(() => 0.25546350798039463);
+  });
+
+  afterAll(() => {
+    Math.random = random;
+    console.log(Math.random());
+  });
+
   it('renders correctly', () => {
     const { container } = render(
       <Form formData={formData} schema={schema} uiSchema={uiSchema} />
