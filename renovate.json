@@ -5,15 +5,6 @@
   "ignorePaths": ["**/node_modules/**", "extension/examples/**"],
   "packageRules": [
     {
-      "matchPackageNames": [
-        "@types/react",
-        "@types/react-dom",
-        "@types/react-test-renderer"
-      ],
-      "matchUpdateTypes": ["major"],
-      "groupName": "react monorepo"
-    },
-    {
       "matchPackageNames": ["knex"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "knex"
