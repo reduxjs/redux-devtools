@@ -5066,11 +5066,12 @@ __metadata:
     "@rjsf/core": ^3.2.0
     "@storybook/addon-essentials": ^6.3.12
     "@storybook/react": ^6.3.12
+    "@testing-library/dom": ^8.10.1
+    "@testing-library/react": ^12.1.2
+    "@testing-library/user-event": ^13.5.0
     "@types/base16": ^1.0.2
     "@types/codemirror": ^5.60.5
     "@types/color": ^3.0.2
-    "@types/enzyme": ^3.10.10
-    "@types/enzyme-adapter-react-16": ^1.0.6
     "@types/jest": ^27.0.2
     "@types/json-schema": ^7.0.9
     "@types/prop-types": ^15.7.4
@@ -5080,13 +5081,11 @@ __metadata:
     "@types/styled-components": ^5.1.15
     "@typescript-eslint/eslint-plugin": ^5.1.0
     "@typescript-eslint/parser": ^5.1.0
+    babel-loader: ^8.2.3
     base16: ^1.0.0
     codemirror: ^5.63.3
     color: ^3.2.1
     csstype: ^3.0.9
-    enzyme: ^3.11.0
-    enzyme-adapter-react-16: ^1.15.6
-    enzyme-to-json: ^3.6.2
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-jest: ^25.2.2
@@ -5109,6 +5108,7 @@ __metadata:
     stylelint-processor-styled-components: ^1.10.0
     ts-jest: ^27.0.7
     typescript: ~4.4.4
+    webpack: ^5.59.1
   peerDependencies:
     "@types/react": ^16.3.0 || ^17.0.0
     "@types/styled-components": ^5.1.15
@@ -6293,7 +6293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^8.0.0":
+"@testing-library/dom@npm:^8.0.0, @testing-library/dom@npm:^8.10.1":
   version: 8.10.1
   resolution: "@testing-library/dom@npm:8.10.1"
   dependencies:
@@ -6319,6 +6319,17 @@ __metadata:
     react: "*"
     react-dom: "*"
   checksum: 70b0f7f27c83fe1a33e7df01b1e64850fbab4050c403848d611d852cadaa25ccde58518773002ae569a1350b2282c2ccbcbe5eb6af8b29ab377ab2a8ab573b3b
+  languageName: node
+  linkType: hard
+
+"@testing-library/user-event@npm:^13.5.0":
+  version: 13.5.0
+  resolution: "@testing-library/user-event@npm:13.5.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+  peerDependencies:
+    "@testing-library/dom": ">=7.21.4"
+  checksum: 16319de685fbb7008f1ba667928f458b2d08196918002daca56996de80ef35e6d9de26e9e1ece7d00a004692b95a597cf9142fff0dc53f2f51606a776584f549
   languageName: node
   linkType: hard
 

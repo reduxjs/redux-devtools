@@ -1,12 +1,12 @@
 import React from 'react';
-import { render, mount } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ContextMenu } from '../src';
 import { items } from '../src/ContextMenu/data';
 
 describe('ContextMenu', function () {
   it('renders correctly', () => {
-    const wrapper = render(
+    const { container } = render(
       <ContextMenu
         items={items}
         onClick={() => {
@@ -16,15 +16,15 @@ describe('ContextMenu', function () {
         y={100}
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
   it('should handle the click event', () => {
     const onClick = jest.fn();
-    const wrapper = mount(
-      <ContextMenu items={items} onClick={onClick} x={100} y={100} />
+    render(
+      <ContextMenu items={items} onClick={onClick} x={100} y={100} visible />
     );
 
-    wrapper.find('button').first().simulate('click');
-    expect(onClick).toBeCalled();
+    userEvent.click(screen.getByRole('button', { name: 'Menu Item 1' }));
+    expect(onClick).toHaveBeenCalled();
   });
 });

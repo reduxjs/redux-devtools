@@ -1,22 +1,21 @@
 import React from 'react';
-import { render, mount } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Slider } from '../src';
 
 describe('Slider', function () {
   it('renders correctly', () => {
-    const wrapper = render(
+    const { container } = render(
       <Slider
         onChange={() => {
           // noop
         }}
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders with props', () => {
-    const wrapper = render(
+    const { container } = render(
       <Slider
         label="Hi"
         min={1}
@@ -28,15 +27,15 @@ describe('Slider', function () {
         }}
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should handle the change event', () => {
     const onChange = jest.fn();
-    const wrapper = mount(<Slider value={1} onChange={onChange} />);
+    render(<Slider value={1} onChange={onChange} />);
 
-    wrapper.find('input').simulate('change');
-    expect(onChange).toBeCalled();
-    expect(onChange).toBeCalledWith(1);
+    fireEvent.change(screen.getByRole('slider'), { target: { value: '2' } });
+    expect(onChange).toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledWith(2);
   });
 });

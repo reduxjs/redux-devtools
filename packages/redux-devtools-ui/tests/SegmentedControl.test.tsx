@@ -1,11 +1,11 @@
 import React from 'react';
-import { render, mount } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { SegmentedControl } from '../src';
 
 describe('SegmentedControl', function () {
   it('renders correctly', () => {
-    const wrapper = render(
+    const { container } = render(
       <SegmentedControl
         values={['Button1', 'Button2', 'Button3']}
         selected="Button1"
@@ -15,11 +15,11 @@ describe('SegmentedControl', function () {
         }}
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
   it('should handle the click event', () => {
     const onClick = jest.fn();
-    const wrapper = mount(
+    render(
       <SegmentedControl
         values={['Button1', 'Button2', 'Button3']}
         selected="Button1"
@@ -28,7 +28,7 @@ describe('SegmentedControl', function () {
       />
     );
 
-    wrapper.find('button').first().simulate('click');
-    expect(onClick).toBeCalled();
+    userEvent.click(screen.getByRole('button', { name: 'Button1' }));
+    expect(onClick).toHaveBeenCalled();
   });
 });
