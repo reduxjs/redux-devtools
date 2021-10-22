@@ -1,11 +1,10 @@
 import React from 'react';
-import { render } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
+import { render } from '@testing-library/react';
 import { Toolbar, Divider, Spacer, Button } from '../src';
 
 describe('Toolbar', function () {
   it('renders correctly', () => {
-    const wrapper = render(
+    const { container } = render(
       <Toolbar>
         <Button>1</Button>
         <Divider />
@@ -13,11 +12,11 @@ describe('Toolbar', function () {
         <Button>2</Button>
       </Toolbar>
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders with props', () => {
-    const wrapper = render(<Toolbar borderPosition="top" />);
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    const { container } = render(<Toolbar borderPosition="top" />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

@@ -1,374 +1,1045 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Form renders correctly 1`] = `
-<Styled(Form)
-  formData={
-    Object {
-      "age": 75,
-      "bio": "Roundhouse kicking asses since 1940",
-      "integerRange": 52,
-      "name": "Chuck Norris",
-      "password": "noneed",
-    }
-  }
-  schema={
-    Object {
-      "description": "A simple form example.",
-      "properties": Object {
-        "age": Object {
-          "title": "Age",
-          "type": "integer",
-        },
-        "bio": Object {
-          "title": "Bio",
-          "type": "string",
-        },
-        "integerRange": Object {
-          "maximum": 100,
-          "minimum": 42,
-          "title": "Integer range",
-          "type": "integer",
-        },
-        "multipleChoicesList": Object {
-          "items": Object {
-            "enum": Array [
-              "foo",
-              "bar",
-              "fuzz",
-            ],
-            "type": "string",
-          },
-          "title": "A multiple choices list",
-          "type": "array",
-          "uniqueItems": true,
-        },
-        "name": Object {
-          "title": "Full name",
-          "type": "string",
-        },
-        "numberEnum": Object {
-          "enum": Array [
-            1,
-            2,
-            3,
-          ],
-          "title": "Number enum",
-          "type": "number",
-        },
-        "numberEnumRadio": Object {
-          "enum": Array [
-            1,
-            2,
-            3,
-          ],
-          "title": "Number enum",
-          "type": "number",
-        },
-        "password": Object {
-          "minLength": 3,
-          "title": "Password",
-          "type": "string",
-        },
-      },
-      "required": Array [
-        "name",
-      ],
-      "title": "Example form",
-      "type": "object",
-    }
-  }
-  uiSchema={
-    Object {
-      "age": Object {
-        "ui:widget": "updown",
-      },
-      "bio": Object {
-        "ui:widget": "textarea",
-      },
-      "date": Object {
-        "ui:widget": "alt-datetime",
-      },
-      "integerRange": Object {
-        "ui:widget": "range",
-      },
-      "multipleChoicesList": Object {
-        "ui:widget": "checkboxes",
-      },
-      "name": Object {
-        "ui:autofocus": true,
-      },
-      "numberEnumRadio": Object {
-        "ui:options": Object {
-          "inline": true,
-        },
-        "ui:widget": "radio",
-      },
-      "password": Object {
-        "ui:help": "Hint: Make it strong!",
-        "ui:widget": "password",
-      },
-    }
-  }
-  widgets={
-    Object {
-      "RangeWidget": [Function],
-      "SelectWidget": [Function],
-    }
-  }
+<form
+  class="sc-furwcr elOoGk"
 >
-  <Button
-    size="big"
-    tooltipPosition="top"
-    type="submit"
+  <div
+    class="form-group field field-object"
   >
-    Submit
-  </Button>
-</Styled(Form)>
+    <fieldset
+      id="root"
+    >
+      <legend
+        id="root__title"
+      >
+        Example form
+      </legend>
+      <p
+        class="field-description"
+        id="root__description"
+      >
+        A simple form example.
+      </p>
+      <div
+        class="form-group field field-string"
+      >
+        <label
+          class="control-label"
+          for="root_name"
+        >
+          Full name
+          <span
+            class="required"
+          >
+            *
+          </span>
+        </label>
+        <input
+          class="form-control"
+          id="root_name"
+          label="Full name"
+          placeholder=""
+          required=""
+          type="text"
+          value="Chuck Norris"
+        />
+      </div>
+      <div
+        class="form-group field field-integer"
+      >
+        <label
+          class="control-label"
+          for="root_age"
+        >
+          Age
+        </label>
+        <input
+          class="form-control"
+          id="root_age"
+          label="Age"
+          placeholder=""
+          type="number"
+          value="75"
+        />
+      </div>
+      <div
+        class="form-group field field-string"
+      >
+        <label
+          class="control-label"
+          for="root_bio"
+        >
+          Bio
+        </label>
+        <textarea
+          class="form-control"
+          id="root_bio"
+          placeholder=""
+        >
+          Roundhouse kicking asses since 1940
+        </textarea>
+      </div>
+      <div
+        class="form-group field field-string"
+      >
+        <label
+          class="control-label"
+          for="root_password"
+        >
+          Password
+        </label>
+        <input
+          class="form-control"
+          id="root_password"
+          label="Password"
+          placeholder=""
+          type="password"
+          value="noneed"
+        />
+        <p
+          class="help-block"
+          id="root_password__help"
+        >
+          Hint: Make it strong!
+        </p>
+      </div>
+      <div
+        class="form-group field field-array"
+      >
+        <label
+          class="control-label"
+          for="root_multipleChoicesList"
+        >
+          A multiple choices list
+        </label>
+        <div
+          class="checkboxes"
+          id="root_multipleChoicesList"
+        >
+          <div
+            class="checkbox "
+          >
+            <label>
+              <span>
+                <input
+                  id="root_multipleChoicesList_0"
+                  type="checkbox"
+                />
+                <span>
+                  foo
+                </span>
+              </span>
+            </label>
+          </div>
+          <div
+            class="checkbox "
+          >
+            <label>
+              <span>
+                <input
+                  id="root_multipleChoicesList_1"
+                  type="checkbox"
+                />
+                <span>
+                  bar
+                </span>
+              </span>
+            </label>
+          </div>
+          <div
+            class="checkbox "
+          >
+            <label>
+              <span>
+                <input
+                  id="root_multipleChoicesList_2"
+                  type="checkbox"
+                />
+                <span>
+                  fuzz
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="form-group field field-number"
+      >
+        <label
+          class="control-label"
+          for="root_numberEnum"
+        >
+          Number enum
+        </label>
+        <div
+          class=" css-18o3wl1-container"
+          id="root_numberEnum"
+        >
+          <span
+            class="css-1f43avz-a11yText-A11yText"
+            id="react-select-2-live-region"
+          />
+          <span
+            aria-atomic="false"
+            aria-live="polite"
+            aria-relevant="additions text"
+            class="css-1f43avz-a11yText-A11yText"
+          />
+          <div
+            class=" css-gdsksj-control"
+          >
+            <div
+              class=" css-1dzc0nd-ValueContainer"
+            >
+              <div
+                class=" css-du77wi-placeholder"
+                id="react-select-2-placeholder"
+              />
+              <div
+                class=" css-1qx78vi-Input"
+                data-value=""
+              >
+                <input
+                  aria-autocomplete="list"
+                  aria-controls="react-select-2-listbox"
+                  aria-describedby="react-select-2-placeholder"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-owns="react-select-2-listbox"
+                  autocapitalize="none"
+                  autocomplete="off"
+                  autocorrect="off"
+                  class=""
+                  id="react-select-2-input"
+                  role="combobox"
+                  spellcheck="false"
+                  style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                  tabindex="0"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class=" css-1hb7zxy-IndicatorsContainer"
+            >
+              <span
+                class=" css-1urf5ax-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                class=" css-aazq4s-indicatorContainer"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="css-tj5bde-Svg"
+                  focusable="false"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  width="20"
+                >
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="form-group field field-number"
+      >
+        <label
+          class="control-label"
+          for="root_numberEnumRadio"
+        >
+          Number enum
+        </label>
+        <div
+          class="field-radio-group"
+          id="root_numberEnumRadio"
+        >
+          <label
+            class="radio-inline "
+          >
+            <span>
+              <input
+                name="0.25546350798039463"
+                type="radio"
+                value="1"
+              />
+              <span>
+                1
+              </span>
+            </span>
+          </label>
+          <label
+            class="radio-inline "
+          >
+            <span>
+              <input
+                name="0.25546350798039463"
+                type="radio"
+                value="2"
+              />
+              <span>
+                2
+              </span>
+            </span>
+          </label>
+          <label
+            class="radio-inline "
+          >
+            <span>
+              <input
+                name="0.25546350798039463"
+                type="radio"
+                value="3"
+              />
+              <span>
+                3
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div
+        class="form-group field field-integer"
+      >
+        <label
+          class="control-label"
+          for="root_integerRange"
+        >
+          Integer range
+        </label>
+        <div
+          class="sc-gKclnd cELrub"
+        >
+          <div
+            class="sc-iCfMLu HKVV"
+          >
+            <input
+              id="root_integerRange"
+              max="100"
+              min="42"
+              placeholder=""
+              type="range"
+              uischema="[object Object]"
+              value="52"
+            />
+            <div>
+              52
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div
+    class="sc-eCImPb gcPrSZ"
+  >
+    <button
+      class="sc-dkPtRN hMJxMJ"
+      type="submit"
+    >
+      Submit
+    </button>
+  </div>
+</form>
 `;
 
 exports[`Form renders with no button 1`] = `
-<Styled(Form)
-  formData={
-    Object {
-      "age": 75,
-      "bio": "Roundhouse kicking asses since 1940",
-      "integerRange": 52,
-      "name": "Chuck Norris",
-      "password": "noneed",
-    }
-  }
-  schema={
-    Object {
-      "description": "A simple form example.",
-      "properties": Object {
-        "age": Object {
-          "title": "Age",
-          "type": "integer",
-        },
-        "bio": Object {
-          "title": "Bio",
-          "type": "string",
-        },
-        "integerRange": Object {
-          "maximum": 100,
-          "minimum": 42,
-          "title": "Integer range",
-          "type": "integer",
-        },
-        "multipleChoicesList": Object {
-          "items": Object {
-            "enum": Array [
-              "foo",
-              "bar",
-              "fuzz",
-            ],
-            "type": "string",
-          },
-          "title": "A multiple choices list",
-          "type": "array",
-          "uniqueItems": true,
-        },
-        "name": Object {
-          "title": "Full name",
-          "type": "string",
-        },
-        "numberEnum": Object {
-          "enum": Array [
-            1,
-            2,
-            3,
-          ],
-          "title": "Number enum",
-          "type": "number",
-        },
-        "numberEnumRadio": Object {
-          "enum": Array [
-            1,
-            2,
-            3,
-          ],
-          "title": "Number enum",
-          "type": "number",
-        },
-        "password": Object {
-          "minLength": 3,
-          "title": "Password",
-          "type": "string",
-        },
-      },
-      "required": Array [
-        "name",
-      ],
-      "title": "Example form",
-      "type": "object",
-    }
-  }
-  uiSchema={
-    Object {
-      "age": Object {
-        "ui:widget": "updown",
-      },
-      "bio": Object {
-        "ui:widget": "textarea",
-      },
-      "date": Object {
-        "ui:widget": "alt-datetime",
-      },
-      "integerRange": Object {
-        "ui:widget": "range",
-      },
-      "multipleChoicesList": Object {
-        "ui:widget": "checkboxes",
-      },
-      "name": Object {
-        "ui:autofocus": true,
-      },
-      "numberEnumRadio": Object {
-        "ui:options": Object {
-          "inline": true,
-        },
-        "ui:widget": "radio",
-      },
-      "password": Object {
-        "ui:help": "Hint: Make it strong!",
-        "ui:widget": "password",
-      },
-    }
-  }
-  widgets={
-    Object {
-      "RangeWidget": [Function],
-      "SelectWidget": [Function],
-    }
-  }
+<form
+  class="sc-furwcr elOoGk"
 >
+  <div
+    class="form-group field field-object"
+  >
+    <fieldset
+      id="root"
+    >
+      <legend
+        id="root__title"
+      >
+        Example form
+      </legend>
+      <p
+        class="field-description"
+        id="root__description"
+      >
+        A simple form example.
+      </p>
+      <div
+        class="form-group field field-string"
+      >
+        <label
+          class="control-label"
+          for="root_name"
+        >
+          Full name
+          <span
+            class="required"
+          >
+            *
+          </span>
+        </label>
+        <input
+          class="form-control"
+          id="root_name"
+          label="Full name"
+          placeholder=""
+          required=""
+          type="text"
+          value="Chuck Norris"
+        />
+      </div>
+      <div
+        class="form-group field field-integer"
+      >
+        <label
+          class="control-label"
+          for="root_age"
+        >
+          Age
+        </label>
+        <input
+          class="form-control"
+          id="root_age"
+          label="Age"
+          placeholder=""
+          type="number"
+          value="75"
+        />
+      </div>
+      <div
+        class="form-group field field-string"
+      >
+        <label
+          class="control-label"
+          for="root_bio"
+        >
+          Bio
+        </label>
+        <textarea
+          class="form-control"
+          id="root_bio"
+          placeholder=""
+        >
+          Roundhouse kicking asses since 1940
+        </textarea>
+      </div>
+      <div
+        class="form-group field field-string"
+      >
+        <label
+          class="control-label"
+          for="root_password"
+        >
+          Password
+        </label>
+        <input
+          class="form-control"
+          id="root_password"
+          label="Password"
+          placeholder=""
+          type="password"
+          value="noneed"
+        />
+        <p
+          class="help-block"
+          id="root_password__help"
+        >
+          Hint: Make it strong!
+        </p>
+      </div>
+      <div
+        class="form-group field field-array"
+      >
+        <label
+          class="control-label"
+          for="root_multipleChoicesList"
+        >
+          A multiple choices list
+        </label>
+        <div
+          class="checkboxes"
+          id="root_multipleChoicesList"
+        >
+          <div
+            class="checkbox "
+          >
+            <label>
+              <span>
+                <input
+                  id="root_multipleChoicesList_0"
+                  type="checkbox"
+                />
+                <span>
+                  foo
+                </span>
+              </span>
+            </label>
+          </div>
+          <div
+            class="checkbox "
+          >
+            <label>
+              <span>
+                <input
+                  id="root_multipleChoicesList_1"
+                  type="checkbox"
+                />
+                <span>
+                  bar
+                </span>
+              </span>
+            </label>
+          </div>
+          <div
+            class="checkbox "
+          >
+            <label>
+              <span>
+                <input
+                  id="root_multipleChoicesList_2"
+                  type="checkbox"
+                />
+                <span>
+                  fuzz
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="form-group field field-number"
+      >
+        <label
+          class="control-label"
+          for="root_numberEnum"
+        >
+          Number enum
+        </label>
+        <div
+          class=" css-18o3wl1-container"
+          id="root_numberEnum"
+        >
+          <span
+            class="css-1f43avz-a11yText-A11yText"
+            id="react-select-4-live-region"
+          />
+          <span
+            aria-atomic="false"
+            aria-live="polite"
+            aria-relevant="additions text"
+            class="css-1f43avz-a11yText-A11yText"
+          />
+          <div
+            class=" css-gdsksj-control"
+          >
+            <div
+              class=" css-1dzc0nd-ValueContainer"
+            >
+              <div
+                class=" css-du77wi-placeholder"
+                id="react-select-4-placeholder"
+              />
+              <div
+                class=" css-1qx78vi-Input"
+                data-value=""
+              >
+                <input
+                  aria-autocomplete="list"
+                  aria-controls="react-select-4-listbox"
+                  aria-describedby="react-select-4-placeholder"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-owns="react-select-4-listbox"
+                  autocapitalize="none"
+                  autocomplete="off"
+                  autocorrect="off"
+                  class=""
+                  id="react-select-4-input"
+                  role="combobox"
+                  spellcheck="false"
+                  style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                  tabindex="0"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class=" css-1hb7zxy-IndicatorsContainer"
+            >
+              <span
+                class=" css-1urf5ax-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                class=" css-aazq4s-indicatorContainer"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="css-tj5bde-Svg"
+                  focusable="false"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  width="20"
+                >
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="form-group field field-number"
+      >
+        <label
+          class="control-label"
+          for="root_numberEnumRadio"
+        >
+          Number enum
+        </label>
+        <div
+          class="field-radio-group"
+          id="root_numberEnumRadio"
+        >
+          <label
+            class="radio-inline "
+          >
+            <span>
+              <input
+                name="0.25546350798039463"
+                type="radio"
+                value="1"
+              />
+              <span>
+                1
+              </span>
+            </span>
+          </label>
+          <label
+            class="radio-inline "
+          >
+            <span>
+              <input
+                name="0.25546350798039463"
+                type="radio"
+                value="2"
+              />
+              <span>
+                2
+              </span>
+            </span>
+          </label>
+          <label
+            class="radio-inline "
+          >
+            <span>
+              <input
+                name="0.25546350798039463"
+                type="radio"
+                value="3"
+              />
+              <span>
+                3
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div
+        class="form-group field field-integer"
+      >
+        <label
+          class="control-label"
+          for="root_integerRange"
+        >
+          Integer range
+        </label>
+        <div
+          class="sc-gKclnd cELrub"
+        >
+          <div
+            class="sc-iCfMLu HKVV"
+          >
+            <input
+              id="root_integerRange"
+              max="100"
+              min="42"
+              placeholder=""
+              type="range"
+              uischema="[object Object]"
+              value="52"
+            />
+            <div>
+              52
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
   <noscript />
-</Styled(Form)>
+</form>
 `;
 
 exports[`Form renders with primary button 1`] = `
-<Styled(Form)
-  formData={
-    Object {
-      "age": 75,
-      "bio": "Roundhouse kicking asses since 1940",
-      "integerRange": 52,
-      "name": "Chuck Norris",
-      "password": "noneed",
-    }
-  }
-  schema={
-    Object {
-      "description": "A simple form example.",
-      "properties": Object {
-        "age": Object {
-          "title": "Age",
-          "type": "integer",
-        },
-        "bio": Object {
-          "title": "Bio",
-          "type": "string",
-        },
-        "integerRange": Object {
-          "maximum": 100,
-          "minimum": 42,
-          "title": "Integer range",
-          "type": "integer",
-        },
-        "multipleChoicesList": Object {
-          "items": Object {
-            "enum": Array [
-              "foo",
-              "bar",
-              "fuzz",
-            ],
-            "type": "string",
-          },
-          "title": "A multiple choices list",
-          "type": "array",
-          "uniqueItems": true,
-        },
-        "name": Object {
-          "title": "Full name",
-          "type": "string",
-        },
-        "numberEnum": Object {
-          "enum": Array [
-            1,
-            2,
-            3,
-          ],
-          "title": "Number enum",
-          "type": "number",
-        },
-        "numberEnumRadio": Object {
-          "enum": Array [
-            1,
-            2,
-            3,
-          ],
-          "title": "Number enum",
-          "type": "number",
-        },
-        "password": Object {
-          "minLength": 3,
-          "title": "Password",
-          "type": "string",
-        },
-      },
-      "required": Array [
-        "name",
-      ],
-      "title": "Example form",
-      "type": "object",
-    }
-  }
-  uiSchema={
-    Object {
-      "age": Object {
-        "ui:widget": "updown",
-      },
-      "bio": Object {
-        "ui:widget": "textarea",
-      },
-      "date": Object {
-        "ui:widget": "alt-datetime",
-      },
-      "integerRange": Object {
-        "ui:widget": "range",
-      },
-      "multipleChoicesList": Object {
-        "ui:widget": "checkboxes",
-      },
-      "name": Object {
-        "ui:autofocus": true,
-      },
-      "numberEnumRadio": Object {
-        "ui:options": Object {
-          "inline": true,
-        },
-        "ui:widget": "radio",
-      },
-      "password": Object {
-        "ui:help": "Hint: Make it strong!",
-        "ui:widget": "password",
-      },
-    }
-  }
-  widgets={
-    Object {
-      "RangeWidget": [Function],
-      "SelectWidget": [Function],
-    }
-  }
+<form
+  class="sc-furwcr elOoGk"
 >
-  <Button
-    primary={true}
-    size="big"
-    tooltipPosition="top"
-    type="submit"
+  <div
+    class="form-group field field-object"
   >
-    Custom button
-  </Button>
-</Styled(Form)>
+    <fieldset
+      id="root"
+    >
+      <legend
+        id="root__title"
+      >
+        Example form
+      </legend>
+      <p
+        class="field-description"
+        id="root__description"
+      >
+        A simple form example.
+      </p>
+      <div
+        class="form-group field field-string"
+      >
+        <label
+          class="control-label"
+          for="root_name"
+        >
+          Full name
+          <span
+            class="required"
+          >
+            *
+          </span>
+        </label>
+        <input
+          class="form-control"
+          id="root_name"
+          label="Full name"
+          placeholder=""
+          required=""
+          type="text"
+          value="Chuck Norris"
+        />
+      </div>
+      <div
+        class="form-group field field-integer"
+      >
+        <label
+          class="control-label"
+          for="root_age"
+        >
+          Age
+        </label>
+        <input
+          class="form-control"
+          id="root_age"
+          label="Age"
+          placeholder=""
+          type="number"
+          value="75"
+        />
+      </div>
+      <div
+        class="form-group field field-string"
+      >
+        <label
+          class="control-label"
+          for="root_bio"
+        >
+          Bio
+        </label>
+        <textarea
+          class="form-control"
+          id="root_bio"
+          placeholder=""
+        >
+          Roundhouse kicking asses since 1940
+        </textarea>
+      </div>
+      <div
+        class="form-group field field-string"
+      >
+        <label
+          class="control-label"
+          for="root_password"
+        >
+          Password
+        </label>
+        <input
+          class="form-control"
+          id="root_password"
+          label="Password"
+          placeholder=""
+          type="password"
+          value="noneed"
+        />
+        <p
+          class="help-block"
+          id="root_password__help"
+        >
+          Hint: Make it strong!
+        </p>
+      </div>
+      <div
+        class="form-group field field-array"
+      >
+        <label
+          class="control-label"
+          for="root_multipleChoicesList"
+        >
+          A multiple choices list
+        </label>
+        <div
+          class="checkboxes"
+          id="root_multipleChoicesList"
+        >
+          <div
+            class="checkbox "
+          >
+            <label>
+              <span>
+                <input
+                  id="root_multipleChoicesList_0"
+                  type="checkbox"
+                />
+                <span>
+                  foo
+                </span>
+              </span>
+            </label>
+          </div>
+          <div
+            class="checkbox "
+          >
+            <label>
+              <span>
+                <input
+                  id="root_multipleChoicesList_1"
+                  type="checkbox"
+                />
+                <span>
+                  bar
+                </span>
+              </span>
+            </label>
+          </div>
+          <div
+            class="checkbox "
+          >
+            <label>
+              <span>
+                <input
+                  id="root_multipleChoicesList_2"
+                  type="checkbox"
+                />
+                <span>
+                  fuzz
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="form-group field field-number"
+      >
+        <label
+          class="control-label"
+          for="root_numberEnum"
+        >
+          Number enum
+        </label>
+        <div
+          class=" css-18o3wl1-container"
+          id="root_numberEnum"
+        >
+          <span
+            class="css-1f43avz-a11yText-A11yText"
+            id="react-select-3-live-region"
+          />
+          <span
+            aria-atomic="false"
+            aria-live="polite"
+            aria-relevant="additions text"
+            class="css-1f43avz-a11yText-A11yText"
+          />
+          <div
+            class=" css-gdsksj-control"
+          >
+            <div
+              class=" css-1dzc0nd-ValueContainer"
+            >
+              <div
+                class=" css-du77wi-placeholder"
+                id="react-select-3-placeholder"
+              />
+              <div
+                class=" css-1qx78vi-Input"
+                data-value=""
+              >
+                <input
+                  aria-autocomplete="list"
+                  aria-controls="react-select-3-listbox"
+                  aria-describedby="react-select-3-placeholder"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-owns="react-select-3-listbox"
+                  autocapitalize="none"
+                  autocomplete="off"
+                  autocorrect="off"
+                  class=""
+                  id="react-select-3-input"
+                  role="combobox"
+                  spellcheck="false"
+                  style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                  tabindex="0"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class=" css-1hb7zxy-IndicatorsContainer"
+            >
+              <span
+                class=" css-1urf5ax-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                class=" css-aazq4s-indicatorContainer"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="css-tj5bde-Svg"
+                  focusable="false"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  width="20"
+                >
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="form-group field field-number"
+      >
+        <label
+          class="control-label"
+          for="root_numberEnumRadio"
+        >
+          Number enum
+        </label>
+        <div
+          class="field-radio-group"
+          id="root_numberEnumRadio"
+        >
+          <label
+            class="radio-inline "
+          >
+            <span>
+              <input
+                name="0.25546350798039463"
+                type="radio"
+                value="1"
+              />
+              <span>
+                1
+              </span>
+            </span>
+          </label>
+          <label
+            class="radio-inline "
+          >
+            <span>
+              <input
+                name="0.25546350798039463"
+                type="radio"
+                value="2"
+              />
+              <span>
+                2
+              </span>
+            </span>
+          </label>
+          <label
+            class="radio-inline "
+          >
+            <span>
+              <input
+                name="0.25546350798039463"
+                type="radio"
+                value="3"
+              />
+              <span>
+                3
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div
+        class="form-group field field-integer"
+      >
+        <label
+          class="control-label"
+          for="root_integerRange"
+        >
+          Integer range
+        </label>
+        <div
+          class="sc-gKclnd cELrub"
+        >
+          <div
+            class="sc-iCfMLu HKVV"
+          >
+            <input
+              id="root_integerRange"
+              max="100"
+              min="42"
+              placeholder=""
+              type="range"
+              uischema="[object Object]"
+              value="52"
+            />
+            <div>
+              52
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div
+    class="sc-eCImPb gcPrSZ"
+  >
+    <button
+      class="sc-dkPtRN bHfEsJ"
+      type="submit"
+    >
+      Custom button
+    </button>
+  </div>
+</form>
 `;

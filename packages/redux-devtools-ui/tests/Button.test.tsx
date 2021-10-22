@@ -1,19 +1,19 @@
 import React from 'react';
-import { render, mount } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Button } from '../src';
 
 describe('Button', function () {
   it('renders correctly', () => {
-    const wrapper = render(<Button>Text</Button>);
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    const { container } = render(<Button>Text</Button>);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should handle the click event', () => {
     const onClick = jest.fn();
-    const wrapper = mount(<Button onClick={onClick}>ClickMe</Button>);
+    render(<Button onClick={onClick}>ClickMe</Button>);
 
-    wrapper.find('button').simulate('click');
-    expect(onClick).toBeCalled();
+    userEvent.click(screen.getByRole('button'));
+    expect(onClick).toHaveBeenCalled();
   });
 });

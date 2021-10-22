@@ -1,19 +1,139 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Editor renders correctly 1`] = `
-<Editor
-  autofocus={false}
-  foldGutter={true}
-  lineNumbers={true}
-  lineWrapping={false}
-  mode="javascript"
-  readOnly={false}
-  value="var a = 1;"
+<div
+  class="sc-jrQzAO bvXojw"
 >
-  <styled.div>
+  <div
+    class="CodeMirror cm-s-default"
+    translate="no"
+  >
     <div
-      className="sc-jrQzAO bvXojw"
+      style="overflow: hidden; position: relative; width: 3px; height: 0px;"
+    >
+      <textarea
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; min-height: 1em; outline: none;"
+        tabindex="0"
+      />
+    </div>
+    <div
+      class="CodeMirror-vscrollbar"
+      cm-not-content="true"
+      tabindex="-1"
+    >
+      <div
+        style="min-width: 1px;"
+      />
+    </div>
+    <div
+      class="CodeMirror-hscrollbar"
+      cm-not-content="true"
+      tabindex="-1"
+    >
+      <div
+        style="height: 100%; min-height: 1px;"
+      />
+    </div>
+    <div
+      class="CodeMirror-scrollbar-filler"
+      cm-not-content="true"
     />
-  </styled.div>
-</Editor>
+    <div
+      class="CodeMirror-gutter-filler"
+      cm-not-content="true"
+    />
+    <div
+      class="CodeMirror-scroll"
+      tabindex="-1"
+    >
+      <div
+        class="CodeMirror-sizer"
+        style="margin-left: 0px; min-width: 3px;"
+      >
+        <div
+          style="position: relative;"
+        >
+          <div
+            class="CodeMirror-lines"
+            role="presentation"
+          >
+            <div
+              role="presentation"
+              style="position: relative; outline: none;"
+            >
+              <div
+                class="CodeMirror-measure"
+              />
+              <div
+                class="CodeMirror-measure"
+              >
+                <pre
+                  class="CodeMirror-line"
+                  role="presentation"
+                >
+                  <span
+                    role="presentation"
+                    style="padding-right: .1px;"
+                  >
+                    <span
+                      class="cm-keyword"
+                    >
+                      var
+                    </span>
+                     
+                    <span
+                      class="cm-def"
+                    >
+                      a
+                    </span>
+                     
+                    <span
+                      class="cm-operator"
+                    >
+                      =
+                    </span>
+                     
+                    <span
+                      class="cm-number"
+                    >
+                      1
+                    </span>
+                    ;
+                  </span>
+                </pre>
+              </div>
+              <div
+                style="position: relative; z-index: 1;"
+              />
+              <div
+                class="CodeMirror-cursors"
+              />
+              <div
+                class="CodeMirror-code"
+                role="presentation"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="position: absolute; height: 50px; width: 1px;"
+      />
+      <div
+        class="CodeMirror-gutters"
+      >
+        <div
+          class="CodeMirror-gutter CodeMirror-linenumbers"
+          style="width: 1px;"
+        />
+        <div
+          class="CodeMirror-gutter CodeMirror-foldgutter"
+        />
+      </div>
+    </div>
+  </div>
+</div>
 `;

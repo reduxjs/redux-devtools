@@ -1,16 +1,16 @@
 import React from 'react';
-import { render, mount } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Notification } from '../src';
 
 describe('Notification', function () {
   it('renders correctly', () => {
-    const wrapper = render(<Notification>Message</Notification>);
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    const { container } = render(<Notification>Message</Notification>);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders with props', () => {
-    const wrapper = render(
+    const { container } = render(
       <Notification
         type="error"
         onClose={() => {
@@ -20,16 +20,14 @@ describe('Notification', function () {
         Message
       </Notification>
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should handle the click event', () => {
     const onClose = jest.fn();
-    const wrapper = mount(
-      <Notification onClose={onClose}>Message</Notification>
-    );
+    render(<Notification onClose={onClose}>Message</Notification>);
 
-    wrapper.find('button').simulate('click');
-    expect(onClose).toBeCalled();
+    userEvent.click(screen.getByRole('button'));
+    expect(onClose).toHaveBeenCalled();
   });
 });

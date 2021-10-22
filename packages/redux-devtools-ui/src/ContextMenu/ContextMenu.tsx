@@ -24,22 +24,7 @@ export interface ContextMenuProps {
 }
 
 export default class ContextMenu extends Component<ContextMenuProps> {
-  constructor(props: ContextMenuProps) {
-    super(props);
-    this.updateItems(props.items);
-  }
-
   menu?: HTMLDivElement | null;
-  items?: React.ReactNode[];
-
-  UNSAFE_componentWillReceiveProps(nextProps: ContextMenuProps) {
-    if (
-      nextProps.items !== this.props.items ||
-      nextProps.visible !== this.props.visible
-    ) {
-      this.updateItems(nextProps.items);
-    }
-  }
 
   componentDidMount() {
     this.amendPosition();
@@ -84,8 +69,8 @@ export default class ContextMenu extends Component<ContextMenuProps> {
     this.menu!.style.left = `${left}px`;
   }
 
-  updateItems(items: Item[]) {
-    this.items = items.map((item) => {
+  renderItems() {
+    return this.props.items.map((item) => {
       if (isReactButtonElement(item)) return item;
       const value = item.value || item.name;
       return (
@@ -113,7 +98,7 @@ export default class ContextMenu extends Component<ContextMenuProps> {
         top={this.props.y}
         visible={this.props.visible}
       >
-        {this.items}
+        {this.renderItems()}
       </ContextMenuWrapper>
     );
   }
