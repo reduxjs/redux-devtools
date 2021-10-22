@@ -312,6 +312,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     return (
       <div
         key="inspector"
+        data-testid="inspector"
         ref={this.inspectorCreateRef}
         {...styling(
           ['inspector', isWideLayout && 'inspectorWide'],
