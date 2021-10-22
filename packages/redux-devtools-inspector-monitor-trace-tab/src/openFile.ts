@@ -88,7 +88,6 @@ function openInEditor(editor: string, path: string, stackFrame: StackFrame) {
       // sublime, emacs, macvim, textmate + custom like https://github.com/eclemens/atom-url-handler
       url = `${editor}://open/?url=file://${projectPath}${filePath}&line=${line}&column=${column}`;
   }
-  if (process.env.NODE_ENV === 'development') console.log(url); // eslint-disable-line no-console
   if (chrome.devtools && !isFF) {
     if (chrome.tabs) openAndCloseTab(url);
     else window.open(url);
@@ -102,9 +101,6 @@ export default function openFile(
   lineNumber: number,
   stackFrame: StackFrame
 ) {
-  if (process.env.NODE_ENV === 'development')
-    // eslint-disable-next-line no-console
-    console.log(fileName, lineNumber, stackFrame);
   if (!chrome || !chrome.storage) return; // TODO: Pass editor settings for using outside of browser extension
   const storage = isFF
     ? chrome.storage.local
