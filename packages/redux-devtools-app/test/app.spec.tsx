@@ -29,8 +29,8 @@ describe('App container', () => {
     );
     const actionList = screen.getByTestId('actionList');
     expect(
-      within(actionList).getByTestId('actionListRows').getAttribute('class')
-    ).toMatch(/actionListRows-\d-\d-\d+/);
+      within(actionList).getByTestId('actionListRows')
+    ).toBeEmptyDOMElement();
   });
 });
 
