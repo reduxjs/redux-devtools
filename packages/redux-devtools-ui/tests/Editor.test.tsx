@@ -1,6 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { mountToJson } from 'enzyme-to-json';
+import { render } from '@testing-library/react';
 import { Editor } from '../src';
 import 'codemirror/mode/javascript/javascript';
 
@@ -25,17 +24,17 @@ describe('Editor', function () {
 
     return range;
   };
-  const wrapper = mount(<Editor value="var a = 1;" />);
+  const { container } = render(<Editor value="var a = 1;" />);
 
   it('renders correctly', () => {
-    expect(mountToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('calls getBoundingClientRect', () => {
-    expect(getBoundingClientRect).toBeCalled();
+    expect(getBoundingClientRect).toHaveBeenCalled();
   });
 
   it('calls getClientRects', () => {
-    expect(getClientRects).toBeCalled();
+    expect(getClientRects).toHaveBeenCalled();
   });
 });
