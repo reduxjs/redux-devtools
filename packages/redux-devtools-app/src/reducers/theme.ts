@@ -1,5 +1,8 @@
 import { Scheme, Theme } from '@redux-devtools/ui';
-import { CHANGE_THEME, APPLY_MEDIA_FEATURES_PREFERENCES, } from '../constants/actionTypes';
+import {
+  CHANGE_THEME,
+  APPLY_MEDIA_FEATURES_PREFERENCES,
+} from '../constants/actionTypes';
 import { StoreAction } from '../actions';
 
 export interface ThemeState {
