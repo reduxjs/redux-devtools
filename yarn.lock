@@ -4659,7 +4659,6 @@ __metadata:
     "@types/uuid": ^8.3.1
     "@typescript-eslint/eslint-plugin": ^5.1.0
     "@typescript-eslint/parser": ^5.1.0
-    apollo-server: ^3.4.0
     apollo-server-express: ^3.4.0
     body-parser: ^1.19.0
     chalk: ^4.1.2
@@ -8823,19 +8822,6 @@ __metadata:
   peerDependencies:
     graphql: ^15.3.0
   checksum: 8f131698dc8b7f63f6103ff38819bf7cbcb072e321f7de2ffa55a5c2781c02262fde7a4e4d6bbcb35faba5c5f84d6d6c3aa1bc8494711414c03d70b302a43938
-  languageName: node
-  linkType: hard
-
-"apollo-server@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "apollo-server@npm:3.4.0"
-  dependencies:
-    apollo-server-core: ^3.4.0
-    apollo-server-express: ^3.4.0
-    express: ^4.17.1
-  peerDependencies:
-    graphql: ^15.3.0
-  checksum: e51e5529b4014cfa2bbf52038223b04a87c423b481a7948d8430a8861ab9766ef12d8bd08945434819f9f85ee5c0134cced6be2da7460b3bc29aa7185cb39bed
   languageName: node
   linkType: hard
 

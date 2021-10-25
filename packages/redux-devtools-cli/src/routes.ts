@@ -5,8 +5,10 @@ import * as http from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { SCServer } from 'socketcluster-server';
+import { ApolloServer } from 'apollo-server-express';
 import graphqlMiddleware from './middleware/graphql';
 import { AddData, ReportBaseFields, Store } from './store';
+import { resolvers, schema } from './api/schema';
 
 const app = express.Router();
 
@@ -40,6 +42,15 @@ function routes(
     else app.use(morgan('combined'));
   }
 
+  const server = new ApolloServer({
+    typeDefs: schema,
+    resolvers,
+    context: {
+      store: store,
+    },
+  });
+  await server.start();
+  server.applyMiddleware({ app });
   graphqlMiddleware(store).applyMiddleware({ app } as {
     app: express.Application;
   });

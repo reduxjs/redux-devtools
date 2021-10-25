@@ -1,12 +1,11 @@
 import fs from 'fs';
-import { makeExecutableSchema } from 'apollo-server';
 import { Store } from '../store';
 
-const schema = fs
+export const schema = fs
   .readFileSync(require.resolve('./schema_def.graphql'))
   .toString();
 
-const resolvers = {
+export const resolvers = {
   Query: {
     reports: function report(
       source: unknown,
@@ -24,10 +23,3 @@ const resolvers = {
     },
   },
 };
-
-const executableSchema = makeExecutableSchema({
-  typeDefs: schema,
-  resolvers: resolvers,
-});
-
-export default executableSchema;
