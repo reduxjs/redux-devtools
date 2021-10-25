@@ -60,7 +60,7 @@ class Worker extends SCWorker {
         });
         respond(null, channelToWatch);
       });
-      socket.on('getReport', function (id, respond) {
+      socket.on('getReport', function (id: string, respond) {
         store
           .get(id)
           .then(function (data) {

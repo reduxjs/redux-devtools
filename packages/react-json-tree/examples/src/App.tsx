@@ -28,7 +28,8 @@ const getValueLabelStyle: StylingValue = ({ style }, nodeType, keyPath) => ({
   style: {
     ...style,
     color:
-      !Number.isNaN(keyPath[0]) && !(parseInt(keyPath, 10) % 2)
+      !Number.isNaN((keyPath as unknown[])[0]) &&
+      !(parseInt(keyPath as string, 10) % 2)
         ? '#33F'
         : style!.color,
   },

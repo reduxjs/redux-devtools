@@ -40,7 +40,7 @@ export default function configureStore(
       module.hot.accept('../reducers', () => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const nextReducer = require('../reducers'); // eslint-disable-line global-require
-        store.replaceReducer(nextReducer);
+        store.replaceReducer(nextReducer as Reducer<StoreState, StoreAction>);
       });
     }
   }

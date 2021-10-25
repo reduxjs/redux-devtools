@@ -62,7 +62,7 @@ function get(id: string): Promise<Report | { error: string }> {
   return knex(reports).where('id', id).first();
 }
 
-interface AddData {
+export interface AddData {
   type: ReportType | null;
   title: string | null;
   description: string | null;

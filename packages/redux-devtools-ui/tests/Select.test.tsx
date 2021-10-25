@@ -1,12 +1,12 @@
 import React from 'react';
-import { render, mount, CommonWrapper, ReactWrapper } from 'enzyme';
-import { renderToJson, mountToJson } from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Select } from '../src';
 import { options } from '../src/Select/options';
 
 describe('Select', function () {
   it('renders correctly', () => {
-    const wrapper = render(
+    const { container } = render(
       <Select
         options={options}
         onChange={() => {
@@ -14,11 +14,11 @@ describe('Select', function () {
         }}
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders with props', () => {
-    const wrapper = render(
+    const { container } = render(
       <Select
         options={options}
         onChange={() => {
@@ -34,32 +34,30 @@ describe('Select', function () {
         menuPlacement="top"
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should select another option', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <Select options={options} onInputChange={onChange} />
+    const { container } = render(
+      <Select options={options} onChange={onChange} />
     );
 
-    const input = wrapper.find('input');
-    (input.at(0).instance() as unknown as HTMLInputElement).value = 'two';
-    input.first().simulate('change');
-    expect(mountToJson(wrapper)).toMatchSnapshot();
-    input.first().simulate('keyDown', { keyCode: 13 });
-    expect(onChange).toBeCalled();
+    userEvent.type(screen.getByRole('combobox'), 'two');
+    expect(container.firstChild).toMatchSnapshot();
+    userEvent.type(screen.getByRole('combobox'), '{enter}');
+    expect(onChange).toHaveBeenCalled();
   });
 
   it("shouldn't find any results", () => {
     const onChange = jest.fn();
-    const wrapper = mount(<Select options={options} onChange={onChange} />);
+    const { container } = render(
+      <Select options={options} onChange={onChange} />
+    );
 
-    const input = wrapper.find('input');
-    (input.at(0).instance() as unknown as HTMLInputElement).value = 'text';
-    input.first().simulate('change');
-    expect(mountToJson(wrapper)).toMatchSnapshot(); // 'No results found'
-    input.first().simulate('keyDown', { keyCode: 13 });
-    expect(onChange).not.toBeCalled();
+    userEvent.type(screen.getByRole('combobox'), 'text');
+    expect(container.firstChild).toMatchSnapshot();
+    userEvent.type(screen.getByRole('combobox'), '{enter}');
+    expect(onChange).not.toHaveBeenCalled();
   });
 });

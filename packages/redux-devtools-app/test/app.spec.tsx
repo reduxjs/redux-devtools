@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { mount, ReactWrapper } from 'enzyme';
-// import { mountToJson } from 'enzyme-to-json';
+import { render, screen, within } from '@testing-library/react';
 import App from '../src/containers/App';
 import api from '../src/middlewares/api';
 import exportState from '../src/middlewares/exportState';
@@ -10,39 +9,28 @@ import rootReducer from '../src/reducers';
 import { DATA_TYPE_KEY } from '../src/constants/dataTypes';
 import stringifyJSON from '../src/utils/stringifyJSON';
 
-let wrapper: ReactWrapper<unknown, unknown, Component>;
-
 const store = createStore(rootReducer, applyMiddleware(exportState, api));
 
 describe('App container', () => {
-  beforeAll(() => {
-    wrapper = mount(
+  it("should render inspector monitor's wrapper", () => {
+    render(
       <Provider store={store}>
         <App />
       </Provider>
     );
-  });
-
-  /*
-  it('should render the App', () => {
-    expect(mountToJson(wrapper)).toMatchSnapshot();
-  });
-*/
-
-  it("should render inspector monitor's wrapper", () => {
-    expect(wrapper.find('DevtoolsInspector').html()).toBeDefined();
+    expect(screen.getByTestId('inspector')).toBeDefined();
   });
 
   it('should contain an empty action list', () => {
+    render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+    const actionList = screen.getByTestId('actionList');
     expect(
-      wrapper
-        .find('ActionList')
-        .findWhere((n) => {
-          const { className } = n.props();
-          return className && className.startsWith('actionListRows-');
-        })
-        .html()
-    ).toMatch(/<div class="actionListRows-\d-\d-\d+"><\/div>/);
+      within(actionList).getByTestId('actionListRows')
+    ).toBeEmptyDOMElement();
   });
 });
 

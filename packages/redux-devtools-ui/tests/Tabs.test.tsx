@@ -1,12 +1,12 @@
 import React from 'react';
-import { render, mount } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Tabs } from '../src';
 import { tabs, simple10Tabs } from '../src/Tabs/data';
 
 describe('Tabs', function () {
   it('renders correctly', () => {
-    const wrapper = render(
+    const { container } = render(
       <Tabs
         tabs={tabs}
         onClick={() => {
@@ -14,11 +14,11 @@ describe('Tabs', function () {
         }}
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders with props', () => {
-    const wrapper = render(
+    const { container } = render(
       <Tabs
         tabs={tabs}
         onClick={() => {
@@ -27,11 +27,11 @@ describe('Tabs', function () {
         selected="Tab2"
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders tabs without inner components', () => {
-    const wrapper = render(
+    const { container } = render(
       <Tabs
         tabs={simple10Tabs}
         onClick={() => {
@@ -40,14 +40,14 @@ describe('Tabs', function () {
         selected="5"
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should select tab', () => {
     const onClick = jest.fn();
-    const wrapper = mount(<Tabs tabs={tabs} onClick={onClick} />);
+    render(<Tabs tabs={tabs} onClick={onClick} />);
 
-    wrapper.find('button').first().simulate('click');
-    expect(onClick).toBeCalled();
+    userEvent.click(screen.getByRole('button', { name: 'Tab1' }));
+    expect(onClick).toHaveBeenCalled();
   });
 });

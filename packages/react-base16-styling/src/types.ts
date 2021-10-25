@@ -8,7 +8,7 @@ export interface Styling {
 
 export type StylingValueFunction = (
   styling: Styling,
-  ...rest: any[]
+  ...rest: unknown[]
 ) => Partial<Styling>;
 
 export type StylingValue =
@@ -28,5 +28,5 @@ export type Theme = string | Base16Theme | StylingConfig;
 
 export type StylingFunction = (
   keys: (string | false | undefined) | (string | false | undefined)[],
-  ...rest: any[]
+  ...rest: unknown[]
 ) => Styling;

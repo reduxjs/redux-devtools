@@ -1,5 +1,6 @@
 import { join } from 'path';
 import webdriver from 'selenium-webdriver';
+import chrome from 'selenium-webdriver/chrome';
 import electronPath from 'electron';
 import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
@@ -16,15 +17,13 @@ describe('DevTools panel for Electron', function () {
     await delay(1000);
     driver = new webdriver.Builder()
       .usingServer(`http://localhost:${port}`)
-      .withCapabilities({
-        chromeOptions: {
-          binary: electronPath,
-          args: [`app=${join(__dirname, 'fixture')}`],
-        },
-      })
-      .forBrowser('electron')
+      .setChromeOptions(
+        new chrome.Options()
+          .setChromeBinaryPath(electronPath)
+          .addArguments(`app=${join(__dirname, 'fixture')}`)
+      )
+      .forBrowser('chrome')
       .build();
-    await driver.manage().timeouts().setScriptTimeout(10000);
   });
 
   afterAll(async () => {
@@ -47,8 +46,6 @@ describe('DevTools panel for Electron', function () {
     expect(await driver.getCurrentUrl()).toMatch(
       /devtools:\/\/devtools\/bundled\/devtools_app.html/
     );
-
-    await driver.manage().timeouts().pageLoadTimeout(5000);
 
     const id = await driver.executeAsyncScript(function (callback) {
       let attempts = 5;

@@ -6,7 +6,7 @@
  */
 
 import StackFrame from './stack-frame';
-import { getSourceMap } from './getSourceMap';
+import { getSourceMap, SourceMap } from './getSourceMap';
 import { getLinesAround } from './getLinesAround';
 
 /**
@@ -18,7 +18,12 @@ async function map(
   frames: StackFrame[],
   contextLines = 3
 ): Promise<StackFrame[]> {
-  const cache: any = {};
+  const cache: {
+    [fileName: string]: {
+      readonly fileSource: string;
+      readonly map: SourceMap;
+    };
+  } = {};
   const files: string[] = [];
   frames.forEach((frame) => {
     const { fileName } = frame;
@@ -45,7 +50,7 @@ async function map(
     }
     const { source, line, column } = map.getOriginalPosition(
       lineNumber,
-      columnNumber
+      columnNumber!
     );
     const originalSource = source == null ? [] : map.getSource(source) || [];
     return new StackFrame(
@@ -58,7 +63,7 @@ async function map(
       source,
       line,
       column,
-      getLinesAround(line, contextLines, originalSource)
+      getLinesAround(line!, contextLines, originalSource)
     );
   });
 }

@@ -1,11 +1,11 @@
 import React from 'react';
-import { render, mount } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Dialog } from '../src';
 
 describe('Dialog', function () {
   it('renders correctly', () => {
-    const wrapper = render(
+    const { container } = render(
       <Dialog
         onDismiss={() => {
           // noop
@@ -15,11 +15,11 @@ describe('Dialog', function () {
         }}
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders with props', () => {
-    const wrapper = render(
+    const { container } = render(
       <Dialog
         title="Dialog Title"
         open
@@ -34,11 +34,11 @@ describe('Dialog', function () {
         Hello Dialog!
       </Dialog>
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders modal', () => {
-    const wrapper = render(
+    const { container } = render(
       <Dialog
         modal
         onDismiss={() => {
@@ -49,12 +49,12 @@ describe('Dialog', function () {
         }}
       />
     );
-    expect(renderToJson(wrapper)).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should handle dismiss event', () => {
     const onDismiss = jest.fn();
-    const wrapper = mount(
+    render(
       <Dialog
         open
         onDismiss={onDismiss}
@@ -64,13 +64,13 @@ describe('Dialog', function () {
       />
     );
 
-    wrapper.find('button').first().simulate('click');
-    expect(onDismiss).toBeCalled();
+    userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    expect(onDismiss).toHaveBeenCalled();
   });
 
   it('should handle submit event', () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(
+    render(
       <Dialog
         open
         onDismiss={() => {
@@ -80,7 +80,7 @@ describe('Dialog', function () {
       />
     );
 
-    wrapper.find('button').last().simulate('click');
-    expect(onSubmit).toBeCalled();
+    userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    expect(onSubmit).toHaveBeenCalled();
   });
 });

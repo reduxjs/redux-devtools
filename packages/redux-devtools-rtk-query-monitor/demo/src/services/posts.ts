@@ -42,7 +42,7 @@ export const postsApi = createApi({
       }),
       invalidatesTags: (result, error, { id }) => [{ type: 'Post', id }],
     }),
-    deletePost: build.mutation<{ success: boolean; id: number }, number>({
+    deletePost: build.mutation<{ success: boolean; id: number }, string>({
       query(id) {
         return {
           url: `posts/${id}`,

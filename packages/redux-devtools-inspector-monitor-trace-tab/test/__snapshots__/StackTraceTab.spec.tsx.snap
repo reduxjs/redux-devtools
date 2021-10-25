@@ -1,376 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StackTraceTab component should render the link to docs 1`] = `
-<StackTraceTab
-  action={
-    Object {
-      "type": "INCREMENT_COUNTER",
-    }
-  }
-  actions={
-    Object {
-      "0": Object {
-        "action": Object {
-          "type": "@@INIT",
-        },
-        "type": "PERFORM_ACTION",
-      },
-      "1": Object {
-        "action": Object {
-          "type": "INCREMENT_COUNTER",
-        },
-        "type": "PERFORM_ACTION",
-      },
-      "2": Object {
-        "action": Object {
-          "type": "INCREMENT_COUNTER",
-        },
-        "stack": "Error
-    at fn1 (app.js:72:24)
-    at fn2 (app.js:84:31)
-     at fn3 (chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/page.bundle.js:1269:80)",
-        "type": "PERFORM_ACTION",
-      },
-    }
-  }
-  openFile={[Function]}
+<div
+  style="padding: 5px 10px;"
 >
-  <div
-    style={
-      Object {
-        "padding": "5px 10px",
-      }
-    }
+  To enable tracing action calls, you should set \`trace\` option to \`true\` for Redux DevTools enhancer. Refer to
+   
+  <a
+    href="#"
   >
-    To enable tracing action calls, you should set \`trace\` option to \`true\` for Redux DevTools enhancer. Refer to
-     
-    <a
-      href="#"
-      onClick={[Function]}
-    >
-      this page
-    </a>
-     
-    for more details.
-  </div>
-</StackTraceTab>
+    this page
+  </a>
+   
+  for more details.
+</div>
 `;
 
 exports[`StackTraceTab component should render with no props 1`] = `
-<StackTraceTab
-  openFile={[Function]}
+<div
+  style="padding: 5px 10px;"
 >
   <div
-    style={
-      Object {
-        "padding": "5px 10px",
-      }
-    }
-  >
-    <StackTrace
-      contextSize={3}
-      editorHandler={[Function]}
-      errorName="N/A"
-      stackFrames={Array []}
-    >
-      <div
-        style={
-          Object {
-            "flex": "0 1 auto",
-            "fontSize": "1em",
-            "minHeight": "0px",
-            "overflow": "auto",
-          }
-        }
-      />
-    </StackTrace>
-  </div>
-</StackTraceTab>
+    data-testid="stack-trace"
+    style="font-size: 1em; flex: 0 1 auto; min-height: 0px; overflow: auto;"
+  />
+</div>
 `;
 
 exports[`StackTraceTab component should render with props, but without stack 1`] = `
-<StackTraceTab
-  action={
-    Object {
-      "type": "@@INIT",
-    }
-  }
-  actions={
-    Object {
-      "0": Object {
-        "action": Object {
-          "type": "@@INIT",
-        },
-        "type": "PERFORM_ACTION",
-      },
-      "1": Object {
-        "action": Object {
-          "type": "INCREMENT_COUNTER",
-        },
-        "type": "PERFORM_ACTION",
-      },
-      "2": Object {
-        "action": Object {
-          "type": "INCREMENT_COUNTER",
-        },
-        "stack": "Error
-    at fn1 (app.js:72:24)
-    at fn2 (app.js:84:31)
-     at fn3 (chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/page.bundle.js:1269:80)",
-        "type": "PERFORM_ACTION",
-      },
-    }
-  }
-  openFile={[Function]}
+<div
+  style="padding: 5px 10px;"
 >
   <div
-    style={
-      Object {
-        "padding": "5px 10px",
-      }
-    }
-  >
-    <StackTrace
-      contextSize={3}
-      editorHandler={[Function]}
-      errorName="N/A"
-      stackFrames={Array []}
-    >
-      <div
-        style={
-          Object {
-            "flex": "0 1 auto",
-            "fontSize": "1em",
-            "minHeight": "0px",
-            "overflow": "auto",
-          }
-        }
-      />
-    </StackTrace>
-  </div>
-</StackTraceTab>
+    data-testid="stack-trace"
+    style="font-size: 1em; flex: 0 1 auto; min-height: 0px; overflow: auto;"
+  />
+</div>
 `;
 
 exports[`StackTraceTab component should render with trace stack 1`] = `
-<StackTraceTab
-  action={
-    Object {
-      "type": "INCREMENT_COUNTER",
-    }
-  }
-  actions={
-    Object {
-      "0": Object {
-        "action": Object {
-          "type": "@@INIT",
-        },
-        "type": "PERFORM_ACTION",
-      },
-      "1": Object {
-        "action": Object {
-          "type": "INCREMENT_COUNTER",
-        },
-        "type": "PERFORM_ACTION",
-      },
-      "2": Object {
-        "action": Object {
-          "type": "INCREMENT_COUNTER",
-        },
-        "stack": "Error
-    at fn1 (app.js:72:24)
-    at fn2 (app.js:84:31)
-     at fn3 (chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/page.bundle.js:1269:80)",
-        "type": "PERFORM_ACTION",
-      },
-    }
-  }
-  openFile={[Function]}
+<div
+  style="padding: 5px 10px;"
 >
   <div
-    style={
-      Object {
-        "padding": "5px 10px",
-      }
-    }
+    data-testid="stack-trace"
+    style="font-size: 1em; flex: 0 1 auto; min-height: 0px; overflow: auto;"
   >
-    <StackTrace
-      contextSize={3}
-      editorHandler={[Function]}
-      errorName="N/A"
-      stackFrames={
-        Array [
-          StackFrame {
-            "_originalColumnNumber": null,
-            "_originalFileName": null,
-            "_originalFunctionName": null,
-            "_originalLineNumber": null,
-            "_originalScriptCode": null,
-            "_scriptCode": null,
-            "columnNumber": 24,
-            "fileName": "app.js",
-            "functionName": "fn1",
-            "lineNumber": 72,
-          },
-          StackFrame {
-            "_originalColumnNumber": null,
-            "_originalFileName": null,
-            "_originalFunctionName": null,
-            "_originalLineNumber": null,
-            "_originalScriptCode": null,
-            "_scriptCode": null,
-            "columnNumber": 31,
-            "fileName": "app.js",
-            "functionName": "fn2",
-            "lineNumber": 84,
-          },
-        ]
-      }
-    >
-      <div
-        style={
-          Object {
-            "flex": "0 1 auto",
-            "fontSize": "1em",
-            "minHeight": "0px",
-            "overflow": "auto",
-          }
-        }
+    <div>
+      <button
+        style="color: rgb(255, 255, 255); background-color: rgb(60, 68, 79); cursor: pointer; display: block; width: 100%; text-align: left; font-size: 1em; padding: 0px 5px; line-height: 1.5; margin-bottom: 0.6em;"
       >
-        <Collapsible
-          collapsedByDefault={false}
-          key="bundle-1"
-        >
+        ▼ 2 stack frames were expanded.
+      </button>
+      <div
+        style="display: block;"
+      >
+        <div>
           <div>
-            <button
-              onClick={[Function]}
-              style={
-                Object {
-                  "backgroundColor": "#3C444F",
-                  "border": "none",
-                  "color": "#FFFFFF",
-                  "cursor": "pointer",
-                  "display": "block",
-                  "fontSize": "1em",
-                  "lineHeight": "1.5",
-                  "marginBottom": "0.6em",
-                  "padding": "0px 5px",
-                  "textAlign": "left",
-                  "width": "100%",
-                }
-              }
-            >
-              ▼ 2 stack frames were expanded.
-            </button>
-            <div
-              style={
-                Object {
-                  "display": "block",
-                }
-              }
-            >
-              <StackFrame
-                contextSize={3}
-                critical={true}
-                editorHandler={[Function]}
-                frame={
-                  StackFrame {
-                    "_originalColumnNumber": null,
-                    "_originalFileName": null,
-                    "_originalFunctionName": null,
-                    "_originalLineNumber": null,
-                    "_originalScriptCode": null,
-                    "_scriptCode": null,
-                    "columnNumber": 24,
-                    "fileName": "app.js",
-                    "functionName": "fn1",
-                    "lineNumber": 72,
-                  }
-                }
-                key="frame-0"
-                showCode={false}
-              >
-                <div>
-                  <div>
-                    fn1
-                  </div>
-                  <div
-                    style={
-                      Object {
-                        "fontSize": "0.9em",
-                        "marginBottom": "0.9em",
-                      }
-                    }
-                  >
-                    <span>
-                      app.js:72:24
-                    </span>
-                  </div>
-                </div>
-              </StackFrame>
-              <StackFrame
-                contextSize={3}
-                critical={false}
-                editorHandler={[Function]}
-                frame={
-                  StackFrame {
-                    "_originalColumnNumber": null,
-                    "_originalFileName": null,
-                    "_originalFunctionName": null,
-                    "_originalLineNumber": null,
-                    "_originalScriptCode": null,
-                    "_scriptCode": null,
-                    "columnNumber": 31,
-                    "fileName": "app.js",
-                    "functionName": "fn2",
-                    "lineNumber": 84,
-                  }
-                }
-                key="frame-1"
-                showCode={false}
-              >
-                <div>
-                  <div>
-                    fn2
-                  </div>
-                  <div
-                    style={
-                      Object {
-                        "fontSize": "0.9em",
-                        "marginBottom": "0.9em",
-                      }
-                    }
-                  >
-                    <span>
-                      app.js:84:31
-                    </span>
-                  </div>
-                </div>
-              </StackFrame>
-              <button
-                onClick={[Function]}
-                style={
-                  Object {
-                    "backgroundColor": "#3C444F",
-                    "border": "none",
-                    "color": "#FFFFFF",
-                    "cursor": "pointer",
-                    "display": "block",
-                    "fontSize": "1em",
-                    "lineHeight": "1.5",
-                    "marginBottom": "0.6em",
-                    "padding": "0px 5px",
-                    "textAlign": "left",
-                    "width": "100%",
-                  }
-                }
-              >
-                ▲ 2 stack frames were expanded.
-              </button>
-            </div>
+            fn1
           </div>
-        </Collapsible>
+          <div
+            style="font-size: 0.9em; margin-bottom: 0.9em;"
+          >
+            <span>
+              app.js:72:24
+            </span>
+          </div>
+        </div>
+        <div>
+          <div>
+            fn2
+          </div>
+          <div
+            style="font-size: 0.9em; margin-bottom: 0.9em;"
+          >
+            <span>
+              app.js:84:31
+            </span>
+          </div>
+        </div>
+        <button
+          style="color: rgb(255, 255, 255); background-color: rgb(60, 68, 79); cursor: pointer; display: block; width: 100%; text-align: left; font-size: 1em; padding: 0px 5px; line-height: 1.5; margin-bottom: 0.6em;"
+        >
+          ▲ 2 stack frames were expanded.
+        </button>
       </div>
-    </StackTrace>
+    </div>
   </div>
-</StackTraceTab>
+</div>
 `;
