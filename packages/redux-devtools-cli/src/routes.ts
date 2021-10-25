@@ -90,7 +90,7 @@ function routes(
         break;
       case 'list':
         store
-          .list(req.body.query, req.body.fields as string[])
+          .list(req.body.query as string, req.body.fields as string[])
           .then(function (r) {
             res.send(r);
           })

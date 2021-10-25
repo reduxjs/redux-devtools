@@ -1,12 +1,12 @@
 import { v4 as uuidV4 } from 'uuid';
 import pick from 'lodash/pick';
 import { SCServer } from 'socketcluster-server';
-import knexModule from 'knex';
+import { Knex } from 'knex';
 import connector from './db/connector';
 
 const reports = 'remotedev_reports';
 // var payloads = 'remotedev_payloads';
-let knex: knexModule;
+let knex: Knex;
 
 const baseFields = ['id', 'title', 'added'];
 
@@ -44,13 +44,13 @@ export interface ReportBaseFields {
   added: string | null;
 }
 
-function list(query?: unknown, fields?: string[]): Promise<ReportBaseFields[]> {
+function list(query?: string, fields?: string[]): Promise<ReportBaseFields[]> {
   const r = knex.select(fields || baseFields).from(reports);
   if (query) return r.where(query);
   return r;
 }
 
-function listAll(query: unknown): Promise<Report[]> {
+function listAll(query?: string): Promise<Report[]> {
   const r = knex.select().from(reports);
   if (query) return r.where(query);
   return r;
@@ -133,8 +133,8 @@ function byBaseFields(data: Report): ReportBaseFields {
 }
 
 export interface Store {
-  list: (query?: unknown, fields?: string[]) => Promise<ReportBaseFields[]>;
-  listAll: (query?: unknown) => Promise<Report[]>;
+  list: (query?: string, fields?: string[]) => Promise<ReportBaseFields[]>;
+  listAll: (query?: string) => Promise<Report[]>;
   get: (id: string) => Promise<Report | { error: string }>;
   add: (data: AddData) => Promise<ReportBaseFields | { error: string }>;
 }
