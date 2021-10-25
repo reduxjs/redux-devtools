@@ -18,7 +18,7 @@ function error(msg: string): Promise<{ error: string }> {
 
 type ReportType = 'STATE' | 'ACTION' | 'STATES' | 'ACTIONS';
 
-interface Report {
+export interface Report {
   id: string;
   type: ReportType | null;
   title: string | null;

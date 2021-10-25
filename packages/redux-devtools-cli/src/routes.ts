@@ -5,8 +5,9 @@ import * as http from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { SCServer } from 'socketcluster-server';
-import graphqlMiddleware from './middleware/graphql';
+import { ApolloServer } from 'apollo-server-express';
 import { AddData, ReportBaseFields, Store } from './store';
+import { resolvers, schema } from './api/schema';
 
 const app = express.Router();
 
@@ -40,9 +41,23 @@ function routes(
     else app.use(morgan('combined'));
   }
 
-  graphqlMiddleware(store).applyMiddleware({ app } as {
-    app: express.Application;
+  const server = new ApolloServer({
+    typeDefs: schema,
+    resolvers,
+    context: {
+      store: store,
+    },
   });
+  server
+    .start()
+    .then(() => {
+      server.applyMiddleware({ app } as {
+        app: express.Application;
+      });
+    })
+    .catch((error) => {
+      console.error(error); // eslint-disable-line no-console
+    });
 
   serveUmdModule('react');
   serveUmdModule('react-dom');
