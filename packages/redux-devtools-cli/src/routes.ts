@@ -6,7 +6,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { SCServer } from 'socketcluster-server';
 import { ApolloServer } from 'apollo-server-express';
-import graphqlMiddleware from './middleware/graphql';
 import { AddData, ReportBaseFields, Store } from './store';
 import { resolvers, schema } from './api/schema';
 
@@ -49,11 +48,16 @@ function routes(
       store: store,
     },
   });
-  await server.start();
-  server.applyMiddleware({ app });
-  graphqlMiddleware(store).applyMiddleware({ app } as {
-    app: express.Application;
-  });
+  server
+    .start()
+    .then(() => {
+      server.applyMiddleware({ app } as {
+        app: express.Application;
+      });
+    })
+    .catch((error) => {
+      console.error(error); // eslint-disable-line no-console
+    });
 
   serveUmdModule('react');
   serveUmdModule('react-dom');
