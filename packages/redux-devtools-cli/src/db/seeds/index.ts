@@ -1,6 +1,6 @@
-import type knexModule from 'knex';
+import { Knex } from 'knex';
 
-export function seed(knex: knexModule) {
+export function seed(knex: Knex) {
   return Promise.all([knex('remotedev_apps').del()]).then(function () {
     return Promise.all([
       knex('remotedev_apps').insert({

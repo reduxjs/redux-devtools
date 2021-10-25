@@ -1,6 +1,6 @@
-import type knexModule from 'knex';
+import { Knex } from 'knex';
 
-export function up(knex: knexModule) {
+export function up(knex: Knex) {
   return Promise.all([
     knex.schema.createTable('remotedev_reports', function (table) {
       table.uuid('id').primary();
@@ -79,7 +79,7 @@ export function up(knex: knexModule) {
   ]);
 }
 
-export function down(knex: knexModule) {
+export function down(knex: Knex) {
   return Promise.all([
     knex.schema.dropTable('remotedev_reports'),
     knex.schema.dropTable('remotedev_apps'),
