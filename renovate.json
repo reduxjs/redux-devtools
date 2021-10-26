@@ -5,18 +5,13 @@
   "ignorePaths": ["**/node_modules/**", "extension/examples/**"],
   "packageRules": [
     {
-      "matchPackageNames": ["knex"],
-      "matchUpdateTypes": ["major", "minor"],
-      "groupName": "knex"
+      "matchPackageNames": ["node"],
+      "enabled": false
     },
     {
       "matchPackageNames": ["typescript"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "typescript"
-    },
-    {
-      "matchPackageNames": ["node"],
-      "groupName": "node"
     },
     {
       "matchPackageNames": ["source-map"],
