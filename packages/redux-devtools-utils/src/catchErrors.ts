@@ -1,6 +1,6 @@
 const ERROR = '@@redux-devtools/ERROR';
 
-interface ErrorAction {
+export interface ErrorAction {
   type: typeof ERROR;
   message?: Event | string;
   url?: string | undefined;

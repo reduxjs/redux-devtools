@@ -1,7 +1,7 @@
 import mapValues from 'lodash/mapValues';
-import { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
+import { LocalFilter } from '@redux-devtools/utils/lib/filters';
 
 export type FilterStateValue =
   | 'DO_NOT_FILTER'
@@ -13,27 +13,6 @@ export const FilterState: { [K in FilterStateValue]: FilterStateValue } = {
   DENYLIST_SPECIFIC: 'DENYLIST_SPECIFIC',
   ALLOWLIST_SPECIFIC: 'ALLOWLIST_SPECIFIC',
 };
-
-function isArray(arg: unknown): arg is readonly unknown[] {
-  return Array.isArray(arg);
-}
-
-interface LocalFilter {
-  readonly allowlist: string | undefined;
-  readonly denylist: string | undefined;
-}
-
-export function getLocalFilter(config: Config): LocalFilter | undefined {
-  const denylist = config.actionsDenylist ?? config.actionsBlacklist;
-  const allowlist = config.actionsAllowlist ?? config.actionsWhitelist;
-  if (denylist || allowlist) {
-    return {
-      allowlist: isArray(allowlist) ? allowlist.join('|') : allowlist,
-      denylist: isArray(denylist) ? denylist.join('|') : denylist,
-    };
-  }
-  return undefined;
-}
 
 export const noFiltersApplied = (localFilter: LocalFilter | undefined) =>
   // !predicate &&

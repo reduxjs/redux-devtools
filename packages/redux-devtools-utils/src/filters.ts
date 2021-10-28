@@ -2,7 +2,7 @@ import mapValues from 'lodash/mapValues';
 import { PerformAction } from '@redux-devtools/core';
 import { Action } from 'redux';
 
-interface State {
+export interface State {
   actionsById: { [actionId: number]: PerformAction<Action<unknown>> };
   computedStates: { state: unknown; error?: string }[];
   stagedActionIds: number[];
@@ -40,21 +40,35 @@ function filterStates(
   }));
 }
 
-interface Config {
-  actionsDenylist?: string[];
-  actionsAllowlist?: string[];
+function isArray(arg: unknown): arg is readonly unknown[] {
+  return Array.isArray(arg);
 }
 
-interface LocalFilter {
-  allowlist?: string;
-  denylist?: string;
+interface Config {
+  /**
+   * @deprecated Use actionsDenylist instead.
+   */
+  readonly actionsBlacklist?: string | readonly string[];
+  /**
+   * @deprecated Use actionsAllowlist instead.
+   */
+  readonly actionsWhitelist?: string | readonly string[];
+  readonly actionsDenylist?: string | readonly string[];
+  readonly actionsAllowlist?: string | readonly string[];
+}
+
+export interface LocalFilter {
+  allowlist: string | undefined;
+  denylist: string | undefined;
 }
 
 export function getLocalFilter(config: Config): LocalFilter | undefined {
-  if (config.actionsDenylist || config.actionsAllowlist) {
+  const denylist = config.actionsDenylist ?? config.actionsBlacklist;
+  const allowlist = config.actionsAllowlist ?? config.actionsWhitelist;
+  if (denylist || allowlist) {
     return {
-      allowlist: config.actionsAllowlist && config.actionsAllowlist.join('|'),
-      denylist: config.actionsDenylist && config.actionsDenylist.join('|'),
+      allowlist: isArray(allowlist) ? allowlist.join('|') : allowlist,
+      denylist: isArray(denylist) ? denylist.join('|') : denylist,
     };
   }
   return undefined;
@@ -99,7 +113,10 @@ export function isFiltered(
   );
 }
 
-export function filterStagedActions(state: State, filters: LocalFilter) {
+export function filterStagedActions(
+  state: State,
+  filters: LocalFilter | undefined
+) {
   if (!filters) return state;
 
   const filteredStagedActionIds: number[] = [];
@@ -125,13 +142,13 @@ export function filterStagedActions(state: State, filters: LocalFilter) {
 export function filterState(
   state: State,
   type: string,
-  localFilter: LocalFilter,
-  stateSanitizer: (state: unknown, actionId: number) => unknown,
+  localFilter: LocalFilter | undefined,
+  stateSanitizer: ((state: unknown, actionId: number) => unknown) | undefined,
   actionSanitizer:
     | ((action: Action<unknown>, id: number) => Action)
     | undefined,
   nextActionId: number,
-  predicate: (currState: unknown, currAction: Action<unknown>) => boolean
+  predicate?: (currState: unknown, currAction: Action<unknown>) => boolean
 ) {
   if (type === 'ACTION')
     return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
@@ -192,6 +209,6 @@ export function filterState(
   return {
     ...state,
     actionsById: filterActions(state.actionsById, actionSanitizer),
-    computedStates: filterStates(state.computedStates, stateSanitizer),
+    computedStates: filterStates(state.computedStates, stateSanitizer!),
   };
 }

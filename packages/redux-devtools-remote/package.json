@@ -1,0 +1,68 @@
+{
+  "name": "@redux-devtools/remote",
+  "version": "0.5.16",
+  "description": "Relay Redux actions to remote Redux DevTools.",
+  "keywords": [
+    "redux",
+    "devtools",
+    "flux",
+    "react",
+    "hot reloading",
+    "time travel",
+    "live edit"
+  ],
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-remote",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  },
+  "license": "MIT",
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "files": [
+    "src",
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "scripts": {
+    "build": "yarn run build:types && yarn run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
+    "build:examples": "babel-node examples/buildAll.js",
+    "clean": "rimraf lib",
+    "lint": "eslint . --ext .ts",
+    "type-check": "tsc --noEmit",
+    "prepack": "yarn run clean && yarn run build",
+    "prepublish": "yarn run type-check && yarn run lint"
+  },
+  "dependencies": {
+    "@redux-devtools/instrument": "^1.11.0",
+    "@redux-devtools/utils": "^1.0.0-6",
+    "jsan": "^3.1.13",
+    "querystring": "^0.2.1",
+    "rn-host-detect": "^1.2.0",
+    "socketcluster-client": "^14.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/jsan": "^3.1.2",
+    "@types/socketcluster-client": "^13.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.26.1",
+    "redux": "^4.1.1",
+    "rimraf": "^3.0.2",
+    "typescript": "~4.4.4"
+  },
+  "peerDependencies": {
+    "redux": "^3.5.2 || ^4.0.0"
+  }
+}

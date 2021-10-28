@@ -22,7 +22,6 @@ import { isAllowed, Options } from '../options/syncOptions';
 import Monitor from '../../../app/service/Monitor';
 import {
   noFiltersApplied,
-  getLocalFilter,
   isFiltered,
   filterState,
   startingFrom,
@@ -52,6 +51,7 @@ import {
 } from '@redux-devtools/app/lib/actions';
 import { ContentScriptToPageScriptMessage } from './contentScript';
 import { Features } from '@redux-devtools/app/lib/reducers/instances';
+import { getLocalFilter } from '@redux-devtools/utils/lib/filters';
 
 type EnhancedStoreWithInitialDispatch<
   S,
