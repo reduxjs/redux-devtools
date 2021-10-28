@@ -2,7 +2,11 @@
   "extends": ["config:base", "group:allNonMajor", ":maintainLockFilesWeekly"],
   "rangeStrategy": "bump",
   "rebaseWhen": "conflicted",
-  "ignorePaths": ["**/node_modules/**", "extension/examples/**"],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "extension/examples/**",
+    "packages/redux-devtools-remote/examples/**"
+  ],
   "packageRules": [
     {
       "matchPackageNames": ["node"],
