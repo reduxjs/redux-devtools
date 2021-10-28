@@ -1,0 +1,16 @@
+{
+  "name": "redux-remote-devtools-node-counter",
+  "version": "1.0.0",
+  "description": "Very simple counter for redux remote devtools in node",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^3.5.2"
+  },
+  "devDependencies": {
+    "remote-redux-devtools": "^0.5.7"
+  }
+}
