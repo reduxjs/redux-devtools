@@ -1,5 +1,9 @@
 import { createStore, compose } from 'redux';
-import { reduxReactRouter, routerStateReducer, ReduxRouter } from 'redux-router';
+import {
+  reduxReactRouter,
+  routerStateReducer,
+  ReduxRouter,
+} from 'redux-router';
 //import createHistory from 'history/lib/createBrowserHistory';
 import devTools from 'remote-redux-devtools';
 import createHistory from 'history/lib/createHashHistory';

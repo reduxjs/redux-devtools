@@ -6,11 +6,16 @@ import reducer from '../reducers';
 import * as actionCreators from '../actions/counter';
 
 export default function configureStore(initialState) {
-
-  const composeEnhancers = composeWithDevTools({ realtime: true, actionCreators, trace: true });
-  const store = createStore(reducer, initialState, composeEnhancers(
-    applyMiddleware(invariant(), thunk)
-  ));
+  const composeEnhancers = composeWithDevTools({
+    realtime: true,
+    actionCreators,
+    trace: true,
+  });
+  const store = createStore(
+    reducer,
+    initialState,
+    composeEnhancers(applyMiddleware(invariant(), thunk))
+  );
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

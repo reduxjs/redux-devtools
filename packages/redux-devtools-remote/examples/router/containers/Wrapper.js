@@ -8,14 +8,14 @@ import * as TodoActions from '../actions/todos';
 function mapDispatchToProps(dispatch) {
   return {
     pushState: bindActionCreators(pushState, dispatch),
-    actions: bindActionCreators(TodoActions, dispatch)
+    actions: bindActionCreators(TodoActions, dispatch),
   };
 }
 
 @connect((state) => ({}), mapDispatchToProps)
 class Wrapper extends Component {
   static propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   constructor(props) {
@@ -41,11 +41,23 @@ class Wrapper extends Component {
   }
 
   render() {
-
     return (
       <div>
-        <div style={{ padding: 20, backgroundColor: '#eee', fontWeight: 'bold', textAlign: 'center' }}>
-          <a href="#" onClick={this.handleClick}>Standard Todo</a> | <a href="#" onClick={this.handleClick}>AutoTodo</a>
+        <div
+          style={{
+            padding: 20,
+            backgroundColor: '#eee',
+            fontWeight: 'bold',
+            textAlign: 'center',
+          }}
+        >
+          <a href="#" onClick={this.handleClick}>
+            Standard Todo
+          </a>{' '}
+          |{' '}
+          <a href="#" onClick={this.handleClick}>
+            AutoTodo
+          </a>
         </div>
         {this.props.children}
       </div>

@@ -6,7 +6,7 @@ import * as MonitorActions from '../actions/monitoring';
 
 function mapStateToProps(state) {
   return {
-    counter: state.counter
+    counter: state.counter,
   };
 }
 

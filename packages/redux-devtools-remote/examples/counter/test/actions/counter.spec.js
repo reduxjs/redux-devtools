@@ -12,16 +12,17 @@ function mockStore(getState, expectedActions, onLastAction) {
   if (!Array.isArray(expectedActions)) {
     throw new Error('expectedActions should be an array of expected actions.');
   }
-  if (typeof onLastAction !== 'undefined' && typeof onLastAction !== 'function') {
+  if (
+    typeof onLastAction !== 'undefined' &&
+    typeof onLastAction !== 'function'
+  ) {
     throw new Error('onLastAction should either be undefined or function.');
   }
 
   function mockStoreWithoutMiddleware() {
     return {
       getState() {
-        return typeof getState === 'function' ?
-          getState() :
-          getState;
+        return typeof getState === 'function' ? getState() : getState;
       },
 
       dispatch(action) {
@@ -31,13 +32,13 @@ function mockStore(getState, expectedActions, onLastAction) {
           onLastAction();
         }
         return action;
-      }
+      },
     };
   }
 
-  const mockStoreWithMiddleware = applyMiddleware(
-    ...middlewares
-  )(mockStoreWithoutMiddleware);
+  const mockStoreWithMiddleware = applyMiddleware(...middlewares)(
+    mockStoreWithoutMiddleware
+  );
 
   return mockStoreWithMiddleware();
 }
@@ -52,9 +53,7 @@ describe('actions', () => {
   });
 
   it('incrementIfOdd should create increment action', (done) => {
-    const expectedActions = [
-      { type: actions.INCREMENT_COUNTER }
-    ];
+    const expectedActions = [{ type: actions.INCREMENT_COUNTER }];
     const store = mockStore({ counter: 1 }, expectedActions, done);
     store.dispatch(actions.incrementIfOdd());
   });
@@ -67,9 +66,7 @@ describe('actions', () => {
   });
 
   it('incrementAsync should create increment action', (done) => {
-    const expectedActions = [
-      { type: actions.INCREMENT_COUNTER }
-    ];
+    const expectedActions = [{ type: actions.INCREMENT_COUNTER }];
     const store = mockStore({ counter: 0 }, expectedActions, done);
     store.dispatch(actions.incrementAsync(100));
   });

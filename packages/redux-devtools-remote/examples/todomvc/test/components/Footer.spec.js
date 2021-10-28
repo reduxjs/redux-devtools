@@ -5,13 +5,16 @@ import Footer from '../../components/Footer';
 import { SHOW_ALL, SHOW_ACTIVE } from '../../constants/TodoFilters';
 
 function setup(propOverrides) {
-  const props = Object.assign({
-    completedCount: 0,
-    activeCount: 0,
-    filter: SHOW_ALL,
-    onClearCompleted: expect.createSpy(),
-    onShow: expect.createSpy()
-  }, propOverrides);
+  const props = Object.assign(
+    {
+      completedCount: 0,
+      activeCount: 0,
+      filter: SHOW_ALL,
+      onClearCompleted: expect.createSpy(),
+      onShow: expect.createSpy(),
+    },
+    propOverrides
+  );
 
   const renderer = TestUtils.createRenderer();
   renderer.render(<Footer {...props} />);
@@ -19,13 +22,14 @@ function setup(propOverrides) {
 
   return {
     props: props,
-    output: output
+    output: output,
   };
 }
 
 function getTextContent(elem) {
-  const children = Array.isArray(elem.props.children) ?
-    elem.props.children : [elem.props.children];
+  const children = Array.isArray(elem.props.children)
+    ? elem.props.children
+    : [elem.props.children];
 
   return children.reduce(function concatText(out, child) {
     // Children are either elements or text strings
@@ -63,11 +67,13 @@ describe('components', () => {
         expect(filter.type).toBe('li');
         const a = filter.props.children;
         expect(a.props.className).toBe(i === 0 ? 'selected' : '');
-        expect(a.props.children).toBe({
-          0: 'All',
-          1: 'Active',
-          2: 'Completed'
-        }[i]);
+        expect(a.props.children).toBe(
+          {
+            0: 'All',
+            1: 'Active',
+            2: 'Completed',
+          }[i]
+        );
       });
     });
 
@@ -81,20 +87,20 @@ describe('components', () => {
 
     it('shouldnt show clear button when no completed todos', () => {
       const { output } = setup({ completedCount: 0 });
-      const [,, clear] = output.props.children;
+      const [, , clear] = output.props.children;
       expect(clear).toBe(undefined);
     });
 
     it('should render clear button when completed todos', () => {
       const { output } = setup({ completedCount: 1 });
-      const [,, clear] = output.props.children;
+      const [, , clear] = output.props.children;
       expect(clear.type).toBe('button');
       expect(clear.props.children).toBe('Clear completed');
     });
 
     it('should call onClearCompleted on clear button click', () => {
       const { output, props } = setup({ completedCount: 1 });
-      const [,, clear] = output.props.children;
+      const [, , clear] = output.props.children;
       clear.props.onClick({});
       expect(props.onClearCompleted).toHaveBeenCalled();
     });

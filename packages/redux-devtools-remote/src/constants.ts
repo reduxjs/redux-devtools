@@ -4,6 +4,6 @@ export const defaultSocketOptions = {
   port: 443,
   autoReconnect: true,
   autoReconnectOptions: {
-    randomness: 30000
-  }
+    randomness: 30000,
+  },
 };

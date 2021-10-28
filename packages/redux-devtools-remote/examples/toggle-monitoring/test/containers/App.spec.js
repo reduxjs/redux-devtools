@@ -15,7 +15,7 @@ function setup(initialState) {
   return {
     app: app,
     buttons: TestUtils.scryRenderedDOMComponentsWithTag(app, 'button'),
-    p: TestUtils.findRenderedDOMComponentWithTag(app, 'p')
+    p: TestUtils.findRenderedDOMComponentWithTag(app, 'p'),
   };
 }
 

@@ -8,14 +8,16 @@ function setup() {
     increment: expect.createSpy(),
     incrementIfOdd: expect.createSpy(),
     incrementAsync: expect.createSpy(),
-    decrement: expect.createSpy()
+    decrement: expect.createSpy(),
   };
-  const component = TestUtils.renderIntoDocument(<Counter counter={1} {...actions} />);
+  const component = TestUtils.renderIntoDocument(
+    <Counter counter={1} {...actions} />
+  );
   return {
     component: component,
     actions: actions,
     buttons: TestUtils.scryRenderedDOMComponentsWithTag(component, 'button'),
-    p: TestUtils.findRenderedDOMComponentWithTag(component, 'p')
+    p: TestUtils.findRenderedDOMComponentWithTag(component, 'p'),
   };
 }
 

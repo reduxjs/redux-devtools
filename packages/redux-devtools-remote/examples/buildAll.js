@@ -13,7 +13,7 @@ var exampleDirs = fs.readdirSync(__dirname).filter((file) => {
 // Ordering is important here. `npm install` must come first.
 var cmdArgs = [
   { cmd: 'npm', args: ['install'] },
-  { cmd: 'webpack', args: ['index.js'] }
+  { cmd: 'webpack', args: ['index.js'] },
 ];
 
 for (const dir of exampleDirs) {
@@ -21,7 +21,7 @@ for (const dir of exampleDirs) {
     // declare opts in this scope to avoid https://github.com/joyent/node/issues/9158
     const opts = {
       cwd: path.join(__dirname, dir),
-      stdio: 'inherit'
+      stdio: 'inherit',
     };
     let result = {};
     if (process.platform === 'win32') {
