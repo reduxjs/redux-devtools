@@ -1,15 +1,25 @@
-import { Scheme, Theme } from '@redux-devtools/ui';
+import { Theme, Scheme } from '@redux-devtools/ui';
 import {
   CHANGE_THEME,
   APPLY_MEDIA_FEATURES_PREFERENCES,
 } from '../constants/actionTypes';
 import { StoreAction } from '../actions';
 
+export const defaultThemeColorPreference = 'default';
+
+export const themeColorPreferences = [
+  defaultThemeColorPreference,
+  'light',
+  'dark',
+] as const;
+
+export type ThemeColorPreference = typeof themeColorPreferences[number];
+
 export interface ThemeState {
   readonly theme: Theme;
   readonly scheme: Scheme;
   readonly light: boolean;
-  readonly latestChangeBy?: string;
+  readonly themeColorPreference?: ThemeColorPreference;
 }
 
 export default function theme(
@@ -17,6 +27,7 @@ export default function theme(
     theme: 'default' as const,
     scheme: 'default' as const,
     light: true,
+    themeColorPreference: defaultThemeColorPreference,
   },
   action: StoreAction
 ) {
@@ -25,18 +36,20 @@ export default function theme(
       theme: action.theme,
       scheme: action.scheme,
       light: !action.dark,
-      latestChangeBy: CHANGE_THEME,
+      themeColorPreference: action.themeColorPreference,
     };
   }
 
   if (
     action.type === APPLY_MEDIA_FEATURES_PREFERENCES &&
-    state.latestChangeBy !== CHANGE_THEME
+    (!state.themeColorPreference ||
+      state.themeColorPreference === defaultThemeColorPreference)
   ) {
     return {
       ...state,
+      themeColorPreference:
+        state.themeColorPreference ?? defaultThemeColorPreference,
       light: !action.prefersDarkColorScheme,
-      latestChangeBy: APPLY_MEDIA_FEATURES_PREFERENCES,
     };
   }
 

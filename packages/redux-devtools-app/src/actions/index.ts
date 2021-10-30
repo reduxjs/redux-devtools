@@ -48,6 +48,7 @@ import { MonitorStateMonitorState } from '../reducers/monitor';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import { Data } from '../reducers/reports';
 import { prefersDarkColorScheme } from '../utils/media-queries';
+import { ThemeColorPreference } from '../reducers/theme';
 
 let monitorReducer: (
   monitorProps: unknown,
@@ -67,9 +68,9 @@ export function changeSection(section: string): ChangeSectionAction {
 interface ChangeThemeFormData {
   readonly theme: Theme;
   readonly scheme: Scheme;
-  readonly dark: boolean;
+  readonly themeColorPreference: ThemeColorPreference;
 }
-interface ChangeThemeData {
+export interface ChangeThemeData {
   readonly formData: ChangeThemeFormData;
 }
 export interface ChangeThemeAction {
@@ -77,6 +78,7 @@ export interface ChangeThemeAction {
   readonly theme: Theme;
   readonly scheme: Scheme;
   readonly dark: boolean;
+  readonly themeColorPreference: ThemeColorPreference;
 }
 
 export interface ApplyMediaFeaturesPreferencesAction {
@@ -85,7 +87,21 @@ export interface ApplyMediaFeaturesPreferencesAction {
 }
 
 export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
-  return { type: CHANGE_THEME, ...data.formData };
+  const { themeColorPreference } = data.formData;
+  let dark: boolean;
+
+  switch (themeColorPreference) {
+    case 'light':
+      dark = false;
+      break;
+    case 'dark':
+      dark = true;
+      break;
+    default:
+      dark = prefersDarkColorScheme();
+  }
+
+  return { type: CHANGE_THEME, ...data.formData, dark };
 }
 
 /**
