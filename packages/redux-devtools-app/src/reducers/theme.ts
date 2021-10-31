@@ -5,7 +5,7 @@ import {
 } from '../constants/actionTypes';
 import { StoreAction } from '../actions';
 
-export const defaultThemeColorPreference = 'default';
+export const defaultThemeColorPreference = 'auto';
 
 export const themeColorPreferences = [
   defaultThemeColorPreference,
