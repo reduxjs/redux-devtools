@@ -39,7 +39,10 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
   };
 
   selectFormattedQuery: Selector<RtkResourceInfo, FormattedQuery> =
-    createSelector(identity, (resInfo: RtkResourceInfo): FormattedQuery => {
+    createSelector<
+      [(identity: RtkResourceInfo) => RtkResourceInfo],
+      FormattedQuery
+    >(identity, (resInfo: RtkResourceInfo): FormattedQuery => {
       const { state, queryKey, reducerPath } = resInfo;
 
       const startedAt = state.startedTimeStamp

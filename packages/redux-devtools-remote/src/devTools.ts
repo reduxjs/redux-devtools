@@ -576,7 +576,10 @@ const compose =
     const devToolsEnhancer = new DevToolsEnhancer();
 
     function preEnhancer(createStore: StoreEnhancerStoreCreator) {
-      return (reducer: Reducer, preloadedState: PreloadedState<unknown>) => {
+      return <S, A extends Action<unknown>>(
+        reducer: Reducer<S, A>,
+        preloadedState: PreloadedState<S>
+      ) => {
         devToolsEnhancer.store = createStore(reducer, preloadedState) as any;
         return {
           ...devToolsEnhancer.store,

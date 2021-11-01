@@ -13,8 +13,7 @@ const keySep = ' - ';
 
 export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps> {
   selectFormattedActions = createSelector<
-    AnyAction[],
-    AnyAction[],
+    [(actions: AnyAction[]) => AnyAction[]],
     Record<string, AnyAction>
   >(identity, (actions) => {
     const output: Record<string, AnyAction> = {};
