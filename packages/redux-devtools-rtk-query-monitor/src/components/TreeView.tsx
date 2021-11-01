@@ -37,14 +37,12 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
   };
 
   readonly selectLabelRenderer = createSelector<
-    StylingFunction,
-    StylingFunction,
+    [(stylingFunction: StylingFunction) => StylingFunction],
     ReturnType<typeof createTreeItemLabelRenderer>
   >(identity, createTreeItemLabelRenderer);
 
   readonly selectGetItemString = createSelector<
-    StylingFunction,
-    StylingFunction,
+    [(stylingFunction: StylingFunction) => StylingFunction],
     (type: string, data: unknown) => ReactNode
   >(
     identity,
@@ -53,8 +51,7 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
   );
 
   readonly selectTheme = createSelector<
-    Base16Theme,
-    Base16Theme,
+    [(base16Theme: Base16Theme) => Base16Theme],
     ReturnType<typeof getJsonTreeTheme>
   >(identity, getJsonTreeTheme);
 

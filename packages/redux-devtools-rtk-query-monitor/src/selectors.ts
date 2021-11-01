@@ -237,8 +237,8 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
 
   const selectApiStatsOfCurrentQuery = createSelector(
     selectApiOfCurrentQuery,
-    (selectorsSource) => selectorsSource.actionsById,
-    (selectorsSource) => selectorsSource.currentStateIndex,
+    (selectorsSource: SelectorsSource<S>) => selectorsSource.actionsById,
+    (selectorsSource: SelectorsSource<S>) => selectorsSource.currentStateIndex,
     generateApiStatsOfCurrentQuery
   );
 
