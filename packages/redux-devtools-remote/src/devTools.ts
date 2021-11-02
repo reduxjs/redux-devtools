@@ -200,7 +200,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
   sendOn: readonly string[] | undefined;
   sendOnError: number | undefined;
   channel?: string;
-  errorCounts?: { [errorName: string]: number };
+  errorCounts: { [errorName: string]: number } = {};
   lastAction?: unknown;
   paused?: boolean;
   locked?: boolean;
@@ -423,17 +423,17 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     )
       return;
 
-    this.socket = socketCluster.connect(this.socketOptions);
+    this.socket = socketCluster.create(this.socketOptions);
 
     this.socket.on('error', (err) => {
       // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
       // eslint-disable-next-line no-prototype-builtins
-      this.errorCounts![err.name] = this.errorCounts!.hasOwnProperty(err.name)
-        ? this.errorCounts![err.name] + 1
+      this.errorCounts[err.name] = this.errorCounts.hasOwnProperty(err.name)
+        ? this.errorCounts[err.name] + 1
         : 1;
 
       if (this.suppressConnectErrors) {
-        if (this.errorCounts![err.name] === 1) {
+        if (this.errorCounts[err.name] === 1) {
           console.log(
             'remote-redux-devtools: Socket connection errors are being suppressed. ' +
               '\n' +
