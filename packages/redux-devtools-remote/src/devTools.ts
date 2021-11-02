@@ -423,7 +423,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     )
       return;
 
-    this.socket = socketCluster.connect(this.socketOptions);
+    this.socket = socketCluster.create(this.socketOptions);
 
     this.socket.on('error', (err) => {
       // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
