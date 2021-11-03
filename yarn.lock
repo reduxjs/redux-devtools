@@ -15948,6 +15948,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"history@npm:^5.0.3":
+  version: 5.1.0
+  resolution: "history@npm:5.1.0"
+  dependencies:
+    "@babel/runtime": ^7.7.6
+  checksum: c978710a188ee5ad5d2acf55721c77e27469578c891a66311e71e8920d1390d14476e39a6db07e0ab0f5f8d594f1f62eb55a1059c7549cde7795a36367df5869
+  languageName: node
+  linkType: hard
+
 "hmac-drbg@npm:^1.0.1":
   version: 1.0.1
   resolution: "hmac-drbg@npm:1.0.1"
@@ -24088,24 +24097,30 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "react-router-dom@npm:5.3.0"
+"react-router-dom@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "react-router-dom@npm:6.0.0"
   dependencies:
-    "@babel/runtime": ^7.12.13
-    history: ^4.9.0
-    loose-envify: ^1.3.1
-    prop-types: ^15.6.2
-    react-router: 5.2.1
-    tiny-invariant: ^1.0.2
-    tiny-warning: ^1.0.0
+    react-router: 6.0.0
   peerDependencies:
-    react: ">=15"
-  checksum: 47584fd629ecca52398d7888cab193b8a74057cc99a7ef44410c405d4082f618c3c0399db5325bc3524f9c511404086169570013b61a94dfa6acdfdc850d7a1f
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: d411dbdb139b27535f80326a8c6dc0dbf600a5fadda8db27460caeade87c252543cc75a8338f032ecf3fcb3d0c9856b10e3e071f8e0c9ccf73f93453fc453884
   languageName: node
   linkType: hard
 
-"react-router@npm:5.2.1, react-router@npm:^5.2.1":
+"react-router@npm:6.0.0":
+  version: 6.0.0
+  resolution: "react-router@npm:6.0.0"
+  dependencies:
+    history: ^5.0.3
+  peerDependencies:
+    react: ">=16.8"
+  checksum: c6ddc02366009e6ea2db28631d676026c1da3b51c0c179b1a1a92e5602f66cbf379e1d56418c7612009f8b049c159c40b4fd1eb8b261c991bf11206417930175
+  languageName: node
+  linkType: hard
+
+"react-router@npm:^5.2.1":
   version: 5.2.1
   resolution: "react-router@npm:5.2.1"
   dependencies:
@@ -25396,7 +25411,7 @@ resolve@^2.0.0-next.3:
     react-dom: ^17.0.2
     react-icons: ^4.3.1
     react-redux: ^7.2.6
-    react-router-dom: ^5.3.0
+    react-router-dom: ^6.0.0
     style-loader: ^3.3.1
     ts-node: ^10.4.0
     typescript: ~4.4.4
