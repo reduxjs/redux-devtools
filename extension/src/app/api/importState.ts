@@ -1,4 +1,3 @@
-import mapValues from 'lodash/mapValues';
 import jsan from 'jsan';
 import seralizeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
 import {
@@ -8,13 +7,6 @@ import {
 import Immutable from 'immutable';
 import { LiftedState } from '@redux-devtools/instrument';
 import { Action } from 'redux';
-
-function deprecate(param: string) {
-  // eslint-disable-next-line no-console
-  console.warn(
-    `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead: https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1`
-  );
-}
 
 interface SerializeWithRequiredImmutable extends SerializeWithImmutable {
   readonly immutable: typeof Immutable;
@@ -43,7 +35,7 @@ interface ParsedSerializedLiftedState {
 
 export default function importState<S, A extends Action<unknown>>(
   state: string | undefined,
-  { deserializeState, deserializeAction, serialize }: Config
+  { serialize }: Config
 ) {
   if (!state) return undefined;
   let parse = jsan.parse;
@@ -82,35 +74,6 @@ export default function importState<S, A extends Action<unknown>>(
           unknown
         >)
       : parsedSerializedLiftedState;
-  if (deserializeState) {
-    deprecate('deserializeState');
-    if (typeof nextLiftedState.computedStates !== 'undefined') {
-      nextLiftedState.computedStates = nextLiftedState.computedStates.map(
-        (computedState) => ({
-          ...computedState,
-          state: deserializeState(computedState.state),
-        })
-      );
-    }
-    if (typeof nextLiftedState.committedState !== 'undefined') {
-      nextLiftedState.committedState = deserializeState(
-        nextLiftedState.committedState
-      );
-    }
-    if (typeof preloadedState !== 'undefined') {
-      preloadedState = deserializeState(preloadedState);
-    }
-  }
-  if (deserializeAction) {
-    deprecate('deserializeAction');
-    nextLiftedState.actionsById = mapValues(
-      nextLiftedState.actionsById,
-      (liftedAction) => ({
-        ...liftedAction,
-        action: deserializeAction(liftedAction.action),
-      })
-    );
-  }
 
   return { nextLiftedState, preloadedState };
 }
