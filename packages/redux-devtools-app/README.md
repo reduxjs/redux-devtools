@@ -2,7 +2,7 @@
 
 ![Demo](https://raw.githubusercontent.com/zalmoxisus/remote-redux-devtools/master/demo.gif)
 
-Web, Electron and Chrome app for monitoring [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools). Can be accessed on [`remotedev.io`](http://remotedev.io/local).
+Web, Electron and Chrome app for monitoring [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools).
 
 Also it's a react component you can use to build amazing monitor applications like:
 
