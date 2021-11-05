@@ -10,13 +10,11 @@ import {
   Dispatch,
   PreloadedState,
   Reducer,
-  Store,
   StoreEnhancer,
   StoreEnhancerStoreCreator,
 } from 'redux';
 import Immutable from 'immutable';
 import { EnhancedStore, PerformAction } from '@redux-devtools/instrument';
-import createStore from '../../../app/stores/createStore';
 import configureStore, { getUrlParam } from '../../../app/stores/enhancerStore';
 import { isAllowed, Options } from '../options/syncOptions';
 import Monitor from '../../../app/service/Monitor';
@@ -133,11 +131,6 @@ export interface Config extends ConfigWithExpandedMaxAge {
 }
 
 interface ReduxDevtoolsExtension {
-  <S, A extends Action<unknown>>(
-    reducer: Reducer<S, A>,
-    preloadedState?: PreloadedState<S>,
-    config?: Config
-  ): Store<S, A>;
   (config?: Config): StoreEnhancer;
   open: (position?: Position) => void;
   updateStore: (
@@ -167,21 +160,10 @@ declare global {
 }
 
 function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
-  reducer?: Reducer<S, A>,
-  preloadedState?: PreloadedState<S>,
   config?: Config
-): Store<S, A>;
-function __REDUX_DEVTOOLS_EXTENSION__(config: Config): StoreEnhancer;
-function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
-  reducer?: Reducer<S, A> | Config | undefined,
-  preloadedState?: PreloadedState<S>,
-  config?: Config
-): Store<S, A> | StoreEnhancer {
+): StoreEnhancer {
   /* eslint-disable no-param-reassign */
-  if (typeof reducer === 'object') {
-    config = reducer;
-    reducer = undefined;
-  } else if (typeof config !== 'object') config = {};
+  if (typeof config !== 'object') config = {};
   /* eslint-enable no-param-reassign */
   if (!window.devToolsOptions) window.devToolsOptions = {} as any;
 
@@ -570,13 +552,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       };
     };
 
-  if (!reducer) return enhance();
-  /* eslint-disable no-console */
-  console.warn(
-    'Creating a Redux store directly from DevTools extension is discouraged and will not be supported in future major version. For more details see: https://git.io/fphCe'
-  );
-  /* eslint-enable no-console */
-  return createStore(reducer, preloadedState, enhance);
+  return enhance();
 }
 
 declare global {
