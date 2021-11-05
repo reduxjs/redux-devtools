@@ -29,7 +29,6 @@ import importState from '../../../app/api/importState';
 import openWindow, { Position } from '../../../app/api/openWindow';
 import generateId from '../../../app/api/generateInstanceId';
 import {
-  updateStore,
   toContentScript,
   sendMessage,
   setListener,
@@ -133,10 +132,6 @@ export interface Config extends ConfigWithExpandedMaxAge {
 interface ReduxDevtoolsExtension {
   (config?: Config): StoreEnhancer;
   open: (position?: Position) => void;
-  updateStore: (
-    newStore: EnhancedStore<unknown, Action<unknown>, unknown>,
-    instanceId: number
-  ) => void;
   notifyErrors: (onError?: () => boolean) => void;
   send: <S, A extends Action<unknown>>(
     action: StructuralPerformAction<A> | StructuralPerformAction<A>[],
@@ -564,7 +559,6 @@ declare global {
 // noinspection JSAnnotator
 window.__REDUX_DEVTOOLS_EXTENSION__ = __REDUX_DEVTOOLS_EXTENSION__ as any;
 window.__REDUX_DEVTOOLS_EXTENSION__.open = openWindow;
-window.__REDUX_DEVTOOLS_EXTENSION__.updateStore = updateStore(stores);
 window.__REDUX_DEVTOOLS_EXTENSION__.notifyErrors = notifyErrors;
 window.__REDUX_DEVTOOLS_EXTENSION__.send = sendMessage;
 window.__REDUX_DEVTOOLS_EXTENSION__.listen = setListener;

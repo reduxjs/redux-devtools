@@ -695,25 +695,6 @@ export function connect(preConfig: Config): ConnectResponse {
   };
 }
 
-export function updateStore<S, A extends Action<unknown>>(stores: {
-  [K in string | number]: EnhancedStore<S, A, unknown>;
-}) {
-  return function (newStore: EnhancedStore<S, A, unknown>, instanceId: number) {
-    /* eslint-disable no-console */
-    console.warn(
-      '`__REDUX_DEVTOOLS_EXTENSION__.updateStore` is deprecated, remove it and just use ' +
-        "`__REDUX_DEVTOOLS_EXTENSION_COMPOSE__` instead of the extension's store enhancer: " +
-        'https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup'
-    );
-    /* eslint-enable no-console */
-    const store = stores[instanceId || Object.keys(stores)[0]];
-    // Mutate the store in order to keep the reference
-    store.liftedStore = newStore.liftedStore;
-    store.getState = newStore.getState;
-    store.dispatch = newStore.dispatch;
-  };
-}
-
 export function isInIframe() {
   try {
     return window.self !== window.top;
