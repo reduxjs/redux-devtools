@@ -37,10 +37,6 @@ export default function configureStore<
       shouldStartLocked: config.shouldStartLocked,
       pauseActionType: config.pauseActionType || '@@PAUSED',
     }),
-    persistState(
-      getUrlParam('debug_session'),
-      config.deserializeState,
-      config.deserializeAction
-    )
+    persistState(getUrlParam('debug_session'))
   )(next);
 }

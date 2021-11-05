@@ -95,14 +95,6 @@ export interface ConfigWithExpandedMaxAge {
   readonly actionsDenylist?: string | readonly string[];
   readonly actionsAllowlist?: string | readonly string[];
   serialize?: boolean | SerializeWithImmutable;
-  readonly serializeState?:
-    | boolean
-    | ((key: string, value: unknown) => unknown)
-    | Serialize;
-  readonly serializeAction?:
-    | boolean
-    | ((key: string, value: unknown) => unknown)
-    | Serialize;
   readonly stateSanitizer?: <S>(state: S, index?: number) => S;
   readonly actionSanitizer?: <A extends Action<unknown>>(
     action: A,
@@ -129,8 +121,6 @@ export interface ConfigWithExpandedMaxAge {
   readonly shouldRecordChanges?: boolean;
   readonly shouldStartLocked?: boolean;
   readonly pauseActionType?: unknown;
-  readonly deserializeState?: <S>(state: S) => S;
-  readonly deserializeAction?: <A extends Action<unknown>>(action: A) => A;
   name?: string;
   readonly autoPause?: boolean;
   readonly features?: Features;
@@ -205,8 +195,8 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   let sendingActionId = 1;
   const instanceId = generateId(config.instanceId);
   const localFilter = getLocalFilter(config);
-  const serializeState = getSerializeParameter(config, 'serializeState');
-  const serializeAction = getSerializeParameter(config, 'serializeAction');
+  const serializeState = getSerializeParameter(config);
+  const serializeAction = getSerializeParameter(config);
   let { stateSanitizer, actionSanitizer, predicate, latency = 500 } = config;
 
   // Deprecate actionsWhitelist and actionsBlacklist
