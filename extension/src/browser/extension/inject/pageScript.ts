@@ -103,11 +103,6 @@ export interface ConfigWithExpandedMaxAge {
     | boolean
     | ((key: string, value: unknown) => unknown)
     | Serialize;
-  readonly statesFilter?: <S>(state: S, index?: number) => S;
-  readonly actionsFilter?: <A extends Action<unknown>>(
-    action: A,
-    id?: number
-  ) => A;
   readonly stateSanitizer?: <S>(state: S, index?: number) => S;
   readonly actionSanitizer?: <A extends Action<unknown>>(
     action: A,
@@ -212,14 +207,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   const localFilter = getLocalFilter(config);
   const serializeState = getSerializeParameter(config, 'serializeState');
   const serializeAction = getSerializeParameter(config, 'serializeAction');
-  let {
-    statesFilter,
-    actionsFilter,
-    stateSanitizer,
-    actionSanitizer,
-    predicate,
-    latency = 500,
-  } = config;
+  let { stateSanitizer, actionSanitizer, predicate, latency = 500 } = config;
 
   // Deprecate actionsWhitelist and actionsBlacklist
   if (config.actionsWhitelist) {
@@ -227,16 +215,6 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   }
   if (config.actionsBlacklist) {
     deprecateParam('actionsBlacklist', 'actionsDenylist');
-  }
-
-  // Deprecate statesFilter and actionsFilter
-  if (statesFilter) {
-    deprecateParam('statesFilter', 'stateSanitizer');
-    stateSanitizer = statesFilter; // eslint-disable-line no-param-reassign
-  }
-  if (actionsFilter) {
-    deprecateParam('actionsFilter', 'actionSanitizer');
-    actionSanitizer = actionsFilter; // eslint-disable-line no-param-reassign
   }
 
   const relayState = throttle(

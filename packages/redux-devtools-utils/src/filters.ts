@@ -20,23 +20,23 @@ export function arrToRegex(v: string | string[]) {
 
 function filterActions(
   actionsById: { [actionId: number]: PerformAction<Action<unknown>> },
-  actionsFilter: ((action: Action<unknown>, id: number) => Action) | undefined
+  actionSanitizer: ((action: Action<unknown>, id: number) => Action) | undefined
 ) {
-  if (!actionsFilter) return actionsById;
+  if (!actionSanitizer) return actionsById;
   return mapValues(actionsById, (action, id: number) => ({
     ...action,
-    action: actionsFilter(action.action, id),
+    action: actionSanitizer(action.action, id),
   }));
 }
 
 function filterStates(
   computedStates: { state: unknown; error?: string | undefined }[],
-  statesFilter: (state: unknown, actionId: number) => unknown
+  stateSanitizer: (state: unknown, actionId: number) => unknown
 ) {
-  if (!statesFilter) return computedStates;
+  if (!stateSanitizer) return computedStates;
   return computedStates.map((state, idx) => ({
     ...state,
-    state: statesFilter(state.state, idx),
+    state: stateSanitizer(state.state, idx),
   }));
 }
 
