@@ -76,10 +76,7 @@ export interface Serialize {
   readonly options?: Options | boolean;
 }
 
-export function getSerializeParameter(
-  config: Config,
-  param?: 'serializeState' | 'serializeAction'
-) {
+export function getSerializeParameter(config: Config) {
   const serialize = config.serialize;
   if (serialize) {
     if (serialize === true) return { options: true };
@@ -109,16 +106,7 @@ export function getSerializeParameter(
     };
   }
 
-  const value = config[param!];
-  if (typeof value === 'undefined') return undefined;
-  // eslint-disable-next-line no-console
-  console.warn(
-    `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead: https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1`
-  );
-
-  if (typeof value === 'boolean') return { options: value };
-  if (typeof value === 'function') return { replacer: value };
-  return value;
+  return undefined;
 }
 
 interface InitInstancePageScriptToContentScriptMessage {
