@@ -1,4 +1,3 @@
-import mapValues from 'lodash/mapValues';
 import jsan from 'jsan';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { Action } from 'redux';
@@ -11,23 +10,11 @@ interface State {
   committedState?: unknown;
 }
 
-function deprecate(param: string) {
-  // eslint-disable-next-line no-console
-  console.warn(
-    `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead:` +
-      ' https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1'
-  );
-}
-
 export default function importState(
   state: string,
   {
-    deserializeState,
-    deserializeAction,
     serialize,
   }: {
-    deserializeState?: (state: string) => unknown;
-    deserializeAction?: (action: string) => Action<unknown>;
     serialize?: {
       immutable?: typeof Immutable;
       refs?: (new (data: any) => unknown)[] | null;
@@ -82,37 +69,6 @@ export default function importState(
         }
       ).payload
     ) as State;
-  }
-  if (deserializeState) {
-    deprecate('deserializeState');
-    if (typeof nextLiftedState.computedStates !== 'undefined') {
-      nextLiftedState.computedStates = nextLiftedState.computedStates.map(
-        (computedState) => ({
-          ...computedState,
-          state: deserializeState(computedState.state as string),
-        })
-      );
-    }
-    if (typeof nextLiftedState.committedState !== 'undefined') {
-      nextLiftedState.committedState = deserializeState(
-        nextLiftedState.committedState as string
-      );
-    }
-    if (typeof preloadedState !== 'undefined') {
-      preloadedState = deserializeState(
-        preloadedState as unknown as string
-      ) as State;
-    }
-  }
-  if (deserializeAction) {
-    deprecate('deserializeAction');
-    nextLiftedState.actionsById = mapValues(
-      nextLiftedState.actionsById,
-      (liftedAction) => ({
-        ...liftedAction,
-        action: deserializeAction(liftedAction.action as unknown as string),
-      })
-    );
   }
 
   return { nextLiftedState, preloadedState };
