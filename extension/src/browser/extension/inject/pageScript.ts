@@ -105,9 +105,6 @@ export interface ConfigWithExpandedMaxAge {
     action: A
   ) => boolean;
   readonly latency?: number;
-  readonly getMonitor?: <S, A extends Action<unknown>>(
-    monitor: Monitor<S, A>
-  ) => void;
   readonly maxAge?:
     | number
     | (<S, A extends Action<unknown>>(
@@ -237,17 +234,6 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   );
 
   const monitor = new Monitor(relayState);
-  if (config.getMonitor) {
-    /* eslint-disable no-console */
-    console.warn(
-      "Redux DevTools extension's `getMonitor` parameter is deprecated and will be not " +
-        'supported in the next version, please remove it and just use ' +
-        '`__REDUX_DEVTOOLS_EXTENSION_COMPOSE__` instead: ' +
-        'https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup'
-    );
-    /* eslint-enable no-console */
-    config.getMonitor(monitor);
-  }
 
   function exportState() {
     const liftedState = store.liftedStore.getState();
