@@ -3,7 +3,6 @@ import { AuthStates, States } from 'socketcluster-client/lib/scclientsocket';
 import {
   CHANGE_SECTION,
   CHANGE_THEME,
-  APPLY_MEDIA_FEATURES_PREFERENCES,
   SELECT_INSTANCE,
   SELECT_MONITOR,
   UPDATE_MONITOR_STATE,
@@ -45,10 +44,9 @@ import {
 import { Action } from 'redux';
 import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
-import { LiftedAction, LiftedState } from '@redux-devtools/core';
+import { LiftedAction } from '@redux-devtools/core';
 import { Data } from '../reducers/reports';
-import { prefersDarkColorScheme } from '../utils/media-queries';
-import { ThemeColorPreference } from '../reducers/theme';
+import { LiftedState } from '@redux-devtools/core';
 
 let monitorReducer: (
   monitorProps: unknown,
@@ -68,53 +66,19 @@ export function changeSection(section: string): ChangeSectionAction {
 interface ChangeThemeFormData {
   readonly theme: Theme;
   readonly scheme: Scheme;
-  readonly themeColorPreference: ThemeColorPreference;
+  readonly colorPreference: 'auto' | 'light' | 'dark';
 }
-export interface ChangeThemeData {
+interface ChangeThemeData {
   readonly formData: ChangeThemeFormData;
 }
 export interface ChangeThemeAction {
   readonly type: typeof CHANGE_THEME;
   readonly theme: Theme;
   readonly scheme: Scheme;
-  readonly dark: boolean;
-  readonly themeColorPreference: ThemeColorPreference;
+  readonly colorPreference: 'auto' | 'light' | 'dark';
 }
-
-export interface ApplyMediaFeaturesPreferencesAction {
-  readonly type: typeof APPLY_MEDIA_FEATURES_PREFERENCES;
-  readonly prefersDarkColorScheme: boolean;
-}
-
 export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
-  const { themeColorPreference } = data.formData;
-  let dark: boolean;
-
-  switch (themeColorPreference) {
-    case 'light':
-      dark = false;
-      break;
-    case 'dark':
-      dark = true;
-      break;
-    default:
-      dark = prefersDarkColorScheme();
-  }
-
-  return { type: CHANGE_THEME, ...data.formData, dark };
-}
-
-/**
- * @see https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries#media_features
- */
-export function applyMediaFeaturesPreferences(
-  payload?: Partial<Omit<ApplyMediaFeaturesPreferencesAction, 'type'>>
-): ApplyMediaFeaturesPreferencesAction {
-  return {
-    prefersDarkColorScheme: prefersDarkColorScheme(),
-    ...payload,
-    type: APPLY_MEDIA_FEATURES_PREFERENCES,
-  };
+  return { type: CHANGE_THEME, ...data.formData };
 }
 
 export interface InitMonitorAction {
@@ -600,7 +564,6 @@ export interface ErrorAction {
 export type StoreActionWithoutUpdateStateOrLiftedAction =
   | ChangeSectionAction
   | ChangeThemeAction
-  | ApplyMediaFeaturesPreferencesAction
   | MonitorActionAction
   | SelectInstanceAction
   | SelectMonitorAction

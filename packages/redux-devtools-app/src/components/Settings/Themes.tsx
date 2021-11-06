@@ -4,10 +4,6 @@ import { Container, Form } from '@redux-devtools/ui';
 import { listSchemes, listThemes } from '@redux-devtools/ui/lib/utils/theme';
 import { changeTheme } from '../../actions';
 import { StoreState } from '../../reducers';
-import {
-  defaultThemeColorPreference,
-  themeColorPreferences,
-} from '../../reducers/theme';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
@@ -19,8 +15,7 @@ export class Themes extends Component<Props> {
     const formData = {
       theme: theme.theme,
       scheme: theme.scheme,
-      themeColorPreference:
-        theme.themeColorPreference ?? defaultThemeColorPreference,
+      colorPreference: theme.colorPreference,
     };
 
     return (
@@ -38,10 +33,10 @@ export class Themes extends Component<Props> {
                 type: 'string',
                 enum: listSchemes(),
               },
-              themeColorPreference: {
+              colorPreference: {
                 title: 'theme color',
                 type: 'string',
-                enum: themeColorPreferences as unknown as string[],
+                enum: ['auto', 'light', 'dark'],
               },
             },
           }}

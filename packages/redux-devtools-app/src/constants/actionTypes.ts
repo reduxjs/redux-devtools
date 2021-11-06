@@ -1,7 +1,5 @@
 export const CHANGE_SECTION = 'main/CHANGE_SECTION';
 export const CHANGE_THEME = 'main/CHANGE_THEME';
-export const APPLY_MEDIA_FEATURES_PREFERENCES =
-  'main/APPLY_MEDIA_FEATURES_PREFERENCES';
 
 export const UPDATE_STATE = 'devTools/UPDATE_STATE';
 export const SET_STATE = 'devTools/SET_STATE';

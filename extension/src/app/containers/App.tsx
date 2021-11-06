@@ -62,12 +62,10 @@ class App extends Component<Props> {
 function mapStateToProps(state: StoreState) {
   const instances = state.instances;
   const id = getActiveInstance(instances);
-  const { themeColorPreference, ...themeData } = state.theme;
-
   return {
     options: instances.options[id],
     section: state.section,
-    theme: themeData,
+    theme: state.theme,
     notification: state.notification,
   };
 }
