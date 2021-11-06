@@ -585,30 +585,41 @@ const preEnhancer =
 
 const extensionCompose =
   (config: Config) =>
-  (...funcs: StoreEnhancer[]) => {
-    return (...args: any[]) => {
+  (...funcs: StoreEnhancer[]): StoreEnhancer => {
+    return (...args) => {
       const instanceId = generateId(config.instanceId);
       return [preEnhancer(instanceId), ...funcs].reduceRight(
         (composed, f) => f(composed),
-        (__REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId }) as any)(
-          ...args
-        )
+        __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args)
       );
     };
   };
 
+interface ReduxDevtoolsExtensionCompose {
+  (config: Config): (...funcs: StoreEnhancer[]) => StoreEnhancer;
+  (...funcs: StoreEnhancer[]): StoreEnhancer;
+}
+
 declare global {
   interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: unknown;
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: ReduxDevtoolsExtensionCompose;
   }
 }
 
-window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = (...funcs: any[]) => {
+function reduxDevtoolsExtensionCompose(
+  config: Config
+): (...funcs: StoreEnhancer[]) => StoreEnhancer;
+function reduxDevtoolsExtensionCompose(
+  ...funcs: StoreEnhancer[]
+): StoreEnhancer;
+function reduxDevtoolsExtensionCompose(...funcs: [Config] | StoreEnhancer[]) {
   if (funcs.length === 0) {
     return __REDUX_DEVTOOLS_EXTENSION__();
   }
   if (funcs.length === 1 && typeof funcs[0] === 'object') {
     return extensionCompose(funcs[0]);
   }
-  return extensionCompose({})(...funcs);
-};
+  return extensionCompose({})(...(funcs as StoreEnhancer[]));
+}
+
+window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = reduxDevtoolsExtensionCompose;
