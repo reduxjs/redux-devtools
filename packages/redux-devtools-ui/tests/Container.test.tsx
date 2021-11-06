@@ -6,7 +6,11 @@ describe('Container', function () {
   it('renders correctly', () => {
     const { container } = render(
       <Container
-        themeData={{ theme: 'default', scheme: 'default', light: false }}
+        themeData={{
+          theme: 'default',
+          scheme: 'default',
+          colorPreference: 'auto',
+        }}
       >
         Text
       </Container>
