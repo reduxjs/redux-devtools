@@ -8,6 +8,7 @@ import configureStore from '../../../app/stores/windowStore';
 import { MonitorMessage } from '../../../app/middlewares/api';
 
 import '../../views/window.pug';
+import { applyMediaFeaturesPreferences } from '@redux-devtools/app/lib/actions';
 
 const position = location.hash;
 
@@ -25,9 +26,17 @@ chrome.runtime.getBackgroundPage((window) => {
   bg.onMessage.addListener(update);
   update();
 
+  const onBeforeLift = () => {
+    localStore.dispatch(applyMediaFeaturesPreferences());
+  };
+
   render(
     <Provider store={localStore}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate
+        loading={null}
+        persistor={persistor}
+        onBeforeLift={onBeforeLift}
+      >
         <App position={position} />
       </PersistGate>
     </Provider>,
