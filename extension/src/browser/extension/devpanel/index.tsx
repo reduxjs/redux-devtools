@@ -8,10 +8,7 @@ import configureStore from '../../../app/stores/panelStore';
 
 import '../../views/devpanel.pug';
 import { Action, Store } from 'redux';
-import {
-  applyMediaFeaturesPreferences,
-  StoreAction,
-} from '@redux-devtools/app/lib/actions';
+import { StoreAction } from '@redux-devtools/app/lib/actions';
 import { PanelMessage } from '../../../app/middlewares/api';
 import { StoreStateWithoutSocket } from '../../../app/reducers/panel';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -36,20 +33,9 @@ function renderDevTools() {
   unmountComponentAtNode(node!);
   clearTimeout(naTimeout);
   ({ store, persistor } = configureStore(position, bgConnection));
-
-  const onBeforeLift = () => {
-    if (store) {
-      store.dispatch(applyMediaFeaturesPreferences());
-    }
-  };
-
   render(
     <Provider store={store}>
-      <PersistGate
-        loading={null}
-        persistor={persistor}
-        onBeforeLift={onBeforeLift}
-      >
+      <PersistGate loading={null} persistor={persistor}>
         <App position={position} />
       </PersistGate>
     </Provider>,

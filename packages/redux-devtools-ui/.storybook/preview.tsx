@@ -13,6 +13,7 @@ export const globalTypes = {
     defaultValue: 'default',
     toolbar: {
       items: listThemes(),
+      showName: true,
     },
   },
   scheme: {
@@ -21,6 +22,7 @@ export const globalTypes = {
     defaultValue: 'default',
     toolbar: {
       items: listSchemes(),
+      showName: true,
     },
   },
   color: {
@@ -28,7 +30,8 @@ export const globalTypes = {
     description: 'Global color for components',
     defaultValue: 'light',
     toolbar: {
-      items: ['light', 'dark'],
+      items: ['auto', 'light', 'dark'],
+      showName: true,
     },
   },
 };
@@ -38,7 +41,7 @@ const withThemeProvider = (Story, context) => (
     themeData={{
       theme: context.globals.theme,
       scheme: context.globals.scheme,
-      light: context.globals.color === 'light',
+      colorPreference: context.globals.color,
     }}
   >
     <Story {...context} />
