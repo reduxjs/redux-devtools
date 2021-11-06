@@ -1,4 +1,4 @@
-import { Action, ActionCreator, StoreEnhancer, compose } from 'redux';
+import { Action, ActionCreator, compose, StoreEnhancer } from 'redux';
 
 export interface EnhancerOptions {
   /**
@@ -43,6 +43,7 @@ export interface EnhancerOptions {
         symbol?: boolean;
         map?: boolean;
         set?: boolean;
+        // eslint-disable-next-line @typescript-eslint/ban-types
         function?: boolean | Function;
       };
   /**
@@ -179,8 +180,26 @@ export interface EnhancerOptions {
   traceLimit?: number;
 }
 
-export function composeWithDevTools<StoreExt, StateExt>(
-  ...funcs: Array<StoreEnhancer<StoreExt>>
-): StoreEnhancer<StoreExt>;
-export function composeWithDevTools(options: EnhancerOptions): typeof compose;
-export function devToolsEnhancer(options: EnhancerOptions): StoreEnhancer<any>;
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__?: (options?: EnhancerOptions) => StoreEnhancer;
+  }
+}
+
+export const composeWithDevTools =
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : function () {
+        if (arguments.length === 0) return undefined;
+        if (typeof arguments[0] === 'object') return compose;
+        return compose.apply(null, arguments);
+      };
+
+export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__
+    ? window.__REDUX_DEVTOOLS_EXTENSION__
+    : function () {
+        return function (noop) {
+          return noop;
+        };
+      };

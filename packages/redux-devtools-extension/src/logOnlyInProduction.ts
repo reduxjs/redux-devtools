@@ -1,10 +1,10 @@
-'use strict';
+import { compose, StoreEnhancer } from 'redux';
+import * as logOnly from './logOnly';
+import { EnhancerOptions } from './index';
 
-var compose = require('redux').compose;
-var logOnly = require('./logOnly');
+declare const process: any;
 
-exports.__esModule = true;
-exports.composeWithDevTools =
+export const composeWithDevTools =
   process.env.NODE_ENV === 'production'
     ? logOnly.composeWithDevTools
     : typeof window !== 'undefined' &&
@@ -16,7 +16,7 @@ exports.composeWithDevTools =
         return compose.apply(null, arguments);
       };
 
-exports.devToolsEnhancer =
+export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
   process.env.NODE_ENV === 'production'
     ? logOnly.devToolsEnhancer
     : typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__

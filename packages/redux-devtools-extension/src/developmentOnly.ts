@@ -1,9 +1,9 @@
-'use strict';
+import { compose, StoreEnhancer } from 'redux';
+import { EnhancerOptions } from './index';
 
-var compose = require('redux').compose;
+declare const process: any;
 
-exports.__esModule = true;
-exports.composeWithDevTools =
+export const composeWithDevTools =
   process.env.NODE_ENV !== 'production' &&
   typeof window !== 'undefined' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -14,7 +14,7 @@ exports.composeWithDevTools =
         return compose.apply(null, arguments);
       };
 
-exports.devToolsEnhancer =
+export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
   process.env.NODE_ENV !== 'production' &&
   typeof window !== 'undefined' &&
   window.__REDUX_DEVTOOLS_EXTENSION__
