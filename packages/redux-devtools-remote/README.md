@@ -141,8 +141,8 @@ For React Native you can use [remotedev-rn-debugger](https://github.com/jhen0409
 | `port`                  | _Number_ used to specify host's port for [@redux-devtools/cli](https://github.com/reduxjs/redux-devtools/tree/main/packages/redux-devtools-cli).                                                                                                                                                              |
 | `secure`                | _Boolean_ specifies whether to use `https` protocol for [@redux-devtools/cli](https://github.com/reduxjs/redux-devtools/tree/main/packages/redux-devtools-cli).                                                                                                                                               |
 | `maxAge`                | _Number_ of maximum allowed actions to be stored on the history tree, the oldest actions are removed once maxAge is reached. Default is `30`.                                                                                                                                                                 |
-| `actionsBlacklist`      | _array_ of actions to be hidden in DevTools. Overwrites corresponding global setting in the options page. See the example bellow.                                                                                                                                                                             |
-| `actionsWhitelist`      | _array_ of actions to be shown. All other actions will be hidden in DevTools.                                                                                                                                                                                                                                 |
+| `actionsDenylist`       | _array_ of actions to be hidden in DevTools. Overwrites corresponding global setting in the options page. See the example bellow.                                                                                                                                                                             |
+| `actionsAllowlist`      | _array_ of actions to be shown. All other actions will be hidden in DevTools.                                                                                                                                                                                                                                 |
 | `actionSanitizer`       | _Function_ which takes action object and id number as arguments, and should return action object back. See the example bellow.                                                                                                                                                                                |
 | `stateSanitizer`        | _Function_ which takes state object and index as arguments, and should return state object back. See the example bellow.                                                                                                                                                                                      |
 | `startOn`               | _String_ or _Array of strings_ indicating an action or a list of actions, which should start remote monitoring (when `realtime` is `false`).                                                                                                                                                                  |
@@ -172,7 +172,7 @@ export default function configureStore(preloadedState) {
       hostname: 'localhost',
       port: 8000,
       maxAge: 30,
-      actionsBlacklist: ['EFFECT_RESOLVED'],
+      actionsDenylist: ['EFFECT_RESOLVED'],
       actionSanitizer: (action) =>
         action.type === 'FILE_DOWNLOAD_SUCCESS' && action.data
           ? { ...action, data: '<<LONG_BLOB>>' }
