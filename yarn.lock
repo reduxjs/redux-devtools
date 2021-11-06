@@ -4790,6 +4790,7 @@ __metadata:
     "@babel/preset-typescript": ^7.16.0
     "@typescript-eslint/eslint-plugin": ^5.2.0
     "@typescript-eslint/parser": ^5.2.0
+    core-js: ^3.19.1
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
     redux: ^4.1.2
@@ -11729,6 +11730,13 @@ __metadata:
   version: 3.19.0
   resolution: "core-js@npm:3.19.0"
   checksum: 9f03e72f01d9eeafb2724ee5787ab8d6e7dcf0e3b44c4dec23e6a0cfc9e2e0a76460b77ce7d1d0be09db918618b11595fad6838978ff97f2684270738898c5a2
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.19.1":
+  version: 3.19.1
+  resolution: "core-js@npm:3.19.1"
+  checksum: 2f669061788dc6fea823f0433d871deeaaaacc7d68ef2748859509522a34df5c83e648c3c6a1993fed0ab188081b3cf32b957b2a1f46156a2b20bd775961ade4
   languageName: node
   linkType: hard
 

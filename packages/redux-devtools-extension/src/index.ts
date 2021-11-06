@@ -180,20 +180,46 @@ export interface EnhancerOptions {
   traceLimit?: number;
 }
 
+export interface Config extends EnhancerOptions {
+  type?: string;
+}
+
+interface ConnectResponse {
+  init: (state: unknown) => void;
+  send: (action: Action<unknown>, state: unknown) => void;
+}
+
+interface ReduxDevtoolsExtension {
+  (config?: Config): StoreEnhancer;
+  connect: (preConfig: Config) => ConnectResponse;
+}
+
+export interface ReduxDevtoolsExtensionCompose {
+  (config: Config): (...funcs: StoreEnhancer[]) => StoreEnhancer;
+  (...funcs: StoreEnhancer[]): StoreEnhancer;
+}
+
 declare global {
   interface Window {
-    __REDUX_DEVTOOLS_EXTENSION__?: (options?: EnhancerOptions) => StoreEnhancer;
+    __REDUX_DEVTOOLS_EXTENSION__?: ReduxDevtoolsExtension;
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: ReduxDevtoolsExtensionCompose;
   }
 }
 
-export const composeWithDevTools =
+function extensionComposeStub(
+  config: Config
+): (...funcs: StoreEnhancer[]) => StoreEnhancer;
+function extensionComposeStub(...funcs: StoreEnhancer[]): StoreEnhancer;
+function extensionComposeStub(...funcs: [Config] | StoreEnhancer[]) {
+  if (funcs.length === 0) return undefined;
+  if (typeof funcs[0] === 'object') return compose;
+  return compose(...(funcs as StoreEnhancer[]));
+}
+
+export const composeWithDevTools: ReduxDevtoolsExtensionCompose =
   typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : function () {
-        if (arguments.length === 0) return undefined;
-        if (typeof arguments[0] === 'object') return compose;
-        return compose.apply(null, arguments);
-      };
+    : extensionComposeStub;
 
 export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
   typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__

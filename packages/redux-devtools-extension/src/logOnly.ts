@@ -1,23 +1,33 @@
 import assign from './utils/assign';
-import { compose, StoreEnhancer } from 'redux';
-import { EnhancerOptions } from './index';
+import {
+  Action,
+  compose,
+  Dispatch,
+  PreloadedState,
+  Reducer,
+  StoreEnhancer,
+} from 'redux';
+import { Config, EnhancerOptions } from './index';
 
-function enhancer() {
-  const config = arguments[0] || {};
+function enhancer(options?: EnhancerOptions): StoreEnhancer {
+  const config: Config = options || {};
   config.features = { pause: true, export: true, test: true };
   config.type = 'redux';
   if (config.autoPause === undefined) config.autoPause = true;
   if (config.latency === undefined) config.latency = 500;
 
   return function (createStore) {
-    return function (reducer, preloadedState, enhancer) {
-      const store = createStore(reducer, preloadedState, enhancer);
+    return function <S, A extends Action<unknown>>(
+      reducer: Reducer<S, A>,
+      preloadedState: PreloadedState<S> | undefined
+    ) {
+      const store = createStore(reducer, preloadedState);
       const origDispatch = store.dispatch;
 
-      const devTools = window.__REDUX_DEVTOOLS_EXTENSION__.connect(config);
+      const devTools = window.__REDUX_DEVTOOLS_EXTENSION__!.connect(config);
       devTools.init(store.getState());
 
-      const dispatch = function (action) {
+      const dispatch: Dispatch<A> = function (action) {
         const r = origDispatch(action);
         devTools.send(action, store.getState());
         return r;
@@ -29,24 +39,27 @@ function enhancer() {
   };
 }
 
-function composeWithEnhancer(config) {
-  return function () {
-    return compose(compose.apply(null, arguments), enhancer(config));
+function composeWithEnhancer(config?: EnhancerOptions) {
+  return function (...funcs: StoreEnhancer[]) {
+    return compose(compose(...funcs), enhancer(config));
   };
 }
 
-export const composeWithDevTools = function () {
+export function composeWithDevTools(
+  config: Config
+): (...funcs: StoreEnhancer[]) => StoreEnhancer;
+export function composeWithDevTools(...funcs: StoreEnhancer[]): StoreEnhancer;
+export function composeWithDevTools(...funcs: [Config] | StoreEnhancer[]) {
   if (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__) {
-    if (arguments.length === 0) return enhancer();
-    if (typeof arguments[0] === 'object')
-      return composeWithEnhancer(arguments[0]);
-    return composeWithEnhancer().apply(null, arguments);
+    if (funcs.length === 0) return enhancer();
+    if (typeof funcs[0] === 'object') return composeWithEnhancer(funcs[0]);
+    return composeWithEnhancer()(...(funcs as StoreEnhancer[]));
   }
 
-  if (arguments.length === 0) return undefined;
-  if (typeof arguments[0] === 'object') return compose;
-  return compose.apply(null, arguments);
-};
+  if (funcs.length === 0) return undefined;
+  if (typeof funcs[0] === 'object') return compose;
+  return compose(...(funcs as StoreEnhancer[]));
+}
 
 export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
   typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__
