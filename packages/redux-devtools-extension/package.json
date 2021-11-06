@@ -1,15 +1,39 @@
 {
-  "name": "redux-devtools-extension",
+  "name": "@redux-devtools/extension",
   "version": "2.13.9",
   "description": "Wrappers for Redux DevTools Extension.",
-  "main": "index.js",
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-extension",
+  "license": "MIT",
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zalmoxisus/redux-devtools-extension"
+    "url": "https://github.com/reduxjs/redux-devtools"
   },
-  "homepage": "https://github.com/zalmoxisus/redux-devtools-extension",
-  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
-  "license": "MIT",
+  "scripts": {
+    "build": "yarn run build:types && yarn run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
+    "clean": "rimraf lib",
+    "lint": "eslint . --ext .ts",
+    "type-check": "tsc --noEmit",
+    "prepack": "yarn run clean && yarn run build",
+    "prepublish": "yarn run type-check && yarn run lint"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "redux": "^4.1.2",
+    "rimraf": "^3.0.2",
+    "typescript": "~4.4.4"
+  },
   "peerDependencies": {
     "redux": "^3.1.0 || ^4.0.0"
   }

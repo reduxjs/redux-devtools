@@ -7,14 +7,14 @@
 Install:
 
 ```
-npm install --save redux-devtools-extension
+yarn add @redux-devtools/extension
 ```
 
 and use like that:
 
 ```js
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const store = createStore(
   reducer,
@@ -25,11 +25,11 @@ const store = createStore(
 );
 ```
 
-or if needed to apply [extension’s options](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md#windowdevtoolsextensionconfig):
+or if needed to apply [extension’s options](https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/API/Arguments.md):
 
 ```js
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const composeEnhancers = composeWithDevTools({
   // Specify here name, actionsDenylist, actionsCreators and other options
@@ -43,7 +43,7 @@ const store = createStore(
 );
 ```
 
-There’re just [few lines of code](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/npm-package/index.js). If you don’t want to allow the extension in production, just use ‘redux-devtools-extension/developmentOnly’ instead of ‘redux-devtools-extension’.
+There’re just [few lines of code](https://github.com/reduxjs/redux-devtools/blob/main/packages/redux-devtools-extension/src/index.ts). If you don’t want to allow the extension in production, just use ‘@redux-devtools/extension/lib/developmentOnly’ instead of ‘@redux-devtools/extension’.
 
 ## License
 

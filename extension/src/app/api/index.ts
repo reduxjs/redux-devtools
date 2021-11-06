@@ -8,11 +8,7 @@ import importState from './importState';
 import generateId from './generateInstanceId';
 import { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
-import {
-  EnhancedStore,
-  LiftedState,
-  PerformAction,
-} from '@redux-devtools/instrument';
+import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LibConfig } from '@redux-devtools/app/lib/actions';
 import {
   ContentScriptToPageScriptMessage,
@@ -527,7 +523,7 @@ export function disconnect() {
 export interface ConnectResponse {
   init: <S, A extends Action<unknown>>(
     state: S,
-    liftedData: LiftedState<S, A, unknown>
+    liftedData?: LiftedState<S, A, unknown>
   ) => void;
   subscribe: <S, A extends Action<unknown>>(
     listener: (message: ListenerMessage<S, A>) => void
@@ -650,7 +646,7 @@ export function connect(preConfig: Config): ConnectResponse {
 
   const init = <S, A extends Action<unknown>>(
     state: S,
-    liftedData: LiftedState<S, A, unknown>
+    liftedData?: LiftedState<S, A, unknown>
   ) => {
     const message: InitMessage<S, A> = {
       type: 'INIT',

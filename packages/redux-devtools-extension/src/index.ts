@@ -1,4 +1,4 @@
-import { Action, ActionCreator, StoreEnhancer, compose } from 'redux';
+import { Action, ActionCreator, compose, StoreEnhancer } from 'redux';
 
 export interface EnhancerOptions {
   /**
@@ -43,6 +43,7 @@ export interface EnhancerOptions {
         symbol?: boolean;
         map?: boolean;
         set?: boolean;
+        // eslint-disable-next-line @typescript-eslint/ban-types
         function?: boolean | Function;
       };
   /**
@@ -179,8 +180,52 @@ export interface EnhancerOptions {
   traceLimit?: number;
 }
 
-export function composeWithDevTools<StoreExt, StateExt>(
-  ...funcs: Array<StoreEnhancer<StoreExt>>
-): StoreEnhancer<StoreExt>;
-export function composeWithDevTools(options: EnhancerOptions): typeof compose;
-export function devToolsEnhancer(options: EnhancerOptions): StoreEnhancer<any>;
+export interface Config extends EnhancerOptions {
+  type?: string;
+}
+
+interface ConnectResponse {
+  init: (state: unknown) => void;
+  send: (action: Action<unknown>, state: unknown) => void;
+}
+
+interface ReduxDevtoolsExtension {
+  (config?: Config): StoreEnhancer;
+  connect: (preConfig: Config) => ConnectResponse;
+}
+
+export interface ReduxDevtoolsExtensionCompose {
+  (config: Config): (...funcs: StoreEnhancer[]) => StoreEnhancer;
+  (...funcs: StoreEnhancer[]): StoreEnhancer;
+}
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__?: ReduxDevtoolsExtension;
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: ReduxDevtoolsExtensionCompose;
+  }
+}
+
+function extensionComposeStub(
+  config: Config
+): (...funcs: StoreEnhancer[]) => StoreEnhancer;
+function extensionComposeStub(...funcs: StoreEnhancer[]): StoreEnhancer;
+function extensionComposeStub(...funcs: [Config] | StoreEnhancer[]) {
+  if (funcs.length === 0) return undefined;
+  if (typeof funcs[0] === 'object') return compose;
+  return compose(...(funcs as StoreEnhancer[]));
+}
+
+export const composeWithDevTools: ReduxDevtoolsExtensionCompose =
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : extensionComposeStub;
+
+export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__
+    ? window.__REDUX_DEVTOOLS_EXTENSION__
+    : function () {
+        return function (noop) {
+          return noop;
+        };
+      };

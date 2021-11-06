@@ -4780,6 +4780,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@redux-devtools/extension@workspace:packages/redux-devtools-extension":
+  version: 0.0.0-use.local
+  resolution: "@redux-devtools/extension@workspace:packages/redux-devtools-extension"
+  dependencies:
+    "@babel/cli": ^7.16.0
+    "@babel/core": ^7.16.0
+    "@babel/preset-env": ^7.16.0
+    "@babel/preset-typescript": ^7.16.0
+    "@typescript-eslint/eslint-plugin": ^5.2.0
+    "@typescript-eslint/parser": ^5.2.0
+    eslint: ^7.32.0
+    eslint-config-prettier: ^8.3.0
+    redux: ^4.1.2
+    rimraf: ^3.0.2
+    typescript: ~4.4.4
+  peerDependencies:
+    redux: ^3.1.0 || ^4.0.0
+  languageName: unknown
+  linkType: soft
+
 "@redux-devtools/inspector-monitor-test-tab@^0.7.2, @redux-devtools/inspector-monitor-test-tab@workspace:packages/redux-devtools-inspector-monitor-test-tab":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/inspector-monitor-test-tab@workspace:packages/redux-devtools-inspector-monitor-test-tab"
@@ -24595,14 +24615,6 @@ fsevents@^1.2.7:
   checksum: fa1ef20404a2d399235e83cc80bd55a956642e37dd197b4b612ba7327bf87fa32745aeb4a1634b2bab25467164ab4ed9c15be2c307923dd08b0fe7c52431ae6b
   languageName: node
   linkType: hard
-
-"redux-devtools-extension@workspace:packages/redux-devtools-extension":
-  version: 0.0.0-use.local
-  resolution: "redux-devtools-extension@workspace:packages/redux-devtools-extension"
-  peerDependencies:
-    redux: ^3.1.0 || ^4.0.0
-  languageName: unknown
-  linkType: soft
 
 "redux-devtools-themes@npm:^1.0.0":
   version: 1.0.0
