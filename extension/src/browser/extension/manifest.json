@@ -52,11 +52,7 @@
     }
   ],
   "devtools_page": "devtools.html",
-  "web_accessible_resources": [
-    "page.bundle.js",
-    "inject.bundle.js",
-    "redux-devtools-extension.bundle.js"
-  ],
+  "web_accessible_resources": ["page.bundle.js"],
   "externally_connectable": {
     "ids": ["*"]
   },
