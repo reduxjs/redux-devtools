@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/rtk-query-monitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "rtk-query monitor for Redux DevTools",
   "keywords": [
     "redux",
@@ -40,7 +40,7 @@
     "prepublish": "yarn run type-check && yarn run lint"
   },
   "dependencies": {
-    "@redux-devtools/ui": "^1.0.0-9",
+    "@redux-devtools/ui": "^1.0.0-10",
     "@types/prop-types": "^15.7.4",
     "@types/redux-devtools-themes": "^1.0.0",
     "hex-rgba": "^1.0.2",
@@ -49,8 +49,8 @@
     "jss-preset-default": "^10.8.2",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",
-    "react-base16-styling": "^0.8.0",
-    "react-json-tree": "^0.15.0",
+    "react-base16-styling": "^0.8.1",
+    "react-json-tree": "^0.15.1",
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
@@ -59,7 +59,7 @@
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
-    "@redux-devtools/core": "^3.9.0",
+    "@redux-devtools/core": "^3.9.1",
     "@reduxjs/toolkit": "^1.6.2",
     "@types/hex-rgba": "^1.0.1",
     "@types/lodash.debounce": "^4.0.6",

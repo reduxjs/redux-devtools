@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/core",
-  "version": "3.9.0",
+  "version": "3.9.1",
   "description": "Redux DevTools with hot reloading and time travel",
   "keywords": [
     "redux",
@@ -38,7 +38,7 @@
     "prepublish": "yarn run type-check && yarn run lint && yarn run test"
   },
   "dependencies": {
-    "@redux-devtools/instrument": "^1.11.0",
+    "@redux-devtools/instrument": "^1.11.1",
     "@types/prop-types": "^15.7.4",
     "lodash": "^4.17.21",
     "prop-types": "^15.7.2"
