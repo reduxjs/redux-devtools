@@ -16,5 +16,5 @@ export default function functor<Datum>(
 ): (datum: Datum, index: number, outerIndex?: number) => Primitive {
   return is(Function, v)
     ? (v as (datum: Datum, index: number, outerIndex?: number) => Primitive)
-    : () => v as Primitive;
+    : () => v;
 }
