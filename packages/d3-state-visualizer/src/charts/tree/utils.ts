@@ -85,12 +85,10 @@ export function getTooltipString(
   const spaces2nbsp = replace(/\s{2}/g, spacer(new Array(indentationSize)));
   const json2html = pipe(sortAndSerialize, cr2br, spaces2nbsp);
 
-  const children = (node as any).children || (node as any)._children;
+  const children = node.children || node._children;
 
-  if (typeof (node as any).value !== 'undefined')
-    return json2html((node as any).value);
-  if (typeof (node as any).object !== 'undefined')
-    return json2html((node as any).object);
+  if (typeof node.value !== 'undefined') return json2html(node.value);
+  if (typeof node.object !== 'undefined') return json2html(node.object);
   if (children && children.length)
     return `childrenCount: ${(children as unknown[]).length}`;
   return 'empty';
