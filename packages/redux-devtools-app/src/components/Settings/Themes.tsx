@@ -15,7 +15,7 @@ export class Themes extends Component<Props> {
     const formData = {
       theme: theme.theme,
       scheme: theme.scheme,
-      dark: !theme.light,
+      colorPreference: theme.colorPreference,
     };
 
     return (
@@ -33,8 +33,10 @@ export class Themes extends Component<Props> {
                 type: 'string',
                 enum: listSchemes(),
               },
-              dark: {
-                type: 'boolean',
+              colorPreference: {
+                title: 'theme color',
+                type: 'string',
+                enum: ['auto', 'light', 'dark'],
               },
             },
           }}

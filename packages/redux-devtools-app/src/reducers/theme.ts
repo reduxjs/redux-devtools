@@ -5,14 +5,14 @@ import { StoreAction } from '../actions';
 export interface ThemeState {
   readonly theme: Theme;
   readonly scheme: Scheme;
-  readonly light: boolean;
+  readonly colorPreference: 'auto' | 'light' | 'dark';
 }
 
 export default function theme(
   state: ThemeState = {
-    theme: 'default' as const,
-    scheme: 'default' as const,
-    light: true,
+    theme: 'default',
+    scheme: 'default',
+    colorPreference: 'auto',
   },
   action: StoreAction
 ) {
@@ -20,7 +20,7 @@ export default function theme(
     return {
       theme: action.theme,
       scheme: action.scheme,
-      light: !action.dark,
+      colorPreference: action.colorPreference,
     };
   }
   return state;

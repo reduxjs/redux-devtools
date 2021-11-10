@@ -141,8 +141,8 @@ For React Native you can use [remotedev-rn-debugger](https://github.com/jhen0409
 | `port`                  | _Number_ used to specify host's port for [@redux-devtools/cli](https://github.com/reduxjs/redux-devtools/tree/main/packages/redux-devtools-cli).                                                                                                                                                              |
 | `secure`                | _Boolean_ specifies whether to use `https` protocol for [@redux-devtools/cli](https://github.com/reduxjs/redux-devtools/tree/main/packages/redux-devtools-cli).                                                                                                                                               |
 | `maxAge`                | _Number_ of maximum allowed actions to be stored on the history tree, the oldest actions are removed once maxAge is reached. Default is `30`.                                                                                                                                                                 |
-| `actionsBlacklist`      | _array_ of actions to be hidden in DevTools. Overwrites corresponding global setting in the options page. See the example bellow.                                                                                                                                                                             |
-| `actionsWhitelist`      | _array_ of actions to be shown. All other actions will be hidden in DevTools.                                                                                                                                                                                                                                 |
+| `actionsDenylist`       | _array_ of actions to be hidden in DevTools. Overwrites corresponding global setting in the options page. See the example bellow.                                                                                                                                                                             |
+| `actionsAllowlist`      | _array_ of actions to be shown. All other actions will be hidden in DevTools.                                                                                                                                                                                                                                 |
 | `actionSanitizer`       | _Function_ which takes action object and id number as arguments, and should return action object back. See the example bellow.                                                                                                                                                                                |
 | `stateSanitizer`        | _Function_ which takes state object and index as arguments, and should return state object back. See the example bellow.                                                                                                                                                                                      |
 | `startOn`               | _String_ or _Array of strings_ indicating an action or a list of actions, which should start remote monitoring (when `realtime` is `false`).                                                                                                                                                                  |
@@ -157,7 +157,7 @@ For React Native you can use [remotedev-rn-debugger](https://github.com/jhen0409
 | `id`                    | _String_ to identify the instance when sending the history triggered by `sendOn`. You can use, for example, user id here, to know who sent the data.                                                                                                                                                          |
 | `suppressConnectErrors` | _Boolean_ - if set to `false`, all socket errors thrown while trying to connect will be printed to the console, regardless of if they've been thrown before. This is primarily for suppressing `SocketProtocolError` errors, which get repeatedly thrown when trying to make a connection. Default is `true`. |
 
-All parameters are optional. You have to provide at least `port` property to use `localhost` instead of `remotedev.io` server.
+All parameters are optional. You have to provide the `port` property to use the `hostname` or `secure` properties.
 
 Example:
 
@@ -172,7 +172,7 @@ export default function configureStore(preloadedState) {
       hostname: 'localhost',
       port: 8000,
       maxAge: 30,
-      actionsBlacklist: ['EFFECT_RESOLVED'],
+      actionsDenylist: ['EFFECT_RESOLVED'],
       actionSanitizer: (action) =>
         action.type === 'FILE_DOWNLOAD_SUCCESS' && action.data
           ? { ...action, data: '<<LONG_BLOB>>' }

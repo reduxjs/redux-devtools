@@ -66,7 +66,7 @@ export function changeSection(section: string): ChangeSectionAction {
 interface ChangeThemeFormData {
   readonly theme: Theme;
   readonly scheme: Scheme;
-  readonly dark: boolean;
+  readonly colorPreference: 'auto' | 'light' | 'dark';
 }
 interface ChangeThemeData {
   readonly formData: ChangeThemeFormData;
@@ -75,7 +75,7 @@ export interface ChangeThemeAction {
   readonly type: typeof CHANGE_THEME;
   readonly theme: Theme;
   readonly scheme: Scheme;
-  readonly dark: boolean;
+  readonly colorPreference: 'auto' | 'light' | 'dark';
 }
 export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
   return { type: CHANGE_THEME, ...data.formData };

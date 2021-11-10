@@ -8,11 +8,7 @@ import importState from './importState';
 import generateId from './generateInstanceId';
 import { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
-import {
-  EnhancedStore,
-  LiftedState,
-  PerformAction,
-} from '@redux-devtools/instrument';
+import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LibConfig } from '@redux-devtools/app/lib/actions';
 import {
   ContentScriptToPageScriptMessage,
@@ -76,10 +72,7 @@ export interface Serialize {
   readonly options?: Options | boolean;
 }
 
-export function getSerializeParameter(
-  config: Config,
-  param?: 'serializeState' | 'serializeAction'
-) {
+export function getSerializeParameter(config: Config) {
   const serialize = config.serialize;
   if (serialize) {
     if (serialize === true) return { options: true };
@@ -109,16 +102,7 @@ export function getSerializeParameter(
     };
   }
 
-  const value = config[param!];
-  if (typeof value === 'undefined') return undefined;
-  // eslint-disable-next-line no-console
-  console.warn(
-    `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead: https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1`
-  );
-
-  if (typeof value === 'boolean') return { options: value };
-  if (typeof value === 'function') return { replacer: value };
-  return value;
+  return undefined;
 }
 
 interface InitInstancePageScriptToContentScriptMessage {
@@ -539,7 +523,7 @@ export function disconnect() {
 export interface ConnectResponse {
   init: <S, A extends Action<unknown>>(
     state: S,
-    liftedData: LiftedState<S, A, unknown>
+    liftedData?: LiftedState<S, A, unknown>
   ) => void;
   subscribe: <S, A extends Action<unknown>>(
     listener: (message: ListenerMessage<S, A>) => void
@@ -662,7 +646,7 @@ export function connect(preConfig: Config): ConnectResponse {
 
   const init = <S, A extends Action<unknown>>(
     state: S,
-    liftedData: LiftedState<S, A, unknown>
+    liftedData?: LiftedState<S, A, unknown>
   ) => {
     const message: InitMessage<S, A> = {
       type: 'INIT',
@@ -704,25 +688,6 @@ export function connect(preConfig: Config): ConnectResponse {
     unsubscribe,
     send,
     error,
-  };
-}
-
-export function updateStore<S, A extends Action<unknown>>(stores: {
-  [K in string | number]: EnhancedStore<S, A, unknown>;
-}) {
-  return function (newStore: EnhancedStore<S, A, unknown>, instanceId: number) {
-    /* eslint-disable no-console */
-    console.warn(
-      '`__REDUX_DEVTOOLS_EXTENSION__.updateStore` is deprecated, remove it and just use ' +
-        "`__REDUX_DEVTOOLS_EXTENSION_COMPOSE__` instead of the extension's store enhancer: " +
-        'https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup'
-    );
-    /* eslint-enable no-console */
-    const store = stores[instanceId || Object.keys(stores)[0]];
-    // Mutate the store in order to keep the reference
-    store.liftedStore = newStore.liftedStore;
-    store.getState = newStore.getState;
-    store.dispatch = newStore.dispatch;
   };
 }
 

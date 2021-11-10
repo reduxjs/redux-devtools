@@ -182,8 +182,6 @@ describe('Redux enhancer', () => {
         counter,
         window.__REDUX_DEVTOOLS_EXTENSION__({
           actionsDenylist: ['SOME_ACTION'],
-          statesFilter: (state) => state,
-          serializeState: (key, value) => value,
         })
       );
       expect(typeof window.store).toBe('object');

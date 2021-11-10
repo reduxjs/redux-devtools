@@ -1,4 +1,4 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ReactNode, PureComponent } from 'react';
 import { Action, AnyAction } from 'redux';
 import { emptyRecord, identity } from '../utils/object';
@@ -12,7 +12,11 @@ export interface QueryPreviewActionsProps {
 const keySep = ' - ';
 
 export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps> {
-  selectFormattedActions = createSelector<
+  selectFormattedActions: Selector<
+    AnyAction[],
+    Record<string, AnyAction>,
+    never
+  > = createSelector<
     [(actions: AnyAction[]) => AnyAction[]],
     Record<string, AnyAction>
   >(identity, (actions) => {

@@ -1,4 +1,4 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ComponentProps, ReactNode } from 'react';
 import JSONTree from 'react-json-tree';
 import { Base16Theme, StylingFunction } from 'react-base16-styling';
@@ -36,12 +36,20 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
     },
   };
 
-  readonly selectLabelRenderer = createSelector<
+  readonly selectLabelRenderer: Selector<
+    StylingFunction,
+    ReturnType<typeof createTreeItemLabelRenderer>,
+    never
+  > = createSelector<
     [(stylingFunction: StylingFunction) => StylingFunction],
     ReturnType<typeof createTreeItemLabelRenderer>
   >(identity, createTreeItemLabelRenderer);
 
-  readonly selectGetItemString = createSelector<
+  readonly selectGetItemString: Selector<
+    StylingFunction,
+    (type: string, data: unknown) => ReactNode,
+    never
+  > = createSelector<
     [(stylingFunction: StylingFunction) => StylingFunction],
     (type: string, data: unknown) => ReactNode
   >(
@@ -50,7 +58,11 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
       getItemString(styling, type, data, DATA_TYPE_KEY, false)
   );
 
-  readonly selectTheme = createSelector<
+  readonly selectTheme: Selector<
+    Base16Theme,
+    ReturnType<typeof getJsonTreeTheme>,
+    never
+  > = createSelector<
     [(base16Theme: Base16Theme) => Base16Theme],
     ReturnType<typeof getJsonTreeTheme>
   >(identity, getJsonTreeTheme);

@@ -10,13 +10,11 @@ import {
   Dispatch,
   PreloadedState,
   Reducer,
-  Store,
   StoreEnhancer,
   StoreEnhancerStoreCreator,
 } from 'redux';
 import Immutable from 'immutable';
 import { EnhancedStore, PerformAction } from '@redux-devtools/instrument';
-import createStore from '../../../app/stores/createStore';
 import configureStore, { getUrlParam } from '../../../app/stores/enhancerStore';
 import { isAllowed, Options } from '../options/syncOptions';
 import Monitor from '../../../app/service/Monitor';
@@ -31,7 +29,6 @@ import importState from '../../../app/api/importState';
 import openWindow, { Position } from '../../../app/api/openWindow';
 import generateId from '../../../app/api/generateInstanceId';
 import {
-  updateStore,
   toContentScript,
   sendMessage,
   setListener,
@@ -95,19 +92,6 @@ export interface ConfigWithExpandedMaxAge {
   readonly actionsDenylist?: string | readonly string[];
   readonly actionsAllowlist?: string | readonly string[];
   serialize?: boolean | SerializeWithImmutable;
-  readonly serializeState?:
-    | boolean
-    | ((key: string, value: unknown) => unknown)
-    | Serialize;
-  readonly serializeAction?:
-    | boolean
-    | ((key: string, value: unknown) => unknown)
-    | Serialize;
-  readonly statesFilter?: <S>(state: S, index?: number) => S;
-  readonly actionsFilter?: <A extends Action<unknown>>(
-    action: A,
-    id?: number
-  ) => A;
   readonly stateSanitizer?: <S>(state: S, index?: number) => S;
   readonly actionSanitizer?: <A extends Action<unknown>>(
     action: A,
@@ -118,9 +102,6 @@ export interface ConfigWithExpandedMaxAge {
     action: A
   ) => boolean;
   readonly latency?: number;
-  readonly getMonitor?: <S, A extends Action<unknown>>(
-    monitor: Monitor<S, A>
-  ) => void;
   readonly maxAge?:
     | number
     | (<S, A extends Action<unknown>>(
@@ -134,8 +115,6 @@ export interface ConfigWithExpandedMaxAge {
   readonly shouldRecordChanges?: boolean;
   readonly shouldStartLocked?: boolean;
   readonly pauseActionType?: unknown;
-  readonly deserializeState?: <S>(state: S) => S;
-  readonly deserializeAction?: <A extends Action<unknown>>(action: A) => A;
   name?: string;
   readonly autoPause?: boolean;
   readonly features?: Features;
@@ -151,17 +130,8 @@ export interface Config extends ConfigWithExpandedMaxAge {
 }
 
 interface ReduxDevtoolsExtension {
-  <S, A extends Action<unknown>>(
-    reducer: Reducer<S, A>,
-    preloadedState?: PreloadedState<S>,
-    config?: Config
-  ): Store<S, A>;
   (config?: Config): StoreEnhancer;
   open: (position?: Position) => void;
-  updateStore: (
-    newStore: EnhancedStore<unknown, Action<unknown>, unknown>,
-    instanceId: number
-  ) => void;
   notifyErrors: (onError?: () => boolean) => void;
   send: <S, A extends Action<unknown>>(
     action: StructuralPerformAction<A> | StructuralPerformAction<A>[],
@@ -185,21 +155,10 @@ declare global {
 }
 
 function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
-  reducer?: Reducer<S, A>,
-  preloadedState?: PreloadedState<S>,
   config?: Config
-): Store<S, A>;
-function __REDUX_DEVTOOLS_EXTENSION__(config: Config): StoreEnhancer;
-function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
-  reducer?: Reducer<S, A> | Config | undefined,
-  preloadedState?: PreloadedState<S>,
-  config?: Config
-): Store<S, A> | StoreEnhancer {
+): StoreEnhancer {
   /* eslint-disable no-param-reassign */
-  if (typeof reducer === 'object') {
-    config = reducer;
-    reducer = undefined;
-  } else if (typeof config !== 'object') config = {};
+  if (typeof config !== 'object') config = {};
   /* eslint-enable no-param-reassign */
   if (!window.devToolsOptions) window.devToolsOptions = {} as any;
 
@@ -210,16 +169,9 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   let sendingActionId = 1;
   const instanceId = generateId(config.instanceId);
   const localFilter = getLocalFilter(config);
-  const serializeState = getSerializeParameter(config, 'serializeState');
-  const serializeAction = getSerializeParameter(config, 'serializeAction');
-  let {
-    statesFilter,
-    actionsFilter,
-    stateSanitizer,
-    actionSanitizer,
-    predicate,
-    latency = 500,
-  } = config;
+  const serializeState = getSerializeParameter(config);
+  const serializeAction = getSerializeParameter(config);
+  let { stateSanitizer, actionSanitizer, predicate, latency = 500 } = config;
 
   // Deprecate actionsWhitelist and actionsBlacklist
   if (config.actionsWhitelist) {
@@ -227,16 +179,6 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   }
   if (config.actionsBlacklist) {
     deprecateParam('actionsBlacklist', 'actionsDenylist');
-  }
-
-  // Deprecate statesFilter and actionsFilter
-  if (statesFilter) {
-    deprecateParam('statesFilter', 'stateSanitizer');
-    stateSanitizer = statesFilter; // eslint-disable-line no-param-reassign
-  }
-  if (actionsFilter) {
-    deprecateParam('actionsFilter', 'actionSanitizer');
-    actionSanitizer = actionsFilter; // eslint-disable-line no-param-reassign
   }
 
   const relayState = throttle(
@@ -269,17 +211,6 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   );
 
   const monitor = new Monitor(relayState);
-  if (config.getMonitor) {
-    /* eslint-disable no-console */
-    console.warn(
-      "Redux DevTools extension's `getMonitor` parameter is deprecated and will be not " +
-        'supported in the next version, please remove it and just use ' +
-        '`__REDUX_DEVTOOLS_EXTENSION_COMPOSE__` instead: ' +
-        'https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup'
-    );
-    /* eslint-enable no-console */
-    config.getMonitor(monitor);
-  }
 
   function exportState() {
     const liftedState = store.liftedStore.getState();
@@ -616,13 +547,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       };
     };
 
-  if (!reducer) return enhance();
-  /* eslint-disable no-console */
-  console.warn(
-    'Creating a Redux store directly from DevTools extension is discouraged and will not be supported in future major version. For more details see: https://git.io/fphCe'
-  );
-  /* eslint-enable no-console */
-  return createStore(reducer, preloadedState, enhance);
+  return enhance();
 }
 
 declare global {
@@ -634,7 +559,6 @@ declare global {
 // noinspection JSAnnotator
 window.__REDUX_DEVTOOLS_EXTENSION__ = __REDUX_DEVTOOLS_EXTENSION__ as any;
 window.__REDUX_DEVTOOLS_EXTENSION__.open = openWindow;
-window.__REDUX_DEVTOOLS_EXTENSION__.updateStore = updateStore(stores);
 window.__REDUX_DEVTOOLS_EXTENSION__.notifyErrors = notifyErrors;
 window.__REDUX_DEVTOOLS_EXTENSION__.send = sendMessage;
 window.__REDUX_DEVTOOLS_EXTENSION__.listen = setListener;
@@ -661,30 +585,41 @@ const preEnhancer =
 
 const extensionCompose =
   (config: Config) =>
-  (...funcs: StoreEnhancer[]) => {
-    return (...args: any[]) => {
+  (...funcs: StoreEnhancer[]): StoreEnhancer => {
+    return (...args) => {
       const instanceId = generateId(config.instanceId);
       return [preEnhancer(instanceId), ...funcs].reduceRight(
         (composed, f) => f(composed),
-        (__REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId }) as any)(
-          ...args
-        )
+        __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args)
       );
     };
   };
 
+interface ReduxDevtoolsExtensionCompose {
+  (config: Config): (...funcs: StoreEnhancer[]) => StoreEnhancer;
+  (...funcs: StoreEnhancer[]): StoreEnhancer;
+}
+
 declare global {
   interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: unknown;
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: ReduxDevtoolsExtensionCompose;
   }
 }
 
-window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = (...funcs: any[]) => {
+function reduxDevtoolsExtensionCompose(
+  config: Config
+): (...funcs: StoreEnhancer[]) => StoreEnhancer;
+function reduxDevtoolsExtensionCompose(
+  ...funcs: StoreEnhancer[]
+): StoreEnhancer;
+function reduxDevtoolsExtensionCompose(...funcs: [Config] | StoreEnhancer[]) {
   if (funcs.length === 0) {
     return __REDUX_DEVTOOLS_EXTENSION__();
   }
   if (funcs.length === 1 && typeof funcs[0] === 'object') {
     return extensionCompose(funcs[0]);
   }
-  return extensionCompose({})(...funcs);
-};
+  return extensionCompose({})(...(funcs as StoreEnhancer[]));
+}
+
+window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = reduxDevtoolsExtensionCompose;

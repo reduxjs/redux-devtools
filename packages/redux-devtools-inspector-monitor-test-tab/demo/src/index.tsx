@@ -58,7 +58,11 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Container
-        themeData={{ theme: 'default', scheme: 'default', light: true }}
+        themeData={{
+          theme: 'default',
+          scheme: 'default',
+          colorPreference: 'auto',
+        }}
       >
         <Route path={ROOT}>
           <DemoApp />

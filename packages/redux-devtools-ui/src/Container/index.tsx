@@ -1,9 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
-import { getTheme, ThemeData } from '../utils/theme';
+import { useTheme, ThemeData } from '../utils/theme';
 import { MainContainerWrapper, ContainerWrapper } from './styles';
 import { Theme } from '../themes/default';
+
+interface ContainerFromThemeDataProps {
+  children?: React.ReactNode;
+  themeData: ThemeData;
+  className?: string;
+}
+
+const ContainerFromThemeData: React.FunctionComponent<ContainerFromThemeDataProps> =
+  ({ themeData, className, children }) => {
+    const theme = useTheme(themeData);
+    return (
+      <ThemeProvider theme={theme}>
+        <MainContainerWrapper className={className}>
+          {children}
+        </MainContainerWrapper>
+      </ThemeProvider>
+    );
+  };
 
 interface Props {
   children?: React.ReactNode;
@@ -27,11 +45,9 @@ const Container: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <ThemeProvider theme={getTheme(themeData)}>
-      <MainContainerWrapper className={className}>
-        {children}
-      </MainContainerWrapper>
-    </ThemeProvider>
+    <ContainerFromThemeData themeData={themeData} className={className}>
+      {children}
+    </ContainerFromThemeData>
   );
 };
 
