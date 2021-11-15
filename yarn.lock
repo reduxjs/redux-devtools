@@ -10969,9 +10969,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:^94.0.0":
-  version: 94.0.0
-  resolution: "chromedriver@npm:94.0.0"
+"chromedriver@npm:^95.0.0":
+  version: 95.0.0
+  resolution: "chromedriver@npm:95.0.0"
   dependencies:
     "@testim/chrome-version": ^1.0.7
     axios: ^0.21.2
@@ -10982,7 +10982,7 @@ __metadata:
     tcp-port-used: ^1.0.1
   bin:
     chromedriver: bin/chromedriver
-  checksum: 1b881d3cedce97b02694877338fcd5d70f24585b1cf848b77ede6833f0cac74cdabd5e75f658985535adabc3789d67bde4e1b9a2834419b32c667db8b40b74b4
+  checksum: b6afdf8b99f72bbba424c9bca85efe56d602f298fda26136e4ae3689ea00ddc64109ce036884565d292e16dd05f96338e635e6d3bdc7105c032cc988fcb23410
   languageName: node
   linkType: hard
 
@@ -25065,7 +25065,7 @@ __metadata:
     "@types/styled-components": ^5.1.15
     babel-loader: ^8.2.3
     bestzip: ^2.2.0
-    chromedriver: ^94.0.0
+    chromedriver: ^95.0.0
     copy-webpack-plugin: ^9.1.0
     cross-env: ^7.0.3
     css-loader: ^6.5.1
