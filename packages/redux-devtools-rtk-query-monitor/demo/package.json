@@ -11,15 +11,15 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.16.3",
-    "@chakra-ui/react": "^1.6.12",
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
+    "@chakra-ui/react": "^1.7.1",
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
     "@mswjs/data": "^0.7.1",
     "@redux-devtools/core": "^3.9.1",
     "@redux-devtools/dock-monitor": "^1.4.1",
     "@redux-devtools/rtk-query-monitor": "^1.0.1",
     "@reduxjs/toolkit": "^1.6.2",
-    "framer-motion": "^5.2.1",
+    "framer-motion": "^5.3.0",
     "msw": "^0.35.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -44,7 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
     "babel-loader": "^8.2.3",
-    "copy-webpack-plugin": "^9.0.1",
+    "copy-webpack-plugin": "^9.1.0",
     "css-loader": "^6.5.1",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
@@ -55,9 +55,9 @@
     "style-loader": "^3.3.1",
     "ts-node": "^10.4.0",
     "typescript": "~4.4.4",
-    "webpack": "^5.63.0",
+    "webpack": "^5.64.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.4.0"
+    "webpack-dev-server": "^4.5.0"
   },
   "msw": {
     "workerDirectory": "public"
