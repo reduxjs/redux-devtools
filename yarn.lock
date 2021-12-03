@@ -4663,7 +4663,7 @@ __metadata:
     chalk: ^4.1.2
     cors: ^2.8.5
     cross-spawn: ^7.0.3
-    electron: ^15.3.2
+    electron: ^16.0.4
     eslint: ^8.3.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-jest: ^25.2.4
@@ -13169,16 +13169,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:^15.3.2":
-  version: 15.3.2
-  resolution: "electron@npm:15.3.2"
+"electron@npm:^16.0.4":
+  version: 16.0.4
+  resolution: "electron@npm:16.0.4"
   dependencies:
     "@electron/get": ^1.13.0
     "@types/node": ^14.6.2
     extract-zip: ^1.0.3
   bin:
     electron: cli.js
-  checksum: d86a418d4aa9a347071962fb9950880bff759e0bf141b9f13f7538746186ef8c09e83f3510baffe08887405024bd98e87e076988f26578ff74f38d2d0a3ad5a1
+  checksum: 16d7211da6b050e78e79c1a2d8607724592dba7e5fa70da3ef9043c5f8ed11487b42d5821539af82dbbf7cc331da7a89b87dadd8391b9d33c9651d1008f84f47
   languageName: node
   linkType: hard
 
@@ -24986,7 +24986,7 @@ __metadata:
     copy-webpack-plugin: ^9.1.0
     cross-env: ^7.0.3
     css-loader: ^6.5.1
-    electron: ^15.3.2
+    electron: ^16.0.4
     eslint: ^8.3.0
     eslint-config-airbnb: ^19.0.0
     eslint-plugin-import: ^2.25.3
