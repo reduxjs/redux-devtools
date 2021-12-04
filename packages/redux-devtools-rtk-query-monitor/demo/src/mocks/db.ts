@@ -19,41 +19,47 @@ const db = factory({
 });
 
 export const handlers = [
-  rest.post('/posts', async (req, res, ctx) => {
-    const { name } = req.body as Partial<Post>;
+  rest.post<Post, never, Post | { error: string }>(
+    '/posts',
+    async (req, res, ctx) => {
+      const { name } = req.body;
 
-    if (Math.random() < 0.3) {
-      return res(
-        ctx.json({ error: 'Oh no, there was an error, try again.' }),
-        ctx.status(500),
-        ctx.delay(300)
-      );
+      if (Math.random() < 0.3) {
+        return res(
+          ctx.json({ error: 'Oh no, there was an error, try again.' }),
+          ctx.status(500),
+          ctx.delay(300)
+        );
+      }
+
+      const post = db.post.create({
+        id: nanoid(),
+        name,
+      });
+
+      return res(ctx.json(post), ctx.delay(300));
     }
+  ),
+  rest.put<Post, { id: string }, Post | { error: string }>(
+    '/posts/:id',
+    (req, res, ctx) => {
+      const { name } = req.body;
 
-    const post = db.post.create({
-      id: nanoid(),
-      name,
-    });
+      if (Math.random() < 0.3) {
+        return res(
+          ctx.json({ error: 'Oh no, there was an error, try again.' }),
+          ctx.status(500),
+          ctx.delay(300)
+        );
+      }
 
-    return res(ctx.json(post), ctx.delay(300));
-  }),
-  rest.put('/posts/:id', (req, res, ctx) => {
-    const { name } = req.body as Partial<Post>;
+      const post = db.post.update({
+        where: { id: { equals: req.params.id } },
+        data: { name },
+      });
 
-    if (Math.random() < 0.3) {
-      return res(
-        ctx.json({ error: 'Oh no, there was an error, try again.' }),
-        ctx.status(500),
-        ctx.delay(300)
-      );
+      return res(ctx.json(post!), ctx.delay(300));
     }
-
-    const post = db.post.update({
-      where: { id: { equals: req.params.id } },
-      data: { name },
-    });
-
-    return res(ctx.json(post), ctx.delay(300));
-  }),
+  ),
   ...db.post.toHandlers('rest'),
 ] as const;
