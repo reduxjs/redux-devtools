@@ -21,6 +21,11 @@
       "matchPackageNames": ["source-map"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "source-map"
+    },
+    {
+      "matchPackageNames": ["msw"],
+      "matchUpdateTypes": ["major", "minor"],
+      "groupName": "msw"
     }
   ]
 }

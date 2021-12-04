@@ -53,4 +53,4 @@ WithTabs.argTypes = {
   foldGutter: { control: { disable: true } },
   autofocus: { control: { disable: true } },
   onChange: { control: { disable: true } },
-};
+} as any;

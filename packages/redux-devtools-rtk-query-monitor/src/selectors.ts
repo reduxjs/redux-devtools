@@ -200,17 +200,19 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     }
   );
 
-  const selectApiOfCurrentQuery: InspectorSelector<S, null | RtkQueryApiState> =
-    (selectorsSource: SelectorsSource<S>) => {
-      const apiStates = selectApiStates(selectorsSource);
-      const currentQueryInfo = selectCurrentQueryInfo(selectorsSource);
+  const selectApiOfCurrentQuery: InspectorSelector<
+    S,
+    null | RtkQueryApiState
+  > = (selectorsSource: SelectorsSource<S>) => {
+    const apiStates = selectApiStates(selectorsSource);
+    const currentQueryInfo = selectCurrentQueryInfo(selectorsSource);
 
-      if (!apiStates || !currentQueryInfo) {
-        return null;
-      }
+    if (!apiStates || !currentQueryInfo) {
+      return null;
+    }
 
-      return apiStates[currentQueryInfo.reducerPath] ?? null;
-    };
+    return apiStates[currentQueryInfo.reducerPath] ?? null;
+  };
 
   const selectProvidedOfCurrentQuery: InspectorSelector<
     S,
