@@ -1,6 +1,7 @@
 import * as path from 'path';
+import * as webpack from 'webpack';
 
-module.exports = (env: { production?: boolean } = {}) => ({
+export default (env: { production?: boolean } = {}): webpack.Configuration => ({
   mode: env.production ? 'production' : 'development',
   entry: {
     app: ['./src/index'],
