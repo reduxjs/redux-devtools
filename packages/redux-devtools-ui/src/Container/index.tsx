@@ -11,17 +11,18 @@ interface ContainerFromThemeDataProps {
   className?: string;
 }
 
-const ContainerFromThemeData: React.FunctionComponent<ContainerFromThemeDataProps> =
-  ({ themeData, className, children }) => {
-    const theme = useTheme(themeData);
-    return (
-      <ThemeProvider theme={theme}>
-        <MainContainerWrapper className={className}>
-          {children}
-        </MainContainerWrapper>
-      </ThemeProvider>
-    );
-  };
+const ContainerFromThemeData: React.FunctionComponent<
+  ContainerFromThemeDataProps
+> = ({ themeData, className, children }) => {
+  const theme = useTheme(themeData);
+  return (
+    <ThemeProvider theme={theme}>
+      <MainContainerWrapper className={className}>
+        {children}
+      </MainContainerWrapper>
+    </ThemeProvider>
+  );
+};
 
 interface Props {
   children?: React.ReactNode;

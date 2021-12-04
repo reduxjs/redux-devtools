@@ -17,7 +17,7 @@ export default {
   component: SegmentedControl,
 };
 
-const Template: Story<Omit<SegmentedControlProps, 'values'>> = (args) => (
+const Template: Story<SegmentedControlProps> = ({ values, ...args }) => (
   <Container>
     <SegmentedControl values={['Button1', 'Button2', 'Button3']} {...args} />
   </Container>
