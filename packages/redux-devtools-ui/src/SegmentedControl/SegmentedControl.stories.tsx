@@ -17,7 +17,7 @@ export default {
   component: SegmentedControl,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, react/prop-types
+// eslint-disable-next-line react/prop-types
 const Template: Story<SegmentedControlProps> = ({ values, ...args }) => (
   <Container>
     <SegmentedControl values={['Button1', 'Button2', 'Button3']} {...args} />
