@@ -54,7 +54,7 @@ describe('DevTools panel for Electron', function () {
           return callback('Redux panel not found');
         }
         if (UI.inspectorView) {
-          const tabs = UI.inspectorView._tabbedPane._tabs;
+          const tabs = UI.inspectorView.tabbedPane.tabs;
           const idList = tabs.map((tab) => tab.id);
           const reduxPanelId =
             'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux';
