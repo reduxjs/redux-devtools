@@ -4084,7 +4084,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mswjs/interceptors@npm:^0.12.6, @mswjs/interceptors@npm:^0.12.7":
+"@mswjs/interceptors@npm:^0.12.7":
   version: 0.12.7
   resolution: "@mswjs/interceptors@npm:0.12.7"
   dependencies:
@@ -7273,16 +7273,6 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 88f9c75ca65378d0287d8d0b1dbeed372c8267f4841fe2f6f2d759522494382d3943bc6cc774bef7dd125464a266bafeda813d3658b17a2d1e74acc4efb6e21c
-  languageName: node
-  linkType: hard
-
-"@types/inquirer@npm:^7.3.3":
-  version: 7.3.3
-  resolution: "@types/inquirer@npm:7.3.3"
-  dependencies:
-    "@types/through": "*"
-    rxjs: ^6.4.0
-  checksum: 49b21d883ab533dbb84b400fa1aeab2638c37b87978d16f15636316c8d9f70d93a185479cf32081d9013fe2b362db05a83bdc3725771cc93d8bdab9182a96ab9
   languageName: node
   linkType: hard
 
@@ -17163,7 +17153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:^8.1.1, inquirer@npm:^8.2.0":
+"inquirer@npm:^8.2.0":
   version: 8.2.0
   resolution: "inquirer@npm:8.2.0"
   dependencies:
@@ -21020,7 +21010,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:^0.36.0":
+"msw@npm:^0.36.0, msw@npm:latest":
   version: 0.36.0
   resolution: "msw@npm:0.36.0"
   dependencies:
@@ -21047,36 +21037,6 @@ __metadata:
   bin:
     msw: cli/index.js
   checksum: e0f60b8dca57d3fe936d2288793fae4448ca84318a19bf0a4e7733a25259bdf26fcf36ec2cd78d9b341c016f08d7a2a7834d4b5677167119ca7b967ef3b297ca
-  languageName: node
-  linkType: hard
-
-"msw@npm:latest":
-  version: 0.35.0
-  resolution: "msw@npm:0.35.0"
-  dependencies:
-    "@mswjs/cookies": ^0.1.6
-    "@mswjs/interceptors": ^0.12.6
-    "@open-draft/until": ^1.0.3
-    "@types/cookie": ^0.4.1
-    "@types/inquirer": ^7.3.3
-    "@types/js-levenshtein": ^1.1.0
-    chalk: ^4.1.1
-    chokidar: ^3.4.2
-    cookie: ^0.4.1
-    graphql: ^15.5.1
-    headers-utils: ^3.0.2
-    inquirer: ^8.1.1
-    is-node-process: ^1.0.1
-    js-levenshtein: ^1.1.6
-    node-fetch: ^2.6.1
-    node-match-path: ^0.6.3
-    statuses: ^2.0.0
-    strict-event-emitter: ^0.2.0
-    type-fest: ^1.2.2
-    yargs: ^17.0.1
-  bin:
-    msw: cli/index.js
-  checksum: cc5e85573e85779a95b1d5bfc306d4d0bcb4de660ac08c640e316c00fe4a0ea24dfe1decf6a46d10538550dfc7f7559836e1fda3d6e1f60ee7e99916bb3db3ff
   languageName: node
   linkType: hard
 
@@ -21438,13 +21398,6 @@ __metadata:
     util: ^0.11.0
     vm-browserify: ^1.0.1
   checksum: 41fa7927378edc0cb98a8cc784d3f4a47e43378d3b42ec57a23f81125baa7287c4b54d6d26d062072226160a3ce4d8b7a62e873d2fb637aceaddf71f5a26eca0
-  languageName: node
-  linkType: hard
-
-"node-match-path@npm:^0.6.3":
-  version: 0.6.3
-  resolution: "node-match-path@npm:0.6.3"
-  checksum: d515bc069f293688109c058ee02567528fdaa856290d362b80a2254734975014e4eefcdcc5164a8adfd5560aa870e277c97fe8be648074d5088056cf61553c7c
   languageName: node
   linkType: hard
 
@@ -26057,7 +26010,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^6.4.0, rxjs@npm:^6.6.0":
+"rxjs@npm:^6.6.0":
   version: 6.6.7
   resolution: "rxjs@npm:6.6.7"
   dependencies:
@@ -30599,21 +30552,6 @@ __metadata:
     y18n: ^5.0.5
     yargs-parser: ^20.2.2
   checksum: b14afbb51e3251a204d81937c86a7e9d4bdbf9a2bcee38226c900d00f522969ab675703bee2a6f99f8e20103f608382936034e64d921b74df82b63c07c5e8f59
-  languageName: node
-  linkType: hard
-
-"yargs@npm:^17.0.1":
-  version: 17.2.1
-  resolution: "yargs@npm:17.2.1"
-  dependencies:
-    cliui: ^7.0.2
-    escalade: ^3.1.1
-    get-caller-file: ^2.0.5
-    require-directory: ^2.1.1
-    string-width: ^4.2.0
-    y18n: ^5.0.5
-    yargs-parser: ^20.2.2
-  checksum: 451aac46f82da776f436018feed0244bc0e7b4355f7e397bcb53d34c691b177c0d71db3dda9653760e1bc240254d8b763a252ff918ef9e235a8d202e2909c4eb
   languageName: node
   linkType: hard
 
