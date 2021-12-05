@@ -1,10 +1,11 @@
 import * as path from 'path';
+import * as webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import pkg from '@redux-devtools/rtk-query-monitor/package.json';
 
-module.exports = {
+const config: webpack.Configuration = {
   mode: 'development',
   entry: './src/index.tsx',
   devtool: 'eval-source-map',
@@ -58,3 +59,5 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 };
+
+export default config;

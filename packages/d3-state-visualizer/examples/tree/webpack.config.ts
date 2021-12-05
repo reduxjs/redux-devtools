@@ -1,8 +1,9 @@
 import * as path from 'path';
+import * as webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-export default {
+const config: webpack.Configuration = {
   mode: 'development',
   entry: './src/index.ts',
   devtool: 'eval-source-map',
@@ -41,3 +42,5 @@ export default {
     extensions: ['.js', '.ts'],
   },
 };
+
+export default config;

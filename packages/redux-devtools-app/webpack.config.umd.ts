@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-module.exports = (env: { production?: boolean } = {}) => ({
+export default (env: { production?: boolean } = {}): webpack.Configuration => ({
   mode: env.production ? 'production' : 'development',
   entry: {
     app: ['./src/index'],

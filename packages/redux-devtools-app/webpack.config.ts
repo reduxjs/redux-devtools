@@ -3,7 +3,9 @@ import * as webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-module.exports = (env: { development?: boolean; platform?: string } = {}) => ({
+export default (
+  env: { development?: boolean; platform?: string } = {}
+): webpack.Configuration => ({
   mode: env.development ? 'development' : 'production',
   entry: {
     app: './demo/index',
