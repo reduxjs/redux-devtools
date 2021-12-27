@@ -1,6 +1,7 @@
 {
   "extends": ["config:base", "group:allNonMajor", ":maintainLockFilesWeekly"],
   "rangeStrategy": "bump",
+  "postUpdateOptions": ["yarnDedupeHighest"],
   "rebaseWhen": "conflicted",
   "ignorePaths": [
     "**/node_modules/**",
