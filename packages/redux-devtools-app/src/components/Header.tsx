@@ -52,16 +52,14 @@ class Header extends Component<Props> {
         <Button
           title="Follow us"
           tooltipPosition="bottom"
-          onClick={this.openLink('https://twitter.com/ReduxDevTools')}
+          onClick={this.openLink('https://twitter.com/NathanBierema')}
         >
           <TiSocialTwitter />
         </Button>
         <Button
           title="Support us"
           tooltipPosition="bottom-left"
-          onClick={this.openLink(
-            'https://opencollective.com/redux-devtools-extension'
-          )}
+          onClick={this.openLink('https://github.com/sponsors/Methuselah96')}
         >
           <TiHeartFullOutline />
         </Button>
