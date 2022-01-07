@@ -220,7 +220,7 @@ export function dispatchAction(
     const currentStateIndex =
       action.type === 'JUMP_TO_STATE'
         ? action.index
-        : liftedState.stagedActionIds[action.actionId];
+        : liftedState.stagedActionIds.indexOf(action.actionId);
     return {
       ...state,
       states: {
