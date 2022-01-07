@@ -218,7 +218,9 @@ export function dispatchAction(
     const id = state.selected || state.current;
     const liftedState = state.states[id];
     const currentStateIndex =
-      action.type === 'JUMP_TO_STATE' ? action.index : action.actionId;
+      action.type === 'JUMP_TO_STATE'
+        ? action.index
+        : liftedState.stagedActionIds[action.actionId];
     return {
       ...state,
       states: {
