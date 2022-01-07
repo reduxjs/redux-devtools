@@ -17,7 +17,7 @@ import reducer from './reducers';
 import SliderButton from './SliderButton';
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
-const { reset, jumpToState } = ActionCreators;
+const { reset, jumpToAction } = ActionCreators;
 
 interface ExternalProps<S, A extends Action<unknown>> {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -151,11 +151,12 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
       this.pauseReplay();
     }
 
-    this.props.dispatch(jumpToState(value));
+    this.props.dispatch(jumpToAction(this.props.stagedActionIds[value]));
   };
 
   startReplay = () => {
-    const { computedStates, currentStateIndex, dispatch } = this.props;
+    const { computedStates, currentStateIndex, dispatch, stagedActionIds } =
+      this.props;
 
     if (computedStates.length < 2) {
       return;
@@ -164,20 +165,20 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
 
     let stateIndex;
     if (currentStateIndex === computedStates.length - 1) {
-      dispatch(jumpToState(0));
+      dispatch(jumpToAction(stagedActionIds[0]));
       stateIndex = 0;
     } else if (currentStateIndex === computedStates.length - 2) {
-      dispatch(jumpToState(currentStateIndex + 1));
+      dispatch(jumpToAction(stagedActionIds[currentStateIndex + 1]));
       return;
     } else {
       stateIndex = currentStateIndex + 1;
-      dispatch(jumpToState(currentStateIndex + 1));
+      dispatch(jumpToAction(stagedActionIds[currentStateIndex + 1]));
     }
 
     let counter = stateIndex;
     const timer = window.setInterval(() => {
       if (counter + 1 <= computedStates.length - 1) {
-        dispatch(jumpToState(counter + 1));
+        dispatch(jumpToAction(stagedActionIds[counter + 1]));
       }
       counter += 1;
 
@@ -198,7 +199,7 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
     }
 
     if (this.props.currentStateIndex === this.props.computedStates.length - 1) {
-      this.props.dispatch(jumpToState(0));
+      this.props.dispatch(jumpToAction(this.props.stagedActionIds[0]));
 
       this.loop(0);
     } else {
@@ -213,7 +214,11 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
     const aLoop = () => {
       const replayDiff = Date.now() - currentTimestamp;
       if (replayDiff >= timestampDiff) {
-        this.props.dispatch(jumpToState(this.props.currentStateIndex + 1));
+        this.props.dispatch(
+          jumpToAction(
+            this.props.stagedActionIds[this.props.currentStateIndex + 1]
+          )
+        );
 
         if (
           this.props.currentStateIndex >=
@@ -275,7 +280,11 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
     this.pauseReplay();
 
     if (this.props.currentStateIndex !== 0) {
-      this.props.dispatch(jumpToState(this.props.currentStateIndex - 1));
+      this.props.dispatch(
+        jumpToAction(
+          this.props.stagedActionIds[this.props.currentStateIndex - 1]
+        )
+      );
     }
   };
 
@@ -283,7 +292,11 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
     this.pauseReplay();
 
     if (this.props.currentStateIndex !== this.props.computedStates.length - 1) {
-      this.props.dispatch(jumpToState(this.props.currentStateIndex + 1));
+      this.props.dispatch(
+        jumpToAction(
+          this.props.stagedActionIds[this.props.currentStateIndex + 1]
+        )
+      );
     }
   };
 

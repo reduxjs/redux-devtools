@@ -51,7 +51,8 @@ export default class Monitor<S, A extends Action<unknown>> {
     this.lastAction && /^@@redux\/(INIT|REPLACE)/.test(this.lastAction);
   isMonitorAction = () =>
     this.lastAction && this.lastAction !== 'PERFORM_ACTION';
-  isTimeTraveling = () => this.lastAction === 'JUMP_TO_STATE';
+  isTimeTraveling = () =>
+    this.lastAction === 'JUMP_TO_STATE' || this.lastAction === 'JUMP_TO_ACTION';
   isPaused = () => {
     if (this.paused) {
       if (this.lastAction !== 'BLOCKED') {

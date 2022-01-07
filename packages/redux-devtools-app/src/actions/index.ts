@@ -104,11 +104,9 @@ export interface MonitorActionAction {
 export interface JumpToStateAction {
   type: 'JUMP_TO_STATE';
   index: number;
-  actionId: number;
 }
 export interface JumpToActionAction {
   type: 'JUMP_TO_ACTION';
-  index: number;
   actionId: number;
 }
 export interface PauseRecordingAction {

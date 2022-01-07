@@ -217,10 +217,10 @@ export function dispatchAction(
   if (action.type === 'JUMP_TO_STATE' || action.type === 'JUMP_TO_ACTION') {
     const id = state.selected || state.current;
     const liftedState = state.states[id];
-    let currentStateIndex = action.index;
-    if (typeof currentStateIndex === 'undefined' && action.actionId) {
-      currentStateIndex = liftedState.stagedActionIds.indexOf(action.actionId);
-    }
+    const currentStateIndex =
+      action.type === 'JUMP_TO_STATE'
+        ? action.index
+        : liftedState.stagedActionIds.indexOf(action.actionId);
     return {
       ...state,
       states: {
