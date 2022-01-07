@@ -218,7 +218,7 @@ export function dispatchAction(
     const id = state.selected || state.current;
     const liftedState = state.states[id];
     let currentStateIndex = action.index;
-    if (typeof currentStateIndex === 'undefined' && action.actionId) {
+    if (typeof currentStateIndex === 'undefined' && action.actionId != null) {
       currentStateIndex = liftedState.stagedActionIds.indexOf(action.actionId);
     }
     return {
