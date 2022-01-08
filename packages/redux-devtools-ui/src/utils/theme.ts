@@ -62,18 +62,12 @@ export const useTheme = ({
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     const handleChange = ({ matches }: MediaQueryListEvent) => {
-      if (matches && !prefersDarkColorScheme) {
-        setPrefersDarkColorScheme(true);
-      }
-
-      if (!matches && prefersDarkColorScheme) {
-        setPrefersDarkColorScheme(false);
-      }
+      setPrefersDarkColorScheme(matches);
     };
 
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [prefersDarkColorScheme]);
+  }, []);
 
   const light = useMemo(
     () =>
