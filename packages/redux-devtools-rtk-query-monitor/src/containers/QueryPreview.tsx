@@ -94,7 +94,7 @@ const tabs: ReadonlyArray<
   TabOption<QueryPreviewTabs, QueryPreviewTabProps, RtkResourceInfo['type']>
 > = [
   {
-    label: 'query',
+    label: 'Query',
     value: QueryPreviewTabs.queryinfo,
     component: MappedQueryPreviewInfo,
     visible: {
@@ -104,7 +104,7 @@ const tabs: ReadonlyArray<
     },
   },
   {
-    label: 'actions',
+    label: 'Actions',
     value: QueryPreviewTabs.actions,
     component: MappedQueryPreviewActions,
     visible: {
@@ -114,7 +114,7 @@ const tabs: ReadonlyArray<
     },
   },
   {
-    label: 'tags',
+    label: 'Tags',
     value: QueryPreviewTabs.queryTags,
     component: MappedQueryPreviewTags,
     visible: {
@@ -124,7 +124,7 @@ const tabs: ReadonlyArray<
     },
   },
   {
-    label: 'subs',
+    label: 'Subs',
     value: QueryPreviewTabs.querySubscriptions,
     component: MappedQuerySubscriptipns,
     visible: {
@@ -134,7 +134,7 @@ const tabs: ReadonlyArray<
     },
   },
   {
-    label: 'api',
+    label: 'Api',
     value: QueryPreviewTabs.apiConfig,
     component: MappedApiPreview,
   },
