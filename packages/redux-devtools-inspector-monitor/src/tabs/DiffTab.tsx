@@ -35,7 +35,7 @@ DiffTab.propTypes = {
   invertTheme: PropTypes.bool.isRequired,
   labelRenderer: PropTypes.func.isRequired,
   isWideLayout: PropTypes.bool.isRequired,
-  dataTypeKey: PropTypes.string,
+  dataTypeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.symbol]),
 };
 
 export default DiffTab;

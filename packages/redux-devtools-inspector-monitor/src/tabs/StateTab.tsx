@@ -35,7 +35,7 @@ StateTab.propTypes = {
   base16Theme: PropTypes.any.isRequired,
   invertTheme: PropTypes.bool.isRequired,
   labelRenderer: PropTypes.func.isRequired,
-  dataTypeKey: PropTypes.string,
+  dataTypeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.symbol]),
   isWideLayout: PropTypes.bool.isRequired,
 };
 
