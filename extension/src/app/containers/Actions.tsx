@@ -85,14 +85,11 @@ class Actions extends Component<Props> {
           options.connectionId &&
           options.features.dispatch && <Dispatcher options={options} />}
         <Toolbar borderPosition="top">
-          {features.export && (
-            <Button title="Save a report" tooltipPosition="top-right">
-              <MdSave />
-            </Button>
-          )}
           {features.export && <ExportButton />}
           {features.import && <ImportButton />}
-          <PrintButton />
+          {position &&
+            (position !== '#popup' ||
+              navigator.userAgent.indexOf('Firefox') !== -1) && <PrintButton />}
           <Divider />
           <MonitorSelector />
           <Divider />
