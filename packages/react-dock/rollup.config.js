@@ -11,9 +11,8 @@ const config = [
     plugins: [
       typescript(),
       babel({
-        exclude: 'node_modules/**',
         babelHelpers: 'runtime',
-        extensions: ['.ts'],
+        extensions: ['.ts', '.tsx'],
         plugins: ['@babel/plugin-transform-runtime'],
       }),
     ],

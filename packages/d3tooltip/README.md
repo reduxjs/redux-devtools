@@ -11,7 +11,7 @@ It was created by [@romseguy](https://github.com/romseguy) and merged from [`rom
 
 ```javascript
 import d3 from 'd3';
-import d3tooltip from 'd3tooltip';
+import { tooltip } from 'd3tooltip';
 
 const DOMNode = document.getElementById('chart');
 const root = d3.select(DOMNode);

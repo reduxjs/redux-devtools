@@ -102,7 +102,7 @@ function getStateFromProps(props: Props) {
   };
 }
 
-export default class JSONTree extends React.Component<Props, State> {
+export class JSONTree extends React.Component<Props, State> {
   static propTypes = {
     data: PropTypes.any,
     hideRoot: PropTypes.bool,

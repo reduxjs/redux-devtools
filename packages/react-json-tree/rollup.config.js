@@ -6,11 +6,14 @@ import { terser } from 'rollup-plugin-terser';
 
 const config = [
   {
-    input: 'src/index.ts',
+    input: 'src/index.tsx',
     output: {
-      name: 'map2tree',
-      file: 'dist/map2tree.umd.js',
+      name: 'ReactJsonTree',
+      file: 'dist/react-json-tree.umd.js',
       format: 'umd',
+      globals: {
+        react: 'React',
+      },
     },
     plugins: [
       typescript(),
@@ -18,17 +21,21 @@ const config = [
       commonjs(),
       babel({
         babelHelpers: 'runtime',
-        extensions: ['.ts'],
+        extensions: ['.ts', '.tsx'],
         plugins: ['@babel/plugin-transform-runtime'],
       }),
     ],
+    external: ['react'],
   },
   {
-    input: 'src/index.ts',
+    input: 'src/index.tsx',
     output: {
-      name: 'map2tree',
-      file: 'dist/map2tree.umd.min.js',
+      name: 'ReactJsonTree',
+      file: 'dist/react-json-tree.umd.min.js',
       format: 'umd',
+      globals: {
+        react: 'React',
+      },
     },
     plugins: [
       typescript(),
@@ -36,27 +43,33 @@ const config = [
       commonjs(),
       babel({
         babelHelpers: 'runtime',
-        extensions: ['.ts'],
+        extensions: ['.ts', '.tsx'],
         plugins: ['@babel/plugin-transform-runtime'],
       }),
       terser(),
     ],
+    external: ['react'],
   },
   {
-    input: 'src/index.ts',
+    input: 'src/index.tsx',
     output: [
-      { file: 'dist/map2tree.cjs.js', format: 'cjs' },
-      { file: 'dist/map2tree.esm.js', format: 'esm' },
+      { file: 'dist/react-json-tree.cjs.js', format: 'cjs' },
+      { file: 'dist/react-json-tree.esm.js', format: 'esm' },
     ],
     plugins: [
       typescript(),
       babel({
         babelHelpers: 'runtime',
-        extensions: ['.ts'],
+        extensions: ['.ts', '.tsx'],
         plugins: ['@babel/plugin-transform-runtime'],
       }),
     ],
-    external: [/@babel\/runtime/, /lodash/],
+    external: [
+      /@babel\/runtime/,
+      'react',
+      'prop-types',
+      'react-base16-styling',
+    ],
   },
 ];
 

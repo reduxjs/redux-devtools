@@ -17,7 +17,6 @@ const config = [
       resolve(),
       commonjs(),
       babel({
-        exclude: 'node_modules/**',
         babelHelpers: 'runtime',
         extensions: ['.ts'],
         plugins: ['@babel/plugin-transform-runtime'],
@@ -36,7 +35,6 @@ const config = [
       resolve(),
       commonjs(),
       babel({
-        exclude: 'node_modules/**',
         babelHelpers: 'runtime',
         extensions: ['.ts'],
         plugins: ['@babel/plugin-transform-runtime'],
@@ -53,7 +51,6 @@ const config = [
     plugins: [
       typescript(),
       babel({
-        exclude: 'node_modules/**',
         babelHelpers: 'runtime',
         extensions: ['.ts'],
         plugins: ['@babel/plugin-transform-runtime'],

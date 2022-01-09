@@ -13,7 +13,6 @@
   "license": "MIT",
   "author": "romseguy",
   "files": [
-    "lib",
     "dist",
     "src"
   ],
@@ -27,7 +26,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "clean": "rimraf lib dist",
+    "clean": "rimraf dist",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit",
     "prepack": "yarn run clean && yarn run build",

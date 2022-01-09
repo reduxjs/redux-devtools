@@ -15,7 +15,7 @@
   "license": "MIT",
   "author": "Alexander <alexkuz@gmail.com> (http://kuzya.org/)",
   "files": [
-    "lib",
+    "dist",
     "src"
   ],
   "main": "dist/react-dock.cjs.js",
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "clean": "rimraf lib",
+    "clean": "rimraf dist",
     "test": "jest",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",

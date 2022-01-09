@@ -17,7 +17,6 @@
   "author": "romseguy",
   "files": [
     "dist",
-    "lib",
     "src"
   ],
   "main": "dist/d3-state-visualizer.cjs.js",
@@ -30,7 +29,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "clean": "rimraf lib dist",
+    "clean": "rimraf dist",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit",
     "prepack": "yarn run clean && yarn run build",
