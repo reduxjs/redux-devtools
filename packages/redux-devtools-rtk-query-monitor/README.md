@@ -36,7 +36,7 @@ You can use `RtkQueryMonitor` as the only monitor in your app:
 ```ts
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import RtkQueryrMonitor from '@redux-devtools/rtk-query-monitor';
+import { RtkQueryrMonitor } from '@redux-devtools/rtk-query-monitor';
 
 export default createDevTools(<RtkQueryrMonitor />);
 ```
