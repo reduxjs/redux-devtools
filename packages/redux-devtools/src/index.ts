@@ -1,5 +1,5 @@
 export {
-  default as instrument,
+  instrument,
   ActionCreators,
   ActionTypes,
   PerformAction,

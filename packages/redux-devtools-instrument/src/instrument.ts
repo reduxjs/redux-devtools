@@ -981,7 +981,7 @@ export interface Options<
 /**
  * Redux instrumentation store enhancer.
  */
-export default function instrument<
+export function instrument<
   OptionsS,
   OptionsA extends Action<unknown>,
   MonitorState = null,

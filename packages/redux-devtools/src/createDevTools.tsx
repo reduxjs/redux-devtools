@@ -1,7 +1,8 @@
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect, Provider, ReactReduxContext } from 'react-redux';
-import instrument, {
+import {
+  instrument,
   EnhancedStore,
   LiftedState,
   LiftedStore,
