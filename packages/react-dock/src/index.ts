@@ -1,2 +1,1 @@
-import Dock from './Dock';
-export default Dock;
+export { default as Dock } from './Dock';
