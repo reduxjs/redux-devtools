@@ -49,7 +49,7 @@ interface Tip<Datum> {
   ) => this;
 }
 
-export default function tooltip<Datum>(
+export function tooltip<Datum>(
   d3: typeof d3Package,
   className = 'tooltip',
   options: Partial<Options<Datum>> = {}

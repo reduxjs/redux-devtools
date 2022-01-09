@@ -47,7 +47,7 @@ const config = [
   {
     input: 'src/index.ts',
     output: [
-      { file: 'dist/map2tree.cjs.js', format: 'cjs', exports: 'auto' },
+      { file: 'dist/map2tree.cjs.js', format: 'cjs' },
       { file: 'dist/map2tree.esm.js', format: 'esm' },
     ],
     plugins: [

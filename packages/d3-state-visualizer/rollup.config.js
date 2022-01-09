@@ -8,8 +8,8 @@ const config = [
   {
     input: 'src/index.ts',
     output: {
-      name: 'd3tooltip',
-      file: 'dist/d3tooltip.umd.js',
+      name: 'd3-state-visualizer',
+      file: 'dist/d3-state-visualizer.umd.js',
       format: 'umd',
     },
     plugins: [
@@ -27,8 +27,8 @@ const config = [
   {
     input: 'src/index.ts',
     output: {
-      name: 'd3tooltip',
-      file: 'dist/d3tooltip.umd.min.js',
+      name: 'd3-state-visualizer',
+      file: 'dist/d3-state-visualizer.umd.min.js',
       format: 'umd',
     },
     plugins: [
@@ -47,8 +47,8 @@ const config = [
   {
     input: 'src/index.ts',
     output: [
-      { file: 'dist/d3tooltip.cjs.js', format: 'cjs' },
-      { file: 'dist/d3tooltip.esm.js', format: 'esm' },
+      { file: 'dist/d3-state-visualizer.cjs.js', format: 'cjs' },
+      { file: 'dist/d3-state-visualizer.esm.js', format: 'esm' },
     ],
     plugins: [
       typescript(),
@@ -59,7 +59,14 @@ const config = [
         plugins: ['@babel/plugin-transform-runtime'],
       }),
     ],
-    external: [/@babel\/runtime/, 'ramda'],
+    external: [
+      /@babel\/runtime/,
+      'd3',
+      'ramda',
+      'map2tree',
+      'deepmerge',
+      'd3tooltip',
+    ],
   },
 ];
 
