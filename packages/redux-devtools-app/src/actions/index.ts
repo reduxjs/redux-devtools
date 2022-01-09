@@ -1,4 +1,4 @@
-import { Scheme, Theme } from '@redux-devtools/ui';
+import { SchemeName, ThemeName } from '@redux-devtools/ui';
 import { AuthStates, States } from 'socketcluster-client/lib/scclientsocket';
 import {
   CHANGE_SECTION,
@@ -64,8 +64,8 @@ export function changeSection(section: string): ChangeSectionAction {
 }
 
 interface ChangeThemeFormData {
-  readonly theme: Theme;
-  readonly scheme: Scheme;
+  readonly theme: ThemeName;
+  readonly scheme: SchemeName;
   readonly colorPreference: 'auto' | 'light' | 'dark';
 }
 interface ChangeThemeData {
@@ -73,8 +73,8 @@ interface ChangeThemeData {
 }
 export interface ChangeThemeAction {
   readonly type: typeof CHANGE_THEME;
-  readonly theme: Theme;
-  readonly scheme: Scheme;
+  readonly theme: ThemeName;
+  readonly scheme: SchemeName;
   readonly colorPreference: 'auto' | 'light' | 'dark';
 }
 export function changeTheme(data: ChangeThemeData): ChangeThemeAction {

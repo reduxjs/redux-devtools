@@ -9,7 +9,7 @@ import App from './containers/App';
 import { StoreState } from './reducers';
 import { StoreAction } from './actions';
 
-class Root extends Component {
+export class ReduxDevToolsApp extends Component {
   store?: Store<StoreState, StoreAction>;
   persistor?: Persistor;
 
@@ -38,5 +38,3 @@ class Root extends Component {
     );
   }
 }
-
-export default Root;
