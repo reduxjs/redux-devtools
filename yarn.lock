@@ -5303,12 +5303,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/utils@workspace:packages/redux-devtools-utils"
   dependencies:
-    "@babel/cli": ^7.16.7
     "@babel/core": ^7.16.7
+    "@babel/eslint-parser": ^7.16.5
+    "@babel/plugin-transform-runtime": ^7.16.7
     "@babel/preset-env": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
+    "@babel/runtime": ^7.16.7
     "@redux-devtools/core": ^3.9.2
     "@redux-devtools/serialize": ^0.3.2
+    "@rollup/plugin-babel": ^5.3.0
     "@types/get-params": ^0.1.0
     "@types/jsan": ^3.1.2
     "@types/lodash": ^4.14.178
@@ -5324,6 +5327,9 @@ __metadata:
     nanoid: ^3.1.30
     redux: ^4.1.2
     rimraf: ^3.0.2
+    rollup: ^2.63.0
+    rollup-plugin-typescript2: ^0.31.1
+    tslib: ^2.3.1
     typescript: ~4.5.4
   peerDependencies:
     "@redux-devtools/core": ^3.7.0
