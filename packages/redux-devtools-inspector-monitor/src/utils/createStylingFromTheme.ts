@@ -1,4 +1,4 @@
-import jss, { Styles, StyleSheet } from 'jss';
+import jss, { StyleSheet } from 'jss';
 import preset from 'jss-preset-default';
 import { createStyling } from 'react-base16-styling';
 import rgba from 'hex-rgba';

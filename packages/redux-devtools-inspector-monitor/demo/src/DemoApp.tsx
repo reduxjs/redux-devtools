@@ -12,7 +12,7 @@ import Row from 'react-bootstrap/Row';
 import * as base16 from 'base16';
 import { push as pushRoute } from 'connected-react-router';
 import { Path } from 'history';
-import * as inspectorThemes from '@redux-devtools/inspector-monitor/lib/themes';
+import { inspectorThemes } from '@redux-devtools/inspector-monitor';
 import getOptions, { Options } from './getOptions';
 import {
   AddFunctionAction,
