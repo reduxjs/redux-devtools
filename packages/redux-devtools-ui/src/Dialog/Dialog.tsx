@@ -1,4 +1,4 @@
-import React, { PureComponent, Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Base16Theme } from 'base16';
 import createStyledComponent from '../utils/createStyledComponent';
@@ -43,7 +43,7 @@ function isForm<P>(rest?: FormProps<P>): rest is FormProps<P> {
   return (rest as FormProps<P>).schema !== undefined;
 }
 
-export default class Dialog<P> extends (PureComponent || Component)<
+export default class Dialog<P> extends PureComponent<
   DialogProps | (Omit<DialogProps, 'onSubmit'> & FormProps<P>)
 > {
   submitButton?: HTMLInputElement | null;

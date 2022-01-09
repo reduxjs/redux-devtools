@@ -17,13 +17,12 @@ With [`redux-devtools`](https://github.com/reduxjs/redux-devtools) and [`redux-d
 ```js
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import InspectorMonitor from '@redux-devtools/inspector-monitor';
-import TestGenerator from '@redux-devtools/inspector-monitor-test-tab';
-import mochaTemplate from '@redux-devtools/inspector-monitor-test-tab/lib/redux/mocha'; // If using default tests.
+import { InspectorMonitor } from '@redux-devtools/inspector-monitor';
+import { TestTab, reduxMochaTemplate } from '@redux-devtools/inspector-monitor-test-tab'; // If using default tests.
 
 const testComponent = (props) => (
-  <TestGenerator
-    expect={mochaTemplate.expect} wrap={mochaTemplate.wrap} useCodemirror
+  <TestTab
+    expect={reduxMochaTemplate.expect} wrap={reduxMochaTemplate.wrap} useCodemirror
     {...props}
   />
 );

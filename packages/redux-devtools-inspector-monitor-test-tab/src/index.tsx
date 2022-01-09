@@ -42,7 +42,7 @@ interface State {
   dialogStatus: 'Add' | 'Edit' | null;
 }
 
-export default class TestTab<S, A extends Action<unknown>> extends Component<
+export class TestTab<S, A extends Action<unknown>> extends Component<
   TabComponentProps<S, A>,
   State
 > {
@@ -200,3 +200,12 @@ export default class TestTab<S, A extends Action<unknown>> extends Component<
     updateMonitorState: PropTypes.func.isRequired,
   };
 }
+
+export { default as reduxAvaTemplate } from './redux/ava';
+export { default as reduxJestTemplate } from './redux/jest';
+export { default as reduxMochaTemplate } from './redux/mocha';
+export { default as reduxTapeTemplate } from './redux/tape';
+export { default as vanillaAvaTemplate } from './vanilla/ava';
+export { default as vanillaJestTemplate } from './vanilla/jest';
+export { default as vanillaMochaTemplate } from './vanilla/mocha';
+export { default as vanillaTapeTemplate } from './vanilla/tape';

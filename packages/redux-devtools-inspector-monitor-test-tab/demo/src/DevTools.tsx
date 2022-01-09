@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createDevTools } from '@redux-devtools/core';
-import InspectorMonitor, {
+import {
+  InspectorMonitor,
   base16Themes,
   Tab,
 } from '@redux-devtools/inspector-monitor';
-import DockMonitor from '@redux-devtools/dock-monitor';
+import { DockMonitor } from '@redux-devtools/dock-monitor';
 import { Location } from 'history';
 import getOptions from './getOptions';
-import TestGenerator from '@redux-devtools/inspector-monitor-test-tab';
+import { TestTab } from '@redux-devtools/inspector-monitor-test-tab';
 import { DemoAppState } from './reducers';
 import { Action } from 'redux';
 
@@ -28,7 +29,7 @@ export const getDevTools = (location: { search: string }) =>
           [
             {
               name: 'Test',
-              component: TestGenerator,
+              component: TestTab,
             },
             ...defaultTabs,
           ] as Tab<unknown, Action<unknown>>[]
