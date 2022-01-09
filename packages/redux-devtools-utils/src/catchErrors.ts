@@ -14,9 +14,7 @@ export interface ErrorAction {
   column?: number;
 }
 
-export default function catchErrors(
-  sendError: (errorAction: ErrorAction) => void
-) {
+export function catchErrors(sendError: (errorAction: ErrorAction) => void) {
   if (typeof window === 'object' && typeof window.onerror === 'object') {
     window.onerror = function (message, url, lineNo, columnNo, error) {
       const errorAction: ErrorAction = {

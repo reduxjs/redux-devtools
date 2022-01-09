@@ -27,7 +27,7 @@ with
 
 ```javascript
 import { createStore } from 'redux';
-import devToolsEnhancer from '@redux-devtools/remote';
+import { devToolsEnhancer } from '@redux-devtools/remote';
 const store = createStore(reducer, devToolsEnhancer());
 // or const store = createStore(reducer, preloadedState, devToolsEnhancer());
 ```
