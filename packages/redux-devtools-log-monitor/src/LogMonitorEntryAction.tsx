@@ -1,5 +1,5 @@
 import React, { Component, CSSProperties, MouseEventHandler } from 'react';
-import JSONTree from 'react-json-tree';
+import { JSONTree } from 'react-json-tree';
 import { Base16Theme } from 'redux-devtools-themes';
 import { Action } from 'redux';
 
