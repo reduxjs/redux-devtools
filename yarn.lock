@@ -4620,12 +4620,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/chart-monitor@workspace:packages/redux-devtools-chart-monitor"
   dependencies:
-    "@babel/cli": ^7.16.7
     "@babel/core": ^7.16.7
+    "@babel/eslint-parser": ^7.16.5
+    "@babel/plugin-transform-runtime": ^7.16.7
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
+    "@babel/runtime": ^7.16.7
     "@redux-devtools/core": ^3.9.2
+    "@rollup/plugin-babel": ^5.3.0
     "@types/prop-types": ^15.7.4
     "@types/react": ^17.0.38
     "@types/redux-devtools-themes": ^1.0.0
@@ -4642,6 +4645,9 @@ __metadata:
     redux: ^4.1.2
     redux-devtools-themes: ^1.0.0
     rimraf: ^3.0.2
+    rollup: ^2.63.0
+    rollup-plugin-typescript2: ^0.31.1
+    tslib: ^2.3.1
     typescript: ~4.5.4
   peerDependencies:
     "@redux-devtools/core": ^3.7.0

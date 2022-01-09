@@ -8,13 +8,10 @@ import {
 } from '@redux-devtools/core';
 import deepmerge from 'deepmerge';
 import { Action, Dispatch } from 'redux';
+import { NodeWithId, Primitive } from 'd3-state-visualizer';
 
 import reducer, { ChartMonitorState } from './reducers';
 import Chart, { Props } from './Chart';
-import {
-  NodeWithId,
-  Primitive,
-} from 'd3-state-visualizer/lib/charts/tree/tree';
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep, toggleAction } = ActionCreators;
 

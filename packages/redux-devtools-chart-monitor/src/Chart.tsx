@@ -1,14 +1,10 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { tree } from 'd3-state-visualizer';
+import { tree, NodeWithId, Primitive } from 'd3-state-visualizer';
 import { Action, Dispatch } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import * as themes from 'redux-devtools-themes';
 import { ChartMonitorState } from './reducers';
-import {
-  NodeWithId,
-  Primitive,
-} from 'd3-state-visualizer/lib/charts/tree/tree';
 
 const wrapperStyle = {
   width: '100%',
