@@ -21,9 +21,9 @@ You can use `Inspector` as the only monitor in your app:
 ```js
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import Inspector from '@redux-devtools/inspector-monitor';
+import { InspectorMonitor } from '@redux-devtools/inspector-monitor';
 
-export default createDevTools(<Inspector />);
+export default createDevTools(<InspectorMonitor />);
 ```
 
 Then you can render `<DevTools>` to any place inside app or even into a separate popup window.

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import JSONTree from 'react-json-tree';
+import { JSONTree } from 'react-json-tree';
 import { stringify } from 'javascript-stringify';
 import { Delta } from 'jsondiffpatch';
 import { StylingFunction } from 'react-base16-styling';
