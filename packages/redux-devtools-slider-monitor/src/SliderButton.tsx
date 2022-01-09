@@ -1,7 +1,7 @@
 import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Base16Theme } from 'redux-devtools-themes';
-import Button from '@redux-devtools/ui/lib/Button';
+import { Button } from '@redux-devtools/ui';
 
 interface Props {
   theme: Base16Theme;

@@ -8,10 +8,13 @@ import {
   LiftedAction,
   LiftedState,
 } from '@redux-devtools/core';
-import { Toolbar, Divider } from '@redux-devtools/ui/lib/Toolbar';
-import Slider from '@redux-devtools/ui/lib/Slider';
-import Button from '@redux-devtools/ui/lib/Button';
-import SegmentedControl from '@redux-devtools/ui/lib/SegmentedControl';
+import {
+  Button,
+  Divider,
+  SegmentedControl,
+  Slider,
+  Toolbar,
+} from '@redux-devtools/ui';
 
 import reducer from './reducers';
 import SliderButton from './SliderButton';
