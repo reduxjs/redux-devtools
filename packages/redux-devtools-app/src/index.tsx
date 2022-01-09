@@ -9,7 +9,7 @@ import App from './containers/App';
 import { StoreState } from './reducers';
 import { StoreAction } from './actions';
 
-export class ReduxDevToolsApp extends Component {
+export class Root extends Component {
   store?: Store<StoreState, StoreAction>;
   persistor?: Persistor;
 

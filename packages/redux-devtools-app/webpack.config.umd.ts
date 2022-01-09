@@ -9,7 +9,7 @@ export default (env: { production?: boolean } = {}): webpack.Configuration => ({
   },
   output: {
     library: 'ReduxDevToolsApp',
-    libraryExport: 'ReduxDevToolsApp',
+    libraryExport: 'Root',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'umd'),
     filename: env.production
