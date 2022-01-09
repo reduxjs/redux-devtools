@@ -1,6 +1,6 @@
 import React, { cloneElement, Children, Component } from 'react';
 import PropTypes from 'prop-types';
-import Dock from 'react-dock';
+import { Dock } from 'react-dock';
 import { Action, Dispatch } from 'redux';
 import { LiftedState, Monitor } from '@redux-devtools/core';
 import { POSITIONS } from './constants';
