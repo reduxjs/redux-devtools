@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { render, screen, within } from '@testing-library/react';
 import App from '../src/containers/App';
-import api from '../src/middlewares/api';
-import exportState from '../src/middlewares/exportState';
-import rootReducer from '../src/reducers';
+import { api } from '../src/middlewares/api';
+import { exportStateMiddleware } from '../src/middlewares/exportState';
+import { rootReducer } from '../src/reducers';
 import { DATA_TYPE_KEY } from '../src/constants/dataTypes';
-import stringifyJSON from '../src/utils/stringifyJSON';
+import { stringifyJSON } from '../src/utils/stringifyJSON';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -23,7 +23,10 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-const store = createStore(rootReducer, applyMiddleware(exportState, api));
+const store = createStore(
+  rootReducer,
+  applyMiddleware(exportStateMiddleware, api)
+);
 
 describe('App container', () => {
   it("should render inspector monitor's wrapper", () => {
