@@ -1,7 +1,8 @@
 import { createStore, compose, Reducer, Store, Action } from 'redux';
-import instrument, {
+import {
   ActionCreators,
   EnhancedStore,
+  instrument,
   LiftedStore,
   LiftedState,
 } from '../src/instrument';

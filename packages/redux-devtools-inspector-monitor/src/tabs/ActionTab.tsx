@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import PropTypes from 'prop-types';
-import JSONTree from 'react-json-tree';
+import { JSONTree } from 'react-json-tree';
 import { Action } from 'redux';
 import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';

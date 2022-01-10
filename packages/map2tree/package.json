@@ -16,23 +16,20 @@
   "license": "MIT",
   "author": "romseguy",
   "files": [
-    "lib",
     "dist",
     "src"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/map2tree.cjs.js",
+  "module": "dist/map2tree.esm.js",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/map2tree.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "yarn run build:types && yarn run build:js && yarn run build:umd && yarn run build:umd:min",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
-    "build:umd": "webpack --progress --config webpack.config.umd.ts",
-    "build:umd:min": "webpack --env production --progress --config webpack.config.umd.ts",
-    "clean": "rimraf lib dist",
+    "build": "rollup -c",
+    "clean": "rimraf dist",
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit",
@@ -40,29 +37,33 @@
     "prepublish": "yarn run type-check && yarn run lint && yarn run test"
   },
   "dependencies": {
+    "@babel/runtime": "^7.16.7",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.7",
     "@babel/core": "^7.16.7",
+    "@babel/eslint-parser": "^7.16.5",
+    "@babel/plugin-transform-runtime": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
-    "@types/node": "^16.11.17",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
-    "babel-loader": "^8.2.3",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^25.3.4",
     "immutable": "^4.0.0",
     "jest": "^27.4.5",
     "rimraf": "^3.0.2",
+    "rollup": "^2.63.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.1",
     "ts-jest": "^27.1.2",
-    "ts-node": "^10.4.0",
-    "typescript": "~4.5.4",
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1"
+    "tslib": "^2.3.1",
+    "typescript": "~4.5.4"
   }
 }

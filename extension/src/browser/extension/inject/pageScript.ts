@@ -1,7 +1,8 @@
 import {
-  getActionsArray,
-  evalAction,
   ActionCreatorObject,
+  evalAction,
+  getActionsArray,
+  getLocalFilter,
 } from '@redux-devtools/utils';
 import throttle from 'lodash/throttle';
 import {
@@ -14,7 +15,18 @@ import {
   StoreEnhancerStoreCreator,
 } from 'redux';
 import Immutable from 'immutable';
-import { EnhancedStore, PerformAction } from '@redux-devtools/instrument';
+import {
+  EnhancedStore,
+  LiftedAction,
+  LiftedState,
+  PerformAction,
+} from '@redux-devtools/instrument';
+import {
+  CustomAction,
+  DispatchAction,
+  LibConfig,
+  Features,
+} from '@redux-devtools/app';
 import configureStore, { getUrlParam } from '../../../app/stores/enhancerStore';
 import { isAllowed, Options } from '../options/syncOptions';
 import Monitor from '../../../app/service/Monitor';
@@ -40,15 +52,7 @@ import {
   StructuralPerformAction,
   ConnectResponse,
 } from '../../../app/api';
-import { LiftedAction, LiftedState } from '@redux-devtools/instrument';
-import {
-  CustomAction,
-  DispatchAction,
-  LibConfig,
-} from '@redux-devtools/app/lib/actions';
 import { ContentScriptToPageScriptMessage } from './contentScript';
-import { Features } from '@redux-devtools/app/lib/reducers/instances';
-import { getLocalFilter } from '@redux-devtools/utils/lib/filters';
 
 type EnhancedStoreWithInitialDispatch<
   S,

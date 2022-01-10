@@ -10,7 +10,7 @@ interface State {
   committedState?: unknown;
 }
 
-export default function importState(
+export function importState(
   state: string,
   {
     serialize,

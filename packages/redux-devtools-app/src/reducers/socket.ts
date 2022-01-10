@@ -20,10 +20,7 @@ const initialState: SocketState = {
   error: undefined,
 };
 
-export default function socket(
-  state = initialState,
-  action: StoreAction
-): SocketState {
+export function socket(state = initialState, action: StoreAction): SocketState {
   switch (action.type) {
     case actions.CONNECT_REQUEST: {
       return {

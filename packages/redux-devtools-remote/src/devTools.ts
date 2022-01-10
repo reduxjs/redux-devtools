@@ -19,20 +19,17 @@ import {
 } from '@redux-devtools/instrument';
 import {
   ActionCreatorObject,
-  evalAction,
-  getActionsArray,
-} from '@redux-devtools/utils';
-import catchErrors, {
   ErrorAction,
-} from '@redux-devtools/utils/lib/catchErrors';
-import {
+  evalAction,
+  catchErrors,
+  getActionsArray,
   getLocalFilter,
   isFiltered,
   filterStagedActions,
   filterState,
   LocalFilter,
   State,
-} from '@redux-devtools/utils/lib/filters';
+} from '@redux-devtools/utils';
 
 function async(fn: () => unknown) {
   setTimeout(fn, 0);

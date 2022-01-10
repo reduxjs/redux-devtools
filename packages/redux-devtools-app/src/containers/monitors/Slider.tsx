@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled, { withTheme } from 'styled-components';
-import SliderMonitor from '@redux-devtools/slider-monitor';
+import { SliderMonitor } from '@redux-devtools/slider-monitor';
 import { LiftedAction } from '@redux-devtools/core';
 import { Action } from 'redux';
 import { ThemeFromProvider } from '@redux-devtools/ui';

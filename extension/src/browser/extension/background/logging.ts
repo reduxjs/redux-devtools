@@ -1,4 +1,4 @@
-import { LIFTED_ACTION } from '@redux-devtools/app/lib/constants/actionTypes';
+import { LIFTED_ACTION } from '@redux-devtools/app';
 
 export function getReport(
   reportId: string,

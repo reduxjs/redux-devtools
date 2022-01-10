@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createDevTools } from '@redux-devtools/core';
-import DockMonitor from '@redux-devtools/dock-monitor';
+import { DockMonitor } from '@redux-devtools/dock-monitor';
 import { Location } from 'history';
-import DevtoolsInspector from '@redux-devtools/inspector-monitor/lib/DevtoolsInspector';
+import {
+  InspectorMonitor,
+  base16Themes,
+} from '@redux-devtools/inspector-monitor';
 import getOptions from './getOptions';
-import { base16Themes } from '@redux-devtools/inspector-monitor/lib/utils/createStylingFromTheme';
 import { DemoAppState } from './reducers';
 
 const CustomComponent = () => (
@@ -31,7 +33,7 @@ export const getDevTools = (location: { search: string }) =>
       changePositionKey="ctrl-q"
       changeMonitorKey="ctrl-m"
     >
-      <DevtoolsInspector
+      <InspectorMonitor
         theme={getOptions(location).theme as keyof typeof base16Themes}
         invertTheme={!getOptions(location).dark}
         supportImmutable={getOptions(location).supportImmutable}

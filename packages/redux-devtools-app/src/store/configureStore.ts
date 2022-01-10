@@ -1,9 +1,9 @@
 import { createStore, compose, applyMiddleware, Reducer, Store } from 'redux';
 import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
-import api from '../middlewares/api';
-import exportState from '../middlewares/exportState';
-import rootReducer, { StoreState } from '../reducers';
+import { api } from '../middlewares/api';
+import { exportStateMiddleware } from '../middlewares/exportState';
+import { rootReducer, StoreState } from '../reducers';
 import { StoreAction } from '../actions';
 
 const persistConfig = {
@@ -47,7 +47,7 @@ export default function configureStore(
 
   const store = createStore(
     persistedReducer,
-    composeEnhancers(applyMiddleware(exportState, api))
+    composeEnhancers(applyMiddleware(exportStateMiddleware, api))
   );
   const persistor = persistStore(store, null, () => {
     callback(store);

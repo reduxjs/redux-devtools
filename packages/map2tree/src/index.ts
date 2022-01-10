@@ -42,7 +42,7 @@ function getNode(tree: Node, key: string): Node | null {
   return node;
 }
 
-export default function map2tree(
+export function map2tree(
   // eslint-disable-next-line @typescript-eslint/ban-types
   root: unknown,
   options: { key?: string; pushMethod?: 'push' | 'unshift' } = {},

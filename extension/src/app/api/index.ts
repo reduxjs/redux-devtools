@@ -1,15 +1,14 @@
 import jsan, { Options } from 'jsan';
 import throttle from 'lodash/throttle';
-import serializeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
-import { getActionsArray } from '@redux-devtools/utils';
-import { getLocalFilter } from '@redux-devtools/utils/lib/filters';
+import { immutableSerialize } from '@redux-devtools/serialize';
+import { getActionsArray, getLocalFilter } from '@redux-devtools/utils';
 import { isFiltered, PartialLiftedState } from './filters';
 import importState from './importState';
 import generateId from './generateInstanceId';
 import { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
-import { LibConfig } from '@redux-devtools/app/lib/actions';
+import { LibConfig } from '@redux-devtools/app';
 import {
   ContentScriptToPageScriptMessage,
   ListenerMessage,
@@ -77,7 +76,7 @@ export function getSerializeParameter(config: Config) {
   if (serialize) {
     if (serialize === true) return { options: true };
     if (serialize.immutable) {
-      const immutableSerializer = serializeImmutable(
+      const immutableSerializer = immutableSerialize(
         serialize.immutable,
         serialize.refs,
         serialize.replacer,

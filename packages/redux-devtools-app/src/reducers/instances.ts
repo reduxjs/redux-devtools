@@ -66,7 +66,7 @@ export interface InstancesState {
   persisted?: boolean;
 }
 
-export const initialState: InstancesState = {
+export const instancesInitialState: InstancesState = {
   selected: null,
   current: 'default',
   sync: false,
@@ -303,8 +303,8 @@ function init(
   };
 }
 
-export default function instances(
-  state = initialState,
+export function instances(
+  state = instancesInitialState,
   action: StoreAction
 ): InstancesState {
   switch (action.type) {
@@ -375,7 +375,7 @@ export default function instances(
       return state;
     }
     case DISCONNECTED:
-      return initialState;
+      return instancesInitialState;
     default:
       return state;
   }

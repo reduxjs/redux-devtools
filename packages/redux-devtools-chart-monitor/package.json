@@ -16,26 +16,26 @@
   "license": "MIT",
   "author": "romseguy",
   "files": [
-    "lib",
+    "dist",
     "src"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/redux-devtools-chart-monitor.cjs.js",
+  "module": "dist/redux-devtools-chart-monitor.esm.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "yarn run build:types && yarn run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "clean": "rimraf lib",
+    "build": "rollup -c",
+    "clean": "rimraf dist",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
     "prepack": "yarn run clean && yarn run build",
     "prepublish": "yarn run type-check && yarn run lint"
   },
   "dependencies": {
+    "@babel/runtime": "^7.16.7",
     "@types/prop-types": "^15.7.4",
     "@types/redux-devtools-themes": "^1.0.0",
     "d3-state-visualizer": "^1.4.2",
@@ -44,12 +44,14 @@
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.7",
     "@babel/core": "^7.16.7",
+    "@babel/eslint-parser": "^7.16.5",
+    "@babel/plugin-transform-runtime": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@redux-devtools/core": "^3.9.2",
+    "@rollup/plugin-babel": "^5.3.0",
     "@types/react": "^17.0.38",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
@@ -60,6 +62,9 @@
     "react": "^17.0.2",
     "redux": "^4.1.2",
     "rimraf": "^3.0.2",
+    "rollup": "^2.63.0",
+    "rollup-plugin-typescript2": "^0.31.1",
+    "tslib": "^2.3.1",
     "typescript": "~4.5.4"
   },
   "peerDependencies": {

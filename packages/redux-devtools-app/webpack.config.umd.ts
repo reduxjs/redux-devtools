@@ -8,8 +8,8 @@ export default (env: { production?: boolean } = {}): webpack.Configuration => ({
     app: ['./src/index'],
   },
   output: {
-    library: 'ReduxDevTools',
-    libraryExport: 'default',
+    library: 'ReduxDevToolsApp',
+    libraryExport: 'Root',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'umd'),
     filename: env.production

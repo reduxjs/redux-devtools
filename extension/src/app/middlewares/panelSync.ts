@@ -1,13 +1,13 @@
 import {
+  getActiveInstance,
   LIFTED_ACTION,
-  UPDATE_STATE,
   SELECT_INSTANCE,
+  StoreAction,
+  StoreState,
   TOGGLE_PERSIST,
-} from '@redux-devtools/app/lib/constants/actionTypes';
-import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
+  UPDATE_STATE,
+} from '@redux-devtools/app';
 import { Dispatch, MiddlewareAPI } from 'redux';
-import { StoreState } from '@redux-devtools/app/lib/reducers';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
 
 function panelDispatcher(bgConnection: chrome.runtime.Port) {
   let autoselected = false;

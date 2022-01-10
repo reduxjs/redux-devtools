@@ -1,12 +1,8 @@
 module.exports = {
-  extends: '../../eslintrc.ts.base.json',
-  parserOptions: {
-    tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json'],
-  },
+  extends: '../../eslintrc.js.base.json',
   overrides: [
     {
-      files: ['test/**/*.ts'],
+      files: ['*.ts'],
       extends: '../../eslintrc.ts.jest.base.json',
       parserOptions: {
         tsconfigRootDir: __dirname,
@@ -14,11 +10,11 @@ module.exports = {
       },
     },
     {
-      files: ['webpack.config.umd.ts'],
-      extends: '../../eslintrc.ts.base.json',
+      files: ['test/**/*.ts'],
+      extends: '../../eslintrc.ts.jest.base.json',
       parserOptions: {
         tsconfigRootDir: __dirname,
-        project: ['./tsconfig.webpack.json'],
+        project: ['./test/tsconfig.json'],
       },
     },
   ],

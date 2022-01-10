@@ -3,7 +3,7 @@ import { StoreAction } from '../actions';
 
 export type SectionState = string;
 
-export default function section(state = 'Actions', action: StoreAction) {
+export function section(state = 'Actions', action: StoreAction) {
   if (action.type === CHANGE_SECTION) {
     return action.section;
   }

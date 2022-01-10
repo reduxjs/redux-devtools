@@ -1,7 +1,7 @@
 import mapValues from 'lodash/mapValues';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
-import { LocalFilter } from '@redux-devtools/utils/lib/filters';
+import { LocalFilter } from '@redux-devtools/utils';
 
 export type FilterStateValue =
   | 'DO_NOT_FILTER'

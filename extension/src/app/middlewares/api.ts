@@ -1,12 +1,16 @@
-import stringifyJSON from '@redux-devtools/app/lib/utils/stringifyJSON';
 import {
-  UPDATE_STATE,
-  REMOVE_INSTANCE,
+  CustomAction,
+  DispatchAction as AppDispatchAction,
+  LibConfig,
   LIFTED_ACTION,
-  TOGGLE_PERSIST,
+  nonReduxDispatch,
+  REMOVE_INSTANCE,
   SET_PERSIST,
-} from '@redux-devtools/app/lib/constants/actionTypes';
-import { nonReduxDispatch } from '@redux-devtools/app/lib/utils/monitorActions';
+  SetPersistAction,
+  stringifyJSON,
+  TOGGLE_PERSIST,
+  UPDATE_STATE,
+} from '@redux-devtools/app';
 import syncOptions, {
   Options,
   OptionsMessage,
@@ -16,12 +20,6 @@ import openDevToolsWindow, {
   DevToolsPosition,
 } from '../../browser/extension/background/openWindow';
 import { getReport } from '../../browser/extension/background/logging';
-import {
-  CustomAction,
-  DispatchAction as AppDispatchAction,
-  LibConfig,
-  SetPersistAction,
-} from '@redux-devtools/app/lib/actions';
 import { Action, Dispatch, MiddlewareAPI } from 'redux';
 import {
   ContentScriptToBackgroundMessage,

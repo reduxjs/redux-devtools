@@ -1,6 +1,6 @@
 import d3, { ZoomEvent, Primitive } from 'd3';
 import { isEmpty } from 'ramda';
-import map2tree from 'map2tree';
+import { map2tree } from 'map2tree';
 import deepmerge from 'deepmerge';
 import {
   getTooltipString,
@@ -8,7 +8,7 @@ import {
   visit,
   getNodeGroupByDepthCount,
 } from './utils';
-import d3tooltip from 'd3tooltip';
+import { tooltip } from 'd3tooltip';
 
 export interface InputOptions {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -401,7 +401,7 @@ export default function (
 
       if (!tooltipOptions.disabled) {
         nodeEnter.call(
-          d3tooltip<NodeWithId>(d3, 'tooltip', { ...tooltipOptions, root })
+          tooltip<NodeWithId>(d3, 'tooltip', { ...tooltipOptions, root })
             .text((d, i) => getTooltipString(d, i, tooltipOptions))
             .style(tooltipOptions.style)
         );

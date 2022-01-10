@@ -15,7 +15,7 @@ const initialState: ReportsState = {
   data: [],
 };
 
-export default function reports(
+export function reports(
   state = initialState,
   action: StoreAction
 ): ReportsState {

@@ -1,4 +1,4 @@
-import stringifyJSON from '../utils/stringifyJSON';
+import { stringifyJSON } from '../utils/stringifyJSON';
 import { UPDATE_STATE, LIFTED_ACTION, EXPORT } from '../constants/actionTypes';
 import { getActiveInstance } from '../reducers/instances';
 import { Dispatch, MiddlewareAPI } from 'redux';
@@ -22,7 +22,7 @@ function download(state: string) {
   }, 0);
 }
 
-const exportState =
+export const exportStateMiddleware =
   (store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) =>
   (next: Dispatch<StoreAction>) =>
   (action: StoreAction) => {
@@ -63,5 +63,3 @@ const exportState =
     }
     return result;
   };
-
-export default exportState;

@@ -12,17 +12,20 @@
   },
   "license": "MIT",
   "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "dist/redux-devtools-serialize.cjs.js",
+  "module": "dist/redux-devtools-serialize.esm.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "yarn run build:types && yarn run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
-    "clean": "rimraf lib",
+    "build": "rollup -c",
+    "clean": "rimraf dist",
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit",
@@ -30,13 +33,16 @@
     "prepublish": "yarn run type-check && yarn run lint && yarn run test"
   },
   "dependencies": {
+    "@babel/runtime": "^7.16.7",
     "jsan": "^3.1.14"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.7",
     "@babel/core": "^7.16.7",
+    "@babel/eslint-parser": "^7.16.5",
+    "@babel/plugin-transform-runtime": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@rollup/plugin-babel": "^5.3.0",
     "@types/jest": "^27.4.0",
     "@types/jsan": "^3.1.2",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
@@ -47,7 +53,10 @@
     "immutable": "^4.0.0",
     "jest": "^27.4.5",
     "rimraf": "^3.0.2",
+    "rollup": "^2.63.0",
+    "rollup-plugin-typescript2": "^0.31.1",
     "ts-jest": "^27.1.2",
+    "tslib": "^2.3.1",
     "typescript": "~4.5.4"
   },
   "peerDependencies": {

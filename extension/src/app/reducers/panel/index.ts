@@ -1,24 +1,21 @@
 import { combineReducers, Reducer } from 'redux';
-import instances, {
-  InstancesState,
-} from '@redux-devtools/app/lib/reducers/instances';
-import monitor, {
-  MonitorState,
-} from '@redux-devtools/app/lib/reducers/monitor';
-import notification, {
-  NotificationState,
-} from '@redux-devtools/app/lib/reducers/notification';
-import reports, {
-  ReportsState,
-} from '@redux-devtools/app/lib/reducers/reports';
-import section, {
-  SectionState,
-} from '@redux-devtools/app/lib/reducers/section';
-import theme, { ThemeState } from '@redux-devtools/app/lib/reducers/theme';
-import connection, {
+import {
+  connection,
   ConnectionState,
-} from '@redux-devtools/app/lib/reducers/connection';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
+  instances,
+  InstancesState,
+  monitor,
+  MonitorState,
+  notification,
+  NotificationState,
+  reports,
+  ReportsState,
+  section,
+  SectionState,
+  StoreAction,
+  theme,
+  ThemeState,
+} from '@redux-devtools/app';
 
 export interface StoreStateWithoutSocket {
   readonly section: SectionState;

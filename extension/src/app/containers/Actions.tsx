@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Button, Container, Divider, Toolbar } from '@redux-devtools/ui';
-import SliderMonitor from '@redux-devtools/app/lib/containers/monitors/Slider';
-import { liftedDispatch, getReport } from '@redux-devtools/app/lib/actions';
-import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
-import DevTools from '@redux-devtools/app/lib/containers/DevTools';
-import Dispatcher from '@redux-devtools/app/lib/containers/monitors/Dispatcher';
-import TopButtons from '@redux-devtools/app/lib/components/TopButtons';
-import ExportButton from '@redux-devtools/app/lib/components/buttons/ExportButton';
-import ImportButton from '@redux-devtools/app/lib/components/buttons/ImportButton';
-import PrintButton from '@redux-devtools/app/lib/components/buttons/PrintButton';
-import MonitorSelector from '@redux-devtools/app/lib/components/MonitorSelector';
-import SliderButton from '@redux-devtools/app/lib/components/buttons/SliderButton';
-import DispatcherButton from '@redux-devtools/app/lib/components/buttons/DispatcherButton';
-import { StoreState } from '@redux-devtools/app/lib/reducers';
-import { GoRadioTower } from 'react-icons/go';
 import {
-  MdBorderBottom,
-  MdBorderLeft,
-  MdBorderRight,
-  MdSave,
-} from 'react-icons/md';
+  DevTools,
+  Dispatcher,
+  DispatcherButton,
+  ExportButton,
+  getActiveInstance,
+  getReport,
+  ImportButton,
+  liftedDispatch,
+  MonitorSelector,
+  PrintButton,
+  SliderButton,
+  SliderMonitor,
+  StoreState,
+  TopButtons,
+} from '@redux-devtools/app';
+import { GoRadioTower } from 'react-icons/go';
+import { MdBorderBottom, MdBorderLeft, MdBorderRight } from 'react-icons/md';
 import { Position } from '../api/openWindow';
 import { SingleMessage } from '../middlewares/api';
 

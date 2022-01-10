@@ -1,6 +1,6 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ComponentProps, ReactNode } from 'react';
-import JSONTree from 'react-json-tree';
+import { JSONTree } from 'react-json-tree';
 import { Base16Theme, StylingFunction } from 'react-base16-styling';
 import { DATA_TYPE_KEY } from '../monitor-config';
 import {

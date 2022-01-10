@@ -1,14 +1,14 @@
 import {
-  UPDATE_STATE,
+  getActiveInstance,
   LIFTED_ACTION,
+  StoreAction,
+  StoreState,
   TOGGLE_PERSIST,
-} from '@redux-devtools/app/lib/constants/actionTypes';
-import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
+  UPDATE_STATE,
+} from '@redux-devtools/app';
 import { Dispatch, MiddlewareAPI, Store } from 'redux';
 import { BackgroundState } from '../reducers/background';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
 import { WindowStoreAction } from '../stores/windowStore';
-import { StoreState } from '@redux-devtools/app/lib/reducers';
 import { BackgroundAction } from '../stores/backgroundStore';
 
 const syncStores =

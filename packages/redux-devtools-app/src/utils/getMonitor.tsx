@@ -1,8 +1,8 @@
 import React from 'react';
-import LogMonitor from '@redux-devtools/log-monitor';
+import { LogMonitor } from '@redux-devtools/log-monitor';
 import ChartMonitorWrapper from '../containers/monitors/ChartMonitorWrapper';
 import InspectorWrapper from '../containers/monitors/InspectorWrapper';
-import RtkQueryMonitor from '@redux-devtools/rtk-query-monitor';
+import { RtkQueryMonitor } from '@redux-devtools/rtk-query-monitor';
 
 export const monitors = [
   { value: 'InspectorMonitor', name: 'Inspector' },

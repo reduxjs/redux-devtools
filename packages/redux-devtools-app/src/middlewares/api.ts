@@ -244,9 +244,7 @@ function getReport(reportId: unknown) {
   );
 }
 
-export default function api(
-  inStore: MiddlewareAPI<Dispatch<StoreAction>, StoreState>
-) {
+export function api(inStore: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) {
   store = inStore;
   return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
     const result = next(action);

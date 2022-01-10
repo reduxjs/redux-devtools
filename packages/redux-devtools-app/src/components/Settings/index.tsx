@@ -8,7 +8,7 @@ interface State {
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-class Settings extends Component<{}, State> {
+export default class Settings extends Component<{}, State> {
   tabs = [
     { name: 'Connection', component: Connection },
     { name: 'Themes', component: Themes },
@@ -30,5 +30,3 @@ class Settings extends Component<{}, State> {
     );
   }
 }
-
-export default Settings;

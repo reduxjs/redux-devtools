@@ -52,9 +52,6 @@ const baseConfig = (params) => ({
         })
       : []
   ),
-  optimization: {
-    minimize: false,
-  },
   performance: {
     hints: false,
   },

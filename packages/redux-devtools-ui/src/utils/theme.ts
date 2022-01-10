@@ -10,8 +10,8 @@ export const schemes = { ...baseSchemes, ...additionalSchemes };
 export const listSchemes = () => Object.keys(schemes).slice(1).sort(); // remove `__esModule`
 export const listThemes = () => Object.keys(themes);
 
-export type Theme = keyof typeof themes;
-export type Scheme = keyof typeof schemes;
+export type ThemeName = keyof typeof themes;
+export type SchemeName = keyof typeof schemes;
 
 export interface ThemeData {
   theme: keyof typeof themes;

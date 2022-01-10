@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import path from 'path';
 import StackFrame from './stack-frame';
 import { getSourceMap } from './getSourceMap';
 import { getLinesAround } from './getLinesAround';
-import path from 'path-browserify';
 
 function count(search: string, string: string): number {
   // Count starts at -1 becuse a do-while loop always runs at least once

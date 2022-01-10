@@ -24,10 +24,10 @@ interface State {
   showDocsLink?: boolean;
 }
 
-export default class StackTraceTab<
-  S,
-  A extends Action<unknown>
-> extends Component<Props<S, A>, State> {
+export class TraceTab<S, A extends Action<unknown>> extends Component<
+  Props<S, A>,
+  State
+> {
   static defaultProps = {
     openFile,
   };

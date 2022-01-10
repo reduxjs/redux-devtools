@@ -1,2 +1,1 @@
-import DockMonitor from './DockMonitor';
-export default DockMonitor;
+export { default as DockMonitor } from './DockMonitor';

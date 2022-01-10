@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Tab, Tabs } from '@redux-devtools/ui';
-import { TabComponentProps } from '@redux-devtools/inspector-monitor';
+import {
+  TabComponentProps,
+  StateTab,
+  ActionTab,
+  DiffTab,
+} from '@redux-devtools/inspector-monitor';
 import { Action } from 'redux';
-import StateTree from '@redux-devtools/inspector-monitor/lib/tabs/StateTab';
-import ActionTree from '@redux-devtools/inspector-monitor/lib/tabs/ActionTab';
-import DiffTree from '@redux-devtools/inspector-monitor/lib/tabs/DiffTab';
 import { selectMonitorTab } from '../../../actions';
 import RawTab from './RawTab';
 import ChartTab from './ChartTab';
@@ -51,7 +53,7 @@ class SubTabs extends Component<Props> {
       this.tabs = [
         {
           name: 'Tree',
-          component: DiffTree,
+          component: DiffTab,
           selector: () => this.props,
         },
         {
@@ -66,7 +68,7 @@ class SubTabs extends Component<Props> {
     this.tabs = [
       {
         name: 'Tree',
-        component: parentTab === 'Action' ? ActionTree : StateTree,
+        component: parentTab === 'Action' ? ActionTab : StateTab,
         selector: () => this.props,
       },
       {

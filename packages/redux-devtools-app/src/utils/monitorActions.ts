@@ -1,6 +1,6 @@
 import difference from 'lodash/difference';
 import omit from 'lodash/omit';
-import stringifyJSON from './stringifyJSON';
+import { stringifyJSON } from './stringifyJSON';
 import { SET_STATE } from '../constants/actionTypes';
 import { InstancesState, State } from '../reducers/instances';
 import { Dispatch, MiddlewareAPI } from 'redux';

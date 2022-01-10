@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from '@redux-devtools/app';
+import { Root } from '@redux-devtools/app';
 
 import '../../views/remote.pug';
 
@@ -14,7 +14,7 @@ chrome.storage.local.get(
     's:secure': null,
   },
   (options) => {
-    const AppAsAny = App as any;
+    const AppAsAny = Root as any;
     render(
       <AppAsAny
         selectMonitor={options['select-monitor']}
