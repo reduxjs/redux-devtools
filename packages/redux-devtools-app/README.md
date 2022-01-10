@@ -17,9 +17,9 @@ Also it's a react component you can use to build amazing monitor applications li
 ```js
 import React from 'react';
 import ReactDom from 'react-dom';
-import DevToolsApp from '@redux-devtools/app';
+import { Root } from '@redux-devtools/app';
 
-ReactDom.render(<App />, document.getElementById('root'));
+ReactDom.render(<Root />, document.getElementById('root'));
 ```
 
 ### Parameters
