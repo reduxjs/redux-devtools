@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import StackTraceTab from '../src/StackTraceTab';
+import { TraceTab } from '../src/StackTraceTab';
 
 const actions = {
   0: { type: 'PERFORM_ACTION', action: { type: '@@INIT' } },
@@ -14,18 +14,18 @@ const actions = {
   },
 };
 
-const StackTraceTabAsAny = StackTraceTab as any;
+const TraceTabAsAny = TraceTab as any;
 
 describe('StackTraceTab component', () => {
   it('should render with no props', async () => {
-    const { container } = render(<StackTraceTabAsAny />);
+    const { container } = render(<TraceTabAsAny />);
     await screen.findByTestId('stack-trace');
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render with props, but without stack', async () => {
     const { container } = render(
-      <StackTraceTabAsAny actions={actions} action={actions[0].action} />
+      <TraceTabAsAny actions={actions} action={actions[0].action} />
     );
     await screen.findByTestId('stack-trace');
     expect(container.firstChild).toMatchSnapshot();
@@ -33,14 +33,14 @@ describe('StackTraceTab component', () => {
 
   it('should render the link to docs', () => {
     const { container } = render(
-      <StackTraceTabAsAny actions={actions} action={actions[1].action} />
+      <TraceTabAsAny actions={actions} action={actions[1].action} />
     );
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render with trace stack', async () => {
     const { container } = render(
-      <StackTraceTabAsAny actions={actions} action={actions[2].action} />
+      <TraceTabAsAny actions={actions} action={actions[2].action} />
     );
     await screen.findByTestId('stack-trace');
     expect(container.firstChild).toMatchSnapshot();
