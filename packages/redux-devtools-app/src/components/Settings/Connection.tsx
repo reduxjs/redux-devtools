@@ -8,7 +8,7 @@ import {
 } from 'json-schema';
 import { ConnectionType, saveSocketSettings } from '../../actions';
 import { StoreState } from '../../reducers';
-import { ConnectionOptions } from '../../reducers/connection';
+import { ConnectionStateOptions } from '../../reducers/connection';
 import { IChangeEvent, ISubmitEvent } from '@rjsf/core';
 
 declare module 'json-schema' {
@@ -57,7 +57,7 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = StateProps & DispatchProps;
 
-interface FormData extends ConnectionOptions {
+interface FormData extends ConnectionStateOptions {
   readonly type: ConnectionType;
 }
 
