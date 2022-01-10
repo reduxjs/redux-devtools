@@ -1,10 +1,10 @@
 import { Dispatch, MiddlewareAPI } from 'redux';
 import {
   SELECT_INSTANCE,
+  StoreAction,
+  StoreState,
   UPDATE_STATE,
-} from '@redux-devtools/app/lib/constants/actionTypes';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
-import { StoreState } from '@redux-devtools/app/lib/reducers';
+} from '@redux-devtools/app';
 
 function selectInstance(
   tabId: number,

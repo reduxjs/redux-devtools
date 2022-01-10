@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { LiftedState } from '@redux-devtools/instrument';
-import { DispatchAction, LibConfig } from '@redux-devtools/app/lib/actions';
+import { DispatchAction, LibConfig } from '@redux-devtools/app';
 
 declare global {
   interface Window {

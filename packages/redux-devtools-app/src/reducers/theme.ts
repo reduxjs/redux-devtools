@@ -8,7 +8,7 @@ export interface ThemeState {
   readonly colorPreference: 'auto' | 'light' | 'dark';
 }
 
-export default function theme(
+export function theme(
   state: ThemeState = {
     theme: 'default',
     scheme: 'default',

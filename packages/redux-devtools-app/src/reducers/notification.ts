@@ -12,7 +12,7 @@ interface Notification {
 }
 export type NotificationState = Notification | null;
 
-export default function notification(
+export function notification(
   state: NotificationState = null,
   action: StoreAction
 ): NotificationState {

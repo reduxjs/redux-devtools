@@ -1,5 +1,5 @@
 import jsan from 'jsan';
-import seralizeImmutable from '@redux-devtools/serialize/lib/immutable/serialize';
+import { immutableSerialize } from '@redux-devtools/serialize';
 import {
   Config,
   SerializeWithImmutable,
@@ -44,7 +44,7 @@ export default function importState<S, A extends Action<unknown>>(
       parse = (v) =>
         jsan.parse(
           v,
-          seralizeImmutable(
+          immutableSerialize(
             serialize.immutable,
             serialize.refs,
             serialize.replacer,

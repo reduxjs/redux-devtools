@@ -1,17 +1,17 @@
 import { RECONNECT } from '../constants/socketActionTypes';
 import { ConnectionType, StoreAction } from '../actions';
 
-export interface ConnectionOptions {
+export interface ConnectionStateOptions {
   readonly hostname: string;
   readonly port: number;
   readonly secure: boolean;
 }
 export interface ConnectionState {
-  readonly options: ConnectionOptions;
+  readonly options: ConnectionStateOptions;
   readonly type: ConnectionType;
 }
 
-export default function connection(
+export function connection(
   state: ConnectionState = {
     options: { hostname: 'localhost', port: 8000, secure: false },
     type: 'disabled',

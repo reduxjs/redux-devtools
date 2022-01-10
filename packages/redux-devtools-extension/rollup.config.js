@@ -22,7 +22,7 @@ const config = [
         plugins: ['@babel/plugin-transform-runtime'],
       }),
     ],
-    external: [/@babel\/runtime/],
+    external: [/@babel\/runtime/, 'redux'],
   },
 ];
 

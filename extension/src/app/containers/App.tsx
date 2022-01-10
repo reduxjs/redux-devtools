@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container, Notification } from '@redux-devtools/ui';
-import { getActiveInstance } from '@redux-devtools/app/lib/reducers/instances';
-import Settings from '@redux-devtools/app/lib/components/Settings';
-import Header from '@redux-devtools/app/lib/components/Header';
-import { clearNotification } from '@redux-devtools/app/lib/actions';
-import { StoreState } from '@redux-devtools/app/lib/reducers';
+import {
+  clearNotification,
+  getActiveInstance,
+  Header,
+  Settings,
+  StoreState,
+} from '@redux-devtools/app';
 import Actions from './Actions';
 
 type StateProps = ReturnType<typeof mapStateToProps>;

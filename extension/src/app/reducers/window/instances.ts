@@ -1,20 +1,18 @@
 import {
-  initialState,
+  instancesInitialState,
   dispatchAction,
-} from '@redux-devtools/app/lib/reducers/instances';
-import {
   UPDATE_STATE,
   SELECT_INSTANCE,
   LIFTED_ACTION,
   SET_PERSIST,
-} from '@redux-devtools/app/lib/constants/actionTypes';
+} from '@redux-devtools/app';
 import {
   ExpandedUpdateStateAction,
   WindowStoreAction,
 } from '../../stores/windowStore';
 
 export default function instances(
-  state = initialState,
+  state = instancesInitialState,
   action: WindowStoreAction
 ) {
   switch (action.type) {

@@ -13,7 +13,7 @@ import { Action } from 'redux';
 import {
   CustomAction,
   DispatchAction as AppDispatchAction,
-} from '@redux-devtools/app/lib/actions';
+} from '@redux-devtools/app';
 import { LiftedState } from '@redux-devtools/instrument';
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';

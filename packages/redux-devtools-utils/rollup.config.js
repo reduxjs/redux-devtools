@@ -6,11 +6,11 @@ const config = [
     input: 'src/index.ts',
     output: [
       {
-        file: 'dist/redux-devtools-serialize.cjs.js',
+        file: 'dist/redux-devtools-utils.cjs.js',
         format: 'cjs',
       },
       {
-        file: 'dist/redux-devtools-serialize.esm.js',
+        file: 'dist/redux-devtools-utils.esm.js',
         format: 'esm',
       },
     ],

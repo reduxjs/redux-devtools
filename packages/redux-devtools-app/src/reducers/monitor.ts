@@ -45,7 +45,7 @@ export function dispatchMonitorAction(
   };
 }
 
-export default function monitor(
+export function monitor(
   state = initialState,
   action: StoreAction
 ): MonitorState {

@@ -8,21 +8,21 @@ import {
 } from 'redux';
 import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
-import exportState from '@redux-devtools/app/lib/middlewares/exportState';
-import api from '@redux-devtools/app/lib/middlewares/api';
-import { CONNECT_REQUEST } from '@redux-devtools/app/lib/constants/socketActionTypes';
 import {
+  api,
+  CONNECT_REQUEST,
+  exportStateMiddleware,
+  InstancesState,
   StoreActionWithoutUpdateState,
+  StoreState,
   UpdateStateAction,
-} from '@redux-devtools/app/lib/actions';
-import { InstancesState } from '@redux-devtools/app/lib/reducers/instances';
+} from '@redux-devtools/app';
 import syncStores from '../middlewares/windowSync';
 import instanceSelector from '../middlewares/instanceSelector';
 import rootReducer from '../reducers/window';
 import { BackgroundState } from '../reducers/background';
 import { BackgroundAction } from './backgroundStore';
 import { EmptyUpdateStateAction, NAAction } from '../middlewares/api';
-import { StoreState } from '@redux-devtools/app/lib/reducers';
 
 export interface ExpandedUpdateStateAction extends UpdateStateAction {
   readonly instances: InstancesState;
@@ -50,7 +50,7 @@ export default function configureStore(
   position: string
 ) {
   let enhancer: StoreEnhancer;
-  const middlewares = [exportState, api, syncStores(baseStore)];
+  const middlewares = [exportStateMiddleware, api, syncStores(baseStore)];
   if (!position || position === '#popup') {
     // select current tab instance for devPanel and pageAction
     middlewares.push(instanceSelector);

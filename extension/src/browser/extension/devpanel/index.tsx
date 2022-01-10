@@ -2,13 +2,12 @@ import React, { CSSProperties } from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Persistor } from 'redux-persist';
-import { REMOVE_INSTANCE } from '@redux-devtools/app/lib/constants/actionTypes';
+import { REMOVE_INSTANCE, StoreAction } from '@redux-devtools/app';
 import App from '../../../app/containers/App';
 import configureStore from '../../../app/stores/panelStore';
 
 import '../../views/devpanel.pug';
 import { Action, Store } from 'redux';
-import { StoreAction } from '@redux-devtools/app/lib/actions';
 import { PanelMessage } from '../../../app/middlewares/api';
 import { StoreStateWithoutSocket } from '../../../app/reducers/panel';
 import { PersistGate } from 'redux-persist/integration/react';
