@@ -908,6 +908,7 @@ export function unliftStore<
 
     dispatch,
 
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     subscribe: liftedStore.subscribe,
 
     getState,
