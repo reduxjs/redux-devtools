@@ -2,9 +2,7 @@ import React from 'react';
 import { OptionsProps } from './Options';
 
 export default ({ options, saveOption }: OptionsProps) => {
-  const browserName = navigator.userAgent.includes('Firefox')
-    ? 'Firefox'
-    : 'Chrome';
+  const browserName = 'Edge';
 
   return (
     <fieldset className="option-group">
