@@ -904,8 +904,6 @@ export function unliftStore<
   }
 
   return {
-    ...liftedStore,
-
     liftedStore,
 
     dispatch,
