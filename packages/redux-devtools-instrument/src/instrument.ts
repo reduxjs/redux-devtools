@@ -908,6 +908,8 @@ export function unliftStore<
 
     dispatch,
 
+    subscribe: liftedStore.subscribe,
+
     getState,
 
     replaceReducer(nextReducer: Reducer<S & NextStateExt, A>) {
