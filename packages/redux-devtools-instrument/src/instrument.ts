@@ -1,16 +1,16 @@
 import difference from 'lodash/difference';
 import union from 'lodash/union';
 import isPlainObject from 'lodash/isPlainObject';
-import $$observable from './symbol-observable';
 import {
   Action,
-  Observable,
+  Observer,
   PreloadedState,
   Reducer,
   Store,
   StoreEnhancer,
   StoreEnhancerStoreCreator,
 } from 'redux';
+import getSymbolObservable from './getSymbolObservable';
 
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
@@ -903,12 +903,20 @@ export function unliftStore<
     return action;
   }
 
-  return {
-    ...liftedStore,
+  const $$observable = getSymbolObservable();
+  if (!($$observable in liftedStore)) {
+    console.warn(
+      'Symbol.observable as defined by Redux and Redux DevTools do not match. This could cause your app to behave differently if the DevTools are not loaded. Consider polyfilling Symbol.observable before Redux is imported or avoid polyfilling Symbol.observable altogether.'
+    );
+  }
 
+  return {
     liftedStore,
 
     dispatch,
+
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    subscribe: liftedStore.subscribe,
 
     getState,
 
@@ -923,10 +931,9 @@ export function unliftStore<
       );
     },
 
-    [$$observable](): Observable<S> {
+    [$$observable]() {
       return {
-        ...(liftedStore as any)[$$observable](),
-        subscribe(observer) {
+        subscribe(observer: Observer<S>) {
           if (typeof observer !== 'object') {
             throw new TypeError('Expected the observer to be an object.');
           }
