@@ -1,16 +1,16 @@
 import difference from 'lodash/difference';
 import union from 'lodash/union';
 import isPlainObject from 'lodash/isPlainObject';
-import $$observable from './symbol-observable';
 import {
   Action,
-  Observable,
+  Observer,
   PreloadedState,
   Reducer,
   Store,
   StoreEnhancer,
   StoreEnhancerStoreCreator,
 } from 'redux';
+import getSymbolObservable from './getSymbolObservable';
 
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',
@@ -903,6 +903,8 @@ export function unliftStore<
     return action;
   }
 
+  const $$observable = getSymbolObservable();
+
   return {
     liftedStore,
 
@@ -924,10 +926,9 @@ export function unliftStore<
       );
     },
 
-    [$$observable](): Observable<S> {
+    [$$observable]() {
       return {
-        ...(liftedStore as any)[$$observable](),
-        subscribe(observer) {
+        subscribe(observer: Observer<S>) {
           if (typeof observer !== 'object') {
             throw new TypeError('Expected the observer to be an object.');
           }
