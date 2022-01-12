@@ -4498,7 +4498,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redux-devtools/app@^2.0.1, @redux-devtools/app@workspace:packages/redux-devtools-app":
+"@redux-devtools/app@^2.0.2, @redux-devtools/app@workspace:packages/redux-devtools-app":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/app@workspace:packages/redux-devtools-app"
   dependencies:
@@ -4509,14 +4509,14 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/chart-monitor": ^2.0.0
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/inspector-monitor": ^2.0.0
-    "@redux-devtools/inspector-monitor-test-tab": ^0.8.1
-    "@redux-devtools/inspector-monitor-trace-tab": ^0.3.1
-    "@redux-devtools/log-monitor": ^3.0.0
-    "@redux-devtools/rtk-query-monitor": ^2.0.0
-    "@redux-devtools/slider-monitor": ^3.0.0
+    "@redux-devtools/chart-monitor": ^2.0.1
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/inspector-monitor": ^2.0.1
+    "@redux-devtools/inspector-monitor-test-tab": ^0.8.2
+    "@redux-devtools/inspector-monitor-trace-tab": ^0.3.2
+    "@redux-devtools/log-monitor": ^3.0.1
+    "@redux-devtools/rtk-query-monitor": ^2.0.1
+    "@redux-devtools/slider-monitor": ^3.0.1
     "@redux-devtools/ui": ^1.1.0
     "@reduxjs/toolkit": ^1.7.1
     "@rjsf/core": ^3.2.1
@@ -4588,7 +4588,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/chart-monitor@^2.0.0, @redux-devtools/chart-monitor@workspace:packages/redux-devtools-chart-monitor":
+"@redux-devtools/chart-monitor@^2.0.1, @redux-devtools/chart-monitor@workspace:packages/redux-devtools-chart-monitor":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/chart-monitor@workspace:packages/redux-devtools-chart-monitor"
   dependencies:
@@ -4599,7 +4599,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
+    "@redux-devtools/core": ^3.10.1
     "@rollup/plugin-babel": ^5.3.0
     "@types/prop-types": ^15.7.4
     "@types/react": ^17.0.38
@@ -4633,7 +4633,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/cli@workspace:packages/redux-devtools-cli"
   dependencies:
-    "@redux-devtools/app": ^2.0.1
+    "@redux-devtools/app": ^2.0.2
     "@types/body-parser": ^1.19.2
     "@types/cors": ^2.8.12
     "@types/cross-spawn": ^6.0.2
@@ -4689,7 +4689,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/core@^3.10.0, @redux-devtools/core@workspace:packages/redux-devtools":
+"@redux-devtools/core@^3.10.1, @redux-devtools/core@workspace:packages/redux-devtools":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/core@workspace:packages/redux-devtools"
   dependencies:
@@ -4700,7 +4700,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/instrument": ^2.0.0
+    "@redux-devtools/instrument": ^2.0.1
     "@rollup/plugin-babel": ^5.3.0
     "@types/jest": ^27.4.0
     "@types/lodash": ^4.14.178
@@ -4735,7 +4735,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/dock-monitor@^2.0.0, @redux-devtools/dock-monitor@workspace:packages/redux-devtools-dock-monitor":
+"@redux-devtools/dock-monitor@^2.0.1, @redux-devtools/dock-monitor@workspace:packages/redux-devtools-dock-monitor":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/dock-monitor@workspace:packages/redux-devtools-dock-monitor"
   dependencies:
@@ -4746,7 +4746,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
+    "@redux-devtools/core": ^3.10.1
     "@rollup/plugin-babel": ^5.3.0
     "@types/parse-key": ^0.2.0
     "@types/prop-types": ^15.7.4
@@ -4801,7 +4801,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/inspector-monitor-test-tab@^0.8.1, @redux-devtools/inspector-monitor-test-tab@workspace:packages/redux-devtools-inspector-monitor-test-tab":
+"@redux-devtools/inspector-monitor-test-tab@^0.8.2, @redux-devtools/inspector-monitor-test-tab@workspace:packages/redux-devtools-inspector-monitor-test-tab":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/inspector-monitor-test-tab@workspace:packages/redux-devtools-inspector-monitor-test-tab"
   dependencies:
@@ -4812,8 +4812,8 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/inspector-monitor": ^2.0.0
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/inspector-monitor": ^2.0.1
     "@redux-devtools/ui": ^1.1.0
     "@rollup/plugin-babel": ^5.3.0
     "@testing-library/react": ^12.1.2
@@ -4858,7 +4858,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/inspector-monitor-trace-tab@^0.3.1, @redux-devtools/inspector-monitor-trace-tab@workspace:packages/redux-devtools-inspector-monitor-trace-tab":
+"@redux-devtools/inspector-monitor-trace-tab@^0.3.2, @redux-devtools/inspector-monitor-trace-tab@workspace:packages/redux-devtools-inspector-monitor-trace-tab":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/inspector-monitor-trace-tab@workspace:packages/redux-devtools-inspector-monitor-trace-tab"
   dependencies:
@@ -4870,8 +4870,8 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/inspector-monitor": ^2.0.0
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/inspector-monitor": ^2.0.1
     "@rollup/plugin-babel": ^5.3.0
     "@testing-library/react": ^12.1.2
     "@types/babel__code-frame": ^7.0.3
@@ -4913,7 +4913,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/inspector-monitor@^2.0.0, @redux-devtools/inspector-monitor@workspace:packages/redux-devtools-inspector-monitor":
+"@redux-devtools/inspector-monitor@^2.0.1, @redux-devtools/inspector-monitor@workspace:packages/redux-devtools-inspector-monitor":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/inspector-monitor@workspace:packages/redux-devtools-inspector-monitor"
   dependencies:
@@ -4924,7 +4924,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
+    "@redux-devtools/core": ^3.10.1
     "@rollup/plugin-babel": ^5.3.0
     "@types/dateformat": ^3.0.1
     "@types/dragula": ^3.7.1
@@ -4970,7 +4970,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/instrument@^2.0.0, @redux-devtools/instrument@workspace:packages/redux-devtools-instrument":
+"@redux-devtools/instrument@^2.0.1, @redux-devtools/instrument@workspace:packages/redux-devtools-instrument":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/instrument@workspace:packages/redux-devtools-instrument"
   dependencies:
@@ -5004,7 +5004,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/log-monitor@^3.0.0, @redux-devtools/log-monitor@workspace:packages/redux-devtools-log-monitor":
+"@redux-devtools/log-monitor@^3.0.1, @redux-devtools/log-monitor@workspace:packages/redux-devtools-log-monitor":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/log-monitor@workspace:packages/redux-devtools-log-monitor"
   dependencies:
@@ -5015,7 +5015,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
+    "@redux-devtools/core": ^3.10.1
     "@rollup/plugin-babel": ^5.3.0
     "@types/lodash.debounce": ^4.0.6
     "@types/prop-types": ^15.7.4
@@ -5056,8 +5056,8 @@ __metadata:
     "@babel/preset-env": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/instrument": ^2.0.0
-    "@redux-devtools/utils": ^1.1.0
+    "@redux-devtools/instrument": ^2.0.1
+    "@redux-devtools/utils": ^1.1.1
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.1
     "@types/jsan": ^3.1.2
@@ -5081,7 +5081,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/rtk-query-monitor@^2.0.0, @redux-devtools/rtk-query-monitor@workspace:packages/redux-devtools-rtk-query-monitor":
+"@redux-devtools/rtk-query-monitor@^2.0.1, @redux-devtools/rtk-query-monitor@workspace:packages/redux-devtools-rtk-query-monitor":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/rtk-query-monitor@workspace:packages/redux-devtools-rtk-query-monitor"
   dependencies:
@@ -5092,7 +5092,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
+    "@redux-devtools/core": ^3.10.1
     "@redux-devtools/ui": ^1.1.0
     "@reduxjs/toolkit": ^1.7.1
     "@rollup/plugin-babel": ^5.3.0
@@ -5166,7 +5166,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/slider-monitor@^3.0.0, @redux-devtools/slider-monitor@workspace:packages/redux-devtools-slider-monitor":
+"@redux-devtools/slider-monitor@^3.0.1, @redux-devtools/slider-monitor@workspace:packages/redux-devtools-slider-monitor":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/slider-monitor@workspace:packages/redux-devtools-slider-monitor"
   dependencies:
@@ -5177,7 +5177,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
+    "@redux-devtools/core": ^3.10.1
     "@redux-devtools/ui": ^1.1.0
     "@rollup/plugin-babel": ^5.3.0
     "@types/prop-types": ^15.7.4
@@ -5278,7 +5278,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/utils@^1.1.0, @redux-devtools/utils@workspace:packages/redux-devtools-utils":
+"@redux-devtools/utils@^1.1.1, @redux-devtools/utils@workspace:packages/redux-devtools-utils":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/utils@workspace:packages/redux-devtools-utils"
   dependencies:
@@ -5288,7 +5288,7 @@ __metadata:
     "@babel/preset-env": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
+    "@redux-devtools/core": ^3.10.1
     "@redux-devtools/serialize": ^0.4.0
     "@rollup/plugin-babel": ^5.3.0
     "@types/get-params": ^0.1.0
@@ -12099,9 +12099,9 @@ __metadata:
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/dock-monitor": ^2.0.0
-    "@redux-devtools/log-monitor": ^3.0.0
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/dock-monitor": ^2.0.1
+    "@redux-devtools/log-monitor": ^3.0.1
     "@types/node": ^16.11.17
     "@types/prop-types": ^15.7.4
     "@types/react": ^17.0.38
@@ -17013,9 +17013,9 @@ __metadata:
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/dock-monitor": ^2.0.0
-    "@redux-devtools/inspector-monitor": ^2.0.0
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/dock-monitor": ^2.0.1
+    "@redux-devtools/inspector-monitor": ^2.0.1
     "@types/base16": ^1.0.2
     "@types/history": ^4.7.9
     "@types/lodash.shuffle": ^4.2.6
@@ -25277,13 +25277,13 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/register": ^7.16.7
-    "@redux-devtools/app": ^2.0.1
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/instrument": ^2.0.0
+    "@redux-devtools/app": ^2.0.2
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/instrument": ^2.0.1
     "@redux-devtools/serialize": ^0.4.0
-    "@redux-devtools/slider-monitor": ^3.0.0
+    "@redux-devtools/slider-monitor": ^3.0.1
     "@redux-devtools/ui": ^1.1.0
-    "@redux-devtools/utils": ^1.1.0
+    "@redux-devtools/utils": ^1.1.1
     "@testing-library/jest-dom": ^5.16.1
     "@testing-library/react": ^12.1.2
     "@types/chrome": ^0.0.174
@@ -25874,9 +25874,9 @@ __metadata:
     "@emotion/react": ^11.7.1
     "@emotion/styled": ^11.6.0
     "@mswjs/data": ^0.8.4
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/dock-monitor": ^2.0.0
-    "@redux-devtools/rtk-query-monitor": ^2.0.0
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/dock-monitor": ^2.0.1
+    "@redux-devtools/rtk-query-monitor": ^2.0.1
     "@reduxjs/toolkit": ^1.7.1
     "@types/copy-webpack-plugin": ^8.0.1
     "@types/node": ^16.11.17
@@ -26659,10 +26659,10 @@ __metadata:
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/dock-monitor": ^2.0.0
-    "@redux-devtools/log-monitor": ^3.0.0
-    "@redux-devtools/slider-monitor": ^3.0.0
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/dock-monitor": ^2.0.1
+    "@redux-devtools/log-monitor": ^3.0.1
+    "@redux-devtools/slider-monitor": ^3.0.1
     "@types/classnames": ^2.3.1
     "@types/node": ^16.11.17
     "@types/prop-types": ^15.7.4
@@ -28160,10 +28160,10 @@ __metadata:
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/dock-monitor": ^2.0.0
-    "@redux-devtools/inspector-monitor": ^2.0.0
-    "@redux-devtools/inspector-monitor-test-tab": ^0.8.1
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/dock-monitor": ^2.0.1
+    "@redux-devtools/inspector-monitor": ^2.0.1
+    "@redux-devtools/inspector-monitor-test-tab": ^0.8.2
     "@redux-devtools/ui": ^1.1.0
     "@types/history": ^4.7.9
     "@types/lodash.shuffle": ^4.2.6
@@ -28446,9 +28446,9 @@ __metadata:
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
-    "@redux-devtools/core": ^3.10.0
-    "@redux-devtools/dock-monitor": ^2.0.0
-    "@redux-devtools/log-monitor": ^3.0.0
+    "@redux-devtools/core": ^3.10.1
+    "@redux-devtools/dock-monitor": ^2.0.1
+    "@redux-devtools/log-monitor": ^3.0.1
     "@types/classnames": ^2.3.1
     "@types/node": ^16.11.17
     "@types/prop-types": ^15.7.4
