@@ -904,6 +904,11 @@ export function unliftStore<
   }
 
   const $$observable = getSymbolObservable();
+  if (!($$observable in liftedStore)) {
+    console.warn(
+      'Symbol.observable as defined by Redux and Redux DevTools do not match. This could cause your app to behave differently if the DevTools are not loaded. Consider polyfilling Symbol.observable before Redux is imported or avoid polyfilling Symbol.observable altogether.'
+    );
+  }
 
   return {
     liftedStore,
