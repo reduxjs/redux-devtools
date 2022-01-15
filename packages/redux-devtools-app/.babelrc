@@ -1,8 +1,8 @@
 {
   "presets": [
-    ["@babel/preset-env", { "targets": "defaults" }],
+    ["@babel/preset-env", { "targets": { "chrome": "96" } }],
     "@babel/preset-react",
     "@babel/preset-typescript"
   ],
-  "plugins": ["@babel/plugin-transform-runtime"]
+  "plugins": [["@babel/plugin-transform-runtime", { "regenerator": false }]]
 }

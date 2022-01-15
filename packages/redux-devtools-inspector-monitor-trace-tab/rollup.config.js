@@ -20,7 +20,7 @@ const config = [
       babel({
         babelHelpers: 'runtime',
         extensions: ['.ts', '.tsx'],
-        plugins: ['@babel/plugin-transform-runtime'],
+        plugins: [['@babel/plugin-transform-runtime', { regenerator: false }]],
       }),
       nodePolyfills(),
     ],
