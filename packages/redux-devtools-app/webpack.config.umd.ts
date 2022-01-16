@@ -32,13 +32,8 @@ export default (env: { production?: boolean } = {}): webpack.Configuration => ({
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
       {
-        test: /\.(png|gif|jpg)$/,
-        loader: 'url-loader',
-        options: { limit: '25000' },
-      },
-      {
-        test: /\.(ttf|eot|svg|woff|woff2)$/,
-        loader: 'url-loader',
+        test: /\.woff2$/,
+        type: 'asset/inline',
       },
     ],
   },
