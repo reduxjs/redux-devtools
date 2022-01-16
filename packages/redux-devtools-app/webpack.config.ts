@@ -32,18 +32,8 @@ export default (
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
       {
-        test: /\.(png|gif|jpg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: '25000',
-          outputPath: 'images/',
-          publicPath: 'images/',
-        },
-      },
-      {
-        test: /\.(ttf|eot|svg|woff|woff2)$/,
-        loader: 'file-loader',
-        options: { outputPath: 'fonts/', publicPath: 'fonts/' },
+        test: /\.woff2$/,
+        type: 'asset/resource',
       },
     ],
   },
