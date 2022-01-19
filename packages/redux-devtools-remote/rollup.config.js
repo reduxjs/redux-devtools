@@ -6,11 +6,11 @@ const config = [
     input: 'src/index.ts',
     output: [
       {
-        file: 'dist/redux-devtools-log-monitor.cjs.js',
+        file: 'dist/redux-devtools-remote.cjs.js',
         format: 'cjs',
       },
       {
-        file: 'dist/redux-devtools-log-monitor.esm.js',
+        file: 'dist/redux-devtools-remote.esm.js',
         format: 'esm',
       },
     ],
