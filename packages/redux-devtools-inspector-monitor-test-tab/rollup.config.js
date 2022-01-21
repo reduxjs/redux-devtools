@@ -32,6 +32,7 @@ const config = [
       'object-path',
       'jsan',
       'simple-diff',
+      'es6template',
     ],
   },
 ];
