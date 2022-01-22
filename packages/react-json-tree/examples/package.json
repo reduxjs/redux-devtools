@@ -13,8 +13,8 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "webpack serve --open",
-    "build": "webpack",
+    "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
+    "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit"
   },
@@ -33,10 +33,10 @@
     "@types/node": "^16.11.17",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
-    "@types/webpack-dev-server": "^4.5.1",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "babel-loader": "^8.2.3",
+    "cross-env": "^7.0.3",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.28.0",

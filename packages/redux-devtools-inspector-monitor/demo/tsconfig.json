@@ -1,7 +1,8 @@
 {
   "extends": "../../../tsconfig.react.base.json",
   "compilerOptions": {
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["webpack-env"]
   },
-  "include": ["../src", "src"]
+  "include": ["src"]
 }

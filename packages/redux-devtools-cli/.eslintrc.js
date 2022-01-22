@@ -1,16 +1,19 @@
 module.exports = {
-  extends: '../../eslintrc.ts.base.json',
-  parserOptions: {
-    tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json'],
-  },
   overrides: [
     {
-      files: ['test/**/*.ts', 'test/**/*.tsx'],
+      files: ['*.ts'],
+      extends: '../../eslintrc.ts.base.json',
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+        project: ['./tsconfig.json'],
+      },
+    },
+    {
+      files: ['test/**/*.ts'],
       extends: '../../eslintrc.ts.jest.base.json',
       parserOptions: {
         tsconfigRootDir: __dirname,
-        project: ['./test/tsconfig.json'],
+        project: ['./tsconfig.test.json'],
       },
     },
   ],
