@@ -4,8 +4,8 @@
   "version": "0.1.6",
   "license": "MIT",
   "scripts": {
-    "start": "webpack serve --open",
-    "build": "webpack",
+    "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
+    "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit"
   },
@@ -42,10 +42,11 @@
     "@types/react-router": "^5.1.17",
     "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.19",
-    "@types/webpack-dev-server": "^4.5.1",
+    "@types/webpack-env": "^1.16.3",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "babel-loader": "^8.2.3",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
