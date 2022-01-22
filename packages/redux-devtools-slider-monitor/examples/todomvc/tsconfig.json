@@ -1,4 +1,7 @@
 {
   "extends": "../../../../tsconfig.react.base.json",
-  "include": ["."]
+  "compilerOptions": {
+    "types": ["webpack-env"]
+  },
+  "include": ["src"]
 }
