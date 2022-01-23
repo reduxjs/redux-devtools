@@ -9,14 +9,16 @@ const config = [
     input: 'src/index.tsx',
     output: {
       name: 'ReactJsonTree',
-      file: 'dist/react-json-tree.umd.js',
+      file: 'lib/umd/react-json-tree.js',
       format: 'umd',
       globals: {
         react: 'React',
       },
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfigOverride: { compilerOptions: { declaration: false } },
+      }),
       resolve(),
       commonjs(),
       babel({
@@ -31,14 +33,16 @@ const config = [
     input: 'src/index.tsx',
     output: {
       name: 'ReactJsonTree',
-      file: 'dist/react-json-tree.umd.min.js',
+      file: 'lib/umd/react-json-tree.min.js',
       format: 'umd',
       globals: {
         react: 'React',
       },
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfigOverride: { compilerOptions: { declaration: false } },
+      }),
       resolve(),
       commonjs(),
       babel({
@@ -49,27 +53,6 @@ const config = [
       terser(),
     ],
     external: ['react'],
-  },
-  {
-    input: 'src/index.tsx',
-    output: [
-      { file: 'dist/react-json-tree.cjs.js', format: 'cjs' },
-      { file: 'dist/react-json-tree.esm.js', format: 'esm' },
-    ],
-    plugins: [
-      typescript(),
-      babel({
-        babelHelpers: 'runtime',
-        extensions: ['.ts', '.tsx'],
-        plugins: ['@babel/plugin-transform-runtime'],
-      }),
-    ],
-    external: [
-      /@babel\/runtime/,
-      'react',
-      'prop-types',
-      'react-base16-styling',
-    ],
   },
 ];
 
