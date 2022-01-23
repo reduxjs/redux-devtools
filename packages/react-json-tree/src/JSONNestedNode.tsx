@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import JSONArrow from './JSONArrow';
 import getCollectionEntries from './getCollectionEntries';
@@ -97,144 +97,115 @@ interface Props extends CircularPropsPassedThroughJSONNestedNode {
   expandable: boolean;
 }
 
-interface State {
-  expanded: boolean;
-}
+function JSONNestedNode(props: Props) {
+  const {
+    getItemString,
+    nodeTypeIndicator,
+    nodeType,
+    data = [],
+    hideRoot,
+    createItemString,
+    styling,
+    collectionLimit,
+    keyPath,
+    labelRenderer,
+    expandable = true,
+    isCircular,
+    level = 0,
+    shouldExpandNode,
+  } = props;
 
-function getStateFromProps(props: Props) {
-  // calculate individual node expansion if necessary
-  const expanded = !props.isCircular
-    ? props.shouldExpandNode(props.keyPath, props.data, props.level)
-    : false;
-  return {
-    expanded,
-  };
-}
+  const [expanded, setExpanded] = useState<boolean>(() => {
+    return !isCircular ? shouldExpandNode(keyPath, data, level) : false;
+  });
 
-export default class JSONNestedNode extends React.Component<Props, State> {
-  static propTypes = {
-    getItemString: PropTypes.func.isRequired,
-    nodeTypeIndicator: PropTypes.any,
-    nodeType: PropTypes.string.isRequired,
-    data: PropTypes.any,
-    hideRoot: PropTypes.bool.isRequired,
-    createItemString: PropTypes.func.isRequired,
-    styling: PropTypes.func.isRequired,
-    collectionLimit: PropTypes.number,
-    keyPath: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    ).isRequired,
-    labelRenderer: PropTypes.func.isRequired,
-    shouldExpandNode: PropTypes.func,
-    level: PropTypes.number.isRequired,
-    sortObjectKeys: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-    isCircular: PropTypes.bool,
-    expandable: PropTypes.bool,
-  };
+  // When certain props change, we need to re-compute whether our node should be in an expanded state
+  useEffect(() => {
+    setExpanded(() => {
+      return !isCircular ? shouldExpandNode(keyPath, data, level) : false;
+    });
+  }, [isCircular, data, keyPath, level, shouldExpandNode]);
 
-  static defaultProps = {
-    data: [],
-    circularCache: [],
-    level: 0,
-    expandable: true,
-  };
+  // fixme - previously this was happening after a component should update
+  // this should be moved to a useMemo and updated only when some props change
+  const renderedChildren =
+    expanded || (hideRoot && props.level === 0)
+      ? renderChildNodes({ ...props, level: props.level + 1 })
+      : null;
 
-  constructor(props: Props) {
-    super(props);
-    this.state = getStateFromProps(props);
-  }
+  const itemType = (
+    <span {...styling('nestedNodeItemType', expanded)}>
+      {nodeTypeIndicator}
+    </span>
+  );
+  const renderedItemString = getItemString(
+    nodeType,
+    data,
+    itemType,
+    createItemString(data, collectionLimit),
+    keyPath
+  );
+  const stylingArgs = [keyPath, nodeType, expanded, expandable] as const;
 
-  UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    const nextState = getStateFromProps(nextProps);
-    if (getStateFromProps(this.props).expanded !== nextState.expanded) {
-      this.setState(nextState);
+  const expandableLatest = useRef<boolean>(expandable);
+  expandableLatest.current = expandable;
+  const handleClick = useCallback(() => {
+    if (expandableLatest.current) {
+      setExpanded((prevValue) => !prevValue);
     }
-  }
+  }, []);
 
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return (
-      !!Object.keys(nextProps).find(
-        (key) =>
-          key !== 'circularCache' &&
-          (key === 'keyPath'
-            ? nextProps[key].join('/') !== this.props[key].join('/')
-            : nextProps[key as keyof Props] !== this.props[key as keyof Props])
-      ) || nextState.expanded !== this.state.expanded
-    );
-  }
-
-  render() {
-    const {
-      getItemString,
-      nodeTypeIndicator,
-      nodeType,
-      data,
-      hideRoot,
-      createItemString,
-      styling,
-      collectionLimit,
-      keyPath,
-      labelRenderer,
-      expandable,
-    } = this.props;
-    const { expanded } = this.state;
-    const renderedChildren =
-      expanded || (hideRoot && this.props.level === 0)
-        ? renderChildNodes({ ...this.props, level: this.props.level + 1 })
-        : null;
-
-    const itemType = (
-      <span {...styling('nestedNodeItemType', expanded)}>
-        {nodeTypeIndicator}
+  return hideRoot ? (
+    <li {...styling('rootNode', ...stylingArgs)}>
+      <ul {...styling('rootNodeChildren', ...stylingArgs)}>
+        {renderedChildren}
+      </ul>
+    </li>
+  ) : (
+    <li {...styling('nestedNode', ...stylingArgs)}>
+      {expandable && (
+        <JSONArrow
+          styling={styling}
+          nodeType={nodeType}
+          expanded={expanded}
+          onClick={handleClick}
+        />
+      )}
+      <label
+        {...styling(['label', 'nestedNodeLabel'], ...stylingArgs)}
+        onClick={handleClick}
+      >
+        {labelRenderer(...stylingArgs)}
+      </label>
+      <span
+        {...styling('nestedNodeItemString', ...stylingArgs)}
+        onClick={handleClick}
+      >
+        {renderedItemString}
       </span>
-    );
-    const renderedItemString = getItemString(
-      nodeType,
-      data,
-      itemType,
-      createItemString(data, collectionLimit),
-      keyPath
-    );
-    const stylingArgs = [keyPath, nodeType, expanded, expandable] as const;
-
-    return hideRoot ? (
-      <li {...styling('rootNode', ...stylingArgs)}>
-        <ul {...styling('rootNodeChildren', ...stylingArgs)}>
-          {renderedChildren}
-        </ul>
-      </li>
-    ) : (
-      <li {...styling('nestedNode', ...stylingArgs)}>
-        {expandable && (
-          <JSONArrow
-            styling={styling}
-            nodeType={nodeType}
-            expanded={expanded}
-            onClick={this.handleClick}
-          />
-        )}
-        <label
-          {...styling(['label', 'nestedNodeLabel'], ...stylingArgs)}
-          onClick={this.handleClick}
-        >
-          {labelRenderer(...stylingArgs)}
-        </label>
-        <span
-          {...styling('nestedNodeItemString', ...stylingArgs)}
-          onClick={this.handleClick}
-        >
-          {renderedItemString}
-        </span>
-        <ul {...styling('nestedNodeChildren', ...stylingArgs)}>
-          {renderedChildren}
-        </ul>
-      </li>
-    );
-  }
-
-  handleClick = () => {
-    if (this.props.expandable) {
-      this.setState({ expanded: !this.state.expanded });
-    }
-  };
+      <ul {...styling('nestedNodeChildren', ...stylingArgs)}>
+        {renderedChildren}
+      </ul>
+    </li>
+  );
 }
+
+JSONNestedNode.propTypes = {
+  getItemString: PropTypes.func.isRequired,
+  nodeTypeIndicator: PropTypes.any,
+  nodeType: PropTypes.string.isRequired,
+  data: PropTypes.any,
+  hideRoot: PropTypes.bool.isRequired,
+  createItemString: PropTypes.func.isRequired,
+  styling: PropTypes.func.isRequired,
+  collectionLimit: PropTypes.number,
+  keyPath: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ).isRequired,
+  labelRenderer: PropTypes.func.isRequired,
+  shouldExpandNode: PropTypes.func,
+  level: PropTypes.number.isRequired,
+  sortObjectKeys: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  isCircular: PropTypes.bool,
+  expandable: PropTypes.bool,
+};
