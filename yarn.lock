@@ -4867,6 +4867,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/inspector-monitor-trace-tab@workspace:packages/redux-devtools-inspector-monitor-trace-tab"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/code-frame": ^7.16.7
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
@@ -4877,13 +4878,13 @@ __metadata:
     "@babel/runtime": ^7.16.7
     "@redux-devtools/core": ^3.10.1
     "@redux-devtools/inspector-monitor": ^2.0.1
-    "@rollup/plugin-babel": ^5.3.0
     "@testing-library/react": ^12.1.2
     "@types/babel__code-frame": ^7.0.3
     "@types/chrome": ^0.0.176
     "@types/html-entities": ^1.3.4
     "@types/jest": ^27.4.0
     "@types/node": ^16.11.21
+    "@types/path-browserify": ^1.0.0
     "@types/react": ^17.0.38
     "@types/redux-devtools-themes": ^1.0.0
     "@types/source-map": 0.5.2
@@ -4897,18 +4898,15 @@ __metadata:
     eslint-plugin-react-hooks: ^4.3.0
     html-entities: ^2.3.2
     jest: ^27.4.7
+    path-browserify: ^1.0.1
     react: ^17.0.2
     react-dom: ^17.0.2
     react-test-renderer: ^17.0.2
     redux: ^4.1.2
     redux-devtools-themes: ^1.0.0
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-node-polyfills: ^0.2.1
-    rollup-plugin-typescript2: ^0.31.1
     source-map: ^0.5.7
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@redux-devtools/inspector-monitor": ^2.0.0
@@ -7488,6 +7486,13 @@ __metadata:
   version: 5.0.3
   resolution: "@types/parse5@npm:5.0.3"
   checksum: d6b7495cb1850f9f2e9c5e103ede9f2d30a5320669707b105c403868adc9e4bf8d3a7ff314cc23f67826bbbbbc0e6147346ce9062ab429f099dba7a01f463919
+  languageName: node
+  linkType: hard
+
+"@types/path-browserify@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@types/path-browserify@npm:1.0.0"
+  checksum: e3f98ef9638fb75dc7547c3cde5fa86bc5986e38403ec91234abcc7b911e30711af7c6abc674d617d27c4a6c09e7f8e9d77662b1cc45d00d4708d94764202b61
   languageName: node
   linkType: hard
 
@@ -14103,13 +14108,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"estree-walker@npm:^0.6.1":
-  version: 0.6.1
-  resolution: "estree-walker@npm:0.6.1"
-  checksum: 9d6f82a4921f11eec18f8089fb3cce6e53bcf45a8e545c42a2674d02d055fb30f25f90495f8be60803df6c39680c80dcee7f944526867eb7aa1fc9254883b23d
-  languageName: node
-  linkType: hard
-
 "estree-walker@npm:^1.0.1":
   version: 1.0.1
   resolution: "estree-walker@npm:1.0.1"
@@ -19893,7 +19891,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.25.3, magic-string@npm:^0.25.7":
+"magic-string@npm:^0.25.7":
   version: 0.25.7
   resolution: "magic-string@npm:0.25.7"
   dependencies:
@@ -25633,26 +25631,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-inject@npm:^3.0.0":
-  version: 3.0.2
-  resolution: "rollup-plugin-inject@npm:3.0.2"
-  dependencies:
-    estree-walker: ^0.6.1
-    magic-string: ^0.25.3
-    rollup-pluginutils: ^2.8.1
-  checksum: a014972c80fe34b8c8154056fa2533a8440066a31de831e3793fc21b15d108d92c22d8f7f472397bd5783d7c5e04d8cbf112fb72c5a26e997726e4eb090edad1
-  languageName: node
-  linkType: hard
-
-"rollup-plugin-node-polyfills@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "rollup-plugin-node-polyfills@npm:0.2.1"
-  dependencies:
-    rollup-plugin-inject: ^3.0.0
-  checksum: e84645212c443aca3cfae2ba69f01c6d8c5c250f0bf651416b69a4572b60aae9da7cdd687de3ab9b903f7a1ab96b06b71f0c4927d1b02a37485360d2b563937b
-  languageName: node
-  linkType: hard
-
 "rollup-plugin-terser@npm:^7.0.2":
   version: 7.0.2
   resolution: "rollup-plugin-terser@npm:7.0.2"
@@ -25681,15 +25659,6 @@ __metadata:
     rollup: ">=1.26.3"
     typescript: ">=2.4.0"
   checksum: 29a809aaf7a8c2f81e033cc3214284c2bbe915c3cbe0e31de5930d51b8b031b7ab46dcef9b3f32fd9e5a82a3ad78c6434f35639fc163c940a6ee71b44548673e
-  languageName: node
-  linkType: hard
-
-"rollup-pluginutils@npm:^2.8.1":
-  version: 2.8.2
-  resolution: "rollup-pluginutils@npm:2.8.2"
-  dependencies:
-    estree-walker: ^0.6.1
-  checksum: 339fdf866d8f4ff6e408fa274c0525412f7edb01dc46b5ccda51f575b7e0d20ad72965773376fb5db95a77a7fcfcab97bf841ec08dbadf5d6b08af02b7a2cf5e
   languageName: node
   linkType: hard
 
