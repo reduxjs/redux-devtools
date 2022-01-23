@@ -9,11 +9,13 @@ const config = [
     input: 'src/index.ts',
     output: {
       name: 'map2tree',
-      file: 'dist/map2tree.umd.js',
+      file: 'lib/umd/map2tree.js',
       format: 'umd',
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfigOverride: { compilerOptions: { declaration: false } },
+      }),
       resolve(),
       commonjs(),
       babel({
@@ -27,11 +29,13 @@ const config = [
     input: 'src/index.ts',
     output: {
       name: 'map2tree',
-      file: 'dist/map2tree.umd.min.js',
+      file: 'lib/umd/map2tree.min.js',
       format: 'umd',
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfigOverride: { compilerOptions: { declaration: false } },
+      }),
       resolve(),
       commonjs(),
       babel({
@@ -41,22 +45,6 @@ const config = [
       }),
       terser(),
     ],
-  },
-  {
-    input: 'src/index.ts',
-    output: [
-      { file: 'dist/map2tree.cjs.js', format: 'cjs' },
-      { file: 'dist/map2tree.esm.js', format: 'esm' },
-    ],
-    plugins: [
-      typescript(),
-      babel({
-        babelHelpers: 'runtime',
-        extensions: ['.ts'],
-        plugins: ['@babel/plugin-transform-runtime'],
-      }),
-    ],
-    external: [/@babel\/runtime/, /lodash/],
   },
 ];
 
