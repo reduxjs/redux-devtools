@@ -23859,13 +23859,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-base16-styling@workspace:packages/react-base16-styling"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
     "@babel/preset-env": ^7.16.11
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@rollup/plugin-babel": ^5.3.0
     "@types/base16": ^1.0.2
     "@types/color": ^3.0.2
     "@types/jest": ^27.4.0
@@ -23882,10 +23882,7 @@ __metadata:
     jest: ^27.4.7
     lodash.curry: ^4.1.1
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
   languageName: unknown
   linkType: soft
