@@ -20,19 +20,23 @@
     "url": "https://github.com/FaberVitale"
   },
   "files": [
-    "dist",
+    "lib",
     "src"
   ],
-  "main": "dist/redux-devtools-rtk-query-monitor.cjs.js",
-  "module": "dist/redux-devtools-rtk-query-monitor.esm.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/types/index.d.ts",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "rollup -c",
-    "clean": "rimraf dist",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:types",
+    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
+    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
+    "build:types": "tsc --emitDeclarationOnly",
+    "clean": "rimraf lib",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
     "prepack": "yarn run clean && yarn run build",
@@ -54,6 +58,7 @@
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.12",
     "@babel/eslint-parser": "^7.16.5",
     "@babel/plugin-transform-runtime": "^7.16.10",
@@ -62,7 +67,6 @@
     "@babel/preset-typescript": "^7.16.7",
     "@redux-devtools/core": "^3.10.1",
     "@reduxjs/toolkit": "^1.7.1",
-    "@rollup/plugin-babel": "^5.3.0",
     "@types/hex-rgba": "^1.0.1",
     "@types/lodash.debounce": "^4.0.6",
     "@types/react": "^17.0.38",
@@ -75,9 +79,6 @@
     "react": "^17.0.2",
     "redux": "^4.1.2",
     "rimraf": "^3.0.2",
-    "rollup": "^2.66.0",
-    "rollup-plugin-typescript2": "^0.31.1",
-    "tslib": "^2.3.1",
     "typescript": "~4.5.5"
   },
   "peerDependencies": {
