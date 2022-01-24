@@ -19,20 +19,25 @@
     "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)"
   ],
   "files": [
-    "dist",
+    "lib",
     "src"
   ],
-  "main": "dist/react-json-tree.cjs.js",
-  "module": "dist/react-json-tree.esm.js",
-  "types": "dist/index.d.ts",
-  "unpkg": "dist/react-json-tree.umd.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/types/index.d.ts",
+  "unpkg": "lib/umd/react-json-tree.umd.js",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "rollup -c",
-    "clean": "rimraf umd",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:types && yarn build:umd",
+    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
+    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:umd": "rollup -c",
+    "clean": "rimraf lib",
     "test": "jest",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
@@ -46,6 +51,7 @@
     "react-base16-styling": "^0.9.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.12",
     "@babel/eslint-parser": "^7.16.5",
     "@babel/plugin-transform-runtime": "^7.16.10",

@@ -45,6 +45,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/cli@npm:^7.16.8":
+  version: 7.16.8
+  resolution: "@babel/cli@npm:7.16.8"
+  dependencies:
+    "@nicolo-ribaudo/chokidar-2": 2.1.8-no-fsevents.3
+    chokidar: ^3.4.0
+    commander: ^4.0.1
+    convert-source-map: ^1.1.0
+    fs-readdir-recursive: ^1.1.0
+    glob: ^7.0.0
+    make-dir: ^2.1.0
+    slash: ^2.0.0
+    source-map: ^0.5.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  dependenciesMeta:
+    "@nicolo-ribaudo/chokidar-2":
+      optional: true
+    chokidar:
+      optional: true
+  bin:
+    babel: ./bin/babel.js
+    babel-external-helpers: ./bin/babel-external-helpers.js
+  checksum: bb0cf50ff502a30e92918cf644192351023a9ef615acc3e7774abbd0327948d93e58ab3a8d31f52c18e2f04df8af10186b89421c28f4f0a2eee6b1ddce17a8ef
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.10.4, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.16.7, @babel/code-frame@npm:^7.5.5, @babel/code-frame@npm:^7.8.3":
   version: 7.16.7
   resolution: "@babel/code-frame@npm:7.16.7"
@@ -4055,6 +4082,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.3":
+  version: 2.1.8-no-fsevents.3
+  resolution: "@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.3"
+  checksum: ee55cc9241aeea7eb94b8a8551bfa4246c56c53bc71ecda0a2104018fcc328ba5723b33686bdf9cc65d4df4ae65e8016b89e0bbdeb94e0309fe91bb9ced42344
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -4493,6 +4527,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/app@workspace:packages/redux-devtools-app"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -4511,7 +4546,6 @@ __metadata:
     "@redux-devtools/ui": ^1.1.1
     "@reduxjs/toolkit": ^1.7.1
     "@rjsf/core": ^3.2.1
-    "@rollup/plugin-babel": ^5.3.0
     "@testing-library/jest-dom": ^5.16.1
     "@testing-library/react": ^12.1.2
     "@types/jest": ^27.4.0
@@ -4557,14 +4591,11 @@ __metadata:
     redux: ^4.1.2
     redux-persist: ^6.0.0
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     socketcluster-client: ^14.3.2
     style-loader: ^3.3.1
     styled-components: ^5.3.3
     ts-jest: ^27.1.3
     ts-node: ^10.4.0
-    tslib: ^2.3.1
     typescript: ~4.5.5
     webpack: ^5.67.0
     webpack-cli: ^4.9.1
@@ -4581,6 +4612,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/chart-monitor@workspace:packages/redux-devtools-chart-monitor"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -4589,7 +4621,6 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
     "@redux-devtools/core": ^3.10.1
-    "@rollup/plugin-babel": ^5.3.0
     "@types/prop-types": ^15.7.4
     "@types/react": ^17.0.38
     "@types/redux-devtools-themes": ^1.0.0
@@ -4606,9 +4637,6 @@ __metadata:
     redux: ^4.1.2
     redux-devtools-themes: ^1.0.0
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@redux-devtools/core": ^3.7.0
@@ -4682,6 +4710,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/core@workspace:packages/redux-devtools"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -4690,7 +4719,6 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
     "@redux-devtools/instrument": ^2.0.1
-    "@rollup/plugin-babel": ^5.3.0
     "@types/jest": ^27.4.0
     "@types/lodash": ^4.14.178
     "@types/node": ^16.11.21
@@ -4712,10 +4740,7 @@ __metadata:
     react-redux: ^7.2.6
     redux: ^4.1.2
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     react: ^0.14.9 || ^15.3.0 || ^16.0.0 || ^17.0.0
@@ -4728,6 +4753,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/dock-monitor@workspace:packages/redux-devtools-dock-monitor"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -4736,7 +4762,6 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
     "@redux-devtools/core": ^3.10.1
-    "@rollup/plugin-babel": ^5.3.0
     "@types/parse-key": ^0.2.0
     "@types/prop-types": ^15.7.4
     "@types/react": ^17.0.38
@@ -4752,9 +4777,6 @@ __metadata:
     react-dock: ^0.5.0
     redux: ^4.1.2
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@redux-devtools/core": ^3.7.0
@@ -4768,22 +4790,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/extension@workspace:packages/redux-devtools-extension"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
     "@babel/preset-env": ^7.16.11
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@rollup/plugin-babel": ^5.3.0
     "@typescript-eslint/eslint-plugin": ^5.10.0
     "@typescript-eslint/parser": ^5.10.0
     eslint: ^8.7.0
     eslint-config-prettier: ^8.3.0
     redux: ^4.1.2
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     redux: ^3.1.0 || ^4.0.0
@@ -4794,6 +4813,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/inspector-monitor-test-tab@workspace:packages/redux-devtools-inspector-monitor-test-tab"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -4804,7 +4824,6 @@ __metadata:
     "@redux-devtools/core": ^3.10.1
     "@redux-devtools/inspector-monitor": ^2.0.1
     "@redux-devtools/ui": ^1.1.1
-    "@rollup/plugin-babel": ^5.3.0
     "@testing-library/react": ^12.1.2
     "@types/es6template": ^1.0.0
     "@types/jest": ^27.4.0
@@ -4831,11 +4850,8 @@ __metadata:
     react-icons: ^4.3.1
     redux: ^4.1.2
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     simple-diff: ^1.6.0
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@redux-devtools/inspector-monitor": ^2.0.0
@@ -4851,6 +4867,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/inspector-monitor-trace-tab@workspace:packages/redux-devtools-inspector-monitor-trace-tab"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/code-frame": ^7.16.7
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
@@ -4861,13 +4878,13 @@ __metadata:
     "@babel/runtime": ^7.16.7
     "@redux-devtools/core": ^3.10.1
     "@redux-devtools/inspector-monitor": ^2.0.1
-    "@rollup/plugin-babel": ^5.3.0
     "@testing-library/react": ^12.1.2
     "@types/babel__code-frame": ^7.0.3
     "@types/chrome": ^0.0.176
     "@types/html-entities": ^1.3.4
     "@types/jest": ^27.4.0
     "@types/node": ^16.11.21
+    "@types/path-browserify": ^1.0.0
     "@types/react": ^17.0.38
     "@types/redux-devtools-themes": ^1.0.0
     "@types/source-map": 0.5.2
@@ -4881,18 +4898,15 @@ __metadata:
     eslint-plugin-react-hooks: ^4.3.0
     html-entities: ^2.3.2
     jest: ^27.4.7
+    path-browserify: ^1.0.1
     react: ^17.0.2
     react-dom: ^17.0.2
     react-test-renderer: ^17.0.2
     redux: ^4.1.2
     redux-devtools-themes: ^1.0.0
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-node-polyfills: ^0.2.1
-    rollup-plugin-typescript2: ^0.31.1
     source-map: ^0.5.7
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@redux-devtools/inspector-monitor": ^2.0.0
@@ -4906,6 +4920,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/inspector-monitor@workspace:packages/redux-devtools-inspector-monitor"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -4914,7 +4929,6 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
     "@redux-devtools/core": ^3.10.1
-    "@rollup/plugin-babel": ^5.3.0
     "@types/dateformat": ^3.0.1
     "@types/dragula": ^3.7.1
     "@types/hex-rgba": ^1.0.1
@@ -4947,9 +4961,6 @@ __metadata:
     redux: ^4.1.2
     redux-devtools-themes: ^1.0.0
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@redux-devtools/core": ^3.7.0
@@ -4963,13 +4974,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/instrument@workspace:packages/redux-devtools-instrument"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
     "@babel/preset-env": ^7.16.11
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@rollup/plugin-babel": ^5.3.0
     "@types/jest": ^27.4.0
     "@types/lodash": ^4.14.178
     "@types/node": ^16.11.21
@@ -4982,11 +4993,8 @@ __metadata:
     lodash: ^4.17.21
     redux: ^4.1.2
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     rxjs: ^7.5.2
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     redux: ^3.4.0 || ^4.0.0
@@ -4997,6 +5005,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/log-monitor@workspace:packages/redux-devtools-log-monitor"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -5005,7 +5014,6 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
     "@redux-devtools/core": ^3.10.1
-    "@rollup/plugin-babel": ^5.3.0
     "@types/lodash.debounce": ^4.0.6
     "@types/prop-types": ^15.7.4
     "@types/react": ^17.0.38
@@ -5023,9 +5031,6 @@ __metadata:
     redux: ^4.1.2
     redux-devtools-themes: ^1.0.0
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@redux-devtools/core": ^3.7.0
@@ -5039,6 +5044,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/remote@workspace:packages/redux-devtools-remote"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -5047,8 +5053,6 @@ __metadata:
     "@babel/runtime": ^7.16.7
     "@redux-devtools/instrument": ^2.0.1
     "@redux-devtools/utils": ^1.1.1
-    "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^21.0.1
     "@types/jsan": ^3.1.2
     "@types/socketcluster-client": ^13.0.5
     "@typescript-eslint/eslint-plugin": ^5.10.0
@@ -5060,10 +5064,7 @@ __metadata:
     redux: ^4.1.2
     rimraf: ^3.0.2
     rn-host-detect: ^1.2.0
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     socketcluster-client: ^14.3.2
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     redux: ^3.5.2 || ^4.0.0
@@ -5074,6 +5075,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/rtk-query-monitor@workspace:packages/redux-devtools-rtk-query-monitor"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -5084,7 +5086,6 @@ __metadata:
     "@redux-devtools/core": ^3.10.1
     "@redux-devtools/ui": ^1.1.1
     "@reduxjs/toolkit": ^1.7.1
-    "@rollup/plugin-babel": ^5.3.0
     "@types/hex-rgba": ^1.0.1
     "@types/lodash.debounce": ^4.0.6
     "@types/prop-types": ^15.7.4
@@ -5108,9 +5109,6 @@ __metadata:
     redux: ^4.1.2
     redux-devtools-themes: ^1.0.0
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@redux-devtools/core": ^3.7.0
@@ -5127,13 +5125,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/serialize@workspace:packages/redux-devtools-serialize"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
     "@babel/preset-env": ^7.16.11
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@rollup/plugin-babel": ^5.3.0
     "@types/jest": ^27.4.0
     "@types/jsan": ^3.1.2
     "@typescript-eslint/eslint-plugin": ^5.10.0
@@ -5145,10 +5143,7 @@ __metadata:
     jest: ^27.4.7
     jsan: ^3.1.14
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     immutable: ^4.0.0
@@ -5159,6 +5154,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/slider-monitor@workspace:packages/redux-devtools-slider-monitor"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -5201,6 +5197,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/ui@workspace:packages/redux-devtools-ui"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -5209,7 +5206,6 @@ __metadata:
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
     "@rjsf/core": ^3.2.1
-    "@rollup/plugin-babel": ^5.3.0
     "@storybook/addon-essentials": ^6.4.14
     "@storybook/react": ^6.4.14
     "@testing-library/dom": ^8.11.2
@@ -5238,6 +5234,7 @@ __metadata:
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     jest: ^27.4.7
+    ncp: ^2.0.0
     prop-types: ^15.8.1
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -5246,8 +5243,6 @@ __metadata:
     react-select: ^5.2.2
     redux-devtools-themes: ^1.0.0
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     simple-element-resize-detector: ^1.3.0
     styled-components: ^5.3.3
     stylelint: ^14.2.0
@@ -5256,7 +5251,6 @@ __metadata:
     stylelint-config-styled-components: ^0.1.1
     stylelint-processor-styled-components: ^1.10.0
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
     webpack: ^5.67.0
   peerDependencies:
@@ -5271,6 +5265,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@redux-devtools/utils@workspace:packages/redux-devtools-utils"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -5279,7 +5274,6 @@ __metadata:
     "@babel/runtime": ^7.16.7
     "@redux-devtools/core": ^3.10.1
     "@redux-devtools/serialize": ^0.4.0
-    "@rollup/plugin-babel": ^5.3.0
     "@types/get-params": ^0.1.0
     "@types/jsan": ^3.1.2
     "@types/lodash": ^4.14.178
@@ -5295,9 +5289,6 @@ __metadata:
     nanoid: ^3.2.0
     redux: ^4.1.2
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@redux-devtools/core": ^3.7.0
@@ -7475,6 +7466,13 @@ __metadata:
   version: 5.0.3
   resolution: "@types/parse5@npm:5.0.3"
   checksum: d6b7495cb1850f9f2e9c5e103ede9f2d30a5320669707b105c403868adc9e4bf8d3a7ff314cc23f67826bbbbbc0e6147346ce9062ab429f099dba7a01f463919
+  languageName: node
+  linkType: hard
+
+"@types/path-browserify@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@types/path-browserify@npm:1.0.0"
+  checksum: e3f98ef9638fb75dc7547c3cde5fa86bc5986e38403ec91234abcc7b911e30711af7c6abc674d617d27c4a6c09e7f8e9d77662b1cc45d00d4708d94764202b61
   languageName: node
   linkType: hard
 
@@ -11049,7 +11047,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.4.1, chokidar@npm:^3.4.2, chokidar@npm:^3.5.2":
+"chokidar@npm:^3.4.0, chokidar@npm:^3.4.1, chokidar@npm:^3.4.2, chokidar@npm:^3.5.2":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -11512,7 +11510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^4.1.1":
+"commander@npm:^4.0.1, commander@npm:^4.1.1":
   version: 4.1.1
   resolution: "commander@npm:4.1.1"
   checksum: d7b9913ff92cae20cb577a4ac6fcc121bd6223319e54a40f51a14740a681ad5c574fd29a57da478a5f234a6fa6c52cbf0b7c641353e03c648b1ae85ba670b977
@@ -11904,7 +11902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
+"convert-source-map@npm:^1.1.0, convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
   version: 1.8.0
   resolution: "convert-source-map@npm:1.8.0"
   dependencies:
@@ -12517,6 +12515,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "d3-state-visualizer@workspace:packages/d3-state-visualizer"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -12557,6 +12556,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "d3tooltip@workspace:packages/d3tooltip"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -14088,13 +14088,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"estree-walker@npm:^0.6.1":
-  version: 0.6.1
-  resolution: "estree-walker@npm:0.6.1"
-  checksum: 9d6f82a4921f11eec18f8089fb3cce6e53bcf45a8e545c42a2674d02d055fb30f25f90495f8be60803df6c39680c80dcee7f944526867eb7aa1fc9254883b23d
-  languageName: node
-  linkType: hard
-
 "estree-walker@npm:^1.0.1":
   version: 1.0.1
   resolution: "estree-walker@npm:1.0.1"
@@ -15071,6 +15064,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fs-readdir-recursive@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "fs-readdir-recursive@npm:1.1.0"
+  checksum: 29d50f3d2128391c7fc9fd051c8b7ea45bcc8aa84daf31ef52b17218e20bfd2bd34d02382742801954cc8d1905832b68227f6b680a666ce525d8b6b75068ad1e
+  languageName: node
+  linkType: hard
+
 "fs-vacuum@npm:~1.2.10, fs-vacuum@npm:~1.2.9":
   version: 1.2.10
   resolution: "fs-vacuum@npm:1.2.10"
@@ -15635,7 +15635,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^7.0.3, glob@npm:^7.0.5, glob@npm:^7.1.1, glob@npm:^7.1.2, glob@npm:^7.1.3, glob@npm:^7.1.4, glob@npm:^7.1.6":
+"glob@npm:^7.0.0, glob@npm:^7.0.3, glob@npm:^7.0.5, glob@npm:^7.1.1, glob@npm:^7.1.2, glob@npm:^7.1.3, glob@npm:^7.1.4, glob@npm:^7.1.6":
   version: 7.2.0
   resolution: "glob@npm:7.2.0"
   dependencies:
@@ -19871,7 +19871,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.25.3, magic-string@npm:^0.25.7":
+"magic-string@npm:^0.25.7":
   version: 0.25.7
   resolution: "magic-string@npm:0.25.7"
   dependencies:
@@ -20031,6 +20031,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "map2tree@workspace:packages/map2tree"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -23818,13 +23819,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-base16-styling@workspace:packages/react-base16-styling"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
     "@babel/preset-env": ^7.16.11
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@rollup/plugin-babel": ^5.3.0
     "@types/base16": ^1.0.2
     "@types/color": ^3.0.2
     "@types/jest": ^27.4.0
@@ -23841,10 +23842,7 @@ __metadata:
     jest: ^27.4.7
     lodash.curry: ^4.1.1
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
   languageName: unknown
   linkType: soft
@@ -23974,6 +23972,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-dock@workspace:packages/react-dock"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -23981,7 +23980,6 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.16.7
-    "@rollup/plugin-babel": ^5.3.0
     "@types/jest": ^27.4.0
     "@types/lodash": ^4.14.178
     "@types/lodash.debounce": ^4.0.6
@@ -24001,10 +23999,7 @@ __metadata:
     react: ^17.0.2
     react-test-renderer: ^17.0.2
     rimraf: ^3.0.2
-    rollup: ^2.66.0
-    rollup-plugin-typescript2: ^0.31.1
     ts-jest: ^27.1.3
-    tslib: ^2.3.1
     typescript: ~4.5.5
   peerDependencies:
     "@types/react": ^16.3.0 || ^17.0.0
@@ -24175,6 +24170,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-json-tree@workspace:packages/react-json-tree"
   dependencies:
+    "@babel/cli": ^7.16.8
     "@babel/core": ^7.16.12
     "@babel/eslint-parser": ^7.16.5
     "@babel/plugin-transform-runtime": ^7.16.10
@@ -25615,26 +25611,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-inject@npm:^3.0.0":
-  version: 3.0.2
-  resolution: "rollup-plugin-inject@npm:3.0.2"
-  dependencies:
-    estree-walker: ^0.6.1
-    magic-string: ^0.25.3
-    rollup-pluginutils: ^2.8.1
-  checksum: a014972c80fe34b8c8154056fa2533a8440066a31de831e3793fc21b15d108d92c22d8f7f472397bd5783d7c5e04d8cbf112fb72c5a26e997726e4eb090edad1
-  languageName: node
-  linkType: hard
-
-"rollup-plugin-node-polyfills@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "rollup-plugin-node-polyfills@npm:0.2.1"
-  dependencies:
-    rollup-plugin-inject: ^3.0.0
-  checksum: e84645212c443aca3cfae2ba69f01c6d8c5c250f0bf651416b69a4572b60aae9da7cdd687de3ab9b903f7a1ab96b06b71f0c4927d1b02a37485360d2b563937b
-  languageName: node
-  linkType: hard
-
 "rollup-plugin-terser@npm:^7.0.2":
   version: 7.0.2
   resolution: "rollup-plugin-terser@npm:7.0.2"
@@ -25663,15 +25639,6 @@ __metadata:
     rollup: ">=1.26.3"
     typescript: ">=2.4.0"
   checksum: 29a809aaf7a8c2f81e033cc3214284c2bbe915c3cbe0e31de5930d51b8b031b7ab46dcef9b3f32fd9e5a82a3ad78c6434f35639fc163c940a6ee71b44548673e
-  languageName: node
-  linkType: hard
-
-"rollup-pluginutils@npm:^2.8.1":
-  version: 2.8.2
-  resolution: "rollup-pluginutils@npm:2.8.2"
-  dependencies:
-    estree-walker: ^0.6.1
-  checksum: 339fdf866d8f4ff6e408fa274c0525412f7edb01dc46b5ccda51f575b7e0d20ad72965773376fb5db95a77a7fcfcab97bf841ec08dbadf5d6b08af02b7a2cf5e
   languageName: node
   linkType: hard
 

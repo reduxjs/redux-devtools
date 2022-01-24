@@ -9,11 +9,13 @@ const config = [
     input: 'src/index.ts',
     output: {
       name: 'd3tooltip',
-      file: 'dist/d3tooltip.umd.js',
+      file: 'lib/umd/d3tooltip.js',
       format: 'umd',
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfigOverride: { compilerOptions: { declaration: false } },
+      }),
       resolve(),
       commonjs(),
       babel({
@@ -27,11 +29,13 @@ const config = [
     input: 'src/index.ts',
     output: {
       name: 'd3tooltip',
-      file: 'dist/d3tooltip.umd.min.js',
+      file: 'lib/umd/d3tooltip.min.js',
       format: 'umd',
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfigOverride: { compilerOptions: { declaration: false } },
+      }),
       resolve(),
       commonjs(),
       babel({
@@ -41,22 +45,6 @@ const config = [
       }),
       terser(),
     ],
-  },
-  {
-    input: 'src/index.ts',
-    output: [
-      { file: 'dist/d3tooltip.cjs.js', format: 'cjs' },
-      { file: 'dist/d3tooltip.esm.js', format: 'esm' },
-    ],
-    plugins: [
-      typescript(),
-      babel({
-        babelHelpers: 'runtime',
-        extensions: ['.ts'],
-        plugins: ['@babel/plugin-transform-runtime'],
-      }),
-    ],
-    external: [/@babel\/runtime/, 'ramda'],
   },
 ];
 

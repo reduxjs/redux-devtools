@@ -1,6 +1,6 @@
 import { Action, compose, Reducer, StoreEnhancerStoreCreator } from 'redux';
 import { instrument } from '@redux-devtools/instrument';
-import persistState from './persistState';
+import { persistState } from '@redux-devtools/core';
 import { ConfigWithExpandedMaxAge } from '../../browser/extension/inject/pageScript';
 
 export function getUrlParam(key: string) {

@@ -9,11 +9,13 @@ const config = [
     input: 'src/index.ts',
     output: {
       name: 'd3-state-visualizer',
-      file: 'dist/d3-state-visualizer.umd.js',
+      file: 'lib/umd/d3-state-visualizer.js',
       format: 'umd',
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfigOverride: { compilerOptions: { declaration: false } },
+      }),
       resolve(),
       commonjs(),
       babel({
@@ -27,11 +29,13 @@ const config = [
     input: 'src/index.ts',
     output: {
       name: 'd3-state-visualizer',
-      file: 'dist/d3-state-visualizer.umd.min.js',
+      file: 'lib/umd/d3-state-visualizer.min.js',
       format: 'umd',
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfigOverride: { compilerOptions: { declaration: false } },
+      }),
       resolve(),
       commonjs(),
       babel({
@@ -40,29 +44,6 @@ const config = [
         plugins: ['@babel/plugin-transform-runtime'],
       }),
       terser(),
-    ],
-  },
-  {
-    input: 'src/index.ts',
-    output: [
-      { file: 'dist/d3-state-visualizer.cjs.js', format: 'cjs' },
-      { file: 'dist/d3-state-visualizer.esm.js', format: 'esm' },
-    ],
-    plugins: [
-      typescript(),
-      babel({
-        babelHelpers: 'runtime',
-        extensions: ['.ts'],
-        plugins: ['@babel/plugin-transform-runtime'],
-      }),
-    ],
-    external: [
-      /@babel\/runtime/,
-      'd3',
-      'ramda',
-      'map2tree',
-      'deepmerge',
-      'd3tooltip',
     ],
   },
 ];
