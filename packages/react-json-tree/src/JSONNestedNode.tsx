@@ -97,7 +97,7 @@ interface Props extends CircularPropsPassedThroughJSONNestedNode {
   expandable: boolean;
 }
 
-function JSONNestedNode(props: Props) {
+export default function JSONNestedNode(props: Props) {
   const {
     getItemString,
     nodeTypeIndicator,
@@ -126,8 +126,6 @@ function JSONNestedNode(props: Props) {
     });
   }, [isCircular, data, keyPath, level, shouldExpandNode]);
 
-  // fixme - previously this was happening after a component should update
-  // this should be moved to a useMemo and updated only when some props change
   const renderedChildren =
     expanded || (hideRoot && props.level === 0)
       ? renderChildNodes({ ...props, level: props.level + 1 })
