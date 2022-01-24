@@ -9,19 +9,23 @@
   "license": "MIT",
   "author": "Cale Newman <newman.cale@gmail.com> (http://github.com/calesce)",
   "files": [
-    "dist",
+    "lib",
     "src"
   ],
-  "main": "dist/redux-devtools-slider-monitor.cjs.js",
-  "module": "dist/redux-devtools-slider-monitor.esm.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/types/index.d.ts",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "rollup -c",
-    "clean": "rimraf dist",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:types",
+    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
+    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
+    "build:types": "tsc --emitDeclarationOnly",
+    "clean": "rimraf lib",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
     "prepack": "yarn run clean && yarn run build",
@@ -36,6 +40,7 @@
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.12",
     "@babel/eslint-parser": "^7.16.5",
     "@babel/plugin-transform-runtime": "^7.16.10",

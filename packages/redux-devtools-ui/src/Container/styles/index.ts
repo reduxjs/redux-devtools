@@ -25,7 +25,8 @@ export const MainContainerWrapper = styled.div`
 
   .CodeMirror div,
   pre,
-  .monitor-LogMonitor * {
+  .monitor div,
+  .slider div {
     font-family: ${(props) =>
       props.theme.codeFontFamily || props.theme.fontFamily || 'monospace'};
   }

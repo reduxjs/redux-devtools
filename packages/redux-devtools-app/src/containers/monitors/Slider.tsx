@@ -27,7 +27,7 @@ class Slider extends Component<Props> {
   }
   render() {
     return (
-      <SliderWrapper>
+      <SliderWrapper className="slider">
         <SliderMonitor
           {...this.props.liftedState}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment

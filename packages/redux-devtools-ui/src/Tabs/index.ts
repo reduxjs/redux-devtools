@@ -1,2 +1,2 @@
 export { default } from './Tabs';
-export { Tab } from './TabsHeader';
+export type { Tab } from './TabsHeader';

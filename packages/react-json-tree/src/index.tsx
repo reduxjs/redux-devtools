@@ -9,9 +9,9 @@ import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
 import {
   invertTheme,
-  StylingFunction,
-  StylingValue,
-  Theme,
+  type StylingFunction,
+  type StylingValue,
+  type Theme,
 } from 'react-base16-styling';
 import { CircularPropsPassedThroughJSONTree } from './types';
 

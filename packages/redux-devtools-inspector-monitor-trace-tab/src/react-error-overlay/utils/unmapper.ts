@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import path from 'path';
+import path from 'path-browserify';
 import StackFrame from './stack-frame';
 import { getSourceMap } from './getSourceMap';
 import { getLinesAround } from './getLinesAround';

@@ -6,7 +6,7 @@ export { default as Editor } from './Editor';
 export { default as Form } from './Form';
 export { default as Select } from './Select';
 export { default as Slider } from './Slider';
-export { default as Tabs, Tab } from './Tabs';
+export { default as Tabs, type Tab } from './Tabs';
 export { default as SegmentedControl } from './SegmentedControl';
 export { default as Notification } from './Notification';
 export * from './Toolbar';
@@ -17,8 +17,8 @@ export { default as createStyledComponent } from './utils/createStyledComponent'
 export {
   listSchemes,
   listThemes,
-  ThemeName,
-  ThemeFromProvider,
-  SchemeName,
+  type ThemeName,
+  type ThemeFromProvider,
+  type SchemeName,
 } from './utils/theme';
-export { Theme } from './themes/default';
+export type { Theme } from './themes/default';
