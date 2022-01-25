@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "counter-redux",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Counter example for redux",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools/examples/counter",
   "bugs": {
@@ -19,9 +19,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@redux-devtools/core": "^3.10.1",
-    "@redux-devtools/dock-monitor": "^2.0.1",
-    "@redux-devtools/log-monitor": "^3.0.1",
+    "@redux-devtools/core": "^3.11.0",
+    "@redux-devtools/dock-monitor": "^2.1.0",
+    "@redux-devtools/log-monitor": "^3.1.0",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
