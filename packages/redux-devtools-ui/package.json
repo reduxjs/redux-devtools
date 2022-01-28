@@ -28,7 +28,7 @@
     "build": "yarn run build:lib && yarn run build:storybook",
     "build:lib": "yarn build:cjs && yarn build:esm && yarn build:types && yarn build:css",
     "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
+    "build:esm": "babel src --config-file ./babel.config.esm.json --no-babelrc --extensions \".ts,.tsx\" --out-dir lib/esm",
     "build:types": "tsc --emitDeclarationOnly",
     "build:css": "ncp fonts lib/fonts",
     "clean": "rimraf lib storybook-static",
