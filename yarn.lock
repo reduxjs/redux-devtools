@@ -4572,7 +4572,7 @@ __metadata:
     eslint-plugin-jest: ^25.7.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     html-loader: ^3.1.0
     html-webpack-plugin: ^5.5.0
     javascript-stringify: ^2.1.0
@@ -11047,7 +11047,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.4.0, chokidar@npm:^3.4.1, chokidar@npm:^3.4.2, chokidar@npm:^3.5.2":
+"chokidar@npm:^3.4.0, chokidar@npm:^3.4.1, chokidar@npm:^3.4.2, chokidar@npm:^3.5.2, chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -12084,7 +12084,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     html-webpack-plugin: ^5.5.0
     prop-types: ^15.8.1
     react: ^17.0.2
@@ -12500,7 +12500,7 @@ __metadata:
     d3-state-visualizer: ^1.6.0
     eslint: ^8.7.0
     eslint-config-prettier: ^8.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     html-webpack-plugin: ^5.5.0
     map2tree: ^2.1.0
     ts-node: ^10.4.0
@@ -14779,7 +14779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fork-ts-checker-webpack-plugin@npm:^6.0.4, fork-ts-checker-webpack-plugin@npm:^6.5.0":
+"fork-ts-checker-webpack-plugin@npm:^6.0.4":
   version: 6.5.0
   resolution: "fork-ts-checker-webpack-plugin@npm:6.5.0"
   dependencies:
@@ -14807,6 +14807,32 @@ __metadata:
     vue-template-compiler:
       optional: true
   checksum: 95d145ab7936445f3a9bfa4116ef73537f97196cfaa3f5b24473dff36d034e839d3b0e034a23beefc9619eceb7a9866816bfd55afd1968e955eb3b3f8cfc35ed
+  languageName: node
+  linkType: hard
+
+"fork-ts-checker-webpack-plugin@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "fork-ts-checker-webpack-plugin@npm:7.0.0"
+  dependencies:
+    "@babel/code-frame": ^7.16.7
+    chalk: ^4.1.2
+    chokidar: ^3.5.3
+    cosmiconfig: ^7.0.1
+    deepmerge: ^4.2.2
+    fs-extra: ^10.0.0
+    memfs: ^3.4.1
+    minimatch: ^3.0.4
+    schema-utils: 4.0.0
+    semver: ^7.3.5
+    tapable: ^2.2.1
+  peerDependencies:
+    typescript: ">3.6.0"
+    vue-template-compiler: "*"
+    webpack: ^5.11.0
+  peerDependenciesMeta:
+    vue-template-compiler:
+      optional: true
+  checksum: b02a74ada4d3917fd2edbfbf13c5c17804e7a8669c785cd127c320983ce793042e50892c38e108bc52562b41ec8490bbfddc4963bf651629d4829d9bbc355d38
   languageName: node
   linkType: hard
 
@@ -15024,6 +15050,17 @@ __metadata:
     path-is-absolute: ^1.0.0
     rimraf: ^2.2.8
   checksum: 6edfd65fc813baa27f1603778c0f5ec11f8c5006a20b920437813ee2023eba18aeec8bef1c89b2e6c84f9fc90fdc7c916f4a700466c8c69d22a35d018f2570f0
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "fs-extra@npm:10.0.0"
+  dependencies:
+    graceful-fs: ^4.2.0
+    jsonfile: ^6.0.1
+    universalify: ^2.0.0
+  checksum: 5285a3d8f34b917cf2b66af8c231a40c1623626e9d701a20051d3337be16c6d7cac94441c8b3732d47a92a2a027886ca93c69b6a4ae6aee3c89650d2a8880c0a
   languageName: node
   linkType: hard
 
@@ -16964,7 +17001,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     history: ^4.10.1
     html-webpack-plugin: ^5.5.0
     immutable: ^4.0.0
@@ -20170,7 +20207,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memfs@npm:^3.1.2, memfs@npm:^3.2.2":
+"memfs@npm:^3.1.2, memfs@npm:^3.2.2, memfs@npm:^3.4.1":
   version: 3.4.1
   resolution: "memfs@npm:3.4.1"
   dependencies:
@@ -23951,7 +23988,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     html-webpack-plugin: ^5.5.0
     react: ^17.0.2
     react-bootstrap: ^2.1.1
@@ -24151,7 +24188,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     html-webpack-plugin: ^5.5.0
     immutable: ^4.0.0
     react: ^17.0.2
@@ -25159,7 +25196,7 @@ __metadata:
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     file-loader: ^6.2.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     gitbook-cli: ^2.3.2
     immutable: ^4.0.0
     jest: ^27.4.7
@@ -25718,7 +25755,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     framer-motion: ^5.6.0
     html-webpack-plugin: ^5.5.0
     msw: ^0.36.5
@@ -25966,6 +26003,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"schema-utils@npm:4.0.0, schema-utils@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "schema-utils@npm:4.0.0"
+  dependencies:
+    "@types/json-schema": ^7.0.9
+    ajv: ^8.8.0
+    ajv-formats: ^2.1.1
+    ajv-keywords: ^5.0.0
+  checksum: c843e92fdd1a5c145dbb6ffdae33e501867f9703afac67bdf35a685e49f85b1dcc10ea250033175a64bd9d31f0555bc6785b8359da0c90bcea30cf6dfbb55a8f
+  languageName: node
+  linkType: hard
+
 "schema-utils@npm:^1.0.0":
   version: 1.0.0
   resolution: "schema-utils@npm:1.0.0"
@@ -25996,18 +26045,6 @@ __metadata:
     ajv: ^6.12.5
     ajv-keywords: ^3.5.2
   checksum: fb73f3d759d43ba033c877628fe9751620a26879f6301d3dbeeb48cf2a65baec5cdf99da65d1bf3b4ff5444b2e59cbe4f81c2456b5e0d2ba7d7fd4aed5da29ce
-  languageName: node
-  linkType: hard
-
-"schema-utils@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "schema-utils@npm:4.0.0"
-  dependencies:
-    "@types/json-schema": ^7.0.9
-    ajv: ^8.8.0
-    ajv-formats: ^2.1.1
-    ajv-keywords: ^5.0.0
-  checksum: c843e92fdd1a5c145dbb6ffdae33e501867f9703afac67bdf35a685e49f85b1dcc10ea250033175a64bd9d31f0555bc6785b8359da0c90bcea30cf6dfbb55a8f
   languageName: node
   linkType: hard
 
@@ -26497,7 +26534,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     html-webpack-plugin: ^5.5.0
     prop-types: ^15.8.1
     react: ^17.0.2
@@ -27710,7 +27747,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tapable@npm:^2.0.0, tapable@npm:^2.1.1, tapable@npm:^2.2.0":
+"tapable@npm:^2.0.0, tapable@npm:^2.1.1, tapable@npm:^2.2.0, tapable@npm:^2.2.1":
   version: 2.2.1
   resolution: "tapable@npm:2.2.1"
   checksum: 3b7a1b4d86fa940aad46d9e73d1e8739335efd4c48322cb37d073eb6f80f5281889bf0320c6d8ffcfa1a0dd5bfdbd0f9d037e252ef972aca595330538aac4d51
@@ -27993,7 +28030,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     history: ^4.10.1
     html-webpack-plugin: ^5.5.0
     immutable: ^4.0.0
@@ -28275,7 +28312,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
-    fork-ts-checker-webpack-plugin: ^6.5.0
+    fork-ts-checker-webpack-plugin: ^7.0.0
     html-webpack-plugin: ^5.5.0
     prop-types: ^15.8.1
     react: ^17.0.2
