@@ -21,7 +21,8 @@
     "build:all": "lerna run build",
     "lint:all": "lerna run lint",
     "test:all": "lerna run test",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "release": "yarn build:all && changeset publish"
   },
   "workspaces": [
     "extension",
