@@ -1,7 +1,9 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 3.0.0
+
+- **BREAKING** Rename `redux-devtools-extension` package to `@redux-devtools/extension` (https://github.com/reduxjs/redux-devtools/pull/948).
+- Deprecate `actionsBlacklist` and `actionsWhitelist` in favor of `actionsDenylist` and `actionsAllowlist` (https://github.com/reduxjs/redux-devtools/pull/851).
 
 ## 2.13.9 (2021-03-06)
 

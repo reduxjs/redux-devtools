@@ -1,16 +1,22 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 2.0.0
 
-# [1.0.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor@0.15.0...@redux-devtools/inspector-monitor@1.0.0) (2021-06-11)
+- Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):
+
+```diff
+- import Inspector from '@redux-devtools/inspector-monitor';
++ import { InspectorMonitor } from '@redux-devtools/inspector-monitor';
+```
+
+## [1.0.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor@0.15.0...@redux-devtools/inspector-monitor@1.0.0) (2021-06-11)
 
 ### Bug Fixes
 
 - **inspector:** fix z-index of tabs ([#723](https://github.com/reduxjs/redux-devtools/issues/723)) ([e747783](https://github.com/reduxjs/redux-devtools/commit/e7477833f05ab0ff8f947a48d97eb3ed87ccb70b))
 - **inspector:** move immutable back to dependencies ([#725](https://github.com/reduxjs/redux-devtools/issues/725)) ([fcd73ab](https://github.com/reduxjs/redux-devtools/commit/fcd73ab043062bd3c191fd814f3d912bea6fc675))
 
-# [0.15.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor@0.14.1...@redux-devtools/inspector-monitor@0.15.0) (2021-03-06)
+## [0.15.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor@0.14.1...@redux-devtools/inspector-monitor@0.15.0) (2021-03-06)
 
 ### Features
 
@@ -20,7 +26,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @redux-devtools/inspector-monitor
 
-# [0.14.0](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-inspector@0.13.1...redux-devtools-inspector@0.14.0) (2020-09-07)
+## [0.14.0](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-inspector@0.13.1...redux-devtools-inspector@0.14.0) (2020-09-07)
 
 ### Features
 

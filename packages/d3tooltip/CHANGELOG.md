@@ -1,9 +1,15 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 2.0.0
 
-# [1.3.0](https://github.com/reduxjs/redux-devtools/compare/d3tooltip@1.2.3...d3tooltip@1.3.0) (2021-03-06)
+- Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):
+
+```diff
+- import d3tooltip from 'd3tooltip';
++ import { tooltip } from 'd3tooltip';
+```
+
+## [1.3.0](https://github.com/reduxjs/redux-devtools/compare/d3tooltip@1.2.3...d3tooltip@1.3.0) (2021-03-06)
 
 ### Features
 

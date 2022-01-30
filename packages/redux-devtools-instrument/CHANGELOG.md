@@ -1,9 +1,15 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 2.0.0
 
-# 1.11.0 (2021-03-06)
+- Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):
+
+```diff
+- import instrument from '@redux-devtools/instrument';
++ import { instrument } from '@redux-devtools/instrument';
+```
+
+## 1.11.0 (2021-03-06)
 
 ### Features
 
@@ -11,7 +17,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **redux-devtools-instrument:** export type PerformAction ([#614](https://github.com/reduxjs/redux-devtools/issues/614)) ([9e59cfd](https://github.com/reduxjs/redux-devtools/commit/9e59cfdc7d1d0595f0718feaebc0a9bf814b0b63))
 - **redux-devtools-serialize:** convert to TypeScript ([#621](https://github.com/reduxjs/redux-devtools/issues/621)) ([d586f19](https://github.com/reduxjs/redux-devtools/commit/d586f1955a3648883107f8c981ee17eeb4c013a3))
 
-# [1.10.0](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-instrument@1.9.7...redux-devtools-instrument@1.10.0) (2020-09-07)
+## [1.10.0](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-instrument@1.9.7...redux-devtools-instrument@1.10.0) (2020-09-07)
 
 ### Features
 

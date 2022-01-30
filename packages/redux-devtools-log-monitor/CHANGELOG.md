@@ -1,15 +1,21 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 3.0.0
 
-# [2.3.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/log-monitor@2.2.0...@redux-devtools/log-monitor@2.3.0) (2021-03-06)
+- Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):
+
+```diff
+- import LogMonitor from '@redux-devtools/log-monitor';
++ import { LogMonitor } from '@redux-devtools/log-monitor';
+```
+
+## [2.3.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/log-monitor@2.2.0...@redux-devtools/log-monitor@2.3.0) (2021-03-06)
 
 ### Features
 
 - update peer dependencies to allow react@^17 ([#703](https://github.com/reduxjs/redux-devtools/issues/703)) ([2aaa9c1](https://github.com/reduxjs/redux-devtools/commit/2aaa9c10a383e3a7ab20b3ab14639781fd7bb2eb))
 
-# 2.2.0 (2021-03-06)
+## 2.2.0 (2021-03-06)
 
 ### Bug Fixes
 
@@ -24,7 +30,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **redux-devtools-serialize:** convert to TypeScript ([#621](https://github.com/reduxjs/redux-devtools/issues/621)) ([d586f19](https://github.com/reduxjs/redux-devtools/commit/d586f1955a3648883107f8c981ee17eeb4c013a3))
 - **redux-devtools-slider-monitor:** convert to TypeScript ([#631](https://github.com/reduxjs/redux-devtools/issues/631)) ([8991732](https://github.com/reduxjs/redux-devtools/commit/89917320e5ecf33dc3625b05daa1e9fe120a783d))
 
-# [2.1.0](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-log-monitor@2.0.1...redux-devtools-log-monitor@2.1.0) (2020-09-07)
+## [2.1.0](https://github.com/reduxjs/redux-devtools/compare/redux-devtools-log-monitor@2.0.1...redux-devtools-log-monitor@2.1.0) (2020-09-07)
 
 ### Features
 

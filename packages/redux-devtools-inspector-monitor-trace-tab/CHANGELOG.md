@@ -1,7 +1,13 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.3.0
+
+- Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):
+
+```diff
+- import TraceTab from '@redux-devtools/inspector-monitor-trace-tab';
++ import { TraceTab } from '@redux-devtools/inspector-monitor-trace-tab';
+```
 
 ## [0.2.2](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor-trace-tab@0.2.1...@redux-devtools/inspector-monitor-trace-tab@0.2.2) (2021-06-11)
 
@@ -15,7 +21,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix peer dependencies on inpsector monitor ([#730](https://github.com/reduxjs/redux-devtools/issues/730)) ([0291f5c](https://github.com/reduxjs/redux-devtools/commit/0291f5c95e4340a3b5e30a3efe76a1a1a2bb7f5e))
 
-# [0.2.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor-trace-tab@0.1.4...@redux-devtools/inspector-monitor-trace-tab@0.2.0) (2021-03-06)
+## [0.2.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/inspector-monitor-trace-tab@0.1.4...@redux-devtools/inspector-monitor-trace-tab@0.2.0) (2021-03-06)
 
 ### Features
 
