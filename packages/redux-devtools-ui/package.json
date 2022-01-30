@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/ui",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "Reusable React components for building DevTools monitors and apps.",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-ui",
   "bugs": {
@@ -16,7 +16,9 @@
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "types": "lib/types/index.d.ts",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
@@ -28,7 +30,7 @@
     "build": "yarn run build:lib && yarn run build:storybook",
     "build:lib": "yarn build:cjs && yarn build:esm && yarn build:types && yarn build:css",
     "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
+    "build:esm": "babel src --config-file ./babel.config.esm.json --no-babelrc --extensions \".ts,.tsx\" --out-dir lib/esm",
     "build:types": "tsc --emitDeclarationOnly",
     "build:css": "ncp fonts lib/fonts",
     "clean": "rimraf lib storybook-static",
@@ -80,7 +82,7 @@
     "csstype": "^3.0.10",
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jest": "^25.7.0",
+    "eslint-plugin-jest": "^26.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.4.7",

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "counter-redux",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Counter example for redux",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools/examples/counter",
   "bugs": {
@@ -19,9 +19,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@redux-devtools/core": "^3.10.1",
-    "@redux-devtools/dock-monitor": "^2.0.1",
-    "@redux-devtools/log-monitor": "^3.0.1",
+    "@redux-devtools/core": "^3.11.0",
+    "@redux-devtools/dock-monitor": "^2.1.0",
+    "@redux-devtools/log-monitor": "^3.1.0",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -48,7 +48,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "fork-ts-checker-webpack-plugin": "^6.5.0",
+    "fork-ts-checker-webpack-plugin": "^7.0.0",
     "html-webpack-plugin": "^5.5.0",
     "ts-node": "^10.4.0",
     "typescript": "~4.5.5",
