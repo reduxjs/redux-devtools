@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.2.2
+
+### Patch Changes
+
+- a25551f: Fix failing to bundle fonts
+
 ## [1.0.0-9](https://github.com/reduxjs/redux-devtools/compare/devui@1.0.0-8...devui@1.0.0-9) (2021-06-11)
 
 ### Bug Fixes

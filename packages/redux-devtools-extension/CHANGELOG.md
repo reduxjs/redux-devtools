@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.2.1
+
+### Patch Changes
+
+- a25551f: Fix files included in publish
+
 ## 3.0.0
 
 - **BREAKING** Rename `redux-devtools-extension` package to `@redux-devtools/extension` (https://github.com/reduxjs/redux-devtools/pull/948).
