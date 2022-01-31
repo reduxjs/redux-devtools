@@ -9,21 +9,16 @@ import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
 import {
   invertTheme,
-  type StylingFunction,
   type StylingValue,
   type Theme,
 } from 'react-base16-styling';
 import { CircularPropsPassedThroughJSONTree } from './types';
 
-interface Props extends CircularPropsPassedThroughJSONTree {
+type Props = Partial<CircularPropsPassedThroughJSONTree> & {
   data: any;
   theme?: Theme;
-  invertTheme: boolean;
-}
-
-interface State {
-  styling: StylingFunction;
-}
+  invertTheme?: boolean;
+};
 
 const identity = (value: any) => value;
 const expandRootNode = (
@@ -53,7 +48,7 @@ export function JSONTree(props: Props) {
     postprocessValue = identity,
     hideRoot = false,
     theme,
-    invertTheme: invertThemeProp,
+    invertTheme: invertThemeProp = true,
     shouldExpandNode = expandRootNode,
     getItemString = defaultItemString,
     labelRenderer = defaultLabelRenderer,
