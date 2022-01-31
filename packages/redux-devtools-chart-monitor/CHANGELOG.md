@@ -1,15 +1,21 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 2.0.0
 
-# [1.9.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/chart-monitor@1.8.0...@redux-devtools/chart-monitor@1.9.0) (2021-03-06)
+- Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):
+
+```diff
+- import ChartMonitor from '@redux-devtools/chart-monitor';
++ import { ChartMonitor } from '@redux-devtools/chart-monitor';
+```
+
+## [1.9.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/chart-monitor@1.8.0...@redux-devtools/chart-monitor@1.9.0) (2021-03-06)
 
 ### Features
 
 - update peer dependencies to allow react@^17 ([#703](https://github.com/reduxjs/redux-devtools/issues/703)) ([2aaa9c1](https://github.com/reduxjs/redux-devtools/commit/2aaa9c10a383e3a7ab20b3ab14639781fd7bb2eb))
 
-# 1.8.0 (2021-03-06)
+## 1.8.0 (2021-03-06)
 
 ### Features
 

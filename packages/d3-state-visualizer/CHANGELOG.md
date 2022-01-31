@@ -1,9 +1,6 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
-
-# [1.4.0](https://github.com/reduxjs/redux-devtools/compare/d3-state-visualizer@1.3.4...d3-state-visualizer@1.4.0) (2021-03-06)
+## [1.4.0](https://github.com/reduxjs/redux-devtools/compare/d3-state-visualizer@1.3.4...d3-state-visualizer@1.4.0) (2021-03-06)
 
 ### Features
 
