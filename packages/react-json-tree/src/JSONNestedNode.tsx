@@ -42,7 +42,7 @@ function renderChildNodes(
     nodeType,
     data,
     collectionLimit,
-    circularCache,
+    circularCache = [],
     keyPath,
     postprocessValue,
     sortObjectKeys,
@@ -94,10 +94,12 @@ interface Props extends CircularPropsPassedThroughJSONNestedNode {
   nodeType: string;
   nodeTypeIndicator: string;
   createItemString: (data: any, collectionLimit: number) => string;
-  expandable: boolean;
+  expandable?: boolean;
 }
 
 export default function JSONNestedNode(props: Props) {
+  props.circularCache ??= [];
+
   const {
     getItemString,
     nodeTypeIndicator,
@@ -128,7 +130,7 @@ export default function JSONNestedNode(props: Props) {
 
   const renderedChildren =
     expanded || (hideRoot && props.level === 0)
-      ? renderChildNodes({ ...props, level: props.level + 1 })
+      ? renderChildNodes({ ...props, level: level + 1 })
       : null;
 
   const itemType = (

@@ -60,22 +60,17 @@ export type CircularPropsPassedThroughJSONNode =
     JSONValueNodeCircularPropsPassedThroughJSONTree &
     JSONNestedNodeCircularPropsPassedThroughJSONNode;
 
-export interface JSONNestedNodeCircularPropsPassedThroughJSONNestedNode
-  extends JSONNestedNodeCircularPropsPassedThroughJSONNode {
-  circularCache: any[];
-  level: number;
-}
 export type CircularPropsPassedThroughJSONNestedNode =
   SharedCircularPropsProvidedByJSONTree &
     JSONValueNodeCircularPropsPassedThroughJSONTree &
-    JSONNestedNodeCircularPropsPassedThroughJSONNestedNode;
+    JSONNestedNodeCircularPropsPassedThroughJSONNode;
 
 export type CircularPropsPassedThroughRenderChildNodes =
   SharedCircularPropsProvidedByJSONTree &
     JSONValueNodeCircularPropsPassedThroughJSONTree &
-    JSONNestedNodeCircularPropsPassedThroughJSONNestedNode;
+    JSONNestedNodeCircularPropsPassedThroughJSONNode;
 
 export type CircularPropsPassedThroughItemRange =
   SharedCircularPropsProvidedByJSONTree &
     JSONValueNodeCircularPropsPassedThroughJSONTree &
-    JSONNestedNodeCircularPropsPassedThroughJSONNestedNode;
+    JSONNestedNodeCircularPropsPassedThroughJSONNode;
