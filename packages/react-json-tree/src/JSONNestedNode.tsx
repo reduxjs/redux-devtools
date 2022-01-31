@@ -98,8 +98,6 @@ interface Props extends CircularPropsPassedThroughJSONNestedNode {
 }
 
 export default function JSONNestedNode(props: Props) {
-  props.circularCache ??= [];
-
   const {
     getItemString,
     nodeTypeIndicator,
