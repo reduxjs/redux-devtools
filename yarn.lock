@@ -4275,7 +4275,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mswjs/cookies@npm:^0.1.6, @mswjs/cookies@npm:^0.1.7":
+"@mswjs/cookies@npm:^0.1.6":
   version: 0.1.7
   resolution: "@mswjs/cookies@npm:0.1.7"
   dependencies:
@@ -21211,37 +21211,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:^0.36.8":
-  version: 0.36.8
-  resolution: "msw@npm:0.36.8"
-  dependencies:
-    "@mswjs/cookies": ^0.1.7
-    "@mswjs/interceptors": ^0.12.7
-    "@open-draft/until": ^1.0.3
-    "@types/cookie": ^0.4.1
-    "@types/inquirer": ^8.1.3
-    "@types/js-levenshtein": ^1.1.0
-    chalk: 4.1.1
-    chokidar: ^3.4.2
-    cookie: ^0.4.1
-    graphql: ^15.5.1
-    headers-utils: ^3.0.2
-    inquirer: ^8.2.0
-    is-node-process: ^1.0.1
-    js-levenshtein: ^1.1.6
-    node-fetch: ^2.6.7
-    path-to-regexp: ^6.2.0
-    statuses: ^2.0.0
-    strict-event-emitter: ^0.2.0
-    type-fest: ^1.2.2
-    yargs: ^17.3.0
-  bin:
-    msw: cli/index.js
-  checksum: 3a5935692bab92f17b3b15444a590ceceb8e952706372396a25bd1567d60bca71a42c28e6ebba1ae8ebbdccc91a4e0a0061f87ffbf09928952911f8cb7c6731f
-  languageName: node
-  linkType: hard
-
-"msw@npm:latest":
+"msw@npm:^0.36.8, msw@npm:latest":
   version: 0.36.5
   resolution: "msw@npm:0.36.5"
   dependencies:
