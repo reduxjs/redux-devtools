@@ -6854,7 +6854,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testim/chrome-version@npm:^1.0.7":
+"@testim/chrome-version@npm:^1.1.2":
   version: 1.1.2
   resolution: "@testim/chrome-version@npm:1.1.2"
   checksum: dcc470c190117adfade3013f9bb7b3642f3b020a770017c222114ac30fcb79defe098f6e2c7b74118199d39f749ef5cd9fab8878e3216339d9b5f4e541ec5fd9
@@ -9906,12 +9906,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.21.2":
-  version: 0.21.4
-  resolution: "axios@npm:0.21.4"
+"axios@npm:^0.24.0":
+  version: 0.24.0
+  resolution: "axios@npm:0.24.0"
   dependencies:
-    follow-redirects: ^1.14.0
-  checksum: 44245f24ac971e7458f3120c92f9d66d1fc695e8b97019139de5b0cc65d9b8104647db01e5f46917728edfc0cfd88eb30fc4c55e6053eef4ace76768ce95ff3c
+    follow-redirects: ^1.14.4
+  checksum: 468cf496c08a6aadfb7e699bebdac02851e3043d4e7d282350804ea8900e30d368daa6e3cd4ab83b8ddb5a3b1e17a5a21ada13fc9cebd27b74828f47a4236316
   languageName: node
   linkType: hard
 
@@ -11381,12 +11381,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:^96.0.0":
-  version: 96.0.0
-  resolution: "chromedriver@npm:96.0.0"
+"chromedriver@npm:^97.0.4":
+  version: 97.0.4
+  resolution: "chromedriver@npm:97.0.4"
   dependencies:
-    "@testim/chrome-version": ^1.0.7
-    axios: ^0.21.2
+    "@testim/chrome-version": ^1.1.2
+    axios: ^0.24.0
     del: ^6.0.0
     extract-zip: ^2.0.1
     https-proxy-agent: ^5.0.0
@@ -11394,7 +11394,7 @@ __metadata:
     tcp-port-used: ^1.0.1
   bin:
     chromedriver: bin/chromedriver
-  checksum: d2b34e1304146f16100aa3d336e944af0b1cbbeabddc4eb136f4691cc987683770e46bdaca442ba678020fb2bf0c254e868d018f52dff56c75f41880829566e4
+  checksum: 36c17402ae70778870572e435c8dcd5bd0e9c3da66f605e63c9b5a2534c1acacc0017d4e2023be47e5b7b74a85c27f6014c506d3e3f077148d7f3fe3009a8384
   languageName: node
   linkType: hard
 
@@ -15087,7 +15087,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.0":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.4":
   version: 1.14.7
   resolution: "follow-redirects@npm:1.14.7"
   peerDependenciesMeta:
@@ -25680,7 +25680,7 @@ __metadata:
     "@types/styled-components": ^5.1.21
     babel-loader: ^8.2.3
     bestzip: ^2.2.0
-    chromedriver: ^96.0.0
+    chromedriver: ^97.0.4
     copy-webpack-plugin: ^9.1.0
     cross-env: ^7.0.3
     css-loader: ^6.5.1
