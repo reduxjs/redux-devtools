@@ -43,7 +43,7 @@ const store = createStore(
 );
 ```
 
-There’re just [few lines of code](https://github.com/reduxjs/redux-devtools/blob/main/packages/redux-devtools-extension/src/index.ts). If you don’t want to allow the extension in production, just use ‘@redux-devtools/extension/lib/developmentOnly’ instead of ‘@redux-devtools/extension’.
+There are just a [few lines of code](https://github.com/reduxjs/redux-devtools/blob/main/packages/redux-devtools-extension/src/index.ts). If you don’t want to allow the extension in production, just use `composeWithDevToolsDevelopmentOnly` instead of `composeWithDevTools`.
 
 ## License
 
