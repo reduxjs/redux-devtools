@@ -11,7 +11,6 @@ render(
     <Provider store={store}>
       <App />
     </Provider>
-    <iframe src="http://remotedev.io/local/" />
   </div>,
   document.getElementById('root')
 );
