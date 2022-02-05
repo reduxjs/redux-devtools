@@ -43,7 +43,7 @@
     "prepublish": "yarn run type-check && yarn run lint && yarn run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.7",
+    "@babel/runtime": "^7.17.0",
     "@redux-devtools/ui": "^1.2.1",
     "@types/prop-types": "^15.7.4",
     "es6template": "^1.0.5",
@@ -55,10 +55,10 @@
     "simple-diff": "^1.6.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.12",
-    "@babel/eslint-parser": "^7.16.5",
-    "@babel/plugin-transform-runtime": "^7.16.10",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
@@ -69,16 +69,16 @@
     "@types/jest": "^27.4.0",
     "@types/jsan": "^3.1.2",
     "@types/object-path": "^0.11.1",
-    "@types/react": "^17.0.38",
+    "@types/react": "^17.0.39",
     "@types/simple-diff": "^1.6.1",
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^26.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "jest": "^27.4.7",
+    "jest": "^27.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "redux": "^4.1.2",
@@ -89,7 +89,7 @@
   "peerDependencies": {
     "@redux-devtools/inspector-monitor": "^2.0.0",
     "@types/react": "^16.3.0 || ^17.0.0",
-    "@types/styled-components": "^5.1.21",
+    "@types/styled-components": "^5.1.22",
     "react": "^16.3.0 || ^17.0.0",
     "redux": "^3.4.0 || ^4.0.0",
     "styled-components": "^5.3.3"

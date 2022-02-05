@@ -41,7 +41,7 @@
     "prepublish": "yarn run type-check && yarn run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.7",
+    "@babel/runtime": "^7.17.0",
     "@redux-devtools/instrument": "^2.1.0",
     "@redux-devtools/utils": "^1.2.0",
     "jsan": "^3.1.14",
@@ -50,17 +50,17 @@
     "socketcluster-client": "^14.3.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.12",
-    "@babel/eslint-parser": "^7.16.5",
-    "@babel/plugin-transform-runtime": "^7.16.10",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jsan": "^3.1.2",
     "@types/rn-host-detect": "^1.2.0",
     "@types/socketcluster-client": "^13.0.5",
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "redux": "^4.1.2",

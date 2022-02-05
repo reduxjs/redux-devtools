@@ -41,7 +41,7 @@
     "prepublish": "yarn run type-check && yarn run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.7",
+    "@babel/runtime": "^7.17.0",
     "@types/lodash.debounce": "^4.0.6",
     "@types/prop-types": "^15.7.4",
     "@types/redux-devtools-themes": "^1.0.0",
@@ -51,17 +51,17 @@
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.12",
-    "@babel/eslint-parser": "^7.16.5",
-    "@babel/plugin-transform-runtime": "^7.16.10",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@redux-devtools/core": "^3.11.0",
-    "@types/react": "^17.0.38",
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
+    "@types/react": "^17.0.39",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.28.0",
