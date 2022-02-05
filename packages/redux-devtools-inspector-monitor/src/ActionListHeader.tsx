@@ -16,6 +16,7 @@ interface Props {
   hideMainButtons: boolean | undefined;
   hasSkippedActions: boolean;
   hasStagedActions: boolean;
+  searchValue: string | undefined;
 }
 
 const ActionListHeader: FunctionComponent<Props> = ({
@@ -26,12 +27,14 @@ const ActionListHeader: FunctionComponent<Props> = ({
   onCommit,
   onSweep,
   hideMainButtons,
+  searchValue,
 }) => (
   <div {...styling('actionListHeader')}>
     <input
       {...styling('actionListHeaderSearch')}
       onChange={(e) => onSearch(e.target.value)}
       placeholder="filter..."
+      value={searchValue}
     />
     {!hideMainButtons && (
       <div {...styling('actionListHeaderWrapper')}>
