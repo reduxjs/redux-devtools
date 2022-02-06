@@ -42,7 +42,7 @@ devTools.init({ value: 'initial state' });
 devTools.send('change state', { value: 'state changed' });
 ```
 
-See [redux enhancer's example](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/npm-package/logOnly.js), [react example](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/examples/react-counter-messaging/components/Counter.js) and [blog post](https://medium.com/@zalmoxis/redux-devtools-without-redux-or-how-to-have-a-predictable-state-with-any-architecture-61c5f5a7716f) for more details.
+See [redux enhancer's example](https://github.com/reduxjs/redux-devtools/blob/main/packages/redux-devtools-extension/src/logOnly.ts), [react example](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/examples/react-counter-messaging/components/Counter.js) and [blog post](https://medium.com/@zalmoxis/redux-devtools-without-redux-or-how-to-have-a-predictable-state-with-any-architecture-61c5f5a7716f) for more details.
 
 ### disconnect()
 

@@ -229,3 +229,16 @@ export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
           return noop;
         };
       };
+
+export {
+  composeWithDevTools as composeWithDevToolsDevelopmentOnly,
+  devToolsEnhancer as devToolsEnhancerDevelopmentOnly,
+} from './developmentOnly';
+export {
+  composeWithDevTools as composeWithDevToolsLogOnly,
+  devToolsEnhancer as devToolsEnhancerLogOnly,
+} from './logOnly';
+export {
+  composeWithDevTools as composeWithDevToolsLogOnlyInProduction,
+  devToolsEnhancer as devToolsEnhancerLogOnlyInProduction,
+} from './logOnlyInProduction';

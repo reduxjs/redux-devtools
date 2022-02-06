@@ -113,19 +113,19 @@ const store = createStore(reducer, enhancer);
 
 > [See the post for more details](https://medium.com/@zalmoxis/improve-your-development-workflow-with-redux-devtools-extension-f0379227ff83).
 
-### 1.3 Use `redux-devtools-extension` package from npm
+### 1.3 Use `@redux-devtools/extension` package from npm
 
 To make things easier, there's an npm package to install:
 
 ```
-npm install --save redux-devtools-extension
+npm install --save @redux-devtools/extension
 ```
 
 and to use like so:
 
 ```js
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const store = createStore(
   reducer,
@@ -140,7 +140,7 @@ To specify [extension’s options](https://github.com/zalmoxisus/redux-devtools-
 
 ```js
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const composeEnhancers = composeWithDevTools({
   // Specify name here, actionsDenylist, actionsCreators and other options if needed
@@ -154,13 +154,13 @@ const store = createStore(
 );
 ```
 
-> There’re just [few lines of code](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/npm-package/index.js) added to your bundle.
+> There are just a [few lines of code](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/npm-package/index.js) added to your bundle.
 
 In case you don't include other enhancers and middlewares, just use `devToolsEnhancer`:
 
 ```js
 import { createStore } from 'redux';
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { devToolsEnhancer } from '@redux-devtools/extension';
 
 const store = createStore(
   reducer,
@@ -173,15 +173,15 @@ const store = createStore(
 
 It's useful to include the extension in production as well. Usually you [can use it for development](https://medium.com/@zalmoxis/using-redux-devtools-in-production-4c5b56c5600f).
 
-If you want to restrict it there, use `redux-devtools-extension/logOnlyInProduction`:
+If you want to restrict it there, use `composeWithDevToolsLogOnlyInProduction` or `devToolsEnhancerLogOnlyInProduction`:
 
 ```js
 import { createStore } from 'redux';
-import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
+import { devToolsEnhancerLogOnlyInProduction } from '@redux-devtools/extension';
 
 const store = createStore(
   reducer,
-  /* preloadedState, */ devToolsEnhancer()
+  /* preloadedState, */ devToolsEnhancerLogOnlyInProduction()
   // options like actionSanitizer, stateSanitizer
 );
 ```
@@ -190,9 +190,9 @@ or with middlewares and enhancers:
 
 ```js
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import { composeWithDevToolsLogOnlyInProduction } from '@redux-devtools/extension';
 
-const composeEnhancers = composeWithDevTools({
+const composeEnhancers = composeWithDevToolsLogOnlyInProduction({
   // options like actionSanitizer, stateSanitizer
 });
 const store = createStore(
@@ -206,9 +206,9 @@ const store = createStore(
 
 > You'll have to add `'process.env.NODE_ENV': JSON.stringify('production')` in your Webpack config for the production bundle ([to envify](https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md#exclude-devtools-from-production-builds)). If you use `create-react-app`, [it already does it for you.](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/config/webpack.config.prod.js#L253-L257)
 
-If you're already checking `process.env.NODE_ENV` when creating the store, include `redux-devtools-extension/logOnly` for production environment.
+If you're already checking `process.env.NODE_ENV` when creating the store, import `composeWithDevToolsLogOnly` or `devToolsEnhancerLogOnly` for production environment.
 
-If you don’t want to allow the extension in production, just use `redux-devtools-extension/developmentOnly`.
+If you don’t want to allow the extension in production, just use `composeWithDevToolsDevelopmentOnly` or `devToolsEnhancerDevelopmentOnly`.
 
 > See [the article](https://medium.com/@zalmoxis/using-redux-devtools-in-production-4c5b56c5600f) for more details.
 
