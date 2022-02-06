@@ -12630,13 +12630,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debounce@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "debounce@npm:1.2.1"
-  checksum: 682a89506d9e54fb109526f4da255c5546102fbb8e3ae75eef3b04effaf5d4853756aee97475cd4650641869794e44f410eeb20ace2b18ea592287ab2038519e
-  languageName: node
-  linkType: hard
-
 "debug@npm:2.6.9, debug@npm:^2.2.0, debug@npm:^2.3.3, debug@npm:^2.6.0, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -14856,32 +14849,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^5.6.0":
-  version: 5.6.0
-  resolution: "framer-motion@npm:5.6.0"
+"framer-motion@npm:^6.2.4":
+  version: 6.2.4
+  resolution: "framer-motion@npm:6.2.4"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     framesync: 6.0.1
     hey-listen: ^1.0.8
     popmotion: 11.0.3
-    react-merge-refs: ^1.1.0
-    react-use-measure: ^2.1.1
     style-value-types: 5.0.0
     tslib: ^2.1.0
   peerDependencies:
-    "@react-three/fiber": "*"
     react: ">=16.8 || ^17.0.0"
     react-dom: ">=16.8 || ^17.0.0"
-    three: ^0.135.0
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  peerDependenciesMeta:
-    "@react-three/fiber":
-      optional: true
-    three:
-      optional: true
-  checksum: 384374bebda443ea2a149951337c4f82b9c3611e138e8dd8db6439bbccc4523968deb72dde83d5686223ec78be58f8ae1f51b9e34b585e4c50df15266e586a60
+  checksum: 71b2fefba015812bfbb9041a5a7aebabb0181a58f33467a45c91746d25db50dd2dcb79e5d90c7d329acb45cab259e8cb503d8a0b5406f4615dfca739c91edd25
   languageName: node
   linkType: hard
 
@@ -23039,13 +23023,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-merge-refs@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "react-merge-refs@npm:1.1.0"
-  checksum: 90884352999002d868ab9f1bcfe3222fb0f2178ed629f1da7e98e5a9b02a2c96b4aa72800db92aabd69d2483211b4be57a2088e89a11a0b660e7ada744d4ddf7
-  languageName: node
-  linkType: hard
-
 "react-popper-tooltip@npm:^3.1.1":
   version: 3.1.1
   resolution: "react-popper-tooltip@npm:3.1.1"
@@ -23337,18 +23314,6 @@ __metadata:
     react: ">=16.6.0"
     react-dom: ">=16.6.0"
   checksum: b67bf5b3e86dbab72d658b9a52a3589e5960583ab28c7c66272427d8fe30d4c7de422d5046ae96bd2683cdf80cc3264b2516f5ce80cae1dbe6cf3ca6dda392c5
-  languageName: node
-  linkType: hard
-
-"react-use-measure@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "react-use-measure@npm:2.1.1"
-  dependencies:
-    debounce: ^1.2.1
-  peerDependencies:
-    react: ">=16.13"
-    react-dom: ">=16.13"
-  checksum: b8e8939229d463c3c505f7b617925c0228efae0cd6f651371f463846417b06c9170be57df51293a61027c41770f8a090fdb8a08717c4e36290ccb496e0318f1f
   languageName: node
   linkType: hard
 
@@ -24326,7 +24291,7 @@ __metadata:
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.0.0
-    framer-motion: ^5.6.0
+    framer-motion: ^6.2.4
     html-webpack-plugin: ^5.5.0
     msw: ^0.36.8
     react: ^17.0.2
