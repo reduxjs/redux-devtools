@@ -154,6 +154,7 @@ export default class ActionList<
           hideMainButtons={hideMainButtons}
           hasSkippedActions={skippedActionIds.length > 0}
           hasStagedActions={actionIds.length > 1}
+          searchValue={searchValue}
         />
         <div
           data-testid="actionListRows"
