@@ -18,7 +18,6 @@ export function DevToolsSelector() {
         <Button
           aria-selected={!extensionEnabled}
           colorScheme="blue"
-          selected={!extensionEnabled}
           data-extension="0"
           variant={!extensionEnabled ? 'solid' : 'outline'}
           onClick={handleClick}
