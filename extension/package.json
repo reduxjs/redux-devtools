@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "remotedev-redux-devtools-extension",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "description": "Redux Developer Tools for debugging application state changes.",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/extension",
   "license": "MIT",
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "@redux-devtools/app": "^2.1.1",
+    "@redux-devtools/app": "^2.1.2",
     "@redux-devtools/core": "^3.11.0",
     "@redux-devtools/instrument": "^2.1.0",
     "@redux-devtools/serialize": "^0.4.1",
