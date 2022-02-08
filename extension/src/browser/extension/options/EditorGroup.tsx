@@ -47,36 +47,11 @@ export default ({ options, saveOption }: OptionsProps) => {
           id="editor"
           type="text"
           size={33}
-          maxLength={30}
-          placeholder="vscode, atom, webstorm, sublime..."
-          value={options.editor}
+          placeholder={'vscode://file/{path}:{line}:{column}'}
+          value={options.editorURL}
           disabled={options.useEditor !== EditorState.EXTERNAL}
-          onChange={(e) =>
-            saveOption('editor', e.target.value.replace(/\W/g, ''))
-          }
+          onChange={(e) => saveOption('editorURL', e.target.value)}
         />
-      </div>
-      <div className="option option_type_radio">
-        <label
-          className="option__label"
-          htmlFor="editor-external"
-          style={{ marginLeft: '20px' }}
-        >
-          Absolute path to the project directory to open:
-        </label>
-        <br />
-        <textarea
-          className="option__textarea"
-          placeholder="/home/user/my-awesome-app"
-          value={options.projectPath}
-          disabled={options.useEditor !== EditorState.EXTERNAL}
-          onChange={(e) =>
-            saveOption('projectPath', e.target.value.replace('\n', ''))
-          }
-        />
-        <div className="option__hint">
-          Run `pwd` in your project root directory to get it
-        </div>
       </div>
     </fieldset>
   );
