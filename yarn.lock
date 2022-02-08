@@ -4808,7 +4808,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redux-devtools/app@^2.1.1, @redux-devtools/app@workspace:packages/redux-devtools-app":
+"@redux-devtools/app@^2.1.1, @redux-devtools/app@^2.1.2, @redux-devtools/app@workspace:packages/redux-devtools-app":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/app@workspace:packages/redux-devtools-app"
   dependencies:
@@ -4822,7 +4822,7 @@ __metadata:
     "@babel/runtime": ^7.17.0
     "@redux-devtools/chart-monitor": ^2.1.0
     "@redux-devtools/core": ^3.11.0
-    "@redux-devtools/inspector-monitor": ^2.1.0
+    "@redux-devtools/inspector-monitor": ^2.1.1
     "@redux-devtools/inspector-monitor-test-tab": ^0.8.5
     "@redux-devtools/inspector-monitor-trace-tab": ^0.3.3
     "@redux-devtools/log-monitor": ^3.1.0
@@ -5201,7 +5201,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@redux-devtools/inspector-monitor@^2.1.0, @redux-devtools/inspector-monitor@workspace:packages/redux-devtools-inspector-monitor":
+"@redux-devtools/inspector-monitor@^2.1.0, @redux-devtools/inspector-monitor@^2.1.1, @redux-devtools/inspector-monitor@workspace:packages/redux-devtools-inspector-monitor":
   version: 0.0.0-use.local
   resolution: "@redux-devtools/inspector-monitor@workspace:packages/redux-devtools-inspector-monitor"
   dependencies:
@@ -23802,7 +23802,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/register": ^7.17.0
-    "@redux-devtools/app": ^2.1.1
+    "@redux-devtools/app": ^2.1.2
     "@redux-devtools/core": ^3.11.0
     "@redux-devtools/instrument": ^2.1.0
     "@redux-devtools/serialize": ^0.4.1
