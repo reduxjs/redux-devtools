@@ -4959,7 +4959,7 @@ __metadata:
     chalk: ^4.1.2
     cors: ^2.8.5
     cross-spawn: ^7.0.3
-    electron: ^16.0.8
+    electron: ^17.0.0
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-jest: ^26.0.0
@@ -6897,7 +6897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testim/chrome-version@npm:^1.0.7":
+"@testim/chrome-version@npm:^1.1.2":
   version: 1.1.2
   resolution: "@testim/chrome-version@npm:1.1.2"
   checksum: dcc470c190117adfade3013f9bb7b3642f3b020a770017c222114ac30fcb79defe098f6e2c7b74118199d39f749ef5cd9fab8878e3216339d9b5f4e541ec5fd9
@@ -9840,12 +9840,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.21.2":
-  version: 0.21.4
-  resolution: "axios@npm:0.21.4"
+"axios@npm:^0.24.0":
+  version: 0.24.0
+  resolution: "axios@npm:0.24.0"
   dependencies:
-    follow-redirects: ^1.14.0
-  checksum: 44245f24ac971e7458f3120c92f9d66d1fc695e8b97019139de5b0cc65d9b8104647db01e5f46917728edfc0cfd88eb30fc4c55e6053eef4ace76768ce95ff3c
+    follow-redirects: ^1.14.4
+  checksum: 468cf496c08a6aadfb7e699bebdac02851e3043d4e7d282350804ea8900e30d368daa6e3cd4ab83b8ddb5a3b1e17a5a21ada13fc9cebd27b74828f47a4236316
   languageName: node
   linkType: hard
 
@@ -11095,12 +11095,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:^96.0.0":
-  version: 96.0.0
-  resolution: "chromedriver@npm:96.0.0"
+"chromedriver@npm:^98.0.0":
+  version: 98.0.0
+  resolution: "chromedriver@npm:98.0.0"
   dependencies:
-    "@testim/chrome-version": ^1.0.7
-    axios: ^0.21.2
+    "@testim/chrome-version": ^1.1.2
+    axios: ^0.24.0
     del: ^6.0.0
     extract-zip: ^2.0.1
     https-proxy-agent: ^5.0.0
@@ -11108,7 +11108,7 @@ __metadata:
     tcp-port-used: ^1.0.1
   bin:
     chromedriver: bin/chromedriver
-  checksum: d2b34e1304146f16100aa3d336e944af0b1cbbeabddc4eb136f4691cc987683770e46bdaca442ba678020fb2bf0c254e868d018f52dff56c75f41880829566e4
+  checksum: 3a60ca06706e547fd9bbadbdd17c021b2c3afdd8324ade84a7671eff0c9f7f99fc0be288a8e24dff8629c03a23b446892684224355adb26a77831d79ed98d0d2
   languageName: node
   linkType: hard
 
@@ -13328,16 +13328,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:^16.0.8":
-  version: 16.0.8
-  resolution: "electron@npm:16.0.8"
+"electron@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "electron@npm:17.0.0"
   dependencies:
     "@electron/get": ^1.13.0
     "@types/node": ^14.6.2
     extract-zip: ^1.0.3
   bin:
     electron: cli.js
-  checksum: 9d3a2e1c3e6dcfdce25b4d9e1ef9dfe736354f9c3605945cfc5b1568862b69ad0a81e402cfaf09c2f51615b64bc3585ef4828a013437b9506cd0dbff3e6db903
+  checksum: c945a1a5475ba66ca70637b150b3f10ea9d28b1f2167a9d8d2137e087785f647e1153f4335f898238470392ed689e3d207b2b96928025c5dd092d6f601e21414
   languageName: node
   linkType: hard
 
@@ -14675,13 +14675,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.0":
-  version: 1.14.7
-  resolution: "follow-redirects@npm:1.14.7"
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.4":
+  version: 1.14.8
+  resolution: "follow-redirects@npm:1.14.8"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: f6d03e5e30877431065bca0d1b2e3db93949eb799d368a5c07ea8a4b71205f0349a3f8f0191bf13a07c93885522834dca1dc8e527dc99a772c6911fba24edc5f
+  checksum: 40c67899c2e3149a27e8b6498a338ff27f39fe138fde8d7f0756cb44b073ba0bfec3d52af28f20c5bdd67263d564d0d8d7b5efefd431de95c18c42f7b4aef457
   languageName: node
   linkType: hard
 
@@ -23820,11 +23820,11 @@ __metadata:
     "@types/styled-components": ^5.1.22
     babel-loader: ^8.2.3
     bestzip: ^2.2.0
-    chromedriver: ^96.0.0
+    chromedriver: ^98.0.0
     copy-webpack-plugin: ^9.1.0
     cross-env: ^7.0.3
     css-loader: ^6.6.0
-    electron: ^16.0.8
+    electron: ^17.0.0
     eslint: ^8.8.0
     eslint-config-airbnb: ^19.0.4
     eslint-plugin-import: ^2.25.4
