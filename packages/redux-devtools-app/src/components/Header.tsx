@@ -59,7 +59,9 @@ class Header extends Component<Props> {
         <Button
           title="Support us"
           tooltipPosition="bottom-left"
-          onClick={this.openLink('https://github.com/sponsors/Methuselah96')}
+          onClick={this.openLink(
+            'https://opencollective.com/redux-devtools-extension'
+          )}
         >
           <TiHeartFullOutline />
         </Button>
