@@ -23,6 +23,7 @@ It can be used as a browser extension (for [Chrome](https://chrome.google.com/we
 - [FAQ](https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/FAQ.md)
 
 ## Backers
+
 Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/redux-devtools-extension#backer)]
 
 <a href="https://opencollective.com/redux-devtools-extension/backer/0/website" target="_blank"><img src="https://opencollective.com/redux-devtools-extension/backer/0/avatar.svg"></a>
@@ -57,6 +58,7 @@ Support us with a monthly donation and help us continue our activities. [[Become
 <a href="https://opencollective.com/redux-devtools-extension/backer/29/website" target="_blank"><img src="https://opencollective.com/redux-devtools-extension/backer/29/avatar.svg"></a>
 
 ## Sponsors
+
 Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/redux-devtools-extension#sponsor)]
 
 <a href="https://opencollective.com/redux-devtools-extension/sponsor/0/website" target="_blank"><img src="https://opencollective.com/redux-devtools-extension/sponsor/0/avatar.svg"></a>
