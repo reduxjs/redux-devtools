@@ -7,8 +7,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
+import invertTheme from 'react-base16-styling';
 import type {
-  invertTheme,
   StylingConfig,
   StylingFunction,
   StylingValue,
