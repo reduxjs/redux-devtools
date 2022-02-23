@@ -4830,7 +4830,7 @@ __metadata:
     "@redux-devtools/slider-monitor": ^3.1.1
     "@redux-devtools/ui": ^1.2.1
     "@reduxjs/toolkit": ^1.7.2
-    "@rjsf/core": ^3.2.1
+    "@rjsf/core": ^4.0.1
     "@testing-library/jest-dom": ^5.16.2
     "@testing-library/react": ^12.1.2
     "@types/jest": ^27.4.0
@@ -5491,7 +5491,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
     "@babel/runtime": ^7.17.0
-    "@rjsf/core": ^3.2.1
+    "@rjsf/core": ^4.0.1
     "@storybook/addon-essentials": ^6.4.18
     "@storybook/react": ^6.4.18
     "@testing-library/dom": ^8.11.3
@@ -5635,9 +5635,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rjsf/core@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "@rjsf/core@npm:3.2.1"
+"@rjsf/core@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "@rjsf/core@npm:4.0.1"
   dependencies:
     "@types/json-schema": ^7.0.7
     ajv: ^6.7.0
@@ -5649,8 +5649,8 @@ __metadata:
     prop-types: ^15.7.2
     react-is: ^16.9.0
   peerDependencies:
-    react: ">=16"
-  checksum: 2142d4a31229ea242b79aca4ed93e2fe89e75f15ce93111457c3017d3ab295cae8f53e4dd870c619afa571959d00f46b3c19085c6a336f522c891fc07ecc46f1
+    react: ">=16 || >=17"
+  checksum: 8c117d7bd41171f132f7218cde154662599b44ef1409668feefc42319a2e014c1bdb3d9cfe6525d99a8199a11b40c22084a86d94116c0d44d78e1293aa666961
   languageName: node
   linkType: hard
 
