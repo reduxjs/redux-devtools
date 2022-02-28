@@ -5025,7 +5025,7 @@ __metadata:
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
     eslint-plugin-jest: ^26.1.1
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.2.1
     html-loader: ^3.1.0
@@ -5085,7 +5085,7 @@ __metadata:
     deepmerge: ^4.2.2
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     prop-types: ^15.8.1
     react: ^17.0.2
@@ -5185,7 +5185,7 @@ __metadata:
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
     eslint-plugin-jest: ^26.1.1
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     jest: ^27.5.1
     lodash: ^4.17.21
@@ -5224,7 +5224,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.12.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     parse-key: ^0.2.1
     prop-types: ^15.8.1
@@ -5293,7 +5293,7 @@ __metadata:
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
     eslint-plugin-jest: ^26.1.1
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     javascript-stringify: ^2.1.0
     jest: ^27.5.1
@@ -5349,7 +5349,7 @@ __metadata:
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
     eslint-plugin-jest: ^26.1.1
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     html-entities: ^2.3.2
     jest: ^27.5.1
@@ -5399,7 +5399,7 @@ __metadata:
     dateformat: ^4.6.3
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     hex-rgba: ^1.0.2
     immutable: ^4.0.0
@@ -5477,7 +5477,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.12.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     lodash.debounce: ^4.0.8
     prop-types: ^15.8.1
@@ -5551,7 +5551,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.12.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     hex-rgba: ^1.0.2
     immutable: ^4.0.0
@@ -5628,7 +5628,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.12.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     prop-types: ^15.8.1
     react: ^17.0.2
@@ -5687,7 +5687,7 @@ __metadata:
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
     eslint-plugin-jest: ^26.1.1
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     jest: ^27.5.1
     ncp: ^2.0.0
@@ -12325,7 +12325,7 @@ __metadata:
     cross-env: ^7.0.3
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.2.1
     html-webpack-plugin: ^5.5.0
@@ -14112,27 +14112,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.29.2":
-  version: 7.29.2
-  resolution: "eslint-plugin-react@npm:7.29.2"
+"eslint-plugin-react@npm:~7.28.0":
+  version: 7.28.0
+  resolution: "eslint-plugin-react@npm:7.28.0"
   dependencies:
     array-includes: ^3.1.4
     array.prototype.flatmap: ^1.2.5
     doctrine: ^2.1.0
     estraverse: ^5.3.0
     jsx-ast-utils: ^2.4.1 || ^3.0.0
-    minimatch: ^3.1.2
+    minimatch: ^3.0.4
     object.entries: ^1.1.5
     object.fromentries: ^2.0.5
     object.hasown: ^1.1.0
     object.values: ^1.1.5
-    prop-types: ^15.8.1
+    prop-types: ^15.7.2
     resolve: ^2.0.0-next.3
     semver: ^6.3.0
     string.prototype.matchall: ^4.0.6
   peerDependencies:
     eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
-  checksum: fcd793c0fd8e4570dcf8f70dd4afae9882303f4a4b650e09dac2f85fdc0b28747cb97b79832f4b8f4eabdbfb9edf69dc0ff04e8b7f33e0bb8e3f024185f4b037
+  checksum: 90293d0fd53bb1f735ffd32141cdd211fb1120c9f7bbe5342f9e923261a39e52a2b2575d4e46c9cd77d257f42db4a99b8b339689fc5b5c1c26048929f69b1784
   languageName: node
   linkType: hard
 
@@ -16890,7 +16890,7 @@ __metadata:
     cross-env: ^7.0.3
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.2.1
     history: ^4.10.1
@@ -20212,15 +20212,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "minimatch@npm:3.1.2"
-  dependencies:
-    brace-expansion: ^1.1.7
-  checksum: c154e566406683e7bcb746e000b84d74465b3a832c45d59912b9b55cd50dee66e5c4b1e5566dba26154040e51672f9aa450a9aef0c97cfc7336b78b7afb9540a
-  languageName: node
-  linkType: hard
-
 "minimist-options@npm:4.1.0, minimist-options@npm:^4.0.2":
   version: 4.1.0
   resolution: "minimist-options@npm:4.1.0"
@@ -23180,7 +23171,7 @@ __metadata:
     cross-env: ^7.0.3
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.2.1
     html-webpack-plugin: ^5.5.0
@@ -23222,7 +23213,7 @@ __metadata:
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
     eslint-plugin-jest: ^26.1.1
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     jest: ^27.5.1
     lodash.debounce: ^4.0.8
@@ -23380,7 +23371,7 @@ __metadata:
     cross-env: ^7.0.3
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.2.1
     html-webpack-plugin: ^5.5.0
@@ -23421,7 +23412,7 @@ __metadata:
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
     eslint-plugin-jest: ^26.1.1
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     jest: ^27.5.1
     prop-types: ^15.8.1
@@ -24254,7 +24245,7 @@ __metadata:
     eslint-config-airbnb: ^19.0.4
     eslint-plugin-import: ^2.25.4
     eslint-plugin-jsx-a11y: ^6.5.1
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     file-loader: ^6.2.0
     fork-ts-checker-webpack-plugin: ^7.2.1
@@ -24664,7 +24655,7 @@ __metadata:
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
     eslint-plugin-jest: ^26.1.1
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     jest: ^27.5.1
     lerna: ^4.0.0
@@ -24713,7 +24704,7 @@ __metadata:
     css-loader: ^6.6.0
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.2.1
     framer-motion: ^6.2.8
@@ -25457,7 +25448,7 @@ __metadata:
     css-loader: ^6.6.0
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.2.1
     html-webpack-plugin: ^5.5.0
@@ -26851,7 +26842,7 @@ __metadata:
     css-loader: ^6.6.0
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.2.1
     history: ^4.10.1
@@ -27110,7 +27101,7 @@ __metadata:
     css-loader: ^6.6.0
     eslint: ^8.10.0
     eslint-config-prettier: ^8.4.0
-    eslint-plugin-react: ^7.29.2
+    eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     fork-ts-checker-webpack-plugin: ^7.2.1
     html-webpack-plugin: ^5.5.0
