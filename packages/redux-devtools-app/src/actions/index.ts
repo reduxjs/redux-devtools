@@ -1,5 +1,6 @@
 import { SchemeName, ThemeName } from '@redux-devtools/ui';
 import { AuthStates, States } from 'socketcluster-client/lib/scclientsocket';
+import { REHYDRATE } from 'redux-persist';
 import {
   CHANGE_SECTION,
   CHANGE_THEME,
@@ -559,6 +560,11 @@ export interface ErrorAction {
   payload: string;
 }
 
+interface ReduxPersistRehydrateAction {
+  type: typeof REHYDRATE;
+  payload: unknown;
+}
+
 export type StoreActionWithoutUpdateStateOrLiftedAction =
   | ChangeSectionAction
   | ChangeThemeAction
@@ -594,7 +600,8 @@ export type StoreActionWithoutUpdateStateOrLiftedAction =
   | UpdateReportsAction
   | GetReportError
   | GetReportSuccess
-  | ErrorAction;
+  | ErrorAction
+  | ReduxPersistRehydrateAction;
 
 export type StoreActionWithoutUpdateState =
   | StoreActionWithoutUpdateStateOrLiftedAction

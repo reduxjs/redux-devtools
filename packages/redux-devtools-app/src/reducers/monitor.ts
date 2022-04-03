@@ -1,3 +1,4 @@
+import { REHYDRATE } from 'redux-persist';
 import {
   MONITOR_ACTION,
   SELECT_MONITOR,
@@ -93,6 +94,31 @@ export function monitor(
         ...state,
         dispatcherIsOpen: !state.dispatcherIsOpen,
       };
+    case REHYDRATE: {
+      const rehydratedState = action.payload as
+        | {
+            readonly monitor: MonitorState;
+          }
+        | undefined;
+      if (!rehydratedState) return state;
+      if (
+        rehydratedState.monitor.monitorState &&
+        (typeof rehydratedState.monitor.monitorState.selectedActionId ===
+          'number' ||
+          typeof rehydratedState.monitor.monitorState.startActionId ===
+            'number')
+      ) {
+        return {
+          ...rehydratedState.monitor,
+          monitorState: {
+            ...rehydratedState.monitor.monitorState,
+            selectedActionId: null,
+            startActionId: null,
+          },
+        };
+      }
+      return rehydratedState.monitor;
+    }
     default:
       return state;
   }
