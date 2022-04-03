@@ -94,7 +94,7 @@ export function monitor(
         ...state,
         dispatcherIsOpen: !state.dispatcherIsOpen,
       };
-    case REHYDRATE:
+    case REHYDRATE: {
       const rehydratedState = action.payload as
         | {
             readonly monitor: MonitorState;
@@ -118,6 +118,7 @@ export function monitor(
         };
       }
       return rehydratedState.monitor;
+    }
     default:
       return state;
   }
