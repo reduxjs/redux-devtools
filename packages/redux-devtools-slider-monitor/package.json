@@ -32,7 +32,7 @@
     "prepublish": "yarn run type-check && yarn run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.2",
+    "@babel/runtime": "^7.17.8",
     "@redux-devtools/ui": "^1.2.1",
     "@types/prop-types": "^15.7.4",
     "@types/redux-devtools-themes": "^1.0.0",
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.5",
+    "@babel/core": "^7.17.8",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -49,17 +49,17 @@
     "@babel/preset-typescript": "^7.16.7",
     "@redux-devtools/core": "^3.11.0",
     "@rollup/plugin-babel": "^5.3.1",
-    "@types/react": "^17.0.39",
-    "@typescript-eslint/eslint-plugin": "^5.12.1",
-    "@typescript-eslint/parser": "^5.12.1",
-    "eslint": "^8.10.0",
-    "eslint-config-prettier": "^8.4.0",
+    "@types/react": "^17.0.43",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "~7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react-hooks": "^4.4.0",
     "react": "^17.0.2",
     "redux": "^4.1.2",
     "rimraf": "^3.0.2",
-    "rollup": "^2.68.0",
+    "rollup": "^2.70.1",
     "rollup-plugin-typescript2": "^0.31.2",
     "tslib": "^2.3.1",
     "typescript": "~4.5.5"
@@ -67,9 +67,9 @@
   "peerDependencies": {
     "@redux-devtools/core": "^3.7.0",
     "@types/react": "^16.3.0 || ^17.0.0",
-    "@types/styled-components": "^5.1.23",
+    "@types/styled-components": "^5.1.24",
     "react": "^16.3.0 || ^17.0.0",
     "redux": "^3.4.0 || ^4.0.0",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.5"
   }
 }
