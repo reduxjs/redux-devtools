@@ -1,6 +1,6 @@
 ---
 '@redux-devtools/app': patch
-'@redux-devtools/core': patch
+'@redux-devtools/cli': patch
 'remotedev-redux-devtools-extension': patch
 ---
 
