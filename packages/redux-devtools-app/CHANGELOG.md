@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.3
+
+### Patch Changes
+
+- ab3c0e2: Avoid persisting the selected action index between sessions
+
 ## 2.1.2
 
 ### Patch Changes

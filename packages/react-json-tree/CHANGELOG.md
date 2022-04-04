@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.16.2
+
+### Patch Changes
+
+- 4c9a890: Fix type import for Typescript versions <4.5
+
 ## 0.16.0
 
 - Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):

@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.0.7
+
+### Patch Changes
+
+- ab3c0e2: Avoid persisting the selected action index between sessions
+- Updated dependencies [ab3c0e2]
+  - @redux-devtools/app@2.1.3
+
 ## [1.0.0-9](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/cli@1.0.0-8...@redux-devtools/cli@1.0.0-9) (2021-06-11)
 
 **Note:** Version bump only for package @redux-devtools/cli
