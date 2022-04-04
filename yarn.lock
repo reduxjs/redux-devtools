@@ -4990,7 +4990,7 @@ __metadata:
     chalk: ^4.1.2
     cors: ^2.8.5
     cross-spawn: ^7.0.3
-    electron: ^17.3.1
+    electron: ^18.0.1
     eslint: ^8.12.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-jest: ^26.1.3
@@ -7720,7 +7720,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.0.10, @types/node@npm:^14.6.2":
+"@types/node@npm:^14.0.10":
   version: 14.18.12
   resolution: "@types/node@npm:14.18.12"
   checksum: 8a0273caa0584020adb8802784fc7d4f18f05e6c205335b7f3818a91d6b0c22736b9f51da3428d5bc54076ad47f1a4d6d57990a3ce8489a520ac66b2b3ff24bc
@@ -11152,9 +11152,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:^98.0.1":
-  version: 98.0.1
-  resolution: "chromedriver@npm:98.0.1"
+"chromedriver@npm:^100.0.0":
+  version: 100.0.0
+  resolution: "chromedriver@npm:100.0.0"
   dependencies:
     "@testim/chrome-version": ^1.1.2
     axios: ^0.24.0
@@ -11165,7 +11165,7 @@ __metadata:
     tcp-port-used: ^1.0.1
   bin:
     chromedriver: bin/chromedriver
-  checksum: a3c4d1a88d07e17b79e67ac25769a85387bbf4f7f07f8bd6cbc870754b19f84fea321a9f687893c6222275b1cd1dfc6893414c3a76de35b2033f420dcaa08aa7
+  checksum: d6a22ba439e189235b7f4d9006ce0a60c3644be28c01c2deda52c3f377191b8bec994fcdc0574d669b9b29447066861fbfc5c388fd9b7c372d1cc64e39b77716
   languageName: node
   linkType: hard
 
@@ -13399,16 +13399,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:^17.3.1":
-  version: 17.3.1
-  resolution: "electron@npm:17.3.1"
+"electron@npm:^18.0.1":
+  version: 18.0.1
+  resolution: "electron@npm:18.0.1"
   dependencies:
     "@electron/get": ^1.13.0
-    "@types/node": ^14.6.2
+    "@types/node": ^16.11.26
     extract-zip: ^1.0.3
   bin:
     electron: cli.js
-  checksum: 29a2edb59402b2752934872bec6f5f5fa914ad2ffb7ed09a6c7f44f08dfd314db72cda99b53a8db28ab6a3761f8305e4753afa72f8cca9fa858eb2d4dda30581
+  checksum: 90d2e7d640643edcf41ddfeedc0a0e535154b68e039fe561dc208895497369d9afcf7c2cf3142d196055718d21cb100eb94360ee6356c911a1019e01d93cebbd
   languageName: node
   linkType: hard
 
@@ -23978,11 +23978,11 @@ __metadata:
     "@types/styled-components": ^5.1.24
     babel-loader: ^8.2.4
     bestzip: ^2.2.0
-    chromedriver: ^98.0.1
+    chromedriver: ^100.0.0
     copy-webpack-plugin: ^9.1.0
     cross-env: ^7.0.3
     css-loader: ^6.7.1
-    electron: ^17.3.1
+    electron: ^18.0.1
     eslint: ^8.12.0
     eslint-config-airbnb: ^19.0.4
     eslint-plugin-import: ^2.25.4
