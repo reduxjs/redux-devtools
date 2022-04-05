@@ -9223,13 +9223,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-styles@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "ansi-styles@npm:6.1.0"
-  checksum: 7a7f8528c07a9d20c3a92bccd2b6bc3bb4d26e5cb775c02826921477377bd495d615d61f710d56216344b6238d1d11ef2b0348e146c5b128715578bfb3217229
-  languageName: node
-  linkType: hard
-
 "ansi-to-html@npm:^0.6.11":
   version: 0.6.15
   resolution: "ansi-to-html@npm:0.6.15"
@@ -10979,13 +10972,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@github:Methuselah96/chalk":
-  version: 4.1.0
-  resolution: "chalk@https://github.com/Methuselah96/chalk.git#commit=9d5b9a133c3f8aa9f24de283660de3f732964aaa"
+"chalk@Methuselah96/chalk#head=v2-without-process":
+  version: 2.4.2
+  resolution: "chalk@https://github.com/Methuselah96/chalk.git#commit=7e66d0ff681fc10462ce327f1c4f82bfa13193e2"
   dependencies:
-    ansi-styles: ^6.1.0
-    supports-color: ^9.0.2
-  checksum: 3dae917e6cce9a4dcf2e2d647f2f16bbca96097853c58276cf887f1a150edda3ffea3ec3cd436fcd94c99528782832c6adcc4df7f96d629794fb763a3bdc5278
+    ansi-styles: ^3.2.1
+    escape-string-regexp: ^1.0.5
+    supports-color: ^5.3.0
+  checksum: c62455bef25b90310c345c578bf55737b168533f07721f66c91d4ae1a27063dbf8f25852a0bc94d066b3590dfe8b016e37723ac871a74759d992a7b4c7483c12
   languageName: node
   linkType: hard
 
@@ -26242,13 +26236,6 @@ __metadata:
   dependencies:
     has-flag: ^4.0.0
   checksum: c052193a7e43c6cdc741eb7f378df605636e01ad434badf7324f17fb60c69a880d8d8fcdcb562cf94c2350e57b937d7425ab5b8326c67c2adc48f7c87c1db406
-  languageName: node
-  linkType: hard
-
-"supports-color@npm:^9.0.2":
-  version: 9.2.2
-  resolution: "supports-color@npm:9.2.2"
-  checksum: 976d84877402fc38c1d43b1fde20b0a8dc0283273f21cfebe4ff7507d27543cdfbeec7db108a96b82d694465f06d64e8577562b05d0520b41710088e0a33cc50
   languageName: node
   linkType: hard
 
