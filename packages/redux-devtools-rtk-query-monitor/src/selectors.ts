@@ -262,6 +262,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
         [QueryPreviewTabs.querySubscriptions]: Object.keys(subscriptions ?? {})
           .length,
         [QueryPreviewTabs.apiConfig]: 0,
+        [QueryPreviewTabs.queryData]: 0,
         [QueryPreviewTabs.queryinfo]: 0,
         [QueryPreviewTabs.actions]: actions.length,
       };

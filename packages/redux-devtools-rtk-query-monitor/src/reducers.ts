@@ -20,7 +20,7 @@ const initialState: RtkQueryMonitorState = {
       queryFilter: QueryFilters.queryKey,
     },
   },
-  selectedPreviewTab: QueryPreviewTabs.queryinfo,
+  selectedPreviewTab: QueryPreviewTabs.queryData,
   selectedQueryKey: null,
 };
 
