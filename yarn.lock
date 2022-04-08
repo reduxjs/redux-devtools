@@ -14920,23 +14920,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^6.2.8":
-  version: 6.2.8
-  resolution: "framer-motion@npm:6.2.8"
+"framer-motion@npm:^3.10.6":
+  version: 3.10.6
+  resolution: "framer-motion@npm:3.10.6"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
-    framesync: 6.0.1
+    framesync: 5.2.0
     hey-listen: ^1.0.8
-    popmotion: 11.0.3
-    style-value-types: 5.0.0
-    tslib: ^2.1.0
+    popmotion: 9.3.1
+    style-value-types: 4.1.1
+    tslib: ^1.10.0
   peerDependencies:
-    react: ">=16.8 || ^17.0.0 || ^18.0.0"
-    react-dom: ">=16.8 || ^17.0.0 || ^18.0.0"
+    react: ">=16.8 || ^17.0.0"
+    react-dom: ">=16.8 || ^17.0.0"
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: d84b716ab5e9480804856088551dbb493092e63625fe2d29c05ce734025d3e5cfded223443c604e807e8fca09064282aed9fb05f3ff590c9fb6ff4502f1ca1a6
+  checksum: 0465e0d12f98dbff50a7398d16397d1a6ae0d901c23d8846704ada5fbaa103a3e8caa394010b48e37b575fe7f02294f205aebbe4c174cc1117b17467095dc7a9
+  languageName: node
+  linkType: hard
+
+"framesync@npm:5.2.0":
+  version: 5.2.0
+  resolution: "framesync@npm:5.2.0"
+  checksum: 5c5383e9719273057c1d19ae2718b3e5070f6174ad108556efae1c378313dba5882c55416f4bca04fc1d12da7752c800f0d203425f2e99a4caf60477e4eccf92
   languageName: node
   linkType: hard
 
@@ -14946,15 +14953,6 @@ __metadata:
   dependencies:
     tslib: ^2.1.0
   checksum: 9ebbb2863e6a1cfd2e9dd1b73af427d23caa03c92dd49ea767ebdd208c3a573bba4a1026f67068d856a21704f79adcdf2f750cc852ff73bc1f0e80edaaecded8
-  languageName: node
-  linkType: hard
-
-"framesync@npm:6.0.1":
-  version: 6.0.1
-  resolution: "framesync@npm:6.0.1"
-  dependencies:
-    tslib: ^2.1.0
-  checksum: a23ebe8f7e20a32c0b99c2f8175b6f07af3ec6316aad52a2316316a6d011d717af8d2175dcc2827031c59fabb30232ed3e19a720a373caba7f070e1eae436325
   languageName: node
   linkType: hard
 
@@ -21910,15 +21908,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"popmotion@npm:11.0.3":
-  version: 11.0.3
-  resolution: "popmotion@npm:11.0.3"
+"popmotion@npm:9.3.1":
+  version: 9.3.1
+  resolution: "popmotion@npm:9.3.1"
   dependencies:
-    framesync: 6.0.1
+    framesync: 5.2.0
     hey-listen: ^1.0.8
-    style-value-types: 5.0.0
-    tslib: ^2.1.0
-  checksum: 9fe7d03b4ec0e85bfb9dadc23b745147bfe42e16f466ba06e6327197d0e38b72015afc2f918a8051dedc3680310417f346ffdc463be6518e2e92e98f48e30268
+    style-value-types: 4.1.1
+    tslib: ^1.10.0
+  checksum: e2a662bacee38cc6234dfd0b081052f533f0aa6c6b00166de5b0c91c1f0447a29ad9774c42998f9f82e0e27a8ac7462b5861b330d1388ccfe224fe6f8a660ac8
   languageName: node
   linkType: hard
 
@@ -24449,7 +24447,7 @@ __metadata:
     eslint-plugin-react: ~7.28.0
     eslint-plugin-react-hooks: ^4.4.0
     fork-ts-checker-webpack-plugin: ^7.2.2
-    framer-motion: ^6.2.8
+    framer-motion: ^3.10.6
     html-webpack-plugin: ^5.5.0
     msw: ^0.39.2
     react: ^17.0.2
@@ -26033,13 +26031,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-value-types@npm:5.0.0":
-  version: 5.0.0
-  resolution: "style-value-types@npm:5.0.0"
+"style-value-types@npm:4.1.1":
+  version: 4.1.1
+  resolution: "style-value-types@npm:4.1.1"
   dependencies:
     hey-listen: ^1.0.8
-    tslib: ^2.1.0
-  checksum: 16d198302cd102edf9dba94e7752a2364c93b1eaa5cc7c32b42b28eef4af4ccb5149a3f16bc2a256adc02616a2404f4612bd15f3081c1e8ca06132cae78be6c0
+    tslib: ^1.10.0
+  checksum: b7d2c3dd668bb6c1e7f29032b2bf72c4bb3104abdfb59ceb683fa68cc11da669d3808110763ec01d6104f1c68d34f839ea6bab9e257401dc908bfe3a420787ff
   languageName: node
   linkType: hard
 
@@ -27042,7 +27040,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.0.0, tslib@npm:^1.8.1, tslib@npm:^1.9.0, tslib@npm:^1.9.3":
+"tslib@npm:^1.0.0, tslib@npm:^1.10.0, tslib@npm:^1.8.1, tslib@npm:^1.9.0, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
