@@ -9,5 +9,13 @@ module.exports = {
         project: ['./tsconfig.json'],
       },
     },
+    {
+      files: ['test/**/*.ts'],
+      extends: '../../eslintrc.ts.jest.base.json',
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+        project: ['./tsconfig.test.json'],
+      },
+    },
   ],
 };
