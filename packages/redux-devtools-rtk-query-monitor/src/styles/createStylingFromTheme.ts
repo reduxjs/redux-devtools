@@ -217,6 +217,8 @@ const getSheetFromColorMap = (map: ColorMap) => {
       padding: '0 8px',
       display: 'inline-flex',
       alignItems: 'center',
+      boxShadow: 'none',
+      outline: 'none',
       color: map.TEXT_COLOR,
       'border-style': 'solid',
       'border-width': '1px',

@@ -1,11 +1,12 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
 import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import React, { ReactNode, PureComponent } from 'react';
-import { RtkResourceInfo, RTKStatusFlags } from '../types';
+import { QueryPreviewTabs, RtkResourceInfo, RTKStatusFlags } from '../types';
+import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
 import { formatMs } from '../utils/formatters';
 import { identity } from '../utils/object';
 import { getQueryStatusFlags } from '../utils/rtk-query';
-import { TreeView } from './TreeView';
+import { TreeView, TreeViewProps } from './TreeView';
 
 type QueryTimings = {
   startedAt: string;
@@ -22,6 +23,12 @@ type FormattedQuery = {
   | { mutation: RtkResourceInfo['state'] }
   | { query: RtkResourceInfo['state'] }
 );
+
+const rootProps: TreeViewProps['rootProps'] = {
+  'aria-labelledby': renderTabPanelButtonId(QueryPreviewTabs.queryinfo),
+  id: renderTabPanelId(QueryPreviewTabs.queryinfo),
+  role: 'tabpanel',
+};
 
 export interface QueryPreviewInfoProps {
   resInfo: RtkResourceInfo;
@@ -97,6 +104,7 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
 
     return (
       <TreeView
+        rootProps={rootProps}
         data={formattedQuery}
         isWideLayout={isWideLayout}
         shouldExpandNode={this.shouldExpandNode}
