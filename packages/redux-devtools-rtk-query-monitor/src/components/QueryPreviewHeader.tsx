@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 import { QueryPreviewTabs, TabOption } from '../types';
-import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
+import { renderTabPanelButtonId } from '../utils/a11y';
 import { emptyArray } from '../utils/object';
 
 export interface QueryPreviewHeaderProps {
