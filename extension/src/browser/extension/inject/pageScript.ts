@@ -600,7 +600,9 @@ const extensionCompose =
   };
 
 interface ReduxDevtoolsExtensionCompose {
-  (config: Config): <StoreExt>(...funcs: Array<StoreEnhancer<StoreExt>>) => StoreEnhancer<StoreExt>;
+  (config: Config): <StoreExt>(
+    ...funcs: Array<StoreEnhancer<StoreExt>>
+  ) => StoreEnhancer<StoreExt>;
   <StoreExt>(...funcs: Array<StoreEnhancer<StoreExt>>): StoreEnhancer<StoreExt>;
 }
 
@@ -616,7 +618,9 @@ function reduxDevtoolsExtensionCompose<StoreExt>(
 function reduxDevtoolsExtensionCompose<StoreExt>(
   ...funcs: Array<StoreEnhancer<StoreExt>>
 ): StoreEnhancer<StoreExt>;
-function reduxDevtoolsExtensionCompose<StoreExt>(...funcs: [Config] | Array<StoreEnhancer<StoreExt>>) {
+function reduxDevtoolsExtensionCompose<StoreExt>(
+  ...funcs: [Config] | Array<StoreEnhancer<StoreExt>>
+) {
   if (funcs.length === 0) {
     return __REDUX_DEVTOOLS_EXTENSION__();
   }

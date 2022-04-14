@@ -195,7 +195,9 @@ interface ReduxDevtoolsExtension {
 }
 
 export interface ReduxDevtoolsExtensionCompose {
-  (config: Config): <StoreExt>(...funcs: Array<StoreEnhancer<StoreExt>>) => StoreEnhancer<StoreExt>;
+  (config: Config): <StoreExt>(
+    ...funcs: Array<StoreEnhancer<StoreExt>>
+  ) => StoreEnhancer<StoreExt>;
   <StoreExt>(...funcs: Array<StoreEnhancer<StoreExt>>): StoreEnhancer<StoreExt>;
 }
 
@@ -209,8 +211,12 @@ declare global {
 function extensionComposeStub<StoreExt>(
   config: Config
 ): (...funcs: Array<StoreEnhancer<StoreExt>>) => StoreEnhancer<StoreExt>;
-function extensionComposeStub<StoreExt>(...funcs: Array<StoreEnhancer<StoreExt>>): StoreEnhancer<StoreExt>;
-function extensionComposeStub<StoreExt>(...funcs: [Config] | Array<StoreEnhancer<StoreExt>>) {
+function extensionComposeStub<StoreExt>(
+  ...funcs: Array<StoreEnhancer<StoreExt>>
+): StoreEnhancer<StoreExt>;
+function extensionComposeStub<StoreExt>(
+  ...funcs: [Config] | Array<StoreEnhancer<StoreExt>>
+) {
   if (funcs.length === 0) return undefined;
   if (typeof funcs[0] === 'object') return compose;
   return compose(...(funcs as Array<StoreEnhancer<StoreExt>>));
