@@ -600,8 +600,8 @@ const extensionCompose =
   };
 
 interface ReduxDevtoolsExtensionCompose {
-  (config: Config): (...funcs: StoreEnhancer[]) => StoreEnhancer;
-  (...funcs: StoreEnhancer[]): StoreEnhancer;
+  (config: Config): <StoreExt>(...funcs: Array<StoreEnhancer<StoreExt>>) => StoreEnhancer<StoreExt>;
+  <StoreExt>(...funcs: Array<StoreEnhancer<StoreExt>>): StoreEnhancer<StoreExt>;
 }
 
 declare global {
@@ -610,20 +610,20 @@ declare global {
   }
 }
 
-function reduxDevtoolsExtensionCompose(
+function reduxDevtoolsExtensionCompose<StoreExt>(
   config: Config
-): (...funcs: StoreEnhancer[]) => StoreEnhancer;
-function reduxDevtoolsExtensionCompose(
-  ...funcs: StoreEnhancer[]
-): StoreEnhancer;
-function reduxDevtoolsExtensionCompose(...funcs: [Config] | StoreEnhancer[]) {
+): (...funcs: Array<StoreEnhancer<StoreExt>>) => StoreEnhancer<StoreExt>;
+function reduxDevtoolsExtensionCompose<StoreExt>(
+  ...funcs: Array<StoreEnhancer<StoreExt>>
+): StoreEnhancer<StoreExt>;
+function reduxDevtoolsExtensionCompose<StoreExt>(...funcs: [Config] | Array<StoreEnhancer<StoreExt>>) {
   if (funcs.length === 0) {
     return __REDUX_DEVTOOLS_EXTENSION__();
   }
   if (funcs.length === 1 && typeof funcs[0] === 'object') {
     return extensionCompose(funcs[0]);
   }
-  return extensionCompose({})(...(funcs as StoreEnhancer[]));
+  return extensionCompose({})(...(funcs as Array<StoreEnhancer<StoreExt>>));
 }
 
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = reduxDevtoolsExtensionCompose;
