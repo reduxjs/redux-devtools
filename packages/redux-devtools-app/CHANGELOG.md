@@ -1,5 +1,19 @@
 # Change Log
 
+## 2.1.4
+
+### Patch Changes
+
+- Updated dependencies [4891bf6]
+  - @redux-devtools/core@3.12.0
+  - @redux-devtools/chart-monitor@3.0.0
+  - @redux-devtools/inspector-monitor@3.0.0
+  - @redux-devtools/log-monitor@4.0.0
+  - @redux-devtools/rtk-query-monitor@3.0.0
+  - @redux-devtools/slider-monitor@4.0.0
+  - @redux-devtools/inspector-monitor-test-tab@1.0.0
+  - @redux-devtools/inspector-monitor-trace-tab@1.0.0
+
 ## 2.1.3
 
 ### Patch Changes
