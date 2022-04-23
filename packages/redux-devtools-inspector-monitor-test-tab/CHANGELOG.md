@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- @redux-devtools/inspector-monitor@3.0.0
+- @redux-devtools/inspector-monitor@2.1.2
 
 ## 0.8.0
 

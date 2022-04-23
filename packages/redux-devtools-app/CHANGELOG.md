@@ -6,13 +6,13 @@
 
 - Updated dependencies [4891bf6]
   - @redux-devtools/core@3.12.0
-  - @redux-devtools/chart-monitor@3.0.0
-  - @redux-devtools/inspector-monitor@3.0.0
-  - @redux-devtools/log-monitor@4.0.0
-  - @redux-devtools/rtk-query-monitor@3.0.0
-  - @redux-devtools/slider-monitor@4.0.0
-  - @redux-devtools/inspector-monitor-test-tab@1.0.0
-  - @redux-devtools/inspector-monitor-trace-tab@1.0.0
+  - @redux-devtools/chart-monitor@2.1.1
+  - @redux-devtools/inspector-monitor@2.1.2
+  - @redux-devtools/log-monitor@3.1.1
+  - @redux-devtools/rtk-query-monitor@2.1.2
+  - @redux-devtools/slider-monitor@3.1.2
+  - @redux-devtools/inspector-monitor-test-tab@0.8.6
+  - @redux-devtools/inspector-monitor-trace-tab@0.3.4
 
 ## 2.1.3
 

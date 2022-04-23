@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- @redux-devtools/utils@2.0.0
+- @redux-devtools/utils@1.2.1
 
 ## 0.7.0
 
