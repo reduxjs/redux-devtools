@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.12.0
+
+### Minor Changes
+
+- 4891bf6: Add react-redux v8 to peerDependencies range
+
 ## [3.9.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/core@3.8.0...@redux-devtools/core@3.9.0) (2021-03-06)
 
 ### Features

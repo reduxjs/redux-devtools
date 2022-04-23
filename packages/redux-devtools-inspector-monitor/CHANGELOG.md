@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.1.2
+
+### Patch Changes
+
+- Updated dependencies [4891bf6]
+  - @redux-devtools/core@3.12.0
+
 ## 2.1.1
 
 ### Patch Changes

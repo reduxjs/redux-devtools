@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.8.6
+
+### Patch Changes
+
+- @redux-devtools/inspector-monitor@2.1.2
+
 ## 0.8.0
 
 - Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):
