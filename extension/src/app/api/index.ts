@@ -56,7 +56,7 @@ function stringify(obj: unknown, serialize?: Serialize | undefined) {
     // 16 MB
     /* eslint-disable no-console */
     console.warn(
-      'Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://git.io/fpcP5 on how to configure it.'
+      'Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://github.com/reduxjs/redux-devtools-extension/blob/master/docs/Troubleshooting.md#excessive-use-of-memory-and-cpu on how to configure it.'
     );
     /* eslint-enable no-console */
     stringifyWarned = true;
