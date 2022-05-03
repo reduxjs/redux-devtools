@@ -2,8 +2,7 @@ import { FilterState, FilterStateValue } from '../../../app/api/filters';
 
 export interface Options {
   readonly useEditor: number;
-  readonly editor: string;
-  readonly projectPath: string;
+  readonly editorURL: string;
   readonly maxAge: number;
   readonly filter: FilterStateValue;
   readonly allowlist: string;
@@ -16,8 +15,7 @@ export interface Options {
 
 interface OldOrNewOptions {
   readonly useEditor: number;
-  readonly editor: string;
-  readonly projectPath: string;
+  readonly editorURL: string;
   readonly maxAge: number;
   readonly filter:
     | FilterStateValue
@@ -77,8 +75,7 @@ const get = (callback: (options: Options) => void) => {
     chrome.storage.sync.get(
       {
         useEditor: 0,
-        editor: '',
-        projectPath: '',
+        editorURL: '',
         maxAge: 50,
         filter: FilterState.DO_NOT_FILTER,
         whitelist: '',

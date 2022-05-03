@@ -55,8 +55,7 @@ function openInIframe(url: string) {
   setTimeout(() => iframe.parentNode!.removeChild(iframe), 3000);
 }
 
-function openInEditor(editor: string, path: string, stackFrame: StackFrame) {
-  const projectPath = path.replace(/\/$/, '');
+function openInEditor(editorURL: string, stackFrame: StackFrame) {
   const file =
     stackFrame._originalFileName ||
     (stackFrame as unknown as { finalFileName: string }).finalFileName ||
@@ -69,30 +68,17 @@ function openInEditor(editor: string, path: string, stackFrame: StackFrame) {
   const line = stackFrame._originalLineNumber || stackFrame.lineNumber || '0';
   const column =
     stackFrame._originalColumnNumber || stackFrame.columnNumber || '0';
-  let url;
 
-  switch (editor) {
-    case 'vscode':
-    case 'code':
-      url = `vscode://file/${projectPath}${filePath}:${line}:${column}`;
-      break;
-    case 'atom':
-      url = `atom://core/open/file?filename=${projectPath}${filePath}&line=${line}&column=${column}`;
-      break;
-    case 'webstorm':
-    case 'phpstorm':
-    case 'idea':
-      url = `${editor}://open?file=${projectPath}${filePath}&line=${line}&column=${column}`;
-      break;
-    default:
-      // sublime, emacs, macvim, textmate + custom like https://github.com/eclemens/atom-url-handler
-      url = `${editor}://open/?url=file://${projectPath}${filePath}&line=${line}&column=${column}`;
-  }
+  const url = new URL(editorURL);
+  url.href = url.href.replace('{path}', filePath);
+  url.href = url.href.replace('{line}', String(line));
+  url.href = url.href.replace('{column}', String(column));
+
   if (chrome.devtools && !isFF) {
-    if (chrome.tabs) openAndCloseTab(url);
+    if (chrome.tabs) openAndCloseTab(url.href);
     else window.open(url);
   } else {
-    openInIframe(url);
+    openInIframe(url.href);
   }
 }
 
@@ -105,37 +91,29 @@ export default function openFile(
   const storage = isFF
     ? chrome.storage.local
     : chrome.storage.sync || chrome.storage.local;
-  storage.get(
-    ['useEditor', 'editor', 'projectPath'],
-    function ({ useEditor, editor, projectPath }) {
+  storage.get(['useEditor', 'editorURL'], function ({ useEditor, editorURL }) {
+    if (useEditor && typeof editorURL === 'string') {
+      openInEditor(editorURL, stackFrame);
+    } else {
       if (
-        useEditor &&
-        projectPath &&
-        typeof editor === 'string' &&
-        /^\w{1,30}$/.test(editor)
+        chrome.devtools &&
+        chrome.devtools.panels &&
+        !!chrome.devtools.panels.openResource
       ) {
-        openInEditor(editor.toLowerCase(), projectPath as string, stackFrame);
-      } else {
-        if (
-          chrome.devtools &&
-          chrome.devtools.panels &&
-          !!chrome.devtools.panels.openResource
-        ) {
-          openResource(fileName, lineNumber, stackFrame);
-        } else if (chrome.runtime && (chrome.runtime.openOptionsPage || isFF)) {
-          if (chrome.devtools && isFF) {
-            chrome.devtools.inspectedWindow.eval(
-              'confirm("Set the editor to open the file in?")',
-              (result) => {
-                if (!result) return;
-                chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
-              }
-            );
-          } else if (confirm('Set the editor to open the file in?')) {
-            chrome.runtime.openOptionsPage();
-          }
+        openResource(fileName, lineNumber, stackFrame);
+      } else if (chrome.runtime && (chrome.runtime.openOptionsPage || isFF)) {
+        if (chrome.devtools && isFF) {
+          chrome.devtools.inspectedWindow.eval(
+            'confirm("Set the editor to open the file in?")',
+            (result) => {
+              if (!result) return;
+              chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
+            }
+          );
+        } else if (confirm('Set the editor to open the file in?')) {
+          chrome.runtime.openOptionsPage();
         }
       }
     }
-  );
+  });
 }
