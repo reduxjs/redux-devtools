@@ -128,7 +128,7 @@ export default function openFile(
               'confirm("Set the editor to open the file in?")',
               (result) => {
                 if (!result) return;
-                chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
+                void chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
               }
             );
           } else if (confirm('Set the editor to open the file in?')) {
