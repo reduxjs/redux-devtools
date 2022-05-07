@@ -1,8 +1,9 @@
 import jss, { StyleSheet } from 'jss';
 import preset from 'jss-preset-default';
-import { createStyling } from 'react-base16-styling';
+import { createStyling, StylingFunction, Theme } from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import { Base16Theme } from 'redux-devtools-themes';
+import type { CurriedFunction1 } from 'lodash';
 import inspector from '../themes/inspector';
 import * as reduxThemes from 'redux-devtools-themes';
 import * as inspectorThemes from '../themes';
@@ -405,7 +406,10 @@ const getDefaultThemeStyling = (theme: Base16Theme) => {
 
 export const base16Themes = { ...reduxThemes, ...inspectorThemes };
 
-export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
+export const createStylingFromTheme: CurriedFunction1<
+  Theme | undefined,
+  StylingFunction
+> = createStyling(getDefaultThemeStyling, {
   defaultBase16: inspector,
   base16Themes,
 });
