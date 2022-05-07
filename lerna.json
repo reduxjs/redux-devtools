@@ -1,12 +1,10 @@
 {
-  "lerna": "3.4.2",
   "version": "independent",
-  "npmClient": "yarn",
+  "npmClient": "pnpm",
   "useWorkspaces": true,
   "command": {
     "publish": {
       "allowBranch": "main"
     }
-  },
-  "ignoreChanges": ["**/test/**", "**/examples/**", "**/*.md"]
+  }
 }

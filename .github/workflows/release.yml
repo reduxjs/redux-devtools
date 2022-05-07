@@ -20,17 +20,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install Dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          version: yarn changeset version
-          publish: yarn release
+          version: pnpm changeset version
+          publish: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
