@@ -1,7 +1,8 @@
 import React, { ReactNode, FormEvent, MouseEvent, ChangeEvent } from 'react';
+import type { DebouncedFunc } from 'lodash';
+import { Select } from '@redux-devtools/ui';
 import { QueryFormValues } from '../types';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
-import { Select } from '@redux-devtools/ui';
 import { SelectOption } from '../types';
 import debounce from 'lodash.debounce';
 import { sortQueryOptions, QueryComparators } from '../utils/comparators';
@@ -84,7 +85,7 @@ export class QueryForm extends React.PureComponent<
     });
   };
 
-  invalidateSearchValueFromProps = debounce(() => {
+  invalidateSearchValueFromProps: DebouncedFunc<() => void> = debounce(() => {
     this.props.onFormValuesChange({
       searchValue: this.state.searchValue,
     });

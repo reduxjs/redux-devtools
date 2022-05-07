@@ -5,12 +5,15 @@ import {
   getBase16Theme,
   invertTheme,
   StylingConfig,
+  StylingFunction,
+  Theme,
 } from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import * as reduxThemes from 'redux-devtools-themes';
 import { Action } from 'redux';
-import { RtkQueryMonitorProps, StyleUtils } from '../types';
 import { createContext } from 'react';
+import type { CurriedFunction1 } from 'lodash';
+import { RtkQueryMonitorProps, StyleUtils } from '../types';
 
 jss.setup(preset());
 
@@ -513,7 +516,10 @@ const getDefaultThemeStyling = (theme: reduxThemes.Base16Theme) => {
   return themeSheet.classes;
 };
 
-export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
+export const createStylingFromTheme: CurriedFunction1<
+  Theme | undefined,
+  StylingFunction
+> = createStyling(getDefaultThemeStyling, {
   defaultBase16: reduxThemes.nicinabox,
   base16Themes: { ...reduxThemes },
 });
