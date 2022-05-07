@@ -1798,6 +1798,7 @@ importers:
       '@redux-devtools/ui': ^1.2.1
       '@reduxjs/toolkit': ^1.8.1
       '@types/hex-rgba': ^1.0.1
+      '@types/lodash': ^4.14.182
       '@types/lodash.debounce': ^4.0.7
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.44
@@ -1824,6 +1825,7 @@ importers:
     dependencies:
       '@babel/runtime': 7.17.9
       '@redux-devtools/ui': link:../redux-devtools-ui
+      '@types/lodash': 4.14.182
       '@types/prop-types': 15.7.5
       '@types/redux-devtools-themes': 1.0.0
       hex-rgba: 1.0.2
