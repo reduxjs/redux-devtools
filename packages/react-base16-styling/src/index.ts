@@ -3,6 +3,7 @@ import { Base16Theme } from 'base16';
 import Color from 'color';
 import * as CSS from 'csstype';
 import curry from 'lodash.curry';
+import type { CurriedFunction3 } from 'lodash';
 import { Color as ColorTuple, yuv2rgb, rgb2yuv } from './colorConverters';
 import {
   Styling,
@@ -201,7 +202,12 @@ interface Options {
   base16Themes?: { [themeName: string]: Base16Theme };
 }
 
-export const createStyling = curry<
+export const createStyling: CurriedFunction3<
+  (base16Theme: Base16Theme) => StylingConfig,
+  Options | undefined,
+  Theme | undefined,
+  StylingFunction
+> = curry<
   (base16Theme: Base16Theme) => StylingConfig,
   Options | undefined,
   Theme | undefined,
