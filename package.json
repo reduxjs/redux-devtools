@@ -23,5 +23,6 @@
     "test:all": "lerna run test",
     "format:check": "prettier --check .",
     "release": "pnpm build:all && changeset publish"
-  }
+  },
+  "packageManager": "pnpm@7.0.1"
 }

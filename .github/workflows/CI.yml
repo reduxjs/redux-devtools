@@ -12,6 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
@@ -20,7 +21,7 @@ jobs:
       - run: pnpm run format:check
       - run: pnpm run build:all
       - run: pnpm run lint:all
-      - name: Run yarn test:all
+      - name: Run pnpm test:all
         uses: GabrielBB/xvfb-action@v1
         with:
           run: pnpm run test:all
