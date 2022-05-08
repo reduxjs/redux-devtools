@@ -1,5 +1,8 @@
 lockfileVersion: 5.4
 
+overrides:
+  '@babel/highlight>chalk': Methuselah96/chalk#v2-without-process
+
 importers:
 
   .:
@@ -2881,7 +2884,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/helper-validator-identifier': 7.16.7
-      chalk: 2.4.2
+      chalk: github.com/Methuselah96/chalk/7e66d0ff681fc10462ce327f1c4f82bfa13193e2
       js-tokens: 4.0.0
 
   /@babel/parser/7.17.10:
@@ -24109,3 +24112,13 @@ packages:
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
     dev: true
+
+  github.com/Methuselah96/chalk/7e66d0ff681fc10462ce327f1c4f82bfa13193e2:
+    resolution: {tarball: https://codeload.github.com/Methuselah96/chalk/tar.gz/7e66d0ff681fc10462ce327f1c4f82bfa13193e2}
+    name: chalk
+    version: 2.4.2
+    engines: {node: '>=4'}
+    dependencies:
+      ansi-styles: 3.2.1
+      escape-string-regexp: 1.0.5
+      supports-color: 5.5.0

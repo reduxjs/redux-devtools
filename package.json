@@ -24,5 +24,10 @@
     "format:check": "prettier --check .",
     "release": "pnpm build:all && changeset publish"
   },
-  "packageManager": "pnpm@7.0.1"
+  "packageManager": "pnpm@7.0.1",
+  "pnpm": {
+    "overrides": {
+      "@babel/highlight>chalk": "Methuselah96/chalk#v2-without-process"
+    }
+  }
 }
