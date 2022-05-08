@@ -1,12 +1,22 @@
 {
-  "lerna": "3.4.2",
   "version": "independent",
-  "npmClient": "yarn",
-  "useWorkspaces": true,
+  "npmClient": "pnpm",
+  "packages": [
+    "extension",
+    "packages/*",
+    "packages/d3-state-visualizer/examples/tree",
+    "packages/react-dock/demo",
+    "packages/react-json-tree/examples",
+    "packages/redux-devtools/examples/counter",
+    "packages/redux-devtools/examples/todomvc",
+    "packages/redux-devtools-inspector-monitor/demo",
+    "packages/redux-devtools-inspector-monitor-test-tab/demo",
+    "packages/redux-devtools-rtk-query-monitor/demo",
+    "packages/redux-devtools-slider-monitor/examples/todomvc"
+  ],
   "command": {
     "publish": {
       "allowBranch": "main"
     }
-  },
-  "ignoreChanges": ["**/test/**", "**/examples/**", "**/*.md"]
+  }
 }

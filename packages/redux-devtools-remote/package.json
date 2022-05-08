@@ -30,15 +30,15 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "yarn build:cjs && yarn build:esm && yarn build:types",
+    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
     "build:cjs": "babel src --extensions \".ts\" --out-dir lib/cjs",
     "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts\" --out-dir lib/esm",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf lib",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit",
-    "prepack": "yarn run clean && yarn run build",
-    "prepublish": "yarn run type-check && yarn run lint"
+    "prepack": "pnpm run clean && pnpm run build",
+    "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
@@ -57,6 +57,7 @@
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jsan": "^3.1.2",
+    "@types/node": "^16.11.33",
     "@types/rn-host-detect": "^1.2.0",
     "@types/socketcluster-client": "^13.0.5",
     "@typescript-eslint/eslint-plugin": "^5.22.0",

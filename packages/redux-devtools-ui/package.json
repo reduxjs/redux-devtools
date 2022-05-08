@@ -24,11 +24,11 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "yarn run storybook",
+    "start": "pnpm run storybook",
     "storybook": "start-storybook -p 6006 -s ./fonts",
     "build:storybook": "build-storybook -s ./fonts",
-    "build": "yarn run build:lib && yarn run build:storybook",
-    "build:lib": "yarn build:cjs && yarn build:esm && yarn build:types && yarn build:css",
+    "build": "pnpm run build:lib && pnpm run build:storybook",
+    "build:lib": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types && pnpm run build:css",
     "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
     "build:esm": "babel src --config-file ./babel.config.esm.json --no-babelrc --extensions \".ts,.tsx\" --out-dir lib/esm",
     "build:types": "tsc --emitDeclarationOnly",
@@ -38,8 +38,8 @@
     "lint": "eslint . --ext .ts,.tsx",
     "lint:css": "stylelint \"./src/**/*.js\"",
     "type-check": "tsc --noEmit",
-    "prepack": "yarn run clean && yarn run build",
-    "prepublish": "yarn run type-check && yarn run lint && yarn run test"
+    "prepack": "pnpm run clean && pnpm run build",
+    "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",

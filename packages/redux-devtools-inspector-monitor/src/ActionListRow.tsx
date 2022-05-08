@@ -1,6 +1,7 @@
 import React, { MouseEvent, MouseEventHandler, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
+import type { DebouncedFunc } from 'lodash';
 import debounce from 'lodash.debounce';
 import { StylingFunction } from 'react-base16-styling';
 import { Action } from 'redux';
@@ -179,12 +180,13 @@ export default class ActionListRow<
     this.handleMouseEnterDebounced(e.buttons);
   };
 
-  handleMouseEnterDebounced = debounce((buttons) => {
-    if (buttons) return;
-    this.setState({ hover: true });
-  }, 150);
+  handleMouseEnterDebounced: DebouncedFunc<(buttons: number) => void> =
+    debounce((buttons) => {
+      if (buttons) return;
+      this.setState({ hover: true });
+    }, 150);
 
-  handleMouseLeave = debounce(() => {
+  handleMouseLeave: DebouncedFunc<() => void> = debounce(() => {
     this.handleMouseEnterDebounced.cancel();
     if (this.state.hover) this.setState({ hover: false });
   }, 100);

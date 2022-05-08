@@ -22,23 +22,12 @@
     "lint:all": "lerna run lint",
     "test:all": "lerna run test",
     "format:check": "prettier --check .",
-    "release": "yarn build:all && changeset publish"
+    "release": "pnpm build:all && changeset publish"
   },
-  "workspaces": [
-    "extension",
-    "packages/*",
-    "packages/d3-state-visualizer/examples/tree",
-    "packages/react-dock/demo",
-    "packages/react-json-tree/examples",
-    "packages/redux-devtools/examples/counter",
-    "packages/redux-devtools/examples/todomvc",
-    "packages/redux-devtools-inspector-monitor/demo",
-    "packages/redux-devtools-inspector-monitor-test-tab/demo",
-    "packages/redux-devtools-rtk-query-monitor/demo",
-    "packages/redux-devtools-slider-monitor/examples/todomvc"
-  ],
-  "resolutions": {
-    "@babel/highlight/chalk": "Methuselah96/chalk#head=v2-without-process"
-  },
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "pnpm@7.0.1",
+  "pnpm": {
+    "overrides": {
+      "@babel/highlight>chalk": "Methuselah96/chalk#v2-without-process"
+    }
+  }
 }

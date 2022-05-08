@@ -12,15 +12,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
-          cache: 'yarn'
-      - run: yarn install
-      - run: yarn format:check
-      - run: yarn build:all
-      - run: yarn lint:all
-      - name: Run yarn test:all
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm run format:check
+      - run: pnpm run build:all
+      - run: pnpm run lint:all
+      - name: Run pnpm test:all
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: yarn test:all
+          run: pnpm run test:all

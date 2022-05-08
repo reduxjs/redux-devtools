@@ -1,5 +1,6 @@
 import path from 'path';
 import express from 'express';
+import type { Router } from 'express';
 import morgan from 'morgan';
 import * as http from 'http';
 import bodyParser from 'body-parser';
@@ -23,7 +24,7 @@ function routes(
   options: SCServer.SCServerOptions,
   store: Store,
   scServer: SCServer
-) {
+): Router {
   const limit = options.maxRequestBody;
   const logHTTPRequests = options.logHTTPRequests;
 
