@@ -12,16 +12,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v2
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm run format:check
-      - run: pnpm run build:all
-      - run: pnpm run lint:all
-      - name: Run pnpm test:all
+      - name: Install dependencies
+        run: pnpm install
+      - name: Check formatting
+        run: pnpm run format:check
+      - name: Build
+        run: pnpm exec nx affected --target=build --parallel=3
+      - name: Lint
+        run: pnpm exec nx affected --target=lint --parallel=3
+      - name: Test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: pnpm run test:all
+          run: pnpm exec nx affected --target=test --parallel=3

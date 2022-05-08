@@ -12,19 +12,33 @@
     "eslint-plugin-react": "~7.28.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "jest": "^27.5.1",
-    "lerna": "^4.0.0",
     "prettier": "2.6.2",
-    "typescript": "~4.5.5"
+    "typescript": "~4.5.5",
+    "nx": "^14.1.4",
+    "@nrwl/nx-cloud": "^14.0.3"
   },
   "scripts": {
     "format": "prettier --write .",
-    "build:all": "lerna run build",
-    "lint:all": "lerna run lint",
-    "test:all": "lerna run test",
     "format:check": "prettier --check .",
+    "build:all": "nx run-many --target=build --all",
+    "lint:all": "nx run-many --target=lint --all",
+    "test:all": "nx run-many --target=test --all",
     "release": "pnpm build:all && changeset publish"
   },
-  "packageManager": "pnpm@7.0.1",
+  "workspaces": [
+    "extension",
+    "packages/*",
+    "packages/d3-state-visualizer/examples/tree",
+    "packages/react-dock/demo",
+    "packages/react-json-tree/examples",
+    "packages/redux-devtools/examples/counter",
+    "packages/redux-devtools/examples/todomvc",
+    "packages/redux-devtools-inspector-monitor/demo",
+    "packages/redux-devtools-inspector-monitor-test-tab/demo",
+    "packages/redux-devtools-rtk-query-monitor/demo",
+    "packages/redux-devtools-slider-monitor/examples/todomvc"
+  ],
+  "packageManager": "pnpm@6.32.12",
   "pnpm": {
     "overrides": {
       "@babel/highlight>chalk": "Methuselah96/chalk#v2-without-process"
