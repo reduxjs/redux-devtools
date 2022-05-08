@@ -14,15 +14,18 @@
     "jest": "^27.5.1",
     "prettier": "2.6.2",
     "typescript": "~4.5.5",
-    "nx": "14.1.4",
-    "@nrwl/nx-cloud": "latest"
+    "nx": "^14.1.4",
+    "@nrwl/nx-cloud": "^14.0.3"
   },
   "scripts": {
     "format": "prettier --write .",
-    "build:all": "nx run-many --target=build --all",
-    "lint:all": "nx run-many --target=lint --all",
-    "test:all": "nx run-many --target=test --all",
     "format:check": "prettier --check .",
+    "build:all": "nx run-many --target=build --all",
+    "build:since": "nx affected --target=build",
+    "lint:all": "nx run-many --target=lint --all",
+    "lint:since": "nx affected --target=lint",
+    "test:all": "nx run-many --target=test --all",
+    "test:since": "nx affected --target=test",
     "release": "pnpm build:all && changeset publish"
   },
   "workspaces": [

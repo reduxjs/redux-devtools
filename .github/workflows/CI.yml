@@ -19,9 +19,9 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run format:check
-      - run: pnpm run build:all
-      - run: pnpm run lint:all
-      - name: Run pnpm test:all
+      - run: pnpm run build:since
+      - run: pnpm run lint:since
+      - name: Run pnpm test:since
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: pnpm run test:all
+          run: pnpm run test:since
