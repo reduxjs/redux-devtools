@@ -23,7 +23,7 @@ jobs:
       - run: pnpm run lint:all
       - uses: browser-actions/setup-chrome@latest
         with:
-          chrome-version: 972766
+          chrome-version: 972774
       - name: Run pnpm test:all
         uses: GabrielBB/xvfb-action@v1
         with:
