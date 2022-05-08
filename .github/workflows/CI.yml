@@ -27,4 +27,4 @@ jobs:
       - name: Run pnpm test:all
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: pnpm run test:all
+          run: CHROMIUM_BIN=$(which chrome) pnpm run test:all
