@@ -21,11 +21,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "build:all": "nx run-many --target=build --all",
-    "build:since": "nx affected --target=build",
     "lint:all": "nx run-many --target=lint --all",
-    "lint:since": "nx affected --target=lint",
     "test:all": "nx run-many --target=test --all",
-    "test:since": "nx affected --target=test",
     "release": "pnpm build:all && changeset publish"
   },
   "workspaces": [
