@@ -21,10 +21,7 @@ jobs:
       - run: pnpm run format:check
       - run: pnpm run build:all
       - run: pnpm run lint:all
-      - uses: browser-actions/setup-chrome@latest
-        with:
-          chrome-version: 972774
       - name: Run pnpm test:all
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: CHROMIUM_BIN=$(which chrome) pnpm run test:all
+          run: pnpm run test:all
