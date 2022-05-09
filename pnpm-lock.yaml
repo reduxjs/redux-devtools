@@ -13,7 +13,7 @@ importers:
       '@nrwl/nx-cloud': ^14.0.3
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       eslint-plugin-react: ~7.28.0
@@ -59,7 +59,7 @@ importers:
       '@types/chrome': ^0.0.184
       '@types/jsan': ^3.1.2
       '@types/lodash': ^4.14.182
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
       '@types/styled-components': ^5.1.25
@@ -70,7 +70,7 @@ importers:
       cross-env: ^7.0.3
       css-loader: ^6.7.1
       electron: ^18.2.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-airbnb: ^19.0.4
       eslint-plugin-import: ^2.26.0
       eslint-plugin-jsx-a11y: ^6.5.1
@@ -191,12 +191,12 @@ importers:
       d3: ^3.5.17
       d3tooltip: ^2.1.0
       deepmerge: ^4.2.2
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       map2tree: ^2.1.0
       ramda: ^0.28.0
       rimraf: ^3.0.2
-      rollup: ^2.71.1
+      rollup: ^2.72.1
       rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.31.2
       tslib: ^2.4.0
@@ -242,7 +242,7 @@ importers:
       babel-loader: ^8.2.5
       cross-env: ^7.0.3
       d3-state-visualizer: ^1.6.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       fork-ts-checker-webpack-plugin: ^7.2.11
       html-webpack-plugin: ^5.5.0
@@ -251,7 +251,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       d3-state-visualizer: link:../..
       map2tree: link:../../../map2tree
@@ -291,11 +291,11 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       d3: ^3.5.17
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       ramda: ^0.28.0
       rimraf: ^3.0.2
-      rollup: ^2.71.1
+      rollup: ^2.72.1
       rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.31.2
       tslib: ^2.4.0
@@ -343,14 +343,14 @@ importers:
       '@types/lodash': ^4.14.182
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       immutable: ^4.0.0
       jest: ^27.5.1
       lodash: ^4.17.21
       rimraf: ^3.0.2
-      rollup: ^2.71.1
+      rollup: ^2.72.1
       rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.31.2
       ts-jest: ^27.1.4
@@ -405,7 +405,7 @@ importers:
       base16: ^1.0.0
       color: ^4.2.3
       csstype: ^3.0.11
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       jest: ^27.5.1
@@ -455,11 +455,11 @@ importers:
       '@types/lodash': ^4.14.182
       '@types/lodash.debounce': ^4.0.7
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-test-renderer': ^17.0.2
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       eslint-plugin-react: ~7.28.0
@@ -511,14 +511,14 @@ importers:
       '@babel/preset-react': ^7.16.7
       '@babel/preset-typescript': ^7.16.7
       '@types/node': ^16.11.33
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/styled-components': ^5.1.25
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       babel-loader: ^8.2.5
       cross-env: ^7.0.3
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -535,7 +535,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       react: 17.0.2
       react-bootstrap: 2.3.1_569957a51d469c962fcce166a59b9f78
@@ -585,11 +585,11 @@ importers:
       '@types/jest': ^27.5.0
       '@types/lodash': ^4.14.182
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-test-renderer': ^17.0.2
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       eslint-plugin-react: ~7.28.0
@@ -600,7 +600,7 @@ importers:
       react-base16-styling: ^0.9.1
       react-test-renderer: ^17.0.2
       rimraf: ^3.0.2
-      rollup: ^2.71.1
+      rollup: ^2.72.1
       rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.31.2
       ts-jest: ^27.1.4
@@ -651,13 +651,13 @@ importers:
       '@babel/preset-react': ^7.16.7
       '@babel/preset-typescript': ^7.16.7
       '@types/node': ^16.11.33
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       babel-loader: ^8.2.5
       cross-env: ^7.0.3
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -672,7 +672,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       immutable: 4.0.0
       react: 17.0.2
@@ -718,11 +718,11 @@ importers:
       '@types/lodash': ^4.14.182
       '@types/node': ^16.11.33
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-redux': ^7.1.24
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       eslint-plugin-react: ~7.28.0
@@ -792,7 +792,7 @@ importers:
       '@redux-devtools/slider-monitor': ^3.1.2
       '@redux-devtools/ui': ^1.2.1
       '@reduxjs/toolkit': ^1.8.1
-      '@rjsf/core': ^4.1.1
+      '@rjsf/core': ^4.2.0
       '@testing-library/jest-dom': ^5.16.4
       '@testing-library/react': ^12.1.5
       '@types/jest': ^27.5.0
@@ -801,7 +801,7 @@ importers:
       '@types/lodash': ^4.14.182
       '@types/node': ^16.11.33
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
       '@types/socketcluster-client': ^13.0.5
@@ -814,7 +814,7 @@ importers:
       cross-env: ^7.0.3
       css-loader: ^6.7.1
       d3-state-visualizer: ^1.6.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       eslint-plugin-react: ~7.28.0
@@ -846,7 +846,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       '@babel/runtime': 7.17.9
       '@redux-devtools/chart-monitor': link:../redux-devtools-chart-monitor
@@ -935,13 +935,13 @@ importers:
       '@babel/runtime': ^7.17.9
       '@redux-devtools/core': ^3.12.0
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/redux-devtools-themes': ^1.0.0
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       d3-state-visualizer: ^1.6.0
       deepmerge: ^4.2.2
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -992,7 +992,7 @@ importers:
       '@types/minimist': ^1.2.2
       '@types/morgan': ^1.9.3
       '@types/node': ^16.11.33
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/semver': ^7.3.9
       '@types/socketcluster': ^14.0.4
       '@types/socketcluster-client': ^13.0.5
@@ -1002,13 +1002,13 @@ importers:
       '@types/uuid': ^8.3.4
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      apollo-server-express: ^3.6.7
+      apollo-server-express: ^3.7.0
       body-parser: ^1.20.0
       chalk: ^4.1.2
       cors: ^2.8.5
       cross-spawn: ^7.0.3
       electron: ^18.2.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       express: ^4.18.1
@@ -1028,7 +1028,7 @@ importers:
       semver: ^7.3.7
       socketcluster: ^14.4.2
       socketcluster-client: ^14.3.2
-      sqlite3: ^5.0.6
+      sqlite3: ^5.0.8
       styled-components: ^5.3.5
       supertest: ^6.2.3
       ts-jest: ^27.1.4
@@ -1102,10 +1102,10 @@ importers:
       '@redux-devtools/core': ^3.12.0
       '@types/parse-key': ^0.2.0
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -1155,7 +1155,7 @@ importers:
       '@babel/runtime': ^7.17.9
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       redux: ^4.2.0
       rimraf: ^3.0.2
@@ -1195,13 +1195,13 @@ importers:
       '@types/lodash': ^4.14.182
       '@types/lodash.debounce': ^4.0.7
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dragula': ^1.1.0
       '@types/redux-devtools-themes': ^1.0.0
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       dateformat: ^4.6.3
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -1285,12 +1285,12 @@ importers:
       '@types/jsan': ^3.1.2
       '@types/object-path': ^0.11.1
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/simple-diff': ^1.6.1
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       es6template: ^1.0.5
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       eslint-plugin-react: ~7.28.0
@@ -1365,7 +1365,7 @@ importers:
       '@types/history': ^4.7.11
       '@types/lodash.shuffle': ^4.2.7
       '@types/node': ^16.11.33
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
       '@types/react-router': ^5.1.18
@@ -1378,7 +1378,7 @@ importers:
       connected-react-router: ^6.9.2
       cross-env: ^7.0.3
       css-loader: ^6.7.1
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -1400,7 +1400,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       '@redux-devtools/core': link:../../redux-devtools
       '@redux-devtools/dock-monitor': link:../../redux-devtools-dock-monitor
@@ -1472,13 +1472,13 @@ importers:
       '@types/jest': ^27.5.0
       '@types/node': ^16.11.33
       '@types/path-browserify': ^1.0.0
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/redux-devtools-themes': ^1.0.0
       '@types/source-map': 0.5.2
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       anser: ^2.1.1
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       eslint-plugin-react: ~7.28.0
@@ -1552,7 +1552,7 @@ importers:
       '@types/history': ^4.7.11
       '@types/lodash.shuffle': ^4.2.7
       '@types/node': ^16.11.33
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
       '@types/react-router': ^5.1.18
@@ -1564,7 +1564,7 @@ importers:
       base16: ^1.0.0
       connected-react-router: ^6.9.2
       cross-env: ^7.0.3
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -1584,7 +1584,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       '@redux-devtools/core': link:../../redux-devtools
       '@redux-devtools/dock-monitor': link:../../redux-devtools-dock-monitor
@@ -1646,7 +1646,7 @@ importers:
       '@types/node': ^16.11.33
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       jest: ^27.5.1
@@ -1694,11 +1694,11 @@ importers:
       '@redux-devtools/core': ^3.12.0
       '@types/lodash.debounce': ^4.0.7
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/redux-devtools-themes': ^1.0.0
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -1757,7 +1757,7 @@ importers:
       '@types/socketcluster-client': ^13.0.5
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       jsan: ^3.1.14
       querystring: ^0.2.1
@@ -1810,11 +1810,11 @@ importers:
       '@types/lodash': ^4.14.182
       '@types/lodash.debounce': ^4.0.7
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/redux-devtools-themes': ^1.0.0
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -1888,7 +1888,7 @@ importers:
       '@reduxjs/toolkit': ^1.8.1
       '@types/copy-webpack-plugin': ^8.0.1
       '@types/node': ^16.11.33
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
       '@types/react-router-dom': ^5.3.3
@@ -1899,7 +1899,7 @@ importers:
       copy-webpack-plugin: ^9.1.0
       cross-env: ^7.0.3
       css-loader: ^6.7.1
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -1919,7 +1919,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       '@babel/runtime': 7.17.9
       '@chakra-ui/react': 1.8.8_8021b84ec8ff18477d479d84cde0245c
@@ -1984,7 +1984,7 @@ importers:
       '@types/jsan': ^3.1.2
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       immutable: ^4.0.0
@@ -2030,11 +2030,11 @@ importers:
       '@redux-devtools/ui': ^1.2.1
       '@rollup/plugin-babel': ^5.3.1
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/redux-devtools-themes': ^1.0.0
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -2043,7 +2043,7 @@ importers:
       redux: ^4.2.0
       redux-devtools-themes: ^1.0.0
       rimraf: ^3.0.2
-      rollup: ^2.71.1
+      rollup: ^2.72.1
       rollup-plugin-typescript2: ^0.31.2
       tslib: ^2.4.0
       typescript: ~4.6.4
@@ -2092,7 +2092,7 @@ importers:
       '@types/classnames': ^2.3.1
       '@types/node': ^16.11.33
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
       '@types/styled-components': ^5.1.25
@@ -2103,7 +2103,7 @@ importers:
       classnames: ^2.3.1
       cross-env: ^7.0.3
       css-loader: ^6.7.1
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -2122,7 +2122,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       '@redux-devtools/core': link:../../../redux-devtools
       '@redux-devtools/dock-monitor': link:../../../redux-devtools-dock-monitor
@@ -2178,7 +2178,7 @@ importers:
       '@babel/preset-react': ^7.16.7
       '@babel/preset-typescript': ^7.16.7
       '@babel/runtime': ^7.17.9
-      '@rjsf/core': ^4.1.1
+      '@rjsf/core': ^4.2.0
       '@storybook/addon-essentials': ^6.4.22
       '@storybook/react': ^6.4.22
       '@testing-library/dom': ^8.13.0
@@ -2190,7 +2190,7 @@ importers:
       '@types/jest': ^27.5.0
       '@types/json-schema': ^7.0.11
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/redux-devtools-themes': ^1.0.0
       '@types/simple-element-resize-detector': ^1.3.0
       '@types/styled-components': ^5.1.25
@@ -2201,7 +2201,7 @@ importers:
       codemirror: ^5.65.3
       color: ^4.2.3
       csstype: ^3.0.11
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.1.5
       eslint-plugin-react: ~7.28.0
@@ -2213,7 +2213,7 @@ importers:
       react-dom: ^17.0.2
       react-icons: ^4.3.1
       react-is: ^17.0.2
-      react-select: ^5.3.1
+      react-select: ^5.3.2
       redux-devtools-themes: ^1.0.0
       rimraf: ^3.0.2
       simple-element-resize-detector: ^1.3.0
@@ -2240,7 +2240,7 @@ importers:
       color: 4.2.3
       prop-types: 15.8.1
       react-icons: 4.3.1_react@17.0.2
-      react-select: 5.3.1_119827f31b0360eaa21c3c49ad2eba57
+      react-select: 5.3.2_119827f31b0360eaa21c3c49ad2eba57
       redux-devtools-themes: 1.0.0
       simple-element-resize-detector: 1.3.0
     devDependencies:
@@ -2302,7 +2302,7 @@ importers:
       '@types/node': ^16.11.33
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       get-params: ^0.1.2
       immutable: ^4.0.0
@@ -2351,7 +2351,7 @@ importers:
       '@redux-devtools/log-monitor': ^3.1.1
       '@types/node': ^16.11.33
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
       '@types/webpack-env': ^1.16.4
@@ -2359,7 +2359,7 @@ importers:
       '@typescript-eslint/parser': ^5.22.0
       babel-loader: ^8.2.5
       cross-env: ^7.0.3
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -2375,7 +2375,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       '@redux-devtools/core': link:../..
       '@redux-devtools/dock-monitor': link:../../../redux-devtools-dock-monitor
@@ -2425,7 +2425,7 @@ importers:
       '@types/classnames': ^2.3.1
       '@types/node': ^16.11.33
       '@types/prop-types': ^15.7.5
-      '@types/react': ^17.0.44
+      '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
       '@types/webpack-env': ^1.16.4
@@ -2435,7 +2435,7 @@ importers:
       classnames: ^2.3.1
       cross-env: ^7.0.3
       css-loader: ^6.7.1
-      eslint: ^8.14.0
+      eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
@@ -2452,7 +2452,7 @@ importers:
       typescript: ~4.6.4
       webpack: ^5.72.0
       webpack-cli: ^4.9.2
-      webpack-dev-server: ^4.8.1
+      webpack-dev-server: ^4.9.0
     dependencies:
       '@redux-devtools/core': link:../..
       '@redux-devtools/dock-monitor': link:../../../redux-devtools-dock-monitor
@@ -18594,8 +18594,8 @@ packages:
       react: 17.0.2
     dev: true
 
-  /react-select/5.3.1_119827f31b0360eaa21c3c49ad2eba57:
-    resolution: {integrity: sha512-Y195MmhDoDAj/8gTDyYZU1Raf7tmZd81wxM6RkFko4pqJ4Xv0/ilqUMtSn+GYkwmSlTWeMlzh+e+t7PJgtuXPw==}
+  /react-select/5.3.2_119827f31b0360eaa21c3c49ad2eba57:
+    resolution: {integrity: sha512-W6Irh7U6Ha7p5uQQ2ZnemoCQ8mcfgOtHfw3wuMzG6FAu0P+CYicgofSLOq97BhjMx8jS+h+wwWdCBeVVZ9VqlQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
