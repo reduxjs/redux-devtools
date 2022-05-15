@@ -1,8 +1,8 @@
 import React, { CSSProperties } from 'react';
 import { connect } from 'react-redux';
 import { Button, Toolbar, Spacer } from '@redux-devtools/ui';
-import { push as pushRoute } from 'connected-react-router';
 import pkg from '@redux-devtools/inspector-monitor-test-tab/package.json';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import getOptions from './getOptions';
 import { DemoAppState } from './reducers';
 import {
@@ -69,11 +69,11 @@ interface Props
   shuffleArray: () => void;
 }
 
-class DemoApp extends React.Component<Props> {
+class DemoApp extends React.Component<Props & RouteComponentProps> {
   timeout?: number;
 
   render() {
-    const options = getOptions(this.props.router.location);
+    const options = getOptions(this.props.location);
 
     return (
       <div style={styles.wrapper}>
@@ -180,5 +180,4 @@ export default connect((state: DemoAppState) => state, {
   addFunction: (): AddFunctionAction => ({ type: 'ADD_FUNCTION' }),
   addSymbol: (): AddSymbolAction => ({ type: 'ADD_SYMBOL' }),
   shuffleArray: (): ShuffleArrayAction => ({ type: 'SHUFFLE_ARRAY' }),
-  pushRoute,
-})(DemoApp);
+})(withRouter(DemoApp));

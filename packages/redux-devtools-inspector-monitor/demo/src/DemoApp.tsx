@@ -10,9 +10,8 @@ import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import * as base16 from 'base16';
-import { push as pushRoute } from 'connected-react-router';
-import { Path } from 'history';
 import { inspectorThemes } from '@redux-devtools/inspector-monitor';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import getOptions, { Options } from './getOptions';
 import {
   AddFunctionAction,
@@ -140,14 +139,13 @@ interface Props
   addFunction: () => void;
   addSymbol: () => void;
   shuffleArray: () => void;
-  pushRoute: (path: Path) => void;
 }
 
-class DemoApp extends React.Component<Props> {
+class DemoApp extends React.Component<Props & RouteComponentProps> {
   timeout?: number;
 
   render() {
-    const options = getOptions(this.props.router.location);
+    const options = getOptions(this.props.location);
 
     return (
       <div style={styles.wrapper}>
@@ -265,7 +263,7 @@ class DemoApp extends React.Component<Props> {
   }
 
   toggleExtension = () => {
-    const options = getOptions(this.props.router.location);
+    const options = getOptions(this.props.location);
 
     window.location.href = buildUrl({
       ...options,
@@ -274,21 +272,21 @@ class DemoApp extends React.Component<Props> {
   };
 
   toggleImmutableSupport = () => {
-    const options = getOptions(this.props.router.location);
+    const options = getOptions(this.props.location);
 
-    this.props.pushRoute(
+    this.props.history.push(
       buildUrl({ ...options, supportImmutable: !options.supportImmutable })
     );
   };
 
   toggleTheme = () => {
-    const options = getOptions(this.props.router.location);
+    const options = getOptions(this.props.location);
 
-    this.props.pushRoute(buildUrl({ ...options, dark: !options.dark }));
+    this.props.history.push(buildUrl({ ...options, dark: !options.dark }));
   };
 
   setTheme = (options: Options, theme: string) => {
-    this.props.pushRoute(buildUrl({ ...options, theme }));
+    this.props.history.push(buildUrl({ ...options, theme }));
   };
 
   toggleTimeoutUpdate = () => {
@@ -332,5 +330,4 @@ export default connect((state: DemoAppState) => state, {
   addFunction: (): AddFunctionAction => ({ type: 'ADD_FUNCTION' }),
   addSymbol: (): AddSymbolAction => ({ type: 'ADD_SYMBOL' }),
   shuffleArray: (): ShuffleArrayAction => ({ type: 'SHUFFLE_ARRAY' }),
-  pushRoute,
-})(DemoApp);
+})(withRouter(DemoApp));

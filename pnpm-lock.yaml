@@ -1362,20 +1362,18 @@ importers:
       '@redux-devtools/inspector-monitor': ^2.1.2
       '@redux-devtools/inspector-monitor-test-tab': ^0.8.6
       '@redux-devtools/ui': ^1.2.1
-      '@types/history': ^4.7.11
       '@types/lodash.shuffle': ^4.2.7
       '@types/node': ^16.11.33
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
-      '@types/react-router': ^5.1.18
+      '@types/react-router-dom': ^5.3.3
       '@types/redux-logger': ^3.0.9
       '@types/styled-components': ^5.1.25
       '@types/webpack-env': ^1.16.4
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       babel-loader: ^8.2.5
-      connected-react-router: ^6.9.2
       cross-env: ^7.0.3
       css-loader: ^6.7.1
       eslint: ^8.15.0
@@ -1383,7 +1381,6 @@ importers:
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
       fork-ts-checker-webpack-plugin: ^7.2.11
-      history: ^4.10.1
       html-webpack-plugin: ^5.5.0
       immutable: ^4.0.0
       lodash.shuffle: ^4.2.0
@@ -1391,7 +1388,7 @@ importers:
       react-dom: ^17.0.2
       react-is: ^17.0.2
       react-redux: ^7.2.8
-      react-router: ^5.3.1
+      react-router-dom: ^5.3.1
       redux: ^4.2.0
       redux-logger: ^3.0.6
       style-loader: ^3.3.1
@@ -1407,15 +1404,13 @@ importers:
       '@redux-devtools/inspector-monitor': link:../../redux-devtools-inspector-monitor
       '@redux-devtools/inspector-monitor-test-tab': link:..
       '@redux-devtools/ui': link:../../redux-devtools-ui
-      connected-react-router: 6.9.2_00712eb8f791d7f1c28c0ddcca5e8608
-      history: 4.10.1
       immutable: 4.0.0
       lodash.shuffle: 4.2.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-is: 17.0.2
       react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
-      react-router: 5.3.1_react@17.0.2
+      react-router-dom: 5.3.1_react@17.0.2
       redux: 4.2.0
       redux-logger: 3.0.6
       styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
@@ -1424,13 +1419,12 @@ importers:
       '@babel/preset-env': 7.17.10_@babel+core@7.17.10
       '@babel/preset-react': 7.16.7_@babel+core@7.17.10
       '@babel/preset-typescript': 7.16.7_@babel+core@7.17.10
-      '@types/history': 4.7.11
       '@types/lodash.shuffle': 4.2.7
       '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
       '@types/react-redux': 7.1.24
-      '@types/react-router': 5.1.18
+      '@types/react-router-dom': 5.3.3
       '@types/redux-logger': 3.0.9
       '@types/styled-components': 5.1.25
       '@types/webpack-env': 1.16.4
@@ -1549,27 +1543,24 @@ importers:
       '@redux-devtools/dock-monitor': ^2.1.1
       '@redux-devtools/inspector-monitor': ^2.1.2
       '@types/base16': ^1.0.2
-      '@types/history': ^4.7.11
       '@types/lodash.shuffle': ^4.2.7
       '@types/node': ^16.11.33
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
-      '@types/react-router': ^5.1.18
+      '@types/react-router-dom': ^5.3.3
       '@types/redux-logger': ^3.0.9
       '@types/webpack-env': ^1.16.4
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       babel-loader: ^8.2.5
       base16: ^1.0.0
-      connected-react-router: ^6.9.2
       cross-env: ^7.0.3
       eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
       fork-ts-checker-webpack-plugin: ^7.2.11
-      history: ^4.10.1
       html-webpack-plugin: ^5.5.0
       immutable: ^4.0.0
       lodash.shuffle: ^4.2.0
@@ -1577,7 +1568,7 @@ importers:
       react-bootstrap: ^2.3.1
       react-dom: ^17.0.2
       react-redux: ^7.2.8
-      react-router: ^5.3.1
+      react-router-dom: ^5.3.1
       redux: ^4.2.0
       redux-logger: ^3.0.6
       ts-node: ^10.7.0
@@ -1590,15 +1581,13 @@ importers:
       '@redux-devtools/dock-monitor': link:../../redux-devtools-dock-monitor
       '@redux-devtools/inspector-monitor': link:..
       base16: 1.0.0
-      connected-react-router: 6.9.2_00712eb8f791d7f1c28c0ddcca5e8608
-      history: 4.10.1
       immutable: 4.0.0
       lodash.shuffle: 4.2.0
       react: 17.0.2
       react-bootstrap: 2.3.1_569957a51d469c962fcce166a59b9f78
       react-dom: 17.0.2_react@17.0.2
       react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
-      react-router: 5.3.1_react@17.0.2
+      react-router-dom: 5.3.1_react@17.0.2
       redux: 4.2.0
       redux-logger: 3.0.6
     devDependencies:
@@ -1607,13 +1596,12 @@ importers:
       '@babel/preset-react': 7.16.7_@babel+core@7.17.10
       '@babel/preset-typescript': 7.16.7_@babel+core@7.17.10
       '@types/base16': 1.0.2
-      '@types/history': 4.7.11
       '@types/lodash.shuffle': 4.2.7
       '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
       '@types/react-redux': 7.1.24
-      '@types/react-router': 5.1.18
+      '@types/react-router-dom': 5.3.3
       '@types/redux-logger': 3.0.9
       '@types/webpack-env': 1.16.4
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
@@ -10979,27 +10967,6 @@ packages:
     engines: {node: '>=0.8'}
     dev: true
 
-  /connected-react-router/6.9.2_00712eb8f791d7f1c28c0ddcca5e8608:
-    resolution: {integrity: sha512-bE8kNBiZv9Mivp7pYn9JvLH5ItTjLl45kk1/Vha0rmAK9I/ETb5JPJrAm0h2KCG9qLfv7vqU3Jo4UUDo0oJnQg==}
-    peerDependencies:
-      history: ^4.7.2
-      react: ^16.4.0 || ^17.0.0
-      react-redux: ^6.0.0 || ^7.1.0
-      react-router: ^4.3.1 || ^5.0.0
-      redux: ^3.6.0 || ^4.0.0
-    dependencies:
-      history: 4.10.1
-      lodash.isequalwith: 4.4.0
-      prop-types: 15.8.1
-      react: 17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
-      react-router: 5.3.1_react@17.0.2
-      redux: 4.2.0
-    optionalDependencies:
-      immutable: 4.0.0
-      seamless-immutable: 7.1.4
-    dev: false
-
   /console-browserify/1.2.0:
     resolution: {integrity: sha512-ZMkYO/LkF17QvCPqM0gxw8yUzigAOZOSWSHg91FH6orS7vcEj5dVZTidN2fQ14yBSdg97RqhSNwLUXInd52OTA==}
     dev: true
@@ -15582,6 +15549,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile/2.4.0:
     resolution: {integrity: sha1-NzaitCi4e72gzIO1P6PWM6NcKug=}
@@ -16079,10 +16047,6 @@ packages:
 
   /lodash.isboolean/3.0.3:
     resolution: {integrity: sha1-bC4XHbKiV82WgC/UOwGyDV9YcPY=}
-    dev: false
-
-  /lodash.isequalwith/4.4.0:
-    resolution: {integrity: sha1-Jmcm3dUo+FTyH06pigZWBuD7xrA=}
     dev: false
 
   /lodash.isinteger/4.0.4:
@@ -19417,12 +19381,6 @@ packages:
       ajv-formats: 2.1.1
       ajv-keywords: 5.1.0_ajv@8.11.0
     dev: true
-
-  /seamless-immutable/7.1.4:
-    resolution: {integrity: sha512-XiUO1QP4ki4E2PHegiGAlu6r82o5A+6tRh7IkGGTVg/h+UoeX4nFBeCGPOhb4CYjvkqsfm/TUtvOMYC1xmV30A==}
-    requiresBuild: true
-    dev: false
-    optional: true
 
   /select-hose/2.0.0:
     resolution: {integrity: sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=}

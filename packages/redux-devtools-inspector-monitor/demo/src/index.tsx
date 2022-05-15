@@ -9,12 +9,10 @@ import {
   StoreEnhancer,
 } from 'redux';
 import logger from 'redux-logger';
-import { Route } from 'react-router';
-import { createBrowserHistory } from 'history';
-import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { persistState } from '@redux-devtools/core';
 import DemoApp from './DemoApp';
-import createRootReducer from './reducers';
+import { rootReducer } from './reducers';
 import getOptions from './getOptions';
 import { ConnectedDevTools, getDevTools } from './DevTools';
 
@@ -30,14 +28,12 @@ const ROOT =
 
 const DevTools = getDevTools(window.location);
 
-const history = createBrowserHistory();
-
 const useDevtoolsExtension =
   !!(window as unknown as { __REDUX_DEVTOOLS_EXTENSION__: unknown })
     .__REDUX_DEVTOOLS_EXTENSION__ && getOptions(window.location).useExtension;
 
 const enhancer = compose(
-  applyMiddleware(logger, routerMiddleware(history)),
+  applyMiddleware(logger),
   (next: StoreEnhancerStoreCreator) => {
     const instrument = useDevtoolsExtension
       ? (
@@ -51,16 +47,16 @@ const enhancer = compose(
   persistState(getDebugSessionKey())
 );
 
-const store = createStore(createRootReducer(history), enhancer);
+const store = createStore(rootReducer, enhancer);
 
 render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <BrowserRouter>
       <Route path={ROOT}>
         <DemoApp />
       </Route>
       {!useDevtoolsExtension && <ConnectedDevTools />}
-    </ConnectedRouter>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

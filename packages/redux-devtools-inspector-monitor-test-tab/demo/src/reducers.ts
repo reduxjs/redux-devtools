@@ -1,12 +1,6 @@
 import Immutable from 'immutable';
 import shuffle from 'lodash.shuffle';
 import { combineReducers, Reducer } from 'redux';
-import {
-  connectRouter,
-  LocationChangeAction,
-  RouterState,
-} from 'connected-react-router';
-import { History } from 'history';
 
 type Nested = { long: { nested: { path: { to: { a: string } } }[] } };
 
@@ -139,11 +133,9 @@ type DemoAppAction =
   | HugePayloadAction
   | AddFunctionAction
   | AddSymbolAction
-  | ShuffleArrayAction
-  | LocationChangeAction;
+  | ShuffleArrayAction;
 
 export interface DemoAppState {
-  router: RouterState;
   timeoutUpdateEnabled: boolean;
   store: number;
   undefined: { val: undefined };
@@ -162,11 +154,8 @@ export interface DemoAppState {
   shuffleArray: unknown[];
 }
 
-const createRootReducer = (
-  history: History
-): Reducer<DemoAppState, DemoAppAction> =>
+export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
   combineReducers<DemoAppState, DemoAppAction>({
-    router: connectRouter(history) as Reducer<RouterState, DemoAppAction>,
     timeoutUpdateEnabled: (state = false, action) =>
       action.type === 'TOGGLE_TIMEOUT_UPDATE'
         ? action.timeoutUpdateEnabled
@@ -231,5 +220,3 @@ const createRootReducer = (
     shuffleArray: (state = DEFAULT_SHUFFLE_ARRAY, action) =>
       action.type === 'SHUFFLE_ARRAY' ? shuffle(state) : state,
   });
-
-export default createRootReducer;

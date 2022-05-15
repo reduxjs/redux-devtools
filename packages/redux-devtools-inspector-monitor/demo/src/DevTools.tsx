@@ -1,14 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { createDevTools } from '@redux-devtools/core';
 import { DockMonitor } from '@redux-devtools/dock-monitor';
-import { Location } from 'history';
 import {
   InspectorMonitor,
   base16Themes,
 } from '@redux-devtools/inspector-monitor';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import getOptions from './getOptions';
-import { DemoAppState } from './reducers';
 
 const CustomComponent = () => (
   <div
@@ -48,13 +46,9 @@ export const getDevTools = (location: { search: string }) =>
     </DockMonitor>
   );
 
-const UnconnectedDevTools = ({ location }: { location: Location }) => {
+const UnconnectedDevTools = ({ location }: RouteComponentProps) => {
   const DevTools = getDevTools(location);
   return <DevTools />;
 };
 
-const mapStateToProps = (state: DemoAppState) => ({
-  location: state.router.location,
-});
-
-export const ConnectedDevTools = connect(mapStateToProps)(UnconnectedDevTools);
+export const ConnectedDevTools = withRouter(UnconnectedDevTools);

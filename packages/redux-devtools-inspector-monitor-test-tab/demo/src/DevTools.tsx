@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { createDevTools } from '@redux-devtools/core';
 import {
   InspectorMonitor,
@@ -7,10 +6,9 @@ import {
   Tab,
 } from '@redux-devtools/inspector-monitor';
 import { DockMonitor } from '@redux-devtools/dock-monitor';
-import { Location } from 'history';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import getOptions from './getOptions';
 import { TestTab } from '@redux-devtools/inspector-monitor-test-tab';
-import { DemoAppState } from './reducers';
 import { Action } from 'redux';
 
 export const getDevTools = (location: { search: string }) =>
@@ -38,13 +36,9 @@ export const getDevTools = (location: { search: string }) =>
     </DockMonitor>
   );
 
-const UnconnectedDevTools = ({ location }: { location: Location }) => {
+const UnconnectedDevTools = ({ location }: RouteComponentProps) => {
   const DevTools = getDevTools(location);
   return <DevTools />;
 };
 
-const mapStateToProps = (state: DemoAppState) => ({
-  location: state.router.location,
-});
-
-export const ConnectedDevTools = connect(mapStateToProps)(UnconnectedDevTools);
+export const ConnectedDevTools = withRouter(UnconnectedDevTools);
