@@ -1549,27 +1549,24 @@ importers:
       '@redux-devtools/dock-monitor': ^2.1.1
       '@redux-devtools/inspector-monitor': ^2.1.2
       '@types/base16': ^1.0.2
-      '@types/history': ^4.7.11
       '@types/lodash.shuffle': ^4.2.7
       '@types/node': ^16.11.33
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
       '@types/react-redux': ^7.1.24
-      '@types/react-router': ^5.1.18
+      '@types/react-router-dom': ^5.1.18
       '@types/redux-logger': ^3.0.9
       '@types/webpack-env': ^1.16.4
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       babel-loader: ^8.2.5
       base16: ^1.0.0
-      connected-react-router: ^6.9.2
       cross-env: ^7.0.3
       eslint: ^8.15.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ~7.28.0
       eslint-plugin-react-hooks: ^4.5.0
       fork-ts-checker-webpack-plugin: ^7.2.11
-      history: ^4.10.1
       html-webpack-plugin: ^5.5.0
       immutable: ^4.0.0
       lodash.shuffle: ^4.2.0
@@ -1577,7 +1574,7 @@ importers:
       react-bootstrap: ^2.3.1
       react-dom: ^17.0.2
       react-redux: ^7.2.8
-      react-router: ^5.3.1
+      react-router-dom: ^5.3.1
       redux: ^4.2.0
       redux-logger: ^3.0.6
       ts-node: ^10.7.0
@@ -1590,15 +1587,13 @@ importers:
       '@redux-devtools/dock-monitor': link:../../redux-devtools-dock-monitor
       '@redux-devtools/inspector-monitor': link:..
       base16: 1.0.0
-      connected-react-router: 6.9.2_00712eb8f791d7f1c28c0ddcca5e8608
-      history: 4.10.1
       immutable: 4.0.0
       lodash.shuffle: 4.2.0
       react: 17.0.2
       react-bootstrap: 2.3.1_569957a51d469c962fcce166a59b9f78
       react-dom: 17.0.2_react@17.0.2
       react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
-      react-router: 5.3.1_react@17.0.2
+      react-router-dom: 5.3.1_react@17.0.2
       redux: 4.2.0
       redux-logger: 3.0.6
     devDependencies:
@@ -1607,13 +1602,12 @@ importers:
       '@babel/preset-react': 7.16.7_@babel+core@7.17.10
       '@babel/preset-typescript': 7.16.7_@babel+core@7.17.10
       '@types/base16': 1.0.2
-      '@types/history': 4.7.11
       '@types/lodash.shuffle': 4.2.7
       '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
       '@types/react-redux': 7.1.24
-      '@types/react-router': 5.1.18
+      '@types/react-router-dom': 5.3.3
       '@types/redux-logger': 3.0.9
       '@types/webpack-env': 1.16.4
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
@@ -15582,6 +15576,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile/2.4.0:
     resolution: {integrity: sha1-NzaitCi4e72gzIO1P6PWM6NcKug=}
