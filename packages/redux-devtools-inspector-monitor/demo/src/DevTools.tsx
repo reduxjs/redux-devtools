@@ -5,7 +5,7 @@ import {
   InspectorMonitor,
   base16Themes,
 } from '@redux-devtools/inspector-monitor';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import getOptions from './getOptions';
 
 const CustomComponent = () => (
@@ -46,9 +46,8 @@ export const getDevTools = (location: { search: string }) =>
     </DockMonitor>
   );
 
-const UnconnectedDevTools = ({ location }: RouteComponentProps) => {
+export function ConnectedDevTools() {
+  const location = useLocation();
   const DevTools = getDevTools(location);
   return <DevTools />;
-};
-
-export const ConnectedDevTools = withRouter(UnconnectedDevTools);
+}

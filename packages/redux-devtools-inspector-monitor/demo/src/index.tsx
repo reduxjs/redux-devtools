@@ -9,7 +9,7 @@ import {
   StoreEnhancer,
 } from 'redux';
 import logger from 'redux-logger';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { persistState } from '@redux-devtools/core';
 import DemoApp from './DemoApp';
 import { rootReducer } from './reducers';
@@ -52,9 +52,9 @@ const store = createStore(rootReducer, enhancer);
 render(
   <Provider store={store}>
     <BrowserRouter>
-      <Route path={ROOT}>
-        <DemoApp />
-      </Route>
+      <Routes>
+        <Route path={ROOT} element={<DemoApp />} />
+      </Routes>
       {!useDevtoolsExtension && <ConnectedDevTools />}
     </BrowserRouter>
   </Provider>,
