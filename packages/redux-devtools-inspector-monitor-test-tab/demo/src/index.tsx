@@ -10,7 +10,7 @@ import {
   StoreEnhancerStoreCreator,
 } from 'redux';
 import logger from 'redux-logger';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { persistState } from '@redux-devtools/core';
 import DemoApp from './DemoApp';
 import { rootReducer } from './reducers';
@@ -60,9 +60,9 @@ render(
           colorPreference: 'auto',
         }}
       >
-        <Route path={ROOT}>
-          <DemoApp />
-        </Route>
+        <Routes>
+          <Route path={ROOT} element={<DemoApp />} />
+        </Routes>
         {!useDevtoolsExtension && <ConnectedDevTools />}
       </Container>
     </BrowserRouter>

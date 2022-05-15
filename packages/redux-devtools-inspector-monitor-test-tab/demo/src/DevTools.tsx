@@ -6,7 +6,7 @@ import {
   Tab,
 } from '@redux-devtools/inspector-monitor';
 import { DockMonitor } from '@redux-devtools/dock-monitor';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import getOptions from './getOptions';
 import { TestTab } from '@redux-devtools/inspector-monitor-test-tab';
 import { Action } from 'redux';
@@ -36,9 +36,8 @@ export const getDevTools = (location: { search: string }) =>
     </DockMonitor>
   );
 
-const UnconnectedDevTools = ({ location }: RouteComponentProps) => {
+export function ConnectedDevTools() {
+  const location = useLocation();
   const DevTools = getDevTools(location);
   return <DevTools />;
-};
-
-export const ConnectedDevTools = withRouter(UnconnectedDevTools);
+}
