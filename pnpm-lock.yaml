@@ -61,7 +61,6 @@ importers:
       '@types/lodash': ^4.14.182
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
-      '@types/react-redux': ^7.1.24
       '@types/styled-components': ^5.1.25
       babel-loader: ^8.2.5
       bestzip: ^2.2.1
@@ -91,7 +90,7 @@ importers:
       react-icons: ^4.3.1
       react-is: ^17.0.2
       react-json-tree: ^0.16.2
-      react-redux: ^7.2.8
+      react-redux: ^8.0.1
       react-transform-catch-errors: ^1.0.2
       react-transform-hmr: ^1.0.4
       redux: ^4.2.0
@@ -123,7 +122,7 @@ importers:
       react-icons: 4.3.1_react@17.0.2
       react-is: 17.0.2
       react-json-tree: link:../packages/react-json-tree
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_d9885bc64a42b1d580f050330fa99afd
       redux: 4.2.0
       redux-persist: 6.0.0_react@17.0.2+redux@4.2.0
       styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
@@ -139,7 +138,6 @@ importers:
       '@types/lodash': 4.14.182
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
-      '@types/react-redux': 7.1.24
       '@types/styled-components': 5.1.25
       babel-loader: 8.2.5_887a5110397f957d9e06dd05497793db
       bestzip: 2.2.1
@@ -727,7 +725,6 @@ importers:
       '@types/node': ^16.11.33
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
-      '@types/react-redux': ^7.1.24
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       eslint: ^8.15.0
@@ -740,7 +737,7 @@ importers:
       prop-types: ^15.8.1
       react: ^17.0.2
       react-dom: ^17.0.2
-      react-redux: ^7.2.8
+      react-redux: ^8.0.1
       redux: ^4.2.0
       rimraf: ^3.0.2
       ts-jest: ^27.1.4
@@ -763,7 +760,6 @@ importers:
       '@types/lodash': 4.14.182
       '@types/node': 16.11.33
       '@types/react': 17.0.45
-      '@types/react-redux': 7.1.24
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
       '@typescript-eslint/parser': 5.22.0_eslint@8.15.0+typescript@4.6.4
       eslint: 8.15.0
@@ -774,7 +770,7 @@ importers:
       jest: 27.5.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_e03e580c80e558c9766465e70e7dd428
       redux: 4.2.0
       rimraf: 3.0.2
       ts-jest: 27.1.4_6b62438663b23957550c965172b78733
@@ -811,7 +807,6 @@ importers:
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
-      '@types/react-redux': ^7.1.24
       '@types/socketcluster-client': ^13.0.5
       '@types/styled-components': ^5.1.25
       '@types/testing-library__jest-dom': ^5.14.3
@@ -842,7 +837,7 @@ importers:
       react-dom: ^17.0.2
       react-icons: ^4.3.1
       react-is: ^17.0.2
-      react-redux: ^7.2.8
+      react-redux: ^8.0.1
       redux: ^4.2.0
       redux-persist: ^6.0.0
       rimraf: ^3.0.2
@@ -866,7 +861,7 @@ importers:
       '@redux-devtools/rtk-query-monitor': link:../redux-devtools-rtk-query-monitor
       '@redux-devtools/slider-monitor': link:../redux-devtools-slider-monitor
       '@redux-devtools/ui': link:../redux-devtools-ui
-      '@reduxjs/toolkit': 1.8.1_react-redux@7.2.8+react@17.0.2
+      '@reduxjs/toolkit': 1.8.1_react-redux@8.0.1+react@17.0.2
       '@types/prop-types': 15.7.5
       d3-state-visualizer: link:../d3-state-visualizer
       javascript-stringify: 2.1.0
@@ -877,7 +872,7 @@ importers:
       prop-types: 15.8.1
       react-icons: 4.3.1_react@17.0.2
       react-is: 17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_d9885bc64a42b1d580f050330fa99afd
       redux: 4.2.0
       redux-persist: 6.0.0_react@17.0.2+redux@4.2.0
       socketcluster-client: 14.3.2
@@ -899,7 +894,6 @@ importers:
       '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
-      '@types/react-redux': 7.1.24
       '@types/socketcluster-client': 13.0.5
       '@types/styled-components': 5.1.25
       '@types/testing-library__jest-dom': 5.14.3
@@ -1374,7 +1368,6 @@ importers:
       '@types/node': ^16.11.33
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
-      '@types/react-redux': ^7.1.24
       '@types/redux-logger': ^3.0.9
       '@types/styled-components': ^5.1.25
       '@types/webpack-env': ^1.16.4
@@ -1394,7 +1387,7 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       react-is: ^17.0.2
-      react-redux: ^7.2.8
+      react-redux: ^8.0.1
       react-router-dom: ^6.3.0
       redux: ^4.2.0
       redux-logger: ^3.0.6
@@ -1416,7 +1409,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-is: 17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_d9885bc64a42b1d580f050330fa99afd
       react-router-dom: 6.3.0_react-dom@17.0.2+react@17.0.2
       redux: 4.2.0
       redux-logger: 3.0.6
@@ -1430,7 +1423,6 @@ importers:
       '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
-      '@types/react-redux': 7.1.24
       '@types/redux-logger': 3.0.9
       '@types/styled-components': 5.1.25
       '@types/webpack-env': 1.16.4
@@ -1553,7 +1545,6 @@ importers:
       '@types/node': ^16.11.33
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
-      '@types/react-redux': ^7.1.24
       '@types/redux-logger': ^3.0.9
       '@types/webpack-env': ^1.16.4
       '@typescript-eslint/eslint-plugin': ^5.22.0
@@ -1572,7 +1563,7 @@ importers:
       react: ^17.0.2
       react-bootstrap: ^2.3.1
       react-dom: ^17.0.2
-      react-redux: ^7.2.8
+      react-redux: ^8.0.1
       react-router-dom: ^6.3.0
       redux: ^4.2.0
       redux-logger: ^3.0.6
@@ -1591,7 +1582,7 @@ importers:
       react: 17.0.2
       react-bootstrap: 2.3.1_569957a51d469c962fcce166a59b9f78
       react-dom: 17.0.2_react@17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_d9885bc64a42b1d580f050330fa99afd
       react-router-dom: 6.3.0_react-dom@17.0.2+react@17.0.2
       redux: 4.2.0
       redux-logger: 3.0.6
@@ -1605,7 +1596,6 @@ importers:
       '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
-      '@types/react-redux': 7.1.24
       '@types/redux-logger': 3.0.9
       '@types/webpack-env': 1.16.4
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
@@ -1882,7 +1872,6 @@ importers:
       '@types/node': ^16.11.33
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
-      '@types/react-redux': ^7.1.24
       '@types/styled-components': ^5.1.25
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
@@ -1902,7 +1891,7 @@ importers:
       react-dom: ^17.0.2
       react-icons: ^4.3.1
       react-is: ^17.0.2
-      react-redux: ^7.2.8
+      react-redux: ^8.0.1
       react-router-dom: ^6.3.0
       style-loader: ^3.3.1
       styled-components: ^5.3.5
@@ -1920,14 +1909,14 @@ importers:
       '@redux-devtools/core': link:../../redux-devtools
       '@redux-devtools/dock-monitor': link:../../redux-devtools-dock-monitor
       '@redux-devtools/rtk-query-monitor': link:..
-      '@reduxjs/toolkit': 1.8.1_react-redux@7.2.8+react@17.0.2
+      '@reduxjs/toolkit': 1.8.1_react-redux@8.0.1+react@17.0.2
       framer-motion: 6.3.3_react-dom@17.0.2+react@17.0.2
       msw: 0.39.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-icons: 4.3.1_react@17.0.2
       react-is: 17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_10b98e1be08185250763d14185d70e7b
       react-router-dom: 6.3.0_react-dom@17.0.2+react@17.0.2
       styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
     devDependencies:
@@ -1940,7 +1929,6 @@ importers:
       '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
-      '@types/react-redux': 7.1.24
       '@types/styled-components': 5.1.25
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
       '@typescript-eslint/parser': 5.22.0_eslint@8.15.0+typescript@4.6.4
@@ -2086,7 +2074,6 @@ importers:
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
-      '@types/react-redux': ^7.1.24
       '@types/styled-components': ^5.1.25
       '@types/webpack-env': ^1.16.4
       '@typescript-eslint/eslint-plugin': ^5.22.0
@@ -2105,7 +2092,7 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       react-is: ^17.0.2
-      react-redux: ^7.2.8
+      react-redux: ^8.0.1
       redux: ^4.2.0
       style-loader: ^3.3.1
       styled-components: ^5.3.5
@@ -2125,7 +2112,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-is: 17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_d9885bc64a42b1d580f050330fa99afd
       redux: 4.2.0
       styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
       todomvc-app-css: 2.4.2
@@ -2139,7 +2126,6 @@ importers:
       '@types/prop-types': 15.7.5
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
-      '@types/react-redux': 7.1.24
       '@types/styled-components': 5.1.25
       '@types/webpack-env': 1.16.4
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
@@ -2345,7 +2331,6 @@ importers:
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
-      '@types/react-redux': ^7.1.24
       '@types/webpack-env': ^1.16.4
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
@@ -2360,7 +2345,7 @@ importers:
       prop-types: ^15.8.1
       react: ^17.0.2
       react-dom: ^17.0.2
-      react-redux: ^7.2.8
+      react-redux: ^8.0.1
       redux: ^4.2.0
       redux-thunk: ^2.4.1
       ts-node: ^10.7.0
@@ -2375,7 +2360,7 @@ importers:
       prop-types: 15.8.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_d9885bc64a42b1d580f050330fa99afd
       redux: 4.2.0
       redux-thunk: 2.4.1_redux@4.2.0
     devDependencies:
@@ -2387,7 +2372,6 @@ importers:
       '@types/prop-types': 15.7.5
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
-      '@types/react-redux': 7.1.24
       '@types/webpack-env': 1.16.4
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
       '@typescript-eslint/parser': 5.22.0_eslint@8.15.0+typescript@4.6.4
@@ -2419,7 +2403,6 @@ importers:
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
-      '@types/react-redux': ^7.1.24
       '@types/webpack-env': ^1.16.4
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
@@ -2436,7 +2419,7 @@ importers:
       prop-types: ^15.8.1
       react: ^17.0.2
       react-dom: ^17.0.2
-      react-redux: ^7.2.8
+      react-redux: ^8.0.1
       redux: ^4.2.0
       style-loader: ^3.3.1
       todomvc-app-css: ^2.4.2
@@ -2453,7 +2436,7 @@ importers:
       prop-types: 15.8.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_d9885bc64a42b1d580f050330fa99afd
       redux: 4.2.0
       todomvc-app-css: 2.4.2
     devDependencies:
@@ -2466,7 +2449,6 @@ importers:
       '@types/prop-types': 15.7.5
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
-      '@types/react-redux': 7.1.24
       '@types/webpack-env': 1.16.4
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
       '@typescript-eslint/parser': 5.22.0_eslint@8.15.0+typescript@4.6.4
@@ -6018,7 +6000,7 @@ packages:
       react: 17.0.2
     dev: false
 
-  /@reduxjs/toolkit/1.8.1_react-redux@7.2.8+react@17.0.2:
+  /@reduxjs/toolkit/1.8.1_react-redux@8.0.1+react@17.0.2:
     resolution: {integrity: sha512-Q6mzbTpO9nOYRnkwpDlFOAbQnd3g7zj7CtHAZWz5SzE5lcV97Tf8f3SzOO8BoPOMYBFgfZaqTUZqgGu+a0+Fng==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18
@@ -6031,7 +6013,7 @@ packages:
     dependencies:
       immer: 9.0.12
       react: 17.0.2
-      react-redux: 7.2.8_react-dom@17.0.2+react@17.0.2
+      react-redux: 8.0.1_10b98e1be08185250763d14185d70e7b
       redux: 4.2.0
       redux-thunk: 2.4.1_redux@4.2.0
       reselect: 4.1.5
@@ -8224,14 +8206,6 @@ packages:
       '@types/dragula': 3.7.1
     dev: true
 
-  /@types/react-redux/7.1.24:
-    resolution: {integrity: sha512-7FkurKcS1k0FHZEtdbbgN8Oc6b+stGSfZYjQGicofJ0j4U0qIn/jaSvnP2pLwZKiai3/17xqqxkkrxTgN8UNbQ==}
-    dependencies:
-      '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 17.0.45
-      hoist-non-react-statics: 3.3.2
-      redux: 4.2.0
-
   /@types/react-syntax-highlighter/11.0.5:
     resolution: {integrity: sha512-VIOi9i2Oj5XsmWWoB72p3KlZoEbdRAcechJa8Ztebw7bDl2YmR+odxIqhtJGp1q2EozHs02US+gzxJ9nuf56qg==}
     dependencies:
@@ -8453,6 +8427,9 @@ packages:
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
     dev: true
+
+  /@types/use-sync-external-store/0.0.3:
+    resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
 
   /@types/uuid/8.3.4:
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
@@ -18372,6 +18349,9 @@ packages:
   /react-is/17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
+  /react-is/18.1.0:
+    resolution: {integrity: sha512-Fl7FuabXsJnV5Q1qIOQwx/sagGF18kogb4gpfcG4gjLBWO0WDiiz1ko/ExayuxE7InyQkBLkxRFG5oxY6Uu3Kg==}
+
   /react-lifecycles-compat/3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
     dev: false
@@ -18410,26 +18390,105 @@ packages:
       react-deep-force-update: 1.1.2
     dev: true
 
-  /react-redux/7.2.8_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-6+uDjhs3PSIclqoCk0kd6iX74gzrGc3W5zcAjbrFgEdIjRSQObdIwfx80unTkVUYvbQ95Y8Av3OvFHq1w5EOUw==}
+  /react-redux/8.0.1_10b98e1be08185250763d14185d70e7b:
+    resolution: {integrity: sha512-LMZMsPY4DYdZfLJgd7i79n5Kps5N9XVLCJJeWAaPYTV+Eah2zTuBjTxKtNEbjiyitbq80/eIkm55CYSLqAub3w==}
     peerDependencies:
-      react: ^16.8.3 || ^17 || ^18
-      react-dom: '*'
-      react-native: '*'
+      '@types/react': ^16.8 || ^17.0 || ^18.0
+      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+      react-native: '>=0.59'
+      redux: ^4
     peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
       react-dom:
         optional: true
       react-native:
         optional: true
+      redux:
+        optional: true
     dependencies:
       '@babel/runtime': 7.17.9
-      '@types/react-redux': 7.1.24
+      '@types/hoist-non-react-statics': 3.3.1
+      '@types/react': 17.0.45
+      '@types/react-dom': 17.0.16
+      '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-is: 17.0.2
+      react-is: 18.1.0
+      use-sync-external-store: 1.1.0_react@17.0.2
+    dev: false
+
+  /react-redux/8.0.1_d9885bc64a42b1d580f050330fa99afd:
+    resolution: {integrity: sha512-LMZMsPY4DYdZfLJgd7i79n5Kps5N9XVLCJJeWAaPYTV+Eah2zTuBjTxKtNEbjiyitbq80/eIkm55CYSLqAub3w==}
+    peerDependencies:
+      '@types/react': ^16.8 || ^17.0 || ^18.0
+      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+      react-native: '>=0.59'
+      redux: ^4
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+      redux:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.17.9
+      '@types/hoist-non-react-statics': 3.3.1
+      '@types/react': 17.0.45
+      '@types/react-dom': 17.0.16
+      '@types/use-sync-external-store': 0.0.3
+      hoist-non-react-statics: 3.3.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-is: 18.1.0
+      redux: 4.2.0
+      use-sync-external-store: 1.1.0_react@17.0.2
+    dev: false
+
+  /react-redux/8.0.1_e03e580c80e558c9766465e70e7dd428:
+    resolution: {integrity: sha512-LMZMsPY4DYdZfLJgd7i79n5Kps5N9XVLCJJeWAaPYTV+Eah2zTuBjTxKtNEbjiyitbq80/eIkm55CYSLqAub3w==}
+    peerDependencies:
+      '@types/react': ^16.8 || ^17.0 || ^18.0
+      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+      react-native: '>=0.59'
+      redux: ^4
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+      redux:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.17.9
+      '@types/hoist-non-react-statics': 3.3.1
+      '@types/react': 17.0.45
+      '@types/use-sync-external-store': 0.0.3
+      hoist-non-react-statics: 3.3.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-is: 18.1.0
+      redux: 4.2.0
+      use-sync-external-store: 1.1.0_react@17.0.2
+    dev: true
 
   /react-refresh/0.11.0:
     resolution: {integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==}
@@ -21273,6 +21332,13 @@ packages:
       react: 17.0.2
       tslib: 2.4.0
     dev: false
+
+  /use-sync-external-store/1.1.0_react@17.0.2:
+    resolution: {integrity: sha512-SEnieB2FPKEVne66NpXPd1Np4R1lTNKfjuy3XdIoPQKYBAFdzbzSZlSn1KJZUiihQLQC5Znot4SBz1EOTBwQAQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 17.0.2
 
   /use/3.1.1:
     resolution: {integrity: sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==}
