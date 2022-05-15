@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useRef } from 'react';
 import { connect } from 'react-redux';
 import pkg from '@redux-devtools/inspector-monitor/package.json';
 import Button from 'react-bootstrap/Button';
@@ -11,7 +11,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import * as base16 from 'base16';
 import { inspectorThemes } from '@redux-devtools/inspector-monitor';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import getOptions, { Options } from './getOptions';
 import {
   AddFunctionAction,
@@ -141,129 +141,13 @@ interface Props
   shuffleArray: () => void;
 }
 
-class DemoApp extends React.Component<Props & RouteComponentProps> {
-  timeout?: number;
+function DemoApp(props: Props) {
+  const timeout = useRef<number | undefined>();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  render() {
-    const options = getOptions(this.props.location);
-
-    return (
-      <div style={styles.wrapper}>
-        <h1 style={styles.header}>
-          {pkg.name || <span style={styles.muted}>Package Name</span>}
-        </h1>
-        <h5>
-          {pkg.description || (
-            <span style={styles.muted}>Package Description</span>
-          )}
-        </h5>
-        <div style={styles.links}>
-          <div style={styles.input}>
-            <Form>
-              <FormGroup as={Row}>
-                <Col as={FormLabel} sm={3}>
-                  Theme:
-                </Col>
-                <Col sm={9}>
-                  <InputGroup>
-                    <FormControl
-                      as="select"
-                      onChange={(event) =>
-                        this.setTheme(options, event.currentTarget.value)
-                      }
-                    >
-                      {themeOptions.map((theme) => (
-                        <option
-                          key={(theme && theme.label) || 'empty'}
-                          label={(theme && theme.label) || '──────────'}
-                          value={theme ? theme.value : undefined}
-                          disabled={!theme}
-                        />
-                      ))}
-                    </FormControl>
-                    <a onClick={this.toggleTheme} style={styles.link}>
-                      {options.dark ? 'Light theme' : 'Dark theme'}
-                    </a>
-                  </InputGroup>
-                </Col>
-              </FormGroup>
-            </Form>
-          </div>
-        </div>
-        <div style={styles.content}>
-          <div style={styles.buttons}>
-            <Button onClick={this.props.increment} style={styles.button}>
-              Increment
-            </Button>
-            <Button onClick={this.props.push} style={styles.button}>
-              Push
-            </Button>
-            <Button onClick={this.props.pop} style={styles.button}>
-              Pop
-            </Button>
-            <Button onClick={this.props.replace} style={styles.button}>
-              Replace
-            </Button>
-            <Button onClick={this.props.changeNested} style={styles.button}>
-              Change Nested
-            </Button>
-            <Button onClick={this.props.pushHugeArray} style={styles.button}>
-              Push Huge Array
-            </Button>
-            <Button onClick={this.props.addHugeObject} style={styles.button}>
-              Add Huge Object
-            </Button>
-            <Button onClick={this.props.addIterator} style={styles.button}>
-              Add Iterator
-            </Button>
-            <Button onClick={this.props.addRecursive} style={styles.button}>
-              Add Recursive
-            </Button>
-            <Button onClick={this.props.addNativeMap} style={styles.button}>
-              Add Native Map
-            </Button>
-            <Button onClick={this.props.addImmutableMap} style={styles.button}>
-              Add Immutable Map
-            </Button>
-            <Button
-              onClick={this.props.changeImmutableNested}
-              style={styles.button}
-            >
-              Change Immutable Nested
-            </Button>
-            <Button onClick={this.props.hugePayload} style={styles.button}>
-              Huge Payload
-            </Button>
-            <Button onClick={this.props.addFunction} style={styles.button}>
-              Add Function
-            </Button>
-            <Button onClick={this.props.addSymbol} style={styles.button}>
-              Add Symbol
-            </Button>
-            <Button onClick={this.toggleTimeoutUpdate} style={styles.button}>
-              Timeout Update {this.props.timeoutUpdateEnabled ? 'On' : 'Off'}
-            </Button>
-            <Button onClick={this.props.shuffleArray} style={styles.button}>
-              Shuffle Array
-            </Button>
-          </div>
-        </div>
-        <div style={styles.links}>
-          <a onClick={this.toggleExtension} style={styles.link}>
-            {(options.useExtension ? 'Disable' : 'Enable') +
-              ' Chrome Extension (will reload this page)'}
-          </a>
-          <a onClick={this.toggleImmutableSupport} style={styles.link}>
-            {(options.supportImmutable ? 'Disable' : 'Enable') +
-              ' Full Immutable Support'}
-          </a>
-        </div>
-      </div>
-    );
-  }
-
-  toggleExtension = () => {
-    const options = getOptions(this.props.location);
+  const toggleExtension = () => {
+    const options = getOptions(location);
 
     window.location.href = buildUrl({
       ...options,
@@ -271,34 +155,147 @@ class DemoApp extends React.Component<Props & RouteComponentProps> {
     });
   };
 
-  toggleImmutableSupport = () => {
-    const options = getOptions(this.props.location);
+  const toggleImmutableSupport = () => {
+    const options = getOptions(location);
 
-    this.props.history.push(
+    navigate(
       buildUrl({ ...options, supportImmutable: !options.supportImmutable })
     );
   };
 
-  toggleTheme = () => {
-    const options = getOptions(this.props.location);
+  const toggleTheme = () => {
+    const options = getOptions(location);
 
-    this.props.history.push(buildUrl({ ...options, dark: !options.dark }));
+    navigate(buildUrl({ ...options, dark: !options.dark }));
   };
 
-  setTheme = (options: Options, theme: string) => {
-    this.props.history.push(buildUrl({ ...options, theme }));
+  const setTheme = (options: Options, theme: string) => {
+    navigate(buildUrl({ ...options, theme }));
   };
 
-  toggleTimeoutUpdate = () => {
-    const enabled = !this.props.timeoutUpdateEnabled;
-    this.props.toggleTimeoutUpdate(enabled);
+  const toggleTimeoutUpdate = () => {
+    const enabled = !props.timeoutUpdateEnabled;
+    props.toggleTimeoutUpdate(enabled);
 
     if (enabled) {
-      this.timeout = window.setInterval(this.props.timeoutUpdate, 1000);
+      timeout.current = window.setInterval(props.timeoutUpdate, 1000);
     } else {
-      clearTimeout(this.timeout);
+      clearTimeout(timeout.current);
     }
   };
+
+  const options = getOptions(location);
+
+  return (
+    <div style={styles.wrapper}>
+      <h1 style={styles.header}>
+        {pkg.name || <span style={styles.muted}>Package Name</span>}
+      </h1>
+      <h5>
+        {pkg.description || (
+          <span style={styles.muted}>Package Description</span>
+        )}
+      </h5>
+      <div style={styles.links}>
+        <div style={styles.input}>
+          <Form>
+            <FormGroup as={Row}>
+              <Col as={FormLabel} sm={3}>
+                Theme:
+              </Col>
+              <Col sm={9}>
+                <InputGroup>
+                  <FormControl
+                    as="select"
+                    onChange={(event) =>
+                      setTheme(options, event.currentTarget.value)
+                    }
+                  >
+                    {themeOptions.map((theme) => (
+                      <option
+                        key={(theme && theme.label) || 'empty'}
+                        label={(theme && theme.label) || '──────────'}
+                        value={theme ? theme.value : undefined}
+                        disabled={!theme}
+                      />
+                    ))}
+                  </FormControl>
+                  <a onClick={toggleTheme} style={styles.link}>
+                    {options.dark ? 'Light theme' : 'Dark theme'}
+                  </a>
+                </InputGroup>
+              </Col>
+            </FormGroup>
+          </Form>
+        </div>
+      </div>
+      <div style={styles.content}>
+        <div style={styles.buttons}>
+          <Button onClick={props.increment} style={styles.button}>
+            Increment
+          </Button>
+          <Button onClick={props.push} style={styles.button}>
+            Push
+          </Button>
+          <Button onClick={props.pop} style={styles.button}>
+            Pop
+          </Button>
+          <Button onClick={props.replace} style={styles.button}>
+            Replace
+          </Button>
+          <Button onClick={props.changeNested} style={styles.button}>
+            Change Nested
+          </Button>
+          <Button onClick={props.pushHugeArray} style={styles.button}>
+            Push Huge Array
+          </Button>
+          <Button onClick={props.addHugeObject} style={styles.button}>
+            Add Huge Object
+          </Button>
+          <Button onClick={props.addIterator} style={styles.button}>
+            Add Iterator
+          </Button>
+          <Button onClick={props.addRecursive} style={styles.button}>
+            Add Recursive
+          </Button>
+          <Button onClick={props.addNativeMap} style={styles.button}>
+            Add Native Map
+          </Button>
+          <Button onClick={props.addImmutableMap} style={styles.button}>
+            Add Immutable Map
+          </Button>
+          <Button onClick={props.changeImmutableNested} style={styles.button}>
+            Change Immutable Nested
+          </Button>
+          <Button onClick={props.hugePayload} style={styles.button}>
+            Huge Payload
+          </Button>
+          <Button onClick={props.addFunction} style={styles.button}>
+            Add Function
+          </Button>
+          <Button onClick={props.addSymbol} style={styles.button}>
+            Add Symbol
+          </Button>
+          <Button onClick={toggleTimeoutUpdate} style={styles.button}>
+            Timeout Update {props.timeoutUpdateEnabled ? 'On' : 'Off'}
+          </Button>
+          <Button onClick={props.shuffleArray} style={styles.button}>
+            Shuffle Array
+          </Button>
+        </div>
+      </div>
+      <div style={styles.links}>
+        <a onClick={toggleExtension} style={styles.link}>
+          {(options.useExtension ? 'Disable' : 'Enable') +
+            ' Chrome Extension (will reload this page)'}
+        </a>
+        <a onClick={toggleImmutableSupport} style={styles.link}>
+          {(options.supportImmutable ? 'Disable' : 'Enable') +
+            ' Full Immutable Support'}
+        </a>
+      </div>
+    </div>
+  );
 }
 
 export default connect((state: DemoAppState) => state, {
@@ -330,4 +327,4 @@ export default connect((state: DemoAppState) => state, {
   addFunction: (): AddFunctionAction => ({ type: 'ADD_FUNCTION' }),
   addSymbol: (): AddSymbolAction => ({ type: 'ADD_SYMBOL' }),
   shuffleArray: (): ShuffleArrayAction => ({ type: 'SHUFFLE_ARRAY' }),
-})(withRouter(DemoApp));
+})(DemoApp);

@@ -1,8 +1,8 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Button, Toolbar, Spacer } from '@redux-devtools/ui';
 import pkg from '@redux-devtools/inspector-monitor-test-tab/package.json';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import getOptions from './getOptions';
 import { DemoAppState } from './reducers';
 import {
@@ -69,87 +69,84 @@ interface Props
   shuffleArray: () => void;
 }
 
-class DemoApp extends React.Component<Props & RouteComponentProps> {
-  timeout?: number;
+function DemoApp(props: Props) {
+  const timeout = useRef<number | undefined>();
+  const location = useLocation();
 
-  render() {
-    const options = getOptions(this.props.location);
+  const options = getOptions(location);
 
-    return (
-      <div style={styles.wrapper}>
-        <h3>{pkg.name || <span style={styles.muted}>Package Name</span>}</h3>
-        <h5>
-          {pkg.description || (
-            <span style={styles.muted}>Package Description</span>
-          )}
-        </h5>
-        <Toolbar>
-          <Spacer />
-          <Button onClick={this.props.increment}>Increment</Button>
-          <Button onClick={this.props.push}>Push</Button>
-          <Button onClick={this.props.pop}>Pop</Button>
-          <Button onClick={this.props.replace}>Replace</Button>
-          <Button onClick={this.props.changeNested}>Change Nested</Button>
-          <Spacer />
-        </Toolbar>
-        <Toolbar>
-          <Spacer />
-          <Button onClick={this.props.pushHugeArray}>Push Huge Array</Button>
-          <Button onClick={this.props.addHugeObject}>Add Huge Object</Button>
-          <Button onClick={this.props.hugePayload}>Huge Payload</Button>
-          <Spacer />
-        </Toolbar>
-        <Toolbar>
-          <Spacer />
-          <Button onClick={this.props.addIterator}>Add Iterator</Button>
-          <Button onClick={this.props.addImmutableMap}>
-            Add Immutable Map
-          </Button>
-          <Button onClick={this.props.changeImmutableNested}>
-            Change Immutable Nested
-          </Button>
-          <Spacer />
-        </Toolbar>
-        <Toolbar>
-          <Spacer />
-          <Button onClick={this.props.addRecursive}>Add Recursive</Button>
-          <Button onClick={this.props.addFunction}>Add Function</Button>
-          <Button onClick={this.props.addSymbol}>Add Symbol</Button>
-          <Spacer />
-        </Toolbar>
-        <Toolbar>
-          <Spacer />
-          <Button onClick={this.toggleTimeoutUpdate}>
-            Timeout Update {this.props.timeoutUpdateEnabled ? 'On' : 'Off'}
-          </Button>
-          <Button onClick={this.props.shuffleArray}>Shuffle Array</Button>
-          <Spacer />
-        </Toolbar>
-        <div>
-          {options.useExtension ? (
-            <a href={`${ROOT}`} style={styles.link}>
-              Disable browser extension
-            </a>
-          ) : (
-            <a href={`${ROOT}?ext`} style={styles.link}>
-              Use browser extension
-            </a>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  toggleTimeoutUpdate = () => {
-    const enabled = !this.props.timeoutUpdateEnabled;
-    this.props.toggleTimeoutUpdate(enabled);
+  const toggleTimeoutUpdate = () => {
+    const enabled = !props.timeoutUpdateEnabled;
+    props.toggleTimeoutUpdate(enabled);
 
     if (enabled) {
-      this.timeout = window.setInterval(this.props.timeoutUpdate, 1000);
+      timeout.current = window.setInterval(props.timeoutUpdate, 1000);
     } else {
-      clearTimeout(this.timeout);
+      clearTimeout(timeout.current);
     }
   };
+
+  return (
+    <div style={styles.wrapper}>
+      <h3>{pkg.name || <span style={styles.muted}>Package Name</span>}</h3>
+      <h5>
+        {pkg.description || (
+          <span style={styles.muted}>Package Description</span>
+        )}
+      </h5>
+      <Toolbar>
+        <Spacer />
+        <Button onClick={props.increment}>Increment</Button>
+        <Button onClick={props.push}>Push</Button>
+        <Button onClick={props.pop}>Pop</Button>
+        <Button onClick={props.replace}>Replace</Button>
+        <Button onClick={props.changeNested}>Change Nested</Button>
+        <Spacer />
+      </Toolbar>
+      <Toolbar>
+        <Spacer />
+        <Button onClick={props.pushHugeArray}>Push Huge Array</Button>
+        <Button onClick={props.addHugeObject}>Add Huge Object</Button>
+        <Button onClick={props.hugePayload}>Huge Payload</Button>
+        <Spacer />
+      </Toolbar>
+      <Toolbar>
+        <Spacer />
+        <Button onClick={props.addIterator}>Add Iterator</Button>
+        <Button onClick={props.addImmutableMap}>Add Immutable Map</Button>
+        <Button onClick={props.changeImmutableNested}>
+          Change Immutable Nested
+        </Button>
+        <Spacer />
+      </Toolbar>
+      <Toolbar>
+        <Spacer />
+        <Button onClick={props.addRecursive}>Add Recursive</Button>
+        <Button onClick={props.addFunction}>Add Function</Button>
+        <Button onClick={props.addSymbol}>Add Symbol</Button>
+        <Spacer />
+      </Toolbar>
+      <Toolbar>
+        <Spacer />
+        <Button onClick={toggleTimeoutUpdate}>
+          Timeout Update {props.timeoutUpdateEnabled ? 'On' : 'Off'}
+        </Button>
+        <Button onClick={props.shuffleArray}>Shuffle Array</Button>
+        <Spacer />
+      </Toolbar>
+      <div>
+        {options.useExtension ? (
+          <a href={`${ROOT}`} style={styles.link}>
+            Disable browser extension
+          </a>
+        ) : (
+          <a href={`${ROOT}?ext`} style={styles.link}>
+            Use browser extension
+          </a>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default connect((state: DemoAppState) => state, {
@@ -180,4 +177,4 @@ export default connect((state: DemoAppState) => state, {
   addFunction: (): AddFunctionAction => ({ type: 'ADD_FUNCTION' }),
   addSymbol: (): AddSymbolAction => ({ type: 'ADD_SYMBOL' }),
   shuffleArray: (): ShuffleArrayAction => ({ type: 'SHUFFLE_ARRAY' }),
-})(withRouter(DemoApp));
+})(DemoApp);
