@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   useDeletePostMutation,
   useGetPostQuery,
@@ -73,13 +73,13 @@ const PostJsonDetail = ({ id }: { id: string }) => {
 
 export const PostDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const toast = useToast();
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const { data: post, isLoading } = useGetPostQuery(id);
+  const { data: post, isLoading } = useGetPostQuery(id!);
 
   const [updatePost, { isLoading: isUpdating }] = useUpdatePostMutation();
 
@@ -106,7 +106,7 @@ export const PostDetail = () => {
           name={post.name}
           onUpdate={async (name) => {
             try {
-              await updatePost({ id, name }).unwrap();
+              await updatePost({ id: id!, name }).unwrap();
             } catch {
               toast({
                 title: 'An error occurred',
@@ -137,9 +137,7 @@ export const PostDetail = () => {
                 {isUpdating ? 'Updating...' : 'Edit'}
               </Button>
               <Button
-                onClick={() =>
-                  deletePost(id).then(() => history.push('/posts'))
-                }
+                onClick={() => deletePost(id!).then(() => navigate('/posts'))}
                 disabled={isDeleting}
                 colorScheme="red"
               >
