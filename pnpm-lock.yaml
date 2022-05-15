@@ -185,6 +185,7 @@ importers:
       '@rollup/plugin-commonjs': ^22.0.0
       '@rollup/plugin-node-resolve': ^13.3.0
       '@types/d3': ^3.5.47
+      '@types/node': ^16.11.33
       '@types/ramda': ^0.28.12
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
@@ -219,6 +220,7 @@ importers:
       '@rollup/plugin-babel': 5.3.1_18dfcb1ca7050ba6f445f613f30091b1
       '@rollup/plugin-commonjs': 22.0.0_rollup@2.72.1
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.72.1
+      '@types/node': 16.11.33
       '@types/ramda': 0.28.12
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
       '@typescript-eslint/parser': 5.22.0_eslint@8.15.0+typescript@4.6.4
@@ -227,7 +229,7 @@ importers:
       rimraf: 3.0.2
       rollup: 2.72.1
       rollup-plugin-terser: 7.0.2_rollup@2.72.1
-      rollup-plugin-typescript2: 0.31.2_rollup@2.72.1+typescript@4.6.4
+      rollup-plugin-typescript2: 0.31.2_bde7e3c526181af230ede5fa8141c771
       tslib: 2.4.0
       typescript: 4.6.4
 
@@ -287,6 +289,7 @@ importers:
       '@rollup/plugin-commonjs': ^22.0.0
       '@rollup/plugin-node-resolve': ^13.3.0
       '@types/d3': ^3.5.47
+      '@types/node': ^16.11.33
       '@types/ramda': ^0.28.12
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
@@ -314,6 +317,7 @@ importers:
       '@rollup/plugin-commonjs': 22.0.0_rollup@2.72.1
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.72.1
       '@types/d3': 3.5.47
+      '@types/node': 16.11.33
       '@types/ramda': 0.28.12
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
       '@typescript-eslint/parser': 5.22.0_eslint@8.15.0+typescript@4.6.4
@@ -323,7 +327,7 @@ importers:
       rimraf: 3.0.2
       rollup: 2.72.1
       rollup-plugin-terser: 7.0.2_rollup@2.72.1
-      rollup-plugin-typescript2: 0.31.2_rollup@2.72.1+typescript@4.6.4
+      rollup-plugin-typescript2: 0.31.2_bde7e3c526181af230ede5fa8141c771
       tslib: 2.4.0
       typescript: 4.6.4
 
@@ -341,6 +345,7 @@ importers:
       '@rollup/plugin-node-resolve': ^13.3.0
       '@types/jest': ^27.5.0
       '@types/lodash': ^4.14.182
+      '@types/node': ^16.11.33
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       eslint: ^8.15.0
@@ -371,6 +376,7 @@ importers:
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.72.1
       '@types/jest': 27.5.0
       '@types/lodash': 4.14.182
+      '@types/node': 16.11.33
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
       '@typescript-eslint/parser': 5.22.0_eslint@8.15.0+typescript@4.6.4
       eslint: 8.15.0
@@ -381,7 +387,7 @@ importers:
       rimraf: 3.0.2
       rollup: 2.72.1
       rollup-plugin-terser: 7.0.2_rollup@2.72.1
-      rollup-plugin-typescript2: 0.31.2_rollup@2.72.1+typescript@4.6.4
+      rollup-plugin-typescript2: 0.31.2_bde7e3c526181af230ede5fa8141c771
       ts-jest: 27.1.4_6b62438663b23957550c965172b78733
       tslib: 2.4.0
       typescript: 4.6.4
@@ -584,6 +590,7 @@ importers:
       '@rollup/plugin-node-resolve': ^13.3.0
       '@types/jest': ^27.5.0
       '@types/lodash': ^4.14.182
+      '@types/node': ^16.11.33
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
       '@types/react-test-renderer': ^17.0.2
@@ -624,6 +631,7 @@ importers:
       '@rollup/plugin-commonjs': 22.0.0_rollup@2.72.1
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.72.1
       '@types/jest': 27.5.0
+      '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@types/react-test-renderer': 17.0.2
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
@@ -639,7 +647,7 @@ importers:
       rimraf: 3.0.2
       rollup: 2.72.1
       rollup-plugin-terser: 7.0.2_rollup@2.72.1
-      rollup-plugin-typescript2: 0.31.2_rollup@2.72.1+typescript@4.6.4
+      rollup-plugin-typescript2: 0.31.2_bde7e3c526181af230ede5fa8141c771
       ts-jest: 27.1.4_6b62438663b23957550c965172b78733
       tslib: 2.4.0
       typescript: 4.6.4
@@ -2017,6 +2025,7 @@ importers:
       '@redux-devtools/core': ^3.12.0
       '@redux-devtools/ui': ^1.2.1
       '@rollup/plugin-babel': ^5.3.1
+      '@types/node': ^16.11.33
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
       '@types/redux-devtools-themes': ^1.0.0
@@ -2052,6 +2061,7 @@ importers:
       '@babel/preset-typescript': 7.16.7_@babel+core@7.17.10
       '@redux-devtools/core': link:../redux-devtools
       '@rollup/plugin-babel': 5.3.1_18dfcb1ca7050ba6f445f613f30091b1
+      '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@typescript-eslint/eslint-plugin': 5.22.0_9817cbad956b8aa5d1e3d9ec99e4a1e4
       '@typescript-eslint/parser': 5.22.0_eslint@8.15.0+typescript@4.6.4
@@ -2063,7 +2073,7 @@ importers:
       redux: 4.2.0
       rimraf: 3.0.2
       rollup: 2.72.1
-      rollup-plugin-typescript2: 0.31.2_rollup@2.72.1+typescript@4.6.4
+      rollup-plugin-typescript2: 0.31.2_bde7e3c526181af230ede5fa8141c771
       tslib: 2.4.0
       typescript: 4.6.4
 
@@ -8941,12 +8951,12 @@ packages:
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
     dev: true
 
-  /@yarn-tool/resolve-package/1.0.46:
+  /@yarn-tool/resolve-package/1.0.46_@types+node@16.11.33:
     resolution: {integrity: sha512-RJcBGTVywUqYGRtGkPSgJC/ozf0wK/xjUy66tXkbpL35U0o1oef4S0v23euxA/CiukqBWr2fRGtGY6FidESdTg==}
     dependencies:
       pkg-dir: 5.0.0
       tslib: 2.4.0
-      upath2: 3.1.12
+      upath2: 3.1.12_@types+node@16.11.33
     transitivePeerDependencies:
       - '@types/node'
     dev: true
@@ -19155,14 +19165,14 @@ packages:
       terser: 5.13.1
     dev: true
 
-  /rollup-plugin-typescript2/0.31.2_rollup@2.72.1+typescript@4.6.4:
+  /rollup-plugin-typescript2/0.31.2_bde7e3c526181af230ede5fa8141c771:
     resolution: {integrity: sha512-hRwEYR1C8xDGVVMFJQdEVnNAeWRvpaY97g5mp3IeLnzhNXzSVq78Ye/BJ9PAaUfN4DXa/uDnqerifMOaMFY54Q==}
     peerDependencies:
       rollup: '>=1.26.3'
       typescript: '>=2.4.0'
     dependencies:
       '@rollup/pluginutils': 4.2.1
-      '@yarn-tool/resolve-package': 1.0.46
+      '@yarn-tool/resolve-package': 1.0.46_@types+node@16.11.33
       find-cache-dir: 3.3.2
       fs-extra: 10.1.0
       resolve: 1.22.0
@@ -21225,11 +21235,12 @@ packages:
     dev: true
     optional: true
 
-  /upath2/3.1.12:
+  /upath2/3.1.12_@types+node@16.11.33:
     resolution: {integrity: sha512-yC3eZeCyCXFWjy7Nu4pgjLhXNYjuzuUmJiRgSSw6TJp8Emc+E4951HGPJf+bldFC5SL7oBLeNbtm1fGzXn2gxw==}
     peerDependencies:
       '@types/node': '*'
     dependencies:
+      '@types/node': 16.11.33
       path-is-network-drive: 1.0.13
       path-strip-sep: 1.0.10
       tslib: 2.4.0
