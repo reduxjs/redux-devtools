@@ -19,11 +19,6 @@
       "groupName": "source-map"
     },
     {
-      "matchPackageNames": ["eslint-plugin-react"],
-      "matchUpdateTypes": ["major", "minor"],
-      "groupName": "eslint-plugin-react"
-    },
-    {
       "matchPackageNames": [
         "react",
         "react-dom",
@@ -38,6 +33,16 @@
       ],
       "matchUpdateTypes": ["major"],
       "groupName": "react"
+    },
+    {
+      "matchPackageNames": [
+        "socketcluster-client",
+        "@types/socketcluster-client",
+        "socketcluster",
+        "@types/socketcluster-server"
+      ],
+      "matchUpdateTypes": ["major"],
+      "groupName": "socketcluster"
     }
   ]
 }

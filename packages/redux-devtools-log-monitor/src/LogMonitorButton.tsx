@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import { Base16Theme } from 'redux-devtools-themes';
 import brighten from './brighten';
 
@@ -29,6 +29,7 @@ interface Props {
   theme: Base16Theme;
   onClick: () => void;
   enabled: boolean;
+  children?: ReactNode;
 }
 
 export default class LogMonitorButton extends React.PureComponent<
