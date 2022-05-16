@@ -9,6 +9,10 @@
   ],
   "packageRules": [
     {
+      "matchPackageNames": ["node"],
+      "enabled": false
+    },
+    {
       "matchPackageNames": ["typescript"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "typescript"
