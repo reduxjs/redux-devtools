@@ -28,7 +28,7 @@
     "build:lib": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
     "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
     "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build:types": "tsc --emitDeclarationOnly && echo",
     "build:web": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack --env platform=web --progress",
     "build:umd": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack --progress --config webpack.config.umd.ts",
     "build:umd:min": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack --env production --progress --config webpack.config.umd.ts",
