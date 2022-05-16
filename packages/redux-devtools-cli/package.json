@@ -37,7 +37,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "engines": {
-    "node": ">=14.15.0"
+    "node": ">=v16.15.0"
   },
   "dependencies": {
     "@redux-devtools/app": "^2.1.3",
