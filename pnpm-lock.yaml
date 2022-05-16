@@ -807,7 +807,7 @@ importers:
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
       '@types/react-dom': ^17.0.16
-      '@types/socketcluster-client': ^13.0.5
+      '@types/socketcluster-client': ^16.0.0
       '@types/styled-components': ^5.1.25
       '@types/testing-library__jest-dom': ^5.14.3
       '@types/webpack-env': ^1.16.4
@@ -841,7 +841,7 @@ importers:
       redux: ^4.2.0
       redux-persist: ^6.0.0
       rimraf: ^3.0.2
-      socketcluster-client: ^14.3.2
+      socketcluster-client: ^16.0.4
       style-loader: ^3.3.1
       styled-components: ^5.3.5
       ts-jest: ^27.1.4
@@ -875,7 +875,7 @@ importers:
       react-redux: 8.0.1_3gefxrskiky5lahqkazq7km27u
       redux: 4.2.0
       redux-persist: 6.0.0_react@17.0.2+redux@4.2.0
-      socketcluster-client: 14.3.2
+      socketcluster-client: 16.0.4
     devDependencies:
       '@babel/cli': 7.17.10_@babel+core@7.17.10
       '@babel/core': 7.17.10
@@ -894,7 +894,7 @@ importers:
       '@types/node': 16.11.33
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
-      '@types/socketcluster-client': 13.0.5
+      '@types/socketcluster-client': 16.0.0
       '@types/styled-components': 5.1.25
       '@types/testing-library__jest-dom': 5.14.3
       '@types/webpack-env': 1.16.4
@@ -997,7 +997,7 @@ importers:
       '@types/react': ^17.0.45
       '@types/semver': ^7.3.9
       '@types/socketcluster': ^14.0.4
-      '@types/socketcluster-client': ^13.0.5
+      '@types/socketcluster-client': ^16.0.0
       '@types/socketcluster-server': ^14.2.6
       '@types/styled-components': ^5.1.25
       '@types/supertest': ^2.0.12
@@ -1029,7 +1029,7 @@ importers:
       rimraf: ^3.0.2
       semver: ^7.3.7
       socketcluster: ^14.4.2
-      socketcluster-client: ^14.3.2
+      socketcluster-client: ^16.0.4
       sqlite3: ^5.0.8
       styled-components: ^5.3.5
       supertest: ^6.2.3
@@ -1073,7 +1073,7 @@ importers:
       '@types/node': 16.11.33
       '@types/semver': 7.3.9
       '@types/socketcluster': 14.0.4
-      '@types/socketcluster-client': 13.0.5
+      '@types/socketcluster-client': 16.0.0
       '@types/socketcluster-server': 14.2.6
       '@types/styled-components': 5.1.25
       '@types/supertest': 2.0.12
@@ -1086,7 +1086,7 @@ importers:
       jest: 27.5.1
       ncp: 2.0.0
       rimraf: 3.0.2
-      socketcluster-client: 14.3.2
+      socketcluster-client: 16.0.4
       supertest: 6.2.3
       ts-jest: 27.1.4_3y7pzupgu3ueocdatbfldfrs3i
       typescript: 4.6.4
@@ -1736,7 +1736,7 @@ importers:
       '@types/jsan': ^3.1.2
       '@types/node': ^16.11.33
       '@types/rn-host-detect': ^1.2.0
-      '@types/socketcluster-client': ^13.0.5
+      '@types/socketcluster-client': ^16.0.0
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       eslint: ^8.15.0
@@ -1746,7 +1746,7 @@ importers:
       redux: ^4.2.0
       rimraf: ^3.0.2
       rn-host-detect: ^1.2.0
-      socketcluster-client: ^14.3.2
+      socketcluster-client: ^16.0.4
       typescript: ~4.6.4
     dependencies:
       '@babel/runtime': 7.17.9
@@ -1755,7 +1755,7 @@ importers:
       jsan: 3.1.14
       querystring: 0.2.1
       rn-host-detect: 1.2.0
-      socketcluster-client: 14.3.2
+      socketcluster-client: 16.0.4
     devDependencies:
       '@babel/cli': 7.17.10_@babel+core@7.17.10
       '@babel/core': 7.17.10
@@ -1766,7 +1766,7 @@ importers:
       '@types/jsan': 3.1.2
       '@types/node': 16.11.33
       '@types/rn-host-detect': 1.2.0
-      '@types/socketcluster-client': 13.0.5
+      '@types/socketcluster-client': 16.0.0
       '@typescript-eslint/eslint-plugin': 5.22.0_tal4xlmvnofklupd3hwjtzfb4q
       '@typescript-eslint/parser': 5.22.0_hcfsmds2fshutdssjqluwm76uu
       eslint: 8.15.0
@@ -7715,8 +7715,23 @@ packages:
       '@types/node': 16.11.33
     dev: false
 
+  /@types/ag-channel/5.0.0:
+    resolution: {integrity: sha512-ab4P2BWe61MFOGmeXX1yKmBh8UrOSUZv+SsauJreGc1WdHQKaCGtH6VVUkiYfYv73a7e9+LGG5LiF/lIGVqOxw==}
+    dependencies:
+      '@types/consumable-stream': 2.0.0
+      '@types/stream-demux': 8.0.0
+      '@types/writable-consumable-stream': 2.0.0
+    dev: true
+
   /@types/aria-query/4.2.2:
     resolution: {integrity: sha512-HnYpAE1Y6kRyKM/XkEuiRQhTHvkzMBurTHnpFLYLBGPIylZNPs9jJcuOOYWxPLJCSEtmZT0Y8rHDokKN7rRTig==}
+    dev: true
+
+  /@types/async-stream-emitter/4.0.0:
+    resolution: {integrity: sha512-13vdKrWE2navt87EPbk6VcUjQgAu/p/rRGdbcE+bYhbKg/fA7nsEgRkxIdlEpZTnGyixUO5+5yHKaIXgMmKL0A==}
+    dependencies:
+      '@types/consumable-stream': 2.0.0
+      '@types/writable-consumable-stream': 2.0.0
     dev: true
 
   /@types/async/3.2.13:
@@ -7831,6 +7846,12 @@ packages:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
       '@types/node': 16.11.33
+
+  /@types/consumable-stream/2.0.0:
+    resolution: {integrity: sha512-RuXAZX3pQ2jGgETa1p4fTZb4Y1IxanZ8hafWewNoWW+Nqc4OcDw2VbAPzB1Wq7l5rtvmmCmHnpDX0CNRthqsAA==}
+    dependencies:
+      '@types/node': 17.0.31
+    dev: true
 
   /@types/cookie/0.4.1:
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
@@ -8334,14 +8355,16 @@ packages:
     resolution: {integrity: sha512-z89ForrCNg+4uwTHjwBCM9LjcsXYC/4O8u3tSi+82v2LCbfiYFpkjH/qQVkDewFBK6FUG7RRV7jw78EGs2maoQ==}
     dev: false
 
-  /@types/socketcluster-client/13.0.5:
-    resolution: {integrity: sha512-HL0cpZdSx/RczgPRnHY2mCg4K8bSHmpv8Tra1qspb/BtZZQ73R9iAwIf3mX07+/npfBMlPGF6eMHsZP8WyMMAw==}
+  /@types/socketcluster-client/16.0.0:
+    resolution: {integrity: sha512-Re5rkp09jcvW95WRBN5q/FIVx9MJZJQPVBpxShLcUnUiMeqXGOO8Ag2RI7dmw4YqKkulpOrk5nl2iUiUC2hUEg==}
     dependencies:
-      '@types/component-emitter': 1.2.11
-      '@types/sc-auth': 5.0.0
-      '@types/sc-channel': 1.2.2
+      '@types/ag-channel': 5.0.0
+      '@types/async-stream-emitter': 4.0.0
+      '@types/consumable-stream': 2.0.0
       '@types/sc-errors': 1.4.1
       '@types/socketcluster-server': 14.2.6
+      '@types/stream-demux': 8.0.0
+      '@types/writable-consumable-stream': 2.0.0
       '@types/ws': 8.5.3
     dev: true
 
@@ -8379,6 +8402,13 @@ packages:
 
   /@types/stack-utils/2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
+    dev: true
+
+  /@types/stream-demux/8.0.0:
+    resolution: {integrity: sha512-4yiERxITSwLnSNrfWdSIKoW4nZe+AzwgwgtViVnySNTyPwiaW8a8o1sAjGCWL2PjUdyRaolidxoLH3s7dnvBMg==}
+    dependencies:
+      '@types/consumable-stream': 2.0.0
+      '@types/writable-consumable-stream': 2.0.0
     dev: true
 
   /@types/styled-components/5.1.25:
@@ -8461,10 +8491,16 @@ packages:
       source-map: 0.6.1
     dev: true
 
+  /@types/writable-consumable-stream/2.0.0:
+    resolution: {integrity: sha512-9pnn3oI+VrFhyp5l8frOvAaK+CS3K34kSJT4+8upBeTWeaMSxkSSyIGM6hVcRx0M1VuStKH3xjMKVLBGCzPgfw==}
+    dependencies:
+      '@types/consumable-stream': 2.0.0
+    dev: true
+
   /@types/ws/8.5.3:
     resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
     dependencies:
-      '@types/node': 16.11.33
+      '@types/node': 17.0.31
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -9013,6 +9049,16 @@ packages:
     resolution: {integrity: sha512-tNEZYz5G/zYunxFm7sfhAxkXEuLj3K6BKwv6ZURlsF6yiUQ65z0Q2wZW9L5cPUl9ocofGvXOdFYbFHp0+6MOig==}
     engines: {node: '>= 10.0.0'}
     dev: true
+
+  /ag-channel/5.0.0:
+    resolution: {integrity: sha512-bArHkdqQxynim981t8FLZM5TfA0v7p081OlFdOxs6clB79GSGcGlOQMDa31DT9F5VMjzqNiJmhfGwinvfU/3Zg==}
+    dependencies:
+      consumable-stream: 2.0.0
+
+  /ag-request/1.0.0:
+    resolution: {integrity: sha512-2f7I0cQLMVyGAqjSewVMEFuAsJsIY6egdE16UHS636r+8c6Oevrv0j6SrOIXyRN6yuNT4PBuhiKmrhHbh9OvEg==}
+    dependencies:
+      sc-errors: 2.0.1
 
   /agent-base/6.0.2:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
@@ -9586,6 +9632,11 @@ packages:
     dependencies:
       retry: 0.13.1
     dev: false
+
+  /async-stream-emitter/4.0.0:
+    resolution: {integrity: sha512-zPVflmOEN4EFEAk2/p+BbLRRM/i4Iol2nvO2RSFNuYUiYZdBmBJi5O/PMQeO9Unj1EONQqUN0W5PadVS/bA6/g==}
+    dependencies:
+      stream-demux: 8.0.0
 
   /async/2.0.0:
     resolution: {integrity: sha1-0JAK04WvE4BFQKEJxCFm4657K50=}
@@ -10706,7 +10757,6 @@ packages:
       is-plain-object: 2.0.4
       kind-of: 6.0.3
       shallow-clone: 3.0.1
-    dev: true
 
   /clone-regexp/2.2.0:
     resolution: {integrity: sha512-beMpP7BOtTipFuW8hrJvREQ2DrRu3BE7by0ZpibtfBA+qfHYvMGTc2Yb1JMYPKg/JUw0CHYvpg796aNTSW9z7Q==}
@@ -10722,10 +10772,6 @@ packages:
 
   /clone/1.0.4:
     resolution: {integrity: sha1-2jCcwmPfFZlMaIypAheco8fNfH4=}
-    engines: {node: '>=0.8'}
-
-  /clone/2.1.1:
-    resolution: {integrity: sha1-0hfR6WERjjrJpLi7oyhVU79kfNs=}
     engines: {node: '>=0.8'}
 
   /clsx/1.1.1:
@@ -10850,6 +10896,7 @@ packages:
 
   /component-emitter/1.2.1:
     resolution: {integrity: sha1-E3kY1teCg/ffemt8WmPhQOaUJeY=}
+    dev: false
 
   /component-emitter/1.3.0:
     resolution: {integrity: sha512-Rd3se6QB+sO1TwqZjscQrurpEPIfO0/yYnSin6Q/rD3mOutHvUrCAhJub3r90uNb+SESBuE0QYoB90YdfatsRg==}
@@ -10957,6 +11004,9 @@ packages:
   /constants-browserify/1.0.0:
     resolution: {integrity: sha1-wguW2MYXdIqvHBYCF2DNJ/y4y3U=}
     dev: true
+
+  /consumable-stream/2.0.0:
+    resolution: {integrity: sha512-I6WA2JVYXs/68rEvi1ie3rZjP6qusTVFEQkbzR+WC+fY56TpwiGTIDJETsrnlxv5CsnmK69ps6CkYvIbpEEqBA==}
 
   /content-disposition/0.5.4:
     resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
@@ -14526,7 +14576,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       isobject: 3.0.1
-    dev: true
 
   /is-plain-object/5.0.0:
     resolution: {integrity: sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==}
@@ -14681,7 +14730,6 @@ packages:
   /isobject/3.0.1:
     resolution: {integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /isobject/4.0.0:
     resolution: {integrity: sha512-S/2fF5wH8SJA/kmwr6HYhK/RI/OkhD84k8ntalo0iJjZikgq1XFvR5M8NPT1x5F7fBwCG3qHfnzeP/Vh/ZxCUA==}
@@ -15755,7 +15803,6 @@ packages:
   /kind-of/6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /klaw/1.3.1:
     resolution: {integrity: sha1-QIhDO0azsbolnXh4XY6W9zugJDk=}
@@ -18115,6 +18162,7 @@ packages:
     resolution: {integrity: sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=}
     engines: {node: '>=0.4.x'}
     deprecated: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
+    dev: true
 
   /querystring/0.2.1:
     resolution: {integrity: sha512-wkvS7mL/JMugcup3/rMitHmd9ecIGd2lhFhK9N3UUQ450h66d1r3Y9nvXzQAW1Lq+wyx61k/1pfKS5KuKiyEbg==}
@@ -19311,6 +19359,7 @@ packages:
     resolution: {integrity: sha512-M3gdq8PlKg0zWJSisWqAsMmTVxYRTpVRqw4CWAdKBgAfVKumFcTjoCV0hYu7lgUXccCtCD8Wk9VkkE+IXCxmZA==}
     dependencies:
       component-emitter: 1.2.1
+    dev: false
 
   /sc-errors/1.4.1:
     resolution: {integrity: sha512-dBn92iIonpChTxYLgKkIT/PCApvmYT6EPIbRvbQKTgY6tbEbIy8XVUv4pGyKwEK4nCmvX4TKXcN0iXC6tNW6rQ==}
@@ -19566,7 +19615,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       kind-of: 6.0.3
-    dev: true
 
   /shallowequal/1.1.0:
     resolution: {integrity: sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==}
@@ -19719,18 +19767,20 @@ packages:
       - supports-color
     dev: true
 
-  /socketcluster-client/14.3.2:
-    resolution: {integrity: sha512-xDtgW7Ss0ARlfhx53bJ5GY5THDdEOeJnT+/C9Rmrj/vnZr54xeiQfrCZJbcglwe732nK3V+uZq87IvrRl7Hn4g==}
+  /socketcluster-client/16.0.4:
+    resolution: {integrity: sha512-eigOUY83fAAEI/TeqXVG2d5Um1G4LBJjM37FKOPGK21IKjiLiSdmaD8mOy87qZbCzOrEHVlboqTs9IQxKSEA1Q==}
     dependencies:
+      ag-channel: 5.0.0
+      ag-request: 1.0.0
+      async-stream-emitter: 4.0.0
       buffer: 5.7.1
-      clone: 2.1.1
-      component-emitter: 1.2.1
+      clone-deep: 4.0.1
       linked-list: 0.1.0
-      querystring: 0.2.0
-      sc-channel: 1.2.0
+      querystring: 0.2.1
       sc-errors: 2.0.1
       sc-formatter: 3.0.2
-      uuid: 3.2.1
+      stream-demux: 8.0.0
+      uuid: 3.4.0
       ws: 7.5.7
     transitivePeerDependencies:
       - bufferutil
@@ -20022,6 +20072,12 @@ packages:
       inherits: 2.0.4
       readable-stream: 2.3.7
     dev: true
+
+  /stream-demux/8.0.0:
+    resolution: {integrity: sha512-vt6P85yEUxiapK9F+ET5BLyto1DnCD4Sl7MlDklDgcb4K5SGXPtOPz9DiP7vTooJ1wW1F/VRPlcSV22Coeim1A==}
+    dependencies:
+      consumable-stream: 2.0.0
+      writable-consumable-stream: 2.0.0
 
   /stream-each/1.2.3:
     resolution: {integrity: sha512-vlMC2f8I2u/bZGqkdfLQW/13Zihpej/7PmSiMQsbYddxuTsJp8vRe2x2FvVExZg7FaOds43ROAuFJwPR4MTZLw==}
@@ -21443,12 +21499,12 @@ packages:
     resolution: {integrity: sha512-jZnMwlb9Iku/O3smGWvZhauCf6cvvpKi4BKRiliS3cxnI+Gz9j5MEpTz2UFuXiKPJocb7gnsLHwiS05ige5BEA==}
     deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
     hasBin: true
+    dev: false
 
   /uuid/3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
     deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
     hasBin: true
-    dev: true
 
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
@@ -22114,6 +22170,11 @@ packages:
 
   /wrappy/1.0.2:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
+
+  /writable-consumable-stream/2.0.0:
+    resolution: {integrity: sha512-SITambzxtPTFU/wR82h+zOKGBiEv5V8gC1mt8xvoE1/168ApEa8H+6s2UToYJo3VLL7sNYTaApKuPD+pZHMGJQ==}
+    dependencies:
+      consumable-stream: 2.0.0
 
   /write-file-atomic/3.0.3:
     resolution: {integrity: sha512-AvHcyZ5JnSfq3ioSyjrBkH9yW4m7Ayk8/9My/DD9onKeu/94fwrMocemO2QAJFAlnnDN+ZDS+ZjAR5ua1/PV/Q==}
