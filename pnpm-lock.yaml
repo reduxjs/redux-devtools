@@ -2161,7 +2161,7 @@ importers:
       '@storybook/react': ^6.4.22
       '@testing-library/dom': ^8.13.0
       '@testing-library/react': ^12.1.5
-      '@testing-library/user-event': ^13.5.0
+      '@testing-library/user-event': ^14.2.0
       '@types/base16': ^1.0.2
       '@types/codemirror': ^5.60.5
       '@types/color': ^3.0.3
@@ -2233,7 +2233,7 @@ importers:
       '@storybook/react': 6.4.22_jurladot27yzmjhsf564kvzqea
       '@testing-library/dom': 8.13.0
       '@testing-library/react': 12.1.5_sfoxds7t5ydpegc3knd667wn6m
-      '@testing-library/user-event': 13.5.0_tlwynutqiyp5mns3woioasuxnq
+      '@testing-library/user-event': 14.2.0_tlwynutqiyp5mns3woioasuxnq
       '@types/color': 3.0.3
       '@types/jest': 27.5.0
       '@types/react': 17.0.45
@@ -7679,13 +7679,12 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: true
 
-  /@testing-library/user-event/13.5.0_tlwynutqiyp5mns3woioasuxnq:
-    resolution: {integrity: sha512-5Kwtbo3Y/NowpkbRuSepbyMFkZmHgD+vPzYB/RJ4oxt5Gj/avFFBYjhw27cqSVPVw/3a67NK1PbiIr9k4Gwmdg==}
-    engines: {node: '>=10', npm: '>=6'}
+  /@testing-library/user-event/14.2.0_tlwynutqiyp5mns3woioasuxnq:
+    resolution: {integrity: sha512-+hIlG4nJS6ivZrKnOP7OGsDu9Fxmryj9vCl8x0ZINtTJcCHs2zLsYif5GzuRiBF2ck5GZG2aQr7Msg+EHlnYVQ==}
+    engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
-      '@babel/runtime': 7.17.9
       '@testing-library/dom': 8.13.0
     dev: true
 
