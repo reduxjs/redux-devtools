@@ -9,10 +9,6 @@
   ],
   "packageRules": [
     {
-      "matchPackageNames": ["node"],
-      "enabled": false
-    },
-    {
       "matchPackageNames": ["typescript"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "typescript"
@@ -26,6 +22,22 @@
       "matchPackageNames": ["eslint-plugin-react"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "eslint-plugin-react"
+    },
+    {
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "react-is",
+        "react-test-renderer",
+        "@testing-library/react",
+        "@testing-library/user-event",
+        "@types/react",
+        "@types/react-dom",
+        "@types/react-test-renderer",
+        "@chakra-ui/react"
+      ],
+      "matchUpdateTypes": ["major"],
+      "groupName": "react"
     }
   ]
 }
