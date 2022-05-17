@@ -65,7 +65,7 @@ importers:
       babel-loader: ^8.2.5
       bestzip: ^2.2.1
       chromedriver: ^100.0.0
-      copy-webpack-plugin: ^10.2.4
+      copy-webpack-plugin: ^11.0.0
       cross-env: ^7.0.3
       css-loader: ^6.7.1
       electron: ^18.2.0
@@ -142,7 +142,7 @@ importers:
       babel-loader: 8.2.5_rb5fcebzp6kx3hqg3ucus54t3m
       bestzip: 2.2.1
       chromedriver: 100.0.0
-      copy-webpack-plugin: 10.2.4_webpack@5.72.0
+      copy-webpack-plugin: 11.0.0_webpack@5.72.0
       cross-env: 7.0.3
       css-loader: 6.7.1_webpack@5.72.0
       electron: 18.2.0
@@ -1876,7 +1876,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.22.0
       '@typescript-eslint/parser': ^5.22.0
       babel-loader: ^8.2.5
-      copy-webpack-plugin: ^10.2.4
+      copy-webpack-plugin: ^11.0.0
       cross-env: ^7.0.3
       css-loader: ^6.7.1
       eslint: ^8.15.0
@@ -1933,7 +1933,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 5.22.0_tal4xlmvnofklupd3hwjtzfb4q
       '@typescript-eslint/parser': 5.22.0_hcfsmds2fshutdssjqluwm76uu
       babel-loader: 8.2.5_rb5fcebzp6kx3hqg3ucus54t3m
-      copy-webpack-plugin: 10.2.4_webpack@5.72.0
+      copy-webpack-plugin: 11.0.0_webpack@5.72.0
       cross-env: 7.0.3
       css-loader: 6.7.1_webpack@5.72.0
       eslint: 8.15.0
@@ -9479,11 +9479,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /array-union/3.0.1:
-    resolution: {integrity: sha512-1OvF9IbWwaeiM9VhzYXVQacMibxpXOMYVNIvMtKRyX9SImBXpKcFr8XvFDeEslCyuH/t6KRt7HEO94AlP8Iatw==}
-    engines: {node: '>=12'}
-    dev: true
-
   /array-uniq/1.0.3:
     resolution: {integrity: sha1-r2rId6Jcx/dOBYiUdThY39sk/bY=}
     engines: {node: '>=0.10.0'}
@@ -11017,15 +11012,15 @@ packages:
     dependencies:
       toggle-selection: 1.0.6
 
-  /copy-webpack-plugin/10.2.4_webpack@5.72.0:
-    resolution: {integrity: sha512-xFVltahqlsRcyyJqQbDY6EYTtyQZF9rf+JPjwHObLdPFMEISqkFkr7mFoVOC6BfYS/dNThyoQKvziugm+OnwBg==}
-    engines: {node: '>= 12.20.0'}
+  /copy-webpack-plugin/11.0.0_webpack@5.72.0:
+    resolution: {integrity: sha512-fX2MWpamkW0hZxMEg0+mYnA40LTosOSa5TqZ9GYIBzyJa9C3QUaMPSE2xAi/buNr8u89SfD9wHSQVBzrRa/SOQ==}
+    engines: {node: '>= 14.15.0'}
     peerDependencies:
       webpack: ^5.1.0
     dependencies:
       fast-glob: 3.2.11
       glob-parent: 6.0.2
-      globby: 12.2.0
+      globby: 13.1.1
       normalize-path: 3.0.0
       schema-utils: 4.0.0
       serialize-javascript: 6.0.0
@@ -13503,11 +13498,10 @@ packages:
       slash: 3.0.0
     dev: true
 
-  /globby/12.2.0:
-    resolution: {integrity: sha512-wiSuFQLZ+urS9x2gGPl1H5drc5twabmm4m2gTR27XDFyjUHJUNsS8o/2aKyIF6IoBaR630atdher0XJ5g6OMmA==}
+  /globby/13.1.1:
+    resolution: {integrity: sha512-XMzoDZbGZ37tufiv7g0N4F/zp3zkwdFtVbV3EHsVl1KQr4RPLfNoT068/97RPshz2J5xYNEjLKKBKaGHifBd3Q==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
-      array-union: 3.0.1
       dir-glob: 3.0.1
       fast-glob: 3.2.11
       ignore: 5.2.0
