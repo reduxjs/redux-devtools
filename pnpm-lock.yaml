@@ -64,7 +64,7 @@ importers:
       '@types/styled-components': ^5.1.25
       babel-loader: ^8.2.5
       bestzip: ^2.2.1
-      chromedriver: ^100.0.0
+      chromedriver: ^101.0.0
       copy-webpack-plugin: ^11.0.0
       cross-env: ^7.0.3
       css-loader: ^6.7.1
@@ -141,7 +141,7 @@ importers:
       '@types/styled-components': 5.1.25
       babel-loader: 8.2.5_72ctybzk7ntig5kqkayinqycte
       bestzip: 2.2.1
-      chromedriver: 100.0.0
+      chromedriver: 101.0.0
       copy-webpack-plugin: 11.0.0_webpack@5.72.1
       cross-env: 7.0.3
       css-loader: 6.7.1_webpack@5.72.1
@@ -8053,7 +8053,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 16.11.36
+      '@types/node': 17.0.34
 
   /@types/lodash.curry/4.1.7:
     resolution: {integrity: sha512-R+IkSvh7CI8klh7FkQuTAiAR+aPFqYrNEjw/hMxjCSO7TsAqBAxpR99PxxJN1lgE6YuvpHEoktqbh6V5VLzxZA==}
@@ -8142,7 +8142,6 @@ packages:
 
   /@types/node/17.0.34:
     resolution: {integrity: sha512-XImEz7XwTvDBtzlTnm8YvMqGW/ErMWBsKZ+hMTvnDIjGCKxwK5Xpc+c/oQjOauwq8M4OS11hEkpjX8rrI/eEgA==}
-    dev: true
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -8259,7 +8258,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 16.11.36
+      '@types/node': 17.0.34
 
   /@types/retry/0.12.0:
     resolution: {integrity: sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==}
@@ -10569,8 +10568,8 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
-  /chromedriver/100.0.0:
-    resolution: {integrity: sha512-oLfB0IgFEGY9qYpFQO/BNSXbPw7bgfJUN5VX8Okps9W2qNT4IqKh5hDwKWtpUIQNI6K3ToWe2/J5NdpurTY02g==}
+  /chromedriver/101.0.0:
+    resolution: {integrity: sha512-LkkWxy6KM/0YdJS8qBeg5vfkTZTRamhBfOttb4oic4echDgWvCU1E8QcBbUBOHqZpSrYMyi7WMKmKMhXFUaZ+w==}
     engines: {node: '>=10'}
     hasBin: true
     requiresBuild: true
@@ -15508,6 +15507,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile/4.0.0:
     resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
