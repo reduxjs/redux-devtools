@@ -21,10 +21,10 @@ postMerge :
               - node --version 
         configFile : "./jest.config.js"
         
-      - name: redux-devtools-app     
-        path : "./packages/redux-devtools-app"
+      - name: redux-devtools   
+        path : "./packages/redux-devtools"
         pattern: 
-          - "./test/app.spec.tsx"
+          - "./test/*.spec.ts"
 
         framework : jest
         preRun:
