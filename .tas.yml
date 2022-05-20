@@ -29,7 +29,7 @@ postMerge :
         framework : jest
         preRun:
           command:
-            - npm run build
+            - npm i
 
         postRun:
             command:
