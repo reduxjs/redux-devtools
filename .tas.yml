@@ -21,20 +21,6 @@ postMerge :
               - node --version 
         configFile : "./jest.config.js"
         
-      - name: redux-devtools   
-        path : "./packages/redux-devtools"
-        pattern: 
-          - "./test/*.spec.ts"
-
-        framework : jest
-        preRun:
-          command:
-            - npm i
-
-        postRun:
-            command:
-              - node --version 
-        configFile : "./jest.config.js"
       
         
       
