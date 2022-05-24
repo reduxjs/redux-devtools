@@ -39,7 +39,7 @@ postMerge :
       - name: react-base16-styling     
         path : "./packages/react-base16-styling"
         pattern: 
-          - "./test/*.spec.ts"
+          - "./test/index.test.ts"
         
         framework : jest
         preRun:
