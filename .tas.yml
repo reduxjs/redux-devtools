@@ -21,6 +21,21 @@ postMerge :
               - node --version 
         configFile : "./jest.config.js"
         
+      - name: map2tree     
+        path : "./packages/map2tree"
+        pattern: 
+          - "./test/*.spec.ts"
+        
+        framework : jest
+        preRun:
+          command:
+            - npm run build
+          
+        postRun:
+            command:
+              - node --version 
+        configFile : "./jest.config.js"
+        
       
         
       
