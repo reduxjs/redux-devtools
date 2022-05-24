@@ -1,15 +1,15 @@
 import { map2tree, Node } from '../src';
 import * as immutable from 'immutable';
 
-test('# rootNodeKey', () => {
+test('rootNodeKey', () => {
   const map = {};
   const options = { key: 'foo' };
 
   expect((map2tree(map, options) as Node).name).toBe('foo');
 });
 
-describe('# shallow map', () => {
-  test('## null', () => {
+describe('shallow map', () => {
+  test('null', () => {
     const map = {
       a: null,
     };
@@ -23,7 +23,7 @@ describe('# shallow map', () => {
     expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  test('## value', () => {
+  test('value', () => {
     const map = {
       a: 'foo',
       b: 'bar',
@@ -41,7 +41,7 @@ describe('# shallow map', () => {
     expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  test('## object', () => {
+  test('object', () => {
     const map = {
       a: { aa: 'foo' },
     };
@@ -55,7 +55,7 @@ describe('# shallow map', () => {
     expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  test('## immutable Map', () => {
+  test('immutable Map', () => {
     const map = {
       a: immutable.fromJS({ aa: 'foo', ab: 'bar' }),
     };
@@ -77,8 +77,8 @@ describe('# shallow map', () => {
   });
 });
 
-describe('# deep map', () => {
-  test('## null', () => {
+describe('deep map', () => {
+  test('null', () => {
     const map = {
       a: { aa: null },
     };
@@ -102,7 +102,7 @@ describe('# deep map', () => {
     expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  test('## object', () => {
+  test('object', () => {
     const map = {
       a: { aa: { aaa: 'foo' } },
     };
@@ -127,12 +127,12 @@ describe('# deep map', () => {
   });
 });
 
-describe('# array map', () => {
+describe('array map', () => {
   const map = {
     a: [1, 2],
   };
 
-  test('## push', () => {
+  test('push', () => {
     const expected = {
       name: 'state',
       children: [
@@ -150,7 +150,7 @@ describe('# array map', () => {
     expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  test('## unshift', () => {
+  test('unshift', () => {
     const options = { pushMethod: 'unshift' as const };
     const expected = {
       name: 'state',
@@ -169,7 +169,7 @@ describe('# array map', () => {
     expect(map2tree(immutable.fromJS(map), options)).toEqual(expected);
   });
 
-  test('## null', () => {
+  test('null', () => {
     const map = {
       a: [null],
     };
@@ -189,8 +189,8 @@ describe('# array map', () => {
   });
 });
 
-describe('# collection map', () => {
-  test('## value', () => {
+describe('collection map', () => {
+  test('value', () => {
     const map = {
       a: [{ aa: 1 }, { aa: 2 }],
     };
@@ -212,7 +212,7 @@ describe('# collection map', () => {
     expect(map2tree(immutable.fromJS(map))).toEqual(expected);
   });
 
-  test('## object', () => {
+  test('object', () => {
     const map = {
       a: [{ aa: { aaa: 'foo' } }],
     };
