@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.3.0
+
+### Minor Changes
+
+- 8a7eae4: Add React 18 to peerDependencies range
+
 ## 1.2.2
 
 ### Patch Changes

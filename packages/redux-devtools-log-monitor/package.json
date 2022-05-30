@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/log-monitor",
-  "version": "3.1.1",
+  "version": "4.0.0",
   "description": "The default tree view monitor for Redux DevTools",
   "keywords": [
     "redux",
@@ -47,7 +47,7 @@
     "@types/redux-devtools-themes": "^1.0.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.8.1",
-    "react-json-tree": "^0.16.1",
+    "react-json-tree": "^0.17.0",
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
@@ -58,7 +58,7 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "@babel/preset-typescript": "^7.17.12",
-    "@redux-devtools/core": "^3.12.0",
+    "@redux-devtools/core": "^3.13.0",
     "@types/react": "^17.0.45",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
@@ -72,7 +72,7 @@
     "typescript": "~4.6.4"
   },
   "peerDependencies": {
-    "@redux-devtools/core": "^3.7.0",
+    "@redux-devtools/core": "^3.13.0",
     "@types/react": "^16.3.0 || ^17.0.0 || ^18.0.0",
     "react": "^16.3.0 || ^17.0.0 || ^18.0.0",
     "redux": "^3.4.0 || ^4.0.0"
