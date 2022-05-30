@@ -47,13 +47,13 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/register': ^7.17.7
-      '@redux-devtools/app': ^2.1.4
-      '@redux-devtools/core': ^3.12.0
+      '@redux-devtools/app': ^2.2.0
+      '@redux-devtools/core': ^3.13.0
       '@redux-devtools/instrument': ^2.1.0
       '@redux-devtools/serialize': ^0.4.1
-      '@redux-devtools/slider-monitor': ^3.1.2
-      '@redux-devtools/ui': ^1.2.1
-      '@redux-devtools/utils': ^1.2.1
+      '@redux-devtools/slider-monitor': ^4.0.0
+      '@redux-devtools/ui': ^1.3.0
+      '@redux-devtools/utils': ^2.0.0
       '@testing-library/jest-dom': ^5.16.4
       '@testing-library/react': ^12.1.5
       '@types/chrome': ^0.0.188
@@ -89,7 +89,7 @@ importers:
       react-dom: ^17.0.2
       react-icons: ^4.3.1
       react-is: ^17.0.2
-      react-json-tree: ^0.16.2
+      react-json-tree: ^0.17.0
       react-redux: ^8.0.2
       react-transform-catch-errors: ^1.0.2
       react-transform-hmr: ^1.0.4
@@ -530,7 +530,7 @@ importers:
       html-webpack-plugin: ^5.5.0
       react: ^17.0.2
       react-bootstrap: ^2.4.0
-      react-dock: ^0.5.1
+      react-dock: ^0.6.0
       react-dom: ^17.0.2
       react-icons: ^4.3.1
       react-is: ^17.0.2
@@ -673,7 +673,7 @@ importers:
       react: ^17.0.2
       react-base16-styling: ^0.9.1
       react-dom: ^17.0.2
-      react-json-tree: ^0.16.1
+      react-json-tree: ^0.17.0
       ts-node: ^10.8.0
       typescript: ~4.6.4
       webpack: ^5.72.1
@@ -786,15 +786,15 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/chart-monitor': ^2.1.1
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/inspector-monitor': ^2.1.2
-      '@redux-devtools/inspector-monitor-test-tab': ^0.8.6
-      '@redux-devtools/inspector-monitor-trace-tab': ^0.3.4
-      '@redux-devtools/log-monitor': ^3.1.1
-      '@redux-devtools/rtk-query-monitor': ^2.1.2
-      '@redux-devtools/slider-monitor': ^3.1.2
-      '@redux-devtools/ui': ^1.2.1
+      '@redux-devtools/chart-monitor': ^3.0.0
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/inspector-monitor': ^3.0.0
+      '@redux-devtools/inspector-monitor-test-tab': ^1.0.0
+      '@redux-devtools/inspector-monitor-trace-tab': ^1.0.0
+      '@redux-devtools/log-monitor': ^4.0.0
+      '@redux-devtools/rtk-query-monitor': ^3.0.0
+      '@redux-devtools/slider-monitor': ^4.0.0
+      '@redux-devtools/ui': ^1.3.0
       '@reduxjs/toolkit': ^1.8.2
       '@rjsf/core': ^4.2.0
       '@testing-library/jest-dom': ^5.16.4
@@ -935,7 +935,7 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/core': ^3.12.0
+      '@redux-devtools/core': ^3.13.0
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
       '@types/redux-devtools-themes': ^1.0.0
@@ -1101,7 +1101,7 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/core': ^3.12.0
+      '@redux-devtools/core': ^3.13.0
       '@types/parse-key': ^0.2.0
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
@@ -1114,7 +1114,7 @@ importers:
       parse-key: ^0.2.1
       prop-types: ^15.8.1
       react: ^17.0.2
-      react-dock: ^0.5.1
+      react-dock: ^0.6.0
       redux: ^4.2.0
       rimraf: ^3.0.2
       typescript: ~4.6.4
@@ -1189,7 +1189,7 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/core': ^3.12.0
+      '@redux-devtools/core': ^3.13.0
       '@types/dateformat': ^3.0.1
       '@types/dragula': ^3.7.1
       '@types/hex-rgba': ^1.0.1
@@ -1218,7 +1218,7 @@ importers:
       react: ^17.0.2
       react-base16-styling: ^0.9.1
       react-dragula: ^1.1.17
-      react-json-tree: ^0.16.1
+      react-json-tree: ^0.17.0
       redux: ^4.2.0
       redux-devtools-themes: ^1.0.0
       rimraf: ^3.0.2
@@ -1278,9 +1278,9 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/inspector-monitor': ^2.1.2
-      '@redux-devtools/ui': ^1.2.1
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/inspector-monitor': ^3.0.0
+      '@redux-devtools/ui': ^1.3.0
       '@testing-library/react': ^12.1.5
       '@types/es6template': ^1.0.0
       '@types/jest': ^27.5.1
@@ -1359,11 +1359,11 @@ importers:
       '@babel/preset-env': ^7.18.2
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/dock-monitor': ^2.1.1
-      '@redux-devtools/inspector-monitor': ^2.1.2
-      '@redux-devtools/inspector-monitor-test-tab': ^0.8.6
-      '@redux-devtools/ui': ^1.2.1
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/dock-monitor': ^3.0.0
+      '@redux-devtools/inspector-monitor': ^3.0.0
+      '@redux-devtools/inspector-monitor-test-tab': ^1.0.0
+      '@redux-devtools/ui': ^1.3.0
       '@types/lodash.shuffle': ^4.2.7
       '@types/node': ^16.11.36
       '@types/react': ^17.0.45
@@ -1455,8 +1455,8 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/inspector-monitor': ^2.1.2
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/inspector-monitor': ^3.0.0
       '@testing-library/react': ^12.1.5
       '@types/babel__code-frame': ^7.0.3
       '@types/chrome': ^0.0.188
@@ -1537,9 +1537,9 @@ importers:
       '@babel/preset-env': ^7.18.2
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/dock-monitor': ^2.1.1
-      '@redux-devtools/inspector-monitor': ^2.1.2
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/dock-monitor': ^3.0.0
+      '@redux-devtools/inspector-monitor': ^3.0.0
       '@types/base16': ^1.0.2
       '@types/lodash.shuffle': ^4.2.7
       '@types/node': ^16.11.36
@@ -1673,7 +1673,7 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/core': ^3.12.0
+      '@redux-devtools/core': ^3.13.0
       '@types/lodash.debounce': ^4.0.7
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
@@ -1687,7 +1687,7 @@ importers:
       lodash.debounce: ^4.0.8
       prop-types: ^15.8.1
       react: ^17.0.2
-      react-json-tree: ^0.16.1
+      react-json-tree: ^0.17.0
       redux: ^4.2.0
       redux-devtools-themes: ^1.0.0
       rimraf: ^3.0.2
@@ -1732,7 +1732,7 @@ importers:
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
       '@redux-devtools/instrument': ^2.1.0
-      '@redux-devtools/utils': ^1.2.1
+      '@redux-devtools/utils': ^2.0.0
       '@types/jsan': ^3.1.2
       '@types/node': ^16.11.36
       '@types/rn-host-detect': ^1.2.0
@@ -1785,8 +1785,8 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/ui': ^1.2.1
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/ui': ^1.3.0
       '@reduxjs/toolkit': ^1.8.2
       '@types/hex-rgba': ^1.0.1
       '@types/lodash': ^4.14.182
@@ -1808,7 +1808,7 @@ importers:
       prop-types: ^15.8.1
       react: ^17.0.2
       react-base16-styling: ^0.9.1
-      react-json-tree: ^0.16.1
+      react-json-tree: ^0.17.0
       redux: ^4.2.0
       redux-devtools-themes: ^1.0.0
       rimraf: ^3.0.2
@@ -1864,9 +1864,9 @@ importers:
       '@emotion/react': ^11.9.0
       '@emotion/styled': ^11.8.1
       '@mswjs/data': ^0.10.1
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/dock-monitor': ^2.1.1
-      '@redux-devtools/rtk-query-monitor': ^2.1.2
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/dock-monitor': ^3.0.0
+      '@redux-devtools/rtk-query-monitor': ^3.0.0
       '@reduxjs/toolkit': ^1.8.2
       '@types/copy-webpack-plugin': ^8.0.1
       '@types/node': ^16.11.36
@@ -2004,8 +2004,8 @@ importers:
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/ui': ^1.2.1
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/ui': ^1.3.0
       '@rollup/plugin-babel': ^5.3.1
       '@types/node': ^16.11.36
       '@types/prop-types': ^15.7.5
@@ -2065,10 +2065,10 @@ importers:
       '@babel/preset-env': ^7.18.2
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/dock-monitor': ^2.1.1
-      '@redux-devtools/log-monitor': ^3.1.1
-      '@redux-devtools/slider-monitor': ^3.1.2
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/dock-monitor': ^3.0.0
+      '@redux-devtools/log-monitor': ^4.0.0
+      '@redux-devtools/slider-monitor': ^4.0.0
       '@types/classnames': ^2.3.1
       '@types/node': ^16.11.36
       '@types/prop-types': ^15.7.5
@@ -2274,7 +2274,7 @@ importers:
       '@babel/preset-env': ^7.18.2
       '@babel/preset-typescript': ^7.17.12
       '@babel/runtime': ^7.18.3
-      '@redux-devtools/core': ^3.12.0
+      '@redux-devtools/core': ^3.13.0
       '@redux-devtools/serialize': ^0.4.1
       '@types/get-params': ^0.1.0
       '@types/jsan': ^3.1.2
@@ -2326,9 +2326,9 @@ importers:
       '@babel/preset-env': ^7.18.2
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/dock-monitor': ^2.1.1
-      '@redux-devtools/log-monitor': ^3.1.1
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/dock-monitor': ^3.0.0
+      '@redux-devtools/log-monitor': ^4.0.0
       '@types/node': ^16.11.36
       '@types/prop-types': ^15.7.5
       '@types/react': ^17.0.45
@@ -2397,9 +2397,9 @@ importers:
       '@babel/preset-env': ^7.18.2
       '@babel/preset-react': ^7.17.12
       '@babel/preset-typescript': ^7.17.12
-      '@redux-devtools/core': ^3.12.0
-      '@redux-devtools/dock-monitor': ^2.1.1
-      '@redux-devtools/log-monitor': ^3.1.1
+      '@redux-devtools/core': ^3.13.0
+      '@redux-devtools/dock-monitor': ^3.0.0
+      '@redux-devtools/log-monitor': ^4.0.0
       '@types/classnames': ^2.3.1
       '@types/node': ^16.11.36
       '@types/prop-types': ^15.7.5
@@ -15456,6 +15456,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile/4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}

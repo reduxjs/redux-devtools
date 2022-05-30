@@ -1,5 +1,14 @@
 # counter-redux
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [8a7eae4]
+  - @redux-devtools/dock-monitor@3.0.0
+  - @redux-devtools/log-monitor@4.0.0
+  - @redux-devtools/core@3.13.0
+
 ## 0.1.8
 
 ### Patch Changes

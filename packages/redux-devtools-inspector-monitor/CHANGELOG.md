@@ -1,5 +1,17 @@
 # Change Log
 
+## 3.0.0
+
+### Minor Changes
+
+- 8a7eae4: Add React 18 to peerDependencies range
+
+### Patch Changes
+
+- Updated dependencies [8a7eae4]
+  - react-json-tree@0.17.0
+  - @redux-devtools/core@3.13.0
+
 ## 2.1.2
 
 ### Patch Changes
