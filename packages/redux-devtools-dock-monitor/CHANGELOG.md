@@ -1,5 +1,13 @@
 # Change Log
 
+## 3.0.1
+
+### Patch Changes
+
+- a55ba302: Fix peer dependencies on @redux-devtools/core
+- Updated dependencies [a55ba302]
+  - @redux-devtools/core@3.13.1
+
 ## 3.0.0
 
 ### Minor Changes
