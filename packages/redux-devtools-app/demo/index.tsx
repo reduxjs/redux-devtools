@@ -1,8 +1,9 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Root } from '../src';
 
-render(<Root />, document.getElementById('root'));
+const root = createRoot(document.getElementById('root')!);
+root.render(<Root />);
 
 if (module.hot) {
   // https://github.com/webpack/webpack/issues/418#issuecomment-53398056

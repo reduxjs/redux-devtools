@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Container } from '@redux-devtools/ui';
 import { Provider } from 'react-redux';
 import {
@@ -50,7 +50,8 @@ const enhancer = compose(
 
 const store = createStore(rootReducer, enhancer);
 
-render(
+const root = createRoot(document.getElementById('root')!);
+root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Container
@@ -66,6 +67,5 @@ render(
         {!useDevtoolsExtension && <ConnectedDevTools />}
       </Container>
     </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );

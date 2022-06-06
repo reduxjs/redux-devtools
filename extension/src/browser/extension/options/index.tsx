@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import OptionsComponent from './Options';
 import { Options } from './syncOptions';
 
@@ -13,10 +13,8 @@ chrome.runtime.getBackgroundPage((background) => {
   };
 
   const renderOptions = (options: Options) => {
-    render(
-      <OptionsComponent options={options} saveOption={saveOption} />,
-      document.getElementById('root')
-    );
+    const root = createRoot(document.getElementById('root')!);
+    root.render(<OptionsComponent options={options} saveOption={saveOption} />);
   };
 
   syncOptions.subscribe(renderOptions);

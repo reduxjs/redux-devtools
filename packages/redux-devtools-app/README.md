@@ -16,10 +16,11 @@ Also it's a react component you can use to build amazing monitor applications li
 
 ```js
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Root } from '@redux-devtools/app';
 
-ReactDom.render(<Root />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Root />);
 ```
 
 ### Parameters
