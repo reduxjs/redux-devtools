@@ -4,11 +4,11 @@
     "@babel/core": "^7.18.2",
     "@babel/eslint-parser": "^7.18.2",
     "@changesets/cli": "^2.22.0",
-    "@typescript-eslint/eslint-plugin": "^5.26.0",
-    "@typescript-eslint/parser": "^5.26.0",
-    "eslint": "^8.16.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-jest": "^26.4.5",
+    "eslint-plugin-jest": "^26.5.3",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "jest": "^27.5.1",
@@ -38,7 +38,7 @@
     "packages/redux-devtools-rtk-query-monitor/demo",
     "packages/redux-devtools-slider-monitor/examples/todomvc"
   ],
-  "packageManager": "pnpm@7.1.7",
+  "packageManager": "pnpm@7.1.9",
   "pnpm": {
     "overrides": {
       "@babel/highlight>chalk": "Methuselah96/chalk#v2-without-process"
