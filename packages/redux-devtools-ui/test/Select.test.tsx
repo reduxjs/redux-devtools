@@ -37,27 +37,27 @@ describe('Select', function () {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should select another option', () => {
+  it('should select another option', async () => {
     const onChange = jest.fn();
     const { container } = render(
       <Select options={options} onChange={onChange} />
     );
 
-    userEvent.type(screen.getByRole('combobox'), 'two');
+    await userEvent.type(screen.getByRole('combobox'), 'two');
     expect(container.firstChild).toMatchSnapshot();
-    userEvent.type(screen.getByRole('combobox'), '{enter}');
+    await userEvent.type(screen.getByRole('combobox'), '{enter}');
     expect(onChange).toHaveBeenCalled();
   });
 
-  it("shouldn't find any results", () => {
+  it("shouldn't find any results", async () => {
     const onChange = jest.fn();
     const { container } = render(
       <Select options={options} onChange={onChange} />
     );
 
-    userEvent.type(screen.getByRole('combobox'), 'text');
+    await userEvent.type(screen.getByRole('combobox'), 'text');
     expect(container.firstChild).toMatchSnapshot();
-    userEvent.type(screen.getByRole('combobox'), '{enter}');
+    await userEvent.type(screen.getByRole('combobox'), '{enter}');
     expect(onChange).not.toHaveBeenCalled();
   });
 });

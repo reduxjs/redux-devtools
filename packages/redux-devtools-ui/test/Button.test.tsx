@@ -9,11 +9,11 @@ describe('Button', function () {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should handle the click event', () => {
+  it('should handle the click event', async () => {
     const onClick = jest.fn();
     render(<Button onClick={onClick}>ClickMe</Button>);
 
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalled();
   });
 });
