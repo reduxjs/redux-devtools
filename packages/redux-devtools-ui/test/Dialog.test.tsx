@@ -52,7 +52,7 @@ describe('Dialog', function () {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should handle dismiss event', () => {
+  it('should handle dismiss event', async () => {
     const onDismiss = jest.fn();
     render(
       <Dialog
@@ -64,11 +64,11 @@ describe('Dialog', function () {
       />
     );
 
-    userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
     expect(onDismiss).toHaveBeenCalled();
   });
 
-  it('should handle submit event', () => {
+  it('should handle submit event', async () => {
     const onSubmit = jest.fn();
     render(
       <Dialog
@@ -80,7 +80,7 @@ describe('Dialog', function () {
       />
     );
 
-    userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
     expect(onSubmit).toHaveBeenCalled();
   });
 });

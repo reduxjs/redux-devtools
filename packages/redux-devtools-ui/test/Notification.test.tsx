@@ -23,11 +23,11 @@ describe('Notification', function () {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should handle the click event', () => {
+  it('should handle the click event', async () => {
     const onClose = jest.fn();
     render(<Notification onClose={onClose}>Message</Notification>);
 
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(onClose).toHaveBeenCalled();
   });
 });
