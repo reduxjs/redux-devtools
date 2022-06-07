@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
 import './index.css';
@@ -11,8 +11,8 @@ import { worker } from './mocks/browser';
 
 function renderApp() {
   const rootElement = document.getElementById('root');
-
-  ReactDOM.render(
+  const root = ReactDOM.createRoot(rootElement!);
+  root.render(
     <Provider store={store}>
       <ChakraProvider>
         <BrowserRouter>
@@ -20,8 +20,7 @@ function renderApp() {
           <DevTools />
         </BrowserRouter>
       </ChakraProvider>
-    </Provider>,
-    rootElement
+    </Provider>
   );
 }
 

@@ -44,7 +44,7 @@ describe('Form', function () {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should handle the submit event', () => {
+  it('should handle the submit event', async () => {
     const onSubmit = jest.fn();
     render(
       <Form
@@ -55,7 +55,7 @@ describe('Form', function () {
       />
     );
 
-    userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
     expect(onSubmit).toHaveBeenCalled();
   });
 });

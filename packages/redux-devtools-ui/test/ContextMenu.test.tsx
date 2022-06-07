@@ -18,13 +18,13 @@ describe('ContextMenu', function () {
     );
     expect(container.firstChild).toMatchSnapshot();
   });
-  it('should handle the click event', () => {
+  it('should handle the click event', async () => {
     const onClick = jest.fn();
     render(
       <ContextMenu items={items} onClick={onClick} x={100} y={100} visible />
     );
 
-    userEvent.click(screen.getByRole('button', { name: 'Menu Item 1' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Menu Item 1' }));
     expect(onClick).toHaveBeenCalled();
   });
 });

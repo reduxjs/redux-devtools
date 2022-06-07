@@ -20,7 +20,7 @@ interface Props {
 }
 
 class DevTools extends Component<Props> {
-  monitorProps: unknown;
+  monitorProps?: object;
   Monitor?: React.ComponentType<
     LiftedState<unknown, Action<unknown>, unknown>
   > & {

@@ -43,11 +43,11 @@ describe('Tabs', function () {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should select tab', () => {
+  it('should select tab', async () => {
     const onClick = jest.fn();
     render(<Tabs tabs={tabs} onClick={onClick} />);
 
-    userEvent.click(screen.getByRole('button', { name: 'Tab1' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Tab1' }));
     expect(onClick).toHaveBeenCalled();
   });
 });
