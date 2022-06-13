@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import * as http from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { SCServer } from 'socketcluster-server';
+import { AGServer } from 'socketcluster-server';
 import { ApolloServer } from 'apollo-server-express';
 import { AddData, ReportBaseFields, Store } from './store';
 import { resolvers, schema } from './api/schema';
@@ -21,9 +21,9 @@ function serveUmdModule(name: string) {
 }
 
 function routes(
-  options: SCServer.SCServerOptions,
+  options: AGServer.AGServerOptions,
   store: Store,
-  scServer: SCServer
+  scServer: AGServer
 ): Router {
   const limit = options.maxRequestBody;
   const logHTTPRequests = options.logHTTPRequests;
@@ -65,7 +65,8 @@ function routes(
   serveUmdModule('@redux-devtools/app');
 
   app.get('/port.js', function (req, res) {
-    res.send(`reduxDevToolsPort = ${options.port!}`);
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    res.send(`reduxDevToolsPort = ${options.port}`);
   });
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../app/index.html'));
@@ -108,7 +109,7 @@ function routes(
               id: (r as ReportBaseFields).id,
               error: (r as { error: string }).error,
             });
-            scServer.exchange.publish('report', {
+            void scServer.exchange.transmitPublish('report', {
               type: 'add',
               data: r,
             });

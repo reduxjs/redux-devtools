@@ -1,6 +1,6 @@
 import childProcess from 'child_process';
 import request from 'supertest';
-import scClient from 'socketcluster-client';
+import socketClusterClient from 'socketcluster-client';
 
 jest.setTimeout(10000);
 
@@ -44,20 +44,30 @@ describe('Server', function () {
   });
 
   describe('Realtime monitoring', function () {
-    let socket: scClient.SCClientSocket,
-      socket2: scClient.SCClientSocket,
+    let socket: socketClusterClient.AGClientSocket,
+      socket2: socketClusterClient.AGClientSocket,
       channel;
     beforeAll(function () {
-      socket = scClient.connect({ hostname: 'localhost', port: 8000 });
+      socket = socketClusterClient.create({
+        hostname: 'localhost',
+        port: 8000,
+      });
       socket.connect();
-      socket.on('error', function (error) {
-        console.error('Socket1 error', error); // eslint-disable-line no-console
+      void (async () => {
+        for await (const data of socket.listener('error')) {
+          console.error('Socket1 error', data.error); // eslint-disable-line no-console
+        }
+      })();
+      socket2 = socketClusterClient.create({
+        hostname: 'localhost',
+        port: 8000,
       });
-      socket2 = scClient.connect({ hostname: 'localhost', port: 8000 });
       socket2.connect();
-      socket.on('error', function (error) {
-        console.error('Socket2 error', error); // eslint-disable-line no-console
-      });
+      void (async () => {
+        for await (const data of socket2.listener('error')) {
+          console.error('Socket2 error', data.error); // eslint-disable-line no-console
+        }
+      })();
     });
 
     afterAll(function () {
@@ -65,73 +75,50 @@ describe('Server', function () {
       socket2.disconnect();
     });
 
-    it('should connect', function () {
-      return new Promise<void>((done) => {
-        socket.on('connect', function (status) {
-          expect(status.id).toBeTruthy();
-          done();
-        });
-      });
+    it('should connect', async function () {
+      const data = await socket.listener('connect').once();
+      expect(data.id).toBeTruthy();
     });
 
-    it('should login', function () {
-      socket.emit(
-        'login',
-        'master',
-        function (error: Error | undefined, channelName: string) {
-          if (error) {
-            /* eslint-disable-next-line no-console */
-            console.log(error);
-            return;
-          }
-          expect(channelName).toBe('respond');
-          channel = socket.subscribe(channelName);
-          expect(channel.SUBSCRIBED).toBe('subscribed');
-        }
-      );
+    it('should login', async function () {
+      try {
+        const channelName = (await socket.invoke('login', 'master')) as string;
+        expect(channelName).toBe('respond');
+        channel = socket.subscribe(channelName);
+        expect(channel.SUBSCRIBED).toBe('subscribed');
+      } catch (error) {
+        console.log(error);
+      }
     });
 
-    it('should send message', function () {
-      return new Promise<void>((done) => {
-        const data = {
-          type: 'ACTION',
-          payload: {
-            todos: 'do some',
-          },
+    it('should send message', async function () {
+      const data = {
+        type: 'ACTION',
+        payload: {
+          todos: 'do some',
+        },
+        action: {
+          timestamp: 1483349708506,
           action: {
-            timestamp: 1483349708506,
-            action: {
-              type: 'ADD_TODO',
-              text: 'hggg',
-            },
+            type: 'ADD_TODO',
+            text: 'hggg',
           },
-          instanceId: 'tAmA7H5fclyWhvizAAAi',
-          name: 'LoggerInstance',
-          id: 'tAmA7H5fclyWhvizAAAi',
-        };
+        },
+        instanceId: 'tAmA7H5fclyWhvizAAAi',
+        name: 'LoggerInstance',
+        id: 'tAmA7H5fclyWhvizAAAi',
+      };
 
-        socket2.emit(
-          'login',
-          '',
-          function (error: Error | undefined, channelName: string) {
-            if (error) {
-              /* eslint-disable-next-line no-console */
-              console.log(error);
-              return;
-            }
-            expect(channelName).toBe('log');
-            const channel2 = socket2.subscribe(channelName);
-            expect(channel2.SUBSCRIBED).toBe('subscribed');
-            channel2.on('subscribe', function () {
-              channel2.watch(function (message) {
-                expect(message).toEqual(data);
-                done();
-              });
-              socket.emit(channelName, data);
-            });
-          }
-        );
-      });
+      try {
+        const channelName = (await socket.invoke('login', '')) as string;
+        expect(channelName).toBe('log');
+        const channel2 = socket2.subscribe(channelName);
+        expect(channel2.SUBSCRIBED).toBe('subscribed');
+        const message = await channel2.listener('subscribe').once();
+        expect(message).toEqual(data);
+      } catch (error) {
+        console.log(error);
+      }
     });
   });
 
@@ -149,97 +136,61 @@ describe('Server', function () {
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) ' +
         'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36',
     };
-    it('should add a report', function () {
-      return new Promise<void>((done) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        request('http://localhost:8000')
-          .post('/')
-          .send(report)
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /application\/json/)
-          .expect(200)
-          .then(function (res: { body: { id: string } }) {
-            id = res.body.id;
-            expect(id).toBeTruthy();
-            done();
-          });
-      });
+    it('should add a report', async function () {
+      const res = await request('http://localhost:8000')
+        .post('/')
+        .send(report)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+      id = res.body.id;
+      expect(id).toBeTruthy();
     });
 
-    it('should get the report', function () {
-      return new Promise<void>((done) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        request('http://localhost:8000')
-          .post('/')
-          .send({
-            op: 'get',
-            id: id,
-          })
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /application\/json/)
-          .expect(200)
-          .then(function (res: { body: unknown }) {
-            expect(res.body).toMatchObject(report);
-            done();
-          });
-      });
+    it('should get the report', async function () {
+      const res = await request('http://localhost:8000')
+        .post('/')
+        .send({
+          op: 'get',
+          id: id,
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+      expect(res.body).toMatchObject(report);
     });
 
-    it('should list reports', function () {
-      return new Promise<void>((done) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        request('http://localhost:8000')
-          .post('/')
-          .send({
-            op: 'list',
-          })
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /application\/json/)
-          .expect(200)
-          .then(function (res: {
-            body: { id: string; title: string | null; added: string | null }[];
-          }) {
-            expect(res.body).toHaveLength(1);
-            expect(res.body[0].id).toBe(id);
-            expect(res.body[0].title).toBe('Test report');
-            expect(res.body[0].added).toBeTruthy();
-            done();
-          });
-      });
+    it('should list reports', async function () {
+      const res = await request('http://localhost:8000')
+        .post('/')
+        .send({
+          op: 'list',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+      expect(res.body).toHaveLength(1);
+      expect(res.body[0].id).toBe(id);
+      expect(res.body[0].title).toBe('Test report');
+      expect(res.body[0].added).toBeTruthy();
     });
   });
 
   describe('GraphQL backend', function () {
-    it('should get the report', function () {
-      return new Promise<void>((done) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        request('http://localhost:8000')
-          .post('/graphql')
-          .send({
-            query: '{ reports { id, type, title } }',
-          })
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /application\/json/)
-          .expect(200)
-          .then(function (res: {
-            body: {
-              data: {
-                reports: {
-                  id: string;
-                  title: string | null;
-                  type: string | null;
-                }[];
-              };
-            };
-          }) {
-            const reports = res.body.data.reports;
-            expect(reports).toHaveLength(1);
-            expect(reports[0].id).toBeTruthy();
-            expect(reports[0].title).toBe('Test report');
-            expect(reports[0].type).toBe('ACTIONS');
-            done();
-          });
-      });
+    it('should get the report', async function () {
+      const res = await request('http://localhost:8000')
+        .post('/graphql')
+        .send({
+          query: '{ reports { id, type, title } }',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /application\/json/)
+        .expect(200);
+      const reports = res.body.data.reports;
+      expect(reports).toHaveLength(1);
+      expect(reports[0].id).toBeTruthy();
+      expect(reports[0].title).toBe('Test report');
+      expect(reports[0].type).toBe('ACTIONS');
     });
   });
 });
