@@ -132,7 +132,7 @@ export default function (argv: { [arg: string]: any }): Promise<{
               }
             })();
             void (async () => {
-              for await (const data of socket.receiver('disconnect')) {
+              for await (const data of socket.listener('disconnect')) {
                 const channel = agServer.exchange.channel('sc-' + socket.id);
                 channel.unsubscribe();
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

@@ -29,7 +29,7 @@ let socket: AGClientSocket;
 let store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>;
 
 function emit({ message: type, id, instanceId, action, state }: EmitAction) {
-  socket.transmit(id ? `sc-${id}` : 'respond', {
+  void socket.transmit(id ? `sc-${id}` : 'respond', {
     type,
     action,
     state,
@@ -125,7 +125,7 @@ function monitoring(request: MonitoringRequest) {
     instanceId === instances.selected &&
     (request.type === 'ACTION' || request.type === 'STATE')
   ) {
-    socket.transmit('respond', {
+    void socket.transmit('respond', {
       type: 'SYNC',
       state: stringify(instances.states[instanceId]),
       id: request.id,
@@ -191,7 +191,7 @@ function handleConnection() {
   })();
   void (async () => {
     for await (const data of socket.listener('unsubscribe')) {
-      socket.unsubscribe(data.channel);
+      void socket.unsubscribe(data.channel);
       store.dispatch({ type: actions.UNSUBSCRIBE, channel: data.channel });
     }
   })();
