@@ -167,8 +167,7 @@ function handleConnection() {
           authState: socket.authState,
           socketState: socket.state,
         },
-        // TODO Fix
-        // @ts-expect-error Because
+        // @ts-expect-error Is this legitimate?
         error: data.authError,
       });
       if (socket.authState !== actions.AUTHENTICATED) {

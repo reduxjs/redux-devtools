@@ -17,7 +17,7 @@ export interface ExtendedOptions extends Options {
 
 export default function (argv: { [arg: string]: any }): Promise<{
   portAlreadyUsed?: boolean;
-  listener: (eventName: 'ready') => { once(): Promise<unknown> };
+  listener: (eventName: 'ready') => { once(): Promise<void> };
 }> {
   const options = Object.assign(getOptions(argv), {
     allowClientPublish: false,
@@ -135,19 +135,18 @@ export default function (argv: { [arg: string]: any }): Promise<{
               for await (const data of socket.receiver('disconnect')) {
                 const channel = agServer.exchange.channel('sc-' + socket.id);
                 channel.unsubscribe();
-                // TODO
-                // void agServer.exchange.transmitPublish(channelToEmit, {
-                //   id: socket.id,
-                //   type: 'DISCONNECTED',
-                // });
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                void agServer.exchange.transmitPublish(channelToEmit!, {
+                  id: socket.id,
+                  type: 'DISCONNECTED',
+                });
               }
             })();
           }
         })();
 
         httpServer.listen(options.port);
-        // TODO Fix
-        // @ts-expect-error Because
+        // @ts-expect-error Shouldn't there be a 'ready' event?
         resolve(agServer);
       }
       /* eslint-enable no-console */

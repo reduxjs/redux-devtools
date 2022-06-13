@@ -90,11 +90,7 @@ if (argv.injectserver) {
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 server(argv).then(async function (r) {
   if (argv.open && argv.open !== 'false') {
-    await r
-      .listener('ready')
-      .once()
-      .then(async () => {
-        await openApp(argv.open as string, options);
-      });
+    await r.listener('ready').once();
+    await openApp(argv.open as string, options);
   }
 });
