@@ -109,7 +109,7 @@ function routes(
               id: (r as ReportBaseFields).id,
               error: (r as { error: string }).error,
             });
-            scServer.exchange.transmitPublish('report', {
+            void scServer.exchange.transmitPublish('report', {
               type: 'add',
               data: r,
             });
