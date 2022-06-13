@@ -1,5 +1,5 @@
 import { stringify, parse } from 'jsan';
-import socketCluster, { AGClientSocket } from 'socketcluster-client';
+import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
 import configureStore from './configureStore';
 import { defaultSocketOptions } from './constants';
 import getHostForRN from 'rn-host-detect';
@@ -429,7 +429,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     )
       return;
 
-    this.socket = socketCluster.create(this.socketOptions);
+    this.socket = socketClusterClient.create(this.socketOptions);
 
     void (async () => {
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion

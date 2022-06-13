@@ -1,4 +1,4 @@
-import socketCluster, { AGClientSocket } from 'socketcluster-client';
+import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
 import { stringify } from 'jsan';
 import { Dispatch, MiddlewareAPI } from 'redux';
 import * as actions from '../constants/socketActionTypes';
@@ -216,7 +216,7 @@ function connect() {
   if (process.env.NODE_ENV === 'test') return;
   const connection = store.getState().connection;
   try {
-    socket = socketCluster.create(connection.options);
+    socket = socketClusterClient.create(connection.options);
     handleConnection();
   } catch (error) {
     store.dispatch({ type: actions.CONNECT_ERROR, error: error as Error });
