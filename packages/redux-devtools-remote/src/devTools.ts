@@ -281,7 +281,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
       message.action = action as ActionCreatorObject[];
     }
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    this.socket!.transmit(this.socket!.id ? 'log' : 'log-noid', message);
+    void this.socket!.transmit(this.socket!.id ? 'log' : 'log-noid', message);
   }
 
   dispatchRemotely(
@@ -415,7 +415,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     this.started = false;
     this.isMonitored = false;
     if (!this.socket) return;
-    this.socket.unsubscribe(this.channel!);
+    void this.socket.unsubscribe(this.channel!);
     this.socket.closeChannel(this.channel!);
     if (!keepConnected) {
       this.socket.disconnect();
