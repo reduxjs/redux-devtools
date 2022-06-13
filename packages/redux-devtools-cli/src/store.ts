@@ -1,6 +1,6 @@
 import { v4 as uuidV4 } from 'uuid';
 import pick from 'lodash/pick';
-import { SCServer } from 'socketcluster-server';
+import { AGServer } from 'socketcluster-server';
 import { Knex } from 'knex';
 import connector from './db/connector';
 
@@ -139,7 +139,7 @@ export interface Store {
   add: (data: AddData) => Promise<ReportBaseFields | { error: string }>;
 }
 
-function createStore(options: SCServer.SCServerOptions): Store {
+function createStore(options: AGServer.AGServerOptions): Store {
   knex = connector(options);
 
   return {
