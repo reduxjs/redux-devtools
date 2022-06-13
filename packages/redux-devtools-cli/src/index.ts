@@ -71,7 +71,7 @@ export default function (argv: { [arg: string]: any }): Promise<{
                 const channel = action.receiver;
                 const data = action.data;
                 if (
-                  channel.substr(0, 3) === 'sc-' ||
+                  channel.substring(0, 3) === 'sc-' ||
                   channel === 'respond' ||
                   channel === 'log'
                 ) {
@@ -82,23 +82,21 @@ export default function (argv: { [arg: string]: any }): Promise<{
                     data: data,
                   });
                 }
+              } else if (action.type === action.SUBSCRIBE) {
+                if (action.channel === 'report') {
+                  store
+                    .list()
+                    .then(function (data) {
+                      void agServer.exchange.transmitPublish('report', {
+                        type: 'list',
+                        data: data,
+                      });
+                    })
+                    .catch(function (error) {
+                      console.error(error); // eslint-disable-line no-console
+                    });
+                }
               }
-              // TODO
-              // } else if (action.type === action.SUBSCRIBE) {
-              //   if (action.channel === 'report') {
-              //     store
-              //       .list()
-              //       .then(function (data) {
-              //         action.socket.emit(action.channel, {
-              //           type: 'list',
-              //           data: data,
-              //         });
-              //       })
-              //       .catch(function (error) {
-              //         console.error(error); // eslint-disable-line no-console
-              //       });
-              //   }
-              // }
               action.allow();
             }
           }
@@ -117,12 +115,6 @@ export default function (argv: { [arg: string]: any }): Promise<{
                   channelToWatch = 'log';
                   channelToEmit = 'respond';
                 }
-                // TODO
-                // agServer.exchange
-                //   .subscribe('sc-' + socket.id)
-                //   .watch(function (msg) {
-                //     socket.emit(channelToWatch, msg);
-                //   });
                 request.end(channelToWatch);
               }
             })();
@@ -141,11 +133,10 @@ export default function (argv: { [arg: string]: any }): Promise<{
             })();
             void (async () => {
               for await (const data of socket.receiver('disconnect')) {
+                const channel = agServer.exchange.channel('sc-' + socket.id);
+                channel.unsubscribe();
                 // TODO
-                // const channel = agServer.exchange.channel('sc-' + socket.id);
-                // channel.unsubscribe();
-                // channel.destroy();
-                // agServer.exchange.publish(channelToEmit, {
+                // void agServer.exchange.transmitPublish(channelToEmit, {
                 //   id: socket.id,
                 //   type: 'DISCONNECTED',
                 // });
