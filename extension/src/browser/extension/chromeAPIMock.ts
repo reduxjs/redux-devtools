@@ -1,7 +1,8 @@
 // Mock not supported chrome.* API for Firefox and Electron
 
 window.isElectron =
-  window.navigator && window.navigator.userAgent.indexOf('Electron') !== -1;
+  (window.navigator && window.navigator.userAgent.indexOf('Electron') !== -1) ||
+  (window as any).__sizzy;
 
 const isFirefox = navigator.userAgent.indexOf('Firefox') !== -1;
 
