@@ -2,7 +2,7 @@
 
 window.isElectron =
   (window.navigator && window.navigator.userAgent.indexOf('Electron') !== -1) ||
-  (window as any).__sizzy;
+  !!(window as any).__sizzy;
 
 const isFirefox = navigator.userAgent.indexOf('Firefox') !== -1;
 
