@@ -1,5 +1,5 @@
 ---
-"@redux-devtools/extension": patch
+'@redux-devtools/extension': patch
 ---
 
 Fix type for serialize option
