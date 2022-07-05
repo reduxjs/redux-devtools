@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { UPDATE_STATE } from '@redux-devtools/app';
@@ -25,13 +25,13 @@ chrome.runtime.getBackgroundPage((window) => {
   bg.onMessage.addListener(update);
   update();
 
-  render(
+  const root = createRoot(document.getElementById('root')!);
+  root.render(
     <Provider store={localStore}>
       <PersistGate loading={null} persistor={persistor}>
         <App position={position} />
       </PersistGate>
-    </Provider>,
-    document.getElementById('root')
+    </Provider>
   );
 });
 

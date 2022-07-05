@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
+import type { DebouncedFunc } from 'lodash';
 import autoprefix from './autoprefix';
 
 interface Styles {
@@ -438,7 +439,10 @@ export default class Dock extends Component<Props, State> {
     });
   };
 
-  debouncedUpdateWindowSizeEnd = debounce(this.updateWindowSizeEnd, 30);
+  debouncedUpdateWindowSizeEnd: DebouncedFunc<() => void> = debounce(
+    this.updateWindowSizeEnd,
+    30
+  );
 
   handleWrapperLeave = () => {
     this.setState({ isResizing: false });

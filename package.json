@@ -1,28 +1,29 @@
 {
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/eslint-parser": "^7.17.0",
-    "@changesets/cli": "^2.22.0",
-    "@typescript-eslint/eslint-plugin": "^5.17.0",
-    "@typescript-eslint/parser": "^5.17.0",
-    "eslint": "^8.12.0",
+    "@babel/core": "^7.18.5",
+    "@babel/eslint-parser": "^7.18.2",
+    "@changesets/cli": "^2.23.0",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-jest": "^26.1.3",
-    "eslint-plugin-react": "~7.28.0",
-    "eslint-plugin-react-hooks": "^4.4.0",
+    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^27.5.1",
-    "lerna": "^4.0.0",
-    "prettier": "2.6.2",
-    "typescript": "~4.5.5"
+    "prettier": "2.7.1",
+    "typescript": "~4.7.4",
+    "nx": "^14.3.6",
+    "@nrwl/nx-cloud": "^14.1.2"
   },
   "scripts": {
     "format": "prettier --write .",
-    "build:all": "lerna run build",
-    "lint:all": "lerna run lint",
-    "test:all": "lerna run test",
     "format:check": "prettier --check .",
-    "release": "yarn build:all && changeset publish"
+    "build:all": "nx run-many --target=build --all",
+    "lint:all": "nx run-many --target=lint --all",
+    "test:all": "nx run-many --target=test --all",
+    "release": "pnpm build:all && changeset publish"
   },
   "workspaces": [
     "extension",
@@ -37,8 +38,16 @@
     "packages/redux-devtools-rtk-query-monitor/demo",
     "packages/redux-devtools-slider-monitor/examples/todomvc"
   ],
-  "resolutions": {
-    "@babel/highlight/chalk": "Methuselah96/chalk#head=v2-without-process"
-  },
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "pnpm@7.3.0",
+  "pnpm": {
+    "overrides": {
+      "@babel/highlight>chalk": "Methuselah96/chalk#v2-without-process"
+    },
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "18",
+        "react-dom": "18"
+      }
+    }
+  }
 }

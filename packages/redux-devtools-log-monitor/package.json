@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/log-monitor",
-  "version": "3.1.0",
+  "version": "4.0.1",
   "description": "The default tree view monitor for Redux DevTools",
   "keywords": [
     "redux",
@@ -30,51 +30,51 @@
     "url": "https://github.com/reduxjs/redux-devtools"
   },
   "scripts": {
-    "build": "yarn build:cjs && yarn build:esm && yarn build:types",
+    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
     "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
     "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf lib",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
-    "prepack": "yarn run clean && yarn run build",
-    "prepublish": "yarn run type-check && yarn run lint"
+    "prepack": "pnpm run clean && pnpm run build",
+    "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.8",
-    "@types/lodash.debounce": "^4.0.6",
-    "@types/prop-types": "^15.7.4",
+    "@babel/runtime": "^7.18.3",
+    "@types/lodash.debounce": "^4.0.7",
+    "@types/prop-types": "^15.7.5",
     "@types/redux-devtools-themes": "^1.0.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.8.1",
-    "react-json-tree": "^0.16.1",
+    "react-json-tree": "^0.17.0",
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.8",
-    "@babel/eslint-parser": "^7.17.0",
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/preset-typescript": "^7.16.7",
-    "@redux-devtools/core": "^3.11.0",
-    "@types/react": "^17.0.43",
-    "@typescript-eslint/eslint-plugin": "^5.17.0",
-    "@typescript-eslint/parser": "^5.17.0",
-    "eslint": "^8.12.0",
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.5",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/plugin-transform-runtime": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "@babel/preset-typescript": "^7.17.12",
+    "@redux-devtools/core": "^3.13.1",
+    "@types/react": "^18.0.14",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-react": "~7.28.0",
-    "eslint-plugin-react-hooks": "^4.4.0",
-    "react": "^17.0.2",
-    "redux": "^4.1.2",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "react": "^18.2.0",
+    "redux": "^4.2.0",
     "rimraf": "^3.0.2",
-    "typescript": "~4.5.5"
+    "typescript": "~4.7.4"
   },
   "peerDependencies": {
-    "@redux-devtools/core": "^3.7.0",
-    "@types/react": "^16.3.0 || ^17.0.0",
-    "react": "^16.3.0 || ^17.0.0",
+    "@redux-devtools/core": "^3.13.1",
+    "@types/react": "^16.3.0 || ^17.0.0 || ^18.0.0",
+    "react": "^16.3.0 || ^17.0.0 || ^18.0.0",
     "redux": "^3.4.0 || ^4.0.0"
   }
 }

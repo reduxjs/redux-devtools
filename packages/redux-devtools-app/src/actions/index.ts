@@ -1,5 +1,5 @@
 import { SchemeName, ThemeName } from '@redux-devtools/ui';
-import { AuthStates, States } from 'socketcluster-client/lib/scclientsocket';
+import { AuthStates, States } from 'socketcluster-client/lib/clientsocket';
 import { REHYDRATE } from 'redux-persist';
 import {
   CHANGE_SECTION,

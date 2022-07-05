@@ -1,4 +1,4 @@
-import { AuthStates, States } from 'socketcluster-client/lib/scclientsocket';
+import { AuthStates, States } from 'socketcluster-client/lib/clientsocket';
 import * as actions from '../constants/socketActionTypes';
 import { StoreAction } from '../actions';
 

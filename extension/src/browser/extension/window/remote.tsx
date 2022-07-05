@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Root } from '@redux-devtools/app';
 
 import '../../views/remote.pug';
@@ -15,7 +15,8 @@ chrome.storage.local.get(
   },
   (options) => {
     const AppAsAny = Root as any;
-    render(
+    const root = createRoot(document.getElementById('root')!);
+    root.render(
       <AppAsAny
         selectMonitor={options['select-monitor']}
         testTemplates={options['test-templates']}
@@ -30,8 +31,7 @@ chrome.storage.local.get(
               }
             : undefined
         }
-      />,
-      document.getElementById('root')
+      />
     );
   }
 );

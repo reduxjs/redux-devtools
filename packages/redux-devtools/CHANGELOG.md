@@ -1,5 +1,23 @@
 # Change Log
 
+## 3.13.1
+
+### Patch Changes
+
+- a55ba302: Fix peer dependencies on @redux-devtools/core
+
+## 3.13.0
+
+### Minor Changes
+
+- 8a7eae4: Add React 18 to peerDependencies range
+
+## 3.12.0
+
+### Minor Changes
+
+- 4891bf6: Add react-redux v8 to peerDependencies range
+
 ## [3.9.0](https://github.com/reduxjs/redux-devtools/compare/@redux-devtools/core@3.8.0...@redux-devtools/core@3.9.0) (2021-03-06)
 
 ### Features

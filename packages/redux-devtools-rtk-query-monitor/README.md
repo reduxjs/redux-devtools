@@ -91,7 +91,7 @@ Alternatively, you can use it together with [`DockMonitor`](https://github.com/r
 #### Start Demo
 
 ```bash
-yarn lerna run start --stream --scope @redux-devtools/rtk-query-monitor
+pnpm nx start rtk-query-demo
 ```
 
 <br/>
