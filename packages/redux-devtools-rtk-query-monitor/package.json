@@ -41,7 +41,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run  && pnpm run test"
+    "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
