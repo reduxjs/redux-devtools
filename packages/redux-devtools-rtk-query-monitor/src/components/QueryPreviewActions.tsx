@@ -1,8 +1,10 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ReactNode, PureComponent } from 'react';
 import { Action, AnyAction } from 'redux';
+import { QueryPreviewTabs } from '../types';
+import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
 import { emptyRecord, identity } from '../utils/object';
-import { TreeView } from './TreeView';
+import { TreeView, TreeViewProps } from './TreeView';
 
 export interface QueryPreviewActionsProps {
   isWideLayout: boolean;
@@ -10,6 +12,12 @@ export interface QueryPreviewActionsProps {
 }
 
 const keySep = ' - ';
+
+const rootProps: TreeViewProps['rootProps'] = {
+  'aria-labelledby': renderTabPanelButtonId(QueryPreviewTabs.actions),
+  id: renderTabPanelId(QueryPreviewTabs.actions),
+  role: 'tabpanel',
+};
 
 export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps> {
   selectFormattedActions: Selector<
@@ -74,6 +82,7 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
 
     return (
       <TreeView
+        rootProps={rootProps}
         data={this.selectFormattedActions(actionsOfQuery)}
         isWideLayout={isWideLayout}
         shouldExpandNode={this.shouldExpandNode}

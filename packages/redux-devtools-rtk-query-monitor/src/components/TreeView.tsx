@@ -22,6 +22,9 @@ export interface TreeViewProps
   before?: ReactNode;
   after?: ReactNode;
   children?: ReactNode;
+  rootProps?: Partial<
+    Omit<React.HTMLAttributes<HTMLDivElement>, 'className' | 'style'>
+  >;
 }
 
 export class TreeView extends React.PureComponent<TreeViewProps> {
@@ -80,13 +83,14 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
       keyPath,
       shouldExpandNode,
       hideRoot,
+      rootProps,
     } = this.props;
 
     return (
       <StyleUtilsContext.Consumer>
         {({ styling, invertTheme, base16Theme }) => {
           return (
-            <div {...styling('treeWrapper')}>
+            <div {...rootProps} {...styling('treeWrapper')}>
               {before}
               <JSONTree
                 keyPath={keyPath}

@@ -33,6 +33,10 @@ import {
   QueryPreviewActionsProps,
 } from '../components/QueryPreviewActions';
 import { isTabVisible } from '../utils/tabs';
+import {
+  QueryPreviewData,
+  QueryPreviewDataProps,
+} from '../components/QueryPreviewData';
 
 export interface QueryPreviewProps<S = unknown> {
   readonly selectedTab: QueryPreviewTabs;
@@ -66,6 +70,14 @@ const MappedQueryPreviewInfo = mapProps<
   QueryPreviewInfoProps
 >(({ resInfo, isWideLayout }) => ({ resInfo, isWideLayout }))(QueryPreviewInfo);
 
+const MappedQueryPreviewData = mapProps<
+  QueryPreviewTabProps,
+  QueryPreviewDataProps
+>(({ resInfo, isWideLayout }) => ({
+  data: resInfo?.state?.data,
+  isWideLayout,
+}))(QueryPreviewData);
+
 const MappedQuerySubscriptipns = mapProps<
   QueryPreviewTabProps,
   QueryPreviewSubscriptionsProps
@@ -93,6 +105,16 @@ const MappedQueryPreviewActions = mapProps<
 const tabs: ReadonlyArray<
   TabOption<QueryPreviewTabs, QueryPreviewTabProps, RtkResourceInfo['type']>
 > = [
+  {
+    label: 'Data',
+    value: QueryPreviewTabs.data,
+    component: MappedQueryPreviewData,
+    visible: {
+      query: true,
+      mutation: true,
+      default: true,
+    },
+  },
   {
     label: 'Query',
     value: QueryPreviewTabs.queryinfo,

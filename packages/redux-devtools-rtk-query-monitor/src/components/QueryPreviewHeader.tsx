@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 import { QueryPreviewTabs, TabOption } from '../types';
+import { renderTabPanelButtonId } from '../utils/a11y';
 import { emptyArray } from '../utils/object';
 
 export interface QueryPreviewHeaderProps {
@@ -28,7 +29,11 @@ export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps>
           <div {...styling('previewHeader')}>
             <div {...styling('tabSelector')}>
               {tabs.map((tab) => (
-                <div
+                <button
+                  type="button"
+                  id={renderTabPanelButtonId(tab.value)}
+                  aria-selected={tab.value === selectedTab}
+                  role={'tab'}
                   onClick={() => this.handleTabClick(tab)}
                   key={tab.value}
                   {...styling(
@@ -42,7 +47,7 @@ export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps>
                   <span>
                     {renderTabLabel ? renderTabLabel(tab) : tab.label}
                   </span>
-                </div>
+                </button>
               ))}
             </div>
           </div>

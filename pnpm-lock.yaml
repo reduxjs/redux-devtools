@@ -1788,7 +1788,10 @@ importers:
       '@redux-devtools/core': ^3.13.1
       '@redux-devtools/ui': ^1.3.0
       '@reduxjs/toolkit': ^1.8.2
+      '@testing-library/jest-dom': ^5.16.4
+      '@testing-library/react': ^13.3.0
       '@types/hex-rgba': ^1.0.1
+      '@types/jest': ^27.5.2
       '@types/lodash': ^4.14.182
       '@types/lodash.debounce': ^4.0.7
       '@types/prop-types': ^15.7.5
@@ -1798,20 +1801,25 @@ importers:
       '@typescript-eslint/parser': ^5.29.0
       eslint: ^8.18.0
       eslint-config-prettier: ^8.5.0
+      eslint-plugin-jest: ^26.5.3
       eslint-plugin-react: ^7.30.1
       eslint-plugin-react-hooks: ^4.6.0
       hex-rgba: ^1.0.2
       immutable: ^4.1.0
+      jest: ^27.5.1
       jss: ^10.9.0
       jss-preset-default: ^10.9.0
       lodash.debounce: ^4.0.8
       prop-types: ^15.8.1
       react: ^18.2.0
       react-base16-styling: ^0.9.1
+      react-dom: ^18.2.0
       react-json-tree: ^0.17.0
+      react-redux: ^8.0.2
       redux: ^4.2.0
       redux-devtools-themes: ^1.0.0
       rimraf: ^3.0.2
+      ts-jest: ^27.1.5
       typescript: ~4.7.4
     dependencies:
       '@babel/runtime': 7.18.3
@@ -1837,19 +1845,27 @@ importers:
       '@babel/preset-react': 7.17.12_@babel+core@7.18.5
       '@babel/preset-typescript': 7.17.12_@babel+core@7.18.5
       '@redux-devtools/core': link:../redux-devtools
-      '@reduxjs/toolkit': 1.8.2_react@18.2.0
+      '@reduxjs/toolkit': 1.8.2_kkwg4cbsojnjnupd3btipussee
+      '@testing-library/jest-dom': 5.16.4
+      '@testing-library/react': 13.3.0_biqbaboplfbrettd7655fr4n2y
       '@types/hex-rgba': 1.0.1
+      '@types/jest': 27.5.2
       '@types/lodash.debounce': 4.0.7
       '@types/react': 18.0.14
       '@typescript-eslint/eslint-plugin': 5.29.0_qqmbkyiaixvppdwswpytuf2hgm
       '@typescript-eslint/parser': 5.29.0_b5e7v2qnwxfo6hmiq56u52mz3e
       eslint: 8.18.0
       eslint-config-prettier: 8.5.0_eslint@8.18.0
+      eslint-plugin-jest: 26.5.3_hkaktba3mic4t6mktu5mmyzyhi
       eslint-plugin-react: 7.30.1_eslint@8.18.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.18.0
+      jest: 27.5.1
       react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-redux: 8.0.2_42iqcqzqjdyq32nxzztmetzyhu
       redux: 4.2.0
       rimraf: 3.0.2
+      ts-jest: 27.1.5_7giygfzd3xe4pjz4ngu3nwlqbm
       typescript: 4.7.4
 
   packages/redux-devtools-rtk-query-monitor/demo:
@@ -1886,7 +1902,7 @@ importers:
       fork-ts-checker-webpack-plugin: ^7.2.11
       framer-motion: ^6.3.15
       html-webpack-plugin: ^5.5.0
-      msw: ^0.42.3
+      msw: ^0.43.0
       react: ^18.2.0
       react-dom: ^18.2.0
       react-icons: ^4.4.0
@@ -1911,7 +1927,7 @@ importers:
       '@redux-devtools/rtk-query-monitor': link:..
       '@reduxjs/toolkit': 1.8.2_kkwg4cbsojnjnupd3btipussee
       framer-motion: 6.3.15_biqbaboplfbrettd7655fr4n2y
-      msw: 0.42.3_typescript@4.7.4
+      msw: 0.43.0_typescript@4.7.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-icons: 4.4.0_react@18.2.0
@@ -5999,29 +6015,10 @@ packages:
     dependencies:
       immer: 9.0.15
       react: 18.2.0
-      react-redux: 8.0.2_fzknh3pugl53jp7xsetxkg5ani
+      react-redux: 8.0.2_42iqcqzqjdyq32nxzztmetzyhu
       redux: 4.2.0
       redux-thunk: 2.4.1_redux@4.2.0
       reselect: 4.1.6
-    dev: false
-
-  /@reduxjs/toolkit/1.8.2_react@18.2.0:
-    resolution: {integrity: sha512-CtPw5TkN1pHRigMFCOS/0qg3b/yfPV5qGCsltVnIz7bx4PKTJlGHYfIxm97qskLknMzuGfjExaYdXJ77QTL0vg==}
-    peerDependencies:
-      react: ^16.9.0 || ^17.0.0 || ^18 || 18
-      react-redux: ^7.2.1 || ^8.0.0-beta
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-redux:
-        optional: true
-    dependencies:
-      immer: 9.0.15
-      react: 18.2.0
-      redux: 4.2.0
-      redux-thunk: 2.4.1_redux@4.2.0
-      reselect: 4.1.6
-    dev: true
 
   /@restart/hooks/0.4.7_react@18.2.0:
     resolution: {integrity: sha512-ZbjlEHcG+FQtpDPHd7i4FzNNvJf2enAwZfJbpM8CW7BhmOAbsHpZe3tsHwfQUrBuyrxWqPYp2x5UMnilWcY22A==}
@@ -16403,43 +16400,6 @@ packages:
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  /msw/0.42.3_typescript@4.7.4:
-    resolution: {integrity: sha512-zrKBIGCDsNUCZLd3DLSeUtRruZ0riwJgORg9/bSDw3D0PTI8XUGAK3nC0LJA9g0rChGuKaWK/SwObA8wpFrz4g==}
-    engines: {node: '>=14'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      typescript: '>= 4.2.x <= 4.7.x'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@mswjs/cookies': 0.2.1
-      '@mswjs/interceptors': 0.16.6
-      '@open-draft/until': 1.0.3
-      '@types/cookie': 0.4.1
-      '@types/js-levenshtein': 1.1.1
-      chalk: 4.1.1
-      chokidar: 3.5.3
-      cookie: 0.4.2
-      graphql: 16.5.0
-      headers-polyfill: 3.0.7
-      inquirer: 8.2.4
-      is-node-process: 1.0.1
-      js-levenshtein: 1.1.6
-      node-fetch: 2.6.7
-      outvariant: 1.3.0
-      path-to-regexp: 6.2.1
-      statuses: 2.0.1
-      strict-event-emitter: 0.2.4
-      type-fest: 1.4.0
-      typescript: 4.7.4
-      yargs: 17.5.1
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-    dev: false
-
   /msw/0.43.0_typescript@4.7.4:
     resolution: {integrity: sha512-XJylZP0qW3D5WUGWh9FFefJEl3MGG4y1I+/8a833d0eedm6B+GaPm6wPVZNcnlS2YVTagvEgShVJ7ZtY66tTRQ==}
     engines: {node: '>=14'}
@@ -16476,7 +16436,6 @@ packages:
       - encoding
       - supports-color
     dev: false
-    optional: true
 
   /multicast-dns/7.2.5:
     resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
@@ -18192,7 +18151,6 @@ packages:
       react-is: 18.2.0
       redux: 4.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
-    dev: true
 
   /react-redux/8.0.2_fzknh3pugl53jp7xsetxkg5ani:
     resolution: {integrity: sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA==}

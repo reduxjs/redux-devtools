@@ -8,6 +8,7 @@ import type { QueryComparators } from './utils/comparators';
 import type { QueryFilters } from './utils/filters';
 
 export enum QueryPreviewTabs {
+  data,
   queryinfo,
   apiConfig,
   querySubscriptions,

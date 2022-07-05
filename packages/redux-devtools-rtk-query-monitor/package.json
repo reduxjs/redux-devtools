@@ -37,10 +37,11 @@
     "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf lib",
+    "test": "jest",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint"
+    "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
@@ -68,6 +69,9 @@
     "@babel/preset-typescript": "^7.17.12",
     "@redux-devtools/core": "^3.13.1",
     "@reduxjs/toolkit": "^1.8.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@types/jest": "^27.5.2",
     "@types/hex-rgba": "^1.0.1",
     "@types/lodash.debounce": "^4.0.7",
     "@types/react": "^18.0.14",
@@ -75,11 +79,16 @@
     "@typescript-eslint/parser": "^5.29.0",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^26.5.3",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^27.5.1",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
     "redux": "^4.2.0",
     "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.5",
     "typescript": "~4.7.4"
   },
   "peerDependencies": {
