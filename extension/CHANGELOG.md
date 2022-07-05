@@ -1,5 +1,17 @@
 # remotedev-redux-devtools-extension
 
+## 3.0.13
+
+### Patch Changes
+
+- Updated dependencies [8a7eae4]
+  - react-json-tree@0.17.0
+  - @redux-devtools/app@2.2.0
+  - @redux-devtools/slider-monitor@4.0.0
+  - @redux-devtools/ui@1.3.0
+  - @redux-devtools/core@3.13.0
+  - @redux-devtools/utils@2.0.0
+
 ## 3.0.12
 
 ### Patch Changes

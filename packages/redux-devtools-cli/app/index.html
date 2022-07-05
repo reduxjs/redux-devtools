@@ -31,16 +31,15 @@
     <script src="/redux-devtools-app.min.js"></script>
     <script src="/port.js"></script>
     <script>
-      ReactDOM.render(
-        React.createElement(ReduxDevToolsApp, {
-          socketOptions: {
-            hostname: location.hostname,
-            port: reduxDevToolsPort,
-            autoReconnect: true,
-          },
-        }),
-        document.querySelector('#root')
-      );
+      const container = document.querySelector('#root');
+      const element = React.createElement(ReduxDevToolsApp, {
+        socketOptions: {
+          hostname: location.hostname,
+          port: reduxDevToolsPort,
+          autoReconnect: true,
+        },
+      });
+      ReactDOM.createRoot(container).render(element);
     </script>
   </body>
 </html>

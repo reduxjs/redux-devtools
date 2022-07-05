@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { TraceTab } from '../src/StackTraceTab';
 
 const actions = {
@@ -42,7 +42,10 @@ describe('StackTraceTab component', () => {
     const { container } = render(
       <TraceTabAsAny actions={actions} action={actions[2].action} />
     );
-    await screen.findByTestId('stack-trace');
+    const stackTraceDiv = await screen.findByTestId('stack-trace');
+    await waitFor(() =>
+      expect(stackTraceDiv.querySelector('div')).toBeTruthy()
+    );
     expect(container.firstChild).toMatchSnapshot();
   });
 });

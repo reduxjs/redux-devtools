@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/log-monitor",
-  "version": "3.1.1",
+  "version": "4.0.1",
   "description": "The default tree view monitor for Redux DevTools",
   "keywords": [
     "redux",
@@ -41,40 +41,40 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.9",
+    "@babel/runtime": "^7.18.3",
     "@types/lodash.debounce": "^4.0.7",
     "@types/prop-types": "^15.7.5",
     "@types/redux-devtools-themes": "^1.0.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.8.1",
-    "react-json-tree": "^0.16.1",
+    "react-json-tree": "^0.17.0",
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
-    "@babel/core": "^7.17.10",
-    "@babel/eslint-parser": "^7.17.0",
-    "@babel/plugin-transform-runtime": "^7.17.10",
-    "@babel/preset-env": "^7.17.10",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/preset-typescript": "^7.16.7",
-    "@redux-devtools/core": "^3.12.0",
-    "@types/react": "^17.0.45",
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
-    "eslint": "^8.15.0",
+    "@babel/core": "^7.18.5",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/plugin-transform-runtime": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "@babel/preset-typescript": "^7.17.12",
+    "@redux-devtools/core": "^3.13.1",
+    "@types/react": "^18.0.14",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-react": "~7.28.0",
-    "eslint-plugin-react-hooks": "^4.5.0",
-    "react": "^17.0.2",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "react": "^18.2.0",
     "redux": "^4.2.0",
     "rimraf": "^3.0.2",
-    "typescript": "~4.6.4"
+    "typescript": "~4.7.4"
   },
   "peerDependencies": {
-    "@redux-devtools/core": "^3.7.0",
-    "@types/react": "^16.3.0 || ^17.0.0",
-    "react": "^16.3.0 || ^17.0.0",
+    "@redux-devtools/core": "^3.13.1",
+    "@types/react": "^16.3.0 || ^17.0.0 || ^18.0.0",
+    "react": "^16.3.0 || ^17.0.0 || ^18.0.0",
     "redux": "^3.4.0 || ^4.0.0"
   }
 }

@@ -1,5 +1,16 @@
 # test-demo
 
+## 0.1.10
+
+### Patch Changes
+
+- Updated dependencies [8a7eae4]
+  - @redux-devtools/dock-monitor@3.0.0
+  - @redux-devtools/inspector-monitor-test-tab@1.0.0
+  - @redux-devtools/inspector-monitor@3.0.0
+  - @redux-devtools/ui@1.3.0
+  - @redux-devtools/core@3.13.0
+
 ## 0.1.9
 
 ### Patch Changes

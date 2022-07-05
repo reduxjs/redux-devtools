@@ -1,5 +1,5 @@
 import { stringify, parse } from 'jsan';
-import socketCluster, { SCClientSocket } from 'socketcluster-client';
+import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
 import configureStore from './configureStore';
 import { defaultSocketOptions } from './constants';
 import getHostForRN from 'rn-host-detect';
@@ -179,7 +179,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
   store!: EnhancedStore<S, A, {}>;
   filters: LocalFilter | undefined;
   instanceId?: string;
-  socket?: SCClientSocket;
+  socket?: AGClientSocket;
   sendTo?: string;
   instanceName: string | undefined;
   appInstanceId!: string;
@@ -241,7 +241,8 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
   ) {
     const message: MessageToRelay = {
       type,
-      id: this.socket!.id,
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      id: this.socket!.id!,
       name: this.instanceName,
       instanceId: this.appInstanceId,
     };
@@ -279,7 +280,8 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     } else if (action) {
       message.action = action as ActionCreatorObject[];
     }
-    this.socket!.emit(this.socket!.id ? 'log' : 'log-noid', message);
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    void this.socket!.transmit(this.socket!.id ? 'log' : 'log-noid', message);
   }
 
   dispatchRemotely(
@@ -300,7 +302,9 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     if (
       message.type === 'IMPORT' ||
       (message.type === 'SYNC' &&
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         this.socket!.id &&
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         message.id !== this.socket!.id)
     ) {
       this.store.liftedStore.dispatch({
@@ -387,15 +391,22 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
   }
 
   login() {
-    this.socket!.emit('login', 'master', (err: Error, channelName: string) => {
-      if (err) {
-        console.log(err);
-        return;
+    void (async () => {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+        const channelName = (await this.socket!.invoke(
+          'login',
+          'master'
+        )) as string;
+        this.channel = channelName;
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+        for await (const data of this.socket!.subscribe(channelName)) {
+          this.handleMessages(data as Message<S, A>);
+        }
+      } catch (error) {
+        console.log(error);
       }
-      this.channel = channelName;
-      this.socket!.subscribe(channelName).watch(this.handleMessages);
-      this.socket!.on(channelName, this.handleMessages);
-    });
+    })();
     this.started = true;
     this.relay('START');
   }
@@ -404,11 +415,9 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     this.started = false;
     this.isMonitored = false;
     if (!this.socket) return;
-    this.socket.destroyChannel(this.channel!);
-    if (keepConnected) {
-      this.socket.off(this.channel, this.handleMessages);
-    } else {
-      this.socket.off();
+    void this.socket.unsubscribe(this.channel!);
+    this.socket.closeChannel(this.channel!);
+    if (!keepConnected) {
       this.socket.disconnect();
     }
   };
@@ -420,36 +429,48 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     )
       return;
 
-    this.socket = socketCluster.create(this.socketOptions);
+    this.socket = socketClusterClient.create(this.socketOptions);
 
-    this.socket.on('error', (err) => {
-      // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
-      // eslint-disable-next-line no-prototype-builtins
-      this.errorCounts[err.name] = this.errorCounts.hasOwnProperty(err.name)
-        ? this.errorCounts[err.name] + 1
-        : 1;
+    void (async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      for await (const data of this.socket!.listener('error')) {
+        // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
+        // eslint-disable-next-line no-prototype-builtins,@typescript-eslint/no-unsafe-argument
+        this.errorCounts[data.error.name] = this.errorCounts.hasOwnProperty(
+          data.error.name
+        )
+          ? this.errorCounts[data.error.name] + 1
+          : 1;
 
-      if (this.suppressConnectErrors) {
-        if (this.errorCounts[err.name] === 1) {
-          console.log(
-            'remote-redux-devtools: Socket connection errors are being suppressed. ' +
-              '\n' +
-              "This can be disabled by setting suppressConnectErrors to 'false'."
-          );
-          console.log(err);
+        if (this.suppressConnectErrors) {
+          if (this.errorCounts[data.error.name] === 1) {
+            console.log(
+              'remote-redux-devtools: Socket connection errors are being suppressed. ' +
+                '\n' +
+                "This can be disabled by setting suppressConnectErrors to 'false'."
+            );
+            console.log(data.error);
+          }
+        } else {
+          console.log(data.error);
         }
-      } else {
-        console.log(err);
       }
-    });
-    this.socket.on('connect', () => {
-      console.log('connected to remotedev-server');
-      this.errorCounts = {}; // clear the errorCounts object, so that we'll log any new errors in the event of a disconnect
-      this.login();
-    });
-    this.socket.on('disconnect', () => {
-      this.stop(true);
-    });
+    })();
+
+    void (async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      for await (const data of this.socket!.listener('connect')) {
+        console.log('connected to remotedev-server');
+        this.errorCounts = {}; // clear the errorCounts object, so that we'll log any new errors in the event of a disconnect
+        this.login();
+      }
+    })();
+    void (async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      for await (const data of this.socket!.listener('disconnect')) {
+        this.stop(true);
+      }
+    })();
   };
 
   checkForReducerErrors = (liftedState = this.getLiftedStateRaw()) => {

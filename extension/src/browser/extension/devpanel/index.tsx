@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
+import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Persistor } from 'redux-persist';
 import { REMOVE_INSTANCE, StoreAction } from '@redux-devtools/app';
@@ -27,23 +27,21 @@ let naTimeout: NodeJS.Timeout;
 
 const isChrome = navigator.userAgent.indexOf('Firefox') === -1;
 
-function renderDevTools() {
-  const node = document.getElementById('root');
-  unmountComponentAtNode(node!);
+function renderDevTools(root: Root) {
+  root.unmount();
   clearTimeout(naTimeout);
   ({ store, persistor } = configureStore(position, bgConnection));
-  render(
+  root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <App position={position} />
       </PersistGate>
-    </Provider>,
-    node
+    </Provider>
   );
   rendered = true;
 }
 
-function renderNA() {
+function renderNA(root: Root) {
   if (rendered === false) return;
   rendered = false;
   naTimeout = setTimeout(() => {
@@ -76,32 +74,31 @@ function renderNA() {
           );
         }
 
-        const node = document.getElementById('root');
-        unmountComponentAtNode(node!);
-        render(message, node);
+        root.unmount();
+        root.render(message);
         store = undefined;
       });
     } else {
-      const node = document.getElementById('root');
-      unmountComponentAtNode(node!);
-      render(message, node);
+      root.unmount();
+      root.render(message);
       store = undefined;
     }
   }, 3500);
 }
 
 function init(id: number) {
-  renderNA();
+  const root = createRoot(document.getElementById('root')!);
+  renderNA(root);
   bgConnection = chrome.runtime.connect({
     name: id ? id.toString() : undefined,
   });
   bgConnection.onMessage.addListener(
     <S, A extends Action<unknown>>(message: PanelMessage<S, A>) => {
       if (message.type === 'NA') {
-        if (message.id === id) renderNA();
+        if (message.id === id) renderNA(root);
         else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });
       } else {
-        if (!rendered) renderDevTools();
+        if (!rendered) renderDevTools(root);
         store!.dispatch(message);
       }
     }

@@ -17,7 +17,7 @@ describe('SegmentedControl', function () {
     );
     expect(container.firstChild).toMatchSnapshot();
   });
-  it('should handle the click event', () => {
+  it('should handle the click event', async () => {
     const onClick = jest.fn();
     render(
       <SegmentedControl
@@ -28,7 +28,7 @@ describe('SegmentedControl', function () {
       />
     );
 
-    userEvent.click(screen.getByRole('button', { name: 'Button1' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Button1' }));
     expect(onClick).toHaveBeenCalled();
   });
 });
