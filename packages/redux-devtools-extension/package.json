@@ -29,7 +29,8 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.18.3"
+    "@babel/runtime": "^7.18.3",
+    "immutable": "^4.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",

@@ -1157,11 +1157,13 @@ importers:
       '@typescript-eslint/parser': ^5.29.0
       eslint: ^8.18.0
       eslint-config-prettier: ^8.5.0
+      immutable: ^4.0.0
       redux: ^4.2.0
       rimraf: ^3.0.2
       typescript: ~4.7.4
     dependencies:
       '@babel/runtime': 7.18.3
+      immutable: 4.1.0
     devDependencies:
       '@babel/cli': 7.17.10_@babel+core@7.18.5
       '@babel/core': 7.18.5
@@ -5778,7 +5780,7 @@ packages:
       strict-event-emitter: 0.2.4
       uuid: 8.3.2
     optionalDependencies:
-      msw: 0.42.3_typescript@4.7.4
+      msw: 0.43.0_typescript@4.7.4
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -16437,6 +16439,44 @@ packages:
       - encoding
       - supports-color
     dev: false
+
+  /msw/0.43.0_typescript@4.7.4:
+    resolution: {integrity: sha512-XJylZP0qW3D5WUGWh9FFefJEl3MGG4y1I+/8a833d0eedm6B+GaPm6wPVZNcnlS2YVTagvEgShVJ7ZtY66tTRQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      typescript: '>= 4.2.x <= 4.7.x'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@mswjs/cookies': 0.2.1
+      '@mswjs/interceptors': 0.16.6
+      '@open-draft/until': 1.0.3
+      '@types/cookie': 0.4.1
+      '@types/js-levenshtein': 1.1.1
+      chalk: 4.1.1
+      chokidar: 3.5.3
+      cookie: 0.4.2
+      graphql: 16.5.0
+      headers-polyfill: 3.0.7
+      inquirer: 8.2.4
+      is-node-process: 1.0.1
+      js-levenshtein: 1.1.6
+      node-fetch: 2.6.7
+      outvariant: 1.3.0
+      path-to-regexp: 6.2.1
+      statuses: 2.0.1
+      strict-event-emitter: 0.2.4
+      type-fest: 1.4.0
+      typescript: 4.7.4
+      yargs: 17.5.1
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+    dev: false
+    optional: true
 
   /multicast-dns/7.2.5:
     resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
