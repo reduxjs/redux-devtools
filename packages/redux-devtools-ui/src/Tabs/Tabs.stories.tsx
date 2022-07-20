@@ -18,7 +18,7 @@ export default {
   component: Tabs,
 };
 
-const Template: Story<TabsProps<unknown>> = (args) => (
+const Template: Story<TabsProps<object>> = (args) => (
   <Container>
     <Tabs {...args} />
   </Container>
