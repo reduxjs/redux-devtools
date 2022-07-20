@@ -14,9 +14,7 @@ export interface TabsProps<P> {
   position: Position;
 }
 
-export default class Tabs<P extends JSX.IntrinsicAttributes> extends Component<
-  TabsProps<P>
-> {
+export default class Tabs<P extends object> extends Component<TabsProps<P>> {
   SelectedComponent?: React.ComponentType<P>;
   selector?: () => P;
 
