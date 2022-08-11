@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "rtk-query-demo",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "license": "MIT",
   "scripts": {
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
@@ -17,7 +17,7 @@
     "@mswjs/data": "^0.10.1",
     "@redux-devtools/core": "^3.13.0",
     "@redux-devtools/dock-monitor": "^3.0.0",
-    "@redux-devtools/rtk-query-monitor": "^3.0.0",
+    "@redux-devtools/rtk-query-monitor": "^3.1.0",
     "@reduxjs/toolkit": "^1.8.2",
     "framer-motion": "^6.3.15",
     "msw": "^0.43.0",
