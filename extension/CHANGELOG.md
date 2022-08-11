@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.0.14
+
+### Patch Changes
+
+- 24f60a7a: bump min popup window width to 760px #1126 #1129
+
 ## 3.0.13
 
 ### Patch Changes
