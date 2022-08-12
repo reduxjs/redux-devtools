@@ -823,7 +823,7 @@ importers:
       eslint-plugin-react: ^7.30.1
       eslint-plugin-react-hooks: ^4.6.0
       fork-ts-checker-webpack-plugin: ^7.2.13
-      html-loader: ^3.1.2
+      html-loader: ^4.1.0
       html-webpack-plugin: ^5.5.0
       javascript-stringify: ^2.1.0
       jest: ^27.5.1
@@ -909,7 +909,7 @@ importers:
       eslint-plugin-react: 7.30.1_eslint@8.21.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.21.0
       fork-ts-checker-webpack-plugin: 7.2.13_xnp4kzegbjokq62cajex2ovgkm
-      html-loader: 3.1.2_webpack@5.74.0
+      html-loader: 4.1.0_webpack@5.74.0
       html-webpack-plugin: 5.5.0_webpack@5.74.0
       jest: 27.5.1_ts-node@10.9.1
       path-browserify: 1.0.1
@@ -11970,6 +11970,11 @@ packages:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
     dev: true
 
+  /entities/4.3.1:
+    resolution: {integrity: sha512-o4q/dYJlmyjP2zfnaWDUC6A3BQFmVTX+tZPezK7k0GLSU9QYCauscf5Y+qcEPzKL+EixVouYDgLQK5H9GrLpkg==}
+    engines: {node: '>=0.12'}
+    dev: true
+
   /env-paths/2.2.1:
     resolution: {integrity: sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==}
     engines: {node: '>=6'}
@@ -13781,14 +13786,14 @@ packages:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
     dev: true
 
-  /html-loader/3.1.2_webpack@5.74.0:
-    resolution: {integrity: sha512-9WQlLiAV5N9fCna4MUmBW/ifaUbuFZ2r7IZmtXzhyfyi4zgPEjXsmsYCKs+yT873MzRj+f1WMjuAiPNA7C6Tcw==}
-    engines: {node: '>= 12.13.0'}
+  /html-loader/4.1.0_webpack@5.74.0:
+    resolution: {integrity: sha512-QDDNmLgn96NWtTPx/VXRerFXH0hn7cm4bruqsZ333GCb+rqiqGurcxtP/M52wcui1/iLiu0l5ms/McE7/Ik6aQ==}
+    engines: {node: '>= 14.15.0'}
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
       html-minifier-terser: 6.1.0
-      parse5: 6.0.1
+      parse5: 7.0.0
       webpack: 5.74.0_webpack-cli@4.10.0
     dev: true
 
@@ -17385,6 +17390,12 @@ packages:
 
   /parse5/6.0.1:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
+    dev: true
+
+  /parse5/7.0.0:
+    resolution: {integrity: sha512-y/t8IXSPWTuRZqXc0ajH/UwDj4mnqLEbSttNbThcFhGrZuOyoyvNBO85PBp2jQa55wY9d07PBNjsK8ZP3K5U6g==}
+    dependencies:
+      entities: 4.3.1
     dev: true
 
   /parseurl/1.3.3:
