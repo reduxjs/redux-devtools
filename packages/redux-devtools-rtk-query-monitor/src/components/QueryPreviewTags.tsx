@@ -1,10 +1,17 @@
 import React, { ReactNode, PureComponent } from 'react';
-import { RtkQueryTag } from '../types';
-import { TreeView } from './TreeView';
+import { QueryPreviewTabs, RtkQueryTag } from '../types';
+import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
+import { TreeView, TreeViewProps } from './TreeView';
 
 interface QueryPreviewTagsState {
   data: { tags: RtkQueryTag[] };
 }
+
+const rootProps: TreeViewProps['rootProps'] = {
+  'aria-labelledby': renderTabPanelButtonId(QueryPreviewTabs.queryTags),
+  id: renderTabPanelId(QueryPreviewTabs.queryTags),
+  role: 'tabpanel',
+};
 
 export interface QueryPreviewTagsProps {
   tags: RtkQueryTag[];
@@ -26,6 +33,8 @@ export class QueryPreviewTags extends PureComponent<
   render(): ReactNode {
     const { isWideLayout, tags } = this.props;
 
-    return <TreeView data={tags} isWideLayout={isWideLayout} />;
+    return (
+      <TreeView rootProps={rootProps} data={tags} isWideLayout={isWideLayout} />
+    );
   }
 }

@@ -23,30 +23,9 @@
       "groupName": "source-map"
     },
     {
-      "matchPackageNames": [
-        "react",
-        "react-dom",
-        "react-is",
-        "react-test-renderer",
-        "@testing-library/react",
-        "@testing-library/user-event",
-        "@types/react",
-        "@types/react-dom",
-        "@types/react-test-renderer",
-        "@chakra-ui/react"
-      ],
-      "matchUpdateTypes": ["major"],
-      "groupName": "react"
-    },
-    {
-      "matchPackageNames": [
-        "socketcluster-client",
-        "@types/socketcluster-client",
-        "socketcluster",
-        "@types/socketcluster-server"
-      ],
-      "matchUpdateTypes": ["major"],
-      "groupName": "socketcluster"
+      "matchPackageNames": ["@chakra-ui/react"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "groupName": "chakra-ui"
     }
   ]
 }

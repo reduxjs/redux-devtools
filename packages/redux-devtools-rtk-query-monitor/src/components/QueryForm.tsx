@@ -128,6 +128,7 @@ export class QueryForm extends React.PureComponent<
         {({ styling, base16Theme }) => {
           return (
             <form
+              id="rtk-query-monitor-query-selection-form"
               action="#"
               onSubmit={this.handleSubmit}
               {...styling('queryForm')}
