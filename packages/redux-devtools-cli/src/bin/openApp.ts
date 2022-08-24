@@ -33,7 +33,7 @@ export default async function openApp(app: true | string, options: Options) {
   }
 
   await open(
-    `http://localhost:${options.port}/`,
+    `${options.protocol}://${options.host ?? 'localhost'}:${options.port}/`,
     app !== 'browser' ? { app: { name: app } } : undefined
   );
 }
