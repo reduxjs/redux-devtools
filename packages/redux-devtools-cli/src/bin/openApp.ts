@@ -7,10 +7,15 @@ export default async function openApp(app: true | string, options: Options) {
   if (app === true || app === 'electron') {
     try {
       const port = options.port ? `--port=${options.port}` : '';
+      const host = options.host ? `--host=${options.host}` : '';
+      const protocol = options.protocol ? `--protocol=${options.protocol}` : '';
+
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       spawn.sync(require('electron') as string, [
         path.join(__dirname, '..', '..', 'app'),
         port,
+        host,
+        protocol,
       ]);
     } catch (error) {
       /* eslint-disable no-console */
