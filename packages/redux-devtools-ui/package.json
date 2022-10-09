@@ -25,8 +25,8 @@
   },
   "scripts": {
     "start": "pnpm run storybook",
-    "storybook": "start-storybook -p 6006 -s ./fonts",
-    "build:storybook": "build-storybook -s ./fonts",
+    "storybook": "start-storybook --port 6006 --static-dir ./fonts",
+    "build:storybook": "build-storybook --static-dir ./fonts --quiet",
     "build": "pnpm run build:lib && pnpm run build:storybook",
     "build:lib": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types && pnpm run build:css",
     "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
