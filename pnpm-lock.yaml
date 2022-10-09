@@ -6025,7 +6025,7 @@ packages:
       strict-event-emitter: 0.2.4
       uuid: 8.3.2
     optionalDependencies:
-      msw: 0.47.4_typescript@4.7.4
+      msw: 0.44.2_typescript@4.7.4
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -16674,44 +16674,6 @@ packages:
       - encoding
       - supports-color
     dev: false
-
-  /msw/0.47.4_typescript@4.7.4:
-    resolution: {integrity: sha512-Psftt8Yfl0+l+qqg9OlmKEsxF8S/vtda0CmlR6y8wTaWrMMzuCDa55n2hEGC0ZRDwuV6FFWc/4CjoDsBpATKBw==}
-    engines: {node: '>=14'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      typescript: '>= 4.2.x <= 4.8.x'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@mswjs/cookies': 0.2.2
-      '@mswjs/interceptors': 0.17.5
-      '@open-draft/until': 1.0.3
-      '@types/cookie': 0.4.1
-      '@types/js-levenshtein': 1.1.1
-      chalk: 4.1.1
-      chokidar: 3.5.3
-      cookie: 0.4.2
-      graphql: 16.5.0
-      headers-polyfill: 3.1.2
-      inquirer: 8.2.4
-      is-node-process: 1.0.1
-      js-levenshtein: 1.1.6
-      node-fetch: 2.6.7
-      outvariant: 1.3.0
-      path-to-regexp: 6.2.1
-      statuses: 2.0.1
-      strict-event-emitter: 0.2.7
-      type-fest: 2.19.0
-      typescript: 4.7.4
-      yargs: 17.5.1
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-    dev: false
-    optional: true
 
   /multicast-dns/7.2.5:
     resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
