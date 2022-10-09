@@ -68,7 +68,7 @@ importers:
       copy-webpack-plugin: ^11.0.0
       cross-env: ^7.0.3
       css-loader: ^6.7.1
-      electron: ^20.0.2
+      electron: ^21.1.0
       eslint: ^8.21.0
       eslint-config-airbnb: ^19.0.4
       eslint-plugin-import: ^2.26.0
@@ -145,7 +145,7 @@ importers:
       copy-webpack-plugin: 11.0.0_webpack@5.74.0
       cross-env: 7.0.3
       css-loader: 6.7.1_webpack@5.74.0
-      electron: 20.0.2
+      electron: 21.1.0
       eslint: 8.21.0
       eslint-config-airbnb: 19.0.4_oyn2uifcemcbkyuj2uapcqffk4
       eslint-plugin-import: 2.26.0_eslint@8.21.0
@@ -1008,7 +1008,7 @@ importers:
       chalk: ^4.1.2
       cors: ^2.8.5
       cross-spawn: ^7.0.3
-      electron: ^20.0.2
+      electron: ^21.1.0
       eslint: ^8.21.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^26.8.2
@@ -1043,7 +1043,7 @@ importers:
       chalk: 4.1.2
       cors: 2.8.5
       cross-spawn: 7.0.3
-      electron: 20.0.2
+      electron: 21.1.0
       express: 4.18.1
       getport: 0.1.0
       graphql: 16.5.0
@@ -8156,12 +8156,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: true
 
-  /@types/node/16.11.41:
-    resolution: {integrity: sha512-mqoYK2TnVjdkGk8qXAVGc/x9nSaTpSrFaGFm43BUH3IdoBV0nta6hYaGmdOvIMlbHJbUEVen3gvwpwovAZKNdQ==}
-
   /@types/node/16.11.47:
     resolution: {integrity: sha512-fpP+jk2zJ4VW66+wAMFoBJlx1bxmBKx4DUFf68UHgdGCOuyUTDlLWqsaNPJh7xhNDykyJ9eIzAygilP/4WoN8g==}
-    dev: true
 
   /@types/node/18.0.0:
     resolution: {integrity: sha512-cHlGmko4gWLVI27cGJntjs/Sj8th9aYwplmZFwmmgYQQvL5NUsgVJG7OddLvNfLqYS31KFN0s3qlaD9qCaxACA==}
@@ -11893,14 +11889,14 @@ packages:
   /electron-to-chromium/1.4.161:
     resolution: {integrity: sha512-sTjBRhqh6wFodzZtc5Iu8/R95OkwaPNn7tj/TaDU5nu/5EFiQDtADGAXdR4tJcTEHlYfJpHqigzJqHvPgehP8A==}
 
-  /electron/20.0.2:
-    resolution: {integrity: sha512-Op4nxSyXH0tXjhvWC+WDn9EI0gep5etPccainxu1A4wes+ZFQBMCBXxibotanJfG+WNW4RaOv88NArwHIsSmPw==}
+  /electron/21.1.0:
+    resolution: {integrity: sha512-CM5VZpZPtAoPgTPcmEbRaZWXlxGuD5a5DTeAwm0F0F6/k6R3HZAi8vZnE77gwuHK/Qqcinw4/MAbiCwAKh2W+g==}
     engines: {node: '>= 10.17.0'}
     hasBin: true
     requiresBuild: true
     dependencies:
       '@electron/get': 1.14.1
-      '@types/node': 16.11.41
+      '@types/node': 16.11.47
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
@@ -15436,7 +15432,7 @@ packages:
     hasBin: true
 
   /json-buffer/3.0.0:
-    resolution: {integrity: sha512-CuUqjv0FUZIdXkHPI8MezCnFCdaTAacej1TZYulLoAg1h/PhwkdXFN4V/gzY4g+fMBCOV2xF+rp7t2XD2ns/NQ==}
+    resolution: {integrity: sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=}
 
   /json-parse-better-errors/1.0.2:
     resolution: {integrity: sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==}
