@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Base16Theme } from 'redux-devtools-themes';
 import { Action } from 'redux';
-import { StylingFunction } from 'react-base16-styling';
+import type { StylingFunction } from 'react-base16-styling';
 import { PerformAction } from '@redux-devtools/core';
 import { Delta } from 'jsondiffpatch';
 import { DEFAULT_STATE, DevtoolsInspectorState } from './redux';
