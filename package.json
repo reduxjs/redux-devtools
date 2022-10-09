@@ -1,21 +1,21 @@
 {
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.18.10",
-    "@babel/eslint-parser": "^7.18.9",
-    "@changesets/cli": "^2.24.2",
-    "@typescript-eslint/eslint-plugin": "^5.33.0",
-    "@typescript-eslint/parser": "^5.33.0",
-    "eslint": "^8.21.0",
+    "@babel/core": "^7.19.3",
+    "@babel/eslint-parser": "^7.19.1",
+    "@changesets/cli": "^2.25.0",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-jest": "^26.8.2",
-    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-jest": "^26.9.0",
+    "eslint-plugin-react": "^7.31.9",
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^27.5.1",
     "prettier": "2.7.1",
     "typescript": "~4.7.4",
-    "nx": "^14.5.4",
-    "@nrwl/nx-cloud": "^14.3.0"
+    "nx": "^14.8.3",
+    "@nrwl/nx-cloud": "^14.7.0"
   },
   "scripts": {
     "format": "prettier --write .",
@@ -38,7 +38,7 @@
     "packages/redux-devtools-rtk-query-monitor/demo",
     "packages/redux-devtools-slider-monitor/examples/todomvc"
   ],
-  "packageManager": "pnpm@7.9.0",
+  "packageManager": "pnpm@7.13.3",
   "pnpm": {
     "overrides": {
       "@babel/highlight>chalk": "Methuselah96/chalk#v2-without-process"
