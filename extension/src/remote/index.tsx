@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Root } from '@redux-devtools/app';
 
-import '../../views/remote.pug';
+import './remote.pug';
 
 chrome.storage.local.get(
   {

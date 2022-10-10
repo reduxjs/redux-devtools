@@ -9,8 +9,8 @@ import {
   theme,
   StoreState,
 } from '@redux-devtools/app';
-import instances from './instances';
-import { WindowStoreAction } from '../../stores/windowStore';
+import instances from './instancesReducer';
+import type { WindowStoreAction } from './windowStore';
 
 const rootReducer: Reducer<StoreState, WindowStoreAction> =
   combineReducers<StoreState>({

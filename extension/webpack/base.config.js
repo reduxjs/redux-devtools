@@ -12,8 +12,8 @@ const baseConfig = (params) => ({
   entry: params.input || {
     background: [mock, '../src/background/index'],
     options: [mock, '../src/options/index'],
-    window: [`${extpath}window/index`],
-    remote: [`${extpath}window/remote`],
+    window: ['../src/window/index'],
+    remote: ['../src/remote/index'],
     devpanel: [mock, '../src/devpanel/index'],
     devtools: ['../src/devtools/index'],
     content: [mock, `${extpath}inject/contentScript`],

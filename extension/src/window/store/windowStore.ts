@@ -17,9 +17,9 @@ import {
   StoreState,
   UpdateStateAction,
 } from '@redux-devtools/app';
-import syncStores from '../middlewares/windowSync';
-import instanceSelector from '../middlewares/instanceSelector';
-import rootReducer from '../reducers/window';
+import syncStores from './windowSyncMiddleware';
+import instanceSelector from './instanceSelectorMiddleware';
+import rootReducer from './windowReducer';
 import type { BackgroundState } from '../../background/store/backgroundReducer';
 import type { BackgroundAction } from '../../background/store/backgroundStore';
 import type {

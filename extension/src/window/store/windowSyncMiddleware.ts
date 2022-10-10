@@ -8,7 +8,7 @@ import {
 } from '@redux-devtools/app';
 import { Dispatch, MiddlewareAPI, Store } from 'redux';
 import type { BackgroundState } from '../../background/store/backgroundReducer';
-import { WindowStoreAction } from '../stores/windowStore';
+import type { WindowStoreAction } from './windowStore';
 import type { BackgroundAction } from '../../background/store/backgroundStore';
 
 const syncStores =

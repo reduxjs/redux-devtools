@@ -6,10 +6,10 @@ import {
   LIFTED_ACTION,
   SET_PERSIST,
 } from '@redux-devtools/app';
-import {
+import type {
   ExpandedUpdateStateAction,
   WindowStoreAction,
-} from '../../stores/windowStore';
+} from './windowStore';
 
 export default function instances(
   state = instancesInitialState,
