@@ -3,21 +3,30 @@ import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-const extpath = path.join(__dirname, '../src/browser/extension/');
-const mock = `${extpath}chromeAPIMock`;
-
 const baseConfig = (params) => ({
   // devtool: 'source-map',
   mode: params.mode,
   entry: params.input || {
-    background: [mock, `${extpath}background/index`],
-    options: [mock, `${extpath}options/index`],
-    window: [`${extpath}window/index`],
-    remote: [`${extpath}window/remote`],
-    devpanel: [mock, `${extpath}devpanel/index`],
-    devtools: [`${extpath}devtools/index`],
-    content: [mock, `${extpath}inject/contentScript`],
-    pagewrap: [`${extpath}inject/pageScriptWrap`],
+    background: [
+      path.resolve(__dirname, '../src/chromeApiMock'),
+      path.resolve(__dirname, '../src/background/index'),
+    ],
+    options: [
+      path.resolve(__dirname, '../src/chromeApiMock'),
+      path.resolve(__dirname, '../src/options/index'),
+    ],
+    window: [path.resolve(__dirname, '../src/window/index')],
+    remote: [path.resolve(__dirname, '../src/remote/index')],
+    devpanel: [
+      path.resolve(__dirname, '../src/chromeApiMock'),
+      path.resolve(__dirname, '../src/devpanel/index'),
+    ],
+    devtools: [path.resolve(__dirname, '../src/devtools/index')],
+    content: [
+      path.resolve(__dirname, '../src/chromeApiMock'),
+      path.resolve(__dirname, '../src/contentScript/index'),
+    ],
+    pagewrap: [path.resolve(__dirname, '../src/pageScriptWrap')],
     ...params.inputExtra,
   },
   output: {
