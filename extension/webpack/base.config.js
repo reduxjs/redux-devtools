@@ -7,14 +7,26 @@ const baseConfig = (params) => ({
   // devtool: 'source-map',
   mode: params.mode,
   entry: params.input || {
-    background: ['../src/chromeApiMock', '../src/background/index'],
-    options: ['../src/chromeApiMock', '../src/options/index'],
-    window: ['../src/window/index'],
-    remote: ['../src/remote/index'],
-    devpanel: ['../src/chromeApiMock', '../src/devpanel/index'],
-    devtools: ['../src/devtools/index'],
-    content: ['../src/chromeApiMock', '../src/contentScript/index'],
-    pagewrap: ['../src/pageScriptWrap'],
+    background: [
+      path.resolve(__dirname, '../src/chromeApiMock'),
+      path.resolve(__dirname, '../src/background/index'),
+    ],
+    options: [
+      path.resolve(__dirname, '../src/chromeApiMock'),
+      path.resolve(__dirname, '../src/options/index'),
+    ],
+    window: [path.resolve(__dirname, '../src/window/index')],
+    remote: [path.resolve(__dirname, '../src/remote/index')],
+    devpanel: [
+      path.resolve(__dirname, '../src/chromeApiMock'),
+      path.resolve(__dirname, '../src/devpanel/index'),
+    ],
+    devtools: [path.resolve(__dirname, '../src/devtools/index')],
+    content: [
+      path.resolve(__dirname, '../src/chromeApiMock'),
+      path.resolve(__dirname, '../src/contentScript/index'),
+    ],
+    pagewrap: [path.resolve(__dirname, '../src/pageScriptWrap')],
     ...params.inputExtra,
   },
   output: {
