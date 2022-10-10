@@ -10,7 +10,7 @@ const baseConfig = (params) => ({
   // devtool: 'source-map',
   mode: params.mode,
   entry: params.input || {
-    background: [mock, `${extpath}background/index`],
+    background: [mock, '../src/background/index'],
     options: [mock, `${extpath}options/index`],
     window: [`${extpath}window/index`],
     remote: [`${extpath}window/remote`],

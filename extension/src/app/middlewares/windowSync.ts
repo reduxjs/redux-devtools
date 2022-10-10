@@ -7,9 +7,9 @@ import {
   UPDATE_STATE,
 } from '@redux-devtools/app';
 import { Dispatch, MiddlewareAPI, Store } from 'redux';
-import { BackgroundState } from '../reducers/background';
+import type { BackgroundState } from '../../background/store/backgroundReducer';
 import { WindowStoreAction } from '../stores/windowStore';
-import { BackgroundAction } from '../stores/backgroundStore';
+import type { BackgroundAction } from '../../background/store/backgroundStore';
 
 const syncStores =
   (baseStore: Store<BackgroundState, BackgroundAction>) =>

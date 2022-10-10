@@ -5,15 +5,15 @@ import { getActionsArray, getLocalFilter } from '@redux-devtools/utils';
 import { isFiltered, PartialLiftedState } from './filters';
 import importState from './importState';
 import generateId from './generateInstanceId';
-import { Config } from '../../browser/extension/inject/pageScript';
+import type { Config } from '../../browser/extension/inject/pageScript';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LibConfig } from '@redux-devtools/app';
-import {
+import type {
   ContentScriptToPageScriptMessage,
   ListenerMessage,
 } from '../../browser/extension/inject/contentScript';
-import { Position } from './openWindow';
+import type { Position } from './openWindow';
 
 const listeners: {
   [instanceId: string]:

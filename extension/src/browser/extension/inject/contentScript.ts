@@ -3,7 +3,7 @@ import {
   getOptionsFromBg,
   isAllowed,
 } from '../options/syncOptions';
-import { TabMessage } from '../../../app/middlewares/api';
+import type { TabMessage } from '../../../background/store/apiMiddleware';
 import {
   PageScriptToContentScriptMessage,
   PageScriptToContentScriptMessageWithoutDisconnect,

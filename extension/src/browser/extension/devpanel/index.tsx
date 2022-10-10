@@ -8,7 +8,7 @@ import configureStore from '../../../app/stores/panelStore';
 
 import '../../views/devpanel.pug';
 import { Action, Store } from 'redux';
-import { PanelMessage } from '../../../app/middlewares/api';
+import type { PanelMessage } from '../../../background/store/apiMiddleware';
 import { StoreStateWithoutSocket } from '../../../app/reducers/panel';
 import { PersistGate } from 'redux-persist/integration/react';
 

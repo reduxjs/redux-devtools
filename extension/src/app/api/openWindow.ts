@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { PageScriptToContentScriptMessage } from './index';
+import type { PageScriptToContentScriptMessage } from './index';
 
 export type Position = 'left' | 'right' | 'bottom' | 'panel' | 'remote';
 

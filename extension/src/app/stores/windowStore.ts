@@ -20,9 +20,12 @@ import {
 import syncStores from '../middlewares/windowSync';
 import instanceSelector from '../middlewares/instanceSelector';
 import rootReducer from '../reducers/window';
-import { BackgroundState } from '../reducers/background';
-import { BackgroundAction } from './backgroundStore';
-import { EmptyUpdateStateAction, NAAction } from '../middlewares/api';
+import type { BackgroundState } from '../../background/store/backgroundReducer';
+import type { BackgroundAction } from '../../background/store/backgroundStore';
+import type {
+  EmptyUpdateStateAction,
+  NAAction,
+} from '../../background/store/apiMiddleware';
 
 export interface ExpandedUpdateStateAction extends UpdateStateAction {
   readonly instances: InstancesState;

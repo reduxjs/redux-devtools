@@ -16,27 +16,22 @@ import syncOptions, {
   OptionsMessage,
   SyncOptions,
 } from '../../browser/extension/options/syncOptions';
-import openDevToolsWindow, {
-  DevToolsPosition,
-} from '../../browser/extension/background/openWindow';
-import { getReport } from '../../browser/extension/background/logging';
+import openDevToolsWindow, { DevToolsPosition } from '../openWindow';
+import { getReport } from '../logging';
 import { Action, Dispatch, MiddlewareAPI } from 'redux';
 import {
   ContentScriptToBackgroundMessage,
   SplitMessage,
 } from '../../browser/extension/inject/contentScript';
-import {
+import type {
   ErrorMessage,
   PageScriptToContentScriptMessageForwardedToMonitors,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
-} from '../api';
+} from '../../app/api';
 import { LiftedState } from '@redux-devtools/instrument';
-import {
-  BackgroundAction,
-  LiftedActionAction,
-} from '../stores/backgroundStore';
-import { Position } from '../api/openWindow';
-import { BackgroundState } from '../reducers/background';
+import type { BackgroundAction, LiftedActionAction } from './backgroundStore';
+import type { Position } from '../../app/api/openWindow';
+import type { BackgroundState } from './backgroundReducer';
 
 interface TabMessageBase {
   readonly type: string;

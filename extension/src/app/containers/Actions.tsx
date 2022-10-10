@@ -20,7 +20,7 @@ import {
 import { GoRadioTower } from 'react-icons/go';
 import { MdBorderBottom, MdBorderLeft, MdBorderRight } from 'react-icons/md';
 import { Position } from '../api/openWindow';
-import { SingleMessage } from '../middlewares/api';
+import type { SingleMessage } from '../../background/store/apiMiddleware';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

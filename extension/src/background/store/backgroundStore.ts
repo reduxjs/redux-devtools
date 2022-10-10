@@ -5,8 +5,8 @@ import {
   LIFTED_ACTION,
   StoreActionWithoutLiftedAction,
 } from '@redux-devtools/app';
-import rootReducer, { BackgroundState } from '../reducers/background';
-import api, { CONNECTED, DISCONNECTED } from '../middlewares/api';
+import rootReducer, { BackgroundState } from './backgroundReducer';
+import api, { CONNECTED, DISCONNECTED } from './apiMiddleware';
 
 interface LiftedActionActionBase {
   action?: DispatchAction | string | CustomAction;

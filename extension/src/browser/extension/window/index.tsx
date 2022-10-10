@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { UPDATE_STATE } from '@redux-devtools/app';
 import App from '../../../app/containers/App';
 import configureStore from '../../../app/stores/windowStore';
-import { MonitorMessage } from '../../../app/middlewares/api';
+import type { MonitorMessage } from '../../../background/store/apiMiddleware';
 
 import '../../views/window.pug';
 

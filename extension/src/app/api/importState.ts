@@ -1,6 +1,6 @@
 import jsan from 'jsan';
 import { immutableSerialize } from '@redux-devtools/serialize';
-import {
+import type {
   Config,
   SerializeWithImmutable,
 } from '../../browser/extension/inject/pageScript';
