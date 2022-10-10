@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, Reducer } from 'redux';
 import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { exportStateMiddleware, StoreAction } from '@redux-devtools/app';
-import panelDispatcher from '../middlewares/panelSync';
-import rootReducer, { StoreStateWithoutSocket } from '../reducers/panel';
+import panelDispatcher from './panelSyncMiddleware';
+import rootReducer, { StoreStateWithoutSocket } from './panelReducer';
 
 const persistConfig = {
   key: 'redux-devtools',

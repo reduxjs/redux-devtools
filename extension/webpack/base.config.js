@@ -14,7 +14,7 @@ const baseConfig = (params) => ({
     options: [mock, `${extpath}options/index`],
     window: [`${extpath}window/index`],
     remote: [`${extpath}window/remote`],
-    devpanel: [mock, `${extpath}devpanel/index`],
+    devpanel: [mock, '../src/devpanel/index'],
     devtools: [`${extpath}devtools/index`],
     content: [mock, `${extpath}inject/contentScript`],
     pagewrap: [`${extpath}inject/pageScriptWrap`],

@@ -3,13 +3,13 @@ import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Persistor } from 'redux-persist';
 import { REMOVE_INSTANCE, StoreAction } from '@redux-devtools/app';
-import App from '../../../app/containers/App';
-import configureStore from '../../../app/stores/panelStore';
+import App from '../app/containers/App';
+import configureStore from './store/panelStore';
 
 import '../../views/devpanel.pug';
 import { Action, Store } from 'redux';
-import type { PanelMessage } from '../../../background/store/apiMiddleware';
-import { StoreStateWithoutSocket } from '../../../app/reducers/panel';
+import type { PanelMessage } from '../background/store/apiMiddleware';
+import type { StoreStateWithoutSocket } from './store/panelReducer';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const position = location.hash;
