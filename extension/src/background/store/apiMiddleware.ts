@@ -19,10 +19,10 @@ import syncOptions, {
 import openDevToolsWindow, { DevToolsPosition } from '../openWindow';
 import { getReport } from '../logging';
 import { Action, Dispatch, MiddlewareAPI } from 'redux';
-import {
+import type {
   ContentScriptToBackgroundMessage,
   SplitMessage,
-} from '../../browser/extension/inject/contentScript';
+} from '../../contentScript';
 import type {
   ErrorMessage,
   PageScriptToContentScriptMessageForwardedToMonitors,

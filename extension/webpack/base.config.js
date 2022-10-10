@@ -15,7 +15,7 @@ const baseConfig = (params) => ({
     remote: ['../src/remote/index'],
     devpanel: ['../src/chromeApiMock', '../src/devpanel/index'],
     devtools: ['../src/devtools/index'],
-    content: ['../src/chromeApiMock', `${extpath}inject/contentScript`],
+    content: ['../src/chromeApiMock', '../src/contentScript/index'],
     pagewrap: [`${extpath}inject/pageScriptWrap`],
     ...params.inputExtra,
   },

@@ -2,13 +2,13 @@ import {
   injectOptions,
   getOptionsFromBg,
   isAllowed,
-} from '../../../options/syncOptions';
-import type { TabMessage } from '../../../background/store/apiMiddleware';
-import {
+} from '../options/syncOptions';
+import type { TabMessage } from '../background/store/apiMiddleware';
+import type {
   PageScriptToContentScriptMessage,
   PageScriptToContentScriptMessageWithoutDisconnect,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
-} from '../../../app/api';
+} from '../app/api';
 import { Action } from 'redux';
 import {
   CustomAction,

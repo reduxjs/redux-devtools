@@ -12,7 +12,7 @@ import { LibConfig } from '@redux-devtools/app';
 import type {
   ContentScriptToPageScriptMessage,
   ListenerMessage,
-} from '../../browser/extension/inject/contentScript';
+} from '../../contentScript';
 import type { Position } from './openWindow';
 
 const listeners: {

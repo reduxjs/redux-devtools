@@ -52,7 +52,7 @@ import {
   StructuralPerformAction,
   ConnectResponse,
 } from '../../../app/api';
-import { ContentScriptToPageScriptMessage } from './contentScript';
+import type { ContentScriptToPageScriptMessage } from '../../../contentScript';
 
 type EnhancedStoreWithInitialDispatch<
   S,
