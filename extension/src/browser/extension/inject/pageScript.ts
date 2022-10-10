@@ -28,7 +28,7 @@ import {
   Features,
 } from '@redux-devtools/app';
 import configureStore, { getUrlParam } from '../../../app/stores/enhancerStore';
-import { isAllowed, Options } from '../options/syncOptions';
+import { isAllowed, Options } from '../../../options/syncOptions';
 import Monitor from '../../../app/service/Monitor';
 import {
   noFiltersApplied,

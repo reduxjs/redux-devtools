@@ -2,7 +2,7 @@ import {
   injectOptions,
   getOptionsFromBg,
   isAllowed,
-} from '../options/syncOptions';
+} from '../../../options/syncOptions';
 import type { TabMessage } from '../../../background/store/apiMiddleware';
 import {
   PageScriptToContentScriptMessage,

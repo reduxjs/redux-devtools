@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import OptionsComponent from './Options';
 import { Options } from './syncOptions';
 
-import '../../views/options.pug';
+import './options.pug';
 
 chrome.runtime.getBackgroundPage((background) => {
   const syncOptions = background!.syncOptions;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilterState } from '../../../app/api/filters';
+import { FilterState } from '../app/api/filters';
 import { OptionsProps } from './Options';
 
 export default ({ options, saveOption }: OptionsProps) => {

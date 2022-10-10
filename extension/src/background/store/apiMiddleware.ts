@@ -15,7 +15,7 @@ import syncOptions, {
   Options,
   OptionsMessage,
   SyncOptions,
-} from '../../browser/extension/options/syncOptions';
+} from '../../options/syncOptions';
 import openDevToolsWindow, { DevToolsPosition } from '../openWindow';
 import { getReport } from '../logging';
 import { Action, Dispatch, MiddlewareAPI } from 'redux';

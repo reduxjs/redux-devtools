@@ -11,11 +11,11 @@ const baseConfig = (params) => ({
   mode: params.mode,
   entry: params.input || {
     background: [mock, '../src/background/index'],
-    options: [mock, `${extpath}options/index`],
+    options: [mock, '../src/options/index'],
     window: [`${extpath}window/index`],
     remote: [`${extpath}window/remote`],
     devpanel: [mock, '../src/devpanel/index'],
-    devtools: [`${extpath}devtools/index`],
+    devtools: ['../src/devtools/index'],
     content: [mock, `${extpath}inject/contentScript`],
     pagewrap: [`${extpath}inject/pageScriptWrap`],
     ...params.inputExtra,
