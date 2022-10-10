@@ -18,7 +18,7 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-const { store } = configureStore(store);
+const { store } = configureStore();
 
 describe('App container', () => {
   it("should render inspector monitor's component", () => {

@@ -1,3 +1,5 @@
+export type { Base16Theme } from 'base16';
+
 export { default as Container } from './Container';
 export { default as Button } from './Button';
 export { default as ContextMenu } from './ContextMenu';
