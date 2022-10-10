@@ -4,19 +4,18 @@ import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const extpath = path.join(__dirname, '../src/browser/extension/');
-const mock = `${extpath}chromeAPIMock`;
 
 const baseConfig = (params) => ({
   // devtool: 'source-map',
   mode: params.mode,
   entry: params.input || {
-    background: [mock, '../src/background/index'],
-    options: [mock, '../src/options/index'],
+    background: ['../src/chromeApiMock', '../src/background/index'],
+    options: ['../src/chromeApiMock', '../src/options/index'],
     window: ['../src/window/index'],
     remote: ['../src/remote/index'],
-    devpanel: [mock, '../src/devpanel/index'],
+    devpanel: ['../src/chromeApiMock', '../src/devpanel/index'],
     devtools: ['../src/devtools/index'],
-    content: [mock, `${extpath}inject/contentScript`],
+    content: ['../src/chromeApiMock', `${extpath}inject/contentScript`],
     pagewrap: [`${extpath}inject/pageScriptWrap`],
     ...params.inputExtra,
   },
