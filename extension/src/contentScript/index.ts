@@ -8,7 +8,7 @@ import type {
   PageScriptToContentScriptMessage,
   PageScriptToContentScriptMessageWithoutDisconnect,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
-} from '../app/api';
+} from '../pageScript/api';
 import { Action } from 'redux';
 import {
   CustomAction,

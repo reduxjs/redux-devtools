@@ -3,8 +3,6 @@ import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-const extpath = path.join(__dirname, '../src/browser/extension/');
-
 const baseConfig = (params) => ({
   // devtool: 'source-map',
   mode: params.mode,
@@ -16,7 +14,7 @@ const baseConfig = (params) => ({
     devpanel: ['../src/chromeApiMock', '../src/devpanel/index'],
     devtools: ['../src/devtools/index'],
     content: ['../src/chromeApiMock', '../src/contentScript/index'],
-    pagewrap: [`${extpath}inject/pageScriptWrap`],
+    pagewrap: ['../src/pageScriptWrap'],
     ...params.inputExtra,
   },
   output: {

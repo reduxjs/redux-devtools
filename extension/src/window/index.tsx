@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { UPDATE_STATE } from '@redux-devtools/app';
-import App from '../app/containers/App';
+import App from '../app/App';
 import configureStore from './store/windowStore';
 import type { MonitorMessage } from '../background/store/apiMiddleware';
 

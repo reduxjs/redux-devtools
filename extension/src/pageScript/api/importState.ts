@@ -1,9 +1,6 @@
 import jsan from 'jsan';
 import { immutableSerialize } from '@redux-devtools/serialize';
-import type {
-  Config,
-  SerializeWithImmutable,
-} from '../../browser/extension/inject/pageScript';
+import type { Config, SerializeWithImmutable } from '../index';
 import Immutable from 'immutable';
 import { LiftedState } from '@redux-devtools/instrument';
 import { Action } from 'redux';

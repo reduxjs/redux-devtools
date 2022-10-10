@@ -27,10 +27,10 @@ import type {
   ErrorMessage,
   PageScriptToContentScriptMessageForwardedToMonitors,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
-} from '../../app/api';
+} from '../../pageScript/api';
 import { LiftedState } from '@redux-devtools/instrument';
 import type { BackgroundAction, LiftedActionAction } from './backgroundStore';
-import type { Position } from '../../app/api/openWindow';
+import type { Position } from '../../pageScript/api/openWindow';
 import type { BackgroundState } from './backgroundReducer';
 
 interface TabMessageBase {

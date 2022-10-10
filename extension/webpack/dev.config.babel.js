@@ -5,7 +5,7 @@ import baseConfig from './base.config';
 let config = baseConfig({
   mode: 'development',
   inputExtra: {
-    page: [path.join(__dirname, '../src/browser/extension/inject/pageScript')],
+    page: [path.join(__dirname, '../src/pageScript')],
   },
   output: { path: path.join(__dirname, '../dev') },
   globals: {

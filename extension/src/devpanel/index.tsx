@@ -3,7 +3,7 @@ import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Persistor } from 'redux-persist';
 import { REMOVE_INSTANCE, StoreAction } from '@redux-devtools/app';
-import App from '../app/containers/App';
+import App from '../app/App';
 import configureStore from './store/panelStore';
 
 import '../../views/devpanel.pug';

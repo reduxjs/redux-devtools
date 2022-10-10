@@ -19,8 +19,8 @@ import {
 } from '@redux-devtools/app';
 import { GoRadioTower } from 'react-icons/go';
 import { MdBorderBottom, MdBorderLeft, MdBorderRight } from 'react-icons/md';
-import { Position } from '../api/openWindow';
-import type { SingleMessage } from '../../background/store/apiMiddleware';
+import type { Position } from '../pageScript/api/openWindow';
+import type { SingleMessage } from '../background/store/apiMiddleware';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

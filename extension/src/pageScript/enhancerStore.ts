@@ -1,7 +1,7 @@
 import { Action, compose, Reducer, StoreEnhancerStoreCreator } from 'redux';
 import { instrument } from '@redux-devtools/instrument';
 import { persistState } from '@redux-devtools/core';
-import { ConfigWithExpandedMaxAge } from '../../browser/extension/inject/pageScript';
+import type { ConfigWithExpandedMaxAge } from './index';
 
 export function getUrlParam(key: string) {
   const matches = window.location.href.match(

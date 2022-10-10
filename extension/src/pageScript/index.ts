@@ -27,19 +27,19 @@ import {
   LibConfig,
   Features,
 } from '@redux-devtools/app';
-import configureStore, { getUrlParam } from '../../../app/stores/enhancerStore';
-import { isAllowed, Options } from '../../../options/syncOptions';
-import Monitor from '../../../app/service/Monitor';
+import configureStore, { getUrlParam } from './enhancerStore';
+import { isAllowed, Options } from '../options/syncOptions';
+import Monitor from './Monitor';
 import {
   noFiltersApplied,
   isFiltered,
   filterState,
   startingFrom,
-} from '../../../app/api/filters';
-import notifyErrors from '../../../app/api/notifyErrors';
-import importState from '../../../app/api/importState';
-import openWindow, { Position } from '../../../app/api/openWindow';
-import generateId from '../../../app/api/generateInstanceId';
+} from './api/filters';
+import notifyErrors from './api/notifyErrors';
+import importState from './api/importState';
+import openWindow, { Position } from './api/openWindow';
+import generateId from './api/generateInstanceId';
 import {
   toContentScript,
   sendMessage,
@@ -51,8 +51,8 @@ import {
   Serialize,
   StructuralPerformAction,
   ConnectResponse,
-} from '../../../app/api';
-import type { ContentScriptToPageScriptMessage } from '../../../contentScript';
+} from './api';
+import type { ContentScriptToPageScriptMessage } from '../contentScript';
 
 type EnhancedStoreWithInitialDispatch<
   S,
