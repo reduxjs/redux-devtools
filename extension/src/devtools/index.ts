@@ -1,4 +1,4 @@
-import '../../views/devtools.pug';
+import './devtools.pug';
 
 function createPanel(url: string) {
   chrome.devtools.panels.create(
