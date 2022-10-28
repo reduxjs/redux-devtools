@@ -182,6 +182,7 @@ importers:
       '@rollup/plugin-babel': ^6.0.0
       '@rollup/plugin-commonjs': ^23.0.0
       '@rollup/plugin-node-resolve': ^15.0.0
+      '@rollup/plugin-terser': ^0.1.0
       '@types/d3': ^3.5.47
       '@types/node': ^16.11.66
       '@types/ramda': ^0.28.16
@@ -196,7 +197,6 @@ importers:
       ramda: ^0.28.0
       rimraf: ^3.0.2
       rollup: ^2.79.1
-      rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.34.1
       tslib: ^2.4.0
       typescript: ~4.8.4
@@ -218,6 +218,7 @@ importers:
       '@rollup/plugin-babel': 6.0.0_vy4anxjpv2s44kyfi2kxqu576u
       '@rollup/plugin-commonjs': 23.0.0_rollup@2.79.1
       '@rollup/plugin-node-resolve': 15.0.0_rollup@2.79.1
+      '@rollup/plugin-terser': 0.1.0_rollup@2.79.1
       '@types/node': 16.11.66
       '@types/ramda': 0.28.16
       '@typescript-eslint/eslint-plugin': 5.40.1_ukgdydjtebaxmxfqp5v5ulh64y
@@ -226,7 +227,6 @@ importers:
       eslint-config-prettier: 8.5.0_eslint@8.25.0
       rimraf: 3.0.2
       rollup: 2.79.1
-      rollup-plugin-terser: 7.0.2_rollup@2.79.1
       rollup-plugin-typescript2: 0.34.1_gypgyaqhine6mwjfvh7icfhviq
       tslib: 2.4.0
       typescript: 4.8.4
@@ -286,6 +286,7 @@ importers:
       '@rollup/plugin-babel': ^6.0.0
       '@rollup/plugin-commonjs': ^23.0.0
       '@rollup/plugin-node-resolve': ^15.0.0
+      '@rollup/plugin-terser': ^0.1.0
       '@types/d3': ^3.5.47
       '@types/node': ^16.11.66
       '@types/ramda': ^0.28.16
@@ -297,7 +298,6 @@ importers:
       ramda: ^0.28.0
       rimraf: ^3.0.2
       rollup: ^2.79.1
-      rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.34.1
       tslib: ^2.4.0
       typescript: ~4.8.4
@@ -314,6 +314,7 @@ importers:
       '@rollup/plugin-babel': 6.0.0_vy4anxjpv2s44kyfi2kxqu576u
       '@rollup/plugin-commonjs': 23.0.0_rollup@2.79.1
       '@rollup/plugin-node-resolve': 15.0.0_rollup@2.79.1
+      '@rollup/plugin-terser': 0.1.0_rollup@2.79.1
       '@types/d3': 3.5.47
       '@types/node': 16.11.66
       '@types/ramda': 0.28.16
@@ -324,7 +325,6 @@ importers:
       eslint-config-prettier: 8.5.0_eslint@8.25.0
       rimraf: 3.0.2
       rollup: 2.79.1
-      rollup-plugin-terser: 7.0.2_rollup@2.79.1
       rollup-plugin-typescript2: 0.34.1_gypgyaqhine6mwjfvh7icfhviq
       tslib: 2.4.0
       typescript: 4.8.4
@@ -341,6 +341,7 @@ importers:
       '@rollup/plugin-babel': ^6.0.0
       '@rollup/plugin-commonjs': ^23.0.0
       '@rollup/plugin-node-resolve': ^15.0.0
+      '@rollup/plugin-terser': ^0.1.0
       '@types/jest': ^27.5.2
       '@types/lodash': ^4.14.186
       '@types/node': ^16.11.66
@@ -354,7 +355,6 @@ importers:
       lodash: ^4.17.21
       rimraf: ^3.0.2
       rollup: ^2.79.1
-      rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.34.1
       ts-jest: ^27.1.5
       tslib: ^2.4.0
@@ -372,6 +372,7 @@ importers:
       '@rollup/plugin-babel': 6.0.0_vy4anxjpv2s44kyfi2kxqu576u
       '@rollup/plugin-commonjs': 23.0.0_rollup@2.79.1
       '@rollup/plugin-node-resolve': 15.0.0_rollup@2.79.1
+      '@rollup/plugin-terser': 0.1.0_rollup@2.79.1
       '@types/jest': 27.5.2
       '@types/lodash': 4.14.186
       '@types/node': 16.11.66
@@ -384,7 +385,6 @@ importers:
       jest: 27.5.1
       rimraf: 3.0.2
       rollup: 2.79.1
-      rollup-plugin-terser: 7.0.2_rollup@2.79.1
       rollup-plugin-typescript2: 0.34.1_gypgyaqhine6mwjfvh7icfhviq
       ts-jest: 27.1.5_zgo3ukr7wfsrfu7w73hol4lxpy
       tslib: 2.4.0
@@ -586,6 +586,7 @@ importers:
       '@rollup/plugin-babel': ^6.0.0
       '@rollup/plugin-commonjs': ^23.0.0
       '@rollup/plugin-node-resolve': ^15.0.0
+      '@rollup/plugin-terser': ^0.1.0
       '@types/jest': ^27.5.2
       '@types/lodash': ^4.14.186
       '@types/node': ^16.11.66
@@ -606,7 +607,6 @@ importers:
       react-test-renderer: ^18.2.0
       rimraf: ^3.0.2
       rollup: ^2.79.1
-      rollup-plugin-terser: ^7.0.2
       rollup-plugin-typescript2: ^0.34.1
       ts-jest: ^27.1.5
       tslib: ^2.4.0
@@ -628,6 +628,7 @@ importers:
       '@rollup/plugin-babel': 6.0.0_vy4anxjpv2s44kyfi2kxqu576u
       '@rollup/plugin-commonjs': 23.0.0_rollup@2.79.1
       '@rollup/plugin-node-resolve': 15.0.0_rollup@2.79.1
+      '@rollup/plugin-terser': 0.1.0_rollup@2.79.1
       '@types/jest': 27.5.2
       '@types/node': 16.11.66
       '@types/react': 18.0.21
@@ -644,7 +645,6 @@ importers:
       react-test-renderer: 18.2.0_react@18.2.0
       rimraf: 3.0.2
       rollup: 2.79.1
-      rollup-plugin-terser: 7.0.2_rollup@2.79.1
       rollup-plugin-typescript2: 0.34.1_gypgyaqhine6mwjfvh7icfhviq
       ts-jest: 27.1.5_zgo3ukr7wfsrfu7w73hol4lxpy
       tslib: 2.4.0
@@ -6484,6 +6484,19 @@ packages:
       is-module: 1.0.0
       resolve: 1.22.1
       rollup: 2.79.1
+    dev: true
+
+  /@rollup/plugin-terser/0.1.0_rollup@2.79.1:
+    resolution: {integrity: sha512-N2KK+qUfHX2hBzVzM41UWGLrEmcjVC37spC8R3c9mt3oEDFKh3N2e12/lLp9aVSt86veR0TQiCNQXrm8C6aiUQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.x || ^3.x
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      rollup: 2.79.1
+      terser: 5.15.1
     dev: true
 
   /@rollup/pluginutils/4.2.1:
@@ -19719,18 +19732,6 @@ packages:
       semver-compare: 1.0.0
       sprintf-js: 1.1.2
     optional: true
-
-  /rollup-plugin-terser/7.0.2_rollup@2.79.1:
-    resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
-    peerDependencies:
-      rollup: ^2.0.0
-    dependencies:
-      '@babel/code-frame': 7.18.6
-      jest-worker: 26.6.2
-      rollup: 2.79.1
-      serialize-javascript: 4.0.0
-      terser: 5.15.1
-    dev: true
 
   /rollup-plugin-typescript2/0.34.1_gypgyaqhine6mwjfvh7icfhviq:
     resolution: {integrity: sha512-P4cHLtGikESmqi1CA+tdMDUv8WbQV48mzPYt77TSTOPJpERyZ9TXdDgjSDix8Fkqce6soYz3+fa4lrC93IEkcw==}
