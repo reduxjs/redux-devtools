@@ -8,7 +8,7 @@ const objectKeys =
     return keys;
   };
 
-export default function assign<T, K extends keyof T>(
+export default function assign<T extends object, K extends keyof T>(
   obj: T,
   newKey: K,
   newValue: T[K]

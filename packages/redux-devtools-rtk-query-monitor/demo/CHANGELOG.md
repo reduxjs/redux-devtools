@@ -1,5 +1,13 @@
 # rtk-query-demo
 
+## 0.1.10
+
+### Patch Changes
+
+- 24f60a7a: fix: rtk-query-monitor demo not working #1126 #1129
+- Updated dependencies [24f60a7a]
+  - @redux-devtools/rtk-query-monitor@3.1.0
+
 ## 0.1.9
 
 ### Patch Changes
