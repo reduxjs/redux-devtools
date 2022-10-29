@@ -848,7 +848,7 @@ importers:
       redux: ^4.2.0
       redux-persist: ^6.0.0
       rimraf: ^3.0.2
-      socketcluster-client: ^16.1.1
+      socketcluster-client: ^17.1.0
       style-loader: ^3.3.1
       styled-components: ^5.3.6
       ts-jest: ^29.0.3
@@ -882,7 +882,7 @@ importers:
       react-redux: 8.0.4_yfr4m6wk75wdra335rld4tkrbu
       redux: 4.2.0
       redux-persist: 6.0.0_react@18.2.0+redux@4.2.0
-      socketcluster-client: 16.1.1
+      socketcluster-client: 17.1.0
     devDependencies:
       '@babel/cli': 7.19.3_@babel+core@7.19.3
       '@babel/core': 7.19.3
@@ -1035,8 +1035,8 @@ importers:
       react-is: ^18.2.0
       rimraf: ^3.0.2
       semver: ^7.3.8
-      socketcluster-client: ^16.1.1
-      socketcluster-server: ^16.2.1
+      socketcluster-client: ^17.1.0
+      socketcluster-server: ^17.2.0
       sqlite3: ^5.1.2
       styled-components: ^5.3.6
       supertest: ^6.3.0
@@ -1064,7 +1064,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
       semver: 7.3.8
-      socketcluster-server: 16.2.1
+      socketcluster-server: 17.2.0
       sqlite3: 5.1.2
       styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
       uuid: 9.0.0
@@ -1092,7 +1092,7 @@ importers:
       jest: 29.2.2_@types+node@18.11.7
       ncp: 2.0.0
       rimraf: 3.0.2
-      socketcluster-client: 16.1.1
+      socketcluster-client: 17.1.0
       supertest: 6.3.0
       ts-jest: 29.0.3_r7gdwuj75x2gz25bauak3xcnbm
       typescript: 4.8.4
@@ -1758,7 +1758,7 @@ importers:
       redux: ^4.2.0
       rimraf: ^3.0.2
       rn-host-detect: ^1.2.0
-      socketcluster-client: ^16.1.1
+      socketcluster-client: ^17.1.0
       typescript: ~4.8.4
     dependencies:
       '@babel/runtime': 7.19.4
@@ -1767,7 +1767,7 @@ importers:
       jsan: 3.1.14
       querystring: 0.2.1
       rn-host-detect: 1.2.0
-      socketcluster-client: 16.1.1
+      socketcluster-client: 17.1.0
     devDependencies:
       '@babel/cli': 7.19.3_@babel+core@7.19.3
       '@babel/core': 7.19.3
@@ -20371,8 +20371,8 @@ packages:
       - supports-color
     dev: true
 
-  /socketcluster-client/16.1.1:
-    resolution: {integrity: sha512-Fv/O8Dnb62fDLHRfh0Vr0FLrK/IzcFCukAqZlTE3L2LkI8ZY+24GzUNvYn3NnppSfqjEjEl1bLm26guqPAqlpQ==}
+  /socketcluster-client/17.1.0:
+    resolution: {integrity: sha512-jAmjBixLVPCN6NuDGufN+8Zycvz9wQ8QXQvdqBDqkVEDfZV3Mv2mR0FGYwX6KZa0kHr3VJ2EjvUj8ZYJ2ZfyzQ==}
     dependencies:
       ag-channel: 5.0.0
       ag-request: 1.0.0
@@ -20385,13 +20385,13 @@ packages:
       stream-demux: 8.1.0
       uuid: 8.3.2
       vinyl-buffer: 1.0.1
-      ws: 7.5.9
+      ws: 8.9.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  /socketcluster-server/16.2.1:
-    resolution: {integrity: sha512-ARB3VmM5JIfehQR8Dk3he11v+DA7dEtSOX/97Dce7WTK4ELdbdyHpgPhOhFPhW6TWCd+43X6/LwMmcwJkx7vUQ==}
+  /socketcluster-server/17.2.0:
+    resolution: {integrity: sha512-gBbRn2lqymwb1HA7oRU4OnWuySMSyz1B3QhOxIFIqOQIBX8TdKgjihIxAHmRue0C6vqk3aU5QaMOXQGgHI3MfA==}
     dependencies:
       ag-auth: 1.0.1
       ag-request: 1.0.0
@@ -20403,7 +20403,7 @@ packages:
       sc-formatter: 3.0.3
       stream-demux: 8.1.0
       writable-consumable-stream: 2.0.0
-      ws: 7.5.9
+      ws: 8.9.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -22759,7 +22759,6 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
-    dev: true
 
   /x-default-browser/0.4.0:
     resolution: {integrity: sha512-7LKo7RtWfoFN/rHx1UELv/2zHGMx8MkZKDq1xENmOCTkfIqZJ0zZ26NEJX8czhnPXVcqS0ARjjfJB+eJ0/5Cvw==}
