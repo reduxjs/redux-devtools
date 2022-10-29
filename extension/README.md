@@ -57,7 +57,7 @@ const composeEnhancers =
   compose;
 ```
 
-> For TypeScript use [`redux-devtools-extension` npm package](#13-use-redux-devtools-extension-package-from-npm), which contains all the definitions, or just use `(window as any)` (see [Recipes](/docs/Recipes.md#using-in-a-typescript-project) for an example).
+> For TypeScript use [`redux-devtools-extension` npm package](#13-use-redux-devtoolsextension-package-from-npm), which contains all the definitions, or just use `(window as any)` (see [Recipes](/docs/Recipes.md#using-in-a-typescript-project) for an example).
 
 ```js
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
