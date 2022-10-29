@@ -4,7 +4,7 @@ import baseConfig from './base.config';
 export default baseConfig({
   mode: 'production',
   inputExtra: {
-    page: [path.join(__dirname, '../src/browser/extension/inject/pageScript')],
+    page: [path.join(__dirname, '../src/pageScript')],
   },
   output: { path: path.join(__dirname, '../build/extension') },
   globals: {
@@ -13,8 +13,5 @@ export default baseConfig({
     },
   },
   copy: true,
-  manifestJsonPath: path.join(
-    __dirname,
-    '../src/browser/extension/manifest.json'
-  ),
+  manifestJsonPath: path.join(__dirname, '../chrome/manifest.json'),
 });

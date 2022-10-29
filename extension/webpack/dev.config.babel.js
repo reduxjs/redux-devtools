@@ -5,7 +5,7 @@ import baseConfig from './base.config';
 let config = baseConfig({
   mode: 'development',
   inputExtra: {
-    page: [path.join(__dirname, '../src/browser/extension/inject/pageScript')],
+    page: [path.join(__dirname, '../src/pageScript')],
   },
   output: { path: path.join(__dirname, '../dev') },
   globals: {
@@ -15,10 +15,7 @@ let config = baseConfig({
   },
   plugins: [new webpack.NoEmitOnErrorsPlugin()],
   copy: true,
-  manifestJsonPath: path.join(
-    __dirname,
-    '../src/browser/extension/manifest.json'
-  ),
+  manifestJsonPath: path.join(__dirname, '../chrome/manifest.json'),
 });
 
 config.watch = true;

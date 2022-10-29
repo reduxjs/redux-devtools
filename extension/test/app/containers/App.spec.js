@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import configureStore from '../../../src/app/stores/windowStore';
-import App from '../../../src/app/containers/App';
+import configureStore from '../../../src/window/store/windowStore';
+import App from '../../../src/app/App';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -18,7 +18,7 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-const { store } = configureStore(store);
+const { store } = configureStore();
 
 describe('App container', () => {
   it("should render inspector monitor's component", () => {
