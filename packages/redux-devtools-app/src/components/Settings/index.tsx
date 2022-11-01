@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Tabs } from '@redux-devtools/ui';
 import Connection from './Connection';
 import Themes from './Themes';
+import StateTree from './StateTree';
 
 interface State {
   selected: string;
@@ -12,6 +13,7 @@ export default class Settings extends Component<{}, State> {
   tabs = [
     { name: 'Connection', component: Connection },
     { name: 'Themes', component: Themes },
+    { name: 'State Tree', component: StateTree },
   ];
   state: State = { selected: 'Connection' };
 

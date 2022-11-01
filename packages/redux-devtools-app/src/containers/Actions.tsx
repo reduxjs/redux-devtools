@@ -23,6 +23,7 @@ class Actions extends Component<Props> {
       options,
       liftedState,
       liftedDispatch,
+      stateTreeSettings,
     } = this.props;
     return (
       <Container>
@@ -37,6 +38,7 @@ class Actions extends Component<Props> {
           monitorState={this.props.monitorState}
           dispatch={liftedDispatch}
           features={options.features}
+          stateTreeSettings={stateTreeSettings}
         />
         {sliderIsOpen && options.connectionId && options.features.jump && (
           <SliderMonitor liftedState={liftedState} dispatch={liftedDispatch} />
@@ -65,6 +67,7 @@ const mapStateToProps = (state: StoreState) => {
     dispatcherIsOpen: state.monitor.dispatcherIsOpen,
     sliderIsOpen: state.monitor.sliderIsOpen,
     reports: state.reports.data,
+    stateTreeSettings: state.stateTreeSettings,
   };
 };
 
