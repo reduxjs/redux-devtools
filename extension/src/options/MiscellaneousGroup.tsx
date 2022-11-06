@@ -2,10 +2,6 @@ import React from 'react';
 import { OptionsProps } from './Options';
 
 export default ({ options, saveOption }: OptionsProps) => {
-  const browserName = navigator.userAgent.includes('Firefox')
-    ? 'Firefox'
-    : 'Chrome';
-
   return (
     <fieldset className="option-group">
       <legend className="option-group__title">Miscellaneous</legend>
@@ -46,7 +42,7 @@ export default ({ options, saveOption }: OptionsProps) => {
           Show errors
         </label>
         <div className="option__hint">
-          Show the {browserName} notifications when errors occur in the app
+          Show the browser notifications when errors occur in the app
         </div>
       </div>
     </fieldset>

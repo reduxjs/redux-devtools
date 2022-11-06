@@ -23,7 +23,7 @@ export default ({ options, saveOption }: OptionsProps) => {
         <label className="option__label" htmlFor="editor-browser">
           {navigator.userAgent.indexOf('Firefox') !== -1
             ? "Don't open in external editor"
-            : "Use browser's debugger (from Chrome devpanel only)"}
+            : "Use browser's debugger (from browser devpanel only)"}
         </label>
       </div>
 
