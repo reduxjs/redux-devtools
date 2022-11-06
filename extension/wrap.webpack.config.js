@@ -3,12 +3,12 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   mode: 'production',
+  devtool: 'source-map',
   entry: {
     pagewrap: path.resolve(__dirname, 'src/pageScriptWrap'),
   },
   output: {
     filename: '[name].bundle.js',
-    chunkFilename: '[id].chunk.js',
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin({

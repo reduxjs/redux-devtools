@@ -4,8 +4,8 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = function (env) {
   return {
-    // devtool: 'source-map',
     mode: env.production ? 'production' : 'development',
+    devtool: env.production ? 'source-map' : 'eval-source-map',
     entry: {
       background: [
         path.resolve(__dirname, 'src/chromeApiMock'),
@@ -27,10 +27,12 @@ module.exports = function (env) {
         path.resolve(__dirname, 'src/contentScript/index'),
       ],
       page: path.join(__dirname, 'src/pageScript'),
+      ...(env.production
+        ? {}
+        : { pagewrap: path.resolve(__dirname, 'src/pageScriptWrap') }),
     },
     output: {
       filename: '[name].bundle.js',
-      chunkFilename: '[id].chunk.js',
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin({
@@ -45,7 +47,7 @@ module.exports = function (env) {
             to: path.join(__dirname, 'dist/manifest.json'),
           },
           {
-            from: path.join(__dirname, 'src/assets/'),
+            from: path.join(__dirname, 'src/assets'),
             to: path.join(__dirname, 'dist'),
           },
         ],
