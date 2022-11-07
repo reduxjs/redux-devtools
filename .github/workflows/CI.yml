@@ -27,7 +27,15 @@ jobs:
 
       - shell: bash
         run: |
+          ls extension/dist/
+
+      - shell: bash
+        run: |
           ls extension/chrome/dist/
+
+      - shell: bash
+        run: |
+          ls extension/chrome/dist/dist/
 
       - name: Archive Chrome Extension
         uses: actions/upload-artifact@v3
