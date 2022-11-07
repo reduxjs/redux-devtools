@@ -38,3 +38,21 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Archive Chrome Extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: Chrome extension
+          path: extension/chrome/dist/chrome.zip
+
+      - name: Archive Edge Extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: Edge extension
+          path: extension/edge/dist/edge.zip
+
+      - name: Archive Firefox Extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: Edge extension
+          path: extension/firefox/dist/firefox.zip

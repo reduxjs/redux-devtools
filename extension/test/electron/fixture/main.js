@@ -4,7 +4,7 @@ const { app, BrowserWindow, session } = require('electron');
 app.on('window-all-closed', app.quit);
 app.whenReady().then(async () => {
   await session.defaultSession.loadExtension(
-    path.join(__dirname, '../../../build/extension'),
+    path.join(__dirname, '../../../dist'),
     { allowFileAccess: true }
   );
 
