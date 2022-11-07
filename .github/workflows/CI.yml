@@ -25,10 +25,10 @@ jobs:
       - name: Check formatting
         run: pnpm run format:check
       - name: Build
-        run: pnpm exec nx affected --target=build --parallel=3
+        run: pnpm exec nx affected --target=build --parallel=1
       - name: Lint
-        run: pnpm exec nx affected --target=lint --parallel=3
+        run: pnpm exec nx affected --target=lint --parallel=1
       - name: Test
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: pnpm exec nx affected --target=test --parallel=3
+          run: pnpm exec nx affected --target=test --parallel=1
