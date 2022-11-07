@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
@@ -35,6 +36,9 @@ module.exports = function (env) {
       filename: '[name].bundle.js',
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.BABEL_ENV': JSON.stringify(process.env.NODE_ENV),
+      }),
       new ForkTsCheckerWebpackPlugin({
         typescript: {
           configFile: 'tsconfig.json',
