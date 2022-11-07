@@ -20,9 +20,9 @@
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "build:all": "nx run-many --target=build --all --skip-nx-cache",
-    "lint:all": "nx run-many --target=lint --all --skip-nx-cache",
-    "test:all": "nx run-many --target=test --all --skip-nx-cache",
+    "build:all": "nx run-many --target=build --all --skip-nx-cache --parallel=1",
+    "lint:all": "nx run-many --target=lint --all --skip-nx-cache --parallel=1",
+    "test:all": "nx run-many --target=test --all --skip-nx-cache --parallel=1",
     "clean:all": "nx run-many --target=clean --all",
     "release": "pnpm build:all && changeset publish"
   },
