@@ -25,6 +25,10 @@ jobs:
       - name: Build
         run: pnpm build:all
 
+      - shell: bash
+        run: |
+          ls extension/chrome/dist/
+
       - name: Archive Chrome Extension
         uses: actions/upload-artifact@v3
         with:
