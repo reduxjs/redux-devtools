@@ -43,16 +43,16 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: chrome
-          path: extension/chrome/dist
+          path: extension/chrome/dist/
 
       - name: Archive Edge Extension
         uses: actions/upload-artifact@v3
         with:
           name: edge
-          path: extension/edge/dist
+          path: extension/edge/dist/
 
       - name: Archive Firefox Extension
         uses: actions/upload-artifact@v3
         with:
           name: firefox
-          path: extension/firefox/dist
+          path: extension/firefox/dist/

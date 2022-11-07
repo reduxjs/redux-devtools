@@ -22,13 +22,23 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-      - name: Check formatting
-        run: pnpm run format:check
       - name: Build
-        run: pnpm exec nx affected --target=build --parallel=3
-      - name: Lint
-        run: pnpm exec nx affected --target=lint --parallel=3
-      - name: Test
-        uses: GabrielBB/xvfb-action@v1
+        run: pnpm build:all
+
+      - name: Archive Chrome Extension
+        uses: actions/upload-artifact@v3
         with:
-          run: pnpm exec nx affected --target=test --parallel=3
+          name: chrome
+          path: extension/chrome/dist/
+
+      - name: Archive Edge Extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: edge
+          path: extension/edge/dist/
+
+      - name: Archive Firefox Extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: firefox
+          path: extension/firefox/dist/
