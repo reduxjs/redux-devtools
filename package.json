@@ -20,10 +20,10 @@
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "build:all": "nx run-many --target=build --all",
-    "lint:all": "nx run-many --target=lint --all",
-    "test:all": "nx run-many --target=test --all",
-    "clean:all": "nx run-many --target=clean --all",
+    "build:all": "nx run-many --target=build --all --parallel=1",
+    "lint:all": "nx run-many --target=lint --all --parallel=1",
+    "test:all": "nx run-many --target=test --all --parallel=1",
+    "clean:all": "nx run-many --target=clean --all --parallel=1",
     "release": "pnpm build:all && changeset publish"
   },
   "workspaces": [
