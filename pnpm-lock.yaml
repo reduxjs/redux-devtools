@@ -63,7 +63,6 @@ importers:
       '@types/react-dom': ^18.0.6
       '@types/styled-components': ^5.1.26
       babel-loader: ^9.0.0
-      bestzip: ^2.2.1
       chromedriver: ^106.0.1
       copy-webpack-plugin: ^11.0.0
       cpy-cli: ^4.2.0
@@ -141,7 +140,6 @@ importers:
       '@types/react-dom': 18.0.6
       '@types/styled-components': 5.1.26
       babel-loader: 9.0.0_wfdvla2jorjoj23kkavho2upde
-      bestzip: 2.2.1
       chromedriver: 106.0.1
       copy-webpack-plugin: 11.0.0_webpack@5.74.0
       cpy-cli: 4.2.0
@@ -10052,35 +10050,6 @@ packages:
   /aproba/2.0.0:
     resolution: {integrity: sha512-lYe4Gx7QT+MKGbDsA+Z+he/Wtef0BiwDOlK/XkBrdfsh9J/jPPXbX0tE9x9cl27Tmu5gg3QUbUrQYa/y+KOHPQ==}
 
-  /archiver-utils/2.1.0:
-    resolution: {integrity: sha512-bEL/yUb/fNNiNTuUz979Z0Yg5L+LzLxGJz8x79lYmR54fmTIb6ob/hNQgkQnIUDWIFjZVQwl9Xs356I6BAMHfw==}
-    engines: {node: '>= 6'}
-    dependencies:
-      glob: 7.2.3
-      graceful-fs: 4.2.10
-      lazystream: 1.0.1
-      lodash.defaults: 4.2.0
-      lodash.difference: 4.5.0
-      lodash.flatten: 4.4.0
-      lodash.isplainobject: 4.0.6
-      lodash.union: 4.6.0
-      normalize-path: 3.0.0
-      readable-stream: 2.3.7
-    dev: true
-
-  /archiver/5.3.1:
-    resolution: {integrity: sha512-8KyabkmbYrH+9ibcTScQ1xCJC/CGcugdVIwB+53f5sZziXgwUh3iXlAlANMxcZyDEfTHMe6+Z5FofV8nopXP7w==}
-    engines: {node: '>= 10'}
-    dependencies:
-      archiver-utils: 2.1.0
-      async: 3.2.4
-      buffer-crc32: 0.2.13
-      readable-stream: 3.6.0
-      readdir-glob: 1.1.2
-      tar-stream: 2.2.0
-      zip-stream: 4.1.0
-    dev: true
-
   /are-we-there-yet/2.0.0:
     resolution: {integrity: sha512-Ci/qENmwHnsYo9xKIcUJN5LeDKdJ6R1Z1j9V/J5wyq8nh/mYPEpIKJbBZXtZjG04HiK7zV/p6Vs9952MrMeUIw==}
     engines: {node: '>=10'}
@@ -10317,10 +10286,6 @@ packages:
     resolution: {integrity: sha512-cfPZYjHkhCdHSR+eux71vOU8+8Xb23oLyxccAjwYHgOxDb3+qSDb2HV1Y0Hmu39vZlse2cm15CUShLiVYXHCmQ==}
     dependencies:
       stream-demux: 8.1.0
-
-  /async/3.2.4:
-    resolution: {integrity: sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==}
-    dev: true
 
   /asynckit/0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
@@ -10687,18 +10652,6 @@ packages:
 
   /batch/0.6.1:
     resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}
-    dev: true
-
-  /bestzip/2.2.1:
-    resolution: {integrity: sha512-XdAb87RXqOqF7C6UgQG9IqpEHJvS6IOUo0bXWEAebjSSdhDjsbcqFKdHpn5Q7QHz2pGr3Zmw4wgG3LlzdyDz7w==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      archiver: 5.3.1
-      async: 3.2.4
-      glob: 7.2.3
-      which: 2.0.2
-      yargs: 16.2.0
     dev: true
 
   /better-opn/2.1.1:
@@ -11611,16 +11564,6 @@ packages:
     resolution: {integrity: sha512-Rd3se6QB+sO1TwqZjscQrurpEPIfO0/yYnSin6Q/rD3mOutHvUrCAhJub3r90uNb+SESBuE0QYoB90YdfatsRg==}
     dev: true
 
-  /compress-commons/4.1.1:
-    resolution: {integrity: sha512-QLdDLCKNV2dtoTorqgxngQCMA+gWXkM/Nwu7FpeBhk/RdkzimqC3jueb/FDmaZeXh+uby1jkBqE3xArsLBE5wQ==}
-    engines: {node: '>= 10'}
-    dependencies:
-      buffer-crc32: 0.2.13
-      crc32-stream: 4.0.2
-      normalize-path: 3.0.0
-      readable-stream: 3.6.0
-    dev: true
-
   /compressible/2.0.18:
     resolution: {integrity: sha512-AF3r7P5dWxL8MxyITRMlORQNaOA2IkAFaTr4k7BUumjPtRpGDTZpl0Pb1XCO6JeDCBdp126Cgs9sMxqSjgYyRg==}
     engines: {node: '>= 0.6'}
@@ -11897,20 +11840,6 @@ packages:
       nested-error-stacks: 2.1.1
       p-filter: 3.0.0
       p-map: 5.5.0
-    dev: true
-
-  /crc-32/1.2.2:
-    resolution: {integrity: sha512-ROmzCKrTnOwybPcJApAA6WBWij23HVfGVNKqqrZpuyZOHqK2CwHSvpGuyt/UNNvaIjEd8X5IFGp4Mh+Ie1IHJQ==}
-    engines: {node: '>=0.8'}
-    hasBin: true
-    dev: true
-
-  /crc32-stream/4.0.2:
-    resolution: {integrity: sha512-DxFZ/Hk473b/muq1VJ///PMNLj0ZMnzye9thBpmjpJKCc5eMgB95aK8zCGrGfQ90cWo561Te6HK9D+j4KPdM6w==}
-    engines: {node: '>= 10'}
-    dependencies:
-      crc-32: 1.2.2
-      readable-stream: 3.6.0
     dev: true
 
   /create-ecdh/4.0.4:
@@ -16694,13 +16623,6 @@ packages:
       dotenv-expand: 5.1.0
     dev: true
 
-  /lazystream/1.0.1:
-    resolution: {integrity: sha512-b94GiNHQNy6JNTrt5w6zNyffMrNkXZb3KTkCZJb2V1xaEGCk093vkZ2jk3tpaeP33/OiXC+WvK9AxUebnf5nbw==}
-    engines: {node: '>= 0.6.3'}
-    dependencies:
-      readable-stream: 2.3.7
-    dev: true
-
   /leven/3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
@@ -16837,18 +16759,6 @@ packages:
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
-  /lodash.defaults/4.2.0:
-    resolution: {integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==}
-    dev: true
-
-  /lodash.difference/4.5.0:
-    resolution: {integrity: sha512-dS2j+W26TQ7taQBGN8Lbbq04ssV3emRw4NY58WErlTO29pIqS0HmoT5aJ9+TUQ1N3G+JOZSji4eugsWwGp9yPA==}
-    dev: true
-
-  /lodash.flatten/4.4.0:
-    resolution: {integrity: sha512-C5N2Z3DgnnKr0LOpv/hKCgKdb7ZZwafIrsesve6lmzvZIRZRGaZ/l6Q8+2W7NaT+ZwO3fFlSCzCzrDCFdJfZ4g==}
-    dev: true
-
   /lodash.includes/4.3.0:
     resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
     dev: false
@@ -16867,6 +16777,7 @@ packages:
 
   /lodash.isplainobject/4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+    dev: false
 
   /lodash.isstring/4.0.1:
     resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
@@ -16902,10 +16813,6 @@ packages:
 
   /lodash.truncate/4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
-    dev: true
-
-  /lodash.union/4.6.0:
-    resolution: {integrity: sha512-c4pB2CdGrGdjMKYLA+XiRDO7Y0PRQbm/Gzg8qMj+QH+pFVAoTp5sBpO0odL3FjoPCGjK96p6qsP+yQoiLoOBcw==}
     dev: true
 
   /lodash.uniq/4.5.0:
@@ -19615,12 +19522,6 @@ packages:
       inherits: 2.0.4
       string_decoder: 1.3.0
       util-deprecate: 1.0.2
-
-  /readdir-glob/1.1.2:
-    resolution: {integrity: sha512-6RLVvwJtVwEDfPdn6X6Ille4/lxGl0ATOY4FN/B9nxQcgOazvvI0nodiD19ScKq0PvA/29VpaOQML36o5IzZWA==}
-    dependencies:
-      minimatch: 5.1.0
-    dev: true
 
   /readdirp/2.2.1:
     resolution: {integrity: sha512-1JU/8q+VgFZyxwrJ+SVIOsh+KywWGpds3NTqikiKpDMZWScmAYyKIgqkO+ARvNWJfXeXR1zxz7aHF4u4CyH6vQ==}
@@ -23049,15 +22950,6 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: true
-
-  /zip-stream/4.1.0:
-    resolution: {integrity: sha512-zshzwQW7gG7hjpBlgeQP9RuyPGNxvJdzR8SUM3QhxCnLjWN2E7j3dOvpeDcQoETfHx0urRS7EtmVToql7YpU4A==}
-    engines: {node: '>= 10'}
-    dependencies:
-      archiver-utils: 2.1.0
-      compress-commons: 4.1.1
-      readable-stream: 3.6.0
     dev: true
 
   /zwitch/1.0.5:
