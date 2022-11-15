@@ -96,7 +96,7 @@ importers:
       redux: ^4.2.0
       redux-persist: ^6.0.0
       rimraf: ^3.0.2
-      selenium-webdriver: ^4.6.0
+      selenium-webdriver: ^4.6.1
       sinon-chrome: ^3.0.1
       style-loader: ^3.3.1
       styled-components: ^5.3.6
@@ -162,7 +162,7 @@ importers:
       react-transform-catch-errors: 1.0.2
       react-transform-hmr: 1.0.4
       rimraf: 3.0.2
-      selenium-webdriver: 4.6.0
+      selenium-webdriver: 4.6.1
       sinon-chrome: 3.0.1
       style-loader: 3.3.1_webpack@5.75.0
       ts-jest: 29.0.3_25xopm7qx5wgmsgnog4okhpq5a
@@ -9244,7 +9244,7 @@ packages:
       webpack-cli: 4.x.x
     dependencies:
       webpack: 5.75.0_webpack-cli@4.10.0
-      webpack-cli: 4.10.0_uaydpeuxkjjcxdbyfgk36cjdxi
+      webpack-cli: 4.10.0_webpack@5.75.0
     dev: true
 
   /@webpack-cli/info/1.5.0_webpack-cli@4.10.0:
@@ -9253,7 +9253,7 @@ packages:
       webpack-cli: 4.x.x
     dependencies:
       envinfo: 7.8.1
-      webpack-cli: 4.10.0_uaydpeuxkjjcxdbyfgk36cjdxi
+      webpack-cli: 4.10.0_webpack@5.75.0
     dev: true
 
   /@webpack-cli/serve/1.7.0_ud4agclah7rahur6ntojouq57y:
@@ -19969,8 +19969,8 @@ packages:
     resolution: {integrity: sha512-mEugaLK+YfkijB4fx0e6kImuJdCIt2LxCRcbEYPqRGCs4F2ogyfZU5IAZRdjCP8JPq2AtdNoC/Dux63d9Kiryg==}
     dev: true
 
-  /selenium-webdriver/4.6.0:
-    resolution: {integrity: sha512-HIH/+J+V7l/lbSRSOwyLcpjezg9CV4DLo1pBhP9aphuMlf/PJXEDwC/A/Ht2bFc1AqQppFBGvClYcuMzyO6tRw==}
+  /selenium-webdriver/4.6.1:
+    resolution: {integrity: sha512-FT8Dw0tbzaTp8YYLuwhaCnve/nw03HKrOJrA3aUmTKmxaIFSP4kT2R5fN3K0RpV5kbR0ZnM4FGVI2vANBvekaA==}
     engines: {node: '>= 14.20.0'}
     dependencies:
       jszip: 3.10.1
@@ -21380,7 +21380,7 @@ packages:
       '@babel/core': 7.20.2
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
-      jest: 29.3.1_@types+node@18.11.9
+      jest: 29.3.1
       jest-util: 29.2.1
       json5: 2.2.1
       lodash.memoize: 4.1.2
@@ -22479,7 +22479,7 @@ packages:
       tapable: 2.2.1
       terser-webpack-plugin: 5.3.6_webpack@5.75.0
       watchpack: 2.4.0
-      webpack-cli: 4.10.0_uaydpeuxkjjcxdbyfgk36cjdxi
+      webpack-cli: 4.10.0_webpack@5.75.0
       webpack-sources: 3.2.3
     transitivePeerDependencies:
       - '@swc/core'
