@@ -5,6 +5,8 @@ on:
     branches:
       - main
 
+permissions: write-all
+
 jobs:
   release:
     name: Release
@@ -36,3 +38,21 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Archive Chrome Extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: chrome
+          path: extension/chrome/dist
+
+      - name: Archive Edge Extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: edge
+          path: extension/edge/dist
+
+      - name: Archive Firefox Extension
+        uses: actions/upload-artifact@v3
+        with:
+          name: firefox
+          path: extension/firefox/dist

@@ -1,0 +1,67 @@
+{
+  "version": "3.0.11",
+  "name": "Redux DevTools",
+  "description": "Redux DevTools for debugging application's state changes.",
+  "homepage_url": "https://github.com/reduxjs/redux-devtools",
+  "manifest_version": 2,
+  "page_action": {
+    "default_icon": "img/logo/gray.png",
+    "default_title": "Redux DevTools",
+    "default_popup": "window.html#popup"
+  },
+  "commands": {
+    "devtools-left": {
+      "description": "DevTools window to left"
+    },
+    "devtools-right": {
+      "description": "DevTools window to right"
+    },
+    "devtools-bottom": {
+      "description": "DevTools window to bottom"
+    },
+    "devtools-remote": {
+      "description": "Remote DevTools"
+    },
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E"
+      }
+    }
+  },
+  "icons": {
+    "16": "img/logo/16x16.png",
+    "48": "img/logo/48x48.png",
+    "128": "img/logo/128x128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": ["background.bundle.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_globs": ["https://www.google*"],
+      "js": ["content.bundle.js", "pagewrap.bundle.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "devtools_page": "devtools.html",
+  "web_accessible_resources": ["page.bundle.js"],
+  "externally_connectable": {
+    "ids": ["*"]
+  },
+  "permissions": [
+    "notifications",
+    "contextMenus",
+    "storage",
+    "file:///*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+}

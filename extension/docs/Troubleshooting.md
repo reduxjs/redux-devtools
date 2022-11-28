@@ -16,6 +16,8 @@ If you develop on your local filesystem, make sure to allow Redux DevTools acces
 
 Most likely you mutate the state. Check it by [adding `redux-immutable-state-invariant` middleware](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/examples/counter/store/configureStore.js#L3).
 
+Another cause could be that you are creating multiple stores, which means that the devtools get attached to one but the application uses another. See [https://github.com/reduxjs/redux-toolkit/issues/2753](this issue).
+
 ### @@INIT or REPLACE action resets the state of the app or last actions RE-APPLIED
 
 `@@redux/REPLACE` (or `@@INIT`) is used internally when the application is hot reloaded. When you use `store.replaceReducer` the effect will be the same as for hot-reloading, where the extension is recomputing all the history again. To avoid that set [`shouldHotReload`](/docs/API/Arguments.md#shouldhotreload) parameter to `false`.

@@ -5,4 +5,5 @@ module.exports = {
   moduleNameMapper: {
     '\\.css$': '<rootDir>/test/__mocks__/styleMock.ts',
   },
+  resolver: '<rootDir>/jestResolver.js',
 };

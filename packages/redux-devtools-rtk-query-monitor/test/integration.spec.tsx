@@ -96,7 +96,9 @@ describe('rtk-query-monitor standalone integration', () => {
 
   it('displays query data tab content', async () => {
     // `Promise.resolve()` hushes `@typescript-eslint/await-thenable`
-    await Promise.resolve(pokemonApi.util.getRunningOperationPromises());
+    await Promise.resolve(
+      store.dispatch(pokemonApi.util.getRunningQueriesThunk() as any)
+    );
 
     const { container } = render(
       <Providers store={store}>

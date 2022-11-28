@@ -168,12 +168,14 @@ export function stringify(
 
 export function getSeralizeParameter(
   config: {
-    serialize?: {
-      immutable?: typeof Immutable;
-      refs?: (new (data: any) => unknown)[] | null;
-      replacer?: (key: string, value: unknown) => unknown;
-      options?: unknown | boolean;
-    };
+    serialize?:
+      | {
+          immutable?: typeof Immutable;
+          refs?: (new (data: any) => unknown)[] | null;
+          replacer?: (key: string, value: unknown) => unknown;
+          options?: unknown | boolean;
+        }
+      | boolean;
   },
   param: string
 ):
