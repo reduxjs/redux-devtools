@@ -6,7 +6,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = function (env) {
   return {
     mode: env.production ? 'production' : 'development',
-    devtool: env.production ? 'source-map' : 'eval-source-map',
+    devtool: env.production ? undefined : 'eval-source-map',
     entry: {
       background: [
         path.resolve(__dirname, 'src/chromeApiMock'),
