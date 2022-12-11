@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.0.16
+
+### Patch Changes
+
+- 20ebf725: Remove source map from page wrap bundle
+
 ## 3.0.14
 
 ### Patch Changes
