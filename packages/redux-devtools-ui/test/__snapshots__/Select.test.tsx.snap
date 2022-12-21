@@ -15,19 +15,19 @@ exports[`Select renders correctly 1`] = `
     class="css-1f43avz-a11yText-A11yText"
   />
   <div
-    class=" css-gdsksj-control"
+    class=" css-10g0wlc-control"
   >
     <div
-      class=" css-1dzc0nd-ValueContainer"
+      class=" css-1gpx584-ValueContainer"
     >
       <div
-        class=" css-du77wi-placeholder"
+        class=" css-1m6ztbo-placeholder"
         id="react-select-2-placeholder"
       >
         Select...
       </div>
       <div
-        class=" css-1xl7is7-Input"
+        class=" css-mh08on-Input"
         data-value=""
       >
         <input
@@ -53,11 +53,11 @@ exports[`Select renders correctly 1`] = `
       class=" css-1hb7zxy-IndicatorsContainer"
     >
       <span
-        class=" css-1urf5ax-indicatorSeparator"
+        class=" css-19norqf-indicatorSeparator"
       />
       <div
         aria-hidden="true"
-        class=" css-aazq4s-indicatorContainer"
+        class=" css-17vo4tq-indicatorContainer"
       >
         <svg
           aria-hidden="true"
@@ -92,22 +92,22 @@ exports[`Select renders with props 1`] = `
     class="css-1f43avz-a11yText-A11yText"
   />
   <div
-    class=" css-gdsksj-control"
+    class=" css-10g0wlc-control"
   >
     <div
-      class=" css-be27w2-ValueContainer"
+      class=" css-1ei5tw5-ValueContainer"
     >
       <div
-        class="css-168vvpw-multiValue"
+        class=" css-7ef4eb-multiValue"
       >
         <div
-          class="css-1m51f4l"
+          class=" css-sro4fq-MultiValueGeneric"
         >
           One
         </div>
         <div
           aria-label="Remove One"
-          class="css-1to589f"
+          class=" css-1f177ni-MultiValueRemove"
           role="button"
         >
           <svg
@@ -143,7 +143,7 @@ exports[`Select renders with props 1`] = `
     >
       <div
         aria-hidden="true"
-        class=" css-1gilzap-loadingIndicator"
+        class=" css-1x631db-loadingIndicator"
       >
         <span
           class="css-1xtdfmb-LoadingDot"
@@ -156,11 +156,11 @@ exports[`Select renders with props 1`] = `
         />
       </div>
       <span
-        class=" css-1urf5ax-indicatorSeparator"
+        class=" css-19norqf-indicatorSeparator"
       />
       <div
         aria-hidden="true"
-        class=" css-aazq4s-indicatorContainer"
+        class=" css-17vo4tq-indicatorContainer"
       >
         <svg
           aria-hidden="true"
@@ -204,13 +204,13 @@ exports[`Select should select another option 1`] = `
     </span>
   </span>
   <div
-    class=" css-1gv8qk2-control"
+    class=" css-mjg7mv-control"
   >
     <div
-      class=" css-1dzc0nd-ValueContainer"
+      class=" css-1gpx584-ValueContainer"
     >
       <div
-        class=" css-e4ucyw-Input"
+        class=" css-jpmdcb-Input"
         data-value="two"
       >
         <input
@@ -238,11 +238,11 @@ exports[`Select should select another option 1`] = `
       class=" css-1hb7zxy-IndicatorsContainer"
     >
       <span
-        class=" css-1urf5ax-indicatorSeparator"
+        class=" css-19norqf-indicatorSeparator"
       />
       <div
         aria-hidden="true"
-        class=" css-aazq4s-indicatorContainer"
+        class=" css-17vo4tq-indicatorContainer"
       >
         <svg
           aria-hidden="true"
@@ -260,15 +260,15 @@ exports[`Select should select another option 1`] = `
     </div>
   </div>
   <div
-    class=" css-17wpf85-menu"
+    class=" css-sromc4-menu"
     id="react-select-4-listbox"
   >
     <div
-      class=" css-87spde-MenuList"
+      class=" css-hln2r9-MenuList"
     >
       <div
         aria-disabled="false"
-        class=" css-1npzjqc-option"
+        class=" css-1t6re7j-option"
         id="react-select-4-option-1"
         tabindex="-1"
       >
@@ -303,13 +303,13 @@ exports[`Select shouldn't find any results 1`] = `
     </span>
   </span>
   <div
-    class=" css-1gv8qk2-control"
+    class=" css-mjg7mv-control"
   >
     <div
-      class=" css-1dzc0nd-ValueContainer"
+      class=" css-1gpx584-ValueContainer"
     >
       <div
-        class=" css-e4ucyw-Input"
+        class=" css-jpmdcb-Input"
         data-value="text"
       >
         <input
@@ -337,11 +337,11 @@ exports[`Select shouldn't find any results 1`] = `
       class=" css-1hb7zxy-IndicatorsContainer"
     >
       <span
-        class=" css-1urf5ax-indicatorSeparator"
+        class=" css-19norqf-indicatorSeparator"
       />
       <div
         aria-hidden="true"
-        class=" css-aazq4s-indicatorContainer"
+        class=" css-17vo4tq-indicatorContainer"
       >
         <svg
           aria-hidden="true"
@@ -359,14 +359,14 @@ exports[`Select shouldn't find any results 1`] = `
     </div>
   </div>
   <div
-    class=" css-17wpf85-menu"
+    class=" css-sromc4-menu"
     id="react-select-5-listbox"
   >
     <div
-      class=" css-87spde-MenuList"
+      class=" css-hln2r9-MenuList"
     >
       <div
-        class=" css-36co7-NoOptionsMessage"
+        class=" css-v8tq8h-NoOptionsMessage"
       >
         No options
       </div>
