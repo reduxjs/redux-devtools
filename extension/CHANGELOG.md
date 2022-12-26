@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.0.17
+
+### Patch Changes
+
+- 1aa6c4f7: Fix remounting root for devpanel
+
 ## 3.0.16
 
 ### Patch Changes
