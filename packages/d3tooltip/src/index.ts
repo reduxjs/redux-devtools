@@ -5,8 +5,7 @@ import d3Package, {
   Selection,
 } from 'd3';
 import { is } from 'ramda';
-import utils from './utils';
-const { prependClass, functor } = utils;
+import functor from './utils/functor';
 
 interface Options<
   GElement extends ContainerElement,
@@ -30,6 +29,8 @@ const defaultOptions: Options<ContainerElement, unknown, BaseType, unknown> = {
   root: undefined,
 };
 
+type StyleValue = string | number | boolean;
+
 interface Tip<
   GElement extends ContainerElement,
   Datum,
@@ -37,27 +38,8 @@ interface Tip<
   PDatum
 > {
   (selection: Selection<GElement, Datum, PElement, PDatum>): void;
-  attr: (
-    this: this,
-    d:
-      | string
-      | {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }
-  ) => this;
-  style: (
-    this: this,
-    d:
-      | string
-      | {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }
-      | undefined
-  ) => this;
+  // TODO Do we need to support functions or `null`?
+  style: (this: this, value: { [key: string]: StyleValue }) => this;
   text: (
     this: this,
     d: string | ((datum: Datum, index?: number, outerIndex?: number) => string)
@@ -79,10 +61,11 @@ export function tooltip<
     ...options,
   } as Options<GElement, Datum, PElement, PDatum>;
 
-  let attrs = { class: className };
-  let text: (datum: Datum, index?: number, outerIndex?: number) => string = (
-    node: Datum
-  ) => '';
+  let text: (
+    datum: Datum,
+    index?: number,
+    outerIndex?: number
+  ) => string = () => '';
   let styles = {};
 
   let el: Selection<HTMLDivElement, Datum, BaseType, PDatum>;
@@ -99,52 +82,30 @@ export function tooltip<
 
       el = anchor
         .append('div')
-        .attr(prependClass(className)(attrs))
-        .style({
-          position: 'absolute',
-          'z-index': 1001,
-          left: `${x}px`,
-          top: `${y}px`,
-          ...styles,
-        })
-        .html(() => text(node));
+        .attr('class', className)
+        .style('position', 'absolute')
+        .style('z-index', 1001)
+        .style('left', `${x}px`)
+        .style('top', `${y}px`);
+
+      for (const [key, value] of Object.entries(styles)) {
+        el = el.style(key, value as StyleValue);
+      }
+
+      el = el.html(() => text(node));
     });
 
     selection.on('mousemove.tip', (node) => {
       const [mouseX, mouseY] = d3.mouse(rootNode);
       const [x, y] = [left || mouseX + offset.left, top || mouseY - offset.top];
 
-      el.style({
-        left: `${x}px`,
-        top: `${y}px`,
-      }).html(() => text(node));
+      el.style('left', `${x}px`)
+        .style('top', `${y}px`)
+        .html(() => text(node));
     });
 
     selection.on('mouseout.tip', () => el.remove());
   }
-
-  tip.attr = function setAttr(
-    this: typeof tip,
-    d:
-      | string
-      | {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }
-  ) {
-    if (is(Object, d)) {
-      attrs = {
-        ...attrs,
-        ...(d as {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }),
-      };
-    }
-    return this;
-  };
 
   tip.style = function setStyle(
     this: typeof tip,
