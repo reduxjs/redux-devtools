@@ -38,7 +38,10 @@ class SubTabs extends Component<Props> {
   }
 
   filteredData = () => {
-    const [data, _error] = filter(this.props.nextState as object, this.props.stateFilter);
+    const [data, _error] = filter(
+      this.props.nextState as object,
+      this.props.stateFilter
+    );
     return data;
   };
 
