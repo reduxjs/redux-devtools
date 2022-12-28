@@ -85,8 +85,8 @@ export function tooltip<
   ) => '';
   let styles = {};
 
-  let el: Selection<GElement, Datum, PElement, PDatum>;
-  const anchor: Selection<GElement, Datum, PElement, PDatum> =
+  let el: Selection<HTMLDivElement, Datum, BaseType, PDatum>;
+  const anchor: Selection<GElement, Datum, BaseType, PDatum> =
     root || d3.select('body');
   const rootNode = anchor.node()!;
 
@@ -107,7 +107,7 @@ export function tooltip<
           top: `${y}px`,
           ...styles,
         })
-        .html(() => text(node)) as Selection<GElement, Datum, PElement, PDatum>;
+        .html(() => text(node));
     });
 
     selection.on('mousemove.tip', (node) => {
