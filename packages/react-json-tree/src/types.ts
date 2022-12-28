@@ -9,6 +9,7 @@ interface SharedCircularPropsPassedThroughJSONTree {
     expanded: boolean,
     expandable: boolean
   ) => React.ReactNode;
+  onExpand?: (data: any, level: number, keyPath: any[]) => void;
 }
 interface SharedCircularPropsProvidedByJSONTree
   extends SharedCircularPropsPassedThroughJSONTree {
@@ -43,6 +44,7 @@ interface JSONNestedNodeCircularPropsPassedThroughJSONTree {
   isCustomNode: (value: any) => boolean;
   collectionLimit: number;
   sortObjectKeys?: ((a: any, b: any) => number) | boolean;
+  onExpand?: (data: any, level: number, keyPath: any[]) => void;
 }
 export type CircularPropsPassedThroughJSONTree =
   SharedCircularPropsPassedThroughJSONTree &

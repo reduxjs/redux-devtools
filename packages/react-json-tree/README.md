@@ -146,6 +146,7 @@ Their full signatures are:
 - `isCustomNode: function(value)` - overrides the default object type detection and renders the value as a single value
 - `collectionLimit: number` - sets the number of nodes that will be rendered in a collection before rendering them in collapsed ranges
 - `keyPath: (string | number)[]` - overrides the initial key path for the root node (defaults to `[root]`)
+- `onExpand: function(data, level, keyPath)` - on expand callback
 
 ### Credits
 

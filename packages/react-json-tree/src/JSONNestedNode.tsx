@@ -95,6 +95,7 @@ interface Props extends CircularPropsPassedThroughJSONNestedNode {
   nodeTypeIndicator: string;
   createItemString: (data: any, collectionLimit: number) => string;
   expandable: boolean;
+  onExpand?: (data: any, level: number, keyPath: any[]) => void;
 }
 
 interface State {
@@ -130,6 +131,7 @@ export default class JSONNestedNode extends React.Component<Props, State> {
     sortObjectKeys: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     isCircular: PropTypes.bool,
     expandable: PropTypes.bool,
+    onExpand: PropTypes.func
   };
 
   static defaultProps = {
@@ -234,6 +236,14 @@ export default class JSONNestedNode extends React.Component<Props, State> {
 
   handleClick = () => {
     if (this.props.expandable) {
+      if (this.props.onExpand && !this.state.expanded) {
+        const {
+          data,
+          level,
+          keyPath
+        } = this.props;
+        this.props.onExpand(data, level, keyPath);
+      }
       this.setState({ expanded: !this.state.expanded });
     }
   };
