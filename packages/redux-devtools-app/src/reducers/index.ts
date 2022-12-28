@@ -7,6 +7,7 @@ import { notification, NotificationState } from './notification';
 import { instances, InstancesState } from './instances';
 import { reports, ReportsState } from './reports';
 import { theme, ThemeState } from './theme';
+import { stateFilter, StateFilterState } from './stateFilter';
 import { StoreAction } from '../actions';
 
 export interface StoreState {
@@ -18,6 +19,7 @@ export interface StoreState {
   readonly instances: InstancesState;
   readonly reports: ReportsState;
   readonly notification: NotificationState;
+  readonly stateFilter: StateFilterState;
 }
 
 export const rootReducer = combineReducers<StoreState, StoreAction>({
@@ -29,4 +31,5 @@ export const rootReducer = combineReducers<StoreState, StoreAction>({
   instances,
   reports,
   notification,
+  stateFilter,
 });

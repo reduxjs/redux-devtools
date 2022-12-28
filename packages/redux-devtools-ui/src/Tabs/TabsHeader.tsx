@@ -5,6 +5,7 @@ import { FaAngleDoubleRight } from 'react-icons/fa';
 import ContextMenu from '../ContextMenu';
 import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
+import { StateFilter, StateFilterValue } from '../StateFilter/StateFilter';
 
 const TabsWrapper = createStyledComponent(styles);
 
@@ -20,7 +21,7 @@ export interface Tab<P> {
   selector?: (tab: this) => P;
 }
 
-interface Props<P> {
+interface PropsWithoutFilter<P> {
   tabs: ReactButtonElement[];
   items: Tab<P>[];
   main: boolean | undefined;
@@ -29,6 +30,13 @@ interface Props<P> {
   collapsible: boolean | undefined;
   selected: string | undefined;
 }
+
+interface PropsWithFilter<P> extends PropsWithoutFilter<P> {
+  setFilter: (value: Partial<StateFilterValue>) => void;
+  stateFilterValue: StateFilterValue;
+}
+
+type Props<P> = PropsWithoutFilter<P> | PropsWithFilter<P>;
 
 interface State {
   visibleTabs: ReactButtonElement[];
@@ -221,6 +229,12 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
                 <FaAngleDoubleRight />
               </button>
             )}
+          {'setFilter' in this.props && this.props.setFilter ? (
+            <StateFilter
+              value={this.props.stateFilterValue}
+              onChange={this.props.setFilter}
+            />
+          ) : null}
         </div>
         {this.props.collapsible && contextMenu && (
           <ContextMenu
