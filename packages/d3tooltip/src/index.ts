@@ -1,9 +1,4 @@
-import d3Package, {
-  BaseType,
-  ContainerElement,
-  Primitive,
-  Selection,
-} from 'd3';
+import d3Package, { BaseType, ContainerElement, Selection } from 'd3';
 import { is } from 'ramda';
 import functor from './utils/functor';
 
@@ -38,11 +33,12 @@ interface Tip<
   PDatum
 > {
   (selection: Selection<GElement, Datum, PElement, PDatum>): void;
-  // TODO Do we need to support functions or `null`?
   style: (this: this, value: { [key: string]: StyleValue }) => this;
   text: (
     this: this,
-    d: string | ((datum: Datum, index?: number, outerIndex?: number) => string)
+    value:
+      | string
+      | ((datum: Datum, index?: number, outerIndex?: number) => string)
   ) => this;
 }
 
@@ -109,33 +105,21 @@ export function tooltip<
 
   tip.style = function setStyle(
     this: typeof tip,
-    d:
-      | string
-      | {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }
-      | undefined
+    value: { [key: string]: StyleValue }
   ) {
-    if (is(Object, d)) {
-      styles = {
-        ...styles,
-        ...(d as {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }),
-      };
+    if (is(Object, value)) {
+      styles = { ...styles, ...value };
     }
     return this;
   };
 
   tip.text = function setText(
     this: typeof tip,
-    d: string | ((datum: Datum, index?: number, outerIndex?: number) => string)
+    value:
+      | string
+      | ((datum: Datum, index?: number, outerIndex?: number) => string)
   ) {
-    text = functor(d);
+    text = functor(value);
     return this;
   };
 
