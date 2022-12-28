@@ -24,7 +24,7 @@ const defaultOptions: Options<ContainerElement, unknown, BaseType, unknown> = {
   root: undefined,
 };
 
-type StyleValue = string | number | boolean;
+export type StyleValue = string | number | boolean;
 
 interface Tip<
   GElement extends ContainerElement,
@@ -62,7 +62,7 @@ export function tooltip<
     index?: number,
     outerIndex?: number
   ) => string = () => '';
-  let styles = {};
+  let styles: { [key: string]: StyleValue } = {};
 
   let el: Selection<HTMLDivElement, Datum, BaseType, PDatum>;
   const anchor: Selection<GElement, Datum, BaseType, PDatum> =
@@ -85,7 +85,7 @@ export function tooltip<
         .style('top', `${y}px`);
 
       for (const [key, value] of Object.entries(styles)) {
-        el = el.style(key, value as StyleValue);
+        el = el.style(key, value);
       }
 
       el = el.html(() => text(node));

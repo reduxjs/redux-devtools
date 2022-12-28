@@ -1,4 +1,4 @@
-import d3, { ZoomEvent, Primitive } from 'd3';
+import d3, { ZoomEvent } from 'd3';
 import { isEmpty } from 'ramda';
 import { map2tree } from 'map2tree';
 import deepmerge from 'deepmerge';
@@ -9,6 +9,7 @@ import {
   getNodeGroupByDepthCount,
 } from './utils';
 import { tooltip } from 'd3tooltip';
+import type { StyleValue } from 'd3tooltip';
 
 // TODO Can we remove InputOptions?
 export interface InputOptions {
@@ -20,7 +21,7 @@ export interface InputOptions {
   rootKeyName: string;
   pushMethod: 'push' | 'unshift';
   id: string;
-  chartStyles: { [key: string]: Primitive };
+  chartStyles: { [key: string]: StyleValue };
   nodeStyleOptions: {
     colors: {
       default: string;
@@ -35,7 +36,7 @@ export interface InputOptions {
       hover: string;
     };
   };
-  linkStyles: { [key: string]: Primitive };
+  linkStyles: { [key: string]: StyleValue };
   size: number;
   aspectRatio: number;
   initialZoom: number;
@@ -59,7 +60,7 @@ export interface InputOptions {
       left: number;
       top: number;
     };
-    style?: { [key: string]: Primitive } | undefined;
+    style?: { [key: string]: StyleValue } | undefined;
     indentationSize?: number;
   };
 }
@@ -73,7 +74,7 @@ interface Options {
   rootKeyName: string;
   pushMethod: 'push' | 'unshift';
   id: string;
-  chartStyles: { [key: string]: Primitive };
+  chartStyles: { [key: string]: StyleValue };
   nodeStyleOptions: {
     colors: {
       default: string;
@@ -88,7 +89,7 @@ interface Options {
       hover: string;
     };
   };
-  linkStyles: { [key: string]: Primitive };
+  linkStyles: { [key: string]: StyleValue };
   size: number;
   aspectRatio: number;
   initialZoom: number;
@@ -112,7 +113,7 @@ interface Options {
       left: number;
       top: number;
     };
-    style: { [key: string]: Primitive } | undefined;
+    style: { [key: string]: StyleValue } | undefined;
     indentationSize?: number;
   };
 }
@@ -241,12 +242,11 @@ export default function (
 
   svgElement = svgElement.style('cursor', '-webkit-grab');
 
-  const vis = root
-    .append('svg')
-    .attr(attr)
-    .style({ cursor: '-webkit-grab', ...chartStyles } as unknown as {
-      [key: string]: Primitive;
-    })
+  for (const [key, value] of Object.entries(chartStyles)) {
+    svgElement = svgElement.style(key, value);
+  }
+
+  const vis = svgElement
     .call(
       zoom.on('zoom', () => {
         const { translate, scale } = d3.event as ZoomEvent;
@@ -257,11 +257,12 @@ export default function (
       })
     )
     .append('g')
-    .attr({
-      transform: `translate(${margin.left + nodeStyleOptions.radius}, ${
+    .attr(
+      'transform',
+      `translate(${margin.left + nodeStyleOptions.radius}, ${
         margin.top
-      }) scale(${initialZoom})`,
-    });
+      }) scale(${initialZoom})`
+    );
 
   let layout = d3.layout.tree().size([width, height]);
   let data: NodeWithId;
@@ -384,24 +385,20 @@ export default function (
       const nodeEnter = node
         .enter()
         .append('g')
-        .attr({
-          class: 'node',
-          transform: (d) => {
-            const position = findParentNodePosition(
-              nodePositionsById,
-              d.id,
-              (n) => !!previousNodePositionsById[n.id]
-            );
-            const previousPosition =
-              (position && previousNodePositionsById[position.id]) ||
-              previousNodePositionsById.root;
-            return `translate(${previousPosition.y!},${previousPosition.x!})`;
-          },
+        .attr('class', 'node')
+        .attr('transform', (d) => {
+          const position = findParentNodePosition(
+            nodePositionsById,
+            d.id,
+            (n) => !!previousNodePositionsById[n.id]
+          );
+          const previousPosition =
+            (position && previousNodePositionsById[position.id]) ||
+            previousNodePositionsById.root;
+          return `translate(${previousPosition.y!},${previousPosition.x!})`;
         })
-        .style({
-          fill: textStyleOptions.colors.default,
-          cursor: 'pointer',
-        })
+        .style('fill', textStyleOptions.colors.default)
+        .style('cursor', 'pointer')
         .on('mouseover', function mouseover(this: EventTarget) {
           d3.select(this).style({
             fill: textStyleOptions.colors.hover,
@@ -426,10 +423,8 @@ export default function (
       const nodeEnterInnerGroup = nodeEnter.append('g');
       nodeEnterInnerGroup
         .append('circle')
-        .attr({
-          class: 'nodeCircle',
-          r: 0,
-        })
+        .attr('class', 'nodeCircle')
+        .attr('r', 0)
         .on('click', (clickedNode) => {
           if ((d3.event as Event).defaultPrevented) return;
           toggleChildren(clickedNode);
@@ -438,15 +433,11 @@ export default function (
 
       nodeEnterInnerGroup
         .append('text')
-        .attr({
-          class: 'nodeText',
-          'text-anchor': 'middle',
-          transform: 'translate(0,0)',
-          dy: '.35em',
-        })
-        .style({
-          'fill-opacity': 0,
-        })
+        .attr('class', 'nodeText')
+        .attr('text-anchor', 'middle')
+        .attr('transform', 'translate(0,0)')
+        .attr('dy', '.35em')
+        .style('fill-opacity', 0)
         .text((d) => d.name)
         .on('click', onClickText);
 
@@ -454,24 +445,23 @@ export default function (
       node.select('text').text((d) => d.name);
 
       // change the circle fill depending on whether it has children and is collapsed
-      node.select('circle').style({
-        stroke: 'black',
-        'stroke-width': '1.5px',
-        fill: (d) =>
+      node
+        .select('circle')
+        .style('stroke', 'black')
+        .style('stroke-width', '1.5px')
+        .style('fill', (d) =>
           d._children
             ? nodeStyleOptions.colors.collapsed
             : d.children
             ? nodeStyleOptions.colors.parent
-            : nodeStyleOptions.colors.default,
-      });
+            : nodeStyleOptions.colors.default
+        );
 
       // transition nodes to their new position
       const nodeUpdate = node
         .transition()
         .duration(transitionDuration)
-        .attr({
-          transform: (d) => `translate(${d.y!},${d.x!})`,
-        });
+        .attr('transform', (d) => `translate(${d.y!},${d.x!})`);
 
       // ensure circle radius is correct
       nodeUpdate.select('circle').attr('r', nodeStyleOptions.radius);
@@ -480,13 +470,11 @@ export default function (
       nodeUpdate
         .select('text')
         .style('fill-opacity', 1)
-        .attr({
-          transform: function transform(this: SVGGraphicsElement, d) {
-            const x =
-              (d.children || d._children ? -1 : 1) *
-              (this.getBBox().width / 2 + nodeStyleOptions.radius + 5);
-            return `translate(${x},0)`;
-          },
+        .attr('transform', function transform(this: SVGGraphicsElement, d) {
+          const x =
+            (d.children || d._children ? -1 : 1) *
+            (this.getBBox().width / 2 + nodeStyleOptions.radius + 5);
+          return `translate(${x},0)`;
         });
 
       // blink updated nodes
@@ -509,18 +497,16 @@ export default function (
         .exit()
         .transition()
         .duration(transitionDuration)
-        .attr({
-          transform: (d) => {
-            const position = findParentNodePosition(
-              previousNodePositionsById,
-              d.id,
-              (n) => !!nodePositionsById[n.id]
-            );
-            const futurePosition =
-              (position && nodePositionsById[position.id]) ||
-              nodePositionsById.root;
-            return `translate(${futurePosition.y!},${futurePosition.x!})`;
-          },
+        .attr('transform', (d) => {
+          const position = findParentNodePosition(
+            previousNodePositionsById,
+            d.id,
+            (n) => !!nodePositionsById[n.id]
+          );
+          const futurePosition =
+            (position && nodePositionsById[position.id]) ||
+            nodePositionsById.root;
+          return `translate(${futurePosition.y!},${futurePosition.x!})`;
         })
         .remove();
 
@@ -537,53 +523,44 @@ export default function (
       link
         .enter()
         .insert('path', 'g')
-        .attr({
-          class: 'link',
-          d: (d) => {
-            const position = findParentNodePosition(
-              nodePositionsById,
-              (d.target as NodeWithId).id,
-              (n) => !!previousNodePositionsById[n.id]
-            );
-            const previousPosition =
-              (position && previousNodePositionsById[position.id]) ||
-              previousNodePositionsById.root;
-            return diagonal({
-              source: previousPosition,
-              target: previousPosition,
-            } as d3.svg.diagonal.Link<NodePosition>);
-          },
+        .attr('class', 'link')
+        .attr('d', (d) => {
+          const position = findParentNodePosition(
+            nodePositionsById,
+            (d.target as NodeWithId).id,
+            (n) => !!previousNodePositionsById[n.id]
+          );
+          const previousPosition =
+            (position && previousNodePositionsById[position.id]) ||
+            previousNodePositionsById.root;
+          return diagonal({
+            source: previousPosition,
+            target: previousPosition,
+          } as d3.svg.diagonal.Link<NodePosition>);
         })
         .style(linkStyles);
 
       // transition links to their new position
-      link
-        .transition()
-        .duration(transitionDuration)
-        .attr({
-          d: diagonal as unknown as Primitive,
-        });
+      link.transition().duration(transitionDuration).attr('d', diagonal);
 
       // transition exiting nodes to the parent's new position
       link
         .exit()
         .transition()
         .duration(transitionDuration)
-        .attr({
-          d: (d) => {
-            const position = findParentNodePosition(
-              previousNodePositionsById,
-              (d.target as NodeWithId).id,
-              (n) => !!nodePositionsById[n.id]
-            );
-            const futurePosition =
-              (position && nodePositionsById[position.id]) ||
-              nodePositionsById.root;
-            return diagonal({
-              source: futurePosition,
-              target: futurePosition,
-            });
-          },
+        .attr('d', (d) => {
+          const position = findParentNodePosition(
+            previousNodePositionsById,
+            (d.target as NodeWithId).id,
+            (n) => !!nodePositionsById[n.id]
+          );
+          const futurePosition =
+            (position && nodePositionsById[position.id]) ||
+            nodePositionsById.root;
+          return diagonal({
+            source: futurePosition,
+            target: futurePosition,
+          });
         })
         .remove();
 
@@ -595,5 +572,3 @@ export default function (
     }
   };
 }
-
-export { Primitive };
