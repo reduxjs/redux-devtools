@@ -10,6 +10,7 @@ import {
 } from './utils';
 import { tooltip } from 'd3tooltip';
 
+// TODO Can we remove InputOptions?
 export interface InputOptions {
   // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
@@ -19,7 +20,22 @@ export interface InputOptions {
   rootKeyName: string;
   pushMethod: 'push' | 'unshift';
   id: string;
-  style: { [key: string]: Primitive };
+  chartStyles: { [key: string]: Primitive };
+  nodeStyleOptions: {
+    colors: {
+      default: string;
+      collapsed: string;
+      parent: string;
+    };
+    radius: number;
+  };
+  textStyleOptions: {
+    colors: {
+      default: string;
+      hover: string;
+    };
+  };
+  linkStyles: { [key: string]: Primitive };
   size: number;
   aspectRatio: number;
   initialZoom: number;
@@ -57,26 +73,22 @@ interface Options {
   rootKeyName: string;
   pushMethod: 'push' | 'unshift';
   id: string;
-  style: {
-    node: {
-      colors: {
-        default: string;
-        collapsed: string;
-        parent: string;
-      };
-      radius: number;
+  chartStyles: { [key: string]: Primitive };
+  nodeStyleOptions: {
+    colors: {
+      default: string;
+      collapsed: string;
+      parent: string;
     };
-    text: {
-      colors: {
-        default: string;
-        hover: string;
-      };
-    };
-    link: {
-      stroke: string;
-      fill: string;
+    radius: number;
+  };
+  textStyleOptions: {
+    colors: {
+      default: string;
+      hover: string;
     };
   };
+  linkStyles: { [key: string]: Primitive };
   size: number;
   aspectRatio: number;
   initialZoom: number;
@@ -111,25 +123,24 @@ const defaultOptions: Options = {
   pushMethod: 'push',
   tree: undefined,
   id: 'd3svg',
-  style: {
-    node: {
-      colors: {
-        default: '#ccc',
-        collapsed: 'lightsteelblue',
-        parent: 'white',
-      },
-      radius: 7,
+  chartStyles: {},
+  nodeStyleOptions: {
+    colors: {
+      default: '#ccc',
+      collapsed: 'lightsteelblue',
+      parent: 'white',
     },
-    text: {
-      colors: {
-        default: 'black',
-        hover: 'skyblue',
-      },
+    radius: 7,
+  },
+  textStyleOptions: {
+    colors: {
+      default: 'black',
+      hover: 'skyblue',
     },
-    link: {
-      stroke: '#000',
-      fill: 'none',
-    },
+  },
+  linkStyles: {
+    stroke: '#000',
+    fill: 'none',
   },
   size: 500,
   aspectRatio: 1.0,
@@ -186,7 +197,10 @@ export default function (
 ) {
   const {
     id,
-    style,
+    chartStyles,
+    nodeStyleOptions,
+    textStyleOptions,
+    linkStyles,
     size,
     aspectRatio,
     initialZoom,
@@ -209,28 +223,28 @@ export default function (
   const fullWidth = size;
   const fullHeight = size * aspectRatio;
 
-  const attr: { [key: string]: Primitive } = {
-    id,
-    preserveAspectRatio: 'xMinYMin slice',
-  };
-
-  if (!(style as unknown as { [key: string]: Primitive }).width) {
-    attr.width = fullWidth;
-  }
-
-  if (
-    !(style as unknown as { [key: string]: Primitive }).width ||
-    !(style as unknown as { [key: string]: Primitive }).height
-  ) {
-    attr.viewBox = `0 0 ${fullWidth} ${fullHeight}`;
-  }
-
   const root = d3.select(DOMNode);
   const zoom = d3.behavior.zoom().scaleExtent([0.1, 3]).scale(initialZoom);
+
+  let svgElement = root
+    .append('svg')
+    .attr('id', id)
+    .attr('preserveAspectRatio', 'xMinYMin slice');
+
+  if (!chartStyles.width) {
+    svgElement = svgElement.attr('width', fullWidth);
+  }
+
+  if (!chartStyles.width || !chartStyles.height) {
+    svgElement = svgElement.attr('viewBox', `0 0 ${fullWidth} ${fullHeight}`);
+  }
+
+  svgElement = svgElement.style('cursor', '-webkit-grab');
+
   const vis = root
     .append('svg')
     .attr(attr)
-    .style({ cursor: '-webkit-grab', ...style } as unknown as {
+    .style({ cursor: '-webkit-grab', ...chartStyles } as unknown as {
       [key: string]: Primitive;
     })
     .call(
@@ -244,7 +258,7 @@ export default function (
     )
     .append('g')
     .attr({
-      transform: `translate(${margin.left + style.node.radius}, ${
+      transform: `translate(${margin.left + nodeStyleOptions.radius}, ${
         margin.top
       }) scale(${initialZoom})`,
     });
@@ -385,17 +399,17 @@ export default function (
           },
         })
         .style({
-          fill: style.text.colors.default,
+          fill: textStyleOptions.colors.default,
           cursor: 'pointer',
         })
         .on('mouseover', function mouseover(this: EventTarget) {
           d3.select(this).style({
-            fill: style.text.colors.hover,
+            fill: textStyleOptions.colors.hover,
           });
         })
         .on('mouseout', function mouseout(this: EventTarget) {
           d3.select(this).style({
-            fill: style.text.colors.default,
+            fill: textStyleOptions.colors.default,
           });
         });
 
@@ -445,10 +459,10 @@ export default function (
         'stroke-width': '1.5px',
         fill: (d) =>
           d._children
-            ? style.node.colors.collapsed
+            ? nodeStyleOptions.colors.collapsed
             : d.children
-            ? style.node.colors.parent
-            : style.node.colors.default,
+            ? nodeStyleOptions.colors.parent
+            : nodeStyleOptions.colors.default,
       });
 
       // transition nodes to their new position
@@ -460,7 +474,7 @@ export default function (
         });
 
       // ensure circle radius is correct
-      nodeUpdate.select('circle').attr('r', style.node.radius);
+      nodeUpdate.select('circle').attr('r', nodeStyleOptions.radius);
 
       // fade the text in and align it
       nodeUpdate
@@ -470,7 +484,7 @@ export default function (
           transform: function transform(this: SVGGraphicsElement, d) {
             const x =
               (d.children || d._children ? -1 : 1) *
-              (this.getBBox().width / 2 + style.node.radius + 5);
+              (this.getBBox().width / 2 + nodeStyleOptions.radius + 5);
             return `translate(${x},0)`;
           },
         });
@@ -540,7 +554,7 @@ export default function (
             } as d3.svg.diagonal.Link<NodePosition>);
           },
         })
-        .style(style.link);
+        .style(linkStyles);
 
       // transition links to their new position
       link

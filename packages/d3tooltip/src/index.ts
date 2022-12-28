@@ -33,7 +33,7 @@ interface Tip<
   PDatum
 > {
   (selection: Selection<GElement, Datum, PElement, PDatum>): void;
-  style: (this: this, value: { [key: string]: StyleValue }) => this;
+  styles: (this: this, value: { [key: string]: StyleValue }) => this;
   text: (
     this: this,
     value:
@@ -103,7 +103,7 @@ export function tooltip<
     selection.on('mouseout.tip', () => el.remove());
   }
 
-  tip.style = function setStyle(
+  tip.styles = function setStyles(
     this: typeof tip,
     value: { [key: string]: StyleValue }
   ) {
