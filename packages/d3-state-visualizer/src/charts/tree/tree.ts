@@ -1,4 +1,5 @@
-import d3, { D3ZoomEvent } from 'd3';
+import * as d3 from 'd3';
+import type { D3ZoomEvent, HierarchyPointLink, HierarchyPointNode } from 'd3';
 import { isEmpty } from 'ramda';
 import { map2tree } from 'map2tree';
 import deepmerge from 'deepmerge';
@@ -16,7 +17,7 @@ export interface InputOptions {
   // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
   // eslint-disable-next-line @typescript-eslint/ban-types
-  tree?: NodeWithId | {};
+  tree?: Node | {};
 
   rootKeyName: string;
   pushMethod: 'push' | 'unshift';
@@ -51,7 +52,7 @@ export interface InputOptions {
   widthBetweenNodesCoeff: number;
   transitionDuration: number;
   blinkDuration: number;
-  onClickText: (datum: NodeWithId) => void;
+  onClickText: (datum: Node) => void;
   tooltipOptions: {
     disabled?: boolean;
     left?: number | undefined;
@@ -69,7 +70,7 @@ interface Options {
   // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
   // eslint-disable-next-line @typescript-eslint/ban-types
-  tree?: NodeWithId | {};
+  tree?: Node | {};
 
   rootKeyName: string;
   pushMethod: 'push' | 'unshift';
@@ -172,18 +173,36 @@ const defaultOptions: Options = {
   },
 };
 
-export interface NodeWithId {
+export interface Node {
   name: string;
-  children?: NodeWithId[] | null;
-  _children?: NodeWithId[] | null;
+  children?: Node[] | null;
+  value?: unknown;
+}
+
+export interface InternalNode {
+  name: string;
+  children?: this[] | null;
   value?: unknown;
   id: string;
-
-  parent?: NodeWithId;
-  depth?: number;
-  x?: number;
-  y?: number;
 }
+
+export interface HierarchyPointNodeWithPrivateChildren<Datum>
+  extends HierarchyPointNode<Datum> {
+  _children?: this[] | undefined;
+}
+
+// export interface NodeWithId {
+//   name: string;
+//   children?: NodeWithId[] | null;
+//   _children?: NodeWithId[] | null;
+//   value?: unknown;
+//   id: string;
+//
+//   parent?: NodeWithId;
+//   depth?: number;
+//   x?: number;
+//   y?: number;
+// }
 
 interface NodePosition {
   parentId: string | null | undefined;
@@ -263,17 +282,17 @@ export default function (
       }) scale(${initialZoom})`
     );
 
-  let layout = d3.layout.tree().size([width, height]);
-  let data: NodeWithId;
+  // let layout = d3.tree().size([width, height]);
+  let data: InternalNode;
 
-  if (isSorted) {
-    layout.sort((a, b) =>
-      (b as NodeWithId).name.toLowerCase() <
-      (a as NodeWithId).name.toLowerCase()
-        ? 1
-        : -1
-    );
-  }
+  // if (isSorted) {
+  //   layout.sort((a, b) =>
+  //     (b as NodeWithId).name.toLowerCase() <
+  //     (a as NodeWithId).name.toLowerCase()
+  //       ? 1
+  //       : -1
+  //   );
+  // }
 
   // previousNodePositionsById stores node x and y
   // as well as hierarchy (id / parentId);
@@ -309,18 +328,17 @@ export default function (
 
   return function renderChart(nextState = tree || state) {
     data = !tree
-      ? // eslint-disable-next-line @typescript-eslint/ban-types
-        (map2tree(nextState as {}, {
+      ? (map2tree(nextState, {
           key: rootKeyName,
           pushMethod,
-        }) as NodeWithId)
-      : (nextState as NodeWithId);
+        }) as InternalNode)
+      : (nextState as InternalNode);
 
     if (isEmpty(data) || !data.name) {
       data = {
         name: 'error',
         message: 'Please provide a state map or a tree structure',
-      } as unknown as NodeWithId;
+      } as unknown as InternalNode;
     }
 
     let nodeIndex = 0;
@@ -354,22 +372,32 @@ export default function (
       // set tree dimensions and spacing between branches and nodes
       const maxNodeCountByLevel = Math.max(...getNodeGroupByDepthCount(data));
 
-      layout = layout.size([
-        maxNodeCountByLevel * 25 * heightBetweenNodesCoeff,
-        width,
-      ]);
+      const layout = d3
+        .tree<InternalNode>()
+        .size([maxNodeCountByLevel * 25 * heightBetweenNodesCoeff, width]);
 
-      const nodes = layout.nodes(data as d3.layout.tree.Node) as NodeWithId[];
-      const links = layout.links(nodes as d3.layout.tree.Node[]);
+      const rootNode = d3.hierarchy(data);
+      if (isSorted) {
+        rootNode.sort((a, b) =>
+          b.data.name.toLowerCase() < a.data.name.toLowerCase() ? 1 : -1
+        );
+      }
 
-      nodes.forEach(
+      const rootPointNode = layout(
+        rootNode
+      ) as HierarchyPointNodeWithPrivateChildren<InternalNode>;
+      const links = rootPointNode.links();
+
+      rootPointNode.each(
         (node) =>
-          (node.y = node.depth! * (maxLabelLength * 7 * widthBetweenNodesCoeff))
+          (node.y = node.depth * (maxLabelLength * 7 * widthBetweenNodesCoeff))
       );
 
+      const nodes = rootPointNode.descendants();
+
       const nodePositions = nodes.map((n) => ({
-        parentId: n.parent && n.parent.id,
-        id: n.id,
+        parentId: n.parent && n.parent.data.id,
+        id: n.data.id,
         x: n.x,
         y: n.y,
       }));
@@ -378,9 +406,15 @@ export default function (
 
       // process the node selection
       const node = vis
-        .selectAll('g.node')
-        .property('__oldData__', (d: NodeWithId) => d)
-        .data(nodes, (d) => d.id || (d.id = ++nodeIndex as unknown as string));
+        .selectAll<
+          SVGGElement,
+          HierarchyPointNodeWithPrivateChildren<InternalNode>
+        >('g.node')
+        .property('__oldData__', (d) => d)
+        .data(
+          nodes,
+          (d) => d.data.id || (d.data.id = ++nodeIndex as unknown as string)
+        );
       const nodeEnter = node
         .enter()
         .append('g')
@@ -388,7 +422,7 @@ export default function (
         .attr('transform', (d) => {
           const position = findParentNodePosition(
             nodePositionsById,
-            d.id,
+            d.data.id,
             (n) => !!previousNodePositionsById[n.id]
           );
           const previousPosition =
@@ -411,9 +445,9 @@ export default function (
 
       if (!tooltipOptions.disabled) {
         nodeEnter.call(
-          tooltip<NodeWithId>(d3, 'tooltip', { ...tooltipOptions, root })
+          tooltip('tooltip', { ...tooltipOptions, root })
             .text((d, i) => getTooltipString(d, i, tooltipOptions))
-            .style(tooltipOptions.style)
+            .styles(tooltipOptions.style)
         );
       }
 
@@ -437,11 +471,11 @@ export default function (
         .attr('transform', 'translate(0,0)')
         .attr('dy', '.35em')
         .style('fill-opacity', 0)
-        .text((d) => d.name)
+        .text((d) => d.data.name)
         .on('click', onClickText);
 
       // update the text to reflect whether node has children or not
-      node.select('text').text((d) => d.name);
+      node.select('text').text((d) => d.data.name);
 
       // change the circle fill depending on whether it has children and is collapsed
       node
@@ -515,8 +549,8 @@ export default function (
 
       // update the links
       const link = vis
-        .selectAll('path.link')
-        .data(links, (d) => (d.target as NodeWithId).id);
+        .selectAll<SVGGElement, HierarchyPointLink<InternalNode>>('path.link')
+        .data(links, (d) => d.target.data.id);
 
       // enter any new links at the parent's previous position
       link
@@ -526,7 +560,7 @@ export default function (
         .attr('d', (d) => {
           const position = findParentNodePosition(
             nodePositionsById,
-            (d.target as NodeWithId).id,
+            d.target.data.id,
             (n) => !!previousNodePositionsById[n.id]
           );
           const previousPosition =
@@ -535,9 +569,12 @@ export default function (
           return diagonal({
             source: previousPosition,
             target: previousPosition,
-          } as d3.svg.diagonal.Link<NodePosition>);
-        })
-        .style(linkStyles);
+          });
+        });
+
+      for (const [key, value] of Object.entries(linkStyles)) {
+        link.style(key, value);
+      }
 
       // transition links to their new position
       link.transition().duration(transitionDuration).attr('d', diagonal);
@@ -550,7 +587,7 @@ export default function (
         .attr('d', (d) => {
           const position = findParentNodePosition(
             previousNodePositionsById,
-            (d.target as NodeWithId).id,
+            d.target.data.id,
             (n) => !!nodePositionsById[n.id]
           );
           const futurePosition =

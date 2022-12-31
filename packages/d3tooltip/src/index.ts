@@ -1,4 +1,5 @@
-import d3Package, { BaseType, ContainerElement, Selection } from 'd3';
+import * as d3 from 'd3';
+import type { BaseType, ContainerElement, Selection } from 'd3';
 import { is } from 'ramda';
 import functor from './utils/functor';
 
@@ -48,7 +49,6 @@ export function tooltip<
   PElement extends BaseType,
   PDatum
 >(
-  d3: typeof d3Package,
   className = 'tooltip',
   options: Partial<Options<GElement, Datum, PElement, PDatum>> = {}
 ): Tip<GElement, Datum, PElement, PDatum> {
