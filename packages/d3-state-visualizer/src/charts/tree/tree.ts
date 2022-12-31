@@ -445,7 +445,10 @@ export default function (
 
       if (!tooltipOptions.disabled) {
         nodeEnter.call(
-          tooltip('tooltip', { ...tooltipOptions, root })
+          tooltip<HierarchyPointNodeWithPrivateChildren<InternalNode>>(
+            'tooltip',
+            { ...tooltipOptions, root }
+          )
             .text((d, i) => getTooltipString(d, i, tooltipOptions))
             .styles(tooltipOptions.style)
         );
@@ -501,9 +504,9 @@ export default function (
 
       // fade the text in and align it
       nodeUpdate
-        .select('text')
+        .select<SVGTextElement>('text')
         .style('fill-opacity', 1)
-        .attr('transform', function transform(this: SVGGraphicsElement, d) {
+        .attr('transform', function transform(d) {
           const x =
             (d.children || d._children ? -1 : 1) *
             (this.getBBox().width / 2 + nodeStyleOptions.radius + 5);
