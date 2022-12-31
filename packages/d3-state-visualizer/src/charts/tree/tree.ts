@@ -1,4 +1,4 @@
-import d3, { ZoomEvent } from 'd3';
+import d3, { D3ZoomEvent } from 'd3';
 import { isEmpty } from 'ramda';
 import { map2tree } from 'map2tree';
 import deepmerge from 'deepmerge';
@@ -225,7 +225,7 @@ export default function (
   const fullHeight = size * aspectRatio;
 
   const root = d3.select(DOMNode);
-  const zoom = d3.behavior.zoom().scaleExtent([0.1, 3]).scale(initialZoom);
+  const zoom = d3.zoom<SVGSVGElement, unknown>().scaleExtent([0.1, 3]);
 
   let svgElement = root
     .append('svg')
@@ -247,13 +247,12 @@ export default function (
   }
 
   const vis = svgElement
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    .call(zoom.scaleTo, initialZoom)
     .call(
       zoom.on('zoom', () => {
-        const { translate, scale } = d3.event as ZoomEvent;
-        vis.attr(
-          'transform',
-          `translate(${translate.toString()})scale(${scale})`
-        );
+        const { transform } = d3.event as D3ZoomEvent<SVGSVGElement, unknown>;
+        vis.attr('transform', transform.toString());
       })
     )
     .append('g')
