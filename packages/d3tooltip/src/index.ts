@@ -3,22 +3,17 @@ import type { BaseType, ContainerElement, Selection } from 'd3';
 import { is } from 'ramda';
 import functor from './utils/functor';
 
-interface Options<
-  GElement extends ContainerElement,
-  Datum,
-  PElement extends BaseType,
-  PDatum
-> {
+interface Options {
   left: number | undefined;
   top: number | undefined;
   offset: {
     left: number;
     top: number;
   };
-  root: Selection<GElement, Datum, PElement, PDatum> | undefined;
+  root: Selection<ContainerElement, unknown, BaseType, unknown> | undefined;
 }
 
-const defaultOptions: Options<ContainerElement, unknown, BaseType, unknown> = {
+const defaultOptions: Options = {
   left: undefined, // mouseX
   top: undefined, // mouseY
   offset: { left: 0, top: 0 },
@@ -27,14 +22,12 @@ const defaultOptions: Options<ContainerElement, unknown, BaseType, unknown> = {
 
 export type StyleValue = string | number | boolean;
 
-interface Tip<
-  GElement extends ContainerElement,
-  Datum,
-  PElement extends BaseType,
-  PDatum
-> {
-  (selection: Selection<GElement, Datum, PElement, PDatum>): void;
-  styles: (this: this, value: { [key: string]: StyleValue }) => this;
+interface Tip<Datum> {
+  (selection: Selection<BaseType, Datum, BaseType, unknown>): void;
+  styles: (
+    this: this,
+    value: { [key: string]: StyleValue } | undefined
+  ) => this;
   text: (
     this: this,
     value:
@@ -43,19 +36,11 @@ interface Tip<
   ) => this;
 }
 
-export function tooltip<
-  GElement extends ContainerElement,
-  Datum,
-  PElement extends BaseType,
-  PDatum
->(
+export function tooltip<Datum>(
   className = 'tooltip',
-  options: Partial<Options<GElement, Datum, PElement, PDatum>> = {}
-): Tip<GElement, Datum, PElement, PDatum> {
-  const { left, top, offset, root } = {
-    ...defaultOptions,
-    ...options,
-  } as Options<GElement, Datum, PElement, PDatum>;
+  options: Partial<Options> = {}
+): Tip<Datum> {
+  const { left, top, offset, root } = { ...defaultOptions, ...options };
 
   let text: (
     datum: Datum,
@@ -64,12 +49,12 @@ export function tooltip<
   ) => string = () => '';
   let styles: { [key: string]: StyleValue } = {};
 
-  let el: Selection<HTMLDivElement, Datum, BaseType, PDatum>;
-  const anchor: Selection<GElement, Datum, BaseType, PDatum> =
+  let el: Selection<HTMLDivElement, unknown, BaseType, unknown>;
+  const anchor: Selection<ContainerElement, unknown, BaseType, unknown> =
     root || d3.select('body');
   const rootNode = anchor.node()!;
 
-  function tip(selection: Selection<GElement, Datum, PElement, PDatum>) {
+  function tip(selection: Selection<BaseType, Datum, BaseType, unknown>) {
     selection.on('mouseover.tip', (node) => {
       const [mouseX, mouseY] = d3.mouse(rootNode);
       const [x, y] = [left || mouseX + offset.left, top || mouseY - offset.top];
@@ -105,7 +90,7 @@ export function tooltip<
 
   tip.styles = function setStyles(
     this: typeof tip,
-    value: { [key: string]: StyleValue }
+    value: { [key: string]: StyleValue } | undefined
   ) {
     if (is(Object, value)) {
       styles = { ...styles, ...value };
