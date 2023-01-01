@@ -435,10 +435,16 @@ export default function (
 
       if (!tooltipOptions.disabled) {
         nodeEnter.call(
-          tooltip<HierarchyPointNodeWithPrivateChildren<InternalNode>>(
-            'tooltip',
-            { ...tooltipOptions, root }
-          )
+          tooltip<
+            SVGGElement,
+            HierarchyPointNodeWithPrivateChildren<InternalNode>,
+            SVGGElement,
+            unknown,
+            HTMLElement,
+            unknown,
+            null,
+            undefined
+          >('tooltip', { ...tooltipOptions, root })
             .text((d, i) => getTooltipString(d, i, tooltipOptions))
             .styles(tooltipOptions.style)
         );

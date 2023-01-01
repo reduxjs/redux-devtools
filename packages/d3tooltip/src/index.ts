@@ -3,17 +3,22 @@ import type { BaseType, ContainerElement, Selection } from 'd3';
 import { is } from 'ramda';
 import functor from './utils/functor';
 
-interface Options {
+interface Options<
+  GElement extends ContainerElement,
+  Datum,
+  PElement extends BaseType,
+  PDatum
+> {
   left: number | undefined;
   top: number | undefined;
   offset: {
     left: number;
     top: number;
   };
-  root: Selection<ContainerElement, unknown, BaseType, unknown> | undefined;
+  root: Selection<GElement, Datum, PElement, PDatum> | undefined;
 }
 
-const defaultOptions: Options = {
+const defaultOptions: Options<ContainerElement, unknown, BaseType, unknown> = {
   left: undefined, // mouseX
   top: undefined, // mouseY
   offset: { left: 0, top: 0 },
@@ -22,8 +27,13 @@ const defaultOptions: Options = {
 
 export type StyleValue = string | number | boolean;
 
-interface Tip<Datum> {
-  (selection: Selection<BaseType, Datum, BaseType, unknown>): void;
+interface Tip<
+  GElement extends BaseType,
+  Datum,
+  PElement extends BaseType,
+  PDatum
+> {
+  (selection: Selection<GElement, Datum, PElement, PDatum>): void;
   styles: (
     this: this,
     value: { [key: string]: StyleValue } | undefined
@@ -36,11 +46,25 @@ interface Tip<Datum> {
   ) => this;
 }
 
-export function tooltip<Datum>(
+export function tooltip<
+  GElement extends BaseType,
+  Datum,
+  PElement extends BaseType,
+  PDatum,
+  RootGElement extends ContainerElement,
+  RootDatum,
+  RootPElement extends BaseType,
+  RootPDatum
+>(
   className = 'tooltip',
-  options: Partial<Options> = {}
-): Tip<Datum> {
-  const { left, top, offset, root } = { ...defaultOptions, ...options };
+  options: Partial<
+    Options<RootGElement, RootDatum, RootPElement, RootPDatum>
+  > = {}
+): Tip<GElement, Datum, PElement, PDatum> {
+  const { left, top, offset, root } = {
+    ...defaultOptions,
+    ...options,
+  } as Options<RootGElement, RootDatum, RootPElement, RootPDatum>;
 
   let text: (
     datum: Datum,
@@ -49,12 +73,16 @@ export function tooltip<Datum>(
   ) => string = () => '';
   let styles: { [key: string]: StyleValue } = {};
 
-  let el: Selection<HTMLDivElement, unknown, BaseType, unknown>;
-  const anchor: Selection<ContainerElement, unknown, BaseType, unknown> =
-    root || d3.select('body');
+  let el: Selection<HTMLDivElement, RootDatum, BaseType, unknown>;
+  const anchor: Selection<
+    RootGElement,
+    RootDatum,
+    RootPElement | HTMLElement,
+    RootPDatum
+  > = root || d3.select<RootGElement, RootDatum>('body');
   const rootNode = anchor.node()!;
 
-  function tip(selection: Selection<BaseType, Datum, BaseType, unknown>) {
+  function tip(selection: Selection<GElement, Datum, PElement, PDatum>) {
     selection.on('mouseover.tip', (node) => {
       const [mouseX, mouseY] = d3.mouse(rootNode);
       const [x, y] = [left || mouseX + offset.left, top || mouseY - offset.top];
