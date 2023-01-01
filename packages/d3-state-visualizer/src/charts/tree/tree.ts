@@ -191,24 +191,11 @@ export interface HierarchyPointNodeWithPrivateChildren<Datum>
   _children?: this[] | undefined;
 }
 
-// export interface NodeWithId {
-//   name: string;
-//   children?: NodeWithId[] | null;
-//   _children?: NodeWithId[] | null;
-//   value?: unknown;
-//   id: string;
-//
-//   parent?: NodeWithId;
-//   depth?: number;
-//   x?: number;
-//   y?: number;
-// }
-
 interface NodePosition {
-  parentId: string | null | undefined;
+  parentId: string | null;
   id: string;
-  x: number | undefined;
-  y: number | undefined;
+  x: number;
+  y: number;
 }
 
 export default function (
@@ -366,9 +353,13 @@ export default function (
 
     function update() {
       // path generator for links
-      const diagonal = d3.svg
-        .diagonal<NodePosition>()
-        .projection((d) => [d.y!, d.x!]);
+      const linkHorizontal = d3
+        .linkHorizontal<
+          { source: NodePosition; target: NodePosition },
+          NodePosition
+        >()
+        .x((d) => d.x)
+        .y((d) => d.y);
       // set tree dimensions and spacing between branches and nodes
       const maxNodeCountByLevel = Math.max(...getNodeGroupByDepthCount(data));
 
@@ -428,7 +419,7 @@ export default function (
           const previousPosition =
             (position && previousNodePositionsById[position.id]) ||
             previousNodePositionsById.root;
-          return `translate(${previousPosition.y!},${previousPosition.x!})`;
+          return `translate(${previousPosition.y},${previousPosition.x})`;
         })
         .style('fill', textStyleOptions.colors.default)
         .style('cursor', 'pointer')
@@ -543,7 +534,7 @@ export default function (
           const futurePosition =
             (position && nodePositionsById[position.id]) ||
             nodePositionsById.root;
-          return `translate(${futurePosition.y!},${futurePosition.x!})`;
+          return `translate(${futurePosition.y},${futurePosition.x})`;
         })
         .remove();
 
@@ -570,7 +561,7 @@ export default function (
           const previousPosition =
             (position && previousNodePositionsById[position.id]) ||
             previousNodePositionsById.root;
-          return diagonal({
+          return linkHorizontal({
             source: previousPosition,
             target: previousPosition,
           });
@@ -581,11 +572,11 @@ export default function (
       }
 
       // transition links to their new position
-      link.transition().duration(transitionDuration).attr('d', diagonal);
+      link.transition().duration(transitionDuration).attr('d', linkHorizontal);
 
       // transition exiting nodes to the parent's new position
       link
-        .exit()
+        .exit<HierarchyPointLink<InternalNode>>()
         .transition()
         .duration(transitionDuration)
         .attr('d', (d) => {
@@ -597,7 +588,7 @@ export default function (
           const futurePosition =
             (position && nodePositionsById[position.id]) ||
             nodePositionsById.root;
-          return diagonal({
+          return linkHorizontal({
             source: futurePosition,
             target: futurePosition,
           });
