@@ -355,8 +355,11 @@ export default function (
       // path generator for links
       const linkHorizontal = d3
         .linkHorizontal<
-          { source: NodePosition; target: NodePosition },
-          NodePosition
+          {
+            source: { x: number; y: number };
+            target: { x: number; y: number };
+          },
+          { x: number; y: number }
         >()
         .x((d) => d.x)
         .y((d) => d.y);
