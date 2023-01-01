@@ -432,15 +432,11 @@ export default function (
         })
         .style('fill', textStyleOptions.colors.default)
         .style('cursor', 'pointer')
-        .on('mouseover', function mouseover(this: EventTarget) {
-          d3.select(this).style({
-            fill: textStyleOptions.colors.hover,
-          });
+        .on('mouseover', function mouseover() {
+          d3.select(this).style('fill', textStyleOptions.colors.hover);
         })
-        .on('mouseout', function mouseout(this: EventTarget) {
-          d3.select(this).style({
-            fill: textStyleOptions.colors.default,
-          });
+        .on('mouseout', function mouseout() {
+          d3.select(this).style('fill', textStyleOptions.colors.default);
         });
 
       if (!tooltipOptions.disabled) {
