@@ -511,12 +511,17 @@ export default function (
 
       // blink updated nodes
       node
-        .filter(function flick(this: any, d) {
+        .filter(function flick(
+          this: SVGGElement & {
+            __oldData__?: HierarchyPointNodeWithPrivateChildren<InternalNode>;
+          },
+          d
+        ) {
           // test whether the relevant properties of d match
           // the equivalent property of the oldData
           // also test whether the old data exists,
           // to catch the entering elements!
-          return this.__oldData__ && d.value !== this.__oldData__.value;
+          return !!this.__oldData__ && d.value !== this.__oldData__.value;
         })
         .select('g')
         .style('opacity', '0.3')
@@ -526,13 +531,13 @@ export default function (
 
       // transition exiting nodes to the parent's new position
       const nodeExit = node
-        .exit()
+        .exit<HierarchyPointNodeWithPrivateChildren<InternalNode>>()
         .transition()
         .duration(transitionDuration)
         .attr('transform', (d) => {
           const position = findParentNodePosition(
             previousNodePositionsById,
-            d.id,
+            d.data.id,
             (n) => !!nodePositionsById[n.id]
           );
           const futurePosition =
