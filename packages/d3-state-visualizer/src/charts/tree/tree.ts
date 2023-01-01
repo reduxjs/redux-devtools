@@ -493,7 +493,7 @@ export default function (
       const nodeUpdate = node
         .transition()
         .duration(transitionDuration)
-        .attr('transform', (d) => `translate(${d.y!},${d.x!})`);
+        .attr('transform', (d) => `translate(${d.y},${d.x})`);
 
       // ensure circle radius is correct
       nodeUpdate.select('circle').attr('r', nodeStyleOptions.radius);
