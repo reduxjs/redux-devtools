@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
-import type { BaseType, ContainerElement, Selection } from 'd3';
+import type { BaseType, Selection } from 'd3';
 
 export type StyleValue = string | number | boolean;
 
 interface Options<
   Datum,
-  RootGElement extends ContainerElement,
+  RootGElement extends BaseType,
   RootDatum,
   RootPElement extends BaseType,
   RootPDatum
@@ -23,13 +23,7 @@ interface Options<
   text: string | ((datum: Datum) => string);
 }
 
-const defaultOptions: Options<
-  unknown,
-  ContainerElement,
-  unknown,
-  BaseType,
-  unknown
-> = {
+const defaultOptions: Options<unknown, BaseType, unknown, BaseType, unknown> = {
   left: undefined, // mouseX
   top: undefined, // mouseY
   offset: { left: 0, top: 0 },
@@ -43,7 +37,7 @@ export function tooltip<
   Datum,
   PElement extends BaseType,
   PDatum,
-  RootGElement extends ContainerElement,
+  RootGElement extends BaseType,
   RootDatum,
   RootPElement extends BaseType,
   RootPDatum
@@ -68,9 +62,12 @@ export function tooltip<
   const rootNode = anchor.node()!;
 
   return function tip(selection: Selection<GElement, Datum, PElement, PDatum>) {
-    selection.on('mouseover.tip', (node) => {
-      const [mouseX, mouseY] = d3.mouse(rootNode);
-      const [x, y] = [left || mouseX + offset.left, top || mouseY - offset.top];
+    selection.on('mouseover.tip', (event, datum) => {
+      const [pointerX, pointerY] = d3.pointer(event, rootNode);
+      const [x, y] = [
+        left || pointerX + offset.left,
+        top || pointerY - offset.top,
+      ];
 
       anchor.selectAll(`div.${className}`).remove();
 
@@ -81,20 +78,23 @@ export function tooltip<
         .style('z-index', 1001)
         .style('left', `${x}px`)
         .style('top', `${y}px`)
-        .html(typeof text === 'function' ? () => text(node) : () => text);
+        .html(typeof text === 'function' ? () => text(datum) : () => text);
 
       for (const [key, value] of Object.entries(styles)) {
         el.style(key, value);
       }
     });
 
-    selection.on('mousemove.tip', (node) => {
-      const [mouseX, mouseY] = d3.mouse(rootNode);
-      const [x, y] = [left || mouseX + offset.left, top || mouseY - offset.top];
+    selection.on('mousemove.tip', (event, datum) => {
+      const [pointerX, pointerY] = d3.pointer(event, rootNode);
+      const [x, y] = [
+        left || pointerX + offset.left,
+        top || pointerY - offset.top,
+      ];
 
       el.style('left', `${x}px`)
         .style('top', `${y}px`)
-        .html(typeof text === 'function' ? () => text(node) : () => text);
+        .html(typeof text === 'function' ? () => text(datum) : () => text);
     });
 
     selection.on('mouseout.tip', () => el.remove());
