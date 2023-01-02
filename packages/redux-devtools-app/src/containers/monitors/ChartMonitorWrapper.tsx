@@ -4,7 +4,10 @@ import { ChartMonitor } from '@redux-devtools/chart-monitor';
 import type { HierarchyPointNode, Node } from 'd3-state-visualizer';
 import { selectMonitorWithState } from '../../actions';
 
-export function getPath(obj: HierarchyPointNode<Node>, inspectedStatePath: string[]) {
+export function getPath(
+  obj: HierarchyPointNode<Node>,
+  inspectedStatePath: string[]
+) {
   const parent = obj.parent;
   if (!parent) return;
   getPath(parent, inspectedStatePath);
