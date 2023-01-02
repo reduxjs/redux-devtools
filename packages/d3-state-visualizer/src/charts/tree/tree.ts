@@ -387,7 +387,7 @@ export default function (
       nodePositions.forEach((node) => (nodePositionsById[node.id] = node));
 
       // process the node selection
-      const node = vis
+      let node = vis
         .selectAll<
           SVGGElement,
           HierarchyPointNodeWithPrivateChildren<InternalNode>
@@ -458,6 +458,8 @@ export default function (
         .text((d) => d.data.name)
         .on('click', onClickText);
 
+      node = nodeEnter.merge(node);
+
       // update the text to reflect whether node has children or not
       node.select('text').text((d) => d.data.name);
 
@@ -475,13 +477,10 @@ export default function (
         );
 
       // transition nodes to their new position
-      const nodeUpdate = nodeEnter
-        .merge(node)
-        // .transition()
-        // .duration(transitionDuration)
-        .attr('transform', (d) => {
-          return `translate(${d.y},${d.x})`;
-        });
+      const nodeUpdate = node
+        .transition()
+        .duration(transitionDuration)
+        .attr('transform', (d) => `translate(${d.y},${d.x})`);
 
       // ensure circle radius is correct
       nodeUpdate.select('circle').attr('r', nodeStyleOptions.radius);
@@ -540,12 +539,14 @@ export default function (
       nodeExit.select('text').style('fill-opacity', 0);
 
       // update the links
-      const link = vis
-        .selectAll<SVGGElement, HierarchyPointLink<InternalNode>>('path.link')
+      let link = vis
+        .selectAll<SVGPathElement, HierarchyPointLink<InternalNode>>(
+          'path.link'
+        )
         .data(links, (d) => d.target.data.id);
 
       // enter any new links at the parent's previous position
-      link
+      const linkEnter = link
         .enter()
         .insert('path', 'g')
         .attr('class', 'link')
@@ -565,8 +566,10 @@ export default function (
         });
 
       for (const [key, value] of Object.entries(linkStyles)) {
-        link.style(key, value);
+        linkEnter.style(key, value);
       }
+
+      link = linkEnter.merge(link);
 
       // transition links to their new position
       link.transition().duration(transitionDuration).attr('d', linkHorizontal);
