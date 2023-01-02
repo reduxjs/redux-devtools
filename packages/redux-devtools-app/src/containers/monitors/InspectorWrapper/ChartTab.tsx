@@ -1,7 +1,8 @@
 import React, { Component, RefCallback } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { withTheme } from 'styled-components';
-import { InputOptions, NodeWithId, tree } from 'd3-state-visualizer';
+import { tree } from 'd3-state-visualizer';
+import type { HierarchyPointNode, Node, Options } from 'd3-state-visualizer';
 import { getPath } from '../ChartMonitorWrapper';
 import { updateMonitorState } from '../../../actions';
 import { ThemeFromProvider } from '@redux-devtools/ui';
@@ -54,12 +55,12 @@ class ChartTab extends Component<Props> {
     this.renderChart(props.data as {} | null | undefined);
   }
 
-  getChartTheme(theme: ThemeFromProvider): Partial<InputOptions> {
+  getChartTheme(theme: ThemeFromProvider): Partial<Options> {
     return {
       heightBetweenNodesCoeff: 1,
       widthBetweenNodesCoeff: 1.3,
       tooltipOptions: {
-        style: {
+        styles: {
           color: theme.base06,
           'background-color': theme.base01,
           opacity: '0.9',
@@ -69,29 +70,29 @@ class ChartTab extends Component<Props> {
         offset: { left: 30, top: 10 },
         indentationSize: 2,
       },
-      style: {
+      chartStyles: {
         width: '100%',
         height: '100%',
-        node: {
-          colors: {
-            default: theme.base0B,
-            collapsed: theme.base0B,
-            parent: theme.base0E,
-          },
-          radius: 7,
-        } as unknown as string,
-        text: {
-          colors: {
-            default: theme.base0D,
-            hover: theme.base06,
-          },
-        } as unknown as string,
+      },
+      nodeStyleOptions: {
+        colors: {
+          default: theme.base0B,
+          collapsed: theme.base0B,
+          parent: theme.base0E,
+        },
+        radius: 7,
+      },
+      textStyleOptions: {
+        colors: {
+          default: theme.base0D,
+          hover: theme.base06,
+        },
       },
       onClickText: this.onClickText,
     };
   }
 
-  onClickText = (data: NodeWithId) => {
+  onClickText = (data: HierarchyPointNode<Node>) => {
     const inspectedStatePath: string[] = [];
     getPath(data, inspectedStatePath);
     this.props.updateMonitorState({

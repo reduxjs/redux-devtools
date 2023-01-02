@@ -35,7 +35,7 @@ const render = tree(document.getElementById('root'), {
   isSorted: false,
   widthBetweenNodesCoeff: 1.5,
   heightBetweenNodesCoeff: 2,
-  style: { border: '1px solid black' },
+  chartStyles: { border: '1px solid black' },
   tooltipOptions: { offset: { left: 30, top: 10 }, indentationSize: 2 },
 });
 
@@ -61,7 +61,7 @@ Other options are listed below and have reasonable default values if you want to
 | Option                    | Type    | Default                                                                          | Description                                                                                                                                                                                                                                                                                  |
 | ------------------------- | ------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                      | String  | `'d3svg'`                                                                        | Sets the identifier of the SVG element —i.e your chart— that will be added to the DOM element you passed as first argument                                                                                                                                                                   |
-| `style`                   | Object  | `{}`                                                                             | Sets the CSS style of the chart                                                                                                                                                                                                                                                              |
+| `chartStyles`             | Object  | `{}`                                                                             | Sets the CSS style of the chart                                                                                                                                                                                                                                                              |
 | `size`                    | Number  | `500`                                                                            | Sets size of the chart in pixels                                                                                                                                                                                                                                                             |
 | `aspectRatio`             | Float   | `1.0`                                                                            | Sets the chart height to `size * aspectRatio` and [viewBox](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox) in order to preserve the aspect ratio of the chart. [Great video](https://www.youtube.com/watch?v=FCOeMy7HrBc) if you want to learn more about how SVG works |
 | `widthBetweenNodesCoeff`  | Float   | `1.0`                                                                            | Alters the horizontal space between each node                                                                                                                                                                                                                                                |
@@ -73,12 +73,6 @@ Other options are listed below and have reasonable default values if you want to
 | `pushMethod`              | String  | `'push'`                                                                         | Sets the method that shall be used to add array children to the tree. **Warning**: only works if you provide a `state` option                                                                                                                                                                |
 
 More to come...
-
-## Bindings
-
-### React
-
-[example](https://github.com/reduxjs/redux-devtools/tree/master/packages/d3-state-visualizer/examples/react-tree) implementation.
 
 ## Roadmap
 

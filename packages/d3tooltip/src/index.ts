@@ -1,75 +1,73 @@
-import d3Package, { Primitive, Selection } from 'd3';
-import { is } from 'ramda';
-import utils from './utils';
-const { prependClass, functor } = utils;
+import * as d3 from 'd3';
+import type { BaseType, ContainerElement, Selection } from 'd3';
 
-interface Options<Datum> {
+export type StyleValue = string | number | boolean;
+
+interface Options<
+  Datum,
+  RootGElement extends ContainerElement,
+  RootDatum,
+  RootPElement extends BaseType,
+  RootPDatum
+> {
   left: number | undefined;
   top: number | undefined;
   offset: {
     left: number;
     top: number;
   };
-  root: Selection<Datum> | undefined;
+  root:
+    | Selection<RootGElement, RootDatum, RootPElement, RootPDatum>
+    | undefined;
+  styles: { [key: string]: StyleValue };
+  text: string | ((datum: Datum) => string);
 }
 
-const defaultOptions: Options<unknown> = {
+const defaultOptions: Options<
+  unknown,
+  ContainerElement,
+  unknown,
+  BaseType,
+  unknown
+> = {
   left: undefined, // mouseX
   top: undefined, // mouseY
   offset: { left: 0, top: 0 },
   root: undefined,
+  styles: {},
+  text: '',
 };
 
-interface Tip<Datum> {
-  (selection: Selection<Datum>): void;
-  attr: (
-    this: this,
-    d:
-      | string
-      | {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }
-  ) => this;
-  style: (
-    this: this,
-    d:
-      | string
-      | {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }
-      | undefined
-  ) => this;
-  text: (
-    this: this,
-    d: string | ((datum: Datum, index?: number, outerIndex?: number) => string)
-  ) => this;
-}
-
-export function tooltip<Datum>(
-  d3: typeof d3Package,
+export function tooltip<
+  GElement extends BaseType,
+  Datum,
+  PElement extends BaseType,
+  PDatum,
+  RootGElement extends ContainerElement,
+  RootDatum,
+  RootPElement extends BaseType,
+  RootPDatum
+>(
   className = 'tooltip',
-  options: Partial<Options<Datum>> = {}
-): Tip<Datum> {
-  const { left, top, offset, root } = {
+  options: Partial<
+    Options<Datum, RootGElement, RootDatum, RootPElement, RootPDatum>
+  > = {}
+) {
+  const { left, top, offset, root, styles, text } = {
     ...defaultOptions,
     ...options,
-  } as Options<Datum>;
+  } as Options<Datum, RootGElement, RootDatum, RootPElement, RootPDatum>;
 
-  let attrs = { class: className };
-  let text: (datum: Datum, index?: number, outerIndex?: number) => string = (
-    node: Datum
-  ) => '';
-  let styles = {};
+  let el: Selection<HTMLDivElement, RootDatum, BaseType, unknown>;
+  const anchor: Selection<
+    RootGElement,
+    RootDatum,
+    RootPElement | HTMLElement,
+    RootPDatum
+  > = root || d3.select<RootGElement, RootDatum>('body');
+  const rootNode = anchor.node()!;
 
-  let el: Selection<Datum>;
-  const anchor = root || d3.select('body');
-  const rootNode = anchor.node();
-
-  function tip(selection: Selection<Datum>) {
+  return function tip(selection: Selection<GElement, Datum, PElement, PDatum>) {
     selection.on('mouseover.tip', (node) => {
       const [mouseX, mouseY] = d3.mouse(rootNode);
       const [x, y] = [left || mouseX + offset.left, top || mouseY - offset.top];
@@ -78,84 +76,27 @@ export function tooltip<Datum>(
 
       el = anchor
         .append('div')
-        .attr(prependClass(className)(attrs))
-        .style({
-          position: 'absolute',
-          'z-index': 1001,
-          left: `${x}px`,
-          top: `${y}px`,
-          ...styles,
-        })
-        .html(() => text(node)) as Selection<Datum>;
+        .attr('class', className)
+        .style('position', 'absolute')
+        .style('z-index', 1001)
+        .style('left', `${x}px`)
+        .style('top', `${y}px`)
+        .html(typeof text === 'function' ? () => text(node) : () => text);
+
+      for (const [key, value] of Object.entries(styles)) {
+        el.style(key, value);
+      }
     });
 
     selection.on('mousemove.tip', (node) => {
       const [mouseX, mouseY] = d3.mouse(rootNode);
       const [x, y] = [left || mouseX + offset.left, top || mouseY - offset.top];
 
-      el.style({
-        left: `${x}px`,
-        top: `${y}px`,
-      }).html(() => text(node));
+      el.style('left', `${x}px`)
+        .style('top', `${y}px`)
+        .html(typeof text === 'function' ? () => text(node) : () => text);
     });
 
     selection.on('mouseout.tip', () => el.remove());
-  }
-
-  tip.attr = function setAttr(
-    this: typeof tip,
-    d:
-      | string
-      | {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }
-  ) {
-    if (is(Object, d)) {
-      attrs = {
-        ...attrs,
-        ...(d as {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }),
-      };
-    }
-    return this;
   };
-
-  tip.style = function setStyle(
-    this: typeof tip,
-    d:
-      | string
-      | {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }
-      | undefined
-  ) {
-    if (is(Object, d)) {
-      styles = {
-        ...styles,
-        ...(d as {
-          [key: string]:
-            | Primitive
-            | ((datum: Datum, index: number, outerIndex: number) => Primitive);
-        }),
-      };
-    }
-    return this;
-  };
-
-  tip.text = function setText(
-    this: typeof tip,
-    d: string | ((datum: Datum, index?: number, outerIndex?: number) => string)
-  ) {
-    text = functor(d);
-    return this;
-  };
-
-  return tip;
 }

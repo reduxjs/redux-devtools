@@ -1,6 +1,8 @@
-import d3, { ZoomEvent, Primitive } from 'd3';
+import * as d3 from 'd3';
+import type { D3ZoomEvent, HierarchyPointLink, HierarchyPointNode } from 'd3';
 import { isEmpty } from 'ramda';
 import { map2tree } from 'map2tree';
+import type { Node } from 'map2tree';
 import deepmerge from 'deepmerge';
 import {
   getTooltipString,
@@ -9,17 +11,33 @@ import {
   getNodeGroupByDepthCount,
 } from './utils';
 import { tooltip } from 'd3tooltip';
+import type { StyleValue } from 'd3tooltip';
 
-export interface InputOptions {
+export interface Options {
   // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
   // eslint-disable-next-line @typescript-eslint/ban-types
-  tree?: NodeWithId | {};
+  tree?: Node | {};
 
   rootKeyName: string;
   pushMethod: 'push' | 'unshift';
   id: string;
-  style: { [key: string]: Primitive };
+  chartStyles: { [key: string]: StyleValue };
+  nodeStyleOptions: {
+    colors: {
+      default: string;
+      collapsed: string;
+      parent: string;
+    };
+    radius: number;
+  };
+  textStyleOptions: {
+    colors: {
+      default: string;
+      hover: string;
+    };
+  };
+  linkStyles: { [key: string]: StyleValue };
   size: number;
   aspectRatio: number;
   initialZoom: number;
@@ -34,7 +52,7 @@ export interface InputOptions {
   widthBetweenNodesCoeff: number;
   transitionDuration: number;
   blinkDuration: number;
-  onClickText: (datum: NodeWithId) => void;
+  onClickText: (datum: HierarchyPointNode<Node>) => void;
   tooltipOptions: {
     disabled?: boolean;
     left?: number | undefined;
@@ -43,64 +61,7 @@ export interface InputOptions {
       left: number;
       top: number;
     };
-    style?: { [key: string]: Primitive } | undefined;
-    indentationSize?: number;
-  };
-}
-
-interface Options {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  state?: {} | null;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  tree?: NodeWithId | {};
-
-  rootKeyName: string;
-  pushMethod: 'push' | 'unshift';
-  id: string;
-  style: {
-    node: {
-      colors: {
-        default: string;
-        collapsed: string;
-        parent: string;
-      };
-      radius: number;
-    };
-    text: {
-      colors: {
-        default: string;
-        hover: string;
-      };
-    };
-    link: {
-      stroke: string;
-      fill: string;
-    };
-  };
-  size: number;
-  aspectRatio: number;
-  initialZoom: number;
-  margin: {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-  };
-  isSorted: boolean;
-  heightBetweenNodesCoeff: number;
-  widthBetweenNodesCoeff: number;
-  transitionDuration: number;
-  blinkDuration: number;
-  onClickText: () => void;
-  tooltipOptions: {
-    disabled: boolean;
-    left: number | undefined;
-    top: number | undefined;
-    offset: {
-      left: number;
-      top: number;
-    };
-    style: { [key: string]: Primitive } | undefined;
+    styles?: { [key: string]: StyleValue } | undefined;
     indentationSize?: number;
   };
 }
@@ -111,25 +72,24 @@ const defaultOptions: Options = {
   pushMethod: 'push',
   tree: undefined,
   id: 'd3svg',
-  style: {
-    node: {
-      colors: {
-        default: '#ccc',
-        collapsed: 'lightsteelblue',
-        parent: 'white',
-      },
-      radius: 7,
+  chartStyles: {},
+  nodeStyleOptions: {
+    colors: {
+      default: '#ccc',
+      collapsed: 'lightsteelblue',
+      parent: 'white',
     },
-    text: {
-      colors: {
-        default: 'black',
-        hover: 'skyblue',
-      },
+    radius: 7,
+  },
+  textStyleOptions: {
+    colors: {
+      default: 'black',
+      hover: 'skyblue',
     },
-    link: {
-      stroke: '#000',
-      fill: 'none',
-    },
+  },
+  linkStyles: {
+    stroke: '#000',
+    fill: 'none',
   },
   size: 500,
   aspectRatio: 1.0,
@@ -156,37 +116,29 @@ const defaultOptions: Options = {
       left: 0,
       top: 0,
     },
-    style: undefined,
+    styles: undefined,
   },
-};
+} satisfies Options;
 
-export interface NodeWithId {
-  name: string;
-  children?: NodeWithId[] | null;
-  _children?: NodeWithId[] | null;
-  value?: unknown;
-  id: string;
-
-  parent?: NodeWithId;
-  depth?: number;
-  x?: number;
-  y?: number;
+export interface InternalNode extends Node {
+  _children?: this[] | undefined;
+  id: string | number;
 }
 
 interface NodePosition {
-  parentId: string | null | undefined;
-  id: string;
-  x: number | undefined;
-  y: number | undefined;
+  parentId: string | number | null;
+  id: string | number;
+  x: number;
+  y: number;
 }
 
-export default function (
-  DOMNode: HTMLElement,
-  options: Partial<InputOptions> = {}
-) {
+export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
   const {
     id,
-    style,
+    chartStyles,
+    nodeStyleOptions,
+    textStyleOptions,
+    linkStyles,
     size,
     aspectRatio,
     initialZoom,
@@ -202,64 +154,50 @@ export default function (
     tree,
     tooltipOptions,
     onClickText,
-  } = deepmerge(defaultOptions, options) as Options;
+  } = deepmerge(defaultOptions, options);
 
   const width = size - margin.left - margin.right;
   const height = size * aspectRatio - margin.top - margin.bottom;
   const fullWidth = size;
   const fullHeight = size * aspectRatio;
 
-  const attr: { [key: string]: Primitive } = {
-    id,
-    preserveAspectRatio: 'xMinYMin slice',
-  };
-
-  if (!(style as unknown as { [key: string]: Primitive }).width) {
-    attr.width = fullWidth;
-  }
-
-  if (
-    !(style as unknown as { [key: string]: Primitive }).width ||
-    !(style as unknown as { [key: string]: Primitive }).height
-  ) {
-    attr.viewBox = `0 0 ${fullWidth} ${fullHeight}`;
-  }
-
   const root = d3.select(DOMNode);
-  const zoom = d3.behavior.zoom().scaleExtent([0.1, 3]).scale(initialZoom);
-  const vis = root
+  const zoom = d3.zoom<SVGSVGElement, unknown>().scaleExtent([0.1, 3]);
+
+  const svgElement = root
     .append('svg')
-    .attr(attr)
-    .style({ cursor: '-webkit-grab', ...style } as unknown as {
-      [key: string]: Primitive;
-    })
+    .attr('id', id)
+    .attr('preserveAspectRatio', 'xMinYMin slice')
+    .style('cursor', '-webkit-grab');
+
+  if (!chartStyles.width) {
+    svgElement.attr('width', fullWidth);
+  }
+
+  if (!chartStyles.width || !chartStyles.height) {
+    svgElement.attr('viewBox', `0 0 ${fullWidth} ${fullHeight}`);
+  }
+
+  for (const [key, value] of Object.entries(chartStyles)) {
+    svgElement.style(key, value);
+  }
+
+  const vis = svgElement
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    .call(zoom.scaleTo, initialZoom)
     .call(
       zoom.on('zoom', () => {
-        const { translate, scale } = d3.event as ZoomEvent;
-        vis.attr(
-          'transform',
-          `translate(${translate.toString()})scale(${scale})`
-        );
+        const { transform } = d3.event as D3ZoomEvent<SVGSVGElement, unknown>;
+        vis.attr('transform', transform.toString());
       })
     )
     .append('g')
-    .attr({
-      transform: `translate(${margin.left + style.node.radius}, ${
+    .attr(
+      'transform',
+      `translate(${margin.left + nodeStyleOptions.radius}, ${
         margin.top
-      }) scale(${initialZoom})`,
-    });
-
-  let layout = d3.layout.tree().size([width, height]);
-  let data: NodeWithId;
-
-  if (isSorted) {
-    layout.sort((a, b) =>
-      (b as NodeWithId).name.toLowerCase() <
-      (a as NodeWithId).name.toLowerCase()
-        ? 1
-        : -1
+      }) scale(${initialZoom})`
     );
-  }
 
   // previousNodePositionsById stores node x and y
   // as well as hierarchy (id / parentId);
@@ -277,8 +215,8 @@ export default function (
   // of parent ids; once a parent that matches the given filter is found,
   // the parent position gets returned
   function findParentNodePosition(
-    nodePositionsById: { [nodeId: string]: NodePosition },
-    nodeId: string,
+    nodePositionsById: { [nodeId: string | number]: NodePosition },
+    nodeId: string | number,
     filter: (nodePosition: NodePosition) => boolean
   ) {
     let currentPosition = nodePositionsById[nodeId];
@@ -294,19 +232,18 @@ export default function (
   }
 
   return function renderChart(nextState = tree || state) {
-    data = !tree
-      ? // eslint-disable-next-line @typescript-eslint/ban-types
-        (map2tree(nextState as {}, {
+    let data = !tree
+      ? (map2tree(nextState, {
           key: rootKeyName,
           pushMethod,
-        }) as NodeWithId)
-      : (nextState as NodeWithId);
+        }) as InternalNode)
+      : (nextState as InternalNode);
 
     if (isEmpty(data) || !data.name) {
       data = {
         name: 'error',
         message: 'Please provide a state map or a tree structure',
-      } as unknown as NodeWithId;
+      } as unknown as InternalNode;
     }
 
     let nodeIndex = 0;
@@ -334,76 +271,94 @@ export default function (
 
     function update() {
       // path generator for links
-      const diagonal = d3.svg
-        .diagonal<NodePosition>()
-        .projection((d) => [d.y!, d.x!]);
+      const linkHorizontal = d3
+        .linkHorizontal<
+          {
+            source: { x: number; y: number };
+            target: { x: number; y: number };
+          },
+          { x: number; y: number }
+        >()
+        .x((d) => d.y)
+        .y((d) => d.x);
       // set tree dimensions and spacing between branches and nodes
       const maxNodeCountByLevel = Math.max(...getNodeGroupByDepthCount(data));
 
-      layout = layout.size([
-        maxNodeCountByLevel * 25 * heightBetweenNodesCoeff,
-        width,
-      ]);
+      const layout = d3
+        .tree<InternalNode>()
+        .size([maxNodeCountByLevel * 25 * heightBetweenNodesCoeff, width]);
 
-      const nodes = layout.nodes(data as d3.layout.tree.Node) as NodeWithId[];
-      const links = layout.links(nodes as d3.layout.tree.Node[]);
+      const rootNode = d3.hierarchy(data);
+      if (isSorted) {
+        rootNode.sort((a, b) =>
+          b.data.name.toLowerCase() < a.data.name.toLowerCase() ? 1 : -1
+        );
+      }
 
-      nodes.forEach(
+      const rootPointNode = layout(rootNode);
+      const links = rootPointNode.links();
+
+      rootPointNode.each(
         (node) =>
-          (node.y = node.depth! * (maxLabelLength * 7 * widthBetweenNodesCoeff))
+          (node.y = node.depth * (maxLabelLength * 7 * widthBetweenNodesCoeff))
       );
 
+      const nodes = rootPointNode.descendants();
+
       const nodePositions = nodes.map((n) => ({
-        parentId: n.parent && n.parent.id,
-        id: n.id,
+        parentId: n.parent && n.parent.data.id,
+        id: n.data.id,
         x: n.x,
         y: n.y,
       }));
-      const nodePositionsById: { [nodeId: string]: NodePosition } = {};
+      const nodePositionsById: { [nodeId: string | number]: NodePosition } = {};
       nodePositions.forEach((node) => (nodePositionsById[node.id] = node));
 
       // process the node selection
       const node = vis
-        .selectAll('g.node')
-        .property('__oldData__', (d: NodeWithId) => d)
-        .data(nodes, (d) => d.id || (d.id = ++nodeIndex as unknown as string));
+        .selectAll<SVGGElement, HierarchyPointNode<InternalNode>>('g.node')
+        .property('__oldData__', (d) => d)
+        .data(nodes, (d) => d.data.id || (d.data.id = ++nodeIndex));
       const nodeEnter = node
         .enter()
         .append('g')
-        .attr({
-          class: 'node',
-          transform: (d) => {
-            const position = findParentNodePosition(
-              nodePositionsById,
-              d.id,
-              (n) => !!previousNodePositionsById[n.id]
-            );
-            const previousPosition =
-              (position && previousNodePositionsById[position.id]) ||
-              previousNodePositionsById.root;
-            return `translate(${previousPosition.y!},${previousPosition.x!})`;
-          },
+        .attr('class', 'node')
+        .attr('transform', (d) => {
+          const position = findParentNodePosition(
+            nodePositionsById,
+            d.data.id,
+            (n) => !!previousNodePositionsById[n.id]
+          );
+          const previousPosition =
+            (position && previousNodePositionsById[position.id]) ||
+            previousNodePositionsById.root;
+          return `translate(${previousPosition.y},${previousPosition.x})`;
         })
-        .style({
-          fill: style.text.colors.default,
-          cursor: 'pointer',
+        .style('fill', textStyleOptions.colors.default)
+        .style('cursor', 'pointer')
+        .on('mouseover', function mouseover() {
+          d3.select(this).style('fill', textStyleOptions.colors.hover);
         })
-        .on('mouseover', function mouseover(this: EventTarget) {
-          d3.select(this).style({
-            fill: style.text.colors.hover,
-          });
-        })
-        .on('mouseout', function mouseout(this: EventTarget) {
-          d3.select(this).style({
-            fill: style.text.colors.default,
-          });
+        .on('mouseout', function mouseout() {
+          d3.select(this).style('fill', textStyleOptions.colors.default);
         });
 
       if (!tooltipOptions.disabled) {
         nodeEnter.call(
-          tooltip<NodeWithId>(d3, 'tooltip', { ...tooltipOptions, root })
-            .text((d, i) => getTooltipString(d, i, tooltipOptions))
-            .style(tooltipOptions.style)
+          tooltip<
+            SVGGElement,
+            HierarchyPointNode<InternalNode>,
+            SVGGElement,
+            unknown,
+            HTMLElement,
+            unknown,
+            null,
+            undefined
+          >('tooltip', {
+            ...tooltipOptions,
+            root,
+            text: (d) => getTooltipString(d.data, tooltipOptions),
+          })
         );
       }
 
@@ -412,77 +367,79 @@ export default function (
       const nodeEnterInnerGroup = nodeEnter.append('g');
       nodeEnterInnerGroup
         .append('circle')
-        .attr({
-          class: 'nodeCircle',
-          r: 0,
-        })
+        .attr('class', 'nodeCircle')
+        .attr('r', 0)
         .on('click', (clickedNode) => {
-          if ((d3.event as Event).defaultPrevented) return;
-          toggleChildren(clickedNode);
+          if (d3.event.defaultPrevented) return;
+          toggleChildren(clickedNode.data);
           update();
         });
 
       nodeEnterInnerGroup
         .append('text')
-        .attr({
-          class: 'nodeText',
-          'text-anchor': 'middle',
-          transform: 'translate(0,0)',
-          dy: '.35em',
-        })
-        .style({
-          'fill-opacity': 0,
-        })
-        .text((d) => d.name)
+        .attr('class', 'nodeText')
+        .attr('text-anchor', 'middle')
+        .attr('transform', 'translate(0,0)')
+        .attr('dy', '.35em')
+        .style('fill-opacity', 0)
+        .text((d) => d.data.name)
         .on('click', onClickText);
 
+      const nodeEnterAndUpdate = nodeEnter.merge(node);
+
       // update the text to reflect whether node has children or not
-      node.select('text').text((d) => d.name);
+      nodeEnterAndUpdate.select('text').text((d) => d.data.name);
 
       // change the circle fill depending on whether it has children and is collapsed
-      node.select('circle').style({
-        stroke: 'black',
-        'stroke-width': '1.5px',
-        fill: (d) =>
-          d._children
-            ? style.node.colors.collapsed
-            : d.children
-            ? style.node.colors.parent
-            : style.node.colors.default,
-      });
+      nodeEnterAndUpdate
+        .select('circle')
+        .style('stroke', 'black')
+        .style('stroke-width', '1.5px')
+        .style('fill', (d) =>
+          d.data._children && d.data._children.length > 0
+            ? nodeStyleOptions.colors.collapsed
+            : d.data.children && d.data.children.length > 0
+            ? nodeStyleOptions.colors.parent
+            : nodeStyleOptions.colors.default
+        );
 
       // transition nodes to their new position
-      const nodeUpdate = node
+      const nodeUpdate = nodeEnterAndUpdate
         .transition()
         .duration(transitionDuration)
-        .attr({
-          transform: (d) => `translate(${d.y!},${d.x!})`,
-        });
+        .attr('transform', (d) => `translate(${d.y},${d.x})`);
 
       // ensure circle radius is correct
-      nodeUpdate.select('circle').attr('r', style.node.radius);
+      nodeUpdate.select('circle').attr('r', nodeStyleOptions.radius);
 
       // fade the text in and align it
       nodeUpdate
-        .select('text')
+        .select<SVGTextElement>('text')
         .style('fill-opacity', 1)
-        .attr({
-          transform: function transform(this: SVGGraphicsElement, d) {
-            const x =
-              (d.children || d._children ? -1 : 1) *
-              (this.getBBox().width / 2 + style.node.radius + 5);
-            return `translate(${x},0)`;
-          },
+        .attr('transform', function transform(d) {
+          const x =
+            (((d.data.children ?? d.data._children)?.length ?? 0) > 0
+              ? -1
+              : 1) *
+            (this.getBBox().width / 2 + nodeStyleOptions.radius + 5);
+          return `translate(${x},0)`;
         });
 
       // blink updated nodes
-      node
-        .filter(function flick(this: any, d) {
+      nodeEnterAndUpdate
+        .filter(function flick(
+          this: SVGGElement & {
+            __oldData__?: HierarchyPointNode<InternalNode>;
+          },
+          d
+        ) {
           // test whether the relevant properties of d match
           // the equivalent property of the oldData
           // also test whether the old data exists,
           // to catch the entering elements!
-          return this.__oldData__ && d.value !== this.__oldData__.value;
+          return (
+            !!this.__oldData__ && d.data.value !== this.__oldData__.data.value
+          );
         })
         .select('g')
         .style('opacity', '0.3')
@@ -492,21 +449,19 @@ export default function (
 
       // transition exiting nodes to the parent's new position
       const nodeExit = node
-        .exit()
+        .exit<HierarchyPointNode<InternalNode>>()
         .transition()
         .duration(transitionDuration)
-        .attr({
-          transform: (d) => {
-            const position = findParentNodePosition(
-              previousNodePositionsById,
-              d.id,
-              (n) => !!nodePositionsById[n.id]
-            );
-            const futurePosition =
-              (position && nodePositionsById[position.id]) ||
-              nodePositionsById.root;
-            return `translate(${futurePosition.y!},${futurePosition.x!})`;
-          },
+        .attr('transform', (d) => {
+          const position = findParentNodePosition(
+            previousNodePositionsById,
+            d.data.id,
+            (n) => !!nodePositionsById[n.id]
+          );
+          const futurePosition =
+            (position && nodePositionsById[position.id]) ||
+            nodePositionsById.root;
+          return `translate(${futurePosition.y},${futurePosition.x})`;
         })
         .remove();
 
@@ -516,65 +471,66 @@ export default function (
 
       // update the links
       const link = vis
-        .selectAll('path.link')
-        .data(links, (d) => (d.target as NodeWithId).id);
+        .selectAll<SVGPathElement, HierarchyPointLink<InternalNode>>(
+          'path.link'
+        )
+        .data(links, (d) => d.target.data.id);
 
       // enter any new links at the parent's previous position
-      link
+      const linkEnter = link
         .enter()
         .insert('path', 'g')
-        .attr({
-          class: 'link',
-          d: (d) => {
-            const position = findParentNodePosition(
-              nodePositionsById,
-              (d.target as NodeWithId).id,
-              (n) => !!previousNodePositionsById[n.id]
-            );
-            const previousPosition =
-              (position && previousNodePositionsById[position.id]) ||
-              previousNodePositionsById.root;
-            return diagonal({
-              source: previousPosition,
-              target: previousPosition,
-            } as d3.svg.diagonal.Link<NodePosition>);
-          },
-        })
-        .style(style.link);
+        .attr('class', 'link')
+        .attr('d', (d) => {
+          const position = findParentNodePosition(
+            nodePositionsById,
+            d.target.data.id,
+            (n) => !!previousNodePositionsById[n.id]
+          );
+          const previousPosition =
+            (position && previousNodePositionsById[position.id]) ||
+            previousNodePositionsById.root;
+          return linkHorizontal({
+            source: previousPosition,
+            target: previousPosition,
+          });
+        });
+
+      for (const [key, value] of Object.entries(linkStyles)) {
+        linkEnter.style(key, value);
+      }
+
+      const linkEnterAndUpdate = linkEnter.merge(link);
 
       // transition links to their new position
-      link
+      linkEnterAndUpdate
         .transition()
         .duration(transitionDuration)
-        .attr({
-          d: diagonal as unknown as Primitive,
-        });
+        .attr('d', linkHorizontal);
 
       // transition exiting nodes to the parent's new position
       link
-        .exit()
+        .exit<HierarchyPointLink<InternalNode>>()
         .transition()
         .duration(transitionDuration)
-        .attr({
-          d: (d) => {
-            const position = findParentNodePosition(
-              previousNodePositionsById,
-              (d.target as NodeWithId).id,
-              (n) => !!nodePositionsById[n.id]
-            );
-            const futurePosition =
-              (position && nodePositionsById[position.id]) ||
-              nodePositionsById.root;
-            return diagonal({
-              source: futurePosition,
-              target: futurePosition,
-            });
-          },
+        .attr('d', (d) => {
+          const position = findParentNodePosition(
+            previousNodePositionsById,
+            d.target.data.id,
+            (n) => !!nodePositionsById[n.id]
+          );
+          const futurePosition =
+            (position && nodePositionsById[position.id]) ||
+            nodePositionsById.root;
+          return linkHorizontal({
+            source: futurePosition,
+            target: futurePosition,
+          });
         })
         .remove();
 
       // delete the old data once it's no longer needed
-      node.property('__oldData__', null);
+      nodeEnterAndUpdate.property('__oldData__', null);
 
       // stash the old positions for transition
       previousNodePositionsById = nodePositionsById;
@@ -582,4 +538,4 @@ export default function (
   };
 }
 
-export { Primitive };
+export type { Node };
