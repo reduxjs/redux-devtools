@@ -453,7 +453,9 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           // the equivalent property of the oldData
           // also test whether the old data exists,
           // to catch the entering elements!
-          return !!this.__oldData__ && d.value !== this.__oldData__.value;
+          return (
+            !!this.__oldData__ && d.data.value !== this.__oldData__.data.value
+          );
         })
         .select('g')
         .style('opacity', '0.3')
