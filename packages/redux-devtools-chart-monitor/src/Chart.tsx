@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { tree, NodeWithId, Primitive } from 'd3-state-visualizer';
+import { tree } from 'd3-state-visualizer';
+import type { Node, StyleValue } from 'd3-state-visualizer';
 import { Action, Dispatch } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import * as themes from 'redux-devtools-themes';
@@ -23,7 +24,7 @@ export interface Props<S, A extends Action<unknown>>
   isSorted: boolean;
   heightBetweenNodesCoeff: number;
   widthBetweenNodesCoeff: number;
-  onClickText: (datum: NodeWithId) => void;
+  onClickText: (datum: Node) => void;
   tooltipOptions: {
     disabled: boolean;
     offset: {
@@ -31,9 +32,9 @@ export interface Props<S, A extends Action<unknown>>
       top: number;
     };
     indentationSize: number;
-    style: { [key: string]: Primitive } | undefined;
+    styles: { [key: string]: StyleValue } | undefined;
   };
-  style: { [key: string]: Primitive } | undefined;
+  chartStyles: { [key: string]: StyleValue } | undefined;
   defaultIsVisible?: boolean;
 }
 
