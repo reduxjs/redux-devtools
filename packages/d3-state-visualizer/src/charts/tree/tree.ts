@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import type { D3ZoomEvent, HierarchyPointLink, HierarchyPointNode } from 'd3';
 import { isEmpty } from 'ramda';
 import { map2tree } from 'map2tree';
+import type { Node } from 'map2tree';
 import deepmerge from 'deepmerge';
 import {
   getTooltipString,
@@ -12,7 +13,7 @@ import {
 import { tooltip } from 'd3tooltip';
 import type { StyleValue } from 'd3tooltip';
 
-interface Options {
+export interface Options {
   // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -51,16 +52,16 @@ interface Options {
   widthBetweenNodesCoeff: number;
   transitionDuration: number;
   blinkDuration: number;
-  onClickText: (datum: HierarchyPointNode<Node>) => void;
+  onClickText: (datum: Node) => void;
   tooltipOptions: {
-    disabled: boolean;
-    left: number | undefined;
-    top: number | undefined;
-    offset: {
+    disabled?: boolean;
+    left?: number | undefined;
+    top?: number | undefined;
+    offset?: {
       left: number;
       top: number;
     };
-    style: { [key: string]: StyleValue } | undefined;
+    styles?: { [key: string]: StyleValue } | undefined;
     indentationSize?: number;
   };
 }
@@ -115,28 +116,13 @@ const defaultOptions: Options = {
       left: 0,
       top: 0,
     },
-    style: undefined,
+    styles: undefined,
   },
 } satisfies Options;
 
-export interface Node {
-  name: string;
-  children?: this[] | null;
-  object?: unknown;
-  value?: unknown;
-}
-
-export interface InternalNode {
-  name: string;
-  children?: this[] | null;
-  object?: unknown;
-  value?: unknown;
-  id: string | number;
-}
-
-export interface HierarchyPointNodeWithPrivateChildren<Datum>
-  extends HierarchyPointNode<Datum> {
+export interface InternalNode extends Node {
   _children?: this[] | undefined;
+  id: string | number;
 }
 
 interface NodePosition {
@@ -310,9 +296,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         );
       }
 
-      const rootPointNode = layout(
-        rootNode
-      ) as HierarchyPointNodeWithPrivateChildren<InternalNode>;
+      const rootPointNode = layout(rootNode);
       const links = rootPointNode.links();
 
       rootPointNode.each(
@@ -333,10 +317,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
 
       // process the node selection
       let node = vis
-        .selectAll<
-          SVGGElement,
-          HierarchyPointNodeWithPrivateChildren<InternalNode>
-        >('g.node')
+        .selectAll<SVGGElement, HierarchyPointNode<InternalNode>>('g.node')
         .property('__oldData__', (d) => d)
         .data(nodes, (d) => d.data.id || (d.data.id = ++nodeIndex));
       const nodeEnter = node
@@ -367,7 +348,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         nodeEnter.call(
           tooltip<
             SVGGElement,
-            HierarchyPointNodeWithPrivateChildren<InternalNode>,
+            HierarchyPointNode<InternalNode>,
             SVGGElement,
             unknown,
             HTMLElement,
@@ -375,8 +356,8 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
             null,
             undefined
           >('tooltip', { ...tooltipOptions, root })
-            .text((d, i) => getTooltipString(d, i, tooltipOptions))
-            .styles(tooltipOptions.style)
+            .text((d, i) => getTooltipString(d.data, i, tooltipOptions))
+            .styles(tooltipOptions.styles)
         );
       }
 
@@ -388,8 +369,8 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .attr('class', 'nodeCircle')
         .attr('r', 0)
         .on('click', (clickedNode) => {
-          if ((d3.event as Event).defaultPrevented) return;
-          toggleChildren(clickedNode);
+          if (d3.event.defaultPrevented) return;
+          toggleChildren(clickedNode.data);
           update();
         });
 
@@ -401,7 +382,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .attr('dy', '.35em')
         .style('fill-opacity', 0)
         .text((d) => d.data.name)
-        .on('click', onClickText);
+        .on('click', (d) => onClickText(d.data));
 
       node = nodeEnter.merge(node);
 
@@ -414,9 +395,9 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .style('stroke', 'black')
         .style('stroke-width', '1.5px')
         .style('fill', (d) =>
-          d._children
+          d.data._children
             ? nodeStyleOptions.colors.collapsed
-            : d.children
+            : d.data.children
             ? nodeStyleOptions.colors.parent
             : nodeStyleOptions.colors.default
         );
@@ -436,7 +417,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .style('fill-opacity', 1)
         .attr('transform', function transform(d) {
           const x =
-            (d.children || d._children ? -1 : 1) *
+            (d.data.children || d.data._children ? -1 : 1) *
             (this.getBBox().width / 2 + nodeStyleOptions.radius + 5);
           return `translate(${x},0)`;
         });
@@ -445,7 +426,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
       node
         .filter(function flick(
           this: SVGGElement & {
-            __oldData__?: HierarchyPointNodeWithPrivateChildren<InternalNode>;
+            __oldData__?: HierarchyPointNode<InternalNode>;
           },
           d
         ) {
@@ -465,7 +446,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
 
       // transition exiting nodes to the parent's new position
       const nodeExit = node
-        .exit<HierarchyPointNodeWithPrivateChildren<InternalNode>>()
+        .exit<HierarchyPointNode<InternalNode>>()
         .transition()
         .duration(transitionDuration)
         .attr('transform', (d) => {
@@ -550,3 +531,5 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
     }
   };
 }
+
+export type { Node };

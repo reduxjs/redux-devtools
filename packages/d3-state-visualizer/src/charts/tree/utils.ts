@@ -1,13 +1,8 @@
 import { is, join, pipe, replace } from 'ramda';
 import sortAndSerialize from './sortAndSerialize';
-import type {
-  HierarchyPointNodeWithPrivateChildren,
-  InternalNode,
-} from './tree';
+import type { InternalNode } from './tree';
 
-export function collapseChildren(
-  node: HierarchyPointNodeWithPrivateChildren<InternalNode>
-) {
+export function collapseChildren(node: InternalNode) {
   if (node.children) {
     node._children = node.children;
     node._children.forEach(collapseChildren);
@@ -15,9 +10,7 @@ export function collapseChildren(
   }
 }
 
-export function expandChildren(
-  node: HierarchyPointNodeWithPrivateChildren<InternalNode>
-) {
+export function expandChildren(node: InternalNode) {
   if (node._children) {
     node.children = node._children;
     node.children.forEach(expandChildren);
@@ -25,9 +18,7 @@ export function expandChildren(
   }
 }
 
-export function toggleChildren(
-  node: HierarchyPointNodeWithPrivateChildren<InternalNode>
-) {
+export function toggleChildren(node: InternalNode) {
   if (node.children) {
     node._children = node.children;
     node.children = undefined;
@@ -83,11 +74,11 @@ export function getNodeGroupByDepthCount(rootNode: InternalNode) {
 }
 
 export function getTooltipString(
-  node: HierarchyPointNodeWithPrivateChildren<InternalNode>,
+  node: InternalNode,
   i: number | undefined,
   { indentationSize = 4 }
 ) {
-  if (!is(Object, node.data)) return '';
+  if (!is(Object, node)) return '';
 
   const spacer = join('&nbsp;&nbsp;');
   const cr2br = replace(/\n/g, '<br/>');
@@ -96,9 +87,8 @@ export function getTooltipString(
 
   const children = node.children || node._children;
 
-  if (typeof node.data.value !== 'undefined') return json2html(node.data.value);
-  if (typeof node.data.object !== 'undefined')
-    return json2html(node.data.object);
+  if (typeof node.value !== 'undefined') return json2html(node.value);
+  if (typeof node.object !== 'undefined') return json2html(node.object);
   if (children && children.length) return `childrenCount: ${children.length}`;
   return 'empty';
 }
