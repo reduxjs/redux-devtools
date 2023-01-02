@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Persistor } from 'redux-persist';
@@ -20,6 +20,7 @@ const messageStyle: CSSProperties = {
 };
 
 let rendered: boolean | undefined;
+let currentRoot: Root | undefined;
 let store: Store<StoreStateWithoutSocket, StoreAction> | undefined;
 let persistor: Persistor | undefined;
 let bgConnection: chrome.runtime.Port;
@@ -27,11 +28,16 @@ let naTimeout: NodeJS.Timeout;
 
 const isChrome = navigator.userAgent.indexOf('Firefox') === -1;
 
-function renderDevTools(root: Root) {
-  root.unmount();
+function renderNodeAtRoot(node: ReactNode) {
+  if (currentRoot) currentRoot.unmount();
+  currentRoot = createRoot(document.getElementById('root')!);
+  currentRoot.render(node);
+}
+
+function renderDevTools() {
   clearTimeout(naTimeout);
   ({ store, persistor } = configureStore(position, bgConnection));
-  root.render(
+  renderNodeAtRoot(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <App position={position} />
@@ -41,7 +47,7 @@ function renderDevTools(root: Root) {
   rendered = true;
 }
 
-function renderNA(root: Root) {
+function renderNA() {
   if (rendered === false) return;
   rendered = false;
   naTimeout = setTimeout(() => {
@@ -74,31 +80,28 @@ function renderNA(root: Root) {
           );
         }
 
-        root.unmount();
-        root.render(message);
+        renderNodeAtRoot(message);
         store = undefined;
       });
     } else {
-      root.unmount();
-      root.render(message);
+      renderNodeAtRoot(message);
       store = undefined;
     }
   }, 3500);
 }
 
 function init(id: number) {
-  const root = createRoot(document.getElementById('root')!);
-  renderNA(root);
+  renderNA();
   bgConnection = chrome.runtime.connect({
     name: id ? id.toString() : undefined,
   });
   bgConnection.onMessage.addListener(
     <S, A extends Action<unknown>>(message: PanelMessage<S, A>) => {
       if (message.type === 'NA') {
-        if (message.id === id) renderNA(root);
+        if (message.id === id) renderNA();
         else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });
       } else {
-        if (!rendered) renderDevTools(root);
+        if (!rendered) renderDevTools();
         store!.dispatch(message);
       }
     }

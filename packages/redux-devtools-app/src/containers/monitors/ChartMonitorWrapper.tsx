@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { ChartMonitor } from '@redux-devtools/chart-monitor';
-import { NodeWithId } from 'd3-state-visualizer';
+import type { HierarchyPointNode, Node } from 'd3-state-visualizer';
 import { selectMonitorWithState } from '../../actions';
 
-export function getPath(obj: NodeWithId, inspectedStatePath: string[]) {
+export function getPath(
+  obj: HierarchyPointNode<Node>,
+  inspectedStatePath: string[]
+) {
   const parent = obj.parent;
   if (!parent) return;
   getPath(parent, inspectedStatePath);
-  let name = obj.name;
+  let name = obj.data.name;
   const item = /.+\[(\d+)]/.exec(name);
   if (item) name = item[1];
   inspectedStatePath.push(name);
@@ -20,7 +23,7 @@ type Props = DispatchProps;
 class ChartMonitorWrapper extends Component<Props> {
   static update = ChartMonitor.update;
 
-  onClickText = (data: NodeWithId) => {
+  onClickText = (data: HierarchyPointNode<Node>) => {
     const inspectedStatePath: string[] = [];
     getPath(data, inspectedStatePath);
     this.props.selectMonitorWithState('InspectorMonitor', {
