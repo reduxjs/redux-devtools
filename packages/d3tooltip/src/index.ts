@@ -95,13 +95,12 @@ export function tooltip<
         .style('position', 'absolute')
         .style('z-index', 1001)
         .style('left', `${x}px`)
-        .style('top', `${y}px`);
+        .style('top', `${y}px`)
+        .html(() => text(node));
 
       for (const [key, value] of Object.entries(styles)) {
-        el = el.style(key, value);
+        el.style(key, value);
       }
-
-      el = el.html(() => text(node));
     });
 
     selection.on('mousemove.tip', (node) => {

@@ -164,23 +164,22 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
   const root = d3.select(DOMNode);
   const zoom = d3.zoom<SVGSVGElement, unknown>().scaleExtent([0.1, 3]);
 
-  let svgElement = root
+  const svgElement = root
     .append('svg')
     .attr('id', id)
-    .attr('preserveAspectRatio', 'xMinYMin slice');
+    .attr('preserveAspectRatio', 'xMinYMin slice')
+    .style('cursor', '-webkit-grab');
 
   if (!chartStyles.width) {
-    svgElement = svgElement.attr('width', fullWidth);
+    svgElement.attr('width', fullWidth);
   }
 
   if (!chartStyles.width || !chartStyles.height) {
-    svgElement = svgElement.attr('viewBox', `0 0 ${fullWidth} ${fullHeight}`);
+    svgElement.attr('viewBox', `0 0 ${fullWidth} ${fullHeight}`);
   }
 
-  svgElement = svgElement.style('cursor', '-webkit-grab');
-
   for (const [key, value] of Object.entries(chartStyles)) {
-    svgElement = svgElement.style(key, value);
+    svgElement.style(key, value);
   }
 
   const vis = svgElement
