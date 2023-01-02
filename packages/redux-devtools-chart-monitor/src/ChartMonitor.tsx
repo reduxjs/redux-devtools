@@ -7,7 +7,7 @@ import {
 } from '@redux-devtools/core';
 import deepmerge from 'deepmerge';
 import { Action, Dispatch } from 'redux';
-import type { HierarchyPointNode, Node } from 'd3-state-visualizer';
+import type { Options } from 'd3-state-visualizer';
 
 import reducer, { ChartMonitorState } from './reducers';
 import Chart, { Props } from './Chart';
@@ -40,37 +40,14 @@ function invertColors(theme: themes.Base16Theme) {
 }
 
 export interface ChartMonitorProps<S, A extends Action<unknown>>
-  extends LiftedState<S, A, ChartMonitorState> {
+  extends LiftedState<S, A, ChartMonitorState>,
+    Options {
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
   theme: keyof typeof themes | themes.Base16Theme;
   invertTheme: boolean;
 
-  state: S | null;
-  isSorted: boolean;
-  heightBetweenNodesCoeff: number;
-  widthBetweenNodesCoeff: number;
-  onClickText: (datum: HierarchyPointNode<Node>) => void;
-  tooltipOptions: unknown;
-  style: {
-    width: number;
-    height: number;
-    node: {
-      colors: {
-        default: string;
-        collapsed: string;
-        parent: string;
-      };
-      radius: number;
-    };
-    text: {
-      colors: {
-        default: string;
-        hover: string;
-      };
-    };
-  };
   defaultIsVisible?: boolean;
 }
 

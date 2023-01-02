@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { tree } from 'd3-state-visualizer';
-import type { HierarchyPointNode, Node, StyleValue } from 'd3-state-visualizer';
+import type { Options } from 'd3-state-visualizer';
 import { Action, Dispatch } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import * as themes from 'redux-devtools-themes';
@@ -12,7 +12,8 @@ const wrapperStyle = {
 };
 
 export interface Props<S, A extends Action<unknown>>
-  extends LiftedState<S, A, ChartMonitorState> {
+  extends LiftedState<S, A, ChartMonitorState>,
+    Options {
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
@@ -20,20 +21,6 @@ export interface Props<S, A extends Action<unknown>>
   invertTheme: boolean;
 
   state: S | null;
-  isSorted: boolean;
-  heightBetweenNodesCoeff: number;
-  widthBetweenNodesCoeff: number;
-  onClickText: (datum: HierarchyPointNode<Node>) => void;
-  tooltipOptions: {
-    disabled: boolean;
-    offset: {
-      left: number;
-      top: number;
-    };
-    indentationSize: number;
-    styles: { [key: string]: StyleValue } | undefined;
-  };
-  chartStyles: { [key: string]: StyleValue } | undefined;
   defaultIsVisible?: boolean;
 }
 
