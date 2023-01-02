@@ -183,7 +183,7 @@ export interface InternalNode {
   name: string;
   children?: this[] | null;
   value?: unknown;
-  id: string;
+  id: string | number;
 }
 
 export interface HierarchyPointNodeWithPrivateChildren<Datum>
@@ -192,8 +192,8 @@ export interface HierarchyPointNodeWithPrivateChildren<Datum>
 }
 
 interface NodePosition {
-  parentId: string | null;
-  id: string;
+  parentId: string | number | null;
+  id: string | number;
   x: number;
   y: number;
 }
@@ -285,8 +285,8 @@ export default function (
   // of parent ids; once a parent that matches the given filter is found,
   // the parent position gets returned
   function findParentNodePosition(
-    nodePositionsById: { [nodeId: string]: NodePosition },
-    nodeId: string,
+    nodePositionsById: { [nodeId: string | number]: NodePosition },
+    nodeId: string | number,
     filter: (nodePosition: NodePosition) => boolean
   ) {
     let currentPosition = nodePositionsById[nodeId];
@@ -383,7 +383,7 @@ export default function (
         x: n.x,
         y: n.y,
       }));
-      const nodePositionsById: { [nodeId: string]: NodePosition } = {};
+      const nodePositionsById: { [nodeId: string | number]: NodePosition } = {};
       nodePositions.forEach((node) => (nodePositionsById[node.id] = node));
 
       // process the node selection
@@ -393,10 +393,7 @@ export default function (
           HierarchyPointNodeWithPrivateChildren<InternalNode>
         >('g.node')
         .property('__oldData__', (d) => d)
-        .data(
-          nodes,
-          (d) => d.data.id || (d.data.id = ++nodeIndex as unknown as string)
-        );
+        .data(nodes, (d) => d.data.id || (d.data.id = ++nodeIndex));
       const nodeEnter = node
         .enter()
         .append('g')
