@@ -5,6 +5,7 @@ import mapValues from 'lodash/mapValues';
 export interface Node {
   name: string;
   children?: Node[] | null;
+  object?: unknown;
   value?: unknown;
 }
 

@@ -176,12 +176,14 @@ const defaultOptions: Options = {
 export interface Node {
   name: string;
   children?: this[] | null;
+  object?: unknown;
   value?: unknown;
 }
 
 export interface InternalNode {
   name: string;
   children?: this[] | null;
+  object?: unknown;
   value?: unknown;
   id: string | number;
 }

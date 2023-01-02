@@ -83,11 +83,11 @@ export function getNodeGroupByDepthCount(rootNode: InternalNode) {
 }
 
 export function getTooltipString(
-  node: unknown,
+  node: HierarchyPointNodeWithPrivateChildren<InternalNode>,
   i: number | undefined,
   { indentationSize = 4 }
 ) {
-  if (!is(Object, node)) return '';
+  if (!is(Object, node.data)) return '';
 
   const spacer = join('&nbsp;&nbsp;');
   const cr2br = replace(/\n/g, '<br/>');
@@ -96,9 +96,9 @@ export function getTooltipString(
 
   const children = node.children || node._children;
 
-  if (typeof node.value !== 'undefined') return json2html(node.value);
-  if (typeof node.object !== 'undefined') return json2html(node.object);
-  if (children && children.length)
-    return `childrenCount: ${(children as unknown[]).length}`;
+  if (typeof node.data.value !== 'undefined') return json2html(node.data.value);
+  if (typeof node.data.object !== 'undefined')
+    return json2html(node.data.object);
+  if (children && children.length) return `childrenCount: ${children.length}`;
   return 'empty';
 }
