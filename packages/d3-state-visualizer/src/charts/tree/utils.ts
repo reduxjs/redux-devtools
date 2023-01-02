@@ -73,11 +73,7 @@ export function getNodeGroupByDepthCount(rootNode: InternalNode) {
   return nodeGroupByDepthCount;
 }
 
-export function getTooltipString(
-  node: InternalNode,
-  i: number | undefined,
-  { indentationSize = 4 }
-) {
+export function getTooltipString(node: InternalNode, { indentationSize = 4 }) {
   if (!is(Object, node)) return '';
 
   const spacer = join('&nbsp;&nbsp;');

@@ -354,9 +354,11 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
             unknown,
             null,
             undefined
-          >('tooltip', { ...tooltipOptions, root })
-            .text((d, i) => getTooltipString(d.data, i, tooltipOptions))
-            .styles(tooltipOptions.styles)
+          >('tooltip', {
+            ...tooltipOptions,
+            root,
+            text: (d) => getTooltipString(d.data, tooltipOptions),
+          })
         );
       }
 
