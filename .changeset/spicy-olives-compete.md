@@ -2,7 +2,6 @@
 'd3tooltip': major
 ---
 
-
 - Remove UMD build.
 - Upgrade d3 peer dependency from v3 to v7.
 - Remove `attr` configuration method.
