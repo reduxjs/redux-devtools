@@ -52,7 +52,7 @@ export interface Options {
   widthBetweenNodesCoeff: number;
   transitionDuration: number;
   blinkDuration: number;
-  onClickText: (datum: Node) => void;
+  onClickText: (datum: HierarchyPointNode<Node>) => void;
   tooltipOptions: {
     disabled?: boolean;
     left?: number | undefined;
@@ -383,7 +383,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .attr('dy', '.35em')
         .style('fill-opacity', 0)
         .text((d) => d.data.name)
-        .on('click', (d) => onClickText(d.data));
+        .on('click', onClickText);
 
       const nodeEnterAndUpdate = nodeEnter.merge(node);
 
