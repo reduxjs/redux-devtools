@@ -269,18 +269,6 @@ export default function (
       }) scale(${initialZoom})`
     );
 
-  // let layout = d3.tree().size([width, height]);
-  let data: InternalNode;
-
-  // if (isSorted) {
-  //   layout.sort((a, b) =>
-  //     (b as NodeWithId).name.toLowerCase() <
-  //     (a as NodeWithId).name.toLowerCase()
-  //       ? 1
-  //       : -1
-  //   );
-  // }
-
   // previousNodePositionsById stores node x and y
   // as well as hierarchy (id / parentId);
   // helps animating transitions
@@ -314,7 +302,7 @@ export default function (
   }
 
   return function renderChart(nextState = tree || state) {
-    data = !tree
+    let data = !tree
       ? (map2tree(nextState, {
           key: rootKeyName,
           pushMethod,
@@ -361,8 +349,8 @@ export default function (
           },
           { x: number; y: number }
         >()
-        .x((d) => d.x)
-        .y((d) => d.y);
+        .x((d) => d.y)
+        .y((d) => d.x);
       // set tree dimensions and spacing between branches and nodes
       const maxNodeCountByLevel = Math.max(...getNodeGroupByDepthCount(data));
 
@@ -490,10 +478,13 @@ export default function (
         );
 
       // transition nodes to their new position
-      const nodeUpdate = node
-        .transition()
-        .duration(transitionDuration)
-        .attr('transform', (d) => `translate(${d.y},${d.x})`);
+      const nodeUpdate = nodeEnter
+        .merge(node)
+        // .transition()
+        // .duration(transitionDuration)
+        .attr('transform', (d) => {
+          return `translate(${d.y},${d.x})`;
+        });
 
       // ensure circle radius is correct
       nodeUpdate.select('circle').attr('r', nodeStyleOptions.radius);
