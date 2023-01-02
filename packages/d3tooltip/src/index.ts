@@ -19,8 +19,8 @@ interface Options<
   root:
     | Selection<RootGElement, RootDatum, RootPElement, RootPDatum>
     | undefined;
-  styles?: { [key: string]: StyleValue };
-  text?: string | ((datum: Datum) => string);
+  styles: { [key: string]: StyleValue };
+  text: string | ((datum: Datum) => string);
 }
 
 const defaultOptions: Options<
@@ -34,6 +34,8 @@ const defaultOptions: Options<
   top: undefined, // mouseY
   offset: { left: 0, top: 0 },
   root: undefined,
+  styles: {},
+  text: '',
 };
 
 export function tooltip<
@@ -51,14 +53,7 @@ export function tooltip<
     Options<Datum, RootGElement, RootDatum, RootPElement, RootPDatum>
   > = {}
 ) {
-  const {
-    left,
-    top,
-    offset,
-    root,
-    styles = {},
-    text = '',
-  } = {
+  const { left, top, offset, root, styles, text } = {
     ...defaultOptions,
     ...options,
   } as Options<Datum, RootGElement, RootDatum, RootPElement, RootPDatum>;
