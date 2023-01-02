@@ -175,7 +175,7 @@ const defaultOptions: Options = {
 
 export interface Node {
   name: string;
-  children?: Node[] | null;
+  children?: this[] | null;
   value?: unknown;
 }
 
