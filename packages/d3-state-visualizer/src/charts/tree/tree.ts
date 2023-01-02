@@ -316,7 +316,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
       nodePositions.forEach((node) => (nodePositionsById[node.id] = node));
 
       // process the node selection
-      let node = vis
+      const node = vis
         .selectAll<SVGGElement, HierarchyPointNode<InternalNode>>('g.node')
         .property('__oldData__', (d) => d)
         .data(nodes, (d) => d.data.id || (d.data.id = ++nodeIndex));
@@ -384,13 +384,13 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .text((d) => d.data.name)
         .on('click', (d) => onClickText(d.data));
 
-      node = nodeEnter.merge(node);
+      const nodeEnterAndUpdate = nodeEnter.merge(node);
 
       // update the text to reflect whether node has children or not
-      node.select('text').text((d) => d.data.name);
+      nodeEnterAndUpdate.select('text').text((d) => d.data.name);
 
       // change the circle fill depending on whether it has children and is collapsed
-      node
+      nodeEnterAndUpdate
         .select('circle')
         .style('stroke', 'black')
         .style('stroke-width', '1.5px')
@@ -403,7 +403,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         );
 
       // transition nodes to their new position
-      const nodeUpdate = node
+      const nodeUpdate = nodeEnterAndUpdate
         .transition()
         .duration(transitionDuration)
         .attr('transform', (d) => `translate(${d.y},${d.x})`);
@@ -423,7 +423,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         });
 
       // blink updated nodes
-      node
+      nodeEnterAndUpdate
         .filter(function flick(
           this: SVGGElement & {
             __oldData__?: HierarchyPointNode<InternalNode>;
@@ -467,7 +467,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
       nodeExit.select('text').style('fill-opacity', 0);
 
       // update the links
-      let link = vis
+      const link = vis
         .selectAll<SVGPathElement, HierarchyPointLink<InternalNode>>(
           'path.link'
         )
@@ -497,10 +497,13 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         linkEnter.style(key, value);
       }
 
-      link = linkEnter.merge(link);
+      const linkEnterAndUpdate = linkEnter.merge(link);
 
       // transition links to their new position
-      link.transition().duration(transitionDuration).attr('d', linkHorizontal);
+      linkEnterAndUpdate
+        .transition()
+        .duration(transitionDuration)
+        .attr('d', linkHorizontal);
 
       // transition exiting nodes to the parent's new position
       link
@@ -524,7 +527,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .remove();
 
       // delete the old data once it's no longer needed
-      node.property('__oldData__', null);
+      nodeEnterAndUpdate.property('__oldData__', null);
 
       // stash the old positions for transition
       previousNodePositionsById = nodePositionsById;
