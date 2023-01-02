@@ -175,16 +175,10 @@ importers:
       '@babel/cli': ^7.19.3
       '@babel/core': ^7.20.5
       '@babel/eslint-parser': ^7.19.1
-      '@babel/plugin-transform-runtime': ^7.19.6
       '@babel/preset-env': ^7.20.2
       '@babel/preset-typescript': ^7.18.6
       '@babel/runtime': ^7.20.6
-      '@rollup/plugin-babel': ^6.0.3
-      '@rollup/plugin-commonjs': ^24.0.0
-      '@rollup/plugin-node-resolve': ^15.0.1
-      '@rollup/plugin-terser': ^0.2.1
       '@types/d3': ^4.13.12
-      '@types/node': ^18.11.17
       '@types/ramda': ^0.28.20
       '@typescript-eslint/eslint-plugin': ^5.47.0
       '@typescript-eslint/parser': ^5.47.0
@@ -196,9 +190,6 @@ importers:
       map2tree: ^2.1.0
       ramda: ^0.28.0
       rimraf: ^3.0.2
-      rollup: ^3.7.5
-      rollup-plugin-typescript2: ^0.34.1
-      tslib: ^2.4.1
       typescript: ~4.9.4
     dependencies:
       '@babel/runtime': 7.20.6
@@ -212,23 +203,14 @@ importers:
       '@babel/cli': 7.19.3_@babel+core@7.20.5
       '@babel/core': 7.20.5
       '@babel/eslint-parser': 7.19.1_ak4stjm4k2uvd2drmeegtfb5ly
-      '@babel/plugin-transform-runtime': 7.19.6_@babel+core@7.20.5
       '@babel/preset-env': 7.20.2_@babel+core@7.20.5
       '@babel/preset-typescript': 7.18.6_@babel+core@7.20.5
-      '@rollup/plugin-babel': 6.0.3_zrxplyvfi52whpdwd6wkjjeo5q
-      '@rollup/plugin-commonjs': 24.0.0_rollup@3.7.5
-      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.5
-      '@rollup/plugin-terser': 0.2.1_rollup@3.7.5
-      '@types/node': 18.11.17
       '@types/ramda': 0.28.20
       '@typescript-eslint/eslint-plugin': 5.47.0_ncmi6noazr3nzas7jxykisekym
       '@typescript-eslint/parser': 5.47.0_lzzuuodtsqwxnvqeq4g4likcqa
       eslint: 8.30.0
       eslint-config-prettier: 8.5.0_eslint@8.30.0
       rimraf: 3.0.2
-      rollup: 3.7.5
-      rollup-plugin-typescript2: 0.34.1_oj4jlwi3mkekxo3vucumcwebnq
-      tslib: 2.4.1
       typescript: 4.9.4
 
   packages/d3-state-visualizer/examples/tree:
@@ -279,16 +261,10 @@ importers:
       '@babel/cli': ^7.19.3
       '@babel/core': ^7.20.5
       '@babel/eslint-parser': ^7.19.1
-      '@babel/plugin-transform-runtime': ^7.19.6
       '@babel/preset-env': ^7.20.2
       '@babel/preset-typescript': ^7.18.6
       '@babel/runtime': ^7.20.6
-      '@rollup/plugin-babel': ^6.0.3
-      '@rollup/plugin-commonjs': ^24.0.0
-      '@rollup/plugin-node-resolve': ^15.0.1
-      '@rollup/plugin-terser': ^0.2.1
       '@types/d3': ^4.13.12
-      '@types/node': ^18.11.17
       '@types/ramda': ^0.28.20
       '@typescript-eslint/eslint-plugin': ^5.47.0
       '@typescript-eslint/parser': ^5.47.0
@@ -297,9 +273,6 @@ importers:
       eslint-config-prettier: ^8.5.0
       ramda: ^0.28.0
       rimraf: ^3.0.2
-      rollup: ^3.7.5
-      rollup-plugin-typescript2: ^0.34.1
-      tslib: ^2.4.1
       typescript: ~4.9.4
     dependencies:
       '@babel/runtime': 7.20.6
@@ -308,15 +281,9 @@ importers:
       '@babel/cli': 7.19.3_@babel+core@7.20.5
       '@babel/core': 7.20.5
       '@babel/eslint-parser': 7.19.1_ak4stjm4k2uvd2drmeegtfb5ly
-      '@babel/plugin-transform-runtime': 7.19.6_@babel+core@7.20.5
       '@babel/preset-env': 7.20.2_@babel+core@7.20.5
       '@babel/preset-typescript': 7.18.6_@babel+core@7.20.5
-      '@rollup/plugin-babel': 6.0.3_zrxplyvfi52whpdwd6wkjjeo5q
-      '@rollup/plugin-commonjs': 24.0.0_rollup@3.7.5
-      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.5
-      '@rollup/plugin-terser': 0.2.1_rollup@3.7.5
       '@types/d3': 4.13.12
-      '@types/node': 18.11.17
       '@types/ramda': 0.28.20
       '@typescript-eslint/eslint-plugin': 5.47.0_ncmi6noazr3nzas7jxykisekym
       '@typescript-eslint/parser': 5.47.0_lzzuuodtsqwxnvqeq4g4likcqa
@@ -324,9 +291,6 @@ importers:
       eslint: 8.30.0
       eslint-config-prettier: 8.5.0_eslint@8.30.0
       rimraf: 3.0.2
-      rollup: 3.7.5
-      rollup-plugin-typescript2: 0.34.1_oj4jlwi3mkekxo3vucumcwebnq
-      tslib: 2.4.1
       typescript: 4.9.4
 
   packages/map2tree:
@@ -334,17 +298,11 @@ importers:
       '@babel/cli': ^7.19.3
       '@babel/core': ^7.20.5
       '@babel/eslint-parser': ^7.19.1
-      '@babel/plugin-transform-runtime': ^7.19.6
       '@babel/preset-env': ^7.20.2
       '@babel/preset-typescript': ^7.18.6
       '@babel/runtime': ^7.20.6
-      '@rollup/plugin-babel': ^6.0.3
-      '@rollup/plugin-commonjs': ^24.0.0
-      '@rollup/plugin-node-resolve': ^15.0.1
-      '@rollup/plugin-terser': ^0.2.1
       '@types/jest': ^29.2.4
       '@types/lodash': ^4.14.191
-      '@types/node': ^18.11.17
       '@typescript-eslint/eslint-plugin': ^5.47.0
       '@typescript-eslint/parser': ^5.47.0
       eslint: ^8.30.0
@@ -354,10 +312,7 @@ importers:
       jest: ^29.3.1
       lodash: ^4.17.21
       rimraf: ^3.0.2
-      rollup: ^3.7.5
-      rollup-plugin-typescript2: ^0.34.1
       ts-jest: ^29.0.3
-      tslib: ^2.4.1
       typescript: ~4.9.4
     dependencies:
       '@babel/runtime': 7.20.6
@@ -366,28 +321,19 @@ importers:
       '@babel/cli': 7.19.3_@babel+core@7.20.5
       '@babel/core': 7.20.5
       '@babel/eslint-parser': 7.19.1_ak4stjm4k2uvd2drmeegtfb5ly
-      '@babel/plugin-transform-runtime': 7.19.6_@babel+core@7.20.5
       '@babel/preset-env': 7.20.2_@babel+core@7.20.5
       '@babel/preset-typescript': 7.18.6_@babel+core@7.20.5
-      '@rollup/plugin-babel': 6.0.3_zrxplyvfi52whpdwd6wkjjeo5q
-      '@rollup/plugin-commonjs': 24.0.0_rollup@3.7.5
-      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.5
-      '@rollup/plugin-terser': 0.2.1_rollup@3.7.5
       '@types/jest': 29.2.4
       '@types/lodash': 4.14.191
-      '@types/node': 18.11.17
       '@typescript-eslint/eslint-plugin': 5.47.0_ncmi6noazr3nzas7jxykisekym
       '@typescript-eslint/parser': 5.47.0_lzzuuodtsqwxnvqeq4g4likcqa
       eslint: 8.30.0
       eslint-config-prettier: 8.5.0_eslint@8.30.0
       eslint-plugin-jest: 27.1.7_ynswt5pvagzyqki5w7w75b3qvm
       immutable: 4.1.0
-      jest: 29.3.1_@types+node@18.11.17
+      jest: 29.3.1
       rimraf: 3.0.2
-      rollup: 3.7.5
-      rollup-plugin-typescript2: 0.34.1_oj4jlwi3mkekxo3vucumcwebnq
       ts-jest: 29.0.3_orsjflytm5zjweotzi5qijesea
-      tslib: 2.4.1
       typescript: 4.9.4
 
   packages/react-base16-styling:
@@ -2025,14 +1971,12 @@ importers:
       '@babel/cli': ^7.19.3
       '@babel/core': ^7.20.5
       '@babel/eslint-parser': ^7.19.1
-      '@babel/plugin-transform-runtime': ^7.19.6
       '@babel/preset-env': ^7.20.2
       '@babel/preset-react': ^7.18.6
       '@babel/preset-typescript': ^7.18.6
       '@babel/runtime': ^7.20.6
       '@redux-devtools/core': ^3.13.1
       '@redux-devtools/ui': ^1.3.0
-      '@rollup/plugin-babel': ^6.0.3
       '@types/node': ^18.11.17
       '@types/prop-types': ^15.7.5
       '@types/react': ^18.0.26
@@ -2048,9 +1992,6 @@ importers:
       redux: ^4.2.0
       redux-devtools-themes: ^1.0.0
       rimraf: ^3.0.2
-      rollup: ^3.7.5
-      rollup-plugin-typescript2: ^0.34.1
-      tslib: ^2.4.1
       typescript: ~4.9.4
     dependencies:
       '@babel/runtime': 7.20.6
@@ -2063,12 +2004,10 @@ importers:
       '@babel/cli': 7.19.3_@babel+core@7.20.5
       '@babel/core': 7.20.5
       '@babel/eslint-parser': 7.19.1_ak4stjm4k2uvd2drmeegtfb5ly
-      '@babel/plugin-transform-runtime': 7.19.6_@babel+core@7.20.5
       '@babel/preset-env': 7.20.2_@babel+core@7.20.5
       '@babel/preset-react': 7.18.6_@babel+core@7.20.5
       '@babel/preset-typescript': 7.18.6_@babel+core@7.20.5
       '@redux-devtools/core': link:../redux-devtools
-      '@rollup/plugin-babel': 6.0.3_zrxplyvfi52whpdwd6wkjjeo5q
       '@types/node': 18.11.17
       '@types/react': 18.0.26
       '@typescript-eslint/eslint-plugin': 5.47.0_ncmi6noazr3nzas7jxykisekym
@@ -2080,9 +2019,6 @@ importers:
       react: 18.2.0
       redux: 4.2.0
       rimraf: 3.0.2
-      rollup: 3.7.5
-      rollup-plugin-typescript2: 0.34.1_oj4jlwi3mkekxo3vucumcwebnq
-      tslib: 2.4.1
       typescript: 4.9.4
 
   packages/redux-devtools-slider-monitor/examples/todomvc:
