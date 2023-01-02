@@ -396,9 +396,9 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .style('stroke', 'black')
         .style('stroke-width', '1.5px')
         .style('fill', (d) =>
-          d.data._children
+          d.data._children && d.data._children.length > 0
             ? nodeStyleOptions.colors.collapsed
-            : d.data.children
+            : d.data.children && d.data.children.length > 0
             ? nodeStyleOptions.colors.parent
             : nodeStyleOptions.colors.default
         );
@@ -418,7 +418,9 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .style('fill-opacity', 1)
         .attr('transform', function transform(d) {
           const x =
-            (d.data.children || d.data._children ? -1 : 1) *
+            (((d.data.children ?? d.data._children)?.length ?? 0) > 0
+              ? -1
+              : 1) *
             (this.getBBox().width / 2 + nodeStyleOptions.radius + 5);
           return `translate(${x},0)`;
         });
