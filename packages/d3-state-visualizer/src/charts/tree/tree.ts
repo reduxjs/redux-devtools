@@ -12,60 +12,6 @@ import {
 import { tooltip } from 'd3tooltip';
 import type { StyleValue } from 'd3tooltip';
 
-// TODO Can we remove InputOptions?
-export interface InputOptions {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  state?: {} | null;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  tree?: Node | {};
-
-  rootKeyName: string;
-  pushMethod: 'push' | 'unshift';
-  id: string;
-  chartStyles: { [key: string]: StyleValue };
-  nodeStyleOptions: {
-    colors: {
-      default: string;
-      collapsed: string;
-      parent: string;
-    };
-    radius: number;
-  };
-  textStyleOptions: {
-    colors: {
-      default: string;
-      hover: string;
-    };
-  };
-  linkStyles: { [key: string]: StyleValue };
-  size: number;
-  aspectRatio: number;
-  initialZoom: number;
-  margin: {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-  };
-  isSorted: boolean;
-  heightBetweenNodesCoeff: number;
-  widthBetweenNodesCoeff: number;
-  transitionDuration: number;
-  blinkDuration: number;
-  onClickText: (datum: Node) => void;
-  tooltipOptions: {
-    disabled?: boolean;
-    left?: number | undefined;
-    top?: number | undefined;
-    offset?: {
-      left: number;
-      top: number;
-    };
-    style?: { [key: string]: StyleValue } | undefined;
-    indentationSize?: number;
-  };
-}
-
 interface Options {
   // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
@@ -105,7 +51,7 @@ interface Options {
   widthBetweenNodesCoeff: number;
   transitionDuration: number;
   blinkDuration: number;
-  onClickText: () => void;
+  onClickText: (datum: HierarchyPointNode<Node>) => void;
   tooltipOptions: {
     disabled: boolean;
     left: number | undefined;
@@ -171,7 +117,7 @@ const defaultOptions: Options = {
     },
     style: undefined,
   },
-};
+} satisfies Options;
 
 export interface Node {
   name: string;
@@ -200,10 +146,7 @@ interface NodePosition {
   y: number;
 }
 
-export default function (
-  DOMNode: HTMLElement,
-  options: Partial<InputOptions> = {}
-) {
+export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
   const {
     id,
     chartStyles,
@@ -225,7 +168,7 @@ export default function (
     tree,
     tooltipOptions,
     onClickText,
-  } = deepmerge(defaultOptions, options) as Options;
+  } = deepmerge(defaultOptions, options);
 
   const width = size - margin.left - margin.right;
   const height = size * aspectRatio - margin.top - margin.bottom;
