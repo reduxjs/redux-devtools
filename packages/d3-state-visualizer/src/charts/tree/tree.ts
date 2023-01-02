@@ -186,8 +186,8 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     .call(zoom.scaleTo, initialZoom)
     .call(
-      zoom.on('zoom', () => {
-        const { transform } = d3.event as D3ZoomEvent<SVGSVGElement, unknown>;
+      zoom.on('zoom', (event) => {
+        const { transform } = event as D3ZoomEvent<SVGSVGElement, unknown>;
         vis.attr('transform', transform.toString());
       })
     )
@@ -369,8 +369,8 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .append('circle')
         .attr('class', 'nodeCircle')
         .attr('r', 0)
-        .on('click', (clickedNode) => {
-          if (d3.event.defaultPrevented) return;
+        .on('click', (event, clickedNode) => {
+          if ((event as Event).defaultPrevented) return;
           toggleChildren(clickedNode.data);
           update();
         });
@@ -383,7 +383,9 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .attr('dy', '.35em')
         .style('fill-opacity', 0)
         .text((d) => d.data.name)
-        .on('click', onClickText);
+        .on('click', (_, datum) => {
+          onClickText(datum);
+        });
 
       const nodeEnterAndUpdate = nodeEnter.merge(node);
 
