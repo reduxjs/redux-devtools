@@ -30,7 +30,7 @@
     "build": "pnpm run build:lib && pnpm run build:storybook",
     "build:lib": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types && pnpm run build:css",
     "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --no-babelrc --extensions \".ts,.tsx\" --out-dir lib/esm",
+    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
     "build:types": "tsc --emitDeclarationOnly",
     "build:css": "ncp fonts lib/fonts",
     "clean": "rimraf lib storybook-static",
