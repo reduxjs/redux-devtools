@@ -5,6 +5,7 @@ module.exports = {
   moduleNameMapper: {
     '\\.css$': '<rootDir>/test/__mocks__/styleMock.ts',
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!(d3)/)'],
-  resolver: '<rootDir>/jestResolver.js',
+  transformIgnorePatterns: [
+    'node_modules/(?!.pnpm|d3|dateformat|delaunator|nanoid|robust-predicates|uuid)',
+  ],
 };

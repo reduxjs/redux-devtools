@@ -9,6 +9,7 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest',
     '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!(d3)/)'],
-  resolver: '<rootDir>/jestResolver.js',
+  transformIgnorePatterns: [
+    'node_modules/(?!.pnpm|d3|dateformat|delaunator|nanoid|robust-predicates|uuid)',
+  ],
 };

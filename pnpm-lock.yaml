@@ -1132,7 +1132,7 @@ importers:
       '@babel/preset-typescript': ^7.18.6
       '@babel/runtime': ^7.20.6
       '@redux-devtools/core': ^3.13.1
-      '@types/dateformat': ^3.0.1
+      '@types/dateformat': ^5.0.0
       '@types/dragula': ^3.7.1
       '@types/hex-rgba': ^1.0.1
       '@types/history': ^4.7.11
@@ -1144,7 +1144,7 @@ importers:
       '@types/redux-devtools-themes': ^1.0.0
       '@typescript-eslint/eslint-plugin': ^5.47.0
       '@typescript-eslint/parser': ^5.47.0
-      dateformat: ^4.6.3
+      dateformat: ^5.0.3
       eslint: ^8.30.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-react: ^7.31.11
@@ -1170,7 +1170,7 @@ importers:
       '@types/dragula': 3.7.1
       '@types/lodash': 4.14.191
       '@types/prop-types': 15.7.5
-      dateformat: 4.6.3
+      dateformat: 5.0.3
       hex-rgba: 1.0.2
       immutable: 4.1.0
       javascript-stringify: 2.1.0
@@ -1192,7 +1192,7 @@ importers:
       '@babel/preset-react': 7.18.6_@babel+core@7.20.5
       '@babel/preset-typescript': 7.18.6_@babel+core@7.20.5
       '@redux-devtools/core': link:../redux-devtools
-      '@types/dateformat': 3.0.1
+      '@types/dateformat': 5.0.0
       '@types/hex-rgba': 1.0.1
       '@types/history': 4.7.11
       '@types/lodash.debounce': 4.0.7
@@ -8325,8 +8325,8 @@ packages:
       '@types/d3-transition': 2.0.2
       '@types/d3-zoom': 2.0.3
 
-  /@types/dateformat/3.0.1:
-    resolution: {integrity: sha512-KlPPdikagvL6ELjWsljbyDIPzNCeliYkqRpI+zea99vBBbCIA5JNshZAwQKTON139c87y9qvTFVgkFd14rtS4g==}
+  /@types/dateformat/5.0.0:
+    resolution: {integrity: sha512-SZg4JdHIWHQGEokbYGZSDvo5wA4TLYPXaqhigs/wH+REDOejcJzgH+qyY+HtEUtWOZxEUkbhbdYPqQDiEgrXeA==}
     dev: true
 
   /@types/debug/4.1.7:
@@ -12159,8 +12159,9 @@ packages:
     engines: {node: '>=0.11'}
     dev: false
 
-  /dateformat/4.6.3:
-    resolution: {integrity: sha512-2P0p0pFGzHS5EMnhdxQi7aJN+iMheud0UhG4dlE1DLAlvL8JHjJJTX/CSm4JXwV0Ka5nGk3zC5mcb5bUQUxxMA==}
+  /dateformat/5.0.3:
+    resolution: {integrity: sha512-Kvr6HmPXUMerlLcLF+Pwq3K7apHpYmGDVqrxcDasBg86UcKeTSNWbEzU8bwdXnxnR44FtMhJAxI4Bov6Y/KUfA==}
+    engines: {node: '>=12.20'}
     dev: false
 
   /debug/2.6.9:
