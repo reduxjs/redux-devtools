@@ -4,7 +4,7 @@ import JSONObjectNode from './JSONObjectNode';
 import JSONArrayNode from './JSONArrayNode';
 import JSONIterableNode from './JSONIterableNode';
 import JSONValueNode from './JSONValueNode';
-import type { CommonInternalProps, KeyPath } from './types';
+import type { CommonInternalProps } from './types';
 
 interface Props extends CommonInternalProps {
   value: any;
