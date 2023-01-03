@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import JSONNestedNode from './JSONNestedNode';
 import type { CommonInternalProps } from './types';
 
@@ -26,10 +25,5 @@ const JSONObjectNode: React.FunctionComponent<Props> = ({ data, ...props }) => (
     expandable={Object.getOwnPropertyNames(data).length > 0}
   />
 );
-
-JSONObjectNode.propTypes = {
-  data: PropTypes.object,
-  nodeType: PropTypes.string.isRequired,
-};
 
 export default JSONObjectNode;

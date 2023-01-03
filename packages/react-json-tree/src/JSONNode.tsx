@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import objType from './objType';
 import JSONObjectNode from './JSONObjectNode';
 import JSONArrayNode from './JSONArrayNode';
@@ -101,18 +100,6 @@ const JSONNode: React.FunctionComponent<Props> = ({
         />
       );
   }
-};
-
-JSONNode.propTypes = {
-  getItemString: PropTypes.func.isRequired,
-  keyPath: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-  ).isRequired,
-  labelRenderer: PropTypes.func.isRequired,
-  styling: PropTypes.func.isRequired,
-  value: PropTypes.any,
-  valueRenderer: PropTypes.func.isRequired,
-  isCustomNode: PropTypes.func.isRequired,
 };
 
 export default JSONNode;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import JSONArrow from './JSONArrow';
 import type { CircularCache, CommonInternalProps } from './types';
 
@@ -17,14 +16,6 @@ interface State {
 }
 
 export default class ItemRange extends React.Component<Props, State> {
-  static propTypes = {
-    styling: PropTypes.func.isRequired,
-    from: PropTypes.number.isRequired,
-    to: PropTypes.number.isRequired,
-    renderChildNodes: PropTypes.func.isRequired,
-    nodeType: PropTypes.string.isRequired,
-  };
-
   constructor(props: Props) {
     super(props);
     this.state = { expanded: false };

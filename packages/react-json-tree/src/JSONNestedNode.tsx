@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import JSONArrow from './JSONArrow';
 import getCollectionEntries from './getCollectionEntries';
 import JSONNode from './JSONNode';
@@ -111,26 +110,6 @@ function getStateFromProps(props: Props) {
 }
 
 export default class JSONNestedNode extends React.Component<Props, State> {
-  static propTypes = {
-    getItemString: PropTypes.func.isRequired,
-    nodeTypeIndicator: PropTypes.any,
-    nodeType: PropTypes.string.isRequired,
-    data: PropTypes.any,
-    hideRoot: PropTypes.bool.isRequired,
-    createItemString: PropTypes.func.isRequired,
-    styling: PropTypes.func.isRequired,
-    collectionLimit: PropTypes.number,
-    keyPath: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    ).isRequired,
-    labelRenderer: PropTypes.func.isRequired,
-    shouldExpandNode: PropTypes.func,
-    level: PropTypes.number.isRequired,
-    sortObjectKeys: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-    isCircular: PropTypes.bool,
-    expandable: PropTypes.bool,
-  };
-
   static defaultProps = {
     data: [],
     circularCache: [],

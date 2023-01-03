@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import type { StylingFunction } from 'react-base16-styling';
 
 interface Props {
@@ -12,7 +11,7 @@ interface Props {
 
 const JSONArrow: React.FunctionComponent<Props> = ({
   styling,
-  arrowStyle,
+  arrowStyle = 'single',
   expanded,
   nodeType,
   onClick,
@@ -26,17 +25,5 @@ const JSONArrow: React.FunctionComponent<Props> = ({
     </div>
   </div>
 );
-
-JSONArrow.propTypes = {
-  styling: PropTypes.func.isRequired,
-  arrowStyle: PropTypes.oneOf(['single', 'double']),
-  expanded: PropTypes.bool.isRequired,
-  nodeType: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
-
-JSONArrow.defaultProps = {
-  arrowStyle: 'single',
-};
 
 export default JSONArrow;

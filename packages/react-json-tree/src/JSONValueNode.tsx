@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import type {
   GetItemString,
   Key,
@@ -43,17 +42,5 @@ const JSONValueNode: React.FunctionComponent<Props> = ({
     </span>
   </li>
 );
-
-JSONValueNode.propTypes = {
-  nodeType: PropTypes.string.isRequired,
-  styling: PropTypes.func.isRequired,
-  labelRenderer: PropTypes.func.isRequired,
-  keyPath: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-  ).isRequired,
-  valueRenderer: PropTypes.func.isRequired,
-  value: PropTypes.any,
-  valueGetter: PropTypes.func,
-};
 
 export default JSONValueNode;
