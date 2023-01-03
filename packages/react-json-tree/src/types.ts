@@ -26,7 +26,7 @@ export type ValueRenderer = (
   ...keyPath: KeyPath
 ) => React.ReactNode;
 
-export type ShouldExpandNode = (
+export type ShouldExpandNodeInitially = (
   keyPath: KeyPath,
   data: any,
   level: number
@@ -46,7 +46,7 @@ export interface CommonExternalProps {
   keyPath: KeyPath;
   labelRenderer: LabelRenderer;
   valueRenderer: ValueRenderer;
-  shouldExpandNode: ShouldExpandNode;
+  shouldExpandNodeInitially: ShouldExpandNodeInitially;
   hideRoot: boolean;
   getItemString: GetItemString;
   postprocessValue: PostprocessValue;

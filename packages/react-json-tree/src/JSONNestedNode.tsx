@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import JSONArrow from './JSONArrow';
 import getCollectionEntries from './getCollectionEntries';
 import JSONNode from './JSONNode';
@@ -91,128 +91,86 @@ interface Props extends CommonInternalProps {
   nodeTypeIndicator: string;
   createItemString: (data: any, collectionLimit: number) => string;
   expandable: boolean;
-  circularCache: CircularCache;
-  level: number;
 }
 
-interface State {
-  expanded: boolean;
-}
+export default function JSONNestedNode(props: Props) {
+  const {
+    circularCache = [],
+    collectionLimit,
+    createItemString,
+    data,
+    expandable,
+    getItemString,
+    hideRoot,
+    isCircular,
+    keyPath,
+    labelRenderer,
+    level = 0,
+    nodeType,
+    nodeTypeIndicator,
+    shouldExpandNodeInitially,
+    styling,
+  } = props;
 
-function getStateFromProps(props: Props) {
-  // calculate individual node expansion if necessary
-  const expanded = !props.isCircular
-    ? props.shouldExpandNode(props.keyPath, props.data, props.level)
-    : false;
-  return {
-    expanded,
-  };
-}
+  const [expanded, setExpanded] = useState<boolean>(
+    // calculate individual node expansion if necessary
+    isCircular ? false : shouldExpandNodeInitially(keyPath, data, level)
+  );
 
-export default class JSONNestedNode extends React.Component<Props, State> {
-  static defaultProps = {
-    data: [],
-    circularCache: [],
-    level: 0,
-    expandable: true,
-  };
+  const handleClick = useCallback(() => {
+    if (expandable) setExpanded(!expanded);
+  }, [expandable, expanded]);
 
-  constructor(props: Props) {
-    super(props);
-    this.state = getStateFromProps(props);
-  }
+  const renderedChildren =
+    expanded || (hideRoot && level === 0)
+      ? renderChildNodes({ ...props, circularCache, level: level + 1 })
+      : null;
 
-  UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    const nextState = getStateFromProps(nextProps);
-    if (getStateFromProps(this.props).expanded !== nextState.expanded) {
-      this.setState(nextState);
-    }
-  }
+  const itemType = (
+    <span {...styling('nestedNodeItemType', expanded)}>
+      {nodeTypeIndicator}
+    </span>
+  );
+  const renderedItemString = getItemString(
+    nodeType,
+    data,
+    itemType,
+    createItemString(data, collectionLimit),
+    keyPath
+  );
+  const stylingArgs = [keyPath, nodeType, expanded, expandable] as const;
 
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return (
-      !!Object.keys(nextProps).find(
-        (key) =>
-          key !== 'circularCache' &&
-          (key === 'keyPath'
-            ? nextProps[key].join('/') !== this.props[key].join('/')
-            : nextProps[key as keyof Props] !== this.props[key as keyof Props])
-      ) || nextState.expanded !== this.state.expanded
-    );
-  }
-
-  render() {
-    const {
-      getItemString,
-      nodeTypeIndicator,
-      nodeType,
-      data,
-      hideRoot,
-      createItemString,
-      styling,
-      collectionLimit,
-      keyPath,
-      labelRenderer,
-      expandable,
-    } = this.props;
-    const { expanded } = this.state;
-    const renderedChildren =
-      expanded || (hideRoot && this.props.level === 0)
-        ? renderChildNodes({ ...this.props, level: this.props.level + 1 })
-        : null;
-
-    const itemType = (
-      <span {...styling('nestedNodeItemType', expanded)}>
-        {nodeTypeIndicator}
+  return hideRoot ? (
+    <li {...styling('rootNode', ...stylingArgs)}>
+      <ul {...styling('rootNodeChildren', ...stylingArgs)}>
+        {renderedChildren}
+      </ul>
+    </li>
+  ) : (
+    <li {...styling('nestedNode', ...stylingArgs)}>
+      {expandable && (
+        <JSONArrow
+          styling={styling}
+          nodeType={nodeType}
+          expanded={expanded}
+          onClick={handleClick}
+        />
+      )}
+      <label
+        {...styling(['label', 'nestedNodeLabel'], ...stylingArgs)}
+        onClick={handleClick}
+      >
+        {labelRenderer(...stylingArgs)}
+      </label>
+      <span
+        {...styling('nestedNodeItemString', ...stylingArgs)}
+        onClick={handleClick}
+      >
+        {renderedItemString}
       </span>
-    );
-    const renderedItemString = getItemString(
-      nodeType,
-      data,
-      itemType,
-      createItemString(data, collectionLimit),
-      keyPath
-    );
-    const stylingArgs = [keyPath, nodeType, expanded, expandable] as const;
-
-    return hideRoot ? (
-      <li {...styling('rootNode', ...stylingArgs)}>
-        <ul {...styling('rootNodeChildren', ...stylingArgs)}>
-          {renderedChildren}
-        </ul>
-      </li>
-    ) : (
-      <li {...styling('nestedNode', ...stylingArgs)}>
-        {expandable && (
-          <JSONArrow
-            styling={styling}
-            nodeType={nodeType}
-            expanded={expanded}
-            onClick={this.handleClick}
-          />
-        )}
-        <label
-          {...styling(['label', 'nestedNodeLabel'], ...stylingArgs)}
-          onClick={this.handleClick}
-        >
-          {labelRenderer(...stylingArgs)}
-        </label>
-        <span
-          {...styling('nestedNodeItemString', ...stylingArgs)}
-          onClick={this.handleClick}
-        >
-          {renderedItemString}
-        </span>
-        <ul {...styling('nestedNodeChildren', ...stylingArgs)}>
-          {renderedChildren}
-        </ul>
-      </li>
-    );
-  }
-
-  handleClick = () => {
-    if (this.props.expandable) {
-      this.setState({ expanded: !this.state.expanded });
-    }
-  };
+      <ul {...styling('nestedNodeChildren', ...stylingArgs)}>
+        {renderedChildren}
+      </ul>
+    </li>
+  );
 }

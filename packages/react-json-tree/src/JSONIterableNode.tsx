@@ -35,6 +35,7 @@ const JSONIterableNode: React.FunctionComponent<Props> = ({ ...props }) => {
       nodeType="Iterable"
       nodeTypeIndicator="()"
       createItemString={createItemString}
+      expandable
     />
   );
 };

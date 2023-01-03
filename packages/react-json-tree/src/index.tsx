@@ -13,7 +13,7 @@ import type {
   GetItemString,
   IsCustomNode,
   LabelRenderer,
-  ShouldExpandNode,
+  ShouldExpandNodeInitially,
 } from './types';
 
 interface Props extends Partial<CommonExternalProps> {
@@ -23,7 +23,8 @@ interface Props extends Partial<CommonExternalProps> {
 }
 
 const identity = (value: any) => value;
-const expandRootNode: ShouldExpandNode = (keyPath, data, level) => level === 0;
+const expandRootNode: ShouldExpandNodeInitially = (keyPath, data, level) =>
+  level === 0;
 const defaultItemString: GetItemString = (type, data, itemType, itemString) => (
   <span>
     {itemType} {itemString}
@@ -39,7 +40,7 @@ export function JSONTree({
   keyPath = ['root'],
   labelRenderer = defaultLabelRenderer,
   valueRenderer = identity,
-  shouldExpandNode = expandRootNode,
+  shouldExpandNodeInitially = expandRootNode,
   hideRoot = false,
   getItemString = defaultItemString,
   postprocessValue = identity,
@@ -62,7 +63,7 @@ export function JSONTree({
         styling={styling}
         labelRenderer={labelRenderer}
         valueRenderer={valueRenderer}
-        shouldExpandNode={shouldExpandNode}
+        shouldExpandNodeInitially={shouldExpandNodeInitially}
         hideRoot={hideRoot}
         getItemString={getItemString}
         postprocessValue={postprocessValue}
