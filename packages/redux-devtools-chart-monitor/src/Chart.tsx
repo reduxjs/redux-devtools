@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
-import PropTypes from 'prop-types';
-import { tree, NodeWithId, Primitive } from 'd3-state-visualizer';
+import { tree } from 'd3-state-visualizer';
+import type { Options } from 'd3-state-visualizer';
 import { Action, Dispatch } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import * as themes from 'redux-devtools-themes';
@@ -12,7 +12,8 @@ const wrapperStyle = {
 };
 
 export interface Props<S, A extends Action<unknown>>
-  extends LiftedState<S, A, ChartMonitorState> {
+  extends LiftedState<S, A, ChartMonitorState>,
+    Options {
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
@@ -20,76 +21,10 @@ export interface Props<S, A extends Action<unknown>>
   invertTheme: boolean;
 
   state: S | null;
-  isSorted: boolean;
-  heightBetweenNodesCoeff: number;
-  widthBetweenNodesCoeff: number;
-  onClickText: (datum: NodeWithId) => void;
-  tooltipOptions: {
-    disabled: boolean;
-    offset: {
-      left: number;
-      top: number;
-    };
-    indentationSize: number;
-    style: { [key: string]: Primitive } | undefined;
-  };
-  style: { [key: string]: Primitive } | undefined;
   defaultIsVisible?: boolean;
 }
 
 class Chart<S, A extends Action<unknown>> extends Component<Props<S, A>> {
-  static propTypes = {
-    state: PropTypes.object,
-    rootKeyName: PropTypes.string,
-    pushMethod: PropTypes.oneOf(['push', 'unshift']),
-    tree: PropTypes.shape({
-      name: PropTypes.string,
-      children: PropTypes.array,
-    }),
-    id: PropTypes.string,
-    style: PropTypes.shape({
-      node: PropTypes.shape({
-        colors: PropTypes.shape({
-          default: PropTypes.string,
-          parent: PropTypes.string,
-          collapsed: PropTypes.string,
-        }),
-        radius: PropTypes.number,
-      }),
-      text: PropTypes.shape({
-        colors: PropTypes.shape({
-          default: PropTypes.string,
-          hover: PropTypes.string,
-        }),
-      }),
-      link: PropTypes.object,
-    }),
-    size: PropTypes.number,
-    aspectRatio: PropTypes.number,
-    margin: PropTypes.shape({
-      top: PropTypes.number,
-      right: PropTypes.number,
-      bottom: PropTypes.number,
-      left: PropTypes.number,
-    }),
-    isSorted: PropTypes.bool,
-    heightBetweenNodesCoeff: PropTypes.number,
-    widthBetweenNodesCoeff: PropTypes.number,
-    transitionDuration: PropTypes.number,
-    onClickText: PropTypes.func,
-    tooltipOptions: PropTypes.shape({
-      disabled: PropTypes.bool,
-      left: PropTypes.number,
-      top: PropTypes.number,
-      offset: PropTypes.shape({
-        left: PropTypes.number,
-        top: PropTypes.number,
-      }),
-      indentationSize: PropTypes.number,
-      style: PropTypes.object,
-    }),
-  };
-
   divRef = createRef<HTMLDivElement>();
   // eslint-disable-next-line @typescript-eslint/ban-types
   renderChart?: (state?: {} | null | undefined) => void;

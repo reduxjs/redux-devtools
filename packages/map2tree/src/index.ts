@@ -4,7 +4,8 @@ import mapValues from 'lodash/mapValues';
 
 export interface Node {
   name: string;
-  children?: Node[] | null;
+  children?: this[];
+  object?: unknown;
   value?: unknown;
 }
 
@@ -43,7 +44,6 @@ function getNode(tree: Node, key: string): Node | null {
 }
 
 export function map2tree(
-  // eslint-disable-next-line @typescript-eslint/ban-types
   root: unknown,
   options: { key?: string; pushMethod?: 'push' | 'unshift' } = {},
   tree: Node = { name: options.key || 'state', children: [] }

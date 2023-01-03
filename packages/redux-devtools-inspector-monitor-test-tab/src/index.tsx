@@ -155,11 +155,13 @@ export class TestTab<S, A extends Action<unknown>> extends Component<
             {...rest}
           />
         )}
-        {!persistedState.hideTip && assertion && rest.startActionId === null && (
-          <Notification onClose={this.handleCloseTip}>
-            Hold <b>SHIFT</b> key to select more actions.
-          </Notification>
-        )}
+        {!persistedState.hideTip &&
+          assertion &&
+          rest.startActionId === null && (
+            <Notification onClose={this.handleCloseTip}>
+              Hold <b>SHIFT</b> key to select more actions.
+            </Notification>
+          )}
         {dialogStatus && (
           <Dialog<Template>
             open

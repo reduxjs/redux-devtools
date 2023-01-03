@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.1.0
+
+### Minor Changes
+
+- 24f60a7a: feat(rtk-query): add Data tab to rtk-query-monitor #1126 #1129
+
 ## 3.0.1
 
 ### Patch Changes

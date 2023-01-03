@@ -1,5 +1,5 @@
 import { insertScript, listenMessage } from '../../utils/inject';
-import '../../../src/browser/extension/inject/pageScript';
+import '../../../src/pageScript';
 
 describe('API', () => {
   it('should get window.__REDUX_DEVTOOLS_EXTENSION__ function', () => {

@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import { createStore, compose } from 'redux';
 import { insertScript, listenMessage } from '../../utils/inject';
-import '../../../src/browser/extension/inject/pageScript';
+import '../../../src/pageScript';
 
 function counter(state = 0, action) {
   switch (action.type) {

@@ -1,5 +1,23 @@
 # remotedev-redux-devtools-extension
 
+## 3.0.17
+
+### Patch Changes
+
+- 1aa6c4f7: Fix remounting root for devpanel
+
+## 3.0.16
+
+### Patch Changes
+
+- 20ebf725: Remove source map from page wrap bundle
+
+## 3.0.14
+
+### Patch Changes
+
+- 24f60a7a: bump min popup window width to 760px #1126 #1129
+
 ## 3.0.13
 
 ### Patch Changes

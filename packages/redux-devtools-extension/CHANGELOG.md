@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.2.3
+
+### Patch Changes
+
+- 6cf1865f: Fix type for serialize option
+
 ## 3.2.2
 
 ### Patch Changes

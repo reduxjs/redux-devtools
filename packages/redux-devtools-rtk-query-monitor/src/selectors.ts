@@ -258,6 +258,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
     ],
     (subscriptions, actions, tags) => {
       return {
+        [QueryPreviewTabs.data]: 0,
         [QueryPreviewTabs.queryTags]: tags.length,
         [QueryPreviewTabs.querySubscriptions]: Object.keys(subscriptions ?? {})
           .length,

@@ -1,13 +1,20 @@
 import React, { ReactNode, PureComponent } from 'react';
-import { ApiStats, RtkQueryApiState } from '../types';
+import { ApiStats, QueryPreviewTabs, RtkQueryApiState } from '../types';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
-import { TreeView } from './TreeView';
+import { TreeView, TreeViewProps } from './TreeView';
+import { renderTabPanelId, renderTabPanelButtonId } from '../utils/a11y';
 
 export interface QueryPreviewApiProps {
   apiStats: ApiStats | null;
   apiState: RtkQueryApiState | null;
   isWideLayout: boolean;
 }
+
+const rootProps: TreeViewProps['rootProps'] = {
+  'aria-labelledby': renderTabPanelButtonId(QueryPreviewTabs.apiConfig),
+  id: renderTabPanelId(QueryPreviewTabs.apiConfig),
+  role: 'tabpanel',
+};
 
 export class QueryPreviewApi extends PureComponent<QueryPreviewApiProps> {
   shouldExpandApiStateNode = (
@@ -33,7 +40,7 @@ export class QueryPreviewApi extends PureComponent<QueryPreviewApiProps> {
     return (
       <StyleUtilsContext.Consumer>
         {({ styling }) => (
-          <article {...styling('tabContent')}>
+          <article {...rootProps} {...styling('tabContent')}>
             <h2>{apiState.config.reducerPath}</h2>
             <TreeView
               before={<h3>State</h3>}

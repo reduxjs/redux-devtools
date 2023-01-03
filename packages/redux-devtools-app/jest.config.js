@@ -5,9 +5,11 @@ module.exports = {
   moduleNameMapper: {
     '\\.css$': '<rootDir>/test/__mocks__/styleMock.ts',
   },
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.test.json',
-    },
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!.pnpm|d3|dateformat|delaunator|nanoid|robust-predicates|uuid)',
+  ],
 };

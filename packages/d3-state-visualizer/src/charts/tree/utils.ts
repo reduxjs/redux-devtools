@@ -1,38 +1,38 @@
 import { is, join, pipe, replace } from 'ramda';
 import sortAndSerialize from './sortAndSerialize';
-import { NodeWithId } from './tree';
+import type { InternalNode } from './tree';
 
-export function collapseChildren(node: NodeWithId) {
+export function collapseChildren(node: InternalNode) {
   if (node.children) {
     node._children = node.children;
     node._children.forEach(collapseChildren);
-    node.children = null;
+    node.children = undefined;
   }
 }
 
-export function expandChildren(node: NodeWithId) {
+export function expandChildren(node: InternalNode) {
   if (node._children) {
     node.children = node._children;
     node.children.forEach(expandChildren);
-    node._children = null;
+    node._children = undefined;
   }
 }
 
-export function toggleChildren(node: NodeWithId) {
+export function toggleChildren(node: InternalNode) {
   if (node.children) {
     node._children = node.children;
-    node.children = null;
+    node.children = undefined;
   } else if (node._children) {
     node.children = node._children;
-    node._children = null;
+    node._children = undefined;
   }
   return node;
 }
 
 export function visit(
-  parent: NodeWithId,
-  visitFn: (parent: NodeWithId) => void,
-  childrenFn: (parent: NodeWithId) => NodeWithId[] | null | undefined
+  parent: InternalNode,
+  visitFn: (parent: InternalNode) => void,
+  childrenFn: (parent: InternalNode) => InternalNode[] | null | undefined
 ) {
   if (!parent) {
     return;
@@ -50,10 +50,10 @@ export function visit(
   }
 }
 
-export function getNodeGroupByDepthCount(rootNode: NodeWithId) {
+export function getNodeGroupByDepthCount(rootNode: InternalNode) {
   const nodeGroupByDepthCount = [1];
 
-  const traverseFrom = function traverseFrom(node: NodeWithId, depth = 0) {
+  const traverseFrom = function traverseFrom(node: InternalNode, depth = 0) {
     if (!node.children || node.children.length === 0) {
       return 0;
     }
@@ -73,11 +73,7 @@ export function getNodeGroupByDepthCount(rootNode: NodeWithId) {
   return nodeGroupByDepthCount;
 }
 
-export function getTooltipString(
-  node: unknown,
-  i: number | undefined,
-  { indentationSize = 4 }
-) {
+export function getTooltipString(node: InternalNode, { indentationSize = 4 }) {
   if (!is(Object, node)) return '';
 
   const spacer = join('&nbsp;&nbsp;');
@@ -89,7 +85,6 @@ export function getTooltipString(
 
   if (typeof node.value !== 'undefined') return json2html(node.value);
   if (typeof node.object !== 'undefined') return json2html(node.object);
-  if (children && children.length)
-    return `childrenCount: ${(children as unknown[]).length}`;
+  if (children && children.length) return `childrenCount: ${children.length}`;
   return 'empty';
 }

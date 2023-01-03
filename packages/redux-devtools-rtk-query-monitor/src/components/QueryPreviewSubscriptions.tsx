@@ -1,6 +1,15 @@
 import React, { ReactNode, PureComponent } from 'react';
-import { RtkQueryApiState } from '../types';
-import { TreeView } from './TreeView';
+import { QueryPreviewTabs, RtkQueryApiState } from '../types';
+import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
+import { TreeView, TreeViewProps } from './TreeView';
+
+const rootProps: TreeViewProps['rootProps'] = {
+  'aria-labelledby': renderTabPanelButtonId(
+    QueryPreviewTabs.querySubscriptions
+  ),
+  id: renderTabPanelId(QueryPreviewTabs.querySubscriptions),
+  role: 'tabpanel',
+};
 
 export interface QueryPreviewSubscriptionsProps {
   subscriptions: RtkQueryApiState['subscriptions'][keyof RtkQueryApiState['subscriptions']];
@@ -12,7 +21,11 @@ export class QueryPreviewSubscriptions extends PureComponent<QueryPreviewSubscri
     const { subscriptions } = this.props;
 
     return (
-      <TreeView data={subscriptions} isWideLayout={this.props.isWideLayout} />
+      <TreeView
+        rootProps={rootProps}
+        data={subscriptions}
+        isWideLayout={this.props.isWideLayout}
+      />
     );
   }
 }
