@@ -194,7 +194,11 @@ const App = () => (
     </div>
     <p>Collapsed root node</p>
     <div>
-      <JSONTree data={data} theme={theme} shouldExpandNode={() => false} />
+      <JSONTree
+        data={data}
+        theme={theme}
+        shouldExpandNodeInitially={() => false}
+      />
     </div>
   </div>
 );

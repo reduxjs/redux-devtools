@@ -42,7 +42,7 @@ export default class LogMonitorAction<
             invertTheme={false}
             keyPath={['action']}
             data={payload}
-            shouldExpandNode={this.shouldExpandNode}
+            shouldExpandNodeInitially={this.shouldExpandNodeInitially}
           />
         ) : (
           ''
@@ -51,7 +51,7 @@ export default class LogMonitorAction<
     );
   }
 
-  shouldExpandNode = (
+  shouldExpandNodeInitially = (
     keyPath: (string | number)[],
     data: any,
     level: number

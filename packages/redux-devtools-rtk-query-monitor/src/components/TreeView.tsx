@@ -14,7 +14,7 @@ export interface TreeViewProps
   extends Partial<
     Pick<
       ComponentProps<typeof JSONTree>,
-      'keyPath' | 'shouldExpandNode' | 'hideRoot'
+      'keyPath' | 'shouldExpandNodeInitially' | 'hideRoot'
     >
   > {
   data: unknown;
@@ -30,7 +30,7 @@ export interface TreeViewProps
 export class TreeView extends React.PureComponent<TreeViewProps> {
   static defaultProps = {
     hideRoot: true,
-    shouldExpandNode: (
+    shouldExpandNodeInitially: (
       keyPath: (string | number)[],
       value: unknown,
       layer: number
@@ -81,7 +81,7 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
       after,
       children,
       keyPath,
-      shouldExpandNode,
+      shouldExpandNodeInitially,
       hideRoot,
       rootProps,
     } = this.props;
@@ -94,7 +94,7 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
               {before}
               <JSONTree
                 keyPath={keyPath}
-                shouldExpandNode={shouldExpandNode}
+                shouldExpandNodeInitially={shouldExpandNodeInitially}
                 data={data}
                 labelRenderer={this.selectLabelRenderer(styling)}
                 theme={this.selectTheme(base16Theme)}

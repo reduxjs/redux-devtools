@@ -115,7 +115,7 @@ export default class LogMonitorEntry<
             data={data}
             invertTheme={false}
             keyPath={['state']}
-            shouldExpandNode={this.shouldExpandNode}
+            shouldExpandNodeInitially={this.shouldExpandNodeInitially}
           />
         );
       } catch (err) {
@@ -149,7 +149,7 @@ export default class LogMonitorEntry<
     }
   };
 
-  shouldExpandNode = (
+  shouldExpandNodeInitially = (
     keyPath: (string | number)[],
     data: any,
     level: number

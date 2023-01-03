@@ -15,7 +15,7 @@ const rootProps: TreeViewProps['rootProps'] = {
 };
 
 export class QueryPreviewData extends PureComponent<QueryPreviewDataProps> {
-  shouldExpandNode = (
+  shouldExpandNodeInitially = (
     keyPath: (string | number)[],
     value: unknown,
     layer: number
@@ -31,7 +31,7 @@ export class QueryPreviewData extends PureComponent<QueryPreviewDataProps> {
         rootProps={rootProps}
         data={data}
         isWideLayout={isWideLayout}
-        shouldExpandNode={this.shouldExpandNode}
+        shouldExpandNodeInitially={this.shouldExpandNodeInitially}
       />
     );
   }

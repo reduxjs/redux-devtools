@@ -45,7 +45,7 @@ export class QueryPreviewApi extends PureComponent<QueryPreviewApiProps> {
             <TreeView
               before={<h3>State</h3>}
               data={apiState}
-              shouldExpandNode={this.shouldExpandApiStateNode}
+              shouldExpandNodeInitially={this.shouldExpandApiStateNode}
               isWideLayout={isWideLayout}
             />
             {apiStats && (

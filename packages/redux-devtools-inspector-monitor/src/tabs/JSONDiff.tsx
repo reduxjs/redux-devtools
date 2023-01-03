@@ -104,7 +104,7 @@ export default class JSONDiff extends Component<Props, State> {
         valueRenderer={this.valueRenderer}
         postprocessValue={prepareDelta}
         isCustomNode={Array.isArray}
-        shouldExpandNode={expandFirstLevel}
+        shouldExpandNodeInitially={expandFirstLevel}
         hideRoot
       />
     );

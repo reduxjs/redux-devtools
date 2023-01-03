@@ -35,7 +35,7 @@ export interface QueryPreviewInfoProps {
   isWideLayout: boolean;
 }
 export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
-  shouldExpandNode = (
+  shouldExpandNodeInitially = (
     keyPath: (string | number)[],
     value: unknown,
     layer: number
@@ -107,7 +107,7 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
         rootProps={rootProps}
         data={formattedQuery}
         isWideLayout={isWideLayout}
-        shouldExpandNode={this.shouldExpandNode}
+        shouldExpandNodeInitially={this.shouldExpandNodeInitially}
       />
     );
   }

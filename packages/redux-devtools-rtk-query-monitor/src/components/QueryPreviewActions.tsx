@@ -58,7 +58,7 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
     return false;
   };
 
-  shouldExpandNode = (
+  shouldExpandNodeInitially = (
     keyPath: (string | number)[],
     value: unknown,
     layer: number
@@ -85,7 +85,7 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
         rootProps={rootProps}
         data={this.selectFormattedActions(actionsOfQuery)}
         isWideLayout={isWideLayout}
-        shouldExpandNode={this.shouldExpandNode}
+        shouldExpandNodeInitially={this.shouldExpandNodeInitially}
       />
     );
   }
