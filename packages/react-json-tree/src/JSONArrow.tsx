@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StylingFunction } from 'react-base16-styling';
+import type { StylingFunction } from 'react-base16-styling';
 
 interface Props {
   styling: StylingFunction;

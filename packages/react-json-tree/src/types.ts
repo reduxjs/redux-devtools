@@ -1,81 +1,63 @@
 import React from 'react';
 import { StylingFunction } from 'react-base16-styling';
 
-interface SharedCircularPropsPassedThroughJSONTree {
-  keyPath: (string | number)[];
-  labelRenderer: (
-    keyPath: (string | number)[],
-    nodeType: string,
-    expanded: boolean,
-    expandable: boolean
-  ) => React.ReactNode;
-}
-interface SharedCircularPropsProvidedByJSONTree
-  extends SharedCircularPropsPassedThroughJSONTree {
-  styling: StylingFunction;
-}
-interface JSONValueNodeCircularPropsPassedThroughJSONTree {
-  valueRenderer: (
-    valueAsString: any,
-    value: any,
-    ...keyPath: (string | number)[]
-  ) => React.ReactNode;
-}
-export type JSONValueNodeCircularPropsProvidedByJSONNode =
-  SharedCircularPropsProvidedByJSONTree &
-    JSONValueNodeCircularPropsPassedThroughJSONTree;
+export type Key = string | number;
 
-interface JSONNestedNodeCircularPropsPassedThroughJSONTree {
-  shouldExpandNode: (
-    keyPath: (string | number)[],
-    data: any,
-    level: number
-  ) => boolean;
+export type KeyPath = (string | number)[];
+
+export type GetItemString = (
+  nodeType: string,
+  data: any,
+  itemType: React.ReactNode,
+  itemString: string,
+  keyPath: KeyPath
+) => React.ReactNode;
+
+export type LabelRenderer = (
+  keyPath: KeyPath,
+  nodeType: string,
+  expanded: boolean,
+  expandable: boolean
+) => React.ReactNode;
+
+export type ValueRenderer = (
+  valueAsString: any,
+  value: any,
+  ...keyPath: KeyPath
+) => React.ReactNode;
+
+export type ShouldExpandNode = (
+  keyPath: KeyPath,
+  data: any,
+  level: number
+) => boolean;
+
+export type PostprocessValue = (value: any) => any;
+
+export type IsCustomNode = (value: any) => boolean;
+
+export type SortObjectKeys = ((a: any, b: any) => number) | boolean;
+
+export type Styling = StylingFunction;
+
+export type CircularCache = any[];
+
+export interface CommonExternalProps {
+  keyPath: KeyPath;
+  labelRenderer: LabelRenderer;
+  valueRenderer: ValueRenderer;
+  shouldExpandNode: ShouldExpandNode;
   hideRoot: boolean;
-  getItemString: (
-    nodeType: string,
-    data: any,
-    itemType: React.ReactNode,
-    itemString: string,
-    keyPath: (string | number)[]
-  ) => React.ReactNode;
-  postprocessValue: (value: any) => any;
-  isCustomNode: (value: any) => boolean;
+  getItemString: GetItemString;
+  postprocessValue: PostprocessValue;
+  isCustomNode: IsCustomNode;
   collectionLimit: number;
-  sortObjectKeys?: ((a: any, b: any) => number) | boolean;
+  sortObjectKeys: SortObjectKeys;
 }
-export type CircularPropsPassedThroughJSONTree =
-  SharedCircularPropsPassedThroughJSONTree &
-    JSONValueNodeCircularPropsPassedThroughJSONTree &
-    JSONNestedNodeCircularPropsPassedThroughJSONTree;
 
-interface JSONNestedNodeCircularPropsPassedThroughJSONNode
-  extends JSONNestedNodeCircularPropsPassedThroughJSONTree {
-  circularCache?: any[];
+export interface CommonInternalProps extends CommonExternalProps {
+  styling: StylingFunction;
+  circularCache?: CircularCache;
   isCircular?: boolean;
   level?: number;
 }
-export type CircularPropsPassedThroughJSONNode =
-  SharedCircularPropsProvidedByJSONTree &
-    JSONValueNodeCircularPropsPassedThroughJSONTree &
-    JSONNestedNodeCircularPropsPassedThroughJSONNode;
-
-export interface JSONNestedNodeCircularPropsPassedThroughJSONNestedNode
-  extends JSONNestedNodeCircularPropsPassedThroughJSONNode {
-  circularCache: any[];
-  level: number;
-}
-export type CircularPropsPassedThroughJSONNestedNode =
-  SharedCircularPropsProvidedByJSONTree &
-    JSONValueNodeCircularPropsPassedThroughJSONTree &
-    JSONNestedNodeCircularPropsPassedThroughJSONNestedNode;
-
-export type CircularPropsPassedThroughRenderChildNodes =
-  SharedCircularPropsProvidedByJSONTree &
-    JSONValueNodeCircularPropsPassedThroughJSONTree &
-    JSONNestedNodeCircularPropsPassedThroughJSONNestedNode;
-
-export type CircularPropsPassedThroughItemRange =
-  SharedCircularPropsProvidedByJSONTree &
-    JSONValueNodeCircularPropsPassedThroughJSONTree &
-    JSONNestedNodeCircularPropsPassedThroughJSONNestedNode;

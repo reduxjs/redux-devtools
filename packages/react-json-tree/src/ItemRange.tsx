@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import JSONArrow from './JSONArrow';
-import { CircularPropsPassedThroughItemRange } from './types';
+import type { CircularCache, CommonInternalProps } from './types';
 
-interface Props extends CircularPropsPassedThroughItemRange {
+interface Props extends CommonInternalProps {
   data: any;
   nodeType: string;
   from: number;
   to: number;
   renderChildNodes: (props: Props, from: number, to: number) => React.ReactNode;
+  circularCache: CircularCache;
 }
 
 interface State {

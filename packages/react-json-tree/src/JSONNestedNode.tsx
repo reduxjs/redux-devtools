@@ -4,19 +4,16 @@ import JSONArrow from './JSONArrow';
 import getCollectionEntries from './getCollectionEntries';
 import JSONNode from './JSONNode';
 import ItemRange from './ItemRange';
-import {
-  CircularPropsPassedThroughJSONNestedNode,
-  CircularPropsPassedThroughRenderChildNodes,
-} from './types';
+import type { CircularCache, CommonInternalProps } from './types';
 
 /**
  * Renders nested values (eg. objects, arrays, lists, etc.)
  */
 
-export interface RenderChildNodesProps
-  extends CircularPropsPassedThroughRenderChildNodes {
+export interface RenderChildNodesProps extends CommonInternalProps {
   data: any;
   nodeType: string;
+  circularCache: CircularCache;
 }
 
 interface Range {
@@ -89,12 +86,14 @@ function renderChildNodes(
   return childNodes;
 }
 
-interface Props extends CircularPropsPassedThroughJSONNestedNode {
+interface Props extends CommonInternalProps {
   data: any;
   nodeType: string;
   nodeTypeIndicator: string;
   createItemString: (data: any, collectionLimit: number) => string;
   expandable: boolean;
+  circularCache: CircularCache;
+  level: number;
 }
 
 interface State {

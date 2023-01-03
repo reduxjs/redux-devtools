@@ -8,34 +8,29 @@ import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
 import { invertTheme } from 'react-base16-styling';
 import type { StylingValue, Theme } from 'react-base16-styling';
-import { CircularPropsPassedThroughJSONTree } from './types';
+import type {
+  CommonExternalProps,
+  GetItemString,
+  IsCustomNode,
+  LabelRenderer,
+  ShouldExpandNode,
+} from './types';
 
-interface Props extends CircularPropsPassedThroughJSONTree {
+interface Props extends Partial<CommonExternalProps> {
   data: any;
   theme?: Theme;
-  invertTheme: boolean;
+  invertTheme?: boolean;
 }
 
 const identity = (value: any) => value;
-const expandRootNode = (
-  keyPath: (string | number)[],
-  data: any,
-  level: number
-) => level === 0;
-const defaultItemString = (
-  type: string,
-  data: any,
-  itemType: React.ReactNode,
-  itemString: string
-) => (
+const expandRootNode: ShouldExpandNode = (keyPath, data, level) => level === 0;
+const defaultItemString: GetItemString = (type, data, itemType, itemString) => (
   <span>
     {itemType} {itemString}
   </span>
 );
-const defaultLabelRenderer = ([label]: (string | number)[]) => (
-  <span>{label}:</span>
-);
-const noCustomNode = () => false;
+const defaultLabelRenderer: LabelRenderer = ([label]) => <span>{label}:</span>;
+const noCustomNode: IsCustomNode = () => false;
 
 export function JSONTree({
   data: value,
@@ -50,7 +45,7 @@ export function JSONTree({
   postprocessValue = identity,
   isCustomNode = noCustomNode,
   collectionLimit = 50,
-  sortObjectKeys,
+  sortObjectKeys = false,
 }: Props) {
   const styling = useMemo(
     () =>

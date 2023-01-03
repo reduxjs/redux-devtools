@@ -1,3 +1,5 @@
+import type { SortObjectKeys } from './types';
+
 function getLength(type: string, collection: any) {
   if (type === 'Object') {
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -16,7 +18,7 @@ function isIterableMap(collection: any) {
 function getEntries(
   type: string,
   collection: any,
-  sortObjectKeys?: ((a: any, b: any) => number) | boolean | undefined,
+  sortObjectKeys: SortObjectKeys,
   from = 0,
   to = Infinity
 ): { entries: { key: string | number; value: any }[]; hasMore?: boolean } {
@@ -96,7 +98,7 @@ function getRanges(from: number, to: number, limit: number) {
 export default function getCollectionEntries(
   type: string,
   collection: any,
-  sortObjectKeys: ((a: any, b: any) => number) | boolean | undefined,
+  sortObjectKeys: SortObjectKeys,
   limit: number,
   from = 0,
   to = Infinity

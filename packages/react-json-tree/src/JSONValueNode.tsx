@@ -1,14 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { JSONValueNodeCircularPropsProvidedByJSONNode } from './types';
+import type {
+  GetItemString,
+  Key,
+  KeyPath,
+  LabelRenderer,
+  Styling,
+  ValueRenderer,
+} from './types';
 
 /**
  * Renders simple values (eg. strings, numbers, booleans, etc)
  */
 
-interface Props extends JSONValueNodeCircularPropsProvidedByJSONNode {
+interface Props {
+  getItemString: GetItemString;
+  key: Key;
+  keyPath: KeyPath;
+  labelRenderer: LabelRenderer;
   nodeType: string;
+  styling: Styling;
   value: any;
+  valueRenderer: ValueRenderer;
   valueGetter?: (value: any) => any;
 }
 

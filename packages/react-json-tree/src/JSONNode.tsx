@@ -5,10 +5,9 @@ import JSONObjectNode from './JSONObjectNode';
 import JSONArrayNode from './JSONArrayNode';
 import JSONIterableNode from './JSONIterableNode';
 import JSONValueNode from './JSONValueNode';
-import { CircularPropsPassedThroughJSONNode } from './types';
+import type { CommonInternalProps, KeyPath } from './types';
 
-interface Props extends CircularPropsPassedThroughJSONNode {
-  keyPath: (string | number)[];
+interface Props extends CommonInternalProps {
   value: any;
   isCustomNode: (value: any) => boolean;
 }
