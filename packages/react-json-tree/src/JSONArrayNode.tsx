@@ -16,15 +16,15 @@ interface Props extends CommonInternalProps {
 }
 
 // Configures <JSONNestedNode> to render an Array
-const JSONArrayNode: React.FunctionComponent<Props> = ({ data, ...props }) => (
-  <JSONNestedNode
-    {...props}
-    data={data}
-    nodeType="Array"
-    nodeTypeIndicator="[]"
-    createItemString={createItemString}
-    expandable={data.length > 0}
-  />
-);
-
-export default JSONArrayNode;
+export default function JSONArrayNode({ data, ...props }: Props) {
+  return (
+    <JSONNestedNode
+      {...props}
+      data={data}
+      nodeType="Array"
+      nodeTypeIndicator="[]"
+      createItemString={createItemString}
+      expandable={data.length > 0}
+    />
+  );
+}

@@ -28,7 +28,7 @@ interface Props extends CommonInternalProps {
 }
 
 // Configures <JSONNestedNode> to render an iterable
-const JSONIterableNode: React.FunctionComponent<Props> = ({ ...props }) => {
+export default function JSONIterableNode(props: Props) {
   return (
     <JSONNestedNode
       {...props}
@@ -38,6 +38,4 @@ const JSONIterableNode: React.FunctionComponent<Props> = ({ ...props }) => {
       expandable
     />
   );
-};
-
-export default JSONIterableNode;
+}

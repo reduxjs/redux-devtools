@@ -15,15 +15,15 @@ interface Props extends CommonInternalProps {
 }
 
 // Configures <JSONNestedNode> to render an Object
-const JSONObjectNode: React.FunctionComponent<Props> = ({ data, ...props }) => (
-  <JSONNestedNode
-    {...props}
-    data={data}
-    nodeType="Object"
-    nodeTypeIndicator={props.nodeType === 'Error' ? 'Error()' : '{}'}
-    createItemString={createItemString}
-    expandable={Object.getOwnPropertyNames(data).length > 0}
-  />
-);
-
-export default JSONObjectNode;
+export default function JSONObjectNode({ data, ...props }: Props) {
+  return (
+    <JSONNestedNode
+      {...props}
+      data={data}
+      nodeType="Object"
+      nodeTypeIndicator={props.nodeType === 'Error' ? 'Error()' : '{}'}
+      createItemString={createItemString}
+      expandable={Object.getOwnPropertyNames(data).length > 0}
+    />
+  );
+}

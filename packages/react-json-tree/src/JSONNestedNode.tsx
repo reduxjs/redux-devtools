@@ -13,6 +13,7 @@ export interface RenderChildNodesProps extends CommonInternalProps {
   data: any;
   nodeType: string;
   circularCache: CircularCache;
+  level: number;
 }
 
 interface Range {

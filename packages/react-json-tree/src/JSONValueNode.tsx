@@ -24,7 +24,7 @@ interface Props {
   valueGetter?: (value: any) => any;
 }
 
-const JSONValueNode: React.FunctionComponent<Props> = ({
+export default function JSONValueNode({
   nodeType,
   styling,
   labelRenderer,
@@ -32,15 +32,15 @@ const JSONValueNode: React.FunctionComponent<Props> = ({
   valueRenderer,
   value,
   valueGetter = (value) => value,
-}) => (
-  <li {...styling('value', nodeType, keyPath)}>
-    <label {...styling(['label', 'valueLabel'], nodeType, keyPath)}>
-      {labelRenderer(keyPath, nodeType, false, false)}
-    </label>
-    <span {...styling('valueText', nodeType, keyPath)}>
-      {valueRenderer(valueGetter(value), value, ...keyPath)}
-    </span>
-  </li>
-);
-
-export default JSONValueNode;
+}: Props) {
+  return (
+    <li {...styling('value', nodeType, keyPath)}>
+      <label {...styling(['label', 'valueLabel'], nodeType, keyPath)}>
+        {labelRenderer(keyPath, nodeType, false, false)}
+      </label>
+      <span {...styling('valueText', nodeType, keyPath)}>
+        {valueRenderer(valueGetter(value), value, ...keyPath)}
+      </span>
+    </li>
+  );
+}

@@ -8,10 +8,9 @@ import type { CommonInternalProps } from './types';
 
 interface Props extends CommonInternalProps {
   value: any;
-  isCustomNode: (value: any) => boolean;
 }
 
-const JSONNode: React.FunctionComponent<Props> = ({
+export default function JSONNode({
   getItemString,
   keyPath,
   labelRenderer,
@@ -20,7 +19,7 @@ const JSONNode: React.FunctionComponent<Props> = ({
   valueRenderer,
   isCustomNode,
   ...rest
-}) => {
+}: Props) {
   const nodeType = isCustomNode(value) ? 'Custom' : objType(value);
 
   const simpleNodeProps = {
@@ -100,6 +99,4 @@ const JSONNode: React.FunctionComponent<Props> = ({
         />
       );
   }
-};
-
-export default JSONNode;
+}

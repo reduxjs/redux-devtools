@@ -58,6 +58,6 @@ export interface CommonExternalProps {
 export interface CommonInternalProps extends CommonExternalProps {
   styling: StylingFunction;
   circularCache?: CircularCache;
-  isCircular?: boolean;
   level?: number;
+  isCircular?: boolean;
 }

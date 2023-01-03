@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import JSONArrow from './JSONArrow';
 import type { CircularCache, CommonInternalProps } from './types';
 
@@ -9,43 +9,31 @@ interface Props extends CommonInternalProps {
   to: number;
   renderChildNodes: (props: Props, from: number, to: number) => React.ReactNode;
   circularCache: CircularCache;
+  level: number;
 }
 
-interface State {
-  expanded: boolean;
-}
+export default function ItemRange(props: Props) {
+  const { styling, from, to, renderChildNodes, nodeType } = props;
 
-export default class ItemRange extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { expanded: false };
-  }
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const handleClick = useCallback(() => {
+    setExpanded(!expanded);
+  }, [expanded]);
 
-  render() {
-    const { styling, from, to, renderChildNodes, nodeType } = this.props;
-
-    return this.state.expanded ? (
-      <div {...styling('itemRange', this.state.expanded)}>
-        {renderChildNodes(this.props, from, to)}
-      </div>
-    ) : (
-      <div
-        {...styling('itemRange', this.state.expanded)}
-        onClick={this.handleClick}
-      >
-        <JSONArrow
-          nodeType={nodeType}
-          styling={styling}
-          expanded={false}
-          onClick={this.handleClick}
-          arrowStyle="double"
-        />
-        {`${from} ... ${to}`}
-      </div>
-    );
-  }
-
-  handleClick = () => {
-    this.setState({ expanded: !this.state.expanded });
-  };
+  return expanded ? (
+    <div {...styling('itemRange', expanded)}>
+      {renderChildNodes(props, from, to)}
+    </div>
+  ) : (
+    <div {...styling('itemRange', expanded)} onClick={handleClick}>
+      <JSONArrow
+        nodeType={nodeType}
+        styling={styling}
+        expanded={false}
+        onClick={handleClick}
+        arrowStyle="double"
+      />
+      {`${from} ... ${to}`}
+    </div>
+  );
 }

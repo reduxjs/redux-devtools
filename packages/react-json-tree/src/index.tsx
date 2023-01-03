@@ -74,4 +74,4 @@ export function JSONTree({
   );
 }
 
-export { StylingValue };
+export type { StylingValue };
