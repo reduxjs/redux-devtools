@@ -6,7 +6,10 @@ module.exports = {
     '\\.css$': '<rootDir>/test/__mocks__/styleMock.ts',
   },
   transform: {
+    '^.+\\.jsx?$': 'babel-jest',
     '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
-  resolver: '<rootDir>/jestResolver.js',
+  transformIgnorePatterns: [
+    'node_modules/(?!.pnpm|d3|dateformat|delaunator|nanoid|robust-predicates|uuid)',
+  ],
 };
