@@ -1,6 +1,7 @@
 import React, { CSSProperties, MouseEventHandler, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { JSONTree, StylingValue } from 'react-json-tree';
+import { JSONTree } from 'react-json-tree';
+import type { ShouldExpandNodeInitially, StylingValue } from 'react-json-tree';
 import { Base16Theme } from 'redux-devtools-themes';
 import { Action } from 'redux';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
@@ -149,10 +150,10 @@ export default class LogMonitorEntry<
     }
   };
 
-  shouldExpandNodeInitially = (
-    keyPath: (string | number)[],
-    data: any,
-    level: number
+  shouldExpandNodeInitially: ShouldExpandNodeInitially = (
+    keyPath,
+    data,
+    level
   ) => {
     return this.props.expandStateRoot && level === 0;
   };
