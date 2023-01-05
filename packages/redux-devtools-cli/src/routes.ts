@@ -7,8 +7,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { AGServer } from 'socketcluster-server';
 import { ApolloServer } from 'apollo-server-express';
-import { AddData, ReportBaseFields, Store } from './store';
-import { resolvers, schema } from './api/schema';
+import type { AddData, ReportBaseFields, Store } from './store.js';
+import { resolvers, schema } from './api/schema.js';
 
 const app = express.Router();
 

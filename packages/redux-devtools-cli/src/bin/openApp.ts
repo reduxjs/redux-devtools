@@ -1,7 +1,7 @@
 import open from 'open';
 import path from 'path';
 import spawn from 'cross-spawn';
-import { Options } from '../options';
+import type { Options } from '../options.js';
 
 export default async function openApp(app: true | string, options: Options) {
   if (app === true || app === 'electron') {

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Store } from '../store';
+import type { Store } from '../store.js';
 
 export const schema = fs
   .readFileSync(require.resolve('./schema_def.graphql'))

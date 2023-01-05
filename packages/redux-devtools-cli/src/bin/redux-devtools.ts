@@ -3,10 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import parseArgs from 'minimist';
 import chalk from 'chalk';
-import * as injectServer from './injectServer';
-import getOptions from '../options';
-import server from '../index';
-import openApp from './openApp';
+import * as injectServer from './injectServer.js';
+import getOptions from '../options.js';
+import server from '../index.js';
+import openApp from './openApp.js';
 
 const argv = parseArgs(process.argv.slice(2));
 
