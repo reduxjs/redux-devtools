@@ -6,7 +6,8 @@ import * as http from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { AGServer } from 'socketcluster-server';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
 import { AddData, ReportBaseFields, Store } from './store';
 import { resolvers, schema } from './api/schema';
 
@@ -18,6 +19,10 @@ function serveUmdModule(name: string) {
       path.dirname(require.resolve(name + '/package.json')) + '/umd'
     )
   );
+}
+
+interface Context {
+  store?: Store;
 }
 
 function routes(
@@ -42,19 +47,19 @@ function routes(
     else app.use(morgan('combined'));
   }
 
-  const server = new ApolloServer({
+  const server = new ApolloServer<Context>({
     typeDefs: schema,
     resolvers,
-    context: {
-      store: store,
-    },
   });
   server
     .start()
     .then(() => {
-      server.applyMiddleware({ app } as {
-        app: express.Application;
-      });
+      app.use(
+        '/graphql',
+        cors<cors.CorsRequest>(),
+        bodyParser.json(),
+        expressMiddleware(server, { context: () => Promise.resolve({ store }) })
+      );
     })
     .catch((error) => {
       console.error(error); // eslint-disable-line no-console
