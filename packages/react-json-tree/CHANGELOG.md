@@ -2,7 +2,7 @@
 
 ## 0.18.0
 
-### Minor Changes
+### Major Changes
 
 - 81926f32: Remove UNSAFE method from react-json-tree
 
