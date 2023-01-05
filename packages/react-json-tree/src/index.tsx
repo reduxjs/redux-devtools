@@ -74,4 +74,16 @@ export function JSONTree({
   );
 }
 
+export type {
+  Key,
+  KeyPath,
+  GetItemString,
+  LabelRenderer,
+  ValueRenderer,
+  ShouldExpandNodeInitially,
+  PostprocessValue,
+  IsCustomNode,
+  SortObjectKeys,
+  Styling,
+} from './types';
 export type { StylingValue };

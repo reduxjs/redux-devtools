@@ -1,4 +1,5 @@
 export type { StylingFunction } from 'react-base16-styling';
+export type { LabelRenderer } from 'react-json-tree';
 export { default as InspectorMonitor } from './DevtoolsInspector';
 export type { Tab, TabComponentProps } from './ActionPreview';
 export type { DevtoolsInspectorState } from './redux';
