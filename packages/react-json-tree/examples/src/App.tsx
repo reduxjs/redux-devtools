@@ -178,7 +178,7 @@ const App = () => (
             <span role="img" aria-label="mellow">
               😐
             </span>{' '}
-            {raw}{' '}
+            {raw as string}{' '}
             <span role="img" aria-label="mellow">
               😐
             </span>
