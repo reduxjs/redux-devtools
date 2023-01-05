@@ -85,5 +85,6 @@ export type {
   IsCustomNode,
   SortObjectKeys,
   Styling,
+  CommonExternalProps,
 } from './types';
 export type { StylingValue };
