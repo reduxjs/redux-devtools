@@ -1,5 +1,17 @@
 # Change Log
 
+## 2.2.1
+
+### Patch Changes
+
+- Updated dependencies [b323f77d]
+- Updated dependencies [b323f77d]
+  - d3-state-visualizer@2.0.0
+  - @redux-devtools/chart-monitor@4.0.0
+  - @redux-devtools/inspector-monitor@3.0.2
+  - @redux-devtools/log-monitor@4.0.2
+  - @redux-devtools/rtk-query-monitor@3.1.1
+
 ## 2.2.0
 
 ### Minor Changes
