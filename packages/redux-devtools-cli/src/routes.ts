@@ -58,7 +58,7 @@ function routes(
         '/graphql',
         cors<cors.CorsRequest>(),
         bodyParser.json(),
-        expressMiddleware(server, { context: async () => ({ store }) })
+        expressMiddleware(server, { context: () => Promise.resolve({ store }) })
       );
     })
     .catch((error) => {
