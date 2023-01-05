@@ -10,7 +10,7 @@ import type { CircularCache, CommonInternalProps } from './types';
  */
 
 export interface RenderChildNodesProps extends CommonInternalProps {
-  data: any;
+  data: unknown;
   nodeType: string;
   circularCache: CircularCache;
   level: number;
@@ -23,7 +23,7 @@ interface Range {
 
 interface Entry {
   key: string | number;
-  value: any;
+  value: unknown;
 }
 
 function isRange(rangeOrEntry: Range | Entry): rangeOrEntry is Range {
@@ -87,10 +87,10 @@ function renderChildNodes(
 }
 
 interface Props extends CommonInternalProps {
-  data: any;
+  data: unknown;
   nodeType: string;
   nodeTypeIndicator: string;
-  createItemString: (data: any, collectionLimit: number) => string;
+  createItemString: (data: unknown, collectionLimit: number) => string;
   expandable: boolean;
 }
 

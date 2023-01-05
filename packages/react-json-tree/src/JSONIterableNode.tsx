@@ -23,7 +23,7 @@ function createItemString(data: any, limit: number) {
 }
 
 interface Props extends CommonInternalProps {
-  data: any;
+  data: unknown;
   nodeType: string;
 }
 

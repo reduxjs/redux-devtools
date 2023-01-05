@@ -17,7 +17,7 @@ import type {
 } from './types';
 
 interface Props extends Partial<CommonExternalProps> {
-  data: any;
+  data: unknown;
   theme?: Theme;
   invertTheme?: boolean;
 }

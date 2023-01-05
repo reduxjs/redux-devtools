@@ -4,13 +4,13 @@ import type { CommonInternalProps } from './types';
 
 // Returns the "n Items" string for this node,
 // generating and caching it if it hasn't been created yet.
-function createItemString(data: any) {
+function createItemString(data: unknown) {
   const len = Object.getOwnPropertyNames(data).length;
   return `${len} ${len !== 1 ? 'keys' : 'key'}`;
 }
 
 interface Props extends CommonInternalProps {
-  data: any;
+  data: unknown;
   nodeType: string;
 }
 

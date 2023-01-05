@@ -3,11 +3,11 @@ import { StylingFunction } from 'react-base16-styling';
 
 export type Key = string | number;
 
-export type KeyPath = (string | number)[];
+export type KeyPath = readonly (string | number)[];
 
 export type GetItemString = (
   nodeType: string,
-  data: any,
+  data: unknown,
   itemType: React.ReactNode,
   itemString: string,
   keyPath: KeyPath
@@ -21,26 +21,26 @@ export type LabelRenderer = (
 ) => React.ReactNode;
 
 export type ValueRenderer = (
-  valueAsString: any,
-  value: any,
+  valueAsString: unknown,
+  value: unknown,
   ...keyPath: KeyPath
 ) => React.ReactNode;
 
 export type ShouldExpandNodeInitially = (
   keyPath: KeyPath,
-  data: any,
+  data: unknown,
   level: number
 ) => boolean;
 
-export type PostprocessValue = (value: any) => any;
+export type PostprocessValue = (value: unknown) => unknown;
 
-export type IsCustomNode = (value: any) => boolean;
+export type IsCustomNode = (value: unknown) => boolean;
 
-export type SortObjectKeys = ((a: any, b: any) => number) | boolean;
+export type SortObjectKeys = ((a: unknown, b: unknown) => number) | boolean;
 
 export type Styling = StylingFunction;
 
-export type CircularCache = any[];
+export type CircularCache = unknown[];
 
 export interface CommonExternalProps {
   keyPath: KeyPath;

@@ -19,9 +19,9 @@ interface Props {
   labelRenderer: LabelRenderer;
   nodeType: string;
   styling: Styling;
-  value: any;
+  value: unknown;
   valueRenderer: ValueRenderer;
-  valueGetter?: (value: any) => any;
+  valueGetter?: (value: any) => unknown;
 }
 
 export default function JSONValueNode({

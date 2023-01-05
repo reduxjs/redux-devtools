@@ -4,14 +4,14 @@ import type { CommonInternalProps } from './types';
 
 // Returns the "n Items" string for this node,
 // generating and caching it if it hasn't been created yet.
-function createItemString(data: any) {
+function createItemString(data: unknown) {
   return `${(data as unknown[]).length} ${
     (data as unknown[]).length !== 1 ? 'items' : 'item'
   }`;
 }
 
 interface Props extends CommonInternalProps {
-  data: any;
+  data: unknown;
   nodeType: string;
 }
 
@@ -24,7 +24,7 @@ export default function JSONArrayNode({ data, ...props }: Props) {
       nodeType="Array"
       nodeTypeIndicator="[]"
       createItemString={createItemString}
-      expandable={data.length > 0}
+      expandable={(data as unknown[]).length > 0}
     />
   );
 }

@@ -3,7 +3,7 @@ import JSONArrow from './JSONArrow';
 import type { CircularCache, CommonInternalProps } from './types';
 
 interface Props extends CommonInternalProps {
-  data: any;
+  data: unknown;
   nodeType: string;
   from: number;
   to: number;

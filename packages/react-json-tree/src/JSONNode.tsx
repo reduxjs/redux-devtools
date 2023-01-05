@@ -7,7 +7,7 @@ import JSONValueNode from './JSONValueNode';
 import type { CommonInternalProps } from './types';
 
 interface Props extends CommonInternalProps {
-  value: any;
+  value: unknown;
 }
 
 export default function JSONNode({
