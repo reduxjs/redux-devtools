@@ -1,6 +1,7 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
 import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import React, { ReactNode, PureComponent } from 'react';
+import type { ShouldExpandNodeInitially } from 'react-json-tree';
 import { QueryPreviewTabs, RtkResourceInfo, RTKStatusFlags } from '../types';
 import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
 import { formatMs } from '../utils/formatters';
@@ -35,11 +36,11 @@ export interface QueryPreviewInfoProps {
   isWideLayout: boolean;
 }
 export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
-  shouldExpandNode = (
-    keyPath: (string | number)[],
-    value: unknown,
-    layer: number
-  ): boolean => {
+  shouldExpandNodeInitially: ShouldExpandNodeInitially = (
+    keyPath,
+    value,
+    layer
+  ) => {
     const lastKey = keyPath[keyPath.length - 1];
 
     return layer <= 1 && lastKey !== 'query' && lastKey !== 'mutation';
@@ -107,7 +108,7 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
         rootProps={rootProps}
         data={formattedQuery}
         isWideLayout={isWideLayout}
-        shouldExpandNode={this.shouldExpandNode}
+        shouldExpandNodeInitially={this.shouldExpandNodeInitially}
       />
     );
   }

@@ -1,19 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import objType from './objType';
 import JSONObjectNode from './JSONObjectNode';
 import JSONArrayNode from './JSONArrayNode';
 import JSONIterableNode from './JSONIterableNode';
 import JSONValueNode from './JSONValueNode';
-import { CircularPropsPassedThroughJSONNode } from './types';
+import type { CommonInternalProps } from './types';
 
-interface Props extends CircularPropsPassedThroughJSONNode {
-  keyPath: (string | number)[];
-  value: any;
-  isCustomNode: (value: any) => boolean;
+interface Props extends CommonInternalProps {
+  value: unknown;
 }
 
-const JSONNode: React.FunctionComponent<Props> = ({
+export default function JSONNode({
   getItemString,
   keyPath,
   labelRenderer,
@@ -22,7 +19,7 @@ const JSONNode: React.FunctionComponent<Props> = ({
   valueRenderer,
   isCustomNode,
   ...rest
-}) => {
+}: Props) {
   const nodeType = isCustomNode(value) ? 'Custom' : objType(value);
 
   const simpleNodeProps = {
@@ -102,18 +99,4 @@ const JSONNode: React.FunctionComponent<Props> = ({
         />
       );
   }
-};
-
-JSONNode.propTypes = {
-  getItemString: PropTypes.func.isRequired,
-  keyPath: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-  ).isRequired,
-  labelRenderer: PropTypes.func.isRequired,
-  styling: PropTypes.func.isRequired,
-  value: PropTypes.any,
-  valueRenderer: PropTypes.func.isRequired,
-  isCustomNode: PropTypes.func.isRequired,
-};
-
-export default JSONNode;
+}

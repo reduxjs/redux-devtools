@@ -1,4 +1,5 @@
 import React, { ReactNode, PureComponent } from 'react';
+import type { ShouldExpandNodeInitially } from 'react-json-tree';
 import { QueryPreviewTabs, RtkResourceInfo } from '../types';
 import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
 import { TreeView, TreeViewProps } from './TreeView';
@@ -15,11 +16,11 @@ const rootProps: TreeViewProps['rootProps'] = {
 };
 
 export class QueryPreviewData extends PureComponent<QueryPreviewDataProps> {
-  shouldExpandNode = (
-    keyPath: (string | number)[],
-    value: unknown,
-    layer: number
-  ): boolean => {
+  shouldExpandNodeInitially: ShouldExpandNodeInitially = (
+    keyPath,
+    value,
+    layer
+  ) => {
     return layer <= 1;
   };
 
@@ -31,7 +32,7 @@ export class QueryPreviewData extends PureComponent<QueryPreviewDataProps> {
         rootProps={rootProps}
         data={data}
         isWideLayout={isWideLayout}
-        shouldExpandNode={this.shouldExpandNode}
+        shouldExpandNodeInitially={this.shouldExpandNodeInitially}
       />
     );
   }

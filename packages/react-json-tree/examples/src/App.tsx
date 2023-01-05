@@ -178,7 +178,7 @@ const App = () => (
             <span role="img" aria-label="mellow">
               😐
             </span>{' '}
-            {raw}{' '}
+            {raw as string}{' '}
             <span role="img" aria-label="mellow">
               😐
             </span>
@@ -194,7 +194,11 @@ const App = () => (
     </div>
     <p>Collapsed root node</p>
     <div>
-      <JSONTree data={data} theme={theme} shouldExpandNode={() => false} />
+      <JSONTree
+        data={data}
+        theme={theme}
+        shouldExpandNodeInitially={() => false}
+      />
     </div>
   </div>
 );

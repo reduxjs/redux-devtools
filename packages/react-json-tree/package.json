@@ -47,8 +47,6 @@
   "dependencies": {
     "@babel/runtime": "^7.20.6",
     "@types/lodash": "^4.14.191",
-    "@types/prop-types": "^15.7.5",
-    "prop-types": "^15.8.1",
     "react-base16-styling": "^0.9.1"
   },
   "devDependencies": {
@@ -85,7 +83,7 @@
     "typescript": "~4.9.4"
   },
   "peerDependencies": {
-    "@types/react": "^16.3.0 || ^17.0.0 || ^18.0.0",
-    "react": "^16.3.0 || ^17.0.0 || ^18.0.0"
+    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   }
 }
