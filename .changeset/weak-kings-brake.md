@@ -2,4 +2,4 @@
 'map2tree': major
 ---
 
-- Remove UMD build.
+Remove UMD build.
