@@ -1,5 +1,5 @@
 ---
-'react-json-tree': major
+'react-json-tree': minor
 ---
 
 Remove UNSAFE method from react-json-tree
