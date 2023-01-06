@@ -951,7 +951,7 @@ importers:
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^27.1.7
       express: ^4.18.2
-      get-port: ^5.1.1
+      get-port: ^6.1.2
       graphql: ^16.6.0
       jest: ^29.3.1
       knex: ^2.3.0
@@ -983,7 +983,7 @@ importers:
       cross-spawn: 7.0.3
       electron: 22.0.0
       express: 4.18.2
-      get-port: 5.1.1
+      get-port: 6.1.2
       graphql: 16.6.0
       knex: 2.3.0_sqlite3@5.1.4
       lodash: 4.17.21
@@ -13892,9 +13892,9 @@ packages:
     resolution: {integrity: sha512-41eOxtlGgHQRbFyA8KTH+w+32Em3cRdfBud7j67ulzmIfmaHX9doq47s0fa4P5o9H64BZX9nrYI6sJvk46Op+Q==}
     dev: false
 
-  /get-port/5.1.1:
-    resolution: {integrity: sha512-g/Q1aTSDOxFpchXC4i8ZWvxA1lnPqx/JHqcpIw0/LX9T8x/GBbi6YnlN5nhaKIFkT8oFsscUKgDJYxfwfS6QsQ==}
-    engines: {node: '>=8'}
+  /get-port/6.1.2:
+    resolution: {integrity: sha512-BrGGraKm2uPqurfGVj/z97/zv8dPleC6x9JBNRTrDNtCkkRF4rPwrQXFgL7+I+q8QSdU4ntLQX2D7KIxSy8nGw==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
   /get-stdin/4.0.1:
@@ -17915,7 +17915,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       bl: 4.1.0
-      chalk: 4.1.1
+      chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-spinners: 2.7.0
       is-interactive: 1.0.0
