@@ -31,7 +31,7 @@ export interface Options {
 export default function getOptions(argv: { [arg: string]: any }): Options {
   let dbOptions = argv.dbOptions;
   if (typeof dbOptions === 'string') {
-    dbOptions = JSON.parse(fs.readFileSync(argv.dbOptions, 'utf8'));
+    dbOptions = JSON.parse(fs.readFileSync(dbOptions, 'utf8'));
   } else if (typeof dbOptions === 'undefined') {
     dbOptions = JSON.parse(
       fs.readFileSync(
