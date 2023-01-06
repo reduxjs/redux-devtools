@@ -1,4 +1,6 @@
 import path from 'path';
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import type { Router } from 'express';
 import morgan from 'morgan';
@@ -12,6 +14,8 @@ import type { AddData, ReportBaseFields, Store } from './store.js';
 import { resolvers, schema } from './api/schema.js';
 
 const app = express.Router();
+
+const require = createRequire(import.meta.url);
 
 function serveUmdModule(name: string) {
   app.use(
@@ -74,7 +78,12 @@ function routes(
     res.send(`reduxDevToolsPort = ${options.port}`);
   });
   app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, '../app/index.html'));
+    res.sendFile(
+      path.join(
+        path.dirname(fileURLToPath(import.meta.url)),
+        '../app/index.html'
+      )
+    );
   });
 
   app.use(cors({ methods: 'POST' }));

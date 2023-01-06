@@ -1,17 +1,30 @@
 import path from 'path';
-import { Knex, knex } from 'knex';
+import { fileURLToPath } from 'url';
+import knex from 'knex';
+import type { Knex } from 'knex';
 import { AGServer } from 'socketcluster-server';
+
+type KnexFunction = <TRecord extends {} = any, TResult = unknown[]>(
+  config: Knex.Config | string
+) => Knex<TRecord, TResult>;
 
 export default function connector(options: AGServer.AGServerOptions) {
   const dbOptions = options.dbOptions as Knex.Config;
   dbOptions.useNullAsDefault = true;
   if (!(dbOptions as any).migrate) {
-    return knex(dbOptions);
+    return (knex as unknown as KnexFunction)(dbOptions);
   }
 
-  dbOptions.migrations = { directory: path.resolve(__dirname, 'migrations') };
-  dbOptions.seeds = { directory: path.resolve(__dirname, 'seeds') };
-  const knexInstance = knex(dbOptions);
+  dbOptions.migrations = {
+    directory: path.join(
+      path.dirname(fileURLToPath(import.meta.url)),
+      'migrations'
+    ),
+  };
+  dbOptions.seeds = {
+    directory: path.join(path.dirname(fileURLToPath(import.meta.url)), 'seeds'),
+  };
+  const knexInstance = (knex as unknown as KnexFunction)(dbOptions);
 
   /* eslint-disable no-console */
   knexInstance.migrate
