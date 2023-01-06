@@ -951,7 +951,7 @@ importers:
       eslint-config-prettier: ^8.5.0
       eslint-plugin-jest: ^27.1.7
       express: ^4.18.2
-      getport: ^0.1.0
+      get-port: ^5.1.1
       graphql: ^16.6.0
       jest: ^29.3.1
       knex: ^2.3.0
@@ -983,7 +983,7 @@ importers:
       cross-spawn: 7.0.3
       electron: 22.0.0
       express: 4.18.2
-      getport: 0.1.0
+      get-port: 5.1.1
       graphql: 16.6.0
       knex: 2.3.0_sqlite3@5.1.4
       lodash: 4.17.21
@@ -13892,6 +13892,11 @@ packages:
     resolution: {integrity: sha512-41eOxtlGgHQRbFyA8KTH+w+32Em3cRdfBud7j67ulzmIfmaHX9doq47s0fa4P5o9H64BZX9nrYI6sJvk46Op+Q==}
     dev: false
 
+  /get-port/5.1.1:
+    resolution: {integrity: sha512-g/Q1aTSDOxFpchXC4i8ZWvxA1lnPqx/JHqcpIw0/LX9T8x/GBbi6YnlN5nhaKIFkT8oFsscUKgDJYxfwfS6QsQ==}
+    engines: {node: '>=8'}
+    dev: false
+
   /get-stdin/4.0.1:
     resolution: {integrity: sha512-F5aQMywwJ2n85s4hJPTT9RPxGmubonuB10MNYo17/xph174n2MIR33HRguhzVag10O/npM7SPk73LMZNP+FaWw==}
     engines: {node: '>=0.10.0'}
@@ -13930,10 +13935,6 @@ packages:
 
   /getopts/2.3.0:
     resolution: {integrity: sha512-5eDf9fuSXwxBL6q5HX+dhDj+dslFGWzU5thZ9kNKUkcPtaPdatmUFKwHFrLb/uf/WpA4BHET+AX3Scl56cAjpA==}
-    dev: false
-
-  /getport/0.1.0:
-    resolution: {integrity: sha512-hx+r6Q5IutZH+5k+zeZe78J4vzgW9IqLzfz8+hqMa9NrM1ccpgPIxrxqiBg+aioJMKcCK5qNKKcGdes3PeTlKQ==}
     dev: false
 
   /github-slugger/1.5.0:
