@@ -32,37 +32,37 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.20.6",
+    "@babel/runtime": "^7.20.7",
     "@redux-devtools/core": "^3.13.1",
     "@redux-devtools/serialize": "^0.4.1",
     "@types/get-params": "^0.1.0",
     "get-params": "^0.1.2",
-    "immutable": "^4.1.0",
+    "immutable": "^4.2.2",
     "jsan": "^3.1.14",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0",
     "redux": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.20.5",
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
     "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-transform-runtime": "^7.19.6",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-typescript": "^7.18.6",
     "@types/jsan": "^3.1.2",
     "@types/lodash": "^4.14.191",
-    "@types/node": "^18.11.17",
-    "@typescript-eslint/eslint-plugin": "^5.47.0",
-    "@typescript-eslint/parser": "^5.47.0",
-    "eslint": "^8.30.0",
-    "eslint-config-prettier": "^8.5.0",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
     "rimraf": "^3.0.2",
     "typescript": "~4.9.4"
   },
   "peerDependencies": {
     "@redux-devtools/core": "^3.13.1",
-    "immutable": "^4.1.0",
+    "immutable": "^4.2.2",
     "redux": "^4.2.0"
   }
 }
