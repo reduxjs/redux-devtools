@@ -6,6 +6,6 @@ module.exports = {
     '\\.css$': '<rootDir>/test/__mocks__/styleMock.ts',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!.pnpm|d3|dateformat|delaunator|nanoid|robust-predicates|uuid)',
+    'node_modules/(?!.pnpm|d3|dateformat|delaunator|internmap|nanoid|robust-predicates|uuid)',
   ],
 };
