@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import semver from 'semver';
-import { Options } from '../options';
+import type { Options } from '../options.js';
 
 const name = '@redux-devtools/cli';
 const startFlag = '/* ' + name + ' start */';

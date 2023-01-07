@@ -1,9 +1,10 @@
 import fs from 'fs';
-import { Store } from '../store';
+import type { Store } from '../store.js';
 
-export const schema = fs
-  .readFileSync(require.resolve('./schema_def.graphql'))
-  .toString();
+export const schema = fs.readFileSync(
+  new URL('./schema_def.graphql', import.meta.url),
+  'utf8'
+);
 
 export const resolvers = {
   Query: {

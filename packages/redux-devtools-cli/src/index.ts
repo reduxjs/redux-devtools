@@ -2,9 +2,9 @@ import express from 'express';
 import http from 'http';
 import getPort from 'get-port';
 import socketClusterServer from 'socketcluster-server';
-import getOptions from './options';
-import routes from './routes';
-import createStore from './store';
+import getOptions from './options.js';
+import routes from './routes.js';
+import createStore from './store.js';
 
 // const LOG_LEVEL_NONE = 0;
 // const LOG_LEVEL_ERROR = 1;

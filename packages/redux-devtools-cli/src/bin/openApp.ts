@@ -1,7 +1,11 @@
 import open from 'open';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 import spawn from 'cross-spawn';
-import { Options } from '../options';
+import type { Options } from '../options.js';
+
+const require = createRequire(import.meta.url);
 
 export default async function openApp(app: true | string, options: Options) {
   if (app === true || app === 'electron') {
@@ -9,7 +13,12 @@ export default async function openApp(app: true | string, options: Options) {
       const port = options.port ? `--port=${options.port}` : '';
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       spawn.sync(require('electron') as string, [
-        path.join(__dirname, '..', '..', 'app'),
+        path.join(
+          path.dirname(fileURLToPath(import.meta.url)),
+          '..',
+          '..',
+          'app'
+        ),
         port,
       ]);
     } catch (error) {
