@@ -1,4 +1,4 @@
-import path from 'path';
+import fs from 'fs';
 
 interface ProtocolOptions {
   key: string | undefined;
@@ -31,9 +31,14 @@ export interface Options {
 export default function getOptions(argv: { [arg: string]: any }): Options {
   let dbOptions = argv.dbOptions;
   if (typeof dbOptions === 'string') {
-    dbOptions = require(path.resolve(process.cwd(), argv.dbOptions as string));
+    dbOptions = JSON.parse(fs.readFileSync(dbOptions, 'utf8'));
   } else if (typeof dbOptions === 'undefined') {
-    dbOptions = require('../defaultDbOptions.json');
+    dbOptions = JSON.parse(
+      fs.readFileSync(
+        new URL('../defaultDbOptions.json', import.meta.url),
+        'utf8'
+      )
+    );
   }
 
   return {

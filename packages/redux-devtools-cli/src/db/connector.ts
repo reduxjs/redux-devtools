@@ -1,23 +1,37 @@
 import path from 'path';
-import knexModule, { Knex } from 'knex';
+import { fileURLToPath } from 'url';
+import knex from 'knex';
+import type { Knex } from 'knex';
 import { AGServer } from 'socketcluster-server';
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+type KnexFunction = <TRecord extends {} = any, TResult = unknown[]>(
+  config: Knex.Config | string
+) => Knex<TRecord, TResult>;
 
 export default function connector(options: AGServer.AGServerOptions) {
   const dbOptions = options.dbOptions as Knex.Config;
   dbOptions.useNullAsDefault = true;
   if (!(dbOptions as any).migrate) {
-    return knexModule(dbOptions);
+    return (knex as unknown as KnexFunction)(dbOptions);
   }
 
-  dbOptions.migrations = { directory: path.resolve(__dirname, 'migrations') };
-  dbOptions.seeds = { directory: path.resolve(__dirname, 'seeds') };
-  const knex = knexModule(dbOptions);
+  dbOptions.migrations = {
+    directory: path.join(
+      path.dirname(fileURLToPath(import.meta.url)),
+      'migrations'
+    ),
+  };
+  dbOptions.seeds = {
+    directory: path.join(path.dirname(fileURLToPath(import.meta.url)), 'seeds'),
+  };
+  const knexInstance = (knex as unknown as KnexFunction)(dbOptions);
 
   /* eslint-disable no-console */
-  knex.migrate
+  knexInstance.migrate
     .latest({ loadExtensions: ['.js'] })
     .then(function () {
-      return knex.seed.run({ loadExtensions: ['.js'] });
+      return knexInstance.seed.run({ loadExtensions: ['.js'] });
     })
     .then(function () {
       console.log('   \x1b[0;32m[Done]\x1b[0m Migrations are finished\n');
@@ -27,5 +41,5 @@ export default function connector(options: AGServer.AGServerOptions) {
     });
   /* eslint-enable no-console */
 
-  return knex;
+  return knexInstance;
 }

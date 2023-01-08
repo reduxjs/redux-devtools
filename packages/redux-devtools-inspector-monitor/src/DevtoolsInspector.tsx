@@ -28,13 +28,18 @@ import {
   updateMonitorState,
 } from './redux';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const {
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   commit,
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   sweep,
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   toggleAction,
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   jumpToAction,
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   jumpToState,
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   reorderAction,
 } = ActionCreators;
 

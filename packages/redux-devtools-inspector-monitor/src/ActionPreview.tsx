@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Base16Theme } from 'redux-devtools-themes';
 import { Action } from 'redux';
 import type { StylingFunction } from 'react-base16-styling';
+import type { LabelRenderer } from 'react-json-tree';
 import { PerformAction } from '@redux-devtools/core';
 import { Delta } from 'jsondiffpatch';
 import { DEFAULT_STATE, DevtoolsInspectorState } from './redux';
@@ -11,12 +12,7 @@ import StateTab from './tabs/StateTab';
 import ActionTab from './tabs/ActionTab';
 
 export interface TabComponentProps<S, A extends Action<unknown>> {
-  labelRenderer: (
-    keyPath: (string | number)[],
-    nodeType: string,
-    expanded: boolean,
-    expandable: boolean
-  ) => React.ReactNode;
+  labelRenderer: LabelRenderer;
   styling: StylingFunction;
   computedStates: { state: S; error?: string }[];
   actions: { [actionId: number]: PerformAction<A> };
@@ -152,11 +148,7 @@ class ActionPreview<S, A extends Action<unknown>> extends Component<
     );
   }
 
-  labelRenderer = (
-    [key, ...rest]: (string | number)[],
-    nodeType: string,
-    expanded: boolean
-  ) => {
+  labelRenderer: LabelRenderer = ([key, ...rest], nodeType, expanded) => {
     const { styling, onInspectPath, inspectedPath } = this.props;
 
     return (

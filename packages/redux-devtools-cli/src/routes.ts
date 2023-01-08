@@ -1,4 +1,6 @@
 import path from 'path';
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import type { Router } from 'express';
 import morgan from 'morgan';
@@ -6,11 +8,14 @@ import * as http from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { AGServer } from 'socketcluster-server';
-import { ApolloServer } from 'apollo-server-express';
-import { AddData, ReportBaseFields, Store } from './store';
-import { resolvers, schema } from './api/schema';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import type { AddData, ReportBaseFields, Store } from './store.js';
+import { resolvers, schema } from './api/schema.js';
 
 const app = express.Router();
+
+const require = createRequire(import.meta.url);
 
 function serveUmdModule(name: string) {
   app.use(
@@ -18,6 +23,10 @@ function serveUmdModule(name: string) {
       path.dirname(require.resolve(name + '/package.json')) + '/umd'
     )
   );
+}
+
+interface Context {
+  store?: Store;
 }
 
 function routes(
@@ -42,19 +51,19 @@ function routes(
     else app.use(morgan('combined'));
   }
 
-  const server = new ApolloServer({
+  const server = new ApolloServer<Context>({
     typeDefs: schema,
     resolvers,
-    context: {
-      store: store,
-    },
   });
   server
     .start()
     .then(() => {
-      server.applyMiddleware({ app } as {
-        app: express.Application;
-      });
+      app.use(
+        '/graphql',
+        cors<cors.CorsRequest>(),
+        bodyParser.json(),
+        expressMiddleware(server, { context: () => Promise.resolve({ store }) })
+      );
     })
     .catch((error) => {
       console.error(error); // eslint-disable-line no-console
@@ -69,7 +78,12 @@ function routes(
     res.send(`reduxDevToolsPort = ${options.port}`);
   });
   app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, '../app/index.html'));
+    res.sendFile(
+      path.join(
+        path.dirname(fileURLToPath(import.meta.url)),
+        '../app/index.html'
+      )
+    );
   });
 
   app.use(cors({ methods: 'POST' }));

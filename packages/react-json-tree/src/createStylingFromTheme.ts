@@ -1,11 +1,12 @@
 import type { CurriedFunction1 } from 'lodash';
-import {
+import { createStyling } from 'react-base16-styling';
+import type {
   Base16Theme,
-  createStyling,
   StylingConfig,
+  StylingFunction,
+  Theme,
 } from 'react-base16-styling';
 import solarized from './themes/solarized';
-import { StylingFunction, Theme } from 'react-base16-styling/src';
 
 const colorMap = (theme: Base16Theme) => ({
   BACKGROUND_COLOR: theme.base00,
