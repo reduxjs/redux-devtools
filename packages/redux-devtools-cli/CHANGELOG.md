@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.0.0
+
+### Major Changes
+
+- 7e129988: Convert @redux-devtools/cli to ESM. Please [read this](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) for more info about ESM.
+  Update supported Node versions from `>=14.15.0` to `^14.13.1 || ^16.13.0 || >=18.12.0`.
+
+### Patch Changes
+
+- a7729dae: Updates `--open` flag to respect protocol and host when provided
+
 ## 1.0.7
 
 ### Patch Changes
