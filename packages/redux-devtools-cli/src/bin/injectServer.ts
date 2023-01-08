@@ -56,7 +56,7 @@ export function inject(
     startFlag,
     '    require("' + name + '")(' + JSON.stringify(options) + ')',
     '      .then(_remotedev =>',
-    '        _remotedev.on("ready", () => {',
+    '        _remotedev.ready.then(() => {',
     '          if (!_remotedev.portAlreadyUsed) console.log("-".repeat(80));',
     '      ' + serverFlag,
     '        })',
