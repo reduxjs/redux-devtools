@@ -13,7 +13,7 @@ const LOG_LEVEL_INFO = 3;
 
 export default async function (argv: { [arg: string]: any }): Promise<{
   portAlreadyUsed?: boolean;
-  listener: (eventName: 'ready') => { once(): Promise<void> };
+  ready: Promise<void>;
 }> {
   const options = Object.assign(getOptions(argv), {
     allowClientPublish: false,
@@ -29,13 +29,7 @@ export default async function (argv: { [arg: string]: any }): Promise<{
     }
     return {
       portAlreadyUsed: true,
-      listener: function () {
-        return {
-          once() {
-            return Promise.resolve();
-          },
-        };
-      },
+      ready: Promise.resolve(),
     };
   }
 
@@ -135,6 +129,9 @@ export default async function (argv: { [arg: string]: any }): Promise<{
   })();
 
   httpServer.listen(options.port);
-  // @ts-expect-error Shouldn't there be a 'ready' event?
-  return agServer;
+  return {
+    ready: (async () => {
+      await agServer.listener('ready' as 'error').once();
+    })(),
+  };
 }
