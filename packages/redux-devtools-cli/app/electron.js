@@ -9,7 +9,11 @@ function createWindow() {
     height: 600,
   });
 
-  mainWindow.loadURL('http://localhost:' + (argv.port ? argv.port : 8000));
+  const port = argv.port ? argv.port : 8000;
+  const host = argv.host ? argv.host : 'localhost';
+  const protocol = argv.protocol ? argv.protocol : 'http';
+
+  mainWindow.loadURL(protocol + '://' + host + ':' + port);
 }
 
 app.whenReady().then(() => {
