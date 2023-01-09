@@ -1,5 +1,5 @@
 ---
-"@redux-devtools/extension": patch
+'@redux-devtools/extension': patch
 ---
 
 Propagate store enhancer generic type when using composeWithDevTools
