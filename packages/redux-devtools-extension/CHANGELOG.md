@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.2.4
+
+### Patch Changes
+
+- 07456db4: Propagate store enhancer generic type when using composeWithDevTools
+
 ## 3.2.3
 
 ### Patch Changes
