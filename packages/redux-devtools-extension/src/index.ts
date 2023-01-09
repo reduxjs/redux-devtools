@@ -227,9 +227,22 @@ interface ReduxDevtoolsExtension {
   connect: (preConfig: Config) => ConnectResponse;
 }
 
+export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
+  infer HeadStoreEnhancer,
+  ...infer RestStoreEnhancers
+]
+  ? HeadStoreEnhancer extends StoreEnhancer<infer StoreExt>
+    ? StoreExt & InferComposedStoreExt<RestStoreEnhancers>
+    : never
+  : unknown;
+
 export interface ReduxDevtoolsExtensionCompose {
-  (config: Config): (...funcs: StoreEnhancer[]) => StoreEnhancer;
-  (...funcs: StoreEnhancer[]): StoreEnhancer;
+  (config: Config): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+    ...funcs: StoreEnhancers
+  ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
+  <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+    ...funcs: StoreEnhancers
+  ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 }
 
 declare global {
@@ -241,12 +254,18 @@ declare global {
 
 function extensionComposeStub(
   config: Config
-): (...funcs: StoreEnhancer[]) => StoreEnhancer;
-function extensionComposeStub(...funcs: StoreEnhancer[]): StoreEnhancer;
-function extensionComposeStub(...funcs: [Config] | StoreEnhancer[]) {
+): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  ...funcs: StoreEnhancers
+) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
+function extensionComposeStub<
+  StoreEnhancers extends readonly StoreEnhancer<unknown>[]
+>(
+  ...funcs: StoreEnhancers
+): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
+function extensionComposeStub(...funcs: [Config] | StoreEnhancer<unknown>[]) {
   if (funcs.length === 0) return undefined;
   if (typeof funcs[0] === 'object') return compose;
-  return compose(...(funcs as StoreEnhancer[]));
+  return compose(...(funcs as StoreEnhancer<unknown>[]));
 }
 
 export const composeWithDevTools: ReduxDevtoolsExtensionCompose =
