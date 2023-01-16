@@ -1,6 +1,12 @@
-import { compose, StoreEnhancer } from 'redux';
+import { compose } from 'redux';
+import type { StoreEnhancer } from 'redux';
 import * as logOnly from './logOnly';
-import { Config, EnhancerOptions } from './index';
+import type {
+  Config,
+  EnhancerOptions,
+  InferComposedStoreExt,
+  ReduxDevtoolsExtensionCompose,
+} from './index';
 
 declare const process: {
   env: {
@@ -10,15 +16,21 @@ declare const process: {
 
 function extensionComposeStub(
   config: Config
-): (...funcs: StoreEnhancer[]) => StoreEnhancer;
-function extensionComposeStub(...funcs: StoreEnhancer[]): StoreEnhancer;
-function extensionComposeStub(...funcs: [Config] | StoreEnhancer[]) {
+): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  ...funcs: StoreEnhancers
+) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
+function extensionComposeStub<
+  StoreEnhancers extends readonly StoreEnhancer<unknown>[]
+>(
+  ...funcs: StoreEnhancers
+): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
+function extensionComposeStub(...funcs: [Config] | StoreEnhancer<unknown>[]) {
   if (funcs.length === 0) return undefined;
   if (typeof funcs[0] === 'object') return compose;
-  return compose(...(funcs as StoreEnhancer[]));
+  return compose(...(funcs as StoreEnhancer<unknown>[]));
 }
 
-export const composeWithDevTools =
+export const composeWithDevTools: ReduxDevtoolsExtensionCompose =
   process.env.NODE_ENV === 'production'
     ? logOnly.composeWithDevTools
     : typeof window !== 'undefined' &&
