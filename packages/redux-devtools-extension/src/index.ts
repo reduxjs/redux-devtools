@@ -1,5 +1,6 @@
-import Immutable from 'immutable';
-import { Action, ActionCreator, compose, StoreEnhancer } from 'redux';
+import type Immutable from 'immutable';
+import { compose } from 'redux';
+import type { Action, ActionCreator, StoreEnhancer } from 'redux';
 
 export interface EnhancerOptions {
   /**
