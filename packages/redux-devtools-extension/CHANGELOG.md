@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.2.5
+
+### Patch Changes
+
+- a0716740: Fix types for other exports from `@redux-devtools/extension`.
+
 ## 3.2.4
 
 ### Patch Changes
