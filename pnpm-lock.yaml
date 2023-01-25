@@ -1846,7 +1846,7 @@ importers:
       fork-ts-checker-webpack-plugin: ^7.2.14
       framer-motion: ^8.2.4
       html-webpack-plugin: ^5.5.0
-      msw: ^0.49.2
+      msw: ^1.0.0
       react: ^18.2.0
       react-dom: ^18.2.0
       react-icons: ^4.7.1
@@ -1871,7 +1871,7 @@ importers:
       '@redux-devtools/rtk-query-monitor': link:..
       '@reduxjs/toolkit': 1.9.1_k4ae6lp43ej6mezo3ztvx6pykq
       framer-motion: 8.2.4_biqbaboplfbrettd7655fr4n2y
-      msw: 0.49.2_typescript@4.9.4
+      msw: 1.0.0_typescript@4.9.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-icons: 4.7.1_react@18.2.0
@@ -6169,7 +6169,7 @@ packages:
       strict-event-emitter: 0.2.8
       uuid: 8.3.2
     optionalDependencies:
-      msw: 0.49.2_typescript@4.9.4
+      msw: 1.0.0_typescript@4.9.4
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -8118,7 +8118,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.4
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
       '@types/responselike': 1.0.0
 
   /@types/chrome/0.0.206:
@@ -8427,14 +8427,14 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
     dev: true
 
   /@types/glob/8.0.0:
     resolution: {integrity: sha512-l6NQsDDyQUVeoTynNpC9uRvCUint/gSUXQA2euwmTuWGvPY5LSDUu6tkCtJB2SvGQlJQzLaKqcGZP4//7EDveA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
     dev: true
 
   /@types/graceful-fs/4.1.5:
@@ -8554,7 +8554,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
 
   /@types/lodash-es/4.17.6:
     resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
@@ -8741,7 +8741,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
 
   /@types/retry/0.12.0:
     resolution: {integrity: sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==}
@@ -8917,7 +8917,7 @@ packages:
   /@types/webpack-sources/3.2.0:
     resolution: {integrity: sha512-Ft7YH3lEVRQ6ls8k4Ff1oB4jN6oy/XmU6tQISKdhfh+1mR+viZFphS6WL0IrtDOzvefmJg5a0s7ZQoRXwqTEFg==}
     dependencies:
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
       '@types/source-list-map': 0.1.2
       source-map: 0.7.4
     dev: true
@@ -8925,7 +8925,7 @@ packages:
   /@types/webpack/4.41.33:
     resolution: {integrity: sha512-PPajH64Ft2vWevkerISMtnZ8rTs4YmRbs+23c402J0INmxDKCrhZNvwZYtzx96gY2wAtXdrK1BS2fiC8MlLr3g==}
     dependencies:
-      '@types/node': 16.18.11
+      '@types/node': 18.11.18
       '@types/tapable': 1.0.8
       '@types/uglify-js': 3.17.1
       '@types/webpack-sources': 3.2.0
@@ -14817,7 +14817,7 @@ packages:
     engines: {node: '>=12.0.0'}
     dependencies:
       ansi-escapes: 4.3.2
-      chalk: 4.1.1
+      chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-width: 3.0.0
       external-editor: 3.1.0
@@ -17433,8 +17433,8 @@ packages:
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  /msw/0.49.2_typescript@4.9.4:
-    resolution: {integrity: sha512-70/E10f+POE2UmMw16v8PnKatpZplpkUwVRLBqiIdimpgaC3le7y2yOq9JmOrL15jpwWM5wAcPTOj0f550LI3g==}
+  /msw/1.0.0_typescript@4.9.4:
+    resolution: {integrity: sha512-8QVa1RAN/Nzbn/tKmtimJ+b2M1QZOMdETQW7/1TmBOZ4w+wJojfxuh1Hj5J4FYdBgZWW/TK4CABUOlOM4OjTOA==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
@@ -17460,7 +17460,7 @@ packages:
       node-fetch: 2.6.7
       outvariant: 1.3.0
       path-to-regexp: 6.2.1
-      strict-event-emitter: 0.2.8
+      strict-event-emitter: 0.4.4
       type-fest: 2.19.0
       typescript: 4.9.4
       yargs: 17.6.2
@@ -17991,7 +17991,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       bl: 4.1.0
-      chalk: 4.1.1
+      chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-spinners: 2.7.0
       is-interactive: 1.0.0
@@ -20710,6 +20710,10 @@ packages:
     resolution: {integrity: sha512-KDf/ujU8Zud3YaLtMCcTI4xkZlZVIYxTLr+XIULexP+77EEVWixeXroLUXQXiVtH4XH2W7jr/3PT1v3zBuvc3A==}
     dependencies:
       events: 3.3.0
+    dev: false
+
+  /strict-event-emitter/0.4.4:
+    resolution: {integrity: sha512-rTCFXHBxs2/XvNc7InSkSwUkwyQ0T9eop/Qvm0atNUXpBxjwsJ5yb7Ih/tgHbjPdeCcB4aCP8K4tuo7hNKssNg==}
     dev: false
 
   /string-length/4.0.2:
