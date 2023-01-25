@@ -1,4 +1,4 @@
-# Remote Redux DevTools2
+# Remote Redux DevTools
 
 ![Demo](demo.gif)
 
