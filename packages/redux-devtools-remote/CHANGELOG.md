@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.8.0
+
+### Minor Changes
+
+- 421ea476: Upgrade SocketCluster (#1167)
+
 ## 0.7.5
 
 ### Patch Changes
