@@ -32,7 +32,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.20.7",
+    "@babel/runtime": "^7.20.13",
     "@redux-devtools/ui": "^1.3.0",
     "@types/prop-types": "^15.7.5",
     "@types/redux-devtools-themes": "^1.0.0",
@@ -47,18 +47,18 @@
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
     "@redux-devtools/core": "^3.13.1",
-    "@types/node": "^18.11.18",
-    "@types/react": "^18.0.26",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
-    "eslint": "^8.31.0",
+    "@types/node": "^18.13.0",
+    "@types/react": "^18.0.28",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "react": "^18.2.0",
-    "redux": "^4.2.0",
-    "rimraf": "^4.1.0",
-    "typescript": "~4.9.4"
+    "redux": "^4.2.1",
+    "rimraf": "^4.1.2",
+    "typescript": "~4.9.5"
   },
   "peerDependencies": {
     "@redux-devtools/core": "^3.13.1",
