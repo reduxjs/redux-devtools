@@ -68,7 +68,7 @@ importers:
       cpy-cli: ^4.2.0
       cross-env: ^7.0.3
       css-loader: ^6.7.3
-      electron: ^22.2.1
+      electron: ^23.1.0
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
       eslint-plugin-import: ^2.27.5
@@ -145,7 +145,7 @@ importers:
       cpy-cli: 4.2.0
       cross-env: 7.0.3
       css-loader: 6.7.3_webpack@5.75.0
-      electron: 22.2.1
+      electron: 23.1.0
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-plugin-import: 2.27.5_eslint@8.34.0
@@ -946,7 +946,7 @@ importers:
       chalk: ^5.2.0
       cors: ^2.8.5
       cross-spawn: ^7.0.3
-      electron: ^22.2.1
+      electron: ^23.1.0
       eslint: ^8.34.0
       eslint-config-prettier: ^8.6.0
       eslint-plugin-jest: ^27.2.1
@@ -981,7 +981,7 @@ importers:
       chalk: 5.2.0
       cors: 2.8.5
       cross-spawn: 7.0.3
-      electron: 22.2.1
+      electron: 23.1.0
       express: 4.18.2
       get-port: 6.1.2
       graphql: 16.6.0
@@ -12650,8 +12650,8 @@ packages:
   /electron-to-chromium/1.4.296:
     resolution: {integrity: sha512-i/6Q+Y9bluDa2a0NbMvdtG5TuS/1Fr3TKK8L+7UUL9QjRS5iFJzCC3r70xjyOnLiYG8qGV4/mMpe6HuAbdJW4w==}
 
-  /electron/22.2.1:
-    resolution: {integrity: sha512-gPO9IYXCfG+BJnS9WRN/jkBSbnzrIU26IKfDpUAWgqDJNCCfSKHrQJ3kv55RW9gUtPdzYwmhVRHySXd6v9Rzmg==}
+  /electron/23.1.0:
+    resolution: {integrity: sha512-LRgACMpVrmjfYWPgCSyJ+TFQ/FPeniOowpO57z0xUcTchfC7EH+5rUncgYN+uMvqePiYDce+ywZeCIFaO8x/Nw==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true
@@ -16425,6 +16425,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile/4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
