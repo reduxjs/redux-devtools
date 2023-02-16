@@ -936,7 +936,7 @@ importers:
       '@types/react': ^18.0.28
       '@types/semver': ^7.3.13
       '@types/socketcluster-client': ^16.0.0
-      '@types/socketcluster-server': ^16.1.1
+      '@types/socketcluster-server': ^17.3.0
       '@types/styled-components': ^5.1.26
       '@types/supertest': ^2.0.12
       '@types/uuid': ^9.0.0
@@ -1010,7 +1010,7 @@ importers:
       '@types/node': 18.13.0
       '@types/semver': 7.3.13
       '@types/socketcluster-client': 16.0.0
-      '@types/socketcluster-server': 16.1.1
+      '@types/socketcluster-server': 17.3.0
       '@types/styled-components': 5.1.26
       '@types/supertest': 2.0.12
       '@types/uuid': 9.0.0
@@ -8161,7 +8161,7 @@ packages:
       '@types/ag-channel': 5.0.0
       '@types/async-stream-emitter': 4.0.0
       '@types/consumable-stream': 2.0.0
-      '@types/socketcluster-server': 16.1.1
+      '@types/socketcluster-server': 17.3.0
       '@types/writable-consumable-stream': 2.0.0
     dev: true
 
@@ -8928,6 +8928,20 @@ packages:
 
   /@types/socketcluster-server/16.1.1:
     resolution: {integrity: sha512-mFtXm4oz91zkpWjnfCm6z+gMhrqVKD7aXYI3JmUqrkA5wIcXxDfDAPINScNTSrok2LrMScS9GgwbMga9dqwNCA==}
+    dependencies:
+      '@types/ag-auth': 1.0.0
+      '@types/ag-simple-broker': 5.0.0
+      '@types/async-stream-emitter': 4.0.0
+      '@types/consumable-stream': 2.0.0
+      '@types/jsonwebtoken': 9.0.1
+      '@types/sc-errors': 1.4.1
+      '@types/stream-demux': 8.0.0
+      '@types/writable-consumable-stream': 2.0.0
+      '@types/ws': 8.5.4
+    dev: true
+
+  /@types/socketcluster-server/17.3.0:
+    resolution: {integrity: sha512-0QtXyjVvUJCZbImW4UdLWX9LLUgR5lHjDMdP56QCikm/Du5bDJ7ex6IMqAlIKFs0myjSDbjJ2EqI6ItEc32MZQ==}
     dependencies:
       '@types/ag-auth': 1.0.0
       '@types/ag-simple-broker': 5.0.0
@@ -16425,6 +16439,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile/4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
