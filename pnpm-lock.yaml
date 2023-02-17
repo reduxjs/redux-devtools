@@ -2111,7 +2111,7 @@ importers:
       '@storybook/builder-webpack5': ^6.5.16
       '@storybook/manager-webpack5': ^6.5.16
       '@storybook/react': ^6.5.16
-      '@testing-library/dom': ^8.20.0
+      '@testing-library/dom': ^9.0.0
       '@testing-library/react': ^13.4.0
       '@testing-library/user-event': ^14.4.3
       '@types/base16': ^1.0.2
@@ -2187,9 +2187,9 @@ importers:
       '@storybook/builder-webpack5': 6.5.16_thg4xgkqzam43wvb4m4gitomxu
       '@storybook/manager-webpack5': 6.5.16_thg4xgkqzam43wvb4m4gitomxu
       '@storybook/react': 6.5.16_nsojkcuzyxevfv6vk2xlte3i2q
-      '@testing-library/dom': 8.20.0
+      '@testing-library/dom': 9.0.0
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
-      '@testing-library/user-event': 14.4.3_yxlyej73nftwmh2fiao7paxmlm
+      '@testing-library/user-event': 14.4.3_@testing-library+dom@9.0.0
       '@types/color': 3.0.3
       '@types/jest': 29.4.0
       '@types/react': 18.0.28
@@ -8076,6 +8076,20 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
+  /@testing-library/dom/9.0.0:
+    resolution: {integrity: sha512-+/TLgKNFsYUshOY/zXsQOk+PlFQK+eyJ9T13IDVNJEi+M+Un7xlJK+FZKkbGSnf0+7E1G6PlDhkSYQ/GFiruBQ==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@babel/code-frame': 7.18.6
+      '@babel/runtime': 7.20.13
+      '@types/aria-query': 5.0.1
+      aria-query: 5.1.3
+      chalk: 4.1.2
+      dom-accessibility-api: 0.5.16
+      lz-string: 1.4.4
+      pretty-format: 27.5.1
+    dev: true
+
   /@testing-library/jest-dom/5.16.5:
     resolution: {integrity: sha512-N5ixQ2qKpi5OLYfwQmUb/5mSV9LneAcaUfp32pn4yCnpb8r/Yz0pXFPck21dIicKmi+ta5WRAknkZCfA8refMA==}
     engines: {node: '>=8', npm: '>=6', yarn: '>=1'}
@@ -8105,13 +8119,13 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: true
 
-  /@testing-library/user-event/14.4.3_yxlyej73nftwmh2fiao7paxmlm:
+  /@testing-library/user-event/14.4.3_@testing-library+dom@9.0.0:
     resolution: {integrity: sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
-      '@testing-library/dom': 8.20.0
+      '@testing-library/dom': 9.0.0
     dev: true
 
   /@tootallnate/once/1.1.2:
