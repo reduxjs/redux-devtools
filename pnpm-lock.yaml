@@ -63,12 +63,12 @@ importers:
       '@types/react-dom': ^18.0.11
       '@types/styled-components': ^5.1.26
       babel-loader: ^9.1.2
-      chromedriver: ^108.0.0
+      chromedriver: ^110.0.0
       copy-webpack-plugin: ^11.0.0
       cpy-cli: ^4.2.0
       cross-env: ^7.0.3
       css-loader: ^6.7.3
-      electron: ^22.2.1
+      electron: ^23.1.0
       eslint: ^8.34.0
       eslint-config-airbnb: ^19.0.4
       eslint-plugin-import: ^2.27.5
@@ -140,12 +140,12 @@ importers:
       '@types/react-dom': 18.0.11
       '@types/styled-components': 5.1.26
       babel-loader: 9.1.2_la66t7xldg4uecmyawueag5wkm
-      chromedriver: 108.0.0
+      chromedriver: 110.0.0
       copy-webpack-plugin: 11.0.0_webpack@5.75.0
       cpy-cli: 4.2.0
       cross-env: 7.0.3
       css-loader: 6.7.3_webpack@5.75.0
-      electron: 22.2.1
+      electron: 23.1.0
       eslint: 8.34.0
       eslint-config-airbnb: 19.0.4_hbw3smywoiafix46yjc35xsaqq
       eslint-plugin-import: 2.27.5_eslint@8.34.0
@@ -946,7 +946,7 @@ importers:
       chalk: ^5.2.0
       cors: ^2.8.5
       cross-spawn: ^7.0.3
-      electron: ^22.2.1
+      electron: ^23.1.0
       eslint: ^8.34.0
       eslint-config-prettier: ^8.6.0
       eslint-plugin-jest: ^27.2.1
@@ -981,7 +981,7 @@ importers:
       chalk: 5.2.0
       cors: 2.8.5
       cross-spawn: 7.0.3
-      electron: 22.2.1
+      electron: 23.1.0
       express: 4.18.2
       get-port: 6.1.2
       graphql: 16.6.0
@@ -11115,8 +11115,8 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
-  /chromedriver/108.0.0:
-    resolution: {integrity: sha512-/kb0rb0dlC4RfXh2BOT7RV87K6d+It3VV5YXebLzO5a8t2knNffiTE23XPJQCH+l1xmgoW8/sOX/NB9irskvOQ==}
+  /chromedriver/110.0.0:
+    resolution: {integrity: sha512-Le6q8xrA/3fAt+g8qiN0YjsYxINIhQMC6wj9X3W5L77uN4NspEzklDrqYNwBcEVn7PcAEJ73nLlS7mTyZRspHA==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
@@ -12664,8 +12664,8 @@ packages:
   /electron-to-chromium/1.4.296:
     resolution: {integrity: sha512-i/6Q+Y9bluDa2a0NbMvdtG5TuS/1Fr3TKK8L+7UUL9QjRS5iFJzCC3r70xjyOnLiYG8qGV4/mMpe6HuAbdJW4w==}
 
-  /electron/22.2.1:
-    resolution: {integrity: sha512-gPO9IYXCfG+BJnS9WRN/jkBSbnzrIU26IKfDpUAWgqDJNCCfSKHrQJ3kv55RW9gUtPdzYwmhVRHySXd6v9Rzmg==}
+  /electron/23.1.0:
+    resolution: {integrity: sha512-LRgACMpVrmjfYWPgCSyJ+TFQ/FPeniOowpO57z0xUcTchfC7EH+5rUncgYN+uMvqePiYDce+ywZeCIFaO8x/Nw==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true
