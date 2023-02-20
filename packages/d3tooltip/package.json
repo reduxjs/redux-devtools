@@ -36,7 +36,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.20.7"
+    "@babel/runtime": "^7.20.13"
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
@@ -45,16 +45,16 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-typescript": "^7.18.6",
     "@types/d3": "^7.4.0",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
-    "d3": "^7.8.0",
-    "eslint": "^8.31.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "d3": "^7.8.2",
+    "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
-    "rimraf": "^4.1.0",
-    "typescript": "~4.9.4"
+    "rimraf": "^4.1.2",
+    "typescript": "~4.9.5"
   },
   "peerDependencies": {
     "@types/d3": "^7.4.0",
-    "d3": "^7.8.0"
+    "d3": "^7.8.2"
   }
 }

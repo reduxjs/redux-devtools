@@ -384,7 +384,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
         .style('fill-opacity', 0)
         .text((d) => d.data.name)
         .on('click', (_, datum) => {
-          onClickText(datum);
+          onClickText(datum as unknown as HierarchyPointNode<Node>);
         });
 
       const nodeEnterAndUpdate = nodeEnter.merge(node);
