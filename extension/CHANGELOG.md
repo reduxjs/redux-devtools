@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.0.19
+
+### Patch Changes
+
+- 450cde6e: Fix responsive layout
+
 ## 3.0.18
 
 ### Patch Changes
