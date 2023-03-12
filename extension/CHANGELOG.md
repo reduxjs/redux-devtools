@@ -1,5 +1,19 @@
 # remotedev-redux-devtools-extension
 
+## 3.0.19
+
+### Patch Changes
+
+- 450cde6e: Fix responsive layout
+
+## 3.0.18
+
+### Patch Changes
+
+- Updated dependencies [81926f32]
+  - react-json-tree@0.18.0
+  - @redux-devtools/app@2.2.1
+
 ## 3.0.17
 
 ### Patch Changes

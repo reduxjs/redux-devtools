@@ -1,5 +1,19 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- b323f77d: Upgrade D3
+
+  - Split `style` option into `chartStyles`, `nodeStyleOptions`, `textStyleOptions`, and `linkStyles`.
+  - The shape of the argument passed to the `onClickText` option has been updated.
+
+### Patch Changes
+
+- Updated dependencies [b323f77d]
+  - d3-state-visualizer@2.0.0
+
 ## 3.0.1
 
 ### Patch Changes

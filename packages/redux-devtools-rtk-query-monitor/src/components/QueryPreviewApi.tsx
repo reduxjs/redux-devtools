@@ -1,4 +1,5 @@
 import React, { ReactNode, PureComponent } from 'react';
+import type { ShouldExpandNodeInitially } from 'react-json-tree';
 import { ApiStats, QueryPreviewTabs, RtkQueryApiState } from '../types';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 import { TreeView, TreeViewProps } from './TreeView';
@@ -17,11 +18,11 @@ const rootProps: TreeViewProps['rootProps'] = {
 };
 
 export class QueryPreviewApi extends PureComponent<QueryPreviewApiProps> {
-  shouldExpandApiStateNode = (
-    keyPath: (string | number)[],
-    value: unknown,
-    layer: number
-  ): boolean => {
+  shouldExpandApiStateNode: ShouldExpandNodeInitially = (
+    keyPath,
+    value,
+    layer
+  ) => {
     const lastKey = keyPath[keyPath.length - 1];
 
     return layer <= 1 && lastKey !== 'config';
@@ -45,7 +46,7 @@ export class QueryPreviewApi extends PureComponent<QueryPreviewApiProps> {
             <TreeView
               before={<h3>State</h3>}
               data={apiState}
-              shouldExpandNode={this.shouldExpandApiStateNode}
+              shouldExpandNodeInitially={this.shouldExpandApiStateNode}
               isWideLayout={isWideLayout}
             />
             {apiStats && (

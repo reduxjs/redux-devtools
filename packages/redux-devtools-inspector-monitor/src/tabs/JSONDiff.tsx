@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { JSONTree } from 'react-json-tree';
+import type { LabelRenderer, ShouldExpandNodeInitially } from 'react-json-tree';
 import { stringify } from 'javascript-stringify';
 import { Delta } from 'jsondiffpatch';
 import { StylingFunction } from 'react-base16-styling';
@@ -22,11 +23,8 @@ function stringifyAndShrink(val: any, isWideLayout?: boolean) {
   return str.length > 22 ? `${str.substr(0, 15)}…${str.substr(-5)}` : str;
 }
 
-const expandFirstLevel = (
-  keyName: (string | number)[],
-  data: any,
-  level: number
-) => level <= 1;
+const expandFirstLevel: ShouldExpandNodeInitially = (keyName, data, level) =>
+  level <= 1;
 
 function prepareDelta(value: any) {
   if (value && value._t === 'a') {
@@ -53,12 +51,7 @@ interface Props {
   styling: StylingFunction;
   base16Theme: Base16Theme;
   invertTheme: boolean;
-  labelRenderer: (
-    keyPath: (string | number)[],
-    nodeType: string,
-    expanded: boolean,
-    expandable: boolean
-  ) => React.ReactNode;
+  labelRenderer: LabelRenderer;
   isWideLayout: boolean;
   dataTypeKey: string | symbol | undefined;
 }
@@ -104,7 +97,7 @@ export default class JSONDiff extends Component<Props, State> {
         valueRenderer={this.valueRenderer}
         postprocessValue={prepareDelta}
         isCustomNode={Array.isArray}
-        shouldExpandNode={expandFirstLevel}
+        shouldExpandNodeInitially={expandFirstLevel}
         hideRoot
       />
     );

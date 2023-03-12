@@ -1,5 +1,12 @@
 # Change Log
 
+## 3.1.1
+
+### Patch Changes
+
+- Updated dependencies [81926f32]
+  - react-json-tree@0.18.0
+
 ## 3.1.0
 
 ### Minor Changes

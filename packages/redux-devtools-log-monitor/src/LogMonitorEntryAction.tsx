@@ -1,5 +1,6 @@
 import React, { Component, CSSProperties, MouseEventHandler } from 'react';
 import { JSONTree } from 'react-json-tree';
+import type { ShouldExpandNodeInitially } from 'react-json-tree';
 import { Base16Theme } from 'redux-devtools-themes';
 import { Action } from 'redux';
 
@@ -42,7 +43,7 @@ export default class LogMonitorAction<
             invertTheme={false}
             keyPath={['action']}
             data={payload}
-            shouldExpandNode={this.shouldExpandNode}
+            shouldExpandNodeInitially={this.shouldExpandNodeInitially}
           />
         ) : (
           ''
@@ -51,10 +52,10 @@ export default class LogMonitorAction<
     );
   }
 
-  shouldExpandNode = (
-    keyPath: (string | number)[],
-    data: any,
-    level: number
+  shouldExpandNodeInitially: ShouldExpandNodeInitially = (
+    keyPath,
+    data,
+    level
   ) => {
     return this.props.expandActionRoot && level === 0;
   };

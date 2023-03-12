@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { StylingFunction } from 'react-base16-styling';
+import type { LabelRenderer } from 'react-json-tree';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
 import isIterable from '../utils/isIterable';
 
@@ -91,12 +92,10 @@ export function getItemString(
   );
 }
 
-export function createTreeItemLabelRenderer(styling: StylingFunction) {
-  return function labelRenderer(
-    [key]: (string | number)[],
-    nodeType: string,
-    expanded: boolean
-  ): ReactNode {
+export function createTreeItemLabelRenderer(
+  styling: StylingFunction
+): LabelRenderer {
+  return function labelRenderer([key], nodeType, expanded) {
     return (
       <span>
         <span {...styling('treeItemKey')}>{key}</span>

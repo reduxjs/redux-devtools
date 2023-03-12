@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import semver from 'semver';
-import { Options } from '../options';
+import type { Options } from '../options.js';
 
 const name = '@redux-devtools/cli';
 const startFlag = '/* ' + name + ' start */';
@@ -56,7 +56,7 @@ export function inject(
     startFlag,
     '    require("' + name + '")(' + JSON.stringify(options) + ')',
     '      .then(_remotedev =>',
-    '        _remotedev.on("ready", () => {',
+    '        _remotedev.ready.then(() => {',
     '          if (!_remotedev.portAlreadyUsed) console.log("-".repeat(80));',
     '      ' + serverFlag,
     '        })',

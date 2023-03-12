@@ -3,10 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import parseArgs from 'minimist';
 import chalk from 'chalk';
-import * as injectServer from './injectServer';
-import getOptions from '../options';
-import server from '../index';
-import openApp from './openApp';
+import * as injectServer from './injectServer.js';
+import getOptions from '../options.js';
+import server from '../index.js';
+import openApp from './openApp.js';
 
 const argv = parseArgs(process.argv.slice(2));
 
@@ -87,10 +87,8 @@ if (argv.injectserver) {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-server(argv).then(async function (r) {
-  if (argv.open && argv.open !== 'false') {
-    await r.listener('ready').once();
-    await openApp(argv.open as string, options);
-  }
-});
+const response = await server(argv);
+if (argv.open && argv.open !== 'false') {
+  await response.ready;
+  await openApp(argv.open as string, options);
+}

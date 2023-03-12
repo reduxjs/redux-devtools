@@ -1,6 +1,6 @@
 import React from 'react';
 import JSONNestedNode from './JSONNestedNode';
-import { CircularPropsPassedThroughJSONNode } from './types';
+import type { CommonInternalProps } from './types';
 
 // Returns the "n Items" string for this node,
 // generating and caching it if it hasn't been created yet.
@@ -22,21 +22,20 @@ function createItemString(data: any, limit: number) {
   return `${hasMore ? '>' : ''}${count} ${count !== 1 ? 'entries' : 'entry'}`;
 }
 
-interface Props extends CircularPropsPassedThroughJSONNode {
-  data: any;
+interface Props extends CommonInternalProps {
+  data: unknown;
   nodeType: string;
 }
 
 // Configures <JSONNestedNode> to render an iterable
-const JSONIterableNode: React.FunctionComponent<Props> = ({ ...props }) => {
+export default function JSONIterableNode(props: Props) {
   return (
     <JSONNestedNode
       {...props}
       nodeType="Iterable"
       nodeTypeIndicator="()"
       createItemString={createItemString}
+      expandable
     />
   );
-};
-
-export default JSONIterableNode;
+}

@@ -1,13 +1,13 @@
 import assign from './utils/assign';
-import {
+import { compose } from 'redux';
+import type {
   Action,
-  compose,
   Dispatch,
   PreloadedState,
   Reducer,
   StoreEnhancer,
 } from 'redux';
-import { Config, EnhancerOptions } from './index';
+import type { Config, EnhancerOptions, InferComposedStoreExt } from './index';
 
 function enhancer(options?: EnhancerOptions): StoreEnhancer {
   const config: Config = options || {};
@@ -40,20 +40,28 @@ function enhancer(options?: EnhancerOptions): StoreEnhancer {
 }
 
 function composeWithEnhancer(config?: EnhancerOptions) {
-  return function (...funcs: StoreEnhancer[]) {
+  return function (...funcs: StoreEnhancer<unknown>[]) {
     return compose(compose(...funcs), enhancer(config));
   };
 }
 
 export function composeWithDevTools(
   config: Config
-): (...funcs: StoreEnhancer[]) => StoreEnhancer;
-export function composeWithDevTools(...funcs: StoreEnhancer[]): StoreEnhancer;
-export function composeWithDevTools(...funcs: [Config] | StoreEnhancer[]) {
+): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  ...funcs: StoreEnhancers
+) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
+export function composeWithDevTools<
+  StoreEnhancers extends readonly StoreEnhancer<unknown>[]
+>(
+  ...funcs: StoreEnhancers
+): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
+export function composeWithDevTools(
+  ...funcs: [Config] | StoreEnhancer<unknown>[]
+) {
   if (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__) {
     if (funcs.length === 0) return enhancer();
     if (typeof funcs[0] === 'object') return composeWithEnhancer(funcs[0]);
-    return composeWithEnhancer()(...(funcs as StoreEnhancer[]));
+    return composeWithEnhancer()(...(funcs as StoreEnhancer<unknown>[]));
   }
 
   if (funcs.length === 0) return undefined;

@@ -1,4 +1,6 @@
-function getLength(type: string, collection: any) {
+import type { SortObjectKeys } from './types';
+
+function getLength(type: string, collection: unknown) {
   if (type === 'Object') {
     // eslint-disable-next-line @typescript-eslint/ban-types
     return Object.keys(collection as {}).length;
@@ -9,17 +11,17 @@ function getLength(type: string, collection: any) {
   return Infinity;
 }
 
-function isIterableMap(collection: any) {
-  return typeof (collection as Map<any, any>).set === 'function';
+function isIterableMap(collection: unknown) {
+  return typeof (collection as Map<unknown, unknown>).set === 'function';
 }
 
 function getEntries(
   type: string,
   collection: any,
-  sortObjectKeys?: ((a: any, b: any) => number) | boolean | undefined,
+  sortObjectKeys: SortObjectKeys,
   from = 0,
   to = Infinity
-): { entries: { key: string | number; value: any }[]; hasMore?: boolean } {
+): { entries: { key: string | number; value: unknown }[]; hasMore?: boolean } {
   let res;
 
   if (type === 'Object') {
@@ -95,8 +97,8 @@ function getRanges(from: number, to: number, limit: number) {
 
 export default function getCollectionEntries(
   type: string,
-  collection: any,
-  sortObjectKeys: ((a: any, b: any) => number) | boolean | undefined,
+  collection: unknown,
+  sortObjectKeys: SortObjectKeys,
   limit: number,
   from = 0,
   to = Infinity

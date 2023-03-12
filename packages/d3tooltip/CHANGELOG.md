@@ -1,5 +1,18 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- b323f77d: Upgrade D3
+
+  - Remove UMD build.
+  - Upgrade d3 peer dependency from v3 to v7.
+  - Remove `attr` configuration method.
+  - Rename `style` configuration method to `styles` and move to options.
+  - Move `text` configuration method to options.
+  - Remove d3 parameter as first parameter for `tooltip`.
+
 ## 2.0.0
 
 - Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):

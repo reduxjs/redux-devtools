@@ -1,8 +1,8 @@
 import { v4 as uuidV4 } from 'uuid';
-import pick from 'lodash/pick';
+import { pick } from 'lodash-es';
 import { AGServer } from 'socketcluster-server';
 import { Knex } from 'knex';
-import connector from './db/connector';
+import connector from './db/connector.js';
 
 const reports = 'remotedev_reports';
 // var payloads = 'remotedev_payloads';

@@ -1,6 +1,7 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ReactNode, PureComponent } from 'react';
 import { Action, AnyAction } from 'redux';
+import type { KeyPath, ShouldExpandNodeInitially } from 'react-json-tree';
 import { QueryPreviewTabs } from '../types';
 import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
 import { emptyRecord, identity } from '../utils/object';
@@ -43,7 +44,7 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
     return output;
   });
 
-  isLastActionNode = (keyPath: (string | number)[], layer: number): boolean => {
+  isLastActionNode = (keyPath: KeyPath, layer: number): boolean => {
     if (layer >= 1) {
       const len = this.props.actionsOfQuery.length;
       const actionKey = keyPath[keyPath.length - 1];
@@ -58,11 +59,11 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
     return false;
   };
 
-  shouldExpandNode = (
-    keyPath: (string | number)[],
-    value: unknown,
-    layer: number
-  ): boolean => {
+  shouldExpandNodeInitially: ShouldExpandNodeInitially = (
+    keyPath,
+    value,
+    layer
+  ) => {
     if (layer === 1) {
       return this.isLastActionNode(keyPath, layer);
     }
@@ -85,7 +86,7 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
         rootProps={rootProps}
         data={this.selectFormattedActions(actionsOfQuery)}
         isWideLayout={isWideLayout}
-        shouldExpandNode={this.shouldExpandNode}
+        shouldExpandNodeInitially={this.shouldExpandNodeInitially}
       />
     );
   }
