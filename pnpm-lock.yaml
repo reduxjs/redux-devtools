@@ -2152,7 +2152,7 @@ importers:
       styled-components: ^5.3.9
       stylelint: ^15.2.0
       stylelint-config-prettier: ^9.0.5
-      stylelint-config-standard: ^30.0.1
+      stylelint-config-standard: ^31.0.0
       stylelint-config-styled-components: ^0.1.1
       stylelint-processor-styled-components: ^1.10.0
       ts-jest: ^29.0.5
@@ -2214,7 +2214,7 @@ importers:
       styled-components: 5.3.9_7i5myeigehqah43i5u7wbekgba
       stylelint: 15.2.0
       stylelint-config-prettier: 9.0.5_stylelint@15.2.0
-      stylelint-config-standard: 30.0.1_stylelint@15.2.0
+      stylelint-config-standard: 31.0.0_stylelint@15.2.0
       stylelint-config-styled-components: 0.1.1
       stylelint-processor-styled-components: 1.10.0
       ts-jest: 29.0.5_q744lk64cx4tbpg7zn4yr5nesi
@@ -16422,6 +16422,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile/4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -21129,21 +21130,21 @@ packages:
       stylelint: 15.2.0
     dev: true
 
-  /stylelint-config-recommended/10.0.1_stylelint@15.2.0:
-    resolution: {integrity: sha512-TQ4xQ48tW4QSlODcti7pgSRqBZcUaBzuh0jPpfiMhwJKBPkqzTIAU+IrSWL/7BgXlOM90DjB7YaNgFpx8QWhuA==}
+  /stylelint-config-recommended/11.0.0_stylelint@15.2.0:
+    resolution: {integrity: sha512-SoGIHNI748OCZn6BxFYT83ytWoYETCINVHV3LKScVAWQQauWdvmdDqJC5YXWjpBbxg2E761Tg5aUGKLFOVhEkA==}
     peerDependencies:
-      stylelint: ^15.0.0
+      stylelint: ^15.3.0
     dependencies:
       stylelint: 15.2.0
     dev: true
 
-  /stylelint-config-standard/30.0.1_stylelint@15.2.0:
-    resolution: {integrity: sha512-NbeHOmpRQhjZh5XB1B/S4MLRWvz4xxAxeDBjzl0tY2xEcayNhLbaRGF0ZQzq+DQZLCcPpOHeS2Ru1ydbkhkmLg==}
+  /stylelint-config-standard/31.0.0_stylelint@15.2.0:
+    resolution: {integrity: sha512-CUGAmtROCvX0YgMY2+6P9tqSkHj5z/75XxrQ8bGxvkCa1xYdGDx4poM0pa7cXc3s74/PZLJH/okxZZouRfOSGw==}
     peerDependencies:
-      stylelint: ^15.0.0
+      stylelint: ^15.3.0
     dependencies:
       stylelint: 15.2.0
-      stylelint-config-recommended: 10.0.1_stylelint@15.2.0
+      stylelint-config-recommended: 11.0.0_stylelint@15.2.0
     dev: true
 
   /stylelint-config-styled-components/0.1.1:
