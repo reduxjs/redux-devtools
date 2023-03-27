@@ -44,7 +44,7 @@ export function compare<S>(
       path += '.length';
     } else if (event.type === 'add-item') {
       generate({ type: 'move-item', newPath: event.newPath });
-      path += `[${event.newIndex}]`;
+      path += `[${event.newIndex!}]`;
       curState = stringify(event.newValue);
     } else {
       curState = stringify(event.newValue);
