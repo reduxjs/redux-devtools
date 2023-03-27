@@ -2,7 +2,7 @@ import React, { PureComponent, Component, ReactNode } from 'react';
 import { stringify } from 'javascript-stringify';
 import objectPath from 'object-path';
 import jsan from 'jsan';
-import diff, { Event } from 'simple-diff';
+import diff, { DiffEvent } from 'simple-diff';
 import es6template from 'es6template';
 import { Editor } from '@redux-devtools/ui';
 import { TabComponentProps } from '@redux-devtools/inspector-monitor';
@@ -30,7 +30,7 @@ export function compare<S>(
 ) {
   const paths: string[] = []; // Already processed
   function generate(
-    event: Event | { type: 'move-item'; newPath: (string | number)[] }
+    event: DiffEvent | { type: 'move-item'; newPath: (string | number)[] }
   ) {
     let curState: number | string | undefined;
     let path = fromPath(event.newPath);
@@ -44,7 +44,7 @@ export function compare<S>(
       path += '.length';
     } else if (event.type === 'add-item') {
       generate({ type: 'move-item', newPath: event.newPath });
-      path += `[${event.newIndex}]`;
+      path += `[${event.newIndex!}]`;
       curState = stringify(event.newValue);
     } else {
       curState = stringify(event.newValue);
