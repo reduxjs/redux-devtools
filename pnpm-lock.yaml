@@ -3218,8 +3218,8 @@ importers:
         specifier: ^9.0.5
         version: 9.0.5(stylelint@15.3.0)
       stylelint-config-standard:
-        specifier: ^31.0.0
-        version: 31.0.0(stylelint@15.3.0)
+        specifier: ^32.0.0
+        version: 32.0.0(stylelint@15.3.0)
       stylelint-config-styled-components:
         specifier: ^0.1.1
         version: 0.1.1
@@ -22022,10 +22022,10 @@ packages:
       stylelint: 15.3.0
     dev: true
 
-  /stylelint-config-standard@31.0.0(stylelint@15.3.0):
-    resolution: {integrity: sha512-CUGAmtROCvX0YgMY2+6P9tqSkHj5z/75XxrQ8bGxvkCa1xYdGDx4poM0pa7cXc3s74/PZLJH/okxZZouRfOSGw==}
+  /stylelint-config-standard@32.0.0(stylelint@15.3.0):
+    resolution: {integrity: sha512-UnGJxYDyYFrIE9CjDMZRkrNh2o4lOtO+MVZ9qG5b8yARfsWho0GMx4YvhHfsv8zKKgHeWX2wfeyxmuoqcaYZ4w==}
     peerDependencies:
-      stylelint: ^15.3.0
+      stylelint: ^15.4.0
     dependencies:
       stylelint: 15.3.0
       stylelint-config-recommended: 11.0.0(stylelint@15.3.0)
