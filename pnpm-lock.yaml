@@ -3137,8 +3137,11 @@ importers:
         specifier: ^7.0.2
         version: 7.0.2(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.5)
       '@storybook/react-webpack5':
-        specifier: 7.0.2
+        specifier: ^7.0.2
         version: 7.0.2(@babel/core@7.21.3)(esbuild@0.17.15)(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.5)
+      '@storybook/types':
+        specifier: ^7.0.2
+        version: 7.0.2
       '@testing-library/dom':
         specifier: ^9.2.0
         version: 9.2.0
@@ -3209,7 +3212,7 @@ importers:
         specifier: ^4.4.1
         version: 4.4.1
       storybook:
-        specifier: 7.0.2
+        specifier: ^7.0.2
         version: 7.0.2
       styled-components:
         specifier: ^5.3.9
@@ -3839,7 +3842,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0
     dependencies:
-      '@babel/compat-data': 7.21.0
+      '@babel/compat-data': 7.21.4
       '@babel/core': 7.21.3
       '@babel/helper-validator-option': 7.21.0
       browserslist: 4.21.5
@@ -4208,9 +4211,9 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/compat-data': 7.21.0
+      '@babel/compat-data': 7.21.4
       '@babel/core': 7.21.3
-      '@babel/helper-compilation-targets': 7.20.7(@babel/core@7.21.3)
+      '@babel/helper-compilation-targets': 7.21.4(@babel/core@7.21.3)
       '@babel/helper-plugin-utils': 7.20.2
       '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.21.3)
       '@babel/plugin-transform-parameters': 7.21.3(@babel/core@7.21.3)
@@ -4517,7 +4520,7 @@ packages:
     dependencies:
       '@babel/core': 7.21.3
       '@babel/helper-annotate-as-pure': 7.18.6
-      '@babel/helper-compilation-targets': 7.20.7(@babel/core@7.21.3)
+      '@babel/helper-compilation-targets': 7.21.4(@babel/core@7.21.3)
       '@babel/helper-environment-visitor': 7.18.9
       '@babel/helper-function-name': 7.21.0
       '@babel/helper-optimise-call-expression': 7.18.6
@@ -4610,7 +4613,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.21.3
-      '@babel/helper-compilation-targets': 7.20.7(@babel/core@7.21.3)
+      '@babel/helper-compilation-targets': 7.21.4(@babel/core@7.21.3)
       '@babel/helper-function-name': 7.21.0
       '@babel/helper-plugin-utils': 7.20.2
     dev: true
@@ -8258,8 +8261,8 @@ packages:
   /@storybook/builder-webpack5@7.0.2(esbuild@0.17.15)(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.5):
     resolution: {integrity: sha512-kYzmP4QfH/sA6S65+PY5XzIJ5Adsc9soSEZYdTYntTtLOzdrthKEb7InlYKt1Tg1hGVyhn6KQafSxyGHgFkC+A==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       typescript: '*'
     peerDependenciesMeta:
       typescript:
@@ -8349,7 +8352,7 @@ packages:
     hasBin: true
     dependencies:
       '@babel/core': 7.21.3
-      '@babel/preset-env': 7.20.2(@babel/core@7.21.3)
+      '@babel/preset-env': 7.21.4(@babel/core@7.21.3)
       '@ndelangen/get-tarball': 3.0.7
       '@storybook/codemod': 7.0.2
       '@storybook/core-common': 7.0.2
@@ -8373,7 +8376,7 @@ packages:
       get-port: 5.1.1
       giget: 1.1.2
       globby: 11.1.0
-      jscodeshift: 0.14.0(@babel/preset-env@7.20.2)
+      jscodeshift: 0.14.0(@babel/preset-env@7.21.4)
       leven: 3.1.0
       prettier: 2.8.7
       prompts: 2.4.2
@@ -8760,8 +8763,8 @@ packages:
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@babel/core': ^7.11.5
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       typescript: '*'
     peerDependenciesMeta:
       '@babel/core':
@@ -10798,7 +10801,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/compat-data': 7.21.0
+      '@babel/compat-data': 7.21.4
       '@babel/core': 7.21.3
       '@babel/helper-define-polyfill-provider': 0.3.3(@babel/core@7.21.3)
       semver: 6.3.0
@@ -15596,36 +15599,6 @@ packages:
   /jsan@3.1.14:
     resolution: {integrity: sha512-wStfgOJqMv4QKktuH273f5fyi3D3vy2pHOiSDGPvpcS/q+wb/M7AK3vkCcaHbkZxDOlDU/lDJgccygKSG2OhtA==}
     dev: false
-
-  /jscodeshift@0.14.0(@babel/preset-env@7.20.2):
-    resolution: {integrity: sha512-7eCC1knD7bLUPuSCwXsMZUH51O8jIcoVyKtI6P0XM0IVzlGjckPy3FIwQlorzbN0Sg79oK+RlohN32Mqf/lrYA==}
-    hasBin: true
-    peerDependencies:
-      '@babel/preset-env': ^7.1.6
-    dependencies:
-      '@babel/core': 7.21.3
-      '@babel/parser': 7.21.3
-      '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.21.3)
-      '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6(@babel/core@7.21.3)
-      '@babel/plugin-proposal-optional-chaining': 7.21.0(@babel/core@7.21.3)
-      '@babel/plugin-transform-modules-commonjs': 7.21.2(@babel/core@7.21.3)
-      '@babel/preset-env': 7.20.2(@babel/core@7.21.3)
-      '@babel/preset-flow': 7.21.4(@babel/core@7.21.3)
-      '@babel/preset-typescript': 7.21.0(@babel/core@7.21.3)
-      '@babel/register': 7.21.0(@babel/core@7.21.3)
-      babel-core: 7.0.0-bridge.0(@babel/core@7.21.3)
-      chalk: 4.1.2
-      flow-parser: 0.203.1
-      graceful-fs: 4.2.11
-      micromatch: 4.0.5
-      neo-async: 2.6.2
-      node-dir: 0.1.17
-      recast: 0.21.5
-      temp: 0.8.4
-      write-file-atomic: 2.4.3
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
 
   /jscodeshift@0.14.0(@babel/preset-env@7.21.4):
     resolution: {integrity: sha512-7eCC1knD7bLUPuSCwXsMZUH51O8jIcoVyKtI6P0XM0IVzlGjckPy3FIwQlorzbN0Sg79oK+RlohN32Mqf/lrYA==}
