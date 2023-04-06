@@ -3139,9 +3139,6 @@ importers:
       '@storybook/react-webpack5':
         specifier: ^7.0.2
         version: 7.0.2(@babel/core@7.21.3)(esbuild@0.17.15)(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.5)
-      '@storybook/types':
-        specifier: ^7.0.2
-        version: 7.0.2
       '@testing-library/dom':
         specifier: ^9.2.0
         version: 9.2.0
@@ -8261,8 +8258,8 @@ packages:
   /@storybook/builder-webpack5@7.0.2(esbuild@0.17.15)(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.5):
     resolution: {integrity: sha512-kYzmP4QfH/sA6S65+PY5XzIJ5Adsc9soSEZYdTYntTtLOzdrthKEb7InlYKt1Tg1hGVyhn6KQafSxyGHgFkC+A==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
       typescript: '*'
     peerDependenciesMeta:
       typescript:
@@ -8763,8 +8760,8 @@ packages:
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@babel/core': ^7.11.5
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
       typescript: '*'
     peerDependenciesMeta:
       '@babel/core':
