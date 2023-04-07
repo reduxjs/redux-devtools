@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Select from './';
 import { options } from './options';
-import { Story } from '@storybook/react';
-import { SelectProps } from './Select';
+import { Meta, StoryObj } from '@storybook/react';
 
 const Container = styled.div`
   display: flex;
@@ -17,40 +16,38 @@ const Container = styled.div`
   }
 `;
 
-export default {
+const meta: Meta = {
   title: 'Select',
   component: Select,
 };
 
-type TemplateArgs = Omit<
-  SelectProps<{ value: string; label: string }, boolean>,
-  'value'
-> & { value: string };
+export default meta;
 
-// eslint-disable-next-line react/prop-types
-const Template: Story<TemplateArgs> = ({ value, ...args }) => (
-  <Container>
-    <Select
-      options={options}
-      value={options.filter((option) => option.value === value)}
-      {...args}
-    />
-  </Container>
-);
+type Story = StoryObj<typeof Select>;
 
-export const Default = Template.bind({});
-Default.args = {
-  value: 'one',
-  maxMenuHeight: 300,
-  isClearable: false,
-  isDisabled: false,
-  isLoading: false,
-  isMulti: false,
-  isSearchable: true,
-  menuPlacement: 'bottom',
-};
-Default.argTypes = {
-  onChange: {
-    action: 'selected',
+export const Default: Story = {
+  render: ({ value, ...args }) => (
+    <Container>
+      <Select
+        options={options}
+        value={options.filter((option) => option.value === value)}
+        {...args}
+      />
+    </Container>
+  ),
+  args: {
+    value: 'one',
+    maxMenuHeight: 300,
+    isClearable: false,
+    isDisabled: false,
+    isLoading: false,
+    isMulti: false,
+    isSearchable: true,
+    menuPlacement: 'bottom',
+  },
+  argTypes: {
+    onChange: {
+      action: 'selected',
+    },
   },
 };

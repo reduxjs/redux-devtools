@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import Tabs from './';
 import { tabs, simple10Tabs } from './data';
 import { TabsProps } from './Tabs';
@@ -13,41 +13,49 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export default {
+const meta: Meta = {
   title: 'Tabs',
   component: Tabs,
 };
 
-const Template: Story<TabsProps<object>> = (args) => (
-  <Container>
-    <Tabs {...args} />
-  </Container>
-);
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  tabs: simple10Tabs,
-  selected: '2',
-  main: true,
-  collapsible: true,
-  position: 'left',
-};
-Default.argTypes = {
-  tabs: { control: { disable: true } },
-  onClick: { control: { disable: true } },
+type Story = StoryObj<typeof Tabs>;
+
+export const Default: Story = {
+  render: (args) => (
+    <Container>
+      <Tabs {...args} />
+    </Container>
+  ),
+  args: {
+    tabs: simple10Tabs,
+    selected: '2',
+    main: true,
+    collapsible: true,
+    position: 'left',
+  },
+  argTypes: {
+    tabs: { control: { disable: true } },
+    onClick: { control: { disable: true } },
+  },
 };
 
-export const WithContent = (
-  Template as Story<TabsProps<{ selected: string }>>
-).bind({});
-WithContent.args = {
-  tabs,
-  selected: 'Tab2',
-  main: false,
-  collapsible: false,
-  position: 'left',
-};
-WithContent.argTypes = {
-  tabs: { control: { disable: true } },
-  onClick: { control: { disable: true } },
+export const WithContext: StoryObj<TabsProps<{ selected: string }>> = {
+  render: (args) => (
+    <Container>
+      <Tabs {...args} />
+    </Container>
+  ),
+  args: {
+    tabs,
+    selected: 'Tab2',
+    main: false,
+    collapsible: false,
+    position: 'left',
+  },
+  argTypes: {
+    tabs: { control: { disable: true } },
+    onClick: { control: { disable: true } },
+  },
 };
