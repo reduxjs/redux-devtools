@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import Notification from './';
-import { NotificationProps } from './Notification';
 
 const Container = styled.div`
   display: flex;
@@ -12,23 +11,27 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export default {
+const meta: Meta = {
   title: 'Notification',
   component: Notification,
 };
 
-const Template: Story<NotificationProps> = (args) => (
-  <Container>
-    <Notification {...args} />
-  </Container>
-);
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  type: 'warning',
-  children: 'Hello Notification',
-};
-Default.argTypes = {
-  onClose: { control: { disable: true } },
-  theme: { control: { disable: true } },
+type Story = StoryObj<typeof Notification>;
+
+export const Default: Story = {
+  render: (args) => (
+    <Container>
+      <Notification {...args} />
+    </Container>
+  ),
+  args: {
+    type: 'warning',
+    children: 'Hello Notification',
+  },
+  argTypes: {
+    onClose: { control: { disable: true } },
+    theme: { control: { disable: true } },
+  },
 };

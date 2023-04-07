@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import SegmentedControl from './';
-import { SegmentedControlProps } from './SegmentedControl';
 
 const Container = styled.div`
   display: flex;
@@ -12,25 +11,28 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export default {
+const meta: Meta = {
   title: 'SegmentedControl',
   component: SegmentedControl,
 };
 
-// eslint-disable-next-line react/prop-types
-const Template: Story<SegmentedControlProps> = ({ values, ...args }) => (
-  <Container>
-    <SegmentedControl values={['Button1', 'Button2', 'Button3']} {...args} />
-  </Container>
-);
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  selected: 'Button1',
-  disabled: false,
-};
-Default.argTypes = {
-  values: { control: { disable: true } },
-  onClick: { control: { disable: true } },
-  theme: { control: { disable: true } },
+type Story = StoryObj<typeof SegmentedControl>;
+
+export const Default: Story = {
+  render: ({ values, ...args }) => (
+    <Container>
+      <SegmentedControl values={['Button1', 'Button2', 'Button3']} {...args} />
+    </Container>
+  ),
+  args: {
+    selected: 'Button1',
+    disabled: false,
+  },
+  argTypes: {
+    values: { control: { disable: true } },
+    onClick: { control: { disable: true } },
+    theme: { control: { disable: true } },
+  },
 };

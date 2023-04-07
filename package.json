@@ -43,12 +43,6 @@
   "pnpm": {
     "overrides": {
       "@babel/highlight>chalk": "Methuselah96/chalk#v2-without-process"
-    },
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "react": "18",
-        "react-dom": "18"
-      }
     }
   }
 }
