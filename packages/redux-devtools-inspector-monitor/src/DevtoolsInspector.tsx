@@ -151,6 +151,8 @@ export interface ExternalProps<S, A extends Action<unknown>> {
   hideMainButtons?: boolean;
   hideActionButtons?: boolean;
   invertTheme: boolean;
+  sortStateTreeAlphabetically: boolean;
+  disableStateTreeCollection: boolean;
   dataTypeKey?: string | symbol;
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
 }
@@ -177,6 +179,8 @@ export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
   diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
   hideMainButtons?: boolean;
   hideActionButtons?: boolean;
+  sortStateTreeAlphabetically: boolean;
+  disableStateTreeCollection: boolean;
   invertTheme: boolean;
   dataTypeKey?: string | symbol;
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
@@ -220,6 +224,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     hideMainButtons: PropTypes.bool,
     hideActionButtons: PropTypes.bool,
     invertTheme: PropTypes.bool,
+    sortStateTreeAlphabetically: PropTypes.bool,
+    disableStateTreeCollection: PropTypes.bool,
     skippedActionIds: PropTypes.array,
     dataTypeKey: PropTypes.any,
     tabs: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
@@ -305,6 +311,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
       dataTypeKey,
       hideMainButtons,
       hideActionButtons,
+      sortStateTreeAlphabetically,
+      disableStateTreeCollection,
     } = this.props;
     const { selectedActionId, startActionId, searchValue, tabName } =
       monitorState;
@@ -364,6 +372,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
             selectedActionId,
             startActionId,
             dataTypeKey,
+            sortStateTreeAlphabetically,
+            disableStateTreeCollection,
           }}
           monitorState={this.props.monitorState}
           updateMonitorState={this.updateMonitorState}
