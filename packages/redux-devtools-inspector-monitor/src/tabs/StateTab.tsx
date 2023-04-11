@@ -16,6 +16,8 @@ const StateTab: React.FunctionComponent<
   labelRenderer,
   dataTypeKey,
   isWideLayout,
+  sortStateTreeAlphabetically,
+  disableStateTreeCollection,
 }) => (
   <JSONTree
     labelRenderer={labelRenderer}
@@ -26,6 +28,8 @@ const StateTab: React.FunctionComponent<
     }
     invertTheme={invertTheme}
     hideRoot
+    sortObjectKeys={sortStateTreeAlphabetically}
+    {...(disableStateTreeCollection ? { collectionLimit: 0 } : {})}
   />
 );
 

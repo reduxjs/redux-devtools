@@ -7,6 +7,7 @@ import { InitMonitorAction } from '../actions';
 import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
 import { ThemeFromProvider } from '@redux-devtools/ui';
+import { StateTreeSettings } from '../reducers/stateTreeSettings';
 
 interface Props {
   monitor: string;
@@ -17,6 +18,7 @@ interface Props {
   ) => void;
   features: Features | undefined;
   theme: ThemeFromProvider;
+  stateTreeSettings: StateTreeSettings;
 }
 
 class DevTools extends Component<Props> {
@@ -110,6 +112,12 @@ class DevTools extends Component<Props> {
           features={this.props.features}
           dispatch={this.dispatch}
           theme={this.props.theme}
+          sortStateTreeAlphabetically={
+            this.props.stateTreeSettings.sortAlphabetically
+          }
+          disableStateTreeCollection={
+            this.props.stateTreeSettings.disableCollection
+          }
         />
       </div>
     );

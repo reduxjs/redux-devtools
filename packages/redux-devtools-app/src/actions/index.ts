@@ -25,6 +25,7 @@ import {
   GET_REPORT_SUCCESS,
   ERROR,
   SET_PERSIST,
+  CHANGE_STATE_TREE_SETTINGS,
 } from '../constants/actionTypes';
 import {
   AUTH_ERROR,
@@ -80,6 +81,27 @@ export interface ChangeThemeAction {
 }
 export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
   return { type: CHANGE_THEME, ...data.formData };
+}
+
+interface ChangeStateTreeSettingsFormData {
+  readonly sortAlphabetically: boolean;
+  readonly disableCollection: boolean;
+}
+
+interface ChangeStateTreeSettingsData {
+  readonly formData: ChangeStateTreeSettingsFormData;
+}
+
+export interface ChangeStateTreeSettingsAction {
+  readonly type: typeof CHANGE_STATE_TREE_SETTINGS;
+  readonly sortAlphabetically: boolean;
+  readonly disableCollection: boolean;
+}
+
+export function changeStateTreeSettings(
+  data: ChangeStateTreeSettingsData
+): ChangeStateTreeSettingsAction {
+  return { type: CHANGE_STATE_TREE_SETTINGS, ...data.formData };
 }
 
 export interface InitMonitorAction {
@@ -568,6 +590,7 @@ interface ReduxPersistRehydrateAction {
 export type StoreActionWithoutUpdateStateOrLiftedAction =
   | ChangeSectionAction
   | ChangeThemeAction
+  | ChangeStateTreeSettingsAction
   | MonitorActionAction
   | SelectInstanceAction
   | SelectMonitorAction

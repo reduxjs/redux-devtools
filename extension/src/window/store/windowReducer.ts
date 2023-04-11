@@ -7,6 +7,7 @@ import {
   section,
   socket,
   theme,
+  stateTreeSettings,
   StoreState,
 } from '@redux-devtools/app';
 import instances from './instancesReducer';
@@ -22,6 +23,7 @@ const rootReducer: Reducer<StoreState, WindowStoreAction> =
     section,
     theme,
     connection,
+    stateTreeSettings,
   });
 
 export default rootReducer;
