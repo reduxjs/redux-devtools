@@ -159,8 +159,8 @@ importers:
         specifier: ^9.1.2
         version: 9.1.2(@babel/core@7.21.4)(webpack@5.78.0)
       chromedriver:
-        specifier: ^110.0.0
-        version: 110.0.0
+        specifier: ^112.0.0
+        version: 112.0.0
       copy-webpack-plugin:
         specifier: ^11.0.0
         version: 11.0.0(webpack@5.78.0)
@@ -174,8 +174,8 @@ importers:
         specifier: ^6.7.3
         version: 6.7.3(webpack@5.78.0)
       electron:
-        specifier: ^23.2.2
-        version: 23.2.2
+        specifier: ^24.1.2
+        version: 24.1.2
       eslint:
         specifier: ^8.38.0
         version: 8.38.0
@@ -1353,8 +1353,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       electron:
-        specifier: ^23.2.2
-        version: 23.2.2
+        specifier: ^24.1.2
+        version: 24.1.2
       express:
         specifier: ^4.18.2
         version: 4.18.2
@@ -9488,6 +9488,7 @@ packages:
 
   /@types/node@16.18.23:
     resolution: {integrity: sha512-XAMpaw1s1+6zM+jn2tmw8MyaRDIJfXxqmIQIS0HfoGYPuf7dUWeiUKopwq13KFX9lEp1+THGtlaaYx39Nxr58g==}
+    dev: true
 
   /@types/node@18.15.11:
     resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
@@ -11259,8 +11260,8 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
-  /chromedriver@110.0.0:
-    resolution: {integrity: sha512-Le6q8xrA/3fAt+g8qiN0YjsYxINIhQMC6wj9X3W5L77uN4NspEzklDrqYNwBcEVn7PcAEJ73nLlS7mTyZRspHA==}
+  /chromedriver@112.0.0:
+    resolution: {integrity: sha512-fEw1tI05dmK1KK8MGh99LAppP7zCOPEXUxxbYX5wpIBCCmKasyrwZhk/qsdnxJYKd/h0TfiHvGEj7ReDQXW1AA==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
@@ -12563,14 +12564,14 @@ packages:
     resolution: {integrity: sha512-UTkCbNTAcGXABmEnQrGcW4m3cG6fcyBfD4KDF0iyEAlbrGZiY9dmslyDAGOD1Kr5biN2F743Y30aRCOtau35Vw==}
     dev: true
 
-  /electron@23.2.2:
-    resolution: {integrity: sha512-8UfC2NCaqLJvdWoAfzAi56DaF+8cD3QPbnabKMdYNxMhYJ54gAje4ChVRo3sUMD5uSMk6MbPYCdnoMusCrfzrQ==}
+  /electron@24.1.2:
+    resolution: {integrity: sha512-V0isWbyLYiXrSCcB4lrSVhS/U56NFGfuqHyc+yEPkyhhvY+h4F85cYGdEiZlXp6XjHT+/CLHmw0ltK54g9lvDw==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true
     dependencies:
       '@electron/get': 2.0.2
-      '@types/node': 16.18.23
+      '@types/node': 18.15.11
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
