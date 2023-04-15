@@ -41,7 +41,7 @@ export const exportStateMiddleware =
           JSON.stringify(
             {
               payload: request.payload,
-              preloadedState: (request as ExportRequest).committedState,
+              preloadedState: request.committedState,
             },
             null,
             '\t'
