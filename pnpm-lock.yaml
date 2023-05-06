@@ -159,8 +159,8 @@ importers:
         specifier: ^9.1.2
         version: 9.1.2(@babel/core@7.21.4)(webpack@5.81.0)
       chromedriver:
-        specifier: ^112.0.0
-        version: 112.0.0
+        specifier: ^113.0.0
+        version: 113.0.0
       copy-webpack-plugin:
         specifier: ^11.0.0
         version: 11.0.0(webpack@5.81.0)
@@ -11252,9 +11252,9 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
-  /chromedriver@112.0.0:
-    resolution: {integrity: sha512-fEw1tI05dmK1KK8MGh99LAppP7zCOPEXUxxbYX5wpIBCCmKasyrwZhk/qsdnxJYKd/h0TfiHvGEj7ReDQXW1AA==}
-    engines: {node: '>=14'}
+  /chromedriver@113.0.0:
+    resolution: {integrity: sha512-UnQlt2kPicYXVNHPzy9HfcWvEbKJjjKAEaatdcnP/lCIRwuSoZFVLH0HVDAGdbraXp3dNVhfE2Qx7gw8TnHnPw==}
+    engines: {node: '>=16'}
     hasBin: true
     requiresBuild: true
     dependencies:
