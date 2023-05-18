@@ -35,7 +35,7 @@
     "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types && pnpm run build:umd",
     "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
     "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --traceResolution --emitDeclarationOnly",
+    "build:types": "tsc --emitDeclarationOnly",
     "build:umd": "rollup -c",
     "clean": "rimraf lib",
     "test": "jest",
