@@ -118,16 +118,15 @@ export default function JSONNestedNode(props: Props) {
     // calculate individual node expansion if necessary
     isCircular ? false : shouldExpandNodeInitially(keyPath, data, level)
   );
-  
 
   useEffect(() => {
-    if(shouldExpandNode === undefined){
-      return
+    if (shouldExpandNode === undefined) {
+      return;
     }
 
     setExpanded(shouldExpandNode);
-  }, [shouldExpandNode])
-  
+  }, [shouldExpandNode]);
+
   const handleClick = useCallback(() => {
     if (expandable) setExpanded(!expanded);
   }, [expandable, expanded]);
