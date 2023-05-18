@@ -41,6 +41,7 @@ export function JSONTree({
   labelRenderer = defaultLabelRenderer,
   valueRenderer = identity,
   shouldExpandNodeInitially = expandRootNode,
+  shouldExpandNode,
   hideRoot = false,
   getItemString = defaultItemString,
   postprocessValue = identity,
@@ -64,6 +65,7 @@ export function JSONTree({
         labelRenderer={labelRenderer}
         valueRenderer={valueRenderer}
         shouldExpandNodeInitially={shouldExpandNodeInitially}
+        shouldExpandNode={shouldExpandNode}
         hideRoot={hideRoot}
         getItemString={getItemString}
         postprocessValue={postprocessValue}

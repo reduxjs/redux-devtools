@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import JSONArrow from './JSONArrow';
 import getCollectionEntries from './getCollectionEntries';
 import JSONNode from './JSONNode';
@@ -110,6 +110,7 @@ export default function JSONNestedNode(props: Props) {
     nodeType,
     nodeTypeIndicator,
     shouldExpandNodeInitially,
+    shouldExpandNode,
     styling,
   } = props;
 
@@ -117,7 +118,16 @@ export default function JSONNestedNode(props: Props) {
     // calculate individual node expansion if necessary
     isCircular ? false : shouldExpandNodeInitially(keyPath, data, level)
   );
+  
 
+  useEffect(() => {
+    if(shouldExpandNode === undefined){
+      return
+    }
+
+    setExpanded(shouldExpandNode);
+  }, [shouldExpandNode])
+  
   const handleClick = useCallback(() => {
     if (expandable) setExpanded(!expanded);
   }, [expandable, expanded]);

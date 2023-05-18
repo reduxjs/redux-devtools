@@ -47,6 +47,7 @@ export interface CommonExternalProps {
   labelRenderer: LabelRenderer;
   valueRenderer: ValueRenderer;
   shouldExpandNodeInitially: ShouldExpandNodeInitially;
+  shouldExpandNode: boolean | undefined;
   hideRoot: boolean;
   getItemString: GetItemString;
   postprocessValue: PostprocessValue;
