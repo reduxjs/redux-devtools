@@ -111,8 +111,9 @@ export default function JSONNestedNode(props: Props) {
     nodeTypeIndicator,
     shouldExpandNodeInitially,
     shouldExpandNode,
-    styling,
+    setShouldExpandNode,
     setEnableDefaultButton,
+    styling,
   } = props;
 
   const [expanded, setExpanded] = useState<boolean>(
@@ -135,8 +136,9 @@ export default function JSONNestedNode(props: Props) {
     if (expandable) {
       setExpanded(!expanded);
       setEnableDefaultButton(true);
+      setShouldExpandNode(undefined)
     }
-  }, [expandable, expanded, setEnableDefaultButton]);
+  }, [expandable, expanded, setEnableDefaultButton, setShouldExpandNode]);
 
   const renderedChildren =
     expanded || (hideRoot && level === 0)

@@ -54,6 +54,7 @@ export interface CommonExternalProps {
   collectionLimit: number;
   sortObjectKeys: SortObjectKeys;
   setEnableDefaultButton: any;
+  setShouldExpandNode: any;
 }
 
 export interface CommonInternalProps extends CommonExternalProps {

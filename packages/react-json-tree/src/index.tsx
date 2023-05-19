@@ -79,6 +79,7 @@ export function JSONTree({
         shouldExpandNodeInitially={shouldExpandNodeInitially}
         shouldExpandNode={shouldExpandNode}
         setEnableDefaultButton={setEnableDefaultButton}
+        setShouldExpandNode={setShouldExpandNode}
         hideRoot={hideRoot}
         getItemString={getItemString}
         postprocessValue={postprocessValue}
