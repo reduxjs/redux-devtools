@@ -5,6 +5,8 @@ import { Expandable } from '.';
 
 interface Props {
   expandable?: Expandable;
+  enableDefaultButton: boolean;
+  setEnableDefaultButton: any;
   shouldExpandNode?: 'expand' | 'collapse' | 'default';
   setShouldExpandNode: any;
 }
@@ -14,6 +16,7 @@ interface ExpandButtonProps {
   expandIcon?: ReactNode;
   shouldExpandNode?: 'expand' | 'collapse' | 'default';
   setShouldExpandNode: any;
+  setEnableDefaultButton: any;
 }
 
 interface CollapseButtonProps {
@@ -21,15 +24,19 @@ interface CollapseButtonProps {
   collapseIcon?: ReactNode;
   shouldExpandNode?: 'expand' | 'collapse' | 'default';
   setShouldExpandNode: any;
+  setEnableDefaultButton: any;
 }
 
 interface DefaultButtonProps {
   defaultIcon?: ReactNode;
   setShouldExpandNode: any;
+  setEnableDefaultButton: any;
 }
 
 function ExpandableButtons({ 
   expandable,
+  enableDefaultButton,
+  setEnableDefaultButton,
   setShouldExpandNode,
   shouldExpandNode
  }: Props){
@@ -41,15 +48,17 @@ function ExpandableButtons({
 
     return (
       <div style={{position: 'absolute', display: 'flex', justifyContent:'center', alignItems: 'center', gap:'1rem', top: '1rem', right: '1rem', cursor: 'pointer'}}>
-        <DefaultButton
+        {enableDefaultButton && <DefaultButton
           defaultIcon={expandable?.defaultIcon}
           setShouldExpandNode={setShouldExpandNode}
-        />
+          setEnableDefaultButton={setEnableDefaultButton}
+        />}
 
         <ExpandButton
           expandableDefaultValue={expandableDefaultValue}
           expandIcon={expandable?.expandIcon}
           setShouldExpandNode={setShouldExpandNode}
+          setEnableDefaultButton={setEnableDefaultButton}
           shouldExpandNode={shouldExpandNode}
         />
         
@@ -57,14 +66,18 @@ function ExpandableButtons({
           expandableDefaultValue={expandable?.defaultValue}
           collapseIcon={expandable?.collapseIcon}
           setShouldExpandNode={setShouldExpandNode}
+          setEnableDefaultButton={setEnableDefaultButton}
           shouldExpandNode={shouldExpandNode}
         />
       </div>
     )
 }
 
-function ExpandButton({ expandableDefaultValue, expandIcon, shouldExpandNode, setShouldExpandNode }: ExpandButtonProps) {
-    const onExpand = () => setShouldExpandNode('expand');
+function ExpandButton({ expandableDefaultValue, expandIcon, shouldExpandNode, setEnableDefaultButton, setShouldExpandNode }: ExpandButtonProps) {
+    const onExpand = () => {
+      setShouldExpandNode('expand');
+      setEnableDefaultButton(true);
+    }
   
     const isDefault = !shouldExpandNode ||shouldExpandNode === 'default'
 
@@ -79,8 +92,11 @@ function ExpandButton({ expandableDefaultValue, expandIcon, shouldExpandNode, se
     return <></>;
   }
   
-  function CollapseButton({ expandableDefaultValue, collapseIcon, shouldExpandNode, setShouldExpandNode }: CollapseButtonProps) {
-    const onCollapse = () => setShouldExpandNode('collapse');
+  function CollapseButton({ expandableDefaultValue, collapseIcon, shouldExpandNode, setEnableDefaultButton, setShouldExpandNode }: CollapseButtonProps) {
+    const onCollapse = () => {
+      setShouldExpandNode('collapse');
+      setEnableDefaultButton(true);
+    }
   
     const isDefault = !shouldExpandNode ||shouldExpandNode === 'default'
 
@@ -95,8 +111,11 @@ function ExpandButton({ expandableDefaultValue, expandIcon, shouldExpandNode, se
     return <></>;
   }
   
-  function DefaultButton({defaultIcon, setShouldExpandNode }:DefaultButtonProps) {
-    const onDefaultCollapse = () => setShouldExpandNode('default');
+  function DefaultButton({defaultIcon, setEnableDefaultButton, setShouldExpandNode }:DefaultButtonProps) {
+    const onDefaultCollapse = () => {
+      setShouldExpandNode('default');
+      setEnableDefaultButton(false)
+    }
     
     return (
       <div role="presentation" onClick={onDefaultCollapse}>

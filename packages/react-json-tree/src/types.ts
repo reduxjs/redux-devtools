@@ -53,6 +53,7 @@ export interface CommonExternalProps {
   isCustomNode: IsCustomNode;
   collectionLimit: number;
   sortObjectKeys: SortObjectKeys;
+  setEnableDefaultButton: any;
 }
 
 export interface CommonInternalProps extends CommonExternalProps {
