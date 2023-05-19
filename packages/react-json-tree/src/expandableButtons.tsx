@@ -5,7 +5,6 @@ import { Expandable } from '.';
 
 interface Props {
   expandable?: Expandable;
-  expandableDefaultValue?: 'expand' | 'collapse';
   shouldExpandNode?: 'expand' | 'collapse' | 'default';
   setShouldExpandNode: any;
 }
@@ -31,7 +30,6 @@ interface DefaultButtonProps {
 
 function ExpandableButtons({ 
   expandable,
-  expandableDefaultValue,
   setShouldExpandNode,
   shouldExpandNode
  }: Props){
@@ -39,13 +37,15 @@ function ExpandableButtons({
         return <></>
     }
 
+    const expandableDefaultValue = expandable?.defaultValue || 'expand'
+
     return (
       <div style={{position: 'absolute', display: 'flex', justifyContent:'center', alignItems: 'center', gap:'1rem', top: '1rem', right: '1rem', cursor: 'pointer'}}>
         <DefaultButton
           defaultIcon={expandable?.defaultIcon}
           setShouldExpandNode={setShouldExpandNode}
         />
-        
+
         <ExpandButton
           expandableDefaultValue={expandableDefaultValue}
           expandIcon={expandable?.expandIcon}
@@ -66,7 +66,9 @@ function ExpandableButtons({
 function ExpandButton({ expandableDefaultValue, expandIcon, shouldExpandNode, setShouldExpandNode }: ExpandButtonProps) {
     const onExpand = () => setShouldExpandNode('expand');
   
-    if (shouldExpandNode === 'collapse' || (shouldExpandNode === 'default' && expandableDefaultValue === 'collapse')) {
+    const isDefault = !shouldExpandNode ||shouldExpandNode === 'default'
+
+    if (shouldExpandNode === 'collapse' || (isDefault && expandableDefaultValue === 'collapse')) {
       return (
         <div role="presentation" onClick={onExpand}>
           {expandIcon || <FontAwesomeIcon icon={faArrowRight} />}
@@ -80,7 +82,9 @@ function ExpandButton({ expandableDefaultValue, expandIcon, shouldExpandNode, se
   function CollapseButton({ expandableDefaultValue, collapseIcon, shouldExpandNode, setShouldExpandNode }: CollapseButtonProps) {
     const onCollapse = () => setShouldExpandNode('collapse');
   
-    if (shouldExpandNode === 'expand' ||(shouldExpandNode === 'default' && expandableDefaultValue === 'expand')) {
+    const isDefault = !shouldExpandNode ||shouldExpandNode === 'default'
+
+    if (shouldExpandNode === 'expand' ||(isDefault && expandableDefaultValue === 'expand')) {
       return (
         <div role="presentation" onClick={onCollapse}>
           {collapseIcon || <FontAwesomeIcon icon={faArrowDown} />}

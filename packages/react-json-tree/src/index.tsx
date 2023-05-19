@@ -58,8 +58,7 @@ export function JSONTree({
   collectionLimit = 50,
   sortObjectKeys = false,
 }: Props) {
-  const expandableDefaultValue = expandable?.defaultValue || 'expand'
-  const [shouldExpandNode, setShouldExpandNode] = useState(expandableDefaultValue);
+  const [shouldExpandNode, setShouldExpandNode] = useState();
 
   const styling = useMemo(
     () =>
@@ -87,7 +86,6 @@ export function JSONTree({
 
       <ExpandableButtons 
         expandable={expandable}
-        expandableDefaultValue={expandableDefaultValue}
         shouldExpandNode={shouldExpandNode}
         setShouldExpandNode={setShouldExpandNode}
       />
