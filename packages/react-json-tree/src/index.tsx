@@ -3,11 +3,12 @@
 // Dave Vedder <veddermatic@gmail.com> http://www.eskimospy.com/
 // port by Daniele Zannotti http://www.github.com/dzannotti <dzannotti@me.com>
 
-import React, { useMemo } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
 import { invertTheme } from 'react-base16-styling';
 import type { StylingValue, Theme } from 'react-base16-styling';
+import ExpandableButtons from './expandableButtons'
 import type {
   CommonExternalProps,
   GetItemString,
@@ -20,6 +21,14 @@ interface Props extends Partial<CommonExternalProps> {
   data: unknown;
   theme?: Theme;
   invertTheme?: boolean;
+  expandable?: Expandable;
+}
+
+interface Expandable {
+  defaultValue?: 'expand' | 'collapse';
+  expandIcon?: ReactNode;
+  collapseIcon?: ReactNode;
+  defaultIcon?: ReactNode;
 }
 
 const identity = (value: any) => value;
@@ -41,7 +50,7 @@ export function JSONTree({
   labelRenderer = defaultLabelRenderer,
   valueRenderer = identity,
   shouldExpandNodeInitially = expandRootNode,
-  shouldExpandNode,
+  expandable,
   hideRoot = false,
   getItemString = defaultItemString,
   postprocessValue = identity,
@@ -49,6 +58,9 @@ export function JSONTree({
   collectionLimit = 50,
   sortObjectKeys = false,
 }: Props) {
+  const expandableDefaultValue = expandable?.defaultValue || 'expand'
+  const [shouldExpandNode, setShouldExpandNode] = useState(expandableDefaultValue);
+
   const styling = useMemo(
     () =>
       createStylingFromTheme(shouldInvertTheme ? invertTheme(theme) : theme),
@@ -72,6 +84,13 @@ export function JSONTree({
         collectionLimit={collectionLimit}
         sortObjectKeys={sortObjectKeys}
       />
+
+      <ExpandableButtons 
+        expandable={expandable}
+        expandableDefaultValue={expandableDefaultValue}
+        shouldExpandNode={shouldExpandNode}
+        setShouldExpandNode={setShouldExpandNode}
+      />
     </ul>
   );
 }
@@ -89,4 +108,4 @@ export type {
   Styling,
   CommonExternalProps,
 } from './types';
-export type { StylingValue };
+export type { Expandable, StylingValue };

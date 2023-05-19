@@ -47,7 +47,6 @@ export interface CommonExternalProps {
   labelRenderer: LabelRenderer;
   valueRenderer: ValueRenderer;
   shouldExpandNodeInitially: ShouldExpandNodeInitially;
-  shouldExpandNode: boolean | undefined;
   hideRoot: boolean;
   getItemString: GetItemString;
   postprocessValue: PostprocessValue;
@@ -61,4 +60,5 @@ export interface CommonInternalProps extends CommonExternalProps {
   circularCache?: CircularCache;
   level?: number;
   isCircular?: boolean;
+  shouldExpandNode?: 'expand' | 'collapse' | 'default';
 }

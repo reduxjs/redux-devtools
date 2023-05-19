@@ -17,6 +17,6 @@ describe('JSONTree', () => {
     const result = render(<JSONTree data={BASIC_DATA} />);
 
     expect(result.type).toBe('ul');
-    expect(result.props.children.type.name).toBe(JSONNode.name);
+    expect(result.props.children[0].type.name).toBe(JSONNode.name);
   });
 });
