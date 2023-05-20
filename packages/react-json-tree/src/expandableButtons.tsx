@@ -77,7 +77,7 @@ function ExpandButton({
 
   if (
     shouldExpandNode === 'collapse' ||
-    (isDefault && expandableDefaultValue === 'collapse')
+    (isDefault && expandableDefaultValue === 'expand')
   ) {
     return (
       <div role="presentation" onClick={onExpand}>
@@ -105,7 +105,7 @@ function CollapseButton({
 
   if (
     shouldExpandNode === 'expand' ||
-    (isDefault && expandableDefaultValue === 'expand')
+    (isDefault && expandableDefaultValue === 'collapse')
   ) {
     return (
       <div role="presentation" onClick={onCollapse}>
