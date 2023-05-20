@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import JSONArrow from './JSONArrow';
-import getCollectionEntries from './getCollectionEntries';
-import JSONNode from './JSONNode';
 import ItemRange from './ItemRange';
+import JSONArrow from './JSONArrow';
+import JSONNode from './JSONNode';
+import { useExpandableButtonContext } from './expandableButtonsContext';
+import getCollectionEntries from './getCollectionEntries';
 import type { CircularCache, CommonInternalProps } from './types';
 
 /**
@@ -110,11 +111,11 @@ export default function JSONNestedNode(props: Props) {
     nodeType,
     nodeTypeIndicator,
     shouldExpandNodeInitially,
-    shouldExpandNode,
-    setShouldExpandNode,
-    setEnableDefaultButton,
     styling,
   } = props;
+
+  const { shouldExpandNode, setShouldExpandNode, setEnableDefaultButton } =
+    useExpandableButtonContext();
 
   const [expanded, setExpanded] = useState<boolean>(
     // calculate individual node expansion if necessary
@@ -124,11 +125,17 @@ export default function JSONNestedNode(props: Props) {
   const defaultExpanded = shouldExpandNodeInitially(keyPath, data, level);
 
   useEffect(() => {
-    switch(shouldExpandNode){
-      case 'expand': setExpanded(true); break;
-      case'collapse': setExpanded(false); break;
-      case'default': setExpanded(defaultExpanded); break;
-      default:
+    switch (shouldExpandNode) {
+      case 'expand':
+        setExpanded(true);
+        break;
+      case 'collapse':
+        setExpanded(false);
+        break;
+      case 'default':
+        setExpanded(defaultExpanded);
+        break;
+      default: // Do nothing
     }
   }, [defaultExpanded, shouldExpandNode]);
 
@@ -136,7 +143,7 @@ export default function JSONNestedNode(props: Props) {
     if (expandable) {
       setExpanded(!expanded);
       setEnableDefaultButton(true);
-      setShouldExpandNode(undefined)
+      setShouldExpandNode(undefined);
     }
   }, [expandable, expanded, setEnableDefaultButton, setShouldExpandNode]);
 

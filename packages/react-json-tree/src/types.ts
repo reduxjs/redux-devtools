@@ -53,8 +53,6 @@ export interface CommonExternalProps {
   isCustomNode: IsCustomNode;
   collectionLimit: number;
   sortObjectKeys: SortObjectKeys;
-  setEnableDefaultButton: any;
-  setShouldExpandNode: any;
 }
 
 export interface CommonInternalProps extends CommonExternalProps {
@@ -62,5 +60,4 @@ export interface CommonInternalProps extends CommonExternalProps {
   circularCache?: CircularCache;
   level?: number;
   isCircular?: boolean;
-  shouldExpandNode?: 'expand' | 'collapse' | 'default';
 }

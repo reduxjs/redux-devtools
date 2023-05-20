@@ -3,12 +3,13 @@
 // Dave Vedder <veddermatic@gmail.com> http://www.eskimospy.com/
 // port by Daniele Zannotti http://www.github.com/dzannotti <dzannotti@me.com>
 
-import React, { ReactNode, useMemo, useState } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
 import { invertTheme } from 'react-base16-styling';
 import type { StylingValue, Theme } from 'react-base16-styling';
-import ExpandableButtons from './expandableButtons'
+import ExpandableButtonsContext from './expandableButtonsContext';
+
 import type {
   CommonExternalProps,
   GetItemString,
@@ -58,9 +59,6 @@ export function JSONTree({
   collectionLimit = 50,
   sortObjectKeys = false,
 }: Props) {
-  const [enableDefaultButton, setEnableDefaultButton] = useState(false);
-  const [shouldExpandNode, setShouldExpandNode] = useState();
-
   const styling = useMemo(
     () =>
       createStylingFromTheme(shouldInvertTheme ? invertTheme(theme) : theme),
@@ -69,31 +67,22 @@ export function JSONTree({
 
   return (
     <ul {...styling('tree')}>
-      <JSONNode
-        keyPath={hideRoot ? [] : keyPath}
-        value={postprocessValue(value)}
-        isCustomNode={isCustomNode}
-        styling={styling}
-        labelRenderer={labelRenderer}
-        valueRenderer={valueRenderer}
-        shouldExpandNodeInitially={shouldExpandNodeInitially}
-        shouldExpandNode={shouldExpandNode}
-        setEnableDefaultButton={setEnableDefaultButton}
-        setShouldExpandNode={setShouldExpandNode}
-        hideRoot={hideRoot}
-        getItemString={getItemString}
-        postprocessValue={postprocessValue}
-        collectionLimit={collectionLimit}
-        sortObjectKeys={sortObjectKeys}
-      />
-
-      <ExpandableButtons 
-        expandable={expandable}
-        enableDefaultButton={enableDefaultButton}
-        setEnableDefaultButton={setEnableDefaultButton}
-        shouldExpandNode={shouldExpandNode}
-        setShouldExpandNode={setShouldExpandNode}
-      />
+      <ExpandableButtonsContext expandable={expandable}>
+        <JSONNode
+          keyPath={hideRoot ? [] : keyPath}
+          value={postprocessValue(value)}
+          isCustomNode={isCustomNode}
+          styling={styling}
+          labelRenderer={labelRenderer}
+          valueRenderer={valueRenderer}
+          shouldExpandNodeInitially={shouldExpandNodeInitially}
+          hideRoot={hideRoot}
+          getItemString={getItemString}
+          postprocessValue={postprocessValue}
+          collectionLimit={collectionLimit}
+          sortObjectKeys={sortObjectKeys}
+        />
+      </ExpandableButtonsContext>
     </ul>
   );
 }
