@@ -46,6 +46,7 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
 
   return {
     tree: {
+      position: 'relative',
       border: 0,
       padding: 0,
       marginTop: '0.5em',
