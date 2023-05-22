@@ -24,7 +24,11 @@ interface Props {
 
 const ExpandableButtonsContext = createContext<Context>({} as Context);
 
-function ExpandableButtonsContextProvider({ expandable, children, styling }: Props) {
+function ExpandableButtonsContextProvider({
+  expandable,
+  children,
+  styling,
+}: Props) {
   const [enableDefaultButton, setEnableDefaultButton] = useState(false);
   const [shouldExpandNode, setShouldExpandNode] = useState();
 
@@ -41,7 +45,9 @@ function ExpandableButtonsContextProvider({ expandable, children, styling }: Pro
   return (
     <ExpandableButtonsContext.Provider value={value}>
       {children}
-      {expandable && <ExpandableButtons expandable={expandable} styling={styling} />}
+      {expandable && (
+        <ExpandableButtons expandable={expandable} styling={styling} />
+      )}
     </ExpandableButtonsContext.Provider>
   );
 }

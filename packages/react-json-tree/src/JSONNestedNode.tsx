@@ -118,37 +118,46 @@ export default function JSONNestedNode(props: Props) {
 
   const [defaultExpanded] = useState<boolean>(
     // calculate individual node expansion if necessary
-    isCircular 
-      ? false 
-      : (function getDefault(){
+    isCircular
+      ? false
+      : (function getDefault() {
           switch (shouldExpandNode) {
-          case 'expand': return true;
-          case 'collapse': return false;
-          default: return shouldExpandNodeInitially(keyPath, data, level);
-        }
-      })()
+            case 'expand':
+              return true;
+            case 'collapse':
+              return false;
+            default:
+              return shouldExpandNodeInitially(keyPath, data, level);
+          }
+        })()
   );
 
   const [, setTriggerReRender] = useState<boolean>(defaultExpanded);
 
   /**
    * Used the useRef to handle expanded because calling a setState in a recursive implementation
-   * could lead to a "Maximum update depth exceeded" error */ 
-  const expandedRef = useRef<boolean>(defaultExpanded)  
-  
+   * could lead to a "Maximum update depth exceeded" error */
+  const expandedRef = useRef<boolean>(defaultExpanded);
+
   switch (shouldExpandNode) {
-    case 'expand': expandedRef.current = isCircular ? false : true; break;
-    case 'collapse': expandedRef.current = false; break;
-    case 'default': expandedRef.current = defaultExpanded; break;
+    case 'expand':
+      expandedRef.current = isCircular ? false : true;
+      break;
+    case 'collapse':
+      expandedRef.current = false;
+      break;
+    case 'default':
+      expandedRef.current = defaultExpanded;
+      break;
     default: //Do nothing;
   }
 
   const handleClick = useCallback(() => {
     if (expandable) {
-      expandedRef.current = !expandedRef.current
-      setTriggerReRender((e) => !e)
+      expandedRef.current = !expandedRef.current;
+      setTriggerReRender((e) => !e);
       setEnableDefaultButton(true);
-      setShouldExpandNode(undefined)
+      setShouldExpandNode(undefined);
     }
   }, [expandable, setEnableDefaultButton, setShouldExpandNode]);
 
@@ -169,7 +178,12 @@ export default function JSONNestedNode(props: Props) {
     createItemString(data, collectionLimit),
     keyPath
   );
-  const stylingArgs = [keyPath, nodeType, expandedRef.current, expandable] as const;
+  const stylingArgs = [
+    keyPath,
+    nodeType,
+    expandedRef.current,
+    expandable,
+  ] as const;
 
   return hideRoot ? (
     <li {...styling('rootNode', ...stylingArgs)}>

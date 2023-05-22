@@ -58,7 +58,7 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
       WebkitUserSelect: 'none',
       backgroundColor: colors.BACKGROUND_COLOR,
     },
-    
+
     expandable: {
       color: colors.TEXT_COLOR,
       backgroundColor: colors.BACKGROUND_COLOR,
