@@ -34,7 +34,7 @@ function ExpandCollapseButtons({ expandCollapseAll, styling }: Props) {
   const expandableDefaultValue = expandCollapseAll?.defaultValue || 'expand';
 
   return (
-    <div {...styling('expandable')}>
+    <div {...styling('expandCollapseAll')}>
       {enableDefaultButton && (
         <DefaultButton defaultIcon={expandCollapseAll?.defaultIcon} />
       )}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Map } from 'immutable';
 import { JSONTree, StylingValue } from 'react-json-tree';
+import veryDeepJson from './very-deep-json';
 
 const getLabelStyle: StylingValue = ({ style }, nodeType, expanded) => ({
   style: {
@@ -127,77 +128,13 @@ const theme = {
 
 const App = () => (
   <div>
-    <JSONTree data={data} theme={theme} invertTheme />
-    <br />
-    <h3>Dark Theme</h3>
-    <JSONTree data={data} theme={theme} invertTheme={false} />
-    <br />
-    <h3>Hidden Root</h3>
-    <JSONTree data={data} theme={theme} hideRoot />
-    <br />
-    <h3>Base16 Greenscreen Theme</h3>
-    <JSONTree data={data} theme="greenscreen" invertTheme={false} />
-    <h4>Inverted Theme</h4>
-    <JSONTree data={data} theme="greenscreen" invertTheme />
-    <br />
-    <h3>Style Customization</h3>
-    <ul>
-      <li>
-        Label changes between uppercase/lowercase based on the expanded state.
-      </li>
-      <li>Array keys are styled based on their parity.</li>
-      <li>
-        The labels of objects, arrays, and iterables are customized as &quot;//
-        type&quot;.
-      </li>
-      <li>See code for details.</li>
-    </ul>
+    <p>Very deep JSON</p>
     <div>
       <JSONTree
-        data={data}
-        theme={{
-          extend: theme,
-          nestedNodeLabel: getLabelStyle,
-          value: getBoolStyle,
-          valueLabel: getValueLabelStyle,
-        }}
-        getItemString={getItemString}
-      />
-    </div>
-    <h3>More Fine Grained Rendering</h3>
-    <p>
-      Pass <code>labelRenderer</code> or <code>valueRenderer</code>.
-    </p>
-    <div>
-      <JSONTree
-        data={data}
+        data={veryDeepJson}
         theme={theme}
-        labelRenderer={([raw]) => <span>(({raw})):</span>}
-        valueRenderer={(raw) => (
-          <em>
-            <span role="img" aria-label="mellow">
-              😐
-            </span>{' '}
-            {raw as string}{' '}
-            <span role="img" aria-label="mellow">
-              😐
-            </span>
-          </em>
-        )}
-      />
-    </div>
-    <p>
-      Sort object keys with <code>sortObjectKeys</code> prop.
-    </p>
-    <div>
-      <JSONTree data={data} theme={theme} sortObjectKeys />
-    </div>
-    <p>Collapsed root node</p>
-    <div>
-      <JSONTree
-        data={data}
-        theme={theme}
-        shouldExpandNodeInitially={() => false}
+        expandCollapseAll={{ defaultValue: 'expand' }}
+        shouldExpandNodeInitially={(_, __, level) => level < 3}
       />
     </div>
   </div>

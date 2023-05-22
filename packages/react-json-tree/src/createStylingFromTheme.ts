@@ -59,7 +59,7 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
       backgroundColor: colors.BACKGROUND_COLOR,
     },
 
-    expandable: {
+    expandCollapseAll: {
       color: colors.TEXT_COLOR,
       backgroundColor: colors.BACKGROUND_COLOR,
       position: 'absolute',
