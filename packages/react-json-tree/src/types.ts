@@ -10,7 +10,8 @@ export type GetItemString = (
   data: unknown,
   itemType: React.ReactNode,
   itemString: string,
-  keyPath: KeyPath
+  keyPath: KeyPath,
+  isExpanded: boolean,
 ) => React.ReactNode;
 
 export type LabelRenderer = (
