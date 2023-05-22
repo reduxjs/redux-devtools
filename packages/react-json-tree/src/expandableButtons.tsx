@@ -7,9 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactNode } from 'react';
 import { Expandable } from '.';
 import { useExpandableButtonContext } from './expandableButtonsContext';
+import { StylingFunction } from 'react-base16-styling';
 
 interface ExpandableButtonsProps {
   expandable: Expandable;
+  styling: StylingFunction;
 }
 
 interface ExpandButtonProps {
@@ -26,24 +28,13 @@ interface DefaultButtonProps {
   defaultIcon?: ReactNode;
 }
 
-function ExpandableButtons({ expandable }: ExpandableButtonsProps) {
+function ExpandableButtons({ expandable, styling }: ExpandableButtonsProps) {
   const { enableDefaultButton } = useExpandableButtonContext();
 
   const expandableDefaultValue = expandable?.defaultValue || 'expand';
 
   return (
-    <div
-      style={{
-        position: 'absolute',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: '1rem',
-        top: '1rem',
-        right: '1rem',
-        cursor: 'pointer',
-      }}
-    >
+    <div {...styling('expandable')}>
       {enableDefaultButton && (
         <DefaultButton defaultIcon={expandable?.defaultIcon} />
       )}

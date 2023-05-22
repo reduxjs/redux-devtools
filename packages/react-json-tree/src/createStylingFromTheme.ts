@@ -58,6 +58,19 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
       WebkitUserSelect: 'none',
       backgroundColor: colors.BACKGROUND_COLOR,
     },
+    
+    expandable: {
+      color: colors.TEXT_COLOR,
+      backgroundColor: colors.BACKGROUND_COLOR,
+      position: 'absolute',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: '1rem',
+      top: '1rem',
+      right: '1rem',
+      cursor: 'pointer',
+    },
 
     value: ({ style }, nodeType, keyPath) => ({
       style: {

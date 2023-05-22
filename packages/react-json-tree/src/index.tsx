@@ -67,7 +67,7 @@ export function JSONTree({
 
   return (
     <ul {...styling('tree')}>
-      <ExpandableButtonsContext expandable={expandable}>
+      <ExpandableButtonsContext expandable={expandable} styling={styling}>
         <JSONNode
           keyPath={hideRoot ? [] : keyPath}
           value={postprocessValue(value)}
