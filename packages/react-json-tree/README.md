@@ -137,13 +137,13 @@ Their full signatures are:
 - `labelRenderer: function(keyPath, nodeType, expanded, expandable)`
 - `valueRenderer: function(valueAsString, value, ...keyPath)`
 
-#### Customize Expandable Buttons
+#### Customize "Expand All/Collapse All" Buttons
 
-Passing the `expandable` props will activate in the top right corner of the JSONTree component the `expand all/collapse all` buttons. You can pass a JSON to customize the expand all/collapse all icons. The default icons are from [FontAwesome](https://fontawesome.com/).
+Passing the `expandCollapseAll` props will activate in the top right corner of the JSONTree component the `expand all/collapse all` buttons. You can pass a JSON to customize the expand all/collapse all icons. The default icons are from [FontAwesome](https://fontawesome.com/).
 
 ```jsx
 <JSONTree
-  expandable={{
+  expandCollapseAll={{
     defaultValue: 'expand',
     expandIcon: /* your custom expand icon */,
     collapseIcon: /* your custom collapse icon */,

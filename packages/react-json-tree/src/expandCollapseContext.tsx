@@ -5,8 +5,8 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { Expandable } from '.';
-import ExpandableButtons from './expandableButtons';
+import { ExpandCollapseAll } from '.';
+import ExpandCollapseButtons from './expandCollapseButtons';
 import { StylingFunction } from 'react-base16-styling';
 
 interface Context {
@@ -18,14 +18,14 @@ interface Context {
 
 interface Props {
   children: ReactNode;
-  expandable?: Expandable;
+  expandCollapseAll?: ExpandCollapseAll;
   styling: StylingFunction;
 }
 
-const ExpandableButtonsContext = createContext<Context>({} as Context);
+const ExpandCollapseAllContext = createContext<Context>({} as Context);
 
-function ExpandableButtonsContextProvider({
-  expandable,
+function ExpandCollapseAllContextProvider({
+  expandCollapseAll,
   children,
   styling,
 }: Props) {
@@ -43,16 +43,19 @@ function ExpandableButtonsContextProvider({
   );
 
   return (
-    <ExpandableButtonsContext.Provider value={value}>
+    <ExpandCollapseAllContext.Provider value={value}>
       {children}
-      {expandable && (
-        <ExpandableButtons expandable={expandable} styling={styling} />
+      {expandCollapseAll && (
+        <ExpandCollapseButtons
+          expandCollapseAll={expandCollapseAll}
+          styling={styling}
+        />
       )}
-    </ExpandableButtonsContext.Provider>
+    </ExpandCollapseAllContext.Provider>
   );
 }
 
-export const useExpandableButtonContext = () =>
-  useContext(ExpandableButtonsContext);
+export const useExpandCollapseAllContext = () =>
+  useContext(ExpandCollapseAllContext);
 
-export default ExpandableButtonsContextProvider;
+export default ExpandCollapseAllContextProvider;

@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import ItemRange from './ItemRange';
 import JSONArrow from './JSONArrow';
 import JSONNode from './JSONNode';
-import { useExpandableButtonContext } from './expandableButtonsContext';
+import { useExpandCollapseAllContext } from './expandCollapseContext';
 import getCollectionEntries from './getCollectionEntries';
 import type { CircularCache, CommonInternalProps } from './types';
 
@@ -114,7 +114,7 @@ export default function JSONNestedNode(props: Props) {
     styling,
   } = props;
   const { expandAllState, setExpandAllState, setEnableDefaultButton } =
-    useExpandableButtonContext();
+    useExpandCollapseAllContext();
 
   const [defaultExpanded] = useState<boolean>(
     // calculate individual node expansion if necessary

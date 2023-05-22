@@ -8,7 +8,7 @@ import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
 import { invertTheme } from 'react-base16-styling';
 import type { StylingValue, Theme } from 'react-base16-styling';
-import ExpandableButtonsContext from './expandableButtonsContext';
+import ExpandCollapseAllButtonsContext from './expandCollapseContext';
 
 import type {
   CommonExternalProps,
@@ -22,10 +22,10 @@ interface Props extends Partial<CommonExternalProps> {
   data: unknown;
   theme?: Theme;
   invertTheme?: boolean;
-  expandable?: Expandable;
+  expandCollapseAll?: ExpandCollapseAll;
 }
 
-interface Expandable {
+interface ExpandCollapseAll {
   defaultValue?: 'expand' | 'collapse';
   expandIcon?: ReactNode;
   collapseIcon?: ReactNode;
@@ -51,7 +51,7 @@ export function JSONTree({
   labelRenderer = defaultLabelRenderer,
   valueRenderer = identity,
   shouldExpandNodeInitially = expandRootNode,
-  expandable,
+  expandCollapseAll,
   hideRoot = false,
   getItemString = defaultItemString,
   postprocessValue = identity,
@@ -67,7 +67,10 @@ export function JSONTree({
 
   return (
     <ul {...styling('tree')}>
-      <ExpandableButtonsContext expandable={expandable} styling={styling}>
+      <ExpandCollapseAllButtonsContext
+        expandCollapseAll={expandCollapseAll}
+        styling={styling}
+      >
         <JSONNode
           keyPath={hideRoot ? [] : keyPath}
           value={postprocessValue(value)}
@@ -82,7 +85,7 @@ export function JSONTree({
           collectionLimit={collectionLimit}
           sortObjectKeys={sortObjectKeys}
         />
-      </ExpandableButtonsContext>
+      </ExpandCollapseAllButtonsContext>
     </ul>
   );
 }
@@ -100,4 +103,4 @@ export type {
   Styling,
   CommonExternalProps,
 } from './types';
-export type { Expandable, StylingValue };
+export type { ExpandCollapseAll, StylingValue };

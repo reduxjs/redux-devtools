@@ -5,12 +5,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactNode } from 'react';
-import { Expandable } from '.';
-import { useExpandableButtonContext } from './expandableButtonsContext';
+import { ExpandCollapseAll } from '.';
+import { useExpandCollapseAllContext } from './expandCollapseContext';
 import { StylingFunction } from 'react-base16-styling';
 
-interface ExpandableButtonsProps {
-  expandable: Expandable;
+interface Props {
+  expandCollapseAll: ExpandCollapseAll;
   styling: StylingFunction;
 }
 
@@ -28,25 +28,25 @@ interface DefaultButtonProps {
   defaultIcon?: ReactNode;
 }
 
-function ExpandableButtons({ expandable, styling }: ExpandableButtonsProps) {
-  const { enableDefaultButton } = useExpandableButtonContext();
+function ExpandCollapseButtons({ expandCollapseAll, styling }: Props) {
+  const { enableDefaultButton } = useExpandCollapseAllContext();
 
-  const expandableDefaultValue = expandable?.defaultValue || 'expand';
+  const expandableDefaultValue = expandCollapseAll?.defaultValue || 'expand';
 
   return (
     <div {...styling('expandable')}>
       {enableDefaultButton && (
-        <DefaultButton defaultIcon={expandable?.defaultIcon} />
+        <DefaultButton defaultIcon={expandCollapseAll?.defaultIcon} />
       )}
 
       <ExpandButton
         expandableDefaultValue={expandableDefaultValue}
-        expandIcon={expandable?.expandIcon}
+        expandIcon={expandCollapseAll?.expandIcon}
       />
 
       <CollapseButton
-        expandableDefaultValue={expandable?.defaultValue}
-        collapseIcon={expandable?.collapseIcon}
+        expandableDefaultValue={expandCollapseAll?.defaultValue}
+        collapseIcon={expandCollapseAll?.collapseIcon}
       />
     </div>
   );
@@ -57,7 +57,7 @@ function ExpandButton({
   expandIcon,
 }: ExpandButtonProps) {
   const { expandAllState, setExpandAllState, setEnableDefaultButton } =
-    useExpandableButtonContext();
+    useExpandCollapseAllContext();
 
   const onExpand = () => {
     setExpandAllState('expand');
@@ -85,7 +85,7 @@ function CollapseButton({
   collapseIcon,
 }: CollapseButtonProps) {
   const { expandAllState, setExpandAllState, setEnableDefaultButton } =
-    useExpandableButtonContext();
+    useExpandCollapseAllContext();
 
   const onCollapse = () => {
     setExpandAllState('collapse');
@@ -110,7 +110,7 @@ function CollapseButton({
 
 function DefaultButton({ defaultIcon }: DefaultButtonProps) {
   const { setExpandAllState, setEnableDefaultButton } =
-    useExpandableButtonContext();
+    useExpandCollapseAllContext();
 
   const onDefaultCollapse = () => {
     setExpandAllState('default');
@@ -126,4 +126,4 @@ function DefaultButton({ defaultIcon }: DefaultButtonProps) {
   return <></>;
 }
 
-export default ExpandableButtons;
+export default ExpandCollapseButtons;
