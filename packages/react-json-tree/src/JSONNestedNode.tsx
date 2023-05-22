@@ -147,7 +147,7 @@ export default function JSONNestedNode(props: Props) {
       expandedRef.current = false;
       break;
     case 'default':
-      expandedRef.current = defaultExpanded;
+      expandedRef.current = shouldExpandNodeInitially(keyPath, data, level);
       break;
     default: //Do nothing;
   }
