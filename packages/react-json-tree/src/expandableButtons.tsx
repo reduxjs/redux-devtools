@@ -56,18 +56,18 @@ function ExpandButton({
   expandableDefaultValue,
   expandIcon,
 }: ExpandButtonProps) {
-  const { shouldExpandNode, setShouldExpandNode, setEnableDefaultButton } =
+  const { expandAllState, setExpandAllState, setEnableDefaultButton } =
     useExpandableButtonContext();
 
   const onExpand = () => {
-    setShouldExpandNode('expand');
+    setExpandAllState('expand');
     setEnableDefaultButton(true);
   };
 
-  const isDefault = !shouldExpandNode || shouldExpandNode === 'default';
+  const isDefault = !expandAllState || expandAllState === 'default';
 
   if (
-    shouldExpandNode === 'collapse' ||
+    expandAllState === 'collapse' ||
     (isDefault && expandableDefaultValue === 'expand')
   ) {
     return (
@@ -84,18 +84,18 @@ function CollapseButton({
   expandableDefaultValue,
   collapseIcon,
 }: CollapseButtonProps) {
-  const { shouldExpandNode, setShouldExpandNode, setEnableDefaultButton } =
+  const { expandAllState, setExpandAllState, setEnableDefaultButton } =
     useExpandableButtonContext();
 
   const onCollapse = () => {
-    setShouldExpandNode('collapse');
+    setExpandAllState('collapse');
     setEnableDefaultButton(true);
   };
 
-  const isDefault = !shouldExpandNode || shouldExpandNode === 'default';
+  const isDefault = !expandAllState || expandAllState === 'default';
 
   if (
-    shouldExpandNode === 'expand' ||
+    expandAllState === 'expand' ||
     (isDefault && expandableDefaultValue === 'collapse')
   ) {
     return (
@@ -109,11 +109,11 @@ function CollapseButton({
 }
 
 function DefaultButton({ defaultIcon }: DefaultButtonProps) {
-  const { setShouldExpandNode, setEnableDefaultButton } =
+  const { setExpandAllState, setEnableDefaultButton } =
     useExpandableButtonContext();
 
   const onDefaultCollapse = () => {
-    setShouldExpandNode('default');
+    setExpandAllState('default');
     setEnableDefaultButton(false);
   };
 

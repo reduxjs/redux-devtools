@@ -113,7 +113,7 @@ export default function JSONNestedNode(props: Props) {
     shouldExpandNodeInitially,
     styling,
   } = props;
-  const { shouldExpandNode, setEnableDefaultButton, setShouldExpandNode } =
+  const { expandAllState, setExpandAllState, setEnableDefaultButton } =
     useExpandableButtonContext();
 
   const [defaultExpanded] = useState<boolean>(
@@ -121,7 +121,7 @@ export default function JSONNestedNode(props: Props) {
     isCircular
       ? false
       : (function getDefault() {
-          switch (shouldExpandNode) {
+          switch (expandAllState) {
             case 'expand':
               return true;
             case 'collapse':
@@ -139,7 +139,7 @@ export default function JSONNestedNode(props: Props) {
    * could lead to a "Maximum update depth exceeded" error */
   const expandedRef = useRef<boolean>(defaultExpanded);
 
-  switch (shouldExpandNode) {
+  switch (expandAllState) {
     case 'expand':
       expandedRef.current = isCircular ? false : true;
       break;
@@ -157,9 +157,9 @@ export default function JSONNestedNode(props: Props) {
       expandedRef.current = !expandedRef.current;
       setTriggerReRender((e) => !e);
       setEnableDefaultButton(true);
-      setShouldExpandNode(undefined);
+      setExpandAllState(undefined);
     }
-  }, [expandable, setEnableDefaultButton, setShouldExpandNode]);
+  }, [expandable, setEnableDefaultButton, setExpandAllState]);
 
   const renderedChildren =
     expandedRef.current || (hideRoot && level === 0)

@@ -12,8 +12,8 @@ import { StylingFunction } from 'react-base16-styling';
 interface Context {
   enableDefaultButton: boolean;
   setEnableDefaultButton: any;
-  shouldExpandNode?: 'expand' | 'collapse' | 'default';
-  setShouldExpandNode: any;
+  expandAllState?: 'expand' | 'collapse' | 'default';
+  setExpandAllState: any;
 }
 
 interface Props {
@@ -30,16 +30,16 @@ function ExpandableButtonsContextProvider({
   styling,
 }: Props) {
   const [enableDefaultButton, setEnableDefaultButton] = useState(false);
-  const [shouldExpandNode, setShouldExpandNode] = useState();
+  const [expandAllState, setExpandAllState] = useState();
 
   const value = useMemo(
     () => ({
       enableDefaultButton,
       setEnableDefaultButton,
-      shouldExpandNode,
-      setShouldExpandNode,
+      expandAllState,
+      setExpandAllState,
     }),
-    [enableDefaultButton, shouldExpandNode]
+    [enableDefaultButton, expandAllState]
   );
 
   return (
