@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react';
-import JSONArrow from './JSONArrow';
-import getCollectionEntries from './getCollectionEntries';
-import JSONNode from './JSONNode';
+import React, { useCallback, useRef, useState } from 'react';
 import ItemRange from './ItemRange';
+import JSONArrow from './JSONArrow';
+import JSONNode from './JSONNode';
+import { useExpandCollapseAllContext } from './expandCollapseContext';
+import getCollectionEntries from './getCollectionEntries';
 import type { CircularCache, CommonInternalProps } from './types';
 
 /**
@@ -112,23 +113,61 @@ export default function JSONNestedNode(props: Props) {
     shouldExpandNodeInitially,
     styling,
   } = props;
+  const { expandAllState, setExpandAllState, setEnableDefaultButton } =
+    useExpandCollapseAllContext();
 
-  const [expanded, setExpanded] = useState<boolean>(
+  const [defaultExpanded] = useState<boolean>(
     // calculate individual node expansion if necessary
-    isCircular ? false : shouldExpandNodeInitially(keyPath, data, level)
+    isCircular
+      ? false
+      : (function getDefault() {
+          switch (expandAllState) {
+            case 'expand':
+              return true;
+            case 'collapse':
+              return false;
+            default:
+              return shouldExpandNodeInitially(keyPath, data, level);
+          }
+        })()
   );
 
+  const [, setTriggerReRender] = useState<boolean>(defaultExpanded);
+
+  /**
+   * Used the useRef to handle expanded because calling a setState in a recursive implementation
+   * could lead to a "Maximum update depth exceeded" error */
+  const expandedRef = useRef<boolean>(defaultExpanded);
+
+  switch (expandAllState) {
+    case 'expand':
+      expandedRef.current = isCircular ? false : true;
+      break;
+    case 'collapse':
+      expandedRef.current = false;
+      break;
+    case 'default':
+      expandedRef.current = shouldExpandNodeInitially(keyPath, data, level);
+      break;
+    default: //Do nothing;
+  }
+
   const handleClick = useCallback(() => {
-    if (expandable) setExpanded(!expanded);
-  }, [expandable, expanded]);
+    if (expandable) {
+      expandedRef.current = !expandedRef.current;
+      setTriggerReRender((e) => !e);
+      setEnableDefaultButton(true);
+      setExpandAllState(undefined);
+    }
+  }, [expandable, setEnableDefaultButton, setExpandAllState]);
 
   const renderedChildren =
-    expanded || (hideRoot && level === 0)
+    expandedRef.current || (hideRoot && level === 0)
       ? renderChildNodes({ ...props, circularCache, level: level + 1 })
       : null;
 
   const itemType = (
-    <span {...styling('nestedNodeItemType', expanded)}>
+    <span {...styling('nestedNodeItemType', expandedRef.current)}>
       {nodeTypeIndicator}
     </span>
   );
@@ -137,9 +176,15 @@ export default function JSONNestedNode(props: Props) {
     data,
     itemType,
     createItemString(data, collectionLimit),
-    keyPath
+    keyPath,
+    expandedRef.current,
   );
-  const stylingArgs = [keyPath, nodeType, expanded, expandable] as const;
+  const stylingArgs = [
+    keyPath,
+    nodeType,
+    expandedRef.current,
+    expandable,
+  ] as const;
 
   return hideRoot ? (
     <li {...styling('rootNode', ...stylingArgs)}>
@@ -153,7 +198,7 @@ export default function JSONNestedNode(props: Props) {
         <JSONArrow
           styling={styling}
           nodeType={nodeType}
-          expanded={expanded}
+          expanded={expandedRef.current}
           onClick={handleClick}
         />
       )}

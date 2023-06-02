@@ -3,11 +3,13 @@
 // Dave Vedder <veddermatic@gmail.com> http://www.eskimospy.com/
 // port by Daniele Zannotti http://www.github.com/dzannotti <dzannotti@me.com>
 
-import React, { useMemo } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
 import { invertTheme } from 'react-base16-styling';
 import type { StylingValue, Theme } from 'react-base16-styling';
+import ExpandCollapseAllButtonsContext from './expandCollapseContext';
+
 import type {
   CommonExternalProps,
   GetItemString,
@@ -20,6 +22,14 @@ interface Props extends Partial<CommonExternalProps> {
   data: unknown;
   theme?: Theme;
   invertTheme?: boolean;
+  expandCollapseAll?: ExpandCollapseAll;
+}
+
+interface ExpandCollapseAll {
+  defaultValue?: 'expand' | 'collapse';
+  expandIcon?: ReactNode;
+  collapseIcon?: ReactNode;
+  defaultIcon?: ReactNode;
 }
 
 const identity = (value: any) => value;
@@ -41,6 +51,7 @@ export function JSONTree({
   labelRenderer = defaultLabelRenderer,
   valueRenderer = identity,
   shouldExpandNodeInitially = expandRootNode,
+  expandCollapseAll,
   hideRoot = false,
   getItemString = defaultItemString,
   postprocessValue = identity,
@@ -56,20 +67,25 @@ export function JSONTree({
 
   return (
     <ul {...styling('tree')}>
-      <JSONNode
-        keyPath={hideRoot ? [] : keyPath}
-        value={postprocessValue(value)}
-        isCustomNode={isCustomNode}
+      <ExpandCollapseAllButtonsContext
+        expandCollapseAll={expandCollapseAll}
         styling={styling}
-        labelRenderer={labelRenderer}
-        valueRenderer={valueRenderer}
-        shouldExpandNodeInitially={shouldExpandNodeInitially}
-        hideRoot={hideRoot}
-        getItemString={getItemString}
-        postprocessValue={postprocessValue}
-        collectionLimit={collectionLimit}
-        sortObjectKeys={sortObjectKeys}
-      />
+      >
+        <JSONNode
+          keyPath={hideRoot ? [] : keyPath}
+          value={postprocessValue(value)}
+          isCustomNode={isCustomNode}
+          styling={styling}
+          labelRenderer={labelRenderer}
+          valueRenderer={valueRenderer}
+          shouldExpandNodeInitially={shouldExpandNodeInitially}
+          hideRoot={hideRoot}
+          getItemString={getItemString}
+          postprocessValue={postprocessValue}
+          collectionLimit={collectionLimit}
+          sortObjectKeys={sortObjectKeys}
+        />
+      </ExpandCollapseAllButtonsContext>
     </ul>
   );
 }
@@ -87,4 +103,4 @@ export type {
   Styling,
   CommonExternalProps,
 } from './types';
-export type { StylingValue };
+export type { ExpandCollapseAll, StylingValue };

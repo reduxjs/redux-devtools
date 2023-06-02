@@ -46,6 +46,7 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
 
   return {
     tree: {
+      position: 'relative',
       border: 0,
       padding: 0,
       marginTop: '0.5em',
@@ -56,6 +57,19 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
       MozUserSelect: 'none',
       WebkitUserSelect: 'none',
       backgroundColor: colors.BACKGROUND_COLOR,
+    },
+
+    expandCollapseAll: {
+      color: colors.TEXT_COLOR,
+      backgroundColor: colors.BACKGROUND_COLOR,
+      position: 'absolute',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: '1rem',
+      top: '1rem',
+      right: '1rem',
+      cursor: 'pointer',
     },
 
     value: ({ style }, nodeType, keyPath) => ({
