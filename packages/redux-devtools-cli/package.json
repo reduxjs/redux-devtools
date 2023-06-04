@@ -38,7 +38,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "engines": {
-    "node": "^14.13.1 || ^16.13.0 || >= 18.12.0"
+    "node": "^16.13.0 || >= 18.12.0"
   },
   "dependencies": {
     "@apollo/server": "^4.7.1",
@@ -50,7 +50,7 @@
     "cross-spawn": "^7.0.3",
     "electron": "^24.4.1",
     "express": "^4.18.2",
-    "get-port": "^6.1.2",
+    "get-port": "^7.0.0",
     "graphql": "^16.6.0",
     "knex": "^2.4.2",
     "lodash-es": "^4.17.21",
