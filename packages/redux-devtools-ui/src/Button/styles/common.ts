@@ -43,7 +43,7 @@ const both = (tooltipPosition: TooltipPosition) => {
       `;
     default:
       return `
-       transform: translate(-50%, -100%);
+       transform: translate(-30%, -100%);
       `;
   }
 };
