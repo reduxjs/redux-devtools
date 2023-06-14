@@ -163,8 +163,8 @@ importers:
         specifier: ^9.1.2
         version: 9.1.2(@babel/core@7.22.1)(webpack@5.85.0)
       chromedriver:
-        specifier: ^112.0.1
-        version: 112.0.1
+        specifier: ^114.0.2
+        version: 114.0.2
       copy-webpack-plugin:
         specifier: ^11.0.0
         version: 11.0.0(webpack@5.85.0)
@@ -178,8 +178,8 @@ importers:
         specifier: ^6.8.1
         version: 6.8.1(webpack@5.85.0)
       electron:
-        specifier: ^24.4.1
-        version: 24.4.1
+        specifier: ^25.1.0
+        version: 25.1.0
       eslint:
         specifier: ^8.42.0
         version: 8.42.0
@@ -1357,8 +1357,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       electron:
-        specifier: ^24.4.1
-        version: 24.4.1
+        specifier: ^25.1.0
+        version: 25.1.0
       express:
         specifier: ^4.18.2
         version: 4.18.2
@@ -2672,7 +2672,7 @@ importers:
         version: 10.12.16(react-dom@18.2.0)(react@18.2.0)
       msw:
         specifier: ^1.2.1
-        version: 1.2.1(typescript@5.0.4)
+        version: 1.2.2(typescript@5.0.4)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -8335,7 +8335,7 @@ packages:
       strict-event-emitter: 0.2.8
       uuid: 8.3.2
     optionalDependencies:
-      msw: 1.2.1(typescript@5.0.4)
+      msw: 1.2.2(typescript@5.0.4)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -12400,8 +12400,8 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
-  /chromedriver@112.0.1:
-    resolution: {integrity: sha512-ieQzvellbtPY4MUrFzzayC1bZa/HoBsGXejUQJhAPWcYALxtkjUZNUYWbojMjIzf8iIhVda9VvdXiRKqdlN7ow==}
+  /chromedriver@114.0.2:
+    resolution: {integrity: sha512-v0qrXRBknbxqmtklG7RWOe3TJ/dLaHhtB0jVxE7BAdYERxUjEaNRyqBwoGgVfQDibHCB0swzvzsj158nnfPgZw==}
     engines: {node: '>=16'}
     hasBin: true
     requiresBuild: true
@@ -13716,8 +13716,8 @@ packages:
     resolution: {integrity: sha512-jdie3RiEgygvDTyS2sgjq71B36q2cDSBfPlwzUyuOrfYTNoYWyBxxjGJV/HAu3A2hB0Y+HesvCVkVAFoCKwCSw==}
     dev: true
 
-  /electron@24.4.1:
-    resolution: {integrity: sha512-tVZw5/dKGJbU1h8bdY0gfz4Y7ANYi8VddnIiLg/sPidJWc4CdshCZhLfU0lW1ySjtEt35JYxGHfmerkJJqUSTw==}
+  /electron@25.1.0:
+    resolution: {integrity: sha512-VKk4G/0euO7ysMKQKHXmI4d3/qR4uHsAtVFXK2WfQUVxBmc160OAm2R6PN9/EXmgXEioKQBtbc2/lvWyYpDbuA==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true
@@ -16824,6 +16824,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -17773,13 +17774,13 @@ packages:
   /ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  /msw@1.2.1(typescript@5.0.4):
-    resolution: {integrity: sha512-bF7qWJQSmKn6bwGYVPXOxhexTCGD5oJSZg8yt8IBClxvo3Dx/1W0zqE1nX9BSWmzRsCKWfeGWcB/vpqV6aclpw==}
+  /msw@1.2.2(typescript@5.0.4):
+    resolution: {integrity: sha512-GsW3PE/Es/a1tYThXcM8YHOZ1S1MtivcS3He/LQbbTCx3rbWJYCtWD5XXyJ53KlNPT7O1VI9sCW3xMtgFe8XpQ==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
     peerDependencies:
-      typescript: '>= 4.4.x <= 5.0.x'
+      typescript: '>= 4.4.x <= 5.1.x'
     peerDependenciesMeta:
       typescript:
         optional: true
