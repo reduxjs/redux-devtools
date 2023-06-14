@@ -2672,7 +2672,7 @@ importers:
         version: 10.12.16(react-dom@18.2.0)(react@18.2.0)
       msw:
         specifier: ^1.2.1
-        version: 1.2.1(typescript@5.0.4)
+        version: 1.2.2(typescript@5.0.4)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -17774,42 +17774,6 @@ packages:
   /ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  /msw@1.2.1(typescript@5.0.4):
-    resolution: {integrity: sha512-bF7qWJQSmKn6bwGYVPXOxhexTCGD5oJSZg8yt8IBClxvo3Dx/1W0zqE1nX9BSWmzRsCKWfeGWcB/vpqV6aclpw==}
-    engines: {node: '>=14'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      typescript: '>= 4.4.x <= 5.0.x'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@mswjs/cookies': 0.2.2
-      '@mswjs/interceptors': 0.17.9
-      '@open-draft/until': 1.0.3
-      '@types/cookie': 0.4.1
-      '@types/js-levenshtein': 1.1.1
-      chalk: 4.1.1
-      chokidar: 3.5.3
-      cookie: 0.4.2
-      graphql: 16.6.0
-      headers-polyfill: 3.1.2
-      inquirer: 8.2.5
-      is-node-process: 1.2.0
-      js-levenshtein: 1.1.6
-      node-fetch: 2.6.11
-      outvariant: 1.4.0
-      path-to-regexp: 6.2.1
-      strict-event-emitter: 0.4.6
-      type-fest: 2.19.0
-      typescript: 5.0.4
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-    dev: false
-
   /msw@1.2.2(typescript@5.0.4):
     resolution: {integrity: sha512-GsW3PE/Es/a1tYThXcM8YHOZ1S1MtivcS3He/LQbbTCx3rbWJYCtWD5XXyJ53KlNPT7O1VI9sCW3xMtgFe8XpQ==}
     engines: {node: '>=14'}
@@ -17845,7 +17809,6 @@ packages:
       - encoding
       - supports-color
     dev: false
-    optional: true
 
   /multicast-dns@7.2.5:
     resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
