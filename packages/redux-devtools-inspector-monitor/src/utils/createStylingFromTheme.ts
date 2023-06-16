@@ -17,6 +17,7 @@ const colorMap = (theme: Base16Theme) => ({
   SELECTED_BACKGROUND_COLOR: rgba(theme.base03, 20),
   SKIPPED_BACKGROUND_COLOR: rgba(theme.base03, 10),
   HEADER_BACKGROUND_COLOR: rgba(theme.base03, 30),
+  HEADER_BACKGROUND_COLOR_OPAQUE: rgba(theme.base03, 100),
   HEADER_BORDER_COLOR: rgba(theme.base03, 20),
   BORDER_COLOR: rgba(theme.base03, 50),
   LIST_BORDER_COLOR: rgba(theme.base03, 50),
@@ -34,6 +35,7 @@ const colorMap = (theme: Base16Theme) => ({
   LINK_COLOR: rgba(theme.base0E, 90),
   LINK_HOVER_COLOR: theme.base0E,
   ERROR_COLOR: theme.base08,
+  SEARCH_BUTTON_COLOR: rgba(theme.base00, 50),
 });
 
 type Color = keyof ReturnType<typeof colorMap>;
@@ -265,6 +267,95 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
     'background-color': map.HEADER_BACKGROUND_COLOR,
     'border-bottom-color': map.HEADER_BORDER_COLOR,
+  },
+
+  searchPanel: {
+    display: 'flex',
+    position: 'sticky',
+    top: 0,
+    width: '100%',
+    'z-index': 1,
+    height: '2em',
+    gap: '1em',
+    padding: '5px 10px',
+    'align-items': 'center',
+    'border-bottom-width': '1px',
+    'border-bottom-style': 'solid',
+
+    'background-color': map.HEADER_BACKGROUND_COLOR_OPAQUE,
+    'border-bottom-color': map.HEADER_BORDER_COLOR,
+  },
+
+  searchForm: {
+    display: 'flex',
+    gap: '1em',
+    'align-items': 'center',
+  },
+
+  searchPanelParameterSelection: {
+    display: 'inline-grid',
+    color: map.SEARCH_BUTTON_COLOR,
+    width: '1.15em',
+    height: '1.15em',
+    border: '0.15em solid currentColor',
+    'border-radius': '0.15em',
+    transform: 'translateY(-0.075em)',
+    'place-content': 'center',
+    appearance: 'none',
+    'background-color': map.SEARCH_BUTTON_COLOR,
+
+    '&::before': {
+      'background-color': map.TEXT_COLOR,
+      'transform-origin': 'bottom left',
+      'clip-path':
+        'polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%)',
+      content: '""',
+      width: '0.65em',
+      height: '0.65em',
+      transform: 'scale(0)',
+      transition: '120ms transform ease-in-out',
+    },
+    '&:checked::before': {
+      transform: 'scale(1)',
+    },
+  },
+
+  searchInput: {
+    'background-color': 'white',
+    opacity: 0.9,
+    'border-color': 'transparent',
+    'border-radius': '4px',
+    height: '1.2rem',
+  },
+
+  searchButton: {
+    'background-color': map.SEARCH_BUTTON_COLOR,
+    'border-color': 'transparent',
+    'border-radius': '4px',
+    height: '1.56rem',
+    color: map.TEXT_COLOR,
+  },
+
+  jumpResultButton: {
+    'background-color': map.SEARCH_BUTTON_COLOR,
+    'border-color': 'transparent',
+    'border-radius': '4px',
+  },
+
+  jumpResultButtonArrow: {
+    cursor: 'hand',
+    fill: map.TEXT_COLOR,
+    width: '0.6rem',
+    height: '1rem',
+  },
+
+  queryResult: {
+    'background-color': '#FFFF00',
+  },
+
+  queryResultLabel: {
+    'background-color': '#FFFF00',
+    'text-indent': 0,
   },
 
   tabSelector: {
