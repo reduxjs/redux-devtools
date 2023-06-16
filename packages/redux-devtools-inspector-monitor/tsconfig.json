@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.react.base.json",
   "compilerOptions": {
+    "module": "ES2022",
     "outDir": "lib/types",
     "resolveJsonModule": true
   },
