@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { JSONTree } from 'react-json-tree';
 import { Action } from 'redux';
-import getItemString from './getItemString';
-import getJsonTreeTheme from './getJsonTreeTheme';
 import { TabComponentProps } from '../ActionPreview';
 import SearchPanel from '../searchPanel/SearchPanel';
+import getItemString from './getItemString';
+import getJsonTreeTheme from './getJsonTreeTheme';
+
+interface SearchState {
+  searchResult: string[];
+  searchInProgress: boolean;
+}
 
 const StateTab: React.FunctionComponent<
   TabComponentProps<any, Action<unknown>>
@@ -19,11 +24,8 @@ const StateTab: React.FunctionComponent<
   isWideLayout,
   sortStateTreeAlphabetically,
   disableStateTreeCollection,
+  enableSearchPanel,
 }) => {
-  interface SearchState {
-    searchResult: string[];
-    searchInProgress: boolean;
-  }
   const [searchState, setSearchState] = useState<SearchState>({
     searchResult: [],
     searchInProgress: false,
@@ -32,7 +34,11 @@ const StateTab: React.FunctionComponent<
   const displayedResult = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (searchState.searchInProgress && displayedResult.current) {
+    if (
+      enableSearchPanel &&
+      searchState.searchInProgress &&
+      displayedResult.current
+    ) {
       displayedResult.current.scrollIntoView({
         behavior: 'smooth',
         block: 'center',
@@ -40,21 +46,23 @@ const StateTab: React.FunctionComponent<
       });
       setSearchState({ ...searchState, searchInProgress: false });
     }
-  }, [searchState, setSearchState]);
+  }, [searchState, setSearchState, enableSearchPanel]);
 
   return (
     <>
-      <SearchPanel
-        onSubmit={setSearchState}
-        onReset={() =>
-          setSearchState({
-            searchResult: [],
-            searchInProgress: false,
-          })
-        }
-        styling={styling}
-        state={nextState}
-      />
+      {enableSearchPanel && (
+        <SearchPanel
+          onSubmit={setSearchState}
+          onReset={() =>
+            setSearchState({
+              searchResult: [],
+              searchInProgress: false,
+            })
+          }
+          styling={styling}
+          state={nextState}
+        />
+      )}
       <JSONTree
         labelRenderer={(keyPath, nodeType, expanded, expandable) => {
           return isMatch(searchState.searchResult, [...keyPath].reverse()) ? (

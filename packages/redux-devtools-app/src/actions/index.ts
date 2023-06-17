@@ -1,31 +1,33 @@
+import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import { SchemeName, ThemeName } from '@redux-devtools/ui';
-import { AuthStates, States } from 'socketcluster-client/lib/clientsocket';
+import { Action } from 'redux';
 import { REHYDRATE } from 'redux-persist';
+import { AuthStates, States } from 'socketcluster-client/lib/clientsocket';
 import {
   CHANGE_SECTION,
+  CHANGE_STATE_TREE_SETTINGS,
   CHANGE_THEME,
-  SELECT_INSTANCE,
-  SELECT_MONITOR,
-  UPDATE_MONITOR_STATE,
+  CLEAR_NOTIFICATION,
+  ERROR,
+  EXPORT,
+  GET_REPORT_ERROR,
+  GET_REPORT_REQUEST,
+  GET_REPORT_SUCCESS,
   LIFTED_ACTION,
   MONITOR_ACTION,
-  EXPORT,
-  TOGGLE_SYNC,
-  TOGGLE_SLIDER,
+  REMOVE_INSTANCE,
+  SELECT_INSTANCE,
+  SELECT_MONITOR,
+  SET_PERSIST,
+  SET_STATE,
+  SHOW_NOTIFICATION,
   TOGGLE_DISPATCHER,
   TOGGLE_PERSIST,
-  GET_REPORT_REQUEST,
-  SHOW_NOTIFICATION,
-  CLEAR_NOTIFICATION,
-  UPDATE_STATE,
+  TOGGLE_SLIDER,
+  TOGGLE_SYNC,
+  UPDATE_MONITOR_STATE,
   UPDATE_REPORTS,
-  REMOVE_INSTANCE,
-  SET_STATE,
-  GET_REPORT_ERROR,
-  GET_REPORT_SUCCESS,
-  ERROR,
-  SET_PERSIST,
-  CHANGE_STATE_TREE_SETTINGS,
+  UPDATE_STATE,
 } from '../constants/actionTypes';
 import {
   AUTH_ERROR,
@@ -43,12 +45,9 @@ import {
   SUBSCRIBE_SUCCESS,
   UNSUBSCRIBE,
 } from '../constants/socketActionTypes';
-import { Action } from 'redux';
 import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
-import { LiftedAction } from '@redux-devtools/core';
 import { Data } from '../reducers/reports';
-import { LiftedState } from '@redux-devtools/core';
 
 let monitorReducer: (
   monitorProps: unknown,
@@ -86,6 +85,7 @@ export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
 interface ChangeStateTreeSettingsFormData {
   readonly sortAlphabetically: boolean;
   readonly disableCollection: boolean;
+  readonly enableSearchPanel: boolean;
 }
 
 interface ChangeStateTreeSettingsData {
@@ -96,6 +96,7 @@ export interface ChangeStateTreeSettingsAction {
   readonly type: typeof CHANGE_STATE_TREE_SETTINGS;
   readonly sortAlphabetically: boolean;
   readonly disableCollection: boolean;
+  readonly enableSearchPanel: boolean;
 }
 
 export function changeStateTreeSettings(

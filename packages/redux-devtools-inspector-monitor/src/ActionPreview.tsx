@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Base16Theme } from 'redux-devtools-themes';
-import { Action } from 'redux';
-import type { StylingFunction } from 'react-base16-styling';
-import type { LabelRenderer } from 'react-json-tree';
 import { PerformAction } from '@redux-devtools/core';
 import { Delta } from 'jsondiffpatch';
-import { DEFAULT_STATE, DevtoolsInspectorState } from './redux';
+import React, { Component } from 'react';
+import type { StylingFunction } from 'react-base16-styling';
+import type { LabelRenderer } from 'react-json-tree';
+import { Action } from 'redux';
+import { Base16Theme } from 'redux-devtools-themes';
 import ActionPreviewHeader from './ActionPreviewHeader';
+import { DEFAULT_STATE, DevtoolsInspectorState } from './redux';
+import ActionTab from './tabs/ActionTab';
 import DiffTab from './tabs/DiffTab';
 import StateTab from './tabs/StateTab';
-import ActionTab from './tabs/ActionTab';
 
 export interface TabComponentProps<S, A extends Action<unknown>> {
   labelRenderer: LabelRenderer;
@@ -23,6 +23,7 @@ export interface TabComponentProps<S, A extends Action<unknown>> {
   isWideLayout: boolean;
   sortStateTreeAlphabetically: boolean;
   disableStateTreeCollection: boolean;
+  enableSearchPanel: boolean;
   dataTypeKey: string | symbol | undefined;
   delta: Delta | null | undefined | false;
   action: A;
@@ -74,6 +75,7 @@ interface Props<S, A extends Action<unknown>> {
   onSelectTab: (tabName: string) => void;
   sortStateTreeAlphabetically: boolean;
   disableStateTreeCollection: boolean;
+  enableSearchPanel: boolean;
 }
 
 class ActionPreview<S, A extends Action<unknown>> extends Component<
@@ -107,6 +109,7 @@ class ActionPreview<S, A extends Action<unknown>> extends Component<
       updateMonitorState,
       sortStateTreeAlphabetically,
       disableStateTreeCollection,
+      enableSearchPanel,
     } = this.props;
 
     const renderedTabs: Tab<S, A>[] =
@@ -141,6 +144,7 @@ class ActionPreview<S, A extends Action<unknown>> extends Component<
                 isWideLayout,
                 sortStateTreeAlphabetically,
                 disableStateTreeCollection,
+                enableSearchPanel,
                 dataTypeKey,
                 delta,
                 action,

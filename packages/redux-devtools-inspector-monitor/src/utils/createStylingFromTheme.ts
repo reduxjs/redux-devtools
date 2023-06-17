@@ -271,11 +271,11 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
   searchPanel: {
     display: 'flex',
+    'flex-wrap': 'wrap',
     position: 'sticky',
     top: 0,
     width: '100%',
     'z-index': 1,
-    height: '2em',
     gap: '1em',
     padding: '5px 10px',
     'align-items': 'center',
@@ -284,12 +284,6 @@ const getSheetFromColorMap = (map: ColorMap) => ({
 
     'background-color': map.HEADER_BACKGROUND_COLOR_OPAQUE,
     'border-bottom-color': map.HEADER_BORDER_COLOR,
-  },
-
-  searchForm: {
-    display: 'flex',
-    gap: '1em',
-    'align-items': 'center',
   },
 
   searchPanelParameterSelection: {
@@ -334,6 +328,12 @@ const getSheetFromColorMap = (map: ColorMap) => ({
     'border-radius': '4px',
     height: '1.56rem',
     color: map.TEXT_COLOR,
+  },
+
+  jumpResultContainer: {
+    display: 'flex',
+    gap: '1em',
+    'align-items': 'center',
   },
 
   jumpResultButton: {

@@ -114,41 +114,43 @@ function SearchPanel({
       {searchStatus === 'pending' && 'Searching...'}
       {searchStatus === 'done' && (
         <>
-          <JumpSearchResultButton
-            buttonDirection={BUTTON_DIRECTION.LEFT}
-            buttonDisabled={!results || results.length < 2}
-            styling={styling}
-            jumpToNewResult={() => {
-              if (!results) {
-                return;
-              }
-              const newIndex =
-                resultIndex - 1 < 0 ? results.length - 1 : resultIndex - 1;
-              setResultIndex(newIndex);
-              onSubmit({
-                searchResult: results[newIndex] || [],
-                searchInProgress: true,
-              });
-            }}
-          />
-          <JumpSearchResultButton
-            buttonDirection={BUTTON_DIRECTION.RIGHT}
-            buttonDisabled={!results || results.length < 2}
-            styling={styling}
-            jumpToNewResult={() => {
-              if (!results) {
-                return;
-              }
-              const newIndex = (resultIndex + 1) % results.length || 0;
-              setResultIndex(newIndex);
-              onSubmit({
-                searchResult: results[newIndex] || [],
-                searchInProgress: true,
-              });
-            }}
-          />
-          {results &&
-            `${results.length ? resultIndex + 1 : 0}/${results.length}`}
+          <div {...styling('jumpResultContainer')}>
+            <JumpSearchResultButton
+              buttonDirection={BUTTON_DIRECTION.LEFT}
+              buttonDisabled={!results || results.length < 2}
+              styling={styling}
+              jumpToNewResult={() => {
+                if (!results) {
+                  return;
+                }
+                const newIndex =
+                  resultIndex - 1 < 0 ? results.length - 1 : resultIndex - 1;
+                setResultIndex(newIndex);
+                onSubmit({
+                  searchResult: results[newIndex] || [],
+                  searchInProgress: true,
+                });
+              }}
+            />
+            <JumpSearchResultButton
+              buttonDirection={BUTTON_DIRECTION.RIGHT}
+              buttonDisabled={!results || results.length < 2}
+              styling={styling}
+              jumpToNewResult={() => {
+                if (!results) {
+                  return;
+                }
+                const newIndex = (resultIndex + 1) % results.length || 0;
+                setResultIndex(newIndex);
+                onSubmit({
+                  searchResult: results[newIndex] || [],
+                  searchInProgress: true,
+                });
+              }}
+            />
+            {results &&
+              `${results.length ? resultIndex + 1 : 0}/${results.length}`}
+          </div>
           <button {...styling('searchButton')} onClick={() => reset()}>
             Reset
           </button>
