@@ -17,7 +17,7 @@ import {
   StoreState,
   TopButtons,
 } from '@redux-devtools/app';
-import { GoRadioTower } from 'react-icons/go';
+import { GoBroadcast } from 'react-icons/go';
 import { MdBorderBottom, MdBorderLeft, MdBorderRight } from 'react-icons/md';
 import type { Position } from '../pageScript/api/openWindow';
 import type { SingleMessage } from '../background/store/apiMiddleware';
@@ -131,7 +131,7 @@ class Actions extends Component<Props> {
                 this.openWindow('remote');
               }}
             >
-              <GoRadioTower />
+              <GoBroadcast />
             </Button>
           )}
         </Toolbar>
