@@ -216,14 +216,15 @@ export function getSeralizeParameter(
   return value;
 }
 
-export function getStackTrace(
+export function getStackTrace<A extends Action<unknown>>(
   // eslint-disable-next-line @typescript-eslint/ban-types
-  config: { trace?: () => {}; traceLimit: number },
+  config: { trace?: (action?: A) => {}; traceLimit: number },
   // eslint-disable-next-line @typescript-eslint/ban-types
-  toExcludeFromTrace?: Function | undefined
+  toExcludeFromTrace?: Function | undefined,
+  action?: A
 ) {
   if (!config.trace) return undefined;
-  if (typeof config.trace === 'function') return config.trace();
+  if (typeof config.trace === 'function') return config.trace(action);
 
   let stack;
   let extraFrames = 0;
