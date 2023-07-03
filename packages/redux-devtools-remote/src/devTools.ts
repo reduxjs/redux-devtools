@@ -17,8 +17,8 @@ import {
   LiftedAction,
   LiftedState,
   PerformAction,
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
 } from '@redux-devtools/instrument';
 import {
   ActionCreatorObject,
@@ -32,8 +32,8 @@ import {
   filterState,
   LocalFilter,
   State,
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
 } from '@redux-devtools/utils';
 
 function async(fn: () => unknown) {
@@ -411,7 +411,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         const consumer = this.socket!.listener(channelName).createConsumer();
         // eslint-disable-next-line no-constant-condition
         while (true) {
-          const {value: data, done} = await consumer.next();
+          const { value: data, done } = await consumer.next();
           if (done) break;
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
@@ -450,8 +450,8 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
       const consumer = this.socket!.listener('error').createConsumer();
       // eslint-disable-next-line no-constant-condition
       while (true) {
-        const {value: data, done} = await consumer.next();
-        if (done) break;        // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
+        const { value: data, done } = await consumer.next();
+        if (done) break; // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
         // eslint-disable-next-line no-prototype-builtins,@typescript-eslint/no-unsafe-argument
         this.errorCounts[data.error.name] = this.errorCounts.hasOwnProperty(
           data.error.name
@@ -479,7 +479,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
       const consumer = this.socket!.listener('connect').createConsumer();
       // eslint-disable-next-line no-constant-condition
       while (true) {
-        const {done} = await consumer.next();
+        const { done } = await consumer.next();
         if (done) break;
         console.log('connected to remotedev-server');
         this.errorCounts = {}; // clear the errorCounts object, so that we'll log any new errors in the event of a disconnect
@@ -490,7 +490,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
       const consumer = this.socket!.listener('disconnect').createConsumer();
       // eslint-disable-next-line no-constant-condition
       while (true) {
-        const {done} = await consumer.next();
+        const { done } = await consumer.next();
         if (done) break;
         this.stop(true);
       }
