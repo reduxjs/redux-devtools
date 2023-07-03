@@ -276,6 +276,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         !this.actionSanitizer
           ? action
           : this.actionSanitizer(
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               (action as PerformAction<A>).action,
               nextActionId! - 1
             )
@@ -549,6 +550,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
       const nextActionId = liftedState.nextActionId;
       const liftedAction = liftedState.actionsById[nextActionId - 1];
       if (isFiltered(liftedAction.action, this.filters)) return;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       this.relay('ACTION', state, liftedAction, nextActionId);
       if (!this.isExcess && maxAge)
         this.isExcess = liftedState.stagedActionIds.length >= maxAge;
@@ -597,6 +599,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         this.store.subscribe(() => {
           if (this.isMonitored)
             this.handleChange(
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               this.store.getState(),
               this.getLiftedStateRaw(),
               maxAge
