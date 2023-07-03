@@ -11,11 +11,14 @@ import {
   StoreEnhancer,
   StoreEnhancerStoreCreator,
 } from 'redux';
+
 import {
   EnhancedStore,
   LiftedAction,
   LiftedState,
   PerformAction,
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 } from '@redux-devtools/instrument';
 import {
   ActionCreatorObject,
@@ -29,6 +32,8 @@ import {
   filterState,
   LocalFilter,
   State,
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 } from '@redux-devtools/utils';
 
 function async(fn: () => unknown) {
@@ -400,7 +405,16 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         )) as string;
         this.channel = channelName;
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-        for await (const data of this.socket!.subscribe(channelName)) {
+        // for await (const data of this.socket!.subscribe(channelName)) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const consumer = this.socket!.listener(channelName).createConsumer();
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+          const {value: data, done} = await consumer.next();
+          if (done) break;
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           this.handleMessages(data as Message<S, A>);
         }
       } catch (error) {
@@ -433,8 +447,11 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
 
     void (async () => {
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-      for await (const data of this.socket!.listener('error')) {
-        // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
+      const consumer = this.socket!.listener('error').createConsumer();
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        const {value: data, done} = await consumer.next();
+        if (done) break;        // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
         // eslint-disable-next-line no-prototype-builtins,@typescript-eslint/no-unsafe-argument
         this.errorCounts[data.error.name] = this.errorCounts.hasOwnProperty(
           data.error.name
@@ -459,15 +476,22 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
 
     void (async () => {
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-      for await (const data of this.socket!.listener('connect')) {
+      const consumer = this.socket!.listener('connect').createConsumer();
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        const {done} = await consumer.next();
+        if (done) break;
         console.log('connected to remotedev-server');
         this.errorCounts = {}; // clear the errorCounts object, so that we'll log any new errors in the event of a disconnect
         this.login();
       }
     })();
     void (async () => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-      for await (const data of this.socket!.listener('disconnect')) {
+      const consumer = this.socket!.listener('disconnect').createConsumer();
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        const {done} = await consumer.next();
+        if (done) break;
         this.stop(true);
       }
     })();
@@ -566,7 +590,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
           shouldHotReload: options.shouldHotReload,
           shouldRecordChanges: options.shouldRecordChanges,
           shouldStartLocked: options.shouldStartLocked,
-          pauseActionType: options.pauseActionType || '@@PAUSED',
+          pauseActionType: options.pauseActionType || '@@Paused',
         })(reducer, initialState);
 
         if (realtime) this.start();

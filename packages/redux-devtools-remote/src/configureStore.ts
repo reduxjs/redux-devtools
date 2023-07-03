@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { instrument, Options } from '@redux-devtools/instrument';
 import { Action, Reducer, StoreEnhancerStoreCreator } from 'redux';
 
