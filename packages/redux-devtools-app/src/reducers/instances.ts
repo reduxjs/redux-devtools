@@ -88,7 +88,7 @@ function updateState(
   state: { [id: string]: State },
   request: Request,
   id: string | number,
-  serialize: boolean | undefined
+  serialize: boolean | undefined,
 ) {
   let payload: State = request.payload as State;
   const actionsById = request.actionsById;
@@ -132,7 +132,7 @@ function updateState(
             action[i] as PerformAction<Action<unknown>>,
             newState.nextActionId + 1,
             maxAge,
-            isExcess
+            isExcess,
           );
         }
       } else {
@@ -142,7 +142,7 @@ function updateState(
           action,
           nextActionId,
           maxAge,
-          isExcess
+          isExcess,
         );
       }
       break;
@@ -212,7 +212,7 @@ function updateState(
 
 export function dispatchAction(
   state: InstancesState,
-  { action }: LiftedActionDispatchAction
+  { action }: LiftedActionDispatchAction,
 ) {
   if (action.type === 'JUMP_TO_STATE' || action.type === 'JUMP_TO_ACTION') {
     const id = state.selected || state.current;
@@ -270,7 +270,7 @@ function removeState(state: InstancesState, connectionId: string | number) {
 function init(
   { type, action, name, libConfig = {} }: Request,
   connectionId: string | number,
-  current: string | number
+  current: string | number,
 ): Options {
   let lib;
   let actionCreators;
@@ -305,7 +305,7 @@ function init(
 
 export function instances(
   state = instancesInitialState,
-  action: StoreAction
+  action: StoreAction,
 ): InstancesState {
   switch (action.type) {
     case UPDATE_STATE: {
@@ -336,7 +336,7 @@ export function instances(
           state.states,
           request,
           current,
-          options[current].serialize
+          options[current].serialize,
         ),
       };
     }

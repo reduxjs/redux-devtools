@@ -13,7 +13,7 @@ describe('SegmentedControl', function () {
         onClick={() => {
           // noop
         }}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -25,7 +25,7 @@ describe('SegmentedControl', function () {
         selected="Button1"
         disabled={false}
         onClick={onClick}
-      />
+      />,
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Button1' }));

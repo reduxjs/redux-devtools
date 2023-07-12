@@ -24,7 +24,7 @@ interface Props<S, A extends Action<unknown>> {
 
 export default class LogMonitorEntryList<
   S,
-  A extends Action<unknown>
+  A extends Action<unknown>,
 > extends PureComponent<Props<S, A>> {
   static propTypes = {
     actionsById: PropTypes.object,
@@ -85,7 +85,7 @@ export default class LogMonitorEntryList<
           markStateDiff={markStateDiff}
           onActionClick={onActionClick}
           onActionShiftClick={onActionShiftClick}
-        />
+        />,
       );
     }
 

@@ -5,7 +5,7 @@ const isFF = navigator.userAgent.indexOf('Firefox') !== -1;
 function openResource(
   fileName: string,
   lineNumber: number,
-  stackFrame: StackFrame
+  stackFrame: StackFrame,
 ) {
   const adjustedLineNumber = Math.max(lineNumber - 1, 0);
   chrome.devtools.panels.openResource(fileName, adjustedLineNumber, ((result: {
@@ -21,7 +21,7 @@ function openResource(
         adjustedLineNumber,
         (/* result */) => {
           // console.log("openResource result: ", result);
-        }
+        },
       );
     }
   }) as () => void);
@@ -99,7 +99,7 @@ function openInEditor(editor: string, path: string, stackFrame: StackFrame) {
 export default function openFile(
   fileName: string,
   lineNumber: number,
-  stackFrame: StackFrame
+  stackFrame: StackFrame,
 ) {
   if (!chrome || !chrome.storage) return; // TODO: Pass editor settings for using outside of browser extension
   const storage = isFF
@@ -129,13 +129,13 @@ export default function openFile(
               (result) => {
                 if (!result) return;
                 void chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
-              }
+              },
             );
           } else if (confirm('Set the editor to open the file in?')) {
             chrome.runtime.openOptionsPage();
           }
         }
       }
-    }
+    },
   );
 }

@@ -14,7 +14,7 @@ interface Props<S, A extends Action<unknown>> extends TabComponentProps<S, A> {
   openFile: (
     fileName: string,
     lineNumber: number,
-    stackFrame: StackFrame
+    stackFrame: StackFrame,
   ) => void;
 }
 
@@ -58,7 +58,7 @@ export class TraceTab<S, A extends Action<unknown>> extends Component<
 
     const liftedActions = Object.values(liftedActionsById);
     const liftedAction = liftedActions.find(
-      (liftedAction) => liftedAction.action === action
+      (liftedAction) => liftedAction.action === action,
     );
 
     if (liftedAction && typeof liftedAction.stack === 'string') {
@@ -118,7 +118,7 @@ export class TraceTab<S, A extends Action<unknown>> extends Component<
   openDocs: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.stopPropagation();
     window.open(
-      'https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Features/Trace.md'
+      'https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Features/Trace.md',
     );
   };
 

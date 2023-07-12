@@ -27,7 +27,7 @@ interface Props<A extends Action<unknown>> {
 }
 
 export default class LogMonitorAction<
-  A extends Action<unknown>
+  A extends Action<unknown>,
 > extends Component<Props<A>> {
   renderPayload(payload: Record<string, unknown>) {
     return (
@@ -55,7 +55,7 @@ export default class LogMonitorAction<
   shouldExpandNodeInitially: ShouldExpandNodeInitially = (
     keyPath,
     data,
-    level
+    level,
   ) => {
     return this.props.expandActionRoot && level === 0;
   };

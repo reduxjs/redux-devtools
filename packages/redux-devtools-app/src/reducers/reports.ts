@@ -17,7 +17,7 @@ const initialState: ReportsState = {
 
 export function reports(
   state = initialState,
-  action: StoreAction
+  action: StoreAction,
 ): ReportsState {
   /* if (action.type === GET_REPORT_SUCCESS) {
     const id = action.data.id;

@@ -23,7 +23,7 @@ export const noFiltersApplied = (localFilter: LocalFilter | undefined) =>
 
 export function isFiltered<A extends Action<unknown>>(
   action: A | string,
-  localFilter: LocalFilter | undefined
+  localFilter: LocalFilter | undefined,
 ) {
   if (
     noFiltersApplied(localFilter) ||
@@ -43,7 +43,7 @@ export function isFiltered<A extends Action<unknown>>(
 
 function filterActions<A extends Action<unknown>>(
   actionsById: { [p: number]: PerformAction<A> },
-  actionSanitizer: ((action: A, id: number) => A) | undefined
+  actionSanitizer: ((action: A, id: number) => A) | undefined,
 ): { [p: number]: PerformAction<A> } {
   if (!actionSanitizer) return actionsById;
   return mapValues(actionsById, (action, id) => ({
@@ -54,7 +54,7 @@ function filterActions<A extends Action<unknown>>(
 
 function filterStates<S>(
   computedStates: { state: S; error?: string | undefined }[],
-  stateSanitizer: ((state: S, index: number) => S) | undefined
+  stateSanitizer: ((state: S, index: number) => S) | undefined,
 ) {
   if (!stateSanitizer) return computedStates;
   return computedStates.map((state, idx) => ({
@@ -68,7 +68,7 @@ export function filterState<S, A extends Action<unknown>>(
   localFilter: LocalFilter | undefined,
   stateSanitizer: ((state: S, index: number) => S) | undefined,
   actionSanitizer: ((action: A, id: number) => A) | undefined,
-  predicate: ((state: S, action: A) => boolean) | undefined
+  predicate: ((state: S, action: A) => boolean) | undefined,
 ): LiftedState<S, A, unknown> {
   if (predicate || !noFiltersApplied(localFilter)) {
     const filteredStagedActionIds: number[] = [];
@@ -94,7 +94,7 @@ export function filterState<S, A extends Action<unknown>>(
       filteredComputedStates.push(
         stateSanitizer
           ? { ...liftedState, state: stateSanitizer(currState, idx) }
-          : liftedState
+          : liftedState,
       );
       if (actionSanitizer) {
         sanitizedActionsById![id] = {
@@ -139,7 +139,7 @@ export function startingFrom<S, A extends Action<unknown>>(
     | undefined,
   predicate:
     | (<S, A extends Action<unknown>>(state: S, action: A) => boolean)
-    | undefined
+    | undefined,
 ): LiftedState<S, A, unknown> | PartialLiftedState<S, A> | undefined {
   const stagedActionIds = state.stagedActionIds;
   if (sendingActionId <= stagedActionIds[1]) return state;
@@ -178,7 +178,7 @@ export function startingFrom<S, A extends Action<unknown>>(
     newComputedStates.push(
       !stateSanitizer
         ? currState
-        : { ...currState, state: stateSanitizer(currState.state, i) }
+        : { ...currState, state: stateSanitizer(currState.state, i) },
     );
   }
 

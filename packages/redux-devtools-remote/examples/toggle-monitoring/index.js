@@ -12,5 +12,5 @@ render(
       <App />
     </Provider>
   </div>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

@@ -9,7 +9,7 @@ interface MapPropsOutput<In, Out> {
 }
 
 export function mapProps<In, Out>(
-  mapper: Mapper<In, Out>
+  mapper: Mapper<In, Out>,
 ): MapPropsOutput<In, Out> {
   return function mapPropsHoc(Comp) {
     class MapPropsHoc extends Component<In> {

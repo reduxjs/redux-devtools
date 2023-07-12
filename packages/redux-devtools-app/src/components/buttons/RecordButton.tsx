@@ -32,7 +32,7 @@ class RecordButton extends Component<Props> {
 
 function mapDispatchToProps(
   dispatch: Dispatch<StoreAction>,
-  ownProps: OwnProps
+  ownProps: OwnProps,
 ) {
   return {
     pauseRecording: () => dispatch(pauseRecording(!ownProps.paused)),

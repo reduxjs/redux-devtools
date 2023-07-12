@@ -32,7 +32,7 @@ export function catchErrors(sendError: (errorAction: ErrorAction) => void) {
     (global as any).ErrorUtils.setGlobalHandler(
       (error: Error, isFatal: boolean) => {
         sendError({ type: ERROR, error, isFatal });
-      }
+      },
     );
   }
 

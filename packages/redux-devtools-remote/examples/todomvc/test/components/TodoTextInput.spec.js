@@ -12,7 +12,7 @@ function setup(propOverrides) {
       editing: false,
       newTodo: false,
     },
-    propOverrides
+    propOverrides,
   );
 
   const renderer = TestUtils.createRenderer();

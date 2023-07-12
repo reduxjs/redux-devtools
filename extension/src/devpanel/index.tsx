@@ -42,7 +42,7 @@ function renderDevTools() {
       <PersistGate loading={null} persistor={persistor}>
         <App position={position} />
       </PersistGate>
-    </Provider>
+    </Provider>,
   );
   rendered = true;
 }
@@ -104,7 +104,7 @@ function init(id: number) {
         if (!rendered) renderDevTools();
         store!.dispatch(message);
       }
-    }
+    },
   );
 }
 

@@ -3,7 +3,7 @@ import { LIFTED_ACTION } from '@redux-devtools/app';
 export function getReport(
   reportId: string,
   tabId: string | number,
-  instanceId: number
+  instanceId: number,
 ) {
   chrome.storage.local.get(['s:hostname', 's:port', 's:secure'], (options) => {
     if (!options['s:hostname'] || !options['s:port']) return;

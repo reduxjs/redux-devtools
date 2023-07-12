@@ -13,7 +13,7 @@ describe('Dialog', function () {
         onSubmit={() => {
           // noop
         }}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -32,7 +32,7 @@ describe('Dialog', function () {
         }}
       >
         Hello Dialog!
-      </Dialog>
+      </Dialog>,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -47,7 +47,7 @@ describe('Dialog', function () {
         onSubmit={() => {
           // noop
         }}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -61,7 +61,7 @@ describe('Dialog', function () {
         onSubmit={() => {
           // noop
         }}
-      />
+      />,
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
@@ -77,7 +77,7 @@ describe('Dialog', function () {
           // noop
         }}
         onSubmit={onSubmit}
-      />
+      />,
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Submit' }));

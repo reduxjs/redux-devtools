@@ -53,7 +53,7 @@ import { LiftedState } from '@redux-devtools/core';
 let monitorReducer: (
   monitorProps: unknown,
   state: unknown | undefined,
-  action: Action<unknown>
+  action: Action<unknown>,
 ) => unknown;
 let monitorProps: unknown = {};
 
@@ -99,7 +99,7 @@ export interface ChangeStateTreeSettingsAction {
 }
 
 export function changeStateTreeSettings(
-  data: ChangeStateTreeSettingsData
+  data: ChangeStateTreeSettingsData,
 ): ChangeStateTreeSettingsAction {
   return { type: CHANGE_STATE_TREE_SETTINGS, ...data.formData };
 }
@@ -110,7 +110,7 @@ export interface InitMonitorAction {
   update: (
     monitorProps: unknown,
     state: unknown | undefined,
-    action: Action<unknown>
+    action: Action<unknown>,
   ) => unknown;
   monitorProps: unknown;
 }
@@ -120,7 +120,7 @@ export interface MonitorActionAction {
   monitorReducer: (
     monitorProps: unknown,
     state: unknown | undefined,
-    action: Action<unknown>
+    action: Action<unknown>,
   ) => unknown;
   monitorProps: unknown;
 }
@@ -211,7 +211,7 @@ export function liftedDispatch(
     | InitMonitorAction
     | JumpToStateAction
     | JumpToActionAction
-    | LiftedAction<unknown, Action<unknown>, unknown>
+    | LiftedAction<unknown, Action<unknown>, unknown>,
 ): MonitorActionAction | LiftedActionDispatchAction {
   if (action.type[0] === '@') {
     if (action.type === '@@INIT_MONITOR') {
@@ -250,7 +250,7 @@ export function selectMonitor(monitor: string): SelectMonitorAction {
 }
 export function selectMonitorWithState(
   value: string,
-  monitorState: MonitorStateMonitorState
+  monitorState: MonitorStateMonitorState,
 ): SelectMonitorAction {
   return { type: SELECT_MONITOR, monitor: value, monitorState };
 }
@@ -268,14 +268,14 @@ export function selectMonitorTab(subTabName: string): UpdateMonitorStateAction {
 }
 
 export function updateMonitorState(
-  nextState: NextState
+  nextState: NextState,
 ): UpdateMonitorStateAction {
   return { type: UPDATE_MONITOR_STATE, nextState };
 }
 
 export function importState(
   state: string,
-  preloadedState?: unknown
+  preloadedState?: unknown,
 ): LiftedActionImportAction {
   return { type: LIFTED_ACTION, message: 'IMPORT', state, preloadedState };
 }
@@ -312,7 +312,7 @@ export interface CustomAction {
   rest: string;
 }
 export function dispatchRemotely(
-  action: string | CustomAction
+  action: string | CustomAction,
 ): LiftedActionActionAction {
   return { type: LIFTED_ACTION, message: 'ACTION', action };
 }
@@ -365,7 +365,7 @@ export interface ReconnectAction {
   readonly options: ConnectionOptions;
 }
 export function saveSocketSettings(
-  options: ConnectionOptions
+  options: ConnectionOptions,
 ): ReconnectAction {
   return { type: RECONNECT, options };
 }

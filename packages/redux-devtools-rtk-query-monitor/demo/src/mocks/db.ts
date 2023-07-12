@@ -28,7 +28,7 @@ export const handlers = [
         return res(
           ctx.json({ error: 'Oh no, there was an error, try again.' }),
           ctx.status(500),
-          ctx.delay(300)
+          ctx.delay(300),
         );
       }
 
@@ -38,7 +38,7 @@ export const handlers = [
       });
 
       return res(ctx.json(post), ctx.delay(300));
-    }
+    },
   ),
   rest.put<Post, { id: string }, Post | { error: string }>(
     '/posts/:id',
@@ -49,7 +49,7 @@ export const handlers = [
         return res(
           ctx.json({ error: 'Oh no, there was an error, try again.' }),
           ctx.status(500),
-          ctx.delay(300)
+          ctx.delay(300),
         );
       }
 
@@ -59,7 +59,7 @@ export const handlers = [
       });
 
       return res(ctx.json(post!), ctx.delay(300));
-    }
+    },
   ),
   ...db.post.toHandlers('rest'),
 ] as const;

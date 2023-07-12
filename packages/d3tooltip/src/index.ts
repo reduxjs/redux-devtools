@@ -8,7 +8,7 @@ interface Options<
   RootGElement extends BaseType,
   RootDatum,
   RootPElement extends BaseType,
-  RootPDatum
+  RootPDatum,
 > {
   left: number | undefined;
   top: number | undefined;
@@ -40,12 +40,12 @@ export function tooltip<
   RootGElement extends BaseType,
   RootDatum,
   RootPElement extends BaseType,
-  RootPDatum
+  RootPDatum,
 >(
   className = 'tooltip',
   options: Partial<
     Options<Datum, RootGElement, RootDatum, RootPElement, RootPDatum>
-  > = {}
+  > = {},
 ) {
   const { left, top, offset, root, styles, text } = {
     ...defaultOptions,

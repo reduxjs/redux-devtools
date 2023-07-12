@@ -11,7 +11,7 @@ interface Styles {
 function autoprefixes(styles: Styles) {
   return Object.keys(styles).reduce<Styles>(
     (obj, key) => ((obj[key] = autoprefix(styles[key])), obj),
-    {}
+    {},
   );
 }
 
@@ -81,13 +81,13 @@ const styles = autoprefixes({
 
 function getTransitions(duration: number) {
   return ['left', 'top', 'width', 'height'].map(
-    (p) => `${p} ${duration / 1000}s ease-out`
+    (p) => `${p} ${duration / 1000}s ease-out`,
   );
 }
 
 function getDockStyles(
   { fluid, dockStyle, dockHiddenStyle, duration, position, isVisible }: Props,
-  { size, isResizing, fullWidth, fullHeight }: State
+  { size, isResizing, fullWidth, fullHeight }: State,
 ) {
   let posStyle;
   const absSize = fluid ? `${size * 100}%` : `${size}px`;
@@ -145,7 +145,7 @@ function getDockStyles(
 
 function getDimStyles(
   { dimMode, dimStyle, duration, isVisible }: Props,
-  { isTransitionStarted }: State
+  { isTransitionStarted }: State,
 ) {
   return [
     styles.dim,
@@ -209,7 +209,7 @@ function getResizerStyles(position: 'left' | 'right' | 'top' | 'bottom') {
 function getFullSize(
   position: 'left' | 'right' | 'top' | 'bottom',
   fullWidth: number,
-  fullHeight: number
+  fullHeight: number,
 ) {
   return position === 'left' || position === 'right' ? fullWidth : fullHeight;
 }
@@ -358,11 +358,11 @@ export default class Dock extends Component<Props, State> {
 
     const dimStyles = Object.assign(
       {},
-      ...getDimStyles(this.props, this.state)
+      ...getDimStyles(this.props, this.state),
     );
     const dockStyles = Object.assign(
       {},
-      ...getDockStyles(this.props, this.state)
+      ...getDockStyles(this.props, this.state),
     );
     const resizerStyles = Object.assign({}, ...getResizerStyles(position));
 
@@ -441,7 +441,7 @@ export default class Dock extends Component<Props, State> {
 
   debouncedUpdateWindowSizeEnd: DebouncedFunc<() => void> = debounce(
     this.updateWindowSizeEnd,
-    30
+    30,
   );
 
   handleWrapperLeave = () => {

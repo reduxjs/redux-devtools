@@ -5,7 +5,7 @@ import { ChartMonitorProps } from './ChartMonitor';
 function toggleVisibility<S, A extends Action<unknown>>(
   props: ChartMonitorProps<S, A>,
   state = props.defaultIsVisible,
-  action: ChartMonitorAction
+  action: ChartMonitorAction,
 ): boolean {
   if (action.type === TOGGLE_VISIBILITY) {
     return !state;
@@ -25,7 +25,7 @@ export interface ChartMonitorState {
 export default function reducer<S, A extends Action<unknown>>(
   props: ChartMonitorProps<S, A>,
   state: ChartMonitorState | undefined = {},
-  action: ChartMonitorAction
+  action: ChartMonitorAction,
 ) {
   return {
     isVisible: toggleVisibility(props, state.isVisible, action),

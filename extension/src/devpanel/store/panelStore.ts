@@ -16,11 +16,11 @@ const persistedReducer: Reducer<StoreStateWithoutSocket, StoreAction> =
 
 export default function configureStore(
   position: string,
-  bgConnection: chrome.runtime.Port
+  bgConnection: chrome.runtime.Port,
 ) {
   const enhancer = applyMiddleware(
     exportStateMiddleware,
-    panelDispatcher(bgConnection)
+    panelDispatcher(bgConnection),
   );
   const store = createStore(persistedReducer, enhancer);
   const persistor = persistStore(store);

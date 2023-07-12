@@ -20,7 +20,7 @@ const EditorContainer = styled.div(
   ({ theme }: { theme: Theme }) =>
     theme.scheme === 'default' && theme.light
       ? defaultStyle
-      : themedStyle(theme)
+      : themedStyle(theme),
 );
 
 export interface EditorProps {

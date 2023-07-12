@@ -151,7 +151,7 @@ function DemoApp(props: Props) {
 
 export default connect((state: DemoAppState) => state, {
   toggleTimeoutUpdate: (
-    timeoutUpdateEnabled: boolean
+    timeoutUpdateEnabled: boolean,
   ): ToggleTimeoutUpdateAction => ({
     type: 'TOGGLE_TIMEOUT_UPDATE',
     timeoutUpdateEnabled,

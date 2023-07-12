@@ -11,5 +11,5 @@ export default createDevTools(
     defaultSize={0.15}
   >
     <SliderMonitor keyboardEnabled />
-  </DockMonitor>
+  </DockMonitor>,
 );

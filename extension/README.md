@@ -105,7 +105,7 @@ const composeEnhancers =
     : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(...middleware)
+  applyMiddleware(...middleware),
   // other store enhancers if any
 );
 const store = createStore(reducer, enhancer);
@@ -130,9 +130,9 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 const store = createStore(
   reducer,
   composeWithDevTools(
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
     // other store enhancers if any
-  )
+  ),
 );
 ```
 
@@ -148,9 +148,9 @@ const composeEnhancers = composeWithDevTools({
 const store = createStore(
   reducer,
   /* preloadedState, */ composeEnhancers(
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
     // other store enhancers if any
-  )
+  ),
 );
 ```
 
@@ -164,7 +164,7 @@ import { devToolsEnhancer } from '@redux-devtools/extension';
 
 const store = createStore(
   reducer,
-  /* preloadedState, */ devToolsEnhancer()
+  /* preloadedState, */ devToolsEnhancer(),
   // Specify name here, actionsDenylist, actionsCreators and other options if needed
 );
 ```
@@ -181,7 +181,7 @@ import { devToolsEnhancerLogOnlyInProduction } from '@redux-devtools/extension';
 
 const store = createStore(
   reducer,
-  /* preloadedState, */ devToolsEnhancerLogOnlyInProduction()
+  /* preloadedState, */ devToolsEnhancerLogOnlyInProduction(),
   // options like actionSanitizer, stateSanitizer
 );
 ```
@@ -198,9 +198,9 @@ const composeEnhancers = composeWithDevToolsLogOnlyInProduction({
 const store = createStore(
   reducer,
   /* preloadedState, */ composeEnhancers(
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
     // other store enhancers if any
-  )
+  ),
 );
 ```
 

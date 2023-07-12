@@ -48,7 +48,7 @@ class StackFrame {
     sourceFileName: string | null = null,
     sourceLineNumber: number | null = null,
     sourceColumnNumber: number | null = null,
-    sourceScriptCode: ScriptLine[] | null = null
+    sourceScriptCode: ScriptLine[] | null = null,
   ) {
     if (functionName && functionName.indexOf('Object.') === 0) {
       functionName = functionName.slice('Object.'.length);

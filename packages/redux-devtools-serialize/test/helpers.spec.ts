@@ -4,7 +4,7 @@ describe('Helpers', function () {
   it('mark', function () {
     expect(mark({ testData: 'test' }, 'testType')).toMatchSnapshot();
     expect(
-      mark({ testData: 'test' }, 'testType', 'toString')
+      mark({ testData: 'test' }, 'testType', 'toString'),
     ).toMatchSnapshot();
   });
 
@@ -20,7 +20,7 @@ describe('Helpers', function () {
       testData: 'test',
     }) as unknown;
     expect(
-      refer(testInstance, 'testType', false, [TestClass as any])
+      refer(testInstance, 'testType', false, [TestClass as any]),
     ).toMatchSnapshot();
   });
 });

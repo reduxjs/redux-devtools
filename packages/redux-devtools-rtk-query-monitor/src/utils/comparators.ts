@@ -23,7 +23,7 @@ export const sortQueryOptions: SelectOption<QueryComparators>[] = [
 
 function sortQueryByFulfilled(
   thisQueryInfo: RtkResourceInfo,
-  thatQueryInfo: RtkResourceInfo
+  thatQueryInfo: RtkResourceInfo,
 ): number {
   const thisFulfilled = thisQueryInfo.state.fulfilledTimeStamp ?? -1;
   const thatFulfilled = thatQueryInfo.state.fulfilledTimeStamp ?? -1;
@@ -40,7 +40,7 @@ const mapStatusToFactor = {
 
 function sortQueryByStatus(
   thisQueryInfo: RtkResourceInfo,
-  thatQueryInfo: RtkResourceInfo
+  thatQueryInfo: RtkResourceInfo,
 ): number {
   const thisTerm = mapStatusToFactor[thisQueryInfo.state.status] || -1;
   const thatTerm = mapStatusToFactor[thatQueryInfo.state.status] || -1;
@@ -49,7 +49,7 @@ function sortQueryByStatus(
 }
 
 export function compareJSONPrimitive<
-  T extends string | number | boolean | null
+  T extends string | number | boolean | null,
 >(a: T, b: T): number {
   if (a === b) {
     return 0;
@@ -63,14 +63,14 @@ export function compareJSONPrimitive<
 
 function sortByQueryKey(
   thisQueryInfo: RtkResourceInfo,
-  thatQueryInfo: RtkResourceInfo
+  thatQueryInfo: RtkResourceInfo,
 ): number {
   return compareJSONPrimitive(thisQueryInfo.queryKey, thatQueryInfo.queryKey);
 }
 
 function sortQueryByEndpointName(
   thisQueryInfo: RtkResourceInfo,
-  thatQueryInfo: RtkResourceInfo
+  thatQueryInfo: RtkResourceInfo,
 ): number {
   const thisEndpointName = thisQueryInfo.state.endpointName ?? '';
   const thatEndpointName = thatQueryInfo.state.endpointName ?? '';
@@ -80,11 +80,11 @@ function sortQueryByEndpointName(
 
 function sortByApiReducerPath(
   thisQueryInfo: RtkResourceInfo,
-  thatQueryInfo: RtkResourceInfo
+  thatQueryInfo: RtkResourceInfo,
 ): number {
   return compareJSONPrimitive(
     thisQueryInfo.reducerPath,
-    thatQueryInfo.reducerPath
+    thatQueryInfo.reducerPath,
   );
 }
 

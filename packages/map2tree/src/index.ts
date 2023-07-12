@@ -12,7 +12,7 @@ export interface Node {
 function visit(
   parent: Node,
   visitFn: (parent: Node) => void,
-  childrenFn: (parent: Node) => Node[] | undefined | null
+  childrenFn: (parent: Node) => Node[] | undefined | null,
 ) {
   if (!parent) return;
 
@@ -37,7 +37,7 @@ function getNode(tree: Node, key: string): Node | null {
         node = d;
       }
     },
-    (d) => d.children
+    (d) => d.children,
   );
 
   return node;
@@ -46,7 +46,7 @@ function getNode(tree: Node, key: string): Node | null {
 export function map2tree(
   root: unknown,
   options: { key?: string; pushMethod?: 'push' | 'unshift' } = {},
-  tree: Node = { name: options.key || 'state', children: [] }
+  tree: Node = { name: options.key || 'state', children: [] },
   // eslint-disable-next-line @typescript-eslint/ban-types
 ): Node | {} {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -94,7 +94,7 @@ export function map2tree(
       currentNode.children![pushMethod](newNode);
 
       map2tree(value, { key, pushMethod }, tree);
-    }
+    },
   );
 
   return tree;
