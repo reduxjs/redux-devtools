@@ -33,7 +33,7 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
     shouldExpandNodeInitially: (
       keyPath: (string | number)[],
       value: unknown,
-      layer: number
+      layer: number,
     ): boolean => {
       return layer < 2;
     },
@@ -58,7 +58,7 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
   >(
     identity,
     (styling) => (type, data) =>
-      getItemString(styling, type, data, DATA_TYPE_KEY, false)
+      getItemString(styling, type, data, DATA_TYPE_KEY, false),
   );
 
   readonly selectTheme: Selector<

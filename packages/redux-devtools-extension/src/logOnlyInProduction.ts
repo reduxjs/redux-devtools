@@ -15,12 +15,12 @@ declare const process: {
 };
 
 function extensionComposeStub(
-  config: Config
+  config: Config,
 ): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
   ...funcs: StoreEnhancers
 ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 function extensionComposeStub<
-  StoreEnhancers extends readonly StoreEnhancer<unknown>[]
+  StoreEnhancers extends readonly StoreEnhancer<unknown>[],
 >(
   ...funcs: StoreEnhancers
 ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;

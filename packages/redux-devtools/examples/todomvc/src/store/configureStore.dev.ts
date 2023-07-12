@@ -10,11 +10,11 @@ function getDebugSessionKey() {
 
 const enhancer = compose(
   DevTools.instrument(),
-  persistState(getDebugSessionKey())
+  persistState(getDebugSessionKey()),
 );
 
 export default function configureStore(
-  initialState?: PreloadedState<TodoState>
+  initialState?: PreloadedState<TodoState>,
 ) {
   return createStore(rootReducer, initialState, enhancer);
 }

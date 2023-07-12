@@ -27,7 +27,7 @@ const ActionPreviewHeader: FunctionComponent<
               'selectorButton',
               tab.name === tabName && 'selectorButtonSelected',
             ],
-            tab.name === tabName
+            tab.name === tabName,
           )}
         >
           {tab.name}
@@ -59,7 +59,7 @@ const ActionPreviewHeader: FunctionComponent<
               {key}
             </a>
           </span>
-        )
+        ),
       )}
     </div>
   </div>

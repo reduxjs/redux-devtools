@@ -91,7 +91,7 @@ const MappedApiPreview = mapProps<QueryPreviewTabProps, QueryPreviewApiProps>(
     isWideLayout,
     apiState: selectors.selectApiOfCurrentQuery(selectorsSource),
     apiStats: selectors.selectApiStatsOfCurrentQuery(selectorsSource),
-  })
+  }),
 )(QueryPreviewApi);
 
 const MappedQueryPreviewActions = mapProps<
@@ -173,7 +173,7 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
 
   renderLabelWithCounter = (
     label: React.ReactText,
-    counter: number
+    counter: number,
   ): string => {
     let counterAsString = counter.toFixed(0);
 
@@ -185,7 +185,7 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
   };
 
   renderTabLabel = (
-    tab: TabOption<QueryPreviewTabs, unknown, 'query' | 'mutation'>
+    tab: TabOption<QueryPreviewTabs, unknown, 'query' | 'mutation'>,
   ): ReactNode => {
     const { selectors, selectorsSource, resInfo } = this.props;
     const tabCount = selectors.selectTabCounters(selectorsSource)[tab.value];
@@ -219,7 +219,7 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
                 onTabChange={onTabChange}
                 tabs={
                   tabs.filter((tab) =>
-                    isTabVisible(tab, 'default')
+                    isTabVisible(tab, 'default'),
                   ) as ReadonlyArray<
                     TabOption<
                       QueryPreviewTabs,
@@ -247,7 +247,7 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
                 onTabChange={onTabChange}
                 tabs={
                   tabs.filter((tab) =>
-                    isTabVisible(tab, resInfo.type)
+                    isTabVisible(tab, resInfo.type),
                   ) as ReadonlyArray<
                     TabOption<
                       QueryPreviewTabs,

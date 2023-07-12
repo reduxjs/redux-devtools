@@ -10,7 +10,7 @@ import ActionListHeader from './ActionListHeader';
 function getTimestamps<A extends Action<unknown>>(
   actions: { [actionId: number]: PerformAction<A> },
   actionIds: number[],
-  actionId: number
+  actionId: number,
 ) {
   const idx = actionIds.indexOf(actionId);
   const prevActionId = actionIds[idx - 1];
@@ -45,7 +45,7 @@ interface Props<A extends Action<unknown>> {
 }
 
 export default class ActionList<
-  A extends Action<unknown>
+  A extends Action<unknown>,
 > extends PureComponent<Props<A>> {
   node?: HTMLDivElement | null;
   scrollDown?: boolean;
@@ -133,7 +133,7 @@ export default class ActionList<
           (id) =>
             (actions[id].action.type as string)
               .toLowerCase()
-              .indexOf(lowerSearchValue as string) !== -1
+              .indexOf(lowerSearchValue as string) !== -1,
         )
       : actionIds;
 
@@ -143,7 +143,7 @@ export default class ActionList<
         data-testid="actionList"
         {...styling(
           ['actionList', isWideLayout && 'actionListWide'],
-          isWideLayout
+          isWideLayout,
         )}
       >
         <ActionListHeader

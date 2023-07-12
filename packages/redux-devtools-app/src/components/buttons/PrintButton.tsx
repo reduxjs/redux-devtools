@@ -24,7 +24,7 @@ export default class PrintButton extends Component {
     const initTransform = g.getAttribute('transform')!;
     g.setAttribute(
       'transform',
-      initTransform.replace(/.+scale\(/, 'translate(57, 10) scale(')
+      initTransform.replace(/.+scale\(/, 'translate(57, 10) scale('),
     );
 
     window.print();

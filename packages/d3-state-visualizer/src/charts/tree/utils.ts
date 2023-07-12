@@ -32,7 +32,7 @@ export function toggleChildren(node: InternalNode) {
 export function visit(
   parent: InternalNode,
   visitFn: (parent: InternalNode) => void,
-  childrenFn: (parent: InternalNode) => InternalNode[] | null | undefined
+  childrenFn: (parent: InternalNode) => InternalNode[] | null | undefined,
 ) {
   if (!parent) {
     return;

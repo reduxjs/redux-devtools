@@ -13,7 +13,7 @@ function setup(propOverrides) {
       onClearCompleted: expect.createSpy(),
       onShow: expect.createSpy(),
     },
-    propOverrides
+    propOverrides,
   );
 
   const renderer = TestUtils.createRenderer();
@@ -72,7 +72,7 @@ describe('components', () => {
             0: 'All',
             1: 'Active',
             2: 'Completed',
-          }[i]
+          }[i],
         );
       });
     });

@@ -39,12 +39,12 @@ export default function todos(state = initialState, action: TodoAction) {
 
     case EDIT_TODO:
       return state.map((todo) =>
-        todo.id === action.id ? { ...todo, text: action.text } : todo
+        todo.id === action.id ? { ...todo, text: action.text } : todo,
       );
 
     case MARK_TODO:
       return state.map((todo) =>
-        todo.id === action.id ? { ...todo, marked: !todo.marked } : todo
+        todo.id === action.id ? { ...todo, marked: !todo.marked } : todo,
       );
 
     case MARK_ALL: {

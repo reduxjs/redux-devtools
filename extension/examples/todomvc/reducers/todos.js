@@ -36,7 +36,7 @@ export default function todos(state = initialState, action) {
       return state.map((todo) =>
         todo.id === action.id
           ? Object.assign({}, todo, { text: action.text, modified: new Date() })
-          : todo
+          : todo,
       );
 
     case COMPLETE_TODO:
@@ -46,7 +46,7 @@ export default function todos(state = initialState, action) {
               completed: !todo.completed,
               modified: new Date(),
             })
-          : todo
+          : todo,
       );
 
     case COMPLETE_ALL:
@@ -55,7 +55,7 @@ export default function todos(state = initialState, action) {
         Object.assign({}, todo, {
           completed: !areAllMarked,
           modified: new Date(),
-        })
+        }),
       );
 
     case CLEAR_COMPLETED:

@@ -27,7 +27,7 @@ export interface ThemeFromProvider extends ThemeBase {
 const getTheme = (
   type: keyof typeof themes,
   scheme: keyof typeof schemes,
-  light: boolean
+  light: boolean,
 ): ThemeFromProvider => {
   let colors;
   if (scheme === 'default') {
@@ -55,7 +55,7 @@ export const useTheme = ({
   colorPreference,
 }: ThemeData): ThemeFromProvider => {
   const [prefersDarkColorScheme, setPrefersDarkColorScheme] = useState(
-    window.matchMedia('(prefers-color-scheme: dark)').matches
+    window.matchMedia('(prefers-color-scheme: dark)').matches,
   );
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export const useTheme = ({
       colorPreference === 'auto'
         ? !prefersDarkColorScheme
         : colorPreference === 'light',
-    [colorPreference, prefersDarkColorScheme]
+    [colorPreference, prefersDarkColorScheme],
   );
 
   return getTheme(type, scheme, light);

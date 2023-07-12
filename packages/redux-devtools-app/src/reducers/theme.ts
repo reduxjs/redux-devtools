@@ -14,7 +14,7 @@ export function theme(
     scheme: 'default',
     colorPreference: 'auto',
   },
-  action: StoreAction
+  action: StoreAction,
 ) {
   if (action.type === CHANGE_THEME) {
     return {

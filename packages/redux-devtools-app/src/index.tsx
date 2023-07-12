@@ -21,7 +21,7 @@ export class Root extends Component {
             type: CONNECT_REQUEST,
           });
         }
-      }
+      },
     );
     this.store = store;
     this.persistor = persistor;

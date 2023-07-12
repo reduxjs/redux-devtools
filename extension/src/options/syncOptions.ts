@@ -93,7 +93,7 @@ const get = (callback: (options: Options) => void) => {
       function (items) {
         options = migrateOldOptions(items as OldOrNewOptions);
         callback(options);
-      }
+      },
     );
   }
 };
@@ -125,8 +125,8 @@ export const injectOptions = (newOptions: Options) => {
     document.createTextNode(
       'window.devToolsOptions = Object.assign(window.devToolsOptions||{},' +
         JSON.stringify(options) +
-        ');'
-    )
+        ');',
+    ),
   );
   (document.head || document.documentElement).appendChild(s);
   s.parentNode!.removeChild(s);

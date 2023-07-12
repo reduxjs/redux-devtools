@@ -45,7 +45,9 @@ export const style = ({
 
   &:focus:not(:active) {
     background-color: ${theme.base02};
-    box-shadow: 0 0 4px ${theme.base02}, 0 4px 8px ${theme.base04};
+    box-shadow:
+      0 0 4px ${theme.base02},
+      0 4px 8px ${theme.base04};
   }
 
   ${ripple(theme)}

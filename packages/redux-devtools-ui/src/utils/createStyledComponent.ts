@@ -13,7 +13,7 @@ import { ThemeFromProvider } from './theme';
 type StyleFunction<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/ban-types
-  O extends object = {}
+  O extends object = {},
 > = InterpolationFunction<
   ThemedStyledProps<StyledComponentPropsWithRef<C> & O, Theme>
 >;
@@ -21,7 +21,7 @@ type StyleFunction<
 interface StylesObject<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/ban-types
-  O extends object = {}
+  O extends object = {},
 > {
   [type: string]: StyleFunction<C, O>;
 }
@@ -29,13 +29,13 @@ interface StylesObject<
 type Styles<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/ban-types
-  O extends object = {}
+  O extends object = {},
 > = StylesObject<C, O> | StyleFunction<C, O>;
 
 function isStylesObject<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/ban-types
-  O extends object = {}
+  O extends object = {},
 >(styles: Styles<C>): styles is StylesObject<C, O> {
   return typeof styles === 'object';
 }
@@ -43,14 +43,14 @@ function isStylesObject<
 const getStyle = <
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/ban-types
-  O extends object = {}
+  O extends object = {},
 >(
   styles: Styles<C, O>,
-  type: string
+  type: string,
 ) => (isStylesObject(styles) ? styles[type] || styles.default : styles);
 
 function isThemeFromProvider(
-  theme: Theme | Base16Theme
+  theme: Theme | Base16Theme,
 ): theme is ThemeFromProvider {
   return (theme as ThemeFromProvider).type !== undefined;
 }
@@ -58,10 +58,10 @@ function isThemeFromProvider(
 export default function createStyledComponent<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/ban-types
-  O extends object = {}
+  O extends object = {},
 >(
   styles: Styles<C, O>,
-  component?: C
+  component?: C,
 ): StyledComponent<C, Theme | Base16Theme, O> {
   return (styled as ThemedStyledInterface<Theme>)((component || 'div') as C)`
     ${(props: ThemedStyledProps<StyledComponentPropsWithRef<C> & O, Theme>) =>
@@ -70,7 +70,7 @@ export default function createStyledComponent<
         : // used outside of container (theme provider)
           getStyle(
             styles,
-            'default'
+            'default',
           )({
             ...props,
             theme: getDefaultTheme(props.theme as Base16Theme),

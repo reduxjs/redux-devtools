@@ -20,7 +20,9 @@ export function arrToRegex(v: string | string[]) {
 
 function filterActions(
   actionsById: { [actionId: number]: PerformAction<Action<unknown>> },
-  actionSanitizer: ((action: Action<unknown>, id: number) => Action) | undefined
+  actionSanitizer:
+    | ((action: Action<unknown>, id: number) => Action)
+    | undefined,
 ) {
   if (!actionSanitizer) return actionsById;
   return mapValues(actionsById, (action, id: number) => ({
@@ -31,7 +33,7 @@ function filterActions(
 
 function filterStates(
   computedStates: { state: unknown; error?: string | undefined }[],
-  stateSanitizer: (state: unknown, actionId: number) => unknown
+  stateSanitizer: (state: unknown, actionId: number) => unknown,
 ) {
   if (!stateSanitizer) return computedStates;
   return computedStates.map((state, idx) => ({
@@ -92,7 +94,7 @@ function getDevToolsOptions() {
 
 export function isFiltered(
   action: PerformAction<Action<unknown>> | Action<unknown>,
-  localFilter?: LocalFilter
+  localFilter?: LocalFilter,
 ) {
   const { type } = (action as PerformAction<Action<unknown>>).action || action;
   const opts = getDevToolsOptions();
@@ -115,7 +117,7 @@ export function isFiltered(
 
 export function filterStagedActions(
   state: State,
-  filters: LocalFilter | undefined
+  filters: LocalFilter | undefined,
 ) {
   if (!filters) return state;
 
@@ -148,7 +150,7 @@ export function filterState(
     | ((action: Action<unknown>, id: number) => Action)
     | undefined,
   nextActionId: number,
-  predicate?: (currState: unknown, currAction: Action<unknown>) => boolean
+  predicate?: (currState: unknown, currAction: Action<unknown>) => boolean,
 ) {
   if (type === 'ACTION')
     return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
@@ -187,7 +189,7 @@ export function filterState(
       filteredComputedStates.push(
         stateSanitizer
           ? { ...liftedState, state: stateSanitizer(currState, idx) }
-          : liftedState
+          : liftedState,
       );
       if (actionSanitizer) {
         sanitizedActionsById![id] = {

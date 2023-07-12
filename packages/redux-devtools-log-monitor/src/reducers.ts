@@ -9,7 +9,7 @@ import { LogMonitorProps } from './LogMonitor';
 function initialScrollTop<S, A extends Action<unknown>>(
   props: LogMonitorProps<S, A>,
   state = 0,
-  action: LogMonitorAction
+  action: LogMonitorAction,
 ) {
   if (!props.preserveScrollTop) {
     return 0;
@@ -21,7 +21,7 @@ function initialScrollTop<S, A extends Action<unknown>>(
 function startConsecutiveToggle<S, A extends Action<unknown>>(
   props: LogMonitorProps<S, A>,
   state: number | null | undefined,
-  action: LogMonitorAction
+  action: LogMonitorAction,
 ) {
   return action.type === START_CONSECUTIVE_TOGGLE ? action.id : state;
 }
@@ -34,14 +34,14 @@ export interface LogMonitorState {
 export default function reducer<S, A extends Action<unknown>>(
   props: LogMonitorProps<S, A>,
   state: Partial<LogMonitorState> = {},
-  action: LogMonitorAction
+  action: LogMonitorAction,
 ): LogMonitorState {
   return {
     initialScrollTop: initialScrollTop(props, state.initialScrollTop, action),
     consecutiveToggleStartId: startConsecutiveToggle(
       props,
       state.consecutiveToggleStartId,
-      action
+      action,
     ),
   };
 }

@@ -19,7 +19,7 @@ export default function configureStore(initialState) {
       sendOn: SEND_TO_MONITOR,
       sendOnError: 1,
       maxAge: 30,
-    })
+    }),
   );
 
   const store = createStore(reducer, initialState, enhancer);

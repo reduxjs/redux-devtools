@@ -40,7 +40,7 @@ describe('TestGenerator component', () => {
         dispatcher={fnTemplate.dispatcher}
         wrap={fnTemplate.wrap}
         useCodemirror={false}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -55,7 +55,7 @@ describe('TestGenerator component', () => {
         computedStates={computedStates}
         selectedActionId={1}
         useCodemirror={false}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -70,7 +70,7 @@ describe('TestGenerator component', () => {
         actions={actions}
         computedStates={computedStates}
         selectedActionId={1}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -84,7 +84,7 @@ describe('TestGenerator component', () => {
         actions={actions}
         computedStates={computedStates}
         useCodemirror={false}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -101,7 +101,7 @@ describe('TestGenerator component', () => {
         isVanilla
         name="SomeStore"
         useCodemirror={false}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -118,7 +118,7 @@ describe('TestGenerator component', () => {
         isVanilla
         name="SomeStore"
         useCodemirror={false}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });

@@ -56,7 +56,7 @@ function stringify(obj: unknown, serialize?: Serialize | undefined) {
     // 16 MB
     /* eslint-disable no-console */
     console.warn(
-      'Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://github.com/reduxjs/redux-devtools-extension/blob/master/docs/Troubleshooting.md#excessive-use-of-memory-and-cpu on how to configure it.'
+      'Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://github.com/reduxjs/redux-devtools-extension/blob/master/docs/Troubleshooting.md#excessive-use-of-memory-and-cpu on how to configure it.',
     );
     /* eslint-enable no-console */
     stringifyWarned = true;
@@ -80,7 +80,7 @@ export function getSerializeParameter(config: Config) {
         serialize.immutable,
         serialize.refs,
         serialize.replacer,
-        serialize.reviver
+        serialize.reviver,
       );
       return {
         replacer: immutableSerializer.replacer,
@@ -183,7 +183,7 @@ interface OpenMessage {
 
 export type PageScriptToContentScriptMessageForwardedToMonitors<
   S,
-  A extends Action<unknown>
+  A extends Action<unknown>,
 > =
   | InitMessage<S, A>
   | LiftedMessage
@@ -194,7 +194,7 @@ export type PageScriptToContentScriptMessageForwardedToMonitors<
 
 export type PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<
   S,
-  A extends Action<unknown>
+  A extends Action<unknown>,
 > =
   | PageScriptToContentScriptMessageForwardedToMonitors<S, A>
   | ErrorMessage
@@ -204,7 +204,7 @@ export type PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<
 
 export type PageScriptToContentScriptMessageWithoutDisconnect<
   S,
-  A extends Action<unknown>
+  A extends Action<unknown>,
 > =
   | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
   | InitInstancePageScriptToContentScriptMessage
@@ -215,14 +215,14 @@ export type PageScriptToContentScriptMessage<S, A extends Action<unknown>> =
   | DisconnectMessage;
 
 function post<S, A extends Action<unknown>>(
-  message: PageScriptToContentScriptMessage<S, A>
+  message: PageScriptToContentScriptMessage<S, A>,
 ) {
   window.postMessage(message, '*');
 }
 
 function getStackTrace(
   config: Config,
-  toExcludeFromTrace: Function | undefined
+  toExcludeFromTrace: Function | undefined,
 ) {
   if (!config.trace) return undefined;
   if (typeof config.trace === 'function') return config.trace();
@@ -265,7 +265,7 @@ function amendActionType<A extends Action<unknown>>(
     | StructuralPerformAction<A>[]
     | string,
   config: Config,
-  toExcludeFromTrace: Function | undefined
+  toExcludeFromTrace: Function | undefined,
 ): StructuralPerformAction<A> {
   let timestamp = Date.now();
   let stack = getStackTrace(config, toExcludeFromTrace);
@@ -383,7 +383,7 @@ type ToContentScriptMessage<S, A extends Action<unknown>> =
 export function toContentScript<S, A extends Action<unknown>>(
   message: ToContentScriptMessage<S, A>,
   serializeState?: Serialize | undefined,
-  serializeAction?: Serialize | undefined
+  serializeAction?: Serialize | undefined,
 ) {
   if (message.type === 'ACTION') {
     post({
@@ -430,7 +430,7 @@ export function sendMessage<S, A extends Action<unknown>>(
   state: LiftedState<S, A, unknown>,
   config: Config,
   instanceId?: number,
-  name?: string
+  name?: string,
 ) {
   let amendedAction = action;
   if (typeof config !== 'object') {
@@ -450,7 +450,7 @@ export function sendMessage<S, A extends Action<unknown>>(
         instanceId: config.instanceId || instanceId || 1,
       },
       config.serialize as Serialize | undefined,
-      config.serialize as Serialize | undefined
+      config.serialize as Serialize | undefined,
     );
   } else {
     toContentScript<S, A>(
@@ -464,7 +464,7 @@ export function sendMessage<S, A extends Action<unknown>>(
         instanceId: config.instanceId || instanceId || 1,
       },
       config.serialize as Serialize | undefined,
-      config.serialize as Serialize | undefined
+      config.serialize as Serialize | undefined,
     );
   }
 }
@@ -489,7 +489,7 @@ function handleMessages(event: MessageEvent<ContentScriptToPageScriptMessage>) {
 
 export function setListener(
   onMessage: (message: ContentScriptToPageScriptMessage) => void,
-  instanceId: number
+  instanceId: number,
 ) {
   listeners[instanceId] = onMessage;
   window.addEventListener('message', handleMessages, false);
@@ -498,7 +498,7 @@ export function setListener(
 const liftListener =
   <S, A extends Action<unknown>>(
     listener: (message: ListenerMessage<S, A>) => void,
-    config: Config
+    config: Config,
   ) =>
   (message: ContentScriptToPageScriptMessage) => {
     if (message.type === 'IMPORT') {
@@ -522,15 +522,15 @@ export function disconnect() {
 export interface ConnectResponse {
   init: <S, A extends Action<unknown>>(
     state: S,
-    liftedData?: LiftedState<S, A, unknown>
+    liftedData?: LiftedState<S, A, unknown>,
   ) => void;
   subscribe: <S, A extends Action<unknown>>(
-    listener: (message: ListenerMessage<S, A>) => void
+    listener: (message: ListenerMessage<S, A>) => void,
   ) => (() => void) | undefined;
   unsubscribe: () => void;
   send: <S, A extends Action<unknown>>(
     action: A,
-    state: LiftedState<S, A, unknown>
+    state: LiftedState<S, A, unknown>,
   ) => void;
   error: (payload: string) => void;
 }
@@ -575,12 +575,12 @@ export function connect(preConfig: Config): ConnectResponse {
   listeners[id] = [rootListener];
 
   const subscribe = <S, A extends Action<unknown>>(
-    listener: (message: ListenerMessage<S, A>) => void
+    listener: (message: ListenerMessage<S, A>) => void,
   ) => {
     if (!listener) return undefined;
     const liftedListener = liftListener(listener, config);
     const listenersForId = listeners[id] as ((
-      message: ContentScriptToPageScriptMessage
+      message: ContentScriptToPageScriptMessage,
     ) => void)[];
     listenersForId.push(liftedListener);
 
@@ -602,7 +602,7 @@ export function connect(preConfig: Config): ConnectResponse {
 
   const send = <S, A extends Action<unknown>>(
     action: A,
-    state: LiftedState<S, A, unknown>
+    state: LiftedState<S, A, unknown>,
   ) => {
     if (
       isPaused ||
@@ -639,13 +639,13 @@ export function connect(preConfig: Config): ConnectResponse {
     sendMessage(
       amendedAction as StructuralPerformAction<A>,
       amendedState,
-      config
+      config,
     );
   };
 
   const init = <S, A extends Action<unknown>>(
     state: S,
-    liftedData?: LiftedState<S, A, unknown>
+    liftedData?: LiftedState<S, A, unknown>,
   ) => {
     const message: InitMessage<S, A> = {
       type: 'INIT',
