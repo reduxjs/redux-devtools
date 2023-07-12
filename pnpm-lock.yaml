@@ -3222,8 +3222,8 @@ importers:
         specifier: ^15.9.0
         version: 15.9.0
       stylelint-config-standard:
-        specifier: ^33.0.0
-        version: 33.0.0(stylelint@15.9.0)
+        specifier: ^34.0.0
+        version: 34.0.0(stylelint@15.9.0)
       stylelint-config-styled-components:
         specifier: ^0.1.1
         version: 0.1.1
@@ -20789,21 +20789,23 @@ packages:
       shallowequal: 1.1.0
       supports-color: 5.5.0
 
-  /stylelint-config-recommended@12.0.0(stylelint@15.9.0):
-    resolution: {integrity: sha512-x6x8QNARrGO2sG6iURkzqL+Dp+4bJorPMMRNPScdvaUK8PsynriOcMW7AFDKqkWAS5wbue/u8fUT/4ynzcmqdQ==}
+  /stylelint-config-recommended@13.0.0(stylelint@15.9.0):
+    resolution: {integrity: sha512-EH+yRj6h3GAe/fRiyaoO2F9l9Tgg50AOFhaszyfov9v6ayXJ1IkSHwTxd7lB48FmOeSGDPLjatjO11fJpmarkQ==}
+    engines: {node: ^14.13.1 || >=16.0.0}
     peerDependencies:
-      stylelint: ^15.5.0
+      stylelint: ^15.10.0
     dependencies:
       stylelint: 15.9.0
     dev: true
 
-  /stylelint-config-standard@33.0.0(stylelint@15.9.0):
-    resolution: {integrity: sha512-eyxnLWoXImUn77+ODIuW9qXBDNM+ALN68L3wT1lN2oNspZ7D9NVGlNHb2QCUn4xDug6VZLsh0tF8NyoYzkgTzg==}
+  /stylelint-config-standard@34.0.0(stylelint@15.9.0):
+    resolution: {integrity: sha512-u0VSZnVyW9VSryBG2LSO+OQTjN7zF9XJaAJRX/4EwkmU0R2jYwmBSN10acqZisDitS0CLiEiGjX7+Hrq8TAhfQ==}
+    engines: {node: ^14.13.1 || >=16.0.0}
     peerDependencies:
-      stylelint: ^15.5.0
+      stylelint: ^15.10.0
     dependencies:
       stylelint: 15.9.0
-      stylelint-config-recommended: 12.0.0(stylelint@15.9.0)
+      stylelint-config-recommended: 13.0.0(stylelint@15.9.0)
     dev: true
 
   /stylelint-config-styled-components@0.1.1:
