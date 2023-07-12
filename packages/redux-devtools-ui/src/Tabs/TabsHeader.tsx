@@ -144,8 +144,8 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
           tabsRef!.getBoundingClientRect().width + this.hiddenTabsWidth[0] <
             tabsWrapperRef!.getBoundingClientRect().width
         ) {
-          hiddenTab = hiddenTabs.shift();
-          visibleTabs.splice(Number(hiddenTab!.key), 0, hiddenTab!);
+          hiddenTab = hiddenTabs.shift()!;
+          visibleTabs.splice(Number(hiddenTab.key), 0, hiddenTab);
           i++;
         }
       } else {
@@ -173,8 +173,8 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
         tabButtons[i].getBoundingClientRect().right + this.hiddenTabsWidth[0] <
           tabsWrapperRight - this.iconWidth
       ) {
-        hiddenTab = hiddenTabs.shift();
-        visibleTabs.splice(Number(hiddenTab!.key), 0, hiddenTab!);
+        hiddenTab = hiddenTabs.shift()!;
+        visibleTabs.splice(Number(hiddenTab.key), 0, hiddenTab);
         this.hiddenTabsWidth.shift();
         i++;
       }
