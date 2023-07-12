@@ -19,7 +19,7 @@ export class QueryPreviewData extends PureComponent<QueryPreviewDataProps> {
   shouldExpandNodeInitially: ShouldExpandNodeInitially = (
     keyPath,
     value,
-    layer
+    layer,
   ) => {
     return layer <= 1;
   };

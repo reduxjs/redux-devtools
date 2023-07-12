@@ -42,7 +42,7 @@ function getText(
   type: string,
   data: any,
   previewContent: boolean,
-  isDiff: boolean | undefined
+  isDiff: boolean | undefined,
 ) {
   if (type === 'Object') {
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -52,7 +52,7 @@ function getText(
     const str = keys
       .slice(0, 3)
       .map(
-        (key) => `${key}: ${getShortTypeString(data[key], isDiff) as string}`
+        (key) => `${key}: ${getShortTypeString(data[key], isDiff) as string}`,
       )
       .concat(keys.length > 3 ? ['…'] : [])
       .join(', ');
@@ -79,7 +79,7 @@ export function getItemString(
   data: any,
   dataTypeKey: string | symbol | undefined,
   previewContent: boolean,
-  isDiff?: boolean
+  isDiff?: boolean,
 ): ReactNode {
   return (
     <span {...styling('treeItemHint')}>
@@ -93,7 +93,7 @@ export function getItemString(
 }
 
 export function createTreeItemLabelRenderer(
-  styling: StylingFunction
+  styling: StylingFunction,
 ): LabelRenderer {
   return function labelRenderer([key], nodeType, expanded) {
     return (

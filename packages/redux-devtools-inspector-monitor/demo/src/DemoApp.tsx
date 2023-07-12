@@ -159,7 +159,7 @@ function DemoApp(props: Props) {
     const options = getOptions(location);
 
     navigate(
-      buildUrl({ ...options, supportImmutable: !options.supportImmutable })
+      buildUrl({ ...options, supportImmutable: !options.supportImmutable }),
     );
   };
 
@@ -300,7 +300,7 @@ function DemoApp(props: Props) {
 
 export default connect((state: DemoAppState) => state, {
   toggleTimeoutUpdate: (
-    timeoutUpdateEnabled: boolean
+    timeoutUpdateEnabled: boolean,
   ): ToggleTimeoutUpdateAction => ({
     type: 'TOGGLE_TIMEOUT_UPDATE',
     timeoutUpdateEnabled,

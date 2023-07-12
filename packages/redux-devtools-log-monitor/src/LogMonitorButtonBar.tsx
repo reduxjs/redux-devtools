@@ -29,7 +29,7 @@ interface Props<S, A extends Action<unknown>> {
 
 export default class LogMonitorButtonBar<
   S,
-  A extends Action<unknown>
+  A extends Action<unknown>,
 > extends PureComponent<Props<S, A>> {
   static propTypes = {
     dispatch: PropTypes.func,

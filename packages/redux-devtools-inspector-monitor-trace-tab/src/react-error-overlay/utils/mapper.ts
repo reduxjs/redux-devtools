@@ -16,7 +16,7 @@ import { getLinesAround } from './getLinesAround';
  */
 async function map(
   frames: StackFrame[],
-  contextLines = 3
+  contextLines = 3,
 ): Promise<StackFrame[]> {
   const cache: {
     [fileName: string]: {
@@ -40,7 +40,7 @@ async function map(
       const fileSource = await fetch(fileName).then((r) => r.text());
       const map = await getSourceMap(fileName, fileSource);
       cache[fileName] = { fileSource, map };
-    })
+    }),
   );
   return frames.map((frame) => {
     const { functionName, fileName, lineNumber, columnNumber } = frame;
@@ -50,7 +50,7 @@ async function map(
     }
     const { source, line, column } = map.getOriginalPosition(
       lineNumber,
-      columnNumber!
+      columnNumber!,
     );
     const originalSource = source == null ? [] : map.getSource(source) || [];
     return new StackFrame(
@@ -63,7 +63,7 @@ async function map(
       source,
       line,
       column,
-      getLinesAround(line!, contextLines, originalSource)
+      getLinesAround(line!, contextLines, originalSource),
     );
   });
 }

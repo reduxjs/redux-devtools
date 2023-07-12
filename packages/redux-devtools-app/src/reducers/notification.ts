@@ -14,7 +14,7 @@ export type NotificationState = Notification | null;
 
 export function notification(
   state: NotificationState = null,
-  action: StoreAction
+  action: StoreAction,
 ): NotificationState {
   switch (action.type) {
     case SHOW_NOTIFICATION:

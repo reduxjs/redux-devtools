@@ -21,7 +21,7 @@ export class QueryPreviewApi extends PureComponent<QueryPreviewApiProps> {
   shouldExpandApiStateNode: ShouldExpandNodeInitially = (
     keyPath,
     value,
-    layer
+    layer,
   ) => {
     const lastKey = keyPath[keyPath.length - 1];
 

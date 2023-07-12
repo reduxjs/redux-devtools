@@ -158,7 +158,7 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
           if ((tabButtons[i] as HTMLButtonElement).value !== selected) {
             hiddenTabs.unshift(...visibleTabs.splice(i, 1));
             this.hiddenTabsWidth.unshift(
-              tabButtons[i].getBoundingClientRect().width
+              tabButtons[i].getBoundingClientRect().width,
             );
           } else {
             tabsWrapperRight -= tabButtons[i].getBoundingClientRect().width;

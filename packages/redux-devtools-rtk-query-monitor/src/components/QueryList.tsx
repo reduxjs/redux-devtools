@@ -12,7 +12,7 @@ export interface QueryListProps {
 export class QueryList extends PureComponent<QueryListProps> {
   static isItemSelected(
     selectedQueryKey: QueryListProps['selectedQueryKey'],
-    queryInfo: RtkResourceInfo
+    queryInfo: RtkResourceInfo,
   ): boolean {
     return (
       !!selectedQueryKey &&
@@ -46,7 +46,7 @@ export class QueryList extends PureComponent<QueryListProps> {
                   onClick={() => onSelectQuery(resInfo)}
                   {...styling(
                     ['queryListItem', isSelected && 'queryListItemSelected'],
-                    isSelected
+                    isSelected,
                   )}
                 >
                   <p {...styling('queryListItemKey')}>

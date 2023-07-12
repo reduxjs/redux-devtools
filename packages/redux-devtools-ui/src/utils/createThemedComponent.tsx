@@ -6,7 +6,7 @@ import { Base16Theme } from 'base16';
 export default <C extends React.ComponentType<any>>(
   UnthemedComponent: React.ComponentProps<C> extends { theme?: Theme }
     ? C
-    : never
+    : never,
 ) => {
   return withTheme((props) => {
     return props.theme && props.theme.type ? (

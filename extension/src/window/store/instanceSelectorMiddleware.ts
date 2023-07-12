@@ -9,7 +9,7 @@ import {
 function selectInstance(
   tabId: number,
   store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
-  next: Dispatch<StoreAction>
+  next: Dispatch<StoreAction>,
 ) {
   const instances = store.getState().instances;
   if (instances.current === 'default') return;
@@ -29,12 +29,12 @@ function getCurrentTabId(next: (tabId: number) => void) {
       const tab = tabs[0];
       if (!tab) return;
       next(tab.id!);
-    }
+    },
   );
 }
 
 export default function popupSelector(
-  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>
+  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
 ) {
   return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
     const result = next(action);

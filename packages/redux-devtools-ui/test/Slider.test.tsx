@@ -9,7 +9,7 @@ describe('Slider', function () {
         onChange={() => {
           // noop
         }}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -25,7 +25,7 @@ describe('Slider', function () {
         onChange={() => {
           // noop
         }}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });

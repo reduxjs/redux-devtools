@@ -20,7 +20,7 @@ export function importState(
       refs?: (new (data: any) => unknown)[] | null;
       reviver?: (key: string, value: unknown) => unknown;
     };
-  }
+  },
 ) {
   if (!state) return undefined;
   let parse = jsan.parse;
@@ -29,7 +29,7 @@ export function importState(
       parse = (v) =>
         jsan.parse(
           v,
-          immutableSerialize(serialize.immutable!, serialize.refs).reviver
+          immutableSerialize(serialize.immutable!, serialize.refs).reviver,
         );
     } else if (serialize.reviver) {
       parse = (v) => jsan.parse(v, serialize.reviver);
@@ -60,14 +60,14 @@ export function importState(
             payload: string;
             preloadedState: string;
           }
-        ).preloadedState
+        ).preloadedState,
       ) as State;
     nextLiftedState = parse(
       (
         nextLiftedState as unknown as {
           payload: string;
         }
-      ).payload
+      ).payload,
     ) as State;
   }
 

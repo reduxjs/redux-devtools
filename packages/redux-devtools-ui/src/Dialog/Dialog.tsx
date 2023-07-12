@@ -20,7 +20,7 @@ export interface DialogProps {
   noFooter?: boolean;
   modal?: boolean;
   onDismiss: (
-    e: React.MouseEvent<HTMLButtonElement | HTMLDivElement> | false
+    e: React.MouseEvent<HTMLButtonElement | HTMLDivElement> | false,
   ) => void;
   onSubmit: () => void;
   theme?: Base16Theme;

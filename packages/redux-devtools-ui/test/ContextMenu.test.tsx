@@ -14,14 +14,14 @@ describe('ContextMenu', function () {
         }}
         x={100}
         y={100}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
   it('should handle the click event', async () => {
     const onClick = jest.fn();
     render(
-      <ContextMenu items={items} onClick={onClick} x={100} y={100} visible />
+      <ContextMenu items={items} onClick={onClick} x={100} y={100} visible />,
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Menu Item 1' }));

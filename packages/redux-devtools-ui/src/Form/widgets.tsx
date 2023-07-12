@@ -21,7 +21,7 @@ const SelectWidget: Widget = ({
       onChange(option?.value);
     }}
     value={(options.enumOptions as { label: string; value: string }[]).find(
-      (option) => option.value === value
+      (option) => option.value === value,
     )}
     {...rest}
   />

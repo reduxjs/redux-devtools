@@ -39,7 +39,7 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
   shouldExpandNodeInitially: ShouldExpandNodeInitially = (
     keyPath,
     value,
-    layer
+    layer,
   ) => {
     const lastKey = keyPath[keyPath.length - 1];
 
@@ -76,7 +76,7 @@ export class QueryPreviewInfo extends PureComponent<QueryPreviewInfoProps> {
         state.startedTimeStamp <= state.fulfilledTimeStamp
       ) {
         timings.duration = formatMs(
-          state.fulfilledTimeStamp - state.startedTimeStamp
+          state.fulfilledTimeStamp - state.startedTimeStamp,
         );
       }
 

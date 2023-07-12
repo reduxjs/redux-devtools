@@ -73,7 +73,7 @@ export function socket(state = initialState, action: StoreAction): SocketState {
       return {
         ...state,
         channels: state.channels.filter(
-          (channel) => channel !== action.channel
+          (channel) => channel !== action.channel,
         ),
       };
     case actions.DISCONNECTED:

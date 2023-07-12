@@ -33,7 +33,7 @@ export default createDevTools(
   >
     <LogMonitor />
     <SliderMonitor />
-  </DockMonitor>
+  </DockMonitor>,
 );
 ```
 

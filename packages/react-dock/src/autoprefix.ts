@@ -41,7 +41,7 @@ function prefixProp<Value>(key: string, value: Value) {
     (obj, pre) => (
       (obj[pre + key[0].toUpperCase() + key.substr(1)] = value), obj
     ),
-    {}
+    {},
   );
 }
 
@@ -54,6 +54,6 @@ export default function autoprefix(style: CSSProperties) {
             ...prefixProp(key, style[key as keyof CSSProperties]),
           }
         : obj,
-    style
+    style,
   );
 }

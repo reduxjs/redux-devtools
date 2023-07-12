@@ -84,7 +84,7 @@ export default RtkQueryMonitor as unknown as React.ComponentType<
   update(
     monitorProps: ExternalProps<unknown, Action<unknown>>,
     state: RtkQueryMonitorState | undefined,
-    action: Action
+    action: Action,
   ): RtkQueryMonitorState;
   defaultProps: DefaultProps;
 };

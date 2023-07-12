@@ -15,13 +15,13 @@ function logError(type: string) {
     console.error(
       'Redux DevTools could not render. You must pass the Redux store ' +
         'to <DevTools> either as a "store" prop or by wrapping it in a ' +
-        '<Provider store={store}>.'
+        '<Provider store={store}>.',
     );
   } else {
     console.error(
       'Redux DevTools could not render. Did you forget to include ' +
         'DevTools.instrument() in your store enhancer chain before ' +
-        'using createStore()?'
+        'using createStore()?',
     );
   }
 }
@@ -30,7 +30,7 @@ export interface Props<
   S,
   A extends Action<unknown>,
   MonitorState,
-  MonitorAction extends Action<unknown>
+  MonitorAction extends Action<unknown>,
 > {
   store?: EnhancedStore<S, A, MonitorState>;
 }
@@ -40,14 +40,14 @@ export type Monitor<
   A extends Action<unknown>,
   MonitorProps extends LiftedState<S, A, MonitorState>,
   MonitorState,
-  MonitorAction extends Action<unknown>
+  MonitorAction extends Action<unknown>,
 > = React.ReactElement<
   MonitorProps,
   React.ComponentType<MonitorProps & LiftedState<S, A, MonitorState>> & {
     update(
       monitorProps: MonitorProps,
       state: MonitorState | undefined,
-      action: MonitorAction
+      action: MonitorAction,
     ): MonitorState;
   }
 >;
@@ -57,13 +57,13 @@ export default function createDevTools<
   A extends Action<unknown>,
   MonitorProps extends LiftedState<S, A, MonitorState>,
   MonitorState,
-  MonitorAction extends Action<unknown>
+  MonitorAction extends Action<unknown>,
 >(children: Monitor<S, A, MonitorProps, MonitorState, MonitorAction>) {
   const monitorElement = Children.only(children);
   const monitorProps = monitorElement.props;
   const Monitor = monitorElement.type;
   const ConnectedMonitor = connect(
-    (state: LiftedState<S, A, MonitorState>) => state
+    (state: LiftedState<S, A, MonitorState>) => state,
   )(Monitor as React.ComponentType<any>);
 
   return class DevTools extends Component<
@@ -80,16 +80,16 @@ export default function createDevTools<
     liftedStore?: LiftedStore<S, A, MonitorState>;
 
     static instrument = (
-      options?: Options<S, A, MonitorState, MonitorAction>
+      options?: Options<S, A, MonitorState, MonitorAction>,
     ) =>
       instrument(
         (state, action) => Monitor.update(monitorProps, state, action),
-        options
+        options,
       );
 
     constructor(
       props: Props<S, A, MonitorState, MonitorAction>,
-      context: { store?: EnhancedStore<S, A, MonitorState> }
+      context: { store?: EnhancedStore<S, A, MonitorState> },
     ) {
       super(props, context);
 

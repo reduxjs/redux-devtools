@@ -10,7 +10,7 @@ describe('Toolbar', function () {
         <Divider />
         <Spacer />
         <Button>2</Button>
-      </Toolbar>
+      </Toolbar>,
     );
     expect(container.firstChild).toMatchSnapshot();
   });

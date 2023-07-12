@@ -84,7 +84,7 @@ export interface ApiInfo {
 
 export interface SelectOption<
   T = string,
-  VisConfig extends string = 'default'
+  VisConfig extends string = 'default',
 > {
   label: string;
   value: T;

@@ -10,7 +10,7 @@ export default function configureStore(initialState) {
     devTools({
       realtime: true,
       actionCreators,
-    })
+    }),
   );
 
   if (module.hot) {

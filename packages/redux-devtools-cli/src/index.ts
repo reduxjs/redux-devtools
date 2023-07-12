@@ -82,7 +82,7 @@ export default async function (argv: { [arg: string]: any }): Promise<{
         }
         action.allow();
       }
-    }
+    },
   );
 
   void (async () => {

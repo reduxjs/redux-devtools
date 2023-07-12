@@ -14,7 +14,7 @@ export default function configureStore(preloadedState) {
   const store = createStore(
     reducer,
     preloadedState,
-    composeEnhancers(applyMiddleware(invariant(), thunk))
+    composeEnhancers(applyMiddleware(invariant(), thunk)),
   );
 
   if (module.hot) {
