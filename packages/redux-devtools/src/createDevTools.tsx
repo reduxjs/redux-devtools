@@ -89,7 +89,7 @@ export default function createDevTools<
 
     constructor(
       props: Props<S, A, MonitorState, MonitorAction>,
-      context: { store?: EnhancedStore<S, A, MonitorState> },
+      context?: { store?: EnhancedStore<S, A, MonitorState> },
     ) {
       super(props, context);
 
@@ -100,12 +100,12 @@ export default function createDevTools<
         return;
       }
 
-      if (!props.store && !context.store) {
+      if (!props.store && !context?.store) {
         logError('NoStore');
         return;
       }
 
-      if (context.store) {
+      if (context?.store) {
         this.liftedStore = context.store.liftedStore;
       } else {
         this.liftedStore = props.store!.liftedStore;
