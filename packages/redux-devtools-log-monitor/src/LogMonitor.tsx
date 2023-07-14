@@ -206,7 +206,7 @@ class LogMonitor<S, A extends Action<unknown>> extends PureComponent<
 
     // eslint-disable-next-line no-console
     console.warn(
-      'DevTools theme ' + theme + ' not found, defaulting to nicinabox'
+      'DevTools theme ' + theme + ' not found, defaulting to nicinabox',
     );
     return themes.nicinabox;
   }
@@ -279,7 +279,7 @@ export default LogMonitor as unknown as React.ComponentType<
   update(
     monitorProps: ExternalProps<unknown, Action<unknown>>,
     state: LogMonitorState | undefined,
-    action: LogMonitorAction
+    action: LogMonitorAction,
   ): LogMonitorState;
   defaultProps: DefaultProps<unknown>;
 };

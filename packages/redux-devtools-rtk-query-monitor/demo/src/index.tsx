@@ -20,7 +20,7 @@ function renderApp() {
           <DevTools />
         </BrowserRouter>
       </ChakraProvider>
-    </Provider>
+    </Provider>,
   );
 }
 

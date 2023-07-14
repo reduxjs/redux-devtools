@@ -20,7 +20,7 @@ describe('DevTools panel for Electron', function () {
       .setChromeOptions(
         new chrome.Options()
           .setChromeBinaryPath(electronPath)
-          .addArguments(`app=${join(__dirname, 'fixture')}`)
+          .addArguments(`app=${join(__dirname, 'fixture')}`),
       )
       .forBrowser('chrome')
       .build();
@@ -44,7 +44,7 @@ describe('DevTools panel for Electron', function () {
       }
     }
     expect(await driver.getCurrentUrl()).toMatch(
-      /devtools:\/\/devtools\/bundled\/devtools_app.html/
+      /devtools:\/\/devtools\/bundled\/devtools_app.html/,
     );
 
     const id = await driver.executeAsyncScript(function (callback) {
@@ -81,8 +81,8 @@ describe('DevTools panel for Electron', function () {
       .switchTo()
       .frame(
         driver.findElement(
-          webdriver.By.xpath(`//iframe[@src='${devPanelPath}']`)
-        )
+          webdriver.By.xpath(`//iframe[@src='${devPanelPath}']`),
+        ),
       );
     await delay(1000);
   });
@@ -90,10 +90,10 @@ describe('DevTools panel for Electron', function () {
   it('should contain INIT action', async () => {
     const element = await driver.wait(
       webdriver.until.elementLocated(
-        webdriver.By.xpath('//div[contains(@class, "actionListRows-")]')
+        webdriver.By.xpath('//div[contains(@class, "actionListRows-")]'),
       ),
       5000,
-      'Element not found'
+      'Element not found',
     );
     const val = await element.getText();
     expect(val).toMatch(/@@INIT/);
@@ -107,7 +107,7 @@ describe('DevTools panel for Electron', function () {
   });
 
   Object.keys(switchMonitorTests).forEach((description) =>
-    it(description, () => switchMonitorTests[description](driver))
+    it(description, () => switchMonitorTests[description](driver)),
   );
 
   /*  it('should be no logs in console of main window', async () => {

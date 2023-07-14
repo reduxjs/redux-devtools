@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
   s.src = chrome.extension.getURL('page.bundle.js');
   s.onload = function () {
     (this as HTMLScriptElement).parentNode!.removeChild(
-      this as HTMLScriptElement
+      this as HTMLScriptElement,
     );
   };
   (document.head || document.documentElement).appendChild(s);

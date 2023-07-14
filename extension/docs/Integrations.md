@@ -32,7 +32,7 @@ import { inspectProps } from 'react-inspect-props';
 
 compose(
   withState('count', 'setCount', 0),
-  inspectProps('Counter inspector')
+  inspectProps('Counter inspector'),
 )(Counter);
 ```
 
@@ -167,7 +167,7 @@ run(App, {
         { id: newId(), num: 0 },
         { id: newId(), num: 0 },
       ],
-    })
+    }),
   ),
 });
 ```

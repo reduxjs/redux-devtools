@@ -13,7 +13,7 @@ describe('objType', () => {
     expect(
       objType(() => {
         // noop
-      })
+      }),
     ).toBe('Function');
     expect(objType('')).toBe('String');
     expect(objType(true)).toBe('Boolean');

@@ -60,7 +60,7 @@ export type BackgroundAction =
   | DisconnectedAction;
 
 export default function configureStore(
-  preloadedState?: PreloadedState<BackgroundState>
+  preloadedState?: PreloadedState<BackgroundState>,
 ) {
   return createStore(rootReducer, preloadedState, applyMiddleware(api));
   /*

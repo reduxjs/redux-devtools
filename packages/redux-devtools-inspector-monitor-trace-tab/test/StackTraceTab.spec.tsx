@@ -25,7 +25,7 @@ describe('StackTraceTab component', () => {
 
   it('should render with props, but without stack', async () => {
     const { container } = render(
-      <TraceTabAsAny actions={actions} action={actions[0].action} />
+      <TraceTabAsAny actions={actions} action={actions[0].action} />,
     );
     await screen.findByTestId('stack-trace');
     expect(container.firstChild).toMatchSnapshot();
@@ -33,18 +33,18 @@ describe('StackTraceTab component', () => {
 
   it('should render the link to docs', () => {
     const { container } = render(
-      <TraceTabAsAny actions={actions} action={actions[1].action} />
+      <TraceTabAsAny actions={actions} action={actions[1].action} />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render with trace stack', async () => {
     const { container } = render(
-      <TraceTabAsAny actions={actions} action={actions[2].action} />
+      <TraceTabAsAny actions={actions} action={actions[2].action} />,
     );
     const stackTraceDiv = await screen.findByTestId('stack-trace');
     await waitFor(() =>
-      expect(stackTraceDiv.querySelector('div')).toBeTruthy()
+      expect(stackTraceDiv.querySelector('div')).toBeTruthy(),
     );
     expect(container.firstChild).toMatchSnapshot();
   });

@@ -219,8 +219,8 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
       if (replayDiff >= timestampDiff) {
         this.props.dispatch(
           jumpToAction(
-            this.props.stagedActionIds[this.props.currentStateIndex + 1]
-          )
+            this.props.stagedActionIds[this.props.currentStateIndex + 1],
+          ),
         );
 
         if (
@@ -232,7 +232,7 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
         }
 
         timestampDiff = this.getLatestTimestampDiff(
-          this.props.currentStateIndex
+          this.props.currentStateIndex,
         );
         currentTimestamp = Date.now();
 
@@ -274,7 +274,7 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
           if (typeof cb === 'function') {
             cb();
           }
-        }
+        },
       );
     }
   };
@@ -285,8 +285,8 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
     if (this.props.currentStateIndex !== 0) {
       this.props.dispatch(
         jumpToAction(
-          this.props.stagedActionIds[this.props.currentStateIndex - 1]
-        )
+          this.props.stagedActionIds[this.props.currentStateIndex - 1],
+        ),
       );
     }
   };
@@ -297,8 +297,8 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
     if (this.props.currentStateIndex !== this.props.computedStates.length - 1) {
       this.props.dispatch(
         jumpToAction(
-          this.props.stagedActionIds[this.props.currentStateIndex + 1]
-        )
+          this.props.stagedActionIds[this.props.currentStateIndex + 1],
+        ),
       );
     }
   };
@@ -397,7 +397,7 @@ export default SliderMonitor as unknown as React.ComponentType<
     monitorProps: ExternalProps<unknown, Action<unknown>>,
     // eslint-disable-next-line @typescript-eslint/ban-types
     state: {} | undefined,
-    action: Action<unknown>
+    action: Action<unknown>,
     // eslint-disable-next-line @typescript-eslint/ban-types
   ): {};
   defaultProps: DefaultProps;

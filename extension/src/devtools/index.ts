@@ -5,7 +5,7 @@ function createPanel(url: string) {
     'Redux',
     'img/logo/scalable.png',
     url,
-    function () {}
+    function () {},
   );
 }
 

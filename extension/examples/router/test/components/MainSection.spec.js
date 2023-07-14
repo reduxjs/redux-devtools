@@ -29,7 +29,7 @@ function setup(propOverrides) {
         clearCompleted: expect.createSpy(),
       },
     },
-    propOverrides
+    propOverrides,
   );
 
   const renderer = TestUtils.createRenderer();

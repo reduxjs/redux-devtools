@@ -12,7 +12,7 @@ describe('Tabs', function () {
         onClick={() => {
           // noop
         }}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -25,7 +25,7 @@ describe('Tabs', function () {
           // noop
         }}
         selected="Tab2"
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -38,7 +38,7 @@ describe('Tabs', function () {
           // noop
         }}
         selected="5"
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });

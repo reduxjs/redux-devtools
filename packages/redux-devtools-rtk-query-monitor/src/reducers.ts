@@ -34,13 +34,13 @@ const monitorSlice = createSlice({
   reducers: {
     changeQueryFormValues(
       state,
-      action: PayloadAction<Partial<QueryFormValues>>
+      action: PayloadAction<Partial<QueryFormValues>>,
     ) {
       state.queryForm.values = { ...state.queryForm.values, ...action.payload };
     },
     selectQueryKey(
       state,
-      action: PayloadAction<Pick<QueryInfo, 'reducerPath' | 'queryKey'>>
+      action: PayloadAction<Pick<QueryInfo, 'reducerPath' | 'queryKey'>>,
     ) {
       state.selectedQueryKey = {
         queryKey: action.payload.queryKey,
@@ -56,7 +56,7 @@ const monitorSlice = createSlice({
 export function reducer<S, A extends Action<unknown>>(
   props: RtkQueryMonitorProps<S, A>,
   state: RtkQueryMonitorState | undefined,
-  action: AnyAction
+  action: AnyAction,
 ): RtkQueryMonitorState {
   return monitorSlice.reducer(state, action);
 }

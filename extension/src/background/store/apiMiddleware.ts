@@ -193,7 +193,7 @@ type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
 };
 type PanelPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: <S, A extends Action<unknown>>(
-    message: PanelMessage<S, A>
+    message: PanelMessage<S, A>,
   ) => void;
 };
 type MonitorPort = Omit<chrome.runtime.Port, 'postMessage'> & {
@@ -232,13 +232,13 @@ type MonitorAction<S, A extends Action<unknown>> =
 function toMonitors<S, A extends Action<unknown>>(
   action: MonitorAction<S, A>,
   tabId?: string | number,
-  verbose?: boolean
+  verbose?: boolean,
 ) {
   Object.keys(connections.monitor).forEach((id) => {
     connections.monitor[id].postMessage(
       verbose || action.type === 'ERROR' || action.type === SET_PERSIST
         ? action
-        : { type: UPDATE_STATE }
+        : { type: UPDATE_STATE },
     );
   });
   Object.keys(connections.panel).forEach((id) => {
@@ -267,7 +267,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         message,
         instanceId,
         action as AppDispatchAction,
-        state
+        state,
       ),
       id: instanceId.toString().replace(/^[^\/]+\//, ''),
     });
@@ -281,7 +281,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         message,
         instanceId,
         action as unknown as AppDispatchAction,
-        state
+        state,
       ),
       id: instanceId.toString().replace(/^[^\/]+\//, ''),
     });
@@ -295,7 +295,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         message,
         instanceId,
         action as unknown as AppDispatchAction,
-        state
+        state,
       ),
       id: instanceId.toString().replace(/^[^\/]+\//, ''),
     });
@@ -309,7 +309,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         message,
         instanceId,
         action as unknown as AppDispatchAction,
-        state
+        state,
       ),
       id: instanceId.toString().replace(/^[^\/]+\//, ''),
     });
@@ -323,7 +323,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         message,
         instanceId,
         action as AppDispatchAction,
-        state
+        state,
       ),
       id: (instanceId as number).toString().replace(/^[^\/]+\//, ''),
     });
@@ -397,7 +397,7 @@ type BackgroundStoreResponse = { readonly options: Options };
 function messaging<S, A extends Action<unknown>>(
   request: BackgroundStoreMessage<S, A>,
   sender: chrome.runtime.MessageSender,
-  sendResponse?: (response?: BackgroundStoreResponse) => void
+  sendResponse?: (response?: BackgroundStoreResponse) => void,
 ) {
   let tabId = getId(sender);
   if (!tabId) return;
@@ -427,7 +427,7 @@ function messaging<S, A extends Action<unknown>>(
     let position: DevToolsPosition = 'devtools-left';
     if (
       ['remote', 'panel', 'left', 'right', 'bottom'].indexOf(
-        request.position
+        request.position,
       ) !== -1
     ) {
       position = ('devtools-' + request.position) as DevToolsPosition;
@@ -489,7 +489,7 @@ function messaging<S, A extends Action<unknown>>(
 function disconnect(
   type: 'tab' | 'monitor' | 'panel',
   id: number | string,
-  listener?: (message: any, port: chrome.runtime.Port) => void
+  listener?: (message: any, port: chrome.runtime.Port) => void,
 ) {
   return function disconnectListener() {
     const p = connections[type][id];
@@ -537,7 +537,7 @@ function onConnect<S, A extends Action<unknown>>(port: chrome.runtime.Port) {
             instanceId,
             state: stringifyJSON(
               persistedState,
-              state.instances.options[instanceId].serialize
+              state.instances.options[instanceId].serialize,
             ),
           });
         }
@@ -588,7 +588,7 @@ declare global {
 window.syncOptions = syncOptions(toAllTabs); // Expose to the options page
 
 export default function api(
-  store: MiddlewareAPI<Dispatch<BackgroundAction>, BackgroundState>
+  store: MiddlewareAPI<Dispatch<BackgroundAction>, BackgroundState>,
 ) {
   return (next: Dispatch<BackgroundAction>) => (action: BackgroundAction) => {
     if (action.type === LIFTED_ACTION) toContentScript(action);

@@ -20,8 +20,8 @@ const require = createRequire(import.meta.url);
 function serveUmdModule(name: string) {
   app.use(
     express.static(
-      path.dirname(require.resolve(name + '/package.json')) + '/umd'
-    )
+      path.dirname(require.resolve(name + '/package.json')) + '/umd',
+    ),
   );
 }
 
@@ -32,7 +32,7 @@ interface Context {
 function routes(
   options: AGServer.AGServerOptions,
   store: Store,
-  scServer: AGServer
+  scServer: AGServer,
 ): Router {
   const limit = options.maxRequestBody;
   const logHTTPRequests = options.logHTTPRequests;
@@ -45,8 +45,8 @@ function routes(
           logHTTPRequests as morgan.Options<
             http.IncomingMessage,
             http.ServerResponse
-          >
-        )
+          >,
+        ),
       );
     else app.use(morgan('combined'));
   }
@@ -62,7 +62,9 @@ function routes(
         '/graphql',
         cors<cors.CorsRequest>(),
         bodyParser.json(),
-        expressMiddleware(server, { context: () => Promise.resolve({ store }) })
+        expressMiddleware(server, {
+          context: () => Promise.resolve({ store }),
+        }),
       );
     })
     .catch((error) => {
@@ -81,8 +83,8 @@ function routes(
     res.sendFile(
       path.join(
         path.dirname(fileURLToPath(import.meta.url)),
-        '../app/index.html'
-      )
+        '../app/index.html',
+      ),
     );
   });
 

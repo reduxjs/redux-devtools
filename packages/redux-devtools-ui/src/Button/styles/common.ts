@@ -161,7 +161,7 @@ export const commonStyle = ({
     background-color: ${colorEffect(
       theme[mark],
       'fade',
-      theme.light ? 0.92 : 0.82
+      theme.light ? 0.92 : 0.82,
     )};
   
     > svg {
@@ -200,7 +200,8 @@ export const tooltipStyle = ({
     border-radius: 3px;
     background: ${theme.base01};
     border: 1px solid ${theme.base02};
-    box-shadow: 1px 1px 2px -1px ${theme.base02},
+    box-shadow:
+      1px 1px 2px -1px ${theme.base02},
       1px 1px 2px 0px ${theme.base02};
   }
 

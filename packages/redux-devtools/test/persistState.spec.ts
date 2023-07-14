@@ -50,7 +50,7 @@ describe('persistState', () => {
   it('should persist state', () => {
     const store = createStore(
       reducer,
-      compose(instrument(), persistState('id'))
+      compose(instrument(), persistState('id')),
     );
     expect(store.getState()).toBe(0);
 
@@ -60,7 +60,7 @@ describe('persistState', () => {
 
     const store2 = createStore(
       reducer,
-      compose(instrument(), persistState('id'))
+      compose(instrument(), persistState('id')),
     );
     expect(store2.getState()).toBe(2);
   });
@@ -82,7 +82,7 @@ describe('persistState', () => {
       state === undefined ? -1 : state - 1;
     const store = createStore(
       reducer,
-      compose(instrument(), persistState('id', oneLess))
+      compose(instrument(), persistState('id', oneLess)),
     );
     expect(store.getState()).toBe(0);
 
@@ -92,7 +92,7 @@ describe('persistState', () => {
 
     const store2 = createStore(
       reducer,
-      compose(instrument(), persistState('id', oneLess))
+      compose(instrument(), persistState('id', oneLess)),
     );
     expect(store2.getState()).toBe(1);
   });
@@ -102,7 +102,7 @@ describe('persistState', () => {
       action.type === 'INCREMENT' ? ({ type: 'DECREMENT' } as const) : action;
     const store = createStore(
       reducer,
-      compose(instrument(), persistState('id', undefined, incToDec))
+      compose(instrument(), persistState('id', undefined, incToDec)),
     );
     expect(store.getState()).toBe(0);
 
@@ -112,7 +112,7 @@ describe('persistState', () => {
 
     const store2 = createStore(
       reducer,
-      compose(instrument(), persistState('id', undefined, incToDec))
+      compose(instrument(), persistState('id', undefined, incToDec)),
     );
     expect(store2.getState()).toBe(-2);
   });
@@ -127,7 +127,7 @@ describe('persistState', () => {
     createStore(reducer, compose(instrument(), persistState('id')));
 
     expect(spy.mock.calls[0]).toContain(
-      'Could not read debug session from localStorage:'
+      'Could not read debug session from localStorage:',
     );
 
     spy.mockReset();
@@ -142,12 +142,12 @@ describe('persistState', () => {
     delete global.localStorage.setItem;
     const store = createStore(
       reducer,
-      compose(instrument(), persistState('id'))
+      compose(instrument(), persistState('id')),
     );
 
     store.dispatch({ type: 'INCREMENT' });
     expect(spy.mock.calls[0]).toContain(
-      'Could not write debug session to localStorage:'
+      'Could not write debug session to localStorage:',
     );
 
     spy.mockReset();

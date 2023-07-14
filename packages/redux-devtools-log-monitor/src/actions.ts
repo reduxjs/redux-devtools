@@ -15,7 +15,7 @@ interface StartConsecutiveToggleAction {
   id: number | null;
 }
 export function startConsecutiveToggle(
-  id: number | null
+  id: number | null,
 ): StartConsecutiveToggleAction {
   return { type: START_CONSECUTIVE_TOGGLE, id };
 }

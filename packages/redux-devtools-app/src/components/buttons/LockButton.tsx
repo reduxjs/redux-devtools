@@ -34,7 +34,7 @@ class LockButton extends Component<Props> {
 
 function mapDispatchToProps(
   dispatch: Dispatch<StoreAction>,
-  ownProps: OwnProps
+  ownProps: OwnProps,
 ) {
   return {
     lockChanges: () => dispatch(lockChanges(!ownProps.locked)),

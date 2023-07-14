@@ -79,7 +79,7 @@ class StackTrace extends Component<Props> {
               key={`bundle-${bundleCount}`}
             >
               {currentBundle}
-            </Collapsible>
+            </Collapsible>,
           );
         }
         currentBundle = [];

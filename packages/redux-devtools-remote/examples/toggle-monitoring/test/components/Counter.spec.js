@@ -11,7 +11,7 @@ function setup() {
     decrement: expect.createSpy(),
   };
   const component = TestUtils.renderIntoDocument(
-    <Counter counter={1} {...actions} />
+    <Counter counter={1} {...actions} />,
   );
   return {
     component: component,

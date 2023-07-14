@@ -94,7 +94,7 @@ class ChartMonitor<S, A extends Action<unknown>> extends PureComponent<
     }
 
     console.warn(
-      'DevTools theme ' + theme + ' not found, defaulting to nicinabox'
+      'DevTools theme ' + theme + ' not found, defaulting to nicinabox',
     );
     return invertTheme ? invertColors(themes.nicinabox) : themes.nicinabox;
   }

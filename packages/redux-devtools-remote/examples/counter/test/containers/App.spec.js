@@ -10,7 +10,7 @@ function setup(initialState) {
   const app = TestUtils.renderIntoDocument(
     <Provider store={store}>
       <App />
-    </Provider>
+    </Provider>,
   );
   return {
     app: app,

@@ -230,7 +230,7 @@ interface ReduxDevtoolsExtension {
 
 export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
   infer HeadStoreEnhancer,
-  ...infer RestStoreEnhancers
+  ...infer RestStoreEnhancers,
 ]
   ? HeadStoreEnhancer extends StoreEnhancer<infer StoreExt>
     ? StoreExt & InferComposedStoreExt<RestStoreEnhancers>
@@ -238,7 +238,9 @@ export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
   : unknown;
 
 export interface ReduxDevtoolsExtensionCompose {
-  (config: Config): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  (
+    config: Config,
+  ): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
     ...funcs: StoreEnhancers
   ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
   <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
@@ -254,12 +256,12 @@ declare global {
 }
 
 function extensionComposeStub(
-  config: Config
+  config: Config,
 ): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
   ...funcs: StoreEnhancers
 ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 function extensionComposeStub<
-  StoreEnhancers extends readonly StoreEnhancer<unknown>[]
+  StoreEnhancers extends readonly StoreEnhancer<unknown>[],
 >(
   ...funcs: StoreEnhancers
 ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;

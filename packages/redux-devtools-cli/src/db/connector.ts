@@ -6,7 +6,7 @@ import { AGServer } from 'socketcluster-server';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type KnexFunction = <TRecord extends {} = any, TResult = unknown[]>(
-  config: Knex.Config | string
+  config: Knex.Config | string,
 ) => Knex<TRecord, TResult>;
 
 export default function connector(options: AGServer.AGServerOptions) {
@@ -19,7 +19,7 @@ export default function connector(options: AGServer.AGServerOptions) {
   dbOptions.migrations = {
     directory: path.join(
       path.dirname(fileURLToPath(import.meta.url)),
-      'migrations'
+      'migrations',
     ),
   };
   dbOptions.seeds = {

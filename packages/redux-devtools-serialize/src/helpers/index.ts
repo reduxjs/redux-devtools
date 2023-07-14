@@ -8,17 +8,17 @@ export function mark(data: unknown, type: string): SerializedData;
 export function mark<K extends string>(
   data: { [key in K]: () => unknown },
   type: string,
-  transformMethod?: K | false
+  transformMethod?: K | false,
 ): SerializedData;
 export function mark<K extends string>(
   data: any,
   type: string,
-  transformMethod?: 'toString' | false
+  transformMethod?: 'toString' | false,
 ): SerializedData;
 export function mark<K extends string>(
   data: { [key in K]: () => unknown } | unknown,
   type: string,
-  transformMethod?: K | false
+  transformMethod?: K | false,
 ): SerializedData {
   return {
     data: transformMethod
@@ -40,19 +40,19 @@ export function refer<K extends string>(
   data: { [key in K]: () => unknown },
   type: string,
   transformMethod?: K | false,
-  refs?: (new (data: any) => unknown)[] | null
+  refs?: (new (data: any) => unknown)[] | null,
 ): SerializedData;
 export function refer<K extends string>(
   data: any,
   type: string,
   transformMethod?: 'toString' | false,
-  refs?: (new (data: any) => unknown)[] | null
+  refs?: (new (data: any) => unknown)[] | null,
 ): SerializedData;
 export function refer<K extends string>(
   data: { [key in K]: () => unknown } | unknown,
   type: string,
   transformMethod?: K | false,
-  refs?: (new (data: any) => unknown)[] | null
+  refs?: (new (data: any) => unknown)[] | null,
 ): SerializedData {
   const r = mark(data as { [key in K]: () => unknown }, type, transformMethod);
   if (!refs) return r;

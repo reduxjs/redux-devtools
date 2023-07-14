@@ -91,7 +91,7 @@ class StackFrame extends Component<Props, State> {
   };
 
   onKeyDown: React.KeyboardEventHandler<HTMLSpanElement> = (
-    e /* : SyntheticKeyboardEvent<> */
+    e /* : SyntheticKeyboardEvent<> */,
   ) => {
     if (e.key === 'Enter') {
       this.editorHandler();
@@ -120,7 +120,7 @@ class StackFrame extends Component<Props, State> {
       fileName,
       lineNumber,
       columnNumber,
-      compiled
+      compiled,
     );
 
     let codeBlockProps = null;

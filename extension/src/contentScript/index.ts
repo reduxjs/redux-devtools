@@ -205,9 +205,11 @@ export type SplitMessage =
 
 function tryCatch<S, A extends Action<unknown>>(
   fn: (
-    args: PageScriptToContentScriptMessageWithoutDisconnect<S, A> | SplitMessage
+    args:
+      | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
+      | SplitMessage,
   ) => void,
-  args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>
+  args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>,
 ) {
   try {
     return fn(args);
@@ -273,7 +275,7 @@ export type ContentScriptToBackgroundMessage<S, A extends Action<unknown>> =
   | RelayMessage<S, A>;
 
 function postToBackground<S, A extends Action<unknown>>(
-  message: ContentScriptToBackgroundMessage<S, A>
+  message: ContentScriptToBackgroundMessage<S, A>,
 ) {
   bg!.postMessage(message);
 }
@@ -281,7 +283,7 @@ function postToBackground<S, A extends Action<unknown>>(
 function send<S, A extends Action<unknown>>(
   message:
     | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
-    | SplitMessage
+    | SplitMessage,
 ) {
   if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {
@@ -294,7 +296,7 @@ function send<S, A extends Action<unknown>>(
 
 // Resend messages from the page to the background script
 function handleMessages<S, A extends Action<unknown>>(
-  event: MessageEvent<PageScriptToContentScriptMessage<S, A>>
+  event: MessageEvent<PageScriptToContentScriptMessage<S, A>>,
 ) {
   if (!isAllowed()) return;
   if (!event || event.source !== window || typeof event.data !== 'object') {

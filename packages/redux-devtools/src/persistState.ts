@@ -6,11 +6,11 @@ import { LiftedState } from '@redux-devtools/instrument';
 export default function persistState<
   S,
   A extends Action<unknown>,
-  MonitorState
+  MonitorState,
 >(
   sessionId?: string | null,
   deserializeState: (state: S) => S = identity,
-  deserializeAction: (action: A) => A = identity
+  deserializeAction: (action: A) => A = identity,
 ): StoreEnhancer {
   if (!sessionId) {
     return (next) =>
@@ -19,7 +19,7 @@ export default function persistState<
   }
 
   function deserialize(
-    state: LiftedState<S, A, MonitorState>
+    state: LiftedState<S, A, MonitorState>,
   ): LiftedState<S, A, MonitorState> {
     return {
       ...state,
@@ -38,7 +38,7 @@ export default function persistState<
   return (next) =>
     <S2, A2 extends Action<unknown>>(
       reducer: Reducer<S2, A2>,
-      initialState?: PreloadedState<S2>
+      initialState?: PreloadedState<S2>,
     ) => {
       const key = `redux-dev-session-${sessionId}`;
 
@@ -62,7 +62,7 @@ export default function persistState<
 
       const store = next(
         reducer,
-        finalInitialState as PreloadedState<S2> | undefined
+        finalInitialState as PreloadedState<S2> | undefined,
       );
 
       return {
