@@ -5,10 +5,10 @@ Use with
 - `window.__REDUX_DEVTOOLS_EXTENSION__([options])`
 - `window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__([options])()`
 - `window.__REDUX_DEVTOOLS_EXTENSION__.connect([options])`
-- `redux-devtools-extension` npm package:
+- `@redux-devtools/extension` npm package:
 
 ```js
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const composeEnhancers = composeWithDevTools(options);
 const store = createStore(
