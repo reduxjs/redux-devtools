@@ -33,7 +33,7 @@ export const getDevTools = (location: { search: string }) =>
           ] as Tab<unknown, Action<unknown>>[]
         }
       />
-    </DockMonitor>
+    </DockMonitor>,
   );
 
 export function ConnectedDevTools() {

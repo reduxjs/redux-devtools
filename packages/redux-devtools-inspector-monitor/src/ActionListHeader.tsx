@@ -5,7 +5,7 @@ import RightSlider from './RightSlider';
 
 const getActiveButtons = (hasSkippedActions: boolean): ('Sweep' | 'Commit')[] =>
   [hasSkippedActions && 'Sweep', 'Commit'].filter(
-    (a): a is 'Sweep' | 'Commit' => !!a
+    (a): a is 'Sweep' | 'Commit' => !!a,
   );
 
 interface Props {
@@ -47,12 +47,12 @@ const ActionListHeader: FunctionComponent<Props> = ({
                   ({
                     Commit: onCommit,
                     Sweep: onSweep,
-                  }[btn]())
+                  })[btn]()
                 }
                 {...styling(
                   ['selectorButton', 'selectorButtonSmall'],
                   false,
-                  true
+                  true,
                 )}
               >
                 {btn}

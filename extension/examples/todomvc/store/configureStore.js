@@ -13,7 +13,7 @@ export default function configureStore(preloadedState) {
   if (!enhancer) {
     console.warn(
       'Install Redux DevTools Extension to inspect the app state: ' +
-        'https://github.com/zalmoxisus/redux-devtools-extension#installation'
+        'https://github.com/zalmoxisus/redux-devtools-extension#installation',
     );
   }
 

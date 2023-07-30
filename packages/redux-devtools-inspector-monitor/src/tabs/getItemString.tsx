@@ -40,7 +40,7 @@ function getText(
   type: string,
   data: any,
   isWideLayout: boolean,
-  isDiff: boolean | undefined
+  isDiff: boolean | undefined,
 ) {
   if (type === 'Object') {
     // eslint-disable-next-line @typescript-eslint/ban-types
@@ -50,7 +50,7 @@ function getText(
     const str = keys
       .slice(0, 3)
       .map(
-        (key) => `${key}: ${getShortTypeString(data[key], isDiff) as string}`
+        (key) => `${key}: ${getShortTypeString(data[key], isDiff) as string}`,
       )
       .concat(keys.length > 3 ? ['…'] : [])
       .join(', ');
@@ -77,7 +77,7 @@ const getItemString = (
   data: any,
   dataTypeKey: string | symbol | undefined,
   isWideLayout: boolean,
-  isDiff?: boolean
+  isDiff?: boolean,
 ) => (
   <span {...styling('treeItemHint')}>
     {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}

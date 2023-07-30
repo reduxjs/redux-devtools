@@ -31,7 +31,7 @@ chrome.storage.local.get(
               }
             : undefined
         }
-      />
+      />,
     );
-  }
+  },
 );

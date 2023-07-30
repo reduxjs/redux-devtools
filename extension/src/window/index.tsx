@@ -31,7 +31,7 @@ chrome.runtime.getBackgroundPage((window) => {
       <PersistGate loading={null} persistor={persistor}>
         <App position={position} />
       </PersistGate>
-    </Provider>
+    </Provider>,
   );
 });
 

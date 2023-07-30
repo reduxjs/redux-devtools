@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 export default (
-  env: { development?: boolean; platform?: string } = {}
+  env: { development?: boolean; platform?: string } = {},
 ): webpack.Configuration => ({
   mode: env.development ? 'development' : 'production',
   entry: {
@@ -44,7 +44,7 @@ export default (
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(
-          env.development ? 'development' : 'production'
+          env.development ? 'development' : 'production',
         ),
         PLATFORM: JSON.stringify(env.platform),
       },

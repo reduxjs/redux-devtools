@@ -14,7 +14,7 @@ export function sweep(state: State): State {
     skippedActionIds: [],
     currentStateIndex: Math.min(
       state.currentStateIndex,
-      state.stagedActionIds.length - 1
+      state.stagedActionIds.length - 1,
     ),
   };
 }
@@ -28,7 +28,7 @@ export function nonReduxDispatch(
   instanceId: string | number,
   action: DispatchAction,
   initialState: string | undefined,
-  preInstances?: InstancesState
+  preInstances?: InstancesState,
 ) {
   const instances = preInstances || store.getState().instances;
   const state = instances.states[instanceId];
@@ -39,7 +39,7 @@ export function nonReduxDispatch(
       if (options.features.import === true) {
         return stringifyJSON(
           state.computedStates[state.currentStateIndex].state,
-          true
+          true,
         );
       }
       return initialState;
@@ -58,7 +58,7 @@ export function nonReduxDispatch(
       return stringifyJSON(
         state.computedStates[state.stagedActionIds.indexOf(action.actionId)]
           .state,
-        true
+        true,
       );
     case 'ROLLBACK':
       return stringifyJSON(state.computedStates[0].state, true);

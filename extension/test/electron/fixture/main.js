@@ -5,7 +5,7 @@ app.on('window-all-closed', app.quit);
 app.whenReady().then(async () => {
   await session.defaultSession.loadExtension(
     path.join(__dirname, '../../../dist'),
-    { allowFileAccess: true }
+    { allowFileAccess: true },
   );
 
   const mainWindow = new BrowserWindow({

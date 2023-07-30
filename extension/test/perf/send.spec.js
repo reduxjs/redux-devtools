@@ -9,7 +9,7 @@ function test(title, data, maxTime = 100) {
     await listenMessage(() => {
       window.__REDUX_DEVTOOLS_EXTENSION__.send(
         { type: 'TEST_ACTION', data },
-        data
+        data,
       );
     });
     const ms = new Date() - start;

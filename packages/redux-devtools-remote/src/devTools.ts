@@ -41,7 +41,7 @@ function async(fn: () => unknown) {
 }
 
 function str2array(
-  str: string | readonly string[] | undefined
+  str: string | readonly string[] | undefined,
 ): readonly string[] | undefined {
   return typeof str === 'string'
     ? [str]
@@ -242,7 +242,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     type: 'STATE' | 'ACTION' | 'START' | 'STOP' | 'ERROR',
     state?: State | S | string,
     action?: PerformAction<A> | ActionCreatorObject[],
-    nextActionId?: number
+    nextActionId?: number,
   ) {
     const message: MessageToRelay = {
       type,
@@ -262,13 +262,13 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
                 this.filters,
                 this.stateSanitizer as (
                   state: unknown,
-                  index?: number
+                  index?: number,
                 ) => unknown,
                 this.actionSanitizer as
                   | ((action: Action<unknown>, id: number) => Action)
                   | undefined,
-                nextActionId!
-              )
+                nextActionId!,
+              ),
             );
     }
     if (type === 'ACTION') {
@@ -278,8 +278,8 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
           : this.actionSanitizer(
               // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               (action as PerformAction<A>).action,
-              nextActionId! - 1
-            )
+              nextActionId! - 1,
+            ),
       );
       message.isExcess = this.isExcess;
       message.nextActionId = nextActionId;
@@ -291,12 +291,12 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
   }
 
   dispatchRemotely(
-    action: string | { args: string[]; rest: string; selected: number }
+    action: string | { args: string[]; rest: string; selected: number },
   ) {
     try {
       const result = evalAction(
         action,
-        this.actionCreators as ActionCreatorObject[]
+        this.actionCreators as ActionCreatorObject[],
       );
       this.store.dispatch(result);
     } catch (e: unknown) {
@@ -402,7 +402,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         const channelName = (await this.socket!.invoke(
           'login',
-          'master'
+          'master',
         )) as string;
         this.channel = channelName;
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
@@ -455,7 +455,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         if (done) break; // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
         // eslint-disable-next-line no-prototype-builtins,@typescript-eslint/no-unsafe-argument
         this.errorCounts[data.error.name] = this.errorCounts.hasOwnProperty(
-          data.error.name
+          data.error.name,
         )
           ? this.errorCounts[data.error.name] + 1
           : 1;
@@ -465,7 +465,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
             console.log(
               'remote-redux-devtools: Socket connection errors are being suppressed. ' +
                 '\n' +
-                "This can be disabled by setting suppressConnectErrors to 'false'."
+                "This can be disabled by setting suppressConnectErrors to 'false'.",
             );
             console.log(data.error);
           }
@@ -518,7 +518,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         this.startOn &&
         !this.started &&
         this.startOn.indexOf(
-          (action as PerformAction<A>).action.type as string
+          (action as PerformAction<A>).action.type as string,
         ) !== -1
       )
         async(this.start);
@@ -526,7 +526,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         this.stopOn &&
         this.started &&
         this.stopOn.indexOf(
-          (action as PerformAction<A>).action.type as string
+          (action as PerformAction<A>).action.type as string,
         ) !== -1
       )
         async(this.stop);
@@ -534,7 +534,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         this.sendOn &&
         !this.started &&
         this.sendOn.indexOf(
-          (action as PerformAction<A>).action.type as string
+          (action as PerformAction<A>).action.type as string,
         ) !== -1
       )
         async(this.send);
@@ -602,7 +602,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
               this.store.getState(),
               this.getLiftedStateRaw(),
-              maxAge
+              maxAge,
             );
         });
         return this.store;
@@ -623,7 +623,7 @@ const compose =
     function preEnhancer(createStore: StoreEnhancerStoreCreator) {
       return <S, A extends Action<unknown>>(
         reducer: Reducer<S, A>,
-        preloadedState: PreloadedState<S>
+        preloadedState: PreloadedState<S>,
       ) => {
         devToolsEnhancer.store = createStore(reducer, preloadedState) as any;
         return {
@@ -639,8 +639,8 @@ const compose =
     return [preEnhancer, ...funcs].reduceRight(
       (composed, f) => f(composed) as any,
       devToolsEnhancer.enhance(options)(
-        ...(args as [StoreEnhancerStoreCreator])
-      )
+        ...(args as [StoreEnhancerStoreCreator]),
+      ),
     );
   };
 

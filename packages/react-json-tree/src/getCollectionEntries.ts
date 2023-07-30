@@ -20,7 +20,7 @@ function getEntries(
   collection: any,
   sortObjectKeys: SortObjectKeys,
   from = 0,
-  to = Infinity
+  to = Infinity,
 ): { entries: { key: string | number; value: unknown }[]; hasMore?: boolean } {
   let res;
 
@@ -101,13 +101,13 @@ export default function getCollectionEntries(
   sortObjectKeys: SortObjectKeys,
   limit: number,
   from = 0,
-  to = Infinity
+  to = Infinity,
 ) {
   const getEntriesBound = getEntries.bind(
     null,
     type,
     collection,
-    sortObjectKeys
+    sortObjectKeys,
   );
 
   if (!limit) {

@@ -14,11 +14,11 @@ const persistConfig = {
 
 const persistedReducer: Reducer<StoreState, StoreAction> = persistReducer(
   persistConfig,
-  rootReducer
+  rootReducer,
 ) as any;
 
 export default function configureStore(
-  callback: (store: Store<StoreState, StoreAction>) => void
+  callback: (store: Store<StoreState, StoreAction>) => void,
 ) {
   let composeEnhancers = compose;
   if (process.env.NODE_ENV !== 'production') {
@@ -47,7 +47,7 @@ export default function configureStore(
 
   const store = createStore(
     persistedReducer,
-    composeEnhancers(applyMiddleware(exportStateMiddleware, api))
+    composeEnhancers(applyMiddleware(exportStateMiddleware, api)),
   );
   const persistor = persistStore(store, null, () => {
     callback(store);

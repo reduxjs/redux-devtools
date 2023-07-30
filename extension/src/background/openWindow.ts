@@ -12,7 +12,7 @@ export default function openDevToolsWindow(position: DevToolsPosition) {
   function popWindow(
     action: string,
     url: string,
-    customOptions: chrome.windows.CreateData & chrome.windows.UpdateInfo
+    customOptions: chrome.windows.CreateData & chrome.windows.UpdateInfo,
   ) {
     function focusIfExist(callback: () => void) {
       if (!windows[position]) {
@@ -37,7 +37,7 @@ export default function openDevToolsWindow(position: DevToolsPosition) {
       };
       if (action === 'open') {
         options.url = chrome.extension.getURL(
-          url + '#' + position.substr(position.indexOf('-') + 1)
+          url + '#' + position.substr(position.indexOf('-') + 1),
         );
         chrome.windows.create(options, (win) => {
           windows[position] = win!.id;

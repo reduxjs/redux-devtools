@@ -45,12 +45,12 @@ const persistConfig = {
 
 const persistedReducer: Reducer<StoreState, WindowStoreAction> = persistReducer(
   persistConfig,
-  rootReducer
+  rootReducer,
 ) as any;
 
 export default function configureStore(
   baseStore: Store<BackgroundState, BackgroundAction>,
-  position: string
+  position: string,
 ) {
   let enhancer: StoreEnhancer;
   const middlewares = [exportStateMiddleware, api, syncStores(baseStore)];
@@ -65,7 +65,7 @@ export default function configureStore(
       applyMiddleware(...middlewares),
       window.__REDUX_DEVTOOLS_EXTENSION__
         ? window.__REDUX_DEVTOOLS_EXTENSION__()
-        : (noop: unknown) => noop
+        : (noop: unknown) => noop,
     );
   }
   const store = createStore(persistedReducer, enhancer);

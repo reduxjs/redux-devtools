@@ -52,7 +52,7 @@ export default class MainSection extends Component<Props, State> {
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
     const markedCount = todos.reduce(
       (count, todo) => (todo.marked ? count + 1 : count),
-      0
+      0,
     );
 
     return (

@@ -76,7 +76,7 @@ const { stringify, parse } = immutable(
   Immutable,
   null,
   customReplacer,
-  customReviver
+  customReviver,
 );
 
 const map = Immutable.Map({ a: 1, b: 2 });

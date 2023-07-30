@@ -6,7 +6,7 @@ import { selectMonitorWithState } from '../../actions';
 
 export function getPath(
   obj: HierarchyPointNode<Node>,
-  inspectedStatePath: string[]
+  inspectedStatePath: string[],
 ) {
   const parent = obj.parent;
   if (!parent) return;

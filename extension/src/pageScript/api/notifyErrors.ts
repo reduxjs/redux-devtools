@@ -26,7 +26,7 @@ function postError(message: string) {
       type: 'ERROR',
       message: message,
     },
-    '*'
+    '*',
   );
 }
 

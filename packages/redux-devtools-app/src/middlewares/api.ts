@@ -61,7 +61,7 @@ function dispatchRemoteAction({
       instanceId,
       action as DispatchAction,
       state,
-      instances
+      instances,
     ),
     instanceId,
     id,
@@ -136,7 +136,7 @@ function monitoring(request: MonitoringRequest) {
 
 function subscribe(
   channelName: string,
-  subscription: typeof UPDATE_STATE | typeof UPDATE_REPORTS
+  subscription: typeof UPDATE_STATE | typeof UPDATE_REPORTS,
 ) {
   const channel = socket.subscribe(channelName);
   if (subscription === UPDATE_STATE) {
@@ -221,7 +221,7 @@ function connect() {
   } catch (error) {
     store.dispatch({ type: actions.CONNECT_ERROR, error: error as Error });
     store.dispatch(
-      showNotification((error as Error).message || (error as string))
+      showNotification((error as Error).message || (error as string)),
     );
   }
 }

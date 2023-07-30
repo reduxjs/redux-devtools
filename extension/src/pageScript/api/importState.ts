@@ -10,7 +10,7 @@ interface SerializeWithRequiredImmutable extends SerializeWithImmutable {
 }
 
 function isSerializeWithImmutable(
-  serialize: boolean | SerializeWithImmutable
+  serialize: boolean | SerializeWithImmutable,
 ): serialize is SerializeWithRequiredImmutable {
   return !!(serialize as SerializeWithImmutable).immutable;
 }
@@ -20,7 +20,7 @@ interface SerializeWithRequiredReviver extends SerializeWithImmutable {
 }
 
 function isSerializeWithReviver(
-  serialize: boolean | SerializeWithImmutable
+  serialize: boolean | SerializeWithImmutable,
 ): serialize is SerializeWithRequiredReviver {
   return !!(serialize as SerializeWithImmutable).immutable;
 }
@@ -32,7 +32,7 @@ interface ParsedSerializedLiftedState {
 
 export default function importState<S, A extends Action<unknown>>(
   state: string | undefined,
-  { serialize }: Config
+  { serialize }: Config,
 ) {
   if (!state) return undefined;
   let parse = jsan.parse;
@@ -45,8 +45,8 @@ export default function importState<S, A extends Action<unknown>>(
             serialize.immutable,
             serialize.refs,
             serialize.replacer,
-            serialize.reviver
-          ).reviver
+            serialize.reviver,
+          ).reviver,
         );
     } else if (isSerializeWithReviver(serialize)) {
       parse = (v) => jsan.parse(v, serialize.reviver);

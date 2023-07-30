@@ -25,7 +25,7 @@ class InstanceSelector extends Component<Props> {
         options={this.select}
         onChange={(option) => this.props.onSelect(option!.value)}
         value={this.select.find(
-          (option) => option.value === this.props.selected
+          (option) => option.value === this.props.selected,
         )}
       />
     );

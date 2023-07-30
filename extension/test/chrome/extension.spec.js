@@ -19,7 +19,7 @@ describe('Chrome extension', function () {
     driver = new webdriver.Builder()
       .usingServer(`http://localhost:${port}`)
       .setChromeOptions(
-        new chrome.Options().addArguments(`load-extension=${path}`)
+        new chrome.Options().addArguments(`load-extension=${path}`),
       )
       .forBrowser('chrome')
       .build();
@@ -52,14 +52,14 @@ describe('Chrome extension', function () {
   it('should contain an empty actions list', async () => {
     const val = await driver
       .findElement(
-        webdriver.By.xpath('//div[contains(@class, "actionListRows-")]')
+        webdriver.By.xpath('//div[contains(@class, "actionListRows-")]'),
       )
       .getText();
     expect(val).toBe('');
   });
 
   Object.keys(switchMonitorTests).forEach((description) =>
-    it(description, () => switchMonitorTests[description](driver))
+    it(description, () => switchMonitorTests[description](driver)),
   );
 
   it('should get actions list', async () => {
@@ -77,14 +77,14 @@ describe('Chrome extension', function () {
     const result = await driver.wait(
       driver
         .findElement(
-          webdriver.By.xpath('//div[contains(@class, "actionListRows-")]')
+          webdriver.By.xpath('//div[contains(@class, "actionListRows-")]'),
         )
         .getText()
         .then((val) => {
           return actionsPattern.test(val);
         }),
       15000,
-      "it doesn't match actions pattern"
+      "it doesn't match actions pattern",
     );
     expect(result).toBeTruthy();
   });

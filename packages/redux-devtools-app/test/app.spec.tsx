@@ -25,7 +25,7 @@ Object.defineProperty(window, 'matchMedia', {
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(exportStateMiddleware, api)
+  applyMiddleware(exportStateMiddleware, api),
 );
 
 describe('App container', () => {
@@ -33,7 +33,7 @@ describe('App container', () => {
     render(
       <Provider store={store}>
         <App />
-      </Provider>
+      </Provider>,
     );
     expect(screen.getByTestId('inspector')).toBeDefined();
   });
@@ -42,11 +42,11 @@ describe('App container', () => {
     render(
       <Provider store={store}>
         <App />
-      </Provider>
+      </Provider>,
     );
     const actionList = screen.getByTestId('actionList');
     expect(
-      within(actionList).getByTestId('actionListRows')
+      within(actionList).getByTestId('actionListRows'),
     ).toBeEmptyDOMElement();
   });
 });

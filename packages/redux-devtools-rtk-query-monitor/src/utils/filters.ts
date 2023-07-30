@@ -13,7 +13,7 @@ export enum QueryFilters {
 
 function filterByQueryKey(
   regex: RegExp | null,
-  list: RtkResourceInfo[]
+  list: RtkResourceInfo[],
 ): RtkResourceInfo[] {
   if (!regex) {
     return list;
@@ -24,40 +24,40 @@ function filterByQueryKey(
 
 function filterByReducerPath(
   regex: RegExp | null,
-  list: RtkResourceInfo[]
+  list: RtkResourceInfo[],
 ): RtkResourceInfo[] {
   if (!regex) {
     return list;
   }
 
   return list.filter((RtkResourceInfo) =>
-    regex.test(RtkResourceInfo.reducerPath)
+    regex.test(RtkResourceInfo.reducerPath),
   );
 }
 
 function filterByEndpointName(
   regex: RegExp | null,
-  list: RtkResourceInfo[]
+  list: RtkResourceInfo[],
 ): RtkResourceInfo[] {
   if (!regex) {
     return list;
   }
 
   return list.filter((RtkResourceInfo) =>
-    regex.test(RtkResourceInfo.state.endpointName ?? 'undefined')
+    regex.test(RtkResourceInfo.state.endpointName ?? 'undefined'),
   );
 }
 
 function filterByStatus(
   regex: RegExp | null,
-  list: RtkResourceInfo[]
+  list: RtkResourceInfo[],
 ): RtkResourceInfo[] {
   if (!regex) {
     return list;
   }
 
   return list.filter((RtkResourceInfo) =>
-    regex.test(RtkResourceInfo.state.status)
+    regex.test(RtkResourceInfo.state.status),
   );
 }
 

@@ -33,7 +33,7 @@ function isRange(rangeOrEntry: Range | Entry): rangeOrEntry is Range {
 function renderChildNodes(
   props: RenderChildNodesProps,
   from?: number,
-  to?: number
+  to?: number,
 ) {
   const {
     nodeType,
@@ -52,7 +52,7 @@ function renderChildNodes(
     sortObjectKeys,
     collectionLimit,
     from,
-    to
+    to,
   ).forEach((entry) => {
     if (isRange(entry)) {
       childNodes.push(
@@ -62,7 +62,7 @@ function renderChildNodes(
           from={entry.from}
           to={entry.to}
           renderChildNodes={renderChildNodes}
-        />
+        />,
       );
     } else {
       const { key, value } = entry;
@@ -78,7 +78,7 @@ function renderChildNodes(
           circularCache={[...circularCache, value]}
           isCircular={isCircular}
           hideRoot={false}
-        />
+        />,
       );
     }
   });
@@ -115,7 +115,7 @@ export default function JSONNestedNode(props: Props) {
 
   const [expanded, setExpanded] = useState<boolean>(
     // calculate individual node expansion if necessary
-    isCircular ? false : shouldExpandNodeInitially(keyPath, data, level)
+    isCircular ? false : shouldExpandNodeInitially(keyPath, data, level),
   );
 
   const handleClick = useCallback(() => {
@@ -137,7 +137,7 @@ export default function JSONNestedNode(props: Props) {
     data,
     itemType,
     createItemString(data, collectionLimit),
-    keyPath
+    keyPath,
   );
   const stylingArgs = [keyPath, nodeType, expanded, expandable] as const;
 

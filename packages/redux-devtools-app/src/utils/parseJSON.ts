@@ -28,7 +28,7 @@ export function reviver(key: string, value: unknown) {
 
 export default function parseJSON(
   data: string | undefined,
-  serialize?: boolean
+  serialize?: boolean,
 ) {
   if (typeof data !== 'string') return data;
   try {

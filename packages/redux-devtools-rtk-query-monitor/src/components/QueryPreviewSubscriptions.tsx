@@ -5,7 +5,7 @@ import { TreeView, TreeViewProps } from './TreeView';
 
 const rootProps: TreeViewProps['rootProps'] = {
   'aria-labelledby': renderTabPanelButtonId(
-    QueryPreviewTabs.querySubscriptions
+    QueryPreviewTabs.querySubscriptions,
   ),
   id: renderTabPanelId(QueryPreviewTabs.querySubscriptions),
   role: 'tabpanel',

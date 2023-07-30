@@ -35,7 +35,7 @@ class Header extends Component<Props> {
           title="Documentation"
           tooltipPosition="bottom"
           onClick={this.openLink(
-            'https://github.com/reduxjs/redux-devtools/blob/main/README.md'
+            'https://github.com/reduxjs/redux-devtools/blob/main/README.md',
           )}
         >
           <GoBook />
@@ -44,7 +44,7 @@ class Header extends Component<Props> {
           title="Feedback"
           tooltipPosition="bottom"
           onClick={this.openLink(
-            'https://github.com/reduxjs/redux-devtools/discussions'
+            'https://github.com/reduxjs/redux-devtools/discussions',
           )}
         >
           <IoMdText />
@@ -60,7 +60,7 @@ class Header extends Component<Props> {
           title="Support us"
           tooltipPosition="bottom-left"
           onClick={this.openLink(
-            'https://opencollective.com/redux-devtools-extension'
+            'https://opencollective.com/redux-devtools-extension',
           )}
         >
           <TiHeartFullOutline />
