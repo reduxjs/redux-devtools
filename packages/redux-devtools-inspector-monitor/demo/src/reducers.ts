@@ -64,7 +64,7 @@ const HUGE_OBJECT = Array.from({ length: 5000 }).reduce(
   (o: { [key: string]: string }, _, key) => (
     (o[`key ${key}`] = `item ${key}`), o
   ),
-  {}
+  {},
 );
 
 const FUNC = function (a: number, b: number, c: number) {
@@ -197,7 +197,7 @@ export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
     func: (
       state = () => {
         // noop
-      }
+      },
     ) => state,
     array: (state = [], action) =>
       action.type === 'PUSH'
@@ -240,7 +240,7 @@ export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
       action.type === 'CHANGE_IMMUTABLE_NESTED'
         ? state.updateIn(
             ['long', 'nested', 0, 'path', 'to', 'a'],
-            (str: unknown) => (str as string) + '!'
+            (str: unknown) => (str as string) + '!',
           )
         : state,
     addFunction: (state = null, action) =>

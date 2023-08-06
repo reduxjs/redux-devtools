@@ -27,7 +27,7 @@ describe('Container', function () {
         }}
       >
         Text
-      </Container>
+      </Container>,
     );
     expect(container.firstChild).toMatchSnapshot();
   });

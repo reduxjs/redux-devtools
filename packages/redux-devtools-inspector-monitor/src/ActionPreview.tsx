@@ -21,6 +21,8 @@ export interface TabComponentProps<S, A extends Action<unknown>> {
   base16Theme: Base16Theme;
   invertTheme: boolean;
   isWideLayout: boolean;
+  sortStateTreeAlphabetically: boolean;
+  disableStateTreeCollection: boolean;
   dataTypeKey: string | symbol | undefined;
   delta: Delta | null | undefined | false;
   action: A;
@@ -70,6 +72,8 @@ interface Props<S, A extends Action<unknown>> {
   onInspectPath: (path: (string | number)[]) => void;
   inspectedPath: (string | number)[];
   onSelectTab: (tabName: string) => void;
+  sortStateTreeAlphabetically: boolean;
+  disableStateTreeCollection: boolean;
 }
 
 class ActionPreview<S, A extends Action<unknown>> extends Component<
@@ -101,6 +105,8 @@ class ActionPreview<S, A extends Action<unknown>> extends Component<
       dataTypeKey,
       monitorState,
       updateMonitorState,
+      sortStateTreeAlphabetically,
+      disableStateTreeCollection,
     } = this.props;
 
     const renderedTabs: Tab<S, A>[] =
@@ -133,6 +139,8 @@ class ActionPreview<S, A extends Action<unknown>> extends Component<
                 base16Theme,
                 invertTheme,
                 isWideLayout,
+                sortStateTreeAlphabetically,
+                disableStateTreeCollection,
                 dataTypeKey,
                 delta,
                 action,

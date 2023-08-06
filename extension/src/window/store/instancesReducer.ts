@@ -13,7 +13,7 @@ import type {
 
 export default function instances(
   state = instancesInitialState,
-  action: WindowStoreAction
+  action: WindowStoreAction,
 ) {
   switch (action.type) {
     case UPDATE_STATE:

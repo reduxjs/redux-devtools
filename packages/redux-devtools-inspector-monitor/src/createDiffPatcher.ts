@@ -21,7 +21,7 @@ const defaultDiffPatcher = new DiffPatcher({
 
 export default function createDiffPatcher(
   objectHash: ((item: unknown, index: number) => string) | undefined,
-  propertyFilter: ((name: string, context: DiffContext) => boolean) | undefined
+  propertyFilter: ((name: string, context: DiffContext) => boolean) | undefined,
 ) {
   if (!objectHash && !propertyFilter) {
     return defaultDiffPatcher;

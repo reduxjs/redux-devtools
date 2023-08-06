@@ -62,7 +62,7 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
   shouldExpandNodeInitially: ShouldExpandNodeInitially = (
     keyPath,
     value,
-    layer
+    layer,
   ) => {
     if (layer === 1) {
       return this.isLastActionNode(keyPath, layer);

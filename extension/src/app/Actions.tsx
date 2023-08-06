@@ -17,7 +17,7 @@ import {
   StoreState,
   TopButtons,
 } from '@redux-devtools/app';
-import { GoRadioTower } from 'react-icons/go';
+import { GoBroadcast } from 'react-icons/go';
 import { MdBorderBottom, MdBorderLeft, MdBorderRight } from 'react-icons/md';
 import type { Position } from '../pageScript/api/openWindow';
 import type { SingleMessage } from '../background/store/apiMiddleware';
@@ -60,6 +60,7 @@ class Actions extends Component<Props> {
       liftedState,
       liftedDispatch,
       position,
+      stateTreeSettings,
     } = this.props;
     const { features } = options;
     return (
@@ -75,6 +76,7 @@ class Actions extends Component<Props> {
           monitorState={this.props.monitorState}
           dispatch={liftedDispatch}
           features={options.features}
+          stateTreeSettings={stateTreeSettings}
         />
         {sliderIsOpen && options.connectionId && options.features.jump && (
           <SliderMonitor liftedState={liftedState} dispatch={liftedDispatch} />
@@ -129,7 +131,7 @@ class Actions extends Component<Props> {
                 this.openWindow('remote');
               }}
             >
-              <GoRadioTower />
+              <GoBroadcast />
             </Button>
           )}
         </Toolbar>
@@ -149,6 +151,7 @@ const mapStateToProps = (state: StoreState) => {
     dispatcherIsOpen: state.monitor.dispatcherIsOpen,
     sliderIsOpen: state.monitor.sliderIsOpen,
     reports: state.reports.data,
+    stateTreeSettings: state.stateTreeSettings,
   };
 };
 

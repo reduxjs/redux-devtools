@@ -13,7 +13,7 @@ map2tree(
   (options = {
     key: 'state', // the name you want for as the root node of the output tree
     pushMethod: 'push', // use 'unshift' to change the order children nodes are added
-  })
+  }),
 );
 ```
 

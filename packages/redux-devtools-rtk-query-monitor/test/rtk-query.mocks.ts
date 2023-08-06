@@ -11,7 +11,7 @@ import type { ReduxDevTools } from './devtools.mocks';
 export type MockBaseQuery<
   Result,
   Args = string | FetchArgs,
-  Meta = { status?: number }
+  Meta = { status?: number },
 > = BaseQueryFn<Args, Result, unknown, Meta>;
 
 export type BaseQueryJestMockFunction<Result> = jest.Mock<
@@ -20,7 +20,7 @@ export type BaseQueryJestMockFunction<Result> = jest.Mock<
 >;
 
 export function createMockBaseQuery<Result>(
-  jestMockFn: BaseQueryJestMockFunction<Result>
+  jestMockFn: BaseQueryJestMockFunction<Result>,
 ): MockBaseQuery<Result> {
   return async function mockBaseQuery(param, api, extra) {
     try {
@@ -36,7 +36,7 @@ export function createMockBaseQuery<Result>(
 }
 
 export function createPokemonApi(
-  jestMockFn: BaseQueryJestMockFunction<Record<string, any>>
+  jestMockFn: BaseQueryJestMockFunction<Record<string, any>>,
 ) {
   return createApi({
     reducerPath: 'pokemonApi',
@@ -57,7 +57,7 @@ export function createPokemonApi(
 
 export function setupStore(
   jestMockFn: BaseQueryJestMockFunction<Record<string, any>>,
-  devTools: typeof ReduxDevTools
+  devTools: typeof ReduxDevTools,
 ) {
   const pokemonApi = createPokemonApi(jestMockFn);
 

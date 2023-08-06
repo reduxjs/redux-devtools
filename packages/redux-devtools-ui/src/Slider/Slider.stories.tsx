@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import Slider from './';
-import { SliderProps } from './Slider';
 
 const Container = styled.div`
   display: flex;
@@ -12,28 +11,32 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export default {
+const meta: Meta = {
   title: 'Slider',
   component: Slider,
 };
 
-const Template: Story<SliderProps> = (args) => (
-  <Container>
-    <Slider {...args} />
-  </Container>
-);
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  value: 0,
-  min: 0,
-  max: 100,
-  label: 'Slider label',
-  sublabel: '(sublabel}',
-  withValue: false,
-  disabled: false,
-};
-Default.argTypes = {
-  onChange: { control: { disable: true } },
-  theme: { control: { disable: true } },
+type Story = StoryObj<typeof Slider>;
+
+export const Default: Story = {
+  render: (args) => (
+    <Container>
+      <Slider {...args} />
+    </Container>
+  ),
+  args: {
+    value: 0,
+    min: 0,
+    max: 100,
+    label: 'Slider label',
+    sublabel: '(sublabel}',
+    withValue: false,
+    disabled: false,
+  },
+  argTypes: {
+    onChange: { control: { disable: true } },
+    theme: { control: { disable: true } },
+  },
 };

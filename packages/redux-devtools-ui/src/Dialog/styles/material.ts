@@ -41,8 +41,10 @@ export const style = ({
     margin-bottom: 16px;
     border: none;
     background-color: ${theme.base00};
-    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14),
-      0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+    box-shadow:
+      0 9px 46px 8px rgba(0, 0, 0, 0.14),
+      0 11px 15px -7px rgba(0, 0, 0, 0.12),
+      0 24px 38px 3px rgba(0, 0, 0, 0.2);
 
     > div.mc-dialog--header {
       display: flex;

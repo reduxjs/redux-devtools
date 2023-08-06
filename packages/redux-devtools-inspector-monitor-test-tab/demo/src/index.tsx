@@ -45,7 +45,7 @@ const enhancer = compose(
       : DevTools.instrument();
     return instrument(next);
   },
-  persistState(getDebugSessionKey())
+  persistState(getDebugSessionKey()),
 );
 
 const store = createStore(rootReducer, enhancer);
@@ -67,5 +67,5 @@ root.render(
         {!useDevtoolsExtension && <ConnectedDevTools />}
       </Container>
     </BrowserRouter>
-  </Provider>
+  </Provider>,
 );

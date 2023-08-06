@@ -10,7 +10,7 @@ import { Theme } from '../themes/default';
 export interface SelectProps<
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 > extends Omit<ReactSelectProps<Option, IsMulti, Group>, 'theme'> {
   theme: Theme;
 }
@@ -21,7 +21,7 @@ export interface SelectProps<
 export class Select<
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 > extends (PureComponent || Component)<SelectProps<Option, IsMulti, Group>> {
   render() {
     return (
@@ -96,7 +96,7 @@ export class Select<
 export interface ExternalSelectProps<
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 > extends Omit<ReactSelectProps<Option, IsMulti, Group>, 'theme'> {
   theme?: Theme;
 }
@@ -104,9 +104,9 @@ export interface ExternalSelectProps<
 type SelectComponent = <
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
-  props: ExternalSelectProps<Option, IsMulti, Group>
+  props: ExternalSelectProps<Option, IsMulti, Group>,
 ) => ReactElement;
 
 export default createThemedComponent(Select) as SelectComponent & {

@@ -56,11 +56,11 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
 
   static getDerivedStateFromProps(
     props: RtkQueryInspectorProps<unknown, Action<unknown>>,
-    state: RtkQueryInspectorState<unknown>
+    state: RtkQueryInspectorState<unknown>,
   ): null | Partial<RtkQueryInspectorState<unknown>> {
     const selectorsSource = computeSelectorSource<unknown, Action<unknown>>(
       props,
-      state.selectorsSource
+      state.selectorsSource,
     );
 
     if (selectorsSource !== state.selectorsSource) {

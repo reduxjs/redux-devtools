@@ -44,14 +44,14 @@ const {
 } = ActionCreators;
 
 function getLastActionId<S, A extends Action<unknown>>(
-  props: DevtoolsInspectorProps<S, A>
+  props: DevtoolsInspectorProps<S, A>,
 ) {
   return props.stagedActionIds[props.stagedActionIds.length - 1];
 }
 
 function getCurrentActionId<S, A extends Action<unknown>>(
   props: DevtoolsInspectorProps<S, A>,
-  monitorState: DevtoolsInspectorState
+  monitorState: DevtoolsInspectorState,
 ) {
   return monitorState.selectedActionId === null
     ? props.stagedActionIds[props.currentStateIndex]
@@ -62,7 +62,7 @@ function getFromState<S>(
   actionIndex: number,
   stagedActionIds: number[],
   computedStates: { state: S; error?: string }[],
-  monitorState: DevtoolsInspectorState
+  monitorState: DevtoolsInspectorState,
 ) {
   const { startActionId } = monitorState;
   if (startActionId === null) {
@@ -75,7 +75,7 @@ function getFromState<S>(
 
 function createIntermediateState<S, A extends Action<unknown>>(
   props: DevtoolsInspectorProps<S, A>,
-  monitorState: DevtoolsInspectorState
+  monitorState: DevtoolsInspectorState,
 ) {
   const {
     supportImmutable,
@@ -95,7 +95,7 @@ function createIntermediateState<S, A extends Action<unknown>>(
     actionIndex,
     stagedActionIds,
     computedStates,
-    monitorState
+    monitorState,
   );
   const toState = computedStates[actionIndex];
   const error = toState && toState.error;
@@ -114,7 +114,7 @@ function createIntermediateState<S, A extends Action<unknown>>(
     toState &&
     createDiffPatcher(diffObjectHash, diffPropertyFilter).diff(
       fromInspectedState,
-      toInspectedState
+      toInspectedState,
     );
 
   return {
@@ -127,7 +127,7 @@ function createIntermediateState<S, A extends Action<unknown>>(
 }
 
 function createThemeState<S, A extends Action<unknown>>(
-  props: DevtoolsInspectorProps<S, A>
+  props: DevtoolsInspectorProps<S, A>,
 ) {
   const base16Theme = getBase16Theme(props.theme, base16Themes)!;
 
@@ -151,6 +151,8 @@ export interface ExternalProps<S, A extends Action<unknown>> {
   hideMainButtons?: boolean;
   hideActionButtons?: boolean;
   invertTheme: boolean;
+  sortStateTreeAlphabetically: boolean;
+  disableStateTreeCollection: boolean;
   dataTypeKey?: string | symbol;
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
 }
@@ -177,6 +179,8 @@ export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
   diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
   hideMainButtons?: boolean;
   hideActionButtons?: boolean;
+  sortStateTreeAlphabetically: boolean;
+  disableStateTreeCollection: boolean;
   invertTheme: boolean;
   dataTypeKey?: string | symbol;
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
@@ -220,6 +224,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     hideMainButtons: PropTypes.bool,
     hideActionButtons: PropTypes.bool,
     invertTheme: PropTypes.bool,
+    sortStateTreeAlphabetically: PropTypes.bool,
+    disableStateTreeCollection: PropTypes.bool,
     skippedActionIds: PropTypes.array,
     dataTypeKey: PropTypes.any,
     tabs: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
@@ -242,7 +248,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     this.updateSizeMode();
     this.updateSizeTimeout = window.setInterval(
       this.updateSizeMode.bind(this),
-      150
+      150,
     );
   }
 
@@ -305,6 +311,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
       dataTypeKey,
       hideMainButtons,
       hideActionButtons,
+      sortStateTreeAlphabetically,
+      disableStateTreeCollection,
     } = this.props;
     const { selectedActionId, startActionId, searchValue, tabName } =
       monitorState;
@@ -321,7 +329,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
         ref={this.inspectorCreateRef}
         {...styling(
           ['inspector', isWideLayout && 'inspectorWide'],
-          isWideLayout
+          isWideLayout,
         )}
       >
         <ActionList
@@ -364,6 +372,8 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
             selectedActionId,
             startActionId,
             dataTypeKey,
+            sortStateTreeAlphabetically,
+            disableStateTreeCollection,
           }}
           monitorState={this.props.monitorState}
           updateMonitorState={this.updateMonitorState}
@@ -411,7 +421,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
 
   handleSelectAction = (
     e: React.MouseEvent<HTMLDivElement>,
-    actionId: number
+    actionId: number,
   ) => {
     const { monitorState } = this.props;
     let startActionId;
@@ -422,13 +432,13 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
         if (actionId >= monitorState.startActionId) {
           startActionId = Math.min(
             monitorState.startActionId,
-            monitorState.selectedActionId
+            monitorState.selectedActionId,
           );
           selectedActionId = actionId;
         } else {
           selectedActionId = Math.max(
             monitorState.startActionId,
-            monitorState.selectedActionId
+            monitorState.selectedActionId,
           );
           startActionId = actionId;
         }
@@ -453,7 +463,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
 
   handleInspectPath = (
     pathType: 'inspectedActionPath' | 'inspectedStatePath',
-    path: (string | number)[]
+    path: (string | number)[],
   ) => {
     this.updateMonitorState({ [pathType]: path });
   };
@@ -469,7 +479,7 @@ export default DevtoolsInspector as unknown as React.ComponentType<
   update(
     monitorProps: ExternalProps<unknown, Action<unknown>>,
     state: DevtoolsInspectorState | undefined,
-    action: DevtoolsInspectorAction
+    action: DevtoolsInspectorAction,
   ): DevtoolsInspectorState;
   defaultProps: DefaultProps;
 };

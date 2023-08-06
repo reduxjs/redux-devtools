@@ -102,7 +102,7 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
       console.error(
         '<DockMonitor> requires at least one monitor inside. ' +
           'Why don’t you try <LogMonitor>? You can get it at ' +
-          'https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-log-monitor.'
+          'https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-log-monitor.',
       );
     } else if (childrenCount > 1 && !props.changeMonitorKey) {
       // eslint-disable-next-line no-console
@@ -110,7 +110,7 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
         'You specified multiple monitors inside <DockMonitor> ' +
           'but did not provide `changeMonitorKey` prop to change them. ' +
           'Try specifying <DockMonitor changeMonitorKey="ctrl-m" /> ' +
-          'and then press Ctrl-M.'
+          'and then press Ctrl-M.',
       );
     }
   }
@@ -184,7 +184,7 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
     otherProps: Omit<
       DockMonitorProps<S, A>,
       'monitorState' | 'children' | 'fluid'
-    >
+    >,
   ) {
     const { monitorState } = this.props;
     const { childMonitorIndex, childMonitorStates } = monitorState;
@@ -228,7 +228,7 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
                 unknown,
                 Action<unknown>
               >[],
-          (child, index) => this.renderChild(child, index, rest)
+          (child, index) => this.renderChild(child, index, rest),
         )}
       </Dock>
     );
@@ -241,7 +241,7 @@ export default DockMonitor as unknown as React.ComponentType<
   update(
     monitorProps: ExternalProps<unknown, Action<unknown>>,
     state: DockMonitorState | undefined,
-    action: DockMonitorAction
+    action: DockMonitorAction,
   ): DockMonitorState;
   defaultProps: DefaultProps;
 };

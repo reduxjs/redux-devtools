@@ -43,7 +43,7 @@ export const getDevTools = (location: { search: string }) =>
           ...defaultTabs,
         ]}
       />
-    </DockMonitor>
+    </DockMonitor>,
   );
 
 export function ConnectedDevTools() {

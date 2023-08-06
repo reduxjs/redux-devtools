@@ -33,7 +33,7 @@ interface State {
 }
 
 export default class ActionListRow<
-  A extends Action<unknown>
+  A extends Action<unknown>,
 > extends PureComponent<Props<A>, State> {
   state: State = { hover: false };
 
@@ -97,7 +97,7 @@ export default class ActionListRow<
             isInFuture && 'actionListFromFuture',
           ],
           isSelected,
-          action
+          action,
         )}
       >
         <div
@@ -115,7 +115,7 @@ export default class ActionListRow<
                 ? '+00:00:00'
                 : dateformat(
                     timeDelta,
-                    timestamps.previous ? '+MM:ss.L' : 'h:MM:ss.L'
+                    timestamps.previous ? '+MM:ss.L' : 'h:MM:ss.L',
                   )}
             </div>
           </RightSlider>
@@ -127,7 +127,7 @@ export default class ActionListRow<
                   ? '+00:00:00'
                   : dateformat(
                       timeDelta,
-                      timestamps.previous ? '+MM:ss.L' : 'h:MM:ss.L'
+                      timestamps.previous ? '+MM:ss.L' : 'h:MM:ss.L',
                     )}
               </div>
             </RightSlider>
@@ -146,12 +146,12 @@ export default class ActionListRow<
                             'selectorButtonSmall',
                           ],
                           isButtonSelected(btn),
-                          true
+                          true,
                         )}
                       >
                         {btn}
                       </div>
-                    )
+                    ),
                 )}
               </div>
             </RightSlider>
@@ -194,7 +194,7 @@ export default class ActionListRow<
   handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     if (
       (e.target as unknown as { className: string[] }).className.indexOf(
-        'selectorButton'
+        'selectorButton',
       ) === 0
     )
       return;

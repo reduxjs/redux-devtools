@@ -20,7 +20,7 @@ const composeEnhancers =
   compose;
 const store = createStore(
   reducer,
-  composeEnhancers(applyMiddleware(sagaMiddleware))
+  composeEnhancers(applyMiddleware(sagaMiddleware)),
 );
 sagaMiddleware.run(rootSaga);
 
@@ -35,7 +35,7 @@ function render() {
       onIncrementIfOdd={() => action('INCREMENT_IF_ODD')}
       onIncrementAsync={() => action('INCREMENT_ASYNC')}
     />,
-    document.getElementById('root')
+    document.getElementById('root'),
   );
 }
 

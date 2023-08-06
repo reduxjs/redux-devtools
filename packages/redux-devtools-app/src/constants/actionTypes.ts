@@ -1,5 +1,6 @@
 export const CHANGE_SECTION = 'main/CHANGE_SECTION';
 export const CHANGE_THEME = 'main/CHANGE_THEME';
+export const CHANGE_STATE_TREE_SETTINGS = 'main/CHANGE_STATE_TREE_SETTINGS';
 
 export const UPDATE_STATE = 'devTools/UPDATE_STATE';
 export const SET_STATE = 'devTools/SET_STATE';

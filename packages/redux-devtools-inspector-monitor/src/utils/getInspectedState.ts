@@ -6,10 +6,10 @@ function iterateToKey(obj: any, key: string | number) {
   let idx = 0;
   for (const entry of obj) {
     if (Array.isArray(entry)) {
-      if (entry[0] === key) return entry[1];
+      if (entry[0] === (key as string)) return entry[1];
     } else {
-      if (idx > key) return;
-      if (idx === key) return entry;
+      if (idx > (key as number)) return;
+      if (idx === (key as number)) return entry;
     }
     idx++;
   }
@@ -18,7 +18,7 @@ function iterateToKey(obj: any, key: string | number) {
 export default function getInspectedState<S>(
   state: S,
   path: (string | number)[],
-  convertImmutable: boolean
+  convertImmutable: boolean,
 ): S {
   state =
     path && path.length

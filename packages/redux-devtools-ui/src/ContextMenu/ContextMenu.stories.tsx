@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import ContextMenu from './';
 import { items } from './data';
-import { ContextMenuProps } from './ContextMenu';
 
-export default {
+const meta: Meta = {
   title: 'ContextMenu',
   component: ContextMenu,
 };
+
+export default meta;
 
 const Container = styled.div`
   display: flex;
@@ -18,21 +19,23 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Template: Story<ContextMenuProps> = (args) => (
-  <Container>
-    <ContextMenu {...args} />
-  </Container>
-);
+type Story = StoryObj<typeof ContextMenu>;
 
-export const Default = Template.bind({});
-Default.args = {
-  visible: true,
-  x: 100,
-  y: 100,
-  items,
-};
-Default.argTypes = {
-  visible: { control: { disable: true } },
-  items: { control: { disable: true } },
-  onClick: { control: { disable: true } },
+export const Default: Story = {
+  render: (args) => (
+    <Container>
+      <ContextMenu {...args} />
+    </Container>
+  ),
+  args: {
+    visible: true,
+    x: 100,
+    y: 100,
+    items,
+  },
+  argTypes: {
+    visible: { control: { disable: true } },
+    items: { control: { disable: true } },
+    onClick: { control: { disable: true } },
+  },
 };

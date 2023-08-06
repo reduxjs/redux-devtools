@@ -41,11 +41,11 @@ export const exportStateMiddleware =
           JSON.stringify(
             {
               payload: request.payload,
-              preloadedState: (request as ExportRequest).committedState,
+              preloadedState: request.committedState,
             },
             null,
-            '\t'
-          )
+            '\t',
+          ),
         );
       }
     } else if (action.type === EXPORT) {
@@ -54,7 +54,7 @@ export const exportStateMiddleware =
       const options = instances.options[instanceId];
       if (options.features.export === true) {
         download(
-          stringifyJSON(instances.states[instanceId], options.serialize)
+          stringifyJSON(instances.states[instanceId], options.serialize),
         );
       } else {
         toExport = instanceId;

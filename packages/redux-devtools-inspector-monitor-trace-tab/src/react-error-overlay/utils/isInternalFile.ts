@@ -7,7 +7,7 @@
 
 function isInternalFile(
   sourceFileName: string | null | undefined,
-  fileName: string | null | undefined
+  fileName: string | null | undefined,
 ) {
   return (
     sourceFileName == null ||

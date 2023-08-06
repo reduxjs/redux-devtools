@@ -18,18 +18,18 @@ function getDebugSessionKey() {
 const enhancer = compose(
   applyMiddleware(thunk),
   DevTools.instrument(),
-  persistState(getDebugSessionKey())
+  persistState(getDebugSessionKey()),
 );
 
 export default function configureStore(
-  initialState?: PreloadedState<CounterState>
+  initialState?: PreloadedState<CounterState>,
 ) {
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      store.replaceReducer(require('../reducers').default as Reducer)
+      store.replaceReducer(require('../reducers').default as Reducer),
     );
   }
 

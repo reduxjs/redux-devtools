@@ -19,7 +19,7 @@ const store = createStore(
   initialState,
   window.__REDUX_DEVTOOLS_EXTENSION__
     ? window.__REDUX_DEVTOOLS_EXTENSION__()
-    : (noop) => noop
+    : (noop) => noop,
 );
 
 const el = document.getElementById('counter');

@@ -7,16 +7,18 @@ import { InitMonitorAction } from '../actions';
 import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
 import { ThemeFromProvider } from '@redux-devtools/ui';
+import { StateTreeSettings } from '../reducers/stateTreeSettings';
 
 interface Props {
   monitor: string;
   liftedState: State;
   monitorState: MonitorStateMonitorState | undefined;
   dispatch: (
-    action: LiftedAction<unknown, Action<unknown>, unknown> | InitMonitorAction
+    action: LiftedAction<unknown, Action<unknown>, unknown> | InitMonitorAction,
   ) => void;
   features: Features | undefined;
   theme: ThemeFromProvider;
+  stateTreeSettings: StateTreeSettings;
 }
 
 class DevTools extends Component<Props> {
@@ -27,7 +29,7 @@ class DevTools extends Component<Props> {
     update(
       monitorProps: unknown,
       state: unknown | undefined,
-      action: Action<unknown>
+      action: Action<unknown>,
     ): unknown;
   };
   preventRender?: boolean;
@@ -56,7 +58,7 @@ class DevTools extends Component<Props> {
         newMonitorState = update(
           this.monitorProps,
           undefined,
-          {} as Action<unknown>
+          {} as Action<unknown>,
         );
         if (newMonitorState !== monitorState) {
           this.preventRender = true;
@@ -86,7 +88,7 @@ class DevTools extends Component<Props> {
   }
 
   dispatch = (
-    action: LiftedAction<unknown, Action<unknown>, unknown> | InitMonitorAction
+    action: LiftedAction<unknown, Action<unknown>, unknown> | InitMonitorAction,
   ) => {
     this.props.dispatch(action);
   };
@@ -110,6 +112,12 @@ class DevTools extends Component<Props> {
           features={this.props.features}
           dispatch={this.dispatch}
           theme={this.props.theme}
+          sortStateTreeAlphabetically={
+            this.props.stateTreeSettings.sortAlphabetically
+          }
+          disableStateTreeCollection={
+            this.props.stateTreeSettings.disableCollection
+          }
         />
       </div>
     );

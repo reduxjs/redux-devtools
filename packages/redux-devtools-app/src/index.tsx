@@ -21,7 +21,7 @@ export class Root extends Component {
             type: CONNECT_REQUEST,
           });
         }
-      }
+      },
     );
     this.store = store;
     this.persistor = persistor;
@@ -66,5 +66,6 @@ export * from './reducers/section';
 export * from './reducers/socket';
 export * from './reducers/theme';
 export * from './reducers/stateFilter';
+export * from './reducers/stateTreeSettings';
 export * from './utils/monitorActions';
 export * from './utils/stringifyJSON';

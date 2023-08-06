@@ -41,7 +41,7 @@ export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps>
                       'selectorButton',
                       tab.value === selectedTab && 'selectorButtonSelected',
                     ],
-                    tab.value === selectedTab
+                    tab.value === selectedTab,
                   )}
                 >
                   <span>

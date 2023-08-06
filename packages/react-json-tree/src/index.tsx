@@ -51,7 +51,7 @@ export function JSONTree({
   const styling = useMemo(
     () =>
       createStylingFromTheme(shouldInvertTheme ? invertTheme(theme) : theme),
-    [theme, shouldInvertTheme]
+    [theme, shouldInvertTheme],
   );
 
   return (
