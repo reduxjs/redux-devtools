@@ -31,11 +31,7 @@ export default function serialize(
     if (immutable.List.isList(value))
       return mark(value, 'ImmutableList', 'toArray');
     if (immutable.OrderedSet.isOrderedSet(value))
-      return mark(
-        value as OrderedSet<unknown>,
-        'ImmutableOrderedSet',
-        'toArray',
-      );
+      return mark(value, 'ImmutableOrderedSet', 'toArray');
     if (immutable.Set.isSet(value))
       return mark(value, 'ImmutableSet', 'toArray');
     if (immutable.Seq.isSeq(value))
