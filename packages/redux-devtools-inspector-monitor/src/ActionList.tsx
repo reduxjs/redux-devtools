@@ -1,11 +1,4 @@
-import React, {
-  forwardRef,
-  ReactNode,
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ReactNode, useCallback, useLayoutEffect, useRef } from 'react';
 import { Action } from 'redux';
 import { PerformAction } from '@redux-devtools/core';
 import { StylingFunction } from 'react-base16-styling';
@@ -13,8 +6,6 @@ import {
   closestCenter,
   DndContext,
   DragEndEvent,
-  DragOverlay,
-  DragStartEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,
@@ -94,9 +85,6 @@ export default function ActionListFunction<A extends Action<unknown>>({
 }: Props<A>) {
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const prevLastActionId = useRef<number | undefined>();
-  const [activeDragActionId, setActiveDragActionId] = useState<number | null>(
-    null,
-  );
 
   useLayoutEffect(() => {
     if (nodeRef.current && prevLastActionId.current !== lastActionId) {
@@ -124,17 +112,11 @@ export default function ActionListFunction<A extends Action<unknown>>({
     }),
   );
 
-  const handleDragStart = useCallback(({ active }: DragStartEvent) => {
-    setActiveDragActionId(active.id as number);
-  }, []);
-
   const handleDragEnd = useCallback(
     ({ active, over }: DragEndEvent) => {
       if (over && active.id !== over.id) {
         onReorderAction(active.id as number, over.id as number);
       }
-
-      setActiveDragActionId(null);
     },
     [onReorderAction],
   );
@@ -148,35 +130,6 @@ export default function ActionListFunction<A extends Action<unknown>>({
             .indexOf(lowerSearchValue as string) !== -1,
       )
     : actionIds;
-
-  function renderActionListRow(actionId: number) {
-    return (
-      <ActionListRow
-        styling={styling}
-        actionId={actionId}
-        isInitAction={!actionId}
-        isSelected={
-          (startActionId !== null &&
-            actionId >= startActionId &&
-            actionId <= (selectedActionId as number)) ||
-          actionId === selectedActionId
-        }
-        isInFuture={
-          actionIds.indexOf(actionId) > actionIds.indexOf(currentActionId)
-        }
-        onSelect={(e: React.MouseEvent<HTMLDivElement>) =>
-          onSelect(e, actionId)
-        }
-        timestamps={getTimestamps(actions, actionIds, actionId)}
-        action={actions[actionId].action}
-        onToggleClick={() => onToggleAction(actionId)}
-        onJumpClick={() => onJumpToState(actionId)}
-        onCommitClick={() => onCommit()}
-        hideActionButtons={hideActionButtons}
-        isSkipped={skippedActionIds.indexOf(actionId) !== -1}
-      />
-    );
-  }
 
   return (
     <div
@@ -205,7 +158,6 @@ export default function ActionListFunction<A extends Action<unknown>>({
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
-          onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
           <SortableContext
@@ -214,15 +166,34 @@ export default function ActionListFunction<A extends Action<unknown>>({
           >
             {filteredActionIds.map((actionId) => (
               <SortableItem key={actionId} actionId={actionId}>
-                {renderActionListRow(actionId)}
+                <ActionListRow
+                  styling={styling}
+                  actionId={actionId}
+                  isInitAction={!actionId}
+                  isSelected={
+                    (startActionId !== null &&
+                      actionId >= startActionId &&
+                      actionId <= (selectedActionId as number)) ||
+                    actionId === selectedActionId
+                  }
+                  isInFuture={
+                    actionIds.indexOf(actionId) >
+                    actionIds.indexOf(currentActionId)
+                  }
+                  onSelect={(e: React.MouseEvent<HTMLDivElement>) =>
+                    onSelect(e, actionId)
+                  }
+                  timestamps={getTimestamps(actions, actionIds, actionId)}
+                  action={actions[actionId].action}
+                  onToggleClick={() => onToggleAction(actionId)}
+                  onJumpClick={() => onJumpToState(actionId)}
+                  onCommitClick={() => onCommit()}
+                  hideActionButtons={hideActionButtons}
+                  isSkipped={skippedActionIds.indexOf(actionId) !== -1}
+                />
               </SortableItem>
             ))}
           </SortableContext>
-          <DragOverlay>
-            {activeDragActionId ? (
-              <Item>{renderActionListRow(activeDragActionId)}</Item>
-            ) : null}
-          </DragOverlay>
         </DndContext>
       </div>
     </div>
@@ -244,15 +215,8 @@ function SortableItem({ children, actionId }: SortableItemProps) {
   };
 
   return (
-    <Item ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       {children}
-    </Item>
+    </div>
   );
 }
-
-const Item = forwardRef<
-  HTMLDivElement,
-  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
->(function Item({ ...props }, ref) {
-  return <div {...props} ref={ref} />;
-});
