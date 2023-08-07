@@ -48,7 +48,7 @@ export const filterByJsonPath = (obj: any, jsonpath: string) => {
     json: obj,
     path: jsonpath,
     resultType: 'path',
-    evalType: 'safe',
+    eval: 'safe',
   }).map((jp: string) => JSONPath.toPathArray(jp).slice(1)) as Path[];
 
   if (paths.some((path: Path) => !path.length)) return obj;
