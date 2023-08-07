@@ -19,6 +19,10 @@ function getTimestamps<A extends Action<unknown>>(
   };
 }
 
+function scrollToBottom(node: HTMLDivElement) {
+  node.scrollTop = node.scrollHeight;
+}
+
 interface Props<A extends Action<unknown>> {
   actions: { [actionId: number]: PerformAction<A> };
   actionIds: number[];
@@ -40,10 +44,6 @@ interface Props<A extends Action<unknown>> {
   onReorderAction: (actionId: number, beforeActionId: number) => void;
   currentActionId: number;
   lastActionId: number;
-}
-
-function scrollToBottom(node: HTMLDivElement) {
-  node.scrollTop = node.scrollHeight;
 }
 
 export default function ActionListFunction<A extends Action<unknown>>({
