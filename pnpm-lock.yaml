@@ -1632,6 +1632,9 @@ importers:
       '@types/prop-types':
         specifier: ^15.7.5
         version: 15.7.5
+      '@types/redux-devtools-themes':
+        specifier: ^1.0.0
+        version: 1.0.0
       dateformat:
         specifier: ^5.0.3
         version: 5.0.3
@@ -1714,9 +1717,6 @@ importers:
       '@types/react-dragula':
         specifier: ^1.1.0
         version: 1.1.0
-      '@types/redux-devtools-themes':
-        specifier: ^1.0.0
-        version: 1.0.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.62.0
         version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.46.0)(typescript@5.1.6)
@@ -16455,6 +16455,7 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
