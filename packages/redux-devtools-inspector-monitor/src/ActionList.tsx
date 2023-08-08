@@ -62,7 +62,7 @@ interface Props<A extends Action<unknown>> {
   lastActionId: number;
 }
 
-export default function ActionListFunction<A extends Action<unknown>>({
+export default function ActionList<A extends Action<unknown>>({
   styling,
   actions,
   actionIds,
