@@ -115,10 +115,20 @@ export default function ActionList<A extends Action<unknown>>({
   const handleDragEnd = useCallback(
     ({ active, over }: DragEndEvent) => {
       if (over && active.id !== over.id) {
-        onReorderAction(active.id as number, over.id as number);
+        const activeIndex = actionIds.indexOf(active.id as number);
+        const overIndex = actionIds.indexOf(over.id as number);
+
+        const beforeActionId =
+          overIndex < activeIndex
+            ? (over.id as number)
+            : overIndex < actionIds.length - 1
+            ? actionIds[overIndex + 1]
+            : actionIds.length;
+
+        onReorderAction(active.id as number, beforeActionId);
       }
     },
-    [onReorderAction],
+    [actionIds, onReorderAction],
   );
 
   const lowerSearchValue = searchValue && searchValue.toLowerCase();
