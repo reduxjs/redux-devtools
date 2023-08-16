@@ -163,8 +163,8 @@ importers:
         specifier: ^9.1.3
         version: 9.1.3(@babel/core@7.22.9)(webpack@5.88.2)
       chromedriver:
-        specifier: ^114.0.3
-        version: 114.0.3
+        specifier: ^116.0.0
+        version: 116.0.0
       copy-webpack-plugin:
         specifier: ^11.0.0
         version: 11.0.0(webpack@5.88.2)
@@ -11983,8 +11983,8 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
-  /chromedriver@114.0.3:
-    resolution: {integrity: sha512-Qy5kqsAUrCDwpovM5pIWFkb3X3IgJLoorigwFEDgC1boL094svny3N7yw06marJHAuyX4CE/hhd25RarIcKvKg==}
+  /chromedriver@116.0.0:
+    resolution: {integrity: sha512-/TQaRn+RUAYnVqy5Vx8VtU8DvtWosU8QLM2u7BoNM5h55PRQPXF/onHAehEi8Sj/CehdKqH50NFdiumQAUr0DQ==}
     engines: {node: '>=16'}
     hasBin: true
     requiresBuild: true
