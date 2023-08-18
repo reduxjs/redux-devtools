@@ -45,9 +45,7 @@ describe('App container', () => {
       </Provider>,
     );
     const actionList = screen.getByTestId('actionList');
-    expect(
-      within(actionList).getByTestId('actionListRows'),
-    ).toBeEmptyDOMElement();
+    expect(within(actionList).queryByRole('button')).not.toBeInTheDocument();
   });
 });
 

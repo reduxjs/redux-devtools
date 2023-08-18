@@ -36,7 +36,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.22.6",
-    "@types/dragula": "^3.7.1",
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/modifiers": "^6.0.1",
+    "@dnd-kit/sortable": "^7.0.2",
+    "@dnd-kit/utilities": "^3.2.1",
     "@types/lodash": "^4.14.196",
     "@types/prop-types": "^15.7.5",
     "@types/redux-devtools-themes": "^1.0.0",
@@ -50,7 +53,6 @@
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.8.1",
     "react-base16-styling": "^0.9.1",
-    "react-dragula": "^1.1.17",
     "react-json-tree": "^0.18.0",
     "redux-devtools-themes": "^1.0.0"
   },
@@ -68,7 +70,6 @@
     "@types/history": "^4.7.11",
     "@types/lodash.debounce": "^4.0.7",
     "@types/react": "^18.2.18",
-    "@types/react-dragula": "^1.1.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.46.0",
