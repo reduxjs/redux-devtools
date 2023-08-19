@@ -9,6 +9,7 @@ import {
   theme,
   stateTreeSettings,
   StoreState,
+  stateFilter,
 } from '@redux-devtools/app';
 import instances from './instancesReducer';
 import type { WindowStoreAction } from './windowStore';
@@ -23,6 +24,7 @@ const rootReducer: Reducer<StoreState, WindowStoreAction> =
     section,
     theme,
     connection,
+    stateFilter,
     stateTreeSettings,
   });
 

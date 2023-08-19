@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TabsHeader, { ReactButtonElement, Tab } from './TabsHeader';
+import TabsHeader, { Tab } from './TabsHeader';
 import { TabsContainer } from './styles/common';
+import { StateFilterValue } from '../StateFilter/StateFilter';
 
 export type Position = 'left' | 'right' | 'center';
 
@@ -12,6 +13,8 @@ export interface TabsProps<P> {
   onClick: (value: string) => void;
   collapsible?: boolean;
   position: Position;
+  setFilter?: (value: Partial<StateFilterValue>) => void;
+  stateFilterValue?: StateFilterValue;
 }
 
 export default class Tabs<P extends object> extends Component<TabsProps<P>> {
@@ -64,6 +67,8 @@ export default class Tabs<P extends object> extends Component<TabsProps<P>> {
         onClick={this.props.onClick}
         selected={this.props.selected}
         position={this.props.position}
+        setFilter={this.props.setFilter}
+        stateFilterValue={this.props.stateFilterValue}
       />
     );
 
