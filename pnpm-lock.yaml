@@ -166,8 +166,8 @@ importers:
         specifier: npm:chromedriver@^114.0.3
         version: /chromedriver@114.0.3
       chromedriver115:
-        specifier: npm:chromedriver@^115.0.1
-        version: /chromedriver@115.0.1
+        specifier: npm:chromedriver@^116.0.0
+        version: /chromedriver@116.0.0
       copy-webpack-plugin:
         specifier: ^11.0.0
         version: 11.0.0(webpack@5.88.2)
@@ -12093,8 +12093,8 @@ packages:
       - supports-color
     dev: true
 
-  /chromedriver@115.0.1:
-    resolution: {integrity: sha512-faE6WvIhXfhnoZ3nAxUXYzeDCKy612oPwpkUp0mVkA7fZPg2JHSUiYOQhUYgzHQgGvDWD5Fy2+M2xV55GKHBVQ==}
+  /chromedriver@116.0.0:
+    resolution: {integrity: sha512-/TQaRn+RUAYnVqy5Vx8VtU8DvtWosU8QLM2u7BoNM5h55PRQPXF/onHAehEi8Sj/CehdKqH50NFdiumQAUr0DQ==}
     engines: {node: '>=16'}
     hasBin: true
     requiresBuild: true
