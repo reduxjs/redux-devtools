@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@babel/highlight>chalk': Methuselah96/chalk#v2-without-process
-
 importers:
 
   .:
@@ -2020,8 +2017,8 @@ importers:
   packages/redux-devtools-inspector-monitor-trace-tab:
     dependencies:
       '@babel/code-frame':
-        specifier: ^7.22.5
-        version: 7.22.5
+        specifier: ^8.0.0-alpha.2
+        version: 8.0.0-alpha.2
       '@babel/runtime':
         specifier: ^7.22.6
         version: 7.22.6
@@ -3774,6 +3771,14 @@ packages:
     dependencies:
       '@babel/highlight': 7.22.5
 
+  /@babel/code-frame@8.0.0-alpha.2:
+    resolution: {integrity: sha512-uM1On1MxYaZDFVq1gPbGJx1Rf0N+lwlPOCBHZPS8RNVfP9CAG05xzViguK45e16n4Wo6V3WfaTkdmbuNusBnJQ==}
+    engines: {node: ^16.20.0 || ^18.16.0 || >=20.0.0}
+    dependencies:
+      '@babel/highlight': 8.0.0-alpha.2
+      chalk: 4.1.2
+    dev: false
+
   /@babel/compat-data@7.22.9:
     resolution: {integrity: sha512-5UamI7xkUcJ3i9qVDS+KFDEK8/7oJ55/sJMB1Ge7IEapr7KfdfV/HErR+koZwOfd+SgtFKOKRhRakdg++DcJpQ==}
     engines: {node: '>=6.9.0'}
@@ -3999,6 +4004,11 @@ packages:
     resolution: {integrity: sha512-aJXu+6lErq8ltp+JhkJUfk1MTGyuA4v7f3pA+BJ5HLfNC6nAQ0Cpi9uOquUj8Hehg0aUiHzWQbOVJGao6ztBAQ==}
     engines: {node: '>=6.9.0'}
 
+  /@babel/helper-validator-identifier@8.0.0-alpha.2:
+    resolution: {integrity: sha512-us66RLKkCzBzNJ1TVAHe2euihYrYaXxbuQ7yJogKdBKBZ0R7gHEpB+e0ylaMGsmLzqlpPUyWWcz3OPTCsq1FDw==}
+    engines: {node: ^16.20.0 || ^18.16.0 || >=20.0.0}
+    dev: false
+
   /@babel/helper-validator-option@7.22.5:
     resolution: {integrity: sha512-R3oB6xlIVKUnxNUxbmgq7pKjxpru24zlimpE8WK47fACIlM0II/Hm1RS8IaOI7NgCr6LNS+jl5l75m20npAziw==}
     engines: {node: '>=6.9.0'}
@@ -4029,6 +4039,15 @@ packages:
       '@babel/helper-validator-identifier': 7.22.5
       chalk: github.com/Methuselah96/chalk/7e66d0ff681fc10462ce327f1c4f82bfa13193e2
       js-tokens: 4.0.0
+
+  /@babel/highlight@8.0.0-alpha.2:
+    resolution: {integrity: sha512-V+G3EzQx895Dqbu4xroJo6kMLK6YQJLrMLGj2zjJShA5HNuBCTGgwBhL1BA8jixOfFA5/110QoCugKC39oWB8w==}
+    engines: {node: ^16.20.0 || ^18.16.0 || >=20.0.0}
+    dependencies:
+      '@babel/helper-validator-identifier': 8.0.0-alpha.2
+      chalk: 4.1.2
+      js-tokens: 8.0.1
+    dev: false
 
   /@babel/parser@7.22.7:
     resolution: {integrity: sha512-7NF8pOkHP5o2vpmGgNGcfAeCvOYhGLyA3Z4eBQkT1RJlWu47n63bCs93QfJ2hIAFCil7L5P2IWhs1oToVgrL0Q==}
@@ -16378,6 +16397,10 @@ packages:
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
+  /js-tokens@8.0.1:
+    resolution: {integrity: sha512-3AGrZT6tuMm1ZWWn9mLXh7XMfi2YtiLNPALCVxBCiUVq0LD1OQMxV/AdS/s7rLJU5o9i/jBZw/N4vXXL5dm29A==}
+    dev: false
+
   /js-yaml@3.14.1:
     resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
     hasBin: true
@@ -22125,7 +22148,7 @@ packages:
     dev: true
 
   github.com/Methuselah96/chalk/7e66d0ff681fc10462ce327f1c4f82bfa13193e2:
-    resolution: {tarball: https://codeload.github.com/Methuselah96/chalk/tar.gz/7e66d0ff681fc10462ce327f1c4f82bfa13193e2}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://codeload.github.com/Methuselah96/chalk/tar.gz/7e66d0ff681fc10462ce327f1c4f82bfa13193e2}
     name: chalk
     version: 2.4.2
     engines: {node: '>=4'}
