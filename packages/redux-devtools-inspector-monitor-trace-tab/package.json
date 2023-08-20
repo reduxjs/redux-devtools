@@ -30,7 +30,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/code-frame": "^7.22.10",
+    "@babel/code-frame": "^8.0.0-alpha.2",
     "@babel/runtime": "^7.22.10",
     "@types/chrome": "^0.0.243",
     "anser": "^2.1.1",
