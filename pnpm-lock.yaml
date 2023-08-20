@@ -1657,8 +1657,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       jsondiffpatch:
-        specifier: ^0.5.0
-        version: 0.5.0
+        specifier: ^0.4.1
+        version: 0.4.1
       jss:
         specifier: ^10.10.0
         version: 10.10.0
@@ -4051,7 +4051,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/helper-validator-identifier': 7.22.5
-      chalk: github.com/Methuselah96/chalk/7e66d0ff681fc10462ce327f1c4f82bfa13193e2
+      chalk: 2.4.2
       js-tokens: 4.0.0
 
   /@babel/highlight@8.0.0-alpha.2:
@@ -16773,6 +16773,15 @@ packages:
     resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
     dev: true
 
+  /jsondiffpatch@0.4.1:
+    resolution: {integrity: sha512-t0etAxTUk1w5MYdNOkZBZ8rvYYN5iL+2dHCCx/DpkFm/bW28M6y5nUS83D4XdZiHy35Fpaw6LBb+F88fHZnVCw==}
+    engines: {node: '>=8.17.0'}
+    hasBin: true
+    dependencies:
+      chalk: 2.4.2
+      diff-match-patch: 1.0.5
+    dev: false
+
   /jsondiffpatch@0.5.0:
     resolution: {integrity: sha512-Quz3MvAwHxVYNXsOByL7xI5EB2WYOeFswqaHIA3qOK3isRWTxiplBEocmmru6XmxDB2L7jDNYtYA4FyimoAFEw==}
     engines: {node: '>=8.17.0'}
@@ -22396,13 +22405,3 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
-
-  github.com/Methuselah96/chalk/7e66d0ff681fc10462ce327f1c4f82bfa13193e2:
-    resolution: {registry: https://registry.npmjs.org/, tarball: https://codeload.github.com/Methuselah96/chalk/tar.gz/7e66d0ff681fc10462ce327f1c4f82bfa13193e2}
-    name: chalk
-    version: 2.4.2
-    engines: {node: '>=4'}
-    dependencies:
-      ansi-styles: 3.2.1
-      escape-string-regexp: 1.0.5
-      supports-color: 5.5.0
