@@ -1085,8 +1085,8 @@ importers:
         specifier: ^3.1.14
         version: 3.1.14
       jsondiffpatch:
-        specifier: ^0.5.0
-        version: 0.5.0
+        specifier: ^0.4.1
+        version: 0.4.1
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
@@ -12198,6 +12198,7 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: true
 
   /chalk@4.1.1:
     resolution: {integrity: sha512-diHzdDKxcU+bAsUboHLPEDQiw0qEe0qd7SYUn3HgcFlWgbDcfLGswOHYeGrHKzG9z6UYf01d9VFMfZxPM1xZSg==}
@@ -16781,16 +16782,6 @@ packages:
       chalk: 2.4.2
       diff-match-patch: 1.0.5
     dev: false
-
-  /jsondiffpatch@0.5.0:
-    resolution: {integrity: sha512-Quz3MvAwHxVYNXsOByL7xI5EB2WYOeFswqaHIA3qOK3isRWTxiplBEocmmru6XmxDB2L7jDNYtYA4FyimoAFEw==}
-    engines: {node: '>=8.17.0'}
-    hasBin: true
-    dependencies:
-      chalk: 3.0.0
-      diff-match-patch: 1.0.5
-    dev: false
-    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
