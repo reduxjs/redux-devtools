@@ -1,9 +1,11 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.test.json',
-    },
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!.pnpm|@babel/code-frame|@babel/highlight|@babel/helper-validator-identifier)',
+  ],
 };
