@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.1.1
+
+### Patch Changes
+
+- fe32709c: Update jsondiffpatch to fix bundling issues.
+
 ## 3.1.0
 
 ### Minor Changes
