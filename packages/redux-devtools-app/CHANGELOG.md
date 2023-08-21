@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.2.3
+
+### Patch Changes
+
+- fe32709c: Update jsondiffpatch to fix bundling issues.
+- Updated dependencies [fe32709c]
+  - @redux-devtools/inspector-monitor@3.1.1
+
 ## 2.2.2
 
 ### Patch Changes

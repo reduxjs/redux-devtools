@@ -1049,7 +1049,7 @@ importers:
         specifier: ^3.13.0
         version: link:../redux-devtools
       '@redux-devtools/inspector-monitor':
-        specifier: ^3.1.0
+        specifier: ^3.1.1
         version: link:../redux-devtools-inspector-monitor
       '@redux-devtools/inspector-monitor-test-tab':
         specifier: ^1.0.1
@@ -16672,6 +16672,7 @@ packages:
       chalk: 3.0.0
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
