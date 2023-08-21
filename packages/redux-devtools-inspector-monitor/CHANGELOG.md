@@ -1,5 +1,23 @@
 # Change Log
 
+## 3.1.1
+
+### Patch Changes
+
+- fe32709c: Update jsondiffpatch to fix bundling issues.
+
+## 3.1.0
+
+### Minor Changes
+
+- d54adb76: Option to sort State Tree keys alphabetically
+  Option to disable collapsing of object keys
+
+### Patch Changes
+
+- 14a79573: Replace react-dragula with dnd-kit
+- bb9bd907: Move @types/redux-devtools-themes to dependencies
+
 ## 3.0.2
 
 ### Patch Changes

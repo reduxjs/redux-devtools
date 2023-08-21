@@ -1,5 +1,16 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.0
+
+### Minor Changes
+
+- d54adb76: Option to sort State Tree keys alphabetically
+  Option to disable collapsing of object keys
+
+### Patch Changes
+
+- @redux-devtools/app@2.2.2
+
 ## 3.0.19
 
 ### Patch Changes

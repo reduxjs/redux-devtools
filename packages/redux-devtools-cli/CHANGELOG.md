@@ -1,5 +1,15 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- 81ba239e: Dropped support for Node.js 14.
+
+### Patch Changes
+
+- @redux-devtools/app@2.2.2
+
 ## 2.0.0
 
 ### Major Changes

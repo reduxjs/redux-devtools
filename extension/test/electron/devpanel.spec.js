@@ -2,7 +2,7 @@ import { join } from 'path';
 import webdriver from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
 import electronPath from 'electron';
-import chromedriver from 'chromedriver';
+import chromedriver from 'chromedriver114';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const port = 9515;
