@@ -2,9 +2,11 @@ import {
   faArrowDown,
   faArrowRight,
   faUndo,
+  faCopy,
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { ExpandCollapseAll } from '.';
 import { useExpandCollapseAllContext } from './expandCollapseContext';
 import { StylingFunction } from 'react-base16-styling';
@@ -12,6 +14,7 @@ import { StylingFunction } from 'react-base16-styling';
 interface Props {
   expandCollapseAll: ExpandCollapseAll;
   styling: StylingFunction;
+  value: unknown;
 }
 
 interface ExpandButtonProps {
@@ -24,11 +27,17 @@ interface CollapseButtonProps {
   collapseIcon?: ReactNode;
 }
 
+interface CopyToClipboardButtonProps {
+  copyToClipboardIcon?: ReactNode;
+  copiedToClipboardIcon?: ReactNode;
+  value: unknown;
+}
+
 interface DefaultButtonProps {
   defaultIcon?: ReactNode;
 }
 
-function ExpandCollapseButtons({ expandCollapseAll, styling }: Props) {
+function ExpandCollapseButtons({ expandCollapseAll, styling, value }: Props) {
   const { enableDefaultButton } = useExpandCollapseAllContext();
 
   const expandableDefaultValue = expandCollapseAll?.defaultValue || 'expand';
@@ -38,6 +47,12 @@ function ExpandCollapseButtons({ expandCollapseAll, styling }: Props) {
       {enableDefaultButton && (
         <DefaultButton defaultIcon={expandCollapseAll?.defaultIcon} />
       )}
+
+      <CopyToClipboardButton
+        copyToClipboardIcon={expandCollapseAll?.copyToClipboardIcon}
+        copiedToClipboardIcon={expandCollapseAll?.copiedToClipboardIcon}
+        value={value}
+      />
 
       <ExpandButton
         expandableDefaultValue={expandableDefaultValue}
@@ -108,6 +123,26 @@ function CollapseButton({
   return <></>;
 }
 
+function CopyToClipboardButton({copyToClipboardIcon, copiedToClipboardIcon, value}:CopyToClipboardButtonProps) {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleOnCopyToClipboard = async () => {
+    await navigator.clipboard.writeText(JSON.stringify(value, null, 2));
+    setIsCopied(true)
+  }
+
+  if(isCopied){
+    return (<div role="presentation" onClick={handleOnCopyToClipboard}>
+      {copiedToClipboardIcon || <FontAwesomeIcon icon={faCheck} />}
+    </div>);
+  }
+
+  return (
+    <div role="presentation" onClick={handleOnCopyToClipboard}>
+      {copyToClipboardIcon || <FontAwesomeIcon icon={faCopy} />}
+    </div>)
+}
+
 function DefaultButton({ defaultIcon }: DefaultButtonProps) {
   const { setExpandAllState, setEnableDefaultButton } =
     useExpandCollapseAllContext();
@@ -122,8 +157,6 @@ function DefaultButton({ defaultIcon }: DefaultButtonProps) {
       {defaultIcon || <FontAwesomeIcon icon={faUndo} />}
     </div>
   );
-
-  return <></>;
 }
 
 export default ExpandCollapseButtons;

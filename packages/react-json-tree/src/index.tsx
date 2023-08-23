@@ -29,6 +29,8 @@ interface ExpandCollapseAll {
   defaultValue?: 'expand' | 'collapse';
   expandIcon?: ReactNode;
   collapseIcon?: ReactNode;
+  copyToClipboardIcon?: ReactNode;
+  copiedToClipboardIcon?: ReactNode;
   defaultIcon?: ReactNode;
 }
 
@@ -70,6 +72,7 @@ export function JSONTree({
       <ExpandCollapseAllButtonsContext
         expandCollapseAll={expandCollapseAll}
         styling={styling}
+        value={value}
       >
         <JSONNode
           keyPath={hideRoot ? [] : keyPath}

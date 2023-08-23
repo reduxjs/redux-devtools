@@ -20,6 +20,7 @@ interface Props {
   children: ReactNode;
   expandCollapseAll?: ExpandCollapseAll;
   styling: StylingFunction;
+  value: unknown;
 }
 
 const ExpandCollapseAllContext = createContext<Context>({} as Context);
@@ -28,11 +29,12 @@ function ExpandCollapseAllContextProvider({
   expandCollapseAll,
   children,
   styling,
+  value,
 }: Props) {
   const [enableDefaultButton, setEnableDefaultButton] = useState(false);
   const [expandAllState, setExpandAllState] = useState();
 
-  const value = useMemo(
+  const contextValue = useMemo(
     () => ({
       enableDefaultButton,
       setEnableDefaultButton,
@@ -43,12 +45,13 @@ function ExpandCollapseAllContextProvider({
   );
 
   return (
-    <ExpandCollapseAllContext.Provider value={value}>
+    <ExpandCollapseAllContext.Provider value={contextValue}>
       {children}
       {expandCollapseAll && (
         <ExpandCollapseButtons
           expandCollapseAll={expandCollapseAll}
           styling={styling}
+          value={value}
         />
       )}
     </ExpandCollapseAllContext.Provider>
