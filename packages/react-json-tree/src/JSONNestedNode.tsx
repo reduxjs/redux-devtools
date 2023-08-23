@@ -177,7 +177,7 @@ export default function JSONNestedNode(props: Props) {
     itemType,
     createItemString(data, collectionLimit),
     keyPath,
-    expandedRef.current,
+    expandedRef.current
   );
   const stylingArgs = [
     keyPath,

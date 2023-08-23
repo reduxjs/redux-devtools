@@ -123,30 +123,37 @@ function CollapseButton({
   return <></>;
 }
 
-function CopyToClipboardButton({copyToClipboardIcon, copiedToClipboardIcon, value}:CopyToClipboardButtonProps) {
+function CopyToClipboardButton({
+  copyToClipboardIcon,
+  copiedToClipboardIcon,
+  value,
+}: CopyToClipboardButtonProps) {
   const [isCopied, setIsCopied] = useState(false);
 
   const handleOnCopyToClipboard = async () => {
     await navigator.clipboard.writeText(JSON.stringify(value, null, 2));
-    setIsCopied(true)
-  }
+    setIsCopied(true);
+  };
 
   useEffect(() => {
-    if(isCopied){
-      setTimeout(() => setIsCopied(false), 6000)
+    if (isCopied) {
+      setTimeout(() => setIsCopied(false), 6000);
     }
-  }, [isCopied])
+  }, [isCopied]);
 
-  if(isCopied){
-    return (<div role="presentation" onClick={handleOnCopyToClipboard}>
-      {copiedToClipboardIcon || <FontAwesomeIcon icon={faCheck} />}
-    </div>);
+  if (isCopied) {
+    return (
+      <div role="presentation" onClick={handleOnCopyToClipboard}>
+        {copiedToClipboardIcon || <FontAwesomeIcon icon={faCheck} />}
+      </div>
+    );
   }
 
   return (
     <div role="presentation" onClick={handleOnCopyToClipboard}>
       {copyToClipboardIcon || <FontAwesomeIcon icon={faCopy} />}
-    </div>)
+    </div>
+  );
 }
 
 function DefaultButton({ defaultIcon }: DefaultButtonProps) {

@@ -190,7 +190,12 @@ const App = () => (
       Sort object keys with <code>sortObjectKeys</code> prop.
     </p>
     <div>
-      <JSONTree data={data} theme={theme} sortObjectKeys expandCollapseAll={{}}/>
+      <JSONTree
+        data={data}
+        theme={theme}
+        sortObjectKeys
+        expandCollapseAll={{}}
+      />
     </div>
     <p>Collapsed root node</p>
     <div>
