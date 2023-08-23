@@ -6,7 +6,7 @@ import {
   faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { ExpandCollapseAll } from '.';
 import { useExpandCollapseAllContext } from './expandCollapseContext';
 import { StylingFunction } from 'react-base16-styling';
@@ -130,6 +130,12 @@ function CopyToClipboardButton({copyToClipboardIcon, copiedToClipboardIcon, valu
     await navigator.clipboard.writeText(JSON.stringify(value, null, 2));
     setIsCopied(true)
   }
+
+  useEffect(() => {
+    if(isCopied){
+      setTimeout(() => setIsCopied(false), 6000)
+    }
+  }, [isCopied])
 
   if(isCopied){
     return (<div role="presentation" onClick={handleOnCopyToClipboard}>
