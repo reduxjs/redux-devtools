@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.0.0
+
+### Major Changes
+
+- 57751ff9: Add react-dom peerDependency and bump react peerDependency to `^16.8.0 || ^17.0.0 || ^18.0.0`
+
+### Patch Changes
+
+- Updated dependencies [57751ff9]
+  - @redux-devtools/inspector-monitor@4.0.0
+
 ## 1.0.1
 
 ### Patch Changes
