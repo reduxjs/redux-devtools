@@ -35,4 +35,5 @@ chrome.runtime.getBackgroundPage((window) => {
   );
 });
 
+if (position === '#popup') document.body.style.minWidth = '760px';
 if (position !== '#popup') document.body.style.minHeight = '100%';
