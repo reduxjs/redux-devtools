@@ -1,5 +1,13 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.1
+
+### Patch Changes
+
+- d18525b5: Increase min-width of popup
+- Updated dependencies [57751ff9]
+  - @redux-devtools/app@3.0.0
+
 ## 3.1.0
 
 ### Minor Changes
