@@ -2,13 +2,12 @@ import * as esbuild from 'esbuild';
 
 await esbuild.build({
   entryPoints: [
+    { out: 'background.bundle', in: 'src/background/index.ts' },
     { out: 'remote.bundle', in: 'src/remote/index.tsx' },
     { out: 'window.bundle', in: 'src/window/index.tsx' },
   ],
   bundle: true,
   minify: true,
-  splitting: true,
-  format: 'esm',
   outdir: 'dist',
   loader: {
     '.pug': 'empty',
