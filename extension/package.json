@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "webpack --env development --watch",
+    "build:esbuild": "esbuild src/window/index.tsx --bundle --outfile=dist/window.bundle.js --loader:.pug=empty --loader:.woff2=file",
     "build": "pnpm run build:extension && pnpm run build:chrome && pnpm run build:edge && pnpm run build:firefox",
     "build:extension": "webpack --env production && webpack --config wrap.webpack.config.js",
     "build:chrome": "cpy . ../../chrome/dist --cwd dist && cpy manifest.json ../dist --cwd chrome",
@@ -69,6 +70,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.8.1",
     "electron": "^26.1.0",
+    "esbuild": "^0.19.2",
     "eslint": "^8.48.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.28.1",
