@@ -1,3 +1,4 @@
+import '../chromeApiMock';
 import './devtools.pug';
 
 function createPanel(url: string) {

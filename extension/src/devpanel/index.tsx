@@ -1,3 +1,4 @@
+import '../chromeApiMock';
 import React, { CSSProperties, ReactNode } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
