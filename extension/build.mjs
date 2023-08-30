@@ -21,7 +21,25 @@ await esbuild.build({
     '.pug': 'empty',
     '.woff2': 'file',
   },
-  // TODO Define process.env.NODE_ENV and process.env.BABEL_ENV
+  define: {
+    'process.env.NODE_ENV': '"production"',
+    'process.env.BABEL_ENV': '"production"',
+  },
+});
+
+await esbuild.build({
+  entryPoints: [{ out: 'pagewrap.bundle', in: 'src/pageScriptWrap.ts' }],
+  bundle: true,
+  logLevel: 'info',
+  outdir: 'dist',
+  minify: true,
+  loader: {
+    '.js': 'text',
+  },
+  define: {
+    'process.env.NODE_ENV': '"production"',
+    'process.env.BABEL_ENV': '"production"',
+  },
 });
 
 console.log('Creating HTML files...');
@@ -39,6 +57,8 @@ fs.copyFileSync('chrome/manifest.json', 'dist/manifest.json');
 console.log('Copying assets...');
 fs.cpSync('src/assets', 'dist', { recursive: true });
 
+// TODO Copy dist to each browser directory
+
 // TODO Babel?
 
-// TODO Remember ot run TypeScript
+// TODO Remember to run TypeScript
