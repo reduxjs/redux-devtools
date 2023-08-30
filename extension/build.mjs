@@ -7,6 +7,8 @@ await esbuild.build({
   ],
   bundle: true,
   minify: true,
+  splitting: true,
+  format: 'esm',
   outdir: 'dist',
   loader: {
     '.pug': 'empty',
