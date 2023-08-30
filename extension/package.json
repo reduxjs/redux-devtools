@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "webpack --env development --watch",
-    "build:esbuild": "esbuild src/window/index.tsx --bundle --outfile=dist/window.bundle.js --loader:.pug=empty --loader:.woff2=file",
+    "build:esbuild": "esbuild src/window/index.tsx --bundle --minify --outfile=dist/window.bundle.js --loader:.pug=empty --loader:.woff2=file",
     "build": "pnpm run build:extension && pnpm run build:chrome && pnpm run build:edge && pnpm run build:firefox",
     "build:extension": "webpack --env production && webpack --config wrap.webpack.config.js",
     "build:chrome": "cpy . ../../chrome/dist --cwd dist && cpy manifest.json ../dist --cwd chrome",
