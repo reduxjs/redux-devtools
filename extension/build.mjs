@@ -1,4 +1,6 @@
+import * as fs from 'node:fs';
 import * as esbuild from 'esbuild';
+import pug from 'pug';
 
 await esbuild.build({
   entryPoints: [
@@ -19,4 +21,24 @@ await esbuild.build({
     '.pug': 'empty',
     '.woff2': 'file',
   },
+  // TODO Define process.env.NODE_ENV and process.env.BABEL_ENV
 });
+
+console.log('Creating HTML files...');
+const htmlFiles = ['devpanel', 'devtools', 'options', 'remote', 'window'];
+for (const htmlFile of htmlFiles) {
+  fs.writeFileSync(
+    `dist/${htmlFile}.html`,
+    pug.renderFile(`src/${htmlFile}/${htmlFile}.pug`),
+  );
+}
+
+console.log('Copying manifest.json...');
+fs.copyFileSync('chrome/manifest.json', 'dist/manifest.json');
+
+console.log('Copying assets...');
+fs.cpSync('src/assets', 'dist', { recursive: true });
+
+// TODO Babel?
+
+// TODO Remember ot run TypeScript
