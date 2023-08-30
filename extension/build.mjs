@@ -2,7 +2,23 @@ import * as fs from 'node:fs';
 import * as esbuild from 'esbuild';
 import pug from 'pug';
 
+const args = process.argv.slice(2);
+const prod = !args.includes('--dev');
+
+const commonEsbuildOptions = {
+  bundle: true,
+  logLevel: 'info',
+  outdir: 'dist',
+  minify: prod,
+  sourcemap: !prod,
+  define: {
+    'process.env.NODE_ENV': prod ? '"production"' : '"development"',
+    'process.env.BABEL_ENV': prod ? '"production"' : '"development"',
+  },
+};
+
 await esbuild.build({
+  ...commonEsbuildOptions,
   entryPoints: [
     { out: 'background.bundle', in: 'src/background/index.ts' },
     { out: 'options.bundle', in: 'src/options/index.tsx' },
@@ -12,35 +28,25 @@ await esbuild.build({
     { out: 'devtools.bundle', in: 'src/devtools/index.ts' },
     { out: 'content.bundle', in: 'src/contentScript/index.ts' },
     { out: 'page.bundle', in: 'src/pageScript/index.ts' },
+    ...(prod ? [] : [{ out: 'pagewrap.bundle', in: 'src/pageScriptWrap.ts' }]),
   ],
-  bundle: true,
-  logLevel: 'info',
-  outdir: 'dist',
-  minify: true,
   loader: {
     '.pug': 'empty',
     '.woff2': 'file',
   },
-  define: {
-    'process.env.NODE_ENV': '"production"',
-    'process.env.BABEL_ENV': '"production"',
-  },
 });
 
-await esbuild.build({
-  entryPoints: [{ out: 'pagewrap.bundle', in: 'src/pageScriptWrap.ts' }],
-  bundle: true,
-  logLevel: 'info',
-  outdir: 'dist',
-  minify: true,
-  loader: {
-    '.js': 'text',
-  },
-  define: {
-    'process.env.NODE_ENV': '"production"',
-    'process.env.BABEL_ENV': '"production"',
-  },
-});
+if (prod) {
+  await esbuild.build({
+    ...commonEsbuildOptions,
+    entryPoints: [{ out: 'pagewrap.bundle', in: 'src/pageScriptWrap.ts' }],
+    loader: {
+      '.js': 'text',
+    },
+  });
+}
+
+console.log();
 
 console.log('Creating HTML files...');
 const htmlFiles = ['devpanel', 'devtools', 'options', 'remote', 'window'];
@@ -57,8 +63,14 @@ fs.copyFileSync('chrome/manifest.json', 'dist/manifest.json');
 console.log('Copying assets...');
 fs.cpSync('src/assets', 'dist', { recursive: true });
 
-// TODO Copy dist to each browser directory
+console.log('Copying dist for each browser...');
+fs.cpSync('dist', 'chrome/dist', { recursive: true });
+fs.copyFileSync('chrome/manifest.json', 'chrome/dist/manifest.json');
+fs.cpSync('dist', 'edge/dist', { recursive: true });
+fs.copyFileSync('edge/manifest.json', 'edge/dist/manifest.json');
+fs.cpSync('dist', 'firefox/dist', { recursive: true });
+fs.copyFileSync('firefox/manifest.json', 'firefox/dist/manifest.json');
 
-// TODO Babel?
+// TODO Targets?
 
 // TODO Remember to run TypeScript
