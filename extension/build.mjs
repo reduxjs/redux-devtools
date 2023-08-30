@@ -70,7 +70,3 @@ fs.cpSync('dist', 'edge/dist', { recursive: true });
 fs.copyFileSync('edge/manifest.json', 'edge/dist/manifest.json');
 fs.cpSync('dist', 'firefox/dist', { recursive: true });
 fs.copyFileSync('firefox/manifest.json', 'firefox/dist/manifest.json');
-
-// TODO Targets?
-
-// TODO Remember to run TypeScript
