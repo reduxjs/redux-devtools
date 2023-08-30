@@ -1,3 +1,4 @@
+// @ts-ignore
 import script from '../dist/page.bundle.js';
 
 let s = document.createElement('script');
