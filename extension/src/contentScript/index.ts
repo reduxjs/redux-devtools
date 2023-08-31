@@ -1,3 +1,4 @@
+import '../chromeApiMock';
 import {
   injectOptions,
   getOptionsFromBg,

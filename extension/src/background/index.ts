@@ -1,3 +1,4 @@
+import '../chromeApiMock';
 import { Store } from 'redux';
 import configureStore, { BackgroundAction } from './store/backgroundStore';
 import openDevToolsWindow, { DevToolsPosition } from './openWindow';

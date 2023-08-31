@@ -7,8 +7,6 @@ import App from '../app/App';
 import configureStore from './store/windowStore';
 import type { MonitorMessage } from '../background/store/apiMiddleware';
 
-import './window.pug';
-
 const position = location.hash;
 
 chrome.runtime.getBackgroundPage((window) => {
