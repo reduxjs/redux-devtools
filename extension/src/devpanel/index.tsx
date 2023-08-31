@@ -7,7 +7,6 @@ import { REMOVE_INSTANCE, StoreAction } from '@redux-devtools/app';
 import App from '../app/App';
 import configureStore from './store/panelStore';
 
-import './devpanel.pug';
 import { Action, Store } from 'redux';
 import type { PanelMessage } from '../background/store/apiMiddleware';
 import type { StoreStateWithoutSocket } from './store/panelReducer';

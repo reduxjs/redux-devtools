@@ -31,7 +31,6 @@ await esbuild.build({
     ...(prod ? [] : [{ out: 'pagewrap.bundle', in: 'src/pageScriptWrap.ts' }]),
   ],
   loader: {
-    '.pug': 'empty',
     '.woff2': 'file',
   },
 });
