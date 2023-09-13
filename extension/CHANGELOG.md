@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.2
+
+### Patch Changes
+
+- 64ed81b0: Fix extension in Firefox and Chrome Incognito
+
 ## 3.1.1
 
 ### Patch Changes
