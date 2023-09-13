@@ -12,6 +12,8 @@ import {
   ReportsState,
   section,
   SectionState,
+  StateTreeSettings,
+  stateTreeSettings,
   StoreAction,
   theme,
   ThemeState,
@@ -25,6 +27,7 @@ export interface StoreStateWithoutSocket {
   readonly instances: InstancesState;
   readonly reports: ReportsState;
   readonly notification: NotificationState;
+  readonly stateTreeSettings: StateTreeSettings;
 }
 
 const rootReducer: Reducer<StoreStateWithoutSocket, StoreAction> =
@@ -36,6 +39,7 @@ const rootReducer: Reducer<StoreStateWithoutSocket, StoreAction> =
     section,
     theme,
     connection,
+    stateTreeSettings,
   });
 
 export default rootReducer;
