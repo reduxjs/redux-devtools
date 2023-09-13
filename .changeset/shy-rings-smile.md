@@ -2,4 +2,4 @@
 'remotedev-redux-devtools-extension': patch
 ---
 
-Fix extension in incognito mode
+Fix extension in Firefox and Chrome Incognito
