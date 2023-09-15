@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.3
+
+### Patch Changes
+
+- bca76009: Fix missing CSS for code editor
+
 ## 3.1.2
 
 ### Patch Changes
