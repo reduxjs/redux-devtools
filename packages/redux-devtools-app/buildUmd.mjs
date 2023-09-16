@@ -14,7 +14,7 @@ await esbuild.build({
   define: {
     'process.env.NODE_ENV': prod ? '"production"' : '"development"',
   },
-  entryPoints: ['src/index.tsx'],
+  entryPoints: ['src/ReduxDevToolsApp.js'],
   loader: {
     '.woff2': 'dataurl',
   },
