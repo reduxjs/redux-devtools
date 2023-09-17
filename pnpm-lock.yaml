@@ -1163,6 +1163,9 @@ importers:
       css-loader:
         specifier: ^6.8.1
         version: 6.8.1(webpack@5.88.2)
+      esbuild:
+        specifier: ^0.19.2
+        version: 0.19.2
       eslint:
         specifier: ^8.48.0
         version: 8.48.0
@@ -1210,7 +1213,7 @@ importers:
         version: 5.3.11(@babel/core@7.22.11)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       ts-jest:
         specifier: ^29.1.1
-        version: 29.1.1(@babel/core@7.22.11)(esbuild@0.18.20)(jest@29.6.4)(typescript@5.2.2)
+        version: 29.1.1(@babel/core@7.22.11)(esbuild@0.19.2)(jest@29.6.4)(typescript@5.2.2)
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@18.17.14)(typescript@5.2.2)
@@ -1219,7 +1222,7 @@ importers:
         version: 5.2.2
       webpack:
         specifier: ^5.88.2
-        version: 5.88.2(webpack-cli@5.1.4)
+        version: 5.88.2(esbuild@0.19.2)(webpack-cli@5.1.4)
       webpack-cli:
         specifier: ^5.1.4
         version: 5.1.4(webpack-dev-server@4.15.1)(webpack@5.88.2)
@@ -10516,6 +10519,7 @@ packages:
 
   /@types/ms@0.7.31:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
+    requiresBuild: true
     dev: false
 
   /@types/node-fetch@2.6.4:
@@ -12808,7 +12812,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.28)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.88.2(webpack-cli@5.1.4)
+      webpack: 5.88.2(esbuild@0.19.2)(webpack-cli@5.1.4)
     dev: true
 
   /css-select@4.3.0:
@@ -15205,6 +15209,12 @@ packages:
       set-cookie-parser: 2.6.0
     dev: false
 
+  /headers-polyfill@3.2.5:
+    resolution: {integrity: sha512-tUCGvt191vNSQgttSyJoibR+VO+I6+iCHIUdhzEMJKE+EAL8BwCN7fUOZlY4ofOelNHsK+gEjxB/B+9N3EWtdA==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /hex-rgba@1.0.2:
     resolution: {integrity: sha512-MKla68wFGv+i7zU3Q4giWN74f+zWdkuf2Tk21fISV7aw55r8dH/noBbH5JsVlM4Z2WRTYCEmSxsoZ1QR/o68jg==}
     dev: false
@@ -15261,7 +15271,7 @@ packages:
     dependencies:
       html-minifier-terser: 7.2.0
       parse5: 7.1.2
-      webpack: 5.88.2(webpack-cli@5.1.4)
+      webpack: 5.88.2(esbuild@0.19.2)(webpack-cli@5.1.4)
     dev: true
 
   /html-minifier-terser@6.1.0:
@@ -16830,6 +16840,7 @@ packages:
       chalk: 3.0.0
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -20519,7 +20530,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.88.2(webpack-cli@5.1.4)
+      webpack: 5.88.2(esbuild@0.19.2)(webpack-cli@5.1.4)
     dev: true
 
   /style-search@0.1.0:

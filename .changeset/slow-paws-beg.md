@@ -1,29 +1,16 @@
+---
+'@redux-devtools/app': major
+---
+
+The UMD bundle now exports the same thing as the library and includes the CSS in a sperate file. Therfore, the new usage is:
+
+```diff
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title>Redux DevTools</title>
-    <style>
-      html {
-        min-width: 350px;
-        min-height: 300px;
-      }
-      body {
-        position: fixed;
-        overflow: hidden;
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #root {
-        height: 100%;
-      }
-      #root > div {
-        height: 100%;
-      }
-    </style>
-    <link href="/redux-devtools-app.min.css" rel="stylesheet" />
++   <link href="/redux-devtools-app.min.css" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
@@ -33,7 +20,8 @@
     <script src="/port.js"></script>
     <script>
       const container = document.querySelector('#root');
-      const element = React.createElement(ReduxDevToolsApp.Root, {
+-     const element = React.createElement(ReduxDevToolsApp, {
++     const element = React.createElement(ReduxDevToolsApp.Root, {
         socketOptions: {
           hostname: location.hostname,
           port: reduxDevToolsPort,
@@ -44,3 +32,4 @@
     </script>
   </body>
 </html>
+```

@@ -35,14 +35,6 @@ export default function configureStore(
         }
       ).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
     }
-    if (module.hot) {
-      // Enable Webpack hot module replacement for reducers
-      module.hot.accept('../reducers', () => {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const nextReducer = require('../reducers'); // eslint-disable-line global-require
-        store.replaceReducer(nextReducer as Reducer<StoreState, StoreAction>);
-      });
-    }
   }
 
   const store = createStore(
