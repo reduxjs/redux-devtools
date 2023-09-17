@@ -1,6 +1,13 @@
 {
   "presets": [
-    ["@babel/preset-env", { "targets": "defaults", "modules": false }],
+    [
+      "@babel/preset-env",
+      {
+        "targets": "defaults",
+        "include": ["@babel/plugin-transform-async-generator-functions"],
+        "modules": false
+      }
+    ],
     "@babel/preset-typescript"
   ],
   "plugins": ["@babel/plugin-transform-runtime"]
