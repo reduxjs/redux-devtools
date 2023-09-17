@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import webdriver from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
-import chromedriver from 'chromedriver115';
+import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const port = 9515;
