@@ -1,5 +1,12 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.4
+
+### Patch Changes
+
+- Updated dependencies [e57bcb39]
+  - @redux-devtools/app@4.0.0
+
 ## 3.1.3
 
 ### Patch Changes
