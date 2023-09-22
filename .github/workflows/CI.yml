@@ -29,6 +29,6 @@ jobs:
       - name: Lint
         run: pnpm run lint:all
       - name: Test
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         with:
           run: pnpm run test:all
