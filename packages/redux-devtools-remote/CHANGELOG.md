@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.8.1
+
+### Patch Changes
+
+- 7e6d0438: Transform `for await...of` syntax for @redux-devtools/remote to support Hermes Engine
+
 ## 0.8.0
 
 ### Minor Changes

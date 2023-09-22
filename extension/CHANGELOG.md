@@ -1,5 +1,24 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.4
+
+### Patch Changes
+
+- Updated dependencies [e57bcb39]
+  - @redux-devtools/app@4.0.0
+
+## 3.1.3
+
+### Patch Changes
+
+- bca76009: Fix missing CSS for code editor
+
+## 3.1.2
+
+### Patch Changes
+
+- 64ed81b0: Fix extension in Firefox and Chrome Incognito
+
 ## 3.1.1
 
 ### Patch Changes
