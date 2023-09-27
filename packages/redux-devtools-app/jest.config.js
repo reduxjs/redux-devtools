@@ -10,6 +10,6 @@ module.exports = {
     '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
   transformIgnorePatterns: [
-    'node_modules/(?!.pnpm|@babel/code-frame|@babel/highlight|@babel/helper-validator-identifier|d3|dateformat|delaunator|internmap|nanoid|robust-predicates|uuid)',
+    'node_modules/(?!.pnpm|@babel/code-frame|@babel/highlight|@babel/helper-validator-identifier|chalk|d3|dateformat|delaunator|internmap|nanoid|robust-predicates|uuid)',
   ],
 };
