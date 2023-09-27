@@ -1,21 +1,21 @@
 {
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.22.11",
-    "@babel/eslint-parser": "^7.22.11",
+    "@babel/core": "^7.23.0",
+    "@babel/eslint-parser": "^7.22.15",
     "@changesets/cli": "^2.26.2",
-    "@typescript-eslint/eslint-plugin": "^6.5.0",
-    "@typescript-eslint/parser": "^6.5.0",
-    "eslint": "^8.48.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-jest": "^27.2.3",
+    "eslint-plugin-jest": "^27.4.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "jest": "^29.6.4",
+    "jest": "^29.7.0",
     "prettier": "3.0.3",
     "typescript": "~5.2.2",
-    "nx": "^16.7.4",
-    "@nrwl/nx-cloud": "^16.3.0"
+    "nx": "^16.9.1",
+    "@nrwl/nx-cloud": "^16.4.0"
   },
   "scripts": {
     "format": "prettier --write .",
@@ -39,5 +39,5 @@
     "packages/redux-devtools-rtk-query-monitor/demo",
     "packages/redux-devtools-slider-monitor/examples/todomvc"
   ],
-  "packageManager": "pnpm@8.7.1"
+  "packageManager": "pnpm@8.8.0"
 }
