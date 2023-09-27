@@ -157,8 +157,8 @@ importers:
         specifier: ^5.1.28
         version: 5.1.28
       chromedriver:
-        specifier: ^116.0.0
-        version: 116.0.0
+        specifier: ^117.0.3
+        version: 117.0.3
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -993,7 +993,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-redux:
         specifier: ^8.1.2
-        version: 8.1.2(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+        version: 8.1.2(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
       redux:
         specifier: ^4.2.1
         version: 4.2.1
@@ -2603,7 +2603,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-redux:
         specifier: ^8.1.2
-        version: 8.1.2(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+        version: 8.1.2(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
       redux:
         specifier: ^4.2.1
         version: 4.2.1
@@ -12524,9 +12524,9 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
-  /chromedriver@116.0.0:
-    resolution: {integrity: sha512-/TQaRn+RUAYnVqy5Vx8VtU8DvtWosU8QLM2u7BoNM5h55PRQPXF/onHAehEi8Sj/CehdKqH50NFdiumQAUr0DQ==}
-    engines: {node: '>=16'}
+  /chromedriver@117.0.3:
+    resolution: {integrity: sha512-c2rk2eGK5zZFBJMdviUlAJfQEBuPNIKfal4+rTFVYAmrWbMPYAqPozB+rIkc1lDP/Ryw44lPiqKglrI01ILhTQ==}
+    engines: {node: '>=18'}
     hasBin: true
     requiresBuild: true
     dependencies:
@@ -19326,39 +19326,6 @@ packages:
       react-is: 18.2.0
       redux: 4.2.1
       use-sync-external-store: 1.2.0(react@18.2.0)
-
-  /react-redux@8.1.2(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1):
-    resolution: {integrity: sha512-xJKYI189VwfsFc4CJvHqHlDrzyFTY/3vZACbE+rr/zQ34Xx1wQfB4OTOSeOSNrF6BDVe8OOdxIrAnMGXA3ggfw==}
-    peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-      react-native: '>=0.59'
-      redux: ^4 || ^5.0.0-beta.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-      redux:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.23.1
-      '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.2.23
-      '@types/use-sync-external-store': 0.0.3
-      hoist-non-react-statics: 3.3.2
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-is: 18.2.0
-      redux: 4.2.1
-      use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: true
 
   /react-refresh@0.11.0:
     resolution: {integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==}
