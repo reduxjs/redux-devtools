@@ -55,7 +55,7 @@ export class QueryForm extends React.PureComponent<
   };
 
   handleSelectComparatorChange = (
-    option: SelectOption<QueryComparators> | undefined | null
+    option: SelectOption<QueryComparators> | undefined | null,
   ): void => {
     if (typeof option?.value === 'string') {
       this.props.onFormValuesChange({ queryComparator: option.value });
@@ -63,7 +63,7 @@ export class QueryForm extends React.PureComponent<
   };
 
   handleSelectFilterChange = (
-    option: SelectOption<QueryFilters> | undefined | null
+    option: SelectOption<QueryFilters> | undefined | null,
   ): void => {
     if (typeof option?.value === 'string') {
       this.props.onFormValuesChange({ queryFilter: option.value });
@@ -175,7 +175,7 @@ export class QueryForm extends React.PureComponent<
                   options={filterQueryOptions}
                   theme={base16Theme as any}
                   value={filterQueryOptions.find(
-                    (opt) => opt?.value === queryFilter
+                    (opt) => opt?.value === queryFilter,
                   )}
                   onChange={this.handleSelectFilterChange}
                 />
@@ -187,7 +187,7 @@ export class QueryForm extends React.PureComponent<
                   isSearchable={false}
                   theme={base16Theme as any}
                   value={sortQueryOptions.find(
-                    (opt) => opt?.value === queryComparator
+                    (opt) => opt?.value === queryComparator,
                   )}
                   options={sortQueryOptions}
                   onChange={this.handleSelectComparatorChange}

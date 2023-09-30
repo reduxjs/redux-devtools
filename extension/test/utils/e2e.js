@@ -15,8 +15,8 @@ export const switchMonitorTests = {
     await delay(500);
     await driver.findElement(
       webdriver.By.xpath(
-        '//div[div[button[text()="Reset"]] and .//div[button[text()="Revert"]]]'
-      )
+        '//div[div[button[text()="Reset"]] and .//div[button[text()="Revert"]]]',
+      ),
     );
     await delay(500);
   },
@@ -31,7 +31,7 @@ export const switchMonitorTests = {
       .click();
     await delay(500);
     await driver.findElement(
-      webdriver.By.xpath('//*[@class="nodeText" and text()="state"]')
+      webdriver.By.xpath('//*[@class="nodeText" and text()="state"]'),
     );
     await delay(500); // Wait till menu is closed
   },

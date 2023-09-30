@@ -110,7 +110,7 @@ describe('Immutable', function () {
     function customReplacer(
       key: string,
       value: unknown,
-      defaultReplacer: (key: string, value: unknown) => unknown
+      defaultReplacer: (key: string, value: unknown) => unknown,
     ) {
       if (value === 1) {
         return { data: customOneRepresentation, __serializedType__: 'number' };
@@ -121,7 +121,7 @@ describe('Immutable', function () {
     function customReviver(
       key: string,
       value: unknown,
-      defaultReviver: (key: string, value: unknown) => unknown
+      defaultReviver: (key: string, value: unknown) => unknown,
     ) {
       if (
         typeof value === 'object' &&
@@ -137,12 +137,12 @@ describe('Immutable', function () {
       Immutable,
       null,
       customReplacer,
-      customReviver
+      customReviver,
     );
 
     Object.keys(data).forEach(function (key) {
       const stringified = serializeCustom.stringify(
-        data[key as keyof typeof data]
+        data[key as keyof typeof data],
       );
       // eslint-disable-next-line jest/valid-title
       it(key, function () {
@@ -156,7 +156,7 @@ describe('Immutable', function () {
               deserializedDefault as
                 | Map<unknown, unknown>
                 | OrderedMap<unknown, unknown>
-            ).get('a')
+            ).get('a'),
           ).toEqual(customOneRepresentation);
         }
       });

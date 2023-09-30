@@ -5,18 +5,18 @@ Use with
 - `window.__REDUX_DEVTOOLS_EXTENSION__([options])`
 - `window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__([options])()`
 - `window.__REDUX_DEVTOOLS_EXTENSION__.connect([options])`
-- `redux-devtools-extension` npm package:
+- `@redux-devtools/extension` npm package:
 
 ```js
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const composeEnhancers = composeWithDevTools(options);
 const store = createStore(
   reducer,
   /* preloadedState, */ composeEnhancers(
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
     // other store enhancers if any
-  )
+  ),
 );
 ```
 
@@ -70,7 +70,7 @@ _boolean_ or _object_ which contains:
               },
             },
           },
-        })
+        }),
     );
     ```
 
@@ -87,7 +87,7 @@ _boolean_ or _object_ which contains:
           replacer: (key, value) =>
             value && mori.isMap(value) ? mori.toJs(value) : value,
         },
-      })
+      }),
   );
   ```
 
@@ -109,7 +109,7 @@ _boolean_ or _object_ which contains:
             }
           },
         },
-      })
+      }),
   );
   ```
 
@@ -134,7 +134,7 @@ _boolean_ or _object_ which contains:
             }
           },
         },
-      })
+      }),
   );
   ```
 
@@ -174,7 +174,7 @@ _boolean_ or _object_ which contains:
           immutable: Immutable,
           refs: [ABRecord],
         },
-      })
+      }),
   );
   ```
 
@@ -185,7 +185,7 @@ In the example bellow it will always send `{ component: '[React]' }`, regardless
 ```js
 function component(
   state = { component: null, toJSON: () => ({ component: '[React]' }) },
-  action
+  action,
 ) {
   switch (action.type) {
     case 'ADD_COMPONENT':
@@ -206,7 +206,7 @@ function counter(
       return { conter: this.count * 10 };
     },
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case 'INCREMENT':
@@ -236,7 +236,7 @@ const store = createStore(
       actionSanitizer,
       stateSanitizer: (state) =>
         state.data ? { ...state, data: '<<LONG_BLOB>>' } : state,
-    })
+    }),
 );
 ```
 
@@ -254,7 +254,7 @@ createStore(
     actionsDenylist: 'SOME_ACTION',
     // or actionsDenylist: ['SOME_ACTION', 'SOME_OTHER_ACTION']
     // or just actionsDenylist: 'SOME_' to omit both
-  })
+  }),
 );
 ```
 
@@ -270,7 +270,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__({
       predicate: (state, action) =>
         state.dev.logLevel === VERBOSE && !action.forwarded,
-    })
+    }),
 );
 ```
 

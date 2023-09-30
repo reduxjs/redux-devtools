@@ -10,7 +10,7 @@ export interface OptionsProps {
   readonly options: Options;
   readonly saveOption: <K extends keyof Options>(
     name: K,
-    value: Options[K]
+    value: Options[K],
   ) => void;
 }
 

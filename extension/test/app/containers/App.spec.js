@@ -25,7 +25,7 @@ describe('App container', () => {
     render(
       <Provider store={store}>
         <App position="devtools-left" />
-      </Provider>
+      </Provider>,
     );
     expect(screen.getByTestId('inspector')).toBeDefined();
   });
@@ -34,11 +34,9 @@ describe('App container', () => {
     render(
       <Provider store={store}>
         <App position="devtools-left" />
-      </Provider>
+      </Provider>,
     );
     const actionList = screen.getByTestId('actionList');
-    expect(
-      within(actionList).getByTestId('actionListRows')
-    ).toBeEmptyDOMElement();
+    expect(within(actionList).queryByRole('button')).not.toBeInTheDocument();
   });
 });

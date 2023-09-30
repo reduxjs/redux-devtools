@@ -56,7 +56,8 @@ export const style = ({
     border-radius: 0.8em/1.1em;
     font-size: 1em;
     cursor: pointer;
-    background: linear-gradient(${theme.base02}, ${theme.base00}) padding-box,
+    background:
+      linear-gradient(${theme.base02}, ${theme.base00}) padding-box,
       50% 50% border-box;
     background-size: 100% 100%;
   }
@@ -72,7 +73,7 @@ export const style = ({
     background: linear-gradient(${theme.base01}, ${theme.base02} 40%, ${theme.base01})
       no-repeat ${theme.base00};
     background-size: ${percent}% 100%;
-  }`
+  }`,
   )}
 
   ${prefixSelectors(
@@ -90,7 +91,7 @@ export const style = ({
     height: 1.5em;
     border-radius: 50%;
     cursor: pointer;
-  }`
+  }`,
   )}
 
  ${prefixSelectors(
@@ -98,7 +99,7 @@ export const style = ({
     ['webkit-slider-thumb', 'moz-range-thumb', 'ms-thumb'],
     `{
     box-shadow: 0 0 1px 2px ${theme.base0D};
-  }`
+  }`,
   )}
 
   input::-moz-focus-outer {

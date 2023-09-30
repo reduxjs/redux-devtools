@@ -14,11 +14,11 @@ const persistConfig = {
 
 const persistedReducer: Reducer<StoreState, StoreAction> = persistReducer(
   persistConfig,
-  rootReducer
+  rootReducer,
 ) as any;
 
 export default function configureStore(
-  callback: (store: Store<StoreState, StoreAction>) => void
+  callback: (store: Store<StoreState, StoreAction>) => void,
 ) {
   let composeEnhancers = compose;
   if (process.env.NODE_ENV !== 'production') {
@@ -35,19 +35,11 @@ export default function configureStore(
         }
       ).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
     }
-    if (module.hot) {
-      // Enable Webpack hot module replacement for reducers
-      module.hot.accept('../reducers', () => {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const nextReducer = require('../reducers'); // eslint-disable-line global-require
-        store.replaceReducer(nextReducer as Reducer<StoreState, StoreAction>);
-      });
-    }
   }
 
   const store = createStore(
     persistedReducer,
-    composeEnhancers(applyMiddleware(exportStateMiddleware, api))
+    composeEnhancers(applyMiddleware(exportStateMiddleware, api)),
   );
   const persistor = persistStore(store, null, () => {
     callback(store);

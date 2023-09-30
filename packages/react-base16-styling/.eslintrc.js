@@ -6,7 +6,7 @@ module.exports = {
       extends: '../../eslintrc.ts.jest.base.json',
       parserOptions: {
         tsconfigRootDir: __dirname,
-        project: ['./tsconfig.json'],
+        project: true,
       },
     },
     {

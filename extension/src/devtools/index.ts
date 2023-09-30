@@ -1,11 +1,9 @@
-import './devtools.pug';
-
 function createPanel(url: string) {
   chrome.devtools.panels.create(
     'Redux',
     'img/logo/scalable.png',
     url,
-    function () {}
+    function () {},
   );
 }
 

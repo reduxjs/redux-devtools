@@ -110,7 +110,7 @@ export default class JSONDiff extends Component<Props, State> {
       data,
       this.props.dataTypeKey,
       this.props.isWideLayout,
-      true
+      true,
     );
 
   valueRenderer = (raw: any, value: any) => {
@@ -131,7 +131,7 @@ export default class JSONDiff extends Component<Props, State> {
             <span {...styling('diffWrap')}>
               {renderSpan(
                 'diffAdd',
-                stringifyAndShrink(value[0], isWideLayout)
+                stringifyAndShrink(value[0], isWideLayout),
               )}
             </span>
           );
@@ -140,12 +140,12 @@ export default class JSONDiff extends Component<Props, State> {
             <span {...styling('diffWrap')}>
               {renderSpan(
                 'diffUpdateFrom',
-                stringifyAndShrink(value[0], isWideLayout)
+                stringifyAndShrink(value[0], isWideLayout),
               )}
               {renderSpan('diffUpdateArrow', ' => ')}
               {renderSpan(
                 'diffUpdateTo',
-                stringifyAndShrink(value[1], isWideLayout)
+                stringifyAndShrink(value[1], isWideLayout),
               )}
             </span>
           );

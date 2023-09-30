@@ -18,7 +18,7 @@ describe('Notification', function () {
         }}
       >
         Message
-      </Notification>
+      </Notification>,
     );
     expect(container.firstChild).toMatchSnapshot();
   });

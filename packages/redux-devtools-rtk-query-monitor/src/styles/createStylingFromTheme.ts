@@ -49,7 +49,7 @@ export const colorMap = (theme: reduxThemes.Base16Theme) =>
     TOGGLE_BUTTON_BACKGROUND: rgba(theme.base00, 70),
     TOGGLE_BUTTON_SELECTED_BACKGROUND: theme.base04,
     TOGGLE_BUTTON_ERROR: rgba(theme.base08, 40),
-  } as const);
+  }) as const;
 
 type Color = keyof ReturnType<typeof colorMap>;
 type ColorMap = {
@@ -527,7 +527,7 @@ export const createStylingFromTheme: CurriedFunction1<
 });
 
 export function createThemeState<S, A extends Action<unknown>>(
-  props: RtkQueryMonitorProps<S, A>
+  props: RtkQueryMonitorProps<S, A>,
 ): StyleUtils {
   const base16Theme =
     getBase16Theme(props.theme, { ...reduxThemes }) ?? reduxThemes.nicinabox;
@@ -547,7 +547,7 @@ export const StyleUtilsContext = createContext<StyleUtils>({
 });
 
 export function getJsonTreeTheme(
-  base16Theme: reduxThemes.Base16Theme
+  base16Theme: reduxThemes.Base16Theme,
 ): StylingConfig {
   return {
     extend: base16Theme,

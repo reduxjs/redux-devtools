@@ -5,7 +5,7 @@ import type { ConfigWithExpandedMaxAge } from './index';
 
 export function getUrlParam(key: string) {
   const matches = window.location.href.match(
-    new RegExp(`[?&]${key}=([^&#]+)\\b`)
+    new RegExp(`[?&]${key}=([^&#]+)\\b`),
   );
   return matches && matches.length > 0 ? matches[1] : null;
 }
@@ -20,11 +20,11 @@ export default function configureStore<
   S,
   A extends Action<unknown>,
   MonitorState,
-  MonitorAction extends Action<unknown>
+  MonitorAction extends Action<unknown>,
 >(
   next: StoreEnhancerStoreCreator,
   monitorReducer: Reducer<MonitorState, MonitorAction>,
-  config: ConfigWithExpandedMaxAge
+  config: ConfigWithExpandedMaxAge,
 ) {
   return compose(
     instrument(monitorReducer, {
@@ -37,6 +37,6 @@ export default function configureStore<
       shouldStartLocked: config.shouldStartLocked,
       pauseActionType: config.pauseActionType || '@@PAUSED',
     }),
-    persistState(getUrlParam('debug_session'))
+    persistState(getUrlParam('debug_session')),
   )(next);
 }

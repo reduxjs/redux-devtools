@@ -1,5 +1,43 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.4
+
+### Patch Changes
+
+- Updated dependencies [e57bcb39]
+  - @redux-devtools/app@4.0.0
+
+## 3.1.3
+
+### Patch Changes
+
+- bca76009: Fix missing CSS for code editor
+
+## 3.1.2
+
+### Patch Changes
+
+- 64ed81b0: Fix extension in Firefox and Chrome Incognito
+
+## 3.1.1
+
+### Patch Changes
+
+- d18525b5: Increase min-width of popup
+- Updated dependencies [57751ff9]
+  - @redux-devtools/app@3.0.0
+
+## 3.1.0
+
+### Minor Changes
+
+- d54adb76: Option to sort State Tree keys alphabetically
+  Option to disable collapsing of object keys
+
+### Patch Changes
+
+- @redux-devtools/app@2.2.2
+
 ## 3.0.19
 
 ### Patch Changes

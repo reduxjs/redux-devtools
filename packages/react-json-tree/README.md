@@ -26,7 +26,7 @@ const json = {
 
 #### Result:
 
-![](http://cl.ly/image/3f2C2k2t3D0o/screenshot%202015-08-26%20at%2010.24.12%20AM.png)
+![](https://i.ibb.co/0KSYRJg/example-result.png)
 
 Check out [examples](examples) directory for more details.
 

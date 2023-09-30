@@ -69,7 +69,7 @@ export const style = ({
       border 0.18s ${animationCurve},
       box-shadow 0.18s ${animationCurve},
       background 0.28s ${animationCurve};
-  }`
+  }`,
   )}
 
   ${prefixSelectors(
@@ -78,7 +78,7 @@ export const style = ({
     `{
     box-shadow: 0 0 0 8px ${color(theme.base0D, 'alpha', 0.5)};
     transform: scale(1.2);
-  }`
+  }`,
   )}
 
   input::-moz-focus-outer {

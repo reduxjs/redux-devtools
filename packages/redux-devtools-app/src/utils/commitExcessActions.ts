@@ -20,7 +20,7 @@ export default function commitExcessActions(liftedState: State, n = 1) {
   }
 
   liftedState.skippedActionIds = liftedState.skippedActionIds.filter(
-    (id) => idsToDelete.indexOf(id) === -1
+    (id) => idsToDelete.indexOf(id) === -1,
   );
   liftedState.stagedActionIds = [
     0,

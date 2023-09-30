@@ -11,7 +11,7 @@ export function recompute(
     | { action: Action<unknown>; timestamp?: number; stack?: string },
   nextActionId = 1,
   maxAge?: number,
-  isExcess?: boolean
+  isExcess?: boolean,
 ) {
   const actionId = nextActionId - 1;
   const liftedState = { ...previousLiftedState };

@@ -14,7 +14,7 @@ import { toExclude } from '../../presets';
 function getStackFrames(
   error: Error,
   unhandledRejection = false, // eslint-disable-line no-unused-vars
-  contextSize = 3
+  contextSize = 3,
 ): Promise<StackFrame[] | null> {
   const parsedFrames = parse(error);
   let enhancedFramesPromise;
@@ -33,7 +33,7 @@ function getStackFrames(
         }
       ).__unmap_source,
       parsedFrames,
-      contextSize
+      contextSize,
     );
   } else {
     enhancedFramesPromise = map(parsedFrames, contextSize);
@@ -53,7 +53,7 @@ function getStackFrames(
         (functionName == null ||
           functionName.indexOf('__stack_frame_overlay_proxy_console__') ===
             -1) &&
-        !toExclude.test(fileName!)
+        !toExclude.test(fileName!),
     );
   });
 }

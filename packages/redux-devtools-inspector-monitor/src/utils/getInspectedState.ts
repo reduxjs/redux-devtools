@@ -18,7 +18,7 @@ function iterateToKey(obj: any, key: string | number) {
 export default function getInspectedState<S>(
   state: S,
   path: (string | number)[],
-  convertImmutable: boolean
+  convertImmutable: boolean,
 ): S {
   state =
     path && path.length

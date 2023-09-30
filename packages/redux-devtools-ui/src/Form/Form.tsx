@@ -56,7 +56,7 @@ export default class Form<T> extends (PureComponent || Component)<Props<T>> {
     uiSchema: PropTypes.object,
     formData: PropTypes.any,
     widgets: PropTypes.objectOf(
-      PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+      PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     ),
   };
 }

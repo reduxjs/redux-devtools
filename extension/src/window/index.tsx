@@ -7,8 +7,6 @@ import App from '../app/App';
 import configureStore from './store/windowStore';
 import type { MonitorMessage } from '../background/store/apiMiddleware';
 
-import './window.pug';
-
 const position = location.hash;
 
 chrome.runtime.getBackgroundPage((window) => {
@@ -31,8 +29,9 @@ chrome.runtime.getBackgroundPage((window) => {
       <PersistGate loading={null} persistor={persistor}>
         <App position={position} />
       </PersistGate>
-    </Provider>
+    </Provider>,
   );
 });
 
+if (position === '#popup') document.body.style.minWidth = '760px';
 if (position !== '#popup') document.body.style.minHeight = '100%';

@@ -11,7 +11,7 @@ export function stateTreeSettings(
     sortAlphabetically: false,
     disableCollection: false,
   },
-  action: StoreAction
+  action: StoreAction,
 ) {
   if (action.type === CHANGE_STATE_TREE_SETTINGS) {
     return {

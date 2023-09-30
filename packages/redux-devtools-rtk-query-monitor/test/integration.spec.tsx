@@ -39,14 +39,14 @@ describe('rtk-query-monitor standalone integration', () => {
         data: {
           name: fetchArgs[0],
         },
-      })
+      }),
     );
   const { store, pokemonApi } = setupStore(fetchBaseQueryMock, ReduxDevTools);
 
   beforeAll(() => {
     // let's populate api
     (store.dispatch as any)(
-      pokemonApi.endpoints.getPokemonByName.initiate('bulbasaur')
+      pokemonApi.endpoints.getPokemonByName.initiate('bulbasaur'),
     );
   });
 
@@ -62,48 +62,48 @@ describe('rtk-query-monitor standalone integration', () => {
     const { container } = render(
       <Providers store={store}>
         <div data-testid="children">{childrenTextContent}</div>
-      </Providers>
+      </Providers>,
     );
 
     expect(screen.getByTestId('children').textContent).toBe(
-      childrenTextContent
+      childrenTextContent,
     );
 
     expect(
       screen
         .getByRole('tab', { name: /actions/i })
         ?.textContent?.toLowerCase()
-        .trim()
+        .trim(),
     ).toBe('actions');
     expect(
       screen
         .getByRole('tab', { name: /data/i })
         ?.textContent?.toLowerCase()
-        .trim()
+        .trim(),
     ).toBe('data');
     expect(
       screen
         .getByRole('tab', { name: /api/i })
         ?.textContent?.toLowerCase()
-        .trim()
+        .trim(),
     ).toBe('api');
     expect(
       container.querySelector(
-        'form[id="rtk-query-monitor-query-selection-form"]'
-      )
+        'form[id="rtk-query-monitor-query-selection-form"]',
+      ),
     ).toBeDefined();
   });
 
   it('displays query data tab content', async () => {
     // `Promise.resolve()` hushes `@typescript-eslint/await-thenable`
     await Promise.resolve(
-      store.dispatch(pokemonApi.util.getRunningQueriesThunk() as any)
+      store.dispatch(pokemonApi.util.getRunningQueriesThunk() as any),
     );
 
     const { container } = render(
       <Providers store={store}>
         <div data-testid="children">{childrenTextContent}</div>
-      </Providers>
+      </Providers>,
     );
 
     // We need to select the query & the correct tab
@@ -111,11 +111,11 @@ describe('rtk-query-monitor standalone integration', () => {
     fireEvent.click(screen.getByText(/bulbasaur/i));
 
     await waitFor(() =>
-      expect(container.querySelector(dataPanelDomId)).not.toBeNull()
+      expect(container.querySelector(dataPanelDomId)).not.toBeNull(),
     );
 
     expect(container.querySelector(dataPanelDomId)?.textContent).toMatch(
-      /name\W+pokemon\/bulbasaur/i
+      /name\W+pokemon\/bulbasaur/i,
     );
   });
 });

@@ -9,13 +9,13 @@ export default function serialize(
   customReplacer?: (
     key: string,
     value: unknown,
-    defaultReplacer: (key: string, value: unknown) => unknown
+    defaultReplacer: (key: string, value: unknown) => unknown,
   ) => unknown,
   customReviver?: (
     key: string,
     value: unknown,
-    defaultReviver: (key: string, value: unknown) => unknown
-  ) => unknown
+    defaultReviver: (key: string, value: unknown) => unknown,
+  ) => unknown,
 ) {
   function replacer(key: string, value: unknown) {
     if (value instanceof immutable.Record)
@@ -31,11 +31,7 @@ export default function serialize(
     if (immutable.List.isList(value))
       return mark(value, 'ImmutableList', 'toArray');
     if (immutable.OrderedSet.isOrderedSet(value))
-      return mark(
-        value as OrderedSet<unknown>,
-        'ImmutableOrderedSet',
-        'toArray'
-      );
+      return mark(value, 'ImmutableOrderedSet', 'toArray');
     if (immutable.Set.isSet(value))
       return mark(value, 'ImmutableSet', 'toArray');
     if (immutable.Seq.isSeq(value))
@@ -63,12 +59,12 @@ export default function serialize(
           return immutable.Range(
             immutableValue.data._start,
             immutableValue.data._end,
-            immutableValue.data._step
+            immutableValue.data._step,
           );
         case 'ImmutableRepeat':
           return immutable.Repeat(
             immutableValue.data._value,
-            immutableValue.data.size
+            immutableValue.data.size,
           );
         case 'ImmutableSet':
           return immutable.Set(immutableValue.data);

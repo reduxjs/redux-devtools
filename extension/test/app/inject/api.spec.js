@@ -50,7 +50,7 @@ describe('API', () => {
       window.__REDUX_DEVTOOLS_EXTENSION__.send(
         { type: 'hi' },
         { counter: 1 },
-        1
+        1,
       );
     });
     expect(message).toMatchObject({
@@ -66,7 +66,7 @@ describe('API', () => {
       window.__REDUX_DEVTOOLS_EXTENSION__.send(
         { type: 'hi' },
         { counter: 1 },
-        1
+        1,
       );
     });
     expect(message).toMatchObject({

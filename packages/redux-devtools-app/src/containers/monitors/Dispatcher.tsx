@@ -93,7 +93,7 @@ class Dispatcher extends Component<Props, State> {
     if (selected === 'actions-help') {
       window.open(
         'https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/' +
-          'API/Arguments.md#actioncreators'
+          'API/Arguments.md#actioncreators',
       );
       return;
     }
@@ -191,7 +191,7 @@ class Dispatcher extends Component<Props, State> {
         actionCreators.map(({ name, args }, i) => ({
           value: i,
           label: `${name}(${args.join(', ')})`,
-        }))
+        })),
       );
     } else {
       options.push({

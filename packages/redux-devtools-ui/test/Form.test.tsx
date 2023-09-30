@@ -19,7 +19,7 @@ describe('Form', function () {
 
   it('renders correctly', () => {
     const { container } = render(
-      <Form formData={formData} schema={schema} uiSchema={uiSchema} />
+      <Form formData={formData} schema={schema} uiSchema={uiSchema} />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -32,14 +32,14 @@ describe('Form', function () {
         formData={formData}
         schema={schema}
         uiSchema={uiSchema}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('renders with no button', () => {
     const { container } = render(
-      <Form formData={formData} schema={schema} uiSchema={uiSchema} noSubmit />
+      <Form formData={formData} schema={schema} uiSchema={uiSchema} noSubmit />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -52,7 +52,7 @@ describe('Form', function () {
         schema={schema}
         uiSchema={uiSchema}
         onSubmit={onSubmit}
-      />
+      />,
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Submit' }));

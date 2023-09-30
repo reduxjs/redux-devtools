@@ -19,7 +19,7 @@ function enhancer(options?: EnhancerOptions): StoreEnhancer {
   return function (createStore) {
     return function <S, A extends Action<unknown>>(
       reducer: Reducer<S, A>,
-      preloadedState: PreloadedState<S> | undefined
+      preloadedState: PreloadedState<S> | undefined,
     ) {
       const store = createStore(reducer, preloadedState);
       const origDispatch = store.dispatch;
@@ -46,12 +46,12 @@ function composeWithEnhancer(config?: EnhancerOptions) {
 }
 
 export function composeWithDevTools(
-  config: Config
+  config: Config,
 ): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
   ...funcs: StoreEnhancers
 ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 export function composeWithDevTools<
-  StoreEnhancers extends readonly StoreEnhancer<unknown>[]
+  StoreEnhancers extends readonly StoreEnhancer<unknown>[],
 >(
   ...funcs: StoreEnhancers
 ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;

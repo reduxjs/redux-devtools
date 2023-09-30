@@ -41,7 +41,7 @@ const merger = (styling: Partial<Styling>) => {
 
 const mergeStyling = (
   customStyling: StylingValue,
-  defaultStyling: StylingValue
+  defaultStyling: StylingValue,
 ): StylingValue | undefined => {
   if (customStyling === undefined) {
     return defaultStyling;
@@ -97,7 +97,7 @@ const mergeStyling = (
               merger(styling)({
                 className: defaultStyling as string,
               }),
-              ...args
+              ...args,
             );
         case 'object':
           return (styling, ...args) =>
@@ -105,16 +105,16 @@ const mergeStyling = (
               merger(styling)({
                 style: defaultStyling as CSS.Properties<string | number>,
               }),
-              ...args
+              ...args,
             );
         case 'function':
           return (styling, ...args) =>
             (customStyling as StylingValueFunction)(
               (defaultStyling as StylingValueFunction)(
                 styling,
-                ...args
+                ...args,
               ) as Styling,
-              ...args
+              ...args,
             );
       }
   }
@@ -122,7 +122,7 @@ const mergeStyling = (
 
 const mergeStylings = (
   customStylings: StylingConfig,
-  defaultStylings: StylingConfig
+  defaultStylings: StylingConfig,
 ): StylingConfig => {
   const keys = Object.keys(defaultStylings);
   for (const key in customStylings) {
@@ -133,11 +133,11 @@ const mergeStylings = (
     (mergedStyling, key) => (
       (mergedStyling[key as keyof StylingConfig] = mergeStyling(
         customStylings[key] as StylingValue,
-        defaultStylings[key] as StylingValue
+        defaultStylings[key] as StylingValue,
       ) as StylingValue),
       mergedStyling
     ),
-    {} as StylingConfig
+    {} as StylingConfig,
   );
 };
 
@@ -170,7 +170,7 @@ const getStylingByKeys = (
 
       return obj;
     },
-    { className: '', style: {} }
+    { className: '', style: {} },
   );
 
   if (!props.className) {
@@ -194,7 +194,7 @@ export const invertBase16Theme = (base16Theme: Base16Theme): Base16Theme =>
         : base16Theme[key as keyof Base16Theme]),
       t
     ),
-    {} as Base16Theme
+    {} as Base16Theme,
   );
 
 interface Options {
@@ -236,7 +236,7 @@ export const createStyling: CurriedFunction3<
           defaultBase16[key as keyof Base16Theme]),
         t
       ),
-      {} as Base16Theme
+      {} as Base16Theme,
     );
 
     const customStyling = Object.keys(themeOrStyling).reduce(
@@ -244,7 +244,7 @@ export const createStyling: CurriedFunction3<
         BASE16_KEYS.indexOf(key) === -1
           ? ((s[key] = (themeOrStyling as StylingConfig)[key]), s)
           : s,
-      {} as StylingConfig
+      {} as StylingConfig,
     );
 
     const defaultStyling = getStylingFromBase16(theme);
@@ -253,7 +253,7 @@ export const createStyling: CurriedFunction3<
 
     return curry(getStylingByKeys, 2)(mergedStyling, ...args);
   },
-  3
+  3,
 );
 
 const isStylingConfig = (theme: Theme): theme is StylingConfig =>
@@ -261,7 +261,7 @@ const isStylingConfig = (theme: Theme): theme is StylingConfig =>
 
 export const getBase16Theme = (
   theme: Theme,
-  base16Themes?: { [themeName: string]: Base16Theme } | null
+  base16Themes?: { [themeName: string]: Base16Theme } | null,
 ): Base16Theme | undefined => {
   if (theme && isStylingConfig(theme) && theme.extend) {
     theme = theme.extend as string | Base16Theme;

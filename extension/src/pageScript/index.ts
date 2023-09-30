@@ -57,7 +57,7 @@ import type { ContentScriptToPageScriptMessage } from '../contentScript';
 type EnhancedStoreWithInitialDispatch<
   S,
   A extends Action<unknown>,
-  MonitorState
+  MonitorState,
 > = EnhancedStore<S, A, MonitorState> & { initialDispatch: Dispatch<A> };
 
 const source = '@devtools-page';
@@ -73,7 +73,7 @@ let reportId: string | null | undefined;
 function deprecateParam(oldParam: string, newParam: string) {
   /* eslint-disable no-console */
   console.warn(
-    `${oldParam} parameter is deprecated, use ${newParam} instead: https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/API/Arguments.md`
+    `${oldParam} parameter is deprecated, use ${newParam} instead: https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/API/Arguments.md`,
   );
   /* eslint-enable no-console */
 }
@@ -99,18 +99,18 @@ export interface ConfigWithExpandedMaxAge {
   readonly stateSanitizer?: <S>(state: S, index?: number) => S;
   readonly actionSanitizer?: <A extends Action<unknown>>(
     action: A,
-    id?: number
+    id?: number,
   ) => A;
   readonly predicate?: <S, A extends Action<unknown>>(
     state: S,
-    action: A
+    action: A,
   ) => boolean;
   readonly latency?: number;
   readonly maxAge?:
     | number
     | (<S, A extends Action<unknown>>(
         currentLiftedAction: LiftedAction<S, A, unknown>,
-        previousLiftedState: LiftedState<S, A, unknown> | undefined
+        previousLiftedState: LiftedState<S, A, unknown> | undefined,
       ) => number);
   readonly trace?: boolean | (() => string | undefined);
   readonly traceLimit?: number;
@@ -142,11 +142,11 @@ interface ReduxDevtoolsExtension {
     state: LiftedState<S, A, unknown>,
     config: Config,
     instanceId?: number,
-    name?: string
+    name?: string,
   ) => void;
   listen: (
     onMessage: (message: ContentScriptToPageScriptMessage) => void,
-    instanceId: number
+    instanceId: number,
   ) => void;
   connect: (preConfig: Config) => ConnectResponse;
   disconnect: () => void;
@@ -159,7 +159,7 @@ declare global {
 }
 
 function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
-  config?: Config
+  config?: Config,
 ): StoreEnhancer {
   /* eslint-disable no-param-reassign */
   if (typeof config !== 'object') config = {};
@@ -188,7 +188,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   const relayState = throttle(
     (
       liftedState?: LiftedState<S, A, unknown> | undefined,
-      libConfig?: LibConfig
+      libConfig?: LibConfig,
     ) => {
       relayAction.cancel();
       const state = liftedState || store.liftedStore.getState();
@@ -201,17 +201,17 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
             localFilter,
             stateSanitizer,
             actionSanitizer,
-            predicate
+            predicate,
           ),
           source,
           instanceId,
           libConfig,
         },
         serializeState,
-        serializeAction
+        serializeAction,
       );
     },
-    latency
+    latency,
   );
 
   const monitor = new Monitor(relayState);
@@ -233,7 +233,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
         instanceId,
       },
       serializeState,
-      serializeAction
+      serializeAction,
     );
   }
 
@@ -269,13 +269,13 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
             ? liftedState.actionsById[nextActionId - 1]
             : actionSanitizer(
                 liftedState.actionsById[nextActionId - 1].action,
-                nextActionId - 1
+                nextActionId - 1,
               ),
           maxAge: getMaxAge(),
           nextActionId,
         },
         serializeState,
-        serializeAction
+        serializeAction,
       );
       return;
     }
@@ -287,7 +287,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       localFilter,
       stateSanitizer,
       actionSanitizer,
-      predicate
+      predicate,
     );
     sendingActionId = nextActionId;
     if (typeof payload === 'undefined') return;
@@ -300,13 +300,13 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
             localFilter,
             stateSanitizer,
             actionSanitizer,
-            predicate
+            predicate,
           ),
           source,
           instanceId,
         },
         serializeState,
-        serializeAction
+        serializeAction,
       );
       return;
     }
@@ -319,7 +319,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
         maxAge: getMaxAge(),
       },
       serializeState,
-      serializeAction
+      serializeAction,
     );
   }, latency);
 
@@ -337,7 +337,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
           instanceId,
         },
         serializeState,
-        serializeAction
+        serializeAction,
       );
     }
   }
@@ -357,7 +357,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
           instanceId,
         },
         serializeState,
-        serializeAction
+        serializeAction,
       );
     }
   }
@@ -419,7 +419,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
               instanceId,
             },
             serializeState,
-            serializeAction
+            serializeAction,
           );
           reportId = null;
         }
@@ -437,7 +437,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
               instanceId,
             },
             serializeState,
-            serializeAction
+            serializeAction,
           );
         }
     }
@@ -446,7 +446,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   const filteredActionIds: number[] = []; // simple circular buffer of non-excluded actions with fixed maxAge-1 length
   const getMaxAge = (
     liftedAction?: LiftedAction<S, A, unknown>,
-    liftedState?: LiftedState<S, A, unknown> | undefined
+    liftedState?: LiftedState<S, A, unknown> | undefined,
   ) => {
     let m = (config && config.maxAge) || window.devToolsOptions.maxAge || 50;
     if (
@@ -497,7 +497,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
         instanceId,
       },
       serializeState,
-      serializeAction
+      serializeAction,
     );
     store.subscribe(handleChange);
 
@@ -529,11 +529,11 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   const enhance =
     (): StoreEnhancer =>
     <NextExt, NextStateExt>(
-      next: StoreEnhancerStoreCreator<NextExt, NextStateExt>
+      next: StoreEnhancerStoreCreator<NextExt, NextStateExt>,
     ): any => {
       return <S2 extends S, A2 extends A>(
         reducer_: Reducer<S2, A2>,
-        initialState_?: PreloadedState<S2>
+        initialState_?: PreloadedState<S2>,
       ) => {
         if (!isAllowed(window.devToolsOptions)) {
           return next(reducer_, initialState_);
@@ -545,7 +545,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
           {
             ...config,
             maxAge: getMaxAge as any,
-          }
+          },
         )(reducer_, initialState_) as any;
 
         if (isInIframe()) setTimeout(init, 3000);
@@ -593,7 +593,7 @@ const preEnhancer =
 
 export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
   infer HeadStoreEnhancer,
-  ...infer RestStoreEnhancers
+  ...infer RestStoreEnhancers,
 ]
   ? HeadStoreEnhancer extends StoreEnhancer<infer StoreExt>
     ? StoreExt & InferComposedStoreExt<RestStoreEnhancers>
@@ -611,13 +611,15 @@ const extensionCompose =
       return [preEnhancer(instanceId), ...funcs].reduceRight(
         // @ts-ignore FIXME
         (composed, f) => f(composed),
-        __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args)
+        __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args),
       );
     };
   };
 
 interface ReduxDevtoolsExtensionCompose {
-  (config: Config): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  (
+    config: Config,
+  ): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
     ...funcs: StoreEnhancers
   ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
   <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
@@ -632,12 +634,12 @@ declare global {
 }
 
 function reduxDevtoolsExtensionCompose(
-  config: Config
+  config: Config,
 ): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
   ...funcs: StoreEnhancers
 ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 function reduxDevtoolsExtensionCompose<
-  StoreEnhancers extends readonly StoreEnhancer<unknown>[]
+  StoreEnhancers extends readonly StoreEnhancer<unknown>[],
 >(
   ...funcs: StoreEnhancers
 ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;

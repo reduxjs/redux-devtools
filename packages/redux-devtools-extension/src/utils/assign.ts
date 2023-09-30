@@ -11,7 +11,7 @@ const objectKeys =
 export default function assign<T extends object, K extends keyof T>(
   obj: T,
   newKey: K,
-  newValue: T[K]
+  newValue: T[K],
 ): T {
   const keys = objectKeys(obj);
   const copy: T = {} as T;

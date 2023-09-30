@@ -33,7 +33,7 @@ const initialState: MonitorState = {
 
 export function dispatchMonitorAction(
   state: MonitorState,
-  action: MonitorActionAction
+  action: MonitorActionAction,
 ): MonitorState {
   return {
     ...state,
@@ -41,14 +41,14 @@ export function dispatchMonitorAction(
       action.monitorReducer(
         action.monitorProps,
         state.monitorState,
-        action.action
+        action.action,
       )) as MonitorStateMonitorState,
   };
 }
 
 export function monitor(
   state = initialState,
-  action: StoreAction
+  action: StoreAction,
 ): MonitorState {
   switch (action.type) {
     case MONITOR_ACTION:

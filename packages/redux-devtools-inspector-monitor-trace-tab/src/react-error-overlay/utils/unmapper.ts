@@ -33,7 +33,7 @@ function count(search: string, string: string): number {
 async function unmap(
   _fileUri: string | { uri: string; contents: string },
   frames: StackFrame[],
-  contextLines = 3
+  contextLines = 3,
 ): Promise<StackFrame[]> {
   let fileContents = typeof _fileUri === 'object' ? _fileUri.contents : null;
   const fileUri = typeof _fileUri === 'object' ? _fileUri.uri : _fileUri;
@@ -91,7 +91,7 @@ async function unmap(
         fN,
         lineNumber,
         columnNumber,
-        null
+        null,
       );
     }
     const sourceT = source[0].token;
@@ -99,7 +99,7 @@ async function unmap(
       sourceT,
       lineNumber,
       // $FlowFixMe
-      columnNumber!
+      columnNumber!,
     );
     const originalSource = map.getSource(sourceT);
     return new StackFrame(
@@ -112,7 +112,7 @@ async function unmap(
       fN,
       lineNumber,
       columnNumber,
-      getLinesAround(lineNumber, contextLines, originalSource!)
+      getLinesAround(lineNumber, contextLines, originalSource!),
     );
   });
 }

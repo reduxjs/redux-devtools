@@ -47,9 +47,9 @@ const store = createStore(
   reducer,
   preloadedState,
   compose(
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
     // other store enhancers if any
-  )
+  ),
 );
 ```
 
@@ -62,9 +62,9 @@ import { composeWithDevTools } from '@redux-devtools/remote';
 const store = createStore(
   reducer,
   /* preloadedState, */ composeWithDevTools(
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
     // other store enhancers if any
-  )
+  ),
 );
 ```
 
@@ -78,9 +78,9 @@ const composeEnhancers = composeWithDevTools({ realtime: true, port: 8000 });
 const store = createStore(
   reducer,
   /* preloadedState, */ composeEnhancers(
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
     // other store enhancers if any
-  )
+  ),
 );
 ```
 
@@ -179,7 +179,7 @@ export default function configureStore(preloadedState) {
           : action,
       stateSanitizer: (state) =>
         state.data ? { ...state, data: '<<LONG_BLOB>>' } : state,
-    })
+    }),
   );
   return store;
 }

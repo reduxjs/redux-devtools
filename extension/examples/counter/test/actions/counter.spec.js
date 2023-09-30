@@ -37,7 +37,7 @@ function mockStore(getState, expectedActions, onLastAction) {
   }
 
   const mockStoreWithMiddleware = applyMiddleware(...middlewares)(
-    mockStoreWithoutMiddleware
+    mockStoreWithoutMiddleware,
   );
 
   return mockStoreWithMiddleware();

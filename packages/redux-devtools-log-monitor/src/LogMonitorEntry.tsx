@@ -22,7 +22,7 @@ const getDeepItem = (data: any, path: (string | number)[]) =>
 const dataIsEqual = (
   data: any,
   previousData: unknown,
-  keyPath: (string | number)[]
+  keyPath: (string | number)[],
 ) => {
   const path = [...keyPath].reverse().slice(1);
 
@@ -49,7 +49,7 @@ interface Props<S, A extends Action<unknown>> {
 
 export default class LogMonitorEntry<
   S,
-  A extends Action<unknown>
+  A extends Action<unknown>,
 > extends PureComponent<Props<S, A>> {
   static propTypes = {
     state: PropTypes.object.isRequired,
@@ -82,14 +82,14 @@ export default class LogMonitorEntry<
           const getValueStyle: StylingValue = (
             { style },
             nodeType,
-            keyPath
+            keyPath,
           ) => ({
             style: {
               ...style,
               backgroundColor: dataIsEqual(
                 data,
                 previousData,
-                keyPath as (string | number)[]
+                keyPath as (string | number)[],
               )
                 ? 'transparent'
                 : this.props.theme.base01,
@@ -153,7 +153,7 @@ export default class LogMonitorEntry<
   shouldExpandNodeInitially: ShouldExpandNodeInitially = (
     keyPath,
     data,
-    level
+    level,
   ) => {
     return this.props.expandStateRoot && level === 0;
   };
