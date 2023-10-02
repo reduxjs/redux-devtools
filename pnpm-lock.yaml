@@ -1082,8 +1082,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(react@18.2.0)(redux@4.2.1)
       socketcluster-client:
-        specifier: ^17.2.2
-        version: 17.2.2
+        specifier: ^18.3.0
+        version: 18.3.0
     devDependencies:
       '@babel/cli':
         specifier: ^7.23.0
@@ -1451,8 +1451,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.5
       socketcluster-client:
-        specifier: ^17.2.2
-        version: 17.2.2
+        specifier: ^18.3.0
+        version: 18.3.0
       supertest:
         specifier: ^6.3.3
         version: 6.3.3
@@ -2417,8 +2417,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       socketcluster-client:
-        specifier: ^17.2.2
-        version: 17.2.2
+        specifier: ^18.3.0
+        version: 18.3.0
     devDependencies:
       '@babel/cli':
         specifier: ^7.23.0
@@ -7572,7 +7572,7 @@ packages:
       strict-event-emitter: 0.5.1
       uuid: 8.3.2
     optionalDependencies:
-      msw: 1.3.1(typescript@5.2.2)
+      msw: 1.3.2(typescript@5.2.2)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -11645,12 +11645,12 @@ packages:
     resolution: {integrity: sha512-cfPZYjHkhCdHSR+eux71vOU8+8Xb23oLyxccAjwYHgOxDb3+qSDb2HV1Y0Hmu39vZlse2cm15CUShLiVYXHCmQ==}
     dependencies:
       stream-demux: 8.1.0
+    dev: false
 
   /async-stream-emitter@6.0.1:
     resolution: {integrity: sha512-83l3jwRWnLxicAUWe0soECasl4eLgU2apMl9rdG/Pujng4k4sZyb6+Va1Msx1UUSZjVs9F6eWm1E/REJUbruZg==}
     dependencies:
       stream-demux: 9.0.2
-    dev: false
 
   /async@3.2.4:
     resolution: {integrity: sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==}
@@ -12605,7 +12605,6 @@ packages:
 
   /consumable-stream@3.0.0:
     resolution: {integrity: sha512-CnnsJ9OG9ouxAjt3pc63/DaerezRo/WudqU71pc5epaIUi7NHu2T4v+3f0nKbbCY7icS/TfQ1Satr9rwZ7Jwsg==}
-    dev: false
 
   /content-disposition@0.5.4:
     resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
@@ -16663,6 +16662,7 @@ packages:
       chalk: 3.0.0
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -16991,8 +16991,8 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /linked-list@0.1.0:
-    resolution: {integrity: sha512-Zr4ovrd0ODzF3ut2TWZMdHIxb8iFdJc/P3QM4iCJdlxxGHXo69c9hGIHzLo8/FtuR9E6WUZc5irKhtPUgOKMAg==}
+  /linked-list@2.1.0:
+    resolution: {integrity: sha512-0GK/ylO6e5cv1PCOIdTRHxOaCgQ+0jKwHt+cHzkiCAZlx0KM5Id1bBAPad6g2mkvBNp1pNdmG0cohFGfqjkv9A==}
 
   /load-yaml-file@0.2.0:
     resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
@@ -17640,6 +17640,43 @@ packages:
       - encoding
       - supports-color
     dev: false
+
+  /msw@1.3.2(typescript@5.2.2):
+    resolution: {integrity: sha512-wKLhFPR+NitYTkQl5047pia0reNGgf0P6a1eTnA5aNlripmiz0sabMvvHcicE8kQ3/gZcI0YiPFWmYfowfm3lA==}
+    engines: {node: '>=14'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      typescript: '>= 4.4.x <= 5.2.x'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@mswjs/cookies': 0.2.2
+      '@mswjs/interceptors': 0.17.10
+      '@open-draft/until': 1.0.3
+      '@types/cookie': 0.4.1
+      '@types/js-levenshtein': 1.1.1
+      chalk: 4.1.2
+      chokidar: 3.5.3
+      cookie: 0.4.2
+      graphql: 16.8.1
+      headers-polyfill: 3.2.5
+      inquirer: 8.2.6
+      is-node-process: 1.2.0
+      js-levenshtein: 1.1.6
+      node-fetch: 2.7.0
+      outvariant: 1.4.0
+      path-to-regexp: 6.2.1
+      strict-event-emitter: 0.4.6
+      type-fest: 2.19.0
+      typescript: 5.2.2
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+    dev: false
+    optional: true
 
   /multicast-dns@7.2.5:
     resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
@@ -19975,18 +20012,18 @@ packages:
     resolution: {integrity: sha512-9LK+E7Hv5R9u4g4C3p+jjLstaLe11MDsL21UpYaCNmapvMkYhqCV4A/f/3gyH8QjMyh6l68q9xC85vihY9ahMQ==}
     dev: true
 
-  /socketcluster-client@17.2.2:
-    resolution: {integrity: sha512-HIopjTj8p979N5klC7FeZSwu9rd805bFgFcyVX7Y8zPyjVHXHTfGrV/8vqzN2gpOwnnosWQ44ue0qGqovlxZrg==}
+  /socketcluster-client@18.3.0:
+    resolution: {integrity: sha512-C56cxxzv9Un+nGcwV5fMxUeojbWJp2FzPk00lh6mZMLh5wsfvHYzqYqQtoaL7JvMliNsx/8UYH4bIQn+YRWtSw==}
     dependencies:
       ag-channel: 5.0.0
       ag-request: 1.0.1
-      async-stream-emitter: 4.1.0
+      async-stream-emitter: 6.0.1
       buffer: 5.7.1
       clone-deep: 4.0.1
-      linked-list: 0.1.0
+      linked-list: 2.1.0
       sc-errors: 2.0.3
       sc-formatter: 4.0.0
-      stream-demux: 8.1.0
+      stream-demux: 9.0.2
       uuid: 8.3.2
       vinyl-buffer: 1.0.1
       ws: 8.14.2
@@ -20221,13 +20258,13 @@ packages:
     dependencies:
       consumable-stream: 2.0.0
       writable-consumable-stream: 3.0.1
+    dev: false
 
   /stream-demux@9.0.2:
     resolution: {integrity: sha512-39X+Jf+HDCYIy/FUcsmFq/CrFhRAa+r3OAHyPFzD2VwfRiDKGcuOvOGstKLXipb/6AnY5bqoc4H2Z5fHq+dAyg==}
     dependencies:
       consumable-stream: 3.0.0
       writable-consumable-stream: 4.0.1
-    dev: false
 
   /stream-shift@1.0.1:
     resolution: {integrity: sha512-AiisoFqQ0vbGcZgQPY1cdP2I76glaVA/RauYR4G4thNFgkTqr90yXTo4LYX60Jl+sIlPNHHdGSwo01AvbKUSVQ==}
@@ -20324,6 +20361,7 @@ packages:
 
   /string_decoder@1.3.0:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
+    requiresBuild: true
     dependencies:
       safe-buffer: 5.2.1
 
@@ -22044,12 +22082,12 @@ packages:
     resolution: {integrity: sha512-rAOJTA/sMgXD/X6eMwbQJe49w+Fnkdx3iV5oUzdmiZ7Bwx03khqUnAKIpzp/hbI8q2EP5NfjXgIXN0MsipfHeg==}
     dependencies:
       consumable-stream: 2.0.0
+    dev: false
 
   /writable-consumable-stream@4.0.1:
     resolution: {integrity: sha512-iFGcPiaENb4MjN12seViXs5hxuzqdac6Q+HkrZFHJDzw7pezyCsT1nw1h0W2OIu381xn1NAIvBllEGRtpuDuFw==}
     dependencies:
       consumable-stream: 3.0.0
-    dev: false
 
   /write-file-atomic@2.4.3:
     resolution: {integrity: sha512-GaETH5wwsX+GcnzhPgKcKjJ6M2Cq3/iZp1WyY/X1CSqrW+jVNM9Y7D8EC2sM4ZG/V8wZlSniJnCKWPmBYAucRQ==}
