@@ -1369,8 +1369,8 @@ importers:
         specifier: ^7.5.4
         version: 7.5.4
       socketcluster-server:
-        specifier: ^17.4.1
-        version: 17.4.1
+        specifier: ^18.2.0
+        version: 18.2.0
       sqlite3:
         specifier: ^5.1.6
         version: 5.1.6
@@ -7572,7 +7572,7 @@ packages:
       strict-event-emitter: 0.5.1
       uuid: 8.3.2
     optionalDependencies:
-      msw: 1.3.1(typescript@5.2.2)
+      msw: 1.3.2(typescript@5.2.2)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -16663,6 +16663,7 @@ packages:
       chalk: 3.0.0
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -17640,6 +17641,43 @@ packages:
       - encoding
       - supports-color
     dev: false
+
+  /msw@1.3.2(typescript@5.2.2):
+    resolution: {integrity: sha512-wKLhFPR+NitYTkQl5047pia0reNGgf0P6a1eTnA5aNlripmiz0sabMvvHcicE8kQ3/gZcI0YiPFWmYfowfm3lA==}
+    engines: {node: '>=14'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      typescript: '>= 4.4.x <= 5.2.x'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@mswjs/cookies': 0.2.2
+      '@mswjs/interceptors': 0.17.10
+      '@open-draft/until': 1.0.3
+      '@types/cookie': 0.4.1
+      '@types/js-levenshtein': 1.1.1
+      chalk: 4.1.2
+      chokidar: 3.5.3
+      cookie: 0.4.2
+      graphql: 16.8.1
+      headers-polyfill: 3.2.5
+      inquirer: 8.2.6
+      is-node-process: 1.2.0
+      js-levenshtein: 1.1.6
+      node-fetch: 2.7.0
+      outvariant: 1.4.0
+      path-to-regexp: 6.2.1
+      strict-event-emitter: 0.4.6
+      type-fest: 2.19.0
+      typescript: 5.2.2
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+    dev: false
+    optional: true
 
   /multicast-dns@7.2.5:
     resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
@@ -19994,19 +20032,19 @@ packages:
       - bufferutil
       - utf-8-validate
 
-  /socketcluster-server@17.4.1:
-    resolution: {integrity: sha512-ElKD9U7EncoWNGYOL+G6UAxuYmui1fnawpyhZIpFG/A/lDNGwHsQLNIpJXh1SB4BpoQLn2q4ewwnUK3Mse5mfA==}
+  /socketcluster-server@18.2.0:
+    resolution: {integrity: sha512-fL2gHKT5KjqFkJ0zw2I3Fz6IFhBu/+oI0cNwBCmb8lGG32lf7QAkh2yQZYwroUgeUCbXvY4Adhm0m5voRsd6cQ==}
     dependencies:
       ag-auth: 2.0.1
       ag-request: 1.0.1
       ag-simple-broker: 5.0.1
-      async-stream-emitter: 4.1.0
+      async-stream-emitter: 6.0.1
       base64id: 2.0.0
       clone-deep: 4.0.1
       sc-errors: 2.0.3
       sc-formatter: 4.0.0
-      stream-demux: 8.1.0
-      writable-consumable-stream: 2.0.0
+      stream-demux: 9.0.2
+      writable-consumable-stream: 4.0.1
       ws: 8.14.2
     transitivePeerDependencies:
       - bufferutil
@@ -22033,12 +22071,6 @@ packages:
 
   /wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
-
-  /writable-consumable-stream@2.0.0:
-    resolution: {integrity: sha512-SITambzxtPTFU/wR82h+zOKGBiEv5V8gC1mt8xvoE1/168ApEa8H+6s2UToYJo3VLL7sNYTaApKuPD+pZHMGJQ==}
-    dependencies:
-      consumable-stream: 2.0.0
-    dev: false
 
   /writable-consumable-stream@3.0.1:
     resolution: {integrity: sha512-rAOJTA/sMgXD/X6eMwbQJe49w+Fnkdx3iV5oUzdmiZ7Bwx03khqUnAKIpzp/hbI8q2EP5NfjXgIXN0MsipfHeg==}
