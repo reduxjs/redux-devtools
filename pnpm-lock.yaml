@@ -157,8 +157,8 @@ importers:
         specifier: ^5.1.28
         version: 5.1.28
       chromedriver:
-        specifier: ^116.0.0
-        version: 116.0.0
+        specifier: ^118.0.1
+        version: 118.0.1
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -7572,7 +7572,7 @@ packages:
       strict-event-emitter: 0.5.1
       uuid: 8.3.2
     optionalDependencies:
-      msw: 1.3.1(typescript@5.2.2)
+      msw: 1.3.2(typescript@5.2.2)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -12296,9 +12296,9 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
-  /chromedriver@116.0.0:
-    resolution: {integrity: sha512-/TQaRn+RUAYnVqy5Vx8VtU8DvtWosU8QLM2u7BoNM5h55PRQPXF/onHAehEi8Sj/CehdKqH50NFdiumQAUr0DQ==}
-    engines: {node: '>=16'}
+  /chromedriver@118.0.1:
+    resolution: {integrity: sha512-GlGfyRE47IuSJnuadIiDy89EMDMQFBVWxUmiclLJKzQhFsiWAtcIr/mNOxjljZdsw9IwIOQEkrB9wympKYFPLw==}
+    engines: {node: '>=18'}
     hasBin: true
     requiresBuild: true
     dependencies:
@@ -16663,6 +16663,7 @@ packages:
       chalk: 3.0.0
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -17640,6 +17641,43 @@ packages:
       - encoding
       - supports-color
     dev: false
+
+  /msw@1.3.2(typescript@5.2.2):
+    resolution: {integrity: sha512-wKLhFPR+NitYTkQl5047pia0reNGgf0P6a1eTnA5aNlripmiz0sabMvvHcicE8kQ3/gZcI0YiPFWmYfowfm3lA==}
+    engines: {node: '>=14'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      typescript: '>= 4.4.x <= 5.2.x'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@mswjs/cookies': 0.2.2
+      '@mswjs/interceptors': 0.17.10
+      '@open-draft/until': 1.0.3
+      '@types/cookie': 0.4.1
+      '@types/js-levenshtein': 1.1.1
+      chalk: 4.1.2
+      chokidar: 3.5.3
+      cookie: 0.4.2
+      graphql: 16.8.1
+      headers-polyfill: 3.2.5
+      inquirer: 8.2.6
+      is-node-process: 1.2.0
+      js-levenshtein: 1.1.6
+      node-fetch: 2.7.0
+      outvariant: 1.4.0
+      path-to-regexp: 6.2.1
+      strict-event-emitter: 0.4.6
+      type-fest: 2.19.0
+      typescript: 5.2.2
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+    dev: false
+    optional: true
 
   /multicast-dns@7.2.5:
     resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
