@@ -40,24 +40,24 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.1",
-    "@types/d3": "^7.4.1",
+    "@babel/runtime": "^7.23.2",
+    "@types/d3": "^7.4.2",
     "d3": "^7.8.5",
     "d3tooltip": "^3.0.0",
     "deepmerge": "^4.3.1",
     "map2tree": "^3.0.0",
-    "ramda": "^0.29.0"
+    "ramda": "^0.29.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.0",
-    "@babel/core": "^7.23.0",
+    "@babel/core": "^7.23.2",
     "@babel/eslint-parser": "^7.22.15",
-    "@babel/preset-env": "^7.22.20",
-    "@babel/preset-typescript": "^7.23.0",
-    "@types/ramda": "^0.29.5",
-    "@typescript-eslint/eslint-plugin": "^6.7.3",
-    "@typescript-eslint/parser": "^6.7.3",
-    "eslint": "^8.50.0",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "@types/ramda": "^0.29.7",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
     "rimraf": "^5.0.5",
     "typescript": "~5.2.2"
