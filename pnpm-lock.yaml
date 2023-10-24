@@ -1342,8 +1342,8 @@ importers:
         specifier: ^16.8.1
         version: 16.8.1
       knex:
-        specifier: ^2.5.1
-        version: 2.5.1(sqlite3@5.1.6)
+        specifier: ^3.0.1
+        version: 3.0.1(sqlite3@5.1.6)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -11486,6 +11486,7 @@ packages:
   /aggregate-error@3.1.0:
     resolution: {integrity: sha512-4I7Td01quW/RpocfNayFdFVk1qSuoh0E7JrbRJ16nH01HhKFQ88INq9Sd+nd72zqRySlr9BmDA8xlEJ6vJMrYA==}
     engines: {node: '>=8'}
+    requiresBuild: true
     dependencies:
       clean-stack: 2.2.0
       indent-string: 4.0.0
@@ -12499,6 +12500,7 @@ packages:
   /clean-stack@2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==}
     engines: {node: '>=6'}
+    requiresBuild: true
 
   /cli-cursor@3.1.0:
     resolution: {integrity: sha512-I/zHAwsKf9FqGoXM4WWRACob9+SNukZTd94DWF57E4toouRulbCxcUh6RKUEOQlYTHJnzkPMySvPNaaSLNfLZw==}
@@ -17106,9 +17108,9 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /knex@2.5.1(sqlite3@5.1.6):
-    resolution: {integrity: sha512-z78DgGKUr4SE/6cm7ku+jHvFT0X97aERh/f0MUKAKgFnwCYBEW4TFBqtHWFYiJFid7fMrtpZ/gxJthvz5mEByA==}
-    engines: {node: '>=12'}
+  /knex@3.0.1(sqlite3@5.1.6):
+    resolution: {integrity: sha512-ruASxC6xPyDklRdrcDy6a9iqK+R9cGK214aiQa+D9gX2ZnHZKv6o6JC9ZfgxILxVAul4bZ13c3tgOAHSuQ7/9g==}
+    engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
       better-sqlite3: '*'
