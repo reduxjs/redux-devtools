@@ -183,7 +183,7 @@ export default function JSONNestedNode(props: Props) {
 const containsSearchResult = (
   ownKeyPath: KeyPath,
   resultKeyPath: KeyPath,
-  level: number
+  level: number,
 ): boolean => {
   const searchLevel = level > 0 ? level - 1 : level;
   const currKey = [...ownKeyPath].reverse()[searchLevel];

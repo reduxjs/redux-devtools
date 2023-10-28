@@ -57,7 +57,7 @@ function doSearch(objectToSearch: Value, query: SearchQuery): string[] {
       .split('.')
       .reduce(
         (intermediateObj, key) => intermediateObj?.[key as keyof object],
-        obj
+        obj,
       );
   };
   const match = (value: Value, searchText: string): boolean => {
@@ -75,7 +75,7 @@ function doSearch(objectToSearch: Value, query: SearchQuery): string[] {
 }
 
 self.onmessage = (
-  event: MessageEvent<{ objectToSearch: Value; query: SearchQuery }>
+  event: MessageEvent<{ objectToSearch: Value; query: SearchQuery }>,
 ) => {
   const { objectToSearch, query } = event.data;
   const result = doSearch(objectToSearch, query);

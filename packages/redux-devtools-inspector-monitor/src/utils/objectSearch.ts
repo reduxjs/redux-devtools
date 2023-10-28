@@ -3,7 +3,7 @@ import { Value } from './searchWorker';
 
 export function searchInObject(
   objectToSearch: Value,
-  query: SearchQuery
+  query: SearchQuery,
 ): Promise<string[]> {
   return new Promise((resolve) => {
     const worker = new Worker(new URL('./searchWorker.js', import.meta.url));

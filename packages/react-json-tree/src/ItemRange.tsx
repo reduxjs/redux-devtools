@@ -56,7 +56,7 @@ const containsSearchResult = (
   from: number,
   to: number,
   resultKeyPath: KeyPath,
-  level: number
+  level: number,
 ): boolean => {
   const searchLevel = level > 1 ? level - 1 : level;
   const nextKey = Number(resultKeyPath[searchLevel]);
