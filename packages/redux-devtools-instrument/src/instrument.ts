@@ -1048,7 +1048,7 @@ export function instrument<
         ).liftedStore
       ) {
         throw new Error(
-          'DevTools instrume ntation should not be applied more than once. ' +
+          'DevTools instrumentation should not be applied more than once. ' +
             'Check your store configuration.',
         );
       }
