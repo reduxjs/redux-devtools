@@ -5,7 +5,7 @@ import { TabComponentProps } from '../ActionPreview';
 import { Action } from 'redux';
 
 const DiffTab: FunctionComponent<
-  TabComponentProps<unknown, Action<unknown>>
+  TabComponentProps<unknown, Action<string>>
 > = ({
   delta,
   styling,

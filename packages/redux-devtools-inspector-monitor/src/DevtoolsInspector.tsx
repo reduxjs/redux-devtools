@@ -43,13 +43,13 @@ const {
   reorderAction,
 } = ActionCreators;
 
-function getLastActionId<S, A extends Action<unknown>>(
+function getLastActionId<S, A extends Action<string>>(
   props: DevtoolsInspectorProps<S, A>,
 ) {
   return props.stagedActionIds[props.stagedActionIds.length - 1];
 }
 
-function getCurrentActionId<S, A extends Action<unknown>>(
+function getCurrentActionId<S, A extends Action<string>>(
   props: DevtoolsInspectorProps<S, A>,
   monitorState: DevtoolsInspectorState,
 ) {
@@ -73,7 +73,7 @@ function getFromState<S>(
   return computedStates[fromStateIdx];
 }
 
-function createIntermediateState<S, A extends Action<unknown>>(
+function createIntermediateState<S, A extends Action<string>>(
   props: DevtoolsInspectorProps<S, A>,
   monitorState: DevtoolsInspectorState,
 ) {
@@ -126,7 +126,7 @@ function createIntermediateState<S, A extends Action<unknown>>(
   };
 }
 
-function createThemeState<S, A extends Action<unknown>>(
+function createThemeState<S, A extends Action<string>>(
   props: DevtoolsInspectorProps<S, A>,
 ) {
   const base16Theme = getBase16Theme(props.theme, base16Themes)!;
@@ -137,7 +137,7 @@ function createThemeState<S, A extends Action<unknown>>(
   return { base16Theme, styling };
 }
 
-export interface ExternalProps<S, A extends Action<unknown>> {
+export interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<
     DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
   >;
@@ -165,7 +165,7 @@ interface DefaultProps {
   invertTheme: boolean;
 }
 
-export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
+export interface DevtoolsInspectorProps<S, A extends Action<string>>
   extends LiftedState<S, A, DevtoolsInspectorState> {
   dispatch: Dispatch<
     DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
@@ -186,7 +186,7 @@ export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
 }
 
-interface State<S, A extends Action<unknown>> {
+interface State<S, A extends Action<string>> {
   delta: Delta | null | undefined | false;
   nextState: S;
   action: A;
@@ -195,7 +195,7 @@ interface State<S, A extends Action<unknown>> {
   themeState: { base16Theme: Base16Theme; styling: StylingFunction };
 }
 
-class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
+class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
   DevtoolsInspectorProps<S, A>,
   State<S, A>
 > {
@@ -474,10 +474,10 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
 }
 
 export default DevtoolsInspector as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     state: DevtoolsInspectorState | undefined,
     action: DevtoolsInspectorAction,
   ): DevtoolsInspectorState;

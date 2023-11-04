@@ -28,19 +28,19 @@ function logError(type: string) {
 
 export interface Props<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
 > {
   store?: EnhancedStore<S, A, MonitorState>;
 }
 
 export type Monitor<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorProps extends LiftedState<S, A, MonitorState>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
 > = React.ReactElement<
   MonitorProps,
   React.ComponentType<MonitorProps & LiftedState<S, A, MonitorState>> & {
@@ -54,10 +54,10 @@ export type Monitor<
 
 export default function createDevTools<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorProps extends LiftedState<S, A, MonitorState>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
 >(children: Monitor<S, A, MonitorProps, MonitorState, MonitorAction>) {
   const monitorElement = Children.only(children);
   const monitorProps = monitorElement.props;

@@ -12,7 +12,7 @@ const BUTTON_JUMP = 'Jump';
 
 type Button = typeof BUTTON_SKIP | typeof BUTTON_JUMP;
 
-interface Props<A extends Action<unknown>> {
+interface Props<A extends Action<string>> {
   styling: StylingFunction;
   actionId: number;
   isInitAction: boolean;
@@ -33,7 +33,7 @@ interface State {
 }
 
 export default class ActionListRow<
-  A extends Action<unknown>,
+  A extends Action<string>,
 > extends PureComponent<Props<A>, State> {
   state: State = { hover: false };
 

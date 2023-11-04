@@ -45,7 +45,7 @@ const styles: {
   },
 };
 
-interface ExternalProps<S, A extends Action<unknown>> {
+interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
 
   preserveScrollTop: boolean;
@@ -66,7 +66,7 @@ interface DefaultProps<S> {
   markStateDiff: boolean;
 }
 
-export interface LogMonitorProps<S, A extends Action<unknown>>
+export interface LogMonitorProps<S, A extends Action<string>>
   extends LiftedState<S, A, LogMonitorState> {
   dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
 
@@ -79,7 +79,7 @@ export interface LogMonitorProps<S, A extends Action<unknown>>
   hideMainButtons?: boolean;
 }
 
-class LogMonitor<S, A extends Action<unknown>> extends PureComponent<
+class LogMonitor<S, A extends Action<string>> extends PureComponent<
   LogMonitorProps<S, A>
 > {
   static update = reducer;
@@ -274,10 +274,10 @@ class LogMonitor<S, A extends Action<unknown>> extends PureComponent<
 }
 
 export default LogMonitor as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     state: LogMonitorState | undefined,
     action: LogMonitorAction,
   ): LogMonitorState;

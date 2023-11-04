@@ -23,7 +23,7 @@ interface KeyObject {
   sequence: string;
 }
 
-interface ExternalProps<S, A extends Action<unknown>> {
+interface ExternalProps<S, A extends Action<string>> {
   defaultPosition: 'left' | 'top' | 'right' | 'bottom';
   defaultIsVisible: boolean;
   defaultSize: number;
@@ -35,8 +35,8 @@ interface ExternalProps<S, A extends Action<unknown>> {
   dispatch: Dispatch<DockMonitorAction>;
 
   children:
-    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>
-    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>[];
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>[];
 }
 
 interface DefaultProps {
@@ -46,7 +46,7 @@ interface DefaultProps {
   fluid: boolean;
 }
 
-export interface DockMonitorProps<S, A extends Action<unknown>>
+export interface DockMonitorProps<S, A extends Action<string>>
   extends LiftedState<S, A, DockMonitorState> {
   defaultPosition: 'left' | 'top' | 'right' | 'bottom';
   defaultIsVisible: boolean;
@@ -59,11 +59,11 @@ export interface DockMonitorProps<S, A extends Action<unknown>>
   dispatch: Dispatch<DockMonitorAction>;
 
   children:
-    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>
-    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>[];
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>[];
 }
 
-class DockMonitor<S, A extends Action<unknown>> extends Component<
+class DockMonitor<S, A extends Action<string>> extends Component<
   DockMonitorProps<S, A>
 > {
   static update = reducer;
@@ -179,7 +179,7 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
   };
 
   renderChild(
-    child: Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>,
+    child: Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>,
     index: number,
     otherProps: Omit<
       DockMonitorProps<S, A>,
@@ -214,19 +214,13 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
       >
         {Children.map(
           children as
+            | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>
             | Monitor<
                 S,
                 A,
                 LiftedState<S, A, unknown>,
                 unknown,
-                Action<unknown>
-              >
-            | Monitor<
-                S,
-                A,
-                LiftedState<S, A, unknown>,
-                unknown,
-                Action<unknown>
+                Action<string>
               >[],
           (child, index) => this.renderChild(child, index, rest),
         )}
@@ -236,10 +230,10 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
 }
 
 export default DockMonitor as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     state: DockMonitorState | undefined,
     action: DockMonitorAction,
   ): DockMonitorState;

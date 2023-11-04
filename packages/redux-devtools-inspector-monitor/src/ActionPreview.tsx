@@ -11,7 +11,7 @@ import DiffTab from './tabs/DiffTab';
 import StateTab from './tabs/StateTab';
 import ActionTab from './tabs/ActionTab';
 
-export interface TabComponentProps<S, A extends Action<unknown>> {
+export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;
   styling: StylingFunction;
   computedStates: { state: S; error?: string }[];
@@ -31,7 +31,7 @@ export interface TabComponentProps<S, A extends Action<unknown>> {
   updateMonitorState: (monitorState: Partial<DevtoolsInspectorState>) => void;
 }
 
-export interface Tab<S, A extends Action<unknown>> {
+export interface Tab<S, A extends Action<string>> {
   name: string;
   component: React.ComponentType<TabComponentProps<S, A>>;
 }
@@ -51,7 +51,7 @@ const DEFAULT_TABS = [
   },
 ];
 
-interface Props<S, A extends Action<unknown>> {
+interface Props<S, A extends Action<string>> {
   base16Theme: Base16Theme;
   invertTheme: boolean;
   isWideLayout: boolean;
@@ -76,7 +76,7 @@ interface Props<S, A extends Action<unknown>> {
   disableStateTreeCollection: boolean;
 }
 
-class ActionPreview<S, A extends Action<unknown>> extends Component<
+class ActionPreview<S, A extends Action<string>> extends Component<
   Props<S, A>
 > {
   static defaultProps = {
@@ -123,7 +123,7 @@ class ActionPreview<S, A extends Action<unknown>> extends Component<
     return (
       <div key="actionPreview" {...styling('actionPreview')}>
         <ActionPreviewHeader
-          tabs={renderedTabs as unknown as Tab<unknown, Action<unknown>>[]}
+          tabs={renderedTabs as unknown as Tab<unknown, Action<string>>[]}
           {...{ styling, inspectedPath, onInspectPath, tabName, onSelectTab }}
         />
         {!error && (

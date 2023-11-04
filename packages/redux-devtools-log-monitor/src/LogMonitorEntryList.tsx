@@ -5,7 +5,7 @@ import { PerformAction } from '@redux-devtools/core';
 import { Base16Theme } from 'redux-devtools-themes';
 import LogMonitorEntry from './LogMonitorEntry';
 
-interface Props<S, A extends Action<unknown>> {
+interface Props<S, A extends Action<string>> {
   actionsById: { [actionId: number]: PerformAction<A> };
   computedStates: { state: S; error?: string }[];
   stagedActionIds: number[];
@@ -24,7 +24,7 @@ interface Props<S, A extends Action<unknown>> {
 
 export default class LogMonitorEntryList<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
 > extends PureComponent<Props<S, A>> {
   static propTypes = {
     actionsById: PropTypes.object,

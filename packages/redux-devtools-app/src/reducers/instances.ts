@@ -45,7 +45,7 @@ export interface Options {
 }
 
 export interface State {
-  actionsById: { [actionId: number]: PerformAction<Action<unknown>> };
+  actionsById: { [actionId: number]: PerformAction<Action<string>> };
   computedStates: { state: unknown; error?: string }[];
   currentStateIndex: number;
   nextActionId: number;
@@ -109,7 +109,7 @@ function updateState(
   let newState;
   const liftedState = state[id] || state.default;
   const action = ((request.action && parseJSON(request.action, serialize)) ||
-    {}) as PerformAction<Action<unknown>>;
+    {}) as PerformAction<Action<string>>;
 
   switch (request.type) {
     case 'INIT':
@@ -129,7 +129,7 @@ function updateState(
           newState = recompute(
             newState,
             request.batched ? payload : (payload as unknown as State[])[i],
-            action[i] as PerformAction<Action<unknown>>,
+            action[i] as PerformAction<Action<string>>,
             newState.nextActionId + 1,
             maxAge,
             isExcess,

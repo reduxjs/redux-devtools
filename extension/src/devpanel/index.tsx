@@ -96,7 +96,7 @@ function init(id: number) {
     name: id ? id.toString() : undefined,
   });
   bgConnection.onMessage.addListener(
-    <S, A extends Action<unknown>>(message: PanelMessage<S, A>) => {
+    <S, A extends Action<string>>(message: PanelMessage<S, A>) => {
       if (message.type === 'NA') {
         if (message.id === id) renderNA();
         else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });
