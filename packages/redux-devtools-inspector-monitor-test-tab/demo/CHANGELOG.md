@@ -1,5 +1,16 @@
 # test-demo
 
+## 0.1.13
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+- Updated dependencies [65205f90]
+  - @redux-devtools/dock-monitor@3.0.2
+  - @redux-devtools/inspector-monitor-test-tab@2.0.1
+  - @redux-devtools/inspector-monitor@4.0.1
+  - @redux-devtools/core@3.13.2
+
 ## 0.1.12
 
 ### Patch Changes

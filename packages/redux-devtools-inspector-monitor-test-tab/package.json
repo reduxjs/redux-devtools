@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/inspector-monitor-test-tab",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Generate tests for redux devtools.",
   "keywords": [
     "redux",
@@ -62,8 +62,8 @@
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-react": "^7.22.15",
     "@babel/preset-typescript": "^7.23.2",
-    "@redux-devtools/core": "^3.13.0",
-    "@redux-devtools/inspector-monitor": "^4.0.0",
+    "@redux-devtools/core": "^3.13.2",
+    "@redux-devtools/inspector-monitor": "^4.0.1",
     "@testing-library/react": "^14.0.0",
     "@types/es6template": "^1.0.4",
     "@types/jest": "^29.5.6",
@@ -87,7 +87,7 @@
     "typescript": "~5.2.2"
   },
   "peerDependencies": {
-    "@redux-devtools/inspector-monitor": "^4.0.0",
+    "@redux-devtools/inspector-monitor": "^4.0.1",
     "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "@types/styled-components": "^5.1.29",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",

@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.0.1
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+- Updated dependencies [65205f90]
+  - @redux-devtools/chart-monitor@4.0.1
+  - @redux-devtools/inspector-monitor-test-tab@2.0.1
+  - @redux-devtools/inspector-monitor-trace-tab@2.0.1
+  - @redux-devtools/inspector-monitor@4.0.1
+  - @redux-devtools/core@3.13.2
+
 ## 4.0.0
 
 ### Major Changes

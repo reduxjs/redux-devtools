@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.13.2
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+
 ## 3.13.1
 
 ### Patch Changes
