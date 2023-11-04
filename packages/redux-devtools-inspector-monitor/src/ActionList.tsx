@@ -140,7 +140,7 @@ export default function ActionList<A extends Action<string>>({
   const filteredActionIds = searchValue
     ? actionIds.filter(
         (id) =>
-          (actions[id].action.type as string)
+          actions[id].action.type
             .toLowerCase()
             .indexOf(lowerSearchValue as string) !== -1,
       )

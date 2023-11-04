@@ -333,7 +333,7 @@ class SliderMonitor<S, A extends Action<string>> extends (PureComponent ||
     let actionType = actionsById[actionId].action.type;
     if (actionType === undefined) actionType = '<UNDEFINED>';
     else if (actionType === null) actionType = '<NULL>';
-    else actionType = (actionType as string).toString() || '<EMPTY>';
+    else actionType = actionType.toString() || '<EMPTY>';
 
     const onPlayClick =
       replaySpeed === 'Live' ? this.startRealtimeReplay : this.startReplay;
@@ -352,7 +352,7 @@ class SliderMonitor<S, A extends Action<string>> extends (PureComponent ||
       <Toolbar noBorder compact fullHeight theme={theme}>
         {playPause}
         <Slider
-          label={actionType as string}
+          label={actionType}
           sublabel={`(${actionId})`}
           min={0}
           max={max}

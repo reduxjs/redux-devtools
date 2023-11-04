@@ -73,7 +73,7 @@ export default class ActionListRow<
     let actionType = action.type;
     if (typeof actionType === 'undefined') actionType = '<UNDEFINED>';
     else if (actionType === null) actionType = '<NULL>';
-    else actionType = (actionType as string).toString() || '<EMPTY>';
+    else actionType = actionType.toString() || '<EMPTY>';
 
     return (
       <div
@@ -106,7 +106,7 @@ export default class ActionListRow<
             isSkipped && 'actionListItemNameSkipped',
           ])}
         >
-          {actionType as string}
+          {actionType}
         </div>
         {hideActionButtons ? (
           <RightSlider styling={styling} shown>

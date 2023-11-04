@@ -100,16 +100,16 @@ export function isFiltered(
     (!localFilter &&
       opts.filter &&
       opts.filter === FilterState.DO_NOT_FILTER) ||
-    (type && typeof (type as string).match !== 'function')
+    (type && typeof type.match !== 'function')
   )
     return false;
 
   const { allowlist, denylist } = localFilter || opts;
   return (
     // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (allowlist && !(type as string).match(allowlist)) ||
+    (allowlist && !type.match(allowlist)) ||
     // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (denylist && (type as string).match(denylist))
+    (denylist && type.match(denylist))
   );
 }
 
