@@ -41,7 +41,7 @@
     "jsan": "^3.1.14",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.2",
-    "redux": "^4.2.1"
+    "redux": "^5.0.0-beta.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.0",
@@ -63,6 +63,6 @@
   "peerDependencies": {
     "@redux-devtools/core": "^3.13.1",
     "immutable": "^4.3.4",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1 || ^5.0.0-beta.0"
   }
 }
