@@ -7,7 +7,7 @@ import getJsonTreeTheme from './getJsonTreeTheme';
 import { TabComponentProps } from '../ActionPreview';
 
 const ActionTab: FunctionComponent<
-  TabComponentProps<unknown, Action<unknown>>
+  TabComponentProps<unknown, Action<string>>
 > = ({
   action,
   styling,

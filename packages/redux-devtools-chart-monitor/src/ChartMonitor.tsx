@@ -39,7 +39,7 @@ function invertColors(theme: themes.Base16Theme) {
   };
 }
 
-export interface ChartMonitorProps<S, A extends Action<unknown>>
+export interface ChartMonitorProps<S, A extends Action<string>>
   extends LiftedState<S, A, ChartMonitorState>,
     Options {
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
@@ -51,7 +51,7 @@ export interface ChartMonitorProps<S, A extends Action<unknown>>
   defaultIsVisible?: boolean;
 }
 
-class ChartMonitor<S, A extends Action<unknown>> extends PureComponent<
+class ChartMonitor<S, A extends Action<string>> extends PureComponent<
   ChartMonitorProps<S, A>
 > {
   static update = reducer;

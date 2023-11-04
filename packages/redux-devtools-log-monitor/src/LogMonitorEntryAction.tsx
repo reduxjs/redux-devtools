@@ -17,7 +17,7 @@ const styles = {
   },
 };
 
-interface Props<A extends Action<unknown>> {
+interface Props<A extends Action<string>> {
   theme: Base16Theme;
   collapsed: boolean;
   action: A;
@@ -27,7 +27,7 @@ interface Props<A extends Action<unknown>> {
 }
 
 export default class LogMonitorAction<
-  A extends Action<unknown>,
+  A extends Action<string>,
 > extends Component<Props<A>> {
   renderPayload(payload: Record<string, unknown>) {
     return (

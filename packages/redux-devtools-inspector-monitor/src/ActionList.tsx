@@ -22,7 +22,7 @@ import { CSS } from '@dnd-kit/utilities';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
 
-function getTimestamps<A extends Action<unknown>>(
+function getTimestamps<A extends Action<string>>(
   actions: { [actionId: number]: PerformAction<A> },
   actionIds: number[],
   actionId: number,
@@ -40,7 +40,7 @@ function scrollToBottom(node: HTMLDivElement) {
   node.scrollTop = node.scrollHeight;
 }
 
-interface Props<A extends Action<unknown>> {
+interface Props<A extends Action<string>> {
   actions: { [actionId: number]: PerformAction<A> };
   actionIds: number[];
   isWideLayout: boolean;
@@ -63,7 +63,7 @@ interface Props<A extends Action<unknown>> {
   lastActionId: number;
 }
 
-export default function ActionList<A extends Action<unknown>>({
+export default function ActionList<A extends Action<string>>({
   styling,
   actions,
   actionIds,

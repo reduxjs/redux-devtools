@@ -56,7 +56,7 @@ import type { ContentScriptToPageScriptMessage } from '../contentScript';
 
 type EnhancedStoreWithInitialDispatch<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorState,
 > = EnhancedStore<S, A, MonitorState> & { initialDispatch: Dispatch<A> };
 
@@ -64,7 +64,7 @@ const source = '@devtools-page';
 let stores: {
   [K in string | number]: EnhancedStoreWithInitialDispatch<
     unknown,
-    Action<unknown>,
+    Action<string>,
     unknown
   >;
 } = {};
@@ -97,18 +97,18 @@ export interface ConfigWithExpandedMaxAge {
   readonly actionsAllowlist?: string | readonly string[];
   serialize?: boolean | SerializeWithImmutable;
   readonly stateSanitizer?: <S>(state: S, index?: number) => S;
-  readonly actionSanitizer?: <A extends Action<unknown>>(
+  readonly actionSanitizer?: <A extends Action<string>>(
     action: A,
     id?: number,
   ) => A;
-  readonly predicate?: <S, A extends Action<unknown>>(
+  readonly predicate?: <S, A extends Action<string>>(
     state: S,
     action: A,
   ) => boolean;
   readonly latency?: number;
   readonly maxAge?:
     | number
-    | (<S, A extends Action<unknown>>(
+    | (<S, A extends Action<string>>(
         currentLiftedAction: LiftedAction<S, A, unknown>,
         previousLiftedState: LiftedState<S, A, unknown> | undefined,
       ) => number);
@@ -123,9 +123,9 @@ export interface ConfigWithExpandedMaxAge {
   readonly autoPause?: boolean;
   readonly features?: Features;
   readonly type?: string;
-  readonly getActionType?: <A extends Action<unknown>>(action: A) => A;
+  readonly getActionType?: <A extends Action<string>>(action: A) => A;
   readonly actionCreators?: {
-    readonly [key: string]: ActionCreator<Action<unknown>>;
+    readonly [key: string]: ActionCreator<Action<string>>;
   };
 }
 
@@ -137,7 +137,7 @@ interface ReduxDevtoolsExtension {
   (config?: Config): StoreEnhancer;
   open: (position?: Position) => void;
   notifyErrors: (onError?: () => boolean) => void;
-  send: <S, A extends Action<unknown>>(
+  send: <S, A extends Action<string>>(
     action: StructuralPerformAction<A> | StructuralPerformAction<A>[],
     state: LiftedState<S, A, unknown>,
     config: Config,
@@ -158,7 +158,7 @@ declare global {
   }
 }
 
-function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
+function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
   config?: Config,
 ): StoreEnhancer {
   /* eslint-disable no-param-reassign */

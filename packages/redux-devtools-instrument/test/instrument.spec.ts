@@ -1152,7 +1152,7 @@ describe('instrument', () => {
     });
   });
 
-  function filterStackAndTimestamps<S, A extends Action<unknown>>(
+  function filterStackAndTimestamps<S, A extends Action<string>>(
     state: LiftedState<S, A, null>,
   ) {
     state.actionsById = _.mapValues(state.actionsById, (action) => {

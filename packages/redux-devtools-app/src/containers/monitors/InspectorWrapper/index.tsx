@@ -39,17 +39,17 @@ class InspectorWrapper extends Component<Props> {
 
   render() {
     const { features, ...rest } = this.props;
-    let tabs: () => Tab<unknown, Action<unknown>>[];
+    let tabs: () => Tab<unknown, Action<string>>[];
     if (features && features.test) {
       tabs = () => [
-        ...(DEFAULT_TABS as Tab<unknown, Action<unknown>>[]),
+        ...(DEFAULT_TABS as Tab<unknown, Action<string>>[]),
         { name: 'Test', component: TestTab } as unknown as Tab<
           unknown,
-          Action<unknown>
+          Action<string>
         >,
       ];
     } else {
-      tabs = () => DEFAULT_TABS as Tab<unknown, Action<unknown>>[];
+      tabs = () => DEFAULT_TABS as Tab<unknown, Action<string>>[];
     }
 
     return (

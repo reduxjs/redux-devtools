@@ -18,9 +18,9 @@ declare global {
 
 export default function configureStore<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
 >(
   next: StoreEnhancerStoreCreator,
   monitorReducer: Reducer<MonitorState, MonitorAction>,

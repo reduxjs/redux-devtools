@@ -60,7 +60,7 @@ export function compare<S>(
   ).forEach(generate);
 }
 
-interface Props<S, A extends Action<unknown>>
+interface Props<S, A extends Action<string>>
   extends Omit<TabComponentProps<S, A>, 'monitorState' | 'updateMonitorState'> {
   name?: string;
   isVanilla?: boolean;
@@ -74,7 +74,7 @@ interface Props<S, A extends Action<unknown>>
 
 export default class TestGenerator<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
 > extends (PureComponent || Component)<Props<S, A>> {
   getMethod(action: A) {
     let type: string = action.type as string;

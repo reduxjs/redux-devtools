@@ -14,7 +14,7 @@ import { Options, State } from '../reducers/instances';
 const { reset, rollback, commit, sweep } = ActionCreators;
 
 interface Props {
-  dispatch: (action: LiftedAction<unknown, Action<unknown>, unknown>) => void;
+  dispatch: (action: LiftedAction<unknown, Action<string>, unknown>) => void;
   liftedState: State;
   options: Options;
 }

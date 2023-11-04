@@ -19,12 +19,12 @@ import { QueryList } from '../components/QueryList';
 import { QueryForm } from '../components/QueryForm';
 import { QueryPreview } from './QueryPreview';
 
-type ForwardedMonitorProps<S, A extends Action<unknown>> = Pick<
+type ForwardedMonitorProps<S, A extends Action<string>> = Pick<
   LiftedState<S, A, RtkQueryMonitorState>,
   'monitorState' | 'currentStateIndex' | 'computedStates' | 'actionsById'
 >;
 
-export interface RtkQueryInspectorProps<S, A extends Action<unknown>>
+export interface RtkQueryInspectorProps<S, A extends Action<string>>
   extends ForwardedMonitorProps<S, A> {
   dispatch: Dispatch<LiftedAction<S, A, RtkQueryMonitorState>>;
   styleUtils: StyleUtils;
@@ -35,7 +35,7 @@ type RtkQueryInspectorState<S> = {
   isWideLayout: boolean;
 };
 
-class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
+class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
   RtkQueryInspectorProps<S, A>,
   RtkQueryInspectorState<S>
 > {
@@ -55,10 +55,10 @@ class RtkQueryInspector<S, A extends Action<unknown>> extends PureComponent<
   static wideLayout = 600;
 
   static getDerivedStateFromProps(
-    props: RtkQueryInspectorProps<unknown, Action<unknown>>,
+    props: RtkQueryInspectorProps<unknown, Action<string>>,
     state: RtkQueryInspectorState<unknown>,
   ): null | Partial<RtkQueryInspectorState<unknown>> {
-    const selectorsSource = computeSelectorSource<unknown, Action<unknown>>(
+    const selectorsSource = computeSelectorSource<unknown, Action<string>>(
       props,
       state.selectorsSource,
     );

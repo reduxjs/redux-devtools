@@ -29,7 +29,7 @@ const dataIsEqual = (
   return getDeepItem(data, path) === getDeepItem(previousData, path);
 };
 
-interface Props<S, A extends Action<unknown>> {
+interface Props<S, A extends Action<string>> {
   theme: Base16Theme;
   select: (state: any) => unknown;
   action: A;
@@ -49,7 +49,7 @@ interface Props<S, A extends Action<unknown>> {
 
 export default class LogMonitorEntry<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
 > extends PureComponent<Props<S, A>> {
   static propTypes = {
     state: PropTypes.object.isRequired,

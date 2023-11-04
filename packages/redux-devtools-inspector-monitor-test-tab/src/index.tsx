@@ -42,7 +42,7 @@ interface State {
   dialogStatus: 'Add' | 'Edit' | null;
 }
 
-export class TestTab<S, A extends Action<unknown>> extends Component<
+export class TestTab<S, A extends Action<string>> extends Component<
   TabComponentProps<S, A>,
   State
 > {

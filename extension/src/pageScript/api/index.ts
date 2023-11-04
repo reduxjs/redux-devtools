@@ -115,7 +115,7 @@ interface DisconnectMessage {
   readonly source: typeof source;
 }
 
-interface InitMessage<S, A extends Action<unknown>> {
+interface InitMessage<S, A extends Action<string>> {
   readonly type: 'INIT';
   readonly payload: string;
   readonly instanceId: number;
@@ -161,7 +161,7 @@ interface SerializedActionMessage {
   readonly nextActionId?: number;
 }
 
-interface SerializedStateMessage<S, A extends Action<unknown>> {
+interface SerializedStateMessage<S, A extends Action<string>> {
   readonly type: 'STATE';
   readonly payload: Omit<
     LiftedState<S, A, unknown>,
@@ -183,7 +183,7 @@ interface OpenMessage {
 
 export type PageScriptToContentScriptMessageForwardedToMonitors<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
 > =
   | InitMessage<S, A>
   | LiftedMessage
@@ -194,7 +194,7 @@ export type PageScriptToContentScriptMessageForwardedToMonitors<
 
 export type PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
 > =
   | PageScriptToContentScriptMessageForwardedToMonitors<S, A>
   | ErrorMessage
@@ -204,17 +204,17 @@ export type PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<
 
 export type PageScriptToContentScriptMessageWithoutDisconnect<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
 > =
   | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
   | InitInstancePageScriptToContentScriptMessage
   | InitInstanceMessage;
 
-export type PageScriptToContentScriptMessage<S, A extends Action<unknown>> =
+export type PageScriptToContentScriptMessage<S, A extends Action<string>> =
   | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
   | DisconnectMessage;
 
-function post<S, A extends Action<unknown>>(
+function post<S, A extends Action<string>>(
   message: PageScriptToContentScriptMessage<S, A>,
 ) {
   window.postMessage(message, '*');
@@ -258,7 +258,7 @@ function getStackTrace(
   return stack;
 }
 
-function amendActionType<A extends Action<unknown>>(
+function amendActionType<A extends Action<string>>(
   action:
     | A
     | StructuralPerformAction<A>
@@ -288,7 +288,7 @@ interface LiftedMessage {
   readonly source: typeof source;
 }
 
-interface PartialStateMessage<S, A extends Action<unknown>> {
+interface PartialStateMessage<S, A extends Action<string>> {
   readonly type: 'PARTIAL_STATE';
   readonly payload: PartialLiftedState<S, A>;
   readonly source: typeof source;
@@ -296,7 +296,7 @@ interface PartialStateMessage<S, A extends Action<unknown>> {
   readonly maxAge: number;
 }
 
-interface ExportMessage<S, A extends Action<unknown>> {
+interface ExportMessage<S, A extends Action<string>> {
   readonly type: 'EXPORT';
   readonly payload: readonly A[];
   readonly committedState: S;
@@ -304,21 +304,21 @@ interface ExportMessage<S, A extends Action<unknown>> {
   readonly instanceId: number;
 }
 
-export interface StructuralPerformAction<A extends Action<unknown>> {
+export interface StructuralPerformAction<A extends Action<string>> {
   readonly action: A;
   readonly timestamp?: number;
   readonly stack?: string;
 }
 
-type SingleUserAction<A extends Action<unknown>> =
+type SingleUserAction<A extends Action<string>> =
   | PerformAction<A>
   | StructuralPerformAction<A>
   | A;
-type UserAction<A extends Action<unknown>> =
+type UserAction<A extends Action<string>> =
   | SingleUserAction<A>
   | readonly SingleUserAction<A>[];
 
-interface ActionMessage<S, A extends Action<unknown>> {
+interface ActionMessage<S, A extends Action<string>> {
   readonly type: 'ACTION';
   readonly payload: S;
   readonly source: typeof source;
@@ -329,7 +329,7 @@ interface ActionMessage<S, A extends Action<unknown>> {
   readonly name?: string;
 }
 
-interface StateMessage<S, A extends Action<unknown>> {
+interface StateMessage<S, A extends Action<string>> {
   readonly type: 'STATE';
   readonly payload: LiftedState<S, A, unknown>;
   readonly source: typeof source;
@@ -369,7 +369,7 @@ interface StopMessage {
   readonly instanceId: number;
 }
 
-type ToContentScriptMessage<S, A extends Action<unknown>> =
+type ToContentScriptMessage<S, A extends Action<string>> =
   | LiftedMessage
   | PartialStateMessage<S, A>
   | ExportMessage<S, A>
@@ -380,7 +380,7 @@ type ToContentScriptMessage<S, A extends Action<unknown>> =
   | GetReportMessage
   | StopMessage;
 
-export function toContentScript<S, A extends Action<unknown>>(
+export function toContentScript<S, A extends Action<string>>(
   message: ToContentScriptMessage<S, A>,
   serializeState?: Serialize | undefined,
   serializeAction?: Serialize | undefined,
@@ -425,7 +425,7 @@ export function toContentScript<S, A extends Action<unknown>>(
   }
 }
 
-export function sendMessage<S, A extends Action<unknown>>(
+export function sendMessage<S, A extends Action<string>>(
   action: StructuralPerformAction<A> | StructuralPerformAction<A>[],
   state: LiftedState<S, A, unknown>,
   config: Config,
@@ -496,7 +496,7 @@ export function setListener(
 }
 
 const liftListener =
-  <S, A extends Action<unknown>>(
+  <S, A extends Action<string>>(
     listener: (message: ListenerMessage<S, A>) => void,
     config: Config,
   ) =>
@@ -520,15 +520,15 @@ export function disconnect() {
 }
 
 export interface ConnectResponse {
-  init: <S, A extends Action<unknown>>(
+  init: <S, A extends Action<string>>(
     state: S,
     liftedData?: LiftedState<S, A, unknown>,
   ) => void;
-  subscribe: <S, A extends Action<unknown>>(
+  subscribe: <S, A extends Action<string>>(
     listener: (message: ListenerMessage<S, A>) => void,
   ) => (() => void) | undefined;
   unsubscribe: () => void;
-  send: <S, A extends Action<unknown>>(
+  send: <S, A extends Action<string>>(
     action: A,
     state: LiftedState<S, A, unknown>,
   ) => void;
@@ -550,8 +550,8 @@ export function connect(preConfig: Config): ConnectResponse {
   const localFilter = getLocalFilter(config);
   const autoPause = config.autoPause;
   let isPaused = autoPause;
-  let delayedActions: StructuralPerformAction<Action<unknown>>[] = [];
-  let delayedStates: LiftedState<unknown, Action<unknown>, unknown>[] = [];
+  let delayedActions: StructuralPerformAction<Action<string>>[] = [];
+  let delayedStates: LiftedState<unknown, Action<string>, unknown>[] = [];
 
   const rootListener = (action: ContentScriptToPageScriptMessage) => {
     if (autoPause) {
@@ -574,7 +574,7 @@ export function connect(preConfig: Config): ConnectResponse {
 
   listeners[id] = [rootListener];
 
-  const subscribe = <S, A extends Action<unknown>>(
+  const subscribe = <S, A extends Action<string>>(
     listener: (message: ListenerMessage<S, A>) => void,
   ) => {
     if (!listener) return undefined;
@@ -600,7 +600,7 @@ export function connect(preConfig: Config): ConnectResponse {
     delayedStates = [];
   }, latency);
 
-  const send = <S, A extends Action<unknown>>(
+  const send = <S, A extends Action<string>>(
     action: A,
     state: LiftedState<S, A, unknown>,
   ) => {
@@ -643,7 +643,7 @@ export function connect(preConfig: Config): ConnectResponse {
     );
   };
 
-  const init = <S, A extends Action<unknown>>(
+  const init = <S, A extends Action<string>>(
     state: S,
     liftedData?: LiftedState<S, A, unknown>,
   ) => {

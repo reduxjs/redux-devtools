@@ -11,13 +11,13 @@ export function generateId(id: string | undefined) {
 
 export interface ActionCreatorObject {
   readonly name: string;
-  readonly func: ActionCreator<Action<unknown>>;
+  readonly func: ActionCreator<Action<string>>;
   readonly args: readonly string[];
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 function flatTree(
-  obj: { [key: string]: ActionCreator<Action<unknown>> },
+  obj: { [key: string]: ActionCreator<Action<string>> },
   namespace = '',
 ) {
   let functions: ActionCreatorObject[] = [];
@@ -65,7 +65,7 @@ export function getMethods(obj: unknown) {
 }
 
 export function getActionsArray(actionCreators: {
-  [key: string]: ActionCreator<Action<unknown>>;
+  [key: string]: ActionCreator<Action<string>>;
 }) {
   if (Array.isArray(actionCreators)) return actionCreators;
   return flatTree(actionCreators);

@@ -5,7 +5,7 @@ import Immutable from 'immutable';
 import { PerformAction } from '@redux-devtools/core';
 
 interface State {
-  actionsById: { [actionId: number]: PerformAction<Action<unknown>> };
+  actionsById: { [actionId: number]: PerformAction<Action<string>> };
   computedStates: { state: unknown; error?: string }[];
   committedState?: unknown;
 }

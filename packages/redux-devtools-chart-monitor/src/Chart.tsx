@@ -11,7 +11,7 @@ const wrapperStyle = {
   height: '100%',
 };
 
-export interface Props<S, A extends Action<unknown>>
+export interface Props<S, A extends Action<string>>
   extends LiftedState<S, A, ChartMonitorState>,
     Options {
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
@@ -24,7 +24,7 @@ export interface Props<S, A extends Action<unknown>>
   defaultIsVisible?: boolean;
 }
 
-class Chart<S, A extends Action<unknown>> extends Component<Props<S, A>> {
+class Chart<S, A extends Action<string>> extends Component<Props<S, A>> {
   divRef = createRef<HTMLDivElement>();
   // eslint-disable-next-line @typescript-eslint/ban-types
   renderChart?: (state?: {} | null | undefined) => void;

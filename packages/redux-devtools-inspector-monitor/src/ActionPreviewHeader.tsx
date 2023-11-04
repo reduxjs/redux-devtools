@@ -4,7 +4,7 @@ import { Action } from 'redux';
 import { StylingFunction } from 'react-base16-styling';
 import { Tab } from './ActionPreview';
 
-interface Props<S, A extends Action<unknown>> {
+interface Props<S, A extends Action<string>> {
   tabs: Tab<S, A>[];
   styling: StylingFunction;
   inspectedPath: (string | number)[];
@@ -14,7 +14,7 @@ interface Props<S, A extends Action<unknown>> {
 }
 
 const ActionPreviewHeader: FunctionComponent<
-  Props<unknown, Action<unknown>>
+  Props<unknown, Action<string>>
 > = ({ styling, inspectedPath, onInspectPath, tabName, onSelectTab, tabs }) => (
   <div key="previewHeader" {...styling('previewHeader')}>
     <div {...styling('tabSelector')}>
