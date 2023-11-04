@@ -10,7 +10,7 @@ import { ErrorLocation } from './react-error-overlay/utils/parseCompileError';
 
 const rootStyle = { padding: '5px 10px' };
 
-interface Props<S, A extends Action<unknown>> extends TabComponentProps<S, A> {
+interface Props<S, A extends Action<string>> extends TabComponentProps<S, A> {
   openFile: (
     fileName: string,
     lineNumber: number,
@@ -24,7 +24,7 @@ interface State {
   showDocsLink?: boolean;
 }
 
-export class TraceTab<S, A extends Action<unknown>> extends Component<
+export class TraceTab<S, A extends Action<string>> extends Component<
   Props<S, A>,
   State
 > {

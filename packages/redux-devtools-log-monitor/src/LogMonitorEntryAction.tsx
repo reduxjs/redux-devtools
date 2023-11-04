@@ -17,7 +17,7 @@ const styles = {
   },
 };
 
-interface Props<A extends Action<unknown>> {
+interface Props<A extends Action<string>> {
   theme: Base16Theme;
   collapsed: boolean;
   action: A;
@@ -27,7 +27,7 @@ interface Props<A extends Action<unknown>> {
 }
 
 export default class LogMonitorAction<
-  A extends Action<unknown>,
+  A extends Action<string>,
 > extends Component<Props<A>> {
   renderPayload(payload: Record<string, unknown>) {
     return (
@@ -71,7 +71,7 @@ export default class LogMonitorAction<
         }}
       >
         <div style={styles.actionBar} onClick={this.props.onClick}>
-          {type !== null && (type as string).toString()}
+          {type !== null && type.toString()}
         </div>
         {!this.props.collapsed ? this.renderPayload(payload) : ''}
       </div>

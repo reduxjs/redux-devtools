@@ -23,7 +23,7 @@ export interface RtkQueryComponentState {
   readonly styleUtils: StyleUtils;
 }
 
-class RtkQueryMonitor<S, A extends Action<unknown>> extends Component<
+class RtkQueryMonitor<S, A extends Action<string>> extends Component<
   RtkQueryMonitorProps<S, A>,
   RtkQueryComponentState
 > {
@@ -79,10 +79,10 @@ class RtkQueryMonitor<S, A extends Action<unknown>> extends Component<
 }
 
 export default RtkQueryMonitor as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     state: RtkQueryMonitorState | undefined,
     action: Action,
   ): RtkQueryMonitorState;

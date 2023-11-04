@@ -26,7 +26,7 @@ import {
 
 type InspectorSelector<S, Output> = Selector<SelectorsSource<S>, Output>;
 
-export function computeSelectorSource<S, A extends Action<unknown>>(
+export function computeSelectorSource<S, A extends Action<string>>(
   props: RtkQueryInspectorProps<S, A>,
   previous: SelectorsSource<S> | null = null,
 ): SelectorsSource<S> {

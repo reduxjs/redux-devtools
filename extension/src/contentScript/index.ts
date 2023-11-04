@@ -92,18 +92,18 @@ export type ContentScriptToPageScriptMessage =
   | ExportAction
   | UpdateAction;
 
-interface ImportStatePayload<S, A extends Action<unknown>> {
+interface ImportStatePayload<S, A extends Action<string>> {
   readonly type: 'IMPORT_STATE';
   readonly nextLiftedState: LiftedState<S, A, unknown> | readonly A[];
   readonly preloadedState?: S;
 }
 
-interface ImportStateDispatchAction<S, A extends Action<unknown>> {
+interface ImportStateDispatchAction<S, A extends Action<string>> {
   readonly type: 'DISPATCH';
   readonly payload: ImportStatePayload<S, A>;
 }
 
-export type ListenerMessage<S, A extends Action<unknown>> =
+export type ListenerMessage<S, A extends Action<string>> =
   | StartAction
   | StopAction
   | DispatchAction
@@ -204,7 +204,7 @@ export type SplitMessage =
   | SplitMessageChunk
   | SplitMessageEnd;
 
-function tryCatch<S, A extends Action<unknown>>(
+function tryCatch<S, A extends Action<string>>(
   fn: (
     args:
       | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
@@ -264,24 +264,24 @@ interface InitInstanceContentScriptToBackgroundMessage {
   readonly instanceId: number;
 }
 
-interface RelayMessage<S, A extends Action<unknown>> {
+interface RelayMessage<S, A extends Action<string>> {
   readonly name: 'RELAY';
   readonly message:
     | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
     | SplitMessage;
 }
 
-export type ContentScriptToBackgroundMessage<S, A extends Action<unknown>> =
+export type ContentScriptToBackgroundMessage<S, A extends Action<string>> =
   | InitInstanceContentScriptToBackgroundMessage
   | RelayMessage<S, A>;
 
-function postToBackground<S, A extends Action<unknown>>(
+function postToBackground<S, A extends Action<string>>(
   message: ContentScriptToBackgroundMessage<S, A>,
 ) {
   bg!.postMessage(message);
 }
 
-function send<S, A extends Action<unknown>>(
+function send<S, A extends Action<string>>(
   message:
     | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
     | SplitMessage,
@@ -296,7 +296,7 @@ function send<S, A extends Action<unknown>>(
 }
 
 // Resend messages from the page to the background script
-function handleMessages<S, A extends Action<unknown>>(
+function handleMessages<S, A extends Action<string>>(
   event: MessageEvent<PageScriptToContentScriptMessage<S, A>>,
 ) {
   if (!isAllowed()) return;

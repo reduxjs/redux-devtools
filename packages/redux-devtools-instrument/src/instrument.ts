@@ -42,7 +42,7 @@ const isChromeOrNode =
     process.release &&
     process.release.name === 'node');
 
-export interface PerformAction<A extends Action<unknown>> {
+export interface PerformAction<A extends Action<string>> {
   type: typeof ActionTypes.PERFORM_ACTION;
   action: A;
   timestamp: number;
@@ -96,7 +96,7 @@ interface JumpToActionAction {
   actionId: number;
 }
 
-interface ImportStateAction<S, A extends Action<unknown>, MonitorState> {
+interface ImportStateAction<S, A extends Action<string>, MonitorState> {
   type: typeof ActionTypes.IMPORT_STATE;
   nextLiftedState: LiftedState<S, A, MonitorState> | readonly A[];
   preloadedState?: S;
@@ -113,7 +113,7 @@ interface PauseRecordingAction {
   status: boolean;
 }
 
-export type LiftedAction<S, A extends Action<unknown>, MonitorState> =
+export type LiftedAction<S, A extends Action<string>, MonitorState> =
   | PerformAction<A>
   | ResetAction
   | RollbackAction
@@ -132,7 +132,7 @@ export type LiftedAction<S, A extends Action<unknown>, MonitorState> =
  * Action creators to change the History state.
  */
 export const ActionCreators = {
-  performAction<A extends Action<unknown>>(
+  performAction<A extends Action<string>>(
     action: A,
     trace?: ((action: A) => string | undefined) | boolean,
     traceLimit?: number,
@@ -243,7 +243,7 @@ export const ActionCreators = {
     return { type: ActionTypes.JUMP_TO_ACTION, actionId };
   },
 
-  importState<S, A extends Action<unknown>, MonitorState = null>(
+  importState<S, A extends Action<string>, MonitorState = null>(
     nextLiftedState: LiftedState<S, A, MonitorState> | readonly A[],
     noRecompute?: boolean,
   ): ImportStateAction<S, A, MonitorState> {
@@ -264,7 +264,7 @@ export const INIT_ACTION = { type: '@@INIT' };
 /**
  * Computes the next entry with exceptions catching.
  */
-function computeWithTryCatch<S, A extends Action<unknown>>(
+function computeWithTryCatch<S, A extends Action<string>>(
   reducer: Reducer<S, A>,
   action: A,
   state: S,
@@ -295,7 +295,7 @@ function computeWithTryCatch<S, A extends Action<unknown>>(
 /**
  * Computes the next entry in the log by applying an action.
  */
-function computeNextEntry<S, A extends Action<unknown>>(
+function computeNextEntry<S, A extends Action<string>>(
   reducer: Reducer<S, A>,
   action: A,
   state: S,
@@ -310,7 +310,7 @@ function computeNextEntry<S, A extends Action<unknown>>(
 /**
  * Runs the reducer on invalidated actions to get a fresh computation log.
  */
-function recomputeStates<S, A extends Action<unknown>>(
+function recomputeStates<S, A extends Action<string>>(
   computedStates: { state: S; error?: string }[],
   minInvalidatedStateIndex: number,
   reducer: Reducer<S, A>,
@@ -367,7 +367,7 @@ function recomputeStates<S, A extends Action<unknown>>(
 /**
  * Lifts an app's action into an action on the lifted store.
  */
-export function liftAction<A extends Action<unknown>>(
+export function liftAction<A extends Action<string>>(
   action: A,
   trace?: ((action: A) => string | undefined) | boolean,
   traceLimit?: number,
@@ -382,13 +382,13 @@ export function liftAction<A extends Action<unknown>>(
   );
 }
 
-function isArray<S, A extends Action<unknown>, MonitorState>(
+function isArray<S, A extends Action<string>, MonitorState>(
   nextLiftedState: LiftedState<S, A, MonitorState> | readonly A[],
 ): nextLiftedState is readonly A[] {
   return Array.isArray(nextLiftedState);
 }
 
-export interface LiftedState<S, A extends Action<unknown>, MonitorState> {
+export interface LiftedState<S, A extends Action<string>, MonitorState> {
   monitorState: MonitorState;
   nextActionId: number;
   actionsById: { [actionId: number]: PerformAction<A> };
@@ -406,9 +406,9 @@ export interface LiftedState<S, A extends Action<unknown>, MonitorState> {
  */
 export function liftReducerWith<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
 >(
   reducer: Reducer<S, A>,
   initialCommittedState: PreloadedState<S> | undefined,
@@ -834,7 +834,7 @@ export function liftReducerWith<
  */
 export function unliftState<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorState,
   NextStateExt,
 >(
@@ -845,21 +845,21 @@ export function unliftState<
   return state as S & NextStateExt;
 }
 
-export type LiftedReducer<S, A extends Action<unknown>, MonitorState> = Reducer<
+export type LiftedReducer<S, A extends Action<string>, MonitorState> = Reducer<
   LiftedState<S, A, MonitorState>,
   LiftedAction<S, A, MonitorState>
 >;
 
-export type LiftedStore<S, A extends Action<unknown>, MonitorState> = Store<
+export type LiftedStore<S, A extends Action<string>, MonitorState> = Store<
   LiftedState<S, A, MonitorState>,
   LiftedAction<S, A, MonitorState>
 >;
 
-export type InstrumentExt<S, A extends Action<unknown>, MonitorState> = {
+export type InstrumentExt<S, A extends Action<string>, MonitorState> = {
   liftedStore: LiftedStore<S, A, MonitorState>;
 };
 
-export type EnhancedStore<S, A extends Action<unknown>, MonitorState> = Store<
+export type EnhancedStore<S, A extends Action<string>, MonitorState> = Store<
   S,
   A
 > &
@@ -870,9 +870,9 @@ export type EnhancedStore<S, A extends Action<unknown>, MonitorState> = Store<
  */
 export function unliftStore<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
   NextExt,
   NextStateExt,
 >(
@@ -965,9 +965,9 @@ export function unliftStore<
 
 export interface Options<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
 > {
   maxAge?:
     | number
@@ -990,9 +990,9 @@ export interface Options<
  */
 export function instrument<
   OptionsS,
-  OptionsA extends Action<unknown>,
+  OptionsA extends Action<string>,
   MonitorState = null,
-  MonitorAction extends Action<unknown> = never,
+  MonitorAction extends Action<string> = never,
 >(
   monitorReducer: Reducer<MonitorState, MonitorAction> = (() =>
     null) as unknown as Reducer<MonitorState, MonitorAction>,
@@ -1008,7 +1008,7 @@ export function instrument<
   return <NextExt, NextStateExt>(
       createStore: StoreEnhancerStoreCreator<NextExt, NextStateExt>,
     ) =>
-    <S, A extends Action<unknown>>(
+    <S, A extends Action<string>>(
       reducer: Reducer<S, A>,
       initialState?: PreloadedState<S>,
     ) => {

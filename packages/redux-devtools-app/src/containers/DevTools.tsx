@@ -14,7 +14,7 @@ interface Props {
   liftedState: State;
   monitorState: MonitorStateMonitorState | undefined;
   dispatch: (
-    action: LiftedAction<unknown, Action<unknown>, unknown> | InitMonitorAction,
+    action: LiftedAction<unknown, Action<string>, unknown> | InitMonitorAction,
   ) => void;
   features: Features | undefined;
   theme: ThemeFromProvider;
@@ -24,12 +24,12 @@ interface Props {
 class DevTools extends Component<Props> {
   monitorProps?: object;
   Monitor?: React.ComponentType<
-    LiftedState<unknown, Action<unknown>, unknown>
+    LiftedState<unknown, Action<string>, unknown>
   > & {
     update(
       monitorProps: unknown,
       state: unknown | undefined,
-      action: Action<unknown>,
+      action: Action<string>,
     ): unknown;
   };
   preventRender?: boolean;
@@ -58,7 +58,7 @@ class DevTools extends Component<Props> {
         newMonitorState = update(
           this.monitorProps,
           undefined,
-          {} as Action<unknown>,
+          {} as Action<string>,
         );
         if (newMonitorState !== monitorState) {
           this.preventRender = true;
@@ -88,7 +88,7 @@ class DevTools extends Component<Props> {
   }
 
   dispatch = (
-    action: LiftedAction<unknown, Action<unknown>, unknown> | InitMonitorAction,
+    action: LiftedAction<unknown, Action<string>, unknown> | InitMonitorAction,
   ) => {
     this.props.dispatch(action);
   };

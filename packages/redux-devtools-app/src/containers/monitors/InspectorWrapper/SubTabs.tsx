@@ -19,7 +19,7 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = StateProps &
   DispatchProps &
-  TabComponentProps<unknown, Action<unknown>>;
+  TabComponentProps<unknown, Action<string>>;
 
 class SubTabs extends Component<Props> {
   tabs?: (Tab<Props> | Tab<{ data: unknown }> | Tab<{ data?: Delta }>)[];

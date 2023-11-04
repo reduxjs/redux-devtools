@@ -526,7 +526,7 @@ export const createStylingFromTheme: CurriedFunction1<
   base16Themes: { ...reduxThemes },
 });
 
-export function createThemeState<S, A extends Action<unknown>>(
+export function createThemeState<S, A extends Action<string>>(
   props: RtkQueryMonitorProps<S, A>,
 ): StyleUtils {
   const base16Theme =

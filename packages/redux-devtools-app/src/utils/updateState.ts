@@ -7,8 +7,8 @@ export function recompute(
   previousLiftedState: State,
   storeState: State,
   action:
-    | PerformAction<Action<unknown>>
-    | { action: Action<unknown>; timestamp?: number; stack?: string },
+    | PerformAction<Action<string>>
+    | { action: Action<string>; timestamp?: number; stack?: string },
   nextActionId = 1,
   maxAge?: number,
   isExcess?: boolean,
@@ -24,10 +24,8 @@ export function recompute(
   }
   liftedState.stagedActionIds = [...liftedState.stagedActionIds, actionId];
   liftedState.actionsById = { ...liftedState.actionsById };
-  if ((action as PerformAction<Action<unknown>>).type === 'PERFORM_ACTION') {
-    liftedState.actionsById[actionId] = action as PerformAction<
-      Action<unknown>
-    >;
+  if ((action as PerformAction<Action<string>>).type === 'PERFORM_ACTION') {
+    liftedState.actionsById[actionId] = action as PerformAction<Action<string>>;
   } else {
     liftedState.actionsById[actionId] = {
       action: action.action || action,

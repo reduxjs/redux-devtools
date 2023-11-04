@@ -17,7 +17,7 @@ function enhancer(options?: EnhancerOptions): StoreEnhancer {
   if (config.latency === undefined) config.latency = 500;
 
   return function (createStore) {
-    return function <S, A extends Action<unknown>>(
+    return function <S, A extends Action<string>>(
       reducer: Reducer<S, A>,
       preloadedState: PreloadedState<S> | undefined,
     ) {

@@ -30,7 +30,7 @@ interface ParsedSerializedLiftedState {
   readonly preloadedState?: string;
 }
 
-export default function importState<S, A extends Action<unknown>>(
+export default function importState<S, A extends Action<string>>(
   state: string | undefined,
   { serialize }: Config,
 ) {

@@ -12,7 +12,7 @@ const BUTTON_JUMP = 'Jump';
 
 type Button = typeof BUTTON_SKIP | typeof BUTTON_JUMP;
 
-interface Props<A extends Action<unknown>> {
+interface Props<A extends Action<string>> {
   styling: StylingFunction;
   actionId: number;
   isInitAction: boolean;
@@ -33,7 +33,7 @@ interface State {
 }
 
 export default class ActionListRow<
-  A extends Action<unknown>,
+  A extends Action<string>,
 > extends PureComponent<Props<A>, State> {
   state: State = { hover: false };
 
@@ -73,7 +73,7 @@ export default class ActionListRow<
     let actionType = action.type;
     if (typeof actionType === 'undefined') actionType = '<UNDEFINED>';
     else if (actionType === null) actionType = '<NULL>';
-    else actionType = (actionType as string).toString() || '<EMPTY>';
+    else actionType = actionType.toString() || '<EMPTY>';
 
     return (
       <div
@@ -106,7 +106,7 @@ export default class ActionListRow<
             isSkipped && 'actionListItemNameSkipped',
           ])}
         >
-          {actionType as string}
+          {actionType}
         </div>
         {hideActionButtons ? (
           <RightSlider styling={styling} shown>

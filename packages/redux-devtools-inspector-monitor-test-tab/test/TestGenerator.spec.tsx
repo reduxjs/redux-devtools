@@ -8,7 +8,7 @@ import strTemplate from '../src/redux/mocha/template';
 import fnVanillaTemplate from '../src/vanilla/mocha';
 import strVanillaTemplate from '../src/vanilla/mocha/template';
 
-const actions: { [actionId: number]: PerformAction<Action<unknown>> } = {
+const actions: { [actionId: number]: PerformAction<Action<string>> } = {
   0: {
     type: 'PERFORM_ACTION',
     action: { type: '@@INIT' },

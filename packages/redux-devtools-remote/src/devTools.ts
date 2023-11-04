@@ -74,7 +74,7 @@ interface Filters {
   readonly allowlist?: string | readonly string[];
 }
 
-interface Options<S, A extends Action<unknown>> {
+interface Options<S, A extends Action<string>> {
   readonly hostname?: string;
   readonly realtime?: boolean;
   readonly maxAge?: number;
@@ -106,11 +106,11 @@ interface Options<S, A extends Action<unknown>> {
   readonly sendTo?: string;
   readonly id?: string;
   readonly actionCreators?: {
-    [key: string]: ActionCreator<Action<unknown>>;
+    [key: string]: ActionCreator<Action<string>>;
   };
   readonly stateSanitizer?: ((state: S, index?: number) => S) | undefined;
   readonly actionSanitizer?:
-    | (<A extends Action<unknown>>(action: A, id?: number) => A)
+    | (<A extends Action<string>>(action: A, id?: number) => A)
     | undefined;
 }
 
@@ -158,13 +158,13 @@ interface ActionMessage {
   readonly action: string | { args: string[]; rest: string; selected: number };
 }
 
-interface DispatchMessage<S, A extends Action<unknown>> {
+interface DispatchMessage<S, A extends Action<string>> {
   readonly type: 'DISPATCH';
   // eslint-disable-next-line @typescript-eslint/ban-types
   readonly action: LiftedAction<S, A, {}>;
 }
 
-type Message<S, A extends Action<unknown>> =
+type Message<S, A extends Action<string>> =
   | ImportMessage
   | SyncMessage
   | UpdateMessage
@@ -174,7 +174,7 @@ type Message<S, A extends Action<unknown>> =
   | ActionMessage
   | DispatchMessage<S, A>;
 
-class DevToolsEnhancer<S, A extends Action<unknown>> {
+class DevToolsEnhancer<S, A extends Action<string>> {
   // eslint-disable-next-line @typescript-eslint/ban-types
   store!: EnhancedStore<S, A, {}>;
   filters: LocalFilter | undefined;
@@ -260,7 +260,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
                   index?: number,
                 ) => unknown,
                 this.actionSanitizer as
-                  | ((action: Action<unknown>, id: number) => Action)
+                  | ((action: Action<string>, id: number) => Action)
                   | undefined,
                 nextActionId!,
               ),
@@ -492,25 +492,19 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
       if (
         this.startOn &&
         !this.started &&
-        this.startOn.indexOf(
-          (action as PerformAction<A>).action.type as string,
-        ) !== -1
+        this.startOn.indexOf((action as PerformAction<A>).action.type) !== -1
       )
         async(this.start);
       else if (
         this.stopOn &&
         this.started &&
-        this.stopOn.indexOf(
-          (action as PerformAction<A>).action.type as string,
-        ) !== -1
+        this.stopOn.indexOf((action as PerformAction<A>).action.type) !== -1
       )
         async(this.stop);
       else if (
         this.sendOn &&
         !this.started &&
-        this.sendOn.indexOf(
-          (action as PerformAction<A>).action.type as string,
-        ) !== -1
+        this.sendOn.indexOf((action as PerformAction<A>).action.type) !== -1
       )
         async(this.send);
     }
@@ -584,24 +578,24 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
   };
 }
 
-export default <S, A extends Action<unknown>>(options?: Options<S, A>) =>
+export default <S, A extends Action<string>>(options?: Options<S, A>) =>
   new DevToolsEnhancer<S, A>().enhance(options);
 
 const compose =
-  (options: Options<unknown, Action<unknown>>) =>
+  (options: Options<unknown, Action<string>>) =>
   (...funcs: StoreEnhancer[]) =>
   (...args: unknown[]) => {
     const devToolsEnhancer = new DevToolsEnhancer();
 
     function preEnhancer(createStore: StoreEnhancerStoreCreator) {
-      return <S, A extends Action<unknown>>(
+      return <S, A extends Action<string>>(
         reducer: Reducer<S, A>,
         preloadedState: PreloadedState<S>,
       ) => {
         devToolsEnhancer.store = createStore(reducer, preloadedState) as any;
         return {
           ...devToolsEnhancer.store,
-          dispatch: (action: Action<unknown>) =>
+          dispatch: (action: Action<string>) =>
             devToolsEnhancer.locked
               ? action
               : devToolsEnhancer.store.dispatch(action),
@@ -618,7 +612,7 @@ const compose =
   };
 
 export function composeWithDevTools(
-  ...funcs: [Options<unknown, Action<unknown>>] | StoreEnhancer[]
+  ...funcs: [Options<unknown, Action<string>>] | StoreEnhancer[]
 ) {
   if (funcs.length === 0) {
     return new DevToolsEnhancer().enhance();

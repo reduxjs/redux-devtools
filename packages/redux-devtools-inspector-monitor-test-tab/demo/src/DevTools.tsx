@@ -30,7 +30,7 @@ export const getDevTools = (location: { search: string }) =>
               component: TestTab,
             },
             ...defaultTabs,
-          ] as Tab<unknown, Action<unknown>>[]
+          ] as Tab<unknown, Action<string>>[]
         }
       />
     </DockMonitor>,

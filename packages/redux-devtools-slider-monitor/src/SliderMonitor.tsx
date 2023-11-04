@@ -22,7 +22,7 @@ import SliderButton from './SliderButton';
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, jumpToAction } = ActionCreators;
 
-interface ExternalProps<S, A extends Action<unknown>> {
+interface ExternalProps<S, A extends Action<string>> {
   // eslint-disable-next-line @typescript-eslint/ban-types
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
@@ -39,7 +39,7 @@ interface DefaultProps {
   keyboardEnabled: boolean;
 }
 
-interface SliderMonitorProps<S, A extends Action<unknown>> // eslint-disable-next-line @typescript-eslint/ban-types
+interface SliderMonitorProps<S, A extends Action<string>> // eslint-disable-next-line @typescript-eslint/ban-types
   extends LiftedState<S, A, {}> {
   // eslint-disable-next-line @typescript-eslint/ban-types
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
@@ -55,7 +55,7 @@ interface State {
   replaySpeed: string;
 }
 
-class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
+class SliderMonitor<S, A extends Action<string>> extends (PureComponent ||
   Component)<SliderMonitorProps<S, A>, State> {
   static update = reducer;
 
@@ -333,7 +333,7 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
     let actionType = actionsById[actionId].action.type;
     if (actionType === undefined) actionType = '<UNDEFINED>';
     else if (actionType === null) actionType = '<NULL>';
-    else actionType = (actionType as string).toString() || '<EMPTY>';
+    else actionType = actionType.toString() || '<EMPTY>';
 
     const onPlayClick =
       replaySpeed === 'Live' ? this.startRealtimeReplay : this.startReplay;
@@ -352,7 +352,7 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
       <Toolbar noBorder compact fullHeight theme={theme}>
         {playPause}
         <Slider
-          label={actionType as string}
+          label={actionType}
           sublabel={`(${actionId})`}
           min={0}
           max={max}
@@ -391,13 +391,13 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
 }
 
 export default SliderMonitor as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     // eslint-disable-next-line @typescript-eslint/ban-types
     state: {} | undefined,
-    action: Action<unknown>,
+    action: Action<string>,
     // eslint-disable-next-line @typescript-eslint/ban-types
   ): {};
   defaultProps: DefaultProps;

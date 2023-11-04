@@ -3,11 +3,7 @@ import identity from 'lodash/identity';
 import { Action, PreloadedState, Reducer, StoreEnhancer } from 'redux';
 import { LiftedState } from '@redux-devtools/instrument';
 
-export default function persistState<
-  S,
-  A extends Action<unknown>,
-  MonitorState,
->(
+export default function persistState<S, A extends Action<string>, MonitorState>(
   sessionId?: string | null,
   deserializeState: (state: S) => S = identity,
   deserializeAction: (action: A) => A = identity,
@@ -36,7 +32,7 @@ export default function persistState<
   }
 
   return (next) =>
-    <S2, A2 extends Action<unknown>>(
+    <S2, A2 extends Action<string>>(
       reducer: Reducer<S2, A2>,
       initialState?: PreloadedState<S2>,
     ) => {

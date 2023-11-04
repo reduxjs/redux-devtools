@@ -31,7 +31,7 @@ export interface RtkQueryMonitorState {
   readonly selectedPreviewTab: QueryPreviewTabs;
 }
 
-export interface RtkQueryMonitorProps<S, A extends Action<unknown>>
+export interface RtkQueryMonitorProps<S, A extends Action<string>>
   extends LiftedState<S, A, RtkQueryMonitorState> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
   theme: keyof typeof themes | Base16Theme;
@@ -54,7 +54,7 @@ export type RtkQueryApiConfig = RtkQueryApiState['config'];
 
 export type RtkQueryProvided = RtkQueryApiState['provided'];
 
-export interface ExternalProps<S, A extends Action<unknown>> {
+export interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
   theme: keyof typeof themes | Base16Theme;
   hideMainButtons?: boolean;
