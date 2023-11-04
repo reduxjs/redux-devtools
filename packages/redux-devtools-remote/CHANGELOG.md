@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.8.2
+
+### Patch Changes
+
+- 42531c50: Bump versions
+- Updated dependencies [42531c50]
+  - @redux-devtools/instrument@2.1.1
+  - @redux-devtools/utils@2.0.2
+
 ## 0.8.1
 
 ### Patch Changes
