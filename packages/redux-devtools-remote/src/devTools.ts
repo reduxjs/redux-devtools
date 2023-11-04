@@ -492,25 +492,19 @@ class DevToolsEnhancer<S, A extends Action<string>> {
       if (
         this.startOn &&
         !this.started &&
-        this.startOn.indexOf(
-          (action as PerformAction<A>).action.type as string,
-        ) !== -1
+        this.startOn.indexOf((action as PerformAction<A>).action.type) !== -1
       )
         async(this.start);
       else if (
         this.stopOn &&
         this.started &&
-        this.stopOn.indexOf(
-          (action as PerformAction<A>).action.type as string,
-        ) !== -1
+        this.stopOn.indexOf((action as PerformAction<A>).action.type) !== -1
       )
         async(this.stop);
       else if (
         this.sendOn &&
         !this.started &&
-        this.sendOn.indexOf(
-          (action as PerformAction<A>).action.type as string,
-        ) !== -1
+        this.sendOn.indexOf((action as PerformAction<A>).action.type) !== -1
       )
         async(this.send);
     }
