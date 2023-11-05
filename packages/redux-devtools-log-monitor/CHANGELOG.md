@@ -1,5 +1,13 @@
 # Change Log
 
+## 4.0.3
+
+### Patch Changes
+
+- 42531c50: Bump versions
+- Updated dependencies [42531c50]
+  - @redux-devtools/core@3.13.3
+
 ## 4.0.2
 
 ### Patch Changes
