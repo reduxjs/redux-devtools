@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.2
+
+### Patch Changes
+
+- 262ea85c: Remove unnecessary exported functions from instrument
+
 ## 2.1.1
 
 ### Patch Changes
