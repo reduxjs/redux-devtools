@@ -367,7 +367,7 @@ function recomputeStates<S, A extends Action<string>>(
 /**
  * Lifts an app's action into an action on the lifted store.
  */
-export function liftAction<A extends Action<string>>(
+function liftAction<A extends Action<string>>(
   action: A,
   trace?: ((action: A) => string | undefined) | boolean,
   traceLimit?: number,
@@ -404,7 +404,7 @@ export interface LiftedState<S, A extends Action<string>, MonitorState> {
 /**
  * Creates a history state reducer from an app's reducer.
  */
-export function liftReducerWith<
+function liftReducerWith<
   S,
   A extends Action<string>,
   MonitorState,
@@ -832,12 +832,7 @@ export function liftReducerWith<
 /**
  * Provides an app's view into the state of the lifted store.
  */
-export function unliftState<
-  S,
-  A extends Action<string>,
-  MonitorState,
-  NextStateExt,
->(
+function unliftState<S, A extends Action<string>, MonitorState, NextStateExt>(
   liftedState: LiftedState<S, A, MonitorState> & NextStateExt,
 ): S & NextStateExt {
   const { computedStates, currentStateIndex } = liftedState;
@@ -868,7 +863,7 @@ export type EnhancedStore<S, A extends Action<string>, MonitorState> = Store<
 /**
  * Provides an app's view into the lifted store.
  */
-export function unliftStore<
+function unliftStore<
   S,
   A extends Action<string>,
   MonitorState,
