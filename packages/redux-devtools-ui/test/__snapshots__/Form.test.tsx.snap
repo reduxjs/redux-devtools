@@ -186,6 +186,7 @@ exports[`Form renders correctly 1`] = `
             aria-live="polite"
             aria-relevant="additions text"
             class="css-1f43avz-a11yText-A11yText"
+            role="log"
           />
           <div
             class=" css-10g0wlc-control"
@@ -202,6 +203,7 @@ exports[`Form renders correctly 1`] = `
                 data-value=""
               >
                 <input
+                  aria-activedescendant=""
                   aria-autocomplete="list"
                   aria-describedby="react-select-2-placeholder"
                   aria-expanded="false"
@@ -536,6 +538,7 @@ exports[`Form renders with no button 1`] = `
             aria-live="polite"
             aria-relevant="additions text"
             class="css-1f43avz-a11yText-A11yText"
+            role="log"
           />
           <div
             class=" css-10g0wlc-control"
@@ -552,6 +555,7 @@ exports[`Form renders with no button 1`] = `
                 data-value=""
               >
                 <input
+                  aria-activedescendant=""
                   aria-autocomplete="list"
                   aria-describedby="react-select-4-placeholder"
                   aria-expanded="false"
@@ -877,6 +881,7 @@ exports[`Form renders with primary button 1`] = `
             aria-live="polite"
             aria-relevant="additions text"
             class="css-1f43avz-a11yText-A11yText"
+            role="log"
           />
           <div
             class=" css-10g0wlc-control"
@@ -893,6 +898,7 @@ exports[`Form renders with primary button 1`] = `
                 data-value=""
               >
                 <input
+                  aria-activedescendant=""
                   aria-autocomplete="list"
                   aria-describedby="react-select-3-placeholder"
                   aria-expanded="false"
