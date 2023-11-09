@@ -3246,8 +3246,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       nanoid:
-        specifier: ^4.0.2
-        version: 4.0.2
+        specifier: ^5.0.3
+        version: 5.0.3
       redux:
         specifier: ^4.2.1
         version: 4.2.1
@@ -17790,9 +17790,9 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  /nanoid@4.0.2:
-    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
-    engines: {node: ^14 || ^16 || >=18}
+  /nanoid@5.0.3:
+    resolution: {integrity: sha512-I7X2b22cxA4LIHXPSqbBCEQSL+1wv8TuoefejsX4HFWyC6jc5JG7CEaxOltiKjc1M+YCS2YkrZZcj4+dytw9GA==}
+    engines: {node: ^18 || >=20}
     hasBin: true
     dev: false
 
