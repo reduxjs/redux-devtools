@@ -127,8 +127,8 @@ export default function ActionList<A extends Action<string>>({
           overIndex < activeIndex
             ? (over.id as number)
             : overIndex < actionIds.length - 1
-            ? actionIds[overIndex + 1]
-            : actionIds.length;
+              ? actionIds[overIndex + 1]
+              : actionIds.length;
 
         onReorderAction(active.id as number, beforeActionId);
       }
