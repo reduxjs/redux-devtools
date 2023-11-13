@@ -41,8 +41,8 @@ function str2array(
   return typeof str === 'string'
     ? [str]
     : str && str.length > 0
-    ? str
-    : undefined;
+      ? str
+      : undefined;
 }
 
 function getRandomId() {

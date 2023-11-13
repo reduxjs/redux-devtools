@@ -190,8 +190,8 @@ export const invertBase16Theme = (base16Theme: Base16Theme): Base16Theme =>
       (t[key as keyof Base16Theme] = /^base/.test(key)
         ? invertColor(base16Theme[key as keyof Base16Theme])
         : key === 'scheme'
-        ? base16Theme[key] + ':inverted'
-        : base16Theme[key as keyof Base16Theme]),
+          ? base16Theme[key] + ':inverted'
+          : base16Theme[key as keyof Base16Theme]),
       t
     ),
     {} as Base16Theme,

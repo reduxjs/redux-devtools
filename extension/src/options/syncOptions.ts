@@ -62,13 +62,13 @@ const migrateOldOptions = (oldOptions: OldOrNewOptions): Options => ({
       ? oldOptions.filter && oldOptions.whitelist.length > 0
         ? FilterState.ALLOWLIST_SPECIFIC
         : oldOptions.filter
-        ? FilterState.DENYLIST_SPECIFIC
-        : FilterState.DO_NOT_FILTER
+          ? FilterState.DENYLIST_SPECIFIC
+          : FilterState.DO_NOT_FILTER
       : oldOptions.filter === 'WHITELIST_SPECIFIC'
-      ? FilterState.ALLOWLIST_SPECIFIC
-      : oldOptions.filter === 'BLACKLIST_SPECIFIC'
-      ? FilterState.DENYLIST_SPECIFIC
-      : oldOptions.filter,
+        ? FilterState.ALLOWLIST_SPECIFIC
+        : oldOptions.filter === 'BLACKLIST_SPECIFIC'
+          ? FilterState.DENYLIST_SPECIFIC
+          : oldOptions.filter,
 });
 
 const get = (callback: (options: Options) => void) => {

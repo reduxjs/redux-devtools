@@ -401,8 +401,8 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           d.data._children && d.data._children.length > 0
             ? nodeStyleOptions.colors.collapsed
             : d.data.children && d.data.children.length > 0
-            ? nodeStyleOptions.colors.parent
-            : nodeStyleOptions.colors.default,
+              ? nodeStyleOptions.colors.parent
+              : nodeStyleOptions.colors.default,
         );
 
       // transition nodes to their new position
