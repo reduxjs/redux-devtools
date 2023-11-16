@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import JSONArrow from './JSONArrow';
-import type { CircularCache, CommonInternalProps } from './types';
+import type { CircularCache, CommonInternalProps, KeyPath } from './types';
 
 interface Props extends CommonInternalProps {
   data: unknown;
@@ -13,12 +13,25 @@ interface Props extends CommonInternalProps {
 }
 
 export default function ItemRange(props: Props) {
-  const { styling, from, to, renderChildNodes, nodeType } = props;
+  const {
+    styling,
+    from,
+    to,
+    renderChildNodes,
+    nodeType,
+    keyPath,
+    searchResultPath,
+    level,
+  } = props;
 
-  const [expanded, setExpanded] = useState<boolean>(false);
+  const [userExpanded, setUserExpanded] = useState<boolean>(false);
   const handleClick = useCallback(() => {
-    setExpanded(!expanded);
-  }, [expanded]);
+    setUserExpanded(!userExpanded);
+  }, [userExpanded]);
+
+  const expanded =
+    userExpanded ||
+    containsSearchResult(keyPath, from, to, searchResultPath, level);
 
   return expanded ? (
     <div {...styling('itemRange', expanded)}>
@@ -37,3 +50,15 @@ export default function ItemRange(props: Props) {
     </div>
   );
 }
+
+const containsSearchResult = (
+  ownKeyPath: KeyPath,
+  from: number,
+  to: number,
+  resultKeyPath: KeyPath,
+  level: number,
+): boolean => {
+  const searchLevel = level > 1 ? level - 1 : level;
+  const nextKey = Number(resultKeyPath[searchLevel]);
+  return !isNaN(nextKey) && nextKey >= from && nextKey <= to;
+};

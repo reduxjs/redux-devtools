@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import JSONArrow from './JSONArrow';
-import getCollectionEntries from './getCollectionEntries';
-import JSONNode from './JSONNode';
 import ItemRange from './ItemRange';
-import type { CircularCache, CommonInternalProps } from './types';
+import JSONArrow from './JSONArrow';
+import JSONNode from './JSONNode';
+import getCollectionEntries from './getCollectionEntries';
+import type { CircularCache, CommonInternalProps, KeyPath } from './types';
 
 /**
  * Renders nested values (eg. objects, arrays, lists, etc.)
@@ -110,17 +110,21 @@ export default function JSONNestedNode(props: Props) {
     nodeType,
     nodeTypeIndicator,
     shouldExpandNodeInitially,
+    searchResultPath,
     styling,
   } = props;
 
-  const [expanded, setExpanded] = useState<boolean>(
+  const [userExpanded, setUserExpanded] = useState<boolean>(
     // calculate individual node expansion if necessary
     isCircular ? false : shouldExpandNodeInitially(keyPath, data, level),
   );
 
   const handleClick = useCallback(() => {
-    if (expandable) setExpanded(!expanded);
-  }, [expandable, expanded]);
+    if (expandable) setUserExpanded(!userExpanded);
+  }, [expandable, userExpanded]);
+
+  const expanded =
+    userExpanded || containsSearchResult(keyPath, searchResultPath, level);
 
   const renderedChildren =
     expanded || (hideRoot && level === 0)
@@ -175,3 +179,15 @@ export default function JSONNestedNode(props: Props) {
     </li>
   );
 }
+
+const containsSearchResult = (
+  ownKeyPath: KeyPath,
+  resultKeyPath: KeyPath,
+  level: number,
+): boolean => {
+  const searchLevel = level > 0 ? level - 1 : level;
+  const currKey = [...ownKeyPath].reverse()[searchLevel];
+  return resultKeyPath && currKey !== undefined
+    ? resultKeyPath[searchLevel] === currKey.toString()
+    : false;
+};

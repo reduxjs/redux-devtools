@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { withTheme } from 'styled-components';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
+import { ThemeFromProvider } from '@redux-devtools/ui';
+import React, { Component } from 'react';
 import { Action } from 'redux';
-import getMonitor from '../utils/getMonitor';
+import { withTheme } from 'styled-components';
 import { InitMonitorAction } from '../actions';
 import { Features, State } from '../reducers/instances';
 import { MonitorStateMonitorState } from '../reducers/monitor';
-import { ThemeFromProvider } from '@redux-devtools/ui';
 import { StateTreeSettings } from '../reducers/stateTreeSettings';
+import getMonitor from '../utils/getMonitor';
 
 interface Props {
   monitor: string;
@@ -118,6 +118,7 @@ class DevTools extends Component<Props> {
           disableStateTreeCollection={
             this.props.stateTreeSettings.disableCollection
           }
+          enableSearchPanel={this.props.stateTreeSettings.enableSearchPanel}
         />
       </div>
     );

@@ -4,10 +4,10 @@
 // port by Daniele Zannotti http://www.github.com/dzannotti <dzannotti@me.com>
 
 import React, { useMemo } from 'react';
+import type { StylingValue, Theme } from 'react-base16-styling';
+import { invertTheme } from 'react-base16-styling';
 import JSONNode from './JSONNode';
 import createStylingFromTheme from './createStylingFromTheme';
-import { invertTheme } from 'react-base16-styling';
-import type { StylingValue, Theme } from 'react-base16-styling';
 import type {
   CommonExternalProps,
   GetItemString,
@@ -41,6 +41,8 @@ export function JSONTree({
   labelRenderer = defaultLabelRenderer,
   valueRenderer = identity,
   shouldExpandNodeInitially = expandRootNode,
+  isSearchInProgress = false,
+  searchResultPath = [],
   hideRoot = false,
   getItemString = defaultItemString,
   postprocessValue = identity,
@@ -64,6 +66,8 @@ export function JSONTree({
         labelRenderer={labelRenderer}
         valueRenderer={valueRenderer}
         shouldExpandNodeInitially={shouldExpandNodeInitially}
+        searchResultPath={searchResultPath}
+        isSearchInProgress={isSearchInProgress}
         hideRoot={hideRoot}
         getItemString={getItemString}
         postprocessValue={postprocessValue}
@@ -75,16 +79,16 @@ export function JSONTree({
 }
 
 export type {
+  CommonExternalProps,
+  GetItemString,
+  IsCustomNode,
   Key,
   KeyPath,
-  GetItemString,
   LabelRenderer,
-  ValueRenderer,
-  ShouldExpandNodeInitially,
   PostprocessValue,
-  IsCustomNode,
+  ShouldExpandNodeInitially,
   SortObjectKeys,
   Styling,
-  CommonExternalProps,
+  ValueRenderer,
 } from './types';
 export type { StylingValue };

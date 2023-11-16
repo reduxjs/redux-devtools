@@ -1,25 +1,20 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Base16Theme } from 'redux-devtools-themes';
-import {
-  getBase16Theme,
-  invertTheme,
-  StylingFunction,
-} from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
   LiftedState,
 } from '@redux-devtools/core';
-import { Action, Dispatch } from 'redux';
 import { Delta, DiffContext } from 'jsondiffpatch';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import {
-  createStylingFromTheme,
-  base16Themes,
-} from './utils/createStylingFromTheme';
+  StylingFunction,
+  getBase16Theme,
+  invertTheme,
+} from 'react-base16-styling';
+import { Action, Dispatch } from 'redux';
+import { Base16Theme } from 'redux-devtools-themes';
 import ActionList from './ActionList';
 import ActionPreview, { Tab } from './ActionPreview';
-import getInspectedState from './utils/getInspectedState';
 import createDiffPatcher from './createDiffPatcher';
 import {
   DevtoolsInspectorAction,
@@ -27,6 +22,11 @@ import {
   reducer,
   updateMonitorState,
 } from './redux';
+import {
+  base16Themes,
+  createStylingFromTheme,
+} from './utils/createStylingFromTheme';
+import getInspectedState from './utils/getInspectedState';
 
 const {
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -153,6 +153,7 @@ export interface ExternalProps<S, A extends Action<string>> {
   invertTheme: boolean;
   sortStateTreeAlphabetically: boolean;
   disableStateTreeCollection: boolean;
+  enableSearchPanel: boolean;
   dataTypeKey?: string | symbol;
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
 }
@@ -181,6 +182,7 @@ export interface DevtoolsInspectorProps<S, A extends Action<string>>
   hideActionButtons?: boolean;
   sortStateTreeAlphabetically: boolean;
   disableStateTreeCollection: boolean;
+  enableSearchPanel: boolean;
   invertTheme: boolean;
   dataTypeKey?: string | symbol;
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
@@ -226,6 +228,7 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
     invertTheme: PropTypes.bool,
     sortStateTreeAlphabetically: PropTypes.bool,
     disableStateTreeCollection: PropTypes.bool,
+    enableSearchPanel: PropTypes.bool,
     skippedActionIds: PropTypes.array,
     dataTypeKey: PropTypes.any,
     tabs: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
@@ -313,6 +316,7 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
       hideActionButtons,
       sortStateTreeAlphabetically,
       disableStateTreeCollection,
+      enableSearchPanel,
     } = this.props;
     const { selectedActionId, startActionId, searchValue, tabName } =
       monitorState;
@@ -374,6 +378,7 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
             dataTypeKey,
             sortStateTreeAlphabetically,
             disableStateTreeCollection,
+            enableSearchPanel,
           }}
           monitorState={this.props.monitorState}
           updateMonitorState={this.updateMonitorState}

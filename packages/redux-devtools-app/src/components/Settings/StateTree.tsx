@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect, ResolveThunks } from 'react-redux';
 import { Container, Form } from '@redux-devtools/ui';
+import React, { Component } from 'react';
+import { ResolveThunks, connect } from 'react-redux';
 import { changeStateTreeSettings } from '../../actions';
 import { StoreState } from '../../reducers';
 
@@ -14,6 +14,7 @@ export class StateTree extends Component<Props> {
     const formData = {
       sortAlphabetically: stateTree.sortAlphabetically,
       disableCollection: stateTree.disableCollection,
+      enableSearchPanel: stateTree.enableSearchPanel,
     };
 
     return (
@@ -28,6 +29,10 @@ export class StateTree extends Component<Props> {
               },
               disableCollection: {
                 title: 'Disable collapsing of nodes',
+                type: 'boolean',
+              },
+              enableSearchPanel: {
+                title: 'Show search panel in State tab',
                 type: 'boolean',
               },
             },
