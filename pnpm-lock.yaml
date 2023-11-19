@@ -156,6 +156,9 @@ importers:
       '@types/styled-components':
         specifier: ^5.1.29
         version: 5.1.29
+      babel-plugin-transform-import-meta:
+        specifier: ^2.2.1
+        version: 2.2.1(@babel/core@7.23.2)
       chromedriver:
         specifier: ^118.0.1
         version: 118.0.1
@@ -1157,6 +1160,9 @@ importers:
       babel-loader:
         specifier: ^9.1.3
         version: 9.1.3(@babel/core@7.23.2)(webpack@5.89.0)
+      babel-plugin-transform-import-meta:
+        specifier: ^2.2.1
+        version: 2.2.1(@babel/core@7.23.2)
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -7579,10 +7585,9 @@ packages:
       set-cookie-parser: 2.6.0
     dev: false
 
-  /@mswjs/cookies@1.0.0:
-    resolution: {integrity: sha512-TdXoBdI+h/EDTsVLCX/34s4+9U0sWi92qFnIGUEikpMCSKLhBeujovyYVSoORNbYgsBH5ga7/tfxyWcEZAxiYA==}
-    engines: {node: '>=14'}
-    requiresBuild: true
+  /@mswjs/cookies@1.1.0:
+    resolution: {integrity: sha512-0ZcCVQxifZmhwNBoQIrystCb+2sWBY2Zw8lpfJBPCHGCA/HWqehITeCRVIv4VMy8MPlaHo2w2pTHFV2pFfqKPw==}
+    engines: {node: '>=18'}
     dev: false
     optional: true
 
@@ -7603,9 +7608,8 @@ packages:
       strict-event-emitter: 0.5.1
       uuid: 8.3.2
     optionalDependencies:
-      msw: 1.3.2(typescript@5.2.2)
+      msw: 2.0.8(typescript@5.2.2)
     transitivePeerDependencies:
-      - encoding
       - supports-color
       - typescript
     dev: false
@@ -7626,10 +7630,9 @@ packages:
       - supports-color
     dev: false
 
-  /@mswjs/interceptors@0.25.7:
-    resolution: {integrity: sha512-U7iFYs/qU/5jfz1VDpoYz3xqX9nzhsBXw7q923dv6GiGTy+m2ZLhD33L80R/shHOW/YWjeH6k16GbIHGw+bAng==}
+  /@mswjs/interceptors@0.25.12:
+    resolution: {integrity: sha512-a+zyoR01cPQeukSmaDEkE6aMwSjjfcT5ILzsyxmctEeCePnc2DMOd0X8Fn9bytq1IsAfMxJf/lu2aTfdivDbRg==}
     engines: {node: '>=18'}
-    requiresBuild: true
     dependencies:
       '@open-draft/deferred-promise': 2.2.0
       '@open-draft/logger': 0.3.0
@@ -12002,6 +12005,16 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
 
+  /babel-plugin-transform-import-meta@2.2.1(@babel/core@7.23.2):
+    resolution: {integrity: sha512-AxNh27Pcg8Kt112RGa3Vod2QS2YXKKJ6+nSvRtv7qQTJAdx0MZa4UHZ4lnxHUWA2MNbLuZQv5FVab4P1CoLOWw==}
+    peerDependencies:
+      '@babel/core': ^7.10.0
+    dependencies:
+      '@babel/core': 7.23.2
+      '@babel/template': 7.22.15
+      tslib: 2.6.2
+    dev: true
+
   /babel-preset-current-node-syntax@1.0.1(@babel/core@7.23.2):
     resolution: {integrity: sha512-M7LQ0bxarkxQoN+vz5aJPsLBn77n8QgTFmo8WK0/44auK2xlCXrYcUxHFxgU7qW5Yzw/CjmLRK2uJzaCd7LvqQ==}
     peerDependencies:
@@ -14855,16 +14868,6 @@ packages:
       asynckit: 0.4.0
       combined-stream: 1.0.8
       mime-types: 2.1.35
-
-  /formdata-node@4.4.1:
-    resolution: {integrity: sha512-0iirZp3uVDjVGt9p49aTaqjk84TrglENEDuqfdlZQ1roC9CWlPk6Avf8EEnZNcAqPonwkG35x4n3ww/1THYAeQ==}
-    engines: {node: '>= 12.20'}
-    requiresBuild: true
-    dependencies:
-      node-domexception: 1.0.0
-      web-streams-polyfill: 4.0.0-beta.3
-    dev: false
-    optional: true
 
   /formidable@2.1.2:
     resolution: {integrity: sha512-CM3GuJ57US06mlpQ47YcunuUZ9jpm8Vx+P2CGt2j7HpgkKZO/DJYQ0Bobim8G6PFQmK5lOqOOdUXboU+h73A4g==}
@@ -17864,6 +17867,42 @@ packages:
       - supports-color
     dev: false
 
+  /msw@2.0.8(typescript@5.2.2):
+    resolution: {integrity: sha512-/5nQCotVka62lvubQ3tMfUS3TukyeBwvWyvAthcXvDlXGhkA/85HlEwZyFlJ3ZsPW45Ty+ao0S4oFvuM12R/kA==}
+    engines: {node: '>=18'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      typescript: '>= 4.7.x <= 5.2.x'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@bundled-es-modules/cookie': 2.0.0
+      '@bundled-es-modules/js-levenshtein': 2.0.1
+      '@bundled-es-modules/statuses': 1.0.1
+      '@mswjs/cookies': 1.1.0
+      '@mswjs/interceptors': 0.25.12
+      '@open-draft/until': 2.1.0
+      '@types/cookie': 0.4.1
+      '@types/js-levenshtein': 1.1.2
+      '@types/statuses': 2.0.3
+      chalk: 4.1.2
+      chokidar: 3.5.3
+      graphql: 16.8.1
+      headers-polyfill: 4.0.2
+      inquirer: 8.2.6
+      is-node-process: 1.2.0
+      js-levenshtein: 1.1.6
+      outvariant: 1.4.0
+      path-to-regexp: 6.2.1
+      strict-event-emitter: 0.5.1
+      type-fest: 2.19.0
+      typescript: 5.2.2
+      yargs: 17.7.2
+    dev: false
+    optional: true
+
   /multicast-dns@7.2.5:
     resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
     hasBin: true
@@ -17938,13 +17977,6 @@ packages:
     dependencies:
       minimatch: 3.1.2
     dev: true
-
-  /node-domexception@1.0.0:
-    resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
-    engines: {node: '>=10.5.0'}
-    requiresBuild: true
-    dev: false
-    optional: true
 
   /node-fetch-native@1.4.0:
     resolution: {integrity: sha512-F5kfEj95kX8tkDhUCYdV8dg3/8Olx/94zB8+ZNthFs6Bz31UpUi8Xh40TN3thLwXgrwXry1pEg9lJ++tLWTcqA==}
@@ -21811,13 +21843,6 @@ packages:
     optionalDependencies:
       '@zxing/text-encoding': 0.9.0
     dev: false
-
-  /web-streams-polyfill@4.0.0-beta.3:
-    resolution: {integrity: sha512-QW95TCTaHmsYfHDybGMwO5IJIM93I/6vTRk+daHTWFPhwh+C8Cg7j7XyKrwrj8Ib6vYXe0ocYNrmzY4xAAN6ug==}
-    engines: {node: '>= 14'}
-    requiresBuild: true
-    dev: false
-    optional: true
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
