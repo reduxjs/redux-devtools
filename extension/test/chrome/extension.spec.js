@@ -1,7 +1,6 @@
 import { resolve } from 'path';
 import webdriver from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
-import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const port = 9515;
@@ -14,7 +13,6 @@ describe('Chrome extension', function () {
   let driver;
 
   beforeAll(async () => {
-    chromedriver.start();
     await delay(2000);
     driver = new webdriver.Builder()
       .usingServer(`http://localhost:${port}`)
@@ -27,7 +25,6 @@ describe('Chrome extension', function () {
 
   afterAll(async () => {
     await driver.quit();
-    chromedriver.stop();
   });
 
   it("should open extension's window", async () => {
