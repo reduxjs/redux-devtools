@@ -12,7 +12,6 @@ describe('Chrome extension', function () {
   let driver;
 
   beforeAll(async () => {
-    await delay(2000);
     driver = new webdriver.Builder()
       .setChromeOptions(
         new chrome.Options().addArguments(`load-extension=${path}`),
