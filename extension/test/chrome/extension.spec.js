@@ -3,7 +3,6 @@ import webdriver from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
-const port = 9515;
 const path = resolve(__dirname, '..', '..', 'dist');
 const extensionId = 'lmhkpmbekcpmknklioeibfkpmmfibljd';
 const actionsPattern =
@@ -15,7 +14,6 @@ describe('Chrome extension', function () {
   beforeAll(async () => {
     await delay(2000);
     driver = new webdriver.Builder()
-      .usingServer(`http://localhost:${port}`)
       .setChromeOptions(
         new chrome.Options().addArguments(`load-extension=${path}`),
       )
