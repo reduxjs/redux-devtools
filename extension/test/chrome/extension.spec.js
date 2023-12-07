@@ -14,7 +14,9 @@ describe('Chrome extension', function () {
   beforeAll(async () => {
     driver = new webdriver.Builder()
       .setChromeOptions(
-        new chrome.Options().addArguments(`load-extension=${path}`),
+        new chrome.Options()
+          .setBrowserVersion('stable')
+          .addArguments(`load-extension=${path}`),
       )
       .forBrowser('chrome')
       .build();
@@ -57,7 +59,7 @@ describe('Chrome extension', function () {
   );
 
   it('should get actions list', async () => {
-    const url = 'http://zalmoxisus.github.io/examples/router/';
+    const url = 'https://zalmoxisus.github.io/examples/router/';
     await driver.executeScript(`window.open('${url}')`);
     await delay(2000);
 

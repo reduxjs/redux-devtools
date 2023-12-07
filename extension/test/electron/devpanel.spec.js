@@ -12,6 +12,7 @@ describe('DevTools panel for Electron', function () {
 
   beforeAll(async () => {
     driver = new webdriver.Builder()
+      .usingServer('http://localhost:9515')
       .setChromeOptions(
         new chrome.Options()
           .setChromeBinaryPath(electronPath)

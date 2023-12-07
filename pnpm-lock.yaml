@@ -162,6 +162,9 @@ importers:
       electron:
         specifier: ^27.0.4
         version: 27.0.4
+      electron-chromedriver:
+        specifier: ^27.1.3
+        version: 27.1.3
       esbuild:
         specifier: ^0.19.5
         version: 0.19.5
@@ -13634,6 +13637,18 @@ packages:
     hasBin: true
     dependencies:
       jake: 10.8.7
+    dev: true
+
+  /electron-chromedriver@27.1.3:
+    resolution: {integrity: sha512-dJ9dQTvT1zGLfOc5FhgRAptHuL6IbLMSkc+bccjI10WOCKedz9vHNE/p1x+4Nl3Yx/zNb2KReCEVsa/mIqI5YQ==}
+    engines: {node: '>=10.12.0'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@electron/get': 2.0.3
+      extract-zip: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /electron-to-chromium@1.4.582:
