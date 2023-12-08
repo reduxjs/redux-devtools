@@ -29,6 +29,6 @@ jobs:
       - name: Lint
         run: pnpm run lint:all
       - name: Test
-        run: |
-          pnpm --filter remotedev-redux-devtools-extension exec chromedriver &
-          xvfb-run pnpm run test:all
+        uses: coactions/setup-xvfb@v1
+        with:
+          run: pnpm run test:all

@@ -2,6 +2,7 @@ import { join } from 'path';
 import webdriver from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
 import electronPath from 'electron';
+import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const devPanelPath =
@@ -11,6 +12,8 @@ describe('DevTools panel for Electron', function () {
   let driver;
 
   beforeAll(async () => {
+    chromedriver.start();
+    await delay(1000);
     driver = new webdriver.Builder()
       .usingServer('http://localhost:9515')
       .setChromeOptions(
@@ -24,6 +27,7 @@ describe('DevTools panel for Electron', function () {
 
   afterAll(async () => {
     await driver.quit();
+    chromedriver.stop();
   });
 
   it('should open Redux DevTools tab', async () => {
