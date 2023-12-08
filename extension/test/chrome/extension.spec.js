@@ -1,10 +1,8 @@
 import { resolve } from 'path';
 import webdriver from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
-import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
-const port = 9515;
 const path = resolve(__dirname, '..', '..', 'dist');
 const extensionId = 'lmhkpmbekcpmknklioeibfkpmmfibljd';
 const actionsPattern =
@@ -14,12 +12,11 @@ describe('Chrome extension', function () {
   let driver;
 
   beforeAll(async () => {
-    chromedriver.start();
-    await delay(2000);
     driver = new webdriver.Builder()
-      .usingServer(`http://localhost:${port}`)
       .setChromeOptions(
-        new chrome.Options().addArguments(`load-extension=${path}`),
+        new chrome.Options()
+          .setBrowserVersion('stable')
+          .addArguments(`load-extension=${path}`),
       )
       .forBrowser('chrome')
       .build();
@@ -27,7 +24,6 @@ describe('Chrome extension', function () {
 
   afterAll(async () => {
     await driver.quit();
-    chromedriver.stop();
   });
 
   it("should open extension's window", async () => {
@@ -63,7 +59,7 @@ describe('Chrome extension', function () {
   );
 
   it('should get actions list', async () => {
-    const url = 'http://zalmoxisus.github.io/examples/router/';
+    const url = 'https://zalmoxisus.github.io/examples/router/';
     await driver.executeScript(`window.open('${url}')`);
     await delay(2000);
 

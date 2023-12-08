@@ -5,7 +5,6 @@ import electronPath from 'electron';
 import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
-const port = 9515;
 const devPanelPath =
   'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/window.html';
 
@@ -16,7 +15,7 @@ describe('DevTools panel for Electron', function () {
     chromedriver.start();
     await delay(1000);
     driver = new webdriver.Builder()
-      .usingServer(`http://localhost:${port}`)
+      .usingServer('http://localhost:9515')
       .setChromeOptions(
         new chrome.Options()
           .setChromeBinaryPath(electronPath)
