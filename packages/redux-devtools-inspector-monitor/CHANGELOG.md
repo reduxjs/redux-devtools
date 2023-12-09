@@ -1,5 +1,15 @@
 # Change Log
 
+## 4.1.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+
 ## 4.0.1
 
 ### Patch Changes

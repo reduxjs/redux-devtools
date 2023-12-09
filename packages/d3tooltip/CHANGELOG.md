@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.0.1
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+
 ## 3.0.0
 
 ### Major Changes

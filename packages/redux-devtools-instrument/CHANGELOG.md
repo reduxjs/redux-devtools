@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.2.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
 ## 2.1.2
 
 ### Patch Changes

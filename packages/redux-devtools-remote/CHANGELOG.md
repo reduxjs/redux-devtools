@@ -1,5 +1,18 @@
 # Change Log
 
+## 0.9.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+### Patch Changes
+
+- Updated dependencies [7f5bddbd]
+- Updated dependencies [6fc18ed7]
+  - @redux-devtools/utils@2.1.0
+  - @redux-devtools/instrument@2.2.0
+
 ## 0.8.2
 
 ### Patch Changes
