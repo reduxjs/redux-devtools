@@ -1,5 +1,17 @@
 # Change Log
 
+## 3.14.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+- Updated dependencies [6fc18ed7]
+  - @redux-devtools/instrument@2.2.0
+
 ## 3.13.3
 
 ### Patch Changes

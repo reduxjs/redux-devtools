@@ -1,5 +1,22 @@
 # Change Log
 
+## 4.0.2
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+- Updated dependencies [7f5bddbd]
+- Updated dependencies [6fc18ed7]
+  - @redux-devtools/chart-monitor@4.1.0
+  - @redux-devtools/inspector-monitor-test-tab@2.1.0
+  - @redux-devtools/inspector-monitor-trace-tab@2.1.0
+  - @redux-devtools/inspector-monitor@4.1.0
+  - @redux-devtools/log-monitor@4.1.0
+  - @redux-devtools/rtk-query-monitor@3.2.0
+  - @redux-devtools/slider-monitor@4.1.0
+  - @redux-devtools/ui@1.3.1
+  - @redux-devtools/core@3.14.0
+
 ## 4.0.1
 
 ### Patch Changes
