@@ -21,6 +21,11 @@
       "matchPackageNames": ["source-map"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "source-map"
+    },
+    {
+      "matchPackageNames": ["@mswjs/data"],
+      "matchUpdateTypes": ["major", "minor"],
+      "groupName": "mswjs-data"
     }
   ]
 }
