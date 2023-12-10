@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Base16Theme } from 'redux-devtools-themes';
 import {
   getBase16Theme,
@@ -203,32 +202,6 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
     ...createIntermediateState(this.props, this.props.monitorState),
     isWideLayout: false,
     themeState: createThemeState(this.props),
-  };
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    computedStates: PropTypes.array,
-    stagedActionIds: PropTypes.array,
-    actionsById: PropTypes.object,
-    currentStateIndex: PropTypes.number,
-    monitorState: PropTypes.shape({
-      initialScrollTop: PropTypes.number,
-    }),
-    preserveScrollTop: PropTypes.bool,
-    draggableActions: PropTypes.bool,
-    select: PropTypes.func.isRequired,
-    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    supportImmutable: PropTypes.bool,
-    diffObjectHash: PropTypes.func,
-    diffPropertyFilter: PropTypes.func,
-    hideMainButtons: PropTypes.bool,
-    hideActionButtons: PropTypes.bool,
-    invertTheme: PropTypes.bool,
-    sortStateTreeAlphabetically: PropTypes.bool,
-    disableStateTreeCollection: PropTypes.bool,
-    skippedActionIds: PropTypes.array,
-    dataTypeKey: PropTypes.any,
-    tabs: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
   };
 
   static update = reducer;

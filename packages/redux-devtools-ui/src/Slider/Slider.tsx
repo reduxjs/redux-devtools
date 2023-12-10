@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Base16Theme } from 'base16';
 import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
@@ -66,18 +65,6 @@ export default class Slider extends Component<SliderProps> {
       </SliderWrapper>
     );
   }
-
-  static propTypes = {
-    value: PropTypes.number,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    label: PropTypes.string,
-    sublabel: PropTypes.string,
-    withValue: PropTypes.bool,
-    disabled: PropTypes.bool,
-    onChange: PropTypes.func,
-    theme: PropTypes.object,
-  };
 
   static defaultProps = { value: 0, min: 0, max: 100 };
 }

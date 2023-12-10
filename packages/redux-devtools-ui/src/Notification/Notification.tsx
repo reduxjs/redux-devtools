@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { MdClose } from 'react-icons/md';
 import { MdWarning } from 'react-icons/md';
 import { MdError } from 'react-icons/md';
@@ -53,13 +52,6 @@ export default class Notification extends Component<NotificationProps> {
       </NotificationWrapper>
     );
   }
-
-  static propTypes = {
-    children: PropTypes.any.isRequired,
-    type: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
-    onClose: PropTypes.func,
-    theme: PropTypes.object,
-  };
 
   static defaultProps = {
     type: 'info',

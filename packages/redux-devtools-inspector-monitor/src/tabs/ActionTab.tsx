@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
 import { JSONTree } from 'react-json-tree';
 import { Action } from 'redux';
 import getItemString from './getItemString';
@@ -28,15 +27,5 @@ const ActionTab: FunctionComponent<
     hideRoot
   />
 );
-
-ActionTab.propTypes = {
-  action: PropTypes.any.isRequired,
-  styling: PropTypes.func.isRequired,
-  base16Theme: PropTypes.any.isRequired,
-  invertTheme: PropTypes.bool.isRequired,
-  labelRenderer: PropTypes.func.isRequired,
-  dataTypeKey: PropTypes.string,
-  isWideLayout: PropTypes.bool.isRequired,
-};
 
 export default ActionTab;

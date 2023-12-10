@@ -1,5 +1,4 @@
 import React, { CSSProperties, MouseEventHandler, PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { JSONTree } from 'react-json-tree';
 import type { ShouldExpandNodeInitially, StylingValue } from 'react-json-tree';
 import { Base16Theme } from 'redux-devtools-themes';
@@ -51,22 +50,6 @@ export default class LogMonitorEntry<
   S,
   A extends Action<string>,
 > extends PureComponent<Props<S, A>> {
-  static propTypes = {
-    state: PropTypes.object.isRequired,
-    action: PropTypes.object.isRequired,
-    actionId: PropTypes.number.isRequired,
-    select: PropTypes.func.isRequired,
-    inFuture: PropTypes.bool,
-    error: PropTypes.string,
-    onActionClick: PropTypes.func.isRequired,
-    onActionShiftClick: PropTypes.func.isRequired,
-    collapsed: PropTypes.bool,
-    selected: PropTypes.bool,
-    expandActionRoot: PropTypes.bool,
-    expandStateRoot: PropTypes.bool,
-    previousState: PropTypes.object,
-  };
-
   printState(state: S, error: string | undefined) {
     let errorText = error;
     if (!errorText) {

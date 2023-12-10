@@ -1,5 +1,4 @@
 import React, { Component, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import type { DebouncedFunc } from 'lodash';
 import autoprefix from './autoprefix';
@@ -258,21 +257,6 @@ export default class Dock extends Component<Props, State> {
     fullHeight: window.innerHeight,
     isTransitionStarted: false,
     isWindowResizing: false,
-  };
-
-  static propTypes = {
-    position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-    zIndex: PropTypes.number,
-    fluid: PropTypes.bool,
-    size: PropTypes.number,
-    defaultSize: PropTypes.number,
-    dimMode: PropTypes.oneOf(['none', 'transparent', 'opaque']),
-    isVisible: PropTypes.bool,
-    onVisibleChange: PropTypes.func,
-    onSizeChange: PropTypes.func,
-    dimStyle: PropTypes.object,
-    dockStyle: PropTypes.object,
-    duration: PropTypes.number,
   };
 
   static defaultProps = {

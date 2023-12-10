@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Action } from 'redux';
 import { PerformAction } from '@redux-devtools/core';
 import { Base16Theme } from 'redux-devtools-themes';
@@ -26,21 +25,6 @@ export default class LogMonitorEntryList<
   S,
   A extends Action<string>,
 > extends PureComponent<Props<S, A>> {
-  static propTypes = {
-    actionsById: PropTypes.object,
-    computedStates: PropTypes.array,
-    stagedActionIds: PropTypes.array,
-    skippedActionIds: PropTypes.array,
-    currentStateIndex: PropTypes.number,
-    consecutiveToggleStartId: PropTypes.number,
-
-    select: PropTypes.func.isRequired,
-    onActionClick: PropTypes.func.isRequired,
-    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    expandActionRoot: PropTypes.bool,
-    expandStateRoot: PropTypes.bool,
-  };
-
   render() {
     const elements = [];
     const {

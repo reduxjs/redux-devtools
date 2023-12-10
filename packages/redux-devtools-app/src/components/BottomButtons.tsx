@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Button, Toolbar, Divider } from '@redux-devtools/ui';
-import { MdSave } from 'react-icons/md';
+import { Toolbar, Divider } from '@redux-devtools/ui';
 import ExportButton from './buttons/ExportButton';
 import ImportButton from './buttons/ImportButton';
 import PrintButton from './buttons/PrintButton';
@@ -17,12 +15,6 @@ interface Props {
 }
 
 export default class BottomButtons extends Component<Props> {
-  static propTypes = {
-    dispatcherIsOpen: PropTypes.bool,
-    sliderIsOpen: PropTypes.bool,
-    options: PropTypes.object.isRequired,
-  };
-
   shouldComponentUpdate(nextProps: Props) {
     return (
       nextProps.dispatcherIsOpen !== this.props.dispatcherIsOpen ||

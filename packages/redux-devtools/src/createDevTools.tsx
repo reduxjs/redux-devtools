@@ -1,5 +1,4 @@
 import React, { Children, Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, Provider, ReactReduxContext } from 'react-redux';
 import {
   instrument,
@@ -69,14 +68,6 @@ export default function createDevTools<
   return class DevTools extends Component<
     Props<S, A, MonitorState, MonitorAction>
   > {
-    static contextTypes = {
-      store: PropTypes.object,
-    };
-
-    static propTypes = {
-      store: PropTypes.object,
-    };
-
     liftedStore?: LiftedStore<S, A, MonitorState>;
 
     static instrument = (

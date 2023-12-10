@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import TodoApp from './TodoApp';
 import { Store } from 'redux';
@@ -17,9 +16,5 @@ const Root: FunctionComponent<Props> = ({ store }) => (
     </div>
   </Provider>
 );
-
-Root.propTypes = {
-  store: PropTypes.any.isRequired,
-};
 
 export default Root;

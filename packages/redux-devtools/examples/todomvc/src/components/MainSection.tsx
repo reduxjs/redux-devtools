@@ -1,5 +1,4 @@
 import React, { Component, MouseEventHandler } from 'react';
-import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 import Footer from './Footer';
 import {
@@ -27,10 +26,6 @@ interface Props {
 }
 
 export default class MainSection extends Component<Props, State> {
-  static propTypes = {
-    todos: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired,
-  };
   // Keep a counter that can be used to create an html `id` attribute.
   static mountCount = 0;
 

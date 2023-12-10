@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { ActionCreators, LiftedAction } from '@redux-devtools/core';
 import { Button, Toolbar, Divider } from '@redux-devtools/ui';
 import { Action } from 'redux';
@@ -20,13 +19,6 @@ interface Props {
 }
 
 export default class TopButtons extends Component<Props> {
-  static propTypes = {
-    // shouldSync: PropTypes.bool,
-    liftedState: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    options: PropTypes.object.isRequired,
-  };
-
   shouldComponentUpdate(nextProps: Props) {
     return (
       nextProps.options !== this.props.options ||
