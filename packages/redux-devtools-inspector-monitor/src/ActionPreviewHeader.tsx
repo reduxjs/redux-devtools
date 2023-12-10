@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Action } from 'redux';
 import { StylingFunction } from 'react-base16-styling';
 import { Tab } from './ActionPreview';
@@ -64,14 +63,5 @@ const ActionPreviewHeader: FunctionComponent<
     </div>
   </div>
 );
-
-ActionPreviewHeader.propTypes = {
-  tabs: PropTypes.array.isRequired,
-  styling: PropTypes.func.isRequired,
-  inspectedPath: PropTypes.array.isRequired,
-  onInspectPath: PropTypes.func.isRequired,
-  tabName: PropTypes.string.isRequired,
-  onSelectTab: PropTypes.func.isRequired,
-};
 
 export default ActionPreviewHeader;

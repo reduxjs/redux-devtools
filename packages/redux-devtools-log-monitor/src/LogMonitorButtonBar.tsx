@@ -1,5 +1,4 @@
 import React, { CSSProperties, PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { ActionCreators, LiftedAction } from '@redux-devtools/core';
 import { Base16Theme } from 'redux-devtools-themes';
 import { Action, Dispatch } from 'redux';
@@ -31,11 +30,6 @@ export default class LogMonitorButtonBar<
   S,
   A extends Action<string>,
 > extends PureComponent<Props<S, A>> {
-  static propTypes = {
-    dispatch: PropTypes.func,
-    theme: PropTypes.object,
-  };
-
   handleRollback = () => {
     this.props.dispatch(rollback());
   };

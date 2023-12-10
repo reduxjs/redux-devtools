@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
 import { StylingFunction } from 'react-base16-styling';
 
 interface Props {
@@ -26,12 +25,5 @@ const RightSlider: FunctionComponent<Props> = ({
     {children}
   </div>
 );
-
-RightSlider.propTypes = {
-  styling: PropTypes.func.isRequired,
-  shown: PropTypes.bool,
-  children: PropTypes.any.isRequired,
-  rotate: PropTypes.bool,
-};
 
 export default RightSlider;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles/index';
 
@@ -102,12 +101,4 @@ export default class ContextMenu extends Component<ContextMenuProps> {
       </ContextMenuWrapper>
     );
   }
-
-  static propTypes = {
-    items: PropTypes.array.isRequired,
-    onClick: PropTypes.func.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
-    visible: PropTypes.bool,
-  };
 }

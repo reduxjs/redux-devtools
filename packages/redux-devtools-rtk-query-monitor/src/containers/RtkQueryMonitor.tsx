@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Action, AnyAction } from 'redux';
 import RtkQueryInspector from './RtkQueryInspector';
 import { reducer } from '../reducers';
@@ -28,18 +27,6 @@ class RtkQueryMonitor<S, A extends Action<string>> extends Component<
   RtkQueryComponentState
 > {
   static update = reducer;
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    computedStates: PropTypes.array,
-    currentStateIndex: PropTypes.number,
-    actionsById: PropTypes.object,
-    stagedActionIds: PropTypes.array,
-    skippedActionIds: PropTypes.array,
-    monitorState: PropTypes.object,
-    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    invertTheme: PropTypes.bool,
-  };
 
   static defaultProps: DefaultProps = {
     theme: 'nicinabox',

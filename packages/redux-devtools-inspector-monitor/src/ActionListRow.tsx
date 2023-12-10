@@ -1,5 +1,4 @@
 import React, { MouseEvent, MouseEventHandler, PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
 import type { DebouncedFunc } from 'lodash';
 import debounce from 'lodash.debounce';
@@ -36,20 +35,6 @@ export default class ActionListRow<
   A extends Action<string>,
 > extends PureComponent<Props<A>, State> {
   state: State = { hover: false };
-
-  static propTypes = {
-    styling: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    action: PropTypes.object.isRequired,
-    isInFuture: PropTypes.bool.isRequired,
-    isInitAction: PropTypes.bool.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    timestamps: PropTypes.shape({
-      current: PropTypes.number.isRequired,
-      previous: PropTypes.number.isRequired,
-    }).isRequired,
-    isSkipped: PropTypes.bool.isRequired,
-  };
 
   render() {
     const {

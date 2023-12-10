@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Action, Dispatch } from 'redux';
 import * as themes from 'redux-devtools-themes';
 import { Base16Theme } from 'redux-devtools-themes';
@@ -83,26 +82,6 @@ class LogMonitor<S, A extends Action<string>> extends PureComponent<
   LogMonitorProps<S, A>
 > {
   static update = reducer;
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    computedStates: PropTypes.array,
-    actionsById: PropTypes.object,
-    stagedActionIds: PropTypes.array,
-    skippedActionIds: PropTypes.array,
-    monitorState: PropTypes.shape({
-      initialScrollTop: PropTypes.number,
-      consecutiveToggleStartId: PropTypes.number,
-    }),
-
-    preserveScrollTop: PropTypes.bool,
-    select: PropTypes.func,
-    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    expandActionRoot: PropTypes.bool,
-    expandStateRoot: PropTypes.bool,
-    markStateDiff: PropTypes.bool,
-    hideMainButtons: PropTypes.bool,
-  };
 
   static defaultProps: DefaultProps<unknown> = {
     select: (state: unknown) => state,

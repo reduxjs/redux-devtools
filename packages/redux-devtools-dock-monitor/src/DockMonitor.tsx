@@ -1,9 +1,7 @@
 import React, { cloneElement, Children, Component } from 'react';
-import PropTypes from 'prop-types';
 import { Dock } from 'react-dock';
 import { Action, Dispatch } from 'redux';
 import { LiftedState, Monitor } from '@redux-devtools/core';
-import { POSITIONS } from './constants';
 import {
   toggleVisibility,
   changeMonitor,
@@ -67,24 +65,6 @@ class DockMonitor<S, A extends Action<string>> extends Component<
   DockMonitorProps<S, A>
 > {
   static update = reducer;
-
-  static propTypes = {
-    defaultPosition: PropTypes.oneOf(POSITIONS),
-    defaultIsVisible: PropTypes.bool.isRequired,
-    defaultSize: PropTypes.number.isRequired,
-    toggleVisibilityKey: PropTypes.string.isRequired,
-    changePositionKey: PropTypes.string.isRequired,
-    changeMonitorKey: PropTypes.string,
-    fluid: PropTypes.bool,
-
-    dispatch: PropTypes.func,
-    monitorState: PropTypes.shape({
-      position: PropTypes.oneOf(POSITIONS).isRequired,
-      size: PropTypes.number.isRequired,
-      isVisible: PropTypes.bool.isRequired,
-      childMonitorState: PropTypes.any,
-    }),
-  };
 
   static defaultProps: DefaultProps = {
     defaultIsVisible: true,

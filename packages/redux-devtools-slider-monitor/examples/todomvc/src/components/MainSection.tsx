@@ -1,5 +1,4 @@
 import React, { Component, MouseEventHandler } from 'react';
-import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 import Footer from './Footer';
 import {
@@ -27,11 +26,6 @@ interface Props {
 }
 
 export default class MainSection extends Component<Props, State> {
-  static propTypes = {
-    todos: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired,
-  };
-
   state: State = { filter: SHOW_ALL };
 
   handleClearMarked: MouseEventHandler<HTMLButtonElement> = () => {
