@@ -10,6 +10,7 @@ import {
   actionListItemButtonsCss,
   actionListItemCss,
   actionListItemSelectedCss,
+  actionListItemSelectorCss,
   actionListItemSkippedCss,
   actionListItemTimeCss,
 } from './utils/createStylingFromTheme';
@@ -121,7 +122,7 @@ export default class ActionListRow<
               </div>
             </RightSlider>
             <RightSlider styling={styling} shown={showButtons} rotate>
-              <div {...styling('actionListItemSelector')}>
+              <div css={actionListItemSelectorCss}>
                 {([BUTTON_JUMP, BUTTON_SKIP] as const).map(
                   (btn) =>
                     (!isInitAction || btn !== BUTTON_SKIP) && (

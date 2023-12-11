@@ -146,11 +146,9 @@ export const actionListItemTimeCss: Interpolation<Theme> = (theme) => ({
   color: colorMap(theme).ACTION_TIME_COLOR,
 });
 
-const getSheetFromColorMap = (map: ColorMap) => ({
-  actionListItemSelector: {
-    display: 'inline-flex',
-  },
+export const actionListItemSelectorCss = css({ display: 'inline-flex' });
 
+const getSheetFromColorMap = (map: ColorMap) => ({
   actionListItemName: {
     overflow: 'hidden',
     'text-overflow': 'ellipsis',
