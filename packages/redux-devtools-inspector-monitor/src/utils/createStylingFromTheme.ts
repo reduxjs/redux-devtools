@@ -134,19 +134,19 @@ export const actionListItemButtonsCss = css({
   display: 'flex',
 });
 
+export const actionListItemTimeCss: Interpolation<Theme> = (theme) => ({
+  display: 'inline',
+  padding: '4px 6px',
+  borderRadius: '3px',
+  fontSize: '0.8em',
+  lineHeight: '1em',
+  flexShrink: 0,
+
+  backgroundColor: colorMap(theme).ACTION_TIME_BACK_COLOR,
+  color: colorMap(theme).ACTION_TIME_COLOR,
+});
+
 const getSheetFromColorMap = (map: ColorMap) => ({
-  actionListItemTime: {
-    display: 'inline',
-    padding: '4px 6px',
-    'border-radius': '3px',
-    'font-size': '0.8em',
-    'line-height': '1em',
-    'flex-shrink': 0,
-
-    'background-color': map.ACTION_TIME_BACK_COLOR,
-    color: map.ACTION_TIME_COLOR,
-  },
-
   actionListItemSelector: {
     display: 'inline-flex',
   },

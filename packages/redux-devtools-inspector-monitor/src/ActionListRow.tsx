@@ -11,6 +11,7 @@ import {
   actionListItemCss,
   actionListItemSelectedCss,
   actionListItemSkippedCss,
+  actionListItemTimeCss,
 } from './utils/createStylingFromTheme';
 
 const BUTTON_SKIP = 'Skip';
@@ -98,7 +99,7 @@ export default class ActionListRow<
         </div>
         {hideActionButtons ? (
           <RightSlider styling={styling} shown>
-            <div {...styling('actionListItemTime')}>
+            <div css={actionListItemTimeCss}>
               {timeDelta === 0
                 ? '+00:00:00'
                 : dateformat(
@@ -110,7 +111,7 @@ export default class ActionListRow<
         ) : (
           <div css={actionListItemButtonsCss}>
             <RightSlider styling={styling} shown={!showButtons} rotate>
-              <div {...styling('actionListItemTime')}>
+              <div css={actionListItemTimeCss}>
                 {timeDelta === 0
                   ? '+00:00:00'
                   : dateformat(
