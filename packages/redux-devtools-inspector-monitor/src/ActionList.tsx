@@ -23,6 +23,7 @@ import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
 import {
   actionListCss,
+  actionListRowsCss,
   actionListWideCss,
 } from './utils/createStylingFromTheme';
 
@@ -168,7 +169,7 @@ export default function ActionList<A extends Action<string>>({
       />
       <div
         data-testid="actionListRows"
-        {...styling('actionListRows')}
+        css={actionListRowsCss}
         ref={setNodeRef}
       >
         <DndContext

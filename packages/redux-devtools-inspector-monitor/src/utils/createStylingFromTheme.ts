@@ -99,11 +99,9 @@ export const actionListHeaderCss: Interpolation<Theme> = (theme) => ({
   borderColor: colorMap(theme).LIST_BORDER_COLOR,
 });
 
-const getSheetFromColorMap = (map: ColorMap) => ({
-  actionListRows: {
-    overflow: 'auto',
-  },
+export const actionListRowsCss = css({ overflow: 'auto' });
 
+const getSheetFromColorMap = (map: ColorMap) => ({
   actionListHeaderSelector: {
     display: 'inline-flex',
     'margin-right': '10px',
