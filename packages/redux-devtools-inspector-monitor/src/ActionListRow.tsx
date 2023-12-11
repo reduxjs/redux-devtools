@@ -5,6 +5,13 @@ import debounce from 'lodash.debounce';
 import { StylingFunction } from 'react-base16-styling';
 import { Action } from 'redux';
 import RightSlider from './RightSlider';
+import {
+  actionListFromFutureCss,
+  actionListItemButtonsCss,
+  actionListItemCss,
+  actionListItemSelectedCss,
+  actionListItemSkippedCss,
+} from './utils/createStylingFromTheme';
 
 const BUTTON_SKIP = 'Skip';
 const BUTTON_JUMP = 'Jump';
@@ -74,16 +81,12 @@ export default class ActionListRow<
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseEnter}
         data-id={actionId}
-        {...styling(
-          [
-            'actionListItem',
-            isSelected && 'actionListItemSelected',
-            isSkipped && 'actionListItemSkipped',
-            isInFuture && 'actionListFromFuture',
-          ],
-          isSelected,
-          action,
-        )}
+        css={[
+          actionListItemCss,
+          isSelected && actionListItemSelectedCss,
+          isSkipped && actionListItemSkippedCss,
+          isInFuture && actionListFromFutureCss,
+        ]}
       >
         <div
           {...styling([
@@ -105,7 +108,7 @@ export default class ActionListRow<
             </div>
           </RightSlider>
         ) : (
-          <div {...styling('actionListItemButtons')}>
+          <div css={actionListItemButtonsCss}>
             <RightSlider styling={styling} shown={!showButtons} rotate>
               <div {...styling('actionListItemTime')}>
                 {timeDelta === 0

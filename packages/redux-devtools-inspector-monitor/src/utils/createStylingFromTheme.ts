@@ -106,37 +106,35 @@ export const actionListHeaderSelectorCss = css({
   marginRight: '10px',
 });
 
+export const actionListItemCss: Interpolation<Theme> = (theme) => ({
+  borderBottomWidth: '1px',
+  borderBottomStyle: 'solid',
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '5px 10px',
+  cursor: 'pointer',
+  userSelect: 'none',
+
+  borderBottomColor: colorMap(theme).BORDER_COLOR,
+});
+
+export const actionListItemSelectedCss: Interpolation<Theme> = (theme) => ({
+  backgroundColor: colorMap(theme).SELECTED_BACKGROUND_COLOR,
+});
+
+export const actionListItemSkippedCss: Interpolation<Theme> = (theme) => ({
+  backgroundColor: colorMap(theme).SKIPPED_BACKGROUND_COLOR,
+});
+
+export const actionListFromFutureCss = css({ opacity: '0.6' });
+
+export const actionListItemButtonsCss = css({
+  position: 'relative',
+  height: '20px',
+  display: 'flex',
+});
+
 const getSheetFromColorMap = (map: ColorMap) => ({
-  actionListItem: {
-    'border-bottom-width': '1px',
-    'border-bottom-style': 'solid',
-    display: 'flex',
-    'justify-content': 'space-between',
-    padding: '5px 10px',
-    cursor: 'pointer',
-    'user-select': 'none',
-
-    'border-bottom-color': map.BORDER_COLOR,
-  },
-
-  actionListItemSelected: {
-    'background-color': map.SELECTED_BACKGROUND_COLOR,
-  },
-
-  actionListItemSkipped: {
-    'background-color': map.SKIPPED_BACKGROUND_COLOR,
-  },
-
-  actionListFromFuture: {
-    opacity: '0.6',
-  },
-
-  actionListItemButtons: {
-    position: 'relative',
-    height: '20px',
-    display: 'flex',
-  },
-
   actionListItemTime: {
     display: 'inline',
     padding: '4px 6px',
