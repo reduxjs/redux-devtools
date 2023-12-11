@@ -179,12 +179,12 @@ export const actionListHeaderSearchCss: Interpolation<Theme> = (theme) => ({
   },
 });
 
-const getSheetFromColorMap = (map: ColorMap) => ({
-  actionListHeaderWrapper: {
-    position: 'relative',
-    height: '20px',
-  },
+export const actionListHeaderWrapperCss = css({
+  position: 'relative',
+  height: '20px',
+});
 
+const getSheetFromColorMap = (map: ColorMap) => ({
   actionPreview: {
     flex: 1,
     display: 'flex',

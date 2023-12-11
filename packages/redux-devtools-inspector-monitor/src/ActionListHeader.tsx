@@ -5,6 +5,7 @@ import {
   actionListHeaderCss,
   actionListHeaderSearchCss,
   actionListHeaderSelectorCss,
+  actionListHeaderWrapperCss,
 } from './utils/createStylingFromTheme';
 
 const getActiveButtons = (hasSkippedActions: boolean): ('Sweep' | 'Commit')[] =>
@@ -41,7 +42,7 @@ const ActionListHeader: FunctionComponent<Props> = ({
       value={searchValue}
     />
     {!hideMainButtons && (
-      <div {...styling('actionListHeaderWrapper')}>
+      <div css={actionListHeaderWrapperCss}>
         <RightSlider shown={hasStagedActions} styling={styling}>
           <div css={actionListHeaderSelectorCss}>
             {getActiveButtons(hasSkippedActions).map((btn) => (
