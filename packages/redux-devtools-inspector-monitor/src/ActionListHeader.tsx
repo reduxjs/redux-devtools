@@ -3,6 +3,7 @@ import { StylingFunction } from 'react-base16-styling';
 import RightSlider from './RightSlider';
 import {
   actionListHeaderCss,
+  actionListHeaderSearchCss,
   actionListHeaderSelectorCss,
 } from './utils/createStylingFromTheme';
 
@@ -34,7 +35,7 @@ const ActionListHeader: FunctionComponent<Props> = ({
 }) => (
   <div css={actionListHeaderCss}>
     <input
-      {...styling('actionListHeaderSearch')}
+      css={actionListHeaderSearchCss}
       onChange={(e) => onSearch(e.target.value)}
       placeholder="filter..."
       value={searchValue}

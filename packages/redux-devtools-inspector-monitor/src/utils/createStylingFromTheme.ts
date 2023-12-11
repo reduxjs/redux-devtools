@@ -159,27 +159,27 @@ export const actionListItemNameSkippedCss = css({
   opacity: 0.3,
 });
 
-const getSheetFromColorMap = (map: ColorMap) => ({
-  actionListHeaderSearch: {
-    outline: 'none',
-    border: 'none',
-    width: '100%',
-    padding: '5px 10px',
-    'font-size': '1em',
-    'font-family': 'monaco, Consolas, "Lucida Console", monospace',
+export const actionListHeaderSearchCss: Interpolation<Theme> = (theme) => ({
+  outline: 'none',
+  border: 'none',
+  width: '100%',
+  padding: '5px 10px',
+  fontSize: '1em',
+  fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
 
-    'background-color': map.BACKGROUND_COLOR,
-    color: map.TEXT_COLOR,
+  backgroundColor: colorMap(theme).BACKGROUND_COLOR,
+  color: colorMap(theme).TEXT_COLOR,
 
-    '&::-webkit-input-placeholder': {
-      color: map.TEXT_PLACEHOLDER_COLOR,
-    },
-
-    '&::-moz-placeholder': {
-      color: map.TEXT_PLACEHOLDER_COLOR,
-    },
+  '&::-webkit-input-placeholder': {
+    color: colorMap(theme).TEXT_PLACEHOLDER_COLOR,
   },
 
+  '&::-moz-placeholder': {
+    color: colorMap(theme).TEXT_PLACEHOLDER_COLOR,
+  },
+});
+
+const getSheetFromColorMap = (map: ColorMap) => ({
   actionListHeaderWrapper: {
     position: 'relative',
     height: '20px',
