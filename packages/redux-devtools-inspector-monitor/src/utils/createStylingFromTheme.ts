@@ -148,18 +148,18 @@ export const actionListItemTimeCss: Interpolation<Theme> = (theme) => ({
 
 export const actionListItemSelectorCss = css({ display: 'inline-flex' });
 
+export const actionListItemNameCss = css({
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  lineHeight: '20px',
+});
+
+export const actionListItemNameSkippedCss = css({
+  textDecoration: 'line-through',
+  opacity: 0.3,
+});
+
 const getSheetFromColorMap = (map: ColorMap) => ({
-  actionListItemName: {
-    overflow: 'hidden',
-    'text-overflow': 'ellipsis',
-    'line-height': '20px',
-  },
-
-  actionListItemNameSkipped: {
-    'text-decoration': 'line-through',
-    opacity: 0.3,
-  },
-
   actionListHeaderSearch: {
     outline: 'none',
     border: 'none',

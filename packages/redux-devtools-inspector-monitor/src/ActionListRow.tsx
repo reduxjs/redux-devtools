@@ -9,6 +9,8 @@ import {
   actionListFromFutureCss,
   actionListItemButtonsCss,
   actionListItemCss,
+  actionListItemNameCss,
+  actionListItemNameSkippedCss,
   actionListItemSelectedCss,
   actionListItemSelectorCss,
   actionListItemSkippedCss,
@@ -91,10 +93,10 @@ export default class ActionListRow<
         ]}
       >
         <div
-          {...styling([
-            'actionListItemName',
-            isSkipped && 'actionListItemNameSkipped',
-          ])}
+          css={[
+            actionListItemNameCss,
+            isSkipped && actionListItemNameSkippedCss,
+          ]}
         >
           {actionType}
         </div>
