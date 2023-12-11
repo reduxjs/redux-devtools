@@ -66,23 +66,30 @@ export const inspectorCss: Interpolation<Theme> = (theme) => ({
   color: colorMap(theme).TEXT_COLOR,
 });
 
-export const inspectorWideCss = css({ flexDirection: 'column' });
+export const inspectorWideCss = css({ flexDirection: 'row' });
+
+export const actionListCss: Interpolation<Theme> = (theme) => ({
+  flexBasis: '40%',
+  flexShrink: 0,
+  overflowX: 'hidden',
+  overflowY: 'auto',
+  borderBottomWidth: '3px',
+  borderBottomStyle: 'double',
+  display: 'flex',
+  flexDirection: 'column',
+
+  backgroundColor: colorMap(theme).BACKGROUND_COLOR,
+  borderColor: colorMap(theme).LIST_BORDER_COLOR,
+});
+
+export const actionListWideCss = css({
+  flexBasis: '40%',
+  borderBottom: 'none',
+  borderRightWidth: '3px',
+  borderRightStyle: 'double',
+});
 
 const getSheetFromColorMap = (map: ColorMap) => ({
-  actionList: {
-    'flex-basis': '40%',
-    'flex-shrink': 0,
-    'overflow-x': 'hidden',
-    'overflow-y': 'auto',
-    'border-bottom-width': '3px',
-    'border-bottom-style': 'double',
-    display: 'flex',
-    'flex-direction': 'column',
-
-    'background-color': map.BACKGROUND_COLOR,
-    'border-color': map.LIST_BORDER_COLOR,
-  },
-
   actionListHeader: {
     display: 'flex',
     flex: '0 0 auto',
@@ -100,13 +107,6 @@ const getSheetFromColorMap = (map: ColorMap) => ({
   actionListHeaderSelector: {
     display: 'inline-flex',
     'margin-right': '10px',
-  },
-
-  actionListWide: {
-    'flex-basis': '40%',
-    'border-bottom': 'none',
-    'border-right-width': '3px',
-    'border-right-style': 'double',
   },
 
   actionListItem: {

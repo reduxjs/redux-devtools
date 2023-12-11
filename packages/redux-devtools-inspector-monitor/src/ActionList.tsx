@@ -21,6 +21,10 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
+import {
+  actionListCss,
+  actionListWideCss,
+} from './utils/createStylingFromTheme';
 
 function getTimestamps<A extends Action<string>>(
   actions: { [actionId: number]: PerformAction<A> },
@@ -150,10 +154,7 @@ export default function ActionList<A extends Action<string>>({
     <div
       key="actionList"
       data-testid="actionList"
-      {...styling(
-        ['actionList', isWideLayout && 'actionListWide'],
-        isWideLayout,
-      )}
+      css={[actionListCss, isWideLayout && actionListWideCss]}
     >
       <ActionListHeader
         styling={styling}
