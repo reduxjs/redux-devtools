@@ -89,17 +89,17 @@ export const actionListWideCss = css({
   borderRightStyle: 'double',
 });
 
+export const actionListHeaderCss: Interpolation<Theme> = (theme) => ({
+  display: 'flex',
+  flex: '0 0 auto',
+  alignItems: 'center',
+  borderBottomWidth: '1px',
+  borderBottomStyle: 'solid',
+
+  borderColor: colorMap(theme).LIST_BORDER_COLOR,
+});
+
 const getSheetFromColorMap = (map: ColorMap) => ({
-  actionListHeader: {
-    display: 'flex',
-    flex: '0 0 auto',
-    'align-items': 'center',
-    'border-bottom-width': '1px',
-    'border-bottom-style': 'solid',
-
-    'border-color': map.LIST_BORDER_COLOR,
-  },
-
   actionListRows: {
     overflow: 'auto',
   },

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { StylingFunction } from 'react-base16-styling';
 import RightSlider from './RightSlider';
+import { actionListHeaderCss } from './utils/createStylingFromTheme';
 
 const getActiveButtons = (hasSkippedActions: boolean): ('Sweep' | 'Commit')[] =>
   [hasSkippedActions && 'Sweep', 'Commit'].filter(
@@ -28,7 +29,7 @@ const ActionListHeader: FunctionComponent<Props> = ({
   hideMainButtons,
   searchValue,
 }) => (
-  <div {...styling('actionListHeader')}>
+  <div css={actionListHeaderCss}>
     <input
       {...styling('actionListHeaderSearch')}
       onChange={(e) => onSearch(e.target.value)}
