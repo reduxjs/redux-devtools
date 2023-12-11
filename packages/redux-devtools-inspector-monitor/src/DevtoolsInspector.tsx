@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Base16Theme } from 'redux-devtools-themes';
 import {
   getBase16Theme,
+  invertBase16Theme,
   invertTheme,
   StylingFunction,
 } from 'react-base16-styling';
@@ -15,6 +16,8 @@ import { Delta, DiffContext } from 'jsondiffpatch';
 import {
   createStylingFromTheme,
   base16Themes,
+  inspectorCss,
+  inspectorWideCss,
 } from './utils/createStylingFromTheme';
 import ActionList from './ActionList';
 import ActionPreview, { Tab } from './ActionPreview';
@@ -26,6 +29,7 @@ import {
   reducer,
   updateMonitorState,
 } from './redux';
+import { ThemeProvider } from '@emotion/react';
 
 const {
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -296,68 +300,69 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
     const { base16Theme, styling } = themeState;
 
     return (
-      <div
-        key="inspector"
-        data-testid="inspector"
-        ref={this.inspectorCreateRef}
-        {...styling(
-          ['inspector', isWideLayout && 'inspectorWide'],
-          isWideLayout,
-        )}
+      <ThemeProvider
+        theme={invertTheme ? invertBase16Theme(base16Theme) : base16Theme}
       >
-        <ActionList
-          {...{
-            actions,
-            actionIds,
-            isWideLayout,
-            searchValue,
-            selectedActionId,
-            startActionId,
-            skippedActionIds,
-            draggableActions,
-            hideMainButtons,
-            hideActionButtons,
-            styling,
-          }}
-          onSearch={this.handleSearch}
-          onSelect={this.handleSelectAction}
-          onToggleAction={this.handleToggleAction}
-          onJumpToState={this.handleJumpToState}
-          onCommit={this.handleCommit}
-          onSweep={this.handleSweep}
-          onReorderAction={this.handleReorderAction}
-          currentActionId={actionIds[currentStateIndex]}
-          lastActionId={getLastActionId(this.props)}
-        />
-        <ActionPreview
-          {...{
-            base16Theme,
-            invertTheme,
-            isWideLayout,
-            tabs,
-            tabName,
-            delta,
-            error,
-            nextState,
-            computedStates,
-            action,
-            actions,
-            selectedActionId,
-            startActionId,
-            dataTypeKey,
-            sortStateTreeAlphabetically,
-            disableStateTreeCollection,
-          }}
-          monitorState={this.props.monitorState}
-          updateMonitorState={this.updateMonitorState}
-          styling={styling}
-          onInspectPath={(path: (string | number)[]) =>
-            this.handleInspectPath(inspectedPathType, path)
-          }
-          inspectedPath={monitorState[inspectedPathType]}
-          onSelectTab={this.handleSelectTab}
-        />
-      </div>
+        <div
+          key="inspector"
+          data-testid="inspector"
+          ref={this.inspectorCreateRef}
+          css={[inspectorCss, isWideLayout && inspectorWideCss]}
+        >
+          <ActionList
+            {...{
+              actions,
+              actionIds,
+              isWideLayout,
+              searchValue,
+              selectedActionId,
+              startActionId,
+              skippedActionIds,
+              draggableActions,
+              hideMainButtons,
+              hideActionButtons,
+              styling,
+            }}
+            onSearch={this.handleSearch}
+            onSelect={this.handleSelectAction}
+            onToggleAction={this.handleToggleAction}
+            onJumpToState={this.handleJumpToState}
+            onCommit={this.handleCommit}
+            onSweep={this.handleSweep}
+            onReorderAction={this.handleReorderAction}
+            currentActionId={actionIds[currentStateIndex]}
+            lastActionId={getLastActionId(this.props)}
+          />
+          <ActionPreview
+            {...{
+              base16Theme,
+              invertTheme,
+              isWideLayout,
+              tabs,
+              tabName,
+              delta,
+              error,
+              nextState,
+              computedStates,
+              action,
+              actions,
+              selectedActionId,
+              startActionId,
+              dataTypeKey,
+              sortStateTreeAlphabetically,
+              disableStateTreeCollection,
+            }}
+            monitorState={this.props.monitorState}
+            updateMonitorState={this.updateMonitorState}
+            styling={styling}
+            onInspectPath={(path: (string | number)[]) =>
+              this.handleInspectPath(inspectedPathType, path)
+            }
+            inspectedPath={monitorState[inspectedPathType]}
+            onSelectTab={this.handleSelectTab}
+          />
+        </div>
+      </ThemeProvider>
     );
   }
 

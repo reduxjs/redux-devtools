@@ -1,12 +1,23 @@
 import jss, { StyleSheet } from 'jss';
 import preset from 'jss-preset-default';
-import { createStyling, StylingFunction, Theme } from 'react-base16-styling';
+import { css } from '@emotion/react';
+import type { Interpolation, Theme } from '@emotion/react';
+import {
+  createStyling,
+  StylingFunction,
+  Theme as Base16StylingTheme,
+} from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import { Base16Theme } from 'redux-devtools-themes';
 import type { CurriedFunction1 } from 'lodash';
 import inspector from '../themes/inspector';
 import * as reduxThemes from 'redux-devtools-themes';
 import * as inspectorThemes from '../themes';
+
+declare module '@emotion/react' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  export interface Theme extends Base16Theme {}
+}
 
 jss.setup(preset());
 
@@ -41,25 +52,23 @@ type ColorMap = {
   [color in Color]: string;
 };
 
+export const inspectorCss: Interpolation<Theme> = (theme) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+  height: '100%',
+  fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+  fontSize: '12px',
+  WebkitFontSmoothing: 'antialiased',
+  lineHeight: '1.5em',
+
+  backgroundColor: colorMap(theme).BACKGROUND_COLOR,
+  color: colorMap(theme).TEXT_COLOR,
+});
+
+export const inspectorWideCss = css({ flexDirection: 'column' });
+
 const getSheetFromColorMap = (map: ColorMap) => ({
-  inspector: {
-    display: 'flex',
-    'flex-direction': 'column',
-    width: '100%',
-    height: '100%',
-    'font-family': 'monaco, Consolas, "Lucida Console", monospace',
-    'font-size': '12px',
-    'font-smoothing': 'antialiased',
-    'line-height': '1.5em',
-
-    'background-color': map.BACKGROUND_COLOR,
-    color: map.TEXT_COLOR,
-  },
-
-  inspectorWide: {
-    'flex-direction': 'row',
-  },
-
   actionList: {
     'flex-basis': '40%',
     'flex-shrink': 0,
@@ -386,7 +395,7 @@ const getDefaultThemeStyling = (theme: Base16Theme) => {
 export const base16Themes = { ...reduxThemes, ...inspectorThemes };
 
 export const createStylingFromTheme: CurriedFunction1<
-  Theme | undefined,
+  Base16StylingTheme | undefined,
   StylingFunction
 > = createStyling(getDefaultThemeStyling, {
   defaultBase16: inspector,
