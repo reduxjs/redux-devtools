@@ -184,24 +184,24 @@ export const actionListHeaderWrapperCss = css({
   height: '20px',
 });
 
-const getSheetFromColorMap = (map: ColorMap) => ({
-  actionPreview: {
-    flex: 1,
-    display: 'flex',
-    'flex-direction': 'column',
-    'flex-grow': 1,
-    'overflow-y': 'hidden',
+export const actionPreviewCss: Interpolation<Theme> = (theme) => ({
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  flexGrow: 1,
+  overflowY: 'hidden',
 
-    '& pre': {
-      border: 'inherit',
-      'border-radius': '3px',
-      'line-height': 'inherit',
-      color: 'inherit',
-    },
-
-    'background-color': map.BACKGROUND_COLOR,
+  '& pre': {
+    border: 'inherit',
+    borderRadius: '3px',
+    lineHeight: 'inherit',
+    color: 'inherit',
   },
 
+  backgroundColor: colorMap(theme).BACKGROUND_COLOR,
+});
+
+const getSheetFromColorMap = (map: ColorMap) => ({
   actionPreviewContent: {
     flex: 1,
     'overflow-y': 'auto',

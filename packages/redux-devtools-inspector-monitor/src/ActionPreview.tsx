@@ -10,6 +10,7 @@ import ActionPreviewHeader from './ActionPreviewHeader';
 import DiffTab from './tabs/DiffTab';
 import StateTab from './tabs/StateTab';
 import ActionTab from './tabs/ActionTab';
+import { actionPreviewCss } from './utils/createStylingFromTheme';
 
 export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;
@@ -121,7 +122,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
       renderedTabs.find((tab) => tab.name === DEFAULT_STATE.tabName)!;
 
     return (
-      <div key="actionPreview" {...styling('actionPreview')}>
+      <div key="actionPreview" css={actionPreviewCss}>
         <ActionPreviewHeader
           tabs={renderedTabs as unknown as Tab<unknown, Action<string>>[]}
           {...{ styling, inspectedPath, onInspectPath, tabName, onSelectTab }}
