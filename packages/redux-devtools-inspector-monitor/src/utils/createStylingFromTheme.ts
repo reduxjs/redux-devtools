@@ -36,8 +36,6 @@ const colorMap = (theme: Base16Theme) => ({
   ERROR_COLOR: theme.base08,
 });
 
-type Color = keyof ReturnType<typeof colorMap>;
-
 export const inspectorCss: Interpolation<Theme> = (theme) => ({
   display: 'flex',
   flexDirection: 'column',

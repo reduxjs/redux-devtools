@@ -123,14 +123,6 @@ function createIntermediateState<S, A extends Action<string>>(
   };
 }
 
-function createThemeState<S, A extends Action<string>>(
-  props: DevtoolsInspectorProps<S, A>,
-) {
-  const base16Theme = getBase16Theme(props.theme, base16Themes)!;
-
-  return { base16Theme };
-}
-
 export interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<
     DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
@@ -186,7 +178,6 @@ interface State<S, A extends Action<string>> {
   action: A;
   error: string | undefined;
   isWideLayout: boolean;
-  themeState: { base16Theme: Base16Theme };
 }
 
 class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
@@ -196,7 +187,6 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
   state: State<S, A> = {
     ...createIntermediateState(this.props, this.props.monitorState),
     isWideLayout: false,
-    themeState: createThemeState(this.props),
   };
 
   static update = reducer;
@@ -252,13 +242,6 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
     ) {
       this.setState(createIntermediateState(nextProps, nextMonitorState));
     }
-
-    if (
-      this.props.theme !== nextProps.theme ||
-      this.props.invertTheme !== nextProps.invertTheme
-    ) {
-      this.setState({ themeState: createThemeState(nextProps) });
-    }
   }
 
   inspectorCreateRef: React.RefCallback<HTMLDivElement> = (node) => {
@@ -272,6 +255,7 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
       computedStates,
       draggableActions,
       tabs,
+      theme,
       invertTheme,
       skippedActionIds,
       currentStateIndex,
@@ -286,10 +270,9 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
       monitorState;
     const inspectedPathType =
       tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
-    const { themeState, isWideLayout, action, nextState, delta, error } =
-      this.state;
-    const { base16Theme } = themeState;
+    const { isWideLayout, action, nextState, delta, error } = this.state;
 
+    const base16Theme = getBase16Theme(theme, base16Themes)!;
     return (
       <ThemeProvider
         theme={invertTheme ? invertBase16Theme(base16Theme) : base16Theme}
