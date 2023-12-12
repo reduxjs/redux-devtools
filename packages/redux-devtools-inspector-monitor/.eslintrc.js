@@ -9,8 +9,8 @@ module.exports = {
         project: true,
       },
       rules: {
-        "react/no-unknown-property": ["error", { "ignore": ["css"] }]
-      }
+        'react/no-unknown-property': ['error', { ignore: ['css'] }],
+      },
     },
     {
       files: ['demo/**/*.ts', 'demo/**/*.tsx'],
