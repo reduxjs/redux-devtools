@@ -40,16 +40,14 @@ describe('Chrome extension', function () {
   it("should contain inspector monitor's component", async () => {
     await delay(1000);
     const val = await driver
-      .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
+      .findElement(webdriver.By.xpath('//div[@data-testid="inspector"]'))
       .getText();
     expect(val).toBeDefined();
   });
 
   it('should contain an empty actions list', async () => {
     const val = await driver
-      .findElement(
-        webdriver.By.xpath('//div[contains(@class, "actionListRows-")]'),
-      )
+      .findElement(webdriver.By.xpath('//div[@data-testid="actionListRows"]'))
       .getText();
     expect(val).toBe('');
   });
@@ -72,9 +70,7 @@ describe('Chrome extension', function () {
 
     const result = await driver.wait(
       driver
-        .findElement(
-          webdriver.By.xpath('//div[contains(@class, "actionListRows-")]'),
-        )
+        .findElement(webdriver.By.xpath('//div[@data-testid="actionListRows"]'))
         .getText()
         .then((val) => {
           return actionsPattern.test(val);

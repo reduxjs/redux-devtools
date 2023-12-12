@@ -89,7 +89,7 @@ describe('DevTools panel for Electron', function () {
   it('should contain INIT action', async () => {
     const element = await driver.wait(
       webdriver.until.elementLocated(
-        webdriver.By.xpath('//div[contains(@class, "actionListRows-")]'),
+        webdriver.By.xpath('//div[@data-testid="actionListRows"]'),
       ),
       5000,
       'Element not found',
@@ -100,7 +100,7 @@ describe('DevTools panel for Electron', function () {
 
   it("should contain Inspector monitor's component", async () => {
     const val = await driver
-      .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
+      .findElement(webdriver.By.xpath('//div[@data-testid="inspector"]'))
       .getText();
     expect(val).toBeDefined();
   });
