@@ -59,6 +59,9 @@ importers:
       '@babel/polyfill':
         specifier: ^7.12.1
         version: 7.12.1
+      '@emotion/react':
+        specifier: ^11.11.1
+        version: 11.11.1(@types/react@18.2.43)(react@18.2.0)
       '@redux-devtools/app':
         specifier: ^4.0.1
         version: link:../packages/redux-devtools-app
@@ -1088,6 +1091,9 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.23.3
         version: 7.23.3(@babel/core@7.23.5)
+      '@emotion/react':
+        specifier: ^11.11.1
+        version: 11.11.1(@types/react@18.2.43)(react@18.2.0)
       '@rjsf/core':
         specifier: ^4.2.3
         version: 4.2.3(react@18.2.0)
@@ -1293,6 +1299,9 @@ importers:
       '@apollo/server':
         specifier: ^4.9.5
         version: 4.9.5(graphql@16.8.1)
+      '@emotion/react':
+        specifier: ^11.11.1
+        version: 11.11.1(@types/react@18.2.43)(react@18.2.0)
       '@redux-devtools/app':
         specifier: ^4.0.0
         version: link:../redux-devtools-app
@@ -1757,6 +1766,9 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.23.3
         version: 7.23.3(@babel/core@7.23.5)
+      '@emotion/react':
+        specifier: ^11.11.1
+        version: 11.11.1(@types/react@18.2.43)(react@18.2.0)
       '@redux-devtools/core':
         specifier: ^3.14.0
         version: link:../redux-devtools
@@ -1829,6 +1841,9 @@ importers:
 
   packages/redux-devtools-inspector-monitor-test-tab/demo:
     dependencies:
+      '@emotion/react':
+        specifier: ^11.11.1
+        version: 11.11.1(@types/react@18.2.43)(react@18.2.0)
       '@redux-devtools/core':
         specifier: ^3.13.2
         version: link:../../redux-devtools
@@ -2008,6 +2023,9 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.23.3
         version: 7.23.3(@babel/core@7.23.5)
+      '@emotion/react':
+        specifier: ^11.11.1
+        version: 11.11.1(@types/react@18.2.43)(react@18.2.0)
       '@redux-devtools/core':
         specifier: ^3.14.0
         version: link:../redux-devtools
@@ -2092,6 +2110,9 @@ importers:
 
   packages/redux-devtools-inspector-monitor/demo:
     dependencies:
+      '@emotion/react':
+        specifier: ^11.11.1
+        version: 11.11.1(@types/react@18.2.43)(react@18.2.0)
       '@redux-devtools/core':
         specifier: ^3.13.0
         version: link:../../redux-devtools
@@ -2144,9 +2165,6 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.23.3
         version: 7.23.3(@babel/core@7.23.5)
-      '@emotion/react':
-        specifier: ^11.11.1
-        version: 11.11.1(@types/react@18.2.43)(react@18.2.0)
       '@types/base16':
         specifier: ^1.0.5
         version: 1.0.5

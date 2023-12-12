@@ -10,6 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
     "@redux-devtools/core": "^3.13.0",
     "@redux-devtools/dock-monitor": "^3.0.0",
     "@redux-devtools/inspector-monitor": "^4.0.0",
@@ -29,7 +30,6 @@
     "@babel/preset-env": "^7.23.5",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
-    "@emotion/react": "^11.11.1",
     "@types/base16": "^1.0.5",
     "@types/lodash.shuffle": "^4.2.9",
     "@types/node": "^20.10.4",

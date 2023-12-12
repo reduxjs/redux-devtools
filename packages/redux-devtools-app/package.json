@@ -72,6 +72,7 @@
     "@babel/preset-env": "^7.23.5",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@emotion/react": "^11.11.1",
     "@rjsf/core": "^4.2.3",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
@@ -115,6 +116,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "peerDependencies": {
+    "@emotion/react": "^11.0.0",
     "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "@types/styled-components": "^5.1.34",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
