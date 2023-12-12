@@ -160,6 +160,7 @@ export default class ActionListRow<
                           isButtonSelected(btn) && selectorButtonSelectedCss,
                           selectorButtonSmallCss,
                         ]}
+                        data-isselectorbutton={true}
                       >
                         {btn}
                       </div>
@@ -204,12 +205,7 @@ export default class ActionListRow<
   }, 100);
 
   handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
-    if (
-      (e.target as unknown as { className: string[] }).className.indexOf(
-        'selectorButton',
-      ) === 0
-    )
-      return;
+    if ((e.target as HTMLElement).dataset.isselectorbutton) return;
     this.handleMouseLeave();
   };
 }
