@@ -1,7 +1,6 @@
 import React, { ReactNode, useCallback, useLayoutEffect, useRef } from 'react';
 import { Action } from 'redux';
 import { PerformAction } from '@redux-devtools/core';
-import { StylingFunction } from 'react-base16-styling';
 import {
   closestCenter,
   DndContext,
@@ -51,7 +50,6 @@ interface Props<A extends Action<string>> {
   draggableActions: boolean;
   hideMainButtons: boolean | undefined;
   hideActionButtons: boolean | undefined;
-  styling: StylingFunction;
   onSearch: (value: string) => void;
   onSelect: (e: React.MouseEvent<HTMLDivElement>, actionId: number) => void;
   onToggleAction: (actionId: number) => void;
@@ -64,7 +62,6 @@ interface Props<A extends Action<string>> {
 }
 
 export default function ActionList<A extends Action<string>>({
-  styling,
   actions,
   actionIds,
   isWideLayout,
@@ -150,13 +147,29 @@ export default function ActionList<A extends Action<string>>({
     <div
       key="actionList"
       data-testid="actionList"
-      {...styling(
-        ['actionList', isWideLayout && 'actionListWide'],
-        isWideLayout,
-      )}
+      css={[
+        (theme) => ({
+          flexBasis: '40%',
+          flexShrink: 0,
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          borderBottomWidth: '3px',
+          borderBottomStyle: 'double',
+          display: 'flex',
+          flexDirection: 'column',
+
+          backgroundColor: theme.BACKGROUND_COLOR,
+          borderColor: theme.LIST_BORDER_COLOR,
+        }),
+        isWideLayout && {
+          flexBasis: '40%',
+          borderBottom: 'none',
+          borderRightWidth: '3px',
+          borderRightStyle: 'double',
+        },
+      ]}
     >
       <ActionListHeader
-        styling={styling}
         onSearch={onSearch}
         onCommit={onCommit}
         onSweep={onSweep}
@@ -167,7 +180,7 @@ export default function ActionList<A extends Action<string>>({
       />
       <div
         data-testid="actionListRows"
-        {...styling('actionListRows')}
+        css={{ overflow: 'auto' }}
         ref={setNodeRef}
       >
         <DndContext
@@ -183,7 +196,6 @@ export default function ActionList<A extends Action<string>>({
             {filteredActionIds.map((actionId) => (
               <SortableItem key={actionId} actionId={actionId}>
                 <ActionListRow
-                  styling={styling}
                   actionId={actionId}
                   isInitAction={!actionId}
                   isSelected={

@@ -7,7 +7,6 @@ const DiffTab: FunctionComponent<
   TabComponentProps<unknown, Action<string>>
 > = ({
   delta,
-  styling,
   base16Theme,
   invertTheme,
   labelRenderer,
@@ -17,7 +16,6 @@ const DiffTab: FunctionComponent<
   <JSONDiff
     {...{
       delta,
-      styling,
       base16Theme,
       invertTheme,
       labelRenderer,

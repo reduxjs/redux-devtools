@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Base16Theme } from 'redux-devtools-themes';
 import {
-  getBase16Theme,
-  invertTheme,
-  StylingFunction,
-} from 'react-base16-styling';
-import {
   ActionCreators,
   LiftedAction,
   LiftedState,
@@ -13,9 +8,10 @@ import {
 import { Action, Dispatch } from 'redux';
 import { Delta, DiffContext } from 'jsondiffpatch';
 import {
-  createStylingFromTheme,
-  base16Themes,
-} from './utils/createStylingFromTheme';
+  createInspectorMonitorThemeFromBase16Theme,
+  resolveBase16Theme,
+} from './utils/themes';
+import type { Base16ThemeName } from './utils/themes';
 import ActionList from './ActionList';
 import ActionPreview, { Tab } from './ActionPreview';
 import getInspectedState from './utils/getInspectedState';
@@ -26,6 +22,7 @@ import {
   reducer,
   updateMonitorState,
 } from './redux';
+import { ThemeProvider } from '@emotion/react';
 
 const {
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -125,17 +122,6 @@ function createIntermediateState<S, A extends Action<string>>(
   };
 }
 
-function createThemeState<S, A extends Action<string>>(
-  props: DevtoolsInspectorProps<S, A>,
-) {
-  const base16Theme = getBase16Theme(props.theme, base16Themes)!;
-
-  const theme = props.invertTheme ? invertTheme(props.theme) : props.theme;
-  const styling = createStylingFromTheme(theme);
-
-  return { base16Theme, styling };
-}
-
 export interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<
     DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
@@ -143,7 +129,7 @@ export interface ExternalProps<S, A extends Action<string>> {
   preserveScrollTop?: boolean;
   draggableActions: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof base16Themes | Base16Theme;
+  theme: Base16ThemeName | Base16Theme;
   supportImmutable: boolean;
   diffObjectHash?: (item: unknown, index: number) => string;
   diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
@@ -160,7 +146,7 @@ interface DefaultProps {
   select: (state: unknown) => unknown;
   supportImmutable: boolean;
   draggableActions: boolean;
-  theme: keyof typeof base16Themes;
+  theme: Base16ThemeName;
   invertTheme: boolean;
 }
 
@@ -172,7 +158,7 @@ export interface DevtoolsInspectorProps<S, A extends Action<string>>
   preserveScrollTop?: boolean;
   draggableActions: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof base16Themes | Base16Theme;
+  theme: Base16ThemeName | Base16Theme;
   supportImmutable: boolean;
   diffObjectHash?: (item: unknown, index: number) => string;
   diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
@@ -191,7 +177,6 @@ interface State<S, A extends Action<string>> {
   action: A;
   error: string | undefined;
   isWideLayout: boolean;
-  themeState: { base16Theme: Base16Theme; styling: StylingFunction };
 }
 
 class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
@@ -201,7 +186,6 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
   state: State<S, A> = {
     ...createIntermediateState(this.props, this.props.monitorState),
     isWideLayout: false,
-    themeState: createThemeState(this.props),
   };
 
   static update = reducer;
@@ -257,13 +241,6 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
     ) {
       this.setState(createIntermediateState(nextProps, nextMonitorState));
     }
-
-    if (
-      this.props.theme !== nextProps.theme ||
-      this.props.invertTheme !== nextProps.invertTheme
-    ) {
-      this.setState({ themeState: createThemeState(nextProps) });
-    }
   }
 
   inspectorCreateRef: React.RefCallback<HTMLDivElement> = (node) => {
@@ -277,6 +254,7 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
       computedStates,
       draggableActions,
       tabs,
+      theme,
       invertTheme,
       skippedActionIds,
       currentStateIndex,
@@ -291,73 +269,88 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
       monitorState;
     const inspectedPathType =
       tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
-    const { themeState, isWideLayout, action, nextState, delta, error } =
-      this.state;
-    const { base16Theme, styling } = themeState;
+    const { isWideLayout, action, nextState, delta, error } = this.state;
 
+    const base16Theme = resolveBase16Theme(theme)!;
+    const inspectorMonitorTheme = createInspectorMonitorThemeFromBase16Theme(
+      base16Theme,
+      invertTheme,
+    );
     return (
-      <div
-        key="inspector"
-        data-testid="inspector"
-        ref={this.inspectorCreateRef}
-        {...styling(
-          ['inspector', isWideLayout && 'inspectorWide'],
-          isWideLayout,
-        )}
-      >
-        <ActionList
-          {...{
-            actions,
-            actionIds,
-            isWideLayout,
-            searchValue,
-            selectedActionId,
-            startActionId,
-            skippedActionIds,
-            draggableActions,
-            hideMainButtons,
-            hideActionButtons,
-            styling,
-          }}
-          onSearch={this.handleSearch}
-          onSelect={this.handleSelectAction}
-          onToggleAction={this.handleToggleAction}
-          onJumpToState={this.handleJumpToState}
-          onCommit={this.handleCommit}
-          onSweep={this.handleSweep}
-          onReorderAction={this.handleReorderAction}
-          currentActionId={actionIds[currentStateIndex]}
-          lastActionId={getLastActionId(this.props)}
-        />
-        <ActionPreview
-          {...{
-            base16Theme,
-            invertTheme,
-            isWideLayout,
-            tabs,
-            tabName,
-            delta,
-            error,
-            nextState,
-            computedStates,
-            action,
-            actions,
-            selectedActionId,
-            startActionId,
-            dataTypeKey,
-            sortStateTreeAlphabetically,
-            disableStateTreeCollection,
-          }}
-          monitorState={this.props.monitorState}
-          updateMonitorState={this.updateMonitorState}
-          styling={styling}
-          onInspectPath={(path: (string | number)[]) =>
-            this.handleInspectPath(inspectedPathType, path)
-          }
-          inspectedPath={monitorState[inspectedPathType]}
-          onSelectTab={this.handleSelectTab}
-        />
-      </div>
+      <ThemeProvider theme={inspectorMonitorTheme}>
+        <div
+          key="inspector"
+          data-testid="inspector"
+          ref={this.inspectorCreateRef}
+          css={[
+            (theme) => ({
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              height: '100%',
+              fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+              fontSize: '12px',
+              WebkitFontSmoothing: 'antialiased',
+              lineHeight: '1.5em',
+
+              backgroundColor: theme.BACKGROUND_COLOR,
+              color: theme.TEXT_COLOR,
+            }),
+            isWideLayout && { flexDirection: 'row' },
+          ]}
+        >
+          <ActionList
+            {...{
+              actions,
+              actionIds,
+              isWideLayout,
+              searchValue,
+              selectedActionId,
+              startActionId,
+              skippedActionIds,
+              draggableActions,
+              hideMainButtons,
+              hideActionButtons,
+            }}
+            onSearch={this.handleSearch}
+            onSelect={this.handleSelectAction}
+            onToggleAction={this.handleToggleAction}
+            onJumpToState={this.handleJumpToState}
+            onCommit={this.handleCommit}
+            onSweep={this.handleSweep}
+            onReorderAction={this.handleReorderAction}
+            currentActionId={actionIds[currentStateIndex]}
+            lastActionId={getLastActionId(this.props)}
+          />
+          <ActionPreview
+            {...{
+              base16Theme,
+              invertTheme,
+              isWideLayout,
+              tabs,
+              tabName,
+              delta,
+              error,
+              nextState,
+              computedStates,
+              action,
+              actions,
+              selectedActionId,
+              startActionId,
+              dataTypeKey,
+              sortStateTreeAlphabetically,
+              disableStateTreeCollection,
+            }}
+            monitorState={this.props.monitorState}
+            updateMonitorState={this.updateMonitorState}
+            onInspectPath={(path: (string | number)[]) =>
+              this.handleInspectPath(inspectedPathType, path)
+            }
+            inspectedPath={monitorState[inspectedPathType]}
+            onSelectTab={this.handleSelectTab}
+          />
+        </div>
+      </ThemeProvider>
     );
   }
 

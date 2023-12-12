@@ -1,11 +1,30 @@
 import React, { FunctionComponent } from 'react';
 import { Action } from 'redux';
-import { StylingFunction } from 'react-base16-styling';
+import { css } from '@emotion/react';
+import type { Interpolation, Theme } from '@emotion/react';
 import { Tab } from './ActionPreview';
+import {
+  selectorButtonCss,
+  selectorButtonSelectedCss,
+} from './utils/selectorButtonStyles';
+
+const inspectedPathKeyCss = css({
+  '&:not(:last-child):after': {
+    content: '" > "',
+  },
+});
+
+const inspectedPathKeyLinkCss: Interpolation<Theme> = (theme) => ({
+  cursor: 'pointer',
+  color: theme.LINK_COLOR,
+  '&:hover': {
+    textDecoration: 'underline',
+    color: theme.LINK_HOVER_COLOR,
+  },
+});
 
 interface Props<S, A extends Action<string>> {
   tabs: Tab<S, A>[];
-  styling: StylingFunction;
   inspectedPath: (string | number)[];
   onInspectPath: (path: (string | number)[]) => void;
   tabName: string;
@@ -14,32 +33,38 @@ interface Props<S, A extends Action<string>> {
 
 const ActionPreviewHeader: FunctionComponent<
   Props<unknown, Action<string>>
-> = ({ styling, inspectedPath, onInspectPath, tabName, onSelectTab, tabs }) => (
-  <div key="previewHeader" {...styling('previewHeader')}>
-    <div {...styling('tabSelector')}>
+> = ({ inspectedPath, onInspectPath, tabName, onSelectTab, tabs }) => (
+  <div
+    key="previewHeader"
+    css={(theme) => ({
+      flex: '0 0 30px',
+      padding: '5px 10px',
+      alignItems: 'center',
+      borderBottomWidth: '1px',
+      borderBottomStyle: 'solid',
+
+      backgroundColor: theme.HEADER_BACKGROUND_COLOR,
+      borderBottomColor: theme.HEADER_BORDER_COLOR,
+    })}
+  >
+    <div css={{ position: 'relative', display: 'inline-flex', float: 'right' }}>
       {tabs.map((tab) => (
         <div
           onClick={() => onSelectTab(tab.name)}
           key={tab.name}
-          {...styling(
-            [
-              'selectorButton',
-              tab.name === tabName && 'selectorButtonSelected',
-            ],
-            tab.name === tabName,
-          )}
+          css={[
+            selectorButtonCss,
+            tab.name === tabName && selectorButtonSelectedCss,
+          ]}
         >
           {tab.name}
         </div>
       ))}
     </div>
-    <div {...styling('inspectedPath')}>
+    <div css={{ padding: '6px 0' }}>
       {inspectedPath.length ? (
-        <span {...styling('inspectedPathKey')}>
-          <a
-            onClick={() => onInspectPath([])}
-            {...styling('inspectedPathKeyLink')}
-          >
+        <span css={inspectedPathKeyCss}>
+          <a onClick={() => onInspectPath([])} css={inspectedPathKeyLinkCss}>
             {tabName}
           </a>
         </span>
@@ -50,10 +75,10 @@ const ActionPreviewHeader: FunctionComponent<
         idx === inspectedPath.length - 1 ? (
           <span key={key}>{key}</span>
         ) : (
-          <span key={key} {...styling('inspectedPathKey')}>
+          <span key={key} css={inspectedPathKeyCss}>
             <a
               onClick={() => onInspectPath(inspectedPath.slice(0, idx + 1))}
-              {...styling('inspectedPathKeyLink')}
+              css={inspectedPathKeyLinkCss}
             >
               {key}
             </a>

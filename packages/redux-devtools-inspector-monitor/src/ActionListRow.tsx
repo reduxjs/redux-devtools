@@ -2,17 +2,33 @@ import React, { MouseEvent, MouseEventHandler, PureComponent } from 'react';
 import dateformat from 'dateformat';
 import type { DebouncedFunc } from 'lodash';
 import debounce from 'lodash.debounce';
-import { StylingFunction } from 'react-base16-styling';
 import { Action } from 'redux';
+import type { Interpolation, Theme } from '@emotion/react';
 import RightSlider from './RightSlider';
+import {
+  selectorButtonCss,
+  selectorButtonSelectedCss,
+  selectorButtonSmallCss,
+} from './utils/selectorButtonStyles';
 
 const BUTTON_SKIP = 'Skip';
 const BUTTON_JUMP = 'Jump';
 
 type Button = typeof BUTTON_SKIP | typeof BUTTON_JUMP;
 
+const actionListItemTimeCss: Interpolation<Theme> = (theme) => ({
+  display: 'inline',
+  padding: '4px 6px',
+  borderRadius: '3px',
+  fontSize: '0.8em',
+  lineHeight: '1em',
+  flexShrink: 0,
+
+  backgroundColor: theme.ACTION_TIME_BACK_COLOR,
+  color: theme.ACTION_TIME_COLOR,
+});
+
 interface Props<A extends Action<string>> {
-  styling: StylingFunction;
   actionId: number;
   isInitAction: boolean;
   isSelected: boolean;
@@ -38,7 +54,6 @@ export default class ActionListRow<
 
   render() {
     const {
-      styling,
       isSelected,
       action,
       actionId,
@@ -74,28 +89,44 @@ export default class ActionListRow<
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseEnter}
         data-id={actionId}
-        {...styling(
-          [
-            'actionListItem',
-            isSelected && 'actionListItemSelected',
-            isSkipped && 'actionListItemSkipped',
-            isInFuture && 'actionListFromFuture',
-          ],
-          isSelected,
-          action,
-        )}
+        css={[
+          (theme) => ({
+            borderBottomWidth: '1px',
+            borderBottomStyle: 'solid',
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '5px 10px',
+            cursor: 'pointer',
+            userSelect: 'none',
+
+            borderBottomColor: theme.BORDER_COLOR,
+          }),
+          isSelected &&
+            ((theme) => ({
+              backgroundColor: theme.SELECTED_BACKGROUND_COLOR,
+            })),
+          isSkipped &&
+            ((theme) => ({
+              backgroundColor: theme.SKIPPED_BACKGROUND_COLOR,
+            })),
+          isInFuture && { opacity: '0.6' },
+        ]}
       >
         <div
-          {...styling([
-            'actionListItemName',
-            isSkipped && 'actionListItemNameSkipped',
-          ])}
+          css={[
+            {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              lineHeight: '20px',
+            },
+            isSkipped && { textDecoration: 'line-through', opacity: 0.3 },
+          ]}
         >
           {actionType}
         </div>
         {hideActionButtons ? (
-          <RightSlider styling={styling} shown>
-            <div {...styling('actionListItemTime')}>
+          <RightSlider shown>
+            <div css={actionListItemTimeCss}>
               {timeDelta === 0
                 ? '+00:00:00'
                 : dateformat(
@@ -105,9 +136,9 @@ export default class ActionListRow<
             </div>
           </RightSlider>
         ) : (
-          <div {...styling('actionListItemButtons')}>
-            <RightSlider styling={styling} shown={!showButtons} rotate>
-              <div {...styling('actionListItemTime')}>
+          <div css={{ position: 'relative', height: '20px', display: 'flex' }}>
+            <RightSlider shown={!showButtons} rotate>
+              <div css={actionListItemTimeCss}>
                 {timeDelta === 0
                   ? '+00:00:00'
                   : dateformat(
@@ -116,23 +147,20 @@ export default class ActionListRow<
                     )}
               </div>
             </RightSlider>
-            <RightSlider styling={styling} shown={showButtons} rotate>
-              <div {...styling('actionListItemSelector')}>
+            <RightSlider shown={showButtons} rotate>
+              <div css={{ display: 'inline-flex' }}>
                 {([BUTTON_JUMP, BUTTON_SKIP] as const).map(
                   (btn) =>
                     (!isInitAction || btn !== BUTTON_SKIP) && (
                       <div
                         key={btn}
                         onClick={(e) => this.handleButtonClick(btn, e)}
-                        {...styling(
-                          [
-                            'selectorButton',
-                            isButtonSelected(btn) && 'selectorButtonSelected',
-                            'selectorButtonSmall',
-                          ],
-                          isButtonSelected(btn),
-                          true,
-                        )}
+                        css={[
+                          selectorButtonCss,
+                          isButtonSelected(btn) && selectorButtonSelectedCss,
+                          selectorButtonSmallCss,
+                        ]}
+                        data-isselectorbutton={true}
                       >
                         {btn}
                       </div>
@@ -177,12 +205,7 @@ export default class ActionListRow<
   }, 100);
 
   handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
-    if (
-      (e.target as unknown as { className: string[] }).className.indexOf(
-        'selectorButton',
-      ) === 0
-    )
-      return;
+    if ((e.target as HTMLElement).dataset.isselectorbutton) return;
     this.handleMouseLeave();
   };
 }

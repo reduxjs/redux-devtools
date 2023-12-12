@@ -2,7 +2,8 @@
   "presets": [
     ["@babel/preset-env", { "targets": "defaults" }],
     "@babel/preset-react",
-    "@babel/preset-typescript"
+    "@babel/preset-typescript",
+    "@emotion/babel-preset-css-prop"
   ],
   "plugins": ["@babel/plugin-transform-runtime"]
 }

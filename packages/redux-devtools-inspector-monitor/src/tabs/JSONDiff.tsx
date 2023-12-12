@@ -3,8 +3,9 @@ import { JSONTree } from 'react-json-tree';
 import type { LabelRenderer, ShouldExpandNodeInitially } from 'react-json-tree';
 import { stringify } from 'javascript-stringify';
 import { Delta } from 'jsondiffpatch';
-import { StylingFunction } from 'react-base16-styling';
 import { Base16Theme } from 'redux-devtools-themes';
+import { css } from '@emotion/react';
+import type { Interpolation, Theme } from '@emotion/react';
 import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
 
@@ -46,9 +47,18 @@ function prepareDelta(value: any) {
   return value;
 }
 
+const diffCss: Interpolation<Theme> = (theme) => ({
+  padding: '2px 3px',
+  borderRadius: '3px',
+  position: 'relative',
+
+  color: theme.TEXT_COLOR,
+});
+
+const diffWrapCss = css({ position: 'relative', zIndex: 1 });
+
 interface Props {
   delta: Delta | null | undefined | false;
-  styling: StylingFunction;
   base16Theme: Base16Theme;
   invertTheme: boolean;
   labelRenderer: LabelRenderer;
@@ -82,10 +92,19 @@ export default class JSONDiff extends Component<Props, State> {
   }
 
   render() {
-    const { styling, base16Theme, ...props } = this.props;
+    const { base16Theme, ...props } = this.props;
 
     if (!this.state.data) {
-      return <div {...styling('stateDiffEmpty')}>(states are equal)</div>;
+      return (
+        <div
+          css={(theme) => ({
+            padding: '10px',
+            color: theme.TEXT_PLACEHOLDER_COLOR,
+          })}
+        >
+          (states are equal)
+        </div>
+      );
     }
 
     return (
@@ -105,7 +124,6 @@ export default class JSONDiff extends Component<Props, State> {
 
   getItemString = (type: string, data: any) =>
     getItemString(
-      this.props.styling,
       type,
       data,
       this.props.dataTypeKey,
@@ -114,45 +132,71 @@ export default class JSONDiff extends Component<Props, State> {
     );
 
   valueRenderer = (raw: any, value: any) => {
-    const { styling, isWideLayout } = this.props;
-
-    function renderSpan(name: string, body: string) {
-      return (
-        <span key={name} {...styling(['diff', name])}>
-          {body}
-        </span>
-      );
-    }
+    const { isWideLayout } = this.props;
 
     if (Array.isArray(value)) {
       switch (value.length) {
         case 1:
           return (
-            <span {...styling('diffWrap')}>
-              {renderSpan(
-                'diffAdd',
-                stringifyAndShrink(value[0], isWideLayout),
-              )}
+            <span css={diffWrapCss}>
+              <span
+                key="diffAdd"
+                css={[
+                  diffCss,
+                  (theme) => ({ backgroundColor: theme.DIFF_ADD_COLOR }),
+                ]}
+              >
+                {stringifyAndShrink(value[0], isWideLayout)}
+              </span>
             </span>
           );
         case 2:
           return (
-            <span {...styling('diffWrap')}>
-              {renderSpan(
-                'diffUpdateFrom',
-                stringifyAndShrink(value[0], isWideLayout),
-              )}
-              {renderSpan('diffUpdateArrow', ' => ')}
-              {renderSpan(
-                'diffUpdateTo',
-                stringifyAndShrink(value[1], isWideLayout),
-              )}
+            <span css={diffWrapCss}>
+              <span
+                key="diffUpdateFrom"
+                css={[
+                  diffCss,
+                  (theme) => ({
+                    textDecoration: 'line-through',
+                    backgroundColor: theme.DIFF_REMOVE_COLOR,
+                  }),
+                ]}
+              >
+                {stringifyAndShrink(value[0], isWideLayout)}
+              </span>
+              <span
+                key="diffUpdateArrow"
+                css={[diffCss, (theme) => ({ color: theme.DIFF_ARROW_COLOR })]}
+              >
+                {' => '}
+              </span>
+              <span
+                key="diffUpdateTo"
+                css={[
+                  diffCss,
+                  (theme) => ({ backgroundColor: theme.DIFF_ADD_COLOR }),
+                ]}
+              >
+                {stringifyAndShrink(value[1], isWideLayout)}
+              </span>
             </span>
           );
         case 3:
           return (
-            <span {...styling('diffWrap')}>
-              {renderSpan('diffRemove', stringifyAndShrink(value[0]))}
+            <span css={diffWrapCss}>
+              <span
+                key="diffRemove"
+                css={[
+                  diffCss,
+                  (theme) => ({
+                    textDecoration: 'line-through',
+                    backgroundColor: theme.DIFF_REMOVE_COLOR,
+                  }),
+                ]}
+              >
+                {stringifyAndShrink(value[0])}
+              </span>
             </span>
           );
       }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Base16Theme } from 'redux-devtools-themes';
 import { Action } from 'redux';
-import type { StylingFunction } from 'react-base16-styling';
 import type { LabelRenderer } from 'react-json-tree';
 import { PerformAction } from '@redux-devtools/core';
 import { Delta } from 'jsondiffpatch';
@@ -13,7 +12,6 @@ import ActionTab from './tabs/ActionTab';
 
 export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;
-  styling: StylingFunction;
   computedStates: { state: S; error?: string }[];
   actions: { [actionId: number]: PerformAction<A> };
   selectedActionId: number | null;
@@ -68,7 +66,6 @@ interface Props<S, A extends Action<string>> {
   dataTypeKey: string | symbol | undefined;
   monitorState: DevtoolsInspectorState;
   updateMonitorState: (monitorState: Partial<DevtoolsInspectorState>) => void;
-  styling: StylingFunction;
   onInspectPath: (path: (string | number)[]) => void;
   inspectedPath: (string | number)[];
   onSelectTab: (tabName: string) => void;
@@ -85,7 +82,6 @@ class ActionPreview<S, A extends Action<string>> extends Component<
 
   render() {
     const {
-      styling,
       delta,
       error,
       nextState,
@@ -121,17 +117,34 @@ class ActionPreview<S, A extends Action<string>> extends Component<
       renderedTabs.find((tab) => tab.name === DEFAULT_STATE.tabName)!;
 
     return (
-      <div key="actionPreview" {...styling('actionPreview')}>
+      <div
+        key="actionPreview"
+        css={(theme) => ({
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+          overflowY: 'hidden',
+
+          '& pre': {
+            border: 'inherit',
+            borderRadius: '3px',
+            lineHeight: 'inherit',
+            color: 'inherit',
+          },
+
+          backgroundColor: theme.BACKGROUND_COLOR,
+        })}
+      >
         <ActionPreviewHeader
           tabs={renderedTabs as unknown as Tab<unknown, Action<string>>[]}
-          {...{ styling, inspectedPath, onInspectPath, tabName, onSelectTab }}
+          {...{ inspectedPath, onInspectPath, tabName, onSelectTab }}
         />
         {!error && (
-          <div key="actionPreviewContent" {...styling('actionPreviewContent')}>
+          <div key="actionPreviewContent" css={{ flex: 1, overflowY: 'auto' }}>
             <TabComponent
               labelRenderer={this.labelRenderer}
               {...{
-                styling,
                 computedStates,
                 actions,
                 selectedActionId,
@@ -151,19 +164,40 @@ class ActionPreview<S, A extends Action<string>> extends Component<
             />
           </div>
         )}
-        {error && <div {...styling('stateError')}>{error}</div>}
+        {error && (
+          <div
+            css={(theme) => ({
+              padding: '10px',
+              marginLeft: '14px',
+              fontWeight: 'bold',
+
+              color: theme.ERROR_COLOR,
+            })}
+          >
+            {error}
+          </div>
+        )}
       </div>
     );
   }
 
   labelRenderer: LabelRenderer = ([key, ...rest], nodeType, expanded) => {
-    const { styling, onInspectPath, inspectedPath } = this.props;
+    const { onInspectPath, inspectedPath } = this.props;
 
     return (
       <span>
-        <span {...styling('treeItemKey')}>{key}</span>
+        <span>{key}</span>
         <span
-          {...styling('treeItemPin')}
+          css={(theme) => ({
+            fontSize: '0.7em',
+            paddingLeft: '5px',
+            cursor: 'pointer',
+            '&:hover': {
+              textDecoration: 'underline',
+            },
+
+            color: theme.PIN_COLOR,
+          })}
           onClick={() =>
             onInspectPath([
               ...inspectedPath.slice(0, inspectedPath.length - 1),

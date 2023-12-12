@@ -1,6 +1,5 @@
 import React from 'react';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
-import { StylingFunction } from 'react-base16-styling';
 import isIterable from '../utils/isIterable';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
@@ -72,14 +71,13 @@ function getText(
 }
 
 const getItemString = (
-  styling: StylingFunction,
   type: string,
   data: any,
   dataTypeKey: string | symbol | undefined,
   isWideLayout: boolean,
   isDiff?: boolean,
 ) => (
-  <span {...styling('treeItemHint')}>
+  <span css={(theme) => ({ color: theme.ITEM_HINT_COLOR })}>
     {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
     {dataTypeKey && data[dataTypeKey] ? `${data[dataTypeKey] as string} ` : ''}
     {getText(type, data, isWideLayout, isDiff)}
