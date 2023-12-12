@@ -9,13 +9,13 @@ export const selectorButtonCss: Interpolation<Theme> = (theme) => ({
   borderWidth: '1px',
   borderLeftWidth: 0,
 
-  '&:first-child': {
+  '&:first-of-type': {
     borderLeftWidth: '1px',
     borderTopLeftRadius: '3px',
     borderBottomLeftRadius: '3px',
   },
 
-  '&:last-child': {
+  '&:last-of-type': {
     borderTopRightRadius: '3px',
     borderBottomRightRadius: '3px',
   },
