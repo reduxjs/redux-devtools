@@ -8,12 +8,10 @@ import {
 import { Action, Dispatch } from 'redux';
 import { Delta, DiffContext } from 'jsondiffpatch';
 import {
-  Base16ThemeName,
   createInspectorMonitorThemeFromBase16Theme,
-  inspectorCss,
-  inspectorWideCss,
   resolveBase16Theme,
-} from './utils/createStylingFromTheme';
+} from './utils/themes';
+import type { Base16ThemeName } from './utils/themes';
 import ActionList from './ActionList';
 import ActionPreview, { Tab } from './ActionPreview';
 import getInspectedState from './utils/getInspectedState';
@@ -284,7 +282,22 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
           key="inspector"
           data-testid="inspector"
           ref={this.inspectorCreateRef}
-          css={[inspectorCss, isWideLayout && inspectorWideCss]}
+          css={[
+            (theme) => ({
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              height: '100%',
+              fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+              fontSize: '12px',
+              WebkitFontSmoothing: 'antialiased',
+              lineHeight: '1.5em',
+
+              backgroundColor: theme.BACKGROUND_COLOR,
+              color: theme.TEXT_COLOR,
+            }),
+            isWideLayout && { flexDirection: 'row' },
+          ]}
         >
           <ActionList
             {...{

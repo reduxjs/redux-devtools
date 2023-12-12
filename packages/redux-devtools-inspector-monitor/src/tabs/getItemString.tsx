@@ -1,7 +1,6 @@
 import React from 'react';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
 import isIterable from '../utils/isIterable';
-import { treeItemHintCss } from '../utils/createStylingFromTheme';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
 
@@ -78,7 +77,7 @@ const getItemString = (
   isWideLayout: boolean,
   isDiff?: boolean,
 ) => (
-  <span css={treeItemHintCss}>
+  <span css={(theme) => ({ color: theme.ITEM_HINT_COLOR })}>
     {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
     {dataTypeKey && data[dataTypeKey] ? `${data[dataTypeKey] as string} ` : ''}
     {getText(type, data, isWideLayout, isDiff)}

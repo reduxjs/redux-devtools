@@ -4,18 +4,10 @@ import type { LabelRenderer, ShouldExpandNodeInitially } from 'react-json-tree';
 import { stringify } from 'javascript-stringify';
 import { Delta } from 'jsondiffpatch';
 import { Base16Theme } from 'redux-devtools-themes';
+import { css } from '@emotion/react';
+import type { Interpolation, Theme } from '@emotion/react';
 import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
-import {
-  diffAddCss,
-  diffCss,
-  diffRemoveCss,
-  diffUpdateArrowCss,
-  diffUpdateFromCss,
-  diffUpdateToCss,
-  diffWrapCss,
-  stateDiffEmptyCss,
-} from '../utils/createStylingFromTheme';
 
 function stringifyAndShrink(val: any, isWideLayout?: boolean) {
   if (val === null) {
@@ -55,6 +47,16 @@ function prepareDelta(value: any) {
   return value;
 }
 
+const diffCss: Interpolation<Theme> = (theme) => ({
+  padding: '2px 3px',
+  borderRadius: '3px',
+  position: 'relative',
+
+  color: theme.TEXT_COLOR,
+});
+
+const diffWrapCss = css({ position: 'relative', zIndex: 1 });
+
 interface Props {
   delta: Delta | null | undefined | false;
   base16Theme: Base16Theme;
@@ -93,7 +95,16 @@ export default class JSONDiff extends Component<Props, State> {
     const { base16Theme, ...props } = this.props;
 
     if (!this.state.data) {
-      return <div css={stateDiffEmptyCss}>(states are equal)</div>;
+      return (
+        <div
+          css={(theme) => ({
+            padding: '10px',
+            color: theme.TEXT_PLACEHOLDER_COLOR,
+          })}
+        >
+          (states are equal)
+        </div>
+      );
     }
 
     return (
@@ -128,7 +139,13 @@ export default class JSONDiff extends Component<Props, State> {
         case 1:
           return (
             <span css={diffWrapCss}>
-              <span key="diffAdd" css={[diffCss, diffAddCss]}>
+              <span
+                key="diffAdd"
+                css={[
+                  diffCss,
+                  (theme) => ({ backgroundColor: theme.DIFF_ADD_COLOR }),
+                ]}
+              >
                 {stringifyAndShrink(value[0], isWideLayout)}
               </span>
             </span>
@@ -136,13 +153,31 @@ export default class JSONDiff extends Component<Props, State> {
         case 2:
           return (
             <span css={diffWrapCss}>
-              <span key="diffUpdateFrom" css={[diffCss, diffUpdateFromCss]}>
+              <span
+                key="diffUpdateFrom"
+                css={[
+                  diffCss,
+                  (theme) => ({
+                    textDecoration: 'line-through',
+                    backgroundColor: theme.DIFF_REMOVE_COLOR,
+                  }),
+                ]}
+              >
                 {stringifyAndShrink(value[0], isWideLayout)}
               </span>
-              <span key="diffUpdateArrow" css={[diffCss, diffUpdateArrowCss]}>
+              <span
+                key="diffUpdateArrow"
+                css={[diffCss, (theme) => ({ color: theme.DIFF_ARROW_COLOR })]}
+              >
                 {' => '}
               </span>
-              <span key="diffUpdateTo" css={[diffCss, diffUpdateToCss]}>
+              <span
+                key="diffUpdateTo"
+                css={[
+                  diffCss,
+                  (theme) => ({ backgroundColor: theme.DIFF_ADD_COLOR }),
+                ]}
+              >
                 {stringifyAndShrink(value[1], isWideLayout)}
               </span>
             </span>
@@ -150,7 +185,16 @@ export default class JSONDiff extends Component<Props, State> {
         case 3:
           return (
             <span css={diffWrapCss}>
-              <span key="diffRemove" css={[diffCss, diffRemoveCss]}>
+              <span
+                key="diffRemove"
+                css={[
+                  diffCss,
+                  (theme) => ({
+                    textDecoration: 'line-through',
+                    backgroundColor: theme.DIFF_REMOVE_COLOR,
+                  }),
+                ]}
+              >
                 {stringifyAndShrink(value[0])}
               </span>
             </span>

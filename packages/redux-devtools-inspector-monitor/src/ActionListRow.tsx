@@ -3,26 +3,30 @@ import dateformat from 'dateformat';
 import type { DebouncedFunc } from 'lodash';
 import debounce from 'lodash.debounce';
 import { Action } from 'redux';
+import type { Interpolation, Theme } from '@emotion/react';
 import RightSlider from './RightSlider';
 import {
-  actionListFromFutureCss,
-  actionListItemButtonsCss,
-  actionListItemCss,
-  actionListItemNameCss,
-  actionListItemNameSkippedCss,
-  actionListItemSelectedCss,
-  actionListItemSelectorCss,
-  actionListItemSkippedCss,
-  actionListItemTimeCss,
   selectorButtonCss,
   selectorButtonSelectedCss,
   selectorButtonSmallCss,
-} from './utils/createStylingFromTheme';
+} from './utils/selectorButtonStyles';
 
 const BUTTON_SKIP = 'Skip';
 const BUTTON_JUMP = 'Jump';
 
 type Button = typeof BUTTON_SKIP | typeof BUTTON_JUMP;
+
+const actionListItemTimeCss: Interpolation<Theme> = (theme) => ({
+  display: 'inline',
+  padding: '4px 6px',
+  borderRadius: '3px',
+  fontSize: '0.8em',
+  lineHeight: '1em',
+  flexShrink: 0,
+
+  backgroundColor: theme.ACTION_TIME_BACK_COLOR,
+  color: theme.ACTION_TIME_COLOR,
+});
 
 interface Props<A extends Action<string>> {
   actionId: number;
@@ -86,16 +90,36 @@ export default class ActionListRow<
         onMouseUp={this.handleMouseEnter}
         data-id={actionId}
         css={[
-          actionListItemCss,
-          isSelected && actionListItemSelectedCss,
-          isSkipped && actionListItemSkippedCss,
-          isInFuture && actionListFromFutureCss,
+          (theme) => ({
+            borderBottomWidth: '1px',
+            borderBottomStyle: 'solid',
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '5px 10px',
+            cursor: 'pointer',
+            userSelect: 'none',
+
+            borderBottomColor: theme.BORDER_COLOR,
+          }),
+          isSelected &&
+            ((theme) => ({
+              backgroundColor: theme.SELECTED_BACKGROUND_COLOR,
+            })),
+          isSkipped &&
+            ((theme) => ({
+              backgroundColor: theme.SKIPPED_BACKGROUND_COLOR,
+            })),
+          isInFuture && { opacity: '0.6' },
         ]}
       >
         <div
           css={[
-            actionListItemNameCss,
-            isSkipped && actionListItemNameSkippedCss,
+            {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              lineHeight: '20px',
+            },
+            isSkipped && { textDecoration: 'line-through', opacity: 0.3 },
           ]}
         >
           {actionType}
@@ -112,7 +136,7 @@ export default class ActionListRow<
             </div>
           </RightSlider>
         ) : (
-          <div css={actionListItemButtonsCss}>
+          <div css={{ position: 'relative', height: '20px', display: 'flex' }}>
             <RightSlider shown={!showButtons} rotate>
               <div css={actionListItemTimeCss}>
                 {timeDelta === 0
@@ -124,7 +148,7 @@ export default class ActionListRow<
               </div>
             </RightSlider>
             <RightSlider shown={showButtons} rotate>
-              <div css={actionListItemSelectorCss}>
+              <div css={{ display: 'inline-flex' }}>
                 {([BUTTON_JUMP, BUTTON_SKIP] as const).map(
                   (btn) =>
                     (!isInitAction || btn !== BUTTON_SKIP) && (

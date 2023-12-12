@@ -1,15 +1,27 @@
 import React, { FunctionComponent } from 'react';
 import { Action } from 'redux';
+import { css } from '@emotion/react';
+import type { Interpolation, Theme } from '@emotion/react';
 import { Tab } from './ActionPreview';
 import {
-  inspectedPathCss,
-  inspectedPathKeyCss,
-  inspectedPathKeyLinkCss,
-  previewHeaderCss,
   selectorButtonCss,
   selectorButtonSelectedCss,
-  tabSelectorCss,
-} from './utils/createStylingFromTheme';
+} from './utils/selectorButtonStyles';
+
+const inspectedPathKeyCss = css({
+  '&:not(:last-child):after': {
+    content: '" > "',
+  },
+});
+
+const inspectedPathKeyLinkCss: Interpolation<Theme> = (theme) => ({
+  cursor: 'pointer',
+  color: theme.LINK_COLOR,
+  '&:hover': {
+    textDecoration: 'underline',
+    color: theme.LINK_HOVER_COLOR,
+  },
+});
 
 interface Props<S, A extends Action<string>> {
   tabs: Tab<S, A>[];
@@ -22,8 +34,20 @@ interface Props<S, A extends Action<string>> {
 const ActionPreviewHeader: FunctionComponent<
   Props<unknown, Action<string>>
 > = ({ inspectedPath, onInspectPath, tabName, onSelectTab, tabs }) => (
-  <div key="previewHeader" css={previewHeaderCss}>
-    <div css={tabSelectorCss}>
+  <div
+    key="previewHeader"
+    css={(theme) => ({
+      flex: '0 0 30px',
+      padding: '5px 10px',
+      alignItems: 'center',
+      borderBottomWidth: '1px',
+      borderBottomStyle: 'solid',
+
+      backgroundColor: theme.HEADER_BACKGROUND_COLOR,
+      borderBottomColor: theme.HEADER_BORDER_COLOR,
+    })}
+  >
+    <div css={{ position: 'relative', display: 'inline-flex', float: 'right' }}>
       {tabs.map((tab) => (
         <div
           onClick={() => onSelectTab(tab.name)}
@@ -37,7 +61,7 @@ const ActionPreviewHeader: FunctionComponent<
         </div>
       ))}
     </div>
-    <div css={inspectedPathCss}>
+    <div css={{ padding: '6px 0' }}>
       {inspectedPath.length ? (
         <span css={inspectedPathKeyCss}>
           <a onClick={() => onInspectPath([])} css={inspectedPathKeyLinkCss}>

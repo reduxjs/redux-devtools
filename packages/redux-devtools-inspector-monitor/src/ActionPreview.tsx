@@ -9,12 +9,6 @@ import ActionPreviewHeader from './ActionPreviewHeader';
 import DiffTab from './tabs/DiffTab';
 import StateTab from './tabs/StateTab';
 import ActionTab from './tabs/ActionTab';
-import {
-  actionPreviewContentCss,
-  actionPreviewCss,
-  stateErrorCss,
-  treeItemPinCss,
-} from './utils/createStylingFromTheme';
 
 export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;
@@ -123,13 +117,31 @@ class ActionPreview<S, A extends Action<string>> extends Component<
       renderedTabs.find((tab) => tab.name === DEFAULT_STATE.tabName)!;
 
     return (
-      <div key="actionPreview" css={actionPreviewCss}>
+      <div
+        key="actionPreview"
+        css={(theme) => ({
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+          overflowY: 'hidden',
+
+          '& pre': {
+            border: 'inherit',
+            borderRadius: '3px',
+            lineHeight: 'inherit',
+            color: 'inherit',
+          },
+
+          backgroundColor: theme.BACKGROUND_COLOR,
+        })}
+      >
         <ActionPreviewHeader
           tabs={renderedTabs as unknown as Tab<unknown, Action<string>>[]}
           {...{ inspectedPath, onInspectPath, tabName, onSelectTab }}
         />
         {!error && (
-          <div key="actionPreviewContent" css={actionPreviewContentCss}>
+          <div key="actionPreviewContent" css={{ flex: 1, overflowY: 'auto' }}>
             <TabComponent
               labelRenderer={this.labelRenderer}
               {...{
@@ -152,7 +164,19 @@ class ActionPreview<S, A extends Action<string>> extends Component<
             />
           </div>
         )}
-        {error && <div css={stateErrorCss}>{error}</div>}
+        {error && (
+          <div
+            css={(theme) => ({
+              padding: '10px',
+              marginLeft: '14px',
+              fontWeight: 'bold',
+
+              color: theme.ERROR_COLOR,
+            })}
+          >
+            {error}
+          </div>
+        )}
       </div>
     );
   }
@@ -164,7 +188,16 @@ class ActionPreview<S, A extends Action<string>> extends Component<
       <span>
         <span>{key}</span>
         <span
-          css={treeItemPinCss}
+          css={(theme) => ({
+            fontSize: '0.7em',
+            paddingLeft: '5px',
+            cursor: 'pointer',
+            '&:hover': {
+              textDecoration: 'underline',
+            },
+
+            color: theme.PIN_COLOR,
+          })}
           onClick={() =>
             onInspectPath([
               ...inspectedPath.slice(0, inspectedPath.length - 1),

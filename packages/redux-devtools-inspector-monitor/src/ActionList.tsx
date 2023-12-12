@@ -20,11 +20,6 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
-import {
-  actionListCss,
-  actionListRowsCss,
-  actionListWideCss,
-} from './utils/createStylingFromTheme';
 
 function getTimestamps<A extends Action<string>>(
   actions: { [actionId: number]: PerformAction<A> },
@@ -152,7 +147,27 @@ export default function ActionList<A extends Action<string>>({
     <div
       key="actionList"
       data-testid="actionList"
-      css={[actionListCss, isWideLayout && actionListWideCss]}
+      css={[
+        (theme) => ({
+          flexBasis: '40%',
+          flexShrink: 0,
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          borderBottomWidth: '3px',
+          borderBottomStyle: 'double',
+          display: 'flex',
+          flexDirection: 'column',
+
+          backgroundColor: theme.BACKGROUND_COLOR,
+          borderColor: theme.LIST_BORDER_COLOR,
+        }),
+        isWideLayout && {
+          flexBasis: '40%',
+          borderBottom: 'none',
+          borderRightWidth: '3px',
+          borderRightStyle: 'double',
+        },
+      ]}
     >
       <ActionListHeader
         onSearch={onSearch}
@@ -165,7 +180,7 @@ export default function ActionList<A extends Action<string>>({
       />
       <div
         data-testid="actionListRows"
-        css={actionListRowsCss}
+        css={{ overflow: 'auto' }}
         ref={setNodeRef}
       >
         <DndContext
