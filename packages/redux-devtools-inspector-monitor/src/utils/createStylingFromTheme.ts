@@ -4,6 +4,7 @@ import rgba from 'hex-rgba';
 import { Base16Theme } from 'redux-devtools-themes';
 import * as reduxThemes from 'redux-devtools-themes';
 import * as inspectorThemes from '../themes';
+import { getBase16Theme, invertBase16Theme } from 'react-base16-styling';
 
 declare module '@emotion/react' {
   export interface Theme {
@@ -365,4 +366,19 @@ export const rightSliderRotateShownCss = css({
   transition: 'transform 0.2s ease-in-out 0.18s',
 });
 
-export const base16Themes = { ...reduxThemes, ...inspectorThemes };
+const base16Themes = { ...reduxThemes, ...inspectorThemes };
+export type Base16ThemeName = keyof typeof base16Themes;
+
+export function resolveBase16Theme(theme: Base16ThemeName | Base16Theme) {
+  return getBase16Theme(theme, base16Themes);
+}
+
+export function createInspectorMonitorThemeFromBase16Theme(
+  base16Theme: Base16Theme,
+  invertTheme: boolean,
+) {
+  const finalBase16Theme = invertTheme
+    ? invertBase16Theme(base16Theme)
+    : base16Theme;
+  return colorMap(finalBase16Theme);
+}

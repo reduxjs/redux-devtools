@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Base16Theme } from 'redux-devtools-themes';
-import { getBase16Theme, invertBase16Theme } from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
@@ -9,10 +8,11 @@ import {
 import { Action, Dispatch } from 'redux';
 import { Delta, DiffContext } from 'jsondiffpatch';
 import {
-  base16Themes,
-  colorMap,
+  Base16ThemeName,
+  createInspectorMonitorThemeFromBase16Theme,
   inspectorCss,
   inspectorWideCss,
+  resolveBase16Theme,
 } from './utils/createStylingFromTheme';
 import ActionList from './ActionList';
 import ActionPreview, { Tab } from './ActionPreview';
@@ -131,7 +131,7 @@ export interface ExternalProps<S, A extends Action<string>> {
   preserveScrollTop?: boolean;
   draggableActions: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof base16Themes | Base16Theme;
+  theme: Base16ThemeName | Base16Theme;
   supportImmutable: boolean;
   diffObjectHash?: (item: unknown, index: number) => string;
   diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
@@ -148,7 +148,7 @@ interface DefaultProps {
   select: (state: unknown) => unknown;
   supportImmutable: boolean;
   draggableActions: boolean;
-  theme: keyof typeof base16Themes;
+  theme: Base16ThemeName;
   invertTheme: boolean;
 }
 
@@ -160,7 +160,7 @@ export interface DevtoolsInspectorProps<S, A extends Action<string>>
   preserveScrollTop?: boolean;
   draggableActions: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof base16Themes | Base16Theme;
+  theme: Base16ThemeName | Base16Theme;
   supportImmutable: boolean;
   diffObjectHash?: (item: unknown, index: number) => string;
   diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
@@ -273,12 +273,13 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
       tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
     const { isWideLayout, action, nextState, delta, error } = this.state;
 
-    const base16Theme = getBase16Theme(theme, base16Themes)!;
-    const finalBase16Theme = invertTheme
-      ? invertBase16Theme(base16Theme)
-      : base16Theme;
+    const base16Theme = resolveBase16Theme(theme)!;
+    const inspectorMonitorTheme = createInspectorMonitorThemeFromBase16Theme(
+      base16Theme,
+      invertTheme,
+    );
     return (
-      <ThemeProvider theme={colorMap(finalBase16Theme)}>
+      <ThemeProvider theme={inspectorMonitorTheme}>
         <div
           key="inspector"
           data-testid="inspector"
