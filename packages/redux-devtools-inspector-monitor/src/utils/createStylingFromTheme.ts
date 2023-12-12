@@ -6,11 +6,34 @@ import * as reduxThemes from 'redux-devtools-themes';
 import * as inspectorThemes from '../themes';
 
 declare module '@emotion/react' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface Theme extends Base16Theme {}
+  export interface Theme {
+    TEXT_COLOR: string;
+    TEXT_PLACEHOLDER_COLOR: string;
+    BACKGROUND_COLOR: string;
+    SELECTED_BACKGROUND_COLOR: string;
+    SKIPPED_BACKGROUND_COLOR: string;
+    HEADER_BACKGROUND_COLOR: string;
+    HEADER_BORDER_COLOR: string;
+    BORDER_COLOR: string;
+    LIST_BORDER_COLOR: string;
+    ACTION_TIME_BACK_COLOR: string;
+    ACTION_TIME_COLOR: string;
+    PIN_COLOR: string;
+    ITEM_HINT_COLOR: string;
+    TAB_BACK_SELECTED_COLOR: string;
+    TAB_BACK_COLOR: string;
+    TAB_BACK_HOVER_COLOR: string;
+    TAB_BORDER_COLOR: string;
+    DIFF_ADD_COLOR: string;
+    DIFF_REMOVE_COLOR: string;
+    DIFF_ARROW_COLOR: string;
+    LINK_COLOR: string;
+    LINK_HOVER_COLOR: string;
+    ERROR_COLOR: string;
+  }
 }
 
-const colorMap = (theme: Base16Theme) => ({
+export const colorMap = (theme: Base16Theme) => ({
   TEXT_COLOR: theme.base06,
   TEXT_PLACEHOLDER_COLOR: rgba(theme.base06, 60),
   BACKGROUND_COLOR: theme.base00,
@@ -46,8 +69,8 @@ export const inspectorCss: Interpolation<Theme> = (theme) => ({
   WebkitFontSmoothing: 'antialiased',
   lineHeight: '1.5em',
 
-  backgroundColor: colorMap(theme).BACKGROUND_COLOR,
-  color: colorMap(theme).TEXT_COLOR,
+  backgroundColor: theme.BACKGROUND_COLOR,
+  color: theme.TEXT_COLOR,
 });
 
 export const inspectorWideCss = css({ flexDirection: 'row' });
@@ -62,8 +85,8 @@ export const actionListCss: Interpolation<Theme> = (theme) => ({
   display: 'flex',
   flexDirection: 'column',
 
-  backgroundColor: colorMap(theme).BACKGROUND_COLOR,
-  borderColor: colorMap(theme).LIST_BORDER_COLOR,
+  backgroundColor: theme.BACKGROUND_COLOR,
+  borderColor: theme.LIST_BORDER_COLOR,
 });
 
 export const actionListWideCss = css({
@@ -80,7 +103,7 @@ export const actionListHeaderCss: Interpolation<Theme> = (theme) => ({
   borderBottomWidth: '1px',
   borderBottomStyle: 'solid',
 
-  borderColor: colorMap(theme).LIST_BORDER_COLOR,
+  borderColor: theme.LIST_BORDER_COLOR,
 });
 
 export const actionListRowsCss = css({ overflow: 'auto' });
@@ -99,15 +122,15 @@ export const actionListItemCss: Interpolation<Theme> = (theme) => ({
   cursor: 'pointer',
   userSelect: 'none',
 
-  borderBottomColor: colorMap(theme).BORDER_COLOR,
+  borderBottomColor: theme.BORDER_COLOR,
 });
 
 export const actionListItemSelectedCss: Interpolation<Theme> = (theme) => ({
-  backgroundColor: colorMap(theme).SELECTED_BACKGROUND_COLOR,
+  backgroundColor: theme.SELECTED_BACKGROUND_COLOR,
 });
 
 export const actionListItemSkippedCss: Interpolation<Theme> = (theme) => ({
-  backgroundColor: colorMap(theme).SKIPPED_BACKGROUND_COLOR,
+  backgroundColor: theme.SKIPPED_BACKGROUND_COLOR,
 });
 
 export const actionListFromFutureCss = css({ opacity: '0.6' });
@@ -126,8 +149,8 @@ export const actionListItemTimeCss: Interpolation<Theme> = (theme) => ({
   lineHeight: '1em',
   flexShrink: 0,
 
-  backgroundColor: colorMap(theme).ACTION_TIME_BACK_COLOR,
-  color: colorMap(theme).ACTION_TIME_COLOR,
+  backgroundColor: theme.ACTION_TIME_BACK_COLOR,
+  color: theme.ACTION_TIME_COLOR,
 });
 
 export const actionListItemSelectorCss = css({ display: 'inline-flex' });
@@ -151,15 +174,15 @@ export const actionListHeaderSearchCss: Interpolation<Theme> = (theme) => ({
   fontSize: '1em',
   fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
 
-  backgroundColor: colorMap(theme).BACKGROUND_COLOR,
-  color: colorMap(theme).TEXT_COLOR,
+  backgroundColor: theme.BACKGROUND_COLOR,
+  color: theme.TEXT_COLOR,
 
   '&::-webkit-input-placeholder': {
-    color: colorMap(theme).TEXT_PLACEHOLDER_COLOR,
+    color: theme.TEXT_PLACEHOLDER_COLOR,
   },
 
   '&::-moz-placeholder': {
-    color: colorMap(theme).TEXT_PLACEHOLDER_COLOR,
+    color: theme.TEXT_PLACEHOLDER_COLOR,
   },
 });
 
@@ -182,7 +205,7 @@ export const actionPreviewCss: Interpolation<Theme> = (theme) => ({
     color: 'inherit',
   },
 
-  backgroundColor: colorMap(theme).BACKGROUND_COLOR,
+  backgroundColor: theme.BACKGROUND_COLOR,
 });
 
 export const actionPreviewContentCss = css({ flex: 1, overflowY: 'auto' });
@@ -190,7 +213,7 @@ export const actionPreviewContentCss = css({ flex: 1, overflowY: 'auto' });
 export const stateDiffEmptyCss: Interpolation<Theme> = (theme) => ({
   padding: '10px',
 
-  color: colorMap(theme).TEXT_PLACEHOLDER_COLOR,
+  color: theme.TEXT_PLACEHOLDER_COLOR,
 });
 
 export const stateErrorCss: Interpolation<Theme> = (theme) => ({
@@ -198,7 +221,7 @@ export const stateErrorCss: Interpolation<Theme> = (theme) => ({
   marginLeft: '14px',
   fontWeight: 'bold',
 
-  color: colorMap(theme).ERROR_COLOR,
+  color: theme.ERROR_COLOR,
 });
 
 export const inspectedPathCss = css({ padding: '6px 0' });
@@ -211,10 +234,10 @@ export const inspectedPathKeyCss = css({
 
 export const inspectedPathKeyLinkCss: Interpolation<Theme> = (theme) => ({
   cursor: 'pointer',
-  color: colorMap(theme).LINK_COLOR,
+  color: theme.LINK_COLOR,
   '&:hover': {
     textDecoration: 'underline',
-    color: colorMap(theme).LINK_HOVER_COLOR,
+    color: theme.LINK_HOVER_COLOR,
   },
 });
 
@@ -226,11 +249,11 @@ export const treeItemPinCss: Interpolation<Theme> = (theme) => ({
     textDecoration: 'underline',
   },
 
-  color: colorMap(theme).PIN_COLOR,
+  color: theme.PIN_COLOR,
 });
 
 export const treeItemHintCss: Interpolation<Theme> = (theme) => ({
-  color: colorMap(theme).ITEM_HINT_COLOR,
+  color: theme.ITEM_HINT_COLOR,
 });
 
 export const previewHeaderCss: Interpolation<Theme> = (theme) => ({
@@ -240,8 +263,8 @@ export const previewHeaderCss: Interpolation<Theme> = (theme) => ({
   borderBottomWidth: '1px',
   borderBottomStyle: 'solid',
 
-  backgroundColor: colorMap(theme).HEADER_BACKGROUND_COLOR,
-  borderBottomColor: colorMap(theme).HEADER_BORDER_COLOR,
+  backgroundColor: theme.HEADER_BACKGROUND_COLOR,
+  borderBottomColor: theme.HEADER_BORDER_COLOR,
 });
 
 export const tabSelectorCss = css({
@@ -269,13 +292,13 @@ export const selectorButtonCss: Interpolation<Theme> = (theme) => ({
     borderBottomRightRadius: '3px',
   },
 
-  backgroundColor: colorMap(theme).TAB_BACK_COLOR,
+  backgroundColor: theme.TAB_BACK_COLOR,
 
   '&:hover': {
-    backgroundColor: colorMap(theme).TAB_BACK_HOVER_COLOR,
+    backgroundColor: theme.TAB_BACK_HOVER_COLOR,
   },
 
-  borderColor: colorMap(theme).TAB_BORDER_COLOR,
+  borderColor: theme.TAB_BORDER_COLOR,
 });
 
 export const selectorButtonSmallCss = css({
@@ -284,7 +307,7 @@ export const selectorButtonSmallCss = css({
 });
 
 export const selectorButtonSelectedCss: Interpolation<Theme> = (theme) => ({
-  backgroundColor: colorMap(theme).TAB_BACK_SELECTED_COLOR,
+  backgroundColor: theme.TAB_BACK_SELECTED_COLOR,
 });
 
 export const diffCss: Interpolation<Theme> = (theme) => ({
@@ -292,31 +315,31 @@ export const diffCss: Interpolation<Theme> = (theme) => ({
   borderRadius: '3px',
   position: 'relative',
 
-  color: colorMap(theme).TEXT_COLOR,
+  color: theme.TEXT_COLOR,
 });
 
 export const diffWrapCss = css({ position: 'relative', zIndex: 1 });
 
 export const diffAddCss: Interpolation<Theme> = (theme) => ({
-  backgroundColor: colorMap(theme).DIFF_ADD_COLOR,
+  backgroundColor: theme.DIFF_ADD_COLOR,
 });
 
 export const diffRemoveCss: Interpolation<Theme> = (theme) => ({
   textDecoration: 'line-through',
-  backgroundColor: colorMap(theme).DIFF_REMOVE_COLOR,
+  backgroundColor: theme.DIFF_REMOVE_COLOR,
 });
 
 export const diffUpdateFromCss: Interpolation<Theme> = (theme) => ({
   textDecoration: 'line-through',
-  backgroundColor: colorMap(theme).DIFF_REMOVE_COLOR,
+  backgroundColor: theme.DIFF_REMOVE_COLOR,
 });
 
 export const diffUpdateToCss: Interpolation<Theme> = (theme) => ({
-  backgroundColor: colorMap(theme).DIFF_ADD_COLOR,
+  backgroundColor: theme.DIFF_ADD_COLOR,
 });
 
 export const diffUpdateArrowCss: Interpolation<Theme> = (theme) => ({
-  color: colorMap(theme).DIFF_ARROW_COLOR,
+  color: theme.DIFF_ARROW_COLOR,
 });
 
 export const rightSliderCss = css({

@@ -10,6 +10,7 @@ import { Action, Dispatch } from 'redux';
 import { Delta, DiffContext } from 'jsondiffpatch';
 import {
   base16Themes,
+  colorMap,
   inspectorCss,
   inspectorWideCss,
 } from './utils/createStylingFromTheme';
@@ -273,10 +274,11 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
     const { isWideLayout, action, nextState, delta, error } = this.state;
 
     const base16Theme = getBase16Theme(theme, base16Themes)!;
+    const finalBase16Theme = invertTheme
+      ? invertBase16Theme(base16Theme)
+      : base16Theme;
     return (
-      <ThemeProvider
-        theme={invertTheme ? invertBase16Theme(base16Theme) : base16Theme}
-      >
+      <ThemeProvider theme={colorMap(finalBase16Theme)}>
         <div
           key="inspector"
           data-testid="inspector"
