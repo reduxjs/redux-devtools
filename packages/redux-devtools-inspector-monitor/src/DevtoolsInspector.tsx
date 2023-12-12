@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Base16Theme } from 'redux-devtools-themes';
-import {
-  getBase16Theme,
-  invertBase16Theme,
-  invertTheme,
-  StylingFunction,
-} from 'react-base16-styling';
+import { getBase16Theme, invertBase16Theme } from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
@@ -14,7 +9,6 @@ import {
 import { Action, Dispatch } from 'redux';
 import { Delta, DiffContext } from 'jsondiffpatch';
 import {
-  createStylingFromTheme,
   base16Themes,
   inspectorCss,
   inspectorWideCss,
@@ -134,10 +128,7 @@ function createThemeState<S, A extends Action<string>>(
 ) {
   const base16Theme = getBase16Theme(props.theme, base16Themes)!;
 
-  const theme = props.invertTheme ? invertTheme(props.theme) : props.theme;
-  const styling = createStylingFromTheme(theme);
-
-  return { base16Theme, styling };
+  return { base16Theme };
 }
 
 export interface ExternalProps<S, A extends Action<string>> {
@@ -195,7 +186,7 @@ interface State<S, A extends Action<string>> {
   action: A;
   error: string | undefined;
   isWideLayout: boolean;
-  themeState: { base16Theme: Base16Theme; styling: StylingFunction };
+  themeState: { base16Theme: Base16Theme };
 }
 
 class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<

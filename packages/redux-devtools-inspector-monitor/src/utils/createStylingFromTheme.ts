@@ -1,16 +1,7 @@
-import jss, { StyleSheet } from 'jss';
-import preset from 'jss-preset-default';
 import { css } from '@emotion/react';
 import type { Interpolation, Theme } from '@emotion/react';
-import {
-  createStyling,
-  StylingFunction,
-  Theme as Base16StylingTheme,
-} from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import { Base16Theme } from 'redux-devtools-themes';
-import type { CurriedFunction1 } from 'lodash';
-import inspector from '../themes/inspector';
 import * as reduxThemes from 'redux-devtools-themes';
 import * as inspectorThemes from '../themes';
 
@@ -18,8 +9,6 @@ declare module '@emotion/react' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface Theme extends Base16Theme {}
 }
-
-jss.setup(preset());
 
 const colorMap = (theme: Base16Theme) => ({
   TEXT_COLOR: theme.base06,
@@ -48,9 +37,6 @@ const colorMap = (theme: Base16Theme) => ({
 });
 
 type Color = keyof ReturnType<typeof colorMap>;
-type ColorMap = {
-  [color in Color]: string;
-};
 
 export const inspectorCss: Interpolation<Theme> = (theme) => ({
   display: 'flex',
@@ -358,28 +344,4 @@ export const rightSliderRotateShownCss = css({
   transition: 'transform 0.2s ease-in-out 0.18s',
 });
 
-const getSheetFromColorMap = (map: ColorMap) => ({});
-
-let themeSheet: StyleSheet;
-
-const getDefaultThemeStyling = (theme: Base16Theme) => {
-  if (themeSheet) {
-    themeSheet.detach();
-  }
-
-  themeSheet = jss
-    .createStyleSheet(getSheetFromColorMap(colorMap(theme)))
-    .attach();
-
-  return themeSheet.classes;
-};
-
 export const base16Themes = { ...reduxThemes, ...inspectorThemes };
-
-export const createStylingFromTheme: CurriedFunction1<
-  Base16StylingTheme | undefined,
-  StylingFunction
-> = createStyling(getDefaultThemeStyling, {
-  defaultBase16: inspector,
-  base16Themes,
-});
