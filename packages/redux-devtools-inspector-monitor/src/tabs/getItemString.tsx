@@ -1,6 +1,5 @@
 import React from 'react';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
-import { StylingFunction } from 'react-base16-styling';
 import isIterable from '../utils/isIterable';
 import { treeItemHintCss } from '../utils/createStylingFromTheme';
 
@@ -73,7 +72,6 @@ function getText(
 }
 
 const getItemString = (
-  styling: StylingFunction,
   type: string,
   data: any,
   dataTypeKey: string | symbol | undefined,

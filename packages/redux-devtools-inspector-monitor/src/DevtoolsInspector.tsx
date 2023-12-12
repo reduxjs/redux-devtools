@@ -297,7 +297,7 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
       tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
     const { themeState, isWideLayout, action, nextState, delta, error } =
       this.state;
-    const { base16Theme, styling } = themeState;
+    const { base16Theme } = themeState;
 
     return (
       <ThemeProvider
@@ -321,7 +321,6 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
               draggableActions,
               hideMainButtons,
               hideActionButtons,
-              styling,
             }}
             onSearch={this.handleSearch}
             onSelect={this.handleSelectAction}
@@ -354,7 +353,6 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
             }}
             monitorState={this.props.monitorState}
             updateMonitorState={this.updateMonitorState}
-            styling={styling}
             onInspectPath={(path: (string | number)[]) =>
               this.handleInspectPath(inspectedPathType, path)
             }

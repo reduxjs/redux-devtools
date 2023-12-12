@@ -9,7 +9,6 @@ const ActionTab: FunctionComponent<
   TabComponentProps<unknown, Action<string>>
 > = ({
   action,
-  styling,
   base16Theme,
   invertTheme,
   labelRenderer,
@@ -21,7 +20,7 @@ const ActionTab: FunctionComponent<
     theme={getJsonTreeTheme(base16Theme)}
     data={action}
     getItemString={(type, data) =>
-      getItemString(styling, type, data, dataTypeKey, isWideLayout)
+      getItemString(type, data, dataTypeKey, isWideLayout)
     }
     invertTheme={invertTheme}
     hideRoot

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Base16Theme } from 'redux-devtools-themes';
 import { Action } from 'redux';
-import type { StylingFunction } from 'react-base16-styling';
 import type { LabelRenderer } from 'react-json-tree';
 import { PerformAction } from '@redux-devtools/core';
 import { Delta } from 'jsondiffpatch';
@@ -19,7 +18,6 @@ import {
 
 export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;
-  styling: StylingFunction;
   computedStates: { state: S; error?: string }[];
   actions: { [actionId: number]: PerformAction<A> };
   selectedActionId: number | null;
@@ -74,7 +72,6 @@ interface Props<S, A extends Action<string>> {
   dataTypeKey: string | symbol | undefined;
   monitorState: DevtoolsInspectorState;
   updateMonitorState: (monitorState: Partial<DevtoolsInspectorState>) => void;
-  styling: StylingFunction;
   onInspectPath: (path: (string | number)[]) => void;
   inspectedPath: (string | number)[];
   onSelectTab: (tabName: string) => void;
@@ -91,7 +88,6 @@ class ActionPreview<S, A extends Action<string>> extends Component<
 
   render() {
     const {
-      styling,
       delta,
       error,
       nextState,
@@ -130,14 +126,13 @@ class ActionPreview<S, A extends Action<string>> extends Component<
       <div key="actionPreview" css={actionPreviewCss}>
         <ActionPreviewHeader
           tabs={renderedTabs as unknown as Tab<unknown, Action<string>>[]}
-          {...{ styling, inspectedPath, onInspectPath, tabName, onSelectTab }}
+          {...{ inspectedPath, onInspectPath, tabName, onSelectTab }}
         />
         {!error && (
           <div key="actionPreviewContent" css={actionPreviewContentCss}>
             <TabComponent
               labelRenderer={this.labelRenderer}
               {...{
-                styling,
                 computedStates,
                 actions,
                 selectedActionId,
@@ -163,11 +158,11 @@ class ActionPreview<S, A extends Action<string>> extends Component<
   }
 
   labelRenderer: LabelRenderer = ([key, ...rest], nodeType, expanded) => {
-    const { styling, onInspectPath, inspectedPath } = this.props;
+    const { onInspectPath, inspectedPath } = this.props;
 
     return (
       <span>
-        <span {...styling('treeItemKey')}>{key}</span>
+        <span>{key}</span>
         <span
           css={treeItemPinCss}
           onClick={() =>

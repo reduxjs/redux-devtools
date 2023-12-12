@@ -1,7 +1,6 @@
 import React, { ReactNode, useCallback, useLayoutEffect, useRef } from 'react';
 import { Action } from 'redux';
 import { PerformAction } from '@redux-devtools/core';
-import { StylingFunction } from 'react-base16-styling';
 import {
   closestCenter,
   DndContext,
@@ -56,7 +55,6 @@ interface Props<A extends Action<string>> {
   draggableActions: boolean;
   hideMainButtons: boolean | undefined;
   hideActionButtons: boolean | undefined;
-  styling: StylingFunction;
   onSearch: (value: string) => void;
   onSelect: (e: React.MouseEvent<HTMLDivElement>, actionId: number) => void;
   onToggleAction: (actionId: number) => void;
@@ -69,7 +67,6 @@ interface Props<A extends Action<string>> {
 }
 
 export default function ActionList<A extends Action<string>>({
-  styling,
   actions,
   actionIds,
   isWideLayout,
@@ -158,7 +155,6 @@ export default function ActionList<A extends Action<string>>({
       css={[actionListCss, isWideLayout && actionListWideCss]}
     >
       <ActionListHeader
-        styling={styling}
         onSearch={onSearch}
         onCommit={onCommit}
         onSweep={onSweep}
@@ -185,7 +181,6 @@ export default function ActionList<A extends Action<string>>({
             {filteredActionIds.map((actionId) => (
               <SortableItem key={actionId} actionId={actionId}>
                 <ActionListRow
-                  styling={styling}
                   actionId={actionId}
                   isInitAction={!actionId}
                   isSelected={

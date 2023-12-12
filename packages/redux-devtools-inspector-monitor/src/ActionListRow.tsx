@@ -2,7 +2,6 @@ import React, { MouseEvent, MouseEventHandler, PureComponent } from 'react';
 import dateformat from 'dateformat';
 import type { DebouncedFunc } from 'lodash';
 import debounce from 'lodash.debounce';
-import { StylingFunction } from 'react-base16-styling';
 import { Action } from 'redux';
 import RightSlider from './RightSlider';
 import {
@@ -26,7 +25,6 @@ const BUTTON_JUMP = 'Jump';
 type Button = typeof BUTTON_SKIP | typeof BUTTON_JUMP;
 
 interface Props<A extends Action<string>> {
-  styling: StylingFunction;
   actionId: number;
   isInitAction: boolean;
   isSelected: boolean;
@@ -52,7 +50,6 @@ export default class ActionListRow<
 
   render() {
     const {
-      styling,
       isSelected,
       action,
       actionId,
@@ -104,7 +101,7 @@ export default class ActionListRow<
           {actionType}
         </div>
         {hideActionButtons ? (
-          <RightSlider styling={styling} shown>
+          <RightSlider shown>
             <div css={actionListItemTimeCss}>
               {timeDelta === 0
                 ? '+00:00:00'
@@ -116,7 +113,7 @@ export default class ActionListRow<
           </RightSlider>
         ) : (
           <div css={actionListItemButtonsCss}>
-            <RightSlider styling={styling} shown={!showButtons} rotate>
+            <RightSlider shown={!showButtons} rotate>
               <div css={actionListItemTimeCss}>
                 {timeDelta === 0
                   ? '+00:00:00'
@@ -126,7 +123,7 @@ export default class ActionListRow<
                     )}
               </div>
             </RightSlider>
-            <RightSlider styling={styling} shown={showButtons} rotate>
+            <RightSlider shown={showButtons} rotate>
               <div css={actionListItemSelectorCss}>
                 {([BUTTON_JUMP, BUTTON_SKIP] as const).map(
                   (btn) =>

@@ -3,7 +3,6 @@ import { JSONTree } from 'react-json-tree';
 import type { LabelRenderer, ShouldExpandNodeInitially } from 'react-json-tree';
 import { stringify } from 'javascript-stringify';
 import { Delta } from 'jsondiffpatch';
-import { StylingFunction } from 'react-base16-styling';
 import { Base16Theme } from 'redux-devtools-themes';
 import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
@@ -58,7 +57,6 @@ function prepareDelta(value: any) {
 
 interface Props {
   delta: Delta | null | undefined | false;
-  styling: StylingFunction;
   base16Theme: Base16Theme;
   invertTheme: boolean;
   labelRenderer: LabelRenderer;
@@ -92,7 +90,7 @@ export default class JSONDiff extends Component<Props, State> {
   }
 
   render() {
-    const { styling, base16Theme, ...props } = this.props;
+    const { base16Theme, ...props } = this.props;
 
     if (!this.state.data) {
       return <div css={stateDiffEmptyCss}>(states are equal)</div>;
@@ -115,7 +113,6 @@ export default class JSONDiff extends Component<Props, State> {
 
   getItemString = (type: string, data: any) =>
     getItemString(
-      this.props.styling,
       type,
       data,
       this.props.dataTypeKey,
@@ -124,7 +121,7 @@ export default class JSONDiff extends Component<Props, State> {
     );
 
   valueRenderer = (raw: any, value: any) => {
-    const { styling, isWideLayout } = this.props;
+    const { isWideLayout } = this.props;
 
     if (Array.isArray(value)) {
       switch (value.length) {

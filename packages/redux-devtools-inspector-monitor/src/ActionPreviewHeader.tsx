@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { Action } from 'redux';
-import { StylingFunction } from 'react-base16-styling';
 import { Tab } from './ActionPreview';
 import {
   inspectedPathCss,
@@ -14,7 +13,6 @@ import {
 
 interface Props<S, A extends Action<string>> {
   tabs: Tab<S, A>[];
-  styling: StylingFunction;
   inspectedPath: (string | number)[];
   onInspectPath: (path: (string | number)[]) => void;
   tabName: string;
@@ -23,7 +21,7 @@ interface Props<S, A extends Action<string>> {
 
 const ActionPreviewHeader: FunctionComponent<
   Props<unknown, Action<string>>
-> = ({ styling, inspectedPath, onInspectPath, tabName, onSelectTab, tabs }) => (
+> = ({ inspectedPath, onInspectPath, tabName, onSelectTab, tabs }) => (
   <div key="previewHeader" css={previewHeaderCss}>
     <div css={tabSelectorCss}>
       {tabs.map((tab) => (

@@ -9,7 +9,6 @@ const StateTab: React.FunctionComponent<
   TabComponentProps<any, Action<string>>
 > = ({
   nextState,
-  styling,
   base16Theme,
   invertTheme,
   labelRenderer,
@@ -23,7 +22,7 @@ const StateTab: React.FunctionComponent<
     theme={getJsonTreeTheme(base16Theme)}
     data={nextState}
     getItemString={(type, data) =>
-      getItemString(styling, type, data, dataTypeKey, isWideLayout)
+      getItemString(type, data, dataTypeKey, isWideLayout)
     }
     invertTheme={invertTheme}
     hideRoot

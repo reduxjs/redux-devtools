@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { StylingFunction } from 'react-base16-styling';
 import RightSlider from './RightSlider';
 import {
   actionListHeaderCss,
@@ -16,7 +15,6 @@ const getActiveButtons = (hasSkippedActions: boolean): ('Sweep' | 'Commit')[] =>
   );
 
 interface Props {
-  styling: StylingFunction;
   onSearch: (value: string) => void;
   onCommit: () => void;
   onSweep: () => void;
@@ -27,7 +25,6 @@ interface Props {
 }
 
 const ActionListHeader: FunctionComponent<Props> = ({
-  styling,
   onSearch,
   hasSkippedActions,
   hasStagedActions,
@@ -45,7 +42,7 @@ const ActionListHeader: FunctionComponent<Props> = ({
     />
     {!hideMainButtons && (
       <div css={actionListHeaderWrapperCss}>
-        <RightSlider shown={hasStagedActions} styling={styling}>
+        <RightSlider shown={hasStagedActions}>
           <div css={actionListHeaderSelectorCss}>
             {getActiveButtons(hasSkippedActions).map((btn) => (
               <div
