@@ -17,6 +17,41 @@ import { RtkQueryMonitorProps, StyleUtils } from '../types';
 
 jss.setup(preset());
 
+declare module '@emotion/react' {
+  export interface Theme {
+    TEXT_COLOR: string;
+    TEXT_PLACEHOLDER_COLOR: string;
+    BACKGROUND_COLOR: string;
+    SELECTED_BACKGROUND_COLOR: string;
+    SKIPPED_BACKGROUND_COLOR: string;
+    HEADER_BACKGROUND_COLOR: string;
+    HEADER_BORDER_COLOR: string;
+    BORDER_COLOR: string;
+    LIST_BORDER_COLOR: string;
+    ACTION_TIME_BACK_COLOR: string;
+    ACTION_TIME_COLOR: string;
+    PIN_COLOR: string;
+    ITEM_HINT_COLOR: string;
+    TAB_BACK_SELECTED_COLOR: string;
+    TAB_BACK_COLOR: string;
+    TAB_BACK_HOVER_COLOR: string;
+    TAB_BORDER_COLOR: string;
+    DIFF_ADD_COLOR: string;
+    DIFF_REMOVE_COLOR: string;
+    DIFF_ARROW_COLOR: string;
+    LINK_COLOR: string;
+    LINK_HOVER_COLOR: string;
+    ERROR_COLOR: string;
+    ULIST_DISC_COLOR: string;
+    ULIST_COLOR: string;
+    ULIST_STRONG_COLOR: string;
+    TAB_CONTENT_COLOR: string;
+    TOGGLE_BUTTON_BACKGROUND: string;
+    TOGGLE_BUTTON_SELECTED_BACKGROUND: string;
+    TOGGLE_BUTTON_ERROR: string;
+  }
+}
+
 export const colorMap = (theme: reduxThemes.Base16Theme) =>
   ({
     TEXT_COLOR: theme.base06,
@@ -62,25 +97,6 @@ const getSheetFromColorMap = (map: ColorMap) => {
   };
 
   return {
-    inspector: {
-      display: 'flex',
-      flexFlow: 'column nowrap',
-      overflow: 'hidden',
-      width: '100%',
-      height: '100%',
-      'font-family': 'monaco, Consolas, "Lucida Console", monospace',
-      'font-size': '12px',
-      'font-smoothing': 'antialiased',
-      'line-height': '1.5em',
-
-      'background-color': map.BACKGROUND_COLOR,
-      color: map.TEXT_COLOR,
-
-      '&[data-wide-layout="1"]': {
-        flexFlow: 'row nowrap',
-      },
-    },
-
     querySectionWrapper: {
       display: 'flex',
       flex: '0 0 auto',

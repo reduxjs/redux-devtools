@@ -131,7 +131,24 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
       <div
         ref={this.inspectorRef}
         data-wide-layout={+this.state.isWideLayout}
-        {...styling('inspector')}
+        css={(theme) => ({
+          display: 'flex',
+          flexFlow: 'column nowrap',
+          overflow: 'hidden',
+          width: '100%',
+          height: '100%',
+          fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+          fontSize: '12px',
+          WebkitFontSmoothing: 'antialiased',
+          lineHeight: '1.5em',
+
+          backgroundColor: theme.BACKGROUND_COLOR,
+          color: theme.TEXT_COLOR,
+
+          '&[data-wide-layout="1"]': {
+            flexFlow: 'row nowrap',
+          },
+        })}
       >
         <div
           {...styling('querySectionWrapper')}
