@@ -6,6 +6,8 @@ import {
   actionListHeaderSearchCss,
   actionListHeaderSelectorCss,
   actionListHeaderWrapperCss,
+  selectorButtonCss,
+  selectorButtonSmallCss,
 } from './utils/createStylingFromTheme';
 
 const getActiveButtons = (hasSkippedActions: boolean): ('Sweep' | 'Commit')[] =>
@@ -54,11 +56,7 @@ const ActionListHeader: FunctionComponent<Props> = ({
                     Sweep: onSweep,
                   })[btn]()
                 }
-                {...styling(
-                  ['selectorButton', 'selectorButtonSmall'],
-                  false,
-                  true,
-                )}
+                css={[selectorButtonCss, selectorButtonSmallCss]}
               >
                 {btn}
               </div>

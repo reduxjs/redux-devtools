@@ -2,6 +2,15 @@ import React, { FunctionComponent } from 'react';
 import { Action } from 'redux';
 import { StylingFunction } from 'react-base16-styling';
 import { Tab } from './ActionPreview';
+import {
+  inspectedPathCss,
+  inspectedPathKeyCss,
+  inspectedPathKeyLinkCss,
+  previewHeaderCss,
+  selectorButtonCss,
+  selectorButtonSelectedCss,
+  tabSelectorCss,
+} from './utils/createStylingFromTheme';
 
 interface Props<S, A extends Action<string>> {
   tabs: Tab<S, A>[];
@@ -15,31 +24,25 @@ interface Props<S, A extends Action<string>> {
 const ActionPreviewHeader: FunctionComponent<
   Props<unknown, Action<string>>
 > = ({ styling, inspectedPath, onInspectPath, tabName, onSelectTab, tabs }) => (
-  <div key="previewHeader" {...styling('previewHeader')}>
-    <div {...styling('tabSelector')}>
+  <div key="previewHeader" css={previewHeaderCss}>
+    <div css={tabSelectorCss}>
       {tabs.map((tab) => (
         <div
           onClick={() => onSelectTab(tab.name)}
           key={tab.name}
-          {...styling(
-            [
-              'selectorButton',
-              tab.name === tabName && 'selectorButtonSelected',
-            ],
-            tab.name === tabName,
-          )}
+          css={[
+            selectorButtonCss,
+            tab.name === tabName && selectorButtonSelectedCss,
+          ]}
         >
           {tab.name}
         </div>
       ))}
     </div>
-    <div {...styling('inspectedPath')}>
+    <div css={inspectedPathCss}>
       {inspectedPath.length ? (
-        <span {...styling('inspectedPathKey')}>
-          <a
-            onClick={() => onInspectPath([])}
-            {...styling('inspectedPathKeyLink')}
-          >
+        <span css={inspectedPathKeyCss}>
+          <a onClick={() => onInspectPath([])} css={inspectedPathKeyLinkCss}>
             {tabName}
           </a>
         </span>
@@ -50,10 +53,10 @@ const ActionPreviewHeader: FunctionComponent<
         idx === inspectedPath.length - 1 ? (
           <span key={key}>{key}</span>
         ) : (
-          <span key={key} {...styling('inspectedPathKey')}>
+          <span key={key} css={inspectedPathKeyCss}>
             <a
               onClick={() => onInspectPath(inspectedPath.slice(0, idx + 1))}
-              {...styling('inspectedPathKeyLink')}
+              css={inspectedPathKeyLinkCss}
             >
               {key}
             </a>

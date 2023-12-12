@@ -15,6 +15,9 @@ import {
   actionListItemSelectorCss,
   actionListItemSkippedCss,
   actionListItemTimeCss,
+  selectorButtonCss,
+  selectorButtonSelectedCss,
+  selectorButtonSmallCss,
 } from './utils/createStylingFromTheme';
 
 const BUTTON_SKIP = 'Skip';
@@ -131,15 +134,11 @@ export default class ActionListRow<
                       <div
                         key={btn}
                         onClick={(e) => this.handleButtonClick(btn, e)}
-                        {...styling(
-                          [
-                            'selectorButton',
-                            isButtonSelected(btn) && 'selectorButtonSelected',
-                            'selectorButtonSmall',
-                          ],
-                          isButtonSelected(btn),
-                          true,
-                        )}
+                        css={[
+                          selectorButtonCss,
+                          isButtonSelected(btn) && selectorButtonSelectedCss,
+                          selectorButtonSmallCss,
+                        ]}
                       >
                         {btn}
                       </div>

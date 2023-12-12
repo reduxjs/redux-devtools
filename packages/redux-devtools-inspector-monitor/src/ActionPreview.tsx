@@ -10,7 +10,12 @@ import ActionPreviewHeader from './ActionPreviewHeader';
 import DiffTab from './tabs/DiffTab';
 import StateTab from './tabs/StateTab';
 import ActionTab from './tabs/ActionTab';
-import { actionPreviewCss } from './utils/createStylingFromTheme';
+import {
+  actionPreviewContentCss,
+  actionPreviewCss,
+  stateErrorCss,
+  treeItemPinCss,
+} from './utils/createStylingFromTheme';
 
 export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;
@@ -128,7 +133,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
           {...{ styling, inspectedPath, onInspectPath, tabName, onSelectTab }}
         />
         {!error && (
-          <div key="actionPreviewContent" {...styling('actionPreviewContent')}>
+          <div key="actionPreviewContent" css={actionPreviewContentCss}>
             <TabComponent
               labelRenderer={this.labelRenderer}
               {...{
@@ -152,7 +157,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
             />
           </div>
         )}
-        {error && <div {...styling('stateError')}>{error}</div>}
+        {error && <div css={stateErrorCss}>{error}</div>}
       </div>
     );
   }
@@ -164,7 +169,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
       <span>
         <span {...styling('treeItemKey')}>{key}</span>
         <span
-          {...styling('treeItemPin')}
+          css={treeItemPinCss}
           onClick={() =>
             onInspectPath([
               ...inspectedPath.slice(0, inspectedPath.length - 1),

@@ -7,6 +7,16 @@ import { StylingFunction } from 'react-base16-styling';
 import { Base16Theme } from 'redux-devtools-themes';
 import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
+import {
+  diffAddCss,
+  diffCss,
+  diffRemoveCss,
+  diffUpdateArrowCss,
+  diffUpdateFromCss,
+  diffUpdateToCss,
+  diffWrapCss,
+  stateDiffEmptyCss,
+} from '../utils/createStylingFromTheme';
 
 function stringifyAndShrink(val: any, isWideLayout?: boolean) {
   if (val === null) {
@@ -85,7 +95,7 @@ export default class JSONDiff extends Component<Props, State> {
     const { styling, base16Theme, ...props } = this.props;
 
     if (!this.state.data) {
-      return <div {...styling('stateDiffEmpty')}>(states are equal)</div>;
+      return <div css={stateDiffEmptyCss}>(states are equal)</div>;
     }
 
     return (
@@ -116,43 +126,36 @@ export default class JSONDiff extends Component<Props, State> {
   valueRenderer = (raw: any, value: any) => {
     const { styling, isWideLayout } = this.props;
 
-    function renderSpan(name: string, body: string) {
-      return (
-        <span key={name} {...styling(['diff', name])}>
-          {body}
-        </span>
-      );
-    }
-
     if (Array.isArray(value)) {
       switch (value.length) {
         case 1:
           return (
-            <span {...styling('diffWrap')}>
-              {renderSpan(
-                'diffAdd',
-                stringifyAndShrink(value[0], isWideLayout),
-              )}
+            <span css={diffWrapCss}>
+              <span key="diffAdd" css={[diffCss, diffAddCss]}>
+                {stringifyAndShrink(value[0], isWideLayout)}
+              </span>
             </span>
           );
         case 2:
           return (
-            <span {...styling('diffWrap')}>
-              {renderSpan(
-                'diffUpdateFrom',
-                stringifyAndShrink(value[0], isWideLayout),
-              )}
-              {renderSpan('diffUpdateArrow', ' => ')}
-              {renderSpan(
-                'diffUpdateTo',
-                stringifyAndShrink(value[1], isWideLayout),
-              )}
+            <span css={diffWrapCss}>
+              <span key="diffUpdateFrom" css={[diffCss, diffUpdateFromCss]}>
+                {stringifyAndShrink(value[0], isWideLayout)}
+              </span>
+              <span key="diffUpdateArrow" css={[diffCss, diffUpdateArrowCss]}>
+                {' => '}
+              </span>
+              <span key="diffUpdateTo" css={[diffCss, diffUpdateToCss]}>
+                {stringifyAndShrink(value[1], isWideLayout)}
+              </span>
             </span>
           );
         case 3:
           return (
-            <span {...styling('diffWrap')}>
-              {renderSpan('diffRemove', stringifyAndShrink(value[0]))}
+            <span css={diffWrapCss}>
+              <span key="diffRemove" css={[diffCss, diffRemoveCss]}>
+                {stringifyAndShrink(value[0])}
+              </span>
             </span>
           );
       }

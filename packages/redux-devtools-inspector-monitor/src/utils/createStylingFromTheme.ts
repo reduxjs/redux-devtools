@@ -201,176 +201,164 @@ export const actionPreviewCss: Interpolation<Theme> = (theme) => ({
   backgroundColor: colorMap(theme).BACKGROUND_COLOR,
 });
 
-const getSheetFromColorMap = (map: ColorMap) => ({
-  actionPreviewContent: {
-    flex: 1,
-    'overflow-y': 'auto',
-  },
+export const actionPreviewContentCss = css({ flex: 1, overflowY: 'auto' });
 
-  stateDiff: {
-    padding: '5px 0',
-  },
+export const stateDiffEmptyCss: Interpolation<Theme> = (theme) => ({
+  padding: '10px',
 
-  stateDiffEmpty: {
-    padding: '10px',
+  color: colorMap(theme).TEXT_PLACEHOLDER_COLOR,
+});
 
-    color: map.TEXT_PLACEHOLDER_COLOR,
-  },
+export const stateErrorCss: Interpolation<Theme> = (theme) => ({
+  padding: '10px',
+  marginLeft: '14px',
+  fontWeight: 'bold',
 
-  stateError: {
-    padding: '10px',
-    'margin-left': '14px',
-    'font-weight': 'bold',
+  color: colorMap(theme).ERROR_COLOR,
+});
 
-    color: map.ERROR_COLOR,
-  },
+export const inspectedPathCss = css({ padding: '6px 0' });
 
-  inspectedPath: {
-    padding: '6px 0',
-  },
-
-  inspectedPathKey: {
-    '&:not(:last-child):after': {
-      content: '" > "',
-    },
-  },
-
-  inspectedPathKeyLink: {
-    cursor: 'pointer',
-    color: map.LINK_COLOR,
-    '&:hover': {
-      'text-decoration': 'underline',
-      color: map.LINK_HOVER_COLOR,
-    },
-  },
-
-  treeItemPin: {
-    'font-size': '0.7em',
-    'padding-left': '5px',
-    cursor: 'pointer',
-    '&:hover': {
-      'text-decoration': 'underline',
-    },
-
-    color: map.PIN_COLOR,
-  },
-
-  treeItemHint: {
-    color: map.ITEM_HINT_COLOR,
-  },
-
-  previewHeader: {
-    flex: '0 0 30px',
-    padding: '5px 10px',
-    'align-items': 'center',
-    'border-bottom-width': '1px',
-    'border-bottom-style': 'solid',
-
-    'background-color': map.HEADER_BACKGROUND_COLOR,
-    'border-bottom-color': map.HEADER_BORDER_COLOR,
-  },
-
-  tabSelector: {
-    position: 'relative',
-    display: 'inline-flex',
-    float: 'right',
-  },
-
-  selectorButton: {
-    cursor: 'pointer',
-    position: 'relative',
-    padding: '5px 10px',
-    'border-style': 'solid',
-    'border-width': '1px',
-    'border-left-width': 0,
-
-    '&:first-child': {
-      'border-left-width': '1px',
-      'border-top-left-radius': '3px',
-      'border-bottom-left-radius': '3px',
-    },
-
-    '&:last-child': {
-      'border-top-right-radius': '3px',
-      'border-bottom-right-radius': '3px',
-    },
-
-    'background-color': map.TAB_BACK_COLOR,
-
-    '&:hover': {
-      'background-color': map.TAB_BACK_HOVER_COLOR,
-    },
-
-    'border-color': map.TAB_BORDER_COLOR,
-  },
-
-  selectorButtonSmall: {
-    padding: '0px 8px',
-    'font-size': '0.8em',
-  },
-
-  selectorButtonSelected: {
-    'background-color': map.TAB_BACK_SELECTED_COLOR,
-  },
-
-  diff: {
-    padding: '2px 3px',
-    'border-radius': '3px',
-    position: 'relative',
-
-    color: map.TEXT_COLOR,
-  },
-
-  diffWrap: {
-    position: 'relative',
-    'z-index': 1,
-  },
-
-  diffAdd: {
-    'background-color': map.DIFF_ADD_COLOR,
-  },
-
-  diffRemove: {
-    'text-decoration': 'line-through',
-    'background-color': map.DIFF_REMOVE_COLOR,
-  },
-
-  diffUpdateFrom: {
-    'text-decoration': 'line-through',
-    'background-color': map.DIFF_REMOVE_COLOR,
-  },
-
-  diffUpdateTo: {
-    'background-color': map.DIFF_ADD_COLOR,
-  },
-
-  diffUpdateArrow: {
-    color: map.DIFF_ARROW_COLOR,
-  },
-
-  rightSlider: {
-    'font-smoothing': 'subpixel-antialiased', // http://stackoverflow.com/a/21136111/4218591
-    position: 'absolute',
-    right: 0,
-    transform: 'translateX(150%)',
-    transition: 'transform 0.2s ease-in-out',
-  },
-
-  rightSliderRotate: {
-    transform: 'rotateX(90deg)',
-    transition: 'transform 0.2s ease-in-out 0.08s',
-  },
-
-  rightSliderShown: {
-    position: 'static',
-    transform: 'translateX(0)',
-  },
-
-  rightSliderRotateShown: {
-    transform: 'rotateX(0)',
-    transition: 'transform 0.2s ease-in-out 0.18s',
+export const inspectedPathKeyCss = css({
+  '&:not(:last-child):after': {
+    content: '" > "',
   },
 });
+
+export const inspectedPathKeyLinkCss: Interpolation<Theme> = (theme) => ({
+  cursor: 'pointer',
+  color: colorMap(theme).LINK_COLOR,
+  '&:hover': {
+    textDecoration: 'underline',
+    color: colorMap(theme).LINK_HOVER_COLOR,
+  },
+});
+
+export const treeItemPinCss: Interpolation<Theme> = (theme) => ({
+  fontSize: '0.7em',
+  paddingLeft: '5px',
+  cursor: 'pointer',
+  '&:hover': {
+    textDecoration: 'underline',
+  },
+
+  color: colorMap(theme).PIN_COLOR,
+});
+
+export const treeItemHintCss: Interpolation<Theme> = (theme) => ({
+  color: colorMap(theme).ITEM_HINT_COLOR,
+});
+
+export const previewHeaderCss: Interpolation<Theme> = (theme) => ({
+  flex: '0 0 30px',
+  padding: '5px 10px',
+  alignItems: 'center',
+  borderBottomWidth: '1px',
+  borderBottomStyle: 'solid',
+
+  backgroundColor: colorMap(theme).HEADER_BACKGROUND_COLOR,
+  borderBottomColor: colorMap(theme).HEADER_BORDER_COLOR,
+});
+
+export const tabSelectorCss = css({
+  position: 'relative',
+  display: 'inline-flex',
+  float: 'right',
+});
+
+export const selectorButtonCss: Interpolation<Theme> = (theme) => ({
+  cursor: 'pointer',
+  position: 'relative',
+  padding: '5px 10px',
+  borderStyle: 'solid',
+  borderWidth: '1px',
+  borderLeftWidth: 0,
+
+  '&:first-child': {
+    borderLeftWidth: '1px',
+    borderTopLeftRadius: '3px',
+    borderBottomLeftRadius: '3px',
+  },
+
+  '&:last-child': {
+    borderTopRightRadius: '3px',
+    borderBottomRightRadius: '3px',
+  },
+
+  backgroundColor: colorMap(theme).TAB_BACK_COLOR,
+
+  '&:hover': {
+    backgroundColor: colorMap(theme).TAB_BACK_HOVER_COLOR,
+  },
+
+  borderColor: colorMap(theme).TAB_BORDER_COLOR,
+});
+
+export const selectorButtonSmallCss = css({
+  padding: '0px 8px',
+  fontSize: '0.8em',
+});
+
+export const selectorButtonSelectedCss: Interpolation<Theme> = (theme) => ({
+  backgroundColor: colorMap(theme).TAB_BACK_SELECTED_COLOR,
+});
+
+export const diffCss: Interpolation<Theme> = (theme) => ({
+  padding: '2px 3px',
+  borderRadius: '3px',
+  position: 'relative',
+
+  color: colorMap(theme).TEXT_COLOR,
+});
+
+export const diffWrapCss = css({ position: 'relative', zIndex: 1 });
+
+export const diffAddCss: Interpolation<Theme> = (theme) => ({
+  backgroundColor: colorMap(theme).DIFF_ADD_COLOR,
+});
+
+export const diffRemoveCss: Interpolation<Theme> = (theme) => ({
+  textDecoration: 'line-through',
+  backgroundColor: colorMap(theme).DIFF_REMOVE_COLOR,
+});
+
+export const diffUpdateFromCss: Interpolation<Theme> = (theme) => ({
+  textDecoration: 'line-through',
+  backgroundColor: colorMap(theme).DIFF_REMOVE_COLOR,
+});
+
+export const diffUpdateToCss: Interpolation<Theme> = (theme) => ({
+  backgroundColor: colorMap(theme).DIFF_ADD_COLOR,
+});
+
+export const diffUpdateArrowCss: Interpolation<Theme> = (theme) => ({
+  color: colorMap(theme).DIFF_ARROW_COLOR,
+});
+
+export const rightSliderCss = css({
+  WebkitFontSmoothing: 'subpixel-antialiased', // http://stackoverflow.com/a/21136111/4218591
+  position: 'absolute',
+  right: 0,
+  transform: 'translateX(150%)',
+  transition: 'transform 0.2s ease-in-out',
+});
+
+export const rightSliderRotateCss = css({
+  transform: 'rotateX(90deg)',
+  transition: 'transform 0.2s ease-in-out 0.08s',
+});
+
+export const rightSliderShownCss = css({
+  position: 'static',
+  transform: 'translateX(0)',
+});
+
+export const rightSliderRotateShownCss = css({
+  transform: 'rotateX(0)',
+  transition: 'transform 0.2s ease-in-out 0.18s',
+});
+
+const getSheetFromColorMap = (map: ColorMap) => ({});
 
 let themeSheet: StyleSheet;
 

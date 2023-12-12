@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { StylingFunction } from 'react-base16-styling';
+import {
+  rightSliderCss,
+  rightSliderRotateCss,
+  rightSliderRotateShownCss,
+  rightSliderShownCss,
+} from './utils/createStylingFromTheme';
 
 interface Props {
   styling: StylingFunction;
@@ -15,12 +21,12 @@ const RightSlider: FunctionComponent<Props> = ({
   rotate,
 }) => (
   <div
-    {...styling([
-      'rightSlider',
-      shown && 'rightSliderShown',
-      rotate && 'rightSliderRotate',
-      rotate && shown && 'rightSliderRotateShown',
-    ])}
+    css={[
+      rightSliderCss,
+      shown && rightSliderShownCss,
+      rotate && rightSliderRotateCss,
+      rotate && shown && rightSliderRotateShownCss,
+    ]}
   >
     {children}
   </div>
