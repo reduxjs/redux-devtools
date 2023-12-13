@@ -1,7 +1,6 @@
 import React, { ReactNode, PureComponent } from 'react';
 import type { ShouldExpandNodeInitially } from 'react-json-tree';
 import { ApiStats, QueryPreviewTabs, RtkQueryApiState } from '../types';
-import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 import { TreeView, TreeViewProps } from './TreeView';
 import { renderTabPanelId, renderTabPanelButtonId } from '../utils/a11y';
 
@@ -39,58 +38,54 @@ export class QueryPreviewApi extends PureComponent<QueryPreviewApiProps> {
     const hasQueries = Object.keys(apiState.queries).length > 0;
 
     return (
-      <StyleUtilsContext.Consumer>
-        {({ styling }) => (
-          <article
-            {...rootProps}
-            css={(theme) => ({
-              display: 'block',
-              overflowY: 'auto',
-              padding: '0.5em 0',
-              color: theme.TAB_CONTENT_COLOR,
-              '& h2': {
-                color: theme.ULIST_STRONG_COLOR,
-                padding: '0.5em 1em',
-                fontWeight: 700,
-              },
-              '& h3': {
-                color: theme.ULIST_STRONG_COLOR,
-              },
-            })}
-          >
-            <h2>{apiState.config.reducerPath}</h2>
+      <article
+        {...rootProps}
+        css={(theme) => ({
+          display: 'block',
+          overflowY: 'auto',
+          padding: '0.5em 0',
+          color: theme.TAB_CONTENT_COLOR,
+          '& h2': {
+            color: theme.ULIST_STRONG_COLOR,
+            padding: '0.5em 1em',
+            fontWeight: 700,
+          },
+          '& h3': {
+            color: theme.ULIST_STRONG_COLOR,
+          },
+        })}
+      >
+        <h2>{apiState.config.reducerPath}</h2>
+        <TreeView
+          before={<h3>State</h3>}
+          data={apiState}
+          shouldExpandNodeInitially={this.shouldExpandApiStateNode}
+          isWideLayout={isWideLayout}
+        />
+        {apiStats && (
+          <>
             <TreeView
-              before={<h3>State</h3>}
-              data={apiState}
-              shouldExpandNodeInitially={this.shouldExpandApiStateNode}
+              before={<h3>Tally</h3>}
+              data={apiStats.tally}
               isWideLayout={isWideLayout}
             />
-            {apiStats && (
-              <>
-                <TreeView
-                  before={<h3>Tally</h3>}
-                  data={apiStats.tally}
-                  isWideLayout={isWideLayout}
-                />
-                {hasQueries && (
-                  <TreeView
-                    before={<h3>Queries Timings</h3>}
-                    data={apiStats.timings.queries}
-                    isWideLayout={isWideLayout}
-                  />
-                )}
-                {hasMutations && (
-                  <TreeView
-                    before={<h3>Mutations Timings</h3>}
-                    data={apiStats.timings.mutations}
-                    isWideLayout={isWideLayout}
-                  />
-                )}
-              </>
+            {hasQueries && (
+              <TreeView
+                before={<h3>Queries Timings</h3>}
+                data={apiStats.timings.queries}
+                isWideLayout={isWideLayout}
+              />
             )}
-          </article>
+            {hasMutations && (
+              <TreeView
+                before={<h3>Mutations Timings</h3>}
+                data={apiStats.timings.mutations}
+                isWideLayout={isWideLayout}
+              />
+            )}
+          </>
         )}
-      </StyleUtilsContext.Consumer>
+      </article>
     );
   }
 }

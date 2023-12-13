@@ -137,7 +137,7 @@ export class QueryForm extends React.PureComponent<
 
     return (
       <StyleUtilsContext.Consumer>
-        {({ styling, base16Theme }) => {
+        {({ base16Theme }) => {
           return (
             <form
               id="rtk-query-monitor-query-selection-form"

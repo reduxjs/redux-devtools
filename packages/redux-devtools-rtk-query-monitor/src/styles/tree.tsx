@@ -92,9 +92,7 @@ export function getItemString(
   );
 }
 
-export function createTreeItemLabelRenderer(
-  styling: StylingFunction,
-): LabelRenderer {
+export function createTreeItemLabelRenderer(): LabelRenderer {
   return function labelRenderer([key], nodeType, expanded) {
     return (
       <span>
