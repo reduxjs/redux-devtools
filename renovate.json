@@ -26,6 +26,10 @@
       "matchPackageNames": ["@mswjs/data"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "mswjs-data"
+    },
+    {
+      "matchPackageNames": ["msw"],
+      "groupName": "msw"
     }
   ]
 }
