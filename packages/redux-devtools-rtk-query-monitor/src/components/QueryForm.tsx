@@ -1,5 +1,6 @@
 import React, { ReactNode, FormEvent, MouseEvent, ChangeEvent } from 'react';
 import type { DebouncedFunc } from 'lodash';
+import { css } from '@emotion/react';
 import { Select } from '@redux-devtools/ui';
 import { QueryFormValues } from '../types';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
@@ -9,6 +10,17 @@ import { sortQueryOptions, QueryComparators } from '../utils/comparators';
 import { QueryFilters, filterQueryOptions } from '../utils/filters';
 import { SortOrderButton } from './SortOrderButton';
 import { RegexIcon } from './RegexIcon';
+
+const srOnlyCss = css({
+  position: 'absolute',
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0,0,0,0)',
+  border: 0,
+});
 
 export interface QueryFormProps {
   values: QueryFormValues;
@@ -145,7 +157,7 @@ export class QueryForm extends React.PureComponent<
                   borderColor: theme.LIST_BORDER_COLOR,
                 })}
               >
-                <label htmlFor={searchId} {...styling('srOnly')}>
+                <label htmlFor={searchId} css={srOnlyCss}>
                   filter query
                 </label>
                 <div {...styling('querySearch')}>
@@ -177,7 +189,7 @@ export class QueryForm extends React.PureComponent<
                     <RegexIcon />
                   </button>
                 </div>
-                <label htmlFor={selectId} {...styling('srOnly')}>
+                <label htmlFor={selectId} css={srOnlyCss}>
                   filter by
                 </label>
                 <Select<SelectOption<QueryFilters>>

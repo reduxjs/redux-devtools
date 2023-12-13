@@ -85,7 +85,7 @@ export class QueryList extends PureComponent<QueryListProps> {
                   <p
                     css={{
                       display: '-webkit-box',
-                      boxOrient: 'vertical',
+                      WebkitBoxOrient: 'vertical',
                       WebkitLineClamp: 2,
                       whiteSpace: 'normal',
                       overflow: 'hidden',
