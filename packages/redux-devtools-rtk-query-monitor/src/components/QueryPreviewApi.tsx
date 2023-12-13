@@ -41,7 +41,23 @@ export class QueryPreviewApi extends PureComponent<QueryPreviewApiProps> {
     return (
       <StyleUtilsContext.Consumer>
         {({ styling }) => (
-          <article {...rootProps} {...styling('tabContent')}>
+          <article
+            {...rootProps}
+            css={(theme) => ({
+              display: 'block',
+              overflowY: 'auto',
+              padding: '0.5em 0',
+              color: theme.TAB_CONTENT_COLOR,
+              '& h2': {
+                color: theme.ULIST_STRONG_COLOR,
+                padding: '0.5em 1em',
+                fontWeight: 700,
+              },
+              '& h3': {
+                color: theme.ULIST_STRONG_COLOR,
+              },
+            })}
+          >
             <h2>{apiState.config.reducerPath}</h2>
             <TreeView
               before={<h3>State</h3>}

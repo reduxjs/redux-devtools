@@ -5,7 +5,19 @@ export function NoRtkQueryApi(): JSX.Element {
   return (
     <StyleUtilsContext.Consumer>
       {({ styling }) => (
-        <div {...styling('noApiFound')}>
+        <div
+          css={(theme) => ({
+            width: '100%',
+            textAlign: 'center',
+            color: theme.TEXT_COLOR,
+            padding: '1.4em',
+            '& a': {
+              fontSize: 'inherit',
+              color: theme.TEXT_COLOR,
+              textDecoration: 'underline',
+            },
+          })}
+        >
           No rtk-query api found.
           <br />
           Make sure to follow{' '}

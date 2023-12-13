@@ -26,7 +26,18 @@ export class QueryPreviewHeader extends React.Component<QueryPreviewHeaderProps>
     return (
       <StyleUtilsContext.Consumer>
         {({ styling }) => (
-          <div {...styling('previewHeader')}>
+          <div
+            css={(theme) => ({
+              flex: '0 0 30px',
+              padding: '5px 4px',
+              alignItems: 'center',
+              borderBottomWidth: '1px',
+              borderBottomStyle: 'solid',
+
+              backgroundColor: theme.HEADER_BACKGROUND_COLOR,
+              borderBottomColor: theme.HEADER_BORDER_COLOR,
+            })}
+          >
             <div
               css={{
                 display: 'flex',

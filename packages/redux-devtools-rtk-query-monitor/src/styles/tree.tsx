@@ -98,7 +98,9 @@ export function createTreeItemLabelRenderer(
   return function labelRenderer([key], nodeType, expanded) {
     return (
       <span>
-        <span {...styling('treeItemKey')}>{key}</span>
+        <span css={(theme) => ({ color: theme.TEXT_PLACEHOLDER_COLOR })}>
+          {key}
+        </span>
         {!expanded && ': '}
       </span>
     );

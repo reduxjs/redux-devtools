@@ -35,7 +35,28 @@ export function SortOrderButton({
           id={id}
           onClick={handleButtonClick}
           aria-pressed={isAsc}
-          {...styling(['sortButton'])}
+          css={(theme) => ({
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexFlow: 'row nowrap',
+            cursor: 'pointer',
+            position: 'relative',
+            padding: '0 8px',
+            color: theme.TEXT_COLOR,
+            borderStyle: 'solid',
+            borderWidth: '1px',
+            borderRadius: '3px',
+            backgroundColor: theme.TAB_BACK_COLOR,
+            borderColor: theme.TAB_BORDER_COLOR,
+            height: 30,
+            fontSize: 12,
+            width: 64,
+
+            '&:active': {
+              backgroundColor: theme.TAB_BACK_SELECTED_COLOR,
+            },
+          })}
         >
           <ArrowUpIcon style={arrowStyles} />
           {buttonLabel}

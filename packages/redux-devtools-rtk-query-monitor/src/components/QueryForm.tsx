@@ -143,7 +143,10 @@ export class QueryForm extends React.PureComponent<
               id="rtk-query-monitor-query-selection-form"
               action="#"
               onSubmit={this.handleSubmit}
-              {...styling('queryForm')}
+              css={{
+                display: 'flex',
+                flexFlow: 'column nowrap',
+              }}
             >
               <div
                 css={(theme) => ({
@@ -160,7 +163,42 @@ export class QueryForm extends React.PureComponent<
                 <label htmlFor={searchId} css={srOnlyCss}>
                   filter query
                 </label>
-                <div {...styling('querySearch')}>
+                <div
+                  css={(theme) => ({
+                    maxWidth: '65%',
+                    backgroundColor: theme.BACKGROUND_COLOR,
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexFlow: 'row nowrap',
+                    flex: '1 1 auto',
+                    paddingRight: 6,
+                    '& input': {
+                      outline: 'none',
+                      border: 'none',
+                      width: '100%',
+                      flex: '1 1 auto',
+                      padding: '5px 10px',
+                      fontSize: '1em',
+                      position: 'relative',
+                      fontFamily:
+                        'monaco, Consolas, "Lucida Console", monospace',
+
+                      backgroundColor: theme.BACKGROUND_COLOR,
+                      color: theme.TEXT_COLOR,
+
+                      '&::-webkit-input-placeholder': {
+                        color: theme.TEXT_PLACEHOLDER_COLOR,
+                      },
+
+                      '&::-moz-placeholder': {
+                        color: theme.TEXT_PLACEHOLDER_COLOR,
+                      },
+                      '&::-webkit-search-cancel-button': {
+                        WebkitAppearance: 'none',
+                      },
+                    },
+                  })}
+                >
                   <input
                     ref={this.inputSearchRef}
                     type="search"
@@ -175,7 +213,32 @@ export class QueryForm extends React.PureComponent<
                       +(this.state.searchValue.length === 0) || undefined
                     }
                     onClick={this.handleClearSearchClick}
-                    {...styling('closeButton')}
+                    css={(theme) => ({
+                      WebkitAppearance: 'none',
+                      border: 'none',
+                      outline: 'none',
+                      boxShadow: 'none',
+                      display: 'block',
+                      flex: '0 0 auto',
+                      cursor: 'pointer',
+                      background: 'transparent',
+                      position: 'relative',
+                      fontSize: 'inherit',
+                      '&[data-invisible="1"]': {
+                        visibility: 'hidden !important' as 'hidden',
+                      },
+                      '&::after': {
+                        content: '"\u00d7"',
+                        display: 'block',
+                        padding: 4,
+                        fontSize: '1.2em',
+                        color: theme.TEXT_PLACEHOLDER_COLOR,
+                        background: 'transparent',
+                      },
+                      '&:hover::after': {
+                        color: theme.TEXT_COLOR,
+                      },
+                    })}
                   />
                   <button
                     type="button"
@@ -184,7 +247,36 @@ export class QueryForm extends React.PureComponent<
                     data-type={regexToggleType}
                     aria-pressed={isRegexSearch}
                     onClick={this.handleRegexSearchClick}
-                    {...styling('toggleButton')}
+                    css={(theme) => ({
+                      width: '24px',
+                      height: '24px',
+                      display: 'inline-block',
+                      flex: '0 0 auto',
+                      color: theme.TEXT_PLACEHOLDER_COLOR,
+                      cursor: 'pointer',
+                      padding: 0,
+                      fontSize: '0.7em',
+                      letterSpacing: '-0.7px',
+                      outline: 'none',
+                      boxShadow: 'none',
+                      fontWeight: '700',
+                      border: 'none',
+
+                      '&:hover': {
+                        color: theme.TEXT_COLOR,
+                      },
+
+                      backgroundColor: 'transparent',
+                      '&[aria-pressed="true"]': {
+                        color: theme.BACKGROUND_COLOR,
+                        backgroundColor: theme.TEXT_COLOR,
+                      },
+
+                      '&[data-type="error"]': {
+                        color: theme.TEXT_COLOR,
+                        backgroundColor: theme.TOGGLE_BUTTON_ERROR,
+                      },
+                    })}
                   >
                     <RegexIcon />
                   </button>
@@ -203,7 +295,24 @@ export class QueryForm extends React.PureComponent<
                   onChange={this.handleSelectFilterChange}
                 />
               </div>
-              <div {...styling('sortBySection')}>
+              <div
+                css={{
+                  display: 'flex',
+                  padding: '0.4em',
+                  '& label': {
+                    display: 'flex',
+                    flex: '0 0 auto',
+                    whiteSpace: 'nowrap',
+                    alignItems: 'center',
+                    paddingRight: '0.4em',
+                  },
+
+                  '& > :last-child': {
+                    flex: '0 0 auto',
+                    marginLeft: '0.4em',
+                  },
+                }}
+              >
                 <label htmlFor={selectId}>Sort by</label>
                 <Select<SelectOption<QueryComparators>>
                   id={selectId}

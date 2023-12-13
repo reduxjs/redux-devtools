@@ -90,7 +90,14 @@ export class TreeView extends React.PureComponent<TreeViewProps> {
       <StyleUtilsContext.Consumer>
         {({ styling, invertTheme, base16Theme }) => {
           return (
-            <div {...rootProps} {...styling('treeWrapper')}>
+            <div
+              {...rootProps}
+              css={{
+                overflowX: 'auto',
+                overflowY: 'auto',
+                padding: '0.5em 1em',
+              }}
+            >
               {before}
               <JSONTree
                 keyPath={keyPath}

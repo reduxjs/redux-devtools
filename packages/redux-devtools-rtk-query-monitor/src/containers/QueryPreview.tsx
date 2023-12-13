@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import type { Interpolation, Theme } from '@emotion/react';
 import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 import { createTreeItemLabelRenderer } from '../styles/tree';
 import {
@@ -37,6 +38,23 @@ import {
   QueryPreviewData,
   QueryPreviewDataProps,
 } from '../components/QueryPreviewData';
+
+const queryPreviewCss: Interpolation<Theme> = (theme) => ({
+  flex: '1 1 50%',
+  overflowX: 'hidden',
+  oveflowY: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
+  overflowY: 'hidden',
+  '& pre': {
+    border: 'inherit',
+    borderRadius: '3px',
+    lineHeight: 'inherit',
+    color: 'inherit',
+  },
+
+  backgroundColor: theme.BACKGROUND_COLOR,
+});
 
 export interface QueryPreviewProps<S = unknown> {
   readonly selectedTab: QueryPreviewTabs;
@@ -213,7 +231,7 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
       return (
         <StyleUtilsContext.Consumer>
           {({ styling }) => (
-            <div {...styling('queryPreview')}>
+            <div css={queryPreviewCss}>
               <QueryPreviewHeader
                 selectedTab={selectedTab}
                 onTabChange={onTabChange}
@@ -241,7 +259,7 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
       <StyleUtilsContext.Consumer>
         {({ styling }) => {
           return (
-            <div {...styling('queryPreview')}>
+            <div css={queryPreviewCss}>
               <QueryPreviewHeader
                 selectedTab={selectedTab}
                 onTabChange={onTabChange}
