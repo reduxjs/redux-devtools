@@ -133,7 +133,18 @@ export class QueryForm extends React.PureComponent<
               onSubmit={this.handleSubmit}
               {...styling('queryForm')}
             >
-              <div {...styling('queryListHeader')}>
+              <div
+                css={(theme) => ({
+                  display: 'flex',
+                  padding: 4,
+                  flex: '0 0 auto',
+                  alignItems: 'center',
+                  borderBottomWidth: '1px',
+                  borderBottomStyle: 'solid',
+
+                  borderColor: theme.LIST_BORDER_COLOR,
+                })}
+              >
                 <label htmlFor={searchId} {...styling('srOnly')}>
                   filter query
                 </label>

@@ -151,7 +151,38 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
         })}
       >
         <div
-          {...styling('querySectionWrapper')}
+          css={(theme) => ({
+            display: 'flex',
+            flex: '0 0 auto',
+            height: '50%',
+            width: '100%',
+            borderColor: theme.TAB_BORDER_COLOR,
+
+            '&[data-wide-layout="0"]': {
+              borderBottomWidth: 1,
+              borderStyle: 'solid',
+            },
+
+            '&[data-wide-layout="1"]': {
+              height: '100%',
+              width: '44%',
+              borderRightWidth: 1,
+              borderStyle: 'solid',
+            },
+            flexFlow: 'column nowrap',
+            '& > form': {
+              flex: '0 0 auto',
+              borderBottomWidth: '1px',
+              borderBottomStyle: 'solid',
+              borderColor: theme.LIST_BORDER_COLOR,
+            },
+            '& > ul': {
+              flex: '1 1 auto',
+              overflowX: 'hidden',
+              overflowY: 'auto',
+              maxHeight: 'calc(100% - 70px)',
+            },
+          })}
           data-wide-layout={+this.state.isWideLayout}
         >
           <QueryForm
