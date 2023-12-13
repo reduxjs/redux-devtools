@@ -4,6 +4,8 @@ import {
   createStyling,
   getBase16Theme,
   invertTheme,
+} from 'react-base16-styling';
+import type {
   StylingConfig,
   StylingFunction,
   Theme,
