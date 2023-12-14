@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import { StylingFunction } from 'react-base16-styling';
-import type { LabelRenderer } from 'react-json-tree';
+import React from 'react';
+import type { GetItemString, LabelRenderer } from 'react-json-tree';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
 import isIterable from '../utils/isIterable';
+import { DATA_TYPE_KEY } from '../monitor-config';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
 
@@ -73,34 +73,21 @@ function getText(
   }
 }
 
-export function getItemString(
-  styling: StylingFunction,
-  type: string,
-  data: any,
-  dataTypeKey: string | symbol | undefined,
-  previewContent: boolean,
-  isDiff?: boolean,
-): ReactNode {
-  return (
-    <span {...styling('treeItemHint')}>
-      {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
-      {dataTypeKey && data[dataTypeKey]
-        ? `${data[dataTypeKey] as string} `
-        : ''}
-      {getText(type, data, previewContent, isDiff)}
-    </span>
-  );
-}
+export const getItemString: GetItemString = (type: string, data: any) => (
+  <span>
+    {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
+    {DATA_TYPE_KEY && data[DATA_TYPE_KEY]
+      ? `${data[DATA_TYPE_KEY] as string} `
+      : ''}
+    {getText(type, data, false, undefined)}
+  </span>
+);
 
-export function createTreeItemLabelRenderer(): LabelRenderer {
-  return function labelRenderer([key], nodeType, expanded) {
-    return (
-      <span>
-        <span css={(theme) => ({ color: theme.TEXT_PLACEHOLDER_COLOR })}>
-          {key}
-        </span>
-        {!expanded && ': '}
-      </span>
-    );
-  };
-}
+export const labelRenderer: LabelRenderer = ([key], nodeType, expanded) => (
+  <span>
+    <span css={(theme) => ({ color: theme.TEXT_PLACEHOLDER_COLOR })}>
+      {key}
+    </span>
+    {!expanded && ': '}
+  </span>
+);

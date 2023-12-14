@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import type { Interpolation, Theme } from '@emotion/react';
-import { createTreeItemLabelRenderer } from '../styles/tree';
 import {
   QueryPreviewTabs,
   RtkResourceInfo,
@@ -180,14 +179,6 @@ const tabs: ReadonlyArray<
 ];
 
 export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
-  readonly labelRenderer: ReturnType<typeof createTreeItemLabelRenderer>;
-
-  constructor(props: QueryPreviewProps<S>) {
-    super(props);
-
-    this.labelRenderer = createTreeItemLabelRenderer();
-  }
-
   renderLabelWithCounter = (
     label: React.ReactText,
     counter: number,
