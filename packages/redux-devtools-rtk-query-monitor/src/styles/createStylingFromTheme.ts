@@ -1,23 +1,10 @@
-import jss, { StyleSheet } from 'jss';
-import preset from 'jss-preset-default';
-import {
-  createStyling,
-  getBase16Theme,
-  invertTheme,
-} from 'react-base16-styling';
-import type {
-  StylingConfig,
-  StylingFunction,
-  Theme,
-} from 'react-base16-styling';
+import { getBase16Theme } from 'react-base16-styling';
+import type { StylingConfig } from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import * as reduxThemes from 'redux-devtools-themes';
 import { Action } from 'redux';
 import { createContext } from 'react';
-import type { CurriedFunction1 } from 'lodash';
 import { RtkQueryMonitorProps, StyleUtils } from '../types';
-
-jss.setup(preset());
 
 declare module '@emotion/react' {
   export interface Theme {
@@ -88,53 +75,18 @@ export const colorMap = (theme: reduxThemes.Base16Theme) =>
     TOGGLE_BUTTON_ERROR: rgba(theme.base08, 40),
   }) as const;
 
-type Color = keyof ReturnType<typeof colorMap>;
-type ColorMap = {
-  [color in Color]: string;
-};
-
-const getSheetFromColorMap = (map: ColorMap) => ({});
-
-let themeSheet: StyleSheet;
-
-const getDefaultThemeStyling = (theme: reduxThemes.Base16Theme) => {
-  if (themeSheet) {
-    themeSheet.detach();
-  }
-
-  themeSheet = jss
-    .createStyleSheet(getSheetFromColorMap(colorMap(theme)))
-    .attach();
-
-  return themeSheet.classes;
-};
-
-export const createStylingFromTheme: CurriedFunction1<
-  Theme | undefined,
-  StylingFunction
-> = createStyling(getDefaultThemeStyling, {
-  defaultBase16: reduxThemes.nicinabox,
-  base16Themes: { ...reduxThemes },
-});
-
 export function createThemeState<S, A extends Action<string>>(
   props: RtkQueryMonitorProps<S, A>,
 ): StyleUtils {
   const base16Theme =
     getBase16Theme(props.theme, { ...reduxThemes }) ?? reduxThemes.nicinabox;
 
-  const theme = props.invertTheme ? invertTheme(props.theme) : props.theme;
-  const styling = createStylingFromTheme(theme);
-
-  return { base16Theme, styling, invertTheme: !!props.invertTheme };
+  return { base16Theme, invertTheme: !!props.invertTheme };
 }
-
-const mockStyling = () => ({ className: '', style: {} });
 
 export const StyleUtilsContext = createContext<StyleUtils>({
   base16Theme: reduxThemes.nicinabox,
   invertTheme: false,
-  styling: mockStyling,
 });
 
 export function getJsonTreeTheme(

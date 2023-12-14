@@ -100,7 +100,6 @@ export interface SelectorsSource<S> {
 
 export interface StyleUtils {
   readonly base16Theme: Base16Theme;
-  readonly styling: StylingFunction;
   readonly invertTheme: boolean;
 }
 
