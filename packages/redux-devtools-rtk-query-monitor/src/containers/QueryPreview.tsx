@@ -25,7 +25,6 @@ import {
 } from '../components/QueryPreviewTags';
 import { NoRtkQueryApi } from '../components/NoRtkQueryApi';
 import { InspectorSelectors } from '../selectors';
-import { StylingFunction } from 'react-base16-styling';
 import { mapProps } from './mapProps';
 import {
   QueryPreviewActions,
@@ -59,7 +58,6 @@ export interface QueryPreviewProps<S = unknown> {
   readonly hasNoApis: boolean;
   readonly onTabChange: (tab: QueryPreviewTabs) => void;
   readonly resInfo: RtkResourceInfo | null;
-  readonly styling: StylingFunction;
   readonly isWideLayout: boolean;
   readonly selectorsSource: SelectorsSource<S>;
   readonly selectors: InspectorSelectors<S>;

@@ -5,7 +5,6 @@ import {
   QueryFormValues,
   QueryPreviewTabs,
   RtkQueryMonitorState,
-  StyleUtils,
   SelectorsSource,
   RtkResourceInfo,
 } from '../types';
@@ -27,7 +26,6 @@ type ForwardedMonitorProps<S, A extends Action<string>> = Pick<
 export interface RtkQueryInspectorProps<S, A extends Action<string>>
   extends ForwardedMonitorProps<S, A> {
   dispatch: Dispatch<LiftedAction<S, A, RtkQueryMonitorState>>;
-  styleUtils: StyleUtils;
 }
 
 type RtkQueryInspectorState<S> = {
@@ -111,9 +109,6 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
 
   render(): ReactNode {
     const { selectorsSource, isWideLayout } = this.state;
-    const {
-      styleUtils: { styling },
-    } = this.props;
     const allVisibleRtkResourceInfos =
       this.selectors.selectAllVisbileQueries(selectorsSource);
 
@@ -202,7 +197,6 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
           resInfo={currentResInfo}
           selectedTab={selectorsSource.monitorState.selectedPreviewTab}
           onTabChange={this.handleTabChange}
-          styling={styling}
           isWideLayout={isWideLayout}
           hasNoApis={hasNoApi}
         />

@@ -14,11 +14,7 @@ import {
   StyleUtilsContext,
 } from '../styles/createStylingFromTheme';
 import { ThemeProvider } from '@emotion/react';
-import {
-  getBase16Theme,
-  invertBase16Theme,
-  invertTheme,
-} from 'react-base16-styling';
+import { getBase16Theme, invertBase16Theme } from 'react-base16-styling';
 import * as reduxThemes from 'redux-devtools-themes';
 
 interface DefaultProps {
@@ -74,7 +70,6 @@ class RtkQueryMonitor<S, A extends Action<string>> extends Component<
             currentStateIndex={currentStateIndex}
             monitorState={monitorState}
             dispatch={dispatch}
-            styleUtils={this.state.styleUtils}
             actionsById={actionsById}
           />
         </ThemeProvider>
