@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- 158ba2c: Replace jss with Emotion in inspector-monitor. `@emotion/react` is now a required peer dependency.
+
 ## 4.1.0
 
 ### Minor Changes

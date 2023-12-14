@@ -1,5 +1,20 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- 158ba2c: Replace jss with Emotion in inspector-monitor. `@emotion/react` is now a required peer dependency.
+
+### Patch Changes
+
+- Updated dependencies [158ba2c]
+- Updated dependencies [6954eb9]
+  - @redux-devtools/inspector-monitor-test-tab@3.0.0
+  - @redux-devtools/inspector-monitor-trace-tab@3.0.0
+  - @redux-devtools/inspector-monitor@5.0.0
+  - @redux-devtools/rtk-query-monitor@4.0.0
+
 ## 4.0.2
 
 ### Patch Changes
