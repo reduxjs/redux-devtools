@@ -1,5 +1,12 @@
 # inspector-demo
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [158ba2c]
+  - @redux-devtools/inspector-monitor@5.0.0
+
 ## 0.1.8
 
 ### Patch Changes
