@@ -3,7 +3,7 @@ import type { DebouncedFunc } from 'lodash';
 import { css } from '@emotion/react';
 import { Select } from '@redux-devtools/ui';
 import { QueryFormValues } from '../types';
-import { StyleUtilsContext } from '../styles/createStylingFromTheme';
+import { StyleUtilsContext } from '../styles/themes';
 import { SelectOption } from '../types';
 import debounce from 'lodash.debounce';
 import { sortQueryOptions, QueryComparators } from '../utils/comparators';

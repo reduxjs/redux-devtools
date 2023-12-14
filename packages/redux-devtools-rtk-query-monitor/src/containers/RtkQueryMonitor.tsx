@@ -1,34 +1,26 @@
 import React, { Component } from 'react';
 import { Action, AnyAction } from 'redux';
+import { ThemeProvider } from '@emotion/react';
 import RtkQueryInspector from './RtkQueryInspector';
 import { reducer } from '../reducers';
 import {
   ExternalProps,
   RtkQueryMonitorProps,
   RtkQueryMonitorState,
-  StyleUtils,
 } from '../types';
 import {
-  colorMap,
-  createThemeState,
+  createRtkQueryMonitorThemeFromBase16Theme,
+  resolveBase16Theme,
   StyleUtilsContext,
-} from '../styles/createStylingFromTheme';
-import { ThemeProvider } from '@emotion/react';
-import { getBase16Theme, invertBase16Theme } from 'react-base16-styling';
-import * as reduxThemes from 'redux-devtools-themes';
+} from '../styles/themes';
 
 interface DefaultProps {
   theme: string;
   invertTheme: boolean;
 }
 
-export interface RtkQueryComponentState {
-  readonly styleUtils: StyleUtils;
-}
-
 class RtkQueryMonitor<S, A extends Action<string>> extends Component<
-  RtkQueryMonitorProps<S, A>,
-  RtkQueryComponentState
+  RtkQueryMonitorProps<S, A>
 > {
   static update = reducer;
 
@@ -37,14 +29,6 @@ class RtkQueryMonitor<S, A extends Action<string>> extends Component<
     invertTheme: false,
   };
 
-  constructor(props: RtkQueryMonitorProps<S, A>) {
-    super(props);
-
-    this.state = {
-      styleUtils: createThemeState<S, A>(props),
-    };
-  }
-
   render() {
     const {
       currentStateIndex,
@@ -52,19 +36,20 @@ class RtkQueryMonitor<S, A extends Action<string>> extends Component<
       monitorState,
       dispatch,
       actionsById,
+      theme,
+      invertTheme,
     } = this.props;
 
-    // TODO Cleanup
-    const base16Theme =
-      getBase16Theme(this.props.theme, { ...reduxThemes }) ??
-      reduxThemes.nicinabox;
-    const theme = this.props.invertTheme
-      ? invertBase16Theme(base16Theme)
-      : base16Theme;
+    const base16Theme = resolveBase16Theme(theme);
+    const styleUtils = { base16Theme, invertTheme };
+    const rtkQueryMonitorTheme = createRtkQueryMonitorThemeFromBase16Theme(
+      base16Theme,
+      invertTheme,
+    );
 
     return (
-      <StyleUtilsContext.Provider value={this.state.styleUtils}>
-        <ThemeProvider theme={colorMap(theme)}>
+      <StyleUtilsContext.Provider value={styleUtils}>
+        <ThemeProvider theme={rtkQueryMonitorTheme}>
           <RtkQueryInspector<S, AnyAction>
             computedStates={computedStates}
             currentStateIndex={currentStateIndex}

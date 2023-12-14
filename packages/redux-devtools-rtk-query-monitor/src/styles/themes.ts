@@ -1,10 +1,15 @@
-import { getBase16Theme } from 'react-base16-styling';
-import type { StylingConfig } from 'react-base16-styling';
+import { getBase16Theme, invertBase16Theme } from 'react-base16-styling';
+import type { Base16Theme, StylingConfig } from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import * as reduxThemes from 'redux-devtools-themes';
-import { Action } from 'redux';
 import { createContext } from 'react';
-import { RtkQueryMonitorProps, StyleUtils } from '../types';
+import { StyleUtils } from '../types';
+
+export function resolveBase16Theme(
+  theme: keyof typeof reduxThemes | Base16Theme,
+) {
+  return getBase16Theme(theme, reduxThemes) ?? reduxThemes.nicinabox;
+}
 
 declare module '@emotion/react' {
   export interface Theme {
@@ -75,13 +80,14 @@ export const colorMap = (theme: reduxThemes.Base16Theme) =>
     TOGGLE_BUTTON_ERROR: rgba(theme.base08, 40),
   }) as const;
 
-export function createThemeState<S, A extends Action<string>>(
-  props: RtkQueryMonitorProps<S, A>,
-): StyleUtils {
-  const base16Theme =
-    getBase16Theme(props.theme, { ...reduxThemes }) ?? reduxThemes.nicinabox;
-
-  return { base16Theme, invertTheme: !!props.invertTheme };
+export function createRtkQueryMonitorThemeFromBase16Theme(
+  base16Theme: Base16Theme,
+  invertTheme: boolean,
+) {
+  const finalBase16Theme = invertTheme
+    ? invertBase16Theme(base16Theme)
+    : base16Theme;
+  return colorMap(finalBase16Theme);
 }
 
 export const StyleUtilsContext = createContext<StyleUtils>({

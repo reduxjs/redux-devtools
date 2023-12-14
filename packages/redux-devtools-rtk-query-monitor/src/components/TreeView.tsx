@@ -2,10 +2,7 @@ import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ComponentProps, ReactNode } from 'react';
 import { JSONTree } from 'react-json-tree';
 import { Base16Theme } from 'react-base16-styling';
-import {
-  getJsonTreeTheme,
-  StyleUtilsContext,
-} from '../styles/createStylingFromTheme';
+import { getJsonTreeTheme, StyleUtilsContext } from '../styles/themes';
 import { getItemString, labelRenderer } from '../styles/tree';
 import { identity } from '../utils/object';
 
