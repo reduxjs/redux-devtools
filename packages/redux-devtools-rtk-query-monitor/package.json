@@ -50,8 +50,6 @@
     "@types/redux-devtools-themes": "^1.0.3",
     "hex-rgba": "^1.0.2",
     "immutable": "^4.3.4",
-    "jss": "^10.10.0",
-    "jss-preset-default": "^10.10.0",
     "lodash.debounce": "^4.0.8",
     "react-base16-styling": "^0.9.1",
     "react-json-tree": "^0.18.0",
@@ -65,6 +63,8 @@
     "@babel/preset-env": "^7.23.5",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@emotion/babel-preset-css-prop": "^11.11.0",
+    "@emotion/react": "^11.11.1",
     "@redux-devtools/core": "^3.14.0",
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^6.1.5",
@@ -91,6 +91,7 @@
     "typescript": "~5.3.3"
   },
   "peerDependencies": {
+    "@emotion/react": "^11.0.0",
     "@redux-devtools/core": "^3.0.0",
     "@reduxjs/toolkit": "^1.0.0 || ^2.0.0",
     "@types/react": "^16.3.0 || ^17.0.0 || ^18.0.0",

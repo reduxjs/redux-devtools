@@ -5,7 +5,6 @@ import {
   QueryFormValues,
   QueryPreviewTabs,
   RtkQueryMonitorState,
-  StyleUtils,
   SelectorsSource,
   RtkResourceInfo,
 } from '../types';
@@ -27,7 +26,6 @@ type ForwardedMonitorProps<S, A extends Action<string>> = Pick<
 export interface RtkQueryInspectorProps<S, A extends Action<string>>
   extends ForwardedMonitorProps<S, A> {
   dispatch: Dispatch<LiftedAction<S, A, RtkQueryMonitorState>>;
-  styleUtils: StyleUtils;
 }
 
 type RtkQueryInspectorState<S> = {
@@ -111,9 +109,6 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
 
   render(): ReactNode {
     const { selectorsSource, isWideLayout } = this.state;
-    const {
-      styleUtils: { styling },
-    } = this.props;
     const allVisibleRtkResourceInfos =
       this.selectors.selectAllVisbileQueries(selectorsSource);
 
@@ -131,10 +126,58 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
       <div
         ref={this.inspectorRef}
         data-wide-layout={+this.state.isWideLayout}
-        {...styling('inspector')}
+        css={(theme) => ({
+          display: 'flex',
+          flexFlow: 'column nowrap',
+          overflow: 'hidden',
+          width: '100%',
+          height: '100%',
+          fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+          fontSize: '12px',
+          WebkitFontSmoothing: 'antialiased',
+          lineHeight: '1.5em',
+
+          backgroundColor: theme.BACKGROUND_COLOR,
+          color: theme.TEXT_COLOR,
+
+          '&[data-wide-layout="1"]': {
+            flexFlow: 'row nowrap',
+          },
+        })}
       >
         <div
-          {...styling('querySectionWrapper')}
+          css={(theme) => ({
+            display: 'flex',
+            flex: '0 0 auto',
+            height: '50%',
+            width: '100%',
+            borderColor: theme.TAB_BORDER_COLOR,
+
+            '&[data-wide-layout="0"]': {
+              borderBottomWidth: 1,
+              borderStyle: 'solid',
+            },
+
+            '&[data-wide-layout="1"]': {
+              height: '100%',
+              width: '44%',
+              borderRightWidth: 1,
+              borderStyle: 'solid',
+            },
+            flexFlow: 'column nowrap',
+            '& > form': {
+              flex: '0 0 auto',
+              borderBottomWidth: '1px',
+              borderBottomStyle: 'solid',
+              borderColor: theme.LIST_BORDER_COLOR,
+            },
+            '& > ul': {
+              flex: '1 1 auto',
+              overflowX: 'hidden',
+              overflowY: 'auto',
+              maxHeight: 'calc(100% - 70px)',
+            },
+          })}
           data-wide-layout={+this.state.isWideLayout}
         >
           <QueryForm
@@ -154,7 +197,6 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
           resInfo={currentResInfo}
           selectedTab={selectorsSource.monitorState.selectedPreviewTab}
           onTabChange={this.handleTabChange}
-          styling={styling}
           isWideLayout={isWideLayout}
           hasNoApis={hasNoApi}
         />

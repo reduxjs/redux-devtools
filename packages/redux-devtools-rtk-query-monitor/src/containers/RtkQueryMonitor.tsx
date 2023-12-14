@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
 import { Action, AnyAction } from 'redux';
+import { ThemeProvider } from '@emotion/react';
 import RtkQueryInspector from './RtkQueryInspector';
 import { reducer } from '../reducers';
 import {
   ExternalProps,
   RtkQueryMonitorProps,
   RtkQueryMonitorState,
-  StyleUtils,
 } from '../types';
 import {
-  createThemeState,
+  createRtkQueryMonitorThemeFromBase16Theme,
+  resolveBase16Theme,
   StyleUtilsContext,
-} from '../styles/createStylingFromTheme';
+} from '../styles/themes';
 
 interface DefaultProps {
   theme: string;
   invertTheme: boolean;
 }
 
-export interface RtkQueryComponentState {
-  readonly styleUtils: StyleUtils;
-}
-
 class RtkQueryMonitor<S, A extends Action<string>> extends Component<
-  RtkQueryMonitorProps<S, A>,
-  RtkQueryComponentState
+  RtkQueryMonitorProps<S, A>
 > {
   static update = reducer;
 
@@ -33,14 +29,6 @@ class RtkQueryMonitor<S, A extends Action<string>> extends Component<
     invertTheme: false,
   };
 
-  constructor(props: RtkQueryMonitorProps<S, A>) {
-    super(props);
-
-    this.state = {
-      styleUtils: createThemeState<S, A>(props),
-    };
-  }
-
   render() {
     const {
       currentStateIndex,
@@ -48,18 +36,28 @@ class RtkQueryMonitor<S, A extends Action<string>> extends Component<
       monitorState,
       dispatch,
       actionsById,
+      theme,
+      invertTheme,
     } = this.props;
 
+    const base16Theme = resolveBase16Theme(theme);
+    const styleUtils = { base16Theme, invertTheme };
+    const rtkQueryMonitorTheme = createRtkQueryMonitorThemeFromBase16Theme(
+      base16Theme,
+      invertTheme,
+    );
+
     return (
-      <StyleUtilsContext.Provider value={this.state.styleUtils}>
-        <RtkQueryInspector<S, AnyAction>
-          computedStates={computedStates}
-          currentStateIndex={currentStateIndex}
-          monitorState={monitorState}
-          dispatch={dispatch}
-          styleUtils={this.state.styleUtils}
-          actionsById={actionsById}
-        />
+      <StyleUtilsContext.Provider value={styleUtils}>
+        <ThemeProvider theme={rtkQueryMonitorTheme}>
+          <RtkQueryInspector<S, AnyAction>
+            computedStates={computedStates}
+            currentStateIndex={currentStateIndex}
+            monitorState={monitorState}
+            dispatch={dispatch}
+            actionsById={actionsById}
+          />
+        </ThemeProvider>
       </StyleUtilsContext.Provider>
     );
   }

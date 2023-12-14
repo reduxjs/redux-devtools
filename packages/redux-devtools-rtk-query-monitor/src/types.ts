@@ -35,7 +35,7 @@ export interface RtkQueryMonitorProps<S, A extends Action<string>>
   extends LiftedState<S, A, RtkQueryMonitorState> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
   theme: keyof typeof themes | Base16Theme;
-  invertTheme?: boolean;
+  invertTheme: boolean;
 }
 
 export type RtkQueryApiState = ReturnType<
@@ -100,7 +100,6 @@ export interface SelectorsSource<S> {
 
 export interface StyleUtils {
   readonly base16Theme: Base16Theme;
-  readonly styling: StylingFunction;
   readonly invertTheme: boolean;
 }
 
