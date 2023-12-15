@@ -346,26 +346,7 @@ importers:
         version: 4.15.1(webpack-cli@5.1.4)(webpack@5.89.0)
 
   packages/d3tooltip:
-    dependencies:
-      '@babel/runtime':
-        specifier: ^7.23.5
-        version: 7.23.5
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.23.4
-        version: 7.23.4(@babel/core@7.23.5)
-      '@babel/core':
-        specifier: ^7.23.5
-        version: 7.23.5
-      '@babel/eslint-parser':
-        specifier: ^7.23.3
-        version: 7.23.3(@babel/core@7.23.5)(eslint@8.55.0)
-      '@babel/preset-env':
-        specifier: ^7.23.5
-        version: 7.23.5(@babel/core@7.23.5)
-      '@babel/preset-typescript':
-        specifier: ^7.23.3
-        version: 7.23.3(@babel/core@7.23.5)
       '@types/d3':
         specifier: ^7.4.3
         version: 7.4.3
