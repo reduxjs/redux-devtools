@@ -4,14 +4,14 @@ import { isEmpty } from 'ramda';
 import { map2tree } from 'map2tree';
 import type { Node } from 'map2tree';
 import deepmerge from 'deepmerge';
+import { tooltip } from 'd3tooltip';
+import type { StyleValue } from 'd3tooltip';
 import {
   getTooltipString,
   toggleChildren,
   visit,
   getNodeGroupByDepthCount,
-} from './utils';
-import { tooltip } from 'd3tooltip';
-import type { StyleValue } from 'd3tooltip';
+} from './utils.js';
 
 export interface Options {
   // eslint-disable-next-line @typescript-eslint/ban-types

@@ -1,6 +1,6 @@
 import { is, join, pipe, replace } from 'ramda';
-import sortAndSerialize from './sortAndSerialize';
-import type { InternalNode } from './tree';
+import sortAndSerialize from './sortAndSerialize.js';
+import type { InternalNode } from './tree.js';
 
 export function collapseChildren(node: InternalNode) {
   if (node.children) {
