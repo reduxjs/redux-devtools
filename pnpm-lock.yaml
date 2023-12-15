@@ -374,34 +374,16 @@ importers:
 
   packages/map2tree:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.23.5
-        version: 7.23.5
-      lodash:
+      lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.23.4
-        version: 7.23.4(@babel/core@7.23.5)
-      '@babel/core':
-        specifier: ^7.23.5
-        version: 7.23.5
-      '@babel/eslint-parser':
-        specifier: ^7.23.3
-        version: 7.23.3(@babel/core@7.23.5)(eslint@8.55.0)
-      '@babel/preset-env':
-        specifier: ^7.23.5
-        version: 7.23.5(@babel/core@7.23.5)
-      '@babel/preset-typescript':
-        specifier: ^7.23.3
-        version: 7.23.3(@babel/core@7.23.5)
       '@types/jest':
         specifier: ^29.5.11
         version: 29.5.11
-      '@types/lodash':
-        specifier: ^4.14.202
-        version: 4.14.202
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.13.2
         version: 6.13.2(@typescript-eslint/parser@6.13.2)(eslint@8.55.0)(typescript@5.3.3)
