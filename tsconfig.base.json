@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "moduleResolution": "Node",
+    "target": "es6",
+    "module": "node16",
+    "types": [],
     "declaration": true,
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
+    "outDir": "lib",
+    "isolatedModules": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "types": []
+    "strict": true,
+    "skipLibCheck": false
   }
 }
