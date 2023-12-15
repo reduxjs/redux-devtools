@@ -6,7 +6,7 @@ import {
   LiftedState,
 } from '@redux-devtools/core';
 import { Action, Dispatch } from 'redux';
-import { Delta, DiffContext } from 'jsondiffpatch';
+import type { Delta, DiffContext } from 'jsondiffpatch';
 import {
   createInspectorMonitorThemeFromBase16Theme,
   resolveBase16Theme,
@@ -160,7 +160,7 @@ export interface DevtoolsInspectorProps<S, A extends Action<string>>
   select: (state: S) => unknown;
   theme: Base16ThemeName | Base16Theme;
   supportImmutable: boolean;
-  diffObjectHash?: (item: unknown, index: number) => string;
+  diffObjectHash?: (item: unknown, index: number | undefined) => string;
   diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
   hideMainButtons?: boolean;
   hideActionButtons?: boolean;

@@ -3,7 +3,7 @@ import { Base16Theme } from 'redux-devtools-themes';
 import { Action } from 'redux';
 import type { LabelRenderer } from 'react-json-tree';
 import { PerformAction } from '@redux-devtools/core';
-import { Delta } from 'jsondiffpatch';
+import type { Delta } from 'jsondiffpatch';
 import { DEFAULT_STATE, DevtoolsInspectorState } from './redux';
 import ActionPreviewHeader from './ActionPreviewHeader';
 import DiffTab from './tabs/DiffTab';
