@@ -4,7 +4,8 @@
     "outDir": "lib/types",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+    "stripInternal": true
   },
   "include": ["src"]
 }
