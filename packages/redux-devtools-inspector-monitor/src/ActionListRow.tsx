@@ -4,6 +4,7 @@ import type { DebouncedFunc } from 'lodash';
 import debounce from 'lodash.debounce';
 import { Action } from 'redux';
 import type { Interpolation, Theme } from '@emotion/react';
+import type { JSX } from '@emotion/react/jsx-runtime';
 import RightSlider from './RightSlider';
 import {
   selectorButtonCss,
@@ -52,7 +53,7 @@ export default class ActionListRow<
 > extends PureComponent<Props<A>, State> {
   state: State = { hover: false };
 
-  render() {
+  render(): JSX.Element {
     const {
       isSelected,
       action,

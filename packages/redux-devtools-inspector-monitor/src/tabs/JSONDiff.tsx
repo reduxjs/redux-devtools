@@ -6,6 +6,7 @@ import { Delta } from 'jsondiffpatch';
 import { Base16Theme } from 'redux-devtools-themes';
 import { css } from '@emotion/react';
 import type { Interpolation, Theme } from '@emotion/react';
+import type { JSX } from '@emotion/react/jsx-runtime';
 import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
 
@@ -91,7 +92,7 @@ export default class JSONDiff extends Component<Props, State> {
     this.setState({ data: this.props.delta });
   }
 
-  render() {
+  render(): JSX.Element {
     const { base16Theme, ...props } = this.props;
 
     if (!this.state.data) {
