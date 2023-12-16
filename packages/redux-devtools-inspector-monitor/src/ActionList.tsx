@@ -18,6 +18,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import type { JSX } from '@emotion/react/jsx-runtime';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
 
@@ -80,7 +81,7 @@ export default function ActionList<A extends Action<string>>({
   onJumpToState,
   lastActionId,
   onReorderAction,
-}: Props<A>) {
+}: Props<A>): JSX.Element {
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const prevLastActionId = useRef<number | undefined>();
 

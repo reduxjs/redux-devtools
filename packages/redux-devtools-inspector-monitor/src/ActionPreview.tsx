@@ -4,6 +4,7 @@ import { Action } from 'redux';
 import type { LabelRenderer } from 'react-json-tree';
 import { PerformAction } from '@redux-devtools/core';
 import { Delta } from 'jsondiffpatch';
+import type { JSX } from '@emotion/react/jsx-runtime';
 import { DEFAULT_STATE, DevtoolsInspectorState } from './redux';
 import ActionPreviewHeader from './ActionPreviewHeader';
 import DiffTab from './tabs/DiffTab';
@@ -80,7 +81,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
     tabName: DEFAULT_STATE.tabName,
   };
 
-  render() {
+  render(): JSX.Element {
     const {
       delta,
       error,

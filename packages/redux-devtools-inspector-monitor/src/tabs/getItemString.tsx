@@ -1,5 +1,6 @@
 import React from 'react';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
+import type { JSX } from '@emotion/react/jsx-runtime';
 import isIterable from '../utils/isIterable';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
@@ -76,7 +77,7 @@ const getItemString = (
   dataTypeKey: string | symbol | undefined,
   isWideLayout: boolean,
   isDiff?: boolean,
-) => (
+): JSX.Element => (
   <span css={(theme) => ({ color: theme.ITEM_HINT_COLOR })}>
     {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
     {dataTypeKey && data[dataTypeKey] ? `${data[dataTypeKey] as string} ` : ''}

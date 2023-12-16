@@ -11,6 +11,9 @@ export function resolveBase16Theme(theme: Base16ThemeName | Base16Theme) {
   return getBase16Theme(theme, base16Themes);
 }
 
+/**
+ * @internal
+ */
 declare module '@emotion/react' {
   export interface Theme {
     TEXT_COLOR: string;
