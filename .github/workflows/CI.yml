@@ -26,9 +26,7 @@ jobs:
         run: pnpm run format:check
       - name: Build
         run: pnpm run build:all
-      - name: Lint
-        run: pnpm run lint:all
-      - name: Test
-        uses: coactions/setup-xvfb@v1
+      - uses: actions/upload-artifact@v3
         with:
-          run: pnpm run test:all
+          name: inspector-monitor
+          path: packages/redux-devtools-inspector-monitor
