@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.0.1
+
+### Patch Changes
+
+- 3205269: Add explicit return types
+
 ## 4.0.0
 
 ### Major Changes
