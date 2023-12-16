@@ -29,4 +29,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: inspector-monitor
-          path: packages/redux-devtools-inspector-monitor
+          path: packages/redux-devtools-inspector-monitor/lib
