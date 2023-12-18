@@ -1,5 +1,24 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- 5cfe3e5: Update min required React version to 16.8.4
+
+### Patch Changes
+
+- Updated dependencies [5cfe3e5]
+- Updated dependencies [decc035]
+  - @redux-devtools/chart-monitor@5.0.0
+  - @redux-devtools/inspector-monitor-test-tab@4.0.0
+  - @redux-devtools/inspector-monitor-trace-tab@4.0.0
+  - @redux-devtools/inspector-monitor@6.0.0
+  - @redux-devtools/log-monitor@5.0.0
+  - @redux-devtools/rtk-query-monitor@5.0.0
+  - @redux-devtools/slider-monitor@5.0.0
+  - @redux-devtools/core@4.0.0
+
 ## 5.0.0
 
 ### Major Changes

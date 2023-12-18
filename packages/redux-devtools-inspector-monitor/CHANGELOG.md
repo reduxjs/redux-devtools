@@ -1,5 +1,16 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- 5cfe3e5: Update min required React version to 16.8.4
+
+### Patch Changes
+
+- Updated dependencies [decc035]
+  - @redux-devtools/core@4.0.0
+
 ## 5.0.1
 
 ### Patch Changes

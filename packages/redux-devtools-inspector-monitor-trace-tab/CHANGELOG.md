@@ -1,5 +1,16 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- 5cfe3e5: Update min required React version to 16.8.4
+
+### Patch Changes
+
+- Updated dependencies [5cfe3e5]
+  - @redux-devtools/inspector-monitor@6.0.0
+
 ## 3.0.0
 
 ### Major Changes
