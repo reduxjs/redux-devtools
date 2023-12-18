@@ -22,7 +22,6 @@ class TodoApp extends Component<Props> {
 
     return (
       <div>
-        {/* eslint-disable-next-line @typescript-eslint/unbound-method */}
         <Header addTodo={actions.addTodo} />
         <MainSection todos={todos} actions={actions} />
       </div>

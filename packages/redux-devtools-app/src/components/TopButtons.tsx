@@ -9,7 +9,6 @@ import InstanceSelector from './InstanceSelector';
 import SyncButton from './buttons/SyncButton';
 import { Options, State } from '../reducers/instances';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep } = ActionCreators;
 
 interface Props {

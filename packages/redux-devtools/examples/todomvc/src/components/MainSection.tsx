@@ -77,7 +77,6 @@ export default class MainSection extends Component<Props, State> {
             className="toggle-all"
             type="checkbox"
             checked={markedCount === todos.length}
-            // eslint-disable-next-line @typescript-eslint/unbound-method
             onChange={actions.markAll}
           />
           <label htmlFor={this.htmlFormInputId}>Mark all as complete</label>

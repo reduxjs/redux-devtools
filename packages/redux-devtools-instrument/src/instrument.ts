@@ -133,6 +133,7 @@ export type LiftedAction<S, A extends Action<string>, MonitorState> =
  */
 export const ActionCreators = {
   performAction<A extends Action<string>>(
+    this: void,
     action: A,
     trace?: ((action: A) => string | undefined) | boolean,
     traceLimit?: number,
@@ -203,27 +204,28 @@ export const ActionCreators = {
     };
   },
 
-  reset(): ResetAction {
+  reset(this: void): ResetAction {
     return { type: ActionTypes.RESET, timestamp: Date.now() };
   },
 
-  rollback(): RollbackAction {
+  rollback(this: void): RollbackAction {
     return { type: ActionTypes.ROLLBACK, timestamp: Date.now() };
   },
 
-  commit(): CommitAction {
+  commit(this: void): CommitAction {
     return { type: ActionTypes.COMMIT, timestamp: Date.now() };
   },
 
-  sweep(): SweepAction {
+  sweep(this: void): SweepAction {
     return { type: ActionTypes.SWEEP };
   },
 
-  toggleAction(id: number): ToggleAction {
+  toggleAction(this: void, id: number): ToggleAction {
     return { type: ActionTypes.TOGGLE_ACTION, id };
   },
 
   setActionsActive(
+    this: void,
     start: number,
     end: number,
     active = true,
@@ -231,30 +233,35 @@ export const ActionCreators = {
     return { type: ActionTypes.SET_ACTIONS_ACTIVE, start, end, active };
   },
 
-  reorderAction(actionId: number, beforeActionId: number): ReorderAction {
+  reorderAction(
+    this: void,
+    actionId: number,
+    beforeActionId: number,
+  ): ReorderAction {
     return { type: ActionTypes.REORDER_ACTION, actionId, beforeActionId };
   },
 
-  jumpToState(index: number): JumpToStateAction {
+  jumpToState(this: void, index: number): JumpToStateAction {
     return { type: ActionTypes.JUMP_TO_STATE, index };
   },
 
-  jumpToAction(actionId: number): JumpToActionAction {
+  jumpToAction(this: void, actionId: number): JumpToActionAction {
     return { type: ActionTypes.JUMP_TO_ACTION, actionId };
   },
 
   importState<S, A extends Action<string>, MonitorState = null>(
+    this: void,
     nextLiftedState: LiftedState<S, A, MonitorState> | readonly A[],
     noRecompute?: boolean,
   ): ImportStateAction<S, A, MonitorState> {
     return { type: ActionTypes.IMPORT_STATE, nextLiftedState, noRecompute };
   },
 
-  lockChanges(status: boolean): LockChangesAction {
+  lockChanges(this: void, status: boolean): LockChangesAction {
     return { type: ActionTypes.LOCK_CHANGES, status };
   },
 
-  pauseRecording(status: boolean): PauseRecordingAction {
+  pauseRecording(this: void, status: boolean): PauseRecordingAction {
     return { type: ActionTypes.PAUSE_RECORDING, status };
   },
 };

@@ -27,6 +27,7 @@ class DevTools extends Component<Props> {
     LiftedState<unknown, Action<string>, unknown>
   > & {
     update(
+      this: void,
       monitorProps: unknown,
       state: unknown | undefined,
       action: Action<string>,
@@ -44,7 +45,6 @@ class DevTools extends Component<Props> {
     this.monitorProps = monitorElement.props;
     this.Monitor = monitorElement.type;
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const update = this.Monitor!.update;
     if (update) {
       let newMonitorState;
