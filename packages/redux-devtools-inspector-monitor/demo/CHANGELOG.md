@@ -1,5 +1,15 @@
 # inspector-demo
 
+## 0.1.10
+
+### Patch Changes
+
+- Updated dependencies [5cfe3e5]
+- Updated dependencies [decc035]
+  - @redux-devtools/dock-monitor@4.0.0
+  - @redux-devtools/inspector-monitor@6.0.0
+  - @redux-devtools/core@4.0.0
+
 ## 0.1.9
 
 ### Patch Changes

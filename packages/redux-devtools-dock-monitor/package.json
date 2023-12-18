@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/dock-monitor",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "A resizable and movable dock for Redux DevTools monitors",
   "keywords": [
     "redux",
@@ -53,7 +53,7 @@
     "@babel/preset-env": "^7.23.5",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
-    "@redux-devtools/core": "^3.14.0",
+    "@redux-devtools/core": "^4.0.0",
     "@types/parse-key": "^0.2.2",
     "@types/react": "^18.2.43",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
@@ -68,7 +68,7 @@
     "typescript": "~5.3.3"
   },
   "peerDependencies": {
-    "@redux-devtools/core": "^3.0.0",
+    "@redux-devtools/core": "^4.0.0",
     "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react": "^16.8.4 || ^17.0.0 || ^18.0.0",
     "redux": "^3.4.0 || ^4.0.0 || ^5.0.0"

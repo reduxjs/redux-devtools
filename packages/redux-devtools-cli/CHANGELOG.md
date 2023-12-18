@@ -1,5 +1,12 @@
 # Change Log
 
+## 3.0.4
+
+### Patch Changes
+
+- Updated dependencies [5cfe3e5]
+  - @redux-devtools/app@6.0.0
+
 ## 3.0.3
 
 ### Patch Changes

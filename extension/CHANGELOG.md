@@ -1,5 +1,16 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.7
+
+### Patch Changes
+
+- Updated dependencies [5cfe3e5]
+- Updated dependencies [decc035]
+  - @redux-devtools/app@6.0.0
+  - @redux-devtools/slider-monitor@5.0.0
+  - @redux-devtools/core@4.0.0
+  - @redux-devtools/utils@3.0.0
+
 ## 3.1.6
 
 ### Patch Changes

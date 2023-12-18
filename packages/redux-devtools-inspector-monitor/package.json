@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/inspector-monitor",
-  "version": "5.0.1",
+  "version": "6.0.0",
   "description": "Redux DevTools Diff Monitor",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-inspector-monitor",
   "bugs": {
@@ -62,7 +62,7 @@
     "@babel/preset-typescript": "^7.23.3",
     "@emotion/babel-preset-css-prop": "^11.11.0",
     "@emotion/react": "^11.11.1",
-    "@redux-devtools/core": "^3.14.0",
+    "@redux-devtools/core": "^4.0.0",
     "@types/dateformat": "^5.0.2",
     "@types/hex-rgba": "^1.0.3",
     "@types/history": "^4.7.11",
@@ -81,7 +81,7 @@
   },
   "peerDependencies": {
     "@emotion/react": "^11.0.0",
-    "@redux-devtools/core": "^3.0.0",
+    "@redux-devtools/core": "^4.0.0",
     "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react": "^16.8.4 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.8.4 || ^17.0.0 || ^18.0.0",
