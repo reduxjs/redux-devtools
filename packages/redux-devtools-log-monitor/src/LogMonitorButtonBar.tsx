@@ -6,7 +6,6 @@ import LogMonitorButton from './LogMonitorButton';
 import { LogMonitorAction } from './actions';
 import { LogMonitorState } from './reducers';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep } = ActionCreators;
 
 const style: CSSProperties = {

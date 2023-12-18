@@ -17,7 +17,6 @@ import reducer, { LogMonitorState } from './reducers';
 import LogMonitorButtonBar from './LogMonitorButtonBar';
 import LogMonitorEntryList from './LogMonitorEntryList';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { toggleAction, setActionsActive } = ActionCreators;
 
 const styles: {

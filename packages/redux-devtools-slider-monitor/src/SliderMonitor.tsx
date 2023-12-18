@@ -18,7 +18,6 @@ import {
 import reducer from './reducers';
 import SliderButton from './SliderButton';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, jumpToAction } = ActionCreators;
 
 interface ExternalProps<S, A extends Action<string>> {

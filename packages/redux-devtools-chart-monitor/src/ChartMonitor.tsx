@@ -11,7 +11,7 @@ import type { Options } from 'd3-state-visualizer';
 
 import reducer, { ChartMonitorState } from './reducers';
 import Chart, { Props } from './Chart';
-// eslint-disable-next-line @typescript-eslint/unbound-method
+
 const { reset, rollback, commit, sweep, toggleAction } = ActionCreators;
 
 const styles: { container: CSSProperties } = {

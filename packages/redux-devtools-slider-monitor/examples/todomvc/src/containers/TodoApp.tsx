@@ -18,7 +18,6 @@ interface Props {
 
 const TodoApp: FunctionComponent<Props> = ({ todos, actions }) => (
   <div>
-    {/* eslint-disable-next-line @typescript-eslint/unbound-method */}
     <Header addTodo={actions.addTodo} />
     <MainSection todos={todos} actions={actions} />
   </div>
