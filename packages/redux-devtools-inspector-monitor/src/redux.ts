@@ -46,7 +46,6 @@ function reduceUpdateState(
 }
 
 export function reducer<S, A extends Action<string>>(
-  this: void,
   props: DevtoolsInspectorProps<S, A>,
   state = DEFAULT_STATE,
   action: DevtoolsInspectorAction,
