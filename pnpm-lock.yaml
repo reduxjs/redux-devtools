@@ -1067,8 +1067,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(react@18.2.0)(redux@4.2.1)
       socketcluster-client:
-        specifier: ^17.2.2
-        version: 17.2.2
+        specifier: ^19.1.0
+        version: 19.1.0
     devDependencies:
       '@babel/cli':
         specifier: ^7.23.4
@@ -1125,8 +1125,8 @@ importers:
         specifier: ^18.2.18
         version: 18.2.18
       '@types/socketcluster-client':
-        specifier: ^16.0.3
-        version: 16.0.3
+        specifier: ^19.1.0
+        version: 19.1.0
       '@types/styled-components':
         specifier: ^5.1.34
         version: 5.1.34
@@ -1403,8 +1403,8 @@ importers:
         specifier: ^7.5.6
         version: 7.5.6
       '@types/socketcluster-client':
-        specifier: ^16.0.3
-        version: 16.0.3
+        specifier: ^19.1.0
+        version: 19.1.0
       '@types/socketcluster-server':
         specifier: ^17.3.3
         version: 17.3.3
@@ -1442,8 +1442,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.5
       socketcluster-client:
-        specifier: ^17.2.2
-        version: 17.2.2
+        specifier: ^19.1.0
+        version: 19.1.0
       supertest:
         specifier: ^6.3.3
         version: 6.3.3
@@ -2396,8 +2396,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       socketcluster-client:
-        specifier: ^17.2.2
-        version: 17.2.2
+        specifier: ^19.1.0
+        version: 19.1.0
     devDependencies:
       '@babel/cli':
         specifier: ^7.23.4
@@ -2427,8 +2427,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       '@types/socketcluster-client':
-        specifier: ^16.0.3
-        version: 16.0.3
+        specifier: ^19.1.0
+        version: 19.1.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.15.0
         version: 6.15.0(@typescript-eslint/parser@6.15.0)(eslint@8.56.0)(typescript@5.2.2)
@@ -10484,8 +10484,8 @@ packages:
     resolution: {integrity: sha512-igYpe5ApGMB7YGk2ZyyvrT1NwLYG7Q+8d78uskiS3qriHQa1fiFesibFTCDbGWhc9teD7RmGSuh9a1rzzXj9zg==}
     dev: false
 
-  /@types/socketcluster-client@16.0.3:
-    resolution: {integrity: sha512-FsfSbEbOOYfUwv3ZrdfEEsgHww4hMjlNESNBP7vnBXpn5AGpgRmKO6oh3pyXGIq5kG5pjKYKP7b/xdSnx+NKSA==}
+  /@types/socketcluster-client@19.1.0:
+    resolution: {integrity: sha512-ZWiPno7aO1DKseMuSP+eeohFgnvRYpQQkd/bIjaZKQlxFJz2/0ufYo6tKCxFdjwC5IbxSvxUWhZcevRZCcGyww==}
     dependencies:
       '@types/ag-channel': 5.0.3
       '@types/async-stream-emitter': 4.0.3
@@ -11486,12 +11486,18 @@ packages:
     resolution: {integrity: sha512-cfPZYjHkhCdHSR+eux71vOU8+8Xb23oLyxccAjwYHgOxDb3+qSDb2HV1Y0Hmu39vZlse2cm15CUShLiVYXHCmQ==}
     dependencies:
       stream-demux: 8.1.0
+    dev: false
 
   /async-stream-emitter@6.0.1:
     resolution: {integrity: sha512-83l3jwRWnLxicAUWe0soECasl4eLgU2apMl9rdG/Pujng4k4sZyb6+Va1Msx1UUSZjVs9F6eWm1E/REJUbruZg==}
     dependencies:
       stream-demux: 9.0.2
     dev: false
+
+  /async-stream-emitter@7.0.1:
+    resolution: {integrity: sha512-1bgA3iZ80rCBX2LocvsyZPy0QB3/xM+CsXBze2HDHLmshOqx2JlAANGq23djaJ48e9fpcKzTzS1QM0hAKKI0UQ==}
+    dependencies:
+      stream-demux: 10.0.1
 
   /async@3.2.5:
     resolution: {integrity: sha512-baNZyqaaLhyLVKm/DlvdW051MSgO6b8eVfIezl9E5PqWxFgzLm/wQntEW4zOytVburDEr0JlALEpdOFwvErLsg==}
@@ -12417,7 +12423,6 @@ packages:
 
   /consumable-stream@3.0.0:
     resolution: {integrity: sha512-CnnsJ9OG9ouxAjt3pc63/DaerezRo/WudqU71pc5epaIUi7NHu2T4v+3f0nKbbCY7icS/TfQ1Satr9rwZ7Jwsg==}
-    dev: false
 
   /content-disposition@0.5.4:
     resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
@@ -16504,6 +16509,7 @@ packages:
       chalk: 3.0.0
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -16713,8 +16719,8 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /linked-list@0.1.0:
-    resolution: {integrity: sha512-Zr4ovrd0ODzF3ut2TWZMdHIxb8iFdJc/P3QM4iCJdlxxGHXo69c9hGIHzLo8/FtuR9E6WUZc5irKhtPUgOKMAg==}
+  /linked-list@2.1.0:
+    resolution: {integrity: sha512-0GK/ylO6e5cv1PCOIdTRHxOaCgQ+0jKwHt+cHzkiCAZlx0KM5Id1bBAPad6g2mkvBNp1pNdmG0cohFGfqjkv9A==}
 
   /load-yaml-file@0.2.0:
     resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
@@ -19689,18 +19695,18 @@ packages:
     resolution: {integrity: sha512-9LK+E7Hv5R9u4g4C3p+jjLstaLe11MDsL21UpYaCNmapvMkYhqCV4A/f/3gyH8QjMyh6l68q9xC85vihY9ahMQ==}
     dev: true
 
-  /socketcluster-client@17.2.2:
-    resolution: {integrity: sha512-HIopjTj8p979N5klC7FeZSwu9rd805bFgFcyVX7Y8zPyjVHXHTfGrV/8vqzN2gpOwnnosWQ44ue0qGqovlxZrg==}
+  /socketcluster-client@19.1.0:
+    resolution: {integrity: sha512-N7bkQfLuOtlAVkotSs9MqmYV2ku7My4GmjFvyLpuv8SbYOe34RXPRcshIOOzKPf8Rs1VUw08podFDXNJ8Doudg==}
     dependencies:
       ag-channel: 5.0.0
       ag-request: 1.0.1
-      async-stream-emitter: 4.1.0
+      async-stream-emitter: 7.0.1
       buffer: 5.7.1
       clone-deep: 4.0.1
-      linked-list: 0.1.0
+      linked-list: 2.1.0
       sc-errors: 2.0.3
       sc-formatter: 4.0.0
-      stream-demux: 8.1.0
+      stream-demux: 10.0.1
       uuid: 8.3.2
       vinyl-buffer: 1.0.1
       ws: 8.15.1
@@ -19929,11 +19935,18 @@ packages:
       - utf-8-validate
     dev: true
 
+  /stream-demux@10.0.1:
+    resolution: {integrity: sha512-QjTYLJWpZxZ6uL5R1JzgOzjvao8zDx78ec+uOjHNeVc/9TuasYLldoVrYARZeT1xI1hFYuiKf13IM8b4wamhHg==}
+    dependencies:
+      consumable-stream: 3.0.0
+      writable-consumable-stream: 4.1.0
+
   /stream-demux@8.1.0:
     resolution: {integrity: sha512-20vtOmAj2EVzQZKZVmfyio16u/3QOKSvg+0ldgZeS+m2FNI1vKFoqggamagsPCXufdZ1Tk8VvAM/HV/YUmRbSg==}
     dependencies:
       consumable-stream: 2.0.0
       writable-consumable-stream: 3.0.1
+    dev: false
 
   /stream-demux@9.0.2:
     resolution: {integrity: sha512-39X+Jf+HDCYIy/FUcsmFq/CrFhRAa+r3OAHyPFzD2VwfRiDKGcuOvOGstKLXipb/6AnY5bqoc4H2Z5fHq+dAyg==}
@@ -21743,12 +21756,12 @@ packages:
     resolution: {integrity: sha512-rAOJTA/sMgXD/X6eMwbQJe49w+Fnkdx3iV5oUzdmiZ7Bwx03khqUnAKIpzp/hbI8q2EP5NfjXgIXN0MsipfHeg==}
     dependencies:
       consumable-stream: 2.0.0
+    dev: false
 
   /writable-consumable-stream@4.1.0:
     resolution: {integrity: sha512-4cjCPd4Ayfbix0qqPCzMbnPPZKRh/cKeNCj05unybP3/sRkRAOxh7rSwbhxs3YB6G4/Z2p/2FRBEIQcTeB4jyw==}
     dependencies:
       consumable-stream: 3.0.0
-    dev: false
 
   /write-file-atomic@2.4.3:
     resolution: {integrity: sha512-GaETH5wwsX+GcnzhPgKcKjJ6M2Cq3/iZp1WyY/X1CSqrW+jVNM9Y7D8EC2sM4ZG/V8wZlSniJnCKWPmBYAucRQ==}
