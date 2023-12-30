@@ -1360,8 +1360,8 @@ importers:
         specifier: ^7.5.4
         version: 7.5.4
       socketcluster-server:
-        specifier: ^17.4.1
-        version: 17.4.1
+        specifier: ^19.0.1
+        version: 19.0.1
       sqlite3:
         specifier: ^5.1.6
         version: 5.1.6
@@ -1406,8 +1406,8 @@ importers:
         specifier: ^16.0.3
         version: 16.0.3
       '@types/socketcluster-server':
-        specifier: ^17.3.3
-        version: 17.3.3
+        specifier: ^19.0.0
+        version: 19.0.0
       '@types/styled-components':
         specifier: ^5.1.34
         version: 5.1.34
@@ -9757,13 +9757,17 @@ packages:
       '@types/writable-consumable-stream': 2.0.3
     dev: true
 
+  /@types/ag-request@1.0.0:
+    resolution: {integrity: sha512-TkEbkl6qW+b0fVgP9yoDZFGOa0ctI9GD8b/RygUZ/V06uIVunEUCkFqZ3mYk1g8xg0mYu4s5HjkDXwKsV3kr4g==}
+    dev: true
+
   /@types/ag-simple-broker@5.0.3:
     resolution: {integrity: sha512-XnnZs+yxXO4VseDYDIKQPhTXhFSnPiqKwmgSQVdSWAbuyHfyOIqggWyqmtc75COOrQ1uXm2JH4cpVuhBoNdgDg==}
     dependencies:
       '@types/ag-channel': 5.0.3
       '@types/async-stream-emitter': 4.0.3
       '@types/consumable-stream': 2.0.2
-      '@types/socketcluster-server': 17.3.3
+      '@types/socketcluster-server': 19.0.0
       '@types/writable-consumable-stream': 2.0.3
     dev: true
 
@@ -10511,6 +10515,21 @@ packages:
       '@types/ws': 8.5.10
     dev: true
 
+  /@types/socketcluster-server@19.0.0:
+    resolution: {integrity: sha512-HoQ7eHpR8zdVqOrtVs4ZfSBV9/PQBGTIXoIqBQEf14ABDoF1fVC1TEzO+7CUZMuu6wwwQb11cCpREBABdaoaRA==}
+    dependencies:
+      '@types/ag-auth': 1.0.3
+      '@types/ag-request': 1.0.0
+      '@types/ag-simple-broker': 5.0.3
+      '@types/async-stream-emitter': 4.0.3
+      '@types/consumable-stream': 2.0.2
+      '@types/jsonwebtoken': 9.0.5
+      '@types/sc-errors': 1.4.3
+      '@types/stream-demux': 8.0.3
+      '@types/writable-consumable-stream': 2.0.3
+      '@types/ws': 8.5.10
+    dev: true
+
   /@types/sockjs@0.3.36:
     resolution: {integrity: sha512-MK9V6NzAS1+Ud7JV9lJLFqW85VbC9dq3LmwZCuBe4wBDgKC0Kj/jd8Xl+nSviU+Qc3+m7umHHyHg//2KSa0a0Q==}
     dependencies:
@@ -11146,12 +11165,12 @@ packages:
     dependencies:
       sc-errors: 2.0.3
 
-  /ag-simple-broker@5.0.1:
-    resolution: {integrity: sha512-bD/xiFZmfm/of5qwzqJ/GL4DsxrY7+SV3wGEI+BplpX+2qgIZyiNsKQeN+fhansCF2TScmP3I3lOGnABQ3QZZw==}
+  /ag-simple-broker@6.0.1:
+    resolution: {integrity: sha512-pDlHotEoC9uV2Uk8DrR570QXMiUd9QYwJZXWDlBJZEbYTHzMJLEJDJStxmn7Kp4eT7SIGoPFuzELYZyMYNZ2Kw==}
     dependencies:
       ag-channel: 5.0.0
-      async-stream-emitter: 6.0.1
-      stream-demux: 9.0.2
+      async-stream-emitter: 7.0.1
+      stream-demux: 10.0.1
     dev: false
 
   /agent-base@5.1.1:
@@ -11487,10 +11506,10 @@ packages:
     dependencies:
       stream-demux: 8.1.0
 
-  /async-stream-emitter@6.0.1:
-    resolution: {integrity: sha512-83l3jwRWnLxicAUWe0soECasl4eLgU2apMl9rdG/Pujng4k4sZyb6+Va1Msx1UUSZjVs9F6eWm1E/REJUbruZg==}
+  /async-stream-emitter@7.0.1:
+    resolution: {integrity: sha512-1bgA3iZ80rCBX2LocvsyZPy0QB3/xM+CsXBze2HDHLmshOqx2JlAANGq23djaJ48e9fpcKzTzS1QM0hAKKI0UQ==}
     dependencies:
-      stream-demux: 9.0.2
+      stream-demux: 10.0.1
     dev: false
 
   /async@3.2.5:
@@ -16504,6 +16523,7 @@ packages:
       chalk: 3.0.0
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
@@ -19708,19 +19728,19 @@ packages:
       - bufferutil
       - utf-8-validate
 
-  /socketcluster-server@17.4.1:
-    resolution: {integrity: sha512-ElKD9U7EncoWNGYOL+G6UAxuYmui1fnawpyhZIpFG/A/lDNGwHsQLNIpJXh1SB4BpoQLn2q4ewwnUK3Mse5mfA==}
+  /socketcluster-server@19.0.1:
+    resolution: {integrity: sha512-IfMZxTkzvqOUExqiVxkxE2DjN/tap6WpbplatptsHKa58wfN6SdfcYCYeR3hlUBOx+cG09/hPxlN+R5tYZF0Mg==}
     dependencies:
       ag-auth: 2.0.1
       ag-request: 1.0.1
-      ag-simple-broker: 5.0.1
-      async-stream-emitter: 4.1.0
+      ag-simple-broker: 6.0.1
+      async-stream-emitter: 7.0.1
       base64id: 2.0.0
       clone-deep: 4.0.1
       sc-errors: 2.0.3
       sc-formatter: 4.0.0
-      stream-demux: 8.1.0
-      writable-consumable-stream: 2.0.0
+      stream-demux: 10.0.1
+      writable-consumable-stream: 4.1.0
       ws: 8.15.1
     transitivePeerDependencies:
       - bufferutil
@@ -19929,18 +19949,18 @@ packages:
       - utf-8-validate
     dev: true
 
+  /stream-demux@10.0.1:
+    resolution: {integrity: sha512-QjTYLJWpZxZ6uL5R1JzgOzjvao8zDx78ec+uOjHNeVc/9TuasYLldoVrYARZeT1xI1hFYuiKf13IM8b4wamhHg==}
+    dependencies:
+      consumable-stream: 3.0.0
+      writable-consumable-stream: 4.1.0
+    dev: false
+
   /stream-demux@8.1.0:
     resolution: {integrity: sha512-20vtOmAj2EVzQZKZVmfyio16u/3QOKSvg+0ldgZeS+m2FNI1vKFoqggamagsPCXufdZ1Tk8VvAM/HV/YUmRbSg==}
     dependencies:
       consumable-stream: 2.0.0
       writable-consumable-stream: 3.0.1
-
-  /stream-demux@9.0.2:
-    resolution: {integrity: sha512-39X+Jf+HDCYIy/FUcsmFq/CrFhRAa+r3OAHyPFzD2VwfRiDKGcuOvOGstKLXipb/6AnY5bqoc4H2Z5fHq+dAyg==}
-    dependencies:
-      consumable-stream: 3.0.0
-      writable-consumable-stream: 4.1.0
-    dev: false
 
   /stream-shift@1.0.1:
     resolution: {integrity: sha512-AiisoFqQ0vbGcZgQPY1cdP2I76glaVA/RauYR4G4thNFgkTqr90yXTo4LYX60Jl+sIlPNHHdGSwo01AvbKUSVQ==}
@@ -21732,12 +21752,6 @@ packages:
 
   /wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
-
-  /writable-consumable-stream@2.0.0:
-    resolution: {integrity: sha512-SITambzxtPTFU/wR82h+zOKGBiEv5V8gC1mt8xvoE1/168ApEa8H+6s2UToYJo3VLL7sNYTaApKuPD+pZHMGJQ==}
-    dependencies:
-      consumable-stream: 2.0.0
-    dev: false
 
   /writable-consumable-stream@3.0.1:
     resolution: {integrity: sha512-rAOJTA/sMgXD/X6eMwbQJe49w+Fnkdx3iV5oUzdmiZ7Bwx03khqUnAKIpzp/hbI8q2EP5NfjXgIXN0MsipfHeg==}
