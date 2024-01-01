@@ -3156,8 +3156,8 @@ importers:
         specifier: ^16.1.0
         version: 16.1.0(typescript@5.2.2)
       stylelint-config-standard:
-        specifier: ^34.0.0
-        version: 34.0.0(stylelint@16.1.0)
+        specifier: ^36.0.0
+        version: 36.0.0(stylelint@16.1.0)
       stylelint-config-styled-components:
         specifier: ^0.1.1
         version: 0.1.1
@@ -20068,23 +20068,23 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
 
-  /stylelint-config-recommended@13.0.0(stylelint@16.1.0):
-    resolution: {integrity: sha512-EH+yRj6h3GAe/fRiyaoO2F9l9Tgg50AOFhaszyfov9v6ayXJ1IkSHwTxd7lB48FmOeSGDPLjatjO11fJpmarkQ==}
-    engines: {node: ^14.13.1 || >=16.0.0}
+  /stylelint-config-recommended@14.0.0(stylelint@16.1.0):
+    resolution: {integrity: sha512-jSkx290CglS8StmrLp2TxAppIajzIBZKYm3IxT89Kg6fGlxbPiTiyH9PS5YUuVAFwaJLl1ikiXX0QWjI0jmgZQ==}
+    engines: {node: '>=18.12.0'}
     peerDependencies:
-      stylelint: ^15.10.0
+      stylelint: ^16.0.0
     dependencies:
       stylelint: 16.1.0(typescript@5.2.2)
     dev: true
 
-  /stylelint-config-standard@34.0.0(stylelint@16.1.0):
-    resolution: {integrity: sha512-u0VSZnVyW9VSryBG2LSO+OQTjN7zF9XJaAJRX/4EwkmU0R2jYwmBSN10acqZisDitS0CLiEiGjX7+Hrq8TAhfQ==}
-    engines: {node: ^14.13.1 || >=16.0.0}
+  /stylelint-config-standard@36.0.0(stylelint@16.1.0):
+    resolution: {integrity: sha512-3Kjyq4d62bYFp/Aq8PMKDwlgUyPU4nacXsjDLWJdNPRUgpuxALu1KnlAHIj36cdtxViVhXexZij65yM0uNIHug==}
+    engines: {node: '>=18.12.0'}
     peerDependencies:
-      stylelint: ^15.10.0
+      stylelint: ^16.1.0
     dependencies:
       stylelint: 16.1.0(typescript@5.2.2)
-      stylelint-config-recommended: 13.0.0(stylelint@16.1.0)
+      stylelint-config-recommended: 14.0.0(stylelint@16.1.0)
     dev: true
 
   /stylelint-config-styled-components@0.1.1:
