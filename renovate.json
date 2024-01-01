@@ -32,7 +32,22 @@
       "groupName": "msw"
     },
     {
-      "matchPackageNames": ["redux", "redux-thunk", "react-redux", "@reduxjs/toolkit"],
+      "matchPackageNames": [
+        "redux",
+        "redux-thunk",
+        "react-redux",
+        "@reduxjs/toolkit"
+      ],
+      "matchUpdateTypes": ["major"],
+      "groupName": "redux"
+    },
+    {
+      "matchPackageNames": [
+        "socketcluster-client",
+        "@types/socketcluster-client",
+        "socketcluster-server",
+        "@types/socketcluster-server"
+      ],
       "matchUpdateTypes": ["major"],
       "groupName": "redux"
     }
