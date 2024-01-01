@@ -3,6 +3,7 @@ import {
   ActionCreators,
   EnhancedStore,
   instrument,
+  LiftedAction,
   LiftedStore,
   LiftedState,
 } from '../src/instrument';
@@ -487,10 +488,18 @@ describe('instrument', () => {
 
     const savedComputedStates = monitoredLiftedStore.getState().computedStates;
 
-    monitoredLiftedStore.dispatch({ type: 'lol' } as Action);
+    monitoredLiftedStore.dispatch({ type: 'lol' } as unknown as LiftedAction<
+      number,
+      Action,
+      null
+    >);
     expect(reducerCalls).toBe(4);
 
-    monitoredLiftedStore.dispatch({ type: 'wat' } as Action);
+    monitoredLiftedStore.dispatch({ type: 'wat' } as unknown as LiftedAction<
+      number,
+      Action,
+      null
+    >);
     expect(reducerCalls).toBe(4);
 
     expect(monitoredLiftedStore.getState().computedStates).toBe(
