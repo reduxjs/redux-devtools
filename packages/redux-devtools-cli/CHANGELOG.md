@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- 4dd0dd2: Require Node.js 18
+
 ## 3.0.4
 
 ### Patch Changes
