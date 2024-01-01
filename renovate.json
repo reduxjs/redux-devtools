@@ -26,6 +26,15 @@
       "matchPackageNames": ["jsondiffpatch"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "jsondiffpatch"
+    },
+    {
+      "matchPackageNames": ["msw"],
+      "groupName": "msw"
+    },
+    {
+      "matchPackageNames": ["redux", "redux-thunk", "react-redux", "@reduxjs/toolkit"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "redux"
     }
   ]
 }
