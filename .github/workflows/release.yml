@@ -40,19 +40,19 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Archive Chrome Extension
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: chrome
           path: extension/chrome/dist
 
       - name: Archive Edge Extension
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: edge
           path: extension/edge/dist
 
       - name: Archive Firefox Extension
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: firefox
           path: extension/firefox/dist
