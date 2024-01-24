@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { JSONTree } from 'react-json-tree';
 import type { LabelRenderer, ShouldExpandNodeInitially } from 'react-json-tree';
 import { stringify } from 'javascript-stringify';
-import { Delta } from 'jsondiffpatch';
+import type { Delta } from 'jsondiffpatch';
 import { Base16Theme } from 'redux-devtools-themes';
 import { css } from '@emotion/react';
 import type { Interpolation, Theme } from '@emotion/react';
