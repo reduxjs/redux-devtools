@@ -1173,8 +1173,8 @@ importers:
         specifier: ^9.0.2
         version: 9.0.2(typescript@5.3.3)(webpack@5.89.0)
       html-loader:
-        specifier: ^4.2.0
-        version: 4.2.0(webpack@5.89.0)
+        specifier: ^5.0.0
+        version: 5.0.0(webpack@5.89.0)
       html-webpack-plugin:
         specifier: ^5.6.0
         version: 5.6.0(webpack@5.89.0)
@@ -15027,9 +15027,9 @@ packages:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
     dev: true
 
-  /html-loader@4.2.0(webpack@5.89.0):
-    resolution: {integrity: sha512-OxCHD3yt+qwqng2vvcaPApCEvbx+nXWu+v69TYHx1FO8bffHn/JjHtE3TTQZmHjwvnJe4xxzuecetDVBrQR1Zg==}
-    engines: {node: '>= 14.15.0'}
+  /html-loader@5.0.0(webpack@5.89.0):
+    resolution: {integrity: sha512-puaGKdjdVVIFRtgIC2n5dt5bt0N5j6heXlAQZ4Do1MLjHmOT1gCE1Ogg7XZNeJlnOVHHsrZKGs5dfh+XwZ3XPw==}
+    engines: {node: '>= 18.12.0'}
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
@@ -16479,6 +16479,7 @@ packages:
       chalk: 3.0.0
       diff-match-patch: 1.0.5
     dev: false
+    bundledDependencies: []
 
   /jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
