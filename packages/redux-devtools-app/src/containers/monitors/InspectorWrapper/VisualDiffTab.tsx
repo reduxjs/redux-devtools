@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Delta, formatters } from 'jsondiffpatch';
+import type { Delta } from 'jsondiffpatch';
+import * as htmlFormatter from 'jsondiffpatch/formatters/html';
 import styled, { ThemedStyledProps } from 'styled-components';
 import { effects, Theme } from '@redux-devtools/ui';
 
@@ -240,7 +241,7 @@ export default class VisualDiffTab extends Component<Props> {
     let __html: string | undefined;
     const data = this.props.data;
     if (data) {
-      __html = formatters.html.format(data, undefined);
+      __html = htmlFormatter.format(data, undefined);
     }
 
     return <StyledContainer dangerouslySetInnerHTML={{ __html: __html! }} />;
