@@ -2,13 +2,13 @@
 /* tslint:disable */
 
 /**
- * Mock Service Worker (2.0.12).
+ * Mock Service Worker (2.1.4).
  * @see https://github.com/mswjs/msw
  * - Please do NOT modify this file.
  * - Please do NOT serve this file on production.
  */
 
-const INTEGRITY_CHECKSUM = 'c5f7f8e188b673ea4e677df7ea3c5a39'
+const INTEGRITY_CHECKSUM = '223d191a56023cd36aa88c802961b911'
 const IS_MOCKED_RESPONSE = Symbol('isMockedResponse')
 const activeClientIds = new Set()
 
