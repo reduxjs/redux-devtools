@@ -13,7 +13,7 @@ import RawTab from './RawTab';
 import ChartTab from './ChartTab';
 import VisualDiffTab from './VisualDiffTab';
 import { StoreState } from '../../../reducers';
-import { Delta } from 'jsondiffpatch';
+import type { Delta } from 'jsondiffpatch';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

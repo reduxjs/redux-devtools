@@ -23,11 +23,6 @@
       "groupName": "source-map"
     },
     {
-      "matchPackageNames": ["jsondiffpatch"],
-      "matchUpdateTypes": ["major", "minor"],
-      "groupName": "jsondiffpatch"
-    },
-    {
       "matchPackageNames": ["msw"],
       "groupName": "msw"
     },
@@ -40,16 +35,6 @@
       ],
       "matchUpdateTypes": ["major"],
       "groupName": "redux"
-    },
-    {
-      "matchPackageNames": [
-        "socketcluster-client",
-        "@types/socketcluster-client",
-        "socketcluster-server",
-        "@types/socketcluster-server"
-      ],
-      "matchUpdateTypes": ["major"],
-      "groupName": "socketcluster"
     }
   ]
 }
