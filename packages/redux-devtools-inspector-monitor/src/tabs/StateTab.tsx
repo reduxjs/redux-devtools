@@ -4,6 +4,7 @@ import { Action } from 'redux';
 import getItemString from './getItemString';
 import getJsonTreeTheme from './getJsonTreeTheme';
 import { TabComponentProps } from '../ActionPreview';
+import { VanillaJSONEditor } from './VanillaJSONEditor';
 
 const StateTab: React.FunctionComponent<
   TabComponentProps<any, Action<string>>
@@ -16,19 +17,15 @@ const StateTab: React.FunctionComponent<
   isWideLayout,
   sortStateTreeAlphabetically,
   disableStateTreeCollection,
-}) => (
-  <JSONTree
-    labelRenderer={labelRenderer}
-    theme={getJsonTreeTheme(base16Theme)}
-    data={nextState}
-    getItemString={(type, data) =>
-      getItemString(type, data, dataTypeKey, isWideLayout)
-    }
-    invertTheme={invertTheme}
-    hideRoot
-    sortObjectKeys={sortStateTreeAlphabetically}
-    {...(disableStateTreeCollection ? { collectionLimit: 0 } : {})}
-  />
-);
+}) => {
+  return (
+      <VanillaJSONEditor
+        content={{
+          json: nextState
+        }}
+        readOnly={true}
+      />
+  );
+}
 
 export default StateTab;
