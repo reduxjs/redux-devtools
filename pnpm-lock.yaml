@@ -18,8 +18,8 @@ importers:
         specifier: ^2.27.1
         version: 2.27.1
       '@nrwl/nx-cloud':
-        specifier: ^16.5.2
-        version: 16.5.2
+        specifier: ^18.0.0
+        version: 18.0.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.21.0
         version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -7578,10 +7578,10 @@ packages:
     dev: false
     optional: true
 
-  /@nrwl/nx-cloud@16.5.2:
-    resolution: {integrity: sha512-oHO5T1HRJsR9mbRd8eUqMBPCgqVZLSbAh3zJoPFmhEmjbM4YB9ePRpgYFT8dRNeZUOUd/8Yt7Pb6EVWOHvpD/w==}
+  /@nrwl/nx-cloud@18.0.0:
+    resolution: {integrity: sha512-rjjcJgzDmKwFD1QVIMs5O3X4SoMQIk0bzh3pL90ZP/B5YJUlTySv7+R0JoGQ6ROGwVQHjPFMVKKLB09zl5perA==}
     dependencies:
-      nx-cloud: 16.5.2
+      nx-cloud: 18.0.0
     transitivePeerDependencies:
       - debug
     dev: true
@@ -17524,11 +17524,11 @@ packages:
     resolution: {integrity: sha512-ub5E4+FBPKwAZx0UwIQOjYWGHTEq5sPqHQNRN8Z9e4A7u3Tj1weLJsL59yH9vmvqEtBHaOmT6cYQKIZOxp35FQ==}
     dev: true
 
-  /nx-cloud@16.5.2:
-    resolution: {integrity: sha512-1t1Ii9gojl8r/8hFGaZ/ZyYR0Cb0hzvXLCsaFuvg+EJEFdvua3P4cfNya/0bdRrm+7Eb/ITUOskbvYq4TSlyGg==}
+  /nx-cloud@18.0.0:
+    resolution: {integrity: sha512-VpPywcHmFIU3GSWb3KV3nQ+TAMLc06DTO39vTFsM+HreB6qRloDxbADRvfM5eHAbY26TNmwflT7wxd0fluv2+A==}
     hasBin: true
     dependencies:
-      '@nrwl/nx-cloud': 16.5.2
+      '@nrwl/nx-cloud': 18.0.0
       axios: 1.1.3
       chalk: 4.1.2
       dotenv: 10.0.0
