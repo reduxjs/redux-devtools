@@ -31,9 +31,14 @@
         "redux",
         "redux-thunk",
         "react-redux",
-        "@reduxjs/toolkit"
+        "@reduxjs/toolkit",
+        "@types/redux-logger"
       ],
       "matchUpdateTypes": ["major"],
+      "groupName": "redux"
+    },
+    {
+      "matchPackageNames": ["@types/redux-logger"],
       "groupName": "redux"
     }
   ]
