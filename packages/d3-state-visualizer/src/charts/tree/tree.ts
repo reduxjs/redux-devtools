@@ -473,9 +473,10 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
 
       // update the links
       const link = vis
-        .selectAll<SVGPathElement, HierarchyPointLink<InternalNode>>(
-          'path.link',
-        )
+        .selectAll<
+          SVGPathElement,
+          HierarchyPointLink<InternalNode>
+        >('path.link')
         .data(links, (d) => d.target.data.id);
 
       // enter any new links at the parent's previous position
