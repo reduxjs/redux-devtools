@@ -16,16 +16,18 @@ import type { ErrorLocation } from '../utils/parseCompileError';
 const linkStyle: CSSProperties = {
   fontSize: '0.9em',
   marginBottom: '0.9em',
+  color: '#0645AD',
 };
 
 const anchorStyle: CSSProperties = {
   textDecoration: 'none',
-  color: theme.base05,
+  color: '#0645AD',
   cursor: 'pointer',
 };
 
 const codeAnchorStyle: CSSProperties = {
   cursor: 'pointer',
+  color: '#333',
 };
 
 const toggleStyle: CSSProperties = {
