@@ -1,5 +1,12 @@
 # Change Log
 
+## 4.1.0
+
+### Minor changes
+
+- adds CLI argument to change ping timeout `--pingTimeout=20000` to make debugging easier
+- fixes `--maxRequestBody` argument
+
 ## 4.0.0
 
 ### Major Changes
