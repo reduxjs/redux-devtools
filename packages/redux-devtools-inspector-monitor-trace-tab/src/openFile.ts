@@ -84,6 +84,7 @@ function openInEditor(editor: string, path: string, stackFrame: StackFrame) {
     case 'idea':
       url = `${editor}://open?file=${projectPath}${filePath}&line=${line}&column=${column}`;
       break;
+    // add support for jetbrains server
     case 'jetbrains_server':
       url = `http://localhost:63342/api/file/?file=${filePath}&line=${line}`;
       break;
