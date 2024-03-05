@@ -13,7 +13,6 @@ import { ScriptLine } from '../utils/stack-frame';
 import generateAnsiHTML from '../utils/generateAnsiHTML';
 
 import { codeFrameColumns } from '@babel/code-frame';
-import { nicinabox as theme } from 'redux-devtools-themes';
 
 interface StackFrameCodeBlockPropsType {
   lines: ScriptLine[];
