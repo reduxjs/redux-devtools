@@ -19,6 +19,7 @@ const _collapsibleStyle: CSSProperties = {
   fontSize: '1em',
   padding: '0px 5px',
   lineHeight: '1.5',
+  borderBottom: '1px solid #ddd',
 };
 
 const collapsibleCollapsedStyle: CSSProperties = {
