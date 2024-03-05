@@ -86,7 +86,7 @@ function StackFrameCodeBlock(props: StackFrameCodeBlockPropsType) {
       }
       // $FlowFixMe
       applyStyles(node as HTMLElement, {
-        backgroundColor: main ? theme.base02 : theme.base01,
+        backgroundColor: '#e0e0e0',
       });
       // eslint-disable-next-line
       break oLoop;
