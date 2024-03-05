@@ -3,7 +3,24 @@
 [![OpenCollective](https://opencollective.com/redux-devtools-extension/backers/badge.svg)](#backers)
 [![OpenCollective](https://opencollective.com/redux-devtools-extension/sponsors/badge.svg)](#sponsors)
 
-# Redux DevTools
+# Redux DevTools (Custom Version)
+
+This fork of [Redux DevTools](https://github.com/reduxjs/redux-devtools) includes enhanced styling for better trace readability and JetBrains product support for code opening from traces when using the JavaScript debugger and the built-in server at the default port 63342.
+
+## Features
+
+- Improved trace styles for increased readability.
+- Added support for opening code directly from traces in JetBrains IDEs (like WebStorm, IntelliJ IDEA, etc.).
+
+### JetBrains Integration
+
+To use the JetBrains integration:
+
+1. Set `External editor:` to `jetbrains_server`.
+2. Set `Absolute path to the project directory to open:` to `/`.
+
+
+## Original Redux DevTools
 
 Developer Tools to power-up [Redux](https://redux.js.org/) development workflow or any other architecture which handles the state change (see [integrations](https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/Integrations.md)).
 
