@@ -61,7 +61,9 @@
     "storage",
     "file:///*",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "clipboardWrite",
+    "clipboardRead"
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;",
   "update_url": "https://clients2.google.com/service/update2/crx",
