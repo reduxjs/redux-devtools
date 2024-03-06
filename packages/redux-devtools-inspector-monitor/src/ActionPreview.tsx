@@ -10,6 +10,7 @@ import ActionPreviewHeader from './ActionPreviewHeader';
 import DiffTab from './tabs/DiffTab';
 import StateTab from './tabs/StateTab';
 import ActionTab from './tabs/ActionTab';
+import cloneDeep from 'lodash.clonedeep';
 
 export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;
@@ -79,6 +80,15 @@ class ActionPreview<S, A extends Action<string>> extends Component<
 > {
   static defaultProps = {
     tabName: DEFAULT_STATE.tabName,
+  };
+  copyToClipboard = () => {
+    try {
+      const deepCopiedObject = cloneDeep(this.props.nextState);
+      const jsonString = JSON.stringify(deepCopiedObject, null, 2);
+      void navigator.clipboard.writeText(jsonString);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
   };
 
   render(): JSX.Element {
@@ -206,10 +216,27 @@ class ActionPreview<S, A extends Action<string>> extends Component<
             ])
           }
         >
-          {'(pin)'}
-        </span>
-        {!expanded && ': '}
+              {'(pin)'}
       </span>
+        <span
+          css={(theme) => ({
+            fontSize: '0.7em',
+            paddingLeft: '5px',
+            cursor: 'pointer',
+            '&:hover': {
+              textDecoration: 'underline',
+            },
+            color: theme.PIN_COLOR,
+          })}
+          onClick={event => {
+            event.stopPropagation();
+            this.copyToClipboard();
+          }}
+        >
+        {'(copy)'}
+      </span>
+        {!expanded && ': '}
+    </span>
     );
   };
 }
