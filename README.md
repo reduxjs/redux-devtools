@@ -23,11 +23,16 @@ To use the JetBrains integration:
 
 ## Fix issue with the background color of the trace panel when the theme is dark.
 
-1. --- 
+1. ---
+
+![FH6fkptVOW](https://github.com/IliyaBrook/redux-devtools/assets/60712617/0fef78a6-e98a-4298-b347-f7f3b5d2e52b)
+
 
 ## Add copy to clipboard functionality to TreeView, in State and Action tabs.
 
 2. --- 
+
+![copy_paste](https://github.com/IliyaBrook/redux-devtools/assets/60712617/67fc8242-ec83-467a-a8ba-1e20fdb91f52)
 
 
 ## Original Redux DevTools
