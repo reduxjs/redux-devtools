@@ -208,8 +208,8 @@ class ActionPreview<S, A extends Action<string>> extends Component<
             ])
           }
         >
-              {'(pin)'}
-      </span>
+          {'(pin)'}
+        </span>
         <span
           css={(theme) => ({
             fontSize: '0.7em',
@@ -220,13 +220,19 @@ class ActionPreview<S, A extends Action<string>> extends Component<
             },
             color: theme.PIN_COLOR,
           })}
-          onClick={event => {
+          onClick={(event) => {
             event.stopPropagation();
             let objectForCopying;
             if (this.props.tabName === 'Action') {
-              objectForCopying = getValueByPath(this.props.action, reversedPath);
+              objectForCopying = getValueByPath(
+                this.props.action,
+                reversedPath,
+              );
             } else if (this.props.tabName === 'State') {
-              objectForCopying = getValueByPath(this.props.nextState, reversedPath);
+              objectForCopying = getValueByPath(
+                this.props.nextState,
+                reversedPath,
+              );
             }
             if (objectForCopying !== undefined) {
               copyToClipboard(objectForCopying);
@@ -235,10 +241,10 @@ class ActionPreview<S, A extends Action<string>> extends Component<
             }
           }}
         >
-        {'(copy)'}
-      </span>
+          {'(copy)'}
+        </span>
         {!expanded && ': '}
-    </span>
+      </span>
     );
   };
 }

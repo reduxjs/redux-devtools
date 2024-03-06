@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash.clonedeep';
 
-export function copyToClipboard(object: any){
+export function copyToClipboard(object: any) {
   try {
     const deepCopiedObject = cloneDeep(object);
     const jsonString = JSON.stringify(deepCopiedObject, null, 2);
