@@ -10,7 +10,8 @@ import ActionPreviewHeader from './ActionPreviewHeader';
 import DiffTab from './tabs/DiffTab';
 import StateTab from './tabs/StateTab';
 import ActionTab from './tabs/ActionTab';
-import cloneDeep from 'lodash.clonedeep';
+import { getValueByPath } from './utils/getValueByPath';
+import { copyToClipboard } from './utils/copyToClipboard';
 
 export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;
@@ -81,16 +82,6 @@ class ActionPreview<S, A extends Action<string>> extends Component<
   static defaultProps = {
     tabName: DEFAULT_STATE.tabName,
   };
-  copyToClipboard = (path: (string | number)[]) => {
-    try {
-      const objectByPath = path.reduce((obj: any, key) => (obj && obj[key] !== undefined) ? obj[key] : null, this.props.nextState);
-      const jsonString = JSON.stringify(objectByPath, null, 2);
-      void navigator.clipboard.writeText(jsonString)
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-    }
-  };
-
 
   render(): JSX.Element {
     const {
@@ -195,7 +186,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
 
   labelRenderer: LabelRenderer = ([key, ...rest], nodeType, expanded) => {
     const { onInspectPath, inspectedPath } = this.props;
-
+    const reversedPath = [key, ...rest].reverse();
     return (
       <span>
         <span>{key}</span>
@@ -213,7 +204,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
           onClick={() =>
             onInspectPath([
               ...inspectedPath.slice(0, inspectedPath.length - 1),
-              ...[key, ...rest].reverse(),
+              ...reversedPath,
             ])
           }
         >
@@ -231,7 +222,17 @@ class ActionPreview<S, A extends Action<string>> extends Component<
           })}
           onClick={event => {
             event.stopPropagation();
-            this.copyToClipboard([...inspectedPath.slice(0, inspectedPath.length - 1), key]);
+            let objectForCopying;
+            if (this.props.tabName === 'Action') {
+              objectForCopying = getValueByPath(this.props.action, reversedPath);
+            } else if (this.props.tabName === 'State') {
+              objectForCopying = getValueByPath(this.props.nextState, reversedPath);
+            }
+            if (objectForCopying !== undefined) {
+              copyToClipboard(objectForCopying);
+            } else {
+              console.error('Unable to find the object to copy');
+            }
           }}
         >
         {'(copy)'}
