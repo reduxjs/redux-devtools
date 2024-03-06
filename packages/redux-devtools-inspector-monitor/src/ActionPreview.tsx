@@ -81,15 +81,16 @@ class ActionPreview<S, A extends Action<string>> extends Component<
   static defaultProps = {
     tabName: DEFAULT_STATE.tabName,
   };
-  copyToClipboard = () => {
+  copyToClipboard = (path: (string | number)[]) => {
     try {
-      const deepCopiedObject = cloneDeep(this.props.nextState);
-      const jsonString = JSON.stringify(deepCopiedObject, null, 2);
-      void navigator.clipboard.writeText(jsonString);
+      const objectByPath = path.reduce((obj: any, key) => (obj && obj[key] !== undefined) ? obj[key] : null, this.props.nextState);
+      const jsonString = JSON.stringify(objectByPath, null, 2);
+      void navigator.clipboard.writeText(jsonString)
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
   };
+
 
   render(): JSX.Element {
     const {
@@ -230,7 +231,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
           })}
           onClick={event => {
             event.stopPropagation();
-            this.copyToClipboard();
+            this.copyToClipboard([...inspectedPath.slice(0, inspectedPath.length - 1), key]);
           }}
         >
         {'(copy)'}
