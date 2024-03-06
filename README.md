@@ -19,6 +19,16 @@ To use the JetBrains integration:
 1. Set `External editor:` to `jetbrains_server`.
 2. Set `Absolute path to the project directory to open:` to `/`.
 
+### Fix issue with background color of the trace panel.
+
+## Fix issue with the background color of the trace panel when the theme is dark.
+
+1. --- 
+
+## Add copy to clipboard functionality to TreeView, in State and Action tabs.
+
+2. --- 
+
 
 ## Original Redux DevTools
 
