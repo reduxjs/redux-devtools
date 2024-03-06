@@ -216,8 +216,8 @@ class ActionPreview<S, A extends Action<string>> extends Component<
             ])
           }
         >
-              {'(pin)'}
-      </span>
+          {'(pin)'}
+        </span>
         <span
           css={(theme) => ({
             fontSize: '0.7em',
@@ -228,15 +228,15 @@ class ActionPreview<S, A extends Action<string>> extends Component<
             },
             color: theme.PIN_COLOR,
           })}
-          onClick={event => {
+          onClick={(event) => {
             event.stopPropagation();
             this.copyToClipboard();
           }}
         >
-        {'(copy)'}
-      </span>
+          {'(copy)'}
+        </span>
         {!expanded && ': '}
-    </span>
+      </span>
     );
   };
 }
