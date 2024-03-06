@@ -1,4 +1,4 @@
-export const getValueByPath = (obj: any, path: (string | number)[]) => {
+export function getValueByPath(obj: any, path: (string | number)[]){
   let current: any = obj;
   for (let i = 0; i < path.length; i++) {
     const key = path[i];
