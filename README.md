@@ -21,7 +21,7 @@ To use the JetBrains integration:
 
 ### Fix issue with background color of the trace panel.
 
-## Fix issue with the background color of the trace panel when the theme is dark.
+## Fix issue with the background black color of the trace tab.
 
 1. ---
 
