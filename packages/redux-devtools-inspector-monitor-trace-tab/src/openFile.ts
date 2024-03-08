@@ -132,7 +132,7 @@ export default function openFile(
               },
             );
           } else if (confirm('Set the editor to open the file in?')) {
-            chrome.runtime.openOptionsPage();
+            void chrome.runtime.openOptionsPage();
           }
         }
       }
