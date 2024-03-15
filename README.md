@@ -3,7 +3,39 @@
 [![OpenCollective](https://opencollective.com/redux-devtools-extension/backers/badge.svg)](#backers)
 [![OpenCollective](https://opencollective.com/redux-devtools-extension/sponsors/badge.svg)](#sponsors)
 
-# Redux DevTools
+# Redux DevTools (Custom Version)
+
+This fork of [Redux DevTools](https://github.com/reduxjs/redux-devtools) includes enhanced styling for better trace readability and JetBrains product support for code opening from traces when using the JavaScript debugger and the built-in server at the default port 63342.
+
+## Features
+
+- Improved trace styles for increased readability.
+- Added support for opening code directly from traces in JetBrains IDEs (like WebStorm, IntelliJ IDEA, etc.).
+
+### JetBrains Integration
+
+To use the JetBrains integration:
+
+1. Set `External editor:` to `jetbrains_server`.
+2. Set `Absolute path to the project directory to open:` to `/`.
+
+### Fix issue with background color of the trace panel.
+
+## Fix issue with the background black color of the trace tab.
+
+1. ---
+
+![FH6fkptVOW](https://github.com/IliyaBrook/redux-devtools/assets/60712617/0fef78a6-e98a-4298-b347-f7f3b5d2e52b)
+
+
+## Add copy to clipboard functionality to TreeView, in State and Action tabs.
+
+2. --- 
+
+![copy_paste](https://github.com/IliyaBrook/redux-devtools/assets/60712617/67fc8242-ec83-467a-a8ba-1e20fdb91f52)
+
+
+## Original Redux DevTools
 
 Developer Tools to power-up [Redux](https://redux.js.org/) development workflow or any other architecture which handles the state change (see [integrations](https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/Integrations.md)).
 

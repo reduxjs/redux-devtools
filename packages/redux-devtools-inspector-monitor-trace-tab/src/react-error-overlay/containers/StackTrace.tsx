@@ -19,6 +19,8 @@ const traceStyle = {
   flex: '0 1 auto',
   minHeight: '0px',
   overflow: 'auto',
+  color: '#000',
+  backgroundColor: '#f7f7f7',
 };
 
 interface Props {

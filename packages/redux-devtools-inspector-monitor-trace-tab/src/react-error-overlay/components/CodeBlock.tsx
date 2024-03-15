@@ -10,17 +10,19 @@ import React, { CSSProperties } from 'react';
 const preStyle: CSSProperties = {
   position: 'relative',
   display: 'block',
-  backgroundColor: '#000',
+  backgroundColor: '#f7f7f7',
   padding: '0.5em',
   marginTop: '0.5em',
   marginBottom: '0.5em',
   overflowX: 'auto',
   whiteSpace: 'pre-wrap',
   borderRadius: '0.25rem',
+  border: '1px solid #ddd',
 };
 
 const codeStyle = {
   fontFamily: 'Consolas, Menlo, monospace',
+  color: '#333',
 };
 
 interface CodeBlockPropsType {

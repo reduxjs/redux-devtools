@@ -13,7 +13,6 @@ import { ScriptLine } from '../utils/stack-frame';
 import generateAnsiHTML from '../utils/generateAnsiHTML';
 
 import { codeFrameColumns } from '@babel/code-frame';
-import { nicinabox as theme } from 'redux-devtools-themes';
 
 interface StackFrameCodeBlockPropsType {
   lines: ScriptLine[];
@@ -86,7 +85,7 @@ function StackFrameCodeBlock(props: StackFrameCodeBlockPropsType) {
       }
       // $FlowFixMe
       applyStyles(node as HTMLElement, {
-        backgroundColor: main ? theme.base02 : theme.base01,
+        backgroundColor: '#e0e0e0',
       });
       // eslint-disable-next-line
       break oLoop;
