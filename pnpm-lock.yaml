@@ -2663,8 +2663,8 @@ importers:
         specifier: ^7.24.1
         version: 7.24.1(@babel/core@7.24.3)
       '@types/copy-webpack-plugin':
-        specifier: ^8.0.1
-        version: 8.0.1(webpack-cli@5.1.4)
+        specifier: ^10.1.0
+        version: 10.1.0(webpack@5.91.0)
       '@types/node':
         specifier: ^20.11.30
         version: 20.11.30
@@ -9896,17 +9896,13 @@ packages:
     resolution: {integrity: sha512-he+DHOWReW0nghN24E1WUqM0efK4kI9oTqDm6XmK8ZPe2djZ90BSNdGnIyCLzCPw7/pogPlGbzI2wHGGmi4O/Q==}
     dev: true
 
-  /@types/copy-webpack-plugin@8.0.1(webpack-cli@5.1.4):
-    resolution: {integrity: sha512-TwEeGse0/wq+t3SFW0DEwroMS/cDkwVZT+vj7tMAYTp7llt/yz6NuW2n04X2M5P/kSfBQOORhrHAN2mqZdmybg==}
+  /@types/copy-webpack-plugin@10.1.0(webpack@5.91.0):
+    resolution: {integrity: sha512-Dk0NUW3X6hVQdkH2n9R7NejjPNCocZBiv8XF8Ac5su2d6EKzCcG/yWDwnWGrEsAWvogoADJyUKULwncx0G9Jkg==}
+    deprecated: This is a stub types definition. copy-webpack-plugin provides its own type definitions, so you do not need this installed.
     dependencies:
-      '@types/node': 20.11.30
-      tapable: 2.2.1
-      webpack: 5.91.0(webpack-cli@5.1.4)
+      copy-webpack-plugin: 12.0.2(webpack@5.91.0)
     transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
-      - webpack-cli
+      - webpack
     dev: true
 
   /@types/cors@2.8.17:
