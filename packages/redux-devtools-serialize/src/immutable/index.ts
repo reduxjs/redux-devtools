@@ -18,7 +18,7 @@ export default function (
   ) => unknown,
 ) {
   return {
-    stringify: function (data: unknown) {
+    stringify: function (this: void, data: unknown) {
       return jsan.stringify(
         data,
         serialize(immutable, refs, customReplacer, customReviver).replacer,
@@ -26,7 +26,7 @@ export default function (
         options,
       );
     },
-    parse: function (data: string) {
+    parse: function (this: void, data: string) {
       return jsan.parse(
         data,
         serialize(immutable, refs, customReplacer, customReviver).reviver,
