@@ -1909,8 +1909,8 @@ importers:
         specifier: ^18.2.22
         version: 18.2.22
       '@types/redux-logger':
-        specifier: 3.0.12
-        version: 3.0.12
+        specifier: 3.0.13
+        version: 3.0.13
       '@types/styled-components':
         specifier: ^5.1.34
         version: 5.1.34
@@ -2175,8 +2175,8 @@ importers:
         specifier: ^18.2.22
         version: 18.2.22
       '@types/redux-logger':
-        specifier: 3.0.12
-        version: 3.0.12
+        specifier: 3.0.13
+        version: 3.0.13
       '@types/webpack-env':
         specifier: ^1.18.4
         version: 1.18.4
@@ -10429,10 +10429,10 @@ packages:
     dependencies:
       '@types/base16': 1.0.5
 
-  /@types/redux-logger@3.0.12:
-    resolution: {integrity: sha512-5vAlwokZi/Unb1eGoZfVVzIBTPNDflwXiDzPLT1SynP6hdJfsOEf+w6ZOySOyboLWciCRYeE5DGYUnwVCq+Uyg==}
+  /@types/redux-logger@3.0.13:
+    resolution: {integrity: sha512-jylqZXQfMxahkuPcO8J12AKSSCQngdEWQrw7UiLUJzMBcv1r4Qg77P6mjGLjM27e5gFQDPD8vwUMJ9AyVxFSsg==}
     dependencies:
-      redux: 4.2.1
+      redux: 5.0.1
     dev: true
 
   /@types/resolve@1.20.2:
@@ -19117,6 +19117,10 @@ packages:
     resolution: {integrity: sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==}
     dependencies:
       '@babel/runtime': 7.24.1
+
+  /redux@5.0.1:
+    resolution: {integrity: sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w==}
+    dev: true
 
   /reflect.getprototypeof@1.0.6:
     resolution: {integrity: sha512-fmfw4XgoDke3kdI6h4xcUz1dG8uaiv5q9gcEwLS4Pnth2kxT+GZ7YehS1JTMGBQmtV7Y4GFGbs2re2NqhdozUg==}
