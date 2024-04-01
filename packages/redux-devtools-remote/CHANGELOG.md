@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.9.3
+
+### Patch Changes
+
+- f387854: Revert "Add polyfill for Symbol.asyncIterator (#1642)"
+
 ## 0.9.2
 
 ### Patch Changes
