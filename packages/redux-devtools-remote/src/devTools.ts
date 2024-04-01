@@ -1,6 +1,3 @@
-(Symbol as any).asyncIterator =
-  Symbol.asyncIterator || Symbol.for('Symbol.asyncIterator');
-
 import { stringify, parse } from 'jsan';
 import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
 import configureStore from './configureStore';
