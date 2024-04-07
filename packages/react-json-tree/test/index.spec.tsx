@@ -1,13 +1,13 @@
 import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
+import TestRenderer from 'react-test-renderer/shallow';
 
-import { JSONTree } from '../src/index';
-import JSONNode from '../src/JSONNode';
+import { JSONTree } from '../src/index.js';
+import JSONNode from '../src/JSONNode.js';
 
 const BASIC_DATA = { a: 1, b: 'c' };
 
 function render(component: React.ReactElement) {
-  const renderer = createRenderer();
+  const renderer = TestRenderer.createRenderer();
   renderer.render(component);
   return renderer.getRenderOutput();
 }

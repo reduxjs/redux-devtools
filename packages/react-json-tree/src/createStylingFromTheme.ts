@@ -6,7 +6,7 @@ import type {
   StylingFunction,
   Theme,
 } from 'react-base16-styling';
-import solarized from './themes/solarized';
+import solarized from './themes/solarized.js';
 
 const colorMap = (theme: Base16Theme) => ({
   BACKGROUND_COLOR: theme.base00,
