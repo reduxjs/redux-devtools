@@ -16,5 +16,5 @@ export default {
   base0C: '#12cfc0', // based on ocean theme
   base0D: '#6FB3D2',
   base0E: '#D381C3',
-  base0F: '#deaf8f'  // based on ocean theme
+  base0F: '#deaf8f', // based on ocean theme
 };

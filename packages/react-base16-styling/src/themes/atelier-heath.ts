@@ -1,6 +1,7 @@
 export default {
   scheme: 'atelier heath',
-  author: 'bram de haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/heath)',
+  author:
+    'bram de haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/heath)',
   base00: '#1b181b',
   base01: '#292329',
   base02: '#695d69',
@@ -16,5 +17,5 @@ export default {
   base0C: '#159393',
   base0D: '#516aec',
   base0E: '#7b59c0',
-  base0F: '#cc33cc'
+  base0F: '#cc33cc',
 };

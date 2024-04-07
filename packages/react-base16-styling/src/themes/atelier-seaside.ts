@@ -1,6 +1,7 @@
 export default {
   scheme: 'atelier seaside',
-  author: 'bram de haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/seaside/)',
+  author:
+    'bram de haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/seaside/)',
   base00: '#131513',
   base01: '#242924',
   base02: '#5e6e5e',
@@ -16,5 +17,5 @@ export default {
   base0C: '#1999b3',
   base0D: '#3d62f5',
   base0E: '#ad2bee',
-  base0F: '#e619c3'
+  base0F: '#e619c3',
 };

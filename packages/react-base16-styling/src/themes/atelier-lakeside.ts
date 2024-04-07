@@ -1,6 +1,7 @@
 export default {
   scheme: 'atelier lakeside',
-  author: 'bram de haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/lakeside/)',
+  author:
+    'bram de haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/lakeside/)',
   base00: '#161b1d',
   base01: '#1f292e',
   base02: '#516d7b',
@@ -16,5 +17,5 @@ export default {
   base0C: '#2d8f6f',
   base0D: '#257fad',
   base0E: '#5d5db1',
-  base0F: '#b72dd2'
+  base0F: '#b72dd2',
 };
