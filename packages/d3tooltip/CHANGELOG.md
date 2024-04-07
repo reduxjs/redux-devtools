@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- 191d419: Convert d3 packages to ESM
+
 ## 3.0.1
 
 ### Patch Changes

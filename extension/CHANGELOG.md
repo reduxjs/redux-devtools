@@ -1,5 +1,13 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.8
+
+### Patch Changes
+
+- 191d419: Convert d3 packages to ESM
+- Updated dependencies [191d419]
+  - @redux-devtools/app@6.0.1
+
 ## 3.1.7
 
 ### Patch Changes
