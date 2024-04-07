@@ -1,7 +1,7 @@
 ---
-'react-base16-styling': major
-'react-dock': major
-'react-json-tree': major
+'react-base16-styling': minor
+'react-dock': minor
+'react-json-tree': minor
 ---
 
 Convert React packages to ESM
