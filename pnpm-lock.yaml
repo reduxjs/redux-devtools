@@ -374,16 +374,16 @@ importers:
 
   packages/map2tree:
     dependencies:
-      lodash:
+      lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
     devDependencies:
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
-      '@types/lodash':
-        specifier: ^4.17.0
-        version: 4.17.0
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.4.0
         version: 7.4.0(@typescript-eslint/parser@7.4.0)(eslint@8.57.0)(typescript@5.3.3)
