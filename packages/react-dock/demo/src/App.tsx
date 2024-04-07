@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { BsX } from 'react-icons/bs';
 import styled from 'styled-components';
 
-import Dock from '../../src/Dock';
+import { Dock } from 'react-dock';
 
 const Root = styled.div`
   font-size: 16px;

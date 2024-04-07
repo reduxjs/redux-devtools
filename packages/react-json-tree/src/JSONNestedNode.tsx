@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import JSONArrow from './JSONArrow';
-import getCollectionEntries from './getCollectionEntries';
-import JSONNode from './JSONNode';
-import ItemRange from './ItemRange';
-import type { CircularCache, CommonInternalProps } from './types';
+import JSONArrow from './JSONArrow.js';
+import getCollectionEntries from './getCollectionEntries.js';
+import JSONNode from './JSONNode.js';
+import ItemRange from './ItemRange.js';
+import type { CircularCache, CommonInternalProps } from './types.js';
 
 /**
  * Renders nested values (eg. objects, arrays, lists, etc.)

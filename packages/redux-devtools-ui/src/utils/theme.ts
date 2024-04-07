@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import * as themes from '../themes';
-import { nicinabox as defaultDarkScheme } from 'redux-devtools-themes';
-import * as baseSchemes from 'base16';
+import { base16Themes as baseSchemes } from 'react-base16-styling';
 import * as additionalSchemes from '../colorSchemes';
 import invertColors from '../utils/invertColors';
 import { Theme as ThemeBase } from '../themes/default';
+
+const defaultDarkScheme = baseSchemes.nicinabox;
 
 export const schemes = { ...baseSchemes, ...additionalSchemes };
 export const listSchemes = () => Object.keys(schemes).slice(1).sort(); // remove `__esModule`

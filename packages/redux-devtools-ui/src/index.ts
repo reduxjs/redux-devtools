@@ -1,4 +1,4 @@
-export type { Base16Theme } from 'base16';
+export type { Base16Theme } from 'react-base16-styling';
 
 export { default as Container } from './Container';
 export { default as Button } from './Button';

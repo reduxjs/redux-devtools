@@ -1,6 +1,10 @@
-import { createStyling, invertBase16Theme, getBase16Theme } from '../src';
-import { apathy, Base16Theme } from 'base16';
-import { Styling, StylingConfig } from '../src/types';
+import {
+  createStyling,
+  invertBase16Theme,
+  getBase16Theme,
+} from '../src/index.js';
+import { base16Themes, Base16Theme } from '../src/themes/index.js';
+import { Styling, StylingConfig } from '../src/types.js';
 
 const base16Theme = {
   scheme: 'myscheme',
@@ -94,34 +98,34 @@ test('invertTheme', () => {
 });
 
 test('getBase16Theme', () => {
-  expect(getBase16Theme('apathy')).toEqual(apathy);
-  expect(getBase16Theme({ extend: 'apathy' })).toEqual(apathy);
+  expect(getBase16Theme('apathy')).toEqual(base16Themes.apathy);
+  expect(getBase16Theme({ extend: 'apathy' })).toEqual(base16Themes.apathy);
   expect(getBase16Theme('apathy:inverted')).toEqual(apathyInverted);
   expect(getBase16Theme({})).toBeUndefined();
 });
 
 test('createStyling (default)', () => {
   const styling = createStyling(getStylingFromBase16, {
-    defaultBase16: apathy,
+    defaultBase16: base16Themes.apathy,
   });
   const defaultStyling = styling(undefined);
 
   expect(defaultStyling('testClass')).toEqual({ className: 'testClass' });
   expect(defaultStyling('testStyle')).toEqual({
-    style: { color: apathy.base00 },
+    style: { color: base16Themes.apathy.base00 },
   });
   expect(defaultStyling('testFunc', 'mod')).toEqual({
     className: 'testClass--mod',
     style: {
       width: 0,
-      color: apathy.base00,
+      color: base16Themes.apathy.base00,
     },
   });
 });
 
 test('createStyling (custom)', () => {
   const styling = createStyling(getStylingFromBase16, {
-    defaultBase16: apathy,
+    defaultBase16: base16Themes.apathy,
   });
   let customStyling = styling({
     testClass: 'customClass',
@@ -146,13 +150,13 @@ test('createStyling (custom)', () => {
     className: 'testClass customClass',
   });
   expect(customStyling('testStyle')).toEqual({
-    style: { color: apathy.base00, height: 0 },
+    style: { color: base16Themes.apathy.base00, height: 0 },
   });
   expect(customStyling('testFunc', 'mod')).toEqual({
     className: 'testClass--mod customClass--mod',
     style: {
       width: 0,
-      color: apathy.base00,
+      color: base16Themes.apathy.base00,
       border: 0,
     },
   });
@@ -180,7 +184,7 @@ test('createStyling (custom)', () => {
 
 test('createStyling (multiple)', () => {
   const styling = createStyling(getStylingFromBase16, {
-    defaultBase16: apathy,
+    defaultBase16: base16Themes.apathy,
   });
   let customStyling = styling({
     baseStyle: ({ style }) => ({ style: { ...style, color: 'blue' } }),

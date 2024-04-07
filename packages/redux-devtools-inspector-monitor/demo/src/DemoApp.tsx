@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import * as base16 from 'base16';
+import { base16Themes } from 'react-base16-styling';
 import { inspectorThemes } from '@redux-devtools/inspector-monitor';
 import { useLocation, useNavigate } from 'react-router-dom';
 import getOptions, { Options } from './getOptions';
@@ -92,10 +92,10 @@ const themeOptions = [
     label: inspectorThemes[value as keyof typeof inspectorThemes].scheme,
   })),
   null,
-  ...Object.keys(base16)
+  ...Object.keys(base16Themes)
     .map((value) => ({
       value,
-      label: base16[value as keyof typeof base16].scheme,
+      label: base16Themes[value as keyof typeof base16Themes].scheme,
     }))
     .filter((opt) => opt.label),
 ];

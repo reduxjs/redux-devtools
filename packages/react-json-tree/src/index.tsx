@@ -4,17 +4,17 @@
 // port by Daniele Zannotti http://www.github.com/dzannotti <dzannotti@me.com>
 
 import React, { useMemo } from 'react';
-import JSONNode from './JSONNode';
-import createStylingFromTheme from './createStylingFromTheme';
 import { invertTheme } from 'react-base16-styling';
 import type { StylingValue, Theme } from 'react-base16-styling';
+import JSONNode from './JSONNode.js';
+import createStylingFromTheme from './createStylingFromTheme.js';
 import type {
   CommonExternalProps,
   GetItemString,
   IsCustomNode,
   LabelRenderer,
   ShouldExpandNodeInitially,
-} from './types';
+} from './types.js';
 
 interface Props extends Partial<CommonExternalProps> {
   data: unknown;
@@ -86,5 +86,5 @@ export type {
   SortObjectKeys,
   Styling,
   CommonExternalProps,
-} from './types';
+} from './types.js';
 export type { StylingValue };

@@ -1,10 +1,8 @@
-import * as base16 from 'base16';
-import { Base16Theme } from 'base16';
 import Color from 'color';
 import * as CSS from 'csstype';
-import curry from 'lodash.curry';
+import { curry } from 'lodash-es';
 import type { CurriedFunction3 } from 'lodash';
-import { Color as ColorTuple, yuv2rgb, rgb2yuv } from './colorConverters';
+import { Color as ColorTuple, yuv2rgb, rgb2yuv } from './colorConverters.js';
 import {
   Styling,
   StylingConfig,
@@ -12,7 +10,9 @@ import {
   StylingValue,
   StylingValueFunction,
   Theme,
-} from './types';
+} from './types.js';
+import { base16Themes as base16 } from './themes/index.js';
+import type { Base16Theme } from './themes/index.js';
 
 const DEFAULT_BASE16 = base16.default;
 
@@ -272,7 +272,7 @@ export const getBase16Theme = (
     if (base16Themes) {
       theme = base16Themes[themeName];
     } else {
-      theme = base16[themeName as keyof typeof base16];
+      theme = base16[themeName as keyof typeof base16] as Base16Theme;
     }
     if (modifier === 'inverted') {
       theme = invertBase16Theme(theme);
@@ -308,4 +308,5 @@ export const invertTheme = (theme: Theme | undefined): Theme | undefined => {
 };
 
 export type { Base16Theme };
-export * from './types';
+export { base16 as base16Themes };
+export * from './types.js';

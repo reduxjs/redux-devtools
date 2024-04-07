@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import { Base16Theme } from 'redux-devtools-themes';
+import type { Base16Theme } from 'react-base16-styling';
 import brighten from './brighten';
 
 const styles: { base: CSSProperties } = {

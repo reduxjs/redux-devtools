@@ -1,6 +1,6 @@
 import rgba from 'hex-rgba';
-import { Base16Theme } from 'redux-devtools-themes';
-import * as reduxThemes from 'redux-devtools-themes';
+import type { Base16Theme } from 'react-base16-styling';
+import { base16Themes as reduxThemes } from 'react-base16-styling';
 import * as inspectorThemes from '../themes';
 import { getBase16Theme, invertBase16Theme } from 'react-base16-styling';
 

@@ -1,4 +1,4 @@
-import { Base16Theme } from 'base16';
+import type { Base16Theme } from 'react-base16-styling';
 import * as CSS from 'csstype';
 import * as themes from './index';
 
