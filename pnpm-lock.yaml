@@ -225,9 +225,6 @@ importers:
 
   packages/d3-state-visualizer:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.24.1
-        version: 7.24.1
       '@types/d3':
         specifier: ^7.4.3
         version: 7.4.3
@@ -247,21 +244,6 @@ importers:
         specifier: ^0.29.1
         version: 0.29.1
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
-      '@babel/core':
-        specifier: ^7.24.3
-        version: 7.24.3
-      '@babel/eslint-parser':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)(eslint@8.57.0)
-      '@babel/preset-env':
-        specifier: ^7.24.3
-        version: 7.24.3(@babel/core@7.24.3)
-      '@babel/preset-typescript':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
       '@types/ramda':
         specifier: ^0.29.11
         version: 0.29.11
@@ -346,26 +328,7 @@ importers:
         version: 5.0.4(webpack-cli@5.1.4)(webpack@5.91.0)
 
   packages/d3tooltip:
-    dependencies:
-      '@babel/runtime':
-        specifier: ^7.24.1
-        version: 7.24.1
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
-      '@babel/core':
-        specifier: ^7.24.3
-        version: 7.24.3
-      '@babel/eslint-parser':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)(eslint@8.57.0)
-      '@babel/preset-env':
-        specifier: ^7.24.3
-        version: 7.24.3(@babel/core@7.24.3)
-      '@babel/preset-typescript':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
       '@types/d3':
         specifier: ^7.4.3
         version: 7.4.3
@@ -393,34 +356,16 @@ importers:
 
   packages/map2tree:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.24.1
-        version: 7.24.1
-      lodash:
+      lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
-      '@babel/core':
-        specifier: ^7.24.3
-        version: 7.24.3
-      '@babel/eslint-parser':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)(eslint@8.57.0)
-      '@babel/preset-env':
-        specifier: ^7.24.3
-        version: 7.24.3(@babel/core@7.24.3)
-      '@babel/preset-typescript':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
-      '@types/lodash':
-        specifier: ^4.17.0
-        version: 4.17.0
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.4.0
         version: 7.4.0(@typescript-eslint/parser@7.4.0)(eslint@8.57.0)(typescript@5.3.3)
@@ -10878,7 +10823,7 @@ packages:
       '@babel/core': 7.24.3
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.91.0(@swc/core@1.4.11)(esbuild@0.20.2)
+      webpack: 5.91.0(webpack-cli@5.1.4)
     dev: true
 
   /babel-plugin-istanbul@6.1.1:

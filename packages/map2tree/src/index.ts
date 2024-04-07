@@ -1,6 +1,4 @@
-import isArray from 'lodash/isArray';
-import isPlainObject from 'lodash/isPlainObject';
-import mapValues from 'lodash/mapValues';
+import { isArray, isPlainObject, mapValues } from 'lodash-es';
 
 export interface Node {
   name: string;
