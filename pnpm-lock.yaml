@@ -225,9 +225,6 @@ importers:
 
   packages/d3-state-visualizer:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.24.1
-        version: 7.24.1
       '@types/d3':
         specifier: ^7.4.3
         version: 7.4.3
@@ -247,21 +244,6 @@ importers:
         specifier: ^0.29.1
         version: 0.29.1
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
-      '@babel/core':
-        specifier: ^7.24.3
-        version: 7.24.3
-      '@babel/eslint-parser':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)(eslint@8.57.0)
-      '@babel/preset-env':
-        specifier: ^7.24.3
-        version: 7.24.3(@babel/core@7.24.3)
-      '@babel/preset-typescript':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
       '@types/ramda':
         specifier: ^0.29.11
         version: 0.29.11
