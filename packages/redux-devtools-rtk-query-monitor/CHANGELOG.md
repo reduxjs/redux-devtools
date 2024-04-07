@@ -1,5 +1,14 @@
 # Change Log
 
+## 5.0.1
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-base16-styling@0.10.0
+  - react-json-tree@0.19.0
+  - @redux-devtools/ui@1.3.2
+
 ## 5.0.0
 
 ### Major Changes
