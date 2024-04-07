@@ -1,4 +1,3 @@
-import { Base16Theme } from 'base16';
 import Color from 'color';
 import * as CSS from 'csstype';
 import { curry } from 'lodash-es';
@@ -13,6 +12,7 @@ import {
   Theme,
 } from './types.js';
 import { base16Themes as base16 } from './themes/index.js';
+import type { Base16Theme } from './themes/index.js';
 
 const DEFAULT_BASE16 = base16.default;
 
