@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Action, Dispatch } from 'redux';
-import * as themes from 'redux-devtools-themes';
-import { Base16Theme } from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
@@ -48,7 +48,7 @@ interface ExternalProps<S, A extends Action<string>> {
 
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   expandActionRoot: boolean;
   expandStateRoot: boolean;
   markStateDiff: boolean;
@@ -57,7 +57,7 @@ interface ExternalProps<S, A extends Action<string>> {
 
 interface DefaultProps<S> {
   select: (state: unknown) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   preserveScrollTop: boolean;
   expandActionRoot: boolean;
   expandStateRoot: boolean;
@@ -70,7 +70,7 @@ export interface LogMonitorProps<S, A extends Action<string>>
 
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   expandActionRoot: boolean;
   expandStateRoot: boolean;
   markStateDiff: boolean;
@@ -178,15 +178,15 @@ class LogMonitor<S, A extends Action<string>> extends PureComponent<
       return theme;
     }
 
-    if (typeof themes[theme] !== 'undefined') {
-      return themes[theme];
+    if (typeof base16Themes[theme] !== 'undefined') {
+      return base16Themes[theme];
     }
 
     // eslint-disable-next-line no-console
     console.warn(
       'DevTools theme ' + theme + ' not found, defaulting to nicinabox',
     );
-    return themes.nicinabox;
+    return base16Themes.nicinabox;
   }
 
   getRef: React.RefCallback<HTMLDivElement> = (node) => {

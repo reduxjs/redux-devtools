@@ -25,6 +25,7 @@ import { default as isotope } from './isotope.js';
 import { default as marrakesh } from './marrakesh.js';
 import { default as mocha } from './mocha.js';
 import { default as monokai } from './monokai.js';
+import { default as nicinabox } from './nicinabox';
 import { default as ocean } from './ocean.js';
 import { default as paraiso } from './paraiso.js';
 import { default as pop } from './pop.js';
@@ -85,6 +86,7 @@ export const base16Themes = {
   marrakesh,
   mocha,
   monokai,
+  nicinabox,
   ocean,
   paraiso,
   pop,

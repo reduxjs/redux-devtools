@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react';
-import { Base16Theme } from 'redux-devtools-themes';
+import type { Base16Theme } from 'react-base16-styling';
 import { Button } from '@redux-devtools/ui';
 
 interface Props {

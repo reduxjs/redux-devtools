@@ -1,5 +1,6 @@
 import React, { CSSProperties, PureComponent } from 'react';
-import * as themes from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
@@ -25,7 +26,7 @@ const styles: { container: CSSProperties } = {
   },
 };
 
-function invertColors(theme: themes.Base16Theme) {
+function invertColors(theme: Base16Theme) {
   return {
     ...theme,
     base00: theme.base07,
@@ -45,7 +46,7 @@ export interface ChartMonitorProps<S, A extends Action<string>>
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | themes.Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   invertTheme: boolean;
 
   defaultIsVisible?: boolean;
@@ -89,14 +90,18 @@ class ChartMonitor<S, A extends Action<string>> extends PureComponent<
       return invertTheme ? invertColors(theme) : theme;
     }
 
-    if (typeof themes[theme] !== 'undefined') {
-      return invertTheme ? invertColors(themes[theme]) : themes[theme];
+    if (typeof base16Themes[theme] !== 'undefined') {
+      return invertTheme
+        ? invertColors(base16Themes[theme])
+        : base16Themes[theme];
     }
 
     console.warn(
       'DevTools theme ' + theme + ' not found, defaulting to nicinabox',
     );
-    return invertTheme ? invertColors(themes.nicinabox) : themes.nicinabox;
+    return invertTheme
+      ? invertColors(base16Themes.nicinabox)
+      : base16Themes.nicinabox;
   }
 
   getChartOptions(props = this.props): Props<S, A> {

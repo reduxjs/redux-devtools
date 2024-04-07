@@ -1,9 +1,10 @@
 import React, { Component, createRef } from 'react';
 import { tree } from 'd3-state-visualizer';
 import type { Options } from 'd3-state-visualizer';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import { Action, Dispatch } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
-import * as themes from 'redux-devtools-themes';
 import { ChartMonitorState } from './reducers';
 
 const wrapperStyle = {
@@ -17,7 +18,7 @@ export interface Props<S, A extends Action<string>>
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | themes.Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   invertTheme: boolean;
 
   state: S | null;

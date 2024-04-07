@@ -1,7 +1,7 @@
 import React, { Component, CSSProperties, MouseEventHandler } from 'react';
 import { JSONTree } from 'react-json-tree';
 import type { ShouldExpandNodeInitially } from 'react-json-tree';
-import { Base16Theme } from 'redux-devtools-themes';
+import type { Base16Theme } from 'react-base16-styling';
 import { Action } from 'redux';
 
 const styles = {

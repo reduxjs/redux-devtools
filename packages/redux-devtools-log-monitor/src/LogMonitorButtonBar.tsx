@@ -1,6 +1,6 @@
 import React, { CSSProperties, PureComponent } from 'react';
 import { ActionCreators, LiftedAction } from '@redux-devtools/core';
-import { Base16Theme } from 'redux-devtools-themes';
+import type { Base16Theme } from 'react-base16-styling';
 import { Action, Dispatch } from 'redux';
 import LogMonitorButton from './LogMonitorButton';
 import { LogMonitorAction } from './actions';
