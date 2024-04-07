@@ -1,6 +1,6 @@
 import React, { PureComponent, Component } from 'react';
 import JSONSchemaForm, { FormProps } from '@rjsf/core';
-import { Base16Theme } from 'base16';
+import type { Base16Theme } from 'react-base16-styling';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
 import Button from '../Button';

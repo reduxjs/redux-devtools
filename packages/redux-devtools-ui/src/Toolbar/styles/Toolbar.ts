@@ -1,5 +1,5 @@
 import styled, { ThemedStyledInterface } from 'styled-components';
-import { Base16Theme } from 'base16';
+import type { Base16Theme } from 'react-base16-styling';
 import * as CSS from 'csstype';
 
 export type BorderPosition = 'top' | 'bottom';

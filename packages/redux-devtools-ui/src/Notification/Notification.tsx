@@ -3,7 +3,7 @@ import { MdClose } from 'react-icons/md';
 import { MdWarning } from 'react-icons/md';
 import { MdError } from 'react-icons/md';
 import { MdCheckCircle } from 'react-icons/md';
-import { Base16Theme } from 'base16';
+import type { Base16Theme } from 'react-base16-styling';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
 

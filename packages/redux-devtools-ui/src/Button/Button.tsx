@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import { Base16Theme } from 'base16';
+import type { Base16Theme } from 'react-base16-styling';
 import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
 import { commonStyle, tooltipStyle } from './styles/common';
