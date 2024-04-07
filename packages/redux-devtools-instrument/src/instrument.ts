@@ -1,6 +1,4 @@
-import difference from 'lodash/difference';
-import union from 'lodash/union';
-import isPlainObject from 'lodash/isPlainObject';
+import { difference, isPlainObject, union } from 'lodash-es';
 import {
   Action,
   Observer,
@@ -10,7 +8,7 @@ import {
   StoreEnhancer,
   StoreEnhancerStoreCreator,
 } from 'redux';
-import getSymbolObservable from './getSymbolObservable';
+import getSymbolObservable from './getSymbolObservable.js';
 
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',

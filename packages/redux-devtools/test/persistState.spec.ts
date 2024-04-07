@@ -1,5 +1,6 @@
-import { instrument, persistState } from '../src';
+import { jest } from '@jest/globals';
 import { compose, createStore } from 'redux';
+import { instrument, persistState } from '../src/index.js';
 
 describe('persistState', () => {
   const savedLocalStorage = global.localStorage;
