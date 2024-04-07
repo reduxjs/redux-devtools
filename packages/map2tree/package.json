@@ -30,7 +30,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
