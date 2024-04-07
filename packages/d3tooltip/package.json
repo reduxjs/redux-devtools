@@ -28,6 +28,7 @@
     "build": "tsc",
     "clean": "rimraf lib",
     "lint": "eslint . --ext .ts",
+    "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run lint"
   },
