@@ -36,11 +36,11 @@
     "prepublish": "pnpm run lint && pnpm run test"
   },
   "dependencies": {
+    "@types/lodash-es": "^4.17.12",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
-    "@types/lodash-es": "^4.17.12",
     "@types/react": "^18.2.72",
     "@types/react-test-renderer": "^18.0.7",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
