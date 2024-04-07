@@ -346,26 +346,7 @@ importers:
         version: 5.0.4(webpack-cli@5.1.4)(webpack@5.91.0)
 
   packages/d3tooltip:
-    dependencies:
-      '@babel/runtime':
-        specifier: ^7.24.1
-        version: 7.24.1
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
-      '@babel/core':
-        specifier: ^7.24.3
-        version: 7.24.3
-      '@babel/eslint-parser':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)(eslint@8.57.0)
-      '@babel/preset-env':
-        specifier: ^7.24.3
-        version: 7.24.3(@babel/core@7.24.3)
-      '@babel/preset-typescript':
-        specifier: ^7.24.1
-        version: 7.24.1(@babel/core@7.24.3)
       '@types/d3':
         specifier: ^7.4.3
         version: 7.4.3
@@ -10878,7 +10859,7 @@ packages:
       '@babel/core': 7.24.3
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.91.0(@swc/core@1.4.11)(esbuild@0.20.2)
+      webpack: 5.91.0(webpack-cli@5.1.4)
     dev: true
 
   /babel-plugin-istanbul@6.1.1:
