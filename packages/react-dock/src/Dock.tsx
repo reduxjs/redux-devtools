@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react';
-import debounce from 'lodash.debounce';
-import type { DebouncedFunc } from 'lodash';
-import autoprefix from './autoprefix';
+import { debounce } from 'lodash-es';
+import type { DebouncedFunc } from 'lodash-es';
+import autoprefix from './autoprefix.js';
 
 interface Styles {
   [key: string]: React.CSSProperties;
