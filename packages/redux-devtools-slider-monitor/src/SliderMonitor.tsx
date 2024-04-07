@@ -43,7 +43,7 @@ interface SliderMonitorProps<S, A extends Action<string>> // eslint-disable-next
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   keyboardEnabled: boolean;
   hideResetButton?: boolean;
 }

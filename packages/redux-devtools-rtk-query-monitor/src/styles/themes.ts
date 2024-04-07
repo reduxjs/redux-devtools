@@ -101,9 +101,7 @@ export const StyleUtilsContext = createContext<StyleUtils>({
   invertTheme: false,
 });
 
-export function getJsonTreeTheme(
-  base16Theme: base16Themes.Base16Theme,
-): StylingConfig {
+export function getJsonTreeTheme(base16Theme: Base16Theme): StylingConfig {
   return {
     extend: base16Theme,
     nestedNode: ({ style }, keyPath, nodeType, expanded) => ({
