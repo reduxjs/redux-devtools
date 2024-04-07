@@ -1,13 +1,15 @@
+import { jest } from '@jest/globals';
 import { createStore, compose, Reducer, Store, Action } from 'redux';
+import { from, Observable } from 'rxjs';
+import { mapValues } from 'lodash-es';
 import {
   ActionCreators,
   EnhancedStore,
   instrument,
   LiftedStore,
   LiftedState,
-} from '../src/instrument';
-import { from, Observable } from 'rxjs';
-import _ from 'lodash';
+  LiftedAction,
+} from '../src/instrument.js';
 
 type CounterAction = { type: 'INCREMENT' } | { type: 'DECREMENT' };
 function counter(state = 0, action: CounterAction) {
@@ -713,7 +715,16 @@ describe('instrument', () => {
 
     it('should use dynamic maxAge', () => {
       let max = 3;
-      const getMaxAge = jest.fn().mockImplementation(() => max);
+      const getMaxAge = jest
+        .fn<
+          (
+            currentLiftedAction: LiftedAction<number, CounterAction, null>,
+            previousLiftedState:
+              | LiftedState<number, CounterAction, null>
+              | undefined,
+          ) => number
+        >()
+        .mockImplementation(() => max);
       store = createStore(
         counter,
         instrument(undefined, { maxAge: getMaxAge }),
@@ -729,10 +740,10 @@ describe('instrument', () => {
       expect(getMaxAge.mock.calls[0][0].type).toContain('INIT');
       expect(getMaxAge.mock.calls[0][1]).toBeUndefined();
       expect(getMaxAge.mock.calls[1][0].type).toBe('PERFORM_ACTION');
-      expect(getMaxAge.mock.calls[1][1].nextActionId).toBe(1);
-      expect(getMaxAge.mock.calls[1][1].stagedActionIds).toEqual([0]);
-      expect(getMaxAge.mock.calls[2][1].nextActionId).toBe(2);
-      expect(getMaxAge.mock.calls[2][1].stagedActionIds).toEqual([0, 1]);
+      expect(getMaxAge.mock.calls[1][1]!.nextActionId).toBe(1);
+      expect(getMaxAge.mock.calls[1][1]!.stagedActionIds).toEqual([0]);
+      expect(getMaxAge.mock.calls[2][1]!.nextActionId).toBe(2);
+      expect(getMaxAge.mock.calls[2][1]!.stagedActionIds).toEqual([0, 1]);
 
       expect(store.getState()).toBe(2);
       expect(Object.keys(liftedStoreState.actionsById)).toHaveLength(3);
@@ -1155,7 +1166,7 @@ describe('instrument', () => {
   function filterStackAndTimestamps<S, A extends Action<string>>(
     state: LiftedState<S, A, null>,
   ) {
-    state.actionsById = _.mapValues(state.actionsById, (action) => {
+    state.actionsById = mapValues(state.actionsById, (action) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       delete action.timestamp;
