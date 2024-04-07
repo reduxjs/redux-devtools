@@ -1,5 +1,12 @@
 # Change Log
 
+## 5.0.2
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-base16-styling@0.10.0
+
 ## 5.0.1
 
 ### Patch Changes

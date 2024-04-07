@@ -1,5 +1,13 @@
 # Change Log
 
+## 6.0.1
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-base16-styling@0.10.0
+  - react-json-tree@0.19.0
+
 ## 6.0.0
 
 ### Major Changes

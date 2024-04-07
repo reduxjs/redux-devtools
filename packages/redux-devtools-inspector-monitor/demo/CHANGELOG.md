@@ -1,5 +1,14 @@
 # inspector-demo
 
+## 0.1.11
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-base16-styling@0.10.0
+  - @redux-devtools/inspector-monitor@6.0.1
+  - @redux-devtools/dock-monitor@4.0.1
+
 ## 0.1.10
 
 ### Patch Changes

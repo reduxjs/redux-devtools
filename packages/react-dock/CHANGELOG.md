@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.7.0
+
+### Minor Changes
+
+- bbb1a40: Convert React packages to ESM
+
 ## 0.6.0
 
 ### Minor Changes
