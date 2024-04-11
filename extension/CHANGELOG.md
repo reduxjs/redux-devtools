@@ -1,5 +1,22 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.9
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-json-tree@0.19.0
+  - @redux-devtools/slider-monitor@5.0.1
+  - @redux-devtools/ui@1.3.2
+
+## 3.1.8
+
+### Patch Changes
+
+- 191d419: Convert d3 packages to ESM
+- Updated dependencies [191d419]
+  - @redux-devtools/app@6.0.1
+
 ## 3.1.7
 
 ### Patch Changes

@@ -9,7 +9,7 @@ import {
   toggleChildren,
   visit,
   getNodeGroupByDepthCount,
-} from './utils';
+} from './utils.js';
 import { tooltip } from 'd3tooltip';
 import type { StyleValue } from 'd3tooltip';
 

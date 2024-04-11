@@ -1,10 +1,10 @@
 import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
-import Dock from '../src/Dock';
+import TestRenderer from 'react-test-renderer/shallow';
+import Dock from '../src/Dock.js';
 
 describe('Dock component', function () {
   it('should have shallow rendering', function () {
-    const renderer = createRenderer();
+    const renderer = TestRenderer.createRenderer();
     const DockEl = <Dock />;
     renderer.render(DockEl);
 

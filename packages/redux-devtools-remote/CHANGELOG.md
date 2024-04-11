@@ -1,5 +1,17 @@
 # Change Log
 
+## 0.9.3
+
+### Patch Changes
+
+- f387854: Revert "Add polyfill for Symbol.asyncIterator (#1642)"
+
+## 0.9.2
+
+### Patch Changes
+
+- 138f4f3: Fix Hermes support by adding polyfill for Symbol.asyncIterator
+
 ## 0.9.1
 
 ### Patch Changes

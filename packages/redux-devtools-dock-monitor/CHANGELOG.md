@@ -1,5 +1,12 @@
 # Change Log
 
+## 4.0.1
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-dock@0.7.0
+
 ## 4.0.0
 
 ### Major Changes

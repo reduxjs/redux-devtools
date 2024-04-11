@@ -1,7 +1,7 @@
 import React, { Component, PureComponent } from 'react';
 import { Action, Dispatch } from 'redux';
-import * as themes from 'redux-devtools-themes';
-import { Base16Theme } from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
@@ -25,14 +25,14 @@ interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   keyboardEnabled: boolean;
   hideResetButton?: boolean;
 }
 
 interface DefaultProps {
   select: (state: unknown) => unknown;
-  theme: keyof typeof themes;
+  theme: keyof typeof base16Themes;
   preserveScrollTop: boolean;
   keyboardEnabled: boolean;
 }
@@ -43,7 +43,7 @@ interface SliderMonitorProps<S, A extends Action<string>> // eslint-disable-next
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   keyboardEnabled: boolean;
   hideResetButton?: boolean;
 }
@@ -84,10 +84,10 @@ class SliderMonitor<S, A extends Action<string>> extends (PureComponent ||
   setUpTheme = (): Base16Theme => {
     let theme;
     if (typeof this.props.theme === 'string') {
-      if (typeof themes[this.props.theme] !== 'undefined') {
-        theme = themes[this.props.theme];
+      if (typeof base16Themes[this.props.theme] !== 'undefined') {
+        theme = base16Themes[this.props.theme];
       } else {
-        theme = themes.nicinabox;
+        theme = base16Themes.nicinabox;
       }
     } else {
       theme = this.props.theme;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import CodeMirror, { EditorChange } from 'codemirror';
-import { Base16Theme } from 'base16';
+import type { Base16Theme } from 'react-base16-styling';
 import { defaultStyle, themedStyle } from './styles';
 import { Theme } from '../themes/default';
 

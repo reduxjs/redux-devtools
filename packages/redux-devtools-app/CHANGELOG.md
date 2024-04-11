@@ -1,5 +1,14 @@
 # Change Log
 
+## 6.0.1
+
+### Patch Changes
+
+- 191d419: Convert d3 packages to ESM
+- Updated dependencies [191d419]
+  - d3-state-visualizer@3.0.0
+  - @redux-devtools/chart-monitor@5.0.1
+
 ## 6.0.0
 
 ### Major Changes

@@ -2,8 +2,8 @@ import type { LiftedAction, LiftedState } from '@redux-devtools/core';
 import type { createApi, QueryStatus } from '@reduxjs/toolkit/query';
 import type { Action, AnyAction, Dispatch } from '@reduxjs/toolkit';
 import type { ComponentType } from 'react';
-import type { Base16Theme, StylingFunction } from 'react-base16-styling';
-import type * as themes from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import type { QueryComparators } from './utils/comparators';
 import type { QueryFilters } from './utils/filters';
 
@@ -34,7 +34,7 @@ export interface RtkQueryMonitorState {
 export interface RtkQueryMonitorProps<S, A extends Action<string>>
   extends LiftedState<S, A, RtkQueryMonitorState> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   invertTheme: boolean;
 }
 
@@ -56,7 +56,7 @@ export type RtkQueryProvided = RtkQueryApiState['provided'];
 
 export interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   hideMainButtons?: boolean;
   invertTheme: boolean;
 }

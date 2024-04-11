@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/remote",
-  "version": "0.9.1",
+  "version": "0.9.3",
   "description": "Relay Redux actions to remote Redux DevTools.",
   "keywords": [
     "redux",
@@ -41,7 +41,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.24.0",
+    "@babel/runtime": "^7.24.1",
     "@redux-devtools/instrument": "^2.2.0",
     "@redux-devtools/utils": "^3.0.0",
     "jsan": "^3.1.14",
@@ -50,18 +50,18 @@
     "socketcluster-client": "^19.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.24.0",
-    "@babel/eslint-parser": "^7.23.10",
-    "@babel/plugin-transform-runtime": "^7.24.0",
-    "@babel/preset-env": "^7.24.0",
-    "@babel/preset-typescript": "^7.23.3",
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.3",
+    "@babel/eslint-parser": "^7.24.1",
+    "@babel/plugin-transform-runtime": "^7.24.3",
+    "@babel/preset-env": "^7.24.3",
+    "@babel/preset-typescript": "^7.24.1",
     "@types/jsan": "^3.1.5",
-    "@types/node": "^20.11.25",
+    "@types/node": "^20.11.30",
     "@types/rn-host-detect": "^1.2.2",
     "@types/socketcluster-client": "^19.1.0",
-    "@typescript-eslint/eslint-plugin": "^7.1.1",
-    "@typescript-eslint/parser": "^7.1.1",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "redux": "^4.2.1",

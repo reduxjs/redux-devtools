@@ -1,4 +1,4 @@
-import type { SortObjectKeys } from './types';
+import type { SortObjectKeys } from './types.js';
 
 function getLength(type: string, collection: unknown) {
   if (type === 'Object') {

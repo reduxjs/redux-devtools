@@ -1,14 +1,17 @@
-import { getBase16Theme, invertBase16Theme } from 'react-base16-styling';
+import {
+  base16Themes,
+  getBase16Theme,
+  invertBase16Theme,
+} from 'react-base16-styling';
 import type { Base16Theme, StylingConfig } from 'react-base16-styling';
 import rgba from 'hex-rgba';
-import * as reduxThemes from 'redux-devtools-themes';
 import { createContext } from 'react';
 import { StyleUtils } from '../types';
 
 export function resolveBase16Theme(
-  theme: keyof typeof reduxThemes | Base16Theme,
+  theme: keyof typeof base16Themes | Base16Theme,
 ) {
-  return getBase16Theme(theme, reduxThemes) ?? reduxThemes.nicinabox;
+  return getBase16Theme(theme, base16Themes) ?? base16Themes.nicinabox;
 }
 
 /**
@@ -49,7 +52,7 @@ declare module '@emotion/react' {
   }
 }
 
-export const colorMap = (theme: reduxThemes.Base16Theme) =>
+export const colorMap = (theme: Base16Theme) =>
   ({
     TEXT_COLOR: theme.base06,
     TEXT_PLACEHOLDER_COLOR: rgba(theme.base06, 60),
@@ -94,13 +97,11 @@ export function createRtkQueryMonitorThemeFromBase16Theme(
 }
 
 export const StyleUtilsContext = createContext<StyleUtils>({
-  base16Theme: reduxThemes.nicinabox,
+  base16Theme: base16Themes.nicinabox,
   invertTheme: false,
 });
 
-export function getJsonTreeTheme(
-  base16Theme: reduxThemes.Base16Theme,
-): StylingConfig {
+export function getJsonTreeTheme(base16Theme: Base16Theme): StylingConfig {
   return {
     extend: base16Theme,
     nestedNode: ({ style }, keyPath, nodeType, expanded) => ({

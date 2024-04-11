@@ -1,5 +1,5 @@
 module.exports = {
-  extends: '../../eslintrc.js.base.json',
+  extends: ['../../eslintrc.js.base.json', 'plugin:storybook/recommended'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
