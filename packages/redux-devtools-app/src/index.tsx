@@ -65,6 +65,7 @@ export * from './reducers/reports';
 export * from './reducers/section';
 export * from './reducers/socket';
 export * from './reducers/theme';
+export * from './reducers/stateFilter';
 export * from './reducers/stateTreeSettings';
 export * from './utils/monitorActions';
 export * from './utils/stringifyJSON';
