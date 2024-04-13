@@ -1,5 +1,17 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- 191d419: Convert d3 packages to ESM
+
+### Patch Changes
+
+- Updated dependencies [191d419]
+  - d3tooltip@4.0.0
+  - map2tree@4.0.0
+
 ## 2.0.0
 
 ### Major Changes

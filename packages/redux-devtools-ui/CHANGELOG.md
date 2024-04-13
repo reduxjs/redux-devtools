@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.3.2
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-base16-styling@0.10.0
+
+## 1.3.1
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+
 ## 1.3.0
 
 ### Minor Changes

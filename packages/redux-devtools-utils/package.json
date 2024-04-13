@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/utils",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Reusable functions of Redux DevTools",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-utils",
   "bugs": {
@@ -32,37 +32,37 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.6",
-    "@redux-devtools/core": "^3.13.1",
-    "@redux-devtools/serialize": "^0.4.1",
-    "@types/get-params": "^0.1.0",
+    "@babel/runtime": "^7.24.1",
+    "@redux-devtools/core": "^4.0.0",
+    "@redux-devtools/serialize": "^0.4.2",
+    "@types/get-params": "^0.1.2",
     "get-params": "^0.1.2",
-    "immutable": "^4.3.2",
+    "immutable": "^4.3.5",
     "jsan": "^3.1.14",
     "lodash": "^4.17.21",
-    "nanoid": "^4.0.2",
+    "nanoid": "^5.0.6",
     "redux": "^4.2.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.9",
-    "@babel/core": "^7.22.9",
-    "@babel/eslint-parser": "^7.22.9",
-    "@babel/plugin-transform-runtime": "^7.22.9",
-    "@babel/preset-env": "^7.22.9",
-    "@babel/preset-typescript": "^7.22.5",
-    "@types/jsan": "^3.1.2",
-    "@types/lodash": "^4.14.196",
-    "@types/node": "^18.17.3",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "eslint": "^8.46.0",
-    "eslint-config-prettier": "^9.0.0",
-    "rimraf": "^5.0.1",
-    "typescript": "~5.1.6"
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.3",
+    "@babel/eslint-parser": "^7.24.1",
+    "@babel/plugin-transform-runtime": "^7.24.3",
+    "@babel/preset-env": "^7.24.3",
+    "@babel/preset-typescript": "^7.24.1",
+    "@types/jsan": "^3.1.5",
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "rimraf": "^5.0.5",
+    "typescript": "~5.3.3"
   },
   "peerDependencies": {
-    "@redux-devtools/core": "^3.13.1",
-    "immutable": "^4.3.2",
-    "redux": "^4.2.1"
+    "@redux-devtools/core": "^4.0.0",
+    "immutable": "^4.3.5",
+    "redux": "^4.0.0 || ^5.0.0"
   }
 }

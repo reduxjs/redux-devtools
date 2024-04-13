@@ -6,7 +6,10 @@ module.exports = {
       extends: '../../eslintrc.ts.react.base.json',
       parserOptions: {
         tsconfigRootDir: __dirname,
-        project: ['./tsconfig.json'],
+        project: true,
+      },
+      rules: {
+        'react/no-unknown-property': ['error', { ignore: ['css'] }],
       },
     },
     {

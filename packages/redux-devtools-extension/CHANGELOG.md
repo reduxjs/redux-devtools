@@ -1,5 +1,17 @@
 # Change Log
 
+## 3.3.0
+
+### Minor Changes
+
+- a3f86a42: Add Redux 5 to peerDependency range of extension package
+
+## 3.2.6
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+
 ## 3.2.5
 
 ### Patch Changes

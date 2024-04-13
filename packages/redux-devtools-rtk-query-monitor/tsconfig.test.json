@@ -1,7 +1,9 @@
 {
   "extends": "../../tsconfig.react.base.json",
   "compilerOptions": {
-    "types": ["jest"]
+    "types": ["jest"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["src", "test"],
   "exclude": ["dist"]

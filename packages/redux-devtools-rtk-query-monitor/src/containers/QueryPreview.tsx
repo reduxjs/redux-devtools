@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
-import { StyleUtilsContext } from '../styles/createStylingFromTheme';
-import { createTreeItemLabelRenderer } from '../styles/tree';
+import type { Interpolation, Theme } from '@emotion/react';
 import {
   QueryPreviewTabs,
   RtkResourceInfo,
@@ -26,7 +25,6 @@ import {
 } from '../components/QueryPreviewTags';
 import { NoRtkQueryApi } from '../components/NoRtkQueryApi';
 import { InspectorSelectors } from '../selectors';
-import { StylingFunction } from 'react-base16-styling';
 import { mapProps } from './mapProps';
 import {
   QueryPreviewActions,
@@ -38,12 +36,28 @@ import {
   QueryPreviewDataProps,
 } from '../components/QueryPreviewData';
 
+const queryPreviewCss: Interpolation<Theme> = (theme) => ({
+  flex: '1 1 50%',
+  overflowX: 'hidden',
+  oveflowY: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
+  overflowY: 'hidden',
+  '& pre': {
+    border: 'inherit',
+    borderRadius: '3px',
+    lineHeight: 'inherit',
+    color: 'inherit',
+  },
+
+  backgroundColor: theme.BACKGROUND_COLOR,
+});
+
 export interface QueryPreviewProps<S = unknown> {
   readonly selectedTab: QueryPreviewTabs;
   readonly hasNoApis: boolean;
   readonly onTabChange: (tab: QueryPreviewTabs) => void;
   readonly resInfo: RtkResourceInfo | null;
-  readonly styling: StylingFunction;
   readonly isWideLayout: boolean;
   readonly selectorsSource: SelectorsSource<S>;
   readonly selectors: InspectorSelectors<S>;
@@ -163,14 +177,6 @@ const tabs: ReadonlyArray<
 ];
 
 export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
-  readonly labelRenderer: ReturnType<typeof createTreeItemLabelRenderer>;
-
-  constructor(props: QueryPreviewProps<S>) {
-    super(props);
-
-    this.labelRenderer = createTreeItemLabelRenderer(this.props.styling);
-  }
-
   renderLabelWithCounter = (
     label: React.ReactText,
     counter: number,
@@ -211,58 +217,40 @@ export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
 
     if (!resInfo) {
       return (
-        <StyleUtilsContext.Consumer>
-          {({ styling }) => (
-            <div {...styling('queryPreview')}>
-              <QueryPreviewHeader
-                selectedTab={selectedTab}
-                onTabChange={onTabChange}
-                tabs={
-                  tabs.filter((tab) =>
-                    isTabVisible(tab, 'default'),
-                  ) as ReadonlyArray<
-                    TabOption<
-                      QueryPreviewTabs,
-                      unknown,
-                      RtkResourceInfo['type']
-                    >
-                  >
-                }
-                renderTabLabel={this.renderTabLabel}
-              />
-              {hasNoApis && <NoRtkQueryApi />}
-            </div>
-          )}
-        </StyleUtilsContext.Consumer>
+        <div css={queryPreviewCss}>
+          <QueryPreviewHeader
+            selectedTab={selectedTab}
+            onTabChange={onTabChange}
+            tabs={
+              tabs.filter((tab) =>
+                isTabVisible(tab, 'default'),
+              ) as ReadonlyArray<
+                TabOption<QueryPreviewTabs, unknown, RtkResourceInfo['type']>
+              >
+            }
+            renderTabLabel={this.renderTabLabel}
+          />
+          {hasNoApis && <NoRtkQueryApi />}
+        </div>
       );
     }
 
     return (
-      <StyleUtilsContext.Consumer>
-        {({ styling }) => {
-          return (
-            <div {...styling('queryPreview')}>
-              <QueryPreviewHeader
-                selectedTab={selectedTab}
-                onTabChange={onTabChange}
-                tabs={
-                  tabs.filter((tab) =>
-                    isTabVisible(tab, resInfo.type),
-                  ) as ReadonlyArray<
-                    TabOption<
-                      QueryPreviewTabs,
-                      unknown,
-                      RtkResourceInfo['type']
-                    >
-                  >
-                }
-                renderTabLabel={this.renderTabLabel}
-              />
-              <TabComponent {...(this.props as QueryPreviewTabProps)} />
-            </div>
-          );
-        }}
-      </StyleUtilsContext.Consumer>
+      <div css={queryPreviewCss}>
+        <QueryPreviewHeader
+          selectedTab={selectedTab}
+          onTabChange={onTabChange}
+          tabs={
+            tabs.filter((tab) =>
+              isTabVisible(tab, resInfo.type),
+            ) as ReadonlyArray<
+              TabOption<QueryPreviewTabs, unknown, RtkResourceInfo['type']>
+            >
+          }
+          renderTabLabel={this.renderTabLabel}
+        />
+        <TabComponent {...(this.props as QueryPreviewTabProps)} />
+      </div>
     );
   }
 }

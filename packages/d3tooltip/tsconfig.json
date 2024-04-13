@@ -1,7 +1,7 @@
 {
-  "extends": "../../tsconfig.react.base.json",
+  "extends": "../../tsconfig.esm.base.json",
   "compilerOptions": {
-    "outDir": "lib/types"
+    "outDir": "lib"
   },
   "include": ["src"]
 }

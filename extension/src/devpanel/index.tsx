@@ -1,3 +1,4 @@
+import '../chromeApiMock';
 import React, { CSSProperties, ReactNode } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -6,7 +7,6 @@ import { REMOVE_INSTANCE, StoreAction } from '@redux-devtools/app';
 import App from '../app/App';
 import configureStore from './store/panelStore';
 
-import './devpanel.pug';
 import { Action, Store } from 'redux';
 import type { PanelMessage } from '../background/store/apiMiddleware';
 import type { StoreStateWithoutSocket } from './store/panelReducer';
@@ -96,7 +96,7 @@ function init(id: number) {
     name: id ? id.toString() : undefined,
   });
   bgConnection.onMessage.addListener(
-    <S, A extends Action<unknown>>(message: PanelMessage<S, A>) => {
+    <S, A extends Action<string>>(message: PanelMessage<S, A>) => {
       if (message.type === 'NA') {
         if (message.id === id) renderNA();
         else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });

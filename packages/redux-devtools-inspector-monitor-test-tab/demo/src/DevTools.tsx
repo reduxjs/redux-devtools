@@ -1,10 +1,7 @@
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import {
-  InspectorMonitor,
-  base16Themes,
-  Tab,
-} from '@redux-devtools/inspector-monitor';
+import { InspectorMonitor, Tab } from '@redux-devtools/inspector-monitor';
+import type { Base16ThemeName } from '@redux-devtools/inspector-monitor';
 import { DockMonitor } from '@redux-devtools/dock-monitor';
 import { useLocation } from 'react-router-dom';
 import getOptions from './getOptions';
@@ -20,7 +17,7 @@ export const getDevTools = (location: { search: string }) =>
       changeMonitorKey="ctrl-m"
     >
       <InspectorMonitor
-        theme={getOptions(location).theme as keyof typeof base16Themes}
+        theme={getOptions(location).theme as Base16ThemeName}
         invertTheme={!getOptions(location).dark}
         supportImmutable={getOptions(location).supportImmutable}
         tabs={(defaultTabs) =>
@@ -30,7 +27,7 @@ export const getDevTools = (location: { search: string }) =>
               component: TestTab,
             },
             ...defaultTabs,
-          ] as Tab<unknown, Action<unknown>>[]
+          ] as Tab<unknown, Action<string>>[]
         }
       />
     </DockMonitor>,

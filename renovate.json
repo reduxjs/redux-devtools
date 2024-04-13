@@ -18,9 +18,28 @@
       "groupName": "typescript"
     },
     {
-      "matchPackageNames": ["source-map"],
+      "matchPackageNames": ["source-map", "@types/source-map"],
       "matchUpdateTypes": ["major", "minor"],
       "groupName": "source-map"
+    },
+    {
+      "matchPackageNames": ["msw"],
+      "groupName": "msw"
+    },
+    {
+      "matchPackageNames": [
+        "redux",
+        "redux-thunk",
+        "react-redux",
+        "@reduxjs/toolkit",
+        "@types/redux-logger"
+      ],
+      "matchUpdateTypes": ["major"],
+      "groupName": "redux"
+    },
+    {
+      "matchPackageNames": ["@types/redux-logger"],
+      "groupName": "redux"
     }
   ]
 }

@@ -21,7 +21,7 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = StateProps &
   DispatchProps &
-  TabComponentProps<unknown, Action<unknown>>;
+  TabComponentProps<unknown, Action<string>>;
 
 class SubTabs extends Component<Props> {
   tabs?: (Tab<Props> | Tab<{ data: unknown }> | Tab<{ data?: Delta }>)[];
@@ -40,7 +40,7 @@ class SubTabs extends Component<Props> {
   filteredData = () => {
     const [data, _error] = filter(
       this.props.nextState as object,
-      this.props.stateFilter
+      this.props.stateFilter,
     );
     return data;
   };
@@ -79,7 +79,7 @@ class SubTabs extends Component<Props> {
           component: DiffTab,
           selector: this.selectorCreator(
             this.props.parentTab,
-            'Tree'
+            'Tree',
           ) as () => Props,
         },
         {
@@ -99,7 +99,7 @@ class SubTabs extends Component<Props> {
         component: parentTab === 'Action' ? ActionTab : StateTab,
         selector: this.selectorCreator(
           this.props.parentTab,
-          'Tree'
+          'Tree',
         ) as () => Props,
       },
       {

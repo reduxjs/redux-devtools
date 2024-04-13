@@ -1,5 +1,4 @@
 import React, { Children, Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, Provider, ReactReduxContext } from 'react-redux';
 import {
   instrument,
@@ -26,21 +25,16 @@ function logError(type: string) {
   }
 }
 
-export interface Props<
-  S,
-  A extends Action<unknown>,
-  MonitorState,
-  MonitorAction extends Action<unknown>,
-> {
+export interface Props<S, A extends Action<string>, MonitorState> {
   store?: EnhancedStore<S, A, MonitorState>;
 }
 
 export type Monitor<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorProps extends LiftedState<S, A, MonitorState>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
 > = React.ReactElement<
   MonitorProps,
   React.ComponentType<MonitorProps & LiftedState<S, A, MonitorState>> & {
@@ -54,10 +48,10 @@ export type Monitor<
 
 export default function createDevTools<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorProps extends LiftedState<S, A, MonitorState>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
 >(children: Monitor<S, A, MonitorProps, MonitorState, MonitorAction>) {
   const monitorElement = Children.only(children);
   const monitorProps = monitorElement.props;
@@ -66,17 +60,7 @@ export default function createDevTools<
     (state: LiftedState<S, A, MonitorState>) => state,
   )(Monitor as React.ComponentType<any>);
 
-  return class DevTools extends Component<
-    Props<S, A, MonitorState, MonitorAction>
-  > {
-    static contextTypes = {
-      store: PropTypes.object,
-    };
-
-    static propTypes = {
-      store: PropTypes.object,
-    };
-
+  return class DevTools extends Component<Props<S, A, MonitorState>> {
     liftedStore?: LiftedStore<S, A, MonitorState>;
 
     static instrument = (
@@ -87,11 +71,8 @@ export default function createDevTools<
         options,
       );
 
-    constructor(
-      props: Props<S, A, MonitorState, MonitorAction>,
-      context?: { store?: EnhancedStore<S, A, MonitorState> },
-    ) {
-      super(props, context);
+    constructor(props: Props<S, A, MonitorState>) {
+      super(props);
 
       if (ReactReduxContext) {
         if (this.props.store && !this.props.store.liftedStore) {
@@ -100,16 +81,12 @@ export default function createDevTools<
         return;
       }
 
-      if (!props.store && !context?.store) {
+      if (!props.store) {
         logError('NoStore');
         return;
       }
 
-      if (context?.store) {
-        this.liftedStore = context.store.liftedStore;
-      } else {
-        this.liftedStore = props.store!.liftedStore;
-      }
+      this.liftedStore = props.store.liftedStore;
 
       if (!this.liftedStore) {
         logError('NoLiftedStore');

@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/extension",
-  "version": "3.2.5",
+  "version": "3.3.0",
   "description": "Wrappers for Redux DevTools Extension.",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-extension",
   "license": "MIT",
@@ -29,25 +29,25 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.22.6",
-    "immutable": "^4.3.2"
+    "@babel/runtime": "^7.24.1",
+    "immutable": "^4.3.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.9",
-    "@babel/core": "^7.22.9",
-    "@babel/eslint-parser": "^7.22.9",
-    "@babel/plugin-transform-runtime": "^7.22.9",
-    "@babel/preset-env": "^7.22.9",
-    "@babel/preset-typescript": "^7.22.5",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "eslint": "^8.46.0",
-    "eslint-config-prettier": "^9.0.0",
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.3",
+    "@babel/eslint-parser": "^7.24.1",
+    "@babel/plugin-transform-runtime": "^7.24.3",
+    "@babel/preset-env": "^7.24.3",
+    "@babel/preset-typescript": "^7.24.1",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "redux": "^4.2.1",
-    "rimraf": "^5.0.1",
-    "typescript": "~5.1.6"
+    "rimraf": "^5.0.5",
+    "typescript": "~5.3.3"
   },
   "peerDependencies": {
-    "redux": "^3.1.0 || ^4.0.0"
+    "redux": "^3.1.0 || ^4.0.0 || ^5.0.0"
   }
 }

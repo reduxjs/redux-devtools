@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import TodoTextInput from './TodoTextInput';
 
 interface Props {
@@ -7,10 +6,6 @@ interface Props {
 }
 
 export default class Header extends Component<Props> {
-  static propTypes = {
-    addTodo: PropTypes.func.isRequired,
-  };
-
   handleSave = (text: string) => {
     if (text.length !== 0) {
       this.props.addTodo(text);

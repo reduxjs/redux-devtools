@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { ActionCreators, LiftedAction } from '@redux-devtools/core';
 import { Button, Toolbar, Divider } from '@redux-devtools/ui';
 import { Action } from 'redux';
@@ -10,23 +9,15 @@ import InstanceSelector from './InstanceSelector';
 import SyncButton from './buttons/SyncButton';
 import { Options, State } from '../reducers/instances';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, rollback, commit, sweep } = ActionCreators;
 
 interface Props {
-  dispatch: (action: LiftedAction<unknown, Action<unknown>, unknown>) => void;
+  dispatch: (action: LiftedAction<unknown, Action<string>, unknown>) => void;
   liftedState: State;
   options: Options;
 }
 
 export default class TopButtons extends Component<Props> {
-  static propTypes = {
-    // shouldSync: PropTypes.bool,
-    liftedState: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    options: PropTypes.object.isRequired,
-  };
-
   shouldComponentUpdate(nextProps: Props) {
     return (
       nextProps.options !== this.props.options ||

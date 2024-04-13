@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect, ResolveThunks } from 'react-redux';
 import { Button } from '@redux-devtools/ui';
 import { FaThumbtack } from 'react-icons/fa';

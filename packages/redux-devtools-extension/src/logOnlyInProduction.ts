@@ -34,17 +34,17 @@ export const composeWithDevTools: ReduxDevtoolsExtensionCompose =
   process.env.NODE_ENV === 'production'
     ? logOnly.composeWithDevTools
     : typeof window !== 'undefined' &&
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : extensionComposeStub;
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      : extensionComposeStub;
 
 export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
   process.env.NODE_ENV === 'production'
     ? logOnly.devToolsEnhancer
     : typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__
-    ? window.__REDUX_DEVTOOLS_EXTENSION__
-    : function () {
-        return function (noop) {
-          return noop;
+      ? window.__REDUX_DEVTOOLS_EXTENSION__
+      : function () {
+          return function (noop) {
+            return noop;
+          };
         };
-      };

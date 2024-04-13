@@ -1,22 +1,17 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Base16Theme } from 'redux-devtools-themes';
-import {
-  getBase16Theme,
-  invertTheme,
-  StylingFunction,
-} from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
   LiftedState,
 } from '@redux-devtools/core';
 import { Action, Dispatch } from 'redux';
-import { Delta, DiffContext } from 'jsondiffpatch';
+import type { Delta, DiffContext } from 'jsondiffpatch';
 import {
-  createStylingFromTheme,
-  base16Themes,
-} from './utils/createStylingFromTheme';
+  createInspectorMonitorThemeFromBase16Theme,
+  resolveBase16Theme,
+} from './utils/themes';
+import type { Base16ThemeName } from './utils/themes';
 import ActionList from './ActionList';
 import ActionPreview, { Tab } from './ActionPreview';
 import getInspectedState from './utils/getInspectedState';
@@ -27,29 +22,24 @@ import {
   reducer,
   updateMonitorState,
 } from './redux';
+import { ThemeProvider } from '@emotion/react';
 
 const {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   commit,
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   sweep,
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   toggleAction,
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   jumpToAction,
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   jumpToState,
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   reorderAction,
 } = ActionCreators;
 
-function getLastActionId<S, A extends Action<unknown>>(
+function getLastActionId<S, A extends Action<string>>(
   props: DevtoolsInspectorProps<S, A>,
 ) {
   return props.stagedActionIds[props.stagedActionIds.length - 1];
 }
 
-function getCurrentActionId<S, A extends Action<unknown>>(
+function getCurrentActionId<S, A extends Action<string>>(
   props: DevtoolsInspectorProps<S, A>,
   monitorState: DevtoolsInspectorState,
 ) {
@@ -73,7 +63,7 @@ function getFromState<S>(
   return computedStates[fromStateIdx];
 }
 
-function createIntermediateState<S, A extends Action<unknown>>(
+function createIntermediateState<S, A extends Action<string>>(
   props: DevtoolsInspectorProps<S, A>,
   monitorState: DevtoolsInspectorState,
 ) {
@@ -126,25 +116,14 @@ function createIntermediateState<S, A extends Action<unknown>>(
   };
 }
 
-function createThemeState<S, A extends Action<unknown>>(
-  props: DevtoolsInspectorProps<S, A>,
-) {
-  const base16Theme = getBase16Theme(props.theme, base16Themes)!;
-
-  const theme = props.invertTheme ? invertTheme(props.theme) : props.theme;
-  const styling = createStylingFromTheme(theme);
-
-  return { base16Theme, styling };
-}
-
-export interface ExternalProps<S, A extends Action<unknown>> {
+export interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<
     DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
   >;
   preserveScrollTop?: boolean;
   draggableActions: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof base16Themes | Base16Theme;
+  theme: Base16ThemeName | Base16Theme;
   supportImmutable: boolean;
   diffObjectHash?: (item: unknown, index: number) => string;
   diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
@@ -161,11 +140,11 @@ interface DefaultProps {
   select: (state: unknown) => unknown;
   supportImmutable: boolean;
   draggableActions: boolean;
-  theme: keyof typeof base16Themes;
+  theme: Base16ThemeName;
   invertTheme: boolean;
 }
 
-export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
+export interface DevtoolsInspectorProps<S, A extends Action<string>>
   extends LiftedState<S, A, DevtoolsInspectorState> {
   dispatch: Dispatch<
     DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
@@ -173,9 +152,9 @@ export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
   preserveScrollTop?: boolean;
   draggableActions: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof base16Themes | Base16Theme;
+  theme: Base16ThemeName | Base16Theme;
   supportImmutable: boolean;
-  diffObjectHash?: (item: unknown, index: number) => string;
+  diffObjectHash?: (item: unknown, index: number | undefined) => string;
   diffPropertyFilter?: (name: string, context: DiffContext) => boolean;
   hideMainButtons?: boolean;
   hideActionButtons?: boolean;
@@ -186,49 +165,21 @@ export interface DevtoolsInspectorProps<S, A extends Action<unknown>>
   tabs: Tab<S, A>[] | ((tabs: Tab<S, A>[]) => Tab<S, A>[]);
 }
 
-interface State<S, A extends Action<unknown>> {
+interface State<S, A extends Action<string>> {
   delta: Delta | null | undefined | false;
   nextState: S;
   action: A;
   error: string | undefined;
   isWideLayout: boolean;
-  themeState: { base16Theme: Base16Theme; styling: StylingFunction };
 }
 
-class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
+class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
   DevtoolsInspectorProps<S, A>,
   State<S, A>
 > {
   state: State<S, A> = {
     ...createIntermediateState(this.props, this.props.monitorState),
     isWideLayout: false,
-    themeState: createThemeState(this.props),
-  };
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    computedStates: PropTypes.array,
-    stagedActionIds: PropTypes.array,
-    actionsById: PropTypes.object,
-    currentStateIndex: PropTypes.number,
-    monitorState: PropTypes.shape({
-      initialScrollTop: PropTypes.number,
-    }),
-    preserveScrollTop: PropTypes.bool,
-    draggableActions: PropTypes.bool,
-    select: PropTypes.func.isRequired,
-    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    supportImmutable: PropTypes.bool,
-    diffObjectHash: PropTypes.func,
-    diffPropertyFilter: PropTypes.func,
-    hideMainButtons: PropTypes.bool,
-    hideActionButtons: PropTypes.bool,
-    invertTheme: PropTypes.bool,
-    sortStateTreeAlphabetically: PropTypes.bool,
-    disableStateTreeCollection: PropTypes.bool,
-    skippedActionIds: PropTypes.array,
-    dataTypeKey: PropTypes.any,
-    tabs: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
   };
 
   static update = reducer;
@@ -284,13 +235,6 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
     ) {
       this.setState(createIntermediateState(nextProps, nextMonitorState));
     }
-
-    if (
-      this.props.theme !== nextProps.theme ||
-      this.props.invertTheme !== nextProps.invertTheme
-    ) {
-      this.setState({ themeState: createThemeState(nextProps) });
-    }
   }
 
   inspectorCreateRef: React.RefCallback<HTMLDivElement> = (node) => {
@@ -304,6 +248,7 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
       computedStates,
       draggableActions,
       tabs,
+      theme,
       invertTheme,
       skippedActionIds,
       currentStateIndex,
@@ -318,73 +263,88 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
       monitorState;
     const inspectedPathType =
       tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
-    const { themeState, isWideLayout, action, nextState, delta, error } =
-      this.state;
-    const { base16Theme, styling } = themeState;
+    const { isWideLayout, action, nextState, delta, error } = this.state;
 
+    const base16Theme = resolveBase16Theme(theme)!;
+    const inspectorMonitorTheme = createInspectorMonitorThemeFromBase16Theme(
+      base16Theme,
+      invertTheme,
+    );
     return (
-      <div
-        key="inspector"
-        data-testid="inspector"
-        ref={this.inspectorCreateRef}
-        {...styling(
-          ['inspector', isWideLayout && 'inspectorWide'],
-          isWideLayout,
-        )}
-      >
-        <ActionList
-          {...{
-            actions,
-            actionIds,
-            isWideLayout,
-            searchValue,
-            selectedActionId,
-            startActionId,
-            skippedActionIds,
-            draggableActions,
-            hideMainButtons,
-            hideActionButtons,
-            styling,
-          }}
-          onSearch={this.handleSearch}
-          onSelect={this.handleSelectAction}
-          onToggleAction={this.handleToggleAction}
-          onJumpToState={this.handleJumpToState}
-          onCommit={this.handleCommit}
-          onSweep={this.handleSweep}
-          onReorderAction={this.handleReorderAction}
-          currentActionId={actionIds[currentStateIndex]}
-          lastActionId={getLastActionId(this.props)}
-        />
-        <ActionPreview
-          {...{
-            base16Theme,
-            invertTheme,
-            isWideLayout,
-            tabs,
-            tabName,
-            delta,
-            error,
-            nextState,
-            computedStates,
-            action,
-            actions,
-            selectedActionId,
-            startActionId,
-            dataTypeKey,
-            sortStateTreeAlphabetically,
-            disableStateTreeCollection,
-          }}
-          monitorState={this.props.monitorState}
-          updateMonitorState={this.updateMonitorState}
-          styling={styling}
-          onInspectPath={(path: (string | number)[]) =>
-            this.handleInspectPath(inspectedPathType, path)
-          }
-          inspectedPath={monitorState[inspectedPathType]}
-          onSelectTab={this.handleSelectTab}
-        />
-      </div>
+      <ThemeProvider theme={inspectorMonitorTheme}>
+        <div
+          key="inspector"
+          data-testid="inspector"
+          ref={this.inspectorCreateRef}
+          css={[
+            (theme) => ({
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              height: '100%',
+              fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+              fontSize: '12px',
+              WebkitFontSmoothing: 'antialiased',
+              lineHeight: '1.5em',
+
+              backgroundColor: theme.BACKGROUND_COLOR,
+              color: theme.TEXT_COLOR,
+            }),
+            isWideLayout && { flexDirection: 'row' },
+          ]}
+        >
+          <ActionList
+            {...{
+              actions,
+              actionIds,
+              isWideLayout,
+              searchValue,
+              selectedActionId,
+              startActionId,
+              skippedActionIds,
+              draggableActions,
+              hideMainButtons,
+              hideActionButtons,
+            }}
+            onSearch={this.handleSearch}
+            onSelect={this.handleSelectAction}
+            onToggleAction={this.handleToggleAction}
+            onJumpToState={this.handleJumpToState}
+            onCommit={this.handleCommit}
+            onSweep={this.handleSweep}
+            onReorderAction={this.handleReorderAction}
+            currentActionId={actionIds[currentStateIndex]}
+            lastActionId={getLastActionId(this.props)}
+          />
+          <ActionPreview
+            {...{
+              base16Theme,
+              invertTheme,
+              isWideLayout,
+              tabs,
+              tabName,
+              delta,
+              error,
+              nextState,
+              computedStates,
+              action,
+              actions,
+              selectedActionId,
+              startActionId,
+              dataTypeKey,
+              sortStateTreeAlphabetically,
+              disableStateTreeCollection,
+            }}
+            monitorState={this.props.monitorState}
+            updateMonitorState={this.updateMonitorState}
+            onInspectPath={(path: (string | number)[]) =>
+              this.handleInspectPath(inspectedPathType, path)
+            }
+            inspectedPath={monitorState[inspectedPathType]}
+            onSelectTab={this.handleSelectTab}
+          />
+        </div>
+      </ThemeProvider>
     );
   }
 
@@ -474,10 +434,10 @@ class DevtoolsInspector<S, A extends Action<unknown>> extends PureComponent<
 }
 
 export default DevtoolsInspector as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     state: DevtoolsInspectorState | undefined,
     action: DevtoolsInspectorAction,
   ): DevtoolsInspectorState;

@@ -1,6 +1,5 @@
 import React, { CSSProperties } from 'react';
 import { ArrowUpIcon } from './ArrowUpIcon';
-import { StyleUtilsContext } from '../styles/createStylingFromTheme';
 
 export interface SortOrderButtonProps {
   readonly isAsc?: boolean;
@@ -28,19 +27,36 @@ export function SortOrderButton({
   };
 
   return (
-    <StyleUtilsContext.Consumer>
-      {({ styling }) => (
-        <button
-          type="button"
-          id={id}
-          onClick={handleButtonClick}
-          aria-pressed={isAsc}
-          {...styling(['sortButton'])}
-        >
-          <ArrowUpIcon style={arrowStyles} />
-          {buttonLabel}
-        </button>
-      )}
-    </StyleUtilsContext.Consumer>
+    <button
+      type="button"
+      id={id}
+      onClick={handleButtonClick}
+      aria-pressed={isAsc}
+      css={(theme) => ({
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexFlow: 'row nowrap',
+        cursor: 'pointer',
+        position: 'relative',
+        padding: '0 8px',
+        color: theme.TEXT_COLOR,
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderRadius: '3px',
+        backgroundColor: theme.TAB_BACK_COLOR,
+        borderColor: theme.TAB_BORDER_COLOR,
+        height: 30,
+        fontSize: 12,
+        width: 64,
+
+        '&:active': {
+          backgroundColor: theme.TAB_BACK_SELECTED_COLOR,
+        },
+      })}
+    >
+      <ArrowUpIcon style={arrowStyles} />
+      {buttonLabel}
+    </button>
   );
 }

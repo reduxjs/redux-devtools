@@ -1,5 +1,44 @@
 # Change Log
 
+## 5.0.1
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-base16-styling@0.10.0
+  - @redux-devtools/ui@1.3.2
+
+## 5.0.0
+
+### Major Changes
+
+- 5cfe3e5: Update min required React version to 16.8.4
+
+### Patch Changes
+
+- Updated dependencies [decc035]
+  - @redux-devtools/core@4.0.0
+
+## 4.1.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+- Updated dependencies [7f5bddbd]
+  - @redux-devtools/ui@1.3.1
+
+## 4.0.2
+
+### Patch Changes
+
+- 42531c50: Bump versions
+- Updated dependencies [42531c50]
+  - @redux-devtools/core@3.13.3
+
 ## 4.0.1
 
 ### Patch Changes

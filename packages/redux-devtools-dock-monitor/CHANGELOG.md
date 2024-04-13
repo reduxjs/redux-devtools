@@ -1,5 +1,41 @@
 # Change Log
 
+## 4.0.1
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-dock@0.7.0
+
+## 4.0.0
+
+### Major Changes
+
+- 5cfe3e5: Update min required React version to 16.8.4
+
+### Patch Changes
+
+- Updated dependencies [decc035]
+  - @redux-devtools/core@4.0.0
+
+## 3.1.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+
+## 3.0.2
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+- Updated dependencies [65205f90]
+  - @redux-devtools/core@3.13.2
+
 ## 3.0.1
 
 ### Patch Changes

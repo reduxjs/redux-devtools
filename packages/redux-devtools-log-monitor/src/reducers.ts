@@ -6,7 +6,7 @@ import {
 } from './actions';
 import { LogMonitorProps } from './LogMonitor';
 
-function initialScrollTop<S, A extends Action<unknown>>(
+function initialScrollTop<S, A extends Action<string>>(
   props: LogMonitorProps<S, A>,
   state = 0,
   action: LogMonitorAction,
@@ -18,7 +18,7 @@ function initialScrollTop<S, A extends Action<unknown>>(
   return action.type === UPDATE_SCROLL_TOP ? action.scrollTop : state;
 }
 
-function startConsecutiveToggle<S, A extends Action<unknown>>(
+function startConsecutiveToggle<S, A extends Action<string>>(
   props: LogMonitorProps<S, A>,
   state: number | null | undefined,
   action: LogMonitorAction,
@@ -31,7 +31,7 @@ export interface LogMonitorState {
   consecutiveToggleStartId: number | null | undefined;
 }
 
-export default function reducer<S, A extends Action<unknown>>(
+export default function reducer<S, A extends Action<string>>(
   props: LogMonitorProps<S, A>,
   state: Partial<LogMonitorState> = {},
   action: LogMonitorAction,

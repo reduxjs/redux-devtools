@@ -5,7 +5,6 @@ import electronPath from 'electron';
 import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
-const port = 9515;
 const devPanelPath =
   'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/window.html';
 
@@ -16,7 +15,7 @@ describe('DevTools panel for Electron', function () {
     chromedriver.start();
     await delay(1000);
     driver = new webdriver.Builder()
-      .usingServer(`http://localhost:${port}`)
+      .usingServer('http://localhost:9515')
       .setChromeOptions(
         new chrome.Options()
           .setChromeBinaryPath(electronPath)
@@ -90,7 +89,7 @@ describe('DevTools panel for Electron', function () {
   it('should contain INIT action', async () => {
     const element = await driver.wait(
       webdriver.until.elementLocated(
-        webdriver.By.xpath('//div[contains(@class, "actionListRows-")]'),
+        webdriver.By.xpath('//div[@data-testid="actionListRows"]'),
       ),
       5000,
       'Element not found',
@@ -101,7 +100,7 @@ describe('DevTools panel for Electron', function () {
 
   it("should contain Inspector monitor's component", async () => {
     const val = await driver
-      .findElement(webdriver.By.xpath('//div[contains(@class, "inspector-")]'))
+      .findElement(webdriver.By.xpath('//div[@data-testid="inspector"]'))
       .getText();
     expect(val).toBeDefined();
   });

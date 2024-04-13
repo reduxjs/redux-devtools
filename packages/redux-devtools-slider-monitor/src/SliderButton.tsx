@@ -1,6 +1,5 @@
 import React, { Component, PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Base16Theme } from 'redux-devtools-themes';
+import type { Base16Theme } from 'react-base16-styling';
 import { Button } from '@redux-devtools/ui';
 
 interface Props {
@@ -11,13 +10,6 @@ interface Props {
 }
 
 export default class SliderButton extends (PureComponent || Component)<Props> {
-  static propTypes = {
-    theme: PropTypes.object,
-    type: PropTypes.string,
-    disabled: PropTypes.bool,
-    onClick: PropTypes.func,
-  };
-
   iconStyle() {
     return {
       cursor: 'hand',

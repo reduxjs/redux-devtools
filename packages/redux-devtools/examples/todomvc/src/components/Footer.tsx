@@ -1,5 +1,4 @@
 import React, { Component, MouseEventHandler } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {
   SHOW_ALL,
@@ -23,14 +22,6 @@ interface Props {
 }
 
 export default class Footer extends Component<Props> {
-  static propTypes = {
-    markedCount: PropTypes.number.isRequired,
-    unmarkedCount: PropTypes.number.isRequired,
-    filter: PropTypes.string.isRequired,
-    onClearMarked: PropTypes.func.isRequired,
-    onShow: PropTypes.func.isRequired,
-  };
-
   render() {
     return (
       <footer className="footer">

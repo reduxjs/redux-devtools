@@ -14,7 +14,7 @@ const SliderWrapper = styled.div`
 
 interface Props {
   liftedState: State;
-  dispatch: (action: LiftedAction<unknown, Action<unknown>, unknown>) => void;
+  dispatch: (action: LiftedAction<unknown, Action<string>, unknown>) => void;
   theme: ThemeFromProvider;
 }
 

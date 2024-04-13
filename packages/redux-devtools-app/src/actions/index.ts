@@ -55,7 +55,7 @@ import { StateFilterState } from '../reducers/stateFilter';
 let monitorReducer: (
   monitorProps: unknown,
   state: unknown | undefined,
-  action: Action<unknown>,
+  action: Action<string>,
 ) => unknown;
 let monitorProps: unknown = {};
 
@@ -125,7 +125,7 @@ export interface InitMonitorAction {
   update: (
     monitorProps: unknown,
     state: unknown | undefined,
-    action: Action<unknown>,
+    action: Action<string>,
   ) => unknown;
   monitorProps: unknown;
 }
@@ -135,7 +135,7 @@ export interface MonitorActionAction {
   monitorReducer: (
     monitorProps: unknown,
     state: unknown | undefined,
-    action: Action<unknown>,
+    action: Action<string>,
   ) => unknown;
   monitorProps: unknown;
 }
@@ -174,8 +174,8 @@ interface ReorderActionAction {
 interface ImportStateAction {
   type: 'IMPORT_STATE';
   nextLiftedState:
-    | LiftedState<unknown, Action<unknown>, unknown>
-    | readonly Action<unknown>[];
+    | LiftedState<unknown, Action<string>, unknown>
+    | readonly Action<string>[];
   preloadedState?: unknown;
   noRecompute?: boolean | undefined;
 }
@@ -226,7 +226,7 @@ export function liftedDispatch(
     | InitMonitorAction
     | JumpToStateAction
     | JumpToActionAction
-    | LiftedAction<unknown, Action<unknown>, unknown>,
+    | LiftedAction<unknown, Action<string>, unknown>,
 ): MonitorActionAction | LiftedActionDispatchAction {
   if (action.type[0] === '@') {
     if (action.type === '@@INIT_MONITOR') {

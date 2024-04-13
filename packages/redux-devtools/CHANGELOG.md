@@ -1,5 +1,37 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- decc035: Remove support for legacy context. Minimum supported react-redux version is 7.0.0 and minimum support React version is 16.8.4.
+
+## 3.14.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+- Updated dependencies [6fc18ed7]
+  - @redux-devtools/instrument@2.2.0
+
+## 3.13.3
+
+### Patch Changes
+
+- 42531c50: Bump versions
+- Updated dependencies [42531c50]
+  - @redux-devtools/instrument@2.1.1
+
+## 3.13.2
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+
 ## 3.13.1
 
 ### Patch Changes

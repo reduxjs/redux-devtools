@@ -1,58 +1,33 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Action, AnyAction } from 'redux';
+import { ThemeProvider } from '@emotion/react';
 import RtkQueryInspector from './RtkQueryInspector';
 import { reducer } from '../reducers';
 import {
   ExternalProps,
   RtkQueryMonitorProps,
   RtkQueryMonitorState,
-  StyleUtils,
 } from '../types';
 import {
-  createThemeState,
+  createRtkQueryMonitorThemeFromBase16Theme,
+  resolveBase16Theme,
   StyleUtilsContext,
-} from '../styles/createStylingFromTheme';
+} from '../styles/themes';
 
 interface DefaultProps {
   theme: string;
   invertTheme: boolean;
 }
 
-export interface RtkQueryComponentState {
-  readonly styleUtils: StyleUtils;
-}
-
-class RtkQueryMonitor<S, A extends Action<unknown>> extends Component<
-  RtkQueryMonitorProps<S, A>,
-  RtkQueryComponentState
+class RtkQueryMonitor<S, A extends Action<string>> extends Component<
+  RtkQueryMonitorProps<S, A>
 > {
   static update = reducer;
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    computedStates: PropTypes.array,
-    currentStateIndex: PropTypes.number,
-    actionsById: PropTypes.object,
-    stagedActionIds: PropTypes.array,
-    skippedActionIds: PropTypes.array,
-    monitorState: PropTypes.object,
-    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    invertTheme: PropTypes.bool,
-  };
 
   static defaultProps: DefaultProps = {
     theme: 'nicinabox',
     invertTheme: false,
   };
-
-  constructor(props: RtkQueryMonitorProps<S, A>) {
-    super(props);
-
-    this.state = {
-      styleUtils: createThemeState<S, A>(props),
-    };
-  }
 
   render() {
     const {
@@ -61,28 +36,38 @@ class RtkQueryMonitor<S, A extends Action<unknown>> extends Component<
       monitorState,
       dispatch,
       actionsById,
+      theme,
+      invertTheme,
     } = this.props;
 
+    const base16Theme = resolveBase16Theme(theme);
+    const styleUtils = { base16Theme, invertTheme };
+    const rtkQueryMonitorTheme = createRtkQueryMonitorThemeFromBase16Theme(
+      base16Theme,
+      invertTheme,
+    );
+
     return (
-      <StyleUtilsContext.Provider value={this.state.styleUtils}>
-        <RtkQueryInspector<S, AnyAction>
-          computedStates={computedStates}
-          currentStateIndex={currentStateIndex}
-          monitorState={monitorState}
-          dispatch={dispatch}
-          styleUtils={this.state.styleUtils}
-          actionsById={actionsById}
-        />
+      <StyleUtilsContext.Provider value={styleUtils}>
+        <ThemeProvider theme={rtkQueryMonitorTheme}>
+          <RtkQueryInspector<S, AnyAction>
+            computedStates={computedStates}
+            currentStateIndex={currentStateIndex}
+            monitorState={monitorState}
+            dispatch={dispatch}
+            actionsById={actionsById}
+          />
+        </ThemeProvider>
       </StyleUtilsContext.Provider>
     );
   }
 }
 
 export default RtkQueryMonitor as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     state: RtkQueryMonitorState | undefined,
     action: Action,
   ): RtkQueryMonitorState;

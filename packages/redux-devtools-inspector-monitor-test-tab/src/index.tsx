@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
   Toolbar,
   Container,
@@ -42,7 +41,7 @@ interface State {
   dialogStatus: 'Add' | 'Edit' | null;
 }
 
-export class TestTab<S, A extends Action<unknown>> extends Component<
+export class TestTab<S, A extends Action<string>> extends Component<
   TabComponentProps<S, A>,
   State
 > {
@@ -185,22 +184,6 @@ export class TestTab<S, A extends Action<unknown>> extends Component<
       </Container>
     );
   }
-
-  static propTypes = {
-    monitorState: PropTypes.shape({
-      testGenerator: PropTypes.shape({
-        templates: PropTypes.array,
-        selected: PropTypes.number,
-        hideTip: PropTypes.bool,
-      }),
-    }).isRequired,
-    /*
-    options: PropTypes.shape({
-      lib: PropTypes.string
-    }).isRequired,
-    */
-    updateMonitorState: PropTypes.func.isRequired,
-  };
 }
 
 export { default as reduxAvaTemplate } from './redux/ava';

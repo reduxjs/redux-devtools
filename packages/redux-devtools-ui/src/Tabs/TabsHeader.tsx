@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import observeResize from 'simple-element-resize-detector';
 import { FaAngleDoubleRight } from 'react-icons/fa';
 import ContextMenu from '../ContextMenu';
@@ -248,14 +247,4 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
       </TabsWrapper>
     );
   }
-
-  static propTypes = {
-    tabs: PropTypes.array.isRequired,
-    items: PropTypes.array.isRequired,
-    main: PropTypes.bool,
-    onClick: PropTypes.func,
-    position: PropTypes.string,
-    collapsible: PropTypes.bool,
-    selected: PropTypes.string,
-  };
 }

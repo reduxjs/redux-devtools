@@ -1,5 +1,6 @@
 import React, { CSSProperties, PureComponent } from 'react';
-import * as themes from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
@@ -11,7 +12,7 @@ import type { Options } from 'd3-state-visualizer';
 
 import reducer, { ChartMonitorState } from './reducers';
 import Chart, { Props } from './Chart';
-// eslint-disable-next-line @typescript-eslint/unbound-method
+
 const { reset, rollback, commit, sweep, toggleAction } = ActionCreators;
 
 const styles: { container: CSSProperties } = {
@@ -25,7 +26,7 @@ const styles: { container: CSSProperties } = {
   },
 };
 
-function invertColors(theme: themes.Base16Theme) {
+function invertColors(theme: Base16Theme) {
   return {
     ...theme,
     base00: theme.base07,
@@ -39,19 +40,19 @@ function invertColors(theme: themes.Base16Theme) {
   };
 }
 
-export interface ChartMonitorProps<S, A extends Action<unknown>>
+export interface ChartMonitorProps<S, A extends Action<string>>
   extends LiftedState<S, A, ChartMonitorState>,
     Options {
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | themes.Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   invertTheme: boolean;
 
   defaultIsVisible?: boolean;
 }
 
-class ChartMonitor<S, A extends Action<unknown>> extends PureComponent<
+class ChartMonitor<S, A extends Action<string>> extends PureComponent<
   ChartMonitorProps<S, A>
 > {
   static update = reducer;
@@ -89,14 +90,18 @@ class ChartMonitor<S, A extends Action<unknown>> extends PureComponent<
       return invertTheme ? invertColors(theme) : theme;
     }
 
-    if (typeof themes[theme] !== 'undefined') {
-      return invertTheme ? invertColors(themes[theme]) : themes[theme];
+    if (typeof base16Themes[theme] !== 'undefined') {
+      return invertTheme
+        ? invertColors(base16Themes[theme])
+        : base16Themes[theme];
     }
 
     console.warn(
       'DevTools theme ' + theme + ' not found, defaulting to nicinabox',
     );
-    return invertTheme ? invertColors(themes.nicinabox) : themes.nicinabox;
+    return invertTheme
+      ? invertColors(base16Themes.nicinabox)
+      : base16Themes.nicinabox;
   }
 
   getChartOptions(props = this.props): Props<S, A> {

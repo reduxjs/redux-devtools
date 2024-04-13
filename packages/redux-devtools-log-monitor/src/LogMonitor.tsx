@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Action, Dispatch } from 'redux';
-import * as themes from 'redux-devtools-themes';
-import { Base16Theme } from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
@@ -18,7 +17,6 @@ import reducer, { LogMonitorState } from './reducers';
 import LogMonitorButtonBar from './LogMonitorButtonBar';
 import LogMonitorEntryList from './LogMonitorEntryList';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { toggleAction, setActionsActive } = ActionCreators;
 
 const styles: {
@@ -45,12 +43,12 @@ const styles: {
   },
 };
 
-interface ExternalProps<S, A extends Action<unknown>> {
+interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
 
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   expandActionRoot: boolean;
   expandStateRoot: boolean;
   markStateDiff: boolean;
@@ -59,50 +57,30 @@ interface ExternalProps<S, A extends Action<unknown>> {
 
 interface DefaultProps<S> {
   select: (state: unknown) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   preserveScrollTop: boolean;
   expandActionRoot: boolean;
   expandStateRoot: boolean;
   markStateDiff: boolean;
 }
 
-export interface LogMonitorProps<S, A extends Action<unknown>>
+export interface LogMonitorProps<S, A extends Action<string>>
   extends LiftedState<S, A, LogMonitorState> {
   dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
 
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   expandActionRoot: boolean;
   expandStateRoot: boolean;
   markStateDiff: boolean;
   hideMainButtons?: boolean;
 }
 
-class LogMonitor<S, A extends Action<unknown>> extends PureComponent<
+class LogMonitor<S, A extends Action<string>> extends PureComponent<
   LogMonitorProps<S, A>
 > {
   static update = reducer;
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    computedStates: PropTypes.array,
-    actionsById: PropTypes.object,
-    stagedActionIds: PropTypes.array,
-    skippedActionIds: PropTypes.array,
-    monitorState: PropTypes.shape({
-      initialScrollTop: PropTypes.number,
-      consecutiveToggleStartId: PropTypes.number,
-    }),
-
-    preserveScrollTop: PropTypes.bool,
-    select: PropTypes.func,
-    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    expandActionRoot: PropTypes.bool,
-    expandStateRoot: PropTypes.bool,
-    markStateDiff: PropTypes.bool,
-    hideMainButtons: PropTypes.bool,
-  };
 
   static defaultProps: DefaultProps<unknown> = {
     select: (state: unknown) => state,
@@ -200,15 +178,15 @@ class LogMonitor<S, A extends Action<unknown>> extends PureComponent<
       return theme;
     }
 
-    if (typeof themes[theme] !== 'undefined') {
-      return themes[theme];
+    if (typeof base16Themes[theme] !== 'undefined') {
+      return base16Themes[theme];
     }
 
     // eslint-disable-next-line no-console
     console.warn(
       'DevTools theme ' + theme + ' not found, defaulting to nicinabox',
     );
-    return themes.nicinabox;
+    return base16Themes.nicinabox;
   }
 
   getRef: React.RefCallback<HTMLDivElement> = (node) => {
@@ -274,10 +252,10 @@ class LogMonitor<S, A extends Action<unknown>> extends PureComponent<
 }
 
 export default LogMonitor as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     state: LogMonitorState | undefined,
     action: LogMonitorAction,
   ): LogMonitorState;

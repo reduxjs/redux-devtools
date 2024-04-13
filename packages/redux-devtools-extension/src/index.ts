@@ -220,7 +220,7 @@ export interface Config extends EnhancerOptions {
 
 interface ConnectResponse {
   init: (state: unknown) => void;
-  send: (action: Action<unknown>, state: unknown) => void;
+  send: (action: Action<string>, state: unknown) => void;
 }
 
 interface ReduxDevtoolsExtension {

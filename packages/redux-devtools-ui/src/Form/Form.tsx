@@ -1,7 +1,6 @@
 import React, { PureComponent, Component } from 'react';
-import PropTypes from 'prop-types';
 import JSONSchemaForm, { FormProps } from '@rjsf/core';
-import { Base16Theme } from 'base16';
+import type { Base16Theme } from 'react-base16-styling';
 import createStyledComponent from '../utils/createStyledComponent';
 import styles from './styles';
 import Button from '../Button';
@@ -46,17 +45,4 @@ export default class Form<T> extends (PureComponent || Component)<Props<T>> {
       </FormContainer>
     );
   }
-
-  static propTypes = {
-    children: PropTypes.any,
-    submitText: PropTypes.string,
-    primaryButton: PropTypes.bool,
-    noSubmit: PropTypes.bool,
-    schema: PropTypes.object.isRequired,
-    uiSchema: PropTypes.object,
-    formData: PropTypes.any,
-    widgets: PropTypes.objectOf(
-      PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    ),
-  };
 }

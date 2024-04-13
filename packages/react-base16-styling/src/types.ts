@@ -1,5 +1,5 @@
-import { Base16Theme } from 'base16';
 import * as CSS from 'csstype';
+import type { Base16Theme } from './themes/index.js';
 
 export interface Styling {
   className?: string;

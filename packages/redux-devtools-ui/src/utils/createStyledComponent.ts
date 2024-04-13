@@ -6,8 +6,8 @@ import styled, {
   ThemedStyledInterface,
   ThemedStyledProps,
 } from 'styled-components';
+import type { Base16Theme } from 'react-base16-styling';
 import getDefaultTheme, { Theme } from '../themes/default';
-import { Base16Theme } from 'base16';
 import { ThemeFromProvider } from './theme';
 
 type StyleFunction<

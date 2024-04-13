@@ -9,7 +9,7 @@ import {
   toggleChildren,
   visit,
   getNodeGroupByDepthCount,
-} from './utils';
+} from './utils.js';
 import { tooltip } from 'd3tooltip';
 import type { StyleValue } from 'd3tooltip';
 
@@ -401,8 +401,8 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           d.data._children && d.data._children.length > 0
             ? nodeStyleOptions.colors.collapsed
             : d.data.children && d.data.children.length > 0
-            ? nodeStyleOptions.colors.parent
-            : nodeStyleOptions.colors.default,
+              ? nodeStyleOptions.colors.parent
+              : nodeStyleOptions.colors.default,
         );
 
       // transition nodes to their new position
@@ -473,9 +473,10 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
 
       // update the links
       const link = vis
-        .selectAll<SVGPathElement, HierarchyPointLink<InternalNode>>(
-          'path.link',
-        )
+        .selectAll<
+          SVGPathElement,
+          HierarchyPointLink<InternalNode>
+        >('path.link')
         .data(links, (d) => d.target.data.id);
 
       // enter any new links at the parent's previous position

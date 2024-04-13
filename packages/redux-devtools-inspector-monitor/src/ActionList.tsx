@@ -1,13 +1,28 @@
-import React, { PureComponent, RefCallback } from 'react';
-import { Drake } from 'dragula';
-import dragula from 'react-dragula';
+import React, { ReactNode, useCallback, useLayoutEffect, useRef } from 'react';
 import { Action } from 'redux';
 import { PerformAction } from '@redux-devtools/core';
-import { StylingFunction } from 'react-base16-styling';
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { restrictToFirstScrollableAncestor } from '@dnd-kit/modifiers';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import type { JSX } from '@emotion/react/jsx-runtime';
 import ActionListRow from './ActionListRow';
 import ActionListHeader from './ActionListHeader';
 
-function getTimestamps<A extends Action<unknown>>(
+function getTimestamps<A extends Action<string>>(
   actions: { [actionId: number]: PerformAction<A> },
   actionIds: number[],
   actionId: number,
@@ -21,7 +36,11 @@ function getTimestamps<A extends Action<unknown>>(
   };
 }
 
-interface Props<A extends Action<unknown>> {
+function scrollToBottom(node: HTMLDivElement) {
+  node.scrollTop = node.scrollHeight;
+}
+
+interface Props<A extends Action<string>> {
   actions: { [actionId: number]: PerformAction<A> };
   actionIds: number[];
   isWideLayout: boolean;
@@ -32,7 +51,6 @@ interface Props<A extends Action<unknown>> {
   draggableActions: boolean;
   hideMainButtons: boolean | undefined;
   hideActionButtons: boolean | undefined;
-  styling: StylingFunction;
   onSearch: (value: string) => void;
   onSelect: (e: React.MouseEvent<HTMLDivElement>, actionId: number) => void;
   onToggleAction: (actionId: number) => void;
@@ -44,152 +62,190 @@ interface Props<A extends Action<unknown>> {
   lastActionId: number;
 }
 
-export default class ActionList<
-  A extends Action<unknown>,
-> extends PureComponent<Props<A>> {
-  node?: HTMLDivElement | null;
-  scrollDown?: boolean;
-  drake?: Drake;
+export default function ActionList<A extends Action<string>>({
+  actions,
+  actionIds,
+  isWideLayout,
+  onToggleAction,
+  skippedActionIds,
+  selectedActionId,
+  startActionId,
+  onSelect,
+  onSearch,
+  searchValue,
+  currentActionId,
+  hideMainButtons,
+  hideActionButtons,
+  onCommit,
+  onSweep,
+  onJumpToState,
+  lastActionId,
+  onReorderAction,
+}: Props<A>): JSX.Element {
+  const nodeRef = useRef<HTMLDivElement | null>(null);
+  const prevLastActionId = useRef<number | undefined>();
 
-  UNSAFE_componentWillReceiveProps(nextProps: Props<A>) {
-    const node = this.node;
-    if (!node) {
-      this.scrollDown = true;
-    } else if (this.props.lastActionId !== nextProps.lastActionId) {
-      const { scrollTop, offsetHeight, scrollHeight } = node;
-      this.scrollDown =
-        Math.abs(scrollHeight - (scrollTop + offsetHeight)) < 50;
-    } else {
-      this.scrollDown = false;
-    }
-  }
-
-  componentDidMount() {
-    this.scrollDown = true;
-    this.scrollToBottom();
-
-    if (!this.props.draggableActions) return;
-    const container = this.node!;
-    this.drake = dragula([container], {
-      copy: false,
-      copySortSource: false,
-      mirrorContainer: container,
-      accepts: (el, target, source, sibling) =>
-        !sibling || !!parseInt(sibling.getAttribute('data-id')!),
-      moves: (el, source, handle) =>
-        !!parseInt(el!.getAttribute('data-id')!) &&
-        handle!.className.indexOf('selectorButton') !== 0,
-    }).on('drop', (el, target, source, sibling) => {
-      let beforeActionId = this.props.actionIds.length;
-      if (sibling && sibling.className.indexOf('gu-mirror') === -1) {
-        beforeActionId = parseInt(sibling.getAttribute('data-id')!);
+  useLayoutEffect(() => {
+    if (nodeRef.current && prevLastActionId.current !== lastActionId) {
+      const { scrollTop, offsetHeight, scrollHeight } = nodeRef.current;
+      if (Math.abs(scrollHeight - (scrollTop + offsetHeight)) < 50) {
+        scrollToBottom(nodeRef.current);
       }
-      const actionId = parseInt(el.getAttribute('data-id')!);
-      this.props.onReorderAction(actionId, beforeActionId);
-    });
-  }
-
-  componentWillUnmount() {
-    if (this.drake) this.drake.destroy();
-  }
-
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
-
-  scrollToBottom() {
-    if (this.scrollDown && this.node) {
-      this.node.scrollTop = this.node.scrollHeight;
     }
-  }
 
-  getRef: RefCallback<HTMLDivElement> = (node) => {
-    this.node = node;
+    prevLastActionId.current = lastActionId;
+  }, [lastActionId]);
+
+  const setNodeRef = useCallback((node: HTMLDivElement | null) => {
+    if (node && !nodeRef.current) {
+      scrollToBottom(node);
+    }
+
+    nodeRef.current = node;
+  }, []);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const handleDragEnd = useCallback(
+    ({ active, over }: DragEndEvent) => {
+      if (over && active.id !== over.id) {
+        const activeIndex = actionIds.indexOf(active.id as number);
+        const overIndex = actionIds.indexOf(over.id as number);
+
+        const beforeActionId =
+          overIndex < activeIndex
+            ? (over.id as number)
+            : overIndex < actionIds.length - 1
+              ? actionIds[overIndex + 1]
+              : actionIds.length;
+
+        onReorderAction(active.id as number, beforeActionId);
+      }
+    },
+    [actionIds, onReorderAction],
+  );
+
+  const lowerSearchValue = searchValue && searchValue.toLowerCase();
+  const filteredActionIds = searchValue
+    ? actionIds.filter(
+        (id) =>
+          actions[id].action.type
+            .toLowerCase()
+            .indexOf(lowerSearchValue as string) !== -1,
+      )
+    : actionIds;
+
+  return (
+    <div
+      key="actionList"
+      data-testid="actionList"
+      css={[
+        (theme) => ({
+          flexBasis: '40%',
+          flexShrink: 0,
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          borderBottomWidth: '3px',
+          borderBottomStyle: 'double',
+          display: 'flex',
+          flexDirection: 'column',
+
+          backgroundColor: theme.BACKGROUND_COLOR,
+          borderColor: theme.LIST_BORDER_COLOR,
+        }),
+        isWideLayout && {
+          flexBasis: '40%',
+          borderBottom: 'none',
+          borderRightWidth: '3px',
+          borderRightStyle: 'double',
+        },
+      ]}
+    >
+      <ActionListHeader
+        onSearch={onSearch}
+        onCommit={onCommit}
+        onSweep={onSweep}
+        hideMainButtons={hideMainButtons}
+        hasSkippedActions={skippedActionIds.length > 0}
+        hasStagedActions={actionIds.length > 1}
+        searchValue={searchValue}
+      />
+      <div
+        data-testid="actionListRows"
+        css={{ overflow: 'auto' }}
+        ref={setNodeRef}
+      >
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+          modifiers={[restrictToFirstScrollableAncestor]}
+        >
+          <SortableContext
+            items={filteredActionIds}
+            strategy={verticalListSortingStrategy}
+          >
+            {filteredActionIds.map((actionId) => (
+              <SortableItem key={actionId} actionId={actionId}>
+                <ActionListRow
+                  actionId={actionId}
+                  isInitAction={!actionId}
+                  isSelected={
+                    (startActionId !== null &&
+                      actionId >= startActionId &&
+                      actionId <= (selectedActionId as number)) ||
+                    actionId === selectedActionId
+                  }
+                  isInFuture={
+                    actionIds.indexOf(actionId) >
+                    actionIds.indexOf(currentActionId)
+                  }
+                  onSelect={(e: React.MouseEvent<HTMLDivElement>) =>
+                    onSelect(e, actionId)
+                  }
+                  timestamps={getTimestamps(actions, actionIds, actionId)}
+                  action={actions[actionId].action}
+                  onToggleClick={() => onToggleAction(actionId)}
+                  onJumpClick={() => onJumpToState(actionId)}
+                  onCommitClick={() => onCommit()}
+                  hideActionButtons={hideActionButtons}
+                  isSkipped={skippedActionIds.indexOf(actionId) !== -1}
+                />
+              </SortableItem>
+            ))}
+          </SortableContext>
+        </DndContext>
+      </div>
+    </div>
+  );
+}
+
+interface SortableItemProps {
+  readonly children: ReactNode;
+  readonly actionId: number;
+}
+
+function SortableItem({ children, actionId }: SortableItemProps) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: actionId });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
   };
 
-  render() {
-    const {
-      styling,
-      actions,
-      actionIds,
-      isWideLayout,
-      onToggleAction,
-      skippedActionIds,
-      selectedActionId,
-      startActionId,
-      onSelect,
-      onSearch,
-      searchValue,
-      currentActionId,
-      hideMainButtons,
-      hideActionButtons,
-      onCommit,
-      onSweep,
-      onJumpToState,
-    } = this.props;
-    const lowerSearchValue = searchValue && searchValue.toLowerCase();
-    const filteredActionIds = searchValue
-      ? actionIds.filter(
-          (id) =>
-            (actions[id].action.type as string)
-              .toLowerCase()
-              .indexOf(lowerSearchValue as string) !== -1,
-        )
-      : actionIds;
-
-    return (
-      <div
-        key="actionList"
-        data-testid="actionList"
-        {...styling(
-          ['actionList', isWideLayout && 'actionListWide'],
-          isWideLayout,
-        )}
-      >
-        <ActionListHeader
-          styling={styling}
-          onSearch={onSearch}
-          onCommit={onCommit}
-          onSweep={onSweep}
-          hideMainButtons={hideMainButtons}
-          hasSkippedActions={skippedActionIds.length > 0}
-          hasStagedActions={actionIds.length > 1}
-          searchValue={searchValue}
-        />
-        <div
-          data-testid="actionListRows"
-          {...styling('actionListRows')}
-          ref={this.getRef}
-        >
-          {filteredActionIds.map((actionId) => (
-            <ActionListRow
-              key={actionId}
-              styling={styling}
-              actionId={actionId}
-              isInitAction={!actionId}
-              isSelected={
-                (startActionId !== null &&
-                  actionId >= startActionId &&
-                  actionId <= (selectedActionId as number)) ||
-                actionId === selectedActionId
-              }
-              isInFuture={
-                actionIds.indexOf(actionId) > actionIds.indexOf(currentActionId)
-              }
-              onSelect={(e: React.MouseEvent<HTMLDivElement>) =>
-                onSelect(e, actionId)
-              }
-              timestamps={getTimestamps(actions, actionIds, actionId)}
-              action={actions[actionId].action}
-              onToggleClick={() => onToggleAction(actionId)}
-              onJumpClick={() => onJumpToState(actionId)}
-              onCommitClick={() => onCommit()}
-              hideActionButtons={hideActionButtons}
-              isSkipped={skippedActionIds.indexOf(actionId) !== -1}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {children}
+    </div>
+  );
 }

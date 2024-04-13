@@ -203,10 +203,10 @@ export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
       action.type === 'PUSH'
         ? [...state, Math.random()]
         : action.type === 'POP'
-        ? state.slice(0, state.length - 1)
-        : action.type === 'REPLACE'
-        ? [Math.random(), ...state.slice(1)]
-        : state,
+          ? state.slice(0, state.length - 1)
+          : action.type === 'REPLACE'
+            ? [Math.random(), ...state.slice(1)]
+            : state,
     hugeArrays: (state = [], action) =>
       action.type === 'PUSH_HUGE_ARRAY' ? [...state, ...HUGE_ARRAY] : state,
     hugeObjects: (state = [], action) =>

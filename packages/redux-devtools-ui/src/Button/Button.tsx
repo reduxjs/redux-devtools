@@ -1,6 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import PropTypes from 'prop-types';
-import { Base16Theme } from 'base16';
+import type { Base16Theme } from 'react-base16-styling';
 import createStyledComponent from '../utils/createStyledComponent';
 import * as styles from './styles';
 import { commonStyle, tooltipStyle } from './styles/common';
@@ -89,38 +88,6 @@ export default class Button extends Component<ButtonProps> {
       </Wrapper>
     );
   }
-
-  static propTypes = {
-    children: PropTypes.any.isRequired,
-    title: PropTypes.string,
-    tooltipPosition: PropTypes.oneOf([
-      'top',
-      'bottom',
-      'left',
-      'right',
-      'bottom-left',
-      'bottom-right',
-      'top-left',
-      'top-right',
-    ]),
-    onClick: PropTypes.func,
-    type: PropTypes.string,
-    disabled: PropTypes.bool,
-    primary: PropTypes.bool,
-    size: PropTypes.oneOf(['big', 'normal', 'small']),
-    mark: PropTypes.oneOf([
-      false,
-      'base08',
-      'base09',
-      'base0A',
-      'base0B',
-      'base0C',
-      'base0D',
-      'base0E',
-      'base0F',
-    ]),
-    theme: PropTypes.object,
-  };
 
   static defaultProps = {
     tooltipPosition: 'top',

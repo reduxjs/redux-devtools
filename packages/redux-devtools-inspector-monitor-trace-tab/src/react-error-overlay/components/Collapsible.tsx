@@ -6,7 +6,9 @@
  */
 
 import React, { Component, CSSProperties, ReactNode } from 'react';
-import { nicinabox as theme } from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
+
+const theme = base16Themes.nicinabox;
 
 const _collapsibleStyle: CSSProperties = {
   color: theme.base06,

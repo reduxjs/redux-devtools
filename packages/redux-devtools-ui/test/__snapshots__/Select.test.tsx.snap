@@ -13,6 +13,7 @@ exports[`Select renders correctly 1`] = `
     aria-live="polite"
     aria-relevant="additions text"
     class="css-1f43avz-a11yText-A11yText"
+    role="log"
   />
   <div
     class=" css-10g0wlc-control"
@@ -31,6 +32,7 @@ exports[`Select renders correctly 1`] = `
         data-value=""
       >
         <input
+          aria-activedescendant=""
           aria-autocomplete="list"
           aria-describedby="react-select-2-placeholder"
           aria-expanded="false"
@@ -90,8 +92,10 @@ exports[`Select renders with props 1`] = `
     aria-live="polite"
     aria-relevant="additions text"
     class="css-1f43avz-a11yText-A11yText"
+    role="log"
   />
   <div
+    aria-disabled="true"
     class=" css-10g0wlc-control"
   >
     <div
@@ -125,6 +129,7 @@ exports[`Select renders with props 1`] = `
         </div>
       </div>
       <input
+        aria-activedescendant=""
         aria-autocomplete="list"
         aria-expanded="false"
         aria-haspopup="true"
@@ -193,14 +198,23 @@ exports[`Select should select another option 1`] = `
     aria-live="polite"
     aria-relevant="additions text"
     class="css-1f43avz-a11yText-A11yText"
+    role="log"
   >
     <span
       id="aria-selection"
     />
     <span
-      id="aria-context"
+      id="aria-focused"
+    />
+    <span
+      id="aria-results"
     >
-      option Two focused, 1 of 1. 1 result available for search term two. Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.
+      1 result available for search term two.
+    </span>
+    <span
+      id="aria-guidance"
+    >
+      Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.
     </span>
   </span>
   <div
@@ -214,12 +228,12 @@ exports[`Select should select another option 1`] = `
         data-value="two"
       >
         <input
+          aria-activedescendant="react-select-4-option-1"
           aria-autocomplete="list"
           aria-controls="react-select-4-listbox"
           aria-describedby="react-select-4-placeholder"
           aria-expanded="true"
           aria-haspopup="true"
-          aria-owns="react-select-4-listbox"
           autocapitalize="none"
           autocomplete="off"
           autocorrect="off"
@@ -261,15 +275,19 @@ exports[`Select should select another option 1`] = `
   </div>
   <div
     class=" css-sromc4-menu"
-    id="react-select-4-listbox"
   >
     <div
+      aria-multiselectable="false"
       class=" css-hln2r9-MenuList"
+      id="react-select-4-listbox"
+      role="listbox"
     >
       <div
         aria-disabled="false"
+        aria-selected="false"
         class=" css-1t6re7j-option"
         id="react-select-4-option-1"
+        role="option"
         tabindex="-1"
       >
         Two
@@ -292,14 +310,23 @@ exports[`Select shouldn't find any results 1`] = `
     aria-live="polite"
     aria-relevant="additions text"
     class="css-1f43avz-a11yText-A11yText"
+    role="log"
   >
     <span
       id="aria-selection"
     />
     <span
-      id="aria-context"
+      id="aria-focused"
+    />
+    <span
+      id="aria-results"
     >
-       0 results available for search term text. Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.
+      0 results available for search term text.
+    </span>
+    <span
+      id="aria-guidance"
+    >
+      Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.
     </span>
   </span>
   <div
@@ -313,12 +340,12 @@ exports[`Select shouldn't find any results 1`] = `
         data-value="text"
       >
         <input
+          aria-activedescendant=""
           aria-autocomplete="list"
           aria-controls="react-select-5-listbox"
           aria-describedby="react-select-5-placeholder"
           aria-expanded="true"
           aria-haspopup="true"
-          aria-owns="react-select-5-listbox"
           autocapitalize="none"
           autocomplete="off"
           autocorrect="off"
@@ -360,10 +387,12 @@ exports[`Select shouldn't find any results 1`] = `
   </div>
   <div
     class=" css-sromc4-menu"
-    id="react-select-5-listbox"
   >
     <div
+      aria-multiselectable="false"
       class=" css-hln2r9-MenuList"
+      id="react-select-5-listbox"
+      role="listbox"
     >
       <div
         class=" css-v8tq8h-NoOptionsMessage"

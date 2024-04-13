@@ -53,7 +53,7 @@ const monitorSlice = createSlice({
   },
 });
 
-export function reducer<S, A extends Action<unknown>>(
+export function reducer<S, A extends Action<string>>(
   props: RtkQueryMonitorProps<S, A>,
   state: RtkQueryMonitorState | undefined,
   action: AnyAction,

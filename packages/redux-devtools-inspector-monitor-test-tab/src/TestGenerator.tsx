@@ -60,7 +60,7 @@ export function compare<S>(
   ).forEach(generate);
 }
 
-interface Props<S, A extends Action<unknown>>
+interface Props<S, A extends Action<string>>
   extends Omit<TabComponentProps<S, A>, 'monitorState' | 'updateMonitorState'> {
   name?: string;
   isVanilla?: boolean;
@@ -74,10 +74,10 @@ interface Props<S, A extends Action<unknown>>
 
 export default class TestGenerator<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
 > extends (PureComponent || Component)<Props<S, A>> {
   getMethod(action: A) {
-    let type: string = action.type as string;
+    let type = action.type;
     if (type[0] === '┗') type = type.substr(1).trim();
     const args = (action as unknown as { arguments: unknown[] }).arguments
       ? (action as unknown as { arguments: unknown[] }).arguments
@@ -143,11 +143,11 @@ export default class TestGenerator<
       if (
         !isVanilla ||
         /* eslint-disable-next-line no-useless-escape */
-        /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type as string)
+        /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type)
       ) {
         if (isFirst) isFirst = false;
         else r += space;
-        if (!isVanilla || (actions[i].action.type as string)[0] !== '@') {
+        if (!isVanilla || actions[i].action.type[0] !== '@') {
           r +=
             (dispatcher as (locals: DispatcherLocals) => string)({
               action: !isVanilla
@@ -184,10 +184,7 @@ export default class TestGenerator<
           actionName:
             (selectedActionId === null || selectedActionId > 0) &&
             actions[startIdx]
-              ? (actions[startIdx].action.type as string).replace(
-                  /[^a-zA-Z0-9_-]+/,
-                  '',
-                )
+              ? actions[startIdx].action.type.replace(/[^a-zA-Z0-9_-]+/, '')
               : 'should return the initial state',
           initialState: stringify(computedStates[startIdx - 1].state),
           assertions: r,

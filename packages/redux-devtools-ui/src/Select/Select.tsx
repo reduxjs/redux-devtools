@@ -1,5 +1,4 @@
 import React, { PureComponent, Component, ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import ReactSelect, {
   GroupBase,
   Props as ReactSelectProps,
@@ -80,17 +79,6 @@ export class Select<
       />
     );
   }
-
-  static propTypes = {
-    isClearable: PropTypes.bool, // should it be possible to reset value
-    isDisabled: PropTypes.bool, // whether the Select is disabled or not
-    isLoading: PropTypes.bool, // whether the Select is loading externally or not
-    maxMenuHeight: PropTypes.number, // maximum css height for the opened menu of options
-    isMulti: PropTypes.bool, // multi-value input
-    isSearchable: PropTypes.bool, // whether to enable searching feature or not
-    value: PropTypes.any, // initial field value
-    menuPlacement: PropTypes.oneOf(['auto', 'bottom', 'top']), // value to control the opening direction
-  };
 }
 
 export interface ExternalSelectProps<

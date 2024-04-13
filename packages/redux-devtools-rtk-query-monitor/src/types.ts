@@ -2,8 +2,8 @@ import type { LiftedAction, LiftedState } from '@redux-devtools/core';
 import type { createApi, QueryStatus } from '@reduxjs/toolkit/query';
 import type { Action, AnyAction, Dispatch } from '@reduxjs/toolkit';
 import type { ComponentType } from 'react';
-import type { Base16Theme, StylingFunction } from 'react-base16-styling';
-import type * as themes from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import type { QueryComparators } from './utils/comparators';
 import type { QueryFilters } from './utils/filters';
 
@@ -31,11 +31,11 @@ export interface RtkQueryMonitorState {
   readonly selectedPreviewTab: QueryPreviewTabs;
 }
 
-export interface RtkQueryMonitorProps<S, A extends Action<unknown>>
+export interface RtkQueryMonitorProps<S, A extends Action<string>>
   extends LiftedState<S, A, RtkQueryMonitorState> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
-  theme: keyof typeof themes | Base16Theme;
-  invertTheme?: boolean;
+  theme: keyof typeof base16Themes | Base16Theme;
+  invertTheme: boolean;
 }
 
 export type RtkQueryApiState = ReturnType<
@@ -54,9 +54,9 @@ export type RtkQueryApiConfig = RtkQueryApiState['config'];
 
 export type RtkQueryProvided = RtkQueryApiState['provided'];
 
-export interface ExternalProps<S, A extends Action<unknown>> {
+export interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   hideMainButtons?: boolean;
   invertTheme: boolean;
 }
@@ -100,7 +100,6 @@ export interface SelectorsSource<S> {
 
 export interface StyleUtils {
   readonly base16Theme: Base16Theme;
-  readonly styling: StylingFunction;
   readonly invertTheme: boolean;
 }
 

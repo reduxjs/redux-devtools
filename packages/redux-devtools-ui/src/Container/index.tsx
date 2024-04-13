@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { useTheme, ThemeData } from '../utils/theme';
 import { MainContainerWrapper, ContainerWrapper } from './styles';
@@ -50,13 +49,6 @@ const Container: React.FunctionComponent<Props> = ({
       {children}
     </ContainerFromThemeData>
   );
-};
-
-Container.propTypes = {
-  children: PropTypes.node,
-  themeData: PropTypes.any,
-  theme: PropTypes.any,
-  className: PropTypes.string,
 };
 
 export default Container;

@@ -1,12 +1,12 @@
 module.exports = {
-  extends: '../../eslintrc.js.base.json',
+  extends: ['../../eslintrc.js.base.json', 'plugin:storybook/recommended'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
       extends: '../../eslintrc.ts.react.base.json',
       parserOptions: {
         tsconfigRootDir: __dirname,
-        project: ['./tsconfig.json'],
+        project: true,
       },
     },
     {

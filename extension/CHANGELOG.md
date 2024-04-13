@@ -1,5 +1,87 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.9
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-json-tree@0.19.0
+  - @redux-devtools/slider-monitor@5.0.1
+  - @redux-devtools/ui@1.3.2
+
+## 3.1.8
+
+### Patch Changes
+
+- 191d419: Convert d3 packages to ESM
+- Updated dependencies [191d419]
+  - @redux-devtools/app@6.0.1
+
+## 3.1.7
+
+### Patch Changes
+
+- Updated dependencies [5cfe3e5]
+- Updated dependencies [decc035]
+  - @redux-devtools/app@6.0.0
+  - @redux-devtools/slider-monitor@5.0.0
+  - @redux-devtools/core@4.0.0
+  - @redux-devtools/utils@3.0.0
+
+## 3.1.6
+
+### Patch Changes
+
+- Updated dependencies [158ba2c]
+  - @redux-devtools/app@5.0.0
+
+## 3.1.5
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+- Updated dependencies [65205f90]
+  - @redux-devtools/app@4.0.1
+  - @redux-devtools/core@3.13.2
+
+## 3.1.4
+
+### Patch Changes
+
+- Updated dependencies [e57bcb39]
+  - @redux-devtools/app@4.0.0
+
+## 3.1.3
+
+### Patch Changes
+
+- bca76009: Fix missing CSS for code editor
+
+## 3.1.2
+
+### Patch Changes
+
+- 64ed81b0: Fix extension in Firefox and Chrome Incognito
+
+## 3.1.1
+
+### Patch Changes
+
+- d18525b5: Increase min-width of popup
+- Updated dependencies [57751ff9]
+  - @redux-devtools/app@3.0.0
+
+## 3.1.0
+
+### Minor Changes
+
+- d54adb76: Option to sort State Tree keys alphabetically
+  Option to disable collapsing of object keys
+
+### Patch Changes
+
+- @redux-devtools/app@2.2.2
+
 ## 3.0.19
 
 ### Patch Changes

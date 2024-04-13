@@ -84,7 +84,7 @@ export interface NAAction {
   readonly id: string | number;
 }
 
-interface InitMessage<S, A extends Action<unknown>> {
+interface InitMessage<S, A extends Action<string>> {
   readonly type: 'INIT';
   readonly payload: string;
   instanceId: string;
@@ -137,7 +137,7 @@ interface SerializedActionMessage {
   readonly nextActionId: number;
 }
 
-interface SerializedStateMessage<S, A extends Action<unknown>> {
+interface SerializedStateMessage<S, A extends Action<string>> {
   readonly type: 'STATE';
   readonly payload: Omit<
     LiftedState<S, A, unknown>,
@@ -151,7 +151,7 @@ interface SerializedStateMessage<S, A extends Action<unknown>> {
   readonly committedState: boolean;
 }
 
-type UpdateStateRequest<S, A extends Action<unknown>> =
+type UpdateStateRequest<S, A extends Action<string>> =
   | InitMessage<S, A>
   | LiftedMessage
   | SerializedPartialStateMessage
@@ -163,7 +163,7 @@ export interface EmptyUpdateStateAction {
   readonly type: typeof UPDATE_STATE;
 }
 
-interface UpdateStateAction<S, A extends Action<unknown>> {
+interface UpdateStateAction<S, A extends Action<string>> {
   readonly type: typeof UPDATE_STATE;
   request: UpdateStateRequest<S, A>;
   readonly id: string | number;
@@ -177,7 +177,7 @@ export type TabMessage =
   | ImportAction
   | ActionAction
   | ExportAction;
-export type PanelMessage<S, A extends Action<unknown>> =
+export type PanelMessage<S, A extends Action<string>> =
   | NAAction
   | ErrorMessage
   | UpdateStateAction<S, A>
@@ -192,7 +192,7 @@ type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: (message: TabMessage) => void;
 };
 type PanelPort = Omit<chrome.runtime.Port, 'postMessage'> & {
-  postMessage: <S, A extends Action<unknown>>(
+  postMessage: <S, A extends Action<string>>(
     message: PanelMessage<S, A>,
   ) => void;
 };
@@ -214,7 +214,7 @@ const connections: {
 const chunks: {
   [instanceId: string]: PageScriptToContentScriptMessageForwardedToMonitors<
     unknown,
-    Action<unknown>
+    Action<string>
   >;
 } = {};
 let monitors = 0;
@@ -223,13 +223,13 @@ let isMonitored = false;
 const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
   sender.tab ? sender.tab.id! : name || sender.id!;
 
-type MonitorAction<S, A extends Action<unknown>> =
+type MonitorAction<S, A extends Action<string>> =
   | NAAction
   | ErrorMessage
   | UpdateStateAction<S, A>
   | SetPersistAction;
 
-function toMonitors<S, A extends Action<unknown>>(
+function toMonitors<S, A extends Action<string>>(
   action: MonitorAction<S, A>,
   tabId?: string | number,
   verbose?: boolean,
@@ -387,14 +387,14 @@ export type SingleMessage =
   | OpenOptionsMessage
   | GetOptionsMessage;
 
-type BackgroundStoreMessage<S, A extends Action<unknown>> =
+type BackgroundStoreMessage<S, A extends Action<string>> =
   | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
   | SplitMessage
   | SingleMessage;
 type BackgroundStoreResponse = { readonly options: Options };
 
 // Receive messages from content scripts
-function messaging<S, A extends Action<unknown>>(
+function messaging<S, A extends Action<string>>(
   request: BackgroundStoreMessage<S, A>,
   sender: chrome.runtime.MessageSender,
   sendResponse?: (response?: BackgroundStoreResponse) => void,
@@ -508,7 +508,7 @@ function disconnect(
   };
 }
 
-function onConnect<S, A extends Action<unknown>>(port: chrome.runtime.Port) {
+function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
   let id: number | string;
   let listener;
 

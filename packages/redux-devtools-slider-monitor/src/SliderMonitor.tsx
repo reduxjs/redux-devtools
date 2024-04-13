@@ -1,8 +1,7 @@
 import React, { Component, PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Action, Dispatch } from 'redux';
-import * as themes from 'redux-devtools-themes';
-import { Base16Theme } from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import {
   ActionCreators,
   LiftedAction,
@@ -19,33 +18,32 @@ import {
 import reducer from './reducers';
 import SliderButton from './SliderButton';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { reset, jumpToAction } = ActionCreators;
 
-interface ExternalProps<S, A extends Action<unknown>> {
+interface ExternalProps<S, A extends Action<string>> {
   // eslint-disable-next-line @typescript-eslint/ban-types
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   keyboardEnabled: boolean;
   hideResetButton?: boolean;
 }
 
 interface DefaultProps {
   select: (state: unknown) => unknown;
-  theme: keyof typeof themes;
+  theme: keyof typeof base16Themes;
   preserveScrollTop: boolean;
   keyboardEnabled: boolean;
 }
 
-interface SliderMonitorProps<S, A extends Action<unknown>> // eslint-disable-next-line @typescript-eslint/ban-types
+interface SliderMonitorProps<S, A extends Action<string>> // eslint-disable-next-line @typescript-eslint/ban-types
   extends LiftedState<S, A, {}> {
   // eslint-disable-next-line @typescript-eslint/ban-types
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   keyboardEnabled: boolean;
   hideResetButton?: boolean;
 }
@@ -55,26 +53,9 @@ interface State {
   replaySpeed: string;
 }
 
-class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
+class SliderMonitor<S, A extends Action<string>> extends (PureComponent ||
   Component)<SliderMonitorProps<S, A>, State> {
   static update = reducer;
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    computedStates: PropTypes.array,
-    stagedActionIds: PropTypes.array,
-    actionsById: PropTypes.object,
-    currentStateIndex: PropTypes.number,
-    monitorState: PropTypes.shape({
-      initialScrollTop: PropTypes.number,
-    }),
-    preserveScrollTop: PropTypes.bool,
-    // stagedActions: PropTypes.array,
-    select: PropTypes.func.isRequired,
-    hideResetButton: PropTypes.bool,
-    theme: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    keyboardEnabled: PropTypes.bool,
-  };
 
   static defaultProps = {
     select: (state: unknown) => state,
@@ -103,10 +84,10 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
   setUpTheme = (): Base16Theme => {
     let theme;
     if (typeof this.props.theme === 'string') {
-      if (typeof themes[this.props.theme] !== 'undefined') {
-        theme = themes[this.props.theme];
+      if (typeof base16Themes[this.props.theme] !== 'undefined') {
+        theme = base16Themes[this.props.theme];
       } else {
-        theme = themes.nicinabox;
+        theme = base16Themes.nicinabox;
       }
     } else {
       theme = this.props.theme;
@@ -333,7 +314,7 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
     let actionType = actionsById[actionId].action.type;
     if (actionType === undefined) actionType = '<UNDEFINED>';
     else if (actionType === null) actionType = '<NULL>';
-    else actionType = (actionType as string).toString() || '<EMPTY>';
+    else actionType = actionType.toString() || '<EMPTY>';
 
     const onPlayClick =
       replaySpeed === 'Live' ? this.startRealtimeReplay : this.startReplay;
@@ -352,7 +333,7 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
       <Toolbar noBorder compact fullHeight theme={theme}>
         {playPause}
         <Slider
-          label={actionType as string}
+          label={actionType}
           sublabel={`(${actionId})`}
           min={0}
           max={max}
@@ -391,13 +372,13 @@ class SliderMonitor<S, A extends Action<unknown>> extends (PureComponent ||
 }
 
 export default SliderMonitor as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     // eslint-disable-next-line @typescript-eslint/ban-types
     state: {} | undefined,
-    action: Action<unknown>,
+    action: Action<string>,
     // eslint-disable-next-line @typescript-eslint/ban-types
   ): {};
   defaultProps: DefaultProps;
