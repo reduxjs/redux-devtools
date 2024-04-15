@@ -1,10 +1,14 @@
 import difference from 'lodash/difference';
 import omit from 'lodash/omit';
-import { stringifyJSON } from './stringifyJSON';
-import { SET_STATE } from '../constants/actionTypes';
-import { InstancesState, State } from '../reducers/instances';
+import {
+  DispatchAction,
+  InstancesState,
+  SET_STATE,
+  State,
+  stringifyJSON,
+} from '@redux-devtools/app-core';
 import { Dispatch, MiddlewareAPI } from 'redux';
-import { DispatchAction, StoreActionWithoutLiftedAction } from '../actions';
+import { StoreActionWithoutLiftedAction } from '../actions';
 
 export function sweep(state: State): State {
   return {

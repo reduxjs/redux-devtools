@@ -1,28 +1,26 @@
+import {
+  DispatchAction,
+  GET_REPORT_ERROR,
+  GET_REPORT_REQUEST,
+  GET_REPORT_SUCCESS,
+  CLEAR_INSTANCES,
+  getActiveInstance,
+  importState,
+  LIFTED_ACTION,
+  LiftedActionAction,
+  REMOVE_INSTANCE,
+  Request,
+  showNotification,
+  UPDATE_REPORTS,
+  UPDATE_STATE,
+  UpdateReportsRequest,
+} from '@redux-devtools/app-core';
 import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
 import { stringify } from 'jsan';
 import { Dispatch, MiddlewareAPI } from 'redux';
 import * as actions from '../constants/socketActionTypes';
-import { getActiveInstance } from '../reducers/instances';
-import {
-  UPDATE_STATE,
-  REMOVE_INSTANCE,
-  LIFTED_ACTION,
-  UPDATE_REPORTS,
-  GET_REPORT_REQUEST,
-  GET_REPORT_ERROR,
-  GET_REPORT_SUCCESS,
-} from '../constants/actionTypes';
-import {
-  showNotification,
-  importState,
-  StoreAction,
-  EmitAction,
-  LiftedActionAction,
-  Request,
-  DispatchAction,
-  UpdateReportsRequest,
-} from '../actions';
 import { nonReduxDispatch } from '../utils/monitorActions';
+import { EmitAction, StoreAction } from '../actions';
 import { StoreState } from '../reducers';
 
 let socket: AGClientSocket;
@@ -178,6 +176,7 @@ function handleConnection() {
   void (async () => {
     for await (const data of socket.listener('disconnect')) {
       store.dispatch({ type: actions.DISCONNECTED, code: data.code });
+      store.dispatch({ type: CLEAR_INSTANCES });
     }
   })();
 
