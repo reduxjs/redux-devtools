@@ -18,8 +18,8 @@ importers:
         specifier: ^2.27.5
         version: 2.27.5
       '@nrwl/nx-cloud':
-        specifier: ^18.0.1
-        version: 18.0.1
+        specifier: ^19.0.0
+        version: 19.0.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.12.0
         version: 7.12.0(@typescript-eslint/parser@7.12.0)(eslint@8.57.0)(typescript@5.4.5)
@@ -7549,10 +7549,10 @@ packages:
     dev: false
     optional: true
 
-  /@nrwl/nx-cloud@18.0.1:
-    resolution: {integrity: sha512-uYVxoOXf0xlWJX8O5GBWajmIeL0PfIGvfqtvVNVnl7C6FiZRbmKEhXkWxEDekI6Jq+mI1G86o7d5YsIzq6e36A==}
+  /@nrwl/nx-cloud@19.0.0:
+    resolution: {integrity: sha512-3WuXq3KKXwKnbjOkYK0OXosjD02LIjC3kEkyMIbaE36O9dMp3k/sa4ZtDVC3tAoIrj17VLVmjKfoDYbED1rapw==}
     dependencies:
-      nx-cloud: 18.0.1
+      nx-cloud: 19.0.0
     transitivePeerDependencies:
       - debug
     dev: true
@@ -11026,16 +11026,6 @@ packages:
   /axe-core@4.7.0:
     resolution: {integrity: sha512-M0JtH+hlOL5pLQwHOLNYZaXuhqmvS8oExsqB1SBYgA4Dk7u/xx+YdGHXaK5pyUfed5mYXdlYiphWq3G8cRi5JQ==}
     engines: {node: '>=4'}
-    dev: true
-
-  /axios@1.1.3:
-    resolution: {integrity: sha512-00tXVRwKx/FZr/IDVFt4C+f9FYairX517WoGCL6dpOntqLkZofjhu43F/Xl44UOpqa+9sLFDrG/XAnFsUYgkDA==}
-    dependencies:
-      follow-redirects: 1.15.6
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
     dev: true
 
   /axios@1.7.2:
@@ -17115,12 +17105,12 @@ packages:
     resolution: {integrity: sha512-QK0sRs7MKv0tKe1+5uZIQk/C8XGza4DAnztJG8iD+TpJIORARrCxczA738awHrZoHeTjSSoHqao2teO0dC/gFQ==}
     dev: true
 
-  /nx-cloud@18.0.1:
-    resolution: {integrity: sha512-nxJfz0ZmW+DKSr8evmVVm6t1XcLn9WHR5I8kiE2BFNkLVwC+nx+MimjJ53opfHOepMqQiGJAdstZ5Ks630bJgg==}
+  /nx-cloud@19.0.0:
+    resolution: {integrity: sha512-Aq1vQD8yBIdb5jLVpzsqmu8yDmMvRVdjaM30Pp1hghhlSvorGBlpTwY+TccZJv/hBtVO+SpXK8SnnegRZMrxdw==}
     hasBin: true
     dependencies:
-      '@nrwl/nx-cloud': 18.0.1
-      axios: 1.1.3
+      '@nrwl/nx-cloud': 19.0.0
+      axios: 1.7.2
       chalk: 4.1.2
       dotenv: 10.0.0
       fs-extra: 11.2.0
