@@ -52,7 +52,7 @@ describe('DevTools panel for Electron', function () {
         if (attempts === 0) {
           return callback('Redux panel not found');
         }
-        if (EUI.inspectorView) {
+        if (EUI.InspectorView) {
           const instance = EUI.InspectorView.InspectorView.instance();
           const tabs = instance.tabbedPane.tabs;
           const idList = tabs.map((tab) => tab.id);
