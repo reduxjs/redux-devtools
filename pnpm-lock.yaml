@@ -1034,8 +1034,8 @@ importers:
         specifier: ^5.0.7
         version: 5.0.7
       style-loader:
-        specifier: ^3.3.4
-        version: 3.3.4(webpack@5.91.0)
+        specifier: ^4.0.0
+        version: 4.0.0(webpack@5.91.0)
       styled-components:
         specifier: ^5.3.11
         version: 5.3.11(@babel/core@7.24.7)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)
@@ -1779,8 +1779,8 @@ importers:
         specifier: ^5.6.0
         version: 5.6.0(webpack@5.91.0)
       style-loader:
-        specifier: ^3.3.4
-        version: 3.3.4(webpack@5.91.0)
+        specifier: ^4.0.0
+        version: 4.0.0(webpack@5.91.0)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.14.2)(typescript@5.4.5)
@@ -2524,8 +2524,8 @@ importers:
         specifier: ^5.6.0
         version: 5.6.0(webpack@5.91.0)
       style-loader:
-        specifier: ^3.3.4
-        version: 3.3.4(webpack@5.91.0)
+        specifier: ^4.0.0
+        version: 4.0.0(webpack@5.91.0)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.14.2)(typescript@5.4.5)
@@ -2785,8 +2785,8 @@ importers:
         specifier: ^5.6.0
         version: 5.6.0(webpack@5.91.0)
       style-loader:
-        specifier: ^3.3.4
-        version: 3.3.4(webpack@5.91.0)
+        specifier: ^4.0.0
+        version: 4.0.0(webpack@5.91.0)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.14.2)(typescript@5.4.5)
@@ -3257,8 +3257,8 @@ importers:
         specifier: ^5.6.0
         version: 5.6.0(webpack@5.91.0)
       style-loader:
-        specifier: ^3.3.4
-        version: 3.3.4(webpack@5.91.0)
+        specifier: ^4.0.0
+        version: 4.0.0(webpack@5.91.0)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.14.2)(typescript@5.4.5)
@@ -19616,6 +19616,15 @@ packages:
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
+    dependencies:
+      webpack: 5.91.0(@swc/core@1.5.7)(esbuild@0.20.2)
+    dev: true
+
+  /style-loader@4.0.0(webpack@5.91.0):
+    resolution: {integrity: sha512-1V4WqhhZZgjVAVJyt7TdDPZoPBPNHbekX4fWnCJL1yQukhCeZhJySUL+gL9y6sNdN95uEOS83Y55SqHcP7MzLA==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      webpack: ^5.27.0
     dependencies:
       webpack: 5.91.0(esbuild@0.21.5)(webpack-cli@5.1.4)
     dev: true
