@@ -52,13 +52,13 @@ describe('DevTools panel for Electron', function () {
         if (attempts === 0) {
           return callback('Redux panel not found');
         }
-        if (UI.inspectorView) {
-          const tabs = UI.inspectorView.tabbedPane.tabs;
+        if (EUI.inspectorView) {
+          const tabs = EUI.inspectorView.tabbedPane.tabs;
           const idList = tabs.map((tab) => tab.id);
           const reduxPanelId =
             'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux';
           if (idList.indexOf(reduxPanelId) !== -1) {
-            UI.inspectorView.showPanel(reduxPanelId);
+            EUI.inspectorView.showPanel(reduxPanelId);
             return callback(reduxPanelId);
           }
         }
