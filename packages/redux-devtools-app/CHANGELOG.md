@@ -9,7 +9,7 @@
 ### Patch Changes
 
 - Updated dependencies [96ac1f2]
-  - @redux-devtools/app-core@2.0.0
+  - @redux-devtools/app-core@1.0.0
 
 ## 6.0.1
 
