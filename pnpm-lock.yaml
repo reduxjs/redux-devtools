@@ -163,14 +163,14 @@ importers:
         specifier: ^5.1.34
         version: 5.1.34
       chromedriver:
-        specifier: ^124.0.4
-        version: 124.0.4
+        specifier: ^126.0.0
+        version: 126.0.0
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
       electron:
-        specifier: ^30.1.0
-        version: 30.1.0
+        specifier: ^31.0.0
+        version: 31.0.0
       esbuild:
         specifier: ^0.21.4
         version: 0.21.5
@@ -1273,8 +1273,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       electron:
-        specifier: ^30.1.0
-        version: 30.1.0
+        specifier: ^31.0.0
+        version: 31.0.0
       express:
         specifier: ^4.19.2
         version: 4.19.2
@@ -11892,8 +11892,8 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
-  /chromedriver@124.0.4:
-    resolution: {integrity: sha512-ZaO0EjwMMyQGrJsVAMupMO6iyhB47rM5fDEpl2HH0+iAiOVXxJ7UAEg1XmhS6pCfeNtMmNAZJSf2Fhlp4wp9Og==}
+  /chromedriver@126.0.0:
+    resolution: {integrity: sha512-rzwKp1okI9RmFtSyIzkk9+GTlTK62ai5P3/AS2qMwl86+gw84d2S/IyLkQMm5cqieFs4dgDAuqqPu0AqQACScg==}
     engines: {node: '>=18'}
     hasBin: true
     requiresBuild: true
@@ -13262,8 +13262,8 @@ packages:
   /electron-to-chromium@1.4.796:
     resolution: {integrity: sha512-NglN/xprcM+SHD2XCli4oC6bWe6kHoytcyLKCWXmRL854F0qhPhaYgUswUsglnPxYaNQIg2uMY4BvaomIf3kLA==}
 
-  /electron@30.1.0:
-    resolution: {integrity: sha512-9O8m7kinjwMH5Df0hpXbwUaqI6pk3aJm1sKQUkQGCF7NDbNkGhu2BXgqaicPU6oe26zQPc5vtwWnHmiKlh1hYA==}
+  /electron@31.0.0:
+    resolution: {integrity: sha512-yJMhwu5NVqor7h5mt65uKtBsjSAD7NiRwNCigK8xAlJMaP0X2FKipEzQocOzusy7E0dny4gkTgOTATy+ucDtjw==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true
