@@ -1,5 +1,16 @@
 # Change Log
 
+## 6.1.0
+
+### Minor Changes
+
+- 96ac1f2: Move the logic from @redux-devtools/app into @redux-devtools/app-core
+
+### Patch Changes
+
+- Updated dependencies [96ac1f2]
+  - @redux-devtools/app-core@2.0.0
+
 ## 6.0.1
 
 ### Patch Changes
