@@ -1,4 +1,3 @@
-import '@babel/polyfill';
 import { createStore, compose } from 'redux';
 import { insertScript, listenMessage } from '../../utils/inject';
 import '../../../src/pageScript';
