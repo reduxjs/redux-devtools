@@ -41,31 +41,31 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.24.7",
+    "@babel/runtime": "^7.24.8",
     "parse-key": "^0.2.1",
     "react-dock": "^0.7.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.7",
-    "@babel/core": "^7.24.7",
-    "@babel/eslint-parser": "^7.24.7",
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.9",
+    "@babel/eslint-parser": "^7.24.8",
     "@babel/plugin-transform-runtime": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-env": "^7.24.8",
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
     "@redux-devtools/core": "^4.0.0",
     "@types/parse-key": "^0.2.2",
     "@types/react": "^18.3.3",
-    "@typescript-eslint/eslint-plugin": "^7.13.0",
-    "@typescript-eslint/parser": "^7.13.0",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react": "^7.34.4",
     "eslint-plugin-react-hooks": "^4.6.2",
     "react": "^18.3.1",
     "redux": "^4.2.1",
-    "rimraf": "^5.0.7",
-    "typescript": "~5.5.2"
+    "rimraf": "^5.0.9",
+    "typescript": "~5.5.3"
   },
   "peerDependencies": {
     "@redux-devtools/core": "^4.0.0",
