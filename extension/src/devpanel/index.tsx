@@ -23,9 +23,10 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 const position = location.hash;
 const messageStyle: CSSProperties = {
-  padding: '20px',
+  paddingTop: '20px',
   width: '100%',
   textAlign: 'center',
+  boxSizing: 'border-box',
 };
 
 let rendered: boolean | undefined;
@@ -72,7 +73,12 @@ function renderNA() {
         .
       </div>
     );
-    if (isChrome) {
+    if (
+      isChrome &&
+      chrome &&
+      chrome.devtools &&
+      chrome.devtools.inspectedWindow
+    ) {
       chrome.devtools.inspectedWindow.getResources((resources) => {
         if (resources[0].url.substr(0, 4) === 'file') {
           message = (
@@ -101,17 +107,20 @@ function renderNA() {
 
 let splitMessage: SplitUpdateStateRequest<unknown, Action<string>>;
 
-function init(id: number) {
+function init() {
   renderNA();
-  bgConnection = chrome.runtime.connect({
-    name: id ? id.toString() : undefined,
-  });
+  let name = 'monitor';
+  if (chrome && chrome.devtools && chrome.devtools.inspectedWindow) {
+    name += chrome.devtools.inspectedWindow.tabId;
+  }
+  bgConnection = chrome.runtime.connect({ name });
   bgConnection.onMessage.addListener(
     <S, A extends Action<string>>(
       message: PanelMessageWithSplitAction<S, A>,
     ) => {
       if (message.type === 'NA') {
-        if (message.id === id) renderNA();
+        // TODO Double-check this now that the name is different
+        if (message.id === name) renderNA();
         else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });
       } else {
         if (!rendered) renderDevTools();
@@ -157,4 +166,7 @@ function init(id: number) {
   );
 }
 
-init(chrome.devtools.inspectedWindow.tabId);
+if (position === '#popup') document.body.style.minWidth = '760px';
+if (position !== '#popup') document.body.style.minHeight = '100%';
+
+init();

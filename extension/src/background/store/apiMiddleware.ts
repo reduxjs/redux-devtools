@@ -261,22 +261,18 @@ type MonitorAction<S, A extends Action<string>> =
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
 const maxChromeMsgSize = 32 * 1024 * 1024;
 
+// TODO Clean up args
 function toMonitors<S, A extends Action<string>>(
   action: MonitorAction<S, A>,
   tabId?: string | number,
   verbose?: boolean,
 ) {
-  for (const monitorPort of Object.values(connections.monitor)) {
-    monitorPort.postMessage(
-      verbose || action.type === 'ERROR' || action.type === SET_PERSIST
-        ? action
-        : { type: UPDATE_STATE },
-    );
-  }
-
-  for (const panelPort of Object.values(connections.panel)) {
+  for (const port of [
+    ...Object.values(connections.monitor),
+    ...Object.values(connections.panel),
+  ]) {
     try {
-      panelPort.postMessage(action);
+      port.postMessage(action);
     } catch (err) {
       if (
         action.type !== UPDATE_STATE ||
@@ -307,11 +303,11 @@ function toMonitors<S, A extends Action<string>>(
           value;
       }
 
-      panelPort.postMessage({ ...action, request: splitMessageStart });
+      port.postMessage({ ...action, request: splitMessageStart });
 
       for (let i = 0; i < toSplit.length; i++) {
         for (let j = 0; j < toSplit[i][1].length; j += maxChromeMsgSize) {
-          panelPort.postMessage({
+          port.postMessage({
             ...action,
             request: {
               split: 'chunk',
@@ -324,7 +320,7 @@ function toMonitors<S, A extends Action<string>>(
         }
       }
 
-      panelPort.postMessage({ ...action, request: { split: 'end' } });
+      port.postMessage({ ...action, request: { split: 'end' } });
     }
   }
 }
