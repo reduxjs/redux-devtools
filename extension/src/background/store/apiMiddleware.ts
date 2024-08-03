@@ -229,17 +229,14 @@ type MonitorAction<S, A extends Action<string>> =
   | UpdateStateAction<S, A>
   | SetPersistAction;
 
+// TODO Clean up args
 function toMonitors<S, A extends Action<string>>(
   action: MonitorAction<S, A>,
   tabId?: string | number,
   verbose?: boolean,
 ) {
   Object.keys(connections.monitor).forEach((id) => {
-    connections.monitor[id].postMessage(
-      verbose || action.type === 'ERROR' || action.type === SET_PERSIST
-        ? action
-        : { type: UPDATE_STATE },
-    );
+    connections.monitor[id].postMessage(action);
   });
   Object.keys(connections.panel).forEach((id) => {
     connections.panel[id].postMessage(action);
