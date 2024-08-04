@@ -3,12 +3,21 @@ import React, { CSSProperties, ReactNode } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Persistor } from 'redux-persist';
-import { REMOVE_INSTANCE, StoreAction } from '@redux-devtools/app';
+import {
+  REMOVE_INSTANCE,
+  StoreAction,
+  UPDATE_STATE,
+} from '@redux-devtools/app';
 import App from '../app/App';
 import configureStore from './store/panelStore';
 
 import { Action, Store } from 'redux';
-import type { PanelMessage } from '../background/store/apiMiddleware';
+import {
+  PanelMessageWithoutNA,
+  PanelMessageWithSplitAction,
+  SplitUpdateStateRequest,
+  UpdateStateRequest,
+} from '../background/store/apiMiddleware';
 import type { StoreStateWithoutSocket } from './store/panelReducer';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -90,19 +99,59 @@ function renderNA() {
   }, 3500);
 }
 
+let splitMessage: SplitUpdateStateRequest<unknown, Action<string>>;
+
 function init(id: number) {
   renderNA();
   bgConnection = chrome.runtime.connect({
     name: id ? id.toString() : undefined,
   });
   bgConnection.onMessage.addListener(
-    <S, A extends Action<string>>(message: PanelMessage<S, A>) => {
+    <S, A extends Action<string>>(
+      message: PanelMessageWithSplitAction<S, A>,
+    ) => {
       if (message.type === 'NA') {
         if (message.id === id) renderNA();
         else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });
       } else {
         if (!rendered) renderDevTools();
-        store!.dispatch(message);
+
+        if (
+          message.type === UPDATE_STATE &&
+          (message.request as SplitUpdateStateRequest<S, A>).split
+        ) {
+          const request = message.request as SplitUpdateStateRequest<S, A>;
+
+          if (request.split === 'start') {
+            splitMessage = request;
+            return;
+          }
+
+          if (request.split === 'chunk') {
+            if ((splitMessage as Record<string, unknown>)[request.chunk[0]]) {
+              (splitMessage as Record<string, unknown>)[request.chunk[0]] +=
+                request.chunk[1];
+            } else {
+              (splitMessage as Record<string, unknown>)[request.chunk[0]] =
+                request.chunk[1];
+            }
+            return;
+          }
+
+          if (request.split === 'end') {
+            store!.dispatch({
+              ...message,
+              request: splitMessage as UpdateStateRequest<S, A>,
+            });
+            return;
+          }
+
+          throw new Error(
+            `Unable to process split message with type: ${(request as any).split}`,
+          );
+        } else {
+          store!.dispatch(message as PanelMessageWithoutNA<S, A>);
+        }
       }
     },
   );

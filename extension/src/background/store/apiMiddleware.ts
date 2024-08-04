@@ -151,7 +151,7 @@ interface SerializedStateMessage<S, A extends Action<string>> {
   readonly committedState: boolean;
 }
 
-type UpdateStateRequest<S, A extends Action<string>> =
+export type UpdateStateRequest<S, A extends Action<string>> =
   | InitMessage<S, A>
   | LiftedMessage
   | SerializedPartialStateMessage
@@ -169,6 +169,30 @@ interface UpdateStateAction<S, A extends Action<string>> {
   readonly id: string | number;
 }
 
+type SplitUpdateStateRequestStart<S, A extends Action<string>> = {
+  split: 'start';
+} & Partial<UpdateStateRequest<S, A>>;
+
+interface SplitUpdateStateRequestChunk {
+  readonly split: 'chunk';
+  readonly chunk: [string, string];
+}
+
+interface SplitUpdateStateRequestEnd {
+  readonly split: 'end';
+}
+
+export type SplitUpdateStateRequest<S, A extends Action<string>> =
+  | SplitUpdateStateRequestStart<S, A>
+  | SplitUpdateStateRequestChunk
+  | SplitUpdateStateRequestEnd;
+
+interface SplitUpdateStateAction<S, A extends Action<string>> {
+  readonly type: typeof UPDATE_STATE;
+  request: SplitUpdateStateRequest<S, A>;
+  readonly id: string | number;
+}
+
 export type TabMessage =
   | StartAction
   | StopAction
@@ -177,11 +201,16 @@ export type TabMessage =
   | ImportAction
   | ActionAction
   | ExportAction;
-export type PanelMessage<S, A extends Action<string>> =
-  | NAAction
+export type PanelMessageWithoutNA<S, A extends Action<string>> =
   | ErrorMessage
   | UpdateStateAction<S, A>
   | SetPersistAction;
+export type PanelMessage<S, A extends Action<string>> =
+  | PanelMessageWithoutNA<S, A>
+  | NAAction;
+export type PanelMessageWithSplitAction<S, A extends Action<string>> =
+  | PanelMessage<S, A>
+  | SplitUpdateStateAction<S, A>;
 export type MonitorMessage =
   | NAAction
   | ErrorMessage
@@ -193,7 +222,7 @@ type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
 };
 type PanelPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: <S, A extends Action<string>>(
-    message: PanelMessage<S, A>,
+    message: PanelMessageWithSplitAction<S, A>,
   ) => void;
 };
 type MonitorPort = Omit<chrome.runtime.Port, 'postMessage'> & {
@@ -229,21 +258,75 @@ type MonitorAction<S, A extends Action<string>> =
   | UpdateStateAction<S, A>
   | SetPersistAction;
 
+// Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
+const maxChromeMsgSize = 32 * 1024 * 1024;
+
 function toMonitors<S, A extends Action<string>>(
   action: MonitorAction<S, A>,
   tabId?: string | number,
   verbose?: boolean,
 ) {
-  Object.keys(connections.monitor).forEach((id) => {
-    connections.monitor[id].postMessage(
+  for (const monitorPort of Object.values(connections.monitor)) {
+    monitorPort.postMessage(
       verbose || action.type === 'ERROR' || action.type === SET_PERSIST
         ? action
         : { type: UPDATE_STATE },
     );
-  });
-  Object.keys(connections.panel).forEach((id) => {
-    connections.panel[id].postMessage(action);
-  });
+  }
+
+  for (const panelPort of Object.values(connections.panel)) {
+    try {
+      panelPort.postMessage(action);
+    } catch (err) {
+      if (
+        action.type !== UPDATE_STATE ||
+        err == null ||
+        (err as Error).message !==
+          'Message length exceeded maximum allowed length.'
+      ) {
+        throw err;
+      }
+
+      const splitMessageStart: SplitUpdateStateRequestStart<S, A> = {
+        split: 'start',
+      };
+      const toSplit: [string, string][] = [];
+      let size = 0;
+      for (const [key, value] of Object.entries(
+        action.request as unknown as Record<string, unknown>,
+      )) {
+        if (typeof value === 'string') {
+          size += value.length;
+          if (size > maxChromeMsgSize) {
+            toSplit.push([key, value]);
+            continue;
+          }
+        }
+
+        (splitMessageStart as any)[key as keyof typeof splitMessageStart] =
+          value;
+      }
+
+      panelPort.postMessage({ ...action, request: splitMessageStart });
+
+      for (let i = 0; i < toSplit.length; i++) {
+        for (let j = 0; j < toSplit[i][1].length; j += maxChromeMsgSize) {
+          panelPort.postMessage({
+            ...action,
+            request: {
+              split: 'chunk',
+              chunk: [
+                toSplit[i][0],
+                toSplit[i][1].substring(j, j + maxChromeMsgSize),
+              ],
+            },
+          });
+        }
+      }
+
+      panelPort.postMessage({ ...action, request: { split: 'end' } });
+    }
+  }
 }
 
 interface ImportMessage {
