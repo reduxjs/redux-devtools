@@ -164,7 +164,7 @@ class LogMonitor<S, A extends Action<string>> extends PureComponent<
       const { skippedActionIds } = this.props;
       const start = Math.min(consecutiveToggleStartId, id);
       const end = Math.max(consecutiveToggleStartId, id);
-      const active = skippedActionIds.indexOf(consecutiveToggleStartId) > -1;
+      const active = skippedActionIds.includes(consecutiveToggleStartId);
       this.props.dispatch(setActionsActive(start, end + 1, active));
       this.props.dispatch(startConsecutiveToggle(null));
     } else if (id > 0) {
