@@ -151,7 +151,7 @@ interface SerializedStateMessage<S, A extends Action<string>> {
   readonly committedState: boolean;
 }
 
-type UpdateStateRequest<S, A extends Action<string>> =
+export type UpdateStateRequest<S, A extends Action<string>> =
   | InitMessage<S, A>
   | LiftedMessage
   | SerializedPartialStateMessage
@@ -169,6 +169,30 @@ interface UpdateStateAction<S, A extends Action<string>> {
   readonly id: string | number;
 }
 
+type SplitUpdateStateRequestStart<S, A extends Action<string>> = {
+  split: 'start';
+} & Partial<UpdateStateRequest<S, A>>;
+
+interface SplitUpdateStateRequestChunk {
+  readonly split: 'chunk';
+  readonly chunk: [string, string];
+}
+
+interface SplitUpdateStateRequestEnd {
+  readonly split: 'end';
+}
+
+export type SplitUpdateStateRequest<S, A extends Action<string>> =
+  | SplitUpdateStateRequestStart<S, A>
+  | SplitUpdateStateRequestChunk
+  | SplitUpdateStateRequestEnd;
+
+interface SplitUpdateStateAction<S, A extends Action<string>> {
+  readonly type: typeof UPDATE_STATE;
+  request: SplitUpdateStateRequest<S, A>;
+  readonly id: string | number;
+}
+
 export type TabMessage =
   | StartAction
   | StopAction
@@ -177,11 +201,16 @@ export type TabMessage =
   | ImportAction
   | ActionAction
   | ExportAction;
-export type PanelMessage<S, A extends Action<string>> =
-  | NAAction
+export type PanelMessageWithoutNA<S, A extends Action<string>> =
   | ErrorMessage
   | UpdateStateAction<S, A>
   | SetPersistAction;
+export type PanelMessage<S, A extends Action<string>> =
+  | PanelMessageWithoutNA<S, A>
+  | NAAction;
+export type PanelMessageWithSplitAction<S, A extends Action<string>> =
+  | PanelMessage<S, A>
+  | SplitUpdateStateAction<S, A>;
 export type MonitorMessage =
   | NAAction
   | ErrorMessage
@@ -193,7 +222,7 @@ type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
 };
 type PanelPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: <S, A extends Action<string>>(
-    message: PanelMessage<S, A>,
+    message: PanelMessageWithSplitAction<S, A>,
   ) => void;
 };
 type MonitorPort = Omit<chrome.runtime.Port, 'postMessage'> & {
@@ -258,7 +287,9 @@ function toMonitors<S, A extends Action<string>>(
         throw err;
       }
 
-      const splitMessageStart = { split: 'start' };
+      const splitMessageStart: SplitUpdateStateRequestStart<S, A> = {
+        split: 'start',
+      };
       const toSplit: [string, string][] = [];
       let size = 0;
       for (const [key, value] of Object.entries(
@@ -272,7 +303,8 @@ function toMonitors<S, A extends Action<string>>(
           }
         }
 
-        splitMessageStart[key] = value;
+        (splitMessageStart as any)[key as keyof typeof splitMessageStart] =
+          value;
       }
 
       panelPort.postMessage({ ...action, request: splitMessageStart });
