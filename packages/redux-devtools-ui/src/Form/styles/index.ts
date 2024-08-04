@@ -1,7 +1,7 @@
 import { css, ThemedStyledProps } from 'styled-components';
 import { Theme } from '../../themes/default';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export default ({ theme }: ThemedStyledProps<{}, Theme>) => css`
   padding: 10px;
   line-height: 1.846;
