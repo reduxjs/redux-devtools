@@ -3,7 +3,11 @@ import React, { CSSProperties, ReactNode } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Persistor } from 'redux-persist';
-import { REMOVE_INSTANCE, StoreAction } from '@redux-devtools/app';
+import {
+  REMOVE_INSTANCE,
+  StoreAction,
+  UPDATE_STATE,
+} from '@redux-devtools/app';
 import App from '../app/App';
 import configureStore from './store/panelStore';
 
@@ -90,6 +94,8 @@ function renderNA() {
   }, 3500);
 }
 
+let splitMessage;
+
 function init(id: number) {
   renderNA();
   bgConnection = chrome.runtime.connect({
@@ -102,7 +108,34 @@ function init(id: number) {
         else store!.dispatch({ type: REMOVE_INSTANCE, id: message.id });
       } else {
         if (!rendered) renderDevTools();
-        store!.dispatch(message);
+
+        if (message.type === UPDATE_STATE && message.request.split) {
+          if (message.request.split === 'start') {
+            splitMessage = message.request;
+            return;
+          }
+
+          if (message.request.split === 'chunk') {
+            if (splitMessage[message.request.chunk[0]]) {
+              splitMessage[message.request.chunk[0]] +=
+                message.request.chunk[1];
+            } else {
+              splitMessage[message.request.chunk[0]] = message.request.chunk[1];
+            }
+            return;
+          }
+
+          if (message.request.split === 'end') {
+            store!.dispatch({ ...message, request: splitMessage });
+            return;
+          }
+
+          throw new Error(
+            `Unable to process split message with type: ${message.request.split}`,
+          );
+        } else {
+          store!.dispatch(message);
+        }
       }
     },
   );
