@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.10
+
+### Patch Changes
+
+- 2163bc3: Split large messages sent from background page to devpanel
+
 ## 3.1.9
 
 ### Patch Changes
