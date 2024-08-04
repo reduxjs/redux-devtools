@@ -137,7 +137,7 @@ export const ActionCreators = {
     action: A,
     trace?: ((action: A) => string | undefined) | boolean,
     traceLimit?: number,
-    // eslint-disable-next-line @typescript-eslint/ban-types
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     toExcludeFromTrace?: Function,
   ) {
     if (!isPlainObject(action)) {
@@ -281,7 +281,6 @@ function computeWithTryCatch<S, A extends Action<string>>(
   try {
     nextState = reducer(state, action);
   } catch (err) {
-    // eslint-disable-next-line @typescript-eslint/ban-types
     nextError = (err as object).toString();
     if (isChrome) {
       // In Chrome, rethrowing provides better source map support
@@ -346,7 +345,7 @@ function recomputeStates<S, A extends Action<string>>(
     const previousEntry = nextComputedStates[i - 1];
     const previousState = previousEntry ? previousEntry.state : committedState;
 
-    const shouldSkip = skippedActionIds.indexOf(actionId) > -1;
+    const shouldSkip = skippedActionIds.includes(actionId);
     let entry;
     if (shouldSkip) {
       entry = previousEntry;
@@ -378,7 +377,7 @@ function liftAction<A extends Action<string>>(
   action: A,
   trace?: ((action: A) => string | undefined) | boolean,
   traceLimit?: number,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace?: Function,
 ) {
   return ActionCreators.performAction(
@@ -477,7 +476,7 @@ function liftReducerWith<
       }
 
       skippedActionIds = skippedActionIds.filter(
-        (id) => idsToDelete.indexOf(id) === -1,
+        (id) => !idsToDelete.includes(id),
       );
       stagedActionIds = [0, ...stagedActionIds.slice(excess + 1)];
       committedState = computedStates[excess].state;
