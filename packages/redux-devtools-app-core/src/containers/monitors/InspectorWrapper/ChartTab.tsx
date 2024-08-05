@@ -21,7 +21,7 @@ type Props = DispatchProps & OwnProps;
 
 class ChartTab extends Component<Props> {
   node?: HTMLDivElement | null;
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   renderChart?: (nextState?: {} | null | undefined) => void;
 
   shouldComponentUpdate() {
@@ -40,7 +40,7 @@ class ChartTab extends Component<Props> {
       this.node!.innerHTML = '';
       this.createChart(nextProps);
     } else if (nextProps.data !== this.props.data) {
-      // eslint-disable-next-line @typescript-eslint/ban-types
+      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
       this.renderChart!(nextProps.data as {} | null | undefined);
     }
   }
@@ -51,7 +51,7 @@ class ChartTab extends Component<Props> {
 
   createChart(props: Props) {
     this.renderChart = tree(this.node!, this.getChartTheme(props.theme));
-    // eslint-disable-next-line @typescript-eslint/ban-types
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     this.renderChart(props.data as {} | null | undefined);
   }
 

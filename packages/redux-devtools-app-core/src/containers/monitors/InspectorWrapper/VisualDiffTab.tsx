@@ -19,7 +19,7 @@ export const StyledContainer = styled.div`
     padding: 2px 3px;
     border-radius: 3px;
     position: relative;
-    ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
     color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base07};
     display: inline-block;
   }
@@ -44,7 +44,7 @@ export const StyledContainer = styled.div`
   .jsondiffpatch-modified .jsondiffpatch-right-value:before {
     vertical-align: top;
     padding: 2px;
-    ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
     color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base0E};
     content: ' => ';
   }
@@ -52,7 +52,7 @@ export const StyledContainer = styled.div`
   .jsondiffpatch-added .jsondiffpatch-value pre,
   .jsondiffpatch-modified .jsondiffpatch-right-value pre,
   .jsondiffpatch-textdiff-added {
-    ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
     background: ${(props: ThemedStyledProps<{}, Theme>) =>
       effects.color(props.theme.base0B, 'alpha', 0.2)};
   }
@@ -60,7 +60,7 @@ export const StyledContainer = styled.div`
   .jsondiffpatch-deleted pre,
   .jsondiffpatch-modified .jsondiffpatch-left-value pre,
   .jsondiffpatch-textdiff-deleted {
-    ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
     background: ${(props: ThemedStyledProps<{}, Theme>) =>
       effects.color(props.theme.base08, 'alpha', 0.2)};
     text-decoration: line-through;
@@ -129,13 +129,13 @@ export const StyledContainer = styled.div`
     padding: 2px 0;
     padding-right: 5px;
     vertical-align: top;
-    ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
     color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base0D};
   }
 
   .jsondiffpatch-property-name:after {
     content: ': ';
-    ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
     color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base07};
   }
 
@@ -172,7 +172,7 @@ export const StyledContainer = styled.div`
   }
 
   .jsondiffpatch-value pre:after {
-    ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
     color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base07};
     content: ',';
   }
@@ -196,7 +196,7 @@ export const StyledContainer = styled.div`
 
   .jsondiffpatch-moved .jsondiffpatch-moved-destination {
     display: inline-block;
-    ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
     background: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base0A};
   }
 
