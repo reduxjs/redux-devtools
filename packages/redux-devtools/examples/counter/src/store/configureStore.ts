@@ -6,8 +6,8 @@ const configureStore: (
   initialState?: PreloadedState<CounterState>,
 ) => Store<CounterState, CounterAction> =
   process.env.NODE_ENV === 'production'
-    ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+    ? // eslint-disable-next-line @typescript-eslint/no-require-imports
       require('./configureStore.prod').default
-    : // eslint-disable-next-line @typescript-eslint/no-var-requires
+    : // eslint-disable-next-line @typescript-eslint/no-require-imports
       require('./configureStore.dev').default;
 export default configureStore;
