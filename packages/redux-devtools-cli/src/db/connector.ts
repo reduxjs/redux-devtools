@@ -4,7 +4,7 @@ import knex from 'knex';
 import type { Knex } from 'knex';
 import { AGServer } from 'socketcluster-server';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type KnexFunction = <TRecord extends {} = any, TResult = unknown[]>(
   config: Knex.Config | string,
 ) => Knex<TRecord, TResult>;
