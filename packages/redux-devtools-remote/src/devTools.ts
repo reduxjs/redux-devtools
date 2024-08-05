@@ -160,7 +160,7 @@ interface ActionMessage {
 
 interface DispatchMessage<S, A extends Action<string>> {
   readonly type: 'DISPATCH';
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   readonly action: LiftedAction<S, A, {}>;
 }
 
@@ -175,7 +175,7 @@ type Message<S, A extends Action<string>> =
   | DispatchMessage<S, A>;
 
 class DevToolsEnhancer<S, A extends Action<string>> {
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   store!: EnhancedStore<S, A, {}>;
   filters: LocalFilter | undefined;
   instanceId?: string;
@@ -309,7 +309,7 @@ class DevToolsEnhancer<S, A extends Action<string>> {
     ) {
       this.store.liftedStore.dispatch({
         type: 'IMPORT_STATE',
-        // eslint-disable-next-line @typescript-eslint/ban-types
+        // eslint-disable-next-line @typescript-eslint/no-empty-object-type
         nextLiftedState: parse(message.state) as LiftedState<S, A, {}>,
       });
     } else if (message.type === 'UPDATE') {
@@ -483,7 +483,7 @@ class DevToolsEnhancer<S, A extends Action<string>> {
     return false;
   };
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   monitorReducer = (state = {}, action: LiftedAction<S, A, {}>) => {
     this.lastAction = action.type;
     if (!this.started && this.sendOnError === 2 && this.store.liftedStore)
@@ -492,26 +492,26 @@ class DevToolsEnhancer<S, A extends Action<string>> {
       if (
         this.startOn &&
         !this.started &&
-        this.startOn.indexOf((action as PerformAction<A>).action.type) !== -1
+        this.startOn.includes((action as PerformAction<A>).action.type)
       )
         async(this.start);
       else if (
         this.stopOn &&
         this.started &&
-        this.stopOn.indexOf((action as PerformAction<A>).action.type) !== -1
+        this.stopOn.includes((action as PerformAction<A>).action.type)
       )
         async(this.stop);
       else if (
         this.sendOn &&
         !this.started &&
-        this.sendOn.indexOf((action as PerformAction<A>).action.type) !== -1
+        this.sendOn.includes((action as PerformAction<A>).action.type)
       )
         async(this.send);
     }
     return state;
   };
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   handleChange(state: S, liftedState: LiftedState<S, A, {}>, maxAge: number) {
     if (this.checkForReducerErrors(liftedState)) return;
 
