@@ -50,10 +50,10 @@ function parseStack(stack: string[]): StackFrame[] {
         );
       } else {
         // Strip eval, we don't care about it
-        if (e.indexOf('(eval ') !== -1) {
+        if (e.includes('(eval ')) {
           e = e.replace(/(\(eval at [^()]*)|(\),.*$)/g, '');
         }
-        if (e.indexOf('(at ') !== -1) {
+        if (e.includes('(at ')) {
           e = e.replace(/\(at /, '(');
         }
         const data = e.trim().split(/\s+/g).slice(1);

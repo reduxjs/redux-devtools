@@ -60,7 +60,7 @@ export default class LogMonitorEntryList<
           actionId={actionId}
           state={state}
           previousState={previousState}
-          collapsed={skippedActionIds.indexOf(actionId) > -1}
+          collapsed={skippedActionIds.includes(actionId)}
           inFuture={i > currentStateIndex}
           selected={consecutiveToggleStartId === i}
           error={error}

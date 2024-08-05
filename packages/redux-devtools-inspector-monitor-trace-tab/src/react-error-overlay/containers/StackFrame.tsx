@@ -76,7 +76,7 @@ class StackFrame extends Component<Props, State> {
       return null;
     }
     // e.g. "/path-to-my-app/webpack/bootstrap eaddeb46b67d75e4dfc1"
-    const isInternalWebpackBootstrapCode = fileName.trim().indexOf(' ') !== -1;
+    const isInternalWebpackBootstrapCode = fileName.trim().includes(' ');
     if (isInternalWebpackBootstrapCode) {
       return null;
     }

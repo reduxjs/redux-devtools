@@ -30,7 +30,7 @@ async function map(
     if (fileName == null) {
       return;
     }
-    if (files.indexOf(fileName) !== -1) {
+    if (files.includes(fileName)) {
       return;
     }
     files.push(fileName);

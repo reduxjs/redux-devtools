@@ -23,8 +23,7 @@ function getShortTypeString(val: any, diff: boolean | undefined) {
   } else if (val === undefined) {
     return 'undef';
   } else if (typeof val === 'object') {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    return Object.keys(val as {}).length > 0 ? '{…}' : '{}';
+    return Object.keys(val as object).length > 0 ? '{…}' : '{}';
   } else if (typeof val === 'function') {
     return 'fn';
   } else if (typeof val === 'string') {
@@ -43,8 +42,7 @@ function getText(
   isDiff: boolean | undefined,
 ) {
   if (type === 'Object') {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const keys = Object.keys(data as {});
+    const keys = Object.keys(data as object);
     if (!isWideLayout) return keys.length ? '{…}' : '{}';
 
     const str = keys

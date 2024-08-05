@@ -66,7 +66,7 @@ function renderChildNodes(
       );
     } else {
       const { key, value } = entry;
-      const isCircular = circularCache.indexOf(value) !== -1;
+      const isCircular = circularCache.includes(value);
 
       childNodes.push(
         <JSONNode

@@ -136,11 +136,10 @@ export default function ActionList<A extends Action<string>>({
 
   const lowerSearchValue = searchValue && searchValue.toLowerCase();
   const filteredActionIds = searchValue
-    ? actionIds.filter(
-        (id) =>
-          actions[id].action.type
-            .toLowerCase()
-            .indexOf(lowerSearchValue as string) !== -1,
+    ? actionIds.filter((id) =>
+        actions[id].action.type
+          .toLowerCase()
+          .includes(lowerSearchValue as string),
       )
     : actionIds;
 
@@ -218,7 +217,7 @@ export default function ActionList<A extends Action<string>>({
                   onJumpClick={() => onJumpToState(actionId)}
                   onCommitClick={() => onCommit()}
                   hideActionButtons={hideActionButtons}
-                  isSkipped={skippedActionIds.indexOf(actionId) !== -1}
+                  isSkipped={skippedActionIds.includes(actionId)}
                 />
               </SortableItem>
             ))}

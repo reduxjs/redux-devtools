@@ -126,7 +126,7 @@ const mergeStylings = (
 ): StylingConfig => {
   const keys = Object.keys(defaultStylings);
   for (const key in customStylings) {
-    if (keys.indexOf(key) === -1) keys.push(key);
+    if (!keys.includes(key)) keys.push(key);
   }
 
   return keys.reduce(
@@ -241,7 +241,7 @@ export const createStyling: CurriedFunction3<
 
     const customStyling = Object.keys(themeOrStyling).reduce(
       (s, key) =>
-        BASE16_KEYS.indexOf(key) === -1
+        !BASE16_KEYS.includes(key)
           ? ((s[key] = (themeOrStyling as StylingConfig)[key]), s)
           : s,
       {} as StylingConfig,

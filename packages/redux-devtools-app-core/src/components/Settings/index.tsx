@@ -11,7 +11,6 @@ interface State {
   selected: string | undefined;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export default class Settings extends Component<Props, State> {
   state: State = { selected: undefined };
 
@@ -27,7 +26,7 @@ export default class Settings extends Component<Props, State> {
       { name: 'State Tree', component: StateTree },
     ];
     return (
-      // eslint-disable-next-line @typescript-eslint/ban-types
+      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
       <Tabs<{}>
         tabs={tabs as any}
         selected={this.state.selected || tabs[0].name}

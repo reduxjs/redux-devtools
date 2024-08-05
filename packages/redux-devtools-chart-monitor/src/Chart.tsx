@@ -27,14 +27,14 @@ export interface Props<S, A extends Action<string>>
 
 class Chart<S, A extends Action<string>> extends Component<Props<S, A>> {
   divRef = createRef<HTMLDivElement>();
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   renderChart?: (state?: {} | null | undefined) => void;
 
   componentDidMount() {
     const { select, state, defaultIsVisible } = this.props;
     this.renderChart = tree(this.divRef.current!, this.props);
     if (defaultIsVisible) {
-      // eslint-disable-next-line @typescript-eslint/ban-types
+      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
       this.renderChart(select(state!) as {} | null | undefined);
     }
   }
@@ -43,7 +43,7 @@ class Chart<S, A extends Action<string>> extends Component<Props<S, A>> {
     const { state, select, monitorState } = nextProps;
 
     if (monitorState.isVisible !== false) {
-      // eslint-disable-next-line @typescript-eslint/ban-types
+      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
       this.renderChart!(select(state!) as {} | null | undefined);
     }
   }

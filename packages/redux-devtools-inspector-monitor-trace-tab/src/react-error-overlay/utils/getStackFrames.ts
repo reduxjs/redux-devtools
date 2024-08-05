@@ -51,8 +51,7 @@ function getStackFrames(
     return enhancedFrames.filter(
       ({ functionName, fileName }) =>
         (functionName == null ||
-          functionName.indexOf('__stack_frame_overlay_proxy_console__') ===
-            -1) &&
+          !functionName.includes('__stack_frame_overlay_proxy_console__')) &&
         !toExclude.test(fileName!),
     );
   });

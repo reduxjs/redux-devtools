@@ -94,7 +94,6 @@ function updateState(
   const actionsById = request.actionsById;
   if (actionsById) {
     payload = {
-      // eslint-disable-next-line @typescript-eslint/ban-types
       ...payload,
       actionsById: parseJSON(actionsById, serialize),
       computedStates: parseJSON(request.computedStates, serialize),
