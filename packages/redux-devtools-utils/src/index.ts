@@ -15,7 +15,6 @@ export interface ActionCreatorObject {
   readonly args: readonly string[];
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 function flatTree(
   obj: { [key: string]: ActionCreator<Action<string>> },
   namespace = '',
@@ -217,9 +216,9 @@ export function getSeralizeParameter(
 }
 
 export function getStackTrace(
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   config: { trace?: () => {}; traceLimit: number },
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace?: Function | undefined,
 ) {
   if (!config.trace) return undefined;
