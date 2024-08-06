@@ -185,12 +185,12 @@ export interface DemoAppState {
 }
 
 export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
-  combineReducers<DemoAppState, DemoAppAction>({
-    timeoutUpdateEnabled: (state = false, action) =>
+  combineReducers({
+    timeoutUpdateEnabled: (state = false, action: DemoAppAction) =>
       action.type === 'TOGGLE_TIMEOUT_UPDATE'
         ? action.timeoutUpdateEnabled
         : state,
-    store: (state = 0, action) =>
+    store: (state = 0, action: DemoAppAction) =>
       action.type === 'INCREMENT' ? state + 1 : state,
     undefined: (state = { val: undefined }) => state,
     null: (state = null) => state,
@@ -199,7 +199,7 @@ export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
         // noop
       },
     ) => state,
-    array: (state = [], action) =>
+    array: (state = [], action: DemoAppAction) =>
       action.type === 'PUSH'
         ? [...state, Math.random()]
         : action.type === 'POP'
@@ -207,13 +207,13 @@ export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
           : action.type === 'REPLACE'
             ? [Math.random(), ...state.slice(1)]
             : state,
-    hugeArrays: (state = [], action) =>
+    hugeArrays: (state = [], action: DemoAppAction) =>
       action.type === 'PUSH_HUGE_ARRAY' ? [...state, ...HUGE_ARRAY] : state,
-    hugeObjects: (state = [], action) =>
+    hugeObjects: (state = [], action: DemoAppAction) =>
       action.type === 'ADD_HUGE_OBJECT' ? [...state, HUGE_OBJECT] : state,
-    iterators: (state = [], action) =>
+    iterators: (state = [], action: DemoAppAction) =>
       action.type === 'ADD_ITERATOR' ? [...state, createIterator()] : state,
-    nested: (state = NESTED, action) =>
+    nested: (state = NESTED, action: DemoAppAction) =>
       action.type === 'CHANGE_NESTED'
         ? {
             ...state,
@@ -230,25 +230,28 @@ export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
             },
           }
         : state,
-    recursive: (state: { obj?: unknown }[] = [], action) =>
+    recursive: (state: { obj?: unknown }[] = [], action: DemoAppAction) =>
       action.type === 'ADD_RECURSIVE' ? [...state, { ...RECURSIVE }] : state,
-    immutables: (state: Immutable.Map<string, unknown>[] = [], action) =>
+    immutables: (
+      state: Immutable.Map<string, unknown>[] = [],
+      action: DemoAppAction,
+    ) =>
       action.type === 'ADD_IMMUTABLE_MAP' ? [...state, IMMUTABLE_MAP] : state,
-    maps: (state: Map<string, MapValue>[] = [], action) =>
+    maps: (state: Map<string, MapValue>[] = [], action: DemoAppAction) =>
       action.type === 'ADD_NATIVE_MAP' ? [...state, NATIVE_MAP] : state,
-    immutableNested: (state = IMMUTABLE_NESTED, action) =>
+    immutableNested: (state = IMMUTABLE_NESTED, action: DemoAppAction) =>
       action.type === 'CHANGE_IMMUTABLE_NESTED'
         ? state.updateIn(
             ['long', 'nested', 0, 'path', 'to', 'a'],
             (str: unknown) => (str as string) + '!',
           )
         : state,
-    addFunction: (state = null, action) =>
+    addFunction: (state = null, action: DemoAppAction) =>
       action.type === 'ADD_FUNCTION' ? { f: FUNC } : state,
-    addSymbol: (state = null, action) =>
+    addSymbol: (state = null, action: DemoAppAction) =>
       action.type === 'ADD_SYMBOL'
         ? { s: window.Symbol('symbol'), error: new Error('TEST') }
         : state,
-    shuffleArray: (state = DEFAULT_SHUFFLE_ARRAY, action) =>
+    shuffleArray: (state = DEFAULT_SHUFFLE_ARRAY, action: DemoAppAction) =>
       action.type === 'SHUFFLE_ARRAY' ? shuffle(state) : state,
-  });
+  }) as any;
