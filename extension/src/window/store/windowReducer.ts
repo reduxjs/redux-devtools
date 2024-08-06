@@ -13,17 +13,20 @@ import {
 import instances from './instancesReducer';
 import type { WindowStoreAction } from './windowStore';
 
-const rootReducer: Reducer<StoreState, WindowStoreAction> =
-  combineReducers<StoreState>({
-    instances,
-    monitor,
-    socket,
-    reports,
-    notification,
-    section,
-    theme,
-    connection,
-    stateTreeSettings,
-  });
+const rootReducer: Reducer<
+  StoreState,
+  WindowStoreAction,
+  Partial<StoreState>
+> = combineReducers({
+  instances,
+  monitor,
+  socket,
+  reports,
+  notification,
+  section,
+  theme,
+  connection,
+  stateTreeSettings,
+}) as any;
 
 export default rootReducer;

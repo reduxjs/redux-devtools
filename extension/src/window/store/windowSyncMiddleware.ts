@@ -6,16 +6,19 @@ import {
   TOGGLE_PERSIST,
   UPDATE_STATE,
 } from '@redux-devtools/app';
-import { Dispatch, MiddlewareAPI, Store } from 'redux';
+import { Dispatch, Middleware, Store } from 'redux';
 import type { BackgroundState } from '../../background/store/backgroundReducer';
-import type { WindowStoreAction } from './windowStore';
 import type { BackgroundAction } from '../../background/store/backgroundStore';
 
 const syncStores =
-  (baseStore: Store<BackgroundState, BackgroundAction>) =>
-  (store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) =>
-  (next: Dispatch<WindowStoreAction>) =>
-  (action: StoreAction) => {
+  (
+    baseStore: Store<BackgroundState, BackgroundAction>,
+  ): Middleware<{}, StoreState, Dispatch<StoreAction>> =>
+  (store) =>
+  (next) =>
+  (untypedAction) => {
+    const action = untypedAction as StoreAction;
+
     if (action.type === UPDATE_STATE) {
       return next({
         ...action,
