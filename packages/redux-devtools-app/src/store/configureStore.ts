@@ -14,7 +14,7 @@ const persistConfig = {
 
 const persistedReducer: Reducer<StoreState, StoreAction> = persistReducer(
   persistConfig,
-  rootReducer,
+  rootReducer as unknown as Reducer<StoreState, StoreAction>,
 ) as any;
 
 export default function configureStore(
@@ -41,7 +41,7 @@ export default function configureStore(
     persistedReducer,
     composeEnhancers(applyMiddleware(...middlewares, api)),
   );
-  const persistor = persistStore(store, null, () => {
+  const persistor = persistStore(store as Store, null, () => {
     callback(store);
   });
   return { store, persistor };
