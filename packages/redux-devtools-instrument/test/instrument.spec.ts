@@ -1382,7 +1382,9 @@ describe('instrument', () => {
   it('throws if reducer is not a function', () => {
     expect(() =>
       createStore(undefined as unknown as Reducer, instrument()),
-    ).toThrow('Expected the reducer to be a function.');
+    ).toThrow(
+      "Expected the root reducer to be a function. Instead, received: 'undefined'",
+    );
   });
 
   it('warns if the reducer is not a function but has a default field that is', () => {
@@ -1396,10 +1398,7 @@ describe('instrument', () => {
         instrument(),
       ),
     ).toThrow(
-      'Expected the reducer to be a function. ' +
-        'Instead got an object with a "default" field. ' +
-        'Did you pass a module instead of the default export? ' +
-        'Try passing require(...).default instead.',
+      "Expected the root reducer to be a function. Instead, received: 'object'",
     );
   });
 
