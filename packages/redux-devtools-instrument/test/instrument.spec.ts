@@ -1,4 +1,11 @@
-import { createStore, compose, Reducer, Store, Action } from 'redux';
+import {
+  createStore,
+  compose,
+  Reducer,
+  Store,
+  Action,
+  StoreEnhancer,
+} from 'redux';
 import {
   ActionCreators,
   EnhancedStore,
@@ -1398,7 +1405,10 @@ describe('instrument', () => {
 
   it('throws if there are more than one instrument enhancer included', () => {
     expect(() => {
-      createStore(counter, compose(instrument(), instrument()));
+      createStore(
+        counter,
+        compose(instrument(), instrument()) as StoreEnhancer,
+      );
     }).toThrow(
       'DevTools instrumentation should not be applied more than once. ' +
         'Check your store configuration.',
