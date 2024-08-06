@@ -1,11 +1,9 @@
-import { createStore, applyMiddleware, PreloadedState } from 'redux';
+import { createStore, applyMiddleware, Middleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer, { CounterState } from '../reducers';
 
-const enhancer = applyMiddleware(thunk);
+const enhancer = applyMiddleware(thunk as unknown as Middleware);
 
-export default function configureStore(
-  initialState?: PreloadedState<CounterState>,
-) {
+export default function configureStore(initialState?: Partial<CounterState>) {
   return createStore(rootReducer, initialState, enhancer);
 }
