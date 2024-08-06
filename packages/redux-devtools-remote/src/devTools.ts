@@ -6,7 +6,6 @@ import getHostForRN from 'rn-host-detect';
 import {
   Action,
   ActionCreator,
-  PreloadedState,
   Reducer,
   StoreEnhancer,
   StoreEnhancerStoreCreator,
@@ -174,7 +173,7 @@ type Message<S, A extends Action<string>> =
   | ActionMessage
   | DispatchMessage<S, A>;
 
-class DevToolsEnhancer<S, A extends Action<string>> {
+class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   store!: EnhancedStore<S, A, {}>;
   filters: LocalFilter | undefined;
@@ -547,11 +546,14 @@ class DevToolsEnhancer<S, A extends Action<string>> {
         ? process.env.NODE_ENV === 'development'
         : options.realtime;
     if (!realtime && !(this.startOn || this.sendOn || this.sendOnError))
-      return (f: StoreEnhancerStoreCreator) => f;
+      return (f) => f;
 
     const maxAge = options.maxAge || 30;
     return ((next: StoreEnhancerStoreCreator) => {
-      return (reducer: Reducer<S, A>, initialState: PreloadedState<S>) => {
+      return (
+        reducer: Reducer<S, A, PreloadedState>,
+        initialState?: PreloadedState | undefined,
+      ) => {
         this.store = configureStore(next, this.monitorReducer, {
           maxAge,
           trace: options.trace,
@@ -578,8 +580,9 @@ class DevToolsEnhancer<S, A extends Action<string>> {
   };
 }
 
-export default <S, A extends Action<string>>(options?: Options<S, A>) =>
-  new DevToolsEnhancer<S, A>().enhance(options);
+export default <S, A extends Action<string>, PreloadedState>(
+  options?: Options<S, A>,
+) => new DevToolsEnhancer<S, A, PreloadedState>().enhance(options);
 
 const compose =
   (options: Options<unknown, Action<string>>) =>
@@ -588,9 +591,9 @@ const compose =
     const devToolsEnhancer = new DevToolsEnhancer();
 
     function preEnhancer(createStore: StoreEnhancerStoreCreator) {
-      return <S, A extends Action<string>>(
-        reducer: Reducer<S, A>,
-        preloadedState: PreloadedState<S>,
+      return <S, A extends Action<string>, PreloadedState>(
+        reducer: Reducer<S, A, PreloadedState>,
+        preloadedState?: PreloadedState | undefined,
       ) => {
         devToolsEnhancer.store = createStore(reducer, preloadedState) as any;
         return {
