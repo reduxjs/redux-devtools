@@ -1,5 +1,5 @@
 import React, { PureComponent, createRef, ReactNode } from 'react';
-import type { AnyAction, Dispatch, Action } from '@reduxjs/toolkit';
+import type { Dispatch, Action } from '@reduxjs/toolkit';
 import type { LiftedAction, LiftedState } from '@redux-devtools/core';
 import {
   QueryFormValues,
@@ -96,15 +96,33 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
   }
 
   handleQueryFormValuesChange = (values: Partial<QueryFormValues>): void => {
-    this.props.dispatch(changeQueryFormValues(values) as AnyAction);
+    this.props.dispatch(
+      changeQueryFormValues(values) as unknown as LiftedAction<
+        S,
+        A,
+        RtkQueryMonitorState
+      >,
+    );
   };
 
   handleSelectQuery = (queryInfo: RtkResourceInfo): void => {
-    this.props.dispatch(selectQueryKey(queryInfo) as AnyAction);
+    this.props.dispatch(
+      selectQueryKey(queryInfo) as unknown as LiftedAction<
+        S,
+        A,
+        RtkQueryMonitorState
+      >,
+    );
   };
 
   handleTabChange = (tab: QueryPreviewTabs): void => {
-    this.props.dispatch(selectedPreviewTab(tab) as AnyAction);
+    this.props.dispatch(
+      selectedPreviewTab(tab) as unknown as LiftedAction<
+        S,
+        A,
+        RtkQueryMonitorState
+      >,
+    );
   };
 
   render(): ReactNode {

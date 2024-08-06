@@ -1,12 +1,5 @@
-import assign from './utils/assign';
 import { compose } from 'redux';
-import type {
-  Action,
-  Dispatch,
-  PreloadedState,
-  Reducer,
-  StoreEnhancer,
-} from 'redux';
+import type { Action, Dispatch, Reducer, StoreEnhancer } from 'redux';
 import type { Config, EnhancerOptions, InferComposedStoreExt } from './index';
 
 function enhancer(options?: EnhancerOptions): StoreEnhancer {
@@ -17,9 +10,9 @@ function enhancer(options?: EnhancerOptions): StoreEnhancer {
   if (config.latency === undefined) config.latency = 500;
 
   return function (createStore) {
-    return function <S, A extends Action<string>>(
-      reducer: Reducer<S, A>,
-      preloadedState: PreloadedState<S> | undefined,
+    return function <S, A extends Action<string>, PreloadedState>(
+      reducer: Reducer<S, A, PreloadedState>,
+      preloadedState?: PreloadedState | undefined,
     ) {
       const store = createStore(reducer, preloadedState);
       const origDispatch = store.dispatch;
@@ -33,35 +26,32 @@ function enhancer(options?: EnhancerOptions): StoreEnhancer {
         return r;
       };
 
-      if (Object.assign) return Object.assign(store, { dispatch: dispatch });
-      return assign(store, 'dispatch', dispatch);
+      return Object.assign(store, { dispatch: dispatch });
     };
   };
 }
 
 function composeWithEnhancer(config?: EnhancerOptions) {
-  return function (...funcs: StoreEnhancer<unknown>[]) {
+  return function (...funcs: StoreEnhancer[]) {
     return compose(compose(...funcs), enhancer(config));
   };
 }
 
 export function composeWithDevTools(
   config: Config,
-): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+): <StoreEnhancers extends readonly StoreEnhancer[]>(
   ...funcs: StoreEnhancers
 ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 export function composeWithDevTools<
-  StoreEnhancers extends readonly StoreEnhancer<unknown>[],
+  StoreEnhancers extends readonly StoreEnhancer[],
 >(
   ...funcs: StoreEnhancers
 ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
-export function composeWithDevTools(
-  ...funcs: [Config] | StoreEnhancer<unknown>[]
-) {
+export function composeWithDevTools(...funcs: [Config] | StoreEnhancer[]) {
   if (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__) {
     if (funcs.length === 0) return enhancer();
     if (typeof funcs[0] === 'object') return composeWithEnhancer(funcs[0]);
-    return composeWithEnhancer()(...(funcs as StoreEnhancer<unknown>[]));
+    return composeWithEnhancer()(...(funcs as StoreEnhancer[]));
   }
 
   if (funcs.length === 0) return undefined;

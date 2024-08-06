@@ -17,7 +17,7 @@ import {
 } from '@redux-devtools/app-core';
 import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
 import { stringify } from 'jsan';
-import { Dispatch, MiddlewareAPI } from 'redux';
+import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 import * as actions from '../constants/socketActionTypes';
 import { nonReduxDispatch } from '../utils/monitorActions';
 import { EmitAction, StoreAction } from '../actions';
@@ -266,10 +266,15 @@ function getReport(reportId: unknown) {
   })();
 }
 
-export function api(inStore: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export const api: Middleware<{}, StoreState, Dispatch<StoreAction>> = (
+  inStore,
+) => {
   store = inStore;
-  return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
-    const result = next(action);
+  return (next) => (untypedAction) => {
+    const result = next(untypedAction);
+
+    const action = untypedAction as StoreAction;
     switch (action.type) {
       case actions.CONNECT_REQUEST:
         connect();
@@ -299,4 +304,4 @@ export function api(inStore: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) {
     }
     return result;
   };
-}
+};

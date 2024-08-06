@@ -3,6 +3,7 @@ import {
   configureStore,
   EnhancedStore,
   Middleware,
+  Tuple,
 } from '@reduxjs/toolkit';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs } from '@reduxjs/toolkit/query';
@@ -70,8 +71,9 @@ export function setupStore(
     devTools: false,
     // adding the api middleware enables caching, invalidation, polling and other features of `rtk-query`
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat([pokemonApi.middleware]) as Middleware[],
-    enhancers: [devTools.instrument()],
+      getDefaultMiddleware().concat(pokemonApi.middleware),
+    enhancers: (getDefaultEnhancers) =>
+      getDefaultEnhancers().concat(devTools.instrument()),
   });
 
   return {

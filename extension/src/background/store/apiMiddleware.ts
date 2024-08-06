@@ -18,7 +18,7 @@ import syncOptions, {
 } from '../../options/syncOptions';
 import openDevToolsWindow, { DevToolsPosition } from '../openWindow';
 import { getReport } from '../logging';
-import { Action, Dispatch, MiddlewareAPI } from 'redux';
+import { Action, Dispatch, Middleware } from 'redux';
 import type {
   ContentScriptToBackgroundMessage,
   SplitMessage,
@@ -670,10 +670,10 @@ declare global {
 
 window.syncOptions = syncOptions(toAllTabs); // Expose to the options page
 
-export default function api(
-  store: MiddlewareAPI<Dispatch<BackgroundAction>, BackgroundState>,
-) {
-  return (next: Dispatch<BackgroundAction>) => (action: BackgroundAction) => {
+const api: Middleware<{}, BackgroundState, Dispatch<BackgroundAction>> =
+  (store) => (next) => (untypedAction) => {
+    const action = untypedAction as BackgroundAction;
+
     if (action.type === LIFTED_ACTION) toContentScript(action);
     else if (action.type === TOGGLE_PERSIST) {
       togglePersist();
@@ -684,4 +684,5 @@ export default function api(
     }
     return next(action);
   };
-}
+
+export default api;

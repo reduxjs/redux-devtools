@@ -1,6 +1,6 @@
 import mapValues from 'lodash/mapValues';
 import identity from 'lodash/identity';
-import { Action, PreloadedState, Reducer, StoreEnhancer } from 'redux';
+import { Action, Reducer, StoreEnhancer } from 'redux';
 import { LiftedState } from '@redux-devtools/instrument';
 
 export default function persistState<S, A extends Action<string>, MonitorState>(
@@ -32,9 +32,9 @@ export default function persistState<S, A extends Action<string>, MonitorState>(
   }
 
   return (next) =>
-    <S2, A2 extends Action<string>>(
-      reducer: Reducer<S2, A2>,
-      initialState?: PreloadedState<S2>,
+    <S2, A2 extends Action<string>, PreloadedState>(
+      reducer: Reducer<S2, A2, PreloadedState>,
+      initialState?: PreloadedState | undefined,
     ) => {
       const key = `redux-dev-session-${sessionId}`;
 
@@ -58,7 +58,7 @@ export default function persistState<S, A extends Action<string>, MonitorState>(
 
       const store = next(
         reducer,
-        finalInitialState as PreloadedState<S2> | undefined,
+        finalInitialState as PreloadedState | undefined,
       );
 
       return {

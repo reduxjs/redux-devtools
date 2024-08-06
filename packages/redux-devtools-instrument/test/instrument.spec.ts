@@ -1,8 +1,16 @@
-import { createStore, compose, Reducer, Store, Action } from 'redux';
+import {
+  createStore,
+  compose,
+  Reducer,
+  Store,
+  Action,
+  StoreEnhancer,
+} from 'redux';
 import {
   ActionCreators,
   EnhancedStore,
   instrument,
+  LiftedAction,
   LiftedStore,
   LiftedState,
 } from '../src/instrument';
@@ -487,10 +495,18 @@ describe('instrument', () => {
 
     const savedComputedStates = monitoredLiftedStore.getState().computedStates;
 
-    monitoredLiftedStore.dispatch({ type: 'lol' } as Action);
+    monitoredLiftedStore.dispatch({ type: 'lol' } as unknown as LiftedAction<
+      number,
+      Action,
+      null
+    >);
     expect(reducerCalls).toBe(4);
 
-    monitoredLiftedStore.dispatch({ type: 'wat' } as Action);
+    monitoredLiftedStore.dispatch({ type: 'wat' } as unknown as LiftedAction<
+      number,
+      Action,
+      null
+    >);
     expect(reducerCalls).toBe(4);
 
     expect(monitoredLiftedStore.getState().computedStates).toBe(
@@ -1366,7 +1382,9 @@ describe('instrument', () => {
   it('throws if reducer is not a function', () => {
     expect(() =>
       createStore(undefined as unknown as Reducer, instrument()),
-    ).toThrow('Expected the reducer to be a function.');
+    ).toThrow(
+      "Expected the root reducer to be a function. Instead, received: 'undefined'",
+    );
   });
 
   it('warns if the reducer is not a function but has a default field that is', () => {
@@ -1380,16 +1398,16 @@ describe('instrument', () => {
         instrument(),
       ),
     ).toThrow(
-      'Expected the reducer to be a function. ' +
-        'Instead got an object with a "default" field. ' +
-        'Did you pass a module instead of the default export? ' +
-        'Try passing require(...).default instead.',
+      "Expected the root reducer to be a function. Instead, received: 'object'",
     );
   });
 
   it('throws if there are more than one instrument enhancer included', () => {
     expect(() => {
-      createStore(counter, compose(instrument(), instrument()));
+      createStore(
+        counter,
+        compose(instrument(), instrument()) as StoreEnhancer,
+      );
     }).toThrow(
       'DevTools instrumentation should not be applied more than once. ' +
         'Check your store configuration.',

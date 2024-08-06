@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, Reducer } from 'redux';
 import { render, screen, within } from '@testing-library/react';
 import App from '../src/containers/App';
 import { exportStateMiddleware } from '../src/middlewares/exportState';
@@ -8,6 +8,7 @@ import { coreReducers } from '../src/reducers';
 import { DATA_TYPE_KEY } from '../src/constants/dataTypes';
 import { stringifyJSON } from '../src/utils/stringifyJSON';
 import { combineReducers } from 'redux';
+import { CoreStoreAction, CoreStoreState } from '../lib/types';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -24,7 +25,11 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 const store = createStore(
-  combineReducers(coreReducers),
+  combineReducers(coreReducers) as Reducer<
+    CoreStoreState,
+    CoreStoreAction,
+    Partial<CoreStoreState>
+  >,
   applyMiddleware(exportStateMiddleware),
 );
 

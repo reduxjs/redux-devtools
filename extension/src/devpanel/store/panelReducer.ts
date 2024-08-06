@@ -30,16 +30,19 @@ export interface StoreStateWithoutSocket {
   readonly stateTreeSettings: StateTreeSettings;
 }
 
-const rootReducer: Reducer<StoreStateWithoutSocket, StoreAction> =
-  combineReducers<StoreStateWithoutSocket>({
-    instances,
-    monitor,
-    reports,
-    notification,
-    section,
-    theme,
-    connection,
-    stateTreeSettings,
-  });
+const rootReducer: Reducer<
+  StoreStateWithoutSocket,
+  StoreAction,
+  Partial<StoreStateWithoutSocket>
+> = combineReducers({
+  instances,
+  monitor,
+  reports,
+  notification,
+  section,
+  theme,
+  connection,
+  stateTreeSettings,
+}) as any;
 
 export default rootReducer;

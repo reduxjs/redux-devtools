@@ -69,7 +69,7 @@ export default function configureStore(
     );
   }
   const store = createStore(persistedReducer, enhancer);
-  const persistor = persistStore(store, null, () => {
+  const persistor = persistStore(store as Store, null, () => {
     if (store.getState().connection.type !== 'disabled') {
       store.dispatch({
         type: CONNECT_REQUEST,

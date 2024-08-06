@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, Reducer } from 'redux';
+import { createStore, applyMiddleware, Reducer, Store } from 'redux';
 import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { exportStateMiddleware, StoreAction } from '@redux-devtools/app';
@@ -23,6 +23,6 @@ export default function configureStore(
     panelDispatcher(bgConnection),
   );
   const store = createStore(persistedReducer, enhancer);
-  const persistor = persistStore(store);
+  const persistor = persistStore(store as Store);
   return { store, persistor };
 }

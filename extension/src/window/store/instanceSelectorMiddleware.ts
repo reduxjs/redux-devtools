@@ -1,4 +1,4 @@
-import { Dispatch, MiddlewareAPI } from 'redux';
+import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 import {
   SELECT_INSTANCE,
   StoreAction,
@@ -9,7 +9,7 @@ import {
 function selectInstance(
   tabId: number,
   store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
-  next: Dispatch<StoreAction>,
+  next: (action: unknown) => unknown,
 ) {
   const instances = store.getState().instances;
   if (instances.current === 'default') return;
@@ -33,10 +33,10 @@ function getCurrentTabId(next: (tabId: number) => void) {
   );
 }
 
-export default function popupSelector(
-  store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
-) {
-  return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
+const popupSelector: Middleware<{}, StoreState, Dispatch<StoreAction>> =
+  (store) => (next) => (untypedAction) => {
+    const action = untypedAction as StoreAction;
+
     const result = next(action);
     if (action.type === UPDATE_STATE) {
       if (chrome.devtools && chrome.devtools.inspectedWindow) {
@@ -47,4 +47,5 @@ export default function popupSelector(
     }
     return result;
   };
-}
+
+export default popupSelector;
