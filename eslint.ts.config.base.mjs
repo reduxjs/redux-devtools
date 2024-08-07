@@ -2,34 +2,34 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default (tsconfigRootDir) => [
+export default (tsconfigRootDir, files = ['**/*.ts'], project = true) => [
   {
-    files: ['**/*.ts'],
+    files,
     ...eslint.configs.recommended,
   },
   ...tseslint.configs.recommendedTypeChecked.map((config) => ({
-    files: ['**/*.ts'],
+    files,
     ...config,
   })),
   ...tseslint.configs.stylisticTypeChecked.map((config) => ({
-    files: ['**/*.ts'],
+    files,
     ...config,
   })),
   {
-    files: ['**/*.ts'],
+    files,
     languageOptions: {
       parserOptions: {
-        project: true,
+        project,
         tsconfigRootDir,
       },
     },
   },
   {
-    files: ['**/*.ts'],
+    files,
     ...eslintConfigPrettier,
   },
   {
-    files: ['**/*.ts'],
+    files,
     rules: {
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',

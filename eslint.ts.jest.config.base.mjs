@@ -3,7 +3,7 @@ import tseslint from 'typescript-eslint';
 import jest from 'eslint-plugin-jest';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default (files, tsconfigRootDir, tsconfigFile) => [
+export default (files, tsconfigRootDir, project) => [
   {
     files,
     ...eslint.configs.recommended,
@@ -20,7 +20,7 @@ export default (files, tsconfigRootDir, tsconfigFile) => [
     files,
     languageOptions: {
       parserOptions: {
-        project: [tsconfigFile],
+        project,
         tsconfigRootDir,
       },
     },
