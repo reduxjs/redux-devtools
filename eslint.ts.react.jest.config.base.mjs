@@ -65,14 +65,6 @@ export default (files, tsconfigRootDir, project) => [
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',
       '@typescript-eslint/no-unsafe-member-access': 'off',
-      '@typescript-eslint/no-misused-promises': [
-        'error',
-        {
-          checksVoidReturn: {
-            attributes: false,
-          },
-        },
-      ],
       '@typescript-eslint/prefer-optional-chain': 'off',
       '@typescript-eslint/no-base-to-string': 'off',
       '@typescript-eslint/consistent-indexed-object-style': 'off',
@@ -88,7 +80,6 @@ export default (files, tsconfigRootDir, project) => [
       '@typescript-eslint/no-duplicate-type-constituents': 'off',
       '@typescript-eslint/array-type': 'off',
       '@typescript-eslint/prefer-function-type': 'off',
-      'react/prop-types': 'off',
     },
   },
 ];
