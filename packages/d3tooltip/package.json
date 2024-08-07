@@ -27,18 +27,14 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run lint"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
-    "@typescript-eslint/eslint-plugin": "^8.0.1",
-    "@typescript-eslint/parser": "^8.0.1",
     "d3": "^7.9.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
     "rimraf": "^6.0.1",
     "typescript": "~5.5.4"
   },
