@@ -13,7 +13,16 @@ function selectInstance(
 ) {
   const instances = store.getState().instances;
   if (instances.current === 'default') return;
-  const connections = instances.connections[tabId];
+
+  const connections = Object.entries(instances.connections).reduce<
+    (string | number)[]
+  >((acc, [key, connections]) => {
+    if (key.startsWith(String(tabId))) {
+      return [...acc, ...connections];
+    }
+    return acc;
+  }, []);
+
   if (connections && connections.length === 1) {
     next({ type: SELECT_INSTANCE, selected: connections[0] });
   }
