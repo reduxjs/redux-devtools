@@ -8,5 +8,5 @@ export default [
   ...eslintTsReactJest(import.meta.dirname),
   {
     ignores: ['lib'],
-  }
+  },
 ];

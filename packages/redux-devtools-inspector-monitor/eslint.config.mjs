@@ -11,6 +11,6 @@ export default [
     files: ['**/*.ts', '**/*.tsx'],
     rules: {
       'react/no-unknown-property': ['error', { ignore: ['css'] }],
-    }
-  }
+    },
+  },
 ];
