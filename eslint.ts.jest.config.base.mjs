@@ -3,42 +3,42 @@ import tseslint from 'typescript-eslint';
 import jest from 'eslint-plugin-jest';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default (files, tsconfigRootDir, project) => [
+export default (tsconfigRootDir) => [
   {
-    files,
+    files: ['test/**/*.ts'],
     ...eslint.configs.recommended,
   },
   ...tseslint.configs.recommendedTypeChecked.map((config) => ({
-    files,
+    files: ['test/**/*.ts'],
     ...config,
   })),
   ...tseslint.configs.stylisticTypeChecked.map((config) => ({
-    files,
+    files: ['test/**/*.ts'],
     ...config,
   })),
   {
-    files,
+    files: ['test/**/*.ts'],
     languageOptions: {
       parserOptions: {
-        project,
+        project: ['./tsconfig.test.json'],
         tsconfigRootDir,
       },
     },
   },
   {
-    files,
+    files: ['test/**/*.ts'],
     ...jest.configs['flat/recommended'],
   },
   {
-    files,
+    files: ['test/**/*.ts'],
     ...jest.configs['jest/style'],
   },
   {
-    files,
+    files: ['test/**/*.ts'],
     ...eslintConfigPrettier,
   },
   {
-    files,
+    files: ['test/**/*.ts'],
     rules: {
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',

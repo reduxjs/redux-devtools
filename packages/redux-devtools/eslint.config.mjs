@@ -5,9 +5,7 @@ import eslintTsReactJest from '../../eslint.ts.react.jest.config.base.mjs';
 export default [
   ...eslintJs,
   ...eslintTsReact(import.meta.dirname),
-  ...eslintTsReactJest(['test/**/*.ts', 'test/**/*.tsx'], import.meta.dirname, [
-    './tsconfig.test.json',
-  ]),
+  ...eslintTsReactJest(import.meta.dirname),
   {
     ignores: ['examples', 'lib'],
   },

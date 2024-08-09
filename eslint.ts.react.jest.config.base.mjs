@@ -6,34 +6,34 @@ import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
 import jest from 'eslint-plugin-jest';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default (files, tsconfigRootDir, project) => [
+export default (tsconfigRootDir) => [
   {
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     ...eslint.configs.recommended,
   },
   ...tseslint.configs.recommendedTypeChecked.map((config) => ({
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     ...config,
   })),
   ...tseslint.configs.stylisticTypeChecked.map((config) => ({
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     ...config,
   })),
   {
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     languageOptions: {
       parserOptions: {
-        project,
+        project: ['./tsconfig.test.json'],
         tsconfigRootDir,
       },
     },
   },
   {
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     ...react.configs.flat.recommended,
   },
   {
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     settings: {
       react: {
         version: 'detect',
@@ -41,25 +41,25 @@ export default (files, tsconfigRootDir, project) => [
     },
   },
   {
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     plugins: {
       'react-hooks': fixupPluginRules(eslintPluginReactHooks),
     },
   },
   {
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     ...jest.configs['flat/recommended'],
   },
   {
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     ...jest.configs['jest/style'],
   },
   {
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     ...eslintConfigPrettier,
   },
   {
-    files,
+    files: ['test/**/*.ts', 'test/**/*.tsx'],
     rules: {
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',

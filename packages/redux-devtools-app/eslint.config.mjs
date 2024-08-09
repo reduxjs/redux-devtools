@@ -12,9 +12,7 @@ export default [
     ['demo/**/*.ts', 'demo/**/*.tsx'],
     ['./tsconfig.demo.json'],
   ),
-  ...eslintTsReactJest(['test/**/*.ts', 'test/**/*.tsx'], import.meta.dirname, [
-    './tsconfig.test.json',
-  ]),
+  ...eslintTsReactJest(import.meta.dirname),
   ...eslintTs(
     import.meta.dirname,
     ['webpack.config.ts', 'webpack.config.umd.ts'],
