@@ -1630,8 +1630,8 @@ importers:
         specifier: ^0.10.0
         version: link:../react-base16-styling
       source-map:
-        specifier: ^0.5.7
-        version: 0.5.7
+        specifier: ^0.7.4
+        version: 0.7.4
     devDependencies:
       '@babel/cli':
         specifier: ^7.24.8
@@ -1685,8 +1685,8 @@ importers:
         specifier: ^18.3.3
         version: 18.3.3
       '@types/source-map':
-        specifier: 0.5.2
-        version: 0.5.2
+        specifier: 0.5.7
+        version: 0.5.7
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.14.14)(ts-node@10.9.2)
@@ -8985,8 +8985,11 @@ packages:
       '@types/node': 20.14.14
     dev: true
 
-  /@types/source-map@0.5.2:
-    resolution: {integrity: sha512-++w4WmMbk3dS3UeHGzAG+xJOSz5Xqtjys/TBkqG3qp3SeWE7Wwezqe5eB7B51cxUyh4PW7bwVotpsLdBK0D8cw==}
+  /@types/source-map@0.5.7:
+    resolution: {integrity: sha512-LrnsgZIfJaysFkv9rRJp4/uAyqw87oVed3s1hhF83nwbo9c7MG9g5DqR0seHP+lkX4ldmMrVolPjQSe2ZfD0yA==}
+    deprecated: This is a stub types definition for source-map (https://github.com/mozilla/source-map). source-map provides its own type definitions, so you don't need @types/source-map installed!
+    dependencies:
+      source-map: 0.7.4
     dev: true
 
   /@types/stack-utils@2.0.3:
@@ -17938,6 +17941,10 @@ packages:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /source-map@0.7.4:
+    resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
+    engines: {node: '>= 8'}
 
   /space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
