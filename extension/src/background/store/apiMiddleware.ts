@@ -644,7 +644,8 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     connections.panel[id] = port;
     monitorInstances(true, port.name);
     monitors++;
-    listener = (msg: BackgroundAction) => {
+    listener = (msg: BackgroundAction | 'heartbeat') => {
+      if (msg === 'heartbeat') return;
       store.dispatch(msg);
     };
     port.onMessage.addListener(listener);

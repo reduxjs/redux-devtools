@@ -103,9 +103,15 @@ let splitMessage: SplitUpdateStateRequest<unknown, Action<string>>;
 
 function init(id: number) {
   renderNA();
+
   bgConnection = chrome.runtime.connect({
     name: id ? id.toString() : undefined,
   });
+
+  setInterval(() => {
+    bgConnection.postMessage('heartbeat');
+  }, 15000);
+
   bgConnection.onMessage.addListener(
     <S, A extends Action<string>>(
       message: PanelMessageWithSplitAction<S, A>,
