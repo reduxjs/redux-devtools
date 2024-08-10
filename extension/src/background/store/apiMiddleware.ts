@@ -601,7 +601,8 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     id = getId(port.sender!);
     if (port.sender!.frameId) id = `${id}-${port.sender!.frameId}`;
     connections.tab[id] = port;
-    listener = (msg: ContentScriptToBackgroundMessage<S, A>) => {
+    listener = (msg: ContentScriptToBackgroundMessage<S, A> | 'heartbeat') => {
+      if (msg === 'heartbeat') return;
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
           chrome.pageAction.show(id);

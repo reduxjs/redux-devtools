@@ -318,3 +318,7 @@ function handleMessages<S, A extends Action<string>>(
 }
 
 window.addEventListener('message', handleMessages, false);
+
+setInterval(() => {
+  bg?.postMessage('heartbeat');
+}, 15000);
