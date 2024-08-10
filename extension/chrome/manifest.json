@@ -43,19 +43,20 @@
     {
       "matches": ["<all_urls>"],
       "exclude_globs": ["https://www.google*"],
-      "js": ["content.bundle.js", "pagewrap.bundle.js"],
+      "js": ["content.bundle.js"],
       "run_at": "document_start",
       "all_frames": true
+    },
+    {
+      "matches": ["<all_urls>"],
+      "exclude_globs": ["https://www.google*"],
+      "js": ["page.bundle.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
     }
   ],
   "devtools_page": "devtools.html",
-  "web_accessible_resources": [
-    {
-      "resources": ["page.bundle.js"],
-      "matches": ["<all_urls>"],
-      "extension_ids": []
-    }
-  ],
   "externally_connectable": {
     "ids": ["*"]
   },
