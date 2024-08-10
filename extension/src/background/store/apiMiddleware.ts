@@ -14,7 +14,6 @@ import {
 import syncOptions, {
   Options,
   OptionsMessage,
-  SyncOptions,
 } from '../../options/syncOptions';
 import openDevToolsWindow, { DevToolsPosition } from '../openWindow';
 import { getReport } from '../logging';
@@ -32,6 +31,7 @@ import { LiftedState } from '@redux-devtools/instrument';
 import type { BackgroundAction, LiftedActionAction } from './backgroundStore';
 import type { Position } from '../../pageScript/api/openWindow';
 import type { BackgroundState } from './backgroundReducer';
+import { store } from '../index';
 
 interface TabMessageBase {
   readonly type: string;
@@ -346,7 +346,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as AppDispatchAction,
@@ -360,7 +360,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as unknown as AppDispatchAction,
@@ -374,7 +374,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as unknown as AppDispatchAction,
@@ -388,7 +388,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as unknown as AppDispatchAction,
@@ -402,7 +402,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as AppDispatchAction,
@@ -434,7 +434,7 @@ function monitorInstances(shouldMonitor: boolean, id?: string) {
 }
 
 function getReducerError() {
-  const instancesState = window.store.getState().instances;
+  const instancesState = store.getState().instances;
   const payload = instancesState.states[instancesState.current];
   const computedState = payload.computedStates[payload.currentStateIndex];
   if (!computedState) return false;
@@ -442,11 +442,11 @@ function getReducerError() {
 }
 
 function togglePersist() {
-  const state = window.store.getState();
+  const state = store.getState();
   if (state.instances.persisted) {
     Object.keys(state.instances.connections).forEach((id) => {
       if (connections.tab[id]) return;
-      window.store.dispatch({ type: REMOVE_INSTANCE, id });
+      store.dispatch({ type: REMOVE_INSTANCE, id });
       toMonitors({ type: 'NA', id });
     });
   }
@@ -487,8 +487,8 @@ function messaging<S, A extends Action<string>>(
   if (sender.frameId) tabId = `${tabId}-${sender.frameId}`;
 
   if (request.type === 'STOP') {
-    if (!Object.keys(window.store.getState().instances.connections).length) {
-      window.store.dispatch({ type: DISCONNECTED });
+    if (!Object.keys(store.getState().instances.connections).length) {
+      store.dispatch({ type: DISCONNECTED });
     }
     return;
   }
@@ -497,7 +497,7 @@ function messaging<S, A extends Action<string>>(
     return;
   }
   if (request.type === 'GET_OPTIONS') {
-    window.syncOptions.get((options) => {
+    syncOptionsToAllTabs.get((options) => {
       sendResponse!({ options });
     });
     return;
@@ -560,7 +560,7 @@ function messaging<S, A extends Action<string>>(
   if (request.instanceId) {
     action.request.instanceId = instanceId;
   }
-  window.store.dispatch(action);
+  store.dispatch(action);
 
   if (request.type === 'EXPORT') {
     toMonitors(action, tabId, true);
@@ -580,8 +580,8 @@ function disconnect(
     if (p) p.onDisconnect.removeListener(disconnectListener);
     delete connections[type][id];
     if (type === 'tab') {
-      if (!window.store.getState().instances.persisted) {
-        window.store.dispatch({ type: REMOVE_INSTANCE, id });
+      if (!store.getState().instances.persisted) {
+        store.dispatch({ type: REMOVE_INSTANCE, id });
         toMonitors({ type: 'NA', id });
       }
     } else {
@@ -595,7 +595,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
   let id: number | string;
   let listener;
 
-  window.store.dispatch({ type: CONNECTED, port });
+  store.dispatch({ type: CONNECTED, port });
 
   if (port.name === 'tab') {
     id = getId(port.sender!);
@@ -609,7 +609,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
         }
         if (isMonitored) port.postMessage({ type: 'START' });
 
-        const state = window.store.getState();
+        const state = store.getState();
         if (state.instances.persisted) {
           const instanceId = `${id}/${msg.instanceId}`;
           const persistedState = state.instances.states[instanceId];
@@ -645,7 +645,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     monitorInstances(true, port.name);
     monitors++;
     listener = (msg: BackgroundAction) => {
-      window.store.dispatch(msg);
+      store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
     port.onDisconnect.addListener(disconnect('panel', id, listener));
@@ -662,13 +662,7 @@ chrome.notifications.onClicked.addListener((id) => {
   openDevToolsWindow('devtools-right');
 });
 
-declare global {
-  interface Window {
-    syncOptions: SyncOptions;
-  }
-}
-
-window.syncOptions = syncOptions(toAllTabs); // Expose to the options page
+const syncOptionsToAllTabs = syncOptions(toAllTabs); // Expose to the options page
 
 const api: Middleware<{}, BackgroundState, Dispatch<BackgroundAction>> =
   (store) => (next) => (untypedAction) => {
