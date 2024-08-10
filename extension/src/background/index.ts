@@ -12,8 +12,10 @@ chrome.commands.onCommand.addListener((shortcut) => {
   openDevToolsWindow(shortcut as DevToolsPosition);
 });
 
-// Create the context menu when installed
+// Disable the action by default and create the context menu when installed
 chrome.runtime.onInstalled.addListener(() => {
+  chrome.action.disable();
+
   syncOptions().get((option) => {
     if (option.showContextMenus) createMenu();
   });

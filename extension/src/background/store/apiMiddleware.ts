@@ -605,8 +605,8 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
       if (msg === 'heartbeat') return;
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
-          chrome.pageAction.show(id);
-          chrome.pageAction.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
+          chrome.action.enable(id);
+          chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
         }
         if (isMonitored) port.postMessage({ type: 'START' });
 
