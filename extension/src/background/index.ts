@@ -1,7 +1,7 @@
 import configureStore from './store/backgroundStore';
 import openDevToolsWindow, { DevToolsPosition } from './openWindow';
 import { createMenu, removeMenu } from './contextMenus';
-import syncOptions from '../options/syncOptions';
+import createSyncOptions from '../options/syncOptions';
 
 // Expose the extension's store globally to access it from the windows
 // via chrome.runtime.getBackgroundPage
@@ -16,7 +16,7 @@ chrome.commands.onCommand.addListener((shortcut) => {
 chrome.runtime.onInstalled.addListener(() => {
   chrome.action.disable();
 
-  syncOptions().get((option) => {
+  createSyncOptions().get((option) => {
     if (option.showContextMenus) createMenu();
   });
 });

@@ -11,7 +11,7 @@ import {
   TOGGLE_PERSIST,
   UPDATE_STATE,
 } from '@redux-devtools/app';
-import syncOptions, {
+import createSyncOptions, {
   Options,
   OptionsMessage,
 } from '../../options/syncOptions';
@@ -420,6 +420,8 @@ function toAllTabs(msg: TabMessage) {
   });
 }
 
+const syncOptions = createSyncOptions(toAllTabs);
+
 function monitorInstances(shouldMonitor: boolean, id?: string) {
   if (!id && isMonitored === shouldMonitor) return;
   const action = {
@@ -497,7 +499,7 @@ function messaging<S, A extends Action<string>>(
     return;
   }
   if (request.type === 'GET_OPTIONS') {
-    syncOptionsToAllTabs.get((options) => {
+    syncOptions.get((options) => {
       sendResponse!({ options });
     });
     return;
@@ -663,8 +665,6 @@ chrome.notifications.onClicked.addListener((id) => {
   chrome.notifications.clear(id);
   openDevToolsWindow('devtools-right');
 });
-
-const syncOptionsToAllTabs = syncOptions(toAllTabs); // Expose to the options page
 
 const api: Middleware<{}, BackgroundState, Dispatch<BackgroundAction>> =
   (store) => (next) => (untypedAction) => {

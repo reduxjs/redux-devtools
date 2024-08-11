@@ -154,7 +154,7 @@ export interface SyncOptions {
   readonly subscribe: (callback: (options: Options) => void) => void;
 }
 
-export default function syncOptions(toAllTabs?: ToAllTabs): SyncOptions {
+export default function createSyncOptions(toAllTabs?: ToAllTabs): SyncOptions {
   if (toAllTabs && !options) get(() => {}); // Initialize
   return {
     save: save(toAllTabs),
