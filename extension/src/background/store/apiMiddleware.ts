@@ -11,10 +11,7 @@ import {
   TOGGLE_PERSIST,
   UPDATE_STATE,
 } from '@redux-devtools/app';
-import createSyncOptions, {
-  Options,
-  OptionsMessage,
-} from '../../options/syncOptions';
+import type { Options, OptionsMessage } from '../../options/syncOptions';
 import openDevToolsWindow, { DevToolsPosition } from '../openWindow';
 import { getReport } from '../logging';
 import { Action, Dispatch, Middleware } from 'redux';
@@ -49,6 +46,11 @@ interface StopAction extends TabMessageBase {
   readonly type: 'STOP';
   readonly state?: never;
   readonly id?: never;
+}
+
+interface OptionsAction {
+  readonly type: 'OPTIONS';
+  readonly options: Options;
 }
 
 interface DispatchAction extends TabMessageBase {
@@ -196,7 +198,7 @@ interface SplitUpdateStateAction<S, A extends Action<string>> {
 export type TabMessage =
   | StartAction
   | StopAction
-  | OptionsMessage
+  | OptionsAction
   | DispatchAction
   | ImportAction
   | ActionAction
@@ -414,13 +416,10 @@ function toContentScript(messageBody: ToContentScriptMessage) {
 }
 
 function toAllTabs(msg: TabMessage) {
-  const tabs = connections.tab;
-  Object.keys(tabs).forEach((id) => {
-    tabs[id].postMessage(msg);
-  });
+  for (const tabPort of Object.values(connections.tab)) {
+    tabPort.postMessage(msg);
+  }
 }
-
-const syncOptions = createSyncOptions(toAllTabs);
 
 function monitorInstances(shouldMonitor: boolean, id?: string) {
   if (!id && isMonitored === shouldMonitor) return;
@@ -463,26 +462,17 @@ interface OpenOptionsMessage {
   readonly type: 'OPEN_OPTIONS';
 }
 
-interface GetOptionsMessage {
-  readonly type: 'GET_OPTIONS';
-}
-
-export type SingleMessage =
-  | OpenMessage
-  | OpenOptionsMessage
-  | GetOptionsMessage;
+export type SingleMessage = OpenMessage | OpenOptionsMessage | OptionsMessage;
 
 type BackgroundStoreMessage<S, A extends Action<string>> =
   | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
   | SplitMessage
   | SingleMessage;
-type BackgroundStoreResponse = { readonly options: Options };
 
 // Receive messages from content scripts
 function messaging<S, A extends Action<string>>(
   request: BackgroundStoreMessage<S, A>,
   sender: chrome.runtime.MessageSender,
-  sendResponse?: (response?: BackgroundStoreResponse) => void,
 ) {
   let tabId = getId(sender);
   if (!tabId) return;
@@ -498,10 +488,8 @@ function messaging<S, A extends Action<string>>(
     chrome.runtime.openOptionsPage();
     return;
   }
-  if (request.type === 'GET_OPTIONS') {
-    syncOptions.get((options) => {
-      sendResponse!({ options });
-    });
+  if (request.type === 'OPTIONS') {
+    toAllTabs({ type: 'OPTIONS', options: request.options });
     return;
   }
   if (request.type === 'GET_REPORT') {
