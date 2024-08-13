@@ -249,7 +249,6 @@ const chunks: {
   >;
 } = {};
 let monitors = 0;
-let isMonitored = false;
 
 const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
   sender.tab ? sender.tab.id! : name || sender.id!;
@@ -418,7 +417,6 @@ function toAllTabs(msg: TabMessage) {
 }
 
 function monitorInstances(shouldMonitor: boolean, id?: string) {
-  if (!id && isMonitored === shouldMonitor) return;
   const action = {
     type: shouldMonitor ? ('START' as const) : ('STOP' as const),
   };
@@ -427,7 +425,6 @@ function monitorInstances(shouldMonitor: boolean, id?: string) {
   } else {
     toAllTabs(action);
   }
-  isMonitored = shouldMonitor;
 }
 
 function getReducerError() {
@@ -594,7 +591,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
           chrome.action.enable(id);
           chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
         }
-        if (isMonitored) port.postMessage({ type: 'START' });
+        port.postMessage({ type: 'START' });
 
         const state = store.getState();
         if (state.instances.persisted) {
@@ -623,6 +620,11 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     id = getId(port.sender!, port.name);
     connections.monitor[id] = port;
     monitorInstances(true);
+    listener = (msg: BackgroundAction | 'heartbeat') => {
+      if (msg === 'heartbeat') return;
+      store.dispatch(msg);
+    };
+    port.onMessage.addListener(listener);
     monitors++;
     port.onDisconnect.addListener(disconnect('monitor', id));
   } else {
