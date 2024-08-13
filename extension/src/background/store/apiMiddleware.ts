@@ -490,12 +490,8 @@ function messaging<S, A extends Action<string>>(
     return;
   }
   if (request.type === 'OPEN') {
-    let position: DevToolsPosition = 'devtools-left';
-    if (
-      ['remote', 'panel', 'left', 'right', 'bottom'].indexOf(
-        request.position,
-      ) !== -1
-    ) {
+    let position: DevToolsPosition = 'devtools-window';
+    if (['remote', 'window'].includes(request.position)) {
       position = ('devtools-' + request.position) as DevToolsPosition;
     }
     openDevToolsWindow(position);
@@ -649,7 +645,7 @@ chrome.runtime.onMessageExternal.addListener(messaging);
 
 chrome.notifications.onClicked.addListener((id) => {
   chrome.notifications.clear(id);
-  openDevToolsWindow('devtools-right');
+  openDevToolsWindow('devtools-window');
 });
 
 const api: Middleware<{}, BackgroundState, Dispatch<BackgroundAction>> =
