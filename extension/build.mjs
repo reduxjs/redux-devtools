@@ -22,7 +22,6 @@ await esbuild.build({
   entryPoints: [
     { out: 'background.bundle', in: 'src/background/index.ts' },
     { out: 'options.bundle', in: 'src/options/index.tsx' },
-    { out: 'window.bundle', in: 'src/window/index.tsx' },
     { out: 'remote.bundle', in: 'src/remote/index.tsx' },
     { out: 'devpanel.bundle', in: 'src/devpanel/index.tsx' },
     { out: 'devtools.bundle', in: 'src/devtools/index.ts' },
@@ -48,7 +47,7 @@ if (prod) {
 console.log();
 
 console.log('Creating HTML files...');
-const htmlFiles = ['devpanel', 'devtools', 'options', 'remote', 'window'];
+const htmlFiles = ['devpanel', 'devtools', 'options', 'remote'];
 for (const htmlFile of htmlFiles) {
   fs.writeFileSync(
     `dist/${htmlFile}.html`,

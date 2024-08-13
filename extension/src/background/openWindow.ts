@@ -58,7 +58,7 @@ export default function openDevToolsWindow(position: DevToolsPosition) {
     width: 380,
     height: window.screen.availHeight,
   };
-  let url = 'window.html';
+  let url = 'devpanel.html';
   switch (position) {
     case 'devtools-right':
       params.left =
