@@ -1,5 +1,4 @@
-import mapValues from 'lodash/mapValues';
-import identity from 'lodash/identity';
+import { identity, mapValues } from 'lodash-es';
 import { Action, Reducer, StoreEnhancer } from 'redux';
 import { LiftedState } from '@redux-devtools/instrument';
 
