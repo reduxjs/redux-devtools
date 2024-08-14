@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.1.11
+
+### Patch Changes
+
+- 73688e1: Fix releasing Firefox extension
+
 ## 3.1.10
 
 ### Patch Changes
