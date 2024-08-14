@@ -1,6 +1,4 @@
-import difference from 'lodash/difference';
-import union from 'lodash/union';
-import isPlainObject from 'lodash/isPlainObject';
+import { difference, isPlainObject, union } from 'lodash-es';
 import {
   Action,
   Observer,
