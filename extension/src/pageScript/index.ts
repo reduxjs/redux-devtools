@@ -4,15 +4,8 @@ import {
   getActionsArray,
   getLocalFilter,
 } from '@redux-devtools/utils';
-import throttle from 'lodash/throttle';
-import {
-  Action,
-  ActionCreator,
-  Dispatch,
-  Reducer,
-  StoreEnhancer,
-  StoreEnhancerStoreCreator,
-} from 'redux';
+import { throttle } from 'lodash-es';
+import { Action, ActionCreator, Dispatch, Reducer, StoreEnhancer } from 'redux';
 import Immutable from 'immutable';
 import {
   EnhancedStore,
