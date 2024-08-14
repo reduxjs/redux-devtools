@@ -6,6 +6,7 @@ import { Persistor } from 'redux-persist';
 import {
   REMOVE_INSTANCE,
   StoreAction,
+  StoreState,
   UPDATE_STATE,
 } from '@redux-devtools/app';
 import App from '../app/App';
@@ -18,7 +19,6 @@ import {
   SplitUpdateStateRequest,
   UpdateStateRequest,
 } from '../background/store/apiMiddleware';
-import type { StoreStateWithoutSocket } from './store/panelReducer';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const position = location.hash;
@@ -31,7 +31,7 @@ const messageStyle: CSSProperties = {
 
 let rendered: boolean | undefined;
 let currentRoot: Root | undefined;
-let store: Store<StoreStateWithoutSocket, StoreAction> | undefined;
+let store: Store<StoreState, StoreAction> | undefined;
 let persistor: Persistor | undefined;
 let bgConnection: chrome.runtime.Port;
 let naTimeout: NodeJS.Timeout;
