@@ -15,7 +15,6 @@ import {
   LiftedState,
 } from '../src/instrument';
 import { from, Observable } from 'rxjs';
-import _ from 'lodash';
 
 type CounterAction = { type: 'INCREMENT' } | { type: 'DECREMENT' };
 function counter(state = 0, action: CounterAction) {
@@ -1171,13 +1170,15 @@ describe('instrument', () => {
   function filterStackAndTimestamps<S, A extends Action<string>>(
     state: LiftedState<S, A, null>,
   ) {
-    state.actionsById = _.mapValues(state.actionsById, (action) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      delete action.timestamp;
-      delete action.stack;
-      return action;
-    });
+    state.actionsById = Object.fromEntries(
+      Object.entries(state.actionsById).map(([actionId, action]) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        delete action.timestamp;
+        delete action.stack;
+        return [actionId, action];
+      }),
+    );
     return state;
   }
 
