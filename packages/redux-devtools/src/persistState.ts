@@ -1,11 +1,10 @@
-import { identity, mapValues } from 'lodash-es';
 import { Action, Reducer, StoreEnhancer } from 'redux';
 import { LiftedState } from '@redux-devtools/instrument';
 
 export default function persistState<S, A extends Action<string>, MonitorState>(
   sessionId?: string | null,
-  deserializeState: (state: S) => S = identity,
-  deserializeAction: (action: A) => A = identity,
+  deserializeState: (state: S) => S = (state) => state,
+  deserializeAction: (action: A) => A = (state) => state,
 ): StoreEnhancer {
   if (!sessionId) {
     return (next) =>
@@ -18,10 +17,15 @@ export default function persistState<S, A extends Action<string>, MonitorState>(
   ): LiftedState<S, A, MonitorState> {
     return {
       ...state,
-      actionsById: mapValues(state.actionsById, (liftedAction) => ({
-        ...liftedAction,
-        action: deserializeAction(liftedAction.action),
-      })),
+      actionsById: Object.fromEntries(
+        Object.entries(state.actionsById).map(([actionId, liftedAction]) => [
+          actionId,
+          {
+            ...liftedAction,
+            action: deserializeAction(liftedAction.action),
+          },
+        ]),
+      ),
       committedState: deserializeState(state.committedState),
       computedStates: state.computedStates.map((computedState) => ({
         ...computedState,
