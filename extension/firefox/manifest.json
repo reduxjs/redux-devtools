@@ -4,12 +4,6 @@
   "manifest_version": 2,
   "description": "Redux Developer Tools for debugging application state changes.",
   "homepage_url": "https://github.com/reduxjs/redux-devtools",
-  "applications": {
-    "gecko": {
-      "id": "extension@redux.devtools",
-      "strict_min_version": "54.0"
-    }
-  },
   "page_action": {
     "default_icon": "img/logo/38x38.png",
     "default_title": "Redux DevTools",
