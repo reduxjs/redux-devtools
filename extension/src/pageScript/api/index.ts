@@ -1,5 +1,5 @@
 import jsan, { Options } from 'jsan';
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash-es';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { getActionsArray, getLocalFilter } from '@redux-devtools/utils';
 import { isFiltered, PartialLiftedState } from './filters';

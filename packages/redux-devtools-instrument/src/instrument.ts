@@ -1,8 +1,6 @@
-import difference from 'lodash/difference';
-import union from 'lodash/union';
-import isPlainObject from 'lodash/isPlainObject';
 import {
   Action,
+  isPlainObject,
   Observer,
   Reducer,
   Store,
@@ -669,9 +667,18 @@ function liftReducerWith<
           const actionIds = [];
           for (let i = start; i < end; i++) actionIds.push(i);
           if (active) {
-            skippedActionIds = difference(skippedActionIds, actionIds);
+            const actionIdsSet = new Set(actionIds);
+            skippedActionIds = skippedActionIds.filter(
+              (actionId) => !actionIdsSet.has(actionId),
+            );
           } else {
-            skippedActionIds = union(skippedActionIds, actionIds);
+            const skippedActionIdsSet = new Set(skippedActionIds);
+            skippedActionIds = [
+              ...skippedActionIds,
+              ...actionIds.filter(
+                (actionId) => !skippedActionIdsSet.has(actionId),
+              ),
+            ];
           }
 
           // Optimization: we know history before this action hasn't changed
@@ -696,7 +703,10 @@ function liftReducerWith<
         }
         case ActionTypes.SWEEP: {
           // Forget any actions that are currently being skipped.
-          stagedActionIds = difference(stagedActionIds, skippedActionIds);
+          const skippedActionIdsSet = new Set(skippedActionIds);
+          stagedActionIds = stagedActionIds.filter(
+            (actionId) => !skippedActionIdsSet.has(actionId),
+          );
           skippedActionIds = [];
           currentStateIndex = Math.min(
             currentStateIndex,

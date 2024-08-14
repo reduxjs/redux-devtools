@@ -92,7 +92,7 @@ importers:
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
-      lodash:
+      lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
       react:
@@ -150,9 +150,9 @@ importers:
       '@types/chrome':
         specifier: ^0.0.269
         version: 0.0.269
-      '@types/lodash':
-        specifier: ^4.17.7
-        version: 4.17.7
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -617,9 +617,6 @@ importers:
       '@redux-devtools/instrument':
         specifier: ^2.2.0
         version: link:../redux-devtools-instrument
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
     devDependencies:
       '@babel/cli':
         specifier: ^7.24.8
@@ -645,9 +642,6 @@ importers:
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
-      '@types/lodash':
-        specifier: ^4.17.7
-        version: 4.17.7
       '@types/node':
         specifier: ^20.14.14
         version: 20.14.14
@@ -1819,13 +1813,6 @@ importers:
         version: 5.0.4(webpack-cli@5.1.4)(webpack@5.93.0)
 
   packages/redux-devtools-instrument:
-    dependencies:
-      '@babel/runtime':
-        specifier: ^7.25.0
-        version: 7.25.0
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
     devDependencies:
       '@babel/cli':
         specifier: ^7.24.8
@@ -1848,9 +1835,6 @@ importers:
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
-      '@types/lodash':
-        specifier: ^4.17.7
-        version: 4.17.7
       '@types/node':
         specifier: ^20.14.14
         version: 20.14.14
@@ -2633,9 +2617,6 @@ importers:
       jsan:
         specifier: ^3.1.14
         version: 3.1.14
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
@@ -2664,9 +2645,6 @@ importers:
       '@types/jsan':
         specifier: ^3.1.5
         version: 3.1.5
-      '@types/lodash':
-        specifier: ^4.17.7
-        version: 4.17.7
       '@types/node':
         specifier: ^20.14.14
         version: 20.14.14
