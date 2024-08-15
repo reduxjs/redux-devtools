@@ -1,5 +1,5 @@
 import jsan, { Options } from 'jsan';
-import { throttle } from 'lodash-es';
+import { throttle } from 'throttle-debounce';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { getActionsArray, getLocalFilter } from '@redux-devtools/utils';
 import { isFiltered, PartialLiftedState } from './filters';
@@ -594,11 +594,11 @@ export function connect(preConfig: Config): ConnectResponse {
     delete listeners[id];
   };
 
-  const sendDelayed = throttle(() => {
+  const sendDelayed = throttle(latency ?? 0, () => {
     sendMessage(delayedActions, delayedStates as any, config);
     delayedActions = [];
     delayedStates = [];
-  }, latency);
+  });
 
   const send = <S, A extends Action<string>>(
     action: A,

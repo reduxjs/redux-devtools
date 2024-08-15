@@ -4,7 +4,7 @@ import {
   getActionsArray,
   getLocalFilter,
 } from '@redux-devtools/utils';
-import { throttle } from 'lodash-es';
+import { throttle } from 'throttle-debounce';
 import { Action, ActionCreator, Dispatch, Reducer, StoreEnhancer } from 'redux';
 import Immutable from 'immutable';
 import {
@@ -178,6 +178,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
   }
 
   const relayState = throttle(
+    latency,
     (
       liftedState?: LiftedState<S, A, unknown> | undefined,
       libConfig?: LibConfig,
@@ -203,7 +204,6 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
         serializeAction,
       );
     },
-    latency,
   );
 
   const monitor = new Monitor(relayState);
@@ -229,7 +229,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
     );
   }
 
-  const relayAction = throttle(() => {
+  const relayAction = throttle(latency, () => {
     const liftedState = store.liftedStore.getState();
     const nextActionId = liftedState.nextActionId;
     const currentActionId = nextActionId - 1;
@@ -313,7 +313,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
       serializeState,
       serializeAction,
     );
-  }, latency);
+  });
 
   function dispatchRemotely(action: string | CustomAction) {
     if (config!.features && !config!.features.dispatch) return;
