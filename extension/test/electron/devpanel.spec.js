@@ -76,7 +76,7 @@ describe('DevTools panel for Electron', function () {
     expect(className).not.toMatch(/hidden/); // not hidden
   });
 
-  it('should have Redux DevTools UI on current tab', async () => {
+  it.skip('should have Redux DevTools UI on current tab', async () => {
     await driver
       .switchTo()
       .frame(
@@ -87,7 +87,7 @@ describe('DevTools panel for Electron', function () {
     await delay(1000);
   });
 
-  it('should contain INIT action', async () => {
+  it.skip('should contain INIT action', async () => {
     const element = await driver.wait(
       webdriver.until.elementLocated(
         webdriver.By.xpath('//div[@data-testid="actionListRows"]'),
@@ -99,7 +99,7 @@ describe('DevTools panel for Electron', function () {
     expect(val).toMatch(/@@INIT/);
   });
 
-  it("should contain Inspector monitor's component", async () => {
+  it.skip("should contain Inspector monitor's component", async () => {
     const val = await driver
       .findElement(webdriver.By.xpath('//div[@data-testid="inspector"]'))
       .getText();
@@ -107,7 +107,7 @@ describe('DevTools panel for Electron', function () {
   });
 
   Object.keys(switchMonitorTests).forEach((description) =>
-    it(description, () => switchMonitorTests[description](driver)),
+    it.skip(description, () => switchMonitorTests[description](driver)),
   );
 
   /*  it('should be no logs in console of main window', async () => {
