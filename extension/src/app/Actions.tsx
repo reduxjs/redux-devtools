@@ -18,7 +18,7 @@ import {
   TopButtons,
 } from '@redux-devtools/app';
 import { GoBroadcast } from 'react-icons/go';
-import { MdBorderBottom, MdBorderLeft, MdBorderRight } from 'react-icons/md';
+import { MdOutlineWindow } from 'react-icons/md';
 import type { Position } from '../pageScript/api/openWindow';
 import type { SingleMessage } from '../background/store/apiMiddleware';
 
@@ -98,31 +98,13 @@ class Actions extends Component<Props> {
             <DispatcherButton dispatcherIsOpen={this.props.dispatcherIsOpen} />
           )}
           <Divider />
-          {!window.isElectron && position !== '#left' && (
+          {!window.isElectron && (
             <Button
               onClick={() => {
-                this.openWindow('left');
+                this.openWindow('window');
               }}
             >
-              <MdBorderLeft />
-            </Button>
-          )}
-          {!window.isElectron && position !== '#right' && (
-            <Button
-              onClick={() => {
-                this.openWindow('right');
-              }}
-            >
-              <MdBorderRight />
-            </Button>
-          )}
-          {!window.isElectron && position !== '#bottom' && (
-            <Button
-              onClick={() => {
-                this.openWindow('bottom');
-              }}
-            >
-              <MdBorderBottom />
+              <MdOutlineWindow />
             </Button>
           )}
           {!window.isElectron && (

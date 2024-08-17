@@ -432,6 +432,13 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
             serializeAction,
           );
         }
+        return;
+      case 'OPTIONS':
+        window.devToolsOptions = Object.assign(
+          window.devToolsOptions || {},
+          message.options,
+        );
+        return;
     }
   }
 

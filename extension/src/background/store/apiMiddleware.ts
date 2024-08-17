@@ -11,11 +11,7 @@ import {
   TOGGLE_PERSIST,
   UPDATE_STATE,
 } from '@redux-devtools/app';
-import syncOptions, {
-  Options,
-  OptionsMessage,
-  SyncOptions,
-} from '../../options/syncOptions';
+import type { Options, OptionsMessage } from '../../options/syncOptions';
 import openDevToolsWindow, { DevToolsPosition } from '../openWindow';
 import { getReport } from '../logging';
 import { Action, Dispatch, Middleware } from 'redux';
@@ -32,6 +28,7 @@ import { LiftedState } from '@redux-devtools/instrument';
 import type { BackgroundAction, LiftedActionAction } from './backgroundStore';
 import type { Position } from '../../pageScript/api/openWindow';
 import type { BackgroundState } from './backgroundReducer';
+import { store } from '../index';
 
 interface TabMessageBase {
   readonly type: string;
@@ -49,6 +46,11 @@ interface StopAction extends TabMessageBase {
   readonly type: 'STOP';
   readonly state?: never;
   readonly id?: never;
+}
+
+interface OptionsAction {
+  readonly type: 'OPTIONS';
+  readonly options: Options;
 }
 
 interface DispatchAction extends TabMessageBase {
@@ -196,7 +198,7 @@ interface SplitUpdateStateAction<S, A extends Action<string>> {
 export type TabMessage =
   | StartAction
   | StopAction
-  | OptionsMessage
+  | OptionsAction
   | DispatchAction
   | ImportAction
   | ActionAction
@@ -247,7 +249,6 @@ const chunks: {
   >;
 } = {};
 let monitors = 0;
-let isMonitored = false;
 
 const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
   sender.tab ? sender.tab.id! : name || sender.id!;
@@ -261,22 +262,18 @@ type MonitorAction<S, A extends Action<string>> =
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
 const maxChromeMsgSize = 32 * 1024 * 1024;
 
+// TODO Clean up args
 function toMonitors<S, A extends Action<string>>(
   action: MonitorAction<S, A>,
   tabId?: string | number,
   verbose?: boolean,
 ) {
-  for (const monitorPort of Object.values(connections.monitor)) {
-    monitorPort.postMessage(
-      verbose || action.type === 'ERROR' || action.type === SET_PERSIST
-        ? action
-        : { type: UPDATE_STATE },
-    );
-  }
-
-  for (const panelPort of Object.values(connections.panel)) {
+  for (const port of [
+    ...Object.values(connections.monitor),
+    ...Object.values(connections.panel),
+  ]) {
     try {
-      panelPort.postMessage(action);
+      port.postMessage(action);
     } catch (err) {
       if (
         action.type !== UPDATE_STATE ||
@@ -307,11 +304,11 @@ function toMonitors<S, A extends Action<string>>(
           value;
       }
 
-      panelPort.postMessage({ ...action, request: splitMessageStart });
+      port.postMessage({ ...action, request: splitMessageStart });
 
       for (let i = 0; i < toSplit.length; i++) {
         for (let j = 0; j < toSplit[i][1].length; j += maxChromeMsgSize) {
-          panelPort.postMessage({
+          port.postMessage({
             ...action,
             request: {
               split: 'chunk',
@@ -324,7 +321,7 @@ function toMonitors<S, A extends Action<string>>(
         }
       }
 
-      panelPort.postMessage({ ...action, request: { split: 'end' } });
+      port.postMessage({ ...action, request: { split: 'end' } });
     }
   }
 }
@@ -346,7 +343,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as AppDispatchAction,
@@ -360,7 +357,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as unknown as AppDispatchAction,
@@ -374,7 +371,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as unknown as AppDispatchAction,
@@ -388,7 +385,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as unknown as AppDispatchAction,
@@ -402,7 +399,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
       type: message,
       action,
       state: nonReduxDispatch(
-        window.store,
+        store,
         message,
         instanceId,
         action as AppDispatchAction,
@@ -414,14 +411,12 @@ function toContentScript(messageBody: ToContentScriptMessage) {
 }
 
 function toAllTabs(msg: TabMessage) {
-  const tabs = connections.tab;
-  Object.keys(tabs).forEach((id) => {
-    tabs[id].postMessage(msg);
-  });
+  for (const tabPort of Object.values(connections.tab)) {
+    tabPort.postMessage(msg);
+  }
 }
 
 function monitorInstances(shouldMonitor: boolean, id?: string) {
-  if (!id && isMonitored === shouldMonitor) return;
   const action = {
     type: shouldMonitor ? ('START' as const) : ('STOP' as const),
   };
@@ -430,11 +425,10 @@ function monitorInstances(shouldMonitor: boolean, id?: string) {
   } else {
     toAllTabs(action);
   }
-  isMonitored = shouldMonitor;
 }
 
 function getReducerError() {
-  const instancesState = window.store.getState().instances;
+  const instancesState = store.getState().instances;
   const payload = instancesState.states[instancesState.current];
   const computedState = payload.computedStates[payload.currentStateIndex];
   if (!computedState) return false;
@@ -442,11 +436,11 @@ function getReducerError() {
 }
 
 function togglePersist() {
-  const state = window.store.getState();
+  const state = store.getState();
   if (state.instances.persisted) {
     Object.keys(state.instances.connections).forEach((id) => {
       if (connections.tab[id]) return;
-      window.store.dispatch({ type: REMOVE_INSTANCE, id });
+      store.dispatch({ type: REMOVE_INSTANCE, id });
       toMonitors({ type: 'NA', id });
     });
   }
@@ -461,34 +455,25 @@ interface OpenOptionsMessage {
   readonly type: 'OPEN_OPTIONS';
 }
 
-interface GetOptionsMessage {
-  readonly type: 'GET_OPTIONS';
-}
-
-export type SingleMessage =
-  | OpenMessage
-  | OpenOptionsMessage
-  | GetOptionsMessage;
+export type SingleMessage = OpenMessage | OpenOptionsMessage | OptionsMessage;
 
 type BackgroundStoreMessage<S, A extends Action<string>> =
   | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
   | SplitMessage
   | SingleMessage;
-type BackgroundStoreResponse = { readonly options: Options };
 
 // Receive messages from content scripts
 function messaging<S, A extends Action<string>>(
   request: BackgroundStoreMessage<S, A>,
   sender: chrome.runtime.MessageSender,
-  sendResponse?: (response?: BackgroundStoreResponse) => void,
 ) {
   let tabId = getId(sender);
   if (!tabId) return;
   if (sender.frameId) tabId = `${tabId}-${sender.frameId}`;
 
   if (request.type === 'STOP') {
-    if (!Object.keys(window.store.getState().instances.connections).length) {
-      window.store.dispatch({ type: DISCONNECTED });
+    if (!Object.keys(store.getState().instances.connections).length) {
+      store.dispatch({ type: DISCONNECTED });
     }
     return;
   }
@@ -496,10 +481,8 @@ function messaging<S, A extends Action<string>>(
     chrome.runtime.openOptionsPage();
     return;
   }
-  if (request.type === 'GET_OPTIONS') {
-    window.syncOptions.get((options) => {
-      sendResponse!({ options });
-    });
+  if (request.type === 'OPTIONS') {
+    toAllTabs({ type: 'OPTIONS', options: request.options });
     return;
   }
   if (request.type === 'GET_REPORT') {
@@ -507,12 +490,8 @@ function messaging<S, A extends Action<string>>(
     return;
   }
   if (request.type === 'OPEN') {
-    let position: DevToolsPosition = 'devtools-left';
-    if (
-      ['remote', 'panel', 'left', 'right', 'bottom'].indexOf(
-        request.position,
-      ) !== -1
-    ) {
+    let position: DevToolsPosition = 'devtools-window';
+    if (['remote', 'window'].includes(request.position)) {
       position = ('devtools-' + request.position) as DevToolsPosition;
     }
     openDevToolsWindow(position);
@@ -560,7 +539,7 @@ function messaging<S, A extends Action<string>>(
   if (request.instanceId) {
     action.request.instanceId = instanceId;
   }
-  window.store.dispatch(action);
+  store.dispatch(action);
 
   if (request.type === 'EXPORT') {
     toMonitors(action, tabId, true);
@@ -580,8 +559,8 @@ function disconnect(
     if (p) p.onDisconnect.removeListener(disconnectListener);
     delete connections[type][id];
     if (type === 'tab') {
-      if (!window.store.getState().instances.persisted) {
-        window.store.dispatch({ type: REMOVE_INSTANCE, id });
+      if (!store.getState().instances.persisted) {
+        store.dispatch({ type: REMOVE_INSTANCE, id });
         toMonitors({ type: 'NA', id });
       }
     } else {
@@ -595,21 +574,22 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
   let id: number | string;
   let listener;
 
-  window.store.dispatch({ type: CONNECTED, port });
+  store.dispatch({ type: CONNECTED, port });
 
   if (port.name === 'tab') {
     id = getId(port.sender!);
     if (port.sender!.frameId) id = `${id}-${port.sender!.frameId}`;
     connections.tab[id] = port;
-    listener = (msg: ContentScriptToBackgroundMessage<S, A>) => {
+    listener = (msg: ContentScriptToBackgroundMessage<S, A> | 'heartbeat') => {
+      if (msg === 'heartbeat') return;
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
-          chrome.pageAction.show(id);
-          chrome.pageAction.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
+          chrome.action.enable(id);
+          chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
         }
-        if (isMonitored) port.postMessage({ type: 'START' });
+        port.postMessage({ type: 'START' });
 
-        const state = window.store.getState();
+        const state = store.getState();
         if (state.instances.persisted) {
           const instanceId = `${id}/${msg.instanceId}`;
           const persistedState = state.instances.states[instanceId];
@@ -636,6 +616,11 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     id = getId(port.sender!, port.name);
     connections.monitor[id] = port;
     monitorInstances(true);
+    listener = (msg: BackgroundAction | 'heartbeat') => {
+      if (msg === 'heartbeat') return;
+      store.dispatch(msg);
+    };
+    port.onMessage.addListener(listener);
     monitors++;
     port.onDisconnect.addListener(disconnect('monitor', id));
   } else {
@@ -644,8 +629,9 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     connections.panel[id] = port;
     monitorInstances(true, port.name);
     monitors++;
-    listener = (msg: BackgroundAction) => {
-      window.store.dispatch(msg);
+    listener = (msg: BackgroundAction | 'heartbeat') => {
+      if (msg === 'heartbeat') return;
+      store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
     port.onDisconnect.addListener(disconnect('panel', id, listener));
@@ -659,16 +645,8 @@ chrome.runtime.onMessageExternal.addListener(messaging);
 
 chrome.notifications.onClicked.addListener((id) => {
   chrome.notifications.clear(id);
-  openDevToolsWindow('devtools-right');
+  openDevToolsWindow('devtools-window');
 });
-
-declare global {
-  interface Window {
-    syncOptions: SyncOptions;
-  }
-}
-
-window.syncOptions = syncOptions(toAllTabs); // Expose to the options page
 
 const api: Middleware<{}, BackgroundState, Dispatch<BackgroundAction>> =
   (store) => (next) => (untypedAction) => {

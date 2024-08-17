@@ -1,8 +1,10 @@
 import '../chromeApiMock';
 import {
-  injectOptions,
-  getOptionsFromBg,
+  getOptions,
   isAllowed,
+  Options,
+  prefetchOptions,
+  prepareOptionsForPage,
 } from '../options/syncOptions';
 import type { TabMessage } from '../background/store/apiMiddleware';
 import type {
@@ -84,6 +86,13 @@ interface UpdateAction {
   readonly source: typeof source;
 }
 
+interface OptionsAction {
+  readonly type: 'OPTIONS';
+  readonly options: Options;
+  readonly id: undefined;
+  readonly source: typeof source;
+}
+
 export type ContentScriptToPageScriptMessage =
   | StartAction
   | StopAction
@@ -91,7 +100,8 @@ export type ContentScriptToPageScriptMessage =
   | ImportAction
   | ActionAction
   | ExportAction
-  | UpdateAction;
+  | UpdateAction
+  | OptionsAction;
 
 interface ImportStatePayload<S, A extends Action<string>> {
   readonly type: 'IMPORT_STATE';
@@ -112,6 +122,7 @@ export type ListenerMessage<S, A extends Action<string>> =
   | ActionAction
   | ExportAction
   | UpdateAction
+  | OptionsAction
   | ImportStateDispatchAction<S, A>;
 
 function postToPageScript(message: ContentScriptToPageScriptMessage) {
@@ -156,8 +167,13 @@ function connect() {
           source,
         });
       }
-    } else if ('options' in message) {
-      injectOptions(message.options);
+    } else if (message.type === 'OPTIONS') {
+      postToPageScript({
+        type: message.type,
+        options: prepareOptionsForPage(message.options),
+        id: undefined,
+        source,
+      });
     } else {
       postToPageScript({
         type: message.type,
@@ -289,7 +305,14 @@ function send<S, A extends Action<string>>(
 ) {
   if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {
-    getOptionsFromBg();
+    getOptions((options) => {
+      postToPageScript({
+        type: 'OPTIONS',
+        options: prepareOptionsForPage(options),
+        id: undefined,
+        source,
+      });
+    });
     postToBackground({ name: 'INIT_INSTANCE', instanceId: message.instanceId });
   } else {
     postToBackground({ name: 'RELAY', message });
@@ -317,4 +340,10 @@ function handleMessages<S, A extends Action<string>>(
   tryCatch(send, message);
 }
 
+prefetchOptions();
+
 window.addEventListener('message', handleMessages, false);
+
+setInterval(() => {
+  bg?.postMessage('heartbeat');
+}, 15000);
