@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.2.0
+
+### Minor Changes
+
+- 83b2c19: Upgrade to Manifest V3
+
 ## 3.1.11
 
 ### Patch Changes
