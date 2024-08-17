@@ -8,11 +8,10 @@ html
 
   body
     #root
-      div(style='position: relative')
+      div(style='display: flex; justify-content: center; align-items: center')
         img(
           src='/img/loading.svg',
           height=300, width=350,
-          style='position: absolute; top: 50%; left: 50%; margin-top: -150px; margin-left: -175px;'
         )
     link(href='/devpanel.bundle.css', rel='stylesheet')
     script(src='/devpanel.bundle.js')
