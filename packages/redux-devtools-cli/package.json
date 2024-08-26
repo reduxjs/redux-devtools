@@ -41,16 +41,16 @@
     "node": ">= 18.12.0"
   },
   "dependencies": {
-    "@apollo/server": "^4.10.5",
-    "@emotion/react": "^11.13.0",
+    "@apollo/server": "^4.11.0",
+    "@emotion/react": "^11.13.3",
     "@redux-devtools/app": "^6.0.0",
     "@reduxjs/toolkit": "^2.2.7",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.4",
     "body-parser": "^1.20.2",
     "chalk": "^5.3.0",
     "cors": "^2.8.5",
     "cross-spawn": "^7.0.3",
-    "electron": "^31.3.1",
+    "electron": "^31.4.0",
     "express": "^4.19.2",
     "get-port": "^7.1.0",
     "graphql": "^16.9.0",
@@ -77,7 +77,7 @@
     "@types/lodash-es": "^4.17.12",
     "@types/minimist": "^1.2.5",
     "@types/morgan": "^1.9.9",
-    "@types/node": "^20.14.14",
+    "@types/node": "^20.16.1",
     "@types/semver": "^7.5.8",
     "@types/socketcluster-client": "^19.1.0",
     "@types/socketcluster-server": "^19.0.1",
@@ -88,9 +88,9 @@
     "jest": "^29.7.0",
     "ncp": "^2.0.0",
     "rimraf": "^6.0.1",
-    "socketcluster-client": "^19.2.1",
+    "socketcluster-client": "^19.2.2",
     "supertest": "^7.0.0",
-    "ts-jest": "^29.2.4",
+    "ts-jest": "^29.2.5",
     "typescript": "~5.5.4"
   }
 }
