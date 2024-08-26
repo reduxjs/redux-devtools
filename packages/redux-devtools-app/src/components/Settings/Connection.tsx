@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container, Form } from '@redux-devtools/ui';
-import {
-  JSONSchema7Definition,
-  JSONSchema7Type,
-  JSONSchema7TypeName,
-} from 'json-schema';
+import { JSONSchema7Definition, JSONSchema7TypeName } from 'json-schema';
 import { ConnectionType, saveSocketSettings } from '../../actions';
 import { StoreState } from '../../reducers';
 import { ConnectionStateOptions } from '../../reducers/connection';
-import { IChangeEvent, ISubmitEvent } from '@rjsf/core';
+import { IChangeEvent } from '@rjsf/core';
 
 declare module 'json-schema' {
   export interface JSONSchema7 {
@@ -104,13 +100,13 @@ export class Connection extends Component<Props, State> {
     }
   }
 
-  handleSave = (data: ISubmitEvent<FormData>) => {
-    this.props.saveSettings(data.formData);
+  handleSave = (data: IChangeEvent<FormData>) => {
+    this.props.saveSettings(data.formData!);
     this.setState({ changed: false });
   };
 
   handleChange = (data: IChangeEvent<FormData>) => {
-    const formData = data.formData;
+    const formData = data.formData!;
     const type = formData.type;
     if (type !== this.state.type) {
       this.setState(this.setFormData(type, true));
