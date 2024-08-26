@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldProps, Widget, WidgetProps } from '@rjsf/core';
+import { FieldProps, Widget, WidgetProps } from '@rjsf/utils';
 import Select from '../Select';
 import Slider from '../Slider';
 
