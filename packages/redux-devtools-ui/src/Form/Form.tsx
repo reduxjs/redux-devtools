@@ -9,7 +9,7 @@ import customWidgets from './widgets';
 
 const FormContainer = createStyledComponent(styles, JSONSchemaForm);
 
-export interface Props<T> extends FormProps<T> {
+export interface Props<T> extends Omit<FormProps<T>, 'validator'> {
   children?: React.ReactNode;
   submitText?: string;
   primaryButton?: boolean;

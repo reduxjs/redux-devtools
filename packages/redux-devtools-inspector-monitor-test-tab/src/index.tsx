@@ -64,17 +64,17 @@ export class TestTab<S, A extends Action<string>> extends Component<
     this.setState({ dialogStatus: null });
   };
 
-  handleSubmit = ({ formData: template }: { formData: Template }) => {
+  handleSubmit = ({ formData: template }: { formData?: Template }) => {
     const { templates = getDefaultTemplates(), selected = 0 } =
       this.getPersistedState();
     if (this.state.dialogStatus === 'Add') {
       this.updateState({
         selected: templates.length,
-        templates: [...templates, template],
+        templates: [...templates, template!],
       });
     } else {
       const editedTemplates = [...templates];
-      editedTemplates[selected] = template;
+      editedTemplates[selected] = template!;
       this.updateState({
         templates: editedTemplates,
       });
