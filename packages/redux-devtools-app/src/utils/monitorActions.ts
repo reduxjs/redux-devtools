@@ -1,5 +1,3 @@
-import difference from 'lodash/difference';
-import omit from 'lodash/omit';
 import {
   DispatchAction,
   InstancesState,
@@ -11,10 +9,18 @@ import { Dispatch, MiddlewareAPI } from 'redux';
 import { StoreActionWithoutLiftedAction } from '../actions';
 
 export function sweep(state: State): State {
+  const skippedActionIdsSet = new Set(state.skippedActionIds);
+
   return {
     ...state,
-    actionsById: omit(state.actionsById, state.skippedActionIds),
-    stagedActionIds: difference(state.stagedActionIds, state.skippedActionIds),
+    actionsById: Object.fromEntries(
+      Object.entries(state.actionsById).filter(
+        ([actionId]) => !skippedActionIdsSet.has(parseInt(actionId, 10)),
+      ),
+    ),
+    stagedActionIds: state.stagedActionIds.filter(
+      (actionId) => !skippedActionIdsSet.has(actionId),
+    ),
     skippedActionIds: [],
     currentStateIndex: Math.min(
       state.currentStateIndex,
