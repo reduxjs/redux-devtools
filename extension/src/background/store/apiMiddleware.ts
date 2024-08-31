@@ -521,7 +521,7 @@ function messaging<S, A extends Action<string>>(
 function disconnect(
   type: 'tab' | 'panel',
   id: number | string,
-  listener?: (message: any, port: chrome.runtime.Port) => void,
+  listener: (message: any, port: chrome.runtime.Port) => void,
 ) {
   return function disconnectListener() {
     const p = connections[type][id];
@@ -593,7 +593,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
       store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
-    port.onDisconnect.addListener(disconnect('panel', id));
+    port.onDisconnect.addListener(disconnect('panel', id, listener));
   }
 }
 
