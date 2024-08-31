@@ -528,7 +528,7 @@ function disconnect(
       }
     } else {
       monitors--;
-      if (monitors == 0) toAllTabs({ type: 'STOP' });
+      if (monitors === 0) toAllTabs({ type: 'STOP' });
     }
   };
 }
