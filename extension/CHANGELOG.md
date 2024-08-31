@@ -1,6 +1,6 @@
 # remotedev-redux-devtools-extension
 
-## 3.2.2
+## 3.2.3
 
 ### Patch Changes
 
