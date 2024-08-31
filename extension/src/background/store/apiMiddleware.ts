@@ -249,6 +249,7 @@ const chunks: {
   >;
 } = {};
 let monitors = 0;
+let isMonitored = false;
 
 const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
   sender.tab ? sender.tab.id! : name || sender.id!;
@@ -262,12 +263,7 @@ type MonitorAction<S, A extends Action<string>> =
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
 const maxChromeMsgSize = 32 * 1024 * 1024;
 
-// TODO Clean up args
-function toMonitors<S, A extends Action<string>>(
-  action: MonitorAction<S, A>,
-  tabId?: string | number,
-  verbose?: boolean,
-) {
+function toMonitors<S, A extends Action<string>>(action: MonitorAction<S, A>) {
   for (const port of [
     ...Object.values(connections.monitor),
     ...Object.values(connections.panel),
@@ -417,6 +413,7 @@ function toAllTabs(msg: TabMessage) {
 }
 
 function monitorInstances(shouldMonitor: boolean, id?: string) {
+  if (!id && isMonitored === shouldMonitor) return;
   const action = {
     type: shouldMonitor ? ('START' as const) : ('STOP' as const),
   };
@@ -425,6 +422,7 @@ function monitorInstances(shouldMonitor: boolean, id?: string) {
   } else {
     toAllTabs(action);
   }
+  isMonitored = shouldMonitor;
 }
 
 function getReducerError() {
@@ -499,7 +497,7 @@ function messaging<S, A extends Action<string>>(
   }
   if (request.type === 'ERROR') {
     if (request.payload) {
-      toMonitors(request, tabId);
+      toMonitors(request);
       return;
     }
     if (!request.message) return;
@@ -541,11 +539,7 @@ function messaging<S, A extends Action<string>>(
   }
   store.dispatch(action);
 
-  if (request.type === 'EXPORT') {
-    toMonitors(action, tabId, true);
-  } else {
-    toMonitors(action, tabId);
-  }
+  toMonitors(action);
 }
 
 function disconnect(
@@ -587,7 +581,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
           chrome.action.enable(id);
           chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
         }
-        port.postMessage({ type: 'START' });
+        if (isMonitored) port.postMessage({ type: 'START' });
 
         const state = store.getState();
         if (state.instances.persisted) {
