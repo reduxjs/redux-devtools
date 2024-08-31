@@ -161,10 +161,6 @@ export type UpdateStateRequest<S, A extends Action<string>> =
   | SerializedActionMessage
   | SerializedStateMessage<S, A>;
 
-export interface EmptyUpdateStateAction {
-  readonly type: typeof UPDATE_STATE;
-}
-
 interface UpdateStateAction<S, A extends Action<string>> {
   readonly type: typeof UPDATE_STATE;
   request: UpdateStateRequest<S, A>;
@@ -213,11 +209,6 @@ export type PanelMessage<S, A extends Action<string>> =
 export type PanelMessageWithSplitAction<S, A extends Action<string>> =
   | PanelMessage<S, A>
   | SplitUpdateStateAction<S, A>;
-export type MonitorMessage =
-  | NAAction
-  | ErrorMessage
-  | EmptyUpdateStateAction
-  | SetPersistAction;
 
 type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: (message: TabMessage) => void;
@@ -227,20 +218,15 @@ type PanelPort = Omit<chrome.runtime.Port, 'postMessage'> & {
     message: PanelMessageWithSplitAction<S, A>,
   ) => void;
 };
-type MonitorPort = Omit<chrome.runtime.Port, 'postMessage'> & {
-  postMessage: (message: MonitorMessage) => void;
-};
 
 export const CONNECTED = 'socket/CONNECTED';
 export const DISCONNECTED = 'socket/DISCONNECTED';
 const connections: {
   readonly tab: { [K in number | string]: TabPort };
   readonly panel: { [K in number | string]: PanelPort };
-  readonly monitor: { [K in number | string]: MonitorPort };
 } = {
   tab: {},
   panel: {},
-  monitor: {},
 };
 const chunks: {
   [instanceId: string]: PageScriptToContentScriptMessageForwardedToMonitors<
@@ -249,7 +235,6 @@ const chunks: {
   >;
 } = {};
 let monitors = 0;
-let isMonitored = false;
 
 const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
   sender.tab ? sender.tab.id! : name || sender.id!;
@@ -264,10 +249,7 @@ type MonitorAction<S, A extends Action<string>> =
 const maxChromeMsgSize = 32 * 1024 * 1024;
 
 function toMonitors<S, A extends Action<string>>(action: MonitorAction<S, A>) {
-  for (const port of [
-    ...Object.values(connections.monitor),
-    ...Object.values(connections.panel),
-  ]) {
+  for (const port of Object.values(connections.panel)) {
     try {
       port.postMessage(action);
     } catch (err) {
@@ -412,19 +394,6 @@ function toAllTabs(msg: TabMessage) {
   }
 }
 
-function monitorInstances(shouldMonitor: boolean, id?: string) {
-  if (!id && isMonitored === shouldMonitor) return;
-  const action = {
-    type: shouldMonitor ? ('START' as const) : ('STOP' as const),
-  };
-  if (id) {
-    if (connections.tab[id]) connections.tab[id].postMessage(action);
-  } else {
-    toAllTabs(action);
-  }
-  isMonitored = shouldMonitor;
-}
-
 function getReducerError() {
   const instancesState = store.getState().instances;
   const payload = instancesState.states[instancesState.current];
@@ -436,11 +405,11 @@ function getReducerError() {
 function togglePersist() {
   const state = store.getState();
   if (state.instances.persisted) {
-    Object.keys(state.instances.connections).forEach((id) => {
+    for (const id of Object.keys(state.instances.connections)) {
       if (connections.tab[id]) return;
       store.dispatch({ type: REMOVE_INSTANCE, id });
       toMonitors({ type: 'NA', id });
-    });
+    }
   }
 }
 
@@ -543,9 +512,9 @@ function messaging<S, A extends Action<string>>(
 }
 
 function disconnect(
-  type: 'tab' | 'monitor' | 'panel',
+  type: 'tab' | 'panel',
   id: number | string,
-  listener?: (message: any, port: chrome.runtime.Port) => void,
+  listener: (message: any, port: chrome.runtime.Port) => void,
 ) {
   return function disconnectListener() {
     const p = connections[type][id];
@@ -559,7 +528,7 @@ function disconnect(
       }
     } else {
       monitors--;
-      if (!monitors) monitorInstances(false);
+      if (monitors === 0) toAllTabs({ type: 'STOP' });
     }
   };
 }
@@ -581,7 +550,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
           chrome.action.enable(id);
           chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
         }
-        if (isMonitored) port.postMessage({ type: 'START' });
+        if (monitors > 0) port.postMessage({ type: 'START' });
 
         const state = store.getState();
         if (state.instances.persisted) {
@@ -607,22 +576,11 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     port.onMessage.addListener(listener);
     port.onDisconnect.addListener(disconnect('tab', id, listener));
   } else if (port.name && port.name.indexOf('monitor') === 0) {
-    id = getId(port.sender!, port.name);
-    connections.monitor[id] = port;
-    monitorInstances(true);
-    listener = (msg: BackgroundAction | 'heartbeat') => {
-      if (msg === 'heartbeat') return;
-      store.dispatch(msg);
-    };
-    port.onMessage.addListener(listener);
-    monitors++;
-    port.onDisconnect.addListener(disconnect('monitor', id));
-  } else {
     // devpanel
-    id = port.name || port.sender!.frameId!;
+    id = getId(port.sender!, port.name);
     connections.panel[id] = port;
-    monitorInstances(true, port.name);
     monitors++;
+    toAllTabs({ type: 'START' });
     listener = (msg: BackgroundAction | 'heartbeat') => {
       if (msg === 'heartbeat') return;
       store.dispatch(msg);
