@@ -249,7 +249,6 @@ const chunks: {
   >;
 } = {};
 let monitors = 0;
-let isMonitored = false;
 
 const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
   sender.tab ? sender.tab.id! : name || sender.id!;
@@ -412,17 +411,15 @@ function toAllTabs(msg: TabMessage) {
   }
 }
 
-function monitorInstances(shouldMonitor: boolean, id?: string) {
-  if (!id && isMonitored === shouldMonitor) return;
+function monitorInstances(id?: string) {
   const action = {
-    type: shouldMonitor ? ('START' as const) : ('STOP' as const),
+    type: monitors > 0 ? ('START' as const) : ('STOP' as const),
   };
   if (id) {
     if (connections.tab[id]) connections.tab[id].postMessage(action);
   } else {
     toAllTabs(action);
   }
-  isMonitored = shouldMonitor;
 }
 
 function getReducerError() {
@@ -559,7 +556,7 @@ function disconnect(
       }
     } else {
       monitors--;
-      if (!monitors) monitorInstances(false);
+      if (monitors == 0) monitorInstances();
     }
   };
 }
@@ -581,7 +578,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
           chrome.action.enable(id);
           chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
         }
-        if (isMonitored) port.postMessage({ type: 'START' });
+        if (monitors > 0) port.postMessage({ type: 'START' });
 
         const state = store.getState();
         if (state.instances.persisted) {
@@ -609,20 +606,20 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
   } else if (port.name && port.name.indexOf('monitor') === 0) {
     id = getId(port.sender!, port.name);
     connections.monitor[id] = port;
-    monitorInstances(true);
+    monitors++;
+    monitorInstances();
     listener = (msg: BackgroundAction | 'heartbeat') => {
       if (msg === 'heartbeat') return;
       store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
-    monitors++;
     port.onDisconnect.addListener(disconnect('monitor', id));
   } else {
     // devpanel
     id = port.name || port.sender!.frameId!;
     connections.panel[id] = port;
-    monitorInstances(true, port.name);
     monitors++;
+    monitorInstances(port.name);
     listener = (msg: BackgroundAction | 'heartbeat') => {
       if (msg === 'heartbeat') return;
       store.dispatch(msg);
