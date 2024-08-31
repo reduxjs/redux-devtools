@@ -1,5 +1,12 @@
 # remotedev-redux-devtools-extension
 
+## 3.2.3
+
+### Patch Changes
+
+- fd9f950: Fix monitoring on opening panel
+- e49708d: Fix manifest.json for Edge
+
 ## 3.2.1
 
 ### Patch Changes
