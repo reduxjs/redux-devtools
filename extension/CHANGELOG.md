@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.2.1
+
+### Patch Changes
+
+- abd03a7: Fix: only send data to extension if DevTools are open
+
 ## 3.2.0
 
 ### Minor Changes
