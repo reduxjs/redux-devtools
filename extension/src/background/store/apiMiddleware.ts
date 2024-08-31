@@ -394,13 +394,6 @@ function toAllTabs(msg: TabMessage) {
   }
 }
 
-function monitorInstances(shouldMonitor: boolean) {
-  const action = {
-    type: shouldMonitor ? ('START' as const) : ('STOP' as const),
-  };
-  toAllTabs(action);
-}
-
 function getReducerError() {
   const instancesState = store.getState().instances;
   const payload = instancesState.states[instancesState.current];
@@ -535,7 +528,7 @@ function disconnect(
       }
     } else {
       monitors--;
-      if (monitors == 0) monitorInstances(false);
+      if (monitors == 0) toAllTabs({ type: 'STOP' });
     }
   };
 }
@@ -587,7 +580,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     id = getId(port.sender!, port.name);
     connections.panel[id] = port;
     monitors++;
-    monitorInstances(true);
+    toAllTabs({ type: 'START' });
     listener = (msg: BackgroundAction | 'heartbeat') => {
       if (msg === 'heartbeat') return;
       store.dispatch(msg);
