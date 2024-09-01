@@ -60,25 +60,25 @@ importers:
         specifier: ^11.13.3
         version: 11.13.3(@types/react@18.3.4)(react@18.3.1)
       '@redux-devtools/app':
-        specifier: ^6.1.0
+        specifier: workspace:^
         version: link:../packages/redux-devtools-app
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../packages/redux-devtools
       '@redux-devtools/instrument':
-        specifier: ^2.1.0
+        specifier: workspace:^
         version: link:../packages/redux-devtools-instrument
       '@redux-devtools/serialize':
-        specifier: ^0.4.1
+        specifier: workspace:^
         version: link:../packages/redux-devtools-serialize
       '@redux-devtools/slider-monitor':
-        specifier: ^5.0.1
+        specifier: workspace:^
         version: link:../packages/redux-devtools-slider-monitor
       '@redux-devtools/ui':
-        specifier: ^1.3.2
+        specifier: workspace:^
         version: link:../packages/redux-devtools-ui
       '@redux-devtools/utils':
-        specifier: ^3.0.0
+        specifier: workspace:^
         version: link:../packages/redux-devtools-utils
       '@reduxjs/toolkit':
         specifier: ^2.2.7
@@ -108,7 +108,7 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       react-json-tree:
-        specifier: ^0.19.0
+        specifier: workspace:^
         version: link:../packages/react-json-tree
       react-redux:
         specifier: ^9.1.2
@@ -235,13 +235,13 @@ importers:
         specifier: ^7.9.0
         version: 7.9.0
       d3tooltip:
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../d3tooltip
       deepmerge:
         specifier: ^4.3.1
         version: 4.3.1
       map2tree:
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../map2tree
       ramda:
         specifier: ^0.30.1
@@ -260,10 +260,10 @@ importers:
   packages/d3-state-visualizer/examples/tree:
     dependencies:
       d3-state-visualizer:
-        specifier: ^3.0.0
+        specifier: workspace:^
         version: link:../..
       map2tree:
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../../map2tree
     devDependencies:
       '@babel/core':
@@ -438,7 +438,7 @@ importers:
         specifier: ^2.10.4
         version: 2.10.4(@types/react@18.3.4)(react-dom@18.3.1)(react@18.3.1)
       react-dock:
-        specifier: ^0.7.0
+        specifier: workspace:^
         version: link:..
       react-dom:
         specifier: ^18.3.1
@@ -511,7 +511,7 @@ importers:
         specifier: ^4.17.7
         version: 4.17.7
       react-base16-styling:
-        specifier: ^0.10.0
+        specifier: workspace:^
         version: link:../react-base16-styling
     devDependencies:
       '@types/jest':
@@ -551,13 +551,13 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       react-base16-styling:
-        specifier: ^0.10.0
+        specifier: workspace:^
         version: link:../../react-base16-styling
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-json-tree:
-        specifier: ^0.19.0
+        specifier: workspace:^
         version: link:..
     devDependencies:
       '@babel/core':
@@ -615,7 +615,7 @@ importers:
         specifier: ^7.25.4
         version: 7.25.4
       '@redux-devtools/instrument':
-        specifier: ^2.2.0
+        specifier: workspace:^
         version: link:../redux-devtools-instrument
     devDependencies:
       '@babel/cli':
@@ -676,10 +676,10 @@ importers:
   packages/redux-devtools-app:
     dependencies:
       '@redux-devtools/app-core':
-        specifier: ^1.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-app-core
       '@redux-devtools/ui':
-        specifier: ^1.3.2
+        specifier: workspace:^
         version: link:../redux-devtools-ui
       jsan:
         specifier: ^3.1.14
@@ -818,31 +818,31 @@ importers:
         specifier: ^7.25.4
         version: 7.25.4
       '@redux-devtools/chart-monitor':
-        specifier: ^5.0.1
+        specifier: workspace:^
         version: link:../redux-devtools-chart-monitor
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@redux-devtools/inspector-monitor':
-        specifier: ^6.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-inspector-monitor
       '@redux-devtools/inspector-monitor-test-tab':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-inspector-monitor-test-tab
       '@redux-devtools/inspector-monitor-trace-tab':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-inspector-monitor-trace-tab
       '@redux-devtools/log-monitor':
-        specifier: ^5.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-log-monitor
       '@redux-devtools/rtk-query-monitor':
-        specifier: ^5.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-rtk-query-monitor
       '@redux-devtools/slider-monitor':
-        specifier: ^5.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-slider-monitor
       '@redux-devtools/ui':
-        specifier: ^1.3.1
+        specifier: workspace:^
         version: link:../redux-devtools-ui
       d3-state-visualizer:
         specifier: ^3.0.0
@@ -972,13 +972,13 @@ importers:
         specifier: ^7.25.4
         version: 7.25.4
       d3-state-visualizer:
-        specifier: ^3.0.0
+        specifier: workspace:^
         version: link:../d3-state-visualizer
       deepmerge:
         specifier: ^4.3.1
         version: 4.3.1
       react-base16-styling:
-        specifier: ^0.10.0
+        specifier: workspace:^
         version: link:../react-base16-styling
     devDependencies:
       '@babel/cli':
@@ -1003,7 +1003,7 @@ importers:
         specifier: ^7.24.7
         version: 7.24.7(@babel/core@7.25.2)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@types/react':
         specifier: ^18.3.4
@@ -1030,7 +1030,7 @@ importers:
         specifier: ^11.13.3
         version: 11.13.3(@types/react@18.3.4)(react@18.3.1)
       '@redux-devtools/app':
-        specifier: ^6.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-app
       '@reduxjs/toolkit':
         specifier: ^2.2.7
@@ -1206,7 +1206,7 @@ importers:
         specifier: ^7.24.7
         version: 7.24.7(@babel/core@7.25.2)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@types/parse-key':
         specifier: ^0.2.2
@@ -1303,13 +1303,13 @@ importers:
         specifier: ^4.0.8
         version: 4.0.8
       react-base16-styling:
-        specifier: ^0.10.0
+        specifier: workspace:^
         version: link:../react-base16-styling
       react-dom:
         specifier: ^16.8.4 || ^17.0.0 || ^18.0.0
         version: 18.3.1(react@18.3.1)
       react-json-tree:
-        specifier: ^0.19.0
+        specifier: workspace:^
         version: link:../react-json-tree
     devDependencies:
       '@babel/cli':
@@ -1340,7 +1340,7 @@ importers:
         specifier: ^11.13.3
         version: 11.13.3(@types/react@18.3.4)(react@18.3.1)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@types/dateformat':
         specifier: ^5.0.2
@@ -1373,7 +1373,7 @@ importers:
         specifier: ^7.25.4
         version: 7.25.4
       '@redux-devtools/ui':
-        specifier: ^1.3.1
+        specifier: workspace:^
         version: link:../redux-devtools-ui
       '@types/styled-components':
         specifier: ^5.1.34
@@ -1425,10 +1425,10 @@ importers:
         specifier: ^11.13.3
         version: 11.13.3(@types/react@18.3.4)(react@18.3.1)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@redux-devtools/inspector-monitor':
-        specifier: ^6.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-inspector-monitor
       '@testing-library/dom':
         specifier: ^10.4.0
@@ -1482,19 +1482,19 @@ importers:
         specifier: ^11.13.3
         version: 11.13.3(@types/react@18.3.4)(react@18.3.1)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../redux-devtools
       '@redux-devtools/dock-monitor':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../redux-devtools-dock-monitor
       '@redux-devtools/inspector-monitor':
-        specifier: ^6.0.0
+        specifier: workspace:^
         version: link:../../redux-devtools-inspector-monitor
       '@redux-devtools/inspector-monitor-test-tab':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:..
       '@redux-devtools/ui':
-        specifier: ^1.3.0
+        specifier: workspace:^
         version: link:../../redux-devtools-ui
       immutable:
         specifier: ^4.3.7
@@ -1646,10 +1646,10 @@ importers:
         specifier: ^11.13.3
         version: 11.13.3(@types/react@18.3.4)(react@18.3.1)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@redux-devtools/inspector-monitor':
-        specifier: ^6.0.1
+        specifier: workspace:^
         version: link:../redux-devtools-inspector-monitor
       '@testing-library/dom':
         specifier: ^10.4.0
@@ -1709,13 +1709,13 @@ importers:
         specifier: ^11.13.3
         version: 11.13.3(@types/react@18.3.4)(react@18.3.1)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../redux-devtools
       '@redux-devtools/dock-monitor':
-        specifier: ^4.0.1
+        specifier: workspace:^
         version: link:../../redux-devtools-dock-monitor
       '@redux-devtools/inspector-monitor':
-        specifier: ^6.0.1
+        specifier: workspace:^
         version: link:..
       immutable:
         specifier: ^4.3.7
@@ -1727,7 +1727,7 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       react-base16-styling:
-        specifier: ^0.10.0
+        specifier: workspace:^
         version: link:../../react-base16-styling
       react-bootstrap:
         specifier: ^2.10.4
@@ -1891,7 +1891,7 @@ importers:
         specifier: ^7.24.7
         version: 7.24.7(@babel/core@7.25.2)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@types/react':
         specifier: ^18.3.4
@@ -1915,10 +1915,10 @@ importers:
         specifier: ^7.25.4
         version: 7.25.4
       '@redux-devtools/instrument':
-        specifier: ^2.2.0
+        specifier: workspace:^
         version: link:../redux-devtools-instrument
       '@redux-devtools/utils':
-        specifier: ^3.0.0
+        specifier: workspace:^
         version: link:../redux-devtools-utils
       jsan:
         specifier: ^3.1.14
@@ -1988,7 +1988,7 @@ importers:
         specifier: ^7.25.4
         version: 7.25.4
       '@redux-devtools/ui':
-        specifier: ^1.3.2
+        specifier: workspace:^
         version: link:../redux-devtools-ui
       '@types/lodash':
         specifier: ^4.17.7
@@ -2006,10 +2006,10 @@ importers:
         specifier: ^4.0.8
         version: 4.0.8
       react-base16-styling:
-        specifier: ^0.10.0
+        specifier: workspace:^
         version: link:../react-base16-styling
       react-json-tree:
-        specifier: ^0.19.0
+        specifier: workspace:^
         version: link:../react-json-tree
       styled-components:
         specifier: ^5.3.11
@@ -2043,7 +2043,7 @@ importers:
         specifier: ^11.13.3
         version: 11.13.3(@types/react@18.3.4)(react@18.3.1)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@reduxjs/toolkit':
         specifier: ^2.2.7
@@ -2115,13 +2115,13 @@ importers:
         specifier: ^0.16.1
         version: 0.16.1(typescript@5.5.4)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../redux-devtools
       '@redux-devtools/dock-monitor':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../redux-devtools-dock-monitor
       '@redux-devtools/rtk-query-monitor':
-        specifier: ^5.0.0
+        specifier: workspace:^
         version: link:..
       '@reduxjs/toolkit':
         specifier: ^2.2.7
@@ -2273,13 +2273,13 @@ importers:
         specifier: ^7.25.4
         version: 7.25.4
       '@redux-devtools/ui':
-        specifier: ^1.3.2
+        specifier: workspace:^
         version: link:../redux-devtools-ui
       '@types/styled-components':
         specifier: ^5.1.34
         version: 5.1.34
       react-base16-styling:
-        specifier: ^0.10.0
+        specifier: workspace:^
         version: link:../react-base16-styling
       styled-components:
         specifier: ^5.3.11
@@ -2304,7 +2304,7 @@ importers:
         specifier: ^7.24.7
         version: 7.24.7(@babel/core@7.25.2)
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@types/node':
         specifier: ^20.16.1
@@ -2328,16 +2328,16 @@ importers:
   packages/redux-devtools-slider-monitor/examples/todomvc:
     dependencies:
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../../redux-devtools
       '@redux-devtools/dock-monitor':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../../redux-devtools-dock-monitor
       '@redux-devtools/log-monitor':
-        specifier: ^5.0.0
+        specifier: workspace:^
         version: link:../../../redux-devtools-log-monitor
       '@redux-devtools/slider-monitor':
-        specifier: ^5.0.0
+        specifier: workspace:^
         version: link:../..
       classnames:
         specifier: ^2.5.1
@@ -2455,7 +2455,7 @@ importers:
         specifier: ^4.2.3
         version: 4.2.3
       react-base16-styling:
-        specifier: ^0.10.0
+        specifier: workspace:^
         version: link:../react-base16-styling
       react-icons:
         specifier: ^5.3.0
@@ -2600,10 +2600,10 @@ importers:
         specifier: ^7.25.4
         version: 7.25.4
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../redux-devtools
       '@redux-devtools/serialize':
-        specifier: ^0.4.2
+        specifier: workspace:^
         version: link:../redux-devtools-serialize
       '@types/get-params':
         specifier: ^0.1.2
@@ -2658,13 +2658,13 @@ importers:
   packages/redux-devtools/examples/counter:
     dependencies:
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../..
       '@redux-devtools/dock-monitor':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../../redux-devtools-dock-monitor
       '@redux-devtools/log-monitor':
-        specifier: ^5.0.0
+        specifier: workspace:^
         version: link:../../../redux-devtools-log-monitor
       react:
         specifier: ^18.3.1
@@ -2737,13 +2737,13 @@ importers:
   packages/redux-devtools/examples/todomvc:
     dependencies:
       '@redux-devtools/core':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../..
       '@redux-devtools/dock-monitor':
-        specifier: ^4.0.0
+        specifier: workspace:^
         version: link:../../../redux-devtools-dock-monitor
       '@redux-devtools/log-monitor':
-        specifier: ^5.0.0
+        specifier: workspace:^
         version: link:../../../redux-devtools-log-monitor
       classnames:
         specifier: ^2.5.1

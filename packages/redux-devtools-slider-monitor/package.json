@@ -33,8 +33,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.25.4",
-    "@redux-devtools/ui": "^1.3.2",
-    "react-base16-styling": "^0.10.0"
+    "@redux-devtools/ui": "workspace:^",
+    "react-base16-styling": "workspace:^"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.8",
@@ -43,7 +43,7 @@
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
-    "@redux-devtools/core": "^4.0.0",
+    "@redux-devtools/core": "workspace:^",
     "@types/node": "^20.16.1",
     "@types/react": "^18.3.4",
     "react": "^18.3.1",
@@ -52,7 +52,7 @@
     "typescript": "~5.5.4"
   },
   "peerDependencies": {
-    "@redux-devtools/core": "^4.0.0",
+    "@redux-devtools/core": "workspace:^",
     "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "@types/styled-components": "^5.1.34",
     "react": "^16.8.4 || ^17.0.0 || ^18.0.0",

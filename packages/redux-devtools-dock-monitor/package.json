@@ -53,7 +53,7 @@
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
-    "@redux-devtools/core": "^4.0.0",
+    "@redux-devtools/core": "workspace:^",
     "@types/parse-key": "^0.2.2",
     "@types/react": "^18.3.4",
     "react": "^18.3.1",
@@ -62,7 +62,7 @@
     "typescript": "~5.5.4"
   },
   "peerDependencies": {
-    "@redux-devtools/core": "^4.0.0",
+    "@redux-devtools/core": "workspace:^",
     "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react": "^16.8.4 || ^17.0.0 || ^18.0.0",
     "redux": "^3.4.0 || ^4.0.0 || ^5.0.0"
