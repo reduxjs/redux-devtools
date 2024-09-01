@@ -41,7 +41,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.25.4",
+    "@babel/runtime": "^7.25.6",
     "@redux-devtools/instrument": "workspace:^",
     "@redux-devtools/utils": "workspace:^",
     "jsan": "^3.1.14",
@@ -49,18 +49,18 @@
     "socketcluster-client": "^19.2.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.8",
+    "@babel/cli": "^7.25.6",
     "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "^7.25.1",
     "@babel/plugin-transform-runtime": "^7.25.4",
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-typescript": "^7.24.7",
     "@types/jsan": "^3.1.5",
-    "@types/node": "^20.16.1",
+    "@types/node": "^20.16.2",
     "@types/rn-host-detect": "^1.2.2",
     "@types/socketcluster-client": "^19.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.2.0",
-    "@typescript-eslint/parser": "^8.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "redux": "^5.0.1",
