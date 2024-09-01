@@ -2130,7 +2130,7 @@ importers:
         specifier: ^11.3.31
         version: 11.3.31(react-dom@18.3.1)(react@18.3.1)
       msw:
-        specifier: ^2.3.5
+        specifier: ^2.4.1
         version: 2.4.1(graphql@16.9.0)(typescript@5.5.4)
       react:
         specifier: ^18.3.1
@@ -16049,7 +16049,7 @@ packages:
       bl: 4.1.0
       chalk: 4.1.2
       cli-cursor: 3.1.0
-      cli-spinners: 2.6.1
+      cli-spinners: 2.9.2
       is-interactive: 1.0.0
       log-symbols: 4.1.0
       strip-ansi: 6.0.1
@@ -18153,6 +18153,7 @@ packages:
 
   /string_decoder@1.3.0:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
+    requiresBuild: true
     dependencies:
       safe-buffer: 5.2.1
 
