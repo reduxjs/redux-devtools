@@ -35,7 +35,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.25.4",
+    "@babel/runtime": "^7.25.6",
     "@redux-devtools/chart-monitor": "workspace:^",
     "@redux-devtools/core": "workspace:^",
     "@redux-devtools/inspector-monitor": "workspace:^",
@@ -53,7 +53,7 @@
     "react-is": "^18.3.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.8",
+    "@babel/cli": "^7.25.6",
     "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "^7.25.1",
     "@babel/plugin-transform-runtime": "^7.25.4",
@@ -62,15 +62,15 @@
     "@babel/preset-typescript": "^7.24.7",
     "@emotion/react": "^11.13.3",
     "@reduxjs/toolkit": "^2.2.7",
-    "@rjsf/core": "^5.20.0",
+    "@rjsf/core": "^5.20.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
-    "@testing-library/react": "^16.0.0",
+    "@testing-library/react": "^16.0.1",
     "@types/jest": "^29.5.12",
     "@types/jsan": "^3.1.5",
     "@types/json-schema": "^7.0.15",
-    "@types/node": "^20.16.1",
-    "@types/react": "^18.3.4",
+    "@types/node": "^20.16.2",
+    "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@types/styled-components": "^5.1.34",
     "cross-env": "^7.0.3",
