@@ -26,5 +26,5 @@
     "clean:all": "nx run-many --target=clean --all --parallel=1",
     "release": "pnpm build:all && pnpm publish -r"
   },
-  "packageManager": "pnpm@8.15.9"
+  "packageManager": "pnpm@9.9.0"
 }
