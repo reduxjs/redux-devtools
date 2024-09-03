@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { StylingFunction } from 'react-base16-styling';
+import { JSONArrowProps } from './JSONArrow.js';
 
 export type Key = string | number;
 
@@ -46,6 +47,7 @@ export interface CommonExternalProps {
   keyPath: KeyPath;
   labelRenderer: LabelRenderer;
   valueRenderer: ValueRenderer;
+  ArrowComponentOverride?: ComponentType<JSONArrowProps>;
   shouldExpandNodeInitially: ShouldExpandNodeInitially;
   hideRoot: boolean;
   getItemString: GetItemString;

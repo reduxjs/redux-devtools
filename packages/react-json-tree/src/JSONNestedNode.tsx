@@ -161,6 +161,7 @@ export default function JSONNestedNode(props: Props) {
           onClick={handleClick}
           ariaControls={ariaControls}
           ariaLabel={ariaLabel}
+          OverrideComponent={props.ArrowComponentOverride}
         />
       )}
       <label
