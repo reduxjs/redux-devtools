@@ -4,6 +4,7 @@ import getCollectionEntries from './getCollectionEntries.js';
 import JSONNode from './JSONNode.js';
 import ItemRange from './ItemRange.js';
 import type { CircularCache, CommonInternalProps } from './types.js';
+import getAriaPropsFromKeyPath from './getAriaPropsFromKeyPath.js';
 
 /**
  * Renders nested values (eg. objects, arrays, lists, etc.)
@@ -62,6 +63,7 @@ function renderChildNodes(
           from={entry.from}
           to={entry.to}
           renderChildNodes={renderChildNodes}
+          keyPath={[entry.from, ...keyPath]}
         />,
       );
     } else {
@@ -141,6 +143,8 @@ export default function JSONNestedNode(props: Props) {
   );
   const stylingArgs = [keyPath, nodeType, expanded, expandable] as const;
 
+  const {ariaControls, ariaLabel} = getAriaPropsFromKeyPath(keyPath)
+
   return hideRoot ? (
     <li {...styling('rootNode', ...stylingArgs)}>
       <ul {...styling('rootNodeChildren', ...stylingArgs)}>
@@ -155,6 +159,8 @@ export default function JSONNestedNode(props: Props) {
           nodeType={nodeType}
           expanded={expanded}
           onClick={handleClick}
+          ariaControls={ariaControls}
+          ariaLabel={ariaLabel}
         />
       )}
       <label
@@ -169,7 +175,7 @@ export default function JSONNestedNode(props: Props) {
       >
         {renderedItemString}
       </span>
-      <ul {...styling('nestedNodeChildren', ...stylingArgs)}>
+      <ul {...styling('nestedNodeChildren', ...stylingArgs)} id={expandable ? ariaControls : undefined}>
         {renderedChildren}
       </ul>
     </li>
