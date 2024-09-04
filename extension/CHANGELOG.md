@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.2.4
+
+### Patch Changes
+
+- f1d6158: Fix mocking Chrome API for Electron
+
 ## 3.2.3
 
 ### Patch Changes
