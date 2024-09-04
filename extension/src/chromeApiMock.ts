@@ -1,14 +1,11 @@
 // Mock not supported chrome.* API for Firefox and Electron
 
-window.isElectron =
-  window.navigator && window.navigator.userAgent.indexOf('Electron') !== -1;
-
-const isFirefox = navigator.userAgent.indexOf('Firefox') !== -1;
+const isElectron = navigator.userAgent.includes('Electron');
+const isFirefox = navigator.userAgent.includes('Firefox');
 
 // Background page only
 if (
-  (window.isElectron &&
-    location.pathname === '/_generated_background_page.html') ||
+  (isElectron && location.pathname === '/background.bundle.js') ||
   isFirefox
 ) {
   (chrome.runtime as any).onConnectExternal = {
@@ -18,7 +15,7 @@ if (
     addListener() {},
   };
 
-  if (window.isElectron) {
+  if (isElectron) {
     (chrome.notifications as any) = {
       onClicked: {
         addListener() {},
@@ -31,6 +28,11 @@ if (
         addListener() {},
       },
     };
+    (chrome.commands as any) = {
+      onCommand: {
+        addListener() {},
+      },
+    };
   } else {
     (chrome.storage as any).sync = chrome.storage.local;
     (chrome.runtime as any).onInstalled = {
@@ -39,7 +41,7 @@ if (
   }
 }
 
-if (window.isElectron) {
+if (isElectron) {
   if (!chrome.storage.local || !chrome.storage.local.remove) {
     (chrome.storage as any).local = {
       set(obj: any, callback: any) {
@@ -87,6 +89,6 @@ if (window.isElectron) {
   };
 }
 
-if (isFirefox || window.isElectron) {
+if (isFirefox || isElectron) {
   (chrome.storage as any).sync = chrome.storage.local;
 }

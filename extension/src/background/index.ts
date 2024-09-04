@@ -1,3 +1,4 @@
+import '../chromeApiMock';
 import configureStore from './store/backgroundStore';
 import openDevToolsWindow, { DevToolsPosition } from './openWindow';
 import { createMenu, removeMenu } from './contextMenus';
