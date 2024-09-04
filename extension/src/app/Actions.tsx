@@ -29,11 +29,7 @@ interface OwnProps {
 }
 type Props = StateProps & DispatchProps & OwnProps;
 
-declare global {
-  interface Window {
-    isElectron?: boolean;
-  }
-}
+const isElectron = navigator.userAgent.includes('Electron');
 
 function sendMessage(message: SingleMessage) {
   chrome.runtime.sendMessage(message);
@@ -98,7 +94,7 @@ class Actions extends Component<Props> {
             <DispatcherButton dispatcherIsOpen={this.props.dispatcherIsOpen} />
           )}
           <Divider />
-          {!window.isElectron && (
+          {!isElectron && (
             <Button
               onClick={() => {
                 this.openWindow('window');
@@ -107,7 +103,7 @@ class Actions extends Component<Props> {
               <MdOutlineWindow />
             </Button>
           )}
-          {!window.isElectron && (
+          {!isElectron && (
             <Button
               onClick={() => {
                 this.openWindow('remote');
