@@ -17,7 +17,7 @@ export function mapProps<In, Out>(
         const mappedProps = mapper(this.props);
 
         // TODO Not really sure why this is needed, but it is
-        return <Comp {...(mappedProps as Out & JSX.IntrinsicElements)} />;
+        return <Comp {...(mappedProps as any)} />;
       }
 
       static displayName = `mapProps(${

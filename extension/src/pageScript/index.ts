@@ -4,16 +4,8 @@ import {
   getActionsArray,
   getLocalFilter,
 } from '@redux-devtools/utils';
-import throttle from 'lodash/throttle';
-import {
-  Action,
-  ActionCreator,
-  Dispatch,
-  PreloadedState,
-  Reducer,
-  StoreEnhancer,
-  StoreEnhancerStoreCreator,
-} from 'redux';
+import { throttle } from 'lodash-es';
+import { Action, ActionCreator, Dispatch, Reducer, StoreEnhancer } from 'redux';
 import Immutable from 'immutable';
 import {
   EnhancedStore,
@@ -440,6 +432,13 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
             serializeAction,
           );
         }
+        return;
+      case 'OPTIONS':
+        window.devToolsOptions = Object.assign(
+          window.devToolsOptions || {},
+          message.options,
+        );
+        return;
     }
   }
 
@@ -526,34 +525,28 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
     relayState(liftedState);
   }
 
-  const enhance =
-    (): StoreEnhancer =>
-    <NextExt, NextStateExt>(
-      next: StoreEnhancerStoreCreator<NextExt, NextStateExt>,
-    ): any => {
-      return <S2 extends S, A2 extends A>(
-        reducer_: Reducer<S2, A2>,
-        initialState_?: PreloadedState<S2>,
-      ) => {
-        if (!isAllowed(window.devToolsOptions)) {
-          return next(reducer_, initialState_);
-        }
+  const enhance = (): StoreEnhancer => (next) => {
+    return <S2, A2 extends Action<string>, PreloadedState>(
+      reducer_: Reducer<S2, A2, PreloadedState>,
+      initialState_?: PreloadedState | undefined,
+    ) => {
+      if (!isAllowed(window.devToolsOptions)) {
+        return next(reducer_, initialState_);
+      }
 
-        store = stores[instanceId] = configureStore(
-          next as StoreEnhancerStoreCreator,
-          monitor.reducer,
-          {
-            ...config,
-            maxAge: getMaxAge as any,
-          },
-        )(reducer_, initialState_) as any;
+      store = stores[instanceId] = (
+        configureStore(next, monitor.reducer, {
+          ...config,
+          maxAge: getMaxAge as any,
+        }) as any
+      )(reducer_, initialState_) as any;
 
-        if (isInIframe()) setTimeout(init, 3000);
-        else init();
+      if (isInIframe()) setTimeout(init, 3000);
+      else init();
 
-        return store;
-      };
+      return store as any;
     };
+  };
 
   return enhance();
 }
@@ -598,11 +591,11 @@ export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
   ? HeadStoreEnhancer extends StoreEnhancer<infer StoreExt>
     ? StoreExt & InferComposedStoreExt<RestStoreEnhancers>
     : never
-  : unknown;
+  : {};
 
 const extensionCompose =
   (config: Config) =>
-  <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  <StoreEnhancers extends readonly StoreEnhancer[]>(
     ...funcs: StoreEnhancers
   ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>> => {
     // @ts-ignore FIXME
@@ -619,10 +612,10 @@ const extensionCompose =
 interface ReduxDevtoolsExtensionCompose {
   (
     config: Config,
-  ): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  ): <StoreEnhancers extends readonly StoreEnhancer[]>(
     ...funcs: StoreEnhancers
   ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
-  <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  <StoreEnhancers extends readonly StoreEnhancer[]>(
     ...funcs: StoreEnhancers
   ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 }
@@ -635,24 +628,22 @@ declare global {
 
 function reduxDevtoolsExtensionCompose(
   config: Config,
-): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+): <StoreEnhancers extends readonly StoreEnhancer[]>(
   ...funcs: StoreEnhancers
 ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 function reduxDevtoolsExtensionCompose<
-  StoreEnhancers extends readonly StoreEnhancer<unknown>[],
+  StoreEnhancers extends readonly StoreEnhancer[],
 >(
   ...funcs: StoreEnhancers
 ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
-function reduxDevtoolsExtensionCompose(
-  ...funcs: [Config] | StoreEnhancer<unknown>[]
-) {
+function reduxDevtoolsExtensionCompose(...funcs: [Config] | StoreEnhancer[]) {
   if (funcs.length === 0) {
     return __REDUX_DEVTOOLS_EXTENSION__();
   }
   if (funcs.length === 1 && typeof funcs[0] === 'object') {
     return extensionCompose(funcs[0]);
   }
-  return extensionCompose({})(...(funcs as StoreEnhancer<unknown>[]));
+  return extensionCompose({})(...(funcs as StoreEnhancer[]));
 }
 
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = reduxDevtoolsExtensionCompose;

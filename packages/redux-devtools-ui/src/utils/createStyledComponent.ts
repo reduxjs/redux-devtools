@@ -12,7 +12,7 @@ import { ThemeFromProvider } from './theme';
 
 type StyleFunction<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 > = InterpolationFunction<
   ThemedStyledProps<StyledComponentPropsWithRef<C> & O, Theme>
@@ -20,7 +20,7 @@ type StyleFunction<
 
 interface StylesObject<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 > {
   [type: string]: StyleFunction<C, O>;
@@ -28,13 +28,13 @@ interface StylesObject<
 
 type Styles<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 > = StylesObject<C, O> | StyleFunction<C, O>;
 
 function isStylesObject<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 >(styles: Styles<C>): styles is StylesObject<C, O> {
   return typeof styles === 'object';
@@ -42,7 +42,7 @@ function isStylesObject<
 
 const getStyle = <
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 >(
   styles: Styles<C, O>,
@@ -57,7 +57,7 @@ function isThemeFromProvider(
 
 export default function createStyledComponent<
   C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 >(
   styles: Styles<C, O>,

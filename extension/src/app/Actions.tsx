@@ -18,7 +18,7 @@ import {
   TopButtons,
 } from '@redux-devtools/app';
 import { GoBroadcast } from 'react-icons/go';
-import { MdBorderBottom, MdBorderLeft, MdBorderRight } from 'react-icons/md';
+import { MdOutlineWindow } from 'react-icons/md';
 import type { Position } from '../pageScript/api/openWindow';
 import type { SingleMessage } from '../background/store/apiMiddleware';
 
@@ -29,11 +29,7 @@ interface OwnProps {
 }
 type Props = StateProps & DispatchProps & OwnProps;
 
-declare global {
-  interface Window {
-    isElectron?: boolean;
-  }
-}
+const isElectron = navigator.userAgent.includes('Electron');
 
 function sendMessage(message: SingleMessage) {
   chrome.runtime.sendMessage(message);
@@ -98,34 +94,16 @@ class Actions extends Component<Props> {
             <DispatcherButton dispatcherIsOpen={this.props.dispatcherIsOpen} />
           )}
           <Divider />
-          {!window.isElectron && position !== '#left' && (
+          {!isElectron && (
             <Button
               onClick={() => {
-                this.openWindow('left');
+                this.openWindow('window');
               }}
             >
-              <MdBorderLeft />
+              <MdOutlineWindow />
             </Button>
           )}
-          {!window.isElectron && position !== '#right' && (
-            <Button
-              onClick={() => {
-                this.openWindow('right');
-              }}
-            >
-              <MdBorderRight />
-            </Button>
-          )}
-          {!window.isElectron && position !== '#bottom' && (
-            <Button
-              onClick={() => {
-                this.openWindow('bottom');
-              }}
-            >
-              <MdBorderBottom />
-            </Button>
-          )}
-          {!window.isElectron && (
+          {!isElectron && (
             <Button
               onClick={() => {
                 this.openWindow('remote');

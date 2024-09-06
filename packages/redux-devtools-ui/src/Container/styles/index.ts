@@ -8,7 +8,7 @@ export const MainContainerWrapper = styled.div`
   width: 100%;
   flex-flow: column nowrap;
   overflow: auto;
-  ${/* eslint-disable-next-line @typescript-eslint/ban-types */ ''}
+  ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
   background-color: ${(props: ThemedStyledProps<{}, Theme>) =>
     color(props.theme.base00, 'lighten', 0.03)};
   color: ${(props) => props.theme.base07};

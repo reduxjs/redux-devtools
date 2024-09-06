@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, PreloadedState } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import {
   CustomAction,
   DispatchAction,
@@ -60,7 +60,7 @@ export type BackgroundAction =
   | DisconnectedAction;
 
 export default function configureStore(
-  preloadedState?: PreloadedState<BackgroundState>,
+  preloadedState?: Partial<BackgroundState>,
 ) {
   return createStore(rootReducer, preloadedState, applyMiddleware(api));
   /*

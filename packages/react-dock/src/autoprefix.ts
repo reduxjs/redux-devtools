@@ -48,7 +48,7 @@ function prefixProp<Value>(key: string, value: Value) {
 export default function autoprefix(style: CSSProperties) {
   return Object.keys(style).reduce(
     (obj, key) =>
-      vendorSpecificProperties.indexOf(key) !== -1
+      vendorSpecificProperties.includes(key)
         ? {
             ...obj,
             ...prefixProp(key, style[key as keyof CSSProperties]),

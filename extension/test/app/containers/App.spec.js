@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import configureStore from '../../../src/window/store/windowStore';
+import configureStore from '../../../src/devpanel/store/panelStore';
 import App from '../../../src/app/App';
 
 Object.defineProperty(window, 'matchMedia', {

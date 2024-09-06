@@ -26,43 +26,37 @@
     "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts\" --out-dir lib/esm",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf lib",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.24.1",
-    "@redux-devtools/core": "^4.0.0",
-    "@redux-devtools/serialize": "^0.4.2",
+    "@babel/runtime": "^7.25.6",
+    "@redux-devtools/core": "workspace:^",
+    "@redux-devtools/serialize": "workspace:^",
     "@types/get-params": "^0.1.2",
     "get-params": "^0.1.2",
-    "immutable": "^4.3.5",
+    "immutable": "^4.3.7",
     "jsan": "^3.1.14",
-    "lodash": "^4.17.21",
-    "nanoid": "^5.0.6",
-    "redux": "^4.2.1"
+    "nanoid": "^5.0.7",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.1",
-    "@babel/core": "^7.24.3",
-    "@babel/eslint-parser": "^7.24.1",
-    "@babel/plugin-transform-runtime": "^7.24.3",
-    "@babel/preset-env": "^7.24.3",
-    "@babel/preset-typescript": "^7.24.1",
+    "@babel/cli": "^7.25.6",
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "@babel/plugin-transform-runtime": "^7.25.4",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-typescript": "^7.24.7",
     "@types/jsan": "^3.1.5",
-    "@types/lodash": "^4.17.0",
-    "@types/node": "^20.11.30",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "rimraf": "^5.0.5",
-    "typescript": "~5.3.3"
+    "@types/node": "^20.16.3",
+    "rimraf": "^6.0.1",
+    "typescript": "~5.5.4"
   },
   "peerDependencies": {
-    "@redux-devtools/core": "^4.0.0",
-    "immutable": "^4.3.5",
+    "@redux-devtools/core": "workspace:^",
+    "immutable": "^4.3.7",
     "redux": "^4.0.0 || ^5.0.0"
   }
 }

@@ -1,6 +1,6 @@
 import StackFrame from './react-error-overlay/utils/stack-frame';
 
-const isFF = navigator.userAgent.indexOf('Firefox') !== -1;
+const isFF = navigator.userAgent.includes('Firefox');
 
 function openResource(
   fileName: string,

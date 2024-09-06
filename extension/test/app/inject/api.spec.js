@@ -20,16 +20,7 @@ describe('API', () => {
     expect(message).toEqual({
       source: '@devtools-page',
       type: 'OPEN',
-      position: 'right',
-    });
-
-    message = await listenMessage(() => {
-      window.__REDUX_DEVTOOLS_EXTENSION__.open('left');
-    });
-    expect(message).toEqual({
-      source: '@devtools-page',
-      type: 'OPEN',
-      position: 'left',
+      position: 'window',
     });
   });
 

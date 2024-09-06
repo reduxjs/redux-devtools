@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.react.base.json",
+  "compilerOptions": {
+    "outDir": "lib/types",
+    "types": ["node"]
+  },
+  "include": ["src"]
+}

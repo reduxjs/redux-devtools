@@ -7,8 +7,7 @@ export default function configureStore<
   MonitorState,
   MonitorAction extends Action<string>,
 >(
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  next: StoreEnhancerStoreCreator<{}, unknown>,
+  next: StoreEnhancerStoreCreator,
   subscriber: Reducer<MonitorState, MonitorAction>,
   options: Options<S, A, MonitorState, MonitorAction>,
 ) {

@@ -385,7 +385,7 @@ export default class Dock extends Component<Props, State> {
 
   handleDimClick = () => {
     if (this.props.dimMode === 'opaque') {
-      this.props.onVisibleChange && this.props.onVisibleChange(false);
+      if (this.props.onVisibleChange) this.props.onVisibleChange(false);
     }
   };
 
@@ -471,7 +471,7 @@ export default class Dock extends Component<Props, State> {
         break;
     }
 
-    this.props.onSizeChange && this.props.onSizeChange(size);
+    if (this.props.onSizeChange) this.props.onSizeChange(size);
 
     if (!isControlled) {
       this.setState({ size });
