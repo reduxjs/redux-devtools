@@ -163,8 +163,8 @@ importers:
         specifier: ^5.1.34
         version: 5.1.34
       chromedriver:
-        specifier: ^126.0.5
-        version: 126.0.5
+        specifier: ^128.0.3
+        version: 128.0.3
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -6568,8 +6568,8 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@126.0.5:
-    resolution: {integrity: sha512-xXVxwxd8CJ6yg2KEvFqLQi7V0RvF78xFnLB+xo9g9MoJNHMQccD7b4OWaxtKDy5RXrMgQ6Jb6vUN3SjTYXHLEQ==}
+  chromedriver@128.0.3:
+    resolution: {integrity: sha512-Xn/bknOpGlY9tKinwS/hVWeNblSeZvbbJbF8XZ73X1jeWfAFPRXx3fMLdNNz8DqruDbx3cKEJ5wR3mnst6G3iw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -16429,7 +16429,7 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@126.0.5:
+  chromedriver@128.0.3:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.7.7
