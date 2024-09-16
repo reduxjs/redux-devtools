@@ -249,6 +249,8 @@ type MonitorAction<S, A extends Action<string>> =
 const maxChromeMsgSize = 32 * 1024 * 1024;
 
 function toMonitors<S, A extends Action<string>>(action: MonitorAction<S, A>) {
+  console.log(`Message to monitors: ${action.type}`);
+
   for (const port of Object.values(connections.panel)) {
     try {
       port.postMessage(action);
@@ -315,6 +317,8 @@ interface ImportMessage {
 type ToContentScriptMessage = ImportMessage | LiftedActionAction;
 
 function toContentScript(messageBody: ToContentScriptMessage) {
+  console.log(`Message to tab ${messageBody.id}: ${messageBody.message}`);
+
   if (messageBody.message === 'DISPATCH') {
     const { message, action, id, instanceId, state } = messageBody;
     connections.tab[id!].postMessage({
@@ -389,6 +393,8 @@ function toContentScript(messageBody: ToContentScriptMessage) {
 }
 
 function toAllTabs(msg: TabMessage) {
+  console.log(`Message to all tabs: ${msg.type}`);
+
   for (const tabPort of Object.values(connections.tab)) {
     tabPort.postMessage(msg);
   }
@@ -435,6 +441,7 @@ function messaging<S, A extends Action<string>>(
   sender: chrome.runtime.MessageSender,
 ) {
   let tabId = getId(sender);
+  console.log(`Message from tab ${tabId}: ${request.type ?? request.split}`);
   if (!tabId) return;
   if (sender.frameId) tabId = `${tabId}-${sender.frameId}`;
 
@@ -517,6 +524,8 @@ function disconnect(
   listener: (message: any, port: chrome.runtime.Port) => void,
 ) {
   return function disconnectListener() {
+    console.log(`Disconnected from ${type} ${id}`);
+
     const p = connections[type][id];
     if (listener && p) p.onMessage.removeListener(listener);
     if (p) p.onDisconnect.removeListener(disconnectListener);
@@ -541,10 +550,12 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
 
   if (port.name === 'tab') {
     id = getId(port.sender!);
+    console.log(`Connected to tab ${id}`);
     if (port.sender!.frameId) id = `${id}-${port.sender!.frameId}`;
     connections.tab[id] = port;
     listener = (msg: ContentScriptToBackgroundMessage<S, A> | 'heartbeat') => {
       if (msg === 'heartbeat') return;
+      console.log(`Message from tab ${id}: ${msg.name}`);
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
           chrome.action.enable(id);
@@ -578,11 +589,13 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
   } else if (port.name && port.name.indexOf('monitor') === 0) {
     // devpanel
     id = getId(port.sender!, port.name);
+    console.log(`Connected to monitor ${id}`);
     connections.panel[id] = port;
     monitors++;
     toAllTabs({ type: 'START' });
     listener = (msg: BackgroundAction | 'heartbeat') => {
       if (msg === 'heartbeat') return;
+      console.log(`Message from monitor ${id}: ${msg.type}`);
       store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
