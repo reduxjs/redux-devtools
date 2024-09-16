@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.2.5
+
+### Patch Changes
+
+- eb3ac09: Add logging to background service worker
+
 ## 3.2.4
 
 ### Patch Changes
