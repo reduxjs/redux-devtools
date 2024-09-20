@@ -18,10 +18,10 @@
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "build:all": "pnpn --recursive run build",
-    "lint:all": "pnpn --recursive run lint",
-    "test:all": "pnpn --recursive run test",
-    "clean:all": "pnpn --recursive run clean",
+    "build:all": "pnpm --recursive run build",
+    "lint:all": "pnpm --recursive run lint",
+    "test:all": "pnpm --recursive run test",
+    "clean:all": "pnpm --recursive run clean",
     "release": "pnpm build:all && pnpm publish -r"
   },
   "packageManager": "pnpm@9.10.0"
