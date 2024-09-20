@@ -53,7 +53,7 @@ type EnhancedStoreWithInitialDispatch<
 > = EnhancedStore<S, A, MonitorState> & { initialDispatch: Dispatch<A> };
 
 const source = '@devtools-page';
-let stores: {
+const stores: {
   [K in string | number]: EnhancedStoreWithInitialDispatch<
     unknown,
     Action<string>,
@@ -167,7 +167,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
   const localFilter = getLocalFilter(config);
   const serializeState = getSerializeParameter(config);
   const serializeAction = getSerializeParameter(config);
-  let { stateSanitizer, actionSanitizer, predicate, latency = 500 } = config;
+  const { stateSanitizer, actionSanitizer, predicate, latency = 500 } = config;
 
   // Deprecate actionsWhitelist and actionsBlacklist
   if (config.actionsWhitelist) {
@@ -447,7 +447,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
     liftedAction?: LiftedAction<S, A, unknown>,
     liftedState?: LiftedState<S, A, unknown> | undefined,
   ) => {
-    let m = (config && config.maxAge) || window.devToolsOptions.maxAge || 50;
+    const m = (config && config.maxAge) || window.devToolsOptions.maxAge || 50;
     if (
       !liftedAction ||
       noFiltersApplied(localFilter) ||
@@ -464,10 +464,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
       if (filteredActionIds.length >= m) {
         const stagedActionIds = liftedState!.stagedActionIds;
         let i = 1;
-        while (
-          maxAge > m &&
-          filteredActionIds.indexOf(stagedActionIds[i]) === -1
-        ) {
+        while (maxAge > m && !filteredActionIds.includes(stagedActionIds[i])) {
           maxAge--;
           i++;
         }
@@ -539,7 +536,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
           ...config,
           maxAge: getMaxAge as any,
         }) as any
-      )(reducer_, initialState_) as any;
+      )(reducer_, initialState_);
 
       if (isInIframe()) setTimeout(init, 3000);
       else init();
@@ -591,18 +588,19 @@ export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
   ? HeadStoreEnhancer extends StoreEnhancer<infer StoreExt>
     ? StoreExt & InferComposedStoreExt<RestStoreEnhancers>
     : never
-  : {};
+  : // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    {};
 
 const extensionCompose =
   (config: Config) =>
   <StoreEnhancers extends readonly StoreEnhancer[]>(
     ...funcs: StoreEnhancers
   ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>> => {
-    // @ts-ignore FIXME
+    // @ts-expect-error FIXME
     return (...args) => {
       const instanceId = generateId(config.instanceId);
       return [preEnhancer(instanceId), ...funcs].reduceRight(
-        // @ts-ignore FIXME
+        // @ts-expect-error FIXME
         (composed, f) => f(composed),
         __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args),
       );

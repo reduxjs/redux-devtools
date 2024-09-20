@@ -12,7 +12,7 @@ import {
 
 subscribeToOptions((options) => {
   const message: OptionsMessage = { type: 'OPTIONS', options };
-  chrome.runtime.sendMessage(message);
+  void chrome.runtime.sendMessage(message);
 });
 
 const renderOptions = (options: Options) => {

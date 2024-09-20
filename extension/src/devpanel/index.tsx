@@ -36,7 +36,7 @@ let persistor: Persistor | undefined;
 let bgConnection: chrome.runtime.Port;
 let naTimeout: NodeJS.Timeout;
 
-const isChrome = navigator.userAgent.indexOf('Firefox') === -1;
+const isChrome = !navigator.userAgent.includes('Firefox');
 
 function renderNodeAtRoot(node: ReactNode) {
   if (currentRoot) currentRoot.unmount();
@@ -67,6 +67,7 @@ function renderNA() {
         <a
           href="https://github.com/zalmoxisus/redux-devtools-extension#usage"
           target="_blank"
+          rel="noreferrer"
         >
           the instructions
         </a>
@@ -87,6 +88,7 @@ function renderNA() {
               <a
                 href="https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Troubleshooting.md#access-file-url-file"
                 target="_blank"
+                rel="noreferrer"
               >
                 See details
               </a>
@@ -139,12 +141,18 @@ function init() {
           }
 
           if (request.split === 'chunk') {
-            if ((splitMessage as Record<string, unknown>)[request.chunk[0]]) {
-              (splitMessage as Record<string, unknown>)[request.chunk[0]] +=
-                request.chunk[1];
+            if (
+              (splitMessage as unknown as Record<string, string>)[
+                request.chunk[0]
+              ]
+            ) {
+              (splitMessage as unknown as Record<string, string>)[
+                request.chunk[0]
+              ] += request.chunk[1];
             } else {
-              (splitMessage as Record<string, unknown>)[request.chunk[0]] =
-                request.chunk[1];
+              (splitMessage as unknown as Record<string, string>)[
+                request.chunk[0]
+              ] = request.chunk[1];
             }
             return;
           }

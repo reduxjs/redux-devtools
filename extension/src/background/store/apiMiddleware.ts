@@ -324,14 +324,8 @@ function toContentScript(messageBody: ToContentScriptMessage) {
     connections.tab[id!].postMessage({
       type: message,
       action,
-      state: nonReduxDispatch(
-        store,
-        message,
-        instanceId,
-        action as AppDispatchAction,
-        state,
-      ),
-      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+      state: nonReduxDispatch(store, message, instanceId, action, state),
+      id: instanceId.toString().replace(/^[^/]+\//, ''),
     });
   } else if (messageBody.message === 'IMPORT') {
     const { message, action, id, instanceId, state } = messageBody;
@@ -345,7 +339,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         action as unknown as AppDispatchAction,
         state,
       ),
-      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+      id: instanceId.toString().replace(/^[^/]+\//, ''),
     });
   } else if (messageBody.message === 'ACTION') {
     const { message, action, id, instanceId, state } = messageBody;
@@ -359,7 +353,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         action as unknown as AppDispatchAction,
         state,
       ),
-      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+      id: instanceId.toString().replace(/^[^/]+\//, ''),
     });
   } else if (messageBody.message === 'EXPORT') {
     const { message, action, id, instanceId, state } = messageBody;
@@ -373,11 +367,11 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         action as unknown as AppDispatchAction,
         state,
       ),
-      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+      id: instanceId.toString().replace(/^[^/]+\//, ''),
     });
   } else {
     const { message, action, id, instanceId, state } = messageBody;
-    connections.tab[id!].postMessage({
+    connections.tab[id].postMessage({
       type: message,
       action,
       state: nonReduxDispatch(
@@ -387,7 +381,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         action as AppDispatchAction,
         state,
       ),
-      id: (instanceId as number).toString().replace(/^[^\/]+\//, ''),
+      id: (instanceId as number).toString().replace(/^[^/]+\//, ''),
     });
   }
 }
@@ -452,7 +446,7 @@ function messaging<S, A extends Action<string>>(
     return;
   }
   if (request.type === 'OPEN_OPTIONS') {
-    chrome.runtime.openOptionsPage();
+    void chrome.runtime.openOptionsPage();
     return;
   }
   if (request.type === 'OPTIONS') {
@@ -557,8 +551,8 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
       console.log(`Message from tab ${id}: ${msg.name}`);
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
-          chrome.action.enable(id);
-          chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
+          void chrome.action.enable(id);
+          void chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
         }
         if (monitors > 0) port.postMessage({ type: 'START' });
 
@@ -611,6 +605,7 @@ chrome.notifications.onClicked.addListener((id) => {
   openDevToolsWindow('devtools-window');
 });
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 const api: Middleware<{}, BackgroundState, Dispatch<BackgroundAction>> =
   (store) => (next) => (untypedAction) => {
     const action = untypedAction as BackgroundAction;

@@ -31,19 +31,19 @@ type Props = StateProps & DispatchProps & OwnProps;
 
 const isElectron = navigator.userAgent.includes('Electron');
 
-function sendMessage(message: SingleMessage) {
-  chrome.runtime.sendMessage(message);
+async function sendMessage(message: SingleMessage) {
+  await chrome.runtime.sendMessage(message);
 }
 
 class Actions extends Component<Props> {
-  openWindow = (position: Position) => {
-    sendMessage({ type: 'OPEN', position });
+  openWindow = async (position: Position) => {
+    await sendMessage({ type: 'OPEN', position });
   };
-  openOptionsPage = () => {
-    if (navigator.userAgent.indexOf('Firefox') !== -1) {
-      sendMessage({ type: 'OPEN_OPTIONS' });
+  openOptionsPage = async () => {
+    if (navigator.userAgent.includes('Firefox')) {
+      await sendMessage({ type: 'OPEN_OPTIONS' });
     } else {
-      chrome.runtime.openOptionsPage();
+      await chrome.runtime.openOptionsPage();
     }
   };
 
@@ -85,7 +85,7 @@ class Actions extends Component<Props> {
           {features.import && <ImportButton />}
           {position &&
             (position !== '#popup' ||
-              navigator.userAgent.indexOf('Firefox') !== -1) && <PrintButton />}
+              navigator.userAgent.includes('Firefox')) && <PrintButton />}
           <Divider />
           <MonitorSelector />
           <Divider />
@@ -96,8 +96,8 @@ class Actions extends Component<Props> {
           <Divider />
           {!isElectron && (
             <Button
-              onClick={() => {
-                this.openWindow('window');
+              onClick={async () => {
+                await this.openWindow('window');
               }}
             >
               <MdOutlineWindow />
@@ -105,8 +105,8 @@ class Actions extends Component<Props> {
           )}
           {!isElectron && (
             <Button
-              onClick={() => {
-                this.openWindow('remote');
+              onClick={async () => {
+                await this.openWindow('remote');
               }}
             >
               <GoBroadcast />

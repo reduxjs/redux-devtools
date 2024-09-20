@@ -2,7 +2,7 @@ import React from 'react';
 import { FilterState } from '../pageScript/api/filters';
 import { OptionsProps } from './Options';
 
-export default ({ options, saveOption }: OptionsProps) => {
+export default function FilterGroup({ options, saveOption }: OptionsProps) {
   return (
     <fieldset className="option-group">
       <legend className="option-group__title">
@@ -68,4 +68,4 @@ export default ({ options, saveOption }: OptionsProps) => {
       </div>
     </fieldset>
   );
-};
+}

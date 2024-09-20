@@ -1,7 +1,10 @@
 import React from 'react';
 import { OptionsProps } from './Options';
 
-export default ({ options, saveOption }: OptionsProps) => {
+export default function MiscellaneousGroup({
+  options,
+  saveOption,
+}: OptionsProps) {
   return (
     <fieldset className="option-group">
       <legend className="option-group__title">Miscellaneous</legend>
@@ -47,4 +50,4 @@ export default ({ options, saveOption }: OptionsProps) => {
       </div>
     </fieldset>
   );
-};
+}

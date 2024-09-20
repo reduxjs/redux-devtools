@@ -4,8 +4,8 @@ import { persistState } from '@redux-devtools/core';
 import type { ConfigWithExpandedMaxAge } from './index';
 
 export function getUrlParam(key: string) {
-  const matches = window.location.href.match(
-    new RegExp(`[?&]${key}=([^&#]+)\\b`),
+  const matches = new RegExp(`[?&]${key}=([^&#]+)\\b`).exec(
+    window.location.href,
   );
   return matches && matches.length > 0 ? matches[1] : null;
 }

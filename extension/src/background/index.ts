@@ -15,7 +15,7 @@ chrome.commands.onCommand.addListener((shortcut) => {
 
 // Disable the action by default and create the context menu when installed
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.action.disable();
+  void chrome.action.disable();
 
   getOptions((option) => {
     if (option.showContextMenus) createMenu();
@@ -32,6 +32,7 @@ chrome.storage.onChanged.addListener((changes) => {
 
 // https://developer.chrome.com/docs/extensions/develop/migrate/to-service-workers#keep_a_service_worker_alive_continuously
 setInterval(
-  () => chrome.storage.local.set({ 'last-heartbeat': new Date().getTime() }),
+  () =>
+    void chrome.storage.local.set({ 'last-heartbeat': new Date().getTime() }),
   20000,
 );
