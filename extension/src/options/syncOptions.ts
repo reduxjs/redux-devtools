@@ -46,9 +46,9 @@ export const saveOption = <K extends keyof Options>(
   key: K,
   value: Options[K],
 ) => {
-  let obj: { [K1 in keyof Options]?: Options[K1] } = {};
+  const obj: { [K1 in keyof Options]?: Options[K1] } = {};
   obj[key] = value;
-  chrome.storage.sync.set(obj);
+  void chrome.storage.sync.set(obj);
   options![key] = value;
   for (const subscriber of subscribers) {
     subscriber(options!);
@@ -99,7 +99,10 @@ export const getOptions = (callback: (options: Options) => void) => {
   }
 };
 
-export const prefetchOptions = () => getOptions(() => {});
+export const prefetchOptions = () =>
+  getOptions(() => {
+    // do nothing.
+  });
 
 export const subscribeToOptions = (callback: (options: Options) => void) => {
   subscribers = subscribers.concat(callback);

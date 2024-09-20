@@ -1,7 +1,7 @@
 import React from 'react';
 import { OptionsProps } from './Options';
 
-export default ({ options, saveOption }: OptionsProps) => {
+export default function EditorGroup({ options, saveOption }: OptionsProps) {
   const EditorState = {
     BROWSER: 0,
     EXTERNAL: 1,
@@ -21,7 +21,7 @@ export default ({ options, saveOption }: OptionsProps) => {
           onChange={() => saveOption('useEditor', EditorState.BROWSER)}
         />
         <label className="option__label" htmlFor="editor-browser">
-          {navigator.userAgent.indexOf('Firefox') !== -1
+          {navigator.userAgent.includes('Firefox')
             ? "Don't open in external editor"
             : "Use browser's debugger (from browser devpanel only)"}
         </label>
@@ -80,4 +80,4 @@ export default ({ options, saveOption }: OptionsProps) => {
       </div>
     </fieldset>
   );
-};
+}

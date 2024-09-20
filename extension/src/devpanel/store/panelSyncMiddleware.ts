@@ -38,6 +38,7 @@ function getCurrentTabId(next: (tabId: number) => void) {
 
 function panelDispatcher(
   bgConnection: chrome.runtime.Port,
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 ): Middleware<{}, StoreState, Dispatch<StoreAction>> {
   let autoselected = false;
 

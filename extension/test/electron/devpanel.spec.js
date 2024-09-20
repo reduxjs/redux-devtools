@@ -76,6 +76,7 @@ describe('DevTools panel for Electron', function () {
     expect(className).not.toMatch(/hidden/); // not hidden
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it('should have Redux DevTools UI on current tab', async () => {
     await driver
       .switchTo()
@@ -107,9 +108,11 @@ describe('DevTools panel for Electron', function () {
   });
 
   Object.keys(switchMonitorTests).forEach((description) =>
+    // eslint-disable-next-line jest/expect-expect,jest/valid-title
     it(description, () => switchMonitorTests[description](driver)),
   );
 
+  // eslint-disable-next-line jest/no-commented-out-tests
   /*  it('should be no logs in console of main window', async () => {
     const handles = await driver.getAllWindowHandles();
     await driver.switchTo().window(handles[1]); // Change to main window

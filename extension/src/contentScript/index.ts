@@ -254,7 +254,7 @@ function tryCatch<S, A extends Action<string>>(
         }
         newArgs[key as keyof typeof newArgs] = arg;
       });
-      fn(newArgs as any);
+      fn(newArgs as SplitMessage);
       for (let i = 0; i < toSplit.length; i++) {
         for (let j = 0; j < toSplit[i][1].length; j += maxChromeMsgSize) {
           fn({

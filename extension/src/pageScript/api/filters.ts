@@ -26,8 +26,7 @@ export function isFiltered<A extends Action<string>>(
 ) {
   if (
     noFiltersApplied(localFilter) ||
-    (typeof action !== 'string' &&
-      typeof (action.type as string).match !== 'function')
+    (typeof action !== 'string' && typeof action.type.match !== 'function')
   ) {
     return false;
   }

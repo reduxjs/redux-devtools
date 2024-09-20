@@ -71,6 +71,7 @@ describe('Chrome extension', function () {
   });
 
   Object.keys(switchMonitorTests).forEach((description) =>
+    // eslint-disable-next-line jest/expect-expect,jest/valid-title
     it(description, () => switchMonitorTests[description](driver)),
   );
 });

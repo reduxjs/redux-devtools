@@ -6,7 +6,7 @@ export function createMenu() {
     { id: 'devtools-remote', title: 'Open Remote DevTools' },
   ];
 
-  let shortcuts: { [commandName: string]: string | undefined } = {};
+  const shortcuts: { [commandName: string]: string | undefined } = {};
   chrome.commands.getAll((commands) => {
     for (const { name, shortcut } of commands) {
       shortcuts[name!] = shortcut;

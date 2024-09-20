@@ -1,7 +1,7 @@
 import React from 'react';
 import { OptionsProps } from './Options';
 
-export default ({ options, saveOption }: OptionsProps) => {
+export default function AllowToRunGroup({ options, saveOption }: OptionsProps) {
   const AllowToRunState = {
     EVERYWHERE: true,
     ON_SPECIFIC_URLS: false,
@@ -50,4 +50,4 @@ export default ({ options, saveOption }: OptionsProps) => {
       </div>
     </fieldset>
   );
-};
+}
