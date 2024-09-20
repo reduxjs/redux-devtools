@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.2.6
+
+### Patch Changes
+
+- 50d7682: Fix DevTools from losing connection
+
 ## 3.2.5
 
 ### Patch Changes
