@@ -600,7 +600,6 @@ const extensionCompose =
     return (...args) => {
       const instanceId = generateId(config.instanceId);
       return [preEnhancer(instanceId), ...funcs].reduceRight(
-        // @ts-expect-error FIXME
         (composed, f) => f(composed),
         __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args),
       );
