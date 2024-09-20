@@ -5,14 +5,12 @@
     "@changesets/cli": "^2.27.8",
     "@eslint/compat": "^1.1.1",
     "@eslint/js": "^8.57.1",
-    "@nrwl/nx-cloud": "^19.1.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jest": "^28.8.3",
     "eslint-plugin-react": "^7.36.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "jest": "^29.7.0",
-    "nx": "^19.7.3",
     "prettier": "3.3.3",
     "typescript": "~5.5.4",
     "typescript-eslint": "^8.6.0"
@@ -20,10 +18,10 @@
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "build:all": "nx run-many --target=build --all --parallel=1",
-    "lint:all": "nx run-many --target=lint --all --parallel=1",
-    "test:all": "nx run-many --target=test --all --parallel=1",
-    "clean:all": "nx run-many --target=clean --all --parallel=1",
+    "build:all": "pnpn --recursive run build",
+    "lint:all": "pnpn --recursive run lint",
+    "test:all": "pnpn --recursive run test",
+    "clean:all": "pnpn --recursive run clean",
     "release": "pnpm build:all && pnpm publish -r"
   },
   "packageManager": "pnpm@9.10.0"
