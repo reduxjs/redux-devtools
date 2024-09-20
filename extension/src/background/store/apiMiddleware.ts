@@ -553,8 +553,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     console.log(`Connected to tab ${id}`);
     if (port.sender!.frameId) id = `${id}-${port.sender!.frameId}`;
     connections.tab[id] = port;
-    listener = (msg: ContentScriptToBackgroundMessage<S, A> | 'heartbeat') => {
-      if (msg === 'heartbeat') return;
+    listener = (msg: ContentScriptToBackgroundMessage<S, A>) => {
       console.log(`Message from tab ${id}: ${msg.name}`);
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
@@ -593,8 +592,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     connections.panel[id] = port;
     monitors++;
     toAllTabs({ type: 'START' });
-    listener = (msg: BackgroundAction | 'heartbeat') => {
-      if (msg === 'heartbeat') return;
+    listener = (msg: BackgroundAction) => {
       console.log(`Message from monitor ${id}: ${msg.type}`);
       store.dispatch(msg);
     };

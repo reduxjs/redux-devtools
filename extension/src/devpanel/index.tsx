@@ -116,10 +116,6 @@ function init() {
   }
   bgConnection = chrome.runtime.connect({ name });
 
-  setInterval(() => {
-    bgConnection.postMessage('heartbeat');
-  }, 15000);
-
   bgConnection.onMessage.addListener(
     <S, A extends Action<string>>(
       message: PanelMessageWithSplitAction<S, A>,
