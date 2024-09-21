@@ -1,5 +1,11 @@
 # remotedev-redux-devtools-extension
 
+## 3.2.7
+
+### Patch Changes
+
+- b25bf13: Send state from background when monitor connects
+
 ## 3.2.6
 
 ### Patch Changes
