@@ -592,6 +592,33 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
     };
     port.onMessage.addListener(listener);
     port.onDisconnect.addListener(disconnect('panel', id, listener));
+
+    const { current } = store.getState().instances;
+    if (current !== 'default') {
+      const connectionId = Object.entries(
+        store.getState().instances.connections,
+      ).find(([, instanceIds]) => instanceIds.includes(current))?.[0];
+      const options = store.getState().instances.options[current];
+      const state = store.getState().instances.states[current];
+      const { actionsById, computedStates, committedState, ...rest } = state;
+      toMonitors({
+        type: UPDATE_STATE,
+        request: {
+          type: 'STATE',
+          payload: rest as Omit<
+            LiftedState<S, A, unknown>,
+            'actionsById' | 'computedStates' | 'committedState'
+          >,
+          source: '@devtools-page',
+          instanceId:
+            typeof current === 'number' ? current.toString() : current,
+          actionsById: stringifyJSON(actionsById, options.serialize),
+          computedStates: stringifyJSON(computedStates, options.serialize),
+          committedState: typeof committedState !== 'undefined',
+        },
+        id: connectionId ?? current,
+      });
+    }
   }
 }
 
