@@ -27,34 +27,15 @@ describe('Chrome extension', function () {
   });
 
   it("should open extension's window", async () => {
-    await driver.get(`chrome-extension://${extensionId}/window.html#left`);
+    await driver.get(`chrome-extension://${extensionId}/devpanel.html`);
     const url = await driver.getCurrentUrl();
-    expect(url).toBe(`chrome-extension://${extensionId}/window.html#left`);
+    expect(url).toBe(`chrome-extension://${extensionId}/devpanel.html`);
   });
 
   it('should match document title', async () => {
     const title = await driver.getTitle();
     expect(title).toBe('Redux DevTools');
   });
-
-  it("should contain inspector monitor's component", async () => {
-    await delay(1000);
-    const val = await driver
-      .findElement(webdriver.By.xpath('//div[@data-testid="inspector"]'))
-      .getText();
-    expect(val).toBeDefined();
-  });
-
-  it('should contain an empty actions list', async () => {
-    const val = await driver
-      .findElement(webdriver.By.xpath('//div[@data-testid="actionListRows"]'))
-      .getText();
-    expect(val).toBe('');
-  });
-
-  Object.keys(switchMonitorTests).forEach((description) =>
-    it(description, () => switchMonitorTests[description](driver)),
-  );
 
   it('should get actions list', async () => {
     const url = 'https://zalmoxisus.github.io/examples/router/';
@@ -68,6 +49,7 @@ describe('Chrome extension', function () {
 
     await driver.switchTo().window(tabs[0]);
 
+    await delay(1000);
     const result = await driver.wait(
       driver
         .findElement(webdriver.By.xpath('//div[@data-testid="actionListRows"]'))
@@ -80,4 +62,16 @@ describe('Chrome extension', function () {
     );
     expect(result).toBeTruthy();
   });
+
+  it("should contain inspector monitor's component", async () => {
+    const val = await driver
+      .findElement(webdriver.By.xpath('//div[@data-testid="inspector"]'))
+      .getText();
+    expect(val).toBeDefined();
+  });
+
+  Object.keys(switchMonitorTests).forEach((description) =>
+    // eslint-disable-next-line jest/expect-expect,jest/valid-title
+    it(description, () => switchMonitorTests[description](driver)),
+  );
 });

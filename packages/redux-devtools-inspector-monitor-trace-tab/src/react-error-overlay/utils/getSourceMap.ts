@@ -88,7 +88,9 @@ export function extractSourceMapUrl(
     match = next;
   }
   if (!(match && match[1])) {
-    return Promise.reject(`Cannot find a source map directive for ${fileUri}.`);
+    return Promise.reject(
+      new Error(`Cannot find a source map directive for ${fileUri}.`),
+    );
   }
   return Promise.resolve(match[1].toString());
 }

@@ -1,4 +1,3 @@
-import mapValues from 'lodash/mapValues';
 import { PerformAction } from '@redux-devtools/core';
 import { Action } from 'redux';
 
@@ -23,10 +22,15 @@ function filterActions(
   actionSanitizer: ((action: Action<string>, id: number) => Action) | undefined,
 ) {
   if (!actionSanitizer) return actionsById;
-  return mapValues(actionsById, (action, id: number) => ({
-    ...action,
-    action: actionSanitizer(action.action, id),
-  }));
+  return Object.fromEntries(
+    Object.entries(actionsById).map(([actionId, action]) => [
+      actionId,
+      {
+        ...action,
+        action: actionSanitizer(action.action, actionId as unknown as number),
+      },
+    ]),
+  );
 }
 
 function filterStates(

@@ -1,5 +1,5 @@
 import { instrument, persistState } from '../src';
-import { compose, createStore } from 'redux';
+import { compose, createStore, StoreEnhancer } from 'redux';
 
 describe('persistState', () => {
   const savedLocalStorage = global.localStorage;
@@ -50,7 +50,7 @@ describe('persistState', () => {
   it('should persist state', () => {
     const store = createStore(
       reducer,
-      compose(instrument(), persistState('id')),
+      compose(instrument(), persistState('id')) as StoreEnhancer,
     );
     expect(store.getState()).toBe(0);
 
@@ -60,20 +60,26 @@ describe('persistState', () => {
 
     const store2 = createStore(
       reducer,
-      compose(instrument(), persistState('id')),
+      compose(instrument(), persistState('id')) as StoreEnhancer,
     );
     expect(store2.getState()).toBe(2);
   });
 
   it('should not persist state if no session id', () => {
-    const store = createStore(reducer, compose(instrument(), persistState()));
+    const store = createStore(
+      reducer,
+      compose(instrument(), persistState()) as StoreEnhancer,
+    );
     expect(store.getState()).toBe(0);
 
     store.dispatch({ type: 'INCREMENT' });
     store.dispatch({ type: 'INCREMENT' });
     expect(store.getState()).toBe(2);
 
-    const store2 = createStore(reducer, compose(instrument(), persistState()));
+    const store2 = createStore(
+      reducer,
+      compose(instrument(), persistState()) as StoreEnhancer,
+    );
     expect(store2.getState()).toBe(0);
   });
 
@@ -82,7 +88,7 @@ describe('persistState', () => {
       state === undefined ? -1 : state - 1;
     const store = createStore(
       reducer,
-      compose(instrument(), persistState('id', oneLess)),
+      compose(instrument(), persistState('id', oneLess)) as StoreEnhancer,
     );
     expect(store.getState()).toBe(0);
 
@@ -92,7 +98,7 @@ describe('persistState', () => {
 
     const store2 = createStore(
       reducer,
-      compose(instrument(), persistState('id', oneLess)),
+      compose(instrument(), persistState('id', oneLess)) as StoreEnhancer,
     );
     expect(store2.getState()).toBe(1);
   });
@@ -102,7 +108,10 @@ describe('persistState', () => {
       action.type === 'INCREMENT' ? ({ type: 'DECREMENT' } as const) : action;
     const store = createStore(
       reducer,
-      compose(instrument(), persistState('id', undefined, incToDec)),
+      compose(
+        instrument(),
+        persistState('id', undefined, incToDec),
+      ) as StoreEnhancer,
     );
     expect(store.getState()).toBe(0);
 
@@ -112,7 +121,10 @@ describe('persistState', () => {
 
     const store2 = createStore(
       reducer,
-      compose(instrument(), persistState('id', undefined, incToDec)),
+      compose(
+        instrument(),
+        persistState('id', undefined, incToDec),
+      ) as StoreEnhancer,
     );
     expect(store2.getState()).toBe(-2);
   });
@@ -124,7 +136,10 @@ describe('persistState', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete global.localStorage.getItem;
-    createStore(reducer, compose(instrument(), persistState('id')));
+    createStore(
+      reducer,
+      compose(instrument(), persistState('id')) as StoreEnhancer,
+    );
 
     expect(spy.mock.calls[0]).toContain(
       'Could not read debug session from localStorage:',
@@ -142,7 +157,7 @@ describe('persistState', () => {
     delete global.localStorage.setItem;
     const store = createStore(
       reducer,
-      compose(instrument(), persistState('id')),
+      compose(instrument(), persistState('id')) as StoreEnhancer,
     );
 
     store.dispatch({ type: 'INCREMENT' });

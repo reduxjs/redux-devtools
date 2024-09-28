@@ -1,12 +1,10 @@
-import mapValues from 'lodash/mapValues';
-import identity from 'lodash/identity';
-import { Action, PreloadedState, Reducer, StoreEnhancer } from 'redux';
+import { Action, Reducer, StoreEnhancer } from 'redux';
 import { LiftedState } from '@redux-devtools/instrument';
 
 export default function persistState<S, A extends Action<string>, MonitorState>(
   sessionId?: string | null,
-  deserializeState: (state: S) => S = identity,
-  deserializeAction: (action: A) => A = identity,
+  deserializeState: (state: S) => S = (state) => state,
+  deserializeAction: (action: A) => A = (state) => state,
 ): StoreEnhancer {
   if (!sessionId) {
     return (next) =>
@@ -19,10 +17,15 @@ export default function persistState<S, A extends Action<string>, MonitorState>(
   ): LiftedState<S, A, MonitorState> {
     return {
       ...state,
-      actionsById: mapValues(state.actionsById, (liftedAction) => ({
-        ...liftedAction,
-        action: deserializeAction(liftedAction.action),
-      })),
+      actionsById: Object.fromEntries(
+        Object.entries(state.actionsById).map(([actionId, liftedAction]) => [
+          actionId,
+          {
+            ...liftedAction,
+            action: deserializeAction(liftedAction.action),
+          },
+        ]),
+      ),
       committedState: deserializeState(state.committedState),
       computedStates: state.computedStates.map((computedState) => ({
         ...computedState,
@@ -32,9 +35,9 @@ export default function persistState<S, A extends Action<string>, MonitorState>(
   }
 
   return (next) =>
-    <S2, A2 extends Action<string>>(
-      reducer: Reducer<S2, A2>,
-      initialState?: PreloadedState<S2>,
+    <S2, A2 extends Action<string>, PreloadedState>(
+      reducer: Reducer<S2, A2, PreloadedState>,
+      initialState?: PreloadedState | undefined,
     ) => {
       const key = `redux-dev-session-${sessionId}`;
 
@@ -58,7 +61,7 @@ export default function persistState<S, A extends Action<string>, MonitorState>(
 
       const store = next(
         reducer,
-        finalInitialState as PreloadedState<S2> | undefined,
+        finalInitialState as PreloadedState | undefined,
       );
 
       return {

@@ -2,29 +2,23 @@ import openDevToolsWindow, { DevToolsPosition } from './openWindow';
 
 export function createMenu() {
   const menus = [
-    { id: 'devtools-left', title: 'To left' },
-    { id: 'devtools-right', title: 'To right' },
-    { id: 'devtools-bottom', title: 'To bottom' },
-    {
-      id: 'devtools-panel',
-      title: 'Open in a panel (enable in browser settings)',
-    },
+    { id: 'devtools-window', title: 'Open in a window' },
     { id: 'devtools-remote', title: 'Open Remote DevTools' },
   ];
 
-  let shortcuts: { [commandName: string]: string | undefined } = {};
+  const shortcuts: { [commandName: string]: string | undefined } = {};
   chrome.commands.getAll((commands) => {
-    commands.forEach(({ name, shortcut }) => {
+    for (const { name, shortcut } of commands) {
       shortcuts[name!] = shortcut;
-    });
+    }
 
-    menus.forEach(({ id, title }) => {
+    for (const { id, title } of menus) {
       chrome.contextMenus.create({
         id: id,
         title: title + (shortcuts[id] ? ' (' + shortcuts[id] + ')' : ''),
         contexts: ['all'],
       });
-    });
+    }
   });
 }
 

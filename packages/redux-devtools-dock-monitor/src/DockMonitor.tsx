@@ -192,17 +192,8 @@ class DockMonitor<S, A extends Action<string>> extends Component<
         onSizeChange={this.handleSizeChange}
         dimMode="none"
       >
-        {Children.map(
-          children as
-            | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>
-            | Monitor<
-                S,
-                A,
-                LiftedState<S, A, unknown>,
-                unknown,
-                Action<string>
-              >[],
-          (child, index) => this.renderChild(child, index, rest),
+        {Children.map(children, (child, index) =>
+          this.renderChild(child, index, rest),
         )}
       </Dock>
     );

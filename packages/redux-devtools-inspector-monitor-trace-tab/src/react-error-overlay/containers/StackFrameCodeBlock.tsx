@@ -83,7 +83,7 @@ function StackFrameCodeBlock(props: StackFrameCodeBlockPropsType) {
       if (text == null) {
         continue;
       }
-      if (text.indexOf(` ${lineNum} |`) === -1) {
+      if (!text.includes(` ${lineNum} |`)) {
         continue;
       }
       // $FlowFixMe

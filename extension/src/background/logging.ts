@@ -1,4 +1,5 @@
 import { LIFTED_ACTION } from '@redux-devtools/app';
+import { store } from './index';
 
 export function getReport(
   reportId: string,
@@ -24,7 +25,7 @@ export function getReport(
       .then((json) => {
         const { payload, preloadedState } = json;
         if (!payload) return;
-        window.store.dispatch({
+        store.dispatch({
           type: LIFTED_ACTION,
           message: 'IMPORT',
           state: JSON.stringify({ payload, preloadedState }),

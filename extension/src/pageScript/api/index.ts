@@ -1,5 +1,5 @@
 import jsan, { Options } from 'jsan';
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash-es';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { getActionsArray, getLocalFilter } from '@redux-devtools/utils';
 import { isFiltered, PartialLiftedState } from './filters';
@@ -222,6 +222,7 @@ function post<S, A extends Action<string>>(
 
 function getStackTrace(
   config: Config,
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace: Function | undefined,
 ) {
   if (!config.trace) return undefined;
@@ -248,6 +249,7 @@ function getStackTrace(
     typeof Error.stackTraceLimit !== 'number' ||
     Error.stackTraceLimit > traceLimit!
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const frames = stack!.split('\n');
     if (frames.length > traceLimit!) {
       stack = frames
@@ -265,10 +267,11 @@ function amendActionType<A extends Action<string>>(
     | StructuralPerformAction<A>[]
     | string,
   config: Config,
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace: Function | undefined,
 ): StructuralPerformAction<A> {
-  let timestamp = Date.now();
-  let stack = getStackTrace(config, toExcludeFromTrace);
+  const timestamp = Date.now();
+  const stack = getStackTrace(config, toExcludeFromTrace);
   if (typeof action === 'string') {
     return { action: { type: action } as A, timestamp, stack };
   }
@@ -595,7 +598,11 @@ export function connect(preConfig: Config): ConnectResponse {
   };
 
   const sendDelayed = throttle(() => {
-    sendMessage(delayedActions, delayedStates as any, config);
+    sendMessage(
+      delayedActions,
+      delayedStates as unknown as LiftedState<unknown, Action<string>, unknown>,
+      config,
+    );
     delayedActions = [];
     delayedStates = [];
   }, latency);

@@ -6,7 +6,7 @@ import chromedriver from 'chromedriver';
 import { switchMonitorTests, delay } from '../utils/e2e';
 
 const devPanelPath =
-  'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/window.html';
+  'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/devpanel.html';
 
 describe('DevTools panel for Electron', function () {
   let driver;
@@ -52,13 +52,14 @@ describe('DevTools panel for Electron', function () {
         if (attempts === 0) {
           return callback('Redux panel not found');
         }
-        if (UI.inspectorView) {
-          const tabs = UI.inspectorView.tabbedPane.tabs;
+        if (EUI.InspectorView) {
+          const instance = EUI.InspectorView.InspectorView.instance();
+          const tabs = instance.tabbedPane.tabs;
           const idList = tabs.map((tab) => tab.id);
           const reduxPanelId =
             'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljdRedux';
           if (idList.indexOf(reduxPanelId) !== -1) {
-            UI.inspectorView.showPanel(reduxPanelId);
+            instance.showPanel(reduxPanelId);
             return callback(reduxPanelId);
           }
         }
@@ -75,6 +76,7 @@ describe('DevTools panel for Electron', function () {
     expect(className).not.toMatch(/hidden/); // not hidden
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it('should have Redux DevTools UI on current tab', async () => {
     await driver
       .switchTo()
@@ -106,9 +108,11 @@ describe('DevTools panel for Electron', function () {
   });
 
   Object.keys(switchMonitorTests).forEach((description) =>
+    // eslint-disable-next-line jest/expect-expect,jest/valid-title
     it(description, () => switchMonitorTests[description](driver)),
   );
 
+  // eslint-disable-next-line jest/no-commented-out-tests
   /*  it('should be no logs in console of main window', async () => {
     const handles = await driver.getAllWindowHandles();
     await driver.switchTo().window(handles[1]); // Change to main window

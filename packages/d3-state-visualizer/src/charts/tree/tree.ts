@@ -14,9 +14,9 @@ import { tooltip } from 'd3tooltip';
 import type { StyleValue } from 'd3tooltip';
 
 export interface Options {
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   state?: {} | null;
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   tree?: Node | {};
 
   rootKeyName: string;

@@ -36,9 +36,11 @@ exports[`Form renders correctly 1`] = `
           </span>
         </label>
         <input
+          aria-describedby="root_name__error root_name__description root_name__help"
           class="form-control"
           id="root_name"
           label="Full name"
+          name="root_name"
           placeholder=""
           required=""
           type="text"
@@ -55,9 +57,11 @@ exports[`Form renders correctly 1`] = `
           Age
         </label>
         <input
+          aria-describedby="root_age__error root_age__description root_age__help"
           class="form-control"
           id="root_age"
           label="Age"
+          name="root_age"
           placeholder=""
           type="number"
           value="75"
@@ -73,8 +77,10 @@ exports[`Form renders correctly 1`] = `
           Bio
         </label>
         <textarea
+          aria-describedby="root_bio__error root_bio__description root_bio__help"
           class="form-control"
           id="root_bio"
+          name="root_bio"
           placeholder=""
         >
           Roundhouse kicking asses since 1940
@@ -90,9 +96,11 @@ exports[`Form renders correctly 1`] = `
           Password
         </label>
         <input
+          aria-describedby="root_password__error root_password__description root_password__help"
           class="form-control"
           id="root_password"
           label="Password"
+          name="root_password"
           placeholder=""
           type="password"
           value="noneed"
@@ -123,8 +131,11 @@ exports[`Form renders correctly 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_0"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-0"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="0"
                 />
                 <span>
                   foo
@@ -138,8 +149,11 @@ exports[`Form renders correctly 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_1"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-1"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="1"
                 />
                 <span>
                   bar
@@ -153,8 +167,11 @@ exports[`Form renders correctly 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_2"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-2"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="2"
                 />
                 <span>
                   fuzz
@@ -192,14 +209,14 @@ exports[`Form renders correctly 1`] = `
             class=" css-10g0wlc-control"
           >
             <div
-              class=" css-1gpx584-ValueContainer"
+              class=" css-1uzcsaf"
             >
               <div
                 class=" css-1m6ztbo-placeholder"
                 id="react-select-2-placeholder"
               />
               <div
-                class=" css-mh08on-Input"
+                class=" css-fty6pr"
                 data-value=""
               >
                 <input
@@ -224,7 +241,7 @@ exports[`Form renders correctly 1`] = `
               </div>
             </div>
             <div
-              class=" css-1hb7zxy-IndicatorsContainer"
+              class=" css-1wy0on6"
             >
               <span
                 class=" css-19norqf-indicatorSeparator"
@@ -248,6 +265,11 @@ exports[`Form renders correctly 1`] = `
               </div>
             </div>
           </div>
+          <input
+            name="numberEnum"
+            type="hidden"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -268,9 +290,11 @@ exports[`Form renders correctly 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-0"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="1"
+                value="0"
               />
               <span>
                 1
@@ -282,9 +306,11 @@ exports[`Form renders correctly 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-1"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="2"
+                value="1"
               />
               <span>
                 2
@@ -296,9 +322,11 @@ exports[`Form renders correctly 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-2"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="3"
+                value="2"
               />
               <span>
                 3
@@ -326,6 +354,7 @@ exports[`Form renders correctly 1`] = `
               id="root_integerRange"
               max="100"
               min="42"
+              name="integerRange"
               placeholder=""
               type="range"
               uischema="[object Object]"
@@ -388,9 +417,11 @@ exports[`Form renders with no button 1`] = `
           </span>
         </label>
         <input
+          aria-describedby="root_name__error root_name__description root_name__help"
           class="form-control"
           id="root_name"
           label="Full name"
+          name="root_name"
           placeholder=""
           required=""
           type="text"
@@ -407,9 +438,11 @@ exports[`Form renders with no button 1`] = `
           Age
         </label>
         <input
+          aria-describedby="root_age__error root_age__description root_age__help"
           class="form-control"
           id="root_age"
           label="Age"
+          name="root_age"
           placeholder=""
           type="number"
           value="75"
@@ -425,8 +458,10 @@ exports[`Form renders with no button 1`] = `
           Bio
         </label>
         <textarea
+          aria-describedby="root_bio__error root_bio__description root_bio__help"
           class="form-control"
           id="root_bio"
+          name="root_bio"
           placeholder=""
         >
           Roundhouse kicking asses since 1940
@@ -442,9 +477,11 @@ exports[`Form renders with no button 1`] = `
           Password
         </label>
         <input
+          aria-describedby="root_password__error root_password__description root_password__help"
           class="form-control"
           id="root_password"
           label="Password"
+          name="root_password"
           placeholder=""
           type="password"
           value="noneed"
@@ -475,8 +512,11 @@ exports[`Form renders with no button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_0"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-0"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="0"
                 />
                 <span>
                   foo
@@ -490,8 +530,11 @@ exports[`Form renders with no button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_1"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-1"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="1"
                 />
                 <span>
                   bar
@@ -505,8 +548,11 @@ exports[`Form renders with no button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_2"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-2"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="2"
                 />
                 <span>
                   fuzz
@@ -544,14 +590,14 @@ exports[`Form renders with no button 1`] = `
             class=" css-10g0wlc-control"
           >
             <div
-              class=" css-1gpx584-ValueContainer"
+              class=" css-1uzcsaf"
             >
               <div
                 class=" css-1m6ztbo-placeholder"
                 id="react-select-4-placeholder"
               />
               <div
-                class=" css-mh08on-Input"
+                class=" css-fty6pr"
                 data-value=""
               >
                 <input
@@ -576,7 +622,7 @@ exports[`Form renders with no button 1`] = `
               </div>
             </div>
             <div
-              class=" css-1hb7zxy-IndicatorsContainer"
+              class=" css-1wy0on6"
             >
               <span
                 class=" css-19norqf-indicatorSeparator"
@@ -600,6 +646,11 @@ exports[`Form renders with no button 1`] = `
               </div>
             </div>
           </div>
+          <input
+            name="numberEnum"
+            type="hidden"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -620,9 +671,11 @@ exports[`Form renders with no button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-0"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="1"
+                value="0"
               />
               <span>
                 1
@@ -634,9 +687,11 @@ exports[`Form renders with no button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-1"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="2"
+                value="1"
               />
               <span>
                 2
@@ -648,9 +703,11 @@ exports[`Form renders with no button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-2"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="3"
+                value="2"
               />
               <span>
                 3
@@ -678,6 +735,7 @@ exports[`Form renders with no button 1`] = `
               id="root_integerRange"
               max="100"
               min="42"
+              name="integerRange"
               placeholder=""
               type="range"
               uischema="[object Object]"
@@ -731,9 +789,11 @@ exports[`Form renders with primary button 1`] = `
           </span>
         </label>
         <input
+          aria-describedby="root_name__error root_name__description root_name__help"
           class="form-control"
           id="root_name"
           label="Full name"
+          name="root_name"
           placeholder=""
           required=""
           type="text"
@@ -750,9 +810,11 @@ exports[`Form renders with primary button 1`] = `
           Age
         </label>
         <input
+          aria-describedby="root_age__error root_age__description root_age__help"
           class="form-control"
           id="root_age"
           label="Age"
+          name="root_age"
           placeholder=""
           type="number"
           value="75"
@@ -768,8 +830,10 @@ exports[`Form renders with primary button 1`] = `
           Bio
         </label>
         <textarea
+          aria-describedby="root_bio__error root_bio__description root_bio__help"
           class="form-control"
           id="root_bio"
+          name="root_bio"
           placeholder=""
         >
           Roundhouse kicking asses since 1940
@@ -785,9 +849,11 @@ exports[`Form renders with primary button 1`] = `
           Password
         </label>
         <input
+          aria-describedby="root_password__error root_password__description root_password__help"
           class="form-control"
           id="root_password"
           label="Password"
+          name="root_password"
           placeholder=""
           type="password"
           value="noneed"
@@ -818,8 +884,11 @@ exports[`Form renders with primary button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_0"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-0"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="0"
                 />
                 <span>
                   foo
@@ -833,8 +902,11 @@ exports[`Form renders with primary button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_1"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-1"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="1"
                 />
                 <span>
                   bar
@@ -848,8 +920,11 @@ exports[`Form renders with primary button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_2"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-2"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="2"
                 />
                 <span>
                   fuzz
@@ -887,14 +962,14 @@ exports[`Form renders with primary button 1`] = `
             class=" css-10g0wlc-control"
           >
             <div
-              class=" css-1gpx584-ValueContainer"
+              class=" css-1uzcsaf"
             >
               <div
                 class=" css-1m6ztbo-placeholder"
                 id="react-select-3-placeholder"
               />
               <div
-                class=" css-mh08on-Input"
+                class=" css-fty6pr"
                 data-value=""
               >
                 <input
@@ -919,7 +994,7 @@ exports[`Form renders with primary button 1`] = `
               </div>
             </div>
             <div
-              class=" css-1hb7zxy-IndicatorsContainer"
+              class=" css-1wy0on6"
             >
               <span
                 class=" css-19norqf-indicatorSeparator"
@@ -943,6 +1018,11 @@ exports[`Form renders with primary button 1`] = `
               </div>
             </div>
           </div>
+          <input
+            name="numberEnum"
+            type="hidden"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -963,9 +1043,11 @@ exports[`Form renders with primary button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-0"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="1"
+                value="0"
               />
               <span>
                 1
@@ -977,9 +1059,11 @@ exports[`Form renders with primary button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-1"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="2"
+                value="1"
               />
               <span>
                 2
@@ -991,9 +1075,11 @@ exports[`Form renders with primary button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-2"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="3"
+                value="2"
               />
               <span>
                 3
@@ -1021,6 +1107,7 @@ exports[`Form renders with primary button 1`] = `
               id="root_integerRange"
               max="100"
               min="42"
+              name="integerRange"
               placeholder=""
               type="range"
               uischema="[object Object]"

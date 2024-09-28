@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import TabsHeader, { ReactButtonElement, Tab } from './TabsHeader';
 import { TabsContainer } from './styles/common';
 import { StateFilterValue } from '../StateFilter/StateFilter';

@@ -293,7 +293,7 @@ function computeRtkQueryRequests(
     const [queryCacheKey, queryCache] = queryCacheEntries[i];
     const requestId: string =
       type === 'queries'
-        ? (queryCache as (typeof api)['queries'][string])?.requestId ?? ''
+        ? ((queryCache as (typeof api)['queries'][string])?.requestId ?? '')
         : queryCacheKey;
     if (
       queryCache &&

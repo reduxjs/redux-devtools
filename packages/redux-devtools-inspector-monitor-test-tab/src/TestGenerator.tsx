@@ -14,7 +14,7 @@ export const fromPath = (path: (string | number)[]) =>
 
 function getState<S>(
   s: { state: S; error?: string } | undefined,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   defaultValue?: {},
 ) {
   if (!s) return defaultValue;
@@ -25,7 +25,7 @@ export function compare<S>(
   s1: { state: S; error?: string } | undefined,
   s2: { state: S; error?: string },
   cb: (value: { path: string; curState: number | string | undefined }) => void,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   defaultValue?: {},
 ) {
   const paths: string[] = []; // Already processed
@@ -36,9 +36,8 @@ export function compare<S>(
     let path = fromPath(event.newPath);
 
     if (event.type === 'remove-item' || event.type === 'move-item') {
-      if (paths.length && paths.indexOf(path) !== -1) return;
+      if (paths.length && paths.includes(path)) return;
       paths.push(path);
-      // eslint-disable-next-line @typescript-eslint/ban-types
       const v = objectPath.get(s2.state as unknown as object, event.newPath);
       curState = v.length;
       path += '.length';

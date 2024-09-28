@@ -1,8 +1,10 @@
 import '../chromeApiMock';
 import {
-  injectOptions,
-  getOptionsFromBg,
+  getOptions,
   isAllowed,
+  Options,
+  prefetchOptions,
+  prepareOptionsForPage,
 } from '../options/syncOptions';
 import type { TabMessage } from '../background/store/apiMiddleware';
 import type {
@@ -16,6 +18,7 @@ import {
   DispatchAction as AppDispatchAction,
 } from '@redux-devtools/app';
 import { LiftedState } from '@redux-devtools/instrument';
+
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
@@ -83,6 +86,13 @@ interface UpdateAction {
   readonly source: typeof source;
 }
 
+interface OptionsAction {
+  readonly type: 'OPTIONS';
+  readonly options: Options;
+  readonly id: undefined;
+  readonly source: typeof source;
+}
+
 export type ContentScriptToPageScriptMessage =
   | StartAction
   | StopAction
@@ -90,7 +100,8 @@ export type ContentScriptToPageScriptMessage =
   | ImportAction
   | ActionAction
   | ExportAction
-  | UpdateAction;
+  | UpdateAction
+  | OptionsAction;
 
 interface ImportStatePayload<S, A extends Action<string>> {
   readonly type: 'IMPORT_STATE';
@@ -111,6 +122,7 @@ export type ListenerMessage<S, A extends Action<string>> =
   | ActionAction
   | ExportAction
   | UpdateAction
+  | OptionsAction
   | ImportStateDispatchAction<S, A>;
 
 function postToPageScript(message: ContentScriptToPageScriptMessage) {
@@ -155,8 +167,13 @@ function connect() {
           source,
         });
       }
-    } else if ('options' in message) {
-      injectOptions(message.options);
+    } else if (message.type === 'OPTIONS') {
+      postToPageScript({
+        type: message.type,
+        options: prepareOptionsForPage(message.options),
+        id: undefined,
+        source,
+      });
     } else {
       postToPageScript({
         type: message.type,
@@ -237,7 +254,7 @@ function tryCatch<S, A extends Action<string>>(
         }
         newArgs[key as keyof typeof newArgs] = arg;
       });
-      fn(newArgs as any);
+      fn(newArgs as SplitMessage);
       for (let i = 0; i < toSplit.length; i++) {
         for (let j = 0; j < toSplit[i][1].length; j += maxChromeMsgSize) {
           fn({
@@ -288,7 +305,14 @@ function send<S, A extends Action<string>>(
 ) {
   if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {
-    getOptionsFromBg();
+    getOptions((options) => {
+      postToPageScript({
+        type: 'OPTIONS',
+        options: prepareOptionsForPage(options),
+        id: undefined,
+        source,
+      });
+    });
     postToBackground({ name: 'INIT_INSTANCE', instanceId: message.instanceId });
   } else {
     postToBackground({ name: 'RELAY', message });
@@ -315,5 +339,7 @@ function handleMessages<S, A extends Action<string>>(
 
   tryCatch(send, message);
 }
+
+prefetchOptions();
 
 window.addEventListener('message', handleMessages, false);

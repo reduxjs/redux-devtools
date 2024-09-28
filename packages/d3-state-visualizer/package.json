@@ -31,7 +31,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run lint"
@@ -39,18 +39,14 @@
   "dependencies": {
     "@types/d3": "^7.4.3",
     "d3": "^7.9.0",
-    "d3tooltip": "^4.0.0",
+    "d3tooltip": "workspace:^",
     "deepmerge": "^4.3.1",
-    "map2tree": "^4.0.0",
-    "ramda": "^0.29.1"
+    "map2tree": "workspace:^",
+    "ramda": "^0.30.1"
   },
   "devDependencies": {
-    "@types/ramda": "^0.29.11",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "rimraf": "^5.0.5",
-    "typescript": "~5.3.3"
+    "@types/ramda": "^0.30.2",
+    "rimraf": "^6.0.1",
+    "typescript": "~5.5.4"
   }
 }

@@ -1,5 +1,60 @@
 # remotedev-redux-devtools-extension
 
+## 3.2.7
+
+### Patch Changes
+
+- b25bf13: Send state from background when monitor connects
+
+## 3.2.6
+
+### Patch Changes
+
+- 50d7682: Fix DevTools from losing connection
+
+## 3.2.5
+
+### Patch Changes
+
+- eb3ac09: Add logging to background service worker
+
+## 3.2.4
+
+### Patch Changes
+
+- f1d6158: Fix mocking Chrome API for Electron
+
+## 3.2.3
+
+### Patch Changes
+
+- fd9f950: Fix monitoring on opening panel
+- e49708d: Fix manifest.json for Edge
+
+## 3.2.1
+
+### Patch Changes
+
+- abd03a7: Fix: only send data to extension if DevTools are open
+
+## 3.2.0
+
+### Minor Changes
+
+- 83b2c19: Upgrade to Manifest V3
+
+## 3.1.11
+
+### Patch Changes
+
+- 73688e1: Fix releasing Firefox extension
+
+## 3.1.10
+
+### Patch Changes
+
+- 2163bc3: Split large messages sent from background page to devpanel
+
 ## 3.1.9
 
 ### Patch Changes

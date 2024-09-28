@@ -1,5 +1,5 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
-import { QueryStatus } from '@reduxjs/toolkit/dist/query';
+import { QueryStatus } from '@reduxjs/toolkit/query';
 import React, { ReactNode, PureComponent } from 'react';
 import type { ShouldExpandNodeInitially } from 'react-json-tree';
 import { QueryPreviewTabs, RtkResourceInfo, RTKStatusFlags } from '../types';
