@@ -10,6 +10,7 @@ import {
   stateTreeSettings,
   StoreAction,
   StoreState,
+  stateFilter,
   theme,
 } from '@redux-devtools/app';
 
@@ -26,6 +27,7 @@ const rootReducer: Reducer<
   socket,
   theme,
   connection,
+  stateFilter,
   stateTreeSettings,
 }) as any;
 

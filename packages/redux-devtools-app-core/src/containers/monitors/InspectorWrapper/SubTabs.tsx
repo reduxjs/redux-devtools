@@ -8,12 +8,14 @@ import {
   DiffTab,
 } from '@redux-devtools/inspector-monitor';
 import { Action } from 'redux';
-import { selectMonitorTab } from '../../../actions';
+import { selectMonitorTab, setStateFilter } from '../../../actions';
 import RawTab from './RawTab';
 import ChartTab from './ChartTab';
 import VisualDiffTab from './VisualDiffTab';
 import { CoreStoreState } from '../../../reducers';
 import type { Delta } from 'jsondiffpatch';
+import { filter } from '../../../utils/searchUtils';
+import { StateFilterValue } from '@redux-devtools/ui/lib/types/StateFilter/StateFilter';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
@@ -35,16 +37,37 @@ class SubTabs extends Component<Props> {
     }
   }
 
-  selector = () => {
-    switch (this.props.parentTab) {
-      case 'Action':
-        return { data: this.props.action };
-      case 'Diff':
-        return { data: this.props.delta };
-      default:
-        return { data: this.props.nextState };
-    }
+  filteredData = () => {
+    const [data, _error] = filter(
+      this.props.nextState as object,
+      this.props.stateFilter,
+    );
+    return data;
   };
+
+  treeSelector = (): Props => {
+    const props = {
+      ...this.props,
+    };
+    if (this.props.nextState) props.nextState = this.filteredData();
+    return props;
+  };
+
+  selectorCreator =
+    (parentTab: Props['parentTab'], selected: Props['selected']) => () => {
+      if (selected === 'Tree')
+        // FIXME change to (this.props.nextState ? { nextState: data } : {})
+        return this.treeSelector();
+      switch (parentTab) {
+        case 'Action':
+          return { data: this.props.action };
+        case 'Diff':
+          return { data: this.props.delta };
+        default:
+          return { data: this.filteredData() };
+      }
+      // {a: 1, b: {c: 2}, e: 5, c: {d: 1}, d: 2}
+    };
 
   updateTabs(props: Props) {
     const parentTab = props.parentTab;
@@ -54,12 +77,17 @@ class SubTabs extends Component<Props> {
         {
           name: 'Tree',
           component: DiffTab,
-          selector: () => this.props,
+          selector: this.selectorCreator(
+            this.props.parentTab,
+            'Tree',
+          ) as () => Props,
         },
         {
           name: 'Raw',
           component: VisualDiffTab,
-          selector: this.selector as () => { data?: Delta },
+          selector: this.selectorCreator(this.props.parentTab, 'Raw') as () => {
+            data?: Delta;
+          },
         },
       ];
       return;
@@ -69,20 +97,36 @@ class SubTabs extends Component<Props> {
       {
         name: 'Tree',
         component: parentTab === 'Action' ? ActionTab : StateTab,
-        selector: () => this.props,
+        selector: this.selectorCreator(
+          this.props.parentTab,
+          'Tree',
+        ) as () => Props,
       },
       {
         name: 'Chart',
         component: ChartTab,
-        selector: this.selector,
+        selector: this.selectorCreator(this.props.parentTab, 'Chart') as () => {
+          data: unknown;
+        },
       },
       {
         name: 'Raw',
         component: RawTab,
-        selector: this.selector,
+        selector: this.selectorCreator(this.props.parentTab, 'Raw') as () => {
+          data: Delta;
+        },
       },
     ];
   }
+
+  setFilter = (value: StateFilterValue) => {
+    this.setState({
+      stateFilter: {
+        isJsonPath: value.isJsonPath,
+        searchString: value.searchString,
+      },
+    });
+  };
 
   render() {
     let selected = this.props.selected;
@@ -94,6 +138,8 @@ class SubTabs extends Component<Props> {
         tabs={this.tabs! as any}
         selected={selected || 'Tree'}
         onClick={this.props.selectMonitorTab}
+        setFilter={this.props.setStateFilter}
+        stateFilterValue={this.props.stateFilter}
       />
     );
   }
@@ -102,10 +148,12 @@ class SubTabs extends Component<Props> {
 const mapStateToProps = (state: CoreStoreState) => ({
   parentTab: state.monitor.monitorState!.tabName,
   selected: state.monitor.monitorState!.subTabName,
+  stateFilter: state.stateFilter,
 });
 
 const actionCreators = {
   selectMonitorTab,
+  setStateFilter,
 };
 
 export default connect(mapStateToProps, actionCreators)(SubTabs);

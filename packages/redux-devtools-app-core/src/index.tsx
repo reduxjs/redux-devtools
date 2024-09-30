@@ -22,5 +22,6 @@ export * from './reducers/notification';
 export * from './reducers/reports';
 export * from './reducers/section';
 export * from './reducers/theme';
+export * from './reducers/stateFilter';
 export * from './reducers/stateTreeSettings';
 export * from './utils/stringifyJSON';

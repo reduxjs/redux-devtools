@@ -4,6 +4,7 @@ import { notification, NotificationState } from './notification';
 import { instances, InstancesState } from './instances';
 import { reports, ReportsState } from './reports';
 import { theme, ThemeState } from './theme';
+import { stateFilter, StateFilterState } from './stateFilter';
 import { stateTreeSettings, StateTreeSettings } from './stateTreeSettings';
 
 export interface CoreStoreState {
@@ -14,6 +15,7 @@ export interface CoreStoreState {
   readonly instances: InstancesState;
   readonly reports: ReportsState;
   readonly notification: NotificationState;
+  readonly stateFilter: StateFilterState;
 }
 
 export const coreReducers = {
@@ -24,4 +26,5 @@ export const coreReducers = {
   instances,
   reports,
   notification,
+  stateFilter,
 };

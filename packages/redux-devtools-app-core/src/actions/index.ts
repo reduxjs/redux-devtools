@@ -24,6 +24,7 @@ import {
   GET_REPORT_SUCCESS,
   ERROR,
   SET_PERSIST,
+  SET_STATE_FILTER,
   CHANGE_STATE_TREE_SETTINGS,
   CLEAR_INSTANCES,
 } from '../constants/actionTypes';
@@ -33,6 +34,7 @@ import { MonitorStateMonitorState } from '../reducers/monitor';
 import { LiftedAction } from '@redux-devtools/core';
 import { Data } from '../reducers/reports';
 import { LiftedState } from '@redux-devtools/core';
+import { StateFilterState } from '../reducers/stateFilter';
 
 let monitorReducer: (
   monitorProps: unknown,
@@ -65,6 +67,20 @@ export interface ChangeThemeAction {
 }
 export function changeTheme(data: ChangeThemeData): ChangeThemeAction {
   return { type: CHANGE_THEME, ...data.formData! };
+}
+
+export interface SetStateFilterAction {
+  readonly type: typeof SET_STATE_FILTER;
+  stateFilter: Partial<StateFilterState>;
+}
+
+export function setStateFilter(
+  stateFilter: SetStateFilterAction['stateFilter'],
+): SetStateFilterAction {
+  return {
+    type: SET_STATE_FILTER,
+    stateFilter,
+  };
 }
 
 interface ChangeStateTreeSettingsFormData {
@@ -487,6 +503,7 @@ export interface ReduxPersistRehydrateAction {
 export type CoreStoreActionWithoutUpdateStateOrLiftedAction =
   | ChangeSectionAction
   | ChangeThemeAction
+  | SetStateFilterAction
   | ChangeStateTreeSettingsAction
   | MonitorActionAction
   | SelectInstanceAction

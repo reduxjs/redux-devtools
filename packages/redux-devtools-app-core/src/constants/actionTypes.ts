@@ -19,6 +19,7 @@ export const TOGGLE_DISPATCHER = 'devTools/TOGGLE_DISPATCHER';
 export const EXPORT = 'devTools/EXPORT';
 export const SHOW_NOTIFICATION = 'devTools/SHOW_NOTIFICATION';
 export const CLEAR_NOTIFICATION = 'devTools/CLEAR_NOTIFICATION';
+export const SET_STATE_FILTER = 'devTools/SET_STATE_FILTER';
 
 export const UPDATE_REPORTS = 'reports/UPDATE';
 export const GET_REPORT_REQUEST = 'reports/GET_REPORT_REQUEST';
