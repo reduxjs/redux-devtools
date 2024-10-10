@@ -28,7 +28,7 @@ importers:
         version: 9.1.0(eslint@8.57.1)
       eslint-plugin-jest:
         specifier: ^28.8.3
-        version: 28.8.3(@typescript-eslint/eslint-plugin@8.6.0(@typescript-eslint/parser@8.6.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(jest@29.7.0(@types/node@20.16.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@20.16.5)(typescript@5.5.4)))(typescript@5.5.4)
+        version: 28.8.3(@typescript-eslint/eslint-plugin@8.6.0(@typescript-eslint/parser@8.6.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(jest@29.7.0(@types/node@22.5.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@22.5.5)(typescript@5.5.4)))(typescript@5.5.4)
       eslint-plugin-react:
         specifier: ^7.36.1
         version: 7.36.1(eslint@8.57.1)
@@ -37,7 +37,7 @@ importers:
         version: 4.6.2(eslint@8.57.1)
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@20.16.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@20.16.5)(typescript@5.5.4))
+        version: 29.7.0(@types/node@22.5.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@22.5.5)(typescript@5.5.4))
       prettier:
         specifier: 3.3.3
         version: 3.3.3
@@ -157,8 +157,8 @@ importers:
         specifier: ^5.1.34
         version: 5.1.34
       chromedriver:
-        specifier: ^126.0.5
-        version: 126.0.5
+        specifier: ^129.0.4
+        version: 129.0.4
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -176,7 +176,7 @@ importers:
         version: 4.3.7
       jest:
         specifier: ^29.7.0
-        version: 29.7.0(@types/node@22.5.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@22.5.5)(typescript@5.5.4))
+        version: 29.7.0(@types/node@20.16.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@20.16.5)(typescript@5.5.4))
       jest-environment-jsdom:
         specifier: ^29.7.0
         version: 29.7.0
@@ -194,7 +194,7 @@ importers:
         version: 3.0.1
       ts-jest:
         specifier: ^29.2.5
-        version: 29.2.5(@babel/core@7.25.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.25.2))(esbuild@0.23.1)(jest@29.7.0(@types/node@22.5.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@22.5.5)(typescript@5.5.4)))(typescript@5.5.4)
+        version: 29.2.5(@babel/core@7.25.2)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.25.2))(esbuild@0.23.1)(jest@29.7.0(@types/node@20.16.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@20.16.5)(typescript@5.5.4)))(typescript@5.5.4)
       typescript:
         specifier: ~5.5.4
         version: 5.5.4
@@ -6257,8 +6257,8 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@126.0.5:
-    resolution: {integrity: sha512-xXVxwxd8CJ6yg2KEvFqLQi7V0RvF78xFnLB+xo9g9MoJNHMQccD7b4OWaxtKDy5RXrMgQ6Jb6vUN3SjTYXHLEQ==}
+  chromedriver@129.0.4:
+    resolution: {integrity: sha512-j5I55cQwodFJUaYa1tWUmj2ss9KcPRBWmUa5Qonq3X8kqv2ASPyTboFYb4YB/YLztkYTUUw2E43txXw0wYzT/A==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -7156,6 +7156,7 @@ packages:
   eslint@8.57.1:
     resolution: {integrity: sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   esm@3.2.25:
@@ -15479,7 +15480,7 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@126.0.5:
+  chromedriver@129.0.4:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.7.7
@@ -16421,13 +16422,13 @@ snapshots:
     dependencies:
       eslint: 8.57.1
 
-  eslint-plugin-jest@28.8.3(@typescript-eslint/eslint-plugin@8.6.0(@typescript-eslint/parser@8.6.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(jest@29.7.0(@types/node@20.16.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@20.16.5)(typescript@5.5.4)))(typescript@5.5.4):
+  eslint-plugin-jest@28.8.3(@typescript-eslint/eslint-plugin@8.6.0(@typescript-eslint/parser@8.6.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(jest@29.7.0(@types/node@22.5.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@22.5.5)(typescript@5.5.4)))(typescript@5.5.4):
     dependencies:
       '@typescript-eslint/utils': 8.6.0(eslint@8.57.1)(typescript@5.5.4)
       eslint: 8.57.1
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 8.6.0(@typescript-eslint/parser@8.6.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
-      jest: 29.7.0(@types/node@20.16.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@20.16.5)(typescript@5.5.4))
+      jest: 29.7.0(@types/node@22.5.5)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.7.26(@swc/helpers@0.5.13))(@types/node@22.5.5)(typescript@5.5.4))
     transitivePeerDependencies:
       - supports-color
       - typescript
