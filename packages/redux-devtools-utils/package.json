@@ -32,7 +32,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.25.6",
+    "@babel/runtime": "^7.25.7",
     "@redux-devtools/core": "workspace:^",
     "@redux-devtools/serialize": "workspace:^",
     "@types/get-params": "^0.1.2",
@@ -43,14 +43,14 @@
     "redux": "^5.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.6",
-    "@babel/core": "^7.25.2",
-    "@babel/eslint-parser": "^7.25.1",
-    "@babel/plugin-transform-runtime": "^7.25.4",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-typescript": "^7.24.7",
+    "@babel/cli": "^7.25.7",
+    "@babel/core": "^7.25.8",
+    "@babel/eslint-parser": "^7.25.8",
+    "@babel/plugin-transform-runtime": "^7.25.7",
+    "@babel/preset-env": "^7.25.8",
+    "@babel/preset-typescript": "^7.25.7",
     "@types/jsan": "^3.1.5",
-    "@types/node": "^20.16.5",
+    "@types/node": "^20.16.11",
     "rimraf": "^6.0.1",
     "typescript": "~5.5.4"
   },
