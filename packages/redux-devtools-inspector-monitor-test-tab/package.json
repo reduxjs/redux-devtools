@@ -43,7 +43,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.25.6",
+    "@babel/runtime": "^7.25.7",
     "@redux-devtools/ui": "workspace:^",
     "es6template": "^1.0.5",
     "javascript-stringify": "^2.1.0",
@@ -53,13 +53,13 @@
     "simple-diff": "^1.7.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.6",
-    "@babel/core": "^7.25.2",
-    "@babel/eslint-parser": "^7.25.1",
-    "@babel/plugin-transform-runtime": "^7.25.4",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
+    "@babel/cli": "^7.25.7",
+    "@babel/core": "^7.25.8",
+    "@babel/eslint-parser": "^7.25.8",
+    "@babel/plugin-transform-runtime": "^7.25.7",
+    "@babel/preset-env": "^7.25.8",
+    "@babel/preset-react": "^7.25.7",
+    "@babel/preset-typescript": "^7.25.7",
     "@emotion/react": "^11.13.3",
     "@redux-devtools/core": "workspace:^",
     "@redux-devtools/inspector-monitor": "workspace:^",
@@ -69,7 +69,7 @@
     "@types/jest": "^29.5.13",
     "@types/jsan": "^3.1.5",
     "@types/object-path": "^0.11.4",
-    "@types/react": "^18.3.6",
+    "@types/react": "^18.3.11",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "react": "^18.3.1",
