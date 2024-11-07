@@ -157,8 +157,8 @@ importers:
         specifier: ^5.1.34
         version: 5.1.34
       chromedriver:
-        specifier: ^126.0.5
-        version: 126.0.5
+        specifier: ^130.0.4
+        version: 130.0.4
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -5916,6 +5916,7 @@ packages:
 
   boolean@3.2.0:
     resolution: {integrity: sha512-d0II/GO9uf9lfUHH2BQsjxzRJZBdsjgsBiW4BvhWk/3qoKwQFjIDVN19PfX8F2D/r9PCMTtLWjYVCFrpeYUzsw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -6079,8 +6080,8 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@126.0.5:
-    resolution: {integrity: sha512-xXVxwxd8CJ6yg2KEvFqLQi7V0RvF78xFnLB+xo9g9MoJNHMQccD7b4OWaxtKDy5RXrMgQ6Jb6vUN3SjTYXHLEQ==}
+  chromedriver@130.0.4:
+    resolution: {integrity: sha512-lpR+PWXszij1k4Ig3t338Zvll9HtCTiwoLM7n4pCCswALHxzmgwaaIFBh3rt9+5wRk9D07oFblrazrBxwaYYAQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -14862,7 +14863,7 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@126.0.5:
+  chromedriver@130.0.4:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.7.7
