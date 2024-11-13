@@ -11,6 +11,7 @@ Also it's a react component you can use to build amazing monitor applications li
 - [remote-redux-devtools-on-debugger](https://github.com/jhen0409/remote-redux-devtools-on-debugger) - Used in React Native debugger as a dock monitor.
 - [atom-redux-devtools](https://github.com/zalmoxisus/atom-redux-devtools) - Used in Atom editor.
 - [vscode-redux-devtools](https://github.com/jkzing/vscode-redux-devtools) - Used in Visual Studio Code.
+- [intellij-redux-devtools](https://github.com/takanuva15/intellij-redux-devtools) - Used in IntelliJ IDEA.
 
 ### Usage
 
