@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/reduxjs/redux-devtools/CI)
+kjpp5
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=round-square)](https://github.com/reduxjs/redux-devtools/pulls)
 [![OpenCollective](https://opencollective.com/redux-devtools-extension/backers/badge.svg)](#backers)
 [![OpenCollective](https://opencollective.com/redux-devtools-extension/sponsors/badge.svg)](#sponsors)
