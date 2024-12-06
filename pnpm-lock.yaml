@@ -384,8 +384,8 @@ importers:
         specifier: ^18.3.14
         version: 18.3.14
       '@types/react-test-renderer':
-        specifier: ^18.3.1
-        version: 18.3.1
+        specifier: ^19.0.0
+        version: 19.0.0
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.10.1)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.10.0(@swc/helpers@0.5.15))(@types/node@22.10.1)(typescript@5.5.4))
@@ -500,8 +500,8 @@ importers:
         specifier: ^18.3.14
         version: 18.3.14
       '@types/react-test-renderer':
-        specifier: ^18.3.1
-        version: 18.3.1
+        specifier: ^19.0.0
+        version: 19.0.0
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.10.1)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.10.0(@swc/helpers@0.5.15))(@types/node@22.10.1)(typescript@5.5.4))
@@ -5011,8 +5011,8 @@ packages:
   '@types/react-dom@18.3.2':
     resolution: {integrity: sha512-Fqp+rcvem9wEnGr3RY8dYNvSQ8PoLqjZ9HLgaPUOjJJD120uDyOxOjc/39M4Kddp9JQCxpGQbnhVQF0C0ncYVg==}
 
-  '@types/react-test-renderer@18.3.1':
-    resolution: {integrity: sha512-vAhnk0tG2eGa37lkU9+s5SoroCsRI08xnsWFiAXOuPH2jqzMbcXvKExXViPi1P5fIklDeCvXqyrdmipFaSkZrA==}
+  '@types/react-test-renderer@19.0.0':
+    resolution: {integrity: sha512-qDVnNybqFm2eZKJ4jD34EvRd6VHD67KjgnWaEMM0Id9L22EpWe3nOSVKHWL1XWRCxUWe3lhXwlEeCKD1BlJCQA==}
 
   '@types/react-transition-group@4.4.11':
     resolution: {integrity: sha512-RM05tAniPZ5DZPzzNFP+DmrcOdD0efDUxMy3145oljWSl3x9ZV5vhme98gTxFrj2lhXvmGNnUiuDyJgY9IKkNA==}
@@ -13181,7 +13181,7 @@ snapshots:
     dependencies:
       '@types/react': 18.3.14
 
-  '@types/react-test-renderer@18.3.1':
+  '@types/react-test-renderer@19.0.0':
     dependencies:
       '@types/react': 18.3.14
 
