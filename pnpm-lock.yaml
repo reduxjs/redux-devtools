@@ -344,8 +344,8 @@ importers:
         version: 4.17.21
     devDependencies:
       '@types/color':
-        specifier: ^3.0.6
-        version: 3.0.6
+        specifier: ^4.2.0
+        version: 4.2.0
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -2468,8 +2468,8 @@ importers:
         specifier: ^7.26.0
         version: 7.26.0(@babel/core@7.26.0)
       '@chromatic-com/storybook':
-        specifier: ^2.0.2
-        version: 2.0.2(react@18.3.1)
+        specifier: ^3.2.2
+        version: 3.2.2(react@18.3.1)(storybook@8.4.7(prettier@3.4.2))
       '@storybook/addon-essentials':
         specifier: ^8.4.7
         version: 8.4.7(@types/react@18.3.14)(storybook@8.4.7(prettier@3.4.2))
@@ -2507,8 +2507,8 @@ importers:
         specifier: ^14.5.2
         version: 14.5.2(@testing-library/dom@10.4.0)
       '@types/color':
-        specifier: ^3.0.6
-        version: 3.0.6
+        specifier: ^4.2.0
+        version: 4.2.0
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -3647,9 +3647,11 @@ packages:
   '@changesets/write@0.3.2':
     resolution: {integrity: sha512-kDxDrPNpUgsjDbWBvUo27PzKX4gqeKOlhibaOXDJA6kuBisGqNHv/HwGJrAu8U/dSf8ZEFIeHIPtvSlZI1kULw==}
 
-  '@chromatic-com/storybook@2.0.2':
-    resolution: {integrity: sha512-7bPIliISedeIpnVKbzktysFYW5n56bN91kxuOj1XXKixmjbUHRUMvcXd4K2liN6MiR5ZqJtmtcPsZ6CebbGlEA==}
+  '@chromatic-com/storybook@3.2.2':
+    resolution: {integrity: sha512-xmXt/GW0hAPbzNTrxYuVo43Adrtjue4DeVrsoIIEeJdGaPNNeNf+DHMlJKOBdlHmCnFUoe9R/0mLM9zUp5bKWw==}
     engines: {node: '>=16.0.0', yarn: '>=1.22.18'}
+    peerDependencies:
+      storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -4743,8 +4745,8 @@ packages:
   '@types/color-name@1.1.5':
     resolution: {integrity: sha512-j2K5UJqGTxeesj6oQuGpMgifpT5k9HprgQd8D1Y0lOFqKHl3PJu5GMeS4Y5EgjS55AE6OQxf8mPED9uaGbf4Cg==}
 
-  '@types/color@3.0.6':
-    resolution: {integrity: sha512-NMiNcZFRUAiUUCCf7zkAelY8eV3aKqfbzyFQlXpPIEeoNDbsEHGpb854V3gzTsGKYj830I5zPuOwU/TP5/cW6A==}
+  '@types/color@4.2.0':
+    resolution: {integrity: sha512-6+xrIRImMtGAL2X3qYkd02Mgs+gFGs+WsK0b7VVMaO4mYRISwyTjcqNrO0mNSmYEoq++rSLDB2F5HDNmqfOe+A==}
 
   '@types/connect-history-api-fallback@1.5.4':
     resolution: {integrity: sha512-n6Cr2xS1h4uAulPRdlw6Jl6s1oG8KrVilPN2yUITEs+K48EzMJJ3W1xy8K5eWuFvjp3R74AOIGSmp2UfBJ8HFw==}
@@ -11547,12 +11549,13 @@ snapshots:
       human-id: 1.0.2
       prettier: 2.8.8
 
-  '@chromatic-com/storybook@2.0.2(react@18.3.1)':
+  '@chromatic-com/storybook@3.2.2(react@18.3.1)(storybook@8.4.7(prettier@3.4.2))':
     dependencies:
       chromatic: 11.20.0
       filesize: 10.1.6
       jsonfile: 6.1.0
       react-confetti: 6.1.0(react@18.3.1)
+      storybook: 8.4.7(prettier@3.4.2)
       strip-ansi: 7.1.0
     transitivePeerDependencies:
       - '@chromatic-com/cypress'
@@ -12887,7 +12890,7 @@ snapshots:
 
   '@types/color-name@1.1.5': {}
 
-  '@types/color@3.0.6':
+  '@types/color@4.2.0':
     dependencies:
       '@types/color-convert': 2.0.4
 
