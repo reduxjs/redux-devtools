@@ -1,18 +1,20 @@
-import type { StorybookConfig } from '@storybook/react-webpack5';
+import { createRequire } from 'node:module';
+import path from 'node:path';
 
-import { join, dirname } from 'path';
+const require = createRequire(import.meta.url);
 
 /**
  * This function is used to resolve the absolute path of a package.
  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
  */
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, 'package.json')));
+function getAbsolutePath(packageName) {
+  return path.dirname(require.resolve(path.join(packageName, 'package.json')));
 }
-const config: StorybookConfig = {
+
+const config = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    './swc-preset.mjs',
+    getAbsolutePath('@storybook/addon-webpack5-compiler-swc'),
     getAbsolutePath('@storybook/addon-onboarding'),
     getAbsolutePath('@storybook/addon-links'),
     {
@@ -33,4 +35,5 @@ const config: StorybookConfig = {
   },
   staticDirs: ['../fonts'],
 };
+
 export default config;
