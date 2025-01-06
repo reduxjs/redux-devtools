@@ -99,6 +99,7 @@ To use WSS, set `protocol` argument to `https` and provide `key`, `cert` and `pa
 | `--logLevel`     | the socket server log level - 0=none, 1=error, 2=warn, 3=info                                                                                                                                                                                                 | 3             |
 | `--wsEngine`     | the socket server web socket engine - ws or uws (sc-uws)                                                                                                                                                                                                      | ws            |
 | `--open`         | open Redux DevTools as a standalone application or as web app. See [Open Redux DevTools](#open-redux-devtools) for details.                                                                                                                                   | false         |
+| `--pingTimeout`  | if debugged app is not responding for 20 seconds (because it paused on breakpoint) the Redux DevTools will disconnect. This can extend it to e.g. 8 hours `28000000`ms                                                                                        | 20000         |
 
 ### Inject to React Native local server
 
