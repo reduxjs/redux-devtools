@@ -22,8 +22,8 @@ export function createMenu() {
   });
 }
 
-export function removeMenu() {
-  chrome.contextMenus.removeAll();
+export async function removeMenu() {
+  await chrome.contextMenus.removeAll();
 }
 
 chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {

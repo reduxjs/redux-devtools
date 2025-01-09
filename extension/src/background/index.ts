@@ -26,7 +26,7 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.storage.onChanged.addListener((changes) => {
   if (changes.showContextMenus) {
     if (changes.showContextMenus.newValue) createMenu();
-    else removeMenu();
+    else void removeMenu();
   }
 });
 
