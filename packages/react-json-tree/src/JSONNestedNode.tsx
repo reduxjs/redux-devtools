@@ -27,7 +27,7 @@ interface Entry {
 }
 
 function isRange(rangeOrEntry: Range | Entry): rangeOrEntry is Range {
-  return (rangeOrEntry as Range).to !== undefined;
+  return (rangeOrEntry as Range)?.to !== undefined;
 }
 
 function renderChildNodes(
@@ -54,6 +54,10 @@ function renderChildNodes(
     from,
     to,
   ).forEach((entry) => {
+    // Don't process null/undefined entries, which can come from sparse arrays
+    if(!entry) {
+      return
+    }
     if (isRange(entry)) {
       childNodes.push(
         <ItemRange
