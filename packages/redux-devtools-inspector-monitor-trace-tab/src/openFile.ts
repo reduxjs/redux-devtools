@@ -84,6 +84,9 @@ function openInEditor(editor: string, path: string, stackFrame: StackFrame) {
     case 'idea':
       url = `${editor}://open?file=${projectPath}${filePath}&line=${line}&column=${column}`;
       break;
+    case 'jetbrains_server':
+      url = `http://localhost:63342/api/file/?file=${filePath}&line=${line}`;
+      break;
     default:
       // sublime, emacs, macvim, textmate + custom like https://github.com/eclemens/atom-url-handler
       url = `${editor}://open/?url=file://${projectPath}${filePath}&line=${line}&column=${column}`;
