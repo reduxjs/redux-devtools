@@ -1,5 +1,12 @@
 # Change Log
 
+## 4.1.1
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+
 ## 4.1.0
 
 ### Minor Changes

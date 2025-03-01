@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.1.1
+
+### Patch Changes
+
+- @redux-devtools/inspector-monitor@6.1.1
+
 ## 4.1.0
 
 ### Minor Changes

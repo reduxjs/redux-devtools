@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.9.5
+
+### Patch Changes
+
+- @redux-devtools/utils@3.1.1
+
 ## 0.9.4
 
 ### Patch Changes

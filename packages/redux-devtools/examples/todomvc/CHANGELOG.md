@@ -1,5 +1,14 @@
 # todomvc
 
+## 0.2.11
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+  - @redux-devtools/dock-monitor@4.1.1
+  - @redux-devtools/log-monitor@5.1.1
+
 ## 0.2.10
 
 ### Patch Changes
