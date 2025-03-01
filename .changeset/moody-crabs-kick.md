@@ -1,18 +1,18 @@
 ---
-'react-dock': patch
-'react-json-tree': patch
-'@redux-devtools/app-core': patch
-'@redux-devtools/app': patch
-'@redux-devtools/chart-monitor': patch
-'@redux-devtools/dock-monitor': patch
-'@redux-devtools/inspector-monitor-test-tab': patch
-'@redux-devtools/inspector-monitor-trace-tab': patch
-'@redux-devtools/inspector-monitor': patch
-'@redux-devtools/log-monitor': patch
-'@redux-devtools/rtk-query-monitor': patch
-'@redux-devtools/slider-monitor': patch
-'@redux-devtools/ui': patch
-'@redux-devtools/core': patch
+'react-dock': minor
+'react-json-tree': minor
+'@redux-devtools/app-core': minor
+'@redux-devtools/app': minor
+'@redux-devtools/chart-monitor': minor
+'@redux-devtools/dock-monitor': minor
+'@redux-devtools/inspector-monitor-test-tab': minor
+'@redux-devtools/inspector-monitor-trace-tab': minor
+'@redux-devtools/inspector-monitor': minor
+'@redux-devtools/log-monitor': minor
+'@redux-devtools/rtk-query-monitor': minor
+'@redux-devtools/slider-monitor': minor
+'@redux-devtools/ui': minor
+'@redux-devtools/core': minor
 ---
 
 Add React 19 to peer deps
