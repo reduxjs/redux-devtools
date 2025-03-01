@@ -1,5 +1,19 @@
 # @redux-devtools/app-core
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+  - @redux-devtools/chart-monitor@5.1.1
+  - @redux-devtools/inspector-monitor@6.1.1
+  - @redux-devtools/inspector-monitor-test-tab@4.1.1
+  - @redux-devtools/inspector-monitor-trace-tab@4.1.1
+  - @redux-devtools/log-monitor@5.1.1
+  - @redux-devtools/rtk-query-monitor@5.1.1
+  - @redux-devtools/slider-monitor@5.1.1
+
 ## 1.1.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # Change Log
 
+## 6.2.1
+
+### Patch Changes
+
+- @redux-devtools/app-core@1.1.1
+
 ## 6.2.0
 
 ### Minor Changes
