@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.1.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - react-dock@0.8.0
+  - @redux-devtools/core@4.1.0
+
 ## 4.0.1
 
 ### Patch Changes

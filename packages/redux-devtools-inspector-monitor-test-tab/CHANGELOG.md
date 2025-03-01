@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.1.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/inspector-monitor@7.0.0
+  - @redux-devtools/ui@1.4.0
+
 ## 4.0.0
 
 ### Major Changes

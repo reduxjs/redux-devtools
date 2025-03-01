@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.4.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
 ## 1.3.2
 
 ### Patch Changes
