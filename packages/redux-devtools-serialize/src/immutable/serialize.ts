@@ -1,4 +1,4 @@
-import * as Immutable from 'immutable';
+import type Immutable from 'immutable';
 import { Record } from 'immutable';
 import { mark, extract, refer } from '../helpers';
 import options from '../constants/options';

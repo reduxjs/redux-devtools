@@ -2,7 +2,7 @@ import getParams from 'get-params';
 import jsan from 'jsan';
 import { nanoid } from 'nanoid/non-secure';
 import { immutableSerialize } from '@redux-devtools/serialize';
-import * as Immutable from 'immutable';
+import type Immutable from 'immutable';
 import { Action, ActionCreator } from 'redux';
 
 export function generateId(id: string | undefined) {
