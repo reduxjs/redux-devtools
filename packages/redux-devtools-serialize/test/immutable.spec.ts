@@ -102,7 +102,7 @@ describe('Immutable', function () {
       const scndProp = parsed.data.scnd.data.prop;
 
       expect(fstProp).toEqual(scndProp);
-      expect(Array.isArray(obj.get('fst')!.get('prop'))).toBe(true);
+      expect(Array.isArray(obj.get('fst').get('prop'))).toBe(true);
     });
   });
 
