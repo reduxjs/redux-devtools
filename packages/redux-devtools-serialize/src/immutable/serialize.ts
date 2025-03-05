@@ -1,4 +1,5 @@
-import Immutable, { OrderedSet, Record } from 'immutable';
+import * as Immutable from 'immutable';
+import { Record } from 'immutable';
 import { mark, extract, refer } from '../helpers';
 import options from '../constants/options';
 import { SerializedImmutableData } from '../types';

@@ -1,4 +1,5 @@
-import Immutable, { Map, OrderedMap } from 'immutable';
+import * as Immutable from 'immutable';
+import { Map, OrderedMap } from 'immutable';
 import Serialize from '../src/immutable';
 import { SerializedData } from '../src/helpers';
 const serialize = Serialize(Immutable);

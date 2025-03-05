@@ -1,4 +1,4 @@
-import Immutable from 'immutable';
+import * as Immutable from 'immutable';
 import shuffle from 'lodash.shuffle';
 import { combineReducers, Reducer } from 'redux';
 
