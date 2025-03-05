@@ -57,8 +57,8 @@ export default function serialize(
           return immutable.List(immutableValue.data);
         case 'ImmutableRange':
           return immutable.Range(
-            immutableValue.data._start,
-            immutableValue.data._end,
+            immutableValue.data._start!,
+            immutableValue.data._end!,
             immutableValue.data._step,
           );
         case 'ImmutableRepeat':
