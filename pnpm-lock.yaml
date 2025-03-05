@@ -172,8 +172,8 @@ importers:
         specifier: ^15.15.0
         version: 15.15.0
       immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^5.0.3
+        version: 5.0.3
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.13.9)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.11.7(@swc/helpers@0.5.15))(@types/node@22.13.9)(typescript@5.7.3))
@@ -313,8 +313,8 @@ importers:
         specifier: ^4.17.12
         version: 4.17.12
       immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^5.0.3
+        version: 5.0.3
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.13.9)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.11.7(@swc/helpers@0.5.15))(@types/node@22.13.9)(typescript@5.7.3))
@@ -524,8 +524,8 @@ importers:
   packages/react-json-tree/examples:
     dependencies:
       immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^5.0.3
+        version: 5.0.3
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1211,9 +1211,6 @@ importers:
       '@babel/runtime':
         specifier: ^7.26.9
         version: 7.26.9
-      immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
     devDependencies:
       '@babel/cli':
         specifier: ^7.26.4
@@ -1270,8 +1267,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^5.0.3
+        version: 5.0.3
       javascript-stringify:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1476,8 +1473,8 @@ importers:
         specifier: workspace:^
         version: link:../../redux-devtools-ui
       immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^5.0.3
+        version: 5.0.3
       lodash.shuffle:
         specifier: ^4.2.0
         version: 4.2.0
@@ -1697,8 +1694,8 @@ importers:
         specifier: workspace:^
         version: link:..
       immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^5.0.3
+        version: 5.0.3
       lodash.shuffle:
         specifier: ^4.2.0
         version: 4.2.0
@@ -1979,8 +1976,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^5.0.3
+        version: 5.0.3
       lodash.debounce:
         specifier: ^4.0.8
         version: 4.0.8
@@ -2231,8 +2228,8 @@ importers:
         specifier: ^3.1.5
         version: 3.1.5
       immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^5.0.3
+        version: 5.0.3
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.13.9)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.11.7(@swc/helpers@0.5.15))(@types/node@22.13.9)(typescript@5.7.3))
@@ -2594,8 +2591,8 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2
       immutable:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^5.0.3
+        version: 5.0.3
       jsan:
         specifier: ^3.1.14
         version: 3.1.14
@@ -7397,8 +7394,8 @@ packages:
   immer@10.1.1:
     resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
 
-  immutable@4.3.7:
-    resolution: {integrity: sha512-1hqclzwYwjRDFLjcFxOM5AYkkG0rpFPpr1RLPMEuGczoS7YA8gLhy8SWXYRAA/XwfEHpfo3cw5JGioS32fnMRw==}
+  immutable@5.0.3:
+    resolution: {integrity: sha512-P8IdPQHq3lA1xVeBRi5VPqUm5HDgKnx0Ru51wZz5mjxHr5n3RWhjIpOFU7ybkUxfB+5IToy+OLaHYDBIWsv+uw==}
 
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
@@ -16049,7 +16046,7 @@ snapshots:
 
   immer@10.1.1: {}
 
-  immutable@4.3.7: {}
+  immutable@5.0.3: {}
 
   import-fresh@3.3.1:
     dependencies:

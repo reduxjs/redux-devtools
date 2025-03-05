@@ -1,4 +1,5 @@
-import Immutable, { OrderedSet, Record } from 'immutable';
+import type Immutable from 'immutable';
+import { Record } from 'immutable';
 import { mark, extract, refer } from '../helpers';
 import options from '../constants/options';
 import { SerializedImmutableData } from '../types';
@@ -57,8 +58,8 @@ export default function serialize(
           return immutable.List(immutableValue.data);
         case 'ImmutableRange':
           return immutable.Range(
-            immutableValue.data._start,
-            immutableValue.data._end,
+            immutableValue.data._start!,
+            immutableValue.data._end!,
             immutableValue.data._step,
           );
         case 'ImmutableRepeat':

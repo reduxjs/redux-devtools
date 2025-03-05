@@ -7,7 +7,7 @@ import {
   Middleware,
 } from 'redux';
 import { persistState } from '@redux-devtools/core';
-import thunk from 'redux-thunk';
+import { thunk } from 'redux-thunk';
 import rootReducer, { CounterState } from '../reducers';
 import DevTools from '../containers/DevTools';
 import { CounterAction } from '../actions/CounterActions';

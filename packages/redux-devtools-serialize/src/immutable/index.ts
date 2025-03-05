@@ -1,5 +1,5 @@
 import jsan from 'jsan';
-import Immutable from 'immutable';
+import type Immutable from 'immutable';
 import serialize from './serialize';
 import options from '../constants/options';
 

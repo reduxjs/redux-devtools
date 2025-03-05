@@ -1,6 +1,8 @@
-import Immutable, { Map, OrderedMap } from 'immutable';
+import * as Immutable from 'immutable';
+import { Map, OrderedMap } from 'immutable';
 import Serialize from '../src/immutable';
 import { SerializedData } from '../src/helpers';
+
 const serialize = Serialize(Immutable);
 const stringify = serialize.stringify;
 const parse = serialize.parse;
@@ -100,7 +102,7 @@ describe('Immutable', function () {
       const scndProp = parsed.data.scnd.data.prop;
 
       expect(fstProp).toEqual(scndProp);
-      expect(Array.isArray(obj.get('fst')!.get('prop'))).toBe(true);
+      expect(Array.isArray(obj.get('fst').get('prop'))).toBe(true);
     });
   });
 

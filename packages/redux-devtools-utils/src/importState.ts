@@ -1,7 +1,7 @@
 import jsan from 'jsan';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { Action } from 'redux';
-import Immutable from 'immutable';
+import type Immutable from 'immutable';
 import { PerformAction } from '@redux-devtools/core';
 
 interface State {

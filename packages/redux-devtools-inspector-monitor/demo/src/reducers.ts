@@ -1,4 +1,11 @@
-import Immutable from 'immutable';
+import {
+  fromJS,
+  Map as ImmutableMap,
+  List,
+  Set as ImmutableSet,
+  Stack,
+  Seq,
+} from 'immutable';
 import shuffle from 'lodash.shuffle';
 import { combineReducers, Reducer } from 'redux';
 
@@ -18,17 +25,14 @@ const NESTED = {
   },
 };
 
-const IMMUTABLE_NESTED = Immutable.fromJS(NESTED) as Immutable.Map<
-  unknown,
-  unknown
->;
+const IMMUTABLE_NESTED = fromJS(NESTED) as ImmutableMap<unknown, unknown>;
 
-const IMMUTABLE_MAP = Immutable.Map({
-  map: Immutable.Map({ a: 1, b: 2, c: 3 }),
-  list: Immutable.List(['a', 'b', 'c']),
-  set: Immutable.Set(['a', 'b', 'c']),
-  stack: Immutable.Stack(['a', 'b', 'c']),
-  seq: Immutable.Seq([1, 2, 3, 4, 5, 6, 7, 8]),
+const IMMUTABLE_MAP = ImmutableMap({
+  map: ImmutableMap({ a: 1, b: 2, c: 3 }),
+  list: List(['a', 'b', 'c']),
+  set: ImmutableSet(['a', 'b', 'c']),
+  stack: Stack(['a', 'b', 'c']),
+  seq: Seq([1, 2, 3, 4, 5, 6, 7, 8]),
 });
 
 type MapValue =
