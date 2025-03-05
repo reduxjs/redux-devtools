@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "rtk-query-demo",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "license": "MIT",
   "scripts": {
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
@@ -20,7 +20,7 @@
     "@redux-devtools/rtk-query-monitor": "workspace:^",
     "@reduxjs/toolkit": "^2.6.0",
     "framer-motion": "^11.18.2",
-    "msw": "^2.7.0",
+    "msw": "^2.7.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
@@ -35,7 +35,7 @@
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.13.9",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@types/styled-components": "^5.1.34",

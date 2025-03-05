@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/inspector-monitor",
-  "version": "6.0.1",
+  "version": "6.1.1",
   "description": "Redux DevTools Diff Monitor",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-inspector-monitor",
   "bugs": {
@@ -40,7 +40,7 @@
     "@dnd-kit/modifiers": "^7.0.0",
     "@dnd-kit/sortable": "^8.0.0",
     "@dnd-kit/utilities": "^3.2.2",
-    "@types/lodash": "^4.17.15",
+    "@types/lodash": "^4.17.16",
     "dateformat": "^5.0.3",
     "hex-rgba": "^1.0.2",
     "immutable": "^5.0.3",
@@ -73,9 +73,9 @@
   "peerDependencies": {
     "@emotion/react": "^11.14.0",
     "@redux-devtools/core": "workspace:^",
-    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react": "^16.8.4 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.4 || ^17.0.0 || ^18.0.0",
+    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
     "redux": "^3.4.0 || ^4.0.0 || ^5.0.0"
   }
 }

@@ -6,8 +6,9 @@ import {
   LiftedState,
   LiftedStore,
   Options,
+  InstrumentExt,
 } from '@redux-devtools/instrument';
-import { Action } from 'redux';
+import { Action, StoreEnhancer } from 'redux';
 
 function logError(type: string) {
   if (type === 'NoStore') {
@@ -46,13 +47,32 @@ export type Monitor<
   }
 >;
 
+export interface DevToolsInstance<S, A extends Action<string>, MonitorState>
+  extends Component<Props<S, A, MonitorState>> {
+  liftedStore?: LiftedStore<S, A, MonitorState>;
+}
+
+export interface DevToolsClass<
+  S,
+  A extends Action<string>,
+  MonitorState,
+  MonitorAction extends Action<string>,
+> {
+  new (props: Props<S, A, MonitorState>): DevToolsInstance<S, A, MonitorState>;
+  instrument: (
+    options?: Options<S, A, MonitorState, MonitorAction>,
+  ) => StoreEnhancer<InstrumentExt<any, any, MonitorState>>;
+}
+
 export default function createDevTools<
   S,
   A extends Action<string>,
   MonitorProps extends LiftedState<S, A, MonitorState>,
   MonitorState,
   MonitorAction extends Action<string>,
->(children: Monitor<S, A, MonitorProps, MonitorState, MonitorAction>) {
+>(
+  children: Monitor<S, A, MonitorProps, MonitorState, MonitorAction>,
+): DevToolsClass<S, A, MonitorState, MonitorAction> {
   const monitorElement = Children.only(children);
   const monitorProps = monitorElement.props;
   const Monitor = monitorElement.type;

@@ -1,5 +1,23 @@
 # Change Log
 
+## 6.2.1
+
+### Patch Changes
+
+- @redux-devtools/app-core@1.1.1
+
+## 6.2.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/app-core@1.1.0
+  - @redux-devtools/ui@1.4.0
+
 ## 6.1.0
 
 ### Minor Changes

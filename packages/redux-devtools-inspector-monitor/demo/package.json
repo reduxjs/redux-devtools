@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "inspector-demo",
-  "version": "0.1.11",
+  "version": "0.1.13",
   "license": "MIT",
   "scripts": {
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
@@ -31,7 +31,7 @@
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@types/lodash.shuffle": "^4.2.9",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.13.9",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@types/redux-logger": "^3.0.13",

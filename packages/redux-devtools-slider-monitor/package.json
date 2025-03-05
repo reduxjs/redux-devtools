@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/slider-monitor",
-  "version": "5.0.1",
+  "version": "5.1.1",
   "description": "A custom monitor for replaying Redux actions that works similarly to a video player",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-slider-monitor",
   "bugs": {
@@ -44,7 +44,7 @@
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@redux-devtools/core": "workspace:^",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.13.9",
     "@types/react": "^18.3.18",
     "react": "^18.3.1",
     "redux": "^5.0.1",
@@ -53,9 +53,9 @@
   },
   "peerDependencies": {
     "@redux-devtools/core": "workspace:^",
-    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
     "@types/styled-components": "^5.1.34",
-    "react": "^16.8.4 || ^17.0.0 || ^18.0.0",
+    "react": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
     "redux": "^3.4.0 || ^4.0.0 || ^5.0.0",
     "styled-components": "^5.3.11"
   }

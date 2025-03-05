@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.1.1
+
+### Patch Changes
+
+- 91f21b2: Fix compatibility of createDevTools with React 19 types
+
+## 4.1.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
 ## 4.0.0
 
 ### Major Changes
