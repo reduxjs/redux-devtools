@@ -1,5 +1,9 @@
 import type { LiftedAction, LiftedState } from '@redux-devtools/core';
-import type { createApi, QueryStatus } from '@reduxjs/toolkit/query';
+import type {
+  createApi,
+  QueryCacheKey,
+  QueryStatus,
+} from '@reduxjs/toolkit/query';
 import type { Action, AnyAction, Dispatch } from '@reduxjs/toolkit';
 import type { ComponentType } from 'react';
 import { base16Themes } from 'react-base16-styling';
@@ -52,7 +56,37 @@ export type RtkMutationState = NonNullable<
 
 export type RtkQueryApiConfig = RtkQueryApiState['config'];
 
-export type RtkQueryProvided = RtkQueryApiState['provided'];
+export type FullTagDescription<TagType> = {
+  type: TagType;
+  id?: number | string;
+};
+
+// This is the actual tags structure, and was the entire `api.provided`
+// field up through 2.6.1
+export type RtkQueryProvidedTagsState = {
+  [x: string]: {
+    [id: string]: QueryCacheKey[];
+    [id: number]: QueryCacheKey[];
+  };
+};
+
+// As of 2.6.2, the `api.provided` field is split into `tags` and `keys` fields,
+// with the old data nested in `tags`.
+export type RtkQuery262ProvidedState = {
+  keys: Record<QueryCacheKey, FullTagDescription<any>[]>;
+  tags: RtkQueryProvidedTagsState;
+};
+
+export function isRtkQuery262Provided(
+  provided: Record<string, unknown>,
+): provided is RtkQuery262ProvidedState {
+  return (
+    'tags' in provided &&
+    'keys' in provided &&
+    typeof provided.tags === 'object' &&
+    typeof provided.keys === 'object'
+  );
+}
 
 export interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
