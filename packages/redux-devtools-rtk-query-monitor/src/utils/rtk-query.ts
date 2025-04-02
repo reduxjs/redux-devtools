@@ -1,5 +1,5 @@
 import { Action, AnyAction, isAllOf, isPlainObject } from '@reduxjs/toolkit';
-import { QueryStatus } from '@reduxjs/toolkit/query';
+import { QueryCacheKey, QueryStatus } from '@reduxjs/toolkit/query';
 import {
   QueryInfo,
   RtkQueryMonitorState,
@@ -11,7 +11,8 @@ import {
   MutationInfo,
   ApiStats,
   QueryTally,
-  RtkQueryProvided,
+  RtkQueryProvidedTagsState,
+  RtkQuery262ProvidedState,
   ApiTimings,
   QueryTimings,
   SelectorsSource,
@@ -19,6 +20,7 @@ import {
   RtkResourceInfo,
   RtkRequest,
   RtkRequestTiming,
+  isRtkQuery262Provided,
 } from '../types';
 import { missingTagId } from '../monitor-config';
 import { Comparator, compareJSONPrimitive } from './comparators';
@@ -529,13 +531,25 @@ export function getProvidedOf(
 
 export function getQueryTagsOf(
   resInfo: RtkResourceInfo | null,
-  provided: RtkQueryProvided | null,
+  provided: RtkQueryProvidedTagsState | RtkQuery262ProvidedState | null,
 ): RtkQueryTag[] {
   if (!resInfo || resInfo.type === 'mutation' || !provided) {
     return emptyArray;
   }
 
-  const tagTypes = Object.keys(provided);
+  // Handle `api.provided` schema change with RTK Query tag handling.
+  // Originally, `api.provided` was a `Record<string, Record<string, string[]>>`,
+  // directly containing the tag names.
+  // With https://github.com/reduxjs/redux-toolkit/pull/4910 , that changes to
+  // change the top level to be `{tags, keys}`, with `tags` containing the tag names.
+  // Handle the newer structure by extracting the right field if it exists.
+  const actualProvided: RtkQueryProvidedTagsState = isRtkQuery262Provided(
+    provided,
+  )
+    ? provided.tags
+    : provided;
+
+  const tagTypes = Object.keys(actualProvided);
 
   if (tagTypes.length < 1) {
     return emptyArray;
@@ -543,10 +557,10 @@ export function getQueryTagsOf(
 
   const output: RtkQueryTag[] = [];
 
-  for (const [type, tagIds] of Object.entries(provided)) {
+  for (const [type, tagIds] of Object.entries(actualProvided)) {
     if (tagIds) {
       for (const [id, queryKeys] of Object.entries(tagIds)) {
-        if ((queryKeys as unknown[]).includes(resInfo.queryKey)) {
+        if (queryKeys.includes(resInfo.queryKey as QueryCacheKey)) {
           const tag: RtkQueryTag = { type };
 
           if (id !== missingTagId) {

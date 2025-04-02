@@ -6,9 +6,10 @@ import {
   RtkQueryApiState,
   RtkQueryTag,
   SelectorsSource,
-  RtkQueryProvided,
+  RtkQueryProvidedTagsState,
   QueryPreviewTabs,
   RtkResourceInfo,
+  RtkQuery262ProvidedState,
 } from './types';
 import { Comparator, queryComparators } from './utils/comparators';
 import { FilterList, queryListFilters } from './utils/filters';
@@ -216,7 +217,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
 
   const selectProvidedOfCurrentQuery: InspectorSelector<
     S,
-    null | RtkQueryProvided
+    null | RtkQueryProvidedTagsState | RtkQuery262ProvidedState
   > = (selectorsSource: SelectorsSource<S>) => {
     return selectApiOfCurrentQuery(selectorsSource)?.provided ?? null;
   };
