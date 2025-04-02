@@ -2480,8 +2480,8 @@ importers:
         specifier: ^8.6.4
         version: 8.6.4(storybook@8.6.4(prettier@3.5.3))
       '@storybook/addon-webpack5-compiler-swc':
-        specifier: 2.1.0
-        version: 2.1.0(@swc/helpers@0.5.15)(webpack@5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.0))
+        specifier: 3.0.0
+        version: 3.0.0(@swc/helpers@0.5.15)(webpack@5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.0))
       '@storybook/blocks':
         specifier: ^8.6.4
         version: 8.6.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.4(prettier@3.5.3))
@@ -4429,8 +4429,8 @@ packages:
     peerDependencies:
       storybook: ^8.6.4
 
-  '@storybook/addon-webpack5-compiler-swc@2.1.0':
-    resolution: {integrity: sha512-mCzNtuqY8LJqj/2vW12o3S/UujRSBFstxRqhOUErrbbOBRyM6RgcPuvytDdRv1npFi8OaKOIz3SoJBT/EtAN3A==}
+  '@storybook/addon-webpack5-compiler-swc@3.0.0':
+    resolution: {integrity: sha512-qkQwQEvHlxwPCHz/xakGfXJusEa1gKMw7enELh6QGopblfN3rMiV084boqiIqBReqWTasSwHOqvuElAu0NQ+8w==}
     engines: {node: '>=18'}
 
   '@storybook/blocks@8.6.4':
@@ -12515,7 +12515,7 @@ snapshots:
       memoizerific: 1.11.3
       storybook: 8.6.4(prettier@3.5.3)
 
-  '@storybook/addon-webpack5-compiler-swc@2.1.0(@swc/helpers@0.5.15)(webpack@5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.0))':
+  '@storybook/addon-webpack5-compiler-swc@3.0.0(@swc/helpers@0.5.15)(webpack@5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.0))':
     dependencies:
       '@swc/core': 1.11.7(@swc/helpers@0.5.15)
       swc-loader: 0.2.6(@swc/core@1.11.7(@swc/helpers@0.5.15))(webpack@5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.0))
