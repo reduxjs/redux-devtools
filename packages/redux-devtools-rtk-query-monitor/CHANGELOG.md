@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.2.0
+
+### Minor Changes
+
+- 17b55ef: Handle api.provided state changes in RTKQ 2.6.2
+
 ## 5.1.1
 
 ### Patch Changes

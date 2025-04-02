@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.0.3
+
+### Patch Changes
+
+- @redux-devtools/app@6.2.2
+
 ## 4.0.2
 
 ### Patch Changes
