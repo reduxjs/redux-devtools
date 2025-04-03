@@ -1,5 +1,12 @@
 # @redux-devtools/app-core
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [17b55ef]
+  - @redux-devtools/rtk-query-monitor@5.2.0
+
 ## 1.1.1
 
 ### Patch Changes

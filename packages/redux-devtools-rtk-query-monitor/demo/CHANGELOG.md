@@ -1,5 +1,12 @@
 # rtk-query-demo
 
+## 0.1.15
+
+### Patch Changes
+
+- Updated dependencies [17b55ef]
+  - @redux-devtools/rtk-query-monitor@5.2.0
+
 ## 0.1.14
 
 ### Patch Changes
