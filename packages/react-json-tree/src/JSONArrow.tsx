@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import type { StylingFunction } from 'react-base16-styling';
 
-interface Props {
+export interface JSONArrowProps {
   styling: StylingFunction;
   arrowStyle?: 'single' | 'double';
   expanded: boolean;
   nodeType: string;
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  ariaControls?: string;
+  ariaLabel?: string
+  OverrideComponent?: ComponentType<JSONArrowProps>;
 }
 
-export default function JSONArrow({
-  styling,
-  arrowStyle = 'single',
-  expanded,
-  nodeType,
-  onClick,
-}: Props) {
+export default function JSONArrow({OverrideComponent, ...props}: JSONArrowProps) {
+  const {
+    styling,
+    arrowStyle = 'single',
+    expanded,
+    nodeType,
+    onClick,
+    ariaControls,
+    ariaLabel
+  } = props
+  if(OverrideComponent) {
+    return <OverrideComponent {...props} />
+  }
+
   return (
-    <div {...styling('arrowContainer', arrowStyle)} onClick={onClick}>
+    <button {...styling('arrowContainer', arrowStyle)} aria-label={ariaLabel} aria-expanded={expanded} aria-controls={ariaControls} onClick={onClick}>
       <div {...styling(['arrow', 'arrowSign'], nodeType, expanded, arrowStyle)}>
         {'\u25B6'}
         {arrowStyle === 'double' && (
           <div {...styling(['arrowSign', 'arrowSignInner'])}>{'\u25B6'}</div>
         )}
       </div>
-    </div>
+    </button>
   );
 }
