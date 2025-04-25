@@ -157,8 +157,8 @@ importers:
         specifier: ^5.1.34
         version: 5.1.34
       chromedriver:
-        specifier: ^126.0.5
-        version: 126.0.5
+        specifier: ^135.0.4
+        version: 135.0.4
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -5844,8 +5844,8 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@126.0.5:
-    resolution: {integrity: sha512-xXVxwxd8CJ6yg2KEvFqLQi7V0RvF78xFnLB+xo9g9MoJNHMQccD7b4OWaxtKDy5RXrMgQ6Jb6vUN3SjTYXHLEQ==}
+  chromedriver@135.0.4:
+    resolution: {integrity: sha512-x0DESUcvCfKydljOCTQUve6f0+78Vq71FHcAMmdzBoWzAnyzB+2Fd2PouGRoJJkqk/vgfNzCiuwFosT0hnIjEg==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -13589,13 +13589,13 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.98.0)':
     dependencies:
-      webpack: 5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-dev-server@5.2.0)(webpack@5.98.0)
+      webpack: 5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.0)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack@5.98.0)
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.98.0)':
     dependencies:
-      webpack: 5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-dev-server@5.2.0)(webpack@5.98.0)
+      webpack: 5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.0)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack@5.98.0)
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack-dev-server@5.2.0)(webpack@5.98.0)':
     dependencies:
@@ -14238,7 +14238,7 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@126.0.5:
+  chromedriver@135.0.4:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.8.1
@@ -14510,7 +14510,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.7.1
     optionalDependencies:
-      webpack: 5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(webpack-cli@6.0.1)
+      webpack: 5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.0)(webpack-cli@6.0.1)
 
   css-select@4.3.0:
     dependencies:
@@ -18659,7 +18659,7 @@ snapshots:
 
   style-loader@4.0.0(webpack@5.98.0):
     dependencies:
-      webpack: 5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(webpack-cli@6.0.1)
+      webpack: 5.98.0(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.0)(webpack-cli@6.0.1)
 
   styled-components@5.3.11(@babel/core@7.26.9)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1):
     dependencies:
@@ -19433,7 +19433,7 @@ snapshots:
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     optionalDependencies:
-      webpack-cli: 6.0.1(webpack-dev-server@5.2.0)(webpack@5.98.0)
+      webpack-cli: 6.0.1(webpack@5.98.0)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
