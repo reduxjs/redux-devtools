@@ -13987,13 +13987,13 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.99.8)':
     dependencies:
-      webpack: 5.99.8(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.4)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack@5.99.8)
+      webpack: 5.99.8(@swc/core@1.11.7(@swc/helpers@0.5.15))(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.8)
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.99.8)':
     dependencies:
-      webpack: 5.99.8(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.4)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack@5.99.8)
+      webpack: 5.99.8(@swc/core@1.11.7(@swc/helpers@0.5.15))(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.8)
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack-dev-server@5.2.1)(webpack@5.99.8)':
     dependencies:
@@ -14929,7 +14929,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.7.1
     optionalDependencies:
-      webpack: 5.99.8(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.4)(webpack-cli@6.0.1)
+      webpack: 5.99.8(@swc/core@1.11.7(@swc/helpers@0.5.15))(webpack-cli@6.0.1)
 
   css-select@4.3.0:
     dependencies:
@@ -19198,7 +19198,7 @@ snapshots:
 
   style-loader@4.0.0(webpack@5.99.8):
     dependencies:
-      webpack: 5.99.8(@swc/core@1.11.7(@swc/helpers@0.5.15))(esbuild@0.25.4)(webpack-cli@6.0.1)
+      webpack: 5.99.8(@swc/core@1.11.7(@swc/helpers@0.5.15))(webpack-cli@6.0.1)
 
   styled-components@5.3.11(@babel/core@7.27.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1):
     dependencies:
@@ -19990,7 +19990,7 @@ snapshots:
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     optionalDependencies:
-      webpack-cli: 6.0.1(webpack@5.99.8)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.1)(webpack@5.99.8)
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
