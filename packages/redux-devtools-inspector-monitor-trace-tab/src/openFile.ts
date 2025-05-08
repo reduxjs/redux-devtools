@@ -32,11 +32,10 @@ function openAndCloseTab(url: string) {
     const removeTab = () => {
       chrome.windows.onFocusChanged.removeListener(removeTab);
       if (tab && tab.id) {
-        chrome.tabs.remove(tab.id, async () => {
-          // eslint-disable-next-line no-console
+        chrome.tabs.remove(tab.id, () => {
           if (chrome.runtime.lastError) console.log(chrome.runtime.lastError);
           else if (chrome.devtools && chrome.devtools.inspectedWindow) {
-            await chrome.tabs.update(chrome.devtools.inspectedWindow.tabId, {
+            void chrome.tabs.update(chrome.devtools.inspectedWindow.tabId, {
               active: true,
             });
           }
