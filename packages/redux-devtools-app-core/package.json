@@ -35,7 +35,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.9",
+    "@babel/runtime": "^7.27.1",
     "@redux-devtools/chart-monitor": "workspace:^",
     "@redux-devtools/core": "workspace:^",
     "@redux-devtools/inspector-monitor": "workspace:^",
@@ -69,7 +69,7 @@
     "@types/jest": "^29.5.14",
     "@types/jsan": "^3.1.5",
     "@types/json-schema": "^7.0.15",
-    "@types/node": "^22.15.15",
+    "@types/node": "^22.15.17",
     "@types/react": "^18.3.21",
     "@types/react-dom": "^18.3.7",
     "@types/styled-components": "^5.1.34",

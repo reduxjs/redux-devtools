@@ -44,7 +44,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.9",
+    "@babel/runtime": "^7.27.1",
     "@redux-devtools/ui": "workspace:^",
     "@types/lodash": "^4.17.16",
     "hex-rgba": "^1.0.2",
