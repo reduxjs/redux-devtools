@@ -43,7 +43,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.9",
+    "@babel/runtime": "^7.27.1",
     "@redux-devtools/ui": "workspace:^",
     "es6template": "^1.0.5",
     "javascript-stringify": "^2.1.0",
@@ -76,7 +76,7 @@
     "react-dom": "^18.3.1",
     "redux": "^5.0.1",
     "rimraf": "^6.0.1",
-    "ts-jest": "^29.3.2",
+    "ts-jest": "^29.3.4",
     "typescript": "~5.8.3"
   },
   "peerDependencies": {
