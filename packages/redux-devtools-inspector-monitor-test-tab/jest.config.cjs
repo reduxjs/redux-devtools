@@ -8,5 +8,5 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest',
     '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
-  transformIgnorePatterns: ['node_modules/(?!.pnpm|lodash-es|nanoid)'],
+  transformIgnorePatterns: ['node_modules/(?!.pnpm|color|lodash-es|nanoid)'],
 };
