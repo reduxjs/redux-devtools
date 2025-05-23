@@ -32,7 +32,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.9",
+    "@babel/runtime": "^7.27.1",
     "@redux-devtools/ui": "workspace:^",
     "react-base16-styling": "workspace:^"
   },
@@ -44,8 +44,8 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
     "@redux-devtools/core": "workspace:^",
-    "@types/node": "^22.15.15",
-    "@types/react": "^18.3.21",
+    "@types/node": "^22.15.21",
+    "@types/react": "^18.3.22",
     "react": "^18.3.1",
     "redux": "^5.0.1",
     "rimraf": "^6.0.1",
