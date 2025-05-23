@@ -43,7 +43,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.9",
+    "@babel/runtime": "^7.27.1",
     "@redux-devtools/ui": "workspace:^",
     "es6template": "^1.0.5",
     "javascript-stringify": "^2.1.0",
@@ -69,14 +69,14 @@
     "@types/jest": "^29.5.14",
     "@types/jsan": "^3.1.5",
     "@types/object-path": "^0.11.4",
-    "@types/react": "^18.3.21",
+    "@types/react": "^18.3.22",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "redux": "^5.0.1",
     "rimraf": "^6.0.1",
-    "ts-jest": "^29.3.2",
+    "ts-jest": "^29.3.4",
     "typescript": "~5.8.3"
   },
   "peerDependencies": {

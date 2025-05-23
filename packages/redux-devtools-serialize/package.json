@@ -37,7 +37,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.9",
+    "@babel/runtime": "^7.27.1",
     "jsan": "^3.1.14"
   },
   "devDependencies": {
@@ -52,7 +52,7 @@
     "immutable": "^5.1.2",
     "jest": "^29.7.0",
     "rimraf": "^6.0.1",
-    "ts-jest": "^29.3.2",
+    "ts-jest": "^29.3.4",
     "typescript": "~5.8.3"
   },
   "peerDependencies": {
