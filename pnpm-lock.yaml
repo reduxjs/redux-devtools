@@ -384,8 +384,8 @@ importers:
         specifier: ^18.3.22
         version: 18.3.22
       '@types/react-test-renderer':
-        specifier: ^18.3.1
-        version: 18.3.1
+        specifier: ^19.1.0
+        version: 19.1.0
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.15.21)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.21)(typescript@5.8.3))
@@ -500,8 +500,8 @@ importers:
         specifier: ^18.3.22
         version: 18.3.22
       '@types/react-test-renderer':
-        specifier: ^18.3.1
-        version: 18.3.1
+        specifier: ^19.1.0
+        version: 19.1.0
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.15.21)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@22.15.21)(typescript@5.8.3))
@@ -5081,8 +5081,8 @@ packages:
     peerDependencies:
       '@types/react': ^18.0.0
 
-  '@types/react-test-renderer@18.3.1':
-    resolution: {integrity: sha512-vAhnk0tG2eGa37lkU9+s5SoroCsRI08xnsWFiAXOuPH2jqzMbcXvKExXViPi1P5fIklDeCvXqyrdmipFaSkZrA==}
+  '@types/react-test-renderer@19.1.0':
+    resolution: {integrity: sha512-XD0WZrHqjNrxA/MaR9O22w/RNidWR9YZmBdRGI7wcnWGrv/3dA8wKCJ8m63Sn+tLJhcjmuhOi629N66W6kgWzQ==}
 
   '@types/react-transition-group@4.4.12':
     resolution: {integrity: sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==}
@@ -13321,7 +13321,7 @@ snapshots:
     dependencies:
       '@types/react': 18.3.22
 
-  '@types/react-test-renderer@18.3.1':
+  '@types/react-test-renderer@19.1.0':
     dependencies:
       '@types/react': 18.3.22
 
