@@ -472,7 +472,7 @@ function messaging<S, A extends Action<string>>(
     }
     if (!request.message) return;
     const reducerError = getReducerError();
-    chrome.notifications.create('app-error', {
+    void chrome.notifications.create('app-error', {
       type: 'basic',
       title: reducerError
         ? 'An error occurred in the reducer'
@@ -628,7 +628,7 @@ chrome.runtime.onMessage.addListener(messaging);
 chrome.runtime.onMessageExternal.addListener(messaging);
 
 chrome.notifications.onClicked.addListener((id) => {
-  chrome.notifications.clear(id);
+  void chrome.notifications.clear(id);
   openDevToolsWindow('devtools-window');
 });
 
