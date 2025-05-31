@@ -155,22 +155,22 @@ function DemoApp(props: Props) {
     });
   };
 
-  const toggleImmutableSupport = () => {
+  const toggleImmutableSupport = async () => {
     const options = getOptions(location);
 
-    navigate(
+    await navigate(
       buildUrl({ ...options, supportImmutable: !options.supportImmutable }),
     );
   };
 
-  const toggleTheme = () => {
+  const toggleTheme = async () => {
     const options = getOptions(location);
 
-    navigate(buildUrl({ ...options, dark: !options.dark }));
+    await navigate(buildUrl({ ...options, dark: !options.dark }));
   };
 
-  const setTheme = (options: Options, theme: string) => {
-    navigate(buildUrl({ ...options, theme }));
+  const setTheme = async (options: Options, theme: string) => {
+    await navigate(buildUrl({ ...options, theme }));
   };
 
   const toggleTimeoutUpdate = () => {
