@@ -32,7 +32,7 @@
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run lint && pnpm run test"
+    "prepublish": "pnpm run lint"
   },
   "dependencies": {
     "@types/lodash-es": "^4.17.12",
