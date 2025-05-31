@@ -21,5 +21,8 @@ export const store: EnhancedStore<ReturnType<typeof reducer>> = configureStore({
   // adding the api middleware enables caching, invalidation, polling and other features of `rtk-query`
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([pokemonApi.middleware, postsApi.middleware]),
-  enhancers: (devTools ? [] : [DevTools.instrument()]) as any,
+  enhancers: devTools
+    ? undefined
+    : (getDefaultEnhancers) =>
+        getDefaultEnhancers().concat(DevTools.instrument()),
 });
