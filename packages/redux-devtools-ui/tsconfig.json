@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.react.base.json",
   "compilerOptions": {
     "outDir": "lib/types",
-    "types": ["node"]
+    "types": ["node"],
+    "skipLibCheck": true
   },
   "include": ["src"]
 }
