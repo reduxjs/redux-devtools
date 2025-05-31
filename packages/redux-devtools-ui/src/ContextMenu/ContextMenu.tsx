@@ -5,7 +5,7 @@ import styles from './styles/index';
 const ContextMenuWrapper = createStyledComponent(styles);
 
 type ReactButtonElement = React.ReactElement<
-  JSX.IntrinsicElements['button'],
+  React.JSX.IntrinsicElements['button'],
   'button'
 >;
 type Item = { name: string; value?: string } | ReactButtonElement;

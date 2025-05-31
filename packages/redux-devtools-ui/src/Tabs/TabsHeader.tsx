@@ -8,7 +8,7 @@ import * as styles from './styles';
 const TabsWrapper = createStyledComponent(styles);
 
 export type ReactButtonElement = React.ReactElement<
-  JSX.IntrinsicElements['button'],
+  React.JSX.IntrinsicElements['button'],
   'button'
 >;
 
