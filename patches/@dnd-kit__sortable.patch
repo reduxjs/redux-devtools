@@ -1,0 +1,11 @@
+diff --git a/dist/components/SortableContext.d.ts b/dist/components/SortableContext.d.ts
+index 718e8db4aa98759ac82b151650c15568d9a9f538..98d5b11a96d27f1f094bf3aeedc889e2c7325c93 100644
+--- a/dist/components/SortableContext.d.ts
++++ b/dist/components/SortableContext.d.ts
+@@ -22,5 +22,5 @@ interface ContextDescriptor {
+     strategy: SortingStrategy;
+ }
+ export declare const Context: React.Context<ContextDescriptor>;
+-export declare function SortableContext({ children, id, items: userDefinedItems, strategy, disabled: disabledProp, }: Props): JSX.Element;
++export declare function SortableContext({ children, id, items: userDefinedItems, strategy, disabled: disabledProp, }: Props): React.JSX.Element;
+ export {};

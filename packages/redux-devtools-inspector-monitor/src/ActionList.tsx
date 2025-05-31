@@ -83,7 +83,7 @@ export default function ActionList<A extends Action<string>>({
   onReorderAction,
 }: Props<A>): JSX.Element {
   const nodeRef = useRef<HTMLDivElement | null>(null);
-  const prevLastActionId = useRef<number | undefined>();
+  const prevLastActionId = useRef<number | undefined>(undefined);
 
   useLayoutEffect(() => {
     if (nodeRef.current && prevLastActionId.current !== lastActionId) {
