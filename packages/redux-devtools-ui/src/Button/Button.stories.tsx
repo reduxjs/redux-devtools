@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdFiberManualRecord } from 'react-icons/md';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import Button from './';
 
 const meta: Meta = {

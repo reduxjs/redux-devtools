@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import Tabs from './';
 import { tabs, simple10Tabs } from './data';
 import { TabsProps } from './Tabs';
