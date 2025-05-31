@@ -18,3 +18,7 @@ onlyBuiltDependencies:
   - esbuild
   - msw
   - sqlite3
+patchedDependencies:
+  '@dnd-kit/core': patches/@dnd-kit__core.patch
+  '@dnd-kit/sortable': patches/@dnd-kit__sortable.patch
+  react-icons: patches/react-icons.patch

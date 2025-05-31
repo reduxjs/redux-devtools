@@ -142,7 +142,7 @@ interface Props
 }
 
 function DemoApp(props: Props) {
-  const timeout = useRef<number | undefined>();
+  const timeout = useRef<number | undefined>(undefined);
   const location = useLocation();
   const navigate = useNavigate();
 

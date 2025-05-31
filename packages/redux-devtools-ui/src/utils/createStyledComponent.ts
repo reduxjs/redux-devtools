@@ -11,7 +11,7 @@ import getDefaultTheme, { Theme } from '../themes/default';
 import { ThemeFromProvider } from './theme';
 
 type StyleFunction<
-  C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
+  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 > = InterpolationFunction<
@@ -19,7 +19,7 @@ type StyleFunction<
 >;
 
 interface StylesObject<
-  C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
+  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 > {
@@ -27,13 +27,13 @@ interface StylesObject<
 }
 
 type Styles<
-  C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
+  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 > = StylesObject<C, O> | StyleFunction<C, O>;
 
 function isStylesObject<
-  C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
+  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 >(styles: Styles<C>): styles is StylesObject<C, O> {
@@ -41,7 +41,7 @@ function isStylesObject<
 }
 
 const getStyle = <
-  C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
+  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 >(
@@ -56,7 +56,7 @@ function isThemeFromProvider(
 }
 
 export default function createStyledComponent<
-  C extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
+  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   O extends object = {},
 >(
