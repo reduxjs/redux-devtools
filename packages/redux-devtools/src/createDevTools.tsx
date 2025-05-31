@@ -94,7 +94,7 @@ export default function createDevTools<
     constructor(props: Props<S, A, MonitorState>) {
       super(props);
 
-      if (ReactReduxContext) {
+      if (ReactReduxContext as typeof ReactReduxContext | undefined) {
         if (this.props.store && !this.props.store.liftedStore) {
           logError('NoLiftedStore');
         }
