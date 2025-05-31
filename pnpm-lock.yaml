@@ -11,6 +11,9 @@ patchedDependencies:
   '@dnd-kit/sortable':
     hash: e47dc0c4389a046873ebf71cee394de1946ef0e0ee96c171579932908f628d7f
     path: patches/@dnd-kit__sortable.patch
+  react-icons:
+    hash: 65754f60dd6af554cf9ea4e47d63102ed06a703cde01a82c29e2373f7815b658
+    path: patches/react-icons.patch
 
 importers:
 
@@ -105,7 +108,7 @@ importers:
         version: 19.1.0(react@19.1.0)
       react-icons:
         specifier: ^5.5.0
-        version: 5.5.0(react@19.1.0)
+        version: 5.5.0(patch_hash=65754f60dd6af554cf9ea4e47d63102ed06a703cde01a82c29e2373f7815b658)(react@19.1.0)
       react-is:
         specifier: ^19.1.0
         version: 19.1.0
@@ -432,7 +435,7 @@ importers:
         version: 19.1.0(react@19.1.0)
       react-icons:
         specifier: ^5.5.0
-        version: 5.5.0(react@19.1.0)
+        version: 5.5.0(patch_hash=65754f60dd6af554cf9ea4e47d63102ed06a703cde01a82c29e2373f7815b658)(react@19.1.0)
       react-is:
         specifier: ^19.1.0
         version: 19.1.0
@@ -845,7 +848,7 @@ importers:
         version: 0.7.3
       react-icons:
         specifier: ^5.5.0
-        version: 5.5.0(react@19.1.0)
+        version: 5.5.0(patch_hash=65754f60dd6af554cf9ea4e47d63102ed06a703cde01a82c29e2373f7815b658)(react@19.1.0)
       react-is:
         specifier: ^19.1.0
         version: 19.1.0
@@ -1376,7 +1379,7 @@ importers:
         version: 0.11.8
       react-icons:
         specifier: ^5.5.0
-        version: 5.5.0(react@19.1.0)
+        version: 5.5.0(patch_hash=65754f60dd6af554cf9ea4e47d63102ed06a703cde01a82c29e2373f7815b658)(react@19.1.0)
       simple-diff:
         specifier: ^1.7.2
         version: 1.7.2
@@ -2124,7 +2127,7 @@ importers:
         version: 19.1.0(react@19.1.0)
       react-icons:
         specifier: ^5.5.0
-        version: 5.5.0(react@19.1.0)
+        version: 5.5.0(patch_hash=65754f60dd6af554cf9ea4e47d63102ed06a703cde01a82c29e2373f7815b658)(react@19.1.0)
       react-is:
         specifier: ^19.1.0
         version: 19.1.0
@@ -2443,7 +2446,7 @@ importers:
         version: link:../react-base16-styling
       react-icons:
         specifier: ^5.5.0
-        version: 5.5.0(react@19.1.0)
+        version: 5.5.0(patch_hash=65754f60dd6af554cf9ea4e47d63102ed06a703cde01a82c29e2373f7815b658)(react@19.1.0)
       react-select:
         specifier: ^5.10.1
         version: 5.10.1(@types/react@19.1.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -17392,7 +17395,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.1.6
 
-  react-icons@5.5.0(react@19.1.0):
+  react-icons@5.5.0(patch_hash=65754f60dd6af554cf9ea4e47d63102ed06a703cde01a82c29e2373f7815b658)(react@19.1.0):
     dependencies:
       react: 19.1.0
 
