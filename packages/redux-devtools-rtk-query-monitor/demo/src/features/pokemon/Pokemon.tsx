@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Button, Select } from '@chakra-ui/react';
+import { Button, createListCollection, Portal, Select } from '@chakra-ui/react';
 import { useGetPokemonByNameQuery } from '../../services/pokemon';
 import type { PokemonName } from '../../pokemon.data';
 
-const intervalOptions = [
-  { label: 'Off', value: 0 },
-  { label: '3s', value: 3000 },
-  { label: '5s', value: 5000 },
-  { label: '10s', value: 10000 },
-  { label: '1m', value: 60000 },
-];
+const intervalOptions = createListCollection({
+  items: [
+    { label: 'Off', value: '0' },
+    { label: '3s', value: '3000' },
+    { label: '5s', value: '5000' },
+    { label: '10s', value: '10000' },
+    { label: '1m', value: '60000' },
+  ],
+});
 
 export function Pokemon({ name }: { name: PokemonName }) {
   const [pollingInterval, setPollingInterval] = useState(60000);
@@ -41,19 +43,39 @@ export function Pokemon({ name }: { name: PokemonName }) {
             />
           </div>
           <div>
-            <label style={{ display: 'block' }}>Polling interval</label>
-            <Select
-              value={pollingInterval}
-              onChange={({ target: { value } }) =>
-                setPollingInterval(Number(value))
+            <Select.Root
+              collection={intervalOptions}
+              value={[pollingInterval.toString()]}
+              onValueChange={({ value }) =>
+                setPollingInterval(Number(value[0]))
               }
             >
-              {intervalOptions.map(({ label, value }) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </Select>
+              <Select.HiddenSelect />
+              <Select.Label>Polling interval</Select.Label>
+              <Select.Control>
+                <Select.Trigger>
+                  <Select.ValueText placeholder="Polling interval" />
+                </Select.Trigger>
+                <Select.IndicatorGroup>
+                  <Select.Indicator />
+                </Select.IndicatorGroup>
+              </Select.Control>
+              <Portal>
+                <Select.Positioner>
+                  <Select.Content>
+                    {intervalOptions.items.map((intervalOption) => (
+                      <Select.Item
+                        item={intervalOption}
+                        key={intervalOption.value}
+                      >
+                        {intervalOption.label}
+                        <Select.ItemIndicator />
+                      </Select.Item>
+                    ))}
+                  </Select.Content>
+                </Select.Positioner>
+              </Portal>
+            </Select.Root>
           </div>
           <div>
             <Button

@@ -15,8 +15,8 @@ import {
   Input,
   Spacer,
   Stack,
-  useToast,
 } from '@chakra-ui/react';
+import { toaster } from '../../components/ui/toaster';
 
 const EditablePostName = ({
   name: initialName,
@@ -50,8 +50,8 @@ const EditablePostName = ({
       </Box>
       <Spacer />
       <Box>
-        <Stack spacing={4} direction="row" align="center">
-          <Button onClick={handleUpdate} isLoading={isLoading}>
+        <Stack gap={4} direction="row" align="center">
+          <Button onClick={handleUpdate} loading={isLoading}>
             Update
           </Button>
           <CloseButton bg="red" onClick={handleCancel} disabled={isLoading} />
@@ -74,8 +74,6 @@ const PostJsonDetail = ({ id }: { id: string }) => {
 export const PostDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-
-  const toast = useToast();
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -108,12 +106,12 @@ export const PostDetail = () => {
             try {
               await updatePost({ id: id!, name }).unwrap();
             } catch {
-              toast({
+              toaster.create({
                 title: 'An error occurred',
                 description: "We couldn't save your changes, try again!",
-                status: 'error',
+                type: 'error',
                 duration: 2000,
-                isClosable: true,
+                closable: true,
               });
             } finally {
               setIsEditing(false);
@@ -129,7 +127,7 @@ export const PostDetail = () => {
           </Box>
           <Spacer />
           <Box>
-            <Stack spacing={4} direction="row" align="center">
+            <Stack gap={4} direction="row" align="center">
               <Button
                 onClick={() => setIsEditing(true)}
                 disabled={isDeleting || isUpdating}

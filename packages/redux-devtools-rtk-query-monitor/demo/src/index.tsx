@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { ChakraProvider } from '@chakra-ui/react';
+import { Provider as ChakraProvider } from './components/ui/provider';
 import './index.css';
 import { store } from './store';
 import DevTools from './features/DevTools/DevTools';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { worker } from './mocks/browser';
+import { Toaster } from './components/ui/toaster';
 
 function renderApp() {
   const rootElement = document.getElementById('root');
@@ -17,6 +18,7 @@ function renderApp() {
       <ChakraProvider>
         <BrowserRouter>
           <App />
+          <Toaster />
           <DevTools />
         </BrowserRouter>
       </ChakraProvider>
