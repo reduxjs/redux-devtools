@@ -5,11 +5,11 @@ import type { PokemonName } from '../../pokemon.data';
 
 const intervalOptions = createListCollection({
   items: [
-    { label: 'Off', value: 0 },
-    { label: '3s', value: 3000 },
-    { label: '5s', value: 5000 },
-    { label: '10s', value: 10000 },
-    { label: '1m', value: 60000 },
+    { label: 'Off', value: '0' },
+    { label: '3s', value: '3000' },
+    { label: '5s', value: '5000' },
+    { label: '10s', value: '10000' },
+    { label: '1m', value: '60000' },
   ],
 });
 
@@ -46,7 +46,9 @@ export function Pokemon({ name }: { name: PokemonName }) {
             <Select.Root
               collection={intervalOptions}
               value={[pollingInterval.toString()]}
-              onValueChange={({ value }) => setPollingInterval(Number(value))}
+              onValueChange={({ value }) =>
+                setPollingInterval(Number(value[0]))
+              }
             >
               <Select.HiddenSelect />
               <Select.Label>Polling interval</Select.Label>
