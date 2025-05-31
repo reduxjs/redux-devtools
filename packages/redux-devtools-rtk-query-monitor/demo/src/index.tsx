@@ -8,6 +8,7 @@ import DevTools from './features/DevTools/DevTools';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { worker } from './mocks/browser';
+import { Toaster } from './components/ui/toaster';
 
 function renderApp() {
   const rootElement = document.getElementById('root');
@@ -17,6 +18,7 @@ function renderApp() {
       <ChakraProvider>
         <BrowserRouter>
           <App />
+          <Toaster />
           <DevTools />
         </BrowserRouter>
       </ChakraProvider>

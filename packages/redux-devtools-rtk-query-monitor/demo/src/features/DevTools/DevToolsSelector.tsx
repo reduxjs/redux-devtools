@@ -14,7 +14,7 @@ export function DevToolsSelector() {
   return (
     <Box as="section" p="2">
       <Heading as="h2">Set active devTools</Heading>
-      <ButtonGroup variant="outline" spacing="4" p="4">
+      <ButtonGroup variant="outline" gap="4" p="4">
         <Button
           aria-selected={!extensionEnabled}
           colorScheme="blue"
