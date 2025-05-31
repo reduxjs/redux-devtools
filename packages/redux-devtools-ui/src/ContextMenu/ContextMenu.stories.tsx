@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import ContextMenu from './';
 import { items } from './data';
 

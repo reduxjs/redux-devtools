@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import { MdPlayArrow } from 'react-icons/md';
 import { MdFiberManualRecord } from 'react-icons/md';
 import { MdKeyboardArrowLeft } from 'react-icons/md';

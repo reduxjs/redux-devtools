@@ -11,25 +11,10 @@ function getAbsolutePath(value: string): any {
 }
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  addons: [
-    getAbsolutePath('@storybook/addon-webpack5-compiler-swc'),
-    getAbsolutePath('@storybook/addon-onboarding'),
-    getAbsolutePath('@storybook/addon-links'),
-    {
-      name: getAbsolutePath('@storybook/addon-essentials'),
-      options: {
-        backgrounds: false,
-      },
-    },
-    getAbsolutePath('@chromatic-com/storybook'),
-    getAbsolutePath('@storybook/addon-interactions'),
-  ],
+  addons: [getAbsolutePath('@storybook/addon-onboarding')],
   framework: {
-    name: getAbsolutePath('@storybook/react-webpack5'),
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
-  },
-  docs: {
-    autodocs: 'tag',
   },
   staticDirs: ['../fonts'],
 };
