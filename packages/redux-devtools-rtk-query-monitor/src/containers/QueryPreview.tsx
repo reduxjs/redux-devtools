@@ -177,10 +177,7 @@ const tabs: ReadonlyArray<
 ];
 
 export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
-  renderLabelWithCounter = (
-    label: React.ReactText,
-    counter: number,
-  ): string => {
+  renderLabelWithCounter = (label: string, counter: number): string => {
     let counterAsString = counter.toFixed(0);
 
     if (counterAsString.length > 3) {

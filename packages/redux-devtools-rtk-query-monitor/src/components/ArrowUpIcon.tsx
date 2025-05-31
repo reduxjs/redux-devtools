@@ -9,7 +9,7 @@ export type ArrowUpIconProps = Omit<
 /**
  * @see https://icons.getbootstrap.com/icons/arrow-up/
  */
-export function ArrowUpIcon(props: ArrowUpIconProps): JSX.Element {
+export function ArrowUpIcon(props: ArrowUpIconProps): React.JSX.Element {
   return (
     <svg
       fill="currentColor"

@@ -11,7 +11,7 @@ export function SortOrderButton({
   isAsc,
   onChange,
   id,
-}: SortOrderButtonProps): JSX.Element {
+}: SortOrderButtonProps): React.JSX.Element {
   const handleButtonClick = (): void => {
     if (!isAsc) {
       onChange(true);
