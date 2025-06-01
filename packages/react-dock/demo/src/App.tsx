@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { BsX } from 'react-icons/bs';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 import { Dock } from 'react-dock';
 
