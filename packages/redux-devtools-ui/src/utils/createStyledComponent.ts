@@ -5,8 +5,8 @@ import styled, {
 } from '@emotion/styled';
 import { PropsOf } from '@emotion/react';
 import type { Base16Theme } from 'react-base16-styling';
-import getDefaultTheme, { Theme } from '../themes/default';
-import { ThemeFromProvider } from './theme';
+import getDefaultTheme, { Theme } from '../themes/default.js';
+import { ThemeFromProvider } from './theme.js';
 
 type StyleFunction<Props> = FunctionInterpolation<Props>;
 

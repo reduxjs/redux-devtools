@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from '@emotion/styled';
 import CodeMirror, { EditorChange } from 'codemirror';
 import type { Base16Theme } from 'react-base16-styling';
-import { defaultStyle, themedStyle } from './styles';
-import { Theme } from '../themes/default';
+import { defaultStyle, themedStyle } from './styles/index.js';
+import { Theme } from '../themes/default.js';
 
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/addon/fold/foldgutter';

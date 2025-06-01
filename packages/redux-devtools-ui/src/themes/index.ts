@@ -1,2 +1,2 @@
-export { default } from './default';
-export { default as material } from './material';
+export { default } from './default.js';
+export { default as material } from './material.js';

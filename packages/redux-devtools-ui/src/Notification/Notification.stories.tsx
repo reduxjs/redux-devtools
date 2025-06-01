@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Meta, StoryObj } from '@storybook/react-vite';
-import Notification from './';
+import Notification from './index.js';
 
 const Container = styled.div`
   display: flex;

@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { prefixSelectors } from '../../utils/autoPrefix';
-import color from '../../utils/color';
-import { animationCurve } from '../../utils/animations';
-import { StyleProps } from './default';
-import { Theme } from '../../themes/default';
+import { prefixSelectors } from '../../utils/autoPrefix.js';
+import color from '../../utils/color.js';
+import { animationCurve } from '../../utils/animations.js';
+import { StyleProps } from './default.js';
+import { Theme } from '../../themes/default.js';
 
 export const style = ({
   theme,

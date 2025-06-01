@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { StyleProps } from './default';
-import { Theme } from '../../themes/default';
+import { StyleProps } from './default.js';
+import { Theme } from '../../themes/default.js';
 
 export const style = ({
   theme,

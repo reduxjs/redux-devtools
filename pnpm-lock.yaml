@@ -2354,9 +2354,6 @@ importers:
 
   packages/redux-devtools-ui:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.27.1
-        version: 7.27.1
       '@rjsf/core':
         specifier: ^5.24.10
         version: 5.24.10(@rjsf/utils@5.24.10(react@19.1.0))(react@19.1.0)
@@ -2394,27 +2391,6 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.27.2
-        version: 7.27.2(@babel/core@7.27.1)
-      '@babel/core':
-        specifier: ^7.27.1
-        version: 7.27.1
-      '@babel/eslint-parser':
-        specifier: ^7.27.1
-        version: 7.27.1(@babel/core@7.27.1)(eslint@9.27.0)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.27.1
-        version: 7.27.1(@babel/core@7.27.1)
-      '@babel/preset-env':
-        specifier: ^7.27.2
-        version: 7.27.2(@babel/core@7.27.1)
-      '@babel/preset-react':
-        specifier: ^7.27.1
-        version: 7.27.1(@babel/core@7.27.1)
-      '@babel/preset-typescript':
-        specifier: ^7.27.1
-        version: 7.27.1(@babel/core@7.27.1)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.1.6)(react@19.1.0)
@@ -2448,9 +2424,6 @@ importers:
       '@types/react':
         specifier: ^19.1.6
         version: 19.1.6
-      babel-loader:
-        specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.27.1)(webpack@5.99.9(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4))
       csstype:
         specifier: ^3.1.3
         version: 3.1.3
@@ -13776,12 +13749,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-loader@10.0.0(@babel/core@7.27.1)(webpack@5.99.9(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4)):
-    dependencies:
-      '@babel/core': 7.27.1
-      find-up: 5.0.0
-      webpack: 5.99.9(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4)
-
   babel-loader@10.0.0(@babel/core@7.27.1)(webpack@5.99.9):
     dependencies:
       '@babel/core': 7.27.1
@@ -18366,18 +18333,6 @@ snapshots:
 
   term-size@2.2.1: {}
 
-  terser-webpack-plugin@5.3.14(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4)(webpack@5.99.9(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      jest-worker: 27.5.1
-      schema-utils: 4.3.2
-      serialize-javascript: 6.0.2
-      terser: 5.39.2
-      webpack: 5.99.9(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4)
-    optionalDependencies:
-      '@swc/core': 1.11.29(@swc/helpers@0.5.17)
-      esbuild: 0.25.4
-
   terser-webpack-plugin@5.3.14(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4)(webpack@5.99.9):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -18866,37 +18821,6 @@ snapshots:
   webpack-sources@3.3.0: {}
 
   webpack-virtual-modules@0.6.2: {}
-
-  webpack@5.99.9(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4):
-    dependencies:
-      '@types/eslint-scope': 3.7.7
-      '@types/estree': 1.0.7
-      '@types/json-schema': 7.0.15
-      '@webassemblyjs/ast': 1.14.1
-      '@webassemblyjs/wasm-edit': 1.14.1
-      '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.14.1
-      browserslist: 4.24.5
-      chrome-trace-event: 1.0.4
-      enhanced-resolve: 5.18.1
-      es-module-lexer: 1.7.0
-      eslint-scope: 5.1.1
-      events: 3.3.0
-      glob-to-regexp: 0.4.1
-      graceful-fs: 4.2.11
-      json-parse-even-better-errors: 2.3.1
-      loader-runner: 4.3.0
-      mime-types: 2.1.35
-      neo-async: 2.6.2
-      schema-utils: 4.3.2
-      tapable: 2.2.2
-      terser-webpack-plugin: 5.3.14(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4)(webpack@5.99.9(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4))
-      watchpack: 2.4.4
-      webpack-sources: 3.3.0
-    transitivePeerDependencies:
-      - '@swc/core'
-      - esbuild
-      - uglify-js
 
   webpack@5.99.9(@swc/core@1.11.29(@swc/helpers@0.5.17))(esbuild@0.25.4)(webpack-cli@6.0.1):
     dependencies:
