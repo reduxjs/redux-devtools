@@ -32,7 +32,6 @@ export const Default: Story = {
   argTypes: {
     autofocus: { control: { disable: true } },
     mode: { control: { disable: true } },
-    theme: { control: { disable: true } },
     onChange: { control: { disable: true } },
   },
 };
