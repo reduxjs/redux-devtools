@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import CodeMirror, { EditorChange } from 'codemirror';
-import type { Base16Theme } from 'react-base16-styling';
 import { defaultStyle, themedStyle } from './styles';
 import { Theme } from '../themes/default';
 
@@ -28,7 +27,6 @@ export interface EditorProps {
   lineNumbers: boolean;
   lineWrapping: boolean;
   readOnly: boolean;
-  theme?: Base16Theme;
   foldGutter: boolean;
   autofocus: boolean;
   onChange?: (value: string, change: EditorChange) => void;
@@ -93,7 +91,7 @@ export default class Editor extends Component<EditorProps> {
   };
 
   render() {
-    return <EditorContainer ref={this.getRef} theme={this.props.theme} />;
+    return <EditorContainer ref={this.getRef} />;
   }
 
   static defaultProps = {

@@ -1,6 +1,4 @@
-import styled, { ThemedStyledInterface } from 'styled-components';
-import type { Base16Theme } from 'react-base16-styling';
-import * as CSS from 'csstype';
+import styled from 'styled-components';
 
 export type BorderPosition = 'top' | 'bottom';
 
@@ -11,11 +9,7 @@ export interface Props {
   noBorder?: boolean;
 }
 
-const Toolbar = (
-  styled as ThemedStyledInterface<
-    Base16Theme & { fontFamily?: CSS.Property.FontFamily }
-  >
-).div<Props>`
+const Toolbar = styled.div<Props>`
   display: flex;
   flex-shrink: 0;
   box-sizing: border-box;
