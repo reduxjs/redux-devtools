@@ -1,8 +1,7 @@
-import { css, ThemedStyledProps } from 'styled-components';
+import { css } from '@emotion/react';
 import { Theme } from '../../themes/default';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export const containerStyle = ({ theme }: ThemedStyledProps<{}, Theme>) => css`
+export const containerStyle = ({ theme }: { theme: Theme }) => css`
   display: flex;
   align-items: center;
 

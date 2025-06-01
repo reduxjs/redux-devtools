@@ -1,8 +1,14 @@
 // Based on https://github.com/YoruNoHikage/redux-devtools-dispatch
 
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import { Button, Select, Editor, Toolbar } from '@redux-devtools/ui';
+import styled from '@emotion/styled';
+import {
+  Button,
+  Select,
+  Editor,
+  Toolbar,
+  Base16Theme,
+} from '@redux-devtools/ui';
 import { connect, ResolveThunks } from 'react-redux';
 import { dispatchRemotely } from '../../actions';
 import { Options } from '../../reducers/instances';
@@ -12,7 +18,7 @@ export const DispatcherContainer = styled.div`
   flex-direction: column;
   flex-shrink: 0;
   padding-top: 2px;
-  background: ${(props) => props.theme.base01};
+  background: ${(props: { theme?: Base16Theme }) => props.theme!.base01};
 `;
 
 export const CodeContainer = styled.div`
@@ -24,7 +30,7 @@ export const CodeContainer = styled.div`
 export const ActionContainer = styled.div`
   display: table;
   width: 100%;
-  color: ${(props) => props.theme.base06};
+  color: ${(props: { theme?: Base16Theme }) => props.theme!.base06};
 
   > div {
     display: table-row;

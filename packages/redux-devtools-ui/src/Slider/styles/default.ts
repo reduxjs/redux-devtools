@@ -6,7 +6,7 @@ Based on:
  http://codepen.io/thebabydino/pen/YPOPxr
 */
 
-import { css, ThemedStyledProps } from 'styled-components';
+import { css } from '@emotion/react';
 import { prefixSelectors } from '../../utils/autoPrefix';
 import { Theme } from '../../themes/default';
 
@@ -21,7 +21,7 @@ export const style = ({
   percent,
   disabled,
   withLabel,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+}: StyleProps & { theme: Theme }) => css`
   display: block;
   width: 100%;
   position: relative;

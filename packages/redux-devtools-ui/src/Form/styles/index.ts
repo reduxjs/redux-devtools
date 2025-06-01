@@ -1,8 +1,7 @@
-import { css, ThemedStyledProps } from 'styled-components';
+import { css } from '@emotion/react';
 import { Theme } from '../../themes/default';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export default ({ theme }: ThemedStyledProps<{}, Theme>) => css`
+export default ({ theme }: { theme: Theme }) => css`
   padding: 10px;
   line-height: 1.846;
   font-size: 14px;

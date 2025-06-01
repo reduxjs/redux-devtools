@@ -1,4 +1,4 @@
-import { css, ThemedStyledProps } from 'styled-components';
+import { css } from '@emotion/react';
 import { Theme } from '../../themes/default';
 import { Type } from '../Notification';
 
@@ -19,7 +19,7 @@ interface StyleProps {
   type: Type;
 }
 
-export default ({ theme, type }: ThemedStyledProps<StyleProps, Theme>) => css`
+export default ({ theme, type }: StyleProps & { theme: Theme }) => css`
   display: flex;
   align-items: flex-start;
   flex-shrink: 0;

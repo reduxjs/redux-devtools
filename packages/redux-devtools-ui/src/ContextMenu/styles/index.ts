@@ -1,4 +1,4 @@
-import { css, ThemedStyledProps } from 'styled-components';
+import { css } from '@emotion/react';
 import { Theme } from '../../themes/default';
 
 interface StyleProps {
@@ -12,7 +12,7 @@ export default ({
   left,
   top,
   visible,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+}: StyleProps & { theme: Theme }) => css`
   ${visible
     ? `
     visibility: visible;

@@ -1,4 +1,4 @@
-import { css, ThemedStyledProps } from 'styled-components';
+import { css } from '@emotion/react';
 import { prefixSelectors } from '../../utils/autoPrefix';
 import color from '../../utils/color';
 import { animationCurve } from '../../utils/animations';
@@ -10,7 +10,7 @@ export const style = ({
   percent,
   disabled,
   withLabel,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+}: StyleProps & { theme: Theme }) => css`
   display: block;
   width: 100%;
   position: relative;
