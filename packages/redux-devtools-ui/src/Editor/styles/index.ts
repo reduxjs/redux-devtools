@@ -1,5 +1,5 @@
-import { css } from 'styled-components';
-import { Theme } from '../../themes/default';
+import { css } from '@emotion/react';
+import { Base16Theme } from 'react-base16-styling';
 
 export const defaultStyle = `
   height: 100%;
@@ -11,7 +11,7 @@ export const defaultStyle = `
   }
 `;
 
-export const themedStyle = (theme: Theme) => css`
+export const themedStyle = (theme: Base16Theme) => css`
   height: 100%;
 
   > div {

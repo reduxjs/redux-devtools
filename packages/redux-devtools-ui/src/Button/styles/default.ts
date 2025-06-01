@@ -1,4 +1,4 @@
-import { css, ThemedStyledProps } from 'styled-components';
+import { css } from '@emotion/react';
 import { Theme } from '../../themes/default';
 
 export interface StyleProps {
@@ -10,7 +10,7 @@ export const style = ({
   theme,
   primary,
   disabled,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+}: StyleProps & { theme: Theme }) => css`
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   outline: none;

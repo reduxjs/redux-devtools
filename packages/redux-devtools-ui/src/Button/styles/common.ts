@@ -1,4 +1,4 @@
-import { css, ThemedStyledProps } from 'styled-components';
+import { css } from '@emotion/react';
 import { fadeIn } from '../../utils/animations';
 import colorEffect from '../../utils/color';
 import { Mark, Size, TooltipPosition } from '../Button';
@@ -138,7 +138,7 @@ export const commonStyle = ({
   theme,
   mark,
   size,
-}: ThemedStyledProps<CommonStyleProps, Theme>) => css`
+}: CommonStyleProps & { theme: Theme }) => css`
   display: inline-block;
   position: relative;
   flex-shrink: 0;
@@ -188,7 +188,7 @@ export const tooltipStyle = ({
   tooltipPosition,
   mark,
   size,
-}: ThemedStyledProps<TooltipStyleProps, Theme>) => css`
+}: TooltipStyleProps & { theme: Theme }) => css`
   ${commonStyle({ theme, mark, size })}
 
   &:before {

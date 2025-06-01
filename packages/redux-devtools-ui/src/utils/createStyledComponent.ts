@@ -1,53 +1,29 @@
 import React from 'react';
 import styled, {
-  InterpolationFunction,
+  FunctionInterpolation,
   StyledComponent,
-  StyledComponentPropsWithRef,
-  ThemedStyledInterface,
-  ThemedStyledProps,
-} from 'styled-components';
+} from '@emotion/styled';
+import { PropsOf } from '@emotion/react';
 import type { Base16Theme } from 'react-base16-styling';
 import getDefaultTheme, { Theme } from '../themes/default';
 import { ThemeFromProvider } from './theme';
 
-type StyleFunction<
-  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  O extends object = {},
-> = InterpolationFunction<
-  ThemedStyledProps<StyledComponentPropsWithRef<C> & O, Theme>
->;
+type StyleFunction<Props> = FunctionInterpolation<Props>;
 
-interface StylesObject<
-  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  O extends object = {},
-> {
-  [type: string]: StyleFunction<C, O>;
+interface StylesObject<Props> {
+  [type: string]: StyleFunction<Props>;
 }
 
-type Styles<
-  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  O extends object = {},
-> = StylesObject<C, O> | StyleFunction<C, O>;
+type Styles<Props> = StylesObject<Props> | StyleFunction<Props>;
 
-function isStylesObject<
-  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  O extends object = {},
->(styles: Styles<C>): styles is StylesObject<C, O> {
+function isStylesObject<Props>(
+  styles: Styles<Props>,
+): styles is StylesObject<Props> {
   return typeof styles === 'object';
 }
 
-const getStyle = <
-  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  O extends object = {},
->(
-  styles: Styles<C, O>,
-  type: string,
-) => (isStylesObject(styles) ? styles[type] || styles.default : styles);
+const getStyle = <Props>(styles: Styles<Props>, type: string) =>
+  isStylesObject(styles) ? styles[type] || styles.default : styles;
 
 function isThemeFromProvider(
   theme: Theme | Base16Theme,
@@ -57,14 +33,15 @@ function isThemeFromProvider(
 
 export default function createStyledComponent<
   C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  O extends object = {},
+  O extends object,
 >(
-  styles: Styles<C, O>,
+  styles: Styles<PropsOf<C> & O & { theme: Theme }>,
   component?: C,
-): StyledComponent<C, Theme | Base16Theme, O> {
-  return (styled as ThemedStyledInterface<Theme>)((component || 'div') as C)`
-    ${(props: ThemedStyledProps<StyledComponentPropsWithRef<C> & O, Theme>) =>
+): StyledComponent<PropsOf<C> & O & { theme?: Theme | Base16Theme }> {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return styled((component || 'div') as C)`
+    ${(props: PropsOf<C> & { theme: Theme | Base16Theme }) =>
       isThemeFromProvider(props.theme as Theme | Base16Theme)
         ? getStyle(styles, props.theme.type as string)
         : // used outside of container (theme provider)
@@ -75,7 +52,7 @@ export default function createStyledComponent<
             ...props,
             theme: getDefaultTheme(props.theme as Base16Theme),
           })}
-  ` as StyledComponent<C, Theme | Base16Theme, O>;
+  ` as StyledComponent<PropsOf<C> & O & { theme?: Theme | Base16Theme }>;
 }
 
 // TODO: memoize it?

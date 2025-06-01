@@ -1,4 +1,4 @@
-import { css, keyframes } from 'styled-components';
+import { css, keyframes } from '@emotion/react';
 import { Theme } from '../themes/default';
 
 export const spin = keyframes`

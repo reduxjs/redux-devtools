@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { Theme } from '../../themes/default';
 
 const Divider = styled.div`
-  background-color: ${(props) => props.theme.base02};
+  background-color: ${(props: { theme?: Theme }) => props.theme!.base02};
   box-shadow: 1px 1px 2px ${(props) => props.theme.base00};
   height: ${(props) => props.theme.inputHeight || '30'}px;
   width: 1px;

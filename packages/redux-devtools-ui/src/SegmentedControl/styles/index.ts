@@ -1,4 +1,4 @@
-import { css, ThemedStyledProps } from 'styled-components';
+import { css } from '@emotion/react';
 import color from '../../utils/color';
 import { Theme } from '../../themes/default';
 
@@ -6,10 +6,7 @@ interface StyleProps {
   disabled: boolean | undefined;
 }
 
-export default ({
-  theme,
-  disabled,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+export default ({ theme, disabled }: StyleProps & { theme: Theme }) => css`
   display: flex;
   flex-shrink: 0;
 

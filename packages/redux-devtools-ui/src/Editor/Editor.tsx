@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import CodeMirror, { EditorChange } from 'codemirror';
 import type { Base16Theme } from 'react-base16-styling';
 import { defaultStyle, themedStyle } from './styles';
@@ -16,10 +16,10 @@ import 'codemirror/addon/fold/foldgutter.css';
 
 const EditorContainer = styled.div(
   '' as unknown as TemplateStringsArray,
-  ({ theme }: { theme: Theme }) =>
-    theme.scheme === 'default' && theme.light
+  ({ theme }: { theme?: Base16Theme }) =>
+    theme!.scheme === 'default' && (theme as Theme).light
       ? defaultStyle
-      : themedStyle(theme),
+      : themedStyle(theme!),
 );
 
 export interface EditorProps {

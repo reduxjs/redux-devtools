@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Meta, StoryObj } from '@storybook/react-vite';
 import { MdPlayArrow } from 'react-icons/md';
 import { MdFiberManualRecord } from 'react-icons/md';
