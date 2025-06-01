@@ -1,6 +1,6 @@
 import React, { Component, RefCallback } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { withTheme } from 'styled-components';
+import { withTheme } from '@emotion/react';
 import { tree } from 'd3-state-visualizer';
 import type { HierarchyPointNode, Node, Options } from 'd3-state-visualizer';
 import { getPath } from '../ChartMonitorWrapper';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withTheme } from 'styled-components';
+import { withTheme } from '@emotion/react';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
 import { Action } from 'redux';
 import getMonitor from '../utils/getMonitor';

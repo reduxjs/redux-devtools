@@ -15,6 +15,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@redux-devtools/core": "workspace:^",
     "@redux-devtools/dock-monitor": "workspace:^",
     "@redux-devtools/log-monitor": "workspace:^",
@@ -25,7 +27,6 @@
     "react-is": "^19.1.0",
     "react-redux": "^9.2.0",
     "redux": "^5.0.1",
-    "styled-components": "^5.3.11",
     "todomvc-app-css": "^2.4.3"
   },
   "devDependencies": {
@@ -36,7 +37,6 @@
     "@types/node": "^22.15.21",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
-    "@types/styled-components": "^5.1.34",
     "@types/webpack-env": "^1.18.8",
     "babel-loader": "^10.0.0",
     "cross-env": "^7.0.3",
