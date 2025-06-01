@@ -1,5 +1,16 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+  - @redux-devtools/ui@2.0.0
+
 ## 4.1.1
 
 ### Patch Changes
