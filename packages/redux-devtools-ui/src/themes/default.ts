@@ -18,6 +18,11 @@ export interface Theme extends Base16Theme {
   light?: boolean;
 }
 
+declare module 'styled-components' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  interface DefaultTheme extends Theme {}
+}
+
 export default (colors: Base16Theme) => ({
   ...colors,
   fontFamily: "'Source Sans Pro', sans-serif",
