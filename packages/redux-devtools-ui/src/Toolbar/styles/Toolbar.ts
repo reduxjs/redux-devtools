@@ -24,11 +24,11 @@ const Toolbar = styled.div<Props>`
   position: relative;
   ${({ borderPosition, theme }) =>
     borderPosition && `border-${borderPosition}: 1px solid ${theme.base02};`}
-  
+
   & > div {
     margin: auto ${(props) => (props.noBorder ? '0' : '1px;')};
   }
-  
+
   & button {
     border-radius: 0;
     ${(props) => props.noBorder && 'border-color: transparent;'}
@@ -41,7 +41,7 @@ const Toolbar = styled.div<Props>`
     text-align: left;
     margin: auto 1px;
     flex-grow: 1;
-    
+
     .Select-control {
       cursor: pointer;
       border-radius: 0 !important;
