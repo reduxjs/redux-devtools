@@ -41,6 +41,7 @@ export default async function (argv: { [arg: string]: any }): Promise<{
   const agServer = socketClusterServer.attach(httpServer, options);
 
   const app = express();
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   httpServer.on('request', app);
   const store = createStore(options);
   app.use(routes(options, store, agServer));
@@ -76,7 +77,7 @@ export default async function (argv: { [arg: string]: any }): Promise<{
                 });
               })
               .catch(function (error) {
-                console.error(error); // eslint-disable-line no-console
+                console.error(error);
               });
           }
         }
@@ -110,7 +111,7 @@ export default async function (argv: { [arg: string]: any }): Promise<{
               request.end(data);
             })
             .catch(function (error) {
-              console.error(error); // eslint-disable-line no-console
+              console.error(error);
             });
         }
       })();
@@ -118,7 +119,6 @@ export default async function (argv: { [arg: string]: any }): Promise<{
         for await (const data of socket.listener('disconnect')) {
           const channel = agServer.exchange.channel('sc-' + socket.id);
           channel.unsubscribe();
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           void agServer.exchange.transmitPublish(channelToEmit!, {
             id: socket.id,
             type: 'DISCONNECTED',
