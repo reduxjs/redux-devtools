@@ -980,6 +980,9 @@ importers:
       '@apollo/server':
         specifier: ^4.12.1
         version: 4.12.1(encoding@0.1.13)(graphql@16.11.0)
+      '@as-integrations/express5':
+        specifier: ^1.1.0
+        version: 1.1.0(@apollo/server@4.12.1(encoding@0.1.13)(graphql@16.11.0))(express@5.1.0)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.1.6)(react@19.1.0)
@@ -996,8 +999,8 @@ importers:
         specifier: ^19.1.6
         version: 19.1.6
       body-parser:
-        specifier: ^1.20.3
-        version: 1.20.3
+        specifier: ^2.2.0
+        version: 2.2.0
       chalk:
         specifier: ^5.4.1
         version: 5.4.1
@@ -2813,6 +2816,13 @@ packages:
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
+
+  '@as-integrations/express5@1.1.0':
+    resolution: {integrity: sha512-rlZU5Rlk4Sm2NDq2bs8BzveelEq39WBUvt4QVj9mVvPet1DuggLFR6nMVdDO6mb07gDLlWCWd+XTHclAEli9PQ==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@apollo/server': ^4.0.0
+      express: ^5.0.0
 
   '@babel/cli@7.27.2':
     resolution: {integrity: sha512-cfd7DnGlhH6OIyuPSSj3vcfIdnbXukhAyKY8NaZrFadC7pXyL9mOL5WgjcptiEJLi5k3j8aYvLIVCzezrWTaiA==}
@@ -10316,6 +10326,11 @@ snapshots:
       '@zag-js/utils': 1.12.2
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
+
+  '@as-integrations/express5@1.1.0(@apollo/server@4.12.1(encoding@0.1.13)(graphql@16.11.0))(express@5.1.0)':
+    dependencies:
+      '@apollo/server': 4.12.1(encoding@0.1.13)(graphql@16.11.0)
+      express: 5.1.0
 
   '@babel/cli@7.27.2(@babel/core@7.27.1)':
     dependencies:

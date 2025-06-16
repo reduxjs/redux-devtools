@@ -62,13 +62,14 @@ function routes(
         '/graphql',
         cors<cors.CorsRequest>(),
         bodyParser.json(),
+        // @ts-expect-error https://github.com/apollo-server-integrations/apollo-server-integration-express5/issues/9
         expressMiddleware(server, {
           context: () => Promise.resolve({ store }),
         }),
       );
     })
     .catch((error) => {
-      console.error(error); // eslint-disable-line no-console
+      console.error(error);
     });
 
   serveUmdModule('react');
@@ -76,10 +77,9 @@ function routes(
   serveUmdModule('@redux-devtools/app');
 
   app.get('/port.js', function (req, res) {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     res.send(`reduxDevToolsPort = ${options.port}`);
   });
-  app.get('*', function (req, res) {
+  app.get('/{*splat}', function (req, res) {
     res.sendFile(
       path.join(
         path.dirname(fileURLToPath(import.meta.url)),
@@ -93,7 +93,10 @@ function routes(
   app.use(bodyParser.urlencoded({ limit: limit, extended: false }));
 
   app.post('/', function (req, res) {
-    if (!req.body) return res.status(404).end();
+    if (!req.body) {
+      res.status(404).end();
+      return;
+    }
     switch (req.body.op) {
       case 'get':
         store
@@ -102,7 +105,7 @@ function routes(
             res.send(r || {});
           })
           .catch(function (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
             res.sendStatus(500);
           });
         break;
@@ -113,7 +116,7 @@ function routes(
             res.send(r);
           })
           .catch(function (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
             res.sendStatus(500);
           });
         break;
@@ -131,7 +134,7 @@ function routes(
             });
           })
           .catch(function (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
             res.status(500).send({});
           });
     }
