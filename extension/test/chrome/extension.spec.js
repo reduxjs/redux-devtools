@@ -16,6 +16,10 @@ describe('Chrome extension', function () {
       .setChromeOptions(
         new chrome.Options()
           .setBrowserVersion('stable')
+          // Temporary fix https://github.com/SeleniumHQ/selenium/issues/15788
+          .addArguments(
+            '--disable-features=DisableLoadExtensionCommandLineSwitch',
+          )
           .addArguments(`load-extension=${path}`),
       )
       .forBrowser('chrome')
