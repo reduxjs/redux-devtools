@@ -16,7 +16,7 @@
     "build:examples": "babel-node examples/buildAll.js",
     "clean": "rimraf dist && rimraf chrome/dist && rimraf edge/dist && rimraf firefox/dist",
     "test:app": "cross-env BABEL_ENV=test jest test/app",
-    "test:chrome": "jest test/chrome",
+    "test:chrome": "cross-env SE_FORCE_BROWSER_DOWNLOAD=true jest test/chrome",
     "build:test:electron:fixture": "webpack --config test/electron/fixture/webpack.config.js",
     "test:electron": "pnpm run build:test:electron:fixture && jest test/electron",
     "test": "pnpm run test:app && pnpm run test:chrome && pnpm run test:electron",
