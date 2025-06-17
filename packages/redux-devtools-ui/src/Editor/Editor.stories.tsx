@@ -24,14 +24,12 @@ export const Default: Story = {
   args: {
     value,
     lineNumbers: true,
-    lineWrapping: false,
     foldGutter: true,
     readOnly: false,
     autofocus: true,
   },
   argTypes: {
     autofocus: { control: { disable: true } },
-    mode: { control: { disable: true } },
     theme: { control: { disable: true } },
     onChange: { control: { disable: true } },
   },
@@ -45,8 +43,6 @@ export const WithTabs: StoryObj<WithTabsProps> = {
   },
   argTypes: {
     value: { control: { disable: true } },
-    mode: { control: { disable: true } },
-    lineWrapping: { control: { disable: true } },
     readOnly: { control: { disable: true } },
     theme: { control: { disable: true } },
     foldGutter: { control: { disable: true } },
