@@ -7,6 +7,8 @@ import { defaultStyle, themedStyle } from './styles';
 import { Theme } from '../themes/default';
 import type { ViewUpdate } from '@codemirror/view';
 
+import '../../fonts/index.css';
+
 const EditorContainer = styled.div(
   '' as unknown as TemplateStringsArray,
   ({ theme }: { theme?: Base16Theme }) =>
