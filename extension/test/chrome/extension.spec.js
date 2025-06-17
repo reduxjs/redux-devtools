@@ -13,7 +13,6 @@ describe('Chrome extension', function () {
 
   beforeAll(async () => {
     driver = new webdriver.Builder()
-      .forBrowser(webdriver.Browser.CHROME)
       .setChromeOptions(
         new chrome.Options()
           .setBrowserVersion('stable')
