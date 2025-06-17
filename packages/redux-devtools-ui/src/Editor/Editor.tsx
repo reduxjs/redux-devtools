@@ -18,7 +18,7 @@ const EditorContainer = styled.div(
 );
 
 export interface EditorProps {
-  value: string;
+  value?: string;
   lineNumbers?: boolean;
   readOnly?: boolean;
   theme?: Base16Theme;
@@ -28,7 +28,7 @@ export interface EditorProps {
 }
 
 export default function Editor({
-  value,
+  value = '',
   lineNumbers = true,
   readOnly = false,
   foldGutter = true,
