@@ -30,9 +30,9 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/code-frame": "^8.0.0-alpha.17",
-    "@babel/runtime": "^7.27.1",
-    "@types/chrome": "^0.0.323",
+    "@babel/code-frame": "^8.0.0-beta.0",
+    "@babel/runtime": "^7.27.6",
+    "@types/chrome": "^0.0.326",
     "anser": "^2.3.2",
     "html-entities": "^2.6.0",
     "path-browserify": "^1.0.1",
@@ -41,9 +41,9 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.27.2",
-    "@babel/core": "^7.27.1",
-    "@babel/eslint-parser": "^7.27.1",
-    "@babel/plugin-transform-runtime": "^7.27.1",
+    "@babel/core": "^7.27.4",
+    "@babel/eslint-parser": "^7.27.5",
+    "@babel/plugin-transform-runtime": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
@@ -54,9 +54,9 @@
     "@testing-library/react": "^16.3.0",
     "@types/babel__code-frame": "^7.0.6",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.15.21",
+    "@types/node": "^22.15.32",
     "@types/path-browserify": "^1.0.3",
-    "@types/react": "^19.1.6",
+    "@types/react": "^19.1.8",
     "@types/source-map": "0.5.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
@@ -64,7 +64,7 @@
     "react-dom": "^19.1.0",
     "redux": "^5.0.1",
     "rimraf": "^6.0.1",
-    "ts-jest": "^29.3.4",
+    "ts-jest": "^29.4.0",
     "typescript": "~5.8.3"
   },
   "peerDependencies": {
