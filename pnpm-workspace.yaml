@@ -17,6 +17,7 @@ onlyBuiltDependencies:
   - electron
   - esbuild
   - msw
+  - unrs-resolver
   - sqlite3
 patchedDependencies:
   '@dnd-kit/core': patches/@dnd-kit__core.patch
