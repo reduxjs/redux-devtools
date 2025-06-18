@@ -165,8 +165,8 @@ importers:
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
       chromedriver:
-        specifier: ^126.0.5
-        version: 126.0.5
+        specifier: ^137.0.4
+        version: 137.0.4
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -5928,9 +5928,9 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@126.0.5:
-    resolution: {integrity: sha512-xXVxwxd8CJ6yg2KEvFqLQi7V0RvF78xFnLB+xo9g9MoJNHMQccD7b4OWaxtKDy5RXrMgQ6Jb6vUN3SjTYXHLEQ==}
-    engines: {node: '>=18'}
+  chromedriver@137.0.4:
+    resolution: {integrity: sha512-IxipIe0AnoQhWvG6eSTOLhVf1Tt586LA1IH4RdhGhXrrK6nZx8+VcKdjtlyZIV60S0CttUij/YnYuHAI+7qzWg==}
+    engines: {node: '>=20'}
     hasBin: true
 
   ci-info@3.9.0:
@@ -14444,7 +14444,7 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@126.0.5:
+  chromedriver@137.0.4:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.10.0
