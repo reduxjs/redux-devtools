@@ -18,6 +18,7 @@ onlyBuiltDependencies:
   - esbuild
   - msw
   - sqlite3
+  - unrs-resolver
 patchedDependencies:
   '@dnd-kit/core': patches/@dnd-kit__core.patch
   '@dnd-kit/sortable': patches/@dnd-kit__sortable.patch
