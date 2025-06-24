@@ -41,7 +41,8 @@ const HUGE_ARRAY = Array.from({ length: 5000 }).map((_, key) => ({
 
 const HUGE_OBJECT = Array.from({ length: 5000 }).reduce(
   (o: { [key: string]: string }, _, key) => (
-    (o[`key ${key}`] = `item ${key}`), o
+    (o[`key ${key}`] = `item ${key}`),
+    o
   ),
   {},
 );
