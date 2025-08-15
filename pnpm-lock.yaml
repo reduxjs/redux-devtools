@@ -171,8 +171,8 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0
       electron:
-        specifier: ^31.7.7
-        version: 31.7.7
+        specifier: ^37.3.0
+        version: 37.3.0
       esbuild:
         specifier: ^0.25.5
         version: 0.25.5
@@ -1011,8 +1011,8 @@ importers:
         specifier: ^7.0.6
         version: 7.0.6
       electron:
-        specifier: ^31.7.7
-        version: 31.7.7
+        specifier: ^37.3.0
+        version: 37.3.0
       express:
         specifier: ^5.1.0
         version: 5.1.0
@@ -4857,9 +4857,6 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@20.19.1':
-    resolution: {integrity: sha512-jJD50LtlD2dodAEO653i3YF04NWak6jN3ky+Ri3Em3mGR39/glWiboM/IePaRbgwSfqM1TpGXfAg8ohn/4dTgA==}
-
   '@types/node@22.15.32':
     resolution: {integrity: sha512-3jigKqgSjsH6gYZv2nEsqdXfZqIFGAV36XYYjf9KGZ3PSG+IhLecqPnI310RvjutyMwifE2hhhNEklOUrvx/wA==}
 
@@ -6577,8 +6574,8 @@ packages:
   electron-to-chromium@1.5.173:
     resolution: {integrity: sha512-2bFhXP2zqSfQHugjqJIDFVwa+qIxyNApenmXTp9EjaKtdPrES5Qcn9/aSFy/NaP2E+fWG/zxKu/LBvY36p5VNQ==}
 
-  electron@31.7.7:
-    resolution: {integrity: sha512-HZtZg8EHsDGnswFt0QeV8If8B+et63uD6RJ7I4/xhcXqmTIbI08GoubX/wm+HdY0DwcuPe1/xsgqpmYvjdjRoA==}
+  electron@37.3.0:
+    resolution: {integrity: sha512-cPOPUD26DwCh+PZ9q+gMyVBvdBN75SnekI6u5zcOeoLVIXQpzrCm1ewz9BcrkWkVW7oOtfQAEo1G1SffvXrSSw==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -12951,10 +12948,6 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
-  '@types/node@20.19.1':
-    dependencies:
-      undici-types: 6.21.0
-
   '@types/node@22.15.32':
     dependencies:
       undici-types: 6.21.0
@@ -15093,10 +15086,10 @@ snapshots:
 
   electron-to-chromium@1.5.173: {}
 
-  electron@31.7.7:
+  electron@37.3.0:
     dependencies:
       '@electron/get': 2.0.3
-      '@types/node': 20.19.1
+      '@types/node': 22.15.32
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
