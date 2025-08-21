@@ -473,9 +473,6 @@ importers:
 
   packages/react-json-tree:
     dependencies:
-      '@types/lodash':
-        specifier: ^4.17.18
-        version: 4.17.18
       react-base16-styling:
         specifier: workspace:^
         version: link:../react-base16-styling
