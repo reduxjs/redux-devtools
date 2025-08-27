@@ -91,8 +91,7 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
         <RTKActionButtons
           dispatch={dispatch}
           liftedDispatch={liftedDispatch}
-          resInfo={resInfo}
-          actionsOfQuery={actionsOfQuery}
+          data={this.selectFormattedActions(actionsOfQuery)}
         />
         <TreeView
           rootProps={rootProps}
