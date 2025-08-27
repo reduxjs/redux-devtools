@@ -1,10 +1,57 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import type { GetItemString, LabelRenderer } from 'react-json-tree';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
 import isIterable from '../utils/isIterable';
 import { DATA_TYPE_KEY } from '../monitor-config';
+import { Button, Toolbar } from '@redux-devtools/ui';
+import { CopyIcon } from '../components/CopyIcon';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
+
+const copyToClipboard = async (data: any) => {
+  try {
+    const text =
+      typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+    await navigator.clipboard.writeText(text);
+    console.log('Copied to clipboard');
+  } catch (err) {
+    // Fallback for older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value =
+      typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    console.log('Copied to clipboard');
+  }
+};
+
+const CopyButton: React.FC<{ data: any }> = ({ data }) => {
+  const iconStyle: CSSProperties = {
+    width: '14px',
+    height: '14px',
+  };
+
+  return (
+    <Toolbar
+      noBorder
+      style={{
+        display: 'inline',
+        backgroundColor: 'transparent',
+      }}
+    >
+      <Button
+        onClick={(e) => {
+          e.stopPropagation();
+          void copyToClipboard(data);
+        }}
+      >
+        <CopyIcon style={iconStyle} />
+      </Button>
+    </Toolbar>
+  );
+};
 
 function isImmutable(value: unknown) {
   return isKeyed(value) || isIndexed(value) || isCollection(value);
@@ -79,6 +126,7 @@ export const getItemString: GetItemString = (type: string, data: any) => (
       ? `${data[DATA_TYPE_KEY] as string} `
       : ''}
     {getText(type, data, false, undefined)}
+    <CopyButton data={data} />
   </span>
 );
 

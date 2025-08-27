@@ -1,15 +1,19 @@
 import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ReactNode, PureComponent } from 'react';
-import { Action, AnyAction } from 'redux';
+import { Action, AnyAction, Dispatch } from 'redux';
 import type { KeyPath, ShouldExpandNodeInitially } from 'react-json-tree';
-import { QueryPreviewTabs } from '../types';
+import { QueryPreviewTabs, RtkResourceInfo } from '../types';
 import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
 import { emptyRecord, identity } from '../utils/object';
 import { TreeView, TreeViewProps } from './TreeView';
+import { RTKActionButtons } from './RTKQueryActions';
 
 export interface QueryPreviewActionsProps {
   isWideLayout: boolean;
   actionsOfQuery: AnyAction[];
+  dispatch?: Dispatch<AnyAction>;
+  resInfo?: RtkResourceInfo | null;
+  liftedDispatch?: Dispatch<AnyAction>; // Add lifted dispatch for DevTools
 }
 
 const keySep = ' - ';
@@ -79,15 +83,24 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
   };
 
   render(): ReactNode {
-    const { isWideLayout, actionsOfQuery } = this.props;
+    const { isWideLayout, actionsOfQuery, dispatch, liftedDispatch, resInfo } =
+      this.props;
 
     return (
-      <TreeView
-        rootProps={rootProps}
-        data={this.selectFormattedActions(actionsOfQuery)}
-        isWideLayout={isWideLayout}
-        shouldExpandNodeInitially={this.shouldExpandNodeInitially}
-      />
+      <>
+        <RTKActionButtons
+          dispatch={dispatch}
+          liftedDispatch={liftedDispatch}
+          resInfo={resInfo}
+          actionsOfQuery={actionsOfQuery}
+        />
+        <TreeView
+          rootProps={rootProps}
+          data={this.selectFormattedActions(actionsOfQuery)}
+          isWideLayout={isWideLayout}
+          shouldExpandNodeInitially={this.shouldExpandNodeInitially}
+        />
+      </>
     );
   }
 }

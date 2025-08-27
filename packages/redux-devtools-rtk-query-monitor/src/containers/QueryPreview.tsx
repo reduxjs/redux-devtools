@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import type { Interpolation, Theme } from '@emotion/react';
+import { Dispatch, AnyAction } from 'redux';
 import {
   QueryPreviewTabs,
   RtkResourceInfo,
@@ -61,6 +62,8 @@ export interface QueryPreviewProps<S = unknown> {
   readonly isWideLayout: boolean;
   readonly selectorsSource: SelectorsSource<S>;
   readonly selectors: InspectorSelectors<S>;
+  readonly dispatch?: Dispatch<AnyAction>;
+  readonly liftedDispatch?: Dispatch<AnyAction>;
 }
 
 /**
@@ -111,9 +114,12 @@ const MappedApiPreview = mapProps<QueryPreviewTabProps, QueryPreviewApiProps>(
 const MappedQueryPreviewActions = mapProps<
   QueryPreviewTabProps,
   QueryPreviewActionsProps
->(({ isWideLayout, selectorsSource, selectors }) => ({
+>(({ isWideLayout, selectorsSource, selectors, resInfo, ...props }) => ({
   isWideLayout,
   actionsOfQuery: selectors.selectActionsOfCurrentQuery(selectorsSource),
+  dispatch: (props as any).dispatch,
+  liftedDispatch: (props as any).liftedDispatch,
+  resInfo,
 }))(QueryPreviewActions);
 
 const tabs: ReadonlyArray<
