@@ -41,19 +41,19 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "devDependencies": {
-    "@babel/cli": "^7.27.2",
-    "@babel/core": "^7.27.4",
-    "@babel/eslint-parser": "^7.27.5",
-    "@babel/plugin-transform-runtime": "^7.27.4",
-    "@babel/preset-env": "^7.27.2",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.3",
+    "@babel/eslint-parser": "^7.28.0",
+    "@babel/plugin-transform-runtime": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
     "@babel/preset-typescript": "^7.27.1",
     "@types/jest": "^30.0.0",
-    "@types/node": "^22.15.32",
-    "jest": "^30.0.2",
+    "@types/node": "^22.18.0",
+    "jest": "^30.1.2",
     "redux": "^5.0.1",
     "rimraf": "^6.0.1",
     "rxjs": "^7.8.2",
-    "ts-jest": "^29.4.0",
+    "ts-jest": "^29.4.1",
     "typescript": "~5.9.2"
   },
   "peerDependencies": {
