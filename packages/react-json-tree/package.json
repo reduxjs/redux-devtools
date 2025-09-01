@@ -40,16 +40,16 @@
     "prepublish": "pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@types/lodash": "^4.17.18",
+    "@types/lodash": "^4.17.20",
     "react-base16-styling": "workspace:^"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "@types/react": "^19.1.8",
-    "jest": "^30.0.2",
-    "react": "^19.1.0",
+    "@types/react": "^19.1.12",
+    "jest": "^30.1.1",
+    "react": "^19.1.1",
     "rimraf": "^6.0.1",
-    "ts-jest": "^29.4.0",
+    "ts-jest": "^29.4.1",
     "typescript": "~5.9.2"
   },
   "peerDependencies": {
