@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
 ## 1.4.0
 
 ### Minor Changes

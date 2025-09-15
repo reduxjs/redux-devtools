@@ -1,5 +1,21 @@
 # @redux-devtools/app-core
 
+## 2.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+- Updated dependencies [20883e5]
+  - @redux-devtools/inspector-monitor-test-tab@5.0.0
+  - @redux-devtools/rtk-query-monitor@6.0.0
+  - @redux-devtools/slider-monitor@6.0.0
+  - @redux-devtools/ui@2.0.0
+  - @redux-devtools/inspector-monitor@6.1.2
+
 ## 1.1.2
 
 ### Patch Changes
