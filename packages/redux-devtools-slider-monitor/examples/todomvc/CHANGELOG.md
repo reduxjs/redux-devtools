@@ -1,5 +1,12 @@
 # slider-todomvc
 
+## 0.1.15
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+  - @redux-devtools/slider-monitor@6.0.0
+
 ## 0.1.14
 
 ### Patch Changes

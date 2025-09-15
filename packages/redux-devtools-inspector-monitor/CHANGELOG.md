@@ -1,5 +1,11 @@
 # Change Log
 
+## 6.1.2
+
+### Patch Changes
+
+- 20883e5: fix(deps): update all non-major dependencies
+
 ## 6.1.1
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # Change Log
 
+## 7.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+  - @redux-devtools/app-core@2.0.0
+  - @redux-devtools/ui@2.0.0
+
 ## 6.2.2
 
 ### Patch Changes
