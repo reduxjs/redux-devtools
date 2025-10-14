@@ -43,10 +43,7 @@ export default (tsconfigRootDir) =>
     },
     {
       files: ['test/**/*.ts', 'test/**/*.tsx'],
-      plugins: {
-        'react-hooks': reactHooks,
-      },
-      extends: ['react-hooks/recommended-latest'],
+      ...reactHooks.configs.flat.recommended,
     },
     {
       files: ['test/**/*.ts', 'test/**/*.tsx'],

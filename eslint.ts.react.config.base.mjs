@@ -46,10 +46,7 @@ export default (
     },
     {
       files,
-      plugins: {
-        'react-hooks': reactHooks,
-      },
-      extends: ['react-hooks/recommended-latest'],
+      ...reactHooks.configs.flat.recommended,
     },
     {
       files,

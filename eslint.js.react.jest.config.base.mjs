@@ -24,10 +24,7 @@ export default defineConfig([
   },
   {
     files: ['test/**/*.js', 'test/**/*.jsx'],
-    plugins: {
-      'react-hooks': reactHooks,
-    },
-    extends: ['react-hooks/recommended'],
+    ...reactHooks.configs.flat.recommended,
   },
   {
     files: ['test/**/*.js', 'test/**/*.jsx'],
