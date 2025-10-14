@@ -1,11 +1,11 @@
+import { defineConfig } from 'eslint/config';
 import eslint from '@eslint/js';
 import react from 'eslint-plugin-react';
-import { fixupPluginRules } from '@eslint/compat';
-import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
+import reactHooks from 'eslint-plugin-react-hooks';
 import jest from 'eslint-plugin-jest';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default [
+export default defineConfig([
   {
     files: ['test/**/*.js', 'test/**/*.jsx'],
     ...eslint.configs.recommended,
@@ -25,8 +25,9 @@ export default [
   {
     files: ['test/**/*.js', 'test/**/*.jsx'],
     plugins: {
-      'react-hooks': fixupPluginRules(eslintPluginReactHooks),
+      'react-hooks': reactHooks,
     },
+    extends: ['react-hooks/recommended'],
   },
   {
     files: ['test/**/*.js', 'test/**/*.jsx'],
@@ -40,4 +41,4 @@ export default [
     files: ['test/**/*.js', 'test/**/*.jsx'],
     ...eslintConfigPrettier,
   },
-];
+]);
