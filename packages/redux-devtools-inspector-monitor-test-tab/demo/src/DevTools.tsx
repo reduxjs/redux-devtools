@@ -36,5 +36,6 @@ export const getDevTools = (location: { search: string }) =>
 export function ConnectedDevTools() {
   const location = useLocation();
   const DevTools = getDevTools(location);
+  // eslint-disable-next-line react-hooks/static-components
   return <DevTools />;
 }
