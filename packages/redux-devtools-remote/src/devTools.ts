@@ -402,6 +402,9 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
         for await (const data of this.socket!.subscribe(channelName)) {
           this.handleMessages(data as Message<S, A>);
         }
+        for await (const data of this.socket!.subscribe('sc-' + this.socket!.id)) {
+          this.handleMessages(data as Message<S, A>);
+        }
       } catch (error) {
         console.log(error);
       }
