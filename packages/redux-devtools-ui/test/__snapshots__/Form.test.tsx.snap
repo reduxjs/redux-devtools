@@ -5,7 +5,7 @@ exports[`Form renders correctly 1`] = `
   class="css-yd7kx"
 >
   <div
-    class="form-group field field-object"
+    class="form-group rjsf-field rjsf-field-object"
   >
     <fieldset
       id="root"
@@ -15,14 +15,14 @@ exports[`Form renders correctly 1`] = `
       >
         Example form
       </legend>
-      <p
+      <div
         class="field-description"
         id="root__description"
       >
         A simple form example.
-      </p>
+      </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -48,7 +48,7 @@ exports[`Form renders correctly 1`] = `
         />
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -68,7 +68,7 @@ exports[`Form renders correctly 1`] = `
         />
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -87,7 +87,7 @@ exports[`Form renders correctly 1`] = `
         </textarea>
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -113,7 +113,7 @@ exports[`Form renders correctly 1`] = `
         </p>
       </div>
       <div
-        class="form-group field field-array"
+        class="form-group rjsf-field rjsf-field-array"
       >
         <label
           class="control-label"
@@ -182,7 +182,7 @@ exports[`Form renders correctly 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -273,7 +273,7 @@ exports[`Form renders correctly 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -284,6 +284,7 @@ exports[`Form renders correctly 1`] = `
         <div
           class="field-radio-group"
           id="root_numberEnumRadio"
+          role="radiogroup"
         >
           <label
             class="radio-inline "
@@ -336,7 +337,7 @@ exports[`Form renders correctly 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -386,7 +387,7 @@ exports[`Form renders with no button 1`] = `
   class="css-yd7kx"
 >
   <div
-    class="form-group field field-object"
+    class="form-group rjsf-field rjsf-field-object"
   >
     <fieldset
       id="root"
@@ -396,14 +397,14 @@ exports[`Form renders with no button 1`] = `
       >
         Example form
       </legend>
-      <p
+      <div
         class="field-description"
         id="root__description"
       >
         A simple form example.
-      </p>
+      </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -429,7 +430,7 @@ exports[`Form renders with no button 1`] = `
         />
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -449,7 +450,7 @@ exports[`Form renders with no button 1`] = `
         />
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -468,7 +469,7 @@ exports[`Form renders with no button 1`] = `
         </textarea>
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -494,7 +495,7 @@ exports[`Form renders with no button 1`] = `
         </p>
       </div>
       <div
-        class="form-group field field-array"
+        class="form-group rjsf-field rjsf-field-array"
       >
         <label
           class="control-label"
@@ -563,7 +564,7 @@ exports[`Form renders with no button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -654,7 +655,7 @@ exports[`Form renders with no button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -665,6 +666,7 @@ exports[`Form renders with no button 1`] = `
         <div
           class="field-radio-group"
           id="root_numberEnumRadio"
+          role="radiogroup"
         >
           <label
             class="radio-inline "
@@ -717,7 +719,7 @@ exports[`Form renders with no button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -758,7 +760,7 @@ exports[`Form renders with primary button 1`] = `
   class="css-yd7kx"
 >
   <div
-    class="form-group field field-object"
+    class="form-group rjsf-field rjsf-field-object"
   >
     <fieldset
       id="root"
@@ -768,14 +770,14 @@ exports[`Form renders with primary button 1`] = `
       >
         Example form
       </legend>
-      <p
+      <div
         class="field-description"
         id="root__description"
       >
         A simple form example.
-      </p>
+      </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -801,7 +803,7 @@ exports[`Form renders with primary button 1`] = `
         />
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -821,7 +823,7 @@ exports[`Form renders with primary button 1`] = `
         />
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -840,7 +842,7 @@ exports[`Form renders with primary button 1`] = `
         </textarea>
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -866,7 +868,7 @@ exports[`Form renders with primary button 1`] = `
         </p>
       </div>
       <div
-        class="form-group field field-array"
+        class="form-group rjsf-field rjsf-field-array"
       >
         <label
           class="control-label"
@@ -935,7 +937,7 @@ exports[`Form renders with primary button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -1026,7 +1028,7 @@ exports[`Form renders with primary button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -1037,6 +1039,7 @@ exports[`Form renders with primary button 1`] = `
         <div
           class="field-radio-group"
           id="root_numberEnumRadio"
+          role="radiogroup"
         >
           <label
             class="radio-inline "
@@ -1089,7 +1092,7 @@ exports[`Form renders with primary button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
