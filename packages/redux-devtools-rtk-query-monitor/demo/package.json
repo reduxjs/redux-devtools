@@ -50,6 +50,8 @@
     "webpack-dev-server": "^5.2.2"
   },
   "msw": {
-    "workerDirectory": "public"
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
