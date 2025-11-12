@@ -105,12 +105,12 @@ exports[`Form renders correctly 1`] = `
           type="password"
           value="noneed"
         />
-        <p
+        <div
           class="help-block"
           id="root_password__help"
         >
           Hint: Make it strong!
-        </p>
+        </div>
       </div>
       <div
         class="form-group rjsf-field rjsf-field-array"
@@ -487,12 +487,12 @@ exports[`Form renders with no button 1`] = `
           type="password"
           value="noneed"
         />
-        <p
+        <div
           class="help-block"
           id="root_password__help"
         >
           Hint: Make it strong!
-        </p>
+        </div>
       </div>
       <div
         class="form-group rjsf-field rjsf-field-array"
@@ -860,12 +860,12 @@ exports[`Form renders with primary button 1`] = `
           type="password"
           value="noneed"
         />
-        <p
+        <div
           class="help-block"
           id="root_password__help"
         >
           Hint: Make it strong!
-        </p>
+        </div>
       </div>
       <div
         class="form-group rjsf-field rjsf-field-array"
