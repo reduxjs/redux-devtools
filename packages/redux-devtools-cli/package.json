@@ -38,7 +38,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "engines": {
-    "node": ">= 18.12.0"
+    "node": ">=20"
   },
   "dependencies": {
     "@apollo/server": "^4.12.2",
@@ -60,7 +60,7 @@
     "lodash-es": "^4.17.21",
     "minimist": "^1.2.8",
     "morgan": "^1.10.1",
-    "open": "^10.2.0",
+    "open": "^11.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-is": "^19.2.0",
