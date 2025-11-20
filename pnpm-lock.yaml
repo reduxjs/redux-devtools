@@ -1047,8 +1047,8 @@ importers:
         specifier: ^7.7.3
         version: 7.7.3
       socketcluster-server:
-        specifier: ^19.2.2
-        version: 19.2.2
+        specifier: ^20.0.0
+        version: 20.0.0
       sqlite3:
         specifier: ^5.1.7
         version: 5.1.7
@@ -5715,8 +5715,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  ag-auth@2.1.0:
-    resolution: {integrity: sha512-M4l+IErFmYPk0HAvolaPyvCMyn3oJ4aPHVMeVqlxJIynkHGhyTFiT+LX+jYY34pEdwM03TLkQUMHxpXBMuNmZg==}
+  ag-auth@2.1.1:
+    resolution: {integrity: sha512-7XkzbCoW/jWpI/1wdmCCr1LXk4ucywXoORG68OzPQl/Y8/sWTMiGIU/stfnUh07kVkihn4dKelz3HJ2T6niPng==}
 
   ag-channel@5.0.0:
     resolution: {integrity: sha512-bArHkdqQxynim981t8FLZM5TfA0v7p081OlFdOxs6clB79GSGcGlOQMDa31DT9F5VMjzqNiJmhfGwinvfU/3Zg==}
@@ -9585,8 +9585,8 @@ packages:
   socketcluster-client@19.2.7:
     resolution: {integrity: sha512-c6caNOr/49FUjlVnQfXb0TasMnrqY1uN/uevT99xicF+7NkvGSNwjP6rlMP0v1ZZjz+MosT2/qJNDDc2b3v/Jw==}
 
-  socketcluster-server@19.2.2:
-    resolution: {integrity: sha512-GHZn7+n2+rOUNoWWpr7kIzDWBc61HUQR0f9o6sAAnYEHXww6j7RhJ1Clonhp90D6gvRoLqK4jhgX+Y6bcBsWPA==}
+  socketcluster-server@20.0.0:
+    resolution: {integrity: sha512-vXwKcEBVCt+o95WB+R5JjK2AURzxxpnugF6WCbXl/7YUTqOPJtwoxIlF65yJY37wN5juCde3br5/GQP6SXHybQ==}
 
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
@@ -14304,7 +14304,7 @@ snapshots:
 
   acorn@8.15.0: {}
 
-  ag-auth@2.1.0:
+  ag-auth@2.1.1:
     dependencies:
       jsonwebtoken: 9.0.2
       sc-errors: 3.0.0
@@ -18869,7 +18869,7 @@ snapshots:
 
   socketcluster-client@19.2.7:
     dependencies:
-      ag-auth: 2.1.0
+      ag-auth: 2.1.1
       ag-channel: 5.0.0
       ag-request: 1.1.0
       async-stream-emitter: 7.0.1
@@ -18886,9 +18886,9 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  socketcluster-server@19.2.2:
+  socketcluster-server@20.0.0:
     dependencies:
-      ag-auth: 2.1.0
+      ag-auth: 2.1.1
       ag-request: 1.1.0
       ag-simple-broker: 6.0.1
       async-stream-emitter: 7.0.1
