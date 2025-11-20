@@ -5715,8 +5715,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  ag-auth@2.1.0:
-    resolution: {integrity: sha512-M4l+IErFmYPk0HAvolaPyvCMyn3oJ4aPHVMeVqlxJIynkHGhyTFiT+LX+jYY34pEdwM03TLkQUMHxpXBMuNmZg==}
+  ag-auth@2.1.1:
+    resolution: {integrity: sha512-7XkzbCoW/jWpI/1wdmCCr1LXk4ucywXoORG68OzPQl/Y8/sWTMiGIU/stfnUh07kVkihn4dKelz3HJ2T6niPng==}
 
   ag-channel@5.0.0:
     resolution: {integrity: sha512-bArHkdqQxynim981t8FLZM5TfA0v7p081OlFdOxs6clB79GSGcGlOQMDa31DT9F5VMjzqNiJmhfGwinvfU/3Zg==}
@@ -14304,7 +14304,7 @@ snapshots:
 
   acorn@8.15.0: {}
 
-  ag-auth@2.1.0:
+  ag-auth@2.1.1:
     dependencies:
       jsonwebtoken: 9.0.2
       sc-errors: 3.0.0
@@ -18869,7 +18869,7 @@ snapshots:
 
   socketcluster-client@19.2.7:
     dependencies:
-      ag-auth: 2.1.0
+      ag-auth: 2.1.1
       ag-channel: 5.0.0
       ag-request: 1.1.0
       async-stream-emitter: 7.0.1
@@ -18888,7 +18888,7 @@ snapshots:
 
   socketcluster-server@19.2.2:
     dependencies:
-      ag-auth: 2.1.0
+      ag-auth: 2.1.1
       ag-request: 1.1.0
       ag-simple-broker: 6.0.1
       async-stream-emitter: 7.0.1
