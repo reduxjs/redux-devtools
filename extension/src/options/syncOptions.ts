@@ -75,7 +75,7 @@ const migrateOldOptions = (oldOptions: OldOrNewOptions): Options => ({
 export const getOptions = (callback: (options: Options) => void) => {
   if (options) callback(options);
   else {
-    chrome.storage.sync.get(
+    chrome.storage.sync.get<OldOrNewOptions>(
       {
         useEditor: 0,
         editor: '',
@@ -92,7 +92,7 @@ export const getOptions = (callback: (options: Options) => void) => {
         showContextMenus: true,
       },
       function (items) {
-        options = migrateOldOptions(items as OldOrNewOptions);
+        options = migrateOldOptions(items);
         callback(options);
       },
     );
