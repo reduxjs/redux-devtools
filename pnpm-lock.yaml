@@ -654,8 +654,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(react@19.2.0)(redux@5.0.1)
       socketcluster-client:
-        specifier: ^19.2.7
-        version: 19.2.7
+        specifier: ^20.0.1
+        version: 20.0.1
     devDependencies:
       '@babel/cli':
         specifier: ^7.28.3
@@ -1111,8 +1111,8 @@ importers:
         specifier: ^6.1.2
         version: 6.1.2
       socketcluster-client:
-        specifier: ^19.2.7
-        version: 19.2.7
+        specifier: ^20.0.1
+        version: 20.0.1
       supertest:
         specifier: ^7.1.4
         version: 7.1.4
@@ -1866,8 +1866,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       socketcluster-client:
-        specifier: ^19.2.7
-        version: 19.2.7
+        specifier: ^20.0.1
+        version: 20.0.1
     devDependencies:
       '@babel/cli':
         specifier: ^7.28.3
@@ -5715,8 +5715,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  ag-auth@2.1.0:
-    resolution: {integrity: sha512-M4l+IErFmYPk0HAvolaPyvCMyn3oJ4aPHVMeVqlxJIynkHGhyTFiT+LX+jYY34pEdwM03TLkQUMHxpXBMuNmZg==}
+  ag-auth@2.1.1:
+    resolution: {integrity: sha512-7XkzbCoW/jWpI/1wdmCCr1LXk4ucywXoORG68OzPQl/Y8/sWTMiGIU/stfnUh07kVkihn4dKelz3HJ2T6niPng==}
 
   ag-channel@5.0.0:
     resolution: {integrity: sha512-bArHkdqQxynim981t8FLZM5TfA0v7p081OlFdOxs6clB79GSGcGlOQMDa31DT9F5VMjzqNiJmhfGwinvfU/3Zg==}
@@ -9582,8 +9582,8 @@ packages:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
 
-  socketcluster-client@19.2.7:
-    resolution: {integrity: sha512-c6caNOr/49FUjlVnQfXb0TasMnrqY1uN/uevT99xicF+7NkvGSNwjP6rlMP0v1ZZjz+MosT2/qJNDDc2b3v/Jw==}
+  socketcluster-client@20.0.1:
+    resolution: {integrity: sha512-qJ+fr1Qxh6bGqmchnBe+6dcUaC6/9nJLgVy6uszNTmWEH3qyPpTiDM2jSHAC8kRxAR0XXfdEC1pjkhzSXyJDLw==}
 
   socketcluster-server@19.2.2:
     resolution: {integrity: sha512-GHZn7+n2+rOUNoWWpr7kIzDWBc61HUQR0f9o6sAAnYEHXww6j7RhJ1Clonhp90D6gvRoLqK4jhgX+Y6bcBsWPA==}
@@ -14304,7 +14304,7 @@ snapshots:
 
   acorn@8.15.0: {}
 
-  ag-auth@2.1.0:
+  ag-auth@2.1.1:
     dependencies:
       jsonwebtoken: 9.0.2
       sc-errors: 3.0.0
@@ -18867,9 +18867,9 @@ snapshots:
 
   smart-buffer@4.2.0: {}
 
-  socketcluster-client@19.2.7:
+  socketcluster-client@20.0.1:
     dependencies:
-      ag-auth: 2.1.0
+      ag-auth: 2.1.1
       ag-channel: 5.0.0
       ag-request: 1.1.0
       async-stream-emitter: 7.0.1
@@ -18888,7 +18888,7 @@ snapshots:
 
   socketcluster-server@19.2.2:
     dependencies:
-      ag-auth: 2.1.0
+      ag-auth: 2.1.1
       ag-request: 1.1.0
       ag-simple-broker: 6.0.1
       async-stream-emitter: 7.0.1
