@@ -1047,8 +1047,8 @@ importers:
         specifier: ^7.7.3
         version: 7.7.3
       socketcluster-server:
-        specifier: ^19.2.2
-        version: 19.2.2
+        specifier: ^20.0.0
+        version: 20.0.0
       sqlite3:
         specifier: ^5.1.7
         version: 5.1.7
@@ -9582,8 +9582,8 @@ packages:
   socketcluster-client@19.2.7:
     resolution: {integrity: sha512-c6caNOr/49FUjlVnQfXb0TasMnrqY1uN/uevT99xicF+7NkvGSNwjP6rlMP0v1ZZjz+MosT2/qJNDDc2b3v/Jw==}
 
-  socketcluster-server@19.2.2:
-    resolution: {integrity: sha512-GHZn7+n2+rOUNoWWpr7kIzDWBc61HUQR0f9o6sAAnYEHXww6j7RhJ1Clonhp90D6gvRoLqK4jhgX+Y6bcBsWPA==}
+  socketcluster-server@20.0.0:
+    resolution: {integrity: sha512-vXwKcEBVCt+o95WB+R5JjK2AURzxxpnugF6WCbXl/7YUTqOPJtwoxIlF65yJY37wN5juCde3br5/GQP6SXHybQ==}
 
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
@@ -18859,7 +18859,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  socketcluster-server@19.2.2:
+  socketcluster-server@20.0.0:
     dependencies:
       ag-auth: 2.1.1
       ag-request: 1.1.0
