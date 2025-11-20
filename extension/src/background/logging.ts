@@ -6,7 +6,11 @@ export function getReport(
   tabId: string | number,
   instanceId: number,
 ) {
-  chrome.storage.local.get(['s:hostname', 's:port', 's:secure'], (options) => {
+  chrome.storage.local.get<{
+    's:hostname': string | undefined;
+    's:port': string | undefined;
+    's:secure': string | undefined;
+  }>(['s:hostname', 's:port', 's:secure'], (options) => {
     if (!options['s:hostname'] || !options['s:port']) return;
     const url = `${options['s:secure'] ? 'https' : 'http'}://${
       options['s:hostname']
