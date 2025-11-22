@@ -6,7 +6,7 @@
     "@eslint/js": "^9.39.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jest": "^29.1.0",
+    "eslint-plugin-jest": "^29.2.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "jest": "^30.2.0",
@@ -23,5 +23,5 @@
     "clean:all": "pnpm --recursive run clean",
     "release": "pnpm build:all && pnpm publish -r"
   },
-  "packageManager": "pnpm@10.22.0"
+  "packageManager": "pnpm@10.23.0"
 }
