@@ -6,13 +6,12 @@ import { getJsonTreeTheme, StyleUtilsContext } from '../styles/themes';
 import { getItemString, labelRenderer } from '../styles/tree';
 import { identity } from '../utils/object';
 
-export interface TreeViewProps
-  extends Partial<
-    Pick<
-      ComponentProps<typeof JSONTree>,
-      'keyPath' | 'shouldExpandNodeInitially' | 'hideRoot'
-    >
-  > {
+export interface TreeViewProps extends Partial<
+  Pick<
+    ComponentProps<typeof JSONTree>,
+    'keyPath' | 'shouldExpandNodeInitially' | 'hideRoot'
+  >
+> {
   data: unknown;
   isWideLayout: boolean;
   before?: ReactNode;

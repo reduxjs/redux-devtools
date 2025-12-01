@@ -41,8 +41,7 @@ function invertColors(theme: Base16Theme) {
 }
 
 export interface ChartMonitorProps<S, A extends Action<string>>
-  extends LiftedState<S, A, ChartMonitorState>,
-    Options {
+  extends LiftedState<S, A, ChartMonitorState>, Options {
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;

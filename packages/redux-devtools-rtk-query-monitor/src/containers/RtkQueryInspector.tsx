@@ -23,8 +23,10 @@ type ForwardedMonitorProps<S, A extends Action<string>> = Pick<
   'monitorState' | 'currentStateIndex' | 'computedStates' | 'actionsById'
 >;
 
-export interface RtkQueryInspectorProps<S, A extends Action<string>>
-  extends ForwardedMonitorProps<S, A> {
+export interface RtkQueryInspectorProps<
+  S,
+  A extends Action<string>,
+> extends ForwardedMonitorProps<S, A> {
   dispatch: Dispatch<LiftedAction<S, A, RtkQueryMonitorState>>;
 }
 

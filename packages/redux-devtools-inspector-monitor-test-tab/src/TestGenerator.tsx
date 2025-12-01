@@ -59,8 +59,10 @@ export function compare<S>(
   ).forEach(generate);
 }
 
-interface Props<S, A extends Action<string>>
-  extends Omit<TabComponentProps<S, A>, 'monitorState' | 'updateMonitorState'> {
+interface Props<S, A extends Action<string>> extends Omit<
+  TabComponentProps<S, A>,
+  'monitorState' | 'updateMonitorState'
+> {
   name?: string;
   isVanilla?: boolean;
   wrap?: string | ((locals: WrapLocals) => string);

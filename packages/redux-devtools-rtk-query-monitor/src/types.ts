@@ -35,8 +35,10 @@ export interface RtkQueryMonitorState {
   readonly selectedPreviewTab: QueryPreviewTabs;
 }
 
-export interface RtkQueryMonitorProps<S, A extends Action<string>>
-  extends LiftedState<S, A, RtkQueryMonitorState> {
+export interface RtkQueryMonitorProps<
+  S,
+  A extends Action<string>,
+> extends LiftedState<S, A, RtkQueryMonitorState> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
   theme: keyof typeof base16Themes | Base16Theme;
   invertTheme: boolean;
@@ -187,8 +189,11 @@ export interface ApiStats {
   }>;
 }
 
-export interface TabOption<S, P, V extends string = 'default'>
-  extends SelectOption<S, V> {
+export interface TabOption<
+  S,
+  P,
+  V extends string = 'default',
+> extends SelectOption<S, V> {
   component: ComponentType<P>;
 }
 
