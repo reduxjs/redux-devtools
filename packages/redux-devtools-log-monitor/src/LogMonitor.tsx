@@ -64,8 +64,10 @@ interface DefaultProps<S> {
   markStateDiff: boolean;
 }
 
-export interface LogMonitorProps<S, A extends Action<string>>
-  extends LiftedState<S, A, LogMonitorState> {
+export interface LogMonitorProps<
+  S,
+  A extends Action<string>,
+> extends LiftedState<S, A, LogMonitorState> {
   dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
 
   preserveScrollTop: boolean;

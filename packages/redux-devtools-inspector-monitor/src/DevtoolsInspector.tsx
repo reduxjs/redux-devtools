@@ -144,8 +144,10 @@ interface DefaultProps {
   invertTheme: boolean;
 }
 
-export interface DevtoolsInspectorProps<S, A extends Action<string>>
-  extends LiftedState<S, A, DevtoolsInspectorState> {
+export interface DevtoolsInspectorProps<
+  S,
+  A extends Action<string>,
+> extends LiftedState<S, A, DevtoolsInspectorState> {
   dispatch: Dispatch<
     DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
   >;

@@ -44,8 +44,10 @@ interface DefaultProps {
   fluid: boolean;
 }
 
-export interface DockMonitorProps<S, A extends Action<string>>
-  extends LiftedState<S, A, DockMonitorState> {
+export interface DockMonitorProps<
+  S,
+  A extends Action<string>,
+> extends LiftedState<S, A, DockMonitorState> {
   defaultPosition: 'left' | 'top' | 'right' | 'bottom';
   defaultIsVisible: boolean;
   defaultSize: number;
