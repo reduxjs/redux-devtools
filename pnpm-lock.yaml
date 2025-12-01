@@ -1047,8 +1047,8 @@ importers:
         specifier: ^7.7.3
         version: 7.7.3
       socketcluster-server:
-        specifier: ^19.2.2
-        version: 19.2.2
+        specifier: ^20.0.0
+        version: 20.0.0
       sqlite3:
         specifier: ^5.1.7
         version: 5.1.7
@@ -1090,8 +1090,8 @@ importers:
         specifier: ^19.1.1
         version: 19.1.1
       '@types/socketcluster-server':
-        specifier: ^19.0.1
-        version: 19.0.1
+        specifier: ^20.0.0
+        version: 20.0.0
       '@types/supertest':
         specifier: ^6.0.3
         version: 6.0.3
@@ -5139,8 +5139,8 @@ packages:
   '@types/socketcluster-client@19.1.1':
     resolution: {integrity: sha512-F4X2UAFrlsTNU+BOC3mjUadbbGb11dRdkMfywQ3lrgKvgfADfxKccKGA0a6ttiVJp/xPZm5LJE7w4bD5FvldSQ==}
 
-  '@types/socketcluster-server@19.0.1':
-    resolution: {integrity: sha512-YChXxNgn1RCUO4Km6scw0Liiq/E+9TDI+YHbmTdmw/AQGk7U7uVeIQyQdpYRosnWdY4uPbT1gKhJb0TPfAmfFg==}
+  '@types/socketcluster-server@20.0.0':
+    resolution: {integrity: sha512-Cz+A5+K66EFnlxH6QmcSAMZ5GucCTXTDRPYXj6UpSuV8kpIUhjphS81wgAJafGPYrj55Ty6xEPdPOCCv7v6BkQ==}
 
   '@types/sockjs@0.3.36':
     resolution: {integrity: sha512-MK9V6NzAS1+Ud7JV9lJLFqW85VbC9dq3LmwZCuBe4wBDgKC0Kj/jd8Xl+nSviU+Qc3+m7umHHyHg//2KSa0a0Q==}
@@ -9578,8 +9578,8 @@ packages:
   socketcluster-client@19.2.7:
     resolution: {integrity: sha512-c6caNOr/49FUjlVnQfXb0TasMnrqY1uN/uevT99xicF+7NkvGSNwjP6rlMP0v1ZZjz+MosT2/qJNDDc2b3v/Jw==}
 
-  socketcluster-server@19.2.2:
-    resolution: {integrity: sha512-GHZn7+n2+rOUNoWWpr7kIzDWBc61HUQR0f9o6sAAnYEHXww6j7RhJ1Clonhp90D6gvRoLqK4jhgX+Y6bcBsWPA==}
+  socketcluster-server@20.0.0:
+    resolution: {integrity: sha512-vXwKcEBVCt+o95WB+R5JjK2AURzxxpnugF6WCbXl/7YUTqOPJtwoxIlF65yJY37wN5juCde3br5/GQP6SXHybQ==}
 
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
@@ -12911,7 +12911,7 @@ snapshots:
       '@types/ag-channel': 5.0.3
       '@types/async-stream-emitter': 7.0.0
       '@types/consumable-stream': 3.0.0
-      '@types/socketcluster-server': 19.0.1
+      '@types/socketcluster-server': 20.0.0
       '@types/writable-consumable-stream': 4.1.0
 
   '@types/aria-query@5.0.4': {}
@@ -13350,12 +13350,12 @@ snapshots:
       '@types/async-stream-emitter': 7.0.0
       '@types/consumable-stream': 3.0.0
       '@types/sc-errors': 1.4.3
-      '@types/socketcluster-server': 19.0.1
+      '@types/socketcluster-server': 20.0.0
       '@types/stream-demux': 10.0.0
       '@types/writable-consumable-stream': 4.1.0
       '@types/ws': 8.18.1
 
-  '@types/socketcluster-server@19.0.1':
+  '@types/socketcluster-server@20.0.0':
     dependencies:
       '@types/ag-auth': 1.0.3
       '@types/ag-request': 1.0.0
@@ -18849,7 +18849,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  socketcluster-server@19.2.2:
+  socketcluster-server@20.0.0:
     dependencies:
       ag-auth: 2.1.1
       ag-request: 1.1.0
