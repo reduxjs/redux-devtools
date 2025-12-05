@@ -47,6 +47,7 @@ export function JSONTree({
   isCustomNode = noCustomNode,
   collectionLimit = 50,
   sortObjectKeys = false,
+  ArrowComponentOverride
 }: Props) {
   const styling = useMemo(
     () =>
@@ -69,6 +70,7 @@ export function JSONTree({
         postprocessValue={postprocessValue}
         collectionLimit={collectionLimit}
         sortObjectKeys={sortObjectKeys}
+        ArrowComponentOverride={ArrowComponentOverride}
       />
     </ul>
   );
@@ -87,4 +89,7 @@ export type {
   Styling,
   CommonExternalProps,
 } from './types.js';
+
+export type { JSONArrowProps } from './JSONArrow.js';
+
 export type { StylingValue };
