@@ -219,6 +219,8 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
           onTabChange={this.handleTabChange}
           isWideLayout={isWideLayout}
           hasNoApis={hasNoApi}
+          dispatch={this.props.dispatch}
+          liftedDispatch={this.props.dispatch}
         />
       </div>
     );
