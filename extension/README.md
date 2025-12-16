@@ -13,7 +13,7 @@
 
 - from [Chrome Web Store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd);
 - or download `extension.zip` from [last releases](https://github.com/zalmoxisus/redux-devtools-extension/releases), unzip, open `chrome://extensions` url and turn on developer mode from top left and then click; on `Load Unpacked` and select the extracted folder for use
-- or build it with `npm i && npm run build:extension` and [load the extension's folder](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked) `./build/extension`;
+- or build it with `npm i && npm run build` (in `./extension`) and [load the extension's folder](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked) `./extension/chrome/dist`;
 - or run it in dev mode with `npm i && npm start` and [load the extension's folder](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked) `./dev`.
 
 ### 2. For Firefox
