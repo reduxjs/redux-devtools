@@ -2,137 +2,105 @@
 
 exports[`Editor renders correctly 1`] = `
 <div
-  class="css-1u3pnvo"
+  class="cm-theme-light"
 >
   <div
-    class="CodeMirror cm-s-default"
-    translate="no"
+    class="cm-editor ͼ1 ͼ2 ͼ4 ͼ17 ͼ15"
   >
     <div
-      style="overflow: hidden; position: relative; width: 3px; height: 0px;"
-    >
-      <textarea
-        autocapitalize="off"
-        autocorrect="off"
-        spellcheck="false"
-        style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; min-height: 1em; outline: none;"
-        tabindex="0"
-      />
-    </div>
-    <div
-      class="CodeMirror-vscrollbar"
-      cm-not-content="true"
-      tabindex="-1"
-    >
-      <div
-        style="min-width: 1px;"
-      />
-    </div>
-    <div
-      class="CodeMirror-hscrollbar"
-      cm-not-content="true"
-      tabindex="-1"
-    >
-      <div
-        style="height: 100%; min-height: 1px;"
-      />
-    </div>
-    <div
-      class="CodeMirror-scrollbar-filler"
-      cm-not-content="true"
+      aria-live="polite"
+      class="cm-announced"
     />
     <div
-      class="CodeMirror-gutter-filler"
-      cm-not-content="true"
-    />
-    <div
-      class="CodeMirror-scroll"
+      class="cm-scroller"
       tabindex="-1"
     >
       <div
-        class="CodeMirror-sizer"
-        style="margin-left: 0px; min-width: 3px;"
+        aria-hidden="true"
+        class="cm-gutters cm-gutters-before"
+        style="min-height: 14px; position: sticky;"
       >
         <div
-          style="position: relative;"
+          class="cm-gutter cm-lineNumbers"
         >
           <div
-            class="CodeMirror-lines"
-            role="presentation"
+            class="cm-gutterElement"
+            style="height: 0px; visibility: hidden; pointer-events: none;"
           >
-            <div
-              role="presentation"
-              style="position: relative; outline: none;"
-            >
-              <div
-                class="CodeMirror-measure"
-              />
-              <div
-                class="CodeMirror-measure"
-              >
-                <pre
-                  class="CodeMirror-line"
-                  role="presentation"
-                >
-                  <span
-                    role="presentation"
-                    style="padding-right: 0.1px;"
-                  >
-                    <span
-                      class="cm-keyword"
-                    >
-                      var
-                    </span>
-                     
-                    <span
-                      class="cm-def"
-                    >
-                      a
-                    </span>
-                     
-                    <span
-                      class="cm-operator"
-                    >
-                      =
-                    </span>
-                     
-                    <span
-                      class="cm-number"
-                    >
-                      1
-                    </span>
-                    ;
-                  </span>
-                </pre>
-              </div>
-              <div
-                style="position: relative; z-index: 1;"
-              />
-              <div
-                class="CodeMirror-cursors"
-              />
-              <div
-                class="CodeMirror-code"
-                role="presentation"
-              />
-            </div>
+            9
           </div>
+          <div
+            class="cm-gutterElement cm-activeLineGutter"
+            style="height: 14px;"
+          >
+            1
+          </div>
+        </div>
+        <div
+          class="cm-gutter cm-foldGutter"
+        >
+          <div
+            class="cm-gutterElement"
+            style="height: 0px; visibility: hidden; pointer-events: none;"
+          >
+            <span
+              title="Unfold line"
+            >
+              ›
+            </span>
+          </div>
+          <div
+            class="cm-gutterElement cm-activeLineGutter"
+            style="height: 14px;"
+          />
         </div>
       </div>
       <div
-        style="position: absolute; height: 50px; width: 1px;"
-      />
-      <div
-        class="CodeMirror-gutters"
+        aria-multiline="true"
+        autocapitalize="off"
+        autocorrect="off"
+        class="cm-content"
+        contenteditable="true"
+        data-language="javascript"
+        role="textbox"
+        spellcheck="false"
+        style="tab-size: 4;"
+        translate="no"
+        writingsuggestions="false"
       >
         <div
-          class="CodeMirror-gutter CodeMirror-linenumbers"
-          style="width: 1px;"
-        />
-        <div
-          class="CodeMirror-gutter CodeMirror-foldgutter"
-        />
+          class="cm-line cm-activeLine"
+        >
+          <span
+            class="ͼb"
+          >
+            var
+          </span>
+           
+          <span
+            class="ͼg"
+          >
+            a
+          </span>
+           = 
+          <span
+            class="ͼd"
+          >
+            1
+          </span>
+          ;
+        </div>
       </div>
+      <div
+        aria-hidden="true"
+        class="cm-layer cm-layer-above cm-cursorLayer"
+        style="z-index: 150; animation-duration: 1200ms;"
+      />
+      <div
+        aria-hidden="true"
+        class="cm-layer cm-selectionLayer"
+        style="z-index: -2;"
+      />
     </div>
   </div>
 </div>
