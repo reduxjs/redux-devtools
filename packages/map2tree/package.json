@@ -37,7 +37,7 @@
     "prepublish": "pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.22"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
@@ -45,7 +45,7 @@
     "immutable": "^5.1.4",
     "jest": "^30.2.0",
     "rimraf": "^6.1.2",
-    "ts-jest": "^29.4.5",
+    "ts-jest": "^29.4.6",
     "typescript": "~5.9.3"
   }
 }
