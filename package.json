@@ -3,16 +3,16 @@
   "devDependencies": {
     "@babel/core": "^7.28.5",
     "@changesets/cli": "^2.29.8",
-    "@eslint/js": "^9.39.1",
-    "eslint": "^9.39.1",
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jest": "^29.2.1",
+    "eslint-plugin-jest": "^29.11.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "jest": "^30.2.0",
-    "prettier": "3.7.3",
+    "prettier": "3.7.4",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.48.0"
+    "typescript-eslint": "^8.50.1"
   },
   "scripts": {
     "format": "prettier --write .",
@@ -23,5 +23,5 @@
     "clean:all": "pnpm --recursive run clean",
     "release": "pnpm build:all && pnpm publish -r"
   },
-  "packageManager": "pnpm@10.24.0"
+  "packageManager": "pnpm@10.26.2"
 }
