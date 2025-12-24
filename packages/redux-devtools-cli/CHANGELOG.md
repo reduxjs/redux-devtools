@@ -1,5 +1,11 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- 56de415: Require Node.js 20
+
 ## 4.0.4
 
 ### Patch Changes
