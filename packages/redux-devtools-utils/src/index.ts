@@ -1,4 +1,3 @@
-import getParams from 'get-params';
 import jsan from 'jsan';
 import { nanoid } from 'nanoid/non-secure';
 import { immutableSerialize } from '@redux-devtools/serialize';
@@ -15,13 +14,84 @@ export interface ActionCreatorObject {
   readonly args: readonly string[];
 }
 
+function getParams(func: Function) {
+  if (typeof func !== 'function') return [];
+
+  const src = func
+    .toString()
+    // remove comments
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\/\/.*$/gm, '')
+    .trim();
+
+  let paramsSrc = '';
+
+  // function foo(a, b)
+  const fnMatch = src.match(/^[^(]*\(\s*([^)]*)\)/);
+
+  // (a, b) => or a =>
+  const arrowMatch = src.match(/^(?:\(\s*([^)]*)\)|([^\s=]+))\s*=>/);
+
+  if (fnMatch) {
+    paramsSrc = fnMatch[1] ?? '';
+  } else if (arrowMatch) {
+    paramsSrc = arrowMatch[1] ?? arrowMatch[2] ?? '';
+  } else {
+    return [];
+  }
+
+  if (!paramsSrc) return [];
+
+  const params = [];
+  let current = '';
+  let depth = 0;
+
+  for (let i = 0; i < paramsSrc.length; i++) {
+    const ch = paramsSrc[i];
+
+    if (ch === ',' && depth === 0) {
+      params.push(current.trim());
+      current = '';
+      continue;
+    }
+
+    if (ch === '{' || ch === '[' || ch === '(') depth++;
+    if (ch === '}' || ch === ']' || ch === ')') depth--;
+
+    current += ch;
+  }
+
+  if (current.trim()) {
+    params.push(current.trim());
+  }
+
+  // remove default values: a = 1 → a
+  return params.map((p, i) => {
+    const cleaned = p.replace(/=.*/, '').trim();
+
+    // destructured parameter
+    if (
+      cleaned.startsWith('{') ||
+      cleaned.startsWith('[') ||
+      cleaned.startsWith('...{') ||
+      cleaned.startsWith('...[')
+    ) {
+      return `arg_${i}`;
+    }
+
+    return cleaned;
+  });
+}
+
 function flatTree(
   obj: { [key: string]: ActionCreator<Action<string>> },
   namespace = '',
 ) {
+  if (!obj) return [];
   let functions: ActionCreatorObject[] = [];
   Object.keys(obj).forEach((key) => {
     const prop = obj[key];
+    if (!prop) return;
     if (typeof prop === 'function') {
       functions.push({
         name: namespace + (key || prop.name || 'anonymous'),

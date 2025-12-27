@@ -2499,12 +2499,6 @@ importers:
       '@redux-devtools/serialize':
         specifier: workspace:^
         version: link:../redux-devtools-serialize
-      '@types/get-params':
-        specifier: ^0.1.2
-        version: 0.1.2
-      get-params:
-        specifier: ^0.1.2
-        version: 0.1.2
       immutable:
         specifier: ^5.1.4
         version: 5.1.4
@@ -4810,9 +4804,6 @@ packages:
 
   '@types/geojson@7946.0.16':
     resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
-
-  '@types/get-params@0.1.2':
-    resolution: {integrity: sha512-ujqPyr1UDsOTDngJPV+WFbR0iHT5AfZKlNPMX6XOCnQcMhEqR+r64dVC/nwYCitqjR3DcpWofnOEAInUQmI/eA==}
 
   '@types/har-format@1.2.16':
     resolution: {integrity: sha512-fluxdy7ryD3MV6h8pTfTYpy/xQzCFC7m89nOH9y94cNqJ1mDIDPut7MnRHI3F6qRmh/cT2fUjG1MLdCNb4hE9A==}
@@ -7128,9 +7119,6 @@ packages:
   get-package-type@0.1.0:
     resolution: {integrity: sha512-pjzuKtY64GYfWizNAJ0fr9VqttZkNiK2iS430LtIHzjBEr6bX8Am2zm4sW4Ro5wjWW5cAlRL1qAMTcXbjNAO2Q==}
     engines: {node: '>=8.0.0'}
-
-  get-params@0.1.2:
-    resolution: {integrity: sha512-41eOxtlGgHQRbFyA8KTH+w+32Em3cRdfBud7j67ulzmIfmaHX9doq47s0fa4P5o9H64BZX9nrYI6sJvk46Op+Q==}
 
   get-port@7.1.0:
     resolution: {integrity: sha512-QB9NKEeDg3xxVwCCwJQ9+xycaz6pBB6iQ76wiWMl1927n0Kir6alPiP+yuiICLLU4jpMe08dXfpebuQppFA2zw==}
@@ -12929,8 +12917,6 @@ snapshots:
 
   '@types/geojson@7946.0.16': {}
 
-  '@types/get-params@0.1.2': {}
-
   '@types/har-format@1.2.16': {}
 
   '@types/hex-rgba@1.0.3': {}
@@ -15894,8 +15880,6 @@ snapshots:
       math-intrinsics: 1.1.0
 
   get-package-type@0.1.0: {}
-
-  get-params@0.1.2: {}
 
   get-port@7.1.0: {}
 
