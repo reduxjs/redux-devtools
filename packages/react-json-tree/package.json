@@ -40,15 +40,15 @@
     "prepublish": "pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@types/lodash": "^4.17.23",
+    "@types/lodash": "^4.17.24",
     "react-base16-styling": "workspace:^"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "@types/react": "^19.2.8",
+    "@types/react": "^19.2.14",
     "jest": "^30.2.0",
-    "react": "^19.2.3",
-    "rimraf": "^6.1.2",
+    "react": "^19.2.4",
+    "rimraf": "^6.1.3",
     "ts-jest": "^29.4.6",
     "typescript": "~5.9.3"
   },
