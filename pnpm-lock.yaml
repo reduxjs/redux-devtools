@@ -973,10 +973,10 @@ importers:
     dependencies:
       '@apollo/server':
         specifier: ^5.2.0
-        version: 5.2.0(graphql@16.13.0)
+        version: 5.4.0(graphql@16.13.0)
       '@as-integrations/express5':
         specifier: ^1.1.2
-        version: 1.1.2(@apollo/server@5.2.0(graphql@16.13.0))(express@5.2.1)
+        version: 1.1.2(@apollo/server@5.4.0(graphql@16.13.0))(express@5.2.1)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
@@ -2732,10 +2732,9 @@ packages:
     peerDependencies:
       graphql: 14.x || 15.x || 16.x
 
-  '@apollo/server@5.2.0':
-    resolution: {integrity: sha512-OEAl5bwVitkvVkmZlgWksSnQ10FUr6q2qJMdkexs83lsvOGmd/y81X5LoETmKZux8UiQsy/A/xzP00b8hTHH/w==}
+  '@apollo/server@5.4.0':
+    resolution: {integrity: sha512-E0/2C5Rqp7bWCjaDh4NzYuEPDZ+dltTf2c0FI6GCKJA6GBetVferX3h1//1rS4+NxD36wrJsGGJK+xyT/M3ysg==}
     engines: {node: '>=20'}
-    deprecated: This version of Apollo Server is vulnerable to a denial of service (DoS) attack. Please update to @apollo/server 5.4.0 or later. For more details, see https://github.com/apollographql/apollo-server/security/advisories/GHSA-mp6q-xf9x-fwf7
     peerDependencies:
       graphql: ^16.11.0
 
@@ -3895,20 +3894,20 @@ packages:
   '@gar/promisify@1.1.3':
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
 
-  '@graphql-tools/merge@9.1.6':
-    resolution: {integrity: sha512-bTnP+4oom4nDjmkS3Ykbe+ljAp/RIiWP3R35COMmuucS24iQxGLa9Hn8VMkLIoaoPxgz6xk+dbC43jtkNsFoBw==}
+  '@graphql-tools/merge@9.1.7':
+    resolution: {integrity: sha512-Y5E1vTbTabvcXbkakdFUt4zUIzB1fyaEnVmIWN0l0GMed2gdD01TpZWLUm4RNAxpturvolrb24oGLQrBbPLSoQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@graphql-tools/schema@10.0.30':
-    resolution: {integrity: sha512-yPXU17uM/LR90t92yYQqn9mAJNOVZJc0nQtYeZyZeQZeQjwIGlTubvvoDL0fFVk+wZzs4YQOgds2NwSA4npodA==}
+  '@graphql-tools/schema@10.0.31':
+    resolution: {integrity: sha512-ZewRgWhXef6weZ0WiP7/MV47HXiuFbFpiDUVLQl6mgXsWSsGELKFxQsyUCBos60Qqy1JEFAIu3Ns6GGYjGkqkQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@graphql-tools/utils@10.11.0':
-    resolution: {integrity: sha512-iBFR9GXIs0gCD+yc3hoNswViL1O5josI33dUqiNStFI/MHLCEPduasceAcazRH77YONKNiviHBV8f7OgcT4o2Q==}
+  '@graphql-tools/utils@11.0.0':
+    resolution: {integrity: sha512-bM1HeZdXA2C3LSIeLOnH/bcqSgbQgKEDrjxODjqi3y58xai2TkNrtYcQSoWzGbt9VMN1dORGjR7Vem8SPnUFQA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
@@ -8190,8 +8189,8 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  lru-cache@11.2.4:
-    resolution: {integrity: sha512-B5Y16Jr9LB9dHVkh6ZevG+vAbOsNOYCX+sXvFWFu7B3Iz5mijW3zdbMyhsh8ANd2mSWBYdJgnqi+mL7/LrOPYg==}
+  lru-cache@11.2.6:
+    resolution: {integrity: sha512-ESL2CrkS/2wTPfuend7Zhkzo2u0daGJ/A2VucJOgQ/C48S/zB8MMeMHSGKYpXhIjbPxfuezITkaBH1wqv00DDQ==}
     engines: {node: 20 || >=22}
 
   lru-cache@5.1.1:
@@ -10404,7 +10403,7 @@ snapshots:
       '@apollo/utils.logger': 3.0.0
       graphql: 16.13.0
 
-  '@apollo/server@5.2.0(graphql@16.13.0)':
+  '@apollo/server@5.4.0(graphql@16.13.0)':
     dependencies:
       '@apollo/cache-control-types': 1.0.3(graphql@16.13.0)
       '@apollo/server-gateway-interface': 2.0.0(graphql@16.13.0)
@@ -10416,14 +10415,15 @@ snapshots:
       '@apollo/utils.logger': 3.0.0
       '@apollo/utils.usagereporting': 2.1.0(graphql@16.13.0)
       '@apollo/utils.withrequired': 3.0.0
-      '@graphql-tools/schema': 10.0.30(graphql@16.13.0)
+      '@graphql-tools/schema': 10.0.31(graphql@16.13.0)
       async-retry: 1.3.3
       body-parser: 2.2.2
+      content-type: 1.0.5
       cors: 2.8.6
       finalhandler: 2.1.1
       graphql: 16.13.0
       loglevel: 1.9.2
-      lru-cache: 11.2.4
+      lru-cache: 11.2.6
       negotiator: 1.0.0
       uuid: 11.1.0
       whatwg-mimetype: 4.0.0
@@ -10450,7 +10450,7 @@ snapshots:
   '@apollo/utils.keyvaluecache@4.0.0':
     dependencies:
       '@apollo/utils.logger': 3.0.0
-      lru-cache: 11.2.4
+      lru-cache: 11.2.6
 
   '@apollo/utils.logger@3.0.0': {}
 
@@ -10553,9 +10553,9 @@ snapshots:
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@as-integrations/express5@1.1.2(@apollo/server@5.2.0(graphql@16.13.0))(express@5.2.1)':
+  '@as-integrations/express5@1.1.2(@apollo/server@5.4.0(graphql@16.13.0))(express@5.2.1)':
     dependencies:
-      '@apollo/server': 5.2.0(graphql@16.13.0)
+      '@apollo/server': 5.4.0(graphql@16.13.0)
       express: 5.2.1
 
   '@asamuzakjp/css-color@3.2.0':
@@ -11901,20 +11901,20 @@ snapshots:
   '@gar/promisify@1.1.3':
     optional: true
 
-  '@graphql-tools/merge@9.1.6(graphql@16.13.0)':
+  '@graphql-tools/merge@9.1.7(graphql@16.13.0)':
     dependencies:
-      '@graphql-tools/utils': 10.11.0(graphql@16.13.0)
+      '@graphql-tools/utils': 11.0.0(graphql@16.13.0)
       graphql: 16.13.0
       tslib: 2.8.1
 
-  '@graphql-tools/schema@10.0.30(graphql@16.13.0)':
+  '@graphql-tools/schema@10.0.31(graphql@16.13.0)':
     dependencies:
-      '@graphql-tools/merge': 9.1.6(graphql@16.13.0)
-      '@graphql-tools/utils': 10.11.0(graphql@16.13.0)
+      '@graphql-tools/merge': 9.1.7(graphql@16.13.0)
+      '@graphql-tools/utils': 11.0.0(graphql@16.13.0)
       graphql: 16.13.0
       tslib: 2.8.1
 
-  '@graphql-tools/utils@10.11.0(graphql@16.13.0)':
+  '@graphql-tools/utils@11.0.0(graphql@16.13.0)':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.13.0)
       '@whatwg-node/promise-helpers': 1.3.2
@@ -17279,7 +17279,7 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
-  lru-cache@11.2.4: {}
+  lru-cache@11.2.6: {}
 
   lru-cache@5.1.1:
     dependencies:
@@ -17822,7 +17822,7 @@ snapshots:
 
   path-scurry@2.0.2:
     dependencies:
-      lru-cache: 11.2.4
+      lru-cache: 11.2.6
       minipass: 7.1.3
 
   path-to-regexp@0.1.12: {}
