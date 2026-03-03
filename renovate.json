@@ -1,5 +1,9 @@
 {
-  "extends": ["config:base", "group:allNonMajor", ":maintainLockFilesWeekly"],
+  "extends": [
+    "config:recommended",
+    "group:allNonMajor",
+    ":maintainLockFilesWeekly"
+  ],
   "rangeStrategy": "bump",
   "postUpdateOptions": ["pnpmDedupe"],
   "rebaseWhen": "conflicted",
