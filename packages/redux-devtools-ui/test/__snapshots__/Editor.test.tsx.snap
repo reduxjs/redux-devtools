@@ -5,7 +5,7 @@ exports[`Editor renders correctly 1`] = `
   class="cm-theme"
 >
   <div
-    class="cm-editor ͼ1 ͼ3 ͼ4 ͼ18 ͼ16"
+    class="cm-editor ͼ1 ͼ3 ͼ4 ͼ1r ͼ16"
   >
     <div
       aria-live="polite"
@@ -71,7 +71,30 @@ exports[`Editor renders correctly 1`] = `
         <div
           class="cm-line cm-activeLine"
         >
-          var a = 1;
+          <span
+            class="ͼ19"
+          >
+            var
+          </span>
+           
+          <span
+            class="ͼ1c"
+          >
+            a
+          </span>
+           
+          <span
+            class="ͼ1f"
+          >
+            =
+          </span>
+           
+          <span
+            class="ͼ1b"
+          >
+            1
+          </span>
+          ;
         </div>
       </div>
       <div
