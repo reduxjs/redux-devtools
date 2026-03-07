@@ -5,11 +5,11 @@ import type { LabelRenderer } from 'react-json-tree';
 import { PerformAction } from '@redux-devtools/core';
 import type { Delta } from 'jsondiffpatch';
 import type { JSX } from '@emotion/react/jsx-runtime';
-import { DEFAULT_STATE, DevtoolsInspectorState } from './redux';
-import ActionPreviewHeader from './ActionPreviewHeader';
-import DiffTab from './tabs/DiffTab';
-import StateTab from './tabs/StateTab';
-import ActionTab from './tabs/ActionTab';
+import { DEFAULT_STATE, DevtoolsInspectorState } from './redux.js';
+import ActionPreviewHeader from './ActionPreviewHeader.js';
+import DiffTab from './tabs/DiffTab.js';
+import StateTab from './tabs/StateTab.js';
+import ActionTab from './tabs/ActionTab.js';
 
 export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;

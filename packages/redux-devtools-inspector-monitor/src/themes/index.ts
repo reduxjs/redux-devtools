@@ -1,1 +1,1 @@
-export { default as inspector } from './inspector';
+export { default as inspector } from './inspector.js';

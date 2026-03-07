@@ -7,8 +7,8 @@ import type { Base16Theme } from 'react-base16-styling';
 import { css } from '@emotion/react';
 import type { Interpolation, Theme } from '@emotion/react';
 import type { JSX } from '@emotion/react/jsx-runtime';
-import getItemString from './getItemString';
-import getJsonTreeTheme from './getJsonTreeTheme';
+import getItemString from './getItemString.js';
+import getJsonTreeTheme from './getJsonTreeTheme.js';
 
 function stringifyAndShrink(val: any, isWideLayout?: boolean) {
   if (val === null) {
