@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.esm.react.base.json",
   "compilerOptions": {
-    "outDir": "types",
+    "outDir": "lib",
     "resolveJsonModule": true
   },
   "include": ["src"]
