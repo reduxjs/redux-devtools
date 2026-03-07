@@ -5,9 +5,9 @@ import { javascript } from '@codemirror/lang-javascript';
 import type { ViewUpdate } from '@codemirror/view';
 import { tags as t } from '@lezer/highlight';
 import { useTheme } from '@emotion/react';
+import type { ThemeFromProvider } from '../utils/theme';
 
 import '../../fonts/index.css';
-import { ThemeFromProvider } from '../utils/theme';
 
 export interface EditorProps {
   value?: string;
@@ -33,7 +33,17 @@ export default function Editor({
       ? undefined
       : createTheme({
           theme: theme.light ? 'light' : 'dark',
-          settings: {},
+          settings: {
+            background: theme.base00,
+            foreground: theme.base04,
+            selection: theme.base01,
+            selectionMatch: 'transparent',
+            gutterBackground: theme.base01,
+            gutterForeground: theme.base05,
+            gutterBorder: 'transparent',
+            gutterActiveForeground: theme.base05,
+            lineHighlight: 'transparent',
+          },
           styles: [],
         });
 
