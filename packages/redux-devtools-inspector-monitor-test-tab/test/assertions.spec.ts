@@ -1,5 +1,5 @@
-import { assertion } from '../src/vanilla/mocha';
-import { compare } from '../src/TestGenerator';
+import { assertion } from '../src/vanilla/mocha/index.js';
+import { compare } from '../src/TestGenerator.js';
 
 const computedStates = [
   { state: { o1: 0 } },

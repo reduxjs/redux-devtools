@@ -1,4 +1,4 @@
-import StackFrame from './react-error-overlay/utils/stack-frame';
+import StackFrame from './react-error-overlay/utils/stack-frame.js';
 
 const isFF = navigator.userAgent.includes('Firefox');
 
