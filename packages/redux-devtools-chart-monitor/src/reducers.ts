@@ -1,6 +1,6 @@
 import { Action } from 'redux';
-import { ChartMonitorAction, TOGGLE_VISIBILITY } from './actions';
-import { ChartMonitorProps } from './ChartMonitor';
+import { ChartMonitorAction, TOGGLE_VISIBILITY } from './actions.js';
+import { ChartMonitorProps } from './ChartMonitor.js';
 
 function toggleVisibility<S, A extends Action<string>>(
   props: ChartMonitorProps<S, A>,

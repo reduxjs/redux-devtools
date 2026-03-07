@@ -1,1 +1,1 @@
-export { default as ChartMonitor } from './ChartMonitor';
+export { default as ChartMonitor } from './ChartMonitor.js';

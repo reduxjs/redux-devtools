@@ -5,7 +5,7 @@ import { base16Themes } from 'react-base16-styling';
 import type { Base16Theme } from 'react-base16-styling';
 import { Action, Dispatch } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
-import { ChartMonitorState } from './reducers';
+import { ChartMonitorState } from './reducers.js';
 
 const wrapperStyle = {
   width: '100%',
