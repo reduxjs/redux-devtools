@@ -3,8 +3,8 @@ import {
   UPDATE_SCROLL_TOP,
   START_CONSECUTIVE_TOGGLE,
   LogMonitorAction,
-} from './actions';
-import { LogMonitorProps } from './LogMonitor';
+} from './actions.js';
+import { LogMonitorProps } from './LogMonitor.js';
 
 function initialScrollTop<S, A extends Action<string>>(
   props: LogMonitorProps<S, A>,

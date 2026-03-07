@@ -2,9 +2,9 @@ import React, { CSSProperties, PureComponent } from 'react';
 import { ActionCreators, LiftedAction } from '@redux-devtools/core';
 import type { Base16Theme } from 'react-base16-styling';
 import { Action, Dispatch } from 'redux';
-import LogMonitorButton from './LogMonitorButton';
-import { LogMonitorAction } from './actions';
-import { LogMonitorState } from './reducers';
+import LogMonitorButton from './LogMonitorButton.js';
+import { LogMonitorAction } from './actions.js';
+import { LogMonitorState } from './reducers.js';
 
 const { reset, rollback, commit, sweep } = ActionCreators;
 

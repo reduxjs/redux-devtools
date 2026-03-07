@@ -3,7 +3,7 @@ import { JSONTree } from 'react-json-tree';
 import type { ShouldExpandNodeInitially, StylingValue } from 'react-json-tree';
 import type { Base16Theme } from 'react-base16-styling';
 import { Action } from 'redux';
-import LogMonitorEntryAction from './LogMonitorEntryAction';
+import LogMonitorEntryAction from './LogMonitorEntryAction.js';
 
 const styles: { entry: CSSProperties; root: CSSProperties } = {
   entry: {
