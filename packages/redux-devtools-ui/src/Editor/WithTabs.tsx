@@ -20,7 +20,6 @@ interface TabProps {
   lineNumbers: boolean;
 }
 
-/* eslint-disable react/prop-types */
 export default class WithTabs extends Component<WithTabsProps> {
   state = {
     selected: 'Function 1',
