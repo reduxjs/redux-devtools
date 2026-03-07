@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { Action } from 'redux';
-import { InspectorMonitor, Tab } from '@redux-devtools/inspector-monitor';
+import {
+  DevtoolsInspectorAction,
+  DevtoolsInspectorProps,
+  DevtoolsInspectorState,
+  InspectorMonitor,
+  Tab,
+} from '@redux-devtools/inspector-monitor';
 import { TraceTab } from '@redux-devtools/inspector-monitor-trace-tab';
 import { TestTab } from '@redux-devtools/inspector-monitor-test-tab';
 import { DATA_TYPE_KEY } from '../../../constants/dataTypes';
@@ -34,8 +40,12 @@ interface Props {
 }
 
 class InspectorWrapper extends Component<Props> {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  static update = InspectorMonitor.update;
+  static update: (
+    props: DevtoolsInspectorProps<unknown, Action<string>>,
+    state: DevtoolsInspectorState | undefined,
+    action: DevtoolsInspectorAction,
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+  ) => DevtoolsInspectorState = InspectorMonitor.update;
 
   render() {
     const { features, ...rest } = this.props;
