@@ -1708,9 +1708,6 @@ importers:
 
   packages/redux-devtools-log-monitor:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@types/lodash.debounce':
         specifier: ^4.0.9
         version: 4.0.9
@@ -1724,27 +1721,6 @@ importers:
         specifier: workspace:^
         version: link:../react-json-tree
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@redux-devtools/core':
         specifier: workspace:^
         version: link:../redux-devtools
@@ -2112,9 +2088,6 @@ importers:
 
   packages/redux-devtools-slider-monitor:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
@@ -2128,24 +2101,6 @@ importers:
         specifier: workspace:^
         version: link:../react-base16-styling
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@redux-devtools/core':
         specifier: workspace:^
         version: link:../redux-devtools
