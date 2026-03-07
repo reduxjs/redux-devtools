@@ -13,9 +13,9 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "type": "module",
   "sideEffects": [
     "*.css"
   ],
@@ -28,20 +28,16 @@
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build --quiet",
     "build": "pnpm run build:lib && pnpm run build:storybook",
-    "build:lib": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types && pnpm run build:css",
-    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build:lib": "tsc && pnpm run build:css",
     "build:css": "ncp fonts lib/fonts",
     "clean": "rimraf lib storybook-static",
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
+    "prepublish": "pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.6",
     "@codemirror/lang-javascript": "^6.2.4",
     "@codemirror/view": "^6.39.7",
     "@lezer/highlight": "^1.2.3",
@@ -60,15 +56,9 @@
     "simple-element-resize-detector": "^1.3.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
-    "@babel/core": "^7.29.0",
-    "@babel/eslint-parser": "^7.28.6",
-    "@babel/plugin-transform-runtime": "^7.29.0",
-    "@babel/preset-env": "^7.29.0",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@jest/globals": "^30.2.0",
     "@storybook/addon-onboarding": "^10.2.14",
     "@storybook/react-vite": "^10.2.14",
     "@testing-library/dom": "^10.4.1",
@@ -78,7 +68,6 @@
     "@types/node": "^24.11.0",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.14",
-    "babel-loader": "^10.0.0",
     "csstype": "^3.2.3",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",

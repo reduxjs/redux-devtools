@@ -4,8 +4,8 @@ import { MdWarning } from 'react-icons/md';
 import { MdError } from 'react-icons/md';
 import { MdCheckCircle } from 'react-icons/md';
 import type { Base16Theme } from 'react-base16-styling';
-import createStyledComponent from '../utils/createStyledComponent';
-import styles from './styles';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import styles from './styles/index.js';
 
 const NotificationWrapper = createStyledComponent(styles);
 

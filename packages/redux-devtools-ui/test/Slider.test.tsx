@@ -1,6 +1,7 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Slider } from '../src';
+import { Slider } from '../src/index.js';
 
 describe('Slider', function () {
   it('renders correctly', () => {

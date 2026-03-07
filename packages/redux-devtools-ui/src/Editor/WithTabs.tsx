@@ -1,6 +1,6 @@
 import React, { Component, ComponentType } from 'react';
-import Editor from './';
-import Tabs from '../Tabs';
+import Editor from './index.js';
+import Tabs from '../Tabs/index.js';
 
 const value1 = `
   const func1 = () => {}

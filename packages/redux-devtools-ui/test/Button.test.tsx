@@ -1,7 +1,8 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Button } from '../src';
+import { Button } from '../src/index.js';
 
 describe('Button', function () {
   it('renders correctly', () => {

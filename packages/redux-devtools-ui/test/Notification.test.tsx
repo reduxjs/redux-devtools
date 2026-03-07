@@ -1,7 +1,8 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Notification } from '../src';
+import { Notification } from '../src/index.js';
 
 describe('Notification', function () {
   it('renders correctly', () => {

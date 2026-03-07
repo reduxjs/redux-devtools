@@ -1,8 +1,9 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ContextMenu } from '../src';
-import { items } from '../src/ContextMenu/data';
+import { ContextMenu } from '../src/index.js';
+import { items } from '../src/ContextMenu/data.js';
 
 describe('ContextMenu', function () {
   it('renders correctly', () => {

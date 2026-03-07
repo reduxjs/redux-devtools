@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ripple } from '../../utils/animations';
-import { Theme } from '../../themes/default';
-import { StyleProps } from './default';
+import { ripple } from '../../utils/animations.js';
+import { Theme } from '../../themes/default.js';
+import { StyleProps } from './default.js';
 
 export const style = ({ theme, main }: StyleProps & { theme: Theme }) => css`
   display: flex;

@@ -1,2 +1,2 @@
-export { style as default } from './default';
-export { style as material } from './material';
+export { style as default } from './default.js';
+export { style as material } from './material.js';

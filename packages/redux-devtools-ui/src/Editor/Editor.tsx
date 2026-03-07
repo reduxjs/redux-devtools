@@ -6,8 +6,8 @@ import { javascript } from '@codemirror/lang-javascript';
 import type { ViewUpdate } from '@codemirror/view';
 import { tags as t } from '@lezer/highlight';
 import { useTheme } from '@emotion/react';
-import type { ThemeFromProvider } from '../utils/theme';
-import { defaultStyle } from './styles';
+import type { ThemeFromProvider } from '../utils/theme.js';
+import { defaultStyle } from './styles/index.js';
 
 import '../../fonts/index.css';
 
