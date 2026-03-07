@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import CodeMirror from '@uiw/react-codemirror';
 import { createTheme } from '@uiw/codemirror-themes';
 import { javascript } from '@codemirror/lang-javascript';
@@ -6,8 +7,14 @@ import type { ViewUpdate } from '@codemirror/view';
 import { tags as t } from '@lezer/highlight';
 import { useTheme } from '@emotion/react';
 import type { ThemeFromProvider } from '../utils/theme';
+import { defaultStyle } from './styles';
 
 import '../../fonts/index.css';
+
+const EditorContainer = styled.div(
+  '' as unknown as TemplateStringsArray,
+  defaultStyle,
+);
 
 export interface EditorProps {
   value?: string;
@@ -57,7 +64,6 @@ export default function Editor({
             { tag: t.comment, color: theme.base05, fontStyle: 'italic' },
             { tag: t.string, color: theme.base0B },
             { tag: t.meta, color: theme.base0B },
-            { tag: t.bracket, color: theme.base09 },
             { tag: t.tagName, color: theme.base02 },
             { tag: t.attributeName, color: theme.base0C },
             { tag: t.attributeName, color: theme.base02, cursor: 'pointer' },
@@ -77,17 +83,19 @@ export default function Editor({
         });
 
   return (
-    <CodeMirror
-      value={value}
-      theme={myTheme}
-      extensions={[javascript()]}
-      onChange={onChange}
-      readOnly={readOnly}
-      autoFocus={autofocus}
-      basicSetup={{
-        lineNumbers,
-        foldGutter,
-      }}
-    />
+    <EditorContainer>
+      <CodeMirror
+        value={value}
+        theme={myTheme}
+        extensions={[javascript()]}
+        onChange={onChange}
+        readOnly={readOnly}
+        autoFocus={autofocus}
+        basicSetup={{
+          lineNumbers,
+          foldGutter,
+        }}
+      />
+    </EditorContainer>
   );
 }
