@@ -7,6 +7,6 @@ export default [
   ...eslintTs(import.meta.dirname),
   ...eslintTsJest(import.meta.dirname),
   {
-    ignores: ['lib'],
+    ignores: ['jest.config.ts', 'lib'],
   },
 ];
