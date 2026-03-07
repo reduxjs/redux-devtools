@@ -1,8 +1,9 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Form } from '../src';
-import { schema, uiSchema, formData } from '../src/Form/schema';
+import { Form } from '../src/index.js';
+import { schema, uiSchema, formData } from '../src/Form/schema.js';
 
 describe('Form', function () {
   let random: () => number;

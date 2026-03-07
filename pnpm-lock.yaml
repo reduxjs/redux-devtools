@@ -2351,9 +2351,6 @@ importers:
 
   packages/redux-devtools-ui:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@codemirror/lang-javascript':
         specifier: ^6.2.4
         version: 6.2.5
@@ -2403,33 +2400,15 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
       '@emotion/styled':
         specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4)
+      '@jest/globals':
+        specifier: ^30.2.0
+        version: 30.2.0
       '@storybook/addon-onboarding':
         specifier: ^10.2.14
         version: 10.2.14(storybook@10.2.14(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
@@ -2457,9 +2436,6 @@ importers:
       '@types/react':
         specifier: ^19.2.14
         version: 19.2.14
-      babel-loader:
-        specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.29.0)(webpack@5.105.3(esbuild@0.27.3))
       csstype:
         specifier: ^3.2.3
         version: 3.2.3
@@ -14860,12 +14836,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-loader@10.0.0(@babel/core@7.29.0)(webpack@5.105.3(esbuild@0.27.3)):
-    dependencies:
-      '@babel/core': 7.29.0
-      find-up: 5.0.0
-      webpack: 5.105.3(esbuild@0.27.3)
-
   babel-loader@10.0.0(@babel/core@7.29.0)(webpack@5.105.3):
     dependencies:
       '@babel/core': 7.29.0
@@ -19556,6 +19526,7 @@ snapshots:
       webpack: 5.105.3(esbuild@0.27.3)
     optionalDependencies:
       esbuild: 0.27.3
+    optional: true
 
   terser-webpack-plugin@5.3.16(esbuild@0.27.3)(webpack@5.105.3):
     dependencies:
@@ -20112,6 +20083,7 @@ snapshots:
       - '@swc/core'
       - esbuild
       - uglify-js
+    optional: true
 
   webpack@5.105.3(esbuild@0.27.3)(webpack-cli@6.0.1):
     dependencies:

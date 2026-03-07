@@ -1,8 +1,9 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Select } from '../src';
-import { options } from '../src/Select/options';
+import { Select } from '../src/index.js';
+import { options } from '../src/Select/options.js';
 
 describe('Select', function () {
   it('renders correctly', () => {

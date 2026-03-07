@@ -1,7 +1,8 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { SegmentedControl } from '../src';
+import { SegmentedControl } from '../src/index.js';
 
 describe('SegmentedControl', function () {
   it('renders correctly', () => {
