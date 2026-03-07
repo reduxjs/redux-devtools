@@ -20,8 +20,7 @@
     "lib",
     "src"
   ],
-  "main": "lib/instrument.js",
-  "module": "lib/instrument.d.ts",
+  "exports": "./lib/instrument.js",
   "type": "module",
   "sideEffects": false,
   "repository": {
