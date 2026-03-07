@@ -2,7 +2,7 @@ import React, { PureComponent, Component } from 'react';
 import { stringify } from 'javascript-stringify';
 import objectPath from 'object-path';
 import jsan from 'jsan';
-import * as diff from 'simple-diff';
+import diff from 'simple-diff';
 import es6template from 'es6template';
 import { Editor } from '@redux-devtools/ui';
 export const fromPath = (path) => path.map((a) => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');

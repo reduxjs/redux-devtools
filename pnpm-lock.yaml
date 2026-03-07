@@ -14,6 +14,9 @@ patchedDependencies:
   '@uiw/codemirror-themes':
     hash: 0807c91492c1c4a6d78cf0e0657f8658d883398c3e1fa9b0eb9f3c3edaca4f6c
     path: patches/@uiw__codemirror-themes.patch
+  simple-diff:
+    hash: 29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576
+    path: patches/simple-diff.patch
 
 importers:
 
@@ -1221,9 +1224,6 @@ importers:
 
   packages/redux-devtools-inspector-monitor-test-tab:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@redux-devtools/ui':
         specifier: workspace:^
         version: link:../redux-devtools-ui
@@ -1244,29 +1244,8 @@ importers:
         version: 5.6.0(react@19.2.4)
       simple-diff:
         specifier: ^1.7.2
-        version: 1.7.2
+        version: 1.7.2(patch_hash=29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576)
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
@@ -18921,7 +18900,7 @@ snapshots:
 
   simple-concat@1.0.1: {}
 
-  simple-diff@1.7.2: {}
+  simple-diff@1.7.2(patch_hash=29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576): {}
 
   simple-element-resize-detector@1.3.0: {}
 
