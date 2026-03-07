@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldProps, Widget, WidgetProps } from '@rjsf/utils';
-import Select from '../Select';
-import Slider from '../Slider';
+import Select from '../Select/index.js';
+import Slider from '../Slider/index.js';
 
 /* eslint-disable react/prop-types */
 const SelectWidget: Widget = ({

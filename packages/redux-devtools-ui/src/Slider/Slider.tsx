@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import type { Base16Theme } from 'react-base16-styling';
-import createStyledComponent from '../utils/createStyledComponent';
-import * as styles from './styles';
-import { containerStyle } from './styles/common';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import * as styles from './styles/index.js';
+import { containerStyle } from './styles/common.js';
 
 const SliderWrapper = createStyledComponent(styles);
 const ContainerWithValue = createStyledComponent(containerStyle);

@@ -14,12 +14,12 @@ import {
   Slider,
   SegmentedControl,
   Tabs as TabsComponent,
-} from '../';
-import { options } from '../Select/options';
-import { simple10Tabs } from '../Tabs/data';
-import { BorderPosition } from './styles/Toolbar';
-import { TooltipPosition } from '../Button/Button';
-import { Position } from '../Tabs/Tabs';
+} from '../index.js';
+import { options } from '../Select/options.js';
+import { simple10Tabs } from '../Tabs/data.js';
+import { BorderPosition } from './styles/Toolbar.js';
+import { TooltipPosition } from '../Button/Button.js';
+import { Position } from '../Tabs/Tabs.js';
 
 const Container = styled.div`
   display: flex;
