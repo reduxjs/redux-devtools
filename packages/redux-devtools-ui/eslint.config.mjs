@@ -7,6 +7,6 @@ export default [
   ...eslintTsReact(import.meta.dirname),
   ...eslintTsReactJest(import.meta.dirname),
   {
-    ignores: ['.storybook', 'lib', 'storybook-static'],
+    ignores: ['.storybook', 'jest.config.ts', 'lib', 'storybook-static'],
   },
 ];
