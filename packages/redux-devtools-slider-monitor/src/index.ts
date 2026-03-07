@@ -1,1 +1,1 @@
-export { default as SliderMonitor } from './SliderMonitor';
+export { default as SliderMonitor } from './SliderMonitor.js';

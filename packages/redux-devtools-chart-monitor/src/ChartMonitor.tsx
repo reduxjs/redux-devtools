@@ -10,8 +10,8 @@ import deepmerge from 'deepmerge';
 import { Action, Dispatch } from 'redux';
 import type { Options } from 'd3-state-visualizer';
 
-import reducer, { ChartMonitorState } from './reducers';
-import Chart, { Props } from './Chart';
+import reducer, { ChartMonitorState } from './reducers.js';
+import Chart, { Props } from './Chart.js';
 
 const { reset, rollback, commit, sweep, toggleAction } = ActionCreators;
 

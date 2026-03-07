@@ -6,12 +6,12 @@
  */
 
 import React, { Component, CSSProperties } from 'react';
-import CodeBlock from './StackFrameCodeBlock';
-import { getPrettyURL } from '../utils/getPrettyURL';
+import CodeBlock from './StackFrameCodeBlock.js';
+import { getPrettyURL } from '../utils/getPrettyURL.js';
 import { base16Themes } from 'react-base16-styling';
 
-import type { StackFrame as StackFrameType } from '../utils/stack-frame';
-import type { ErrorLocation } from '../utils/parseCompileError';
+import type { StackFrame as StackFrameType } from '../utils/stack-frame.js';
+import type { ErrorLocation } from '../utils/parseCompileError.js';
 
 const theme = base16Themes.nicinabox;
 

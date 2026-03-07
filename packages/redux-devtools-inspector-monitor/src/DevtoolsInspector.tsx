@@ -10,18 +10,18 @@ import type { Delta, DiffContext } from 'jsondiffpatch';
 import {
   createInspectorMonitorThemeFromBase16Theme,
   resolveBase16Theme,
-} from './utils/themes';
-import type { Base16ThemeName } from './utils/themes';
-import ActionList from './ActionList';
-import ActionPreview, { Tab } from './ActionPreview';
-import getInspectedState from './utils/getInspectedState';
-import createDiffPatcher from './createDiffPatcher';
+} from './utils/themes.js';
+import type { Base16ThemeName } from './utils/themes.js';
+import ActionList from './ActionList.js';
+import ActionPreview, { Tab } from './ActionPreview.js';
+import getInspectedState from './utils/getInspectedState.js';
+import createDiffPatcher from './createDiffPatcher.js';
 import {
   DevtoolsInspectorAction,
   DevtoolsInspectorState,
   reducer,
   updateMonitorState,
-} from './redux';
+} from './redux.js';
 import { ThemeProvider } from '@emotion/react';
 
 const {

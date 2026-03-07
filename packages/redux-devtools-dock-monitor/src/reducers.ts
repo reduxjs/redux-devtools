@@ -6,9 +6,9 @@ import {
   CHANGE_SIZE,
   DockMonitorAction,
   TOGGLE_VISIBILITY,
-} from './actions';
-import { POSITIONS } from './constants';
-import { DockMonitorProps } from './DockMonitor';
+} from './actions.js';
+import { POSITIONS } from './constants.js';
+import { DockMonitorProps } from './DockMonitor.js';
 
 export interface DockMonitorState {
   position: 'left' | 'top' | 'right' | 'bottom';

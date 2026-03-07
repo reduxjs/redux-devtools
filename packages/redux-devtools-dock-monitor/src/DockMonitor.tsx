@@ -8,8 +8,8 @@ import {
   changePosition,
   changeSize,
   DockMonitorAction,
-} from './actions';
-import reducer, { DockMonitorState } from './reducers';
+} from './actions.js';
+import reducer, { DockMonitorState } from './reducers.js';
 import parseKey from 'parse-key';
 
 interface KeyObject {

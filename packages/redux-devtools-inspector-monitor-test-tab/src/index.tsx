@@ -14,13 +14,13 @@ import {
   DevtoolsInspectorState,
   TabComponentProps,
 } from '@redux-devtools/inspector-monitor';
-import { formSchema, uiSchema, defaultFormData } from './templateForm';
-import TestGenerator from './TestGenerator';
-import jestTemplate from './redux/jest/template';
-import mochaTemplate from './redux/mocha/template';
-import tapeTemplate from './redux/tape/template';
-import avaTemplate from './redux/ava/template';
-import { Template } from './types';
+import { formSchema, uiSchema, defaultFormData } from './templateForm.js';
+import TestGenerator from './TestGenerator.js';
+import jestTemplate from './redux/jest/template.js';
+import mochaTemplate from './redux/mocha/template.js';
+import tapeTemplate from './redux/tape/template.js';
+import avaTemplate from './redux/ava/template.js';
+import { Template } from './types.js';
 
 export const getDefaultTemplates = (/* lib */): Template[] =>
   /*
@@ -186,11 +186,11 @@ export class TestTab<S, A extends Action<string>> extends Component<
   }
 }
 
-export { default as reduxAvaTemplate } from './redux/ava';
-export { default as reduxJestTemplate } from './redux/jest';
-export { default as reduxMochaTemplate } from './redux/mocha';
-export { default as reduxTapeTemplate } from './redux/tape';
-export { default as vanillaAvaTemplate } from './vanilla/ava';
-export { default as vanillaJestTemplate } from './vanilla/jest';
-export { default as vanillaMochaTemplate } from './vanilla/mocha';
-export { default as vanillaTapeTemplate } from './vanilla/tape';
+export { default as reduxAvaTemplate } from './redux/ava/index.js';
+export { default as reduxJestTemplate } from './redux/jest/index.js';
+export { default as reduxMochaTemplate } from './redux/mocha/index.js';
+export { default as reduxTapeTemplate } from './redux/tape/index.js';
+export { default as vanillaAvaTemplate } from './vanilla/ava/index.js';
+export { default as vanillaJestTemplate } from './vanilla/jest/index.js';
+export { default as vanillaMochaTemplate } from './vanilla/mocha/index.js';
+export { default as vanillaTapeTemplate } from './vanilla/tape/index.js';

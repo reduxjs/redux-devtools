@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { TraceTab } from '../src/StackTraceTab';
+import { TraceTab } from '../src/StackTraceTab.js';
 
 const actions = {
   0: { type: 'PERFORM_ACTION', action: { type: '@@INIT' } },

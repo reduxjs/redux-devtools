@@ -1,9 +1,9 @@
 import React from 'react';
 import { JSONTree } from 'react-json-tree';
 import { Action } from 'redux';
-import getItemString from './getItemString';
-import getJsonTreeTheme from './getJsonTreeTheme';
-import { TabComponentProps } from '../ActionPreview';
+import getItemString from './getItemString.js';
+import getJsonTreeTheme from './getJsonTreeTheme.js';
+import { TabComponentProps } from '../ActionPreview.js';
 
 const StateTab: React.FunctionComponent<
   TabComponentProps<any, Action<string>>

@@ -1,2 +1,2 @@
-export { default as RtkQueryMonitor } from './containers/RtkQueryMonitor';
-export type { ExternalProps } from './types';
+export { default as RtkQueryMonitor } from './containers/RtkQueryMonitor.js';
+export type { ExternalProps } from './types.js';

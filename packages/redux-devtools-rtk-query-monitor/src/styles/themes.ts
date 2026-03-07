@@ -6,7 +6,7 @@ import {
 import type { Base16Theme, StylingConfig } from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import { createContext } from 'react';
-import { StyleUtils } from '../types';
+import { StyleUtils } from '../types.js';
 
 export function resolveBase16Theme(
   theme: keyof typeof base16Themes | Base16Theme,

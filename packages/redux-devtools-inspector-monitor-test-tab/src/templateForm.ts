@@ -1,4 +1,4 @@
-import { Template } from './types';
+import { Template } from './types.js';
 
 export const formSchema = {
   type: 'object' as const,

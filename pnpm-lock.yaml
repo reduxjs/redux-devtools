@@ -14,6 +14,9 @@ patchedDependencies:
   '@uiw/codemirror-themes':
     hash: 0807c91492c1c4a6d78cf0e0657f8658d883398c3e1fa9b0eb9f3c3edaca4f6c
     path: patches/@uiw__codemirror-themes.patch
+  simple-diff:
+    hash: 29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576
+    path: patches/simple-diff.patch
 
 importers:
 
@@ -898,9 +901,6 @@ importers:
 
   packages/redux-devtools-chart-monitor:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       d3-state-visualizer:
         specifier: workspace:^
         version: link:../d3-state-visualizer
@@ -911,27 +911,6 @@ importers:
         specifier: workspace:^
         version: link:../react-base16-styling
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@redux-devtools/core':
         specifier: workspace:^
         version: link:../redux-devtools
@@ -1104,9 +1083,6 @@ importers:
 
   packages/redux-devtools-dock-monitor:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       parse-key:
         specifier: ^0.2.1
         version: 0.2.1
@@ -1114,27 +1090,6 @@ importers:
         specifier: workspace:^
         version: link:../react-dock
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@redux-devtools/core':
         specifier: workspace:^
         version: link:../redux-devtools
@@ -1193,9 +1148,6 @@ importers:
 
   packages/redux-devtools-inspector-monitor:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@dnd-kit/core':
         specifier: ^6.3.1
         version: 6.3.1(patch_hash=bee825e5edf3dc4325af458bf5a68b629e8b0a189ea0eee259b66d28981f8a17)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1239,30 +1191,6 @@ importers:
         specifier: workspace:^
         version: link:../react-json-tree
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@emotion/babel-preset-css-prop':
-        specifier: ^11.12.0
-        version: 11.12.0(@babel/core@7.29.0)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
@@ -1296,9 +1224,6 @@ importers:
 
   packages/redux-devtools-inspector-monitor-test-tab:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@redux-devtools/ui':
         specifier: workspace:^
         version: link:../redux-devtools-ui
@@ -1319,29 +1244,8 @@ importers:
         version: 5.6.0(react@19.2.4)
       simple-diff:
         specifier: ^1.7.2
-        version: 1.7.2
+        version: 1.7.2(patch_hash=29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576)
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
@@ -1520,9 +1424,6 @@ importers:
       '@babel/code-frame':
         specifier: ^8.0.0-rc.2
         version: 8.0.0-rc.2
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@types/chrome':
         specifier: ^0.1.37
         version: 0.1.37
@@ -1542,27 +1443,6 @@ importers:
         specifier: ^0.5.7
         version: 0.5.7
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
@@ -1756,9 +1636,6 @@ importers:
 
   packages/redux-devtools-log-monitor:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@types/lodash.debounce':
         specifier: ^4.0.9
         version: 4.0.9
@@ -1772,27 +1649,6 @@ importers:
         specifier: workspace:^
         version: link:../react-json-tree
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@redux-devtools/core':
         specifier: workspace:^
         version: link:../redux-devtools
@@ -1887,9 +1743,6 @@ importers:
 
   packages/redux-devtools-rtk-query-monitor:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@redux-devtools/ui':
         specifier: workspace:^
         version: link:../redux-devtools-ui
@@ -1912,36 +1765,15 @@ importers:
         specifier: workspace:^
         version: link:../react-json-tree
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@emotion/babel-preset-css-prop':
-        specifier: ^11.12.0
-        version: 11.12.0(@babel/core@7.29.0)
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
       '@emotion/styled':
         specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4)
+      '@jest/globals':
+        specifier: ^30.2.0
+        version: 30.2.0
       '@redux-devtools/core':
         specifier: workspace:^
         version: link:../redux-devtools
@@ -2160,9 +1992,6 @@ importers:
 
   packages/redux-devtools-slider-monitor:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       '@emotion/react':
         specifier: ^11.14.0
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
@@ -2176,24 +2005,6 @@ importers:
         specifier: workspace:^
         version: link:../react-base16-styling
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@redux-devtools/core':
         specifier: workspace:^
         version: link:../redux-devtools
@@ -3603,18 +3414,8 @@ packages:
   '@emnapi/wasi-threads@1.1.0':
     resolution: {integrity: sha512-WI0DdZ8xFSbgMjR1sFsKABJ/C5OnRrjT06JXbZKexJGrDuPTzZdDYfFlsgcCXCyf+suG5QU2e/y1Wo2V/OapLQ==}
 
-  '@emotion/babel-plugin-jsx-pragmatic@0.3.0':
-    resolution: {integrity: sha512-XkRI5RdNl+f7HqpJADfTWlzZkd4tNaz2Gjzt97ZqN72jFSOqpL0grGGLdzKJ9dMQHXJBT/KZV+kphTycOblIsQ==}
-    peerDependencies:
-      '@babel/core': ^7.0.0
-
   '@emotion/babel-plugin@11.13.5':
     resolution: {integrity: sha512-pxHCpT2ex+0q+HH91/zsdHkw/lXd468DIN2zvfvLtPKLLMo6gQj7oLObq8PhkrxOZb/gGCq03S3Z7PDhS8pduQ==}
-
-  '@emotion/babel-preset-css-prop@11.12.0':
-    resolution: {integrity: sha512-wJYhkqVvH4nbxqwmw6XEkF/IWFFRQhYXiv69p7gibbT/e4S/5bMatoukDxRVxZla7aNvpZbXnfPeeNDlFehkKA==}
-    peerDependencies:
-      '@babel/core': ^7.0.0
 
   '@emotion/cache@11.14.0':
     resolution: {integrity: sha512-L/B1lc/TViYk4DcpGxtAVbx0ZyiKM5ktoIyafGkH6zg/tj+mA+NE//aPYKG0k8kCHSHVJrpLpcAlOBEXQ3SavA==}
@@ -11873,11 +11674,6 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@emotion/babel-plugin-jsx-pragmatic@0.3.0(@babel/core@7.29.0)':
-    dependencies:
-      '@babel/core': 7.29.0
-      '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.29.0)
-
   '@emotion/babel-plugin@11.13.5':
     dependencies:
       '@babel/helper-module-imports': 7.28.6
@@ -11891,16 +11687,6 @@ snapshots:
       find-root: 1.1.0
       source-map: 0.5.7
       stylis: 4.2.0
-    transitivePeerDependencies:
-      - supports-color
-
-  '@emotion/babel-preset-css-prop@11.12.0(@babel/core@7.29.0)':
-    dependencies:
-      '@babel/core': 7.29.0
-      '@babel/plugin-transform-react-jsx': 7.28.6(@babel/core@7.29.0)
-      '@babel/runtime': 7.28.6
-      '@emotion/babel-plugin': 11.13.5
-      '@emotion/babel-plugin-jsx-pragmatic': 0.3.0(@babel/core@7.29.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -19090,7 +18876,7 @@ snapshots:
 
   simple-concat@1.0.1: {}
 
-  simple-diff@1.7.2: {}
+  simple-diff@1.7.2(patch_hash=29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576): {}
 
   simple-element-resize-detector@1.3.0: {}
 

@@ -6,11 +6,11 @@
  */
 
 import React from 'react';
-import CodeBlock from '../components/CodeBlock';
-import { applyStyles } from '../utils/dom/css';
-import { absolutifyCaret } from '../utils/dom/absolutifyCaret';
-import { ScriptLine } from '../utils/stack-frame';
-import generateAnsiHTML from '../utils/generateAnsiHTML';
+import CodeBlock from '../components/CodeBlock.js';
+import { applyStyles } from '../utils/dom/css.js';
+import { absolutifyCaret } from '../utils/dom/absolutifyCaret.js';
+import { ScriptLine } from '../utils/stack-frame.js';
+import generateAnsiHTML from '../utils/generateAnsiHTML.js';
 
 import { codeFrameColumns } from '@babel/code-frame';
 import { base16Themes } from 'react-base16-styling';
