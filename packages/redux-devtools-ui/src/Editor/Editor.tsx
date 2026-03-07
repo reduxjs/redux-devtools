@@ -1,27 +1,18 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import CodeMirror from '@uiw/react-codemirror';
+import { createTheme } from '@uiw/codemirror-themes';
 import { javascript } from '@codemirror/lang-javascript';
-import type { Base16Theme } from 'react-base16-styling';
-import { defaultStyle, themedStyle } from './styles';
-import { Theme } from '../themes/default';
 import type { ViewUpdate } from '@codemirror/view';
+import { tags as t } from '@lezer/highlight';
+import { useTheme } from '@emotion/react';
 
 import '../../fonts/index.css';
-
-const EditorContainer = styled.div(
-  '' as unknown as TemplateStringsArray,
-  ({ theme }: { theme?: Base16Theme }) =>
-    theme!.scheme === 'default' && (theme as Theme).light
-      ? defaultStyle
-      : themedStyle(theme!),
-);
+import { ThemeFromProvider } from '../utils/theme';
 
 export interface EditorProps {
   value?: string;
   lineNumbers?: boolean;
   readOnly?: boolean;
-  theme?: Base16Theme;
   foldGutter?: boolean;
   autofocus?: boolean;
   onChange?: (value: string, viewUpdate: ViewUpdate) => void;
@@ -35,9 +26,21 @@ export default function Editor({
   autofocus = false,
   onChange,
 }: EditorProps) {
+  const theme = useTheme() as ThemeFromProvider;
+
+  const myTheme =
+    theme.scheme === 'default' && theme.light
+      ? undefined
+      : createTheme({
+          theme: theme.light ? 'light' : 'dark',
+          settings: {},
+          styles: [],
+        });
+
   return (
     <CodeMirror
       value={value}
+      theme={myTheme}
       extensions={[javascript()]}
       onChange={onChange}
       readOnly={readOnly}

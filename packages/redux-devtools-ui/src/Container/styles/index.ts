@@ -22,7 +22,7 @@ export const MainContainerWrapper = styled.div`
     font-family: ${(props) => props.theme.fontFamily || 'monaco, monospace'};
   }
 
-  .CodeMirror div,
+  .cm-editor div,
   pre,
   .monitor div,
   .slider div {
