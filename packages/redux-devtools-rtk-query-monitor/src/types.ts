@@ -8,8 +8,8 @@ import type { Action, AnyAction, Dispatch } from '@reduxjs/toolkit';
 import type { ComponentType } from 'react';
 import { base16Themes } from 'react-base16-styling';
 import type { Base16Theme } from 'react-base16-styling';
-import type { QueryComparators } from './utils/comparators';
-import type { QueryFilters } from './utils/filters';
+import type { QueryComparators } from './utils/comparators.js';
+import type { QueryFilters } from './utils/filters.js';
 
 export enum QueryPreviewTabs {
   data,

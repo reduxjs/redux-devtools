@@ -7,16 +7,19 @@ import {
   RtkQueryMonitorState,
   SelectorsSource,
   RtkResourceInfo,
-} from '../types';
-import { createInspectorSelectors, computeSelectorSource } from '../selectors';
+} from '../types.js';
+import {
+  createInspectorSelectors,
+  computeSelectorSource,
+} from '../selectors.js';
 import {
   changeQueryFormValues,
   selectedPreviewTab,
   selectQueryKey,
-} from '../reducers';
-import { QueryList } from '../components/QueryList';
-import { QueryForm } from '../components/QueryForm';
-import { QueryPreview } from './QueryPreview';
+} from '../reducers.js';
+import { QueryList } from '../components/QueryList.js';
+import { QueryForm } from '../components/QueryForm.js';
+import { QueryPreview } from './QueryPreview.js';
 
 type ForwardedMonitorProps<S, A extends Action<string>> = Pick<
   LiftedState<S, A, RtkQueryMonitorState>,

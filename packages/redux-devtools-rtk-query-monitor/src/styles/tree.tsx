@@ -1,8 +1,8 @@
 import React from 'react';
 import type { GetItemString, LabelRenderer } from 'react-json-tree';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
-import isIterable from '../utils/isIterable';
-import { DATA_TYPE_KEY } from '../monitor-config';
+import isIterable from '../utils/isIterable.js';
+import { DATA_TYPE_KEY } from '../monitor-config.js';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
 

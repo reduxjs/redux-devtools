@@ -1,4 +1,4 @@
-import { TabOption } from '../types';
+import { TabOption } from '../types.js';
 
 export function isTabVisible<St, Props, Vis extends string>(
   tab: TabOption<St, Props, Vis>,
