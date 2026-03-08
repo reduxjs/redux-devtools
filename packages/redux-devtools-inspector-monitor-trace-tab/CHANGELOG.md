@@ -1,5 +1,16 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- 12849a4: Convert monitors to ESM
+
+### Patch Changes
+
+- Updated dependencies [12849a4]
+  - @redux-devtools/inspector-monitor@7.0.0
+
 ## 4.1.1
 
 ### Patch Changes
