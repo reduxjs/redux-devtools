@@ -11,24 +11,27 @@ import {
   TOGGLE_PERSIST,
   UPDATE_STATE,
 } from '@redux-devtools/app';
-import type { Options, OptionsMessage } from '../../options/syncOptions';
-import openDevToolsWindow, { DevToolsPosition } from '../openWindow';
-import { getReport } from '../logging';
+import type { Options, OptionsMessage } from '../../options/syncOptions.js';
+import openDevToolsWindow, { DevToolsPosition } from '../openWindow.js';
+import { getReport } from '../logging.js';
 import { Action, Dispatch, Middleware } from 'redux';
 import type {
   ContentScriptToBackgroundMessage,
   SplitMessage,
-} from '../../contentScript';
+} from '../../contentScript/index.js';
 import type {
   ErrorMessage,
   PageScriptToContentScriptMessageForwardedToMonitors,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
-} from '../../pageScript/api';
+} from '../../pageScript/api/index.js';
 import { LiftedState } from '@redux-devtools/instrument';
-import type { BackgroundAction, LiftedActionAction } from './backgroundStore';
-import type { Position } from '../../pageScript/api/openWindow';
-import type { BackgroundState } from './backgroundReducer';
-import { store } from '../index';
+import type {
+  BackgroundAction,
+  LiftedActionAction,
+} from './backgroundStore.js';
+import type { Position } from '../../pageScript/api/openWindow.js';
+import type { BackgroundState } from './backgroundReducer.js';
+import { store } from '../index.js';
 
 interface TabMessageBase {
   readonly type: string;

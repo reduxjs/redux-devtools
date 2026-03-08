@@ -19,19 +19,19 @@ import {
   LibConfig,
   Features,
 } from '@redux-devtools/app';
-import configureStore, { getUrlParam } from './enhancerStore';
-import { isAllowed, Options } from '../options/syncOptions';
-import Monitor from './Monitor';
+import configureStore, { getUrlParam } from './enhancerStore.js';
+import { isAllowed, Options } from '../options/syncOptions.js';
+import Monitor from './Monitor.js';
 import {
   noFiltersApplied,
   isFiltered,
   filterState,
   startingFrom,
-} from './api/filters';
-import notifyErrors from './api/notifyErrors';
-import importState from './api/importState';
-import openWindow, { Position } from './api/openWindow';
-import generateId from './api/generateInstanceId';
+} from './api/filters.js';
+import notifyErrors from './api/notifyErrors.js';
+import importState from './api/importState.js';
+import openWindow, { Position } from './api/openWindow.js';
+import generateId from './api/generateInstanceId.js';
 import {
   toContentScript,
   sendMessage,
@@ -43,8 +43,8 @@ import {
   Serialize,
   StructuralPerformAction,
   ConnectResponse,
-} from './api';
-import type { ContentScriptToPageScriptMessage } from '../contentScript';
+} from './api/index.js';
+import type { ContentScriptToPageScriptMessage } from '../contentScript/index.js';
 
 type EnhancedStoreWithInitialDispatch<
   S,

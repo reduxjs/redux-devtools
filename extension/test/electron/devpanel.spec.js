@@ -3,7 +3,7 @@ import webdriver from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
 import electronPath from 'electron';
 import chromedriver from 'chromedriver';
-import { switchMonitorTests, delay } from '../utils/e2e';
+import { switchMonitorTests, delay } from '../utils/e2e.js';
 
 const devPanelPath =
   'chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/devpanel.html';

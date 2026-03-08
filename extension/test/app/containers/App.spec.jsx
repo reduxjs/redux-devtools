@@ -1,8 +1,9 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import configureStore from '../../../src/devpanel/store/panelStore';
-import App from '../../../src/app/App';
+import configureStore from '../../../src/devpanel/store/panelStore.js';
+import App from '../../../src/app/App.js';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

@@ -1,17 +1,17 @@
-import '../chromeApiMock';
+import '../chromeApiMock.js';
 import {
   getOptions,
   isAllowed,
   Options,
   prefetchOptions,
   prepareOptionsForPage,
-} from '../options/syncOptions';
-import type { TabMessage } from '../background/store/apiMiddleware';
+} from '../options/syncOptions.js';
+import type { TabMessage } from '../background/store/apiMiddleware.js';
 import type {
   PageScriptToContentScriptMessage,
   PageScriptToContentScriptMessageWithoutDisconnect,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
-} from '../pageScript/api';
+} from '../pageScript/api/index.js';
 import { Action } from 'redux';
 import {
   CustomAction,

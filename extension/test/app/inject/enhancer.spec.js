@@ -1,6 +1,6 @@
 import { createStore, compose } from 'redux';
-import { insertScript, listenMessage } from '../../utils/inject';
-import '../../../src/pageScript';
+import { insertScript, listenMessage } from '../../utils/inject.js';
+import '../../../src/pageScript/index.js';
 
 function counter(state = 0, action) {
   switch (action.type) {
