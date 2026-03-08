@@ -1,7 +1,7 @@
 import { stringify, parse } from 'jsan';
 import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
-import configureStore from './configureStore';
-import { defaultSocketOptions } from './constants';
+import configureStore from './configureStore.js';
+import { defaultSocketOptions } from './constants.js';
 import getHostForRN from 'rn-host-detect';
 import {
   Action,
