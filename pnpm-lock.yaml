@@ -14,6 +14,9 @@ patchedDependencies:
   '@uiw/codemirror-themes':
     hash: 0807c91492c1c4a6d78cf0e0657f8658d883398c3e1fa9b0eb9f3c3edaca4f6c
     path: patches/@uiw__codemirror-themes.patch
+  redux-persist:
+    hash: f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa
+    path: patches/redux-persist.patch
   simple-diff:
     hash: 29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576
     path: patches/simple-diff.patch
@@ -126,7 +129,7 @@ importers:
         version: 5.0.1
       redux-persist:
         specifier: ^6.0.0
-        version: 6.0.0(react@19.2.4)(redux@5.0.1)
+        version: 6.0.0(patch_hash=f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa)(react@19.2.4)(redux@5.0.1)
     devDependencies:
       '@babel/core':
         specifier: ^7.29.0
@@ -634,14 +637,11 @@ importers:
         version: 5.0.1
       redux-persist:
         specifier: ^6.0.0
-        version: 6.0.0(react@19.2.4)(redux@5.0.1)
+        version: 6.0.0(patch_hash=f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa)(react@19.2.4)(redux@5.0.1)
       socketcluster-client:
         specifier: ^20.0.1
         version: 20.0.1
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
       '@babel/core':
         specifier: ^7.29.0
         version: 7.29.0
@@ -864,7 +864,7 @@ importers:
         version: 5.0.1
       redux-persist:
         specifier: ^6.0.0
-        version: 6.0.0(react@19.2.4)(redux@5.0.1)
+        version: 6.0.0(patch_hash=f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa)(react@19.2.4)(redux@5.0.1)
       rimraf:
         specifier: ^6.1.3
         version: 6.1.3
@@ -18433,7 +18433,7 @@ snapshots:
     dependencies:
       deep-diff: 0.3.8
 
-  redux-persist@6.0.0(react@19.2.4)(redux@5.0.1):
+  redux-persist@6.0.0(patch_hash=f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa)(react@19.2.4)(redux@5.0.1):
     dependencies:
       redux: 5.0.1
     optionalDependencies:

@@ -15,7 +15,7 @@ export default [
   ...eslintTsReactJest(import.meta.dirname),
   ...eslintTs(
     import.meta.dirname,
-    ['webpack.config.ts', 'webpack.config.umd.ts'],
+    ['webpack.config.cts'],
     ['./tsconfig.webpack.json'],
   ),
   {

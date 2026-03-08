@@ -14,9 +14,8 @@
     "src",
     "umd"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -25,10 +24,7 @@
   "scripts": {
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --hot --env development --env platform=web --progress",
     "build": "pnpm run build:lib && pnpm run build:web && pnpm run build:umd && pnpm run build:umd:min",
-    "build:lib": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build:lib": "tsc",
     "build:web": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack --env platform=web",
     "build:umd": "node buildUmd.mjs --dev",
     "build:umd:min": "node buildUmd.mjs",
@@ -49,7 +45,6 @@
     "socketcluster-client": "^20.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-transform-runtime": "^7.29.0",
