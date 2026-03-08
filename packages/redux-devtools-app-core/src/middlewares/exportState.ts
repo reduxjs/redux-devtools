@@ -1,9 +1,13 @@
-import { stringifyJSON } from '../utils/stringifyJSON';
-import { UPDATE_STATE, LIFTED_ACTION, EXPORT } from '../constants/actionTypes';
-import { getActiveInstance } from '../reducers/instances';
+import { stringifyJSON } from '../utils/stringifyJSON.js';
+import {
+  UPDATE_STATE,
+  LIFTED_ACTION,
+  EXPORT,
+} from '../constants/actionTypes.js';
+import { getActiveInstance } from '../reducers/instances.js';
 import { Dispatch, Middleware } from 'redux';
-import { CoreStoreAction } from '../actions';
-import { CoreStoreState } from '../reducers';
+import { CoreStoreAction } from '../actions/index.js';
+import { CoreStoreState } from '../reducers/index.js';
 
 let toExport: string | number | undefined;
 

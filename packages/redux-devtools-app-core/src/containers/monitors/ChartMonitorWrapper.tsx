@@ -7,7 +7,7 @@ import {
   ChartMonitorState,
 } from '@redux-devtools/chart-monitor';
 import type { HierarchyPointNode, Node } from 'd3-state-visualizer';
-import { selectMonitorWithState } from '../../actions';
+import { selectMonitorWithState } from '../../actions/index.js';
 import { Action } from 'redux';
 
 export function getPath(

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Button } from '@redux-devtools/ui';
 import { TiDownload } from 'react-icons/ti';
-import { exportState } from '../../actions';
+import { exportState } from '../../actions/index.js';
 
 type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = DispatchProps;

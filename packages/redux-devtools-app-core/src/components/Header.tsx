@@ -5,7 +5,7 @@ import { GoBook } from 'react-icons/go';
 import { IoMdText } from 'react-icons/io';
 import { TiSocialTwitter } from 'react-icons/ti';
 import { TiHeartFullOutline } from 'react-icons/ti';
-import { changeSection } from '../actions';
+import { changeSection } from '../actions/index.js';
 
 const tabs = [{ name: 'Actions' }, { name: 'Settings' }];
 
