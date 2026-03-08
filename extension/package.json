@@ -14,7 +14,6 @@
   "scripts": {
     "build": "pnpm run build:extension && pnpm run type-check",
     "build:extension": "node build.mjs",
-    "build:examples": "babel-node examples/buildAll.js",
     "clean": "rimraf dist && rimraf chrome/dist && rimraf edge/dist && rimraf firefox/dist",
     "test:app": "cross-env BABEL_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js test/app",
     "test:chrome": "cross-env SE_FORCE_BROWSER_DOWNLOAD=true node --experimental-vm-modules node_modules/jest/bin/jest.js test/chrome",
