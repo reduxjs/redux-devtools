@@ -2,7 +2,7 @@ diff --git a/CHANGELOG.md b/CHANGELOG.md
 deleted file mode 100644
 index 7e3bce49f30e7027c2688e7bb50429422213e576..0000000000000000000000000000000000000000
 diff --git a/package.json b/package.json
-index 6ce8011287adc33a92b206f3926702f7182e933c..603004dd931985da04901ad85b8f354264eb2194 100644
+index 6ce8011287adc33a92b206f3926702f7182e933c..0b4383f21d9800f31116c4aef95abefdf5e740c5 100644
 --- a/package.json
 +++ b/package.json
 @@ -5,6 +5,16 @@
@@ -12,11 +12,11 @@ index 6ce8011287adc33a92b206f3926702f7182e933c..603004dd931985da04901ad85b8f3542
 +  "exports": {
 +    ".": {
 +      "types": "./types/index.d.ts",
-+      "default": "./es/index.js"
++      "default": "./lib/index.js"
 +    },
-+    "./integration/react":{
++    "./integration/react": {
 +      "types": "./types/integration/react.d.ts",
-+      "default": "./es/integration/react.js"
++      "default": "./lib/integration/react.js"
 +    }
 +  },
    "repository": "rt2zz/redux-persist",

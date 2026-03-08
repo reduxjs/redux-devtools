@@ -15,7 +15,7 @@ patchedDependencies:
     hash: 0807c91492c1c4a6d78cf0e0657f8658d883398c3e1fa9b0eb9f3c3edaca4f6c
     path: patches/@uiw__codemirror-themes.patch
   redux-persist:
-    hash: f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa
+    hash: 70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2
     path: patches/redux-persist.patch
   simple-diff:
     hash: 29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576
@@ -129,7 +129,7 @@ importers:
         version: 5.0.1
       redux-persist:
         specifier: ^6.0.0
-        version: 6.0.0(patch_hash=f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa)(react@19.2.4)(redux@5.0.1)
+        version: 6.0.0(patch_hash=70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2)(react@19.2.4)(redux@5.0.1)
     devDependencies:
       '@babel/core':
         specifier: ^7.29.0
@@ -637,7 +637,7 @@ importers:
         version: 5.0.1
       redux-persist:
         specifier: ^6.0.0
-        version: 6.0.0(patch_hash=f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa)(react@19.2.4)(redux@5.0.1)
+        version: 6.0.0(patch_hash=70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2)(react@19.2.4)(redux@5.0.1)
       socketcluster-client:
         specifier: ^20.0.1
         version: 20.0.1
@@ -864,7 +864,7 @@ importers:
         version: 5.0.1
       redux-persist:
         specifier: ^6.0.0
-        version: 6.0.0(patch_hash=f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa)(react@19.2.4)(redux@5.0.1)
+        version: 6.0.0(patch_hash=70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2)(react@19.2.4)(redux@5.0.1)
       rimraf:
         specifier: ^6.1.3
         version: 6.1.3
@@ -1092,29 +1092,7 @@ importers:
         version: 5.9.3
 
   packages/redux-devtools-extension:
-    dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       redux:
         specifier: ^5.0.1
         version: 5.0.1
@@ -1922,31 +1900,10 @@ importers:
 
   packages/redux-devtools-serialize:
     dependencies:
-      '@babel/runtime':
-        specifier: ^7.28.6
-        version: 7.28.6
       jsan:
         specifier: ^3.1.14
         version: 3.1.14
     devDependencies:
-      '@babel/cli':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/eslint-parser':
-        specifier: ^7.28.6
-        version: 7.28.6(@babel/core@7.29.0)(eslint@9.39.3)
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
       '@types/jest':
         specifier: ^30.0.0
         version: 30.0.0
@@ -18433,7 +18390,7 @@ snapshots:
     dependencies:
       deep-diff: 0.3.8
 
-  redux-persist@6.0.0(patch_hash=f5f9ab511a4464a65036c3f844c05de2e120d7631a3a370ab2e854039bf26daa)(react@19.2.4)(redux@5.0.1):
+  redux-persist@6.0.0(patch_hash=70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2)(react@19.2.4)(redux@5.0.1):
     dependencies:
       redux: 5.0.1
     optionalDependencies:
