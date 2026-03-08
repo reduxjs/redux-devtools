@@ -286,12 +286,12 @@ export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
 export {
   composeWithDevTools as composeWithDevToolsDevelopmentOnly,
   devToolsEnhancer as devToolsEnhancerDevelopmentOnly,
-} from './developmentOnly';
+} from './developmentOnly.js';
 export {
   composeWithDevTools as composeWithDevToolsLogOnly,
   devToolsEnhancer as devToolsEnhancerLogOnly,
-} from './logOnly';
+} from './logOnly.js';
 export {
   composeWithDevTools as composeWithDevToolsLogOnlyInProduction,
   devToolsEnhancer as devToolsEnhancerLogOnlyInProduction,
-} from './logOnlyInProduction';
+} from './logOnlyInProduction.js';

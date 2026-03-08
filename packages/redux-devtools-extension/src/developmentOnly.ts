@@ -5,7 +5,7 @@ import type {
   EnhancerOptions,
   InferComposedStoreExt,
   ReduxDevtoolsExtensionCompose,
-} from './index';
+} from './index.js';
 
 declare const process: {
   env: {
