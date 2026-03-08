@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import childProcess from 'child_process';
 import request from 'supertest';
 import socketClusterClient from 'socketcluster-client';
@@ -7,7 +8,9 @@ jest.setTimeout(10000);
 describe('Server', function () {
   let scServer: childProcess.ChildProcess;
   beforeAll(async function () {
-    scServer = childProcess.fork(__dirname + '/../bin/redux-devtools.js');
+    scServer = childProcess.fork(
+      import.meta.dirname + '/../bin/redux-devtools.js',
+    );
     await new Promise((resolve) => setTimeout(resolve, 5000));
   });
 
