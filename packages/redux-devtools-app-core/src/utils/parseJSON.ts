@@ -1,5 +1,5 @@
 import jsan from 'jsan';
-import { DATA_TYPE_KEY, DATA_REF_KEY } from '../constants/dataTypes';
+import { DATA_TYPE_KEY, DATA_REF_KEY } from '../constants/dataTypes.js';
 
 export function reviver(key: string, value: unknown) {
   if (

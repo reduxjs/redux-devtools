@@ -1,12 +1,12 @@
 import { compose } from 'redux';
 import type { StoreEnhancer } from 'redux';
-import * as logOnly from './logOnly';
+import * as logOnly from './logOnly.js';
 import type {
   Config,
   EnhancerOptions,
   InferComposedStoreExt,
   ReduxDevtoolsExtensionCompose,
-} from './index';
+} from './index.js';
 
 declare const process: {
   env: {

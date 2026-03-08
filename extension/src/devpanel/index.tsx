@@ -1,4 +1,4 @@
-import '../chromeApiMock';
+import '../chromeApiMock.js';
 import React, { CSSProperties, ReactNode } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -9,8 +9,8 @@ import {
   StoreState,
   UPDATE_STATE,
 } from '@redux-devtools/app';
-import App from '../app/App';
-import configureStore from './store/panelStore';
+import App from '../app/App.js';
+import configureStore from './store/panelStore.js';
 
 import { Action, Store } from 'redux';
 import {
@@ -18,7 +18,7 @@ import {
   PanelMessageWithSplitAction,
   SplitUpdateStateRequest,
   UpdateStateRequest,
-} from '../background/store/apiMiddleware';
+} from '../background/store/apiMiddleware.js';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const position = location.hash;

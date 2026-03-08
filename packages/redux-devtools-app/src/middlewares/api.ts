@@ -18,10 +18,10 @@ import {
 import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
 import { stringify } from 'jsan';
 import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
-import * as actions from '../constants/socketActionTypes';
-import { nonReduxDispatch } from '../utils/monitorActions';
-import { EmitAction, StoreAction } from '../actions';
-import { StoreState } from '../reducers';
+import * as actions from '../constants/socketActionTypes.js';
+import { nonReduxDispatch } from '../utils/monitorActions.js';
+import { EmitAction, StoreAction } from '../actions/index.js';
+import { StoreState } from '../reducers/index.js';
 
 let socket: AGClientSocket;
 let store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>;

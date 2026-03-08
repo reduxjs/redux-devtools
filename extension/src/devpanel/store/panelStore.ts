@@ -6,8 +6,8 @@ import {
   StoreAction,
   StoreState,
 } from '@redux-devtools/app';
-import panelDispatcher from './panelSyncMiddleware';
-import rootReducer from './panelReducer';
+import panelDispatcher from './panelSyncMiddleware.js';
+import rootReducer from './panelReducer.js';
 
 const persistConfig = {
   key: 'redux-devtools',

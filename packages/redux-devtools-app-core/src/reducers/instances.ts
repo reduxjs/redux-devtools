@@ -10,15 +10,15 @@ import {
   TOGGLE_SYNC,
   SET_PERSIST,
   CLEAR_INSTANCES,
-} from '../constants/actionTypes';
-import parseJSON from '../utils/parseJSON';
-import { recompute } from '../utils/updateState';
+} from '../constants/actionTypes.js';
+import parseJSON from '../utils/parseJSON.js';
+import { recompute } from '../utils/updateState.js';
 import {
   ActionCreator,
   LiftedActionDispatchAction,
   Request,
   CoreStoreAction,
-} from '../actions';
+} from '../actions/index.js';
 
 export interface Features {
   lock?: boolean;

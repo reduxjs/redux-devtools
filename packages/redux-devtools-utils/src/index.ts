@@ -256,6 +256,6 @@ export function getStackTrace(
   return stack;
 }
 
-export * from './catchErrors';
-export * from './filters';
-export * from './importState';
+export * from './catchErrors.js';
+export * from './filters.js';
+export * from './importState.js';

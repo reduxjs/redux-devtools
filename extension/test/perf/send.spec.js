@@ -1,6 +1,5 @@
-import { bigArray, bigString, circularData } from './data';
-import { listenMessage } from '../utils/inject';
-import '../../src/browser/extension/inject/pageScript';
+import { bigArray, bigString, circularData } from './data.js';
+import { listenMessage } from '../utils/inject.js';
 
 function test(title, data, maxTime = 100) {
   it('should send ' + title, async () => {

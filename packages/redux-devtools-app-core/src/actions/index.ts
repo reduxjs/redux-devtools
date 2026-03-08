@@ -26,12 +26,12 @@ import {
   SET_PERSIST,
   CHANGE_STATE_TREE_SETTINGS,
   CLEAR_INSTANCES,
-} from '../constants/actionTypes';
+} from '../constants/actionTypes.js';
 import { Action } from 'redux';
-import { Features, State } from '../reducers/instances';
-import { MonitorStateMonitorState } from '../reducers/monitor';
+import { Features, State } from '../reducers/instances.js';
+import { MonitorStateMonitorState } from '../reducers/monitor.js';
 import { LiftedAction } from '@redux-devtools/core';
-import { Data } from '../reducers/reports';
+import { Data } from '../reducers/reports.js';
 import { LiftedState } from '@redux-devtools/core';
 
 let monitorReducer: (

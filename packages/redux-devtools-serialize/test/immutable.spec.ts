@@ -1,7 +1,7 @@
 import * as Immutable from 'immutable';
 import { Map, OrderedMap } from 'immutable';
-import Serialize from '../src/immutable';
-import { SerializedData } from '../src/helpers';
+import Serialize from '../src/immutable/index.js';
+import { SerializedData } from '../src/helpers/index.js';
 
 const serialize = Serialize(Immutable);
 const stringify = serialize.stringify;

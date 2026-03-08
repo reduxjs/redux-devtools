@@ -3,8 +3,8 @@ import { connect, ResolveThunks } from 'react-redux';
 import { withTheme } from '@emotion/react';
 import { tree } from 'd3-state-visualizer';
 import type { HierarchyPointNode, Node, Options } from 'd3-state-visualizer';
-import { getPath } from '../ChartMonitorWrapper';
-import { updateMonitorState } from '../../../actions';
+import { getPath } from '../ChartMonitorWrapper.js';
+import { updateMonitorState } from '../../../actions/index.js';
 import { ThemeFromProvider } from '@redux-devtools/ui';
 
 const style = {

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container } from '@redux-devtools/ui';
-import SliderMonitor from './monitors/Slider';
-import { liftedDispatch, getReport } from '../actions';
-import { getActiveInstance } from '../reducers/instances';
-import DevTools from './DevTools';
-import Dispatcher from './monitors/Dispatcher';
-import TopButtons from '../components/TopButtons';
-import BottomButtons from '../components/BottomButtons';
-import { CoreStoreState } from '../reducers';
+import SliderMonitor from './monitors/Slider.js';
+import { liftedDispatch, getReport } from '../actions/index.js';
+import { getActiveInstance } from '../reducers/instances.js';
+import DevTools from './DevTools.js';
+import Dispatcher from './monitors/Dispatcher.js';
+import TopButtons from '../components/TopButtons.js';
+import BottomButtons from '../components/BottomButtons.js';
+import { CoreStoreState } from '../reducers/index.js';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

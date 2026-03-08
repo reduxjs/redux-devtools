@@ -1,5 +1,5 @@
 import { LIFTED_ACTION } from '@redux-devtools/app';
-import { store } from './index';
+import { store } from './index.js';
 
 export function getReport(
   reportId: string,

@@ -1,1 +1,4 @@
-export { default as devToolsEnhancer, composeWithDevTools } from './devTools';
+export {
+  default as devToolsEnhancer,
+  composeWithDevTools,
+} from './devTools.js';

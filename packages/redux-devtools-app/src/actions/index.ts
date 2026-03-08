@@ -1,4 +1,4 @@
-import { AuthStates, States } from 'socketcluster-client/lib/clientsocket';
+import { AuthStates, States } from 'socketcluster-client/lib/clientsocket.js';
 import {
   CoreStoreActionWithoutUpdateStateOrLiftedAction,
   LiftedActionAction,
@@ -21,7 +21,7 @@ import {
   SUBSCRIBE_REQUEST,
   SUBSCRIBE_SUCCESS,
   UNSUBSCRIBE,
-} from '../constants/socketActionTypes';
+} from '../constants/socketActionTypes.js';
 
 export type ConnectionType = 'disabled' | 'custom';
 export interface ConnectionOptions {

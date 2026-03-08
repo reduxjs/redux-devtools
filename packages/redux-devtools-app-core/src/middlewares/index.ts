@@ -1,4 +1,4 @@
-import { exportStateMiddleware } from './exportState';
+import { exportStateMiddleware } from './exportState.js';
 
 const middlewares = [exportStateMiddleware];
 

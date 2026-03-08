@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Toolbar, Divider } from '@redux-devtools/ui';
-import ExportButton from './buttons/ExportButton';
-import ImportButton from './buttons/ImportButton';
-import PrintButton from './buttons/PrintButton';
-import DispatcherButton from './buttons/DispatcherButton';
-import SliderButton from './buttons/SliderButton';
-import MonitorSelector from './MonitorSelector';
-import { Options } from '../reducers/instances';
+import ExportButton from './buttons/ExportButton.js';
+import ImportButton from './buttons/ImportButton.js';
+import PrintButton from './buttons/PrintButton.js';
+import DispatcherButton from './buttons/DispatcherButton.js';
+import SliderButton from './buttons/SliderButton.js';
+import MonitorSelector from './MonitorSelector.js';
+import { Options } from '../reducers/instances.js';
 
 interface Props {
   dispatcherIsOpen: boolean;

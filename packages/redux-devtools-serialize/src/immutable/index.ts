@@ -1,7 +1,7 @@
 import jsan from 'jsan';
 import type Immutable from 'immutable';
-import serialize from './serialize';
-import options from '../constants/options';
+import serialize from './serialize.js';
+import options from '../constants/options.js';
 
 export default function (
   immutable: typeof Immutable,
@@ -35,4 +35,4 @@ export default function (
     serialize: serialize,
   };
 }
-export { default as serialize } from './serialize';
+export { default as serialize } from './serialize.js';

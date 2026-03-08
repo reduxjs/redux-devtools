@@ -14,6 +14,7 @@ export default [
       'edge',
       'examples',
       'firefox',
+      'jest.config.ts',
       'test/electron/fixture/dist',
     ],
   },

@@ -2,18 +2,18 @@ import jsan, { Options } from 'jsan';
 import { throttle } from 'lodash-es';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { getActionsArray, getLocalFilter } from '@redux-devtools/utils';
-import { isFiltered, PartialLiftedState } from './filters';
-import importState from './importState';
-import generateId from './generateInstanceId';
-import type { Config } from '../index';
+import { isFiltered, PartialLiftedState } from './filters.js';
+import importState from './importState.js';
+import generateId from './generateInstanceId.js';
+import type { Config } from '../index.js';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LibConfig } from '@redux-devtools/app';
 import type {
   ContentScriptToPageScriptMessage,
   ListenerMessage,
-} from '../../contentScript';
-import type { Position } from './openWindow';
+} from '../../contentScript/index.js';
+import type { Position } from './openWindow.js';
 
 const listeners: {
   [instanceId: string]:

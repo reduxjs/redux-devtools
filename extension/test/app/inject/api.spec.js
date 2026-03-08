@@ -1,5 +1,6 @@
-import { insertScript, listenMessage } from '../../utils/inject';
-import '../../../src/pageScript';
+import { jest } from '@jest/globals';
+import { insertScript, listenMessage } from '../../utils/inject.js';
+import '../../../src/pageScript/index.js';
 
 describe('API', () => {
   it('should get window.__REDUX_DEVTOOLS_EXTENSION__ function', () => {

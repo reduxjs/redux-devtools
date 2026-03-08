@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Tabs } from '@redux-devtools/ui';
-import { monitors } from '../utils/getMonitor';
-import { selectMonitor } from '../actions';
-import { CoreStoreState } from '../reducers';
+import { monitors } from '../utils/getMonitor.js';
+import { selectMonitor } from '../actions/index.js';
+import { CoreStoreState } from '../reducers/index.js';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

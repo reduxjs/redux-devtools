@@ -31,7 +31,7 @@
     "start": "node ./bin/redux-devtools.js",
     "start:electron": "node ./bin/redux-devtools.js --open",
     "clean": "rimraf dist",
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
@@ -70,6 +70,7 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@jest/globals": "^30.2.0",
     "@types/body-parser": "^1.19.6",
     "@types/cors": "^2.8.19",
     "@types/cross-spawn": "^6.0.6",
