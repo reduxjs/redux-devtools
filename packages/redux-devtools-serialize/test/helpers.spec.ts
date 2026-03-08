@@ -1,4 +1,4 @@
-import { mark, extract, refer } from '../src/helpers';
+import { mark, extract, refer } from '../src/helpers/index.js';
 
 describe('Helpers', function () {
   it('mark', function () {
