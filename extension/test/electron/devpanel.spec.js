@@ -19,7 +19,7 @@ describe('DevTools panel for Electron', function () {
       .setChromeOptions(
         new chrome.Options()
           .setChromeBinaryPath(electronPath)
-          .addArguments(`app=${join(__dirname, 'fixture')}`),
+          .addArguments(`app=${join(import.meta.dirname, 'fixture')}`),
       )
       .forBrowser('chrome')
       .build();
