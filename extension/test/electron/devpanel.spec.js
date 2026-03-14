@@ -13,7 +13,7 @@ describe('DevTools panel for Electron', function () {
 
   beforeAll(async () => {
     chromedriver.start(['--port=9515']);
-    await delay(3000);
+    await delay(1000);
     driver = new webdriver.Builder()
       .usingServer('http://localhost:9515')
       .setChromeOptions(
