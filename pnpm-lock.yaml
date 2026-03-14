@@ -165,14 +165,14 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.14)
       chromedriver:
-        specifier: ^126.0.5
-        version: 126.0.5
+        specifier: ^128.0.3
+        version: 128.0.3
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
       electron:
-        specifier: ^31.7.7
-        version: 31.7.7
+        specifier: ^32.3.3
+        version: 32.3.3
       esbuild:
         specifier: ^0.27.4
         version: 0.27.4
@@ -942,8 +942,8 @@ importers:
         specifier: ^7.0.6
         version: 7.0.6
       electron:
-        specifier: ^31.7.7
-        version: 31.7.7
+        specifier: ^32.3.3
+        version: 32.3.3
       express:
         specifier: ^5.2.1
         version: 5.2.1
@@ -5954,8 +5954,8 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@126.0.5:
-    resolution: {integrity: sha512-xXVxwxd8CJ6yg2KEvFqLQi7V0RvF78xFnLB+xo9g9MoJNHMQccD7b4OWaxtKDy5RXrMgQ6Jb6vUN3SjTYXHLEQ==}
+  chromedriver@128.0.3:
+    resolution: {integrity: sha512-Xn/bknOpGlY9tKinwS/hVWeNblSeZvbbJbF8XZ73X1jeWfAFPRXx3fMLdNNz8DqruDbx3cKEJ5wR3mnst6G3iw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -6568,8 +6568,8 @@ packages:
   electron-to-chromium@1.5.313:
     resolution: {integrity: sha512-QBMrTWEf00GXZmJyx2lbYD45jpI3TUFnNIzJ5BBc8piGUDwMPa1GV6HJWTZVvY/eiN3fSopl7NRbgGp9sZ9LTA==}
 
-  electron@31.7.7:
-    resolution: {integrity: sha512-HZtZg8EHsDGnswFt0QeV8If8B+et63uD6RJ7I4/xhcXqmTIbI08GoubX/wm+HdY0DwcuPe1/xsgqpmYvjdjRoA==}
+  electron@32.3.3:
+    resolution: {integrity: sha512-7FT8tDg+MueAw8dBn5LJqDvlM4cZkKJhXfgB3w7P5gvSoUQVAY6LIQcXJxgL+vw2rIRY/b9ak7ZBFbCMF2Bk4w==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -14863,7 +14863,7 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@126.0.5:
+  chromedriver@128.0.3:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.13.6
@@ -15455,7 +15455,7 @@ snapshots:
 
   electron-to-chromium@1.5.313: {}
 
-  electron@31.7.7:
+  electron@32.3.3:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 20.19.37
@@ -19599,7 +19599,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.105.4(webpack-cli@7.0.0)
+      webpack: 5.105.4(esbuild@0.27.4)(webpack-cli@7.0.0)
       webpack-merge: 6.0.1
     optionalDependencies:
       webpack-dev-server: 5.2.3(tslib@2.8.1)(webpack-cli@7.0.0)(webpack@5.105.4)
@@ -19613,7 +19613,7 @@ snapshots:
       range-parser: 1.2.1
       schema-utils: 4.3.3
     optionalDependencies:
-      webpack: 5.105.4(webpack-cli@7.0.0)
+      webpack: 5.105.4(esbuild@0.27.4)(webpack-cli@7.0.0)
     transitivePeerDependencies:
       - tslib
 
@@ -19648,7 +19648,7 @@ snapshots:
       webpack-dev-middleware: 7.4.5(tslib@2.8.1)(webpack@5.105.4)
       ws: 8.19.0
     optionalDependencies:
-      webpack: 5.105.4(webpack-cli@7.0.0)
+      webpack: 5.105.4(esbuild@0.27.4)(webpack-cli@7.0.0)
       webpack-cli: 7.0.0(webpack-dev-server@5.2.3)(webpack@5.105.4)
     transitivePeerDependencies:
       - bufferutil

@@ -13,7 +13,7 @@ describe('DevTools panel for Electron', function () {
 
   beforeAll(async () => {
     chromedriver.start();
-    await delay(1000);
+    await delay(3000);
     driver = new webdriver.Builder()
       .usingServer('http://localhost:9515')
       .setChromeOptions(

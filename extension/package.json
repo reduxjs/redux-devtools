@@ -21,7 +21,8 @@
     "test:electron": "pnpm run build:test:electron:fixture && node --experimental-vm-modules node_modules/jest/bin/jest.js test/electron",
     "test": "pnpm run test:app && pnpm run test:chrome && pnpm run test:electron",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "start:electron": "electron test/electron/fixture"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -61,9 +62,9 @@
     "@types/lodash-es": "^4.17.12",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "chromedriver": "^126.0.5",
+    "chromedriver": "^128.0.3",
     "cross-env": "^10.1.0",
-    "electron": "^31.7.7",
+    "electron": "^32.3.3",
     "esbuild": "^0.27.4",
     "globals": "^17.4.0",
     "immutable": "^5.1.5",
