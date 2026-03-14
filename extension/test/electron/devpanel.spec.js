@@ -12,7 +12,7 @@ describe('DevTools panel for Electron', function () {
   let driver;
 
   beforeAll(async () => {
-    chromedriver.start();
+    chromedriver.start(['--port=9515']);
     await delay(3000);
     driver = new webdriver.Builder()
       .usingServer('http://localhost:9515')

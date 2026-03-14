@@ -21,8 +21,7 @@
     "test:electron": "pnpm run build:test:electron:fixture && node --experimental-vm-modules node_modules/jest/bin/jest.js test/electron",
     "test": "pnpm run test:app && pnpm run test:chrome && pnpm run test:electron",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit",
-    "start:electron": "electron test/electron/fixture"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
