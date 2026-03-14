@@ -26,6 +26,8 @@ jobs:
       - name: Lint
         run: pnpm run lint:all
       - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - run: pnpm exec chromedriver &
+        working-directory: extension
       - name: Test
         uses: coactions/setup-xvfb@v1
         with:
