@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: 'ubuntu-22.04'
+    runs-on: 'ubuntu-24.04'
 
     steps:
       - uses: actions/checkout@v6
@@ -25,6 +25,7 @@ jobs:
         run: pnpm run build:all
       - name: Lint
         run: pnpm run lint:all
+      - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Test
         uses: coactions/setup-xvfb@v1
         with:
