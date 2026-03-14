@@ -1,4 +1,4 @@
-import { FilterState, FilterStateValue } from '../pageScript/api/filters';
+import { FilterState, FilterStateValue } from '../pageScript/api/filters.js';
 
 export interface Options {
   readonly useEditor: number;

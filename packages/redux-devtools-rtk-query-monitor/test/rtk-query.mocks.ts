@@ -2,12 +2,10 @@ import {
   combineReducers,
   configureStore,
   EnhancedStore,
-  Middleware,
-  Tuple,
 } from '@reduxjs/toolkit';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs } from '@reduxjs/toolkit/query';
-import type { ReduxDevTools } from './devtools.mocks';
+import type { ReduxDevTools } from './devtools.mocks.js';
 
 export type MockBaseQuery<
   Result,

@@ -5,8 +5,8 @@ import styled, {
 } from '@emotion/styled';
 import { PropsOf } from '@emotion/react';
 import type { Base16Theme } from 'react-base16-styling';
-import getDefaultTheme, { Theme } from '../themes/default';
-import { ThemeFromProvider } from './theme';
+import getDefaultTheme, { Theme } from '../themes/default.js';
+import { ThemeFromProvider } from './theme.js';
 
 type StyleFunction<Props> = FunctionInterpolation<Props>;
 
@@ -32,7 +32,9 @@ function isThemeFromProvider(
 }
 
 export default function createStyledComponent<
-  C extends keyof React.JSX.IntrinsicElements | React.ComponentType<any>,
+  C extends
+    | keyof React.JSX.IntrinsicElements
+    | React.JSXElementConstructor<any>,
   O extends object,
 >(
   styles: Styles<PropsOf<C> & O & { theme: Theme }>,

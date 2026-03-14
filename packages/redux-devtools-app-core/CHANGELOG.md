@@ -1,5 +1,27 @@
 # @redux-devtools/app-core
 
+## 3.0.0
+
+### Major Changes
+
+- 6481386: Convert remaining packages to ESM
+
+### Patch Changes
+
+- Updated dependencies [d61d31a]
+- Updated dependencies [804e729]
+- Updated dependencies [12849a4]
+- Updated dependencies [804d6bd]
+  - @redux-devtools/ui@3.0.0
+  - @redux-devtools/chart-monitor@6.0.0
+  - @redux-devtools/inspector-monitor@7.0.0
+  - @redux-devtools/inspector-monitor-test-tab@6.0.0
+  - @redux-devtools/inspector-monitor-trace-tab@5.0.0
+  - @redux-devtools/log-monitor@6.0.0
+  - @redux-devtools/rtk-query-monitor@7.0.0
+  - @redux-devtools/slider-monitor@7.0.0
+  - @redux-devtools/core@5.0.0
+
 ## 2.0.0
 
 ### Major Changes

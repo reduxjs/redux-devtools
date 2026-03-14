@@ -5,8 +5,8 @@ import {
   UPDATE_MONITOR_STATE,
   TOGGLE_SLIDER,
   TOGGLE_DISPATCHER,
-} from '../constants/actionTypes';
-import { MonitorActionAction, CoreStoreAction } from '../actions';
+} from '../constants/actionTypes.js';
+import { MonitorActionAction, CoreStoreAction } from '../actions/index.js';
 
 export interface MonitorStateMonitorState {
   inspectedStatePath?: string[];

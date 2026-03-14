@@ -1,108 +1,101 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-import CodeMirror, { EditorChange } from 'codemirror';
-import type { Base16Theme } from 'react-base16-styling';
-import { defaultStyle, themedStyle } from './styles';
-import { Theme } from '../themes/default';
-
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/addon/fold/foldgutter';
-import 'codemirror/addon/fold/foldcode';
-import 'codemirror/addon/fold/brace-fold';
+import CodeMirror from '@uiw/react-codemirror';
+import { createTheme } from '@uiw/codemirror-themes';
+import { javascript } from '@codemirror/lang-javascript';
+import type { ViewUpdate } from '@codemirror/view';
+import { tags as t } from '@lezer/highlight';
+import { useTheme } from '@emotion/react';
+import type { ThemeFromProvider } from '../utils/theme.js';
+import { defaultStyle } from './styles/index.js';
 
 import '../../fonts/index.css';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/addon/fold/foldgutter.css';
 
 const EditorContainer = styled.div(
   '' as unknown as TemplateStringsArray,
-  ({ theme }: { theme?: Base16Theme }) =>
-    theme!.scheme === 'default' && (theme as Theme).light
-      ? defaultStyle
-      : themedStyle(theme!),
+  defaultStyle,
 );
 
 export interface EditorProps {
-  value: string;
-  mode: string;
-  lineNumbers: boolean;
-  lineWrapping: boolean;
-  readOnly: boolean;
-  theme?: Base16Theme;
-  foldGutter: boolean;
-  autofocus: boolean;
-  onChange?: (value: string, change: EditorChange) => void;
+  value?: string;
+  lineNumbers?: boolean;
+  readOnly?: boolean;
+  foldGutter?: boolean;
+  autofocus?: boolean;
+  onChange?: (value: string, viewUpdate: ViewUpdate) => void;
 }
 
-/**
- * Based on [CodeMirror](http://codemirror.net/).
- */
-export default class Editor extends Component<EditorProps> {
-  cm?: CodeMirror.Editor | null;
-  node?: HTMLDivElement | null;
+export default function Editor({
+  value = '',
+  lineNumbers = true,
+  readOnly = false,
+  foldGutter = true,
+  autofocus = false,
+  onChange,
+}: EditorProps) {
+  const theme = useTheme() as ThemeFromProvider;
 
-  componentDidMount() {
-    this.cm = CodeMirror(this.node!, {
-      value: this.props.value,
-      mode: this.props.mode,
-      lineNumbers: this.props.lineNumbers,
-      lineWrapping: this.props.lineWrapping,
-      readOnly: this.props.readOnly,
-      autofocus: this.props.autofocus,
-      foldGutter: this.props.foldGutter,
-      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-    });
+  const myTheme =
+    theme.scheme === 'default' && theme.light
+      ? undefined
+      : createTheme({
+          theme: theme.light ? 'light' : 'dark',
+          settings: {
+            background: theme.base00,
+            foreground: theme.base04,
+            selection: theme.base01,
+            selectionMatch: 'transparent',
+            gutterBackground: theme.base01,
+            gutterForeground: theme.base05,
+            gutterBorder: 'transparent',
+            gutterActiveForeground: theme.base05,
+            lineHighlight: 'transparent',
+          },
+          styles: [
+            { tag: t.heading, color: theme.base05 },
+            { tag: t.quote, color: theme.base09 },
+            { tag: t.keyword, color: theme.base0F },
+            { tag: t.atom, color: theme.base0F },
+            { tag: t.number, color: theme.base0F },
+            { tag: t.definition(t.variableName), color: theme.base0D },
+            { tag: t.variableName, color: theme.base05 },
+            { tag: t.propertyName, color: theme.base0C },
+            { tag: t.operator, color: theme.base0E },
+            { tag: t.comment, color: theme.base05, fontStyle: 'italic' },
+            { tag: t.string, color: theme.base0B },
+            { tag: t.meta, color: theme.base0B },
+            { tag: t.tagName, color: theme.base02 },
+            { tag: t.attributeName, color: theme.base0C },
+            { tag: t.attributeName, color: theme.base02, cursor: 'pointer' },
+            {
+              tag: t.emphasis,
+              color: '#999',
+              textDecoration: 'underline',
+              textDecorationStyle: 'dotted',
+            },
+            { tag: t.strong, color: theme.base01 },
+            {
+              tag: t.invalid,
+              color: theme.base05,
+              borderBottom: `1px dotted ${theme.base08}`,
+            },
+          ],
+        });
 
-    if (this.props.onChange) {
-      this.cm.on('change', (doc, change) => {
-        this.props.onChange!(doc.getValue(), change);
-      });
-    }
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps: EditorProps) {
-    if (nextProps.value !== this.cm!.getValue()) {
-      this.cm!.setValue(nextProps.value);
-    }
-    if (nextProps.readOnly !== this.props.readOnly) {
-      this.cm!.setOption('readOnly', nextProps.readOnly);
-    }
-    if (nextProps.lineNumbers !== this.props.lineNumbers) {
-      this.cm!.setOption('lineNumbers', nextProps.lineNumbers);
-    }
-    if (nextProps.lineWrapping !== this.props.lineWrapping) {
-      this.cm!.setOption('lineWrapping', nextProps.lineWrapping);
-    }
-    if (nextProps.foldGutter !== this.props.foldGutter) {
-      this.cm!.setOption('foldGutter', nextProps.foldGutter);
-    }
-  }
-
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  componentWillUnmount() {
-    const node = this.node!;
-    node.removeChild(node.children[0]);
-    this.cm = null;
-  }
-
-  getRef: React.RefCallback<HTMLDivElement> = (node) => {
-    this.node = node;
-  };
-
-  render() {
-    return <EditorContainer ref={this.getRef} theme={this.props.theme} />;
-  }
-
-  static defaultProps = {
-    value: '',
-    mode: 'javascript',
-    lineNumbers: true,
-    lineWrapping: false,
-    readOnly: false,
-    foldGutter: true,
-    autofocus: false,
-  };
+  return (
+    <EditorContainer>
+      <CodeMirror
+        value={value}
+        theme={myTheme}
+        extensions={[javascript()]}
+        onChange={onChange}
+        readOnly={readOnly}
+        autoFocus={autofocus}
+        basicSetup={{
+          lineNumbers,
+          foldGutter,
+        }}
+      />
+    </EditorContainer>
+  );
 }

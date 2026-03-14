@@ -5,7 +5,7 @@ import { SliderMonitor } from '@redux-devtools/slider-monitor';
 import { LiftedAction } from '@redux-devtools/core';
 import { Action } from 'redux';
 import { Base16Theme, ThemeFromProvider } from '@redux-devtools/ui';
-import { State } from '../../reducers/instances';
+import { State } from '../../reducers/instances.js';
 
 const SliderWrapper = styled.div`
   border-color: ${(props: { theme?: Base16Theme }) => props.theme!.base02};

@@ -7,7 +7,7 @@ import es6template from 'es6template';
 import { Editor } from '@redux-devtools/ui';
 import { TabComponentProps } from '@redux-devtools/inspector-monitor';
 import { Action } from 'redux';
-import { AssertionLocals, DispatcherLocals, WrapLocals } from './types';
+import { AssertionLocals, DispatcherLocals, WrapLocals } from './types.js';
 
 export const fromPath = (path: (string | number)[]) =>
   path.map((a) => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');

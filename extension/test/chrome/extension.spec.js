@@ -1,9 +1,9 @@
 import { resolve } from 'path';
 import webdriver from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
-import { switchMonitorTests, delay } from '../utils/e2e';
+import { switchMonitorTests, delay } from '../utils/e2e.js';
 
-const path = resolve(__dirname, '..', '..', 'dist');
+const path = resolve(import.meta.dirname, '..', '..', 'dist');
 const extensionId = 'lmhkpmbekcpmknklioeibfkpmmfibljd';
 const actionsPattern =
   /^@@INIT(.|\n)+@@reduxReactRouter\/routerDidChange(.|\n)+@@reduxReactRouter\/initRoutes(.|\n)+$/;

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import color from '../../utils/color';
-import { Theme } from '../../themes/default';
+import color from '../../utils/color.js';
+import { Theme } from '../../themes/default.js';
 
 export const MainContainerWrapper = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const MainContainerWrapper = styled.div`
     font-family: ${(props) => props.theme.fontFamily || 'monaco, monospace'};
   }
 
-  .CodeMirror div,
+  .cm-editor div,
   pre,
   .monitor div,
   .slider div {

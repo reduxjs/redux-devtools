@@ -1,5 +1,5 @@
 import jsan from 'jsan';
-import { DATA_TYPE_KEY, DATA_REF_KEY } from '../constants/dataTypes';
+import { DATA_TYPE_KEY, DATA_REF_KEY } from '../constants/dataTypes.js';
 
 function replacer(key: string, value: unknown) {
   if (typeof value === 'object' && value !== null && DATA_TYPE_KEY in value) {

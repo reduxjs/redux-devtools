@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import RightSlider from './RightSlider';
+import RightSlider from './RightSlider.js';
 import {
   selectorButtonCss,
   selectorButtonSmallCss,
-} from './utils/selectorButtonStyles';
+} from './utils/selectorButtonStyles.js';
 
 const getActiveButtons = (hasSkippedActions: boolean): ('Sweep' | 'Commit')[] =>
   [hasSkippedActions && 'Sweep', 'Commit'].filter(

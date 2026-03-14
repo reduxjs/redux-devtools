@@ -1,5 +1,5 @@
 import { css, keyframes } from '@emotion/react';
-import { Theme } from '../themes/default';
+import { Theme } from '../themes/default.js';
 
 export const spin = keyframes`
   to { transform: rotate(1turn); }

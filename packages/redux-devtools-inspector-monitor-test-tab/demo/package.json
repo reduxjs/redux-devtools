@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "test-demo",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "license": "MIT",
   "scripts": {
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
@@ -17,7 +17,7 @@
     "@redux-devtools/inspector-monitor": "workspace:^",
     "@redux-devtools/inspector-monitor-test-tab": "workspace:^",
     "@redux-devtools/ui": "workspace:^",
-    "immutable": "^5.1.4",
+    "immutable": "^5.1.5",
     "lodash.shuffle": "^4.2.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
@@ -33,12 +33,12 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@types/lodash.shuffle": "^4.2.9",
-    "@types/node": "^24.11.0",
+    "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/redux-logger": "^3.0.13",
     "@types/webpack-env": "^1.18.8",
-    "babel-loader": "^10.0.0",
+    "babel-loader": "^10.1.1",
     "cross-env": "^10.1.0",
     "css-loader": "^7.1.4",
     "fork-ts-checker-webpack-plugin": "^9.1.0",
@@ -46,8 +46,8 @@
     "style-loader": "^4.0.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3",
-    "webpack": "^5.105.3",
-    "webpack-cli": "^6.0.1",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.0",
     "webpack-dev-server": "^5.2.3"
   }
 }

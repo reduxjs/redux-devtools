@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Theme } from '../../themes/default';
+import { Theme } from '../../themes/default.js';
 
 export const containerStyle = ({ theme }: { theme: Theme }) => css`
   display: flex;

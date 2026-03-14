@@ -1,5 +1,19 @@
 # Change Log
 
+## 8.0.0
+
+### Major Changes
+
+- 6481386: Convert remaining packages to ESM
+
+### Patch Changes
+
+- Updated dependencies [d61d31a]
+- Updated dependencies [804e729]
+- Updated dependencies [6481386]
+  - @redux-devtools/ui@3.0.0
+  - @redux-devtools/app-core@3.0.0
+
 ## 7.0.0
 
 ### Major Changes

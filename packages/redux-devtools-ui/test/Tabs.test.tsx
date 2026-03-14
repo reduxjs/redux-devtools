@@ -1,8 +1,9 @@
+import { jest } from '@jest/globals';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Tabs } from '../src';
-import { tabs, simple10Tabs } from '../src/Tabs/data';
+import { Tabs } from '../src/index.js';
+import { tabs, simple10Tabs } from '../src/Tabs/data.js';
 
 describe('Tabs', function () {
   it('renders correctly', () => {

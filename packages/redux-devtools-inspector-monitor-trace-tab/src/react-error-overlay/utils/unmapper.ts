@@ -6,9 +6,9 @@
  */
 
 import path from 'path-browserify';
-import StackFrame from './stack-frame';
-import { getSourceMap } from './getSourceMap';
-import { getLinesAround } from './getLinesAround';
+import StackFrame from './stack-frame.js';
+import { getSourceMap } from './getSourceMap.js';
+import { getLinesAround } from './getLinesAround.js';
 
 function count(search: string, string: string): number {
   // Count starts at -1 becuse a do-while loop always runs at least once

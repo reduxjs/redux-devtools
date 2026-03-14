@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import {
   createStore,
   compose,
@@ -6,6 +7,7 @@ import {
   Action,
   StoreEnhancer,
 } from 'redux';
+import { from, Observable } from 'rxjs';
 import {
   ActionCreators,
   EnhancedStore,
@@ -13,8 +15,7 @@ import {
   LiftedAction,
   LiftedStore,
   LiftedState,
-} from '../src/instrument';
-import { from, Observable } from 'rxjs';
+} from '../src/instrument.js';
 
 type CounterAction = { type: 'INCREMENT' } | { type: 'DECREMENT' };
 function counter(state = 0, action: CounterAction) {

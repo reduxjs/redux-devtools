@@ -1,10 +1,10 @@
-import { section, SectionState } from './section';
-import { monitor, MonitorState } from './monitor';
-import { notification, NotificationState } from './notification';
-import { instances, InstancesState } from './instances';
-import { reports, ReportsState } from './reports';
-import { theme, ThemeState } from './theme';
-import { stateTreeSettings, StateTreeSettings } from './stateTreeSettings';
+import { section, SectionState } from './section.js';
+import { monitor, MonitorState } from './monitor.js';
+import { notification, NotificationState } from './notification.js';
+import { instances, InstancesState } from './instances.js';
+import { reports, ReportsState } from './reports.js';
+import { theme, ThemeState } from './theme.js';
+import { stateTreeSettings, StateTreeSettings } from './stateTreeSettings.js';
 
 export interface CoreStoreState {
   readonly section: SectionState;

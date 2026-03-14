@@ -7,7 +7,7 @@ import {
   StoreEnhancer,
   StoreEnhancerStoreCreator,
 } from 'redux';
-import getSymbolObservable from './getSymbolObservable';
+import getSymbolObservable from './getSymbolObservable.js';
 
 export const ActionTypes = {
   PERFORM_ACTION: 'PERFORM_ACTION',

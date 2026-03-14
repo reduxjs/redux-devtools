@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/inspector-monitor-test-tab",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "Generate tests for redux devtools.",
   "keywords": [
     "redux",
@@ -22,44 +22,35 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.6",
     "@redux-devtools/ui": "workspace:^",
     "es6template": "^1.0.5",
     "javascript-stringify": "^2.1.0",
     "jsan": "^3.1.14",
     "object-path": "^0.11.8",
     "react-icons": "^5.6.0",
-    "simple-diff": "^1.7.2"
+    "simple-diff": "^1.7.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
-    "@babel/core": "^7.29.0",
-    "@babel/eslint-parser": "^7.28.6",
-    "@babel/plugin-transform-runtime": "^7.29.0",
-    "@babel/preset-env": "^7.29.0",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@redux-devtools/core": "workspace:^",
@@ -71,8 +62,8 @@
     "@types/jsan": "^3.1.5",
     "@types/object-path": "^0.11.4",
     "@types/react": "^19.2.14",
-    "jest": "^30.2.0",
-    "jest-environment-jsdom": "^30.2.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "redux": "^5.0.1",

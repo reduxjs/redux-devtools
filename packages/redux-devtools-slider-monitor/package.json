@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/slider-monitor",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "A custom monitor for replaying Redux actions that works similarly to a video player",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-slider-monitor",
   "bugs": {
@@ -12,19 +12,15 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
@@ -32,19 +28,12 @@
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.6",
     "@redux-devtools/ui": "workspace:^",
     "react-base16-styling": "workspace:^"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
-    "@babel/core": "^7.29.0",
-    "@babel/eslint-parser": "^7.28.6",
-    "@babel/preset-env": "^7.29.0",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
     "@redux-devtools/core": "workspace:^",
-    "@types/node": "^24.11.0",
+    "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "react": "^19.2.4",
     "redux": "^5.0.1",

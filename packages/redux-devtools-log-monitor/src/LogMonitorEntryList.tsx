@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Action } from 'redux';
 import { PerformAction } from '@redux-devtools/core';
 import type { Base16Theme } from 'react-base16-styling';
-import LogMonitorEntry from './LogMonitorEntry';
+import LogMonitorEntry from './LogMonitorEntry.js';
 
 interface Props<S, A extends Action<string>> {
   actionsById: { [actionId: number]: PerformAction<A> };

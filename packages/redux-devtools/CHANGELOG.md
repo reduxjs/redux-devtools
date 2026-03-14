@@ -1,5 +1,16 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- 804d6bd: Convert @redux-devtools/core to ESM
+
+### Patch Changes
+
+- Updated dependencies [3f90241]
+  - @redux-devtools/instrument@3.0.0
+
 ## 4.1.1
 
 ### Patch Changes

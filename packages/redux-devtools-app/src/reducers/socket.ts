@@ -1,6 +1,6 @@
-import { AuthStates, States } from 'socketcluster-client/lib/clientsocket';
-import * as actions from '../constants/socketActionTypes';
-import { StoreAction } from '../actions';
+import { AuthStates, States } from 'socketcluster-client/lib/clientsocket.js';
+import * as actions from '../constants/socketActionTypes.js';
+import { StoreAction } from '../actions/index.js';
 
 export interface SocketState {
   id: string | null;

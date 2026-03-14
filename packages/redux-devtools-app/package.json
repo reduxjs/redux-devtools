@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/app",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Redux DevTools app",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-app",
   "bugs": {
@@ -14,9 +14,11 @@
     "src",
     "umd"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -25,10 +27,7 @@
   "scripts": {
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --hot --env development --env platform=web --progress",
     "build": "pnpm run build:lib && pnpm run build:web && pnpm run build:umd && pnpm run build:umd:min",
-    "build:lib": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build:lib": "tsc",
     "build:web": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack --env platform=web",
     "build:umd": "node buildUmd.mjs --dev",
     "build:umd:min": "node buildUmd.mjs",
@@ -49,7 +48,6 @@
     "socketcluster-client": "^20.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-transform-runtime": "^7.29.0",
@@ -59,18 +57,18 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@reduxjs/toolkit": "^2.11.2",
-    "@rjsf/core": "^6.3.1",
+    "@rjsf/core": "^6.4.1",
     "@types/jsan": "^3.1.5",
     "@types/json-schema": "^7.0.15",
-    "@types/node": "^24.11.0",
+    "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/socketcluster-client": "^20.0.0",
     "@types/webpack-env": "^1.18.8",
-    "babel-loader": "^10.0.0",
+    "babel-loader": "^10.1.1",
     "cross-env": "^10.1.0",
     "css-loader": "^7.1.4",
-    "esbuild": "^0.27.3",
+    "esbuild": "^0.27.4",
     "fork-ts-checker-webpack-plugin": "^9.1.0",
     "globals": "^17.4.0",
     "html-loader": "^5.1.0",
@@ -82,8 +80,8 @@
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3",
-    "webpack": "^5.105.3",
-    "webpack-cli": "^6.0.1",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.0",
     "webpack-dev-server": "^5.2.3"
   },
   "peerDependencies": {

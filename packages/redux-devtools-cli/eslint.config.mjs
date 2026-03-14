@@ -8,7 +8,7 @@ export default [
   ...eslintTs(import.meta.dirname),
   ...eslintTsJest(import.meta.dirname),
   {
-    ignores: ['dist', 'umd'],
+    ignores: ['dist', 'jest.config.ts', 'umd'],
   },
   {
     languageOptions: {

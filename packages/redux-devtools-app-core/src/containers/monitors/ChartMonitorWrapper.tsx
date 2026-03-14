@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { ChartMonitor } from '@redux-devtools/chart-monitor';
+import {
+  ChartMonitor,
+  ChartMonitorAction,
+  ChartMonitorProps,
+  ChartMonitorState,
+} from '@redux-devtools/chart-monitor';
 import type { HierarchyPointNode, Node } from 'd3-state-visualizer';
-import { selectMonitorWithState } from '../../actions';
+import { selectMonitorWithState } from '../../actions/index.js';
+import { Action } from 'redux';
 
 export function getPath(
   obj: HierarchyPointNode<Node>,
@@ -21,7 +27,11 @@ type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = DispatchProps;
 
 class ChartMonitorWrapper extends Component<Props> {
-  static update = ChartMonitor.update;
+  static update: <S, A extends Action<string>>(
+    props: ChartMonitorProps<S, A>,
+    state: ChartMonitorState | undefined,
+    action: ChartMonitorAction,
+  ) => ChartMonitorState = ChartMonitor.update;
 
   onClickText = (data: HierarchyPointNode<Node>) => {
     const inspectedStatePath: string[] = [];

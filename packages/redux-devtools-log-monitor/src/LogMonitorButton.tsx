@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactNode } from 'react';
 import type { Base16Theme } from 'react-base16-styling';
-import brighten from './brighten';
+import brighten from './brighten.js';
 
 const styles: { base: CSSProperties } = {
   base: {

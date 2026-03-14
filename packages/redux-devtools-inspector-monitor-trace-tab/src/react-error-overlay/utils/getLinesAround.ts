@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ScriptLine } from './stack-frame';
+import { ScriptLine } from './stack-frame.js';
 
 /**
  *

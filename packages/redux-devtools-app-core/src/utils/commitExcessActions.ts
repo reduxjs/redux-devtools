@@ -1,7 +1,7 @@
 // Based on https://github.com/gaearon/redux-devtools/pull/241
 /* eslint-disable no-param-reassign */
 
-import { State } from '../reducers/instances';
+import { State } from '../reducers/instances.js';
 
 export default function commitExcessActions(liftedState: State, n = 1) {
   // Auto-commits n-number of excess actions.

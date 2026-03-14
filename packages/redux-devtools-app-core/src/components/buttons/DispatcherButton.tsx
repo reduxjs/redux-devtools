@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Button } from '@redux-devtools/ui';
 import { FaTerminal } from 'react-icons/fa';
-import { toggleDispatcher } from '../../actions';
+import { toggleDispatcher } from '../../actions/index.js';
 
 type DispatchProps = ResolveThunks<typeof actionCreators>;
 interface OwnProps {

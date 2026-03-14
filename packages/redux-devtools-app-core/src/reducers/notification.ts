@@ -3,8 +3,8 @@ import {
   CLEAR_NOTIFICATION,
   LIFTED_ACTION,
   ERROR,
-} from '../constants/actionTypes';
-import { CoreStoreAction } from '../actions';
+} from '../constants/actionTypes.js';
+import { CoreStoreAction } from '../actions/index.js';
 
 interface Notification {
   readonly type: 'error';

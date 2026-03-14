@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as webpack from 'webpack';
+import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
@@ -11,7 +11,7 @@ export default (
     app: './demo/index',
   },
   output: {
-    path: path.resolve(__dirname, `build/${env.platform as string}`),
+    path: path.resolve(import.meta.dirname, `build/${env.platform as string}`),
     publicPath: '',
     filename: 'js/[name].js',
     sourceMapFilename: 'js/[name].map',

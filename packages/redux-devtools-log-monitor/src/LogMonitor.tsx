@@ -12,10 +12,10 @@ import {
   updateScrollTop,
   startConsecutiveToggle,
   LogMonitorAction,
-} from './actions';
-import reducer, { LogMonitorState } from './reducers';
-import LogMonitorButtonBar from './LogMonitorButtonBar';
-import LogMonitorEntryList from './LogMonitorEntryList';
+} from './actions.js';
+import reducer, { LogMonitorState } from './reducers.js';
+import LogMonitorButtonBar from './LogMonitorButtonBar.js';
+import LogMonitorEntryList from './LogMonitorEntryList.js';
 
 const { toggleAction, setActionsActive } = ActionCreators;
 

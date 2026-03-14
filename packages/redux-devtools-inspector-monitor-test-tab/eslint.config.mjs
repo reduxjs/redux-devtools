@@ -7,6 +7,6 @@ export default [
   ...eslintTsReact(import.meta.dirname),
   ...eslintTsReactJest(import.meta.dirname),
   {
-    ignores: ['demo', 'lib'],
+    ignores: ['demo', 'jest.config.ts', 'lib'],
   },
 ];

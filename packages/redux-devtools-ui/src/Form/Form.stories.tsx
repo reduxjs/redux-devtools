@@ -1,7 +1,6 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react-vite';
-import Form from './';
-import { schema, uiSchema, formData } from './schema';
+import Form from './index.js';
+import { schema, uiSchema, formData } from './schema.js';
 
 const meta: Meta = {
   title: 'Form',

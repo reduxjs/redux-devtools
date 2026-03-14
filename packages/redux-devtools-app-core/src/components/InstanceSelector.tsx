@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Select } from '@redux-devtools/ui';
-import { selectInstance } from '../actions';
-import { CoreStoreState } from '../reducers';
+import { selectInstance } from '../actions/index.js';
+import { CoreStoreState } from '../reducers/index.js';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

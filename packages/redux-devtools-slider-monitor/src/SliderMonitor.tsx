@@ -15,8 +15,8 @@ import {
   Toolbar,
 } from '@redux-devtools/ui';
 
-import reducer from './reducers';
-import SliderButton from './SliderButton';
+import reducer from './reducers.js';
+import SliderButton from './SliderButton.js';
 
 const { reset, jumpToAction } = ActionCreators;
 

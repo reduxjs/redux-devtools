@@ -1,11 +1,12 @@
 {
   "private": true,
   "name": "remotedev-redux-devtools-extension",
-  "version": "3.2.11",
+  "version": "3.2.12",
   "description": "Redux Developer Tools for debugging application state changes.",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/extension",
   "license": "MIT",
   "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
@@ -13,12 +14,11 @@
   "scripts": {
     "build": "pnpm run build:extension && pnpm run type-check",
     "build:extension": "node build.mjs",
-    "build:examples": "babel-node examples/buildAll.js",
     "clean": "rimraf dist && rimraf chrome/dist && rimraf edge/dist && rimraf firefox/dist",
-    "test:app": "cross-env BABEL_ENV=test jest test/app",
-    "test:chrome": "cross-env SE_FORCE_BROWSER_DOWNLOAD=true jest test/chrome",
+    "test:app": "cross-env BABEL_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js test/app",
+    "test:chrome": "cross-env SE_FORCE_BROWSER_DOWNLOAD=true node --experimental-vm-modules node_modules/jest/bin/jest.js test/chrome",
     "build:test:electron:fixture": "webpack --config test/electron/fixture/webpack.config.js",
-    "test:electron": "pnpm run build:test:electron:fixture && jest test/electron",
+    "test:electron": "pnpm run build:test:electron:fixture && node --experimental-vm-modules node_modules/jest/bin/jest.js test/electron",
     "test": "pnpm run test:app && pnpm run test:chrome && pnpm run test:electron",
     "lint": "eslint .",
     "type-check": "tsc --noEmit"
@@ -53,6 +53,7 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@babel/register": "^7.28.6",
+    "@jest/globals": "^30.3.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -63,18 +64,18 @@
     "chromedriver": "^126.0.5",
     "cross-env": "^10.1.0",
     "electron": "^31.7.7",
-    "esbuild": "^0.27.3",
+    "esbuild": "^0.27.4",
     "globals": "^17.4.0",
-    "immutable": "^5.1.4",
-    "jest": "^30.2.0",
-    "jest-environment-jsdom": "^30.2.0",
-    "pug": "^3.0.3",
+    "immutable": "^5.1.5",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "pug": "^3.0.4",
     "rimraf": "^6.1.3",
     "selenium-webdriver": "^4.41.0",
     "sinon-chrome": "^3.0.1",
     "ts-jest": "^29.4.6",
     "typescript": "~5.9.3",
-    "webpack": "^5.105.3",
-    "webpack-cli": "^6.0.1"
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.0"
   }
 }

@@ -10,6 +10,7 @@ packages:
   - packages/redux-devtools-inspector-monitor-test-tab/demo
   - packages/redux-devtools-rtk-query-monitor/demo
   - packages/redux-devtools-slider-monitor/examples/todomvc
+
 onlyBuiltDependencies:
   - '@apollo/protobufjs'
   - '@swc/core'
@@ -19,6 +20,8 @@ onlyBuiltDependencies:
   - msw
   - sqlite3
   - unrs-resolver
+
 patchedDependencies:
   '@dnd-kit/core': patches/@dnd-kit__core.patch
   '@dnd-kit/sortable': patches/@dnd-kit__sortable.patch
+  redux-persist: patches/redux-persist.patch

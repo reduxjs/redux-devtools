@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import type { Base16Theme } from 'react-base16-styling';
-import createStyledComponent from '../utils/createStyledComponent';
-import * as styles from './styles';
-import Button from '../Button';
-import Form from '../Form';
-import { Props as FormProps } from '../Form/Form';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import * as styles from './styles/index.js';
+import Button from '../Button/index.js';
+import Form from '../Form/index.js';
+import { Props as FormProps } from '../Form/Form.js';
 
 const DialogWrapper = createStyledComponent(styles);
 

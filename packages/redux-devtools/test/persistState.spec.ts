@@ -1,4 +1,5 @@
-import { instrument, persistState } from '../src';
+import { jest } from '@jest/globals';
+import { instrument, persistState } from '../src/index.js';
 import { compose, createStore, StoreEnhancer } from 'redux';
 
 describe('persistState', () => {

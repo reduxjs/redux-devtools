@@ -1,7 +1,7 @@
 import { Action, compose, Reducer, StoreEnhancerStoreCreator } from 'redux';
 import { instrument } from '@redux-devtools/instrument';
 import { persistState } from '@redux-devtools/core';
-import type { ConfigWithExpandedMaxAge } from './index';
+import type { ConfigWithExpandedMaxAge } from './index.js';
 
 export function getUrlParam(key: string) {
   const matches = new RegExp(`[?&]${key}=([^&#]+)\\b`).exec(

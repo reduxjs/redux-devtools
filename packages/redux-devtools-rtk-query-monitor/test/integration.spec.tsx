@@ -1,8 +1,9 @@
+import { jest } from '@jest/globals';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { ReduxDevTools } from './devtools.mocks';
-import { BaseQueryJestMockFunction, setupStore } from './rtk-query.mocks';
+import { ReduxDevTools } from './devtools.mocks.js';
+import { BaseQueryJestMockFunction, setupStore } from './rtk-query.mocks.js';
 
 function Providers({
   store,
