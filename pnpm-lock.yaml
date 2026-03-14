@@ -11,15 +11,9 @@ patchedDependencies:
   '@dnd-kit/sortable':
     hash: e47dc0c4389a046873ebf71cee394de1946ef0e0ee96c171579932908f628d7f
     path: patches/@dnd-kit__sortable.patch
-  '@uiw/codemirror-themes':
-    hash: 0807c91492c1c4a6d78cf0e0657f8658d883398c3e1fa9b0eb9f3c3edaca4f6c
-    path: patches/@uiw__codemirror-themes.patch
   redux-persist:
     hash: 70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2
     path: patches/redux-persist.patch
-  simple-diff:
-    hash: 29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576
-    path: patches/simple-diff.patch
 
 importers:
 
@@ -1207,7 +1201,7 @@ importers:
         version: 5.6.0(react@19.2.4)
       simple-diff:
         specifier: ^1.7.3
-        version: 1.7.3(patch_hash=29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576)
+        version: 1.7.3
     devDependencies:
       '@emotion/react':
         specifier: ^11.14.0
@@ -2079,7 +2073,7 @@ importers:
         version: 1.3.3
       '@uiw/codemirror-themes':
         specifier: ^4.25.8
-        version: 4.25.8(patch_hash=0807c91492c1c4a6d78cf0e0657f8658d883398c3e1fa9b0eb9f3c3edaca4f6c)(@codemirror/language@6.12.2)(@codemirror/state@6.6.0)(@codemirror/view@6.40.0)
+        version: 4.25.8(@codemirror/language@6.12.2)(@codemirror/state@6.6.0)(@codemirror/view@6.40.0)
       '@uiw/react-codemirror':
         specifier: ^4.25.8
         version: 4.25.8(@babel/runtime@7.28.6)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.2)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.40.0)(codemirror@6.0.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -13412,7 +13406,7 @@ snapshots:
       '@codemirror/state': 6.6.0
       '@codemirror/view': 6.40.0
 
-  '@uiw/codemirror-themes@4.25.8(patch_hash=0807c91492c1c4a6d78cf0e0657f8658d883398c3e1fa9b0eb9f3c3edaca4f6c)(@codemirror/language@6.12.2)(@codemirror/state@6.6.0)(@codemirror/view@6.40.0)':
+  '@uiw/codemirror-themes@4.25.8(@codemirror/language@6.12.2)(@codemirror/state@6.6.0)(@codemirror/view@6.40.0)':
     dependencies:
       '@codemirror/language': 6.12.2
       '@codemirror/state': 6.6.0
@@ -18722,7 +18716,7 @@ snapshots:
 
   simple-concat@1.0.1: {}
 
-  simple-diff@1.7.3(patch_hash=29bc2fea6d9a2f54cf1c093356f3bc78c3a44d6f4da796c2ad39dc472dcd2576): {}
+  simple-diff@1.7.3: {}
 
   simple-element-resize-detector@1.3.0: {}
 
