@@ -23,7 +23,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc"
   },
   "dependencies": {
     "d3-state-visualizer": "workspace:^",
