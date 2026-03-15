@@ -253,45 +253,12 @@ importers:
         specifier: workspace:^
         version: link:../../../map2tree
     devDependencies:
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/preset-env':
-        specifier: ^7.29.0
-        version: 7.29.0(@babel/core@7.29.0)
-      '@babel/preset-typescript':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@types/node':
-        specifier: ^24.12.0
-        version: 24.12.0
-      babel-loader:
-        specifier: ^10.1.1
-        version: 10.1.1(@babel/core@7.29.0)(webpack@5.105.4)
-      cross-env:
-        specifier: ^10.1.0
-        version: 10.1.0
-      fork-ts-checker-webpack-plugin:
-        specifier: ^9.1.0
-        version: 9.1.0(typescript@5.9.3)(webpack@5.105.4)
-      html-webpack-plugin:
-        specifier: ^5.6.6
-        version: 5.6.6(webpack@5.105.4)
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.12.0)(typescript@5.9.3)
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
-      webpack:
-        specifier: ^5.105.4
-        version: 5.105.4(webpack-cli@7.0.0)
-      webpack-cli:
-        specifier: ^7.0.0
-        version: 7.0.0(webpack-dev-server@5.2.3)(webpack@5.105.4)
-      webpack-dev-server:
-        specifier: ^5.2.3
-        version: 5.2.3(tslib@2.8.1)(webpack-cli@7.0.0)(webpack@5.105.4)
+      vite:
+        specifier: ^8.0.0
+        version: 8.0.0(@types/node@24.12.0)(esbuild@0.27.4)(terser@5.46.0)
 
   packages/d3tooltip:
     devDependencies:
