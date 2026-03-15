@@ -165,14 +165,14 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.14)
       chromedriver:
-        specifier: ^134.0.5
-        version: 134.0.5
+        specifier: ^140.0.4
+        version: 140.0.4
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
       electron:
-        specifier: ^35.7.5
-        version: 35.7.5
+        specifier: ^38.8.6
+        version: 38.8.6
       esbuild:
         specifier: ^0.27.4
         version: 0.27.4
@@ -942,8 +942,8 @@ importers:
         specifier: ^7.0.6
         version: 7.0.6
       electron:
-        specifier: ^35.7.5
-        version: 35.7.5
+        specifier: ^38.8.6
+        version: 38.8.6
       express:
         specifier: ^5.2.1
         version: 5.2.1
@@ -5954,9 +5954,9 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@134.0.5:
-    resolution: {integrity: sha512-edXbiuShAvH6Elx8Hobl4NQkgNRMIozcW7ZlEiE8TBynZHRazrepO9hfftQzZgztPvjMQiSWeWjZaDV3SecYaw==}
-    engines: {node: '>=18'}
+  chromedriver@140.0.4:
+    resolution: {integrity: sha512-/NUoxYBNkJeoNj1B5ux3KxGShITlxJctkbApgVAa3ZC8EvCLKaBclwU3/IEj5MJHnBJzqOVDxs/eTyaF9k2fOg==}
+    engines: {node: '>=20'}
     hasBin: true
 
   ci-info@4.4.0:
@@ -6568,8 +6568,8 @@ packages:
   electron-to-chromium@1.5.313:
     resolution: {integrity: sha512-QBMrTWEf00GXZmJyx2lbYD45jpI3TUFnNIzJ5BBc8piGUDwMPa1GV6HJWTZVvY/eiN3fSopl7NRbgGp9sZ9LTA==}
 
-  electron@35.7.5:
-    resolution: {integrity: sha512-dnL+JvLraKZl7iusXTVTGYs10TKfzUi30uEDTqsmTm0guN9V2tbOjTzyIZbh9n3ygUjgEYyo+igAwMRXIi3IPw==}
+  electron@38.8.6:
+    resolution: {integrity: sha512-lyBhcVi9QYAZL6FO6r5twAWAjWnYomo3iVDvrb5SJZlq928BGemHOKG0tPIq41NOLaCu9f3XdEEjMkjQPjprRg==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -14863,7 +14863,7 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@134.0.5:
+  chromedriver@140.0.4:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.13.6
@@ -15455,7 +15455,7 @@ snapshots:
 
   electron-to-chromium@1.5.313: {}
 
-  electron@35.7.5:
+  electron@38.8.6:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 22.19.15
