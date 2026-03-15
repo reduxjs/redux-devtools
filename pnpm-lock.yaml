@@ -165,14 +165,14 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.14)
       chromedriver:
-        specifier: ^140.0.4
-        version: 140.0.4
+        specifier: ^146.0.3
+        version: 146.0.3
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
       electron:
-        specifier: ^38.8.6
-        version: 38.8.6
+        specifier: ^41.0.2
+        version: 41.0.2
       esbuild:
         specifier: ^0.27.4
         version: 0.27.4
@@ -942,8 +942,8 @@ importers:
         specifier: ^7.0.6
         version: 7.0.6
       electron:
-        specifier: ^38.8.6
-        version: 38.8.6
+        specifier: ^41.0.2
+        version: 41.0.2
       express:
         specifier: ^5.2.1
         version: 5.2.1
@@ -4828,9 +4828,6 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@22.19.15':
-    resolution: {integrity: sha512-F0R/h2+dsy5wJAUe3tAU6oqa2qbWY5TpNfL/RGmo1y38hiyO1w3x2jPtt76wmuaJI4DQnOBu21cNXQ2STIUUWg==}
-
   '@types/node@24.12.0':
     resolution: {integrity: sha512-GYDxsZi3ChgmckRT9HPU0WEhKLP08ev/Yfcq2AstjrDASOYCSXeyjDsHg4v5t4jOj7cyDX3vmprafKlWIG9MXQ==}
 
@@ -5954,8 +5951,8 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@140.0.4:
-    resolution: {integrity: sha512-/NUoxYBNkJeoNj1B5ux3KxGShITlxJctkbApgVAa3ZC8EvCLKaBclwU3/IEj5MJHnBJzqOVDxs/eTyaF9k2fOg==}
+  chromedriver@146.0.3:
+    resolution: {integrity: sha512-RFhEoG3bmI+TaDm/9vDNntkxM76Sb/VIxvX3kHPzfQ3wvmE+PPSTw6gnD+Oa+dcJAc/kg/vQAwMrOUs8E1LdyQ==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -6568,8 +6565,8 @@ packages:
   electron-to-chromium@1.5.313:
     resolution: {integrity: sha512-QBMrTWEf00GXZmJyx2lbYD45jpI3TUFnNIzJ5BBc8piGUDwMPa1GV6HJWTZVvY/eiN3fSopl7NRbgGp9sZ9LTA==}
 
-  electron@38.8.6:
-    resolution: {integrity: sha512-lyBhcVi9QYAZL6FO6r5twAWAjWnYomo3iVDvrb5SJZlq928BGemHOKG0tPIq41NOLaCu9f3XdEEjMkjQPjprRg==}
+  electron@41.0.2:
+    resolution: {integrity: sha512-raotm/aO8kOs1jD8SI8ssJ7EKciQOY295AOOprl1TxW7B0At8m5Ae7qNU1xdMxofiHMR8cNEGi9PKD3U+yT/mA==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -8794,6 +8791,10 @@ packages:
   proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
 
+  proxy-from-env@2.1.0:
+    resolution: {integrity: sha512-cJ+oHTW1VAEa8cJslgmUZrc+sjRKgAKl3Zyse6+PV38hZe/V6Z14TbCuXcan9F9ghlz4QrFr2c92TNF82UkYHA==}
+    engines: {node: '>=10'}
+
   proxy-memoize@3.0.1:
     resolution: {integrity: sha512-VDdG/VYtOgdGkWJx7y0o7p+zArSf2383Isci8C+BP3YXgMYDoPd3cCBjw0JdWb6YBb9sFiOPbAADDVTPJnh+9g==}
 
@@ -9859,9 +9860,6 @@ packages:
     resolution: {integrity: sha512-ulRWYWHvscPFc0QQXvyJjY6LIXU56f0h8pQFvhxiKk5V1fcI8gp9Ht9leVAhrVjzqMw0BgjspBINx9r6oyJUvQ==}
     peerDependencies:
       react: '>=16.14.0'
-
-  undici-types@6.21.0:
-    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
@@ -13276,10 +13274,6 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
-  '@types/node@22.19.15':
-    dependencies:
-      undici-types: 6.21.0
-
   '@types/node@24.12.0':
     dependencies:
       undici-types: 7.16.0
@@ -14863,14 +14857,14 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@140.0.4:
+  chromedriver@146.0.3:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.13.6
       compare-versions: 6.1.1
       extract-zip: 2.0.1
       proxy-agent: 6.5.0
-      proxy-from-env: 1.1.0
+      proxy-from-env: 2.1.0
       tcp-port-used: 1.0.2
     transitivePeerDependencies:
       - debug
@@ -15455,10 +15449,10 @@ snapshots:
 
   electron-to-chromium@1.5.313: {}
 
-  electron@38.8.6:
+  electron@41.0.2:
     dependencies:
       '@electron/get': 2.0.3
-      '@types/node': 22.19.15
+      '@types/node': 24.12.0
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
@@ -18061,6 +18055,8 @@ snapshots:
 
   proxy-from-env@1.1.0: {}
 
+  proxy-from-env@2.1.0: {}
+
   proxy-memoize@3.0.1:
     dependencies:
       proxy-compare: 3.0.1
@@ -19432,8 +19428,6 @@ snapshots:
   uncontrollable@8.0.4(react@19.2.4):
     dependencies:
       react: 19.2.4
-
-  undici-types@6.21.0: {}
 
   undici-types@7.16.0: {}
 
