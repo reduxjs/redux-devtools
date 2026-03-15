@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button, Form } from 'react-bootstrap';
 import { BsX } from 'react-icons/bs';
 import styled from '@emotion/styled';
 
