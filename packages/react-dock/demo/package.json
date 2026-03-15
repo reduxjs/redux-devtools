@@ -3,11 +3,13 @@
   "name": "react-dock-demo",
   "version": "0.1.7",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
-    "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
@@ -19,21 +21,11 @@
     "react-is": "^19.2.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.0",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
     "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "babel-loader": "^10.1.1",
-    "cross-env": "^10.1.0",
-    "fork-ts-checker-webpack-plugin": "^9.1.0",
-    "html-webpack-plugin": "^5.6.6",
-    "ts-node": "^10.9.2",
+    "@vitejs/plugin-react": "^6.0.0",
     "typescript": "~5.9.3",
-    "webpack": "^5.105.4",
-    "webpack-cli": "^7.0.0",
-    "webpack-dev-server": "^5.2.3"
+    "vite": "^8.0.0"
   }
 }
