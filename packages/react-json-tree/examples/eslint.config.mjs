@@ -3,11 +3,15 @@ import eslintTs from '../../../eslint.ts.react.config.base.mjs';
 
 export default [
   ...eslintJs,
-  ...eslintTs(import.meta.dirname),
   ...eslintTs(
     import.meta.dirname,
-    ['webpack.config.ts'],
-    ['./tsconfig.webpack.json'],
+    ['./src/**/*.ts', './src/**/*.tsx'],
+    ['./tsconfig.app.json'],
+  ),
+  ...eslintTs(
+    import.meta.dirname,
+    ['vite.config.ts'],
+    ['./tsconfig.node.json'],
   ),
   {
     ignores: ['dist'],
