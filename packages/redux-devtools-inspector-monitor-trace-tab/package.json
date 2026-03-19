@@ -26,8 +26,8 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/code-frame": "^8.0.0-rc.2",
-    "@types/chrome": "^0.1.37",
+    "@babel/code-frame": "^8.0.0-rc.3",
+    "@types/chrome": "^0.1.38",
     "anser": "^2.3.5",
     "html-entities": "^2.6.0",
     "path-browserify": "^1.0.1",
