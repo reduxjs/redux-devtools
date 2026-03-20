@@ -61,6 +61,7 @@ export function nonReduxDispatch(
 
   switch (action.type) {
     case 'TOGGLE_ACTION':
+    case 'REORDER_ACTION':
       return stringifyJSON(state, true);
     case 'JUMP_TO_STATE':
       return stringifyJSON(state.computedStates[action.index].state, true);
