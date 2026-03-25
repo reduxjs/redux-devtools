@@ -4,7 +4,8 @@
     "rootDir": "./src",
     "outDir": "lib",
     "types": ["node"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "stripInternal": true
   },
   "include": ["src"]
 }
