@@ -9,6 +9,9 @@ import { useTheme } from '@emotion/react';
 import type { ThemeFromProvider } from '../utils/theme.js';
 import { defaultStyle } from './styles/index.js';
 
+/**
+ * @internal
+ */
 import '../../fonts/index.css';
 
 const EditorContainer = styled.div(

@@ -1,9 +1,11 @@
 {
   "extends": "../../tsconfig.esm.react.base.json",
   "compilerOptions": {
+    "rootDir": "./src",
     "outDir": "lib",
     "types": ["node"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "stripInternal": true
   },
   "include": ["src"]
 }
