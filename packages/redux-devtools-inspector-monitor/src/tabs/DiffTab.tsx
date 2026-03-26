@@ -12,6 +12,7 @@ const DiffTab: FunctionComponent<
   labelRenderer,
   isWideLayout,
   dataTypeKey,
+  sortStateTreeAlphabetically,
 }) => (
   <JSONDiff
     {...{
@@ -21,6 +22,7 @@ const DiffTab: FunctionComponent<
       labelRenderer,
       isWideLayout,
       dataTypeKey,
+      sortObjectKeys: sortStateTreeAlphabetically,
     }}
   />
 );

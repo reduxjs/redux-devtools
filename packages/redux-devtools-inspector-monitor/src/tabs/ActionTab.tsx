@@ -14,6 +14,7 @@ const ActionTab: FunctionComponent<
   labelRenderer,
   dataTypeKey,
   isWideLayout,
+  sortStateTreeAlphabetically,
 }) => (
   <JSONTree
     labelRenderer={labelRenderer}
@@ -24,6 +25,7 @@ const ActionTab: FunctionComponent<
     }
     invertTheme={invertTheme}
     hideRoot
+    sortObjectKeys={sortStateTreeAlphabetically}
   />
 );
 
