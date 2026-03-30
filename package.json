@@ -6,13 +6,13 @@
     "@eslint/js": "^9.39.4",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jest": "^29.15.0",
+    "eslint-plugin-jest": "^29.15.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "jest": "^30.3.0",
     "prettier": "3.8.1",
     "typescript": "~6.0.2",
-    "typescript-eslint": "^8.57.0"
+    "typescript-eslint": "^8.58.0"
   },
   "scripts": {
     "format": "prettier --write .",
@@ -23,5 +23,5 @@
     "clean:all": "pnpm --recursive run clean",
     "release": "pnpm build:all && pnpm publish -r"
   },
-  "packageManager": "pnpm@10.32.1"
+  "packageManager": "pnpm@10.33.0"
 }
