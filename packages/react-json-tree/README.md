@@ -137,6 +137,34 @@ Their full signatures are:
 - `labelRenderer: function(keyPath, nodeType, expanded, expandable)`
 - `valueRenderer: function(valueAsString, value, ...keyPath)`
 
+Additionally, it is possible to override the arrows for expanding, for example with a `+` and `-` button.
+
+```tsx
+const ArrowOverride = ({ expanded, ...rest }: JSONArrowProps) => {
+  if (expanded) {
+    return <button {...rest}>-</button>
+  }
+  return <button {...rest}>+</button>
+}
+
+<JSONTree ArrowComponentOverride={ArrowOverride} />
+```
+
+The default `JSONArrow` component will literally check if an `ArrowComponentOverride` exists and pass it's props there. The typescript for these props is as follows.
+
+```ts
+interface JSONArrowProps {
+  styling: StylingFunction;
+  arrowStyle?: 'single' | 'double';
+  expanded: boolean;
+  nodeType: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  ariaControls?: string;
+  ariaLabel?: string
+  OverrideComponent?: ComponentType<JSONArrowProps>;
+}
+```
+
 #### More Options
 
 - `shouldExpandNodeInitially: function(keyPath, data, level)` - determines if node should be expanded when it first renders (root is expanded by default)
