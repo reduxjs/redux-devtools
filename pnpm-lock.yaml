@@ -165,8 +165,8 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.14)
       chromedriver:
-        specifier: ^146.0.6
-        version: 146.0.6
+        specifier: ^147.0.2
+        version: 147.0.2
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
@@ -5719,6 +5719,7 @@ packages:
   basic-ftp@5.2.0:
     resolution: {integrity: sha512-VoMINM2rqJwJgfdHq6RiUudKt2BV+FY5ZFezP/ypmwayk68+NzzAQy4XXLlqsGD4MCzq3DrmNFD/uUmBJuGoXw==}
     engines: {node: '>=10.0.0'}
+    deprecated: Security vulnerability fixed in 5.2.1, please upgrade
 
   batch@0.6.1:
     resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}
@@ -5898,8 +5899,8 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@146.0.6:
-    resolution: {integrity: sha512-FIRi3hy0nRiyirK03etVXEpYTIodevFcvTBAM5ZCq+pX3w31jLm6JE8BVW1ypAVLvSp6HJDvboCcdgUroS3miw==}
+  chromedriver@147.0.2:
+    resolution: {integrity: sha512-CgbtfPbdE3kse2gJdVVjvpRZtPV6pooaIVTJKdCj8LaDIMJvco57t2lXJcQObjfg2bhGN7RiGOk0iKpY2vLgLQ==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -14811,7 +14812,7 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@146.0.6:
+  chromedriver@147.0.2:
     dependencies:
       '@testim/chrome-version': 1.1.4
       axios: 1.14.0
