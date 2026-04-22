@@ -1,4 +1,3 @@
-import { v4 as uuidV4 } from 'uuid';
 import { pick } from 'lodash-es';
 import { AGServer } from 'socketcluster-server';
 import { Knex } from 'knex';
@@ -88,7 +87,7 @@ function add(data: AddData): Promise<ReportBaseFields | { error: string }> {
     return error('Type ' + data.type + ' is not supported yet.');
   }
 
-  const reportId = uuidV4();
+  const reportId = crypto.randomUUID();
   const report: Report = {
     id: reportId,
     type: data.type,
