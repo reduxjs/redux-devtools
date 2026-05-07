@@ -11,15 +11,13 @@ packages:
   - packages/redux-devtools-rtk-query-monitor/demo
   - packages/redux-devtools-slider-monitor/examples/todomvc
 
-onlyBuiltDependencies:
-  - '@apollo/protobufjs'
-  - '@swc/core'
-  - chromedriver
-  - electron
-  - esbuild
-  - msw
-  - sqlite3
-  - unrs-resolver
+allowBuilds:
+  '@apollo/protobufjs': true
+  chromedriver: true
+  esbuild: true
+  msw: true
+  sqlite3: true
+  unrs-resolver: true
 
 patchedDependencies:
   '@dnd-kit/core': patches/@dnd-kit__core.patch
