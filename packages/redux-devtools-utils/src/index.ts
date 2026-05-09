@@ -128,7 +128,7 @@ function tryCatchStringify(obj: unknown) {
       null as unknown as undefined,
       {
         circular: '[CIRCULAR]',
-      } as unknown as boolean,
+      },
     );
   }
 }

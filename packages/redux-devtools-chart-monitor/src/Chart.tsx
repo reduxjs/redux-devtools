@@ -33,8 +33,7 @@ class Chart<S, A extends Action<string>> extends Component<Props<S, A>> {
     const { select, state, defaultIsVisible } = this.props;
     this.renderChart = tree(this.divRef.current!, this.props);
     if (defaultIsVisible) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-      this.renderChart(select(state!) as {} | null | undefined);
+      this.renderChart(select(state!));
     }
   }
 
@@ -42,8 +41,7 @@ class Chart<S, A extends Action<string>> extends Component<Props<S, A>> {
     const { state, select, monitorState } = nextProps;
 
     if (monitorState.isVisible !== false) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-      this.renderChart!(select(state!) as {} | null | undefined);
+      this.renderChart!(select(state!));
     }
   }
 

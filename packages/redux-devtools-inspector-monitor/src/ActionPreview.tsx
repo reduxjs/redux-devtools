@@ -108,10 +108,10 @@ class ActionPreview<S, A extends Action<string>> extends Component<
 
     const renderedTabs: Tab<S, A>[] =
       typeof tabs === 'function'
-        ? tabs(DEFAULT_TABS as Tab<S, A>[])
+        ? tabs(DEFAULT_TABS)
         : tabs
           ? tabs
-          : (DEFAULT_TABS as Tab<S, A>[]);
+          : DEFAULT_TABS;
 
     const { component: TabComponent } =
       renderedTabs.find((tab) => tab.name === tabName) ||

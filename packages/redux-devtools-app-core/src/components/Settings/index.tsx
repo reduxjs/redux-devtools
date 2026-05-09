@@ -28,7 +28,7 @@ export default class Settings extends Component<Props, State> {
     return (
       // eslint-disable-next-line @typescript-eslint/no-empty-object-type
       <Tabs<{}>
-        tabs={tabs as any}
+        tabs={tabs}
         selected={this.state.selected || tabs[0].name}
         onClick={this.handleSelect}
       />
