@@ -40,8 +40,7 @@ class ChartTab extends Component<Props> {
       this.node!.innerHTML = '';
       this.createChart(nextProps);
     } else if (nextProps.data !== this.props.data) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-      this.renderChart!(nextProps.data as {} | null | undefined);
+      this.renderChart!(nextProps.data);
     }
   }
 
@@ -51,8 +50,7 @@ class ChartTab extends Component<Props> {
 
   createChart(props: Props) {
     this.renderChart = tree(this.node!, this.getChartTheme(props.theme));
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    this.renderChart(props.data as {} | null | undefined);
+    this.renderChart(props.data);
   }
 
   getChartTheme(theme: ThemeFromProvider): Partial<Options> {

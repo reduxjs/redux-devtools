@@ -578,7 +578,7 @@ const preEnhancer =
       dispatch: (...args: any[]) =>
         !window.__REDUX_DEVTOOLS_EXTENSION_LOCKED__ &&
         (store.dispatch as any)(...args),
-    } as any;
+    };
   };
 
 export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [

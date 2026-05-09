@@ -377,13 +377,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
     connections.tab[id].postMessage({
       type: message,
       action,
-      state: nonReduxDispatch(
-        store,
-        message,
-        instanceId,
-        action as AppDispatchAction,
-        state,
-      ),
+      state: nonReduxDispatch(store, message, instanceId, action, state),
       id: (instanceId as number).toString().replace(/^[^/]+\//, ''),
     });
   }

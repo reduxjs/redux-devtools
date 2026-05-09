@@ -16,7 +16,7 @@ const SelectWidget: Widget = ({
   ...rest
 }) => (
   <Select<{ label: string; value: string }>
-    options={options.enumOptions as { label: string; value: string }[]}
+    options={options.enumOptions}
     onChange={(option) => {
       onChange(option?.value);
     }}

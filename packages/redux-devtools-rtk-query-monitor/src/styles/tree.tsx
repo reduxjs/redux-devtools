@@ -24,9 +24,7 @@ function getShortTypeString(val: unknown, diff: boolean | undefined) {
   } else if (val === undefined) {
     return 'undef';
   } else if (typeof val === 'object') {
-    return Object.keys(val as Record<string, unknown>).length > 0
-      ? '{…}'
-      : '{}';
+    return Object.keys(val).length > 0 ? '{…}' : '{}';
   } else if (typeof val === 'function') {
     return 'fn';
   } else if (typeof val === 'string') {
