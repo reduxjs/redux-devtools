@@ -12,7 +12,7 @@
     "jest": "^30.4.2",
     "prettier": "3.8.3",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.59.2"
+    "typescript-eslint": "^8.59.3"
   },
   "scripts": {
     "format": "prettier --write .",
@@ -23,5 +23,5 @@
     "clean:all": "pnpm --recursive run clean",
     "release": "pnpm build:all && pnpm publish -r"
   },
-  "packageManager": "pnpm@11.0.9"
+  "packageManager": "pnpm@11.1.2"
 }

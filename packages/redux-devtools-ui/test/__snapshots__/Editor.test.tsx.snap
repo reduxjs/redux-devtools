@@ -8,7 +8,7 @@ exports[`Editor renders correctly 1`] = `
     class="cm-theme"
   >
     <div
-      class="cm-editor ͼ1 ͼ3 ͼ4 ͼ1q ͼ16"
+      class="cm-editor ͼ1 ͼ3 ͼ4 ͼ1u ͼ1a"
     >
       <div
         aria-live="polite"
@@ -39,24 +39,6 @@ exports[`Editor renders correctly 1`] = `
               1
             </div>
           </div>
-          <div
-            class="cm-gutter cm-foldGutter"
-          >
-            <div
-              class="cm-gutterElement"
-              style="height: 0px; visibility: hidden; pointer-events: none;"
-            >
-              <span
-                title="Unfold line"
-              >
-                ›
-              </span>
-            </div>
-            <div
-              class="cm-gutterElement cm-activeLineGutter"
-              style="height: 14px;"
-            />
-          </div>
         </div>
         <div
           aria-multiline="true"
@@ -64,7 +46,6 @@ exports[`Editor renders correctly 1`] = `
           autocorrect="off"
           class="cm-content"
           contenteditable="true"
-          data-language="javascript"
           role="textbox"
           spellcheck="false"
           style="tab-size: 4;"
@@ -74,30 +55,7 @@ exports[`Editor renders correctly 1`] = `
           <div
             class="cm-line cm-activeLine"
           >
-            <span
-              class="ͼ19"
-            >
-              var
-            </span>
-             
-            <span
-              class="ͼ1c"
-            >
-              a
-            </span>
-             
-            <span
-              class="ͼ1f"
-            >
-              =
-            </span>
-             
-            <span
-              class="ͼ1b"
-            >
-              1
-            </span>
-            ;
+            var a = 1;
           </div>
         </div>
         <div
