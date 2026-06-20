@@ -21,10 +21,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "node node_modules/typescript-go/bin/tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "type-check": "tsc"
+    "type-check": "node node_modules/typescript-go/bin/tsc"
   },
   "dependencies": {
     "d3-state-visualizer": "workspace:^",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "typescript": "~6.0.3",
+    "typescript-go": "npm:typescript@7.0.1-rc",
     "vite": "^8.0.13"
   }
 }

@@ -27,12 +27,12 @@
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build --quiet",
     "build": "pnpm run build:lib && pnpm run build:storybook",
-    "build:lib": "tsc && pnpm run build:css",
+    "build:lib": "node node_modules/typescript-go/bin/tsc && pnpm run build:css",
     "build:css": "ncp fonts lib/fonts",
     "clean": "rimraf lib storybook-static",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit",
+    "type-check": "node node_modules/typescript-go/bin/tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run lint && pnpm run test"
   },
@@ -78,6 +78,7 @@
     "storybook": "^10.4.6",
     "ts-jest": "^29.4.11",
     "typescript": "~6.0.3",
+    "typescript-go": "npm:typescript@7.0.1-rc",
     "vite": "^8.0.13"
   },
   "peerDependencies": {

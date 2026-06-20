@@ -26,11 +26,11 @@
     "url": "git+https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "node node_modules/typescript-go/bin/tsc",
     "clean": "rimraf lib",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit",
+    "type-check": "node node_modules/typescript-go/bin/tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run lint && pnpm run test"
   },
@@ -48,6 +48,7 @@
     "jest-environment-jsdom": "^30.4.1",
     "rimraf": "^6.1.3",
     "ts-jest": "^29.4.11",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "typescript-go": "npm:typescript@7.0.1-rc"
   }
 }

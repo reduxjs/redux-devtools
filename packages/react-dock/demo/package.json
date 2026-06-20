@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "node node_modules/typescript-go/bin/tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "type-check": "tsc"
+    "type-check": "node node_modules/typescript-go/bin/tsc"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
@@ -26,6 +26,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
     "typescript": "~6.0.3",
+    "typescript-go": "npm:typescript@7.0.1-rc",
     "vite": "^8.0.13"
   }
 }

@@ -7,7 +7,7 @@
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
     "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit"
+    "type-check": "node node_modules/typescript-go/bin/tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -46,6 +46,7 @@
     "style-loader": "^4.0.0",
     "ts-node": "^10.9.2",
     "typescript": "~6.0.3",
+    "typescript-go": "npm:typescript@7.0.1-rc",
     "webpack": "^5.107.2",
     "webpack-cli": "^7.0.3",
     "webpack-dev-server": "^5.2.4"
