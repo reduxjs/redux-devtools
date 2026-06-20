@@ -26,8 +26,8 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "dependencies": {
-    "@babel/code-frame": "^8.0.0-rc.5",
-    "@types/chrome": "^0.1.42",
+    "@babel/code-frame": "^8.0.0",
+    "@types/chrome": "^0.1.43",
     "anser": "^2.3.5",
     "html-entities": "^2.6.0",
     "path-browserify": "^1.0.1",
@@ -42,17 +42,17 @@
     "@testing-library/react": "^16.3.2",
     "@types/babel__code-frame": "^7.27.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.12.4",
+    "@types/node": "^24.13.2",
     "@types/path-browserify": "^1.0.3",
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.17",
     "@types/source-map": "0.5.2",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "redux": "^5.0.1",
     "rimraf": "^6.1.3",
-    "ts-jest": "^29.4.9",
+    "ts-jest": "^29.4.11",
     "typescript": "~6.0.3"
   },
   "peerDependencies": {
