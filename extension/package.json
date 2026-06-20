@@ -21,7 +21,7 @@
     "test:electron": "pnpm run build:test:electron:fixture && node --experimental-vm-modules node_modules/jest/bin/jest.js test/electron",
     "test": "pnpm run test:app && pnpm run test:chrome && pnpm run test:electron",
     "lint": "eslint .",
-    "type-check": "node node_modules/typescript-go/bin/tsc --noEmit"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -74,8 +74,8 @@
     "selenium-webdriver": "^4.45.0",
     "sinon-chrome": "^3.0.1",
     "ts-jest": "^29.4.11",
-    "typescript": "~6.0.3",
-    "typescript-go": "npm:typescript@7.0.1-rc",
+    "typescript": "npm:@typescript/typescript6@^6.0.0",
+    "typescript-7": "npm:typescript@7.0.1-rc",
     "webpack": "^5.107.2",
     "webpack-cli": "^7.0.3"
   }

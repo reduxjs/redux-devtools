@@ -30,7 +30,7 @@ importers:
         version: 10.1.8(eslint@9.39.4)
       eslint-plugin-jest:
         specifier: ^29.15.2
-        version: 29.15.2(@typescript-eslint/eslint-plugin@8.61.1(@typescript-eslint/parser@8.61.1(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.15.2(@typescript-eslint/eslint-plugin@8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       eslint-plugin-react:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.39.4)
@@ -39,16 +39,16 @@ importers:
         version: 7.1.1(eslint@9.39.4)
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       prettier:
         specifier: 3.8.4
         version: 3.8.4
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
       typescript-eslint:
         specifier: ^8.61.1
-        version: 8.61.1(eslint@9.39.4)(typescript@6.0.3)
+        version: 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
 
   extension:
     dependencies:
@@ -178,7 +178,7 @@ importers:
         version: 5.1.6
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       jest-environment-jsdom:
         specifier: ^30.4.1
         version: 30.4.1
@@ -196,11 +196,11 @@ importers:
         version: 3.0.1
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       webpack:
@@ -238,9 +238,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -254,9 +254,9 @@ importers:
         version: link:../../../map2tree
     devDependencies:
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       vite:
@@ -275,9 +275,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -298,17 +298,17 @@ importers:
         version: 5.1.6
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       rimraf:
         specifier: ^6.1.3
         version: 6.1.3
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -338,7 +338,7 @@ importers:
         version: 4.17.12
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       jest-environment-jsdom:
         specifier: ^30.4.1
         version: 30.4.1
@@ -347,11 +347,11 @@ importers:
         version: 6.1.3
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -374,9 +374,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -417,9 +417,9 @@ importers:
         specifier: ^6.0.2
         version: 6.0.2(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       vite:
@@ -443,7 +443,7 @@ importers:
         version: 19.2.17
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -452,11 +452,11 @@ importers:
         version: 6.1.3
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -491,9 +491,9 @@ importers:
         specifier: ^6.0.2
         version: 6.0.2(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       vite:
@@ -520,7 +520,7 @@ importers:
         version: 19.2.17
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -538,11 +538,11 @@ importers:
         version: 6.1.3
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -638,7 +638,7 @@ importers:
         version: 0.28.0
       fork-ts-checker-webpack-plugin:
         specifier: ^9.1.0
-        version: 9.1.0(typescript@6.0.3)(webpack@5.107.2)
+        version: 9.1.0(@typescript/typescript6@6.0.1)(webpack@5.107.2)
       globals:
         specifier: ^17.6.0
         version: 17.6.0
@@ -662,14 +662,14 @@ importers:
         version: 4.0.0(webpack@5.107.2)
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       webpack:
@@ -780,7 +780,7 @@ importers:
         version: 0.28.0
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       jest-environment-jsdom:
         specifier: ^30.4.1
         version: 30.4.1
@@ -804,14 +804,14 @@ importers:
         version: 6.1.3
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -843,9 +843,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -977,7 +977,7 @@ importers:
         version: 17.6.0
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       ncp:
         specifier: ^2.0.0
         version: 2.0.0
@@ -992,11 +992,11 @@ importers:
         version: 7.2.2
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1028,9 +1028,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1043,9 +1043,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1122,9 +1122,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1187,7 +1187,7 @@ importers:
         version: 19.2.17
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       jest-environment-jsdom:
         specifier: ^30.4.1
         version: 30.4.1
@@ -1205,11 +1205,11 @@ importers:
         version: 6.1.3
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1305,7 +1305,7 @@ importers:
         version: 7.1.4(webpack@5.107.2)
       fork-ts-checker-webpack-plugin:
         specifier: ^9.1.0
-        version: 9.1.0(typescript@6.0.3)(webpack@5.107.2)
+        version: 9.1.0(@typescript/typescript6@6.0.1)(webpack@5.107.2)
       html-webpack-plugin:
         specifier: ^5.6.7
         version: 5.6.7(webpack@5.107.2)
@@ -1314,11 +1314,11 @@ importers:
         version: 4.0.0(webpack@5.107.2)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       webpack:
@@ -1390,7 +1390,7 @@ importers:
         version: 0.5.2
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       jest-environment-jsdom:
         specifier: ^30.4.1
         version: 30.4.1
@@ -1408,11 +1408,11 @@ importers:
         version: 6.1.3
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1499,17 +1499,17 @@ importers:
         version: 10.1.0
       fork-ts-checker-webpack-plugin:
         specifier: ^9.1.0
-        version: 9.1.0(typescript@6.0.3)(webpack@5.107.2)
+        version: 9.1.0(@typescript/typescript6@6.0.1)(webpack@5.107.2)
       html-webpack-plugin:
         specifier: ^5.6.7
         version: 5.6.7(webpack@5.107.2)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       webpack:
@@ -1535,7 +1535,7 @@ importers:
         version: 24.13.2
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       redux:
         specifier: ^5.0.1
         version: 5.0.1
@@ -1547,11 +1547,11 @@ importers:
         version: 7.8.2
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1586,9 +1586,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1624,10 +1624,10 @@ importers:
         version: 20.0.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.61.1
-        version: 8.61.1(@typescript-eslint/parser@8.61.1(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(typescript@6.0.3)
+        version: 8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       '@typescript-eslint/parser':
         specifier: ^8.61.1
-        version: 8.61.1(eslint@9.39.4)(typescript@6.0.3)
+        version: 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       eslint:
         specifier: ^9.39.4
         version: 9.39.4
@@ -1641,9 +1641,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1709,7 +1709,7 @@ importers:
         version: 19.2.17
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       jest-environment-jsdom:
         specifier: ^30.4.1
         version: 30.4.1
@@ -1730,11 +1730,11 @@ importers:
         version: 6.1.3
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1754,7 +1754,7 @@ importers:
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
       '@mswjs/data':
         specifier: ^0.16.2
-        version: 0.16.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 0.16.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       '@redux-devtools/core':
         specifier: workspace:^
         version: link:../../redux-devtools
@@ -1769,7 +1769,7 @@ importers:
         version: 2.12.0(react-redux@9.3.0(@types/react@19.2.17)(react@19.2.7)(redux@5.0.1))(react@19.2.7)
       msw:
         specifier: 2.13.2
-        version: 2.13.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 2.13.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -1827,7 +1827,7 @@ importers:
         version: 7.1.4(webpack@5.107.2)
       fork-ts-checker-webpack-plugin:
         specifier: ^9.1.0
-        version: 9.1.0(typescript@6.0.3)(webpack@5.107.2)
+        version: 9.1.0(@typescript/typescript6@6.0.1)(webpack@5.107.2)
       html-webpack-plugin:
         specifier: ^5.6.7
         version: 5.6.7(webpack@5.107.2)
@@ -1836,11 +1836,11 @@ importers:
         version: 4.0.0(webpack@5.107.2)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       webpack:
@@ -1870,17 +1870,17 @@ importers:
         version: 5.1.6
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       rimraf:
         specifier: ^6.1.3
         version: 6.1.3
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -1918,9 +1918,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -2001,7 +2001,7 @@ importers:
         version: 7.1.4(webpack@5.107.2)
       fork-ts-checker-webpack-plugin:
         specifier: ^9.1.0
-        version: 9.1.0(typescript@6.0.3)(webpack@5.107.2)
+        version: 9.1.0(@typescript/typescript6@6.0.1)(webpack@5.107.2)
       html-webpack-plugin:
         specifier: ^5.6.7
         version: 5.6.7(webpack@5.107.2)
@@ -2010,11 +2010,11 @@ importers:
         version: 4.0.0(webpack@5.107.2)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       webpack:
@@ -2092,7 +2092,7 @@ importers:
         version: 10.4.6(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       '@storybook/react-vite':
         specifier: ^10.4.6
-        version: 10.4.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(esbuild@0.28.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))(webpack@5.107.2(esbuild@0.28.0))
+        version: 10.4.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@typescript/typescript6@6.0.1)(esbuild@0.28.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))(webpack@5.107.2(esbuild@0.28.0))
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.1
@@ -2119,7 +2119,7 @@ importers:
         version: 3.2.3
       jest:
         specifier: ^30.4.2
-        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+        version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       jest-environment-jsdom:
         specifier: ^30.4.1
         version: 30.4.1
@@ -2143,11 +2143,11 @@ importers:
         version: 10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       ts-jest:
         specifier: ^29.4.11
-        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3)
+        version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       vite:
@@ -2191,9 +2191,9 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
 
@@ -2256,17 +2256,17 @@ importers:
         version: 10.1.0
       fork-ts-checker-webpack-plugin:
         specifier: ^9.1.0
-        version: 9.1.0(typescript@6.0.3)(webpack@5.107.2)
+        version: 9.1.0(@typescript/typescript6@6.0.1)(webpack@5.107.2)
       html-webpack-plugin:
         specifier: ^5.6.7
         version: 5.6.7(webpack@5.107.2)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       webpack:
@@ -2344,7 +2344,7 @@ importers:
         version: 7.1.4(webpack@5.107.2)
       fork-ts-checker-webpack-plugin:
         specifier: ^9.1.0
-        version: 9.1.0(typescript@6.0.3)(webpack@5.107.2)
+        version: 9.1.0(@typescript/typescript6@6.0.1)(webpack@5.107.2)
       html-webpack-plugin:
         specifier: ^5.6.7
         version: 5.6.7(webpack@5.107.2)
@@ -2353,11 +2353,11 @@ importers:
         version: 4.0.0(webpack@5.107.2)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
+        version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-      typescript-go:
+        specifier: npm:@typescript/typescript6@^6.0.0
+        version: '@typescript/typescript6@6.0.1'
+      typescript-7:
         specifier: npm:typescript@7.0.1-rc
         version: typescript@7.0.1-rc
       webpack:
@@ -5248,6 +5248,10 @@ packages:
     engines: {node: '>=16.20.0'}
     cpu: [x64]
     os: [win32]
+
+  '@typescript/typescript6@6.0.1':
+    resolution: {integrity: sha512-JbesA1Y3wSOYpcw4b4XvG8KCk9AaStATxk1Vmc1qY0Y30fjovvcuRXX2fJ8eC2JRycKQi7V1VYKUljSVBJUzZA==}
+    hasBin: true
 
   '@uiw/codemirror-extensions-basic-setup@4.25.10':
     resolution: {integrity: sha512-P3vytLlpE62KYSWrMUnwDCv2lvaQDuDZzyj03mHntuHo5bSl34fRZpjTY3kQTPGuXHxkGSYpoPFFj+hMTqaaMQ==}
@@ -12167,7 +12171,7 @@ snapshots:
       jest-util: 30.4.1
       slash: 3.0.0
 
-  '@jest/core@30.4.2(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))':
+  '@jest/core@30.4.2(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))':
     dependencies:
       '@jest/console': 30.4.1
       '@jest/pattern': 30.4.0
@@ -12183,7 +12187,7 @@ snapshots:
       fast-json-stable-stringify: 2.1.0
       graceful-fs: 4.2.11
       jest-changed-files: 30.4.1
-      jest-config: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+      jest-config: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       jest-haste-map: 30.4.1
       jest-message-util: 30.4.1
       jest-regex-util: 30.4.0
@@ -12347,13 +12351,13 @@ snapshots:
       '@types/yargs': 17.0.35
       chalk: 4.1.2
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.7.0(typescript@6.0.3)(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.7.0(@typescript/typescript6@6.0.1)(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))':
     dependencies:
       glob: 13.0.6
-      react-docgen-typescript: 2.4.0(typescript@6.0.3)
+      react-docgen-typescript: 2.4.0(@typescript/typescript6@6.0.1)
       vite: 8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1)
     optionalDependencies:
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
@@ -12547,7 +12551,7 @@ snapshots:
 
   '@marijn/find-cluster-break@1.0.2': {}
 
-  '@mswjs/data@0.16.2(@types/node@24.13.2)(typescript@6.0.3)':
+  '@mswjs/data@0.16.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)':
     dependencies:
       '@types/lodash': 4.17.24
       '@types/md5': 2.3.6
@@ -12563,7 +12567,7 @@ snapshots:
       strict-event-emitter: 0.5.1
       uuid: 8.3.2
     optionalDependencies:
-      msw: 2.13.2(@types/node@24.13.2)(typescript@6.0.3)
+      msw: 2.13.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
     transitivePeerDependencies:
       - '@types/node'
       - supports-color
@@ -13107,12 +13111,12 @@ snapshots:
       '@types/react': 19.2.17
       '@types/react-dom': 19.2.3(@types/react@19.2.17)
 
-  '@storybook/react-vite@10.4.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(esbuild@0.28.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))(webpack@5.107.2(esbuild@0.28.0))':
+  '@storybook/react-vite@10.4.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@typescript/typescript6@6.0.1)(esbuild@0.28.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))(webpack@5.107.2(esbuild@0.28.0))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.7.0(typescript@6.0.3)(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.7.0(@typescript/typescript6@6.0.1)(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))
       '@rollup/pluginutils': 5.3.0
       '@storybook/builder-vite': 10.4.6(esbuild@0.28.0)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))(webpack@5.107.2(esbuild@0.28.0))
-      '@storybook/react': 10.4.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
+      '@storybook/react': 10.4.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@typescript/typescript6@6.0.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       empathic: 2.0.1
       magic-string: 0.30.21
       react: 19.2.7
@@ -13131,19 +13135,19 @@ snapshots:
       - typescript
       - webpack
 
-  '@storybook/react@10.4.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)':
+  '@storybook/react@10.4.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(@typescript/typescript6@6.0.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))':
     dependencies:
       '@storybook/global': 5.0.0
       '@storybook/react-dom-shim': 10.4.6(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(storybook@10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       react: 19.2.7
       react-docgen: 8.0.3
-      react-docgen-typescript: 2.4.0(typescript@6.0.3)
+      react-docgen-typescript: 2.4.0(@typescript/typescript6@6.0.1)
       react-dom: 19.2.7(react@19.2.7)
       storybook: 10.4.6(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     optionalDependencies:
       '@types/react': 19.2.17
       '@types/react-dom': 19.2.3(@types/react@19.2.17)
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
@@ -13699,40 +13703,40 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@typescript-eslint/eslint-plugin@8.61.1(@typescript-eslint/parser@8.61.1(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(typescript@6.0.3)':
+  '@typescript-eslint/eslint-plugin@8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
     dependencies:
       '@eslint-community/regexpp': 4.12.2
-      '@typescript-eslint/parser': 8.61.1(eslint@9.39.4)(typescript@6.0.3)
+      '@typescript-eslint/parser': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       '@typescript-eslint/scope-manager': 8.61.1
-      '@typescript-eslint/type-utils': 8.61.1(eslint@9.39.4)(typescript@6.0.3)
-      '@typescript-eslint/utils': 8.61.1(eslint@9.39.4)(typescript@6.0.3)
+      '@typescript-eslint/type-utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       '@typescript-eslint/visitor-keys': 8.61.1
       eslint: 9.39.4
       ignore: 7.0.5
       natural-compare: 1.4.0
-      ts-api-utils: 2.5.0(typescript@6.0.3)
-      typescript: 6.0.3
+      ts-api-utils: 2.5.0(@typescript/typescript6@6.0.1)
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.61.1(eslint@9.39.4)(typescript@6.0.3)':
+  '@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.61.1
       '@typescript-eslint/types': 8.61.1
-      '@typescript-eslint/typescript-estree': 8.61.1(typescript@6.0.3)
+      '@typescript-eslint/typescript-estree': 8.61.1(@typescript/typescript6@6.0.1)
       '@typescript-eslint/visitor-keys': 8.61.1
       debug: 4.4.3
       eslint: 9.39.4
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/project-service@8.61.1(typescript@6.0.3)':
+  '@typescript-eslint/project-service@8.61.1(@typescript/typescript6@6.0.1)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.61.1(typescript@6.0.3)
+      '@typescript-eslint/tsconfig-utils': 8.61.1(@typescript/typescript6@6.0.1)
       '@typescript-eslint/types': 8.61.1
       debug: 4.4.3
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
@@ -13741,47 +13745,47 @@ snapshots:
       '@typescript-eslint/types': 8.61.1
       '@typescript-eslint/visitor-keys': 8.61.1
 
-  '@typescript-eslint/tsconfig-utils@8.61.1(typescript@6.0.3)':
+  '@typescript-eslint/tsconfig-utils@8.61.1(@typescript/typescript6@6.0.1)':
     dependencies:
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
 
-  '@typescript-eslint/type-utils@8.61.1(eslint@9.39.4)(typescript@6.0.3)':
+  '@typescript-eslint/type-utils@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
     dependencies:
       '@typescript-eslint/types': 8.61.1
-      '@typescript-eslint/typescript-estree': 8.61.1(typescript@6.0.3)
-      '@typescript-eslint/utils': 8.61.1(eslint@9.39.4)(typescript@6.0.3)
+      '@typescript-eslint/typescript-estree': 8.61.1(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       debug: 4.4.3
       eslint: 9.39.4
-      ts-api-utils: 2.5.0(typescript@6.0.3)
-      typescript: 6.0.3
+      ts-api-utils: 2.5.0(@typescript/typescript6@6.0.1)
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
   '@typescript-eslint/types@8.61.1': {}
 
-  '@typescript-eslint/typescript-estree@8.61.1(typescript@6.0.3)':
+  '@typescript-eslint/typescript-estree@8.61.1(@typescript/typescript6@6.0.1)':
     dependencies:
-      '@typescript-eslint/project-service': 8.61.1(typescript@6.0.3)
-      '@typescript-eslint/tsconfig-utils': 8.61.1(typescript@6.0.3)
+      '@typescript-eslint/project-service': 8.61.1(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/tsconfig-utils': 8.61.1(@typescript/typescript6@6.0.1)
       '@typescript-eslint/types': 8.61.1
       '@typescript-eslint/visitor-keys': 8.61.1
       debug: 4.4.3
       minimatch: 10.2.5
       semver: 7.8.4
       tinyglobby: 0.2.16
-      ts-api-utils: 2.5.0(typescript@6.0.3)
-      typescript: 6.0.3
+      ts-api-utils: 2.5.0(@typescript/typescript6@6.0.1)
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/utils@8.61.1(eslint@9.39.4)(typescript@6.0.3)':
+  '@typescript-eslint/utils@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.4)
       '@typescript-eslint/scope-manager': 8.61.1
       '@typescript-eslint/types': 8.61.1
-      '@typescript-eslint/typescript-estree': 8.61.1(typescript@6.0.3)
+      '@typescript-eslint/typescript-estree': 8.61.1(@typescript/typescript6@6.0.1)
       eslint: 9.39.4
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
@@ -13849,6 +13853,10 @@ snapshots:
 
   '@typescript/typescript-win32-x64@7.0.1-rc':
     optional: true
+
+  '@typescript/typescript6@6.0.1':
+    dependencies:
+      typescript: 6.0.3
 
   '@uiw/codemirror-extensions-basic-setup@4.25.10(@codemirror/autocomplete@6.20.1)(@codemirror/commands@6.10.3)(@codemirror/language@6.12.3)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/view@6.43.1)':
     dependencies:
@@ -15355,14 +15363,14 @@ snapshots:
       path-type: 4.0.0
       yaml: 1.10.3
 
-  cosmiconfig@8.3.6(typescript@6.0.3):
+  cosmiconfig@8.3.6(@typescript/typescript6@6.0.1):
     dependencies:
       import-fresh: 3.3.1
       js-yaml: 4.1.1
       parse-json: 5.2.0
       path-type: 4.0.0
     optionalDependencies:
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
 
   create-require@1.1.1: {}
 
@@ -15977,14 +15985,14 @@ snapshots:
     dependencies:
       eslint: 9.39.4
 
-  eslint-plugin-jest@29.15.2(@typescript-eslint/eslint-plugin@8.61.1(@typescript-eslint/parser@8.61.1(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3):
+  eslint-plugin-jest@29.15.2(@typescript-eslint/eslint-plugin@8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))):
     dependencies:
-      '@typescript-eslint/utils': 8.61.1(eslint@9.39.4)(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       eslint: 9.39.4
     optionalDependencies:
-      '@typescript-eslint/eslint-plugin': 8.61.1(@typescript-eslint/parser@8.61.1(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(typescript@6.0.3)
-      jest: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
-      typescript: 6.0.3
+      '@typescript-eslint/eslint-plugin': 8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      jest: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
@@ -16324,12 +16332,12 @@ snapshots:
       cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
-  fork-ts-checker-webpack-plugin@9.1.0(typescript@6.0.3)(webpack@5.107.2):
+  fork-ts-checker-webpack-plugin@9.1.0(@typescript/typescript6@6.0.1)(webpack@5.107.2):
     dependencies:
       '@babel/code-frame': 7.29.7
       chalk: 4.1.2
       chokidar: 4.0.3
-      cosmiconfig: 8.3.6(typescript@6.0.3)
+      cosmiconfig: 8.3.6(@typescript/typescript6@6.0.1)
       deepmerge: 4.3.1
       fs-extra: 10.1.0
       memfs: 3.5.3
@@ -16338,7 +16346,7 @@ snapshots:
       schema-utils: 3.3.0
       semver: 7.8.4
       tapable: 2.3.3
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
       webpack: 5.107.2(esbuild@0.28.0)(postcss@8.5.14)(webpack-cli@7.0.3)
 
   form-data@4.0.5:
@@ -17045,15 +17053,15 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  jest-cli@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)):
+  jest-cli@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)):
     dependencies:
-      '@jest/core': 30.4.2(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+      '@jest/core': 30.4.2(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       '@jest/test-result': 30.4.1
       '@jest/types': 30.4.1
       chalk: 4.1.2
       exit-x: 0.2.2
       import-local: 3.2.0
-      jest-config: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+      jest-config: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       jest-util: 30.4.1
       jest-validate: 30.4.1
       yargs: 17.7.2
@@ -17064,7 +17072,7 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-config@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)):
+  jest-config@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)):
     dependencies:
       '@babel/core': 7.29.0
       '@jest/get-type': 30.1.0
@@ -17091,7 +17099,7 @@ snapshots:
       strip-json-comments: 3.1.1
     optionalDependencies:
       '@types/node': 24.13.2
-      ts-node: 10.9.2(@types/node@24.13.2)(typescript@6.0.3)
+      ts-node: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -17328,12 +17336,12 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)):
+  jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)):
     dependencies:
-      '@jest/core': 30.4.2(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+      '@jest/core': 30.4.2(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       '@jest/types': 30.4.1
       import-local: 3.2.0
-      jest-cli: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+      jest-cli: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -17830,7 +17838,7 @@ snapshots:
 
   ms@2.1.3: {}
 
-  msw@2.13.2(@types/node@24.13.2)(typescript@6.0.3):
+  msw@2.13.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1):
     dependencies:
       '@inquirer/confirm': 5.1.21(@types/node@24.13.2)
       '@mswjs/interceptors': 0.41.3
@@ -17851,7 +17859,7 @@ snapshots:
       until-async: 3.0.2
       yargs: 17.7.2
     optionalDependencies:
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - '@types/node'
 
@@ -18518,9 +18526,9 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.17
 
-  react-docgen-typescript@2.4.0(typescript@6.0.3):
+  react-docgen-typescript@2.4.0(@typescript/typescript6@6.0.1):
     dependencies:
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
 
   react-docgen@8.0.3:
     dependencies:
@@ -19547,24 +19555,24 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  ts-api-utils@2.5.0(typescript@6.0.3):
+  ts-api-utils@2.5.0(@typescript/typescript6@6.0.1):
     dependencies:
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
 
   ts-dedent@2.2.0: {}
 
-  ts-jest@29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3)))(typescript@6.0.3):
+  ts-jest@29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       handlebars: 4.7.9
-      jest: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3))
+      jest: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       json5: 2.2.3
       lodash.memoize: 4.1.2
       make-error: 1.3.6
       semver: 7.8.4
       type-fest: 4.41.0
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
       yargs-parser: 21.1.1
     optionalDependencies:
       '@babel/core': 7.29.0
@@ -19574,7 +19582,7 @@ snapshots:
       esbuild: 0.28.0
       jest-util: 30.4.1
 
-  ts-node@10.9.2(@types/node@24.13.2)(typescript@6.0.3):
+  ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.12
@@ -19588,7 +19596,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.4
       make-error: 1.3.6
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
@@ -19674,14 +19682,14 @@ snapshots:
     dependencies:
       ts-toolbelt: 9.6.0
 
-  typescript-eslint@8.61.1(eslint@9.39.4)(typescript@6.0.3):
+  typescript-eslint@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4):
     dependencies:
-      '@typescript-eslint/eslint-plugin': 8.61.1(@typescript-eslint/parser@8.61.1(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(typescript@6.0.3)
-      '@typescript-eslint/parser': 8.61.1(eslint@9.39.4)(typescript@6.0.3)
-      '@typescript-eslint/typescript-estree': 8.61.1(typescript@6.0.3)
-      '@typescript-eslint/utils': 8.61.1(eslint@9.39.4)(typescript@6.0.3)
+      '@typescript-eslint/eslint-plugin': 8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/parser': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/typescript-estree': 8.61.1(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       eslint: 9.39.4
-      typescript: 6.0.3
+      typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 

@@ -7,7 +7,7 @@
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
     "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
     "lint": "eslint .",
-    "type-check": "node node_modules/typescript-go/bin/tsc --noEmit"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@babel/runtime": "^7.29.7",
@@ -44,8 +44,8 @@
     "html-webpack-plugin": "^5.6.7",
     "style-loader": "^4.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "~6.0.3",
-    "typescript-go": "npm:typescript@7.0.1-rc",
+    "typescript": "npm:@typescript/typescript6@^6.0.0",
+    "typescript-7": "npm:typescript@7.0.1-rc",
     "webpack": "^5.107.2",
     "webpack-cli": "^7.0.3",
     "webpack-dev-server": "^5.2.4"

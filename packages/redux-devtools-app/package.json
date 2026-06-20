@@ -27,13 +27,13 @@
   "scripts": {
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --hot --env development --env platform=web --progress",
     "build": "pnpm run build:lib && pnpm run build:web && pnpm run build:umd && pnpm run build:umd:min",
-    "build:lib": "node node_modules/typescript-go/bin/tsc",
+    "build:lib": "tsc",
     "build:web": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack --env platform=web",
     "build:umd": "node buildUmd.mjs --dev",
     "build:umd:min": "node buildUmd.mjs",
     "clean": "rimraf build lib umd",
     "lint": "eslint .",
-    "type-check": "node node_modules/typescript-go/bin/tsc --noEmit",
+    "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run type-check && pnpm run lint"
   },
@@ -79,8 +79,8 @@
     "style-loader": "^4.0.0",
     "ts-jest": "^29.4.11",
     "ts-node": "^10.9.2",
-    "typescript": "~6.0.3",
-    "typescript-go": "npm:typescript@7.0.1-rc",
+    "typescript": "npm:@typescript/typescript6@^6.0.0",
+    "typescript-7": "npm:typescript@7.0.1-rc",
     "webpack": "^5.107.2",
     "webpack-cli": "^7.0.3",
     "webpack-dev-server": "^5.2.4"
