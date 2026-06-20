@@ -19,8 +19,6 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-      - name: Install Electron binary
-        run: pnpm --filter remotedev-redux-devtools-extension exec install-electron
       - name: Check formatting
         run: pnpm run format:check
       - name: Build
