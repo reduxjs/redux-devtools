@@ -302,7 +302,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
       );
       return;
     }
-    toContentScript<S, A>(
+    toContentScript(
       {
         type: 'PARTIAL_STATE',
         payload,
