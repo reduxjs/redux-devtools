@@ -10,8 +10,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@babel/runtime": "^7.29.2",
-    "@chakra-ui/react": "^3.35.0",
+    "@babel/runtime": "^7.29.7",
+    "@chakra-ui/react": "^3.36.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mswjs/data": "^0.16.2",
@@ -20,21 +20,21 @@
     "@redux-devtools/rtk-query-monitor": "workspace:^",
     "@reduxjs/toolkit": "^2.12.0",
     "msw": "2.13.2",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "react-icons": "^5.6.0",
-    "react-is": "^19.2.6",
+    "react-is": "^19.2.7",
     "react-redux": "^9.3.0",
-    "react-router-dom": "^7.15.1"
+    "react-router-dom": "^7.18.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
-    "@babel/plugin-transform-runtime": "^7.29.0",
-    "@babel/preset-env": "^7.29.5",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
-    "@types/node": "^24.12.4",
-    "@types/react": "^19.2.14",
+    "@babel/plugin-transform-runtime": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@babel/preset-typescript": "^7.29.7",
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "babel-loader": "^10.1.1",
     "copy-webpack-plugin": "^14.0.0",
@@ -45,8 +45,8 @@
     "style-loader": "^4.0.0",
     "ts-node": "^10.9.2",
     "typescript": "~6.0.3",
-    "webpack": "^5.106.2",
-    "webpack-cli": "^7.0.2",
+    "webpack": "^5.107.2",
+    "webpack-cli": "^7.0.3",
     "webpack-dev-server": "^5.2.4"
   },
   "msw": {
