@@ -31,7 +31,8 @@
     "map2tree": "workspace:^"
   },
   "devDependencies": {
-    "typescript": "~6.0.3",
+    "typescript": "npm:@typescript/typescript6@^6.0.0",
+    "typescript-7": "npm:typescript@7.0.1-rc",
     "vite": "^8.0.13"
   }
 }
