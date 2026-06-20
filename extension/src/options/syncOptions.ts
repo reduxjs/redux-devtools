@@ -127,4 +127,5 @@ export const isAllowed = (localOptions = options) =>
   !localOptions ||
   localOptions.inject ||
   !localOptions.urls ||
+  // oxlint-disable-next-line typescript/prefer-regexp-exec
   location.href.match(toReg(localOptions.urls)!);

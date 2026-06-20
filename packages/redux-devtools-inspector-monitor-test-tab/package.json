@@ -36,7 +36,7 @@
     "build": "tsc",
     "clean": "rimraf lib",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint .",
+    "lint": "oxlint",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"

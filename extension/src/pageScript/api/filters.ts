@@ -34,7 +34,9 @@ export function isFiltered<A extends Action<string>>(
   const { allowlist, denylist } = localFilter || window.devToolsOptions || {};
   const actionType = ((action as A).type || action) as string;
   return (
+    // oxlint-disable-next-line typescript/prefer-regexp-exec
     (allowlist && !actionType.match(allowlist)) ||
+    // oxlint-disable-next-line typescript/prefer-regexp-exec
     (denylist && actionType.match(denylist))
   );
 }

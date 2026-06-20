@@ -3,16 +3,11 @@
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@changesets/cli": "^2.31.0",
-    "@eslint/js": "^9.39.4",
-    "eslint": "^9.39.4",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jest": "^29.15.2",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.1.1",
     "jest": "^30.4.2",
+    "oxlint": "^1.70.0",
+    "oxlint-tsgolint": "^0.23.0",
     "prettier": "3.8.4",
-    "typescript": "npm:@typescript/typescript6@^6.0.0",
-    "typescript-eslint": "^8.61.1"
+    "typescript": "npm:@typescript/typescript6@^6.0.0"
   },
   "scripts": {
     "format": "prettier --write .",
