@@ -14,6 +14,10 @@
   ],
   "packageRules": [
     {
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "1 day"
+    },
+    {
       "matchPackageNames": ["node"],
       "enabled": false
     },
