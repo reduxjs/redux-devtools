@@ -356,13 +356,12 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
         whitelist ??
         options.actionsWhitelist,
     });
-    if (options.port) {
-      this.socketOptions = {
-        port: options.port,
-        hostname: options.hostname || 'localhost',
-        secure: options.secure,
-      };
-    } else this.socketOptions = defaultSocketOptions;
+    this.socketOptions = {
+      ...defaultSocketOptions,
+      secure: options.secure ?? defaultSocketOptions.secure,
+      hostname: options.hostname ?? defaultSocketOptions.hostname,
+      port: options.port ?? defaultSocketOptions.port,
+    };
 
     this.suppressConnectErrors =
       options.suppressConnectErrors !== undefined
