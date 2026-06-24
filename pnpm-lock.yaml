@@ -30,7 +30,7 @@ importers:
         version: 10.1.8(eslint@9.39.4)
       eslint-plugin-jest:
         specifier: ^29.15.2
-        version: 29.15.2(@typescript-eslint/eslint-plugin@8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
+        version: 29.15.2(@typescript-eslint/eslint-plugin@8.62.0(@typescript-eslint/parser@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       eslint-plugin-react:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.39.4)
@@ -44,11 +44,11 @@ importers:
         specifier: 3.8.4
         version: 3.8.4
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-eslint:
-        specifier: ^8.61.1
-        version: 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+        specifier: ^8.62.0
+        version: 8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)
 
   extension:
     dependencies:
@@ -147,8 +147,8 @@ importers:
         specifier: ^16.3.2
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@types/chrome':
-        specifier: ^0.1.43
-        version: 0.1.43
+        specifier: ^0.2.0
+        version: 0.2.0
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -171,11 +171,11 @@ importers:
         specifier: ^0.28.0
         version: 0.28.0
       globals:
-        specifier: ^17.6.0
-        version: 17.6.0
+        specifier: ^17.7.0
+        version: 17.7.0
       immutable:
-        specifier: ^5.1.6
-        version: 5.1.6
+        specifier: ^5.1.7
+        version: 5.1.7
       jest:
         specifier: ^30.4.2
         version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
@@ -198,7 +198,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -232,13 +232,13 @@ importers:
         version: 0.32.0
     devDependencies:
       '@types/ramda':
-        specifier: ^0.31.1
-        version: 0.31.1
+        specifier: ^0.32.0
+        version: 0.32.0
       rimraf:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -254,7 +254,7 @@ importers:
         version: link:../../../map2tree
     devDependencies:
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -275,7 +275,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -294,8 +294,8 @@ importers:
         specifier: ^4.17.12
         version: 4.17.12
       immutable:
-        specifier: ^5.1.6
-        version: 5.1.6
+        specifier: ^5.1.7
+        version: 5.1.7
       jest:
         specifier: ^30.4.2
         version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
@@ -306,7 +306,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -349,7 +349,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -374,7 +374,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -414,10 +414,10 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.17)
       '@vitejs/plugin-react':
-        specifier: ^6.0.2
-        version: 6.0.2(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))
+        specifier: ^6.0.3
+        version: 6.0.3(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -454,7 +454,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -463,8 +463,8 @@ importers:
   packages/react-json-tree/examples:
     dependencies:
       immutable:
-        specifier: ^5.1.6
-        version: 5.1.6
+        specifier: ^5.1.7
+        version: 5.1.7
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -488,10 +488,10 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.17)
       '@vitejs/plugin-react':
-        specifier: ^6.0.2
-        version: 6.0.2(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))
+        specifier: ^6.0.3
+        version: 6.0.3(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -540,7 +540,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -640,8 +640,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(@typescript/typescript6@6.0.1)(webpack@5.107.2)
       globals:
-        specifier: ^17.6.0
-        version: 17.6.0
+        specifier: ^17.7.0
+        version: 17.7.0
       html-loader:
         specifier: ^5.1.0
         version: 5.1.0(webpack@5.107.2)
@@ -667,7 +667,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -809,7 +809,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -843,7 +843,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -921,8 +921,8 @@ importers:
         specifier: ^19.2.7
         version: 19.2.7
       semver:
-        specifier: ^7.8.4
-        version: 7.8.4
+        specifier: ^7.8.5
+        version: 7.8.5
       socketcluster-server:
         specifier: ^20.0.0
         version: 20.0.0
@@ -973,8 +973,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       globals:
-        specifier: ^17.6.0
-        version: 17.6.0
+        specifier: ^17.7.0
+        version: 17.7.0
       jest:
         specifier: ^30.4.2
         version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
@@ -994,7 +994,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1028,7 +1028,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1043,7 +1043,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1073,8 +1073,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       immutable:
-        specifier: ^5.1.6
-        version: 5.1.6
+        specifier: ^5.1.7
+        version: 5.1.7
       javascript-stringify:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1122,7 +1122,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1207,7 +1207,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1237,8 +1237,8 @@ importers:
         specifier: workspace:^
         version: link:../../redux-devtools-ui
       immutable:
-        specifier: ^5.1.6
-        version: 5.1.6
+        specifier: ^5.1.7
+        version: 5.1.7
       lodash.shuffle:
         specifier: ^4.2.0
         version: 4.2.0
@@ -1316,7 +1316,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1337,8 +1337,8 @@ importers:
         specifier: ^8.0.0
         version: 8.0.0
       '@types/chrome':
-        specifier: ^0.1.43
-        version: 0.1.43
+        specifier: ^0.2.0
+        version: 0.2.0
       anser:
         specifier: ^2.3.5
         version: 2.3.5
@@ -1410,7 +1410,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1431,8 +1431,8 @@ importers:
         specifier: workspace:^
         version: link:..
       immutable:
-        specifier: ^5.1.6
-        version: 5.1.6
+        specifier: ^5.1.7
+        version: 5.1.7
       lodash.shuffle:
         specifier: ^4.2.0
         version: 4.2.0
@@ -1507,7 +1507,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1549,7 +1549,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1586,7 +1586,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1623,11 +1623,11 @@ importers:
         specifier: ^20.0.0
         version: 20.0.0
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.61.1
-        version: 8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+        specifier: ^8.62.0
+        version: 8.62.0(@typescript-eslint/parser@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       '@typescript-eslint/parser':
-        specifier: ^8.61.1
-        version: 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+        specifier: ^8.62.0
+        version: 8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       eslint:
         specifier: ^9.39.4
         version: 9.39.4
@@ -1641,7 +1641,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1659,8 +1659,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       immutable:
-        specifier: ^5.1.6
-        version: 5.1.6
+        specifier: ^5.1.7
+        version: 5.1.7
       lodash.debounce:
         specifier: ^4.0.8
         version: 4.0.8
@@ -1732,7 +1732,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1838,7 +1838,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1866,8 +1866,8 @@ importers:
         specifier: ^3.1.5
         version: 3.1.5
       immutable:
-        specifier: ^5.1.6
-        version: 5.1.6
+        specifier: ^5.1.7
+        version: 5.1.7
       jest:
         specifier: ^30.4.2
         version: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
@@ -1878,7 +1878,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -1918,7 +1918,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -2012,7 +2012,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -2033,8 +2033,8 @@ importers:
         specifier: ^6.2.5
         version: 6.2.5
       '@codemirror/view':
-        specifier: ^6.43.1
-        version: 6.43.1
+        specifier: ^6.43.2
+        version: 6.43.2
       '@lezer/highlight':
         specifier: ^1.2.3
         version: 1.2.3
@@ -2058,10 +2058,10 @@ importers:
         version: 1.3.3
       '@uiw/codemirror-themes':
         specifier: ^4.25.10
-        version: 4.25.10(@codemirror/language@6.12.3)(@codemirror/state@6.6.0)(@codemirror/view@6.43.1)
+        version: 4.25.10(@codemirror/language@6.12.3)(@codemirror/state@6.7.0)(@codemirror/view@6.43.2)
       '@uiw/react-codemirror':
         specifier: ^4.25.10
-        version: 4.25.10(@babel/runtime@8.0.0)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.3)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.43.1)(codemirror@6.0.2)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 4.25.10(@babel/runtime@8.0.0)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.3)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.7.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.43.2)(codemirror@6.0.2)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       color:
         specifier: ^5.0.3
         version: 5.0.3
@@ -2145,7 +2145,7 @@ importers:
         specifier: ^29.4.11
         version: 29.4.11(@babel/core@7.29.0)(@jest/transform@30.4.1)(@jest/types@30.4.1)(@typescript/typescript6@6.0.1)(babel-jest@30.4.1(@babel/core@7.29.0))(esbuild@0.28.0)(jest-util@30.4.1)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -2169,14 +2169,14 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2
       immutable:
-        specifier: ^5.1.6
-        version: 5.1.6
+        specifier: ^5.1.7
+        version: 5.1.7
       jsan:
         specifier: ^3.1.14
         version: 3.1.14
       nanoid:
-        specifier: ^5.1.14
-        version: 5.1.14
+        specifier: ^5.1.15
+        version: 5.1.15
       redux:
         specifier: ^5.0.1
         version: 5.0.1
@@ -2191,7 +2191,7 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -2264,7 +2264,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -2355,7 +2355,7 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.0
+        specifier: npm:@typescript/typescript6@^6.0.1
         version: '@typescript/typescript6@6.0.1'
       typescript-7:
         specifier: npm:typescript@7.0.1-rc
@@ -3218,14 +3218,14 @@ packages:
   '@codemirror/search@6.6.0':
     resolution: {integrity: sha512-koFuNXcDvyyotWcgOnZGmY7LZqEOXZaaxD/j6n18TCLx2/9HieZJ5H6hs1g8FiRxBD0DNfs0nXn17g872RmYdw==}
 
-  '@codemirror/state@6.6.0':
-    resolution: {integrity: sha512-4nbvra5R5EtiCzr9BTHiTLc+MLXK2QGiAVYMyi8PkQd3SR+6ixar/Q/01Fa21TBIDOZXgeWV4WppsQolSreAPQ==}
+  '@codemirror/state@6.7.0':
+    resolution: {integrity: sha512-Zbl9NyscLMZkfXPQnNAIIAFftidrA1UbcJEIMp24C0Bukc2I5T8wJS0wsXYsnDOqCFJUeJ1BITGNs5CqPDSmSg==}
 
   '@codemirror/theme-one-dark@6.1.3':
     resolution: {integrity: sha512-NzBdIvEJmx6fjeremiGp3t/okrLPYT0d9orIc7AFun8oZcRk58aejkqhv6spnz4MLAevrKNPMQYXEWMg4s+sKA==}
 
-  '@codemirror/view@6.43.1':
-    resolution: {integrity: sha512-+BIjw/AG3tDQ4pJgTLPYdAW25eDE66YsvM4LKyVPgGzVgZ4a9Wj1SRX8kPVKgBDdPt8oHtZ15F0qx7p0oOHdHw==}
+  '@codemirror/view@6.43.2':
+    resolution: {integrity: sha512-8kU6WNRYBKV9Sw3cxNz+uSvUvx3tt+1qgupGFPubnbLFDHOgh5qQdIGmXcD7bkA/PROK6LDKVhKMpcY7H++Amg==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -4697,8 +4697,8 @@ packages:
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
 
-  '@types/chrome@0.1.43':
-    resolution: {integrity: sha512-ukH/HhmR6ht+UTX3PLUWJxgJ/RQcK2Foj4lBzsF24SIWsXgqhGuXqjd8FFuwioPP7d/JUKLM4g8GZxw3F4HTcA==}
+  '@types/chrome@0.2.0':
+    resolution: {integrity: sha512-K/i7EKEVSpmyXXjE0ev5oASWBYMY6yM8LFSutG2PkM1DmxJUggZsoaTc0W1RsVwDDKrsZEjpHFAbqqxlRxGsSg==}
 
   '@types/codemirror@5.60.17':
     resolution: {integrity: sha512-AZq2FIsUHVMlp7VSe2hTfl5w4pcUkoFkM3zVsRKsn1ca8CXRDYvnin04+HP2REkwsxemuHqvDofdlhUWNpbwfw==}
@@ -4961,8 +4961,8 @@ packages:
   '@types/qs@6.15.0':
     resolution: {integrity: sha512-JawvT8iBVWpzTrz3EGw9BTQFg3BQNmwERdKE22vlTxawwtbyUSlMppvZYKLZzB5zgACXdXxbD3m1bXaMqP/9ow==}
 
-  '@types/ramda@0.31.1':
-    resolution: {integrity: sha512-Vt6sFXnuRpzaEj+yeutA0q3bcAsK7wdPuASIzR9LXqL4gJPyFw8im9qchlbp4ltuf3kDEIRmPJTD/Fkg60dn7g==}
+  '@types/ramda@0.32.0':
+    resolution: {integrity: sha512-eTRIFYUxjVvZimlPNpXzXc3j4tnSYc7lBsD7X3zwtRvJML3qXclM4+m8vvmAZAHhBASKPmZAp6qu2C/DwJpBGQ==}
 
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
@@ -5076,63 +5076,63 @@ packages:
   '@types/yargs@17.0.35':
     resolution: {integrity: sha512-qUHkeCyQFxMXg79wQfTtfndEC+N9ZZg76HJftDJp+qH2tV7Gj4OJi7l+PiWwJ+pWtW8GwSmqsDj/oymhrTWXjg==}
 
-  '@typescript-eslint/eslint-plugin@8.61.1':
-    resolution: {integrity: sha512-ZPlVl3PB3et/59Ne0fv/sci6ZXz4T4Hp4nTJ56i/Y0gR89ARb+KphojTq6j+56E5PIezmOIOOWyY+aWQFd+IkQ==}
+  '@typescript-eslint/eslint-plugin@8.62.0':
+    resolution: {integrity: sha512-o+mpz7EYiMzXoySXiKmzlabIvTVqUuK5yLrAedRPRDA0IpPFMUV1IXt6OqljIxX/kumN6EjUYp41Hqelh6p/Dw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
-      '@typescript-eslint/parser': ^8.61.1
+      '@typescript-eslint/parser': ^8.62.0
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/parser@8.61.1':
-    resolution: {integrity: sha512-PJ5vePq5/ognBbrIcoC5+SHO5dfpeLPzP9FpLkzWrguoYQEeeSjlJpVwOpo1JRSTEi7dRcwNy4h4dzV70PqHcg==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
-      typescript: '>=4.8.4 <6.1.0'
-
-  '@typescript-eslint/project-service@8.61.1':
-    resolution: {integrity: sha512-PrC4JYGmR241lYnfhmKGTXkFqv8+ymbTFgSAY0fVXpY82/QkMw5TZPl+vGzuDDU2QYJk9fIDOBTntF+yDv9LEA==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      typescript: '>=4.8.4 <6.1.0'
-
-  '@typescript-eslint/scope-manager@8.61.1':
-    resolution: {integrity: sha512-L2bdIeoQS8FlKAvONAr20w6OcLXeB+qiDKbAooS9A0Ben+iSIkBef0FxqwKWYqt5sa0i4KJtxVyVmhMylKzF5w==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@typescript-eslint/tsconfig-utils@8.61.1':
-    resolution: {integrity: sha512-UN/H4di+OO7EWx2ovME+8t31YO+KVnK0RRKEHR3kOt21/Ay8BOq3M1OMvWs5vNiqcFCYGYoxK3MXPZzmMUE+yg==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    peerDependencies:
-      typescript: '>=4.8.4 <6.1.0'
-
-  '@typescript-eslint/type-utils@8.61.1':
-    resolution: {integrity: sha512-GYRicKmVK0C4fsKgaACaknOUAq9Oa2kwsjnpFhFcS/5p4Ht5IP9OVLbgIgcK4SRk92nVHFluurg1lumD9dBcLw==}
+  '@typescript-eslint/parser@8.62.0':
+    resolution: {integrity: sha512-dzHeT2gySzZtLDsuqxU9AkYgIsQoHAHtRBpOqM+Ofzx1Bwrd2RcCjQJ+6iQbsHOIR6NS33bF2W1k3blN1zLDrA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/types@8.61.1':
-    resolution: {integrity: sha512-G+CRlPqLv7Bz1IZVs03x5K59F1veqL0EJUROAdGhKsEq8qOiRiZbI+HUojPq5l0fEGOKModD9br6lObhB8zkoA==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@typescript-eslint/typescript-estree@8.61.1':
-    resolution: {integrity: sha512-u+oQD3BqYWPc8YV9Zab4vaJElJuwOLPRc10Jm1o/qS+6Qwen14HCWwx0Seo4LnSn2wxea2Ik8DxPt2/FHmuhrg==}
+  '@typescript-eslint/project-service@8.62.0':
+    resolution: {integrity: sha512-wexnCqiTg7BOGtbLDftYpRWlmLq4xfoMd7BKFR6Y75sZS3QmRKLdN3yWLhmIYgqMmP/OXWpj3H8odkb5nGURCQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/utils@8.61.1':
-    resolution: {integrity: sha512-1+P/3Dj6jvtybE1q0HQ6yBt/gq+oKJyLdEv4HdnqasaEXRSYCAsD59mXEVQnM/ULNdQxbX77tdG4jPRjIS6knA==}
+  '@typescript-eslint/scope-manager@8.62.0':
+    resolution: {integrity: sha512-1lX38kNxXIRb8mEc3lbq5mdHq1Pf2+U0nFU65KfT18mtPxxl0fvjuEE92mHuXPuCtElJhOrddOpyMlM3Z0umEA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/tsconfig-utils@8.62.0':
+    resolution: {integrity: sha512-y2GAdB6ykaXUvuspbYnizQc4oDDz0Tz/Yc7iWrXf9mx8vm/L/0vLHCe0tS2boG96Zy+DivnVDQ9ZUEWoHqqx1g==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.1.0'
+
+  '@typescript-eslint/type-utils@8.62.0':
+    resolution: {integrity: sha512-+g5O3j0w2ldzC86Pv6fvbO/xhAonbJFIdf/MKQ1d30gndlsVzUOE83ldfSE15Qrl9fhFjK6AovHs5Wpp6vx86w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/visitor-keys@8.61.1':
-    resolution: {integrity: sha512-6fJ9MHWtK14C1DSkiMlHUSOmrVebL7150xZJBlJiL62jjhIA4JmOq6flwBgDxIdBKKdoiZRel+dfPD5MLfny3w==}
+  '@typescript-eslint/types@8.62.0':
+    resolution: {integrity: sha512-KvAclkktORPvM54TgLgA4z9HIV1M8zOgw9ZVNXl9f/8dLYfXYX1wkMXP7qmabpijQRV5bHJLOmoyGQbLMaUYeg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/typescript-estree@8.62.0':
+    resolution: {integrity: sha512-+hVbNxtW64pIcZWDPGbyaKF7vp2IBTVY5ma1blwwksrjdsbdqqEKvJWMGbBofei4F6Dovx1M0RJgoFeNu2279A==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.1.0'
+
+  '@typescript-eslint/utils@8.62.0':
+    resolution: {integrity: sha512-82r66fi9zYwZ+mTq3vKgwjbZ1PVk/DJzrXFLpG6RnBbdvH8TEGVHIs9H4d2drhkOzf0syZuD/OZvvlu6GDbP4g==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+      typescript: '>=4.8.4 <6.1.0'
+
+  '@typescript-eslint/visitor-keys@8.62.0':
+    resolution: {integrity: sha512-CY3uyFSRbcQv3nnSv8S0+lDftMVz6P963PoRlxrV7ew/Md564g9ut60PYzdLM5qW4jFn93GBF+Soi90ISAN+GQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript/typescript-aix-ppc64@7.0.1-rc':
@@ -5395,8 +5395,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@vitejs/plugin-react@6.0.2':
-    resolution: {integrity: sha512-DlSMqo4WhThw4vB8Mpn0Woe9J+Jfq1geJ61AKW0QEgLzGMNwtIMdxbDUzLxcun8W7NbJO0e2Jg/Nxm3cCSVzzg==}
+  '@vitejs/plugin-react@6.0.3':
+    resolution: {integrity: sha512-vmFvco5/QuC2f9Oj+wTk0+9XeDFkHxSamwZKYc7MxYwKICfvUvlMhqKI0VuICPltGqh1neqBKDvO4kes1ya8vg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       '@rolldown/plugin-babel': ^0.1.7 || ^0.2.0
@@ -7353,8 +7353,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@17.6.0:
-    resolution: {integrity: sha512-sepffkT8stwnIYbsMBpoCHJuJM5l98FUF2AnE07hfvE0m/qp3R586hw4jF4uadbhvg1ooIdzuu7CsfD2jzCaNA==}
+  globals@17.7.0:
+    resolution: {integrity: sha512-Czmyns5dUsq4seFBR/Kdydhmo8y9kC79hiSkPn0YcGtNnYWnrgt0vjrSjx9tspoDGWm2CMarffRuLjM4xUz8xg==}
     engines: {node: '>=18'}
 
   globalthis@1.0.4:
@@ -7571,8 +7571,8 @@ packages:
   immer@11.1.4:
     resolution: {integrity: sha512-XREFCPo6ksxVzP4E0ekD5aMdf8WMwmdNaz6vuvxgI40UaEiu6q3p8X52aU6GdyvLY3XXX/8R7JOTXStz/nBbRw==}
 
-  immutable@5.1.6:
-    resolution: {integrity: sha512-q1swsS8K7L8usSHuOqF2TAoCCkonYz0SG38wLAggaa4Wml70zixIvt2ql4coQ2C2B3hTjltJry4r6bULwgAXLQ==}
+  immutable@5.1.7:
+    resolution: {integrity: sha512-47Xb+LFbZ/ZIjQMj6Q5J3IfK7PJFuqRdFOC9FpGgRTK6U2dAEVmkR9hp58qU4FpYux5YXpneDwkj2EP6lppzFA==}
 
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
@@ -8563,8 +8563,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@5.1.14:
-    resolution: {integrity: sha512-5c8l8kVzqpnDPaicbEop/fV0Q1w16FmbWtVhMqugTozAwYdlIQojWH5a/M7UfziFmGdQRrUdV+EPzc9Xng3VAQ==}
+  nanoid@5.1.15:
+    resolution: {integrity: sha512-kBg3RpGtIe+RpTbyXwoI6pk5yD7KUiI3sygUqgeBMRst42KmhB4RZC7eiO9Wa1HIpaCCtpE2DJ6OI4Wi5ebwFw==}
     engines: {node: ^18 || >=20}
     hasBin: true
 
@@ -9429,8 +9429,8 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
-  semver@7.8.4:
-    resolution: {integrity: sha512-rUCObTnP32Q08R2uuIrt7r9PlEonuTmtuXYcW6s5kjdlj3xbnwe+21yXptAUYcMAABLkYYTtnmzb3w3EDZfueA==}
+  semver@7.8.5:
+    resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -10060,11 +10060,11 @@ packages:
     resolution: {integrity: sha512-3KS2b+kL7fsuk/eJZ7EQdnEmQoaho/r6KUef7hxvltNA5DR8NAUM+8wJMbJyZ4G9/7i3v5zPBIMN5aybAh2/Jg==}
     engines: {node: '>= 0.4'}
 
-  types-ramda@0.31.0:
-    resolution: {integrity: sha512-vaoC35CRC3xvL8Z6HkshDbi6KWM1ezK0LHN0YyxXWUn9HKzBNg/T3xSGlJZjCYspnOD3jE7bcizsp0bUXZDxnQ==}
+  types-ramda@0.32.0:
+    resolution: {integrity: sha512-iZtriSUdsDqOlip/wUaDNcoiskbVf5RdcqLNpQdUcOM1JKFClochCvPZCDjn/cc9HzoBzi4DEB4iPr1PbrhN1w==}
 
-  typescript-eslint@8.61.1:
-    resolution: {integrity: sha512-V7PayAfJokV3pEHgN7/v03D1SpujhRfQtYLbLIiBfDDncdg4PAiRBfoS4cnCANK4jmAPncczi59QO3afiXUlNw==}
+  typescript-eslint@8.62.0:
+    resolution: {integrity: sha512-8QxXi+ZACKX0kaqO4gY8kn0RSD9gFfaHDWwjqtEN48aWCBkX4MJaufWN+c3BzlrXLOxfywDL8CaoqUwcRq4j4Q==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
@@ -11553,7 +11553,7 @@ snapshots:
       outdent: 0.5.0
       prettier: 2.8.8
       resolve-from: 5.0.0
-      semver: 7.8.4
+      semver: 7.8.5
 
   '@changesets/assemble-release-plan@6.0.10':
     dependencies:
@@ -11562,7 +11562,7 @@ snapshots:
       '@changesets/should-skip-package': 0.1.2
       '@changesets/types': 6.1.0
       '@manypkg/get-packages': 1.1.3
-      semver: 7.8.4
+      semver: 7.8.5
 
   '@changesets/changelog-git@0.2.1':
     dependencies:
@@ -11593,7 +11593,7 @@ snapshots:
       package-manager-detector: 0.2.11
       picocolors: 1.1.1
       resolve-from: 5.0.0
-      semver: 7.8.4
+      semver: 7.8.5
       spawndamnit: 3.0.1
       term-size: 2.2.1
     transitivePeerDependencies:
@@ -11619,7 +11619,7 @@ snapshots:
       '@changesets/types': 6.1.0
       '@manypkg/get-packages': 1.1.3
       picocolors: 1.1.1
-      semver: 7.8.4
+      semver: 7.8.5
 
   '@changesets/get-release-plan@4.0.16':
     dependencies:
@@ -11685,15 +11685,15 @@ snapshots:
   '@codemirror/autocomplete@6.20.1':
     dependencies:
       '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
       '@lezer/common': 1.5.2
 
   '@codemirror/commands@6.10.3':
     dependencies:
       '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
       '@lezer/common': 1.5.2
 
   '@codemirror/lang-javascript@6.2.5':
@@ -11701,15 +11701,15 @@ snapshots:
       '@codemirror/autocomplete': 6.20.1
       '@codemirror/language': 6.12.3
       '@codemirror/lint': 6.9.5
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
       '@lezer/common': 1.5.2
       '@lezer/javascript': 1.5.4
 
   '@codemirror/language@6.12.3':
     dependencies:
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
       '@lezer/common': 1.5.2
       '@lezer/highlight': 1.2.3
       '@lezer/lr': 1.4.8
@@ -11717,30 +11717,30 @@ snapshots:
 
   '@codemirror/lint@6.9.5':
     dependencies:
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
       crelt: 1.0.6
 
   '@codemirror/search@6.6.0':
     dependencies:
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
       crelt: 1.0.6
 
-  '@codemirror/state@6.6.0':
+  '@codemirror/state@6.7.0':
     dependencies:
       '@marijn/find-cluster-break': 1.0.2
 
   '@codemirror/theme-one-dark@6.1.3':
     dependencies:
       '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
       '@lezer/highlight': 1.2.3
 
-  '@codemirror/view@6.43.1':
+  '@codemirror/view@6.43.2':
     dependencies:
-      '@codemirror/state': 6.6.0
+      '@codemirror/state': 6.7.0
       crelt: 1.0.6
       style-mod: 4.1.3
       w3c-keyname: 2.2.8
@@ -11813,7 +11813,7 @@ snapshots:
       env-paths: 3.0.0
       graceful-fs: 4.2.11
       progress: 2.0.3
-      semver: 7.8.4
+      semver: 7.8.5
       sumchecker: 3.0.1
     optionalDependencies:
       undici: 7.25.0
@@ -12645,7 +12645,7 @@ snapshots:
 
   '@npmcli/fs@5.0.0':
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
     optional: true
 
   '@npmcli/redact@4.0.0':
@@ -13279,7 +13279,7 @@ snapshots:
       '@types/deep-eql': 4.0.2
       assertion-error: 2.0.1
 
-  '@types/chrome@0.1.43':
+  '@types/chrome@0.2.0':
     dependencies:
       '@types/filesystem': 0.0.36
       '@types/har-format': 1.2.16
@@ -13577,9 +13577,9 @@ snapshots:
 
   '@types/qs@6.15.0': {}
 
-  '@types/ramda@0.31.1':
+  '@types/ramda@0.32.0':
     dependencies:
-      types-ramda: 0.31.0
+      types-ramda: 0.32.0
 
   '@types/range-parser@1.2.7': {}
 
@@ -13718,14 +13718,14 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@typescript-eslint/eslint-plugin@8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
+  '@typescript-eslint/eslint-plugin@8.62.0(@typescript-eslint/parser@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
     dependencies:
       '@eslint-community/regexpp': 4.12.2
-      '@typescript-eslint/parser': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
-      '@typescript-eslint/scope-manager': 8.61.1
-      '@typescript-eslint/type-utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
-      '@typescript-eslint/utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
-      '@typescript-eslint/visitor-keys': 8.61.1
+      '@typescript-eslint/parser': 8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/scope-manager': 8.62.0
+      '@typescript-eslint/type-utils': 8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/utils': 8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/visitor-keys': 8.62.0
       eslint: 9.39.4
       ignore: 7.0.5
       natural-compare: 1.4.0
@@ -13734,41 +13734,41 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
+  '@typescript-eslint/parser@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
     dependencies:
-      '@typescript-eslint/scope-manager': 8.61.1
-      '@typescript-eslint/types': 8.61.1
-      '@typescript-eslint/typescript-estree': 8.61.1(@typescript/typescript6@6.0.1)
-      '@typescript-eslint/visitor-keys': 8.61.1
+      '@typescript-eslint/scope-manager': 8.62.0
+      '@typescript-eslint/types': 8.62.0
+      '@typescript-eslint/typescript-estree': 8.62.0(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/visitor-keys': 8.62.0
       debug: 4.4.3
       eslint: 9.39.4
       typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/project-service@8.61.1(@typescript/typescript6@6.0.1)':
+  '@typescript-eslint/project-service@8.62.0(@typescript/typescript6@6.0.1)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.61.1(@typescript/typescript6@6.0.1)
-      '@typescript-eslint/types': 8.61.1
+      '@typescript-eslint/tsconfig-utils': 8.62.0(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/types': 8.62.0
       debug: 4.4.3
       typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/scope-manager@8.61.1':
+  '@typescript-eslint/scope-manager@8.62.0':
     dependencies:
-      '@typescript-eslint/types': 8.61.1
-      '@typescript-eslint/visitor-keys': 8.61.1
+      '@typescript-eslint/types': 8.62.0
+      '@typescript-eslint/visitor-keys': 8.62.0
 
-  '@typescript-eslint/tsconfig-utils@8.61.1(@typescript/typescript6@6.0.1)':
+  '@typescript-eslint/tsconfig-utils@8.62.0(@typescript/typescript6@6.0.1)':
     dependencies:
       typescript: '@typescript/typescript6@6.0.1'
 
-  '@typescript-eslint/type-utils@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
+  '@typescript-eslint/type-utils@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
     dependencies:
-      '@typescript-eslint/types': 8.61.1
-      '@typescript-eslint/typescript-estree': 8.61.1(@typescript/typescript6@6.0.1)
-      '@typescript-eslint/utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/types': 8.62.0
+      '@typescript-eslint/typescript-estree': 8.62.0(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/utils': 8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       debug: 4.4.3
       eslint: 9.39.4
       ts-api-utils: 2.5.0(@typescript/typescript6@6.0.1)
@@ -13776,37 +13776,37 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/types@8.61.1': {}
+  '@typescript-eslint/types@8.62.0': {}
 
-  '@typescript-eslint/typescript-estree@8.61.1(@typescript/typescript6@6.0.1)':
+  '@typescript-eslint/typescript-estree@8.62.0(@typescript/typescript6@6.0.1)':
     dependencies:
-      '@typescript-eslint/project-service': 8.61.1(@typescript/typescript6@6.0.1)
-      '@typescript-eslint/tsconfig-utils': 8.61.1(@typescript/typescript6@6.0.1)
-      '@typescript-eslint/types': 8.61.1
-      '@typescript-eslint/visitor-keys': 8.61.1
+      '@typescript-eslint/project-service': 8.62.0(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/tsconfig-utils': 8.62.0(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/types': 8.62.0
+      '@typescript-eslint/visitor-keys': 8.62.0
       debug: 4.4.3
       minimatch: 10.2.5
-      semver: 7.8.4
+      semver: 7.8.5
       tinyglobby: 0.2.16
       ts-api-utils: 2.5.0(@typescript/typescript6@6.0.1)
       typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/utils@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
+  '@typescript-eslint/utils@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.4)
-      '@typescript-eslint/scope-manager': 8.61.1
-      '@typescript-eslint/types': 8.61.1
-      '@typescript-eslint/typescript-estree': 8.61.1(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/scope-manager': 8.62.0
+      '@typescript-eslint/types': 8.62.0
+      '@typescript-eslint/typescript-estree': 8.62.0(@typescript/typescript6@6.0.1)
       eslint: 9.39.4
       typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/visitor-keys@8.61.1':
+  '@typescript-eslint/visitor-keys@8.62.0':
     dependencies:
-      '@typescript-eslint/types': 8.61.1
+      '@typescript-eslint/types': 8.62.0
       eslint-visitor-keys: 5.0.1
 
   '@typescript/typescript-aix-ppc64@7.0.1-rc':
@@ -13873,30 +13873,30 @@ snapshots:
     dependencies:
       typescript: 6.0.3
 
-  '@uiw/codemirror-extensions-basic-setup@4.25.10(@codemirror/autocomplete@6.20.1)(@codemirror/commands@6.10.3)(@codemirror/language@6.12.3)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/view@6.43.1)':
+  '@uiw/codemirror-extensions-basic-setup@4.25.10(@codemirror/autocomplete@6.20.1)(@codemirror/commands@6.10.3)(@codemirror/language@6.12.3)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.7.0)(@codemirror/view@6.43.2)':
     dependencies:
       '@codemirror/autocomplete': 6.20.1
       '@codemirror/commands': 6.10.3
       '@codemirror/language': 6.12.3
       '@codemirror/lint': 6.9.5
       '@codemirror/search': 6.6.0
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
 
-  '@uiw/codemirror-themes@4.25.10(@codemirror/language@6.12.3)(@codemirror/state@6.6.0)(@codemirror/view@6.43.1)':
+  '@uiw/codemirror-themes@4.25.10(@codemirror/language@6.12.3)(@codemirror/state@6.7.0)(@codemirror/view@6.43.2)':
     dependencies:
       '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
 
-  '@uiw/react-codemirror@4.25.10(@babel/runtime@8.0.0)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.3)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.43.1)(codemirror@6.0.2)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@uiw/react-codemirror@4.25.10(@babel/runtime@8.0.0)(@codemirror/autocomplete@6.20.1)(@codemirror/language@6.12.3)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.7.0)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.43.2)(codemirror@6.0.2)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@babel/runtime': 8.0.0
       '@codemirror/commands': 6.10.3
-      '@codemirror/state': 6.6.0
+      '@codemirror/state': 6.7.0
       '@codemirror/theme-one-dark': 6.1.3
-      '@codemirror/view': 6.43.1
-      '@uiw/codemirror-extensions-basic-setup': 4.25.10(@codemirror/autocomplete@6.20.1)(@codemirror/commands@6.10.3)(@codemirror/language@6.12.3)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.6.0)(@codemirror/view@6.43.1)
+      '@codemirror/view': 6.43.2
+      '@uiw/codemirror-extensions-basic-setup': 4.25.10(@codemirror/autocomplete@6.20.1)(@codemirror/commands@6.10.3)(@codemirror/language@6.12.3)(@codemirror/lint@6.9.5)(@codemirror/search@6.6.0)(@codemirror/state@6.7.0)(@codemirror/view@6.43.2)
       codemirror: 6.0.2
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
@@ -13967,7 +13967,7 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@vitejs/plugin-react@6.0.2(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))':
+  '@vitejs/plugin-react@6.0.3(vite@8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
       vite: 8.0.13(@types/node@24.13.2)(esbuild@0.28.0)(terser@5.46.1)
@@ -15247,8 +15247,8 @@ snapshots:
       '@codemirror/language': 6.12.3
       '@codemirror/lint': 6.9.5
       '@codemirror/search': 6.6.0
-      '@codemirror/state': 6.6.0
-      '@codemirror/view': 6.43.1
+      '@codemirror/state': 6.7.0
+      '@codemirror/view': 6.43.2
 
   collect-v8-coverage@1.0.3: {}
 
@@ -15417,7 +15417,7 @@ snapshots:
       postcss-modules-scope: 3.2.1(postcss@8.5.14)
       postcss-modules-values: 4.0.0(postcss@8.5.14)
       postcss-value-parser: 4.2.0
-      semver: 7.8.4
+      semver: 7.8.5
     optionalDependencies:
       webpack: 5.107.2(esbuild@0.28.0)(postcss@8.5.14)(webpack-cli@7.0.3)
 
@@ -16000,12 +16000,12 @@ snapshots:
     dependencies:
       eslint: 9.39.4
 
-  eslint-plugin-jest@29.15.2(@typescript-eslint/eslint-plugin@8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))):
+  eslint-plugin-jest@29.15.2(@typescript-eslint/eslint-plugin@8.62.0(@typescript-eslint/parser@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)(jest@30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))):
     dependencies:
-      '@typescript-eslint/utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/utils': 8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       eslint: 9.39.4
     optionalDependencies:
-      '@typescript-eslint/eslint-plugin': 8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/eslint-plugin': 8.62.0(@typescript-eslint/parser@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       jest: 30.4.2(@types/node@24.13.2)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@24.13.2)(@typescript/typescript6@6.0.1))
       typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
@@ -16369,7 +16369,7 @@ snapshots:
       minimatch: 3.1.5
       node-abort-controller: 3.1.1
       schema-utils: 3.3.0
-      semver: 7.8.4
+      semver: 7.8.5
       tapable: 2.3.3
       typescript: '@typescript/typescript6@6.0.1'
       webpack: 5.107.2(esbuild@0.28.0)(postcss@8.5.14)(webpack-cli@7.0.3)
@@ -16531,7 +16531,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@17.6.0: {}
+  globals@17.7.0: {}
 
   globalthis@1.0.4:
     dependencies:
@@ -16768,7 +16768,7 @@ snapshots:
 
   immer@11.1.4: {}
 
-  immutable@5.1.6: {}
+  immutable@5.1.7: {}
 
   import-fresh@3.3.1:
     dependencies:
@@ -17009,7 +17009,7 @@ snapshots:
       '@babel/parser': 7.29.7
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
-      semver: 7.8.4
+      semver: 7.8.5
     transitivePeerDependencies:
       - supports-color
 
@@ -17316,7 +17316,7 @@ snapshots:
       jest-message-util: 30.4.1
       jest-util: 30.4.1
       pretty-format: 30.4.1
-      semver: 7.8.4
+      semver: 7.8.5
       synckit: 0.11.12
     transitivePeerDependencies:
       - supports-color
@@ -17462,7 +17462,7 @@ snapshots:
       lodash.isstring: 4.0.1
       lodash.once: 4.1.1
       ms: 2.1.3
-      semver: 7.8.4
+      semver: 7.8.5
 
   jstransformer@1.0.0:
     dependencies:
@@ -17688,7 +17688,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
 
   make-error@1.3.6: {}
 
@@ -17900,7 +17900,7 @@ snapshots:
 
   nanoid@3.3.11: {}
 
-  nanoid@5.1.14: {}
+  nanoid@5.1.15: {}
 
   napi-build-utils@2.0.0: {}
 
@@ -17935,7 +17935,7 @@ snapshots:
 
   node-abi@3.89.0:
     dependencies:
-      semver: 7.8.4
+      semver: 7.8.5
 
   node-abort-controller@3.1.1: {}
 
@@ -17956,7 +17956,7 @@ snapshots:
       make-fetch-happen: 15.0.5
       nopt: 9.0.0
       proc-log: 6.1.0
-      semver: 7.8.4
+      semver: 7.8.5
       tar: 7.5.13
       tinyglobby: 0.2.16
       which: 6.0.1
@@ -18918,7 +18918,7 @@ snapshots:
 
   semver@6.3.1: {}
 
-  semver@7.8.4: {}
+  semver@7.8.5: {}
 
   send@0.19.2:
     dependencies:
@@ -19251,7 +19251,7 @@ snapshots:
       oxc-parser: 0.127.0
       oxc-resolver: 11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
       recast: 0.23.11
-      semver: 7.8.4
+      semver: 7.8.5
       use-sync-external-store: 1.6.0(react@19.2.7)
       ws: 8.21.0
     optionalDependencies:
@@ -19600,7 +19600,7 @@ snapshots:
       json5: 2.2.3
       lodash.memoize: 4.1.2
       make-error: 1.3.6
-      semver: 7.8.4
+      semver: 7.8.5
       type-fest: 4.41.0
       typescript: '@typescript/typescript6@6.0.1'
       yargs-parser: 21.1.1
@@ -19708,16 +19708,16 @@ snapshots:
       possible-typed-array-names: 1.1.0
       reflect.getprototypeof: 1.0.10
 
-  types-ramda@0.31.0:
+  types-ramda@0.32.0:
     dependencies:
       ts-toolbelt: 9.6.0
 
-  typescript-eslint@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4):
+  typescript-eslint@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4):
     dependencies:
-      '@typescript-eslint/eslint-plugin': 8.61.1(@typescript-eslint/parser@8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)
-      '@typescript-eslint/parser': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
-      '@typescript-eslint/typescript-estree': 8.61.1(@typescript/typescript6@6.0.1)
-      '@typescript-eslint/utils': 8.61.1(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/eslint-plugin': 8.62.0(@typescript-eslint/parser@8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4))(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/parser': 8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)
+      '@typescript-eslint/typescript-estree': 8.62.0(@typescript/typescript6@6.0.1)
+      '@typescript-eslint/utils': 8.62.0(@typescript/typescript6@6.0.1)(eslint@9.39.4)
       eslint: 9.39.4
       typescript: '@typescript/typescript6@6.0.1'
     transitivePeerDependencies:
