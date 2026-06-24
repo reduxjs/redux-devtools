@@ -23,7 +23,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
+    "lint": "oxlint",
     "type-check": "tsc"
   },
   "dependencies": {

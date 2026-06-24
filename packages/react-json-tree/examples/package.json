@@ -17,7 +17,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
+    "lint": "oxlint",
     "type-check": "tsc"
   },
   "dependencies": {

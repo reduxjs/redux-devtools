@@ -11,7 +11,7 @@
   "scripts": {
     "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
     "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
-    "lint": "eslint .",
+    "lint": "oxlint",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

@@ -32,7 +32,7 @@
     "start:electron": "node ./bin/redux-devtools.js --open",
     "clean": "rimraf dist",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint .",
+    "lint": "oxlint",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build",
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
