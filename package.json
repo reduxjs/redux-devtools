@@ -11,8 +11,8 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "jest": "^30.4.2",
     "prettier": "3.8.4",
-    "typescript": "npm:@typescript/typescript6@^6.0.0",
-    "typescript-eslint": "^8.61.1"
+    "typescript": "npm:@typescript/typescript6@^6.0.1",
+    "typescript-eslint": "^8.62.0"
   },
   "scripts": {
     "format": "prettier --write .",
@@ -23,5 +23,5 @@
     "clean:all": "pnpm --recursive run clean",
     "release": "pnpm build:all && pnpm publish -r"
   },
-  "packageManager": "pnpm@11.8.0"
+  "packageManager": "pnpm@11.9.0"
 }
