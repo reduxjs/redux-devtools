@@ -3,12 +3,7 @@ import eslintTs from '../../../../eslint.ts.config.base.mjs';
 
 export default [
   ...eslintJs,
-  ...eslintTs(import.meta.dirname),
-  ...eslintTs(
-    import.meta.dirname,
-    ['webpack.config.ts'],
-    ['./tsconfig.webpack.json'],
-  ),
+  ...eslintTs,
   {
     ignores: ['dist'],
   },

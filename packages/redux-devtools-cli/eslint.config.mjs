@@ -5,8 +5,8 @@ import eslintTsJest from '../../eslint.ts.jest.config.base.mjs';
 
 export default [
   ...eslintJs,
-  ...eslintTs(import.meta.dirname),
-  ...eslintTsJest(import.meta.dirname),
+  ...eslintTs,
+  ...eslintTsJest,
   {
     ignores: ['dist', 'jest.config.ts', 'umd'],
   },
