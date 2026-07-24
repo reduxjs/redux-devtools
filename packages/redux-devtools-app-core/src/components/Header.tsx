@@ -3,7 +3,7 @@ import { Tabs, Toolbar, Button, Divider } from '@redux-devtools/ui';
 import { connect, ResolveThunks } from 'react-redux';
 import { GoBook } from 'react-icons/go';
 import { IoMdText } from 'react-icons/io';
-import { TiSocialTwitter } from 'react-icons/ti';
+import { RiTwitterXLine } from 'react-icons/ri';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import { changeSection } from '../actions/index.js';
 
@@ -54,7 +54,7 @@ class Header extends Component<Props> {
           tooltipPosition="bottom"
           onClick={this.openLink('https://twitter.com/NathanBierema')}
         >
-          <TiSocialTwitter />
+          <RiTwitterXLine />
         </Button>
         <Button
           title="Support us"
