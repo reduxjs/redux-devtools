@@ -439,7 +439,7 @@ export function sendMessage<S, A extends Action<string>>(
       {
         type: 'ACTION',
         action: amendedAction,
-        payload: state,
+        payload: state as S,
         maxAge: config.maxAge!,
         source,
         name: config.name || name,
