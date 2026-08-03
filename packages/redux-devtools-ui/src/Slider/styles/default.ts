@@ -95,12 +95,12 @@ export const style = ({
   )}
 
  ${prefixSelectors(
-    'input:focus:not(:active)',
-    ['webkit-slider-thumb', 'moz-range-thumb', 'ms-thumb'],
-    `{
+   'input:focus:not(:active)',
+   ['webkit-slider-thumb', 'moz-range-thumb', 'ms-thumb'],
+   `{
     box-shadow: 0 0 1px 2px ${theme.base0D};
   }`,
-  )}
+ )}
 
   input::-moz-focus-outer {
     border: 0;

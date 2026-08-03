@@ -21,8 +21,7 @@ type FormattedQuery = {
   timings: QueryTimings;
   statusFlags: RTKStatusFlags;
 } & (
-  | { mutation: RtkResourceInfo['state'] }
-  | { query: RtkResourceInfo['state'] }
+  { mutation: RtkResourceInfo['state'] } | { query: RtkResourceInfo['state'] }
 );
 
 const rootProps: TreeViewProps['rootProps'] = {

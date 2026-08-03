@@ -17,8 +17,7 @@ interface Options<
     top: number;
   };
   root:
-    | Selection<RootGElement, RootDatum, RootPElement, RootPDatum>
-    | undefined;
+    Selection<RootGElement, RootDatum, RootPElement, RootPDatum> | undefined;
   styles: { [key: string]: StyleValue };
   text: string | ((datum: Datum) => string);
 }

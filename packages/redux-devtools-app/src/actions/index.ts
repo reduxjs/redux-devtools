@@ -132,11 +132,9 @@ export type StoreActionWithoutUpdateStateOrLiftedAction =
   | EmitAction;
 
 export type StoreActionWithoutUpdateState =
-  | StoreActionWithoutUpdateStateOrLiftedAction
-  | LiftedActionAction;
+  StoreActionWithoutUpdateStateOrLiftedAction | LiftedActionAction;
 
 export type StoreActionWithoutLiftedAction =
-  | StoreActionWithoutUpdateStateOrLiftedAction
-  | UpdateStateAction;
+  StoreActionWithoutUpdateStateOrLiftedAction | UpdateStateAction;
 
 export type StoreAction = StoreActionWithoutUpdateState | UpdateStateAction;

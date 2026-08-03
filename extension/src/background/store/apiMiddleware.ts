@@ -203,15 +203,11 @@ export type TabMessage =
   | ActionAction
   | ExportAction;
 export type PanelMessageWithoutNA<S, A extends Action<string>> =
-  | ErrorMessage
-  | UpdateStateAction<S, A>
-  | SetPersistAction;
+  ErrorMessage | UpdateStateAction<S, A> | SetPersistAction;
 export type PanelMessage<S, A extends Action<string>> =
-  | PanelMessageWithoutNA<S, A>
-  | NAAction;
+  PanelMessageWithoutNA<S, A> | NAAction;
 export type PanelMessageWithSplitAction<S, A extends Action<string>> =
-  | PanelMessage<S, A>
-  | SplitUpdateStateAction<S, A>;
+  PanelMessage<S, A> | SplitUpdateStateAction<S, A>;
 
 type TabPort = Omit<chrome.runtime.Port, 'postMessage'> & {
   postMessage: (message: TabMessage) => void;
@@ -243,10 +239,7 @@ const getId = (sender: chrome.runtime.MessageSender, name?: string) =>
   sender.tab ? sender.tab.id! : name || sender.id!;
 
 type MonitorAction<S, A extends Action<string>> =
-  | NAAction
-  | ErrorMessage
-  | UpdateStateAction<S, A>
-  | SetPersistAction;
+  NAAction | ErrorMessage | UpdateStateAction<S, A> | SetPersistAction;
 
 // Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
 const maxChromeMsgSize = 32 * 1024 * 1024;

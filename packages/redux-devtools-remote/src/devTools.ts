@@ -109,8 +109,7 @@ interface Options<S, A extends Action<string>> {
   };
   readonly stateSanitizer?: ((state: S, index?: number) => S) | undefined;
   readonly actionSanitizer?:
-    | (<A extends Action<string>>(action: A, id?: number) => A)
-    | undefined;
+    (<A extends Action<string>>(action: A, id?: number) => A) | undefined;
 }
 
 interface MessageToRelay {
@@ -259,8 +258,7 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
                   index?: number,
                 ) => unknown,
                 this.actionSanitizer as
-                  | ((action: Action<string>, id: number) => Action)
-                  | undefined,
+                  ((action: Action<string>, id: number) => Action) | undefined,
                 nextActionId!,
               ),
             );

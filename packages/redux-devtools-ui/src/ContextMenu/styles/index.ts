@@ -13,17 +13,19 @@ export default ({
   top,
   visible,
 }: StyleProps & { theme: Theme }) => css`
-  ${visible
-    ? `
+  ${
+    visible
+      ? `
     visibility: visible;
     opacity: 1;
     transition: opacity 0.2s linear;
     `
-    : `
+      : `
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.2s, opacity 0.2s linear;
-  `}
+  `
+  }
   position: fixed;
   top: ${top}px;
   left: ${left}px;

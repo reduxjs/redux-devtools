@@ -3,9 +3,7 @@ import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LocalFilter } from '@redux-devtools/utils';
 
 export type FilterStateValue =
-  | 'DO_NOT_FILTER'
-  | 'DENYLIST_SPECIFIC'
-  | 'ALLOWLIST_SPECIFIC';
+  'DO_NOT_FILTER' | 'DENYLIST_SPECIFIC' | 'ALLOWLIST_SPECIFIC';
 
 export const FilterState: { [K in FilterStateValue]: FilterStateValue } = {
   DO_NOT_FILTER: 'DO_NOT_FILTER',
@@ -138,11 +136,9 @@ export function startingFrom<S, A extends Action<string>>(
   localFilter: LocalFilter | undefined,
   stateSanitizer: (<S>(state: S, index: number) => S) | undefined,
   actionSanitizer:
-    | (<A extends Action<string>>(action: A, id: number) => A)
-    | undefined,
+    (<A extends Action<string>>(action: A, id: number) => A) | undefined,
   predicate:
-    | (<S, A extends Action<string>>(state: S, action: A) => boolean)
-    | undefined,
+    (<S, A extends Action<string>>(state: S, action: A) => boolean) | undefined,
 ): LiftedState<S, A, unknown> | PartialLiftedState<S, A> | undefined {
   const stagedActionIds = state.stagedActionIds;
   if (sendingActionId <= stagedActionIds[1]) return state;

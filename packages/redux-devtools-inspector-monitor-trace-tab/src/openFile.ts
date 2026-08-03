@@ -16,13 +16,11 @@ function openResource(
       const { fileName: finalFileName, lineNumber: finalLineNumber } =
         stackFrame;
       const adjustedLineNumber = Math.max(finalLineNumber! - 1, 0);
-      chrome.devtools.panels.openResource(
-        finalFileName!,
-        adjustedLineNumber,
-        (/* result */) => {
-          // console.log("openResource result: ", result);
-        },
-      );
+      chrome.devtools.panels.openResource(finalFileName!, adjustedLineNumber, (
+        /* result */
+      ) => {
+        // console.log("openResource result: ", result);
+      });
     }
   }) as () => void);
 }

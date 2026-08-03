@@ -12,9 +12,7 @@ export type StylingValueFunction = (
 ) => Partial<Styling>;
 
 export type StylingValue =
-  | string
-  | CSS.Properties<string | number>
-  | StylingValueFunction;
+  string | CSS.Properties<string | number> | StylingValueFunction;
 
 export type StylingConfig = {
   // Should actually only be string | Base16Theme

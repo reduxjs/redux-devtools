@@ -54,10 +54,8 @@ export default function importState<S, A extends Action<string>>(
   }
 
   const parsedSerializedLiftedState:
-    | ParsedSerializedLiftedState
-    | LiftedState<S, A, unknown> = parse(state) as
-    | ParsedSerializedLiftedState
-    | LiftedState<S, A, unknown>;
+    ParsedSerializedLiftedState | LiftedState<S, A, unknown> = parse(state) as
+    ParsedSerializedLiftedState | LiftedState<S, A, unknown>;
   const preloadedState =
     'payload' in parsedSerializedLiftedState &&
     parsedSerializedLiftedState.preloadedState
