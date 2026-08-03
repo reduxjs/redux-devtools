@@ -14,7 +14,7 @@ importers:
   .:
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: ^7.29.7
         version: 7.29.7(supports-color@8.1.1)
       '@changesets/cli':
         specifier: ^2.31.1
@@ -120,7 +120,7 @@ importers:
         version: 6.0.0(patch_hash=70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2)(react@19.2.8)(redux@5.0.1)
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: ^7.29.7
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
         specifier: ^7.29.7
@@ -168,13 +168,13 @@ importers:
         specifier: ^42.8.0
         version: 42.8.0(supports-color@8.1.1)
       esbuild:
-        specifier: ^0.28.0
+        specifier: ^0.28.1
         version: 0.28.1
       globals:
-        specifier: ^17.8.0
-        version: 17.8.0
+        specifier: ^17.9.0
+        version: 17.9.0
       immutable:
-        specifier: ^5.1.7
+        specifier: ^5.1.9
         version: 5.1.9
       jest:
         specifier: ^30.4.2
@@ -260,7 +260,7 @@ importers:
         specifier: npm:typescript@7.0.2
         version: typescript@7.0.2
       vite:
-        specifier: ^8.0.13
+        specifier: ^8.2.0
         version: 8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(terser@5.49.0)
 
   packages/d3tooltip:
@@ -294,7 +294,7 @@ importers:
         specifier: ^4.17.12
         version: 4.17.12
       immutable:
-        specifier: ^5.1.7
+        specifier: ^5.1.9
         version: 5.1.9
       jest:
         specifier: ^30.4.2
@@ -423,7 +423,7 @@ importers:
         specifier: npm:typescript@7.0.2
         version: typescript@7.0.2
       vite:
-        specifier: ^8.0.13
+        specifier: ^8.2.0
         version: 8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(terser@5.49.0)
 
   packages/react-json-tree:
@@ -463,7 +463,7 @@ importers:
   packages/react-json-tree/examples:
     dependencies:
       immutable:
-        specifier: ^5.1.7
+        specifier: ^5.1.9
         version: 5.1.9
       react:
         specifier: ^19.2.8
@@ -497,7 +497,7 @@ importers:
         specifier: npm:typescript@7.0.2
         version: typescript@7.0.2
       vite:
-        specifier: ^8.0.13
+        specifier: ^8.2.0
         version: 8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(terser@5.49.0)
 
   packages/redux-devtools:
@@ -574,7 +574,7 @@ importers:
         version: 20.0.1
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: ^7.29.7
         version: 7.29.7(supports-color@8.1.1)
       '@babel/eslint-parser':
         specifier: ^7.29.7
@@ -634,14 +634,14 @@ importers:
         specifier: ^7.1.4
         version: 7.1.4(webpack@5.109.2)
       esbuild:
-        specifier: ^0.28.0
+        specifier: ^0.28.1
         version: 0.28.1
       fork-ts-checker-webpack-plugin:
         specifier: ^9.1.0
         version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.109.2)
       globals:
-        specifier: ^17.8.0
-        version: 17.8.0
+        specifier: ^17.9.0
+        version: 17.9.0
       html-loader:
         specifier: ^5.1.0
         version: 5.1.0(webpack@5.109.2)
@@ -679,7 +679,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.109.2)
       webpack-dev-server:
-        specifier: ^5.2.4
+        specifier: ^5.2.6
         version: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(tslib@2.8.1)(webpack-cli@7.2.2)(webpack@5.109.2)
 
   packages/redux-devtools-app-core:
@@ -776,7 +776,7 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0
       esbuild:
-        specifier: ^0.28.0
+        specifier: ^0.28.1
         version: 0.28.1
       jest:
         specifier: ^30.4.2
@@ -973,8 +973,8 @@ importers:
         specifier: ^7.2.1
         version: 7.2.1
       globals:
-        specifier: ^17.8.0
-        version: 17.8.0
+        specifier: ^17.9.0
+        version: 17.9.0
       jest:
         specifier: ^30.4.2
         version: 30.4.2(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
@@ -1073,7 +1073,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       immutable:
-        specifier: ^5.1.7
+        specifier: ^5.1.9
         version: 5.1.9
       javascript-stringify:
         specifier: ^2.1.0
@@ -1237,7 +1237,7 @@ importers:
         specifier: workspace:^
         version: link:../../redux-devtools-ui
       immutable:
-        specifier: ^5.1.7
+        specifier: ^5.1.9
         version: 5.1.9
       lodash.shuffle:
         specifier: ^4.2.0
@@ -1265,7 +1265,7 @@ importers:
         version: 3.0.6
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: ^7.29.7
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
         specifier: ^7.29.7
@@ -1328,7 +1328,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.109.2)
       webpack-dev-server:
-        specifier: ^5.2.4
+        specifier: ^5.2.6
         version: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(tslib@2.8.1)(webpack-cli@7.2.2)(webpack@5.109.2)
 
   packages/redux-devtools-inspector-monitor-trace-tab:
@@ -1431,7 +1431,7 @@ importers:
         specifier: workspace:^
         version: link:..
       immutable:
-        specifier: ^5.1.7
+        specifier: ^5.1.9
         version: 5.1.9
       lodash.shuffle:
         specifier: ^4.2.0
@@ -1462,7 +1462,7 @@ importers:
         version: 3.0.6
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: ^7.29.7
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
         specifier: ^7.29.7
@@ -1519,7 +1519,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.109.2)
       webpack-dev-server:
-        specifier: ^5.2.4
+        specifier: ^5.2.6
         version: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(tslib@2.8.1)(webpack-cli@7.2.2)(webpack@5.109.2)
 
   packages/redux-devtools-instrument:
@@ -1659,7 +1659,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       immutable:
-        specifier: ^5.1.7
+        specifier: ^5.1.9
         version: 5.1.9
       lodash.debounce:
         specifier: ^4.0.8
@@ -1790,7 +1790,7 @@ importers:
         version: 7.18.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: ^7.29.7
         version: 7.29.7(supports-color@8.1.1)
       '@babel/plugin-transform-runtime':
         specifier: ^7.29.7
@@ -1850,7 +1850,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.109.2)
       webpack-dev-server:
-        specifier: ^5.2.4
+        specifier: ^5.2.6
         version: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(tslib@2.8.1)(webpack-cli@7.2.2)(webpack@5.109.2)
 
   packages/redux-devtools-serialize:
@@ -1866,7 +1866,7 @@ importers:
         specifier: ^3.1.5
         version: 3.1.5
       immutable:
-        specifier: ^5.1.7
+        specifier: ^5.1.9
         version: 5.1.9
       jest:
         specifier: ^30.4.2
@@ -1967,7 +1967,7 @@ importers:
         version: 2.4.3
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: ^7.29.7
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
         specifier: ^7.29.7
@@ -2024,7 +2024,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.109.2)
       webpack-dev-server:
-        specifier: ^5.2.4
+        specifier: ^5.2.6
         version: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(tslib@2.8.1)(webpack-cli@7.2.2)(webpack@5.109.2)
 
   packages/redux-devtools-ui:
@@ -2151,7 +2151,7 @@ importers:
         specifier: npm:typescript@7.0.2
         version: typescript@7.0.2
       vite:
-        specifier: ^8.0.13
+        specifier: ^8.2.0
         version: 8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(terser@5.49.0)
 
   packages/redux-devtools-utils:
@@ -2169,7 +2169,7 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2
       immutable:
-        specifier: ^5.1.7
+        specifier: ^5.1.9
         version: 5.1.9
       jsan:
         specifier: ^3.1.14
@@ -2225,7 +2225,7 @@ importers:
         version: 3.1.0(redux@5.0.1)
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: ^7.29.7
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
         specifier: ^7.29.7
@@ -2276,7 +2276,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.109.2)
       webpack-dev-server:
-        specifier: ^5.2.4
+        specifier: ^5.2.6
         version: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(tslib@2.8.1)(webpack-cli@7.2.2)(webpack@5.109.2)
 
   packages/redux-devtools/examples/todomvc:
@@ -2310,7 +2310,7 @@ importers:
         version: 2.4.3
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.0
+        specifier: ^7.29.7
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
         specifier: ^7.29.7
@@ -2367,7 +2367,7 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.109.2)
       webpack-dev-server:
-        specifier: ^5.2.4
+        specifier: ^5.2.6
         version: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(tslib@2.8.1)(webpack-cli@7.2.2)(webpack@5.109.2)
 
 packages:
@@ -7391,8 +7391,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@17.8.0:
-    resolution: {integrity: sha512-Zz/LMDZScFmkakeL2cTHzf+PbWKdpU3uclqkZT7TjDG58j5WPt0PpA+n9uPI24fZtlw07q0OtEi84K+umsRzqQ==}
+  globals@17.9.0:
+    resolution: {integrity: sha512-m/MvAW61QVU5VDNF1Vj8axt016h8w7L5TU1e9zlab7XIttAT2YAlCwl75K1fOqvMM9apmD7lbCIRhpfkhmxhCg==}
     engines: {node: '>=18'}
 
   globalthis@1.0.4:
@@ -16632,7 +16632,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@17.8.0: {}
+  globals@17.9.0: {}
 
   globalthis@1.0.4:
     dependencies:
