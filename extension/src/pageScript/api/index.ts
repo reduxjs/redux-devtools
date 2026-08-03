@@ -211,8 +211,7 @@ export type PageScriptToContentScriptMessageWithoutDisconnect<
   | InitInstanceMessage;
 
 export type PageScriptToContentScriptMessage<S, A extends Action<string>> =
-  | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
-  | DisconnectMessage;
+  PageScriptToContentScriptMessageWithoutDisconnect<S, A> | DisconnectMessage;
 
 function post<S, A extends Action<string>>(
   message: PageScriptToContentScriptMessage<S, A>,
@@ -262,10 +261,7 @@ function getStackTrace(
 
 function amendActionType<A extends Action<string>>(
   action:
-    | A
-    | StructuralPerformAction<A>
-    | StructuralPerformAction<A>[]
-    | string,
+    A | StructuralPerformAction<A> | StructuralPerformAction<A>[] | string,
   config: Config,
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace: Function | undefined,
@@ -314,12 +310,9 @@ export interface StructuralPerformAction<A extends Action<string>> {
 }
 
 type SingleUserAction<A extends Action<string>> =
-  | PerformAction<A>
-  | StructuralPerformAction<A>
-  | A;
+  PerformAction<A> | StructuralPerformAction<A> | A;
 type UserAction<A extends Action<string>> =
-  | SingleUserAction<A>
-  | readonly SingleUserAction<A>[];
+  SingleUserAction<A> | readonly SingleUserAction<A>[];
 
 interface ActionMessage<S, A extends Action<string>> {
   readonly type: 'ACTION';

@@ -20,10 +20,7 @@ interface OldOrNewOptions {
   readonly projectPath: string;
   readonly maxAge: number;
   readonly filter:
-    | FilterStateValue
-    | 'WHITELIST_SPECIFIC'
-    | 'BLACKLIST_SPECIFIC'
-    | boolean;
+    FilterStateValue | 'WHITELIST_SPECIFIC' | 'BLACKLIST_SPECIFIC' | boolean;
   readonly allowlist: string;
   readonly denylist: string;
   readonly whitelist: string;

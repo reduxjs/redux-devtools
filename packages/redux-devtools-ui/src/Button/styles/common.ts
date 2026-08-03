@@ -156,8 +156,9 @@ export const commonStyle = ({
       pointer-events: none;
     }
 
-    ${mark &&
-    `
+    ${
+      mark &&
+      `
     background-color: ${colorEffect(
       theme[mark],
       'fade',
@@ -171,7 +172,8 @@ export const commonStyle = ({
       stroke-opacity: 0.2;
       user-select: none;
     }
-  `}
+  `
+    }
   }
 `;
 
@@ -223,15 +225,18 @@ export const tooltipStyle = ({
   &:before {
     ${before(tooltipPosition)}
     ${getDirection(tooltipPosition)}: 3px;
-    ${theme.type === 'material'
-      ? css`
-          animation: ${fadeIn} 500ms;
-        `
-      : ''}
+    ${
+      theme.type === 'material'
+        ? css`
+            animation: ${fadeIn} 500ms;
+          `
+        : ''
+    }
   }
 
-  ${theme.type !== 'material' &&
-  `
+  ${
+    theme.type !== 'material' &&
+    `
   &:after {
     content: "";
     border-style: solid;
@@ -240,7 +245,8 @@ export const tooltipStyle = ({
     ${after(tooltipPosition, theme.base02)}
     ${getDirection(tooltipPosition)}: 7px;
   }
-  `}
+  `
+  }
 
   &:hover:after,
   &:hover:before {
