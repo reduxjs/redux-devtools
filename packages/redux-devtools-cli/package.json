@@ -38,7 +38,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "dependencies": {
     "@apollo/server": "^5.5.1",
@@ -49,7 +49,7 @@
     "@reduxjs/toolkit": "^2.12.0",
     "@types/react": "^19.2.18",
     "body-parser": "^2.3.0",
-    "chalk": "^5.6.2",
+    "chalk": "^6.0.0",
     "cors": "^2.8.6",
     "cross-spawn": "^7.0.6",
     "electron": "^42.8.0",
