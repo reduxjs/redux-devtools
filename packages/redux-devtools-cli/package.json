@@ -38,7 +38,7 @@
     "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "dependencies": {
     "@apollo/server": "^5.5.1",
