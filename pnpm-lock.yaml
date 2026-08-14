@@ -159,8 +159,8 @@ importers:
         specifier: ^19.2.4
         version: 19.2.4(@types/react@19.2.18)
       chromedriver:
-        specifier: ^150.0.4
-        version: 150.0.4(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+        specifier: ^151.0.5
+        version: 151.0.5(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
@@ -5764,9 +5764,9 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  adm-zip@0.5.18:
-    resolution: {integrity: sha512-ufJnssQGbxzLNS1Ho9bCtX4rQKCCvoVuDLHoJyc3F9dOGDB4BkWs2Ci0kv53lqocAEQ/Cbi+I2XCsNYGqVYqng==}
-    engines: {node: '>=12.0'}
+  adm-zip@0.6.0:
+    resolution: {integrity: sha512-XleryMhbuksdKtofnWZ9Sk+4CUTbms4Mb/EU32SZwToAyZ5RgVos/ki8n+yr0LWHOGKuakbXTuuYNHLQjhddgg==}
+    engines: {node: '>=14.0'}
 
   ag-auth@2.1.1:
     resolution: {integrity: sha512-7XkzbCoW/jWpI/1wdmCCr1LXk4ucywXoORG68OzPQl/Y8/sWTMiGIU/stfnUh07kVkihn4dKelz3HJ2T6niPng==}
@@ -6197,8 +6197,8 @@ packages:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
 
-  chromedriver@150.0.4:
-    resolution: {integrity: sha512-Yg2oXBONi1mqAMOG2ybwUneSvxIn04NF4qNAJ+yGO2H7WwX1WYLGQRHVHsbySEjIuqIyDmS1ZfAw6p0wtl43zQ==}
+  chromedriver@151.0.5:
+    resolution: {integrity: sha512-oPI/VtTeLePbkTOI5o4yvEOlcdpmqEdqQNLZbyu5ha6kpDQYfDRuliisDiph29hBK/UzHSmOyZFKX1mE3efYOQ==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -14572,7 +14572,7 @@ snapshots:
 
   acorn@8.18.0: {}
 
-  adm-zip@0.5.18: {}
+  adm-zip@0.6.0: {}
 
   ag-auth@2.1.1:
     dependencies:
@@ -15062,10 +15062,10 @@ snapshots:
 
   chrome-trace-event@1.0.4: {}
 
-  chromedriver@150.0.4(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1):
+  chromedriver@151.0.5(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1):
     dependencies:
       '@testim/chrome-version': 1.1.4
-      adm-zip: 0.5.18
+      adm-zip: 0.6.0
       axios: 1.19.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       compare-versions: 6.1.1
       proxy-agent: 8.0.2(supports-color@8.1.1)
