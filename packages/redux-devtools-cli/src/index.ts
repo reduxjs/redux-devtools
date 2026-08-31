@@ -1,10 +1,10 @@
 import express from 'express';
-import http from 'http';
 import getPort from 'get-port';
 import socketClusterServer from 'socketcluster-server';
 import getOptions from './options.js';
 import routes from './routes.js';
 import createStore from './store.js';
+import { createServer } from './utils/create-server.js';
 
 // const LOG_LEVEL_NONE = 0;
 // const LOG_LEVEL_ERROR = 1;
@@ -37,7 +37,8 @@ export default async function (argv: { [arg: string]: any }): Promise<{
     console.log('[ReduxDevTools] Start server...');
     console.log('-'.repeat(80) + '\n');
   }
-  const httpServer = http.createServer();
+
+  const httpServer = createServer(argv);
   const agServer = socketClusterServer.attach(httpServer, options);
 
   const app = express();
