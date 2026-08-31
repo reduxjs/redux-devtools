@@ -1,6 +1,6 @@
 import React from 'react';
 import { Map } from 'immutable';
-import { JSONTree, StylingValue } from 'react-json-tree';
+import { JSONArrowProps, JSONTree, StylingValue } from 'react-json-tree';
 
 const getLabelStyle: StylingValue = ({ style }, nodeType, expanded) => ({
   style: {
@@ -125,6 +125,13 @@ const theme = {
   base0F: '#cc6633',
 };
 
+const ArrowOverride = ({ expanded, ...rest }: JSONArrowProps) => {
+  if (expanded) {
+    return <button {...rest}>-</button>
+  }
+  return <button {...rest}>+</button>
+}
+
 const App = () => (
   <div>
     <JSONTree data={data} theme={theme} invertTheme />
@@ -168,10 +175,12 @@ const App = () => (
     <p>
       Pass <code>labelRenderer</code> or <code>valueRenderer</code>.
     </p>
+    <p>Additionally, you may pass an <code>ArrowComponentOverride</code></p>
     <div>
       <JSONTree
         data={data}
         theme={theme}
+        ArrowComponentOverride={ArrowOverride}
         labelRenderer={([raw]) => <span>(({raw})):</span>}
         valueRenderer={(raw) => (
           <em>
