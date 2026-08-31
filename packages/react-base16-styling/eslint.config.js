@@ -4,8 +4,8 @@ import eslintTsJest from '../../eslint.ts.jest.config.base.mjs';
 
 export default [
   ...eslintJs,
-  ...eslintTs(import.meta.dirname),
-  ...eslintTsJest(import.meta.dirname),
+  ...eslintTs,
+  ...eslintTsJest,
   {
     ignores: ['jest.config.ts', 'lib'],
   },

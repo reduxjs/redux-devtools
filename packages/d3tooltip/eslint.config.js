@@ -3,7 +3,7 @@ import eslintTs from '../../eslint.ts.config.base.mjs';
 
 export default [
   ...eslintJs,
-  ...eslintTs(import.meta.dirname),
+  ...eslintTs,
   {
     ignores: ['lib'],
   },
