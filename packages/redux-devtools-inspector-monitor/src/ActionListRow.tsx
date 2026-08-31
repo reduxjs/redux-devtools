@@ -90,6 +90,7 @@ export default class ActionListRow<
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseEnter}
         data-id={actionId}
+        title={actionType}
         css={[
           (theme) => ({
             borderBottomWidth: '1px',
