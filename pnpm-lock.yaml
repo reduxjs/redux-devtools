@@ -1352,8 +1352,8 @@ importers:
         specifier: workspace:^
         version: link:../react-base16-styling
       source-map:
-        specifier: ^0.5.7
-        version: 0.5.7
+        specifier: ^0.8.0
+        version: 0.8.0
     devDependencies:
       '@emotion/react':
         specifier: ^11.14.0
@@ -1386,8 +1386,8 @@ importers:
         specifier: ^19.2.18
         version: 19.2.18
       '@types/source-map':
-        specifier: 0.5.2
-        version: 0.5.2
+        specifier: 0.5.7
+        version: 0.5.7
       jest:
         specifier: ^30.5.0
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
@@ -5111,8 +5111,9 @@ packages:
   '@types/socketcluster-server@20.0.0':
     resolution: {integrity: sha512-Cz+A5+K66EFnlxH6QmcSAMZ5GucCTXTDRPYXj6UpSuV8kpIUhjphS81wgAJafGPYrj55Ty6xEPdPOCCv7v6BkQ==}
 
-  '@types/source-map@0.5.2':
-    resolution: {integrity: sha512-++w4WmMbk3dS3UeHGzAG+xJOSz5Xqtjys/TBkqG3qp3SeWE7Wwezqe5eB7B51cxUyh4PW7bwVotpsLdBK0D8cw==}
+  '@types/source-map@0.5.7':
+    resolution: {integrity: sha512-LrnsgZIfJaysFkv9rRJp4/uAyqw87oVed3s1hhF83nwbo9c7MG9g5DqR0seHP+lkX4ldmMrVolPjQSe2ZfD0yA==}
+    deprecated: This is a stub types definition for source-map (https://github.com/mozilla/source-map). source-map provides its own type definitions, so you don't need @types/source-map installed!
 
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
@@ -9599,6 +9600,10 @@ packages:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
 
+  source-map@0.8.0:
+    resolution: {integrity: sha512-d8EqvL+k/SOXCreS/SUzg2ciyHqBBLcN/yuRjFsbvVhHTE2pgei7oAhmPM7kWFbkX6OSMQfUq4KbkF3au9lhYQ==}
+    engines: {node: '>= 12'}
+
   spawndamnit@3.0.1:
     resolution: {integrity: sha512-MmnduQUuHCoFckZoWnXsTg7JaiLBJrKFj9UI2MbRPGaJeVpsLcVBu6P/IGZovziM/YBsellCmsprgNA+w0CzVg==}
 
@@ -13640,7 +13645,9 @@ snapshots:
       '@types/writable-consumable-stream': 4.1.0
       '@types/ws': 8.18.1
 
-  '@types/source-map@0.5.2': {}
+  '@types/source-map@0.5.7':
+    dependencies:
+      source-map: 0.8.0
 
   '@types/stack-utils@2.0.3': {}
 
@@ -18962,6 +18969,8 @@ snapshots:
   source-map@0.5.7: {}
 
   source-map@0.6.1: {}
+
+  source-map@0.8.0: {}
 
   spawndamnit@3.0.1:
     dependencies:
