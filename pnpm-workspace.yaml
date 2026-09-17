@@ -11,6 +11,38 @@ packages:
   - packages/redux-devtools-rtk-query-monitor/demo
   - packages/redux-devtools-slider-monitor/examples/todomvc
 
+catalog:
+  '@babel/core': ^7.29.7
+  '@babel/preset-env': ^7.29.7
+  '@babel/preset-react': ^7.29.7
+  '@babel/preset-typescript': ^7.29.7
+  '@jest/globals': ^30.5.0
+  '@testing-library/dom': ^10.4.1
+  '@testing-library/jest-dom': ^7.0.1
+  '@testing-library/react': ^16.3.3
+  '@types/jest': ^30.0.0
+  '@types/node': ^24.13.3
+  '@types/react': ^19.2.18
+  '@types/react-dom': ^19.2.5
+  '@types/webpack-env': ^1.18.8
+  babel-loader: ^10.1.1
+  cross-env: ^10.1.0
+  css-loader: ^7.1.5
+  fork-ts-checker-webpack-plugin: ^9.1.0
+  html-webpack-plugin: ^5.6.8
+  jest: ^30.5.0
+  jest-environment-jsdom: ^30.5.0
+  react: ^19.2.8
+  react-dom: ^19.2.8
+  rimraf: ^6.1.3
+  style-loader: ^4.0.0
+  ts-jest: ^29.4.12
+  ts-node: ^10.9.2
+  typescript: npm:@typescript/typescript6@^6.0.2
+  webpack: ^5.110.1
+  webpack-cli: ^7.2.3
+  webpack-dev-server: ^6.0.0
+
 allowBuilds:
   '@apollo/protobufjs': true
   '@parcel/watcher': true

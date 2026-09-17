@@ -4,6 +4,99 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@babel/core':
+      specifier: ^7.29.7
+      version: 7.29.7
+    '@babel/preset-env':
+      specifier: ^7.29.7
+      version: 7.29.7
+    '@babel/preset-react':
+      specifier: ^7.29.7
+      version: 7.29.7
+    '@babel/preset-typescript':
+      specifier: ^7.29.7
+      version: 7.29.7
+    '@jest/globals':
+      specifier: ^30.5.0
+      version: 30.5.0
+    '@testing-library/dom':
+      specifier: ^10.4.1
+      version: 10.4.1
+    '@testing-library/jest-dom':
+      specifier: ^7.0.1
+      version: 7.0.1
+    '@testing-library/react':
+      specifier: ^16.3.3
+      version: 16.3.3
+    '@types/jest':
+      specifier: ^30.0.0
+      version: 30.0.0
+    '@types/node':
+      specifier: ^24.13.3
+      version: 24.13.3
+    '@types/react':
+      specifier: ^19.2.18
+      version: 19.2.18
+    '@types/react-dom':
+      specifier: ^19.2.5
+      version: 19.2.5
+    '@types/webpack-env':
+      specifier: ^1.18.8
+      version: 1.18.8
+    babel-loader:
+      specifier: ^10.1.1
+      version: 10.1.1
+    cross-env:
+      specifier: ^10.1.0
+      version: 10.1.0
+    css-loader:
+      specifier: ^7.1.5
+      version: 7.1.5
+    fork-ts-checker-webpack-plugin:
+      specifier: ^9.1.0
+      version: 9.1.0
+    html-webpack-plugin:
+      specifier: ^5.6.8
+      version: 5.6.8
+    jest:
+      specifier: ^30.5.0
+      version: 30.5.0
+    jest-environment-jsdom:
+      specifier: ^30.5.0
+      version: 30.5.0
+    react:
+      specifier: ^19.2.8
+      version: 19.2.8
+    react-dom:
+      specifier: ^19.2.8
+      version: 19.2.8
+    rimraf:
+      specifier: ^6.1.3
+      version: 6.1.3
+    style-loader:
+      specifier: ^4.0.0
+      version: 4.0.0
+    ts-jest:
+      specifier: ^29.4.12
+      version: 29.4.12
+    ts-node:
+      specifier: ^10.9.2
+      version: 10.9.2
+    typescript:
+      specifier: npm:@typescript/typescript6@^6.0.2
+      version: 6.0.2
+    webpack:
+      specifier: ^5.110.1
+      version: 5.110.1
+    webpack-cli:
+      specifier: ^7.2.3
+      version: 7.2.3
+    webpack-dev-server:
+      specifier: ^6.0.0
+      version: 6.0.0
+
 patchedDependencies:
   '@dnd-kit/core': bee825e5edf3dc4325af458bf5a68b629e8b0a189ea0eee259b66d28981f8a17
   '@dnd-kit/sortable': e47dc0c4389a046873ebf71cee394de1946ef0e0ee96c171579932908f628d7f
@@ -14,7 +107,7 @@ importers:
   .:
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(supports-color@8.1.1)
       '@changesets/cli':
         specifier: ^2.31.1
@@ -38,13 +131,13 @@ importers:
         specifier: ^7.1.1
         version: 7.1.1(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       prettier:
         specifier: 3.9.6
         version: 3.9.6
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
       typescript-eslint:
         specifier: ^8.68.0
@@ -95,10 +188,10 @@ importers:
         specifier: ^4.18.1
         version: 4.18.1
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-icons:
         specifier: ^5.7.0
@@ -120,31 +213,31 @@ importers:
         version: 6.0.0(patch_hash=70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2)(react@19.2.8)(redux@5.0.1)
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-react':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-typescript':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/register':
         specifier: ^7.29.7
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))
       '@jest/globals':
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       '@testing-library/dom':
-        specifier: ^10.4.1
+        specifier: 'catalog:'
         version: 10.4.1
       '@testing-library/jest-dom':
-        specifier: ^7.0.1
+        specifier: 'catalog:'
         version: 7.0.1(@testing-library/dom@10.4.1)
       '@testing-library/react':
-        specifier: ^16.3.3
+        specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/chrome':
         specifier: ^0.2.7
@@ -153,16 +246,16 @@ importers:
         specifier: ^4.17.12
         version: 4.17.12
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       chromedriver:
         specifier: ^152.0.2
         version: 152.0.2(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       cross-env:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0
       electron:
         specifier: ^44.0.0
@@ -177,16 +270,16 @@ importers:
         specifier: ^5.1.9
         version: 5.1.9
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       jest-environment-jsdom:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       pug:
         specifier: ^3.0.4
         version: 3.0.4
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       selenium-webdriver:
         specifier: ^4.48.0
@@ -195,19 +288,16 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       webpack:
-        specifier: ^5.110.1
+        specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
       webpack-cli:
-        specifier: ^7.2.3
+        specifier: 'catalog:'
         version: 7.2.3(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.110.1)
 
   packages/d3-state-visualizer:
@@ -235,14 +325,11 @@ importers:
         specifier: ^0.32.0
         version: 0.32.0
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/d3-state-visualizer/examples/tree:
     dependencies:
@@ -254,11 +341,8 @@ importers:
         version: link:../../../map2tree
     devDependencies:
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       vite:
         specifier: ^8.2.2
         version: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
@@ -272,14 +356,11 @@ importers:
         specifier: ^7.9.0
         version: 7.9.0
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/map2tree:
     dependencies:
@@ -288,7 +369,7 @@ importers:
         version: 4.18.1
     devDependencies:
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/lodash-es':
         specifier: ^4.17.12
@@ -297,20 +378,17 @@ importers:
         specifier: ^5.1.9
         version: 5.1.9
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/react-base16-styling:
     dependencies:
@@ -331,29 +409,26 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       jest-environment-jsdom:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/react-dock:
     dependencies:
@@ -365,20 +440,17 @@ importers:
         version: 4.18.1
     devDependencies:
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/react-dock/demo:
     dependencies:
@@ -386,7 +458,7 @@ importers:
         specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-bootstrap:
         specifier: ^2.10.10
@@ -395,7 +467,7 @@ importers:
         specifier: workspace:^
         version: link:..
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-icons:
         specifier: ^5.7.0
@@ -405,23 +477,20 @@ importers:
         version: 19.2.8
     devDependencies:
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       '@vitejs/plugin-react':
         specifier: ^6.1.1
         version: 6.1.1(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       vite:
         specifier: ^8.2.2
         version: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
@@ -436,29 +505,26 @@ importers:
         version: link:../react-base16-styling
     devDependencies:
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/react-json-tree/examples:
     dependencies:
@@ -466,36 +532,33 @@ importers:
         specifier: ^5.1.9
         version: 5.1.9
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-base16-styling:
         specifier: workspace:^
         version: link:../../react-base16-styling
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-json-tree:
         specifier: workspace:^
         version: link:..
     devDependencies:
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       '@vitejs/plugin-react':
         specifier: ^6.1.1
         version: 6.1.1(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       vite:
         specifier: ^8.2.2
         version: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
@@ -507,25 +570,25 @@ importers:
         version: link:../redux-devtools-instrument
     devDependencies:
       '@jest/globals':
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-redux:
         specifier: ^9.3.0
@@ -534,17 +597,14 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-app:
     dependencies:
@@ -574,7 +634,7 @@ importers:
         version: 20.0.2
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(supports-color@8.1.1)
       '@babel/eslint-parser':
         specifier: ^7.29.7
@@ -583,13 +643,13 @@ importers:
         specifier: ^7.29.7
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-env':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-react':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-typescript':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@emotion/react':
         specifier: ^11.14.0
@@ -610,34 +670,34 @@ importers:
         specifier: ^7.0.15
         version: 7.0.15
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       '@types/socketcluster-client':
         specifier: ^20.0.0
         version: 20.0.0
       '@types/webpack-env':
-        specifier: ^1.18.8
+        specifier: 'catalog:'
         version: 1.18.8
       babel-loader:
-        specifier: ^10.1.1
+        specifier: 'catalog:'
         version: 10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.110.1)
       cross-env:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0
       css-loader:
-        specifier: ^7.1.5
+        specifier: 'catalog:'
         version: 7.1.5(webpack@5.110.1)
       esbuild:
         specifier: ^0.28.2
         version: 0.28.2
       fork-ts-checker-webpack-plugin:
-        specifier: ^9.1.0
+        specifier: 'catalog:'
         version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
       globals:
         specifier: ^17.11.0
@@ -646,40 +706,37 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(webpack@5.110.1)
       html-webpack-plugin:
-        specifier: ^5.6.8
+        specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       style-loader:
-        specifier: ^4.0.0
+        specifier: 'catalog:'
         version: 4.0.0(webpack@5.110.1)
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       webpack:
-        specifier: ^5.110.1
+        specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
       webpack-cli:
-        specifier: ^7.2.3
+        specifier: 'catalog:'
         version: 7.2.3(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.110.1)
       webpack-dev-server:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
 
   packages/redux-devtools-app-core:
@@ -737,7 +794,7 @@ importers:
         specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)
       '@jest/globals':
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       '@reduxjs/toolkit':
         specifier: ^2.12.0
@@ -746,16 +803,16 @@ importers:
         specifier: ^6.8.0
         version: 6.8.0(@rjsf/utils@6.8.0(react@19.2.8))(react@19.2.8)
       '@testing-library/dom':
-        specifier: ^10.4.1
+        specifier: 'catalog:'
         version: 10.4.1
       '@testing-library/jest-dom':
-        specifier: ^7.0.1
+        specifier: 'catalog:'
         version: 7.0.1(@testing-library/dom@10.4.1)
       '@testing-library/react':
-        specifier: ^16.3.3
+        specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/jsan':
         specifier: ^3.1.5
@@ -764,31 +821,25 @@ importers:
         specifier: ^7.0.15
         version: 7.0.15
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
-      cross-env:
-        specifier: ^10.1.0
-        version: 10.1.0
-      esbuild:
-        specifier: ^0.28.2
-        version: 0.28.2
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       jest-environment-jsdom:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-redux:
         specifier: ^9.3.0
@@ -800,20 +851,14 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(patch_hash=70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2)(react@19.2.8)(redux@5.0.1)
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-chart-monitor:
     dependencies:
@@ -831,23 +876,20 @@ importers:
         specifier: workspace:^
         version: link:../redux-devtools
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       redux:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-cli:
     dependencies:
@@ -931,7 +973,7 @@ importers:
         version: 6.0.1
     devDependencies:
       '@jest/globals':
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       '@types/body-parser':
         specifier: ^1.19.6
@@ -946,7 +988,7 @@ importers:
         specifier: ^5.0.6
         version: 5.0.6
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/lodash-es':
         specifier: ^4.17.12
@@ -958,7 +1000,7 @@ importers:
         specifier: ^1.9.10
         version: 1.9.10
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/semver':
         specifier: ^7.8.0
@@ -976,13 +1018,13 @@ importers:
         specifier: ^17.11.0
         version: 17.11.0
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       ncp:
         specifier: ^2.0.0
         version: 2.0.0
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       socketcluster-client:
         specifier: ^20.0.2
@@ -991,14 +1033,11 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(supports-color@8.1.1)
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-dock-monitor:
     dependencies:
@@ -1016,23 +1055,20 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       redux:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-extension:
     devDependencies:
@@ -1040,14 +1076,11 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-inspector-monitor:
     dependencies:
@@ -1110,23 +1143,20 @@ importers:
         specifier: ^4.0.9
         version: 4.0.9
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       redux:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-inspector-monitor-test-tab:
     dependencies:
@@ -1165,16 +1195,16 @@ importers:
         specifier: workspace:^
         version: link:../redux-devtools-inspector-monitor
       '@testing-library/dom':
-        specifier: ^10.4.1
+        specifier: 'catalog:'
         version: 10.4.1
       '@testing-library/react':
-        specifier: ^16.3.3
+        specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/es6template':
         specifier: ^1.0.5
         version: 1.0.5
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/jsan':
         specifier: ^3.1.5
@@ -1183,35 +1213,32 @@ importers:
         specifier: ^0.11.4
         version: 0.11.4
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       jest-environment-jsdom:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       redux:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-inspector-monitor-test-tab/demo:
     dependencies:
@@ -1243,10 +1270,10 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-is:
         specifier: ^19.2.8
@@ -1265,70 +1292,67 @@ importers:
         version: 3.0.6
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-react':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-typescript':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@types/lodash.shuffle':
         specifier: ^4.2.9
         version: 4.2.9
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       '@types/redux-logger':
         specifier: ^3.0.13
         version: 3.0.13
       '@types/webpack-env':
-        specifier: ^1.18.8
+        specifier: 'catalog:'
         version: 1.18.8
       babel-loader:
-        specifier: ^10.1.1
+        specifier: 'catalog:'
         version: 10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.110.1)
       cross-env:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0
       css-loader:
-        specifier: ^7.1.5
+        specifier: 'catalog:'
         version: 7.1.5(webpack@5.110.1)
       fork-ts-checker-webpack-plugin:
-        specifier: ^9.1.0
+        specifier: 'catalog:'
         version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
       html-webpack-plugin:
-        specifier: ^5.6.8
+        specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
       style-loader:
-        specifier: ^4.0.0
+        specifier: 'catalog:'
         version: 4.0.0(webpack@5.110.1)
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       webpack:
-        specifier: ^5.110.1
+        specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
       webpack-cli:
-        specifier: ^7.2.3
+        specifier: 'catalog:'
         version: 7.2.3(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.110.1)
       webpack-dev-server:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
 
   packages/redux-devtools-inspector-monitor-trace-tab:
@@ -1365,56 +1389,53 @@ importers:
         specifier: workspace:^
         version: link:../redux-devtools-inspector-monitor
       '@testing-library/dom':
-        specifier: ^10.4.1
+        specifier: 'catalog:'
         version: 10.4.1
       '@testing-library/react':
-        specifier: ^16.3.3
+        specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/babel__code-frame':
         specifier: ^7.27.0
         version: 7.27.0
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/path-browserify':
         specifier: ^1.0.3
         version: 1.0.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/source-map':
         specifier: 0.5.2
         version: 0.5.2
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       jest-environment-jsdom:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       redux:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-inspector-monitor/demo:
     dependencies:
@@ -1437,7 +1458,7 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-base16-styling:
         specifier: workspace:^
@@ -1446,7 +1467,7 @@ importers:
         specifier: ^2.10.10
         version: 2.10.10(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-redux:
         specifier: ^9.3.0
@@ -1462,98 +1483,92 @@ importers:
         version: 3.0.6
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-react':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-typescript':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@types/lodash.shuffle':
         specifier: ^4.2.9
         version: 4.2.9
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       '@types/redux-logger':
         specifier: ^3.0.13
         version: 3.0.13
       '@types/webpack-env':
-        specifier: ^1.18.8
+        specifier: 'catalog:'
         version: 1.18.8
       babel-loader:
-        specifier: ^10.1.1
+        specifier: 'catalog:'
         version: 10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.110.1)
       cross-env:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0
       fork-ts-checker-webpack-plugin:
-        specifier: ^9.1.0
+        specifier: 'catalog:'
         version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
       html-webpack-plugin:
-        specifier: ^5.6.8
+        specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       webpack:
-        specifier: ^5.110.1
+        specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
       webpack-cli:
-        specifier: ^7.2.3
+        specifier: 'catalog:'
         version: 7.2.3(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.110.1)
       webpack-dev-server:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
 
   packages/redux-devtools-instrument:
     devDependencies:
       '@jest/globals':
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       redux:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       rxjs:
         specifier: ^7.8.2
         version: 7.8.2
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-log-monitor:
     dependencies:
@@ -1574,23 +1589,20 @@ importers:
         specifier: workspace:^
         version: link:../redux-devtools
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       redux:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-remote:
     dependencies:
@@ -1614,7 +1626,7 @@ importers:
         specifier: ^3.1.5
         version: 3.1.5
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/rn-host-detect':
         specifier: ^1.2.2
@@ -1638,14 +1650,11 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-rtk-query-monitor:
     dependencies:
@@ -1678,7 +1687,7 @@ importers:
         specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)
       '@jest/globals':
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       '@redux-devtools/core':
         specifier: workspace:^
@@ -1687,37 +1696,37 @@ importers:
         specifier: ^2.12.0
         version: 2.12.0(react-redux@9.3.0(@types/react@19.2.18)(react@19.2.8)(redux@5.0.1))(react@19.2.8)
       '@testing-library/dom':
-        specifier: ^10.4.1
+        specifier: 'catalog:'
         version: 10.4.1
       '@testing-library/jest-dom':
-        specifier: ^7.0.1
+        specifier: 'catalog:'
         version: 7.0.1(@testing-library/dom@10.4.1)
       '@testing-library/react':
-        specifier: ^16.3.3
+        specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/hex-rgba':
         specifier: ^1.0.3
         version: 1.0.3
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/lodash.debounce':
         specifier: ^4.0.9
         version: 4.0.9
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       jest-environment-jsdom:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-redux:
         specifier: ^9.3.0
@@ -1726,17 +1735,14 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-rtk-query-monitor/demo:
     dependencies:
@@ -1771,10 +1777,10 @@ importers:
         specifier: 2.15.0
         version: 2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-icons:
         specifier: ^5.7.0
@@ -1790,67 +1796,64 @@ importers:
         version: 7.18.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(supports-color@8.1.1)
       '@babel/plugin-transform-runtime':
         specifier: ^7.29.7
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-env':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-react':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-typescript':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       babel-loader:
-        specifier: ^10.1.1
+        specifier: 'catalog:'
         version: 10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.110.1)
       copy-webpack-plugin:
         specifier: ^14.0.0
         version: 14.0.0(webpack@5.110.1)
       cross-env:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0
       css-loader:
-        specifier: ^7.1.5
+        specifier: 'catalog:'
         version: 7.1.5(webpack@5.110.1)
       fork-ts-checker-webpack-plugin:
-        specifier: ^9.1.0
+        specifier: 'catalog:'
         version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
       html-webpack-plugin:
-        specifier: ^5.6.8
+        specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
       style-loader:
-        specifier: ^4.0.0
+        specifier: 'catalog:'
         version: 4.0.0(webpack@5.110.1)
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       webpack:
-        specifier: ^5.110.1
+        specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
       webpack-cli:
-        specifier: ^7.2.3
+        specifier: 'catalog:'
         version: 7.2.3(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.110.1)
       webpack-dev-server:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
 
   packages/redux-devtools-serialize:
@@ -1860,7 +1863,7 @@ importers:
         version: 3.1.14
     devDependencies:
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/jsan':
         specifier: ^3.1.5
@@ -1869,20 +1872,17 @@ importers:
         specifier: ^5.1.9
         version: 5.1.9
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-slider-monitor:
     dependencies:
@@ -1903,26 +1903,23 @@ importers:
         specifier: workspace:^
         version: link:../redux-devtools
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       redux:
         specifier: ^5.0.1
         version: 5.0.1
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools-slider-monitor/examples/todomvc:
     dependencies:
@@ -1948,10 +1945,10 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-is:
         specifier: ^19.2.8
@@ -1967,64 +1964,61 @@ importers:
         version: 2.4.3
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-react':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-typescript':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       '@types/webpack-env':
-        specifier: ^1.18.8
+        specifier: 'catalog:'
         version: 1.18.8
       babel-loader:
-        specifier: ^10.1.1
+        specifier: 'catalog:'
         version: 10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.110.1)
       cross-env:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0
       css-loader:
-        specifier: ^7.1.5
+        specifier: 'catalog:'
         version: 7.1.5(webpack@5.110.1)
       fork-ts-checker-webpack-plugin:
-        specifier: ^9.1.0
+        specifier: 'catalog:'
         version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
       html-webpack-plugin:
-        specifier: ^5.6.8
+        specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
       style-loader:
-        specifier: ^4.0.0
+        specifier: 'catalog:'
         version: 4.0.0(webpack@5.110.1)
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       webpack:
-        specifier: ^5.110.1
+        specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
       webpack-cli:
-        specifier: ^7.2.3
+        specifier: 'catalog:'
         version: 7.2.3(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.110.1)
       webpack-dev-server:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
 
   packages/redux-devtools-ui:
@@ -2085,7 +2079,7 @@ importers:
         specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)
       '@jest/globals':
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       '@storybook/addon-onboarding':
         specifier: ^10.5.10
@@ -2094,10 +2088,10 @@ importers:
         specifier: ^10.5.10
         version: 10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(@typescript/typescript6@6.0.2)(esbuild@0.28.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))(supports-color@8.1.1)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))(webpack@5.110.1)
       '@testing-library/dom':
-        specifier: ^10.4.1
+        specifier: 'catalog:'
         version: 10.4.1
       '@testing-library/react':
-        specifier: ^16.3.3
+        specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@testing-library/user-event':
         specifier: ^14.6.6
@@ -2106,50 +2100,47 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1
       '@types/jest':
-        specifier: ^30.0.0
+        specifier: 'catalog:'
         version: 30.0.0
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       csstype:
         specifier: ^3.2.3
         version: 3.2.3
       jest:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2))
       jest-environment-jsdom:
-        specifier: ^30.5.0
+        specifier: 'catalog:'
         version: 30.5.0(supports-color@8.1.1)
       ncp:
         specifier: ^2.0.0
         version: 2.0.0
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-is:
         specifier: ^19.2.8
         version: 19.2.8
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       storybook:
         specifier: ^10.5.10
         version: 10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8)
       ts-jest:
-        specifier: ^29.4.12
+        specifier: 'catalog:'
         version: 29.4.12(@babel/core@7.29.7(supports-color@8.1.1))(@jest/transform@30.5.0(supports-color@8.1.1))(@jest/types@30.5.0)(@typescript/typescript6@6.0.2)(babel-jest@30.5.0(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(esbuild@0.28.2)(jest-util@30.5.0)(jest@30.5.0(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)))
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       vite:
         specifier: ^8.2.2
         version: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
@@ -2185,17 +2176,14 @@ importers:
         specifier: ^3.1.5
         version: 3.1.5
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
 
   packages/redux-devtools/examples/counter:
     dependencies:
@@ -2209,10 +2197,10 @@ importers:
         specifier: workspace:^
         version: link:../../../redux-devtools-log-monitor
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-redux:
         specifier: ^9.3.0
@@ -2225,58 +2213,55 @@ importers:
         version: 3.1.0(redux@5.0.1)
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-react':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-typescript':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       '@types/webpack-env':
-        specifier: ^1.18.8
+        specifier: 'catalog:'
         version: 1.18.8
       babel-loader:
-        specifier: ^10.1.1
+        specifier: 'catalog:'
         version: 10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.110.1)
       cross-env:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0
       fork-ts-checker-webpack-plugin:
-        specifier: ^9.1.0
+        specifier: 'catalog:'
         version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
       html-webpack-plugin:
-        specifier: ^5.6.8
+        specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       webpack:
-        specifier: ^5.110.1
+        specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
       webpack-cli:
-        specifier: ^7.2.3
+        specifier: 'catalog:'
         version: 7.2.3(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.110.1)
       webpack-dev-server:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
 
   packages/redux-devtools/examples/todomvc:
@@ -2294,10 +2279,10 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       react:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8
       react-dom:
-        specifier: ^19.2.8
+        specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
       react-redux:
         specifier: ^9.3.0
@@ -2310,64 +2295,61 @@ importers:
         version: 2.4.3
     devDependencies:
       '@babel/core':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(supports-color@8.1.1)
       '@babel/preset-env':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-react':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/preset-typescript':
-        specifier: ^7.29.7
+        specifier: 'catalog:'
         version: 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@types/node':
-        specifier: ^24.13.3
+        specifier: 'catalog:'
         version: 24.13.3
       '@types/react':
-        specifier: ^19.2.18
+        specifier: 'catalog:'
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
       '@types/webpack-env':
-        specifier: ^1.18.8
+        specifier: 'catalog:'
         version: 1.18.8
       babel-loader:
-        specifier: ^10.1.1
+        specifier: 'catalog:'
         version: 10.1.1(@babel/core@7.29.7(supports-color@8.1.1))(webpack@5.110.1)
       cross-env:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0
       css-loader:
-        specifier: ^7.1.5
+        specifier: 'catalog:'
         version: 7.1.5(webpack@5.110.1)
       fork-ts-checker-webpack-plugin:
-        specifier: ^9.1.0
+        specifier: 'catalog:'
         version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
       html-webpack-plugin:
-        specifier: ^5.6.8
+        specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
       style-loader:
-        specifier: ^4.0.0
+        specifier: 'catalog:'
         version: 4.0.0(webpack@5.110.1)
       ts-node:
-        specifier: ^10.9.2
+        specifier: 'catalog:'
         version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
       typescript:
-        specifier: npm:@typescript/typescript6@^6.0.2
+        specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
-      typescript-7:
-        specifier: npm:typescript@7.0.2
-        version: typescript@7.0.2
       webpack:
-        specifier: ^5.110.1
+        specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
       webpack-cli:
-        specifier: ^7.2.3
+        specifier: 'catalog:'
         version: 7.2.3(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.110.1)
       webpack-dev-server:
-        specifier: ^6.0.0
+        specifier: 'catalog:'
         version: 6.0.0(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
 
 packages:
@@ -5217,126 +5199,6 @@ packages:
   '@typescript-eslint/visitor-keys@8.68.0':
     resolution: {integrity: sha512-YR65gGdGvTUAWLldC3xLOvOzamdGzB4A5/N8rehEaHs3Zvoe39BhgY+u0SPch1OvrVTfLcc55wsSgK2NcnTS/A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@typescript/typescript-aix-ppc64@7.0.2':
-    resolution: {integrity: sha512-MTKKkWB7p/0E9xi1d1tHtZ5PiLkGEMIq88pK2CubZjOsLtYTLqhgIgi6zepFa+9GHZ6h05NMCkQxGKiPXMxXtQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [ppc64]
-    os: [aix]
-
-  '@typescript/typescript-darwin-arm64@7.0.2':
-    resolution: {integrity: sha512-gowzar9MwS/aRWp6f3a4KUqzRjAZjOsmGNCM6LcTgXum+dBfgsBVMN+AgvOCCbguXyick6LJhpBszxMebJ8syA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@typescript/typescript-darwin-x64@7.0.2':
-    resolution: {integrity: sha512-SZ9xZInqApNlNGc9s0W1VSsktYSOe9cFqNOIqmN1Gs8SmkjKZYFt017G4VwPxASInODuAdbTW7sXiFUf893RgA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [darwin]
-
-  '@typescript/typescript-freebsd-arm64@7.0.2':
-    resolution: {integrity: sha512-W5NH4y/J0plIIS5b2xvTEkU7JFxyqdMAOgf+Ilhl0vHQXKO5dZoxd+C/jEtq56c4F3wk71RB4BMRQ2XdI+bwYQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [freebsd]
-
-  '@typescript/typescript-freebsd-x64@7.0.2':
-    resolution: {integrity: sha512-UMGDx5sTpzNw3WiPebH7l90IWfJggEd+egHt/q6p7/Cm3zqoV7VxkGXt+3DxPIw8CcmvAB0j3sVVfbhX+M4Tpw==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [freebsd]
-
-  '@typescript/typescript-linux-arm64@7.0.2':
-    resolution: {integrity: sha512-Qh4eU4/y3yDjnfjjyPYihMj5/ODIlmt+Bzu17OI+fiSRDW57QmU5SiN63exPRNJPKUzcc1INa1NXdrJ+MqHjUQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@typescript/typescript-linux-arm@7.0.2':
-    resolution: {integrity: sha512-gffT3xPz9sR7j/YJExkyPntrI0P2EP9XbOyWzth2/Gs0RstK+90RBcO0ncXoXy/beYll1SXw846Nf2zdnEz0QQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm]
-    os: [linux]
-
-  '@typescript/typescript-linux-loong64@7.0.2':
-    resolution: {integrity: sha512-uEHck9i8hoAzXPiYRib1O7miOnz23SxIeVl6F4LXox+qov1K35jHcEW6VHKvZI+pyvl7fZEP4MCU5LYvIq1GuQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [loong64]
-    os: [linux]
-
-  '@typescript/typescript-linux-mips64el@7.0.2':
-    resolution: {integrity: sha512-R4KvAMnE43W5Qeqb0Ly56O3mWMWIAgsMyz36DCaycd5nbg/9kzm0liw3JocfRqyJY0KPmzFjbswozXyW0DnIYA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [mips64el]
-    os: [linux]
-
-  '@typescript/typescript-linux-ppc64@7.0.2':
-    resolution: {integrity: sha512-DORx5b3sd/4S7eayxm4FQv+A7CrkUIGRaHiwI8oiHTAI1fAPWhF4J0vAlkC8biAlHSVVwxMQ3tjZ2/DVbnQiiA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [ppc64]
-    os: [linux]
-
-  '@typescript/typescript-linux-riscv64@7.0.2':
-    resolution: {integrity: sha512-wf0jqEDOjrPRnKwYRyyJDRo11KMbvMFrU+q4zqKyChODBzvlkbhNQfKvLxQCcwTpdDaXSHZTVuh0JoCrKCUMHQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [riscv64]
-    os: [linux]
-
-  '@typescript/typescript-linux-s390x@7.0.2':
-    resolution: {integrity: sha512-IkwJc3L7yhytWd/ewjyxNDfOmswCm9GWMJT/ue/dU4aZNbwZeYAetq42VyLmsmSjvoX7z74X6ZaYCtzAr0EuGw==}
-    engines: {node: '>=16.20.0'}
-    cpu: [s390x]
-    os: [linux]
-
-  '@typescript/typescript-linux-x64@7.0.2':
-    resolution: {integrity: sha512-EYdf2cNg7rgCWJnxCdJ+F3V39O8ihb37eHAu1LK8oAFizgTQbPOK7zHHXbPt8rX24COqODXeI3sIf0fCXG7H/A==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [linux]
-
-  '@typescript/typescript-netbsd-arm64@7.0.2':
-    resolution: {integrity: sha512-+polYF4MF04aPpO5FTkHran9yUQDSXqy5GiSDKpsll5jy3l3+g9QLhpf39T+ePtefhXLOGrLl0QIjkQP6VnelA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [netbsd]
-
-  '@typescript/typescript-netbsd-x64@7.0.2':
-    resolution: {integrity: sha512-8YIT0EHM/3dq10ZOVF/A7pc/YSMtbcecct4rWtexrnSCHOPcpC2KTLXfTCR6vDpnSiY12heNb1GiN/wu+T/FyA==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [netbsd]
-
-  '@typescript/typescript-openbsd-arm64@7.0.2':
-    resolution: {integrity: sha512-APT8+ClYnuYm1u9+kgGXoMj2VzWzcymwh2gNSQVySHfkRDGOTVkoWLjCmOQSaO+PoqQ57B0flRp9SA+7GnnkzQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [openbsd]
-
-  '@typescript/typescript-openbsd-x64@7.0.2':
-    resolution: {integrity: sha512-yX7s+Q0Dln0Dt9tEzZsAjXXR/+ytBM7AlglaqyeMPxQszJ1JhlJdZ6jLA+IzldHtflX81em7lDao1xXu+aRRkg==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [openbsd]
-
-  '@typescript/typescript-sunos-x64@7.0.2':
-    resolution: {integrity: sha512-dLJDGaLZ1D4HPQn62u1n8mBDkJREwMsAkCdkwd4Ieqw+x3TUyTsqY0YiBCtE6H6OzzgGk3iuZ3vFWRS+E8/d1g==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [sunos]
-
-  '@typescript/typescript-win32-arm64@7.0.2':
-    resolution: {integrity: sha512-Gyl1Vy6OsWesLzmq+EP0Fb7b4Nid5232AvcA2SFcdYreldpNtYFFofPjnt62y9hQy7VTaZp65ICJjuAQRaVcIQ==}
-    engines: {node: '>=16.20.0'}
-    cpu: [arm64]
-    os: [win32]
-
-  '@typescript/typescript-win32-x64@7.0.2':
-    resolution: {integrity: sha512-0BQ3HkAHHlKLSp1qRvf3SUhGpGsDuhB/jgFw75guyqbxJqEaS0Cw/VFO8i2nHglJUzQCRtMMR/IBAKE3ETMC4g==}
-    engines: {node: '>=16.20.0'}
-    cpu: [x64]
-    os: [win32]
 
   '@typescript/typescript6@6.0.2':
     resolution: {integrity: sha512-mbCddXd+jm7hfx7w2YU64/Av4/NqqeG3GoRZgxPcgoTxYjhrcfJRw9ULch71SS4G+Q3bOXFhRvPqjguN0Hyp5w==}
@@ -10017,11 +9879,6 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typescript@7.0.2:
-    resolution: {integrity: sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==}
-    engines: {node: '>=16.20.0'}
-    hasBin: true
-
   uglify-js@3.19.3:
     resolution: {integrity: sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==}
     engines: {node: '>=0.8.0'}
@@ -13781,66 +13638,6 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.68.0
       eslint-visitor-keys: 5.0.1
-
-  '@typescript/typescript-aix-ppc64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-darwin-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-darwin-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-freebsd-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-freebsd-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-arm@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-loong64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-mips64el@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-ppc64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-riscv64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-s390x@7.0.2':
-    optional: true
-
-  '@typescript/typescript-linux-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-netbsd-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-netbsd-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-openbsd-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-openbsd-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-sunos-x64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-win32-arm64@7.0.2':
-    optional: true
-
-  '@typescript/typescript-win32-x64@7.0.2':
-    optional: true
 
   '@typescript/typescript6@6.0.2':
     dependencies:
@@ -19431,29 +19228,6 @@ snapshots:
       - supports-color
 
   typescript@6.0.3: {}
-
-  typescript@7.0.2:
-    optionalDependencies:
-      '@typescript/typescript-aix-ppc64': 7.0.2
-      '@typescript/typescript-darwin-arm64': 7.0.2
-      '@typescript/typescript-darwin-x64': 7.0.2
-      '@typescript/typescript-freebsd-arm64': 7.0.2
-      '@typescript/typescript-freebsd-x64': 7.0.2
-      '@typescript/typescript-linux-arm': 7.0.2
-      '@typescript/typescript-linux-arm64': 7.0.2
-      '@typescript/typescript-linux-loong64': 7.0.2
-      '@typescript/typescript-linux-mips64el': 7.0.2
-      '@typescript/typescript-linux-ppc64': 7.0.2
-      '@typescript/typescript-linux-riscv64': 7.0.2
-      '@typescript/typescript-linux-s390x': 7.0.2
-      '@typescript/typescript-linux-x64': 7.0.2
-      '@typescript/typescript-netbsd-arm64': 7.0.2
-      '@typescript/typescript-netbsd-x64': 7.0.2
-      '@typescript/typescript-openbsd-arm64': 7.0.2
-      '@typescript/typescript-openbsd-x64': 7.0.2
-      '@typescript/typescript-sunos-x64': 7.0.2
-      '@typescript/typescript-win32-arm64': 7.0.2
-      '@typescript/typescript-win32-x64': 7.0.2
 
   uglify-js@3.19.3:
     optional: true
