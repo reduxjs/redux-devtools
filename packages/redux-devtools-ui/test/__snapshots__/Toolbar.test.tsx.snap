@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Toolbar renders correctly 1`] = `
+exports[`Toolbar > renders correctly 1`] = `
 <div
   class="css-1vb2bz"
 >
@@ -31,7 +31,7 @@ exports[`Toolbar renders correctly 1`] = `
 </div>
 `;
 
-exports[`Toolbar renders with props 1`] = `
+exports[`Toolbar > renders with props 1`] = `
 <div
   class="css-1wu4lza"
 />

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Form renders correctly 1`] = `
+exports[`Form > renders correctly 1`] = `
 <form
   class="css-yd7kx"
 >
@@ -233,7 +233,7 @@ exports[`Form renders correctly 1`] = `
                   id="react-select-2-input"
                   role="combobox"
                   spellcheck="false"
-                  style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                  style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"
                   tabindex="0"
                   type="text"
                   value=""
@@ -382,7 +382,7 @@ exports[`Form renders correctly 1`] = `
 </form>
 `;
 
-exports[`Form renders with no button 1`] = `
+exports[`Form > renders with no button 1`] = `
 <form
   class="css-yd7kx"
 >
@@ -615,7 +615,7 @@ exports[`Form renders with no button 1`] = `
                   id="react-select-4-input"
                   role="combobox"
                   spellcheck="false"
-                  style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                  style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"
                   tabindex="0"
                   type="text"
                   value=""
@@ -755,7 +755,7 @@ exports[`Form renders with no button 1`] = `
 </form>
 `;
 
-exports[`Form renders with primary button 1`] = `
+exports[`Form > renders with primary button 1`] = `
 <form
   class="css-yd7kx"
 >
@@ -988,7 +988,7 @@ exports[`Form renders with primary button 1`] = `
                   id="react-select-3-input"
                   role="combobox"
                   spellcheck="false"
-                  style="color: inherit; background: 0px; opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                  style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"
                   tabindex="0"
                   type="text"
                   value=""
