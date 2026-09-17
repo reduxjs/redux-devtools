@@ -73,8 +73,8 @@ catalogs:
       specifier: ^10.9.2
       version: 10.9.2
     typescript:
-      specifier: npm:@typescript/typescript6@^6.0.2
-      version: 6.0.2
+      specifier: ^7.0.2
+      version: 7.0.2
     vitest:
       specifier: ^4.1.11
       version: 4.1.11
@@ -114,10 +114,10 @@ importers:
         version: 7.0.2001
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   extension:
     dependencies:
@@ -193,7 +193,7 @@ importers:
         version: 10.4.1
       '@testing-library/jest-dom':
         specifier: 'catalog:'
-        version: 7.0.1(@testing-library/dom@10.4.1)(vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)))
+        version: 7.0.1(@testing-library/dom@10.4.1)(vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)))
       '@testing-library/react':
         specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -241,10 +241,10 @@ importers:
         version: 3.0.1
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
       webpack:
         specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
@@ -281,7 +281,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/d3-state-visualizer/examples/tree:
     dependencies:
@@ -294,7 +294,7 @@ importers:
     devDependencies:
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vite:
         specifier: ^8.2.2
         version: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
@@ -312,7 +312,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/map2tree:
     dependencies:
@@ -331,10 +331,10 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/react-base16-styling:
     dependencies:
@@ -365,10 +365,10 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/react-dock:
     dependencies:
@@ -390,7 +390,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/react-dock/demo:
     dependencies:
@@ -430,7 +430,7 @@ importers:
         version: 6.1.1(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vite:
         specifier: ^8.2.2
         version: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
@@ -455,10 +455,10 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/react-json-tree/examples:
     dependencies:
@@ -492,7 +492,7 @@ importers:
         version: 6.1.1(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vite:
         specifier: ^8.2.2
         version: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
@@ -526,10 +526,10 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/redux-devtools-app:
     dependencies:
@@ -620,7 +620,7 @@ importers:
         version: 0.28.2
       fork-ts-checker-webpack-plugin:
         specifier: 'catalog:'
-        version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
+        version: 9.1.0(typescript@7.0.2)(webpack@5.110.1)
       html-loader:
         specifier: ^5.1.0
         version: 5.1.0(webpack@5.110.1)
@@ -641,10 +641,10 @@ importers:
         version: 4.0.0(webpack@5.110.1)
       ts-node:
         specifier: 'catalog:'
-        version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+        version: 10.9.2(@types/node@24.13.3)(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       webpack:
         specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
@@ -720,7 +720,7 @@ importers:
         version: 10.4.1
       '@testing-library/jest-dom':
         specifier: 'catalog:'
-        version: 7.0.1(@testing-library/dom@10.4.1)(vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)))
+        version: 7.0.1(@testing-library/dom@10.4.1)(vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)))
       '@testing-library/react':
         specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -762,10 +762,10 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/redux-devtools-chart-monitor:
     dependencies:
@@ -796,7 +796,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/redux-devtools-cli:
     dependencies:
@@ -929,10 +929,10 @@ importers:
         version: 7.2.2(supports-color@8.1.1)
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/redux-devtools-dock-monitor:
     dependencies:
@@ -963,7 +963,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/redux-devtools-extension:
     devDependencies:
@@ -975,7 +975,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/redux-devtools-inspector-monitor:
     dependencies:
@@ -1051,7 +1051,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/redux-devtools-inspector-monitor-test-tab:
     dependencies:
@@ -1124,10 +1124,10 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/redux-devtools-inspector-monitor-test-tab/demo:
     dependencies:
@@ -1221,7 +1221,7 @@ importers:
         version: 7.1.5(webpack@5.110.1)
       fork-ts-checker-webpack-plugin:
         specifier: 'catalog:'
-        version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
+        version: 9.1.0(typescript@7.0.2)(webpack@5.110.1)
       html-webpack-plugin:
         specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
@@ -1230,10 +1230,10 @@ importers:
         version: 4.0.0(webpack@5.110.1)
       ts-node:
         specifier: 'catalog:'
-        version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+        version: 10.9.2(@types/node@24.13.3)(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       webpack:
         specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
@@ -1315,10 +1315,10 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/redux-devtools-inspector-monitor/demo:
     dependencies:
@@ -1403,16 +1403,16 @@ importers:
         version: 10.1.0
       fork-ts-checker-webpack-plugin:
         specifier: 'catalog:'
-        version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
+        version: 9.1.0(typescript@7.0.2)(webpack@5.110.1)
       html-webpack-plugin:
         specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
       ts-node:
         specifier: 'catalog:'
-        version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+        version: 10.9.2(@types/node@24.13.3)(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       webpack:
         specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
@@ -1439,10 +1439,10 @@ importers:
         version: 7.8.2
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/redux-devtools-log-monitor:
     dependencies:
@@ -1476,7 +1476,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/redux-devtools-remote:
     dependencies:
@@ -1516,7 +1516,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/redux-devtools-rtk-query-monitor:
     dependencies:
@@ -1559,7 +1559,7 @@ importers:
         version: 10.4.1
       '@testing-library/jest-dom':
         specifier: 'catalog:'
-        version: 7.0.1(@testing-library/dom@10.4.1)(vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)))
+        version: 7.0.1(@testing-library/dom@10.4.1)(vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)))
       '@testing-library/react':
         specifier: 'catalog:'
         version: 16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1592,10 +1592,10 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/redux-devtools-rtk-query-monitor/demo:
     dependencies:
@@ -1613,7 +1613,7 @@ importers:
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)
       '@mswjs/data':
         specifier: ^0.16.2
-        version: 0.16.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)(supports-color@8.1.1)
+        version: 0.16.2(@types/node@24.13.3)(supports-color@8.1.1)(typescript@7.0.2)
       '@redux-devtools/core':
         specifier: workspace:^
         version: link:../../redux-devtools
@@ -1628,7 +1628,7 @@ importers:
         version: 2.12.0(react-redux@9.3.0(@types/react@19.2.18)(react@19.2.8)(redux@5.0.1))(react@19.2.8)
       msw:
         specifier: 2.15.0
-        version: 2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+        version: 2.15.0(@types/node@24.13.3)(typescript@7.0.2)
       react:
         specifier: 'catalog:'
         version: 19.2.8
@@ -1686,7 +1686,7 @@ importers:
         version: 7.1.5(webpack@5.110.1)
       fork-ts-checker-webpack-plugin:
         specifier: 'catalog:'
-        version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
+        version: 9.1.0(typescript@7.0.2)(webpack@5.110.1)
       html-webpack-plugin:
         specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
@@ -1695,10 +1695,10 @@ importers:
         version: 4.0.0(webpack@5.110.1)
       ts-node:
         specifier: 'catalog:'
-        version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+        version: 10.9.2(@types/node@24.13.3)(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       webpack:
         specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
@@ -1726,10 +1726,10 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/redux-devtools-slider-monitor:
     dependencies:
@@ -1766,7 +1766,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/redux-devtools-slider-monitor/examples/todomvc:
     dependencies:
@@ -1845,7 +1845,7 @@ importers:
         version: 7.1.5(webpack@5.110.1)
       fork-ts-checker-webpack-plugin:
         specifier: 'catalog:'
-        version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
+        version: 9.1.0(typescript@7.0.2)(webpack@5.110.1)
       html-webpack-plugin:
         specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
@@ -1854,10 +1854,10 @@ importers:
         version: 4.0.0(webpack@5.110.1)
       ts-node:
         specifier: 'catalog:'
-        version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+        version: 10.9.2(@types/node@24.13.3)(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       webpack:
         specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
@@ -1930,7 +1930,7 @@ importers:
         version: 10.5.10(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))
       '@storybook/react-vite':
         specifier: ^10.5.10
-        version: 10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(@typescript/typescript6@6.0.2)(esbuild@0.28.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))(webpack@5.110.1)
+        version: 10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(esbuild@0.28.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))(webpack@5.110.1)
       '@testing-library/dom':
         specifier: 'catalog:'
         version: 10.4.1
@@ -1975,13 +1975,13 @@ importers:
         version: 10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8)
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       vite:
         specifier: ^8.2.2
         version: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+        version: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   packages/redux-devtools-utils:
     dependencies:
@@ -2021,7 +2021,7 @@ importers:
         version: 6.1.3
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
 
   packages/redux-devtools/examples/counter:
     dependencies:
@@ -2082,16 +2082,16 @@ importers:
         version: 10.1.0
       fork-ts-checker-webpack-plugin:
         specifier: 'catalog:'
-        version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
+        version: 9.1.0(typescript@7.0.2)(webpack@5.110.1)
       html-webpack-plugin:
         specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
       ts-node:
         specifier: 'catalog:'
-        version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+        version: 10.9.2(@types/node@24.13.3)(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       webpack:
         specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
@@ -2167,7 +2167,7 @@ importers:
         version: 7.1.5(webpack@5.110.1)
       fork-ts-checker-webpack-plugin:
         specifier: 'catalog:'
-        version: 9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1)
+        version: 9.1.0(typescript@7.0.2)(webpack@5.110.1)
       html-webpack-plugin:
         specifier: 'catalog:'
         version: 5.6.8(webpack@5.110.1)
@@ -2176,10 +2176,10 @@ importers:
         version: 4.0.0(webpack@5.110.1)
       ts-node:
         specifier: 'catalog:'
-        version: 10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+        version: 10.9.2(@types/node@24.13.3)(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
-        version: '@typescript/typescript6@6.0.2'
+        version: 7.0.2
       webpack:
         specifier: 'catalog:'
         version: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
@@ -4892,9 +4892,125 @@ packages:
   '@types/ws@8.18.1':
     resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
 
-  '@typescript/typescript6@6.0.2':
-    resolution: {integrity: sha512-mbCddXd+jm7hfx7w2YU64/Av4/NqqeG3GoRZgxPcgoTxYjhrcfJRw9ULch71SS4G+Q3bOXFhRvPqjguN0Hyp5w==}
-    hasBin: true
+  '@typescript/typescript-aix-ppc64@7.0.2':
+    resolution: {integrity: sha512-MTKKkWB7p/0E9xi1d1tHtZ5PiLkGEMIq88pK2CubZjOsLtYTLqhgIgi6zepFa+9GHZ6h05NMCkQxGKiPXMxXtQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [ppc64]
+    os: [aix]
+
+  '@typescript/typescript-darwin-arm64@7.0.2':
+    resolution: {integrity: sha512-gowzar9MwS/aRWp6f3a4KUqzRjAZjOsmGNCM6LcTgXum+dBfgsBVMN+AgvOCCbguXyick6LJhpBszxMebJ8syA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@typescript/typescript-darwin-x64@7.0.2':
+    resolution: {integrity: sha512-SZ9xZInqApNlNGc9s0W1VSsktYSOe9cFqNOIqmN1Gs8SmkjKZYFt017G4VwPxASInODuAdbTW7sXiFUf893RgA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@typescript/typescript-freebsd-arm64@7.0.2':
+    resolution: {integrity: sha512-W5NH4y/J0plIIS5b2xvTEkU7JFxyqdMAOgf+Ilhl0vHQXKO5dZoxd+C/jEtq56c4F3wk71RB4BMRQ2XdI+bwYQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [freebsd]
+
+  '@typescript/typescript-freebsd-x64@7.0.2':
+    resolution: {integrity: sha512-UMGDx5sTpzNw3WiPebH7l90IWfJggEd+egHt/q6p7/Cm3zqoV7VxkGXt+3DxPIw8CcmvAB0j3sVVfbhX+M4Tpw==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@typescript/typescript-linux-arm64@7.0.2':
+    resolution: {integrity: sha512-Qh4eU4/y3yDjnfjjyPYihMj5/ODIlmt+Bzu17OI+fiSRDW57QmU5SiN63exPRNJPKUzcc1INa1NXdrJ+MqHjUQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@typescript/typescript-linux-arm@7.0.2':
+    resolution: {integrity: sha512-gffT3xPz9sR7j/YJExkyPntrI0P2EP9XbOyWzth2/Gs0RstK+90RBcO0ncXoXy/beYll1SXw846Nf2zdnEz0QQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm]
+    os: [linux]
+
+  '@typescript/typescript-linux-loong64@7.0.2':
+    resolution: {integrity: sha512-uEHck9i8hoAzXPiYRib1O7miOnz23SxIeVl6F4LXox+qov1K35jHcEW6VHKvZI+pyvl7fZEP4MCU5LYvIq1GuQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [loong64]
+    os: [linux]
+
+  '@typescript/typescript-linux-mips64el@7.0.2':
+    resolution: {integrity: sha512-R4KvAMnE43W5Qeqb0Ly56O3mWMWIAgsMyz36DCaycd5nbg/9kzm0liw3JocfRqyJY0KPmzFjbswozXyW0DnIYA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [mips64el]
+    os: [linux]
+
+  '@typescript/typescript-linux-ppc64@7.0.2':
+    resolution: {integrity: sha512-DORx5b3sd/4S7eayxm4FQv+A7CrkUIGRaHiwI8oiHTAI1fAPWhF4J0vAlkC8biAlHSVVwxMQ3tjZ2/DVbnQiiA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [ppc64]
+    os: [linux]
+
+  '@typescript/typescript-linux-riscv64@7.0.2':
+    resolution: {integrity: sha512-wf0jqEDOjrPRnKwYRyyJDRo11KMbvMFrU+q4zqKyChODBzvlkbhNQfKvLxQCcwTpdDaXSHZTVuh0JoCrKCUMHQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [riscv64]
+    os: [linux]
+
+  '@typescript/typescript-linux-s390x@7.0.2':
+    resolution: {integrity: sha512-IkwJc3L7yhytWd/ewjyxNDfOmswCm9GWMJT/ue/dU4aZNbwZeYAetq42VyLmsmSjvoX7z74X6ZaYCtzAr0EuGw==}
+    engines: {node: '>=16.20.0'}
+    cpu: [s390x]
+    os: [linux]
+
+  '@typescript/typescript-linux-x64@7.0.2':
+    resolution: {integrity: sha512-EYdf2cNg7rgCWJnxCdJ+F3V39O8ihb37eHAu1LK8oAFizgTQbPOK7zHHXbPt8rX24COqODXeI3sIf0fCXG7H/A==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@typescript/typescript-netbsd-arm64@7.0.2':
+    resolution: {integrity: sha512-+polYF4MF04aPpO5FTkHran9yUQDSXqy5GiSDKpsll5jy3l3+g9QLhpf39T+ePtefhXLOGrLl0QIjkQP6VnelA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [netbsd]
+
+  '@typescript/typescript-netbsd-x64@7.0.2':
+    resolution: {integrity: sha512-8YIT0EHM/3dq10ZOVF/A7pc/YSMtbcecct4rWtexrnSCHOPcpC2KTLXfTCR6vDpnSiY12heNb1GiN/wu+T/FyA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [netbsd]
+
+  '@typescript/typescript-openbsd-arm64@7.0.2':
+    resolution: {integrity: sha512-APT8+ClYnuYm1u9+kgGXoMj2VzWzcymwh2gNSQVySHfkRDGOTVkoWLjCmOQSaO+PoqQ57B0flRp9SA+7GnnkzQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [openbsd]
+
+  '@typescript/typescript-openbsd-x64@7.0.2':
+    resolution: {integrity: sha512-yX7s+Q0Dln0Dt9tEzZsAjXXR/+ytBM7AlglaqyeMPxQszJ1JhlJdZ6jLA+IzldHtflX81em7lDao1xXu+aRRkg==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [openbsd]
+
+  '@typescript/typescript-sunos-x64@7.0.2':
+    resolution: {integrity: sha512-dLJDGaLZ1D4HPQn62u1n8mBDkJREwMsAkCdkwd4Ieqw+x3TUyTsqY0YiBCtE6H6OzzgGk3iuZ3vFWRS+E8/d1g==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [sunos]
+
+  '@typescript/typescript-win32-arm64@7.0.2':
+    resolution: {integrity: sha512-Gyl1Vy6OsWesLzmq+EP0Fb7b4Nid5232AvcA2SFcdYreldpNtYFFofPjnt62y9hQy7VTaZp65ICJjuAQRaVcIQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@typescript/typescript-win32-x64@7.0.2':
+    resolution: {integrity: sha512-0BQ3HkAHHlKLSp1qRvf3SUhGpGsDuhB/jgFw75guyqbxJqEaS0Cw/VFO8i2nHglJUzQCRtMMR/IBAKE3ETMC4g==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [win32]
 
   '@uiw/codemirror-extensions-basic-setup@4.25.11':
     resolution: {integrity: sha512-otyFa+n9IOYtEjaKOxPedHkj15fTPUF21wdR9pv0GpZPfuGl27cvmcv6+tognbRu9VvEcsHKE+ESoszeo3KfTw==}
@@ -8608,9 +8724,9 @@ packages:
   types-ramda@0.32.0:
     resolution: {integrity: sha512-iZtriSUdsDqOlip/wUaDNcoiskbVf5RdcqLNpQdUcOM1JKFClochCvPZCDjn/cc9HzoBzi4DEB4iPr1PbrhN1w==}
 
-  typescript@6.0.3:
-    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
-    engines: {node: '>=14.17'}
+  typescript@7.0.2:
+    resolution: {integrity: sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==}
+    engines: {node: '>=16.20.0'}
     hasBin: true
 
   uglify-js@3.19.3:
@@ -10595,13 +10711,13 @@ snapshots:
     dependencies:
       minipass: 7.1.3
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.7.0(@typescript/typescript6@6.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.7.0(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))':
     dependencies:
       glob: 13.0.6
-      react-docgen-typescript: 2.4.0(@typescript/typescript6@6.0.2)
+      react-docgen-typescript: 2.4.0(typescript@7.0.2)
       vite: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
     optionalDependencies:
-      typescript: '@typescript/typescript6@6.0.2'
+      typescript: 7.0.2
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
@@ -10796,7 +10912,7 @@ snapshots:
 
   '@marijn/find-cluster-break@1.0.4': {}
 
-  '@mswjs/data@0.16.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2)(supports-color@8.1.1)':
+  '@mswjs/data@0.16.2(@types/node@24.13.3)(supports-color@8.1.1)(typescript@7.0.2)':
     dependencies:
       '@types/lodash': 4.17.25
       '@types/md5': 2.3.6
@@ -10812,7 +10928,7 @@ snapshots:
       strict-event-emitter: 0.5.1
       uuid: 8.3.2
     optionalDependencies:
-      msw: 2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+      msw: 2.15.0(@types/node@24.13.3)(typescript@7.0.2)
     transitivePeerDependencies:
       - '@types/node'
       - supports-color
@@ -11445,12 +11561,12 @@ snapshots:
       '@types/react': 19.2.18
       '@types/react-dom': 19.2.5(@types/react@19.2.18)
 
-  '@storybook/react-vite@10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(@typescript/typescript6@6.0.2)(esbuild@0.28.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))(webpack@5.110.1)':
+  '@storybook/react-vite@10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(esbuild@0.28.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))(webpack@5.110.1)':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.7.0(@typescript/typescript6@6.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.7.0(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
       '@rollup/pluginutils': 5.4.0
       '@storybook/builder-vite': 10.5.10(esbuild@0.28.2)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))(webpack@5.110.1)
-      '@storybook/react': 10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(@typescript/typescript6@6.0.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))
+      '@storybook/react': 10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))(typescript@7.0.2)
       empathic: 2.0.1
       magic-string: 0.30.21
       react: 19.2.8
@@ -11461,7 +11577,7 @@ snapshots:
       tsconfig-paths: 4.2.0
       vite: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
     optionalDependencies:
-      typescript: '@typescript/typescript6@6.0.2'
+      typescript: 7.0.2
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
@@ -11470,19 +11586,19 @@ snapshots:
       - supports-color
       - webpack
 
-  '@storybook/react@10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(@typescript/typescript6@6.0.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))':
+  '@storybook/react@10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))(typescript@7.0.2)':
     dependencies:
       '@storybook/global': 5.0.0
       '@storybook/react-dom-shim': 10.5.10(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8))
       react: 19.2.8
       react-docgen: 8.0.3
-      react-docgen-typescript: 2.4.0(@typescript/typescript6@6.0.2)
+      react-docgen-typescript: 2.4.0(typescript@7.0.2)
       react-dom: 19.2.8(react@19.2.8)
       storybook: 10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8)
     optionalDependencies:
       '@types/react': 19.2.18
       '@types/react-dom': 19.2.5(@types/react@19.2.18)
-      typescript: '@typescript/typescript6@6.0.2'
+      typescript: 7.0.2
     transitivePeerDependencies:
       - supports-color
 
@@ -11512,7 +11628,7 @@ snapshots:
       picocolors: 1.1.1
       redent: 3.0.0
 
-  '@testing-library/jest-dom@7.0.1(@testing-library/dom@10.4.1)(vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)))':
+  '@testing-library/jest-dom@7.0.1(@testing-library/dom@10.4.1)(vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)))':
     dependencies:
       '@adobe/css-tools': 4.5.0
       '@testing-library/dom': 10.4.1
@@ -11522,7 +11638,7 @@ snapshots:
       picocolors: 1.1.1
       redent: 3.0.0
     optionalDependencies:
-      vitest: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+      vitest: 4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
 
   '@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
@@ -11986,9 +12102,65 @@ snapshots:
     dependencies:
       '@types/node': 24.13.3
 
-  '@typescript/typescript6@6.0.2':
-    dependencies:
-      '@typescript/old': typescript@6.0.3
+  '@typescript/typescript-aix-ppc64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-darwin-arm64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-darwin-x64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-freebsd-arm64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-freebsd-x64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-linux-arm64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-linux-arm@7.0.2':
+    optional: true
+
+  '@typescript/typescript-linux-loong64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-linux-mips64el@7.0.2':
+    optional: true
+
+  '@typescript/typescript-linux-ppc64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-linux-riscv64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-linux-s390x@7.0.2':
+    optional: true
+
+  '@typescript/typescript-linux-x64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-netbsd-arm64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-netbsd-x64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-openbsd-arm64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-openbsd-x64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-sunos-x64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-win32-arm64@7.0.2':
+    optional: true
+
+  '@typescript/typescript-win32-x64@7.0.2':
+    optional: true
 
   '@uiw/codemirror-extensions-basic-setup@4.25.11(@codemirror/autocomplete@6.20.3)(@codemirror/commands@6.11.0)(@codemirror/language@6.12.4)(@codemirror/lint@6.9.7)(@codemirror/search@6.7.1)(@codemirror/state@6.7.1)(@codemirror/view@6.43.9)':
     dependencies:
@@ -12045,13 +12217,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.1
 
-  '@vitest/mocker@4.1.11(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))':
+  '@vitest/mocker@4.1.11(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))':
     dependencies:
       '@vitest/spy': 4.1.11
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      msw: 2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2)
+      msw: 2.15.0(@types/node@24.13.3)(typescript@7.0.2)
       vite: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)
 
   '@vitest/pretty-format@3.2.4':
@@ -13294,14 +13466,14 @@ snapshots:
       path-type: 4.0.0
       yaml: 1.10.3
 
-  cosmiconfig@8.3.6(@typescript/typescript6@6.0.2):
+  cosmiconfig@8.3.6(typescript@7.0.2):
     dependencies:
       import-fresh: 3.3.1
       js-yaml: 4.3.2
       parse-json: 5.2.0
       path-type: 4.0.0
     optionalDependencies:
-      typescript: '@typescript/typescript6@6.0.2'
+      typescript: 7.0.2
 
   create-require@1.1.1: {}
 
@@ -13933,12 +14105,12 @@ snapshots:
     dependencies:
       is-callable: 1.2.7
 
-  fork-ts-checker-webpack-plugin@9.1.0(@typescript/typescript6@6.0.2)(webpack@5.110.1):
+  fork-ts-checker-webpack-plugin@9.1.0(typescript@7.0.2)(webpack@5.110.1):
     dependencies:
       '@babel/code-frame': 7.29.7
       chalk: 4.1.2
       chokidar: 4.0.3
-      cosmiconfig: 8.3.6(@typescript/typescript6@6.0.2)
+      cosmiconfig: 8.3.6(typescript@7.0.2)
       deepmerge: 4.3.1
       fs-extra: 10.1.0
       memfs: 3.5.3
@@ -13947,7 +14119,7 @@ snapshots:
       schema-utils: 3.3.0
       semver: 7.8.5
       tapable: 2.3.3
-      typescript: '@typescript/typescript6@6.0.2'
+      typescript: 7.0.2
       webpack: 5.110.1(clean-css@5.3.3)(esbuild@0.28.2)(html-minifier-terser@7.2.0)(lightningcss@1.33.0)(postcss@8.5.26)(uglify-js@3.19.3)(webpack-cli@7.2.3)
 
   form-data@4.0.6:
@@ -14759,7 +14931,7 @@ snapshots:
 
   ms@2.1.3: {}
 
-  msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2):
+  msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2):
     dependencies:
       '@inquirer/confirm': 6.3.0(@types/node@24.13.3)
       '@mswjs/interceptors': 0.41.9
@@ -14780,7 +14952,7 @@ snapshots:
       until-async: 3.0.2
       yargs: 17.7.3
     optionalDependencies:
-      typescript: '@typescript/typescript6@6.0.2'
+      typescript: 7.0.2
     transitivePeerDependencies:
       - '@types/node'
 
@@ -15409,9 +15581,9 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.18
 
-  react-docgen-typescript@2.4.0(@typescript/typescript6@6.0.2):
+  react-docgen-typescript@2.4.0(typescript@7.0.2):
     dependencies:
-      typescript: '@typescript/typescript6@6.0.2'
+      typescript: 7.0.2
 
   react-docgen@8.0.3:
     dependencies:
@@ -16181,7 +16353,7 @@ snapshots:
 
   ts-dedent@2.3.0: {}
 
-  ts-node@10.9.2(@types/node@24.13.3)(@typescript/typescript6@6.0.2):
+  ts-node@10.9.2(@types/node@24.13.3)(typescript@7.0.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.13
@@ -16195,7 +16367,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.4
       make-error: 1.3.6
-      typescript: '@typescript/typescript6@6.0.2'
+      typescript: 7.0.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
@@ -16241,7 +16413,28 @@ snapshots:
     dependencies:
       ts-toolbelt: 9.6.0
 
-  typescript@6.0.3: {}
+  typescript@7.0.2:
+    optionalDependencies:
+      '@typescript/typescript-aix-ppc64': 7.0.2
+      '@typescript/typescript-darwin-arm64': 7.0.2
+      '@typescript/typescript-darwin-x64': 7.0.2
+      '@typescript/typescript-freebsd-arm64': 7.0.2
+      '@typescript/typescript-freebsd-x64': 7.0.2
+      '@typescript/typescript-linux-arm': 7.0.2
+      '@typescript/typescript-linux-arm64': 7.0.2
+      '@typescript/typescript-linux-loong64': 7.0.2
+      '@typescript/typescript-linux-mips64el': 7.0.2
+      '@typescript/typescript-linux-ppc64': 7.0.2
+      '@typescript/typescript-linux-riscv64': 7.0.2
+      '@typescript/typescript-linux-s390x': 7.0.2
+      '@typescript/typescript-linux-x64': 7.0.2
+      '@typescript/typescript-netbsd-arm64': 7.0.2
+      '@typescript/typescript-netbsd-x64': 7.0.2
+      '@typescript/typescript-openbsd-arm64': 7.0.2
+      '@typescript/typescript-openbsd-x64': 7.0.2
+      '@typescript/typescript-sunos-x64': 7.0.2
+      '@typescript/typescript-win32-arm64': 7.0.2
+      '@typescript/typescript-win32-x64': 7.0.2
 
   uglify-js@3.19.3:
     optional: true
@@ -16348,10 +16541,10 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.51.2
 
-  vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)):
+  vitest@4.1.11(@types/node@24.13.3)(jsdom@30.0.1(@noble/hashes@1.8.0))(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2)):
     dependencies:
       '@vitest/expect': 4.1.11
-      '@vitest/mocker': 4.1.11(msw@2.15.0(@types/node@24.13.3)(@typescript/typescript6@6.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
+      '@vitest/mocker': 4.1.11(msw@2.15.0(@types/node@24.13.3)(typescript@7.0.2))(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(terser@5.51.2))
       '@vitest/pretty-format': 4.1.11
       '@vitest/runner': 4.1.11
       '@vitest/snapshot': 4.1.11
