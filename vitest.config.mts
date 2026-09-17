@@ -106,6 +106,10 @@ export default defineConfig({
         testTimeout: 50000,
         env: { BABEL_ENV: 'test' },
       }),
+      project('extension-harness', 'extension', {
+        environment: 'jsdom',
+        include: ['test-harness/**/*.test.?(c|m)[jt]s?(x)'],
+      }),
     ],
   },
 });
