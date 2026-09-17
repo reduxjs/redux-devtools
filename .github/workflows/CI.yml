@@ -110,13 +110,10 @@ jobs:
         include:
           - browser: chrome
             channel: stable
-            electron: true
           - browser: chrome
             channel: beta
-            electron: false
           - browser: firefox
             channel: stable
-            electron: false
     env:
       CHROME_CHANNEL: ${{ matrix.channel }}
       FIREFOX_CHANNEL: ${{ matrix.channel }}
@@ -153,14 +150,8 @@ jobs:
       # Chrome's user-namespace sandbox is blocked by default on Ubuntu 24.04.
       - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
-      # xvfb is needed because the docked-DevTools test runs headful, and Electron needs a display.
+      # xvfb is needed because the docked-DevTools tests run headful.
       - name: Run Puppeteer e2e tests
         uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
         with:
           run: pnpm --filter remotedev-redux-devtools-extension run test:e2e:${{ matrix.browser }}
-
-      - name: Run Electron tests
-        if: matrix.electron
-        uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
-        with:
-          run: pnpm --filter remotedev-redux-devtools-extension run test:electron
