@@ -332,6 +332,36 @@ export async function clickRowButton(
   }
 }
 
+/**
+ * Picks a monitor in the panel's bottom toolbar. The monitor tabs collapse
+ * into an overflow menu when the toolbar is narrow, so this first looks for a
+ * visible tab button and otherwise opens the `expandIcon` menu. Clicks are
+ * dispatched directly on the button because the overflow menu closes on any
+ * `mousedown`, which a synthesized pointer click would trigger first.
+ */
+export async function selectMonitor(
+  panel: Page | Frame,
+  monitor: 'InspectorMonitor' | 'LogMonitor' | 'ChartMonitor',
+): Promise<void> {
+  const selector = `button[value="${monitor}"]`;
+  const clickButton = (buttonSelector: string) =>
+    panel.$eval(buttonSelector, (button) => {
+      if (!(button instanceof HTMLElement)) return false;
+      button.click();
+      return true;
+    });
+  if (await panel.$(selector)) {
+    await clickButton(selector);
+    return;
+  }
+  await panel.waitForSelector('button[value="expandIcon"]', {
+    timeout: 10_000,
+  });
+  await clickButton('button[value="expandIcon"]');
+  await panel.waitForSelector(selector, { timeout: 10_000 });
+  await clickButton(selector);
+}
+
 export async function dispatchOnFixture(
   page: Page,
   type: string,
