@@ -22,7 +22,7 @@
     "build:test:electron:fixture": "webpack --config test/electron/fixture/webpack.config.js",
     "test:electron": "pnpm run build:test:electron:fixture && vitest --run --config vitest.e2e.config.mts --project extension-electron",
     "test": "pnpm run test:app && pnpm run test:chrome && pnpm run test:electron",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -55,6 +55,7 @@
     "@testing-library/react": "catalog:",
     "@types/chrome": "^0.2.7",
     "@types/lodash-es": "^4.17.12",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "chromedriver": "^152.0.2",
