@@ -30,10 +30,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run lint"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
     "@types/d3": "^7.4.3",

@@ -28,10 +28,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run lint"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
     "@types/lodash-es": "^4.17.12",

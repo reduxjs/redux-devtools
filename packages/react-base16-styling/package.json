@@ -29,10 +29,8 @@
     "build": "tsc",
     "clean": "rimraf lib",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run lint && pnpm run test"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
     "@types/lodash": "^4.17.25",

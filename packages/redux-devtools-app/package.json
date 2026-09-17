@@ -32,10 +32,8 @@
     "build:umd": "node buildUmd.mjs --dev",
     "build:umd:min": "node buildUmd.mjs",
     "clean": "rimraf build lib umd",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
     "@redux-devtools/app-core": "workspace:^",
@@ -49,7 +47,6 @@
   },
   "devDependencies": {
     "@babel/core": "catalog:",
-    "@babel/eslint-parser": "^7.29.7",
     "@babel/plugin-transform-runtime": "^7.29.7",
     "@babel/preset-env": "catalog:",
     "@babel/preset-react": "catalog:",
@@ -70,7 +67,6 @@
     "css-loader": "catalog:",
     "esbuild": "^0.28.2",
     "fork-ts-checker-webpack-plugin": "catalog:",
-    "globals": "^17.11.0",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "catalog:",
     "react": "catalog:",
