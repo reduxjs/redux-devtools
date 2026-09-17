@@ -14,7 +14,6 @@ export const fromPath = (path: (string | number)[]) =>
 
 function getState<S>(
   s: { state: S; error?: string } | undefined,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   defaultValue?: {},
 ) {
   if (!s) return defaultValue;
@@ -25,7 +24,6 @@ export function compare<S>(
   s1: { state: S; error?: string } | undefined,
   s2: { state: S; error?: string },
   cb: (value: { path: string; curState: number | string | undefined }) => void,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   defaultValue?: {},
 ) {
   const paths: string[] = []; // Already processed
@@ -143,8 +141,7 @@ export default class TestGenerator<
     while (actions[i]) {
       if (
         !isVanilla ||
-        /* eslint-disable-next-line no-useless-escape */
-        /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type)
+        /^┗?\s?[a-zA-Z0-9_@.[\]-]+?$/.test(actions[i].action.type)
       ) {
         if (isFirst) isFirst = false;
         else r += space;

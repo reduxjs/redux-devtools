@@ -1,8 +1,8 @@
 const path = require('path');
 const { app, BrowserWindow, session } = require('electron');
 
-app.on('window-all-closed', app.quit);
-app.whenReady().then(async () => {
+app.on('window-all-closed', () => app.quit());
+void app.whenReady().then(async () => {
   await session.defaultSession.loadExtension(
     path.join(__dirname, '../../../dist'),
     { allowFileAccess: true },
@@ -16,6 +16,6 @@ app.whenReady().then(async () => {
       contextIsolation: false,
     },
   });
-  mainWindow.loadFile('index.html');
+  void mainWindow.loadFile('index.html');
   mainWindow.webContents.openDevTools({ mode: 'detach' });
 });

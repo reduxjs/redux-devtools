@@ -22,7 +22,8 @@
     "extension/chrome/**",
     "extension/edge/**",
     "extension/firefox/**",
-    "patches/**"
+    "patches/**",
+    "**/public/mockServiceWorker.js"
   ],
   "rules": {
     "typescript/no-unused-vars": "off",

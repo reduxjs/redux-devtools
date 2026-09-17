@@ -33,11 +33,9 @@ function tryCatchStringify(obj: unknown) {
   try {
     return JSON.stringify(obj);
   } catch (err) {
-    /* eslint-disable no-console */
     if (process.env.NODE_ENV !== 'production') {
       console.log('Failed to stringify', err);
     }
-    /* eslint-enable no-console */
     return jsan.stringify(obj, windowReplacer, undefined, {
       circular: '[CIRCULAR]',
       date: true,
@@ -54,11 +52,9 @@ function stringify(obj: unknown, serialize?: Serialize | undefined) {
 
   if (!stringifyWarned && str && str.length > 16 * 1024 * 1024) {
     // 16 MB
-    /* eslint-disable no-console */
     console.warn(
       'Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://github.com/reduxjs/redux-devtools-extension/blob/master/docs/Troubleshooting.md#excessive-use-of-memory-and-cpu on how to configure it.',
     );
-    /* eslint-enable no-console */
     stringifyWarned = true;
   }
 
@@ -221,7 +217,6 @@ function post<S, A extends Action<string>>(
 
 function getStackTrace(
   config: Config,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace: Function | undefined,
 ) {
   if (!config.trace) return undefined;
@@ -248,7 +243,6 @@ function getStackTrace(
     typeof Error.stackTraceLimit !== 'number' ||
     Error.stackTraceLimit > traceLimit!
   ) {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const frames = stack!.split('\n');
     if (frames.length > traceLimit!) {
       stack = frames
@@ -263,7 +257,6 @@ function amendActionType<A extends Action<string>>(
   action:
     A | StructuralPerformAction<A> | StructuralPerformAction<A>[] | string,
   config: Config,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace: Function | undefined,
 ): StructuralPerformAction<A> {
   const timestamp = Date.now();
@@ -273,10 +266,10 @@ function amendActionType<A extends Action<string>>(
   }
   if (!(action as A).type)
     return { action: { type: 'update' } as A, timestamp, stack };
-  if ((action as StructuralPerformAction<A>).action)
-    return (
-      stack ? { stack, ...action } : action
-    ) as StructuralPerformAction<A>;
+  if ((action as StructuralPerformAction<A>).action) {
+    const performAction = action as StructuralPerformAction<A>;
+    return stack ? { stack, ...performAction } : performAction;
+  }
   return { action, timestamp, stack } as StructuralPerformAction<A>;
 }
 
@@ -431,7 +424,7 @@ export function sendMessage<S, A extends Action<string>>(
   let amendedAction = action;
   if (typeof config !== 'object') {
     // Legacy: sending actions not from connected part
-    config = {}; // eslint-disable-line no-param-reassign
+    config = {};
     if (action) amendedAction = amendActionType(action, config, sendMessage);
   }
   if (action) {
