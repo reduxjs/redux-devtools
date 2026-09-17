@@ -7,11 +7,7 @@
   "rangeStrategy": "bump",
   "postUpdateOptions": ["pnpmDedupe"],
   "rebaseWhen": "conflicted",
-  "ignorePaths": [
-    "**/node_modules/**",
-    "extension/examples/**",
-    "packages/redux-devtools-remote/examples/**"
-  ],
+  "ignorePaths": ["**/node_modules/**"],
   "packageRules": [
     {
       "matchDatasources": ["npm"],
