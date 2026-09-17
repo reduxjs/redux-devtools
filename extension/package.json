@@ -18,7 +18,8 @@
     "test:app": "vitest --run --project extension",
     "test:e2e:chrome": "vitest --run --config vitest.e2e.config.mts --project e2e-chrome",
     "test:e2e:firefox": "vitest --run --config vitest.e2e.config.mts --project e2e-firefox",
-    "test": "pnpm run test:app && pnpm run test:e2e:chrome && pnpm run test:e2e:firefox",
+    "test:e2e:electron": "vitest --run --config vitest.e2e.config.mts --project e2e-electron",
+    "test": "pnpm run test:app && pnpm run test:e2e:chrome && pnpm run test:e2e:firefox && pnpm run test:e2e:electron",
     "type-check": "tsc --noEmit && tsc -p tsconfig.test.json"
   },
   "dependencies": {
@@ -55,6 +56,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "electron": "^44.4.1",
     "esbuild": "^0.28.2",
     "immutable": "^5.1.9",
     "jsdom": "catalog:",

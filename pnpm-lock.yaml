@@ -215,6 +215,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.5(@types/react@19.2.18)
+      electron:
+        specifier: ^44.4.1
+        version: 44.4.1(supports-color@8.1.1)
       esbuild:
         specifier: ^0.28.2
         version: 0.28.2
@@ -6206,6 +6209,11 @@ packages:
 
   electron@44.0.0:
     resolution: {integrity: sha512-FkTqPrFPZYljdPI5b7KORGsJTd6FgUQDefl5MrU3Xz9R87pAj9JLreIjDqcRN8hJIkFHIou0o8kKzvcpT9qiRQ==}
+    engines: {node: '>= 22.12.0'}
+    hasBin: true
+
+  electron@44.4.1:
+    resolution: {integrity: sha512-gXJarQ2Utfn8G6bp/IqLXvckOSCtrxPWjFqQaqm02Gf4zYn1aP+RN9PKimoLH/DMqjKLfBrNC4C4CviPv0cXnQ==}
     engines: {node: '>= 22.12.0'}
     hasBin: true
 
@@ -13701,6 +13709,14 @@ snapshots:
   electron-to-chromium@1.5.416: {}
 
   electron@44.0.0(supports-color@8.1.1):
+    dependencies:
+      '@electron-internal/extract-zip': 1.0.5
+      '@electron/get': 5.1.0(supports-color@8.1.1)
+      '@types/node': 24.13.3
+    transitivePeerDependencies:
+      - supports-color
+
+  electron@44.4.1(supports-color@8.1.1):
     dependencies:
       '@electron-internal/extract-zip': 1.0.5
       '@electron/get': 5.1.0(supports-color@8.1.1)

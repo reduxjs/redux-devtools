@@ -12,6 +12,9 @@ import { defineConfig, type TestProjectConfiguration } from 'vitest/config';
  * - `e2e-firefox`: Puppeteer over WebDriver BiDi against Firefox. Set
  *   `FIREFOX_CHANNEL` or `FIREFOX_PATH`. See `test-e2e/helpers/firefox.ts` for
  *   the Windows cache-path caveat.
+ * - `e2e-electron`: Puppeteer connected to the `electron` package's binary
+ *   running `test-e2e/electron/fixture/main.cjs`, which loads the extension
+ *   with `session.loadExtension`.
  */
 function e2eProject(name: string, include: string[]): TestProjectConfiguration {
   const timeout = 60_000;
@@ -33,6 +36,9 @@ export default defineConfig({
     projects: [
       e2eProject('e2e-chrome', ['test-e2e/chrome/**/*.test.?(c|m)[jt]s?(x)']),
       e2eProject('e2e-firefox', ['test-e2e/firefox/**/*.test.?(c|m)[jt]s?(x)']),
+      e2eProject('e2e-electron', [
+        'test-e2e/electron/**/*.test.?(c|m)[jt]s?(x)',
+      ]),
     ],
   },
 });

@@ -114,6 +114,8 @@ jobs:
             channel: beta
           - browser: firefox
             channel: stable
+          - browser: electron
+            channel: pinned
     env:
       CHROME_CHANNEL: ${{ matrix.channel }}
       FIREFOX_CHANNEL: ${{ matrix.channel }}
@@ -139,18 +141,25 @@ jobs:
           name: extension-dist
           path: extension
 
-      # Browsers are downloaded by @puppeteer/browsers on first use; keep them
-      # between runs. The key changes every run so the newest builds get saved.
+      # Browsers are downloaded by @puppeteer/browsers on first use and Electron
+      # by the `electron` package on first require; keep both between runs.
+      # The key changes every run so the newest builds get saved.
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          path: ${{ env.PUPPETEER_CACHE_DIR }}
+          path: |
+            ${{ env.PUPPETEER_CACHE_DIR }}
+            ~/.cache/electron
           key: browsers-${{ runner.os }}-${{ matrix.browser }}-${{ matrix.channel }}-${{ github.run_id }}
           restore-keys: browsers-${{ runner.os }}-${{ matrix.browser }}-${{ matrix.channel }}-
 
       # Chrome's user-namespace sandbox is blocked by default on Ubuntu 24.04.
       - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
-      # xvfb is needed because the docked-DevTools tests run headful.
+      - if: matrix.browser == 'electron'
+        name: Download Electron
+        run: pnpm --filter remotedev-redux-devtools-extension exec install-electron
+
+      # xvfb is needed because the docked-DevTools tests and Electron run headful.
       - name: Run Puppeteer e2e tests
         uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
         with:
