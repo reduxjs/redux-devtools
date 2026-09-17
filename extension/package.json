@@ -16,11 +16,11 @@
     "build:extension": "node build.mjs",
     "clean": "rimraf dist && rimraf chrome/dist && rimraf edge/dist && rimraf firefox/dist",
     "test:app": "vitest --run --project extension",
-    "test:chrome": "cross-env SE_FORCE_BROWSER_DOWNLOAD=true vitest --run --config vitest.e2e.config.mts --project extension-chrome",
-    "build:test:electron:fixture": "webpack --config test/electron/fixture/webpack.config.js",
-    "test:electron": "pnpm run build:test:electron:fixture && vitest --run --config vitest.e2e.config.mts --project extension-electron",
-    "test": "pnpm run test:app && pnpm run test:chrome && pnpm run test:electron",
-    "type-check": "tsc --noEmit"
+    "test:e2e:chrome": "vitest --run --config vitest.e2e.config.mts --project e2e-chrome",
+    "test:e2e:firefox": "vitest --run --config vitest.e2e.config.mts --project e2e-firefox",
+    "test:e2e:electron": "vitest --run --config vitest.e2e.config.mts --project e2e-electron",
+    "test": "pnpm run test:app && pnpm run test:e2e:chrome && pnpm run test:e2e:firefox && pnpm run test:e2e:electron",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -47,26 +47,24 @@
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {
+    "@puppeteer/browsers": "catalog:",
     "@testing-library/dom": "catalog:",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
     "@types/chrome": "^0.2.7",
     "@types/lodash-es": "^4.17.12",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "chromedriver": "^152.0.2",
-    "cross-env": "catalog:",
-    "electron": "^44.0.0",
+    "electron": "^44.4.1",
     "esbuild": "^0.28.2",
     "immutable": "^5.1.9",
     "jsdom": "catalog:",
     "pug": "^3.0.4",
+    "puppeteer-core": "catalog:",
     "rimraf": "catalog:",
-    "selenium-webdriver": "^4.48.0",
     "sinon-chrome": "^3.0.1",
     "typescript": "catalog:",
-    "vitest": "catalog:",
-    "webpack": "catalog:",
-    "webpack-cli": "catalog:"
+    "vitest": "catalog:"
   }
 }
