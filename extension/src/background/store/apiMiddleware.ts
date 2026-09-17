@@ -622,7 +622,6 @@ chrome.notifications.onClicked.addListener((id) => {
   openDevToolsWindow('devtools-window');
 });
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 const api: Middleware<{}, BackgroundState, Dispatch<BackgroundAction>> =
   (store) => (next) => (untypedAction) => {
     const action = untypedAction as BackgroundAction;

@@ -44,7 +44,7 @@ class InspectorWrapper extends Component<Props> {
     props: DevtoolsInspectorProps<unknown, Action<string>>,
     state: DevtoolsInspectorState | undefined,
     action: DevtoolsInspectorAction,
-    // eslint-disable-next-line @typescript-eslint/unbound-method
+    // oxlint-disable-next-line typescript/unbound-method
   ) => DevtoolsInspectorState = InspectorMonitor.update;
 
   render() {

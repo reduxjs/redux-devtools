@@ -14,9 +14,7 @@ import { tooltip } from 'd3tooltip';
 import type { StyleValue } from 'd3tooltip';
 
 export interface Options {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   state?: {} | null;
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   tree?: Node | {};
 
   rootKeyName: string;
@@ -183,7 +181,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
   }
 
   const vis = svgElement
-    // eslint-disable-next-line @typescript-eslint/unbound-method
+    // oxlint-disable-next-line typescript/unbound-method
     .call(zoom.scaleTo, initialZoom)
     .call(
       zoom.on('zoom', (event) => {

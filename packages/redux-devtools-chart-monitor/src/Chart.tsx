@@ -26,7 +26,6 @@ export interface Props<S, A extends Action<string>>
 
 class Chart<S, A extends Action<string>> extends Component<Props<S, A>> {
   divRef = createRef<HTMLDivElement>();
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   renderChart?: (state?: {} | null | undefined) => void;
 
   componentDidMount() {

@@ -152,7 +152,7 @@ export default class LogMonitorEntry<
     return (
       <div
         style={{
-          opacity: selected ? 0.4 : inFuture ? 0.6 : 1, // eslint-disable-line no-nested-ternary
+          opacity: selected ? 0.4 : inFuture ? 0.6 : 1,
           textDecoration: collapsed ? 'line-through' : 'none',
           color: this.props.theme.base06,
         }}

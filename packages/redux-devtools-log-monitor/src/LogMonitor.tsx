@@ -184,7 +184,6 @@ class LogMonitor<S, A extends Action<string>> extends PureComponent<
       return base16Themes[theme];
     }
 
-    // eslint-disable-next-line no-console
     console.warn(
       'DevTools theme ' + theme + ' not found, defaulting to nicinabox',
     );

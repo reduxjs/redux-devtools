@@ -42,7 +42,7 @@ export default function getInspectedState<S>(
   if (convertImmutable) {
     try {
       state = (fromJS(state) as Map<unknown, unknown>).toJS() as unknown as S;
-    } catch (e) {} // eslint-disable-line no-empty
+    } catch (e) {}
   }
 
   return state;

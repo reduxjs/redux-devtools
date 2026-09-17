@@ -39,7 +39,6 @@ export default function createStyledComponent<
   styles: Styles<PropsOf<C> & O & { theme: Theme }>,
   component?: C,
 ): StyledComponent<PropsOf<C> & O & { theme?: Theme | Base16Theme }> {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   return styled((component || 'div') as C)`
     ${(props: PropsOf<C> & { theme: Theme | Base16Theme }) =>

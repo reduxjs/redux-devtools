@@ -263,7 +263,6 @@ function getReport(reportId: unknown) {
   })();
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export const api: Middleware<{}, StoreState, Dispatch<StoreAction>> = (
   inStore,
 ) => {

@@ -45,9 +45,7 @@ export function map2tree(
   root: unknown,
   options: { key?: string; pushMethod?: 'push' | 'unshift' } = {},
   tree: Node = { name: options.key || 'state', children: [] },
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 ): Node | {} {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   if (!isPlainObject(root) && root && !(root as { toJS: () => {} }).toJS) {
     return {};
   }
@@ -60,13 +58,9 @@ export function map2tree(
   }
 
   mapValues(
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     root && (root as { toJS: () => {} }).toJS
-      ? // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-        (root as { toJS: () => {} }).toJS()
-      : // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-        (root as {}),
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+      ? (root as { toJS: () => {} }).toJS()
+      : (root as {}),
     (maybeImmutable: { toJS?: () => {} }, key) => {
       const value =
         maybeImmutable && maybeImmutable.toJS

@@ -4,7 +4,6 @@ import { compose, createStore, StoreEnhancer } from 'redux';
 
 describe('persistState', () => {
   const savedLocalStorage = global.localStorage;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   delete global.localStorage;
 
@@ -134,7 +133,6 @@ describe('persistState', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete global.localStorage.getItem;
     createStore(
@@ -153,7 +151,6 @@ describe('persistState', () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete global.localStorage.setItem;
     const store = createStore(

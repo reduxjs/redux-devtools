@@ -36,7 +36,6 @@ function counterWithBug(state = 0, action: CounterWithBugAction) {
     case 'INCREMENT':
       return state + 1;
     case 'DECREMENT':
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return mistake - 1;
     case 'SET_UNDEFINED':
@@ -51,7 +50,6 @@ type CounterWithAnotherBugAction =
 function counterWithAnotherBug(state = 0, action: CounterWithBugAction) {
   switch (action.type) {
     case 'INCREMENT':
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return (mistake as unknown as number) + 1;
     case 'DECREMENT':
@@ -1005,7 +1003,7 @@ describe('instrument', () => {
     });
 
     it('should include 3 extra frames when Error.captureStackTrace not suported', () => {
-      // eslint-disable-next-line @typescript-eslint/unbound-method
+      // oxlint-disable-next-line typescript/unbound-method
       const captureStackTrace = Error.captureStackTrace;
       Error.captureStackTrace = undefined as unknown as () => unknown;
       monitoredStore = createStore(
@@ -1121,7 +1119,6 @@ describe('instrument', () => {
       const importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       const noComputedExportedState = Object.assign({}, exportedState);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       delete noComputedExportedState.computedStates;
 
@@ -1167,7 +1164,6 @@ describe('instrument', () => {
   ) {
     state.actionsById = Object.fromEntries(
       Object.entries(state.actionsById).map(([actionId, action]) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         delete action.timestamp;
         delete action.stack;

@@ -265,11 +265,9 @@ function tryCatch<S, A extends Action<string>>(
       return fn({ instanceId, source: pageSource, split: 'end' });
     }
     handleDisconnect();
-    /* eslint-disable no-console */
     if (process.env.NODE_ENV !== 'production') {
       console.error('Failed to send message', err);
     }
-    /* eslint-enable no-console */
   }
 }
 

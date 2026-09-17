@@ -384,7 +384,6 @@ export interface RequestBase {
   libConfig?: LibConfig;
   actionsById?: string;
   computedStates?: string;
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   payload?: {} | string;
   liftedState?: Partial<State>;
 }

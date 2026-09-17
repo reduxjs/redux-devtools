@@ -10,11 +10,9 @@ export default <C extends React.ComponentType<any>>(
 ) => {
   return withTheme((props: { theme?: Theme }) => {
     return props.theme && props.theme.type ? (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       <UnthemedComponent {...props} />
     ) : (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       <UnthemedComponent
         {...props}

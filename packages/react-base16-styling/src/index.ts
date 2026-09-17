@@ -269,7 +269,6 @@ export const getBase16Theme = (
     if (base16Themes) {
       theme = base16Themes[themeName];
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- needed: Base16Theme is structurally assignable to StylingConfig's index signature, so the narrowing widens to Base16Theme | StylingConfig without this
       theme = base16[themeName as keyof typeof base16] as Base16Theme;
     }
     if (modifier === 'inverted') {

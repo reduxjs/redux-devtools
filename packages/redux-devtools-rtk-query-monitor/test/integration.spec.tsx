@@ -28,7 +28,6 @@ describe('rtk-query-monitor standalone integration', () => {
   // Hushes symbol.observable warning
   // @see https://github.com/reduxjs/redux-devtools/issues/1002
   jest.spyOn(console, 'warn');
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   (console.warn as jest.Mock<void>).mockImplementation(() => {});
 
   const dataPanelDomId = '#rtk-query-monitor-tab-panel-0';

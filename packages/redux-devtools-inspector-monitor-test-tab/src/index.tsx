@@ -117,7 +117,7 @@ export class TestTab<S, A extends Action<string>> extends Component<
   };
 
   render() {
-    const { monitorState, updateMonitorState, ...rest } = this.props; // eslint-disable-line no-unused-vars, max-len
+    const { monitorState, updateMonitorState, ...rest } = this.props;
     const { dialogStatus } = this.state;
     const persistedState = this.getPersistedState();
     const { selected = 0, templates = getDefaultTemplates() } = persistedState;

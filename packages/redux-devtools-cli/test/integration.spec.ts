@@ -23,7 +23,7 @@ describe('Server', function () {
   describe('Express backend', function () {
     it('loads main page', function () {
       return new Promise<void>((done) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        // oxlint-disable-next-line typescript/no-floating-promises
         request('http://localhost:8000')
           .get('/')
           .expect('Content-Type', /text\/html/)
@@ -37,7 +37,6 @@ describe('Server', function () {
 
     it('resolves an inexistent url', function () {
       return new Promise((done) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         request('http://localhost:8000/jreerfr/123')
           .get('/')
           .expect('Content-Type', /text\/html/)
@@ -58,7 +57,7 @@ describe('Server', function () {
       socket.connect();
       void (async () => {
         for await (const data of socket.listener('error')) {
-          console.error('Socket1 error', data.error); // eslint-disable-line no-console
+          console.error('Socket1 error', data.error);
         }
       })();
       socket2 = socketClusterClient.create({
@@ -68,7 +67,7 @@ describe('Server', function () {
       socket2.connect();
       void (async () => {
         for await (const data of socket2.listener('error')) {
-          console.error('Socket2 error', data.error); // eslint-disable-line no-console
+          console.error('Socket2 error', data.error);
         }
       })();
     });
