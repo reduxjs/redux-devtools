@@ -17,6 +17,8 @@
     "clean": "rimraf dist && rimraf chrome/dist && rimraf edge/dist && rimraf firefox/dist",
     "test:app": "vitest --run --project extension",
     "test:chrome": "cross-env SE_FORCE_BROWSER_DOWNLOAD=true vitest --run --config vitest.e2e.config.mts --project extension-chrome",
+    "test:e2e:chrome": "vitest --run --config vitest.e2e.config.mts --project e2e-chrome",
+    "test:e2e:firefox": "vitest --run --config vitest.e2e.config.mts --project e2e-firefox",
     "build:test:electron:fixture": "webpack --config test/electron/fixture/webpack.config.js",
     "test:electron": "pnpm run build:test:electron:fixture && vitest --run --config vitest.e2e.config.mts --project extension-electron",
     "test": "pnpm run test:app && pnpm run test:chrome && pnpm run test:electron",
@@ -47,6 +49,7 @@
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {
+    "@puppeteer/browsers": "catalog:",
     "@testing-library/dom": "catalog:",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
@@ -61,6 +64,7 @@
     "immutable": "^5.1.9",
     "jsdom": "catalog:",
     "pug": "^3.0.4",
+    "puppeteer-core": "catalog:",
     "rimraf": "catalog:",
     "selenium-webdriver": "^4.48.0",
     "sinon-chrome": "^3.0.1",
