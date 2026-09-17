@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Slider } from '../src/index.js';
@@ -32,7 +32,7 @@ describe('Slider', function () {
   });
 
   it('should handle the change event', () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<Slider value={1} onChange={onChange} />);
 
     fireEvent.change(screen.getByRole('slider'), { target: { value: '2' } });

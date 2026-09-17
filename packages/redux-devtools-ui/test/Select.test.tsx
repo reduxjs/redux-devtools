@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -39,7 +39,7 @@ describe('Select', function () {
   });
 
   it('should select another option', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { container } = render(
       <Select options={options} onChange={onChange} />,
     );
@@ -51,7 +51,7 @@ describe('Select', function () {
   });
 
   it("shouldn't find any results", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { container } = render(
       <Select options={options} onChange={onChange} />,
     );

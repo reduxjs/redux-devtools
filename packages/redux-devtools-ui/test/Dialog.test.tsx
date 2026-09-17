@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -54,7 +54,7 @@ describe('Dialog', function () {
   });
 
   it('should handle dismiss event', async () => {
-    const onDismiss = jest.fn();
+    const onDismiss = vi.fn();
     render(
       <Dialog
         open
@@ -70,7 +70,7 @@ describe('Dialog', function () {
   });
 
   it('should handle submit event', async () => {
-    const onSubmit = jest.fn();
+    const onSubmit = vi.fn();
     render(
       <Dialog
         open

@@ -143,7 +143,8 @@ interface ReorderActionAction {
 interface ImportStateAction {
   type: 'IMPORT_STATE';
   nextLiftedState:
-    LiftedState<unknown, Action<string>, unknown> | readonly Action<string>[];
+    | LiftedState<unknown, Action<string>, unknown>
+    | readonly Action<string>[];
   preloadedState?: unknown;
   noRecompute?: boolean | undefined;
 }
@@ -384,7 +385,6 @@ export interface RequestBase {
   libConfig?: LibConfig;
   actionsById?: string;
   computedStates?: string;
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   payload?: {} | string;
   liftedState?: Partial<State>;
 }
@@ -510,10 +510,13 @@ export type CoreStoreActionWithoutUpdateStateOrLiftedAction =
   | ReduxPersistRehydrateAction;
 
 export type CoreStoreActionWithoutUpdateState =
-  CoreStoreActionWithoutUpdateStateOrLiftedAction | LiftedActionAction;
+  | CoreStoreActionWithoutUpdateStateOrLiftedAction
+  | LiftedActionAction;
 
 export type CoreStoreActionWithoutLiftedAction =
-  CoreStoreActionWithoutUpdateStateOrLiftedAction | UpdateStateAction;
+  | CoreStoreActionWithoutUpdateStateOrLiftedAction
+  | UpdateStateAction;
 
 export type CoreStoreAction =
-  CoreStoreActionWithoutUpdateState | UpdateStateAction;
+  | CoreStoreActionWithoutUpdateState
+  | UpdateStateAction;

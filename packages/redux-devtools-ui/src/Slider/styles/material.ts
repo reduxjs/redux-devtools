@@ -44,8 +44,7 @@ export const style = ({
     background-image: linear-gradient(
       90deg,
       currentcolor,
-      currentcolor ${percent}%,
-      transparent ${percent}%
+      currentcolor ${percent}%, transparent ${percent}%
     );
     background-clip: content-box;
     height: 0.5em;

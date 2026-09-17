@@ -38,9 +38,7 @@ export function getReport(
         });
       })
       .catch(function (err) {
-        /* eslint-disable no-console */
         console.warn(err);
-        /* eslint-enable no-console */
       });
   });
 }

@@ -21,7 +21,6 @@ type Props = DispatchProps & OwnProps;
 
 class ChartTab extends Component<Props> {
   node?: HTMLDivElement | null;
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   renderChart?: (nextState?: {} | null | undefined) => void;
 
   shouldComponentUpdate() {

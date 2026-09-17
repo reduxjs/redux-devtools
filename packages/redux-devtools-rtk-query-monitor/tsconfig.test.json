@@ -1,7 +1,7 @@
 {
-  "extends": "../../tsconfig.esm.react.base.json",
+  "extends": "../../tsconfig.lib.json",
   "compilerOptions": {
-    "types": ["jest"],
+    "types": ["vitest/globals"],
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react"
   },

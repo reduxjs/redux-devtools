@@ -26,7 +26,6 @@ export default class Settings extends Component<Props, State> {
       { name: 'State Tree', component: StateTree },
     ];
     return (
-      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
       <Tabs<{}>
         tabs={tabs}
         selected={this.state.selected || tabs[0].name}

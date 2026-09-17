@@ -80,14 +80,12 @@ class DockMonitor<S, A extends Action<string>> extends Component<
 
     const childrenCount = Children.count(props.children);
     if (childrenCount === 0) {
-      // eslint-disable-next-line no-console
       console.error(
         '<DockMonitor> requires at least one monitor inside. ' +
           'Why don’t you try <LogMonitor>? You can get it at ' +
           'https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-log-monitor.',
       );
     } else if (childrenCount > 1 && !props.changeMonitorKey) {
-      // eslint-disable-next-line no-console
       console.error(
         'You specified multiple monitors inside <DockMonitor> ' +
           'but did not provide `changeMonitorKey` prop to change them. ' +

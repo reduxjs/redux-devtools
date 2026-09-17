@@ -75,7 +75,6 @@ export default function reducer<S, A extends Action<string>>(
   if (!state.childMonitorStates) {
     Children.forEach(props.children, (child, index) => {
       if (typeof child.type.update !== 'function') {
-        // eslint-disable-next-line no-console
         console.error(
           `Child of <DockMonitor> with the index ${index} ` +
             `(${

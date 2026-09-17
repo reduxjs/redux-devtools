@@ -21,4 +21,5 @@ export function startConsecutiveToggle(
 }
 
 export type LogMonitorAction =
-  UpdateScrollTopAction | StartConsecutiveToggleAction;
+  | UpdateScrollTopAction
+  | StartConsecutiveToggleAction;

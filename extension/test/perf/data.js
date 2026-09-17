@@ -1,5 +1,4 @@
 // Source: http://beta.json-generator.com/V1omRaUJG
-/* eslint-disable */
 
 export const bigString = Array(10000000).join('t');
 

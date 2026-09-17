@@ -134,7 +134,6 @@ export const ActionCreators = {
     action: A,
     trace?: ((action: A) => string | undefined) | boolean,
     traceLimit?: number,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     toExcludeFromTrace?: Function,
   ) {
     if (!isPlainObject(action)) {
@@ -285,7 +284,7 @@ function computeWithTryCatch<S, A extends Action<string>, PreloadedState>(
         throw err;
       });
     } else {
-      console.error(err); // eslint-disable-line no-console
+      console.error(err);
     }
   }
 
@@ -374,7 +373,6 @@ function liftAction<A extends Action<string>>(
   action: A,
   trace?: ((action: A) => string | undefined) | boolean,
   traceLimit?: number,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace?: Function,
 ) {
   return ActionCreators.performAction(
@@ -929,7 +927,7 @@ function unliftStore<
 
     dispatch,
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
+    // oxlint-disable-next-line typescript/unbound-method
     subscribe: liftedStore.subscribe,
 
     getState,
@@ -1020,11 +1018,11 @@ export function instrument<
   }
 
   return <
-      NextExt extends NonNullable<unknown>,
-      NextStateExt extends NonNullable<unknown>,
-    >(
-      createStore: StoreEnhancerStoreCreator<NextExt, NextStateExt>,
-    ) =>
+    NextExt extends NonNullable<unknown>,
+    NextStateExt extends NonNullable<unknown>,
+  >(
+    createStore: StoreEnhancerStoreCreator<NextExt, NextStateExt>,
+  ) =>
     <S, A extends Action<string>, PreloadedState>(
       reducer: Reducer<S, A, PreloadedState>,
       initialState?: PreloadedState | undefined,

@@ -21,7 +21,6 @@ import SliderButton from './SliderButton.js';
 const { reset, jumpToAction } = ActionCreators;
 
 interface ExternalProps<S, A extends Action<string>> {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
@@ -37,9 +36,11 @@ interface DefaultProps {
   keyboardEnabled: boolean;
 }
 
-interface SliderMonitorProps<S, A extends Action<string>> // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  extends LiftedState<S, A, {}> {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface SliderMonitorProps<S, A extends Action<string>> extends LiftedState<
+  S,
+  A,
+  {}
+> {
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
@@ -376,10 +377,8 @@ export default SliderMonitor as unknown as React.ComponentType<
 > & {
   update(
     monitorProps: ExternalProps<unknown, Action<string>>,
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     state: {} | undefined,
     action: Action<string>,
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   ): {};
   defaultProps: DefaultProps;
 };

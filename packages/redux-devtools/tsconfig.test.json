@@ -1,7 +1,7 @@
 {
-  "extends": "../../tsconfig.esm.react.base.json",
+  "extends": "../../tsconfig.lib.json",
   "compilerOptions": {
-    "types": ["jest", "node"]
+    "types": ["vitest/globals", "node"]
   },
   "include": ["src", "test"]
 }

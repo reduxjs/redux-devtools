@@ -42,8 +42,8 @@ export const style = ({
       : ''
   }
 
-
-  &:hover, &:focus:not(:active) {
+  &:hover,
+  &:focus:not(:active) {
     background-color: ${theme.base02};
   }
 

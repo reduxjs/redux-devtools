@@ -8,25 +8,23 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
     "type-check": "tsc"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
-    "react": "^19.2.8",
+    "react": "catalog:",
     "react-bootstrap": "^2.10.10",
     "react-dock": "workspace:^",
-    "react-dom": "^19.2.8",
+    "react-dom": "catalog:",
     "react-icons": "^5.7.0",
     "react-is": "^19.2.8"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^6.1.1",
-    "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-7": "npm:typescript@7.0.2",
+    "typescript": "catalog:",
     "vite": "^8.2.2"
   }
 }

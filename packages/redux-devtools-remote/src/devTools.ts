@@ -109,7 +109,8 @@ interface Options<S, A extends Action<string>> {
   };
   readonly stateSanitizer?: ((state: S, index?: number) => S) | undefined;
   readonly actionSanitizer?:
-    (<A extends Action<string>>(action: A, id?: number) => A) | undefined;
+    | (<A extends Action<string>>(action: A, id?: number) => A)
+    | undefined;
 }
 
 interface MessageToRelay {
@@ -158,7 +159,6 @@ interface ActionMessage {
 
 interface DispatchMessage<S, A extends Action<string>> {
   readonly type: 'DISPATCH';
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   readonly action: LiftedAction<S, A, {}>;
 }
 
@@ -173,7 +173,6 @@ type Message<S, A extends Action<string>> =
   | DispatchMessage<S, A>;
 
 class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   store!: EnhancedStore<S, A, {}>;
   filters: LocalFilter | undefined;
   instanceId?: string;
@@ -239,7 +238,6 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
   ) {
     const message: MessageToRelay = {
       type,
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       id: this.socket!.id!,
       name: this.instanceName,
       instanceId: this.appInstanceId,
@@ -258,7 +256,8 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
                   index?: number,
                 ) => unknown,
                 this.actionSanitizer as
-                  ((action: Action<string>, id: number) => Action) | undefined,
+                  | ((action: Action<string>, id: number) => Action)
+                  | undefined,
                 nextActionId!,
               ),
             );
@@ -277,7 +276,6 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
     } else if (action) {
       message.action = action as ActionCreatorObject[];
     }
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     void this.socket!.transmit(this.socket!.id ? 'log' : 'log-noid', message);
   }
 
@@ -299,14 +297,11 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
     if (
       message.type === 'IMPORT' ||
       (message.type === 'SYNC' &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         this.socket!.id &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         message.id !== this.socket!.id)
     ) {
       this.store.liftedStore.dispatch({
         type: 'IMPORT_STATE',
-        // eslint-disable-next-line @typescript-eslint/no-empty-object-type
         nextLiftedState: parse(message.state) as LiftedState<S, A, {}>,
       });
     } else if (message.type === 'UPDATE') {
@@ -390,13 +385,11 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
   login() {
     void (async () => {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         const channelName = (await this.socket!.invoke(
           'login',
           'master',
         )) as string;
         this.channel = channelName;
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         for await (const data of this.socket!.subscribe(channelName)) {
           this.handleMessages(data as Message<S, A>);
         }
@@ -429,10 +422,8 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
     this.socket = socketClusterClient.create(this.socketOptions);
 
     void (async () => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       for await (const data of this.socket!.listener('error')) {
         // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
-        // eslint-disable-next-line no-prototype-builtins,@typescript-eslint/no-unsafe-argument
         this.errorCounts[data.error.name] = this.errorCounts.hasOwnProperty(
           data.error.name,
         )
@@ -455,7 +446,6 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
     })();
 
     void (async () => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       for await (const data of this.socket!.listener('connect')) {
         console.log('connected to remotedev-server');
         this.errorCounts = {}; // clear the errorCounts object, so that we'll log any new errors in the event of a disconnect
@@ -463,7 +453,6 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
       }
     })();
     void (async () => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       for await (const data of this.socket!.listener('disconnect')) {
         this.stop(true);
       }
@@ -480,7 +469,6 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
     return false;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   monitorReducer = (state = {}, action: LiftedAction<S, A, {}>) => {
     this.lastAction = action.type;
     if (!this.started && this.sendOnError === 2 && this.store.liftedStore)
@@ -508,7 +496,6 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
     return state;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   handleChange(state: S, liftedState: LiftedState<S, A, {}>, maxAge: number) {
     if (this.checkForReducerErrors(liftedState)) return;
 

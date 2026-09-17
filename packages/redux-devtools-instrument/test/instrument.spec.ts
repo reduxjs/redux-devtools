@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import {
   createStore,
   compose,
@@ -30,13 +30,14 @@ function counter(state = 0, action: CounterAction) {
 }
 
 type CounterWithBugAction =
-  { type: 'INCREMENT' } | { type: 'DECREMENT' } | { type: 'SET_UNDEFINED' };
+  | { type: 'INCREMENT' }
+  | { type: 'DECREMENT' }
+  | { type: 'SET_UNDEFINED' };
 function counterWithBug(state = 0, action: CounterWithBugAction) {
   switch (action.type) {
     case 'INCREMENT':
       return state + 1;
     case 'DECREMENT':
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return mistake - 1;
     case 'SET_UNDEFINED':
@@ -47,11 +48,12 @@ function counterWithBug(state = 0, action: CounterWithBugAction) {
 }
 
 type CounterWithAnotherBugAction =
-  { type: 'INCREMENT' } | { type: 'DECREMENT' } | { type: 'SET_UNDEFINED' };
+  | { type: 'INCREMENT' }
+  | { type: 'DECREMENT' }
+  | { type: 'SET_UNDEFINED' };
 function counterWithAnotherBug(state = 0, action: CounterWithBugAction) {
   switch (action.type) {
     case 'INCREMENT':
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return (mistake as unknown as number) + 1;
     case 'DECREMENT':
@@ -76,7 +78,9 @@ function doubleCounter(state = 0, action: DoubleCounterAction) {
 }
 
 type CounterWithMultiplyAction =
-  { type: 'INCREMENT' } | { type: 'DECREMENT' } | { type: 'MULTIPLY' };
+  | { type: 'INCREMENT' }
+  | { type: 'DECREMENT' }
+  | { type: 'MULTIPLY' };
 function counterWithMultiply(state = 0, action: CounterWithMultiplyAction) {
   switch (action.type) {
     case 'INCREMENT':
@@ -342,7 +346,7 @@ describe('instrument', () => {
   });
 
   it('should catch and record errors', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {
       // noop
     });
     const storeWithBug = createStore(
@@ -554,7 +558,7 @@ describe('instrument', () => {
     });
 
     it('should not auto-commit errors', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -572,7 +576,7 @@ describe('instrument', () => {
     });
 
     it('should auto-commit actions after hot reload fixes error', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -633,7 +637,7 @@ describe('instrument', () => {
     });
 
     it('should continue to increment currentStateIndex while error blocks commit', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -657,7 +661,7 @@ describe('instrument', () => {
     });
 
     it('should adjust currentStateIndex correctly when multiple actions are committed', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -689,7 +693,7 @@ describe('instrument', () => {
     });
 
     it('should not allow currentStateIndex to drop below 0', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -723,7 +727,7 @@ describe('instrument', () => {
 
     it('should use dynamic maxAge', () => {
       let max = 3;
-      const getMaxAge = jest.fn().mockImplementation(() => max);
+      const getMaxAge = vi.fn().mockImplementation(() => max);
       store = createStore(
         counter,
         instrument(undefined, { maxAge: getMaxAge }),
@@ -1005,7 +1009,7 @@ describe('instrument', () => {
     });
 
     it('should include 3 extra frames when Error.captureStackTrace not suported', () => {
-      // eslint-disable-next-line @typescript-eslint/unbound-method
+      // oxlint-disable-next-line typescript/unbound-method
       const captureStackTrace = Error.captureStackTrace;
       Error.captureStackTrace = undefined as unknown as () => unknown;
       monitoredStore = createStore(
@@ -1121,7 +1125,6 @@ describe('instrument', () => {
       const importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       const noComputedExportedState = Object.assign({}, exportedState);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       delete noComputedExportedState.computedStates;
 
@@ -1167,7 +1170,6 @@ describe('instrument', () => {
   ) {
     state.actionsById = Object.fromEntries(
       Object.entries(state.actionsById).map(([actionId, action]) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         delete action.timestamp;
         delete action.stack;

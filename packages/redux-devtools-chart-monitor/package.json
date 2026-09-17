@@ -29,10 +29,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
     "d3-state-visualizer": "workspace:^",
@@ -41,12 +39,11 @@
   },
   "devDependencies": {
     "@redux-devtools/core": "workspace:^",
-    "@types/react": "^19.2.18",
-    "react": "^19.2.8",
+    "@types/react": "catalog:",
+    "react": "catalog:",
     "redux": "^5.0.1",
-    "rimraf": "^6.1.3",
-    "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-7": "npm:typescript@7.0.2"
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@redux-devtools/core": "workspace:^",

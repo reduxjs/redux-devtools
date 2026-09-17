@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -25,7 +25,7 @@ describe('Notification', function () {
   });
 
   it('should handle the click event', async () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     render(<Notification onClose={onClose}>Message</Notification>);
 
     await userEvent.click(screen.getByRole('button'));

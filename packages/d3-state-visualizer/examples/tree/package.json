@@ -23,7 +23,6 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
     "type-check": "tsc"
   },
   "dependencies": {
@@ -31,8 +30,7 @@
     "map2tree": "workspace:^"
   },
   "devDependencies": {
-    "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-7": "npm:typescript@7.0.2",
+    "typescript": "catalog:",
     "vite": "^8.2.2"
   }
 }

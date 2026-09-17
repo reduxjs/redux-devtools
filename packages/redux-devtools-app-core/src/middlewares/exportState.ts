@@ -27,7 +27,6 @@ function download(state: string) {
 }
 
 export const exportStateMiddleware: Middleware<
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   {},
   CoreStoreState,
   Dispatch<CoreStoreAction>

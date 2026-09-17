@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Slider renders correctly 1`] = `
+exports[`Slider > renders correctly 1`] = `
 <div
-  class="css-20crcy"
+  class="css-4krksc"
 >
   <input
     max="100"
@@ -13,9 +13,9 @@ exports[`Slider renders correctly 1`] = `
 </div>
 `;
 
-exports[`Slider renders with props 1`] = `
+exports[`Slider > renders with props 1`] = `
 <div
-  class="css-1cg3ohj"
+  class="css-aphf6i"
   disabled=""
 >
   <label>

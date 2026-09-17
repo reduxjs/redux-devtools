@@ -48,7 +48,6 @@ class ChartMonitorWrapper extends Component<Props> {
 
   render() {
     return (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       <ChartMonitor
         defaultIsVisible

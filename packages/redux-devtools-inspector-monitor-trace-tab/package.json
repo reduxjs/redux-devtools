@@ -19,11 +19,9 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint .",
+    "test": "vitest --run --project trace-tab",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
     "@babel/code-frame": "^8.0.0",
@@ -38,23 +36,20 @@
     "@emotion/react": "^11.14.0",
     "@redux-devtools/core": "workspace:^",
     "@redux-devtools/inspector-monitor": "workspace:^",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/react": "^16.3.3",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/react": "catalog:",
     "@types/babel__code-frame": "^7.27.0",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^24.13.3",
+    "@types/node": "catalog:",
     "@types/path-browserify": "^1.0.3",
-    "@types/react": "^19.2.18",
+    "@types/react": "catalog:",
     "@types/source-map": "0.5.2",
-    "jest": "^30.5.0",
-    "jest-environment-jsdom": "^30.5.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
+    "jsdom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "redux": "^5.0.1",
-    "rimraf": "^6.1.3",
-    "ts-jest": "^29.4.12",
-    "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-7": "npm:typescript@7.0.2"
+    "rimraf": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "@emotion/react": "^11.14.0",

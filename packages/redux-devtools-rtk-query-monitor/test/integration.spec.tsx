@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi, type Mock } from 'vitest';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
@@ -27,15 +27,14 @@ function Providers({
 describe('rtk-query-monitor standalone integration', () => {
   // Hushes symbol.observable warning
   // @see https://github.com/reduxjs/redux-devtools/issues/1002
-  jest.spyOn(console, 'warn');
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  (console.warn as jest.Mock<void>).mockImplementation(() => {});
+  vi.spyOn(console, 'warn');
+  (console.warn as Mock).mockImplementation(() => {});
 
   const dataPanelDomId = '#rtk-query-monitor-tab-panel-0';
 
   const childrenTextContent = 'Renders children';
   const fetchBaseQueryMock: BaseQueryJestMockFunction<Record<string, unknown>> =
-    jest.fn((...fetchArgs) =>
+    vi.fn((...fetchArgs) =>
       Promise.resolve({
         data: {
           name: fetchArgs[0],
@@ -56,7 +55,7 @@ describe('rtk-query-monitor standalone integration', () => {
   });
 
   afterAll(() => {
-    (console.warn as jest.Mock<void>).mockRestore();
+    (console.warn as Mock).mockRestore();
   });
 
   it('renders on a standalone app without crashing', () => {

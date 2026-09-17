@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
 
 jobs:
   build:
@@ -24,9 +23,17 @@ jobs:
       - name: Build
         run: pnpm run build:all
       - name: Lint
-        run: pnpm run lint:all
-      - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+        run: pnpm run lint
       - name: Test
+        run: pnpm run test
+      - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      # setup-xvfb tokenizes `run` into arguments rather than passing it to a shell,
+      # so each command needs its own step.
+      - name: Test extension in Chrome
         uses: coactions/setup-xvfb@v1
         with:
-          run: pnpm run test:all
+          run: pnpm --filter remotedev-redux-devtools-extension run test:chrome
+      - name: Test extension in Electron
+        uses: coactions/setup-xvfb@v1
+        with:
+          run: pnpm --filter remotedev-redux-devtools-extension run test:electron

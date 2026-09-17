@@ -1,5 +1,4 @@
 // Based on https://github.com/gaearon/redux-devtools/pull/241
-/* eslint-disable no-param-reassign */
 
 import { State } from '../reducers/instances.js';
 

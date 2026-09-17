@@ -1,27 +1,23 @@
 {
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.29.7",
     "@changesets/cli": "^2.31.1",
-    "@eslint/js": "^9.39.5",
-    "eslint": "^9.39.5",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jest": "^29.16.5",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "jest": "^30.5.0",
-    "prettier": "3.9.6",
-    "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-eslint": "^8.68.0"
+    "jsdom": "catalog:",
+    "oxfmt": "^0.68.0",
+    "oxlint": "^1.83.0",
+    "oxlint-tsgolint": "^7.0.2001",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "scripts": {
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "build:all": "pnpm --recursive run build",
-    "lint:all": "pnpm --recursive run lint",
-    "test:all": "pnpm --recursive run test",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "clean:all": "pnpm --recursive run clean",
-    "release": "pnpm build:all && pnpm publish -r"
+    "release": "pnpm build:all && pnpm publish -r",
+    "test": "vitest --run"
   },
   "packageManager": "pnpm@11.24.0"
 }

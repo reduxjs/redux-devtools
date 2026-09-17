@@ -63,11 +63,9 @@ const stores: {
 let reportId: string | null | undefined;
 
 function deprecateParam(oldParam: string, newParam: string) {
-  /* eslint-disable no-console */
   console.warn(
     `${oldParam} parameter is deprecated, use ${newParam} instead: https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/API/Arguments.md`,
   );
-  /* eslint-enable no-console */
 }
 
 export interface SerializeWithImmutable extends Serialize {
@@ -153,9 +151,7 @@ declare global {
 function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
   config?: Config,
 ): StoreEnhancer {
-  /* eslint-disable no-param-reassign */
   if (typeof config !== 'object') config = {};
-  /* eslint-enable no-param-reassign */
   if (!window.devToolsOptions) window.devToolsOptions = {} as any;
 
   let store: EnhancedStoreWithInitialDispatch<S, A, unknown>;
@@ -588,8 +584,7 @@ export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
   ? HeadStoreEnhancer extends StoreEnhancer<infer StoreExt>
     ? StoreExt & InferComposedStoreExt<RestStoreEnhancers>
     : never
-  : // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    {};
+  : {};
 
 const extensionCompose =
   (config: Config) =>
