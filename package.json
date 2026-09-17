@@ -7,12 +7,11 @@
     "oxfmt": "^0.68.0",
     "oxlint": "^1.83.0",
     "oxlint-tsgolint": "^7.0.2001",
-    "prettier": "3.9.6",
     "typescript": "catalog:"
   },
   "scripts": {
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "build:all": "pnpm --recursive run build",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
