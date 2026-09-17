@@ -29,7 +29,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "vitest --run --project map2tree",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
@@ -37,12 +37,9 @@
     "lodash-es": "^4.18.1"
   },
   "devDependencies": {
-    "@types/jest": "catalog:",
     "@types/lodash-es": "^4.17.12",
     "immutable": "^5.1.9",
-    "jest": "catalog:",
     "rimraf": "catalog:",
-    "ts-jest": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }

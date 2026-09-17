@@ -32,7 +32,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "vitest --run --project react-json-tree",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
@@ -41,12 +41,9 @@
     "react-base16-styling": "workspace:^"
   },
   "devDependencies": {
-    "@types/jest": "catalog:",
     "@types/react": "catalog:",
-    "jest": "catalog:",
     "react": "catalog:",
     "rimraf": "catalog:",
-    "ts-jest": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

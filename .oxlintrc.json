@@ -3,7 +3,7 @@
   "options": {
     "typeAware": true
   },
-  "plugins": ["typescript", "react", "jsx-a11y", "import", "jest"],
+  "plugins": ["typescript", "react", "jsx-a11y", "import", "vitest"],
   "categories": {
     "correctness": "error"
   },
@@ -59,11 +59,12 @@
       "files": ["**/test/**"],
       "rules": {
         "no-unused-expressions": "off",
-        "jest/expect-expect": [
+        "vitest/expect-expect": [
           "error",
           { "assertFunctionNames": ["expect", "runTest", "request.**.expect"] }
         ],
-        "jest/prefer-snapshot-hint": "off"
+        "vitest/prefer-snapshot-hint": "off",
+        "vitest/require-mock-type-parameters": "off"
       }
     },
     {

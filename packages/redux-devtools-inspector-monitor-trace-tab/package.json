@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "vitest --run --project trace-tab",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
@@ -39,19 +39,15 @@
     "@testing-library/dom": "catalog:",
     "@testing-library/react": "catalog:",
     "@types/babel__code-frame": "^7.27.0",
-    "@types/jest": "catalog:",
     "@types/node": "catalog:",
     "@types/path-browserify": "^1.0.3",
     "@types/react": "catalog:",
     "@types/source-map": "0.5.2",
-    "jest": "catalog:",
-    "jest-environment-jsdom": "catalog:",
     "jsdom": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "redux": "^5.0.1",
     "rimraf": "catalog:",
-    "ts-jest": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

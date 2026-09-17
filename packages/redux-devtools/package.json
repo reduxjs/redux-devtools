@@ -30,7 +30,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "vitest --run --project core",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
@@ -38,17 +38,13 @@
     "@redux-devtools/instrument": "workspace:^"
   },
   "devDependencies": {
-    "@jest/globals": "catalog:",
-    "@types/jest": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
-    "jest": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-redux": "^9.3.0",
     "redux": "^5.0.1",
     "rimraf": "catalog:",
-    "ts-jest": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

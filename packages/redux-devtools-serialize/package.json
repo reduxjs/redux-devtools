@@ -26,7 +26,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "vitest --run --project serialize",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
@@ -34,12 +34,9 @@
     "jsan": "^3.1.14"
   },
   "devDependencies": {
-    "@types/jest": "catalog:",
     "@types/jsan": "^3.1.5",
     "immutable": "^5.1.9",
-    "jest": "catalog:",
     "rimraf": "catalog:",
-    "ts-jest": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

@@ -30,19 +30,15 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "vitest --run --project instrument",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
   "devDependencies": {
-    "@jest/globals": "catalog:",
-    "@types/jest": "catalog:",
     "@types/node": "catalog:",
-    "jest": "catalog:",
     "redux": "^5.0.1",
     "rimraf": "catalog:",
     "rxjs": "^7.8.2",
-    "ts-jest": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

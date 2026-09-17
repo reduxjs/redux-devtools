@@ -28,7 +28,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "vitest --run --project react-base16-styling",
     "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
@@ -40,13 +40,9 @@
   },
   "devDependencies": {
     "@types/color": "^4.2.1",
-    "@types/jest": "catalog:",
     "@types/lodash-es": "^4.17.12",
-    "jest": "catalog:",
-    "jest-environment-jsdom": "catalog:",
     "jsdom": "catalog:",
     "rimraf": "catalog:",
-    "ts-jest": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }
