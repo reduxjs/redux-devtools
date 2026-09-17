@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.esm.react.base.json",
+  "extends": "../../tsconfig.lib.json",
   "compilerOptions": {
     "types": ["vitest/globals", "node", "chrome"]
   },

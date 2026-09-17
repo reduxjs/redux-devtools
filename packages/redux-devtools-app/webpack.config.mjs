@@ -1,17 +1,18 @@
-import * as path from 'path';
+import * as path from 'node:path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-export default (
-  env: { development?: boolean; platform?: string } = {},
-): webpack.Configuration => ({
+/**
+ * @param {{ development?: boolean; platform?: string }} env
+ * @returns {import('webpack').Configuration}
+ */
+export default (env = {}) => ({
   mode: env.development ? 'development' : 'production',
   entry: {
     app: './demo/index',
   },
   output: {
-    path: path.resolve(import.meta.dirname, `build/${env.platform as string}`),
+    path: path.resolve(import.meta.dirname, `build/${env.platform}`),
     publicPath: '',
     filename: 'js/[name].js',
     sourceMapFilename: 'js/[name].map',
@@ -51,11 +52,6 @@ export default (
     }),
     new HtmlWebpackPlugin({
       template: 'assets/index.html',
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      typescript: {
-        configFile: 'tsconfig.demo.json',
-      },
     }),
   ],
   optimization: {

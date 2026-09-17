@@ -1,10 +1,8 @@
-import * as path from 'path';
-import * as webpack from 'webpack';
+import * as path from 'node:path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import pkg from '@redux-devtools/inspector-monitor/package.json';
 
-const config: webpack.Configuration = {
+/** @type {import('webpack').Configuration} */
+const config = {
   mode: 'development',
   entry: './src/index.tsx',
   devtool: 'eval-source-map',
@@ -14,13 +12,11 @@ const config: webpack.Configuration = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
-      package: pkg,
     }),
-    new ForkTsCheckerWebpackPlugin(),
   ],
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, 'dist'),
+    path: path.join(import.meta.dirname, 'dist'),
     clean: true,
   },
   module: {
@@ -38,6 +34,10 @@ const config: webpack.Configuration = {
             ],
           },
         },
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

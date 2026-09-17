@@ -4,8 +4,8 @@
   "version": "0.1.14",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
-    "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
+    "start": "webpack serve --open",
+    "build": "webpack",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -30,16 +30,12 @@
     "@babel/preset-react": "catalog:",
     "@babel/preset-typescript": "catalog:",
     "@types/lodash.shuffle": "^4.2.9",
-    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/redux-logger": "^3.0.13",
     "@types/webpack-env": "catalog:",
     "babel-loader": "catalog:",
-    "cross-env": "catalog:",
-    "fork-ts-checker-webpack-plugin": "catalog:",
     "html-webpack-plugin": "catalog:",
-    "ts-node": "catalog:",
     "typescript": "catalog:",
     "webpack": "catalog:",
     "webpack-cli": "catalog:",

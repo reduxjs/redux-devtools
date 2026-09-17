@@ -9,8 +9,8 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
-    "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
+    "start": "webpack serve --open",
+    "build": "webpack",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -33,17 +33,13 @@
     "@babel/preset-env": "catalog:",
     "@babel/preset-react": "catalog:",
     "@babel/preset-typescript": "catalog:",
-    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/webpack-env": "catalog:",
     "babel-loader": "catalog:",
-    "cross-env": "catalog:",
     "css-loader": "catalog:",
-    "fork-ts-checker-webpack-plugin": "catalog:",
     "html-webpack-plugin": "catalog:",
     "style-loader": "catalog:",
-    "ts-node": "catalog:",
     "typescript": "catalog:",
     "webpack": "catalog:",
     "webpack-cli": "catalog:",
