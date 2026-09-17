@@ -38,11 +38,6 @@ export default defineConfig({
       e2eProject('e2e-chrome', ['test-e2e/chrome/**/*.test.?(c|m)[jt]s?(x)']),
       e2eProject('e2e-firefox', ['test-e2e/firefox/**/*.test.?(c|m)[jt]s?(x)']),
       e2eProject(
-        'extension-chrome',
-        ['test/chrome/**/*.spec.?(c|m)[jt]s?(x)'],
-        50_000,
-      ),
-      e2eProject(
         'extension-electron',
         ['test/electron/**/*.spec.?(c|m)[jt]s?(x)'],
         50_000,

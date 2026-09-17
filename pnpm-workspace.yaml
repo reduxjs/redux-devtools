@@ -27,7 +27,6 @@ catalog:
   '@types/react-dom': ^19.2.5
   '@types/webpack-env': ^1.18.8
   babel-loader: ^10.1.1
-  cross-env: ^10.1.0
   css-loader: ^7.1.5
   html-webpack-plugin: ^5.6.8
   puppeteer-core: ^25.11.0
@@ -43,7 +42,6 @@ catalog:
 allowBuilds:
   '@apollo/protobufjs': true
   '@parcel/watcher': true
-  chromedriver: true
   esbuild: true
   msw: true
   sqlite3: true
