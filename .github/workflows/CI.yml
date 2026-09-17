@@ -94,14 +94,33 @@ jobs:
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: extension-dist
-          path: extension/dist
+          path: |
+            extension/dist
+            extension/firefox/dist
           retention-days: 1
 
   test-extension-browser:
-    name: Test extension in Chrome and Electron
+    name: Test extension (${{ matrix.browser }} ${{ matrix.channel }})
     needs: [changes, build]
     if: needs.changes.outputs.code == 'true'
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - browser: chrome
+            channel: stable
+            electron: true
+          - browser: chrome
+            channel: beta
+            electron: false
+          - browser: firefox
+            channel: stable
+            electron: false
+    env:
+      CHROME_CHANNEL: ${{ matrix.channel }}
+      FIREFOX_CHANNEL: ${{ matrix.channel }}
+      PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -121,18 +140,27 @@ jobs:
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: extension-dist
-          path: extension/dist
+          path: extension
 
+      # Browsers are downloaded by @puppeteer/browsers on first use; keep them
+      # between runs. The key changes every run so the newest builds get saved.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ env.PUPPETEER_CACHE_DIR }}
+          key: browsers-${{ runner.os }}-${{ matrix.browser }}-${{ matrix.channel }}-${{ github.run_id }}
+          restore-keys: browsers-${{ runner.os }}-${{ matrix.browser }}-${{ matrix.channel }}-
+
+      # Chrome's user-namespace sandbox is blocked by default on Ubuntu 24.04.
       - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
-      # setup-xvfb tokenizes `run` into arguments rather than passing it to a shell,
-      # so each command needs its own step.
-      - name: Run Selenium tests in Chrome
+      # xvfb is needed because the docked-DevTools test runs headful, and Electron needs a display.
+      - name: Run Puppeteer e2e tests
         uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
         with:
-          run: pnpm --filter remotedev-redux-devtools-extension run test:chrome
+          run: pnpm --filter remotedev-redux-devtools-extension run test:e2e:${{ matrix.browser }}
 
       - name: Run Electron tests
+        if: matrix.electron
         uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
         with:
           run: pnpm --filter remotedev-redux-devtools-extension run test:electron
