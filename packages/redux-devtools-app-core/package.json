@@ -9,10 +9,8 @@
   "license": "MIT",
   "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
   "files": [
-    "build",
     "lib",
-    "src",
-    "umd"
+    "src"
   ],
   "exports": "./lib/index.js",
   "type": "module",
@@ -62,8 +60,6 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "cross-env": "catalog:",
-    "esbuild": "^0.28.2",
     "jest": "catalog:",
     "jest-environment-jsdom": "catalog:",
     "react": "catalog:",
@@ -73,7 +69,6 @@
     "redux-persist": "^6.0.0",
     "rimraf": "catalog:",
     "ts-jest": "catalog:",
-    "ts-node": "^10.9.2",
     "typescript": "catalog:"
   },
   "peerDependencies": {
