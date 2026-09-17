@@ -24,8 +24,10 @@ jobs:
         run: pnpm run build:all
       - name: Lint
         run: pnpm run lint
-      - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Test
+        run: pnpm run test
+      - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - name: Test extension in Chrome and Electron
         uses: coactions/setup-xvfb@v1
         with:
-          run: pnpm run test
+          run: pnpm --filter remotedev-redux-devtools-extension run test:chrome && pnpm --filter remotedev-redux-devtools-extension run test:electron
