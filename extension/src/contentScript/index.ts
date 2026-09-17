@@ -217,12 +217,15 @@ interface SplitMessageEnd extends SplitMessageBase {
 }
 
 export type SplitMessage =
-  SplitMessageStart | SplitMessageChunk | SplitMessageEnd;
+  | SplitMessageStart
+  | SplitMessageChunk
+  | SplitMessageEnd;
 
 function tryCatch<S, A extends Action<string>>(
   fn: (
     args:
-      PageScriptToContentScriptMessageWithoutDisconnect<S, A> | SplitMessage,
+      | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
+      | SplitMessage,
   ) => void,
   args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>,
 ) {
@@ -284,7 +287,8 @@ interface RelayMessage<S, A extends Action<string>> {
 }
 
 export type ContentScriptToBackgroundMessage<S, A extends Action<string>> =
-  InitInstanceContentScriptToBackgroundMessage | RelayMessage<S, A>;
+  | InitInstanceContentScriptToBackgroundMessage
+  | RelayMessage<S, A>;
 
 function postToBackground<S, A extends Action<string>>(
   message: ContentScriptToBackgroundMessage<S, A>,
@@ -294,7 +298,8 @@ function postToBackground<S, A extends Action<string>>(
 
 function send<S, A extends Action<string>>(
   message:
-    PageScriptToContentScriptMessageWithoutDisconnect<S, A> | SplitMessage,
+    | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
+    | SplitMessage,
 ) {
   if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {

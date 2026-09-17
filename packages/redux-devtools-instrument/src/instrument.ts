@@ -1018,11 +1018,11 @@ export function instrument<
   }
 
   return <
-      NextExt extends NonNullable<unknown>,
-      NextStateExt extends NonNullable<unknown>,
-    >(
-      createStore: StoreEnhancerStoreCreator<NextExt, NextStateExt>,
-    ) =>
+    NextExt extends NonNullable<unknown>,
+    NextStateExt extends NonNullable<unknown>,
+  >(
+    createStore: StoreEnhancerStoreCreator<NextExt, NextStateExt>,
+  ) =>
     <S, A extends Action<string>, PreloadedState>(
       reducer: Reducer<S, A, PreloadedState>,
       initialState?: PreloadedState | undefined,

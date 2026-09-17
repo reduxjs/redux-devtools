@@ -30,7 +30,9 @@ function counter(state = 0, action: CounterAction) {
 }
 
 type CounterWithBugAction =
-  { type: 'INCREMENT' } | { type: 'DECREMENT' } | { type: 'SET_UNDEFINED' };
+  | { type: 'INCREMENT' }
+  | { type: 'DECREMENT' }
+  | { type: 'SET_UNDEFINED' };
 function counterWithBug(state = 0, action: CounterWithBugAction) {
   switch (action.type) {
     case 'INCREMENT':
@@ -46,7 +48,9 @@ function counterWithBug(state = 0, action: CounterWithBugAction) {
 }
 
 type CounterWithAnotherBugAction =
-  { type: 'INCREMENT' } | { type: 'DECREMENT' } | { type: 'SET_UNDEFINED' };
+  | { type: 'INCREMENT' }
+  | { type: 'DECREMENT' }
+  | { type: 'SET_UNDEFINED' };
 function counterWithAnotherBug(state = 0, action: CounterWithBugAction) {
   switch (action.type) {
     case 'INCREMENT':
@@ -74,7 +78,9 @@ function doubleCounter(state = 0, action: DoubleCounterAction) {
 }
 
 type CounterWithMultiplyAction =
-  { type: 'INCREMENT' } | { type: 'DECREMENT' } | { type: 'MULTIPLY' };
+  | { type: 'INCREMENT' }
+  | { type: 'DECREMENT' }
+  | { type: 'MULTIPLY' };
 function counterWithMultiply(state = 0, action: CounterWithMultiplyAction) {
   switch (action.type) {
     case 'INCREMENT':

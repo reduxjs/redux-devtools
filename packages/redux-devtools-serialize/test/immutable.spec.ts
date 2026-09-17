@@ -155,7 +155,8 @@ describe('Immutable', function () {
           expect(
             (
               deserializedDefault as
-                Map<unknown, unknown> | OrderedMap<unknown, unknown>
+                | Map<unknown, unknown>
+                | OrderedMap<unknown, unknown>
             ).get('a'),
           ).toEqual(customOneRepresentation);
         }

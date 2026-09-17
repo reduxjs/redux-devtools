@@ -86,7 +86,10 @@ interface RequestWithData extends RequestBase {
   data: Request;
 }
 type MonitoringRequest =
-  DisconnectedAction | StartAction | ErrorAction | Request;
+  | DisconnectedAction
+  | StartAction
+  | ErrorAction
+  | Request;
 
 function monitoring(request: MonitoringRequest) {
   if (request.type === 'DISCONNECTED') {

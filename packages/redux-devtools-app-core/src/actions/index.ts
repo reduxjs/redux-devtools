@@ -143,7 +143,8 @@ interface ReorderActionAction {
 interface ImportStateAction {
   type: 'IMPORT_STATE';
   nextLiftedState:
-    LiftedState<unknown, Action<string>, unknown> | readonly Action<string>[];
+    | LiftedState<unknown, Action<string>, unknown>
+    | readonly Action<string>[];
   preloadedState?: unknown;
   noRecompute?: boolean | undefined;
 }
@@ -509,10 +510,13 @@ export type CoreStoreActionWithoutUpdateStateOrLiftedAction =
   | ReduxPersistRehydrateAction;
 
 export type CoreStoreActionWithoutUpdateState =
-  CoreStoreActionWithoutUpdateStateOrLiftedAction | LiftedActionAction;
+  | CoreStoreActionWithoutUpdateStateOrLiftedAction
+  | LiftedActionAction;
 
 export type CoreStoreActionWithoutLiftedAction =
-  CoreStoreActionWithoutUpdateStateOrLiftedAction | UpdateStateAction;
+  | CoreStoreActionWithoutUpdateStateOrLiftedAction
+  | UpdateStateAction;
 
 export type CoreStoreAction =
-  CoreStoreActionWithoutUpdateState | UpdateStateAction;
+  | CoreStoreActionWithoutUpdateState
+  | UpdateStateAction;

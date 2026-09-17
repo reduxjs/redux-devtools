@@ -33,7 +33,8 @@ function isThemeFromProvider(
 
 export default function createStyledComponent<
   C extends
-    keyof React.JSX.IntrinsicElements | React.JSXElementConstructor<any>,
+    | keyof React.JSX.IntrinsicElements
+    | React.JSXElementConstructor<any>,
   O extends object,
 >(
   styles: Styles<PropsOf<C> & O & { theme: Theme }>,
