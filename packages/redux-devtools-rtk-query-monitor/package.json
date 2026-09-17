@@ -58,19 +58,21 @@
     "@testing-library/dom": "catalog:",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
-    "@types/jest": "catalog:",
     "@types/hex-rgba": "^1.0.3",
+    "@types/jest": "catalog:",
     "@types/lodash.debounce": "^4.0.9",
     "@types/react": "catalog:",
     "jest": "catalog:",
     "jest-environment-jsdom": "catalog:",
+    "jsdom": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-redux": "^9.3.0",
     "redux": "^5.0.1",
     "rimraf": "catalog:",
     "ts-jest": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "@emotion/react": "^11.14.0",

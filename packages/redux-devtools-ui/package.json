@@ -62,12 +62,13 @@
     "@testing-library/react": "catalog:",
     "@testing-library/user-event": "^14.6.6",
     "@types/color": "^4.2.1",
-    "@types/node": "catalog:",
     "@types/jest": "catalog:",
+    "@types/node": "catalog:",
     "@types/react": "catalog:",
     "csstype": "^3.2.3",
     "jest": "catalog:",
     "jest-environment-jsdom": "catalog:",
+    "jsdom": "catalog:",
     "ncp": "^2.0.0",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -76,7 +77,8 @@
     "storybook": "^10.5.10",
     "ts-jest": "catalog:",
     "typescript": "catalog:",
-    "vite": "^8.2.2"
+    "vite": "^8.2.2",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "@emotion/react": "^11.14.0",

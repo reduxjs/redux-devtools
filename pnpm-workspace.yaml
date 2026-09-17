@@ -12,6 +12,8 @@ packages:
   - packages/redux-devtools-slider-monitor/examples/todomvc
 
 catalog:
+  jsdom: ^30.0.1
+  vitest: ^4.1.11
   '@babel/core': ^7.29.7
   '@babel/preset-env': ^7.29.7
   '@babel/preset-react': ^7.29.7

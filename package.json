@@ -4,10 +4,12 @@
     "@babel/core": "catalog:",
     "@changesets/cli": "^2.31.1",
     "jest": "catalog:",
+    "jsdom": "catalog:",
     "oxfmt": "^0.68.0",
     "oxlint": "^1.83.0",
     "oxlint-tsgolint": "^7.0.2001",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "scripts": {
     "format": "oxfmt",
