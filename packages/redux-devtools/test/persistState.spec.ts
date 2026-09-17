@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import { instrument, persistState } from '../src/index.js';
 import { compose, createStore, StoreEnhancer } from 'redux';
 
@@ -130,7 +130,7 @@ describe('persistState', () => {
   });
 
   it('should warn if read from localStorage fails', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    const spy = vi.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
     // @ts-ignore
@@ -148,7 +148,7 @@ describe('persistState', () => {
   });
 
   it('should warn if write to localStorage fails', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    const spy = vi.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
     // @ts-ignore

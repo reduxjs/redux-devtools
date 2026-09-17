@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import {
   createStore,
   compose,
@@ -346,7 +346,7 @@ describe('instrument', () => {
   });
 
   it('should catch and record errors', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {
       // noop
     });
     const storeWithBug = createStore(
@@ -558,7 +558,7 @@ describe('instrument', () => {
     });
 
     it('should not auto-commit errors', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -576,7 +576,7 @@ describe('instrument', () => {
     });
 
     it('should auto-commit actions after hot reload fixes error', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -637,7 +637,7 @@ describe('instrument', () => {
     });
 
     it('should continue to increment currentStateIndex while error blocks commit', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -661,7 +661,7 @@ describe('instrument', () => {
     });
 
     it('should adjust currentStateIndex correctly when multiple actions are committed', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -693,7 +693,7 @@ describe('instrument', () => {
     });
 
     it('should not allow currentStateIndex to drop below 0', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -727,7 +727,7 @@ describe('instrument', () => {
 
     it('should use dynamic maxAge', () => {
       let max = 3;
-      const getMaxAge = jest.fn().mockImplementation(() => max);
+      const getMaxAge = vi.fn().mockImplementation(() => max);
       store = createStore(
         counter,
         instrument(undefined, { maxAge: getMaxAge }),

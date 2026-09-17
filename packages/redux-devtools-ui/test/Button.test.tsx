@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -11,7 +11,7 @@ describe('Button', function () {
   });
 
   it('should handle the click event', async () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<Button onClick={onClick}>ClickMe</Button>);
 
     await userEvent.click(screen.getByRole('button'));

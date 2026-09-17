@@ -1,3 +1,4 @@
+import type { Mock } from 'vitest';
 import {
   combineReducers,
   configureStore,
@@ -13,10 +14,7 @@ export type MockBaseQuery<
   Meta = { status?: number },
 > = BaseQueryFn<Args, Result, unknown, Meta>;
 
-export type BaseQueryJestMockFunction<Result> = jest.Mock<
-  ReturnType<MockBaseQuery<Result>>,
-  Parameters<MockBaseQuery<Result>>
->;
+export type BaseQueryJestMockFunction<Result> = Mock<MockBaseQuery<Result>>;
 
 export function createMockBaseQuery<Result>(
   jestMockFn: BaseQueryJestMockFunction<Result>,

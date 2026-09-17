@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -19,7 +19,7 @@ describe('SegmentedControl', function () {
     expect(container.firstChild).toMatchSnapshot();
   });
   it('should handle the click event', async () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(
       <SegmentedControl
         values={['Button1', 'Button2', 'Button3']}

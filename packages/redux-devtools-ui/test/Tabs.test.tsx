@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -45,7 +45,7 @@ describe('Tabs', function () {
   });
 
   it('should select tab', async () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<Tabs tabs={tabs} onClick={onClick} />);
 
     await userEvent.click(screen.getByRole('button', { name: 'Tab1' }));
