@@ -495,17 +495,23 @@ function messaging<S, A extends Action<string>>(
 function disconnect(
   type: 'tab' | 'panel',
   id: number | string,
+  port: chrome.runtime.Port,
   listener: (message: any, port: chrome.runtime.Port) => void,
 ) {
   return function disconnectListener() {
     console.log(`Disconnected from ${type} ${id}`);
 
-    const p = connections[type][id];
-    if (listener && p) p.onMessage.removeListener(listener);
-    if (p) p.onDisconnect.removeListener(disconnectListener);
-    delete connections[type][id];
+    port.onMessage.removeListener(listener);
+    port.onDisconnect.removeListener(disconnectListener);
+
+    // A reloaded page or panel can connect under the same id before the old
+    // port's disconnect arrives. Only the port that still owns the slot may
+    // remove the instance.
+    const isCurrentPort = connections[type][id] === port;
+    if (isCurrentPort) delete connections[type][id];
+
     if (type === 'tab') {
-      if (!store.getState().instances.persisted) {
+      if (isCurrentPort && !store.getState().instances.persisted) {
         store.dispatch({ type: REMOVE_INSTANCE, id });
         toMonitors({ type: 'NA', id });
       }
@@ -558,7 +564,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
       }
     };
     port.onMessage.addListener(listener);
-    port.onDisconnect.addListener(disconnect('tab', id, listener));
+    port.onDisconnect.addListener(disconnect('tab', id, port, listener));
   } else if (port.name && port.name.indexOf('monitor') === 0) {
     // devpanel
     id = getId(port.sender!, port.name);
@@ -571,7 +577,7 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
       store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
-    port.onDisconnect.addListener(disconnect('panel', id, listener));
+    port.onDisconnect.addListener(disconnect('panel', id, port, listener));
 
     const { current } = store.getState().instances;
     if (current !== 'default') {
