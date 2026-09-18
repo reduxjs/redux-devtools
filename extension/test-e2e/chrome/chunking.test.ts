@@ -17,17 +17,14 @@ const MiB = 1024 * 1024;
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /**
- * P-1: the content script only chunks when `port.postMessage` throws the exact
- * string 'Message length exceeded maximum allowed length.'
- * (src/contentScript/index.ts, tryCatch). Chrome >= 149 throws a different
- * message, so any state whose serialized form is over the 64 MiB port limit
- * takes the generic error branch and the connection is dropped instead.
- *
- * These tests pin the current behavior and record the error string of the
- * Chrome build under test. Flip the "current behavior" assertions when
- * chunking is fixed.
+ * P-1 (#2072): a serialized state over Chrome's 64 MiB port limit must reach
+ * the panel through the chunked `split: start / chunk / end` path in both the
+ * content script (src/contentScript/index.ts) and the background
+ * (src/background/store/apiMiddleware.ts `toMonitors`). The decision to chunk
+ * is made from the message size before posting, so it does not depend on the
+ * wording of the error Chrome throws, which changed in Chrome 149.
  */
-describe('Tier 2: oversized payload / chunking (current behavior)', () => {
+describe('Tier 2: oversized payload / chunking', () => {
   let browser: Browser;
   let extensionId: string;
   let server: FixtureServer;
@@ -73,22 +70,16 @@ describe('Tier 2: oversized payload / chunking (current behavior)', () => {
       .toBe(4);
   });
 
-  it('a state over 64 MiB drops the connection instead of chunking (P-1)', async () => {
+  it('a state over 64 MiB is chunked and reaches the panel', async () => {
     const before = (await readFixtureMessages(page)).length;
     await dispatchOnFixture(page, 'SET_BIG', { size: 65 * MiB });
 
-    // The pageScript relays the action after its 500ms throttle; the content
-    // script's postMessage then throws, the error string does not match, and
-    // handleDisconnect posts STOP { failed: true } back to the page.
     await expect
-      .poll(
-        async () =>
-          (await readFixtureMessages(page))
-            .slice(before)
-            .some((m) => m.type === 'STOP' && m.failed === true),
-        { timeout: 10_000 },
-      )
-      .toBe(true);
+      .poll(async () => (await readActionRows(panel)).length, {
+        timeout: 60_000,
+      })
+      .toBe(5);
+    expect((await readActionRows(panel))[4]).toContain('SET_BIG');
 
     const relayed = (await readFixtureMessages(page)).slice(before);
     const outgoing = relayed.find((m) => m.source === '@devtools-page');
@@ -99,23 +90,25 @@ describe('Tier 2: oversized payload / chunking (current behavior)', () => {
     );
     expect(payloadLength).toBeGreaterThan(64 * MiB);
 
-    // No chunked re-send happened: nothing after the ACTION except STOP.
-    expect(
-      relayed.filter((m) => m.source === '@devtools-page').map((m) => m.type),
-    ).toEqual(['ACTION']);
-
-    await sleep(1_000);
-    expect(await readActionRows(panel)).toHaveLength(4);
+    // The content script never told the page the connection failed.
+    expect(relayed.some((m) => m.type === 'STOP' && m.failed === true)).toBe(
+      false,
+    );
     expect(listServiceWorkerUrls(browser)).toHaveLength(1);
   });
 
-  it('the page is dead to the extension afterwards', async () => {
-    const before = (await readFixtureMessages(page)).length;
+  it('the page keeps relaying afterwards', async () => {
     await dispatchOnFixture(page, 'CLEAR_BIG');
     await dispatchOnFixture(page, 'INCREMENT');
-    await sleep(1_000);
-    expect((await readFixtureMessages(page)).length).toBe(before);
-    expect(await readActionRows(panel)).toHaveLength(4);
+    await expect
+      .poll(async () => (await readActionRows(panel)).length, {
+        timeout: 20_000,
+      })
+      .toBe(7);
+    await sleep(500);
+    const rows = await readActionRows(panel);
+    expect(rows[5]).toContain('CLEAR_BIG');
+    expect(rows[6]).toContain('INCREMENT');
   });
 
   it('records the size-limit error string Chrome throws on this build', async () => {
@@ -129,9 +122,7 @@ describe('Tier 2: oversized payload / chunking (current behavior)', () => {
     expect(message).not.toBe('no error thrown');
     // Pre-149 Chrome: 'Message length exceeded maximum allowed length.'
     // Chrome >= 149: 'Message exceeded maximum allowed size of 64MiB.'
+    // The fallback matcher in src/utils/splitMessage.ts accepts both.
     expect(message).toMatch(/maximum allowed (length|size)/i);
-    // Current code only handles the old wording. This assertion fails on
-    // Chrome < 149; on any current build it documents the P-1 mismatch.
-    expect(message).not.toBe('Message length exceeded maximum allowed length.');
   });
 });

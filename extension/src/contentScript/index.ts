@@ -18,11 +18,14 @@ import {
   DispatchAction as AppDispatchAction,
 } from '@redux-devtools/app';
 import { LiftedState } from '@redux-devtools/instrument';
+import {
+  exceedsChromeMsgSize,
+  isMessageSizeError,
+  splitMessage,
+} from '../utils/splitMessage.js';
 
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';
-// Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
-const maxChromeMsgSize = 32 * 1024 * 1024;
 let connected = false;
 let bg: chrome.runtime.Port | undefined;
 
@@ -195,24 +198,20 @@ function handleDisconnect() {
 
 interface SplitMessageBase {
   readonly type?: never;
+  readonly instanceId: number | undefined;
+  readonly source: typeof pageSource;
 }
 
 interface SplitMessageStart extends SplitMessageBase {
-  readonly instanceId: number;
-  readonly source: typeof pageSource;
   readonly split: 'start';
 }
 
 interface SplitMessageChunk extends SplitMessageBase {
-  readonly instanceId: number;
-  readonly source: typeof pageSource;
   readonly split: 'chunk';
   readonly chunk: [string, string];
 }
 
 interface SplitMessageEnd extends SplitMessageBase {
-  readonly instanceId: number;
-  readonly source: typeof pageSource;
   readonly split: 'end';
 }
 
@@ -221,53 +220,47 @@ export type SplitMessage =
   | SplitMessageChunk
   | SplitMessageEnd;
 
-function tryCatch<S, A extends Action<string>>(
-  fn: (
-    args:
-      | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
-      | SplitMessage,
-  ) => void,
+type SendableMessage<S, A extends Action<string>> =
+  | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
+  | SplitMessage;
+
+function sendInChunks<S, A extends Action<string>>(
+  fn: (args: SendableMessage<S, A>) => void,
   args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>,
 ) {
+  const instanceId = 'instanceId' in args ? args.instanceId : undefined;
+  const { start, chunks } = splitMessage(args);
+  fn(start as unknown as SplitMessageStart);
+  for (const chunk of chunks) {
+    fn({ instanceId, source: pageSource, split: 'chunk', chunk });
+  }
+  fn({ instanceId, source: pageSource, split: 'end' });
+}
+
+function tryCatch<S, A extends Action<string>>(
+  fn: (args: SendableMessage<S, A>) => void,
+  args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>,
+) {
+  const chunked = exceedsChromeMsgSize(args);
   try {
-    return fn(args);
-  } catch (err) {
-    if (
-      (err as Error).message ===
-      'Message length exceeded maximum allowed length.'
-    ) {
-      const instanceId = (args as any).instanceId;
-      const newArgs = {
-        split: 'start',
-      };
-      const toSplit: [string, string][] = [];
-      let size = 0;
-      let arg;
-      Object.keys(args).map((key) => {
-        arg = args[key as keyof typeof args];
-        if (typeof arg === 'string') {
-          size += arg.length;
-          if (size > maxChromeMsgSize) {
-            toSplit.push([key, arg]);
-            return;
-          }
-        }
-        newArgs[key as keyof typeof newArgs] = arg;
-      });
-      fn(newArgs as SplitMessage);
-      for (let i = 0; i < toSplit.length; i++) {
-        for (let j = 0; j < toSplit[i][1].length; j += maxChromeMsgSize) {
-          fn({
-            instanceId,
-            source: pageSource,
-            split: 'chunk',
-            chunk: [toSplit[i][0], toSplit[i][1].substr(j, maxChromeMsgSize)],
-          });
-        }
-      }
-      return fn({ instanceId, source: pageSource, split: 'end' });
+    if (chunked) {
+      sendInChunks(fn, args);
+    } else {
+      fn(args);
     }
-    handleDisconnect();
+    return;
+  } catch (err) {
+    if (!chunked && isMessageSizeError(err)) {
+      try {
+        sendInChunks(fn, args);
+        return;
+      } catch (chunkErr) {
+        err = chunkErr;
+      }
+    }
+    // Drop this message but keep relaying. Tearing the connection down here
+    // left the page permanently detached; a real port loss is reported through
+    // bg.onDisconnect instead.
     if (process.env.NODE_ENV !== 'production') {
       console.error('Failed to send message', err);
     }
