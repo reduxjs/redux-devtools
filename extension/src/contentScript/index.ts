@@ -242,6 +242,7 @@ function tryCatch<S, A extends Action<string>>(
   args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>,
 ) {
   const chunked = exceedsChromeMsgSize(args);
+  let failure: unknown;
   try {
     if (chunked) {
       sendInChunks(fn, args);
@@ -250,20 +251,21 @@ function tryCatch<S, A extends Action<string>>(
     }
     return;
   } catch (err) {
+    failure = err;
     if (!chunked && isMessageSizeError(err)) {
       try {
         sendInChunks(fn, args);
         return;
       } catch (chunkErr) {
-        err = chunkErr;
+        failure = chunkErr;
       }
     }
-    // Drop this message but keep relaying. Tearing the connection down here
-    // left the page permanently detached; a real port loss is reported through
-    // bg.onDisconnect instead.
-    if (process.env.NODE_ENV !== 'production') {
-      console.error('Failed to send message', err);
-    }
+  }
+  // Drop this message but keep relaying. Tearing the connection down here
+  // left the page permanently detached; a real port loss is reported through
+  // bg.onDisconnect instead.
+  if (process.env.NODE_ENV !== 'production') {
+    console.error('Failed to send message', failure);
   }
 }
 
