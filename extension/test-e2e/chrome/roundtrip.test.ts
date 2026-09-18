@@ -97,8 +97,8 @@ describe('Tier 2: panel to page round trip', () => {
   });
 
   it('a new page dispatch after panel edits builds on the recomputed state', async () => {
-    // Let pageScript's 500ms `relayState` throttle drain first; see the
-    // "known defect" test below for what happens if we do not.
+    // Let pageScript's 500ms `relayState` throttle drain first so this test
+    // measures the plain path; the next test covers the overlapping case.
     await sleep(RELAY_LATENCY_MS + 200);
     await dispatchOnFixture(page, 'DECREMENT');
     expect(await readFixtureCount(page)).toBe(1);
@@ -112,16 +112,14 @@ describe('Tier 2: panel to page round trip', () => {
   });
 
   /**
-   * Known defect (pageScript/index.ts `relayState`, ~L180). `relayState` is a
-   * lodash throttle and `handleChange` hands it a lifted-state snapshot. Two
-   * monitor actions inside the 500ms window make the second one fire on the
-   * trailing edge with the stale snapshot, and that trailing call also runs
-   * `relayAction.cancel()`. A page action dispatched in between is relayed,
-   * then overwritten by the stale STATE, so the panel loses it and
-   * `sendingActionId` falls behind the store until the next action arrives.
-   * Flip the row count to 6 once `relayState` reads the store at invoke time.
+   * `relayState` (pageScript/index.ts) is a lodash throttle. Two monitor
+   * actions inside the 500ms window make the second one fire on the trailing
+   * edge, and that trailing call also runs `relayAction.cancel()`. The
+   * trailing STATE must be built from the store at invoke time, so a page
+   * action dispatched in between is kept rather than overwritten by a stale
+   * snapshot.
    */
-  it('KNOWN DEFECT: two quick panel edits then a page dispatch drop the new action from the panel', async () => {
+  it('two quick panel edits then a page dispatch keep the new action in the panel', async () => {
     await sleep(RELAY_LATENCY_MS + 200);
     const countBefore = await readFixtureCount(page);
     const rowsBefore = (await readActionRows(panel)).length;
@@ -167,9 +165,7 @@ describe('Tier 2: panel to page round trip', () => {
       return win.__fixture.store.liftedStore.getState().nextActionId;
     });
     expect(storeNextActionId).toBe(6);
-    // Stale snapshot went out after the ACTION for id 5.
-    expect(lastState?.nextActionId).toBe(5);
-    // Panel is left one action behind the page.
-    expect((await readActionRows(panel)).length).toBe(5);
+    expect(lastState?.nextActionId).toBe(6);
+    expect((await readActionRows(panel)).length).toBe(6);
   });
 });
