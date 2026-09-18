@@ -40,17 +40,28 @@ function panelDispatcher(
   bgConnection: chrome.runtime.Port,
 ): Middleware<{}, StoreState, Dispatch<StoreAction>> {
   let autoselected = false;
+  let userChoseAutoselect = false;
 
   return (store) => (next) => (untypedAction) => {
     const action = untypedAction as StoreAction;
 
-    const result = next(action);
-    if (!autoselected && action.type === UPDATE_STATE) {
-      autoselected = true;
+    if (action.type === SELECT_INSTANCE) {
+      userChoseAutoselect = !action.selected;
+    }
 
-      if (chrome.devtools && chrome.devtools.inspectedWindow) {
-        selectInstance(chrome.devtools.inspectedWindow.tabId, store, next);
-      } else {
+    const result = next(action);
+    if (action.type === UPDATE_STATE) {
+      const inspectedTabId = chrome.devtools?.inspectedWindow?.tabId;
+      if (inspectedTabId !== undefined) {
+        // A devtools panel belongs to one tab. While no instance is picked
+        // explicitly, keep it pinned to that tab's store instead of following
+        // whichever tab dispatched last. A page reload removes the old
+        // instance and clears `selected`, so this re-pins to the new one.
+        if (!userChoseAutoselect && !store.getState().instances.selected) {
+          selectInstance(inspectedTabId, store, next);
+        }
+      } else if (!autoselected) {
+        autoselected = true;
         getCurrentTabId((tabId) => selectInstance(tabId, store, next));
       }
     }
