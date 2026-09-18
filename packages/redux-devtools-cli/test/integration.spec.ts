@@ -8,8 +8,17 @@ describe('Server', function () {
     scServer = childProcess.fork(
       import.meta.dirname + '/../bin/redux-devtools.js',
     );
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-  });
+    const deadline = Date.now() + 30000;
+    while (Date.now() < deadline) {
+      try {
+        await fetch('http://localhost:8000/');
+        return;
+      } catch {
+        await new Promise((resolve) => setTimeout(resolve, 250));
+      }
+    }
+    throw new Error('redux-devtools server did not start listening on :8000');
+  }, 35000);
 
   afterAll(function () {
     if (scServer) {
