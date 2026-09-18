@@ -32,7 +32,7 @@
     "start:electron": "node ./bin/redux-devtools.js --open",
     "clean": "rimraf dist",
     "test": "vitest --run --project cli",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
   "engines": {

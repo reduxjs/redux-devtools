@@ -20,7 +20,7 @@
     "build": "tsc",
     "clean": "rimraf lib",
     "test": "vitest --run --project trace-tab",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
