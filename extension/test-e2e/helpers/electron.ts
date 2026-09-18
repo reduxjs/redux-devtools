@@ -4,10 +4,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import puppeteer, {
   type Browser,
+  type Frame,
   type Page,
   type WebWorker,
 } from 'puppeteer-core';
-import { getBackgroundWorker } from './browser.js';
+import { getBackgroundWorker, showReduxPanel } from './browser.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const fixtureMain = path.resolve(here, '../electron/fixture/main.cjs');
@@ -25,6 +26,16 @@ export interface LaunchedElectron {
   close: () => Promise<void>;
 }
 
+export interface LaunchElectronOptions {
+  /**
+   * Open the fixture window's DevTools docked at the bottom instead of loading
+   * `devpanel.html` in a second window. Use `getDockedReduxPanel` to reach the
+   * panel afterwards.
+   */
+  dockedDevtools?: boolean;
+  timeout?: number;
+}
+
 /**
  * Starts the Electron fixture app with `--remote-debugging-port=0`, reads the
  * `DevTools listening on ws://...` line Chromium prints to stderr, and connects
@@ -33,13 +44,17 @@ export interface LaunchedElectron {
  */
 export async function launchElectronWithExtension(
   fixtureUrl: string,
-  timeout = 30_000,
+  { dockedDevtools = false, timeout = 30_000 }: LaunchElectronOptions = {},
 ): Promise<LaunchedElectron> {
   const child = spawn(
     electronPath,
     [fixtureMain, '--remote-debugging-port=0', '--no-sandbox'],
     {
-      env: { ...process.env, E2E_FIXTURE_URL: fixtureUrl },
+      env: {
+        ...process.env,
+        E2E_FIXTURE_URL: fixtureUrl,
+        E2E_DOCKED_DEVTOOLS: dockedDevtools ? '1' : '0',
+      },
       stdio: ['ignore', 'pipe', 'pipe'],
     },
   );
@@ -99,4 +114,51 @@ export async function findPageByUrl(
     throw new Error(`Target ${target.url()} has no Page handle`);
   }
   return page;
+}
+
+/**
+ * Finds the docked DevTools front-end that `openDevTools` created for the
+ * fixture window, selects the extension's "Redux" tab in it, and returns the
+ * `devpanel.html` frame. Electron reports the DevTools WebContents as an
+ * ordinary `devtools://` page target over `--remote-debugging-port`, so the
+ * same front-end scripting used for Chrome works here.
+ */
+export async function getDockedReduxPanel(
+  browser: Browser,
+  extensionId: string,
+  timeout = 15_000,
+): Promise<Frame> {
+  const target = await browser.waitForTarget(
+    (t) => t.type() === 'page' && t.url().startsWith('devtools://'),
+    { timeout },
+  );
+  const devtools = await target.page();
+  if (!devtools) {
+    throw new Error('DevTools target has no Page handle');
+  }
+  await waitForDevtoolsFrontend(devtools, timeout);
+  return showReduxPanel(devtools, extensionId);
+}
+
+/**
+ * `InspectorView.instance()` throws until the front-end has created its
+ * settings storage, which happens a moment after the target appears.
+ */
+async function waitForDevtoolsFrontend(
+  devtools: Page,
+  timeout: number,
+): Promise<void> {
+  const deadline = Date.now() + timeout;
+  while (Date.now() < deadline) {
+    const ready = await devtools
+      .evaluate(`(async () => {
+        const UI = await import('./ui/legacy/legacy.js');
+        UI.InspectorView.InspectorView.instance();
+        return true;
+      })()`)
+      .catch(() => false);
+    if (ready === true) return;
+    await new Promise((r) => setTimeout(r, 200));
+  }
+  throw new Error(`DevTools front-end did not initialize within ${timeout}ms`);
 }
