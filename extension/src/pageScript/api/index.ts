@@ -22,11 +22,24 @@ const listeners: {
 } = {};
 export const source = '@devtools-page';
 
+type Replacer = (this: unknown, key: string, value: unknown) => unknown;
+
+function serializeBigInt(value: unknown) {
+  return typeof value === 'bigint' ? `${value}n` : value;
+}
+
+function withBigIntReplacer(replacer?: Replacer): Replacer {
+  if (!replacer) return (key, value) => serializeBigInt(value);
+  return function (key, value) {
+    return serializeBigInt(replacer.call(this, key, value));
+  };
+}
+
 function windowReplacer(key: string, value: unknown) {
   if (value && (value as Window).window === value) {
     return '[WINDOW]';
   }
-  return value;
+  return serializeBigInt(value);
 }
 
 function tryCatchStringify(obj: unknown) {
@@ -48,7 +61,12 @@ function stringify(obj: unknown, serialize?: Serialize | undefined) {
   const str =
     typeof serialize === 'undefined'
       ? tryCatchStringify(obj)
-      : jsan.stringify(obj, serialize.replacer, undefined, serialize.options);
+      : jsan.stringify(
+          obj,
+          withBigIntReplacer(serialize.replacer),
+          undefined,
+          serialize.options,
+        );
 
   if (!stringifyWarned && str && str.length > 16 * 1024 * 1024) {
     // 16 MB
@@ -376,7 +394,32 @@ type ToContentScriptMessage<S, A extends Action<string>> =
   | GetReportMessage
   | StopMessage;
 
+function reportSerializationError(
+  instanceId: number,
+  messageType: string,
+  err: unknown,
+) {
+  const reason = err instanceof Error ? err.message : String(err);
+  const description = `Redux DevTools could not serialize the ${messageType} message: ${reason}`;
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(description, err);
+  }
+  post({ type: 'ERROR', payload: description, instanceId, source });
+}
+
 export function toContentScript<S, A extends Action<string>>(
+  message: ToContentScriptMessage<S, A>,
+  serializeState?: Serialize | undefined,
+  serializeAction?: Serialize | undefined,
+) {
+  try {
+    serializeAndPost(message, serializeState, serializeAction);
+  } catch (err) {
+    reportSerializationError(message.instanceId, message.type, err);
+  }
+}
+
+function serializeAndPost<S, A extends Action<string>>(
   message: ToContentScriptMessage<S, A>,
   serializeState?: Serialize | undefined,
   serializeAction?: Serialize | undefined,
@@ -647,15 +690,23 @@ export function connect(preConfig: Config): ConnectResponse {
     state: S,
     liftedData?: LiftedState<S, A, unknown>,
   ) => {
-    const message: InitMessage<S, A> = {
-      type: 'INIT',
-      payload: stringify(state, config.serialize as Serialize | undefined),
-      instanceId: id,
-      source,
-    };
+    let message: InitMessage<S, A>;
+    try {
+      message = {
+        type: 'INIT',
+        payload: stringify(state, config.serialize as Serialize | undefined),
+        instanceId: id,
+        source,
+      };
+      if (liftedData && Array.isArray(liftedData)) {
+        // Legacy
+        message.action = stringify(liftedData);
+      }
+    } catch (err) {
+      reportSerializationError(id, 'INIT', err);
+      return;
+    }
     if (liftedData && Array.isArray(liftedData)) {
-      // Legacy
-      message.action = stringify(liftedData);
       message.name = config.name;
     } else {
       if (liftedData) {
