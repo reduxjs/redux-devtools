@@ -38,6 +38,30 @@ describe('StackTraceTab component', () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
+  it('does not crash when the action prop is a drilled-in wrapper object', () => {
+    const drilledIn = { type: actions[1].action.type };
+    const { container } = render(
+      <TraceTabAsAny actions={actions} action={drilledIn} />,
+    );
+    expect(container.firstChild).toBeTruthy();
+    expect(screen.queryByTestId('stack-trace')).toBeTruthy();
+  });
+
+  it('finds the lifted action by id when the action reference does not match', async () => {
+    const drilledIn = { type: actions[2].action.type };
+    render(
+      <TraceTabAsAny
+        actions={actions}
+        action={drilledIn}
+        currentActionId={2}
+      />,
+    );
+    const stackTraceDiv = await screen.findByTestId('stack-trace');
+    await waitFor(() =>
+      expect(stackTraceDiv.querySelector('div')).toBeTruthy(),
+    );
+  });
+
   it('should render with trace stack', async () => {
     const { container } = render(
       <TraceTabAsAny actions={actions} action={actions[2].action} />,

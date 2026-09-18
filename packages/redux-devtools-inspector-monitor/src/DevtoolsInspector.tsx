@@ -337,6 +337,7 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
               sortStateTreeAlphabetically,
               disableStateTreeCollection,
             }}
+            currentActionId={getCurrentActionId(this.props, monitorState)}
             monitorState={this.props.monitorState}
             updateMonitorState={this.updateMonitorState}
             onInspectPath={(path: (string | number)[]) =>
