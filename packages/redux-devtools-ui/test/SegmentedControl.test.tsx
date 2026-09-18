@@ -1,7 +1,7 @@
 import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 import { SegmentedControl } from '../src/index.js';
 
 describe('SegmentedControl', function () {

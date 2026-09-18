@@ -1,7 +1,7 @@
 import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 import { Tabs } from '../src/index.js';
 import { tabs, simple10Tabs } from '../src/Tabs/data.js';
 
