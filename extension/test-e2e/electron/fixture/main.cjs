@@ -18,8 +18,13 @@ void app.whenReady().then(async () => {
     path.join(__dirname, '../../../dist'),
   );
 
-  const pageWindow = new BrowserWindow({ width: 400, height: 300 });
+  const pageWindow = new BrowserWindow({ width: 900, height: 700 });
   await pageWindow.loadURL(fixtureUrl);
+
+  if (process.env.E2E_DOCKED_DEVTOOLS === '1') {
+    pageWindow.webContents.openDevTools({ mode: 'bottom' });
+    return;
+  }
 
   const panelWindow = new BrowserWindow({ width: 900, height: 600 });
   await panelWindow.loadURL(`chrome-extension://${extension.id}/devpanel.html`);
