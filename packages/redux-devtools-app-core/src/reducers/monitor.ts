@@ -100,24 +100,19 @@ export function monitor(
             readonly monitor: MonitorState;
           }
         | undefined;
-      if (!rehydratedState) return state;
-      if (
-        rehydratedState.monitor.monitorState &&
-        (typeof rehydratedState.monitor.monitorState.selectedActionId ===
-          'number' ||
-          typeof rehydratedState.monitor.monitorState.startActionId ===
-            'number')
-      ) {
-        return {
-          ...rehydratedState.monitor,
-          monitorState: {
-            ...rehydratedState.monitor.monitorState,
-            selectedActionId: null,
-            startActionId: null,
-          },
-        };
-      }
-      return rehydratedState.monitor;
+      if (!rehydratedState?.monitor) return state;
+      const { monitorState } = rehydratedState.monitor;
+      if (!monitorState) return rehydratedState.monitor;
+      return {
+        ...rehydratedState.monitor,
+        monitorState: {
+          ...monitorState,
+          selectedActionId: null,
+          startActionId: null,
+          inspectedActionPath: [],
+          inspectedStatePath: [],
+        },
+      };
     }
     default:
       return state;
