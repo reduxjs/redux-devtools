@@ -173,34 +173,28 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
     deprecateParam('actionsBlacklist', 'actionsDenylist');
   }
 
-  const relayState = throttle(
-    (
-      liftedState?: LiftedState<S, A, unknown> | undefined,
-      libConfig?: LibConfig,
-    ) => {
-      relayAction.cancel();
-      const state = liftedState || store.liftedStore.getState();
-      sendingActionId = state.nextActionId;
-      toContentScript(
-        {
-          type: 'STATE',
-          payload: filterState(
-            state,
-            localFilter,
-            stateSanitizer,
-            actionSanitizer,
-            predicate,
-          ),
-          source,
-          instanceId,
-          libConfig,
-        },
-        serializeState,
-        serializeAction,
-      );
-    },
-    latency,
-  );
+  const relayState = throttle((libConfig?: LibConfig) => {
+    relayAction.cancel();
+    const state = store.liftedStore.getState();
+    sendingActionId = state.nextActionId;
+    toContentScript(
+      {
+        type: 'STATE',
+        payload: filterState(
+          state,
+          localFilter,
+          stateSanitizer,
+          actionSanitizer,
+          predicate,
+        ),
+        source,
+        instanceId,
+        libConfig,
+      },
+      serializeState,
+      serializeAction,
+    );
+  }, latency);
 
   const monitor = new Monitor(relayState);
 
@@ -390,7 +384,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
         if (!actionCreators && config!.actionCreators) {
           actionCreators = getActionsArray(config!.actionCreators);
         }
-        relayState(undefined, {
+        relayState({
           name: config!.name || document.title,
           actionCreators: JSON.stringify(actionCreators),
           features: config!.features,
@@ -476,7 +470,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
       errorOccurred = true;
       const state = store.liftedStore.getState();
       if (state.computedStates[state.currentStateIndex].error) {
-        relayState(state);
+        relayState();
       }
       return true;
     });
@@ -515,7 +509,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
     ) {
       errorOccurred = false;
     }
-    relayState(liftedState);
+    relayState();
   }
 
   const enhance = (): StoreEnhancer => (next) => {
