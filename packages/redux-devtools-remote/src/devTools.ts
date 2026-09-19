@@ -1,4 +1,4 @@
-import { stringify, parse } from 'jsan';
+import jsan from 'jsan';
 import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
 import configureStore from './configureStore.js';
 import { defaultSocketOptions } from './constants.js';
@@ -28,7 +28,16 @@ import {
   filterState,
   LocalFilter,
   State,
+  withBigIntReplacer,
 } from '@redux-devtools/utils';
+
+const bigIntReplacer = withBigIntReplacer();
+
+function stringify(value: unknown) {
+  return jsan.stringify(value, bigIntReplacer);
+}
+
+const parse = jsan.parse;
 
 function async(fn: () => unknown) {
   setTimeout(fn, 0);
@@ -242,6 +251,28 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
       name: this.instanceName,
       instanceId: this.appInstanceId,
     };
+    try {
+      this.serializeInto(message, type, state, action, nextActionId);
+    } catch (err) {
+      if (type === 'ERROR') throw err;
+      const reason = err instanceof Error ? err.message : String(err);
+      const description = `Redux DevTools could not serialize the ${type} message: ${reason}`;
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(description, err);
+      }
+      this.relay('ERROR', description);
+      return;
+    }
+    void this.socket!.transmit(this.socket!.id ? 'log' : 'log-noid', message);
+  }
+
+  private serializeInto(
+    message: MessageToRelay,
+    type: 'STATE' | 'ACTION' | 'START' | 'STOP' | 'ERROR',
+    state?: State | S | string,
+    action?: PerformAction<A> | ActionCreatorObject[],
+    nextActionId?: number,
+  ) {
     if (state) {
       message.payload =
         type === 'ERROR'
@@ -276,7 +307,6 @@ class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
     } else if (action) {
       message.action = action as ActionCreatorObject[];
     }
-    void this.socket!.transmit(this.socket!.id ? 'log' : 'log-noid', message);
   }
 
   dispatchRemotely(

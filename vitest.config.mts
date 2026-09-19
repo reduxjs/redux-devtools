@@ -99,6 +99,8 @@ export default defineConfig({
       ),
       project('serialize', 'packages/redux-devtools-serialize'),
       project('ui', 'packages/redux-devtools-ui', { environment: 'jsdom' }),
+      project('utils', 'packages/redux-devtools-utils'),
+      project('remote', 'packages/redux-devtools-remote'),
       project('extension', 'extension', {
         environment: 'jsdom',
         setupFiles: ['test/setup.ts'],

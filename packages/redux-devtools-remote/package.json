@@ -31,7 +31,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "type-check": "tsc --noEmit",
+    "test": "vitest --run --project remote",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
@@ -48,7 +49,8 @@
     "@types/socketcluster-client": "^20.0.0",
     "redux": "^5.0.1",
     "rimraf": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "redux": "^3.5.2 || ^4.0.0 || ^5.0.0"

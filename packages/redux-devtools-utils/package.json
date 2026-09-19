@@ -22,7 +22,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "type-check": "tsc --noEmit",
+    "test": "vitest --run --project utils",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
@@ -39,7 +40,8 @@
     "@types/jsan": "^3.1.5",
     "@types/node": "catalog:",
     "rimraf": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "@redux-devtools/core": "workspace:^",

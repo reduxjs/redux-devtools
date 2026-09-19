@@ -3,6 +3,7 @@ import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
 import {
   exportStateMiddleware,
+  parseErrorMiddleware,
   StoreAction,
   StoreState,
 } from '@redux-devtools/app';
@@ -25,6 +26,7 @@ export default function configureStore(
   bgConnection: chrome.runtime.Port,
 ) {
   const enhancer = applyMiddleware(
+    parseErrorMiddleware,
     exportStateMiddleware,
     panelDispatcher(bgConnection),
   );
