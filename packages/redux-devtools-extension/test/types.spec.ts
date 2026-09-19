@@ -171,6 +171,20 @@ describe('EnhancerOptions callback types', () => {
     ).toBe('function');
   });
 
+  it('keeps all three options optional (control)', () => {
+    const empty: EnhancerOptions = {};
+    const explicitlyUndefined: EnhancerOptions = {
+      stateSanitizer: undefined,
+      actionSanitizer: undefined,
+      predicate: undefined,
+    };
+
+    expect(composeWithDevTools(empty)).toBe(compose);
+    expect(typeof explicitlyUndefined.stateSanitizer).toBe('undefined');
+    expect(typeof explicitlyUndefined.actionSanitizer).toBe('undefined');
+    expect(typeof explicitlyUndefined.predicate).toBe('undefined');
+  });
+
   it('accepts the sanitizers as documented, without annotations (control)', () => {
     const options: EnhancerOptions = {
       actionSanitizer: (action) =>
