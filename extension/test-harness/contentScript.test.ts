@@ -63,6 +63,16 @@ describe('contentScript with fake chrome (Tier 1 sketch)', () => {
     expect(fake.runtime.connect).not.toHaveBeenCalled();
   });
 
+  it('pushes OPTIONS to the page at import time, before any store exists', async () => {
+    await nextTick();
+    expect(fromExtension()).toEqual([
+      expect.objectContaining({
+        type: 'OPTIONS',
+        options: expect.objectContaining({ maxAge: 50, inject: true }),
+      }),
+    ]);
+  });
+
   it('real window.postMessage does not reach the contentScript under jsdom (event.source !== window)', async () => {
     let source: MessageEventSource | null | undefined;
     const probe = (e: MessageEvent) => {

@@ -3,7 +3,6 @@ import {
   getOptions,
   isAllowed,
   Options,
-  prefetchOptions,
   prepareOptionsForPage,
 } from '../options/syncOptions.js';
 import type { TabMessage } from '../background/store/apiMiddleware.js';
@@ -130,6 +129,17 @@ export type ListenerMessage<S, A extends Action<string>> =
 
 function postToPageScript(message: ContentScriptToPageScriptMessage) {
   window.postMessage(message, '*');
+}
+
+function sendOptionsToPage() {
+  getOptions((options) => {
+    postToPageScript({
+      type: 'OPTIONS',
+      options: prepareOptionsForPage(options),
+      id: undefined,
+      source,
+    });
+  });
 }
 
 function connect() {
@@ -298,14 +308,7 @@ function send<S, A extends Action<string>>(
 ) {
   if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {
-    getOptions((options) => {
-      postToPageScript({
-        type: 'OPTIONS',
-        options: prepareOptionsForPage(options),
-        id: undefined,
-        source,
-      });
-    });
+    sendOptionsToPage();
     postToBackground({ name: 'INIT_INSTANCE', instanceId: message.instanceId });
   } else {
     postToBackground({ name: 'RELAY', message });
@@ -333,6 +336,8 @@ function handleMessages<S, A extends Action<string>>(
   tryCatch(send, message);
 }
 
-prefetchOptions();
+// Push options to the page before any store is created so the first store on a
+// denied host is not instrumented.
+sendOptionsToPage();
 
 window.addEventListener('message', handleMessages, false);

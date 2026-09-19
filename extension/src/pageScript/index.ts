@@ -148,6 +148,24 @@ declare global {
   }
 }
 
+// The content script pushes the extension options as soon as it loads, before
+// any store exists, so `isAllowed` below sees them when `enhance()` runs.
+window.addEventListener(
+  'message',
+  (event: MessageEvent<ContentScriptToPageScriptMessage>) => {
+    if (process.env.BABEL_ENV !== 'test' && event.source !== window) return;
+    const message = event.data;
+    if (!message || message.source !== '@devtools-extension') return;
+    if (message.type === 'OPTIONS') {
+      window.devToolsOptions = Object.assign(
+        window.devToolsOptions || {},
+        message.options,
+      );
+    }
+  },
+  false,
+);
+
 function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
   config?: Config,
 ): StoreEnhancer {
@@ -422,12 +440,6 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
             serializeAction,
           );
         }
-        return;
-      case 'OPTIONS':
-        window.devToolsOptions = Object.assign(
-          window.devToolsOptions || {},
-          message.options,
-        );
         return;
     }
   }
