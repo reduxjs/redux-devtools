@@ -17,7 +17,7 @@ function build(
   overrides: { onConnect?: (post: (m: Msg) => void) => void } = {},
 ) {
   const received: Msg[] = [];
-  const onGiveUp = vi.fn();
+  const onGiveUp = vi.fn<() => void>();
   const port = createReconnectingPort<Msg, Msg>({
     connect: () =>
       fake.runtime.connect({ name: 'tab' }) as unknown as chrome.runtime.Port,
@@ -58,7 +58,7 @@ describe('createReconnectingPort', () => {
   });
 
   it('reconnects after the other side drops the port, replays onConnect, then flushes the queue', () => {
-    const onConnect = vi.fn((post: (m: Msg) => void) => {
+    const onConnect = vi.fn<(post: (m: Msg) => void) => void>((post) => {
       post({ type: 'INIT' });
     });
     const { port } = build({ onConnect });
