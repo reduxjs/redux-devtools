@@ -1,5 +1,16 @@
 # @redux-devtools/app-core
 
+## 3.0.1
+
+### Patch Changes
+
+- 86f6090: Wrap the monitor area in an error boundary so a crashing monitor or tab shows an error with a "Reset monitor state" button instead of blanking the whole app, and reset persisted `inspectedActionPath` / `inspectedStatePath` / selected action ids on rehydrate so a bad persisted selection cannot crash the monitor on every load.
+- 94baca9: Show an error notification and keep the previous instance state when a state payload fails to parse, instead of blanking the panel. Adds `parseErrorMiddleware` (included in the default `middlewares` array).
+- Updated dependencies [caea9e9]
+- Updated dependencies [86f6090]
+  - @redux-devtools/inspector-monitor-trace-tab@5.0.1
+  - @redux-devtools/inspector-monitor@7.0.1
+
 ## 3.0.0
 
 ### Major Changes

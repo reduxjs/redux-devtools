@@ -1,5 +1,12 @@
 # Change Log
 
+## 5.0.1
+
+### Patch Changes
+
+- caea9e9: Clicking a stack frame outside the browser extension no longer throws `ReferenceError: chrome is not defined`; it opens the file URL in a new tab instead.
+- 86f6090: Fix the Trace tab crashing (and blanking the whole DevTools panel) after drilling into an action in the Action tab. The inspector now passes `currentActionId` to tab components, and the Trace tab looks up the lifted action by id instead of by object reference.
+
 ## 5.0.0
 
 ### Major Changes
