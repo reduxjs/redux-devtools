@@ -1,4 +1,4 @@
-import { compose, type Action } from 'redux';
+import { applyMiddleware, compose, type Action } from 'redux';
 import { describe, expect, it } from 'vitest';
 import {
   composeWithDevTools,
@@ -309,5 +309,117 @@ describe('EnhancerOptions callback types', () => {
 
     expect((traced.trace as () => string)()).toBe('stack');
     expect(enabled.trace).toBe(true);
+  });
+
+  it('accepts an actionSanitizer annotated inline on an EnhancerOptions object', () => {
+    const options: EnhancerOptions = {
+      actionSanitizer: (action: MyAction) => ({
+        ...action,
+        password: '<<REDACTED>>',
+      }),
+    };
+
+    expect(options.actionSanitizer!(action, 0)).toEqual({
+      type: 'foo',
+      password: '<<REDACTED>>',
+    });
+  });
+
+  it('accepts an annotated sanitizer on the options overload applied to enhancers', () => {
+    const composeEnhancers = composeWithDevTools({
+      stateSanitizer: (state: MyState) => ({
+        ...state,
+        password: '<<REDACTED>>',
+      }),
+    });
+    const enhancer = composeEnhancers(applyMiddleware());
+
+    expect(typeof enhancer).toBe('function');
+  });
+
+  it('accepts annotated sanitizers on the window extension hooks', () => {
+    const hooks =
+      typeof window === 'undefined'
+        ? undefined
+        : {
+            extension: window.__REDUX_DEVTOOLS_EXTENSION__,
+            extensionCompose: window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__,
+          };
+
+    if (hooks?.extension) {
+      hooks.extension.connect({
+        stateSanitizer: (state: MyState) => state,
+        actionSanitizer: (action: MyAction) => action,
+        predicate: (state: MyState, action: MyAction) =>
+          state.foo !== '' && action.type === 'foo',
+      });
+    }
+    if (hooks?.extensionCompose) {
+      hooks.extensionCompose({ stateSanitizer: (state: MyState) => state });
+    }
+
+    expect(hooks).toBe(undefined);
+  });
+
+  it('accepts an annotated predicate on the developmentOnly and logOnly entry points', () => {
+    expect(
+      composeWithDevToolsDevelopmentOnly({
+        predicate: (state: MyState, action: MyAction) =>
+          state.foo !== '' && action.type === 'foo',
+      }),
+    ).toBe(compose);
+    expect(
+      typeof devToolsEnhancerLogOnly({
+        predicate: (state: MyState, action: MyAction) =>
+          state.foo !== '' && action.type === 'foo',
+      }),
+    ).toBe('function');
+  });
+
+  it('accepts an annotated actionSanitizer on a Config-typed options object', () => {
+    const config: Config = {
+      type: 'redux',
+      actionSanitizer: (action: MyAction) => ({
+        ...action,
+        password: '<<REDACTED>>',
+      }),
+    };
+
+    expect(config.actionSanitizer!(action, 0)).toEqual({
+      type: 'foo',
+      password: '<<REDACTED>>',
+    });
+  });
+
+  it('accepts an actionSanitizer that builds a fresh action', () => {
+    const options: EnhancerOptions = {
+      actionSanitizer: (action, id) => ({ type: `${action.type}#${id}` }),
+    };
+
+    expect(options.actionSanitizer!(action, 4)).toEqual({ type: 'foo#4' });
+  });
+
+  it('accepts boundary ids and falsy states on the widened signatures (control)', () => {
+    const options: EnhancerOptions = {
+      actionSanitizer: (action) => action,
+      predicate: (state, action) => state !== undefined && action.type !== '',
+    };
+
+    expect(options.actionSanitizer!(action, 0)).toBe(action);
+    expect(options.actionSanitizer!(action, -1)).toBe(action);
+    expect(options.actionSanitizer!(action, Number.MAX_SAFE_INTEGER)).toBe(
+      action,
+    );
+    expect(options.predicate!(0, action)).toBe(true);
+    expect(options.predicate!('', action)).toBe(true);
+    expect(options.predicate!(null, action)).toBe(true);
+    expect(options.predicate!(undefined, action)).toBe(false);
+    expect(options.predicate!(state, { type: '' })).toBe(false);
+  });
+
+  it('still resolves the enhancer-only overload (control)', () => {
+    const enhancer = composeWithDevTools(applyMiddleware());
+
+    expect(typeof enhancer).toBe('function');
   });
 });
