@@ -9,6 +9,15 @@ import {
 } from '@redux-devtools/app';
 import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 
+export type PanelOutgoingMessage = StoreAction & {
+  readonly instanceId: string | number;
+  readonly id: string | number | undefined;
+};
+
+export interface PanelBackgroundPort {
+  readonly post: (message: PanelOutgoingMessage) => void;
+}
+
 function selectInstance(
   tabId: number,
   store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
@@ -16,10 +25,28 @@ function selectInstance(
 ) {
   const instances = store.getState().instances;
   if (instances.current === 'default') return;
-  const connections = instances.connections[tabId];
-  if (connections && connections.length === 1) {
-    next({ type: SELECT_INSTANCE, selected: connections[0] });
+  const instanceId = getSoleInstanceForTab(tabId, instances.connections);
+  if (instanceId !== undefined) {
+    next({ type: SELECT_INSTANCE, selected: instanceId });
   }
+}
+
+// Background keys connections by `tabId` for the top frame and
+// `${tabId}-${frameId}` for iframes. Prefer a lone top-frame store; otherwise
+// fall back to a lone store anywhere in the tab's frames.
+export function getSoleInstanceForTab(
+  tabId: number,
+  connections: StoreState['instances']['connections'],
+): string | number | undefined {
+  const topFrame = connections[tabId];
+  if (topFrame && topFrame.length > 0) {
+    return topFrame.length === 1 ? topFrame[0] : undefined;
+  }
+  const framePrefix = `${tabId}-`;
+  const inFrames = Object.entries(connections)
+    .filter(([id]) => id.startsWith(framePrefix))
+    .flatMap(([, instanceIds]) => instanceIds);
+  return inFrames.length === 1 ? inFrames[0] : undefined;
 }
 
 function getCurrentTabId(next: (tabId: number) => void) {
@@ -37,7 +64,7 @@ function getCurrentTabId(next: (tabId: number) => void) {
 }
 
 function panelDispatcher(
-  bgConnection: chrome.runtime.Port,
+  bgConnection: PanelBackgroundPort,
 ): Middleware<{}, StoreState, Dispatch<StoreAction>> {
   let autoselected = false;
   let userChoseAutoselect = false;
@@ -69,7 +96,7 @@ function panelDispatcher(
       const instances = store.getState().instances;
       const instanceId = getActiveInstance(instances);
       const id = instances.options[instanceId].connectionId;
-      bgConnection.postMessage({ ...action, instanceId, id });
+      bgConnection.post({ ...action, instanceId, id });
     }
     return result;
   };

@@ -36,7 +36,7 @@ function setup(initial: Instances) {
     seen.push(action as StoreAction);
     return action;
   };
-  const port = { postMessage: () => {} } as unknown as chrome.runtime.Port;
+  const port = { post: () => {} };
   const dispatch = panelDispatcher(port)(store)(next);
   return {
     seen,
@@ -115,6 +115,50 @@ describe('panelSyncMiddleware instance pinning', () => {
       }),
     );
     dispatch(updateState(7, '7/1'));
+    expect(selections(seen)).toEqual([]);
+  });
+
+  it('pins to a store living in an iframe of the inspected tab', () => {
+    const { seen, dispatch } = setup(
+      makeInstances({
+        current: '7-3/1',
+        connections: { '7-3': ['7-3/1'], 9: ['9/1'] },
+      }),
+    );
+    dispatch(updateState(7, '7-3/1'));
+    expect(selections(seen)).toEqual(['7-3/1']);
+  });
+
+  it('prefers the top-frame store when iframes also have stores', () => {
+    const { seen, dispatch } = setup(
+      makeInstances({
+        current: '7/1',
+        connections: { 7: ['7/1'], '7-3': ['7-3/1'] },
+      }),
+    );
+    dispatch(updateState(7, '7/1'));
+    expect(selections(seen)).toEqual(['7/1']);
+  });
+
+  it('does not guess between several iframe stores', () => {
+    const { seen, dispatch } = setup(
+      makeInstances({
+        current: '7-3/1',
+        connections: { '7-3': ['7-3/1'], '7-4': ['7-4/1'] },
+      }),
+    );
+    dispatch(updateState(7, '7-3/1'));
+    expect(selections(seen)).toEqual([]);
+  });
+
+  it('does not match a tab whose id merely starts with the same digits', () => {
+    const { seen, dispatch } = setup(
+      makeInstances({
+        current: '71/1',
+        connections: { 71: ['71/1'], '71-2': ['71-2/1'] },
+      }),
+    );
+    dispatch(updateState(71, '71/1'));
     expect(selections(seen)).toEqual([]);
   });
 

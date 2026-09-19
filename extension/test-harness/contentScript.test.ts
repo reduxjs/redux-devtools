@@ -49,6 +49,8 @@ function postFromPage(message: PostedMessage) {
 const fromExtension = () =>
   windowMessages.filter((m) => m.source === extensionSource);
 
+const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
 beforeAll(async () => {
   fake = createFakeChrome();
   installFakeChrome(fake);
@@ -61,6 +63,16 @@ beforeAll(async () => {
 describe('contentScript with fake chrome (Tier 1 sketch)', () => {
   it('does not connect to the background at import time', () => {
     expect(fake.runtime.connect).not.toHaveBeenCalled();
+  });
+
+  it('pushes OPTIONS to the page at import time, before any store exists', async () => {
+    await nextTick();
+    expect(fromExtension()).toEqual([
+      expect.objectContaining({
+        type: 'OPTIONS',
+        options: expect.objectContaining({ maxAge: 50, inject: true }),
+      }),
+    ]);
   });
 
   it('real window.postMessage does not reach the contentScript under jsdom (event.source !== window)', async () => {
@@ -154,23 +166,57 @@ describe('contentScript with fake chrome (Tier 1 sketch)', () => {
     ]);
   });
 
-  it('on port disconnect: posts STOP failed:true and stops listening for good (no reconnect)', async () => {
+  it('on port disconnect: keeps the page running, reconnects, re-announces instances, then flushes queued messages', async () => {
     const port = fake.ports[0];
+    const before = fromExtension().length;
     port.dropFromOtherSide();
     await nextTick();
 
-    expect(fromExtension().at(-1)).toEqual({
-      type: 'STOP',
-      failed: true,
-      source: extensionSource,
-    });
+    expect(fromExtension().slice(before)).toEqual([]);
 
     await postFromPage({ type: 'INIT_INSTANCE', instanceId: 2 });
     await postFromPage({ type: 'ACTION', instanceId: 2, action: '{}' });
-
-    // Documents the P-2/P-3 defect: the window listener was removed, so the
-    // page can never re-establish the connection without a full reload.
     expect(fake.ports).toHaveLength(1);
     expect(port.sent).toHaveLength(2);
+
+    await sleep(150);
+
+    expect(fake.ports).toHaveLength(2);
+    const reconnected = fake.ports[1];
+    expect(reconnected.sent).toEqual([
+      { name: 'INIT_INSTANCE', instanceId: 1 },
+      { name: 'INIT_INSTANCE', instanceId: 2 },
+      {
+        name: 'RELAY',
+        message: {
+          source: pageSource,
+          type: 'ACTION',
+          instanceId: 2,
+          action: '{}',
+        },
+      },
+    ]);
+  });
+
+  it('relays background messages on the new port', async () => {
+    const reconnected = fake.ports[1];
+    const before = fromExtension().length;
+    reconnected.receive({ type: 'START', id: '1' });
+    await nextTick();
+    expect(fromExtension().slice(before)).toEqual([
+      { type: 'START', state: undefined, id: '1', source: extensionSource },
+    ]);
+  });
+
+  it('DISCONNECT from the page closes the port and forgets the instances', async () => {
+    const reconnected = fake.ports[1];
+    await postFromPage({ type: 'DISCONNECT' });
+    expect(reconnected.disconnect).toHaveBeenCalledTimes(1);
+
+    await postFromPage({ type: 'INIT_INSTANCE', instanceId: 3 });
+    expect(fake.ports).toHaveLength(3);
+    expect(fake.ports[2].sent).toEqual([
+      { name: 'INIT_INSTANCE', instanceId: 3 },
+    ]);
   });
 });
