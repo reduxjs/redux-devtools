@@ -112,10 +112,47 @@ describe('EnhancerOptions callback types', () => {
     });
   });
 
+  it('accepts annotated sanitizers declared inline on an EnhancerOptions object', () => {
+    const options: EnhancerOptions = {
+      stateSanitizer: (state: MyState) => ({
+        ...state,
+        password: '<<REDACTED>>',
+      }),
+      predicate: (state: MyState, action: MyAction) =>
+        action.type === 'foo' && state.foo !== '',
+    };
+
+    expect(options.stateSanitizer!(state, 0)).toEqual({
+      foo: 'bar',
+      password: '<<REDACTED>>',
+    });
+    expect(options.predicate!(state, action)).toBe(true);
+  });
+
+  it('hands the caller an unknown sanitized state, which has to be cast', () => {
+    const options: EnhancerOptions = { stateSanitizer: (state) => state };
+    const sanitized = options.stateSanitizer!(state, 0);
+
+    // @ts-expect-error the sanitized state is `unknown`, so reading a property
+    // off it requires a cast. On the unfixed signature it was `S`, i.e. the
+    // caller's own state type, and this directive was unused.
+    expect(sanitized.foo).toBe('bar');
+    expect((sanitized as MyState).foo).toBe('bar');
+  });
+
   it('accepts annotated sanitizers on devToolsEnhancer', () => {
     const enhancer = devToolsEnhancer({
       stateSanitizer: (state: MyState) => state,
       actionSanitizer: (action: MyAction) => action,
+    });
+
+    expect(typeof enhancer).toBe('function');
+  });
+
+  it('accepts an annotated predicate on devToolsEnhancer', () => {
+    const enhancer = devToolsEnhancer({
+      predicate: (state: MyState, action: MyAction) =>
+        state.foo !== '' && action.type === 'foo',
     });
 
     expect(typeof enhancer).toBe('function');
@@ -208,6 +245,14 @@ describe('EnhancerOptions callback types', () => {
     expect(options.stateSanitizer!(state, 0)).toBe(state);
   });
 
+  it('accepts a predicate written with the declared parameter types (control)', () => {
+    const predicate = (state: unknown, action: Action<string>): boolean =>
+      state !== undefined && action.type !== '';
+    const options: EnhancerOptions = { predicate };
+
+    expect(options.predicate!(state, action)).toBe(true);
+  });
+
   it('accepts falsy but valid state and boundary indices (control)', () => {
     const options: EnhancerOptions = { stateSanitizer: (state) => state };
 
@@ -236,7 +281,18 @@ describe('EnhancerOptions callback types', () => {
     expect(typeof options.stateSanitizer).toBe('string');
   });
 
-  it('still accepts the documented trace forms', () => {
+  it('leaves trace rejecting an annotated callback (control)', () => {
+    const options: EnhancerOptions = {
+      // @ts-expect-error `trace` is a union member, so it keeps its own
+      // generic and still rejects an annotated callback. Fixing it is a
+      // separate change.
+      trace: (action: MyAction) => action.type,
+    };
+
+    expect(typeof options.trace).toBe('function');
+  });
+
+  it('still accepts the documented trace forms (control)', () => {
     const traced: EnhancerOptions = { trace: () => 'stack' };
     const enabled: EnhancerOptions = { trace: true };
 
