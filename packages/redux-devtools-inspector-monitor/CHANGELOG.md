@@ -1,5 +1,11 @@
 # Change Log
 
+## 7.0.1
+
+### Patch Changes
+
+- 86f6090: Fix the Trace tab crashing (and blanking the whole DevTools panel) after drilling into an action in the Action tab. The inspector now passes `currentActionId` to tab components, and the Trace tab looks up the lifted action by id instead of by object reference.
+
 ## 7.0.0
 
 ### Major Changes

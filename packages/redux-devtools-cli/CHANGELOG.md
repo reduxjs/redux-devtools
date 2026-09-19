@@ -1,5 +1,11 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- 1702060: Requires Node.js 22
+
 ## 5.0.0
 
 ### Major Changes
