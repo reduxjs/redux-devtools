@@ -36,7 +36,7 @@ function setup(initial: Instances) {
     seen.push(action as StoreAction);
     return action;
   };
-  const port = { postMessage: () => {} } as unknown as chrome.runtime.Port;
+  const port = { post: () => {} };
   const dispatch = panelDispatcher(port)(store)(next);
   return {
     seen,
