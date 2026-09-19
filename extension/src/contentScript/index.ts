@@ -22,11 +22,17 @@ import {
   isMessageSizeError,
   splitMessage,
 } from '../utils/splitMessage.js';
+import {
+  createReconnectingPort,
+  ReconnectingPort,
+} from '../utils/reconnectingPort.js';
 
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';
-let connected = false;
-let bg: chrome.runtime.Port | undefined;
+let bg:
+  | ReconnectingPort<ContentScriptToBackgroundMessage<unknown, Action>>
+  | undefined;
+const knownInstanceIds = new Set<number>();
 
 declare global {
   interface Window {
@@ -142,67 +148,87 @@ function sendOptionsToPage() {
   });
 }
 
-function connect() {
-  // Connect to the background script
-  connected = true;
+function connectPort() {
   const name = 'tab';
   if (window.devToolsExtensionID) {
-    bg = chrome.runtime.connect(window.devToolsExtensionID, { name });
-  } else {
-    bg = chrome.runtime.connect({ name });
+    return chrome.runtime.connect(window.devToolsExtensionID, { name });
   }
+  return chrome.runtime.connect({ name });
+}
 
-  // Relay background script messages to the page script
-  bg.onMessage.addListener((message: TabMessage) => {
-    if ('action' in message) {
-      if (message.type === 'DISPATCH') {
-        postToPageScript({
-          type: message.type,
-          payload: message.action,
-          state: message.state,
-          id: message.id,
-          source,
-        });
-      } else if (message.type === 'ACTION') {
-        postToPageScript({
-          type: message.type,
-          payload: message.action,
-          state: message.state,
-          id: message.id,
-          source,
-        });
-      } else {
-        postToPageScript({
-          type: message.type,
-          payload: message.action,
-          state: message.state,
-          id: message.id,
-          source,
-        });
+function getBackground() {
+  if (bg) return bg;
+  bg = createReconnectingPort<
+    ContentScriptToBackgroundMessage<unknown, Action>,
+    TabMessage
+  >({
+    connect: connectPort,
+    onMessage: relayToPage,
+    // A restarted service worker has forgotten every instance. Re-announce
+    // them so it enables the action icon and, if a monitor is open, asks the
+    // page for its full state again.
+    onConnect: (post) => {
+      for (const instanceId of knownInstanceIds) {
+        post({ name: 'INIT_INSTANCE', instanceId });
       }
-    } else if (message.type === 'OPTIONS') {
+    },
+    onGiveUp: handleGiveUp,
+  });
+  return bg;
+}
+
+// Relay background script messages to the page script
+function relayToPage(message: TabMessage) {
+  if ('action' in message) {
+    if (message.type === 'DISPATCH') {
       postToPageScript({
         type: message.type,
-        options: prepareOptionsForPage(message.options),
-        id: undefined,
+        payload: message.action,
+        state: message.state,
+        id: message.id,
+        source,
+      });
+    } else if (message.type === 'ACTION') {
+      postToPageScript({
+        type: message.type,
+        payload: message.action,
+        state: message.state,
+        id: message.id,
         source,
       });
     } else {
       postToPageScript({
         type: message.type,
+        payload: message.action,
         state: message.state,
         id: message.id,
         source,
       });
     }
-  });
-
-  bg.onDisconnect.addListener(handleDisconnect);
+  } else if (message.type === 'OPTIONS') {
+    postToPageScript({
+      type: message.type,
+      options: prepareOptionsForPage(message.options),
+      id: undefined,
+      source,
+    });
+  } else {
+    postToPageScript({
+      type: message.type,
+      state: message.state,
+      id: message.id,
+      source,
+    });
+  }
 }
 
-function handleDisconnect() {
+// The extension was reloaded, updated, or removed: this content script belongs
+// to a dead extension context and can never reach a background again. Tell the
+// page to stop relaying; the next page load gets a fresh content script.
+function handleGiveUp() {
   window.removeEventListener('message', handleMessages);
   window.postMessage({ type: 'STOP', failed: true, source }, '*');
+  knownInstanceIds.clear();
   bg = undefined;
 }
 
@@ -271,9 +297,8 @@ function tryCatch<S, A extends Action<string>>(
       }
     }
   }
-  // Drop this message but keep relaying. Tearing the connection down here
-  // left the page permanently detached; a real port loss is reported through
-  // bg.onDisconnect instead.
+  // Drop this message but keep relaying. A real port loss is handled by the
+  // reconnecting port, which queues and redelivers.
   if (process.env.NODE_ENV !== 'production') {
     console.error('Failed to send message', failure);
   }
@@ -298,7 +323,9 @@ export type ContentScriptToBackgroundMessage<S, A extends Action<string>> =
 function postToBackground<S, A extends Action<string>>(
   message: ContentScriptToBackgroundMessage<S, A>,
 ) {
-  bg!.postMessage(message);
+  getBackground().post(
+    message as ContentScriptToBackgroundMessage<unknown, Action>,
+  );
 }
 
 function send<S, A extends Action<string>>(
@@ -306,10 +333,20 @@ function send<S, A extends Action<string>>(
     | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
     | SplitMessage,
 ) {
-  if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {
     sendOptionsToPage();
-    postToBackground({ name: 'INIT_INSTANCE', instanceId: message.instanceId });
+    knownInstanceIds.add(message.instanceId);
+    const background = getBackground();
+    // While disconnected, onConnect re-announces every known instance, so
+    // only post directly when the port is already open.
+    if (background.isConnected()) {
+      background.post({
+        name: 'INIT_INSTANCE',
+        instanceId: message.instanceId,
+      });
+    } else {
+      background.ensureConnected();
+    }
   } else {
     postToBackground({ name: 'RELAY', message });
   }
@@ -326,10 +363,9 @@ function handleMessages<S, A extends Action<string>>(
   const message = event.data;
   if (message.source !== pageSource) return;
   if (message.type === 'DISCONNECT') {
-    if (bg) {
-      bg.disconnect();
-      connected = false;
-    }
+    bg?.disconnect();
+    bg = undefined;
+    knownInstanceIds.clear();
     return;
   }
 

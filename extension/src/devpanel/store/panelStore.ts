@@ -6,7 +6,7 @@ import {
   StoreAction,
   StoreState,
 } from '@redux-devtools/app';
-import panelDispatcher from './panelSyncMiddleware.js';
+import panelDispatcher, { PanelBackgroundPort } from './panelSyncMiddleware.js';
 import rootReducer from './panelReducer.js';
 
 const persistConfig = {
@@ -22,7 +22,7 @@ const persistedReducer: Reducer<StoreState, StoreAction> = persistReducer(
 
 export default function configureStore(
   position: string,
-  bgConnection: chrome.runtime.Port,
+  bgConnection: PanelBackgroundPort,
 ) {
   const enhancer = applyMiddleware(
     exportStateMiddleware,
