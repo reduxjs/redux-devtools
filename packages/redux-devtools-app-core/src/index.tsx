@@ -15,6 +15,7 @@ export { default as SliderMonitor } from './containers/monitors/Slider.js';
 export * from './constants/actionTypes.js';
 export { default as middlewares } from './middlewares/index.js';
 export * from './middlewares/exportState.js';
+export * from './middlewares/parseError.js';
 export * from './reducers/index.js';
 export * from './reducers/instances.js';
 export * from './reducers/monitor.js';
