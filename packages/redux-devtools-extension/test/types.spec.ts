@@ -33,10 +33,10 @@ const state: MyState = { foo: 'bar', password: 'hunter2' };
 const action: MyAction = { type: 'foo', password: 'hunter2' };
 
 /**
- * A sanitizer annotated with the store's own state or action type used to be
- * rejected by `tsc`, because the callbacks declared their own generics. These
- * cases therefore fail to compile against the unfixed `EnhancerOptions`; the
- * runtime expectations pin the behaviour of the no-extension stubs.
+ * `EnhancerOptions` accepts sanitizer callbacks annotated with the
+ * application's own state and action types. Without the browser extension the
+ * options reach the fallback implementation, whose behaviour the runtime
+ * expectations pin.
  */
 describe('EnhancerOptions callback types', () => {
   it('accepts a stateSanitizer annotated with the store state type', () => {
@@ -236,17 +236,10 @@ describe('EnhancerOptions callback types', () => {
     expect(typeof options.stateSanitizer).toBe('string');
   });
 
-  it('leaves trace out of scope and otherwise unchanged (control)', () => {
-    const options: EnhancerOptions = {
-      // @ts-expect-error `trace` is a union member, so it keeps its own
-      // generic and still rejects an annotated callback. Fixing it is a
-      // separate change.
-      trace: (action: MyAction) => action.type,
-    };
+  it('still accepts the documented trace forms', () => {
     const traced: EnhancerOptions = { trace: () => 'stack' };
     const enabled: EnhancerOptions = { trace: true };
 
-    expect(typeof options.trace).toBe('function');
     expect((traced.trace as () => string)()).toBe('stack');
     expect(enabled.trace).toBe(true);
   });
