@@ -1,10 +1,13 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Browser, Page } from 'puppeteer-core';
 import {
+  clickRowButton,
   dispatchOnFixture,
   getBackgroundWorker,
   launchWithExtension,
   listServiceWorkerUrls,
+  readActionRows,
+  readFixtureCount,
   readFixtureMessages,
   startFixtureServer,
   waitFor,
@@ -13,21 +16,14 @@ import {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function readActionRows(panel: Page): Promise<string[]> {
-  return panel.$$eval('[data-testid="actionListRows"] > *', (rows) =>
-    rows.map((r) => r.textContent ?? '').filter((text) => /Jump/.test(text)),
-  );
-}
-
 /**
- * Documents what happens today when the MV3 service worker is terminated
- * while a page and a panel are connected. The content script has no reconnect
- * logic (`handleDisconnect` in src/contentScript/index.ts) and the devpanel
- * never listens for `onDisconnect` (src/devpanel/index.tsx), so both sides go
- * silent. These assertions pin the current, broken behavior; flip them when
- * reconnect support lands.
+ * Terminates the MV3 service worker while a page and a panel are connected.
+ * Both the content script and the devpanel reopen their ports with a retry
+ * timer (src/utils/reconnectingPort.ts); the content script re-announces its
+ * instances and the panel registers as a monitor again, so the page re-sends
+ * its full state and the panel repopulates without any reload.
  */
-describe('Tier 2: service worker termination (current behavior)', () => {
+describe('Tier 2: service worker termination and reconnect', () => {
   let browser: Browser;
   let extensionId: string;
   let server: FixtureServer;
@@ -70,53 +66,57 @@ describe('Tier 2: service worker termination (current behavior)', () => {
       .toBe(0);
   });
 
-  it('content script tells the page the connection failed and stops relaying', async () => {
-    await expect
-      .poll(
-        async () =>
-          (await readFixtureMessages(page)).some(
-            (m) => m.type === 'STOP' && m.failed === true,
-          ),
-        { timeout: 5_000 },
-      )
-      .toBe(true);
-
-    const before = (await readFixtureMessages(page)).length;
-    await dispatchOnFixture(page, 'INCREMENT');
-    await dispatchOnFixture(page, 'INCREMENT');
-    await sleep(1_000);
-
-    // The STOP message flips the pageScript monitor to inactive, so it stops
-    // posting to window entirely. The content script listener is gone too, and
-    // no port reconnect happens, so the service worker is never woken back up.
-    const after = await readFixtureMessages(page);
-    expect(after.length).toBe(before);
-    expect(listServiceWorkerUrls(browser)).toHaveLength(0);
-  });
-
-  it('panel keeps the stale action list and never recovers', async () => {
-    await sleep(1_000);
-    expect(await readActionRows(panel)).toHaveLength(2);
-
-    // A page reload creates a fresh content script, which reconnects and wakes
-    // the service worker. The already-open panel still holds its dead port.
-    await page.reload();
-    await dispatchOnFixture(page, 'INCREMENT');
+  it('content script reconnects, waking the worker, without telling the page to stop', async () => {
     await expect
       .poll(() => listServiceWorkerUrls(browser).length, { timeout: 10_000 })
       .toBe(1);
-    await sleep(1_500);
 
-    expect(await readActionRows(panel)).toHaveLength(2);
+    const messages = await readFixtureMessages(page);
+    expect(messages.some((m) => m.type === 'STOP' && m.failed === true)).toBe(
+      false,
+    );
+  });
 
-    // Only a freshly opened panel sees the new instance.
-    const freshPanel = await browser.newPage();
-    await freshPanel.goto(`chrome-extension://${extensionId}/devpanel.html`);
+  it('panel repopulates and shows new actions without a page reload', async () => {
     await expect
-      .poll(async () => (await readActionRows(freshPanel)).length, {
-        timeout: 15_000,
-      })
-      .toBe(2);
-    await freshPanel.close();
+      .poll(() => readActionRows(panel), { timeout: 15_000 })
+      .toHaveLength(2);
+
+    await dispatchOnFixture(page, 'INCREMENT');
+    await dispatchOnFixture(page, 'INCREMENT');
+
+    await expect
+      .poll(() => readActionRows(panel), { timeout: 10_000 })
+      .toHaveLength(4);
+    expect(await readFixtureCount(page)).toBe(3);
+  });
+
+  it('panel dispatches still reach the page after the restart', async () => {
+    await clickRowButton(panel, 1, 'Jump');
+    await expect
+      .poll(() => readFixtureCount(page), { timeout: 10_000 })
+      .toBe(1);
+  });
+
+  it('survives a second termination', async () => {
+    const worker = await getBackgroundWorker(browser);
+    await worker.close();
+    await expect
+      .poll(() => listServiceWorkerUrls(browser).length, { timeout: 5_000 })
+      .toBe(0);
+    await expect
+      .poll(() => listServiceWorkerUrls(browser).length, { timeout: 10_000 })
+      .toBe(1);
+
+    await dispatchOnFixture(page, 'INCREMENT');
+    await expect
+      .poll(() => readActionRows(panel), { timeout: 10_000 })
+      .toHaveLength(5);
+    await sleep(200);
+    expect(
+      (await readFixtureMessages(page)).some(
+        (m) => m.type === 'STOP' && m.failed === true,
+      ),
+    ).toBe(false);
   });
 });

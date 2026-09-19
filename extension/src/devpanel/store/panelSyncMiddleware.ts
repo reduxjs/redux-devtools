@@ -9,6 +9,15 @@ import {
 } from '@redux-devtools/app';
 import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 
+export type PanelOutgoingMessage = StoreAction & {
+  readonly instanceId: string | number;
+  readonly id: string | number | undefined;
+};
+
+export interface PanelBackgroundPort {
+  readonly post: (message: PanelOutgoingMessage) => void;
+}
+
 function selectInstance(
   tabId: number,
   store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
@@ -55,7 +64,7 @@ function getCurrentTabId(next: (tabId: number) => void) {
 }
 
 function panelDispatcher(
-  bgConnection: chrome.runtime.Port,
+  bgConnection: PanelBackgroundPort,
 ): Middleware<{}, StoreState, Dispatch<StoreAction>> {
   let autoselected = false;
   let userChoseAutoselect = false;
@@ -87,7 +96,7 @@ function panelDispatcher(
       const instances = store.getState().instances;
       const instanceId = getActiveInstance(instances);
       const id = instances.options[instanceId].connectionId;
-      bgConnection.postMessage({ ...action, instanceId, id });
+      bgConnection.post({ ...action, instanceId, id });
     }
     return result;
   };
