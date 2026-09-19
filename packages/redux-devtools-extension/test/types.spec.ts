@@ -1,8 +1,9 @@
-import { compose } from 'redux';
+import { compose, type Action } from 'redux';
 import { describe, expect, it } from 'vitest';
 import {
   composeWithDevTools,
   devToolsEnhancer,
+  type Config,
   type EnhancerOptions,
 } from '../src/index.js';
 import {
@@ -13,6 +14,10 @@ import {
   composeWithDevTools as composeWithDevToolsLogOnly,
   devToolsEnhancer as devToolsEnhancerLogOnly,
 } from '../src/logOnly.js';
+import {
+  composeWithDevTools as composeWithDevToolsLogOnlyInProduction,
+  devToolsEnhancer as devToolsEnhancerLogOnlyInProduction,
+} from '../src/logOnlyInProduction.js';
 
 interface MyState {
   foo: string;
@@ -82,6 +87,31 @@ describe('EnhancerOptions callback types', () => {
     });
   });
 
+  it('accepts a stateSanitizer that ignores its arguments', () => {
+    const options: EnhancerOptions = {
+      stateSanitizer: () => '<<REDACTED>>',
+    };
+
+    expect(options.stateSanitizer!(state, 0)).toBe('<<REDACTED>>');
+  });
+
+  it('accepts sanitizers annotated with the declared parameter types', () => {
+    const stateSanitizer = (state: unknown, index: number): unknown => ({
+      state,
+      index,
+    });
+    const actionSanitizer = (
+      action: Action<string>,
+      id: number,
+    ): Action<string> => ({ ...action, type: `${action.type}#${id}` });
+    const options: EnhancerOptions = { stateSanitizer, actionSanitizer };
+
+    expect(options.stateSanitizer!(state, 3)).toEqual({ state, index: 3 });
+    expect(options.actionSanitizer!({ type: 'foo' }, 7)).toEqual({
+      type: 'foo#7',
+    });
+  });
+
   it('accepts annotated sanitizers on devToolsEnhancer', () => {
     const enhancer = devToolsEnhancer({
       stateSanitizer: (state: MyState) => state,
@@ -89,6 +119,17 @@ describe('EnhancerOptions callback types', () => {
     });
 
     expect(typeof enhancer).toBe('function');
+  });
+
+  it('accepts annotated sanitizers on a Config-typed options object', () => {
+    const config: Config = {
+      type: 'redux',
+      stateSanitizer: (state: MyState) => state,
+      predicate: (state: MyState) => state.foo !== '',
+    };
+
+    expect(composeWithDevTools(config)).toBe(compose);
+    expect(config.predicate!(state, action)).toBe(true);
   });
 
   it('accepts annotated sanitizers on the developmentOnly entry point', () => {
@@ -117,6 +158,19 @@ describe('EnhancerOptions callback types', () => {
     ).toBe('function');
   });
 
+  it('accepts annotated sanitizers on the logOnlyInProduction entry point', () => {
+    expect(
+      composeWithDevToolsLogOnlyInProduction({
+        stateSanitizer: (state: MyState) => state,
+      }),
+    ).toBe(compose);
+    expect(
+      typeof devToolsEnhancerLogOnlyInProduction({
+        predicate: (state: MyState) => state.foo !== '',
+      }),
+    ).toBe('function');
+  });
+
   it('accepts the sanitizers as documented, without annotations (control)', () => {
     const options: EnhancerOptions = {
       actionSanitizer: (action) =>
@@ -130,6 +184,24 @@ describe('EnhancerOptions callback types', () => {
       data: '<<LONG_BLOB>>',
     });
     expect(options.stateSanitizer!(state, 0)).toBe(state);
+  });
+
+  it('still accepts a sanitizer written with its own generic (control)', () => {
+    const options: EnhancerOptions = {
+      stateSanitizer: <S>(state: S, index: number): S => state,
+    };
+
+    expect(options.stateSanitizer!(state, 0)).toBe(state);
+  });
+
+  it('accepts falsy but valid state and boundary indices (control)', () => {
+    const options: EnhancerOptions = { stateSanitizer: (state) => state };
+
+    expect(options.stateSanitizer!(0, 0)).toBe(0);
+    expect(options.stateSanitizer!('', -1)).toBe('');
+    expect(options.stateSanitizer!(null, Number.MAX_SAFE_INTEGER)).toBe(null);
+    expect(options.stateSanitizer!(undefined, 0)).toBe(undefined);
+    expect(options.stateSanitizer!([], 0)).toEqual([]);
   });
 
   it('still requires actionSanitizer to return an action (control)', () => {
@@ -148,5 +220,20 @@ describe('EnhancerOptions callback types', () => {
     };
 
     expect(typeof options.stateSanitizer).toBe('string');
+  });
+
+  it('leaves trace out of scope and otherwise unchanged (control)', () => {
+    const options: EnhancerOptions = {
+      // @ts-expect-error `trace` is a union member, so it keeps its own
+      // generic and still rejects an annotated callback. Fixing it is a
+      // separate change.
+      trace: (action: MyAction) => action.type,
+    };
+    const traced: EnhancerOptions = { trace: () => 'stack' };
+    const enabled: EnhancerOptions = { trace: true };
+
+    expect(typeof options.trace).toBe('function');
+    expect((traced.trace as () => string)()).toBe('stack');
+    expect(enabled.trace).toBe(true);
   });
 });
