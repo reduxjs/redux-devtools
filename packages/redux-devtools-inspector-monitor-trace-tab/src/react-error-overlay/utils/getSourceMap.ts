@@ -95,64 +95,52 @@ export function extractSourceMapUrl(
   return Promise.resolve(match[1].toString());
 }
 
+export function resolveSourceMapUrl(
+  sourceMapUrl: string,
+  fileUri: string,
+): string {
+  try {
+    return new URL(sourceMapUrl, fileUri).href;
+  } catch {
+    const index = fileUri.lastIndexOf('/');
+    return fileUri.substring(0, index + 1) + sourceMapUrl;
+  }
+}
+
+export function decodeInlineSourceMap(dataUrl: string): RawSourceMap {
+  const comma = dataUrl.indexOf(',');
+  if (comma === -1) {
+    throw new Error('Malformed inline source map data URL.');
+  }
+  const header = dataUrl.substring('data:'.length, comma);
+  const payload = dataUrl.substring(comma + 1);
+  const isBase64 = header.split(';').includes('base64');
+  const json = isBase64 ? window.atob(payload) : decodeURIComponent(payload);
+  return JSON.parse(json) as RawSourceMap;
+}
+
 /**
  * Returns an instance of <code>{@link SourceMap}</code> for a given fileUri and fileContents.
  * @param {string} fileUri The URI of the source file.
  * @param {string} fileContents The contents of the source file.
  */
 export async function getSourceMap(
-  //function getSourceMap(
   fileUri: string,
   fileContents: string,
 ): Promise<SourceMap> {
-  let sm = await extractSourceMapUrl(fileUri, fileContents);
-  if (sm.indexOf('data:') === 0) {
-    const base64 = /^data:application\/json;([\w=:"-]+;)*base64,/;
-    const match2 = base64.exec(sm);
-    if (!match2) {
-      throw new Error(
-        'Sorry, non-base64 inline source-map encoding is not supported.',
-      );
-    }
-    sm = sm.substring(match2[0].length);
-    sm = window.atob(sm);
-    sm = JSON.parse(sm);
-    return new SourceMap(new SourceMapConsumer(sm as unknown as RawSourceMap));
-  } else {
-    const index = fileUri.lastIndexOf('/');
-    const url = fileUri.substring(0, index + 1) + sm;
-    const obj = await fetch(url).then((res) => res.json());
-    return new SourceMap(new SourceMapConsumer(obj as RawSourceMap));
+  const sm = await extractSourceMapUrl(fileUri, fileContents);
+  if (sm.startsWith('data:')) {
+    return new SourceMap(new SourceMapConsumer(decodeInlineSourceMap(sm)));
   }
-
-  /*
-  return extractSourceMapUrl(fileUri, fileContents)
-      .then(sm => {
-          if (sm.indexOf('data:') === 0) {
-              const base64 = /^data:application\/json;([\w=:"-]+;)*base64,/;
-              const match2 = sm.match(base64);
-              if (!match2) {
-                  throw new Error(
-                      'Sorry, non-base64 inline source-map encoding is not supported.'
-                  );
-              }
-              sm = sm.substring(match2[0].length);
-              sm = window.atob(sm);
-              sm = JSON.parse(sm);
-              return new SourceMap(new SourceMapConsumer(sm));
-          } else {
-              const index = fileUri.lastIndexOf('/');
-              const url = fileUri.substring(0, index + 1) + sm;
-
-              return fetch(url).then(res => res.json())
-                  .then(obj => {
-                    return new SourceMap(new SourceMapConsumer(obj))
-                  })
-              //const obj = await fetch(url).then(res => res.json());
-              //return new SourceMap(new SourceMapConsumer(obj));
-          }
-      });
-      */
+  const url = resolveSourceMapUrl(sm, fileUri);
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(
+      `Failed to fetch source map ${url} (${res.status} ${res.statusText}).`,
+    );
+  }
+  const obj = (await res.json()) as RawSourceMap;
+  return new SourceMap(new SourceMapConsumer(obj));
 }
 
 export default getSourceMap;
