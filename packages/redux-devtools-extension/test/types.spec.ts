@@ -140,6 +140,17 @@ describe('EnhancerOptions callback types', () => {
     expect((sanitized as MyState).foo).toBe('bar');
   });
 
+  it('hands the caller a plain action from actionSanitizer, which has to be cast', () => {
+    const options: EnhancerOptions = { actionSanitizer: (action) => action };
+    const sanitized = options.actionSanitizer!(action, 0);
+
+    // @ts-expect-error the sanitized action is `Action<string>`, so reading a
+    // custom property off it requires a cast. On the unfixed signature it was
+    // `A`, i.e. the caller's own action type, and this directive was unused.
+    expect(sanitized.password).toBe('hunter2');
+    expect((sanitized as MyAction).password).toBe('hunter2');
+  });
+
   it('accepts annotated sanitizers on devToolsEnhancer', () => {
     const enhancer = devToolsEnhancer({
       stateSanitizer: (state: MyState) => state,
