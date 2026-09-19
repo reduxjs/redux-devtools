@@ -6,7 +6,7 @@
     "jsdom": "catalog:",
     "oxfmt": "^0.68.0",
     "oxlint": "^1.83.0",
-    "oxlint-tsgolint": "^7.0.2001",
+    "oxlint-tsgolint": "^7.0.2002",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
@@ -20,5 +20,5 @@
     "release": "pnpm build:all && pnpm publish -r",
     "test": "vitest --run"
   },
-  "packageManager": "pnpm@11.24.0"
+  "packageManager": "pnpm@11.27.0"
 }
