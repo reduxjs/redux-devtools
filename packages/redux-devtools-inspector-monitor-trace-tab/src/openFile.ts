@@ -100,7 +100,10 @@ export default function openFile(
   lineNumber: number,
   stackFrame: StackFrame,
 ) {
-  if (!chrome || !chrome.storage) return; // TODO: Pass editor settings for using outside of browser extension
+  if (typeof chrome === 'undefined' || !chrome.storage) {
+    if (/^https?:\/\//.test(fileName)) window.open(fileName, '_blank');
+    return;
+  }
   const storage = isFF
     ? chrome.storage.local
     : chrome.storage.sync || chrome.storage.local;
