@@ -1,55 +1,52 @@
 {
   "private": true,
   "name": "rtk-query-demo",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
-    "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
-    "lint": "eslint .",
+    "start": "webpack serve --open",
+    "build": "webpack",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.4",
-    "@chakra-ui/react": "^3.28.0",
+    "@babel/runtime": "^7.29.7",
+    "@chakra-ui/react": "^3.37.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mswjs/data": "^0.16.2",
     "@redux-devtools/core": "workspace:^",
     "@redux-devtools/dock-monitor": "workspace:^",
     "@redux-devtools/rtk-query-monitor": "workspace:^",
-    "@reduxjs/toolkit": "^2.9.2",
-    "msw": "^2.11.6",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-icons": "^5.5.0",
-    "react-is": "^19.2.0",
-    "react-redux": "^9.2.0",
-    "react-router-dom": "^7.9.5"
+    "@reduxjs/toolkit": "^2.12.0",
+    "msw": "2.15.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-icons": "^5.7.0",
+    "react-is": "^19.3.0",
+    "react-redux": "^9.3.0",
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/plugin-transform-runtime": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
-    "@types/node": "^24.9.2",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "babel-loader": "^10.0.0",
-    "copy-webpack-plugin": "^13.0.1",
-    "cross-env": "^10.1.0",
-    "css-loader": "^7.1.2",
-    "fork-ts-checker-webpack-plugin": "^9.1.0",
-    "html-webpack-plugin": "^5.6.4",
-    "style-loader": "^4.0.0",
-    "ts-node": "^10.9.2",
-    "typescript": "~5.9.3",
-    "webpack": "^5.102.1",
-    "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.2"
+    "@babel/core": "catalog:",
+    "@babel/plugin-transform-runtime": "^7.29.7",
+    "@babel/preset-env": "catalog:",
+    "@babel/preset-react": "catalog:",
+    "@babel/preset-typescript": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "babel-loader": "catalog:",
+    "copy-webpack-plugin": "^14.0.0",
+    "css-loader": "catalog:",
+    "html-webpack-plugin": "catalog:",
+    "style-loader": "catalog:",
+    "typescript": "catalog:",
+    "webpack": "catalog:",
+    "webpack-cli": "catalog:",
+    "webpack-dev-server": "catalog:"
   },
   "msw": {
-    "workerDirectory": "public"
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

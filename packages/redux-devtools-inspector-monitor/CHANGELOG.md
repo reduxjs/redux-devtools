@@ -1,5 +1,16 @@
 # Change Log
 
+## 7.0.0
+
+### Major Changes
+
+- 12849a4: Convert monitors to ESM
+
+### Patch Changes
+
+- Updated dependencies [804d6bd]
+  - @redux-devtools/core@5.0.0
+
 ## 6.1.2
 
 ### Patch Changes

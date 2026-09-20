@@ -16,8 +16,7 @@
     "lib",
     "src"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "exports": "./lib/index.js",
   "type": "module",
   "sideEffects": false,
   "repository": {
@@ -27,16 +26,14 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run lint"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
     "d3": "^7.9.0",
-    "rimraf": "^6.0.1",
-    "typescript": "~5.9.3"
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@types/d3": "^7.4.3",

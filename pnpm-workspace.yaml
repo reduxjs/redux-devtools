@@ -10,16 +10,44 @@ packages:
   - packages/redux-devtools-inspector-monitor-test-tab/demo
   - packages/redux-devtools-rtk-query-monitor/demo
   - packages/redux-devtools-slider-monitor/examples/todomvc
-onlyBuiltDependencies:
-  - '@apollo/protobufjs'
-  - '@swc/core'
-  - chromedriver
-  - electron
-  - esbuild
-  - msw
-  - sqlite3
-  - unrs-resolver
+
+catalog:
+  jsdom: ^30.1.0
+  vitest: ^4.1.11
+  '@babel/core': ^7.29.7
+  '@babel/preset-env': ^7.29.7
+  '@babel/preset-react': ^7.29.7
+  '@babel/preset-typescript': ^7.29.7
+  '@puppeteer/browsers': ^3.2.2
+  '@testing-library/dom': ^10.4.2
+  '@testing-library/jest-dom': ^7.0.1
+  '@testing-library/react': ^16.3.3
+  '@types/node': ^24.13.5
+  '@types/react': ^19.3.0
+  '@types/react-dom': ^19.3.0
+  '@types/webpack-env': ^1.18.8
+  babel-loader: ^10.1.1
+  css-loader: ^7.1.5
+  html-webpack-plugin: ^5.6.8
+  puppeteer-core: ^25.11.0
+  react: ^19.3.0
+  react-dom: ^19.3.0
+  rimraf: ^6.1.3
+  style-loader: ^4.0.0
+  typescript: ^7.0.2
+  webpack: ^5.111.1
+  webpack-cli: ^7.2.3
+  webpack-dev-server: ^6.0.0
+
+allowBuilds:
+  '@apollo/protobufjs': true
+  '@parcel/watcher': true
+  esbuild: true
+  msw: true
+  sqlite3: true
+  unrs-resolver: true
+
 patchedDependencies:
   '@dnd-kit/core': patches/@dnd-kit__core.patch
   '@dnd-kit/sortable': patches/@dnd-kit__sortable.patch
-  react-icons: patches/react-icons.patch
+  redux-persist: patches/redux-persist.patch

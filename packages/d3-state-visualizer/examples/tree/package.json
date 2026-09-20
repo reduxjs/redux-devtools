@@ -14,33 +14,23 @@
     "url": "https://github.com/reduxjs/redux-devtools/issues"
   },
   "license": "MIT",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
-    "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc"
   },
   "dependencies": {
     "d3-state-visualizer": "workspace:^",
     "map2tree": "workspace:^"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
-    "@types/node": "^24.9.2",
-    "babel-loader": "^10.0.0",
-    "cross-env": "^10.1.0",
-    "fork-ts-checker-webpack-plugin": "^9.1.0",
-    "html-webpack-plugin": "^5.6.4",
-    "ts-node": "^10.9.2",
-    "typescript": "~5.9.3",
-    "webpack": "^5.102.1",
-    "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.2"
+    "typescript": "catalog:",
+    "vite": "^8.3.0"
   }
 }

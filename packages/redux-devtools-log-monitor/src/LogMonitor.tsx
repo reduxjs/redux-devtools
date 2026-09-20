@@ -12,10 +12,10 @@ import {
   updateScrollTop,
   startConsecutiveToggle,
   LogMonitorAction,
-} from './actions';
-import reducer, { LogMonitorState } from './reducers';
-import LogMonitorButtonBar from './LogMonitorButtonBar';
-import LogMonitorEntryList from './LogMonitorEntryList';
+} from './actions.js';
+import reducer, { LogMonitorState } from './reducers.js';
+import LogMonitorButtonBar from './LogMonitorButtonBar.js';
+import LogMonitorEntryList from './LogMonitorEntryList.js';
 
 const { toggleAction, setActionsActive } = ActionCreators;
 
@@ -64,8 +64,10 @@ interface DefaultProps<S> {
   markStateDiff: boolean;
 }
 
-export interface LogMonitorProps<S, A extends Action<string>>
-  extends LiftedState<S, A, LogMonitorState> {
+export interface LogMonitorProps<
+  S,
+  A extends Action<string>,
+> extends LiftedState<S, A, LogMonitorState> {
   dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
 
   preserveScrollTop: boolean;
@@ -182,7 +184,6 @@ class LogMonitor<S, A extends Action<string>> extends PureComponent<
       return base16Themes[theme];
     }
 
-    // eslint-disable-next-line no-console
     console.warn(
       'DevTools theme ' + theme + ' not found, defaulting to nicinabox',
     );

@@ -19,8 +19,8 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import type { JSX } from '@emotion/react/jsx-runtime';
-import ActionListRow from './ActionListRow';
-import ActionListHeader from './ActionListHeader';
+import ActionListRow from './ActionListRow.js';
+import ActionListHeader from './ActionListHeader.js';
 
 function getTimestamps<A extends Action<string>>(
   actions: { [actionId: number]: PerformAction<A> },

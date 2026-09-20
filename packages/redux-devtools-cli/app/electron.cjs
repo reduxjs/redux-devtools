@@ -13,10 +13,10 @@ function createWindow() {
   const host = argv.host ? argv.host : 'localhost';
   const protocol = argv.protocol ? argv.protocol : 'http';
 
-  mainWindow.loadURL(protocol + '://' + host + ':' + port);
+  void mainWindow.loadURL(protocol + '://' + host + ':' + port);
 }
 
-app.whenReady().then(() => {
+void app.whenReady().then(() => {
   createWindow();
 
   app.on('activate', function () {

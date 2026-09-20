@@ -1,4 +1,4 @@
-import '../chromeApiMock';
+import '../chromeApiMock.js';
 import React, { CSSProperties, ReactNode } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -9,8 +9,8 @@ import {
   StoreState,
   UPDATE_STATE,
 } from '@redux-devtools/app';
-import App from '../app/App';
-import configureStore from './store/panelStore';
+import App from '../app/App.js';
+import configureStore from './store/panelStore.js';
 
 import { Action, Store } from 'redux';
 import {
@@ -18,8 +18,13 @@ import {
   PanelMessageWithSplitAction,
   SplitUpdateStateRequest,
   UpdateStateRequest,
-} from '../background/store/apiMiddleware';
+} from '../background/store/apiMiddleware.js';
 import { PersistGate } from 'redux-persist/integration/react';
+import {
+  createReconnectingPort,
+  ReconnectingPort,
+} from '../utils/reconnectingPort.js';
+import type { PanelOutgoingMessage } from './store/panelSyncMiddleware.js';
 
 const position = location.hash;
 const messageStyle: CSSProperties = {
@@ -33,7 +38,7 @@ let rendered: boolean | undefined;
 let currentRoot: Root | undefined;
 let store: Store<StoreState, StoreAction> | undefined;
 let persistor: Persistor | undefined;
-let bgConnection: chrome.runtime.Port;
+let bgConnection: ReconnectingPort<PanelOutgoingMessage>;
 let naTimeout: NodeJS.Timeout;
 
 const isChrome = !navigator.userAgent.includes('Firefox');
@@ -116,12 +121,23 @@ function init() {
   if (chrome && chrome.devtools && chrome.devtools.inspectedWindow) {
     name += chrome.devtools.inspectedWindow.tabId;
   }
-  bgConnection = chrome.runtime.connect({ name });
+  // A terminated MV3 service worker drops this port. Reconnecting registers
+  // the panel as a monitor again, which makes the background send START to
+  // every tab, and each page answers with its full state under the same
+  // instance id, so the store below repopulates in place.
+  bgConnection = createReconnectingPort<
+    PanelOutgoingMessage,
+    PanelMessageWithSplitAction<unknown, Action<string>>
+  >({
+    connect: () => chrome.runtime.connect({ name }),
+    onMessage: handleBackgroundMessage,
+  });
+  bgConnection.ensureConnected();
 
-  bgConnection.onMessage.addListener(
-    <S, A extends Action<string>>(
-      message: PanelMessageWithSplitAction<S, A>,
-    ) => {
+  function handleBackgroundMessage<S, A extends Action<string>>(
+    message: PanelMessageWithSplitAction<S, A>,
+  ) {
+    {
       if (message.type === 'NA') {
         // TODO Double-check this now that the name is different
         if (message.id === name) renderNA();
@@ -172,8 +188,8 @@ function init() {
           store!.dispatch(message as PanelMessageWithoutNA<S, A>);
         }
       }
-    },
-  );
+    }
+  }
 }
 
 if (position === '#popup') document.body.style.minWidth = '760px';

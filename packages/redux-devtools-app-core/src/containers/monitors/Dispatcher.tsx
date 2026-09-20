@@ -10,8 +10,8 @@ import {
   Base16Theme,
 } from '@redux-devtools/ui';
 import { connect, ResolveThunks } from 'react-redux';
-import { dispatchRemotely } from '../../actions';
-import { Options } from '../../reducers/instances';
+import { dispatchRemotely } from '../../actions/index.js';
+import { Options } from '../../reducers/instances.js';
 
 export const DispatcherContainer = styled.div`
   display: flex;

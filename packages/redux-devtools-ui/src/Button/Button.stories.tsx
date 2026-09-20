@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { MdFiberManualRecord } from 'react-icons/md';
 import { Meta, StoryObj } from '@storybook/react-vite';
-import Button from './';
+import Button from './index.js';
 
 const meta: Meta = {
   title: 'Button',

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Dialog renders correctly 1`] = `
+exports[`Dialog > renders correctly 1`] = `
 <div
   class="css-1nze9tl"
 >
@@ -43,7 +43,7 @@ exports[`Dialog renders correctly 1`] = `
 </div>
 `;
 
-exports[`Dialog renders modal 1`] = `
+exports[`Dialog > renders modal 1`] = `
 <div
   class="css-1nze9tl"
 >
@@ -83,7 +83,7 @@ exports[`Dialog renders modal 1`] = `
 </div>
 `;
 
-exports[`Dialog renders with props 1`] = `
+exports[`Dialog > renders with props 1`] = `
 <div
   class="css-1cbskzi"
   open=""

@@ -1,9 +1,8 @@
 import React from 'react';
 import { FieldProps, Widget, WidgetProps } from '@rjsf/utils';
-import Select from '../Select';
-import Slider from '../Slider';
+import Select from '../Select/index.js';
+import Slider from '../Slider/index.js';
 
-/* eslint-disable react/prop-types */
 const SelectWidget: Widget = ({
   options,
   onChange,
@@ -16,7 +15,7 @@ const SelectWidget: Widget = ({
   ...rest
 }) => (
   <Select<{ label: string; value: string }>
-    options={options.enumOptions as { label: string; value: string }[]}
+    options={options.enumOptions}
     onChange={(option) => {
       onChange(option?.value);
     }}
@@ -30,10 +29,10 @@ const SelectWidget: Widget = ({
 const RangeWidget: Widget = (({
   schema,
   disabled,
-  label, // eslint-disable-line
-  options, // eslint-disable-line
-  formContext, // eslint-disable-line
-  registry, // eslint-disable-line
+  label,
+  options,
+  formContext,
+  registry,
   ...rest
 }: WidgetProps & { registry: FieldProps['registry'] }) =>
   (

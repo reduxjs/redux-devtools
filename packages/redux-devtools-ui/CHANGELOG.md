@@ -1,5 +1,12 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- d61d31a: Remove theme prop from Editor. Wrap any usage of Editor in Container to provide theme through context.
+- 804e729: Convert @redux-devtools/ui to ESM
+
 ## 2.0.0
 
 ### Major Changes

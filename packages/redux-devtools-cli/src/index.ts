@@ -41,14 +41,13 @@ export default async function (argv: { [arg: string]: any }): Promise<{
   const agServer = socketClusterServer.attach(httpServer, options);
 
   const app = express();
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   httpServer.on('request', app);
   const store = createStore(options);
   app.use(routes(options, store, agServer));
 
   agServer.setMiddleware(
     agServer.MIDDLEWARE_INBOUND,
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    // oxlint-disable-next-line typescript/no-misused-promises
     async (middlewareStream) => {
       for await (const action of middlewareStream) {
         if (action.type === action.TRANSMIT) {

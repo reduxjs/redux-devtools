@@ -1,12 +1,16 @@
 import { LIFTED_ACTION } from '@redux-devtools/app';
-import { store } from './index';
+import { store } from './index.js';
 
 export function getReport(
   reportId: string,
   tabId: string | number,
   instanceId: number,
 ) {
-  chrome.storage.local.get(['s:hostname', 's:port', 's:secure'], (options) => {
+  chrome.storage.local.get<{
+    's:hostname': string | undefined;
+    's:port': string | undefined;
+    's:secure': string | undefined;
+  }>(['s:hostname', 's:port', 's:secure'], (options) => {
     if (!options['s:hostname'] || !options['s:port']) return;
     const url = `${options['s:secure'] ? 'https' : 'http'}://${
       options['s:hostname']
@@ -34,9 +38,7 @@ export function getReport(
         });
       })
       .catch(function (err) {
-        /* eslint-disable no-console */
         console.warn(err);
-        /* eslint-enable no-console */
       });
   });
 }

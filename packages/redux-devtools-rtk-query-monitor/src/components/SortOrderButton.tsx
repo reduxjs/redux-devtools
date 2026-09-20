@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { ArrowUpIcon } from './ArrowUpIcon';
+import { ArrowUpIcon } from './ArrowUpIcon.js';
 
 export interface SortOrderButtonProps {
   readonly isAsc?: boolean;

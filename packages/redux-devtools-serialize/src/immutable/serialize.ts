@@ -1,8 +1,8 @@
 import type Immutable from 'immutable';
 import { Record } from 'immutable';
-import { mark, extract, refer } from '../helpers';
-import options from '../constants/options';
-import { SerializedImmutableData } from '../types';
+import { mark, extract, refer } from '../helpers/index.js';
+import options from '../constants/options.js';
+import { SerializedImmutableData } from '../types.js';
 
 export default function serialize(
   immutable: typeof Immutable,

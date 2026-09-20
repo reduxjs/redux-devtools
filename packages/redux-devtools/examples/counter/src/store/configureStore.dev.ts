@@ -29,7 +29,6 @@ export default function configureStore(initialState?: Partial<CounterState>) {
   if (module.hot) {
     module.hot.accept('../reducers', () =>
       store.replaceReducer(
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
         require('../reducers').default as Reducer<
           CounterState,
           CounterAction,

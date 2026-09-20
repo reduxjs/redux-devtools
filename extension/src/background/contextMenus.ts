@@ -1,4 +1,4 @@
-import openDevToolsWindow, { DevToolsPosition } from './openWindow';
+import openDevToolsWindow, { DevToolsPosition } from './openWindow.js';
 
 export function createMenu() {
   const menus = [

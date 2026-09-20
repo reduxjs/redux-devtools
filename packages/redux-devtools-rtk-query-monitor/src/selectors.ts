@@ -1,5 +1,5 @@
 import { Action, createSelector, Selector } from '@reduxjs/toolkit';
-import { RtkQueryInspectorProps } from './containers/RtkQueryInspector';
+import { RtkQueryInspectorProps } from './containers/RtkQueryInspector.js';
 import {
   ApiStats,
   QueryInfo,
@@ -10,11 +10,11 @@ import {
   QueryPreviewTabs,
   RtkResourceInfo,
   RtkQuery262ProvidedState,
-} from './types';
-import { Comparator, queryComparators } from './utils/comparators';
-import { FilterList, queryListFilters } from './utils/filters';
-import { emptyRecord } from './utils/object';
-import { escapeRegExpSpecialCharacter } from './utils/regexp';
+} from './types.js';
+import { Comparator, queryComparators } from './utils/comparators.js';
+import { FilterList, queryListFilters } from './utils/filters.js';
+import { emptyRecord } from './utils/object.js';
+import { escapeRegExpSpecialCharacter } from './utils/regexp.js';
 import {
   getApiStatesOf,
   extractAllApiQueries,
@@ -23,7 +23,7 @@ import {
   generateApiStatsOfCurrentQuery,
   getActionsOfCurrentQuery,
   extractAllApiMutations,
-} from './utils/rtk-query';
+} from './utils/rtk-query.js';
 
 type InspectorSelector<S, Output> = Selector<SelectorsSource<S>, Output>;
 

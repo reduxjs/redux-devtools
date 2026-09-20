@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/chart-monitor",
-  "version": "5.1.1",
+  "version": "6.0.0",
   "description": "Chart monitor for Redux DevTools",
   "keywords": [
     "redux",
@@ -19,45 +19,31 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.4",
     "d3-state-visualizer": "workspace:^",
     "deepmerge": "^4.3.1",
     "react-base16-styling": "workspace:^"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
-    "@babel/eslint-parser": "^7.28.5",
-    "@babel/plugin-transform-runtime": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
     "@redux-devtools/core": "workspace:^",
-    "@types/react": "^19.2.2",
-    "react": "^19.2.0",
+    "@types/react": "catalog:",
+    "react": "catalog:",
     "redux": "^5.0.1",
-    "rimraf": "^6.0.1",
-    "typescript": "~5.9.3"
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@redux-devtools/core": "workspace:^",

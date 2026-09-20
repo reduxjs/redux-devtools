@@ -7,8 +7,8 @@ Based on:
 */
 
 import { css } from '@emotion/react';
-import { prefixSelectors } from '../../utils/autoPrefix';
-import { Theme } from '../../themes/default';
+import { prefixSelectors } from '../../utils/autoPrefix.js';
+import { Theme } from '../../themes/default.js';
 
 export interface StyleProps {
   percent: number;
@@ -94,7 +94,7 @@ export const style = ({
   }`,
   )}
 
- ${prefixSelectors(
+  ${prefixSelectors(
     'input:focus:not(:active)',
     ['webkit-slider-thumb', 'moz-range-thumb', 'ms-thumb'],
     `{

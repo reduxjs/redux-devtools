@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container, Form } from '@redux-devtools/ui';
 import { JSONSchema7Definition, JSONSchema7TypeName } from 'json-schema';
-import { ConnectionType, saveSocketSettings } from '../../actions';
-import { StoreState } from '../../reducers';
-import { ConnectionStateOptions } from '../../reducers/connection';
+import { ConnectionType, saveSocketSettings } from '../../actions/index.js';
+import { StoreState } from '../../reducers/index.js';
+import { ConnectionStateOptions } from '../../reducers/connection.js';
 import { IChangeEvent } from '@rjsf/core';
 
 declare module 'json-schema' {

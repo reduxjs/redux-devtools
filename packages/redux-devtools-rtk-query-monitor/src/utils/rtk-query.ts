@@ -21,12 +21,12 @@ import {
   RtkRequest,
   RtkRequestTiming,
   isRtkQuery262Provided,
-} from '../types';
-import { missingTagId } from '../monitor-config';
-import { Comparator, compareJSONPrimitive } from './comparators';
-import { emptyArray } from './object';
-import { formatMs } from './formatters';
-import * as statistics from './statistics';
+} from '../types.js';
+import { missingTagId } from '../monitor-config.js';
+import { Comparator, compareJSONPrimitive } from './comparators.js';
+import { emptyArray } from './object.js';
+import { formatMs } from './formatters.js';
+import * as statistics from './statistics.js';
 
 const rtkqueryApiStateKeys: ReadonlyArray<keyof RtkQueryApiState> = [
   'queries',

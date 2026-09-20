@@ -234,8 +234,7 @@ export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
   ? HeadStoreEnhancer extends StoreEnhancer<infer StoreExt>
     ? StoreExt & InferComposedStoreExt<RestStoreEnhancers>
     : never
-  : // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    {};
+  : {};
 
 export interface ReduxDevtoolsExtensionCompose {
   (
@@ -286,12 +285,12 @@ export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
 export {
   composeWithDevTools as composeWithDevToolsDevelopmentOnly,
   devToolsEnhancer as devToolsEnhancerDevelopmentOnly,
-} from './developmentOnly';
+} from './developmentOnly.js';
 export {
   composeWithDevTools as composeWithDevToolsLogOnly,
   devToolsEnhancer as devToolsEnhancerLogOnly,
-} from './logOnly';
+} from './logOnly.js';
 export {
   composeWithDevTools as composeWithDevToolsLogOnlyInProduction,
   devToolsEnhancer as devToolsEnhancerLogOnlyInProduction,
-} from './logOnlyInProduction';
+} from './logOnlyInProduction.js';

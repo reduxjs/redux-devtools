@@ -1,5 +1,6 @@
-import { exportStateMiddleware } from './exportState';
+import { exportStateMiddleware } from './exportState.js';
+import { parseErrorMiddleware } from './parseError.js';
 
-const middlewares = [exportStateMiddleware];
+const middlewares = [parseErrorMiddleware, exportStateMiddleware];
 
 export default middlewares;

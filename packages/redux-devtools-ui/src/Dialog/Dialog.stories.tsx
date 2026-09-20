@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react-vite';
-import Dialog from './';
-import { schema, uiSchema, formData } from '../Form/schema';
+import Dialog from './index.js';
+import { schema, uiSchema, formData } from '../Form/schema.js';
 
 const meta: Meta = {
   title: 'Dialog',

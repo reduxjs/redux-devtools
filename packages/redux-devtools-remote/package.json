@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/remote",
-  "version": "0.9.5",
+  "version": "1.0.0",
   "description": "Relay Redux actions to remote Redux DevTools.",
   "keywords": [
     "redux",
@@ -21,51 +21,36 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint"
+    "test": "vitest --run --project remote",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.4",
     "@redux-devtools/instrument": "workspace:^",
     "@redux-devtools/utils": "workspace:^",
     "jsan": "^3.1.14",
     "rn-host-detect": "^1.2.0",
-    "socketcluster-client": "^19.2.7"
+    "socketcluster-client": "^20.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
-    "@babel/eslint-parser": "^7.28.5",
-    "@babel/plugin-transform-runtime": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
     "@types/jsan": "^3.1.5",
-    "@types/node": "^24.9.2",
+    "@types/node": "catalog:",
     "@types/rn-host-detect": "^1.2.2",
-    "@types/socketcluster-client": "^19.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.46.2",
-    "@typescript-eslint/parser": "^8.46.2",
-    "eslint": "^9.38.0",
-    "eslint-config-prettier": "^10.1.8",
+    "@types/socketcluster-client": "^20.0.0",
     "redux": "^5.0.1",
-    "rimraf": "^6.0.1",
-    "typescript": "~5.9.3"
+    "rimraf": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "redux": "^3.5.2 || ^4.0.0 || ^5.0.0"

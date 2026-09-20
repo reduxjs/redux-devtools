@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react-vite';
-import Editor from './';
-import { default as WithTabsComponent, WithTabsProps } from './WithTabs';
+import Editor from './index.js';
+import { default as WithTabsComponent, WithTabsProps } from './WithTabs.js';
 
 const value = `
 var themes = [];
@@ -24,15 +24,12 @@ export const Default: Story = {
   args: {
     value,
     lineNumbers: true,
-    lineWrapping: false,
     foldGutter: true,
     readOnly: false,
     autofocus: true,
   },
   argTypes: {
     autofocus: { control: { disable: true } },
-    mode: { control: { disable: true } },
-    theme: { control: { disable: true } },
     onChange: { control: { disable: true } },
   },
 };
@@ -45,8 +42,6 @@ export const WithTabs: StoryObj<WithTabsProps> = {
   },
   argTypes: {
     value: { control: { disable: true } },
-    mode: { control: { disable: true } },
-    lineWrapping: { control: { disable: true } },
     readOnly: { control: { disable: true } },
     theme: { control: { disable: true } },
     foldGutter: { control: { disable: true } },

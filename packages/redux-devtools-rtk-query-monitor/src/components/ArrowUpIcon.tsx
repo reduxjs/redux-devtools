@@ -5,7 +5,6 @@ export type ArrowUpIconProps = Omit<
   'xmlns' | 'children' | 'viewBox'
 >;
 
-/* eslint-disable max-len */
 /**
  * @see https://icons.getbootstrap.com/icons/arrow-up/
  */
@@ -24,4 +23,3 @@ export function ArrowUpIcon(props: ArrowUpIconProps): React.JSX.Element {
     </svg>
   );
 }
-/* eslint-enable max-len */

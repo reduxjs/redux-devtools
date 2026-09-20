@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Notification renders correctly 1`] = `
+exports[`Notification > renders correctly 1`] = `
 <div
   class="css-105dgur"
   type="info"
@@ -11,7 +11,7 @@ exports[`Notification renders correctly 1`] = `
 </div>
 `;
 
-exports[`Notification renders with props 1`] = `
+exports[`Notification > renders with props 1`] = `
 <div
   class="css-105dgur"
   type="error"
@@ -30,7 +30,7 @@ exports[`Notification renders with props 1`] = `
       fill="none"
     />
     <path
-      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-2h2zm0-4h-2V7h2z"
     />
   </svg>
   <span>

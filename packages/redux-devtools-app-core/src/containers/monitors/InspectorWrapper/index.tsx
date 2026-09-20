@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Action } from 'redux';
-import { InspectorMonitor, Tab } from '@redux-devtools/inspector-monitor';
+import {
+  DevtoolsInspectorAction,
+  DevtoolsInspectorProps,
+  DevtoolsInspectorState,
+  InspectorMonitor,
+  Tab,
+} from '@redux-devtools/inspector-monitor';
 import { TraceTab } from '@redux-devtools/inspector-monitor-trace-tab';
 import { TestTab } from '@redux-devtools/inspector-monitor-test-tab';
-import { DATA_TYPE_KEY } from '../../../constants/dataTypes';
-import SubTabs from './SubTabs';
+import { DATA_TYPE_KEY } from '../../../constants/dataTypes.js';
+import SubTabs from './SubTabs.js';
 
 const DEFAULT_TABS = [
   {
@@ -34,8 +40,12 @@ interface Props {
 }
 
 class InspectorWrapper extends Component<Props> {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  static update = InspectorMonitor.update;
+  static update: (
+    props: DevtoolsInspectorProps<unknown, Action<string>>,
+    state: DevtoolsInspectorState | undefined,
+    action: DevtoolsInspectorAction,
+    // oxlint-disable-next-line typescript/unbound-method
+  ) => DevtoolsInspectorState = InspectorMonitor.update;
 
   render() {
     const { features, ...rest } = this.props;
@@ -43,10 +53,7 @@ class InspectorWrapper extends Component<Props> {
     if (features && features.test) {
       tabs = () => [
         ...(DEFAULT_TABS as Tab<unknown, Action<string>>[]),
-        { name: 'Test', component: TestTab } as unknown as Tab<
-          unknown,
-          Action<string>
-        >,
+        { name: 'Test', component: TestTab },
       ];
     } else {
       tabs = () => DEFAULT_TABS as Tab<unknown, Action<string>>[];

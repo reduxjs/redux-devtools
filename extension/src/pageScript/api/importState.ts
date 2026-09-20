@@ -1,6 +1,6 @@
 import jsan from 'jsan';
 import { immutableSerialize } from '@redux-devtools/serialize';
-import type { Config, SerializeWithImmutable } from '../index';
+import type { Config, SerializeWithImmutable } from '../index.js';
 import Immutable from 'immutable';
 import { LiftedState } from '@redux-devtools/instrument';
 import { Action } from 'redux';
@@ -22,7 +22,7 @@ interface SerializeWithRequiredReviver extends SerializeWithImmutable {
 function isSerializeWithReviver(
   serialize: boolean | SerializeWithImmutable,
 ): serialize is SerializeWithRequiredReviver {
-  return !!(serialize as SerializeWithImmutable).immutable;
+  return !!(serialize as SerializeWithImmutable).reviver;
 }
 
 interface ParsedSerializedLiftedState {

@@ -119,8 +119,10 @@ function buildUrl(options: Options) {
   );
 }
 
-interface Props
-  extends Omit<DemoAppState, 'addFunction' | 'addSymbol' | 'shuffleArray'> {
+interface Props extends Omit<
+  DemoAppState,
+  'addFunction' | 'addSymbol' | 'shuffleArray'
+> {
   toggleTimeoutUpdate: (timeoutUpdateEnabled: boolean) => void;
   timeoutUpdate: () => void;
   increment: () => void;

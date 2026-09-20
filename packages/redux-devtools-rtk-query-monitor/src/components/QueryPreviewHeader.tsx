@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
-import { QueryPreviewTabs, TabOption } from '../types';
-import { renderTabPanelButtonId } from '../utils/a11y';
-import { emptyArray } from '../utils/object';
+import { QueryPreviewTabs, TabOption } from '../types.js';
+import { renderTabPanelButtonId } from '../utils/a11y.js';
+import { emptyArray } from '../utils/object.js';
 
 export interface QueryPreviewHeaderProps {
   tabs: ReadonlyArray<

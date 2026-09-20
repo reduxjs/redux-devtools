@@ -1,7 +1,7 @@
 import {
   UPDATE_REPORTS /* , GET_REPORT_SUCCESS */,
-} from '../constants/actionTypes';
-import { CoreStoreAction } from '../actions';
+} from '../constants/actionTypes.js';
+import { CoreStoreAction } from '../actions/index.js';
 
 export interface Data {
   id: unknown;

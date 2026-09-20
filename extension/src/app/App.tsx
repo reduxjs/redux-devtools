@@ -8,7 +8,7 @@ import {
   Settings,
   StoreState,
 } from '@redux-devtools/app';
-import Actions from './Actions';
+import Actions from './Actions.js';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

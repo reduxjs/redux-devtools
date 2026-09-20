@@ -1,6 +1,6 @@
 import type { Base16Theme } from 'react-base16-styling';
 import * as CSS from 'csstype';
-import * as themes from './index';
+import * as themes from './index.js';
 
 export interface Theme extends Base16Theme {
   fontFamily: CSS.Property.FontFamily;

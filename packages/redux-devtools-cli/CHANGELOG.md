@@ -1,5 +1,16 @@
 # Change Log
 
+## 5.0.0
+
+### Major Changes
+
+- 56de415: Require Node.js 20
+
+### Patch Changes
+
+- Updated dependencies [6481386]
+  - @redux-devtools/app@8.0.0
+
 ## 4.0.4
 
 ### Patch Changes

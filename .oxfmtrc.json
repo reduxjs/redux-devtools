@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "singleQuote": true,
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "*.log",
+    ".idea",
+    "lib",
+    "dist",
+    "umd",
+    "build",
+    "coverage",
+    "node_modules",
+    "__snapshots__",
+    "dev",
+    "**/demo/public/**",
+    "storybook-static",
+    ".vscode/*",
+    "pnpm-lock.yaml",
+    "patches/**"
+  ]
+}

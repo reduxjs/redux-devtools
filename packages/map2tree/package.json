@@ -19,8 +19,7 @@
     "lib",
     "src"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "exports": "./lib/index.js",
   "type": "module",
   "sideEffects": false,
   "repository": {
@@ -30,22 +29,18 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run lint && pnpm run test"
+    "test": "vitest --run --project map2tree",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.18.1"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "@types/lodash-es": "^4.17.12",
-    "immutable": "^5.1.4",
-    "jest": "^30.2.0",
-    "rimraf": "^6.0.1",
-    "ts-jest": "^29.4.5",
-    "typescript": "~5.9.3"
+    "immutable": "^5.1.9",
+    "rimraf": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }

@@ -18,8 +18,7 @@
     "lib",
     "src"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "exports": "./lib/index.js",
   "type": "module",
   "sideEffects": false,
   "repository": {
@@ -29,20 +28,18 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run lint"
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
     "@types/lodash-es": "^4.17.12",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.18.1"
   },
   "devDependencies": {
-    "@types/react": "^19.2.2",
-    "react": "^19.2.0",
-    "rimraf": "^6.0.1",
-    "typescript": "~5.9.3"
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@types/react": "^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",

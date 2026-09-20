@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/core",
-  "version": "4.1.1",
+  "version": "5.0.0",
   "description": "Redux DevTools with hot reloading and time travel",
   "keywords": [
     "redux",
@@ -20,49 +20,33 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "test": "jest",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
+    "test": "vitest --run --project core",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.4",
     "@redux-devtools/instrument": "workspace:^"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
-    "@babel/eslint-parser": "^7.28.5",
-    "@babel/plugin-transform-runtime": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^24.9.2",
-    "@types/react": "^19.2.2",
-    "jest": "^30.2.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-redux": "^9.2.0",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-redux": "^9.3.0",
     "redux": "^5.0.1",
-    "rimraf": "^6.0.1",
-    "ts-jest": "^29.4.5",
-    "typescript": "~5.9.3"
+    "rimraf": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "react": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",

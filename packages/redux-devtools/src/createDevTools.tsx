@@ -47,8 +47,11 @@ export type Monitor<
   }
 >;
 
-export interface DevToolsInstance<S, A extends Action<string>, MonitorState>
-  extends Component<Props<S, A, MonitorState>> {
+export interface DevToolsInstance<
+  S,
+  A extends Action<string>,
+  MonitorState,
+> extends Component<Props<S, A, MonitorState>> {
   liftedStore?: LiftedStore<S, A, MonitorState>;
 }
 

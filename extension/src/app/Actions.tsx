@@ -19,8 +19,8 @@ import {
 } from '@redux-devtools/app';
 import { GoBroadcast } from 'react-icons/go';
 import { MdOutlineWindow } from 'react-icons/md';
-import type { Position } from '../pageScript/api/openWindow';
-import type { SingleMessage } from '../background/store/apiMiddleware';
+import type { Position } from '../pageScript/api/openWindow.js';
+import type { SingleMessage } from '../background/store/apiMiddleware.js';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

@@ -50,7 +50,7 @@ function generateAnsiHTML(txt: string): string {
         result += '<span style="color: ' + color + ';">' + part + '</span>';
       } else {
         if (fg != null) {
-          console.log('Missing color mapping:', fg); // eslint-disable-line no-console
+          console.log('Missing color mapping:', fg);
         }
         result += '<span>' + part + '</span>';
       }

@@ -1,5 +1,18 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- 6481386: Convert remaining packages to ESM
+
+### Patch Changes
+
+- Updated dependencies [804d6bd]
+- Updated dependencies [6481386]
+  - @redux-devtools/core@5.0.0
+  - @redux-devtools/serialize@1.0.0
+
 ## 3.1.1
 
 ### Patch Changes

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { ripple } from '../../utils/animations';
-import { Theme } from '../../themes/default';
-import { StyleProps } from './default';
+import { ripple } from '../../utils/animations.js';
+import { Theme } from '../../themes/default.js';
+import { StyleProps } from './default.js';
 
 export const style = ({ theme, main }: StyleProps & { theme: Theme }) => css`
   display: flex;
@@ -10,11 +10,13 @@ export const style = ({ theme, main }: StyleProps & { theme: Theme }) => css`
   background-color: ${theme.base01};
   width: 100%;
   overflow: hidden;
-  ${!main &&
-  `
+  ${
+    !main &&
+    `
   border-top: 1px solid ${theme.base01};
   border-bottom: 1px solid ${theme.base02};
-  `}
+  `
+  }
 
   > div {
     display: flex;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import createStyledComponent from '../utils/createStyledComponent';
-import styles from './styles/index';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import styles from './styles/index.js';
 
 const ContextMenuWrapper = createStyledComponent(styles);
 

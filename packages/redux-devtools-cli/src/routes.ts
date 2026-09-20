@@ -9,7 +9,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { AGServer } from 'socketcluster-server';
 import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
+import { expressMiddleware } from '@as-integrations/express5';
 import type { AddData, ReportBaseFields, Store } from './store.js';
 import { resolvers, schema } from './api/schema.js';
 
@@ -62,7 +62,6 @@ function routes(
         '/graphql',
         cors<cors.CorsRequest>(),
         bodyParser.json(),
-        // @ts-expect-error https://github.com/apollo-server-integrations/apollo-server-integration-express5/issues/9
         expressMiddleware(server, {
           context: () => Promise.resolve({ store }),
         }),
