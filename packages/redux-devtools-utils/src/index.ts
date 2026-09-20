@@ -220,12 +220,13 @@ export function getSeralizeParameter(
   return value;
 }
 
-export function getStackTrace(
-  config: { trace?: () => {}; traceLimit: number },
+export function getStackTrace<A extends Action<string>>(
+  config: { trace?: (action?: A) => {}; traceLimit: number },
   toExcludeFromTrace?: Function | undefined,
+  action?: A,
 ) {
   if (!config.trace) return undefined;
-  if (typeof config.trace === 'function') return config.trace();
+  if (typeof config.trace === 'function') return config.trace(action);
 
   let stack;
   let extraFrames = 0;

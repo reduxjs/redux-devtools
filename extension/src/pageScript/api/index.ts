@@ -237,9 +237,10 @@ function post<S, A extends Action<string>>(
 function getStackTrace(
   config: Config,
   toExcludeFromTrace: Function | undefined,
+  action: Action<string>,
 ) {
   if (!config.trace) return undefined;
-  if (typeof config.trace === 'function') return config.trace();
+  if (typeof config.trace === 'function') return config.trace(action);
 
   let stack;
   let extraFrames = 0;
@@ -282,16 +283,32 @@ function amendActionType<A extends Action<string>>(
   toExcludeFromTrace: Function | undefined,
 ): StructuralPerformAction<A> {
   const timestamp = Date.now();
-  const stack = getStackTrace(config, toExcludeFromTrace);
   if (typeof action === 'string') {
-    return { action: { type: action } as A, timestamp, stack };
+    const amendedAction = { type: action } as A;
+    return {
+      action: amendedAction,
+      timestamp,
+      stack: getStackTrace(config, toExcludeFromTrace, amendedAction),
+    };
   }
-  if (!(action as A).type)
-    return { action: { type: 'update' } as A, timestamp, stack };
+  if (!(action as A).type) {
+    const amendedAction = { type: 'update' } as A;
+    return {
+      action: amendedAction,
+      timestamp,
+      stack: getStackTrace(config, toExcludeFromTrace, amendedAction),
+    };
+  }
   if ((action as StructuralPerformAction<A>).action) {
     const performAction = action as StructuralPerformAction<A>;
+    const stack = getStackTrace(
+      config,
+      toExcludeFromTrace,
+      performAction.action,
+    );
     return stack ? { stack, ...performAction } : performAction;
   }
+  const stack = getStackTrace(config, toExcludeFromTrace, action as A);
   return { action, timestamp, stack } as StructuralPerformAction<A>;
 }
 
