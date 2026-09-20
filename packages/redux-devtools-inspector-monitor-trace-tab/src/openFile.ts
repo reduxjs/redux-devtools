@@ -128,8 +128,8 @@ export default function openFile(
           if (chrome.devtools && isFF) {
             chrome.devtools.inspectedWindow.eval(
               'confirm("Set the editor to open the file in?")',
-              (result) => {
-                if (!result) return;
+              (result, exceptionInfo) => {
+                if (exceptionInfo || !result) return;
                 void chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
               },
             );
