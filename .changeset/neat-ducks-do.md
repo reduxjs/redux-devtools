@@ -1,5 +1,5 @@
 ---
-'@redux-devtools/app': minor
+'@redux-devtools/app-core': minor
 ---
 
 Enable lock button for non-Redux connections
