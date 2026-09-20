@@ -1,1 +1,1 @@
-export { default } from './SegmentedControl';
+export { default } from './SegmentedControl.js';

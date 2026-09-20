@@ -9,28 +9,42 @@ if (
   isFirefox
 ) {
   (chrome.runtime as any).onConnectExternal = {
-    addListener() {},
+    addListener() {
+      // do nothing.
+    },
   };
   (chrome.runtime as any).onMessageExternal = {
-    addListener() {},
+    addListener() {
+      // do nothing.
+    },
   };
 
   if (isElectron) {
     (chrome.notifications as any) = {
       onClicked: {
-        addListener() {},
+        addListener() {
+          // do nothing.
+        },
       },
-      create() {},
-      clear() {},
+      create() {
+        // do nothing.
+      },
+      clear() {
+        // do nothing.
+      },
     };
     (chrome.contextMenus as any) = {
       onClicked: {
-        addListener() {},
+        addListener() {
+          // do nothing.
+        },
       },
     };
     (chrome.commands as any) = {
       onCommand: {
-        addListener() {},
+        addListener() {
+          // do nothing.
+        },
       },
     };
   } else {
@@ -44,31 +58,36 @@ if (
 if (isElectron) {
   if (!chrome.storage.local || !chrome.storage.local.remove) {
     (chrome.storage as any).local = {
-      set(obj: any, callback: any) {
-        Object.keys(obj).forEach((key) => {
-          localStorage.setItem(key, obj[key]);
-        });
+      set(items: { [key: string]: string }, callback: () => void) {
+        for (const [key, value] of Object.entries(items)) {
+          localStorage.setItem(key, value);
+        }
         if (callback) {
           callback();
         }
       },
-      get(obj: any, callback: any) {
-        const result: any = {};
-        Object.keys(obj).forEach((key) => {
-          result[key] = localStorage.getItem(key) || obj[key];
-        });
+      get(
+        keys: { [key: string]: any },
+        callback: (items: { [key: string]: any }) => void,
+      ) {
+        const result = Object.fromEntries(
+          Object.entries(keys).map(([key, value]) => [
+            key,
+            localStorage.getItem(key) ?? value,
+          ]),
+        );
         if (callback) {
           callback(result);
         }
       },
       // Electron ~ 1.4.6
-      remove(items: any, callback: any) {
-        if (Array.isArray(items)) {
-          items.forEach((name) => {
-            localStorage.removeItem(name);
-          });
+      remove(keys: string | string[], callback: () => void) {
+        if (Array.isArray(keys)) {
+          for (const key of keys) {
+            localStorage.removeItem(key);
+          }
         } else {
-          localStorage.removeItem(items);
+          localStorage.removeItem(keys);
         }
         if (callback) {
           callback();
@@ -78,14 +97,14 @@ if (isElectron) {
   }
   // Avoid error: chrome.runtime.sendMessage is not supported responseCallback
   const originSendMessage = (chrome.runtime as any).sendMessage;
-  chrome.runtime.sendMessage = function () {
+  (chrome.runtime as any).sendMessage = function (...args: unknown[]) {
     if (process.env.NODE_ENV === 'development') {
-      return originSendMessage(...arguments);
+      return originSendMessage(...args);
     }
-    if (typeof arguments[arguments.length - 1] === 'function') {
-      Array.prototype.pop.call(arguments);
+    if (typeof args[arguments.length - 1] === 'function') {
+      Array.prototype.pop.call(args);
     }
-    return originSendMessage(...arguments);
+    return originSendMessage(...args);
   };
 }
 

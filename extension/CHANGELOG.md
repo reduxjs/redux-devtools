@@ -1,5 +1,78 @@
 # remotedev-redux-devtools-extension
 
+## 3.2.12
+
+### Patch Changes
+
+- Updated dependencies [3f90241]
+- Updated dependencies [d61d31a]
+- Updated dependencies [804e729]
+- Updated dependencies [12849a4]
+- Updated dependencies [804d6bd]
+- Updated dependencies [6481386]
+  - @redux-devtools/instrument@3.0.0
+  - @redux-devtools/ui@3.0.0
+  - @redux-devtools/slider-monitor@7.0.0
+  - @redux-devtools/core@5.0.0
+  - @redux-devtools/app@8.0.0
+  - @redux-devtools/serialize@1.0.0
+  - @redux-devtools/utils@4.0.0
+
+## 3.2.11
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+  - @redux-devtools/app@7.0.0
+  - @redux-devtools/slider-monitor@6.0.0
+  - @redux-devtools/ui@2.0.0
+
+## 3.2.10
+
+### Patch Changes
+
+- @redux-devtools/app@6.2.2
+
+## 3.2.9
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+  - @redux-devtools/slider-monitor@5.1.1
+  - @redux-devtools/utils@3.1.1
+  - @redux-devtools/app@6.2.1
+
+## 3.2.8
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - react-json-tree@0.20.0
+  - @redux-devtools/app@6.2.0
+  - @redux-devtools/slider-monitor@6.0.0
+  - @redux-devtools/ui@1.4.0
+  - @redux-devtools/core@4.1.0
+  - @redux-devtools/utils@4.0.0
+
+## 3.2.7
+
+### Patch Changes
+
+- b25bf13: Send state from background when monitor connects
+
+## 3.2.6
+
+### Patch Changes
+
+- 50d7682: Fix DevTools from losing connection
+
+## 3.2.5
+
+### Patch Changes
+
+- eb3ac09: Add logging to background service worker
+
 ## 3.2.4
 
 ### Patch Changes

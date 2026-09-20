@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import Select from './';
-import { options } from './options';
-import { Meta, StoryObj } from '@storybook/react';
+import styled from '@emotion/styled';
+import Select from './index.js';
+import { options } from './options.js';
+import { Meta, StoryObj } from '@storybook/react-vite';
 
 const Container = styled.div`
   display: flex;

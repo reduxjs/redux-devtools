@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import type { Delta } from 'jsondiffpatch';
 import * as htmlFormatter from 'jsondiffpatch/formatters/html';
-import styled, { ThemedStyledProps } from 'styled-components';
-import { effects, Theme } from '@redux-devtools/ui';
+import styled from '@emotion/styled';
+import { Base16Theme, effects } from '@redux-devtools/ui';
 
 export const StyledContainer = styled.div`
   .jsondiffpatch-delta {
@@ -19,8 +19,7 @@ export const StyledContainer = styled.div`
     padding: 2px 3px;
     border-radius: 3px;
     position: relative;
-    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
-    color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base07};
+    color: ${(props: { theme?: Base16Theme }) => props.theme!.base07};
     display: inline-block;
   }
 
@@ -44,25 +43,22 @@ export const StyledContainer = styled.div`
   .jsondiffpatch-modified .jsondiffpatch-right-value:before {
     vertical-align: top;
     padding: 2px;
-    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
-    color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base0E};
+    color: ${(props) => props.theme.base0E};
     content: ' => ';
   }
 
   .jsondiffpatch-added .jsondiffpatch-value pre,
   .jsondiffpatch-modified .jsondiffpatch-right-value pre,
   .jsondiffpatch-textdiff-added {
-    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
-    background: ${(props: ThemedStyledProps<{}, Theme>) =>
-      effects.color(props.theme.base0B, 'alpha', 0.2)};
+    background: ${(props: { theme?: Base16Theme }) =>
+      effects.color(props.theme!.base0B, 'alpha', 0.2)};
   }
 
   .jsondiffpatch-deleted pre,
   .jsondiffpatch-modified .jsondiffpatch-left-value pre,
   .jsondiffpatch-textdiff-deleted {
-    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
-    background: ${(props: ThemedStyledProps<{}, Theme>) =>
-      effects.color(props.theme.base08, 'alpha', 0.2)};
+    background: ${(props: { theme?: Base16Theme }) =>
+      effects.color(props.theme!.base08, 'alpha', 0.2)};
     text-decoration: line-through;
   }
 
@@ -129,14 +125,12 @@ export const StyledContainer = styled.div`
     padding: 2px 0;
     padding-right: 5px;
     vertical-align: top;
-    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
-    color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base0D};
+    color: ${(props) => props.theme.base0D};
   }
 
   .jsondiffpatch-property-name:after {
     content: ': ';
-    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
-    color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base07};
+    color: ${(props) => props.theme.base07};
   }
 
   .jsondiffpatch-child-node-type-array > .jsondiffpatch-property-name:after {
@@ -172,8 +166,7 @@ export const StyledContainer = styled.div`
   }
 
   .jsondiffpatch-value pre:after {
-    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
-    color: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base07};
+    color: ${(props) => props.theme.base07};
     content: ',';
   }
 
@@ -196,8 +189,7 @@ export const StyledContainer = styled.div`
 
   .jsondiffpatch-moved .jsondiffpatch-moved-destination {
     display: inline-block;
-    ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
-    background: ${(props: ThemedStyledProps<{}, Theme>) => props.theme.base0A};
+    background: ${(props) => props.theme.base0A};
   }
 
   .jsondiffpatch-moved .jsondiffpatch-moved-destination:before {

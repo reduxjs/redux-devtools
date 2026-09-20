@@ -2,11 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { Action } from 'redux';
 import { css } from '@emotion/react';
 import type { Interpolation, Theme } from '@emotion/react';
-import { Tab } from './ActionPreview';
+import { Tab } from './ActionPreview.js';
 import {
   selectorButtonCss,
   selectorButtonSelectedCss,
-} from './utils/selectorButtonStyles';
+} from './utils/selectorButtonStyles.js';
 
 const inspectedPathKeyCss = css({
   '&:not(:last-child):after': {

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Action, AnyAction } from 'redux';
 import { ThemeProvider } from '@emotion/react';
-import RtkQueryInspector from './RtkQueryInspector';
-import { reducer } from '../reducers';
+import RtkQueryInspector from './RtkQueryInspector.js';
+import { reducer } from '../reducers.js';
 import {
   ExternalProps,
   RtkQueryMonitorProps,
   RtkQueryMonitorState,
-} from '../types';
+} from '../types.js';
 import {
   createRtkQueryMonitorThemeFromBase16Theme,
   resolveBase16Theme,
   StyleUtilsContext,
-} from '../styles/themes';
+} from '../styles/themes.js';
 
 interface DefaultProps {
   theme: string;

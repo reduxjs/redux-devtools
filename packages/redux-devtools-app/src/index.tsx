@@ -4,11 +4,11 @@ import { Store } from 'redux';
 import { Persistor } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import { App } from '@redux-devtools/app-core';
-import { StoreState } from './reducers';
-import { StoreAction } from './actions';
-import { CONNECT_REQUEST } from './constants/socketActionTypes';
-import Connection from './components/Settings/Connection';
-import configureStore from './store/configureStore';
+import { StoreState } from './reducers/index.js';
+import { StoreAction } from './actions/index.js';
+import { CONNECT_REQUEST } from './constants/socketActionTypes.js';
+import Connection from './components/Settings/Connection.js';
+import configureStore from './store/configureStore.js';
 
 export class Root extends Component {
   store?: Store<StoreState, StoreAction>;
@@ -43,10 +43,10 @@ export class Root extends Component {
 }
 
 export * from '@redux-devtools/app-core';
-export * from './actions';
-export * from './constants/socketActionTypes';
-export * from './middlewares/api';
-export * from './reducers';
-export * from './reducers/connection';
-export * from './reducers/socket';
-export * from './utils/monitorActions';
+export * from './actions/index.js';
+export * from './constants/socketActionTypes.js';
+export * from './middlewares/api.js';
+export * from './reducers/index.js';
+export * from './reducers/connection.js';
+export * from './reducers/socket.js';
+export * from './utils/monitorActions.js';

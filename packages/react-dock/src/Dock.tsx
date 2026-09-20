@@ -228,12 +228,12 @@ interface Props {
   dockHiddenStyle?: React.CSSProperties | null;
   duration: number;
   children?:
-    | React.FunctionComponent<{
+    | ((params: {
         position: 'left' | 'right' | 'top' | 'bottom';
         isResizing: boolean | undefined;
         size: number;
         isVisible: boolean | undefined;
-      }>
+      }) => ReactNode)
     | ReactNode;
 }
 
@@ -363,14 +363,7 @@ export default class Dock extends Component<Props, State> {
           />
           <div style={styles.dockContent}>
             {typeof children === 'function'
-              ? (
-                  children as React.FunctionComponent<{
-                    position: 'left' | 'right' | 'top' | 'bottom';
-                    isResizing: boolean | undefined;
-                    size: number;
-                    isVisible: boolean | undefined;
-                  }>
-                )({
+              ? children({
                   position,
                   isResizing,
                   size,

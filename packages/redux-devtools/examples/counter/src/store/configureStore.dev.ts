@@ -7,7 +7,7 @@ import {
   Middleware,
 } from 'redux';
 import { persistState } from '@redux-devtools/core';
-import thunk from 'redux-thunk';
+import { thunk } from 'redux-thunk';
 import rootReducer, { CounterState } from '../reducers';
 import DevTools from '../containers/DevTools';
 import { CounterAction } from '../actions/CounterActions';
@@ -29,7 +29,6 @@ export default function configureStore(initialState?: Partial<CounterState>) {
   if (module.hot) {
     module.hot.accept('../reducers', () =>
       store.replaceReducer(
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
         require('../reducers').default as Reducer<
           CounterState,
           CounterAction,

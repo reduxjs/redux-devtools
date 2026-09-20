@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@redux-devtools/ui';
 import { IoIosLock } from 'react-icons/io';
-import { lockChanges, CoreStoreAction } from '../../actions';
+import { lockChanges, CoreStoreAction } from '../../actions/index.js';
 import { Dispatch } from 'redux';
 
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;

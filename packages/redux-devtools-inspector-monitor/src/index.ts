@@ -1,9 +1,15 @@
 export type { LabelRenderer } from 'react-json-tree';
-export { default as InspectorMonitor } from './DevtoolsInspector';
-export type { Tab, TabComponentProps } from './ActionPreview';
-export type { DevtoolsInspectorState } from './redux';
-export type { Base16ThemeName } from './utils/themes';
-export * as inspectorThemes from './themes/index';
-export { default as ActionTab } from './tabs/ActionTab';
-export { default as DiffTab } from './tabs/DiffTab';
-export { default as StateTab } from './tabs/StateTab';
+export {
+  default as InspectorMonitor,
+  type ExternalProps as DevtoolsInspectorProps,
+} from './DevtoolsInspector.js';
+export type { Tab, TabComponentProps } from './ActionPreview.js';
+export type {
+  DevtoolsInspectorAction,
+  DevtoolsInspectorState,
+} from './redux.js';
+export type { Base16ThemeName } from './utils/themes.js';
+export * as inspectorThemes from './themes/index.js';
+export { default as ActionTab } from './tabs/ActionTab.js';
+export { default as DiffTab } from './tabs/DiffTab.js';
+export { default as StateTab } from './tabs/StateTab.js';

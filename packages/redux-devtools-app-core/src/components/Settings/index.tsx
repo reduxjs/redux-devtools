@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs } from '@redux-devtools/ui';
-import Themes from './Themes';
-import StateTree from './StateTree';
+import Themes from './Themes.js';
+import StateTree from './StateTree.js';
 
 interface Props {
   extraTabs?: { name: string; component: React.ComponentType }[];
@@ -26,9 +26,8 @@ export default class Settings extends Component<Props, State> {
       { name: 'State Tree', component: StateTree },
     ];
     return (
-      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
       <Tabs<{}>
-        tabs={tabs as any}
+        tabs={tabs}
         selected={this.state.selected || tabs[0].name}
         onClick={this.handleSelect}
       />

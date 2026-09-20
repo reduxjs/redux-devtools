@@ -1,6 +1,6 @@
-import styled, { ThemedStyledProps } from 'styled-components';
-import color from '../../utils/color';
-import { Theme } from '../../themes/default';
+import styled from '@emotion/styled';
+import color from '../../utils/color.js';
+import { Theme } from '../../themes/default.js';
 
 export const MainContainerWrapper = styled.div`
   display: flex;
@@ -8,9 +8,8 @@ export const MainContainerWrapper = styled.div`
   width: 100%;
   flex-flow: column nowrap;
   overflow: auto;
-  ${/* eslint-disable-next-line @typescript-eslint/no-empty-object-type */ ''}
-  background-color: ${(props: ThemedStyledProps<{}, Theme>) =>
-    color(props.theme.base00, 'lighten', 0.03)};
+  background-color: ${(props: { theme?: Theme }) =>
+    color(props.theme!.base00, 'lighten', 0.03)};
   color: ${(props) => props.theme.base07};
   font-size: 12px;
 
@@ -23,7 +22,7 @@ export const MainContainerWrapper = styled.div`
     font-family: ${(props) => props.theme.fontFamily || 'monaco, monospace'};
   }
 
-  .CodeMirror div,
+  .cm-editor div,
   pre,
   .monitor div,
   .slider div {

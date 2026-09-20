@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Container, Notification } from '@redux-devtools/ui';
-import { clearNotification } from '../actions';
-import Header from '../components/Header';
-import Actions from './Actions';
-import Settings from '../components/Settings';
-import { CoreStoreState } from '../reducers';
+import { clearNotification } from '../actions/index.js';
+import Header from '../components/Header.js';
+import Actions from './Actions.js';
+import Settings from '../components/Settings/index.js';
+import { CoreStoreState } from '../reducers/index.js';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

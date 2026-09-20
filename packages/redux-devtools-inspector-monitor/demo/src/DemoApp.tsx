@@ -119,8 +119,10 @@ function buildUrl(options: Options) {
   );
 }
 
-interface Props
-  extends Omit<DemoAppState, 'addFunction' | 'addSymbol' | 'shuffleArray'> {
+interface Props extends Omit<
+  DemoAppState,
+  'addFunction' | 'addSymbol' | 'shuffleArray'
+> {
   toggleTimeoutUpdate: (timeoutUpdateEnabled: boolean) => void;
   timeoutUpdate: () => void;
   increment: () => void;
@@ -142,7 +144,7 @@ interface Props
 }
 
 function DemoApp(props: Props) {
-  const timeout = useRef<number | undefined>();
+  const timeout = useRef<number | undefined>(undefined);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -155,22 +157,22 @@ function DemoApp(props: Props) {
     });
   };
 
-  const toggleImmutableSupport = () => {
+  const toggleImmutableSupport = async () => {
     const options = getOptions(location);
 
-    navigate(
+    await navigate(
       buildUrl({ ...options, supportImmutable: !options.supportImmutable }),
     );
   };
 
-  const toggleTheme = () => {
+  const toggleTheme = async () => {
     const options = getOptions(location);
 
-    navigate(buildUrl({ ...options, dark: !options.dark }));
+    await navigate(buildUrl({ ...options, dark: !options.dark }));
   };
 
-  const setTheme = (options: Options, theme: string) => {
-    navigate(buildUrl({ ...options, theme }));
+  const setTheme = async (options: Options, theme: string) => {
+    await navigate(buildUrl({ ...options, theme }));
   };
 
   const toggleTimeoutUpdate = () => {

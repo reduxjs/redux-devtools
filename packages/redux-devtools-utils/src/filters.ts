@@ -110,10 +110,7 @@ export function isFiltered(
 
   const { allowlist, denylist } = localFilter || opts;
   return (
-    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (allowlist && !type.match(allowlist)) ||
-    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (denylist && type.match(denylist))
+    (allowlist && !type.match(allowlist)) || (denylist && type.match(denylist))
   );
 }
 

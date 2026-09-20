@@ -110,10 +110,7 @@ const mergeStyling = (
         case 'function':
           return (styling, ...args) =>
             (customStyling as StylingValueFunction)(
-              (defaultStyling as StylingValueFunction)(
-                styling,
-                ...args,
-              ) as Styling,
+              (defaultStyling as StylingValueFunction)(styling, ...args),
               ...args,
             );
       }

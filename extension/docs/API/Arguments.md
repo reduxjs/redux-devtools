@@ -51,7 +51,6 @@ _number_ - maximum stack trace frames to be stored (in case `trace` option was p
 _boolean_ or _object_ which contains:
 
 - **options** `object or boolean`:
-
   - `undefined` - will use regular `JSON.stringify` to send data (it's the fast mode).
   - `false` - will handle also circular references.
   - `true` - will handle also date, regex, undefined, primitives, error objects, symbols, maps, sets and functions.

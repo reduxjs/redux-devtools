@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import type { PageScriptToContentScriptMessage } from './index';
+import type { PageScriptToContentScriptMessage } from './index.js';
 
 export type Position = 'window' | 'remote';
 

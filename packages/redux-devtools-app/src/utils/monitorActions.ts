@@ -6,7 +6,7 @@ import {
   stringifyJSON,
 } from '@redux-devtools/app-core';
 import { Dispatch, MiddlewareAPI } from 'redux';
-import { StoreActionWithoutLiftedAction } from '../actions';
+import { StoreActionWithoutLiftedAction } from '../actions/index.js';
 
 export function sweep(state: State): State {
   const skippedActionIdsSet = new Set(state.skippedActionIds);

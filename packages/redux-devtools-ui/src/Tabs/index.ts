@@ -1,2 +1,2 @@
-export { default } from './Tabs';
-export type { Tab } from './TabsHeader';
+export { default } from './Tabs.js';
+export type { Tab } from './TabsHeader.js';

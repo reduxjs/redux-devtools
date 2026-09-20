@@ -1,0 +1,59 @@
+diff --git a/dist/components/Accessibility/Accessibility.d.ts b/dist/components/Accessibility/Accessibility.d.ts
+index bb8c25b3e818b31da14a1dc64c7d8cc4ad2c1b2f..dc8a50037b90a7a4044d54f2abdf58d1b3dc4bd3 100644
+--- a/dist/components/Accessibility/Accessibility.d.ts
++++ b/dist/components/Accessibility/Accessibility.d.ts
+@@ -6,5 +6,5 @@ interface Props {
+     screenReaderInstructions?: ScreenReaderInstructions;
+     hiddenTextDescribedById: string;
+ }
+-export declare function Accessibility({ announcements, container, hiddenTextDescribedById, screenReaderInstructions, }: Props): JSX.Element | null;
++export declare function Accessibility({ announcements, container, hiddenTextDescribedById, screenReaderInstructions, }: Props): React.JSX.Element | null;
+ export {};
+diff --git a/dist/components/DragOverlay/DragOverlay.d.ts b/dist/components/DragOverlay/DragOverlay.d.ts
+index 36fc7a419fac52cbe265c90106cddc43fe95dcb8..e98ba4a1b81a8266d2b9aa657d6a79f8b4176bb1 100644
+--- a/dist/components/DragOverlay/DragOverlay.d.ts
++++ b/dist/components/DragOverlay/DragOverlay.d.ts
+@@ -5,7 +5,7 @@ import type { DropAnimation } from './hooks';
+ export interface Props extends Pick<PositionedOverlayProps, 'adjustScale' | 'children' | 'className' | 'style' | 'transition'> {
+     dropAnimation?: DropAnimation | null | undefined;
+     modifiers?: Modifiers;
+-    wrapperElement?: keyof JSX.IntrinsicElements;
++    wrapperElement?: keyof React.JSX.IntrinsicElements;
+     zIndex?: number;
+ }
+-export declare const DragOverlay: React.MemoExoticComponent<({ adjustScale, children, dropAnimation: dropAnimationConfig, style, transition, modifiers, wrapperElement, className, zIndex, }: Props) => JSX.Element>;
++export declare const DragOverlay: React.MemoExoticComponent<({ adjustScale, children, dropAnimation: dropAnimationConfig, style, transition, modifiers, wrapperElement, className, zIndex, }: Props) => React.JSX.Element>;
+diff --git a/dist/components/DragOverlay/components/AnimationManager/AnimationManager.d.ts b/dist/components/DragOverlay/components/AnimationManager/AnimationManager.d.ts
+index 8099a21266bdc99774a36a536428957338c4df41..1022ed4621ed50172909fae7ea695fb78a514091 100644
+--- a/dist/components/DragOverlay/components/AnimationManager/AnimationManager.d.ts
++++ b/dist/components/DragOverlay/components/AnimationManager/AnimationManager.d.ts
+@@ -5,4 +5,4 @@ export interface Props {
+     animation: Animation;
+     children: React.ReactElement | null;
+ }
+-export declare function AnimationManager({ animation, children }: Props): JSX.Element;
++export declare function AnimationManager({ animation, children }: Props): React.JSX.Element;
+diff --git a/dist/components/DragOverlay/components/NullifiedContextProvider/NullifiedContextProvider.d.ts b/dist/components/DragOverlay/components/NullifiedContextProvider/NullifiedContextProvider.d.ts
+index cae101110ecb6fdabf90e0fd5018fe1e13512230..c8b9f458b41952bbde8549f0a29d32c4eb2d75a3 100644
+--- a/dist/components/DragOverlay/components/NullifiedContextProvider/NullifiedContextProvider.d.ts
++++ b/dist/components/DragOverlay/components/NullifiedContextProvider/NullifiedContextProvider.d.ts
+@@ -2,5 +2,5 @@ import React from 'react';
+ interface Props {
+     children: React.ReactNode;
+ }
+-export declare function NullifiedContextProvider({ children }: Props): JSX.Element;
++export declare function NullifiedContextProvider({ children }: Props): React.JSX.Element;
+ export {};
+diff --git a/dist/components/DragOverlay/components/PositionedOverlay/PositionedOverlay.d.ts b/dist/components/DragOverlay/components/PositionedOverlay/PositionedOverlay.d.ts
+index 59dba0b1ca8e7b9fed4ea85036c8ad5c0e92caa6..badcc14baa5c99a4a16e6bcf47344deee88ae194 100644
+--- a/dist/components/DragOverlay/components/PositionedOverlay/PositionedOverlay.d.ts
++++ b/dist/components/DragOverlay/components/PositionedOverlay/PositionedOverlay.d.ts
+@@ -3,7 +3,7 @@ import type { Transform } from '@dnd-kit/utilities';
+ import type { ClientRect, UniqueIdentifier } from '../../../../types';
+ declare type TransitionGetter = (activatorEvent: Event | null) => React.CSSProperties['transition'] | undefined;
+ export interface Props {
+-    as: keyof JSX.IntrinsicElements;
++    as: keyof React.JSX.IntrinsicElements;
+     activatorEvent: Event | null;
+     adjustScale?: boolean;
+     children?: React.ReactNode;

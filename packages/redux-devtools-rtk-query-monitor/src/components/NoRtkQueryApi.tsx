@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function NoRtkQueryApi(): JSX.Element {
+export function NoRtkQueryApi(): React.JSX.Element {
   return (
     <div
       css={(theme) => ({

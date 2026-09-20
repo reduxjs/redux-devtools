@@ -1,7 +1,7 @@
 import React, { ReactNode, PureComponent } from 'react';
-import { QueryPreviewTabs, RtkQueryApiState } from '../types';
-import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
-import { TreeView, TreeViewProps } from './TreeView';
+import { QueryPreviewTabs, RtkQueryApiState } from '../types.js';
+import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y.js';
+import { TreeView, TreeViewProps } from './TreeView.js';
 
 const rootProps: TreeViewProps['rootProps'] = {
   'aria-labelledby': renderTabPanelButtonId(
