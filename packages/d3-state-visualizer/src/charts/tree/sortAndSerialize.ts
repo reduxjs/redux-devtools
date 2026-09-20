@@ -2,6 +2,7 @@ function sortObject(obj: unknown, strict?: boolean) {
   if (obj instanceof Array) {
     let ary;
     if (strict) {
+      // oxlint-disable-next-line typescript/require-array-sort-compare
       ary = obj.sort();
     } else {
       ary = obj;

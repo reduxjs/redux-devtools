@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import JSONDiff from './JSONDiff';
-import { TabComponentProps } from '../ActionPreview';
+import JSONDiff from './JSONDiff.js';
+import { TabComponentProps } from '../ActionPreview.js';
 import { Action } from 'redux';
 
 const DiffTab: FunctionComponent<

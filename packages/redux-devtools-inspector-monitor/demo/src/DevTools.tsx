@@ -47,5 +47,6 @@ export const getDevTools = (location: { search: string }) =>
 export function ConnectedDevTools() {
   const location = useLocation();
   const DevTools = getDevTools(location);
+  // oxlint-disable-next-line react/static-components
   return <DevTools />;
 }

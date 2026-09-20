@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- 6481386: Convert remaining packages to ESM
+
 ## 3.3.0
 
 ### Minor Changes

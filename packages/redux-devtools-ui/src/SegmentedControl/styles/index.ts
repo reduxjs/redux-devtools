@@ -1,15 +1,12 @@
-import { css, ThemedStyledProps } from 'styled-components';
-import color from '../../utils/color';
-import { Theme } from '../../themes/default';
+import { css } from '@emotion/react';
+import color from '../../utils/color.js';
+import { Theme } from '../../themes/default.js';
 
 interface StyleProps {
   disabled: boolean | undefined;
 }
 
-export default ({
-  theme,
-  disabled,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+export default ({ theme, disabled }: StyleProps & { theme: Theme }) => css`
   display: flex;
   flex-shrink: 0;
 
@@ -28,12 +25,13 @@ export default ({
     border: 1px solid ${color(theme.base03, 'alpha', 0.4)};
     border-left-width: 0;
     padding: 5px 10px;
-    ${disabled
-      ? `
+    ${
+      disabled
+        ? `
     cursor: not-allowed;
     opacity: 0.6;
     `
-      : `
+        : `
     cursor: pointer;
     color: ${theme.base05};
     background-color: ${theme.base01};
@@ -42,7 +40,8 @@ export default ({
       background-color: ${theme.base02};
       color: ${theme.base07};
     }
-    `}
+    `
+    }
 
     &:first-child {
       border-top-left-radius: 3px;

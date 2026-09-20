@@ -1,4 +1,7 @@
 {
-  "extends": "../../../../tsconfig.base.json",
+  "extends": "../../../../tsconfig.lib.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
   "include": ["src"]
 }

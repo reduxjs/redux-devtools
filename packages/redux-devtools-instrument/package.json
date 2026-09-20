@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/instrument",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Redux DevTools instrumentation",
   "keywords": [
     "redux",
@@ -20,51 +20,27 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/instrument.js",
-  "module": "lib/esm/instrument.js",
-  "types": "lib/types/instrument.d.ts",
+  "exports": "./lib/instrument.js",
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "test": "jest",
-    "lint": "eslint . --ext .ts",
-    "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint && pnpm run test"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.24.1",
-    "lodash": "^4.17.21"
+    "test": "vitest --run --project instrument",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.1",
-    "@babel/core": "^7.24.3",
-    "@babel/eslint-parser": "^7.24.1",
-    "@babel/plugin-transform-runtime": "^7.24.3",
-    "@babel/preset-env": "^7.24.3",
-    "@babel/preset-typescript": "^7.24.1",
-    "@types/jest": "^29.5.12",
-    "@types/lodash": "^4.17.0",
-    "@types/node": "^20.11.30",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-jest": "^27.9.0",
-    "jest": "^29.7.0",
-    "redux": "^4.2.1",
-    "rimraf": "^5.0.5",
-    "rxjs": "^7.8.1",
-    "ts-jest": "^29.1.2",
-    "typescript": "~5.3.3"
+    "@types/node": "catalog:",
+    "redux": "^5.0.1",
+    "rimraf": "catalog:",
+    "rxjs": "^7.8.2",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "redux": "^3.4.0 || ^4.0.0 || ^5.0.0"

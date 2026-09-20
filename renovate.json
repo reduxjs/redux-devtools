@@ -1,13 +1,18 @@
 {
-  "extends": ["config:base", "group:allNonMajor", ":maintainLockFilesWeekly"],
-  "rangeStrategy": "bump",
-  "rebaseWhen": "conflicted",
-  "ignorePaths": [
-    "**/node_modules/**",
-    "extension/examples/**",
-    "packages/redux-devtools-remote/examples/**"
+  "extends": [
+    "config:recommended",
+    "group:allNonMajor",
+    ":maintainLockFilesWeekly"
   ],
+  "rangeStrategy": "bump",
+  "postUpdateOptions": ["pnpmDedupe"],
+  "rebaseWhen": "conflicted",
+  "ignorePaths": ["**/node_modules/**"],
   "packageRules": [
+    {
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "1 day"
+    },
     {
       "matchPackageNames": ["node"],
       "enabled": false
@@ -19,7 +24,6 @@
     },
     {
       "matchPackageNames": ["source-map", "@types/source-map"],
-      "matchUpdateTypes": ["major", "minor"],
       "groupName": "source-map"
     },
     {

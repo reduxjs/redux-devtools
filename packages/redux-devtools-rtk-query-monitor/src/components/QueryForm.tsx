@@ -2,14 +2,14 @@ import React, { ReactNode, FormEvent, MouseEvent, ChangeEvent } from 'react';
 import type { DebouncedFunc } from 'lodash';
 import { css } from '@emotion/react';
 import { Select } from '@redux-devtools/ui';
-import { QueryFormValues } from '../types';
-import { StyleUtilsContext } from '../styles/themes';
-import { SelectOption } from '../types';
+import { QueryFormValues } from '../types.js';
+import { StyleUtilsContext } from '../styles/themes.js';
+import { SelectOption } from '../types.js';
 import debounce from 'lodash.debounce';
-import { sortQueryOptions, QueryComparators } from '../utils/comparators';
-import { QueryFilters, filterQueryOptions } from '../utils/filters';
-import { SortOrderButton } from './SortOrderButton';
-import { RegexIcon } from './RegexIcon';
+import { sortQueryOptions, QueryComparators } from '../utils/comparators.js';
+import { QueryFilters, filterQueryOptions } from '../utils/filters.js';
+import { SortOrderButton } from './SortOrderButton.js';
+import { RegexIcon } from './RegexIcon.js';
 
 const srOnlyCss = css({
   position: 'absolute',

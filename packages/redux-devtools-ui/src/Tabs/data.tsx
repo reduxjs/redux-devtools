@@ -1,6 +1,5 @@
 import React from 'react';
 
-/* eslint-disable react/prop-types */
 const Component = ({ selected }: { selected: string }) => (
   <div
     style={{
@@ -15,7 +14,6 @@ const Component = ({ selected }: { selected: string }) => (
     Selected {selected}
   </div>
 );
-/* eslint-enable react/prop-types */
 
 const selector = (tab: { name: string; value?: string }) => ({
   selected: tab.name,

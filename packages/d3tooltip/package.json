@@ -16,8 +16,7 @@
     "lib",
     "src"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "exports": "./lib/index.js",
   "type": "module",
   "sideEffects": false,
   "repository": {
@@ -27,20 +26,14 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run lint"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
     "d3": "^7.9.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "rimraf": "^5.0.5",
-    "typescript": "~5.3.3"
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@types/d3": "^7.4.3",

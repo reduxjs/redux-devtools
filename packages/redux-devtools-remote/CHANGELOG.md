@@ -1,5 +1,30 @@
 # Change Log
 
+## 1.0.0
+
+### Major Changes
+
+- 6481386: Convert remaining packages to ESM
+
+### Patch Changes
+
+- Updated dependencies [3f90241]
+- Updated dependencies [6481386]
+  - @redux-devtools/instrument@3.0.0
+  - @redux-devtools/utils@4.0.0
+
+## 0.9.5
+
+### Patch Changes
+
+- @redux-devtools/utils@3.1.1
+
+## 0.9.4
+
+### Patch Changes
+
+- @redux-devtools/utils@4.0.0
+
 ## 0.9.3
 
 ### Patch Changes

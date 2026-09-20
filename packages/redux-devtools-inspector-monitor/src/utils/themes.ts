@@ -1,7 +1,7 @@
 import rgba from 'hex-rgba';
 import type { Base16Theme } from 'react-base16-styling';
 import { base16Themes as reduxThemes } from 'react-base16-styling';
-import * as inspectorThemes from '../themes';
+import * as inspectorThemes from '../themes/index.js';
 import { getBase16Theme, invertBase16Theme } from 'react-base16-styling';
 
 const base16Themes = { ...reduxThemes, ...inspectorThemes };

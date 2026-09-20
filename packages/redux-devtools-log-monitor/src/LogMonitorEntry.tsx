@@ -3,7 +3,7 @@ import { JSONTree } from 'react-json-tree';
 import type { ShouldExpandNodeInitially, StylingValue } from 'react-json-tree';
 import type { Base16Theme } from 'react-base16-styling';
 import { Action } from 'redux';
-import LogMonitorEntryAction from './LogMonitorEntryAction';
+import LogMonitorEntryAction from './LogMonitorEntryAction.js';
 
 const styles: { entry: CSSProperties; root: CSSProperties } = {
   entry: {
@@ -152,7 +152,7 @@ export default class LogMonitorEntry<
     return (
       <div
         style={{
-          opacity: selected ? 0.4 : inFuture ? 0.6 : 1, // eslint-disable-line no-nested-ternary
+          opacity: selected ? 0.4 : inFuture ? 0.6 : 1,
           textDecoration: collapsed ? 'line-through' : 'none',
           color: this.props.theme.base06,
         }}

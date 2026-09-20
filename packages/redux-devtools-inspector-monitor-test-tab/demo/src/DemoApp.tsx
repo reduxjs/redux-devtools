@@ -48,8 +48,10 @@ const styles: {
 
 const ROOT = '/'; // process.env.NODE_ENV === 'production' ? '/' : '/';
 
-interface Props
-  extends Omit<DemoAppState, 'addFunction' | 'addSymbol' | 'shuffleArray'> {
+interface Props extends Omit<
+  DemoAppState,
+  'addFunction' | 'addSymbol' | 'shuffleArray'
+> {
   toggleTimeoutUpdate: (timeoutUpdateEnabled: boolean) => void;
   timeoutUpdate: () => void;
   increment: () => void;
@@ -70,7 +72,7 @@ interface Props
 }
 
 function DemoApp(props: Props) {
-  const timeout = useRef<number | undefined>();
+  const timeout = useRef<number | undefined>(undefined);
   const location = useLocation();
 
   const options = getOptions(location);

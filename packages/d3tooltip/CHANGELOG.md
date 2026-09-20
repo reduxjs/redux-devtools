@@ -17,7 +17,6 @@
 ### Major Changes
 
 - b323f77d: Upgrade D3
-
   - Remove UMD build.
   - Upgrade d3 peer dependency from v3 to v7.
   - Remove `attr` configuration method.

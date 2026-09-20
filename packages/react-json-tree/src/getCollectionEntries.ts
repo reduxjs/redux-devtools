@@ -2,8 +2,7 @@ import type { SortObjectKeys } from './types.js';
 
 function getLength(type: string, collection: unknown) {
   if (type === 'Object') {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    return Object.keys(collection as {}).length;
+    return Object.keys(collection as object).length;
   } else if (type === 'Array') {
     return (collection as unknown[]).length;
   }

@@ -1,13 +1,11 @@
-import { PreloadedState, Store } from 'redux';
+import { Store } from 'redux';
 import { CounterState } from '../reducers';
 import { CounterAction } from '../actions/CounterActions';
 
 const configureStore: (
-  initialState?: PreloadedState<CounterState>,
+  initialState?: Partial<CounterState>,
 ) => Store<CounterState, CounterAction> =
   process.env.NODE_ENV === 'production'
-    ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-      require('./configureStore.prod').default
-    : // eslint-disable-next-line @typescript-eslint/no-var-requires
-      require('./configureStore.dev').default;
+    ? require('./configureStore.prod').default
+    : require('./configureStore.dev').default;
 export default configureStore;

@@ -1,4 +1,3 @@
-import mapValues from 'lodash/mapValues';
 import { PerformAction } from '@redux-devtools/core';
 import { Action } from 'redux';
 
@@ -23,10 +22,15 @@ function filterActions(
   actionSanitizer: ((action: Action<string>, id: number) => Action) | undefined,
 ) {
   if (!actionSanitizer) return actionsById;
-  return mapValues(actionsById, (action, id: number) => ({
-    ...action,
-    action: actionSanitizer(action.action, id),
-  }));
+  return Object.fromEntries(
+    Object.entries(actionsById).map(([actionId, action]) => [
+      actionId,
+      {
+        ...action,
+        action: actionSanitizer(action.action, actionId as unknown as number),
+      },
+    ]),
+  );
 }
 
 function filterStates(
@@ -106,10 +110,7 @@ export function isFiltered(
 
   const { allowlist, denylist } = localFilter || opts;
   return (
-    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (allowlist && !type.match(allowlist)) ||
-    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (denylist && type.match(denylist))
+    (allowlist && !type.match(allowlist)) || (denylist && type.match(denylist))
   );
 }
 

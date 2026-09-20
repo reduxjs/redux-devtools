@@ -1,19 +1,20 @@
 import { Action, createSelector, Selector } from '@reduxjs/toolkit';
-import { RtkQueryInspectorProps } from './containers/RtkQueryInspector';
+import { RtkQueryInspectorProps } from './containers/RtkQueryInspector.js';
 import {
   ApiStats,
   QueryInfo,
   RtkQueryApiState,
   RtkQueryTag,
   SelectorsSource,
-  RtkQueryProvided,
+  RtkQueryProvidedTagsState,
   QueryPreviewTabs,
   RtkResourceInfo,
-} from './types';
-import { Comparator, queryComparators } from './utils/comparators';
-import { FilterList, queryListFilters } from './utils/filters';
-import { emptyRecord } from './utils/object';
-import { escapeRegExpSpecialCharacter } from './utils/regexp';
+  RtkQuery262ProvidedState,
+} from './types.js';
+import { Comparator, queryComparators } from './utils/comparators.js';
+import { FilterList, queryListFilters } from './utils/filters.js';
+import { emptyRecord } from './utils/object.js';
+import { escapeRegExpSpecialCharacter } from './utils/regexp.js';
 import {
   getApiStatesOf,
   extractAllApiQueries,
@@ -22,7 +23,7 @@ import {
   generateApiStatsOfCurrentQuery,
   getActionsOfCurrentQuery,
   extractAllApiMutations,
-} from './utils/rtk-query';
+} from './utils/rtk-query.js';
 
 type InspectorSelector<S, Output> = Selector<SelectorsSource<S>, Output>;
 
@@ -216,7 +217,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
 
   const selectProvidedOfCurrentQuery: InspectorSelector<
     S,
-    null | RtkQueryProvided
+    null | RtkQueryProvidedTagsState | RtkQuery262ProvidedState
   > = (selectorsSource: SelectorsSource<S>) => {
     return selectApiOfCurrentQuery(selectorsSource)?.provided ?? null;
   };

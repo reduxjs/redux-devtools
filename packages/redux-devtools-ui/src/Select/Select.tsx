@@ -3,8 +3,8 @@ import ReactSelect, {
   GroupBase,
   Props as ReactSelectProps,
 } from 'react-select';
-import createThemedComponent from '../utils/createThemedComponent';
-import { Theme } from '../themes/default';
+import createThemedComponent from '../utils/createThemedComponent.js';
+import { Theme } from '../themes/default.js';
 
 export interface SelectProps<
   Option,

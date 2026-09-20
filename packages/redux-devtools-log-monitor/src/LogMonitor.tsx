@@ -12,10 +12,10 @@ import {
   updateScrollTop,
   startConsecutiveToggle,
   LogMonitorAction,
-} from './actions';
-import reducer, { LogMonitorState } from './reducers';
-import LogMonitorButtonBar from './LogMonitorButtonBar';
-import LogMonitorEntryList from './LogMonitorEntryList';
+} from './actions.js';
+import reducer, { LogMonitorState } from './reducers.js';
+import LogMonitorButtonBar from './LogMonitorButtonBar.js';
+import LogMonitorEntryList from './LogMonitorEntryList.js';
 
 const { toggleAction, setActionsActive } = ActionCreators;
 
@@ -64,8 +64,10 @@ interface DefaultProps<S> {
   markStateDiff: boolean;
 }
 
-export interface LogMonitorProps<S, A extends Action<string>>
-  extends LiftedState<S, A, LogMonitorState> {
+export interface LogMonitorProps<
+  S,
+  A extends Action<string>,
+> extends LiftedState<S, A, LogMonitorState> {
   dispatch: Dispatch<LogMonitorAction | LiftedAction<S, A, LogMonitorState>>;
 
   preserveScrollTop: boolean;
@@ -164,7 +166,7 @@ class LogMonitor<S, A extends Action<string>> extends PureComponent<
       const { skippedActionIds } = this.props;
       const start = Math.min(consecutiveToggleStartId, id);
       const end = Math.max(consecutiveToggleStartId, id);
-      const active = skippedActionIds.indexOf(consecutiveToggleStartId) > -1;
+      const active = skippedActionIds.includes(consecutiveToggleStartId);
       this.props.dispatch(setActionsActive(start, end + 1, active));
       this.props.dispatch(startConsecutiveToggle(null));
     } else if (id > 0) {
@@ -182,7 +184,6 @@ class LogMonitor<S, A extends Action<string>> extends PureComponent<
       return base16Themes[theme];
     }
 
-    // eslint-disable-next-line no-console
     console.warn(
       'DevTools theme ' + theme + ' not found, defaulting to nicinabox',
     );

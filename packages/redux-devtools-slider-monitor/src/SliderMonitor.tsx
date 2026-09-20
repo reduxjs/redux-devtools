@@ -15,13 +15,12 @@ import {
   Toolbar,
 } from '@redux-devtools/ui';
 
-import reducer from './reducers';
-import SliderButton from './SliderButton';
+import reducer from './reducers.js';
+import SliderButton from './SliderButton.js';
 
 const { reset, jumpToAction } = ActionCreators;
 
 interface ExternalProps<S, A extends Action<string>> {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
@@ -37,9 +36,11 @@ interface DefaultProps {
   keyboardEnabled: boolean;
 }
 
-interface SliderMonitorProps<S, A extends Action<string>> // eslint-disable-next-line @typescript-eslint/ban-types
-  extends LiftedState<S, A, {}> {
-  // eslint-disable-next-line @typescript-eslint/ban-types
+interface SliderMonitorProps<S, A extends Action<string>> extends LiftedState<
+  S,
+  A,
+  {}
+> {
   dispatch: Dispatch<LiftedAction<S, A, {}>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
@@ -376,10 +377,8 @@ export default SliderMonitor as unknown as React.ComponentType<
 > & {
   update(
     monitorProps: ExternalProps<unknown, Action<string>>,
-    // eslint-disable-next-line @typescript-eslint/ban-types
     state: {} | undefined,
     action: Action<string>,
-    // eslint-disable-next-line @typescript-eslint/ban-types
   ): {};
   defaultProps: DefaultProps;
 };

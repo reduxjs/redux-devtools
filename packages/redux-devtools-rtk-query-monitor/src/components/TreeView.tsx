@@ -2,17 +2,16 @@ import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ComponentProps, ReactNode } from 'react';
 import { JSONTree } from 'react-json-tree';
 import { Base16Theme } from 'react-base16-styling';
-import { getJsonTreeTheme, StyleUtilsContext } from '../styles/themes';
-import { getItemString, labelRenderer } from '../styles/tree';
-import { identity } from '../utils/object';
+import { getJsonTreeTheme, StyleUtilsContext } from '../styles/themes.js';
+import { getItemString, labelRenderer } from '../styles/tree.js';
+import { identity } from '../utils/object.js';
 
-export interface TreeViewProps
-  extends Partial<
-    Pick<
-      ComponentProps<typeof JSONTree>,
-      'keyPath' | 'shouldExpandNodeInitially' | 'hideRoot'
-    >
-  > {
+export interface TreeViewProps extends Partial<
+  Pick<
+    ComponentProps<typeof JSONTree>,
+    'keyPath' | 'shouldExpandNodeInitially' | 'hideRoot'
+  >
+> {
   data: unknown;
   isWideLayout: boolean;
   before?: ReactNode;

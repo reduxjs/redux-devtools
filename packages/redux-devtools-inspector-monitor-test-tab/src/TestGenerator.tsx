@@ -7,14 +7,13 @@ import es6template from 'es6template';
 import { Editor } from '@redux-devtools/ui';
 import { TabComponentProps } from '@redux-devtools/inspector-monitor';
 import { Action } from 'redux';
-import { AssertionLocals, DispatcherLocals, WrapLocals } from './types';
+import { AssertionLocals, DispatcherLocals, WrapLocals } from './types.js';
 
 export const fromPath = (path: (string | number)[]) =>
   path.map((a) => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');
 
 function getState<S>(
   s: { state: S; error?: string } | undefined,
-  // eslint-disable-next-line @typescript-eslint/ban-types
   defaultValue?: {},
 ) {
   if (!s) return defaultValue;
@@ -25,7 +24,6 @@ export function compare<S>(
   s1: { state: S; error?: string } | undefined,
   s2: { state: S; error?: string },
   cb: (value: { path: string; curState: number | string | undefined }) => void,
-  // eslint-disable-next-line @typescript-eslint/ban-types
   defaultValue?: {},
 ) {
   const paths: string[] = []; // Already processed
@@ -36,9 +34,8 @@ export function compare<S>(
     let path = fromPath(event.newPath);
 
     if (event.type === 'remove-item' || event.type === 'move-item') {
-      if (paths.length && paths.indexOf(path) !== -1) return;
+      if (paths.length && paths.includes(path)) return;
       paths.push(path);
-      // eslint-disable-next-line @typescript-eslint/ban-types
       const v = objectPath.get(s2.state as unknown as object, event.newPath);
       curState = v.length;
       path += '.length';
@@ -60,8 +57,10 @@ export function compare<S>(
   ).forEach(generate);
 }
 
-interface Props<S, A extends Action<string>>
-  extends Omit<TabComponentProps<S, A>, 'monitorState' | 'updateMonitorState'> {
+interface Props<S, A extends Action<string>> extends Omit<
+  TabComponentProps<S, A>,
+  'monitorState' | 'updateMonitorState'
+> {
   name?: string;
   isVanilla?: boolean;
   wrap?: string | ((locals: WrapLocals) => string);
@@ -142,8 +141,7 @@ export default class TestGenerator<
     while (actions[i]) {
       if (
         !isVanilla ||
-        /* eslint-disable-next-line no-useless-escape */
-        /^┗?\s?[a-zA-Z0-9_@.\[\]-]+?$/.test(actions[i].action.type)
+        /^┗?\s?[a-zA-Z0-9_@.[\]-]+?$/.test(actions[i].action.type)
       ) {
         if (isFirst) isFirst = false;
         else r += space;

@@ -1,4 +1,3 @@
-import mapValues from 'lodash/mapValues';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LocalFilter } from '@redux-devtools/utils';
@@ -27,8 +26,7 @@ export function isFiltered<A extends Action<string>>(
 ) {
   if (
     noFiltersApplied(localFilter) ||
-    (typeof action !== 'string' &&
-      typeof (action.type as string).match !== 'function')
+    (typeof action !== 'string' && typeof action.type.match !== 'function')
   ) {
     return false;
   }
@@ -46,10 +44,15 @@ function filterActions<A extends Action<string>>(
   actionSanitizer: ((action: A, id: number) => A) | undefined,
 ): { [p: number]: PerformAction<A> } {
   if (!actionSanitizer) return actionsById;
-  return mapValues(actionsById, (action, id) => ({
-    ...action,
-    action: actionSanitizer(action.action, id as unknown as number),
-  }));
+  return Object.fromEntries(
+    Object.entries(actionsById).map(([actionId, action]) => [
+      actionId,
+      {
+        ...action,
+        action: actionSanitizer(action.action, actionId as unknown as number),
+      },
+    ]),
+  );
 }
 
 function filterStates<S>(
