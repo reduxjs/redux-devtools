@@ -104,7 +104,7 @@ export interface ConfigWithExpandedMaxAge {
       ) => number);
   readonly trace?:
     | boolean
-    | (<A extends Action<unknown>>(action: A) => string | undefined);
+    | (<A extends Action<string>>(action: A) => string | undefined);
   readonly traceLimit?: number;
   readonly shouldCatchErrors?: boolean;
   readonly shouldHotReload?: boolean;

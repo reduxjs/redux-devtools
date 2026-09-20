@@ -237,7 +237,7 @@ function post<S, A extends Action<string>>(
 function getStackTrace(
   config: Config,
   toExcludeFromTrace: Function | undefined,
-  action: Action<unknown>,
+  action: Action<string>,
 ) {
   if (!config.trace) return undefined;
   if (typeof config.trace === 'function') return config.trace(action);

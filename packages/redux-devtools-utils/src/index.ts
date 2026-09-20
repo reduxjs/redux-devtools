@@ -220,7 +220,7 @@ export function getSeralizeParameter(
   return value;
 }
 
-export function getStackTrace<A extends Action<unknown>>(
+export function getStackTrace<A extends Action<string>>(
   config: { trace?: (action?: A) => {}; traceLimit: number },
   toExcludeFromTrace?: Function | undefined,
   action?: A,
