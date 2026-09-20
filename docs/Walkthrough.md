@@ -82,7 +82,7 @@ It’s important that you should add `DevTools.instrument()` _after_ `applyMiddl
 With redux-toolkit you need to add it as an enhancer and disable the original devtools
 
 ```js
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
@@ -94,7 +94,6 @@ export const store = configureStore({
   enhancers: (getDefaultEnhancers) =>
     getDefaultEnhancers().concat(DevTools.instrument()),
 });
-
 ```
 
 ##### `store/configureStore.js` original

@@ -305,8 +305,9 @@ export function configure(aurelia: Aurelia) {
 ### [Fluxor](https://github.com/mrpmorris/fluxor) (.NET)
 
 #### [Fluxor.Blazor.Web.ReduxDevTools](https://github.com/mrpmorris/Fluxor/tree/master/Source/Lib/Fluxor.Blazor.Web.ReduxDevTools)
- 1. Add the `Fluxor.Blazor.Web.ReduxDevTools` nuget package to your project. 
- 2. (Optional) Make it conditional on `DEBUG` mode.
+
+1.  Add the `Fluxor.Blazor.Web.ReduxDevTools` nuget package to your project.
+2.  (Optional) Make it conditional on `DEBUG` mode.
 
 ```
  <ItemGroup Condition="$(Configuration)=='Debug'">
@@ -314,7 +315,7 @@ export function configure(aurelia: Aurelia) {
   </ItemGroup>
 ```
 
- 3. Use the `UseReduxDevTools` extension on the Fluxor options.
+3.  Use the `UseReduxDevTools` extension on the Fluxor options.
 
 ```c#
 services.AddFluxor(o =>
