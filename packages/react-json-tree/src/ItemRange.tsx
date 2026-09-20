@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import JSONArrow from './JSONArrow.js';
-import type { CircularCache, CommonInternalProps, KeyPath } from './types.js';
+import type { CircularCache, CommonInternalProps } from './types.js';
 
 interface Props extends CommonInternalProps {
   data: unknown;
@@ -10,7 +10,6 @@ interface Props extends CommonInternalProps {
   renderChildNodes: (props: Props, from: number, to: number) => React.ReactNode;
   circularCache: CircularCache;
   level: number;
-  keyPath: KeyPath;
 }
 
 export default function ItemRange(props: Props) {
@@ -33,7 +32,7 @@ export default function ItemRange(props: Props) {
         expanded={false}
         onClick={handleClick}
         arrowStyle="double"
-        ariaLabel={`Expand Array from ${from} to ${to}`}
+        ariaLabel={`Expand items ${from} to ${to}`}
         OverrideComponent={props.ArrowComponentOverride}
       />
       {`${from} ... ${to}`}

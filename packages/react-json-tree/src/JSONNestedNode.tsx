@@ -1,10 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useId, useState } from 'react';
 import JSONArrow from './JSONArrow.js';
 import getCollectionEntries from './getCollectionEntries.js';
 import JSONNode from './JSONNode.js';
 import ItemRange from './ItemRange.js';
 import type { CircularCache, CommonInternalProps } from './types.js';
-import getAriaPropsFromKeyPath from './getAriaPropsFromKeyPath.js';
 
 /**
  * Renders nested values (eg. objects, arrays, lists, etc.)
@@ -63,7 +62,6 @@ function renderChildNodes(
           from={entry.from}
           to={entry.to}
           renderChildNodes={renderChildNodes}
-          keyPath={[entry.from, ...keyPath]}
         />,
       );
     } else {
@@ -143,7 +141,8 @@ export default function JSONNestedNode(props: Props) {
   );
   const stylingArgs = [keyPath, nodeType, expanded, expandable] as const;
 
-  const {ariaControls, ariaLabel} = getAriaPropsFromKeyPath(keyPath)
+  const childrenId = useId();
+  const ariaLabel = `JSON Tree Node: ${[...keyPath].reverse().join(' ')}`;
 
   return hideRoot ? (
     <li {...styling('rootNode', ...stylingArgs)}>
@@ -159,7 +158,7 @@ export default function JSONNestedNode(props: Props) {
           nodeType={nodeType}
           expanded={expanded}
           onClick={handleClick}
-          ariaControls={ariaControls}
+          ariaControls={childrenId}
           ariaLabel={ariaLabel}
           OverrideComponent={props.ArrowComponentOverride}
         />
@@ -176,7 +175,10 @@ export default function JSONNestedNode(props: Props) {
       >
         {renderedItemString}
       </span>
-      <ul {...styling('nestedNodeChildren', ...stylingArgs)} id={expandable ? ariaControls : undefined}>
+      <ul
+        {...styling('nestedNodeChildren', ...stylingArgs)}
+        id={expandable ? childrenId : undefined}
+      >
         {renderedChildren}
       </ul>
     </li>

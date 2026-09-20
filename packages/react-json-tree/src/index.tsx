@@ -47,7 +47,7 @@ export function JSONTree({
   isCustomNode = noCustomNode,
   collectionLimit = 50,
   sortObjectKeys = false,
-  ArrowComponentOverride
+  ArrowComponentOverride,
 }: Props) {
   const styling = useMemo(
     () =>

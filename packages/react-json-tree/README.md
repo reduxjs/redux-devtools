@@ -137,20 +137,31 @@ Their full signatures are:
 - `labelRenderer: function(keyPath, nodeType, expanded, expandable)`
 - `valueRenderer: function(valueAsString, value, ...keyPath)`
 
-Additionally, it is possible to override the arrows for expanding, for example with a `+` and `-` button.
+The expand/collapse arrows are rendered as `<button>` elements with `aria-expanded`, `aria-controls`, and `aria-label` set, so they can be focused and toggled from the keyboard.
+
+You can replace the arrow with your own component via `ArrowComponentOverride`. It receives `JSONArrowProps`:
 
 ```tsx
-const ArrowOverride = ({ expanded, ...rest }: JSONArrowProps) => {
-  if (expanded) {
-    return <button {...rest}>-</button>
-  }
-  return <button {...rest}>+</button>
-}
+import { JSONTree, JSONArrowProps } from 'react-json-tree';
 
-<JSONTree ArrowComponentOverride={ArrowOverride} />
+const ArrowOverride = ({
+  expanded,
+  onClick,
+  ariaLabel,
+  ariaControls,
+}: JSONArrowProps) => (
+  <button
+    onClick={onClick}
+    aria-label={ariaLabel}
+    aria-expanded={expanded}
+    aria-controls={ariaControls}
+  >
+    {expanded ? '-' : '+'}
+  </button>
+);
+
+<JSONTree data={data} ArrowComponentOverride={ArrowOverride} />;
 ```
-
-The default `JSONArrow` component will literally check if an `ArrowComponentOverride` exists and pass it's props there. The typescript for these props is as follows.
 
 ```ts
 interface JSONArrowProps {
@@ -160,8 +171,7 @@ interface JSONArrowProps {
   nodeType: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   ariaControls?: string;
-  ariaLabel?: string
-  OverrideComponent?: ComponentType<JSONArrowProps>;
+  ariaLabel?: string;
 }
 ```
 
