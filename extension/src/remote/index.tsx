@@ -2,8 +2,6 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Root } from '@redux-devtools/app';
 
-import './remote.pug';
-
 chrome.storage.local.get(
   {
     'select-monitor': 'InspectorMonitor',
@@ -31,7 +29,7 @@ chrome.storage.local.get(
               }
             : undefined
         }
-      />
+      />,
     );
-  }
+  },
 );

@@ -14,5 +14,5 @@ export default createDevTools(
     defaultSize={largeScreenQuery.matches ? 0.44 : 0.55}
   >
     <RtkQueryMonitor />
-  </DockMonitor>
+  </DockMonitor>,
 );

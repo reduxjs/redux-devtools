@@ -8,8 +8,8 @@ export type RegexIconProps = Omit<
 // `OOjs_UI_icon_regular-expression.svg` (MIT License)
 // from https://commons.wikimedia.org/wiki/File:OOjs_UI_icon_regular-expression.svg
 export function RegexIcon(
-  props: React.HTMLAttributes<SVGElement>
-): JSX.Element {
+  props: React.HTMLAttributes<SVGElement>,
+): React.JSX.Element {
   return (
     <svg fill="currentColor" {...props} viewBox="0 0 24 24">
       <g>

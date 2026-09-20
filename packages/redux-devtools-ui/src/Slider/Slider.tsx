@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Base16Theme } from 'base16';
-import createStyledComponent from '../utils/createStyledComponent';
-import * as styles from './styles';
-import { containerStyle } from './styles/common';
+import type { Base16Theme } from 'react-base16-styling';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import * as styles from './styles/index.js';
+import { containerStyle } from './styles/common.js';
 
 const SliderWrapper = createStyledComponent(styles);
 const ContainerWithValue = createStyledComponent(containerStyle);
@@ -66,18 +65,6 @@ export default class Slider extends Component<SliderProps> {
       </SliderWrapper>
     );
   }
-
-  static propTypes = {
-    value: PropTypes.number,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    label: PropTypes.string,
-    sublabel: PropTypes.string,
-    withValue: PropTypes.bool,
-    disabled: PropTypes.bool,
-    onChange: PropTypes.func,
-    theme: PropTypes.object,
-  };
 
   static defaultProps = { value: 0, min: 0, max: 100 };
 }

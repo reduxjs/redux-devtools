@@ -9,7 +9,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { AGServer } from 'socketcluster-server';
 import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
+import { expressMiddleware } from '@as-integrations/express5';
 import type { AddData, ReportBaseFields, Store } from './store.js';
 import { resolvers, schema } from './api/schema.js';
 
@@ -20,8 +20,8 @@ const require = createRequire(import.meta.url);
 function serveUmdModule(name: string) {
   app.use(
     express.static(
-      path.dirname(require.resolve(name + '/package.json')) + '/umd'
-    )
+      path.dirname(require.resolve(name + '/package.json')) + '/umd',
+    ),
   );
 }
 
@@ -32,7 +32,7 @@ interface Context {
 function routes(
   options: AGServer.AGServerOptions,
   store: Store,
-  scServer: AGServer
+  scServer: AGServer,
 ): Router {
   const limit = options.maxRequestBody;
   const logHTTPRequests = options.logHTTPRequests;
@@ -45,8 +45,8 @@ function routes(
           logHTTPRequests as morgan.Options<
             http.IncomingMessage,
             http.ServerResponse
-          >
-        )
+          >,
+        ),
       );
     else app.use(morgan('combined'));
   }
@@ -62,11 +62,13 @@ function routes(
         '/graphql',
         cors<cors.CorsRequest>(),
         bodyParser.json(),
-        expressMiddleware(server, { context: () => Promise.resolve({ store }) })
+        expressMiddleware(server, {
+          context: () => Promise.resolve({ store }),
+        }),
       );
     })
     .catch((error) => {
-      console.error(error); // eslint-disable-line no-console
+      console.error(error);
     });
 
   serveUmdModule('react');
@@ -74,15 +76,14 @@ function routes(
   serveUmdModule('@redux-devtools/app');
 
   app.get('/port.js', function (req, res) {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     res.send(`reduxDevToolsPort = ${options.port}`);
   });
-  app.get('*', function (req, res) {
+  app.get('/{*splat}', function (req, res) {
     res.sendFile(
       path.join(
         path.dirname(fileURLToPath(import.meta.url)),
-        '../app/index.html'
-      )
+        '../app/index.html',
+      ),
     );
   });
 
@@ -91,7 +92,10 @@ function routes(
   app.use(bodyParser.urlencoded({ limit: limit, extended: false }));
 
   app.post('/', function (req, res) {
-    if (!req.body) return res.status(404).end();
+    if (!req.body) {
+      res.status(404).end();
+      return;
+    }
     switch (req.body.op) {
       case 'get':
         store
@@ -100,7 +104,7 @@ function routes(
             res.send(r || {});
           })
           .catch(function (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
             res.sendStatus(500);
           });
         break;
@@ -111,7 +115,7 @@ function routes(
             res.send(r);
           })
           .catch(function (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
             res.sendStatus(500);
           });
         break;
@@ -129,7 +133,7 @@ function routes(
             });
           })
           .catch(function (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
             res.status(500).send({});
           });
     }

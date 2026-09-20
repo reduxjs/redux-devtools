@@ -1,19 +1,19 @@
 import jsan, { Options } from 'jsan';
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash-es';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { getActionsArray, getLocalFilter } from '@redux-devtools/utils';
-import { isFiltered, PartialLiftedState } from './filters';
-import importState from './importState';
-import generateId from './generateInstanceId';
-import type { Config } from '../index';
+import { isFiltered, PartialLiftedState } from './filters.js';
+import importState from './importState.js';
+import generateId from './generateInstanceId.js';
+import type { Config } from '../index.js';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LibConfig } from '@redux-devtools/app';
 import type {
   ContentScriptToPageScriptMessage,
   ListenerMessage,
-} from '../../contentScript';
-import type { Position } from './openWindow';
+} from '../../contentScript/index.js';
+import type { Position } from './openWindow.js';
 
 const listeners: {
   [instanceId: string]:
@@ -22,22 +22,33 @@ const listeners: {
 } = {};
 export const source = '@devtools-page';
 
+type Replacer = (this: unknown, key: string, value: unknown) => unknown;
+
+function serializeBigInt(value: unknown) {
+  return typeof value === 'bigint' ? `${value}n` : value;
+}
+
+function withBigIntReplacer(replacer?: Replacer): Replacer {
+  if (!replacer) return (key, value) => serializeBigInt(value);
+  return function (key, value) {
+    return serializeBigInt(replacer.call(this, key, value));
+  };
+}
+
 function windowReplacer(key: string, value: unknown) {
   if (value && (value as Window).window === value) {
     return '[WINDOW]';
   }
-  return value;
+  return serializeBigInt(value);
 }
 
 function tryCatchStringify(obj: unknown) {
   try {
     return JSON.stringify(obj);
   } catch (err) {
-    /* eslint-disable no-console */
     if (process.env.NODE_ENV !== 'production') {
       console.log('Failed to stringify', err);
     }
-    /* eslint-enable no-console */
     return jsan.stringify(obj, windowReplacer, undefined, {
       circular: '[CIRCULAR]',
       date: true,
@@ -50,15 +61,18 @@ function stringify(obj: unknown, serialize?: Serialize | undefined) {
   const str =
     typeof serialize === 'undefined'
       ? tryCatchStringify(obj)
-      : jsan.stringify(obj, serialize.replacer, undefined, serialize.options);
+      : jsan.stringify(
+          obj,
+          withBigIntReplacer(serialize.replacer),
+          undefined,
+          serialize.options,
+        );
 
   if (!stringifyWarned && str && str.length > 16 * 1024 * 1024) {
     // 16 MB
-    /* eslint-disable no-console */
     console.warn(
-      'Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://github.com/reduxjs/redux-devtools-extension/blob/master/docs/Troubleshooting.md#excessive-use-of-memory-and-cpu on how to configure it.'
+      'Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://github.com/reduxjs/redux-devtools-extension/blob/master/docs/Troubleshooting.md#excessive-use-of-memory-and-cpu on how to configure it.',
     );
-    /* eslint-enable no-console */
     stringifyWarned = true;
   }
 
@@ -80,7 +94,7 @@ export function getSerializeParameter(config: Config) {
         serialize.immutable,
         serialize.refs,
         serialize.replacer,
-        serialize.reviver
+        serialize.reviver,
       );
       return {
         replacer: immutableSerializer.replacer,
@@ -115,7 +129,7 @@ interface DisconnectMessage {
   readonly source: typeof source;
 }
 
-interface InitMessage<S, A extends Action<unknown>> {
+interface InitMessage<S, A extends Action<string>> {
   readonly type: 'INIT';
   readonly payload: string;
   readonly instanceId: number;
@@ -161,7 +175,7 @@ interface SerializedActionMessage {
   readonly nextActionId?: number;
 }
 
-interface SerializedStateMessage<S, A extends Action<unknown>> {
+interface SerializedStateMessage<S, A extends Action<string>> {
   readonly type: 'STATE';
   readonly payload: Omit<
     LiftedState<S, A, unknown>,
@@ -183,7 +197,7 @@ interface OpenMessage {
 
 export type PageScriptToContentScriptMessageForwardedToMonitors<
   S,
-  A extends Action<unknown>
+  A extends Action<string>,
 > =
   | InitMessage<S, A>
   | LiftedMessage
@@ -194,7 +208,7 @@ export type PageScriptToContentScriptMessageForwardedToMonitors<
 
 export type PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<
   S,
-  A extends Action<unknown>
+  A extends Action<string>,
 > =
   | PageScriptToContentScriptMessageForwardedToMonitors<S, A>
   | ErrorMessage
@@ -204,18 +218,18 @@ export type PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<
 
 export type PageScriptToContentScriptMessageWithoutDisconnect<
   S,
-  A extends Action<unknown>
+  A extends Action<string>,
 > =
   | PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance<S, A>
   | InitInstancePageScriptToContentScriptMessage
   | InitInstanceMessage;
 
-export type PageScriptToContentScriptMessage<S, A extends Action<unknown>> =
+export type PageScriptToContentScriptMessage<S, A extends Action<string>> =
   | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
   | DisconnectMessage;
 
-function post<S, A extends Action<unknown>>(
-  message: PageScriptToContentScriptMessage<S, A>
+function post<S, A extends Action<string>>(
+  message: PageScriptToContentScriptMessage<S, A>,
 ) {
   window.postMessage(message, '*');
 }
@@ -223,7 +237,7 @@ function post<S, A extends Action<unknown>>(
 function getStackTrace(
   config: Config,
   toExcludeFromTrace: Function | undefined,
-  action: Action<unknown>
+  action: Action<unknown>,
 ) {
   if (!config.trace) return undefined;
   if (typeof config.trace === 'function') return config.trace(action);
@@ -259,16 +273,16 @@ function getStackTrace(
   return stack;
 }
 
-function amendActionType<A extends Action<unknown>>(
+function amendActionType<A extends Action<string>>(
   action:
     | A
     | StructuralPerformAction<A>
     | StructuralPerformAction<A>[]
     | string,
   config: Config,
-  toExcludeFromTrace: Function | undefined
+  toExcludeFromTrace: Function | undefined,
 ): StructuralPerformAction<A> {
-  let timestamp = Date.now();
+  const timestamp = Date.now();
   if (typeof action === 'string') {
     const amendedAction = { type: action } as A;
     return {
@@ -286,14 +300,13 @@ function amendActionType<A extends Action<unknown>>(
     };
   }
   if ((action as StructuralPerformAction<A>).action) {
+    const performAction = action as StructuralPerformAction<A>;
     const stack = getStackTrace(
       config,
       toExcludeFromTrace,
-      (action as StructuralPerformAction<A>).action
+      performAction.action,
     );
-    return (
-      stack ? { stack, ...action } : action
-    ) as StructuralPerformAction<A>;
+    return stack ? { stack, ...performAction } : performAction;
   }
   const stack = getStackTrace(config, toExcludeFromTrace, action as A);
   return { action, timestamp, stack } as StructuralPerformAction<A>;
@@ -306,7 +319,7 @@ interface LiftedMessage {
   readonly source: typeof source;
 }
 
-interface PartialStateMessage<S, A extends Action<unknown>> {
+interface PartialStateMessage<S, A extends Action<string>> {
   readonly type: 'PARTIAL_STATE';
   readonly payload: PartialLiftedState<S, A>;
   readonly source: typeof source;
@@ -314,7 +327,7 @@ interface PartialStateMessage<S, A extends Action<unknown>> {
   readonly maxAge: number;
 }
 
-interface ExportMessage<S, A extends Action<unknown>> {
+interface ExportMessage<S, A extends Action<string>> {
   readonly type: 'EXPORT';
   readonly payload: readonly A[];
   readonly committedState: S;
@@ -322,21 +335,21 @@ interface ExportMessage<S, A extends Action<unknown>> {
   readonly instanceId: number;
 }
 
-export interface StructuralPerformAction<A extends Action<unknown>> {
+export interface StructuralPerformAction<A extends Action<string>> {
   readonly action: A;
   readonly timestamp?: number;
   readonly stack?: string;
 }
 
-type SingleUserAction<A extends Action<unknown>> =
+type SingleUserAction<A extends Action<string>> =
   | PerformAction<A>
   | StructuralPerformAction<A>
   | A;
-type UserAction<A extends Action<unknown>> =
+type UserAction<A extends Action<string>> =
   | SingleUserAction<A>
   | readonly SingleUserAction<A>[];
 
-interface ActionMessage<S, A extends Action<unknown>> {
+interface ActionMessage<S, A extends Action<string>> {
   readonly type: 'ACTION';
   readonly payload: S;
   readonly source: typeof source;
@@ -347,7 +360,7 @@ interface ActionMessage<S, A extends Action<unknown>> {
   readonly name?: string;
 }
 
-interface StateMessage<S, A extends Action<unknown>> {
+interface StateMessage<S, A extends Action<string>> {
   readonly type: 'STATE';
   readonly payload: LiftedState<S, A, unknown>;
   readonly source: typeof source;
@@ -387,7 +400,7 @@ interface StopMessage {
   readonly instanceId: number;
 }
 
-type ToContentScriptMessage<S, A extends Action<unknown>> =
+type ToContentScriptMessage<S, A extends Action<string>> =
   | LiftedMessage
   | PartialStateMessage<S, A>
   | ExportMessage<S, A>
@@ -398,10 +411,35 @@ type ToContentScriptMessage<S, A extends Action<unknown>> =
   | GetReportMessage
   | StopMessage;
 
-export function toContentScript<S, A extends Action<unknown>>(
+function reportSerializationError(
+  instanceId: number,
+  messageType: string,
+  err: unknown,
+) {
+  const reason = err instanceof Error ? err.message : String(err);
+  const description = `Redux DevTools could not serialize the ${messageType} message: ${reason}`;
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(description, err);
+  }
+  post({ type: 'ERROR', payload: description, instanceId, source });
+}
+
+export function toContentScript<S, A extends Action<string>>(
   message: ToContentScriptMessage<S, A>,
   serializeState?: Serialize | undefined,
-  serializeAction?: Serialize | undefined
+  serializeAction?: Serialize | undefined,
+) {
+  try {
+    serializeAndPost(message, serializeState, serializeAction);
+  } catch (err) {
+    reportSerializationError(message.instanceId, message.type, err);
+  }
+}
+
+function serializeAndPost<S, A extends Action<string>>(
+  message: ToContentScriptMessage<S, A>,
+  serializeState?: Serialize | undefined,
+  serializeAction?: Serialize | undefined,
 ) {
   if (message.type === 'ACTION') {
     post({
@@ -443,17 +481,17 @@ export function toContentScript<S, A extends Action<unknown>>(
   }
 }
 
-export function sendMessage<S, A extends Action<unknown>>(
+export function sendMessage<S, A extends Action<string>>(
   action: StructuralPerformAction<A> | StructuralPerformAction<A>[],
   state: LiftedState<S, A, unknown>,
   config: Config,
   instanceId?: number,
-  name?: string
+  name?: string,
 ) {
   let amendedAction = action;
   if (typeof config !== 'object') {
     // Legacy: sending actions not from connected part
-    config = {}; // eslint-disable-line no-param-reassign
+    config = {};
     if (action) amendedAction = amendActionType(action, config, sendMessage);
   }
   if (action) {
@@ -461,14 +499,14 @@ export function sendMessage<S, A extends Action<unknown>>(
       {
         type: 'ACTION',
         action: amendedAction,
-        payload: state,
+        payload: state as S,
         maxAge: config.maxAge!,
         source,
         name: config.name || name,
         instanceId: config.instanceId || instanceId || 1,
       },
       config.serialize as Serialize | undefined,
-      config.serialize as Serialize | undefined
+      config.serialize as Serialize | undefined,
     );
   } else {
     toContentScript<S, A>(
@@ -482,7 +520,7 @@ export function sendMessage<S, A extends Action<unknown>>(
         instanceId: config.instanceId || instanceId || 1,
       },
       config.serialize as Serialize | undefined,
-      config.serialize as Serialize | undefined
+      config.serialize as Serialize | undefined,
     );
   }
 }
@@ -507,16 +545,16 @@ function handleMessages(event: MessageEvent<ContentScriptToPageScriptMessage>) {
 
 export function setListener(
   onMessage: (message: ContentScriptToPageScriptMessage) => void,
-  instanceId: number
+  instanceId: number,
 ) {
   listeners[instanceId] = onMessage;
   window.addEventListener('message', handleMessages, false);
 }
 
 const liftListener =
-  <S, A extends Action<unknown>>(
+  <S, A extends Action<string>>(
     listener: (message: ListenerMessage<S, A>) => void,
-    config: Config
+    config: Config,
   ) =>
   (message: ContentScriptToPageScriptMessage) => {
     if (message.type === 'IMPORT') {
@@ -538,17 +576,17 @@ export function disconnect() {
 }
 
 export interface ConnectResponse {
-  init: <S, A extends Action<unknown>>(
+  init: <S, A extends Action<string>>(
     state: S,
-    liftedData?: LiftedState<S, A, unknown>
+    liftedData?: LiftedState<S, A, unknown>,
   ) => void;
-  subscribe: <S, A extends Action<unknown>>(
-    listener: (message: ListenerMessage<S, A>) => void
+  subscribe: <S, A extends Action<string>>(
+    listener: (message: ListenerMessage<S, A>) => void,
   ) => (() => void) | undefined;
   unsubscribe: () => void;
-  send: <S, A extends Action<unknown>>(
+  send: <S, A extends Action<string>>(
     action: A,
-    state: LiftedState<S, A, unknown>
+    state: LiftedState<S, A, unknown>,
   ) => void;
   error: (payload: string) => void;
 }
@@ -568,8 +606,8 @@ export function connect(preConfig: Config): ConnectResponse {
   const localFilter = getLocalFilter(config);
   const autoPause = config.autoPause;
   let isPaused = autoPause;
-  let delayedActions: StructuralPerformAction<Action<unknown>>[] = [];
-  let delayedStates: LiftedState<unknown, Action<unknown>, unknown>[] = [];
+  let delayedActions: StructuralPerformAction<Action<string>>[] = [];
+  let delayedStates: LiftedState<unknown, Action<string>, unknown>[] = [];
 
   const rootListener = (action: ContentScriptToPageScriptMessage) => {
     if (autoPause) {
@@ -592,13 +630,13 @@ export function connect(preConfig: Config): ConnectResponse {
 
   listeners[id] = [rootListener];
 
-  const subscribe = <S, A extends Action<unknown>>(
-    listener: (message: ListenerMessage<S, A>) => void
+  const subscribe = <S, A extends Action<string>>(
+    listener: (message: ListenerMessage<S, A>) => void,
   ) => {
     if (!listener) return undefined;
     const liftedListener = liftListener(listener, config);
     const listenersForId = listeners[id] as ((
-      message: ContentScriptToPageScriptMessage
+      message: ContentScriptToPageScriptMessage,
     ) => void)[];
     listenersForId.push(liftedListener);
 
@@ -613,14 +651,18 @@ export function connect(preConfig: Config): ConnectResponse {
   };
 
   const sendDelayed = throttle(() => {
-    sendMessage(delayedActions, delayedStates as any, config);
+    sendMessage(
+      delayedActions,
+      delayedStates as unknown as LiftedState<unknown, Action<string>, unknown>,
+      config,
+    );
     delayedActions = [];
     delayedStates = [];
   }, latency);
 
-  const send = <S, A extends Action<unknown>>(
+  const send = <S, A extends Action<string>>(
     action: A,
-    state: LiftedState<S, A, unknown>
+    state: LiftedState<S, A, unknown>,
   ) => {
     if (
       isPaused ||
@@ -657,23 +699,31 @@ export function connect(preConfig: Config): ConnectResponse {
     sendMessage(
       amendedAction as StructuralPerformAction<A>,
       amendedState,
-      config
+      config,
     );
   };
 
-  const init = <S, A extends Action<unknown>>(
+  const init = <S, A extends Action<string>>(
     state: S,
-    liftedData?: LiftedState<S, A, unknown>
+    liftedData?: LiftedState<S, A, unknown>,
   ) => {
-    const message: InitMessage<S, A> = {
-      type: 'INIT',
-      payload: stringify(state, config.serialize as Serialize | undefined),
-      instanceId: id,
-      source,
-    };
+    let message: InitMessage<S, A>;
+    try {
+      message = {
+        type: 'INIT',
+        payload: stringify(state, config.serialize as Serialize | undefined),
+        instanceId: id,
+        source,
+      };
+      if (liftedData && Array.isArray(liftedData)) {
+        // Legacy
+        message.action = stringify(liftedData);
+      }
+    } catch (err) {
+      reportSerializationError(id, 'INIT', err);
+      return;
+    }
     if (liftedData && Array.isArray(liftedData)) {
-      // Legacy
-      message.action = stringify(liftedData);
       message.name = config.name;
     } else {
       if (liftedData) {

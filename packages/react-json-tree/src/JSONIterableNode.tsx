@@ -1,6 +1,6 @@
 import React from 'react';
-import JSONNestedNode from './JSONNestedNode';
-import type { CommonInternalProps } from './types';
+import JSONNestedNode from './JSONNestedNode.js';
+import type { CommonInternalProps } from './types.js';
 
 // Returns the "n Items" string for this node,
 // generating and caching it if it hasn't been created yet.
@@ -10,7 +10,6 @@ function createItemString(data: any, limit: number) {
   if (Number.isSafeInteger(data.size)) {
     count = data.size;
   } else {
-    // eslint-disable-next-line no-unused-vars
     for (const entry of data) {
       if (limit && count + 1 > limit) {
         hasMore = true;

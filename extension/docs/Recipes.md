@@ -28,7 +28,7 @@ type WindowWithDevTools = Window & {
 };
 
 const isReduxDevtoolsExtenstionExist = (
-  arg: Window | WindowWithDevTools
+  arg: Window | WindowWithDevTools,
 ): arg is WindowWithDevTools => {
   return '__REDUX_DEVTOOLS_EXTENSION__' in arg;
 };
@@ -40,7 +40,7 @@ const store = createStore(
   initialState,
   isReduxDevtoolsExtenstionExist(window)
     ? window.__REDUX_DEVTOOLS_EXTENSION__()
-    : undefined
+    : undefined,
 );
 ```
 
@@ -72,7 +72,7 @@ const store = createStore(
       instaceID: 2,
       name: 'Allowlisted',
       actionsAllowlist: '...',
-    })
-  )
+    }),
+  ),
 );
 ```

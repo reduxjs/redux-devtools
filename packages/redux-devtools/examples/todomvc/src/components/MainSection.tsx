@@ -1,5 +1,4 @@
 import React, { Component, MouseEventHandler } from 'react';
-import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 import Footer from './Footer';
 import {
@@ -27,10 +26,6 @@ interface Props {
 }
 
 export default class MainSection extends Component<Props, State> {
-  static propTypes = {
-    todos: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired,
-  };
   // Keep a counter that can be used to create an html `id` attribute.
   static mountCount = 0;
 
@@ -55,7 +50,7 @@ export default class MainSection extends Component<Props, State> {
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
     const markedCount = todos.reduce(
       (count, todo) => (todo.marked ? count + 1 : count),
-      0
+      0,
     );
 
     return (
@@ -82,7 +77,6 @@ export default class MainSection extends Component<Props, State> {
             className="toggle-all"
             type="checkbox"
             checked={markedCount === todos.length}
-            // eslint-disable-next-line @typescript-eslint/unbound-method
             onChange={actions.markAll}
           />
           <label htmlFor={this.htmlFormInputId}>Mark all as complete</label>

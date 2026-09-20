@@ -47,7 +47,7 @@ export default async function (argv: { [arg: string]: any }): Promise<{
 
   agServer.setMiddleware(
     agServer.MIDDLEWARE_INBOUND,
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    // oxlint-disable-next-line typescript/no-misused-promises
     async (middlewareStream) => {
       for await (const action of middlewareStream) {
         if (action.type === action.TRANSMIT) {
@@ -76,13 +76,13 @@ export default async function (argv: { [arg: string]: any }): Promise<{
                 });
               })
               .catch(function (error) {
-                console.error(error); // eslint-disable-line no-console
+                console.error(error);
               });
           }
         }
         action.allow();
       }
-    }
+    },
   );
 
   void (async () => {
@@ -110,7 +110,7 @@ export default async function (argv: { [arg: string]: any }): Promise<{
               request.end(data);
             })
             .catch(function (error) {
-              console.error(error); // eslint-disable-line no-console
+              console.error(error);
             });
         }
       })();
@@ -118,7 +118,6 @@ export default async function (argv: { [arg: string]: any }): Promise<{
         for await (const data of socket.listener('disconnect')) {
           const channel = agServer.exchange.channel('sc-' + socket.id);
           channel.unsubscribe();
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           void agServer.exchange.transmitPublish(channelToEmit!, {
             id: socket.id,
             type: 'DISCONNECTED',

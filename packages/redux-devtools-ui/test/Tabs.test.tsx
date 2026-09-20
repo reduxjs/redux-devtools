@@ -1,8 +1,9 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Tabs } from '../src';
-import { tabs, simple10Tabs } from '../src/Tabs/data';
+import { userEvent } from '@testing-library/user-event';
+import { Tabs } from '../src/index.js';
+import { tabs, simple10Tabs } from '../src/Tabs/data.js';
 
 describe('Tabs', function () {
   it('renders correctly', () => {
@@ -12,7 +13,7 @@ describe('Tabs', function () {
         onClick={() => {
           // noop
         }}
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -25,7 +26,7 @@ describe('Tabs', function () {
           // noop
         }}
         selected="Tab2"
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -38,13 +39,13 @@ describe('Tabs', function () {
           // noop
         }}
         selected="5"
-      />
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should select tab', async () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<Tabs tabs={tabs} onClick={onClick} />);
 
     await userEvent.click(screen.getByRole('button', { name: 'Tab1' }));

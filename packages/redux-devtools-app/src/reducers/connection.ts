@@ -1,5 +1,5 @@
-import { RECONNECT } from '../constants/socketActionTypes';
-import { ConnectionType, StoreAction } from '../actions';
+import { RECONNECT } from '../constants/socketActionTypes.js';
+import { ConnectionType, StoreAction } from '../actions/index.js';
 
 export interface ConnectionStateOptions {
   readonly hostname: string;
@@ -16,7 +16,7 @@ export function connection(
     options: { hostname: 'localhost', port: 8000, secure: false },
     type: 'disabled',
   },
-  action: StoreAction
+  action: StoreAction,
 ) {
   if (action.type === RECONNECT) {
     const { type, ...options } = action.options;

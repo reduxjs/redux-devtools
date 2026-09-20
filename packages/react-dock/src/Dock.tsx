@@ -1,8 +1,7 @@
 import React, { Component, ReactNode } from 'react';
-import PropTypes from 'prop-types';
-import debounce from 'lodash.debounce';
-import type { DebouncedFunc } from 'lodash';
-import autoprefix from './autoprefix';
+import { debounce } from 'lodash-es';
+import type { DebouncedFunc } from 'lodash-es';
+import autoprefix from './autoprefix.js';
 
 interface Styles {
   [key: string]: React.CSSProperties;
@@ -11,7 +10,7 @@ interface Styles {
 function autoprefixes(styles: Styles) {
   return Object.keys(styles).reduce<Styles>(
     (obj, key) => ((obj[key] = autoprefix(styles[key])), obj),
-    {}
+    {},
   );
 }
 
@@ -81,13 +80,13 @@ const styles = autoprefixes({
 
 function getTransitions(duration: number) {
   return ['left', 'top', 'width', 'height'].map(
-    (p) => `${p} ${duration / 1000}s ease-out`
+    (p) => `${p} ${duration / 1000}s ease-out`,
   );
 }
 
 function getDockStyles(
   { fluid, dockStyle, dockHiddenStyle, duration, position, isVisible }: Props,
-  { size, isResizing, fullWidth, fullHeight }: State
+  { size, isResizing, fullWidth, fullHeight }: State,
 ) {
   let posStyle;
   const absSize = fluid ? `${size * 100}%` : `${size}px`;
@@ -145,7 +144,7 @@ function getDockStyles(
 
 function getDimStyles(
   { dimMode, dimStyle, duration, isVisible }: Props,
-  { isTransitionStarted }: State
+  { isTransitionStarted }: State,
 ) {
   return [
     styles.dim,
@@ -209,7 +208,7 @@ function getResizerStyles(position: 'left' | 'right' | 'top' | 'bottom') {
 function getFullSize(
   position: 'left' | 'right' | 'top' | 'bottom',
   fullWidth: number,
-  fullHeight: number
+  fullHeight: number,
 ) {
   return position === 'left' || position === 'right' ? fullWidth : fullHeight;
 }
@@ -229,12 +228,12 @@ interface Props {
   dockHiddenStyle?: React.CSSProperties | null;
   duration: number;
   children?:
-    | React.FunctionComponent<{
+    | ((params: {
         position: 'left' | 'right' | 'top' | 'bottom';
         isResizing: boolean | undefined;
         size: number;
         isVisible: boolean | undefined;
-      }>
+      }) => ReactNode)
     | ReactNode;
 }
 
@@ -258,21 +257,6 @@ export default class Dock extends Component<Props, State> {
     fullHeight: window.innerHeight,
     isTransitionStarted: false,
     isWindowResizing: false,
-  };
-
-  static propTypes = {
-    position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-    zIndex: PropTypes.number,
-    fluid: PropTypes.bool,
-    size: PropTypes.number,
-    defaultSize: PropTypes.number,
-    dimMode: PropTypes.oneOf(['none', 'transparent', 'opaque']),
-    isVisible: PropTypes.bool,
-    onVisibleChange: PropTypes.func,
-    onSizeChange: PropTypes.func,
-    dimStyle: PropTypes.object,
-    dockStyle: PropTypes.object,
-    duration: PropTypes.number,
   };
 
   static defaultProps = {
@@ -358,11 +342,11 @@ export default class Dock extends Component<Props, State> {
 
     const dimStyles = Object.assign(
       {},
-      ...getDimStyles(this.props, this.state)
+      ...getDimStyles(this.props, this.state),
     );
     const dockStyles = Object.assign(
       {},
-      ...getDockStyles(this.props, this.state)
+      ...getDockStyles(this.props, this.state),
     );
     const resizerStyles = Object.assign({}, ...getResizerStyles(position));
 
@@ -379,14 +363,7 @@ export default class Dock extends Component<Props, State> {
           />
           <div style={styles.dockContent}>
             {typeof children === 'function'
-              ? (
-                  children as React.FunctionComponent<{
-                    position: 'left' | 'right' | 'top' | 'bottom';
-                    isResizing: boolean | undefined;
-                    size: number;
-                    isVisible: boolean | undefined;
-                  }>
-                )({
+              ? children({
                   position,
                   isResizing,
                   size,
@@ -401,7 +378,7 @@ export default class Dock extends Component<Props, State> {
 
   handleDimClick = () => {
     if (this.props.dimMode === 'opaque') {
-      this.props.onVisibleChange && this.props.onVisibleChange(false);
+      if (this.props.onVisibleChange) this.props.onVisibleChange(false);
     }
   };
 
@@ -441,7 +418,7 @@ export default class Dock extends Component<Props, State> {
 
   debouncedUpdateWindowSizeEnd: DebouncedFunc<() => void> = debounce(
     this.updateWindowSizeEnd,
-    30
+    30,
   );
 
   handleWrapperLeave = () => {
@@ -487,7 +464,7 @@ export default class Dock extends Component<Props, State> {
         break;
     }
 
-    this.props.onSizeChange && this.props.onSizeChange(size);
+    if (this.props.onSizeChange) this.props.onSizeChange(size);
 
     if (!isControlled) {
       this.setState({ size });

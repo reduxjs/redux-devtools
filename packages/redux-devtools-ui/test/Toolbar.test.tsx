@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Toolbar, Divider, Spacer, Button } from '../src';
+import { Toolbar, Divider, Spacer, Button } from '../src/index.js';
 
 describe('Toolbar', function () {
   it('renders correctly', () => {
@@ -10,7 +10,7 @@ describe('Toolbar', function () {
         <Divider />
         <Spacer />
         <Button>2</Button>
-      </Toolbar>
+      </Toolbar>,
     );
     expect(container.firstChild).toMatchSnapshot();
   });

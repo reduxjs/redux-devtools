@@ -1,6 +1,8 @@
-import Immutable, { Map, OrderedMap } from 'immutable';
-import Serialize from '../src/immutable';
-import { SerializedData } from '../src/helpers';
+import * as Immutable from 'immutable';
+import { Map, OrderedMap } from 'immutable';
+import Serialize from '../src/immutable/index.js';
+import { SerializedData } from '../src/helpers/index.js';
+
 const serialize = Serialize(Immutable);
 const stringify = serialize.stringify;
 const parse = serialize.parse;
@@ -21,7 +23,7 @@ describe('Immutable', function () {
   const stringified: { [key: string]: string } = {};
   describe('Stringify', function () {
     Object.keys(data).forEach(function (key) {
-      // eslint-disable-next-line jest/valid-title
+      // oxlint-disable-next-line vitest/valid-title
       it(key, function () {
         stringified[key] = stringify(data[key as keyof typeof data]);
         expect(stringified[key]).toMatchSnapshot();
@@ -31,7 +33,7 @@ describe('Immutable', function () {
 
   describe('Parse', function () {
     Object.keys(data).forEach(function (key) {
-      // eslint-disable-next-line jest/valid-title
+      // oxlint-disable-next-line vitest/valid-title
       it(key, function () {
         expect(parse(stringified[key])).toEqual(data[key as keyof typeof data]);
       });
@@ -100,7 +102,7 @@ describe('Immutable', function () {
       const scndProp = parsed.data.scnd.data.prop;
 
       expect(fstProp).toEqual(scndProp);
-      expect(Array.isArray(obj.get('fst')!.get('prop'))).toBe(true);
+      expect(Array.isArray(obj.get('fst').get('prop'))).toBe(true);
     });
   });
 
@@ -110,7 +112,7 @@ describe('Immutable', function () {
     function customReplacer(
       key: string,
       value: unknown,
-      defaultReplacer: (key: string, value: unknown) => unknown
+      defaultReplacer: (key: string, value: unknown) => unknown,
     ) {
       if (value === 1) {
         return { data: customOneRepresentation, __serializedType__: 'number' };
@@ -121,7 +123,7 @@ describe('Immutable', function () {
     function customReviver(
       key: string,
       value: unknown,
-      defaultReviver: (key: string, value: unknown) => unknown
+      defaultReviver: (key: string, value: unknown) => unknown,
     ) {
       if (
         typeof value === 'object' &&
@@ -137,26 +139,25 @@ describe('Immutable', function () {
       Immutable,
       null,
       customReplacer,
-      customReviver
+      customReviver,
     );
 
     Object.keys(data).forEach(function (key) {
       const stringified = serializeCustom.stringify(
-        data[key as keyof typeof data]
+        data[key as keyof typeof data],
       );
-      // eslint-disable-next-line jest/valid-title
+      // oxlint-disable-next-line vitest/valid-title
       it(key, function () {
         const deserialized = serializeCustom.parse(stringified);
         expect(deserialized).toEqual(data[key as keyof typeof data]);
         if (key === 'map' || key === 'orderedMap') {
           const deserializedDefault = parse(stringified);
-          // eslint-disable-next-line jest/no-conditional-expect
           expect(
             (
               deserializedDefault as
                 | Map<unknown, unknown>
                 | OrderedMap<unknown, unknown>
-            ).get('a')
+            ).get('a'),
           ).toEqual(customOneRepresentation);
         }
       });

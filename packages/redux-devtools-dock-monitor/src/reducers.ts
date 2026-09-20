@@ -6,9 +6,9 @@ import {
   CHANGE_SIZE,
   DockMonitorAction,
   TOGGLE_VISIBILITY,
-} from './actions';
-import { POSITIONS } from './constants';
-import { DockMonitorProps } from './DockMonitor';
+} from './actions.js';
+import { POSITIONS } from './constants.js';
+import { DockMonitorProps } from './DockMonitor.js';
 
 export interface DockMonitorState {
   position: 'left' | 'top' | 'right' | 'bottom';
@@ -18,46 +18,46 @@ export interface DockMonitorState {
   childMonitorIndex: number;
 }
 
-function position<S, A extends Action<unknown>>(
+function position<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state = props.defaultPosition,
-  action: DockMonitorAction
+  action: DockMonitorAction,
 ) {
   return action.type === CHANGE_POSITION
     ? POSITIONS[(POSITIONS.indexOf(state) + 1) % POSITIONS.length]
     : state;
 }
 
-function size<S, A extends Action<unknown>>(
+function size<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state = props.defaultSize,
-  action: DockMonitorAction
+  action: DockMonitorAction,
 ) {
   return action.type === CHANGE_SIZE ? action.size : state;
 }
 
-function isVisible<S, A extends Action<unknown>>(
+function isVisible<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state = props.defaultIsVisible,
-  action: DockMonitorAction
+  action: DockMonitorAction,
 ) {
   return action.type === TOGGLE_VISIBILITY ? !state : state;
 }
 
-function childMonitorStates<S, A extends Action<unknown>>(
+function childMonitorStates<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state: unknown[] = [],
-  action: DockMonitorAction
+  action: DockMonitorAction,
 ) {
   return Children.map(props.children, (child, index) =>
-    child.type.update(child.props, state[index], action)
+    child.type.update(child.props, state[index], action),
   );
 }
 
-function childMonitorIndex<S, A extends Action<unknown>>(
+function childMonitorIndex<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state = 0,
-  action: DockMonitorAction
+  action: DockMonitorAction,
 ) {
   switch (action.type) {
     case CHANGE_MONITOR:
@@ -67,15 +67,14 @@ function childMonitorIndex<S, A extends Action<unknown>>(
   }
 }
 
-export default function reducer<S, A extends Action<unknown>>(
+export default function reducer<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state: Partial<DockMonitorState> = {},
-  action: DockMonitorAction
+  action: DockMonitorAction,
 ): DockMonitorState {
   if (!state.childMonitorStates) {
     Children.forEach(props.children, (child, index) => {
       if (typeof child.type.update !== 'function') {
-        // eslint-disable-next-line no-console
         console.error(
           `Child of <DockMonitor> with the index ${index} ` +
             `(${
@@ -83,7 +82,7 @@ export default function reducer<S, A extends Action<unknown>>(
               child.type.name ||
               (child.type as unknown as string)
             }) ` +
-            'does not appear to be a valid Redux DevTools monitor.'
+            'does not appear to be a valid Redux DevTools monitor.',
         );
       }
     });
@@ -96,12 +95,12 @@ export default function reducer<S, A extends Action<unknown>>(
     childMonitorIndex: childMonitorIndex(
       props,
       state.childMonitorIndex,
-      action
+      action,
     ),
     childMonitorStates: childMonitorStates(
       props,
       state.childMonitorStates,
-      action
+      action,
     ),
   };
 }

@@ -1,6 +1,6 @@
 import jsan from 'jsan';
 import { immutableSerialize } from '@redux-devtools/serialize';
-import type { Config, SerializeWithImmutable } from '../index';
+import type { Config, SerializeWithImmutable } from '../index.js';
 import Immutable from 'immutable';
 import { LiftedState } from '@redux-devtools/instrument';
 import { Action } from 'redux';
@@ -10,7 +10,7 @@ interface SerializeWithRequiredImmutable extends SerializeWithImmutable {
 }
 
 function isSerializeWithImmutable(
-  serialize: boolean | SerializeWithImmutable
+  serialize: boolean | SerializeWithImmutable,
 ): serialize is SerializeWithRequiredImmutable {
   return !!(serialize as SerializeWithImmutable).immutable;
 }
@@ -20,9 +20,9 @@ interface SerializeWithRequiredReviver extends SerializeWithImmutable {
 }
 
 function isSerializeWithReviver(
-  serialize: boolean | SerializeWithImmutable
+  serialize: boolean | SerializeWithImmutable,
 ): serialize is SerializeWithRequiredReviver {
-  return !!(serialize as SerializeWithImmutable).immutable;
+  return !!(serialize as SerializeWithImmutable).reviver;
 }
 
 interface ParsedSerializedLiftedState {
@@ -30,9 +30,9 @@ interface ParsedSerializedLiftedState {
   readonly preloadedState?: string;
 }
 
-export default function importState<S, A extends Action<unknown>>(
+export default function importState<S, A extends Action<string>>(
   state: string | undefined,
-  { serialize }: Config
+  { serialize }: Config,
 ) {
   if (!state) return undefined;
   let parse = jsan.parse;
@@ -45,8 +45,8 @@ export default function importState<S, A extends Action<unknown>>(
             serialize.immutable,
             serialize.refs,
             serialize.replacer,
-            serialize.reviver
-          ).reviver
+            serialize.reviver,
+          ).reviver,
         );
     } else if (isSerializeWithReviver(serialize)) {
       parse = (v) => jsan.parse(v, serialize.reviver);
@@ -58,7 +58,7 @@ export default function importState<S, A extends Action<unknown>>(
     | LiftedState<S, A, unknown> = parse(state) as
     | ParsedSerializedLiftedState
     | LiftedState<S, A, unknown>;
-  let preloadedState =
+  const preloadedState =
     'payload' in parsedSerializedLiftedState &&
     parsedSerializedLiftedState.preloadedState
       ? (parse(parsedSerializedLiftedState.preloadedState) as S)

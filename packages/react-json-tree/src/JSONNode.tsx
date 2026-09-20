@@ -1,10 +1,10 @@
 import React from 'react';
-import objType from './objType';
-import JSONObjectNode from './JSONObjectNode';
-import JSONArrayNode from './JSONArrayNode';
-import JSONIterableNode from './JSONIterableNode';
-import JSONValueNode from './JSONValueNode';
-import type { CommonInternalProps } from './types';
+import objType from './objType.js';
+import JSONObjectNode from './JSONObjectNode.js';
+import JSONArrayNode from './JSONArrayNode.js';
+import JSONIterableNode from './JSONIterableNode.js';
+import JSONValueNode from './JSONValueNode.js';
+import type { CommonInternalProps } from './types.js';
 
 interface Props extends CommonInternalProps {
   value: unknown;

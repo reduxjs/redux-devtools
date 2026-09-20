@@ -1,9 +1,8 @@
-import mapValues from 'lodash/mapValues';
 import { PerformAction } from '@redux-devtools/core';
 import { Action } from 'redux';
 
 export interface State {
-  actionsById: { [actionId: number]: PerformAction<Action<unknown>> };
+  actionsById: { [actionId: number]: PerformAction<Action<string>> };
   computedStates: { state: unknown; error?: string }[];
   stagedActionIds: number[];
 }
@@ -19,19 +18,24 @@ export function arrToRegex(v: string | string[]) {
 }
 
 function filterActions(
-  actionsById: { [actionId: number]: PerformAction<Action<unknown>> },
-  actionSanitizer: ((action: Action<unknown>, id: number) => Action) | undefined
+  actionsById: { [actionId: number]: PerformAction<Action<string>> },
+  actionSanitizer: ((action: Action<string>, id: number) => Action) | undefined,
 ) {
   if (!actionSanitizer) return actionsById;
-  return mapValues(actionsById, (action, id: number) => ({
-    ...action,
-    action: actionSanitizer(action.action, id),
-  }));
+  return Object.fromEntries(
+    Object.entries(actionsById).map(([actionId, action]) => [
+      actionId,
+      {
+        ...action,
+        action: actionSanitizer(action.action, actionId as unknown as number),
+      },
+    ]),
+  );
 }
 
 function filterStates(
   computedStates: { state: unknown; error?: string | undefined }[],
-  stateSanitizer: (state: unknown, actionId: number) => unknown
+  stateSanitizer: (state: unknown, actionId: number) => unknown,
 ) {
   if (!stateSanitizer) return computedStates;
   return computedStates.map((state, idx) => ({
@@ -91,31 +95,28 @@ function getDevToolsOptions() {
 }
 
 export function isFiltered(
-  action: PerformAction<Action<unknown>> | Action<unknown>,
-  localFilter?: LocalFilter
+  action: PerformAction<Action<string>> | Action<string>,
+  localFilter?: LocalFilter,
 ) {
-  const { type } = (action as PerformAction<Action<unknown>>).action || action;
+  const { type } = (action as PerformAction<Action<string>>).action || action;
   const opts = getDevToolsOptions();
   if (
     (!localFilter &&
       opts.filter &&
       opts.filter === FilterState.DO_NOT_FILTER) ||
-    (type && typeof (type as string).match !== 'function')
+    (type && typeof type.match !== 'function')
   )
     return false;
 
   const { allowlist, denylist } = localFilter || opts;
   return (
-    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (allowlist && !(type as string).match(allowlist)) ||
-    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-    (denylist && (type as string).match(denylist))
+    (allowlist && !type.match(allowlist)) || (denylist && type.match(denylist))
   );
 }
 
 export function filterStagedActions(
   state: State,
-  filters: LocalFilter | undefined
+  filters: LocalFilter | undefined,
 ) {
   if (!filters) return state;
 
@@ -144,11 +145,9 @@ export function filterState(
   type: string,
   localFilter: LocalFilter | undefined,
   stateSanitizer: ((state: unknown, actionId: number) => unknown) | undefined,
-  actionSanitizer:
-    | ((action: Action<unknown>, id: number) => Action)
-    | undefined,
+  actionSanitizer: ((action: Action<string>, id: number) => Action) | undefined,
   nextActionId: number,
-  predicate?: (currState: unknown, currAction: Action<unknown>) => boolean
+  predicate?: (currState: unknown, currAction: Action<string>) => boolean,
 ) {
   if (type === 'ACTION')
     return !stateSanitizer ? state : stateSanitizer(state, nextActionId - 1);
@@ -167,7 +166,7 @@ export function filterState(
     }[] = [];
     const sanitizedActionsById:
       | {
-          [id: number]: PerformAction<Action<unknown>>;
+          [id: number]: PerformAction<Action<string>>;
         }
       | undefined = actionSanitizer && {};
     const { actionsById } = state;
@@ -187,7 +186,7 @@ export function filterState(
       filteredComputedStates.push(
         stateSanitizer
           ? { ...liftedState, state: stateSanitizer(currState, idx) }
-          : liftedState
+          : liftedState,
       );
       if (actionSanitizer) {
         sanitizedActionsById![id] = {

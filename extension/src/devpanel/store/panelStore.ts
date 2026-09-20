@@ -1,9 +1,14 @@
-import { createStore, applyMiddleware, Reducer } from 'redux';
+import { createStore, applyMiddleware, Reducer, Store } from 'redux';
 import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
-import { exportStateMiddleware, StoreAction } from '@redux-devtools/app';
-import panelDispatcher from './panelSyncMiddleware';
-import rootReducer, { StoreStateWithoutSocket } from './panelReducer';
+import {
+  exportStateMiddleware,
+  parseErrorMiddleware,
+  StoreAction,
+  StoreState,
+} from '@redux-devtools/app';
+import panelDispatcher, { PanelBackgroundPort } from './panelSyncMiddleware.js';
+import rootReducer from './panelReducer.js';
 
 const persistConfig = {
   key: 'redux-devtools',
@@ -11,18 +16,21 @@ const persistConfig = {
   storage: localForage,
 };
 
-const persistedReducer: Reducer<StoreStateWithoutSocket, StoreAction> =
-  persistReducer(persistConfig, rootReducer) as any;
+const persistedReducer: Reducer<StoreState, StoreAction> = persistReducer(
+  persistConfig,
+  rootReducer,
+) as any;
 
 export default function configureStore(
   position: string,
-  bgConnection: chrome.runtime.Port
+  bgConnection: PanelBackgroundPort,
 ) {
   const enhancer = applyMiddleware(
+    parseErrorMiddleware,
     exportStateMiddleware,
-    panelDispatcher(bgConnection)
+    panelDispatcher(bgConnection),
   );
   const store = createStore(persistedReducer, enhancer);
-  const persistor = persistStore(store);
+  const persistor = persistStore(store as Store);
   return { store, persistor };
 }

@@ -24,7 +24,7 @@ if (argv.protocol === 'https') {
 function log(pass: boolean, msg: string) {
   const prefix = pass ? chalk.green.bgBlack('PASS') : chalk.red.bgBlack('FAIL');
   const color = pass ? chalk.blue : chalk.red;
-  console.log(prefix, color(msg)); // eslint-disable-line no-console
+  console.log(prefix, color(msg));
 }
 
 function getModuleName(type: string) {
@@ -68,7 +68,7 @@ function injectRN(type: string, msg: string) {
         ? '.'
         : ', the file `' +
           path.join(module.name, injectServer.fullPath) +
-          '` not found.')
+          '` not found.'),
   );
 
   process.exit(pass ? 0 : 1);
@@ -77,13 +77,13 @@ function injectRN(type: string, msg: string) {
 if (argv.revert) {
   injectRN(
     argv.revert as string,
-    'Revert injection of ReduxDevTools server from React Native local server'
+    'Revert injection of ReduxDevTools server from React Native local server',
   );
 }
 if (argv.injectserver) {
   injectRN(
     argv.injectserver as string,
-    'Inject ReduxDevTools server into React Native local server'
+    'Inject ReduxDevTools server into React Native local server',
   );
 }
 

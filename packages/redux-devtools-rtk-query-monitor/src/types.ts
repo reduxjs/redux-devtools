@@ -1,11 +1,15 @@
 import type { LiftedAction, LiftedState } from '@redux-devtools/core';
-import type { createApi, QueryStatus } from '@reduxjs/toolkit/query';
+import type {
+  createApi,
+  QueryCacheKey,
+  QueryStatus,
+} from '@reduxjs/toolkit/query';
 import type { Action, AnyAction, Dispatch } from '@reduxjs/toolkit';
 import type { ComponentType } from 'react';
-import type { Base16Theme, StylingFunction } from 'react-base16-styling';
-import type * as themes from 'redux-devtools-themes';
-import type { QueryComparators } from './utils/comparators';
-import type { QueryFilters } from './utils/filters';
+import { base16Themes } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
+import type { QueryComparators } from './utils/comparators.js';
+import type { QueryFilters } from './utils/filters.js';
 
 export enum QueryPreviewTabs {
   data,
@@ -31,11 +35,13 @@ export interface RtkQueryMonitorState {
   readonly selectedPreviewTab: QueryPreviewTabs;
 }
 
-export interface RtkQueryMonitorProps<S, A extends Action<unknown>>
-  extends LiftedState<S, A, RtkQueryMonitorState> {
+export interface RtkQueryMonitorProps<
+  S,
+  A extends Action<string>,
+> extends LiftedState<S, A, RtkQueryMonitorState> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
-  theme: keyof typeof themes | Base16Theme;
-  invertTheme?: boolean;
+  theme: keyof typeof base16Themes | Base16Theme;
+  invertTheme: boolean;
 }
 
 export type RtkQueryApiState = ReturnType<
@@ -52,11 +58,41 @@ export type RtkMutationState = NonNullable<
 
 export type RtkQueryApiConfig = RtkQueryApiState['config'];
 
-export type RtkQueryProvided = RtkQueryApiState['provided'];
+export type FullTagDescription<TagType> = {
+  type: TagType;
+  id?: number | string;
+};
 
-export interface ExternalProps<S, A extends Action<unknown>> {
+// This is the actual tags structure, and was the entire `api.provided`
+// field up through 2.6.1
+export type RtkQueryProvidedTagsState = {
+  [x: string]: {
+    [id: string]: QueryCacheKey[];
+    [id: number]: QueryCacheKey[];
+  };
+};
+
+// As of 2.6.2, the `api.provided` field is split into `tags` and `keys` fields,
+// with the old data nested in `tags`.
+export type RtkQuery262ProvidedState = {
+  keys: Record<QueryCacheKey, FullTagDescription<any>[]>;
+  tags: RtkQueryProvidedTagsState;
+};
+
+export function isRtkQuery262Provided(
+  provided: Record<string, unknown>,
+): provided is RtkQuery262ProvidedState {
+  return (
+    'tags' in provided &&
+    'keys' in provided &&
+    typeof provided.tags === 'object' &&
+    typeof provided.keys === 'object'
+  );
+}
+
+export interface ExternalProps<S, A extends Action<string>> {
   dispatch: Dispatch<Action | LiftedAction<S, A, RtkQueryMonitorState>>;
-  theme: keyof typeof themes | Base16Theme;
+  theme: keyof typeof base16Themes | Base16Theme;
   hideMainButtons?: boolean;
   invertTheme: boolean;
 }
@@ -84,7 +120,7 @@ export interface ApiInfo {
 
 export interface SelectOption<
   T = string,
-  VisConfig extends string = 'default'
+  VisConfig extends string = 'default',
 > {
   label: string;
   value: T;
@@ -100,7 +136,6 @@ export interface SelectorsSource<S> {
 
 export interface StyleUtils {
   readonly base16Theme: Base16Theme;
-  readonly styling: StylingFunction;
   readonly invertTheme: boolean;
 }
 
@@ -154,8 +189,11 @@ export interface ApiStats {
   }>;
 }
 
-export interface TabOption<S, P, V extends string = 'default'>
-  extends SelectOption<S, V> {
+export interface TabOption<
+  S,
+  P,
+  V extends string = 'default',
+> extends SelectOption<S, V> {
   component: ComponentType<P>;
 }
 

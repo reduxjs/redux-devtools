@@ -35,8 +35,8 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : (noop) => noop,
-    batchedSubscribe(/* ... */)
-  )
+    batchedSubscribe(/* ... */),
+  ),
 );
 ```
 
@@ -60,7 +60,7 @@ const store = createStore(
       actionSanitizer,
       stateSanitizer: (state) =>
         state.data ? { ...state, data: '<<LONG_BLOB>>' } : state,
-    })
+    }),
 );
 ```
 
@@ -124,7 +124,7 @@ const store = Redux.createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ &&
     window.__REDUX_DEVTOOLS_EXTENSION__({
       serialize: true,
-    })
+    }),
 );
 ```
 

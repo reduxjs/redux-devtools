@@ -1,8 +1,8 @@
-import { css, ThemedStyledProps } from 'styled-components';
-import { fadeIn } from '../../utils/animations';
-import colorEffect from '../../utils/color';
-import { Mark, Size, TooltipPosition } from '../Button';
-import { Theme } from '../../themes/default';
+import { css } from '@emotion/react';
+import { fadeIn } from '../../utils/animations.js';
+import colorEffect from '../../utils/color.js';
+import { Mark, Size, TooltipPosition } from '../Button.js';
+import { Theme } from '../../themes/default.js';
 
 const both = (tooltipPosition: TooltipPosition) => {
   switch (tooltipPosition) {
@@ -138,7 +138,7 @@ export const commonStyle = ({
   theme,
   mark,
   size,
-}: ThemedStyledProps<CommonStyleProps, Theme>) => css`
+}: CommonStyleProps & { theme: Theme }) => css`
   display: inline-block;
   position: relative;
   flex-shrink: 0;
@@ -156,12 +156,13 @@ export const commonStyle = ({
       pointer-events: none;
     }
 
-    ${mark &&
-    `
+    ${
+      mark &&
+      `
     background-color: ${colorEffect(
       theme[mark],
       'fade',
-      theme.light ? 0.92 : 0.82
+      theme.light ? 0.92 : 0.82,
     )};
   
     > svg {
@@ -171,7 +172,8 @@ export const commonStyle = ({
       stroke-opacity: 0.2;
       user-select: none;
     }
-  `}
+  `
+    }
   }
 `;
 
@@ -188,7 +190,7 @@ export const tooltipStyle = ({
   tooltipPosition,
   mark,
   size,
-}: ThemedStyledProps<TooltipStyleProps, Theme>) => css`
+}: TooltipStyleProps & { theme: Theme }) => css`
   ${commonStyle({ theme, mark, size })}
 
   &:before {
@@ -200,7 +202,8 @@ export const tooltipStyle = ({
     border-radius: 3px;
     background: ${theme.base01};
     border: 1px solid ${theme.base02};
-    box-shadow: 1px 1px 2px -1px ${theme.base02},
+    box-shadow:
+      1px 1px 2px -1px ${theme.base02},
       1px 1px 2px 0px ${theme.base02};
   }
 
@@ -222,15 +225,18 @@ export const tooltipStyle = ({
   &:before {
     ${before(tooltipPosition)}
     ${getDirection(tooltipPosition)}: 3px;
-    ${theme.type === 'material'
-      ? css`
-          animation: ${fadeIn} 500ms;
-        `
-      : ''}
+    ${
+      theme.type === 'material'
+        ? css`
+            animation: ${fadeIn} 500ms;
+          `
+        : ''
+    }
   }
 
-  ${theme.type !== 'material' &&
-  `
+  ${
+    theme.type !== 'material' &&
+    `
   &:after {
     content: "";
     border-style: solid;
@@ -239,7 +245,8 @@ export const tooltipStyle = ({
     ${after(tooltipPosition, theme.base02)}
     ${getDirection(tooltipPosition)}: 7px;
   }
-  `}
+  `
+  }
 
   &:hover:after,
   &:hover:before {

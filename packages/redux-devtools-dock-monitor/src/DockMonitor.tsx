@@ -1,17 +1,15 @@
 import React, { cloneElement, Children, Component } from 'react';
-import PropTypes from 'prop-types';
 import { Dock } from 'react-dock';
 import { Action, Dispatch } from 'redux';
 import { LiftedState, Monitor } from '@redux-devtools/core';
-import { POSITIONS } from './constants';
 import {
   toggleVisibility,
   changeMonitor,
   changePosition,
   changeSize,
   DockMonitorAction,
-} from './actions';
-import reducer, { DockMonitorState } from './reducers';
+} from './actions.js';
+import reducer, { DockMonitorState } from './reducers.js';
 import parseKey from 'parse-key';
 
 interface KeyObject {
@@ -23,7 +21,7 @@ interface KeyObject {
   sequence: string;
 }
 
-interface ExternalProps<S, A extends Action<unknown>> {
+interface ExternalProps<S, A extends Action<string>> {
   defaultPosition: 'left' | 'top' | 'right' | 'bottom';
   defaultIsVisible: boolean;
   defaultSize: number;
@@ -35,8 +33,8 @@ interface ExternalProps<S, A extends Action<unknown>> {
   dispatch: Dispatch<DockMonitorAction>;
 
   children:
-    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>
-    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>[];
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>[];
 }
 
 interface DefaultProps {
@@ -46,8 +44,10 @@ interface DefaultProps {
   fluid: boolean;
 }
 
-export interface DockMonitorProps<S, A extends Action<unknown>>
-  extends LiftedState<S, A, DockMonitorState> {
+export interface DockMonitorProps<
+  S,
+  A extends Action<string>,
+> extends LiftedState<S, A, DockMonitorState> {
   defaultPosition: 'left' | 'top' | 'right' | 'bottom';
   defaultIsVisible: boolean;
   defaultSize: number;
@@ -59,32 +59,14 @@ export interface DockMonitorProps<S, A extends Action<unknown>>
   dispatch: Dispatch<DockMonitorAction>;
 
   children:
-    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>
-    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>[];
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>
+    | Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>[];
 }
 
-class DockMonitor<S, A extends Action<unknown>> extends Component<
+class DockMonitor<S, A extends Action<string>> extends Component<
   DockMonitorProps<S, A>
 > {
   static update = reducer;
-
-  static propTypes = {
-    defaultPosition: PropTypes.oneOf(POSITIONS),
-    defaultIsVisible: PropTypes.bool.isRequired,
-    defaultSize: PropTypes.number.isRequired,
-    toggleVisibilityKey: PropTypes.string.isRequired,
-    changePositionKey: PropTypes.string.isRequired,
-    changeMonitorKey: PropTypes.string,
-    fluid: PropTypes.bool,
-
-    dispatch: PropTypes.func,
-    monitorState: PropTypes.shape({
-      position: PropTypes.oneOf(POSITIONS).isRequired,
-      size: PropTypes.number.isRequired,
-      isVisible: PropTypes.bool.isRequired,
-      childMonitorState: PropTypes.any,
-    }),
-  };
 
   static defaultProps: DefaultProps = {
     defaultIsVisible: true,
@@ -98,19 +80,17 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
 
     const childrenCount = Children.count(props.children);
     if (childrenCount === 0) {
-      // eslint-disable-next-line no-console
       console.error(
         '<DockMonitor> requires at least one monitor inside. ' +
           'Why don’t you try <LogMonitor>? You can get it at ' +
-          'https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-log-monitor.'
+          'https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-log-monitor.',
       );
     } else if (childrenCount > 1 && !props.changeMonitorKey) {
-      // eslint-disable-next-line no-console
       console.error(
         'You specified multiple monitors inside <DockMonitor> ' +
           'but did not provide `changeMonitorKey` prop to change them. ' +
           'Try specifying <DockMonitor changeMonitorKey="ctrl-m" /> ' +
-          'and then press Ctrl-M.'
+          'and then press Ctrl-M.',
       );
     }
   }
@@ -179,12 +159,12 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
   };
 
   renderChild(
-    child: Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<unknown>>,
+    child: Monitor<S, A, LiftedState<S, A, unknown>, unknown, Action<string>>,
     index: number,
     otherProps: Omit<
       DockMonitorProps<S, A>,
       'monitorState' | 'children' | 'fluid'
-    >
+    >,
   ) {
     const { monitorState } = this.props;
     const { childMonitorIndex, childMonitorStates } = monitorState;
@@ -212,23 +192,8 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
         onSizeChange={this.handleSizeChange}
         dimMode="none"
       >
-        {Children.map(
-          children as
-            | Monitor<
-                S,
-                A,
-                LiftedState<S, A, unknown>,
-                unknown,
-                Action<unknown>
-              >
-            | Monitor<
-                S,
-                A,
-                LiftedState<S, A, unknown>,
-                unknown,
-                Action<unknown>
-              >[],
-          (child, index) => this.renderChild(child, index, rest)
+        {Children.map(children, (child, index) =>
+          this.renderChild(child, index, rest),
         )}
       </Dock>
     );
@@ -236,12 +201,12 @@ class DockMonitor<S, A extends Action<unknown>> extends Component<
 }
 
 export default DockMonitor as unknown as React.ComponentType<
-  ExternalProps<unknown, Action<unknown>>
+  ExternalProps<unknown, Action<string>>
 > & {
   update(
-    monitorProps: ExternalProps<unknown, Action<unknown>>,
+    monitorProps: ExternalProps<unknown, Action<string>>,
     state: DockMonitorState | undefined,
-    action: DockMonitorAction
+    action: DockMonitorAction,
   ): DockMonitorState;
   defaultProps: DefaultProps;
 };

@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.10.0
+
+### Minor Changes
+
+- bbb1a40: Convert React packages to ESM
+
 ## 0.9.0
 
 - Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997).

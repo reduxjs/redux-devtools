@@ -17,10 +17,10 @@ import {
   StoreState,
   TopButtons,
 } from '@redux-devtools/app';
-import { GoRadioTower } from 'react-icons/go';
-import { MdBorderBottom, MdBorderLeft, MdBorderRight } from 'react-icons/md';
-import type { Position } from '../pageScript/api/openWindow';
-import type { SingleMessage } from '../background/store/apiMiddleware';
+import { GoBroadcast } from 'react-icons/go';
+import { MdOutlineWindow } from 'react-icons/md';
+import type { Position } from '../pageScript/api/openWindow.js';
+import type { SingleMessage } from '../background/store/apiMiddleware.js';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
@@ -29,25 +29,21 @@ interface OwnProps {
 }
 type Props = StateProps & DispatchProps & OwnProps;
 
-declare global {
-  interface Window {
-    isElectron?: boolean;
-  }
-}
+const isElectron = navigator.userAgent.includes('Electron');
 
-function sendMessage(message: SingleMessage) {
-  chrome.runtime.sendMessage(message);
+async function sendMessage(message: SingleMessage) {
+  await chrome.runtime.sendMessage(message);
 }
 
 class Actions extends Component<Props> {
-  openWindow = (position: Position) => {
-    sendMessage({ type: 'OPEN', position });
+  openWindow = async (position: Position) => {
+    await sendMessage({ type: 'OPEN', position });
   };
-  openOptionsPage = () => {
-    if (navigator.userAgent.indexOf('Firefox') !== -1) {
-      sendMessage({ type: 'OPEN_OPTIONS' });
+  openOptionsPage = async () => {
+    if (navigator.userAgent.includes('Firefox')) {
+      await sendMessage({ type: 'OPEN_OPTIONS' });
     } else {
-      chrome.runtime.openOptionsPage();
+      await chrome.runtime.openOptionsPage();
     }
   };
 
@@ -60,6 +56,7 @@ class Actions extends Component<Props> {
       liftedState,
       liftedDispatch,
       position,
+      stateTreeSettings,
     } = this.props;
     const { features } = options;
     return (
@@ -75,6 +72,7 @@ class Actions extends Component<Props> {
           monitorState={this.props.monitorState}
           dispatch={liftedDispatch}
           features={options.features}
+          stateTreeSettings={stateTreeSettings}
         />
         {sliderIsOpen && options.connectionId && options.features.jump && (
           <SliderMonitor liftedState={liftedState} dispatch={liftedDispatch} />
@@ -87,7 +85,7 @@ class Actions extends Component<Props> {
           {features.import && <ImportButton />}
           {position &&
             (position !== '#popup' ||
-              navigator.userAgent.indexOf('Firefox') !== -1) && <PrintButton />}
+              navigator.userAgent.includes('Firefox')) && <PrintButton />}
           <Divider />
           <MonitorSelector />
           <Divider />
@@ -96,40 +94,22 @@ class Actions extends Component<Props> {
             <DispatcherButton dispatcherIsOpen={this.props.dispatcherIsOpen} />
           )}
           <Divider />
-          {!window.isElectron && position !== '#left' && (
+          {!isElectron && (
             <Button
-              onClick={() => {
-                this.openWindow('left');
+              onClick={async () => {
+                await this.openWindow('window');
               }}
             >
-              <MdBorderLeft />
+              <MdOutlineWindow />
             </Button>
           )}
-          {!window.isElectron && position !== '#right' && (
+          {!isElectron && (
             <Button
-              onClick={() => {
-                this.openWindow('right');
+              onClick={async () => {
+                await this.openWindow('remote');
               }}
             >
-              <MdBorderRight />
-            </Button>
-          )}
-          {!window.isElectron && position !== '#bottom' && (
-            <Button
-              onClick={() => {
-                this.openWindow('bottom');
-              }}
-            >
-              <MdBorderBottom />
-            </Button>
-          )}
-          {!window.isElectron && (
-            <Button
-              onClick={() => {
-                this.openWindow('remote');
-              }}
-            >
-              <GoRadioTower />
+              <GoBroadcast />
             </Button>
           )}
         </Toolbar>
@@ -149,6 +129,7 @@ const mapStateToProps = (state: StoreState) => {
     dispatcherIsOpen: state.monitor.dispatcherIsOpen,
     sliderIsOpen: state.monitor.sliderIsOpen,
     reports: state.reports.data,
+    stateTreeSettings: state.stateTreeSettings,
   };
 };
 

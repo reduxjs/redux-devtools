@@ -34,7 +34,7 @@ function removeCss(document: Document, ref: number) {
 
 function applyStyles(
   element: HTMLElement,
-  styles: Partial<CSSStyleDeclaration>
+  styles: Partial<CSSStyleDeclaration>,
 ) {
   element.setAttribute('style', '');
   for (const key in styles) {

@@ -32,11 +32,10 @@ export function catchErrors(sendError: (errorAction: ErrorAction) => void) {
     (global as any).ErrorUtils.setGlobalHandler(
       (error: Error, isFatal: boolean) => {
         sendError({ type: ERROR, error, isFatal });
-      }
+      },
     );
   }
 
-  /* eslint-disable no-console */
   if (
     typeof console === 'object' &&
     typeof console.error === 'function' &&
@@ -45,7 +44,6 @@ export function catchErrors(sendError: (errorAction: ErrorAction) => void) {
     (console as any).beforeRemotedev = console.error.bind(console);
     console.error = function () {
       let errorAction: ErrorAction = { type: ERROR };
-      // eslint-disable-next-line prefer-rest-params
       const error = arguments[0];
       errorAction.message = error.message ? error.message : error;
       if (error.sourceURL) {
@@ -58,9 +56,7 @@ export function catchErrors(sendError: (errorAction: ErrorAction) => void) {
       }
       if (error.stack) errorAction.stack = error.stack;
       sendError(errorAction);
-      // eslint-disable-next-line prefer-rest-params
       (console as any).beforeRemotedev.apply(null, arguments);
     };
   }
-  /* eslint-enable no-console */
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
-import { StylingFunction } from 'react-base16-styling';
-import isIterable from '../utils/isIterable';
+import type { JSX } from '@emotion/react/jsx-runtime';
+import isIterable from '../utils/isIterable.js';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
 
@@ -23,8 +23,7 @@ function getShortTypeString(val: any, diff: boolean | undefined) {
   } else if (val === undefined) {
     return 'undef';
   } else if (typeof val === 'object') {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    return Object.keys(val as {}).length > 0 ? '{…}' : '{}';
+    return Object.keys(val as object).length > 0 ? '{…}' : '{}';
   } else if (typeof val === 'function') {
     return 'fn';
   } else if (typeof val === 'string') {
@@ -40,17 +39,16 @@ function getText(
   type: string,
   data: any,
   isWideLayout: boolean,
-  isDiff: boolean | undefined
+  isDiff: boolean | undefined,
 ) {
   if (type === 'Object') {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const keys = Object.keys(data as {});
+    const keys = Object.keys(data as object);
     if (!isWideLayout) return keys.length ? '{…}' : '{}';
 
     const str = keys
       .slice(0, 3)
       .map(
-        (key) => `${key}: ${getShortTypeString(data[key], isDiff) as string}`
+        (key) => `${key}: ${getShortTypeString(data[key], isDiff) as string}`,
       )
       .concat(keys.length > 3 ? ['…'] : [])
       .join(', ');
@@ -72,14 +70,13 @@ function getText(
 }
 
 const getItemString = (
-  styling: StylingFunction,
   type: string,
   data: any,
   dataTypeKey: string | symbol | undefined,
   isWideLayout: boolean,
-  isDiff?: boolean
-) => (
-  <span {...styling('treeItemHint')}>
+  isDiff?: boolean,
+): JSX.Element => (
+  <span css={(theme) => ({ color: theme.ITEM_HINT_COLOR })}>
     {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
     {dataTypeKey && data[dataTypeKey] ? `${data[dataTypeKey] as string} ` : ''}
     {getText(type, data, isWideLayout, isDiff)}

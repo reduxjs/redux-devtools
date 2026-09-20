@@ -1,8 +1,8 @@
-import { TabOption } from '../types';
+import { TabOption } from '../types.js';
 
 export function isTabVisible<St, Props, Vis extends string>(
   tab: TabOption<St, Props, Vis>,
-  visKey: Vis | 'default'
+  visKey: Vis | 'default',
 ): boolean {
   if (typeof tab.visible === 'boolean') {
     return tab.visible;

@@ -1,7 +1,6 @@
-import '@babel/polyfill';
 import { createStore, compose } from 'redux';
-import { insertScript, listenMessage } from '../../utils/inject';
-import '../../../src/pageScript';
+import { insertScript, listenMessage } from '../../utils/inject.js';
+import '../../../src/pageScript/index.js';
 
 function counter(state = 0, action) {
   switch (action.type) {
@@ -19,7 +18,7 @@ describe('Redux enhancer', () => {
     const message = await listenMessage(() => {
       window.store = createStore(
         counter,
-        window.__REDUX_DEVTOOLS_EXTENSION__()
+        window.__REDUX_DEVTOOLS_EXTENSION__(),
       );
       expect(typeof window.store).toBe('object');
     });
@@ -37,7 +36,7 @@ describe('Redux enhancer', () => {
     message = await listenMessage();
     expect(message.type).toBe('STATE');
     expect(message.actionsById).toMatch(
-      /{"0":{"type":"PERFORM_ACTION","action":{"type":"@@INIT"},"/
+      /{"0":{"type":"PERFORM_ACTION","action":{"type":"@@INIT"},"/,
     );
     expect(message.computedStates).toBe('[{"state":0}]');
   });
@@ -49,7 +48,7 @@ describe('Redux enhancer', () => {
     });
     expect(message.type).toBe('ACTION');
     expect(message.action).toMatch(
-      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/
+      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/,
     );
     expect(message.payload).toBe('1');
 
@@ -59,7 +58,7 @@ describe('Redux enhancer', () => {
     });
     expect(message.type).toBe('ACTION');
     expect(message.action).toMatch(
-      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/
+      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/,
     );
     expect(message.payload).toBe('2');
   });
@@ -72,7 +71,7 @@ describe('Redux enhancer', () => {
           payload: "{ type: 'INCREMENT' }",
           source: '@devtools-extension',
         },
-        '*'
+        '*',
       );
     });
     expect(message.type).toBe('ACTION');
@@ -80,7 +79,7 @@ describe('Redux enhancer', () => {
     message = await listenMessage();
     expect(message.type).toBe('ACTION');
     expect(message.action).toMatch(
-      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/
+      /{"type":"PERFORM_ACTION","action":{"type":"INCREMENT"},/,
     );
     expect(message.payload).toBe('3');
   });
@@ -93,7 +92,7 @@ describe('Redux enhancer', () => {
           payload: { type: 'TOGGLE_ACTION', id: 1 },
           source: '@devtools-extension',
         },
-        '*'
+        '*',
       );
     });
     expect(message.type).toBe('DISPATCH');
@@ -109,7 +108,7 @@ describe('Redux enhancer', () => {
           payload: { type: 'TOGGLE_ACTION', id: 1 },
           source: '@devtools-extension',
         },
-        '*'
+        '*',
       );
     });
     expect(message.type).toBe('DISPATCH');
@@ -127,7 +126,7 @@ describe('Redux enhancer', () => {
           payload: { type: 'JUMP_TO_STATE', index: 2, actionId: 2 },
           source: '@devtools-extension',
         },
-        '*'
+        '*',
       );
     });
     expect(message.type).toBe('DISPATCH');
@@ -140,7 +139,7 @@ describe('Redux enhancer', () => {
           payload: { type: 'JUMP_TO_STATE', index: 3, actionId: 3 },
           source: '@devtools-extension',
         },
-        '*'
+        '*',
       );
     });
     expect(message.type).toBe('DISPATCH');
@@ -167,7 +166,7 @@ describe('Redux enhancer', () => {
           }),
           source: '@devtools-extension',
         },
-        '*'
+        '*',
       );
     });
     expect(message.type).toBe('IMPORT');
@@ -182,7 +181,7 @@ describe('Redux enhancer', () => {
         counter,
         window.__REDUX_DEVTOOLS_EXTENSION__({
           actionsDenylist: ['SOME_ACTION'],
-        })
+        }),
       );
       expect(typeof window.store).toBe('object');
     });
@@ -204,7 +203,7 @@ describe('Redux enhancer', () => {
     const message = await listenMessage(() => {
       window.store = createStore(
         counter,
-        compose(testEnhancer, window.__REDUX_DEVTOOLS_EXTENSION__())
+        compose(testEnhancer, window.__REDUX_DEVTOOLS_EXTENSION__()),
       );
       expect(typeof window.store).toBe('object');
     });

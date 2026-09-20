@@ -1,11 +1,22 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- 191d419: Convert d3 packages to ESM
+
+## 3.0.1
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+
 ## 3.0.0
 
 ### Major Changes
 
 - b323f77d: Upgrade D3
-
   - Remove UMD build.
   - Upgrade d3 peer dependency from v3 to v7.
   - Remove `attr` configuration method.

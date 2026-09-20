@@ -1,10 +1,10 @@
+import { middlewares } from '@redux-devtools/app-core';
 import { createStore, compose, applyMiddleware, Reducer, Store } from 'redux';
 import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
-import { api } from '../middlewares/api';
-import { exportStateMiddleware } from '../middlewares/exportState';
-import { rootReducer, StoreState } from '../reducers';
-import { StoreAction } from '../actions';
+import { api } from '../middlewares/api.js';
+import { StoreState, rootReducer } from '../reducers/index.js';
+import { StoreAction } from '../actions/index.js';
 
 const persistConfig = {
   key: 'redux-devtools',
@@ -14,11 +14,11 @@ const persistConfig = {
 
 const persistedReducer: Reducer<StoreState, StoreAction> = persistReducer(
   persistConfig,
-  rootReducer
+  rootReducer as unknown as Reducer<StoreState, StoreAction>,
 ) as any;
 
 export default function configureStore(
-  callback: (store: Store<StoreState, StoreAction>) => void
+  callback: (store: Store<StoreState, StoreAction>) => void,
 ) {
   let composeEnhancers = compose;
   if (process.env.NODE_ENV !== 'production') {
@@ -35,21 +35,13 @@ export default function configureStore(
         }
       ).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
     }
-    if (module.hot) {
-      // Enable Webpack hot module replacement for reducers
-      module.hot.accept('../reducers', () => {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const nextReducer = require('../reducers'); // eslint-disable-line global-require
-        store.replaceReducer(nextReducer as Reducer<StoreState, StoreAction>);
-      });
-    }
   }
 
   const store = createStore(
     persistedReducer,
-    composeEnhancers(applyMiddleware(exportStateMiddleware, api))
+    composeEnhancers(applyMiddleware(...middlewares, api)),
   );
-  const persistor = persistStore(store, null, () => {
+  const persistor = persistStore(store as Store, null, () => {
     callback(store);
   });
   return { store, persistor };

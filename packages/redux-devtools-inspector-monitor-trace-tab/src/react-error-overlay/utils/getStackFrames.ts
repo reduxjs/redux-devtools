@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { StackFrame } from './stack-frame';
-import { parse } from './parser';
-import { map } from './mapper';
-import { unmap } from './unmapper';
-import { toExclude } from '../../presets';
+import type { StackFrame } from './stack-frame.js';
+import { parse } from './parser.js';
+import { map } from './mapper.js';
+import { unmap } from './unmapper.js';
+import { toExclude } from '../../presets.js';
 
 function getStackFrames(
   error: Error,
-  unhandledRejection = false, // eslint-disable-line no-unused-vars
-  contextSize = 3
+  unhandledRejection = false,
+  contextSize = 3,
 ): Promise<StackFrame[] | null> {
   const parsedFrames = parse(error);
   let enhancedFramesPromise;
@@ -33,7 +33,7 @@ function getStackFrames(
         }
       ).__unmap_source,
       parsedFrames,
-      contextSize
+      contextSize,
     );
   } else {
     enhancedFramesPromise = map(parsedFrames, contextSize);
@@ -51,9 +51,8 @@ function getStackFrames(
     return enhancedFrames.filter(
       ({ functionName, fileName }) =>
         (functionName == null ||
-          functionName.indexOf('__stack_frame_overlay_proxy_console__') ===
-            -1) &&
-        !toExclude.test(fileName!)
+          !functionName.includes('__stack_frame_overlay_proxy_console__')) &&
+        !toExclude.test(fileName!),
     );
   });
 }

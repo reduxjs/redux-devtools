@@ -1,8 +1,7 @@
-import { Base16Theme } from 'redux-devtools-themes';
-import { StylingConfig } from 'react-base16-styling';
+import type { Base16Theme, StylingConfig } from 'react-base16-styling';
 
 export default function getJsonTreeTheme(
-  base16Theme: Base16Theme
+  base16Theme: Base16Theme,
 ): StylingConfig {
   return {
     extend: base16Theme,

@@ -1,5 +1,37 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- d61d31a: Remove theme prop from Editor. Wrap any usage of Editor in Container to provide theme through context.
+- 804e729: Convert @redux-devtools/ui to ESM
+
+## 2.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
+## 1.4.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+## 1.3.2
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-base16-styling@0.10.0
+
+## 1.3.1
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+
 ## 1.3.0
 
 ### Minor Changes

@@ -1,4 +1,3 @@
-import mapValues from 'lodash/mapValues';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LocalFilter } from '@redux-devtools/utils';
@@ -21,14 +20,13 @@ export const noFiltersApplied = (localFilter: LocalFilter | undefined) =>
     !window.devToolsOptions.filter ||
     window.devToolsOptions.filter === FilterState.DO_NOT_FILTER);
 
-export function isFiltered<A extends Action<unknown>>(
+export function isFiltered<A extends Action<string>>(
   action: A | string,
-  localFilter: LocalFilter | undefined
+  localFilter: LocalFilter | undefined,
 ) {
   if (
     noFiltersApplied(localFilter) ||
-    (typeof action !== 'string' &&
-      typeof (action.type as string).match !== 'function')
+    (typeof action !== 'string' && typeof action.type.match !== 'function')
   ) {
     return false;
   }
@@ -41,20 +39,25 @@ export function isFiltered<A extends Action<unknown>>(
   );
 }
 
-function filterActions<A extends Action<unknown>>(
+function filterActions<A extends Action<string>>(
   actionsById: { [p: number]: PerformAction<A> },
-  actionSanitizer: ((action: A, id: number) => A) | undefined
+  actionSanitizer: ((action: A, id: number) => A) | undefined,
 ): { [p: number]: PerformAction<A> } {
   if (!actionSanitizer) return actionsById;
-  return mapValues(actionsById, (action, id) => ({
-    ...action,
-    action: actionSanitizer(action.action, id as unknown as number),
-  }));
+  return Object.fromEntries(
+    Object.entries(actionsById).map(([actionId, action]) => [
+      actionId,
+      {
+        ...action,
+        action: actionSanitizer(action.action, actionId as unknown as number),
+      },
+    ]),
+  );
 }
 
 function filterStates<S>(
   computedStates: { state: S; error?: string | undefined }[],
-  stateSanitizer: ((state: S, index: number) => S) | undefined
+  stateSanitizer: ((state: S, index: number) => S) | undefined,
 ) {
   if (!stateSanitizer) return computedStates;
   return computedStates.map((state, idx) => ({
@@ -63,12 +66,12 @@ function filterStates<S>(
   }));
 }
 
-export function filterState<S, A extends Action<unknown>>(
+export function filterState<S, A extends Action<string>>(
   state: LiftedState<S, A, unknown>,
   localFilter: LocalFilter | undefined,
   stateSanitizer: ((state: S, index: number) => S) | undefined,
   actionSanitizer: ((action: A, id: number) => A) | undefined,
-  predicate: ((state: S, action: A) => boolean) | undefined
+  predicate: ((state: S, action: A) => boolean) | undefined,
 ): LiftedState<S, A, unknown> {
   if (predicate || !noFiltersApplied(localFilter)) {
     const filteredStagedActionIds: number[] = [];
@@ -94,7 +97,7 @@ export function filterState<S, A extends Action<unknown>>(
       filteredComputedStates.push(
         stateSanitizer
           ? { ...liftedState, state: stateSanitizer(currState, idx) }
-          : liftedState
+          : liftedState,
       );
       if (actionSanitizer) {
         sanitizedActionsById![id] = {
@@ -120,7 +123,7 @@ export function filterState<S, A extends Action<unknown>>(
   };
 }
 
-export interface PartialLiftedState<S, A extends Action<unknown>> {
+export interface PartialLiftedState<S, A extends Action<string>> {
   readonly actionsById: { [actionId: number]: PerformAction<A> };
   readonly computedStates: { state: S; error?: string }[];
   readonly stagedActionIds: readonly number[];
@@ -129,17 +132,17 @@ export interface PartialLiftedState<S, A extends Action<unknown>> {
   readonly committedState?: S;
 }
 
-export function startingFrom<S, A extends Action<unknown>>(
+export function startingFrom<S, A extends Action<string>>(
   sendingActionId: number,
   state: LiftedState<S, A, unknown>,
   localFilter: LocalFilter | undefined,
   stateSanitizer: (<S>(state: S, index: number) => S) | undefined,
   actionSanitizer:
-    | (<A extends Action<unknown>>(action: A, id: number) => A)
+    | (<A extends Action<string>>(action: A, id: number) => A)
     | undefined,
   predicate:
-    | (<S, A extends Action<unknown>>(state: S, action: A) => boolean)
-    | undefined
+    | (<S, A extends Action<string>>(state: S, action: A) => boolean)
+    | undefined,
 ): LiftedState<S, A, unknown> | PartialLiftedState<S, A> | undefined {
   const stagedActionIds = state.stagedActionIds;
   if (sendingActionId <= stagedActionIds[1]) return state;
@@ -178,7 +181,7 @@ export function startingFrom<S, A extends Action<unknown>>(
     newComputedStates.push(
       !stateSanitizer
         ? currState
-        : { ...currState, state: stateSanitizer(currState.state, i) }
+        : { ...currState, state: stateSanitizer(currState.state, i) },
     );
   }
 

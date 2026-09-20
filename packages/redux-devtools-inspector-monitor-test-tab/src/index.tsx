@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
   Toolbar,
   Container,
@@ -15,13 +14,13 @@ import {
   DevtoolsInspectorState,
   TabComponentProps,
 } from '@redux-devtools/inspector-monitor';
-import { formSchema, uiSchema, defaultFormData } from './templateForm';
-import TestGenerator from './TestGenerator';
-import jestTemplate from './redux/jest/template';
-import mochaTemplate from './redux/mocha/template';
-import tapeTemplate from './redux/tape/template';
-import avaTemplate from './redux/ava/template';
-import { Template } from './types';
+import { formSchema, uiSchema, defaultFormData } from './templateForm.js';
+import TestGenerator from './TestGenerator.js';
+import jestTemplate from './redux/jest/template.js';
+import mochaTemplate from './redux/mocha/template.js';
+import tapeTemplate from './redux/tape/template.js';
+import avaTemplate from './redux/ava/template.js';
+import { Template } from './types.js';
 
 export const getDefaultTemplates = (/* lib */): Template[] =>
   /*
@@ -42,7 +41,7 @@ interface State {
   dialogStatus: 'Add' | 'Edit' | null;
 }
 
-export class TestTab<S, A extends Action<unknown>> extends Component<
+export class TestTab<S, A extends Action<string>> extends Component<
   TabComponentProps<S, A>,
   State
 > {
@@ -65,17 +64,17 @@ export class TestTab<S, A extends Action<unknown>> extends Component<
     this.setState({ dialogStatus: null });
   };
 
-  handleSubmit = ({ formData: template }: { formData: Template }) => {
+  handleSubmit = ({ formData: template }: { formData?: Template }) => {
     const { templates = getDefaultTemplates(), selected = 0 } =
       this.getPersistedState();
     if (this.state.dialogStatus === 'Add') {
       this.updateState({
         selected: templates.length,
-        templates: [...templates, template],
+        templates: [...templates, template!],
       });
     } else {
       const editedTemplates = [...templates];
-      editedTemplates[selected] = template;
+      editedTemplates[selected] = template!;
       this.updateState({
         templates: editedTemplates,
       });
@@ -118,7 +117,7 @@ export class TestTab<S, A extends Action<unknown>> extends Component<
   };
 
   render() {
-    const { monitorState, updateMonitorState, ...rest } = this.props; // eslint-disable-line no-unused-vars, max-len
+    const { monitorState, updateMonitorState, ...rest } = this.props;
     const { dialogStatus } = this.state;
     const persistedState = this.getPersistedState();
     const { selected = 0, templates = getDefaultTemplates() } = persistedState;
@@ -185,29 +184,13 @@ export class TestTab<S, A extends Action<unknown>> extends Component<
       </Container>
     );
   }
-
-  static propTypes = {
-    monitorState: PropTypes.shape({
-      testGenerator: PropTypes.shape({
-        templates: PropTypes.array,
-        selected: PropTypes.number,
-        hideTip: PropTypes.bool,
-      }),
-    }).isRequired,
-    /*
-    options: PropTypes.shape({
-      lib: PropTypes.string
-    }).isRequired,
-    */
-    updateMonitorState: PropTypes.func.isRequired,
-  };
 }
 
-export { default as reduxAvaTemplate } from './redux/ava';
-export { default as reduxJestTemplate } from './redux/jest';
-export { default as reduxMochaTemplate } from './redux/mocha';
-export { default as reduxTapeTemplate } from './redux/tape';
-export { default as vanillaAvaTemplate } from './vanilla/ava';
-export { default as vanillaJestTemplate } from './vanilla/jest';
-export { default as vanillaMochaTemplate } from './vanilla/mocha';
-export { default as vanillaTapeTemplate } from './vanilla/tape';
+export { default as reduxAvaTemplate } from './redux/ava/index.js';
+export { default as reduxJestTemplate } from './redux/jest/index.js';
+export { default as reduxMochaTemplate } from './redux/mocha/index.js';
+export { default as reduxTapeTemplate } from './redux/tape/index.js';
+export { default as vanillaAvaTemplate } from './vanilla/ava/index.js';
+export { default as vanillaJestTemplate } from './vanilla/jest/index.js';
+export { default as vanillaMochaTemplate } from './vanilla/mocha/index.js';
+export { default as vanillaTapeTemplate } from './vanilla/tape/index.js';

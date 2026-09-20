@@ -7,14 +7,14 @@
 
 function isInternalFile(
   sourceFileName: string | null | undefined,
-  fileName: string | null | undefined
+  fileName: string | null | undefined,
 ) {
   return (
     sourceFileName == null ||
     sourceFileName === '' ||
-    sourceFileName.indexOf('/~/') !== -1 ||
-    sourceFileName.indexOf('/node_modules/') !== -1 ||
-    sourceFileName.trim().indexOf(' ') !== -1 ||
+    sourceFileName.includes('/~/') ||
+    sourceFileName.includes('/node_modules/') ||
+    sourceFileName.trim().includes(' ') ||
     fileName == null ||
     fileName === ''
   );

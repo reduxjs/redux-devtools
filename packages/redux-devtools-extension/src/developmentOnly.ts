@@ -5,7 +5,7 @@ import type {
   EnhancerOptions,
   InferComposedStoreExt,
   ReduxDevtoolsExtensionCompose,
-} from './index';
+} from './index.js';
 
 declare const process: {
   env: {
@@ -14,19 +14,17 @@ declare const process: {
 };
 
 function extensionComposeStub(
-  config: Config
-): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  config: Config,
+): <StoreEnhancers extends readonly StoreEnhancer[]>(
   ...funcs: StoreEnhancers
 ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
-function extensionComposeStub<
-  StoreEnhancers extends readonly StoreEnhancer<unknown>[]
->(
+function extensionComposeStub<StoreEnhancers extends readonly StoreEnhancer[]>(
   ...funcs: StoreEnhancers
 ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
-function extensionComposeStub(...funcs: [Config] | StoreEnhancer<unknown>[]) {
+function extensionComposeStub(...funcs: [Config] | StoreEnhancer[]) {
   if (funcs.length === 0) return undefined;
   if (typeof funcs[0] === 'object') return compose;
-  return compose(...(funcs as StoreEnhancer<unknown>[]));
+  return compose(...(funcs as StoreEnhancer[]));
 }
 
 export const composeWithDevTools: ReduxDevtoolsExtensionCompose =

@@ -32,7 +32,7 @@ vis
     d3tooltip('tooltipClassName', {
       ...options,
       text: (d) => toStringOrHtml(d),
-    })
+    }),
   )
   .on('mouseover', function () {
     d3.select(this).style('fill', 'skyblue');

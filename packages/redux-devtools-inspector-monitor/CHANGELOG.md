@@ -1,5 +1,114 @@
 # Change Log
 
+## 7.0.0
+
+### Major Changes
+
+- 12849a4: Convert monitors to ESM
+
+### Patch Changes
+
+- Updated dependencies [804d6bd]
+  - @redux-devtools/core@5.0.0
+
+## 6.1.2
+
+### Patch Changes
+
+- 20883e5: fix(deps): update all non-major dependencies
+
+## 6.1.1
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+
+## 6.1.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - react-json-tree@0.20.0
+  - @redux-devtools/core@4.1.0
+
+## 6.0.1
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-base16-styling@0.10.0
+  - react-json-tree@0.19.0
+
+## 6.0.0
+
+### Major Changes
+
+- 5cfe3e5: Update min required React version to 16.8.4
+
+### Patch Changes
+
+- Updated dependencies [decc035]
+  - @redux-devtools/core@4.0.0
+
+## 5.0.1
+
+### Patch Changes
+
+- 3205269: Add explicit return types
+
+## 5.0.0
+
+### Major Changes
+
+- 158ba2c: Replace jss with Emotion in inspector-monitor. `@emotion/react` is now a required peer dependency.
+
+## 4.1.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+
+## 4.0.1
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+- Updated dependencies [65205f90]
+  - @redux-devtools/core@3.13.2
+
+## 4.0.0
+
+### Major Changes
+
+- 57751ff9: Add react-dom peerDependency and bump react peerDependency to `^16.8.0 || ^17.0.0 || ^18.0.0`
+
+## 3.1.1
+
+### Patch Changes
+
+- fe32709c: Update jsondiffpatch to fix bundling issues.
+
+## 3.1.0
+
+### Minor Changes
+
+- d54adb76: Option to sort State Tree keys alphabetically
+  Option to disable collapsing of object keys
+
+### Patch Changes
+
+- 14a79573: Replace react-dragula with dnd-kit
+- bb9bd907: Move @types/redux-devtools-themes to dependencies
+
 ## 3.0.2
 
 ### Patch Changes

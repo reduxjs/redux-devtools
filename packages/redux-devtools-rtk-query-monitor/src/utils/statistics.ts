@@ -58,7 +58,7 @@ export function median(nums: number[]): number {
     return nums[0];
   }
 
-  const sorted = nums.slice().sort();
+  const sorted = nums.slice().sort((a, b) => a - b);
 
   if (len % 2 === 1) {
     return sorted[(len + 1) / 2 - 1];

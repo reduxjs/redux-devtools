@@ -1,5 +1,206 @@
 # Change Log
 
+## 8.0.0
+
+### Major Changes
+
+- 6481386: Convert remaining packages to ESM
+
+### Patch Changes
+
+- Updated dependencies [d61d31a]
+- Updated dependencies [804e729]
+- Updated dependencies [6481386]
+  - @redux-devtools/ui@3.0.0
+  - @redux-devtools/app-core@3.0.0
+
+## 7.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+  - @redux-devtools/app-core@2.0.0
+  - @redux-devtools/ui@2.0.0
+
+## 6.2.2
+
+### Patch Changes
+
+- @redux-devtools/app-core@1.1.2
+
+## 6.2.1
+
+### Patch Changes
+
+- @redux-devtools/app-core@1.1.1
+
+## 6.2.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/app-core@1.1.0
+  - @redux-devtools/ui@1.4.0
+
+## 6.1.0
+
+### Minor Changes
+
+- 96ac1f2: Move the logic from @redux-devtools/app into @redux-devtools/app-core
+
+### Patch Changes
+
+- Updated dependencies [96ac1f2]
+  - @redux-devtools/app-core@1.0.0
+
+## 6.0.1
+
+### Patch Changes
+
+- 191d419: Convert d3 packages to ESM
+- Updated dependencies [191d419]
+  - d3-state-visualizer@3.0.0
+  - @redux-devtools/chart-monitor@5.0.1
+
+## 6.0.0
+
+### Major Changes
+
+- 5cfe3e5: Update min required React version to 16.8.4
+
+### Patch Changes
+
+- Updated dependencies [5cfe3e5]
+- Updated dependencies [decc035]
+  - @redux-devtools/chart-monitor@5.0.0
+  - @redux-devtools/inspector-monitor-test-tab@4.0.0
+  - @redux-devtools/inspector-monitor-trace-tab@4.0.0
+  - @redux-devtools/inspector-monitor@6.0.0
+  - @redux-devtools/log-monitor@5.0.0
+  - @redux-devtools/rtk-query-monitor@5.0.0
+  - @redux-devtools/slider-monitor@5.0.0
+  - @redux-devtools/core@4.0.0
+
+## 5.0.0
+
+### Major Changes
+
+- 158ba2c: Replace jss with Emotion in inspector-monitor. `@emotion/react` is now a required peer dependency.
+
+### Patch Changes
+
+- Updated dependencies [158ba2c]
+- Updated dependencies [6954eb9]
+  - @redux-devtools/inspector-monitor-test-tab@3.0.0
+  - @redux-devtools/inspector-monitor-trace-tab@3.0.0
+  - @redux-devtools/inspector-monitor@5.0.0
+  - @redux-devtools/rtk-query-monitor@4.0.0
+
+## 4.0.2
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+- Updated dependencies [7f5bddbd]
+- Updated dependencies [6fc18ed7]
+  - @redux-devtools/chart-monitor@4.1.0
+  - @redux-devtools/inspector-monitor-test-tab@2.1.0
+  - @redux-devtools/inspector-monitor-trace-tab@2.1.0
+  - @redux-devtools/inspector-monitor@4.1.0
+  - @redux-devtools/log-monitor@4.1.0
+  - @redux-devtools/rtk-query-monitor@3.2.0
+  - @redux-devtools/slider-monitor@4.1.0
+  - @redux-devtools/ui@1.3.1
+  - @redux-devtools/core@3.14.0
+
+## 4.0.1
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+- Updated dependencies [65205f90]
+  - @redux-devtools/chart-monitor@4.0.1
+  - @redux-devtools/inspector-monitor-test-tab@2.0.1
+  - @redux-devtools/inspector-monitor-trace-tab@2.0.1
+  - @redux-devtools/inspector-monitor@4.0.1
+  - @redux-devtools/core@3.13.2
+
+## 4.0.0
+
+### Major Changes
+
+- e57bcb39: The UMD bundle now exports the same thing as the library and includes the CSS in a sperate file. Therfore, the new usage is:
+
+  ```diff
+  <!doctype html>
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <title>Redux DevTools</title>
+  +   <link href="/redux-devtools-app.min.css" rel="stylesheet" />
+    </head>
+    <body>
+      <div id="root"></div>
+      <script src="/react.production.min.js"></script>
+      <script src="/react-dom.production.min.js"></script>
+      <script src="/redux-devtools-app.min.js"></script>
+      <script src="/port.js"></script>
+      <script>
+        const container = document.querySelector('#root');
+  -     const element = React.createElement(ReduxDevToolsApp, {
+  +     const element = React.createElement(ReduxDevToolsApp.Root, {
+          socketOptions: {
+            hostname: location.hostname,
+            port: reduxDevToolsPort,
+            autoReconnect: true,
+          },
+        });
+        ReactDOM.createRoot(container).render(element);
+      </script>
+    </body>
+  </html>
+  ```
+
+## 3.0.0
+
+### Major Changes
+
+- 57751ff9: Add react-dom peerDependency and bump react peerDependency to `^16.8.0 || ^17.0.0 || ^18.0.0`
+
+### Patch Changes
+
+- Updated dependencies [57751ff9]
+  - @redux-devtools/inspector-monitor-test-tab@2.0.0
+  - @redux-devtools/inspector-monitor-trace-tab@2.0.0
+  - @redux-devtools/inspector-monitor@4.0.0
+
+## 2.2.3
+
+### Patch Changes
+
+- fe32709c: Update jsondiffpatch to fix bundling issues.
+- Updated dependencies [fe32709c]
+  - @redux-devtools/inspector-monitor@3.1.1
+
+## 2.2.2
+
+### Patch Changes
+
+- Updated dependencies [14a79573]
+- Updated dependencies [d54adb76]
+- Updated dependencies [bb9bd907]
+  - @redux-devtools/inspector-monitor@3.1.0
+  - @redux-devtools/inspector-monitor-test-tab@2.0.0
+  - @redux-devtools/inspector-monitor-trace-tab@2.0.0
+
 ## 2.2.1
 
 ### Patch Changes

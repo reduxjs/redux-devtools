@@ -1,4 +1,4 @@
-import objType from '../src/objType';
+import objType from '../src/objType.js';
 
 describe('objType', () => {
   it('should determine the correct type', () => {
@@ -13,7 +13,7 @@ describe('objType', () => {
     expect(
       objType(() => {
         // noop
-      })
+      }),
     ).toBe('Function');
     expect(objType('')).toBe('String');
     expect(objType(true)).toBe('Boolean');

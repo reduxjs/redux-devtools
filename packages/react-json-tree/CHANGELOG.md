@@ -1,11 +1,27 @@
 # Change Log
 
+## 0.20.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+## 0.19.0
+
+### Minor Changes
+
+- bbb1a40: Convert React packages to ESM
+
+### Patch Changes
+
+- Updated dependencies [bbb1a40]
+  - react-base16-styling@0.10.0
+
 ## 0.18.0
 
 ### Major Changes
 
 - 81926f32: Remove UNSAFE method from react-json-tree
-
   - Replace `shouldExpandNode` with `shouldExpandNodeInitially`. This function is now only called when a node in the tree is first rendered, when before it would update the expanded state of the node if the results of calling `shouldExpandNode` changed between renders. There is no way to replicate the old behavior exactly, but the new behavior is the intended behavior for the use cases within Redux DevTools. Please open an issue if you need a way to programatically control the expanded state of nodes.
   - Bump the minimum React version from `16.3.0` to `16.8.0` so that `react-json-tree` can use hooks.
   - Tightened TypeScript prop types to use `unknown` instead of `any` where possible and make the key path array `readonly`.

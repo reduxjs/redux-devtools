@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import StackFrame from './stack-frame';
-import { getSourceMap, SourceMap } from './getSourceMap';
-import { getLinesAround } from './getLinesAround';
+import StackFrame from './stack-frame.js';
+import { getSourceMap, SourceMap } from './getSourceMap.js';
+import { getLinesAround } from './getLinesAround.js';
 
 /**
  * Enhances a set of <code>StackFrame</code>s with their original positions and code (when available).
@@ -16,7 +16,7 @@ import { getLinesAround } from './getLinesAround';
  */
 async function map(
   frames: StackFrame[],
-  contextLines = 3
+  contextLines = 3,
 ): Promise<StackFrame[]> {
   const cache: {
     [fileName: string]: {
@@ -30,7 +30,7 @@ async function map(
     if (fileName == null) {
       return;
     }
-    if (files.indexOf(fileName) !== -1) {
+    if (files.includes(fileName)) {
       return;
     }
     files.push(fileName);
@@ -40,7 +40,7 @@ async function map(
       const fileSource = await fetch(fileName).then((r) => r.text());
       const map = await getSourceMap(fileName, fileSource);
       cache[fileName] = { fileSource, map };
-    })
+    }),
   );
   return frames.map((frame) => {
     const { functionName, fileName, lineNumber, columnNumber } = frame;
@@ -50,7 +50,7 @@ async function map(
     }
     const { source, line, column } = map.getOriginalPosition(
       lineNumber,
-      columnNumber!
+      columnNumber!,
     );
     const originalSource = source == null ? [] : map.getSource(source) || [];
     return new StackFrame(
@@ -63,7 +63,7 @@ async function map(
       source,
       line,
       column,
-      getLinesAround(line!, contextLines, originalSource)
+      getLinesAround(line!, contextLines, originalSource),
     );
   });
 }

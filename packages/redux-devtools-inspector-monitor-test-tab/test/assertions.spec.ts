@@ -1,5 +1,5 @@
-import { assertion } from '../src/vanilla/mocha';
-import { compare } from '../src/TestGenerator';
+import { assertion } from '../src/vanilla/mocha/index.js';
+import { compare } from '../src/TestGenerator.js';
 
 const computedStates = [
   { state: { o1: 0 } },
@@ -15,8 +15,8 @@ const computedStates = [
 const runTest = (s1: { state: unknown } | undefined, s2: { state: unknown }) =>
   compare(s1, s2, ({ path, curState }) =>
     expect(
-      `expect(store${path}).toEqual(${curState as number | string});`
-    ).toBe(assertion({ path, curState }))
+      `expect(store${path}).toEqual(${curState as number | string});`,
+    ).toBe(assertion({ path, curState })),
   );
 
 describe('Assertions', () => {

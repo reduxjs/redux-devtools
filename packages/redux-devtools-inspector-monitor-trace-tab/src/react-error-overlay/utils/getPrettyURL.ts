@@ -12,13 +12,13 @@ function getPrettyURL(
   fileName: string | null | undefined,
   lineNumber: number | null | undefined,
   columnNumber: number | null | undefined,
-  compiled: boolean
+  compiled: boolean,
 ): string {
   let prettyURL;
   if (!compiled && sourceFileName && typeof sourceLineNumber === 'number') {
     // Remove everything up to the first /src/ or /node_modules/
     const trimMatch = /^[/|\\].*?[/|\\]((src|node_modules)[/|\\].*)/.exec(
-      sourceFileName
+      sourceFileName,
     );
     if (trimMatch && trimMatch[1]) {
       prettyURL = trimMatch[1];

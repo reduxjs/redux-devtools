@@ -1,5 +1,5 @@
-import { css, ThemedStyledProps } from 'styled-components';
-import { Theme } from '../../themes/default';
+import { css } from '@emotion/react';
+import { Theme } from '../../themes/default.js';
 
 export interface StyleProps {
   open: boolean | undefined;
@@ -10,7 +10,7 @@ export const style = ({
   theme,
   open,
   fullWidth,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+}: StyleProps & { theme: Theme }) => css`
   position: fixed;
   top: 0px;
   right: 0px;
@@ -46,8 +46,10 @@ export const style = ({
     border: 1px outset ${theme.base01};
     border-radius: 2px;
     background-color: ${theme.base00};
-    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14),
-      0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+    box-shadow:
+      0 9px 46px 8px rgba(0, 0, 0, 0.14),
+      0 11px 15px -7px rgba(0, 0, 0, 0.12),
+      0 24px 38px 3px rgba(0, 0, 0, 0.2);
 
     > div.mc-dialog--header {
       display: flex;

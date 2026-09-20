@@ -37,8 +37,8 @@ import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
 
 // Monitors are separate packages, and you can make a custom one
-import LogMonitor from '@redux-devtools/log-monitor';
-import DockMonitor from '@redux-devtools/dock-monitor';
+import { LogMonitor } from '@redux-devtools/log-monitor';
+import { DockMonitor } from '@redux-devtools/dock-monitor';
 
 // createDevTools takes a monitor and produces a DevTools component
 const DevTools = createDevTools(
@@ -52,7 +52,7 @@ const DevTools = createDevTools(
     defaultIsVisible={true}
   >
     <LogMonitor theme="tomorrow" />
-  </DockMonitor>
+  </DockMonitor>,
 );
 
 export default DevTools;
@@ -77,7 +77,27 @@ You can add additional options to it: `DevTools.instrument({ maxAge: 50, shouldC
 
 It’s important that you should add `DevTools.instrument()` _after_ `applyMiddleware` in your `compose()` function arguments. This is because `applyMiddleware` is potentially asynchronous, but `DevTools.instrument()` expects all actions to be plain objects rather than actions interpreted by asynchronous middleware such as [redux-promise](https://github.com/acdlite/redux-promise) or [redux-thunk](https://github.com/gaearon/redux-thunk). So make sure `applyMiddleware()` goes first in the `compose()` call, and `DevTools.instrument()` goes after it.
 
-##### `store/configureStore.js`
+##### `store/configureStore.js` redux-toolkit
+
+With redux-toolkit you need to add it as an enhancer and disable the original devtools
+
+```js
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from '../reducers';
+import DevTools from '../containers/DevTools';
+
+export const store = configureStore({
+  reducer: {
+    root: rootReducer,
+  },
+  devTools: false,
+  enhancers: (getDefaultEnhancers) =>
+    getDefaultEnhancers().concat(DevTools.instrument()),
+});
+
+```
+
+##### `store/configureStore.js` original
 
 ```js
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -88,7 +108,7 @@ const enhancer = compose(
   // Middleware you want to use in development:
   applyMiddleware(d1, d2, d3),
   // Required! Enable Redux DevTools with the monitors you chose
-  DevTools.instrument()
+  DevTools.instrument(),
 );
 
 export default function configureStore(initialState) {
@@ -100,8 +120,8 @@ export default function configureStore(initialState) {
   if (module.hot) {
     module.hot.accept('../reducers', () =>
       store.replaceReducer(
-        require('../reducers') /*.default if you use Babel 6+ */
-      )
+        require('../reducers') /*.default if you use Babel 6+ */,
+      ),
     );
   }
 
@@ -121,7 +141,7 @@ const enhancer = compose(
   // Required! Enable Redux DevTools with the monitors you chose
   DevTools.instrument(),
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
-  persistState(getDebugSessionKey())
+  persistState(getDebugSessionKey()),
 );
 
 function getDebugSessionKey() {
@@ -200,7 +220,7 @@ const enhancer = compose(
   // Required! Enable Redux DevTools with the monitors you chose
   DevTools.instrument(),
   // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
-  persistState(getDebugSessionKey())
+  persistState(getDebugSessionKey()),
 );
 
 function getDebugSessionKey() {
@@ -219,8 +239,8 @@ export default function configureStore(initialState) {
   if (module.hot) {
     module.hot.accept('../reducers', () =>
       store.replaceReducer(
-        require('../reducers') /*.default if you use Babel 6+ */
-      )
+        require('../reducers') /*.default if you use Babel 6+ */,
+      ),
     );
   }
 
@@ -333,7 +353,7 @@ render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 if (process.env.NODE_ENV !== 'production') {
@@ -353,7 +373,7 @@ export default function showDevTools(store) {
   const popup = window.open(
     null,
     'Redux DevTools',
-    'menubar=no,location=no,resizable=yes,scrollbars=no,status=no'
+    'menubar=no,location=no,resizable=yes,scrollbars=no,status=no',
   );
   // Reload in case it already exists
   popup.location.reload();
@@ -362,7 +382,7 @@ export default function showDevTools(store) {
     popup.document.write('<div id="react-devtools-root"></div>');
     render(
       <DevTools store={store} />,
-      popup.document.getElementById('react-devtools-root')
+      popup.document.getElementById('react-devtools-root'),
     );
   }, 10);
 }

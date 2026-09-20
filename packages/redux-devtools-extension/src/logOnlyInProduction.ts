@@ -1,12 +1,12 @@
 import { compose } from 'redux';
 import type { StoreEnhancer } from 'redux';
-import * as logOnly from './logOnly';
+import * as logOnly from './logOnly.js';
 import type {
   Config,
   EnhancerOptions,
   InferComposedStoreExt,
   ReduxDevtoolsExtensionCompose,
-} from './index';
+} from './index.js';
 
 declare const process: {
   env: {
@@ -15,36 +15,34 @@ declare const process: {
 };
 
 function extensionComposeStub(
-  config: Config
-): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  config: Config,
+): <StoreEnhancers extends readonly StoreEnhancer[]>(
   ...funcs: StoreEnhancers
 ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
-function extensionComposeStub<
-  StoreEnhancers extends readonly StoreEnhancer<unknown>[]
->(
+function extensionComposeStub<StoreEnhancers extends readonly StoreEnhancer[]>(
   ...funcs: StoreEnhancers
 ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
-function extensionComposeStub(...funcs: [Config] | StoreEnhancer<unknown>[]) {
+function extensionComposeStub(...funcs: [Config] | StoreEnhancer[]) {
   if (funcs.length === 0) return undefined;
   if (typeof funcs[0] === 'object') return compose;
-  return compose(...(funcs as StoreEnhancer<unknown>[]));
+  return compose(...(funcs as StoreEnhancer[]));
 }
 
 export const composeWithDevTools: ReduxDevtoolsExtensionCompose =
   process.env.NODE_ENV === 'production'
     ? logOnly.composeWithDevTools
     : typeof window !== 'undefined' &&
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : extensionComposeStub;
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      : extensionComposeStub;
 
 export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
   process.env.NODE_ENV === 'production'
     ? logOnly.devToolsEnhancer
     : typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__
-    ? window.__REDUX_DEVTOOLS_EXTENSION__
-    : function () {
-        return function (noop) {
-          return noop;
+      ? window.__REDUX_DEVTOOLS_EXTENSION__
+      : function () {
+          return function (noop) {
+            return noop;
+          };
         };
-      };

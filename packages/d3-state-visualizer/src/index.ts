@@ -1,2 +1,7 @@
-export { tree } from './charts';
-export type { HierarchyPointNode, Node, Options, StyleValue } from './charts';
+export { tree } from './charts/index.js';
+export type {
+  HierarchyPointNode,
+  Node,
+  Options,
+  StyleValue,
+} from './charts/index.js';

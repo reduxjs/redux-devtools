@@ -28,7 +28,7 @@ export default function configureStore(initialState) {
   const enhancer = compose(
     applyMiddleware(...middlewares),
     // other enhancers and applyMiddleware should be added before the instrumentation
-    instrument(monitorReducer, { maxAge: 50 })
+    instrument(monitorReducer, { maxAge: 50 }),
   );
 
   // Note: passing enhancer as last argument requires redux@>=3.1.0

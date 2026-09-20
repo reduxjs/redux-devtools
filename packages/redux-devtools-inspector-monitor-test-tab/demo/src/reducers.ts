@@ -1,4 +1,11 @@
-import Immutable from 'immutable';
+import {
+  fromJS,
+  Map as ImmutableMap,
+  List,
+  Set as ImmutableSet,
+  Stack,
+  Seq,
+} from 'immutable';
 import shuffle from 'lodash.shuffle';
 import { combineReducers, Reducer } from 'redux';
 
@@ -18,17 +25,14 @@ const NESTED = {
   },
 };
 
-const IMMUTABLE_NESTED = Immutable.fromJS(NESTED) as Immutable.Map<
-  unknown,
-  unknown
->;
+const IMMUTABLE_NESTED = fromJS(NESTED) as ImmutableMap<unknown, unknown>;
 
-const IMMUTABLE_MAP = Immutable.Map({
-  map: Immutable.Map({ a: 1, b: 2, c: 3 }),
-  list: Immutable.List(['a', 'b', 'c']),
-  set: Immutable.Set(['a', 'b', 'c']),
-  stack: Immutable.Stack(['a', 'b', 'c']),
-  seq: Immutable.Seq([1, 2, 3, 4, 5, 6, 7, 8]),
+const IMMUTABLE_MAP = ImmutableMap({
+  map: ImmutableMap({ a: 1, b: 2, c: 3 }),
+  list: List(['a', 'b', 'c']),
+  set: ImmutableSet(['a', 'b', 'c']),
+  stack: Stack(['a', 'b', 'c']),
+  seq: Seq([1, 2, 3, 4, 5, 6, 7, 8]),
 });
 
 const HUGE_ARRAY = Array.from({ length: 5000 }).map((_, key) => ({
@@ -37,9 +41,10 @@ const HUGE_ARRAY = Array.from({ length: 5000 }).map((_, key) => ({
 
 const HUGE_OBJECT = Array.from({ length: 5000 }).reduce(
   (o: { [key: string]: string }, _, key) => (
-    (o[`key ${key}`] = `item ${key}`), o
+    (o[`key ${key}`] = `item ${key}`),
+    o
   ),
-  {}
+  {},
 );
 
 const FUNC = function (a: number, b: number, c: number) {
@@ -155,35 +160,35 @@ export interface DemoAppState {
 }
 
 export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
-  combineReducers<DemoAppState, DemoAppAction>({
-    timeoutUpdateEnabled: (state = false, action) =>
+  combineReducers({
+    timeoutUpdateEnabled: (state = false, action: DemoAppAction) =>
       action.type === 'TOGGLE_TIMEOUT_UPDATE'
         ? action.timeoutUpdateEnabled
         : state,
-    store: (state = 0, action) =>
+    store: (state = 0, action: DemoAppAction) =>
       action.type === 'INCREMENT' ? state + 1 : state,
     undefined: (state = { val: undefined }) => state,
     null: (state = null) => state,
     func: (
       state = () => {
         // noop
-      }
+      },
     ) => state,
-    array: (state = [], action) =>
+    array: (state = [], action: DemoAppAction) =>
       action.type === 'PUSH'
         ? [...state, Math.random()]
         : action.type === 'POP'
-        ? state.slice(0, state.length - 1)
-        : action.type === 'REPLACE'
-        ? [Math.random(), ...state.slice(1)]
-        : state,
-    hugeArrays: (state = [], action) =>
+          ? state.slice(0, state.length - 1)
+          : action.type === 'REPLACE'
+            ? [Math.random(), ...state.slice(1)]
+            : state,
+    hugeArrays: (state = [], action: DemoAppAction) =>
       action.type === 'PUSH_HUGE_ARRAY' ? [...state, ...HUGE_ARRAY] : state,
-    hugeObjects: (state = [], action) =>
+    hugeObjects: (state = [], action: DemoAppAction) =>
       action.type === 'ADD_HUGE_OBJECT' ? [...state, HUGE_OBJECT] : state,
-    iterators: (state = [], action) =>
+    iterators: (state = [], action: DemoAppAction) =>
       action.type === 'ADD_ITERATOR' ? [...state, createIterator()] : state,
-    nested: (state = NESTED, action) =>
+    nested: (state = NESTED, action: DemoAppAction) =>
       action.type === 'CHANGE_NESTED'
         ? {
             ...state,
@@ -200,23 +205,23 @@ export const rootReducer: Reducer<DemoAppState, DemoAppAction> =
             },
           }
         : state,
-    recursive: (state = [], action) =>
+    recursive: (state = [], action: DemoAppAction) =>
       action.type === 'ADD_RECURSIVE' ? [...state, { ...RECURSIVE }] : state,
-    immutables: (state = [], action) =>
+    immutables: (state = [], action: DemoAppAction) =>
       action.type === 'ADD_IMMUTABLE_MAP' ? [...state, IMMUTABLE_MAP] : state,
-    immutableNested: (state = IMMUTABLE_NESTED, action) =>
+    immutableNested: (state = IMMUTABLE_NESTED, action: DemoAppAction) =>
       action.type === 'CHANGE_IMMUTABLE_NESTED'
         ? state.updateIn(
             ['long', 'nested', 0, 'path', 'to', 'a'],
-            (str: unknown) => (str as string) + '!'
+            (str: unknown) => (str as string) + '!',
           )
         : state,
-    addFunction: (state = null, action) =>
+    addFunction: (state = null, action: DemoAppAction) =>
       action.type === 'ADD_FUNCTION' ? { f: FUNC } : state,
-    addSymbol: (state = null, action) =>
+    addSymbol: (state = null, action: DemoAppAction) =>
       action.type === 'ADD_SYMBOL'
         ? { s: window.Symbol('symbol'), error: new Error('TEST') }
         : state,
-    shuffleArray: (state = DEFAULT_SHUFFLE_ARRAY, action) =>
+    shuffleArray: (state = DEFAULT_SHUFFLE_ARRAY, action: DemoAppAction) =>
       action.type === 'SHUFFLE_ARRAY' ? shuffle(state) : state,
-  });
+  }) as any;

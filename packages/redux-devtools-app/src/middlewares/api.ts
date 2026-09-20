@@ -1,29 +1,27 @@
+import {
+  DispatchAction,
+  GET_REPORT_ERROR,
+  GET_REPORT_REQUEST,
+  GET_REPORT_SUCCESS,
+  CLEAR_INSTANCES,
+  getActiveInstance,
+  importState,
+  LIFTED_ACTION,
+  LiftedActionAction,
+  REMOVE_INSTANCE,
+  Request,
+  showNotification,
+  UPDATE_REPORTS,
+  UPDATE_STATE,
+  UpdateReportsRequest,
+} from '@redux-devtools/app-core';
 import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
 import { stringify } from 'jsan';
-import { Dispatch, MiddlewareAPI } from 'redux';
-import * as actions from '../constants/socketActionTypes';
-import { getActiveInstance } from '../reducers/instances';
-import {
-  UPDATE_STATE,
-  REMOVE_INSTANCE,
-  LIFTED_ACTION,
-  UPDATE_REPORTS,
-  GET_REPORT_REQUEST,
-  GET_REPORT_ERROR,
-  GET_REPORT_SUCCESS,
-} from '../constants/actionTypes';
-import {
-  showNotification,
-  importState,
-  StoreAction,
-  EmitAction,
-  LiftedActionAction,
-  Request,
-  DispatchAction,
-  UpdateReportsRequest,
-} from '../actions';
-import { nonReduxDispatch } from '../utils/monitorActions';
-import { StoreState } from '../reducers';
+import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
+import * as actions from '../constants/socketActionTypes.js';
+import { nonReduxDispatch } from '../utils/monitorActions.js';
+import { EmitAction, StoreAction } from '../actions/index.js';
+import { StoreState } from '../reducers/index.js';
 
 let socket: AGClientSocket;
 let store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>;
@@ -61,7 +59,7 @@ function dispatchRemoteAction({
       instanceId,
       action as DispatchAction,
       state,
-      instances
+      instances,
     ),
     instanceId,
     id,
@@ -136,7 +134,7 @@ function monitoring(request: MonitoringRequest) {
 
 function subscribe(
   channelName: string,
-  subscription: typeof UPDATE_STATE | typeof UPDATE_REPORTS
+  subscription: typeof UPDATE_STATE | typeof UPDATE_REPORTS,
 ) {
   const channel = socket.subscribe(channelName);
   if (subscription === UPDATE_STATE) {
@@ -178,6 +176,7 @@ function handleConnection() {
   void (async () => {
     for await (const data of socket.listener('disconnect')) {
       store.dispatch({ type: actions.DISCONNECTED, code: data.code });
+      store.dispatch({ type: CLEAR_INSTANCES });
     }
   })();
 
@@ -221,7 +220,7 @@ function connect() {
   } catch (error) {
     store.dispatch({ type: actions.CONNECT_ERROR, error: error as Error });
     store.dispatch(
-      showNotification((error as Error).message || (error as string))
+      showNotification((error as Error).message || (error as string)),
     );
   }
 }
@@ -267,10 +266,14 @@ function getReport(reportId: unknown) {
   })();
 }
 
-export function api(inStore: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) {
+export const api: Middleware<{}, StoreState, Dispatch<StoreAction>> = (
+  inStore,
+) => {
   store = inStore;
-  return (next: Dispatch<StoreAction>) => (action: StoreAction) => {
-    const result = next(action);
+  return (next) => (untypedAction) => {
+    const result = next(untypedAction);
+
+    const action = untypedAction as StoreAction;
     switch (action.type) {
       case actions.CONNECT_REQUEST:
         connect();
@@ -300,4 +303,4 @@ export function api(inStore: MiddlewareAPI<Dispatch<StoreAction>, StoreState>) {
     }
     return result;
   };
-}
+};

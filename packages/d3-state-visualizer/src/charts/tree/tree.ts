@@ -9,14 +9,12 @@ import {
   toggleChildren,
   visit,
   getNodeGroupByDepthCount,
-} from './utils';
+} from './utils.js';
 import { tooltip } from 'd3tooltip';
 import type { StyleValue } from 'd3tooltip';
 
 export interface Options {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   tree?: Node | {};
 
   rootKeyName: string;
@@ -183,20 +181,20 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
   }
 
   const vis = svgElement
-    // eslint-disable-next-line @typescript-eslint/unbound-method
+    // oxlint-disable-next-line typescript/unbound-method
     .call(zoom.scaleTo, initialZoom)
     .call(
       zoom.on('zoom', (event) => {
         const { transform } = event as D3ZoomEvent<SVGSVGElement, unknown>;
         vis.attr('transform', transform.toString());
-      })
+      }),
     )
     .append('g')
     .attr(
       'transform',
       `translate(${margin.left + nodeStyleOptions.radius}, ${
         margin.top
-      }) scale(${initialZoom})`
+      }) scale(${initialZoom})`,
     );
 
   // previousNodePositionsById stores node x and y
@@ -217,7 +215,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
   function findParentNodePosition(
     nodePositionsById: { [nodeId: string | number]: NodePosition },
     nodeId: string | number,
-    filter: (nodePosition: NodePosition) => boolean
+    filter: (nodePosition: NodePosition) => boolean,
   ) {
     let currentPosition = nodePositionsById[nodeId];
     while (currentPosition) {
@@ -264,7 +262,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
               c.id = `${node.id || ''}|${c.name}`;
               return c;
             })
-          : null
+          : null,
     );
 
     update();
@@ -291,7 +289,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
       const rootNode = d3.hierarchy(data);
       if (isSorted) {
         rootNode.sort((a, b) =>
-          b.data.name.toLowerCase() < a.data.name.toLowerCase() ? 1 : -1
+          b.data.name.toLowerCase() < a.data.name.toLowerCase() ? 1 : -1,
         );
       }
 
@@ -300,7 +298,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
 
       rootPointNode.each(
         (node) =>
-          (node.y = node.depth * (maxLabelLength * 7 * widthBetweenNodesCoeff))
+          (node.y = node.depth * (maxLabelLength * 7 * widthBetweenNodesCoeff)),
       );
 
       const nodes = rootPointNode.descendants();
@@ -327,7 +325,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           const position = findParentNodePosition(
             nodePositionsById,
             d.data.id,
-            (n) => !!previousNodePositionsById[n.id]
+            (n) => !!previousNodePositionsById[n.id],
           );
           const previousPosition =
             (position && previousNodePositionsById[position.id]) ||
@@ -358,7 +356,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
             ...tooltipOptions,
             root,
             text: (d) => getTooltipString(d.data, tooltipOptions),
-          })
+          }),
         );
       }
 
@@ -401,8 +399,8 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           d.data._children && d.data._children.length > 0
             ? nodeStyleOptions.colors.collapsed
             : d.data.children && d.data.children.length > 0
-            ? nodeStyleOptions.colors.parent
-            : nodeStyleOptions.colors.default
+              ? nodeStyleOptions.colors.parent
+              : nodeStyleOptions.colors.default,
         );
 
       // transition nodes to their new position
@@ -433,7 +431,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           this: SVGGElement & {
             __oldData__?: HierarchyPointNode<InternalNode>;
           },
-          d
+          d,
         ) {
           // test whether the relevant properties of d match
           // the equivalent property of the oldData
@@ -458,7 +456,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           const position = findParentNodePosition(
             previousNodePositionsById,
             d.data.id,
-            (n) => !!nodePositionsById[n.id]
+            (n) => !!nodePositionsById[n.id],
           );
           const futurePosition =
             (position && nodePositionsById[position.id]) ||
@@ -474,7 +472,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
       // update the links
       const link = vis
         .selectAll<SVGPathElement, HierarchyPointLink<InternalNode>>(
-          'path.link'
+          'path.link',
         )
         .data(links, (d) => d.target.data.id);
 
@@ -487,7 +485,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           const position = findParentNodePosition(
             nodePositionsById,
             d.target.data.id,
-            (n) => !!previousNodePositionsById[n.id]
+            (n) => !!previousNodePositionsById[n.id],
           );
           const previousPosition =
             (position && previousNodePositionsById[position.id]) ||
@@ -519,7 +517,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           const position = findParentNodePosition(
             previousNodePositionsById,
             d.target.data.id,
-            (n) => !!nodePositionsById[n.id]
+            (n) => !!nodePositionsById[n.id],
           );
           const futurePosition =
             (position && nodePositionsById[position.id]) ||

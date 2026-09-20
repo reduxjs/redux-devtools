@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import { StylingFunction } from 'react-base16-styling';
-import type { LabelRenderer } from 'react-json-tree';
+import React from 'react';
+import type { GetItemString, LabelRenderer } from 'react-json-tree';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
-import isIterable from '../utils/isIterable';
+import isIterable from '../utils/isIterable.js';
+import { DATA_TYPE_KEY } from '../monitor-config.js';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
 
@@ -24,9 +24,7 @@ function getShortTypeString(val: unknown, diff: boolean | undefined) {
   } else if (val === undefined) {
     return 'undef';
   } else if (typeof val === 'object') {
-    return Object.keys(val as Record<string, unknown>).length > 0
-      ? '{…}'
-      : '{}';
+    return Object.keys(val).length > 0 ? '{…}' : '{}';
   } else if (typeof val === 'function') {
     return 'fn';
   } else if (typeof val === 'string') {
@@ -42,17 +40,16 @@ function getText(
   type: string,
   data: any,
   previewContent: boolean,
-  isDiff: boolean | undefined
+  isDiff: boolean | undefined,
 ) {
   if (type === 'Object') {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const keys = Object.keys(data as {});
+    const keys = Object.keys(data as object);
     if (!previewContent) return keys.length ? '{…}' : '{}';
 
     const str = keys
       .slice(0, 3)
       .map(
-        (key) => `${key}: ${getShortTypeString(data[key], isDiff) as string}`
+        (key) => `${key}: ${getShortTypeString(data[key], isDiff) as string}`,
       )
       .concat(keys.length > 3 ? ['…'] : [])
       .join(', ');
@@ -73,34 +70,21 @@ function getText(
   }
 }
 
-export function getItemString(
-  styling: StylingFunction,
-  type: string,
-  data: any,
-  dataTypeKey: string | symbol | undefined,
-  previewContent: boolean,
-  isDiff?: boolean
-): ReactNode {
-  return (
-    <span {...styling('treeItemHint')}>
-      {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
-      {dataTypeKey && data[dataTypeKey]
-        ? `${data[dataTypeKey] as string} `
-        : ''}
-      {getText(type, data, previewContent, isDiff)}
-    </span>
-  );
-}
+export const getItemString: GetItemString = (type: string, data: any) => (
+  <span>
+    {data[IS_IMMUTABLE_KEY] ? 'Immutable' : ''}
+    {DATA_TYPE_KEY && data[DATA_TYPE_KEY]
+      ? `${data[DATA_TYPE_KEY] as string} `
+      : ''}
+    {getText(type, data, false, undefined)}
+  </span>
+);
 
-export function createTreeItemLabelRenderer(
-  styling: StylingFunction
-): LabelRenderer {
-  return function labelRenderer([key], nodeType, expanded) {
-    return (
-      <span>
-        <span {...styling('treeItemKey')}>{key}</span>
-        {!expanded && ': '}
-      </span>
-    );
-  };
-}
+export const labelRenderer: LabelRenderer = ([key], nodeType, expanded) => (
+  <span>
+    <span css={(theme) => ({ color: theme.TEXT_PLACEHOLDER_COLOR })}>
+      {key}
+    </span>
+    {!expanded && ': '}
+  </span>
+);

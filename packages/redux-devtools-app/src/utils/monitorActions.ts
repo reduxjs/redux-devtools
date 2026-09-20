@@ -1,20 +1,30 @@
-import difference from 'lodash/difference';
-import omit from 'lodash/omit';
-import { stringifyJSON } from './stringifyJSON';
-import { SET_STATE } from '../constants/actionTypes';
-import { InstancesState, State } from '../reducers/instances';
+import {
+  DispatchAction,
+  InstancesState,
+  SET_STATE,
+  State,
+  stringifyJSON,
+} from '@redux-devtools/app-core';
 import { Dispatch, MiddlewareAPI } from 'redux';
-import { DispatchAction, StoreActionWithoutLiftedAction } from '../actions';
+import { StoreActionWithoutLiftedAction } from '../actions/index.js';
 
 export function sweep(state: State): State {
+  const skippedActionIdsSet = new Set(state.skippedActionIds);
+
   return {
     ...state,
-    actionsById: omit(state.actionsById, state.skippedActionIds),
-    stagedActionIds: difference(state.stagedActionIds, state.skippedActionIds),
+    actionsById: Object.fromEntries(
+      Object.entries(state.actionsById).filter(
+        ([actionId]) => !skippedActionIdsSet.has(parseInt(actionId, 10)),
+      ),
+    ),
+    stagedActionIds: state.stagedActionIds.filter(
+      (actionId) => !skippedActionIdsSet.has(actionId),
+    ),
     skippedActionIds: [],
     currentStateIndex: Math.min(
       state.currentStateIndex,
-      state.stagedActionIds.length - 1
+      state.stagedActionIds.length - 1,
     ),
   };
 }
@@ -28,7 +38,7 @@ export function nonReduxDispatch(
   instanceId: string | number,
   action: DispatchAction,
   initialState: string | undefined,
-  preInstances?: InstancesState
+  preInstances?: InstancesState,
 ) {
   const instances = preInstances || store.getState().instances;
   const state = instances.states[instanceId];
@@ -39,7 +49,7 @@ export function nonReduxDispatch(
       if (options.features.import === true) {
         return stringifyJSON(
           state.computedStates[state.currentStateIndex].state,
-          true
+          true,
         );
       }
       return initialState;
@@ -58,7 +68,7 @@ export function nonReduxDispatch(
       return stringifyJSON(
         state.computedStates[state.stagedActionIds.indexOf(action.actionId)]
           .state,
-        true
+        true,
       );
     case 'ROLLBACK':
       return stringifyJSON(state.computedStates[0].state, true);

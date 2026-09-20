@@ -1,5 +1,5 @@
 import { Action, AnyAction, isAllOf, isPlainObject } from '@reduxjs/toolkit';
-import { QueryStatus } from '@reduxjs/toolkit/query';
+import { QueryCacheKey, QueryStatus } from '@reduxjs/toolkit/query';
 import {
   QueryInfo,
   RtkQueryMonitorState,
@@ -11,7 +11,8 @@ import {
   MutationInfo,
   ApiStats,
   QueryTally,
-  RtkQueryProvided,
+  RtkQueryProvidedTagsState,
+  RtkQuery262ProvidedState,
   ApiTimings,
   QueryTimings,
   SelectorsSource,
@@ -19,12 +20,13 @@ import {
   RtkResourceInfo,
   RtkRequest,
   RtkRequestTiming,
-} from '../types';
-import { missingTagId } from '../monitor-config';
-import { Comparator, compareJSONPrimitive } from './comparators';
-import { emptyArray } from './object';
-import { formatMs } from './formatters';
-import * as statistics from './statistics';
+  isRtkQuery262Provided,
+} from '../types.js';
+import { missingTagId } from '../monitor-config.js';
+import { Comparator, compareJSONPrimitive } from './comparators.js';
+import { emptyArray } from './object.js';
+import { formatMs } from './formatters.js';
+import * as statistics from './statistics.js';
 
 const rtkqueryApiStateKeys: ReadonlyArray<keyof RtkQueryApiState> = [
   'queries',
@@ -65,7 +67,7 @@ export function isApiSlice(val: unknown): val is RtkQueryApiState {
  * @returns
  */
 export function getApiStatesOf(
-  reduxStoreState: unknown
+  reduxStoreState: unknown,
 ): null | Readonly<Record<string, RtkQueryApiState>> {
   if (!isPlainObject(reduxStoreState)) {
     return null;
@@ -91,7 +93,7 @@ export function getApiStatesOf(
 }
 
 export function extractAllApiQueries(
-  apiStatesByReducerPath: null | Readonly<Record<string, RtkQueryApiState>>
+  apiStatesByReducerPath: null | Readonly<Record<string, RtkQueryApiState>>,
 ): ReadonlyArray<QueryInfo> {
   if (!apiStatesByReducerPath) {
     return emptyArray;
@@ -125,7 +127,7 @@ export function extractAllApiQueries(
 }
 
 export function extractAllApiMutations(
-  apiStatesByReducerPath: null | Readonly<Record<string, RtkQueryApiState>>
+  apiStatesByReducerPath: null | Readonly<Record<string, RtkQueryApiState>>,
 ): ReadonlyArray<MutationInfo> {
   if (!apiStatesByReducerPath) {
     return emptyArray;
@@ -158,7 +160,7 @@ export function extractAllApiMutations(
 }
 
 function computeQueryTallyOf(
-  queryState: RtkQueryApiState['queries'] | RtkQueryApiState['mutations']
+  queryState: RtkQueryApiState['queries'] | RtkQueryApiState['mutations'],
 ): QueryTally {
   const queries = Object.values(queryState);
 
@@ -184,7 +186,7 @@ function computeQueryTallyOf(
 }
 
 function tallySubscriptions(
-  subsState: RtkQueryApiState['subscriptions']
+  subsState: RtkQueryApiState['subscriptions'],
 ): number {
   const subsOfQueries = Object.values(subsState);
 
@@ -205,7 +207,7 @@ function computeRtkQueryRequests(
   type: 'queries' | 'mutations',
   api: RtkQueryApiState,
   sortedActions: AnyAction[],
-  currentStateIndex: SelectorsSource<unknown>['currentStateIndex']
+  currentStateIndex: SelectorsSource<unknown>['currentStateIndex'],
 ): Readonly<Record<string, RtkRequest>> {
   const requestById: Record<string, RtkRequest> = {};
 
@@ -293,7 +295,7 @@ function computeRtkQueryRequests(
     const [queryCacheKey, queryCache] = queryCacheEntries[i];
     const requestId: string =
       type === 'queries'
-        ? (queryCache as (typeof api)['queries'][string])?.requestId ?? ''
+        ? ((queryCache as (typeof api)['queries'][string])?.requestId ?? '')
         : queryCacheKey;
     if (
       queryCache &&
@@ -322,7 +324,7 @@ function computeRtkQueryRequests(
 }
 
 function formatRtkRequest(
-  rtkRequest: RtkRequest | null
+  rtkRequest: RtkRequest | null,
 ): RtkRequestTiming | null {
   if (!rtkRequest) {
     return null;
@@ -353,7 +355,7 @@ function formatRtkRequest(
 }
 
 function computeQueryApiTimings(
-  requestById: Readonly<Record<string, RtkRequest>>
+  requestById: Readonly<Record<string, RtkRequest>>,
 ): QueryTimings {
   const requests = Object.values(requestById);
 
@@ -426,11 +428,11 @@ function computeQueryApiTimings(
 function computeApiTimings(
   api: RtkQueryApiState,
   actionsById: SelectorsSource<unknown>['actionsById'],
-  currentStateIndex: SelectorsSource<unknown>['currentStateIndex']
+  currentStateIndex: SelectorsSource<unknown>['currentStateIndex'],
 ): ApiTimings {
   const sortedActions = Object.entries(actionsById)
     .sort((thisAction, thatAction) =>
-      compareJSONPrimitive(Number(thisAction[0]), Number(thatAction[0]))
+      compareJSONPrimitive(Number(thisAction[0]), Number(thatAction[0])),
     )
     .map((entry) => entry[1].action);
 
@@ -438,14 +440,14 @@ function computeApiTimings(
     'queries',
     api,
     sortedActions,
-    currentStateIndex
+    currentStateIndex,
   );
 
   const mutationRequestsById = computeRtkQueryRequests(
     'mutations',
     api,
     sortedActions,
-    currentStateIndex
+    currentStateIndex,
   );
 
   return {
@@ -457,7 +459,7 @@ function computeApiTimings(
 export function generateApiStatsOfCurrentQuery(
   api: RtkQueryApiState | null,
   actionsById: SelectorsSource<unknown>['actionsById'],
-  currentStateIndex: SelectorsSource<unknown>['currentStateIndex']
+  currentStateIndex: SelectorsSource<unknown>['currentStateIndex'],
 ): ApiStats | null {
   if (!api) {
     return null;
@@ -482,7 +484,7 @@ export function flipComparator<T>(comparator: Comparator<T>): Comparator<T> {
 
 export function isQuerySelected(
   selectedQueryKey: RtkQueryMonitorState['selectedQueryKey'],
-  queryInfo: RtkResourceInfo
+  queryInfo: RtkResourceInfo,
 ): boolean {
   return (
     !!selectedQueryKey &&
@@ -493,7 +495,7 @@ export function isQuerySelected(
 
 export function getApiStateOf(
   queryInfo: RtkResourceInfo | null,
-  apiStates: ReturnType<typeof getApiStatesOf>
+  apiStates: ReturnType<typeof getApiStatesOf>,
 ): RtkQueryApiState | null {
   if (!apiStates || !queryInfo) {
     return null;
@@ -504,7 +506,7 @@ export function getApiStateOf(
 
 export function getQuerySubscriptionsOf(
   queryInfo: QueryInfo | null,
-  apiStates: ReturnType<typeof getApiStatesOf>
+  apiStates: ReturnType<typeof getApiStatesOf>,
 ): RTKQuerySubscribers | null {
   if (!apiStates || !queryInfo) {
     return null;
@@ -518,7 +520,7 @@ export function getQuerySubscriptionsOf(
 
 export function getProvidedOf(
   queryInfo: QueryInfo | null,
-  apiStates: ReturnType<typeof getApiStatesOf>
+  apiStates: ReturnType<typeof getApiStatesOf>,
 ): RtkQueryApiState['provided'] | null {
   if (!apiStates || !queryInfo) {
     return null;
@@ -529,13 +531,25 @@ export function getProvidedOf(
 
 export function getQueryTagsOf(
   resInfo: RtkResourceInfo | null,
-  provided: RtkQueryProvided | null
+  provided: RtkQueryProvidedTagsState | RtkQuery262ProvidedState | null,
 ): RtkQueryTag[] {
   if (!resInfo || resInfo.type === 'mutation' || !provided) {
     return emptyArray;
   }
 
-  const tagTypes = Object.keys(provided);
+  // Handle `api.provided` schema change with RTK Query tag handling.
+  // Originally, `api.provided` was a `Record<string, Record<string, string[]>>`,
+  // directly containing the tag names.
+  // With https://github.com/reduxjs/redux-toolkit/pull/4910 , that changes to
+  // change the top level to be `{tags, keys}`, with `tags` containing the tag names.
+  // Handle the newer structure by extracting the right field if it exists.
+  const actualProvided: RtkQueryProvidedTagsState = isRtkQuery262Provided(
+    provided,
+  )
+    ? provided.tags
+    : provided;
+
+  const tagTypes = Object.keys(actualProvided);
 
   if (tagTypes.length < 1) {
     return emptyArray;
@@ -543,10 +557,10 @@ export function getQueryTagsOf(
 
   const output: RtkQueryTag[] = [];
 
-  for (const [type, tagIds] of Object.entries(provided)) {
+  for (const [type, tagIds] of Object.entries(actualProvided)) {
     if (tagIds) {
       for (const [id, queryKeys] of Object.entries(tagIds)) {
-        if ((queryKeys as unknown[]).includes(resInfo.queryKey)) {
+        if (queryKeys.includes(resInfo.queryKey as QueryCacheKey)) {
           const tag: RtkQueryTag = { type };
 
           if (id !== missingTagId) {
@@ -607,7 +621,7 @@ function matchesReducerPath(reducerPath: string) {
 
 function matchesExecuteQuery(reducerPath: string) {
   return (
-    action: any
+    action: any,
   ): action is Action<string> & {
     meta: { requestId: string; requestStatus: QueryStatus };
   } => {
@@ -622,7 +636,7 @@ function matchesExecuteQuery(reducerPath: string) {
 
 function matchesExecuteMutation(reducerPath: string) {
   return (
-    action: any
+    action: any,
   ): action is Action<string> & {
     meta: { requestId: string; requestStatus: QueryStatus };
   } =>
@@ -634,7 +648,7 @@ function matchesExecuteMutation(reducerPath: string) {
 
 export function getActionsOfCurrentQuery(
   currentQuery: RtkResourceInfo | null,
-  actionById: SelectorsSource<unknown>['actionsById']
+  actionById: SelectorsSource<unknown>['actionsById'],
 ): Action[] {
   if (!currentQuery) {
     return emptyArray;
@@ -645,12 +659,12 @@ export function getActionsOfCurrentQuery(
   if (currentQuery.type === 'mutation') {
     matcher = isAllOf(
       matchesReducerPath(currentQuery.reducerPath),
-      macthesRequestId(currentQuery.queryKey)
+      macthesRequestId(currentQuery.queryKey),
     );
   } else {
     matcher = isAllOf(
       matchesReducerPath(currentQuery.reducerPath),
-      matchesQueryKey(currentQuery.queryKey)
+      matchesQueryKey(currentQuery.queryKey),
     );
   }
 

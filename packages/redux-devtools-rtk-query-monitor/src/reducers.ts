@@ -6,9 +6,9 @@ import {
   QueryFormValues,
   RtkQueryMonitorProps,
   QueryPreviewTabs,
-} from './types';
-import { QueryComparators } from './utils/comparators';
-import { QueryFilters } from './utils/filters';
+} from './types.js';
+import { QueryComparators } from './utils/comparators.js';
+import { QueryFilters } from './utils/filters.js';
 
 const initialState: RtkQueryMonitorState = {
   queryForm: {
@@ -34,13 +34,13 @@ const monitorSlice = createSlice({
   reducers: {
     changeQueryFormValues(
       state,
-      action: PayloadAction<Partial<QueryFormValues>>
+      action: PayloadAction<Partial<QueryFormValues>>,
     ) {
       state.queryForm.values = { ...state.queryForm.values, ...action.payload };
     },
     selectQueryKey(
       state,
-      action: PayloadAction<Pick<QueryInfo, 'reducerPath' | 'queryKey'>>
+      action: PayloadAction<Pick<QueryInfo, 'reducerPath' | 'queryKey'>>,
     ) {
       state.selectedQueryKey = {
         queryKey: action.payload.queryKey,
@@ -53,10 +53,10 @@ const monitorSlice = createSlice({
   },
 });
 
-export function reducer<S, A extends Action<unknown>>(
+export function reducer<S, A extends Action<string>>(
   props: RtkQueryMonitorProps<S, A>,
   state: RtkQueryMonitorState | undefined,
-  action: AnyAction
+  action: AnyAction,
 ): RtkQueryMonitorState {
   return monitorSlice.reducer(state, action);
 }

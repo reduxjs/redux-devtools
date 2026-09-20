@@ -1,10 +1,9 @@
 import React, { CSSProperties, MouseEventHandler, PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { JSONTree } from 'react-json-tree';
 import type { ShouldExpandNodeInitially, StylingValue } from 'react-json-tree';
-import { Base16Theme } from 'redux-devtools-themes';
+import type { Base16Theme } from 'react-base16-styling';
 import { Action } from 'redux';
-import LogMonitorEntryAction from './LogMonitorEntryAction';
+import LogMonitorEntryAction from './LogMonitorEntryAction.js';
 
 const styles: { entry: CSSProperties; root: CSSProperties } = {
   entry: {
@@ -22,14 +21,14 @@ const getDeepItem = (data: any, path: (string | number)[]) =>
 const dataIsEqual = (
   data: any,
   previousData: unknown,
-  keyPath: (string | number)[]
+  keyPath: (string | number)[],
 ) => {
   const path = [...keyPath].reverse().slice(1);
 
   return getDeepItem(data, path) === getDeepItem(previousData, path);
 };
 
-interface Props<S, A extends Action<unknown>> {
+interface Props<S, A extends Action<string>> {
   theme: Base16Theme;
   select: (state: any) => unknown;
   action: A;
@@ -49,24 +48,8 @@ interface Props<S, A extends Action<unknown>> {
 
 export default class LogMonitorEntry<
   S,
-  A extends Action<unknown>
+  A extends Action<string>,
 > extends PureComponent<Props<S, A>> {
-  static propTypes = {
-    state: PropTypes.object.isRequired,
-    action: PropTypes.object.isRequired,
-    actionId: PropTypes.number.isRequired,
-    select: PropTypes.func.isRequired,
-    inFuture: PropTypes.bool,
-    error: PropTypes.string,
-    onActionClick: PropTypes.func.isRequired,
-    onActionShiftClick: PropTypes.func.isRequired,
-    collapsed: PropTypes.bool,
-    selected: PropTypes.bool,
-    expandActionRoot: PropTypes.bool,
-    expandStateRoot: PropTypes.bool,
-    previousState: PropTypes.object,
-  };
-
   printState(state: S, error: string | undefined) {
     let errorText = error;
     if (!errorText) {
@@ -82,14 +65,14 @@ export default class LogMonitorEntry<
           const getValueStyle: StylingValue = (
             { style },
             nodeType,
-            keyPath
+            keyPath,
           ) => ({
             style: {
               ...style,
               backgroundColor: dataIsEqual(
                 data,
                 previousData,
-                keyPath as (string | number)[]
+                keyPath as (string | number)[],
               )
                 ? 'transparent'
                 : this.props.theme.base01,
@@ -153,7 +136,7 @@ export default class LogMonitorEntry<
   shouldExpandNodeInitially: ShouldExpandNodeInitially = (
     keyPath,
     data,
-    level
+    level,
   ) => {
     return this.props.expandStateRoot && level === 0;
   };
@@ -169,7 +152,7 @@ export default class LogMonitorEntry<
     return (
       <div
         style={{
-          opacity: selected ? 0.4 : inFuture ? 0.6 : 1, // eslint-disable-line no-nested-ternary
+          opacity: selected ? 0.4 : inFuture ? 0.6 : 1,
           textDecoration: collapsed ? 'line-through' : 'none',
           color: this.props.theme.base06,
         }}

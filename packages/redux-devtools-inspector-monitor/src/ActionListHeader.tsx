@@ -1,15 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
-import { StylingFunction } from 'react-base16-styling';
-import RightSlider from './RightSlider';
+import RightSlider from './RightSlider.js';
+import {
+  selectorButtonCss,
+  selectorButtonSmallCss,
+} from './utils/selectorButtonStyles.js';
 
 const getActiveButtons = (hasSkippedActions: boolean): ('Sweep' | 'Commit')[] =>
   [hasSkippedActions && 'Sweep', 'Commit'].filter(
-    (a): a is 'Sweep' | 'Commit' => !!a
+    (a): a is 'Sweep' | 'Commit' => !!a,
   );
 
 interface Props {
-  styling: StylingFunction;
   onSearch: (value: string) => void;
   onCommit: () => void;
   onSweep: () => void;
@@ -20,7 +21,6 @@ interface Props {
 }
 
 const ActionListHeader: FunctionComponent<Props> = ({
-  styling,
   onSearch,
   hasSkippedActions,
   hasStagedActions,
@@ -29,17 +29,45 @@ const ActionListHeader: FunctionComponent<Props> = ({
   hideMainButtons,
   searchValue,
 }) => (
-  <div {...styling('actionListHeader')}>
+  <div
+    css={(theme) => ({
+      display: 'flex',
+      flex: '0 0 auto',
+      alignItems: 'center',
+      borderBottomWidth: '1px',
+      borderBottomStyle: 'solid',
+
+      borderColor: theme.LIST_BORDER_COLOR,
+    })}
+  >
     <input
-      {...styling('actionListHeaderSearch')}
+      css={(theme) => ({
+        outline: 'none',
+        border: 'none',
+        width: '100%',
+        padding: '5px 10px',
+        fontSize: '1em',
+        fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+
+        backgroundColor: theme.BACKGROUND_COLOR,
+        color: theme.TEXT_COLOR,
+
+        '&::-webkit-input-placeholder': {
+          color: theme.TEXT_PLACEHOLDER_COLOR,
+        },
+
+        '&::-moz-placeholder': {
+          color: theme.TEXT_PLACEHOLDER_COLOR,
+        },
+      })}
       onChange={(e) => onSearch(e.target.value)}
       placeholder="filter..."
       value={searchValue}
     />
     {!hideMainButtons && (
-      <div {...styling('actionListHeaderWrapper')}>
-        <RightSlider shown={hasStagedActions} styling={styling}>
-          <div {...styling('actionListHeaderSelector')}>
+      <div css={{ position: 'relative', height: '20px' }}>
+        <RightSlider shown={hasStagedActions}>
+          <div css={{ display: 'inline-flex', marginRight: '10px' }}>
             {getActiveButtons(hasSkippedActions).map((btn) => (
               <div
                 key={btn}
@@ -47,13 +75,9 @@ const ActionListHeader: FunctionComponent<Props> = ({
                   ({
                     Commit: onCommit,
                     Sweep: onSweep,
-                  }[btn]())
+                  })[btn]()
                 }
-                {...styling(
-                  ['selectorButton', 'selectorButtonSmall'],
-                  false,
-                  true
-                )}
+                css={[selectorButtonCss, selectorButtonSmallCss]}
               >
                 {btn}
               </div>
@@ -64,15 +88,5 @@ const ActionListHeader: FunctionComponent<Props> = ({
     )}
   </div>
 );
-
-ActionListHeader.propTypes = {
-  styling: PropTypes.func.isRequired,
-  onSearch: PropTypes.func.isRequired,
-  onCommit: PropTypes.func.isRequired,
-  onSweep: PropTypes.func.isRequired,
-  hideMainButtons: PropTypes.bool,
-  hasSkippedActions: PropTypes.bool.isRequired,
-  hasStagedActions: PropTypes.bool.isRequired,
-};
 
 export default ActionListHeader;

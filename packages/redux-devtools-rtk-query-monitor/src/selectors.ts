@@ -1,19 +1,20 @@
 import { Action, createSelector, Selector } from '@reduxjs/toolkit';
-import { RtkQueryInspectorProps } from './containers/RtkQueryInspector';
+import { RtkQueryInspectorProps } from './containers/RtkQueryInspector.js';
 import {
   ApiStats,
   QueryInfo,
   RtkQueryApiState,
   RtkQueryTag,
   SelectorsSource,
-  RtkQueryProvided,
+  RtkQueryProvidedTagsState,
   QueryPreviewTabs,
   RtkResourceInfo,
-} from './types';
-import { Comparator, queryComparators } from './utils/comparators';
-import { FilterList, queryListFilters } from './utils/filters';
-import { emptyRecord } from './utils/object';
-import { escapeRegExpSpecialCharacter } from './utils/regexp';
+  RtkQuery262ProvidedState,
+} from './types.js';
+import { Comparator, queryComparators } from './utils/comparators.js';
+import { FilterList, queryListFilters } from './utils/filters.js';
+import { emptyRecord } from './utils/object.js';
+import { escapeRegExpSpecialCharacter } from './utils/regexp.js';
 import {
   getApiStatesOf,
   extractAllApiQueries,
@@ -22,13 +23,13 @@ import {
   generateApiStatsOfCurrentQuery,
   getActionsOfCurrentQuery,
   extractAllApiMutations,
-} from './utils/rtk-query';
+} from './utils/rtk-query.js';
 
 type InspectorSelector<S, Output> = Selector<SelectorsSource<S>, Output>;
 
-export function computeSelectorSource<S, A extends Action<unknown>>(
+export function computeSelectorSource<S, A extends Action<string>>(
   props: RtkQueryInspectorProps<S, A>,
-  previous: SelectorsSource<S> | null = null
+  previous: SelectorsSource<S> | null = null,
 ): SelectorsSource<S> {
   const { computedStates, currentStateIndex, monitorState, actionsById } =
     props;
@@ -104,16 +105,16 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
 
   const selectApiStates = createSelector(
     ({ userState }: SelectorsSource<S>) => userState,
-    getApiStatesOf
+    getApiStatesOf,
   );
   const selectAllQueries = createSelector(
     selectApiStates,
-    extractAllApiQueries
+    extractAllApiQueries,
   );
 
   const selectAllMutations = createSelector(
     selectApiStates,
-    extractAllApiMutations
+    extractAllApiMutations,
   );
 
   const selectSearchQueryRegex = createSelector(
@@ -135,7 +136,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
       }
 
       return null;
-    }
+    },
   );
 
   const selectComparatorOrder = ({ monitorState }: SelectorsSource<S>) =>
@@ -156,11 +157,11 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
       queryList,
       mutationsList,
       isAscending,
-      searchRegex
+      searchRegex,
     ) => {
       const filteredList = queryListFilter(
         searchRegex,
-        (queryList as RtkResourceInfo[]).concat(mutationsList)
+        (queryList as RtkResourceInfo[]).concat(mutationsList),
       );
 
       const computedComparator = isAscending
@@ -168,7 +169,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
         : flipComparator(comparator);
 
       return filteredList.slice().sort(computedComparator);
-    }
+    },
   );
 
   const selectCurrentQueryInfo = createSelector(
@@ -184,7 +185,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
         allQueries.find(
           (query) =>
             query.queryKey === selectedQueryKey.queryKey &&
-            selectedQueryKey.reducerPath === query.reducerPath
+            selectedQueryKey.reducerPath === query.reducerPath,
         ) || null;
 
       if (!currentQueryInfo) {
@@ -192,12 +193,12 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
           allMutations.find(
             (mutation) =>
               mutation.queryKey === selectedQueryKey.queryKey &&
-              selectedQueryKey.reducerPath === mutation.reducerPath
+              selectedQueryKey.reducerPath === mutation.reducerPath,
           ) || null;
       }
 
       return currentQueryInfo;
-    }
+    },
   );
 
   const selectApiOfCurrentQuery: InspectorSelector<
@@ -216,7 +217,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
 
   const selectProvidedOfCurrentQuery: InspectorSelector<
     S,
-    null | RtkQueryProvided
+    null | RtkQueryProvidedTagsState | RtkQuery262ProvidedState
   > = (selectorsSource: SelectorsSource<S>) => {
     return selectApiOfCurrentQuery(selectorsSource)?.provided ?? null;
   };
@@ -229,25 +230,25 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
       }
 
       return apiState.subscriptions[queryInfo.queryKey];
-    }
+    },
   );
 
   const selectCurrentQueryTags = createSelector(
     [selectCurrentQueryInfo, selectProvidedOfCurrentQuery],
-    getQueryTagsOf
+    getQueryTagsOf,
   );
 
   const selectApiStatsOfCurrentQuery = createSelector(
     selectApiOfCurrentQuery,
     (selectorsSource: SelectorsSource<S>) => selectorsSource.actionsById,
     (selectorsSource: SelectorsSource<S>) => selectorsSource.currentStateIndex,
-    generateApiStatsOfCurrentQuery
+    generateApiStatsOfCurrentQuery,
   );
 
   const selectActionsOfCurrentQuery = createSelector(
     selectCurrentQueryInfo,
     selectActionsById,
-    getActionsOfCurrentQuery
+    getActionsOfCurrentQuery,
   );
 
   const selectTabCounters = createSelector(
@@ -266,7 +267,7 @@ export function createInspectorSelectors<S>(): InspectorSelectors<S> {
         [QueryPreviewTabs.queryinfo]: 0,
         [QueryPreviewTabs.actions]: actions.length,
       };
-    }
+    },
   );
 
   return {

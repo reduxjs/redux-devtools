@@ -3,7 +3,9 @@
   font-family: 'Source Code Pro';
   font-style: normal;
   font-weight: 400;
-  src: local('Source Code Pro'), local('SourceCodePro-Regular'),
+  src:
+    local('Source Code Pro'),
+    local('SourceCodePro-Regular'),
     url('./source-code-pro-v6-latin/source-code-pro-v6-latin-regular.woff2')
       format('woff2');
 }
@@ -12,7 +14,9 @@
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
-  src: local('Source Sans Pro'), local('SourceSansPro-Regular'),
+  src:
+    local('Source Sans Pro'),
+    local('SourceSansPro-Regular'),
     url('./source-sans-pro-v9-latin/source-sans-pro-v9-latin-regular.woff2')
       format('woff2');
 }
@@ -21,7 +25,9 @@
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 600;
-  src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'),
+  src:
+    local('Source Sans Pro Semibold'),
+    local('SourceSansPro-Semibold'),
     url('./source-sans-pro-v9-latin/source-sans-pro-v9-latin-600.woff2')
       format('woff2');
 }
@@ -31,7 +37,9 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'),
+  src:
+    local('Roboto'),
+    local('Roboto-Regular'),
     url('./roboto-v15-latin/roboto-v15-latin-regular.woff2') format('woff2');
 }
 /* roboto-mono-regular - latin */
@@ -39,7 +47,9 @@
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto Mono'), local('RobotoMono-Regular'),
+  src:
+    local('Roboto Mono'),
+    local('RobotoMono-Regular'),
     url('./roboto-mono-v4-latin/roboto-mono-v4-latin-regular.woff2')
       format('woff2');
 }

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { MdClose } from 'react-icons/md';
 import { MdWarning } from 'react-icons/md';
 import { MdError } from 'react-icons/md';
 import { MdCheckCircle } from 'react-icons/md';
-import { Base16Theme } from 'base16';
-import createStyledComponent from '../utils/createStyledComponent';
-import styles from './styles';
+import type { Base16Theme } from 'react-base16-styling';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import styles from './styles/index.js';
 
 const NotificationWrapper = createStyledComponent(styles);
 
@@ -53,13 +52,6 @@ export default class Notification extends Component<NotificationProps> {
       </NotificationWrapper>
     );
   }
-
-  static propTypes = {
-    children: PropTypes.any.isRequired,
-    type: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
-    onClose: PropTypes.func,
-    theme: PropTypes.object,
-  };
 
   static defaultProps = {
     type: 'info',

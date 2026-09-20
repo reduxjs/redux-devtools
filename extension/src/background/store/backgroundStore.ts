@@ -1,12 +1,12 @@
-import { createStore, applyMiddleware, PreloadedState } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import {
   CustomAction,
   DispatchAction,
   LIFTED_ACTION,
   StoreActionWithoutLiftedAction,
 } from '@redux-devtools/app';
-import rootReducer, { BackgroundState } from './backgroundReducer';
-import api, { CONNECTED, DISCONNECTED } from './apiMiddleware';
+import rootReducer, { BackgroundState } from './backgroundReducer.js';
+import api, { CONNECTED, DISCONNECTED } from './apiMiddleware.js';
 
 interface LiftedActionActionBase {
   action?: DispatchAction | string | CustomAction;
@@ -60,7 +60,7 @@ export type BackgroundAction =
   | DisconnectedAction;
 
 export default function configureStore(
-  preloadedState?: PreloadedState<BackgroundState>
+  preloadedState?: Partial<BackgroundState>,
 ) {
   return createStore(rootReducer, preloadedState, applyMiddleware(api));
   /*

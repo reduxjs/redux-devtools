@@ -8,8 +8,6 @@ interface Props {
 }
 const Root: ComponentType<Props> =
   process.env.NODE_ENV === 'production'
-    ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-      require('./Root.prod').default
-    : // eslint-disable-next-line @typescript-eslint/no-var-requires
-      require('./Root.dev').default;
+    ? require('./Root.prod').default
+    : require('./Root.dev').default;
 export default Root;

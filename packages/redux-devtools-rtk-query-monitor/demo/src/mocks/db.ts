@@ -1,6 +1,6 @@
 import { factory, primaryKey } from '@mswjs/data';
 import { nanoid } from '@reduxjs/toolkit';
-import { rest } from 'msw';
+import { http, HttpResponse, delay } from 'msw';
 import { Post } from '../services/posts';
 
 const db = factory({
@@ -19,16 +19,16 @@ const db = factory({
 });
 
 export const handlers = [
-  rest.post<Post, never, Post | { error: string }>(
+  http.post<never, Post, Post | { error: string }>(
     '/posts',
-    async (req, res, ctx) => {
-      const { name } = req.body;
+    async ({ request }) => {
+      const { name } = await request.json();
 
       if (Math.random() < 0.3) {
-        return res(
-          ctx.json({ error: 'Oh no, there was an error, try again.' }),
-          ctx.status(500),
-          ctx.delay(300)
+        await delay(300);
+        return HttpResponse.json(
+          { error: 'Oh no, there was an error, try again.' },
+          { status: 500 },
         );
       }
 
@@ -37,29 +37,31 @@ export const handlers = [
         name,
       });
 
-      return res(ctx.json(post), ctx.delay(300));
-    }
+      await delay(300);
+      return HttpResponse.json(post);
+    },
   ),
-  rest.put<Post, { id: string }, Post | { error: string }>(
+  http.put<{ id: string }, Post, Post | { error: string }>(
     '/posts/:id',
-    (req, res, ctx) => {
-      const { name } = req.body;
+    async ({ params, request }) => {
+      const { name } = await request.json();
 
       if (Math.random() < 0.3) {
-        return res(
-          ctx.json({ error: 'Oh no, there was an error, try again.' }),
-          ctx.status(500),
-          ctx.delay(300)
+        await delay(300);
+        return HttpResponse.json(
+          { error: 'Oh no, there was an error, try again.' },
+          { status: 500 },
         );
       }
 
       const post = db.post.update({
-        where: { id: { equals: req.params.id } },
+        where: { id: { equals: params.id } },
         data: { name },
       });
 
-      return res(ctx.json(post!), ctx.delay(300));
-    }
+      await delay(300);
+      return HttpResponse.json(post);
+    },
   ),
   ...db.post.toHandlers('rest'),
 ] as const;

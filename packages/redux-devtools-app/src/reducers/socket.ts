@@ -1,6 +1,6 @@
-import { AuthStates, States } from 'socketcluster-client/lib/clientsocket';
-import * as actions from '../constants/socketActionTypes';
-import { StoreAction } from '../actions';
+import { AuthStates, States } from 'socketcluster-client/lib/clientsocket.js';
+import * as actions from '../constants/socketActionTypes.js';
+import { StoreAction } from '../actions/index.js';
 
 export interface SocketState {
   id: string | null;
@@ -73,7 +73,7 @@ export function socket(state = initialState, action: StoreAction): SocketState {
       return {
         ...state,
         channels: state.channels.filter(
-          (channel) => channel !== action.channel
+          (channel) => channel !== action.channel,
         ),
       };
     case actions.DISCONNECTED:

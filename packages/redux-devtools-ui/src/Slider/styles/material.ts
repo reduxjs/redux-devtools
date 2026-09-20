@@ -1,16 +1,16 @@
-import { css, ThemedStyledProps } from 'styled-components';
-import { prefixSelectors } from '../../utils/autoPrefix';
-import color from '../../utils/color';
-import { animationCurve } from '../../utils/animations';
-import { StyleProps } from './default';
-import { Theme } from '../../themes/default';
+import { css } from '@emotion/react';
+import { prefixSelectors } from '../../utils/autoPrefix.js';
+import color from '../../utils/color.js';
+import { animationCurve } from '../../utils/animations.js';
+import { StyleProps } from './default.js';
+import { Theme } from '../../themes/default.js';
 
 export const style = ({
   theme,
   percent,
   disabled,
   withLabel,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+}: StyleProps & { theme: Theme }) => css`
   display: block;
   width: 100%;
   position: relative;
@@ -44,8 +44,7 @@ export const style = ({
     background-image: linear-gradient(
       90deg,
       currentcolor,
-      currentcolor ${percent}%,
-      transparent ${percent}%
+      currentcolor ${percent}%, transparent ${percent}%
     );
     background-clip: content-box;
     height: 0.5em;
@@ -69,7 +68,7 @@ export const style = ({
       border 0.18s ${animationCurve},
       box-shadow 0.18s ${animationCurve},
       background 0.28s ${animationCurve};
-  }`
+  }`,
   )}
 
   ${prefixSelectors(
@@ -78,7 +77,7 @@ export const style = ({
     `{
     box-shadow: 0 0 0 8px ${color(theme.base0D, 'alpha', 0.5)};
     transform: scale(1.2);
-  }`
+  }`,
   )}
 
   input::-moz-focus-outer {

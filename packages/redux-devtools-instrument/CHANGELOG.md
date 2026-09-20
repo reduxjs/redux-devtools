@@ -1,5 +1,29 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- 3f90241: Convert @redux-devtools/instrument to ESM
+
+## 2.2.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+## 2.1.2
+
+### Patch Changes
+
+- 262ea85c: Remove unnecessary exported functions from instrument
+
+## 2.1.1
+
+### Patch Changes
+
+- 42531c50: Bump versions
+
 ## 2.0.0
 
 - Adds ESM build (https://github.com/reduxjs/redux-devtools/pull/997) and switches the default export to a named export in order to ensure that the CommonJS output and the ESM output are [interchangeable](https://rollupjs.org/guide/en/#outputexports):

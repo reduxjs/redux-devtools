@@ -19,9 +19,9 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 const store = createStore(
   reducer,
   composeWithDevTools(
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
     // other store enhancers if any
-  )
+  ),
 );
 ```
 
@@ -37,9 +37,9 @@ const composeEnhancers = composeWithDevTools({
 const store = createStore(
   reducer,
   composeEnhancers(
-    applyMiddleware(...middleware)
+    applyMiddleware(...middleware),
     // other store enhancers if any
-  )
+  ),
 );
 ```
 

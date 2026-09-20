@@ -4,7 +4,6 @@ import React, {
   FocusEventHandler,
   KeyboardEventHandler,
 } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 interface State {
@@ -20,14 +19,6 @@ interface Props {
 }
 
 export default class TodoTextInput extends Component<Props, State> {
-  static propTypes = {
-    onSave: PropTypes.func.isRequired,
-    text: PropTypes.string,
-    placeholder: PropTypes.string,
-    editing: PropTypes.bool,
-    newTodo: PropTypes.bool,
-  };
-
   state = {
     text: this.props.text || '',
   };

@@ -1,9 +1,8 @@
-import type { SortObjectKeys } from './types';
+import type { SortObjectKeys } from './types.js';
 
 function getLength(type: string, collection: unknown) {
   if (type === 'Object') {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    return Object.keys(collection as {}).length;
+    return Object.keys(collection as object).length;
   } else if (type === 'Array') {
     return (collection as unknown[]).length;
   }
@@ -20,7 +19,7 @@ function getEntries(
   collection: any,
   sortObjectKeys: SortObjectKeys,
   from = 0,
-  to = Infinity
+  to = Infinity,
 ): { entries: { key: string | number; value: unknown }[]; hasMore?: boolean } {
   let res;
 
@@ -101,13 +100,13 @@ export default function getCollectionEntries(
   sortObjectKeys: SortObjectKeys,
   limit: number,
   from = 0,
-  to = Infinity
+  to = Infinity,
 ) {
   const getEntriesBound = getEntries.bind(
     null,
     type,
     collection,
-    sortObjectKeys
+    sortObjectKeys,
   );
 
   if (!limit) {

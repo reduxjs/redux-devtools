@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Select renders correctly 1`] = `
+exports[`Select > renders correctly 1`] = `
 <div
-  class=" css-18o3wl1-container"
+  class="css-18o3wl1-container"
 >
   <span
     class="css-1f43avz-a11yText-A11yText"
@@ -13,24 +13,26 @@ exports[`Select renders correctly 1`] = `
     aria-live="polite"
     aria-relevant="additions text"
     class="css-1f43avz-a11yText-A11yText"
+    role="log"
   />
   <div
-    class=" css-10g0wlc-control"
+    class="css-10g0wlc-control"
   >
     <div
-      class=" css-1gpx584-ValueContainer"
+      class="css-1uzcsaf"
     >
       <div
-        class=" css-1m6ztbo-placeholder"
+        class="css-1m6ztbo-placeholder"
         id="react-select-2-placeholder"
       >
         Select...
       </div>
       <div
-        class=" css-mh08on-Input"
+        class="css-fty6pr"
         data-value=""
       >
         <input
+          aria-activedescendant=""
           aria-autocomplete="list"
           aria-describedby="react-select-2-placeholder"
           aria-expanded="false"
@@ -42,7 +44,7 @@ exports[`Select renders correctly 1`] = `
           id="react-select-2-input"
           role="combobox"
           spellcheck="false"
-          style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+          style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"
           tabindex="0"
           type="text"
           value=""
@@ -50,14 +52,14 @@ exports[`Select renders correctly 1`] = `
       </div>
     </div>
     <div
-      class=" css-1hb7zxy-IndicatorsContainer"
+      class="css-1wy0on6"
     >
       <span
-        class=" css-19norqf-indicatorSeparator"
+        class="css-19norqf-indicatorSeparator"
       />
       <div
         aria-hidden="true"
-        class=" css-17vo4tq-indicatorContainer"
+        class="css-17vo4tq-indicatorContainer"
       >
         <svg
           aria-hidden="true"
@@ -77,9 +79,9 @@ exports[`Select renders correctly 1`] = `
 </div>
 `;
 
-exports[`Select renders with props 1`] = `
+exports[`Select > renders with props 1`] = `
 <div
-  class=" css-lk03f7-container"
+  class="css-lk03f7-container"
 >
   <span
     class="css-1f43avz-a11yText-A11yText"
@@ -90,24 +92,26 @@ exports[`Select renders with props 1`] = `
     aria-live="polite"
     aria-relevant="additions text"
     class="css-1f43avz-a11yText-A11yText"
+    role="log"
   />
   <div
-    class=" css-10g0wlc-control"
+    aria-disabled="true"
+    class="css-10g0wlc-control"
   >
     <div
-      class=" css-1ei5tw5-ValueContainer"
+      class="css-6dn868"
     >
       <div
-        class=" css-7ef4eb-multiValue"
+        class="css-7ef4eb-multiValue"
       >
         <div
-          class=" css-sro4fq-MultiValueGeneric"
+          class="css-1eqzlh8"
         >
           One
         </div>
         <div
           aria-label="Remove One"
-          class=" css-1f177ni-MultiValueRemove"
+          class="css-13dqakm"
           role="button"
         >
           <svg
@@ -125,11 +129,12 @@ exports[`Select renders with props 1`] = `
         </div>
       </div>
       <input
+        aria-activedescendant=""
         aria-autocomplete="list"
         aria-expanded="false"
         aria-haspopup="true"
         aria-readonly="true"
-        class="css-mohuvp-dummyInput-DummyInput"
+        class="css-1s80ejz-dummyInput-DummyInput"
         disabled=""
         id="react-select-3-input"
         inputmode="none"
@@ -139,28 +144,28 @@ exports[`Select renders with props 1`] = `
       />
     </div>
     <div
-      class=" css-1hb7zxy-IndicatorsContainer"
+      class="css-1wy0on6"
     >
       <div
         aria-hidden="true"
-        class=" css-1x631db-loadingIndicator"
+        class="css-1x631db-loadingIndicator"
       >
         <span
-          class="css-1xtdfmb-LoadingDot"
+          class="css-1icxkl9-LoadingDot"
         />
         <span
-          class="css-zoievk-LoadingDot"
+          class="css-1oazjx7-LoadingDot"
         />
         <span
-          class="css-x748d8-LoadingDot"
+          class="css-1wonz24-LoadingDot"
         />
       </div>
       <span
-        class=" css-19norqf-indicatorSeparator"
+        class="css-19norqf-indicatorSeparator"
       />
       <div
         aria-hidden="true"
-        class=" css-17vo4tq-indicatorContainer"
+        class="css-17vo4tq-indicatorContainer"
       >
         <svg
           aria-hidden="true"
@@ -180,9 +185,9 @@ exports[`Select renders with props 1`] = `
 </div>
 `;
 
-exports[`Select should select another option 1`] = `
+exports[`Select > should select another option 1`] = `
 <div
-  class=" css-18o3wl1-container"
+  class="css-18o3wl1-container"
 >
   <span
     class="css-1f43avz-a11yText-A11yText"
@@ -193,33 +198,42 @@ exports[`Select should select another option 1`] = `
     aria-live="polite"
     aria-relevant="additions text"
     class="css-1f43avz-a11yText-A11yText"
+    role="log"
   >
     <span
       id="aria-selection"
     />
     <span
-      id="aria-context"
+      id="aria-focused"
+    />
+    <span
+      id="aria-results"
     >
-      option Two focused, 1 of 1. 1 result available for search term two. Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.
+      1 result available for search term two.
+    </span>
+    <span
+      id="aria-guidance"
+    >
+      Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.
     </span>
   </span>
   <div
-    class=" css-mjg7mv-control"
+    class="css-mjg7mv-control"
   >
     <div
-      class=" css-1gpx584-ValueContainer"
+      class="css-1uzcsaf"
     >
       <div
-        class=" css-jpmdcb-Input"
+        class="css-vtduo5"
         data-value="two"
       >
         <input
+          aria-activedescendant="react-select-4-option-1"
           aria-autocomplete="list"
           aria-controls="react-select-4-listbox"
           aria-describedby="react-select-4-placeholder"
           aria-expanded="true"
           aria-haspopup="true"
-          aria-owns="react-select-4-listbox"
           autocapitalize="none"
           autocomplete="off"
           autocorrect="off"
@@ -227,7 +241,7 @@ exports[`Select should select another option 1`] = `
           id="react-select-4-input"
           role="combobox"
           spellcheck="false"
-          style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+          style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"
           tabindex="0"
           type="text"
           value="two"
@@ -235,14 +249,14 @@ exports[`Select should select another option 1`] = `
       </div>
     </div>
     <div
-      class=" css-1hb7zxy-IndicatorsContainer"
+      class="css-1wy0on6"
     >
       <span
-        class=" css-19norqf-indicatorSeparator"
+        class="css-19norqf-indicatorSeparator"
       />
       <div
         aria-hidden="true"
-        class=" css-17vo4tq-indicatorContainer"
+        class="css-17vo4tq-indicatorContainer"
       >
         <svg
           aria-hidden="true"
@@ -260,16 +274,20 @@ exports[`Select should select another option 1`] = `
     </div>
   </div>
   <div
-    class=" css-sromc4-menu"
-    id="react-select-4-listbox"
+    class="css-sromc4-menu"
   >
     <div
-      class=" css-hln2r9-MenuList"
+      aria-multiselectable="false"
+      class="css-12gthpx"
+      id="react-select-4-listbox"
+      role="listbox"
     >
       <div
         aria-disabled="false"
-        class=" css-1t6re7j-option"
+        aria-selected="false"
+        class="css-1t6re7j-option"
         id="react-select-4-option-1"
+        role="option"
         tabindex="-1"
       >
         Two
@@ -279,9 +297,9 @@ exports[`Select should select another option 1`] = `
 </div>
 `;
 
-exports[`Select shouldn't find any results 1`] = `
+exports[`Select > shouldn't find any results 1`] = `
 <div
-  class=" css-18o3wl1-container"
+  class="css-18o3wl1-container"
 >
   <span
     class="css-1f43avz-a11yText-A11yText"
@@ -292,33 +310,42 @@ exports[`Select shouldn't find any results 1`] = `
     aria-live="polite"
     aria-relevant="additions text"
     class="css-1f43avz-a11yText-A11yText"
+    role="log"
   >
     <span
       id="aria-selection"
     />
     <span
-      id="aria-context"
+      id="aria-focused"
+    />
+    <span
+      id="aria-results"
     >
-       0 results available for search term text. Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.
+      0 results available for search term text.
+    </span>
+    <span
+      id="aria-guidance"
+    >
+      Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.
     </span>
   </span>
   <div
-    class=" css-mjg7mv-control"
+    class="css-mjg7mv-control"
   >
     <div
-      class=" css-1gpx584-ValueContainer"
+      class="css-1uzcsaf"
     >
       <div
-        class=" css-jpmdcb-Input"
+        class="css-vtduo5"
         data-value="text"
       >
         <input
+          aria-activedescendant=""
           aria-autocomplete="list"
           aria-controls="react-select-5-listbox"
           aria-describedby="react-select-5-placeholder"
           aria-expanded="true"
           aria-haspopup="true"
-          aria-owns="react-select-5-listbox"
           autocapitalize="none"
           autocomplete="off"
           autocorrect="off"
@@ -326,7 +353,7 @@ exports[`Select shouldn't find any results 1`] = `
           id="react-select-5-input"
           role="combobox"
           spellcheck="false"
-          style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+          style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"
           tabindex="0"
           type="text"
           value="text"
@@ -334,14 +361,14 @@ exports[`Select shouldn't find any results 1`] = `
       </div>
     </div>
     <div
-      class=" css-1hb7zxy-IndicatorsContainer"
+      class="css-1wy0on6"
     >
       <span
-        class=" css-19norqf-indicatorSeparator"
+        class="css-19norqf-indicatorSeparator"
       />
       <div
         aria-hidden="true"
-        class=" css-17vo4tq-indicatorContainer"
+        class="css-17vo4tq-indicatorContainer"
       >
         <svg
           aria-hidden="true"
@@ -359,14 +386,16 @@ exports[`Select shouldn't find any results 1`] = `
     </div>
   </div>
   <div
-    class=" css-sromc4-menu"
-    id="react-select-5-listbox"
+    class="css-sromc4-menu"
   >
     <div
-      class=" css-hln2r9-MenuList"
+      aria-multiselectable="false"
+      class="css-12gthpx"
+      id="react-select-5-listbox"
+      role="listbox"
     >
       <div
-        class=" css-v8tq8h-NoOptionsMessage"
+        class="css-1ab4lkd"
       >
         No options
       </div>

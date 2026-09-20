@@ -2,10 +2,10 @@ import { createSelector, Selector } from '@reduxjs/toolkit';
 import React, { ReactNode, PureComponent } from 'react';
 import { Action, AnyAction } from 'redux';
 import type { KeyPath, ShouldExpandNodeInitially } from 'react-json-tree';
-import { QueryPreviewTabs } from '../types';
-import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
-import { emptyRecord, identity } from '../utils/object';
-import { TreeView, TreeViewProps } from './TreeView';
+import { QueryPreviewTabs } from '../types.js';
+import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y.js';
+import { emptyRecord, identity } from '../utils/object.js';
+import { TreeView, TreeViewProps } from './TreeView.js';
 
 export interface QueryPreviewActionsProps {
   isWideLayout: boolean;
@@ -62,7 +62,7 @@ export class QueryPreviewActions extends PureComponent<QueryPreviewActionsProps>
   shouldExpandNodeInitially: ShouldExpandNodeInitially = (
     keyPath,
     value,
-    layer
+    layer,
   ) => {
     if (layer === 1) {
       return this.isLastActionNode(keyPath, layer);

@@ -1,24 +1,26 @@
+import '../chromeApiMock.js';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import OptionsComponent from './Options';
-import { Options } from './syncOptions';
+import OptionsComponent from './Options.js';
+import {
+  getOptions,
+  Options,
+  OptionsMessage,
+  saveOption,
+  subscribeToOptions,
+} from './syncOptions.js';
 
-import './options.pug';
+subscribeToOptions((options) => {
+  const message: OptionsMessage = { type: 'OPTIONS', options };
+  void chrome.runtime.sendMessage(message);
+});
 
-chrome.runtime.getBackgroundPage((background) => {
-  const syncOptions = background!.syncOptions;
+const renderOptions = (options: Options) => {
+  const root = createRoot(document.getElementById('root')!);
+  root.render(<OptionsComponent options={options} saveOption={saveOption} />);
+};
 
-  const saveOption = <K extends keyof Options>(name: K, value: Options[K]) => {
-    syncOptions.save(name, value);
-  };
-
-  const renderOptions = (options: Options) => {
-    const root = createRoot(document.getElementById('root')!);
-    root.render(<OptionsComponent options={options} saveOption={saveOption} />);
-  };
-
-  syncOptions.subscribe(renderOptions);
-  syncOptions.get((options) => {
-    renderOptions(options);
-  });
+subscribeToOptions(renderOptions);
+getOptions((options) => {
+  renderOptions(options);
 });

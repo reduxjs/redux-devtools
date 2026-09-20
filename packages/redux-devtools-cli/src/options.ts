@@ -36,8 +36,8 @@ export default function getOptions(argv: { [arg: string]: any }): Options {
     dbOptions = JSON.parse(
       fs.readFileSync(
         new URL('../defaultDbOptions.json', import.meta.url),
-        'utf8'
-      )
+        'utf8',
+      ),
     );
   }
 

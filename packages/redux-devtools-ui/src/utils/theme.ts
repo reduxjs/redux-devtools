@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import * as themes from '../themes';
-import { nicinabox as defaultDarkScheme } from 'redux-devtools-themes';
-import * as baseSchemes from 'base16';
-import * as additionalSchemes from '../colorSchemes';
-import invertColors from '../utils/invertColors';
-import { Theme as ThemeBase } from '../themes/default';
+import * as themes from '../themes/index.js';
+import { base16Themes as baseSchemes } from 'react-base16-styling';
+import * as additionalSchemes from '../colorSchemes/index.js';
+import invertColors from '../utils/invertColors.js';
+import { Theme as ThemeBase } from '../themes/default.js';
+
+const defaultDarkScheme = baseSchemes.nicinabox;
 
 export const schemes = { ...baseSchemes, ...additionalSchemes };
 export const listSchemes = () => Object.keys(schemes).slice(1).sort(); // remove `__esModule`
@@ -27,7 +28,7 @@ export interface ThemeFromProvider extends ThemeBase {
 const getTheme = (
   type: keyof typeof themes,
   scheme: keyof typeof schemes,
-  light: boolean
+  light: boolean,
 ): ThemeFromProvider => {
   let colors;
   if (scheme === 'default') {
@@ -55,7 +56,7 @@ export const useTheme = ({
   colorPreference,
 }: ThemeData): ThemeFromProvider => {
   const [prefersDarkColorScheme, setPrefersDarkColorScheme] = useState(
-    window.matchMedia('(prefers-color-scheme: dark)').matches
+    window.matchMedia('(prefers-color-scheme: dark)').matches,
   );
 
   useEffect(() => {
@@ -74,7 +75,7 @@ export const useTheme = ({
       colorPreference === 'auto'
         ? !prefersDarkColorScheme
         : colorPreference === 'light',
-    [colorPreference, prefersDarkColorScheme]
+    [colorPreference, prefersDarkColorScheme],
   );
 
   return getTheme(type, scheme, light);

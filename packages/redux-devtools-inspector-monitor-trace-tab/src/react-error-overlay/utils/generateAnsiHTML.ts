@@ -6,8 +6,10 @@
  */
 
 import Anser from 'anser';
-import { nicinabox as theme } from 'redux-devtools-themes';
+import { base16Themes } from 'react-base16-styling';
 import { encode } from 'html-entities';
+
+const theme = base16Themes.nicinabox;
 
 const anserMap = {
   'ansi-bright-black': theme.base03,
@@ -48,7 +50,7 @@ function generateAnsiHTML(txt: string): string {
         result += '<span style="color: ' + color + ';">' + part + '</span>';
       } else {
         if (fg != null) {
-          console.log('Missing color mapping:', fg); // eslint-disable-line no-console
+          console.log('Missing color mapping:', fg);
         }
         result += '<span>' + part + '</span>';
       }

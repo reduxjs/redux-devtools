@@ -1,16 +1,15 @@
 import React, { PureComponent, Component, ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import ReactSelect, {
   GroupBase,
   Props as ReactSelectProps,
 } from 'react-select';
-import createThemedComponent from '../utils/createThemedComponent';
-import { Theme } from '../themes/default';
+import createThemedComponent from '../utils/createThemedComponent.js';
+import { Theme } from '../themes/default.js';
 
 export interface SelectProps<
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 > extends Omit<ReactSelectProps<Option, IsMulti, Group>, 'theme'> {
   theme: Theme;
 }
@@ -21,7 +20,7 @@ export interface SelectProps<
 export class Select<
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 > extends (PureComponent || Component)<SelectProps<Option, IsMulti, Group>> {
   render() {
     return (
@@ -80,23 +79,12 @@ export class Select<
       />
     );
   }
-
-  static propTypes = {
-    isClearable: PropTypes.bool, // should it be possible to reset value
-    isDisabled: PropTypes.bool, // whether the Select is disabled or not
-    isLoading: PropTypes.bool, // whether the Select is loading externally or not
-    maxMenuHeight: PropTypes.number, // maximum css height for the opened menu of options
-    isMulti: PropTypes.bool, // multi-value input
-    isSearchable: PropTypes.bool, // whether to enable searching feature or not
-    value: PropTypes.any, // initial field value
-    menuPlacement: PropTypes.oneOf(['auto', 'bottom', 'top']), // value to control the opening direction
-  };
 }
 
 export interface ExternalSelectProps<
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 > extends Omit<ReactSelectProps<Option, IsMulti, Group>, 'theme'> {
   theme?: Theme;
 }
@@ -104,9 +92,9 @@ export interface ExternalSelectProps<
 type SelectComponent = <
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
-  props: ExternalSelectProps<Option, IsMulti, Group>
+  props: ExternalSelectProps<Option, IsMulti, Group>,
 ) => ReactElement;
 
 export default createThemedComponent(Select) as SelectComponent & {

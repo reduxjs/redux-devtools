@@ -39,21 +39,22 @@ const prefixes = ['Moz', 'Webkit', 'ms', 'O'];
 function prefixProp<Value>(key: string, value: Value) {
   return prefixes.reduce<{ [key: string]: Value }>(
     (obj, pre) => (
-      (obj[pre + key[0].toUpperCase() + key.substr(1)] = value), obj
+      (obj[pre + key[0].toUpperCase() + key.substr(1)] = value),
+      obj
     ),
-    {}
+    {},
   );
 }
 
 export default function autoprefix(style: CSSProperties) {
   return Object.keys(style).reduce(
     (obj, key) =>
-      vendorSpecificProperties.indexOf(key) !== -1
+      vendorSpecificProperties.includes(key)
         ? {
             ...obj,
             ...prefixProp(key, style[key as keyof CSSProperties]),
           }
         : obj,
-    style
+    style,
   );
 }
