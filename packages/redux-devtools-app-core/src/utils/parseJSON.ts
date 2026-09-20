@@ -1,0 +1,47 @@
+import jsan from 'jsan';
+import { DATA_TYPE_KEY, DATA_REF_KEY } from '../constants/dataTypes.js';
+
+export function reviver(key: string, value: unknown) {
+  if (
+    typeof value === 'object' &&
+    value !== null &&
+    '__serializedType__' in value &&
+    typeof (value as any).data === 'object'
+  ) {
+    const data = (value as any).data;
+    data[DATA_TYPE_KEY] = (value as any).__serializedType__;
+    if ('__serializedRef__' in value)
+      data[DATA_REF_KEY] = (value as any).__serializedRef__;
+    /*
+    if (Array.isArray(data)) {
+      data.__serializedType__ = value.__serializedType__;
+    } else {
+      Object.defineProperty(data, '__serializedType__', {
+        value: value.__serializedType__
+      });
+    }
+    */
+    return data;
+  }
+  return value;
+}
+
+export class ParseJSONError extends Error {
+  constructor(cause: unknown) {
+    const detail = cause instanceof Error ? cause.message : String(cause);
+    super(`Failed to parse state received from the store: ${detail}`);
+    this.name = 'ParseJSONError';
+  }
+}
+
+export default function parseJSON(
+  data: string | undefined,
+  serialize?: boolean,
+) {
+  if (typeof data !== 'string') return data;
+  try {
+    return serialize ? jsan.parse(data, reviver) : jsan.parse(data);
+  } catch (e) {
+    throw new ParseJSONError(e);
+  }
+}

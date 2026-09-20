@@ -24,7 +24,7 @@ if (argv.protocol === 'https') {
 function log(pass: boolean, msg: string) {
   const prefix = pass ? chalk.green.bgBlack('PASS') : chalk.red.bgBlack('FAIL');
   const color = pass ? chalk.blue : chalk.red;
-  console.log(prefix, color(msg)); // eslint-disable-line no-console
+  console.log(prefix, color(msg));
 }
 
 function getModuleName(type: string) {

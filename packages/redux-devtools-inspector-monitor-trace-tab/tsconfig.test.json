@@ -1,7 +1,7 @@
 {
-  "extends": "../../tsconfig.react.base.json",
+  "extends": "../../tsconfig.lib.json",
   "compilerOptions": {
-    "types": ["jest", "node", "chrome"]
+    "types": ["vitest/globals", "node", "chrome"]
   },
   "include": ["src", "test"]
 }

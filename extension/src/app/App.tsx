@@ -8,7 +8,7 @@ import {
   Settings,
   StoreState,
 } from '@redux-devtools/app';
-import Actions from './Actions';
+import Actions from './Actions.js';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;
@@ -27,6 +27,7 @@ class App extends Component<Props> {
           <a
             href="https://github.com/zalmoxisus/redux-devtools-extension#usage"
             target="_blank"
+            rel="noreferrer"
           >
             the instructions
           </a>

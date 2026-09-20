@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Action } from 'redux';
 import { PerformAction } from '@redux-devtools/core';
 import type { Base16Theme } from 'react-base16-styling';
-import LogMonitorEntry from './LogMonitorEntry';
+import LogMonitorEntry from './LogMonitorEntry.js';
 
 interface Props<S, A extends Action<string>> {
   actionsById: { [actionId: number]: PerformAction<A> };
@@ -60,7 +60,7 @@ export default class LogMonitorEntryList<
           actionId={actionId}
           state={state}
           previousState={previousState}
-          collapsed={skippedActionIds.indexOf(actionId) > -1}
+          collapsed={skippedActionIds.includes(actionId)}
           inFuture={i > currentStateIndex}
           selected={consecutiveToggleStartId === i}
           error={error}

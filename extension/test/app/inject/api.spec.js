@@ -1,5 +1,6 @@
-import { insertScript, listenMessage } from '../../utils/inject';
-import '../../../src/pageScript';
+import { vi } from 'vitest';
+import { insertScript, listenMessage } from '../../utils/inject.js';
+import '../../../src/pageScript/index.js';
 
 describe('API', () => {
   it('should get window.__REDUX_DEVTOOLS_EXTENSION__ function', () => {
@@ -7,7 +8,7 @@ describe('API', () => {
   });
 
   it('should notify error', () => {
-    const mockFunc = jest.fn(() => {});
+    const mockFunc = vi.fn(() => {});
     window.__REDUX_DEVTOOLS_EXTENSION__.notifyErrors(mockFunc);
     insertScript('hi()');
     expect(mockFunc.mock.calls.length).toBeGreaterThan(0);
@@ -20,16 +21,7 @@ describe('API', () => {
     expect(message).toEqual({
       source: '@devtools-page',
       type: 'OPEN',
-      position: 'right',
-    });
-
-    message = await listenMessage(() => {
-      window.__REDUX_DEVTOOLS_EXTENSION__.open('left');
-    });
-    expect(message).toEqual({
-      source: '@devtools-page',
-      type: 'OPEN',
-      position: 'left',
+      position: 'window',
     });
   });
 

@@ -1,5 +1,49 @@
 # Change Log
 
+## 7.0.0
+
+### Major Changes
+
+- 12849a4: Convert monitors to ESM
+
+### Patch Changes
+
+- Updated dependencies [d61d31a]
+- Updated dependencies [804e729]
+- Updated dependencies [804d6bd]
+  - @redux-devtools/ui@3.0.0
+  - @redux-devtools/core@5.0.0
+
+## 6.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+  - @redux-devtools/ui@2.0.0
+
+## 5.1.1
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+
+## 5.1.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/ui@1.4.0
+  - @redux-devtools/core@4.1.0
+
 ## 5.0.1
 
 ### Patch Changes

@@ -3,11 +3,12 @@ import { Provider } from 'react-redux';
 import { Store } from 'redux';
 import { Persistor } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-import configureStore from './store/configureStore';
-import { CONNECT_REQUEST } from './constants/socketActionTypes';
-import App from './containers/App';
-import { StoreState } from './reducers';
-import { StoreAction } from './actions';
+import { App } from '@redux-devtools/app-core';
+import { StoreState } from './reducers/index.js';
+import { StoreAction } from './actions/index.js';
+import { CONNECT_REQUEST } from './constants/socketActionTypes.js';
+import Connection from './components/Settings/Connection.js';
+import configureStore from './store/configureStore.js';
 
 export class Root extends Component {
   store?: Store<StoreState, StoreAction>;
@@ -32,39 +33,20 @@ export class Root extends Component {
     return (
       <Provider store={this.store}>
         <PersistGate loading={null} persistor={this.persistor!}>
-          <App />
+          <App
+            extraSettingsTabs={[{ name: 'Connection', component: Connection }]}
+          />
         </PersistGate>
       </Provider>
     );
   }
 }
 
-export * from './actions';
-export { default as DispatcherButton } from './components/buttons/DispatcherButton';
-export { default as ExportButton } from './components/buttons/ExportButton';
-export { default as ImportButton } from './components/buttons/ImportButton';
-export { default as PrintButton } from './components/buttons/PrintButton';
-export { default as SliderButton } from './components/buttons/SliderButton';
-export { default as Header } from './components/Header';
-export { default as MonitorSelector } from './components/MonitorSelector';
-export { default as Settings } from './components/Settings';
-export { default as TopButtons } from './components/TopButtons';
-export { default as DevTools } from './containers/DevTools';
-export { default as Dispatcher } from './containers/monitors/Dispatcher';
-export { default as SliderMonitor } from './containers/monitors/Slider';
-export * from './constants/actionTypes';
-export * from './constants/socketActionTypes';
-export * from './middlewares/api';
-export * from './middlewares/exportState';
-export * from './reducers';
-export * from './reducers/connection';
-export * from './reducers/instances';
-export * from './reducers/monitor';
-export * from './reducers/notification';
-export * from './reducers/reports';
-export * from './reducers/section';
-export * from './reducers/socket';
-export * from './reducers/theme';
-export * from './reducers/stateTreeSettings';
-export * from './utils/monitorActions';
-export * from './utils/stringifyJSON';
+export * from '@redux-devtools/app-core';
+export * from './actions/index.js';
+export * from './constants/socketActionTypes.js';
+export * from './middlewares/api.js';
+export * from './reducers/index.js';
+export * from './reducers/connection.js';
+export * from './reducers/socket.js';
+export * from './utils/monitorActions.js';

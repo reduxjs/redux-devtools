@@ -1,8 +1,9 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Select } from '../src';
-import { options } from '../src/Select/options';
+import { userEvent } from '@testing-library/user-event';
+import { Select } from '../src/index.js';
+import { options } from '../src/Select/options.js';
 
 describe('Select', function () {
   it('renders correctly', () => {
@@ -38,7 +39,7 @@ describe('Select', function () {
   });
 
   it('should select another option', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { container } = render(
       <Select options={options} onChange={onChange} />,
     );
@@ -50,7 +51,7 @@ describe('Select', function () {
   });
 
   it("shouldn't find any results", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { container } = render(
       <Select options={options} onChange={onChange} />,
     );

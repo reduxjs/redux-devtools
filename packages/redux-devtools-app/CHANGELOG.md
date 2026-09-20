@@ -1,5 +1,66 @@
 # Change Log
 
+## 8.0.0
+
+### Major Changes
+
+- 6481386: Convert remaining packages to ESM
+
+### Patch Changes
+
+- Updated dependencies [d61d31a]
+- Updated dependencies [804e729]
+- Updated dependencies [6481386]
+  - @redux-devtools/ui@3.0.0
+  - @redux-devtools/app-core@3.0.0
+
+## 7.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+  - @redux-devtools/app-core@2.0.0
+  - @redux-devtools/ui@2.0.0
+
+## 6.2.2
+
+### Patch Changes
+
+- @redux-devtools/app-core@1.1.2
+
+## 6.2.1
+
+### Patch Changes
+
+- @redux-devtools/app-core@1.1.1
+
+## 6.2.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/app-core@1.1.0
+  - @redux-devtools/ui@1.4.0
+
+## 6.1.0
+
+### Minor Changes
+
+- 96ac1f2: Move the logic from @redux-devtools/app into @redux-devtools/app-core
+
+### Patch Changes
+
+- Updated dependencies [96ac1f2]
+  - @redux-devtools/app-core@1.0.0
+
 ## 6.0.1
 
 ### Patch Changes

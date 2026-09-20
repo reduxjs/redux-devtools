@@ -6,11 +6,11 @@
  */
 
 import React from 'react';
-import CodeBlock from '../components/CodeBlock';
-import { applyStyles } from '../utils/dom/css';
-import { absolutifyCaret } from '../utils/dom/absolutifyCaret';
-import { ScriptLine } from '../utils/stack-frame';
-import generateAnsiHTML from '../utils/generateAnsiHTML';
+import CodeBlock from '../components/CodeBlock.js';
+import { applyStyles } from '../utils/dom/css.js';
+import { absolutifyCaret } from '../utils/dom/absolutifyCaret.js';
+import { ScriptLine } from '../utils/stack-frame.js';
+import generateAnsiHTML from '../utils/generateAnsiHTML.js';
 
 import { codeFrameColumns } from '@babel/code-frame';
 import { base16Themes } from 'react-base16-styling';
@@ -73,7 +73,6 @@ function StackFrameCodeBlock(props: StackFrameCodeBlockPropsType) {
   absolutifyCaret(code);
 
   const ccn = code.childNodes;
-  // eslint-disable-next-line
   oLoop: for (let index = 0; index < ccn.length; ++index) {
     const node = ccn[index];
     const ccn2 = node.childNodes;
@@ -83,14 +82,13 @@ function StackFrameCodeBlock(props: StackFrameCodeBlockPropsType) {
       if (text == null) {
         continue;
       }
-      if (text.indexOf(` ${lineNum} |`) === -1) {
+      if (!text.includes(` ${lineNum} |`)) {
         continue;
       }
       // $FlowFixMe
       applyStyles(node as HTMLElement, {
         backgroundColor: main ? theme.base02 : theme.base01,
       });
-      // eslint-disable-next-line
       break oLoop;
     }
   }

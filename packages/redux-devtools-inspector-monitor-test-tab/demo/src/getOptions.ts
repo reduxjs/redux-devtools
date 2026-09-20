@@ -7,10 +7,10 @@ export interface Options {
 
 export default function getOptions(location: { search: string }) {
   return {
-    useExtension: location.search.indexOf('ext') !== -1,
-    supportImmutable: location.search.indexOf('immutable') !== -1,
+    useExtension: location.search.includes('ext'),
+    supportImmutable: location.search.includes('immutable'),
     theme: getTheme(location),
-    dark: location.search.indexOf('dark') !== -1,
+    dark: location.search.includes('dark'),
   };
 }
 

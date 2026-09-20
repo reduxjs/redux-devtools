@@ -1,6 +1,5 @@
 import {
   configureStore,
-  Middleware,
   combineReducers,
   EnhancedStore,
 } from '@reduxjs/toolkit';
@@ -21,9 +20,9 @@ export const store: EnhancedStore<ReturnType<typeof reducer>> = configureStore({
   devTools,
   // adding the api middleware enables caching, invalidation, polling and other features of `rtk-query`
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([
-      pokemonApi.middleware,
-      postsApi.middleware,
-    ]) as Middleware[],
-  enhancers: (devTools ? [] : [DevTools.instrument()]) as any,
+    getDefaultMiddleware().concat([pokemonApi.middleware, postsApi.middleware]),
+  enhancers: devTools
+    ? undefined
+    : (getDefaultEnhancers) =>
+        getDefaultEnhancers().concat(DevTools.instrument()),
 });

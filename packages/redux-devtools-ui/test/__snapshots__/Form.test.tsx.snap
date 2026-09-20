@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Form renders correctly 1`] = `
+exports[`Form > renders correctly 1`] = `
 <form
-  class="sc-imWYAI iSPDym"
+  class="css-yd7kx"
 >
   <div
-    class="form-group field field-object"
+    class="form-group rjsf-field rjsf-field-object"
   >
     <fieldset
       id="root"
@@ -15,14 +15,14 @@ exports[`Form renders correctly 1`] = `
       >
         Example form
       </legend>
-      <p
+      <div
         class="field-description"
         id="root__description"
       >
         A simple form example.
-      </p>
+      </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -36,9 +36,11 @@ exports[`Form renders correctly 1`] = `
           </span>
         </label>
         <input
+          aria-describedby="root_name__error root_name__description root_name__help"
           class="form-control"
           id="root_name"
           label="Full name"
+          name="root_name"
           placeholder=""
           required=""
           type="text"
@@ -46,7 +48,7 @@ exports[`Form renders correctly 1`] = `
         />
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -55,16 +57,18 @@ exports[`Form renders correctly 1`] = `
           Age
         </label>
         <input
+          aria-describedby="root_age__error root_age__description root_age__help"
           class="form-control"
           id="root_age"
           label="Age"
+          name="root_age"
           placeholder=""
           type="number"
           value="75"
         />
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -73,15 +77,17 @@ exports[`Form renders correctly 1`] = `
           Bio
         </label>
         <textarea
+          aria-describedby="root_bio__error root_bio__description root_bio__help"
           class="form-control"
           id="root_bio"
+          name="root_bio"
           placeholder=""
         >
           Roundhouse kicking asses since 1940
         </textarea>
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -90,22 +96,24 @@ exports[`Form renders correctly 1`] = `
           Password
         </label>
         <input
+          aria-describedby="root_password__error root_password__description root_password__help"
           class="form-control"
           id="root_password"
           label="Password"
+          name="root_password"
           placeholder=""
           type="password"
           value="noneed"
         />
-        <p
+        <div
           class="help-block"
           id="root_password__help"
         >
           Hint: Make it strong!
-        </p>
+        </div>
       </div>
       <div
-        class="form-group field field-array"
+        class="form-group rjsf-field rjsf-field-array"
       >
         <label
           class="control-label"
@@ -123,8 +131,11 @@ exports[`Form renders correctly 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_0"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-0"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="0"
                 />
                 <span>
                   foo
@@ -138,8 +149,11 @@ exports[`Form renders correctly 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_1"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-1"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="1"
                 />
                 <span>
                   bar
@@ -153,8 +167,11 @@ exports[`Form renders correctly 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_2"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-2"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="2"
                 />
                 <span>
                   fuzz
@@ -165,7 +182,7 @@ exports[`Form renders correctly 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -174,7 +191,7 @@ exports[`Form renders correctly 1`] = `
           Number enum
         </label>
         <div
-          class=" css-18o3wl1-container"
+          class="css-18o3wl1-container"
           id="root_numberEnum"
         >
           <span
@@ -189,17 +206,17 @@ exports[`Form renders correctly 1`] = `
             role="log"
           />
           <div
-            class=" css-10g0wlc-control"
+            class="css-10g0wlc-control"
           >
             <div
-              class=" css-1gpx584-ValueContainer"
+              class="css-1uzcsaf"
             >
               <div
-                class=" css-1m6ztbo-placeholder"
+                class="css-1m6ztbo-placeholder"
                 id="react-select-2-placeholder"
               />
               <div
-                class=" css-mh08on-Input"
+                class="css-fty6pr"
                 data-value=""
               >
                 <input
@@ -216,7 +233,7 @@ exports[`Form renders correctly 1`] = `
                   id="react-select-2-input"
                   role="combobox"
                   spellcheck="false"
-                  style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                  style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"
                   tabindex="0"
                   type="text"
                   value=""
@@ -224,14 +241,14 @@ exports[`Form renders correctly 1`] = `
               </div>
             </div>
             <div
-              class=" css-1hb7zxy-IndicatorsContainer"
+              class="css-1wy0on6"
             >
               <span
-                class=" css-19norqf-indicatorSeparator"
+                class="css-19norqf-indicatorSeparator"
               />
               <div
                 aria-hidden="true"
-                class=" css-17vo4tq-indicatorContainer"
+                class="css-17vo4tq-indicatorContainer"
               >
                 <svg
                   aria-hidden="true"
@@ -248,10 +265,15 @@ exports[`Form renders correctly 1`] = `
               </div>
             </div>
           </div>
+          <input
+            name="numberEnum"
+            type="hidden"
+            value=""
+          />
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -262,15 +284,18 @@ exports[`Form renders correctly 1`] = `
         <div
           class="field-radio-group"
           id="root_numberEnumRadio"
+          role="radiogroup"
         >
           <label
             class="radio-inline "
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-0"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="1"
+                value="0"
               />
               <span>
                 1
@@ -282,9 +307,11 @@ exports[`Form renders correctly 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-1"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="2"
+                value="1"
               />
               <span>
                 2
@@ -296,9 +323,11 @@ exports[`Form renders correctly 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-2"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="3"
+                value="2"
               />
               <span>
                 3
@@ -308,7 +337,7 @@ exports[`Form renders correctly 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -317,15 +346,16 @@ exports[`Form renders correctly 1`] = `
           Integer range
         </label>
         <div
-          class="sc-gsFSXq jEgvpD"
+          class="css-yckkdz"
         >
           <div
-            class="sc-kAyceB iOgjoF"
+            class="css-nc7xvn"
           >
             <input
               id="root_integerRange"
               max="100"
               min="42"
+              name="integerRange"
               placeholder=""
               type="range"
               uischema="[object Object]"
@@ -340,10 +370,10 @@ exports[`Form renders correctly 1`] = `
     </fieldset>
   </div>
   <div
-    class="sc-dcJsrY dAtIkD"
+    class="css-q8f4aw"
   >
     <button
-      class="sc-eqUAAy fNGiZB"
+      class="css-g2zi5"
       type="submit"
     >
       Submit
@@ -352,12 +382,12 @@ exports[`Form renders correctly 1`] = `
 </form>
 `;
 
-exports[`Form renders with no button 1`] = `
+exports[`Form > renders with no button 1`] = `
 <form
-  class="sc-imWYAI iSPDym"
+  class="css-yd7kx"
 >
   <div
-    class="form-group field field-object"
+    class="form-group rjsf-field rjsf-field-object"
   >
     <fieldset
       id="root"
@@ -367,14 +397,14 @@ exports[`Form renders with no button 1`] = `
       >
         Example form
       </legend>
-      <p
+      <div
         class="field-description"
         id="root__description"
       >
         A simple form example.
-      </p>
+      </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -388,9 +418,11 @@ exports[`Form renders with no button 1`] = `
           </span>
         </label>
         <input
+          aria-describedby="root_name__error root_name__description root_name__help"
           class="form-control"
           id="root_name"
           label="Full name"
+          name="root_name"
           placeholder=""
           required=""
           type="text"
@@ -398,7 +430,7 @@ exports[`Form renders with no button 1`] = `
         />
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -407,16 +439,18 @@ exports[`Form renders with no button 1`] = `
           Age
         </label>
         <input
+          aria-describedby="root_age__error root_age__description root_age__help"
           class="form-control"
           id="root_age"
           label="Age"
+          name="root_age"
           placeholder=""
           type="number"
           value="75"
         />
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -425,15 +459,17 @@ exports[`Form renders with no button 1`] = `
           Bio
         </label>
         <textarea
+          aria-describedby="root_bio__error root_bio__description root_bio__help"
           class="form-control"
           id="root_bio"
+          name="root_bio"
           placeholder=""
         >
           Roundhouse kicking asses since 1940
         </textarea>
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -442,22 +478,24 @@ exports[`Form renders with no button 1`] = `
           Password
         </label>
         <input
+          aria-describedby="root_password__error root_password__description root_password__help"
           class="form-control"
           id="root_password"
           label="Password"
+          name="root_password"
           placeholder=""
           type="password"
           value="noneed"
         />
-        <p
+        <div
           class="help-block"
           id="root_password__help"
         >
           Hint: Make it strong!
-        </p>
+        </div>
       </div>
       <div
-        class="form-group field field-array"
+        class="form-group rjsf-field rjsf-field-array"
       >
         <label
           class="control-label"
@@ -475,8 +513,11 @@ exports[`Form renders with no button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_0"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-0"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="0"
                 />
                 <span>
                   foo
@@ -490,8 +531,11 @@ exports[`Form renders with no button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_1"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-1"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="1"
                 />
                 <span>
                   bar
@@ -505,8 +549,11 @@ exports[`Form renders with no button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_2"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-2"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="2"
                 />
                 <span>
                   fuzz
@@ -517,7 +564,7 @@ exports[`Form renders with no button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -526,7 +573,7 @@ exports[`Form renders with no button 1`] = `
           Number enum
         </label>
         <div
-          class=" css-18o3wl1-container"
+          class="css-18o3wl1-container"
           id="root_numberEnum"
         >
           <span
@@ -541,17 +588,17 @@ exports[`Form renders with no button 1`] = `
             role="log"
           />
           <div
-            class=" css-10g0wlc-control"
+            class="css-10g0wlc-control"
           >
             <div
-              class=" css-1gpx584-ValueContainer"
+              class="css-1uzcsaf"
             >
               <div
-                class=" css-1m6ztbo-placeholder"
+                class="css-1m6ztbo-placeholder"
                 id="react-select-4-placeholder"
               />
               <div
-                class=" css-mh08on-Input"
+                class="css-fty6pr"
                 data-value=""
               >
                 <input
@@ -568,7 +615,7 @@ exports[`Form renders with no button 1`] = `
                   id="react-select-4-input"
                   role="combobox"
                   spellcheck="false"
-                  style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                  style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"
                   tabindex="0"
                   type="text"
                   value=""
@@ -576,14 +623,14 @@ exports[`Form renders with no button 1`] = `
               </div>
             </div>
             <div
-              class=" css-1hb7zxy-IndicatorsContainer"
+              class="css-1wy0on6"
             >
               <span
-                class=" css-19norqf-indicatorSeparator"
+                class="css-19norqf-indicatorSeparator"
               />
               <div
                 aria-hidden="true"
-                class=" css-17vo4tq-indicatorContainer"
+                class="css-17vo4tq-indicatorContainer"
               >
                 <svg
                   aria-hidden="true"
@@ -600,10 +647,15 @@ exports[`Form renders with no button 1`] = `
               </div>
             </div>
           </div>
+          <input
+            name="numberEnum"
+            type="hidden"
+            value=""
+          />
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -614,15 +666,18 @@ exports[`Form renders with no button 1`] = `
         <div
           class="field-radio-group"
           id="root_numberEnumRadio"
+          role="radiogroup"
         >
           <label
             class="radio-inline "
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-0"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="1"
+                value="0"
               />
               <span>
                 1
@@ -634,9 +689,11 @@ exports[`Form renders with no button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-1"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="2"
+                value="1"
               />
               <span>
                 2
@@ -648,9 +705,11 @@ exports[`Form renders with no button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-2"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="3"
+                value="2"
               />
               <span>
                 3
@@ -660,7 +719,7 @@ exports[`Form renders with no button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -669,15 +728,16 @@ exports[`Form renders with no button 1`] = `
           Integer range
         </label>
         <div
-          class="sc-gsFSXq jEgvpD"
+          class="css-yckkdz"
         >
           <div
-            class="sc-kAyceB iOgjoF"
+            class="css-nc7xvn"
           >
             <input
               id="root_integerRange"
               max="100"
               min="42"
+              name="integerRange"
               placeholder=""
               type="range"
               uischema="[object Object]"
@@ -695,12 +755,12 @@ exports[`Form renders with no button 1`] = `
 </form>
 `;
 
-exports[`Form renders with primary button 1`] = `
+exports[`Form > renders with primary button 1`] = `
 <form
-  class="sc-imWYAI iSPDym"
+  class="css-yd7kx"
 >
   <div
-    class="form-group field field-object"
+    class="form-group rjsf-field rjsf-field-object"
   >
     <fieldset
       id="root"
@@ -710,14 +770,14 @@ exports[`Form renders with primary button 1`] = `
       >
         Example form
       </legend>
-      <p
+      <div
         class="field-description"
         id="root__description"
       >
         A simple form example.
-      </p>
+      </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -731,9 +791,11 @@ exports[`Form renders with primary button 1`] = `
           </span>
         </label>
         <input
+          aria-describedby="root_name__error root_name__description root_name__help"
           class="form-control"
           id="root_name"
           label="Full name"
+          name="root_name"
           placeholder=""
           required=""
           type="text"
@@ -741,7 +803,7 @@ exports[`Form renders with primary button 1`] = `
         />
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -750,16 +812,18 @@ exports[`Form renders with primary button 1`] = `
           Age
         </label>
         <input
+          aria-describedby="root_age__error root_age__description root_age__help"
           class="form-control"
           id="root_age"
           label="Age"
+          name="root_age"
           placeholder=""
           type="number"
           value="75"
         />
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -768,15 +832,17 @@ exports[`Form renders with primary button 1`] = `
           Bio
         </label>
         <textarea
+          aria-describedby="root_bio__error root_bio__description root_bio__help"
           class="form-control"
           id="root_bio"
+          name="root_bio"
           placeholder=""
         >
           Roundhouse kicking asses since 1940
         </textarea>
       </div>
       <div
-        class="form-group field field-string"
+        class="form-group rjsf-field rjsf-field-string"
       >
         <label
           class="control-label"
@@ -785,22 +851,24 @@ exports[`Form renders with primary button 1`] = `
           Password
         </label>
         <input
+          aria-describedby="root_password__error root_password__description root_password__help"
           class="form-control"
           id="root_password"
           label="Password"
+          name="root_password"
           placeholder=""
           type="password"
           value="noneed"
         />
-        <p
+        <div
           class="help-block"
           id="root_password__help"
         >
           Hint: Make it strong!
-        </p>
+        </div>
       </div>
       <div
-        class="form-group field field-array"
+        class="form-group rjsf-field rjsf-field-array"
       >
         <label
           class="control-label"
@@ -818,8 +886,11 @@ exports[`Form renders with primary button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_0"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-0"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="0"
                 />
                 <span>
                   foo
@@ -833,8 +904,11 @@ exports[`Form renders with primary button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_1"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-1"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="1"
                 />
                 <span>
                   bar
@@ -848,8 +922,11 @@ exports[`Form renders with primary button 1`] = `
             <label>
               <span>
                 <input
-                  id="root_multipleChoicesList_2"
+                  aria-describedby="root_multipleChoicesList__error root_multipleChoicesList__description root_multipleChoicesList__help"
+                  id="root_multipleChoicesList-2"
+                  name="root_multipleChoicesList"
                   type="checkbox"
+                  value="2"
                 />
                 <span>
                   fuzz
@@ -860,7 +937,7 @@ exports[`Form renders with primary button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -869,7 +946,7 @@ exports[`Form renders with primary button 1`] = `
           Number enum
         </label>
         <div
-          class=" css-18o3wl1-container"
+          class="css-18o3wl1-container"
           id="root_numberEnum"
         >
           <span
@@ -884,17 +961,17 @@ exports[`Form renders with primary button 1`] = `
             role="log"
           />
           <div
-            class=" css-10g0wlc-control"
+            class="css-10g0wlc-control"
           >
             <div
-              class=" css-1gpx584-ValueContainer"
+              class="css-1uzcsaf"
             >
               <div
-                class=" css-1m6ztbo-placeholder"
+                class="css-1m6ztbo-placeholder"
                 id="react-select-3-placeholder"
               />
               <div
-                class=" css-mh08on-Input"
+                class="css-fty6pr"
                 data-value=""
               >
                 <input
@@ -911,7 +988,7 @@ exports[`Form renders with primary button 1`] = `
                   id="react-select-3-input"
                   role="combobox"
                   spellcheck="false"
-                  style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                  style="color: inherit; background: 0px center; opacity: 1; width: 100%; grid-area: 1 / 2; font: inherit; min-width: 2px; border: 0px; margin: 0px; outline: 0px; padding: 0px;"
                   tabindex="0"
                   type="text"
                   value=""
@@ -919,14 +996,14 @@ exports[`Form renders with primary button 1`] = `
               </div>
             </div>
             <div
-              class=" css-1hb7zxy-IndicatorsContainer"
+              class="css-1wy0on6"
             >
               <span
-                class=" css-19norqf-indicatorSeparator"
+                class="css-19norqf-indicatorSeparator"
               />
               <div
                 aria-hidden="true"
-                class=" css-17vo4tq-indicatorContainer"
+                class="css-17vo4tq-indicatorContainer"
               >
                 <svg
                   aria-hidden="true"
@@ -943,10 +1020,15 @@ exports[`Form renders with primary button 1`] = `
               </div>
             </div>
           </div>
+          <input
+            name="numberEnum"
+            type="hidden"
+            value=""
+          />
         </div>
       </div>
       <div
-        class="form-group field field-number"
+        class="form-group rjsf-field rjsf-field-number"
       >
         <label
           class="control-label"
@@ -957,15 +1039,18 @@ exports[`Form renders with primary button 1`] = `
         <div
           class="field-radio-group"
           id="root_numberEnumRadio"
+          role="radiogroup"
         >
           <label
             class="radio-inline "
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-0"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="1"
+                value="0"
               />
               <span>
                 1
@@ -977,9 +1062,11 @@ exports[`Form renders with primary button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-1"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="2"
+                value="1"
               />
               <span>
                 2
@@ -991,9 +1078,11 @@ exports[`Form renders with primary button 1`] = `
           >
             <span>
               <input
-                name="0.25546350798039463"
+                aria-describedby="root_numberEnumRadio__error root_numberEnumRadio__description root_numberEnumRadio__help"
+                id="root_numberEnumRadio-2"
+                name="root_numberEnumRadio"
                 type="radio"
-                value="3"
+                value="2"
               />
               <span>
                 3
@@ -1003,7 +1092,7 @@ exports[`Form renders with primary button 1`] = `
         </div>
       </div>
       <div
-        class="form-group field field-integer"
+        class="form-group rjsf-field rjsf-field-integer"
       >
         <label
           class="control-label"
@@ -1012,15 +1101,16 @@ exports[`Form renders with primary button 1`] = `
           Integer range
         </label>
         <div
-          class="sc-gsFSXq jEgvpD"
+          class="css-yckkdz"
         >
           <div
-            class="sc-kAyceB iOgjoF"
+            class="css-nc7xvn"
           >
             <input
               id="root_integerRange"
               max="100"
               min="42"
+              name="integerRange"
               placeholder=""
               type="range"
               uischema="[object Object]"
@@ -1035,10 +1125,10 @@ exports[`Form renders with primary button 1`] = `
     </fieldset>
   </div>
   <div
-    class="sc-dcJsrY dAtIkD"
+    class="css-q8f4aw"
   >
     <button
-      class="sc-eqUAAy jJvjWh"
+      class="css-1td9y62"
       type="submit"
     >
       Custom button

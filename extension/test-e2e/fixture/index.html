@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redux DevTools e2e fixture</title>
+  </head>
+  <body>
+    <h1>Redux DevTools e2e fixture</h1>
+    <p>count: <span id="count">0</span></p>
+    <script>
+      // Records every window message so tests can inspect the pageScript <-> contentScript
+      // traffic without depending on extension internals.
+      window.__messages = [];
+      window.addEventListener('message', (event) => {
+        if (
+          event.source !== window ||
+          !event.data ||
+          typeof event.data !== 'object'
+        ) {
+          return;
+        }
+        // Large serialized payloads (chunking tests) are replaced by their
+        // length so reading __messages over CDP stays cheap.
+        const recorded = {};
+        for (const [key, value] of Object.entries(event.data)) {
+          recorded[key] =
+            typeof value === 'string' && value.length > 10_000
+              ? `<string:${value.length}>`
+              : value;
+        }
+        window.__messages.push(recorded);
+      });
+
+      function reducer(state = { count: 0, big: '' }, action) {
+        switch (action.type) {
+          case 'INCREMENT':
+            return { ...state, count: state.count + 1 };
+          case 'DECREMENT':
+            return { ...state, count: state.count - 1 };
+          case 'SET_BIG':
+            return { ...state, big: 'x'.repeat(action.size) };
+          case 'CLEAR_BIG':
+            return { ...state, big: '' };
+          default:
+            return state;
+        }
+      }
+    </script>
+    <script type="module">
+      // Real Redux, served by the fixture http server from node_modules.
+      import { createStore } from './redux.mjs';
+
+      window.__fixture = {
+        extensionPresent:
+          typeof window.__REDUX_DEVTOOLS_EXTENSION__ === 'function',
+        store: null,
+      };
+
+      if (window.__fixture.extensionPresent) {
+        window.__fixture.store = createStore(
+          reducer,
+          undefined,
+          window.__REDUX_DEVTOOLS_EXTENSION__({ name: 'e2e-fixture' }),
+        );
+      } else {
+        window.__fixture.store = createStore(reducer);
+      }
+
+      window.__fixture.store.subscribe(() => {
+        document.getElementById('count').textContent = String(
+          window.__fixture.store.getState().count,
+        );
+      });
+    </script>
+  </body>
+</html>

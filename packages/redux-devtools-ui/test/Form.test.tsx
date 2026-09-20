@@ -1,15 +1,16 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { Form } from '../src';
-import { schema, uiSchema, formData } from '../src/Form/schema';
+import { userEvent } from '@testing-library/user-event';
+import { Form } from '../src/index.js';
+import { schema, uiSchema, formData } from '../src/Form/schema.js';
 
 describe('Form', function () {
   let random: () => number;
 
   beforeAll(() => {
     random = Math.random;
-    Math.random = jest.fn(() => 0.25546350798039463);
+    Math.random = vi.fn(() => 0.25546350798039463);
   });
 
   afterAll(() => {
@@ -45,7 +46,7 @@ describe('Form', function () {
   });
 
   it('should handle the submit event', async () => {
-    const onSubmit = jest.fn();
+    const onSubmit = vi.fn();
     render(
       <Form
         formData={formData}

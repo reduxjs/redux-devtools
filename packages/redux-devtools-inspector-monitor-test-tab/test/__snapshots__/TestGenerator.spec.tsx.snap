@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`TestGenerator component should be empty when no actions provided 1`] = `
+exports[`TestGenerator component > should be empty when no actions provided 1`] = `
 <textarea
   style="padding: 10px; width: 100%; height: 100%;"
 />
 `;
 
-exports[`TestGenerator component should generate test for the last action when selectedActionId not specified 1`] = `
+exports[`TestGenerator component > should generate test for the last action when selectedActionId not specified 1`] = `
 <textarea
   style="padding: 10px; width: 100%; height: 100%;"
 >
@@ -24,7 +24,7 @@ expect(state).toEqual({counter:1});
 </textarea>
 `;
 
-exports[`TestGenerator component should generate test for vanilla js class 1`] = `
+exports[`TestGenerator component > should generate test for vanilla js class 1`] = `
 <textarea
   style="padding: 10px; width: 100%; height: 100%;"
 >
@@ -42,7 +42,7 @@ expect(store.counter).toEqual(1);
 </textarea>
 `;
 
-exports[`TestGenerator component should generate test for vanilla js class with string template 1`] = `
+exports[`TestGenerator component > should generate test for vanilla js class with string template 1`] = `
 <textarea
   style="padding: 10px; width: 100%; height: 100%;"
 >
@@ -60,7 +60,7 @@ describe('SomeStore', () =&gt; {
 </textarea>
 `;
 
-exports[`TestGenerator component should match function template's test for first action 1`] = `
+exports[`TestGenerator component > should match function template's test for first action 1`] = `
 <textarea
   style="padding: 10px; width: 100%; height: 100%;"
 >
@@ -78,7 +78,7 @@ expect(state).toEqual({counter:1});
 </textarea>
 `;
 
-exports[`TestGenerator component should match string template's test for first action 1`] = `
+exports[`TestGenerator component > should match string template's test for first action 1`] = `
 <textarea
   style="padding: 10px; width: 100%; height: 100%;"
 >
@@ -96,7 +96,7 @@ describe('reducers', () =&gt; {
 </textarea>
 `;
 
-exports[`TestGenerator component should show warning message when no params provided 1`] = `
+exports[`TestGenerator component > should show warning message when no params provided 1`] = `
 <textarea
   style="padding: 10px; width: 100%; height: 100%;"
 />

@@ -32,7 +32,7 @@ const useDevtoolsExtension =
   !!(window as unknown as { __REDUX_DEVTOOLS_EXTENSION__: unknown })
     .__REDUX_DEVTOOLS_EXTENSION__ && getOptions(window.location).useExtension;
 
-const enhancer = compose(
+const enhancer: StoreEnhancer = compose(
   applyMiddleware(logger),
   (next: StoreEnhancerStoreCreator) => {
     const instrument = useDevtoolsExtension
@@ -45,7 +45,7 @@ const enhancer = compose(
     return instrument(next);
   },
   persistState(getDebugSessionKey()),
-);
+) as any;
 
 const store = createStore(rootReducer, enhancer);
 

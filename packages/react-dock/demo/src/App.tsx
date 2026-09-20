@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button, Form } from 'react-bootstrap';
 import { BsX } from 'react-icons/bs';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 import { Dock } from 'react-dock';
 
@@ -51,7 +50,6 @@ interface State {
   size: number;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export default class App extends Component<{}, State> {
   state: State = {
     positionIdx: 0,

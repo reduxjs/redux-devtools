@@ -29,7 +29,7 @@ await esbuild.build({
 // https://github.com/evanw/esbuild/issues/337#issuecomment-954633403
 function importAsGlobals(mapping) {
   // https://stackoverflow.com/a/3561711/153718
-  const escRe = (s) => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  const escRe = (s) => s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
   const filter = new RegExp(
     Object.keys(mapping)
       .map((mod) => `^${escRe(mod)}$`)

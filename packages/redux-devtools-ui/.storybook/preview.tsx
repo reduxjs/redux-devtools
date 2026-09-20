@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 
 import { Container } from '../src';
 import { listSchemes, listThemes } from '../src/utils/theme';

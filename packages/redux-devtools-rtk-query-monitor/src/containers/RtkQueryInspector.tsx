@@ -1,5 +1,5 @@
 import React, { PureComponent, createRef, ReactNode } from 'react';
-import type { AnyAction, Dispatch, Action } from '@reduxjs/toolkit';
+import type { Dispatch, Action } from '@reduxjs/toolkit';
 import type { LiftedAction, LiftedState } from '@redux-devtools/core';
 import {
   QueryFormValues,
@@ -7,24 +7,29 @@ import {
   RtkQueryMonitorState,
   SelectorsSource,
   RtkResourceInfo,
-} from '../types';
-import { createInspectorSelectors, computeSelectorSource } from '../selectors';
+} from '../types.js';
+import {
+  createInspectorSelectors,
+  computeSelectorSource,
+} from '../selectors.js';
 import {
   changeQueryFormValues,
   selectedPreviewTab,
   selectQueryKey,
-} from '../reducers';
-import { QueryList } from '../components/QueryList';
-import { QueryForm } from '../components/QueryForm';
-import { QueryPreview } from './QueryPreview';
+} from '../reducers.js';
+import { QueryList } from '../components/QueryList.js';
+import { QueryForm } from '../components/QueryForm.js';
+import { QueryPreview } from './QueryPreview.js';
 
 type ForwardedMonitorProps<S, A extends Action<string>> = Pick<
   LiftedState<S, A, RtkQueryMonitorState>,
   'monitorState' | 'currentStateIndex' | 'computedStates' | 'actionsById'
 >;
 
-export interface RtkQueryInspectorProps<S, A extends Action<string>>
-  extends ForwardedMonitorProps<S, A> {
+export interface RtkQueryInspectorProps<
+  S,
+  A extends Action<string>,
+> extends ForwardedMonitorProps<S, A> {
   dispatch: Dispatch<LiftedAction<S, A, RtkQueryMonitorState>>;
 }
 
@@ -96,15 +101,33 @@ class RtkQueryInspector<S, A extends Action<string>> extends PureComponent<
   }
 
   handleQueryFormValuesChange = (values: Partial<QueryFormValues>): void => {
-    this.props.dispatch(changeQueryFormValues(values) as AnyAction);
+    this.props.dispatch(
+      changeQueryFormValues(values) as unknown as LiftedAction<
+        S,
+        A,
+        RtkQueryMonitorState
+      >,
+    );
   };
 
   handleSelectQuery = (queryInfo: RtkResourceInfo): void => {
-    this.props.dispatch(selectQueryKey(queryInfo) as AnyAction);
+    this.props.dispatch(
+      selectQueryKey(queryInfo) as unknown as LiftedAction<
+        S,
+        A,
+        RtkQueryMonitorState
+      >,
+    );
   };
 
   handleTabChange = (tab: QueryPreviewTabs): void => {
-    this.props.dispatch(selectedPreviewTab(tab) as AnyAction);
+    this.props.dispatch(
+      selectedPreviewTab(tab) as unknown as LiftedAction<
+        S,
+        A,
+        RtkQueryMonitorState
+      >,
+    );
   };
 
   render(): ReactNode {
