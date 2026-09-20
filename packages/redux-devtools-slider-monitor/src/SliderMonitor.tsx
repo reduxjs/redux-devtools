@@ -207,7 +207,6 @@ class SliderMonitor<S, A extends Action<string>> extends (PureComponent ||
           return;
         }
 
-        // Update to check for nextActionId and dispatch it
         const nextActionId =
           this.props.stagedActionIds[this.props.currentStateIndex + 1];
         if (nextActionId !== undefined) {
