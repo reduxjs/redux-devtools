@@ -16,7 +16,7 @@ class ExportButton extends Component<Props> {
     return (
       <Button
         title="Export to a file"
-        toolTipPosition="top-right"
+        tooltipPosition="top-right"
         onClick={this.props.exportState}
       >
         <TiDownload />
