@@ -1,10 +1,10 @@
 import React from 'react';
-import EditorGroup from './EditorGroup';
-import FilterGroup from './FilterGroup';
-import AllowToRunGroup from './AllowToRunGroup';
-import MiscellaneousGroup from './MiscellaneousGroup';
-import ContextMenuGroup from './ContextMenuGroup';
-import { Options } from './syncOptions';
+import EditorGroup from './EditorGroup.js';
+import FilterGroup from './FilterGroup.js';
+import AllowToRunGroup from './AllowToRunGroup.js';
+import MiscellaneousGroup from './MiscellaneousGroup.js';
+import ContextMenuGroup from './ContextMenuGroup.js';
+import { Options } from './syncOptions.js';
 
 export interface OptionsProps {
   readonly options: Options;

@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { StackFrame } from './stack-frame';
-import { parse } from './parser';
-import { map } from './mapper';
-import { unmap } from './unmapper';
-import { toExclude } from '../../presets';
+import type { StackFrame } from './stack-frame.js';
+import { parse } from './parser.js';
+import { map } from './mapper.js';
+import { unmap } from './unmapper.js';
+import { toExclude } from '../../presets.js';
 
 function getStackFrames(
   error: Error,
-  unhandledRejection = false, // eslint-disable-line no-unused-vars
+  unhandledRejection = false,
   contextSize = 3,
 ): Promise<StackFrame[] | null> {
   const parsedFrames = parse(error);

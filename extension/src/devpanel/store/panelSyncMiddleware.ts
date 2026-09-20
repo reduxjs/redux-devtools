@@ -9,6 +9,15 @@ import {
 } from '@redux-devtools/app';
 import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 
+export type PanelOutgoingMessage = StoreAction & {
+  readonly instanceId: string | number;
+  readonly id: string | number | undefined;
+};
+
+export interface PanelBackgroundPort {
+  readonly post: (message: PanelOutgoingMessage) => void;
+}
+
 function selectInstance(
   tabId: number,
   store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>,
@@ -16,10 +25,28 @@ function selectInstance(
 ) {
   const instances = store.getState().instances;
   if (instances.current === 'default') return;
-  const connections = instances.connections[tabId];
-  if (connections && connections.length === 1) {
-    next({ type: SELECT_INSTANCE, selected: connections[0] });
+  const instanceId = getSoleInstanceForTab(tabId, instances.connections);
+  if (instanceId !== undefined) {
+    next({ type: SELECT_INSTANCE, selected: instanceId });
   }
+}
+
+// Background keys connections by `tabId` for the top frame and
+// `${tabId}-${frameId}` for iframes. Prefer a lone top-frame store; otherwise
+// fall back to a lone store anywhere in the tab's frames.
+export function getSoleInstanceForTab(
+  tabId: number,
+  connections: StoreState['instances']['connections'],
+): string | number | undefined {
+  const topFrame = connections[tabId];
+  if (topFrame && topFrame.length > 0) {
+    return topFrame.length === 1 ? topFrame[0] : undefined;
+  }
+  const framePrefix = `${tabId}-`;
+  const inFrames = Object.entries(connections)
+    .filter(([id]) => id.startsWith(framePrefix))
+    .flatMap(([, instanceIds]) => instanceIds);
+  return inFrames.length === 1 ? inFrames[0] : undefined;
 }
 
 function getCurrentTabId(next: (tabId: number) => void) {
@@ -37,21 +64,31 @@ function getCurrentTabId(next: (tabId: number) => void) {
 }
 
 function panelDispatcher(
-  bgConnection: chrome.runtime.Port,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  bgConnection: PanelBackgroundPort,
 ): Middleware<{}, StoreState, Dispatch<StoreAction>> {
   let autoselected = false;
+  let userChoseAutoselect = false;
 
   return (store) => (next) => (untypedAction) => {
     const action = untypedAction as StoreAction;
 
-    const result = next(action);
-    if (!autoselected && action.type === UPDATE_STATE) {
-      autoselected = true;
+    if (action.type === SELECT_INSTANCE) {
+      userChoseAutoselect = !action.selected;
+    }
 
-      if (chrome.devtools && chrome.devtools.inspectedWindow) {
-        selectInstance(chrome.devtools.inspectedWindow.tabId, store, next);
-      } else {
+    const result = next(action);
+    if (action.type === UPDATE_STATE) {
+      const inspectedTabId = chrome.devtools?.inspectedWindow?.tabId;
+      if (inspectedTabId !== undefined) {
+        // A devtools panel belongs to one tab. While no instance is picked
+        // explicitly, keep it pinned to that tab's store instead of following
+        // whichever tab dispatched last. A page reload removes the old
+        // instance and clears `selected`, so this re-pins to the new one.
+        if (!userChoseAutoselect && !store.getState().instances.selected) {
+          selectInstance(inspectedTabId, store, next);
+        }
+      } else if (!autoselected) {
+        autoselected = true;
         getCurrentTabId((tabId) => selectInstance(tabId, store, next));
       }
     }
@@ -59,7 +96,7 @@ function panelDispatcher(
       const instances = store.getState().instances;
       const instanceId = getActiveInstance(instances);
       const id = instances.options[instanceId].connectionId;
-      bgConnection.postMessage({ ...action, instanceId, id });
+      bgConnection.post({ ...action, instanceId, id });
     }
     return result;
   };

@@ -10,8 +10,8 @@ import deepmerge from 'deepmerge';
 import { Action, Dispatch } from 'redux';
 import type { Options } from 'd3-state-visualizer';
 
-import reducer, { ChartMonitorState } from './reducers';
-import Chart, { Props } from './Chart';
+import reducer, { ChartMonitorState } from './reducers.js';
+import Chart, { Props } from './Chart.js';
 
 const { reset, rollback, commit, sweep, toggleAction } = ActionCreators;
 
@@ -41,8 +41,7 @@ function invertColors(theme: Base16Theme) {
 }
 
 export interface ChartMonitorProps<S, A extends Action<string>>
-  extends LiftedState<S, A, ChartMonitorState>,
-    Options {
+  extends LiftedState<S, A, ChartMonitorState>, Options {
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;

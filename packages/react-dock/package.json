@@ -1,6 +1,6 @@
 {
   "name": "react-dock",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Resizable dockable react component",
   "keywords": [
     "react",
@@ -18,8 +18,7 @@
     "lib",
     "src"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "exports": "./lib/index.js",
   "type": "module",
   "sideEffects": false,
   "repository": {
@@ -29,30 +28,21 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run lint && pnpm run test"
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
     "@types/lodash-es": "^4.17.12",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.18.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.14",
-    "@types/react": "^18.3.18",
-    "@types/react-test-renderer": "^18.3.1",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "react": "^18.3.1",
-    "react-test-renderer": "^18.3.1",
-    "rimraf": "^6.0.1",
-    "ts-jest": "^29.2.5",
-    "typescript": "~5.7.3"
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
-    "@types/react": "^16.3.0 || ^17.0.0 || ^18.0.0",
-    "react": "^16.3.0 || ^17.0.0 || ^18.0.0"
+    "@types/react": "^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react": "^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
   }
 }

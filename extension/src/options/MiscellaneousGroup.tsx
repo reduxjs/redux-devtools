@@ -1,5 +1,5 @@
 import React from 'react';
-import { OptionsProps } from './Options';
+import { OptionsProps } from './Options.js';
 
 export default function MiscellaneousGroup({
   options,

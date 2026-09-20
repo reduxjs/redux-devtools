@@ -1,1 +1,1 @@
-export { default as DockMonitor } from './DockMonitor';
+export { default as DockMonitor } from './DockMonitor.js';

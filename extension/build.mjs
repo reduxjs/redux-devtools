@@ -40,16 +40,24 @@ for (const htmlFile of htmlFiles) {
   );
 }
 
-console.log('Copying manifest.json...');
-fs.copyFileSync('chrome/manifest.json', 'dist/manifest.json');
+const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+
+function writeManifest(browser, outPath) {
+  const manifest = JSON.parse(
+    fs.readFileSync(`${browser}/manifest.json`, 'utf8'),
+  );
+  manifest.version = version;
+  fs.writeFileSync(outPath, JSON.stringify(manifest, null, 2) + '\n');
+}
+
+console.log(`Writing manifest.json (version ${version})...`);
+writeManifest('chrome', 'dist/manifest.json');
 
 console.log('Copying assets...');
 fs.cpSync('src/assets', 'dist', { recursive: true });
 
 console.log('Copying dist for each browser...');
-fs.cpSync('dist', 'chrome/dist', { recursive: true });
-fs.copyFileSync('chrome/manifest.json', 'chrome/dist/manifest.json');
-fs.cpSync('dist', 'edge/dist', { recursive: true });
-fs.copyFileSync('edge/manifest.json', 'edge/dist/manifest.json');
-fs.cpSync('dist', 'firefox/dist', { recursive: true });
-fs.copyFileSync('firefox/manifest.json', 'firefox/dist/manifest.json');
+for (const browser of ['chrome', 'edge', 'firefox']) {
+  fs.cpSync('dist', `${browser}/dist`, { recursive: true });
+  writeManifest(browser, `${browser}/dist/manifest.json`);
+}

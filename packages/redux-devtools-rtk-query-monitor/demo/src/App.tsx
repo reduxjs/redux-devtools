@@ -1,7 +1,7 @@
 import PokemonView from './features/pokemon/PokemonView';
 import PostsView from './features/posts/PostsView';
-import { Box, Flex, Heading } from '@chakra-ui/react';
-import { Link, UnorderedList, ListItem } from '@chakra-ui/react';
+import { Box, Flex, Heading, List } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/react';
 import { Code } from '@chakra-ui/react';
 import * as React from 'react';
 import { DevToolsSelector } from './features/DevTools/DevToolsSelector';
@@ -27,44 +27,48 @@ export function App() {
         </Box>
       </Flex>
       <Flex p="2" as="footer">
-        <UnorderedList p="2">
-          <ListItem>
+        <List.Root p="2">
+          <List.Item>
             <Link
               className="link"
-              isExternal
+              target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-monitor/demo"
             >
               demo source
             </Link>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <Link
               className="link"
-              isExternal
+              target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/FaberVitale/redux-devtools/tree/feat/rtk-query-monitor/packages/redux-devtools-rtk-query-monitor"
             >
               @redux-devtools/rtk-query-monitor source
             </Link>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <Link
               className="link"
-              isExternal
+              target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/reduxjs/redux-toolkit/tree/master/examples/query/react/polling"
             >
               polling example
             </Link>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <Link
               className="link"
-              isExternal
+              target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/reduxjs/redux-toolkit/tree/master/examples/query/react/mutations"
             >
               mutations example
             </Link>
-          </ListItem>
-        </UnorderedList>
+          </List.Item>
+        </List.Root>
       </Flex>
     </main>
   );

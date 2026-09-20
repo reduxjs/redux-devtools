@@ -1,7 +1,7 @@
 import React, { ReactNode, PureComponent } from 'react';
-import { QueryPreviewTabs, RtkQueryTag } from '../types';
-import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y';
-import { TreeView, TreeViewProps } from './TreeView';
+import { QueryPreviewTabs, RtkQueryTag } from '../types.js';
+import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y.js';
+import { TreeView, TreeViewProps } from './TreeView.js';
 
 interface QueryPreviewTagsState {
   data: { tags: RtkQueryTag[] };

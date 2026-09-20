@@ -1,5 +1,41 @@
 # Change Log
 
+## 7.0.0
+
+### Major Changes
+
+- 12849a4: Convert monitors to ESM
+
+### Patch Changes
+
+- Updated dependencies [804d6bd]
+  - @redux-devtools/core@5.0.0
+
+## 6.1.2
+
+### Patch Changes
+
+- 20883e5: fix(deps): update all non-major dependencies
+
+## 6.1.1
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+
+## 6.1.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - react-json-tree@0.20.0
+  - @redux-devtools/core@4.1.0
+
 ## 6.0.1
 
 ### Patch Changes

@@ -1,4 +1,3 @@
-import type Immutable from 'immutable';
 import { compose } from 'redux';
 import type { Action, ActionCreator, StoreEnhancer } from 'redux';
 
@@ -74,11 +73,11 @@ export interface EnhancerOptions {
          * Just pass the Immutable library. It will support all ImmutableJS structures. You can even export them into a file and get them back.
          * The only exception is `Record` class, for which you should pass this in addition the references to your classes in `refs`.
          */
-        immutable?: typeof Immutable;
+        immutable?: unknown;
         /**
          * ImmutableJS `Record` classes used to make possible restore its instances back when importing, persisting...
          */
-        refs?: Immutable.Record.Factory<any>[];
+        refs?: (new (data: any) => unknown)[];
       };
   /**
    * function which takes `action` object and id number as arguments, and should return `action` object back.
@@ -235,8 +234,7 @@ export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
   ? HeadStoreEnhancer extends StoreEnhancer<infer StoreExt>
     ? StoreExt & InferComposedStoreExt<RestStoreEnhancers>
     : never
-  : // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    {};
+  : {};
 
 export interface ReduxDevtoolsExtensionCompose {
   (
@@ -287,12 +285,12 @@ export const devToolsEnhancer: (options?: EnhancerOptions) => StoreEnhancer =
 export {
   composeWithDevTools as composeWithDevToolsDevelopmentOnly,
   devToolsEnhancer as devToolsEnhancerDevelopmentOnly,
-} from './developmentOnly';
+} from './developmentOnly.js';
 export {
   composeWithDevTools as composeWithDevToolsLogOnly,
   devToolsEnhancer as devToolsEnhancerLogOnly,
-} from './logOnly';
+} from './logOnly.js';
 export {
   composeWithDevTools as composeWithDevToolsLogOnlyInProduction,
   devToolsEnhancer as devToolsEnhancerLogOnlyInProduction,
-} from './logOnlyInProduction';
+} from './logOnlyInProduction.js';

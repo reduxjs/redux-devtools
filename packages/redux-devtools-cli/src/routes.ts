@@ -9,7 +9,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { AGServer } from 'socketcluster-server';
 import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
+import { expressMiddleware } from '@as-integrations/express5';
 import type { AddData, ReportBaseFields, Store } from './store.js';
 import { resolvers, schema } from './api/schema.js';
 
@@ -68,7 +68,7 @@ function routes(
       );
     })
     .catch((error) => {
-      console.error(error); // eslint-disable-line no-console
+      console.error(error);
     });
 
   serveUmdModule('react');
@@ -76,10 +76,9 @@ function routes(
   serveUmdModule('@redux-devtools/app');
 
   app.get('/port.js', function (req, res) {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     res.send(`reduxDevToolsPort = ${options.port}`);
   });
-  app.get('*', function (req, res) {
+  app.get('/{*splat}', function (req, res) {
     res.sendFile(
       path.join(
         path.dirname(fileURLToPath(import.meta.url)),
@@ -93,7 +92,10 @@ function routes(
   app.use(bodyParser.urlencoded({ limit: limit, extended: false }));
 
   app.post('/', function (req, res) {
-    if (!req.body) return res.status(404).end();
+    if (!req.body) {
+      res.status(404).end();
+      return;
+    }
     switch (req.body.op) {
       case 'get':
         store
@@ -102,7 +104,7 @@ function routes(
             res.send(r || {});
           })
           .catch(function (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
             res.sendStatus(500);
           });
         break;
@@ -113,7 +115,7 @@ function routes(
             res.send(r);
           })
           .catch(function (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
             res.sendStatus(500);
           });
         break;
@@ -131,7 +133,7 @@ function routes(
             });
           })
           .catch(function (error) {
-            console.error(error); // eslint-disable-line no-console
+            console.error(error);
             res.status(500).send({});
           });
     }

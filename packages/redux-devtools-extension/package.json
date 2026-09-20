@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/extension",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "Wrappers for Redux DevTools Extension.",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-extension",
   "license": "MIT",
@@ -9,39 +9,23 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.26.7",
-    "immutable": "^4.3.7"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "devDependencies": {
-    "@babel/cli": "^7.26.4",
-    "@babel/core": "^7.26.8",
-    "@babel/eslint-parser": "^7.26.8",
-    "@babel/plugin-transform-runtime": "^7.26.8",
-    "@babel/preset-env": "^7.26.8",
-    "@babel/preset-typescript": "^7.26.0",
     "redux": "^5.0.1",
-    "rimraf": "^6.0.1",
-    "typescript": "~5.7.3"
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "redux": "^3.1.0 || ^4.0.0 || ^5.0.0"

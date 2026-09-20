@@ -5,12 +5,12 @@ import debounce from 'lodash.debounce';
 import { Action } from 'redux';
 import type { Interpolation, Theme } from '@emotion/react';
 import type { JSX } from '@emotion/react/jsx-runtime';
-import RightSlider from './RightSlider';
+import RightSlider from './RightSlider.js';
 import {
   selectorButtonCss,
   selectorButtonSelectedCss,
   selectorButtonSmallCss,
-} from './utils/selectorButtonStyles';
+} from './utils/selectorButtonStyles.js';
 
 const BUTTON_SKIP = 'Skip';
 const BUTTON_JUMP = 'Jump';
@@ -90,6 +90,7 @@ export default class ActionListRow<
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseEnter}
         data-id={actionId}
+        title={actionType}
         css={[
           (theme) => ({
             borderBottomWidth: '1px',

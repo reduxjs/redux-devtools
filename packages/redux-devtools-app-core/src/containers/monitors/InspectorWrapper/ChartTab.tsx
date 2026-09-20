@@ -1,10 +1,10 @@
 import React, { Component, RefCallback } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
-import { withTheme } from 'styled-components';
+import { withTheme } from '@emotion/react';
 import { tree } from 'd3-state-visualizer';
 import type { HierarchyPointNode, Node, Options } from 'd3-state-visualizer';
-import { getPath } from '../ChartMonitorWrapper';
-import { updateMonitorState } from '../../../actions';
+import { getPath } from '../ChartMonitorWrapper.js';
+import { updateMonitorState } from '../../../actions/index.js';
 import { ThemeFromProvider } from '@redux-devtools/ui';
 
 const style = {
@@ -21,7 +21,6 @@ type Props = DispatchProps & OwnProps;
 
 class ChartTab extends Component<Props> {
   node?: HTMLDivElement | null;
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   renderChart?: (nextState?: {} | null | undefined) => void;
 
   shouldComponentUpdate() {
@@ -40,8 +39,7 @@ class ChartTab extends Component<Props> {
       this.node!.innerHTML = '';
       this.createChart(nextProps);
     } else if (nextProps.data !== this.props.data) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-      this.renderChart!(nextProps.data as {} | null | undefined);
+      this.renderChart!(nextProps.data);
     }
   }
 
@@ -51,8 +49,7 @@ class ChartTab extends Component<Props> {
 
   createChart(props: Props) {
     this.renderChart = tree(this.node!, this.getChartTheme(props.theme));
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    this.renderChart(props.data as {} | null | undefined);
+    this.renderChart(props.data);
   }
 
   getChartTheme(theme: ThemeFromProvider): Partial<Options> {

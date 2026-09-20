@@ -1,12 +1,12 @@
-import { css, ThemedStyledProps } from 'styled-components';
-import { StyleProps } from './default';
-import { Theme } from '../../themes/default';
+import { css } from '@emotion/react';
+import { StyleProps } from './default.js';
+import { Theme } from '../../themes/default.js';
 
 export const style = ({
   theme,
   open,
   fullWidth,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+}: StyleProps & { theme: Theme }) => css`
   position: fixed;
   top: 0px;
   right: 0px;

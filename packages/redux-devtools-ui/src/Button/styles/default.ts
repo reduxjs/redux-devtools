@@ -1,5 +1,5 @@
-import { css, ThemedStyledProps } from 'styled-components';
-import { Theme } from '../../themes/default';
+import { css } from '@emotion/react';
+import { Theme } from '../../themes/default.js';
 
 export interface StyleProps {
   primary: boolean | undefined;
@@ -10,7 +10,7 @@ export const style = ({
   theme,
   primary,
   disabled,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+}: StyleProps & { theme: Theme }) => css`
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   outline: none;
@@ -21,32 +21,38 @@ export const style = ({
   margin: auto 0;
   border: 1px solid ${theme.base02};
   border-radius: 4px;
-  ${primary
-    ? `
+  ${
+    primary
+      ? `
   background-color: ${theme.base05};
   color: ${theme.base00};
   `
-    : `
+      : `
   background-color: ${theme.base01};
   color: ${theme.base05};
- `}
-  ${disabled
-    ? `
+ `
+  }
+  ${
+    disabled
+      ? `
   cursor: not-allowed;
   opacity: 0.6;
   `
-    : `
+      : `
   cursor: pointer;
-  `}
-
-  ${!disabled &&
   `
+  }
+
+  ${
+    !disabled &&
+    `
   &:hover,
   &:focus {
     background-color: ${primary ? theme.base07 : theme.base02};
     box-shadow: 1px 1px 2px ${theme.base03};
   }
- `}
+ `
+  }
   &:focus {
     border: 1px solid ${theme.base0D};
   }

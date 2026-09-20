@@ -1,9 +1,9 @@
-import { instrument, persistState } from '../src';
+import { vi } from 'vitest';
+import { instrument, persistState } from '../src/index.js';
 import { compose, createStore, StoreEnhancer } from 'redux';
 
 describe('persistState', () => {
   const savedLocalStorage = global.localStorage;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   delete global.localStorage;
 
@@ -130,10 +130,9 @@ describe('persistState', () => {
   });
 
   it('should warn if read from localStorage fails', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    const spy = vi.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete global.localStorage.getItem;
     createStore(
@@ -149,10 +148,9 @@ describe('persistState', () => {
   });
 
   it('should warn if write to localStorage fails', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    const spy = vi.spyOn(console, 'warn').mockImplementation(() => {
       // noop
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete global.localStorage.setItem;
     const store = createStore(

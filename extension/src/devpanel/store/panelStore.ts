@@ -3,11 +3,12 @@ import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
 import {
   exportStateMiddleware,
+  parseErrorMiddleware,
   StoreAction,
   StoreState,
 } from '@redux-devtools/app';
-import panelDispatcher from './panelSyncMiddleware';
-import rootReducer from './panelReducer';
+import panelDispatcher, { PanelBackgroundPort } from './panelSyncMiddleware.js';
+import rootReducer from './panelReducer.js';
 
 const persistConfig = {
   key: 'redux-devtools',
@@ -22,9 +23,10 @@ const persistedReducer: Reducer<StoreState, StoreAction> = persistReducer(
 
 export default function configureStore(
   position: string,
-  bgConnection: chrome.runtime.Port,
+  bgConnection: PanelBackgroundPort,
 ) {
   const enhancer = applyMiddleware(
+    parseErrorMiddleware,
     exportStateMiddleware,
     panelDispatcher(bgConnection),
   );

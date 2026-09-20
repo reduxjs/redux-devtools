@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/utils",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Reusable functions of Redux DevTools",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-utils",
   "bugs": {
@@ -12,51 +12,40 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
-    "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint"
+    "test": "vitest --run --project utils",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
-    "@babel/runtime": "^7.26.7",
     "@redux-devtools/core": "workspace:^",
     "@redux-devtools/serialize": "workspace:^",
     "@types/get-params": "^0.1.2",
     "get-params": "^0.1.2",
-    "immutable": "^4.3.7",
+    "immutable": "^5.1.9",
     "jsan": "^3.1.14",
-    "nanoid": "^5.0.9",
+    "nanoid": "^6.0.1",
     "redux": "^5.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.26.4",
-    "@babel/core": "^7.26.8",
-    "@babel/eslint-parser": "^7.26.8",
-    "@babel/plugin-transform-runtime": "^7.26.8",
-    "@babel/preset-env": "^7.26.8",
-    "@babel/preset-typescript": "^7.26.0",
     "@types/jsan": "^3.1.5",
-    "@types/node": "^22.13.1",
-    "rimraf": "^6.0.1",
-    "typescript": "~5.7.3"
+    "@types/node": "catalog:",
+    "rimraf": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "@redux-devtools/core": "workspace:^",
-    "immutable": "^4.3.7",
+    "immutable": "^5.1.9",
     "redux": "^4.0.0 || ^5.0.0"
   }
 }

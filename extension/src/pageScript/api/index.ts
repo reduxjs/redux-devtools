@@ -2,18 +2,18 @@ import jsan, { Options } from 'jsan';
 import { throttle } from 'lodash-es';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { getActionsArray, getLocalFilter } from '@redux-devtools/utils';
-import { isFiltered, PartialLiftedState } from './filters';
-import importState from './importState';
-import generateId from './generateInstanceId';
-import type { Config } from '../index';
+import { isFiltered, PartialLiftedState } from './filters.js';
+import importState from './importState.js';
+import generateId from './generateInstanceId.js';
+import type { Config } from '../index.js';
 import { Action } from 'redux';
 import { LiftedState, PerformAction } from '@redux-devtools/instrument';
 import { LibConfig } from '@redux-devtools/app';
 import type {
   ContentScriptToPageScriptMessage,
   ListenerMessage,
-} from '../../contentScript';
-import type { Position } from './openWindow';
+} from '../../contentScript/index.js';
+import type { Position } from './openWindow.js';
 
 const listeners: {
   [instanceId: string]:
@@ -22,22 +22,33 @@ const listeners: {
 } = {};
 export const source = '@devtools-page';
 
+type Replacer = (this: unknown, key: string, value: unknown) => unknown;
+
+function serializeBigInt(value: unknown) {
+  return typeof value === 'bigint' ? `${value}n` : value;
+}
+
+function withBigIntReplacer(replacer?: Replacer): Replacer {
+  if (!replacer) return (key, value) => serializeBigInt(value);
+  return function (key, value) {
+    return serializeBigInt(replacer.call(this, key, value));
+  };
+}
+
 function windowReplacer(key: string, value: unknown) {
   if (value && (value as Window).window === value) {
     return '[WINDOW]';
   }
-  return value;
+  return serializeBigInt(value);
 }
 
 function tryCatchStringify(obj: unknown) {
   try {
     return JSON.stringify(obj);
   } catch (err) {
-    /* eslint-disable no-console */
     if (process.env.NODE_ENV !== 'production') {
       console.log('Failed to stringify', err);
     }
-    /* eslint-enable no-console */
     return jsan.stringify(obj, windowReplacer, undefined, {
       circular: '[CIRCULAR]',
       date: true,
@@ -50,15 +61,18 @@ function stringify(obj: unknown, serialize?: Serialize | undefined) {
   const str =
     typeof serialize === 'undefined'
       ? tryCatchStringify(obj)
-      : jsan.stringify(obj, serialize.replacer, undefined, serialize.options);
+      : jsan.stringify(
+          obj,
+          withBigIntReplacer(serialize.replacer),
+          undefined,
+          serialize.options,
+        );
 
   if (!stringifyWarned && str && str.length > 16 * 1024 * 1024) {
     // 16 MB
-    /* eslint-disable no-console */
     console.warn(
       'Application state or actions payloads are too large making Redux DevTools serialization slow and consuming a lot of memory. See https://github.com/reduxjs/redux-devtools-extension/blob/master/docs/Troubleshooting.md#excessive-use-of-memory-and-cpu on how to configure it.',
     );
-    /* eslint-enable no-console */
     stringifyWarned = true;
   }
 
@@ -222,7 +236,6 @@ function post<S, A extends Action<string>>(
 
 function getStackTrace(
   config: Config,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace: Function | undefined,
 ) {
   if (!config.trace) return undefined;
@@ -249,7 +262,6 @@ function getStackTrace(
     typeof Error.stackTraceLimit !== 'number' ||
     Error.stackTraceLimit > traceLimit!
   ) {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const frames = stack!.split('\n');
     if (frames.length > traceLimit!) {
       stack = frames
@@ -267,7 +279,6 @@ function amendActionType<A extends Action<string>>(
     | StructuralPerformAction<A>[]
     | string,
   config: Config,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   toExcludeFromTrace: Function | undefined,
 ): StructuralPerformAction<A> {
   const timestamp = Date.now();
@@ -277,10 +288,10 @@ function amendActionType<A extends Action<string>>(
   }
   if (!(action as A).type)
     return { action: { type: 'update' } as A, timestamp, stack };
-  if ((action as StructuralPerformAction<A>).action)
-    return (
-      stack ? { stack, ...action } : action
-    ) as StructuralPerformAction<A>;
+  if ((action as StructuralPerformAction<A>).action) {
+    const performAction = action as StructuralPerformAction<A>;
+    return stack ? { stack, ...performAction } : performAction;
+  }
   return { action, timestamp, stack } as StructuralPerformAction<A>;
 }
 
@@ -383,7 +394,32 @@ type ToContentScriptMessage<S, A extends Action<string>> =
   | GetReportMessage
   | StopMessage;
 
+function reportSerializationError(
+  instanceId: number,
+  messageType: string,
+  err: unknown,
+) {
+  const reason = err instanceof Error ? err.message : String(err);
+  const description = `Redux DevTools could not serialize the ${messageType} message: ${reason}`;
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(description, err);
+  }
+  post({ type: 'ERROR', payload: description, instanceId, source });
+}
+
 export function toContentScript<S, A extends Action<string>>(
+  message: ToContentScriptMessage<S, A>,
+  serializeState?: Serialize | undefined,
+  serializeAction?: Serialize | undefined,
+) {
+  try {
+    serializeAndPost(message, serializeState, serializeAction);
+  } catch (err) {
+    reportSerializationError(message.instanceId, message.type, err);
+  }
+}
+
+function serializeAndPost<S, A extends Action<string>>(
   message: ToContentScriptMessage<S, A>,
   serializeState?: Serialize | undefined,
   serializeAction?: Serialize | undefined,
@@ -438,7 +474,7 @@ export function sendMessage<S, A extends Action<string>>(
   let amendedAction = action;
   if (typeof config !== 'object') {
     // Legacy: sending actions not from connected part
-    config = {}; // eslint-disable-line no-param-reassign
+    config = {};
     if (action) amendedAction = amendActionType(action, config, sendMessage);
   }
   if (action) {
@@ -446,7 +482,7 @@ export function sendMessage<S, A extends Action<string>>(
       {
         type: 'ACTION',
         action: amendedAction,
-        payload: state,
+        payload: state as S,
         maxAge: config.maxAge!,
         source,
         name: config.name || name,
@@ -654,15 +690,23 @@ export function connect(preConfig: Config): ConnectResponse {
     state: S,
     liftedData?: LiftedState<S, A, unknown>,
   ) => {
-    const message: InitMessage<S, A> = {
-      type: 'INIT',
-      payload: stringify(state, config.serialize as Serialize | undefined),
-      instanceId: id,
-      source,
-    };
+    let message: InitMessage<S, A>;
+    try {
+      message = {
+        type: 'INIT',
+        payload: stringify(state, config.serialize as Serialize | undefined),
+        instanceId: id,
+        source,
+      };
+      if (liftedData && Array.isArray(liftedData)) {
+        // Legacy
+        message.action = stringify(liftedData);
+      }
+    } catch (err) {
+      reportSerializationError(id, 'INIT', err);
+      return;
+    }
     if (liftedData && Array.isArray(liftedData)) {
-      // Legacy
-      message.action = stringify(liftedData);
       message.name = config.name;
     } else {
       if (liftedData) {

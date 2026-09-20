@@ -1,6 +1,10 @@
 import { compose } from 'redux';
 import type { Action, Dispatch, Reducer, StoreEnhancer } from 'redux';
-import type { Config, EnhancerOptions, InferComposedStoreExt } from './index';
+import type {
+  Config,
+  EnhancerOptions,
+  InferComposedStoreExt,
+} from './index.js';
 
 function enhancer(options?: EnhancerOptions): StoreEnhancer {
   const config: Config = options || {};

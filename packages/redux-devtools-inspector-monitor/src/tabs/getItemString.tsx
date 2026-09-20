@@ -1,7 +1,7 @@
 import React from 'react';
 import { isCollection, isIndexed, isKeyed } from 'immutable';
 import type { JSX } from '@emotion/react/jsx-runtime';
-import isIterable from '../utils/isIterable';
+import isIterable from '../utils/isIterable.js';
 
 const IS_IMMUTABLE_KEY = '@@__IS_IMMUTABLE__@@';
 

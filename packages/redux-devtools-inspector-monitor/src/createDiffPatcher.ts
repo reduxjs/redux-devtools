@@ -16,10 +16,7 @@ const defaultPropertyFilter = (name: string, context: DiffContext) =>
   typeof (context.right as Record<string, unknown>)[name] !== 'function';
 
 const defaultDiffPatcher = new DiffPatcher({
-  arrays: { detectMove: false } as {
-    detectMove: boolean;
-    includeValueOnMove: boolean;
-  },
+  arrays: { detectMove: false },
   objectHash: defaultObjectHash,
   propertyFilter: defaultPropertyFilter,
 });
@@ -35,10 +32,7 @@ export default function createDiffPatcher(
   }
 
   return new DiffPatcher({
-    arrays: { detectMove: false } as {
-      detectMove: boolean;
-      includeValueOnMove: boolean;
-    },
+    arrays: { detectMove: false },
     objectHash: objectHash || defaultObjectHash,
     propertyFilter: propertyFilter || defaultPropertyFilter,
   });

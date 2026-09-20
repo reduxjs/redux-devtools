@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "todomvc",
-  "version": "0.2.9",
+  "version": "0.2.12",
   "description": "TodoMVC example for redux",
   "keywords": [
     "react",
@@ -25,9 +25,8 @@
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "start": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open",
-    "build": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack",
-    "lint": "eslint .",
+    "start": "webpack serve --open",
+    "build": "webpack",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -35,31 +34,27 @@
     "@redux-devtools/dock-monitor": "workspace:^",
     "@redux-devtools/log-monitor": "workspace:^",
     "classnames": "^2.5.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-redux": "^9.2.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-redux": "^9.3.0",
     "redux": "^5.0.1",
     "todomvc-app-css": "^2.4.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.8",
-    "@babel/preset-env": "^7.26.8",
-    "@babel/preset-react": "^7.26.3",
-    "@babel/preset-typescript": "^7.26.0",
-    "@types/node": "^22.13.1",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "@types/webpack-env": "^1.18.8",
-    "babel-loader": "^9.2.1",
-    "cross-env": "^7.0.3",
-    "css-loader": "^7.1.2",
-    "fork-ts-checker-webpack-plugin": "^9.0.2",
-    "html-webpack-plugin": "^5.6.3",
-    "style-loader": "^4.0.0",
-    "ts-node": "^10.9.2",
-    "typescript": "~5.7.3",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.0"
+    "@babel/core": "catalog:",
+    "@babel/preset-env": "catalog:",
+    "@babel/preset-react": "catalog:",
+    "@babel/preset-typescript": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@types/webpack-env": "catalog:",
+    "babel-loader": "catalog:",
+    "css-loader": "catalog:",
+    "html-webpack-plugin": "catalog:",
+    "style-loader": "catalog:",
+    "typescript": "catalog:",
+    "webpack": "catalog:",
+    "webpack-cli": "catalog:",
+    "webpack-dev-server": "catalog:"
   }
 }

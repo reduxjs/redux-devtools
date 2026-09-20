@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.0.0
+
+### Major Changes
+
+- 3f90241: Convert @redux-devtools/instrument to ESM
+
 ## 2.2.0
 
 ### Minor Changes

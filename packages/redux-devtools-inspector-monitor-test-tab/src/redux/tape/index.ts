@@ -1,4 +1,4 @@
-import { AssertionLocals, DispatcherLocals, WrapLocals } from '../../types';
+import { AssertionLocals, DispatcherLocals, WrapLocals } from '../../types.js';
 
 export const name = 'Tape template';
 

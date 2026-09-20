@@ -19,8 +19,8 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import type { JSX } from '@emotion/react/jsx-runtime';
-import ActionListRow from './ActionListRow';
-import ActionListHeader from './ActionListHeader';
+import ActionListRow from './ActionListRow.js';
+import ActionListHeader from './ActionListHeader.js';
 
 function getTimestamps<A extends Action<string>>(
   actions: { [actionId: number]: PerformAction<A> },
@@ -83,7 +83,7 @@ export default function ActionList<A extends Action<string>>({
   onReorderAction,
 }: Props<A>): JSX.Element {
   const nodeRef = useRef<HTMLDivElement | null>(null);
-  const prevLastActionId = useRef<number | undefined>();
+  const prevLastActionId = useRef<number | undefined>(undefined);
 
   useLayoutEffect(() => {
     if (nodeRef.current && prevLastActionId.current !== lastActionId) {
