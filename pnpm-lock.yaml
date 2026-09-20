@@ -85,6 +85,9 @@ catalogs:
       specifier: ^6.0.0
       version: 6.0.0
 
+overrides:
+  uuid@<11.1.1: ^11.1.1
+
 patchedDependencies:
   '@dnd-kit/core': bee825e5edf3dc4325af458bf5a68b629e8b0a189ea0eee259b66d28981f8a17
   '@dnd-kit/sortable': e47dc0c4389a046873ebf71cee394de1946ef0e0ee96c171579932908f628d7f
@@ -8695,13 +8698,12 @@ packages:
   utila@0.4.0:
     resolution: {integrity: sha512-Z0DbgELS9/L/75wZbro8xAnT50pBVFQZ+hUEueGDU5FN51YSCYM+jdxsfCiHjwNP/4LCDD0i/graKpeBnOXKRA==}
 
-  uuid@14.0.2:
-    resolution: {integrity: sha512-xZe/16rV4aa+HGSOCiY2YeLT1OybRLrrkL/Rqaq7p7GMVXjFh+6wN4oMYgjFmnSnhY8t6Xpdl2l9qmnHYuMHwQ==}
+  uuid@11.1.1:
+    resolution: {integrity: sha512-vIYxrBCC/N/K+Js3qSN88go7kIfNPssr/hHCesKCQNAjmgvYS2oqr69kIufEG+O4+PfezOH4EbIeHCfFov8ZgQ==}
     hasBin: true
 
-  uuid@8.3.2:
-    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
-    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+  uuid@14.0.2:
+    resolution: {integrity: sha512-xZe/16rV4aa+HGSOCiY2YeLT1OybRLrrkL/Rqaq7p7GMVXjFh+6wN4oMYgjFmnSnhY8t6Xpdl2l9qmnHYuMHwQ==}
     hasBin: true
 
   validate-npm-package-name@5.0.1:
@@ -10831,7 +10833,7 @@ snapshots:
       outvariant: 1.4.3
       pluralize: 8.0.0
       strict-event-emitter: 0.5.1
-      uuid: 8.3.2
+      uuid: 11.1.1
     optionalDependencies:
       msw: 2.15.0(@types/node@24.13.5)(typescript@7.0.2)
     transitivePeerDependencies:
@@ -16343,9 +16345,9 @@ snapshots:
 
   utila@0.4.0: {}
 
-  uuid@14.0.2: {}
+  uuid@11.1.1: {}
 
-  uuid@8.3.2: {}
+  uuid@14.0.2: {}
 
   validate-npm-package-name@5.0.1: {}
 
