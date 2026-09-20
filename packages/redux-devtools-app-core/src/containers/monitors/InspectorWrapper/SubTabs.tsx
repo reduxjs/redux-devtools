@@ -8,11 +8,11 @@ import {
   DiffTab,
 } from '@redux-devtools/inspector-monitor';
 import { Action } from 'redux';
-import { selectMonitorTab } from '../../../actions';
-import RawTab from './RawTab';
-import ChartTab from './ChartTab';
-import VisualDiffTab from './VisualDiffTab';
-import { CoreStoreState } from '../../../reducers';
+import { selectMonitorTab } from '../../../actions/index.js';
+import RawTab from './RawTab.js';
+import ChartTab from './ChartTab.js';
+import VisualDiffTab from './VisualDiffTab.js';
+import { CoreStoreState } from '../../../reducers/index.js';
 import type { Delta } from 'jsondiffpatch';
 
 type StateProps = ReturnType<typeof mapStateToProps>;

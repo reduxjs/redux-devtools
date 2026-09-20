@@ -10,18 +10,18 @@ import type { Delta, DiffContext } from 'jsondiffpatch';
 import {
   createInspectorMonitorThemeFromBase16Theme,
   resolveBase16Theme,
-} from './utils/themes';
-import type { Base16ThemeName } from './utils/themes';
-import ActionList from './ActionList';
-import ActionPreview, { Tab } from './ActionPreview';
-import getInspectedState from './utils/getInspectedState';
-import createDiffPatcher from './createDiffPatcher';
+} from './utils/themes.js';
+import type { Base16ThemeName } from './utils/themes.js';
+import ActionList from './ActionList.js';
+import ActionPreview, { Tab } from './ActionPreview.js';
+import getInspectedState from './utils/getInspectedState.js';
+import createDiffPatcher from './createDiffPatcher.js';
 import {
   DevtoolsInspectorAction,
   DevtoolsInspectorState,
   reducer,
   updateMonitorState,
-} from './redux';
+} from './redux.js';
 import { ThemeProvider } from '@emotion/react';
 
 const {
@@ -144,8 +144,10 @@ interface DefaultProps {
   invertTheme: boolean;
 }
 
-export interface DevtoolsInspectorProps<S, A extends Action<string>>
-  extends LiftedState<S, A, DevtoolsInspectorState> {
+export interface DevtoolsInspectorProps<
+  S,
+  A extends Action<string>,
+> extends LiftedState<S, A, DevtoolsInspectorState> {
   dispatch: Dispatch<
     DevtoolsInspectorAction | LiftedAction<S, A, DevtoolsInspectorState>
   >;
@@ -335,6 +337,7 @@ class DevtoolsInspector<S, A extends Action<string>> extends PureComponent<
               sortStateTreeAlphabetically,
               disableStateTreeCollection,
             }}
+            currentActionId={getCurrentActionId(this.props, monitorState)}
             monitorState={this.props.monitorState}
             updateMonitorState={this.updateMonitorState}
             onInspectPath={(path: (string | number)[]) =>

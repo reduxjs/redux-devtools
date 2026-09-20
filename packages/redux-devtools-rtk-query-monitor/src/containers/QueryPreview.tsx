@@ -5,36 +5,36 @@ import {
   RtkResourceInfo,
   SelectorsSource,
   TabOption,
-} from '../types';
-import { QueryPreviewHeader } from '../components/QueryPreviewHeader';
+} from '../types.js';
+import { QueryPreviewHeader } from '../components/QueryPreviewHeader.js';
 import {
   QueryPreviewInfo,
   QueryPreviewInfoProps,
-} from '../components/QueryPreviewInfo';
+} from '../components/QueryPreviewInfo.js';
 import {
   QueryPreviewApi,
   QueryPreviewApiProps,
-} from '../components/QueryPreviewApi';
+} from '../components/QueryPreviewApi.js';
 import {
   QueryPreviewSubscriptions,
   QueryPreviewSubscriptionsProps,
-} from '../components/QueryPreviewSubscriptions';
+} from '../components/QueryPreviewSubscriptions.js';
 import {
   QueryPreviewTags,
   QueryPreviewTagsProps,
-} from '../components/QueryPreviewTags';
-import { NoRtkQueryApi } from '../components/NoRtkQueryApi';
-import { InspectorSelectors } from '../selectors';
-import { mapProps } from './mapProps';
+} from '../components/QueryPreviewTags.js';
+import { NoRtkQueryApi } from '../components/NoRtkQueryApi.js';
+import { InspectorSelectors } from '../selectors.js';
+import { mapProps } from './mapProps.js';
 import {
   QueryPreviewActions,
   QueryPreviewActionsProps,
-} from '../components/QueryPreviewActions';
-import { isTabVisible } from '../utils/tabs';
+} from '../components/QueryPreviewActions.js';
+import { isTabVisible } from '../utils/tabs.js';
 import {
   QueryPreviewData,
   QueryPreviewDataProps,
-} from '../components/QueryPreviewData';
+} from '../components/QueryPreviewData.js';
 
 const queryPreviewCss: Interpolation<Theme> = (theme) => ({
   flex: '1 1 50%',
@@ -177,10 +177,7 @@ const tabs: ReadonlyArray<
 ];
 
 export class QueryPreview<S> extends React.PureComponent<QueryPreviewProps<S>> {
-  renderLabelWithCounter = (
-    label: React.ReactText,
-    counter: number,
-  ): string => {
+  renderLabelWithCounter = (label: string, counter: number): string => {
     let counterAsString = counter.toFixed(0);
 
     if (counterAsString.length > 3) {

@@ -11,24 +11,32 @@ import {
   TOGGLE_PERSIST,
   UPDATE_STATE,
 } from '@redux-devtools/app';
-import type { Options, OptionsMessage } from '../../options/syncOptions';
-import openDevToolsWindow, { DevToolsPosition } from '../openWindow';
-import { getReport } from '../logging';
+import type { Options, OptionsMessage } from '../../options/syncOptions.js';
+import openDevToolsWindow, { DevToolsPosition } from '../openWindow.js';
+import { getReport } from '../logging.js';
 import { Action, Dispatch, Middleware } from 'redux';
 import type {
   ContentScriptToBackgroundMessage,
   SplitMessage,
-} from '../../contentScript';
+} from '../../contentScript/index.js';
 import type {
   ErrorMessage,
   PageScriptToContentScriptMessageForwardedToMonitors,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
-} from '../../pageScript/api';
+} from '../../pageScript/api/index.js';
 import { LiftedState } from '@redux-devtools/instrument';
-import type { BackgroundAction, LiftedActionAction } from './backgroundStore';
-import type { Position } from '../../pageScript/api/openWindow';
-import type { BackgroundState } from './backgroundReducer';
-import { store } from '../index';
+import type {
+  BackgroundAction,
+  LiftedActionAction,
+} from './backgroundStore.js';
+import type { Position } from '../../pageScript/api/openWindow.js';
+import type { BackgroundState } from './backgroundReducer.js';
+import { store } from '../index.js';
+import {
+  exceedsChromeMsgSize,
+  isMessageSizeError,
+  splitMessage,
+} from '../../utils/splitMessage.js';
 
 interface TabMessageBase {
   readonly type: string;
@@ -245,61 +253,41 @@ type MonitorAction<S, A extends Action<string>> =
   | UpdateStateAction<S, A>
   | SetPersistAction;
 
-// Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
-const maxChromeMsgSize = 32 * 1024 * 1024;
+function postUpdateStateInChunks<S, A extends Action<string>>(
+  port: PanelPort,
+  action: UpdateStateAction<S, A>,
+) {
+  const { start, chunks } = splitMessage(action.request);
+  port.postMessage({
+    ...action,
+    request: start as SplitUpdateStateRequestStart<S, A>,
+  });
+  for (const chunk of chunks) {
+    port.postMessage({ ...action, request: { split: 'chunk', chunk } });
+  }
+  port.postMessage({ ...action, request: { split: 'end' } });
+}
 
 function toMonitors<S, A extends Action<string>>(action: MonitorAction<S, A>) {
+  console.log(`Message to monitors: ${action.type}`);
+
   for (const port of Object.values(connections.panel)) {
+    const chunked =
+      action.type === UPDATE_STATE && exceedsChromeMsgSize(action.request);
     try {
-      port.postMessage(action);
+      if (chunked) {
+        postUpdateStateInChunks(port, action);
+      } else {
+        port.postMessage(action);
+      }
     } catch (err) {
-      if (
-        action.type !== UPDATE_STATE ||
-        err == null ||
-        (err as Error).message !==
-          'Message length exceeded maximum allowed length.'
-      ) {
-        throw err;
+      if (!chunked && action.type === UPDATE_STATE && isMessageSizeError(err)) {
+        postUpdateStateInChunks(port, action);
+        continue;
       }
-
-      const splitMessageStart: SplitUpdateStateRequestStart<S, A> = {
-        split: 'start',
-      };
-      const toSplit: [string, string][] = [];
-      let size = 0;
-      for (const [key, value] of Object.entries(
-        action.request as unknown as Record<string, unknown>,
-      )) {
-        if (typeof value === 'string') {
-          size += value.length;
-          if (size > maxChromeMsgSize) {
-            toSplit.push([key, value]);
-            continue;
-          }
-        }
-
-        (splitMessageStart as any)[key as keyof typeof splitMessageStart] =
-          value;
-      }
-
-      port.postMessage({ ...action, request: splitMessageStart });
-
-      for (let i = 0; i < toSplit.length; i++) {
-        for (let j = 0; j < toSplit[i][1].length; j += maxChromeMsgSize) {
-          port.postMessage({
-            ...action,
-            request: {
-              split: 'chunk',
-              chunk: [
-                toSplit[i][0],
-                toSplit[i][1].substring(j, j + maxChromeMsgSize),
-              ],
-            },
-          });
-        }
-      }
-
-      port.postMessage({ ...action, request: { split: 'end' } });
+      // A dead panel port is cleaned up by its onDisconnect listener; do not
+      // let one failing port stop delivery to the others.
+      console.error(`Failed to post ${action.type} to a monitor`, err);
     }
   }
 }
@@ -315,19 +303,15 @@ interface ImportMessage {
 type ToContentScriptMessage = ImportMessage | LiftedActionAction;
 
 function toContentScript(messageBody: ToContentScriptMessage) {
+  console.log(`Message to tab ${messageBody.id}: ${messageBody.message}`);
+
   if (messageBody.message === 'DISPATCH') {
     const { message, action, id, instanceId, state } = messageBody;
     connections.tab[id!].postMessage({
       type: message,
       action,
-      state: nonReduxDispatch(
-        store,
-        message,
-        instanceId,
-        action as AppDispatchAction,
-        state,
-      ),
-      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+      state: nonReduxDispatch(store, message, instanceId, action, state),
+      id: instanceId.toString().replace(/^[^/]+\//, ''),
     });
   } else if (messageBody.message === 'IMPORT') {
     const { message, action, id, instanceId, state } = messageBody;
@@ -341,7 +325,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         action as unknown as AppDispatchAction,
         state,
       ),
-      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+      id: instanceId.toString().replace(/^[^/]+\//, ''),
     });
   } else if (messageBody.message === 'ACTION') {
     const { message, action, id, instanceId, state } = messageBody;
@@ -355,7 +339,7 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         action as unknown as AppDispatchAction,
         state,
       ),
-      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+      id: instanceId.toString().replace(/^[^/]+\//, ''),
     });
   } else if (messageBody.message === 'EXPORT') {
     const { message, action, id, instanceId, state } = messageBody;
@@ -369,26 +353,22 @@ function toContentScript(messageBody: ToContentScriptMessage) {
         action as unknown as AppDispatchAction,
         state,
       ),
-      id: instanceId.toString().replace(/^[^\/]+\//, ''),
+      id: instanceId.toString().replace(/^[^/]+\//, ''),
     });
   } else {
     const { message, action, id, instanceId, state } = messageBody;
-    connections.tab[id!].postMessage({
+    connections.tab[id].postMessage({
       type: message,
       action,
-      state: nonReduxDispatch(
-        store,
-        message,
-        instanceId,
-        action as AppDispatchAction,
-        state,
-      ),
-      id: (instanceId as number).toString().replace(/^[^\/]+\//, ''),
+      state: nonReduxDispatch(store, message, instanceId, action, state),
+      id: (instanceId as number).toString().replace(/^[^/]+\//, ''),
     });
   }
 }
 
 function toAllTabs(msg: TabMessage) {
+  console.log(`Message to all tabs: ${msg.type}`);
+
   for (const tabPort of Object.values(connections.tab)) {
     tabPort.postMessage(msg);
   }
@@ -435,6 +415,7 @@ function messaging<S, A extends Action<string>>(
   sender: chrome.runtime.MessageSender,
 ) {
   let tabId = getId(sender);
+  console.log(`Message from tab ${tabId}: ${request.type ?? request.split}`);
   if (!tabId) return;
   if (sender.frameId) tabId = `${tabId}-${sender.frameId}`;
 
@@ -445,7 +426,7 @@ function messaging<S, A extends Action<string>>(
     return;
   }
   if (request.type === 'OPEN_OPTIONS') {
-    chrome.runtime.openOptionsPage();
+    void chrome.runtime.openOptionsPage();
     return;
   }
   if (request.type === 'OPTIONS') {
@@ -471,7 +452,7 @@ function messaging<S, A extends Action<string>>(
     }
     if (!request.message) return;
     const reducerError = getReducerError();
-    chrome.notifications.create('app-error', {
+    void chrome.notifications.create('app-error', {
       type: 'basic',
       title: reducerError
         ? 'An error occurred in the reducer'
@@ -514,15 +495,23 @@ function messaging<S, A extends Action<string>>(
 function disconnect(
   type: 'tab' | 'panel',
   id: number | string,
+  port: chrome.runtime.Port,
   listener: (message: any, port: chrome.runtime.Port) => void,
 ) {
   return function disconnectListener() {
-    const p = connections[type][id];
-    if (listener && p) p.onMessage.removeListener(listener);
-    if (p) p.onDisconnect.removeListener(disconnectListener);
-    delete connections[type][id];
+    console.log(`Disconnected from ${type} ${id}`);
+
+    port.onMessage.removeListener(listener);
+    port.onDisconnect.removeListener(disconnectListener);
+
+    // A reloaded page or panel can connect under the same id before the old
+    // port's disconnect arrives. Only the port that still owns the slot may
+    // remove the instance.
+    const isCurrentPort = connections[type][id] === port;
+    if (isCurrentPort) delete connections[type][id];
+
     if (type === 'tab') {
-      if (!store.getState().instances.persisted) {
+      if (isCurrentPort && !store.getState().instances.persisted) {
         store.dispatch({ type: REMOVE_INSTANCE, id });
         toMonitors({ type: 'NA', id });
       }
@@ -541,14 +530,15 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
 
   if (port.name === 'tab') {
     id = getId(port.sender!);
+    console.log(`Connected to tab ${id}`);
     if (port.sender!.frameId) id = `${id}-${port.sender!.frameId}`;
     connections.tab[id] = port;
-    listener = (msg: ContentScriptToBackgroundMessage<S, A> | 'heartbeat') => {
-      if (msg === 'heartbeat') return;
+    listener = (msg: ContentScriptToBackgroundMessage<S, A>) => {
+      console.log(`Message from tab ${id}: ${msg.name}`);
       if (msg.name === 'INIT_INSTANCE') {
         if (typeof id === 'number') {
-          chrome.action.enable(id);
-          chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
+          void chrome.action.enable(id);
+          void chrome.action.setIcon({ tabId: id, path: 'img/logo/38x38.png' });
         }
         if (monitors > 0) port.postMessage({ type: 'START' });
 
@@ -574,19 +564,47 @@ function onConnect<S, A extends Action<string>>(port: chrome.runtime.Port) {
       }
     };
     port.onMessage.addListener(listener);
-    port.onDisconnect.addListener(disconnect('tab', id, listener));
+    port.onDisconnect.addListener(disconnect('tab', id, port, listener));
   } else if (port.name && port.name.indexOf('monitor') === 0) {
     // devpanel
     id = getId(port.sender!, port.name);
+    console.log(`Connected to monitor ${id}`);
     connections.panel[id] = port;
     monitors++;
     toAllTabs({ type: 'START' });
-    listener = (msg: BackgroundAction | 'heartbeat') => {
-      if (msg === 'heartbeat') return;
+    listener = (msg: BackgroundAction) => {
+      console.log(`Message from monitor ${id}: ${msg.type}`);
       store.dispatch(msg);
     };
     port.onMessage.addListener(listener);
-    port.onDisconnect.addListener(disconnect('panel', id, listener));
+    port.onDisconnect.addListener(disconnect('panel', id, port, listener));
+
+    const { current } = store.getState().instances;
+    if (current !== 'default') {
+      const connectionId = Object.entries(
+        store.getState().instances.connections,
+      ).find(([, instanceIds]) => instanceIds.includes(current))?.[0];
+      const options = store.getState().instances.options[current];
+      const state = store.getState().instances.states[current];
+      const { actionsById, computedStates, committedState, ...rest } = state;
+      toMonitors({
+        type: UPDATE_STATE,
+        request: {
+          type: 'STATE',
+          payload: rest as Omit<
+            LiftedState<S, A, unknown>,
+            'actionsById' | 'computedStates' | 'committedState'
+          >,
+          source: '@devtools-page',
+          instanceId:
+            typeof current === 'number' ? current.toString() : current,
+          actionsById: stringifyJSON(actionsById, options.serialize),
+          computedStates: stringifyJSON(computedStates, options.serialize),
+          committedState: typeof committedState !== 'undefined',
+        },
+        id: connectionId ?? current,
+      });
+    }
   }
 }
 
@@ -596,7 +614,7 @@ chrome.runtime.onMessage.addListener(messaging);
 chrome.runtime.onMessageExternal.addListener(messaging);
 
 chrome.notifications.onClicked.addListener((id) => {
-  chrome.notifications.clear(id);
+  void chrome.notifications.clear(id);
   openDevToolsWindow('devtools-window');
 });
 

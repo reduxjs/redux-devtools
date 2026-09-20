@@ -1,6 +1,6 @@
-import React, { Component, ComponentType } from 'react';
-import Editor from './';
-import Tabs from '../Tabs';
+import React, { Component } from 'react';
+import Editor from './index.js';
+import Tabs from '../Tabs/index.js';
 
 const value1 = `
   const func1 = () => {}
@@ -20,7 +20,6 @@ interface TabProps {
   lineNumbers: boolean;
 }
 
-/* eslint-disable react/prop-types */
 export default class WithTabs extends Component<WithTabsProps> {
   state = {
     selected: 'Function 1',
@@ -33,12 +32,12 @@ export default class WithTabs extends Component<WithTabsProps> {
         tabs={[
           {
             name: 'Function 1',
-            component: Editor as unknown as ComponentType<TabProps>,
+            component: Editor,
             selector: () => ({ value: value1, lineNumbers }),
           },
           {
             name: 'Function 2',
-            component: Editor as unknown as ComponentType<TabProps>,
+            component: Editor,
             selector: () => ({ value: value2, lineNumbers }),
           },
         ]}

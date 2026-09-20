@@ -4,31 +4,163 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+
+permissions:
+  contents: read
+  # paths-filter lists changed files through the pull request API.
+  pull-requests: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  changes:
+    name: Check for changes
+    runs-on: ubuntu-24.04
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        id: filter
         with:
-          fetch-depth: 0
-      - uses: nrwl/nx-set-shas@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+          filters: |
+            code:
+              - '**'
+              - '!docs/**'
+              - '!**/*.md'
+
+  lint-format:
+    name: Lint and format
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Must run before `setup-node`, or `cache: 'pnpm'` cannot locate the store.
+      - uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
         with:
-          node-version: 'lts/*'
+          install: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.21.0'
           cache: 'pnpm'
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+
       - name: Check formatting
         run: pnpm run format:check
+
+  build:
+    name: Build, type-check, and test
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Must run before `setup-node`, or `cache: 'pnpm'` cannot locate the store.
+      - uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+        with:
+          install: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.21.0'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Build
         run: pnpm run build:all
-      - name: Lint
-        run: pnpm run lint:all
+
+      # Demos, the extension, and some tests import other workspace packages
+      # through their built `lib/`, so these steps run after the build.
+      - name: Type-check
+        run: pnpm --recursive run type-check
+
       - name: Test
-        uses: coactions/setup-xvfb@v1
+        run: pnpm run test
+
+      # `--config.ignore-scripts=true` skips each package's `prepack` (clean +
+      # rebuild); the build step above already produced `lib/`.
+      - name: Check published package types
+        run: |
+          for pkg in redux-devtools-instrument react-json-tree redux-devtools-app-core redux-devtools-ui redux-devtools-inspector-monitor; do
+            pnpm --filter "./packages/$pkg" --config.ignore-scripts=true pack --out "$RUNNER_TEMP/$pkg.tgz"
+            pnpm exec attw "$RUNNER_TEMP/$pkg.tgz" --profile esm-only --format table
+          done
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          run: pnpm run test:all
+          name: extension-dist
+          path: |
+            extension/dist
+            extension/firefox/dist
+          retention-days: 1
+
+  test-extension-browser:
+    name: Test extension (${{ matrix.browser }} ${{ matrix.channel }})
+    needs: [changes, build]
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - browser: chrome
+            channel: stable
+          - browser: chrome
+            channel: beta
+          - browser: firefox
+            channel: stable
+          - browser: electron
+            channel: pinned
+    env:
+      CHROME_CHANNEL: ${{ matrix.channel }}
+      FIREFOX_CHANNEL: ${{ matrix.channel }}
+      PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Must run before `setup-node`, or `cache: 'pnpm'` cannot locate the store.
+      - uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+        with:
+          install: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.21.0'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: extension-dist
+          path: extension
+
+      # Browsers are downloaded by @puppeteer/browsers on first use and Electron
+      # by the `electron` package on first require; keep both between runs.
+      # The key changes every run so the newest builds get saved.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ${{ env.PUPPETEER_CACHE_DIR }}
+            ~/.cache/electron
+          key: browsers-${{ runner.os }}-${{ matrix.browser }}-${{ matrix.channel }}-${{ github.run_id }}
+          restore-keys: browsers-${{ runner.os }}-${{ matrix.browser }}-${{ matrix.channel }}-
+
+      # Chrome's user-namespace sandbox is blocked by default on Ubuntu 24.04.
+      - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
+      - if: matrix.browser == 'electron'
+        name: Download Electron
+        run: pnpm --filter remotedev-redux-devtools-extension exec install-electron
+
+      # xvfb is needed because the docked-DevTools tests and Electron run headful.
+      - name: Run Puppeteer e2e tests
+        uses: coactions/setup-xvfb@b6b4fcfb9f5a895edadc3bc76318fae0ac17c8b3 # v1.0.1
+        with:
+          run: pnpm --filter remotedev-redux-devtools-extension run test:e2e:${{ matrix.browser }}

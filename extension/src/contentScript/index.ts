@@ -1,30 +1,38 @@
-import '../chromeApiMock';
+import '../chromeApiMock.js';
 import {
   getOptions,
   isAllowed,
   Options,
-  prefetchOptions,
   prepareOptionsForPage,
-} from '../options/syncOptions';
-import type { TabMessage } from '../background/store/apiMiddleware';
+} from '../options/syncOptions.js';
+import type { TabMessage } from '../background/store/apiMiddleware.js';
 import type {
   PageScriptToContentScriptMessage,
   PageScriptToContentScriptMessageWithoutDisconnect,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
-} from '../pageScript/api';
+} from '../pageScript/api/index.js';
 import { Action } from 'redux';
 import {
   CustomAction,
   DispatchAction as AppDispatchAction,
 } from '@redux-devtools/app';
 import { LiftedState } from '@redux-devtools/instrument';
+import {
+  exceedsChromeMsgSize,
+  isMessageSizeError,
+  splitMessage,
+} from '../utils/splitMessage.js';
+import {
+  createReconnectingPort,
+  ReconnectingPort,
+} from '../utils/reconnectingPort.js';
 
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';
-// Chrome message limit is 64 MB, but we're using 32 MB to include other object's parts
-const maxChromeMsgSize = 32 * 1024 * 1024;
-let connected = false;
-let bg: chrome.runtime.Port | undefined;
+let bg:
+  | ReconnectingPort<ContentScriptToBackgroundMessage<unknown, Action>>
+  | undefined;
+const knownInstanceIds = new Set<number>();
 
 declare global {
   interface Window {
@@ -129,90 +137,117 @@ function postToPageScript(message: ContentScriptToPageScriptMessage) {
   window.postMessage(message, '*');
 }
 
-function connect() {
-  // Connect to the background script
-  connected = true;
+function sendOptionsToPage() {
+  getOptions((options) => {
+    postToPageScript({
+      type: 'OPTIONS',
+      options: prepareOptionsForPage(options),
+      id: undefined,
+      source,
+    });
+  });
+}
+
+function connectPort() {
   const name = 'tab';
   if (window.devToolsExtensionID) {
-    bg = chrome.runtime.connect(window.devToolsExtensionID, { name });
-  } else {
-    bg = chrome.runtime.connect({ name });
+    return chrome.runtime.connect(window.devToolsExtensionID, { name });
   }
+  return chrome.runtime.connect({ name });
+}
 
-  // Relay background script messages to the page script
-  bg.onMessage.addListener((message: TabMessage) => {
-    if ('action' in message) {
-      if (message.type === 'DISPATCH') {
-        postToPageScript({
-          type: message.type,
-          payload: message.action,
-          state: message.state,
-          id: message.id,
-          source,
-        });
-      } else if (message.type === 'ACTION') {
-        postToPageScript({
-          type: message.type,
-          payload: message.action,
-          state: message.state,
-          id: message.id,
-          source,
-        });
-      } else {
-        postToPageScript({
-          type: message.type,
-          payload: message.action,
-          state: message.state,
-          id: message.id,
-          source,
-        });
+function getBackground() {
+  if (bg) return bg;
+  bg = createReconnectingPort<
+    ContentScriptToBackgroundMessage<unknown, Action>,
+    TabMessage
+  >({
+    connect: connectPort,
+    onMessage: relayToPage,
+    // A restarted service worker has forgotten every instance. Re-announce
+    // them so it enables the action icon and, if a monitor is open, asks the
+    // page for its full state again.
+    onConnect: (post) => {
+      for (const instanceId of knownInstanceIds) {
+        post({ name: 'INIT_INSTANCE', instanceId });
       }
-    } else if (message.type === 'OPTIONS') {
+    },
+    onGiveUp: handleGiveUp,
+  });
+  return bg;
+}
+
+// Relay background script messages to the page script
+function relayToPage(message: TabMessage) {
+  if ('action' in message) {
+    if (message.type === 'DISPATCH') {
       postToPageScript({
         type: message.type,
-        options: prepareOptionsForPage(message.options),
-        id: undefined,
+        payload: message.action,
+        state: message.state,
+        id: message.id,
+        source,
+      });
+    } else if (message.type === 'ACTION') {
+      postToPageScript({
+        type: message.type,
+        payload: message.action,
+        state: message.state,
+        id: message.id,
         source,
       });
     } else {
       postToPageScript({
         type: message.type,
+        payload: message.action,
         state: message.state,
         id: message.id,
         source,
       });
     }
-  });
-
-  bg.onDisconnect.addListener(handleDisconnect);
+  } else if (message.type === 'OPTIONS') {
+    postToPageScript({
+      type: message.type,
+      options: prepareOptionsForPage(message.options),
+      id: undefined,
+      source,
+    });
+  } else {
+    postToPageScript({
+      type: message.type,
+      state: message.state,
+      id: message.id,
+      source,
+    });
+  }
 }
 
-function handleDisconnect() {
+// The extension was reloaded, updated, or removed: this content script belongs
+// to a dead extension context and can never reach a background again. Tell the
+// page to stop relaying; the next page load gets a fresh content script.
+function handleGiveUp() {
   window.removeEventListener('message', handleMessages);
   window.postMessage({ type: 'STOP', failed: true, source }, '*');
+  knownInstanceIds.clear();
   bg = undefined;
 }
 
 interface SplitMessageBase {
   readonly type?: never;
+  readonly instanceId: number | undefined;
+  readonly source: typeof pageSource;
 }
 
 interface SplitMessageStart extends SplitMessageBase {
-  readonly instanceId: number;
-  readonly source: typeof pageSource;
   readonly split: 'start';
 }
 
 interface SplitMessageChunk extends SplitMessageBase {
-  readonly instanceId: number;
-  readonly source: typeof pageSource;
   readonly split: 'chunk';
   readonly chunk: [string, string];
 }
 
 interface SplitMessageEnd extends SplitMessageBase {
-  readonly instanceId: number;
-  readonly source: typeof pageSource;
   readonly split: 'end';
 }
 
@@ -221,58 +256,51 @@ export type SplitMessage =
   | SplitMessageChunk
   | SplitMessageEnd;
 
-function tryCatch<S, A extends Action<string>>(
-  fn: (
-    args:
-      | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
-      | SplitMessage,
-  ) => void,
+type SendableMessage<S, A extends Action<string>> =
+  | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
+  | SplitMessage;
+
+function sendInChunks<S, A extends Action<string>>(
+  fn: (args: SendableMessage<S, A>) => void,
   args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>,
 ) {
+  const instanceId = 'instanceId' in args ? args.instanceId : undefined;
+  const { start, chunks } = splitMessage(args);
+  fn(start as unknown as SplitMessageStart);
+  for (const chunk of chunks) {
+    fn({ instanceId, source: pageSource, split: 'chunk', chunk });
+  }
+  fn({ instanceId, source: pageSource, split: 'end' });
+}
+
+function tryCatch<S, A extends Action<string>>(
+  fn: (args: SendableMessage<S, A>) => void,
+  args: PageScriptToContentScriptMessageWithoutDisconnect<S, A>,
+) {
+  const chunked = exceedsChromeMsgSize(args);
+  let failure: unknown;
   try {
-    return fn(args);
+    if (chunked) {
+      sendInChunks(fn, args);
+    } else {
+      fn(args);
+    }
+    return;
   } catch (err) {
-    if (
-      (err as Error).message ===
-      'Message length exceeded maximum allowed length.'
-    ) {
-      const instanceId = (args as any).instanceId;
-      const newArgs = {
-        split: 'start',
-      };
-      const toSplit: [string, string][] = [];
-      let size = 0;
-      let arg;
-      Object.keys(args).map((key) => {
-        arg = args[key as keyof typeof args];
-        if (typeof arg === 'string') {
-          size += arg.length;
-          if (size > maxChromeMsgSize) {
-            toSplit.push([key, arg]);
-            return;
-          }
-        }
-        newArgs[key as keyof typeof newArgs] = arg;
-      });
-      fn(newArgs as any);
-      for (let i = 0; i < toSplit.length; i++) {
-        for (let j = 0; j < toSplit[i][1].length; j += maxChromeMsgSize) {
-          fn({
-            instanceId,
-            source: pageSource,
-            split: 'chunk',
-            chunk: [toSplit[i][0], toSplit[i][1].substr(j, maxChromeMsgSize)],
-          });
-        }
+    failure = err;
+    if (!chunked && isMessageSizeError(err)) {
+      try {
+        sendInChunks(fn, args);
+        return;
+      } catch (chunkErr) {
+        failure = chunkErr;
       }
-      return fn({ instanceId, source: pageSource, split: 'end' });
     }
-    handleDisconnect();
-    /* eslint-disable no-console */
-    if (process.env.NODE_ENV !== 'production') {
-      console.error('Failed to send message', err);
-    }
-    /* eslint-enable no-console */
+  }
+  // Drop this message but keep relaying. A real port loss is handled by the
+  // reconnecting port, which queues and redelivers.
+  if (process.env.NODE_ENV !== 'production') {
+    console.error('Failed to send message', failure);
   }
 }
 
@@ -295,7 +323,9 @@ export type ContentScriptToBackgroundMessage<S, A extends Action<string>> =
 function postToBackground<S, A extends Action<string>>(
   message: ContentScriptToBackgroundMessage<S, A>,
 ) {
-  bg!.postMessage(message);
+  getBackground().post(
+    message as ContentScriptToBackgroundMessage<unknown, Action>,
+  );
 }
 
 function send<S, A extends Action<string>>(
@@ -303,17 +333,20 @@ function send<S, A extends Action<string>>(
     | PageScriptToContentScriptMessageWithoutDisconnect<S, A>
     | SplitMessage,
 ) {
-  if (!connected) connect();
   if (message.type === 'INIT_INSTANCE') {
-    getOptions((options) => {
-      postToPageScript({
-        type: 'OPTIONS',
-        options: prepareOptionsForPage(options),
-        id: undefined,
-        source,
+    sendOptionsToPage();
+    knownInstanceIds.add(message.instanceId);
+    const background = getBackground();
+    // While disconnected, onConnect re-announces every known instance, so
+    // only post directly when the port is already open.
+    if (background.isConnected()) {
+      background.post({
+        name: 'INIT_INSTANCE',
+        instanceId: message.instanceId,
       });
-    });
-    postToBackground({ name: 'INIT_INSTANCE', instanceId: message.instanceId });
+    } else {
+      background.ensureConnected();
+    }
   } else {
     postToBackground({ name: 'RELAY', message });
   }
@@ -330,20 +363,17 @@ function handleMessages<S, A extends Action<string>>(
   const message = event.data;
   if (message.source !== pageSource) return;
   if (message.type === 'DISCONNECT') {
-    if (bg) {
-      bg.disconnect();
-      connected = false;
-    }
+    bg?.disconnect();
+    bg = undefined;
+    knownInstanceIds.clear();
     return;
   }
 
   tryCatch(send, message);
 }
 
-prefetchOptions();
+// Push options to the page before any store is created so the first store on a
+// denied host is not instrumented.
+sendOptionsToPage();
 
 window.addEventListener('message', handleMessages, false);
-
-setInterval(() => {
-  bg?.postMessage('heartbeat');
-}, 15000);

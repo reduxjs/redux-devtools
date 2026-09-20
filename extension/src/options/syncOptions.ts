@@ -1,4 +1,4 @@
-import { FilterState, FilterStateValue } from '../pageScript/api/filters';
+import { FilterState, FilterStateValue } from '../pageScript/api/filters.js';
 
 export interface Options {
   readonly useEditor: number;
@@ -46,9 +46,9 @@ export const saveOption = <K extends keyof Options>(
   key: K,
   value: Options[K],
 ) => {
-  let obj: { [K1 in keyof Options]?: Options[K1] } = {};
+  const obj: { [K1 in keyof Options]?: Options[K1] } = {};
   obj[key] = value;
-  chrome.storage.sync.set(obj);
+  void chrome.storage.sync.set(obj);
   options![key] = value;
   for (const subscriber of subscribers) {
     subscriber(options!);
@@ -75,7 +75,7 @@ const migrateOldOptions = (oldOptions: OldOrNewOptions): Options => ({
 export const getOptions = (callback: (options: Options) => void) => {
   if (options) callback(options);
   else {
-    chrome.storage.sync.get(
+    chrome.storage.sync.get<OldOrNewOptions>(
       {
         useEditor: 0,
         editor: '',
@@ -92,14 +92,12 @@ export const getOptions = (callback: (options: Options) => void) => {
         showContextMenus: true,
       },
       function (items) {
-        options = migrateOldOptions(items as OldOrNewOptions);
+        options = migrateOldOptions(items);
         callback(options);
       },
     );
   }
 };
-
-export const prefetchOptions = () => getOptions(() => {});
 
 export const subscribeToOptions = (callback: (options: Options) => void) => {
   subscribers = subscribers.concat(callback);

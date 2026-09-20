@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import styled from 'styled-components';
-import { Meta, StoryObj } from '@storybook/react';
+import styled from '@emotion/styled';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import { MdPlayArrow } from 'react-icons/md';
 import { MdFiberManualRecord } from 'react-icons/md';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
@@ -14,12 +14,12 @@ import {
   Slider,
   SegmentedControl,
   Tabs as TabsComponent,
-} from '../';
-import { options } from '../Select/options';
-import { simple10Tabs } from '../Tabs/data';
-import { BorderPosition } from './styles/Toolbar';
-import { TooltipPosition } from '../Button/Button';
-import { Position } from '../Tabs/Tabs';
+} from '../index.js';
+import { options } from '../Select/options.js';
+import { simple10Tabs } from '../Tabs/data.js';
+import { BorderPosition } from './styles/Toolbar.js';
+import { TooltipPosition } from '../Button/Button.js';
+import { Position } from '../Tabs/Tabs.js';
 
 const Container = styled.div`
   display: flex;
@@ -52,17 +52,11 @@ interface TemplateArgs {
 
 export const Default: StoryObj<TemplateArgs> = {
   render: ({
-    // eslint-disable-next-line react/prop-types
     borderPosition,
-    // eslint-disable-next-line react/prop-types
     title,
-    // eslint-disable-next-line react/prop-types
     tooltipPosition,
-    // eslint-disable-next-line react/prop-types
     disabled,
-    // eslint-disable-next-line react/prop-types
     onClick,
-    // eslint-disable-next-line react/prop-types
     label,
   }) => (
     <Container>
@@ -140,27 +134,16 @@ interface TabsTemplateArgs {
 
 export const Tabs: StoryObj<TabsTemplateArgs> = {
   render: ({
-    // eslint-disable-next-line react/prop-types
     title,
-    // eslint-disable-next-line react/prop-types
     tooltipPosition,
-    // eslint-disable-next-line react/prop-types
     disabled,
-    // eslint-disable-next-line react/prop-types
     buttonOnClick,
-    // eslint-disable-next-line react/prop-types
     label,
-    // eslint-disable-next-line react/prop-types
     selected,
-    // eslint-disable-next-line react/prop-types
     main,
-    // eslint-disable-next-line react/prop-types
     tabsOnClick,
-    // eslint-disable-next-line react/prop-types
     collapsible,
-    // eslint-disable-next-line react/prop-types
     position,
-    // eslint-disable-next-line react/prop-types
   }) => (
     <Container>
       <Toolbar>
@@ -250,31 +233,18 @@ interface WithSliderTemplateArgs {
 
 export const WithSlider: StoryObj<WithSliderTemplateArgs> = {
   render: ({
-    // eslint-disable-next-line react/prop-types
     title,
-    // eslint-disable-next-line react/prop-types
     tooltipPosition,
-    // eslint-disable-next-line react/prop-types
     playOnClick,
-    // eslint-disable-next-line react/prop-types
     value,
-    // eslint-disable-next-line react/prop-types
     min,
-    // eslint-disable-next-line react/prop-types
     max,
-    // eslint-disable-next-line react/prop-types
     label,
-    // eslint-disable-next-line react/prop-types
     withValue,
-    // eslint-disable-next-line react/prop-types
     onChange,
-    // eslint-disable-next-line react/prop-types
     previousStateOnClick,
-    // eslint-disable-next-line react/prop-types
     nextStateOnClick,
-    // eslint-disable-next-line react/prop-types
     selected,
-    // eslint-disable-next-line react/prop-types
     segmentedControlOnClick,
   }) => (
     <Container>

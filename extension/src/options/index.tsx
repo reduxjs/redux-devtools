@@ -1,18 +1,18 @@
-import '../chromeApiMock';
+import '../chromeApiMock.js';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import OptionsComponent from './Options';
+import OptionsComponent from './Options.js';
 import {
   getOptions,
   Options,
   OptionsMessage,
   saveOption,
   subscribeToOptions,
-} from './syncOptions';
+} from './syncOptions.js';
 
 subscribeToOptions((options) => {
   const message: OptionsMessage = { type: 'OPTIONS', options };
-  chrome.runtime.sendMessage(message);
+  void chrome.runtime.sendMessage(message);
 });
 
 const renderOptions = (options: Options) => {

@@ -1,5 +1,12 @@
 # react-json-tree-example
 
+## 1.1.10
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - react-json-tree@0.20.0
+
 ## 1.1.9
 
 ### Patch Changes

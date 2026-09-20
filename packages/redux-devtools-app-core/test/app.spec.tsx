@@ -1,26 +1,27 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, Reducer } from 'redux';
 import { render, screen, within } from '@testing-library/react';
-import App from '../src/containers/App';
-import { exportStateMiddleware } from '../src/middlewares/exportState';
-import { coreReducers } from '../src/reducers';
-import { DATA_TYPE_KEY } from '../src/constants/dataTypes';
-import { stringifyJSON } from '../src/utils/stringifyJSON';
+import App from '../src/containers/App.js';
+import { exportStateMiddleware } from '../src/middlewares/exportState.js';
+import { coreReducers } from '../src/reducers/index.js';
+import { DATA_TYPE_KEY } from '../src/constants/dataTypes.js';
+import { stringifyJSON } from '../src/utils/stringifyJSON.js';
 import { combineReducers } from 'redux';
-import { CoreStoreAction, CoreStoreState } from '../lib/types';
+import { CoreStoreAction, CoreStoreState } from '../src/index.js';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+    addListener: vi.fn(), // deprecated
+    removeListener: vi.fn(), // deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
   })),
 });
 

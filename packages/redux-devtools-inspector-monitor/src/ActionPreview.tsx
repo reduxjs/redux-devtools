@@ -5,11 +5,11 @@ import type { LabelRenderer } from 'react-json-tree';
 import { PerformAction } from '@redux-devtools/core';
 import type { Delta } from 'jsondiffpatch';
 import type { JSX } from '@emotion/react/jsx-runtime';
-import { DEFAULT_STATE, DevtoolsInspectorState } from './redux';
-import ActionPreviewHeader from './ActionPreviewHeader';
-import DiffTab from './tabs/DiffTab';
-import StateTab from './tabs/StateTab';
-import ActionTab from './tabs/ActionTab';
+import { DEFAULT_STATE, DevtoolsInspectorState } from './redux.js';
+import ActionPreviewHeader from './ActionPreviewHeader.js';
+import DiffTab from './tabs/DiffTab.js';
+import StateTab from './tabs/StateTab.js';
+import ActionTab from './tabs/ActionTab.js';
 
 export interface TabComponentProps<S, A extends Action<string>> {
   labelRenderer: LabelRenderer;
@@ -17,6 +17,7 @@ export interface TabComponentProps<S, A extends Action<string>> {
   actions: { [actionId: number]: PerformAction<A> };
   selectedActionId: number | null;
   startActionId: number | null;
+  currentActionId: number;
   base16Theme: Base16Theme;
   invertTheme: boolean;
   isWideLayout: boolean;
@@ -64,6 +65,7 @@ interface Props<S, A extends Action<string>> {
   actions: { [actionId: number]: PerformAction<A> };
   selectedActionId: number | null;
   startActionId: number | null;
+  currentActionId: number;
   dataTypeKey: string | symbol | undefined;
   monitorState: DevtoolsInspectorState;
   updateMonitorState: (monitorState: Partial<DevtoolsInspectorState>) => void;
@@ -95,6 +97,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
       actions,
       selectedActionId,
       startActionId,
+      currentActionId,
       computedStates,
       base16Theme,
       invertTheme,
@@ -108,10 +111,10 @@ class ActionPreview<S, A extends Action<string>> extends Component<
 
     const renderedTabs: Tab<S, A>[] =
       typeof tabs === 'function'
-        ? tabs(DEFAULT_TABS as Tab<S, A>[])
+        ? tabs(DEFAULT_TABS)
         : tabs
           ? tabs
-          : (DEFAULT_TABS as Tab<S, A>[]);
+          : DEFAULT_TABS;
 
     const { component: TabComponent } =
       renderedTabs.find((tab) => tab.name === tabName) ||
@@ -150,6 +153,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
                 actions,
                 selectedActionId,
                 startActionId,
+                currentActionId,
                 base16Theme,
                 invertTheme,
                 isWideLayout,

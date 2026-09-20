@@ -1,5 +1,50 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- 12849a4: Convert monitors to ESM
+
+### Patch Changes
+
+- Updated dependencies [d61d31a]
+- Updated dependencies [804e729]
+- Updated dependencies [12849a4]
+  - @redux-devtools/ui@3.0.0
+  - @redux-devtools/inspector-monitor@7.0.0
+
+## 5.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+- Updated dependencies [20883e5]
+  - @redux-devtools/ui@2.0.0
+  - @redux-devtools/inspector-monitor@6.1.2
+
+## 4.1.1
+
+### Patch Changes
+
+- @redux-devtools/inspector-monitor@6.1.1
+
+## 4.1.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/inspector-monitor@7.0.0
+  - @redux-devtools/ui@1.4.0
+
 ## 4.0.0
 
 ### Major Changes

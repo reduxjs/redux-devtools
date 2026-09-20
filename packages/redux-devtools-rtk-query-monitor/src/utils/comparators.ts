@@ -1,5 +1,5 @@
 import { QueryStatus } from '@reduxjs/toolkit/query';
-import { RtkResourceInfo, SelectOption } from '../types';
+import { RtkResourceInfo, SelectOption } from '../types.js';
 
 export interface Comparator<T> {
   (a: T, b: T): number;

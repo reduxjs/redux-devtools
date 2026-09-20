@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { ArrowUpIcon } from './ArrowUpIcon';
+import { ArrowUpIcon } from './ArrowUpIcon.js';
 
 export interface SortOrderButtonProps {
   readonly isAsc?: boolean;
@@ -11,7 +11,7 @@ export function SortOrderButton({
   isAsc,
   onChange,
   id,
-}: SortOrderButtonProps): JSX.Element {
+}: SortOrderButtonProps): React.JSX.Element {
   const handleButtonClick = (): void => {
     if (!isAsc) {
       onChange(true);

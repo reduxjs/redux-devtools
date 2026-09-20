@@ -6,9 +6,9 @@ Based on:
  http://codepen.io/thebabydino/pen/YPOPxr
 */
 
-import { css, ThemedStyledProps } from 'styled-components';
-import { prefixSelectors } from '../../utils/autoPrefix';
-import { Theme } from '../../themes/default';
+import { css } from '@emotion/react';
+import { prefixSelectors } from '../../utils/autoPrefix.js';
+import { Theme } from '../../themes/default.js';
 
 export interface StyleProps {
   percent: number;
@@ -21,7 +21,7 @@ export const style = ({
   percent,
   disabled,
   withLabel,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
+}: StyleProps & { theme: Theme }) => css`
   display: block;
   width: 100%;
   position: relative;
@@ -94,7 +94,7 @@ export const style = ({
   }`,
   )}
 
- ${prefixSelectors(
+  ${prefixSelectors(
     'input:focus:not(:active)',
     ['webkit-slider-thumb', 'moz-range-thumb', 'ms-thumb'],
     `{

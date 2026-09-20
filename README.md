@@ -24,7 +24,7 @@ It can be used as a browser extension (for [Chrome](https://chrome.google.com/we
 
 ## Development
 
-This is a monorepo powered by [pnpm](https://pnpm.io/) and [Nx](https://nx.dev/). [Install pnpm](https://pnpm.io/installation) and run `pnpm install` to get started. Each package's dependencies need to be built before the package itself can be built. You can either build all the packages (i.e., `pnpm run build:all`) or use Nx commands to build only the packages necessary for the packages you're working on (i.e., `pnpm nx build remotedev-redux-devtools-extension`).
+This is a monorepo powered by [pnpm](https://pnpm.io/). [Install pnpm](https://pnpm.io/installation) and run `pnpm install` to get started. Each package's dependencies need to be built before the package itself can be built. You can either build all the packages (i.e., `pnpm run build:all`) or use pnpm workspace commands to build only the packages necessary for the packages you're working on (i.e., `pnpm --filter "remotedev-redux-devtools-extension" build`).
 
 ## Backers
 

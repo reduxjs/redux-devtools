@@ -51,7 +51,7 @@ export default function persistState<S, A extends Action<string>, MonitorState>(
           next(reducer, initialState);
         }
       } catch (e) {
-        console.warn('Could not read debug session from localStorage:', e); // eslint-disable-line no-console
+        console.warn('Could not read debug session from localStorage:', e);
         try {
           localStorage.removeItem(key);
         } finally {
@@ -72,7 +72,7 @@ export default function persistState<S, A extends Action<string>, MonitorState>(
           try {
             localStorage.setItem(key, JSON.stringify(store.getState()));
           } catch (e) {
-            console.warn('Could not write debug session to localStorage:', e); // eslint-disable-line no-console
+            console.warn('Could not write debug session to localStorage:', e);
           }
 
           return action;

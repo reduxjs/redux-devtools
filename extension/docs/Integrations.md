@@ -12,6 +12,7 @@ Mostly functional:
 - [PureScript](#purescript)
 - [Reductive](#reductive)
 - [Aurelia](#aurelia)
+- [Fluxor](#fluxor) (.NET)
 
 In progress:
 
@@ -299,4 +300,28 @@ export function configure(aurelia: Aurelia) {
 
   aurelia.start().then(() => aurelia.setRoot());
 }
+```
+
+### [Fluxor](https://github.com/mrpmorris/fluxor) (.NET)
+
+#### [Fluxor.Blazor.Web.ReduxDevTools](https://github.com/mrpmorris/Fluxor/tree/master/Source/Lib/Fluxor.Blazor.Web.ReduxDevTools)
+ 1. Add the `Fluxor.Blazor.Web.ReduxDevTools` nuget package to your project. 
+ 2. (Optional) Make it conditional on `DEBUG` mode.
+
+```
+ <ItemGroup Condition="$(Configuration)=='Debug'">
+    <PackageReference Include="Fluxor.Blazor.Web.ReduxDevTools" Version="...." />
+  </ItemGroup>
+```
+
+ 3. Use the `UseReduxDevTools` extension on the Fluxor options.
+
+```c#
+services.AddFluxor(o =>
+    {
+        o.ScanAssemblies(typeof(SomeType).Assembly);
+#if DEBUG
+        o.UseReduxDevTools();
+#endif
+    });
 ```

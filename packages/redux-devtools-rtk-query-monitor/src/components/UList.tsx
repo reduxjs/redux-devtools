@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export type UListProps = React.HTMLAttributes<HTMLUListElement>;
 
-export function UList(props: UListProps): JSX.Element {
+export function UList(props: UListProps): React.JSX.Element {
   return (
     <ul
       {...props}

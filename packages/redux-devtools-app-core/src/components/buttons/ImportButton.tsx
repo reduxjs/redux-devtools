@@ -2,7 +2,7 @@ import React, { ChangeEventHandler, Component, RefCallback } from 'react';
 import { connect, ResolveThunks } from 'react-redux';
 import { Button } from '@redux-devtools/ui';
 import { TiUpload } from 'react-icons/ti';
-import { importState } from '../../actions';
+import { importState } from '../../actions/index.js';
 
 type DispatchProps = ResolveThunks<typeof actionCreators>;
 type Props = DispatchProps;

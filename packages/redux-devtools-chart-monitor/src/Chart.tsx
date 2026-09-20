@@ -5,7 +5,7 @@ import { base16Themes } from 'react-base16-styling';
 import type { Base16Theme } from 'react-base16-styling';
 import { Action, Dispatch } from 'redux';
 import { LiftedAction, LiftedState } from '@redux-devtools/core';
-import { ChartMonitorState } from './reducers';
+import { ChartMonitorState } from './reducers.js';
 
 const wrapperStyle = {
   width: '100%',
@@ -13,8 +13,7 @@ const wrapperStyle = {
 };
 
 export interface Props<S, A extends Action<string>>
-  extends LiftedState<S, A, ChartMonitorState>,
-    Options {
+  extends LiftedState<S, A, ChartMonitorState>, Options {
   dispatch: Dispatch<LiftedAction<S, A, ChartMonitorState>>;
   preserveScrollTop: boolean;
   select: (state: S) => unknown;
@@ -27,15 +26,13 @@ export interface Props<S, A extends Action<string>>
 
 class Chart<S, A extends Action<string>> extends Component<Props<S, A>> {
   divRef = createRef<HTMLDivElement>();
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   renderChart?: (state?: {} | null | undefined) => void;
 
   componentDidMount() {
     const { select, state, defaultIsVisible } = this.props;
     this.renderChart = tree(this.divRef.current!, this.props);
     if (defaultIsVisible) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-      this.renderChart(select(state!) as {} | null | undefined);
+      this.renderChart(select(state!));
     }
   }
 
@@ -43,8 +40,7 @@ class Chart<S, A extends Action<string>> extends Component<Props<S, A>> {
     const { state, select, monitorState } = nextProps;
 
     if (monitorState.isVisible !== false) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-      this.renderChart!(select(state!) as {} | null | undefined);
+      this.renderChart!(select(state!));
     }
   }
 

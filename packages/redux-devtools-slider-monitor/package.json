@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/slider-monitor",
-  "version": "5.0.1",
+  "version": "7.0.0",
   "description": "A custom monitor for replaying Redux actions that works similarly to a video player",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-slider-monitor",
   "bugs": {
@@ -12,51 +12,38 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools.git"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
-    "@babel/runtime": "^7.25.6",
     "@redux-devtools/ui": "workspace:^",
     "react-base16-styling": "workspace:^"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.6",
-    "@babel/core": "^7.25.2",
-    "@babel/eslint-parser": "^7.25.1",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
     "@redux-devtools/core": "workspace:^",
-    "@types/node": "^20.16.3",
-    "@types/react": "^18.3.5",
-    "react": "^18.3.1",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "react": "catalog:",
     "redux": "^5.0.1",
-    "rimraf": "^6.0.1",
-    "typescript": "~5.5.4"
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@redux-devtools/core": "workspace:^",
-    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "@types/styled-components": "^5.1.34",
-    "react": "^16.8.4 || ^17.0.0 || ^18.0.0",
-    "redux": "^3.4.0 || ^4.0.0 || ^5.0.0",
-    "styled-components": "^5.3.11"
+    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "redux": "^3.4.0 || ^4.0.0 || ^5.0.0"
   }
 }

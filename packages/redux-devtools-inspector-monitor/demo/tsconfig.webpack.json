@@ -1,8 +1,0 @@
-{
-  "extends": "../../../tsconfig.base.json",
-  "compilerOptions": {
-    "resolveJsonModule": true,
-    "types": ["node", "webpack-dev-server"]
-  },
-  "include": ["webpack.config.ts"]
-}

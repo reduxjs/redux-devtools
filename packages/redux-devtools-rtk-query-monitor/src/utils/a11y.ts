@@ -1,4 +1,4 @@
-import { QueryPreviewTabs } from '../types';
+import { QueryPreviewTabs } from '../types.js';
 
 export function renderTabPanelId(value: QueryPreviewTabs): string {
   return `rtk-query-monitor-tab-panel-${value}`;

@@ -1,6 +1,6 @@
 {
   "name": "@redux-devtools/inspector-monitor",
-  "version": "6.0.1",
+  "version": "7.0.0",
   "description": "Redux DevTools Diff Monitor",
   "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-inspector-monitor",
   "bugs": {
@@ -15,67 +15,55 @@
     "lib",
     "src"
   ],
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/reduxjs/redux-devtools"
   },
   "scripts": {
-    "build": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "babel src --extensions \".ts,.tsx\" --out-dir lib/cjs",
-    "build:esm": "babel src --config-file ./babel.config.esm.json --extensions \".ts,.tsx\" --out-dir lib/esm",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "prepack": "pnpm run clean && pnpm run build",
-    "prepublish": "pnpm run type-check && pnpm run lint"
+    "prepack": "pnpm run clean && pnpm run build"
   },
   "dependencies": {
-    "@babel/runtime": "^7.25.6",
-    "@dnd-kit/core": "^6.1.0",
-    "@dnd-kit/modifiers": "^7.0.0",
-    "@dnd-kit/sortable": "^8.0.0",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
-    "@types/lodash": "^4.17.7",
+    "@types/lodash": "^4.17.25",
     "dateformat": "^5.0.3",
     "hex-rgba": "^1.0.2",
-    "immutable": "^4.3.7",
+    "immutable": "^5.1.9",
     "javascript-stringify": "^2.1.0",
-    "jsondiffpatch": "^0.6.0",
+    "jsondiffpatch": "^0.7.6",
     "lodash.debounce": "^4.0.8",
     "react-base16-styling": "workspace:^",
     "react-json-tree": "workspace:^"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.6",
-    "@babel/core": "^7.25.2",
-    "@babel/eslint-parser": "^7.25.1",
-    "@babel/plugin-transform-runtime": "^7.25.4",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
-    "@emotion/babel-preset-css-prop": "^11.12.0",
-    "@emotion/react": "^11.13.3",
+    "@emotion/react": "^11.14.0",
     "@redux-devtools/core": "workspace:^",
-    "@types/dateformat": "^5.0.2",
+    "@types/dateformat": "^5.0.3",
     "@types/hex-rgba": "^1.0.3",
     "@types/lodash.debounce": "^4.0.9",
-    "@types/react": "^18.3.5",
-    "react": "^18.3.1",
+    "@types/react": "catalog:",
+    "react": "catalog:",
     "redux": "^5.0.1",
-    "rimraf": "^6.0.1",
-    "typescript": "~5.5.4"
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
-    "@emotion/react": "^11.13.3",
+    "@emotion/react": "^11.14.0",
     "@redux-devtools/core": "workspace:^",
-    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react": "^16.8.4 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.4 || ^17.0.0 || ^18.0.0",
+    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
     "redux": "^3.4.0 || ^4.0.0 || ^5.0.0"
   }
 }

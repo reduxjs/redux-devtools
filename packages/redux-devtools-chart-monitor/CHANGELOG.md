@@ -1,5 +1,34 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- 12849a4: Convert monitors to ESM
+
+### Patch Changes
+
+- Updated dependencies [804d6bd]
+  - @redux-devtools/core@5.0.0
+
+## 5.1.1
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+
+## 5.1.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/core@4.1.0
+
 ## 5.0.2
 
 ### Patch Changes
@@ -48,7 +77,6 @@
 ### Major Changes
 
 - b323f77d: Upgrade D3
-
   - Split `style` option into `chartStyles`, `nodeStyleOptions`, `textStyleOptions`, and `linkStyles`.
   - The shape of the argument passed to the `onClickText` option has been updated.
 

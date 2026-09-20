@@ -1,4 +1,4 @@
-import openDevToolsWindow, { DevToolsPosition } from './openWindow';
+import openDevToolsWindow, { DevToolsPosition } from './openWindow.js';
 
 export function createMenu() {
   const menus = [
@@ -6,7 +6,7 @@ export function createMenu() {
     { id: 'devtools-remote', title: 'Open Remote DevTools' },
   ];
 
-  let shortcuts: { [commandName: string]: string | undefined } = {};
+  const shortcuts: { [commandName: string]: string | undefined } = {};
   chrome.commands.getAll((commands) => {
     for (const { name, shortcut } of commands) {
       shortcuts[name!] = shortcut;
@@ -22,8 +22,8 @@ export function createMenu() {
   });
 }
 
-export function removeMenu() {
-  chrome.contextMenus.removeAll();
+export async function removeMenu() {
+  await chrome.contextMenus.removeAll();
 }
 
 chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
