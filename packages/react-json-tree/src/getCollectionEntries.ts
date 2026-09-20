@@ -37,9 +37,10 @@ function getEntries(
     };
   } else if (type === 'Array') {
     res = {
-      entries: collection
-        .slice(from, to + 1)
-        .map((val: unknown, idx: number) => ({ key: idx + from, value: val })),
+      entries: Array.from(
+        (collection as unknown[]).slice(from, to + 1),
+        (val, idx) => ({ key: idx + from, value: val }),
+      ),
     };
   } else {
     let idx = 0;
