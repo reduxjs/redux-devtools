@@ -22,7 +22,7 @@ interface SerializeWithRequiredReviver extends SerializeWithImmutable {
 function isSerializeWithReviver(
   serialize: boolean | SerializeWithImmutable,
 ): serialize is SerializeWithRequiredReviver {
-  return !!(serialize as SerializeWithImmutable).immutable;
+  return !!(serialize as SerializeWithImmutable).reviver;
 }
 
 interface ParsedSerializedLiftedState {

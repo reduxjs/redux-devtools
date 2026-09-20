@@ -100,7 +100,10 @@ export default function openFile(
   lineNumber: number,
   stackFrame: StackFrame,
 ) {
-  if (!chrome || !chrome.storage) return; // TODO: Pass editor settings for using outside of browser extension
+  if (typeof chrome === 'undefined' || !chrome.storage) {
+    if (/^https?:\/\//.test(fileName)) window.open(fileName, '_blank');
+    return;
+  }
   const storage = isFF
     ? chrome.storage.local
     : chrome.storage.sync || chrome.storage.local;
@@ -125,8 +128,8 @@ export default function openFile(
           if (chrome.devtools && isFF) {
             chrome.devtools.inspectedWindow.eval(
               'confirm("Set the editor to open the file in?")',
-              (result) => {
-                if (!result) return;
+              (result, exceptionInfo) => {
+                if (exceptionInfo || !result) return;
                 void chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
               },
             );

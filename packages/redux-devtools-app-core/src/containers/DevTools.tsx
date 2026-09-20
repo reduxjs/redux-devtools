@@ -8,6 +8,7 @@ import { Features, State } from '../reducers/instances.js';
 import { MonitorStateMonitorState } from '../reducers/monitor.js';
 import { ThemeFromProvider } from '@redux-devtools/ui';
 import { StateTreeSettings } from '../reducers/stateTreeSettings.js';
+import MonitorErrorBoundary from '../components/MonitorErrorBoundary.js';
 
 interface Props {
   monitor: string;
@@ -106,19 +107,24 @@ class DevTools extends Component<Props> {
     const MonitorAsAny = this.Monitor as any;
     return (
       <div className={`monitor monitor-${this.props.monitor}`}>
-        <MonitorAsAny
-          {...liftedState}
-          {...this.monitorProps}
-          features={this.props.features}
-          dispatch={this.dispatch}
-          theme={this.props.theme}
-          sortStateTreeAlphabetically={
-            this.props.stateTreeSettings.sortAlphabetically
-          }
-          disableStateTreeCollection={
-            this.props.stateTreeSettings.disableCollection
-          }
-        />
+        <MonitorErrorBoundary
+          monitor={this.props.monitor}
+          monitorState={this.props.monitorState}
+        >
+          <MonitorAsAny
+            {...liftedState}
+            {...this.monitorProps}
+            features={this.props.features}
+            dispatch={this.dispatch}
+            theme={this.props.theme}
+            sortStateTreeAlphabetically={
+              this.props.stateTreeSettings.sortAlphabetically
+            }
+            disableStateTreeCollection={
+              this.props.stateTreeSettings.disableCollection
+            }
+          />
+        </MonitorErrorBoundary>
       </div>
     );
   }

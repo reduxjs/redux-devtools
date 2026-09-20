@@ -17,6 +17,7 @@ export interface TabComponentProps<S, A extends Action<string>> {
   actions: { [actionId: number]: PerformAction<A> };
   selectedActionId: number | null;
   startActionId: number | null;
+  currentActionId: number;
   base16Theme: Base16Theme;
   invertTheme: boolean;
   isWideLayout: boolean;
@@ -64,6 +65,7 @@ interface Props<S, A extends Action<string>> {
   actions: { [actionId: number]: PerformAction<A> };
   selectedActionId: number | null;
   startActionId: number | null;
+  currentActionId: number;
   dataTypeKey: string | symbol | undefined;
   monitorState: DevtoolsInspectorState;
   updateMonitorState: (monitorState: Partial<DevtoolsInspectorState>) => void;
@@ -95,6 +97,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
       actions,
       selectedActionId,
       startActionId,
+      currentActionId,
       computedStates,
       base16Theme,
       invertTheme,
@@ -150,6 +153,7 @@ class ActionPreview<S, A extends Action<string>> extends Component<
                 actions,
                 selectedActionId,
                 startActionId,
+                currentActionId,
                 base16Theme,
                 invertTheme,
                 isWideLayout,

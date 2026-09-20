@@ -4,6 +4,7 @@ import { getStackFrames } from './react-error-overlay/utils/getStackFrames.js';
 import StackTrace from './react-error-overlay/containers/StackTrace.js';
 import openFile from './openFile.js';
 import { Action } from 'redux';
+import { PerformAction } from '@redux-devtools/core';
 import { TabComponentProps } from '@redux-devtools/inspector-monitor';
 import StackFrame from './react-error-overlay/utils/stack-frame.js';
 import { ErrorLocation } from './react-error-overlay/utils/parseCompileError.js';
@@ -42,26 +43,43 @@ export class TraceTab<S, A extends Action<string>> extends Component<
   }
 
   componentDidUpdate(prevProps: Props<S, A>) {
-    const { action, actions } = prevProps;
+    const { action, actions, currentActionId } = prevProps;
 
-    if (action !== this.props.action || actions !== this.props.actions) {
+    if (
+      action !== this.props.action ||
+      actions !== this.props.actions ||
+      currentActionId !== this.props.currentActionId
+    ) {
       this.checkForStackTrace();
     }
   }
 
-  checkForStackTrace() {
-    const { action, actions: liftedActionsById } = this.props;
+  findLiftedAction(): PerformAction<A> | undefined {
+    const { action, actions: liftedActionsById, currentActionId } = this.props;
 
-    if (!action) {
+    if (!liftedActionsById) {
+      return undefined;
+    }
+
+    const byId = liftedActionsById[currentActionId];
+    if (byId) {
+      return byId;
+    }
+
+    return Object.values(liftedActionsById).find(
+      (liftedAction) => liftedAction.action === action,
+    );
+  }
+
+  checkForStackTrace() {
+    const liftedAction = this.findLiftedAction();
+
+    if (!liftedAction) {
+      this.setState({ stackFrames: [], showDocsLink: false });
       return;
     }
 
-    const liftedActions = Object.values(liftedActionsById);
-    const liftedAction = liftedActions.find(
-      (liftedAction) => liftedAction.action === action,
-    );
-
-    if (liftedAction && typeof liftedAction.stack === 'string') {
+    if (typeof liftedAction.stack === 'string') {
       const deserializedError = Object.assign(new Error(), {
         stack: liftedAction.stack,
       });
@@ -80,9 +98,9 @@ export class TraceTab<S, A extends Action<string>> extends Component<
       this.setState({
         stackFrames: [],
         showDocsLink:
-          !!liftedAction!.action &&
-          !!liftedAction!.action.type &&
-          liftedAction!.action.type !== '@@INIT',
+          !!liftedAction.action &&
+          !!liftedAction.action.type &&
+          liftedAction.action.type !== '@@INIT',
       });
     }
   }

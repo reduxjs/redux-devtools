@@ -26,6 +26,14 @@ export function reviver(key: string, value: unknown) {
   return value;
 }
 
+export class ParseJSONError extends Error {
+  constructor(cause: unknown) {
+    const detail = cause instanceof Error ? cause.message : String(cause);
+    super(`Failed to parse state received from the store: ${detail}`);
+    this.name = 'ParseJSONError';
+  }
+}
+
 export default function parseJSON(
   data: string | undefined,
   serialize?: boolean,
@@ -34,8 +42,6 @@ export default function parseJSON(
   try {
     return serialize ? jsan.parse(data, reviver) : jsan.parse(data);
   } catch (e) {
-    if (process.env.NODE_ENV !== 'production')
-      console.error(data + 'is not a valid JSON', e);
-    return undefined;
+    throw new ParseJSONError(e);
   }
 }

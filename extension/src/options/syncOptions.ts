@@ -99,11 +99,6 @@ export const getOptions = (callback: (options: Options) => void) => {
   }
 };
 
-export const prefetchOptions = () =>
-  getOptions(() => {
-    // do nothing.
-  });
-
 export const subscribeToOptions = (callback: (options: Options) => void) => {
   subscribers = subscribers.concat(callback);
 };

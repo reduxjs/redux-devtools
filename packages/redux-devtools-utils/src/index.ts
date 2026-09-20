@@ -112,20 +112,30 @@ export function evalMethod(
   );
 }
 
+type Replacer = (this: unknown, key: string, value: unknown) => unknown;
+
+function serializeBigInt(value: unknown) {
+  return typeof value === 'bigint' ? `${value}n` : value;
+}
+
+export function withBigIntReplacer(replacer?: Replacer): Replacer {
+  if (!replacer) return (key, value) => serializeBigInt(value);
+  return function (key, value) {
+    return serializeBigInt(replacer.call(this, key, value));
+  };
+}
+
+const defaultReplacer = withBigIntReplacer();
+
 function tryCatchStringify(obj: unknown) {
   try {
-    return JSON.stringify(obj);
+    return JSON.stringify(obj, defaultReplacer);
   } catch (err) {
     if (process.env.NODE_ENV !== 'production')
       console.log('Failed to stringify', err);
-    return jsan.stringify(
-      obj,
-      null as unknown as undefined,
-      null as unknown as undefined,
-      {
-        circular: '[CIRCULAR]',
-      },
-    );
+    return jsan.stringify(obj, defaultReplacer, null as unknown as undefined, {
+      circular: '[CIRCULAR]',
+    });
   }
 }
 
@@ -144,18 +154,18 @@ export function stringify(
   if (serialize === true) {
     return jsan.stringify(
       obj,
-      function (key, value) {
+      withBigIntReplacer(function (key, value) {
         if (value && typeof (value as any).toJS === 'function')
           return (value as any).toJS();
         return value;
-      },
+      }),
       null as unknown as undefined,
       true,
     );
   }
   return jsan.stringify(
     obj,
-    serialize.replacer,
+    withBigIntReplacer(serialize.replacer),
     null as unknown as undefined,
     serialize.options as boolean,
   );
