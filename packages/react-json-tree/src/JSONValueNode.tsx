@@ -6,7 +6,7 @@ import type {
   LabelRenderer,
   Styling,
   ValueRenderer,
-} from './types';
+} from './types.js';
 
 /**
  * Renders simple values (eg. strings, numbers, booleans, etc)

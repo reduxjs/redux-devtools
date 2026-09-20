@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.lib.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "types": ["chrome", "node"]
+  },
+  "include": ["test-e2e", "test-harness", "vitest.e2e.config.mts"]
+}

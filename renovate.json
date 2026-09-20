@@ -1,13 +1,18 @@
 {
-  "extends": ["config:base", "group:allNonMajor", ":maintainLockFilesWeekly"],
-  "rangeStrategy": "bump",
-  "rebaseWhen": "conflicted",
-  "ignorePaths": [
-    "**/node_modules/**",
-    "extension/examples/**",
-    "packages/redux-devtools-remote/examples/**"
+  "extends": [
+    "config:recommended",
+    "group:allNonMajor",
+    ":maintainLockFilesWeekly"
   ],
+  "rangeStrategy": "bump",
+  "postUpdateOptions": ["pnpmDedupe"],
+  "rebaseWhen": "conflicted",
+  "ignorePaths": ["**/node_modules/**"],
   "packageRules": [
+    {
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "1 day"
+    },
     {
       "matchPackageNames": ["node"],
       "enabled": false
@@ -18,9 +23,27 @@
       "groupName": "typescript"
     },
     {
-      "matchPackageNames": ["source-map"],
-      "matchUpdateTypes": ["major", "minor"],
+      "matchPackageNames": ["source-map", "@types/source-map"],
       "groupName": "source-map"
+    },
+    {
+      "matchPackageNames": ["msw"],
+      "groupName": "msw"
+    },
+    {
+      "matchPackageNames": [
+        "redux",
+        "redux-thunk",
+        "react-redux",
+        "@reduxjs/toolkit",
+        "@types/redux-logger"
+      ],
+      "matchUpdateTypes": ["major"],
+      "groupName": "redux"
+    },
+    {
+      "matchPackageNames": ["@types/redux-logger"],
+      "groupName": "redux"
     }
   ]
 }

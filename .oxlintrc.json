@@ -1,0 +1,78 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "options": {
+    "typeAware": true
+  },
+  "plugins": ["typescript", "react", "jsx-a11y", "import", "vitest"],
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "builtin": true,
+    "browser": true,
+    "node": true
+  },
+  "ignorePatterns": [
+    "**/lib/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/umd/**",
+    "**/coverage/**",
+    "**/storybook-static/**",
+    "extension/chrome/**",
+    "extension/edge/**",
+    "extension/firefox/**",
+    "patches/**",
+    "**/public/mockServiceWorker.js"
+  ],
+  "rules": {
+    "typescript/no-unused-vars": "off",
+    "typescript/no-explicit-any": "off",
+    "typescript/no-base-to-string": "off",
+    "typescript/no-duplicate-type-constituents": "off",
+    "typescript/no-redundant-type-constituents": "off",
+    "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": [
+      "error",
+      { "checksVoidReturn": { "attributes": false } }
+    ],
+    "typescript/await-thenable": "error",
+    "typescript/no-for-in-array": "error",
+    "typescript/no-array-delete": "error",
+    "typescript/only-throw-error": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/no-unsafe": "off",
+    "react/no-did-update-set-state": "off",
+    "import/default": "off",
+    "import/namespace": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/prefer-tag-over-role": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/test/**"],
+      "rules": {
+        "no-unused-expressions": "off",
+        "vitest/expect-expect": [
+          "error",
+          { "assertFunctionNames": ["expect", "runTest", "request.**.expect"] }
+        ],
+        "vitest/prefer-snapshot-hint": "off",
+        "vitest/require-mock-type-parameters": "off"
+      }
+    },
+    {
+      "files": ["extension/test/**"],
+      "globals": {
+        "EUI": "readonly",
+        "chrome": "readonly"
+      }
+    }
+  ]
+}

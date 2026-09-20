@@ -1,6 +1,4 @@
-import isArray from 'lodash/isArray';
-import isPlainObject from 'lodash/isPlainObject';
-import mapValues from 'lodash/mapValues';
+import { isArray, isPlainObject, mapValues } from 'lodash-es';
 
 export interface Node {
   name: string;
@@ -47,9 +45,7 @@ export function map2tree(
   root: unknown,
   options: { key?: string; pushMethod?: 'push' | 'unshift' } = {},
   tree: Node = { name: options.key || 'state', children: [] },
-  // eslint-disable-next-line @typescript-eslint/ban-types
 ): Node | {} {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   if (!isPlainObject(root) && root && !(root as { toJS: () => {} }).toJS) {
     return {};
   }
@@ -62,13 +58,9 @@ export function map2tree(
   }
 
   mapValues(
-    // eslint-disable-next-line @typescript-eslint/ban-types
     root && (root as { toJS: () => {} }).toJS
-      ? // eslint-disable-next-line @typescript-eslint/ban-types
-        (root as { toJS: () => {} }).toJS()
-      : // eslint-disable-next-line @typescript-eslint/ban-types
-        (root as {}),
-    // eslint-disable-next-line @typescript-eslint/ban-types
+      ? (root as { toJS: () => {} }).toJS()
+      : (root as {}),
     (maybeImmutable: { toJS?: () => {} }, key) => {
       const value =
         maybeImmutable && maybeImmutable.toJS

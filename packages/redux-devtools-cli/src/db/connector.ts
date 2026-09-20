@@ -4,7 +4,6 @@ import knex from 'knex';
 import type { Knex } from 'knex';
 import { AGServer } from 'socketcluster-server';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 type KnexFunction = <TRecord extends {} = any, TResult = unknown[]>(
   config: Knex.Config | string,
 ) => Knex<TRecord, TResult>;
@@ -27,7 +26,6 @@ export default function connector(options: AGServer.AGServerOptions) {
   };
   const knexInstance = (knex as unknown as KnexFunction)(dbOptions);
 
-  /* eslint-disable no-console */
   knexInstance.migrate
     .latest({ loadExtensions: ['.js'] })
     .then(function () {
@@ -39,7 +37,6 @@ export default function connector(options: AGServer.AGServerOptions) {
     .catch(function (error) {
       console.error(error);
     });
-  /* eslint-enable no-console */
 
   return knexInstance;
 }

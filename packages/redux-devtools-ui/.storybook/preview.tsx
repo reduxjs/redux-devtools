@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 
 import { Container } from '../src';
 import { listSchemes, listThemes } from '../src/utils/theme';
@@ -18,7 +18,12 @@ const withThemeProvider = (Story, context) => (
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
   },
   globalTypes: {
     theme: {

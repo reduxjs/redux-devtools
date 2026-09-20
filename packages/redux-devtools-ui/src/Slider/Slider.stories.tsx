@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Meta, StoryObj } from '@storybook/react';
-import Slider from './';
+import styled from '@emotion/styled';
+import { Meta, StoryObj } from '@storybook/react-vite';
+import Slider from './index.js';
 
 const Container = styled.div`
   display: flex;

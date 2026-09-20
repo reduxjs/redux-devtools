@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { DevtoolsInspectorProps } from './DevtoolsInspector';
+import { DevtoolsInspectorProps } from './DevtoolsInspector.js';
 
 const UPDATE_MONITOR_STATE =
   '@@redux-devtools-inspector-monitor/UPDATE_MONITOR_STATE';
@@ -45,7 +45,7 @@ function reduceUpdateState(
     : state;
 }
 
-export function reducer<S, A extends Action<unknown>>(
+export function reducer<S, A extends Action<string>>(
   props: DevtoolsInspectorProps<S, A>,
   state = DEFAULT_STATE,
   action: DevtoolsInspectorAction,

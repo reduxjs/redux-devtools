@@ -1,10 +1,8 @@
-import * as base16 from 'base16';
-import { Base16Theme } from 'base16';
 import Color from 'color';
 import * as CSS from 'csstype';
-import curry from 'lodash.curry';
+import { curry } from 'lodash-es';
 import type { CurriedFunction3 } from 'lodash';
-import { Color as ColorTuple, yuv2rgb, rgb2yuv } from './colorConverters';
+import { Color as ColorTuple, yuv2rgb, rgb2yuv } from './colorConverters.js';
 import {
   Styling,
   StylingConfig,
@@ -12,7 +10,9 @@ import {
   StylingValue,
   StylingValueFunction,
   Theme,
-} from './types';
+} from './types.js';
+import { base16Themes as base16 } from './themes/index.js';
+import type { Base16Theme } from './themes/index.js';
 
 const DEFAULT_BASE16 = base16.default;
 
@@ -110,10 +110,7 @@ const mergeStyling = (
         case 'function':
           return (styling, ...args) =>
             (customStyling as StylingValueFunction)(
-              (defaultStyling as StylingValueFunction)(
-                styling,
-                ...args,
-              ) as Styling,
+              (defaultStyling as StylingValueFunction)(styling, ...args),
               ...args,
             );
       }
@@ -126,7 +123,7 @@ const mergeStylings = (
 ): StylingConfig => {
   const keys = Object.keys(defaultStylings);
   for (const key in customStylings) {
-    if (keys.indexOf(key) === -1) keys.push(key);
+    if (!keys.includes(key)) keys.push(key);
   }
 
   return keys.reduce(
@@ -190,8 +187,8 @@ export const invertBase16Theme = (base16Theme: Base16Theme): Base16Theme =>
       (t[key as keyof Base16Theme] = /^base/.test(key)
         ? invertColor(base16Theme[key as keyof Base16Theme])
         : key === 'scheme'
-        ? base16Theme[key] + ':inverted'
-        : base16Theme[key as keyof Base16Theme]),
+          ? base16Theme[key] + ':inverted'
+          : base16Theme[key as keyof Base16Theme]),
       t
     ),
     {} as Base16Theme,
@@ -241,7 +238,7 @@ export const createStyling: CurriedFunction3<
 
     const customStyling = Object.keys(themeOrStyling).reduce(
       (s, key) =>
-        BASE16_KEYS.indexOf(key) === -1
+        !BASE16_KEYS.includes(key)
           ? ((s[key] = (themeOrStyling as StylingConfig)[key]), s)
           : s,
       {} as StylingConfig,
@@ -272,7 +269,7 @@ export const getBase16Theme = (
     if (base16Themes) {
       theme = base16Themes[themeName];
     } else {
-      theme = base16[themeName as keyof typeof base16];
+      theme = base16[themeName as keyof typeof base16] as Base16Theme;
     }
     if (modifier === 'inverted') {
       theme = invertBase16Theme(theme);
@@ -308,4 +305,5 @@ export const invertTheme = (theme: Theme | undefined): Theme | undefined => {
 };
 
 export type { Base16Theme };
-export * from './types';
+export { base16 as base16Themes };
+export * from './types.js';

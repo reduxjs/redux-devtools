@@ -1,5 +1,3 @@
-import { Action } from 'redux';
-import { LiftedState } from '@redux-devtools/instrument';
 import { DispatchAction, LibConfig } from '@redux-devtools/app';
 
 declare global {
@@ -8,22 +6,14 @@ declare global {
   }
 }
 
-export default class Monitor<S, A extends Action<unknown>> {
-  update: (
-    liftedState?: LiftedState<S, A, unknown> | undefined,
-    libConfig?: LibConfig,
-  ) => void;
+export default class Monitor {
+  update: (libConfig?: LibConfig) => void;
   active?: boolean;
   paused?: boolean;
   lastAction?: string;
   waitingTimeout?: number;
 
-  constructor(
-    update: (
-      liftedState?: LiftedState<S, A, unknown> | undefined,
-      libConfig?: LibConfig,
-    ) => void,
-  ) {
+  constructor(update: (libConfig?: LibConfig) => void) {
     this.update = update;
   }
   reducer = (state = {}, action: DispatchAction) => {

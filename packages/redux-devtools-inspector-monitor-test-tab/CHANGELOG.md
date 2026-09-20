@@ -1,5 +1,92 @@
 # Change Log
 
+## 6.0.0
+
+### Major Changes
+
+- 12849a4: Convert monitors to ESM
+
+### Patch Changes
+
+- Updated dependencies [d61d31a]
+- Updated dependencies [804e729]
+- Updated dependencies [12849a4]
+  - @redux-devtools/ui@3.0.0
+  - @redux-devtools/inspector-monitor@7.0.0
+
+## 5.0.0
+
+### Major Changes
+
+- 6163276: Replace styled-components with Emotion
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+- Updated dependencies [20883e5]
+  - @redux-devtools/ui@2.0.0
+  - @redux-devtools/inspector-monitor@6.1.2
+
+## 4.1.1
+
+### Patch Changes
+
+- @redux-devtools/inspector-monitor@6.1.1
+
+## 4.1.0
+
+### Minor Changes
+
+- 6830118: Add React 19 to peer deps
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/inspector-monitor@7.0.0
+  - @redux-devtools/ui@1.4.0
+
+## 4.0.0
+
+### Major Changes
+
+- 5cfe3e5: Update min required React version to 16.8.4
+
+### Patch Changes
+
+- Updated dependencies [5cfe3e5]
+  - @redux-devtools/inspector-monitor@6.0.0
+
+## 3.0.0
+
+### Major Changes
+
+- 158ba2c: Replace jss with Emotion in inspector-monitor. `@emotion/react` is now a required peer dependency.
+
+### Patch Changes
+
+- Updated dependencies [158ba2c]
+  - @redux-devtools/inspector-monitor@5.0.0
+
+## 2.1.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+- Updated dependencies [7f5bddbd]
+  - @redux-devtools/ui@1.3.1
+
+## 2.0.1
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+- Updated dependencies [65205f90]
+  - @redux-devtools/inspector-monitor@4.0.1
+
 ## 2.0.0
 
 ### Major Changes

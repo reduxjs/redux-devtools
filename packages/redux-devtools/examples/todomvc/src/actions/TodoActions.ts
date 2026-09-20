@@ -73,10 +73,10 @@ export type TodoAction =
   | ClearMarkedAction;
 
 export interface TodoActions {
-  addTodo(text: string): AddTodoAction;
-  deleteTodo(id: number): DeleteTodoAction;
-  editTodo(id: number, text: string): EditTodoAction;
-  markTodo(id: number): MarkTodoAction;
-  markAll(): MarkAllAction;
-  clearMarked(): ClearMarkedAction;
+  addTodo(this: void, text: string): AddTodoAction;
+  deleteTodo(this: void, id: number): DeleteTodoAction;
+  editTodo(this: void, id: number, text: string): EditTodoAction;
+  markTodo(this: void, id: number): MarkTodoAction;
+  markAll(this: void): MarkAllAction;
+  clearMarked(this: void): ClearMarkedAction;
 }

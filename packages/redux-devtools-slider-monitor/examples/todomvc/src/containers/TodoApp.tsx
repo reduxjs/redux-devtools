@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import Header from '../components/Header';
@@ -19,16 +18,10 @@ interface Props {
 
 const TodoApp: FunctionComponent<Props> = ({ todos, actions }) => (
   <div>
-    {/* eslint-disable-next-line @typescript-eslint/unbound-method */}
     <Header addTodo={actions.addTodo} />
     <MainSection todos={todos} actions={actions} />
   </div>
 );
-
-TodoApp.propTypes = {
-  todos: PropTypes.array.isRequired,
-  actions: PropTypes.any.isRequired,
-};
 
 function mapState(state: TodoState) {
   return {

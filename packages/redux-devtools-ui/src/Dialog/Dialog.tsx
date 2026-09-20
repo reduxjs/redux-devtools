@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Base16Theme } from 'base16';
-import createStyledComponent from '../utils/createStyledComponent';
-import * as styles from './styles';
-import Button from '../Button';
-import Form from '../Form';
-import { Props as FormProps } from '../Form/Form';
+import type { Base16Theme } from 'react-base16-styling';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import * as styles from './styles/index.js';
+import Button from '../Button/index.js';
+import Form from '../Form/index.js';
+import { Props as FormProps } from '../Form/Form.js';
 
 const DialogWrapper = createStyledComponent(styles);
 
@@ -137,19 +136,4 @@ export default class Dialog<P> extends PureComponent<
       </DialogWrapper>
     );
   }
-
-  static propTypes = {
-    open: PropTypes.bool,
-    title: PropTypes.string,
-    children: PropTypes.any,
-    actions: PropTypes.node,
-    submitText: PropTypes.string,
-    fullWidth: PropTypes.bool,
-    noHeader: PropTypes.bool,
-    noFooter: PropTypes.bool,
-    modal: PropTypes.bool,
-    onDismiss: PropTypes.func,
-    onSubmit: PropTypes.func,
-    theme: PropTypes.object,
-  };
 }

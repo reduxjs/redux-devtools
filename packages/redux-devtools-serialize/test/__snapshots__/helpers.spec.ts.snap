@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Helpers extract 1`] = `
+exports[`Helpers > extract 1`] = `
 {
   "__serializedType__": "testType",
   "data": {
@@ -9,7 +9,7 @@ exports[`Helpers extract 1`] = `
 }
 `;
 
-exports[`Helpers mark 1`] = `
+exports[`Helpers > mark 1`] = `
 {
   "__serializedType__": "testType",
   "data": {
@@ -18,14 +18,14 @@ exports[`Helpers mark 1`] = `
 }
 `;
 
-exports[`Helpers mark 2`] = `
+exports[`Helpers > mark 2`] = `
 {
   "__serializedType__": "testType",
   "data": "[object Object]",
 }
 `;
 
-exports[`Helpers refer 1`] = `
+exports[`Helpers > refer 1`] = `
 {
   "__serializedType__": "testType",
   "data": {

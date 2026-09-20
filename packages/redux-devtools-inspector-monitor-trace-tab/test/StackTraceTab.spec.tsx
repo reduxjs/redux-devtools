@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { TraceTab } from '../src/StackTraceTab';
+import { TraceTab } from '../src/StackTraceTab.js';
 
 const actions = {
   0: { type: 'PERFORM_ACTION', action: { type: '@@INIT' } },
@@ -36,6 +36,30 @@ describe('StackTraceTab component', () => {
       <TraceTabAsAny actions={actions} action={actions[1].action} />,
     );
     expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('does not crash when the action prop is a drilled-in wrapper object', () => {
+    const drilledIn = { type: actions[1].action.type };
+    const { container } = render(
+      <TraceTabAsAny actions={actions} action={drilledIn} />,
+    );
+    expect(container.firstChild).toBeTruthy();
+    expect(screen.queryByTestId('stack-trace')).toBeTruthy();
+  });
+
+  it('finds the lifted action by id when the action reference does not match', async () => {
+    const drilledIn = { type: actions[2].action.type };
+    render(
+      <TraceTabAsAny
+        actions={actions}
+        action={drilledIn}
+        currentActionId={2}
+      />,
+    );
+    const stackTraceDiv = await screen.findByTestId('stack-trace');
+    await waitFor(() =>
+      expect(stackTraceDiv.querySelector('div')).toBeTruthy(),
+    );
   });
 
   it('should render with trace stack', async () => {

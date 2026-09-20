@@ -1,15 +1,15 @@
 import React, { PureComponent, Component } from 'react';
-import PropTypes from 'prop-types';
 import JSONSchemaForm, { FormProps } from '@rjsf/core';
-import { Base16Theme } from 'base16';
-import createStyledComponent from '../utils/createStyledComponent';
-import styles from './styles';
-import Button from '../Button';
-import customWidgets from './widgets';
+import validator from '@rjsf/validator-ajv8';
+import type { Base16Theme } from 'react-base16-styling';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import styles from './styles/index.js';
+import Button from '../Button/index.js';
+import customWidgets from './widgets.js';
 
 const FormContainer = createStyledComponent(styles, JSONSchemaForm);
 
-export interface Props<T> extends FormProps<T> {
+export interface Props<T> extends Omit<FormProps<T>, 'validator'> {
   children?: React.ReactNode;
   submitText?: string;
   primaryButton?: boolean;
@@ -27,6 +27,7 @@ export default class Form<T> extends (PureComponent || Component)<Props<T>> {
     return (
       <FormContainer
         {...(rest as Props<unknown>)}
+        validator={validator}
         widgets={{ ...customWidgets, ...widgets }}
       >
         {noSubmit ? (
@@ -46,17 +47,4 @@ export default class Form<T> extends (PureComponent || Component)<Props<T>> {
       </FormContainer>
     );
   }
-
-  static propTypes = {
-    children: PropTypes.any,
-    submitText: PropTypes.string,
-    primaryButton: PropTypes.bool,
-    noSubmit: PropTypes.bool,
-    schema: PropTypes.object.isRequired,
-    uiSchema: PropTypes.object,
-    formData: PropTypes.any,
-    widgets: PropTypes.objectOf(
-      PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    ),
-  };
 }

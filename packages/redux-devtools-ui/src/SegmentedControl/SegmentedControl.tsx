@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Base16Theme } from 'base16';
-import createStyledComponent from '../utils/createStyledComponent';
-import styles from './styles';
+import type { Base16Theme } from 'react-base16-styling';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import styles from './styles/index.js';
 
 const SegmentedWrapper = createStyledComponent(styles);
 
@@ -48,12 +47,4 @@ export default class SegmentedControl extends Component<SegmentedControlProps> {
       </SegmentedWrapper>
     );
   }
-
-  static propTypes = {
-    values: PropTypes.array.isRequired,
-    selected: PropTypes.string,
-    onClick: PropTypes.func,
-    disabled: PropTypes.bool,
-    theme: PropTypes.object,
-  };
 }

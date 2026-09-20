@@ -1,5 +1,80 @@
 # test-demo
 
+## 0.1.19
+
+### Patch Changes
+
+- Updated dependencies [d61d31a]
+- Updated dependencies [804e729]
+- Updated dependencies [12849a4]
+- Updated dependencies [804d6bd]
+  - @redux-devtools/ui@3.0.0
+  - @redux-devtools/dock-monitor@5.0.0
+  - @redux-devtools/inspector-monitor@7.0.0
+  - @redux-devtools/inspector-monitor-test-tab@6.0.0
+  - @redux-devtools/core@5.0.0
+
+## 0.1.18
+
+### Patch Changes
+
+- Updated dependencies [6163276]
+- Updated dependencies [20883e5]
+  - @redux-devtools/inspector-monitor-test-tab@5.0.0
+  - @redux-devtools/ui@2.0.0
+  - @redux-devtools/inspector-monitor@6.1.2
+
+## 0.1.17
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+  - @redux-devtools/dock-monitor@4.1.1
+  - @redux-devtools/inspector-monitor@6.1.1
+  - @redux-devtools/inspector-monitor-test-tab@4.1.1
+
+## 0.1.16
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/dock-monitor@5.0.0
+  - @redux-devtools/inspector-monitor-test-tab@5.0.0
+  - @redux-devtools/inspector-monitor@7.0.0
+  - @redux-devtools/ui@1.4.0
+  - @redux-devtools/core@4.1.0
+
+## 0.1.15
+
+### Patch Changes
+
+- Updated dependencies [5cfe3e5]
+- Updated dependencies [decc035]
+  - @redux-devtools/dock-monitor@4.0.0
+  - @redux-devtools/inspector-monitor-test-tab@4.0.0
+  - @redux-devtools/inspector-monitor@6.0.0
+  - @redux-devtools/core@4.0.0
+
+## 0.1.14
+
+### Patch Changes
+
+- Updated dependencies [158ba2c]
+  - @redux-devtools/inspector-monitor-test-tab@3.0.0
+  - @redux-devtools/inspector-monitor@5.0.0
+
+## 0.1.13
+
+### Patch Changes
+
+- 65205f90: Replace Action<unknown> with Action<string>
+- Updated dependencies [65205f90]
+  - @redux-devtools/dock-monitor@3.0.2
+  - @redux-devtools/inspector-monitor-test-tab@2.0.1
+  - @redux-devtools/inspector-monitor@4.0.1
+  - @redux-devtools/core@3.13.2
+
 ## 0.1.12
 
 ### Patch Changes

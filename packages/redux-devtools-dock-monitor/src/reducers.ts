@@ -6,9 +6,9 @@ import {
   CHANGE_SIZE,
   DockMonitorAction,
   TOGGLE_VISIBILITY,
-} from './actions';
-import { POSITIONS } from './constants';
-import { DockMonitorProps } from './DockMonitor';
+} from './actions.js';
+import { POSITIONS } from './constants.js';
+import { DockMonitorProps } from './DockMonitor.js';
 
 export interface DockMonitorState {
   position: 'left' | 'top' | 'right' | 'bottom';
@@ -18,7 +18,7 @@ export interface DockMonitorState {
   childMonitorIndex: number;
 }
 
-function position<S, A extends Action<unknown>>(
+function position<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state = props.defaultPosition,
   action: DockMonitorAction,
@@ -28,7 +28,7 @@ function position<S, A extends Action<unknown>>(
     : state;
 }
 
-function size<S, A extends Action<unknown>>(
+function size<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state = props.defaultSize,
   action: DockMonitorAction,
@@ -36,7 +36,7 @@ function size<S, A extends Action<unknown>>(
   return action.type === CHANGE_SIZE ? action.size : state;
 }
 
-function isVisible<S, A extends Action<unknown>>(
+function isVisible<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state = props.defaultIsVisible,
   action: DockMonitorAction,
@@ -44,7 +44,7 @@ function isVisible<S, A extends Action<unknown>>(
   return action.type === TOGGLE_VISIBILITY ? !state : state;
 }
 
-function childMonitorStates<S, A extends Action<unknown>>(
+function childMonitorStates<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state: unknown[] = [],
   action: DockMonitorAction,
@@ -54,7 +54,7 @@ function childMonitorStates<S, A extends Action<unknown>>(
   );
 }
 
-function childMonitorIndex<S, A extends Action<unknown>>(
+function childMonitorIndex<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state = 0,
   action: DockMonitorAction,
@@ -67,7 +67,7 @@ function childMonitorIndex<S, A extends Action<unknown>>(
   }
 }
 
-export default function reducer<S, A extends Action<unknown>>(
+export default function reducer<S, A extends Action<string>>(
   props: DockMonitorProps<S, A>,
   state: Partial<DockMonitorState> = {},
   action: DockMonitorAction,
@@ -75,7 +75,6 @@ export default function reducer<S, A extends Action<unknown>>(
   if (!state.childMonitorStates) {
     Children.forEach(props.children, (child, index) => {
       if (typeof child.type.update !== 'function') {
-        // eslint-disable-next-line no-console
         console.error(
           `Child of <DockMonitor> with the index ${index} ` +
             `(${

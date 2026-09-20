@@ -1,0 +1,80 @@
+{
+  "name": "@redux-devtools/app-core",
+  "version": "3.0.0",
+  "description": "Redux DevTools app core",
+  "homepage": "https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-app-core",
+  "bugs": {
+    "url": "https://github.com/reduxjs/redux-devtools/issues"
+  },
+  "license": "MIT",
+  "author": "Mihail Diordiev <zalmoxisus@gmail.com> (https://github.com/zalmoxisus)",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "exports": "./lib/index.js",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reduxjs/redux-devtools.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "test": "vitest --run --project app-core",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "prepack": "pnpm run clean && pnpm run build"
+  },
+  "dependencies": {
+    "@redux-devtools/chart-monitor": "workspace:^",
+    "@redux-devtools/core": "workspace:^",
+    "@redux-devtools/inspector-monitor": "workspace:^",
+    "@redux-devtools/inspector-monitor-test-tab": "workspace:^",
+    "@redux-devtools/inspector-monitor-trace-tab": "workspace:^",
+    "@redux-devtools/log-monitor": "workspace:^",
+    "@redux-devtools/rtk-query-monitor": "workspace:^",
+    "@redux-devtools/slider-monitor": "workspace:^",
+    "@redux-devtools/ui": "workspace:^",
+    "d3-state-visualizer": "workspace:^",
+    "javascript-stringify": "^2.1.0",
+    "jsan": "^3.1.14",
+    "jsondiffpatch": "^0.7.6",
+    "react-icons": "^5.7.0",
+    "react-is": "^19.3.0"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@reduxjs/toolkit": "^2.12.0",
+    "@rjsf/core": "^6.10.1",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/jest-dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@types/jsan": "^3.1.5",
+    "@types/json-schema": "^7.0.15",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "jsdom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-redux": "^9.3.0",
+    "redux": "^5.0.1",
+    "redux-persist": "^6.0.0",
+    "rimraf": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@reduxjs/toolkit": "^1.0.0 || ^2.0.0",
+    "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-redux": "^8.0.0 || ^9.0.0",
+    "redux": "^4.0.0 || ^5.0.0",
+    "redux-persist": "^6.0.0"
+  }
+}

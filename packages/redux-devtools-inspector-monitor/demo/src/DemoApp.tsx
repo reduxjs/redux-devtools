@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import * as base16 from 'base16';
+import { base16Themes } from 'react-base16-styling';
 import { inspectorThemes } from '@redux-devtools/inspector-monitor';
 import { useLocation, useNavigate } from 'react-router-dom';
 import getOptions, { Options } from './getOptions';
@@ -92,10 +92,10 @@ const themeOptions = [
     label: inspectorThemes[value as keyof typeof inspectorThemes].scheme,
   })),
   null,
-  ...Object.keys(base16)
+  ...Object.keys(base16Themes)
     .map((value) => ({
       value,
-      label: base16[value as keyof typeof base16].scheme,
+      label: base16Themes[value as keyof typeof base16Themes].scheme,
     }))
     .filter((opt) => opt.label),
 ];
@@ -119,8 +119,10 @@ function buildUrl(options: Options) {
   );
 }
 
-interface Props
-  extends Omit<DemoAppState, 'addFunction' | 'addSymbol' | 'shuffleArray'> {
+interface Props extends Omit<
+  DemoAppState,
+  'addFunction' | 'addSymbol' | 'shuffleArray'
+> {
   toggleTimeoutUpdate: (timeoutUpdateEnabled: boolean) => void;
   timeoutUpdate: () => void;
   increment: () => void;
@@ -142,7 +144,7 @@ interface Props
 }
 
 function DemoApp(props: Props) {
-  const timeout = useRef<number | undefined>();
+  const timeout = useRef<number | undefined>(undefined);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -155,22 +157,22 @@ function DemoApp(props: Props) {
     });
   };
 
-  const toggleImmutableSupport = () => {
+  const toggleImmutableSupport = async () => {
     const options = getOptions(location);
 
-    navigate(
+    await navigate(
       buildUrl({ ...options, supportImmutable: !options.supportImmutable }),
     );
   };
 
-  const toggleTheme = () => {
+  const toggleTheme = async () => {
     const options = getOptions(location);
 
-    navigate(buildUrl({ ...options, dark: !options.dark }));
+    await navigate(buildUrl({ ...options, dark: !options.dark }));
   };
 
-  const setTheme = (options: Options, theme: string) => {
-    navigate(buildUrl({ ...options, theme }));
+  const setTheme = async (options: Options, theme: string) => {
+    await navigate(buildUrl({ ...options, theme }));
   };
 
   const toggleTimeoutUpdate = () => {

@@ -2,14 +2,23 @@ import childProcess from 'child_process';
 import request from 'supertest';
 import socketClusterClient from 'socketcluster-client';
 
-jest.setTimeout(10000);
-
 describe('Server', function () {
   let scServer: childProcess.ChildProcess;
   beforeAll(async function () {
-    scServer = childProcess.fork(__dirname + '/../bin/redux-devtools.js');
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-  });
+    scServer = childProcess.fork(
+      import.meta.dirname + '/../bin/redux-devtools.js',
+    );
+    const deadline = Date.now() + 30000;
+    while (Date.now() < deadline) {
+      try {
+        await fetch('http://localhost:8000/');
+        return;
+      } catch {
+        await new Promise((resolve) => setTimeout(resolve, 250));
+      }
+    }
+    throw new Error('redux-devtools server did not start listening on :8000');
+  }, 35000);
 
   afterAll(function () {
     if (scServer) {
@@ -20,7 +29,7 @@ describe('Server', function () {
   describe('Express backend', function () {
     it('loads main page', function () {
       return new Promise<void>((done) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        // oxlint-disable-next-line typescript/no-floating-promises
         request('http://localhost:8000')
           .get('/')
           .expect('Content-Type', /text\/html/)
@@ -34,7 +43,6 @@ describe('Server', function () {
 
     it('resolves an inexistent url', function () {
       return new Promise((done) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         request('http://localhost:8000/jreerfr/123')
           .get('/')
           .expect('Content-Type', /text\/html/)
@@ -55,7 +63,7 @@ describe('Server', function () {
       socket.connect();
       void (async () => {
         for await (const data of socket.listener('error')) {
-          console.error('Socket1 error', data.error); // eslint-disable-line no-console
+          console.error('Socket1 error', data.error);
         }
       })();
       socket2 = socketClusterClient.create({
@@ -65,7 +73,7 @@ describe('Server', function () {
       socket2.connect();
       void (async () => {
         for await (const data of socket2.listener('error')) {
-          console.error('Socket2 error', data.error); // eslint-disable-line no-console
+          console.error('Socket2 error', data.error);
         }
       })();
     });

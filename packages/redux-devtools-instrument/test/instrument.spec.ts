@@ -1,13 +1,21 @@
-import { createStore, compose, Reducer, Store, Action } from 'redux';
+import { vi } from 'vitest';
+import {
+  createStore,
+  compose,
+  Reducer,
+  Store,
+  Action,
+  StoreEnhancer,
+} from 'redux';
+import { from, Observable } from 'rxjs';
 import {
   ActionCreators,
   EnhancedStore,
   instrument,
+  LiftedAction,
   LiftedStore,
   LiftedState,
-} from '../src/instrument';
-import { from, Observable } from 'rxjs';
-import _ from 'lodash';
+} from '../src/instrument.js';
 
 type CounterAction = { type: 'INCREMENT' } | { type: 'DECREMENT' };
 function counter(state = 0, action: CounterAction) {
@@ -30,7 +38,6 @@ function counterWithBug(state = 0, action: CounterWithBugAction) {
     case 'INCREMENT':
       return state + 1;
     case 'DECREMENT':
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return mistake - 1;
     case 'SET_UNDEFINED':
@@ -47,7 +54,6 @@ type CounterWithAnotherBugAction =
 function counterWithAnotherBug(state = 0, action: CounterWithBugAction) {
   switch (action.type) {
     case 'INCREMENT':
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return (mistake as unknown as number) + 1;
     case 'DECREMENT':
@@ -340,7 +346,7 @@ describe('instrument', () => {
   });
 
   it('should catch and record errors', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {
       // noop
     });
     const storeWithBug = createStore(
@@ -487,10 +493,18 @@ describe('instrument', () => {
 
     const savedComputedStates = monitoredLiftedStore.getState().computedStates;
 
-    monitoredLiftedStore.dispatch({ type: 'lol' } as Action);
+    monitoredLiftedStore.dispatch({ type: 'lol' } as unknown as LiftedAction<
+      number,
+      Action,
+      null
+    >);
     expect(reducerCalls).toBe(4);
 
-    monitoredLiftedStore.dispatch({ type: 'wat' } as Action);
+    monitoredLiftedStore.dispatch({ type: 'wat' } as unknown as LiftedAction<
+      number,
+      Action,
+      null
+    >);
     expect(reducerCalls).toBe(4);
 
     expect(monitoredLiftedStore.getState().computedStates).toBe(
@@ -544,7 +558,7 @@ describe('instrument', () => {
     });
 
     it('should not auto-commit errors', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -562,7 +576,7 @@ describe('instrument', () => {
     });
 
     it('should auto-commit actions after hot reload fixes error', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -623,7 +637,7 @@ describe('instrument', () => {
     });
 
     it('should continue to increment currentStateIndex while error blocks commit', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -647,7 +661,7 @@ describe('instrument', () => {
     });
 
     it('should adjust currentStateIndex correctly when multiple actions are committed', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -679,7 +693,7 @@ describe('instrument', () => {
     });
 
     it('should not allow currentStateIndex to drop below 0', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
 
       const storeWithBug = createStore(
         counterWithBug,
@@ -713,7 +727,7 @@ describe('instrument', () => {
 
     it('should use dynamic maxAge', () => {
       let max = 3;
-      const getMaxAge = jest.fn().mockImplementation(() => max);
+      const getMaxAge = vi.fn().mockImplementation(() => max);
       store = createStore(
         counter,
         instrument(undefined, { maxAge: getMaxAge }),
@@ -995,7 +1009,7 @@ describe('instrument', () => {
     });
 
     it('should include 3 extra frames when Error.captureStackTrace not suported', () => {
-      // eslint-disable-next-line @typescript-eslint/unbound-method
+      // oxlint-disable-next-line typescript/unbound-method
       const captureStackTrace = Error.captureStackTrace;
       Error.captureStackTrace = undefined as unknown as () => unknown;
       monitoredStore = createStore(
@@ -1111,7 +1125,6 @@ describe('instrument', () => {
       const importMonitoredLiftedStore = importMonitoredStore.liftedStore;
 
       const noComputedExportedState = Object.assign({}, exportedState);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       delete noComputedExportedState.computedStates;
 
@@ -1152,16 +1165,17 @@ describe('instrument', () => {
     });
   });
 
-  function filterStackAndTimestamps<S, A extends Action<unknown>>(
+  function filterStackAndTimestamps<S, A extends Action<string>>(
     state: LiftedState<S, A, null>,
   ) {
-    state.actionsById = _.mapValues(state.actionsById, (action) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      delete action.timestamp;
-      delete action.stack;
-      return action;
-    });
+    state.actionsById = Object.fromEntries(
+      Object.entries(state.actionsById).map(([actionId, action]) => {
+        // @ts-ignore
+        delete action.timestamp;
+        delete action.stack;
+        return [actionId, action];
+      }),
+    );
     return state;
   }
 
@@ -1366,7 +1380,9 @@ describe('instrument', () => {
   it('throws if reducer is not a function', () => {
     expect(() =>
       createStore(undefined as unknown as Reducer, instrument()),
-    ).toThrow('Expected the reducer to be a function.');
+    ).toThrow(
+      "Expected the root reducer to be a function. Instead, received: 'undefined'",
+    );
   });
 
   it('warns if the reducer is not a function but has a default field that is', () => {
@@ -1380,16 +1396,16 @@ describe('instrument', () => {
         instrument(),
       ),
     ).toThrow(
-      'Expected the reducer to be a function. ' +
-        'Instead got an object with a "default" field. ' +
-        'Did you pass a module instead of the default export? ' +
-        'Try passing require(...).default instead.',
+      "Expected the root reducer to be a function. Instead, received: 'object'",
     );
   });
 
   it('throws if there are more than one instrument enhancer included', () => {
     expect(() => {
-      createStore(counter, compose(instrument(), instrument()));
+      createStore(
+        counter,
+        compose(instrument(), instrument()) as StoreEnhancer,
+      );
     }).toThrow(
       'DevTools instrumentation should not be applied more than once. ' +
         'Check your store configuration.',

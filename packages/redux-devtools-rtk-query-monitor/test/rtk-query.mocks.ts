@@ -1,12 +1,12 @@
+import type { Mock } from 'vitest';
 import {
   combineReducers,
   configureStore,
   EnhancedStore,
-  Middleware,
 } from '@reduxjs/toolkit';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs } from '@reduxjs/toolkit/query';
-import type { ReduxDevTools } from './devtools.mocks';
+import type { ReduxDevTools } from './devtools.mocks.js';
 
 export type MockBaseQuery<
   Result,
@@ -14,10 +14,7 @@ export type MockBaseQuery<
   Meta = { status?: number },
 > = BaseQueryFn<Args, Result, unknown, Meta>;
 
-export type BaseQueryJestMockFunction<Result> = jest.Mock<
-  ReturnType<MockBaseQuery<Result>>,
-  Parameters<MockBaseQuery<Result>>
->;
+export type BaseQueryJestMockFunction<Result> = Mock<MockBaseQuery<Result>>;
 
 export function createMockBaseQuery<Result>(
   jestMockFn: BaseQueryJestMockFunction<Result>,
@@ -70,8 +67,9 @@ export function setupStore(
     devTools: false,
     // adding the api middleware enables caching, invalidation, polling and other features of `rtk-query`
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat([pokemonApi.middleware]) as Middleware[],
-    enhancers: [devTools.instrument()],
+      getDefaultMiddleware().concat(pokemonApi.middleware),
+    enhancers: (getDefaultEnhancers) =>
+      getDefaultEnhancers().concat(devTools.instrument()),
   });
 
   return {

@@ -4,16 +4,8 @@ import {
   getActionsArray,
   getLocalFilter,
 } from '@redux-devtools/utils';
-import throttle from 'lodash/throttle';
-import {
-  Action,
-  ActionCreator,
-  Dispatch,
-  PreloadedState,
-  Reducer,
-  StoreEnhancer,
-  StoreEnhancerStoreCreator,
-} from 'redux';
+import { throttle } from 'lodash-es';
+import { Action, ActionCreator, Dispatch, Reducer, StoreEnhancer } from 'redux';
 import Immutable from 'immutable';
 import {
   EnhancedStore,
@@ -27,19 +19,19 @@ import {
   LibConfig,
   Features,
 } from '@redux-devtools/app';
-import configureStore, { getUrlParam } from './enhancerStore';
-import { isAllowed, Options } from '../options/syncOptions';
-import Monitor from './Monitor';
+import configureStore, { getUrlParam } from './enhancerStore.js';
+import { isAllowed, Options } from '../options/syncOptions.js';
+import Monitor from './Monitor.js';
 import {
   noFiltersApplied,
   isFiltered,
   filterState,
   startingFrom,
-} from './api/filters';
-import notifyErrors from './api/notifyErrors';
-import importState from './api/importState';
-import openWindow, { Position } from './api/openWindow';
-import generateId from './api/generateInstanceId';
+} from './api/filters.js';
+import notifyErrors from './api/notifyErrors.js';
+import importState from './api/importState.js';
+import openWindow, { Position } from './api/openWindow.js';
+import generateId from './api/generateInstanceId.js';
 import {
   toContentScript,
   sendMessage,
@@ -51,31 +43,29 @@ import {
   Serialize,
   StructuralPerformAction,
   ConnectResponse,
-} from './api';
-import type { ContentScriptToPageScriptMessage } from '../contentScript';
+} from './api/index.js';
+import type { ContentScriptToPageScriptMessage } from '../contentScript/index.js';
 
 type EnhancedStoreWithInitialDispatch<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorState,
 > = EnhancedStore<S, A, MonitorState> & { initialDispatch: Dispatch<A> };
 
 const source = '@devtools-page';
-let stores: {
+const stores: {
   [K in string | number]: EnhancedStoreWithInitialDispatch<
     unknown,
-    Action<unknown>,
+    Action<string>,
     unknown
   >;
 } = {};
 let reportId: string | null | undefined;
 
 function deprecateParam(oldParam: string, newParam: string) {
-  /* eslint-disable no-console */
   console.warn(
     `${oldParam} parameter is deprecated, use ${newParam} instead: https://github.com/reduxjs/redux-devtools/blob/main/extension/docs/API/Arguments.md`,
   );
-  /* eslint-enable no-console */
 }
 
 export interface SerializeWithImmutable extends Serialize {
@@ -97,18 +87,18 @@ export interface ConfigWithExpandedMaxAge {
   readonly actionsAllowlist?: string | readonly string[];
   serialize?: boolean | SerializeWithImmutable;
   readonly stateSanitizer?: <S>(state: S, index?: number) => S;
-  readonly actionSanitizer?: <A extends Action<unknown>>(
+  readonly actionSanitizer?: <A extends Action<string>>(
     action: A,
     id?: number,
   ) => A;
-  readonly predicate?: <S, A extends Action<unknown>>(
+  readonly predicate?: <S, A extends Action<string>>(
     state: S,
     action: A,
   ) => boolean;
   readonly latency?: number;
   readonly maxAge?:
     | number
-    | (<S, A extends Action<unknown>>(
+    | (<S, A extends Action<string>>(
         currentLiftedAction: LiftedAction<S, A, unknown>,
         previousLiftedState: LiftedState<S, A, unknown> | undefined,
       ) => number);
@@ -123,9 +113,9 @@ export interface ConfigWithExpandedMaxAge {
   readonly autoPause?: boolean;
   readonly features?: Features;
   readonly type?: string;
-  readonly getActionType?: <A extends Action<unknown>>(action: A) => A;
+  readonly getActionType?: <A extends Action<string>>(action: A) => A;
   readonly actionCreators?: {
-    readonly [key: string]: ActionCreator<Action<unknown>>;
+    readonly [key: string]: ActionCreator<Action<string>>;
   };
 }
 
@@ -137,7 +127,7 @@ interface ReduxDevtoolsExtension {
   (config?: Config): StoreEnhancer;
   open: (position?: Position) => void;
   notifyErrors: (onError?: () => boolean) => void;
-  send: <S, A extends Action<unknown>>(
+  send: <S, A extends Action<string>>(
     action: StructuralPerformAction<A> | StructuralPerformAction<A>[],
     state: LiftedState<S, A, unknown>,
     config: Config,
@@ -158,12 +148,28 @@ declare global {
   }
 }
 
-function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
+// The content script pushes the extension options as soon as it loads, before
+// any store exists, so `isAllowed` below sees them when `enhance()` runs.
+window.addEventListener(
+  'message',
+  (event: MessageEvent<ContentScriptToPageScriptMessage>) => {
+    if (process.env.BABEL_ENV !== 'test' && event.source !== window) return;
+    const message = event.data;
+    if (!message || message.source !== '@devtools-extension') return;
+    if (message.type === 'OPTIONS') {
+      window.devToolsOptions = Object.assign(
+        window.devToolsOptions || {},
+        message.options,
+      );
+    }
+  },
+  false,
+);
+
+function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<string>>(
   config?: Config,
 ): StoreEnhancer {
-  /* eslint-disable no-param-reassign */
   if (typeof config !== 'object') config = {};
-  /* eslint-enable no-param-reassign */
   if (!window.devToolsOptions) window.devToolsOptions = {} as any;
 
   let store: EnhancedStoreWithInitialDispatch<S, A, unknown>;
@@ -175,7 +181,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
   const localFilter = getLocalFilter(config);
   const serializeState = getSerializeParameter(config);
   const serializeAction = getSerializeParameter(config);
-  let { stateSanitizer, actionSanitizer, predicate, latency = 500 } = config;
+  const { stateSanitizer, actionSanitizer, predicate, latency = 500 } = config;
 
   // Deprecate actionsWhitelist and actionsBlacklist
   if (config.actionsWhitelist) {
@@ -185,34 +191,28 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     deprecateParam('actionsBlacklist', 'actionsDenylist');
   }
 
-  const relayState = throttle(
-    (
-      liftedState?: LiftedState<S, A, unknown> | undefined,
-      libConfig?: LibConfig,
-    ) => {
-      relayAction.cancel();
-      const state = liftedState || store.liftedStore.getState();
-      sendingActionId = state.nextActionId;
-      toContentScript(
-        {
-          type: 'STATE',
-          payload: filterState(
-            state,
-            localFilter,
-            stateSanitizer,
-            actionSanitizer,
-            predicate,
-          ),
-          source,
-          instanceId,
-          libConfig,
-        },
-        serializeState,
-        serializeAction,
-      );
-    },
-    latency,
-  );
+  const relayState = throttle((libConfig?: LibConfig) => {
+    relayAction.cancel();
+    const state = store.liftedStore.getState();
+    sendingActionId = state.nextActionId;
+    toContentScript(
+      {
+        type: 'STATE',
+        payload: filterState(
+          state,
+          localFilter,
+          stateSanitizer,
+          actionSanitizer,
+          predicate,
+        ),
+        source,
+        instanceId,
+        libConfig,
+      },
+      serializeState,
+      serializeAction,
+    );
+  }, latency);
 
   const monitor = new Monitor(relayState);
 
@@ -310,7 +310,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       );
       return;
     }
-    toContentScript(
+    toContentScript<S, A>(
       {
         type: 'PARTIAL_STATE',
         payload,
@@ -402,7 +402,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
         if (!actionCreators && config!.actionCreators) {
           actionCreators = getActionsArray(config!.actionCreators);
         }
-        relayState(undefined, {
+        relayState({
           name: config!.name || document.title,
           actionCreators: JSON.stringify(actionCreators),
           features: config!.features,
@@ -440,6 +440,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
             serializeAction,
           );
         }
+        return;
     }
   }
 
@@ -448,7 +449,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     liftedAction?: LiftedAction<S, A, unknown>,
     liftedState?: LiftedState<S, A, unknown> | undefined,
   ) => {
-    let m = (config && config.maxAge) || window.devToolsOptions.maxAge || 50;
+    const m = (config && config.maxAge) || window.devToolsOptions.maxAge || 50;
     if (
       !liftedAction ||
       noFiltersApplied(localFilter) ||
@@ -465,10 +466,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       if (filteredActionIds.length >= m) {
         const stagedActionIds = liftedState!.stagedActionIds;
         let i = 1;
-        while (
-          maxAge > m &&
-          filteredActionIds.indexOf(stagedActionIds[i]) === -1
-        ) {
+        while (maxAge > m && !filteredActionIds.includes(stagedActionIds[i])) {
           maxAge--;
           i++;
         }
@@ -484,7 +482,7 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
       errorOccurred = true;
       const state = store.liftedStore.getState();
       if (state.computedStates[state.currentStateIndex].error) {
-        relayState(state);
+        relayState();
       }
       return true;
     });
@@ -523,37 +521,31 @@ function __REDUX_DEVTOOLS_EXTENSION__<S, A extends Action<unknown>>(
     ) {
       errorOccurred = false;
     }
-    relayState(liftedState);
+    relayState();
   }
 
-  const enhance =
-    (): StoreEnhancer =>
-    <NextExt, NextStateExt>(
-      next: StoreEnhancerStoreCreator<NextExt, NextStateExt>,
-    ): any => {
-      return <S2 extends S, A2 extends A>(
-        reducer_: Reducer<S2, A2>,
-        initialState_?: PreloadedState<S2>,
-      ) => {
-        if (!isAllowed(window.devToolsOptions)) {
-          return next(reducer_, initialState_);
-        }
+  const enhance = (): StoreEnhancer => (next) => {
+    return <S2, A2 extends Action<string>, PreloadedState>(
+      reducer_: Reducer<S2, A2, PreloadedState>,
+      initialState_?: PreloadedState | undefined,
+    ) => {
+      if (!isAllowed(window.devToolsOptions)) {
+        return next(reducer_, initialState_);
+      }
 
-        store = stores[instanceId] = configureStore(
-          next as StoreEnhancerStoreCreator,
-          monitor.reducer,
-          {
-            ...config,
-            maxAge: getMaxAge as any,
-          },
-        )(reducer_, initialState_) as any;
+      store = stores[instanceId] = (
+        configureStore(next, monitor.reducer, {
+          ...config,
+          maxAge: getMaxAge as any,
+        }) as any
+      )(reducer_, initialState_);
 
-        if (isInIframe()) setTimeout(init, 3000);
-        else init();
+      if (isInIframe()) setTimeout(init, 3000);
+      else init();
 
-        return store;
-      };
+      return store as any;
     };
+  };
 
   return enhance();
 }
@@ -588,7 +580,7 @@ const preEnhancer =
       dispatch: (...args: any[]) =>
         !window.__REDUX_DEVTOOLS_EXTENSION_LOCKED__ &&
         (store.dispatch as any)(...args),
-    } as any;
+    };
   };
 
 export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
@@ -598,18 +590,17 @@ export type InferComposedStoreExt<StoreEnhancers> = StoreEnhancers extends [
   ? HeadStoreEnhancer extends StoreEnhancer<infer StoreExt>
     ? StoreExt & InferComposedStoreExt<RestStoreEnhancers>
     : never
-  : unknown;
+  : {};
 
 const extensionCompose =
   (config: Config) =>
-  <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  <StoreEnhancers extends readonly StoreEnhancer[]>(
     ...funcs: StoreEnhancers
   ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>> => {
-    // @ts-ignore FIXME
+    // @ts-expect-error FIXME
     return (...args) => {
       const instanceId = generateId(config.instanceId);
       return [preEnhancer(instanceId), ...funcs].reduceRight(
-        // @ts-ignore FIXME
         (composed, f) => f(composed),
         __REDUX_DEVTOOLS_EXTENSION__({ ...config, instanceId })(...args),
       );
@@ -619,10 +610,10 @@ const extensionCompose =
 interface ReduxDevtoolsExtensionCompose {
   (
     config: Config,
-  ): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  ): <StoreEnhancers extends readonly StoreEnhancer[]>(
     ...funcs: StoreEnhancers
   ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
-  <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+  <StoreEnhancers extends readonly StoreEnhancer[]>(
     ...funcs: StoreEnhancers
   ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 }
@@ -635,24 +626,22 @@ declare global {
 
 function reduxDevtoolsExtensionCompose(
   config: Config,
-): <StoreEnhancers extends readonly StoreEnhancer<unknown>[]>(
+): <StoreEnhancers extends readonly StoreEnhancer[]>(
   ...funcs: StoreEnhancers
 ) => StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
 function reduxDevtoolsExtensionCompose<
-  StoreEnhancers extends readonly StoreEnhancer<unknown>[],
+  StoreEnhancers extends readonly StoreEnhancer[],
 >(
   ...funcs: StoreEnhancers
 ): StoreEnhancer<InferComposedStoreExt<StoreEnhancers>>;
-function reduxDevtoolsExtensionCompose(
-  ...funcs: [Config] | StoreEnhancer<unknown>[]
-) {
+function reduxDevtoolsExtensionCompose(...funcs: [Config] | StoreEnhancer[]) {
   if (funcs.length === 0) {
     return __REDUX_DEVTOOLS_EXTENSION__();
   }
   if (funcs.length === 1 && typeof funcs[0] === 'object') {
     return extensionCompose(funcs[0]);
   }
-  return extensionCompose({})(...(funcs as StoreEnhancer<unknown>[]));
+  return extensionCompose({})(...(funcs as StoreEnhancer[]));
 }
 
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = reduxDevtoolsExtensionCompose;

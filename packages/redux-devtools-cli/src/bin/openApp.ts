@@ -14,7 +14,6 @@ export default async function openApp(app: true | string, options: Options) {
       const host = options.host ? `--host=${options.host}` : '';
       const protocol = options.protocol ? `--protocol=${options.protocol}` : '';
 
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
       spawn(require('electron') as string, [
         path.join(
           path.dirname(fileURLToPath(import.meta.url)),
@@ -27,7 +26,6 @@ export default async function openApp(app: true | string, options: Options) {
         protocol,
       ]);
     } catch (error) {
-      /* eslint-disable no-console */
       if ((error as Error).message === "Cannot find module 'electron'") {
         // TODO: Move electron to dev-dependences to make our package installation faster when not needed.
         console.log(
@@ -41,7 +39,6 @@ export default async function openApp(app: true | string, options: Options) {
       } else {
         console.log(error);
       }
-      /* eslint-enable no-console */
     }
     return;
   }

@@ -2,13 +2,13 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { PerformAction } from '@redux-devtools/core';
 import { Action } from 'redux';
-import TestGenerator from '../src/TestGenerator';
-import fnTemplate from '../src/redux/mocha';
-import strTemplate from '../src/redux/mocha/template';
-import fnVanillaTemplate from '../src/vanilla/mocha';
-import strVanillaTemplate from '../src/vanilla/mocha/template';
+import TestGenerator from '../src/TestGenerator.js';
+import fnTemplate from '../src/redux/mocha/index.js';
+import strTemplate from '../src/redux/mocha/template.js';
+import fnVanillaTemplate from '../src/vanilla/mocha/index.js';
+import strVanillaTemplate from '../src/vanilla/mocha/template.js';
 
-const actions: { [actionId: number]: PerformAction<Action<unknown>> } = {
+const actions: { [actionId: number]: PerformAction<Action<string>> } = {
   0: {
     type: 'PERFORM_ACTION',
     action: { type: '@@INIT' },

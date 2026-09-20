@@ -1,6 +1,6 @@
-import StackFrame from './react-error-overlay/utils/stack-frame';
+import StackFrame from './react-error-overlay/utils/stack-frame.js';
 
-const isFF = navigator.userAgent.indexOf('Firefox') !== -1;
+const isFF = navigator.userAgent.includes('Firefox');
 
 function openResource(
   fileName: string,
@@ -32,11 +32,10 @@ function openAndCloseTab(url: string) {
     const removeTab = () => {
       chrome.windows.onFocusChanged.removeListener(removeTab);
       if (tab && tab.id) {
-        chrome.tabs.remove(tab.id, async () => {
-          // eslint-disable-next-line no-console
+        chrome.tabs.remove(tab.id, () => {
           if (chrome.runtime.lastError) console.log(chrome.runtime.lastError);
           else if (chrome.devtools && chrome.devtools.inspectedWindow) {
-            await chrome.tabs.update(chrome.devtools.inspectedWindow.tabId, {
+            void chrome.tabs.update(chrome.devtools.inspectedWindow.tabId, {
               active: true,
             });
           }
@@ -101,7 +100,10 @@ export default function openFile(
   lineNumber: number,
   stackFrame: StackFrame,
 ) {
-  if (!chrome || !chrome.storage) return; // TODO: Pass editor settings for using outside of browser extension
+  if (typeof chrome === 'undefined' || !chrome.storage) {
+    if (/^https?:\/\//.test(fileName)) window.open(fileName, '_blank');
+    return;
+  }
   const storage = isFF
     ? chrome.storage.local
     : chrome.storage.sync || chrome.storage.local;
@@ -126,13 +128,13 @@ export default function openFile(
           if (chrome.devtools && isFF) {
             chrome.devtools.inspectedWindow.eval(
               'confirm("Set the editor to open the file in?")',
-              (result) => {
-                if (!result) return;
+              (result, exceptionInfo) => {
+                if (exceptionInfo || !result) return;
                 void chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS' });
               },
             );
           } else if (confirm('Set the editor to open the file in?')) {
-            chrome.runtime.openOptionsPage();
+            void chrome.runtime.openOptionsPage();
           }
         }
       }

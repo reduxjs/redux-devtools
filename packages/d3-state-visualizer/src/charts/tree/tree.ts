@@ -9,14 +9,12 @@ import {
   toggleChildren,
   visit,
   getNodeGroupByDepthCount,
-} from './utils';
+} from './utils.js';
 import { tooltip } from 'd3tooltip';
 import type { StyleValue } from 'd3tooltip';
 
 export interface Options {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   state?: {} | null;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   tree?: Node | {};
 
   rootKeyName: string;
@@ -183,7 +181,7 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
   }
 
   const vis = svgElement
-    // eslint-disable-next-line @typescript-eslint/unbound-method
+    // oxlint-disable-next-line typescript/unbound-method
     .call(zoom.scaleTo, initialZoom)
     .call(
       zoom.on('zoom', (event) => {
@@ -401,8 +399,8 @@ export default function (DOMNode: HTMLElement, options: Partial<Options> = {}) {
           d.data._children && d.data._children.length > 0
             ? nodeStyleOptions.colors.collapsed
             : d.data.children && d.data.children.length > 0
-            ? nodeStyleOptions.colors.parent
-            : nodeStyleOptions.colors.default,
+              ? nodeStyleOptions.colors.parent
+              : nodeStyleOptions.colors.default,
         );
 
       // transition nodes to their new position

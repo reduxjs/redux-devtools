@@ -1,16 +1,10 @@
-import mapValues from 'lodash/mapValues';
-import identity from 'lodash/identity';
-import { Action, PreloadedState, Reducer, StoreEnhancer } from 'redux';
+import { Action, Reducer, StoreEnhancer } from 'redux';
 import { LiftedState } from '@redux-devtools/instrument';
 
-export default function persistState<
-  S,
-  A extends Action<unknown>,
-  MonitorState,
->(
+export default function persistState<S, A extends Action<string>, MonitorState>(
   sessionId?: string | null,
-  deserializeState: (state: S) => S = identity,
-  deserializeAction: (action: A) => A = identity,
+  deserializeState: (state: S) => S = (state) => state,
+  deserializeAction: (action: A) => A = (state) => state,
 ): StoreEnhancer {
   if (!sessionId) {
     return (next) =>
@@ -23,10 +17,15 @@ export default function persistState<
   ): LiftedState<S, A, MonitorState> {
     return {
       ...state,
-      actionsById: mapValues(state.actionsById, (liftedAction) => ({
-        ...liftedAction,
-        action: deserializeAction(liftedAction.action),
-      })),
+      actionsById: Object.fromEntries(
+        Object.entries(state.actionsById).map(([actionId, liftedAction]) => [
+          actionId,
+          {
+            ...liftedAction,
+            action: deserializeAction(liftedAction.action),
+          },
+        ]),
+      ),
       committedState: deserializeState(state.committedState),
       computedStates: state.computedStates.map((computedState) => ({
         ...computedState,
@@ -36,9 +35,9 @@ export default function persistState<
   }
 
   return (next) =>
-    <S2, A2 extends Action<unknown>>(
-      reducer: Reducer<S2, A2>,
-      initialState?: PreloadedState<S2>,
+    <S2, A2 extends Action<string>, PreloadedState>(
+      reducer: Reducer<S2, A2, PreloadedState>,
+      initialState?: PreloadedState | undefined,
     ) => {
       const key = `redux-dev-session-${sessionId}`;
 
@@ -52,7 +51,7 @@ export default function persistState<
           next(reducer, initialState);
         }
       } catch (e) {
-        console.warn('Could not read debug session from localStorage:', e); // eslint-disable-line no-console
+        console.warn('Could not read debug session from localStorage:', e);
         try {
           localStorage.removeItem(key);
         } finally {
@@ -62,7 +61,7 @@ export default function persistState<
 
       const store = next(
         reducer,
-        finalInitialState as PreloadedState<S2> | undefined,
+        finalInitialState as PreloadedState | undefined,
       );
 
       return {
@@ -73,7 +72,7 @@ export default function persistState<
           try {
             localStorage.setItem(key, JSON.stringify(store.getState()));
           } catch (e) {
-            console.warn('Could not write debug session to localStorage:', e); // eslint-disable-line no-console
+            console.warn('Could not write debug session to localStorage:', e);
           }
 
           return action;

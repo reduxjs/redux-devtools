@@ -2,20 +2,15 @@ import {
   Box,
   Button,
   Center,
-  Divider,
+  Field,
   Flex,
-  FormControl,
-  FormLabel,
+  FormatNumber,
   Heading,
   Input,
   List,
-  ListIcon,
-  ListItem,
+  Separator,
   Spacer,
   Stat,
-  StatLabel,
-  StatNumber,
-  useToast,
 } from '@chakra-ui/react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { MdBook } from 'react-icons/md';
@@ -26,12 +21,12 @@ import {
   useGetPostsQuery,
 } from '../../services/posts';
 import { PostDetail } from './PostDetail';
+import { toaster } from '../../components/ui/toaster';
 
 const AddPost = () => {
   const initialValue = { name: '' };
   const [post, setPost] = useState<Pick<Post, 'name'>>(initialValue);
   const [addPost, { isLoading }] = useAddPostMutation();
-  const toast = useToast();
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setPost((prev) => ({
@@ -45,12 +40,12 @@ const AddPost = () => {
       await addPost(post).unwrap();
       setPost(initialValue);
     } catch {
-      toast({
+      toaster.create({
         title: 'An error occurred',
         description: "We couldn't save your post, try again!",
-        status: 'error',
+        type: 'error',
         duration: 2000,
-        isClosable: true,
+        closable: true,
       });
     }
   };
@@ -58,11 +53,11 @@ const AddPost = () => {
   return (
     <Flex p={'5px 0'} flexDirection="row" flexWrap="wrap" maxWidth={'85%'}>
       <Box flex={'5 0 auto'} padding="0 5px 0 0">
-        <FormControl
+        <Field.Root
           flexDirection="column"
-          isInvalid={Boolean(post.name.length < 3 && post.name)}
+          invalid={Boolean(post.name.length < 3 && post.name)}
         >
-          <FormLabel htmlFor="name">Post name</FormLabel>
+          <Field.Label htmlFor="name">Post name</Field.Label>
           <Input
             id="name"
             name="name"
@@ -70,13 +65,13 @@ const AddPost = () => {
             value={post.name}
             onChange={handleChange}
           />
-        </FormControl>
+        </Field.Root>
       </Box>
       <Box>
         <Button
           mt={8}
           colorScheme="purple"
-          isLoading={isLoading}
+          loading={isLoading}
           onClick={handleAddPost}
         >
           Add Post
@@ -99,13 +94,16 @@ const PostList = () => {
   }
 
   return (
-    <List spacing={3}>
+    <List.Root gap={3}>
       {posts.map(({ id, name }) => (
-        <ListItem key={id} onClick={() => navigate(`/posts/${id}`)}>
-          <ListIcon as={MdBook} color="green.500" /> {name}
-        </ListItem>
+        <List.Item key={id} onClick={() => navigate(`/posts/${id}`)}>
+          <List.Indicator asChild color="green.500">
+            <MdBook />
+          </List.Indicator>
+          {name}
+        </List.Item>
       ))}
-    </List>
+    </List.Root>
   );
 };
 
@@ -115,10 +113,12 @@ export const PostsCountStat = () => {
   if (!posts) return null;
 
   return (
-    <Stat>
-      <StatLabel>Active Posts</StatLabel>
-      <StatNumber>{posts?.length}</StatNumber>
-    </Stat>
+    <Stat.Root>
+      <Stat.Label>Active Posts</Stat.Label>
+      <Stat.ValueText>
+        <FormatNumber value={posts?.length} />
+      </Stat.ValueText>
+    </Stat.Root>
   );
 };
 
@@ -134,9 +134,9 @@ export const PostsManager = () => {
           <PostsCountStat />
         </Box>
       </Flex>
-      <Divider />
+      <Separator />
       <AddPost />
-      <Divider />
+      <Separator />
       <Flex wrap="wrap">
         <Box flex={1} borderRight="1px solid #eee">
           <Box p={4} borderBottom="1px solid #eee">

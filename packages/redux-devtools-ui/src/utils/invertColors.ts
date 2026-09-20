@@ -1,4 +1,4 @@
-import { Base16Theme } from 'base16';
+import type { Base16Theme } from 'react-base16-styling';
 
 function invertColors(theme: Base16Theme) {
   return {

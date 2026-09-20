@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import observeResize from 'simple-element-resize-detector';
 import { FaAngleDoubleRight } from 'react-icons/fa';
-import ContextMenu from '../ContextMenu';
-import createStyledComponent from '../utils/createStyledComponent';
-import * as styles from './styles';
+import ContextMenu from '../ContextMenu/index.js';
+import createStyledComponent from '../utils/createStyledComponent.js';
+import * as styles from './styles/index.js';
 
 const TabsWrapper = createStyledComponent(styles);
 
 export type ReactButtonElement = React.ReactElement<
-  JSX.IntrinsicElements['button'],
+  React.JSX.IntrinsicElements['button'],
   'button'
 >;
 
@@ -234,14 +233,4 @@ export default class TabsHeader<P> extends Component<Props<P>, State> {
       </TabsWrapper>
     );
   }
-
-  static propTypes = {
-    tabs: PropTypes.array.isRequired,
-    items: PropTypes.array.isRequired,
-    main: PropTypes.bool,
-    onClick: PropTypes.func,
-    position: PropTypes.string,
-    collapsible: PropTypes.bool,
-    selected: PropTypes.string,
-  };
 }

@@ -1,4 +1,4 @@
-import { RtkResourceInfo, SelectOption } from '../types';
+import { RtkResourceInfo, SelectOption } from '../types.js';
 
 export interface FilterList<T> {
   (regex: RegExp | null, list: T[]): T[];

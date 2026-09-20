@@ -1,5 +1,61 @@
 # Change Log
 
+## 4.0.0
+
+### Major Changes
+
+- 6481386: Convert remaining packages to ESM
+
+### Patch Changes
+
+- Updated dependencies [804d6bd]
+- Updated dependencies [6481386]
+  - @redux-devtools/core@5.0.0
+  - @redux-devtools/serialize@1.0.0
+
+## 3.1.1
+
+### Patch Changes
+
+- Updated dependencies [91f21b2]
+  - @redux-devtools/core@4.1.1
+
+## 3.1.0
+
+### Patch Changes
+
+- Updated dependencies [6830118]
+  - @redux-devtools/core@4.1.0
+
+## 3.0.0
+
+### Patch Changes
+
+- Updated dependencies [decc035]
+  - @redux-devtools/core@4.0.0
+
+## 2.1.0
+
+### Minor Changes
+
+- 6fc18ed7: Add new Redux version to peer dependencies
+
+### Patch Changes
+
+- 7f5bddbd: Widen peer dependencies
+- Updated dependencies [7f5bddbd]
+- Updated dependencies [6fc18ed7]
+  - @redux-devtools/serialize@0.4.2
+  - @redux-devtools/core@3.14.0
+
+## 2.0.2
+
+### Patch Changes
+
+- 42531c50: Bump versions
+- Updated dependencies [42531c50]
+  - @redux-devtools/core@3.13.3
+
 ## 2.0.1
 
 ### Patch Changes

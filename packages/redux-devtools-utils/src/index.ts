@@ -2,7 +2,7 @@ import getParams from 'get-params';
 import jsan from 'jsan';
 import { nanoid } from 'nanoid/non-secure';
 import { immutableSerialize } from '@redux-devtools/serialize';
-import Immutable from 'immutable';
+import type Immutable from 'immutable';
 import { Action, ActionCreator } from 'redux';
 
 export function generateId(id: string | undefined) {
@@ -11,13 +11,12 @@ export function generateId(id: string | undefined) {
 
 export interface ActionCreatorObject {
   readonly name: string;
-  readonly func: ActionCreator<Action<unknown>>;
+  readonly func: ActionCreator<Action<string>>;
   readonly args: readonly string[];
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 function flatTree(
-  obj: { [key: string]: ActionCreator<Action<unknown>> },
+  obj: { [key: string]: ActionCreator<Action<string>> },
   namespace = '',
 ) {
   let functions: ActionCreatorObject[] = [];
@@ -65,15 +64,14 @@ export function getMethods(obj: unknown) {
 }
 
 export function getActionsArray(actionCreators: {
-  [key: string]: ActionCreator<Action<unknown>>;
+  [key: string]: ActionCreator<Action<string>>;
 }) {
   if (Array.isArray(actionCreators)) return actionCreators;
   return flatTree(actionCreators);
 }
 
-const interpretArg = (arg: string): unknown =>
-  // eslint-disable-next-line @typescript-eslint/no-implied-eval
-  new Function('return ' + arg)();
+// oxlint-disable-next-line typescript/no-implied-eval
+const interpretArg = (arg: string): unknown => new Function('return ' + arg)();
 
 function evalArgs(inArgs: string[], restArgs: string): unknown[] {
   const args = inArgs.map(interpretArg);
@@ -88,7 +86,7 @@ export function evalAction(
   actionCreators: readonly ActionCreatorObject[],
 ) {
   if (typeof action === 'string') {
-    // eslint-disable-next-line @typescript-eslint/no-implied-eval
+    // oxlint-disable-next-line typescript/no-implied-eval
     return new Function('return ' + action)();
   }
 
@@ -102,35 +100,42 @@ export function evalMethod(
   obj: unknown,
 ) {
   if (typeof action === 'string') {
-    // eslint-disable-next-line @typescript-eslint/no-implied-eval
+    // oxlint-disable-next-line typescript/no-implied-eval
     return new Function('return ' + action).call(obj);
   }
 
   const args = evalArgs(action.args, action.rest);
-  // eslint-disable-next-line @typescript-eslint/no-implied-eval
+  // oxlint-disable-next-line typescript/no-implied-eval
   return new Function('args', `return this.${action.name}(args)`).apply(
     obj,
     args,
   );
 }
-/* eslint-enable */
+
+type Replacer = (this: unknown, key: string, value: unknown) => unknown;
+
+function serializeBigInt(value: unknown) {
+  return typeof value === 'bigint' ? `${value}n` : value;
+}
+
+export function withBigIntReplacer(replacer?: Replacer): Replacer {
+  if (!replacer) return (key, value) => serializeBigInt(value);
+  return function (key, value) {
+    return serializeBigInt(replacer.call(this, key, value));
+  };
+}
+
+const defaultReplacer = withBigIntReplacer();
 
 function tryCatchStringify(obj: unknown) {
   try {
-    return JSON.stringify(obj);
+    return JSON.stringify(obj, defaultReplacer);
   } catch (err) {
-    /* eslint-disable no-console */
     if (process.env.NODE_ENV !== 'production')
       console.log('Failed to stringify', err);
-    /* eslint-enable no-console */
-    return jsan.stringify(
-      obj,
-      null as unknown as undefined,
-      null as unknown as undefined,
-      {
-        circular: '[CIRCULAR]',
-      } as unknown as boolean,
-    );
+    return jsan.stringify(obj, defaultReplacer, null as unknown as undefined, {
+      circular: '[CIRCULAR]',
+    });
   }
 }
 
@@ -149,18 +154,18 @@ export function stringify(
   if (serialize === true) {
     return jsan.stringify(
       obj,
-      function (key, value) {
+      withBigIntReplacer(function (key, value) {
         if (value && typeof (value as any).toJS === 'function')
           return (value as any).toJS();
         return value;
-      },
+      }),
       null as unknown as undefined,
       true,
     );
   }
   return jsan.stringify(
     obj,
-    serialize.replacer,
+    withBigIntReplacer(serialize.replacer),
     null as unknown as undefined,
     serialize.options as boolean,
   );
@@ -207,7 +212,6 @@ export function getSeralizeParameter(
     }
   )[param];
   if (typeof value === 'undefined') return undefined;
-  // eslint-disable-next-line no-console
   console.warn(
     `\`${param}\` parameter for Redux DevTools Extension is deprecated. Use \`serialize\` parameter instead:` +
       ' https://github.com/zalmoxisus/redux-devtools-extension/releases/tag/v2.12.1',
@@ -217,9 +221,7 @@ export function getSeralizeParameter(
 }
 
 export function getStackTrace(
-  // eslint-disable-next-line @typescript-eslint/ban-types
   config: { trace?: () => {}; traceLimit: number },
-  // eslint-disable-next-line @typescript-eslint/ban-types
   toExcludeFromTrace?: Function | undefined,
 ) {
   if (!config.trace) return undefined;
@@ -246,7 +248,6 @@ export function getStackTrace(
     typeof Error.stackTraceLimit !== 'number' ||
     Error.stackTraceLimit > traceLimit
   ) {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const frames = stack!.split('\n');
     if (frames.length > traceLimit) {
       stack = frames
@@ -257,6 +258,6 @@ export function getStackTrace(
   return stack;
 }
 
-export * from './catchErrors';
-export * from './filters';
-export * from './importState';
+export * from './catchErrors.js';
+export * from './filters.js';
+export * from './importState.js';

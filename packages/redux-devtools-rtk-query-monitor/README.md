@@ -91,7 +91,7 @@ Alternatively, you can use it together with [`DockMonitor`](https://github.com/r
 #### Start Demo
 
 ```bash
-pnpm nx start rtk-query-demo
+pnpm --filter "rtk-query-demo" start
 ```
 
 <br/>

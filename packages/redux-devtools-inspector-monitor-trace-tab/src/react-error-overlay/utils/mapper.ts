@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import StackFrame from './stack-frame';
-import { getSourceMap, SourceMap } from './getSourceMap';
-import { getLinesAround } from './getLinesAround';
+import StackFrame from './stack-frame.js';
+import { getSourceMap, SourceMap } from './getSourceMap.js';
+import { getLinesAround } from './getLinesAround.js';
 
 /**
  * Enhances a set of <code>StackFrame</code>s with their original positions and code (when available).
@@ -30,7 +30,7 @@ async function map(
     if (fileName == null) {
       return;
     }
-    if (files.indexOf(fileName) !== -1) {
+    if (files.includes(fileName)) {
       return;
     }
     files.push(fileName);

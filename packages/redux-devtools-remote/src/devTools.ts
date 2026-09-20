@@ -1,12 +1,11 @@
-import { stringify, parse } from 'jsan';
+import jsan from 'jsan';
 import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
-import configureStore from './configureStore';
-import { defaultSocketOptions } from './constants';
+import configureStore from './configureStore.js';
+import { defaultSocketOptions } from './constants.js';
 import getHostForRN from 'rn-host-detect';
 import {
   Action,
   ActionCreator,
-  PreloadedState,
   Reducer,
   StoreEnhancer,
   StoreEnhancerStoreCreator,
@@ -29,7 +28,16 @@ import {
   filterState,
   LocalFilter,
   State,
+  withBigIntReplacer,
 } from '@redux-devtools/utils';
+
+const bigIntReplacer = withBigIntReplacer();
+
+function stringify(value: unknown) {
+  return jsan.stringify(value, bigIntReplacer);
+}
+
+const parse = jsan.parse;
 
 function async(fn: () => unknown) {
   setTimeout(fn, 0);
@@ -41,8 +49,8 @@ function str2array(
   return typeof str === 'string'
     ? [str]
     : str && str.length > 0
-    ? str
-    : undefined;
+      ? str
+      : undefined;
 }
 
 function getRandomId() {
@@ -74,7 +82,7 @@ interface Filters {
   readonly allowlist?: string | readonly string[];
 }
 
-interface Options<S, A extends Action<unknown>> {
+interface Options<S, A extends Action<string>> {
   readonly hostname?: string;
   readonly realtime?: boolean;
   readonly maxAge?: number;
@@ -106,11 +114,11 @@ interface Options<S, A extends Action<unknown>> {
   readonly sendTo?: string;
   readonly id?: string;
   readonly actionCreators?: {
-    [key: string]: ActionCreator<Action<unknown>>;
+    [key: string]: ActionCreator<Action<string>>;
   };
   readonly stateSanitizer?: ((state: S, index?: number) => S) | undefined;
   readonly actionSanitizer?:
-    | (<A extends Action<unknown>>(action: A, id?: number) => A)
+    | (<A extends Action<string>>(action: A, id?: number) => A)
     | undefined;
 }
 
@@ -158,13 +166,12 @@ interface ActionMessage {
   readonly action: string | { args: string[]; rest: string; selected: number };
 }
 
-interface DispatchMessage<S, A extends Action<unknown>> {
+interface DispatchMessage<S, A extends Action<string>> {
   readonly type: 'DISPATCH';
-  // eslint-disable-next-line @typescript-eslint/ban-types
   readonly action: LiftedAction<S, A, {}>;
 }
 
-type Message<S, A extends Action<unknown>> =
+type Message<S, A extends Action<string>> =
   | ImportMessage
   | SyncMessage
   | UpdateMessage
@@ -174,8 +181,7 @@ type Message<S, A extends Action<unknown>> =
   | ActionMessage
   | DispatchMessage<S, A>;
 
-class DevToolsEnhancer<S, A extends Action<unknown>> {
-  // eslint-disable-next-line @typescript-eslint/ban-types
+class DevToolsEnhancer<S, A extends Action<string>, PreloadedState> {
   store!: EnhancedStore<S, A, {}>;
   filters: LocalFilter | undefined;
   instanceId?: string;
@@ -241,11 +247,32 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
   ) {
     const message: MessageToRelay = {
       type,
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       id: this.socket!.id!,
       name: this.instanceName,
       instanceId: this.appInstanceId,
     };
+    try {
+      this.serializeInto(message, type, state, action, nextActionId);
+    } catch (err) {
+      if (type === 'ERROR') throw err;
+      const reason = err instanceof Error ? err.message : String(err);
+      const description = `Redux DevTools could not serialize the ${type} message: ${reason}`;
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(description, err);
+      }
+      this.relay('ERROR', description);
+      return;
+    }
+    void this.socket!.transmit(this.socket!.id ? 'log' : 'log-noid', message);
+  }
+
+  private serializeInto(
+    message: MessageToRelay,
+    type: 'STATE' | 'ACTION' | 'START' | 'STOP' | 'ERROR',
+    state?: State | S | string,
+    action?: PerformAction<A> | ActionCreatorObject[],
+    nextActionId?: number,
+  ) {
     if (state) {
       message.payload =
         type === 'ERROR'
@@ -260,7 +287,7 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
                   index?: number,
                 ) => unknown,
                 this.actionSanitizer as
-                  | ((action: Action<unknown>, id: number) => Action)
+                  | ((action: Action<string>, id: number) => Action)
                   | undefined,
                 nextActionId!,
               ),
@@ -280,8 +307,6 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     } else if (action) {
       message.action = action as ActionCreatorObject[];
     }
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    void this.socket!.transmit(this.socket!.id ? 'log' : 'log-noid', message);
   }
 
   dispatchRemotely(
@@ -302,14 +327,11 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     if (
       message.type === 'IMPORT' ||
       (message.type === 'SYNC' &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         this.socket!.id &&
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         message.id !== this.socket!.id)
     ) {
       this.store.liftedStore.dispatch({
         type: 'IMPORT_STATE',
-        // eslint-disable-next-line @typescript-eslint/ban-types
         nextLiftedState: parse(message.state) as LiftedState<S, A, {}>,
       });
     } else if (message.type === 'UPDATE') {
@@ -392,13 +414,11 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
   login() {
     void (async () => {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         const channelName = (await this.socket!.invoke(
           'login',
           'master',
         )) as string;
         this.channel = channelName;
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         for await (const data of this.socket!.subscribe(channelName)) {
           this.handleMessages(data as Message<S, A>);
         }
@@ -431,10 +451,8 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     this.socket = socketClusterClient.create(this.socketOptions);
 
     void (async () => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       for await (const data of this.socket!.listener('error')) {
         // if we've already had this error before, increment it's counter, otherwise assign it '1' since we've had the error once.
-        // eslint-disable-next-line no-prototype-builtins,@typescript-eslint/no-unsafe-argument
         this.errorCounts[data.error.name] = this.errorCounts.hasOwnProperty(
           data.error.name,
         )
@@ -457,7 +475,6 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     })();
 
     void (async () => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       for await (const data of this.socket!.listener('connect')) {
         console.log('connected to remotedev-server');
         this.errorCounts = {}; // clear the errorCounts object, so that we'll log any new errors in the event of a disconnect
@@ -465,7 +482,6 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
       }
     })();
     void (async () => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       for await (const data of this.socket!.listener('disconnect')) {
         this.stop(true);
       }
@@ -482,7 +498,6 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
     return false;
   };
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
   monitorReducer = (state = {}, action: LiftedAction<S, A, {}>) => {
     this.lastAction = action.type;
     if (!this.started && this.sendOnError === 2 && this.store.liftedStore)
@@ -491,32 +506,25 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
       if (
         this.startOn &&
         !this.started &&
-        this.startOn.indexOf(
-          (action as PerformAction<A>).action.type as string,
-        ) !== -1
+        this.startOn.includes((action as PerformAction<A>).action.type)
       )
         async(this.start);
       else if (
         this.stopOn &&
         this.started &&
-        this.stopOn.indexOf(
-          (action as PerformAction<A>).action.type as string,
-        ) !== -1
+        this.stopOn.includes((action as PerformAction<A>).action.type)
       )
         async(this.stop);
       else if (
         this.sendOn &&
         !this.started &&
-        this.sendOn.indexOf(
-          (action as PerformAction<A>).action.type as string,
-        ) !== -1
+        this.sendOn.includes((action as PerformAction<A>).action.type)
       )
         async(this.send);
     }
     return state;
   };
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
   handleChange(state: S, liftedState: LiftedState<S, A, {}>, maxAge: number) {
     if (this.checkForReducerErrors(liftedState)) return;
 
@@ -552,11 +560,14 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
         ? process.env.NODE_ENV === 'development'
         : options.realtime;
     if (!realtime && !(this.startOn || this.sendOn || this.sendOnError))
-      return (f: StoreEnhancerStoreCreator) => f;
+      return (f) => f;
 
     const maxAge = options.maxAge || 30;
     return ((next: StoreEnhancerStoreCreator) => {
-      return (reducer: Reducer<S, A>, initialState: PreloadedState<S>) => {
+      return (
+        reducer: Reducer<S, A, PreloadedState>,
+        initialState?: PreloadedState | undefined,
+      ) => {
         this.store = configureStore(next, this.monitorReducer, {
           maxAge,
           trace: options.trace,
@@ -583,24 +594,25 @@ class DevToolsEnhancer<S, A extends Action<unknown>> {
   };
 }
 
-export default <S, A extends Action<unknown>>(options?: Options<S, A>) =>
-  new DevToolsEnhancer<S, A>().enhance(options);
+export default <S, A extends Action<string>, PreloadedState>(
+  options?: Options<S, A>,
+) => new DevToolsEnhancer<S, A, PreloadedState>().enhance(options);
 
 const compose =
-  (options: Options<unknown, Action<unknown>>) =>
+  (options: Options<unknown, Action<string>>) =>
   (...funcs: StoreEnhancer[]) =>
   (...args: unknown[]) => {
     const devToolsEnhancer = new DevToolsEnhancer();
 
     function preEnhancer(createStore: StoreEnhancerStoreCreator) {
-      return <S, A extends Action<unknown>>(
-        reducer: Reducer<S, A>,
-        preloadedState: PreloadedState<S>,
+      return <S, A extends Action<string>, PreloadedState>(
+        reducer: Reducer<S, A, PreloadedState>,
+        preloadedState?: PreloadedState | undefined,
       ) => {
         devToolsEnhancer.store = createStore(reducer, preloadedState) as any;
         return {
           ...devToolsEnhancer.store,
-          dispatch: (action: Action<unknown>) =>
+          dispatch: (action: Action<string>) =>
             devToolsEnhancer.locked
               ? action
               : devToolsEnhancer.store.dispatch(action),
@@ -617,7 +629,7 @@ const compose =
   };
 
 export function composeWithDevTools(
-  ...funcs: [Options<unknown, Action<unknown>>] | StoreEnhancer[]
+  ...funcs: [Options<unknown, Action<string>>] | StoreEnhancer[]
 ) {
   if (funcs.length === 0) {
     return new DevToolsEnhancer().enhance();

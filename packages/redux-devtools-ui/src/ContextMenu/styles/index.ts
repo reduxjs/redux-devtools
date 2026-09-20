@@ -1,5 +1,5 @@
-import { css, ThemedStyledProps } from 'styled-components';
-import { Theme } from '../../themes/default';
+import { css } from '@emotion/react';
+import { Theme } from '../../themes/default.js';
 
 interface StyleProps {
   left: number;
@@ -12,18 +12,20 @@ export default ({
   left,
   top,
   visible,
-}: ThemedStyledProps<StyleProps, Theme>) => css`
-  ${visible
-    ? `
+}: StyleProps & { theme: Theme }) => css`
+  ${
+    visible
+      ? `
     visibility: visible;
     opacity: 1;
     transition: opacity 0.2s linear;
     `
-    : `
+      : `
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.2s, opacity 0.2s linear;
-  `}
+  `
+  }
   position: fixed;
   top: ${top}px;
   left: ${left}px;

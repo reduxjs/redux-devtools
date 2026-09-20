@@ -1,4 +1,4 @@
-import objType from '../src/objType';
+import objType from '../src/objType.js';
 
 describe('objType', () => {
   it('should determine the correct type', () => {

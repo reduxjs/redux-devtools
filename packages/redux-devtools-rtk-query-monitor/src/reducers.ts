@@ -6,9 +6,9 @@ import {
   QueryFormValues,
   RtkQueryMonitorProps,
   QueryPreviewTabs,
-} from './types';
-import { QueryComparators } from './utils/comparators';
-import { QueryFilters } from './utils/filters';
+} from './types.js';
+import { QueryComparators } from './utils/comparators.js';
+import { QueryFilters } from './utils/filters.js';
 
 const initialState: RtkQueryMonitorState = {
   queryForm: {
@@ -53,7 +53,7 @@ const monitorSlice = createSlice({
   },
 });
 
-export function reducer<S, A extends Action<unknown>>(
+export function reducer<S, A extends Action<string>>(
   props: RtkQueryMonitorProps<S, A>,
   state: RtkQueryMonitorState | undefined,
   action: AnyAction,

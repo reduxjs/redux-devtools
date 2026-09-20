@@ -1,11 +1,11 @@
 import { Action, compose, Reducer, StoreEnhancerStoreCreator } from 'redux';
 import { instrument } from '@redux-devtools/instrument';
 import { persistState } from '@redux-devtools/core';
-import type { ConfigWithExpandedMaxAge } from './index';
+import type { ConfigWithExpandedMaxAge } from './index.js';
 
 export function getUrlParam(key: string) {
-  const matches = window.location.href.match(
-    new RegExp(`[?&]${key}=([^&#]+)\\b`),
+  const matches = new RegExp(`[?&]${key}=([^&#]+)\\b`).exec(
+    window.location.href,
   );
   return matches && matches.length > 0 ? matches[1] : null;
 }
@@ -18,9 +18,9 @@ declare global {
 
 export default function configureStore<
   S,
-  A extends Action<unknown>,
+  A extends Action<string>,
   MonitorState,
-  MonitorAction extends Action<unknown>,
+  MonitorAction extends Action<string>,
 >(
   next: StoreEnhancerStoreCreator,
   monitorReducer: Reducer<MonitorState, MonitorAction>,

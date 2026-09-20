@@ -1,7 +1,6 @@
 import React, { ReactNode, useCallback, useLayoutEffect, useRef } from 'react';
 import { Action } from 'redux';
 import { PerformAction } from '@redux-devtools/core';
-import { StylingFunction } from 'react-base16-styling';
 import {
   closestCenter,
   DndContext,
@@ -19,10 +18,11 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import ActionListRow from './ActionListRow';
-import ActionListHeader from './ActionListHeader';
+import type { JSX } from '@emotion/react/jsx-runtime';
+import ActionListRow from './ActionListRow.js';
+import ActionListHeader from './ActionListHeader.js';
 
-function getTimestamps<A extends Action<unknown>>(
+function getTimestamps<A extends Action<string>>(
   actions: { [actionId: number]: PerformAction<A> },
   actionIds: number[],
   actionId: number,
@@ -40,7 +40,7 @@ function scrollToBottom(node: HTMLDivElement) {
   node.scrollTop = node.scrollHeight;
 }
 
-interface Props<A extends Action<unknown>> {
+interface Props<A extends Action<string>> {
   actions: { [actionId: number]: PerformAction<A> };
   actionIds: number[];
   isWideLayout: boolean;
@@ -51,7 +51,6 @@ interface Props<A extends Action<unknown>> {
   draggableActions: boolean;
   hideMainButtons: boolean | undefined;
   hideActionButtons: boolean | undefined;
-  styling: StylingFunction;
   onSearch: (value: string) => void;
   onSelect: (e: React.MouseEvent<HTMLDivElement>, actionId: number) => void;
   onToggleAction: (actionId: number) => void;
@@ -63,8 +62,7 @@ interface Props<A extends Action<unknown>> {
   lastActionId: number;
 }
 
-export default function ActionList<A extends Action<unknown>>({
-  styling,
+export default function ActionList<A extends Action<string>>({
   actions,
   actionIds,
   isWideLayout,
@@ -83,9 +81,9 @@ export default function ActionList<A extends Action<unknown>>({
   onJumpToState,
   lastActionId,
   onReorderAction,
-}: Props<A>) {
+}: Props<A>): JSX.Element {
   const nodeRef = useRef<HTMLDivElement | null>(null);
-  const prevLastActionId = useRef<number | undefined>();
+  const prevLastActionId = useRef<number | undefined>(undefined);
 
   useLayoutEffect(() => {
     if (nodeRef.current && prevLastActionId.current !== lastActionId) {
@@ -127,8 +125,8 @@ export default function ActionList<A extends Action<unknown>>({
           overIndex < activeIndex
             ? (over.id as number)
             : overIndex < actionIds.length - 1
-            ? actionIds[overIndex + 1]
-            : actionIds.length;
+              ? actionIds[overIndex + 1]
+              : actionIds.length;
 
         onReorderAction(active.id as number, beforeActionId);
       }
@@ -138,11 +136,10 @@ export default function ActionList<A extends Action<unknown>>({
 
   const lowerSearchValue = searchValue && searchValue.toLowerCase();
   const filteredActionIds = searchValue
-    ? actionIds.filter(
-        (id) =>
-          (actions[id].action.type as string)
-            .toLowerCase()
-            .indexOf(lowerSearchValue as string) !== -1,
+    ? actionIds.filter((id) =>
+        actions[id].action.type
+          .toLowerCase()
+          .includes(lowerSearchValue as string),
       )
     : actionIds;
 
@@ -150,13 +147,29 @@ export default function ActionList<A extends Action<unknown>>({
     <div
       key="actionList"
       data-testid="actionList"
-      {...styling(
-        ['actionList', isWideLayout && 'actionListWide'],
-        isWideLayout,
-      )}
+      css={[
+        (theme) => ({
+          flexBasis: '40%',
+          flexShrink: 0,
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          borderBottomWidth: '3px',
+          borderBottomStyle: 'double',
+          display: 'flex',
+          flexDirection: 'column',
+
+          backgroundColor: theme.BACKGROUND_COLOR,
+          borderColor: theme.LIST_BORDER_COLOR,
+        }),
+        isWideLayout && {
+          flexBasis: '40%',
+          borderBottom: 'none',
+          borderRightWidth: '3px',
+          borderRightStyle: 'double',
+        },
+      ]}
     >
       <ActionListHeader
-        styling={styling}
         onSearch={onSearch}
         onCommit={onCommit}
         onSweep={onSweep}
@@ -167,7 +180,7 @@ export default function ActionList<A extends Action<unknown>>({
       />
       <div
         data-testid="actionListRows"
-        {...styling('actionListRows')}
+        css={{ overflow: 'auto' }}
         ref={setNodeRef}
       >
         <DndContext
@@ -183,7 +196,6 @@ export default function ActionList<A extends Action<unknown>>({
             {filteredActionIds.map((actionId) => (
               <SortableItem key={actionId} actionId={actionId}>
                 <ActionListRow
-                  styling={styling}
                   actionId={actionId}
                   isInitAction={!actionId}
                   isSelected={
@@ -205,7 +217,7 @@ export default function ActionList<A extends Action<unknown>>({
                   onJumpClick={() => onJumpToState(actionId)}
                   onCommitClick={() => onCommit()}
                   hideActionButtons={hideActionButtons}
-                  isSkipped={skippedActionIds.indexOf(actionId) !== -1}
+                  isSkipped={skippedActionIds.includes(actionId)}
                 />
               </SortableItem>
             ))}
