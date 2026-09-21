@@ -137,6 +137,44 @@ Their full signatures are:
 - `labelRenderer: function(keyPath, nodeType, expanded, expandable)`
 - `valueRenderer: function(valueAsString, value, ...keyPath)`
 
+The expand/collapse arrows are rendered as `<button>` elements with `aria-expanded`, `aria-controls`, and `aria-label` set, so they can be focused and toggled from the keyboard.
+
+You can replace the arrow with your own component via `ArrowComponentOverride`. It receives `JSONArrowProps`:
+
+```tsx
+import { JSONTree, JSONArrowProps } from 'react-json-tree';
+
+const ArrowOverride = ({
+  expanded,
+  onClick,
+  ariaLabel,
+  ariaControls,
+}: JSONArrowProps) => (
+  <button
+    onClick={onClick}
+    aria-label={ariaLabel}
+    aria-expanded={expanded}
+    aria-controls={ariaControls}
+  >
+    {expanded ? '-' : '+'}
+  </button>
+);
+
+<JSONTree data={data} ArrowComponentOverride={ArrowOverride} />;
+```
+
+```ts
+interface JSONArrowProps {
+  styling: StylingFunction;
+  arrowStyle?: 'single' | 'double';
+  expanded: boolean;
+  nodeType: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  ariaControls?: string;
+  ariaLabel?: string;
+}
+```
+
 #### More Options
 
 - `shouldExpandNodeInitially: function(keyPath, data, level)` - determines if node should be expanded when it first renders (root is expanded by default)
