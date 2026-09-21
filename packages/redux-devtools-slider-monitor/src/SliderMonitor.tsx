@@ -199,12 +199,6 @@ class SliderMonitor<S, A extends Action<string>> extends (PureComponent ||
     const aLoop = () => {
       const replayDiff = Date.now() - currentTimestamp;
       if (replayDiff >= timestampDiff) {
-        this.props.dispatch(
-          jumpToAction(
-            this.props.stagedActionIds[this.props.currentStateIndex + 1],
-          ),
-        );
-
         if (
           this.props.currentStateIndex >=
           this.props.computedStates.length - 1
@@ -213,14 +207,22 @@ class SliderMonitor<S, A extends Action<string>> extends (PureComponent ||
           return;
         }
 
-        timestampDiff = this.getLatestTimestampDiff(
-          this.props.currentStateIndex,
-        );
-        currentTimestamp = Date.now();
+        const nextActionId =
+          this.props.stagedActionIds[this.props.currentStateIndex + 1];
+        if (nextActionId !== undefined) {
+          this.props.dispatch(jumpToAction(nextActionId));
 
-        this.setState({
-          timer: requestAnimationFrame(aLoop),
-        });
+          timestampDiff = this.getLatestTimestampDiff(
+            this.props.currentStateIndex,
+          );
+          currentTimestamp = Date.now();
+
+          this.setState({
+            timer: requestAnimationFrame(aLoop),
+          });
+        } else {
+          this.pauseReplay();
+        }
       } else {
         this.setState({
           timer: requestAnimationFrame(aLoop),
