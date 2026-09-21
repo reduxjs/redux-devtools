@@ -128,6 +128,7 @@ export class Connection extends Component<Props, State> {
           submitText={disabled ? 'Disconnect' : 'Connect'}
           formData={this.state.formData}
           schema={this.state.schema}
+          noValidate
           uiSchema={uiSchema}
           onChange={this.handleChange}
           onSubmit={this.handleSave}
