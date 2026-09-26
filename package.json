@@ -4,9 +4,9 @@
     "@arethetypeswrong/cli": "^0.18.5",
     "@changesets/cli": "^2.31.1",
     "jsdom": "catalog:",
-    "oxfmt": "^0.68.0",
-    "oxlint": "^1.83.0",
-    "oxlint-tsgolint": "^7.0.2002",
+    "oxfmt": "^0.70.0",
+    "oxlint": "^1.85.0",
+    "oxlint-tsgolint": "^7.0.2003",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
@@ -20,5 +20,5 @@
     "release": "pnpm build:all && pnpm publish -r",
     "test": "vitest --run"
   },
-  "packageManager": "pnpm@11.27.0"
+  "packageManager": "pnpm@11.28.0"
 }
