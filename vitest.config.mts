@@ -97,7 +97,6 @@ export default defineConfig({
           environment: 'jsdom',
         },
       ),
-      project('extension-types', 'packages/redux-devtools-extension'),
       project('serialize', 'packages/redux-devtools-serialize'),
       project('ui', 'packages/redux-devtools-ui', { environment: 'jsdom' }),
       project('utils', 'packages/redux-devtools-utils'),

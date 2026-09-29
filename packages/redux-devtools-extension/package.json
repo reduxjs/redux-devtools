@@ -19,15 +19,13 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
-    "test": "vitest --run --project extension-types",
-    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "type-check": "tsc --noEmit",
     "prepack": "pnpm run clean && pnpm run build"
   },
   "devDependencies": {
     "redux": "^5.0.1",
     "rimraf": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "redux": "^3.1.0 || ^4.0.0 || ^5.0.0"

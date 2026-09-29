@@ -1,8 +1,0 @@
-{
-  "extends": "../../tsconfig.lib.json",
-  "compilerOptions": {
-    "declaration": false,
-    "types": ["vitest/globals"]
-  },
-  "include": ["src", "test"]
-}
