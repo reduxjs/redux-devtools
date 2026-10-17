@@ -1,5 +1,11 @@
 # Change Log
 
+## 4.0.1
+
+### Patch Changes
+
+- 925d15e: Serialize BigInt values as `"<digits>n"` strings and stop serialization failures from throwing out of `store.dispatch`. `@redux-devtools/utils` `stringify` applies the BigInt replacer in every path and exports `withBigIntReplacer`; `@redux-devtools/remote` uses it and relays an `ERROR` message to the monitor when a state or action cannot be serialized.
+
 ## 4.0.0
 
 ### Major Changes
