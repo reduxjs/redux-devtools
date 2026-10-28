@@ -707,8 +707,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(patch_hash=70a6511e470531c1696f844de0771a1c8ba86b0bfb3f9d94ba5b6227359209f2)(react@19.3.1)(redux@5.0.1)
       socketcluster-client:
-        specifier: ^20.0.2
-        version: 20.0.2
+        specifier: ^21.0.0
+        version: 21.0.0
     devDependencies:
       '@babel/core':
         specifier: 'catalog:'
@@ -1062,8 +1062,8 @@ importers:
         specifier: 'catalog:'
         version: 6.1.3
       socketcluster-client:
-        specifier: ^20.0.2
-        version: 20.0.2
+        specifier: ^21.0.0
+        version: 21.0.0
       supertest:
         specifier: ^7.3.1
         version: 7.3.1(supports-color@8.1.1)
@@ -1609,8 +1609,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       socketcluster-client:
-        specifier: ^20.0.2
-        version: 20.0.2
+        specifier: ^21.0.0
+        version: 21.0.0
     devDependencies:
       '@types/jsan':
         specifier: ^3.1.5
@@ -8296,8 +8296,8 @@ packages:
     resolution: {integrity: sha512-VZBmZP8WU3sMOZm1bdgTadsQbcscK0UM8oKxKVBs4XAhUo2Xxzm/OFMGBkPusxw9xL3Uy8LrzEqGqJhclsr0yA==}
     deprecated: Unsupported
 
-  socketcluster-client@20.0.2:
-    resolution: {integrity: sha512-G4wv4wzXjytu+er6bOflr/ar3gYIBCD9aBYIB+BVHeQ2bm7tjkrq2I6WzZJfJuaNYjAuipJKKYQw+5jwzdbpig==}
+  socketcluster-client@21.0.0:
+    resolution: {integrity: sha512-kyMJNlotAUASfi4ab1ipjhwNlEocDLFXN8Ts2zhsai9Miu9kP/9XnQdqIHlFzS9aJ/LsEKaSu+g6TDROu4itgw==}
 
   socketcluster-server@20.0.1:
     resolution: {integrity: sha512-u9Oh8kcGPuNpwuUpM3u3JY1ULBOpmSLR4r+M0tPac5ppSx5hzYLQvudJKMQsqp4pw3v/pgKnI6acx6E/YEeq0Q==}
@@ -15660,7 +15660,7 @@ snapshots:
 
   sliced@1.0.1: {}
 
-  socketcluster-client@20.0.2:
+  socketcluster-client@21.0.0:
     dependencies:
       ag-auth: 2.1.1
       ag-channel: 5.0.0
