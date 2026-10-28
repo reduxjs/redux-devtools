@@ -52,9 +52,7 @@ export default class TopButtons extends Component<Props> {
       <Toolbar borderPosition="bottom">
         {features.pause && <RecordButton paused={isPaused} />}
         {features.persist && <PersistButton />}
-        {features.lock && (
-          <LockButton locked={isLocked} disabled={options.lib !== 'redux'} />
-        )}
+        {features.lock && <LockButton locked={isLocked} />}
         <Divider />
         <Button
           title="Reset to the state you created the store with"
