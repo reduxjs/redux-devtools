@@ -1016,8 +1016,8 @@ importers:
         specifier: ^7.8.5
         version: 7.8.5
       socketcluster-server:
-        specifier: ^20.0.1
-        version: 20.0.1
+        specifier: ^21.0.2
+        version: 21.0.2
       sqlite3:
         specifier: ^6.0.1
         version: 6.0.1
@@ -8322,8 +8322,8 @@ packages:
   socketcluster-client@20.0.2:
     resolution: {integrity: sha512-G4wv4wzXjytu+er6bOflr/ar3gYIBCD9aBYIB+BVHeQ2bm7tjkrq2I6WzZJfJuaNYjAuipJKKYQw+5jwzdbpig==}
 
-  socketcluster-server@20.0.1:
-    resolution: {integrity: sha512-u9Oh8kcGPuNpwuUpM3u3JY1ULBOpmSLR4r+M0tPac5ppSx5hzYLQvudJKMQsqp4pw3v/pgKnI6acx6E/YEeq0Q==}
+  socketcluster-server@21.0.2:
+    resolution: {integrity: sha512-5FJxVIVQjKz63+gdFJZsvtSV6oOOiDag9m3vyB5xi73Sga5JerIBsTBzr1DN10pYy7dkaMafFmUZG89rEwQ/Fw==}
 
   source-map-js@1.2.2:
     resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
@@ -8973,9 +8973,6 @@ packages:
 
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
-
-  writable-consumable-stream@4.3.1:
-    resolution: {integrity: sha512-fsbMm9OzVj3kMD6RREe3HV97pLhr5TEEv9RuYq5+3f+Y5WM1+y6i0jvC/NUwPS04owohiQG5EzNKlxhBR/1rCg==}
 
   writable-consumable-stream@5.0.1:
     resolution: {integrity: sha512-LgpAGXItl5s0fl7q/cIfvZ5QrqJyKj7KP0w1Fa+lI5o8sxSCLOR4Y1I/AWGYGpz3b3TzUU7yGiqke0Tti7Gf4w==}
@@ -15740,7 +15737,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  socketcluster-server@20.0.1:
+  socketcluster-server@21.0.2:
     dependencies:
       ag-auth: 2.1.1
       ag-request: 1.1.0
@@ -15751,7 +15748,7 @@ snapshots:
       sc-errors: 3.0.0
       sc-formatter: 4.0.0
       stream-demux: 10.2.1
-      writable-consumable-stream: 4.3.1
+      writable-consumable-stream: 5.0.1
       ws: 8.22.0
     transitivePeerDependencies:
       - bufferutil
@@ -16401,10 +16398,6 @@ snapshots:
       strip-ansi: 7.2.0
 
   wrappy@1.0.2: {}
-
-  writable-consumable-stream@4.3.1:
-    dependencies:
-      consumable-stream: 3.0.0
 
   writable-consumable-stream@5.0.1:
     dependencies:
