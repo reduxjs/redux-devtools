@@ -1,6 +1,7 @@
 import { Collection } from '@msw/data';
 import { nanoid } from '@reduxjs/toolkit';
-import { http, HttpResponse, delay } from 'msw';
+import { http, HttpResponse } from 'msw/http';
+import { delay } from 'msw/utils/delay';
 import { z } from 'zod';
 import { Post } from '../services/posts';
 
