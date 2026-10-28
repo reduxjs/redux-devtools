@@ -32,6 +32,8 @@ export default function ItemRange(props: Props) {
         expanded={false}
         onClick={handleClick}
         arrowStyle="double"
+        ariaLabel={`Expand items ${from} to ${to}`}
+        OverrideComponent={props.ArrowComponentOverride}
       />
       {`${from} ... ${to}`}
     </div>

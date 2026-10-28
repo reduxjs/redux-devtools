@@ -122,6 +122,11 @@ const getDefaultThemeStyling = (theme: Base16Theme): StylingConfig => {
     arrowContainer: ({ style }, arrowStyle) => ({
       style: {
         ...style,
+        background: 'none',
+        color: 'inherit',
+        border: 'none',
+        padding: 0,
+        font: 'inherit',
         display: 'inline-block',
         paddingRight: '0.5em',
         paddingLeft: arrowStyle === 'double' ? '1em' : 0,
