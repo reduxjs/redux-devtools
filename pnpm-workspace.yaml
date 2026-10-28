@@ -39,9 +39,6 @@ catalog:
   webpack-cli: ^7.2.3
   webpack-dev-server: ^6.1.0
 
-overrides:
-  'uuid@<11.1.1': ^11.1.1
-
 allowBuilds:
   '@apollo/protobufjs': true
   '@parcel/watcher': true
