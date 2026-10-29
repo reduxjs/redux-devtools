@@ -8,7 +8,7 @@ import { Theme as ThemeBase } from '../themes/default.js';
 const defaultDarkScheme = baseSchemes.nicinabox;
 
 export const schemes = { ...baseSchemes, ...additionalSchemes };
-export const listSchemes = () => Object.keys(schemes).slice(1).sort(); // remove `__esModule`
+export const listSchemes = () => Object.keys(schemes).sort();
 export const listThemes = () => Object.keys(themes);
 
 export type ThemeName = keyof typeof themes;
