@@ -22,7 +22,7 @@ catalog:
   '@testing-library/dom': ^10.4.2
   '@testing-library/jest-dom': ^7.0.1
   '@testing-library/react': ^16.3.3
-  '@types/node': ^24.19.2
+  '@types/node': ^26.6.5
   '@types/react': ^19.3.0
   '@types/react-dom': ^19.3.0
   '@types/webpack-env': ^1.18.8
@@ -39,14 +39,10 @@ catalog:
   webpack-cli: ^7.2.3
   webpack-dev-server: ^6.1.0
 
-overrides:
-  'uuid@<11.1.1': ^11.1.1
-
 allowBuilds:
   '@apollo/protobufjs': true
   '@parcel/watcher': true
   esbuild: true
-  msw: true
   sqlite3: true
   unrs-resolver: true
 

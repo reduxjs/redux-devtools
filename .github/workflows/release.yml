@@ -19,14 +19,14 @@ jobs:
           fetch-depth: 0
 
       # Must run before `setup-node`, or `cache: 'pnpm'` cannot locate the store.
-      - uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+      - uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
           install: false
 
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '24.22.1'
+          node-version: '26.12.1'
           cache: 'pnpm'
 
       - name: Install Dependencies

@@ -8,6 +8,7 @@ import DevTools from './features/DevTools/DevTools';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { worker } from './mocks/browser';
+import { seeded } from './mocks/db';
 import { Toaster } from './components/ui/toaster';
 
 function renderApp() {
@@ -26,4 +27,4 @@ function renderApp() {
   );
 }
 
-worker.start({ quiet: true }).then(renderApp, renderApp);
+Promise.all([seeded, worker.start({ quiet: true })]).then(renderApp, renderApp);
