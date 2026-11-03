@@ -1,22 +1,24 @@
-import { factory, primaryKey } from '@mswjs/data';
+import { Collection } from '@msw/data';
 import { nanoid } from '@reduxjs/toolkit';
-import { http, HttpResponse, delay } from 'msw';
+import { http, HttpResponse } from 'msw/http';
+import { delay } from 'msw/utils/delay';
+import { z } from 'zod';
 import { Post } from '../services/posts';
 
-const db = factory({
-  post: {
-    id: primaryKey(String),
-    name: String,
-  },
+const posts = new Collection({
+  schema: z.object({
+    id: z.string(),
+    name: z.string(),
+  }),
 });
 
-[
-  'A sample post',
-  'A post about RTK Query',
-  'How to randomly throw errors, a novella',
-].forEach((name) => {
-  db.post.create({ id: nanoid(), name });
-});
+export const seeded = Promise.all(
+  [
+    'A sample post',
+    'A post about RTK Query',
+    'How to randomly throw errors, a novella',
+  ].map((name) => posts.create({ id: nanoid(), name })),
+);
 
 export const handlers = [
   http.post<never, Post, Post | { error: string }>(
@@ -32,7 +34,7 @@ export const handlers = [
         );
       }
 
-      const post = db.post.create({
+      const post = await posts.create({
         id: nanoid(),
         name,
       });
@@ -54,14 +56,40 @@ export const handlers = [
         );
       }
 
-      const post = db.post.update({
-        where: { id: { equals: params.id } },
-        data: { name },
+      const post = await posts.update((q) => q.where({ id: params.id }), {
+        data(post) {
+          post.name = name;
+        },
       });
 
       await delay(300);
+      if (!post) {
+        return HttpResponse.json({ error: 'Post not found' }, { status: 404 });
+      }
       return HttpResponse.json(post);
     },
   ),
-  ...db.post.toHandlers('rest'),
+  http.get<never, never, Post[]>('/posts', () =>
+    HttpResponse.json(posts.all()),
+  ),
+  http.get<{ id: string }, never, Post | { error: string }>(
+    '/posts/:id',
+    ({ params }) => {
+      const post = posts.findFirst((q) => q.where({ id: params.id }));
+      if (!post) {
+        return HttpResponse.json({ error: 'Post not found' }, { status: 404 });
+      }
+      return HttpResponse.json(post);
+    },
+  ),
+  http.delete<{ id: string }, never, Post | { error: string }>(
+    '/posts/:id',
+    ({ params }) => {
+      const post = posts.delete((q) => q.where({ id: params.id }));
+      if (!post) {
+        return HttpResponse.json({ error: 'Post not found' }, { status: 404 });
+      }
+      return HttpResponse.json(post);
+    },
+  ),
 ] as const;

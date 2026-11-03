@@ -107,8 +107,9 @@ export async function launchFirefoxWithExtension(): Promise<LaunchedFirefoxExten
     executablePath: firefox.executablePath,
     headless: !process.env.HEADFUL,
     // Without this, WebDriver BiDi rejects `browsingContext.navigate` to
-    // moz-extension:// URLs with "not allowed in this context".
-    args: ['--remote-allow-system-access'],
+    // moz-extension:// URLs with "not allowed in this context". Firefox 159
+    // removed the `--remote-allow-system-access` flag in favor of this env var.
+    env: { ...process.env, MOZ_REMOTE_ALLOW_SYSTEM_ACCESS: '1' },
     extraPrefsFirefox: {
       'extensions.webextensions.uuids': JSON.stringify({
         [geckoId]: pinnedUuid,
