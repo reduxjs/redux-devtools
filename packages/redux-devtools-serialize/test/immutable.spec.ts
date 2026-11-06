@@ -152,6 +152,7 @@ describe('Immutable', function () {
         expect(deserialized).toEqual(data[key as keyof typeof data]);
         if (key === 'map' || key === 'orderedMap') {
           const deserializedDefault = parse(stringified);
+          // oxlint-disable-next-line vitest/no-conditional-expect
           expect(
             (
               deserializedDefault as
