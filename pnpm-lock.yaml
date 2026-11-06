@@ -374,8 +374,8 @@ importers:
         specifier: 'catalog:'
         version: 19.3.0(@types/react@19.3.0)
       electron:
-        specifier: ^44.10.2
-        version: 44.10.2(supports-color@8.1.1)
+        specifier: ^45.2.3
+        version: 45.2.3(supports-color@8.1.1)
       esbuild:
         specifier: ^0.28.2
         version: 0.28.2
@@ -974,8 +974,8 @@ importers:
         specifier: ^7.0.6
         version: 7.0.6
       electron:
-        specifier: ^44.10.2
-        version: 44.10.2(supports-color@8.1.1)
+        specifier: ^45.2.3
+        version: 45.2.3(supports-color@8.1.1)
       express:
         specifier: ^5.3.0
         version: 5.3.0(supports-color@8.1.1)
@@ -6302,8 +6302,8 @@ packages:
   electron-to-chromium@1.5.463:
     resolution: {integrity: sha512-nVWNU6ltFjopvOdD44J4zoBkgO0M+WZiFKKFV7EjebOH9z0KNphk6bCEjplXtJofL21ARIuuwWOCsFkBVklm6w==}
 
-  electron@44.10.2:
-    resolution: {integrity: sha512-Bz+GV+9Xj++3RW95NYfzp5Wgivf61BgWTPBxYTOUETytVB1uLUAOdSM39Dn/V3PGYeGTE6LYeCTR5SCiu3BR2A==}
+  electron@45.2.3:
+    resolution: {integrity: sha512-Vurzu5UOA5nTGT4LqIwXD16QFGrOZdiXxF+1UP4KNsAOo/YtDcT3/u0jhP4WSwNJ0iLrLDi85hzBJ0arnGDhyw==}
     engines: {node: '>= 22.12.0'}
     hasBin: true
 
@@ -13641,7 +13641,7 @@ snapshots:
 
   electron-to-chromium@1.5.463: {}
 
-  electron@44.10.2(supports-color@8.1.1):
+  electron@45.2.3(supports-color@8.1.1):
     dependencies:
       '@electron-internal/extract-zip': 1.0.5
       '@electron/get': 5.1.0(supports-color@8.1.1)
