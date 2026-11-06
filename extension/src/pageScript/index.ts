@@ -102,7 +102,9 @@ export interface ConfigWithExpandedMaxAge {
         currentLiftedAction: LiftedAction<S, A, unknown>,
         previousLiftedState: LiftedState<S, A, unknown> | undefined,
       ) => number);
-  readonly trace?: boolean | (() => string | undefined);
+  readonly trace?:
+    | boolean
+    | (<A extends Action<string>>(action: A) => string | undefined);
   readonly traceLimit?: number;
   readonly shouldCatchErrors?: boolean;
   readonly shouldHotReload?: boolean;
