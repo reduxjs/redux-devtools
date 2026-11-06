@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.0.1
+
+### Patch Changes
+
+- 753c012: `listSchemes()` no longer drops the first color scheme. It used `.slice(1)` to skip a CommonJS `__esModule` key that the ESM scheme object does not have, so `threezerotwofour` was missing from the scheme list in the Themes settings.
+
 ## 3.0.0
 
 ### Major Changes
