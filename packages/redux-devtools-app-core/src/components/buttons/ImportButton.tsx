@@ -34,7 +34,11 @@ class ImportButton extends Component<Props> {
 
   render() {
     return (
-      <Button title="Import from a file" onClick={this.handleImport}>
+      <Button
+        title="Import from a file"
+        tooltipPosition="top-right"
+        onClick={this.handleImport}
+      >
         <TiUpload />
         <input
           type="file"
