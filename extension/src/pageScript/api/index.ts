@@ -625,7 +625,7 @@ export function connect(preConfig: Config): ConnectResponse {
 
     return function unsubscribe() {
       const index = listenersForId.indexOf(liftedListener);
-      listenersForId.splice(index, 1);
+      if (index !== -1) listenersForId.splice(index, 1);
     };
   };
 
