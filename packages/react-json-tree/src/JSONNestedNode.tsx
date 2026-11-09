@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useId, useState } from 'react';
 import JSONArrow from './JSONArrow.js';
 import getCollectionEntries from './getCollectionEntries.js';
 import JSONNode from './JSONNode.js';
@@ -141,6 +141,9 @@ export default function JSONNestedNode(props: Props) {
   );
   const stylingArgs = [keyPath, nodeType, expanded, expandable] as const;
 
+  const childrenId = useId();
+  const ariaLabel = `JSON Tree Node: ${[...keyPath].reverse().join(' ')}`;
+
   return hideRoot ? (
     <li {...styling('rootNode', ...stylingArgs)}>
       <ul {...styling('rootNodeChildren', ...stylingArgs)}>
@@ -155,6 +158,9 @@ export default function JSONNestedNode(props: Props) {
           nodeType={nodeType}
           expanded={expanded}
           onClick={handleClick}
+          ariaControls={childrenId}
+          ariaLabel={ariaLabel}
+          OverrideComponent={props.ArrowComponentOverride}
         />
       )}
       <label
@@ -169,7 +175,10 @@ export default function JSONNestedNode(props: Props) {
       >
         {renderedItemString}
       </span>
-      <ul {...styling('nestedNodeChildren', ...stylingArgs)}>
+      <ul
+        {...styling('nestedNodeChildren', ...stylingArgs)}
+        id={expandable ? childrenId : undefined}
+      >
         {renderedChildren}
       </ul>
     </li>
