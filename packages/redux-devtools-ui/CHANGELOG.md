@@ -1,5 +1,14 @@
 # Change Log
 
+## 3.0.1
+
+### Patch Changes
+
+- 7a02f8d: Publish with npm trusted publishing, so releases now include provenance attestations.
+- 753c012: `listSchemes()` no longer drops the first color scheme. It used `.slice(1)` to skip a CommonJS `__esModule` key that the ESM scheme object does not have, so `threezerotwofour` was missing from the scheme list in the Themes settings.
+- Updated dependencies [7a02f8d]
+  - react-base16-styling@0.10.1
+
 ## 3.0.0
 
 ### Major Changes

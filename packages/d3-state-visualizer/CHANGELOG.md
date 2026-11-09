@@ -1,5 +1,14 @@
 # Change Log
 
+## 3.0.1
+
+### Patch Changes
+
+- 7a02f8d: Publish with npm trusted publishing, so releases now include provenance attestations.
+- Updated dependencies [7a02f8d]
+  - d3tooltip@4.0.1
+  - map2tree@4.0.1
+
 ## 3.0.0
 
 ### Major Changes

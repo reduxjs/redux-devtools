@@ -1,5 +1,14 @@
 # Change Log
 
+## 6.0.1
+
+### Patch Changes
+
+- 7a02f8d: Publish with npm trusted publishing, so releases now include provenance attestations.
+- Updated dependencies [7a02f8d]
+  - react-base16-styling@0.10.1
+  - react-json-tree@0.20.1
+
 ## 6.0.0
 
 ### Major Changes
