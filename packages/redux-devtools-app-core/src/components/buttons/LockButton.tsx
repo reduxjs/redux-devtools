@@ -9,7 +9,6 @@ import type { Dispatch } from 'redux';
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 interface OwnProps {
   locked: boolean | undefined;
-  disabled: boolean;
 }
 type Props = DispatchProps & OwnProps;
 
@@ -22,7 +21,6 @@ class LockButton extends Component<Props> {
     return (
       <Button
         tooltipPosition="bottom"
-        disabled={this.props.disabled}
         mark={this.props.locked && 'base0D'}
         title={this.props.locked ? 'Unlock changes' : 'Lock changes'}
         onClick={this.props.lockChanges}
