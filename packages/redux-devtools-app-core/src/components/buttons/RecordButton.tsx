@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@redux-devtools/ui';
 import { MdFiberManualRecord } from 'react-icons/md';
-import { pauseRecording, CoreStoreAction } from '../../actions/index.js';
-import { Dispatch } from 'redux';
+import type { CoreStoreAction } from '../../actions/index.js';
+import { pauseRecording } from '../../actions/index.js';
+import type { Dispatch } from 'redux';
 
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 interface OwnProps {

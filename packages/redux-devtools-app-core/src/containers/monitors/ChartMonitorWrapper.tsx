@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { connect, ResolveThunks } from 'react-redux';
-import {
-  ChartMonitor,
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
+import type {
   ChartMonitorAction,
   ChartMonitorProps,
   ChartMonitorState,
 } from '@redux-devtools/chart-monitor';
+import { ChartMonitor } from '@redux-devtools/chart-monitor';
 import type { HierarchyPointNode, Node } from 'd3-state-visualizer';
 import { selectMonitorWithState } from '../../actions/index.js';
-import { Action } from 'redux';
+import type { Action } from 'redux';
 
 export function getPath(
   obj: HierarchyPointNode<Node>,

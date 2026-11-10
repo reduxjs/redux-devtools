@@ -6,7 +6,7 @@ import type {
 } from '@reduxjs/toolkit/query';
 import type { Action, AnyAction, Dispatch } from '@reduxjs/toolkit';
 import type { ComponentType } from 'react';
-import { base16Themes } from 'react-base16-styling';
+import type { base16Themes } from 'react-base16-styling';
 import type { Base16Theme } from 'react-base16-styling';
 import type { QueryComparators } from './utils/comparators.js';
 import type { QueryFilters } from './utils/filters.js';

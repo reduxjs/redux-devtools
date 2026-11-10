@@ -1,11 +1,8 @@
 import React, { PureComponent } from 'react';
 import type { Base16Theme } from 'react-base16-styling';
-import {
-  ActionCreators,
-  LiftedAction,
-  LiftedState,
-} from '@redux-devtools/core';
-import { Action, Dispatch } from 'redux';
+import type { LiftedAction, LiftedState } from '@redux-devtools/core';
+import { ActionCreators } from '@redux-devtools/core';
+import type { Action, Dispatch } from 'redux';
 import type { Delta, DiffContext } from 'jsondiffpatch';
 import {
   createInspectorMonitorThemeFromBase16Theme,
@@ -13,15 +10,15 @@ import {
 } from './utils/themes.js';
 import type { Base16ThemeName } from './utils/themes.js';
 import ActionList from './ActionList.js';
-import ActionPreview, { Tab } from './ActionPreview.js';
+import type { Tab } from './ActionPreview.js';
+import ActionPreview from './ActionPreview.js';
 import getInspectedState from './utils/getInspectedState.js';
 import createDiffPatcher from './createDiffPatcher.js';
-import {
+import type {
   DevtoolsInspectorAction,
   DevtoolsInspectorState,
-  reducer,
-  updateMonitorState,
 } from './redux.js';
+import { reducer, updateMonitorState } from './redux.js';
 import { ThemeProvider } from '@emotion/react';
 
 const {

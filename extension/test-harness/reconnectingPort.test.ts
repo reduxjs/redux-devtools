@@ -1,10 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import {
-  createFakeChrome,
-  FakeChrome,
-  FakePort,
-  installFakeChrome,
-} from './fakeChrome.js';
+import type { FakeChrome, FakePort } from './fakeChrome.js';
+import { createFakeChrome, installFakeChrome } from './fakeChrome.js';
 import { createReconnectingPort } from '../src/utils/reconnectingPort.js';
 
 interface Msg {

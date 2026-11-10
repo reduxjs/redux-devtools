@@ -1,7 +1,8 @@
 import { vi } from 'vitest';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, Reducer } from 'redux';
+import type { Reducer } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { render, screen, within } from '@testing-library/react';
 import App from '../src/containers/App.js';
 import { exportStateMiddleware } from '../src/middlewares/exportState.js';
@@ -9,7 +10,7 @@ import { coreReducers } from '../src/reducers/index.js';
 import { DATA_TYPE_KEY } from '../src/constants/dataTypes.js';
 import { stringifyJSON } from '../src/utils/stringifyJSON.js';
 import { combineReducers } from 'redux';
-import { CoreStoreAction, CoreStoreState } from '../src/index.js';
+import type { CoreStoreAction, CoreStoreState } from '../src/index.js';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

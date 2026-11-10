@@ -1,8 +1,5 @@
-import {
-  configureStore,
-  combineReducers,
-  EnhancedStore,
-} from '@reduxjs/toolkit';
+import type { EnhancedStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { pokemonApi } from './services/pokemon';
 import { postsApi } from './services/posts';
 import DevTools from './features/DevTools/DevTools';

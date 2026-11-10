@@ -1,6 +1,7 @@
 import React from 'react';
 import { Map } from 'immutable';
-import { JSONTree, StylingValue } from 'react-json-tree';
+import type { StylingValue } from 'react-json-tree';
+import { JSONTree } from 'react-json-tree';
 
 const getLabelStyle: StylingValue = ({ style }, nodeType, expanded) => ({
   style: {

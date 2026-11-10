@@ -1,10 +1,9 @@
-import React, { PureComponent, Component, ReactElement } from 'react';
-import ReactSelect, {
-  GroupBase,
-  Props as ReactSelectProps,
-} from 'react-select';
+import type { ReactElement } from 'react';
+import React, { PureComponent, Component } from 'react';
+import type { GroupBase, Props as ReactSelectProps } from 'react-select';
+import ReactSelect from 'react-select';
 import createThemedComponent from '../utils/createThemedComponent.js';
-import { Theme } from '../themes/default.js';
+import type { Theme } from '../themes/default.js';
 
 export interface SelectProps<
   Option,

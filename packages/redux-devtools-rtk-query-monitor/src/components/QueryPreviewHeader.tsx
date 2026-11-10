@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react';
-import { QueryPreviewTabs, TabOption } from '../types.js';
+import type { ReactNode } from 'react';
+import React from 'react';
+import type { QueryPreviewTabs, TabOption } from '../types.js';
 import { renderTabPanelButtonId } from '../utils/a11y.js';
 import { emptyArray } from '../utils/object.js';
 

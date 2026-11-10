@@ -1,5 +1,5 @@
-import { Action } from 'redux';
-import { DevtoolsInspectorProps } from './DevtoolsInspector.js';
+import type { Action } from 'redux';
+import type { DevtoolsInspectorProps } from './DevtoolsInspector.js';
 
 const UPDATE_MONITOR_STATE =
   '@@redux-devtools-inspector-monitor/UPDATE_MONITOR_STATE';

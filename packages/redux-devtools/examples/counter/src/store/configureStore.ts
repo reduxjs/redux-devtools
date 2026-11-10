@@ -1,6 +1,6 @@
-import { Store } from 'redux';
-import { CounterState } from '../reducers';
-import { CounterAction } from '../actions/CounterActions';
+import type { Store } from 'redux';
+import type { CounterState } from '../reducers';
+import type { CounterAction } from '../actions/CounterActions';
 
 const configureStore: (
   initialState?: Partial<CounterState>,

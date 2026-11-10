@@ -1,13 +1,17 @@
-import { createSelector, Selector } from '@reduxjs/toolkit';
+import type { Selector } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
 import { QueryStatus } from '@reduxjs/toolkit/query';
-import React, { ReactNode, PureComponent } from 'react';
+import type { ReactNode } from 'react';
+import React, { PureComponent } from 'react';
 import type { ShouldExpandNodeInitially } from 'react-json-tree';
-import { QueryPreviewTabs, RtkResourceInfo, RTKStatusFlags } from '../types.js';
+import type { RtkResourceInfo, RTKStatusFlags } from '../types.js';
+import { QueryPreviewTabs } from '../types.js';
 import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y.js';
 import { formatMs } from '../utils/formatters.js';
 import { identity } from '../utils/object.js';
 import { getQueryStatusFlags } from '../utils/rtk-query.js';
-import { TreeView, TreeViewProps } from './TreeView.js';
+import type { TreeViewProps } from './TreeView.js';
+import { TreeView } from './TreeView.js';
 
 type QueryTimings = {
   startedAt: string;

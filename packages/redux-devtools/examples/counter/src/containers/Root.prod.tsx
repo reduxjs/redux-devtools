@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { Store } from 'redux';
+import type { Store } from 'redux';
 import CounterApp from './CounterApp';
-import { CounterState } from '../reducers';
-import { CounterAction } from '../actions/CounterActions';
+import type { CounterState } from '../reducers';
+import type { CounterAction } from '../actions/CounterActions';
 
 interface Props {
   store: Store<CounterState, CounterAction>;

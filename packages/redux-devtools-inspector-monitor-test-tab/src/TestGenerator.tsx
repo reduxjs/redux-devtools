@@ -1,13 +1,15 @@
-import React, { PureComponent, Component, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { PureComponent, Component } from 'react';
 import { stringify } from 'javascript-stringify';
 import objectPath from 'object-path';
 import jsan from 'jsan';
-import diff, { DiffEvent } from 'simple-diff';
+import type { DiffEvent } from 'simple-diff';
+import diff from 'simple-diff';
 import es6template from 'es6template';
 import { Editor } from '@redux-devtools/ui';
-import { TabComponentProps } from '@redux-devtools/inspector-monitor';
-import { Action } from 'redux';
-import { AssertionLocals, DispatcherLocals, WrapLocals } from './types.js';
+import type { TabComponentProps } from '@redux-devtools/inspector-monitor';
+import type { Action } from 'redux';
+import type { AssertionLocals, DispatcherLocals, WrapLocals } from './types.js';
 
 export const fromPath = (path: (string | number)[]) =>
   path.map((a) => (typeof a === 'string' ? `.${a}` : `[${a}]`)).join('');

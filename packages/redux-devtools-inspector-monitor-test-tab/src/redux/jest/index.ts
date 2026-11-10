@@ -1,4 +1,8 @@
-import { AssertionLocals, DispatcherLocals, WrapLocals } from '../../types.js';
+import type {
+  AssertionLocals,
+  DispatcherLocals,
+  WrapLocals,
+} from '../../types.js';
 
 export const name = 'Jest template';
 

@@ -1,5 +1,5 @@
-import { Action, Reducer, StoreEnhancer } from 'redux';
-import { LiftedState } from '@redux-devtools/instrument';
+import type { Action, Reducer, StoreEnhancer } from 'redux';
+import type { LiftedState } from '@redux-devtools/instrument';
 
 export default function persistState<S, A extends Action<string>, MonitorState>(
   sessionId?: string | null,

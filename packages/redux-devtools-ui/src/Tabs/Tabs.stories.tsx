@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Tabs from './index.js';
 import { tabs, simple10Tabs } from './data.js';
-import { TabsProps } from './Tabs.js';
+import type { TabsProps } from './Tabs.js';
 
 const Container = styled.div`
   display: flex;

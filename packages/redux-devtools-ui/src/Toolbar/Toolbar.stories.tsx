@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MdPlayArrow } from 'react-icons/md';
 import { MdFiberManualRecord } from 'react-icons/md';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
@@ -17,9 +18,9 @@ import {
 } from '../index.js';
 import { options } from '../Select/options.js';
 import { simple10Tabs } from '../Tabs/data.js';
-import { BorderPosition } from './styles/Toolbar.js';
-import { TooltipPosition } from '../Button/Button.js';
-import { Position } from '../Tabs/Tabs.js';
+import type { BorderPosition } from './styles/Toolbar.js';
+import type { TooltipPosition } from '../Button/Button.js';
+import type { Position } from '../Tabs/Tabs.js';
 
 const Container = styled.div`
   display: flex;

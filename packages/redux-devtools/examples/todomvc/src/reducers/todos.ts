@@ -6,7 +6,7 @@ import {
   MARK_ALL,
   CLEAR_MARKED,
 } from '../constants/ActionTypes';
-import { TodoAction } from '../actions/TodoActions';
+import type { TodoAction } from '../actions/TodoActions';
 
 export interface Todo {
   text: string;

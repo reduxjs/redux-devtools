@@ -1,9 +1,9 @@
-import React, {
+import type {
   ChangeEventHandler,
-  Component,
   FocusEventHandler,
   KeyboardEventHandler,
 } from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 
 interface State {

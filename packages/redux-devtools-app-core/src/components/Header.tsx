@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs, Toolbar, Button, Divider } from '@redux-devtools/ui';
-import { connect, ResolveThunks } from 'react-redux';
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
 import { GoBook } from 'react-icons/go';
 import { IoMdText } from 'react-icons/io';
 import { RiTwitterXLine } from 'react-icons/ri';

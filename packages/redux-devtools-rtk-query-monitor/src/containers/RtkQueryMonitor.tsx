@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Action, AnyAction } from 'redux';
+import type { Action, AnyAction } from 'redux';
 import { ThemeProvider } from '@emotion/react';
 import RtkQueryInspector from './RtkQueryInspector.js';
 import { reducer } from '../reducers.js';
-import {
+import type {
   ExternalProps,
   RtkQueryMonitorProps,
   RtkQueryMonitorState,

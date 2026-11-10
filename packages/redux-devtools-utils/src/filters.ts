@@ -1,5 +1,5 @@
-import { PerformAction } from '@redux-devtools/core';
-import { Action } from 'redux';
+import type { PerformAction } from '@redux-devtools/core';
+import type { Action } from 'redux';
 
 export interface State {
   actionsById: { [actionId: number]: PerformAction<Action<string>> };

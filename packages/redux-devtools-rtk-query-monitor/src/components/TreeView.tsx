@@ -1,7 +1,9 @@
-import { createSelector, Selector } from '@reduxjs/toolkit';
-import React, { ComponentProps, ReactNode } from 'react';
+import type { Selector } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
+import type { ComponentProps, ReactNode } from 'react';
+import React from 'react';
 import { JSONTree } from 'react-json-tree';
-import { Base16Theme } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 import { getJsonTreeTheme, StyleUtilsContext } from '../styles/themes.js';
 import { getItemString, labelRenderer } from '../styles/tree.js';
 import { identity } from '../utils/object.js';

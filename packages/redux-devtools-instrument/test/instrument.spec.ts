@@ -1,21 +1,15 @@
 import { vi } from 'vitest';
-import {
-  createStore,
-  compose,
-  Reducer,
-  Store,
-  Action,
-  StoreEnhancer,
-} from 'redux';
-import { from, Observable } from 'rxjs';
-import {
-  ActionCreators,
+import type { Reducer, Store, Action, StoreEnhancer } from 'redux';
+import { createStore, compose } from 'redux';
+import type { Observable } from 'rxjs';
+import { from } from 'rxjs';
+import type {
   EnhancedStore,
-  instrument,
   LiftedAction,
   LiftedStore,
   LiftedState,
 } from '../src/instrument.js';
+import { ActionCreators, instrument } from '../src/instrument.js';
 
 type CounterAction = { type: 'INCREMENT' } | { type: 'DECREMENT' };
 function counter(state = 0, action: CounterAction) {

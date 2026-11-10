@@ -1,6 +1,8 @@
-import { createStore, applyMiddleware, Middleware } from 'redux';
+import type { Middleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { thunk } from 'redux-thunk';
-import rootReducer, { CounterState } from '../reducers';
+import type { CounterState } from '../reducers';
+import rootReducer from '../reducers';
 
 const enhancer = applyMiddleware(thunk as unknown as Middleware);
 

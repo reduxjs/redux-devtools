@@ -1,20 +1,23 @@
-import {
+import type {
   CustomAction,
   DispatchAction as AppDispatchAction,
   LibConfig,
+  SetPersistAction,
+} from '@redux-devtools/app';
+import {
   LIFTED_ACTION,
   nonReduxDispatch,
   REMOVE_INSTANCE,
   SET_PERSIST,
-  SetPersistAction,
   stringifyJSON,
   TOGGLE_PERSIST,
   UPDATE_STATE,
 } from '@redux-devtools/app';
 import type { Options, OptionsMessage } from '../../options/syncOptions.js';
-import openDevToolsWindow, { DevToolsPosition } from '../openWindow.js';
+import type { DevToolsPosition } from '../openWindow.js';
+import openDevToolsWindow from '../openWindow.js';
 import { getReport } from '../logging.js';
-import { Action, Dispatch, Middleware } from 'redux';
+import type { Action, Dispatch, Middleware } from 'redux';
 import type {
   ContentScriptToBackgroundMessage,
   SplitMessage,
@@ -24,7 +27,7 @@ import type {
   PageScriptToContentScriptMessageForwardedToMonitors,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
 } from '../../pageScript/api/index.js';
-import { LiftedState } from '@redux-devtools/instrument';
+import type { LiftedState } from '@redux-devtools/instrument';
 import type {
   BackgroundAction,
   LiftedActionAction,

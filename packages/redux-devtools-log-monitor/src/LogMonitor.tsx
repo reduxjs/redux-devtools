@@ -1,19 +1,14 @@
 import React, { PureComponent } from 'react';
-import { Action, Dispatch } from 'redux';
+import type { Action, Dispatch } from 'redux';
 import { base16Themes } from 'react-base16-styling';
 import type { Base16Theme } from 'react-base16-styling';
-import {
-  ActionCreators,
-  LiftedAction,
-  LiftedState,
-} from '@redux-devtools/core';
+import type { LiftedAction, LiftedState } from '@redux-devtools/core';
+import { ActionCreators } from '@redux-devtools/core';
 import debounce from 'lodash.debounce';
-import {
-  updateScrollTop,
-  startConsecutiveToggle,
-  LogMonitorAction,
-} from './actions.js';
-import reducer, { LogMonitorState } from './reducers.js';
+import type { LogMonitorAction } from './actions.js';
+import { updateScrollTop, startConsecutiveToggle } from './actions.js';
+import type { LogMonitorState } from './reducers.js';
+import reducer from './reducers.js';
 import LogMonitorButtonBar from './LogMonitorButtonBar.js';
 import LogMonitorEntryList from './LogMonitorEntryList.js';
 

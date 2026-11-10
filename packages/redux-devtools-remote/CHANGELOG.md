@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.0.2
+
+### Patch Changes
+
+- 7a02f8d: Publish with npm trusted publishing, so releases now include provenance attestations.
+- Updated dependencies [7a02f8d]
+  - @redux-devtools/instrument@3.0.1
+  - @redux-devtools/utils@4.0.2
+
 ## 1.0.1
 
 ### Patch Changes

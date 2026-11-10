@@ -1,6 +1,7 @@
 import { REHYDRATE } from 'redux-persist';
-import { monitor, MonitorState } from '../src/reducers/monitor.js';
-import { CoreStoreAction } from '../src/actions/index.js';
+import type { MonitorState } from '../src/reducers/monitor.js';
+import { monitor } from '../src/reducers/monitor.js';
+import type { CoreStoreAction } from '../src/actions/index.js';
 
 const rehydrate = (persisted: MonitorState): CoreStoreAction =>
   ({

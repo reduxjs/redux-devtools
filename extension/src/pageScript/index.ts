@@ -1,26 +1,33 @@
+import type { ActionCreatorObject } from '@redux-devtools/utils';
 import {
-  ActionCreatorObject,
   evalAction,
   getActionsArray,
   getLocalFilter,
 } from '@redux-devtools/utils';
 import { throttle } from 'lodash-es';
-import { Action, ActionCreator, Dispatch, Reducer, StoreEnhancer } from 'redux';
-import Immutable from 'immutable';
-import {
+import type {
+  Action,
+  ActionCreator,
+  Dispatch,
+  Reducer,
+  StoreEnhancer,
+} from 'redux';
+import type Immutable from 'immutable';
+import type {
   EnhancedStore,
   LiftedAction,
   LiftedState,
   PerformAction,
 } from '@redux-devtools/instrument';
-import {
+import type {
   CustomAction,
   DispatchAction,
   LibConfig,
   Features,
 } from '@redux-devtools/app';
 import configureStore, { getUrlParam } from './enhancerStore.js';
-import { isAllowed, Options } from '../options/syncOptions.js';
+import type { Options } from '../options/syncOptions.js';
+import { isAllowed } from '../options/syncOptions.js';
 import Monitor from './Monitor.js';
 import {
   noFiltersApplied,
@@ -30,8 +37,14 @@ import {
 } from './api/filters.js';
 import notifyErrors from './api/notifyErrors.js';
 import importState from './api/importState.js';
-import openWindow, { Position } from './api/openWindow.js';
+import type { Position } from './api/openWindow.js';
+import openWindow from './api/openWindow.js';
 import generateId from './api/generateInstanceId.js';
+import type {
+  Serialize,
+  StructuralPerformAction,
+  ConnectResponse,
+} from './api/index.js';
 import {
   toContentScript,
   sendMessage,
@@ -40,9 +53,6 @@ import {
   disconnect,
   isInIframe,
   getSerializeParameter,
-  Serialize,
-  StructuralPerformAction,
-  ConnectResponse,
 } from './api/index.js';
 import type { ContentScriptToPageScriptMessage } from '../contentScript/index.js';
 

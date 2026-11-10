@@ -1,12 +1,12 @@
-import { Dispatch, Middleware } from 'redux';
+import type { Dispatch, Middleware } from 'redux';
 import {
   UPDATE_STATE,
   LIFTED_ACTION,
   ERROR,
 } from '../constants/actionTypes.js';
 import { ParseJSONError } from '../utils/parseJSON.js';
-import { CoreStoreAction } from '../actions/index.js';
-import { CoreStoreState } from '../reducers/index.js';
+import type { CoreStoreAction } from '../actions/index.js';
+import type { CoreStoreState } from '../reducers/index.js';
 
 function mayParse(action: CoreStoreAction) {
   return (

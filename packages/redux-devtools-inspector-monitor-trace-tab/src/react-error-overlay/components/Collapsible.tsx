@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component, CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import React, { Component } from 'react';
 import { base16Themes } from 'react-base16-styling';
 
 const theme = base16Themes.nicinabox;

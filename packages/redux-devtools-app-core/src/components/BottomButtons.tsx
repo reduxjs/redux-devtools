@@ -6,7 +6,7 @@ import PrintButton from './buttons/PrintButton.js';
 import DispatcherButton from './buttons/DispatcherButton.js';
 import SliderButton from './buttons/SliderButton.js';
 import MonitorSelector from './MonitorSelector.js';
-import { Options } from '../reducers/instances.js';
+import type { Options } from '../reducers/instances.js';
 
 interface Props {
   dispatcherIsOpen: boolean;

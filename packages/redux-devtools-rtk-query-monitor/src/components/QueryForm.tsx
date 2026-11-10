@@ -1,13 +1,16 @@
-import React, { ReactNode, FormEvent, MouseEvent, ChangeEvent } from 'react';
+import type { ReactNode, FormEvent, MouseEvent, ChangeEvent } from 'react';
+import React from 'react';
 import type { DebouncedFunc } from 'lodash';
 import { css } from '@emotion/react';
 import { Select } from '@redux-devtools/ui';
-import { QueryFormValues } from '../types.js';
+import type { QueryFormValues } from '../types.js';
 import { StyleUtilsContext } from '../styles/themes.js';
-import { SelectOption } from '../types.js';
+import type { SelectOption } from '../types.js';
 import debounce from 'lodash.debounce';
-import { sortQueryOptions, QueryComparators } from '../utils/comparators.js';
-import { QueryFilters, filterQueryOptions } from '../utils/filters.js';
+import type { QueryComparators } from '../utils/comparators.js';
+import { sortQueryOptions } from '../utils/comparators.js';
+import type { QueryFilters } from '../utils/filters.js';
+import { filterQueryOptions } from '../utils/filters.js';
 import { SortOrderButton } from './SortOrderButton.js';
 import { RegexIcon } from './RegexIcon.js';
 

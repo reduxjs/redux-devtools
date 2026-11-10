@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 import { JSONTree } from 'react-json-tree';
-import { Action } from 'redux';
+import type { Action } from 'redux';
 import getItemString from './getItemString.js';
 import getJsonTreeTheme from './getJsonTreeTheme.js';
-import { TabComponentProps } from '../ActionPreview.js';
+import type { TabComponentProps } from '../ActionPreview.js';
 
 const ActionTab: FunctionComponent<
   TabComponentProps<unknown, Action<string>>

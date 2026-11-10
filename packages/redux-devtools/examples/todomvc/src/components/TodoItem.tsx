@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import TodoTextInput from './TodoTextInput';
-import { Todo } from '../reducers/todos';
+import type { Todo } from '../reducers/todos';
 
 interface State {
   editing: boolean;

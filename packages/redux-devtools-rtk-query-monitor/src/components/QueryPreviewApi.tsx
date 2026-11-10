@@ -1,7 +1,10 @@
-import React, { ReactNode, PureComponent } from 'react';
+import type { ReactNode } from 'react';
+import React, { PureComponent } from 'react';
 import type { ShouldExpandNodeInitially } from 'react-json-tree';
-import { ApiStats, QueryPreviewTabs, RtkQueryApiState } from '../types.js';
-import { TreeView, TreeViewProps } from './TreeView.js';
+import type { ApiStats, RtkQueryApiState } from '../types.js';
+import { QueryPreviewTabs } from '../types.js';
+import type { TreeViewProps } from './TreeView.js';
+import { TreeView } from './TreeView.js';
 import { renderTabPanelId, renderTabPanelButtonId } from '../utils/a11y.js';
 
 export interface QueryPreviewApiProps {

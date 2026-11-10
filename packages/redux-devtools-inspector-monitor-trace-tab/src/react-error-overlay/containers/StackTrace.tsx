@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component, ReactElement } from 'react';
+import type { ReactElement } from 'react';
+import React, { Component } from 'react';
 import StackFrame from './StackFrame.js';
 import Collapsible from '../components/Collapsible.js';
 import { isInternalFile } from '../utils/isInternalFile.js';

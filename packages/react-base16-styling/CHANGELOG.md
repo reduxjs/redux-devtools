@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.10.1
+
+### Patch Changes
+
+- 7a02f8d: Publish with npm trusted publishing, so releases now include provenance attestations.
+
 ## 0.10.0
 
 ### Minor Changes

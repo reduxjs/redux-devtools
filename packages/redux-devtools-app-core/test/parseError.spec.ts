@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware, combineReducers, Reducer } from 'redux';
+import type { Reducer } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { coreReducers } from '../src/reducers/index.js';
 import { parseErrorMiddleware } from '../src/middlewares/parseError.js';
 import parseJSON, { ParseJSONError } from '../src/utils/parseJSON.js';

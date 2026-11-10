@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { connect, ResolveThunks } from 'react-redux';
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
 import { Container, Notification } from '@redux-devtools/ui';
+import type { StoreState } from '@redux-devtools/app';
 import {
   clearNotification,
   getActiveInstance,
   Header,
   Settings,
-  StoreState,
 } from '@redux-devtools/app';
 import Actions from './Actions.js';
 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { bindActionCreators, Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Counter from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
-import { CounterAction } from '../actions/CounterActions';
-import { CounterState } from '../reducers';
+import type { CounterAction } from '../actions/CounterActions';
+import type { CounterState } from '../reducers';
 
 interface Props {
   counter: number;

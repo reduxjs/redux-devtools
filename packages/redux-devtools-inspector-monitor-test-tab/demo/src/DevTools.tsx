@@ -1,12 +1,12 @@
 import React from 'react';
 import { createDevTools } from '@redux-devtools/core';
-import { InspectorMonitor, Tab } from '@redux-devtools/inspector-monitor';
-import type { Base16ThemeName } from '@redux-devtools/inspector-monitor';
+import { InspectorMonitor } from '@redux-devtools/inspector-monitor';
+import type { Base16ThemeName, Tab } from '@redux-devtools/inspector-monitor';
 import { DockMonitor } from '@redux-devtools/dock-monitor';
 import { useLocation } from 'react-router-dom';
 import getOptions from './getOptions';
 import { TestTab } from '@redux-devtools/inspector-monitor-test-tab';
-import { Action } from 'redux';
+import type { Action } from 'redux';
 
 export const getDevTools = (location: { search: string }) =>
   createDevTools(

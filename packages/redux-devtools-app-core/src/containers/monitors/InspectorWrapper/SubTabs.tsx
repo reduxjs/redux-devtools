@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { connect, ResolveThunks } from 'react-redux';
-import { Tab, Tabs } from '@redux-devtools/ui';
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
+import type { Tab } from '@redux-devtools/ui';
+import { Tabs } from '@redux-devtools/ui';
+import type { TabComponentProps } from '@redux-devtools/inspector-monitor';
 import {
-  TabComponentProps,
   StateTab,
   ActionTab,
   DiffTab,
 } from '@redux-devtools/inspector-monitor';
-import { Action } from 'redux';
+import type { Action } from 'redux';
 import { selectMonitorTab } from '../../../actions/index.js';
 import RawTab from './RawTab.js';
 import ChartTab from './ChartTab.js';
 import VisualDiffTab from './VisualDiffTab.js';
-import { CoreStoreState } from '../../../reducers/index.js';
+import type { CoreStoreState } from '../../../reducers/index.js';
 import type { Delta } from 'jsondiffpatch';
 
 type StateProps = ReturnType<typeof mapStateToProps>;

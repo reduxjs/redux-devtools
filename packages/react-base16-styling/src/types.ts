@@ -1,4 +1,4 @@
-import * as CSS from 'csstype';
+import type * as CSS from 'csstype';
 import type { Base16Theme } from './themes/index.js';
 
 export interface Styling {

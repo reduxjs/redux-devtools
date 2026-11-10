@@ -1,9 +1,10 @@
 import Color from 'color';
-import * as CSS from 'csstype';
+import type * as CSS from 'csstype';
 import { curry } from 'lodash-es';
 import type { CurriedFunction3 } from 'lodash';
-import { Color as ColorTuple, yuv2rgb, rgb2yuv } from './colorConverters.js';
-import {
+import type { Color as ColorTuple } from './colorConverters.js';
+import { yuv2rgb, rgb2yuv } from './colorConverters.js';
+import type {
   Styling,
   StylingConfig,
   StylingFunction,

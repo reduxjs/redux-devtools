@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Dialog from './index.js';
 import { schema, uiSchema, formData } from '../Form/schema.js';
 

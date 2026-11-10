@@ -1,12 +1,13 @@
-import { Action, AnyAction } from 'redux';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
+import type { Action, AnyAction } from 'redux';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type {
   QueryInfo,
   RtkQueryMonitorState,
   QueryFormValues,
   RtkQueryMonitorProps,
-  QueryPreviewTabs,
 } from './types.js';
+import { QueryPreviewTabs } from './types.js';
 import { QueryComparators } from './utils/comparators.js';
 import { QueryFilters } from './utils/filters.js';
 

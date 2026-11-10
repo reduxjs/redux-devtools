@@ -1,7 +1,8 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Editor from './index.js';
-import { default as WithTabsComponent, WithTabsProps } from './WithTabs.js';
+import type { WithTabsProps } from './WithTabs.js';
+import { default as WithTabsComponent } from './WithTabs.js';
 
 const value = `
 var themes = [];

@@ -1,29 +1,25 @@
 import '../chromeApiMock.js';
-import React, { CSSProperties, ReactNode } from 'react';
-import { createRoot, Root } from 'react-dom/client';
+import type { CSSProperties, ReactNode } from 'react';
+import React from 'react';
+import type { Root } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { Persistor } from 'redux-persist';
-import {
-  REMOVE_INSTANCE,
-  StoreAction,
-  StoreState,
-  UPDATE_STATE,
-} from '@redux-devtools/app';
+import type { Persistor } from 'redux-persist';
+import type { StoreAction, StoreState } from '@redux-devtools/app';
+import { REMOVE_INSTANCE, UPDATE_STATE } from '@redux-devtools/app';
 import App from '../app/App.js';
 import configureStore from './store/panelStore.js';
 
-import { Action, Store } from 'redux';
-import {
+import type { Action, Store } from 'redux';
+import type {
   PanelMessageWithoutNA,
   PanelMessageWithSplitAction,
   SplitUpdateStateRequest,
   UpdateStateRequest,
 } from '../background/store/apiMiddleware.js';
 import { PersistGate } from 'redux-persist/integration/react';
-import {
-  createReconnectingPort,
-  ReconnectingPort,
-} from '../utils/reconnectingPort.js';
+import type { ReconnectingPort } from '../utils/reconnectingPort.js';
+import { createReconnectingPort } from '../utils/reconnectingPort.js';
 import type { PanelOutgoingMessage } from './store/panelSyncMiddleware.js';
 
 const position = location.hash;

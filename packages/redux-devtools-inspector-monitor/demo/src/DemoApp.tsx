@@ -1,4 +1,5 @@
-import React, { CSSProperties, useRef } from 'react';
+import type { CSSProperties } from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import pkg from '@redux-devtools/inspector-monitor/package.json';
 import Button from 'react-bootstrap/Button';
@@ -12,8 +13,9 @@ import Row from 'react-bootstrap/Row';
 import { base16Themes } from 'react-base16-styling';
 import { inspectorThemes } from '@redux-devtools/inspector-monitor';
 import { useLocation, useNavigate } from 'react-router-dom';
-import getOptions, { Options } from './getOptions';
-import {
+import type { Options } from './getOptions';
+import getOptions from './getOptions';
+import type {
   AddFunctionAction,
   AddHugeObjectAction,
   AddImmutableMapAction,

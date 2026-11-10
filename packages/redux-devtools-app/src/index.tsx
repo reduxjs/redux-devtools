@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { Store } from 'redux';
-import { Persistor } from 'redux-persist';
+import type { Store } from 'redux';
+import type { Persistor } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import { App } from '@redux-devtools/app-core';
-import { StoreState } from './reducers/index.js';
-import { StoreAction } from './actions/index.js';
+import type { StoreState } from './reducers/index.js';
+import type { StoreAction } from './actions/index.js';
 import { CONNECT_REQUEST } from './constants/socketActionTypes.js';
 import Connection from './components/Settings/Connection.js';
 import configureStore from './store/configureStore.js';

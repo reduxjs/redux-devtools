@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import type { Delta } from 'jsondiffpatch';
 import * as htmlFormatter from 'jsondiffpatch/formatters/html';
 import styled from '@emotion/styled';
-import { Base16Theme, effects } from '@redux-devtools/ui';
+import type { Base16Theme } from '@redux-devtools/ui';
+import { effects } from '@redux-devtools/ui';
 
 export const StyledContainer = styled.div`
   .jsondiffpatch-delta {

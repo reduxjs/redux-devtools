@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { connect, ResolveThunks } from 'react-redux';
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
 import { Container, Form } from '@redux-devtools/ui';
 import { listSchemes, listThemes } from '@redux-devtools/ui';
 import { changeTheme } from '../../actions/index.js';
-import { CoreStoreState } from '../../reducers/index.js';
+import type { CoreStoreState } from '../../reducers/index.js';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ResolveThunks<typeof actionCreators>;

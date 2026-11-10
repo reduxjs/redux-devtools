@@ -1,5 +1,23 @@
 # @redux-devtools/app-core
 
+## 3.0.2
+
+### Patch Changes
+
+- 7a02f8d: Publish with npm trusted publishing, so releases now include provenance attestations.
+- Updated dependencies [7a02f8d]
+- Updated dependencies [753c012]
+  - @redux-devtools/chart-monitor@6.0.1
+  - @redux-devtools/core@5.0.1
+  - @redux-devtools/inspector-monitor@7.0.2
+  - @redux-devtools/inspector-monitor-test-tab@6.0.1
+  - @redux-devtools/inspector-monitor-trace-tab@5.0.2
+  - @redux-devtools/log-monitor@6.0.1
+  - @redux-devtools/rtk-query-monitor@7.0.1
+  - @redux-devtools/slider-monitor@7.0.1
+  - @redux-devtools/ui@3.0.1
+  - d3-state-visualizer@3.0.1
+
 ## 3.0.1
 
 ### Patch Changes

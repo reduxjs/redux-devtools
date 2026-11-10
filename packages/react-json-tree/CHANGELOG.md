@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.20.1
+
+### Patch Changes
+
+- 7a02f8d: Publish with npm trusted publishing, so releases now include provenance attestations.
+- Updated dependencies [7a02f8d]
+  - react-base16-styling@0.10.1
+
 ## 0.20.0
 
 ### Minor Changes

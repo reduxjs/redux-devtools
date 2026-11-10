@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { Theme } from '../../themes/default.js';
-import { Type } from '../Notification.js';
+import type { Theme } from '../../themes/default.js';
+import type { Type } from '../Notification.js';
 
 const getBackground = (theme: Theme, type: Type) => {
   switch (type) {

@@ -4,7 +4,7 @@ import FilterGroup from './FilterGroup.js';
 import AllowToRunGroup from './AllowToRunGroup.js';
 import MiscellaneousGroup from './MiscellaneousGroup.js';
 import ContextMenuGroup from './ContextMenuGroup.js';
-import { Options } from './syncOptions.js';
+import type { Options } from './syncOptions.js';
 
 export interface OptionsProps {
   readonly options: Options;

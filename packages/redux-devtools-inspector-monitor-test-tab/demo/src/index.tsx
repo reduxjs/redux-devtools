@@ -2,13 +2,8 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Container } from '@redux-devtools/ui';
 import { Provider } from 'react-redux';
-import {
-  createStore,
-  applyMiddleware,
-  compose,
-  StoreEnhancer,
-  StoreEnhancerStoreCreator,
-} from 'redux';
+import type { StoreEnhancer } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { persistState } from '@redux-devtools/core';

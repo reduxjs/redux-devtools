@@ -1,8 +1,9 @@
-import React, { CSSProperties, MouseEventHandler, PureComponent } from 'react';
+import type { CSSProperties, MouseEventHandler } from 'react';
+import React, { PureComponent } from 'react';
 import { JSONTree } from 'react-json-tree';
 import type { ShouldExpandNodeInitially, StylingValue } from 'react-json-tree';
 import type { Base16Theme } from 'react-base16-styling';
-import { Action } from 'redux';
+import type { Action } from 'redux';
 import LogMonitorEntryAction from './LogMonitorEntryAction.js';
 
 const styles: { entry: CSSProperties; root: CSSProperties } = {

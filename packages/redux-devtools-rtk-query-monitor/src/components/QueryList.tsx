@@ -1,6 +1,7 @@
-import React, { PureComponent, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { PureComponent } from 'react';
 import type { Interpolation, Theme } from '@emotion/react';
-import { RtkResourceInfo, RtkQueryMonitorState } from '../types.js';
+import type { RtkResourceInfo, RtkQueryMonitorState } from '../types.js';
 import { isQuerySelected } from '../utils/rtk-query.js';
 
 const queryStatusCss: Interpolation<Theme> = (theme) => ({
