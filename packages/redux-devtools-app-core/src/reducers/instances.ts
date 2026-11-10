@@ -257,6 +257,7 @@ function removeState(state: InstancesState, connectionId: string | number) {
     delete states[id];
   });
   return {
+    ...state,
     selected,
     current,
     sync,
