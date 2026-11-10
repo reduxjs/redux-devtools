@@ -3,7 +3,7 @@ import jsan from 'jsan';
 import { nanoid } from 'nanoid/non-secure';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import type Immutable from 'immutable';
-import { Action, ActionCreator } from 'redux';
+import type { Action, ActionCreator } from 'redux';
 
 export function generateId(id: string | undefined) {
   return id || nanoid(7);

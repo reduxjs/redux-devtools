@@ -1,6 +1,8 @@
-import { combineReducers, Reducer } from 'redux';
-import todos, { Todo } from './todos';
-import { TodoAction } from '../actions/TodoActions';
+import type { Reducer } from 'redux';
+import { combineReducers } from 'redux';
+import type { Todo } from './todos';
+import todos from './todos';
+import type { TodoAction } from '../actions/TodoActions';
 
 export interface TodoState {
   todos: Todo[];

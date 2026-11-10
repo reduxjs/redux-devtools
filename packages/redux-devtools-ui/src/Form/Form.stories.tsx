@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Form from './index.js';
 import { schema, uiSchema, formData } from './schema.js';
 

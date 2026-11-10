@@ -1,14 +1,14 @@
 import { Children } from 'react';
-import { Action } from 'redux';
+import type { Action } from 'redux';
+import type { DockMonitorAction } from './actions.js';
 import {
   CHANGE_MONITOR,
   CHANGE_POSITION,
   CHANGE_SIZE,
-  DockMonitorAction,
   TOGGLE_VISIBILITY,
 } from './actions.js';
 import { POSITIONS } from './constants.js';
-import { DockMonitorProps } from './DockMonitor.js';
+import type { DockMonitorProps } from './DockMonitor.js';
 
 export interface DockMonitorState {
   position: 'left' | 'top' | 'right' | 'bottom';

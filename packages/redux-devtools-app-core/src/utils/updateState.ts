@@ -1,7 +1,7 @@
 import commitExcessActions from './commitExcessActions.js';
-import { State } from '../reducers/instances.js';
-import { Action } from 'redux';
-import { PerformAction } from '@redux-devtools/core';
+import type { State } from '../reducers/instances.js';
+import type { Action } from 'redux';
+import type { PerformAction } from '@redux-devtools/core';
 
 export function recompute(
   previousLiftedState: State,

@@ -1,5 +1,5 @@
 import { RECONNECT } from '../constants/socketActionTypes.js';
-import { ConnectionType, StoreAction } from '../actions/index.js';
+import type { ConnectionType, StoreAction } from '../actions/index.js';
 
 export interface ConnectionStateOptions {
   readonly hostname: string;

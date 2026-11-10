@@ -1,6 +1,7 @@
 import { vi } from 'vitest';
 import { instrument, persistState } from '../src/index.js';
-import { compose, createStore, StoreEnhancer } from 'redux';
+import type { StoreEnhancer } from 'redux';
+import { compose, createStore } from 'redux';
 
 describe('persistState', () => {
   const savedLocalStorage = global.localStorage;

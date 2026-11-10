@@ -4,7 +4,7 @@ import {
   LIFTED_ACTION,
   ERROR,
 } from '../constants/actionTypes.js';
-import { CoreStoreAction } from '../actions/index.js';
+import type { CoreStoreAction } from '../actions/index.js';
 
 interface Notification {
   readonly type: 'error';

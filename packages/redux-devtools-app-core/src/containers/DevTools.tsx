@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { withTheme } from '@emotion/react';
-import { LiftedAction, LiftedState } from '@redux-devtools/core';
-import { Action } from 'redux';
+import type { LiftedAction, LiftedState } from '@redux-devtools/core';
+import type { Action } from 'redux';
 import getMonitor from '../utils/getMonitor.js';
-import { InitMonitorAction } from '../actions/index.js';
-import { Features, State } from '../reducers/instances.js';
-import { MonitorStateMonitorState } from '../reducers/monitor.js';
-import { ThemeFromProvider } from '@redux-devtools/ui';
-import { StateTreeSettings } from '../reducers/stateTreeSettings.js';
+import type { InitMonitorAction } from '../actions/index.js';
+import type { Features, State } from '../reducers/instances.js';
+import type { MonitorStateMonitorState } from '../reducers/monitor.js';
+import type { ThemeFromProvider } from '@redux-devtools/ui';
+import type { StateTreeSettings } from '../reducers/stateTreeSettings.js';
 import MonitorErrorBoundary from '../components/MonitorErrorBoundary.js';
 
 interface Props {

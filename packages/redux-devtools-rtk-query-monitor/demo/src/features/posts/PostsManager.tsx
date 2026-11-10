@@ -15,11 +15,8 @@ import {
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { MdBook } from 'react-icons/md';
 import React, { useState } from 'react';
-import {
-  Post,
-  useAddPostMutation,
-  useGetPostsQuery,
-} from '../../services/posts';
+import type { Post } from '../../services/posts';
+import { useAddPostMutation, useGetPostsQuery } from '../../services/posts';
 import { PostDetail } from './PostDetail';
 import { toaster } from '../../components/ui/toaster';
 

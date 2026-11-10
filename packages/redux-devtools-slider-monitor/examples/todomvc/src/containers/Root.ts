@@ -1,7 +1,7 @@
-import { Store } from 'redux';
-import { ComponentType } from 'react';
-import { TodoState } from '../reducers';
-import { TodoAction } from '../actions/TodoActions';
+import type { Store } from 'redux';
+import type { ComponentType } from 'react';
+import type { TodoState } from '../reducers';
+import type { TodoAction } from '../actions/TodoActions';
 
 interface Props {
   store: Store<TodoState, TodoAction>;

@@ -6,7 +6,7 @@ import {
   TOGGLE_SLIDER,
   TOGGLE_DISPATCHER,
 } from '../constants/actionTypes.js';
-import { MonitorActionAction, CoreStoreAction } from '../actions/index.js';
+import type { MonitorActionAction, CoreStoreAction } from '../actions/index.js';
 
 export interface MonitorStateMonitorState {
   inspectedStatePath?: string[];

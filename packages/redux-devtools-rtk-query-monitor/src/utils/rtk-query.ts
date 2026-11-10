@@ -1,6 +1,8 @@
-import { Action, AnyAction, isAllOf, isPlainObject } from '@reduxjs/toolkit';
-import { QueryCacheKey, QueryStatus } from '@reduxjs/toolkit/query';
-import {
+import type { Action, AnyAction } from '@reduxjs/toolkit';
+import { isAllOf, isPlainObject } from '@reduxjs/toolkit';
+import type { QueryCacheKey } from '@reduxjs/toolkit/query';
+import { QueryStatus } from '@reduxjs/toolkit/query';
+import type {
   QueryInfo,
   RtkQueryMonitorState,
   RtkQueryApiState,
@@ -20,10 +22,11 @@ import {
   RtkResourceInfo,
   RtkRequest,
   RtkRequestTiming,
-  isRtkQuery262Provided,
 } from '../types.js';
+import { isRtkQuery262Provided } from '../types.js';
 import { missingTagId } from '../monitor-config.js';
-import { Comparator, compareJSONPrimitive } from './comparators.js';
+import type { Comparator } from './comparators.js';
+import { compareJSONPrimitive } from './comparators.js';
 import { emptyArray } from './object.js';
 import { formatMs } from './formatters.js';
 import * as statistics from './statistics.js';

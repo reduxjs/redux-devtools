@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Action } from 'redux';
-import {
+import type { Action } from 'redux';
+import type {
   DevtoolsInspectorAction,
   DevtoolsInspectorProps,
   DevtoolsInspectorState,
-  InspectorMonitor,
   Tab,
 } from '@redux-devtools/inspector-monitor';
+import { InspectorMonitor } from '@redux-devtools/inspector-monitor';
 import { TraceTab } from '@redux-devtools/inspector-monitor-trace-tab';
 import { TestTab } from '@redux-devtools/inspector-monitor-test-tab';
 import { DATA_TYPE_KEY } from '../../../constants/dataTypes.js';

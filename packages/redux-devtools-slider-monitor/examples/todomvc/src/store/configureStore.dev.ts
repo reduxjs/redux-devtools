@@ -1,6 +1,8 @@
-import { createStore, compose, StoreEnhancer } from 'redux';
+import type { StoreEnhancer } from 'redux';
+import { createStore, compose } from 'redux';
 import { persistState } from '@redux-devtools/core';
-import rootReducer, { TodoState } from '../reducers';
+import type { TodoState } from '../reducers';
+import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
 function getDebugSessionKey() {

@@ -1,14 +1,16 @@
-import jsan, { Options } from 'jsan';
+import type { Options } from 'jsan';
+import jsan from 'jsan';
 import { throttle } from 'lodash-es';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import { getActionsArray, getLocalFilter } from '@redux-devtools/utils';
-import { isFiltered, PartialLiftedState } from './filters.js';
+import type { PartialLiftedState } from './filters.js';
+import { isFiltered } from './filters.js';
 import importState from './importState.js';
 import generateId from './generateInstanceId.js';
 import type { Config } from '../index.js';
-import { Action } from 'redux';
-import { LiftedState, PerformAction } from '@redux-devtools/instrument';
-import { LibConfig } from '@redux-devtools/app';
+import type { Action } from 'redux';
+import type { LiftedState, PerformAction } from '@redux-devtools/instrument';
+import type { LibConfig } from '@redux-devtools/app';
 import type {
   ContentScriptToPageScriptMessage,
   ListenerMessage,

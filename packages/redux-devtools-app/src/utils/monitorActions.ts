@@ -1,12 +1,11 @@
-import {
+import type {
   DispatchAction,
   InstancesState,
-  SET_STATE,
   State,
-  stringifyJSON,
 } from '@redux-devtools/app-core';
-import { Dispatch, MiddlewareAPI } from 'redux';
-import { StoreActionWithoutLiftedAction } from '../actions/index.js';
+import { SET_STATE, stringifyJSON } from '@redux-devtools/app-core';
+import type { Dispatch, MiddlewareAPI } from 'redux';
+import type { StoreActionWithoutLiftedAction } from '../actions/index.js';
 
 export function sweep(state: State): State {
   const skippedActionIdsSet = new Set(state.skippedActionIds);

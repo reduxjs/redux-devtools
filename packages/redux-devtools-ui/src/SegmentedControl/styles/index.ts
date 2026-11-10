@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import color from '../../utils/color.js';
-import { Theme } from '../../themes/default.js';
+import type { Theme } from '../../themes/default.js';
 
 interface StyleProps {
   disabled: boolean | undefined;

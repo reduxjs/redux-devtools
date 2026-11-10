@@ -7,7 +7,8 @@ import {
   Seq,
 } from 'immutable';
 import shuffle from 'lodash.shuffle';
-import { combineReducers, Reducer } from 'redux';
+import type { Reducer } from 'redux';
+import { combineReducers } from 'redux';
 
 type Nested = { long: { nested: { path: { to: { a: string } } }[] } };
 

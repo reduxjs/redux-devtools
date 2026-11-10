@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { getStackFrames } from './react-error-overlay/utils/getStackFrames.js';
 import StackTrace from './react-error-overlay/containers/StackTrace.js';
 import openFile from './openFile.js';
-import { Action } from 'redux';
-import { PerformAction } from '@redux-devtools/core';
-import { TabComponentProps } from '@redux-devtools/inspector-monitor';
-import StackFrame from './react-error-overlay/utils/stack-frame.js';
-import { ErrorLocation } from './react-error-overlay/utils/parseCompileError.js';
+import type { Action } from 'redux';
+import type { PerformAction } from '@redux-devtools/core';
+import type { TabComponentProps } from '@redux-devtools/inspector-monitor';
+import type StackFrame from './react-error-overlay/utils/stack-frame.js';
+import type { ErrorLocation } from './react-error-overlay/utils/parseCompileError.js';
 
 const rootStyle = { padding: '5px 10px' };
 

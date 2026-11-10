@@ -1,6 +1,6 @@
-import { SchemeName, ThemeName } from '@redux-devtools/ui';
+import type { SchemeName, ThemeName } from '@redux-devtools/ui';
 import { CHANGE_THEME } from '../constants/actionTypes.js';
-import { CoreStoreAction } from '../actions/index.js';
+import type { CoreStoreAction } from '../actions/index.js';
 
 export interface ThemeState {
   readonly theme: ThemeName;

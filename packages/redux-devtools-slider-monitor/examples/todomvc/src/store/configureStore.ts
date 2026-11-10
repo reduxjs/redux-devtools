@@ -1,6 +1,6 @@
-import { Store } from 'redux';
-import { TodoState } from '../reducers';
-import { TodoAction } from '../actions/TodoActions';
+import type { Store } from 'redux';
+import type { TodoState } from '../reducers';
+import type { TodoAction } from '../actions/TodoActions';
 
 const configureStore: (
   initialState?: Partial<TodoState>,

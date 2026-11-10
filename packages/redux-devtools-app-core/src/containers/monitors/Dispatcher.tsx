@@ -2,16 +2,12 @@
 
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
-import {
-  Button,
-  Select,
-  Editor,
-  Toolbar,
-  Base16Theme,
-} from '@redux-devtools/ui';
-import { connect, ResolveThunks } from 'react-redux';
+import type { Base16Theme } from '@redux-devtools/ui';
+import { Button, Select, Editor, Toolbar } from '@redux-devtools/ui';
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
 import { dispatchRemotely } from '../../actions/index.js';
-import { Options } from '../../reducers/instances.js';
+import type { Options } from '../../reducers/instances.js';
 
 export const DispatcherContainer = styled.div`
   display: flex;

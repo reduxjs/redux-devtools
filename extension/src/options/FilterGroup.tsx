@@ -1,6 +1,6 @@
 import React from 'react';
 import { FilterState } from '../pageScript/api/filters.js';
-import { OptionsProps } from './Options.js';
+import type { OptionsProps } from './Options.js';
 
 export default function FilterGroup({ options, saveOption }: OptionsProps) {
   return (

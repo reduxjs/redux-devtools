@@ -1,13 +1,12 @@
+import type { StoreAction, StoreState } from '@redux-devtools/app';
 import {
   getActiveInstance,
   LIFTED_ACTION,
   SELECT_INSTANCE,
-  StoreAction,
-  StoreState,
   TOGGLE_PERSIST,
   UPDATE_STATE,
 } from '@redux-devtools/app';
-import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
+import type { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 
 export type PanelOutgoingMessage = StoreAction & {
   readonly instanceId: string | number;

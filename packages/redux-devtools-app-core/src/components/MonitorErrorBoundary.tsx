@@ -1,8 +1,10 @@
-import React, { Component, ReactNode } from 'react';
-import { connect, ResolveThunks } from 'react-redux';
+import type { ReactNode } from 'react';
+import React, { Component } from 'react';
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
 import { Button } from '@redux-devtools/ui';
 import { selectMonitorWithState } from '../actions/index.js';
-import { MonitorStateMonitorState } from '../reducers/monitor.js';
+import type { MonitorStateMonitorState } from '../reducers/monitor.js';
 
 interface OwnProps {
   monitor: string;

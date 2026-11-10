@@ -1,17 +1,17 @@
-import React, { CSSProperties, PureComponent } from 'react';
+import type { CSSProperties } from 'react';
+import React, { PureComponent } from 'react';
 import { base16Themes } from 'react-base16-styling';
 import type { Base16Theme } from 'react-base16-styling';
-import {
-  ActionCreators,
-  LiftedAction,
-  LiftedState,
-} from '@redux-devtools/core';
+import type { LiftedAction, LiftedState } from '@redux-devtools/core';
+import { ActionCreators } from '@redux-devtools/core';
 import deepmerge from 'deepmerge';
-import { Action, Dispatch } from 'redux';
+import type { Action, Dispatch } from 'redux';
 import type { Options } from 'd3-state-visualizer';
 
-import reducer, { ChartMonitorState } from './reducers.js';
-import Chart, { Props } from './Chart.js';
+import type { ChartMonitorState } from './reducers.js';
+import reducer from './reducers.js';
+import type { Props } from './Chart.js';
+import Chart from './Chart.js';
 
 const { reset, rollback, commit, sweep, toggleAction } = ActionCreators;
 

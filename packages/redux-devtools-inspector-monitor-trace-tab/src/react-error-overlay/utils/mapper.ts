@@ -6,7 +6,8 @@
  */
 
 import StackFrame from './stack-frame.js';
-import { getSourceMap, SourceMap } from './getSourceMap.js';
+import type { SourceMap } from './getSourceMap.js';
+import { getSourceMap } from './getSourceMap.js';
 import { getLinesAround } from './getLinesAround.js';
 
 /**

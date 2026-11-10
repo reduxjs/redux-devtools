@@ -1,16 +1,11 @@
-import {
-  createStore,
-  applyMiddleware,
-  compose,
-  Reducer,
-  StoreEnhancer,
-  Middleware,
-} from 'redux';
+import type { Reducer, StoreEnhancer, Middleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from '@redux-devtools/core';
 import { thunk } from 'redux-thunk';
-import rootReducer, { CounterState } from '../reducers';
+import type { CounterState } from '../reducers';
+import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
-import { CounterAction } from '../actions/CounterActions';
+import type { CounterAction } from '../actions/CounterActions';
 
 function getDebugSessionKey() {
   const matches = /[?&]debug_session=([^&#]+)\b/.exec(window.location.href);

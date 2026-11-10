@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { connect, ResolveThunks } from 'react-redux';
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
 import { Button, Container, Divider, Toolbar } from '@redux-devtools/ui';
+import type { StoreState } from '@redux-devtools/app';
 import {
   DevTools,
   Dispatcher,
@@ -14,7 +16,6 @@ import {
   PrintButton,
   SliderButton,
   SliderMonitor,
-  StoreState,
   TopButtons,
 } from '@redux-devtools/app';
 import { GoBroadcast } from 'react-icons/go';

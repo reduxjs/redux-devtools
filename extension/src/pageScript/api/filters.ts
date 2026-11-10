@@ -1,6 +1,6 @@
-import { Action } from 'redux';
-import { LiftedState, PerformAction } from '@redux-devtools/instrument';
-import { LocalFilter } from '@redux-devtools/utils';
+import type { Action } from 'redux';
+import type { LiftedState, PerformAction } from '@redux-devtools/instrument';
+import type { LocalFilter } from '@redux-devtools/utils';
 
 export type FilterStateValue =
   | 'DO_NOT_FILTER'

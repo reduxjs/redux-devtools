@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { PerformAction } from '@redux-devtools/core';
-import { Action } from 'redux';
+import type { PerformAction } from '@redux-devtools/core';
+import type { Action } from 'redux';
 import TestGenerator from '../src/TestGenerator.js';
 import fnTemplate from '../src/redux/mocha/index.js';
 import strTemplate from '../src/redux/mocha/template.js';

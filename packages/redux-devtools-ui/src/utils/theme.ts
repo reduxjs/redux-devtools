@@ -3,7 +3,7 @@ import * as themes from '../themes/index.js';
 import { base16Themes as baseSchemes } from 'react-base16-styling';
 import * as additionalSchemes from '../colorSchemes/index.js';
 import invertColors from '../utils/invertColors.js';
-import { Theme as ThemeBase } from '../themes/default.js';
+import type { Theme as ThemeBase } from '../themes/default.js';
 
 const defaultDarkScheme = baseSchemes.nicinabox;
 

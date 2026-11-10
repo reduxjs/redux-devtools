@@ -1,12 +1,15 @@
-import { AuthStates, States } from 'socketcluster-client/lib/clientsocket.js';
-import {
+import type {
+  AuthStates,
+  States,
+} from 'socketcluster-client/lib/clientsocket.js';
+import type {
   CoreStoreActionWithoutUpdateStateOrLiftedAction,
   LiftedActionAction,
   UPDATE_REPORTS,
   UPDATE_STATE,
   UpdateStateAction,
 } from '@redux-devtools/app-core';
-import {
+import type {
   AUTH_ERROR,
   AUTH_REQUEST,
   AUTH_SUCCESS,
@@ -16,12 +19,12 @@ import {
   DEAUTHENTICATE,
   DISCONNECTED,
   EMIT,
-  RECONNECT,
   SUBSCRIBE_ERROR,
   SUBSCRIBE_REQUEST,
   SUBSCRIBE_SUCCESS,
   UNSUBSCRIBE,
 } from '../constants/socketActionTypes.js';
+import { RECONNECT } from '../constants/socketActionTypes.js';
 
 export type ConnectionType = 'disabled' | 'custom';
 export interface ConnectionOptions {

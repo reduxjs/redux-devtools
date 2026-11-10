@@ -1,4 +1,5 @@
-import { map2tree, Node } from '../src/index.js';
+import type { Node } from '../src/index.js';
+import { map2tree } from '../src/index.js';
 import * as immutable from 'immutable';
 
 test('# rootNodeKey', () => {

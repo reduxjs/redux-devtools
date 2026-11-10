@@ -1,5 +1,5 @@
 import { CHANGE_STATE_TREE_SETTINGS } from '../constants/actionTypes.js';
-import { CoreStoreAction } from '../actions/index.js';
+import type { CoreStoreAction } from '../actions/index.js';
 
 export interface StateTreeSettings {
   readonly sortAlphabetically: boolean;

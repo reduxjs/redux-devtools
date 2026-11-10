@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import TabsHeader, { Tab } from './TabsHeader.js';
+import type { Tab } from './TabsHeader.js';
+import TabsHeader from './TabsHeader.js';
 import { TabsContainer } from './styles/common.js';
 
 export type Position = 'left' | 'right' | 'center';

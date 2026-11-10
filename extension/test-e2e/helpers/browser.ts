@@ -14,7 +14,7 @@ import puppeteer, {
 } from 'puppeteer-core';
 import { createServer, type Server } from 'node:http';
 import { readFile } from 'node:fs/promises';
-import { AddressInfo } from 'node:net';
+import type { AddressInfo } from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import TodoApp from './TodoApp';
-import { Store } from 'redux';
-import { TodoState } from '../reducers';
-import { TodoAction } from '../actions/TodoActions';
+import type { Store } from 'redux';
+import type { TodoState } from '../reducers';
+import type { TodoAction } from '../actions/TodoActions';
 
 interface Props {
   store: Store<TodoState, TodoAction>;

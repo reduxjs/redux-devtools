@@ -1,11 +1,14 @@
-import { createSelector, Selector } from '@reduxjs/toolkit';
-import React, { ReactNode, PureComponent } from 'react';
-import { Action, AnyAction } from 'redux';
+import type { Selector } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
+import type { ReactNode } from 'react';
+import React, { PureComponent } from 'react';
+import type { Action, AnyAction } from 'redux';
 import type { KeyPath, ShouldExpandNodeInitially } from 'react-json-tree';
 import { QueryPreviewTabs } from '../types.js';
 import { renderTabPanelButtonId, renderTabPanelId } from '../utils/a11y.js';
 import { emptyRecord, identity } from '../utils/object.js';
-import { TreeView, TreeViewProps } from './TreeView.js';
+import type { TreeViewProps } from './TreeView.js';
+import { TreeView } from './TreeView.js';
 
 export interface QueryPreviewActionsProps {
   isWideLayout: boolean;

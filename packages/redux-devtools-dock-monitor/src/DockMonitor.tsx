@@ -1,15 +1,16 @@
 import React, { cloneElement, Children, Component } from 'react';
 import { Dock } from 'react-dock';
-import { Action, Dispatch } from 'redux';
-import { LiftedState, Monitor } from '@redux-devtools/core';
+import type { Action, Dispatch } from 'redux';
+import type { LiftedState, Monitor } from '@redux-devtools/core';
+import type { DockMonitorAction } from './actions.js';
 import {
   toggleVisibility,
   changeMonitor,
   changePosition,
   changeSize,
-  DockMonitorAction,
 } from './actions.js';
-import reducer, { DockMonitorState } from './reducers.js';
+import type { DockMonitorState } from './reducers.js';
+import reducer from './reducers.js';
 import parseKey from 'parse-key';
 
 interface KeyObject {

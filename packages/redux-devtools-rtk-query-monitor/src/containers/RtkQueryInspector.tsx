@@ -1,7 +1,8 @@
-import React, { PureComponent, createRef, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import type { Dispatch, Action } from '@reduxjs/toolkit';
 import type { LiftedAction, LiftedState } from '@redux-devtools/core';
-import {
+import type {
   QueryFormValues,
   QueryPreviewTabs,
   RtkQueryMonitorState,

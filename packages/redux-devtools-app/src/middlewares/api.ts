@@ -1,5 +1,10 @@
-import {
+import type {
   DispatchAction,
+  LiftedActionAction,
+  Request,
+  UpdateReportsRequest,
+} from '@redux-devtools/app-core';
+import {
   GET_REPORT_ERROR,
   GET_REPORT_REQUEST,
   GET_REPORT_SUCCESS,
@@ -7,21 +12,19 @@ import {
   getActiveInstance,
   importState,
   LIFTED_ACTION,
-  LiftedActionAction,
   REMOVE_INSTANCE,
-  Request,
   showNotification,
   UPDATE_REPORTS,
   UPDATE_STATE,
-  UpdateReportsRequest,
 } from '@redux-devtools/app-core';
-import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
+import type { AGClientSocket } from 'socketcluster-client';
+import socketClusterClient from 'socketcluster-client';
 import { stringify } from 'jsan';
-import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
+import type { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 import * as actions from '../constants/socketActionTypes.js';
 import { nonReduxDispatch } from '../utils/monitorActions.js';
-import { EmitAction, StoreAction } from '../actions/index.js';
-import { StoreState } from '../reducers/index.js';
+import type { EmitAction, StoreAction } from '../actions/index.js';
+import type { StoreState } from '../reducers/index.js';
 
 let socket: AGClientSocket;
 let store: MiddlewareAPI<Dispatch<StoreAction>, StoreState>;

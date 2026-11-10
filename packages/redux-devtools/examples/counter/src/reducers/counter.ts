@@ -1,5 +1,5 @@
 import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../constants/ActionTypes';
-import { CounterAction } from '../actions/CounterActions';
+import type { CounterAction } from '../actions/CounterActions';
 
 export default function counter(state = 0, action: CounterAction) {
   switch (action.type) {

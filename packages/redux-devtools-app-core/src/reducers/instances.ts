@@ -1,5 +1,5 @@
-import { PerformAction } from '@redux-devtools/core';
-import { Action } from 'redux';
+import type { PerformAction } from '@redux-devtools/core';
+import type { Action } from 'redux';
 import {
   UPDATE_STATE,
   SET_STATE,
@@ -13,7 +13,7 @@ import {
 } from '../constants/actionTypes.js';
 import parseJSON from '../utils/parseJSON.js';
 import { recompute } from '../utils/updateState.js';
-import {
+import type {
   ActionCreator,
   LiftedActionDispatchAction,
   Request,

@@ -1,13 +1,14 @@
-import { createStore, applyMiddleware, Reducer, Store } from 'redux';
+import type { Reducer, Store } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
+import type { StoreAction, StoreState } from '@redux-devtools/app';
 import {
   exportStateMiddleware,
   parseErrorMiddleware,
-  StoreAction,
-  StoreState,
 } from '@redux-devtools/app';
-import panelDispatcher, { PanelBackgroundPort } from './panelSyncMiddleware.js';
+import type { PanelBackgroundPort } from './panelSyncMiddleware.js';
+import panelDispatcher from './panelSyncMiddleware.js';
 import rootReducer from './panelReducer.js';
 
 const persistConfig = {

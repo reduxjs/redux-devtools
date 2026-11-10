@@ -1,5 +1,6 @@
-import { instrument, Options } from '@redux-devtools/instrument';
-import { Action, Reducer, StoreEnhancerStoreCreator } from 'redux';
+import type { Options } from '@redux-devtools/instrument';
+import { instrument } from '@redux-devtools/instrument';
+import type { Action, Reducer, StoreEnhancerStoreCreator } from 'redux';
 
 export default function configureStore<
   S,
