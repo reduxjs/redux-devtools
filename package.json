@@ -17,7 +17,7 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "clean:all": "pnpm --recursive run clean",
-    "release": "pnpm build:all && pnpm publish -r",
+    "release": "pnpm build:all && changeset publish",
     "test": "vitest --run"
   },
   "packageManager": "pnpm@12.18.0"
