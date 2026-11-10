@@ -5,9 +5,9 @@ import {
   EXPORT,
 } from '../constants/actionTypes.js';
 import { getActiveInstance } from '../reducers/instances.js';
-import { Dispatch, Middleware } from 'redux';
-import { CoreStoreAction } from '../actions/index.js';
-import { CoreStoreState } from '../reducers/index.js';
+import type { Dispatch, Middleware } from 'redux';
+import type { CoreStoreAction } from '../actions/index.js';
+import type { CoreStoreState } from '../reducers/index.js';
 
 let toExport: string | number | undefined;
 

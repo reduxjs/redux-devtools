@@ -1,8 +1,9 @@
 import React from 'react';
 import { ThemeProvider } from '@emotion/react';
-import { useTheme, ThemeData } from '../utils/theme.js';
+import type { ThemeData } from '../utils/theme.js';
+import { useTheme } from '../utils/theme.js';
 import { MainContainerWrapper, ContainerWrapper } from './styles/index.js';
-import { Theme } from '../themes/default.js';
+import type { Theme } from '../themes/default.js';
 
 interface ContainerFromThemeDataProps {
   children?: React.ReactNode;

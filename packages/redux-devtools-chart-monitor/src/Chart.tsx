@@ -1,11 +1,11 @@
 import React, { Component, createRef } from 'react';
 import { tree } from 'd3-state-visualizer';
 import type { Options } from 'd3-state-visualizer';
-import { base16Themes } from 'react-base16-styling';
+import type { base16Themes } from 'react-base16-styling';
 import type { Base16Theme } from 'react-base16-styling';
-import { Action, Dispatch } from 'redux';
-import { LiftedAction, LiftedState } from '@redux-devtools/core';
-import { ChartMonitorState } from './reducers.js';
+import type { Action, Dispatch } from 'redux';
+import type { LiftedAction, LiftedState } from '@redux-devtools/core';
+import type { ChartMonitorState } from './reducers.js';
 
 const wrapperStyle = {
   width: '100%',

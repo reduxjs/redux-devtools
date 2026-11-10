@@ -1,6 +1,7 @@
 import '../chromeApiMock.js';
 import configureStore from './store/backgroundStore.js';
-import openDevToolsWindow, { DevToolsPosition } from './openWindow.js';
+import type { DevToolsPosition } from './openWindow.js';
+import openDevToolsWindow from './openWindow.js';
 import { createMenu, removeMenu } from './contextMenus.js';
 import { getOptions } from '../options/syncOptions.js';
 

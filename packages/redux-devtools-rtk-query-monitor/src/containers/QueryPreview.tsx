@@ -1,40 +1,25 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React from 'react';
 import type { Interpolation, Theme } from '@emotion/react';
-import {
-  QueryPreviewTabs,
-  RtkResourceInfo,
-  SelectorsSource,
-  TabOption,
-} from '../types.js';
+import type { RtkResourceInfo, SelectorsSource, TabOption } from '../types.js';
+import { QueryPreviewTabs } from '../types.js';
 import { QueryPreviewHeader } from '../components/QueryPreviewHeader.js';
-import {
-  QueryPreviewInfo,
-  QueryPreviewInfoProps,
-} from '../components/QueryPreviewInfo.js';
-import {
-  QueryPreviewApi,
-  QueryPreviewApiProps,
-} from '../components/QueryPreviewApi.js';
-import {
-  QueryPreviewSubscriptions,
-  QueryPreviewSubscriptionsProps,
-} from '../components/QueryPreviewSubscriptions.js';
-import {
-  QueryPreviewTags,
-  QueryPreviewTagsProps,
-} from '../components/QueryPreviewTags.js';
+import type { QueryPreviewInfoProps } from '../components/QueryPreviewInfo.js';
+import { QueryPreviewInfo } from '../components/QueryPreviewInfo.js';
+import type { QueryPreviewApiProps } from '../components/QueryPreviewApi.js';
+import { QueryPreviewApi } from '../components/QueryPreviewApi.js';
+import type { QueryPreviewSubscriptionsProps } from '../components/QueryPreviewSubscriptions.js';
+import { QueryPreviewSubscriptions } from '../components/QueryPreviewSubscriptions.js';
+import type { QueryPreviewTagsProps } from '../components/QueryPreviewTags.js';
+import { QueryPreviewTags } from '../components/QueryPreviewTags.js';
 import { NoRtkQueryApi } from '../components/NoRtkQueryApi.js';
-import { InspectorSelectors } from '../selectors.js';
+import type { InspectorSelectors } from '../selectors.js';
 import { mapProps } from './mapProps.js';
-import {
-  QueryPreviewActions,
-  QueryPreviewActionsProps,
-} from '../components/QueryPreviewActions.js';
+import type { QueryPreviewActionsProps } from '../components/QueryPreviewActions.js';
+import { QueryPreviewActions } from '../components/QueryPreviewActions.js';
 import { isTabVisible } from '../utils/tabs.js';
-import {
-  QueryPreviewData,
-  QueryPreviewDataProps,
-} from '../components/QueryPreviewData.js';
+import type { QueryPreviewDataProps } from '../components/QueryPreviewData.js';
+import { QueryPreviewData } from '../components/QueryPreviewData.js';
 
 const queryPreviewCss: Interpolation<Theme> = (theme) => ({
   flex: '1 1 50%',

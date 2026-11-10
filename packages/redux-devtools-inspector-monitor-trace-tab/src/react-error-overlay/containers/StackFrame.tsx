@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component, CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
+import React, { Component } from 'react';
 import CodeBlock from './StackFrameCodeBlock.js';
 import { getPrettyURL } from '../utils/getPrettyURL.js';
 import { base16Themes } from 'react-base16-styling';

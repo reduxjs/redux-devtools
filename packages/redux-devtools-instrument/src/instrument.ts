@@ -1,12 +1,12 @@
-import {
+import type {
   Action,
-  isPlainObject,
   Observer,
   Reducer,
   Store,
   StoreEnhancer,
   StoreEnhancerStoreCreator,
 } from 'redux';
+import { isPlainObject } from 'redux';
 import getSymbolObservable from './getSymbolObservable.js';
 
 export const ActionTypes = {

@@ -1,12 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
-import {
+import type {
   CustomAction,
   DispatchAction,
   LIFTED_ACTION,
   StoreActionWithoutLiftedAction,
 } from '@redux-devtools/app';
-import rootReducer, { BackgroundState } from './backgroundReducer.js';
-import api, { CONNECTED, DISCONNECTED } from './apiMiddleware.js';
+import type { BackgroundState } from './backgroundReducer.js';
+import rootReducer from './backgroundReducer.js';
+import type { CONNECTED, DISCONNECTED } from './apiMiddleware.js';
+import api from './apiMiddleware.js';
 
 interface LiftedActionActionBase {
   action?: DispatchAction | string | CustomAction;

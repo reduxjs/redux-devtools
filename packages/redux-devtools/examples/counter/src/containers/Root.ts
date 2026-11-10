@@ -1,7 +1,7 @@
-import { Store } from 'redux';
-import { CounterState } from '../reducers';
-import { CounterAction } from '../actions/CounterActions';
-import { ComponentType } from 'react';
+import type { Store } from 'redux';
+import type { CounterState } from '../reducers';
+import type { CounterAction } from '../actions/CounterActions';
+import type { ComponentType } from 'react';
 
 interface Props {
   store: Store<CounterState, CounterAction>;

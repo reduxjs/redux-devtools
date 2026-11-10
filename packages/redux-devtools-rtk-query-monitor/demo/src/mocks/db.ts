@@ -3,7 +3,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { http, HttpResponse } from 'msw/http';
 import { delay } from 'msw/utils/delay';
 import { z } from 'zod';
-import { Post } from '../services/posts';
+import type { Post } from '../services/posts';
 
 const posts = new Collection({
   schema: z.object({

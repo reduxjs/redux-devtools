@@ -1,7 +1,7 @@
 // Same as https://github.com/SimenB/react-vendor-prefixes/blob/master/src/index.js,
 // but dumber
 
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 
 const vendorSpecificProperties = [
   'animation',

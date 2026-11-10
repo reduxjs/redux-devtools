@@ -8,7 +8,7 @@ Based on:
 
 import { css } from '@emotion/react';
 import { prefixSelectors } from '../../utils/autoPrefix.js';
-import { Theme } from '../../themes/default.js';
+import type { Theme } from '../../themes/default.js';
 
 export interface StyleProps {
   percent: number;

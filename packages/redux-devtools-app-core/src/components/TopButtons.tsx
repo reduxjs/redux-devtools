@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { ActionCreators, LiftedAction } from '@redux-devtools/core';
+import type { LiftedAction } from '@redux-devtools/core';
+import { ActionCreators } from '@redux-devtools/core';
 import { Button, Toolbar, Divider } from '@redux-devtools/ui';
-import { Action } from 'redux';
+import type { Action } from 'redux';
 import RecordButton from './buttons/RecordButton.js';
 import PersistButton from './buttons/PersistButton.js';
 import LockButton from './buttons/LockButton.js';
 import InstanceSelector from './InstanceSelector.js';
 import SyncButton from './buttons/SyncButton.js';
-import { Options, State } from '../reducers/instances.js';
+import type { Options, State } from '../reducers/instances.js';
 
 const { reset, rollback, commit, sweep } = ActionCreators;
 

@@ -1,5 +1,6 @@
 import { createStore } from 'redux';
-import rootReducer, { TodoState } from '../reducers';
+import type { TodoState } from '../reducers';
+import rootReducer from '../reducers';
 
 export default function configureStore(initialState?: Partial<TodoState>) {
   return createStore(rootReducer, initialState);

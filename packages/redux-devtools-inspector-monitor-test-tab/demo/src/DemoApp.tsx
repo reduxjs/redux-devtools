@@ -1,11 +1,12 @@
-import React, { CSSProperties, useRef } from 'react';
+import type { CSSProperties } from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { Button, Toolbar, Spacer } from '@redux-devtools/ui';
 import pkg from '@redux-devtools/inspector-monitor-test-tab/package.json';
 import { useLocation } from 'react-router-dom';
 import getOptions from './getOptions';
-import { DemoAppState } from './reducers';
-import {
+import type { DemoAppState } from './reducers';
+import type {
   AddFunctionAction,
   AddHugeObjectAction,
   AddImmutableMapAction,

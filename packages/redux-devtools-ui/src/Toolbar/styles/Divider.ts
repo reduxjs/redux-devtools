@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Base16Theme } from 'react-base16-styling';
+import type { Base16Theme } from 'react-base16-styling';
 
 const Divider = styled.div`
   background-color: ${(props: {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect, ResolveThunks } from 'react-redux';
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
 import { Button } from '@redux-devtools/ui';
 import { FaTerminal } from 'react-icons/fa';
 import { toggleDispatcher } from '../../actions/index.js';

@@ -1,14 +1,11 @@
-import React, { Component, MouseEventHandler } from 'react';
+import type { MouseEventHandler } from 'react';
+import React, { Component } from 'react';
 import TodoItem from './TodoItem';
 import Footer from './Footer';
-import {
-  SHOW_ALL,
-  SHOW_MARKED,
-  SHOW_UNMARKED,
-  TodoFilter,
-} from '../constants/TodoFilters';
-import { Todo } from '../reducers/todos';
-import { TodoActions } from '../actions/TodoActions';
+import type { TodoFilter } from '../constants/TodoFilters';
+import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../constants/TodoFilters';
+import type { Todo } from '../reducers/todos';
+import type { TodoActions } from '../actions/TodoActions';
 
 const TODO_FILTERS = {
   [SHOW_ALL]: () => true,

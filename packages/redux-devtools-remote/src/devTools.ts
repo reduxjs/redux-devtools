@@ -1,24 +1,29 @@
 import jsan from 'jsan';
-import socketClusterClient, { AGClientSocket } from 'socketcluster-client';
+import type { AGClientSocket } from 'socketcluster-client';
+import socketClusterClient from 'socketcluster-client';
 import configureStore from './configureStore.js';
 import { defaultSocketOptions } from './constants.js';
 import getHostForRN from 'rn-host-detect';
-import {
+import type {
   Action,
   ActionCreator,
   Reducer,
   StoreEnhancer,
   StoreEnhancerStoreCreator,
 } from 'redux';
-import {
+import type {
   EnhancedStore,
   LiftedAction,
   LiftedState,
   PerformAction,
 } from '@redux-devtools/instrument';
-import {
+import type {
   ActionCreatorObject,
   ErrorAction,
+  LocalFilter,
+  State,
+} from '@redux-devtools/utils';
+import {
   evalAction,
   catchErrors,
   getActionsArray,
@@ -26,8 +31,6 @@ import {
   isFiltered,
   filterStagedActions,
   filterState,
-  LocalFilter,
-  State,
   withBigIntReplacer,
 } from '@redux-devtools/utils';
 

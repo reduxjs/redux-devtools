@@ -1,10 +1,7 @@
-import { Action } from 'redux';
-import {
-  UPDATE_SCROLL_TOP,
-  START_CONSECUTIVE_TOGGLE,
-  LogMonitorAction,
-} from './actions.js';
-import { LogMonitorProps } from './LogMonitor.js';
+import type { Action } from 'redux';
+import type { LogMonitorAction } from './actions.js';
+import { UPDATE_SCROLL_TOP, START_CONSECUTIVE_TOGGLE } from './actions.js';
+import type { LogMonitorProps } from './LogMonitor.js';
 
 function initialScrollTop<S, A extends Action<string>>(
   props: LogMonitorProps<S, A>,

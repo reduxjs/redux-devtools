@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RawSourceMap, SourceMapConsumer } from 'source-map';
+import type { RawSourceMap } from 'source-map';
+import { SourceMapConsumer } from 'source-map';
 
 /**
  * A wrapped instance of a <code>{@link https://github.com/mozilla/source-map SourceMapConsumer}</code>.

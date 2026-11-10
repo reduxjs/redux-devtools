@@ -9,12 +9,8 @@
  * state deliberately; a clean `install(chrome, window)` API would remove that.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
-import {
-  createFakeChrome,
-  FakeChrome,
-  installFakeChrome,
-  nextTick,
-} from './fakeChrome.js';
+import type { FakeChrome } from './fakeChrome.js';
+import { createFakeChrome, installFakeChrome, nextTick } from './fakeChrome.js';
 
 const pageSource = '@devtools-page';
 const extensionSource = '@devtools-extension';

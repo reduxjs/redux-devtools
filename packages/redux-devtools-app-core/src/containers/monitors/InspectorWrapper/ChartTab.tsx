@@ -1,11 +1,13 @@
-import React, { Component, RefCallback } from 'react';
-import { connect, ResolveThunks } from 'react-redux';
+import type { RefCallback } from 'react';
+import React, { Component } from 'react';
+import type { ResolveThunks } from 'react-redux';
+import { connect } from 'react-redux';
 import { withTheme } from '@emotion/react';
 import { tree } from 'd3-state-visualizer';
 import type { HierarchyPointNode, Node, Options } from 'd3-state-visualizer';
 import { getPath } from '../ChartMonitorWrapper.js';
 import { updateMonitorState } from '../../../actions/index.js';
-import { ThemeFromProvider } from '@redux-devtools/ui';
+import type { ThemeFromProvider } from '@redux-devtools/ui';
 
 const style = {
   width: '100%',

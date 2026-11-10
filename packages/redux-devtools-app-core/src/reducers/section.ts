@@ -1,5 +1,5 @@
 import { CHANGE_SECTION } from '../constants/actionTypes.js';
-import { CoreStoreAction } from '../actions/index.js';
+import type { CoreStoreAction } from '../actions/index.js';
 
 export type SectionState = string;
 

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import type { Base16Theme } from 'react-base16-styling';
-import { Action } from 'redux';
+import type { Action } from 'redux';
 import type { LabelRenderer } from 'react-json-tree';
-import { PerformAction } from '@redux-devtools/core';
+import type { PerformAction } from '@redux-devtools/core';
 import type { Delta } from 'jsondiffpatch';
 import type { JSX } from '@emotion/react/jsx-runtime';
-import { DEFAULT_STATE, DevtoolsInspectorState } from './redux.js';
+import type { DevtoolsInspectorState } from './redux.js';
+import { DEFAULT_STATE } from './redux.js';
 import ActionPreviewHeader from './ActionPreviewHeader.js';
 import DiffTab from './tabs/DiffTab.js';
 import StateTab from './tabs/StateTab.js';

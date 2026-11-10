@@ -1,12 +1,11 @@
 import React from 'react';
-import styled, {
-  FunctionInterpolation,
-  StyledComponent,
-} from '@emotion/styled';
-import { PropsOf } from '@emotion/react';
+import type { FunctionInterpolation, StyledComponent } from '@emotion/styled';
+import styled from '@emotion/styled';
+import type { PropsOf } from '@emotion/react';
 import type { Base16Theme } from 'react-base16-styling';
-import getDefaultTheme, { Theme } from '../themes/default.js';
-import { ThemeFromProvider } from './theme.js';
+import type { Theme } from '../themes/default.js';
+import getDefaultTheme from '../themes/default.js';
+import type { ThemeFromProvider } from './theme.js';
 
 type StyleFunction<Props> = FunctionInterpolation<Props>;
 

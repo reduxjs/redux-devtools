@@ -1,5 +1,5 @@
 import React from 'react';
-import { StylingFunction } from 'react-base16-styling';
+import type { StylingFunction } from 'react-base16-styling';
 
 export type Key = string | number;
 

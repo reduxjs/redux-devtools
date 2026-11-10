@@ -1,5 +1,15 @@
-import { SchemeName, ThemeName } from '@redux-devtools/ui';
-import { REHYDRATE } from 'redux-persist';
+import type { SchemeName, ThemeName } from '@redux-devtools/ui';
+import type { REHYDRATE } from 'redux-persist';
+import type {
+  UPDATE_STATE,
+  UPDATE_REPORTS,
+  REMOVE_INSTANCE,
+  SET_STATE,
+  GET_REPORT_ERROR,
+  GET_REPORT_SUCCESS,
+  ERROR,
+  CLEAR_INSTANCES,
+} from '../constants/actionTypes.js';
 import {
   CHANGE_SECTION,
   CHANGE_THEME,
@@ -16,23 +26,15 @@ import {
   GET_REPORT_REQUEST,
   SHOW_NOTIFICATION,
   CLEAR_NOTIFICATION,
-  UPDATE_STATE,
-  UPDATE_REPORTS,
-  REMOVE_INSTANCE,
-  SET_STATE,
-  GET_REPORT_ERROR,
-  GET_REPORT_SUCCESS,
-  ERROR,
   SET_PERSIST,
   CHANGE_STATE_TREE_SETTINGS,
-  CLEAR_INSTANCES,
 } from '../constants/actionTypes.js';
-import { Action } from 'redux';
-import { Features, State } from '../reducers/instances.js';
-import { MonitorStateMonitorState } from '../reducers/monitor.js';
-import { LiftedAction } from '@redux-devtools/core';
-import { Data } from '../reducers/reports.js';
-import { LiftedState } from '@redux-devtools/core';
+import type { Action } from 'redux';
+import type { Features, State } from '../reducers/instances.js';
+import type { MonitorStateMonitorState } from '../reducers/monitor.js';
+import type { LiftedAction } from '@redux-devtools/core';
+import type { Data } from '../reducers/reports.js';
+import type { LiftedState } from '@redux-devtools/core';
 
 let monitorReducer: (
   monitorProps: unknown,

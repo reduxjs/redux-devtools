@@ -1,4 +1,5 @@
-import React, { Component, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { Component } from 'react';
 import { debounce } from 'lodash-es';
 import type { DebouncedFunc } from 'lodash-es';
 import autoprefix from './autoprefix.js';

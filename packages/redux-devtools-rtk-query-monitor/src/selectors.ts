@@ -1,18 +1,21 @@
-import { Action, createSelector, Selector } from '@reduxjs/toolkit';
-import { RtkQueryInspectorProps } from './containers/RtkQueryInspector.js';
-import {
+import type { Action, Selector } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
+import type { RtkQueryInspectorProps } from './containers/RtkQueryInspector.js';
+import type {
   ApiStats,
   QueryInfo,
   RtkQueryApiState,
   RtkQueryTag,
   SelectorsSource,
   RtkQueryProvidedTagsState,
-  QueryPreviewTabs,
   RtkResourceInfo,
   RtkQuery262ProvidedState,
 } from './types.js';
-import { Comparator, queryComparators } from './utils/comparators.js';
-import { FilterList, queryListFilters } from './utils/filters.js';
+import { QueryPreviewTabs } from './types.js';
+import type { Comparator } from './utils/comparators.js';
+import { queryComparators } from './utils/comparators.js';
+import type { FilterList } from './utils/filters.js';
+import { queryListFilters } from './utils/filters.js';
 import { emptyRecord } from './utils/object.js';
 import { escapeRegExpSpecialCharacter } from './utils/regexp.js';
 import {

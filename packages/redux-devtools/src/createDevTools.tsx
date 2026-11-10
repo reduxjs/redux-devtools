@@ -1,14 +1,14 @@
 import React, { Children, Component } from 'react';
 import { connect, Provider, ReactReduxContext } from 'react-redux';
-import {
-  instrument,
+import type {
   EnhancedStore,
   LiftedState,
   LiftedStore,
   Options,
   InstrumentExt,
 } from '@redux-devtools/instrument';
-import { Action, StoreEnhancer } from 'redux';
+import { instrument } from '@redux-devtools/instrument';
+import type { Action, StoreEnhancer } from 'redux';
 
 function logError(type: string) {
   if (type === 'NoStore') {

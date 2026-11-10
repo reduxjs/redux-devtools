@@ -1,4 +1,5 @@
-import { fromJS, isAssociative, Map } from 'immutable';
+import type { Map } from 'immutable';
+import { fromJS, isAssociative } from 'immutable';
 import isIterable from './isIterable.js';
 
 function iterateToKey(obj: any, key: string | number) {

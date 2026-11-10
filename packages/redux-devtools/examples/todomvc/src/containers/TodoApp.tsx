@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
+import { bindActionCreators } from 'redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 import * as TodoActions from '../actions/TodoActions';
-import {
+import type {
   TodoAction,
   TodoActions as TodoActionsType,
 } from '../actions/TodoActions';
-import { TodoState } from '../reducers';
-import { Todo } from '../reducers/todos';
+import type { TodoState } from '../reducers';
+import type { Todo } from '../reducers/todos';
 
 interface Props {
   todos: Todo[];

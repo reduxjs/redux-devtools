@@ -1,10 +1,11 @@
-import React, { ReactNode, useCallback, useLayoutEffect, useRef } from 'react';
-import { Action } from 'redux';
-import { PerformAction } from '@redux-devtools/core';
+import type { ReactNode } from 'react';
+import React, { useCallback, useLayoutEffect, useRef } from 'react';
+import type { Action } from 'redux';
+import type { PerformAction } from '@redux-devtools/core';
+import type { DragEndEvent } from '@dnd-kit/core';
 import {
   closestCenter,
   DndContext,
-  DragEndEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,

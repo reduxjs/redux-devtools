@@ -1,4 +1,5 @@
-import React, { ComponentType, ReactNode, Component } from 'react';
+import type { ComponentType, ReactNode } from 'react';
+import React, { Component } from 'react';
 
 interface Mapper<In, Out> {
   (inProps: In): Out;

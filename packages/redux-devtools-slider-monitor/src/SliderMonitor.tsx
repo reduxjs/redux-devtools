@@ -1,12 +1,9 @@
 import React, { Component, PureComponent } from 'react';
-import { Action, Dispatch } from 'redux';
+import type { Action, Dispatch } from 'redux';
 import { base16Themes } from 'react-base16-styling';
 import type { Base16Theme } from 'react-base16-styling';
-import {
-  ActionCreators,
-  LiftedAction,
-  LiftedState,
-} from '@redux-devtools/core';
+import type { LiftedAction, LiftedState } from '@redux-devtools/core';
+import { ActionCreators } from '@redux-devtools/core';
 import {
   Button,
   Divider,

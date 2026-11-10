@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Position } from '../Tabs.js';
+import type { Position } from '../Tabs.js';
 
 interface StyleProps {
   position: Position;

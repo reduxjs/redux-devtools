@@ -1,8 +1,9 @@
-import React, { FunctionComponent } from 'react';
-import { Action } from 'redux';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import type { Action } from 'redux';
 import { css } from '@emotion/react';
 import type { Interpolation, Theme } from '@emotion/react';
-import { Tab } from './ActionPreview.js';
+import type { Tab } from './ActionPreview.js';
 import {
   selectorButtonCss,
   selectorButtonSelectedCss,

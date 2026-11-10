@@ -1,8 +1,9 @@
-import React, { MouseEvent, MouseEventHandler, PureComponent } from 'react';
+import type { MouseEvent, MouseEventHandler } from 'react';
+import React, { PureComponent } from 'react';
 import dateformat from 'dateformat';
 import type { DebouncedFunc } from 'lodash';
 import debounce from 'lodash.debounce';
-import { Action } from 'redux';
+import type { Action } from 'redux';
 import type { Interpolation, Theme } from '@emotion/react';
 import type { JSX } from '@emotion/react/jsx-runtime';
 import RightSlider from './RightSlider.js';

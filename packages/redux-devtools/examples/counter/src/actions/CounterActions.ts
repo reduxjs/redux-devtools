@@ -1,6 +1,6 @@
-import { ThunkAction } from 'redux-thunk';
+import type { ThunkAction } from 'redux-thunk';
 import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../constants/ActionTypes';
-import { CounterState } from '../reducers';
+import type { CounterState } from '../reducers';
 
 interface IncrementCounterAction {
   type: typeof INCREMENT_COUNTER;

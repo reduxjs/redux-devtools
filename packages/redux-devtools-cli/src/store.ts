@@ -1,6 +1,6 @@
 import { pick } from 'lodash-es';
-import { AGServer } from 'socketcluster-server';
-import { Knex } from 'knex';
+import type { AGServer } from 'socketcluster-server';
+import type { Knex } from 'knex';
 import connector from './db/connector.js';
 
 const reports = 'remotedev_reports';

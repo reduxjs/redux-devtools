@@ -1,6 +1,7 @@
-import { combineReducers, Reducer } from 'redux';
+import type { Reducer } from 'redux';
+import { combineReducers } from 'redux';
 import counter from './counter';
-import { CounterAction } from '../actions/CounterActions';
+import type { CounterAction } from '../actions/CounterActions';
 
 const rootReducer: Reducer<
   CounterState,

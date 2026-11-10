@@ -9,8 +9,8 @@ import {
 } from '@redux-devtools/ui';
 import { MdAdd } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md';
-import { Action } from 'redux';
-import {
+import type { Action } from 'redux';
+import type {
   DevtoolsInspectorState,
   TabComponentProps,
 } from '@redux-devtools/inspector-monitor';
@@ -20,7 +20,7 @@ import jestTemplate from './redux/jest/template.js';
 import mochaTemplate from './redux/mocha/template.js';
 import tapeTemplate from './redux/tape/template.js';
 import avaTemplate from './redux/ava/template.js';
-import { Template } from './types.js';
+import type { Template } from './types.js';
 
 export const getDefaultTemplates = (/* lib */): Template[] =>
   /*

@@ -1,8 +1,8 @@
 import '../chromeApiMock.js';
+import type { Options } from '../options/syncOptions.js';
 import {
   getOptions,
   isAllowed,
-  Options,
   prepareOptionsForPage,
 } from '../options/syncOptions.js';
 import type { TabMessage } from '../background/store/apiMiddleware.js';
@@ -11,21 +11,19 @@ import type {
   PageScriptToContentScriptMessageWithoutDisconnect,
   PageScriptToContentScriptMessageWithoutDisconnectOrInitInstance,
 } from '../pageScript/api/index.js';
-import { Action } from 'redux';
-import {
+import type { Action } from 'redux';
+import type {
   CustomAction,
   DispatchAction as AppDispatchAction,
 } from '@redux-devtools/app';
-import { LiftedState } from '@redux-devtools/instrument';
+import type { LiftedState } from '@redux-devtools/instrument';
 import {
   exceedsChromeMsgSize,
   isMessageSizeError,
   splitMessage,
 } from '../utils/splitMessage.js';
-import {
-  createReconnectingPort,
-  ReconnectingPort,
-} from '../utils/reconnectingPort.js';
+import type { ReconnectingPort } from '../utils/reconnectingPort.js';
+import { createReconnectingPort } from '../utils/reconnectingPort.js';
 
 const source = '@devtools-extension';
 const pageSource = '@devtools-page';

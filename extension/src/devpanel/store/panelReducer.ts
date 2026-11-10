@@ -1,4 +1,6 @@
-import { combineReducers, Reducer } from 'redux';
+import type { Reducer } from 'redux';
+import { combineReducers } from 'redux';
+import type { StoreAction, StoreState } from '@redux-devtools/app';
 import {
   connection,
   instances,
@@ -8,8 +10,6 @@ import {
   section,
   socket,
   stateTreeSettings,
-  StoreAction,
-  StoreState,
   theme,
 } from '@redux-devtools/app';
 

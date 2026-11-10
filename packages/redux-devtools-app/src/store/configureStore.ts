@@ -1,10 +1,12 @@
 import { middlewares } from '@redux-devtools/app-core';
-import { createStore, compose, applyMiddleware, Reducer, Store } from 'redux';
+import type { Reducer, Store } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import localForage from 'localforage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { api } from '../middlewares/api.js';
-import { StoreState, rootReducer } from '../reducers/index.js';
-import { StoreAction } from '../actions/index.js';
+import type { StoreState } from '../reducers/index.js';
+import { rootReducer } from '../reducers/index.js';
+import type { StoreAction } from '../actions/index.js';
 
 const persistConfig = {
   key: 'redux-devtools',

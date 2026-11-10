@@ -9,7 +9,7 @@ import React from 'react';
 import CodeBlock from '../components/CodeBlock.js';
 import { applyStyles } from '../utils/dom/css.js';
 import { absolutifyCaret } from '../utils/dom/absolutifyCaret.js';
-import { ScriptLine } from '../utils/stack-frame.js';
+import type { ScriptLine } from '../utils/stack-frame.js';
 import generateAnsiHTML from '../utils/generateAnsiHTML.js';
 
 import { codeFrameColumns } from '@babel/code-frame';

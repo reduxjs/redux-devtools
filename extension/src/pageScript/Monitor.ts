@@ -1,4 +1,4 @@
-import { DispatchAction, LibConfig } from '@redux-devtools/app';
+import type { DispatchAction, LibConfig } from '@redux-devtools/app';
 
 declare global {
   interface Window {

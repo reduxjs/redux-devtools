@@ -1,6 +1,6 @@
 // Based on https://github.com/gaearon/redux-devtools/pull/241
 
-import { State } from '../reducers/instances.js';
+import type { State } from '../reducers/instances.js';
 
 export default function commitExcessActions(liftedState: State, n = 1) {
   // Auto-commits n-number of excess actions.

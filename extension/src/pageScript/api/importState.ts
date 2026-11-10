@@ -1,9 +1,9 @@
 import jsan from 'jsan';
 import { immutableSerialize } from '@redux-devtools/serialize';
 import type { Config, SerializeWithImmutable } from '../index.js';
-import Immutable from 'immutable';
-import { LiftedState } from '@redux-devtools/instrument';
-import { Action } from 'redux';
+import type Immutable from 'immutable';
+import type { LiftedState } from '@redux-devtools/instrument';
+import type { Action } from 'redux';
 
 interface SerializeWithRequiredImmutable extends SerializeWithImmutable {
   readonly immutable: typeof Immutable;

@@ -1,11 +1,8 @@
-import React, { Component, MouseEventHandler } from 'react';
+import type { MouseEventHandler } from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
-import {
-  SHOW_ALL,
-  SHOW_MARKED,
-  SHOW_UNMARKED,
-  TodoFilter,
-} from '../constants/TodoFilters';
+import type { TodoFilter } from '../constants/TodoFilters';
+import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../constants/TodoFilters';
 
 const FILTER_TITLES = {
   [SHOW_ALL]: 'All',

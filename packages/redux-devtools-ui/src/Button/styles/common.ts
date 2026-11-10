@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { fadeIn } from '../../utils/animations.js';
 import colorEffect from '../../utils/color.js';
-import { Mark, Size, TooltipPosition } from '../Button.js';
-import { Theme } from '../../themes/default.js';
+import type { Mark, Size, TooltipPosition } from '../Button.js';
+import type { Theme } from '../../themes/default.js';
 
 const both = (tooltipPosition: TooltipPosition) => {
   switch (tooltipPosition) {

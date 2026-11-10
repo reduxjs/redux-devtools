@@ -3,8 +3,9 @@ import {
   invertBase16Theme,
   getBase16Theme,
 } from '../src/index.js';
-import { base16Themes, Base16Theme } from '../src/themes/index.js';
-import { Styling, StylingConfig } from '../src/types.js';
+import type { Base16Theme } from '../src/themes/index.js';
+import { base16Themes } from '../src/themes/index.js';
+import type { Styling, StylingConfig } from '../src/types.js';
 
 const base16Theme = {
   scheme: 'myscheme',

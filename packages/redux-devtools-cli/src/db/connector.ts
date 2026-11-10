@@ -2,7 +2,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import knex from 'knex';
 import type { Knex } from 'knex';
-import { AGServer } from 'socketcluster-server';
+import type { AGServer } from 'socketcluster-server';
 
 type KnexFunction = <TRecord extends {} = any, TResult = unknown[]>(
   config: Knex.Config | string,

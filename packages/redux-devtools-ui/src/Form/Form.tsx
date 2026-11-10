@@ -1,5 +1,6 @@
 import React, { PureComponent, Component } from 'react';
-import JSONSchemaForm, { FormProps } from '@rjsf/core';
+import type { FormProps } from '@rjsf/core';
+import JSONSchemaForm from '@rjsf/core';
 import validator from '@rjsf/validator-ajv8';
 import type { Base16Theme } from 'react-base16-styling';
 import createStyledComponent from '../utils/createStyledComponent.js';

@@ -1,4 +1,5 @@
-import { Action, compose, Reducer, StoreEnhancerStoreCreator } from 'redux';
+import type { Action, Reducer, StoreEnhancerStoreCreator } from 'redux';
+import { compose } from 'redux';
 import { instrument } from '@redux-devtools/instrument';
 import { persistState } from '@redux-devtools/core';
 import type { ConfigWithExpandedMaxAge } from './index.js';
