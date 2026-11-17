@@ -1,4 +1,5 @@
-import Color from 'color';
+import { colord, extend } from 'colord';
+import namesPlugin from 'colord/plugins/names';
 import type * as CSS from 'csstype';
 import { curry } from 'lodash-es';
 import type { CurriedFunction3 } from 'lodash';
@@ -15,6 +16,8 @@ import type {
 import { base16Themes as base16 } from './themes/index.js';
 import type { Base16Theme } from './themes/index.js';
 
+extend([namesPlugin]);
+
 const DEFAULT_BASE16 = base16.default;
 
 const BASE16_KEYS = Object.keys(DEFAULT_BASE16);
@@ -24,11 +27,11 @@ const BASE16_KEYS = Object.keys(DEFAULT_BASE16);
 const flip = (x: number) => (x < 0.25 ? 1 : x < 0.5 ? 0.9 - x : 1.1 - x);
 
 const invertColor = (hexString: string) => {
-  const color = Color(hexString);
-  const [y, u, v] = rgb2yuv(color.array() as ColorTuple);
+  const { r, g, b } = colord(hexString).toRgb();
+  const [y, u, v] = rgb2yuv([r, g, b]);
   const flippedYuv: ColorTuple = [flip(y), u, v];
-  const rgb = yuv2rgb(flippedYuv);
-  return Color.rgb(rgb).hex();
+  const [r2, g2, b2] = yuv2rgb(flippedYuv);
+  return colord({ r: r2, g: g2, b: b2 }).toHex().toUpperCase();
 };
 
 const merger = (styling: Partial<Styling>) => {
