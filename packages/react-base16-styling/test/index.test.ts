@@ -32,41 +32,41 @@ const invertedBase16Theme = {
   scheme: 'myscheme:inverted',
   author: 'me',
   base00: '#FFFFFF',
-  base01: '#FFFFFF',
-  base02: '#A2A1A2',
-  base03: '#807F80',
-  base04: '#807F80',
-  base05: '#5E5D5E',
-  base06: '#3C3B3C',
-  base07: '#1A191A',
-  base08: '#FF4D4D',
-  base09: '#CB6500',
-  base0A: '#545400',
-  base0B: '#A2A20A',
-  base0C: '#0FA8A8',
-  base0D: '#32CB32',
-  base0E: '#6868CE',
-  base0F: '#FF2AC3',
+  base01: '#ADADAD',
+  base02: '#848484',
+  base03: '#606060',
+  base04: '#323232',
+  base05: '#181818',
+  base06: '#040404',
+  base07: '#000000',
+  base08: '#EB0000',
+  base09: '#A86500',
+  base0A: '#7A7A00',
+  base0B: '#7A7A00',
+  base0C: '#008080',
+  base0D: '#008A00',
+  base0E: '#6161FF',
+  base0F: '#E00087',
 };
 
 const apathyInverted = {
   author: 'jannik siebert (https://github.com/janniks)',
-  base00: '#EFFFFF',
-  base01: '#E3FFFF',
-  base02: '#DAFFFF',
-  base03: '#67A49A',
-  base04: '#66A399',
-  base05: '#51857C',
-  base06: '#3C635D',
-  base07: '#2A3F3C',
-  base08: '#2F8779',
-  base09: '#4E89A6',
-  base0A: '#8391DB',
-  base0B: '#B167BF',
-  base0C: '#C8707E',
-  base0D: '#A7994F',
-  base0E: '#469038',
-  base0F: '#3A9257',
+  base00: '#EAFFFF',
+  base01: '#BBE6DB',
+  base02: '#91C7BB',
+  base03: '#487B71',
+  base04: '#306E65',
+  base05: '#1D514A',
+  base06: '#103430',
+  base07: '#081917',
+  base08: '#358074',
+  base09: '#3E7996',
+  base0A: '#3E4C96',
+  base0B: '#883E96',
+  base0C: '#963E4C',
+  base0D: '#807435',
+  base0E: '#418035',
+  base0F: '#35804E',
   scheme: 'apathy:inverted',
 };
 
@@ -96,6 +96,15 @@ const getStylingFromBase16 = (base16: Base16Theme): StylingConfig => ({
 
 test('invertTheme', () => {
   expect(invertBase16Theme(base16Theme)).toEqual(invertedBase16Theme);
+});
+
+test('invertTheme (single-color theme)', () => {
+  // base00 and base07 of the same lightness leave no range to flip the shades over
+  const flat: Base16Theme = { ...base16Theme };
+  for (const key of Object.keys(flat) as (keyof Base16Theme)[]) {
+    if (key.startsWith('base')) flat[key] = '#333333';
+  }
+  expect(invertBase16Theme(flat).base00).toBe('#FFFFFF');
 });
 
 test('getBase16Theme', () => {
