@@ -1,10 +1,10 @@
-import { colord, extend } from 'colord';
+import { colord, extend, type Colord } from 'colord';
+import a11yPlugin from 'colord/plugins/a11y';
 import namesPlugin from 'colord/plugins/names';
+import oklchPlugin from 'colord/plugins/oklch';
 import type * as CSS from 'csstype';
 import { curry } from 'lodash-es';
 import type { CurriedFunction3 } from 'lodash';
-import type { Color as ColorTuple } from './colorConverters.js';
-import { yuv2rgb, rgb2yuv } from './colorConverters.js';
 import type {
   Styling,
   StylingConfig,
@@ -16,23 +16,11 @@ import type {
 import { base16Themes as base16 } from './themes/index.js';
 import type { Base16Theme } from './themes/index.js';
 
-extend([namesPlugin]);
+extend([a11yPlugin, namesPlugin, oklchPlugin]);
 
 const DEFAULT_BASE16 = base16.default;
 
 const BASE16_KEYS = Object.keys(DEFAULT_BASE16);
-
-// we need a correcting factor, so that a dark, but not black background color
-// converts to bright enough inversed color
-const flip = (x: number) => (x < 0.25 ? 1 : x < 0.5 ? 0.9 - x : 1.1 - x);
-
-const invertColor = (hexString: string) => {
-  const { r, g, b } = colord(hexString).toRgb();
-  const [y, u, v] = rgb2yuv([r, g, b]);
-  const flippedYuv: ColorTuple = [flip(y), u, v];
-  const [r2, g2, b2] = yuv2rgb(flippedYuv);
-  return colord({ r: r2, g: g2, b: b2 }).toHex().toUpperCase();
-};
 
 const merger = (styling: Partial<Styling>) => {
   return (prevStyling: Partial<Styling>) => ({
@@ -185,18 +173,43 @@ const getStylingByKeys = (
   return props;
 };
 
-export const invertBase16Theme = (base16Theme: Base16Theme): Base16Theme =>
-  Object.keys(base16Theme).reduce(
-    (t, key) => (
-      (t[key as keyof Base16Theme] = /^base/.test(key)
-        ? invertColor(base16Theme[key as keyof Base16Theme])
-        : key === 'scheme'
-          ? base16Theme[key] + ':inverted'
-          : base16Theme[key as keyof Base16Theme]),
-      t
-    ),
-    {} as Base16Theme,
-  );
+// Flips a theme in OKLCH, where lightness matches how bright a color looks: shades
+// (base00–07) swap ends, accents (base08–0F) keep their lightness, and everything
+// except the backgrounds (base00–02) is then made readable on the new base00.
+export const invertBase16Theme = (theme: Base16Theme): Base16Theme => {
+  const l0 = colord(theme.base00).toOklch().l;
+  const l7 = colord(theme.base07).toOklch().l;
+  const end = l0 < 0.5 ? 1 : 0;
+  // base00 and base07 of the same lightness leave no range to spread the shades over
+  const range = l7 - l0 || 1;
+
+  const flipShade = (value: string) => {
+    const { l, c, h } = colord(value).toOklch();
+    return colord({ l: end + ((l - l0) * (l0 - end)) / range, c, h, ok: true });
+  };
+
+  const background = flipShade(theme.base00).toHex();
+  const step = end === 1 ? -0.01 : 0.01; // darken on a light background, lighten on a dark one
+
+  const readable = (color: Colord) => {
+    // check the hex that ends up in the theme: rounding can pull it just below AA
+    while (!colord(color.toHex()).isReadable(background)) {
+      color = color.lighten(step);
+    }
+    return color;
+  };
+
+  const inverted = { ...theme, scheme: `${theme.scheme}:inverted` };
+  for (const key of Object.keys(theme) as (keyof Base16Theme)[]) {
+    if (!key.startsWith('base')) continue;
+    const isShade = /^base0[0-7]$/.test(key);
+    const isBackground = /^base0[0-2]$/.test(key);
+    let color = isShade ? flipShade(theme[key]) : colord(theme[key]);
+    if (!isBackground) color = readable(color);
+    inverted[key] = color.toHex().toUpperCase();
+  }
+  return inverted;
+};
 
 interface Options {
   defaultBase16?: Base16Theme;
