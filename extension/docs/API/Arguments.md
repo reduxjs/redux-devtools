@@ -140,7 +140,7 @@ _boolean_ or _object_ which contains:
 - **immutable** `object` - automatically serialize/deserialize immutablejs via [remotedev-serialize](https://github.com/zalmoxisus/remotedev-serialize). Just pass the Immutable library like so:
 
   ```js
-  import Immutable from 'immutable'; // https://facebook.github.io/immutable-js/
+  import Immutable from 'immutable'; // https://immutable-js.com/
   // ...
   // Like above, only showing off compose this time. Reminder you might not want this in prod.
   const composeEnhancers =
